@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="NFKernelPlugin" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug x64">
+				<Option output="NFConfigPlugin" prefix_auto="1" extension_auto="1" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-DWIN" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add directory="$(NF_HOME)" />
+					<Add directory="$(NF_DEP)" />
+					<Add directory="$(BOOST_HOME)" />
+					<Add directory="$(GLOG_HOME)" />
+					<Add directory="$(THERON_HOME)" />
+					<Add directory="$(THERON_HOME)/External/" />
+				</Compiler>
+				<Linker>
+					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
+					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
+				</Linker>
+			</Target>
+			<Target title="Release x64">
+				<Option output="NFConfigPlugin" prefix_auto="1" extension_auto="1" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-DWIN" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add directory="$(NF_HOME)" />
+					<Add directory="$(BOOST_HOME)" />
+					<Add directory="$(NF_DEP)" />
+					<Add directory="$(GLOG_HOME)" />
+					<Add directory="$(THERON_HOME)" />
+					<Add directory="$(THERON_HOME)/External/" />
+				</Compiler>
+				<Linker>
+					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
+					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="NFCElementInfoModule.cpp" />
+		<Unit filename="NFCElementInfoModule.h" />
+		<Unit filename="NFCLogicClassModule.cpp" />
+		<Unit filename="NFCLogicClassModule.h" />
+		<Unit filename="NFConfigPlugin.cpp" />
+		<Unit filename="NFConfigPlugin.h" />
+		<Unit filename="dllmain.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
