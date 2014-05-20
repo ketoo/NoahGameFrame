@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LocalDebuggerCommand>NFPluginLoader_d.exe</LocalDebuggerCommand>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArguments>NFConfigPlugin_d.dll NFEventProcessPlugin_d.dll NFKernelPlugin_d.dll NFMasterServerPlugin_d.dll NFMasterNet_ServerPlugin_d.dll</LocalDebuggerCommandArguments>
+    <LocalDebuggerWorkingDirectory>$(NFBIN_SERVER)\$(Configuration)\NFMasterServer\</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LocalDebuggerWorkingDirectory>D:\NoahGameFrame\trunk\_Out\Server\Debug\Tutorial3</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommand>D:\NoahGameFrame\trunk\_Out\Server\Debug\Tutorial3\NFPluginLoader_d.exe</LocalDebuggerCommand>
+  </PropertyGroup>
+</Project>
