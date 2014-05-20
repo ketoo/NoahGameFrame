@@ -1,0 +1,9 @@
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
+<XML>
+	<Object ID="Scene0" SceneID="0" SceneName="Login" SceneShowName="NewerScene" RelivePos="-0.7,1.5,-1.64" Width="500" MaxGroup="10" MaxGroupPlayers="200" FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/PioneerNoob/" SoundList="Sound/FutureWorld_Darkness_Loop,Sound/FutureWorld_Darkness_Loop_02" > 
+	</Object>
+	<Object ID="Scene1" SceneID="1" SceneName="Stage001" SceneShowName="NewerScene" RelivePos="-0.7,1.5,-1.64" Width="500" MaxGroup="10" MaxGroupPlayers="200" FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/PioneerNoob/" SoundList="Sound/FutureWorld_Darkness_Loop,Sound/FutureWorld_Darkness_Loop_02" > 
+	</Object>
+	<Object ID="Scene2" SceneID="2" SceneName="Stage001" SceneShowName="NewerScene" RelivePos="-0.7,1.5,-1.64" Width="500" MaxGroup="10" MaxGroupPlayers="200" FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/RebellerNoob/" SoundList="Sound/FutureWorld_Darkness_Loop,Sound/FutureWorld_Darkness_Loop_02" > 
+	</Object>
+</XML>

@@ -1,0 +1,53 @@
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
+<XML>
+	<Propertys>
+		<Property Id="ID" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="道具ID"/>
+		<Property Id="SkillType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="//普通0短刃类//1普通子弹类(不穿透)//2普通子弹类穿//3普通子弹类单体目标范围(每人头顶闪电那样)/3普通子弹类爆炸目标范围(火矛从天而降那样position)"/>
+		<Property Id="ClientState" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="技能对应的客户端动作状态"/>
+		<Property Id="ShowName" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="装备名字字符串索引"/>
+		<Property Id="Desc" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="装备描述字符串索引"/>
+		<Property Id="Job" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="NFJobType"/>
+		<Property Id="ConsumeProperty" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="消耗属性"/>
+		<Property Id="ConsumeValue" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="消耗值"/>
+		<Property Id="ConsumeType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="消耗类型，0为绝对值，1为当前值百分比，2为最大值百分比"/>
+		<Property Id="DamageProperty" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="伤害属性"/>
+		<Property Id="DamageValue" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="伤害值"/>
+		<Property Id="DamageType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="伤害类型，0为绝对值，1为当前值百分比，2为最大值百分比"/>
+		<Property Id="DamageSubType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="0为减益，1为增益(加血)"/>
+		<Property Id="GetBuffList" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="使用后获得的BUFF"/>
+		<Property Id="SendBuffList" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="使用后对方获得的BUFF"/>
+		<Property Id="CoolDownTime" Type="float" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="使用冷却CD"/>
+		<Property Id="RequireDistance" Type="float" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="释放要求目标距离"/>
+		<Property Id="DamageDistance" Type="float" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="伤害距离--群伤需要"/>
+		<Property Id="TargetType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="目标类别0敌人1自己2队友"/>
+		<Property Id="FlashDistance" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="瞬移距离"/>
+		<Property Id="NewObject" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="产生新的对象--召唤"/>
+		<Property Id="PerformanceTime" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="3个过程音效--起始，释放，命中 远程的话则命中时间不是算"/>
+		<Property Id="PerformanceSoundTime" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="3个过程音效--起始，释放，命中 远程的话则命中时间不是算"/>
+		<Property Id="PerformanceEffectTime" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="3个过程音效--起始，释放，命中 远程的话则命中时间不是算"/>
+		<Property Id="PerformanceEffect" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="3个过程音效--起始，释放，命中"/>
+		<Property Id="PerformanceSound" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="3个过程音效--起始，释放，命中"/>
+		<Property Id="ManSound" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="技能释放男吼"/>
+		<Property Id="FemanSound" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="技能释放女吼"/>
+		<Property Id="BeatBackDistance" Type="float" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="击退距离"/>
+		<Property Id="CamShakeArg" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="命中时摄像机震动参数 时间，坐标"/>
+		<Property Id="Icon" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="ICON"/>
+		<Property Id="Atlas" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="图集"/>
+		<Property Id="BulletPrefabPath" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="子弹预设"/>
+		<Property Id="BulletSpeed" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="子弹飞行速度(>=100就为瞬间到达)"/>
+
+		<Property Id="Level" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="此技能的等级"/>
+		<Property Id="NeedLevel" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="升级需要的等级"/>
+		<Property Id="NextLevelID" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="下一等级的ID"/>
+		<Property Id="NeedMoney" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="升级需要的钱"/>
+		<Property Id="NeedPoint" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="升级需要的精气"/>
+		<Property Id="ReqLevel" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="开放技能需要的等级"/>
+		<Property Id="IsPassive" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="是被动技能"/>
+		<Property Id="PlayerSkill" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="是否玩家技能"/>
+		<Property Id="SkillCharType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="技能属于谁，玩家，副将，坐骑， 枚举见SkillCharType"/>
+	</Propertys>
+	<Records>
+	</Records>
+	<Includes>
+	</Includes>
+</XML>
