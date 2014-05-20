@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="NFLoginNet_ClientPlugin" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug x64">
+				<Option output="NFLoginNet_ClientPlugin" prefix_auto="1" extension_auto="1" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-DWIN" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add directory="$(NF_HOME)" />
+					<Add directory="$(BOOST_HOME)" />
+					<Add directory="$(NF_DEP)" />
+				</Compiler>
+				<Linker>
+					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
+					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
+				</Linker>
+			</Target>
+			<Target title="Release x64">
+				<Option output="NFLoginNet_ClientPlugin" prefix_auto="1" extension_auto="1" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-DWIN" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add directory="$(NF_HOME)" />
+					<Add directory="$(BOOST_HOME)" />
+					<Add directory="$(NF_DEP)" />
+				</Compiler>
+				<Linker>
+					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
+					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="NFCLoginNet_ClientModule.cpp" />
+		<Unit filename="NFCLoginNet_ClientModule.h" />
+		<Unit filename="NFLoginNet_ClientPlugin.cpp" />
+		<Unit filename="NFLoginNet_ClientPlugin.h" />
+		<Unit filename="dllmain.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
