@@ -1,0 +1,168 @@
+package NFMsg; 
+
+import "NFDefine.proto";
+import "NFMsgBase.proto";
+
+//这里主要是与游戏内容关系不是很大的协议，比如登录，创建角色，平台扣费等
+
+
+enum EServerState
+{
+	EST_CRASH = 0;
+	EST_NARMAL = 1;
+	EST_BUSY = 2;
+	EST_FIRE = 3;
+	EST_MAINTEN = 4;
+}
+
+message ServerInfoReport//服务器之间报告服务器状态
+{
+	
+	required int32   server_id = 1;
+	required bytes  server_name = 2;
+	required bytes  server_ip = 3;
+	required int32   server_port = 4;
+	required int32   server_max_online = 5;
+	required int32   server_cur_count = 6;
+	required EServerState   server_state = 7;
+}
+
+message ServerInfoReportList//服务器之间报告服务器状态
+{
+	repeated ServerInfoReport server_list = 1;
+}
+
+message AckEventResult//返回事件结果(对或错等详细)
+{
+	required EGameEventCode event_code = 1; 
+}
+
+////////////////////////////////////////////////////
+message ReqAccountLogin//向网关(登录服务器)申请登录
+{ 
+	required bytes 			account = 2;
+	required bytes 			password = 3;
+	required bytes 			security_code = 4;
+    required bytes 			signBuff = 5;
+    required int32 			clientVersion = 6;
+    required int32 			loginMode = 7;
+    required int32 			clientIP = 8;
+    required int64 			clientMAC = 9;
+	required bytes 			device_info = 10;
+	required bytes 			extra_info = 11;
+}
+
+message ReqAccountLogout//向网关(登录服务器)申请登出
+{ 
+	required bytes 		account = 2;
+	required bytes 		extra_info = 3;
+}
+
+message ServerInfo//服务器信息---这个是面向玩家的
+{
+    required int32  		server_id = 1;
+    required bytes 			name = 2;
+	required int32			wait_count = 3;
+	required EServerState	status = 4;
+}
+
+//请求大世界服务器列表，请求单世界游戏服务器列表
+enum ReqServerListType
+{
+	RSLT_WORLD_SERVER = 0;
+	RSLT_GAMES_ERVER = 1;
+};
+
+message ReqServerList//请求游戏服务器列表
+{
+	required ReqServerListType type = 1;
+}
+
+message AckServerList//服务器信息列表
+{
+	required ReqServerListType type = 1;
+	repeated ServerInfo info = 2;
+}
+
+message ReqConnectWorld//玩家想连到世界服务器,进游戏世界--登录通过后选世界
+{
+	required int32   world_id = 1;//想去的世界ID
+	optional bytes  account = 2;//玩家帐号--客户度发送时可以不填--转发需填
+	optional int32  sender_ip = 3;//玩家IP--客户度发送时可以不填--转发需填
+	optional int32   login_id = 4;//登录服务器ID--客户度发送时可以不填--转发需填
+}
+
+message AckConnectWorldResult//返回申请到世界服务器的结果
+{
+	required int32   world_id = 1;//申请者想去的世界ID
+	required int32  sender_ip = 2;//申请者的IP
+	required int32   login_id = 3;//申请者所在的登录服务器ID
+	required bytes  account = 4;//申请者的帐号
+	required bytes  world_ip = 5;//得到的世界服务器分配的网关IP
+	required int32  world_port = 6;//得到的世界服务器分配的端口
+	required bytes  world_key = 7;//得到的握手KEY
+}
+
+message ReqKickFromWorld//玩家想退出游戏世界
+{
+	required int32   world_id = 1;
+	required bytes   account = 2;//帐号
+}
+
+//继续登录进大世界网关
+
+////////////////////////////////////////////
+message ReqRoleList//请求得到角色列表
+{
+	required int32   game_id = 1;	
+}
+
+message RoleLiteInfo//角色基础信息
+{
+	required int32 		char_id = 1;
+	required int32 		career = 2;
+    required int32 		sex = 3;
+    required int32 		race = 4;
+    required bytes 		noob_name = 5;
+    required int32 		game_id = 6;
+	required int32 		char_level = 7;
+	required int32		char_exp = 8;
+	required int32		money = 9;
+	required int32		cash = 10;
+	required int32		vip_level = 11;
+	required int32		delete_time = 12;
+	required int32		reg_time = 13;
+	required int32		last_offline_time = 15;
+	required int32		last_offline_ip = 16;
+	required bytes		view_record = 17;
+	required bytes		pet_record = 18;
+}
+
+message AckRoleLiteInfoList//角色基础信息列表
+{
+	repeated RoleLiteInfo char_data = 1;
+}
+
+message ReqCreateRole//创建角色
+{ 
+    required int32 		career = 1;
+    required int32 		sex = 2;
+    required int32 		race = 3;
+    required int32 		noob_head = 4;
+    required int32 		noob_body = 5;
+    required int32 		noob_foot = 6;
+    required int32 		noob_weapon = 7;
+    required int32 		noob_pic = 8;
+    required bytes 	noob_name = 9;
+    required int32 		game_id = 10;
+}
+
+message ReqDeleteRole//删除角色
+{
+    required int32 char_id = 1;
+}
+
+message ReqRecoverRole//恢复角色
+{
+    required int32 char_id = 1;
+}

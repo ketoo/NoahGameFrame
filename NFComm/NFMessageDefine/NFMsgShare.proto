@@ -1,0 +1,157 @@
+package NFMsg; 
+
+import "NFDefine.proto";
+import "NFMsgBase.proto";
+import "NFMsgBaseEx.proto";
+
+
+//除 去基础对象身上的属性外，这里全部游戏中的逻辑协议
+
+message ReqEnterGameServer
+{
+    required int32 server_id = 1;
+	optional int32 gate_id = 2;
+}
+
+message ReqAckPlayerMove
+{
+	optional int64 	mover = 1;
+	required int32  moveType = 2;
+	required float	target_x = 3;
+	optional float	target_y = 4;
+	required float	target_z = 5;
+	required float	source_x = 6;
+	optional float	source_y = 7;
+	required float	source_z = 8;
+}
+
+message ReqAckPlayerChat
+{
+	enum EGameChatType
+	{
+		EGCT_NARMAL = 0;
+		EGCT_PRIVATE = 1;
+		EGCT_TEAM = 2;
+		EGCT_WORLD = 3;
+	}
+	required int64	chat_id = 1;
+	required EGameChatType  chat_type = 2;
+	required bytes chat_info = 3;
+}
+
+message ReqAckUseSkill
+{
+	required bytes skill_id = 1;
+	repeated int64 	effect_ident = 2;
+	repeated int32  effect_value = 3;
+	repeated int32  effect_rlt = 4;
+	optional bytes key_value = 5;
+}
+
+message ReqAckUseItem
+{
+	required int32 row = 1;
+	required int64 item_guid	= 2;
+	repeated int64 effect_ident = 3;
+	repeated int32 effect_value = 4;
+	repeated int32 effect_rlt = 5;
+	optional bytes key_value = 6;
+}
+
+message ReqAckSwapScene
+{
+	enum EGameSwapType
+	{
+		EGST_NARMAL = 0;//普通城镇传送
+		EGST_CLONE = 1;//普通副本
+		EGST_ARENA = 2;//竞技场
+		EGST_MIRROR = 3;//镜像空间
+	}
+
+    required EGameSwapType		transfer_type = 1;
+	required int32		scene_id = 2;
+	required int32		line_id = 3;
+	optional float 		x = 4;
+	optional float 		y = 5;
+	optional float 		z = 6;
+}
+
+message ReqSellItem// 出售物品 
+{
+	required int64 item_guid = 1;
+	required int64 item_count = 2;
+}
+
+message ReqSplitItem//拆分
+{
+	required int64 item_guid = 1;  // 物品GUID
+}
+
+message ReqProduceItem// 合成物品
+{
+	required bytes item_id  = 1; // 物品ID
+	optional int32 count = 2;//合成数量
+}
+
+message ReqPickDropItem//拾取物品
+{
+	required int64 npc_guid = 1;
+	required int64 item_guid = 2;
+}
+
+message ReqAcceptTask//接受任务
+{
+	required bytes task_id = 1;
+}
+
+message ReqPullDownTask//完成任务后申请领奖
+{
+	required bytes task_id = 1;
+}
+
+
+message CloneCustomItem
+{
+	required int64 object_guid = 1;
+	repeated bytes item_id = 2;
+}
+
+message ReqPullDownCustoms// 申请结算关卡
+{
+	enum EGameCloneResult
+	{
+		EGCR_SUCCESS = 0;
+		EGCR_FAILED = 1;
+	}
+
+	required EGameCloneResult result_value = 1;
+	repeated CloneCustomItem item_list = 2;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+message PlayerEntryInfo//对象出现基本信息
+{
+	required int64	object_guid = 1;
+	required int32	char_type = 2;
+	required float	x = 3;
+	required float	y = 4;
+	required float	z = 5;
+	required int32	career_type = 6;
+	required int32	player_state = 7;
+	required bytes config_id = 8;
+	optional bytes class_name = 9;
+	optional int32 scene_id = 10;
+
+}
+
+message AckPlayerEntryList//对象出现列表
+{
+	repeated PlayerEntryInfo object_list = 1;
+}
+
+message AckPlayerLeaveList//对象离去列表
+{
+	repeated int64 	object_list = 1;
+}
