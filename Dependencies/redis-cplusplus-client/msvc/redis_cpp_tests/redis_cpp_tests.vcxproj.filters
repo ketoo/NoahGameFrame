@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Redis Client Boost Impl">
+      <UniqueIdentifier>{b93d81b1-c743-4d0b-a76e-c5c8ebca0d0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files of Tests">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\redisclient.h">
+      <Filter>Redis Client Boost Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tests\functions.h">
+      <Filter>Source Files of Tests</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\test_client.cpp">
+      <Filter>Source Files of Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tests\benchmark.cpp">
+      <Filter>Source Files of Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tests\functions.cpp">
+      <Filter>Source Files of Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tests\test_cluster.cpp">
+      <Filter>Source Files of Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tests\test_distributed_ints.cpp">
+      <Filter>Source Files of Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tests\test_distributed_mutexes.cpp">
+      <Filter>Source Files of Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tests\test_distributed_strings.cpp">
+      <Filter>Source Files of Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tests\test_generic.cpp">
+      <Filter>Source Files of Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tests\test_hashes.cpp">
+      <Filter>Source Files of Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tests\test_lists.cpp">
+      <Filter>Source Files of Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tests\test_sets.cpp">
+      <Filter>Source Files of Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tests\test_zsets.cpp">
+      <Filter>Source Files of Tests</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
