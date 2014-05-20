@@ -1,0 +1,8 @@
+<XML>
+	<Plugin Name="NFEventProcessPlugin" Main="0"/>
+	<Plugin Name="NFKernelPlugin" Main="0"/>
+	<Plugin Name="NFConfigPlugin" Main="0"/>
+	<Plugin Name="NFWorldLogicPlugin" Main="0"/>
+	<Plugin Name="NFWorldNet_ClientPlugin" Main="1"/>
+	<Plugin Name="NFWorldNet_ServerPlugin" Main="1"/>
+</XML>
