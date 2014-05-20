@@ -1,0 +1,3 @@
+3.然后打开VS2005的命令行提示:
+
+切换到"libevent-2.0.10-stable/" 目录下，执行nmake /f Makefile.nmake。即可生成我们需要的libevent_core.lib libevent_extras.lib libevent.lib 3个静态库文件。
