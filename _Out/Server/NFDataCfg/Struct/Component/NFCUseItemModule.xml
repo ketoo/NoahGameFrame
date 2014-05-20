@@ -1,0 +1,14 @@
+<XML>
+	<Propertys>
+		<Property Id="AutoID"  Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="组件此处配置的属性和表，表明此组件获得了此属性或表的访问权限以及事件通知权限 ScriptFunction 为此表的处理函数"/>
+		<Property Id="AutoID2"  Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="但是另外一个情况就是，如果此模块本身自己需要一些数据常量，比如什么的最大值，最小值之类的，如何区分哪些是关心的，哪些是自己的常量"/>
+	</Propertys>
+	
+	<Records>
+		<Record Id="PlayerViewItem" Row="16" Col="3" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="组件此处配置的属性和表，表明此组件获得了此属性或表的访问权限以及事件通知权限 ScriptFunction 为此表的处理函数">
+		</Record>
+	</Records>
+	
+	<Includes>
+	</Includes>
+</XML>

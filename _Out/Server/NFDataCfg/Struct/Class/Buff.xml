@@ -1,0 +1,18 @@
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
+<XML>
+	<Propertys>
+		<Property Id="EffectType" Type="string" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="影响属性类型(效果类型)  生命，法力(可组合,叠加)"/>
+		<Property Id="EffectValueType" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="影响值类型 百分比 绝对值--如果是控制属性开关，则只能是绝对值"/>
+		<Property Id="EffectValueReferType" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="影响值参考类型"/>
+		<Property Id="EffectTimeValue" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="总共产生几次"/>
+		<Property Id="EffectTimeInterval" Type="float" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="每次间隔时间0.5f倍数"/>
+		<Property Id="WashGroupID" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="每次间隔时间0.5f倍数"/>
+		<Property Id="ReverseReferType" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="是否还原，不还原的在计算的时候不能保存在runTimeInfo,只能累计在最终值内"/>
+		<Property Id="EffectClearOnDead" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="死亡是否清除"/>
+		<Property Id="DownSaveType" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="下线是否保存"/>
+	</Propertys>
+	<Records>
+	</Records>
+	<Includes>
+	</Includes>
+</XML>

@@ -1,0 +1,16 @@
+<XML>
+	<Propertys>
+		<Property Id="1V1LeftCount" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="今日1V1剩余次数"/>
+		<Property Id="1V1PayCount" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="今日1V1付费次数"/>
+		<Property Id="1V1CDTime" Type="object" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="1V1失败时间，用来做CD"/>
+	</Propertys>
+	<Records>
+		<Record Id="1V1List" Row="3" Col="3" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="1V1匹配列表">
+			<Col Type="object" Desc="匹配的3个1V1对象ID"/>
+			<Col Type="int" Desc="强弱EPVP_NONE"/>
+			<Col Type="int" Desc="是否选择开打"/>
+		</Record>
+	</Records>
+	<Includes>	
+	</Includes>
+</XML>

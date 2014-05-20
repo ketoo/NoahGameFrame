@@ -1,0 +1,21 @@
+<XML>
+	<Propertys>
+			<Property Id="X111" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" />
+			<Property Id="Y111" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" />
+			<Property Id="Z111" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" />
+		</Propertys>
+		<Records>
+			<Record Id="HateList222" Row="1" Col="3" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" >
+				<Col Id="X1" Type="int"/>
+				<Col Id="X2" Type="int"/>
+				<Col Id="X3" Type="int"/>
+			</Record>
+			<Record Id="SkillList222" Row="1" Col="3" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" >
+				<Col Id="X1" Type="int"/>
+				<Col Id="X2" Type="int"/>
+				<Col Id="X3" Type="int"/>
+			</Record>
+		</Records>
+		<Includes>
+		</Includes>
+</XML>

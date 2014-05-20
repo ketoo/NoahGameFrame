@@ -1,0 +1,15 @@
+<XML>
+	<Propertys>
+		<Property Id="Account" Type="string" Public="false" Private="false" Save="false" Index="0" Index="0" SaveInterval="0" ScriptFunction="" />
+		<Property Id="ConnectKey" Type="string" Public="false" Private="false" Save="false" Index="0" Index="0" SaveInterval="0" ScriptFunction="" />
+		<Property Id="WorldID" Type="int" Public="false" Private="false" Save="false" Index="0" Index="0" SaveInterval="0" ScriptFunction="" />
+		<Property Id="RoleIdent" Type="object" Public="false" Private="false" Save="false" Index="0" Index="0" SaveInterval="0" ScriptFunction="" />
+		<Property Id="RoleName" Type="string" Public="false" Private="false" Save="false" Index="0" Index="0" SaveInterval="0" ScriptFunction="" />
+		<Property Id="Verified" Type="int" Public="false" Private="false" Save="false" Index="0" Index="0" SaveInterval="0" ScriptFunction="" Desc="验证是否通过" />
+	</Propertys>
+		<Records>
+	</Records>
+	
+	<Includes>
+	</Includes>
+</XML>

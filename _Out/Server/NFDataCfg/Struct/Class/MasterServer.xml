@@ -1,0 +1,11 @@
+<XML>
+	<Propertys>
+
+	</Propertys>
+		<Records>
+	</Records>
+	
+	<Includes>
+	<Include Id="../../NFDataCfg/Struct/Class/ServerData.xml"/>
+	</Includes>
+</XML>

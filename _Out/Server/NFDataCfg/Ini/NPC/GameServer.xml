@@ -1,0 +1,4 @@
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
+<XML>
+	<Object ID="GameServer" CpuCount="4" PassWord="kytoo" IP="127.0.0.1" Port="10000" MaxConnect="10000" OnlineCount="0" SqlIP="" SqlPort="0" SqlAccount="" SqlPwd="" ServerIP="127.0.0.1" ServerPort="8000" ServerID="0" ServerPwd="kytoo" Name="" IsOK="0"/>
+</XML>

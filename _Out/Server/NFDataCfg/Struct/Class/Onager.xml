@@ -1,0 +1,32 @@
+<XML>
+	<Propertys>
+		<Property Id="ID" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="ID"/>
+		<Property Id="Level" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="弩炮等级"/>
+		<Property Id="NeedLevel" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="此进阶需要的玩家等级"/>
+		<Property Id="ItemID" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="此进阶需要的物品ID"/>
+		<Property Id="ItemCount" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="此进阶需要的数量"/>
+		<Property Id="NeedMoney" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="此进阶需要的钱"/>
+		
+		<Property Id="DuringTime" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="持续时间/毫秒"/>
+		<Property Id="UseTime" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="每副本可使用的次数"/>
+		<Property Id="CoolTime" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="冷却时间/毫秒"/>
+		<Property Id="EffectData" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="影响属性集"/>
+		
+		<Property Id="MaxWish" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="祝福上限"/>
+
+		<Property Id="MinLevel" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="进阶成功所需进阶次数min"/>
+		<Property Id="MaxLevel" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="进阶成功所需进阶次数max"/>
+		<Property Id="Rate" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="10000为基数"/>
+		
+		<Property Id="FailAddMinWish" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="失败增加祝福值min"/>
+		<Property Id="FailAddMaxWish" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="失败增加祝福值max"/>
+		<Property Id="BC" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="标识成功后是否进行公告"/>
+		<Property Id="NextID" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="升级后下一个ID"/>
+	
+	
+	</Propertys>
+	<Records>
+	</Records>
+	<Includes>
+	</Includes>
+</XML>

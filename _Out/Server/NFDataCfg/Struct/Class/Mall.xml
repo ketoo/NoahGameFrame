@@ -1,0 +1,20 @@
+<XML>
+	<Propertys>
+		<Property Id="ID" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="商城id"/>
+		<Property Id="LimitType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="限制类型"/>
+		<Property Id="LimitBuyTime" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="限制时间"/>
+		<Property Id="LimitDayCount" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="限制数量"/>
+		<Property Id="ItemId" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="道具ID"/>
+		<Property Id="BuyType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="购买货币种类"/>
+		<Property Id="BuyCost" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="道具花费"/>
+		<Property Id="Effectval" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="道具类型"/>
+		<Property Id="BuyCount" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="道具类型"/>
+		
+	</Propertys>
+	
+	<Records>
+	</Records>
+	
+	<Includes>
+	</Includes>
+</XML>
