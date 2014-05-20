@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="NFKernelModule">
+      <UniqueIdentifier>{a8aa8caa-98c2-4623-b91e-119c2b3027fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NFGridModule">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="NFContainerModule">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NFKernelPlugin.h" />
+    <ClInclude Include="NFKernelModule\NFCKernelModule.h">
+      <Filter>NFKernelModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFGridModule\NFCGridModule.h">
+      <Filter>NFGridModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFGridModule\NFIGridModule.h">
+      <Filter>NFGridModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFContainerModule\NFCContainerModule.h">
+      <Filter>NFContainerModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFContainerModule\NFIContainerModule.h">
+      <Filter>NFContainerModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFKernelModule\NFCLogModule.h">
+      <Filter>NFKernelModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFKernelModule\NFCConcurrentModule.h">
+      <Filter>NFKernelModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFKernelModule\NFCUUIDModule.h">
+      <Filter>NFKernelModule</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="NFKernelPlugin.cpp" />
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="NFKernelModule\NFCKernelModule.cpp">
+      <Filter>NFKernelModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFGridModule\NFCGridModule.cpp">
+      <Filter>NFGridModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFContainerModule\NFCContainerModule.cpp">
+      <Filter>NFContainerModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFKernelModule\NFCLogModule.cpp">
+      <Filter>NFKernelModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFKernelModule\NFCConcurrentModule.cpp">
+      <Filter>NFKernelModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFKernelModule\NFCUUIDModule.cpp">
+      <Filter>NFKernelModule</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

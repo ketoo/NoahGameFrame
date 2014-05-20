@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="NFCore" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug x64">
+				<Option output="NFCore" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-D_WIN64" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-DNFCORE_EXPORTS" />
+					<Add directory="$(NF_HOME)" />
+					<Add directory="$(BOOST_HOME)" />
+				</Compiler>
+				<Linker>
+					<Add directory="$(BOOST_LIB)" />
+				</Linker>
+			</Target>
+			<Target title="Release x64">
+				<Option output="NFCore" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-D_WIN64" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-DNFCORE_EXPORTS" />
+					<Add directory="$(NF_HOME)" />
+					<Add directory="$(BOOST_HOME)" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Unit filename="NFCComponent.cpp" />
+		<Unit filename="NFCComponent.h" />
+		<Unit filename="NFCComponentManager.cpp" />
+		<Unit filename="NFCComponentManager.h" />
+		<Unit filename="NFCHeartBeatManager.cpp" />
+		<Unit filename="NFCHeartBeatManager.h" />
+		<Unit filename="NFCProperty.cpp" />
+		<Unit filename="NFCProperty.h" />
+		<Unit filename="NFCPropertyManager.cpp" />
+		<Unit filename="NFCPropertyManager.h" />
+		<Unit filename="NFCRecord.cpp" />
+		<Unit filename="NFCRecord.h" />
+		<Unit filename="NFCRecordManager.cpp" />
+		<Unit filename="NFCRecordManager.h" />
+		<Unit filename="NFCValueList.cpp" />
+		<Unit filename="NFCValueList.h" />
+		<Unit filename="NFCore.cpp" />
+		<Unit filename="NFCore.h" />
+		<Unit filename="NFDefine.h" />
+		<Unit filename="NFIComponent.h" />
+		<Unit filename="NFIComponentManager.h" />
+		<Unit filename="NFIHeartBeatManager.h" />
+		<Unit filename="NFIObject.h" />
+		<Unit filename="NFIProperty.h" />
+		<Unit filename="NFIPropertyManager.h" />
+		<Unit filename="NFIRecord.h" />
+		<Unit filename="NFIRecordManager.h" />
+		<Unit filename="NFIValueList.h" />
+		<Unit filename="NFIdentID.h" />
+		<Unit filename="NFList.h" />
+		<Unit filename="NFMap.h" />
+		<Unit filename="NFPlatform.h" />
+		<Unit filename="NFSingleton.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

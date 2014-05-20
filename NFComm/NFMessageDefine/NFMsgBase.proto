@@ -1,0 +1,206 @@
+package NFMsg; 
+
+import "NFDefine.proto";
+
+////////////////////////BaseCommon/////////////////////////////
+message PropertyInt//基础结构，不直接发送
+{ 
+    required bytes     property_name = 1;
+    required int32      data = 2;
+}
+
+message PropertyFloat//基础结构，不直接发送
+{ 
+    required bytes     property_name = 1;
+    required float      data = 2;
+}
+
+message PropertyString//基础结构，不直接发送
+{ 
+    required bytes     property_name = 1;
+    required bytes     data = 2;
+}
+
+message PropertyObject//基础结构，不直接发送
+{ 
+    required bytes     property_name = 1;
+    required int64      data = 2;
+}
+
+///////////////////////////////////////////////
+
+message RecordInt//基础结构，不直接发送
+{
+    required int32      row = 1;
+	required int32      col = 2;
+	required int32      data = 3;
+}
+
+
+message RecordFloat//基础结构，不直接发送
+{
+    required int32      row = 1;
+	required int32      col = 2;
+	required float      data = 3;
+}
+
+message RecordString//基础结构，不直接发送
+{ 
+    required int32      row = 1;
+	required int32      col = 2;
+	required bytes     data = 3;
+}
+
+message RecordObject//基础结构，不直接发送
+{
+    required int32      row = 1;
+	required int32      col = 2;
+	required int64      data = 3;
+}
+
+message ObjectRecordBase//基础结构，不直接发送
+{ 
+	required bytes  record_name = 1;
+	repeated RecordInt  record_int_list = 2;
+	repeated RecordFloat  record_float_list = 3;
+	repeated RecordString  record_string_list = 4;
+	repeated RecordObject  record_object_list = 5;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+message ObjectPropertyList//个人玩家全部属性列表，可直接发送--统一发,为节约包
+{
+	required int64  player_id = 1;
+	repeated PropertyInt property_int_list = 2;
+	repeated PropertyFloat property_float_list = 3;
+	repeated PropertyString property_string_list = 4;
+	repeated PropertyObject property_object_list = 5;
+}
+ 
+ message MultiObjectPropertyList//多人玩家全部属性列表，可直接发送--统一发,为节约包
+ {
+	repeated ObjectPropertyList multi_player_property = 1;
+ }
+
+message ObjectRecordList//个人玩家全部表数据，可直接发送--统一发,为节约包
+{
+	required int64  player_id = 1;
+	repeated ObjectRecordBase record_list = 2;
+}
+
+ message MultiObjectRecordList//多人玩家全部表数据，可直接发送--统一发,为节约包
+ {
+	repeated ObjectRecordList multi_player_record = 1;
+ }
+
+message ObjectPropertyInt//个人玩家单类型属性数据，可直接发送---变化时
+{
+	required int64  player_id = 1;
+    repeated PropertyInt	property_list = 2;
+} 
+
+message ObjectPropertyFloat//个人玩家单类型属性数据，可直接发送---变化时
+{
+	required int64  player_id = 1;
+    repeated PropertyFloat  	property_list = 2;
+} 
+
+message ObjectPropertyString//个人玩家单类型属性数据，可直接发送---变化时
+{
+	required int64  player_id = 1;
+    repeated PropertyString  	property_list = 2;
+} 
+
+message ObjectPropertyObject//个人玩家单类型属性数据，可直接发送---变化时
+{
+	required int64  player_id = 1;
+    repeated PropertyObject  	property_list = 2;
+}
+
+message ObjectRecordInt//个人玩家单类型属性数据，可直接发送---变化时
+{
+	required int64  player_id = 1;
+	required bytes     	record_name = 2;
+    repeated RecordInt  	property_list = 3;
+} 
+
+message ObjectRecordFloat//个人玩家单类型属性数据，可直接发送---变化时
+{
+	required int64  player_id = 1;
+	required bytes     	record_name = 2;
+    repeated RecordFloat  	property_list = 3;
+}
+
+message ObjectRecordString//个人玩家单类型属性数据，可直接发送---变化时
+{
+	required int64  player_id = 1;
+	required bytes     	record_name = 2;
+    repeated RecordString  	property_list = 3;
+}
+
+message ObjectRecordObject//个人玩家单类型属性数据，可直接发送---变化时
+{
+	required int64  player_id = 1;
+	required bytes     	record_name = 2;    
+    repeated RecordObject  property_list = 3;
+}
+
+message ObjectRecordSwap//个人玩家单类型属性数据，可直接发送---变化时
+{
+	required int64  player_id = 1;
+	required bytes    	origin_record_name = 2;
+	optional bytes		target_record_name = 3;
+	required int32 		row_origin = 4;
+	required int32 		row_target = 5;
+}
+
+//////////////////////////////
+
+message RecordAddStruct//表添加基础结构，不直接发送
+{
+	required int32 					row = 1;
+	repeated RecordInt			int_list = 2;
+	repeated RecordFloat			float_list = 3;
+	repeated RecordString		string_list = 4;
+	repeated RecordObject		object_list = 5;
+}
+
+message ObjectRecordAddRow//个人玩家单类型属性数据，可直接发送---变化时
+{
+	required int64     			player_id = 1;
+	required bytes     		record_name = 2;
+	repeated RecordAddStruct    row_data = 3;
+}
+
+message ObjectRecordRemove//个人玩家单类型属性数据，可直接发送---变化时
+{
+	required int64     	player_id = 1;
+	required bytes    	record_name = 2;  
+	repeated int32 		remove_row = 3;
+}
+
+
+///////////////////////////////////////////////////////////////////
+message MsgBase
+{
+	required int32   player_id = 1;//内网需要，外网视情况0(通常不需要，只有在要求别人的数据时才需要)
+	required bytes  msg_data = 2;
+}
+
+message ReqCommand//GM命令
+{
+	enum EGameCommandType
+	{
+		EGCT_MODIY_PROPERTY		= 0;//修改属性[property_name,value]
+		EGCT_MODIY_ITEM			= 1;//得到物品[item_id,count]
+		EGCT_MODIY_TASK			= 2;//接受任务，完成任务[task_id,0:accept-1:compelete]
+		EGCT_MODIY_CLONE		= 3;//完成副本进度[clone_id,none]
+		EGCT_MODIY_KILL			= 4;//杀怪[monster_id,monster_guid]
+		EGCT_SWAP_SCENE			= 5;//传送[scene_id,scene_id]
+	}
+	required int64 control_id = 1;
+	required EGameCommandType command_id = 2;
+	optional bytes command_str_value = 3;
+	optional int64 command_value = 4;
+
+}

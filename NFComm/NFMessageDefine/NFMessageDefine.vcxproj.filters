@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="NFLimit.h" />
+    <ClInclude Include="NFMsgDefine.h" />
+    <ClInclude Include="NFMsgShare.pb.h" />
+    <ClInclude Include="NFDefine.pb.h" />
+    <ClInclude Include="NFMsgBase.pb.h" />
+    <ClInclude Include="NFMsgBaseEx.pb.h" />
+    <ClInclude Include="NFMsgPreGame.pb.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="NFMsgShare.pb.cc" />
+    <ClCompile Include="NFDefine.pb.cc" />
+    <ClCompile Include="NFMsgBase.pb.cc" />
+    <ClCompile Include="NFMsgBaseEx.pb.cc" />
+    <ClCompile Include="NFMsgPreGame.pb.cc" />
+    <ClCompile Include="NFMsgDefine.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NFMsgShare.proto" />
+    <None Include="NFDefine.proto" />
+    <None Include="NFMsgBase.proto" />
+    <None Include="NFMsgBaseEx.proto" />
+    <None Include="NFMsgPreGame.proto" />
+  </ItemGroup>
+</Project>

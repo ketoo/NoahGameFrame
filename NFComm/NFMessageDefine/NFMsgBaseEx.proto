@@ -1,0 +1,49 @@
+package NFMsg; 
+
+import "NFMsgBase.proto";
+
+message PropertyIntEx
+{ 
+    required int32     property_id = 1;
+    required int32      data = 2;
+}
+
+message PropertyFloatEx
+{ 
+    required bytes     property_id = 1;
+    required float      data = 2;
+}
+
+message PropertyStringEx
+{ 
+    required bytes     property_id = 1;
+    required bytes     data = 2;
+}
+
+message PropertyObjectEx
+{ 
+    required bytes     property_id = 1;
+    required int64      data = 2;
+}
+
+message ObjectPropertyListEx
+{
+	repeated PropertyIntEx property_int_list = 1;
+	repeated PropertyFloatEx property_float_list = 2;
+	repeated PropertyStringEx property_string_list = 3;
+	repeated PropertyObjectEx property_object_list = 4;
+}
+
+message ObjectRecordBaseEx
+{ 
+	required int32  record_id = 1;
+	repeated RecordInt  record_int_list = 2;
+	repeated RecordFloat  record_float_list = 3;
+	repeated RecordString  record_string_list = 4;
+	repeated RecordObject  record_object_list = 5;
+}
+
+message ObjectRecordListEx
+{
+	repeated ObjectRecordBaseEx record_list = 1;
+}
