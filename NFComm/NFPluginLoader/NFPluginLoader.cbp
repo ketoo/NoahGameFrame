@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="NFPluginLoader" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug x64">
+				<Option output="NFPluginLoader" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DWIN" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_CONSOLE" />
+					<Add option="-D_USRDLL" />
+					<Add directory="$(NF_HOME)" />
+					<Add directory="$(BOOST_HOME)" />
+				</Compiler>
+				<Linker>
+					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
+					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
+					<Add directory="$(BOOST_LIB)" />
+					<Add directory="D:/NoahGameFrame/trunk/_Out/Comm/Debug" />
+					<Add directory="D:/NoahGameFrame/trunk/Dependencies/lib/Debug" />
+				</Linker>
+			</Target>
+			<Target title="Release x64">
+				<Option output="NFPluginLoader" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DWIN" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_CONSOLE" />
+					<Add directory="$(NF_HOME)" />
+					<Add directory="$(BOOST_HOME)" />
+				</Compiler>
+				<Linker>
+					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
+					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="NFCDynLib.cpp" />
+		<Unit filename="NFCDynLib.h" />
+		<Unit filename="NFCPluginManager.cpp" />
+		<Unit filename="NFCPluginManager.h" />
+		<Unit filename="NFPluginLoader.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="NFMessageDefine" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug x64">
+				<Option output="NFMessageDefine" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-DWIN" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_LIB" />
+					<Add directory="$(NF_HOME)" />
+					<Add directory="$(BOOST_HOME)" />
+					<Add directory="$(NF_DEP)" />
+				</Compiler>
+			</Target>
+			<Target title="Release x64">
+				<Option output="NFMessageDefine" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-DWIN" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_LIB" />
+					<Add directory="$(NF_HOME)" />
+					<Add directory="$(BOOST_HOME)" />
+					<Add directory="$(NF_DEP)" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Unit filename="NFLimit.h" />
+		<Unit filename="NFMsgDefine.h" />
+		<Unit filename="NFMsgShare.pb.cc" />
+		<Unit filename="NFMsgShare.pb.h" />
+		<Unit filename="NFMsgShare.proto" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
