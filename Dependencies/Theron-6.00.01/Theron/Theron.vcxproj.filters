@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Detail">
+      <UniqueIdentifier>{6b50fbb3-8cf4-4f05-a81d-9eeac054138c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Detail\Allocators">
+      <UniqueIdentifier>{6e146971-b476-4089-8c96-7bc0b41b1b65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Detail\Alignment">
+      <UniqueIdentifier>{cd98aab1-0fb9-4b3b-bf76-9c34e03e40cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Detail\Containers">
+      <UniqueIdentifier>{edabb3e7-cd76-47bb-95de-60372d553852}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Detail\Directory">
+      <UniqueIdentifier>{cde0d643-8227-46e3-a594-1dca6cbd6712}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Detail\Handlers">
+      <UniqueIdentifier>{2b890872-a285-49c8-95f9-ffba9da67490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Detail\Mailboxes">
+      <UniqueIdentifier>{6b09840f-c997-4afc-8244-59524b2da12a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Detail\Messages">
+      <UniqueIdentifier>{32da6a07-d31d-4769-9f07-f1e65136e229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Detail\Threading">
+      <UniqueIdentifier>{7817cf4c-0cc6-458f-95f2-c7cfa84fc5d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Detail\Network">
+      <UniqueIdentifier>{a7ec97db-66bc-4519-9f7e-787967ef1ed4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Detail\Transport">
+      <UniqueIdentifier>{ea9d0121-3f41-48df-90a4-0dbfe7becc95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Detail\Debug">
+      <UniqueIdentifier>{c2edb279-25ff-4784-be97-1faa9aa0b6b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Detail\Scheduler">
+      <UniqueIdentifier>{e30bc778-440b-43df-ba5b-5d63164603fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Detail\Strings">
+      <UniqueIdentifier>{a0705212-78d4-46e1-b228-47b843f7c9e0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AllocatorManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultHandlerCollection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FallbackHandlerCollection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HandlerCollection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Receiver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EndPoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildDescriptor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="YieldPolicy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StringPool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Address.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Clock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Include\Theron\Actor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Address.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Align.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\AllocatorManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Assert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\BasicTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\DefaultAllocator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Defines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\IAllocator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Receiver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Register.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Allocators\CachingAllocator.h">
+      <Filter>Header Files\Detail\Allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Allocators\Pool.h">
+      <Filter>Header Files\Detail\Allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Alignment\MessageAlignment.h">
+      <Filter>Header Files\Detail\Alignment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Directory\Directory.h">
+      <Filter>Header Files\Detail\Directory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Directory\Entry.h">
+      <Filter>Header Files\Detail\Directory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Directory\StaticDirectory.h">
+      <Filter>Header Files\Detail\Directory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\BlindDefaultHandler.h">
+      <Filter>Header Files\Detail\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\BlindFallbackHandler.h">
+      <Filter>Header Files\Detail\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\DefaultFallbackHandler.h">
+      <Filter>Header Files\Detail\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\DefaultHandler.h">
+      <Filter>Header Files\Detail\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\DefaultHandlerCollection.h">
+      <Filter>Header Files\Detail\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\FallbackHandler.h">
+      <Filter>Header Files\Detail\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\FallbackHandlerCollection.h">
+      <Filter>Header Files\Detail\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\HandlerCollection.h">
+      <Filter>Header Files\Detail\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\IDefaultHandler.h">
+      <Filter>Header Files\Detail\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\IFallbackHandler.h">
+      <Filter>Header Files\Detail\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\IMessageHandler.h">
+      <Filter>Header Files\Detail\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\IReceiverHandler.h">
+      <Filter>Header Files\Detail\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\MessageHandler.h">
+      <Filter>Header Files\Detail\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\MessageHandlerCast.h">
+      <Filter>Header Files\Detail\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\ReceiverHandler.h">
+      <Filter>Header Files\Detail\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\ReceiverHandlerCast.h">
+      <Filter>Header Files\Detail\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Mailboxes\Mailbox.h">
+      <Filter>Header Files\Detail\Mailboxes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Messages\IMessage.h">
+      <Filter>Header Files\Detail\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Messages\Message.h">
+      <Filter>Header Files\Detail\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Messages\MessageCast.h">
+      <Filter>Header Files\Detail\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Messages\MessageCreator.h">
+      <Filter>Header Files\Detail\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Messages\MessageTraits.h">
+      <Filter>Header Files\Detail\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Threading\Atomic.h">
+      <Filter>Header Files\Detail\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Threading\SpinLock.h">
+      <Filter>Header Files\Detail\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Threading\Thread.h">
+      <Filter>Header Files\Detail\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Threading\Utils.h">
+      <Filter>Header Files\Detail\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Catcher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Theron.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Containers\Map.h">
+      <Filter>Header Files\Detail\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Network\NameMap.h">
+      <Filter>Header Files\Detail\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Containers\List.h">
+      <Filter>Header Files\Detail\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Containers\Queue.h">
+      <Filter>Header Files\Detail\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Network\Index.h">
+      <Filter>Header Files\Detail\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Network\NameGenerator.h">
+      <Filter>Header Files\Detail\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Network\NetworkMessage.h">
+      <Filter>Header Files\Detail\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Network\MessageFactory.h">
+      <Filter>Header Files\Detail\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\EndPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Transport\Context.h">
+      <Filter>Header Files\Detail\Transport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Transport\InputMessage.h">
+      <Filter>Header Files\Detail\Transport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Transport\InputSocket.h">
+      <Filter>Header Files\Detail\Transport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Transport\OutputMessage.h">
+      <Filter>Header Files\Detail\Transport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Transport\OutputSocket.h">
+      <Filter>Header Files\Detail\Transport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Debug\BuildDescriptor.h">
+      <Filter>Header Files\Detail\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Messages\MessageSize.h">
+      <Filter>Header Files\Detail\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\MailboxContext.h">
+      <Filter>Header Files\Detail\Scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\MailboxProcessor.h">
+      <Filter>Header Files\Detail\Scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\ThreadPool.h">
+      <Filter>Header Files\Detail\Scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\YieldImplementation.h">
+      <Filter>Header Files\Detail\Scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\YieldPolicy.h">
+      <Filter>Header Files\Detail\Scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\YieldStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Threading\Condition.h">
+      <Filter>Header Files\Detail\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Threading\Lock.h">
+      <Filter>Header Files\Detail\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Threading\Mutex.h">
+      <Filter>Header Files\Detail\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\Scheduler.h">
+      <Filter>Header Files\Detail\Scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\IScheduler.h">
+      <Filter>Header Files\Detail\Scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\WorkerContext.h">
+      <Filter>Header Files\Detail\Scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Strings\String.h">
+      <Filter>Header Files\Detail\Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Strings\StringPool.h">
+      <Filter>Header Files\Detail\Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Threading\Clock.h">
+      <Filter>Header Files\Detail\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\BlockingMonitor.h">
+      <Filter>Header Files\Detail\Scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\NonBlockingMonitor.h">
+      <Filter>Header Files\Detail\Scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\MailboxQueue.h">
+      <Filter>Header Files\Detail\Scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\Counting.h">
+      <Filter>Header Files\Detail\Scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\SchedulerHints.h">
+      <Filter>Header Files\Detail\Scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Theron\Detail\Strings\StringHash.h">
+      <Filter>Header Files\Detail\Strings</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Include\Theron\Detail\Threading\README.txt">
+      <Filter>Header Files\Detail\Threading</Filter>
+    </None>
+    <None Include="Theron.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

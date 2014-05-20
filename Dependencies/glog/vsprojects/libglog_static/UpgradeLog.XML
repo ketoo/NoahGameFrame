@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="libglog_static">
+</Property><Property Name="解决方案文件" Value="D:\NoahGameFrame\trunk\Dependencies\glog\vsprojects\libglog_static\libglog_static.sln">
+</Property><Property Name="Date" Value="2014年2月10日">
+</Property><Property Name="Time" Value="20:17:11">
+</Property></Properties><Event ErrorLevel="0" Project="libglog_static" Source="libglog_static.vcproj" Description="Converting project file 'D:\NoahGameFrame\trunk\Dependencies\glog\vsprojects\libglog_static\libglog_static.vcproj'.">
+</Event><Event ErrorLevel="1" Project="libglog_static" Source="libglog_static.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="libglog_static" Source="libglog_static.vcproj" Description="Done converting to new project file 'D:\NoahGameFrame\trunk\Dependencies\glog\vsprojects\libglog_static\libglog_static.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="libglog_static" Source="libglog_static.vcproj" Description="Converted">
+</Event></UpgradeLog>
