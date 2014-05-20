@@ -1,0 +1,37 @@
+<XML>
+	<class Id = "IObject" Type = "TYPE_OBJECT" Path = "../../NFDataCfg/Struct/Class/IObject.xml" InstancePath = "../../NFDataCfg/Ini/NPC/IObject.xml" public = "false" Desc = "IObject"> 
+		<class Id = "NPC" Type = "TYPE_NPC" Path = "../../NFDataCfg/Struct/Class/NPC.xml" InstancePath = "../../NFDataCfg/Ini/NPC/NPC.xml" public = "true" Desc = "NPC">
+			<class Id = "CreatorNPC" Type = "TYPE_NPC" Path = "../../NFDataCfg/Struct/Class/CreatorNPC.xml" InstancePath = "../../NFDataCfg/Ini/NPC/CreatorNPC.xml" public = "false" Desc = "AI Creator"/>
+			<class Id = "AttackNPC" Type = "TYPE_NPC" Path = "../../NFDataCfg/Struct/Class/AttackNPC.xml" InstancePath = "../../NFDataCfg/Ini/NPC/AttackNPC.xml" public = "true" Desc = "根据新的AI状态机计划，可以省略掉绝大部分NPC"/>
+		</class>
+		<!-- <class Id = "DropNPC" Type = "TYPE_PLAYER" Path = "../../NFDataCfg/Struct/Class/DropNPC.xml" InstancePath = "../../NFDataCfg/Ini/NPC/DropNPC.xml"  public = "true" Desc = "NPC"/> -->
+		<class Id = "Player" Type = "TYPE_PLAYER" Path = "../../NFDataCfg/Struct/Class/Player.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Player.xml"  public = "true" Desc = "NPC"/>
+		<class Id = "PublicPlayer" Type = "TYPE_PLAYER" Path = "../../NFDataCfg/Struct/Class/PublicPlayer.xml" InstancePath = "../../NFDataCfg/Ini/NPC/PublicPlayer.xml"  public = "true" Desc = "工会，拍卖等公共数据对象"/>
+		
+		<class Id = "Item" Type = "TYPE_ITEM" Path = "../../NFDataCfg/Struct/Class/Item.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Item.xml"  public = "false" Desc = "NPC">
+			<!-- <class Id = "Equip" Type = "TYPE_EQUIP" Path = "../../NFDataCfg/Struct/Class/Equip.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Equip.xml" public = "false" Desc = "NPC"/> -->
+		</class>
+		
+		<!-- <class Id = "Skill" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/Skill.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Skill.xml" public = "false" Desc = "NPC"/> -->
+		<class Id = "Scene" Type = "TYPE_SCENE" Path = "../../NFDataCfg/Struct/Class/Scene.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Scene.xml" public = "false" Desc = "NPC"/> 
+		
+		<class Id = "ServerData" Type = "TYPE_WORLD" Path = "../../NFDataCfg/Struct/Class/ServerData.xml" InstancePath = "../../NFDataCfg/Ini/NPC/ServerData.xml" public = "true" Desc = "NPC"> 
+			<class Id = "WorldServer" Type = "TYPE_WORLD" Path = "../../NFDataCfg/Struct/Class/WorldServer.xml" InstancePath = "../../NFDataCfg/Ini/NPC/WorldServer.xml" public = "true" Desc = "NPC"/> 
+			<class Id = "MasterServer" Type = "TYPE_WORLD" Path = "../../NFDataCfg/Struct/Class/MasterServer.xml" InstancePath = "../../NFDataCfg/Ini/NPC/MasterServer.xml" public = "true" Desc = "NPC"/> 
+			<class Id = "DataBaseServer" Type = "TYPE_DataBase" Path = "../../NFDataCfg/Struct/Class/DataBaseServer.xml" InstancePath = "../../NFDataCfg/Ini/NPC/DataBaseServer.xml" public = "false" Desc = "NPC"/> 
+			<class Id = "ProxyServer" Type = "TYPE_PROXY" Path = "../../NFDataCfg/Struct/Class/ProxyServer.xml" InstancePath = "../../NFDataCfg/Ini/NPC/ProxyServer.xml" public = "false" Desc = "NPC"/> 
+			<class Id = "LoginServer" Type = "TYPE_LOGIN" Path = "../../NFDataCfg/Struct/Class/LoginServer.xml" InstancePath = "../../NFDataCfg/Ini/NPC/LoginServer.xml" public = "false" Desc = "NPC"/> 
+			<class Id = "GameServer" Type = "TYPE_LOGIN" Path = "../../NFDataCfg/Struct/Class/GameServer.xml" InstancePath = "../../NFDataCfg/Ini/NPC/GameServer.xml" public = "false" Desc = "NPC"/> 
+			<class Id = "ClientConnect" Type = "TYPE_CLIENT" Path = "../../NFDataCfg/Struct/Class/ClientConnect.xml" InstancePath = "../../NFDataCfg/Ini/NPC/ClientConnect.xml" public = "false" Desc = "NPC"/> 
+			<class Id = "WantToConnect" Type = "TYPE_CLIENT" Path = "../../NFDataCfg/Struct/Class/WantToConnect.xml" InstancePath = "../../NFDataCfg/Ini/NPC/WantToConnect.xml" public = "false" Desc = "AI Creator"/>
+			<class Id = "PlayerAccount" Type = "TYPE_CLIENT" Path = "../../NFDataCfg/Struct/Class/PlayerAccount.xml" InstancePath = "../../NFDataCfg/Ini/NPC/PlayerAccount.xml" public = "false" Desc = "AI Creator"/>
+		</class>
+	</class>
+	<class Id = "NPCSeed" Type = "TYPE_WORLD" Path = "../../NFDataCfg/Struct/Class/NPCSeed.xml" InstancePath = "" public = "false" Desc = "NPC"/> 
+	<class Id = "Buff" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/Buff.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Buff.xml" public = "false" Desc = "NPC"/>
+	<class Id = "Task" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/Task.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Task.xml" public = "false" Desc = "TASK"/>
+	<!-- <class Id = "EffectData" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/EffectData.xml" InstancePath = "../../NFDataCfg/Ini/NPC/EffectData.xml" public = "false" Desc = "TASK"/> -->
+	<class Id = "IComponent" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Component/IComponent.xml" InstancePath = "../../NFDataCfg/Ini/Components/IComponent.xml" public = "false" Desc = "NPC">
+		<class Id = "NFCUseItemModule" Type = "TYPE_NPC" Path = "../../NFDataCfg/Struct/Component/NFCUseItemModule.xml" InstancePath = "../../NFDataCfg/Ini/Components/NFCUseItemModule.xml" public = "false" Desc = "难点：1：如何设计，此组建对哪些事件拥有被通知权限 2：获得被通知权限，如何自动进行事件通知(类似UNITY，基类组建提供通用事件的虚接口)"/>
+	</class>
+</XML>

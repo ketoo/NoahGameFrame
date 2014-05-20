@@ -1,0 +1,11 @@
+<XML>
+	<Propertys>
+		<Property Id="LastAttacker" Type="object" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" />
+		
+	</Propertys>
+	<Records>
+
+	</Records>
+	<Includes>
+	</Includes>
+</XML>

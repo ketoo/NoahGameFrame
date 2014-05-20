@@ -1,0 +1,18 @@
+<!-- edited with XMLSPY v5 U (http://www.xmlspy.com) by et8 (et8) -->
+<XML>
+		<Propertys>
+		
+		</Propertys>
+		<Records>
+
+		</Records>
+		<Includes>
+			<Include Id="../../NFDataCfg/Struct/Class/Comm/MoveProperty.xml"/>
+			<Include Id="../../NFDataCfg/Struct/Class/Comm/ViewObjectCommProperty.xml"/>
+			<Include Id="../../NFDataCfg/Struct/Class/Npc/NPCSeedProperty.xml"/>
+			<Include Id="../../NFDataCfg/Struct/Class/Comm/SkillTable.xml"/>
+			<Include Id="../../NFDataCfg/Struct/Class/Comm/CoolDown.xml"/>
+			<Include Id="../../NFDataCfg/Struct/Class/Comm/FightTmpData.xml"/>
+			
+		</Includes>
+</XML>

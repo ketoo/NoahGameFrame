@@ -1,0 +1,5 @@
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by heh (dadad) -->
+<XML>
+	<Object ID="Skill_100001" Name="八卦1级" SkillCharType="0" TypeID="10001" Level="1" DamageCoefficient="12500" StableDamage="5" NextLevelID="Skill_100002" NeedMoney="300" NeedPoint="0" NeedLevel="5" PartnerNeedLevel="0" ArrayID="1" Icon="Skill0" DarkIcon="" ReqLevel="1" ReqWeapon="0" PlayerSkill="1" CastCost="1" CoolDown="8" DamageFactor="1" HasProjector="0" ProjectorPath="" IsPassive="0" PassiveID="0" IsKatas="1" KatasID="20001" MotionID="10001" debuff="0" debuffProb="0" SkillDescription="脚踏太极，向四周目标施展拳脚攻击。总共造成125%+5点伤害。"/>
+	<Object ID="Skill_100002" Name="八卦2级" SkillCharType="0" TypeID="10001" Level="2" DamageCoefficient="13000" StableDamage="8" NextLevelID="Skill_100003" NeedMoney="600" NeedPoint="0" NeedLevel="7" PartnerNeedLevel="0" ArrayID="1" Icon="Skill0" DarkIcon="" ReqLevel="-1" ReqWeapon="0" PlayerSkill="1" CastCost="1" CoolDown="8" DamageFactor="1.05" HasProjector="0" ProjectorPath="" IsPassive="0" PassiveID="0" IsKatas="1" KatasID="20001" MotionID="10001" debuff="0" debuffProb="0" SkillDescription="脚踏太极，向四周目标施展拳脚攻击。总共造成130%+8点伤害。"/>
+</XML>

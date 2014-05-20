@@ -1,0 +1,21 @@
+<XML>
+	<Propertys>
+		
+		<Property Id="Address" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" />
+		<Property Id="Type" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" />
+		<Property Id="SubType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" />
+		<Property Id="ClassName" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" />
+		<Property Id="Parent" Type="object" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" />
+		<Property Id="Root" Type="object" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" />
+		<Property Id="SceneID" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" />
+		<Property Id="GroupID" Type="int" Public="false" Private="false" Save="false"  Index="0" SaveInterval="0" ScriptFunction="" Desc = "0全局广播" />
+		<Property Id="ConfigID" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" />
+		
+	</Propertys>
+	
+	<Records>
+	</Records>
+	
+	<Includes>
+	</Includes>
+</XML>
