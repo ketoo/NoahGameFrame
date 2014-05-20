@@ -1,0 +1,4 @@
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
+<XML>
+	<Object ID="MasterServer" CpuCount="4" PassWord="kytoo" Port="7000" MaxConnect="10000" OnlineCount="0" SqlIP="" SqlPort="0" SqlAccount="" SqlPwd="" ServerIP="" ServerPort="0" ServerID="0" ServerPwd="" Name="" IsOK="0"/>
+</XML>

@@ -1,0 +1,26 @@
+<XML>
+	<Propertys>
+		<Property Id="ID" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副将ID"/>
+		<Property Id="Quality" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副将品质"/>
+		<Property Id="QualityModulus" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副将品质加成的系数"/>
+		<Property Id="Level" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副将等级"/>
+		<Property Id="Skill" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副将技能"/>
+		<Property Id="NeedPlayerLevel" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副将升级角色等级限制"/>
+		<Property Id="LevelUpMoney" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副将升级所需金钱"/>
+		<Property Id="LevelUpEssence" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副将升级所需精气"/>
+		<Property Id="LevelUpPetID" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副将升级后的副将ID"/>
+		<Property Id="RestoreMoney" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副将恢复到最大血量需要的金钱"/>
+		<Property Id="Attr" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="属性ID,根据等级和ID确定副将自己的属性，给角色加成的属性，角色给副将增加的比例"/>
+		<Property Id="PetToPlayerAttr" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="属性ID,根据等级和ID确定副将给角色的加成属性"/>
+		<Property Id="PlayerToPetConst" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="属性ID,根据等级和ID确定角色给副将增加的比例"/>
+		<Property Id="PlayerToPetAttr" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="属性ID,根据等级和ID确定角色给副将增加的比例"/>
+		<Property Id="ShowName" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副将名字字符串"/>
+		<Property Id="Desc" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副将描述字符串索引"/>
+	</Propertys>
+	
+	<Records>
+	</Records>
+	
+	<Includes>
+	</Includes>
+</XML>

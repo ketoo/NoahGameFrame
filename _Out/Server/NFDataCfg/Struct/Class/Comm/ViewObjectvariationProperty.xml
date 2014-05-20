@@ -1,0 +1,17 @@
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
+<XML>
+	<Propertys>
+		<Property Id="EXP" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction=" " Desc="经验获得,如果是怪物，则是掉落经验"/>
+		<Property Id="HP" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="生命值"/>
+		<Property Id="SP" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction=" " Desc="体力"/>
+		<Property Id="MP" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="法力值"/>
+		<Property Id="VP" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="关卡疲劳值"/>
+		<Property Id="Money" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction=" " Desc="钱"/>
+		<Property Id="ActivityVP" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="活动疲劳值"/>
+	</Propertys>
+	<Records>
+
+	</Records>
+	<Includes>
+	</Includes>
+</XML>

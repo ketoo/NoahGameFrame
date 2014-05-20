@@ -1,0 +1,10 @@
+<XML>
+	<Propertys>
+
+	</Propertys>
+	<Records>
+	</Records>
+	<Includes>
+		<Include Id="../../NFDataCfg/Struct/Class/Comm/ViewObjectvariationProperty.xml"/>
+	</Includes>
+</XML>

@@ -1,0 +1,11 @@
+<XML>
+	<Propertys>
+		<Property Id="DataBaseID" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" />
+	</Propertys>
+		<Records>
+	</Records>
+	
+	<Includes>
+		<Include Id="../../NFDataCfg/Struct/Class/ServerData.xml"/>
+	</Includes>
+</XML>

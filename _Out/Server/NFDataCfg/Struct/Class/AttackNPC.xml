@@ -1,0 +1,14 @@
+<XML>
+	<Propertys>
+		<!-- <Property Id="SkillList" Type="string" Public="true" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="掉落包ID" /> -->
+		<Property Id="DropGroudID1" Type="string" Public="true" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="掉落包ID" />
+		<Property Id="DropGroudID2" Type="string" Public="true" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="掉落包ID" />
+
+	</Propertys>
+	
+	<Records>
+	</Records>
+	
+	<Includes>
+	</Includes>
+</XML>

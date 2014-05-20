@@ -1,0 +1,60 @@
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
+<XML>
+	<Propertys>
+		<Property Id="MAXHP" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="生命值"/>
+		<Property Id="MAXMP" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="法力值"/>
+		<Property Id="MAXSP" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="体力"/>
+		<Property Id="MAXVP" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="关卡疲劳值"/>
+		<Property Id="MAXActivityVP" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="活动疲劳值"/>
+		<Property Id="HPREGEN" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="生命值回复"/>
+		<Property Id="SPREGEN" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="体力回复"/>
+		<Property Id="MPREGEN" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="MP回复"/>
+		<Property Id="VPREGEN" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="VP回复"/>
+		<Property Id="ACTIVETYVPREGEN" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="活动疲劳值回复"/>
+		<Property Id="EXP_SCALE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="额外经验获得率,10000为单位"/>
+		<Property Id="GOLD_SCALE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="额外金币获得率,10000为单位"/>
+		<Property Id="EQUIP_SCALE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="额外装备获得率,10000为单位"/>
+		<Property Id="HIT_VALUE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="命中率,最大都是10000为单位"/>
+		<Property Id="ESSENCE_SCALE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="额外精气获得率,最大都是10000为单位"/>
+		<Property Id="DODGE_VALUE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="闪避等级"/>
+		<Property Id="CRITICAL_VALUE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="暴击等级"/>
+		<Property Id="BROKEN_VALUE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="破击等级"/>
+		<Property Id="DAMAGE_REFOUND" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="反伤率,10000为单位"/>
+		<Property Id="DAMAGE_GETHP" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="吸血率,10000为单位"/>
+		<Property Id="RESIST_VALUE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="格挡等级"/>
+		<Property Id="ATK_VALUE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="物理攻击力"/>
+		<Property Id="DEF_VALUE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="物理防御力"/>
+		<Property Id="CRITICAL_RATIO_VALUE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="暴击倍率,10000为单位"/>
+		<Property Id="DEF_CRITICAL_RATIO_VALUE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="会心值"/>
+		<Property Id="DEF_HALT_VALUE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="定身抗性"/>
+		<Property Id="DEF_SLOW_VALUE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="减速抗性"/>
+		<Property Id="DEF_SILENCE_VALUE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="沉默抗性"/>
+		<Property Id="DEF_DIZZY_VALUE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="昏迷抗性"/>
+		<Property Id="DEF_FREZE_VALUE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="冰冻抗性"/>
+		<Property Id="MOVE_SPEED" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="移动速度,默认单位是10000=1米"/>
+		<Property Id="ATK_SPEED" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="攻击速度默认10000"/>
+		<Property Id="ATK_FIRE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="火"/>
+		<Property Id="ATK_LIGHT" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="雷电"/>
+		<Property Id="ATK_ICE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="冰"/>
+		<Property Id="ATK_POISON" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="毒"/>
+		<Property Id="DEF_FIRE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="火抗"/>
+		<Property Id="DEF_LIGHT" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="雷电抗"/>
+		<Property Id="DEF_ICE" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="冰抗"/>
+		<Property Id="DEF_POISON" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="毒抗"/>
+		<Property Id="MAGIC_BREAK" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="魔法吸收(减免),10000为单位"/>
+		<Property Id="PHYSICAL_BREAK" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="物理吸收(减免),10000为单位"/>
+		<Property Id="MAGIC_REFLECTION" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="魔法反射,10000为单位"/>
+		<Property Id="PHYSICAL_REFLECTION" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="物理反射,10000为单位"/>
+		<Property Id="DIZZY_GATE" Type="int" Public="true" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="眩晕开关"/>
+		<Property Id="MOVE_GATE" Type="int" Public="true" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="移动开关"/>
+		<Property Id="SKILL_GATE" Type="int" Public="true" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="技能开关"/>
+		<Property Id="PHYSICAL_GATE" Type="int" Public="true" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="物理免疫开关"/>
+		<Property Id="MAGIC_GATE" Type="int" Public="true" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="魔法免疫开关"/>
+		<Property Id="BUFF_GATE" Type="int" Public="true" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction=" " Desc="BUFF免疫开关"/>
+	</Propertys>
+	<Records>
+
+	</Records>
+	<Includes>
+	</Includes>
+</XML>
