@@ -369,7 +369,7 @@ bool NFCRecord::QueryRow(const int nRow, NFIValueList& varList)
     varList.Clear();
     for (int i = 0; i < GetCols(); ++i)
     {
-        std::shared_ptr<NFIValueList::VarData>& pVar = mtRecordVec.at(GetPos(nRow, i));
+        std::shared_ptr<NFIValueList::VarData> pVar = mtRecordVec.at(GetPos(nRow, i));
         if (pVar.get())
         {
             varList.Append(*pVar);
