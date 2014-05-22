@@ -222,7 +222,7 @@ NFIDENTID NFCKernelModule::Root(const NFIDENTID& self)
 
 NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIValueList& arg)
 {
-    int64_t nTimeBegin = GetTickCount64();
+    //int64_t nTimeBegin = GetTickCount64();
 
     NFIObject* pObject = NULL;
     NFIDENTID ident = self;
@@ -374,46 +374,46 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
             ||  strClassName == "PublicPlayer"
             || strClassName == "Scene")
         {
-            int64_t nTimeBegin1 = GetTickCount64();
+            //int64_t nTimeBegin1 = GetTickCount64();
 
             m_pEventProcessModule->DoEvent(ident, strClassName, CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA, arg);
 
-            int64_t nTimeDis1 = GetTickCount64() - nTimeBegin1;
-            std::ostringstream str1;
-            str1 << "COE_CREATE_LOADDATA : ";
-            str1 << nTimeDis1;
-            m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, str1, __FUNCTION__, __LINE__);
+            //int64_t nTimeDis1 = GetTickCount64() - nTimeBegin1;
+            //std::ostringstream str1;
+            //str1 << "COE_CREATE_LOADDATA : ";
+            //str1 << nTimeDis1;
+            //m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, str1, __FUNCTION__, __LINE__);
         }
 
-        int64_t nTimeBegin2 = GetTickCount64();
+        //int64_t nTimeBegin2 = GetTickCount64();
 
         m_pEventProcessModule->DoEvent(ident, strClassName, CLASS_OBJECT_EVENT::COE_CREATE_BEFORE_EFFECT, arg);
 
-        int64_t nTimeDis2 = GetTickCount64() - nTimeBegin2;
-        std::ostringstream str2;
-        str2 << "COE_CREATE_BEFORE_EFFECT : ";
-        str2 << nTimeDis2;
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, str2, __FUNCTION__, __LINE__);
+        //int64_t nTimeDis2 = GetTickCount64() - nTimeBegin2;
+        //std::ostringstream str2;
+        //str2 << "COE_CREATE_BEFORE_EFFECT : ";
+        //str2 << nTimeDis2;
+        //m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, str2, __FUNCTION__, __LINE__);
 
-        int64_t nTimeBegin3 = GetTickCount64();
+        //int64_t nTimeBegin3 = GetTickCount64();
 
         m_pEventProcessModule->DoEvent(ident, strClassName, CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA, arg);
 
-        int64_t nTimeDis3 = GetTickCount64() - nTimeBegin3;
-        std::ostringstream str3;
-        str3 << "COE_CREATE_EFFECTDATA : ";
-        str3 << nTimeDis3;
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, str3, __FUNCTION__, __LINE__);
+        //int64_t nTimeDis3 = GetTickCount64() - nTimeBegin3;
+        //std::ostringstream str3;
+        //str3 << "COE_CREATE_EFFECTDATA : ";
+        //str3 << nTimeDis3;
+        //m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, str3, __FUNCTION__, __LINE__);
 
-        int64_t nTimeBegin4 = GetTickCount64();
+        //int64_t nTimeBegin4 = GetTickCount64();
 
         m_pEventProcessModule->DoEvent(ident, strClassName, CLASS_OBJECT_EVENT::COE_CREATE_HASDATA, arg);
 
-        int64_t nTimeDis4 = GetTickCount64() - nTimeBegin4;
-        std::ostringstream str4;
-        str4 << "COE_CREATE_HASDATA : ";
-        str4 << nTimeDis4;
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, str4, __FUNCTION__, __LINE__);
+        //int64_t nTimeDis4 = GetTickCount64() - nTimeBegin4;
+        //std::ostringstream str4;
+        //str4 << "COE_CREATE_HASDATA : ";
+        //str4 << nTimeDis4;
+        //m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, str4, __FUNCTION__, __LINE__);
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -422,17 +422,17 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
         //ÈÝÆ÷
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "Create scene successed", nContainerID);
     }
-    else
-    {
-        int64_t nTimeDis = GetTickCount64() - nTimeBegin;
-        static int64_t totalTime = 0;
-        totalTime += nTimeDis;
-        std::ostringstream str;
-        str << nTimeDis;
-        str << " | ";
-        str << totalTime;
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, str, __FUNCTION__, __LINE__);
-    }
+    //else
+    //{
+    //    int64_t nTimeDis = GetTickCount64() - nTimeBegin;
+    //    static int64_t totalTime = 0;
+    //    totalTime += nTimeDis;
+    //    std::ostringstream str;
+    //    str << nTimeDis;
+    //    str << " | ";
+    //    str << totalTime;
+    //    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, str, __FUNCTION__, __LINE__);
+    //}
 
     return pObject;
 }
