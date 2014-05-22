@@ -96,6 +96,7 @@ bool NFCEventProcessModule::Execute(const float fLasFrametime, const float fStar
     NFList<int>* pList = mRemoveEventListEx.First(ident);
     while (pList)
     {
+        //删除对象的某个事件
         NFCObjectEventInfo* pObjectEventInfo = mObjectEventInfoMapEx.GetElement(ident);
         if (pObjectEventInfo)
         {
@@ -128,7 +129,7 @@ bool NFCEventProcessModule::Execute(const float fLasFrametime, const float fStar
     mRemoveEventListEx.ClearAll();
 
     //////////////////////////////////////////////////////////////////////////
-
+    //删除事件对象
     bool bRet = mRemoveObjectListEx.First(ident);
     while (bRet)
     {
@@ -173,6 +174,7 @@ bool NFCEventProcessModule::RemoveEventCallBack(const NFIDENTID& objectID, const
             if (!pList)
             {
                 pList = new NFList<int>();
+                mRemoveEventListEx.AddElement(objectID, pList);
             }
 
             pList->Add(nEventID);
