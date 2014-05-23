@@ -17,9 +17,16 @@
 					<Add option="-D_DEBUG" />
 					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
+					<Add option="-DTHERON_CPP11" />
 					<Add directory="$(NF_HOME)" />
 					<Add directory="$(BOOST_HOME)" />
 					<Add directory="$(NF_DEP)" />
+					<Add directory="$(NF_LIBEVENT)" />
+					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/include" />
+					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/WIN32-Code" />
+					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/compat" />
+					<Add directory="$(NF_DEP)/protobuf-2.5.0/src" />
+					<Add directory="$(THERON_HOME)" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
@@ -36,9 +43,14 @@
 					<Add option="-DWIN" />
 					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
+					<Add option="-DTHERON_CPP11" />
 					<Add directory="$(NF_HOME)" />
 					<Add directory="$(BOOST_HOME)" />
+					<Add directory="$(THERON_HOME)" />
 					<Add directory="$(NF_DEP)" />
+					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/include" />
+					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/WIN32-Code" />
+					<Add directory="$(NF_DEP)/protobuf-2.5.0/src" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
