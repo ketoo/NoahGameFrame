@@ -17,9 +17,11 @@
 					<Add option="-D_DEBUG" />
 					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
+					<Add option="-DTHERON_CPP11" />
 					<Add directory="$(NF_HOME)" />
 					<Add directory="$(BOOST_HOME)" />
 					<Add directory="$(NF_DEP)" />
+					<Add directory="$(THERON_HOME)" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
@@ -36,9 +38,11 @@
 					<Add option="-DWIN" />
 					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
+					<Add option="-DTHERON_CPP11" />
 					<Add directory="$(NF_HOME)" />
 					<Add directory="$(BOOST_HOME)" />
 					<Add directory="$(NF_DEP)" />
+					<Add directory="$(THERON_HOME)" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
