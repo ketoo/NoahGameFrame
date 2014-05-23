@@ -13,10 +13,8 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
-					<Add option="-D_WIN64" />
+					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
-					<Add option="-D_WINDOWS" />
-					<Add option="-DNFCORE_EXPORTS" />
 					<Add directory="$(NF_HOME)" />
 					<Add directory="$(BOOST_HOME)" />
 				</Compiler>
@@ -31,10 +29,8 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
-					<Add option="-D_WIN64" />
+					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
-					<Add option="-D_WINDOWS" />
-					<Add option="-DNFCORE_EXPORTS" />
 					<Add directory="$(NF_HOME)" />
 					<Add directory="$(BOOST_HOME)" />
 				</Compiler>
@@ -46,6 +42,8 @@
 		<Unit filename="NFCComponentManager.h" />
 		<Unit filename="NFCHeartBeatManager.cpp" />
 		<Unit filename="NFCHeartBeatManager.h" />
+		<Unit filename="NFCObject.cpp" />
+		<Unit filename="NFCObject.h" />
 		<Unit filename="NFCProperty.cpp" />
 		<Unit filename="NFCProperty.h" />
 		<Unit filename="NFCPropertyManager.cpp" />
@@ -72,7 +70,10 @@
 		<Unit filename="NFList.h" />
 		<Unit filename="NFMap.h" />
 		<Unit filename="NFPlatform.h" />
+		<Unit filename="NFQueue.h" />
 		<Unit filename="NFSingleton.h" />
+		<Unit filename="NFTimer.cpp" />
+		<Unit filename="NFTimer.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
