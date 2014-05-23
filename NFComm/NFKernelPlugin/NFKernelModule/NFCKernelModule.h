@@ -64,29 +64,15 @@ public:
 
     virtual int Type(const NFIDENTID& self);
 
-    virtual NFIDENTID Parent(const NFIDENTID& self);
-
-    virtual NFIDENTID Root(const NFIDENTID& self);
-
     virtual NFIObject* GetObject(const NFIDENTID& ident);
 
     virtual NFIObject* CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIValueList& arg);
-
-    virtual NFIObject* CreateChildObject(const NFIDENTID& parent, const int nContainerID, const std::string& strClassName, const std::string& strConfigIndex, const NFIValueList& arg);
-
-    virtual NFIObject* CreateChildObject(const NFIDENTID& parent, const NFIDENTID& self, const std::string& strClassName, const std::string& strConfigIndex, const NFIValueList& arg);
 
     virtual bool DestroyObject(const NFIDENTID& self);
 
     virtual bool DestroyAll();
 
     virtual bool DestroySelf(const NFIDENTID& self);
-
-    virtual bool DestroyChildObject(const NFIDENTID& parent, const NFIDENTID& self, const bool bAll = false);
-
-    virtual bool LinkObject(const NFIDENTID& childObject, const NFIDENTID& targetObject);
-
-    virtual bool UnLinkObject(const NFIDENTID& childObject, const NFIDENTID& targetObject);
 
     //////////////////////////////////////////////////////////////////////////
 
@@ -119,15 +105,6 @@ public:
     virtual NFIDENTID QueryRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
 
     virtual bool SwitchScene(const NFIDENTID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIValueList& arg);
-
-    virtual float GetDistance2D(const NFIDENTID& self, const NFIDENTID& other, bool bSquare = false);
-    virtual float GetDistance3D(const NFIDENTID& self, const NFIDENTID& other, bool bSquare = false);
-
-    virtual bool OnMove(const NFIDENTID& self, const NFIDENTID& lastGrid, const float fX, const float fY, const float fZ);
-    virtual bool Moveto(const NFIDENTID& self, const float fX, const float fY, const float fZ, const int nStateType);
-    virtual bool Stand(const NFIDENTID& self);
-    virtual bool Rotate(const NFIDENTID& self, const float fOrient);
-    virtual bool Rotate(const NFIDENTID& self, const NFIDENTID& target);
 
     virtual void AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction);
     virtual void AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& varData, const NFIValueList& varKey, const NFIValueList& varDesc, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex);
