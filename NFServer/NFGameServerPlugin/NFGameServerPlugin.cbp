@@ -17,12 +17,21 @@
 					<Add option="-D_DEBUG" />
 					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
+					<Add option="-DTHERON_CPP11" />
 					<Add directory="$(NF_HOME)" />
 					<Add directory="$(BOOST_HOME)" />
+					<Add directory="$(NF_DEP)" />
+					<Add directory="$(NF_LIBEVENT)" />
+					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/include" />
+					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/WIN32-Code" />
+					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/compat" />
+					<Add directory="$(NF_DEP)/protobuf-2.5.0/src" />
+					<Add directory="$(THERON_HOME)" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
 					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
+					<Add directory="$(BOOST_LIB)" />
 				</Linker>
 			</Target>
 			<Target title="Release x64">
@@ -35,12 +44,21 @@
 					<Add option="-DWIN" />
 					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
+					<Add option="-DTHERON_CPP11" />
 					<Add directory="$(NF_HOME)" />
 					<Add directory="$(BOOST_HOME)" />
+					<Add directory="$(NF_DEP)" />
+					<Add directory="$(NF_LIBEVENT)" />
+					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/include" />
+					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/WIN32-Code" />
+					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/compat" />
+					<Add directory="$(NF_DEP)/protobuf-2.5.0/src" />
+					<Add directory="$(THERON_HOME)" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
 					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
+					<Add directory="$(BOOST_LIB)" />
 				</Linker>
 			</Target>
 		</Build>
@@ -52,12 +70,8 @@
 		<Unit filename="NFCBulletSkillConsumeProcessModule.h" />
 		<Unit filename="NFCCardItemConsumeProcessModule.cpp" />
 		<Unit filename="NFCCardItemConsumeProcessModule.h" />
-		<Unit filename="NFCCoolDownModule.cpp" />
-		<Unit filename="NFCCoolDownModule.h" />
-		<Unit filename="NFCGMConfigModule.cpp" />
-		<Unit filename="NFCGMConfigModule.h" />
-		<Unit filename="NFCGMModule.cpp" />
-		<Unit filename="NFCGMModule.h" />
+		<Unit filename="NFCDataProcessModule.cpp" />
+		<Unit filename="NFCDataProcessModule.h" />
 		<Unit filename="NFCGameLogicModule.cpp" />
 		<Unit filename="NFCGameLogicModule.h" />
 		<Unit filename="NFCGameServerConfigModule.cpp" />
@@ -70,10 +84,6 @@
 		<Unit filename="NFCLevelConfigModule.h" />
 		<Unit filename="NFCLevelModule.cpp" />
 		<Unit filename="NFCLevelModule.h" />
-		<Unit filename="NFCLoginAwardModule.cpp" />
-		<Unit filename="NFCLoginAwardModule.h" />
-		<Unit filename="NFCMoveModule.cpp" />
-		<Unit filename="NFCMoveModule.h" />
 		<Unit filename="NFCNPCRefreshModule.cpp" />
 		<Unit filename="NFCNPCRefreshModule.h" />
 		<Unit filename="NFCPackModule.cpp" />
@@ -90,8 +100,6 @@
 		<Unit filename="NFCSceneProcessModule.h" />
 		<Unit filename="NFCSkillConsumeManagerModule.cpp" />
 		<Unit filename="NFCSkillConsumeManagerModule.h" />
-		<Unit filename="NFCSkillInitConfigModule.cpp" />
-		<Unit filename="NFCSkillInitConfigModule.h" />
 		<Unit filename="NFCSkillModule.cpp" />
 		<Unit filename="NFCSkillModule.h" />
 		<Unit filename="NFGameServerPlugin.cpp" />
