@@ -94,8 +94,8 @@ copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Co
       </IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName)_d.pdb</Command>
+      <Command>copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).dll $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName).dll
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName).pdb</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
