@@ -13,9 +13,8 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-DWIN" />
+					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
-					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
 					<Add option="-DTHERON_CPP11" />
 					<Add directory="$(NF_HOME)" />
@@ -27,6 +26,7 @@
 				<Linker>
 					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
 					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
+					<Add directory="$(BOOST_LIB)" />
 				</Linker>
 			</Target>
 			<Target title="Release x64">
@@ -36,9 +36,10 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-DWIN" />
-					<Add option="-D_WINDOWS" />
+					<Add option="-D_X64" />
+					<Add option="-DNDEBUG" />
 					<Add option="-D_USRDLL" />
+					<Add option="-DTHERON_CPP11" />
 					<Add directory="$(NF_HOME)" />
 					<Add directory="$(BOOST_HOME)" />
 					<Add directory="$(NF_DEP)" />
@@ -49,6 +50,7 @@
 				<Linker>
 					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
 					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
+					<Add directory="$(BOOST_LIB)" />
 				</Linker>
 			</Target>
 		</Build>
@@ -64,10 +66,8 @@
 		<Unit filename="NFKernelModule/NFCKernelModule.h" />
 		<Unit filename="NFKernelModule/NFCLogModule.cpp" />
 		<Unit filename="NFKernelModule/NFCLogModule.h" />
-		<Unit filename="NFKernelModule/NFCObject.cpp" />
-		<Unit filename="NFKernelModule/NFCObject.h" />
-		<Unit filename="NFKernelModule/NFStackWalker.cpp" />
-		<Unit filename="NFKernelModule/NFStackWalker.h" />
+		<Unit filename="NFKernelModule/NFCUUIDModule.cpp" />
+		<Unit filename="NFKernelModule/NFCUUIDModule.h" />
 		<Unit filename="NFKernelPlugin.cpp" />
 		<Unit filename="NFKernelPlugin.h" />
 		<Unit filename="dllmain.cpp" />

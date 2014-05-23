@@ -13,10 +13,10 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-DWIN" />
+					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
-					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
+					<Add option="-DTHERON_CPP11" />
 					<Add directory="$(NF_HOME)" />
 					<Add directory="$(NF_DEP)" />
 					<Add directory="$(BOOST_HOME)" />
@@ -36,9 +36,10 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-DWIN" />
-					<Add option="-D_WINDOWS" />
+					<Add option="-D_X64" />
+					<Add option="-DNDEBUG" />
 					<Add option="-D_USRDLL" />
+					<Add option="-DTHERON_CPP11" />
 					<Add directory="$(NF_HOME)" />
 					<Add directory="$(BOOST_HOME)" />
 					<Add directory="$(NF_DEP)" />
@@ -63,7 +64,6 @@
 			<code_completion />
 			<envvars />
 			<debugger />
-			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

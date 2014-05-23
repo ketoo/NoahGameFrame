@@ -13,12 +13,14 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
-					<Add option="-DWIN" />
+					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
+					<Add option="-D_USRDLL" />
 					<Add option="-D_LIB" />
 					<Add directory="$(NF_HOME)" />
 					<Add directory="$(BOOST_HOME)" />
 					<Add directory="$(NF_DEP)" />
+					<Add directory="$(NF_DEP)/protobuf-2.5.0/src" />
 				</Compiler>
 			</Target>
 			<Target title="Release x64">
@@ -28,17 +30,31 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
-					<Add option="-DWIN" />
+					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_LIB" />
 					<Add directory="$(NF_HOME)" />
 					<Add directory="$(BOOST_HOME)" />
 					<Add directory="$(NF_DEP)" />
+					<Add directory="$(NF_DEP)/protobuf-2.5.0/src" />
 				</Compiler>
 			</Target>
 		</Build>
+		<Unit filename="NFDefine.pb.cc" />
+		<Unit filename="NFDefine.pb.h" />
+		<Unit filename="NFDefine.proto" />
 		<Unit filename="NFLimit.h" />
+		<Unit filename="NFMsgBase.pb.cc" />
+		<Unit filename="NFMsgBase.pb.h" />
+		<Unit filename="NFMsgBase.proto" />
+		<Unit filename="NFMsgBaseEx.pb.cc" />
+		<Unit filename="NFMsgBaseEx.pb.h" />
+		<Unit filename="NFMsgBaseEx.proto" />
+		<Unit filename="NFMsgDefine.cpp" />
 		<Unit filename="NFMsgDefine.h" />
+		<Unit filename="NFMsgPreGame.pb.cc" />
+		<Unit filename="NFMsgPreGame.pb.h" />
+		<Unit filename="NFMsgPreGame.proto" />
 		<Unit filename="NFMsgShare.pb.cc" />
 		<Unit filename="NFMsgShare.pb.h" />
 		<Unit filename="NFMsgShare.proto" />
@@ -46,6 +62,7 @@
 			<code_completion />
 			<envvars />
 			<debugger />
+			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
