@@ -11,19 +11,22 @@
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-DWIN" />
+					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_CONSOLE" />
-					<Add option="-D_USRDLL" />
+					<Add option="-DNF_DYNAMIC_PLUGIN" />
+					<Add option="-DTHERON_CPP11" />
+					<Add option="-D_WIN64" />
 					<Add directory="$(NF_HOME)" />
+					<Add directory="$(NF_DEP)" />
 					<Add directory="$(BOOST_HOME)" />
+					<Add directory="$(GLOG_HOME)" />
+					<Add directory="$(THERON_HOME)" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
 					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
 					<Add directory="$(BOOST_LIB)" />
-					<Add directory="D:/NoahGameFrame/trunk/_Out/Comm/Debug" />
-					<Add directory="D:/NoahGameFrame/trunk/Dependencies/lib/Debug" />
 				</Linker>
 			</Target>
 			<Target title="Release x64">
@@ -31,18 +34,25 @@
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-DWIN" />
+					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_CONSOLE" />
+					<Add option="-DNF_DYNAMIC_PLUGIN" />
+					<Add option="-D_WIN64" />
+					<Add option="-DTHERON_CPP11" />
 					<Add directory="$(NF_HOME)" />
 					<Add directory="$(BOOST_HOME)" />
+					<Add directory="$(THERON_HOME)" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
 					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
+					<Add directory="$(BOOST_LIB)" />
 				</Linker>
 			</Target>
 		</Build>
+		<Unit filename="NFCActorManager.cpp" />
+		<Unit filename="NFCActorManager.h" />
 		<Unit filename="NFCDynLib.cpp" />
 		<Unit filename="NFCDynLib.h" />
 		<Unit filename="NFCPluginManager.cpp" />
@@ -52,7 +62,6 @@
 			<code_completion />
 			<envvars />
 			<debugger />
-			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
