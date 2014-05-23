@@ -97,14 +97,14 @@ copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Co
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_X64;NDEBUG;_CONSOLE;NF_DYNAMIC_PLUGIN;_WIN64;THERON_CPP11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(NF_HOME);$(BOOST_HOME);$(THERON_HOME)</AdditionalIncludeDirectories>
-      <ExceptionHandling>false</ExceptionHandling>
+      <ExceptionHandling>Sync</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(NFBIN_COMM)\$(Configuration);$(APP_DEPLIB)\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(NFBIN_COMM)\$(Configuration);$(APP_DEPLIB)\$(Configuration);$(BOOST_LIB)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFLoginServer\$(ProjectName).exe

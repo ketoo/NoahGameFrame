@@ -194,32 +194,6 @@ int NFCKernelModule::Type(const NFIDENTID& self)
     return -1;
 }
 
-NFIDENTID NFCKernelModule::Parent(const NFIDENTID& self)
-{
-    NFIObject* pObject = GetElement(self);
-    if (pObject)
-    {
-        return pObject->QueryPropertyObject("Parent");
-    }
-
-    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return 0;
-}
-
-NFIDENTID NFCKernelModule::Root(const NFIDENTID& self)
-{
-    NFIObject* pObject = GetElement(self);
-    if (pObject)
-    {
-        return pObject->QueryPropertyObject("Root");
-    }
-
-    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return 0;
-}
-
 NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIValueList& arg)
 {
     //int64_t nTimeBegin = GetTickCount64();
@@ -437,32 +411,6 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
     return pObject;
 }
 
-NFIObject* NFCKernelModule::CreateChildObject(const NFIDENTID& parent, const int nContainerID, const std::string& strClassName, const std::string& strConfigIndex, const NFIValueList& arg)
-{
-    NFIObject* pObject = GetElement(parent);
-    if (pObject)
-    {
-        return CreateObject(0, nContainerID, pObject->QueryPropertyInt("GroupID"), strClassName, strConfigIndex, arg);
-    }
-
-    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, parent, "There is no object", __FUNCTION__, __LINE__);
-
-    return NULL;
-}
-
-NFIObject* NFCKernelModule::CreateChildObject(const NFIDENTID& parent, const NFIDENTID& self, const std::string& strClassName, const std::string& strConfigIndex, const NFIValueList& arg)
-{
-    NFIObject* pObject = GetElement(self);
-    if (pObject)
-    {
-        //do some thing
-    }
-
-    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, parent, "There is no object", __FUNCTION__, __LINE__);
-
-    return NULL;
-}
-
 bool NFCKernelModule::DestroyObject(const NFIDENTID& self)
 {
     if (self == mnCurExeObject
@@ -515,60 +463,6 @@ bool NFCKernelModule::DestroyObject(const NFIDENTID& self)
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return false;
-}
-
-bool NFCKernelModule::DestroyChildObject(const NFIDENTID& parent, const NFIDENTID& self, const bool bAll /*= false */)
-{
-    NFIObject* pParentObject = GetElement(parent);
-    NFIObject* pObject = GetElement(self);
-
-    if (pParentObject && pObject)
-    {
-        if (parent == Parent(self))
-        {
-            UnLinkObject(self, parent);
-            DestroyObject(self);
-
-            return true;
-        }
-    }
-
-    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return false;
-}
-
-bool NFCKernelModule::LinkObject(const NFIDENTID& childObject, const NFIDENTID& targetObject)
-{
-    NFIObject* pChildObject = GetElement(childObject);
-    NFIObject* pTargetObject = GetElement(targetObject);
-
-    if (pChildObject && pTargetObject)
-    {
-        return true;
-    }
-
-    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, childObject, "There is no object", __FUNCTION__, __LINE__);
-    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, targetObject, "There is no object", __FUNCTION__, __LINE__);
-
-
-    return false;
-}
-
-bool NFCKernelModule::UnLinkObject(const NFIDENTID& childObject, const NFIDENTID& targetObject)
-{
-    NFIObject* pChildObject = GetElement(childObject);
-    NFIObject* pTargetObject = GetElement(targetObject);
-
-    if (pChildObject && pTargetObject)
-    {
-        return true;
-    }
-
-    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, childObject, "There is no object", __FUNCTION__, __LINE__);
-    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, targetObject, "There is no object", __FUNCTION__, __LINE__);
 
     return false;
 }
@@ -942,144 +836,6 @@ bool NFCKernelModule::SwitchScene(const NFIDENTID& self, const int nTargetSceneI
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object",  __FUNCTION__, __LINE__);
-
-    return false;
-}
-
-float NFCKernelModule::GetDistance2D(const NFIDENTID& self, const NFIDENTID& other, bool bSquare /*= false */)
-{
-    NFIObject* pSelfObject = GetElement(self);
-    NFIObject* pOtherObject = GetElement(self);
-
-    if (pSelfObject && pOtherObject)
-    {
-        float fSelfX = pSelfObject->QueryPropertyFloat("X");
-        float fSelfZ = pSelfObject->QueryPropertyFloat("Z");
-
-        float fOtherX = pOtherObject->QueryPropertyFloat("X");
-        float fOtherZ = pOtherObject->QueryPropertyFloat("Z");
-
-        float fDisX = fSelfX - fOtherX;
-        float fDisZ = fSelfZ - fOtherZ;
-
-        float fDistance2D = fDisX * fDisX + fDisZ * fDisZ;
-        if (bSquare)
-        {
-            return sqrt(fDistance2D);
-        }
-        else
-        {
-            return fDistance2D;
-        }
-    }
-
-    return 0.0f;
-}
-
-float NFCKernelModule::GetDistance3D(const NFIDENTID& self, const NFIDENTID& other, bool bSquare /*= false */)
-{
-    NFIObject* pSelfObject = GetElement(self);
-    NFIObject* pOtherObject = GetElement(self);
-
-    if (pSelfObject && pOtherObject)
-    {
-        float fSelfX = pSelfObject->QueryPropertyFloat("X");
-        float fSelfY = pSelfObject->QueryPropertyFloat("Y");
-        float fSelfZ = pSelfObject->QueryPropertyFloat("Z");
-
-        float fOtherX = pOtherObject->QueryPropertyFloat("X");
-        float fOtherY = pOtherObject->QueryPropertyFloat("Y");
-        float fOtherZ = pOtherObject->QueryPropertyFloat("Z");
-
-        float fDisX = fSelfX - fOtherX;
-        float fDisY = fSelfY - fOtherY;
-        float fDisZ = fSelfZ - fOtherZ;
-
-        float fDistance3D = fDisX * fDisX + fDisY * fDisY + fDisZ * fDisZ;
-        if (bSquare)
-        {
-            return sqrt(fDistance3D);
-        }
-        else
-        {
-            return fDistance3D;
-        }
-    }
-
-    return 0.0f;
-}
-
-bool NFCKernelModule::Moveto(const NFIDENTID& self, const float fX, const float fY, const float fZ, const int nStateType)
-{
-    NFIObject* pObject = GetElement(self);
-    if (pObject)
-    {
-        float fSelfX = pObject->QueryPropertyFloat("X");
-        float fSelfY = pObject->QueryPropertyFloat("Y");
-        float fSelfZ = pObject->QueryPropertyFloat("Z");
-
-        float fDisX = fSelfX - fX;
-        float fDisY = fSelfY - fY;
-        float fDisZ = fSelfZ - fZ;
-
-        float fDistance3D = fDisX * fDisX + fDisY * fDisY + fDisZ * fDisZ;
-
-        if (fDistance3D > 0.1f)
-        {
-
-            // TriggerEvent so the proxy can get this event and broadcast to client
-            //TriggerEvent();
-        }
-
-        return true;
-    }
-
-    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return false;
-}
-
-bool NFCKernelModule::Stand(const NFIDENTID& self)
-{
-    NFIObject* pObject = GetElement(self);
-    if (pObject)
-    {
-        // do some thing
-
-        return true;
-    }
-
-    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return false;
-}
-
-bool NFCKernelModule::Rotate(const NFIDENTID& self, const float fOrient)
-{
-    NFIObject* pObject = GetElement(self);
-    if (pObject)
-    {
-        // do some thing
-
-        return true;
-    }
-
-    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return false;
-}
-
-bool NFCKernelModule::Rotate(const NFIDENTID& self, const NFIDENTID& target)
-{
-    NFIObject* pObject = GetElement(self);
-    if (pObject)
-    {
-        // do some thing
-
-        return true;
-    }
-
-    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
 
     return false;
 }
@@ -1772,30 +1528,6 @@ NFINT32 NFCKernelModule::GetIdentID()
 NFIDENTID NFCKernelModule::GetGridID(const float fX, const float fY, const float fZ)
 {
     return NFCGridModule::ComputerGridID((int)fX, (int)fY, (int)fZ);
-}
-
-bool NFCKernelModule::OnMove(const NFIDENTID& self, const NFIDENTID& lastGrid, const float fX, const float fY, const float fZ)
-{
-    int nContainerID = QueryPropertyInt(self, "SceneID");
-    int nGroupID = QueryPropertyInt(self, "GroupID");
-    if (nContainerID > 0)
-    {
-        NFCContainerInfo* pSceneInfo = m_pContainerModule->GetElement(nContainerID);
-        if (pSceneInfo)
-        {
-            NFCContainerGroupInfo* pGroupInfo = pSceneInfo->GetElement(nGroupID);
-            if (pGroupInfo)
-            {
-                NFIGridModule* pGridModule =  pGroupInfo->GetGridModule();
-                if (pGridModule)
-                {
-                    pGridModule->OnObjectMove(self, nContainerID, lastGrid, fX, fY, fZ);
-                }
-            }
-        }
-    }
-
-    return true;
 }
 
 bool NFCKernelModule::AfterInit()
