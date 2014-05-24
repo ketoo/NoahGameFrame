@@ -24,9 +24,6 @@ NFIComponent* NFCComponentManager::AddComponent( const std::string& strComponent
     pComponent = new NFCComponent(mSelf, strComponentName, strScriptName);
     AddElement(strComponentName, pComponent);
 
-    pComponent->Init();
-    pComponent->AfterInit();
-
     return pComponent;
 }
 
@@ -57,33 +54,81 @@ bool NFCComponentManager::Enable( const std::string& strComponentName )
     return false;
 }
 
-bool NFCComponentManager::DestroyComponent( const std::string& strComponentName )
-{
-    //和其他系统一样，不能在自己运行的过程中删除自己
-    NFIComponent* pComponent = RemoveElement(strComponentName);
-    if (pComponent)
-    {
-        pComponent->BeforeShut();
-        pComponent->Shut();
-
-        delete pComponent;
-
-        return true;
-    }
-
-    return false;
-}
-
 bool NFCComponentManager::DestroyAllComponent()
 {
     NFIComponent* pComponent = First();
     while (pComponent)
     {
-        pComponent->BeforeShut();
-        pComponent->Shut();
-
         delete pComponent;
         pComponent = NULL;
+
+        pComponent = Next();
+    }
+
+    return true;
+}
+
+bool NFCComponentManager::Init()
+{
+    NFIComponent* pComponent = First();
+    while (pComponent)
+    {
+        pComponent->Init();
+
+        pComponent = Next();
+    }
+
+    return true;
+}
+
+bool NFCComponentManager::AfterInit()
+{
+    NFIComponent* pComponent = First();
+    while (pComponent)
+    {
+        pComponent->AfterInit();
+
+        pComponent = Next();
+    }
+
+    return true;
+}
+
+bool NFCComponentManager::BeforeShut()
+{
+    NFIComponent* pComponent = First();
+    while (pComponent)
+    {
+        pComponent->BeforeShut();
+
+        pComponent = Next();
+    }
+
+    return true;
+}
+
+bool NFCComponentManager::Shut()
+{
+    NFIComponent* pComponent = First();
+    while (pComponent)
+    {
+        pComponent->Shut();
+
+        pComponent = Next();
+    }
+
+    return true;
+}
+
+bool NFCComponentManager::Execute( const float fLasFrametime, const float fStartedTime )
+{
+    NFIComponent* pComponent = First();
+    while (pComponent)
+    {
+        if (pComponent->Enable())
+        {
+            pComponent->Execute(fLasFrametime, fStartedTime);
+        }
 
         pComponent = Next();
     }
