@@ -12,14 +12,15 @@
 #include "NFCPropertyManager.h"
 #include "NFCComponentManager.h"
 
-NFCObject::NFCObject(const NFIDENTID& self)
+NFCObject::NFCObject(const NFIDENTID& self, NFIPluginManager* pLuginManager)
 {
     mSelf = self;
+    m_pPluginManager = pLuginManager;
 
     m_pRecordManager = new NFCRecordManager(mSelf);
     m_pHeartBeatManager = new NFCHeartBeatManager(mSelf);
     m_pPropertyManager = new NFCPropertyManager(mSelf);
-    m_pComponentManager = new NFCComponentManager(mSelf);
+    m_pComponentManager = new NFCComponentManager(mSelf, m_pPluginManager);
 }
 
 NFCObject::~NFCObject()
