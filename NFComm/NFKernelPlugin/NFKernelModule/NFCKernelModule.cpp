@@ -1606,3 +1606,13 @@ int NFCKernelModule::GetAllContainerObjectList( NFIValueList& var )
     }
     return 0;
 }
+
+bool NFCKernelModule::AddEventCallBack( const NFIDENTID& self, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb )
+{
+    return m_pEventProcessModule->AddEventCallBack(self, nEventID, cb);
+}
+
+bool NFCKernelModule::AddClassCallBack( const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb )
+{
+    return m_pEventProcessModule->AddClassCallBack(strClassName, cb);
+}

@@ -61,6 +61,23 @@ public:
         return false;
     }
 
+    ////////////////event//////////////////////////////////////////////////////////
+    template<typename BaseType>
+    bool AddEventCallBack(const NFIDENTID& self, const int nEventID, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const int, const NFIValueList&))
+    {
+        EVENT_PROCESS_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3);
+        EVENT_PROCESS_FUNCTOR_PTR functorPtr(new EVENT_PROCESS_FUNCTOR(functor));
+        return AddEventCallBack(self, nEventID, functorPtr);
+    }
+
+    template<typename BaseType>
+    bool AddClassCallBack(const std::string& strClassName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIValueList&))
+    {
+        CLASS_EVENT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4);
+        CLASS_EVENT_FUNCTOR_PTR functorPtr(new CLASS_EVENT_FUNCTOR(functor));
+        return AddClassCallBack(strClassName, functorPtr);
+    }
+    //////////////////////////////////////////////////////////////////////////
     //只能网络模块注册，回调用来同步对象类事件,所有的类对象都会回调
     template<typename BaseType>
     bool ResgisterCommonClassEvent(BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIValueList&))
@@ -88,6 +105,7 @@ public:
         return ResgisterCommonRecordEvent(functorPtr);
     }
 
+   
     /////////////////////////////////////////////////////////////////
 
     virtual NFIDENTID NewIdentID() = 0;
