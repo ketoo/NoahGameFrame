@@ -37,10 +37,6 @@ public:
 
     /////////////////////////////////////////////////////////////////
 
-    virtual bool LinkObject(const NFIDENTID& childObject, const NFIDENTID& targetObject);
-
-    virtual bool UnLinkObject(const NFIDENTID& childObject, const NFIDENTID& targetObject);
-
     virtual bool FindProperty(const std::string& strPropertyName);
 
     virtual bool SetPropertyInt(const std::string& strPropertyName, const int nValue);
@@ -80,6 +76,9 @@ public:
     virtual double QueryRecordDouble(NFIRecord* pRecord, const std::string& strRecordName, const int nRow, const int nCol);
     virtual const std::string& QueryRecordString(NFIRecord* pRecord, const std::string& strRecordName, const int nRow, const int nCol);
     virtual NFIDENTID QueryRecordObject(NFIRecord* pRecord, const std::string& strRecordName, const int nRow, const int nCol);
+
+    virtual NFIComponent* AddComponent(const std::string& strComponentName);
+    virtual NFIComponent* FindComponent(const std::string& strComponentName);
 
     virtual NFIRecordManager* GetRecordManager();
     virtual NFIHeartBeatManager* GetHeartBeatManager();
