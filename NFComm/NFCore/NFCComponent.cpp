@@ -27,8 +27,3 @@ const std::string& NFCComponent::ComponentName()
 {
     return mstrName;
 }
-
-const std::string& NFCComponent::ScriptName()
-{
-    return mstrScriptName;
-}

@@ -46,6 +46,7 @@ bool NFCObject::Execute(const float fLastTime, const float fAllTime)
 {
     //循环的心跳中，可能删除自己
     GetHeartBeatManager()->Execute(fLastTime, fAllTime);
+    GetComponentManager()->Execute(fLastTime, fAllTime);
 
     return true;
 }
@@ -89,16 +90,6 @@ bool NFCObject::AddPropertyCallBack(const std::string& strCriticalName, const PR
     }
 
     return false;
-}
-
-bool NFCObject::LinkObject(const NFIDENTID& childObject, const NFIDENTID& targetObject)
-{
-    return true;
-}
-
-bool NFCObject::UnLinkObject(const NFIDENTID& childObject, const NFIDENTID& targetObject)
-{
-    return true;
 }
 
 bool NFCObject::FindProperty(const std::string& strPropertyName)
@@ -482,4 +473,14 @@ NFIDENTID NFCObject::Self()
 NFIComponentManager* NFCObject::GetComponentManager()
 {
     return m_pComponentManager;
+}
+
+NFIComponent* NFCObject::AddComponent( const std::string& strComponentName )
+{
+    return m_pComponentManager->AddComponent(strComponentName);
+}
+
+NFIComponent* NFCObject::FindComponent( const std::string& strComponentName )
+{
+    return m_pComponentManager->Findomponent(strComponentName);
 }
