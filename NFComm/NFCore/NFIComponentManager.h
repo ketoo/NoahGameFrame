@@ -16,7 +16,7 @@
 class NFIComponentManager : public NFILogicModule, public NFMap<std::string, NFIComponent>
 {
 public:
-    virtual NFIComponent* AddComponent(const std::string& strComponentName, const std::string& strScriptName) = 0;
+    virtual NFIComponent* AddComponent(const std::string& strComponentName) = 0;
     virtual NFIComponent* FindComponent(const std::string& strComponentName) = 0;
 
     virtual bool SetEnable(const std::string& strComponentName, const bool bEnable) = 0;
