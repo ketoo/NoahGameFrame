@@ -21,8 +21,6 @@ public:
     virtual NFIDENTID Self() = 0;
 
     virtual const std::string& ComponentName() = 0;
-
-    virtual const std::string& ScriptName() = 0;
 private:
 };
 
