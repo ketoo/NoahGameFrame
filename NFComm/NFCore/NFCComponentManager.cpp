@@ -13,7 +13,7 @@ NFIDENTID NFCComponentManager::Self()
     return mSelf;
 }
 
-NFIComponent* NFCComponentManager::AddComponent( const std::string& strComponentName, const std::string& strScriptName )
+NFIComponent* NFCComponentManager::AddComponent( const std::string& strComponentName)
 {
     NFIComponent* pComponent = GetElement(strComponentName);
     if (pComponent)
@@ -21,7 +21,7 @@ NFIComponent* NFCComponentManager::AddComponent( const std::string& strComponent
         return NULL;
     }
 
-    pComponent = new NFCComponent(mSelf, strComponentName, strScriptName, m_pPluginManager);
+    pComponent = new NFCComponent(mSelf, strComponentName, m_pPluginManager);
     AddElement(strComponentName, pComponent);
 
     return pComponent;
