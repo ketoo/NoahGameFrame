@@ -277,9 +277,12 @@ typedef long long NFINT64;
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <crtdbg.h>
 #include <assert.h>
-#define NFASSERT(exp_, msg_) MessageBox(0, TEXT((std::string("Message : ") + msg_ + std::string(" don't exist or some warning")).c_str()), TEXT("Error_"#exp_), MB_RETRYCANCEL | MB_ICONERROR);
+#define NFASSERT(exp_, msg_, file_, func_)  \
+    std::string strInfo("Message:");        \
+    strInfo += msg_ + std::string(" don't exist or some warning") + std::string("\n\nFile:") + std::string(file_) + std::string("\n Function:") + func_; \
+    MessageBox(0, TEXT(strInfo.c_str()), TEXT("Error_"#exp_), MB_RETRYCANCEL | MB_ICONERROR);
 #else
-#define NFASSERT(exp_, msg_)
+#define NFASSERT(exp_, msg_, file_, func_)
 #endif
 
 #endif
