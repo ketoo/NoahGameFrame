@@ -14,11 +14,12 @@
 class NFCComponent : public NFIComponent
 {
 public:
-    NFCComponent(const NFIDENTID& self, const std::string& strComponentName, const std::string& strScriptName)
+    NFCComponent(const NFIDENTID& self, const std::string& strComponentName, const std::string& strScriptName, NFIPluginManager* pLuginManager)
     {
         mSelf = self;
         mstrName = strComponentName;
         mstrScriptName = strScriptName;
+        m_pPluginManager = pLuginManager;
     }
 
     virtual bool SetEnable(const bool bEnable);
@@ -38,6 +39,7 @@ private:
     NFIDENTID mSelf;
     std::string mstrName;
     std::string mstrScriptName;
+    NFIPluginManager* m_pPluginManager;
 };
 
 #endif
