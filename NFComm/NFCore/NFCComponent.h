@@ -11,11 +11,33 @@
 
 #include "NFIComponent.h"
 
-class NFCComponent : NFIComponent
+class NFCComponent : public NFIComponent
 {
 public:
+    NFCComponent(const NFIDENTID& self, const std::string& strComponentName, const std::string& strScriptName)
+    {
+        mSelf = self;
+        mstrName = strComponentName;
+        mstrScriptName = strScriptName;
+    }
+
+    virtual bool SetEnable(const bool bEnable);
+
+    virtual bool Enable();
+
+    virtual NFIDENTID Self();
+
+    virtual const std::string& ComponentName();
+
+    virtual const std::string& ScriptName();
 
 private:
+
+private:
+    bool mbEnable;
+    NFIDENTID mSelf;
+    std::string mstrName;
+    std::string mstrScriptName;
 };
 
 #endif
