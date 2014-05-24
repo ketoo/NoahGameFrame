@@ -16,9 +16,10 @@
 class NFCComponentManager : public NFIComponentManager
 {
 public:
-    NFCComponentManager(const NFIDENTID& self)
+    NFCComponentManager(const NFIDENTID& self, NFIPluginManager* pLuginManager)
     {
         mSelf = self;
+        m_pPluginManager = pLuginManager;
     }
     
     virtual ~NFCComponentManager()
@@ -50,6 +51,7 @@ protected:
 
 private:
     NFIDENTID mSelf;
+    NFIPluginManager* m_pPluginManager;
 };
 
 #endif

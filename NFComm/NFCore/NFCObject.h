@@ -20,7 +20,7 @@ class NFCObject
     : public NFIObject
 {
 public:
-    NFCObject(const NFIDENTID& self);
+    NFCObject(const NFIDENTID& self, NFIPluginManager* pLuginManager);
     virtual ~NFCObject();
 
     virtual bool Init();
@@ -100,6 +100,8 @@ private:
     NFIHeartBeatManager* m_pHeartBeatManager;
     NFIPropertyManager* m_pPropertyManager;
     NFIComponentManager* m_pComponentManager;
+
+    NFIPluginManager* m_pPluginManager;
 };
 
 #endif
