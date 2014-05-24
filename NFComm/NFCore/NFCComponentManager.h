@@ -26,16 +26,27 @@ public:
         DestroyAllComponent();
     }
 
+    virtual bool Init();
+
+    virtual bool AfterInit();
+
+    virtual bool BeforeShut();
+
+    virtual bool Shut();
+
+    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+
     virtual NFIComponent* AddComponent(const std::string& strComponentName, const std::string& strScriptName);
     virtual NFIComponent* FindComponent(const std::string& strComponentName);
-    virtual bool DestroyComponent(const std::string& strComponentName);
-    virtual bool DestroyAllComponent();
 
     virtual bool SetEnable(const std::string& strComponentName, const bool bEnable);
 
     virtual bool Enable(const std::string& strComponentName);
 
     virtual NFIDENTID Self();
+
+protected:
+    virtual bool DestroyAllComponent();
 
 private:
     NFIDENTID mSelf;
