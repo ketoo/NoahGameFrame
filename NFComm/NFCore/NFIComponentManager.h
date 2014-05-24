@@ -24,6 +24,10 @@ public:
     virtual bool Enable(const std::string& strComponentName) = 0;
 
     virtual NFIDENTID Self() = 0;
+
+    //     template<typename BaseType>
+    //     virtual bool SenbdMessage(const std::string& strComponentName, const bool bEnable);
+
 private:
 };
 
