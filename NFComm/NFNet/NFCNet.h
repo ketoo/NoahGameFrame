@@ -162,8 +162,8 @@ private:
 // }
 // 
 // pNet->Final();
-typedef int(* ON_RECIVE_FUNC)(const NFIPacket& msg);
-typedef int(* ON_EVENT_FUNC)(const uint16_t nSockIndex, const NF_NET_EVENT nEvent);
+// typedef int(* ON_RECIVE_FUNC)(const NFIPacket& msg);
+// typedef int(* ON_EVENT_FUNC)(const uint16_t nSockIndex, const NF_NET_EVENT nEvent);
 
 typedef boost::function<int(const NFIPacket& msg)> RECIEVE_FUNCTOR;
 typedef std::shared_ptr<RECIEVE_FUNCTOR> RECIEVE_FUNCTOR_PTR;
@@ -180,8 +180,6 @@ public:
 		base = NULL;
 		listener = NULL;
 		signal_event = NULL;
-		mCB = NULL;
-		mECB = NULL;
 		mstrIP = "";
 		mnPort = 0;
 		mnCpuCount = 0;
@@ -191,21 +189,19 @@ public:
 		ev = NULL;
 	};
 
-	NFCNet(ON_RECIVE_FUNC cb, ON_EVENT_FUNC ecb)
-	{
-		base = NULL;
-		listener = NULL;
-		signal_event = NULL;
-		mCB = cb;
-		mECB = ecb;
-		mstrIP = "";
-		mnPort = 0;
-		mnCpuCount = 0;
-		mbServer = false;
-		mbRuning = false;
-        mbUsePacket = true;
-		ev = NULL;
-	};
+// 	NFCNet(ON_RECIVE_FUNC cb, ON_EVENT_FUNC ecb)
+// 	{
+// 		base = NULL;
+// 		listener = NULL;
+// 		signal_event = NULL;
+// 		mstrIP = "";
+// 		mnPort = 0;
+// 		mnCpuCount = 0;
+// 		mbServer = false;
+// 		mbRuning = false;
+//         mbUsePacket = true;
+// 		ev = NULL;
+// 	};
 
     template<typename BaseType>
     NFCNet(BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const uint16_t, const NF_NET_EVENT))
@@ -213,6 +209,7 @@ public:
         base = NULL;
         listener = NULL;
         signal_event = NULL;
+
         mRecvCB = boost::bind(handleRecieve, pBaseType, _1);
         mEventCB = boost::bind(handleEvent, pBaseType, _1, _2);
         mstrIP = "";
@@ -266,7 +263,7 @@ private:
 	int mnCpuCount;
 	bool mbServer;
 	bool mbRuning;
-    bool mbUsePacket;
+    bool mbUsePacket;//是否使用我们的包
 	struct event_base *base;
 	struct evconnlistener *listener;
 	struct event *signal_event;
@@ -274,8 +271,7 @@ private:
 	struct timeval tv;
 	struct event* ev;
 	//////////////////////////////////////////////////////////////////////////
-	ON_RECIVE_FUNC mCB;
-	ON_EVENT_FUNC mECB;
+
 
     // 暂时还未使用
     RECIEVE_FUNCTOR mRecvCB;
