@@ -24,11 +24,7 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
 {
 
     NetObject* pObject = (NetObject*)user_data;
-    if(pObject->GetNet()->mECB)
-    {
-        pObject->GetNet()->mECB(pObject->GetFd(), NF_NET_EVENT(events));
-    }
-    else if(!pObject->GetNet()->mEventCB.empty())
+    if(!pObject->GetNet()->mEventCB.empty())
     {
         pObject->GetNet()->mEventCB(pObject->GetFd(), NF_NET_EVENT(events));
     }
@@ -318,12 +314,7 @@ bool NFCNet::Dismantle(NetObject* pObject )
 			packet.SetFd(pObject->GetFd());
 
 			int nRet = 0;
-			if (mCB)
-			{
-				nRet = mCB(packet);
-				bRet = bRet && nRet;
-			}
-            else if (!mRecvCB.empty())
+			if (!mRecvCB.empty())
             {
                 nRet = mRecvCB(packet);
                 bRet = bRet && nRet;
