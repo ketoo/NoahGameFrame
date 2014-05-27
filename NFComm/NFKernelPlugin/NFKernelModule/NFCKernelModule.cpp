@@ -226,7 +226,7 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
     if (pStaticClassPropertyManager && pStaticClassRecordManager)
     {
 
-        pObject = new NFCObject(ident);
+        pObject = new NFCObject(ident, pPluginManager);
         //是否是应该晚点等到事件2时才加入容器，这样能保证进入容器的对象都是有完整数据的，否则因为协程的原因，其他对象找到他时他却没数据或者部分数据
         AddElement(ident, pObject);
 
