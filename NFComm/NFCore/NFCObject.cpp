@@ -482,5 +482,5 @@ NFIComponent* NFCObject::AddComponent( const std::string& strComponentName )
 
 NFIComponent* NFCObject::FindComponent( const std::string& strComponentName )
 {
-    return m_pComponentManager->Findomponent(strComponentName);
+    return m_pComponentManager->FindComponent(strComponentName);
 }
