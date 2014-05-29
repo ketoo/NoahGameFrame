@@ -76,17 +76,21 @@ public:
 #ifdef NF_DYNAMIC_PLUGIN
         //主插件，时刻updata
         //次要插件，100毫秒一次updata
-        if(!pPluginManager->GetActor() == NFIActorManager::EACTOR_MAIN)
+        if(pPluginManager->GetActor() != NFIActorManager::EACTOR_MAIN)
         {
-#endif
+
             if (fLastTotal < 0.1f)
             {
                 fLastTotal += fLastFrametime;
                 return false;
             }
-
-#ifdef NF_DYNAMIC_PLUGIN
         }
+        else
+        {
+            fLastTotal = fLastFrametime;
+        }
+#else
+        fLastTotal = fLastFrametime;
 #endif
 
         NFILogicModule* pModule = First();

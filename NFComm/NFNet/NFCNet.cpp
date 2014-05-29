@@ -1,16 +1,29 @@
+// -------------------------------------------------------------------------
+//    @FileName         ：    NFCNet.cpp
+//    @Author           ：    LvSheng.Huang
+//    @Date             ：    2013-12-15
+//    @Module           ：    NFIPacket
+//    @Desc             :     CNet
+// -------------------------------------------------------------------------
+
 #include "NFCNet.h"
 #include "NFCPacket.h"
 #include <ws2tcpip.h>
 #include <winsock.h>
 #include <winsock2.h>
-
+#include <string.h>
+#include "event2\bufferevent_struct.h"
 
 void NFCNet::time_cb(evutil_socket_t fd, short _event, void *argc)
 {
     NetObject* pObject = (NetObject*)argc;
-    pObject->GetNet()->HeartPack();
+    if (pObject)
+    {
+        pObject->GetNet()->HeartPack();
 
-    evtimer_add(pObject->GetNet()->ev, &(pObject->GetNet()->tv));
+        evtimer_add(pObject->GetNet()->ev, &(pObject->GetNet()->tv));
+    }
+
 }
 
 void NFCNet::conn_writecb(struct bufferevent *bev, void *user_data)
@@ -24,37 +37,38 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
 {
 
     NetObject* pObject = (NetObject*)user_data;
-    if(!pObject->GetNet()->mEventCB.empty())
+    NFCNet* pNet = pObject->GetNet();
+    if(!pNet->mEventCB._Empty())
     {
-        pObject->GetNet()->mEventCB(pObject->GetFd(), NF_NET_EVENT(events));
+        pNet->mEventCB(pObject->GetFd(), NF_NET_EVENT(events));
     }
-
-    pObject->GetNet()->OnConnectEvent(pObject->GetFd(), events);
-
+    
     if (events & BEV_EVENT_EOF) 
     {
         printf("%d Connection closed.\n", pObject->GetFd());
-        pObject->GetNet()->CloseSocket(pObject->GetFd());
+        pNet->CloseSocket(pObject->GetFd());
     } 
     else if (events & BEV_EVENT_ERROR) 
     {
-        printf("%d Got an error on the connection: %s\n", pObject->GetFd(),	strerror(errno));/*XXX win32*/
-        pObject->GetNet()->CloseSocket(pObject->GetFd());
-        if (!pObject->GetNet()->mbServer)
+        
+        printf("%d Got an error on the connection: %d\n", pObject->GetFd(),	errno);/*XXX win32*/
+        pNet->CloseSocket(pObject->GetFd());
+
+        if (!pNet->mbServer)
         {
-            pObject->GetNet()->Reset();
+            //客户端断线重连
+            pNet->Reset();
         }
     }
     else if (events & BEV_EVENT_TIMEOUT)
     {
-        printf("%d read timeout: %s\n", pObject->GetFd(), strerror(errno));/*XXX win32*/
-        pObject->GetNet()->CloseSocket(pObject->GetFd());
+        printf("%d read timeout: %d\n", pObject->GetFd(), errno);/*XXX win32*/
+        pNet->CloseSocket(pObject->GetFd());
     }
     else if (events & BEV_EVENT_CONNECTED)
     {
-        pObject->GetNet()->mbRuning = true;
+        pNet->mbRuning = true;
         printf("%d Connection successed\n", pObject->GetFd());/*XXX win32*/
-        //pObject->GetNet()->CloseSocket(pObject->GetFd());
     }
 }
 
@@ -70,7 +84,7 @@ void NFCNet::signal_cb(evutil_socket_t sig, short events, void *user_data)
 }
 
 
-void NFCNet::listener_cb(struct evconnlistener *listener, evutil_socket_t fd,struct sockaddr *sa, int socklen, void *user_data)
+void NFCNet::listener_cb(struct evconnlistener *listener, evutil_socket_t fd, struct sockaddr *sa, int socklen, void *user_data)
 {
     NFCNet* pNet = (NFCNet*)user_data;
     bool bClose = pNet->CloseSocket(fd);
@@ -129,6 +143,9 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
 {
     //接受到消息
     NetObject* pObject = (NetObject*)user_data;
+    NFCNet* pNet = pObject->GetNet();
+
+
     struct evbuffer *input = bufferevent_get_input(bev);
     size_t len = evbuffer_get_length(input);
     if (len >= NF_MAX_SERVER_PACKET_SIZE)
@@ -142,16 +159,21 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
     //  	evbuffer_add_buffer(output, input);
     //      SendMsg(1, strData,len, pObject->GetFd());
     //////////////////////////////////////////////////////////////////////////
-
-    static char strData[NF_MAX_SERVER_PACKET_SIZE];
-    if(evbuffer_remove(input, strData, len) > 0)
+    if (len <= NF_MAX_SERVER_PACKET_SIZE)
     {
-        pObject->AddBuff(strData,len);
+        char strData[NF_MAX_SERVER_PACKET_SIZE] = {0};
+        if(evbuffer_remove(input, strData, len) > 0)
+        {
+            pObject->AddBuff(strData,len);
+            bool bRet = pNet->Dismantle(pObject);
+            pNet->mbRuning = bRet;
+        }
     }
-
-
-    pObject->GetNet()->mbRuning = pObject->GetNet()->Dismantle(pObject);
-
+    else
+    {
+        //too length
+        pObject->IncreaseError(1000);
+    }
     //////////////////////////////////////////////////////////////////////////
 
 
@@ -165,8 +187,6 @@ bool NFCNet::Execute(const float fLasFrametime, const float fStartedTime)
 
 	return mbRuning;
 }
-
-
 
 
 int NFCNet::Initialization( const char* strIP, const unsigned short nPort, const bool bUsePacket )
@@ -251,7 +271,7 @@ bool NFCNet::SendMsg( const NFIPacket& msg, const uint16_t nSockIndex, bool bBro
 
 }
 
-bool NFCNet::SendMsg( const uint16_t msgID, const char* msg, const uint16_t nLen, const uint16_t nSockIndex, bool bBroadcast /*= false*/ )
+bool NFCNet::SendMsg( const uint32_t msgID, const char* msg, const uint32_t nLen, const uint16_t nSockIndex, bool bBroadcast /*= false*/ )
 {
     if (mbUsePacket)
     {
@@ -285,12 +305,16 @@ bool NFCNet::CloseSocket( const uint16_t nSockIndex )
 	{
         NetObject* pObject = it->second;
 
-        evutil_closesocket(nSockIndex);
-        bufferevent_free(pObject->GetBuffEvent());
+        struct bufferevent* bev = pObject->GetBuffEvent();
+        bev->cbarg = NULL;
 
-        pObject->GetNet()->mmObject.erase(it);
+        bufferevent_free(bev);
+        evutil_closesocket(nSockIndex);
+
+        mmObject.erase(it);
 
         delete pObject;
+        pObject = NULL;
 
 		return true;
 	}
@@ -314,7 +338,7 @@ bool NFCNet::Dismantle(NetObject* pObject )
 			packet.SetFd(pObject->GetFd());
 
 			int nRet = 0;
-			if (!mRecvCB.empty())
+			if (!mRecvCB._Empty())
             {
                 nRet = mRecvCB(packet);
                 bRet = bRet && nRet;
@@ -408,7 +432,8 @@ int NFCNet::InitClientNet()
 	}
 
 	NetObject* pObject = new NetObject(this, sockfd, addr, bev);
-	pObject->GetNet()->AddSocket(sockfd, pObject);
+	AddSocket(sockfd, pObject);
+
 	mbServer = false;
 
 	bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, (void*)pObject);
