@@ -48,7 +48,7 @@ public:
 
 private:
 	std::vector<NFIActor*> mActorVec;
-    std::shared_ptr<Theron::Framework> framework;
+    Theron::Framework* m_pFramework;
 	//Theron::Framework framework; // ªª÷∏’Î
 };
 
