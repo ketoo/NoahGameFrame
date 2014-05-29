@@ -1,3 +1,11 @@
+// -------------------------------------------------------------------------
+//    @FileName         £º    NFINet.h
+//    @Author           £º    LvSheng.Huang
+//    @Date             £º    2013-12-15
+//    @Module           £º    NFINet
+//    @Desc             :     INet
+// -------------------------------------------------------------------------
+
 #ifndef __NFI_NET_H__
 #define __NFI_NET_H__
 
@@ -44,11 +52,10 @@ public:
     virtual  bool Reset() = 0;
 
 	virtual bool SendMsg(const NFIPacket& msg, const uint16_t nSockIndex = 0, bool bBroadcast = false) = 0;
-	virtual bool SendMsg(const uint16_t msgID, const char* msg, const uint16_t nLen, const uint16_t nSockIndex = 0, bool bBroadcast = false) = 0;
+	virtual bool SendMsg(const uint32_t msgID, const char* msg, const uint32_t nLen, const uint16_t nSockIndex = 0, bool bBroadcast = false) = 0;
 	
 	virtual int OnRecivePacket(const NFIPacket& msg){return 1;};
-	virtual int OnRecivePacket(const uint16_t nSockIndex, const uint16_t msgID, const char* msg, const uint16_t nLen){return 1;};
-	virtual int OnConnectEvent(const uint16_t nSockIndex, short events){return 1;};
+	virtual int OnRecivePacket(const uint16_t nSockIndex, const uint32_t msgID, const char* msg, const uint32_t nLen){return 1;};
 
 	virtual bool CloseSocket(const uint16_t nSockIndex) = 0;
 	virtual bool AddBan(const uint16_t nSockIndex, const int32_t nTime = -1) = 0;
