@@ -435,6 +435,7 @@ int NFCNet::InitClientNet()
 	AddSocket(sockfd, pObject);
 
 	mbServer = false;
+    mbRuning = true;
 
 	bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, (void*)pObject);
 	bufferevent_enable(bev, EV_READ|EV_WRITE);
