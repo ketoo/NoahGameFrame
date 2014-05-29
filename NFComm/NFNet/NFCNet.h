@@ -1,7 +1,10 @@
-// ConsoleApplication1.cpp : Defines the entry point for the console application.
-//
-
-
+// -------------------------------------------------------------------------
+//    @FileName         ：    NFCNet.h
+//    @Author           ：    LvSheng.Huang
+//    @Date             ：    2013-12-15
+//    @Module           ：    NFIPacket
+//    @Desc             :     CNet
+// -------------------------------------------------------------------------
 
 #ifndef __NFC_NET_H__
 #define __NFC_NET_H__
@@ -18,7 +21,9 @@
 #endif
 
 #include "NFCPacket.h"
-#include <boost/function.hpp>
+#include <functional>
+#include <memory>
+#include <list>
 
 #pragma pack(push, 1)
 
@@ -50,13 +55,9 @@ public:
 
     ~NetObject()
     {
-        if (bev)
-        {
-            free(bev);
-        }
     }
 
-	int AddBuff(const char* str, uint16_t nLen)
+	int AddBuff(const char* str, uint32_t nLen)
 	{
 		if (nBuffLen + nLen >= NF_MAX_SERVER_PACKET_SIZE)
 		{
@@ -67,10 +68,10 @@ public:
 		memcpy(strBuff + nBuffLen, str, nLen);
 		nBuffLen += nLen;
 
-		return nLen;
+		return nBuffLen;
 	}
 
-	int CopyBuffTo(char* str, uint16_t nStart, uint16_t nLen)
+	int CopyBuffTo(char* str, uint32_t nStart, uint32_t nLen)
 	{
 		if (nStart + nLen > NF_MAX_SERVER_PACKET_SIZE)
 		{
@@ -82,7 +83,7 @@ public:
 		return nLen;
 	}
 
-	int RemoveBuff(uint16_t nStart, uint16_t nLen)
+	int RemoveBuff(uint32_t nStart, uint32_t nLen)
 	{
 		//移除前面，则后面跟上
 		if (nStart + nLen >= NF_MAX_SERVER_PACKET_SIZE)
@@ -142,33 +143,21 @@ public:
         return m_pNet;
     }
 private:
-	uint16_t nIndex;
+	uint32_t nIndex;
 	sockaddr_in sin;
 	bufferevent *bev;
-	uint16_t nBuffLen;
+	uint32_t nBuffLen;
 	char strBuff[NF_MAX_SERVER_PACKET_SIZE];
 
 	uint16_t mnErrorCount;
     NFCNet* m_pNet;
 };
 
-// NFINet* pNet = new NFCNet();
-// //pNet->Initialization("42.62.64.76", 9001);
-// pNet->Initialization(10000, 9001);
-// while (1)
-// {
-//     std::this_thread::sleep_for(std::chrono::microseconds(1));
-//     pNet->Execute(0.0f, 0.0f);
-// }
-// 
-// pNet->Final();
-// typedef int(* ON_RECIVE_FUNC)(const NFIPacket& msg);
-// typedef int(* ON_EVENT_FUNC)(const uint16_t nSockIndex, const NF_NET_EVENT nEvent);
 
-typedef boost::function<int(const NFIPacket& msg)> RECIEVE_FUNCTOR;
+typedef std::function<int(const NFIPacket& msg)> RECIEVE_FUNCTOR;
 typedef std::shared_ptr<RECIEVE_FUNCTOR> RECIEVE_FUNCTOR_PTR;
 
-typedef boost::function<int(const uint16_t nSockIndex, const NF_NET_EVENT nEvent)> EVENT_FUNCTOR;
+typedef std::function<int(const uint16_t nSockIndex, const NF_NET_EVENT nEvent)> EVENT_FUNCTOR;
 typedef std::shared_ptr<EVENT_FUNCTOR> EVENT_FUNCTOR_PTR;
 
 class NFCNet : public NFINet
@@ -189,20 +178,6 @@ public:
 		ev = NULL;
 	};
 
-// 	NFCNet(ON_RECIVE_FUNC cb, ON_EVENT_FUNC ecb)
-// 	{
-// 		base = NULL;
-// 		listener = NULL;
-// 		signal_event = NULL;
-// 		mstrIP = "";
-// 		mnPort = 0;
-// 		mnCpuCount = 0;
-// 		mbServer = false;
-// 		mbRuning = false;
-//         mbUsePacket = true;
-// 		ev = NULL;
-// 	};
-
     template<typename BaseType>
     NFCNet(BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const uint16_t, const NF_NET_EVENT))
     {
@@ -210,8 +185,8 @@ public:
         listener = NULL;
         signal_event = NULL;
 
-        mRecvCB = boost::bind(handleRecieve, pBaseType, _1);
-        mEventCB = boost::bind(handleEvent, pBaseType, _1, _2);
+        mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
+        mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2);
         mstrIP = "";
         mnPort = 0;
         mnCpuCount = 0;
@@ -233,7 +208,7 @@ public:
     virtual  bool Reset();
 
 	virtual bool SendMsg(const NFIPacket& msg, const uint16_t nSockIndex = 0, bool bBroadcast = false);
-	virtual bool SendMsg(const uint16_t msgID, const char* msg, const uint16_t nLen, const uint16_t nSockIndex = 0, bool bBroadcast = false);
+	virtual bool SendMsg(const uint32_t msgID, const char* msg, const uint32_t nLen, const uint16_t nSockIndex = 0, bool bBroadcast = false);
 
 	virtual bool CloseSocket(const uint16_t nSockIndex);
 
@@ -257,6 +232,7 @@ private:
 private:
 	//<fd,object>
 	std::map<int, NetObject*> mmObject;
+
 	int mnMaxConnect;
 	std::string mstrIP;
 	int mnPort;
