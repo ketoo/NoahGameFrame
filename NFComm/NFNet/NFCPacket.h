@@ -1,3 +1,11 @@
+// -------------------------------------------------------------------------
+//    @FileName         £º    NFCPacket.h
+//    @Author           £º    LvSheng.Huang
+//    @Date             £º    2013-12-15
+//    @Module           £º    NFIPacket
+//    @Desc             :     Net Packet
+// -------------------------------------------------------------------------
+
 #ifndef __NFC_PACKET_H__
 #define __NFC_PACKET_H__
 
@@ -16,8 +24,6 @@ public:
 		munFD = 0;
 	}
 
-
-
 	virtual const MsgHead& GetMsgHead() const
 	{
 		return mHead;
@@ -28,12 +34,12 @@ public:
 		return strPackData;
 	}
 
-	virtual const uint16_t GetPacketLen() const
+	virtual const uint32_t GetPacketLen() const
 	{
 		return munPacketLen;
 	}
 
-	virtual const uint16_t GetDataLen() const
+	virtual const uint32_t GetDataLen() const
 	{
 		return mHead.unDataLen;
 	}
@@ -60,14 +66,14 @@ public:
 		munFD = nFd;
 	}
 
-	virtual int EnCode(uint16_t uMsgID, const char* strData, const uint16_t unLen);
+	virtual int EnCode(uint32_t uMsgID, const char* strData, const uint32_t unLen);
 
-	virtual int DeCode(const char* strData, const uint16_t unLen);
+	virtual int DeCode(const char* strData, const uint32_t unLen);
 
 protected:
 private:
 	MsgHead mHead;
-	uint16_t munPacketLen;
+	uint32_t munPacketLen;
 	char strPackData[NF_MAX_SERVER_PACKET_SIZE];
 	uint16_t munFD;;
 };

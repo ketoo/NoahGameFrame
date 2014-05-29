@@ -11,14 +11,14 @@
 
 bool NFCActorManager::Init()
 {
-    framework = std::shared_ptr<Theron::Framework>(new Theron::Framework());
+    m_pFramework = new Theron::Framework();
 
     //首个主线程
-    mActorVec.push_back(new NFCPluginManager(*framework, this, EACTOR::EACTOR_MAIN));
+    mActorVec.push_back(new NFCPluginManager(*m_pFramework, this, EACTOR::EACTOR_MAIN));
 
 	for (int i = EACTOR::EACTOR_LOGIC1; i < EACTOR::EACTOR_END; ++i)
 	{
-		mActorVec.push_back(new NFCPluginManager(*framework, this, (EACTOR)i));
+		mActorVec.push_back(new NFCPluginManager(*m_pFramework, this, (EACTOR)i));
 	}
 
 	std::vector<NFIActor*>::iterator it = mActorVec.begin();
@@ -28,7 +28,7 @@ bool NFCActorManager::Init()
 
 		NFIActorMessage message;
 		message.eType = NFIActorMessage::EACTOR_INIT;
-		framework->Send(message, receiver.GetAddress(), (*it)->GetAddress());
+		m_pFramework->Send(message, receiver.GetAddress(), (*it)->GetAddress());
 
 		receiver.Wait();
 	}
@@ -45,7 +45,7 @@ bool NFCActorManager::AfterInit()
 
 		NFIActorMessage message;
 		message.eType = NFIActorMessage::EACTOR_AFTER_INIT;
-		framework->Send(message, receiver.GetAddress(), (*it)->GetAddress());
+		m_pFramework->Send(message, receiver.GetAddress(), (*it)->GetAddress());
 
 		receiver.Wait();
 	}
@@ -61,7 +61,7 @@ bool NFCActorManager::BeforeShut()
 
 		NFIActorMessage message;
 		message.eType = NFIActorMessage::EACTOR_BEFORE_SHUT;
-		framework->Send(message, receiver.GetAddress(), (*it)->GetAddress());
+		m_pFramework->Send(message, receiver.GetAddress(), (*it)->GetAddress());
 
 		receiver.Wait();
 	}
@@ -77,7 +77,7 @@ bool NFCActorManager::Shut()
 
 		NFIActorMessage message;
 		message.eType = NFIActorMessage::EACTOR_SHUT;
-		framework->Send(message, receiver.GetAddress(), (*it)->GetAddress());
+		m_pFramework->Send(message, receiver.GetAddress(), (*it)->GetAddress());
 
 		receiver.Wait();
 	}
@@ -87,7 +87,9 @@ bool NFCActorManager::Shut()
 	{
 		delete *it;
 	}
-    framework.reset();
+
+    delete m_pFramework;
+    m_pFramework = NULL;
 
 	return true;
 }
@@ -99,7 +101,7 @@ bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTi
 	{
 		NFIActorMessage message;
 		message.eType = NFIActorMessage::EACTOR_EXCUTE;
-		framework->Send(message, Theron::Address(), (*it)->GetAddress());
+		m_pFramework->Send(message, Theron::Address(), (*it)->GetAddress());
 	}
 	return true;
 }
@@ -110,9 +112,6 @@ const Theron::Address NFCActorManager::GetAddress( NFIActorManager::EACTOR eActo
 		&& eActor < NFIActorManager::EACTOR_END)
 	{
 		return mActorVec[eActor]->GetAddress();
-// 		std::vector<NFIActor*>::iterator it = mActorVec.begin();
-// 		std::advance(it, (int)eActor);
-// 		return (*it)->GetAddress();
 	}
 
 	return Theron::Address();
