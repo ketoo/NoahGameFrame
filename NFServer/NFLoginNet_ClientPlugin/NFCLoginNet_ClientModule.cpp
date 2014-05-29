@@ -128,6 +128,7 @@ void NFCLoginNet_ClientModule::Register()
 
 	SendMsg(NFMsg::EGameMsgID::EGMI_LTM_LOGIN_REGISTERED, xMsg, mnSocketFD);
 
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Register");
 }
 
 void NFCLoginNet_ClientModule::UnRegister()
@@ -152,6 +153,7 @@ void NFCLoginNet_ClientModule::UnRegister()
 
 	SendMsg(NFMsg::EGameMsgID::EGMI_LTM_LOGIN_UNREGISTERED, xMsg, mnSocketFD);
 
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "UnRegister");
 	//Execute(0.0f, 0.0f);
 }
 

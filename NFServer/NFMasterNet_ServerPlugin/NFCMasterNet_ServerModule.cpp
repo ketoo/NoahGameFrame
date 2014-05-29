@@ -57,8 +57,11 @@ int NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const NFIPacket& msg)
             pObject->SetPropertyInt("MaxConnect", pData->server_max_online());
             pObject->SetPropertyInt("OnlineCount", pData->server_cur_count());
         }
+
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "WorldRegistered");
     }
 	
+
 	SynWorldToLogin();
 
 	return 0;
@@ -85,6 +88,9 @@ int NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const NFIPacket& msg)
         }
 
         m_pKernelModule->DestroyObject(varList.ObjectVal(0));
+
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "WorldUnRegistered");
+
     }
 
 	SynWorldToLogin();
@@ -121,6 +127,9 @@ int NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFIPacket& msg)
 			pObject->SetPropertyInt("MaxConnect", pData->server_max_online());
 			pObject->SetPropertyInt("OnlineCount", pData->server_cur_count());
 		}
+
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "RefreshWorldInfo");
+
     }
 
 	SynWorldToLogin();
@@ -161,6 +170,8 @@ int NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const NFIPacket& msg)
 			pObject->SetPropertyInt("MaxConnect", pData->server_max_online());
 			pObject->SetPropertyInt("OnlineCount", pData->server_cur_count());
 	    }
+
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "LoginRegistered");
     }
 
 	SynWorldToLogin();
@@ -189,6 +200,9 @@ int NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const NFIPacket& msg)
         }
 
         m_pKernelModule->DestroyObject(varList.ObjectVal(0));
+
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "LoginUnRegistered");
+
     }
 
 
@@ -223,6 +237,9 @@ int NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess(const NFIPacket& msg)
 			pObject->SetPropertyInt("MaxConnect", pData->server_max_online());
 			pObject->SetPropertyInt("OnlineCount", pData->server_cur_count());
 		}
+
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "RefreshLoginInfo");
+
     }
 
 	return 0;
@@ -247,6 +264,7 @@ int NFCMasterNet_ServerModule::OnSelectWorldProcess(const NFIPacket& msg)
 	//转发送到世界服务器
 	uint16_t nSocket = m_pKernelModule->QueryPropertyInt(varList.ObjectVal(0), "FD");
 	SendMsg(NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xMsg, nSocket);
+
 	return 0;
 }
 
