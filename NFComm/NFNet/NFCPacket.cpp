@@ -10,32 +10,37 @@
 
 int NFCPacket::DeCode( const char* strData, const uint32_t unLen )
 {
-	//解密--unLen为总长度
+	//解密--unLen为buff总长度,解包时能用多少是多少
 	if (unLen >= NF_MAX_SERVER_PACKET_SIZE)
 	{
 		//长度超越
 		return -1;
 	}
 
+    if (unLen < NF_HEAD_SIZE)
+    {
+        //长度不够
+        return -1;
+    }
+
 	//取包头
 	char head[NF_HEAD_SIZE] = {0};	
 	memcpy(head, strData, NF_HEAD_SIZE);
 
-	MsgHead msgHead = ntohll(*(uint64_t*)head);
-	if (msgHead.unDataLen + NF_HEAD_SIZE > unLen)
+	mHead.unHead = ntohll(*(uint64_t*)head);
+	if (mHead.unDataLen > unLen)
 	{
 		//总长度不够
 		return 0;
 	}
 
-	mHead.unMsgID = msgHead.unMsgID;
-	mHead.unDataLen = msgHead.unDataLen;
-	munPacketLen = mHead.unDataLen + NF_HEAD_SIZE;
 	//copy包头+包体
-	memcpy(strPackData, strData, munPacketLen);
+	memcpy(strPackData, strData, mHead.unDataLen);
+
 	//返回使用过的量
-	return munPacketLen;
+	return mHead.unDataLen;
 }
+
 int NFCPacket::EnCode(uint32_t uMsgID, const char* strData, const uint32_t unLen)
 {
 	//加密
@@ -46,23 +51,13 @@ int NFCPacket::EnCode(uint32_t uMsgID, const char* strData, const uint32_t unLen
 	}
 
 	mHead.unMsgID = uMsgID;
-	mHead.unDataLen = unLen;
-	munPacketLen = mHead.unDataLen + NF_HEAD_SIZE;
+	mHead.unDataLen = unLen + NF_HEAD_SIZE;
 
 	//////////////////////////////////////////////////////////////////////////
-	uint64_t unHeadID = htonll(mHead.unHeadID);
-	uint32_t nOffest = 0;
+	uint64_t unHeadID = htonll(mHead.unHead);
 
-	memcpy(strPackData + nOffest, (void*)&unHeadID, NF_HEAD_SIZE);
-	nOffest += NF_HEAD_SIZE;
+	memcpy(strPackData, (void*)&unHeadID, NF_HEAD_SIZE);
+	memcpy(strPackData + NF_HEAD_SIZE, strData, mHead.unDataLen);
 
-	memcpy(strPackData + nOffest, strData, mHead.unDataLen);
-	nOffest += unLen;
-
-	if (munPacketLen != nOffest)
-	{
-		return 0;
-	}
-
-	return nOffest;
+	return unLen + NF_HEAD_SIZE;
 }

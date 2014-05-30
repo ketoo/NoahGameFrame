@@ -14,7 +14,7 @@
 
 bool NFCProxyServerNet_ClientModule::Init()
 {
-	mstrConfigIdent = "ProxySserver";
+	mstrConfigIdent = "ProxyServer";
     mnWantToConnectContainer = -2;
     mnGameContainerID = -3;
     //是连接world的
