@@ -177,6 +177,9 @@ int main()
 
 	NFCActorManager::GetSingletonPtr()->BeforeShut();
 	NFCActorManager::GetSingletonPtr()->Shut();
+
+    NFCActorManager::GetSingletonPtr()->ReleaseInstance();
+
     return 0;
 }
 
