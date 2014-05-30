@@ -21,7 +21,7 @@
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 
-class NFCProxyServerNet_ServerModule : public NFINetModule
+class NFCProxyServerNet_ServerModule : public NFIProxyServerNet_ServerModule
 {
 public:
     NFCProxyServerNet_ServerModule(NFIPluginManager* p)
