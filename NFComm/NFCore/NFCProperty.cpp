@@ -34,6 +34,11 @@ NFCProperty::NFCProperty(const NFIDENTID& self, const std::string& strPropertyNa
 
 NFCProperty::~NFCProperty()
 {
+    for (TPROPERTYCALLBACKEX::iterator iter = mtPropertyCallback.begin(); iter != mtPropertyCallback.end(); ++iter)
+    {
+        iter->reset();
+    }
+
     mtPropertyCallback.clear();
     m_pVarData.reset();
 }

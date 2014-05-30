@@ -60,6 +60,16 @@ NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, co
 
 NFCRecord::~NFCRecord()
 {
+    for (auto iter = mtRecordVec.begin(); iter != mtRecordVec.end(); ++iter)
+    {
+        iter->reset();
+    }
+    
+    for (auto iter = mtRecordCallback.begin(); iter != mtRecordCallback.end(); ++iter)
+    {
+        iter->reset();
+    }
+
     mtRecordVec.clear();
     mVecUsedState.clear();
     mtRecordCallback.clear();
