@@ -94,7 +94,7 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* propertyRootNode, N
         if (pClass->GetPropertyManager()->GetElement(strPropertyName))
         {
             //error
-            NFASSERT(0, strPropertyName);
+            NFASSERT(0, strPropertyName, __FILE__, __FUNCTION__);
             continue;
         }
 
@@ -116,7 +116,7 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* propertyRootNode, N
         {
             //std::cout << "error:" << pClass->GetTypeName() << "  " << pClass->GetInstancePath() << ": " << strPropertyName << " type error!!!" << std::endl;
 
-            NFASSERT(0, strPropertyName);
+            NFASSERT(0, strPropertyName, __FILE__, __FUNCTION__);
         }
 
         //printf( " Property:%s[%s]\n", pstrPropertyName, pstrType );
@@ -138,7 +138,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* recordRootNode, NFCLo
             //error
             //file << pClass->mstrType << ":" << pstrRecordName << std::endl;
             //assert(0);
-            NFASSERT(0, pstrRecordName);
+            NFASSERT(0, pstrRecordName, __FILE__, __FUNCTION__);
             continue;
         }
 
@@ -166,7 +166,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* recordRootNode, NFCLo
             if (VTYPE_UNKNOWN == ComputerType(pstrColType, varData))
             {
                 //assert(0);
-                NFASSERT(0, pstrRecordName);
+                NFASSERT(0, pstrRecordName, __FILE__, __FUNCTION__);
             }
 
             recordVar.Append(varData);
