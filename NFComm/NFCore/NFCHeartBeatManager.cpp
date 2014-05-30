@@ -80,6 +80,15 @@ bool NFCHeartBeatManager::Execute(const float fLastTime, const float fAllTime)
         NFCHeartBeatElementEx* pElement = mHeartBeatElementMapEx.RemoveElement(strHeartBeatName);
         if (pElement)
         {
+            HEART_BEAT_FUNCTOR_PTR heartFunctorPtr;
+            bool bRemoveRet = pElement->First(heartFunctorPtr);
+            while (bRemoveRet)
+            {
+                heartFunctorPtr.reset();
+
+                bRemoveRet = pElement->Next(heartFunctorPtr);
+            }
+
             delete pElement;
         }
 
