@@ -52,10 +52,18 @@ bool NFCPluginManager::LoadPlugin()
     {
         const char* strPluginName = pPluginNode->first_attribute( "Name" )->value();
         const char* strMain = pPluginNode->first_attribute( "Main" )->value();
-        
-        //主模块只能运行在主actor上
+
         bool bMain = (bool)boost::lexical_cast<int>( strMain );
-        if (bMain && GetActor() == NFIActorManager::EACTOR_MAIN)
+        if (bMain)
+        {
+            //主模块只能运行在主actor上只
+            //非主模块则所有的actor都创建
+            if (GetActor() == NFIActorManager::EACTOR_MAIN)
+            {
+                mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, bMain));
+            }
+        }
+        else
         {
             mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, bMain));
         }

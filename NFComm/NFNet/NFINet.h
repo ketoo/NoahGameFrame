@@ -52,10 +52,9 @@ public:
     virtual  bool Reset() = 0;
 
 	virtual bool SendMsg(const NFIPacket& msg, const uint16_t nSockIndex = 0, bool bBroadcast = false) = 0;
-	virtual bool SendMsg(const uint32_t msgID, const char* msg, const uint32_t nLen, const uint16_t nSockIndex = 0, bool bBroadcast = false) = 0;
+	virtual bool SendMsg(const char* msg, const uint32_t nLen, const uint16_t nSockIndex = 0, bool bBroadcast = false) = 0;
 	
-	virtual int OnRecivePacket(const NFIPacket& msg){return 1;};
-	virtual int OnRecivePacket(const uint16_t nSockIndex, const uint32_t msgID, const char* msg, const uint32_t nLen){return 1;};
+	virtual int OnRecivePacket(const uint16_t nSockIndex, const char* msg, const uint32_t nLen){return 1;};
 
 	virtual bool CloseSocket(const uint16_t nSockIndex) = 0;
 	virtual bool AddBan(const uint16_t nSockIndex, const int32_t nTime = -1) = 0;
