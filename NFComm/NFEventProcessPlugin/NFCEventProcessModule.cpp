@@ -16,7 +16,11 @@ NFCEventProcessModule::NFCEventProcessModule(NFIPluginManager* p)
 
 NFCEventProcessModule::~NFCEventProcessModule()
 {
-    delete m_pClassEventInfoEx;
+    if (NULL != m_pClassEventInfoEx)
+    {
+        delete m_pClassEventInfoEx;
+        m_pClassEventInfoEx = NULL;
+    }
 }
 
 bool NFCEventProcessModule::Init()
@@ -30,6 +34,15 @@ bool NFCEventProcessModule::Shut()
     NFClassEventList* pEventList = m_pClassEventInfoEx->First();
     while (pEventList)
     {
+        CLASS_EVENT_FUNCTOR_PTR classEventFunctorPtr;
+        bool bRet = pEventList->First(classEventFunctorPtr);
+        while (bRet)
+        {
+            classEventFunctorPtr.reset();
+
+            bRet = pEventList->Next(classEventFunctorPtr);
+        }
+
         pEventList->ClearAll();
         delete pEventList;
         pEventList = NULL;
@@ -139,6 +152,15 @@ bool NFCEventProcessModule::Execute(const float fLasFrametime, const float fStar
             NFEventList* pEventList = pObjectEventInfo->First();
             while (pEventList)
             {
+                EVENT_PROCESS_FUNCTOR_PTR event_func_ptr;
+                bool bRet = pEventList->First(event_func_ptr);
+                while (bRet)
+                {
+                    event_func_ptr.reset();
+
+                    bRet = pEventList->Next(event_func_ptr);
+                }
+
                 delete pEventList;
                 pEventList = NULL;
 

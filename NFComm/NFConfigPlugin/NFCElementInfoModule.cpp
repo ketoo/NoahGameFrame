@@ -87,13 +87,13 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
     std::string strConfigID = attrNode->first_attribute("ID")->value();
 	if (strConfigID.empty())
 	{
-		NFASSERT(0, strConfigID);
+		NFASSERT(0, strConfigID, __FILE__, __FUNCTION__);
 		return false;
 	}
 
     if (ExistElement(strConfigID))
     {
-		NFASSERT(0, strConfigID);
+		NFASSERT(0, strConfigID, __FILE__, __FUNCTION__);
         return false;
     }
 
@@ -155,7 +155,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
 				{
 					if(!LegalNumber(pstrConfigValue))
 					{
-                        NFASSERT(0, temProperty->GetKey());
+                        NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
 					}
 					var.variantData = (int)atoi(pstrConfigValue);
 				}
@@ -164,7 +164,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
                 {
                     if (strlen(pstrConfigValue) <= 0)
                     {
-                        NFASSERT(0, temProperty->GetKey());
+                        NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                     }
                     var.variantData = (float)atof(pstrConfigValue);
                 }
@@ -173,7 +173,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
                 {
                     if (strlen(pstrConfigValue) <= 0)
                     {
-                        NFASSERT(0, temProperty->GetKey());
+                        NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                     }
                     var.variantData = (double)atof(pstrConfigValue);
                 }                
@@ -185,7 +185,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
                 {
                     if (strlen(pstrConfigValue) <= 0)
                     {
-                        NFASSERT(0, temProperty->GetKey());
+                        NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                     }
                     var.variantData = (NFINT64)0;
                 }
@@ -195,7 +195,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
                 var.variantData = (void*)NULL;
                 break;
             default:
-               NFASSERT(0, temProperty->GetKey());
+               NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 break;
         }
 
