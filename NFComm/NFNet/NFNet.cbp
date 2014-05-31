@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="NFNet" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug x64">
+				<Option output="NFNet" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-D_X64" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_LIB" />
+					<Add option="-DWIN32" />
+					<Add option="-DWIN" />
+					<Add directory="$(NF_HOME)" />
+					<Add directory="$(BOOST_HOME)" />
+					<Add directory="$(NF_DEP)" />
+					<Add directory="$(NF_LIBEVENT)" />
+					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/include" />
+					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/WIN32-Code" />
+					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/compat" />
+				</Compiler>
+			</Target>
+			<Target title="Release x64">
+				<Option output="NFNet" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_LIB" />
+					<Add option="-D_X64" />
+					<Add option="-DWIN" />
+					<Add directory="$(NF_HOME)" />
+					<Add directory="$(BOOST_HOME)" />
+					<Add directory="$(NF_DEP)" />
+					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/include" />
+					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/WIN32-Code" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Unit filename="NFCNet.cpp" />
+		<Unit filename="NFCNet.h" />
+		<Unit filename="NFCPacket.cpp" />
+		<Unit filename="NFCPacket.h" />
+		<Unit filename="NFINet.h" />
+		<Unit filename="NFIPacket.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
