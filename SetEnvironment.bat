@@ -63,4 +63,15 @@ set regTHERONName=THERON_HOME
 set regTHERONValue=D:\NoahGameFrame\trunk\Dependencies\Theron-6.00.01\Include\\
 reg add "%regOgrepath%" /v "%regTHERONName%" /d "%regTHERONValue%" /f
 
+echo Set Environment end
+
+rem ====================================================================================
+echo Start to extract boost_1_53_0
+
+cd Tool
+7z x "..\Dependencies\boost_1_53_0.zip" -o"..\Dependencies\" -y
+
+echo Extract boost_1_53_0 completed!
+rem ====================================================================================
+
 pause
