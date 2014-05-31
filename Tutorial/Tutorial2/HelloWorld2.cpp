@@ -23,7 +23,7 @@ bool HelloWorld2::AfterInit()
     //³õÊ¼»¯Íê±Ï
     std::cout << "Hello, world2, AfterInit" << std::endl;
 
-    NFIObject* pObject = new NFCObject(1);
+    NFIObject* pObject = new NFCObject(1, pPluginManager);
     pObject->GetPropertyManager()->AddProperty(pObject->Self(), "Hello", VTYPE_STRING, true, true, true, 0, "");
     pObject->GetPropertyManager()->AddProperty(pObject->Self(), "World", VTYPE_INT, true, true, true, 0, "");
 
