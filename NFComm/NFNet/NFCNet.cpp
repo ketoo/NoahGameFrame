@@ -247,37 +247,11 @@ bool NFCNet::SendMsg( const NFIPacket& msg, const uint16_t nSockIndex, bool bBro
         return false;
     }
 
-	std::map<int, NetObject*>::iterator it = mmObject.find(nSockIndex);
-	if (it != mmObject.end())
-	{
-		NetObject* pNetObject = (NetObject*)it->second;
-		if (pNetObject)
-		{
-			bufferevent* bev = pNetObject->GetBuffEvent();
-			if (NULL != bev
-				&& msg.GetPacketLen() == msg.GetMsgHead().unDataLen + NF_HEAD_SIZE)
-			{
-				//添加到队列
-				bufferevent_write(bev, msg.GetPacketData(), msg.GetPacketLen());
-
-				return true;
-			}
-		}
-
-	}
-
-	std::cout << "send msg failed SocketID: " << nSockIndex << "MsgID:" << msg.GetMsgHead().unMsgID << std::endl;
-	return false;
-
+    return SendMsg(msg.GetPacketData(), msg.GetPacketLen(), nSockIndex, bBroadcast );
 }
 
-bool NFCNet::SendMsg( const uint32_t msgID, const char* msg, const uint32_t nLen, const uint16_t nSockIndex, bool bBroadcast /*= false*/ )
+bool NFCNet::SendMsg(const char* msg, const uint32_t nLen, const uint16_t nSockIndex, bool bBroadcast /*= false*/ )
 {
-    if (mbUsePacket)
-    {
-        return false;
-    }
-
 	std::map<int, NetObject*>::iterator it = mmObject.find(nSockIndex);
 	if (it != mmObject.end())
 	{
@@ -343,17 +317,12 @@ bool NFCNet::Dismantle(NetObject* pObject )
                 nRet = mRecvCB(packet);
                 bRet = bRet && nRet;
             }
-			if (mbUsePacket)
-			{
-				nRet = OnRecivePacket(packet);
-				bRet = bRet && nRet;
-			}
-			else
-			{
-				nRet = OnRecivePacket(pObject->GetFd(), packet.GetMsgHead().unMsgID, packet.GetData(), packet.GetDataLen());
-				bRet = bRet && nRet;
-			}
-            
+            else
+            {
+               nRet = OnRecivePacket(pObject->GetFd(), packet.GetPacketData(), packet.GetPacketLen());
+               bRet = bRet && nRet;
+
+            }
 
 			//添加到队列
 			pObject->RemoveBuff(0, nUsedLen);
@@ -578,9 +547,5 @@ void NFCNet::HeartPack()
 	if (mbUsePacket)
 	{
 		SendMsg(msg, 0);
-	}
-	else
-	{
-		SendMsg(msg.GetMsgHead().unMsgID, msg.GetData(), msg.GetDataLen(), 0);
 	}
 }
