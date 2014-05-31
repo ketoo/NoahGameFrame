@@ -74,4 +74,11 @@ cd Tool
 echo Extract boost_1_53_0 completed!
 rem ====================================================================================
 
+echo Start to extract nessasery lib
+
+7z x "..\Dependencies\lib.zip" -o"..\Dependencies\" -y
+
+echo Extract nessasery lib completed!
+rem ====================================================================================
+
 pause
