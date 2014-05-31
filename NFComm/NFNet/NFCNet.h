@@ -208,7 +208,7 @@ public:
     virtual  bool Reset();
 
 	virtual bool SendMsg(const NFIPacket& msg, const uint16_t nSockIndex = 0, bool bBroadcast = false);
-	virtual bool SendMsg(const uint32_t msgID, const char* msg, const uint32_t nLen, const uint16_t nSockIndex = 0, bool bBroadcast = false);
+	virtual bool SendMsg(const char* msg, const uint32_t nLen, const uint16_t nSockIndex = 0, bool bBroadcast = false);
 
 	virtual bool CloseSocket(const uint16_t nSockIndex);
 
