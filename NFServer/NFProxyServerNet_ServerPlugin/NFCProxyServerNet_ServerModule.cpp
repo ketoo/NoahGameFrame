@@ -15,6 +15,8 @@ bool NFCProxyServerNet_ServerModule::Init()
     mnWantToConnectContainer = -2;
     mnRoleHallContainer = -3;
 
+    mstrConfigIdent = "ProxyServer";
+
     return true;
 }
 
