@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="NoahFrame workspace">
+		<Project filename="NFComm/NFPluginLoader/NFPluginLoader.cbp" />
+		<Project filename="NFServer/NFWorldLogicPlugin/NFWorldLogicPlugin.cbp" />
+		<Project filename="NFServer/NFLoginLogicPlugin/NFLoginLogicPlugin.cbp" />
+		<Project filename="NFComm/NFKernelPlugin/NFKernelPlugin.cbp">
+			<Depends filename="NFComm/NFCore/NFCore.cbp" />
+		</Project>
+		<Project filename="NFComm/NFEventProcessPlugin/NFEventProcessPlugin.cbp" />
+		<Project filename="NFComm/NFConfigPlugin/NFConfigPlugin.cbp" />
+		<Project filename="NFServer/NFLoginNet_ServerPlugin/NFLoginNet_ServerPlugin.cbp" />
+		<Project filename="NFServer/NFLoginNet_ClientPlugin/NFLoginNet_ClientPlugin.cbp" />
+		<Project filename="NFServer/NFWorldNet_ClientPlugin/NFWorldNet_ClientPlugin.cbp" />
+		<Project filename="NFServer/NFGameServerPlugin/NFGameServerPlugin.cbp" />
+		<Project filename="NFServer/NFGameServerNet_ClientPlugin/NFGameServerNet_ClientPlugin.cbp" />
+		<Project filename="NFServer/NFGameServerNet_ServerPlugin/NFGameServerNet_ServerPlugin.cbp">
+			<Depends filename="NFComm/NFEventProcessPlugin/NFEventProcessPlugin.cbp" />
+		</Project>
+		<Project filename="NFServer/NFMasterServerPlugin/NFMasterServerPlugin.cbp" />
+		<Project filename="NFServer/NFMasterNet_ServerPlugin/NFMasterNet_ServerPlugin.cbp" />
+		<Project filename="NFComm/NFCore/NFCore.cbp" />
+		<Project filename="NFServer/NFWorldNet_ServerPlugin/NFWorldNet_ServerPlugin.cbp" />
+		<Project filename="NFServer/NFProxyServerNet_ServerPlugin/NFProxyServerNet_ServerPlugin.cbp" />
+		<Project filename="NFServer/NFProxyServerPlugin/NFProxyPlugin.cbp" />
+		<Project filename="NFServer/NFProxyServerNet_ClientPlugin/NFProxyServerNet_ClientPlugin.cbp" />
+		<Project filename="Dependencies/glog-0.3.3/vsprojects/libglog/libglog.cbp" />
+		<Project filename="Dependencies/protobuf-2.5.0/vsprojects/libprotobuf.cbp" />
+		<Project filename="Dependencies/protobuf-2.5.0/vsprojects/libprotobuf-lite.cbp" />
+		<Project filename="Dependencies/Theron-6.00.01/Theron/Theron.cbp" />
+		<Project filename="Dependencies/redis-cplusplus-client/msvc/anet_win32/anet_win32.cbp" />
+		<Project filename="Tutorial/Tutorial2/Tutorial2.cbp" />
+		<Project filename="Tutorial/Tutorial1/Tutorial1.cbp" />
+		<Project filename="Tutorial/Tutorial3/Tutorial3.cbp" />
+		<Project filename="NFComm/NFNet/NFNet.cbp" />
+		<Project filename="NFComm/NFDataNoSqlPlugin/NFDataNoSqlPlugin.cbp" />
+		<Project filename="NFComm/NFMessageDefine/NFMessageDefine.cbp" />
+		<Project filename="NFComm/NFJavaScriptPlugin/NFJavaScriptPlugin.cbp" />
+		<Project filename="NFComm/NFLuaScriptPlugin/NFLuaScriptPlugin.cbp" />
+		<Project filename="NFComm/NFPythonScriptPlugin/NFPythonScriptPlugin.cbp" />
+	</Workspace>
+</CodeBlocks_workspace_file>
