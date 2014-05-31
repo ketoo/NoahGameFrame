@@ -250,7 +250,7 @@ int NFCLoginNet_ClientModule::OnSocketEvent( const uint16_t nSockIndex, const NF
 	}
 	else  if (eEvent == NF_NET_EVENT_CONNECTED)
 	{
-		printf("%d Got an unknow error on the connection: %s\n", nSockIndex,	strerror(errno));/*XXX win32*/
+		printf("%d connectioned success: %s\n", nSockIndex,	strerror(errno));/*XXX win32*/
 		Register();
 	}
 
@@ -265,6 +265,7 @@ int NFCLoginNet_ClientModule::OnWorldInfoProcess( const NFIPacket& msg )
 	{
 		return 0;
 	}
+
 	int nSize = xMsg.multi_player_property_size();
 	for (int i = 0; i < nSize; ++i)
 	{
@@ -281,6 +282,8 @@ int NFCLoginNet_ClientModule::OnWorldInfoProcess( const NFIPacket& msg )
 			PropertyFormString(pProManager, xData);
 		}
 	}
+
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSize, "", "WorldInfo");
 
 	m_pLoginNet_ServerModule->SynWorldToClient();
 
