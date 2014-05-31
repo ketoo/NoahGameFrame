@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="libglog" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug Win32">
+				<Option output="libglog" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add option="-DLIBGLOG_EXPORTS" />
+					<Add directory="../../src/windows" />
+				</Compiler>
+			</Target>
+			<Target title="Debug x64">
+				<Option output="libglog" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add option="-DLIBGLOG_EXPORTS" />
+					<Add directory="../../src/windows" />
+				</Compiler>
+			</Target>
+			<Target title="Release x64">
+				<Option output="libglog" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add option="-DLIBGLOG_EXPORTS" />
+					<Add directory="../../src/windows" />
+				</Compiler>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="libglog" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add option="-DLIBGLOG_EXPORTS" />
+					<Add directory="../../src/windows" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Unit filename="../../src/base/commandlineflags.h" />
+		<Unit filename="../../src/base/googleinit.h" />
+		<Unit filename="../../src/base/mutex.h" />
+		<Unit filename="../../src/logging.cc" />
+		<Unit filename="../../src/raw_logging.cc" />
+		<Unit filename="../../src/utilities.cc" />
+		<Unit filename="../../src/utilities.h" />
+		<Unit filename="../../src/vlog_is_on.cc" />
+		<Unit filename="../../src/windows/config.h" />
+		<Unit filename="../../src/windows/glog/log_severity.h" />
+		<Unit filename="../../src/windows/glog/logging.h" />
+		<Unit filename="../../src/windows/glog/raw_logging.h" />
+		<Unit filename="../../src/windows/glog/stl_logging.h" />
+		<Unit filename="../../src/windows/glog/vlog_is_on.h" />
+		<Unit filename="../../src/windows/port.cc" />
+		<Unit filename="../../src/windows/port.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
