@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="libprotobuf" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug Win32">
+				<Option output="libprotobuf" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add option="-DLIBPROTOBUF_EXPORTS" />
+					<Add directory="../src" />
+					<Add directory="." />
+				</Compiler>
+			</Target>
+			<Target title="Debug x64">
+				<Option output="libprotobuf" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add option="-DLIBPROTOBUF_EXPORTS" />
+					<Add directory="../src" />
+					<Add directory="." />
+				</Compiler>
+			</Target>
+			<Target title="Release x64">
+				<Option output="libprotobuf" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add option="-DLIBPROTOBUF_EXPORTS" />
+					<Add directory="../src" />
+					<Add directory="." />
+				</Compiler>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="libprotobuf" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add option="-DLIBPROTOBUF_EXPORTS" />
+					<Add directory="../src" />
+					<Add directory="." />
+				</Compiler>
+			</Target>
+		</Build>
+		<Unit filename="../src/google/protobuf/compiler/importer.cc" />
+		<Unit filename="../src/google/protobuf/compiler/importer.h" />
+		<Unit filename="../src/google/protobuf/compiler/parser.cc" />
+		<Unit filename="../src/google/protobuf/compiler/parser.h" />
+		<Unit filename="../src/google/protobuf/descriptor.cc" />
+		<Unit filename="../src/google/protobuf/descriptor.h" />
+		<Unit filename="../src/google/protobuf/descriptor.pb.cc" />
+		<Unit filename="../src/google/protobuf/descriptor.pb.h" />
+		<Unit filename="../src/google/protobuf/descriptor_database.cc" />
+		<Unit filename="../src/google/protobuf/descriptor_database.h" />
+		<Unit filename="../src/google/protobuf/dynamic_message.cc" />
+		<Unit filename="../src/google/protobuf/dynamic_message.h" />
+		<Unit filename="../src/google/protobuf/extension_set.cc" />
+		<Unit filename="../src/google/protobuf/extension_set.h" />
+		<Unit filename="../src/google/protobuf/extension_set_heavy.cc" />
+		<Unit filename="../src/google/protobuf/generated_message_reflection.cc" />
+		<Unit filename="../src/google/protobuf/generated_message_reflection.h" />
+		<Unit filename="../src/google/protobuf/generated_message_util.cc" />
+		<Unit filename="../src/google/protobuf/generated_message_util.h" />
+		<Unit filename="../src/google/protobuf/io/coded_stream.cc" />
+		<Unit filename="../src/google/protobuf/io/coded_stream.h" />
+		<Unit filename="../src/google/protobuf/io/coded_stream_inl.h" />
+		<Unit filename="../src/google/protobuf/io/gzip_stream.cc" />
+		<Unit filename="../src/google/protobuf/io/gzip_stream.h" />
+		<Unit filename="../src/google/protobuf/io/printer.cc" />
+		<Unit filename="../src/google/protobuf/io/printer.h" />
+		<Unit filename="../src/google/protobuf/io/tokenizer.cc" />
+		<Unit filename="../src/google/protobuf/io/tokenizer.h" />
+		<Unit filename="../src/google/protobuf/io/zero_copy_stream.cc" />
+		<Unit filename="../src/google/protobuf/io/zero_copy_stream.h" />
+		<Unit filename="../src/google/protobuf/io/zero_copy_stream_impl.cc" />
+		<Unit filename="../src/google/protobuf/io/zero_copy_stream_impl.h" />
+		<Unit filename="../src/google/protobuf/io/zero_copy_stream_impl_lite.cc" />
+		<Unit filename="../src/google/protobuf/io/zero_copy_stream_impl_lite.h" />
+		<Unit filename="../src/google/protobuf/message.cc" />
+		<Unit filename="../src/google/protobuf/message.h" />
+		<Unit filename="../src/google/protobuf/message_lite.cc" />
+		<Unit filename="../src/google/protobuf/message_lite.h" />
+		<Unit filename="../src/google/protobuf/reflection_ops.cc" />
+		<Unit filename="../src/google/protobuf/reflection_ops.h" />
+		<Unit filename="../src/google/protobuf/repeated_field.cc" />
+		<Unit filename="../src/google/protobuf/repeated_field.h" />
+		<Unit filename="../src/google/protobuf/service.cc" />
+		<Unit filename="../src/google/protobuf/service.h" />
+		<Unit filename="../src/google/protobuf/stubs/atomicops.h" />
+		<Unit filename="../src/google/protobuf/stubs/atomicops_internals_x86_msvc.cc" />
+		<Unit filename="../src/google/protobuf/stubs/atomicops_internals_x86_msvc.h" />
+		<Unit filename="../src/google/protobuf/stubs/common.cc" />
+		<Unit filename="../src/google/protobuf/stubs/common.h" />
+		<Unit filename="../src/google/protobuf/stubs/hash.h" />
+		<Unit filename="../src/google/protobuf/stubs/map-util.h" />
+		<Unit filename="../src/google/protobuf/stubs/once.cc" />
+		<Unit filename="../src/google/protobuf/stubs/once.h" />
+		<Unit filename="../src/google/protobuf/stubs/platform_macros.h" />
+		<Unit filename="../src/google/protobuf/stubs/stl_util.h" />
+		<Unit filename="../src/google/protobuf/stubs/stringprintf.cc" />
+		<Unit filename="../src/google/protobuf/stubs/stringprintf.h" />
+		<Unit filename="../src/google/protobuf/stubs/structurally_valid.cc" />
+		<Unit filename="../src/google/protobuf/stubs/strutil.cc" />
+		<Unit filename="../src/google/protobuf/stubs/strutil.h" />
+		<Unit filename="../src/google/protobuf/stubs/substitute.cc" />
+		<Unit filename="../src/google/protobuf/stubs/substitute.h" />
+		<Unit filename="../src/google/protobuf/stubs/template_util.h" />
+		<Unit filename="../src/google/protobuf/stubs/type_traits.h" />
+		<Unit filename="../src/google/protobuf/text_format.cc" />
+		<Unit filename="../src/google/protobuf/text_format.h" />
+		<Unit filename="../src/google/protobuf/unknown_field_set.cc" />
+		<Unit filename="../src/google/protobuf/unknown_field_set.h" />
+		<Unit filename="../src/google/protobuf/wire_format.cc" />
+		<Unit filename="../src/google/protobuf/wire_format.h" />
+		<Unit filename="../src/google/protobuf/wire_format_lite.cc" />
+		<Unit filename="../src/google/protobuf/wire_format_lite.h" />
+		<Unit filename="../src/google/protobuf/wire_format_lite_inl.h" />
+		<Unit filename="config.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
