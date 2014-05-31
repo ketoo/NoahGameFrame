@@ -11,9 +11,10 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
+#include "NFINetModule.h"
 
 class NFIProxyServerNet_ServerModule
-    : public NFILogicModule
+    :  public NFINetModule
 {
 
 public:
