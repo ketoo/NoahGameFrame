@@ -73,7 +73,7 @@ public:
 		return m_pNet->Execute(fLasFrametime, fStartedTime);
 	}
 
-	bool SendMsg(const uint16_t nMsgID, google::protobuf::Message& xData, const uint16_t nSockIndex = 0, const int32_t nPlayer = 0, bool bBroadcast = false)
+	bool SendMsg(const uint32_t nMsgID, google::protobuf::Message& xData, const uint16_t nSockIndex = 0, const int32_t nPlayer = 0, bool bBroadcast = false)
 	{
 		if (!m_pNet)
 		{

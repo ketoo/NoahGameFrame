@@ -59,8 +59,7 @@ private:
 };
 
 //策略是，开始先连到world，然后拿到gameserverlist，再连gameserver，因此这个连接是连到worldserver
-class NFCProxyServerNet_ClientModule
-    : public  NFINetModule, public NFMap<int64_t, NFINetModule>
+class NFCProxyServerNet_ClientModule : public NFIProxyServerNet_ClientModule
 {
 public:
 
