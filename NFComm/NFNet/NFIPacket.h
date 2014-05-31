@@ -19,31 +19,30 @@
 
 const int NF_HEAD_SIZE = 8;
 const int NF_MAX_SERVER_PACKET_SIZE = 65535;
-const int NF_MAX_CLIENT_PACK_SIZE = 65535;
 
 struct  MsgHead
 {
 	MsgHead()
 	{
-		unHeadID = 0;
+		unHead = 0;
 	}
 
 	MsgHead(uint64_t uID)
 	{
-		unHeadID = uID;
+		unHead = uID;
 	}
 
 	union
 	{
 		struct
 		{
-			uint32_t unDataLen;
+			uint32_t unDataLen;//包含包头本身
 			uint32_t unMsgID;
 		};
 
 		struct
 		{
-			uint64_t unHeadID;
+			uint64_t unHead;
 		};
 	};	
 };
@@ -64,8 +63,8 @@ public:
 	virtual void Construction(const NFIPacket& packet) = 0;
 	virtual const MsgHead& GetMsgHead() const = 0;
 	virtual const char* GetPacketData() const = 0;
-	virtual const uint32_t GetPacketLen() const = 0;
-	virtual const uint32_t GetDataLen() const = 0;
+    virtual const uint32_t GetPacketLen() const = 0;
+    virtual const uint32_t GetDataLen() const = 0;
 	virtual const char* GetData() const = 0;
 	virtual const uint16_t GetFd() const = 0;
 	virtual void SetFd(const uint16_t nFd) = 0;
