@@ -10,7 +10,7 @@
 
 NFCHeartBeatManager::~NFCHeartBeatManager()
 {
-    NFCHeartBeatElementEx* pElementEx = mHeartBeatElementMapEx.First();
+    NFCHeartBeatElement* pElementEx = mHeartBeatElementMapEx.First();
     while (pElementEx)
     {
         delete pElementEx;
@@ -18,13 +18,13 @@ NFCHeartBeatManager::~NFCHeartBeatManager()
     }
 }
 
-void NFCHeartBeatElementEx::DoHeartBeatEvent()
+void NFCHeartBeatElement::DoHeartBeatEvent()
 {
     HEART_BEAT_FUNCTOR_PTR cb = HEART_BEAT_FUNCTOR_PTR();
     bool bRet = First(cb);
     while (bRet)
     {
-        cb.get()->operator()(self, var);
+        cb.get()->operator()(self, strBeatName, fTime, nCount, var);
 
         bRet = Next(cb);
     }
@@ -32,7 +32,7 @@ void NFCHeartBeatElementEx::DoHeartBeatEvent()
 //////////////////////////////////////////////////////////////////////////
 bool NFCHeartBeatManager::Execute(const float fLastTime, const float fAllTime)
 {
-    NFCHeartBeatElementEx* pElement = mHeartBeatElementMapEx.First();
+    NFCHeartBeatElement* pElement = mHeartBeatElementMapEx.First();
     while (pElement)
     {
         int nCount = pElement->nCount;
@@ -77,7 +77,7 @@ bool NFCHeartBeatManager::Execute(const float fLastTime, const float fAllTime)
     bool bRet = mRemoveListEx.First(strHeartBeatName);
     while (bRet)
     {
-        NFCHeartBeatElementEx* pElement = mHeartBeatElementMapEx.RemoveElement(strHeartBeatName);
+        NFCHeartBeatElement* pElement = mHeartBeatElementMapEx.RemoveElement(strHeartBeatName);
         if (pElement)
         {
             HEART_BEAT_FUNCTOR_PTR heartFunctorPtr;
@@ -97,7 +97,7 @@ bool NFCHeartBeatManager::Execute(const float fLastTime, const float fAllTime)
     mRemoveListEx.ClearAll();
     //////////////////////////////////////////////////////////////////////////
     //添加新心跳也是延时添加的
-    NFCHeartBeatElementEx* pHeartBeatEx = NULL;
+    NFCHeartBeatElement* pHeartBeatEx = NULL;
     bool bAddRetEx = mAddListEx.First(pHeartBeatEx);
     while (bAddRetEx && pHeartBeatEx)
     {
@@ -132,7 +132,7 @@ NFIDENTID NFCHeartBeatManager::Self()
 //////////////////////////////////////////////////////////////////////////
 bool NFCHeartBeatManager::AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIValueList& var, const float fTime, const int nCount)
 {
-    NFCHeartBeatElementEx* pHeartBeat = new NFCHeartBeatElementEx();
+    NFCHeartBeatElement* pHeartBeat = new NFCHeartBeatElement();
     pHeartBeat->fTime = fTime;
     pHeartBeat->fBeatTime = fTime;
     pHeartBeat->nCount = nCount;
