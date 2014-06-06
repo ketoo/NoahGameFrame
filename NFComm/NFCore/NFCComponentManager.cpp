@@ -13,7 +13,7 @@ NFIDENTID NFCComponentManager::Self()
     return mSelf;
 }
 
-NFIComponent* NFCComponentManager::AddComponent( const std::string& strComponentName)
+NFIComponent* NFCComponentManager::AddComponent( const std::string& strComponentName, const std::string& strLanguageName)
 {
     NFIComponent* pComponent = GetElement(strComponentName);
     if (pComponent)
@@ -21,7 +21,7 @@ NFIComponent* NFCComponentManager::AddComponent( const std::string& strComponent
         return NULL;
     }
 
-    pComponent = new NFCComponent(mSelf, strComponentName, m_pPluginManager);
+    pComponent = new NFCComponent(mSelf, strComponentName, strLanguageName);
     AddElement(strComponentName, pComponent);
 
     return pComponent;
@@ -43,7 +43,7 @@ bool NFCComponentManager::SetEnable( const std::string& strComponentName, const 
     return false;
 }
 
-bool NFCComponentManager::Enable( const std::string& strComponentName )
+bool NFCComponentManager::QueryEnable( const std::string& strComponentName )
 {
     NFIComponent* pComponent = GetElement(strComponentName);
     if (pComponent)
@@ -123,12 +123,9 @@ bool NFCComponentManager::Shut()
 bool NFCComponentManager::Execute( const float fLasFrametime, const float fStartedTime )
 {
     NFIComponent* pComponent = First();
-    while (pComponent)
+    while (pComponent && pComponent->Enable())
     {
-        if (pComponent->Enable())
-        {
-            pComponent->Execute(fLasFrametime, fStartedTime);
-        }
+        pComponent->Execute(fLasFrametime, fStartedTime);
 
         pComponent = Next();
     }

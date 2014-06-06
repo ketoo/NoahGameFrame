@@ -16,10 +16,9 @@
 class NFCComponentManager : public NFIComponentManager
 {
 public:
-    NFCComponentManager(const NFIDENTID& self, NFIPluginManager* pLuginManager)
+    NFCComponentManager(const NFIDENTID& self)
     {
         mSelf = self;
-        m_pPluginManager = pLuginManager;
     }
     
     virtual ~NFCComponentManager()
@@ -37,12 +36,12 @@ public:
 
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
 
-    virtual NFIComponent* AddComponent(const std::string& strComponentName);
+    virtual NFIComponent* AddComponent(const std::string& strComponentName, const std::string& strLanguageName);
     virtual NFIComponent* FindComponent(const std::string& strComponentName);
 
     virtual bool SetEnable(const std::string& strComponentName, const bool bEnable);
 
-    virtual bool Enable(const std::string& strComponentName);
+    virtual bool QueryEnable(const std::string& strComponentName);
 
     virtual NFIDENTID Self();
 
@@ -51,7 +50,6 @@ protected:
 
 private:
     NFIDENTID mSelf;
-    NFIPluginManager* m_pPluginManager;
 };
 
 #endif

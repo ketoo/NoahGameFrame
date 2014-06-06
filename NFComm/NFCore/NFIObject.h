@@ -30,16 +30,12 @@ public:
     virtual NFIDENTID Self() = 0;
 
     template<typename BaseType>
-    bool AddHeartBeat(const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const NFIValueList&), const NFIValueList& var, const float fTime, const int nCount)
+    bool AddPropertyCallBack(const std::string& strPropertyName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const NFIValueList&, const NFIValueList&, const NFIValueList&))
     {
-        HEART_BEAT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2);
-        HEART_BEAT_FUNCTOR_PTR functorPtr(new HEART_BEAT_FUNCTOR(functor));
-        return AddHeartBeat(strHeartBeatName, functorPtr, var, fTime, nCount);
+        PROPERTY_EVENT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4, _5);
+        PROPERTY_EVENT_FUNCTOR_PTR functorPtr(new PROPERTY_EVENT_FUNCTOR(functor));
+        return AddPropertyCallBack(strPropertyName, functorPtr);
     }
-
-    virtual bool FindHeartBeat(const std::string& strHeartBeatName) = 0;
-
-    virtual bool RemoveHeartBeat(const std::string& strHeartBeatName) = 0;
 
     template<typename BaseType>
     bool AddRecordCallBack(const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const int, const int, const int, const NFIValueList&, const NFIValueList&, const NFIValueList&))
@@ -50,13 +46,23 @@ public:
     }
 
     template<typename BaseType>
-    bool AddPropertyCallBack(const std::string& strPropertyName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const NFIValueList&, const NFIValueList&, const NFIValueList&))
+    bool AddHeartBeat(const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const float, const int, const NFIValueList&), const NFIValueList& var, const float fTime, const int nCount)
     {
-        PROPERTY_EVENT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4, _5);
-        PROPERTY_EVENT_FUNCTOR_PTR functorPtr(new PROPERTY_EVENT_FUNCTOR(functor));
-        return AddPropertyCallBack(strPropertyName, functorPtr);
+        HEART_BEAT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4, _5);
+        HEART_BEAT_FUNCTOR_PTR functorPtr(new HEART_BEAT_FUNCTOR(functor));
+        return AddHeartBeat(strHeartBeatName, functorPtr, var, fTime, nCount);
     }
 
+    virtual bool AddRecordCallBack(const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
+
+    virtual bool AddPropertyCallBack(const std::string& strPropertyName, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
+
+    virtual bool AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIValueList& var, const float fTime, const int nCount) = 0;
+
+    virtual bool FindHeartBeat(const std::string& strHeartBeatName) = 0;
+
+    virtual bool RemoveHeartBeat(const std::string& strHeartBeatName) = 0;
+    
     /////////////////////////////////////////////////////////////////
 
     virtual bool FindProperty(const std::string& strPropertyName) = 0;
@@ -99,7 +105,7 @@ public:
     virtual const std::string& QueryRecordString(NFIRecord* pRecord, const std::string& strPropertyName, const int nRow, const int nCol) = 0;
     virtual NFIDENTID QueryRecordObject(NFIRecord* pRecord, const std::string& strPropertyName, const int nRow, const int nCol) = 0;
 
-    virtual NFIComponent* AddComponent(const std::string& strComponentName) = 0;
+    virtual NFIComponent* AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
     virtual NFIComponent* FindComponent(const std::string& strComponentName) = 0;
 
     virtual NFIRecordManager* GetRecordManager() = 0;
@@ -107,12 +113,7 @@ public:
     virtual NFIPropertyManager* GetPropertyManager() = 0;
     virtual NFIComponentManager* GetComponentManager() = 0;
     
-protected:
-    virtual bool AddRecordCallBack(const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
 
-    virtual bool AddPropertyCallBack(const std::string& strPropertyName, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
-    
-    virtual bool AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIValueList& var, const float fTime, const int nCount) = 0;
 
 private:
 };
