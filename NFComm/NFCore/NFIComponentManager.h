@@ -16,12 +16,12 @@
 class NFIComponentManager : public NFILogicModule, public NFMap<std::string, NFIComponent>
 {
 public:
-    virtual NFIComponent* AddComponent(const std::string& strComponentName) = 0;
+    virtual NFIComponent* AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
     virtual NFIComponent* FindComponent(const std::string& strComponentName) = 0;
 
     virtual bool SetEnable(const std::string& strComponentName, const bool bEnable) = 0;
 
-    virtual bool Enable(const std::string& strComponentName) = 0;
+    virtual bool QueryEnable(const std::string& strComponentName) = 0;
 
     virtual NFIDENTID Self() = 0;
 

@@ -156,6 +156,28 @@ void NFCKernelModule::OnReload(const char* strModuleName, NFILogicModule* pModul
 {
 }
 
+bool NFCKernelModule::SetComponentEnable( const NFIDENTID& self, const std::string& strComponentName, const bool bEnable )
+{
+    NFIObject* pObject = GetElement(self);
+    if (pObject)
+    {
+        return pObject->GetComponentManager()->SetEnable(strComponentName, bEnable);
+    }
+
+    return false;
+}
+
+bool NFCKernelModule::QueryComponentEnable( const NFIDENTID& self, const std::string& strComponentName )
+{
+    NFIObject* pObject = GetElement(self);
+    if (pObject)
+    {
+        return pObject->GetComponentManager()->QueryEnable(strComponentName);
+    }
+
+    return false;
+}
+
 bool NFCKernelModule::FindHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName)
 {
     NFIObject* pObject = GetElement(self);
@@ -223,19 +245,17 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
 
     NFIPropertyManager* pStaticClassPropertyManager = m_pLogicClassModule->GetClassPropertyManager(strClassName);
     NFIRecordManager* pStaticClassRecordManager = m_pLogicClassModule->GetClassRecordManager(strClassName);
-    if (pStaticClassPropertyManager && pStaticClassRecordManager)
+    NFIComponentManager* pStaticClasComponentManager = m_pLogicClassModule->GetClassComponentManager(strClassName);
+    if (pStaticClassPropertyManager && pStaticClassRecordManager && pStaticClasComponentManager)
     {
 
         pObject = new NFCObject(ident, pPluginManager);
         //是否是应该晚点等到事件2时才加入容器，这样能保证进入容器的对象都是有完整数据的，否则因为协程的原因，其他对象找到他时他却没数据或者部分数据
         AddElement(ident, pObject);
 
-        //通用对象事件，方便NET同步
-        //m_pEventProcessModule->AddClassCallBack(strClassName, OnClassCommonEvent);
-        //m_pEventProcessModule->AddClassCallBack(strClassName, this, &NFCKernelModule::OnClassCommonEvent);
-
         NFIPropertyManager* pPropertyManager = pObject->GetPropertyManager();
         NFIRecordManager* pRecordManager = pObject->GetRecordManager();
+        NFIComponentManager* pComponentManager = pObject->GetComponentManager();
 
         //默认属性
         NFIProperty* pStaticConfigPropertyInfo = pStaticClassPropertyManager->First();
@@ -251,8 +271,9 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
                 pStaticConfigPropertyInfo->GetScriptFunction());
 
             //通用回调，方便NET同步
-            //pObject->AddPropertyCallBack(pStaticConfigPropertyInfo->GetKey(), OnPropertyCommonEvent);
-            pObject->AddPropertyCallBack(pStaticConfigPropertyInfo->GetKey(), this, &NFCKernelModule::OnPropertyCommonEvent);
+            PROPERTY_EVENT_FUNCTOR functor = boost::bind(&NFCKernelModule::OnPropertyCommonEvent, this, _1, _2, _3, _4, _5);
+            PROPERTY_EVENT_FUNCTOR_PTR functorPtr(new PROPERTY_EVENT_FUNCTOR(functor));
+            pObject->AddPropertyCallBack(pStaticConfigPropertyInfo->GetKey(), functorPtr);
 
             pStaticConfigPropertyInfo = pStaticClassPropertyManager->Next();
         }
@@ -272,12 +293,20 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
                 pConfigRecordInfo->GetIndex());
 
             //通用回调，方便NET同步
-            //pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), OnRecordCommonEvent);
-            pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), this, &NFCKernelModule::OnRecordCommonEvent);
+            RECORD_EVENT_FUNCTOR functor = boost::bind(&NFCKernelModule::OnRecordCommonEvent, this, _1, _2, _3, _4, _5, _6, _7, _8);
+            RECORD_EVENT_FUNCTOR_PTR functorPtr(new RECORD_EVENT_FUNCTOR(functor));
+            pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), functorPtr);
 
             pConfigRecordInfo = pStaticClassRecordManager->Next();
         }
 
+        NFIComponent* pConfigComponentInfo = pStaticClasComponentManager->First();
+        while (pConfigComponentInfo)
+        {
+            pComponentManager->AddComponent(pConfigComponentInfo->ComponentName(), pConfigComponentInfo->LanguageName());
+
+            pConfigComponentInfo = pStaticClasComponentManager->Next();
+        }
         //////////////////////////////////////////////////////////////////////////
         //配置属性
         NFIPropertyManager* pConfigPropertyManager = m_pElementInfoModule->GetPropertyManager(strConfigIndex);
@@ -373,6 +402,8 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
 
         m_pEventProcessModule->DoEvent(ident, strClassName, CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA, arg);
 
+        m_pEventProcessModule->DoEvent(ident, strClassName, CLASS_OBJECT_EVENT::COE_CREATE_AFTER_EFFECT, arg);
+        
         //int64_t nTimeDis3 = GetTickCount64() - nTimeBegin3;
         //std::ostringstream str3;
         //str3 << "COE_CREATE_EFFECTDATA : ";
@@ -1271,8 +1302,8 @@ int NFCKernelModule::OnPropertyCommonEvent(const NFIDENTID& self, const std::str
         return 0;
     }
 
-    std::list<PROPERTY_EVENT_FUNCTOR_PTR>::iterator it = mtCommonPropertyCallBackListEx.begin();
-    for (it; it != mtCommonPropertyCallBackListEx.end(); it++)
+    std::list<PROPERTY_EVENT_FUNCTOR_PTR>::iterator it = mtCommonPropertyCallBackList.begin();
+    for (it; it != mtCommonPropertyCallBackList.end(); it++)
     {
         PROPERTY_EVENT_FUNCTOR_PTR pFunPtr = *it;
         PROPERTY_EVENT_FUNCTOR* pFun = pFunPtr.get();
@@ -1413,8 +1444,8 @@ int NFCKernelModule::OnRecordCommonEvent(const NFIDENTID& self, const std::strin
         return 0;
     }
 
-    std::list<RECORD_EVENT_FUNCTOR_PTR>::iterator it = mtCommonRecordCallBackListEx.begin();
-    for (it; it != mtCommonRecordCallBackListEx.end(); it++)
+    std::list<RECORD_EVENT_FUNCTOR_PTR>::iterator it = mtCommonRecordCallBackList.begin();
+    for (it; it != mtCommonRecordCallBackList.end(); it++)
     {
         RECORD_EVENT_FUNCTOR_PTR pFunPtr = *it;
         RECORD_EVENT_FUNCTOR* pFun = pFunPtr.get();
@@ -1431,8 +1462,8 @@ int NFCKernelModule::OnClassCommonEvent(const NFIDENTID& self, const std::string
         return 0;
     }
 
-    std::list<CLASS_EVENT_FUNCTOR_PTR>::iterator it = mtCommonClassCallBackListEx.begin();
-    for (it; it != mtCommonClassCallBackListEx.end(); it++)
+    std::list<CLASS_EVENT_FUNCTOR_PTR>::iterator it = mtCommonClassCallBackList.begin();
+    for (it; it != mtCommonClassCallBackList.end(); it++)
     {
         CLASS_EVENT_FUNCTOR_PTR pFunPtr = *it;
         CLASS_EVENT_FUNCTOR* pFun = pFunPtr.get();
@@ -1462,19 +1493,19 @@ int NFCKernelModule::OnClassCommonEvent(const NFIDENTID& self, const std::string
 
 bool NFCKernelModule::ResgisterCommonClassEvent(const CLASS_EVENT_FUNCTOR_PTR& cb)
 {
-    mtCommonClassCallBackListEx.push_back(cb);
+    mtCommonClassCallBackList.push_back(cb);
     return true;
 }
 
 bool NFCKernelModule::ResgisterCommonPropertyEvent(const PROPERTY_EVENT_FUNCTOR_PTR& cb)
 {
-    mtCommonPropertyCallBackListEx.push_back(cb);
+    mtCommonPropertyCallBackList.push_back(cb);
     return true;
 }
 
 bool NFCKernelModule::ResgisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& cb)
 {
-    mtCommonRecordCallBackListEx.push_back(cb);
+    mtCommonRecordCallBackList.push_back(cb);
     return true;
 }
 
@@ -1484,7 +1515,7 @@ bool NFCKernelModule::LogSelfInfo(const NFIDENTID ident)
     return false;
 }
 
-void NFCKernelModule::AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic , bool bPrivate , bool bSave, int nIndex, const std::string& strScriptFunction)
+bool NFCKernelModule::AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic , bool bPrivate , bool bSave, int nIndex, const std::string& strScriptFunction)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
@@ -1492,12 +1523,15 @@ void NFCKernelModule::AddProperty(const NFIDENTID& self, const std::string& strP
         pObject->GetPropertyManager()->AddProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, nIndex, strScriptFunction);
 
         //通用回调，方便NET同步
-        //pObject->AddPropertyCallBack(strPropertyName, OnPropertyCommonEvent);
-        pObject->AddPropertyCallBack(strPropertyName, this, &NFCKernelModule::OnPropertyCommonEvent);
+        PROPERTY_EVENT_FUNCTOR functor = boost::bind(&NFCKernelModule::OnPropertyCommonEvent, this, _1, _2, _3, _4, _5);
+        PROPERTY_EVENT_FUNCTOR_PTR functorPtr(new PROPERTY_EVENT_FUNCTOR(functor));
+        return pObject->AddPropertyCallBack(strPropertyName, functorPtr);
     }
+
+    return false;
 }
 
-void NFCKernelModule::AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& varData, const NFIValueList& varKey, const NFIValueList& varDesc, const int nRows, bool bPublic, bool bPrivate, bool bSave, int nIndex)
+bool NFCKernelModule::AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& varData, const NFIValueList& varKey, const NFIValueList& varDesc, const int nRows, bool bPublic, bool bPrivate, bool bSave, int nIndex)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
@@ -1505,9 +1539,12 @@ void NFCKernelModule::AddRecord(const NFIDENTID& self, const std::string& strRec
         pObject->GetRecordManager()->AddRecord(self, strRecordName, varData, varKey, varDesc, nRows, bPublic, bPrivate, bSave, nIndex);
 
         //通用回调，方便NET同步
-        //pObject->AddRecordCallBack(strRecordName, OnRecordCommonEvent);
-        pObject->AddRecordCallBack(strRecordName, this, &NFCKernelModule::OnRecordCommonEvent);
+        RECORD_EVENT_FUNCTOR functor = boost::bind(&NFCKernelModule::OnRecordCommonEvent, this, _1, _2, _3, _4, _5, _6, _7, _8);
+        RECORD_EVENT_FUNCTOR_PTR functorPtr(new RECORD_EVENT_FUNCTOR(functor));
+        return pObject->AddRecordCallBack(strRecordName, functorPtr);
     }
+
+    return false;
 }
 
 void NFCKernelModule::SetIdentSerialID(int nSerialID)
@@ -1615,4 +1652,90 @@ bool NFCKernelModule::AddEventCallBack( const NFIDENTID& self, const int nEventI
 bool NFCKernelModule::AddClassCallBack( const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb )
 {
     return m_pEventProcessModule->AddClassCallBack(strClassName, cb);
+}
+
+bool NFCKernelModule::ResgisterCommonHeartBeat( const HEART_BEAT_FUNCTOR_PTR& cb )
+{
+    mtCommonHeartBeatCallBackList.push_back(cb);
+    
+    return true;
+}
+
+bool NFCKernelModule::ResgisterCommonEvent( const EVENT_PROCESS_FUNCTOR_PTR& cb )
+{
+    mtCommonEventCallBackList.push_back(cb);
+
+    return true;
+}
+
+int NFCKernelModule::OnHeartBeatCommonCB( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
+{
+    if (IsContainer(self))
+    {
+        return 0;
+    }
+
+    std::list<HEART_BEAT_FUNCTOR_PTR>::iterator it = mtCommonHeartBeatCallBackList.begin();
+    for (it; it != mtCommonHeartBeatCallBackList.end(); it++)
+    {
+        HEART_BEAT_FUNCTOR_PTR pFunPtr = *it;
+        HEART_BEAT_FUNCTOR* pFun = pFunPtr.get();
+        pFun->operator()(self, strHeartBeat, fTime, nCount, var);
+    }
+
+    return 0;
+}
+
+int NFCKernelModule::OnEventCommonCB( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
+{
+    if (IsContainer(self))
+    {
+        return 0;
+    }
+
+    std::list<EVENT_PROCESS_FUNCTOR_PTR>::iterator it = mtCommonEventCallBackList.begin();
+    for (it; it != mtCommonEventCallBackList.end(); it++)
+    {
+        EVENT_PROCESS_FUNCTOR_PTR pFunPtr = *it;
+        EVENT_PROCESS_FUNCTOR* pFun = pFunPtr.get();
+        pFun->operator()(self, nEventID, var);
+    }
+
+    return 0;
+}
+
+bool NFCKernelModule::AddRecordCallBack( const NFIDENTID& self, const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb )
+{
+    NFIObject* pObject = GetObject(self);
+    if (pObject)
+    {
+        return pObject->AddRecordCallBack(strRecordName, cb);
+    }
+
+    return false;
+}
+
+bool NFCKernelModule::AddPropertyCallBack( const NFIDENTID& self, const std::string& strPropertyName, const PROPERTY_EVENT_FUNCTOR_PTR& cb )
+{
+    NFIObject* pObject = GetObject(self);
+    if (pObject)
+    {
+        return pObject->AddPropertyCallBack(strPropertyName, cb);
+    }
+
+    return false;
+}
+
+bool NFCKernelModule::AddHeartBeat( const NFIDENTID& self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIValueList& var, const float fTime, const int nCount )
+{
+    NFIObject* pObject = GetObject(self);
+    if(pObject)
+    {
+        //共有回调添加后，删除时也要删除
+        //ResgisterCommonHeartBeat(cb);
+
+        pObject->AddHeartBeat(strHeartBeatName, cb, var, fTime, nCount);
+    }
+
+    return false;
 }

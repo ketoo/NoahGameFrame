@@ -15,11 +15,11 @@
 #include "NFDefine.h"
 #include "NFCValueList.h"
 
-class  NFCHeartBeatElementEx
+class  NFCHeartBeatElement
     : public NFList<HEART_BEAT_FUNCTOR_PTR>
 {
 public:
-    bool operator==(const NFCHeartBeatElementEx& src)
+    bool operator==(const NFCHeartBeatElement& src)
     {
         if (strBeatName == src.strBeatName)
         {
@@ -29,7 +29,7 @@ public:
         return false;
     }
 
-    NFCHeartBeatElementEx()
+    NFCHeartBeatElement()
     {
         fBeatTime = 0.0f;
         fTime = 0.0f;
@@ -38,7 +38,7 @@ public:
         self = 0;
     };
 
-    ~NFCHeartBeatElementEx() {};
+    ~NFCHeartBeatElement() {};
     void DoHeartBeatEvent();
 
     float fBeatTime;
