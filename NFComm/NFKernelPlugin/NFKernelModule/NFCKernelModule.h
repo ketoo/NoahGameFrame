@@ -75,6 +75,8 @@ public:
     virtual bool DestroySelf(const NFIDENTID& self);
 
     //////////////////////////////////////////////////////////////////////////
+    virtual bool SetComponentEnable(const NFIDENTID& self, const std::string& strComponentName, const bool bEnable);
+    virtual bool QueryComponentEnable(const NFIDENTID& self, const std::string& strComponentName);
 
     virtual bool FindProperty(const NFIDENTID& self, const std::string& strPropertyName);
 
@@ -106,8 +108,8 @@ public:
 
     virtual bool SwitchScene(const NFIDENTID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIValueList& arg);
 
-    virtual void AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction);
-    virtual void AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& varData, const NFIValueList& varKey, const NFIValueList& varDesc, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex);
+    virtual bool AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction);
+    virtual bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& varData, const NFIValueList& varKey, const NFIValueList& varDesc, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex);
     ////////////////////////////////////////////////////////////////
 
     virtual NFIDENTID CreateContainer(const int nContainerIndex, const std::string& strSceneConfigID);
@@ -156,18 +158,29 @@ public:
 
 protected:
 
-    //只能网络模块注册，回调用来同步对象类事件,所有的类对象都会回调
+    //只能网络[脚本]模块注册，回调用来同步对象类事件,所有的类对象都会回调
     virtual bool ResgisterCommonClassEvent(const CLASS_EVENT_FUNCTOR_PTR& cb);
 
-    //只能网络模块注册，回调用来同步对象属性事件,所有的类属性都会回调
+    //只能网络[脚本]模块注册，回调用来同步对象属性事件,所有的类属性都会回调
     virtual bool ResgisterCommonPropertyEvent(const PROPERTY_EVENT_FUNCTOR_PTR& cb);
 
-    //只能网络模块注册，回调用来同步对象类表事件,所有的类表都会回调
+    //只能网络[脚本]模块注册，回调用来同步对象类表事件,所有的类表都会回调
     virtual bool ResgisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& cb);
    
-    //////////////////////////////////////////////////////////////////////////
+    //只能网络[脚本]模块注册，回调心跳,所有的心跳都会回调
+    virtual bool ResgisterCommonHeartBeat(const HEART_BEAT_FUNCTOR_PTR& cb);
+
+    //只能网络[脚本]模块注册，回调事件,所有的事件都会回调
+    virtual bool ResgisterCommonEvent(const EVENT_PROCESS_FUNCTOR_PTR& cb);
+
+protected:
+
     virtual bool AddEventCallBack(const NFIDENTID& self, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb);
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb);
+
+    virtual bool AddRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb);
+    virtual bool AddPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const PROPERTY_EVENT_FUNCTOR_PTR& cb);
+    virtual bool AddHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIValueList& var, const float fTime, const int nCount);
 
 protected:
     void InitRandom();
@@ -177,18 +190,25 @@ protected:
     int OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var);
     int OnPropertyCommonEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar);
     int OnRecordCommonEvent(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& arg);
+
+    int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var);
+    int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIValueList& var);
+
 protected:
 
     std::list<NFIDENTID> mtDeleteSelfList;
 
     //////////////////////////////////////////////////////////////////////////
     //通用对象类事件回调,以便同步
-    std::list<CLASS_EVENT_FUNCTOR_PTR> mtCommonClassCallBackListEx;
+    std::list<CLASS_EVENT_FUNCTOR_PTR> mtCommonClassCallBackList;
     //通用属性变动回调,以便同步
-    std::list<PROPERTY_EVENT_FUNCTOR_PTR> mtCommonPropertyCallBackListEx;
+    std::list<PROPERTY_EVENT_FUNCTOR_PTR> mtCommonPropertyCallBackList;
     //通用表变动回调,以便同步
-    std::list<RECORD_EVENT_FUNCTOR_PTR> mtCommonRecordCallBackListEx;
-
+    std::list<RECORD_EVENT_FUNCTOR_PTR> mtCommonRecordCallBackList;
+    //通用心跳回调
+    std::list<HEART_BEAT_FUNCTOR_PTR> mtCommonHeartBeatCallBackList;
+    //通用事件回调
+    std::list<EVENT_PROCESS_FUNCTOR_PTR> mtCommonEventCallBackList;
 private:
 	//属性的KEY，比如HP=1，会以这个建立KEY，那么可以快速查询所有HP=1的对象而不用遍历
     //     std::map<std::string,std::map<VarData, NFList<NFIDENTID>>>

@@ -20,7 +20,7 @@ NFCObject::NFCObject(const NFIDENTID& self, NFIPluginManager* pLuginManager)
     m_pRecordManager = new NFCRecordManager(mSelf);
     m_pHeartBeatManager = new NFCHeartBeatManager(mSelf);
     m_pPropertyManager = new NFCPropertyManager(mSelf);
-    m_pComponentManager = new NFCComponentManager(mSelf, m_pPluginManager);
+    m_pComponentManager = new NFCComponentManager(mSelf);
 }
 
 NFCObject::~NFCObject()
@@ -475,9 +475,9 @@ NFIComponentManager* NFCObject::GetComponentManager()
     return m_pComponentManager;
 }
 
-NFIComponent* NFCObject::AddComponent( const std::string& strComponentName )
+NFIComponent* NFCObject::AddComponent( const std::string& strComponentName, const std::string& strLanguageName )
 {
-    return m_pComponentManager->AddComponent(strComponentName);
+    return m_pComponentManager->AddComponent(strComponentName, strLanguageName);
 }
 
 NFIComponent* NFCObject::FindComponent( const std::string& strComponentName )

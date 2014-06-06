@@ -38,7 +38,7 @@ public:
     {
         m_pPropertyManager = new NFCPropertyManager(NFIDENTID(0));
         m_pRecordManager = new NFCRecordManager(NFIDENTID(0));
-        m_pComponentManager = new NFCComponentManager(NFIDENTID(0), NULL);
+        m_pComponentManager = new NFCComponentManager(NFIDENTID(0));
     }
 
     virtual ~ElementConfigInfo()
