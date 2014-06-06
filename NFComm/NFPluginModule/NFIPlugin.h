@@ -90,7 +90,11 @@ public:
             fLastTotal = fLastFrametime;
         }
 #else
-        fLastTotal = fLastFrametime;
+        if (fLastTotal < 0.1f)
+        {
+            fLastTotal += fLastFrametime;
+            return false;
+        }
 #endif
 
         NFILogicModule* pModule = First();
