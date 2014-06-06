@@ -22,15 +22,11 @@ class NFIKernelModule
 public:
 
     template<typename BaseType>
-    bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const NFIValueList&), const NFIValueList& var, const float fTime, const int nCount)
+    bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const float, const int, const NFIValueList&), const NFIValueList& var, const float fTime, const int nCount)
     {
-        NFIObject* pObject = GetObject(self);
-        if(pObject)
-        {
-            pObject->AddHeartBeat(strHeartBeatName, pBase, handler, var, fTime, nCount);
-        }
-
-        return false;
+        HEART_BEAT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4, _5);
+        HEART_BEAT_FUNCTOR_PTR functorPtr(new HEART_BEAT_FUNCTOR(functor));
+        return AddHeartBeat(self, strHeartBeatName, functorPtr, var, fTime, nCount);
     }
 
     virtual bool FindHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName) = 0;
@@ -40,25 +36,17 @@ public:
     template<typename BaseType>
     bool AddRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const int, const int, const int, const NFIValueList&, const NFIValueList&, const NFIValueList&))
     {
-        NFIObject* pObject = GetObject(self);
-        if (pObject)
-        {
-            return pObject->AddRecordCallBack(strRecordName, pBase, handler);
-        }
-
-        return false;
+        RECORD_EVENT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4, _5, _6, _7, _8);
+        RECORD_EVENT_FUNCTOR_PTR functorPtr(new RECORD_EVENT_FUNCTOR(functor));
+        return AddRecordCallBack(self, strRecordName, functorPtr);
     }
 
     template<typename BaseType>
     bool AddPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const NFIValueList&, const NFIValueList&, const NFIValueList&))
     {
-        NFIObject* pObject = GetObject(self);
-        if (pObject)
-        {
-             return pObject->AddPropertyCallBack(strPropertyName, pBase, handler);
-        }
-
-        return false;
+        PROPERTY_EVENT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4, _5);
+        PROPERTY_EVENT_FUNCTOR_PTR functorPtr(new PROPERTY_EVENT_FUNCTOR(functor));
+        return AddPropertyCallBack(self, strPropertyName, functorPtr);
     }
 
     ////////////////event//////////////////////////////////////////////////////////
@@ -105,6 +93,21 @@ public:
         return ResgisterCommonRecordEvent(functorPtr);
     }
 
+    template<typename BaseType>
+    bool ResgisterCommonHeartBeatEvent(BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const float, const int, const NFIValueList&))
+    {
+        HEART_BEAT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4, _5);
+        HEART_BEAT_FUNCTOR_PTR functorPtr(new HEART_BEAT_FUNCTOR(functor));
+        return ResgisterCommonHeartBeat(functorPtr);
+    }
+
+    template<typename BaseType>
+    bool ResgisterCommonEvent(BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const int, const NFIValueList&))
+    {
+        EVENT_PROCESS_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3);
+        EVENT_PROCESS_FUNCTOR_PTR functorPtr(new EVENT_PROCESS_FUNCTOR(functor));
+        return ResgisterCommonEvent(functorPtr);
+    }
    
     /////////////////////////////////////////////////////////////////
 
@@ -129,6 +132,9 @@ public:
     virtual bool DestroyObject(const NFIDENTID& self) = 0;
 
     virtual bool DestroyAll() = 0;
+
+    virtual bool SetComponentEnable(const NFIDENTID& self, const std::string& strComponentName, const bool bEnable) = 0;
+    virtual bool QueryComponentEnable(const NFIDENTID& self, const std::string& strComponentName) = 0;
 
     virtual bool FindProperty(const NFIDENTID& self, const std::string& strPropertyName) = 0;
 
@@ -160,8 +166,8 @@ public:
 
     virtual bool SwitchScene(const NFIDENTID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIValueList& arg) = 0;
 
-    virtual void AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction) = 0;
-    virtual void AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& varData, const NFIValueList& varKey, const NFIValueList& varDesc, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex) = 0;
+    virtual bool AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction) = 0;
+    virtual bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& varData, const NFIValueList& varKey, const NFIValueList& varDesc, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex) = 0;
     ////////////////////////////////////////////////////////////////
 
     virtual NFIDENTID CreateContainer(const int nSceneIndex, const std::string& strSceneConfigID) = 0;
@@ -200,6 +206,13 @@ public:
     virtual bool LogInfo(const NFIDENTID ident) = 0;
 
 protected:
+    virtual bool AddEventCallBack(const NFIDENTID& self, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb) = 0;
+    virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb) = 0;
+
+    virtual bool AddRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
+    virtual bool AddPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
+    virtual bool AddHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIValueList& var, const float fTime, const int nCount) = 0;
+protected:
 
     //只能网络模块注册，回调用来同步对象类事件,所有的类对象都会回调
     virtual bool ResgisterCommonClassEvent(const CLASS_EVENT_FUNCTOR_PTR& cb) = 0;
@@ -210,11 +223,11 @@ protected:
     //只能网络模块注册，回调用来同步对象类表事件,所有的类表都会回调
     virtual bool ResgisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
 
-//     virtual bool AddRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
-// 
-//     virtual bool AddPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
+    //只能网络[脚本]模块注册，回调心跳,所有的心跳都会回调
+    virtual bool ResgisterCommonHeartBeat(const HEART_BEAT_FUNCTOR_PTR& cb) = 0;
 
-    //virtual bool AddHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIValueList& var, const float fTime, const int nCount) = 0;
+    //只能网络[脚本]模块注册，回调事件,所有的事件都会回调
+    virtual bool ResgisterCommonEvent(const EVENT_PROCESS_FUNCTOR_PTR& cb) = 0;
 
 };
 
