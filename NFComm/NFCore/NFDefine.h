@@ -26,6 +26,7 @@ enum CLASS_OBJECT_EVENT
     COE_CREATE_LOADDATA,
     COE_CREATE_BEFORE_EFFECT,
     COE_CREATE_EFFECTDATA,
+    COE_CREATE_AFTER_EFFECT,
     COE_CREATE_HASDATA,
     COE_CREATE_FINISH,  // ToModify任务创建完成后再挂回调
 };
@@ -48,7 +49,7 @@ enum CLASS_OBJECT_EVENT
 //typedef int(* EVENT_PROCESS_FUNC)(const NFIDENTID& self, const int nEventID, const NFIValueList& var);
 
 // functor
-typedef boost::function<int(const NFIDENTID&, const NFIValueList&)> HEART_BEAT_FUNCTOR;
+typedef boost::function<int(const NFIDENTID&, const std::string&, const float, const int, const NFIValueList&)> HEART_BEAT_FUNCTOR;
 typedef boost::function<int(const NFIDENTID&, const std::string&, const NFIValueList&, const NFIValueList&, const NFIValueList&)> PROPERTY_EVENT_FUNCTOR;
 typedef boost::function<int(const NFIDENTID&, const std::string&, const int, const int, const int, const NFIValueList&, const NFIValueList&, const NFIValueList&)> RECORD_EVENT_FUNCTOR;
 typedef boost::function<int(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIValueList&)> CLASS_EVENT_FUNCTOR;

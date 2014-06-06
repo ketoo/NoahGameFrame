@@ -90,38 +90,41 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* propertyRootNode, N
 {
     for (rapidxml::xml_node<>* propertyNode = propertyRootNode->first_node(); propertyNode; propertyNode = propertyNode->next_sibling())
     {
-        const char* strPropertyName = propertyNode->first_attribute("Id")->value();
-        if (pClass->GetPropertyManager()->GetElement(strPropertyName))
+        if (propertyNode)
         {
-            //error
-            NFASSERT(0, strPropertyName, __FILE__, __FUNCTION__);
-            continue;
+            const char* strPropertyName = propertyNode->first_attribute("Id")->value();
+            if (pClass->GetPropertyManager()->GetElement(strPropertyName))
+            {
+                //error
+                NFASSERT(0, strPropertyName, __FILE__, __FUNCTION__);
+                continue;
+            }
+
+            const char* pstrType = propertyNode->first_attribute("Type")->value();
+            const char* pstrPublic = propertyNode->first_attribute("Public")->value();
+            const char* pstrPrivate = propertyNode->first_attribute("Private")->value();
+            const char* pstrPropertyIndex = propertyNode->first_attribute("Index")->value();
+
+            const char* pstrSave = propertyNode->first_attribute("Save")->value();
+            const char* pstrScriptFunction = propertyNode->first_attribute("ScriptFunction")->value();
+
+            bool bPublic = (0 == strcmp("true", pstrPublic)) ? true : false;
+            bool bPrivate = (0 == strcmp("true", pstrPrivate)) ? true : false;
+            bool bSave = (0 == strcmp("true", pstrSave)) ? true : false;
+            int nIndex = atoi(pstrPropertyIndex);
+
+            NFIValueList::VarData varProperty;
+            if (VTYPE_UNKNOWN == ComputerType(pstrType, varProperty))
+            {
+                //std::cout << "error:" << pClass->GetTypeName() << "  " << pClass->GetInstancePath() << ": " << strPropertyName << " type error!!!" << std::endl;
+
+                NFASSERT(0, strPropertyName, __FILE__, __FUNCTION__);
+            }
+
+            //printf( " Property:%s[%s]\n", pstrPropertyName, pstrType );
+
+            pClass->GetPropertyManager()->AddProperty(0, strPropertyName,  varProperty.nType, bPublic,  bPrivate, bSave, nIndex, pstrScriptFunction);
         }
-
-        const char* pstrType = propertyNode->first_attribute("Type")->value();
-        const char* pstrPublic = propertyNode->first_attribute("Public")->value();
-        const char* pstrPrivate = propertyNode->first_attribute("Private")->value();
-        const char* pstrPropertyIndex = propertyNode->first_attribute("Index")->value();
-
-        const char* pstrSave = propertyNode->first_attribute("Save")->value();
-        const char* pstrScriptFunction = propertyNode->first_attribute("ScriptFunction")->value();
-
-        bool bPublic = (0 == strcmp("true", pstrPublic)) ? true : false;
-        bool bPrivate = (0 == strcmp("true", pstrPrivate)) ? true : false;
-        bool bSave = (0 == strcmp("true", pstrSave)) ? true : false;
-        int nIndex = atoi(pstrPropertyIndex);
-
-        NFIValueList::VarData varProperty;
-        if (VTYPE_UNKNOWN == ComputerType(pstrType, varProperty))
-        {
-            //std::cout << "error:" << pClass->GetTypeName() << "  " << pClass->GetInstancePath() << ": " << strPropertyName << " type error!!!" << std::endl;
-
-            NFASSERT(0, strPropertyName, __FILE__, __FUNCTION__);
-        }
-
-        //printf( " Property:%s[%s]\n", pstrPropertyName, pstrType );
-
-        pClass->GetPropertyManager()->AddProperty(0, strPropertyName,  varProperty.nType, bPublic,  bPrivate, bSave, nIndex, pstrScriptFunction);
     }
 
     return true;
@@ -131,74 +134,99 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* recordRootNode, NFCLo
 {
     for (rapidxml::xml_node<>* recordNode = recordRootNode->first_node(); recordNode;  recordNode = recordNode->next_sibling())
     {
-        const char* pstrRecordName = recordNode->first_attribute("Id")->value();
-
-        if (pClass->GetRecordManager()->GetElement(pstrRecordName))
+        if (recordNode)
         {
-            //error
-            //file << pClass->mstrType << ":" << pstrRecordName << std::endl;
-            //assert(0);
-            NFASSERT(0, pstrRecordName, __FILE__, __FUNCTION__);
-            continue;
-        }
+            const char* pstrRecordName = recordNode->first_attribute("Id")->value();
 
-        const char* pstrRow = recordNode->first_attribute("Row")->value();
-        const char* pstrCol = recordNode->first_attribute("Col")->value();
-
-        const char* pstrPublic = recordNode->first_attribute("Public")->value();
-        const char* pstrPrivate = recordNode->first_attribute("Private")->value();
-        const char* pstrSave = recordNode->first_attribute("Save")->value();
-        const char* pstrIndex = recordNode->first_attribute("Index")->value();
-
-        bool bPublic = (0 == strcmp("true", pstrPublic)) ? true : false;
-        bool bPrivate = (0 == strcmp("true", pstrPrivate)) ? true : false;
-        bool bSave = (0 == strcmp("true", pstrSave)) ? true : false;
-        int nIndex = atoi(pstrIndex);
-
-		NFCValueList recordVar;
-        NFCValueList recordKey;
-        NFCValueList recordDesc;
-        for (rapidxml::xml_node<>* recordColNode = recordNode->first_node(); recordColNode;  recordColNode = recordColNode->next_sibling())
-        {
-            //const char* pstrColName = recordColNode->first_attribute( "Id" )->value();
-            NFIValueList::VarData varData;
-            const char* pstrColType = recordColNode->first_attribute("Type")->value();
-            if (VTYPE_UNKNOWN == ComputerType(pstrColType, varData))
+            if (pClass->GetRecordManager()->GetElement(pstrRecordName))
             {
+                //error
+                //file << pClass->mstrType << ":" << pstrRecordName << std::endl;
                 //assert(0);
                 NFASSERT(0, pstrRecordName, __FILE__, __FUNCTION__);
+                continue;
             }
 
-            recordVar.Append(varData);
-			//////////////////////////////////////////////////////////////////////////
-            if (recordColNode->first_attribute("Key") != NULL)
+            const char* pstrRow = recordNode->first_attribute("Row")->value();
+            const char* pstrCol = recordNode->first_attribute("Col")->value();
+
+            const char* pstrPublic = recordNode->first_attribute("Public")->value();
+            const char* pstrPrivate = recordNode->first_attribute("Private")->value();
+            const char* pstrSave = recordNode->first_attribute("Save")->value();
+            const char* pstrIndex = recordNode->first_attribute("Index")->value();
+
+            bool bPublic = (0 == strcmp("true", pstrPublic)) ? true : false;
+            bool bPrivate = (0 == strcmp("true", pstrPrivate)) ? true : false;
+            bool bSave = (0 == strcmp("true", pstrSave)) ? true : false;
+            int nIndex = atoi(pstrIndex);
+
+            NFCValueList recordVar;
+            NFCValueList recordKey;
+            NFCValueList recordDesc;
+            for (rapidxml::xml_node<>* recordColNode = recordNode->first_node(); recordColNode;  recordColNode = recordColNode->next_sibling())
             {
-                const char* pstrKey = recordColNode->first_attribute("Key")->value();
-                bool bKey = (0 == strcmp("true", pstrKey)) ? true : false;
-                if (bKey)
+                //const char* pstrColName = recordColNode->first_attribute( "Id" )->value();
+                NFIValueList::VarData varData;
+                const char* pstrColType = recordColNode->first_attribute("Type")->value();
+                if (VTYPE_UNKNOWN == ComputerType(pstrColType, varData))
                 {
-                    recordKey.AddInt(1);
+                    //assert(0);
+                    NFASSERT(0, pstrRecordName, __FILE__, __FUNCTION__);
+                }
+
+                recordVar.Append(varData);
+                //////////////////////////////////////////////////////////////////////////
+                if (recordColNode->first_attribute("Key") != NULL)
+                {
+                    const char* pstrKey = recordColNode->first_attribute("Key")->value();
+                    bool bKey = (0 == strcmp("true", pstrKey)) ? true : false;
+                    if (bKey)
+                    {
+                        recordKey.AddInt(1);
+                    }
+                    else
+                    {
+                        recordKey.AddInt(0);
+                    }
+                }
+                //////////////////////////////////////////////////////////////////////////
+                if (recordColNode->first_attribute("Desc"))
+                {
+                    const char* pstrColDesc = recordColNode->first_attribute("Desc")->value();
+                    recordDesc.AddString(pstrColDesc);
                 }
                 else
                 {
-                    recordKey.AddInt(0);
+                    recordDesc.AddString("");
                 }
-            }
-			//////////////////////////////////////////////////////////////////////////
-            if (recordColNode->first_attribute("Desc"))
-            {
-                const char* pstrColDesc = recordColNode->first_attribute("Desc")->value();
-                recordDesc.AddString(pstrColDesc);
-            }
-            else
-            {
-                recordDesc.AddString("");
+
+                //////////////////////////////////////////////////////////////////////////
             }
 
-			//////////////////////////////////////////////////////////////////////////
+            pClass->GetRecordManager()->AddRecord(0, pstrRecordName, recordVar, recordKey, recordDesc, atoi(pstrRow), bPublic, bPrivate, bSave, nIndex);
         }
+    }
 
-        pClass->GetRecordManager()->AddRecord(0, pstrRecordName, recordVar, recordKey, recordDesc, atoi(pstrRow), bPublic, bPrivate, bSave, nIndex);
+    return true;
+}
+
+bool NFCLogicClassModule::AddComponents( rapidxml::xml_node<>* componentRootNode, NFCLogicClass* pClass )
+{
+    for (rapidxml::xml_node<>* componentNode = componentRootNode->first_node(); componentNode; componentNode = componentNode->next_sibling())
+    {
+        if (componentNode)
+        {
+            const char* strComponentName = componentNode->first_attribute("Id")->value();
+            const char* strLanguageModule = componentNode->first_attribute("LanguageModule")->value();
+            if (pClass->GetComponentManager()->GetElement(strComponentName))
+            {
+                //error
+                NFASSERT(0, strComponentName, __FILE__, __FUNCTION__);
+                continue;
+            }
+
+            pClass->GetComponentManager()->AddComponent(std::string(strComponentName), std::string(strLanguageModule));
+        }
     }
 
     return true;
@@ -383,6 +411,17 @@ NFIRecordManager* NFCLogicClassModule::GetClassRecordManager(const std::string& 
     return NULL;
 }
 
+NFIComponentManager* NFCLogicClassModule::GetClassComponentManager( const std::string& strClassName )
+{
+    NFILogicClass* pClass = GetElement(strClassName);
+    if (pClass)
+    {
+        return pClass->GetComponentManager();
+    }
+
+    return NULL;
+}
+
 bool NFCLogicClassModule::Clear()
 {
 	return true;
@@ -394,3 +433,4 @@ void NFCLogicClassModule::OnReload( const char* strModuleName, NFILogicModule* p
 	Clear();
 	Load();
 }
+

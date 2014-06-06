@@ -77,7 +77,7 @@ public:
     virtual const std::string& QueryRecordString(NFIRecord* pRecord, const std::string& strRecordName, const int nRow, const int nCol);
     virtual NFIDENTID QueryRecordObject(NFIRecord* pRecord, const std::string& strRecordName, const int nRow, const int nCol);
 
-    virtual NFIComponent* AddComponent(const std::string& strComponentName);
+    virtual NFIComponent* AddComponent(const std::string& strComponentName, const std::string& strLanguageName);
     virtual NFIComponent* FindComponent(const std::string& strComponentName);
 
     virtual NFIRecordManager* GetRecordManager();
