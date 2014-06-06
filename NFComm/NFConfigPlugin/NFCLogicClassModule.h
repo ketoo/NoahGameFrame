@@ -39,10 +39,12 @@ public:
 
         m_pPropertyManager = new NFCPropertyManager(0);
         m_pRecordManager = new NFCRecordManager(0);
+        m_pComponentManager = new NFCComponentManager(0);
     }
 
     virtual ~NFCLogicClass()
     {
+        delete m_pComponentManager;
         delete m_pRecordManager;
         delete m_pPropertyManager;
     }
@@ -55,6 +57,11 @@ public:
     NFIRecordManager* GetRecordManager()
     {
         return m_pRecordManager;
+    }
+
+    virtual NFIComponentManager* GetComponentManager()
+    {
+        return m_pComponentManager;
     }
 
     void SetParent(NFILogicClass* pClass)
@@ -106,8 +113,9 @@ public:
 
 private:
     NFIPropertyManager* m_pPropertyManager;
-    NFCRecordManager* m_pRecordManager;
-
+    NFIRecordManager* m_pRecordManager;
+    NFIComponentManager* m_pComponentManager;
+    
     NFILogicClass* m_pParentClass;
     std::string mstrType;
     std::string mstrClassName;
@@ -133,6 +141,7 @@ public:
 
     virtual NFIPropertyManager* GetClassPropertyManager(const std::string& strClassName);
     virtual NFIRecordManager* GetClassRecordManager(const std::string& strClassName);
+    virtual NFIComponentManager* GetClassComponentManager(const std::string& strClassName);
 
 
     virtual bool AddClass(const std::string& strClassName, const std::string& strParentName);
@@ -141,6 +150,7 @@ protected:
     virtual VARIANT_TYPE ComputerType(const char* pstrTypeName, NFIValueList::VarData& var);
     virtual bool AddPropertys(rapidxml::xml_node<>* propertyRootNode, NFCLogicClass* pClass);
     virtual bool AddRecords(rapidxml::xml_node<>* recordRootNode, NFCLogicClass* pClass);
+    virtual bool AddComponents(rapidxml::xml_node<>* recordRootNode, NFCLogicClass* pClass);
     virtual bool AddClassInclude(const char* pstrClassFilePath, NFCLogicClass* pClass);
     virtual bool AddClass(const char* pstrClassFilePath, NFCLogicClass* pClass);
 

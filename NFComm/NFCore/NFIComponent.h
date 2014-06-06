@@ -9,7 +9,8 @@
 #ifndef _NFI_COMPONENT_H_
 #define _NFI_COMPONENT_H_
 
-#include "NFComm/NFPluginModule/NFILogicModule.h"
+#include "NFIdentID.h"
+#include "NFComm\NFPluginModule\NFILogicModule.h"
 
 class NFIComponent : public NFILogicModule
 {
@@ -21,6 +22,7 @@ public:
     virtual NFIDENTID Self() = 0;
 
     virtual const std::string& ComponentName() = 0;
+    virtual const std::string& LanguageName() = 0;
 private:
 };
 
