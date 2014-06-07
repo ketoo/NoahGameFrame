@@ -20,7 +20,7 @@ bool NFCWorldNet_ClientModule::Init()
 
 bool NFCWorldNet_ClientModule::Shut()
 {
-    UnRegister();
+    
 
     m_pNet->Final();
 
@@ -34,11 +34,13 @@ bool NFCWorldNet_ClientModule::AfterInit()
 	m_pWorldLogicModule = dynamic_cast<NFIWorldLogicModule*>(pPluginManager->FindModule("NFCWorldLogicModule"));
 	m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
 	m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-	
+	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
+
 	assert(NULL != m_pEventProcessModule);
 	assert(NULL != m_pWorldLogicModule);
 	assert(NULL != m_pLogicClassModule);
-	assert(NULL != m_pElementInfoModule);
+    assert(NULL != m_pElementInfoModule);
+    assert(NULL != m_pLogModule);
 
 	m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_SELECT_SERVER_RESULTS, this, &NFCWorldNet_ClientModule::OnSelectServerResultsEvent);
 
@@ -87,6 +89,8 @@ void NFCWorldNet_ClientModule::Register()
     pData->set_server_state(NFMsg::EST_NARMAL);
 
     SendMsg(NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED, xMsg, mnSocketFD);
+
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Register");
 }
 
 void NFCWorldNet_ClientModule::UnRegister()
@@ -111,6 +115,9 @@ void NFCWorldNet_ClientModule::UnRegister()
     SendMsg(NFMsg::EGameMsgID::EGMI_MTL_WORLD_UNREGISTERED, xMsg, mnSocketFD);
 
     Execute(0.0f, 0.0f);
+
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "UnRegister");
+
 }
 
 void NFCWorldNet_ClientModule::RefreshWorldInfo()
@@ -234,4 +241,11 @@ void NFCWorldNet_ClientModule::OnClientDisconnect( const uint16_t& nAddress )
 void NFCWorldNet_ClientModule::OnClientConnected( const uint16_t& nAddress )
 {
 
+}
+
+bool NFCWorldNet_ClientModule::BeforeShut()
+{
+    UnRegister();
+
+    return true;
 }

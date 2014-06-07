@@ -20,6 +20,7 @@
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFCore/NFCHeartBeatManager.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
 
 //这个连接是连的gameserver
@@ -106,6 +107,7 @@ private:
     
 private:
 
+    NFILogModule* m_pLogModule;
     NFIProxyLogicModule* m_pProxyLogicModule;
     NFIKernelModule* m_pKernelModule;
     NFIEventProcessModule* m_pEventProcessModule;
