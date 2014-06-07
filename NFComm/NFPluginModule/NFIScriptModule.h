@@ -13,6 +13,7 @@
 #include "NFILogicModule.h"
 #include "NFComm\NFCore\NFCValueList.h"
 #include "NFComm\NFCore\NFIdentID.h"
+#include "NFIElementInfoModule.h"
 
 class NFCScriptVarList
 {
@@ -124,6 +125,22 @@ private:
 class NFCScriptName
 {
 public:
+    bool operator < (const NFCScriptName& id) const
+    {
+        return this->strComponentName.length() < id.strComponentName.length() && this->strFunctionName.length() < id.strFunctionName.length();
+    }
+
+    bool operator == (const NFCScriptName& id) const
+    {
+        if (this->strComponentName != id.strComponentName
+            || this->strFunctionName != id.strFunctionName)
+        {
+            return false;
+        }
+        
+        return true;
+    }
+
     NFCScriptName(){}
 
     NFCScriptName(const std::string& strComponentName, const std::string& strFunctionName)
@@ -143,7 +160,7 @@ public:
     NFMap<int, NFList<NFCScriptName>> mxEventData;
 
     //heartbeatlist: name->ScriptName,FunctionName
-    NFMap<std::string, NFCScriptName> mxHeartBeatData;
+    NFMap<std::string, NFList<NFCScriptName>> mxHeartBeatData;
 
     //propertycblist: name->ScriptName,FunctionName
     NFMap<std::string, NFList<NFCScriptName>> mxPropertyCallBackData;
@@ -159,10 +176,11 @@ class NFIScriptModule;
 class NFCScriptKernelModule : public NFMap<NFIDENTID, NFCSriptData>
 {
 public:
-    NFCScriptKernelModule(NFIKernelModule* pKernelModule, NFIScriptModule* pScriptModule)
+    NFCScriptKernelModule(NFIKernelModule* pKernelModule, NFIScriptModule* pScriptModule, NFIElementInfoModule* pElementInfoModule)
     {
         m_pKernelModule = pKernelModule;
         m_pScriptModule = pScriptModule;
+        m_pElementInfoModule = pElementInfoModule;
     }
 
     bool QueryEnableComponent(const NFIDENTID self, const std::string& strComponentName)
@@ -250,22 +268,22 @@ public:
 
     bool ExistElement(const std::string& strConfigName)
     {
-        return false;
+        return m_pElementInfoModule->ExistElement(strConfigName);
     }
 
     int QueryPropertyInt(const std::string& strConfigName, const std::string& strPropertyName)
     {
-        return 0;
+        return m_pElementInfoModule->QueryPropertyInt(strConfigName, strPropertyName);
     }
 
     float QueryPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName)
     {
-        return 0.0f;
+        return m_pElementInfoModule->QueryPropertyFloat(strConfigName, strPropertyName);
     }
 
     const std::string& QueryPropertyString(const std::string& strConfigName, const std::string& strPropertyName)
     {
-        return NULL_STR;
+        return m_pElementInfoModule->QueryPropertyString(strConfigName, strPropertyName);
     }
     //////////////////////////////////////////////////////////////////
 
@@ -286,7 +304,7 @@ public:
         }
 
         NFCScriptName xScriptName(strComponentName, strFunction);
-        //return pScriptNameList->Add(xScriptName);
+        return pScriptNameList->Add(xScriptName);
 
         return false;
     }
@@ -307,7 +325,7 @@ public:
         }
 
         NFCScriptName xScriptName(strComponentName, strFunction);
-        //return pScriptNameList->Add(xScriptName);
+        return pScriptNameList->Add(xScriptName);
 
         return false;
     }
@@ -325,19 +343,17 @@ public:
         if (!pScriptNameList)
         {
             pScriptNameList = new NFList<NFCScriptName>();
+            pScriptData->mxEventData.AddElement(nEventID, pScriptNameList);
         }
 
         NFCScriptName xScriptName(strComponentName, strFunction);
-        //return pScriptNameList->Add(xScriptName);
+        pScriptNameList->Add(xScriptName);
 
-        return false;
+        return true;
     }
 
     bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, const std::string& strComponentName, const std::string& strFunction, const float fTime, const int nCount)
     {
-        
-        
-
         NFCSriptData* pScriptData = GetElement(self);
         if (!pScriptData)
         {
@@ -345,14 +361,18 @@ public:
             AddElement(self, pScriptData);
         }
 
-        NFCScriptName* pScriptName = pScriptData->mxHeartBeatData.GetElement(strHeartBeatName);
-        if (pScriptName)
+        NFList<NFCScriptName>* pScriptNameList = pScriptData->mxHeartBeatData.GetElement(strHeartBeatName);
+        if (!pScriptNameList)
         {
-            return false;
+            pScriptNameList = new NFList<NFCScriptName>();
+            pScriptData->mxHeartBeatData.AddElement(strHeartBeatName, pScriptNameList);
         }
+
         //应该是同时直接向系统注册.
-        pScriptName = new NFCScriptName(strComponentName, strFunction);
-        return pScriptData->mxHeartBeatData.AddElement(strHeartBeatName, pScriptName);
+        NFCScriptName xScriptName(strComponentName, strFunction);
+        pScriptNameList->Add(xScriptName);
+
+        return true;
     }
 
     bool FindHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName)
@@ -363,8 +383,8 @@ public:
             return false;
         }
 
-        NFCScriptName* pScriptName = pScriptData->mxHeartBeatData.GetElement(strHeartBeatName);
-        if (!pScriptName)
+        NFList<NFCScriptName>* pScriptNameList = pScriptData->mxHeartBeatData.GetElement(strHeartBeatName);
+        if (!pScriptNameList)
         {
             return false;
         }
@@ -380,11 +400,11 @@ public:
             return false;
         }
 
-        NFCScriptName* pScriptName = pScriptData->mxHeartBeatData.RemoveElement(strHeartBeatName);
-        if (pScriptName)
+        NFList<NFCScriptName>* pScriptNameList = pScriptData->mxHeartBeatData.RemoveElement(strHeartBeatName);
+        if (!pScriptNameList)
         {
-            delete pScriptName;
-            pScriptName = NULL;
+            delete pScriptNameList;
+            pScriptNameList = NULL;
 
             return true;
         }
@@ -524,6 +544,7 @@ protected:
 
 private:
     NFIKernelModule* m_pKernelModule;
+    NFIElementInfoModule* m_pElementInfoModule;
     NFIScriptModule*m_pScriptModule;
 };
 
