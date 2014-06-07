@@ -26,9 +26,6 @@
     <Filter Include="NFNPCRefreshModule">
       <UniqueIdentifier>{d866329b-6a9d-4c06-821b-b1443152f268}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFNewer">
-      <UniqueIdentifier>{8a0fcf7e-8cd9-4744-92d4-dd1ff4f6b4bb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="NFDataProcessModule">
       <UniqueIdentifier>{ab24bac9-1d0d-4fdc-b5de-72433c4b2753}</UniqueIdentifier>
     </Filter>
