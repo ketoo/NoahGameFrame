@@ -203,7 +203,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
     }
 
     NFCValueList varClassName;
-    varClassName << pLogicClass->GetTypeName().c_str();
+    varClassName << pLogicClass->GetClassName().c_str();
     pElementPropertyManager->SetProperty("ClassName", *varClassName.GetStackConst(0));
 
     return true;
