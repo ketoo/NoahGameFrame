@@ -110,6 +110,8 @@ int NFCProxyServerNet_ClientModule::OnGameInfoProcess( const NFIPacket& msg )
                     const int nPort = m_pKernelModule->QueryPropertyInt(ident, "Port");
 
                     pNetObject->GetNet()->Initialization(strIP.c_str(), nPort);
+
+                    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, xData.player_id(), strIP, nPort, "Initialization to connect GameServer");
                 }
             }
 
@@ -175,6 +177,7 @@ void NFCProxyServerNet_ClientModule::Register()
 
     SendMsg(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg, mnSocketFD);
 
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Register");
 }
 
 void NFCProxyServerNet_ClientModule::UnRegister()
@@ -198,6 +201,8 @@ void NFCProxyServerNet_ClientModule::UnRegister()
     pData->set_server_state(NFMsg::EST_MAINTEN);
 
     SendMsg(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_UNREGISTERED, xMsg, mnSocketFD);
+
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "UnRegister");
 }
 
 bool NFCProxyServerNet_ClientModule::AfterInit()
@@ -207,13 +212,15 @@ bool NFCProxyServerNet_ClientModule::AfterInit()
     m_pProxyLogicModule = dynamic_cast<NFIProxyLogicModule*>(pPluginManager->FindModule("NFCProxyLogicModule"));
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
 	m_pProxyServerNet_ServerModule = dynamic_cast<NFIProxyServerNet_ServerModule*>(pPluginManager->FindModule("NFCProxyServerNet_ServerModule"));
-	m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
+    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
+    m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
 	
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pProxyLogicModule);
 	assert(NULL != m_pKernelModule);
 	assert(NULL != m_pProxyServerNet_ServerModule);
-	assert(NULL != m_pElementInfoModule);
+    assert(NULL != m_pElementInfoModule);
+    assert(NULL != m_pLogModule);
 
 	const int nServerID = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerID");
 	const std::string& strServerIP = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "ServerIP");
