@@ -94,11 +94,11 @@ protected:
 
     int OnReqModifyData( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
 
-    int OnHPRecoverHeart( const NFIDENTID& self, const NFIValueList& var );
-    int OnMPRecoverHeart( const NFIDENTID& self, const NFIValueList& var );
-    int OnSPRecoverHeart( const NFIDENTID& self, const NFIValueList& var );
-    int OnVPRecoverHeart( const NFIDENTID& self, const NFIValueList& var );
-    int OnActivityVPRecoverHeart( const NFIDENTID& self, const NFIValueList& var );
+    int OnHPRecoverHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var );
+    int OnMPRecoverHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var );
+    int OnSPRecoverHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var );
+    int OnVPRecoverHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var );
+    int OnActivityVPRecoverHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var );
 private:
     //NFConfig mConfig;
 private:
