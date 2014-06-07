@@ -165,6 +165,22 @@ public:
         m_pScriptModule = pScriptModule;
     }
 
+    bool QueryEnableComponent(const NFIDENTID self, const std::string& strComponentName)
+    {
+        NFIObject* pObject = m_pKernelModule->GetObject(self);
+        if (!pObject)
+        {
+            return false;
+        }
+
+        if(!pObject->GetComponentManager()->QueryEnable(strComponentName))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     //becall from script
     ///////need to export function///////////////////////////////////
     bool HasEventCallBack(const NFIDENTID& objectID, const int nEventID)
@@ -319,6 +335,9 @@ public:
 
     bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, const std::string& strComponentName, const std::string& strFunction, const float fTime, const int nCount)
     {
+        
+        
+
         NFCSriptData* pScriptData = GetElement(self);
         if (!pScriptData)
         {
