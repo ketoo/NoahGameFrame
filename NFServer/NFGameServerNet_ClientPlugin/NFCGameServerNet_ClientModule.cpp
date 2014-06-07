@@ -52,6 +52,8 @@ void NFCGameServerNet_ClientModule::Register()
     pData->set_server_state(NFMsg::EST_NARMAL);
 
     SendMsg(NFMsg::EGameMsgID::EGMI_GTW_GAME_REGISTERED, xMsg, mnSocketFD);
+
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Register");
 }
 
 void NFCGameServerNet_ClientModule::UnRegister()
@@ -76,6 +78,9 @@ void NFCGameServerNet_ClientModule::UnRegister()
     pData->set_server_state(NFMsg::EST_MAINTEN);
 
     SendMsg(NFMsg::EGameMsgID::EGMI_GTW_GAME_UNREGISTERED, xMsg, mnSocketFD);
+
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "UnRegister");
+
 }
 
 void NFCGameServerNet_ClientModule::RefreshWorldInfo()
@@ -103,29 +108,23 @@ bool NFCGameServerNet_ClientModule::AfterInit()
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pGameLogicModule = dynamic_cast<NFIGameLogicModule*>(pPluginManager->FindModule("NFCGameLogicModule"));
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
-    m_pGameServerModule = dynamic_cast<NFIGameServerNet_ServerModule*>(pPluginManager->FindModule("NFCGameServerNet_ServerModule"));
     m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-    
-        
-        //m_pShareMemoryModule = dynamic_cast<NFIShareMemoryModule*>(pPluginManager->FindModule("NFCShareMemoryModule"));
+    m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
     
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pGameLogicModule);
     assert(NULL != m_pKernelModule);
-    assert(NULL != m_pGameServerModule);
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pElementInfoModule);
-    //assert( NULL != m_pShareMemoryModule );
+    assert(NULL != m_pLogModule);
 
     m_pEventProcessModule->AddEventCallBack(0, NFED_ON_DATABASE_SERVER_LOADROE_BEGIN, this, &NFCGameServerNet_ClientModule::OnDataLoadBeginEvent);
-    //m_pEventProcessModule->AddEventCallBack( 0, NFED_ON_CLIENT_SELECTROLE_ENTER, OnToWorldEvent );
     m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_WANTO_SWAP_GS, this, &NFCGameServerNet_ClientModule::OnSwapGSEvent);
 
     m_pKernelModule->ResgisterCommonClassEvent(this, &NFCGameServerNet_ClientModule::OnClassCommonEvent);
-    // 连接master server
-    //Initialization(false, "NFGameServerNet_ClientPlugin.cfg");
-
+    
+    // 连接world server
     mstrConfigIdent = "WorldServer";
 
 	const int nServerID = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerID");

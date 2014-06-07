@@ -38,7 +38,7 @@ protected:
 
     int OnObjectHPEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar );
 
-    int OnDeadDestroyHeart( const NFIDENTID& self, const NFIValueList& var );
+    int OnDeadDestroyHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var );
 private:
 
     NFIEventProcessModule* m_pEventProcessModule;

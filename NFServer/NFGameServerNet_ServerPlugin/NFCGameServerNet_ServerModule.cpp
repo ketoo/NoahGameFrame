@@ -14,7 +14,7 @@ bool NFCGameServerNet_ServerModule::Init()
 {
     mnRoleHallContainer = -3;
     mnProxyContainer = -4;
-
+    mstrConfigIdent = "GameServer";
     
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
