@@ -45,8 +45,8 @@ class NFINet
 public:
 	virtual  bool Execute(const float fLasFrametime, const float fStartedTime) = 0;
 
-	virtual  int Initialization(const char* strIP, const unsigned short nPort, const bool bUsePacket = true) = 0;
-	virtual  int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4, const bool bUsePacket = true) = 0;
+	virtual  int Initialization(const char* strIP, const unsigned short nPort) = 0;
+	virtual  int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4) = 0;
 
 	virtual  bool Final() = 0;
     virtual  bool Reset() = 0;

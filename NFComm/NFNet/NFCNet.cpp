@@ -189,23 +189,21 @@ bool NFCNet::Execute(const float fLasFrametime, const float fStartedTime)
 }
 
 
-int NFCNet::Initialization( const char* strIP, const unsigned short nPort, const bool bUsePacket )
+int NFCNet::Initialization( const char* strIP, const unsigned short nPort)
 {
 	mstrIP = strIP;
 	mnPort = nPort;
-    mbUsePacket = bUsePacket;
 
 	return InitClientNet();
 
 
 }
 
-int NFCNet::Initialization( const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount, const bool bUsePacket )
+int NFCNet::Initialization( const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount)
 {
 	mnMaxConnect = nMaxClient;
 	mnPort = nPort;
 	mnCpuCount = nCpuCount;
-    mbUsePacket = bUsePacket;
 
 	return InitServerNet();
 
@@ -237,11 +235,6 @@ bool NFCNet::Final()
 
 bool NFCNet::SendMsg( const NFIPacket& msg, const uint16_t nSockIndex, bool bBroadcast )
 {
-    if (!mbUsePacket)
-    {
-        return false;
-    }
-
     if (!mbRuning)
     {
         return false;
@@ -544,8 +537,6 @@ void NFCNet::HeartPack()
 {
 	NFCPacket msg;
 	msg.EnCode(0, "", 0);
-	if (mbUsePacket)
-	{
-		SendMsg(msg, 0);
-	}
+
+    SendMsg(msg, 0);
 }
