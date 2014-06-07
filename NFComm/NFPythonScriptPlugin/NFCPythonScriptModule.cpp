@@ -19,12 +19,14 @@ bool NFCPythonScriptModule::AfterInit()
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
     m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
+    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
 
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pLogicClassModule);
+    assert(NULL != m_pElementInfoModule);
 
-    m_pScriptKernelModule = new NFCScriptKernelModule(m_pKernelModule, this);
+    m_pScriptKernelModule = new NFCScriptKernelModule(m_pKernelModule, this, m_pElementInfoModule);
 
     //add all callback
     m_pKernelModule->ResgisterCommonPropertyEvent(this, &NFCPythonScriptModule::OnPropertyCommEvent);
@@ -145,6 +147,23 @@ int NFCPythonScriptModule::OnClassCommonEvent( const NFIDENTID& self, const std:
 
 int NFCPythonScriptModule::OnHeartBeatCommonCB( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
 {
+    NFCSriptData* pScriptData = m_pScriptKernelModule->GetElement(self);
+    if (pScriptData)
+    {
+        NFList<NFCScriptName>* pList = pScriptData->mxHeartBeatData.GetElement(strHeartBeat);
+        if (pList)
+        {
+            NFCScriptName xScriptName;
+            bool bRet = pList->First(xScriptName);
+            while (bRet)
+            {
+                DoHeartBeatScript(self, strHeartBeat, fTime, nCount, xScriptName.strComponentName, xScriptName.strFunctionName, NFCScriptVarList(var));
+
+                bRet = pList->Next(xScriptName);
+            }
+        }
+    }
+
     return 0;
 }
 
