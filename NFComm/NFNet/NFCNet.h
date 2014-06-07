@@ -174,7 +174,6 @@ public:
 		mnCpuCount = 0;
 		mbServer = false;
 		mbRuning = false;
-        mbUsePacket = true;
 		ev = NULL;
 	};
 
@@ -192,7 +191,6 @@ public:
         mnCpuCount = 0;
         mbServer = false;
         mbRuning = false;
-        mbUsePacket = true;
         ev = NULL;
     }
 
@@ -201,8 +199,8 @@ public:
 public:
 	virtual  bool Execute(const float fLasFrametime, const float fStartedTime);
 
-	virtual  int Initialization(const char* strIP, const unsigned short nPort,const bool bUsePacket = true);
-	virtual  int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4, const bool bUsePacket = true);
+	virtual  int Initialization(const char* strIP, const unsigned short nPort);
+	virtual  int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4);
 
 	virtual  bool Final();
     virtual  bool Reset();
