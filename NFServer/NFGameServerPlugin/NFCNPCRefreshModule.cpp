@@ -69,16 +69,16 @@ int NFCNPCRefreshModule::OnObjectHPEvent( const NFIDENTID& self, const std::stri
     return 0;
 }
 
-int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFIDENTID& self, const NFIValueList& var )
+int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
 {
     //and create new object
-//     const std::string& strClassName = m_pKernelModule->QueryPropertyString( self, "ClassName" );
-//     const std::string& strSeendID = m_pKernelModule->QueryPropertyString( self, "NPCConfigID" );
-//     const std::string& strConfigID = m_pKernelModule->QueryPropertyString( self, "ConfigID" );
-//     int nContainerID = m_pKernelModule->QueryPropertyInt( self, "SceneID" );
-//     int nGroupID = m_pKernelModule->QueryPropertyInt( self, "GroupID" );
-// 
-//     m_pSceneProcessModule->CreateContinerNPCObject( nContainerID, nGroupID, strSeendID );
+    const std::string& strClassName = m_pKernelModule->QueryPropertyString( self, "ClassName" );
+    const std::string& strSeendID = m_pKernelModule->QueryPropertyString( self, "NPCConfigID" );
+    const std::string& strConfigID = m_pKernelModule->QueryPropertyString( self, "ConfigID" );
+    int nContainerID = m_pKernelModule->QueryPropertyInt( self, "SceneID" );
+    int nGroupID = m_pKernelModule->QueryPropertyInt( self, "GroupID" );
+
+    //m_pSceneProcessModule->ClearAll( nContainerID, nGroupID, strSeendID );
 
     m_pKernelModule->DestroyObject( self );
     return 0;

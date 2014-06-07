@@ -511,22 +511,22 @@ int NFCPropertyModule::AddActivityVP( const NFIDENTID& self, int nValue )
     return nCurValue;
 }
 
-int NFCPropertyModule::OnHPRecoverHeart( const NFIDENTID& self, const NFIValueList& var )
+int NFCPropertyModule::OnHPRecoverHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
 {
     return 0;
 }
 
-int NFCPropertyModule::OnMPRecoverHeart( const NFIDENTID& self, const NFIValueList& var )
+int NFCPropertyModule::OnMPRecoverHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
 {
     return 0;
 }
 
-int NFCPropertyModule::OnSPRecoverHeart( const NFIDENTID& self, const NFIValueList& var )
+int NFCPropertyModule::OnSPRecoverHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
 {
     return 0;
 }
 
-int NFCPropertyModule::OnVPRecoverHeart( const NFIDENTID& self, const NFIValueList& var )
+int NFCPropertyModule::OnVPRecoverHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
 {
     int nValue = m_pKernelModule->QueryPropertyInt(self, "VPREGEN");
     AddVP(self, nValue);
@@ -534,7 +534,7 @@ int NFCPropertyModule::OnVPRecoverHeart( const NFIDENTID& self, const NFIValueLi
     return 0;
 }
 
-int NFCPropertyModule::OnActivityVPRecoverHeart( const NFIDENTID& self, const NFIValueList& var )
+int NFCPropertyModule::OnActivityVPRecoverHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
 {
     int nValue = m_pKernelModule->QueryPropertyInt(self, "ActivityVP");
     AddActivityVP(self, nValue);
