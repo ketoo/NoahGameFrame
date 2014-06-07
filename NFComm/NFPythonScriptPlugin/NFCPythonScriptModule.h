@@ -14,6 +14,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIPythonScriptModule.h"
+#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 
 class NFCPythonScriptModule
     : public NFIPythonScriptModule
@@ -54,7 +55,8 @@ protected:
 protected:
 
     NFCScriptKernelModule* m_pScriptKernelModule;
-
+    
+    NFIElementInfoModule* m_pElementInfoModule;
     NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIEventProcessModule* m_pEventProcessModule;
