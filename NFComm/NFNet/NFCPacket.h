@@ -69,6 +69,14 @@ public:
 		munFD = nFd;
 	}
 
+    virtual uint32_t GetHeadSize()
+    {
+        return sizeof(MsgHead);
+    }
+
+//     virtual int EnCodeHead(uint32_t uMsgID, const char* strData, const uint32_t unLen);
+//     virtual int DeCodeHead(const char* strData, const uint32_t unLen);
+
     //const uint32_t unLen: length of data, not include head
 	virtual int EnCode(uint32_t uMsgID, const char* strData, const uint32_t unLen);
 
