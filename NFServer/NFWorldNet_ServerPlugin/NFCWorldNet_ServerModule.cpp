@@ -188,6 +188,8 @@ int NFCWorldNet_ServerModule::OnGameServerRegisteredProcess(const NFIPacket& msg
                     pObject->SetPropertyString("IP", pData->server_ip());
                     pObject->SetPropertyInt("Port", pData->server_port());
 					pObject->SetPropertyInt("State", NFMsg::EST_NARMAL);
+
+                    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "GameServerRegistered");
                 }
             }
         }
@@ -215,6 +217,8 @@ int NFCWorldNet_ServerModule::OnGameServerUnRegisteredProcess(const NFIPacket& m
          for (int j = 0; j < varList.GetCount(); ++j)
          {
              m_pKernelModule->DestroyObject(varList.ObjectVal(j));
+
+             m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "GameServerRegistered");
          }
      }
     return 0;

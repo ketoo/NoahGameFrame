@@ -18,6 +18,7 @@
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFCWorldNet_ClientModule
     : public NFINetModule
@@ -30,6 +31,7 @@ public:
     }
 
     virtual bool Init();
+    virtual bool BeforeShut();
     virtual bool Shut();
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
     virtual bool AfterInit();
@@ -59,7 +61,7 @@ protected:
 
 private:
 	int mnSocketFD;
-
+    NFILogModule* m_pLogModule;
 	NFIElementInfoModule* m_pElementInfoModule;
 	NFILogicClassModule* m_pLogicClassModule;
     NFIWorldLogicModule* m_pWorldLogicModule;

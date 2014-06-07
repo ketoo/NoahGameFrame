@@ -19,6 +19,7 @@
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 //#include "NFComm/NFPluginModule/NFIShareMemoryModule.h"
 
 class NFCGameServerNet_ClientModule : public NFINetModule
@@ -73,7 +74,7 @@ protected:
 private:
     int mnSocketFD;
 
-    NFIGameServerNet_ServerModule* m_pGameServerModule;
+    NFILogModule* m_pLogModule;
     NFIGameLogicModule* m_pGameLogicModule;
     NFIKernelModule* m_pKernelModule;
     NFIEventProcessModule* m_pEventProcessModule;
