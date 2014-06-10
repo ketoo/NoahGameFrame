@@ -11,6 +11,7 @@
 
 bool NFCPythonScriptModule::Init()
 {
+
     return true;
 }
 
