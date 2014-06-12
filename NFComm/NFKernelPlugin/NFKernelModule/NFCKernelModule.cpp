@@ -122,7 +122,7 @@ bool NFCKernelModule::Execute(const float fLasFrametime, const float fStartedTim
     }
 
 
-    if (fLastTotal < 0.3f)
+    if (fLastTotal < 0.1f)
     {
         fLastTotal += fLasFrametime;
         return false;
@@ -147,7 +147,7 @@ bool NFCKernelModule::Execute(const float fLasFrametime, const float fStartedTim
         pObject = Next();
     }
 
-
+    fLastTotal = 0.0f;
 
     return true;
 }
@@ -286,6 +286,7 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
                 pConfigRecordInfo->GetInitData(),
                 pConfigRecordInfo->GetKeyState(),
                 pConfigRecordInfo->GetInitDesc(),
+                pConfigRecordInfo->GetTag(),
                 pConfigRecordInfo->GetRows(),
                 pConfigRecordInfo->GetPublic(),
                 pConfigRecordInfo->GetPrivate(),
@@ -1531,12 +1532,12 @@ bool NFCKernelModule::AddProperty(const NFIDENTID& self, const std::string& strP
     return false;
 }
 
-bool NFCKernelModule::AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& varData, const NFIValueList& varKey, const NFIValueList& varDesc, const int nRows, bool bPublic, bool bPrivate, bool bSave, int nIndex)
+bool NFCKernelModule::AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& varData, const NFIValueList& varKey, const NFIValueList& varDesc, const NFIValueList& varTag, const int nRows, bool bPublic, bool bPrivate, bool bSave, int nIndex)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        pObject->GetRecordManager()->AddRecord(self, strRecordName, varData, varKey, varDesc, nRows, bPublic, bPrivate, bSave, nIndex);
+        pObject->GetRecordManager()->AddRecord(self, strRecordName, varData, varKey, varDesc, varTag, nRows, bPublic, bPrivate, bSave, nIndex);
 
         //通用回调，方便NET同步
         RECORD_EVENT_FUNCTOR functor = boost::bind(&NFCKernelModule::OnRecordCommonEvent, this, _1, _2, _3, _4, _5, _6, _7, _8);
