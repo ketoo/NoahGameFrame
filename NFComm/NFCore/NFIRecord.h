@@ -39,6 +39,7 @@ public:
     virtual int GetRows() const  = 0;
 
     virtual VARIANT_TYPE GetColType(const int nCol) const = 0;
+    virtual const std::string& GetColTag(const int nCol) const = 0;
 
     // Ìí¼ÓÊý¾Ý
     virtual int AddRow(const int nRow) = 0;
@@ -82,6 +83,7 @@ public:
 	virtual const NFIValueList& GetInitData() = 0;
     virtual const NFIValueList& GetKeyState() = 0;
     virtual const NFIValueList& GetInitDesc() = 0;
+    virtual const NFIValueList& GetTag() = 0;
 
     virtual void SetSave(const bool bSave) = 0;
     virtual void SetPublic(const bool bPublic) = 0;
