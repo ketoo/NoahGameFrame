@@ -14,7 +14,7 @@
 #include <chrono>
 #include <thread>
 
-#ifdef WIN32
+#if NF_PLATFORM == NF_PLATFORM_WIN
 #include <windows.h>
 #else
 #include <unistd.h>
@@ -40,12 +40,11 @@ class NFCNet;
 class NetObject 
 {
 public:
-	NetObject(NFCNet* pThis, int16_t nFd, sockaddr_in& addr, bufferevent* pBev)
+	NetObject(NFCNet* pThis, int32_t nFd, sockaddr_in& addr, bufferevent* pBev)
 	{
         m_pNet = pThis;
 
 		nIndex = nFd;
-		nBuffLen = 0;
 		bev = pBev;
 		memset(&sin, 0, sizeof(sin));
 		sin = addr;
@@ -59,63 +58,51 @@ public:
 
 	int AddBuff(const char* str, uint32_t nLen)
 	{
-		if (nBuffLen + nLen >= NF_MAX_SERVER_PACKET_SIZE)
-		{
-			IncreaseError(1000);
-			return 0;
-		}
+        mstrBuff.append(str, nLen);
 
-		memcpy(strBuff + nBuffLen, str, nLen);
-		nBuffLen += nLen;
-
-		return nBuffLen;
+		return mstrBuff.length();
 	}
 
 	int CopyBuffTo(char* str, uint32_t nStart, uint32_t nLen)
 	{
-		if (nStart + nLen > NF_MAX_SERVER_PACKET_SIZE)
+		if (nStart + nLen > mstrBuff.length())
 		{
 			return 0;
 		}
 
-		memcpy(str, strBuff + nStart, nLen);
+		memcpy(str, mstrBuff.data() + nStart, nLen);
 
 		return nLen;
 	}
 
 	int RemoveBuff(uint32_t nStart, uint32_t nLen)
 	{
+        if (nStart < 0)
+        {
+            return 0;
+        }
+
 		//移除前面，则后面跟上
-		if (nStart + nLen >= NF_MAX_SERVER_PACKET_SIZE)
-		{
-			return 0;
-		}
-
-		if (nLen > nBuffLen)
-		{
-			return 0;
-		}
-
-		if (nStart + nLen > nBuffLen)
+		if (nStart + nLen > mstrBuff.length())
 		{
 			return 0;
 		}
 
 		//把后面的挪到前面来
-		memcpy(strBuff + nStart, strBuff + nStart + nLen, nBuffLen - nLen - nStart);
 
-		nBuffLen -= nLen;
-		return nLen;
+		mstrBuff.replace(nStart, nLen, "");
+
+		return mstrBuff.length();
 	}
 
-	char* GetBuff()
+	const char* GetBuff()
 	{
-		return strBuff;
+		return mstrBuff.data();
 	}
 
 	int GetBuffLen() const
 	{
-		return nBuffLen;
+		return mstrBuff.length();
 	}
 
 	int GetFd() const
@@ -146,8 +133,7 @@ private:
 	uint32_t nIndex;
 	sockaddr_in sin;
 	bufferevent *bev;
-	uint32_t nBuffLen;
-	char strBuff[NF_MAX_SERVER_PACKET_SIZE];
+    std::string mstrBuff;
 
 	uint16_t mnErrorCount;
     NFCNet* m_pNet;
@@ -157,28 +143,14 @@ private:
 typedef std::function<int(const NFIPacket& msg)> RECIEVE_FUNCTOR;
 typedef std::shared_ptr<RECIEVE_FUNCTOR> RECIEVE_FUNCTOR_PTR;
 
-typedef std::function<int(const uint16_t nSockIndex, const NF_NET_EVENT nEvent)> EVENT_FUNCTOR;
+typedef std::function<int(const uint32_t nSockIndex, const NF_NET_EVENT nEvent)> EVENT_FUNCTOR;
 typedef std::shared_ptr<EVENT_FUNCTOR> EVENT_FUNCTOR_PTR;
 
 class NFCNet : public NFINet
 {
 public:
-
-	NFCNet()
-	{
-		base = NULL;
-		listener = NULL;
-		signal_event = NULL;
-		mstrIP = "";
-		mnPort = 0;
-		mnCpuCount = 0;
-		mbServer = false;
-		mbRuning = false;
-		ev = NULL;
-	};
-
     template<typename BaseType>
-    NFCNet(BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const uint16_t, const NF_NET_EVENT))
+    NFCNet(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const uint16_t, const NF_NET_EVENT))
     {
         base = NULL;
         listener = NULL;
@@ -192,6 +164,7 @@ public:
         mbServer = false;
         mbRuning = false;
         ev = NULL;
+        mnHeadLength = nHeadLength;
     }
 
 	virtual ~NFCNet(){};
@@ -205,17 +178,19 @@ public:
 	virtual  bool Final();
     virtual  bool Reset();
 
-	virtual bool SendMsg(const NFIPacket& msg, const uint16_t nSockIndex = 0, bool bBroadcast = false);
-	virtual bool SendMsg(const char* msg, const uint32_t nLen, const uint16_t nSockIndex = 0, bool bBroadcast = false);
+	virtual bool SendMsg(const NFIPacket& msg, const uint32_t nSockIndex = 0, bool bBroadcast = false);
+	virtual bool SendMsg(const char* msg, const uint32_t nLen, const uint32_t nSockIndex = 0, bool bBroadcast = false);
 
-	virtual bool CloseSocket(const uint16_t nSockIndex);
+	virtual bool CloseSocket(const uint32_t nSockIndex);
 
-	virtual bool AddBan(const uint16_t nSockIndex, const int32_t nTime = -1){return true;};
-	virtual bool RemoveBan(const uint16_t nSockIndex){return true;};
+	virtual bool AddBan(const uint32_t nSockIndex, const int32_t nTime = -1){return true;};
+	virtual bool RemoveBan(const uint32_t nSockIndex){return true;};
 	virtual void HeartPack();
 
 private:
-	virtual bool AddSocket(const uint16_t nSockIndex, NetObject* pObject);
+    virtual bool CloseSocketAll();
+
+	virtual bool AddSocket(const uint32_t nSockIndex, NetObject* pObject);
 	virtual bool Dismantle(NetObject* pObject);
 
 	virtual int InitClientNet();
@@ -230,6 +205,8 @@ private:
 private:
 	//<fd,object>
 	std::map<int, NetObject*> mmObject;
+    
+    NFIMsgHead::NF_Head mnHeadLength;
 
 	int mnMaxConnect;
 	std::string mstrIP;
