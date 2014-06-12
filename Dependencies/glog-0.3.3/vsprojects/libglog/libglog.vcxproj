@@ -127,17 +127,8 @@
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
     <PostBuildEvent>
-      <Command>copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFLoginServer\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFLoginServer\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFMasterServer\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFMasterServer\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFProxyServer1\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer1\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFGameServer1\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer1\$(ProjectName)_d.pdb
-</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

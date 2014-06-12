@@ -26,6 +26,8 @@ NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, co
     mVarRecordType = valueList;
     mVarRecordDesc = descList;
     mVarRecordKey = keyList;
+    mVarRecordTag = tagList;
+
     mSelf = self;
     mbSave = bSave;
     mbPublic = bPublic;
@@ -55,6 +57,14 @@ NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, co
     for (int i = 0; i < GetRows() * GetCols(); i++)
     {
         mtRecordVec.push_back(std::shared_ptr<NFIValueList::VarData>());
+    }
+
+    for (int i = 0; i < mVarRecordTag.GetCount(); ++i)
+    {
+        if (!mVarRecordTag.StringVal(i).empty())
+        {
+            mmTag[mVarRecordTag.StringVal(i)] = i;
+        }
     }
 }
 
@@ -227,6 +237,12 @@ bool NFCRecord::SetInt(const int nRow, const int nCol, const int value)
     return false;
 }
 
+bool NFCRecord::SetInt( const int nRow, const std::string& strColTag, const int value )
+{
+    int nCol = GetCol(strColTag);
+    return SetInt(nRow, nCol, value);
+}
+
 bool NFCRecord::SetFloat(const int nRow, const int nCol, const float value)
 {
     if (!ValidPos(nRow, nCol))
@@ -260,6 +276,12 @@ bool NFCRecord::SetFloat(const int nRow, const int nCol, const float value)
     }
 
     return false;
+}
+
+bool NFCRecord::SetFloat( const int nRow, const std::string& strColTag, const float value )
+{
+    int nCol = GetCol(strColTag);
+    return SetFloat(nRow, nCol, value);
 }
 
 bool NFCRecord::SetDouble(const int nRow, const int nCol, const double value)
@@ -297,6 +319,12 @@ bool NFCRecord::SetDouble(const int nRow, const int nCol, const double value)
     return false;
 }
 
+bool NFCRecord::SetDouble( const int nRow, const std::string& strColTag, const double value )
+{
+    int nCol = GetCol(strColTag);
+    return SetDouble(nRow, nCol, value);
+}
+
 bool NFCRecord::SetString(const int nRow, const int nCol, const char* value)
 {
     if (!ValidPos(nRow, nCol))
@@ -330,6 +358,12 @@ bool NFCRecord::SetString(const int nRow, const int nCol, const char* value)
     }
 
     return false;
+}
+
+bool NFCRecord::SetString( const int nRow, const std::string& strColTag, const char* value )
+{
+    int nCol = GetCol(strColTag);
+    return SetString(nRow, nCol, value);
 }
 
 bool NFCRecord::SetObject(const int nRow, const int nCol, const NFIDENTID& value)
@@ -367,10 +401,22 @@ bool NFCRecord::SetObject(const int nRow, const int nCol, const NFIDENTID& value
     return false;
 }
 
+bool NFCRecord::SetObject( const int nRow, const std::string& strColTag, const NFIDENTID& value )
+{
+    int nCol = GetCol(strColTag);
+    return SetObject(nRow, nCol, value);
+}
+
 bool NFCRecord::SetPointer(const int nRow, const int nCol, const void* value)
 {
 
     return false;
+}
+
+bool NFCRecord::SetPointer( const int nRow, const std::string& strColTag, const void* value )
+{
+    int nCol = GetCol(strColTag);
+    return SetPointer(nRow, nCol, value);
 }
 
 // 获得数据
@@ -448,6 +494,12 @@ int NFCRecord::QueryInt(const int nRow, const int nCol) const
     return 0;
 }
 
+int NFCRecord::QueryInt( const int nRow, const std::string& strColTag ) const
+{
+    int nCol = GetCol(strColTag);
+    return QueryInt(nRow, nCol);
+}
+
 float NFCRecord::QueryFloat(const int nRow, const int nCol) const
 {
     if (!ValidPos(nRow, nCol))
@@ -467,6 +519,12 @@ float NFCRecord::QueryFloat(const int nRow, const int nCol) const
     }
 
     return 0.0f;
+}
+
+float NFCRecord::QueryFloat( const int nRow, const std::string& strColTag ) const
+{
+    int nCol = GetCol(strColTag);
+    return QueryFloat(nRow, nCol);
 }
 
 double NFCRecord::QueryDouble(const int nRow, const int nCol) const
@@ -490,6 +548,12 @@ double NFCRecord::QueryDouble(const int nRow, const int nCol) const
     return 0.0f;
 }
 
+double NFCRecord::QueryDouble( const int nRow, const std::string& strColTag ) const
+{
+    int nCol = GetCol(strColTag);
+    return QueryDouble(nRow, nCol);
+}
+
 const std::string& NFCRecord::QueryString(const int nRow, const int nCol) const
 {
     if (!ValidPos(nRow, nCol))
@@ -509,6 +573,12 @@ const std::string& NFCRecord::QueryString(const int nRow, const int nCol) const
     }
 
     return NULL_STR;
+}
+
+const std::string& NFCRecord::QueryString( const int nRow, const std::string& strColTag ) const
+{
+    int nCol = GetCol(strColTag);
+    return QueryString(nRow, nCol);
 }
 
 NFIDENTID NFCRecord::QueryObject(const int nRow, const int nCol) const
@@ -532,6 +602,12 @@ NFIDENTID NFCRecord::QueryObject(const int nRow, const int nCol) const
     return NFIDENTID();
 }
 
+NFIDENTID NFCRecord::QueryObject( const int nRow, const std::string& strColTag ) const
+{
+    int nCol = GetCol(strColTag);
+    return QueryObject(nRow, nCol);
+}
+
 void* NFCRecord::QueryPointer(const int nRow, const int nCol) const
 {
     //     NFIValueList::VarData* pVar = GetVarData(nRow, nCol);
@@ -541,6 +617,12 @@ void* NFCRecord::QueryPointer(const int nRow, const int nCol) const
     //     }
 
     return NULL;
+}
+
+void* NFCRecord::QueryPointer( const int nRow, const std::string& strColTag ) const
+{
+    int nCol = GetCol(strColTag);
+    return QueryPointer(nRow, nCol);
 }
 
 int NFCRecord::FindRowByColValue(const int nCol, const NFIValueList& var, NFIValueList& varResult)
@@ -585,8 +667,19 @@ int NFCRecord::FindRowByColValue(const int nCol, const NFIValueList& var, NFIVal
     return -1;
 }
 
+int NFCRecord::FindRowByColValue( const std::string& strColTag, const NFIValueList& var, NFIValueList& varResult )
+{
+    int nCol = GetCol(strColTag);
+    return FindRowByColValue(nCol, var, varResult);
+}
+
 int NFCRecord::FindInt(const int nCol, const int value, NFIValueList& varResult)
 {
+    if (!ValidCol(nCol))
+    {
+        return -1;
+    }
+
     if (VTYPE_INT != mVarRecordType.Type(nCol))
     {
         return -1;
@@ -608,8 +701,24 @@ int NFCRecord::FindInt(const int nCol, const int value, NFIValueList& varResult)
     return varResult.GetCount();
 }
 
+int NFCRecord::FindInt( const std::string& strColTag, const int value, NFIValueList& varResult )
+{
+    if (strColTag.empty())
+    {
+        return -1;
+    }
+
+    int nCol = GetCol(strColTag);
+    return FindFloat(nCol, value, varResult);
+}
+
 int NFCRecord::FindFloat(const int nCol, const float value, NFIValueList& varResult)
 {
+    if (!ValidCol(nCol))
+    {
+        return -1;
+    }
+
     if (VTYPE_FLOAT != mVarRecordType.Type(nCol))
     {
         return -1;
@@ -631,8 +740,24 @@ int NFCRecord::FindFloat(const int nCol, const float value, NFIValueList& varRes
     return varResult.GetCount();
 }
 
+int NFCRecord::FindFloat( const std::string& strColTag, const float value, NFIValueList& varResult )
+{
+    if (strColTag.empty())
+    {
+        return -1;
+    }
+
+    int nCol = GetCol(strColTag);
+    return FindFloat(nCol, value, varResult);
+}
+
 int NFCRecord::FindDouble(const int nCol, const double value, NFIValueList& varResult)
 {
+    if (!ValidCol(nCol))
+    {
+        return -1;
+    }
+
     if (VTYPE_DOUBLE != mVarRecordType.Type(nCol))
     {
         return -1;
@@ -654,8 +779,24 @@ int NFCRecord::FindDouble(const int nCol, const double value, NFIValueList& varR
     return varResult.GetCount();
 }
 
+int NFCRecord::FindDouble( const std::string& strColTag, const double value, NFIValueList& varResult )
+{
+    if (strColTag.empty())
+    {
+        return -1;
+    }
+
+    int nCol = GetCol(strColTag);
+    return FindDouble(nCol, value, varResult);
+}
+
 int NFCRecord::FindString(const int nCol, const char* value, NFIValueList& varResult)
 {
+    if (!ValidCol(nCol))
+    {
+        return -1;
+    }
+
     if (VTYPE_STRING != mVarRecordType.Type(nCol))
     {
         return -1;
@@ -678,8 +819,24 @@ int NFCRecord::FindString(const int nCol, const char* value, NFIValueList& varRe
     return varResult.GetCount();
 }
 
+int NFCRecord::FindString( const std::string& strColTag, const char* value, NFIValueList& varResult )
+{
+    if (strColTag.empty())
+    {
+        return -1;
+    }
+
+    int nCol = GetCol(strColTag);
+    return FindString(nCol, value, varResult);
+}
+
 int NFCRecord::FindObject(const int nCol, const NFIDENTID& value, NFIValueList& varResult)
 {
+    if (!ValidCol(nCol))
+    {
+        return -1;
+    }
+
     if (VTYPE_OBJECT != mVarRecordType.Type(nCol))
     {
         return -1;
@@ -701,9 +858,31 @@ int NFCRecord::FindObject(const int nCol, const NFIDENTID& value, NFIValueList& 
     return varResult.GetCount();
 }
 
+int NFCRecord::FindObject( const std::string& strColTag, const NFIDENTID& value, NFIValueList& varResult )
+{
+    if (strColTag.empty())
+    {
+        return -1;
+    }
+
+    int nCol = GetCol(strColTag);
+    return FindObject(nCol, value, varResult);
+}
+
 int NFCRecord::FindPointer(const int nCol, const void* value, NFIValueList& varResult)
 {
     return varResult.GetCount();
+}
+
+int NFCRecord::FindPointer( const std::string& strColTag, const void* value, NFIValueList& varResult )
+{
+    if (strColTag.empty())
+    {
+        return -1;
+    }
+
+    int nCol = GetCol(strColTag);
+    return FindPointer(nCol, value, varResult);
 }
 
 bool NFCRecord::Remove(const int nRow)
@@ -769,7 +948,7 @@ int NFCRecord::GetPos( int nRow, int nCol ) const
     return nRow * mVarRecordType.GetCount() + nCol;
 }
 
-const std::string& NFCRecord::GetName()
+const std::string& NFCRecord::GetName() const
 {
     return mstrRecordName;
 }
@@ -794,7 +973,7 @@ void NFCRecord::SetName(const char* strName)
     mstrRecordName = strName;
 }
 
-const NFIValueList& NFCRecord::GetInitData()
+const NFIValueList& NFCRecord::GetInitData() const
 {
     return mVarRecordType;
 }
@@ -845,14 +1024,19 @@ bool NFCRecord::SwapRowInfo(const int nOriginRow, const int nTargetRow)
     return false;
 }
 
-const NFIValueList& NFCRecord::GetInitDesc()
+const NFIValueList& NFCRecord::GetInitDesc() const
 {
     return mVarRecordDesc;
 }
 
-const NFIValueList& NFCRecord::GetTag()
+const NFIValueList& NFCRecord::GetTag() const
 {
     return mVarRecordTag;
+}
+
+const NFIRecord::TRECORDVEC& NFCRecord::GetRecordVec() const
+{
+    return mtRecordVec;
 }
 
 bool NFCRecord::SetUsed(const int nRow, const int bUse)
@@ -885,7 +1069,7 @@ bool NFCRecord::IsKey( const int nRow ) const
     return false;
 }
 
-const NFIValueList& NFCRecord::GetKeyState()
+const NFIValueList& NFCRecord::GetKeyState() const
 {
     return mVarRecordKey;
 }
@@ -919,6 +1103,17 @@ bool NFCRecord::ValidCol( int nCol ) const
     }
 
     return true;
+}
+
+int NFCRecord::GetCol( const std::string& strTag ) const
+{
+    std::map<std::string, int>::const_iterator it = mmTag.find(strTag);
+    if (it != mmTag.end())
+    {
+        return it->second;
+    }
+
+    return -1;
 }
 
 
