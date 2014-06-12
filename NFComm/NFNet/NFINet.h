@@ -18,7 +18,7 @@
 #include <map>
 #include <xtree>
 
-#ifndef WIN32
+#if NF_PLATFORM != NF_PLATFORM_WIN
 #include <netinet/in.h>
 # ifdef _XOPEN_SOURCE_EXTENDED
 #  include <arpa/inet.h>
@@ -51,14 +51,14 @@ public:
 	virtual  bool Final() = 0;
     virtual  bool Reset() = 0;
 
-	virtual bool SendMsg(const NFIPacket& msg, const uint16_t nSockIndex = 0, bool bBroadcast = false) = 0;
-	virtual bool SendMsg(const char* msg, const uint32_t nLen, const uint16_t nSockIndex = 0, bool bBroadcast = false) = 0;
+	virtual bool SendMsg(const NFIPacket& msg, const uint32_t nSockIndex = 0, bool bBroadcast = false) = 0;
+	virtual bool SendMsg(const char* msg, const uint32_t nLen, const uint32_t nSockIndex = 0, bool bBroadcast = false) = 0;
 	
-	virtual int OnRecivePacket(const uint16_t nSockIndex, const char* msg, const uint32_t nLen){return 1;};
+	virtual int OnRecivePacket(const uint32_t nSockIndex, const char* msg, const uint32_t nLen){return 1;};
 
-	virtual bool CloseSocket(const uint16_t nSockIndex) = 0;
-	virtual bool AddBan(const uint16_t nSockIndex, const int32_t nTime = -1) = 0;
-	virtual bool RemoveBan(const uint16_t nSockIndex) = 0;
+	virtual bool CloseSocket(const uint32_t nSockIndex) = 0;
+	virtual bool AddBan(const uint32_t nSockIndex, const int32_t nTime = -1) = 0;
+	virtual bool RemoveBan(const uint32_t nSockIndex) = 0;
 
 	virtual void HeartPack() = 0;
 
