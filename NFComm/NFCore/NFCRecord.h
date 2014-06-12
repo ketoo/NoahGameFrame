@@ -17,7 +17,7 @@ class NFCRecord : public NFIRecord
 {
 public:
     NFCRecord();
-    NFCRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& valueList, const NFIValueList& keyList, const NFIValueList& descList, int nMaxRow, bool bPublic,  bool bPrivate,  bool bSave, int nIndex);
+    NFCRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& valueList, const NFIValueList& keyList, const NFIValueList& descList, const NFIValueList& tagList, int nMaxRow, bool bPublic,  bool bPrivate,  bool bSave, int nIndex);
 
     virtual ~NFCRecord();
 
@@ -32,6 +32,7 @@ public:
     virtual int GetRows() const;
 
     virtual VARIANT_TYPE GetColType(const int nCol) const;
+    virtual const std::string& GetColTag(const int nCol) const;
 
     // 添加数据
     virtual int AddRow(const int nRow);
@@ -107,6 +108,7 @@ public:
 	virtual const NFIValueList& GetInitData();
     virtual const NFIValueList& GetKeyState();
     virtual const NFIValueList& GetInitDesc();
+    virtual const NFIValueList& GetTag();
 
     virtual const TRECORDVEC& GetRecordVec() const
     {
@@ -124,6 +126,7 @@ protected:
 protected:
     //记录这个表的Key类型，那样在读取和设置的时候才能保持正确
     NFCValueList mVarRecordType;//初始值类型--应该引用静态的(或者智能指针)，节约大量内存
+    NFCValueList mVarRecordTag;//col的tag值--应该引用静态的(或者智能指针)，节约大量内存
 	NFCValueList mVarRecordDesc;//初始值描述--应该引用静态的(或者智能指针)，节约大量内存
     NFCValueList mVarRecordKey;//各row是否是KEY--应该引用静态的(或者智能指针)，节约大量内存
     TRECORDVEC mtRecordVec;//真的数据

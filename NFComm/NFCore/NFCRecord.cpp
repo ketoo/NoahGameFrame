@@ -21,7 +21,7 @@ NFCRecord::NFCRecord()
 
 }
 
-NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& valueList, const NFIValueList& keyList, const NFIValueList& descList, int nMaxRow, bool bPublic,  bool bPrivate,  bool bSave, int nIndex)
+NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& valueList, const NFIValueList& keyList, const NFIValueList& descList, const NFIValueList& tagList, int nMaxRow, bool bPublic,  bool bPrivate,  bool bSave, int nIndex)
 {
     mVarRecordType = valueList;
     mVarRecordDesc = descList;
@@ -88,6 +88,11 @@ int NFCRecord::GetRows() const
 VARIANT_TYPE NFCRecord::GetColType(const int nCol) const
 {
     return mVarRecordType.Type(nCol);
+}
+
+const std::string& NFCRecord::GetColTag( const int nCol ) const
+{
+    return mVarRecordTag.StringVal(nCol);
 }
 
 // Ìí¼ÓÊý¾Ý
@@ -845,6 +850,11 @@ const NFIValueList& NFCRecord::GetInitDesc()
     return mVarRecordDesc;
 }
 
+const NFIValueList& NFCRecord::GetTag()
+{
+    return mVarRecordTag;
+}
+
 bool NFCRecord::SetUsed(const int nRow, const int bUse)
 {
     if (ValidRow(nRow))
@@ -910,3 +920,5 @@ bool NFCRecord::ValidCol( int nCol ) const
 
     return true;
 }
+
+
