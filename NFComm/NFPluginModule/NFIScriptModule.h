@@ -13,7 +13,180 @@
 #include "NFILogicModule.h"
 #include "NFComm\NFCore\NFCValueList.h"
 #include "NFComm\NFCore\NFIdentID.h"
-#include "NFIElementInfoModule.h"
+#include "NFComm\NFPluginModule\NFIElementInfoModule.h"
+
+static  NFIValueList* NFVarList_New()
+{
+    NFIValueList* pVarList = new NFCValueList();
+    return pVarList;
+}
+
+static void NFVarList_Del(NFIValueList* pVarList)
+{
+    if (pVarList)
+    {
+        delete pVarList;
+        pVarList = NULL;
+    }
+}
+
+static void NFVarList_Clear(NFIValueList* pVarList)
+{
+    if (pVarList)
+    {
+        pVarList->Clear();
+    }
+}
+
+static bool NFVarList_IsEmpty(NFIValueList* pVarList)
+{
+    if (pVarList)
+    {
+        pVarList->IsEmpty();
+    }
+
+    return false;
+}
+
+static int NFVarList_GetCount(NFIValueList* pVarList)
+{
+    if (pVarList)
+    {
+        return pVarList->GetCount();
+    }
+
+    return 0;
+}
+
+static VARIANT_TYPE NFVarList_Type(NFIValueList* pVarList, const int index)
+{
+    if (pVarList)
+    {
+        return pVarList->Type(index);
+    }
+
+    return VTYPE_UNKNOWN;
+}
+
+static bool NFVarList_AddInt(NFIValueList* pVarList, const int value)
+{
+    if (pVarList)
+    {
+        return pVarList->AddInt(value);
+    }
+
+    return false;
+}
+
+static bool NFVarList_AddFloat(NFIValueList* pVarList, const float value)
+{
+    if (pVarList)
+    {
+        return pVarList->AddFloat(value);
+    }
+
+    return false;
+}
+
+static bool NFVarList_AddString(NFIValueList* pVarList, const char* value)
+{
+    if (pVarList)
+    {
+        return pVarList->AddString(value);
+    }
+
+    return false;
+}
+
+static bool NFVarList_AddObject(NFIValueList* pVarList, const NFIDENTID& value)
+{
+    if (pVarList)
+    {
+        return pVarList->AddObject(value);
+    }
+
+    return false;
+}
+
+static bool NFVarList_SetInt(NFIValueList* pVarList, const int index, const int value)
+{
+    if (pVarList)
+    {
+        return pVarList->SetInt(index, value);
+    }
+
+    return false;
+}
+
+static bool NFVarList_SetFloat(NFIValueList* pVarList, const int index, const float value)
+{
+    if (pVarList)
+    {
+        return pVarList->SetFloat(index, value);
+    }
+
+    return false;
+}
+
+static bool NFVarList_SetString(NFIValueList* pVarList, const int index, const char* value)
+{
+    if (pVarList)
+    {
+        return pVarList->SetString(index, value);
+    }
+
+    return false;
+}
+
+static bool NFVarList_SetObject(NFIValueList* pVarList, const int index, const NFIDENTID& value)
+{
+    if (pVarList)
+    {
+        return pVarList->SetObject(index, value);
+    }
+
+    return false;
+}
+
+static int NFVarList_IntVal(NFIValueList* pVarList, const int index)
+{
+    if (pVarList)
+    {
+        return pVarList->IntVal(index);
+    }
+
+    return 0;
+}
+
+static float NFVarList_FloatVal(NFIValueList* pVarList, const int index)
+{
+    if (pVarList)
+    {
+        return pVarList->FloatVal(index);
+    }
+
+    return 0.0f;
+}
+
+static const std::string& NFVarList_StringVal(NFIValueList* pVarList, const int index)
+{
+    if (pVarList)
+    {
+        return pVarList->StringVal(index);
+    }
+
+    return NULL_STR;
+}
+
+static NFIDENTID NFVarList_ObjectVal(NFIValueList* pVarList, const int index)
+{
+    if (pVarList)
+    {
+        return pVarList->ObjectVal(index);
+    }
+
+    return 0;
+}
 
 class NFCScriptVarList
 {
@@ -137,7 +310,7 @@ public:
         {
             return false;
         }
-        
+
         return true;
     }
 
@@ -262,7 +435,7 @@ public:
     bool DoEvent(const NFIDENTID& objectID, const int nEventID, const NFCScriptVarList& valueList)
     {
         //do c++ event
-        
+
         return false;
     }
 
@@ -287,7 +460,7 @@ public:
     }
     //////////////////////////////////////////////////////////////////
 
-    
+
     bool AddPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction)
     {
         NFCSriptData* pScriptData = GetElement(self);
@@ -296,7 +469,7 @@ public:
             pScriptData = new NFCSriptData();
             AddElement(self, pScriptData);
         }
-        
+
         NFList<NFCScriptName>* pScriptNameList = pScriptData->mxPropertyCallBackData.GetElement(strPropertyName);
         if (!pScriptNameList)
         {
@@ -435,7 +608,7 @@ public:
         {
             return true;
         }
-        
+
         return false;
     }
 
