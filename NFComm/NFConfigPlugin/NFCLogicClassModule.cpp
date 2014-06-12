@@ -163,6 +163,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* recordRootNode, NFCLo
             NFCValueList recordVar;
             NFCValueList recordKey;
             NFCValueList recordDesc;
+            NFCValueList recordTag;
             for (rapidxml::xml_node<>* recordColNode = recordNode->first_node(); recordColNode;  recordColNode = recordColNode->next_sibling())
             {
                 //const char* pstrColName = recordColNode->first_attribute( "Id" )->value();
@@ -189,6 +190,13 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* recordRootNode, NFCLo
                         recordKey.AddInt(0);
                     }
                 }
+
+                if (recordColNode->first_attribute("Tag") != NULL)
+                {
+                    const char* pstrTag = recordColNode->first_attribute("Tag")->value();
+                    recordTag.AddString(pstrTag);
+                }
+
                 //////////////////////////////////////////////////////////////////////////
                 if (recordColNode->first_attribute("Desc"))
                 {
@@ -203,7 +211,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* recordRootNode, NFCLo
                 //////////////////////////////////////////////////////////////////////////
             }
 
-            pClass->GetRecordManager()->AddRecord(0, pstrRecordName, recordVar, recordKey, recordDesc, atoi(pstrRow), bPublic, bPrivate, bSave, nIndex);
+            pClass->GetRecordManager()->AddRecord(0, pstrRecordName, recordVar, recordKey, recordDesc, recordTag, atoi(pstrRow), bPublic, bPrivate, bSave, nIndex);
         }
     }
 
@@ -247,27 +255,37 @@ bool NFCLogicClassModule::AddClassInclude(const char* pstrClassFilePath, NFCLogi
     //support for unlimited layer class inherits
     rapidxml::xml_node<>* root = doc.first_node();
 
-    rapidxml::xml_node<>* propertyRootNode = root->first_node("Propertys");
-    AddPropertys(propertyRootNode, pClass);
+    rapidxml::xml_node<>* pRropertyRootNode = root->first_node("Propertys");
+    if (pRropertyRootNode)
+    {
+        AddPropertys(pRropertyRootNode, pClass);
+    }
 
     //////////////////////////////////////////////////////////////////////////
     //and record
-    rapidxml::xml_node<>* recordRootNode = root->first_node("Records");
-    AddRecords(recordRootNode, pClass);
+    rapidxml::xml_node<>* pRecordRootNode = root->first_node("Records");
+    if (pRecordRootNode)
+    {
+        AddRecords(pRecordRootNode, pClass);
+    }
 
     //pClass->mvIncludeFile.push_back( pstrClassFilePath );
     //and include file
-    rapidxml::xml_node<>* includeRootNode = root->first_node("Includes");
-    for (rapidxml::xml_node<>* includeNode = includeRootNode->first_node(); includeNode; includeNode = includeNode->next_sibling())
+    rapidxml::xml_node<>* pIncludeRootNode = root->first_node("Includes");
+    if (pIncludeRootNode)
     {
-        const char* pstrIncludeFile = includeNode->first_attribute("Id")->value();
-        //std::vector<std::string>::iterator it = std::find( pClass->mvIncludeFile.begin(), pClass->mvIncludeFile..end(), pstrIncludeFile );
-
-        if (AddClassInclude(pstrIncludeFile, pClass))
+        for (rapidxml::xml_node<>* includeNode = pIncludeRootNode->first_node(); includeNode; includeNode = includeNode->next_sibling())
         {
-            pClass->Add(pstrIncludeFile);
+            const char* pstrIncludeFile = includeNode->first_attribute("Id")->value();
+            //std::vector<std::string>::iterator it = std::find( pClass->mvIncludeFile.begin(), pClass->mvIncludeFile..end(), pstrIncludeFile );
+
+            if (AddClassInclude(pstrIncludeFile, pClass))
+            {
+                pClass->Add(pstrIncludeFile);
+            }
         }
     }
+    
 
     return true;
 }
