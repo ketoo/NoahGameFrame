@@ -59,11 +59,11 @@ public:
     virtual bool SetRecordString(const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue);
     virtual bool SetRecordObject(const std::string& strRecordName, const int nRow, const int nCol, const NFIDENTID& obj);
 
-    virtual bool SetRecordInt(NFIRecord* pRecord, const std::string& strRecordName, const int nRow, const int nCol, const int nValue);
-    virtual bool SetRecordFloat(NFIRecord* pRecord, const std::string& strRecordName, const int nRow, const int nCol,  const float fValue);
-    virtual bool SetRecordDouble(NFIRecord* pRecord, const std::string& strRecordName, const int nRow, const int nCol, const double dwValue);
-    virtual bool SetRecordString(NFIRecord* pRecord, const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue);
-    virtual bool SetRecordObject(NFIRecord* pRecord, const std::string& strRecordName, const int nRow, const int nCol, const NFIDENTID& obj);
+    virtual bool SetRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag, const int value);
+    virtual bool SetRecordFloat(const std::string& strRecordName, const int nRow, const std::string& strColTag, const float value);
+    virtual bool SetRecordDouble(const std::string& strRecordName, const int nRow, const std::string& strColTag, const double value);
+    virtual bool SetRecordString(const std::string& strRecordName, const int nRow, const std::string& strColTag, const std::string& value);
+    virtual bool SetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFIDENTID& value);
 
     virtual int QueryRecordInt(const std::string& strRecordName, const int nRow, const int nCol);
     virtual float QueryRecordFloat(const std::string& strRecordName, const int nRow, const int nCol);
@@ -71,11 +71,11 @@ public:
     virtual const std::string& QueryRecordString(const std::string& strRecordName, const int nRow, const int nCol);
     virtual NFIDENTID QueryRecordObject(const std::string& strRecordName, const int nRow, const int nCol);
 
-    virtual int QueryRecordInt(NFIRecord* pRecord, const std::string& strRecordName, const int nRow, const int nCol);
-    virtual float QueryRecordFloat(NFIRecord* pRecord, const std::string& strRecordName, const int nRow, const int nCol);
-    virtual double QueryRecordDouble(NFIRecord* pRecord, const std::string& strRecordName, const int nRow, const int nCol);
-    virtual const std::string& QueryRecordString(NFIRecord* pRecord, const std::string& strRecordName, const int nRow, const int nCol);
-    virtual NFIDENTID QueryRecordObject(NFIRecord* pRecord, const std::string& strRecordName, const int nRow, const int nCol);
+    virtual int QueryRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag);
+    virtual float QueryRecordFloat(const std::string& strRecordName, const int nRow, const std::string& strColTag);
+    virtual double QueryRecordDouble(const std::string& strRecordName, const int nRow, const std::string& strColTag);
+    virtual const std::string& QueryRecordString(const std::string& strRecordName, const int nRow, const std::string& strColTag);
+    virtual NFIDENTID QueryRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag);
 
     virtual NFIComponent* AddComponent(const std::string& strComponentName, const std::string& strLanguageName);
     virtual NFIComponent* FindComponent(const std::string& strComponentName);
