@@ -196,6 +196,10 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* recordRootNode, NFCLo
                     const char* pstrTag = recordColNode->first_attribute("Tag")->value();
                     recordTag.AddString(pstrTag);
                 }
+                else
+                {
+                    recordTag.AddString("");
+                }
 
                 //////////////////////////////////////////////////////////////////////////
                 if (recordColNode->first_attribute("Desc"))

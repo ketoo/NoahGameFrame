@@ -6,20 +6,15 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-//#include "stdafx.h"
 #include <time.h>
 #include <boost/bind.hpp>
-
 #include "NFStackWalker.h"
-
-#include "../NFKernelPlugin.h"
 #include "NFCKernelModule.h"
 #include "NFComm/NFCore/NFIdentID.h"
 #include "NFComm/NFCore/NFIObject.h"
 #include "NFComm/NFCore/NFCValueList.h"
 #include "NFComm/NFCore/NFCRecord.h"
-
-
+#include "../NFKernelPlugin.h"
 
 NFCKernelModule::NFCKernelModule(NFIPluginManager* p)
 {
@@ -676,12 +671,52 @@ bool NFCKernelModule::SetRecordInt(const NFIDENTID& self, const std::string& str
     return false;
 }
 
+bool NFCKernelModule::SetRecordInt( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const int value )
+{
+    NFIObject* pObject = GetElement(self);
+    if (pObject)
+    {
+        if (!pObject->SetRecordInt(strRecordName, nRow, strColTag, value))
+        {
+            m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error for row or col", __FUNCTION__, __LINE__);
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName + "| There is no object", __FUNCTION__, __LINE__);
+    
+    return false;
+}
+
 bool NFCKernelModule::SetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol,  const float fValue)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
         if (!pObject->SetRecordFloat(strRecordName, nRow, nCol, fValue))
+        {
+            m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordFloat for row  or col", __FUNCTION__, __LINE__);
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName + "| There is no object", __FUNCTION__, __LINE__);
+
+    return false;
+}
+
+bool NFCKernelModule::SetRecordFloat( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const float value )
+{
+    NFIObject* pObject = GetElement(self);
+    if (pObject)
+    {
+        if (!pObject->SetRecordFloat(strRecordName, nRow, strColTag, value))
         {
             m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordFloat for row  or col", __FUNCTION__, __LINE__);
         }
@@ -716,6 +751,26 @@ bool NFCKernelModule::SetRecordDouble(const NFIDENTID& self, const std::string& 
     return false;
 }
 
+bool NFCKernelModule::SetRecordDouble( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const double value )
+{
+    NFIObject* pObject = GetElement(self);
+    if (pObject)
+    {
+        if (!pObject->SetRecordDouble(strRecordName, nRow, strColTag, value))
+        {
+            m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordDouble for row  or col", __FUNCTION__, __LINE__);
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+
+    return false;
+}
+
 bool NFCKernelModule::SetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue)
 {
     NFIObject* pObject = GetElement(self);
@@ -724,6 +779,26 @@ bool NFCKernelModule::SetRecordString(const NFIDENTID& self, const std::string& 
         if (!pObject->SetRecordString(strRecordName, nRow, nCol, strValue))
         {
             m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordString for row  or col", __FUNCTION__, __LINE__);
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+
+    return false;
+}
+
+bool NFCKernelModule::SetRecordString( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const std::string& value )
+{
+    NFIObject* pObject = GetElement(self);
+    if (pObject)
+    {
+        if (!pObject->SetRecordString(strRecordName, nRow, strColTag, value))
+        {
+            m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordObject for row  or col", __FUNCTION__, __LINE__);
         }
         else
         {
@@ -756,12 +831,45 @@ bool NFCKernelModule::SetRecordObject(const NFIDENTID& self, const std::string& 
     return false;
 }
 
+bool NFCKernelModule::SetRecordObject( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFIDENTID& value )
+{
+    NFIObject* pObject = GetElement(self);
+    if (pObject)
+    {
+        if (!pObject->SetRecordObject(strRecordName, nRow, strColTag, value))
+        {
+            m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordObject for row  or col", __FUNCTION__, __LINE__);
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+
+    return false;
+}
+
 int NFCKernelModule::QueryRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
         return pObject->QueryRecordInt(strRecordName, nRow, nCol);
+    }
+
+    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+
+    return 0;
+}
+
+int NFCKernelModule::QueryRecordInt( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag )
+{
+    NFIObject* pObject = GetElement(self);
+    if (pObject)
+    {
+        return pObject->QueryRecordInt(strRecordName, nRow, strColTag);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
@@ -782,12 +890,38 @@ float NFCKernelModule::QueryRecordFloat(const NFIDENTID& self, const std::string
     return 0.0f;
 }
 
+float NFCKernelModule::QueryRecordFloat( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag )
+{
+    NFIObject* pObject = GetElement(self);
+    if (pObject)
+    {
+        return pObject->QueryRecordFloat(strRecordName, nRow, strColTag);
+    }
+
+    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+
+    return 0.0f;
+}
+
 double NFCKernelModule::QueryRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
         return pObject->QueryRecordDouble(strRecordName, nRow, nCol);
+    }
+
+    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+
+    return 0.0;
+}
+
+double NFCKernelModule::QueryRecordDouble( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag )
+{
+    NFIObject* pObject = GetElement(self);
+    if (pObject)
+    {
+        return pObject->QueryRecordDouble(strRecordName, nRow, strColTag);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
@@ -808,12 +942,38 @@ const std::string& NFCKernelModule::QueryRecordString(const NFIDENTID& self, con
     return NULL_STR;
 }
 
+const std::string& NFCKernelModule::QueryRecordString( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag )
+{
+    NFIObject* pObject = GetElement(self);
+    if (pObject)
+    {
+        return pObject->QueryRecordString(strRecordName, nRow, strColTag);
+    }
+
+    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+
+    return NULL_STR;
+}
+
 NFIDENTID NFCKernelModule::QueryRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
         return pObject->QueryRecordObject(strRecordName, nRow, nCol);
+    }
+
+    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object",  __FUNCTION__, __LINE__);
+
+    return 0;
+}
+
+NFIDENTID NFCKernelModule::QueryRecordObject( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag )
+{
+    NFIObject* pObject = GetElement(self);
+    if (pObject)
+    {
+        return pObject->QueryRecordObject(strRecordName, nRow, strColTag);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object",  __FUNCTION__, __LINE__);
@@ -1247,54 +1407,38 @@ bool NFCKernelModule::LogStack()
 bool NFCKernelModule::LogInfo(const NFIDENTID ident)
 {
     //看是容器还是普通对象，容器则打印所有对象
-//     NFIObject* pObject = GetObject(ident);
-//     if (pObject)
-//     {
-//         if (IsContainer(ident))
-//         {
-//             LogSelfInfo(ident);
-//             LogInfo("----------child object list--------");
-// 
-//             int nContainerID = QueryPropertyInt(ident, "SceneID");
-//             NFCValueList valObjectList;
-//             int nCount = GetContainerOnLineList(nContainerID, valObjectList);
-//             for (int i  = 0; i < nCount; i++)
-//             {
-//                 NFIDENTID targetIdent = valObjectList.ObjectVal(i);
-//                 std::string szInfo = NFIDENTID::ToString(targetIdent);
-// 
-//                 LogInfo(szInfo.c_str());
-//             }
-//         }
-//         else
-//         {
-//             LogSelfInfo(ident);
-//         }
-//     }
-//     else
-//     {
-//         m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, ident, __FUNCTION__, __LINE__);
-//     }
+    NFIObject* pObject = GetObject(ident);
+    if (pObject)
+    {
+        if (IsContainer(ident))
+        {
+            int nContainerID = QueryPropertyInt(ident, "SceneID");
+
+            m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "//----------child object list-------- SceneID = ", nContainerID);
+
+            NFCValueList valObjectList;
+            int nCount = GetContainerOnLineList(nContainerID, valObjectList);
+            for (int i  = 0; i < nCount; i++)
+            {
+                NFIDENTID targetIdent = valObjectList.ObjectVal(i);
+                LogInfo(targetIdent);
+            }
+        }
+        else
+        {
+            m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "//---------printf object start-------- ", "");
+
+
+            m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "//---------printf object end-------- ", "");
+        }
+    }
+    else
+    {
+        m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, ident, "", __FUNCTION__, __LINE__);
+    }
 
     return true;
 }
-
-//int NFCKernelModule::OnPropertyCommonEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar)
-//{
-    //if (IsContainer(self))
-    //{
-    //    return 0;
-    //}
-
-    //std::list<PROPERTY_EVENT_FUNC>::iterator it = mtCommonPropertyCallBackList.begin();
-    //for (it; it != mtCommonPropertyCallBackList.end(); it++)
-    //{
-    //    PROPERTY_EVENT_FUNC pFun = *it;
-    //    pFun(self, strPropertyName, oldVar, newVar, argVar);
-    //}
-
-//    return 0;
-//}
 
 int NFCKernelModule::OnPropertyCommonEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar)
 {
@@ -1473,24 +1617,6 @@ int NFCKernelModule::OnClassCommonEvent(const NFIDENTID& self, const std::string
 
     return 0;
 }
-
-//bool NFCKernelModule::ResgisterCommonClassEvent(CLASS_EVENT_FUNC cb)
-//{
-//    mtCommonClassCallBackList.push_back(cb);
-//    return true;
-//}
-//
-//bool NFCKernelModule::ResgisterCommonPropertyEvent(PROPERTY_EVENT_FUNC cb)
-//{
-//    mtCommonPropertyCallBackList.push_back(cb);
-//    return true;
-//}
-//
-//bool NFCKernelModule::ResgisterCommonRecordEvent(RECORD_EVENT_FUNC cb)
-//{
-//    mtCommonRecordCallBackList.push_back(cb);
-//    return true;
-//}
 
 bool NFCKernelModule::ResgisterCommonClassEvent(const CLASS_EVENT_FUNCTOR_PTR& cb)
 {
