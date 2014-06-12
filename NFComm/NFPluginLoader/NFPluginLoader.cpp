@@ -159,13 +159,13 @@ int main()
                 break;
             }
 			
-			std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+			std::this_thread::sleep_for(std::chrono::milliseconds(5));
 
 #ifndef NF_DEBUG_MODE
             __try
 #endif
             {
-                NFCActorManager::GetSingletonPtr()->Execute(0.1f, 0.1f);
+                NFCActorManager::GetSingletonPtr()->Execute(0.005f, 0.005f);
             }
 #ifndef NF_DEBUG_MODE
             __except (ApplicationCrashHandler(GetExceptionInformation()))

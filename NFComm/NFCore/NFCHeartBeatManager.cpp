@@ -24,7 +24,7 @@ void NFCHeartBeatElement::DoHeartBeatEvent()
     bool bRet = First(cb);
     while (bRet)
     {
-        cb.get()->operator()(self, strBeatName, fTime, nCount, var);
+        cb.get()->operator()(self, strBeatName, fBeatTime, nCount, var);
 
         bRet = Next(cb);
     }
