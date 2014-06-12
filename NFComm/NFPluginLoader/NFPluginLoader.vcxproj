@@ -82,7 +82,9 @@ copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Co
 copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\Tutorial2\$(ProjectName)_d.exe
 copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\Tutorial2\$(ProjectName)_d.pdb
 copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\Tutorial3\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\Tutorial3\$(ProjectName)_d.pdb</Command>
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\Tutorial3\$(ProjectName)_d.pdb
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\Tutorial4\$(ProjectName)_d.exe
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\Tutorial4\$(ProjectName)_d.pdb</Command>
     </PostBuildEvent>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
