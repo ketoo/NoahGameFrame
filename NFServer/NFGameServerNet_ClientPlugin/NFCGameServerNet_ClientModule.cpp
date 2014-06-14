@@ -125,7 +125,7 @@ bool NFCGameServerNet_ClientModule::AfterInit()
     m_pKernelModule->ResgisterCommonClassEvent(this, &NFCGameServerNet_ClientModule::OnClassCommonEvent);
     
     // Á¬½Óworld server
-    mstrConfigIdent = "WorldServer";
+    mstrConfigIdent = "GameServer";
 
 	const int nServerID = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerID");
 	const std::string& strServerIP = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "ServerIP");
@@ -366,6 +366,23 @@ int NFCGameServerNet_ClientModule::OnRecivePack( const NFIPacket& msg )
 
 int NFCGameServerNet_ClientModule::OnSocketEvent( const uint16_t nSockIndex, const NF_NET_EVENT eEvent )
 {
+    if (eEvent & NF_NET_EVENT_EOF) 
+    {
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
+    } 
+    else if (eEvent & NF_NET_EVENT_ERROR) 
+    {
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
+    }
+    else if (eEvent & NF_NET_EVENT_TIMEOUT)
+    {
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
+    }
+    else  if (eEvent == NF_NET_EVENT_CONNECTED)
+    {
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+    }
+
     return 0;
 
 }
