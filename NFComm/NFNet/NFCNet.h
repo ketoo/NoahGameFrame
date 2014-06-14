@@ -154,7 +154,6 @@ public:
     {
         base = NULL;
         listener = NULL;
-        signal_event = NULL;
 
         mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
         mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2);
@@ -201,7 +200,6 @@ private:
 	static void conn_readcb(struct bufferevent *bev, void *user_data);
 	static void conn_writecb(struct bufferevent *bev, void *user_data);
 	static void conn_eventcb(struct bufferevent *bev, short events, void *user_data);
-	static void signal_cb(evutil_socket_t sig, short events, void *user_data);
 	static void time_cb(evutil_socket_t fd, short _event, void *argc);
 private:
 	//<fd,object>
@@ -218,7 +216,6 @@ private:
     bool mbUsePacket;//是否使用我们的包
 	struct event_base *base;
 	struct evconnlistener *listener;
-	struct event *signal_event;
 	//////////////////////////////////////////////////////////////////////////
 	struct timeval tv;
 	struct event* ev;

@@ -49,7 +49,6 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
         if (!pNet->mbServer)
         {
             //客户端断线重连
-            pNet->mbRuning = false;
             pNet->Reset();
         }
     } 
@@ -60,7 +59,6 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
         if (!pNet->mbServer)
         {
             //客户端断线重连
-            pNet->mbRuning = false;
             pNet->Reset();
         }
     }
@@ -72,7 +70,6 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
         if (!pNet->mbServer)
         {
             //客户端断线重连
-            pNet->mbRuning = false;
             pNet->Reset();
         }
     }
@@ -82,18 +79,6 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
         printf("%d Connection successed\n", pObject->GetFd());/*XXX win32*/
     }
 }
-
-void NFCNet::signal_cb(evutil_socket_t sig, short events, void *user_data)
-{
-//     NFCNet *base = (NFCNet *)user_data;
-//     struct timeval delay = { 2, 0 };
-// 
-//     printf("Caught an interrupt signal; exiting cleanly in two seconds.\n");
-// 
-// 
-//     event_base_loopexit(base->base, &delay);
-}
-
 
 void NFCNet::listener_cb(struct evconnlistener *listener, evutil_socket_t fd, struct sockaddr *sa, int socklen, void *user_data)
 {
@@ -192,7 +177,7 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
 bool NFCNet::Execute(const float fLasFrametime, const float fStartedTime)
 {
     //std::cout << "Running:" << mbRuning << std::endl;
-    if (mbRuning && base)
+    if (base)
     {
         event_base_loop(base, EVLOOP_ONCE|EVLOOP_NONBLOCK);
     }
@@ -230,12 +215,6 @@ bool NFCNet::Final()
 	{
 		evconnlistener_free(listener);
         listener = NULL;
-	}
-
-	if (signal_event)
-	{
-		event_free(signal_event);
-        signal_event = NULL;
 	}
 
     // bufferevent_socket_new用参数控制关闭socket自己释放
@@ -415,7 +394,6 @@ int NFCNet::InitClientNet()
 	}
 	
 	mbServer = false;
-    mbRuning = true;
 
 	bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, (void*)pObject);
 	bufferevent_enable(bev, EV_READ|EV_WRITE);
@@ -518,17 +496,16 @@ int NFCNet::InitServerNet()
 		return -1;
 	}
 
-    signal_event = evsignal_new(base, SIGINT, signal_cb, (void *)this);
-
-    if (!signal_event || event_add(signal_event, NULL)<0)
-    {
-        fprintf(stderr, "Could not create/add a signal event!\n");
-        Final();
-        return -1;
-    }
+//     signal_event = evsignal_new(base, SIGINT, signal_cb, (void *)this);
+// 
+//     if (!signal_event || event_add(signal_event, NULL)<0)
+//     {
+//         fprintf(stderr, "Could not create/add a signal event!\n");
+//         Final();
+//         return -1;
+//     }
 
 	mbServer = true;
-    mbRuning = true;
 
 	return mnMaxConnect;
 }
@@ -547,10 +524,10 @@ bool NFCNet::Reset()
 
 void NFCNet::HeartPack()
 {
-	//NFCPacket msg(mnHeadLength);
-	//msg.EnCode(0, "", 0);
+	NFCPacket msg(mnHeadLength);
+	msg.EnCode(0, "", 0);
 
- //   SendMsg(msg, 0);
+    SendMsg(msg, 0);
 }
 
 bool NFCNet::CloseSocketAll()
