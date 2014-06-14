@@ -16,6 +16,10 @@
 		</Record>
 	</Records>
 	<Includes>	
+		<Include Id="../../NFDataCfg/Struct/Class/Comm/EfftiveObjectCommProperty.xml"/>
+		<Include Id="../../NFDataCfg/Struct/Class/Comm/EfftiveObjectCommRecord.xml"/>
+		
 		<Include Id="../../NFDataCfg/Struct/Class/Comm/ViewObjectCommProperty.xml"/>
+		<Include Id="../../NFDataCfg/Struct/Class/Comm/ViewObjectvariationProperty.xml"/>
 	</Includes>
 </XML>
