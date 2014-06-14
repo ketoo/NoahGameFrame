@@ -41,6 +41,16 @@ int NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const NFIPacket& msg)
         GetWorldObject(pData->server_id(), varList);
         if (varList.GetCount() != 0)
         {
+            NFIObject* pObject = m_pKernelModule->GetObject(varList.ObjectVal(i));
+            if (pObject)
+            {
+                pObject->SetPropertyInt("FD", msg.GetFd());
+                pObject->SetPropertyInt("State", pData->server_state());
+                pObject->SetPropertyInt("ServerID", pData->server_id());
+                pObject->SetPropertyString("Name", pData->server_name());
+                pObject->SetPropertyInt("MaxConnect", pData->server_max_online());
+                pObject->SetPropertyInt("OnlineCount", pData->server_cur_count());
+            }
             return 0;
         }
 
@@ -82,7 +92,7 @@ int NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const NFIPacket& msg)
 
         NFCValueList varList;
         GetWorldObject(pData->server_id(), varList);
-        if (varList.GetCount() != 1)
+        if (varList.GetCount() <= 0)
         {
             return 0;
         }
@@ -117,7 +127,6 @@ int NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFIPacket& msg)
         {
             return 0;
         }
-
 
         NFIDENTID ident = varList.ObjectVal(0);
 		NFIObject* pObject = m_pKernelModule->GetObject(ident);
