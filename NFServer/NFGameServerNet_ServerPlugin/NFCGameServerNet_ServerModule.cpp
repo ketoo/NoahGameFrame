@@ -57,7 +57,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	const int nCpus = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "CpuCount");
 	const int nPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "Port");
 
-	m_pNet = new NFCNet(this, &NFCGameServerNet_ServerModule::OnRecivePack, &NFCGameServerNet_ServerModule::OnSocketEvent);
+	m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerNet_ServerModule::OnRecivePack, &NFCGameServerNet_ServerModule::OnSocketEvent);
 	int nRet = m_pNet->Initialization(nMaxConnect, nPort, nCpus);
 	if (nRet <= 0)
 	{
@@ -85,7 +85,7 @@ int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
     //NFIActorMessage xActorMsg;
 
     //xActorMsg.eType = NFIActorMessage::EACTOR_NET_MSG;
-    //xActorMsg.nSubMsgID = msg.GetMsgHead().unMsgID;
+    //xActorMsg.nSubMsgID = msg.GetMsgHead()->GetMsgID();
     //xActorMsg.data.assign(msg.GetData(), msg.GetDataLen());
 
     ////根据用户基础信息得到目标actor地址,看自己想怎么管理和优化

@@ -53,7 +53,7 @@ bool NFCLoginNet_ClientModule::AfterInit()
 	const int nCpus = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "CpuCount");
 	const int nPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "Port");
 
-	m_pNet = new NFCNet(this, &NFCLoginNet_ClientModule::OnRecivePack, &NFCLoginNet_ClientModule::OnSocketEvent);
+	m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCLoginNet_ClientModule::OnRecivePack, &NFCLoginNet_ClientModule::OnSocketEvent);
 	mnSocketFD = m_pNet->Initialization(strServerIP.c_str(), nServerPort);
 	if (mnSocketFD < 0)
 	{
@@ -96,7 +96,7 @@ int NFCLoginNet_ClientModule::OnSelectServerEvent(const NFIDENTID& object, const
 	xData.set_sender_ip(nSenderAddress);
 	xData.set_account(strAccount);
 
-	SendMsg(NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xData, mnSocketFD);
+	SendMsgPB(NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xData, mnSocketFD);
 
 	return 0;
 }
@@ -126,7 +126,7 @@ void NFCLoginNet_ClientModule::Register()
 	pData->set_server_max_online(nMaxConnect);
 	pData->set_server_state(NFMsg::EST_NARMAL);
 
-	SendMsg(NFMsg::EGameMsgID::EGMI_LTM_LOGIN_REGISTERED, xMsg, mnSocketFD);
+	SendMsgPB(NFMsg::EGameMsgID::EGMI_LTM_LOGIN_REGISTERED, xMsg, mnSocketFD);
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Register");
 }
@@ -151,7 +151,7 @@ void NFCLoginNet_ClientModule::UnRegister()
 	pData->set_server_max_online(nMaxConnect);
 	pData->set_server_state(NFMsg::EST_MAINTEN);
 
-	SendMsg(NFMsg::EGameMsgID::EGMI_LTM_LOGIN_UNREGISTERED, xMsg, mnSocketFD);
+	SendMsgPB(NFMsg::EGameMsgID::EGMI_LTM_LOGIN_UNREGISTERED, xMsg, mnSocketFD);
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "UnRegister");
 	//Execute(0.0f, 0.0f);
@@ -213,7 +213,7 @@ int NFCLoginNet_ClientModule::OnExitServerEvent(const NFIDENTID& object, const i
 int NFCLoginNet_ClientModule::OnRecivePack(const NFIPacket& msg )
 {
 	//统一解包
-	int nMsgID = msg.GetMsgHead().unMsgID;
+	int nMsgID = msg.GetMsgHead()->GetMsgID();
 	switch (nMsgID)
 	{
 
@@ -261,7 +261,7 @@ int NFCLoginNet_ClientModule::OnWorldInfoProcess( const NFIPacket& msg )
 {
 	int32_t nPlayerID = 0;	
 	NFMsg::MultiObjectPropertyList xMsg;
-	if (!Recive(msg, xMsg, nPlayerID))
+	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
 		return 0;
 	}

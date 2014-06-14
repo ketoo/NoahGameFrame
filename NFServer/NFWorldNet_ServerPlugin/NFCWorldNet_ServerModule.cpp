@@ -59,7 +59,7 @@ bool NFCWorldNet_ServerModule::AfterInit()
 	const int nCpus = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "CpuCount");
 	const int nPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "Port");
 
-	m_pNet = new NFCNet(this, &NFCWorldNet_ServerModule::OnRecivePack, &NFCWorldNet_ServerModule::OnSocketEvent);
+	m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCWorldNet_ServerModule::OnRecivePack, &NFCWorldNet_ServerModule::OnSocketEvent);
 	int nRet = m_pNet->Initialization(nMaxConnect, nPort, nCpus);
 	if (nRet <= 0)
 	{
@@ -159,7 +159,7 @@ int NFCWorldNet_ServerModule::OnGameServerRegisteredProcess(const NFIPacket& msg
 {
     int32_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
-    if (!Recive(msg, xMsg, nPlayerID))
+    if (!RecivePB(msg, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -204,7 +204,7 @@ int NFCWorldNet_ServerModule::OnGameServerUnRegisteredProcess(const NFIPacket& m
  {
      int32_t nPlayerID = 0;
      NFMsg::ServerInfoReportList xMsg;
-     if (!Recive(msg, xMsg, nPlayerID))
+     if (!RecivePB(msg, xMsg, nPlayerID))
      {
          return 0;
      }
@@ -228,7 +228,7 @@ int NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess(const NFIPacket& ms
 {
 	int32_t nPlayerID = 0;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!Recive(msg, xMsg, nPlayerID))
+	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
 		return 0;
 	}
@@ -308,7 +308,7 @@ int NFCWorldNet_ServerModule::OnSelectServerEvent(const NFIDENTID& object, const
 			xData.set_world_port(nPort);
 			xData.set_world_key(strConnectKey);
 
-			SendMsg(NFMsg::EGMI_REQ_CONNECT_WORLD, xData, nFD);
+			SendMsgPB(NFMsg::EGMI_REQ_CONNECT_WORLD, xData, nFD);
 
 			//½á¹û
 			NFCValueList varResult;
@@ -332,7 +332,7 @@ int NFCWorldNet_ServerModule::OnProxyServerRegisteredProcess(const NFIPacket& ms
 {
     int32_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
-    if (!Recive(msg, xMsg, nPlayerID))
+    if (!RecivePB(msg, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -374,7 +374,7 @@ int NFCWorldNet_ServerModule::OnProxyServerUnRegisteredProcess(const NFIPacket& 
 {
     int32_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
-    if (!Recive(msg, xMsg, nPlayerID))
+    if (!RecivePB(msg, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -525,7 +525,7 @@ void NFCWorldNet_ServerModule::SynGameToProxy( const int nFD )
 		PropertyListToString(list, xData, E_CHECK_TYPE::ECT_PUBLIC, true);
 
 		//////////////////////////////////////////////////////////////////////////
-		SendMsg(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
+		SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
 
 	}
 }

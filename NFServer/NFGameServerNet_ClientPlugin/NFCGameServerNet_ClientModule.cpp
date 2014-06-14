@@ -51,7 +51,7 @@ void NFCGameServerNet_ClientModule::Register()
     pData->set_server_max_online(50000);
     pData->set_server_state(NFMsg::EST_NARMAL);
 
-    SendMsg(NFMsg::EGameMsgID::EGMI_GTW_GAME_REGISTERED, xMsg, mnSocketFD);
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_REGISTERED, xMsg, mnSocketFD);
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Register");
 }
@@ -77,7 +77,7 @@ void NFCGameServerNet_ClientModule::UnRegister()
     pData->set_server_max_online(50000);
     pData->set_server_state(NFMsg::EST_MAINTEN);
 
-    SendMsg(NFMsg::EGameMsgID::EGMI_GTW_GAME_UNREGISTERED, xMsg, mnSocketFD);
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_UNREGISTERED, xMsg, mnSocketFD);
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "UnRegister");
 
@@ -135,7 +135,7 @@ bool NFCGameServerNet_ClientModule::AfterInit()
 	const int nCpus = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "CpuCount");
 	const int nPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "Port");
 
-    m_pNet = new NFCNet(this, &NFCGameServerNet_ClientModule::OnRecivePack, &NFCGameServerNet_ClientModule::OnSocketEvent);
+    m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerNet_ClientModule::OnRecivePack, &NFCGameServerNet_ClientModule::OnSocketEvent);
     mnSocketFD = m_pNet->Initialization(strServerIP.c_str(), nServerPort);
     if (mnSocketFD < 0)
     {
