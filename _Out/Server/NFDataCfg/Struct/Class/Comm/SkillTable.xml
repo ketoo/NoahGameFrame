@@ -3,22 +3,14 @@
 
 	</Propertys>
 	<Records>
-		<Record Id="SkillSolt" Row="4" Col="3" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="">
-			<Col Type="string" Desc="技能ConfigID"/>
-			<Col Type="int" Desc="是否已经开启"/>
-			<Col Type="int" Desc="是否焦点技能"/>
-		</Record>
-		<Record Id="SkillTable" Row="256" Col="1" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="">
-			<Col Type="string" Desc="技能ConfigID"/>
-		</Record>
-		<!--
+
 		<Record Id="SkillTable" Row="32" Col="4" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="">
 			<Col Type="string" Desc="技能ConfigID"/>
 			<Col Type="int" Desc="技能等级"/>
 			<Col Type="string" Desc="装备的宝石ConfigID"/>
 			<Col Type="int" Desc="宝石附魂等级"/>
 		</Record>
-		-->
+
 	</Records>
 	<Includes>
 	</Includes>
