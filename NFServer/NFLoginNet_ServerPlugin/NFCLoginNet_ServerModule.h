@@ -25,14 +25,14 @@
 #define NET_MSG_PROCESS(xNFMsg, msg) \
     int32_t nPlayerID = 0; \
     xNFMsg xMsg; \
-    if (!Recive(msg, xMsg, nPlayerID)) \
+    if (!RecivePB(msg, xMsg, nPlayerID)) \
     { \
     return 0; \
     } \
     \
     NFIActorMessage xActorMsg; \
     xActorMsg.eType = NFIActorMessage::EACTOR_NET_MSG; \
-    xActorMsg.nSubMsgID = msg.GetMsgHead().unMsgID; \
+    xActorMsg.nSubMsgID = msg.GetMsgHead()->GetMsgID(); \
     xMsg.SerializeToString(&xActorMsg.data); \
     pPluginManager->GetFramework().Send(xActorMsg, pPluginManager->GetAddress(), pPluginManager->GetAddress());
 

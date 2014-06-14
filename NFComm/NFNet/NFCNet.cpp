@@ -182,14 +182,14 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
     //      SendMsg(1, strData,len, pObject->GetFd());
     //////////////////////////////////////////////////////////////////////////
 
-    //char* strData = new char[len];
-    char strData[NF_MAX_SERVER_PACKET_SIZE] = {0};
+    char* strData = new char[len];
+    //char strData[NF_MAX_SERVER_PACKET_SIZE] = {0};
     if(evbuffer_remove(input, strData, len) > 0)
     {
         pObject->AddBuff(strData, len);
         pNet->Dismantle(pObject);
     }
-    //delete[] strData;
+    delete[] strData;
 }
 
 //////////////////////////////////////////////////////////////////////////

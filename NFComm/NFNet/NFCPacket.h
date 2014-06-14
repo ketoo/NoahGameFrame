@@ -12,26 +12,21 @@
 
 #include "NFIPacket.h"
 #include <winsock2.h>
+#include <string>
 
 #pragma pack(push, 1)
 
 class NFCPacket : public NFIPacket
 {
 public:
-	NFCPacket(NFIMsgHead::NF_Head head)
+	NFCPacket(NFIMsgHead::NF_Head eHeadType)
 	{
 		munFD = 0;
-        switch (head)
+        switch (eHeadType)
         {
         case NFIMsgHead::NF_HEAD_LENGTH:
             pHead = new NFCMsgHead();
             break;
-//         case NFIMsgHead::NF_CS_HEAD_LENGTH:
-//             pHead = new MsgCSHead();
-//             break;
-//         case NFIMsgHead::NF_SS_HEAD_LENGTH:
-//             pHead = new MsgSSHead();
-//             break;
         default:
             break;
         }
@@ -58,7 +53,7 @@ public:
 
 	virtual const char* GetPacketData() const
 	{
-		return strPackData;//include head
+		return this->mstrPackData.data();//include head
 	}
 
 	virtual const uint32_t GetPacketLen() const
@@ -73,12 +68,12 @@ public:
 
 	virtual const char* GetData() const
 	{
-		return strPackData + pHead->GetHeadLength();//not include head
+		return this->mstrPackData.data() + pHead->GetHeadLength();//not include head
 	}
 
 	virtual void Construction(const NFIPacket& packet)
 	{
-		memcpy(this->strPackData, packet.GetPacketData(), this->GetPacketLen());
+        this->mstrPackData.assign(packet.GetPacketData(), this->GetPacketLen());
 	}
 
 	virtual const uint32_t GetFd() const
@@ -97,7 +92,7 @@ public:
     }
 
     //const uint32_t unLen: length of data, not include head
-	virtual int EnCode(char* pHeadBuffer, const char* strData, const uint32_t unLen);
+	virtual int EnCode(const uint16_t unMsgID, const char* strData, const uint32_t unLen);
 
     //const uint32_t unLen: length of buff
 	virtual int DeCode(const char* strData, const uint32_t unLen);
@@ -105,7 +100,8 @@ public:
 protected:
 private:
 	NFIMsgHead* pHead;
-	char strPackData[NF_MAX_SERVER_PACKET_SIZE];//include head
+	//char strPackData[NF_MAX_SERVER_PACKET_SIZE];//include head
+    std::string mstrPackData;//include head
 	uint32_t munFD;
 };
 
