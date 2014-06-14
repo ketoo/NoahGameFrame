@@ -106,7 +106,7 @@ protected:
 private:
 	NFIMsgHead* pHead;
 	char strPackData[NF_MAX_SERVER_PACKET_SIZE];//include head
-	uint32_t munFD;;
+	uint32_t munFD;
 };
 
 
