@@ -34,16 +34,16 @@ public:
 	{
 	}
 
-	virtual void LogRecive(const char* str) = 0;
-	virtual void LogSend(const char* str) = 0;
+    virtual void LogRecive(const char* str){};
+    virtual void LogSend(const char* str){};
 
-    bool Recive(const char* data, const uint16_t len, const uint16_t msgID, google::protobuf::Message& xData, int32_t& nPlayer)
-    {
+	bool RecivePB(const NFIPacket& msg, google::protobuf::Message& xData, int32_t& nPlayer)
+	{
         NFMsg::MsgBase xMsg;
-        if(!xMsg.ParseFromArray(data, len))
+        if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
         {
             char szData[MAX_PATH] = { 0 };
-            sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msgID);
+            sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
             LogRecive(szData);
 
             return false;
@@ -52,7 +52,7 @@ public:
         if (!xData.ParseFromString(xMsg.msg_data()))
         {
             char szData[MAX_PATH] = { 0 };
-            sprintf(szData, "Parse Message Failed from MsgData to ProtocolData, MessageID: %d\n", msgID);
+            sprintf(szData, "Parse Message Failed from MsgData to ProtocolData, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
             LogRecive(szData);
 
             return false;
@@ -61,11 +61,6 @@ public:
         nPlayer = xMsg.player_id();
 
         return true;
-    }
-
-	bool Recive(const NFIPacket& msg, google::protobuf::Message& xData, int32_t& nPlayer)
-	{
-        return Recive(msg.GetData(), msg.GetDataLen(), msg.GetMsgHead().unMsgID, xData, nPlayer);
 	}
 
 	virtual bool Execute(const float fLasFrametime, const float fStartedTime)
@@ -73,7 +68,7 @@ public:
 		return m_pNet->Execute(fLasFrametime, fStartedTime);
 	}
 
-	bool SendMsg(const uint32_t nMsgID, google::protobuf::Message& xData, const uint16_t nSockIndex = 0, const int32_t nPlayer = 0, bool bBroadcast = false)
+	bool SendMsgPB(const uint16_t nMsgID, google::protobuf::Message& xData, const uint32_t nSockIndex = 0, const int32_t nPlayer = 0, bool bBroadcast = false)
 	{
 		if (!m_pNet)
 		{
@@ -107,7 +102,7 @@ public:
 			return false;
 		}
 
-		NFCPacket xPacket;
+		NFCPacket xPacket(m_pNet->GetHeadLen());
 		if(!xPacket.EnCode(nMsgID, strMsg.c_str(), strMsg.length()))
 		{
 			char szData[MAX_PATH] = { 0 };
