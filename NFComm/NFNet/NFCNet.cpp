@@ -46,7 +46,7 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
     {
         printf("%d Connection closed.\n", pObject->GetFd());
         pNet->CloseSocket(pObject->GetFd());
-        if (pNet->mbServer)
+        if (!pNet->mbServer)
         {
             //客户端断线重连
             pNet->mbRuning = false;
@@ -69,7 +69,7 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
         printf("%d read timeout: %d\n", pObject->GetFd(), errno);/*XXX win32*/
         pNet->CloseSocket(pObject->GetFd());
 
-        if (pNet->mbServer)
+        if (!pNet->mbServer)
         {
             //客户端断线重连
             pNet->mbRuning = false;
