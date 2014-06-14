@@ -19,10 +19,11 @@ public:
     {
         Add = 0,
         Del,
-        Changed,
+        Changed,//swap
         Create,
         UpData,
         Cleared,
+        Sort,
     };
 
     typedef std::vector<std::shared_ptr<NFIValueList::VarData>> TRECORDVEC;
@@ -82,6 +83,7 @@ public:
     virtual int FindDouble(const int nCol, const double value, NFIValueList& varResult) = 0;
     virtual int FindString(const int nCol, const char* value, NFIValueList& varResult) = 0;
     virtual int FindObject(const int nCol, const NFIDENTID& value, NFIValueList& varResult) = 0;
+    virtual int Sort(const int nCol, const bool bOrder, NFIValueList& varResult){return 0;};
 
     virtual int FindRowByColValue(const std::string& strColTag, const NFIValueList& var, NFIValueList& varResult) = 0;
     virtual int FindInt(const std::string& strColTag, const int value, NFIValueList& varResult) = 0;
@@ -90,6 +92,7 @@ public:
     virtual int FindString(const std::string& strColTag, const char* value, NFIValueList& varResult) = 0;
     virtual int FindObject(const std::string& strColTag, const NFIDENTID& value, NFIValueList& varResult) = 0;
     virtual int FindPointer(const std::string& strColTag, const void* value, NFIValueList& varResult) = 0;
+    virtual int Sort(const std::string& strColTag, const bool bOrder,  NFIValueList& varResult){return 0;};
 
     virtual bool Remove(const int nRow) = 0;
     virtual bool Clear() = 0;
