@@ -11,12 +11,6 @@
 int NFCPacket::DeCode( const char* strData, const uint32_t unLen )
 {
 	//解密--unLen为buff总长度,解包时能用多少是多少
-	if (unLen >= NF_MAX_SERVER_PACKET_SIZE)
-	{
-		//长度超越
-		return -1;
-	}
-
     if (unLen < pHead->GetHeadLength())
     {
         //长度不够
@@ -56,5 +50,5 @@ int NFCPacket::EnCode( const uint16_t unMsgID, const char* strData, const uint32
     mstrPackData.append(szHead, pHead->GetHeadLength());
     mstrPackData.append(strData, unLen);
 
-    return 0;
+    return pHead->GetMsgLength();
 }
