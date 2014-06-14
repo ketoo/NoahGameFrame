@@ -85,13 +85,13 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
 
 void NFCNet::signal_cb(evutil_socket_t sig, short events, void *user_data)
 {
-    NFCNet *base = (NFCNet *)user_data;
-    struct timeval delay = { 2, 0 };
-
-    printf("Caught an interrupt signal; exiting cleanly in two seconds.\n");
-
-
-    event_base_loopexit(base->base, &delay);
+//     NFCNet *base = (NFCNet *)user_data;
+//     struct timeval delay = { 2, 0 };
+// 
+//     printf("Caught an interrupt signal; exiting cleanly in two seconds.\n");
+// 
+// 
+//     event_base_loopexit(base->base, &delay);
 }
 
 
