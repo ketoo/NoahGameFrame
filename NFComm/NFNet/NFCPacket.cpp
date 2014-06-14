@@ -23,8 +23,13 @@ int NFCPacket::DeCode( const char* strData, const uint32_t unLen )
         return -1;
     }
 
-	//取包头
-	pHead->DeCode(strData);
+	
+	if(pHead->GetHeadLength() != pHead->DeCode(strData))
+    {
+        //取包头失败
+        return -1;
+    }
+
 	if (pHead->GetMsgLength() > unLen)
 	{
 		//总长度不够
@@ -32,28 +37,24 @@ int NFCPacket::DeCode( const char* strData, const uint32_t unLen )
 	}
 
 	//copy包头+包体
-	memcpy(strPackData, strData, pHead->GetMsgLength());
+    mstrPackData.append(strData, pHead->GetMsgLength());
 
 	//返回使用过的量
 	return pHead->GetMsgLength();
 }
 
-int NFCPacket::EnCode(char* pHeadBuffer, const char* strData, const uint32_t unLen)
+int NFCPacket::EnCode( const uint16_t unMsgID, const char* strData, const uint32_t unLen )
 {
-	//加密
-	//虽多一次copy，但是可以在外加解密而不耦合库
-	if (unLen + pHead->GetHeadLength() > NF_MAX_SERVER_PACKET_SIZE)
-	{
-        // 长度过大
-		return 0;
-	}
-    
-    memcpy(strPackData, (void*)pHeadBuffer, pHead->GetHeadLength());
 
-    if (unLen > 0)
-    {
-        memcpy(strPackData + pHead->GetHeadLength(), strData, unLen);
-    }
+    pHead->SetMsgID(unMsgID);
+    pHead->SetMsgLength(unLen + pHead->GetHeadLength());
 
-	return unLen + pHead->GetHeadLength();
+    char szHead[64] = { 0 };
+    pHead->EnCode(szHead);
+
+    mstrPackData.clear();
+    mstrPackData.append(szHead, pHead->GetHeadLength());
+    mstrPackData.append(strData, unLen);
+
+    return 0;
 }

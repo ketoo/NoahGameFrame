@@ -24,16 +24,14 @@
 
 #pragma pack(push, 1)
 
-//const int NF_HEAD_SIZE = 8;
-const int NF_MAX_SERVER_PACKET_SIZE = 65535;
+//单包最大长度
+const int NF_MAX_SERVER_PACKET_SIZE = 655350;
 
 struct  NFIMsgHead
 {
     enum NF_Head
     {
         NF_HEAD_LENGTH = 6,
-        NF_CS_HEAD_LENGTH = 10,
-        NF_SS_HEAD_LENGTH = 32,
     };
 
     virtual int EnCode(char* strData) = 0;
@@ -57,10 +55,9 @@ public:
         munMsgID = 0;
     }
 
-    uint32_t munSize;
-    uint16_t munMsgID;           // 枚举见MG_PTOTOCOL_TYPES
 
     virtual uint32_t GetHeadLength() const { return NF_HEAD_LENGTH; }
+
     virtual int EnCode(char* strData)
     {
         uint32_t nOffset = 0;
@@ -109,6 +106,11 @@ public:
 
     virtual uint32_t GetMsgLength() const { return munSize; }
     virtual void SetMsgLength(uint32_t nLength){ munSize = nLength; }
+
+protected:
+    uint32_t munSize;
+    uint16_t munMsgID;
+
 };
 
 class NFIPacket
@@ -119,7 +121,7 @@ public:
 		this->Construction(packet);
 	}
 
-	virtual int EnCode(char* pHeadBuffer, const char* strData, const uint32_t unLen) = 0;
+    virtual int EnCode(const uint16_t unMsgID, const char* strData, const uint32_t unLen) = 0;
 	virtual int DeCode(const char* strData, const uint32_t unLen) = 0;
 
 	virtual void Construction(const NFIPacket& packet) = 0;
