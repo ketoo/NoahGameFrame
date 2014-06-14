@@ -24,9 +24,6 @@
 
 #pragma pack(push, 1)
 
-//单包最大长度
-const int NF_MAX_SERVER_PACKET_SIZE = 655350;
-
 struct  NFIMsgHead
 {
     enum NF_Head
@@ -89,8 +86,8 @@ public:
 
         uint32_t nSize = 0;
         memcpy(&nSize, strData + nOffset, sizeof(nSize));
-        munMsgID = ntohs(nSize);
-        nOffset += sizeof(munMsgID);
+        munSize = ntohs(nSize);
+        nOffset += sizeof(munSize);
 
 
         if (nOffset != GetHeadLength())
