@@ -16,15 +16,10 @@
 		<Property Id="LUCKLY_CARD" Type="string" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="佩戴的幸运卡ID"/>
 		<Property Id="ATK_PVP" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="PVP攻击力"/>
 		<Property Id="DEF_PVP" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="PVP防御力"/>
-		<Property Id="LUCKLY" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="寻宝率"/>
-		<Property Id="AutoID" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="自增ID"/>
 		<Property Id="CreditValue" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="信用值"/>
 		<Property Id="SoulValue" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="武魂值"/>
 		<Property Id="OnlineCount" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="上线次数"/>
 		<Property Id="TotalTime" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="在线时间"/>
-		<Property Id="WeaponType" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="角色类型"/>
-		<Property Id="AccountID" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="角色帐号ID"/>
-		<Property Id="YBP" Type="object" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="元宝币"/>
 		<Property Id="Cash" Type="object" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="金钱"/>
 		<Property Id="BindCash" Type="object" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="绑定钱"/>
 		<Property Id="DeleteFlag" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="删除标志"/>
@@ -35,62 +30,9 @@
 		<Property Id="OnlineTime" Type="object" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="本次上线时间"/>
 		<Property Id="TotalLineTime" Type="object" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="今日在线时长{截至至本次上线时间}"/>
 		<Property Id="GMLevel" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="GM等级"/>
-		<Property Id="LoadPropertyFinish" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="玩家加载数据进度"/>
-		<Property Id="LoadRecordFinish" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="玩家加载数据进度"/>
-		<Property Id="SoulStone" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="魂石"/>
-		<Property Id="EssenceValue" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="精气值"/>
-		
-
-		
-		<Property Id="TotalScore" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="总积分"/>
-		<Property Id="FightValue" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="战斗力"/>
-		<!--
-		<Property Id="ActivityMAXIntegral" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="活动单项最大积分"/>
-		<Property Id="ActivityIntegral" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="活动单项当前分"/>
-		<Property Id="ActivityMAXVP" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="活动最大疲劳值"/>
-		-->
-		<Property Id="LastCloneSceneID" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="上次的副本ID"/>
-		<Property Id="LastCloneSceneMode" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="上次的副本的模式"/>
-		<Property Id="CurrentTime" Type="object" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="服务器时间"/>
-		<Property Id="WorldMsgRead" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="世界消息订阅"/>
-		<Property Id="Honour" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="荣誉"/>
-		<Property Id="OnagerID" Type="string" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="怒炮ID"/>
-		<Property Id="OnagerCount" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="怒炮强化次数"/>
-		<Property Id="OnagerWish" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="当前进阶祝福值"/>
-		<!--
-		<Property Id="AwardExp" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副本过关奖励的经验"/>
-		<Property Id="AwardEssence" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副本过关奖励的精气"/>
-		<Property Id="AwardGold" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副本过关奖励的金币"/>
-		-->
-		<Property Id="AwardEnable" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副本过关奖是否成功失败"/>
-		<Property Id="PackCount" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="背包格子容量"/>
-		<Property Id="LastPetGUID" Type="object" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="最后出战的副将ID"/>
-		
-		<Property Id="TodayOnlineTime" Type="object" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="今日总在线时间"/>
-	
-		<Property Id="TodayCloneSceneTime" Type="object" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="普通副本时间,临时广播"/>
-		<Property Id="EntryCloneSceneTime" Type="object" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="进入副本时间,临时广播"/>
-		<Property Id="TodayTaskSceneTime" Type="object" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="主线时间,临时广播"/>
-		<Property Id="EntryTaskSceneTime" Type="object" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="进入主线副本时间,临时广播"/>
-		
-		
-		<Property Id="LastWorldChatTime" Type="object" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="上次世界聊天的时间"/>
-		
-		<Property Id="TestString" Type="object" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="上次世界聊天的时间"/>
-		
-		<Property Id="SavePublicData" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="数据是否保存到PublicServer"/>
-		
-		<Property Id="SummonFriendCount" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="好友召唤次数"/>
 	</Propertys>
 	<Records>
 
-		<!--
-		<Record Id="RandomProperty" Row="11" Col="3" Public="true" Private="true" Save="true" ClientCanChang="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="">
-			<Col Type="object" Desc="装备唯一ID"/>
-			<Col Type="string" Desc="属性名"/>
-			<Col Type="int" Desc="属性值"/>
-		</Record>
-		-->
 		<Record Id="BagItemList" Row="211" Col="18" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="普通背包">
 			<Col Type="object" Desc="物品唯一ID"/>
 			<Col Type="string" Desc="物品配置ID"/>
@@ -111,34 +53,6 @@
 			<Col Type="object" Desc="得到此物品的日期"/>
 			<Col Type="string" Desc="固定属性ATK_VALUE,10;DEF_VALUE,20;"/>
 		</Record>
-
-		<!--
-		<Record Id="BuyBackItemList" Row="16" Col="17" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="回购列表">
-			<Col Type="object" Desc="物品唯一ID"/>
-			<Col Type="string" Desc="物品配置ID"/>
-			<Col Type="int" Desc="物品数量"/>
-			<Col Type="int" Desc="是否绑定"/>
-			<Col Type="int" Desc="到期时间类型"/>
-			<Col Type="int" Desc="洞数量-装备技能书有效"/>
-			<Col Type="string" Desc="镶嵌宝石ID-装备,技能书有效"/>
-			<Col Type="string" Desc="镶嵌宝石ID-装备,技能书有效"/>
-			<Col Type="string" Desc="镶嵌宝石ID-装备,技能书有效"/>
-			<Col Type="string" Desc="镶嵌宝石ID-装备,技能书有效"/>
-			<Col Type="string" Desc="镶嵌宝石ID-装备,技能书有效"/>
-			<Col Type="string" Desc="镶嵌宝石ID-装备,技能书有效"/>
-			<Col Type="int" Desc="强化等级-装备,技能书有效"/>
-			<Col Type="int" Desc="附魔等级-装备,技能书有效"/>
-			<Col Type="string" Desc="附魔宝石ID-装备,技能书有效"/>
-			<Col Type="string" Desc="随机属性ATK_VALUE,10;DEF_VALUE,20;"/>
-			<Col Type="int" Desc="得到此物品的日期"/>
-		</Record>
-		-->
-		<!--
-		<Record Id="DropMonsterList" Row="512" Col="2" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="">
-			<Col Type="object" Desc="怪物ID"/>
-			<Col Type="int" Desc="是否已死"/>
-		</Record>
-		-->
 		
 		<Record Id="DropItemList" Row="256" Col="7" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副本中掉路物品列表，进副本产生，出副本销毁">
 			<Col Type="object" Desc="掉落怪物ID,最后可能加一个过关奖励的装备,此时ID是0"/>
@@ -159,109 +73,18 @@
 			<Col Type="string" Desc="任务配置ID"/>
 			<Col Type="int" Desc="任务状态"/>
 		</Record>
-		
-		<Record Id="ShopLimitList" Row="1024" Col="3" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="限制商品列表">
-			<Col Type="string" Desc="商品ID"/>
-			<Col Type="object" Desc="上次购买时间"/>
-			<Col Type="int" Desc="购买了多少次"/>
-		</Record>
-		
-		<Record Id="SkillSlot" Row="4" Col="1" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="">
-			<Col Type="string" Desc="技能槽的技能ID"/>
-		</Record>
-		<Record Id="SkillList" Row="16" Col="1" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="">
-			<Col Type="string" Desc="技能ID"/>
-		</Record>
-		<Record Id="MountList" Row="1" Col="6" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="">
-			<Col Type="string" Desc="配置ID"/>
-			<Col Type="object" Desc="唯一ID"/>
-			<Col Type="int" Desc="祝福值"/>
-			<Col Type="int" Desc="进阶次数"/>
-			<Col Type="string" Desc="当前设定的技能"/>
-			<Col Type="int" Desc="等级"/>
-		</Record>
-		
-		<Record Id="EyesList" Row="5" Col="3" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="天眼">
-			<Col Type="string" Desc="配置ID"/>
-			<Col Type="int" Desc="祝福值"/>
-			<Col Type="int" Desc="进阶次数"/>
-		</Record>
-		
-		<Record Id="OnagerList" Row="1" Col="4" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="">
-			<Col Type="string" Desc="配置ID"/>
-			<Col Type="object" Desc="唯一ID"/>
-			<Col Type="int" Desc="祝福值"/>
-			<Col Type="int" Desc="进阶次数"/>
-		</Record>
-		<!--
-		<Record Id="FriendList" Row="128" Col="4" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="">
-			<Col Type="object" Desc="角色ID"/>
-			<Col Type="string" Desc="角色名字"/>
-			<Col Type="int" Desc="角色等级"/>
-			<Col Type="int" Desc="角色职业"/>
-		</Record>
-		<Record Id="FriendAddList" Row="128" Col="2" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="">
-			<Col Type="object" Desc="角色ID"/>
-			<Col Type="string" Desc="角色名字"/>
-		</Record>
-		<Record Id="ShortCutBar" Row="16" Col="3" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="">
-			<Col Type="string" Desc="3"/>
-			<Col Type="string" Desc="3"/>
-			<Col Type="int" Desc="3"/>
-		</Record>
-		<Record Id="HateList" Row="16" Col="3" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="">
-			<Col Type="string" Desc="3"/>
-			<Col Type="int" Desc="3"/>
-			<Col Type="float" Desc="3"/>
-		</Record>
-		-->
-		<Record Id="EctypePlan" Row="512" Col="4" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="">
-			<Col Type="int" Desc="关卡ID"/>
-			<Col Type="int" Desc="普通模式是否过"/>
-			<Col Type="int" Desc="时间模式是否过"/>
-			<Col Type="int" Desc="极限模式是否过"/>
-		</Record>
-		<Record Id="PetList" Row="64" Col="6" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="">
-			<Col Type="string" Desc="configID"/>
-			<Col Type="object" Desc="guid"/>
-			<Col Type="int" Desc="level"/>
-			<Col Type="int" Desc="hp"/>
-			<Col Type="int" Desc="active"/>
-			<Col Type="int" Desc="maxhp"/>
-		</Record>
-		<Record Id="FriendViewList" Row="11" Col="18" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="查看在线好友装备信息">
-			<Col Type="object" Desc="物品唯一ID"/>
-			<Col Type="string" Desc="物品配置ID"/>
-			<Col Type="int" Desc="物品数量"/>
-			<Col Type="int" Desc="是否绑定"/>
-			<Col Type="int" Desc="到期时间类型"/>
-			<Col Type="int" Desc="洞数量-装备技能书有效"/>
-			<Col Type="string" Desc="镶嵌宝石ID-装备,技能书有效"/>
-			<Col Type="string" Desc="镶嵌宝石ID-装备,技能书有效"/>
-			<Col Type="string" Desc="镶嵌宝石ID-装备,技能书有效"/>
-			<Col Type="string" Desc="镶嵌宝石ID-装备,技能书有效"/>
-			<Col Type="string" Desc="镶嵌宝石ID-装备,技能书有效"/>
-			<Col Type="string" Desc="镶嵌宝石ID-装备,技能书有效"/>
-			<Col Type="int" Desc="强化等级-装备,技能书有效"/>
-			<Col Type="int" Desc="附魔等级-装备,技能书有效"/>
-			<Col Type="string" Desc="附魔宝石ID-装备,技能书有效"/>
-			<Col Type="string" Desc="随机属性ATK_VALUE,10;DEF_VALUE,20;"/>
-			<Col Type="object" Desc="得到此物品的日期"/>
-			<Col Type="string" Desc="如果是装备，则可能有固定属性"/>
-		</Record>
 	</Records>
 	<Components>
 		<Component Name="NFCUseItemComponent" Enable="true" Desc="使用物品组件"/>
 	</Components>
 	<Includes>
-		<!-- <Include Id="../../NFDataCfg/Struct/Class/Player/PVPPush.xml"/> -->
-		<!-- <Include Id="../../NFDataCfg/Struct/Class/Player/PlayerBase.xml"/> -->
+		<Include Id="../../NFDataCfg/Struct/Class/Player/PlayerBase.xml"/>
+		
+		
 		<Include Id="../../NFDataCfg/Struct/Class/Comm/MoveProperty.xml"/>
 		<Include Id="../../NFDataCfg/Struct/Class/Comm/SkillTable.xml"/>
 		<Include Id="../../NFDataCfg/Struct/Class/Comm/CoolDown.xml"/>
 		<Include Id="../../NFDataCfg/Struct/Class/Comm/FightTmpData.xml"/>
 		<Include Id="../../NFDataCfg/Struct/Class/Comm/FightTmpData.xml"/>
-		<!-- <Include Id="../../NFDataCfg/Struct/Class/Player/ChallengeTask.xml"/> -->
-		<!-- <Include Id="../../NFDataCfg/Struct/Class/Player/Activity.xml"/> -->
 	</Includes>
 </XML>
