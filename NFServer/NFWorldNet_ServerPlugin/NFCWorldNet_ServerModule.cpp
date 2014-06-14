@@ -454,30 +454,26 @@ int NFCWorldNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 
 int NFCWorldNet_ServerModule::OnSocketEvent( const uint16_t nSockIndex, const NF_NET_EVENT eEvent )
 {
-	if (eEvent & NF_NET_EVENT_EOF) 
-	{
-		//printf("%d Connection closed.\n", nSockIndex);
-		OnClientDisconnect(nSockIndex);
-	} 
-	else if (eEvent & NF_NET_EVENT_ERROR) 
-	{
-		//printf("%d Got an error on the connection: %s\n", pObject->GetFd(),	strerror(errno));/*XXX win32*/
-		OnClientDisconnect(nSockIndex);
-	}
-	else if (eEvent & NF_NET_EVENT_TIMEOUT)
-	{
-		//printf("%d read timeout: %s\n", pObject->GetFd(), strerror(errno));/*XXX win32*/
-		OnClientDisconnect(nSockIndex);
-	}
-	else  if (eEvent & NF_NET_EVENT_CONNECTED)
-	{
-		OnClientConnected(nSockIndex);
-	}
-	else
-	{
-		//printf("%d Got an unknow error on the connection: %s\n", pObject->GetFd(),	strerror(errno));/*XXX win32*/
-		OnClientDisconnect(nSockIndex);
-	}
+    if (eEvent & NF_NET_EVENT_EOF) 
+    {
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
+        OnClientDisconnect(nSockIndex);
+    } 
+    else if (eEvent & NF_NET_EVENT_ERROR) 
+    {
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
+        OnClientDisconnect(nSockIndex);
+    }
+    else if (eEvent & NF_NET_EVENT_TIMEOUT)
+    {
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
+        OnClientDisconnect(nSockIndex);
+    }
+    else  if (eEvent == NF_NET_EVENT_CONNECTED)
+    {
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+        OnClientConnected(nSockIndex);
+    }
 
 
 	return 0;

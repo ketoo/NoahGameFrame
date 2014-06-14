@@ -22,6 +22,7 @@
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFCGameServerNet_ServerModule
     : public NFINetModule
@@ -73,6 +74,7 @@ private:
 
     NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
+    NFILogModule* m_pLogModule;
     NFIEventProcessModule* m_pEventProcessModule;
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFIElementInfoModule* m_pElementInfoModule;

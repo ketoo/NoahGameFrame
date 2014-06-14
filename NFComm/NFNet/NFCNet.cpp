@@ -29,7 +29,7 @@ void NFCNet::conn_writecb(struct bufferevent *bev, void *user_data)
 {
     //每次收到发送消息的时候事件
     // 	struct evbuffer *output = bufferevent_get_output(bev);
-    //printf("发送消息!!!\n");
+    printf("发送消息!!!\n");
 }
 
 void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data)
@@ -170,12 +170,6 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
     }
 
     size_t len = evbuffer_get_length(input);
-    if (len >= NF_MAX_SERVER_PACKET_SIZE)
-    {
-        pObject->IncreaseError(1000);
-        return;
-    }
-
     //返回给客户端
     //  	struct evbuffer *output = bufferevent_get_output(bev);
     //  	evbuffer_add_buffer(output, input);
@@ -189,6 +183,7 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
         pObject->AddBuff(strData, len);
         pNet->Dismantle(pObject);
     }
+
     delete[] strData;
 }
 
