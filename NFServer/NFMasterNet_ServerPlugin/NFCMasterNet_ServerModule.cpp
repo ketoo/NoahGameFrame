@@ -28,7 +28,7 @@ int NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const NFIPacket& msg)
 {
 	int32_t nPlayerID = 0;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!Recive(msg, xMsg, nPlayerID))
+	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
 		return 0;
 	}
@@ -71,7 +71,7 @@ int NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const NFIPacket& msg)
 {
 	int32_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
-    if (!Recive(msg, xMsg, nPlayerID))
+    if (!RecivePB(msg, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -102,7 +102,7 @@ int NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFIPacket& msg)
 {
 	int32_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
-    if (!Recive(msg, xMsg, nPlayerID))
+    if (!RecivePB(msg, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -141,7 +141,7 @@ int NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const NFIPacket& msg)
 {
 	int32_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
-    if (!Recive(msg, xMsg, nPlayerID))
+    if (!RecivePB(msg, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -183,7 +183,7 @@ int NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const NFIPacket& msg)
 {
 	int32_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
-    if (!Recive(msg, xMsg, nPlayerID))
+    if (!RecivePB(msg, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -213,7 +213,7 @@ int NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess(const NFIPacket& msg)
 {
 	int32_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
-    if (!Recive(msg, xMsg, nPlayerID))
+    if (!RecivePB(msg, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -249,7 +249,7 @@ int NFCMasterNet_ServerModule::OnSelectWorldProcess(const NFIPacket& msg)
 {
 	int32_t nPlayerID = 0;
 	NFMsg::ReqConnectWorld xMsg;
-	if (!Recive(msg, xMsg, nPlayerID))
+	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
 		return 0;
 	}
@@ -263,7 +263,7 @@ int NFCMasterNet_ServerModule::OnSelectWorldProcess(const NFIPacket& msg)
 
 	//转发送到世界服务器
 	uint16_t nSocket = m_pKernelModule->QueryPropertyInt(varList.ObjectVal(0), "FD");
-	SendMsg(NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xMsg, nSocket);
+	SendMsgPB(NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xMsg, nSocket);
 
 	return 0;
 }
@@ -302,7 +302,7 @@ int NFCMasterNet_ServerModule::OnSelectServerResultProcess(const NFIPacket& msg)
 {
 	int32_t nPlayerID = 0;
 	NFMsg::AckConnectWorldResult xMsg;
-	if (!Recive(msg, xMsg, nPlayerID))
+	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
 		return 0;
 	}
@@ -316,7 +316,7 @@ int NFCMasterNet_ServerModule::OnSelectServerResultProcess(const NFIPacket& msg)
 
 	//转发送到登录服务器
 	uint16_t nSocket = m_pKernelModule->QueryPropertyInt(varList.ObjectVal(0), "FD");
-	SendMsg(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD, xMsg, nSocket);
+	SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD, xMsg, nSocket);
 
 	return 0;
 }
@@ -362,7 +362,7 @@ bool NFCMasterNet_ServerModule::AfterInit()
 	const int nCpus = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "CpuCount");
 	const int nPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "Port");
 
-	m_pNet = new NFCNet(this, &NFCMasterNet_ServerModule::OnRecivePack, &NFCMasterNet_ServerModule::OnSocketEvent);
+	m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCMasterNet_ServerModule::OnRecivePack, &NFCMasterNet_ServerModule::OnSocketEvent);
 	int nRet = m_pNet->Initialization(nMaxConnect, nPort, nCpus);
 	if (nRet <= 0)
 	{
@@ -380,7 +380,7 @@ bool NFCMasterNet_ServerModule::AfterInit()
 
 int NFCMasterNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 {
-	int nMsgID = msg.GetMsgHead().unMsgID;
+	int nMsgID = msg.GetMsgHead()->GetMsgID();
 	switch (nMsgID)
 	{
 	case NFMsg::EGameMsgID::EGMI_UNKNOW:
@@ -419,7 +419,7 @@ int NFCMasterNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 		break;
 
 	default:
-		printf("NFNet || 非法消息:unMsgID=%d\n", msg.GetMsgHead().unMsgID);
+		printf("NFNet || 非法消息:unMsgID=%d\n", msg.GetMsgHead()->GetMsgID());
 		break;
 	}
 
@@ -516,7 +516,7 @@ void NFCMasterNet_ServerModule::SynWorldToLogin()
 				NFIDENTID ident = varLoginObjectList.ObjectVal(i);
 				int nFD = m_pKernelModule->QueryPropertyInt(ident, "FD");
 
-				SendMsg(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
+				SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
 			}
 		}
 	}

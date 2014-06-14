@@ -60,7 +60,8 @@ public:
 	virtual bool AddBan(const uint32_t nSockIndex, const int32_t nTime = -1) = 0;
 	virtual bool RemoveBan(const uint32_t nSockIndex) = 0;
 
-	virtual void HeartPack() = 0;
+    virtual void HeartPack() = 0;
+    virtual NFIMsgHead::NF_Head GetHeadLen() = 0;
 
 protected:
 private:

@@ -54,7 +54,7 @@ bool NFCWorldNet_ClientModule::AfterInit()
 	const int nCpus = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "CpuCount");
 	const int nPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "Port");
 
-	m_pNet = new NFCNet(this, &NFCWorldNet_ClientModule::OnRecivePack, &NFCWorldNet_ClientModule::OnSocketEvent);
+	m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCWorldNet_ClientModule::OnRecivePack, &NFCWorldNet_ClientModule::OnSocketEvent);
 	mnSocketFD = m_pNet->Initialization(strServerIP.c_str(), nServerPort);
 	if (mnSocketFD < 0)
 	{
@@ -88,7 +88,7 @@ void NFCWorldNet_ClientModule::Register()
     pData->set_server_max_online(100000);
     pData->set_server_state(NFMsg::EST_NARMAL);
 
-    SendMsg(NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED, xMsg, mnSocketFD);
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED, xMsg, mnSocketFD);
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Register");
 }
@@ -112,7 +112,7 @@ void NFCWorldNet_ClientModule::UnRegister()
     pData->set_server_max_online(100000);
     pData->set_server_state(NFMsg::EST_NARMAL);
 
-    SendMsg(NFMsg::EGameMsgID::EGMI_MTL_WORLD_UNREGISTERED, xMsg, mnSocketFD);
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_MTL_WORLD_UNREGISTERED, xMsg, mnSocketFD);
 
     Execute(0.0f, 0.0f);
 
@@ -129,7 +129,7 @@ int NFCWorldNet_ClientModule::OnSelectServerProcess(const NFIPacket& msg)
 {
 	int32_t nPlayerID = 0;
 	NFMsg::ReqConnectWorld xMsg;
-	if (!Recive(msg, xMsg, nPlayerID))
+	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
 		return 0;
 	}
@@ -169,7 +169,7 @@ int NFCWorldNet_ClientModule::OnSelectServerResultsEvent(const NFIDENTID& object
     xMsg.set_world_ip(strWorldAddress);
     xMsg.set_world_key(strKey);
 
-	SendMsg(NFMsg::EGMI_ACK_CONNECT_WORLD, xMsg, 0);
+	SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xMsg, 0);
 
     return 0;
 }
@@ -178,7 +178,7 @@ int NFCWorldNet_ClientModule::OnKickClientProcess(const NFIPacket& msg)
 {
 	int32_t nPlayerID = 0;
 	NFMsg::ReqKickFromWorld xMsg;
-	if (!Recive(msg, xMsg, nPlayerID))
+	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
 		return 0;
 	}
@@ -192,7 +192,7 @@ int NFCWorldNet_ClientModule::OnKickClientProcess(const NFIPacket& msg)
 
 int NFCWorldNet_ClientModule::OnRecivePack( const NFIPacket& msg )
 {
-	int nMsgID = msg.GetMsgHead().unMsgID;
+	int nMsgID = msg.GetMsgHead()->GetMsgID();
 	switch (nMsgID)
 	{
 	case NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD:
@@ -204,7 +204,7 @@ int NFCWorldNet_ClientModule::OnRecivePack( const NFIPacket& msg )
 		break;
 
 	default:
-		printf("NFNet || 非法消息:unMsgID=%d\n", msg.GetMsgHead().unMsgID);
+		printf("NFNet || 非法消息:unMsgID=%d\n", msg.GetMsgHead()->GetMsgID());
 		break;
 	}
 
