@@ -186,6 +186,7 @@ public:
 	virtual bool AddBan(const uint32_t nSockIndex, const int32_t nTime = -1){return true;};
 	virtual bool RemoveBan(const uint32_t nSockIndex){return true;};
 	virtual void HeartPack();
+    virtual NFIMsgHead::NF_Head GetHeadLen(){return mnHeadLength;};
 
 private:
     virtual bool CloseSocketAll();

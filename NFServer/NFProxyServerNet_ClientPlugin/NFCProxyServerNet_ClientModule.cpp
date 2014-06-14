@@ -45,7 +45,7 @@ bool NFCProxyServerNet_ClientModule::Execute(const float fLasFrametime, const fl
 
 int NFCProxyServerNet_ClientModule::OnRecivePack( const NFIPacket& msg )
 {
-    switch (msg.GetMsgHead().unMsgID)
+    switch (msg.GetMsgHead()->GetMsgID())
     {
         case NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD:
             OnSelectServerResultProcess(msg);
@@ -66,7 +66,7 @@ int NFCProxyServerNet_ClientModule::OnGameInfoProcess( const NFIPacket& msg )
 {
     int32_t nPlayerID = 0;	
     NFMsg::MultiObjectPropertyList xMsg;
-    if (!Recive(msg, xMsg, nPlayerID))
+    if (!RecivePB(msg, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -175,7 +175,7 @@ void NFCProxyServerNet_ClientModule::Register()
     pData->set_server_max_online(100000);
     pData->set_server_state(NFMsg::EST_NARMAL);
 
-    SendMsg(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg, mnSocketFD);
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg, mnSocketFD);
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Register");
 }
@@ -200,7 +200,7 @@ void NFCProxyServerNet_ClientModule::UnRegister()
     pData->set_server_max_online(100000);
     pData->set_server_state(NFMsg::EST_MAINTEN);
 
-    SendMsg(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_UNREGISTERED, xMsg, mnSocketFD);
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_UNREGISTERED, xMsg, mnSocketFD);
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "UnRegister");
 }
@@ -230,7 +230,7 @@ bool NFCProxyServerNet_ClientModule::AfterInit()
 	const int nCpus = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "CpuCount");
 	const int nPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "Port");
 
-	m_pNet = new NFCNet(this, &NFCProxyServerNet_ClientModule::OnRecivePack, &NFCProxyServerNet_ClientModule::OnSocketEvent);
+	m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyServerNet_ClientModule::OnRecivePack, &NFCProxyServerNet_ClientModule::OnSocketEvent);
 	int nRet = m_pNet->Initialization(strServerIP.c_str(), nServerPort);
 	if (nRet < 0)
 	{
@@ -255,7 +255,7 @@ int NFCProxyServerNet_ClientModule::OnSelectServerResultProcess(const NFIPacket&
     //保持记录,直到下线,或者1分钟不上线即可删除
     int32_t nPlayerID = 0;
     NFMsg::AckConnectWorldResult xMsg;
-    if (!Recive(msg, xMsg, nPlayerID))
+    if (!RecivePB(msg, xMsg, nPlayerID))
     {
         return 0;
     }
