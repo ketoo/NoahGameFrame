@@ -409,3 +409,22 @@ std::string NFCValueList::StringValEx(const int index, const bool bForce) const
 
     return NULL_STR;
 }
+
+bool NFCValueList::ToString(OUT std::string& str, const char* strSplit)
+{
+    for (int i = 0; i < GetCount(); ++i)
+    {
+        std::string strVal = StringValEx(i, true);
+        str += strVal;
+        str += strSplit;
+    }
+
+    std::string strTempSplit(strSplit);
+    std::string::size_type nPos = str.rfind(strSplit);
+    if (nPos == str.length() - strTempSplit.length())
+    {
+        str = str.substr(0, nPos);
+    }
+
+    return true;
+}
