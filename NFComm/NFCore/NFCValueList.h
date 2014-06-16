@@ -82,6 +82,7 @@ public:
     virtual float FloatVal(const int index) const;
     virtual double DoubleVal(const int index) const;
     virtual std::string StringValEx(const int index, const bool bForce) const;
+    virtual bool ToString(OUT std::string& str, const char* strSplit);
     virtual const std::string& StringVal(const int index) const;
     virtual NFIDENTID ObjectVal(const int index) const;
     virtual void* PointerVal(const int index) const;
