@@ -89,8 +89,7 @@ public:
 		}
 
 		//把后面的挪到前面来
-
-		mstrBuff.replace(nStart, nLen, std::string(""));
+		mstrBuff.erase(nStart, nLen);
 
         std::cout << "剩余长度:" << mstrBuff.length() << std::endl;
 
