@@ -75,7 +75,6 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
     }
     else if (events & BEV_EVENT_CONNECTED)
     {
-        pNet->mbRuning = true;
         printf("%d Connection successed\n", pObject->GetFd());/*XXX win32*/
     }
 }
@@ -155,6 +154,8 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
     }
 
     size_t len = evbuffer_get_length(input);
+    printf("收到消息，长度%d\n", len);
+
     //返回给客户端
     //  	struct evbuffer *output = bufferevent_get_output(bev);
     //  	evbuffer_add_buffer(output, input);
@@ -166,6 +167,7 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
     if(evbuffer_remove(input, strData, len) > 0)
     {
         pObject->AddBuff(strData, len);
+
         pNet->Dismantle(pObject);
     }
 
@@ -182,7 +184,7 @@ bool NFCNet::Execute(const float fLasFrametime, const float fStartedTime)
         event_base_loop(base, EVLOOP_ONCE|EVLOOP_NONBLOCK);
     }
 
-	return mbRuning;
+	return true;
 }
 
 
@@ -229,11 +231,6 @@ bool NFCNet::Final()
 
 bool NFCNet::SendMsg( const NFIPacket& msg, const uint32_t nSockIndex, bool bBroadcast )
 {
-    if (!mbRuning)
-    {
-        return false;
-    }
-
     return SendMsg(msg.GetPacketData(), msg.GetPacketLen(), nSockIndex, bBroadcast );
 }
 
@@ -301,21 +298,19 @@ bool NFCNet::Dismantle(NetObject* pObject )
 			int nRet = 0;
 			if (!mRecvCB._Empty())
             {
-                nRet = mRecvCB(packet);
-                bRet = bRet && nRet;
+                mRecvCB(packet);
             }
             else
             {
                nRet = OnRecivePacket(pObject->GetFd(), packet.GetPacketData(), packet.GetPacketLen());
-               bRet = bRet && nRet;
-
             }
 
 			//添加到队列
 			pObject->RemoveBuff(0, nUsedLen);
 			
 			//继续解包
-			bRet = bRet && Dismantle(pObject);
+
+            Dismantle(pObject);
 		}
 		else if (0 == nUsedLen)
 		{

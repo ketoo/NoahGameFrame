@@ -90,7 +90,9 @@ public:
 
 		//把后面的挪到前面来
 
-		mstrBuff.replace(nStart, nLen, "");
+		mstrBuff.replace(nStart, nLen, std::string(""));
+
+        std::cout << "剩余长度:" << mstrBuff.length() << std::endl;
 
 		return mstrBuff.length();
 	}
@@ -161,7 +163,6 @@ public:
         mnPort = 0;
         mnCpuCount = 0;
         mbServer = false;
-        mbRuning = false;
         ev = NULL;
         mnHeadLength = nHeadLength;
     }
@@ -212,7 +213,6 @@ private:
 	int mnPort;
 	int mnCpuCount;
 	bool mbServer;
-	bool mbRuning;
     bool mbUsePacket;//是否使用我们的包
 	struct event_base *base;
 	struct evconnlistener *listener;
