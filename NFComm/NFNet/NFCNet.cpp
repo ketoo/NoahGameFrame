@@ -16,7 +16,7 @@
 void NFCNet::time_cb(evutil_socket_t fd, short _event, void *argc)
 {
     NetObject* pObject = (NetObject*)argc;
-    if (pObject)
+    if (pObject && pObject->GetNet())
     {
         pObject->GetNet()->HeartPack();
 
