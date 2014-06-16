@@ -71,6 +71,7 @@ public:
     virtual ~NFIValueList() = 0;
 
     virtual std::string StringValEx(const int index, const bool bForce) const = 0;
+    virtual bool ToString(OUT std::string& str, const char* strSplit) = 0;
 
     template<typename NumberType>
     NumberType NumberVal(const int index) const
