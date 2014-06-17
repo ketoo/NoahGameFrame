@@ -99,10 +99,16 @@ bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTi
 	std::vector<NFIActor*>::iterator it = mActorVec.begin();
 	for (; it != mActorVec.end(); ++it)
 	{
-		NFIActorMessage message;
-		message.eType = NFIActorMessage::EACTOR_EXCUTE;
-		m_pFramework->Send(message, Theron::Address(), (*it)->GetAddress());
+        NFIActor* pActor = *it;
+        int nMsgCount = pActor->GetNumQueuedMessages();
+        if (nMsgCount <= 10)
+        {
+            NFIActorMessage message;
+            message.eType = NFIActorMessage::EACTOR_EXCUTE;
+            m_pFramework->Send(message, Theron::Address(), pActor->GetAddress());
+        }
 	}
+
 	return true;
 }
 
