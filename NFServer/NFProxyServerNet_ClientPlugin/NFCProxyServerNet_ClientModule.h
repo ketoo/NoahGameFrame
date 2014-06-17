@@ -44,15 +44,11 @@ protected:
     void OnClientConnected(const uint16_t& nAddress);
 
 private:
-
-private:
-    //NFIPluginManager* pPluginManager;
-
-private:
     int mnConnectContainer;
     int mnRoleHallContainer;
 
     int mnGameServerID;
+
     NFIProxyServerNet_ServerModule* m_pProxyServerNet_ServerModule;
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
@@ -85,9 +81,9 @@ protected:
 	int OnSocketEvent(const uint16_t nSockIndex, const NF_NET_EVENT eEvent);
 
 	//连接丢失,删2层(连接对象，帐号对象)
-	void OnClientDisconnect(const uint16_t& nAddress);
+	void OnClientDisconnect(const uint32_t& nAddress);
 	//有连接
-	void OnClientConnected(const uint16_t& nAddress);
+	void OnClientConnected(const uint32_t& nAddress);
 
     virtual int Transpond(int nGameServerID, const NFIPacket& msg);
 
