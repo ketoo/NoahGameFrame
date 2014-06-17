@@ -47,35 +47,26 @@ protected:
 	int OnSocketEvent(const uint16_t nSockIndex, const NF_NET_EVENT eEvent);
 
 	//连接丢失,删2层(连接对象，帐号对象)
-	void OnClientDisconnect(const uint16_t& nAddress);
+	void OnClientDisconnect(const uint32_t& nAddress);
 	//有连接
-	void OnClientConnected(const uint16_t& nAddress);
+	void OnClientConnected(const uint32_t& nAddress);
 
-protected:
-//     bool CheckPacketLegal(RakNet::Packet* pMsgPacket);
-// 
-//     void CreateConnectObject(const std::string& strAddress);
-// 
-//     void DestoryConnectObject(const std::string& strAddress);
-// 
-//     void OnDisAccount(const std::string& strAddress);
-//     //////////////////////////////////////////////////////////////////////////
-// 
-//     int OnConnectKeyProcessTCP(RakNet::Packet* pMsgPacket, const std::string& strInfo);
-// 
-//     //客户端的连接
-//     int HB_OnConnectCheckTime(const NFIDENTID& self, const NFIValueList& var);
-// 
-//     //保存的世界服务器发过来的信息对象
-//     //int HB_OnPlayerWantToConnect( const NFIDENTID& self, const NFIValueList& var );
-// 
-//     //////////////////////////////////////////////////////////////////////////
-// 
-//     //客户端初次连接，设置一心跳等待他再次发送密钥,超时不发则删掉
-//     int OnConnectObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var);
-// 
-//     //保存的世界服务器发过来的信息对象
-//     int OnWantToConnectObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var);
+    int OnConnectKeyProcess(const NFIPacket& msg);
+
+    //客户端的连接
+    int HB_OnConnectCheckTime(const NFIDENTID& self, const NFIValueList& var);
+
+    //////////////////////////////////////////////////////////////////////////
+
+    //保存的世界服务器发过来的信息对象
+    int HB_OnPlayerWantToConnect(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var );
+    //////////////////////////////////////////////////////////////////////////
+
+    //客户端初次连接，设置一心跳等待他再次发送密钥,超时不发则删掉
+    int OnConnectObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var);
+
+    //保存的世界服务器发过来的信息对象
+    int OnWantToConnectObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var);
 
 protected:
     //新建立的连接对象，等待他们自己发验证KEY，KEY验证后删掉

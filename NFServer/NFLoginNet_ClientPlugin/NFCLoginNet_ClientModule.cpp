@@ -159,25 +159,23 @@ void NFCLoginNet_ClientModule::UnRegister()
 
 int NFCLoginNet_ClientModule::OnSelectServerResultProcess(const NFIPacket& msg)
 {
-	//     _tagPT_KEY_BASE_MSG baseMsg;
-	//     pMsgPacket->DeCode(&baseMsg);
-	// 
-	//     NFMsg::WantToConnectWorldResult xMsg;
-	//     if (!xMsg.ParseFromString(baseMsg.strSyncInfo))
-	//     {
-	//         return 0;
-	//     }
-	// 
-	//     NFCValueList var;
-	//     var << xMsg.world_id()
-	//         << xMsg.sender_ip()
-	//         << xMsg.login_id()
-	//         << xMsg.account()
-	//         << xMsg.world_ip()
-	//         << xMsg.world_port()
-	//         << xMsg.world_key();
-	// 
-	//     m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_SELECT_SERVER_RESULTS, var);
+    int32_t nPlayerID = 0;	
+    NFMsg::AckConnectWorldResult xMsg;
+    if (!RecivePB(msg, xMsg, nPlayerID))
+    {
+        return 0;
+    }
+
+    NFCValueList var;
+    var << xMsg.world_id()
+        << xMsg.sender_ip()
+        << xMsg.login_id()
+        << xMsg.account()
+        << xMsg.world_ip()
+        << xMsg.world_port()
+        << xMsg.world_key();
+
+    m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_SELECT_SERVER_RESULTS, var);
 
 	return 0;
 }
