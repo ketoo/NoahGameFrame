@@ -45,6 +45,7 @@ bool NFCProxyServerNet_ClientModule::Execute(const float fLasFrametime, const fl
 
 int NFCProxyServerNet_ClientModule::OnRecivePack( const NFIPacket& msg )
 {
+    //这里是worldserver发来的消息
     switch (msg.GetMsgHead()->GetMsgID())
     {
         case NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD:
@@ -146,12 +147,12 @@ int NFCProxyServerNet_ClientModule::OnSocketEvent( const uint16_t nSockIndex, co
 	return 0;
 }
 
-void NFCProxyServerNet_ClientModule::OnClientDisconnect( const uint16_t& nAddress )
+void NFCProxyServerNet_ClientModule::OnClientDisconnect( const uint32_t& nAddress )
 {
 
 }
 
-void NFCProxyServerNet_ClientModule::OnClientConnected( const uint16_t& nAddress )
+void NFCProxyServerNet_ClientModule::OnClientConnected( const uint32_t& nAddress )
 {
     Register();
 }
@@ -307,4 +308,14 @@ void NFCProxyConnectObject::OnClientDisconnect( const uint16_t& nAddress )
 void NFCProxyConnectObject::OnClientConnected( const uint16_t& nAddress )
 {
 
+}
+
+int NFCProxyConnectObject::OnRecivePack( const NFIPacket& msg )
+{
+    return 0;
+}
+
+int NFCProxyConnectObject::OnSocketEvent( const uint16_t nSockIndex, const NF_NET_EVENT eEvent )
+{
+    return 0;
 }
