@@ -52,7 +52,6 @@ protected:
 protected:
 
     int OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
-    int OnClientExitWorldEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
 protected:
 
 	bool InThisWorld(const std::string& strAccount);
