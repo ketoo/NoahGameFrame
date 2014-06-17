@@ -125,11 +125,13 @@ int NFCLoginNet_ServerModule::OnLoginResultsEvent(const NFIDENTID& object, const
 
 
 	//把服务器列表广播下去
-	//SynWorldToClient(unAddress);
+	
 	NFMsg::AckEventResult xData;
 	xData.set_event_code(NFMsg::EGEC_ACCOUNT_SUCCESS);
 
 	SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xData, unAddress);
+
+    SynWorldToClient(unAddress);
 
 	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL,ident, "Login successed :", strAccount.c_str());
 
