@@ -40,7 +40,6 @@ bool NFCWorldNet_ServerModule::AfterInit()
     assert(NULL != m_pLogicClassModule);
 
     m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_SELECT_SERVER, this, &NFCWorldNet_ServerModule::OnSelectServerEvent);
-    m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_EXIT_SERVER, this, &NFCWorldNet_ServerModule::OnClientExitWorldEvent);
 
     //////////////////////////////////////////////////////////////////////////
     m_pKernelModule->CreateContainer(mnGameServerContainerID, "");
@@ -176,6 +175,8 @@ int NFCWorldNet_ServerModule::OnGameServerRegisteredProcess(const NFIPacket& msg
             if (pObject)
             {
                 pObject->SetPropertyInt("State", NFMsg::EST_NARMAL);
+
+                m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "GameServerRegistered");
             }
             return 0;
         }
@@ -361,8 +362,12 @@ int NFCWorldNet_ServerModule::OnProxyServerRegisteredProcess(const NFIPacket& ms
                 pObject->SetPropertyString("IP", pData->server_ip());
                 pObject->SetPropertyInt("Port", pData->server_port());
                 pObject->SetPropertyInt("State", NFMsg::EST_NARMAL);
+
+                //同步所有的gameserver给proxy
+                int nFD = pObject->QueryPropertyInt("FD");
+                SynGameToProxy(nFD);
+                return 0;
             }
-            return 0;
         }
 
 
@@ -382,14 +387,13 @@ int NFCWorldNet_ServerModule::OnProxyServerRegisteredProcess(const NFIPacket& ms
                 pObject->SetPropertyString("IP", pData->server_ip());
                 pObject->SetPropertyInt("Port", pData->server_port());
                 pObject->SetPropertyInt("State", NFMsg::EST_NARMAL);
+
+                //同步所有的gameserver给proxy
+                int nFD = pObject->QueryPropertyInt("FD");
+                SynGameToProxy(nFD);
             }
         }
     }
-
-    //////////////////////////////////////////////////////////////////////////
-    //同步所有的gameserver给proxy
-    SynGameToProxy();
-
 
     return 0;
 }
@@ -420,30 +424,6 @@ int NFCWorldNet_ServerModule::OnProxyServerUnRegisteredProcess(const NFIPacket& 
 
 int NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess(const NFIPacket& msg)
 {
-    return 0;
-}
-
-int NFCWorldNet_ServerModule::OnClientExitWorldEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
-{
-    if (2 != var.GetCount()
-        || !var.TypeEx(VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_STRING, VARIANT_TYPE::VTYPE_UNKNOWN))
-
-    {
-        return 0;
-    }
-
-    int nWorldID = var.IntVal(0);
-    const std::string& strAccount = var.StringVal(1);
-
-    //NFIDENTID serverIdent = GetGameServerObject( 1 );
-    //if ( !proxyServerIdent.IsNull() )
-    //     {
-    //         if (Find(strAccount))
-    //         {
-    //             Remove(strAccount);
-    //             return 0;
-    //         }
-    //   }
     return 0;
 }
 
