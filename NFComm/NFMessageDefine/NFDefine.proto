@@ -10,41 +10,45 @@ enum EGameEventCode
 	EGEC_ACCOUNT_USING							= 4;        // 账号正在使用
 	EGEC_ACCOUNT_LOCKED							= 5;        // 账号已封停
 	EGEC_ACCOUNT_SUCCESS						= 6;        // 账号登录成功
-	
-	EGEC_CHARACTER_EXIST						= 10;       // 创建角色时角色名重复
-	EGEC_SVRZONEID_INVALID						= 11;       // 创建角色时游戏区代码无效
-	EGEC_CHARACTER_NUMOUT						= 12;       // 创建角色时角色个数超出设定值（一个账号最多建4个角色）
-	EGEC_CHARACTER_INVALID						= 13;       // 角色名无效（非法角色名）
-	EGEC_CHARACTER_NOTEXIST						= 14;       // 角色不存在
-	EGEC_CHARACTER_USING						= 15;       // 角色已在游戏中
-	EGEC_CHARACTER_LOCKED						= 16;       // 角色已封停
-	EGEC_ZONE_OVERLOAD							= 17;       // 场景人数已满(领地XXX; 过于拥挤)
-	EGEC_NOT_ONLINE								= 18;       // 玩家不在线
-	EGEC_ALREAY_IN_TEAM							= 19;       // 玩家已经在队伍中了
-	EGEC_INVALID_TEAM_INVITE					= 20;       // 无效的组队邀请
-	EGEC_TEAM_FULL								= 21;       // 队伍人数已满
-	EGEC_MAIL_UPDATE_ERROR						= 22;       // 更新邮件状态时出错
-	EGEC_MAIL_TONAME_INVALID					= 23;       // 邮件时收件人不存在
-	EGEC_MAIL_DELETE_ERROR						= 24;       // 删除邮件失败
-	EGEC_MAIL_TOWNAME_EQUAL						= 25;       // 不能自己给自己发邮件
-	EGEC_LACK_MONEY								= 26;       // 金钱不足
-	EGEC_FULL_PACKAGE							= 27;       // 背包已满
-	EGEC_INVALID_ITEM							= 28;       // 无效的道具
-	EGEC_INVALID_CONSIGNMENT					= 29;       // 无效的寄售ID
-	EGEC_NOT_ENOUGH_VIP							= 30;       // VIP点数不够
-	EGEC_NEED_LEVEL								= 31;       // 等级不够
-	EGEC_MAX_FRIEND_LIST						= 32;       // 好友列表已满
-	EGEC_MAX_ENEMY_LIST							= 33;       // 恶人列表已满
-	EGEC_MAX_GANGS_LSIT							= 34;       // 帮会人数达上限
-	EGEC_LIMITS_TO_RIGHTS						= 35;       // 需要权限
-	EGEC_INVALID_GANGS_NAME						= 36;       // 无效的帮会名称
-	EGEC_REPEAT_ENTER_GANGS						= 37;       // 角色已经是帮会成员了;不能再加入帮会了
-	EGEC_INVALID_GANGSMEMBER					= 38;       // 角色不是指定帮会成员
-	EGEC_MASTER_LEAVE_GANGS						= 39;       // 会长不能离开帮会
-	EGEC_GANGS_TITLE_OUTOF						= 40;       // 指定帮会职务的人类超过该职务的最大数量
-	EGEC_ENTER_GATEWAY_FAILD					= 41;       // 无效的传送请求(传送门实际不存在;没有到达触发传送的条件等)
-	EGEC_NO_SERVER4ZONE							= 42;       // 还没有指派服务器管理该场景; 请稍等(游戏世界还处于混沌中...)
-	EGEC_INVALID_SKILL							= 43;       // 无效的技能
+	EGEC_VERIFY_KEY_SUCCESS						= 7;        // 账号KEY验证成功
+	EGEC_VERIFY_KEY_FAIL						= 8;        // 账号KEY验证失败
+	EGEC_SELECTSERVER_SUCCESS					= 9;        // 选择单服成功
+	EGEC_SELECTSERVER_FAIL						= 10;       // 选择单服失败
+
+	EGEC_CHARACTER_EXIST						= 110;       // 创建角色时角色名重复
+	EGEC_SVRZONEID_INVALID						= 111;       // 创建角色时游戏区代码无效
+	EGEC_CHARACTER_NUMOUT						= 112;       // 创建角色时角色个数超出设定值（一个账号最多建4个角色）
+	EGEC_CHARACTER_INVALID						= 113;       // 角色名无效（非法角色名）
+	EGEC_CHARACTER_NOTEXIST						= 114;       // 角色不存在
+	EGEC_CHARACTER_USING						= 115;       // 角色已在游戏中
+	EGEC_CHARACTER_LOCKED						= 116;       // 角色已封停
+	EGEC_ZONE_OVERLOAD							= 117;       // 场景人数已满(领地XXX; 过于拥挤)
+	EGEC_NOT_ONLINE								= 118;       // 玩家不在线
+	EGEC_ALREAY_IN_TEAM							= 119;       // 玩家已经在队伍中了
+	EGEC_INVALID_TEAM_INVITE					= 120;       // 无效的组队邀请
+	EGEC_TEAM_FULL								= 121;       // 队伍人数已满
+	EGEC_MAIL_UPDATE_ERROR						= 122;       // 更新邮件状态时出错
+	EGEC_MAIL_TONAME_INVALID					= 123;       // 邮件时收件人不存在
+	EGEC_MAIL_DELETE_ERROR						= 124;       // 删除邮件失败
+	EGEC_MAIL_TOWNAME_EQUAL						= 125;       // 不能自己给自己发邮件
+	EGEC_LACK_MONEY								= 126;       // 金钱不足
+	EGEC_FULL_PACKAGE							= 127;       // 背包已满
+	EGEC_INVALID_ITEM							= 128;       // 无效的道具
+	EGEC_INVALID_CONSIGNMENT					= 129;       // 无效的寄售ID
+	EGEC_NOT_ENOUGH_VIP							= 130;       // VIP点数不够
+	EGEC_NEED_LEVEL								= 131;       // 等级不够
+	EGEC_MAX_FRIEND_LIST						= 132;       // 好友列表已满
+	EGEC_MAX_ENEMY_LIST							= 133;       // 恶人列表已满
+	EGEC_MAX_GANGS_LSIT							= 134;       // 帮会人数达上限
+	EGEC_LIMITS_TO_RIGHTS						= 135;       // 需要权限
+	EGEC_INVALID_GANGS_NAME						= 136;       // 无效的帮会名称
+	EGEC_REPEAT_ENTER_GANGS						= 137;       // 角色已经是帮会成员了;不能再加入帮会了
+	EGEC_INVALID_GANGSMEMBER					= 138;       // 角色不是指定帮会成员
+	EGEC_MASTER_LEAVE_GANGS						= 139;       // 会长不能离开帮会
+	EGEC_GANGS_TITLE_OUTOF						= 140;       // 指定帮会职务的人类超过该职务的最大数量
+	EGEC_ENTER_GATEWAY_FAILD					= 141;       // 无效的传送请求(传送门实际不存在;没有到达触发传送的条件等)
+	EGEC_NO_SERVER4ZONE							= 142;       // 还没有指派服务器管理该场景; 请稍等(游戏世界还处于混沌中...)
+	EGEC_INVALID_SKILL							= 143;       // 无效的技能
 }
 
 enum EGameMsgID
@@ -87,62 +91,63 @@ enum EGameMsgID
 	EGMI_ACK_CONNECT_KEY						= 122;         // 
 
 
-	EGMI_REQ_SELECT_SERVER					= 130;			// 选择一个单服
-	EGMI_REQ_ROLE_LIST								= 131;			// 申请角色列表
-	EGMI_ACK_ROLE_LIST							= 132;			// 
-	EGMI_REQ_CREATE_ROLE						= 133;			// 申请创建一个角色
-	EGMI_REQ_DELETE_ROLE						= 134;			// 申请删除一个角色
-	EGMI_REQ_RECOVER_ROLE					= 135;			// 申请恢复一个角色
+	EGMI_REQ_SELECT_SERVER						= 130;			// 选择一个单服
+	EGMI_ACK_SELECT_SERVER						= 131;			// 选择一个单服
+	EGMI_REQ_ROLE_LIST							= 132;			// 申请角色列表
+	EGMI_ACK_ROLE_LIST							= 133;			// 
+	EGMI_REQ_CREATE_ROLE						= 134;			// 申请创建一个角色
+	EGMI_REQ_DELETE_ROLE						= 135;			// 申请删除一个角色
+	EGMI_REQ_RECOVER_ROLE						= 136;			// 申请恢复一个角色
 
-	EGMI_REQ_COMMAND								= 140;			// GM命令
+	EGMI_REQ_COMMAND							= 140;			// GM命令
 
 
-	EGMI_REQ_ENTER_GAME						= 150;			// 申请进入游戏世界
-	EGMI_REQ_LEAVE_GAME						= 151;			// 申请离开游戏世界, 回到选人
+	EGMI_REQ_ENTER_GAME							= 150;			// 申请进入游戏世界
+	EGMI_REQ_LEAVE_GAME							= 151;			// 申请离开游戏世界, 回到选人
 	EGMI_REQ_SWAP_GAME							= 152;			//
-	EGMI_REQ_SWAP_SCENE						= 153;			// 
+	EGMI_REQ_SWAP_SCENE							= 153;			// 
 
 
-	EGMI_ACK_OBJECT_ENTRY					= 200;			// 有对象进入
-	EGMI_ACK_OBJECT_LEAVE					= 201;			// 有对象出去
+	EGMI_ACK_OBJECT_ENTRY						= 200;			// 有对象进入
+	EGMI_ACK_OBJECT_LEAVE						= 201;			// 有对象出去
 
 	EGMI_ACK_PROPERTY_INT						= 210;			// 属性变更
-	EGMI_ACK_PROPERTY_FLOAT				= 211;			// 属性变更
-	EGMI_ACK_PROPERTY_STRING				= 212;			// 属性变更
-	EGMI_ACK_PROPERTY_DOUBLE			= 213;			// 属性变更
-	EGMI_ACK_PROPERTY_OBJECT			= 214;			// 属性变更
+	EGMI_ACK_PROPERTY_FLOAT						= 211;			// 属性变更
+	EGMI_ACK_PROPERTY_STRING					= 212;			// 属性变更
+	EGMI_ACK_PROPERTY_DOUBLE					= 213;			// 属性变更
+	EGMI_ACK_PROPERTY_OBJECT					= 214;			// 属性变更
 
-	EGMI_ACK_ADD_ROW								= 220;
-	EGMI_ACK_REMOVE_ROW						= 221;
+	EGMI_ACK_ADD_ROW							= 220;
+	EGMI_ACK_REMOVE_ROW							= 221;
 	EGMI_ACK_SWAP_ROW							= 222;
 	EGMI_ACK_RECORD_INT							= 223;
-	EGMI_ACK_RECORD_FLOAT					= 224;
-	EGMI_ACK_RECORD_DOUBLE				= 225;
-	EGMI_ACK_RECORD_STRING					= 226;
-	EGMI_ACK_RECORD_OBJECT					= 227;
+	EGMI_ACK_RECORD_FLOAT						= 224;
+	EGMI_ACK_RECORD_DOUBLE						= 225;
+	EGMI_ACK_RECORD_STRING						= 226;
+	EGMI_ACK_RECORD_OBJECT						= 227;
 
-	EGMI_REQ_MOVE										= 230;
-	EGMI_ACK_MOVE										= 231;
+	EGMI_REQ_MOVE								= 230;
+	EGMI_ACK_MOVE								= 231;
 	EGMI_REQ_MOVE_IMMUNE						= 232;
 	EGMI_ACK_MOVE_IMMUNE						= 233;
 
-	EGMI_REQ_SKILL_OBJECTX					= 240;
-	EGMI_ACK_SKILL_OBJECTX					= 241;
+	EGMI_REQ_SKILL_OBJECTX						= 240;
+	EGMI_ACK_SKILL_OBJECTX						= 241;
 	EGMI_REQ_SKILL_POS							= 242;
 	EGMI_ACK_SKILL_POS							= 243;
 	EGMI_REQ_ITEM_OBJECT						= 244;
 	EGMI_ACK_ITEM_OBJECT						= 245;
-	EGMI_REQ_ITEM_POS								= 246;
-	EGMI_ACK_ITEM_POS								= 247;
+	EGMI_REQ_ITEM_POS							= 246;
+	EGMI_ACK_ITEM_POS							= 247;
 
 
-	EGMI_REQ_CHAT										= 250;
-	EGMI_ACK_CHAT										= 251;
+	EGMI_REQ_CHAT								= 250;
+	EGMI_ACK_CHAT								= 251;
 	EGMI_REQ_SALE_ITEM							= 252;
 	EGMI_REQ_SPLIT_ITEM							= 253;
-	EGMI_REQ_PRODUCE_ITEM					= 254;
-	EGMI_REQ_PICK_ITEM								= 255;
+	EGMI_REQ_PRODUCE_ITEM						= 254;
+	EGMI_REQ_PICK_ITEM							= 255;
 	EGMI_REQ_ACCEPT_TASK						= 256;
-	EGMI_REQ_PULLDOWNCUSTOM			= 257;
+	EGMI_REQ_PULLDOWNCUSTOM						= 257;
 }
 
