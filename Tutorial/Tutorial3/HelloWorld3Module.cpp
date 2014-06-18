@@ -1,4 +1,5 @@
 #include "HelloWorld3Module.h"
+#include "NFComm\NFCore\NFTimer.h"
 
 bool HelloWorld3Module::Init()
 {
@@ -19,6 +20,17 @@ int HelloWorld3Module::OnEvent(const NFIDENTID& self, const int event, const NFI
     return 0;
 }
 
+int HelloWorld3Module::OnHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& arg)
+{
+    unsigned long unNowTime = ::GetTickCount();
+
+    std::cout << "strHeartBeat: " << fTime << " Count: " << nCount << "  TimeDis: " << unNowTime - mLastTime << std::endl;
+
+    mLastTime = unNowTime;
+
+    return 0;
+}
+
 int HelloWorld3Module::OnClassCallBackEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT event, const NFIValueList& arg)
 {
     //虚拟类事件，只要有此虚拟类创建或者销毁即会回调
@@ -26,8 +38,15 @@ int HelloWorld3Module::OnClassCallBackEvent(const NFIDENTID& self, const std::st
 
     if (event == COE_CREATE_HASDATA)
     {
-        m_pEventProcessModule->AddEventCallBack(self, 11111111, this, &HelloWorld3Module::OnEvent);
 
+        if(pPluginManager->GetActor() == NFIActorManager::EACTOR_MAIN)
+        {
+            m_pEventProcessModule->AddEventCallBack(self, 11111111, this, &HelloWorld3Module::OnEvent);
+
+            m_pKernelModule->AddHeartBeat(self, "OnHeartBeat", this, &HelloWorld3Module::OnHeartBeat, NFCValueList(), 5.0f, 9999 );
+
+            mLastTime = ::GetTickCount();
+        }
     }
 
     return 0;

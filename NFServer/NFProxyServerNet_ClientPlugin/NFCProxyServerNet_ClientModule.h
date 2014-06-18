@@ -75,6 +75,8 @@ public:
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
 
+    virtual int Transpond(int nGameServerID, const NFIPacket& msg);
+
 protected:
 
 	int OnRecivePack(const NFIPacket& msg);
@@ -85,7 +87,6 @@ protected:
 	//спа╛╫с
 	void OnClientConnected(const uint32_t& nAddress);
 
-    virtual int Transpond(int nGameServerID, const NFIPacket& msg);
 
     int DoHeartBeatEvent(const NFIDENTID& self, const NFIValueList& var);
 protected:
