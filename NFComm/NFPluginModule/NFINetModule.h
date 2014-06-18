@@ -14,6 +14,7 @@
 #include "NFComm/NFNet/NFCNet.h"
 #include "NFComm/NFNet/NFCPacket.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
+#include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
 class NFINetModule
 	: public NFILogicModule
