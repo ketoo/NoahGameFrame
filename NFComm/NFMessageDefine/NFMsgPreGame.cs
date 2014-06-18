@@ -388,6 +388,23 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqSelectServer")]
+  public partial class ReqSelectServer : global::ProtoBuf.IExtensible
+  {
+    public ReqSelectServer() {}
+    
+    private int _world_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"world_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int world_id
+    {
+      get { return _world_id; }
+      set { _world_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqKickFromWorld")]
   public partial class ReqKickFromWorld : global::ProtoBuf.IExtensible
   {
