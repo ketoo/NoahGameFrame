@@ -16,7 +16,11 @@ NFCDataNoSqlDriver::NFCDataNoSqlDriver()
 
 NFCDataNoSqlDriver::~NFCDataNoSqlDriver()
 {
-	delete m_pRedisClient;
+	if (m_pRedisClient)
+	{
+		delete m_pRedisClient;
+		m_pRedisClient = NULL;
+	}
 }
 
 int NFCDataNoSqlDriver::Connect(const std::string& strDSN)
