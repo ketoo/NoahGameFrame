@@ -263,7 +263,7 @@ int NFCProxyServerNet_ClientModule::OnSelectServerResultProcess(const NFIPacket&
 
     // 保存起来，等待客户端连接
     NFCValueList varObjectList;
-    //帐号相等的只能有一个---效率低，后面再优化
+    //帐号相等的只能有一个
     int nCount = m_pKernelModule->GetObjectByProperty(mnWantToConnectContainer, "Account", NFCValueList() << xMsg.account(), varObjectList);
     if (1 == nCount)
     {
@@ -312,6 +312,8 @@ void NFCProxyConnectObject::OnClientConnected( const uint16_t& nAddress )
 
 int NFCProxyConnectObject::OnRecivePack( const NFIPacket& msg )
 {
+    m_pProxyServerNet_ServerModule->Transpond(msg);
+
     return 0;
 }
 
