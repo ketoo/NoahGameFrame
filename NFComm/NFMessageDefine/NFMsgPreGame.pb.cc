@@ -50,6 +50,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* AckConnectWorldResult_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   AckConnectWorldResult_reflection_ = NULL;
+const ::google::protobuf::Descriptor* ReqSelectServer_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ReqSelectServer_reflection_ = NULL;
 const ::google::protobuf::Descriptor* ReqKickFromWorld_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqKickFromWorld_reflection_ = NULL;
@@ -262,7 +265,22 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckConnectWorldResult));
-  ReqKickFromWorld_descriptor_ = file->message_type(10);
+  ReqSelectServer_descriptor_ = file->message_type(10);
+  static const int ReqSelectServer_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSelectServer, world_id_),
+  };
+  ReqSelectServer_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ReqSelectServer_descriptor_,
+      ReqSelectServer::default_instance_,
+      ReqSelectServer_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSelectServer, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSelectServer, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ReqSelectServer));
+  ReqKickFromWorld_descriptor_ = file->message_type(11);
   static const int ReqKickFromWorld_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqKickFromWorld, world_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqKickFromWorld, account_),
@@ -278,7 +296,7 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqKickFromWorld));
-  ReqRoleList_descriptor_ = file->message_type(11);
+  ReqRoleList_descriptor_ = file->message_type(12);
   static const int ReqRoleList_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqRoleList, game_id_),
   };
@@ -293,7 +311,7 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqRoleList));
-  RoleLiteInfo_descriptor_ = file->message_type(12);
+  RoleLiteInfo_descriptor_ = file->message_type(13);
   static const int RoleLiteInfo_offsets_[17] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RoleLiteInfo, char_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RoleLiteInfo, career_),
@@ -324,7 +342,7 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(RoleLiteInfo));
-  AckRoleLiteInfoList_descriptor_ = file->message_type(13);
+  AckRoleLiteInfoList_descriptor_ = file->message_type(14);
   static const int AckRoleLiteInfoList_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckRoleLiteInfoList, char_data_),
   };
@@ -339,7 +357,7 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckRoleLiteInfoList));
-  ReqCreateRole_descriptor_ = file->message_type(14);
+  ReqCreateRole_descriptor_ = file->message_type(15);
   static const int ReqCreateRole_offsets_[10] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCreateRole, career_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCreateRole, sex_),
@@ -363,7 +381,7 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqCreateRole));
-  ReqDeleteRole_descriptor_ = file->message_type(15);
+  ReqDeleteRole_descriptor_ = file->message_type(16);
   static const int ReqDeleteRole_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqDeleteRole, char_id_),
   };
@@ -378,7 +396,7 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqDeleteRole));
-  ReqRecoverRole_descriptor_ = file->message_type(16);
+  ReqRecoverRole_descriptor_ = file->message_type(17);
   static const int ReqRecoverRole_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqRecoverRole, char_id_),
   };
@@ -428,6 +446,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     AckConnectWorldResult_descriptor_, &AckConnectWorldResult::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ReqSelectServer_descriptor_, &ReqSelectServer::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqKickFromWorld_descriptor_, &ReqKickFromWorld::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqRoleList_descriptor_, &ReqRoleList::default_instance());
@@ -466,6 +486,8 @@ void protobuf_ShutdownFile_NFMsgPreGame_2eproto() {
   delete ReqConnectWorld_reflection_;
   delete AckConnectWorldResult::default_instance_;
   delete AckConnectWorldResult_reflection_;
+  delete ReqSelectServer::default_instance_;
+  delete ReqSelectServer_reflection_;
   delete ReqKickFromWorld::default_instance_;
   delete ReqKickFromWorld_reflection_;
   delete ReqRoleList::default_instance_;
@@ -519,30 +541,31 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
     "\001(\005\"\230\001\n\025AckConnectWorldResult\022\020\n\010world_i"
     "d\030\001 \002(\005\022\021\n\tsender_ip\030\002 \002(\005\022\020\n\010login_id\030\003"
     " \002(\005\022\017\n\007account\030\004 \002(\014\022\020\n\010world_ip\030\005 \002(\014\022"
-    "\022\n\nworld_port\030\006 \002(\005\022\021\n\tworld_key\030\007 \002(\014\"5"
-    "\n\020ReqKickFromWorld\022\020\n\010world_id\030\001 \002(\005\022\017\n\007"
-    "account\030\002 \002(\014\"\036\n\013ReqRoleList\022\017\n\007game_id\030"
-    "\001 \002(\005\"\310\002\n\014RoleLiteInfo\022\017\n\007char_id\030\001 \002(\005\022"
-    "\016\n\006career\030\002 \002(\005\022\013\n\003sex\030\003 \002(\005\022\014\n\004race\030\004 \002"
-    "(\005\022\021\n\tnoob_name\030\005 \002(\014\022\017\n\007game_id\030\006 \002(\005\022\022"
-    "\n\nchar_level\030\007 \002(\005\022\020\n\010char_exp\030\010 \002(\005\022\r\n\005"
-    "money\030\t \002(\005\022\014\n\004cash\030\n \002(\005\022\021\n\tvip_level\030\013"
-    " \002(\005\022\023\n\013delete_time\030\014 \002(\005\022\020\n\010reg_time\030\r "
-    "\002(\005\022\031\n\021last_offline_time\030\017 \002(\005\022\027\n\017last_o"
-    "ffline_ip\030\020 \002(\005\022\023\n\013view_record\030\021 \002(\014\022\022\n\n"
-    "pet_record\030\022 \002(\014\"=\n\023AckRoleLiteInfoList\022"
-    "&\n\tchar_data\030\001 \003(\0132\023.NFMsg.RoleLiteInfo\""
-    "\276\001\n\rReqCreateRole\022\016\n\006career\030\001 \002(\005\022\013\n\003sex"
-    "\030\002 \002(\005\022\014\n\004race\030\003 \002(\005\022\021\n\tnoob_head\030\004 \002(\005\022"
-    "\021\n\tnoob_body\030\005 \002(\005\022\021\n\tnoob_foot\030\006 \002(\005\022\023\n"
-    "\013noob_weapon\030\007 \002(\005\022\020\n\010noob_pic\030\010 \002(\005\022\021\n\t"
-    "noob_name\030\t \002(\014\022\017\n\007game_id\030\n \002(\005\" \n\rReqD"
-    "eleteRole\022\017\n\007char_id\030\001 \002(\005\"!\n\016ReqRecover"
-    "Role\022\017\n\007char_id\030\001 \002(\005*Z\n\014EServerState\022\r\n"
-    "\tEST_CRASH\020\000\022\016\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY"
-    "\020\002\022\014\n\010EST_FIRE\020\003\022\017\n\013EST_MAINTEN\020\004*@\n\021Req"
-    "ServerListType\022\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n"
-    "\020RSLT_GAMES_ERVER\020\001", 2059);
+    "\022\n\nworld_port\030\006 \002(\005\022\021\n\tworld_key\030\007 \002(\014\"#"
+    "\n\017ReqSelectServer\022\020\n\010world_id\030\001 \002(\005\"5\n\020R"
+    "eqKickFromWorld\022\020\n\010world_id\030\001 \002(\005\022\017\n\007acc"
+    "ount\030\002 \002(\014\"\036\n\013ReqRoleList\022\017\n\007game_id\030\001 \002"
+    "(\005\"\310\002\n\014RoleLiteInfo\022\017\n\007char_id\030\001 \002(\005\022\016\n\006"
+    "career\030\002 \002(\005\022\013\n\003sex\030\003 \002(\005\022\014\n\004race\030\004 \002(\005\022"
+    "\021\n\tnoob_name\030\005 \002(\014\022\017\n\007game_id\030\006 \002(\005\022\022\n\nc"
+    "har_level\030\007 \002(\005\022\020\n\010char_exp\030\010 \002(\005\022\r\n\005mon"
+    "ey\030\t \002(\005\022\014\n\004cash\030\n \002(\005\022\021\n\tvip_level\030\013 \002("
+    "\005\022\023\n\013delete_time\030\014 \002(\005\022\020\n\010reg_time\030\r \002(\005"
+    "\022\031\n\021last_offline_time\030\017 \002(\005\022\027\n\017last_offl"
+    "ine_ip\030\020 \002(\005\022\023\n\013view_record\030\021 \002(\014\022\022\n\npet"
+    "_record\030\022 \002(\014\"=\n\023AckRoleLiteInfoList\022&\n\t"
+    "char_data\030\001 \003(\0132\023.NFMsg.RoleLiteInfo\"\276\001\n"
+    "\rReqCreateRole\022\016\n\006career\030\001 \002(\005\022\013\n\003sex\030\002 "
+    "\002(\005\022\014\n\004race\030\003 \002(\005\022\021\n\tnoob_head\030\004 \002(\005\022\021\n\t"
+    "noob_body\030\005 \002(\005\022\021\n\tnoob_foot\030\006 \002(\005\022\023\n\013no"
+    "ob_weapon\030\007 \002(\005\022\020\n\010noob_pic\030\010 \002(\005\022\021\n\tnoo"
+    "b_name\030\t \002(\014\022\017\n\007game_id\030\n \002(\005\" \n\rReqDele"
+    "teRole\022\017\n\007char_id\030\001 \002(\005\"!\n\016ReqRecoverRol"
+    "e\022\017\n\007char_id\030\001 \002(\005*Z\n\014EServerState\022\r\n\tES"
+    "T_CRASH\020\000\022\016\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022"
+    "\014\n\010EST_FIRE\020\003\022\017\n\013EST_MAINTEN\020\004*@\n\021ReqSer"
+    "verListType\022\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020RS"
+    "LT_GAMES_ERVER\020\001", 2096);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgPreGame.proto", &protobuf_RegisterTypes);
   ServerInfoReport::default_instance_ = new ServerInfoReport();
@@ -555,6 +578,7 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
   AckServerList::default_instance_ = new AckServerList();
   ReqConnectWorld::default_instance_ = new ReqConnectWorld();
   AckConnectWorldResult::default_instance_ = new AckConnectWorldResult();
+  ReqSelectServer::default_instance_ = new ReqSelectServer();
   ReqKickFromWorld::default_instance_ = new ReqKickFromWorld();
   ReqRoleList::default_instance_ = new ReqRoleList();
   RoleLiteInfo::default_instance_ = new RoleLiteInfo();
@@ -572,6 +596,7 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
   AckServerList::default_instance_->InitAsDefaultInstance();
   ReqConnectWorld::default_instance_->InitAsDefaultInstance();
   AckConnectWorldResult::default_instance_->InitAsDefaultInstance();
+  ReqSelectServer::default_instance_->InitAsDefaultInstance();
   ReqKickFromWorld::default_instance_->InitAsDefaultInstance();
   ReqRoleList::default_instance_->InitAsDefaultInstance();
   RoleLiteInfo::default_instance_->InitAsDefaultInstance();
@@ -4022,6 +4047,215 @@ void AckConnectWorldResult::Swap(AckConnectWorldResult* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = AckConnectWorldResult_descriptor_;
   metadata.reflection = AckConnectWorldResult_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ReqSelectServer::kWorldIdFieldNumber;
+#endif  // !_MSC_VER
+
+ReqSelectServer::ReqSelectServer()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void ReqSelectServer::InitAsDefaultInstance() {
+}
+
+ReqSelectServer::ReqSelectServer(const ReqSelectServer& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ReqSelectServer::SharedCtor() {
+  _cached_size_ = 0;
+  world_id_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ReqSelectServer::~ReqSelectServer() {
+  SharedDtor();
+}
+
+void ReqSelectServer::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void ReqSelectServer::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ReqSelectServer::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ReqSelectServer_descriptor_;
+}
+
+const ReqSelectServer& ReqSelectServer::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgPreGame_2eproto();
+  return *default_instance_;
+}
+
+ReqSelectServer* ReqSelectServer::default_instance_ = NULL;
+
+ReqSelectServer* ReqSelectServer::New() const {
+  return new ReqSelectServer;
+}
+
+void ReqSelectServer::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    world_id_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ReqSelectServer::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 world_id = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &world_id_)));
+          set_has_world_id();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void ReqSelectServer::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 world_id = 1;
+  if (has_world_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->world_id(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* ReqSelectServer::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required int32 world_id = 1;
+  if (has_world_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->world_id(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int ReqSelectServer::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 world_id = 1;
+    if (has_world_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->world_id());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ReqSelectServer::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ReqSelectServer* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ReqSelectServer*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ReqSelectServer::MergeFrom(const ReqSelectServer& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_world_id()) {
+      set_world_id(from.world_id());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ReqSelectServer::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqSelectServer::CopyFrom(const ReqSelectServer& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqSelectServer::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void ReqSelectServer::Swap(ReqSelectServer* other) {
+  if (other != this) {
+    std::swap(world_id_, other->world_id_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ReqSelectServer::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ReqSelectServer_descriptor_;
+  metadata.reflection = ReqSelectServer_reflection_;
   return metadata;
 }
 

@@ -103,6 +103,11 @@ message AckConnectWorldResult//返回申请到世界服务器的结果
 	required bytes  world_key = 7;//得到的握手KEY
 }
 
+message ReqSelectServer//玩家想选择单服务器
+{
+	required int32   world_id = 1;//想去的服务器ID
+}
+
 message ReqKickFromWorld//玩家想退出游戏世界
 {
 	required int32   world_id = 1;

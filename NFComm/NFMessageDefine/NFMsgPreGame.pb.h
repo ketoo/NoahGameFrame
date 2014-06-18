@@ -46,6 +46,7 @@ class ReqServerList;
 class AckServerList;
 class ReqConnectWorld;
 class AckConnectWorldResult;
+class ReqSelectServer;
 class ReqKickFromWorld;
 class ReqRoleList;
 class RoleLiteInfo;
@@ -1285,6 +1286,88 @@ class AckConnectWorldResult : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static AckConnectWorldResult* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqSelectServer : public ::google::protobuf::Message {
+ public:
+  ReqSelectServer();
+  virtual ~ReqSelectServer();
+
+  ReqSelectServer(const ReqSelectServer& from);
+
+  inline ReqSelectServer& operator=(const ReqSelectServer& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqSelectServer& default_instance();
+
+  void Swap(ReqSelectServer* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqSelectServer* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqSelectServer& from);
+  void MergeFrom(const ReqSelectServer& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 world_id = 1;
+  inline bool has_world_id() const;
+  inline void clear_world_id();
+  static const int kWorldIdFieldNumber = 1;
+  inline ::google::protobuf::int32 world_id() const;
+  inline void set_world_id(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqSelectServer)
+ private:
+  inline void set_has_world_id();
+  inline void clear_has_world_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 world_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqSelectServer* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -3778,6 +3861,32 @@ inline void AckConnectWorldResult::set_allocated_world_key(::std::string* world_
     clear_has_world_key();
     world_key_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
+}
+
+// -------------------------------------------------------------------
+
+// ReqSelectServer
+
+// required int32 world_id = 1;
+inline bool ReqSelectServer::has_world_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqSelectServer::set_has_world_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqSelectServer::clear_has_world_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqSelectServer::clear_world_id() {
+  world_id_ = 0;
+  clear_has_world_id();
+}
+inline ::google::protobuf::int32 ReqSelectServer::world_id() const {
+  return world_id_;
+}
+inline void ReqSelectServer::set_world_id(::google::protobuf::int32 value) {
+  set_has_world_id();
+  world_id_ = value;
 }
 
 // -------------------------------------------------------------------
