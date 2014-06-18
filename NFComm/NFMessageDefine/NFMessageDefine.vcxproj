@@ -54,7 +54,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_X64;_DEBUG;_USRDLL;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(NF_HOME);$(BOOST_HOME);$(NF_DEP);$(NF_DEP)/protobuf-2.5.0/src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(NF_HOME);$(BOOST_HOME);$(NF_DEP);$(NF_DEP)/protobuf-2.5.0/src;$(Solution)/Dependencies/protobuf-2.5.0/src</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
