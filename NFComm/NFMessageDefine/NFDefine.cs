@@ -35,107 +35,119 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACCOUNT_SUCCESS", Value=6)]
       EGEC_ACCOUNT_SUCCESS = 6,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_CHARACTER_EXIST", Value=10)]
-      EGEC_CHARACTER_EXIST = 10,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_VERIFY_KEY_SUCCESS", Value=7)]
+      EGEC_VERIFY_KEY_SUCCESS = 7,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_SVRZONEID_INVALID", Value=11)]
-      EGEC_SVRZONEID_INVALID = 11,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_VERIFY_KEY_FAIL", Value=8)]
+      EGEC_VERIFY_KEY_FAIL = 8,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_CHARACTER_NUMOUT", Value=12)]
-      EGEC_CHARACTER_NUMOUT = 12,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_SELECTSERVER_SUCCESS", Value=9)]
+      EGEC_SELECTSERVER_SUCCESS = 9,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_CHARACTER_INVALID", Value=13)]
-      EGEC_CHARACTER_INVALID = 13,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_SELECTSERVER_FAIL", Value=10)]
+      EGEC_SELECTSERVER_FAIL = 10,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_CHARACTER_NOTEXIST", Value=14)]
-      EGEC_CHARACTER_NOTEXIST = 14,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_CHARACTER_EXIST", Value=110)]
+      EGEC_CHARACTER_EXIST = 110,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_CHARACTER_USING", Value=15)]
-      EGEC_CHARACTER_USING = 15,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_SVRZONEID_INVALID", Value=111)]
+      EGEC_SVRZONEID_INVALID = 111,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_CHARACTER_LOCKED", Value=16)]
-      EGEC_CHARACTER_LOCKED = 16,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_CHARACTER_NUMOUT", Value=112)]
+      EGEC_CHARACTER_NUMOUT = 112,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ZONE_OVERLOAD", Value=17)]
-      EGEC_ZONE_OVERLOAD = 17,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_CHARACTER_INVALID", Value=113)]
+      EGEC_CHARACTER_INVALID = 113,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_NOT_ONLINE", Value=18)]
-      EGEC_NOT_ONLINE = 18,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_CHARACTER_NOTEXIST", Value=114)]
+      EGEC_CHARACTER_NOTEXIST = 114,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ALREAY_IN_TEAM", Value=19)]
-      EGEC_ALREAY_IN_TEAM = 19,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_CHARACTER_USING", Value=115)]
+      EGEC_CHARACTER_USING = 115,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_INVALID_TEAM_INVITE", Value=20)]
-      EGEC_INVALID_TEAM_INVITE = 20,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_CHARACTER_LOCKED", Value=116)]
+      EGEC_CHARACTER_LOCKED = 116,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_TEAM_FULL", Value=21)]
-      EGEC_TEAM_FULL = 21,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ZONE_OVERLOAD", Value=117)]
+      EGEC_ZONE_OVERLOAD = 117,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_MAIL_UPDATE_ERROR", Value=22)]
-      EGEC_MAIL_UPDATE_ERROR = 22,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_NOT_ONLINE", Value=118)]
+      EGEC_NOT_ONLINE = 118,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_MAIL_TONAME_INVALID", Value=23)]
-      EGEC_MAIL_TONAME_INVALID = 23,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ALREAY_IN_TEAM", Value=119)]
+      EGEC_ALREAY_IN_TEAM = 119,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_MAIL_DELETE_ERROR", Value=24)]
-      EGEC_MAIL_DELETE_ERROR = 24,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_INVALID_TEAM_INVITE", Value=120)]
+      EGEC_INVALID_TEAM_INVITE = 120,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_MAIL_TOWNAME_EQUAL", Value=25)]
-      EGEC_MAIL_TOWNAME_EQUAL = 25,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_TEAM_FULL", Value=121)]
+      EGEC_TEAM_FULL = 121,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_LACK_MONEY", Value=26)]
-      EGEC_LACK_MONEY = 26,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_MAIL_UPDATE_ERROR", Value=122)]
+      EGEC_MAIL_UPDATE_ERROR = 122,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_FULL_PACKAGE", Value=27)]
-      EGEC_FULL_PACKAGE = 27,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_MAIL_TONAME_INVALID", Value=123)]
+      EGEC_MAIL_TONAME_INVALID = 123,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_INVALID_ITEM", Value=28)]
-      EGEC_INVALID_ITEM = 28,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_MAIL_DELETE_ERROR", Value=124)]
+      EGEC_MAIL_DELETE_ERROR = 124,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_INVALID_CONSIGNMENT", Value=29)]
-      EGEC_INVALID_CONSIGNMENT = 29,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_MAIL_TOWNAME_EQUAL", Value=125)]
+      EGEC_MAIL_TOWNAME_EQUAL = 125,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_NOT_ENOUGH_VIP", Value=30)]
-      EGEC_NOT_ENOUGH_VIP = 30,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_LACK_MONEY", Value=126)]
+      EGEC_LACK_MONEY = 126,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_NEED_LEVEL", Value=31)]
-      EGEC_NEED_LEVEL = 31,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_FULL_PACKAGE", Value=127)]
+      EGEC_FULL_PACKAGE = 127,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_MAX_FRIEND_LIST", Value=32)]
-      EGEC_MAX_FRIEND_LIST = 32,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_INVALID_ITEM", Value=128)]
+      EGEC_INVALID_ITEM = 128,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_MAX_ENEMY_LIST", Value=33)]
-      EGEC_MAX_ENEMY_LIST = 33,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_INVALID_CONSIGNMENT", Value=129)]
+      EGEC_INVALID_CONSIGNMENT = 129,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_MAX_GANGS_LSIT", Value=34)]
-      EGEC_MAX_GANGS_LSIT = 34,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_NOT_ENOUGH_VIP", Value=130)]
+      EGEC_NOT_ENOUGH_VIP = 130,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_LIMITS_TO_RIGHTS", Value=35)]
-      EGEC_LIMITS_TO_RIGHTS = 35,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_NEED_LEVEL", Value=131)]
+      EGEC_NEED_LEVEL = 131,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_INVALID_GANGS_NAME", Value=36)]
-      EGEC_INVALID_GANGS_NAME = 36,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_MAX_FRIEND_LIST", Value=132)]
+      EGEC_MAX_FRIEND_LIST = 132,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REPEAT_ENTER_GANGS", Value=37)]
-      EGEC_REPEAT_ENTER_GANGS = 37,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_MAX_ENEMY_LIST", Value=133)]
+      EGEC_MAX_ENEMY_LIST = 133,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_INVALID_GANGSMEMBER", Value=38)]
-      EGEC_INVALID_GANGSMEMBER = 38,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_MAX_GANGS_LSIT", Value=134)]
+      EGEC_MAX_GANGS_LSIT = 134,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_MASTER_LEAVE_GANGS", Value=39)]
-      EGEC_MASTER_LEAVE_GANGS = 39,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_LIMITS_TO_RIGHTS", Value=135)]
+      EGEC_LIMITS_TO_RIGHTS = 135,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_GANGS_TITLE_OUTOF", Value=40)]
-      EGEC_GANGS_TITLE_OUTOF = 40,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_INVALID_GANGS_NAME", Value=136)]
+      EGEC_INVALID_GANGS_NAME = 136,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ENTER_GATEWAY_FAILD", Value=41)]
-      EGEC_ENTER_GATEWAY_FAILD = 41,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REPEAT_ENTER_GANGS", Value=137)]
+      EGEC_REPEAT_ENTER_GANGS = 137,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_NO_SERVER4ZONE", Value=42)]
-      EGEC_NO_SERVER4ZONE = 42,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_INVALID_GANGSMEMBER", Value=138)]
+      EGEC_INVALID_GANGSMEMBER = 138,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_INVALID_SKILL", Value=43)]
-      EGEC_INVALID_SKILL = 43
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_MASTER_LEAVE_GANGS", Value=139)]
+      EGEC_MASTER_LEAVE_GANGS = 139,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_GANGS_TITLE_OUTOF", Value=140)]
+      EGEC_GANGS_TITLE_OUTOF = 140,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ENTER_GATEWAY_FAILD", Value=141)]
+      EGEC_ENTER_GATEWAY_FAILD = 141,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_NO_SERVER4ZONE", Value=142)]
+      EGEC_NO_SERVER4ZONE = 142,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_INVALID_SKILL", Value=143)]
+      EGEC_INVALID_SKILL = 143
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGameMsgID")]
@@ -226,20 +238,23 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SELECT_SERVER", Value=130)]
       EGMI_REQ_SELECT_SERVER = 130,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ROLE_LIST", Value=131)]
-      EGMI_REQ_ROLE_LIST = 131,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SELECT_SERVER", Value=131)]
+      EGMI_ACK_SELECT_SERVER = 131,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ROLE_LIST", Value=132)]
-      EGMI_ACK_ROLE_LIST = 132,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ROLE_LIST", Value=132)]
+      EGMI_REQ_ROLE_LIST = 132,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CREATE_ROLE", Value=133)]
-      EGMI_REQ_CREATE_ROLE = 133,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ROLE_LIST", Value=133)]
+      EGMI_ACK_ROLE_LIST = 133,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_DELETE_ROLE", Value=134)]
-      EGMI_REQ_DELETE_ROLE = 134,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CREATE_ROLE", Value=134)]
+      EGMI_REQ_CREATE_ROLE = 134,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_RECOVER_ROLE", Value=135)]
-      EGMI_REQ_RECOVER_ROLE = 135,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_DELETE_ROLE", Value=135)]
+      EGMI_REQ_DELETE_ROLE = 135,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_RECOVER_ROLE", Value=136)]
+      EGMI_REQ_RECOVER_ROLE = 136,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_COMMAND", Value=140)]
       EGMI_REQ_COMMAND = 140,
