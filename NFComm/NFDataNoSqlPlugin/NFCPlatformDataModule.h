@@ -34,7 +34,7 @@ public:
 
 	virtual int SetAccountState(const std::string& strAccount, const int nState);
 protected:
-
+	NFCDataNoSqlDriver mDataDriver;
 
 };
 
