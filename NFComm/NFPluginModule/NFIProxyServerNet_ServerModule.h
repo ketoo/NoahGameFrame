@@ -21,7 +21,8 @@ public:
     virtual int GetServerPort() = 0;
     //objectList:need to broadcast
     //valueMessage:message infomation
-    //virtual int Transpond( int nMsgID, int nSubMsgID, const NFIValueList& objectList, const NFIValueList& valueMessage ) = 0;
+    virtual int Transpond(const NFIPacket& msg) = 0;
+
 };
 
 #endif

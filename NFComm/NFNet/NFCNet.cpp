@@ -12,15 +12,17 @@
 #include <winsock2.h>
 #include <string.h>
 #include "event2\bufferevent_struct.h"
+#include "event2\event.h"
 
 void NFCNet::time_cb(evutil_socket_t fd, short _event, void *argc)
 {
     NetObject* pObject = (NetObject*)argc;
     if (pObject && pObject->GetNet())
     {
-        pObject->GetNet()->HeartPack();
+        NFCNet* pNet = (NFCNet*)pObject->GetNet();
+        pNet->HeartPack();
 
-        evtimer_add(pObject->GetNet()->ev, &(pObject->GetNet()->tv));
+        evtimer_add(pNet->ev, &(pNet->tv));
     }
 
 }
@@ -36,7 +38,7 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
 {
 
     NetObject* pObject = (NetObject*)user_data;
-    NFCNet* pNet = pObject->GetNet();
+    NFCNet* pNet = (NFCNet*)pObject->GetNet();
     if(!pNet->mEventCB._Empty())
     {
         pNet->mEventCB(pObject->GetFd(), NF_NET_EVENT(events));
@@ -45,7 +47,7 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
     if (events & BEV_EVENT_EOF) 
     {
         printf("%d Connection closed.\n", pObject->GetFd());
-        pNet->CloseSocket(pObject->GetFd());
+        pNet->CloseNetObject(pObject->GetFd());
         if (!pNet->mbServer)
         {
             //客户端断线重连
@@ -55,7 +57,7 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
     else if (events & BEV_EVENT_ERROR) 
     {
         printf("%d Got an error on the connection: %d\n", pObject->GetFd(),	errno);/*XXX win32*/
-        pNet->CloseSocket(pObject->GetFd());
+        pNet->CloseNetObject(pObject->GetFd());
         if (!pNet->mbServer)
         {
             //客户端断线重连
@@ -65,7 +67,7 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
     else if (events & BEV_EVENT_TIMEOUT)
     {
         printf("%d read timeout: %d\n", pObject->GetFd(), errno);/*XXX win32*/
-        pNet->CloseSocket(pObject->GetFd());
+        pNet->CloseNetObject(pObject->GetFd());
 
         if (!pNet->mbServer)
         {
@@ -83,7 +85,7 @@ void NFCNet::listener_cb(struct evconnlistener *listener, evutil_socket_t fd, st
 {
     //怕你们重了
     NFCNet* pNet = (NFCNet*)user_data;
-    bool bClose = pNet->CloseSocket(fd);
+    bool bClose = pNet->CloseNetObject(fd);
     if (bClose)
     {
         //error
@@ -112,7 +114,7 @@ void NFCNet::listener_cb(struct evconnlistener *listener, evutil_socket_t fd, st
     printf("新登录 fd:%d IP: %s\n", fd, inet_ntoa(pSin->sin_addr));
 
     NetObject* pObject = new NetObject(pNet, fd, *pSin, bev);
-    pObject->GetNet()->AddSocket(fd, pObject);
+    pObject->GetNet()->AddNetObject(fd, pObject);
 
     //为bufferevent设置各种回调
     bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, (void*)pObject);
@@ -141,7 +143,7 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
         return;
     }
 
-    NFCNet* pNet = pObject->GetNet();
+    NFCNet* pNet = (NFCNet*)pObject->GetNet();
     if (!pNet)
     {
         return;
@@ -256,7 +258,7 @@ bool NFCNet::SendMsg(const char* msg, const uint32_t nLen, const uint32_t nSockI
 	return false;
 }
 
-bool NFCNet::CloseSocket( const uint32_t nSockIndex )
+bool NFCNet::CloseNetObject( const uint32_t nSockIndex )
 {
 	std::map<int, NetObject*>::iterator it = mmObject.find(nSockIndex);
 	if (it != mmObject.end())
@@ -324,14 +326,14 @@ bool NFCNet::Dismantle(NetObject* pObject )
 		}
 		if (pObject->GetErrorCount() > 5)
 		{
-			CloseSocket(pObject->GetFd());
+			CloseNetObject(pObject->GetFd());
 		}
 	}
 
 	return bRet;
 }
 
-bool NFCNet::AddSocket( const uint32_t nSockIndex, NetObject* pObject )
+bool NFCNet::AddNetObject( const uint32_t nSockIndex, NetObject* pObject )
 {
 	return mmObject.insert(std::map<int, NetObject*>::value_type(nSockIndex, pObject)).second;
 }
@@ -382,7 +384,7 @@ int NFCNet::InitClientNet()
 	}
 
 	NetObject* pObject = new NetObject(this, sockfd, addr, bev);
-	if (!AddSocket(sockfd, pObject))
+	if (!AddNetObject(sockfd, pObject))
 	{
         assert(0);
         return -1;
@@ -547,4 +549,15 @@ bool NFCNet::CloseSocketAll()
     mmObject.clear();
 
     return true;
+}
+
+NetObject* NFCNet::GetNetObject( const uint32_t nSockIndex )
+{
+    std::map<int, NetObject*>::iterator it = mmObject.find(nSockIndex);
+    if (it != mmObject.end())
+    {
+        return it->second;
+    }
+
+    return NULL;
 }

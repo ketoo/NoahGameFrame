@@ -40,6 +40,144 @@
 
 #pragma pack(push, 1)
 
+enum NF_NET_EVENT
+{
+    NF_NET_EVENT_EOF = 0x10,	//掉线
+    NF_NET_EVENT_ERROR = 0x20,//位置错误
+    NF_NET_EVENT_TIMEOUT = 0x40,//连接超时
+    NF_NET_EVENT_CONNECTED = 0x80,//连接成功(作为客户端)
+};
+
+class NFINet;
+
+class NetObject 
+{
+public:
+    NetObject(NFINet* pThis, int32_t nFd, sockaddr_in& addr, bufferevent* pBev)
+    {
+        m_pNet = pThis;
+
+        nIndex = nFd;
+        bev = pBev;
+        memset(&sin, 0, sizeof(sin));
+        sin = addr;
+
+        mnErrorCount = 0;
+        mnLogicState = 0;
+        mnUserData = 0;
+    }
+
+    ~NetObject()
+    {
+    }
+
+    int AddBuff(const char* str, uint32_t nLen)
+    {
+        mstrBuff.append(str, nLen);
+
+        return mstrBuff.length();
+    }
+
+    int CopyBuffTo(char* str, uint32_t nStart, uint32_t nLen)
+    {
+        if (nStart + nLen > mstrBuff.length())
+        {
+            return 0;
+        }
+
+        memcpy(str, mstrBuff.data() + nStart, nLen);
+
+        return nLen;
+    }
+
+    int RemoveBuff(uint32_t nStart, uint32_t nLen)
+    {
+        if (nStart < 0)
+        {
+            return 0;
+        }
+
+        //移除前面，则后面跟上
+        if (nStart + nLen > mstrBuff.length())
+        {
+            return 0;
+        }
+
+        //把后面的挪到前面来
+        mstrBuff.erase(nStart, nLen);
+
+        std::cout << "剩余长度:" << mstrBuff.length() << std::endl;
+
+        return mstrBuff.length();
+    }
+
+    const char* GetBuff()
+    {
+        return mstrBuff.data();
+    }
+
+    int GetBuffLen() const
+    {
+        return mstrBuff.length();
+    }
+
+    int GetFd() const
+    {
+        return nIndex;
+    }
+
+    int GetErrorCount() const
+    {
+        return mnErrorCount;
+    }
+
+    int GetLogicState() const
+    {
+        return mnLogicState;
+    }
+
+    void SetLogicState(const int nState)
+    {
+        mnLogicState = nState;
+    }
+
+    int GetUserData() const
+    {
+        return mnUserData;
+    }
+
+    void SetUserData(const int nData)
+    {
+        mnUserData = nData;
+    }
+
+    int IncreaseError(const int nError = 1)
+    {
+        return mnErrorCount += nError;
+    }
+
+    bufferevent * GetBuffEvent()
+    {
+        return bev;
+    }
+
+    NFINet* GetNet()
+    {
+        return m_pNet;
+    }
+private:
+    uint32_t nIndex;
+    sockaddr_in sin;
+    bufferevent *bev;
+    std::string mstrBuff;
+
+    uint16_t mnErrorCount;
+    int32_t mnLogicState;
+    int32_t mnUserData;
+
+    NFINet* m_pNet;
+};
+
 class NFINet
 {
 public:
@@ -56,7 +194,10 @@ public:
 	
 	virtual int OnRecivePacket(const uint32_t nSockIndex, const char* msg, const uint32_t nLen){return 1;};
 
-	virtual bool CloseSocket(const uint32_t nSockIndex) = 0;
+	virtual bool CloseNetObject(const uint32_t nSockIndex) = 0;
+    virtual NetObject* GetNetObject(const uint32_t nSockIndex) = 0;
+    virtual bool AddNetObject(const uint32_t nSockIndex, NetObject* pObject) = 0;
+
 	virtual bool AddBan(const uint32_t nSockIndex, const int32_t nTime = -1) = 0;
 	virtual bool RemoveBan(const uint32_t nSockIndex) = 0;
 

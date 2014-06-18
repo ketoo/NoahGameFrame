@@ -37,6 +37,10 @@ protected:
     int OnPropertyCallBackEvent( const NFIDENTID& self, const std::string& strProperty, const NFIValueList& oldVarList, const NFIValueList& newVarList, const NFIValueList& argVarList );
     int OnPropertyStrCallBackEvent( const NFIDENTID& self, const std::string& strProperty, const NFIValueList& oldVarList, const NFIValueList& newVarList, const NFIValueList& argVarList );
 
+    int OnHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& arg);
+
+protected:
+    unsigned long mLastTime;
 protected:
     NFIKernelModule* m_pKernelModule;
     NFIEventProcessModule* m_pEventProcessModule;
