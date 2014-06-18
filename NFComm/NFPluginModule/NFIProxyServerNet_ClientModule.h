@@ -21,6 +21,7 @@ public:
     //>0 gs_id, ==0 all gs, < 0 worldserver
     //     virtual int Transpond( int nGameServerID, NFIPacket* pMsgPacket ) = 0;
     //     virtual int Transpond( int nGameServerID, RakNet::BitStream* pBitStream ) = 0;
+    virtual int Transpond(int nGameServerID, const NFIPacket& msg) = 0;
 
 };
 

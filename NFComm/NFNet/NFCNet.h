@@ -27,120 +27,6 @@
 
 #pragma pack(push, 1)
 
-enum NF_NET_EVENT
-{
-	NF_NET_EVENT_EOF = 0x10,	//掉线
-	NF_NET_EVENT_ERROR = 0x20,//位置错误
-	NF_NET_EVENT_TIMEOUT = 0x40,//连接超时
-	NF_NET_EVENT_CONNECTED = 0x80,//连接成功(作为客户端)
-};
-
-class NFCNet;
-
-class NetObject 
-{
-public:
-	NetObject(NFCNet* pThis, int32_t nFd, sockaddr_in& addr, bufferevent* pBev)
-	{
-        m_pNet = pThis;
-
-		nIndex = nFd;
-		bev = pBev;
-		memset(&sin, 0, sizeof(sin));
-		sin = addr;
-
-		mnErrorCount = 0;
-	}
-
-    ~NetObject()
-    {
-    }
-
-	int AddBuff(const char* str, uint32_t nLen)
-	{
-        mstrBuff.append(str, nLen);
-
-		return mstrBuff.length();
-	}
-
-	int CopyBuffTo(char* str, uint32_t nStart, uint32_t nLen)
-	{
-		if (nStart + nLen > mstrBuff.length())
-		{
-			return 0;
-		}
-
-		memcpy(str, mstrBuff.data() + nStart, nLen);
-
-		return nLen;
-	}
-
-	int RemoveBuff(uint32_t nStart, uint32_t nLen)
-	{
-        if (nStart < 0)
-        {
-            return 0;
-        }
-
-		//移除前面，则后面跟上
-		if (nStart + nLen > mstrBuff.length())
-		{
-			return 0;
-		}
-
-		//把后面的挪到前面来
-		mstrBuff.erase(nStart, nLen);
-
-        std::cout << "剩余长度:" << mstrBuff.length() << std::endl;
-
-		return mstrBuff.length();
-	}
-
-	const char* GetBuff()
-	{
-		return mstrBuff.data();
-	}
-
-	int GetBuffLen() const
-	{
-		return mstrBuff.length();
-	}
-
-	int GetFd() const
-	{
-		return nIndex;
-	}
-
-	int GetErrorCount() const
-	{
-		return mnErrorCount;
-	}
-
-	int IncreaseError(const int nError = 1)
-	{
-		return mnErrorCount += nError;
-	}
-
-	bufferevent * GetBuffEvent()
-	{
-		return bev;
-	}
-
-    NFCNet* GetNet()
-    {
-        return m_pNet;
-    }
-private:
-	uint32_t nIndex;
-	sockaddr_in sin;
-	bufferevent *bev;
-    std::string mstrBuff;
-
-	uint16_t mnErrorCount;
-    NFCNet* m_pNet;
-};
-
-
 typedef std::function<int(const NFIPacket& msg)> RECIEVE_FUNCTOR;
 typedef std::shared_ptr<RECIEVE_FUNCTOR> RECIEVE_FUNCTOR_PTR;
 
@@ -180,7 +66,9 @@ public:
 	virtual bool SendMsg(const NFIPacket& msg, const uint32_t nSockIndex = 0, bool bBroadcast = false);
 	virtual bool SendMsg(const char* msg, const uint32_t nLen, const uint32_t nSockIndex = 0, bool bBroadcast = false);
 
-	virtual bool CloseSocket(const uint32_t nSockIndex);
+    virtual bool CloseNetObject(const uint32_t nSockIndex);
+    virtual NetObject* GetNetObject(const uint32_t nSockIndex);
+    virtual bool AddNetObject(const uint32_t nSockIndex, NetObject* pObject);
 
 	virtual bool AddBan(const uint32_t nSockIndex, const int32_t nTime = -1){return true;};
 	virtual bool RemoveBan(const uint32_t nSockIndex){return true;};
@@ -190,7 +78,6 @@ public:
 private:
     virtual bool CloseSocketAll();
 
-	virtual bool AddSocket(const uint32_t nSockIndex, NetObject* pObject);
 	virtual bool Dismantle(NetObject* pObject);
 
 	virtual int InitClientNet();
