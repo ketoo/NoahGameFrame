@@ -41,6 +41,8 @@ public:
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
 
+    virtual int Transpond(const NFIPacket& msg);
+
 protected:
 
 	int OnRecivePack(const NFIPacket& msg);
@@ -52,18 +54,16 @@ protected:
 	void OnClientConnected(const uint32_t& nAddress);
 
     int OnConnectKeyProcess(const NFIPacket& msg);
+    int OnReqServerListProcess(const NFIPacket& msg);
+    int OnSelectServerProcess(const NFIPacket& msg);
+    int OnTranspondProcess(const NFIPacket& msg);
 
-    //客户端的连接
-    int HB_OnConnectCheckTime(const NFIDENTID& self, const NFIValueList& var);
+    //客户端的连接60秒删掉
+    int HB_OnConnectCheckTime( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var );
 
-    //////////////////////////////////////////////////////////////////////////
-
-    //保存的世界服务器发过来的信息对象
+    //保存的世界服务器发过来的KEY,60秒删掉
     int HB_OnPlayerWantToConnect(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var );
     //////////////////////////////////////////////////////////////////////////
-
-    //客户端初次连接，设置一心跳等待他再次发送密钥,超时不发则删掉
-    int OnConnectObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var);
 
     //保存的世界服务器发过来的信息对象
     int OnWantToConnectObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var);
@@ -77,9 +77,8 @@ protected:
     //-2
     int mnWantToConnectContainer;
 
-    //世界服务器发过来，谁想登录此服务器的那个对象，包含帐号和KEY信息，KEY验证后删掉？
     //-3
-    int mnRoleHallContainer;
+    int mnGameContainerID;
 
     NFIProxyServerNet_ClientModule* m_pProxyServerNet_ClientModule;
 	NFIKernelModule* m_pKernelModule;
