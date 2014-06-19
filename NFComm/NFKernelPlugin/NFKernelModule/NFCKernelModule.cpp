@@ -651,6 +651,19 @@ NFIRecord* NFCKernelModule::FindRecord(const NFIDENTID& self, const std::string&
     return NULL;
 }
 
+bool NFCKernelModule::ClearRecord(const NFIDENTID& self, const std::string& strRecordName)
+{
+    NFIRecord* pRecord = FindRecord(self, strRecordName);
+    if (pRecord)
+    {
+        return pRecord->Clear();
+    }
+
+    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName + "| There is no record", __FUNCTION__, __LINE__);
+
+    return false;
+}
+
 bool NFCKernelModule::SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const int nValue)
 {
     NFIObject* pObject = GetElement(self);

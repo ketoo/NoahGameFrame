@@ -152,6 +152,8 @@ public:
 
     virtual NFIRecord* FindRecord(const NFIDENTID& self, const std::string& strRecordName) = 0;
 
+    virtual bool ClearRecord(const NFIDENTID& self, const std::string& strRecordName) = 0;
+
     virtual bool SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const int nValue) = 0;
     virtual bool SetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol,  const float fValue) = 0;
     virtual bool SetRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const double dwValue) = 0;
