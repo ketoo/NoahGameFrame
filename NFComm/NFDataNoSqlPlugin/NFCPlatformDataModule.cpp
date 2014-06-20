@@ -21,12 +21,20 @@ NFCPlatformDataModule::~NFCPlatformDataModule()
 
 bool NFCPlatformDataModule::Init()
 {
+    m_pPlayerDataDriver = new NFCDataNoSqlDriver();
+    m_pPlayerDataDriver->Connect("127.0.0.1");
 
     return true;
 }
 
 bool NFCPlatformDataModule::Shut()
 {
+    if (m_pPlayerDataDriver)
+    {
+        delete m_pPlayerDataDriver;
+        m_pPlayerDataDriver = NULL;
+    }
+
     return true;
 }
 

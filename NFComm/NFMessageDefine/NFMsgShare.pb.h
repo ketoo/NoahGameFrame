@@ -38,6 +38,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto();
 void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
 class ReqEnterGameServer;
+class ReqLeaveGameServer;
 class ReqAckPlayerMove;
 class ReqAckPlayerChat;
 class ReqAckUseSkill;
@@ -179,12 +180,19 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 server_id() const;
   inline void set_server_id(::google::protobuf::int32 value);
 
-  // optional int32 gate_id = 2;
+  // required int32 gate_id = 2;
   inline bool has_gate_id() const;
   inline void clear_gate_id();
   static const int kGateIdFieldNumber = 2;
   inline ::google::protobuf::int32 gate_id() const;
   inline void set_gate_id(::google::protobuf::int32 value);
+
+  // required int32 player_id = 3;
+  inline bool has_player_id() const;
+  inline void clear_player_id();
+  static const int kPlayerIdFieldNumber = 3;
+  inline ::google::protobuf::int32 player_id() const;
+  inline void set_player_id(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqEnterGameServer)
  private:
@@ -192,14 +200,17 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
   inline void clear_has_server_id();
   inline void set_has_gate_id();
   inline void clear_has_gate_id();
+  inline void set_has_player_id();
+  inline void clear_has_player_id();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int32 server_id_;
   ::google::protobuf::int32 gate_id_;
+  ::google::protobuf::int32 player_id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -207,6 +218,78 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ReqEnterGameServer* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqLeaveGameServer : public ::google::protobuf::Message {
+ public:
+  ReqLeaveGameServer();
+  virtual ~ReqLeaveGameServer();
+
+  ReqLeaveGameServer(const ReqLeaveGameServer& from);
+
+  inline ReqLeaveGameServer& operator=(const ReqLeaveGameServer& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqLeaveGameServer& default_instance();
+
+  void Swap(ReqLeaveGameServer* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqLeaveGameServer* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqLeaveGameServer& from);
+  void MergeFrom(const ReqLeaveGameServer& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqLeaveGameServer)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[1];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqLeaveGameServer* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -2074,7 +2157,7 @@ inline void ReqEnterGameServer::set_server_id(::google::protobuf::int32 value) {
   server_id_ = value;
 }
 
-// optional int32 gate_id = 2;
+// required int32 gate_id = 2;
 inline bool ReqEnterGameServer::has_gate_id() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -2095,6 +2178,32 @@ inline void ReqEnterGameServer::set_gate_id(::google::protobuf::int32 value) {
   set_has_gate_id();
   gate_id_ = value;
 }
+
+// required int32 player_id = 3;
+inline bool ReqEnterGameServer::has_player_id() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqEnterGameServer::set_has_player_id() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqEnterGameServer::clear_has_player_id() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqEnterGameServer::clear_player_id() {
+  player_id_ = 0;
+  clear_has_player_id();
+}
+inline ::google::protobuf::int32 ReqEnterGameServer::player_id() const {
+  return player_id_;
+}
+inline void ReqEnterGameServer::set_player_id(::google::protobuf::int32 value) {
+  set_has_player_id();
+  player_id_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqLeaveGameServer
 
 // -------------------------------------------------------------------
 

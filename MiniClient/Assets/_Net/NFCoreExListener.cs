@@ -122,7 +122,6 @@ namespace NFTCPClient
 
                 mNet.sendLogic.RequireServerList();
             }
-            
         }
 
         private void EGMI_ACK_WORLS_LIST(MsgHead head, MemoryStream stream)
@@ -132,7 +131,6 @@ namespace NFTCPClient
 
             if (ReqServerListType.RSLT_WORLD_SERVER == xData.type)
             {
-                //世界服务器
                 for(int i = 0; i < xData.info.Count; ++i)
                 {
                     ServerInfo info = xData.info[i];
@@ -141,108 +139,20 @@ namespace NFTCPClient
                 
             }
         }
-
-// 		private void MGPT_LC_RLT_SERVER_LIST(MsgHead head, MemoryStream stream)
-// 		{
-//             mNet.mPlayerState = NFNet.PLAYER_STATE.E_HAS_PLAYER_SELECTSERVER;
-// 
-// 			aServerList.Clear();
-// 
-// 			NFMsg.ServerList serverList = new NFMsg.ServerList();
-// 			serverList = Serializer.Deserialize<NFMsg.ServerList>(stream);
-// 			
-// 			for(int i = 0; i < serverList.info.Count; i++)
-// 			{
-// 				aServerList.Add(serverList.info[i]);
-// 			}
-// 
-// 
-//             mNet.sendLogic.RequireCharList(head.uiUserID);
-// 		}
-// 		
-// 		private void MGPT_LC_RLT_CHAR_LIST(MsgHead head, MemoryStream stream)
-// 		{
-//             //不能设置状态，否则不能选择服务器了
-//             //mNet.mPlayerState = NFNet.PLAYER_STATE.E_HAS_PLAYER_ROLELIST;
-// 
-// 			aCharList.Clear();
-// 				
-//             NFMsg.CharLiteInfoList charList = new NFMsg.CharLiteInfoList();	
-// 			charList = Serializer.Deserialize<NFMsg.CharLiteInfoList>(stream);
-// 			
-// 			for(int i = 0; i < charList.char_info.Count; i++)
-// 			{
-//                 NFMsg.CharLiteInfo xLiteInfo = charList.char_info[i];
-//                 if(xLiteInfo.delete_flag <= 0)
-//                 {
-//                     aCharList.Add(xLiteInfo);
-//                 }
-//                 if(0 == mNet.nSeleroleID)
-//                 {
-//                     //mNet.nSeleroleID = (uint)xLiteInfo.char_id;
-//                 }
-//                 //Debug.Log(xLiteInfo.viewitem_record.Length);
-// 
-//                 MemoryStream xStream = new MemoryStream(System.Text.Encoding.Default.GetBytes(xLiteInfo.viewitem_record));
-//                 NFMsg.ObjectRecordBase xViewRecord = new NFMsg.ObjectRecordBase();
-//                 xViewRecord = Serializer.Deserialize<NFMsg.ObjectRecordBase>(xStream);
-//                 
-//                 for(int j = 0; j < xViewRecord.record_string_list.Count; ++j)
-//                 {
-//                     if (xViewRecord.record_string_list[j].row >= 0)
-//                     {
-//                         //Debug.Log(charList.char_info[i].char_id + ":" +xViewRecord.record_string_list[j].data);
-//                     }
-//                 }
-// 
-// 			}
-// 		}
-// 		
-// 		private void MGPT_REQ_ENTER_TRANSCRIPTION(MsgHead head, MemoryStream stream)
-// 		{
-// 			NFMsg.SwapScene swapScene = new NFMsg.SwapScene();	
-// 			swapScene = Serializer.Deserialize<NFMsg.SwapScene>(stream);
-// 
-//             Debug.Log("SwapScene:" + swapScene.target_id + " Line:" + swapScene.line_lndex + " PlayerID:" + swapScene.player_id + " Pos:" + swapScene.x + "," + swapScene.y + "," + swapScene.z);
-// 
-//             mNet.mPlayerState = NFNet.PLAYER_STATE.E_PLAYER_GAMEING;
-//             mNet.nLineID = swapScene.line_lndex;
-//             mNet.nSceneID = swapScene.target_id;
-// 		}
-// 		
+	
         private void EGMI_ACK_OBJECT_ENTRY(MsgHead head, MemoryStream stream)
         {
-// 	        NFMsg.PlayerEntryList entryList = new NFMsg.PlayerEntryList();	
-// 	        entryList = Serializer.Deserialize<NFMsg.PlayerEntryList>(stream);
-// 	
-// 	        for(int i = 0; i < entryList.player_list.Count; i++)
-// 	        {
-// 		        aObjectList.Add(entryList.player_list[i].player_id);
-// 
-//                   //Debug.Log("PlayerIn:" + entryList.player_list[i].player_id + " Pos:" + entryList.player_list[i].x + "," + entryList.player_list[i].y + "," + entryList.player_list[i].z);
-//                   mNet.kernel.CreateObject(new NFIDENTID(entryList.player_list[i].player_id), 0, 0, "Player", entryList.player_list[i].config_name, new NFCValueList());
-// 	        }	
+
         }
 
         private void EGMI_ACK_OBJECT_LEAVE(MsgHead head, MemoryStream stream)
 		{
-// 			NFMsg.PlayerLeaveList leaveList = new NFMsg.PlayerLeaveList();
-// 			leaveList = Serializer.Deserialize<NFMsg.PlayerLeaveList>(stream);
-// 			
-// 			for(int i = 0; i < leaveList.player_list.Count; i++)
-// 			{
-// 				aObjectList.Remove(leaveList.player_list[i]);
-// 
-//                 mNet.kernel.DestroyObject(new NFIDENTID(leaveList.player_list[i]));
-// 
-// 			}
+
 		}
 
         private void EGMI_ACK_MOVE(MsgHead head, MemoryStream stream)
         {
-//         	NFMsg.PlayersMoveInFOV moveIn = new NFMsg.PlayersMoveInFOV();	
-//         	moveIn = Serializer.Deserialize<NFMsg.PlayersMoveInFOV>(stream);
-        	
+
         }
         /////////////////////////////////////////////////////////////////////
         private void EGMI_ACK_PROPERTY_INT(MsgHead head, MemoryStream stream)
