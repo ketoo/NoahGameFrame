@@ -310,12 +310,6 @@ public class NFBinarySendLogic
 
     }
 
-    public void RequireOnagerUpLevel( UInt32 charID, string strOnagerName, int nLevel)
-    {
-
-
-    }
-
     public void RequireSwapEquip( UInt32 charID, int nOriginRow, int nTargetRow)
     {
 

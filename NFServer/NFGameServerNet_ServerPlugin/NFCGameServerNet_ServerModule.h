@@ -44,13 +44,16 @@ public:
 protected:
 
 	int OnRecivePack(const NFIPacket& msg);
-	int OnSocketEvent(const uint16_t nSockIndex, const NF_NET_EVENT eEvent);
+	int OnSocketEvent(const uint32_t nSockIndex, const NF_NET_EVENT eEvent);
 
 	//连接丢失,删2层(连接对象，帐号对象)
-	void OnClientDisconnect(const uint16_t& nAddress);
+	void OnClientDisconnect(const uint32_t nSockIndex);
 	//有连接
-	void OnClientConnected(const uint16_t& nAddress);
+	void OnClientConnected(const uint32_t nSockIndex);
 
+protected:
+    void OnClienEnterGame(const NFIPacket& msg);
+    void OnClienLeaveGame(const NFIPacket& msg);
 
     
 protected:

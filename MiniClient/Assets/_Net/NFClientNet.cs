@@ -28,7 +28,6 @@ namespace NFTCPClient
 
     public class NFSocketPacket
     {
-
         public byte[] bytes = null;
         public int bytesCount = 0;
 
@@ -42,8 +41,6 @@ namespace NFTCPClient
 
     public class NFTCPEventParams
     {
-
-        //public ORTCPServer server = null;
         public NFClientNet client = null;
         public int clientID = 0;
         public TcpClient socket = null;
@@ -278,7 +275,6 @@ namespace NFTCPClient
                 return;
             //添加包长在前面4位长度
             int nLen = message.Length;
-            //string strLen = nLen.ToString("D4");
             string strLen = nLen.ToString().PadLeft(4, '0');
 
             StringBuilder strInfo = new StringBuilder();
