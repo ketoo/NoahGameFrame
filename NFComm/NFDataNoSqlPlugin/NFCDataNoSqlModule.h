@@ -27,24 +27,10 @@ public:
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
     virtual bool AfterInit();
 
-    virtual int ExistRole(const std::string& strRoleName);
-
-    virtual int CreateRole(const std::string& strAccount, const std::string& strRoleName);
-
-    virtual int DeleteRole(const std::string& strAccount, const std::string& strRoleName);
-    //操作数据库接口
-    //////////////////////////////////////////////////////////////////////////
-
-    virtual int QueryAccountProperty(const std::string& strAccount, NFIValueList& valueListKeys, NFIValueList& valueListValues);
-    virtual int QueryAccountRoleList(const std::string& strAccount, NFIValueList& value);
-    virtual int QueryRoleProperty(const std::string& strRoleName, NFIValueList& valueListKeys, NFIValueList& valueListValues);
-    virtual int QueryRoleRecord(const std::string& strRoleName, const std::string& strRecordName,  NFIValueList& valueListKeys, NFIValueList& valueListValues);
-
-    virtual int SetAccountProperty(const std::string& strAccount, const NFIValueList& valueListKeys, const NFIValueList& valueListValues);
-    virtual int SetRoleProperty(const std::string& strRoleName, const NFIValueList& valueListKeys, const NFIValueList& valueListValues);
-    virtual int SetRoleRecord(const std::string& strRoleName, const std::string& strRecordName, const NFIValueList& valueListKeys, const NFIValueList& valueListValues);
-
-    virtual void SavePlayerData();
+    virtual NFIDataNoSqlDriver* GetDriver()
+    {
+        return m_pPlayerDataDriver;
+    }
 
 protected:
 

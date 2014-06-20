@@ -134,7 +134,6 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 0, 100, 50), "切换场景"))
             {
-                //切换场景
                 sendLogic.RequireSwapScene(nSeleroleID, 0, uint.Parse(strReqSwapSceneID), int.Parse(strReqSwapSceneLine));
             }
             strReqSwapSceneID = GUI.TextField(new Rect(100, 0, 100, 50), strReqSwapSceneID);
@@ -144,7 +143,6 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 50, 100, 50), "移动"))
             {
-                //移动
                 sendLogic.RequireMove(nSeleroleID, nSeleroleID, float.Parse(strReqMoveX), float.Parse(strReqMoveZ));
             }
             strReqMoveX = GUI.TextField(new Rect(100, 50, 100, 50), strReqMoveX);
@@ -153,7 +151,6 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 100, 100, 50), "接任务"))
             {
-                //接受任务
                 sendLogic.RequireAcceptTask(nSeleroleID, long.Parse(strReqAcceptTaskNPC), strReqAcceptTaskID);
             }
             strReqAcceptTaskNPC = GUI.TextField(new Rect(100, 100, 100, 50), strReqAcceptTaskNPC);
@@ -162,7 +159,6 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 150, 100, 50), "交任务"))
             {
-                //完成任务
                 sendLogic.RequireCompeleteTask(nSeleroleID, long.Parse(strReqAcceptTaskNPC), strReqAcceptTaskID);
             }
             strReqAcceptTaskNPC = GUI.TextField(new Rect(100, 150, 100, 50), strReqAcceptTaskNPC);
@@ -171,7 +167,6 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 200, 100, 50), "杀怪"))
             {
-                //杀怪
                 sendLogic.RequireSkill(nSeleroleID, strReqKillID, long.Parse(strReqKillNPCID));
             }
             strReqKillID = GUI.TextField(new Rect(100, 200, 100, 50), strReqKillID);
@@ -180,7 +175,6 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 250, 100, 50), "结算"))
             {
-                //结算
                 sendLogic.RequirePullDownCustom(nSeleroleID, int.Parse(strPullCustom));
             }
             strPullCustom = GUI.TextField(new Rect(100, 250, 100, 50), strPullCustom);
@@ -188,7 +182,6 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 300, 100, 50), "拾取"))
             {
-                //拾取道具
                 sendLogic.RequirePickUpItem(nSeleroleID, strPickUpItemID, long.Parse(strPickUpNPCID), int.Parse(strPickUpRow));
             }
             strPickUpItemID = GUI.TextField(new Rect(100, 300, 100, 50), strPickUpItemID);
@@ -199,7 +192,6 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 350, 100, 50), "设置属性"))
             {
-                //无敌设置属性
                 sendLogic.RequireProperty(nSeleroleID, strReqSetProperty, int.Parse(strReqPropertyValue));
             }
             strReqSetProperty = GUI.TextField(new Rect(100, 350, 100, 50), strReqSetProperty);
@@ -207,23 +199,16 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 400, 100, 50), "添加道具"))
             {
-                //添加道具
                 sendLogic.RequireItem(nSeleroleID, strReqAddItem);
             }
             strReqAddItem = GUI.TextField(new Rect(100, 400, 100, 50), strReqAddItem);
-
-
-            //生产拆解
-            //换装            
+         
             if (GUI.Button(new Rect(0, 450, 100, 50), "换装"))
             {
-                //添加道具
                 sendLogic.RequireItem(nSeleroleID, strReqAddItem);
             }
             strSwapOrigin = GUI.TextField(new Rect(100, 450, 100, 50), strSwapOrigin);
             strSwapTarget = GUI.TextField(new Rect(200, 450, 100, 50), strSwapTarget);
-
-            //聊天
 
             if (GUI.Button(new Rect(0, 500, 100, 50), "聊天"))
             {
@@ -233,7 +218,6 @@ public class NFNet
             strType = GUI.TextField(new Rect(200, 500, 100, 50), strType);
             strChatData = GUI.TextField(new Rect(300, 500, 100, 50), strChatData);
 
-            //弩炮升级
             if (GUI.Button(new Rect(0, 550, 100, 50), "弩炮升级"))
             {
                 sendLogic.RequireOnagerUpLevel(nSeleroleID, strOnagerName, int.Parse(strOnagerLevel));

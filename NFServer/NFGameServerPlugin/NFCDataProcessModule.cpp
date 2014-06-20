@@ -67,33 +67,16 @@ int NFCDataProcessModule::LoadDataFormNoSql( const NFIDENTID& self )
     NFIObject* pObject = m_pKernelModule->GetObject( self );
     if ( pObject )
     {
-        std::string strRoleName = pObject->QueryPropertyString( "RoleName" );
         NFIPropertyManager* pProManager = pObject->GetPropertyManager();
         if ( pProManager )
         {
-            //LoadProperty( strRoleName, pProManager );
+            LoadProperty( self, pProManager );
         }
 
         NFIRecordManager* pRecordManager = pObject->GetRecordManager();
         if ( pRecordManager )
         {
-            std::string strRecordName;
-            NFIRecord* pRecord = pRecordManager->First( strRecordName );
-            while ( pRecord )
-            {
-                //LoadRecord( strRoleName, strRecordName, pRecord );
-
-                pRecord = pRecordManager->Next( strRecordName );
-            }
-        }
-        else
-        {
-            //否则只载入外观装备view表
-            NFIRecord* pRecord = pRecordManager->GetElement( "PlayerViewItem" );
-            if ( pRecord )
-            {
-                //LoadRecord( strRoleName, "PlayerViewItem", pRecord );
-            }
+            LoadRecord( self, pRecordManager );
         }
     }
 
@@ -105,27 +88,8 @@ int NFCDataProcessModule::SaveDataToNoSql(const NFIDENTID& self, bool bOffline/*
     NFIObject* pObject = m_pKernelModule->GetObject( self );
     if ( pObject )
     {
-        const std::string& strRoleName = pObject->QueryPropertyString( "RoleName" );
-        NFIPropertyManager* pProManager = pObject->GetPropertyManager();
-        if ( pProManager )
-        {
-            //SaveProperty( strRoleName, pProManager );
-        }
-
-        //////////////////////////////////////////////////////////////////////////
-        NFIRecordManager* pRecordManager = pObject->GetRecordManager();
-        std::string strRecordName;
-        NFIRecord* pRecord = pRecordManager->First( strRecordName );
-        while ( pRecord )
-        {
-            //表数据
-            if ( pRecord->GetSave() )
-            {
-                //SaveRecord( strRoleName, strRecordName, pRecord );
-            }
-
-            pRecord = pRecordManager->Next( strRecordName );
-        }
+        SaveProperty( self, pObject->GetPropertyManager() );
+        SaveRecord( self, pObject->GetRecordManager() );
     }
 
     return 0;
@@ -172,4 +136,28 @@ void NFCDataProcessModule::HandlerTrans( const NFIActorMessage& message, const T
 void NFCDataProcessModule::HandlerLog( const NFIActorMessage& message, const Theron::Address from )
 {
     //日志
+}
+
+int NFCDataProcessModule::LoadProperty( const NFIDENTID& self, NFIPropertyManager* pProManager )
+{
+    m_pNoSqlModule->QueryRoleProperty();
+
+    //RecordFormString( NFIRecordManager* pRecordManager, const NFMsg::ObjectRecordList& recordList )
+    //
+    return 0;
+}
+
+int NFCDataProcessModule::LoadRecord( const NFIDENTID& self, NFIRecordManager* pRecord )
+{
+    return 0;
+}
+
+int NFCDataProcessModule::SaveProperty( const NFIDENTID& self, NFIPropertyManager* pProManager )
+{
+    return 0;
+}
+
+int NFCDataProcessModule::SaveRecord( const NFIDENTID& self, NFIRecordManager* pRecord )
+{
+    return 0;
 }
