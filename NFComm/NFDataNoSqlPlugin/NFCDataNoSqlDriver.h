@@ -12,48 +12,49 @@
 // #include <boost/foreach.hpp>
 // #include <boost/algorithm/string.hpp>
 #include "Dependencies/redis-cplusplus-client/redisclient.h"
+#include "NFComm/NFPluginModule/NFIDataNoSqlModule.h"
 
-class  NFCDataNoSqlDriver
+class  NFCDataNoSqlDriver : public NFIDataNoSqlDriver
 {
 public:
     NFCDataNoSqlDriver();
     virtual ~NFCDataNoSqlDriver();
 
-    int Connect(const std::string& strDSN);
+    virtual int Connect(const std::string& strDSN);
 
     //key
-    int Del(const std::string& strKey);
-    int Exists(const std::string& strKey);
+    virtual int Del(const std::string& strKey);
+    virtual int Exists(const std::string& strKey);
 
     //element
-    int Set(const std::string& strKey, const std::string& strValue);
-    std::string Get(const std::string& strKey);
+    virtual int Set(const std::string& strKey, const std::string& strValue);
+    virtual int Get(const std::string& strKey, std::string& strValue);
 
     //list
-    int LPush(const std::string& strKey, const std::string& value);
-    int LSet(const std::string& strKey, int nIndex, const std::string& value);
-    std::string LIndex(const std::string& strKey, const int nIndex);
-    int LLen(const std::string& strKey);
-    int LRemove(const std::string& strKey, const std::string& strValue);
+    virtual int LPush(const std::string& strKey, const std::string& value);
+    virtual int LSet(const std::string& strKey, int nIndex, const std::string& value);
+    virtual int LIndex(const std::string& strKey, const int nIndex, std::string& value);
+    virtual int LLen(const std::string& strKey);
+    virtual int LRemove(const std::string& strKey, const std::string& strValue);
 
     //hash
-    int HSet(const std::string& strKey, const std::string& key, const std::string& value);
-    std::string HGet(const std::string& strKey, const std::string& key);
+    virtual int HSet(const std::string& strKey, const std::string& key, const std::string& value);
+    virtual int HGet(const std::string& strKey, const std::string& key, std::string& value);
 
-    int HGetAll(const std::string& strKey,  redis::client::string_pair_vector& value);
-    int HMGet(const std::string& strKey, const redis::client::string_vector& keys, redis::client::string_vector& values);
-    int HMSet(const std::string& strKey, const redis::client::string_vector& keys, redis::client::string_vector& values);
+    virtual int HGetAll(const std::string& strKey,  std::vector<std::pair<std::string, std::string>>& value);
+    virtual int HMGet(const std::string& strKey, const std::vector<std::string>& keys, std::vector<std::string>& values);
+    virtual int HMSet(const std::string& strKey, const std::vector<std::string>& keys, const std::vector<std::string>& values);
 
-    int HKeys(const std::string& strKey, redis::client::string_vector& value);
-    int HValues(const std::string& strKey, redis::client::string_vector& value);
+    virtual int HKeys(const std::string& strKey, std::vector<std::string>& value);
+    virtual int HValues(const std::string& strKey, std::vector<std::string>& value);
 
     //set
-    int SAdd(const std::string& strKey, const std::string& value);
-    int SMembers(const std::string& strKey, redis::client::string_set& value);
-    int SIsMember(const std::string& strKey, const std::string& value);
-    int SRemove(const std::string& strKey, const redis::client::string_vector& value);
+    virtual int SAdd(const std::string& strKey, const std::string& value);
+    virtual int SMembers(const std::string& strKey, std::set<std::string>& value);
+    virtual int SIsMember(const std::string& strKey, const std::string& value);
+    virtual int SRemove(const std::string& strKey, const std::vector<std::string>& value);
 
-    void Save();
+    virtual void Save();
 
 protected:
 

@@ -53,9 +53,11 @@ int NFCDataNoSqlDriver::Set(const std::string& strKey, const std::string& strVal
     return 0;
 }
 
-std::string NFCDataNoSqlDriver::Get(const std::string& strKey)
+int NFCDataNoSqlDriver::Get(const std::string& strKey, std::string& strValue)
 {
-    return m_pRedisClient->get(strKey);
+    strValue = m_pRedisClient->get(strKey);
+
+    return 1;
 }
 
 int NFCDataNoSqlDriver::HSet(const std::string& strKey, const std::string& key, const std::string& value)
@@ -69,26 +71,28 @@ int NFCDataNoSqlDriver::HSet(const std::string& strKey, const std::string& key, 
     return 0;
 }
 
-std::string NFCDataNoSqlDriver::HGet(const std::string& strKey, const std::string& key)
+int NFCDataNoSqlDriver::HGet(const std::string& strKey, const std::string& key, std::string& value)
 {
-    return m_pRedisClient->hget(strKey, key);
+    value = m_pRedisClient->hget(strKey, key);
+
+    return 1;
 }
 
-int NFCDataNoSqlDriver::HGetAll(const std::string& strKey, redis::client::string_pair_vector& value)
+int NFCDataNoSqlDriver::HGetAll(const std::string& strKey, std::vector<std::pair<std::string, std::string>>& value)
 {
     m_pRedisClient->hgetall(strKey, value);
 
     return value.size();
 }
 
-int NFCDataNoSqlDriver::HMGet(const std::string& strKey, const redis::client::string_vector& keys, redis::client::string_vector& values)
+int NFCDataNoSqlDriver::HMGet(const std::string& strKey, const std::vector<std::string>& keys, std::vector<std::string>& values)
 {
     m_pRedisClient->hmget(strKey, keys, values);
 
     return values.size();
 }
 
-int NFCDataNoSqlDriver::HMSet(const std::string& strKey, const redis::client::string_vector& keys, redis::client::string_vector& values)
+int NFCDataNoSqlDriver::HMSet(const std::string& strKey, const std::vector<std::string>& keys, const std::vector<std::string>& values)
 {
 	if (keys.size() != values.size())
 	{
@@ -100,13 +104,13 @@ int NFCDataNoSqlDriver::HMSet(const std::string& strKey, const redis::client::st
     return keys.size();
 }
 
-int NFCDataNoSqlDriver::HKeys(const std::string& strKey, redis::client::string_vector& value)
+int NFCDataNoSqlDriver::HKeys(const std::string& strKey, std::vector<std::string>& value)
 {
     m_pRedisClient->hkeys(strKey, value);
     return value.size();
 }
 
-int NFCDataNoSqlDriver::HValues(const std::string& strKey, redis::client::string_vector& value)
+int NFCDataNoSqlDriver::HValues(const std::string& strKey, std::vector<std::string>& value)
 {
     m_pRedisClient->hvals(strKey, value);
     return value.size();
@@ -117,7 +121,7 @@ int NFCDataNoSqlDriver::SAdd(const std::string& strKey, const std::string& value
     return (int)m_pRedisClient->sadd(strKey, value);
 }
 
-int NFCDataNoSqlDriver::SMembers(const std::string& strKey, redis::client::string_set& value)
+int NFCDataNoSqlDriver::SMembers(const std::string& strKey, std::set<std::string>& value)
 {
     m_pRedisClient->smembers(strKey, value);
 
@@ -129,9 +133,9 @@ int NFCDataNoSqlDriver::SIsMember(const std::string& strKey, const std::string& 
     return (int)m_pRedisClient->sismember(strKey, value);
 }
 
-int NFCDataNoSqlDriver::SRemove(const std::string& strKey, const redis::client::string_vector& value)
+int NFCDataNoSqlDriver::SRemove(const std::string& strKey, const std::vector<std::string>& value)
 {
-	redis::client::string_vector::const_iterator it = value.begin();
+	std::vector<std::string>::const_iterator it = value.begin();
 	for (; it != value.end(); ++it)
 	{
 		m_pRedisClient->srem(strKey, *it);
@@ -155,9 +159,10 @@ int NFCDataNoSqlDriver::LSet(const std::string& strKey, int nIndex, const std::s
     return 1;
 }
 
-std::string NFCDataNoSqlDriver::LIndex(const std::string& strKey, const int nIndex)
+int NFCDataNoSqlDriver::LIndex(const std::string& strKey, const int nIndex, std::string& value)
 {
-    return m_pRedisClient->lindex(strKey, nIndex);
+    value = m_pRedisClient->lindex(strKey, nIndex);
+    return 1;
 }
 
 int NFCDataNoSqlDriver::LLen(const std::string& strKey)

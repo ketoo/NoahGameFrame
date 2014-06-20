@@ -25,14 +25,30 @@ namespace NFMsg
       get { return _server_id; }
       set { _server_id = value; }
     }
-    private int _gate_id = default(int);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"gate_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    private int _gate_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"gate_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int gate_id
     {
       get { return _gate_id; }
       set { _gate_id = value; }
     }
+    private int _player_id;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"player_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int player_id
+    {
+      get { return _player_id; }
+      set { _player_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqLeaveGameServer")]
+  public partial class ReqLeaveGameServer : global::ProtoBuf.IExtensible
+  {
+    public ReqLeaveGameServer() {}
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

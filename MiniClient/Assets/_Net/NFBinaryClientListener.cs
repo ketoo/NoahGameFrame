@@ -42,8 +42,6 @@ namespace NFTCPClient
 
         public void OnDataReceived(NFTCPEventParams eventParams)
         {
-
-            //stick packet
             byte[] bytes = eventParams.packet.bytes;
             int bytesCount = eventParams.packet.bytesCount;
 
@@ -51,7 +49,6 @@ namespace NFTCPClient
 
             if (mnPacketSize + bytesCount < ConstDefine.MAX_PACKET_LEN)
             {
-                //先缓存
                 Array.Copy(bytes, 0, mPacket, mnPacketSize, bytesCount);
                 mnPacketSize += (UInt32)bytesCount;
 
@@ -59,7 +56,6 @@ namespace NFTCPClient
             }
             else
             {
-                //把包头打印
                 object structType = new MsgHead();
                 StructureTransform.ByteArrayToStructureEndian(bytes, ref structType, 0);
                 MsgHead head = (MsgHead)structType;
@@ -79,7 +75,7 @@ namespace NFTCPClient
                 if (nBodyLen > 0)
                 {
                     byte[] body = new byte[nBodyLen];
-                    Array.Copy(bytes, 10, body, 0, nBodyLen);
+                    Array.Copy(bytes, ConstDefine.NF_PACKET_HEAD_SIZE, body, 0, nBodyLen);
 
                     client.net.binMsgEvent.OnMessageEvent(head, body);
                     return true;
@@ -91,7 +87,6 @@ namespace NFTCPClient
 
         public void OnDataReceived()
         {
-            //包头内部的那个长度，包括了包头的10字节
             if (mnPacketSize >= ConstDefine.NF_PACKET_HEAD_SIZE)
             {
                 object structType = new MsgHead();
@@ -101,11 +96,8 @@ namespace NFTCPClient
                 StructureTransform.ByteArrayToStructureEndian(mPacket, ref structType, 0);
                 MsgHead head = (MsgHead)structType;
 
-                //UnityEngine.Debug.Log("MsgType=" + head.usMsgID.ToString());
-                //此长度要看是否包含包头,不包含就要加上包头长度,目前是包含
                 if (head.unDataLen == mnPacketSize)
                 {
-                    //包刚合适
                     byte[] body_head = new byte[head.unDataLen];
                     Array.Copy(mPacket, 0, body_head, 0, head.unDataLen);
                     mnPacketSize = 0;
@@ -117,13 +109,10 @@ namespace NFTCPClient
                 }
                 else if (mnPacketSize > head.unDataLen)
                 {
-                    //超过一个包
-                    //剩余的包内容弄出来
                     UInt32 nNewLen = mnPacketSize - head.unDataLen;
                     byte[] newpacket = new byte[ConstDefine.MAX_PACKET_LEN];
                     Array.Copy(mPacket, head.unDataLen, newpacket, 0, nNewLen);
 
-                    //消息内容
                     byte[] body_head = new byte[head.unDataLen];
                     Array.Copy(mPacket, 0, body_head, 0, head.unDataLen);
                     mnPacketSize = nNewLen;

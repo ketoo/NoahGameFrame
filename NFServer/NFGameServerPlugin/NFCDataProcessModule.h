@@ -44,11 +44,12 @@ protected:
 
 protected:
     int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var );
-//     virtual int LoadProperty( const std::string& strRoleName, NFIPropertyManager* pProManager );
-//     virtual int LoadRecord( const std::string& strRoleName, const std::string& strRecordName, NFIRecord* pRecord );
-// 
-//     virtual int SaveProperty( const std::string& strRoleName, NFIPropertyManager* pProManager );
-//     virtual int SaveRecord( const std::string& strRoleName, const std::string& strRecordName, NFIRecord* pRecord );
+
+    virtual int LoadProperty( const NFIDENTID& self, NFIPropertyManager* pProManager );
+    virtual int LoadRecord( const NFIDENTID& self, NFIRecordManager* pRecord );
+
+    virtual int SaveProperty( const NFIDENTID& self, NFIPropertyManager* pProManager );
+    virtual int SaveRecord( const NFIDENTID& self, NFIRecordManager* pRecordManager );
 
 private:
 
