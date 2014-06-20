@@ -18,7 +18,7 @@
     and all of the data of the user only attribute data and table data.
 */
 class NFIPlatformDataModule
-    : public NFILogicModule
+    : public NFIDataNoSqlModule
 {
 public:
 
