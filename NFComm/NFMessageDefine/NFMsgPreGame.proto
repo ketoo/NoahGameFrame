@@ -158,7 +158,7 @@ message ReqCreateRole//´´½¨½ÇÉ«
     required int32 		noob_foot = 6;
     required int32 		noob_weapon = 7;
     required int32 		noob_pic = 8;
-    required bytes 	noob_name = 9;
+    required bytes 		noob_name = 9;
     required int32 		game_id = 10;
 }
 

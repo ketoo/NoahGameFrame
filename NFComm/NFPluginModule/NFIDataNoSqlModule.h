@@ -13,30 +13,53 @@
 #include "NFComm/NFCore/NFCValueList.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
 
-/*
-    A user's attributes and the length of the table is fixed in this module,
-    and all of the data of the user only attribute data and table data.
-*/
+class NFIDataNoSqlDriver
+{
+public:
+
+    virtual int Connect(const std::string& strDSN) = 0;
+
+    //key
+    virtual int Del(const std::string& strKey) = 0;
+    virtual int Exists(const std::string& strKey) = 0;
+
+    //element
+    virtual int Set(const std::string& strKey, const std::string& strValue) = 0;
+    virtual int Get(const std::string& strKey, std::string& strValue) = 0;
+
+    //list
+    virtual int LPush(const std::string& strKey, const std::string& value) = 0;
+    virtual int LSet(const std::string& strKey, int nIndex, const std::string& value) = 0;
+    virtual int LIndex(const std::string& strKey, const int nIndex, std::string& value) = 0;
+    virtual int LLen(const std::string& strKey) = 0;
+    virtual int LRemove(const std::string& strKey, const std::string& strValue) = 0;
+
+    //hash
+    virtual int HSet(const std::string& strKey, const std::string& key, const std::string& value) = 0;
+    virtual int HGet(const std::string& strKey, const std::string& key, std::string& strValue) = 0;
+
+    virtual int HGetAll(const std::string& strKey,  std::vector<std::pair<std::string, std::string>>& value) = 0;
+    virtual int HMGet(const std::string& strKey, const std::vector<std::string>& keys, std::vector<std::string>& values) = 0;
+    virtual int HMSet(const std::string& strKey, const std::vector<std::string>& keys, const std::vector<std::string>& values) = 0;
+
+    virtual int HKeys(const std::string& strKey, std::vector<std::string>& value) = 0;
+    virtual int HValues(const std::string& strKey, std::vector<std::string>& value) = 0;
+
+    //set
+    virtual int SAdd(const std::string& strKey, const std::string& value) = 0;
+    virtual int SMembers(const std::string& strKey, std::set<std::string>& value) = 0;
+    virtual int SIsMember(const std::string& strKey, const std::string& value) = 0;
+    virtual int SRemove(const std::string& strKey, const std::vector<std::string>& value) = 0;
+
+    virtual void Save() = 0;
+};
+
 class NFIDataNoSqlModule
     : public NFILogicModule
 {
 public:
 
-    virtual int ExistRole(const std::string& strRoleName) = 0;
-    virtual int CreateRole(const std::string& strAccount, const std::string& strRoleName) = 0;
-    virtual int DeleteRole(const std::string& strAccount, const std::string& strRoleName) = 0;
-
-    virtual int QueryAccountProperty(const std::string& strAccount, NFIValueList& valueListKeys, NFIValueList& valueListValues) = 0;
-    virtual int QueryAccountRoleList(const std::string& strAccount, NFIValueList& value) = 0;
-    
-	virtual int QueryRoleProperty(const std::string& strRoleName, NFIValueList& valueListKeys, NFIValueList& valueListValues) = 0;
-    virtual int QueryRoleRecord(const std::string& strRoleName, const std::string& strRecordName,  NFIValueList& valueListKeys, NFIValueList& valueListValues) = 0;
-
-    virtual int SetAccountProperty(const std::string& strAccount, const NFIValueList& valueListKeys, const NFIValueList& valueListValues) = 0;
-    virtual int SetRoleProperty(const std::string& strRoleName, const NFIValueList& valueListKeys, const NFIValueList& valueListValues) = 0;
-    virtual int SetRoleRecord(const std::string& strRoleName, const std::string& strRecordName, const NFIValueList& valueListKeys, const NFIValueList& valueListValues) = 0;
-
-    virtual void SavePlayerData() = 0;
+    virtual NFIDataNoSqlDriver* GetDriver() = 0;
 
 };
 

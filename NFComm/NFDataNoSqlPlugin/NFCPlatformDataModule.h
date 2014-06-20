@@ -33,8 +33,14 @@ public:
 	virtual int ConfirmAccountInfo(const std::string& strAccount, const std::string& strPassword);
 
 	virtual int SetAccountState(const std::string& strAccount, const int nState);
+
+    virtual NFIDataNoSqlDriver* GetDriver()
+    {
+        return m_pPlayerDataDriver;
+    }
+
 protected:
-	NFCDataNoSqlDriver mDataDriver;
+	NFIDataNoSqlDriver* m_pPlayerDataDriver;
 
 };
 
