@@ -10,7 +10,12 @@ import "NFMsgBaseEx.proto";
 message ReqEnterGameServer
 {
     required int32 server_id = 1;
-	optional int32 gate_id = 2;
+	required int32 gate_id = 2;
+	required int32 player_id = 3;
+}
+
+message ReqLeaveGameServer
+{
 }
 
 message ReqAckPlayerMove

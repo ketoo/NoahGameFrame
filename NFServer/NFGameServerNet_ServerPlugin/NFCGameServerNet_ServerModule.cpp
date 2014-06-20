@@ -92,10 +92,31 @@ int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 
     ////根据用户基础信息得到目标actor地址,看自己想怎么管理和优化
     //pPluginManager->GetFramework().Send(xActorMsg, pPluginManager->GetAddress(), pPluginManager->GetAddress());
+    //不上actor的情况
+    switch (msg.GetMsgHead()->GetMsgID())
+    {
+    case NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME:
+        OnClienEnterGame(msg);
+        break;
+    case NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GAME:
+        OnClienLeaveGame(msg);
+        break;
+    case NFMsg::EGameMsgID::EGMI_REQ_ROLE_LIST:
+        break;
+    case NFMsg::EGameMsgID::EGMI_REQ_CREATE_ROLE:
+        break;
+    case NFMsg::EGameMsgID::EGMI_REQ_DELETE_ROLE:
+        break;
+    case NFMsg::EGameMsgID::EGMI_REQ_RECOVER_ROLE:
+        break;
+    default:
+        break;
+    }
+
     return true;
 }
 
-int NFCGameServerNet_ServerModule::OnSocketEvent( const uint16_t nSockIndex, const NF_NET_EVENT eEvent )
+int NFCGameServerNet_ServerModule::OnSocketEvent( const uint32_t nSockIndex, const NF_NET_EVENT eEvent )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -121,12 +142,12 @@ int NFCGameServerNet_ServerModule::OnSocketEvent( const uint16_t nSockIndex, con
 	return true;
 }
 
-void NFCGameServerNet_ServerModule::OnClientDisconnect( const uint16_t& nAddress )
+void NFCGameServerNet_ServerModule::OnClientDisconnect( const uint32_t nAddress )
 {
 
 }
 
-void NFCGameServerNet_ServerModule::OnClientConnected( const uint16_t& nAddress )
+void NFCGameServerNet_ServerModule::OnClientConnected( const uint32_t nAddress )
 {
 	NFCValueList varList;
 	m_pKernelModule->GetObjectByProperty(mnProxyContainer, "FD", NFCValueList() << nAddress, varList);
@@ -134,4 +155,52 @@ void NFCGameServerNet_ServerModule::OnClientConnected( const uint16_t& nAddress 
 	{
 		m_pKernelModule->DestroyObject(varList.ObjectVal(0));		
 	}
+}
+
+void NFCGameServerNet_ServerModule::OnClienEnterGame( const NFIPacket& msg )
+{
+    int32_t nPlayerID = 0;	
+    NFMsg::ReqEnterGameServer xMsg;
+    if (!RecivePB(msg, xMsg, nPlayerID))
+    {
+        return;
+    }
+
+    if (0 == nPlayerID)
+    {
+        return;
+    }
+
+    nPlayerID = xMsg.player_id();
+    //server_id
+    //gate_id
+
+    int nSceneID = 1;
+    NFCValueList valArg;
+    valArg << "ProxyID";
+    valArg << xMsg.gate_id();
+    NFIObject* pObject = m_pKernelModule->CreateObject( nPlayerID, nSceneID, 0, "Player", "", valArg );
+    if ( NULL == pObject )
+    {
+        return;
+    }
+
+    m_pEventProcessModule->DoEvent(pObject->Self(), "Player", CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCValueList() );
+}
+
+void NFCGameServerNet_ServerModule::OnClienLeaveGame( const NFIPacket& msg )
+{
+    int32_t nPlayerID = 0;	
+    NFMsg::ReqLeaveGameServer xMsg;
+    if (!RecivePB(msg, xMsg, nPlayerID))
+    {
+        return;
+    }
+
+    if (0 == nPlayerID)
+    {
+        return;
+    }
+
+    m_pKernelModule.DestroyObject(nPlayerID);
 }
