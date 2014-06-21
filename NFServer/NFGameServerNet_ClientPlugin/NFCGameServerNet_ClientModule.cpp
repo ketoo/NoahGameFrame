@@ -364,7 +364,7 @@ int NFCGameServerNet_ClientModule::OnRecivePack( const NFIPacket& msg )
 
 }
 
-int NFCGameServerNet_ClientModule::OnSocketEvent( const uint16_t nSockIndex, const NF_NET_EVENT eEvent )
+int NFCGameServerNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -387,12 +387,12 @@ int NFCGameServerNet_ClientModule::OnSocketEvent( const uint16_t nSockIndex, con
 
 }
 
-void NFCGameServerNet_ClientModule::OnClientDisconnect( const uint16_t& nAddress )
+void NFCGameServerNet_ClientModule::OnClientDisconnect( const int nAddress )
 {
 
 }
 
-void NFCGameServerNet_ClientModule::OnClientConnected( const uint16_t& nAddress )
+void NFCGameServerNet_ClientModule::OnClientConnected( const int nAddress )
 {
 
 }

@@ -456,7 +456,7 @@ int NFCWorldNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 
 }
 
-int NFCWorldNet_ServerModule::OnSocketEvent( const uint16_t nSockIndex, const NF_NET_EVENT eEvent )
+int NFCWorldNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -530,7 +530,7 @@ void NFCWorldNet_ServerModule::SynGameToProxy( const int nFD )
     }
 }
 
-void NFCWorldNet_ServerModule::OnClientDisconnect( const uint16_t& nAddress )
+void NFCWorldNet_ServerModule::OnClientDisconnect( const int nAddress )
 {
     NFCValueList varList;
     m_pKernelModule->GetObjectByProperty(mnGameServerContainerID, "FD", NFCValueList() << nAddress, varList);
@@ -547,7 +547,7 @@ void NFCWorldNet_ServerModule::OnClientDisconnect( const uint16_t& nAddress )
     }
 }
 
-void NFCWorldNet_ServerModule::OnClientConnected( const uint16_t& nAddress )
+void NFCWorldNet_ServerModule::OnClientConnected( const int nAddress )
 {
 
 
