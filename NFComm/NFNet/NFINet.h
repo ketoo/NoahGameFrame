@@ -189,17 +189,17 @@ public:
 	virtual  bool Final() = 0;
     virtual  bool Reset() = 0;
 
-	virtual bool SendMsg(const NFIPacket& msg, const uint32_t nSockIndex = 0, bool bBroadcast = false) = 0;
-	virtual bool SendMsg(const char* msg, const uint32_t nLen, const uint32_t nSockIndex = 0, bool bBroadcast = false) = 0;
+	virtual bool SendMsg(const NFIPacket& msg, const int nSockIndex = 0, bool bBroadcast = false) = 0;
+	virtual bool SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex = 0, bool bBroadcast = false) = 0;
 	
-	virtual int OnRecivePacket(const uint32_t nSockIndex, const char* msg, const uint32_t nLen){return 1;};
+	virtual int OnRecivePacket(const int nSockIndex, const char* msg, const uint32_t nLen){return 1;};
 
-	virtual bool CloseNetObject(const uint32_t nSockIndex) = 0;
-    virtual NetObject* GetNetObject(const uint32_t nSockIndex) = 0;
-    virtual bool AddNetObject(const uint32_t nSockIndex, NetObject* pObject) = 0;
+	virtual bool CloseNetObject(const int nSockIndex) = 0;
+    virtual NetObject* GetNetObject(const int nSockIndex) = 0;
+    virtual bool AddNetObject(const int nSockIndex, NetObject* pObject) = 0;
 
-	virtual bool AddBan(const uint32_t nSockIndex, const int32_t nTime = -1) = 0;
-	virtual bool RemoveBan(const uint32_t nSockIndex) = 0;
+	virtual bool AddBan(const int nSockIndex, const int32_t nTime = -1) = 0;
+	virtual bool RemoveBan(const int nSockIndex) = 0;
 
     virtual void HeartPack() = 0;
     virtual NFIMsgHead::NF_Head GetHeadLen() = 0;

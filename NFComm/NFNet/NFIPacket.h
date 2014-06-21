@@ -127,8 +127,8 @@ public:
     virtual const uint32_t GetPacketLen() const = 0;
     virtual const uint32_t GetDataLen() const = 0;
 	virtual const char* GetData() const = 0;
-	virtual const uint32_t GetFd() const = 0;
-	virtual void SetFd(const uint32_t nFd) = 0;
+	virtual const int GetFd() const = 0;
+	virtual void SetFd(const int nFd) = 0;
 };
 
 #pragma pack(pop)
