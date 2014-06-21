@@ -140,7 +140,7 @@ void NFCDataProcessModule::HandlerLog( const NFIActorMessage& message, const The
 
 int NFCDataProcessModule::LoadProperty( const NFIDENTID& self, NFIPropertyManager* pProManager )
 {
-    m_pNoSqlModule->QueryRoleProperty();
+    //m_pNoSqlModule->QueryRoleProperty();
 
     //RecordFormString( NFIRecordManager* pRecordManager, const NFMsg::ObjectRecordList& recordList )
     //

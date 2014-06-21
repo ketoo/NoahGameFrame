@@ -231,12 +231,12 @@ bool NFCNet::Final()
 	return true;
 }
 
-bool NFCNet::SendMsg( const NFIPacket& msg, const uint32_t nSockIndex, bool bBroadcast )
+bool NFCNet::SendMsg( const NFIPacket& msg, const int nSockIndex, bool bBroadcast )
 {
     return SendMsg(msg.GetPacketData(), msg.GetPacketLen(), nSockIndex, bBroadcast );
 }
 
-bool NFCNet::SendMsg(const char* msg, const uint32_t nLen, const uint32_t nSockIndex, bool bBroadcast /*= false*/ )
+bool NFCNet::SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex, bool bBroadcast /*= false*/ )
 {
 	std::map<int, NetObject*>::iterator it = mmObject.find(nSockIndex);
 	if (it != mmObject.end())
@@ -258,7 +258,7 @@ bool NFCNet::SendMsg(const char* msg, const uint32_t nLen, const uint32_t nSockI
 	return false;
 }
 
-bool NFCNet::CloseNetObject( const uint32_t nSockIndex )
+bool NFCNet::CloseNetObject( const int nSockIndex )
 {
 	std::map<int, NetObject*>::iterator it = mmObject.find(nSockIndex);
 	if (it != mmObject.end())
@@ -333,7 +333,7 @@ bool NFCNet::Dismantle(NetObject* pObject )
 	return bRet;
 }
 
-bool NFCNet::AddNetObject( const uint32_t nSockIndex, NetObject* pObject )
+bool NFCNet::AddNetObject( const int nSockIndex, NetObject* pObject )
 {
 	return mmObject.insert(std::map<int, NetObject*>::value_type(nSockIndex, pObject)).second;
 }
@@ -551,7 +551,7 @@ bool NFCNet::CloseSocketAll()
     return true;
 }
 
-NetObject* NFCNet::GetNetObject( const uint32_t nSockIndex )
+NetObject* NFCNet::GetNetObject( const int nSockIndex )
 {
     std::map<int, NetObject*>::iterator it = mmObject.find(nSockIndex);
     if (it != mmObject.end())

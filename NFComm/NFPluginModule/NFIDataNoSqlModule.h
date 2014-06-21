@@ -9,6 +9,7 @@
 #ifndef _NFI_DATANOSQL_MODULE_H_
 #define _NFI_DATANOSQL_MODULE_H_
 
+#include <set>
 #include "NFComm/Config/NFConfig.h"
 #include "NFComm/NFCore/NFCValueList.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
