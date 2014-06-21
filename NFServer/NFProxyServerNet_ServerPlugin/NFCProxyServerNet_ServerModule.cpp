@@ -164,7 +164,7 @@ int NFCProxyServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 
 }
 
-int NFCProxyServerNet_ServerModule::OnSocketEvent( const uint16_t nSockIndex, const NF_NET_EVENT eEvent )
+int NFCProxyServerNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -192,7 +192,7 @@ int NFCProxyServerNet_ServerModule::OnSocketEvent( const uint16_t nSockIndex, co
 
 }
 
-void NFCProxyServerNet_ServerModule::OnClientDisconnect( const uint32_t& nAddress )
+void NFCProxyServerNet_ServerModule::OnClientDisconnect( const int nAddress )
 {
 
 }
@@ -318,7 +318,7 @@ int NFCProxyServerNet_ServerModule::Transpond(const NFIPacket& msg )
     return GetNet()->SendMsg(msg, msg.GetFd());
 }
 
-void NFCProxyServerNet_ServerModule::OnClientConnected( const uint32_t& nAddress )
+void NFCProxyServerNet_ServerModule::OnClientConnected( const int nAddress )
 {
 
 }
