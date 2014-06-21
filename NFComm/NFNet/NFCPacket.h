@@ -76,12 +76,12 @@ public:
         this->mstrPackData.assign(packet.GetPacketData(), this->GetPacketLen());
 	}
 
-	virtual const uint32_t GetFd() const
+	virtual const int GetFd() const
 	{
 		return munFD;
 	}
 
-	virtual void SetFd(const uint32_t nFd)
+	virtual void SetFd(const int nFd)
 	{
 		munFD = nFd;
 	}
@@ -102,7 +102,7 @@ private:
 	NFIMsgHead* pHead;
 	//char strPackData[NF_MAX_SERVER_PACKET_SIZE];//include head
     std::string mstrPackData;//include head
-	uint32_t munFD;
+	int munFD;
 };
 
 

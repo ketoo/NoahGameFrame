@@ -30,14 +30,14 @@
 typedef std::function<int(const NFIPacket& msg)> RECIEVE_FUNCTOR;
 typedef std::shared_ptr<RECIEVE_FUNCTOR> RECIEVE_FUNCTOR_PTR;
 
-typedef std::function<int(const uint32_t nSockIndex, const NF_NET_EVENT nEvent)> EVENT_FUNCTOR;
+typedef std::function<int(const int nSockIndex, const NF_NET_EVENT nEvent)> EVENT_FUNCTOR;
 typedef std::shared_ptr<EVENT_FUNCTOR> EVENT_FUNCTOR_PTR;
 
 class NFCNet : public NFINet
 {
 public:
     template<typename BaseType>
-    NFCNet(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const uint16_t, const NF_NET_EVENT))
+    NFCNet(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT))
     {
         base = NULL;
         listener = NULL;
@@ -63,15 +63,15 @@ public:
 	virtual  bool Final();
     virtual  bool Reset();
 
-	virtual bool SendMsg(const NFIPacket& msg, const uint32_t nSockIndex = 0, bool bBroadcast = false);
-	virtual bool SendMsg(const char* msg, const uint32_t nLen, const uint32_t nSockIndex = 0, bool bBroadcast = false);
+	virtual bool SendMsg(const NFIPacket& msg, const int nSockIndex = 0, bool bBroadcast = false);
+	virtual bool SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex = 0, bool bBroadcast = false);
 
-    virtual bool CloseNetObject(const uint32_t nSockIndex);
-    virtual NetObject* GetNetObject(const uint32_t nSockIndex);
-    virtual bool AddNetObject(const uint32_t nSockIndex, NetObject* pObject);
+    virtual bool CloseNetObject(const int nSockIndex);
+    virtual NetObject* GetNetObject(const int nSockIndex);
+    virtual bool AddNetObject(const int nSockIndex, NetObject* pObject);
 
-	virtual bool AddBan(const uint32_t nSockIndex, const int32_t nTime = -1){return true;};
-	virtual bool RemoveBan(const uint32_t nSockIndex){return true;};
+	virtual bool AddBan(const int nSockIndex, const int32_t nTime = -1){return true;};
+	virtual bool RemoveBan(const int nSockIndex){return true;};
 	virtual void HeartPack();
     virtual NFIMsgHead::NF_Head GetHeadLen(){return mnHeadLength;};
 
