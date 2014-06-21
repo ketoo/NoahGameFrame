@@ -36,12 +36,12 @@ public:
 protected:
 
     int OnRecivePack(const NFIPacket& msg);
-    int OnSocketEvent(const uint16_t nSockIndex, const NF_NET_EVENT eEvent);
+    int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
 
     //连接丢失,删2层(连接对象，帐号对象)
-    void OnClientDisconnect(const uint16_t& nAddress);
+    void OnClientDisconnect(const int nAddress);
     //有连接
-    void OnClientConnected(const uint16_t& nAddress);
+    void OnClientConnected(const int nAddress);
 
 private:
     int mnConnectContainer;
@@ -80,12 +80,12 @@ public:
 protected:
 
 	int OnRecivePack(const NFIPacket& msg);
-	int OnSocketEvent(const uint16_t nSockIndex, const NF_NET_EVENT eEvent);
+	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
 
 	//连接丢失,删2层(连接对象，帐号对象)
-	void OnClientDisconnect(const uint32_t& nAddress);
+	void OnClientDisconnect(const int nAddress);
 	//有连接
-	void OnClientConnected(const uint32_t& nAddress);
+	void OnClientConnected(const int nAddress);
 
 
     int DoHeartBeatEvent(const NFIDENTID& self, const NFIValueList& var);

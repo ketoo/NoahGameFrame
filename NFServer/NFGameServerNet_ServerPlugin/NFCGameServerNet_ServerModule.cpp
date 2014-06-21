@@ -116,7 +116,7 @@ int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
     return true;
 }
 
-int NFCGameServerNet_ServerModule::OnSocketEvent( const uint32_t nSockIndex, const NF_NET_EVENT eEvent )
+int NFCGameServerNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -142,12 +142,12 @@ int NFCGameServerNet_ServerModule::OnSocketEvent( const uint32_t nSockIndex, con
 	return true;
 }
 
-void NFCGameServerNet_ServerModule::OnClientDisconnect( const uint32_t nAddress )
+void NFCGameServerNet_ServerModule::OnClientDisconnect( const int nAddress )
 {
 
 }
 
-void NFCGameServerNet_ServerModule::OnClientConnected( const uint32_t nAddress )
+void NFCGameServerNet_ServerModule::OnClientConnected( const int nAddress )
 {
 	NFCValueList varList;
 	m_pKernelModule->GetObjectByProperty(mnProxyContainer, "FD", NFCValueList() << nAddress, varList);
@@ -202,5 +202,5 @@ void NFCGameServerNet_ServerModule::OnClienLeaveGame( const NFIPacket& msg )
         return;
     }
 
-    m_pKernelModule.DestroyObject(nPlayerID);
+    m_pKernelModule->DestroyObject(nPlayerID);
 }
