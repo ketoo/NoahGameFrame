@@ -124,7 +124,7 @@ int NFCProxyServerNet_ClientModule::OnGameInfoProcess( const NFIPacket& msg )
     return 0;
 }
 
-int NFCProxyServerNet_ClientModule::OnSocketEvent( const uint16_t nSockIndex, const NF_NET_EVENT eEvent )
+int NFCProxyServerNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -147,12 +147,12 @@ int NFCProxyServerNet_ClientModule::OnSocketEvent( const uint16_t nSockIndex, co
 	return 0;
 }
 
-void NFCProxyServerNet_ClientModule::OnClientDisconnect( const uint32_t& nAddress )
+void NFCProxyServerNet_ClientModule::OnClientDisconnect( const int nAddress )
 {
 
 }
 
-void NFCProxyServerNet_ClientModule::OnClientConnected( const uint32_t& nAddress )
+void NFCProxyServerNet_ClientModule::OnClientConnected( const int nAddress )
 {
     Register();
 }
@@ -301,11 +301,11 @@ NFCProxyConnectObject::NFCProxyConnectObject(int nGameServerID, NFIPluginManager
     }
 }
 
-void NFCProxyConnectObject::OnClientDisconnect( const uint16_t& nAddress )
+void NFCProxyConnectObject::OnClientDisconnect( const int nAddress )
 {
 }
 
-void NFCProxyConnectObject::OnClientConnected( const uint16_t& nAddress )
+void NFCProxyConnectObject::OnClientConnected( const int nAddress )
 {
 
 }
@@ -317,7 +317,7 @@ int NFCProxyConnectObject::OnRecivePack( const NFIPacket& msg )
     return 0;
 }
 
-int NFCProxyConnectObject::OnSocketEvent( const uint16_t nSockIndex, const NF_NET_EVENT eEvent )
+int NFCProxyConnectObject::OnSocketEvent( const uint16int_t nSockIndex, const NF_NET_EVENT eEvent )
 {
     return 0;
 }
