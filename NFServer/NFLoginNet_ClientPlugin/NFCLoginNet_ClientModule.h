@@ -43,17 +43,13 @@ public:
 
 protected:
 	int OnRecivePack(const NFIPacket& msg);
-    int OnSocketEvent(const uint16_t nSockIndex, const NF_NET_EVENT eEvent);
+    int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
 
 
 protected:
 
     //////////////////////////////////////////////////////////////////////////
     int OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
-
-    int OnExitServerEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
-
-    //////////////////////////////////////////////////////////////////////////
 
     int OnSelectServerResultProcess(const NFIPacket& msg);
 

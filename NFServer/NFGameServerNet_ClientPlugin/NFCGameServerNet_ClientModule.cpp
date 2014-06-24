@@ -119,8 +119,8 @@ bool NFCGameServerNet_ClientModule::AfterInit()
     assert(NULL != m_pElementInfoModule);
     assert(NULL != m_pLogModule);
 
-    m_pEventProcessModule->AddEventCallBack(0, NFED_ON_DATABASE_SERVER_LOADROE_BEGIN, this, &NFCGameServerNet_ClientModule::OnDataLoadBeginEvent);
-    m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_WANTO_SWAP_GS, this, &NFCGameServerNet_ClientModule::OnSwapGSEvent);
+    //m_pEventProcessModule->AddEventCallBack(0, NFED_ON_DATABASE_SERVER_LOADROE_BEGIN, this, &NFCGameServerNet_ClientModule::OnDataLoadBeginEvent);
+    //m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_WANTO_SWAP_GS, this, &NFCGameServerNet_ClientModule::OnSwapGSEvent);
 
     m_pKernelModule->ResgisterCommonClassEvent(this, &NFCGameServerNet_ClientModule::OnClassCommonEvent);
     

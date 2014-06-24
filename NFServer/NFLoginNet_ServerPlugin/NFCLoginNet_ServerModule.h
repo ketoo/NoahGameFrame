@@ -23,7 +23,7 @@
 #include "NFComm/NFPluginModule/NFIActor.h"
 
 #define NET_MSG_PROCESS(xNFMsg, msg) \
-    int32_t nPlayerID = 0; \
+    int64_t nPlayerID = 0; \
     xNFMsg xMsg; \
     if (!RecivePB(msg, xMsg, nPlayerID)) \
     { \
@@ -62,13 +62,13 @@ public:
 
 protected:
 	int OnRecivePack(const NFIPacket& msg);
-	int OnSocketEvent(const uint16_t nSockIndex, const NF_NET_EVENT eEvent);
+	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
 
 protected:
 	//连接丢失,删2层(连接对象，帐号对象)
-	void OnClientDisconnect(const uint16_t& nAddress);
+	void OnClientDisconnect(const int nAddress);
 	//有连接
-	void OnClientConnected(const uint16_t& nAddress);
+	void OnClientConnected(const int nAddress);
 	//登入 
 	int OnLoginProcess(const NFIPacket& msg);
 	//登出
