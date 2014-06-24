@@ -1,6 +1,6 @@
 <XML>
 	<Propertys>
-		<Property Id="Enable"  Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc=""/>
+		<Property Id="Enable"  Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc=""/>
 	</Propertys>
 	
 	<Records>

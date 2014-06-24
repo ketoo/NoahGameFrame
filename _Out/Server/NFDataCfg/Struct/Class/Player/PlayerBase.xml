@@ -1,14 +1,14 @@
 <XML>
 	<Propertys>
-		<Property Id="RoleName" Type="string" Public="true" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="角色名"/>
-		<Property Id="Sex" Type="int" Public="true" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="性别"/>
-		<Property Id="Race" Type="int" Public="true" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="种族"/>
-		<Property Id="Camp" Type="int" Public="true" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="阵营"/>
-		<Property Id="LastContainerID" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="玩家下线的时候需要保存上次在线的场景"/>
+		<Property Id="RoleName" Type="string" Public="true" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="角色名"/>
+		<Property Id="Sex" Type="int" Public="true" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="性别"/>
+		<Property Id="Race" Type="int" Public="true" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="种族"/>
+		<Property Id="Camp" Type="int" Public="true" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="阵营"/>
+		<Property Id="LastContainerID" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="玩家下线的时候需要保存上次在线的场景"/>
 		
 	</Propertys>
 	<Records>
-		<Record Id="PlayerViewItem" Row="11" Col="4" Public="true" Private="true" Save="true" ClientCanChang="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="">
+		<Record Id="PlayerViewItem" Row="11" Col="4" Public="true" Private="true" Save="true" ClientCanChang="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="">
 			<Col Type="string" Desc="物品配置ID"/>
 			<Col Type="int" Desc="强化等级"/>
 			<Col Type="string" Desc="镶嵌宝石"/>
