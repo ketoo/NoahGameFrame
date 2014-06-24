@@ -17,14 +17,19 @@ public class NFCResultLogic
     public NFCResultLogic(NFNet net)
     {
         mNet = net;
-        mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_EVENT_RESULT, EGMI_EVENT_RESULT);
-
+        mNet.binMsgEvent.RegisteredResultCodeDelegation(NFMsg.EGameEventCode.EGEC_UNKOWN_ERROR, EGEC_UNKOWN_ERROR);
+        mNet.binMsgEvent.RegisteredResultCodeDelegation(NFMsg.EGameEventCode.EGEC_ACCOUNT_SUCCESS, EGEC_ACCOUNT_SUCCESS);
     }
 
-    private void EGMI_EVENT_RESULT(MsgHead head, MemoryStream stream)
+    private void EGEC_UNKOWN_ERROR(NFMsg.EGameEventCode eCode)
     {
-        //OnResultMsg
-        NFMsg.AckEventResult resultCode = new NFMsg.AckEventResult();
-        resultCode = Serializer.Deserialize<NFMsg.AckEventResult>(stream);
+
     }
+
+    private void EGEC_ACCOUNT_SUCCESS(NFMsg.EGameEventCode eCode)
+    {
+        mNet.mPlayerState = NFNet.PLAYER_STATE.E_HAS_PLAYER_LOGIN;
+    }
+    
+
 }
