@@ -43,7 +43,6 @@ bool NFCLoginNet_ClientModule::AfterInit()
 	assert(NULL != m_pLoginNet_ServerModule);
 
 	m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_SELECT_SERVER, this, &NFCLoginNet_ClientModule::OnSelectServerEvent);
-	m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_EXIT_SERVER, this, &NFCLoginNet_ClientModule::OnExitServerEvent);
 
 	const int nServerID = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerID");
 	const std::string& strServerIP = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "ServerIP");
@@ -159,7 +158,7 @@ void NFCLoginNet_ClientModule::UnRegister()
 
 int NFCLoginNet_ClientModule::OnSelectServerResultProcess(const NFIPacket& msg)
 {
-    int32_t nPlayerID = 0;	
+    int64_t nPlayerID = 0;	
     NFMsg::AckConnectWorldResult xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -176,34 +175,6 @@ int NFCLoginNet_ClientModule::OnSelectServerResultProcess(const NFIPacket& msg)
         << xMsg.world_key();
 
     m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_SELECT_SERVER_RESULTS, var);
-
-	return 0;
-}
-
-int NFCLoginNet_ClientModule::OnExitServerEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
-{
-	if (2 != var.GetCount()
-		|| !var.TypeEx(VARIANT_TYPE::VTYPE_STRING, VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_UNKNOWN))
-	{
-		return -1;
-	}
-
-	//     const std::string& strAccount = var.StringVal(0);
-	//     int nWorldID = var.IntVal(1);
-	// 
-	//     _tagPT_KEY_BASE_MSG baseMsg;
-	//     NFMsg::WantToExitWorld xMsg;
-	// 
-	//     xMsg.set_account(strAccount);
-	//     xMsg.set_world_id(nWorldID);
-	// 
-	//     if (xMsg.SerializeToString(&baseMsg.strSyncInfo))
-	//     {
-	//         baseMsg._unMsgID = LTW_WANTTO_CONNECT_WORLD;
-	//         RakNet::BitStream oBitStream;
-	//         baseMsg.EnCode(&oBitStream);
-	//         SendBitStream(&oBitStream);
-	//     }
 
 	return 0;
 }
@@ -234,7 +205,7 @@ int NFCLoginNet_ClientModule::OnRecivePack(const NFIPacket& msg )
 
 
 
-int NFCLoginNet_ClientModule::OnSocketEvent( const uint16_t nSockIndex, const NF_NET_EVENT eEvent )
+int NFCLoginNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -259,7 +230,7 @@ int NFCLoginNet_ClientModule::OnSocketEvent( const uint16_t nSockIndex, const NF
 
 int NFCLoginNet_ClientModule::OnWorldInfoProcess( const NFIPacket& msg )
 {
-	int32_t nPlayerID = 0;	
+	int64_t nPlayerID = 0;	
 	NFMsg::MultiObjectPropertyList xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
