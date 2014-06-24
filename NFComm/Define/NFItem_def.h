@@ -123,17 +123,6 @@ enum EGameItemSubType
     EGIT_ITEM_PACK              = 15,   // 道具包--包括了技能书，礼包，BUFF，使用技能的道具GetXXXList
 };
 
-enum EGameEquipQuality
-{
-    EquipQuality_Gray       = 0,    // 灰色(默认的，最渣的)
-    EquipQuality_White      = 1,    // 白色
-    EquipQuality_Blue       = 2,    // 蓝色
-    EquipQuality_Gold       = 3,    // 金色
-    EquipQuality_BlackGold  = 4,    // 暗金
-
-    EquipQuality_Max,
-};
-
 //道具时间类型
 enum EGameItemExpiredType
 {
