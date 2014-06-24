@@ -69,19 +69,6 @@ enum NFGMComandID
 };
 
 
-////////////////////////////一些行为的原因(LOG记录)//////////////////////////////////////////////
-enum NFBehaviorReason
-{
-    NFBR_KILL_OBJECT_EXP,//杀怪经验
-    NFBR_USE_POTION,//药水经验
-    NFBR_USE_COMMAND,//GM命令
-};
-
-
-
-
-
-
 
 
 
