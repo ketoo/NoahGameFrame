@@ -156,7 +156,7 @@ int NFCWorldNet_ServerModule::GetGameServerObject(const int nServerID, NFIValueL
 
 int NFCWorldNet_ServerModule::OnGameServerRegisteredProcess(const NFIPacket& msg)
 {
-    int32_t nPlayerID = 0;
+    int64_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -210,7 +210,7 @@ int NFCWorldNet_ServerModule::OnGameServerRegisteredProcess(const NFIPacket& msg
 
 int NFCWorldNet_ServerModule::OnGameServerUnRegisteredProcess(const NFIPacket& msg)
 {
-    int32_t nPlayerID = 0;
+    int64_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -234,7 +234,7 @@ int NFCWorldNet_ServerModule::OnGameServerUnRegisteredProcess(const NFIPacket& m
 
 int NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess(const NFIPacket& msg)
 {
-    int32_t nPlayerID = 0;
+    int64_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -338,7 +338,7 @@ int NFCWorldNet_ServerModule::GetProxyObject(const int nProxyID, NFIValueList& v
 
 int NFCWorldNet_ServerModule::OnProxyServerRegisteredProcess(const NFIPacket& msg)
 {
-    int32_t nPlayerID = 0;
+    int64_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -400,7 +400,7 @@ int NFCWorldNet_ServerModule::OnProxyServerRegisteredProcess(const NFIPacket& ms
 
 int NFCWorldNet_ServerModule::OnProxyServerUnRegisteredProcess(const NFIPacket& msg)
 {
-    int32_t nPlayerID = 0;
+    int64_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
