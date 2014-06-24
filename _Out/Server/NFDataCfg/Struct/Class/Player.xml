@@ -2,38 +2,33 @@
 <!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
 <XML>
 	<Propertys>
-		<Property Id="Account" Type="string" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="玩家的帐号"/>
-		<Property Id="ConnectKey" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="玩家连接服务器的KEY"/>
-		<Property Id="Gold" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="玩家金钱"/>
-		<Property Id="MAXEXP" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="升级需要的经验"/>
-		<Property Id="DEAD_COUNT" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="死亡次数--需要保存的都是因为不分层的属性，分层属性不需要保存，保存各层的值即可"/>
-		<Property Id="RELIVE_SOUL" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="转生次数"/>
-		<Property Id="GUILD_NAME" Type="string" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="工会ID名字"/>
-		<Property Id="SPOUSE_NAME" Type="string" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="配偶名字"/>
-		<Property Id="TEAM_CARD" Type="string" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="佩戴的队旗卡ID"/>
-		<Property Id="PVP_ATK_CARD" Type="string" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="佩戴的PVP攻击卡"/>
-		<Property Id="PVP_DEF_CARD" Type="string" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="佩戴的PVP防御卡"/>
-		<Property Id="LUCKLY_CARD" Type="string" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="佩戴的幸运卡ID"/>
-		<Property Id="ATK_PVP" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="PVP攻击力"/>
-		<Property Id="DEF_PVP" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="PVP防御力"/>
-		<Property Id="CreditValue" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="信用值"/>
-		<Property Id="SoulValue" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="武魂值"/>
-		<Property Id="OnlineCount" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="上线次数"/>
-		<Property Id="TotalTime" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="在线时间"/>
-		<Property Id="Cash" Type="object" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="金钱"/>
-		<Property Id="BindCash" Type="object" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="绑定钱"/>
-		<Property Id="DeleteFlag" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="删除标志"/>
-		<Property Id="DeleteTime" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="删除时间"/>
-		<Property Id="Citizenship" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="创建帐号服务器"/>
-		<Property Id="RegTime" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="注册时间"/>
-		<Property Id="LastOfflineTime" Type="object" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="上次下线时间"/>
-		<Property Id="OnlineTime" Type="object" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="本次上线时间"/>
-		<Property Id="TotalLineTime" Type="object" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="今日在线时长{截至至本次上线时间}"/>
-		<Property Id="GMLevel" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="GM等级"/>
+		<Property Id="Account" Type="string" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="玩家的帐号"/>
+		<Property Id="ConnectKey" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="玩家连接服务器的KEY"/>
+		<Property Id="Gold" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="玩家金钱"/>
+		<Property Id="MAXEXP" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="升级需要的经验"/>
+		<Property Id="DEAD_COUNT" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="死亡次数--需要保存的都是因为不分层的属性，分层属性不需要保存，保存各层的值即可"/>
+		<Property Id="RELIVE_SOUL" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="转生次数"/>
+		<Property Id="GUILD_NAME" Type="string" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="工会ID名字"/>
+		<Property Id="SPOUSE_NAME" Type="string" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="配偶名字"/>
+		<Property Id="TEAM_CARD" Type="string" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="佩戴的队旗卡ID"/>
+		<Property Id="PVP_ATK_CARD" Type="string" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="佩戴的PVP攻击卡"/>
+		<Property Id="PVP_DEF_CARD" Type="string" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="佩戴的PVP防御卡"/>
+		<Property Id="LUCKLY_CARD" Type="string" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="佩戴的幸运卡ID"/>
+		<Property Id="ATK_PVP" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="PVP攻击力"/>
+		<Property Id="DEF_PVP" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="PVP防御力"/>
+		<Property Id="CreditValue" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="信用值"/>
+		<Property Id="SoulValue" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="武魂值"/>
+		<Property Id="OnlineCount" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="上线次数"/>
+		<Property Id="TotalTime" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="在线时间"/>
+		<Property Id="Citizenship" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="创建帐号服务器"/>
+		<Property Id="LastOfflineTime" Type="object" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="上次下线时间"/>
+		<Property Id="OnlineTime" Type="object" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="本次上线时间"/>
+		<Property Id="TotalLineTime" Type="object" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="今日在线时长{截至至本次上线时间}"/>
+		<Property Id="GMLevel" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="GM等级"/>
 	</Propertys>
 	<Records>
 
-		<Record Id="BagItemList" Row="211" Col="18" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="普通背包">
+		<Record Id="BagItemList" Row="211" Col="18" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="普通背包">
 			<Col Type="object" Desc="物品唯一ID"/>
 			<Col Type="string" Desc="物品配置ID"/>
 			<Col Type="int" Desc="物品数量"/>
@@ -54,7 +49,7 @@
 			<Col Type="string" Desc="固定属性ATK_VALUE,10;DEF_VALUE,20;"/>
 		</Record>
 		
-		<Record Id="DropItemList" Row="256" Col="7" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="副本中掉路物品列表，进副本产生，出副本销毁">
+		<Record Id="DropItemList" Row="256" Col="7" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="副本中掉路物品列表，进副本产生，出副本销毁">
 			<Col Type="object" Desc="掉落怪物ID,最后可能加一个过关奖励的装备,此时ID是0"/>
 			<Col Type="string" Desc="物品配置ID"/>
 			<Col Type="int" Desc="物品数量"/>
@@ -63,13 +58,13 @@
 			<Col Type="string" Desc="如果是装备，则可能有随机属性"/>
 			<Col Type="string" Desc="如果是装备，则可能有固定属性"/>
 		</Record>
-		<Record Id="TaskMonsterList" Row="8" Col="4" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="任务杀怪表">
+		<Record Id="TaskMonsterList" Row="8" Col="4" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="任务杀怪表">
 			<Col Type="string" Desc="怪物配置ID"/>
 			<Col Type="int" Desc="当前击杀量"/>
 			<Col Type="int" Desc="要求击杀量"/>
 			<Col Type="string" Desc="归属的任务ID"/>
 		</Record>
-		<Record Id="TaskList" Row="512" Col="2" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" ScriptFunction="" Desc="任务表">
+		<Record Id="TaskList" Row="512" Col="2" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="任务表">
 			<Col Type="string" Desc="任务配置ID"/>
 			<Col Type="int" Desc="任务状态"/>
 		</Record>
