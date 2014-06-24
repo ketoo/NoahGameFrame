@@ -26,7 +26,7 @@ bool NFCMasterNet_ServerModule::Shut()
 
 int NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const NFIPacket& msg)
 {
-	int32_t nPlayerID = 0;
+	int64_t nPlayerID = 0;
 	NFMsg::ServerInfoReportList xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
@@ -79,7 +79,7 @@ int NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const NFIPacket& msg)
 
 int NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const NFIPacket& msg)
 {
-	int32_t nPlayerID = 0;
+	int64_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -110,7 +110,7 @@ int NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const NFIPacket& msg)
 
 int NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFIPacket& msg)
 {
-	int32_t nPlayerID = 0;
+	int64_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -148,7 +148,7 @@ int NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFIPacket& msg)
 
 int NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const NFIPacket& msg)
 {
-	int32_t nPlayerID = 0;
+	int64_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -190,7 +190,7 @@ int NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const NFIPacket& msg)
 
 int NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const NFIPacket& msg)
 {
-	int32_t nPlayerID = 0;
+	int64_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -220,7 +220,7 @@ int NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const NFIPacket& msg)
 
 int NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess(const NFIPacket& msg)
 {
-	int32_t nPlayerID = 0;
+	int64_t nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -256,7 +256,7 @@ int NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess(const NFIPacket& msg)
 
 int NFCMasterNet_ServerModule::OnSelectWorldProcess(const NFIPacket& msg)
 {
-	int32_t nPlayerID = 0;
+	int64_t nPlayerID = 0;
 	NFMsg::ReqConnectWorld xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
@@ -309,7 +309,7 @@ int NFCMasterNet_ServerModule::GetWorldObject(const int nWorldID, NFIValueList& 
 
 int NFCMasterNet_ServerModule::OnSelectServerResultProcess(const NFIPacket& msg)
 {
-	int32_t nPlayerID = 0;
+	int64_t nPlayerID = 0;
 	NFMsg::AckConnectWorldResult xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
@@ -436,7 +436,7 @@ int NFCMasterNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 
 }
 
-int NFCMasterNet_ServerModule::OnSocketEvent( const uint16_t nSockIndex, const NF_NET_EVENT eEvent )
+int NFCMasterNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -462,7 +462,7 @@ int NFCMasterNet_ServerModule::OnSocketEvent( const uint16_t nSockIndex, const N
 	return 0;
 }
 
-void NFCMasterNet_ServerModule::OnClientDisconnect( const uint16_t& nAddress )
+void NFCMasterNet_ServerModule::OnClientDisconnect( const int nAddress )
 {
 	//不管是login还是world都要找出来,替他反注册
 	NFCValueList varList;
@@ -481,7 +481,7 @@ void NFCMasterNet_ServerModule::OnClientDisconnect( const uint16_t& nAddress )
 	}
 }
 
-void NFCMasterNet_ServerModule::OnClientConnected( const uint16_t& nAddress )
+void NFCMasterNet_ServerModule::OnClientConnected( const int nAddress )
 {
 	//连接上来啥都不做
 }
