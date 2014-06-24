@@ -104,7 +104,7 @@ int NFCProxyServerNet_ServerModule::OnWantToConnectObjectEvent(const NFIDENTID& 
 
 int NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const NFIPacket& msg)
 {
-    int32_t nPlayerID = 0;
+    int64_t nPlayerID = 0;
     NFMsg::ReqAccountLogin xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -223,7 +223,7 @@ int NFCProxyServerNet_ServerModule::OnTranspondProcess( const NFIPacket& msg )
 
 int NFCProxyServerNet_ServerModule::OnSelectServerProcess( const NFIPacket& msg )
 {
-    int32_t nPlayerID = 0;
+    int64_t nPlayerID = 0;
     NFMsg::ReqSelectServer xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -265,7 +265,7 @@ int NFCProxyServerNet_ServerModule::OnSelectServerProcess( const NFIPacket& msg 
 
 int NFCProxyServerNet_ServerModule::OnReqServerListProcess( const NFIPacket& msg )
 {
-    int32_t nPlayerID = 0;
+    int64_t nPlayerID = 0;
     NFMsg::ReqServerList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -315,7 +315,19 @@ int NFCProxyServerNet_ServerModule::OnReqServerListProcess( const NFIPacket& msg
 
 int NFCProxyServerNet_ServerModule::Transpond(const NFIPacket& msg )
 {
-    return GetNet()->SendMsg(msg, msg.GetFd());
+    NFMsg::MsgBase xMsg;
+    xMsg.ParseFromString(msg.GetPacketData());
+    for (int i = 0; i < xMsg.player_fd_list_size(); ++i)
+    {
+        GetNet()->SendMsg(msg, xMsg.player_fd_list(i));
+    }
+
+    if(xMsg.player_fd_list_size() <= 0)
+    {
+        GetNet()->SendMsg(msg, msg.GetFd());
+    }
+
+    return true;
 }
 
 void NFCProxyServerNet_ServerModule::OnClientConnected( const int nAddress )
