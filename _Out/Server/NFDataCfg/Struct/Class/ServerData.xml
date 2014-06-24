@@ -1,28 +1,28 @@
 <XML>
 	<Propertys>
 		<!--通用-->
-		<Property Id="ServerID" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="" />
-		<Property Id="Name" Type="string" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="" />
-		<Property Id="State" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="0为未开启" />
+		<Property Id="ServerID" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+		<Property Id="Name" Type="string" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+		<Property Id="State" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="0为未开启" />
 		<!--作为服务端-->
-		<Property Id="MaxConnect" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="" />
-		<Property Id="OnlineCount" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="" />
-		<Property Id="IP" Type="string" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="" />
-		<Property Id="Port" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="" />
-		<Property Id="Password" Type="string" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="" />
-		<Property Id="CpuCount" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="" />
+		<Property Id="MaxConnect" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+		<Property Id="OnlineCount" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+		<Property Id="IP" Type="string" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+		<Property Id="Port" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+		<Property Id="Password" Type="string" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+		<Property Id="CpuCount" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
 		<!--作为要连数据库的-->
-		<Property Id="SqlIP" Type="string" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="" />
-		<Property Id="SqlPort" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="" />
-		<Property Id="SqlAccount" Type="string" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="" />
-		<Property Id="SqlPwd" Type="string" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="" />
+		<Property Id="SqlIP" Type="string" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+		<Property Id="SqlPort" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+		<Property Id="SqlAccount" Type="string" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+		<Property Id="SqlPwd" Type="string" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
 		<!--作为客户端，它要连接的服务器地址-->
-		<Property Id="ServerIP" Type="string" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="" />
-		<Property Id="ServerPort" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="" />
-		<Property Id="ServerPwd" Type="string" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="" />
+		<Property Id="ServerIP" Type="string" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+		<Property Id="ServerPort" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+		<Property Id="ServerPwd" Type="string" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
 
 		<!--网络地址-->
-		<Property Id="FD" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="" />
+		<Property Id="FD" Type="int" Public="true" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
 
 	</Propertys>
 		<Records>
