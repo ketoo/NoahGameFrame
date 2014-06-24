@@ -77,6 +77,7 @@ public class NFNet
     public string strReqPropertyValue = "value";
 
     public string strReqAddItem = "additem";
+    public string strAddCount= "count";
 
     public string strSwapOrigin = "swaporigin";
     public string strSwapTarget = "target";
@@ -84,10 +85,6 @@ public class NFNet
     public string strChatTargetID = "target";
     public string strType = "type";
     public string strChatData = "data";
-
-    public string strOnagerName = "onagerName";
-    public string strOnagerLevel = "level";
-
 
     Vector2 scrollVec = new Vector2();
     Vector2 scrollVecChatMsg = new Vector2();
@@ -131,6 +128,7 @@ public class NFNet
             //操作功能区
             scrollVecBtn = GUI.BeginScrollView(new Rect(570, 20, 350, nHeight-40), scrollVecBtn, new Rect(0, 0, 600, 3000));
 
+            ////////////////////////////////////////////////////////////////////////////////////////////////
 
             if (GUI.Button(new Rect(0, 0, 100, 50), "切换场景"))
             {
@@ -139,7 +137,7 @@ public class NFNet
             strReqSwapSceneID = GUI.TextField(new Rect(100, 0, 100, 50), strReqSwapSceneID);
             strReqSwapSceneLine = GUI.TextField(new Rect(200, 0, 100, 50), strReqSwapSceneLine);
 
-
+            ////////////////////////////////////////////////////////////////////////////////////////////////
 
             if (GUI.Button(new Rect(0, 50, 100, 50), "移动"))
             {
@@ -148,6 +146,7 @@ public class NFNet
             strReqMoveX = GUI.TextField(new Rect(100, 50, 100, 50), strReqMoveX);
             strReqMoveZ = GUI.TextField(new Rect(200, 50, 100, 50), strReqMoveZ);
 
+            ////////////////////////////////////////////////////////////////////////////////////////////////
 
             if (GUI.Button(new Rect(0, 100, 100, 50), "接任务"))
             {
@@ -156,6 +155,7 @@ public class NFNet
             strReqAcceptTaskNPC = GUI.TextField(new Rect(100, 100, 100, 50), strReqAcceptTaskNPC);
             strReqAcceptTaskID = GUI.TextField(new Rect(200, 100, 100, 50), strReqAcceptTaskID);
 
+            ////////////////////////////////////////////////////////////////////////////////////////////////
 
             if (GUI.Button(new Rect(0, 150, 100, 50), "交任务"))
             {
@@ -164,6 +164,7 @@ public class NFNet
             strReqAcceptTaskNPC = GUI.TextField(new Rect(100, 150, 100, 50), strReqAcceptTaskNPC);
             strReqAcceptTaskID = GUI.TextField(new Rect(200, 150, 100, 50), strReqAcceptTaskID);
 
+            ////////////////////////////////////////////////////////////////////////////////////////////////
 
             if (GUI.Button(new Rect(0, 200, 100, 50), "杀怪"))
             {
@@ -172,13 +173,15 @@ public class NFNet
             strReqKillID = GUI.TextField(new Rect(100, 200, 100, 50), strReqKillID);
             strReqKillNPCID = GUI.TextField(new Rect(200, 200, 100, 50), strReqKillNPCID);
 
+            ////////////////////////////////////////////////////////////////////////////////////////////////
 
-            if (GUI.Button(new Rect(0, 250, 100, 50), "结算"))
+            if (GUI.Button(new Rect(0, 250, 100, 50), "结算副本"))
             {
                 sendLogic.RequirePullDownCustom(nSeleroleID, int.Parse(strPullCustom));
             }
             strPullCustom = GUI.TextField(new Rect(100, 250, 100, 50), strPullCustom);
 
+            ////////////////////////////////////////////////////////////////////////////////////////////////
 
             if (GUI.Button(new Rect(0, 300, 100, 50), "拾取"))
             {
@@ -188,7 +191,7 @@ public class NFNet
             strPickUpNPCID = GUI.TextField(new Rect(200, 300, 100, 50), strPickUpNPCID);
             strPickUpRow = GUI.TextField(new Rect(300, 300, 100, 50), strPickUpRow);
 
-
+            ////////////////////////////////////////////////////////////////////////////////////////////////
 
             if (GUI.Button(new Rect(0, 350, 100, 50), "设置属性"))
             {
@@ -197,18 +200,25 @@ public class NFNet
             strReqSetProperty = GUI.TextField(new Rect(100, 350, 100, 50), strReqSetProperty);
             strReqPropertyValue = GUI.TextField(new Rect(200, 350, 100, 50), strReqPropertyValue);
 
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+
             if (GUI.Button(new Rect(0, 400, 100, 50), "添加道具"))
             {
-                sendLogic.RequireItem(nSeleroleID, strReqAddItem);
+                sendLogic.RequireItem(nSeleroleID, strReqAddItem, uint.Parse(strAddCount));
             }
             strReqAddItem = GUI.TextField(new Rect(100, 400, 100, 50), strReqAddItem);
-         
-            if (GUI.Button(new Rect(0, 450, 100, 50), "换装"))
+            strAddCount = GUI.TextField(new Rect(200, 400, 100, 50), strAddCount);
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+
+            if (GUI.Button(new Rect(0, 450, 100, 50), "切换Row"))
             {
-                sendLogic.RequireItem(nSeleroleID, strReqAddItem);
+                sendLogic.RequireSwapEquip(nSeleroleID, uint.Parse(strSwapOrigin), uint.Parse(strSwapTarget));
             }
             strSwapOrigin = GUI.TextField(new Rect(100, 450, 100, 50), strSwapOrigin);
             strSwapTarget = GUI.TextField(new Rect(200, 450, 100, 50), strSwapTarget);
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
 
             if (GUI.Button(new Rect(0, 500, 100, 50), "聊天"))
             {
@@ -218,12 +228,6 @@ public class NFNet
             strType = GUI.TextField(new Rect(200, 500, 100, 50), strType);
             strChatData = GUI.TextField(new Rect(300, 500, 100, 50), strChatData);
 
-            if (GUI.Button(new Rect(0, 550, 100, 50), "弩炮升级"))
-            {
-                sendLogic.RequireOnagerUpLevel(nSeleroleID, strOnagerName, int.Parse(strOnagerLevel));
-            }
-            strOnagerName = GUI.TextField(new Rect(100, 550, 100, 50), strOnagerName);
-            strOnagerLevel = GUI.TextField(new Rect(200, 550, 100, 50), strOnagerLevel);
 
             GUI.EndScrollView();
         }
