@@ -263,7 +263,7 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
                 pStaticConfigPropertyInfo->GetPrivate(),
                 pStaticConfigPropertyInfo->GetSave(),
                 pStaticConfigPropertyInfo->GetIndex(),
-                pStaticConfigPropertyInfo->GetScriptFunction());
+                pStaticConfigPropertyInfo->GetRelationValue());
 
             //通用回调，方便NET同步
             PROPERTY_EVENT_FUNCTOR functor = boost::bind(&NFCKernelModule::OnPropertyCommonEvent, this, _1, _2, _3, _4, _5);

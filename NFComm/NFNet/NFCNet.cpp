@@ -16,14 +16,14 @@
 
 void NFCNet::time_cb(evutil_socket_t fd, short _event, void *argc)
 {
-    NetObject* pObject = (NetObject*)argc;
-    if (pObject && pObject->GetNet())
-    {
-        NFCNet* pNet = (NFCNet*)pObject->GetNet();
-        pNet->HeartPack();
-
-        evtimer_add(pNet->ev, &(pNet->tv));
-    }
+//     NetObject* pObject = (NetObject*)argc;
+//     if (pObject && pObject->GetNet())
+//     {
+//         NFCNet* pNet = (NFCNet*)pObject->GetNet();
+//         pNet->HeartPack();
+// 
+//         evtimer_add(pNet->ev, &(pNet->tv));
+//     }
 
 }
 

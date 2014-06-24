@@ -40,7 +40,7 @@ public:
     virtual const bool GetPublic() const;
     virtual const bool GetPrivate() const;
     virtual const int GetIndex() const;
-    virtual const std::string& GetScriptFunction() const;
+    virtual const std::string& GetRelationValue() const;
 
     virtual void SetSave(bool bSave);
     virtual void SetPublic(bool bPublic);

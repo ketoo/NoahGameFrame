@@ -115,7 +115,7 @@ const int NFCProperty::GetIndex() const
     return mnIndex;
 };
 
-const std::string& NFCProperty::GetScriptFunction() const
+const std::string& NFCProperty::GetRelationValue() const
 {
     return NULL_STR;//msScriptFunction;
 }
