@@ -1,36 +1,36 @@
 <!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
 <XML>
 	<Propertys>
-		<Property Id="ID" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="道具ID"/>
-		<Property Id="ItemType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="物品类别EGameItemType"/>
-		<Property Id="ItemSubType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="物品子类别EGameEquipType"/>
-		<Property Id="Level" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="等级限制"/>
-		<Property Id="Job" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="职业限制,用分号隔开"/>
-		<Property Id="Quality" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="物品品质"/>
-		<Property Id="Bound" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="绑定属性"/>
-		<Property Id="ShowName" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="装备名字字符串索引"/>
-		<Property Id="Desc" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="装备描述字符串索引"/>
-		<Property Id="EffectProperty" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="影响属性ViewObjectCommProperty内部填写字符串，分号隔开"/>
-		<Property Id="EffectValue" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="影响的属性值，分号给开，数量与影响属性必一样多"/>
-		<Property Id="EffectData" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="属性集"/>
-		<Property Id="ActiveEffectData" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="一些恢复属性数值集"/>
-		<Property Id="ActiveEffectDataPercent" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="一些恢复属性百分比集"/>
-		<Property Id="Icon" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="ICON"/>
-		<Property Id="Atlas" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="图集"/>
-		<Property Id="GetItemList" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="使用后获得的物品"/>
-		<Property Id="GetBuffList" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="使用后获得的BUFF"/>
-		<Property Id="GetSkill" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="使用时触发使用的技能"/>
-		<Property Id="CoolDownTime" Type="float" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="使用冷却CD"/>
-		<Property Id="OverlayCount" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="叠加数量"/>
-		<Property Id="PrefabPath" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="主模型预设路径"/>
-		<Property Id="PerformanceEffect" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="使用时的特效"/>
-		<Property Id="PerformanceSound" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="物品使用时声音"/>
-		<Property Id="ExpiredType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="过期类型EGameItemExpiredType"/>
-		<Property Id="BuyPrice" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="商店买价格"/>
-		<Property Id="SalePrice" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="卖商店价格"/>
-		<Property Id="Script" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="物品脚本文件"/>
-		<Property Id="DurationType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="事件限制类型"/>
-		<Property Id="Duration" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="限制时间"/>
+		<Property Id="ID" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="道具ID"/>
+		<Property Id="ItemType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="物品类别EGameItemType"/>
+		<Property Id="ItemSubType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="物品子类别EGameEquipType"/>
+		<Property Id="Level" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="等级限制"/>
+		<Property Id="Job" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="职业限制,用分号隔开"/>
+		<Property Id="Quality" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="物品品质"/>
+		<Property Id="Bound" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="绑定属性"/>
+		<Property Id="ShowName" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="装备名字字符串索引"/>
+		<Property Id="Desc" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="装备描述字符串索引"/>
+		<Property Id="EffectProperty" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="影响属性ViewObjectCommProperty内部填写字符串，分号隔开"/>
+		<Property Id="EffectValue" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="影响的属性值，分号给开，数量与影响属性必一样多"/>
+		<Property Id="EffectData" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="属性集"/>
+		<Property Id="ActiveEffectData" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="一些恢复属性数值集"/>
+		<Property Id="ActiveEffectDataPercent" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="一些恢复属性百分比集"/>
+		<Property Id="Icon" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ICON"/>
+		<Property Id="Atlas" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="图集"/>
+		<Property Id="GetItemList" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="使用后获得的物品"/>
+		<Property Id="GetBuffList" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="使用后获得的BUFF"/>
+		<Property Id="GetSkill" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="使用时触发使用的技能"/>
+		<Property Id="CoolDownTime" Type="float" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="使用冷却CD"/>
+		<Property Id="OverlayCount" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="叠加数量"/>
+		<Property Id="PrefabPath" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="主模型预设路径"/>
+		<Property Id="PerformanceEffect" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="使用时的特效"/>
+		<Property Id="PerformanceSound" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="物品使用时声音"/>
+		<Property Id="ExpiredType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="过期类型EGameItemExpiredType"/>
+		<Property Id="BuyPrice" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="商店买价格"/>
+		<Property Id="SalePrice" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="卖商店价格"/>
+		<Property Id="Script" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="物品脚本文件"/>
+		<Property Id="DurationType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="事件限制类型"/>
+		<Property Id="Duration" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="限制时间"/>
 	</Propertys>
 	<Records>
 	</Records>
