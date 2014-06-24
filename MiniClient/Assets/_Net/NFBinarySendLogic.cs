@@ -35,7 +35,6 @@ class StructureTransform
 
     public static bool SetEndian(bool bIsBig)
     {
-
         bBig = bIsBig;
         return bBig;
     }
@@ -200,9 +199,9 @@ public class NFBinarySendLogic
         Serializer.Serialize<NFMsg.MsgBase>(body, xData);
 
         MsgHead head = new MsgHead();
-        head.unMsgID = (UInt32)unMsgID;
+        head.unMsgID = (UInt16)unMsgID;
         head.unDataLen = (UInt32)body.Length + (UInt32)ConstDefine.NF_PACKET_HEAD_SIZE;
-
+        
         byte[] bodyByte = body.ToArray();
         byte[] headByte = StructureTransform.StructureToByteArrayEndian(head);
 
@@ -268,12 +267,12 @@ public class NFBinarySendLogic
 
     }
 
-    public void RequireDelChar( UInt32 charID)
+    public void RequireDelChar(Int64 charID)
     {
 
     }
 
-    public void RequireEnterGameServer( Int32 iServerID, UInt32 charID)
+    public void RequireEnterGameServer(Int32 iServerID, Int64 charID)
     {
 
 
@@ -285,71 +284,71 @@ public class NFBinarySendLogic
     }
 
     //有可能是他副本的NPC移动,因此增加64对象ID
-    public void RequireMove( UInt32 charID, Int64 objectID, float fX, float fZ)
+    public void RequireMove(Int64 charID, Int64 objectID, float fX, float fZ)
     {
 
 
     }
 
     //有可能是他副本的NPC移动,因此增加64对象ID
-    public void RequireSkill( UInt32 charID, string strKillID, Int64 nTargetID)
+    public void RequireSkill(Int64 charID, string strKillID, Int64 nTargetID)
     {
 
 
     }
 
-    public void RequireItem( UInt32 charID, string strItem)
+    public void RequireItem(Int64 charID, string strItem, uint nCount)
     {
 
 
     }
 
-    public void RequireChat( UInt32 charID, UInt32 targetID, int nType, string strData)
+    public void RequireChat(Int64 charID, UInt32 targetID, int nType, string strData)
     {
 
 
     }
 
-    public void RequireSwapEquip( UInt32 charID, int nOriginRow, int nTargetRow)
+    public void RequireSwapEquip(Int64 charID, uint nOriginRow, uint nTargetRow)
     {
 
 
     }
 
-    public void RequireSwapScene( UInt32 charID, Int32 nTransferType, UInt32 nSceneID, int nLineIndex)
+    public void RequireSwapScene(Int64 charID, Int32 nTransferType, UInt32 nSceneID, int nLineIndex)
     {
     }
 
-    public void RequireProperty( UInt32 charID, string strPropertyName, int nValue)
-    {
-
-    }
-
-    public void RequireAcceptTask( UInt32 charID, Int64 nTargetID, string strTaskID)
+    public void RequireProperty(Int64 charID, string strPropertyName, int nValue)
     {
 
     }
 
-    public void RequireCompeleteTask( UInt32 charID, Int64 nTargetID, string strTaskID)
+    public void RequireAcceptTask(Int64 charID, Int64 nTargetID, string strTaskID)
     {
 
     }
 
-    public void RequirePullDownCustom( UInt32 charID, int nResult)
+    public void RequireCompeleteTask(Int64 charID, Int64 nTargetID, string strTaskID)
     {
 
     }
 
-    public void RequirePickUpItem( UInt32 charID, string strItemID, Int64 nNPCID, int nRow)
-    {
-    }
-
-    public void ReqProduceItem( UInt32 charID, string strItemID)
+    public void RequirePullDownCustom(Int64 charID, int nResult)
     {
 
     }
 
-    public void ReqDestroyItem( UInt32 charID, Int64 nID, Int32 nRow)
+    public void RequirePickUpItem(Int64 charID, string strItemID, Int64 nNPCID, int nRow)
+    {
+    }
+
+    public void ReqProduceItem(Int64 charID, string strItemID)
+    {
+
+    }
+
+    public void ReqDestroyItem(Int64 charID, Int64 nID, Int32 nRow)
     {
 
     }

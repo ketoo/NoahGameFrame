@@ -66,6 +66,7 @@ public class NFStart : MonoBehaviour
     public string strReqPropertyValue = "value";
 
     public string strReqAddItem = "additem";
+    public string strReqAddCount = "count";
 
     public string strSwapOrigin = "swaporigin";
     public string strSwapTarget = "target";
@@ -323,6 +324,8 @@ public class NFStart : MonoBehaviour
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     void Do_DrawWaitingLoginSingle(int windowId)
     {
+        
+
         int height = 50;
         int nOffest = 0;
 
@@ -373,24 +376,36 @@ public class NFStart : MonoBehaviour
 
 
             ////////////////////
-            //登录的结果
-            //             switch (netFocus.mPlayerState)
-            //             {
-            //                 case NFNet.PLAYER_STATE.E_WAITING_PLAYER_SELECTSERVER:
-            //                     {
-            //                         //得到了服务器列表
-            //                         netFocus.mPlayerState = NFNet.PLAYER_STATE.E_WAITING_PLAYER_SELECTSERVER;
-            //                     }
-            //                     break;
-            //                 default:
-            //                     break;
-            // 
-            //             }
-            //判断大小端，自动匹配
-            //                 if (GUI.Button(new Rect(450, 0, 150, 50), bBig.ToString()))
-            //                 {
-            //                     bBig = StructureTransform.SetEndian(!bBig);
-            //                 }
+//             string strState = netFocus.strLoginAccount + " 连接中...";
+//             if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_PLAYER_LOGINING)
+//             {
+//                 strState = netFocus.strLoginAccount + " 登录中...";
+//             }
+//             else if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_HAS_PLAYER_LOGIN)
+//             {
+//                 strState = netFocus.strLoginAccount + " 登录成功";
+//             }
+//             else if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_HAS_PLAYER_SELECTSERVER)
+//             {
+//                 strState = netFocus.strLoginAccount + " 获取服务器列表成功";
+//                 //展示服务器，选择服务器后自动创建角色
+//             }
+//             else if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_HAS_PLAYER_ROLELIST)
+//             {
+//                 strState = netFocus.strLoginAccount + " 获取角色列表成功";
+//                 //展示自动创建了的角色，提供进入游戏按钮
+//                 netFocus.nServerID = mConfig.GetServerID();
+//             }
+//             else if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_DISCOUNT)
+//             {
+//                 strState = netFocus.strLoginAccount + " 已掉线,正自动重连...";
+//                 netFocus.StartConnect(strTargetIP, nTargetPort);
+//             }
+//             else if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_PLAYER_GAMEING)
+//             {
+//                 strState = netFocus.strLoginAccount + " 已进入游戏。";
+//             }
+
         }
     }
 
@@ -756,7 +771,7 @@ public class NFStart : MonoBehaviour
         strReqKillNPCID = GUI.TextField(new Rect(200, 100, 100, 50), strReqKillNPCID);
 
 
-        if (GUI.Button(new Rect(0, 150, 100, 50), "结算"))
+        if (GUI.Button(new Rect(0, 150, 100, 50), "结算副本"))
         {
             for (int i = 0; i < netList.Count; ++i)
             {
@@ -777,6 +792,7 @@ public class NFStart : MonoBehaviour
                 rbNet.sendLogic.RequireProperty(rbNet.nSeleroleID, strReqSetProperty, int.Parse(strReqPropertyValue));
             }
         }
+
         strReqSetProperty = GUI.TextField(new Rect(100, 200, 100, 50), strReqSetProperty);
         strReqPropertyValue = GUI.TextField(new Rect(200, 200, 100, 50), strReqPropertyValue);
 
@@ -786,14 +802,14 @@ public class NFStart : MonoBehaviour
             {
                 NFNet rbNet = (NFNet)netList[i];
                 //添加道具
-                rbNet.sendLogic.RequireItem(rbNet.nSeleroleID, strReqAddItem);
+                rbNet.sendLogic.RequireItem(rbNet.nSeleroleID, strReqAddItem, uint.Parse(strReqAddCount));
             }
         }
         strReqAddItem = GUI.TextField(new Rect(100, 250, 100, 50), strReqAddItem);
-
+        strReqAddCount = GUI.TextField(new Rect(200, 250, 100, 50), strReqAddCount);
+        
 
         //聊天
-
         if (GUI.Button(new Rect(0, 300, 100, 50), "聊天"))
         {
             for (int i = 0; i < netList.Count; ++i)

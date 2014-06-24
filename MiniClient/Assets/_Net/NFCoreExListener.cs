@@ -78,7 +78,7 @@ namespace NFTCPClient
 
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_LOGIN, EGMI_ACK_LOGIN);
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_WORLS_LIST, EGMI_ACK_WORLS_LIST);
-            
+            mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_EVENT_RESULT, EGMI_EVENT_RESULT);
 //             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.MGPT_SIGNATURE_PASS, MGPT_SIGNATURE_PASS);
 //             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.MGPT_LC_RLT_SERVER_LIST, MGPT_LC_RLT_SERVER_LIST);
 //             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.MGPT_LC_RLT_CHAR_LIST, MGPT_LC_RLT_CHAR_LIST);
@@ -108,13 +108,23 @@ namespace NFTCPClient
 			
 		}
 
-        
+        private void EGMI_EVENT_RESULT(MsgHead head, MemoryStream stream)
+        {
+            //OnResultMsg
+            NFMsg.AckEventResult xResultCode = new NFMsg.AckEventResult();
+            xResultCode = Serializer.Deserialize<NFMsg.AckEventResult>(stream);
+            NFMsg.EGameEventCode eEvent = xResultCode.event_code;
+
+            mNet.binMsgEvent.DoResultCodeDelegation(eEvent);
+        }
 
         private void EGMI_ACK_LOGIN(MsgHead head, MemoryStream stream)
         {
+            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
+            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
 
             NFMsg.AckEventResult xData = new NFMsg.AckEventResult();
-            xData = Serializer.Deserialize<NFMsg.AckEventResult>(stream);
+            xData = Serializer.Deserialize<NFMsg.AckEventResult>(new MemoryStream(xMsg.msg_data));
 
             if (EGameEventCode.EGEC_ACCOUNT_SUCCESS == xData.event_code)
             {
@@ -126,8 +136,11 @@ namespace NFTCPClient
 
         private void EGMI_ACK_WORLS_LIST(MsgHead head, MemoryStream stream)
         {
+            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
+            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+
             NFMsg.AckServerList xData = new NFMsg.AckServerList();
-            xData = Serializer.Deserialize<NFMsg.AckServerList>(stream);
+            xData = Serializer.Deserialize<NFMsg.AckServerList>(new MemoryStream(xMsg.msg_data));
 
             if (ReqServerListType.RSLT_WORLD_SERVER == xData.type)
             {
