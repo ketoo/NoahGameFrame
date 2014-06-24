@@ -90,7 +90,7 @@ int NFCLoginNet_ServerModule::OnLoginResultsEvent(const NFIDENTID& object, const
 	}
 
 	int nState = var.IntVal(0);
-	uint16_t unAddress = var.IntVal(1);
+	int unAddress = var.IntVal(1);
 	const std::string& strAccount = var.StringVal(2);
 
 	if (0 != nState)
@@ -146,7 +146,7 @@ int NFCLoginNet_ServerModule::OnLogOutResultsEvent(const NFIDENTID& object, cons
 		return -1;
 	}
 
-	uint16_t unAddress = var.IntVal(0);
+	int unAddress = var.IntVal(0);
 	const std::string& strAccount = var.StringVal(1);
 	const std::string& strPassword = var.StringVal(2);
 
@@ -217,7 +217,7 @@ int NFCLoginNet_ServerModule::GetConnectObjectByAddress(const int nAddress, NFIV
 
 
 
-void NFCLoginNet_ServerModule::OnClientConnected(const uint16_t& nAddress)
+void NFCLoginNet_ServerModule::OnClientConnected(const int nAddress)
 {
 	NFCValueList varList;
 	GetConnectObjectByAddress(nAddress, varList);
@@ -234,7 +234,7 @@ void NFCLoginNet_ServerModule::OnClientConnected(const uint16_t& nAddress)
 	}
 }
 
-void NFCLoginNet_ServerModule::OnClientDisconnect(const uint16_t& nAddress)
+void NFCLoginNet_ServerModule::OnClientDisconnect(const int nAddress)
 {
 	NFCValueList varList;
 	GetConnectObjectByAddress(nAddress, varList);
@@ -251,7 +251,7 @@ void NFCLoginNet_ServerModule::OnClientDisconnect(const uint16_t& nAddress)
 
 int NFCLoginNet_ServerModule::OnLoginProcess( const NFIPacket& msg )
 {
-	int32_t nPlayerID = 0;
+	int64_t nPlayerID = 0;
 	NFMsg::ReqAccountLogin xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
@@ -284,7 +284,7 @@ int NFCLoginNet_ServerModule::OnLoginProcess( const NFIPacket& msg )
 
 int NFCLoginNet_ServerModule::OnLogoutProcess( const NFIPacket& msg )
 {
-	int32_t nPlayerID = 0;
+	int64_t nPlayerID = 0;
 	NFMsg::ReqAccountLogout xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
@@ -311,7 +311,7 @@ int NFCLoginNet_ServerModule::OnSelectWorldProcess( const NFIPacket& msg )
 	const int nCpus = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "CpuCount");
 	const int nPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "Port");
 
-	int32_t nPlayerID = 0;
+	int64_t nPlayerID = 0;
 	NFMsg::ReqConnectWorld xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
@@ -375,7 +375,7 @@ int NFCLoginNet_ServerModule::OnRecivePack(const NFIPacket& msg )
 	return 0;
 }
 
-int NFCLoginNet_ServerModule::OnSocketEvent( const uint16_t nSockIndex, const NF_NET_EVENT eEvent )
+int NFCLoginNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -425,8 +425,8 @@ void NFCLoginNet_ServerModule::SynWorldToClient( const int nFD )
 
 	if (varObjectList.GetCount() > 0)
 	{
-		NFMsg::AckServerList xData;
-		xData.set_type(NFMsg::RSLT_WORLD_SERVER);
+        NFMsg::AckServerList xData;
+        xData.set_type(NFMsg::RSLT_WORLD_SERVER);
 
 		for (int i = 0; i < varObjectList.GetCount(); i++)
 		{
@@ -453,7 +453,7 @@ void NFCLoginNet_ServerModule::SynWorldToClient( const int nFD )
 
 int NFCLoginNet_ServerModule::OnViewWorldProcess( const NFIPacket& msg )
 {
-	int32_t nPlayerID = 0;
+	int64_t nPlayerID = 0;
 	NFMsg::ReqServerList xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{

@@ -37,7 +37,7 @@ bool NFCLevelConfigModule::AfterInit()
 
 int NFCLevelConfigModule::Load()
 {
-    rapidxml::file<> fdoc( "../../NFDataCfg/Ini/NFZoneServer/LevelUpExp.xml" );
+    rapidxml::file<> fdoc( "../../NFDataCfg/Ini/NFZoneServer/LevelExp.xml" );
     rapidxml::xml_document<>  doc;
     doc.parse<0>( fdoc.data() );
 
