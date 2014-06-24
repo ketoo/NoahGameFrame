@@ -127,7 +127,7 @@ void NFCWorldNet_ClientModule::RefreshWorldInfo()
 
 int NFCWorldNet_ClientModule::OnSelectServerProcess(const NFIPacket& msg)
 {
-	int32_t nPlayerID = 0;
+	int64_t nPlayerID = 0;
 	NFMsg::ReqConnectWorld xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
@@ -176,7 +176,7 @@ int NFCWorldNet_ClientModule::OnSelectServerResultsEvent(const NFIDENTID& object
 
 int NFCWorldNet_ClientModule::OnKickClientProcess(const NFIPacket& msg)
 {
-	int32_t nPlayerID = 0;
+	int64_t nPlayerID = 0;
 	NFMsg::ReqKickFromWorld xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
@@ -211,7 +211,7 @@ int NFCWorldNet_ClientModule::OnRecivePack( const NFIPacket& msg )
 	return 0;
 }
 
-int NFCWorldNet_ClientModule::OnSocketEvent( const uint16_t nSockIndex, const NF_NET_EVENT eEvent )
+int NFCWorldNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -234,12 +234,12 @@ int NFCWorldNet_ClientModule::OnSocketEvent( const uint16_t nSockIndex, const NF
 	return 0;
 }
 
-void NFCWorldNet_ClientModule::OnClientDisconnect( const uint16_t& nAddress )
+void NFCWorldNet_ClientModule::OnClientDisconnect( const int nAddress )
 {
 
 }
 
-void NFCWorldNet_ClientModule::OnClientConnected( const uint16_t& nAddress )
+void NFCWorldNet_ClientModule::OnClientConnected( const int nAddress )
 {
 
 }
