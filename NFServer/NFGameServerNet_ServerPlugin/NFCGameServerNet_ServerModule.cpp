@@ -96,10 +96,10 @@ int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
     switch (msg.GetMsgHead()->GetMsgID())
     {
     case NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME:
-        OnClienEnterGame(msg);
+        OnClienEnterGameProcess(msg);
         break;
     case NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GAME:
-        OnClienLeaveGame(msg);
+        OnClienLeaveGameProcess(msg);
         break;
     case NFMsg::EGameMsgID::EGMI_REQ_ROLE_LIST:
         break;
@@ -157,9 +157,9 @@ void NFCGameServerNet_ServerModule::OnClientConnected( const int nAddress )
 	}
 }
 
-void NFCGameServerNet_ServerModule::OnClienEnterGame( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& msg )
 {
-    int32_t nPlayerID = 0;	
+    int64_t nPlayerID = 0;	
     NFMsg::ReqEnterGameServer xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -188,9 +188,9 @@ void NFCGameServerNet_ServerModule::OnClienEnterGame( const NFIPacket& msg )
     m_pEventProcessModule->DoEvent(pObject->Self(), "Player", CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCValueList() );
 }
 
-void NFCGameServerNet_ServerModule::OnClienLeaveGame( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess( const NFIPacket& msg )
 {
-    int32_t nPlayerID = 0;	
+    int64_t nPlayerID = 0;	
     NFMsg::ReqLeaveGameServer xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -203,4 +203,144 @@ void NFCGameServerNet_ServerModule::OnClienLeaveGame( const NFIPacket& msg )
     }
 
     m_pKernelModule->DestroyObject(nPlayerID);
+}
+
+int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDENTID& self, const NFIValueList& argVar )
+{
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnRecordEnter( const NFIDENTID& self, const NFIValueList& argVar )
+{
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnObjectListEnter( const NFIValueList& self, const NFIValueList& argVar )
+{
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnObjectListLeave( const NFIValueList& self, const NFIValueList& argVar )
+{
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar )
+{
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar )
+{
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnClassCommonEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var )
+{
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar )
+{
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar )
+{
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::GetBroadCastObject( const NFIDENTID& self, const std::string& strPropertyName, const bool bTable, NFIValueList& valueObject )
+{
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var )
+{
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnReturnEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
+{
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnMoveEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
+{
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnUseSkillResultEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
+{
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
+{
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnChatResultEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
+{
+    return 0;
+}
+
+void NFCGameServerNet_ServerModule::OnCreateRoleGameProcess( const NFIPacket& msg )
+{
+
+}
+
+void NFCGameServerNet_ServerModule::OnDeleteRoleGameProcess( const NFIPacket& msg )
+{
+
+}
+
+void NFCGameServerNet_ServerModule::OnClienSwapSceneProcess( const NFIPacket& msg )
+{
+
+}
+
+void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
+{
+
+}
+
+void NFCGameServerNet_ServerModule::OnClienMove( const NFIPacket& msg )
+{
+
+}
+
+void NFCGameServerNet_ServerModule::OnClienCommand( const NFIPacket& msg )
+{
+
+}
+
+void NFCGameServerNet_ServerModule::OnClienAcceptTask( const NFIPacket& msg )
+{
+
+}
+
+void NFCGameServerNet_ServerModule::OnClienPushTask( const NFIPacket& msg )
+{
+
+}
+
+void NFCGameServerNet_ServerModule::OnClienPushCustom( const NFIPacket& msg )
+{
+
+}
+
+void NFCGameServerNet_ServerModule::OnClienPickItem( const NFIPacket& msg )
+{
+
+}
+
+void NFCGameServerNet_ServerModule::OnClienChatProcess( const NFIPacket& msg )
+{
+
+}
+
+void NFCGameServerNet_ServerModule::OnClienUseItem( const NFIPacket& msg )
+{
+
 }

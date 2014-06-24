@@ -93,7 +93,7 @@ int NFCPropertyConfigModule::CalculateBaseValue( const NFJobType nJob, const int
 
 void NFCPropertyConfigModule::Load()
 {
-    rapidxml::file<> fdoc( "../../NFDataCfg/Ini/NFZoneServer/InitBaseCoefficien.xml" );
+    rapidxml::file<> fdoc( "../../NFDataCfg/Ini/NFZoneServer/InitProperty.xml" );
     rapidxml::xml_document<>  doc;
     doc.parse<0>( fdoc.data() );
 
