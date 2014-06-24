@@ -3,7 +3,7 @@
 
 	</Propertys>
 	<Records>
-		<Record Id="RankList" Row="256" Col="2" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" ScriptFunction="">
+		<Record Id="RankList" Row="256" Col="2" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" RelationValue="Friend">
 			<Col Type="object" Desc = "对象ID"/>
 			<Col Type="int" Desc = "分数"/>
 		</Record>
