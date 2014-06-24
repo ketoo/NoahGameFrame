@@ -147,7 +147,7 @@ message ObjectRecordObject//个人玩家单类型属性数据，可直接发送---变化时
 
 message ObjectRecordSwap//个人玩家单类型属性数据，可直接发送---变化时
 {
-	required int64  player_id = 1;
+	required int64  	player_id = 1;
 	required bytes    	origin_record_name = 2;
 	optional bytes		target_record_name = 3;
 	required int32 		row_origin = 4;
@@ -158,9 +158,9 @@ message ObjectRecordSwap//个人玩家单类型属性数据，可直接发送---变化时
 
 message RecordAddStruct//表添加基础结构，不直接发送
 {
-	required int32 					row = 1;
+	required int32 				row = 1;
 	repeated RecordInt			int_list = 2;
-	repeated RecordFloat			float_list = 3;
+	repeated RecordFloat		float_list = 3;
 	repeated RecordString		string_list = 4;
 	repeated RecordObject		object_list = 5;
 }
@@ -183,8 +183,9 @@ message ObjectRecordRemove//个人玩家单类型属性数据，可直接发送---变化时
 ///////////////////////////////////////////////////////////////////
 message MsgBase
 {
-	required int32   player_id = 1;//内网需要，外网视情况0(通常不需要，只有在要求别人的数据时才需要)
+	required int64  player_id = 1;//内网需要，外网视情况0(通常不需要，只有在要求别人的数据时才需要)
 	required bytes  msg_data = 2;
+	repeated int64  player_fd_list = 3;
 }
 
 message ReqCommand//GM命令

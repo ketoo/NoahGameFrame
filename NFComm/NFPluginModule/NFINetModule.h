@@ -38,7 +38,7 @@ public:
     virtual void LogRecive(const char* str){};
     virtual void LogSend(const char* str){};
 
-	bool RecivePB(const NFIPacket& msg, google::protobuf::Message& xData, int32_t& nPlayer)
+	bool RecivePB(const NFIPacket& msg, google::protobuf::Message& xData, int64_t& nPlayer)
 	{
         NFMsg::MsgBase xMsg;
         if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
@@ -69,7 +69,7 @@ public:
 		return m_pNet->Execute(fLasFrametime, fStartedTime);
 	}
 
-	bool SendMsgPB(const uint16_t nMsgID, google::protobuf::Message& xData, const uint32_t nSockIndex = 0, const int32_t nPlayer = 0, bool bBroadcast = false)
+	bool SendMsgPB(const uint16_t nMsgID, google::protobuf::Message& xData, const uint32_t nSockIndex = 0, const int32_t nPlayer = 0, const std::vector<int>* pFdList = NULL, bool bBroadcast = false)
 	{
 		if (!m_pNet)
 		{
@@ -91,7 +91,15 @@ public:
 		}
 
 		//playerid主要是网关转发消息的时候做识别使用，其他使用不使用
-		xMsg.set_player_id(nPlayer);
+        xMsg.set_player_id(nPlayer);
+        if (pFdList)
+        {
+            for (int i = 0; i < pFdList->size(); ++i)
+            {
+                xMsg.add_player_fd_list((*pFdList)[i]);
+            }
+        }
+
 
 		std::string strMsg;
 		if(!xMsg.SerializeToString(&strMsg))

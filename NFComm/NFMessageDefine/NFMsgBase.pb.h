@@ -2792,12 +2792,12 @@ class MsgBase : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 player_id = 1;
+  // required int64 player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline ::google::protobuf::int32 player_id() const;
-  inline void set_player_id(::google::protobuf::int32 value);
+  inline ::google::protobuf::int64 player_id() const;
+  inline void set_player_id(::google::protobuf::int64 value);
 
   // required bytes msg_data = 2;
   inline bool has_msg_data() const;
@@ -2811,6 +2811,18 @@ class MsgBase : public ::google::protobuf::Message {
   inline ::std::string* release_msg_data();
   inline void set_allocated_msg_data(::std::string* msg_data);
 
+  // repeated int64 player_fd_list = 3;
+  inline int player_fd_list_size() const;
+  inline void clear_player_fd_list();
+  static const int kPlayerFdListFieldNumber = 3;
+  inline ::google::protobuf::int64 player_fd_list(int index) const;
+  inline void set_player_fd_list(int index, ::google::protobuf::int64 value);
+  inline void add_player_fd_list(::google::protobuf::int64 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
+      player_fd_list() const;
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
+      mutable_player_fd_list();
+
   // @@protoc_insertion_point(class_scope:NFMsg.MsgBase)
  private:
   inline void set_has_player_id();
@@ -2820,11 +2832,12 @@ class MsgBase : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::google::protobuf::int64 player_id_;
   ::std::string* msg_data_;
-  ::google::protobuf::int32 player_id_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int64 > player_fd_list_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
@@ -5420,7 +5433,7 @@ ObjectRecordRemove::mutable_remove_row() {
 
 // MsgBase
 
-// required int32 player_id = 1;
+// required int64 player_id = 1;
 inline bool MsgBase::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -5431,13 +5444,13 @@ inline void MsgBase::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void MsgBase::clear_player_id() {
-  player_id_ = 0;
+  player_id_ = GOOGLE_LONGLONG(0);
   clear_has_player_id();
 }
-inline ::google::protobuf::int32 MsgBase::player_id() const {
+inline ::google::protobuf::int64 MsgBase::player_id() const {
   return player_id_;
 }
-inline void MsgBase::set_player_id(::google::protobuf::int32 value) {
+inline void MsgBase::set_player_id(::google::protobuf::int64 value) {
   set_has_player_id();
   player_id_ = value;
 }
@@ -5510,6 +5523,31 @@ inline void MsgBase::set_allocated_msg_data(::std::string* msg_data) {
     clear_has_msg_data();
     msg_data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
+}
+
+// repeated int64 player_fd_list = 3;
+inline int MsgBase::player_fd_list_size() const {
+  return player_fd_list_.size();
+}
+inline void MsgBase::clear_player_fd_list() {
+  player_fd_list_.Clear();
+}
+inline ::google::protobuf::int64 MsgBase::player_fd_list(int index) const {
+  return player_fd_list_.Get(index);
+}
+inline void MsgBase::set_player_fd_list(int index, ::google::protobuf::int64 value) {
+  player_fd_list_.Set(index, value);
+}
+inline void MsgBase::add_player_fd_list(::google::protobuf::int64 value) {
+  player_fd_list_.Add(value);
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
+MsgBase::player_fd_list() const {
+  return player_fd_list_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
+MsgBase::mutable_player_fd_list() {
+  return &player_fd_list_;
 }
 
 // -------------------------------------------------------------------

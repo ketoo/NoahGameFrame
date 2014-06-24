@@ -35,7 +35,7 @@ bool NFCPropertyManager::RegisterCallback(const std::string& strProperty, const 
 NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, NFIProperty* pProperty)
 {
     const std::string& strProperty = pProperty->GetKey();
-    NFIProperty* pNewProperty = new NFCProperty(self, strProperty, pProperty->GetType(), pProperty->GetPublic(), pProperty->GetPrivate(), pProperty->GetSave(), pProperty->GetIndex(), pProperty->GetScriptFunction());
+    NFIProperty* pNewProperty = new NFCProperty(self, strProperty, pProperty->GetType(), pProperty->GetPublic(), pProperty->GetPrivate(), pProperty->GetSave(), pProperty->GetIndex(), pProperty->GetRelationValue());
     this->AddElement(strProperty, pNewProperty);
 
     return pNewProperty;
