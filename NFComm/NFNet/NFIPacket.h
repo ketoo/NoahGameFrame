@@ -21,6 +21,8 @@
 #else
 
 #endif
+#include <string>
+#include "boost\math\special_functions\hypot.hpp"
 
 #pragma pack(push, 1)
 
@@ -63,7 +65,7 @@ public:
         memcpy(strData + nOffset, (void*)(&nMsgID), sizeof(munMsgID));
         nOffset += sizeof(munMsgID);
 
-        uint32_t nSize = htons(munSize);
+        uint32_t nSize = htonl(munSize);
         memcpy(strData + nOffset, (void*)(&nSize), sizeof(munSize));
         nOffset += sizeof(munSize);
 
@@ -80,15 +82,14 @@ public:
         uint32_t nOffset = 0;
 
         uint16_t nMsgID = 0;
-        memcpy(&nMsgID, strData + nOffset, sizeof(nMsgID));
+        memcpy(&nMsgID, strData + nOffset, sizeof(munMsgID));
         munMsgID = ntohs(nMsgID);
         nOffset += sizeof(munMsgID);
 
         uint32_t nSize = 0;
-        memcpy(&nSize, strData + nOffset, sizeof(nSize));
-        munSize = ntohs(nSize);
+        memcpy(&nSize, strData + nOffset, sizeof(munSize));
+        munSize = ntohl(nSize);
         nOffset += sizeof(munSize);
-
 
         if (nOffset != GetHeadLength())
         {
@@ -124,6 +125,7 @@ public:
 	virtual void Construction(const NFIPacket& packet) = 0;
 	virtual const NFIMsgHead* GetMsgHead() const = 0;
 	virtual const char* GetPacketData() const = 0;
+    virtual const std::string& GetPacketString() const = 0;
     virtual const uint32_t GetPacketLen() const = 0;
     virtual const uint32_t GetDataLen() const = 0;
 	virtual const char* GetData() const = 0;

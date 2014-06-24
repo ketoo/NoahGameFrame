@@ -148,9 +148,9 @@ public:
 protected:
 
     virtual VARIANT_TYPE ComputerType(const char* pstrTypeName, NFIValueList::VarData& var);
-    virtual bool AddPropertys(rapidxml::xml_node<>* propertyRootNode, NFCLogicClass* pClass);
-    virtual bool AddRecords(rapidxml::xml_node<>* recordRootNode, NFCLogicClass* pClass);
-    virtual bool AddComponents(rapidxml::xml_node<>* recordRootNode, NFCLogicClass* pClass);
+    virtual bool AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NFCLogicClass* pClass);
+    virtual bool AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCLogicClass* pClass);
+    virtual bool AddComponents(rapidxml::xml_node<>* pRecordRootNode, NFCLogicClass* pClass);
     virtual bool AddClassInclude(const char* pstrClassFilePath, NFCLogicClass* pClass);
     virtual bool AddClass(const char* pstrClassFilePath, NFCLogicClass* pClass);
 
