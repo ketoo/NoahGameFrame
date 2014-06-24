@@ -2,16 +2,16 @@
 <XML>
 	<Propertys>
 		<!--Property Id="SceneIndex" Type="int" Public="false" Private="false" Save="false" SceneID代替-->
-		<Property Id="GameServerID" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc=""/>
-		<Property Id="SceneName" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc=""/>
-		<Property Id="SceneShowName" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc=""/>
-		<Property Id="MaxGroup" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="最大组"/>
-		<Property Id="MaxGroupPlayers" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="每组最大人数"/>
-		<Property Id="FilePath" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="文件路径"/>
-		<Property Id="RelivePos" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="复活坐标列表"/>
-		<Property Id="Width" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="场景宽度"/>
-		<Property Id="SoundList" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="场景背景音乐列表"/>
-		<Property Id="CanClone" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" ScriptFunction="" Desc="是否副本"/>
+		<Property Id="GameServerID" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc=""/>
+		<Property Id="SceneName" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc=""/>
+		<Property Id="SceneShowName" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc=""/>
+		<Property Id="MaxGroup" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="最大组"/>
+		<Property Id="MaxGroupPlayers" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="每组最大人数"/>
+		<Property Id="FilePath" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="文件路径"/>
+		<Property Id="RelivePos" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="复活坐标列表"/>
+		<Property Id="Width" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="场景宽度"/>
+		<Property Id="SoundList" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="场景背景音乐列表"/>
+		<Property Id="CanClone" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="是否副本"/>
 	
 	</Propertys>
 	<Records>
