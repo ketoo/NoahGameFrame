@@ -54,38 +54,9 @@ namespace NFTCPClient
 
                 OnDataReceived();
             }
-            else
-            {
-                object structType = new MsgHead();
-                StructureTransform.ByteArrayToStructureEndian(bytes, ref structType, 0);
-                MsgHead head = (MsgHead)structType;
-                client.net.listener.Log("-----ID SIZE---:" + head.unMsgID + "|" + head.unDataLen);
-            }
         }
 
-        static bool OnDataReceived(NFClientNet client, byte[] bytes, UInt32 bytesCount)
-        {
-            if (bytes.Length == bytesCount)
-            {
-                object structType = new MsgHead();
-                StructureTransform.ByteArrayToStructureEndian(bytes, ref structType, 0);
-                MsgHead head = (MsgHead)structType;
-
-                Int32 nBodyLen = (Int32)bytesCount - (Int32)ConstDefine.NF_PACKET_HEAD_SIZE;
-                if (nBodyLen > 0)
-                {
-                    byte[] body = new byte[nBodyLen];
-                    Array.Copy(bytes, ConstDefine.NF_PACKET_HEAD_SIZE, body, 0, nBodyLen);
-
-                    client.net.binMsgEvent.OnMessageEvent(head, body);
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public void OnDataReceived()
+        void OnDataReceived()
         {
             if (mnPacketSize >= ConstDefine.NF_PACKET_HEAD_SIZE)
             {
@@ -93,7 +64,7 @@ namespace NFTCPClient
                 byte[] headBytes = new byte[Marshal.SizeOf(structType)];
 
                 Array.Copy(mPacket, 0, headBytes, 0, Marshal.SizeOf(structType));
-                StructureTransform.ByteArrayToStructureEndian(mPacket, ref structType, 0);
+                StructureTransform.ByteArrayToStructureEndian(headBytes, ref structType, 0);
                 MsgHead head = (MsgHead)structType;
 
                 if (head.unDataLen == mnPacketSize)
@@ -126,6 +97,32 @@ namespace NFTCPClient
                     OnDataReceived();
                 }
             }
+        }
+
+        bool OnDataReceived(NFClientNet client, byte[] bytes, UInt32 bytesCount)
+        {
+            if (bytes.Length == bytesCount)
+            {
+                object structType = new MsgHead();
+                StructureTransform.ByteArrayToStructureEndian(bytes, ref structType, 0);
+                MsgHead head = (MsgHead)structType;
+
+                Int32 nBodyLen = (Int32)bytesCount - (Int32)ConstDefine.NF_PACKET_HEAD_SIZE;
+                if (nBodyLen > 0)
+                {
+                    byte[] body = new byte[nBodyLen];
+                    Array.Copy(bytes, ConstDefine.NF_PACKET_HEAD_SIZE, body, 0, nBodyLen);
+
+                    client.net.binMsgEvent.OnMessageEvent(head, body);
+                    return true;
+                }
+                else
+                {
+                    //space packet
+                }
+            }
+
+            return false;
         }
     }
 }
