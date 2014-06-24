@@ -56,6 +56,11 @@ public:
 		return this->mstrPackData.data();//include head
 	}
 
+    virtual const std::string& GetPacketString() const
+    {
+        return this->mstrPackData;
+    }
+
 	virtual const uint32_t GetPacketLen() const
 	{
 		return pHead->GetMsgLength();
