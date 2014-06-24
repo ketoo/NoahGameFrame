@@ -31,6 +31,7 @@ int NFCPacket::DeCode( const char* strData, const uint32_t unLen )
 	}
 
 	//copy包头+包体
+    mstrPackData.clear();
     mstrPackData.append(strData, pHead->GetMsgLength());
 
 	//返回使用过的量

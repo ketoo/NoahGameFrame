@@ -37,6 +37,7 @@
 #include <event2/thread.h>
 #include <event2/event_compat.h>
 #include <event2/event.h>
+#include <vector>
 
 #pragma pack(push, 1)
 
