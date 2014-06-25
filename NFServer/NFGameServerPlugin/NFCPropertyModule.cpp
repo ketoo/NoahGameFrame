@@ -448,7 +448,7 @@ int NFCPropertyModule::FullVP( const NFIDENTID& self )
 int NFCPropertyModule::RestoreVP( const NFIDENTID& self )
 {
     NFINT64 nLastOfflineTime = m_pKernelModule->QueryPropertyObject(self, "LastOfflineTime").nData64;
-    NFINT32 nOfflineTime = NFTimeEx::GetNowTime() - nLastOfflineTime;
+    NFINT64 nOfflineTime = NFTimeEx::GetNowTime() - nLastOfflineTime;
     int nValue = (nOfflineTime / (15 * 60.0f)) * m_pKernelModule->QueryPropertyInt(self, "VPREGEN");
     AddVP(self, nValue);
     return 0;
@@ -701,13 +701,11 @@ int NFCPropertyModule::ConsumeHonour( const NFIDENTID& self, int nValue )
 int NFCPropertyModule::ConsumeYBP( const NFIDENTID& self, int nValue )
 {
     NFIDENTID ident = m_pKernelModule->QueryPropertyObject( self, "YBP" );
-    int nCurValue = ident.nData64;
+    NFINT64 nCurValue = ident.nData64;
     nCurValue -= nValue;
     if (nCurValue >= 0)
     {
-        ident.nData64 = nCurValue;
-        m_pKernelModule->SetPropertyObject( self, "YBP", ident);
-
+        m_pKernelModule->SetPropertyObject( self, "YBP", NFIDENTID(nCurValue));
         return nValue;
     }    
 
