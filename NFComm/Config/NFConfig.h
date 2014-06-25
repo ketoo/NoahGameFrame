@@ -31,7 +31,7 @@ public:
 
     const int Count()
     {
-        return map.size();
+        return static_cast<int>(map.size());
     }
 
     // The actual map used to store key/value pairs

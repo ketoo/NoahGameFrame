@@ -164,6 +164,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCL
             NFCValueList recordKey;
             NFCValueList recordDesc;
             NFCValueList recordTag;
+            NFCValueList recordRelation;
             for (rapidxml::xml_node<>* recordColNode = pRecordNode->first_node(); recordColNode;  recordColNode = recordColNode->next_sibling())
             {
                 //const char* pstrColName = recordColNode->first_attribute( "Id" )->value();
@@ -201,6 +202,16 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCL
                     recordTag.AddString("");
                 }
 
+                if (recordColNode->first_attribute("RelateRecord") != NULL)
+                {
+                    std::string strRelationRecord = recordColNode->first_attribute("RelatedRecord")->value();
+                    recordRelation.AddString(strRelationRecord.c_str());
+                }
+                else
+                {
+                    recordRelation.AddString("");
+                }
+
                 //////////////////////////////////////////////////////////////////////////
                 if (recordColNode->first_attribute("Desc"))
                 {
@@ -215,7 +226,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCL
                 //////////////////////////////////////////////////////////////////////////
             }
 
-            pClass->GetRecordManager()->AddRecord(0, pstrRecordName, recordVar, recordKey, recordDesc, recordTag, atoi(pstrRow), bPublic, bPrivate, bSave, nIndex);
+            pClass->GetRecordManager()->AddRecord(0, pstrRecordName, recordVar, recordKey, recordDesc, recordTag, recordRelation, atoi(pstrRow), bPublic, bPrivate, bSave, nIndex);
         }
     }
 
