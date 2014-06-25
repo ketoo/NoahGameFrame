@@ -246,9 +246,9 @@ bool NFCValueList::Split( const char* str, const char* strSplit )
 	std::string temstrSplit(strSplit);
 	std::string::size_type pos;
 	strData += temstrSplit;
-	int size = strData.length();
+	std::string::size_type size = strData.length();
 
-	for (int i = 0; i < size; i++)
+	for (std::string::size_type i = 0; i < size; i++)
 	{
 		pos = int(strData.find(temstrSplit, i));
 		if (pos < size)
