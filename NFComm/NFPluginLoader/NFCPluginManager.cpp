@@ -53,7 +53,8 @@ bool NFCPluginManager::LoadPlugin()
         const char* strPluginName = pPluginNode->first_attribute( "Name" )->value();
         const char* strMain = pPluginNode->first_attribute( "Main" )->value();
 
-        bool bMain = (bool)boost::lexical_cast<int>( strMain );
+        int nMain = boost::lexical_cast<int>( strMain );
+        bool bMain = (nMain > 0 ? true : false);
         if (bMain)
         {
             //主模块只能运行在主actor上只
