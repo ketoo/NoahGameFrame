@@ -21,12 +21,13 @@ NFCRecord::NFCRecord()
 
 }
 
-NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& valueList, const NFIValueList& keyList, const NFIValueList& descList, const NFIValueList& tagList, int nMaxRow, bool bPublic,  bool bPrivate,  bool bSave, int nIndex)
+NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& valueList, const NFIValueList& keyList, const NFIValueList& descList, const NFIValueList& tagList, const NFIValueList& relateRecordList, int nMaxRow, bool bPublic,  bool bPrivate,  bool bSave, int nIndex)
 {
     mVarRecordType = valueList;
     mVarRecordDesc = descList;
     mVarRecordKey = keyList;
     mVarRecordTag = tagList;
+    mVarRecordRelation = relateRecordList;
 
     mSelf = self;
     mbSave = bSave;
@@ -64,6 +65,32 @@ NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, co
         if (!mVarRecordTag.StringVal(i).empty())
         {
             mmTag[mVarRecordTag.StringVal(i)] = i;
+        }
+    }
+
+    for (int i = 0; i < mVarRecordRelation.GetCount(); ++i)
+    {
+        const std::string& strRelationData = mVarRecordRelation.StringVal(i);
+        if (!strRelationData.empty())
+        {
+            continue;
+        }
+
+        NFCValueList relationDataList;
+        relationDataList.Split(strRelationData.c_str(), ";");
+        for (int j = 0; j < relationDataList.GetCount(); ++j)
+        {
+            const std::string& strSingleRelation = relationDataList.StringVal(j);
+            if (strSingleRelation.empty())
+            {
+                continue;
+            }
+
+            NFCValueList singleRelationList;
+            singleRelationList.Split(strRelationData.c_str(), ",");
+            const std::string& strRecord = singleRelationList.StringVal(0);
+            const std::string& strRecordTag =singleRelationList.StringVal(1);
+            mmRelationRecord.insert(RelationRecordMap::value_type(RelationRecordColType(i, strRecord), strRecordTag));
         }
     }
 }
@@ -709,7 +736,7 @@ int NFCRecord::FindInt( const std::string& strColTag, const int value, NFIValueL
     }
 
     int nCol = GetCol(strColTag);
-    return FindFloat(nCol, value, varResult);
+    return FindInt(nCol, value, varResult);
 }
 
 int NFCRecord::FindFloat(const int nCol, const float value, NFIValueList& varResult)
@@ -1034,6 +1061,11 @@ const NFIValueList& NFCRecord::GetTag() const
     return mVarRecordTag;
 }
 
+const NFIValueList& NFCRecord::GetRelatedRecord() const
+{
+    return mVarRecordRelation;
+}
+
 const NFIRecord::TRECORDVEC& NFCRecord::GetRecordVec() const
 {
     return mtRecordVec;
@@ -1062,7 +1094,7 @@ bool NFCRecord::IsKey( const int nRow ) const
 
     if (ValidRow(nRow))
     {
-        return mVarRecordKey.IntVal(nRow);
+        return (mVarRecordKey.IntVal(nRow) > 0);
         //return (m_pRecordKeyState[nRow] > 0);
     }
 
@@ -1116,4 +1148,20 @@ int NFCRecord::GetCol( const std::string& strTag ) const
     return -1;
 }
 
+bool NFCRecord::GetRelatedTag(const std::string& strSrcTag, const std::string& strRelatedRecord, OUT std::string& strRelatedTag)
+{
+    int nCol = GetCol(strSrcTag);
+    if (nCol == -1)
+    {
+        return false;
+    }
 
+    RelationRecordMap::iterator iter = mmRelationRecord.find(RelationRecordColType(nCol, strRelatedTag));
+    if (iter != mmRelationRecord.end())
+    {
+        strRelatedTag = iter->second;
+        return true;
+    }
+
+    return false;
+}
