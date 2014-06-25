@@ -131,7 +131,7 @@ int NFCSceneProcessModule::OnContainerObjectEvent( const NFIDENTID& self, const 
                         if ( NULL == pResourceMap )
                         {
                             pResourceMap = new SceneGroupResource();
-                            pResourceMap->bCanClone = ( bool )nCanClone;
+                            pResourceMap->bCanClone = (nCanClone > 0 ? true : false);
                             mtSceneResourceConfig.AddElement( nSceneID, pResourceMap );
                         }
 
