@@ -1,9 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
@@ -16,21 +24,38 @@
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v100</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v100</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
@@ -40,72 +65,100 @@
   <PropertyGroup>
     <_ProjectFileVersion>11.0.61030.0</_ProjectFileVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(NFBIN_COMM)\$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>$(ProjectName)_d</TargetName>
-    <EmbedManifest>false</EmbedManifest>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(NFBIN_COMM)\$(Configuration)\</OutDir>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)\_Out\Comm\$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)_d</TargetName>
+    <IntDir>$(SolutionDir)\Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <EmbedManifest>false</EmbedManifest>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\_Out\Comm\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\src\windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBGLOG_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <BrowseInformation>true</BrowseInformation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\src\windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_X64;_DEBUG;_WINDOWS;LIBGLOG_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
     <PostBuildEvent>
-      <Command>copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFLoginServer\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFLoginServer\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFMasterServer\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFMasterServer\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFDataBaseServer\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFDataBaseServer\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFProxyServer1\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer1\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFProxyServer2\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer2\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFProxyServer3\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer3\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFProxyServer4\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer4\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFProxyServer5\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer5\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFGameServer1\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer1\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFGameServer2\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer2\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFGameServer3\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer3\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFGameServer4\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer4\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.dll $(NFBIN_SERVER)\$(Configuration)\NFGameServer5\$(ProjectName)_d.dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer5\$(ProjectName)_d.pdb</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>..\..\src\windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBGLOG_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\src\windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_X64;NDEBUG;_WINDOWS;LIBGLOG_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
@@ -120,34 +173,8 @@ copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Co
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).dll $(NFBIN_SERVER)\$(Configuration)\NFLoginServer\$(ProjectName).dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFLoginServer\$(ProjectName).pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).dll $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName).dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName).pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).dll $(NFBIN_SERVER)\$(Configuration)\NFMasterServer\$(ProjectName).dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFMasterServer\$(ProjectName).pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).dll $(NFBIN_SERVER)\$(Configuration)\NFDataBaseServer\$(ProjectName).dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFDataBaseServer\$(ProjectName).pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).dll $(NFBIN_SERVER)\$(Configuration)\NFProxyServer1\$(ProjectName).dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer1\$(ProjectName).pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).dll $(NFBIN_SERVER)\$(Configuration)\NFProxyServer2\$(ProjectName).dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer2\$(ProjectName).pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).dll $(NFBIN_SERVER)\$(Configuration)\NFProxyServer3\$(ProjectName).dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer3\$(ProjectName).pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).dll $(NFBIN_SERVER)\$(Configuration)\NFProxyServer4\$(ProjectName).dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer4\$(ProjectName).pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).dll $(NFBIN_SERVER)\$(Configuration)\NFProxyServer5\$(ProjectName).dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer5\$(ProjectName).pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).dll $(NFBIN_SERVER)\$(Configuration)\NFGameServer1\$(ProjectName).dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer1\$(ProjectName).pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).dll $(NFBIN_SERVER)\$(Configuration)\NFGameServer2\$(ProjectName).dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer2\$(ProjectName).pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).dll $(NFBIN_SERVER)\$(Configuration)\NFGameServer3\$(ProjectName).dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer3\$(ProjectName).pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).dll $(NFBIN_SERVER)\$(Configuration)\NFGameServer4\$(ProjectName).dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer4\$(ProjectName).pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).dll $(NFBIN_SERVER)\$(Configuration)\NFGameServer5\$(ProjectName).dll
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer5\$(ProjectName).pdb</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
