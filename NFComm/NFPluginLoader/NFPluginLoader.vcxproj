@@ -42,12 +42,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>$(ProjectName)_d</TargetName>
-    <OutDir>$(NFBIN_COMM)\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\_Out\Comm\$(Configuration)\</OutDir>
     <EmbedManifest>false</EmbedManifest>
+    <IntDir>$(SolutionDir)\Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(NFBIN_COMM)\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\_Out\Comm\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -55,36 +57,36 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_X64;_DEBUG;_CONSOLE;NF_DYNAMIC_PLUGIN;THERON_USE_STD_THREADS;GOOGLE_GLOG_DLL_DECL=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(NF_HOME);$(NF_DEP);$(BOOST_HOME);$(GLOG_HOME);$(THERON_HOME)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\boost_1_53_0\;$(SolutionDir)\Dependencies\glog-0.3.3\src\windows\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\External\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
-      <AdditionalLibraryDirectories>$(NFBIN_COMM)\$(Configuration);$(APP_DEPLIB)\$(Configuration);$(BOOST_LIB)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\_Out\Comm\$(Configuration)\;$(SolutionDir)\Dependencies\lib\$(Configuration)\;$(SolutionDir)\Dependencies\boost_1_53_0\stage\lib\x64\vs11_0\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>libcpmtd.lib;libcmtd.lib</IgnoreSpecificDefaultLibraries>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFLoginServer\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFLoginServer\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFMasterServer\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFMasterServer\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFProxyServer1\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer1\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFGameServer1\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer1\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\Tutorial1\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\Tutorial1\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\Tutorial2\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\Tutorial2\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\Tutorial3\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\Tutorial3\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\Tutorial4\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\Tutorial4\$(ProjectName)_d.pdb</Command>
+      <Command>copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(SolutionDir)\_Out\Server\$(Configuration)\NFLoginServer\$(ProjectName)_d.exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFLoginServer\$(ProjectName)_d.pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(SolutionDir)\_Out\Server\$(Configuration)\NFWorldServer\$(ProjectName)_d.exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFWorldServer\$(ProjectName)_d.pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(SolutionDir)\_Out\Server\$(Configuration)\NFMasterServer\$(ProjectName)_d.exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFMasterServer\$(ProjectName)_d.pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(SolutionDir)\_Out\Server\$(Configuration)\NFProxyServer1\$(ProjectName)_d.exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFProxyServer1\$(ProjectName)_d.pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(SolutionDir)\_Out\Server\$(Configuration)\NFGameServer1\$(ProjectName)_d.exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFGameServer1\$(ProjectName)_d.pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial1\$(ProjectName)_d.exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial1\$(ProjectName)_d.pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial2\$(ProjectName)_d.exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial2\$(ProjectName)_d.pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName)_d.exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName)_d.pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName)_d.exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName)_d.pdb</Command>
     </PostBuildEvent>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -98,7 +100,7 @@ copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Co
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_X64;NDEBUG;_CONSOLE;NF_DYNAMIC_PLUGIN;_WIN64;THERON_USE_STD_THREADS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(NF_HOME);$(BOOST_HOME);$(THERON_HOME)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\boost_1_53_0\;$(SolutionDir)\Dependencies\glog-0.3.3\src\windows\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\External\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ExceptionHandling>Sync</ExceptionHandling>
     </ClCompile>
     <Link>
@@ -106,19 +108,27 @@ copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Co
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(NFBIN_COMM)\$(Configuration);$(APP_DEPLIB)\$(Configuration);$(BOOST_LIB)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\_Out\Comm\$(Configuration)\;$(SolutionDir)\Dependencies\lib\$(Configuration)\;$(SolutionDir)\Dependencies\boost_1_53_0\stage\lib\x64\vs11_0\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFLoginServer\$(ProjectName).exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFLoginServer\$(ProjectName).pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName).exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName).pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFMasterServer\$(ProjectName).exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFMasterServer\$(ProjectName).pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFProxyServer1\$(ProjectName).exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer1\$(ProjectName).pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFGameServer1\$(ProjectName).exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer1\$(ProjectName).pdb</Command>
+      <Command>copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionDir)\_Out\Server\$(Configuration)\NFLoginServer\$(ProjectName).exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFLoginServer\$(ProjectName).pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionDir)\_Out\Server\$(Configuration)\NFWorldServer\$(ProjectName).exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFWorldServer\$(ProjectName).pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionDir)\_Out\Server\$(Configuration)\NFMasterServer\$(ProjectName).exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFMasterServer\$(ProjectName).pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionDir)\_Out\Server\$(Configuration)\NFProxyServer1\$(ProjectName).exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFProxyServer1\$(ProjectName).pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionDir)\_Out\Server\$(Configuration)\NFGameServer1\$(ProjectName).exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFGameServer1\$(ProjectName).pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial1\$(ProjectName).exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial1\$(ProjectName).pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial2\$(ProjectName).exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial2\$(ProjectName).pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName).exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName).pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName).exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName).pdb</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

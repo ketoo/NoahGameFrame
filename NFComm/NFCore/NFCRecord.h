@@ -17,7 +17,7 @@ class NFCRecord : public NFIRecord
 {
 public:
     NFCRecord();
-    NFCRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& valueList, const NFIValueList& keyList, const NFIValueList& descList, const NFIValueList& tagList, int nMaxRow, bool bPublic,  bool bPrivate,  bool bSave, int nIndex);
+    NFCRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& valueList, const NFIValueList& keyList, const NFIValueList& descList, const NFIValueList& tagList, const NFIValueList& relateRecordList, int nMaxRow, bool bPublic,  bool bPrivate,  bool bSave, int nIndex);
 
     virtual ~NFCRecord();
 
@@ -116,7 +116,8 @@ public:
     virtual const NFIValueList& GetInitDesc() const;
     virtual const NFIValueList& GetTag() const;
     virtual const TRECORDVEC& GetRecordVec() const;
-
+    virtual bool GetRelatedTag(const std::string& strSrcTag, const std::string& strRelatedRecord, OUT std::string& strRelatedTag);
+    virtual const NFIValueList& GetRelatedRecord() const;
 protected:
     int GetPos(int nRow, int nCol) const;
 
@@ -134,10 +135,15 @@ protected:
     NFCValueList mVarRecordTag;//col的tag值--应该引用静态的(或者智能指针)，节约大量内存
 	NFCValueList mVarRecordDesc;//初始值描述--应该引用静态的(或者智能指针)，节约大量内存
     NFCValueList mVarRecordKey;//各row是否是KEY--应该引用静态的(或者智能指针)，节约大量内存
+    NFCValueList mVarRecordRelation; // 表中某个字段与另外一张表中某字段对应关系
     TRECORDVEC mtRecordVec;//真的数据
     std::vector<int> mVecUsedState;
 
     std::map<std::string, int> mmTag;
+
+    typedef std::pair<int, std::string> RelationRecordColType;
+    typedef std::map<RelationRecordColType, std::string> RelationRecordMap;
+    RelationRecordMap mmRelationRecord; // std::map<pair<col, RelationRecord, RelationRecord>, RelationRecordColTag>
 
     int mnMaxRow;
 

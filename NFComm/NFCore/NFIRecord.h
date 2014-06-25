@@ -29,7 +29,7 @@ public:
     typedef std::vector<std::shared_ptr<NFIValueList::VarData>> TRECORDVEC;
     typedef TRECORDVEC::const_iterator TRECORDVECCONSTITER;
 
-    virtual ~NFIRecord() = 0;
+    virtual ~NFIRecord() {}
 
 	virtual bool IsUsed(const int nRow) const  = 0;
     virtual bool IsKey(const int nRow) const  = 0;
@@ -125,8 +125,9 @@ public:
     virtual void SetName(const char* strName) = 0;
 
     virtual const TRECORDVEC& GetRecordVec() const = 0;
+    
+    virtual const NFIValueList& GetRelatedRecord() const = 0;
+    virtual bool GetRelatedTag(const std::string& strSrcTag, const std::string& strRelatedRecord, OUT std::string& strRelatedTag) = 0;
 };
-
-inline NFIRecord::~NFIRecord() {};
 
 #endif
