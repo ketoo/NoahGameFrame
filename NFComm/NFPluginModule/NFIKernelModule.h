@@ -181,7 +181,7 @@ public:
     virtual bool SwitchScene(const NFIDENTID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIValueList& arg) = 0;
 
     virtual bool AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction) = 0;
-    virtual bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& varData, const NFIValueList& varKey, const NFIValueList& varDesc, const NFIValueList& varTag, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex) = 0;
+    virtual bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& varData, const NFIValueList& varKey, const NFIValueList& varDesc, const NFIValueList& varTag, const NFIValueList& varRelatedRecord, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex) = 0;
     ////////////////////////////////////////////////////////////////
 
     virtual NFIDENTID CreateContainer(const int nSceneIndex, const std::string& strSceneConfigID) = 0;

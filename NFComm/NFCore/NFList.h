@@ -146,7 +146,7 @@ bool NFList<idType>::Get(const int32_t index, idType& id)
 template < typename idType >
 int NFList<idType>::Count()
 {
-    return mtObjConfigList.size();
+    return (int)(mtObjConfigList.size());
 }
 
 #endif

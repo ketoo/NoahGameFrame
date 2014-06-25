@@ -125,7 +125,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
         NFIRecord* pRecord = pClassRecordManager->First();
         while (pRecord)
         {
-            pElementRecordManager->AddRecord(0, pRecord->GetName(), pRecord->GetInitData(), pRecord->GetKeyState(), pRecord->GetInitDesc(), pRecord->GetTag(), pRecord->GetRows(), pRecord->GetPublic(), pRecord->GetPrivate(), pRecord->GetSave(), pRecord->GetIndex());
+            pElementRecordManager->AddRecord(0, pRecord->GetName(), pRecord->GetInitData(), pRecord->GetKeyState(), pRecord->GetInitDesc(), pRecord->GetTag(), pRecord->GetRelatedRecord(), pRecord->GetRows(), pRecord->GetPublic(), pRecord->GetPrivate(), pRecord->GetSave(), pRecord->GetIndex());
             pRecord = pClassRecordManager->Next();
         }
 
@@ -328,7 +328,7 @@ bool NFCElementInfoModule::ExistElement(const std::string& strConfigName)
 
 bool NFCElementInfoModule::LegalNumber( const char* str )
 {
-	int nLen = strlen(str);
+	int nLen = int(strlen(str));
 	if (nLen <= 0)
 	{
 		return false;
