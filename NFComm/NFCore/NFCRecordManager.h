@@ -32,8 +32,13 @@ public:
 
     virtual void GetRelationRows(const std::string& strScrRecord, const std::string& strSrcTag, const NFIValueList& var, const std::string& strRelatedRecord, OUT NFIValueList& outRowList);
 
+    virtual const std::map<std::string, int>& GetRecordIndex();
+    virtual const int GetRecordIndex(const std::string& strRecordName);
+
 private:
 	NFIDENTID mSelf;
+    std::map<std::string, int> mxRecordIndexMap;
+
 };
 
 #endif
