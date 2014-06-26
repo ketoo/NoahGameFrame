@@ -383,7 +383,7 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       sizeof(ReqCreateRole));
   ReqDeleteRole_descriptor_ = file->message_type(16);
   static const int ReqDeleteRole_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqDeleteRole, char_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqDeleteRole, name_),
   };
   ReqDeleteRole_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -398,7 +398,7 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       sizeof(ReqDeleteRole));
   ReqRecoverRole_descriptor_ = file->message_type(17);
   static const int ReqRecoverRole_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqRecoverRole, char_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqRecoverRole, name_),
   };
   ReqRecoverRole_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -559,13 +559,13 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
     "\002(\005\022\014\n\004race\030\003 \002(\005\022\021\n\tnoob_head\030\004 \002(\005\022\021\n\t"
     "noob_body\030\005 \002(\005\022\021\n\tnoob_foot\030\006 \002(\005\022\023\n\013no"
     "ob_weapon\030\007 \002(\005\022\020\n\010noob_pic\030\010 \002(\005\022\021\n\tnoo"
-    "b_name\030\t \002(\014\022\017\n\007game_id\030\n \002(\005\" \n\rReqDele"
-    "teRole\022\017\n\007char_id\030\001 \002(\005\"!\n\016ReqRecoverRol"
-    "e\022\017\n\007char_id\030\001 \002(\005*Z\n\014EServerState\022\r\n\tES"
-    "T_CRASH\020\000\022\016\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022"
-    "\014\n\010EST_FIRE\020\003\022\017\n\013EST_MAINTEN\020\004*@\n\021ReqSer"
-    "verListType\022\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020RS"
-    "LT_GAMES_ERVER\020\001", 2096);
+    "b_name\030\t \002(\014\022\017\n\007game_id\030\n \002(\005\"\035\n\rReqDele"
+    "teRole\022\014\n\004name\030\001 \002(\014\"\036\n\016ReqRecoverRole\022\014"
+    "\n\004name\030\001 \002(\014*Z\n\014EServerState\022\r\n\tEST_CRAS"
+    "H\020\000\022\016\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST"
+    "_FIRE\020\003\022\017\n\013EST_MAINTEN\020\004*@\n\021ReqServerLis"
+    "tType\022\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GAM"
+    "ES_ERVER\020\001", 2090);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgPreGame.proto", &protobuf_RegisterTypes);
   ServerInfoReport::default_instance_ = new ServerInfoReport();
@@ -6403,7 +6403,7 @@ void ReqCreateRole::Swap(ReqCreateRole* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int ReqDeleteRole::kCharIdFieldNumber;
+const int ReqDeleteRole::kNameFieldNumber;
 #endif  // !_MSC_VER
 
 ReqDeleteRole::ReqDeleteRole()
@@ -6422,7 +6422,7 @@ ReqDeleteRole::ReqDeleteRole(const ReqDeleteRole& from)
 
 void ReqDeleteRole::SharedCtor() {
   _cached_size_ = 0;
-  char_id_ = 0;
+  name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -6431,6 +6431,9 @@ ReqDeleteRole::~ReqDeleteRole() {
 }
 
 void ReqDeleteRole::SharedDtor() {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_;
+  }
   if (this != default_instance_) {
   }
 }
@@ -6458,7 +6461,11 @@ ReqDeleteRole* ReqDeleteRole::New() const {
 
 void ReqDeleteRole::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    char_id_ = 0;
+    if (has_name()) {
+      if (name_ != &::google::protobuf::internal::kEmptyString) {
+        name_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -6470,14 +6477,12 @@ bool ReqDeleteRole::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 char_id = 1;
+      // required bytes name = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &char_id_)));
-          set_has_char_id();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_name()));
         } else {
           goto handle_uninterpreted;
         }
@@ -6503,9 +6508,10 @@ bool ReqDeleteRole::MergePartialFromCodedStream(
 
 void ReqDeleteRole::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int32 char_id = 1;
-  if (has_char_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->char_id(), output);
+  // required bytes name = 1;
+  if (has_name()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      1, this->name(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -6516,9 +6522,11 @@ void ReqDeleteRole::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqDeleteRole::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int32 char_id = 1;
-  if (has_char_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->char_id(), target);
+  // required bytes name = 1;
+  if (has_name()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        1, this->name(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -6532,11 +6540,11 @@ int ReqDeleteRole::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 char_id = 1;
-    if (has_char_id()) {
+    // required bytes name = 1;
+    if (has_name()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->char_id());
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->name());
     }
 
   }
@@ -6566,8 +6574,8 @@ void ReqDeleteRole::MergeFrom(const ::google::protobuf::Message& from) {
 void ReqDeleteRole::MergeFrom(const ReqDeleteRole& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_char_id()) {
-      set_char_id(from.char_id());
+    if (from.has_name()) {
+      set_name(from.name());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -6593,7 +6601,7 @@ bool ReqDeleteRole::IsInitialized() const {
 
 void ReqDeleteRole::Swap(ReqDeleteRole* other) {
   if (other != this) {
-    std::swap(char_id_, other->char_id_);
+    std::swap(name_, other->name_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -6612,7 +6620,7 @@ void ReqDeleteRole::Swap(ReqDeleteRole* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int ReqRecoverRole::kCharIdFieldNumber;
+const int ReqRecoverRole::kNameFieldNumber;
 #endif  // !_MSC_VER
 
 ReqRecoverRole::ReqRecoverRole()
@@ -6631,7 +6639,7 @@ ReqRecoverRole::ReqRecoverRole(const ReqRecoverRole& from)
 
 void ReqRecoverRole::SharedCtor() {
   _cached_size_ = 0;
-  char_id_ = 0;
+  name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -6640,6 +6648,9 @@ ReqRecoverRole::~ReqRecoverRole() {
 }
 
 void ReqRecoverRole::SharedDtor() {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_;
+  }
   if (this != default_instance_) {
   }
 }
@@ -6667,7 +6678,11 @@ ReqRecoverRole* ReqRecoverRole::New() const {
 
 void ReqRecoverRole::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    char_id_ = 0;
+    if (has_name()) {
+      if (name_ != &::google::protobuf::internal::kEmptyString) {
+        name_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -6679,14 +6694,12 @@ bool ReqRecoverRole::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 char_id = 1;
+      // required bytes name = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &char_id_)));
-          set_has_char_id();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_name()));
         } else {
           goto handle_uninterpreted;
         }
@@ -6712,9 +6725,10 @@ bool ReqRecoverRole::MergePartialFromCodedStream(
 
 void ReqRecoverRole::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int32 char_id = 1;
-  if (has_char_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->char_id(), output);
+  // required bytes name = 1;
+  if (has_name()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      1, this->name(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -6725,9 +6739,11 @@ void ReqRecoverRole::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqRecoverRole::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int32 char_id = 1;
-  if (has_char_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->char_id(), target);
+  // required bytes name = 1;
+  if (has_name()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        1, this->name(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -6741,11 +6757,11 @@ int ReqRecoverRole::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 char_id = 1;
-    if (has_char_id()) {
+    // required bytes name = 1;
+    if (has_name()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->char_id());
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->name());
     }
 
   }
@@ -6775,8 +6791,8 @@ void ReqRecoverRole::MergeFrom(const ::google::protobuf::Message& from) {
 void ReqRecoverRole::MergeFrom(const ReqRecoverRole& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_char_id()) {
-      set_char_id(from.char_id());
+    if (from.has_name()) {
+      set_name(from.name());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -6802,7 +6818,7 @@ bool ReqRecoverRole::IsInitialized() const {
 
 void ReqRecoverRole::Swap(ReqRecoverRole* other) {
   if (other != this) {
-    std::swap(char_id_, other->char_id_);
+    std::swap(name_, other->name_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

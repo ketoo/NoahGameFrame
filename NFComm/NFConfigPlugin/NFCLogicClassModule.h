@@ -161,6 +161,9 @@ protected:
     NFIElementInfoModule* m_pElementInfoModule;
 
     std::string msConfigFileName;
+    int mnPropertyIndex;
+
+    std::map<std::string, int> mxPropertyIndexMap;
 };
 
 #endif

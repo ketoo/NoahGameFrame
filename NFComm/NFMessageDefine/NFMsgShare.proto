@@ -11,7 +11,7 @@ message ReqEnterGameServer
 {
     required int32 server_id = 1;
 	required int32 gate_id = 2;
-	required int32 player_id = 3;
+	required bytes name = 3;
 }
 
 message ReqLeaveGameServer

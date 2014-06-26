@@ -35,10 +35,19 @@ bool NFCPropertyManager::RegisterCallback(const std::string& strProperty, const 
 NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, NFIProperty* pProperty)
 {
     const std::string& strProperty = pProperty->GetKey();
-    NFIProperty* pNewProperty = new NFCProperty(self, strProperty, pProperty->GetType(), pProperty->GetPublic(), pProperty->GetPrivate(), pProperty->GetSave(), pProperty->GetIndex(), pProperty->GetRelationValue());
-    this->AddElement(strProperty, pNewProperty);
+    NFIProperty* pOldProperty = GetElement(strProperty);
+    if (!pOldProperty)
+    {
+        NFIProperty* pNewProperty = new NFCProperty(self, strProperty, pProperty->GetType(), pProperty->GetPublic(), pProperty->GetPrivate(), pProperty->GetSave(), pProperty->GetIndex(), pProperty->GetRelationValue());
+        this->AddElement(strProperty, pNewProperty);
 
-    return pNewProperty;
+        if (pProperty->GetIndex() > 0)
+        {
+            mxPropertyIndexMap.insert(std::map<std::string, int>::value_type(strProperty, pProperty->GetIndex()));
+        }
+    }
+    
+    return pOldProperty;
 }
 
 NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, int nIndex, const std::string& strScriptFunction)
@@ -48,8 +57,12 @@ NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, const std::s
     {
         pProperty = new NFCProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, nIndex, strScriptFunction);
         this->AddElement(strPropertyName, pProperty);
-    }
 
+        if (pProperty->GetIndex() > 0)
+        {
+            mxPropertyIndexMap.insert(std::map<std::string, int>::value_type(strPropertyName, nIndex));
+        }
+    }
 
     return pProperty;
 }
@@ -83,5 +96,21 @@ bool NFCPropertyManager::SetProperty(const NFIProperty* pProperty )
 NFIDENTID NFCPropertyManager::Self()
 {
 	return mSelf;
+}
+
+const std::map<std::string, int>& NFCPropertyManager::GetPropertyIndex()
+{
+    return mxPropertyIndexMap;
+}
+
+const int NFCPropertyManager::GetPropertyIndex( const std::string& strProperty )
+{
+    std::map<std::string, int>::iterator it = mxPropertyIndexMap.find(strProperty);
+    if (it != mxPropertyIndexMap.end())
+    {
+        return it->second;
+    }
+
+    return 0;
 }
 

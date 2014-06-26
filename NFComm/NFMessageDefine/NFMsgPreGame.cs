@@ -677,12 +677,12 @@ namespace NFMsg
   {
     public ReqDeleteRole() {}
     
-    private int _char_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"char_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int char_id
+    private byte[] _name;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] name
     {
-      get { return _char_id; }
-      set { _char_id = value; }
+      get { return _name; }
+      set { _name = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -694,12 +694,12 @@ namespace NFMsg
   {
     public ReqRecoverRole() {}
     
-    private int _char_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"char_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int char_id
+    private byte[] _name;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] name
     {
-      get { return _char_id; }
-      set { _char_id = value; }
+      get { return _name; }
+      set { _name = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
