@@ -41,6 +41,7 @@ bool NFCLogicClassModule::Shut()
 
 NFCLogicClassModule::NFCLogicClassModule(NFIPluginManager* p)
 {
+    mnPropertyIndex = GetTickCount() % 10 + 1;
     pPluginManager = p;
     msConfigFileName = "../../NFDataCfg/Struct/LogicClass.xml";
 }
@@ -112,6 +113,14 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
             bool bPrivate = (0 == strcmp("true", pstrPrivate)) ? true : false;
             bool bSave = (0 == strcmp("true", pstrSave)) ? true : false;
             int nIndex = atoi(pstrPropertyIndex);
+
+            if (bPublic || bPrivate)
+            {
+                ++mnPropertyIndex;
+
+                nIndex = mnPropertyIndex;
+                mxPropertyIndexMap.insert(std::map<std::string, int>::value_type(strPropertyName, mnPropertyIndex));
+            }
 
             NFIValueList::VarData varProperty;
             if (VTYPE_UNKNOWN == ComputerType(pstrType, varProperty))

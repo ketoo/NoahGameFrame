@@ -11,6 +11,7 @@
 
 #include "NFMap.h"
 #include "NFIProperty.h"
+#include <map>
 
 class NFIPropertyManager
     : public NFMap<std::string, NFIProperty>
@@ -27,6 +28,9 @@ public:
     virtual bool SetProperty(const NFIProperty* pProperty) = 0;
 	
 	virtual NFIDENTID Self() = 0;
+
+    virtual const std::map<std::string, int>& GetPropertyIndex() = 0;
+    virtual const int GetPropertyIndex(const std::string& strProperty) = 0;
 
 private:
 };

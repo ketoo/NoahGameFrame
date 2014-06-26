@@ -757,9 +757,9 @@ namespace NFMsg
   {
     public MsgBase() {}
     
-    private int _player_id;
+    private long _player_id;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"player_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int player_id
+    public long player_id
     {
       get { return _player_id; }
       set { _player_id = value; }
@@ -771,6 +771,13 @@ namespace NFMsg
       get { return _msg_data; }
       set { _msg_data = value; }
     }
+    private readonly global::System.Collections.Generic.List<long> _player_fd_list = new global::System.Collections.Generic.List<long>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"player_fd_list", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<long> player_fd_list
+    {
+      get { return _player_fd_list; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

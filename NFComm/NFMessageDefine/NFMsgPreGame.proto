@@ -164,10 +164,10 @@ message ReqCreateRole//创建角色
 
 message ReqDeleteRole//删除角色
 {
-    required int32 char_id = 1;
+    required bytes	name = 1;
 }
 
 message ReqRecoverRole//恢复角色
 {
-    required int32 char_id = 1;
+    required bytes	name = 1;
 }

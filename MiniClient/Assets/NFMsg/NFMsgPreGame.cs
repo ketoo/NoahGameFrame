@@ -388,10 +388,10 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqExitWorld")]
-  public partial class ReqExitWorld : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqSelectServer")]
+  public partial class ReqSelectServer : global::ProtoBuf.IExtensible
   {
-    public ReqExitWorld() {}
+    public ReqSelectServer() {}
     
     private int _world_id;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"world_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -399,6 +399,30 @@ namespace NFMsg
     {
       get { return _world_id; }
       set { _world_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqKickFromWorld")]
+  public partial class ReqKickFromWorld : global::ProtoBuf.IExtensible
+  {
+    public ReqKickFromWorld() {}
+    
+    private int _world_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"world_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int world_id
+    {
+      get { return _world_id; }
+      set { _world_id = value; }
+    }
+    private byte[] _account;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"account", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] account
+    {
+      get { return _account; }
+      set { _account = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -653,12 +677,12 @@ namespace NFMsg
   {
     public ReqDeleteRole() {}
     
-    private int _char_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"char_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int char_id
+    private byte[] _name;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] name
     {
-      get { return _char_id; }
-      set { _char_id = value; }
+      get { return _name; }
+      set { _name = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -670,12 +694,12 @@ namespace NFMsg
   {
     public ReqRecoverRole() {}
     
-    private int _char_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"char_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int char_id
+    private byte[] _name;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] name
     {
-      get { return _char_id; }
-      set { _char_id = value; }
+      get { return _name; }
+      set { _name = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
