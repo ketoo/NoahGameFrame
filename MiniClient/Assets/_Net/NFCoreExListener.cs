@@ -77,12 +77,10 @@ namespace NFTCPClient
 		{
 
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_LOGIN, EGMI_ACK_LOGIN);
-            mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_WORLS_LIST, EGMI_ACK_WORLS_LIST);
+            mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_WORLS_LIST, EGMI_ACK_WORLD_LIST);
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_EVENT_RESULT, EGMI_EVENT_RESULT);
-//             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.MGPT_SIGNATURE_PASS, MGPT_SIGNATURE_PASS);
-//             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.MGPT_LC_RLT_SERVER_LIST, MGPT_LC_RLT_SERVER_LIST);
-//             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.MGPT_LC_RLT_CHAR_LIST, MGPT_LC_RLT_CHAR_LIST);
-//             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.MGPT_REQ_ENTER_TRANSCRIPTION, MGPT_REQ_ENTER_TRANSCRIPTION);
+            mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_ROLE_LIST, EGMI_ACK_ROLE_LIST);
+
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_OBJECT_ENTRY, EGMI_ACK_OBJECT_ENTRY);
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_OBJECT_LEAVE, EGMI_ACK_OBJECT_LEAVE);
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_MOVE, EGMI_ACK_MOVE);
@@ -134,7 +132,7 @@ namespace NFTCPClient
             }
         }
 
-        private void EGMI_ACK_WORLS_LIST(MsgHead head, MemoryStream stream)
+        private void EGMI_ACK_WORLD_LIST(MsgHead head, MemoryStream stream)
         {
             NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
             xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
@@ -149,13 +147,28 @@ namespace NFTCPClient
                     ServerInfo info = xData.info[i];
                     aServerList.Add(info);
                 }
-                
             }
+
+            mNet.mPlayerState = NFNet.PLAYER_STATE.E_HAS_PLAYER_SELECTSERVER;
+        }
+
+        private void EGMI_ACK_ROLE_LIST(MsgHead head, MemoryStream stream)
+        {
         }
 	
+        /// <summary>
+        /// 
+        /// 
+        /// </summary>
+        /// <param name="head"></param>
+        /// <param name="stream"></param>
         private void EGMI_ACK_OBJECT_ENTRY(MsgHead head, MemoryStream stream)
         {
+            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
+            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
 
+//             NFMsg.ACKENTRy xData = new NFMsg.AckServerList();
+//             xData = Serializer.Deserialize<NFMsg.AckServerList>(new MemoryStream(xMsg.msg_data));
         }
 
         private void EGMI_ACK_OBJECT_LEAVE(MsgHead head, MemoryStream stream)
