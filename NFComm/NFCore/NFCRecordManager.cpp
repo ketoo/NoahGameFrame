@@ -27,6 +27,11 @@ NFIRecord* NFCRecordManager::AddRecord(const NFIDENTID& self, const std::string&
     {
         pRecord = new NFCRecord(self, strRecordName, ValueList, keyList, descList, tagList, relateRecordData, nRows, bPublic, bPrivate, bSave, nIndex);
         this->AddElement(strRecordName, pRecord);
+
+        if (nIndex > 0)
+        {
+            mxRecordIndexMap.insert(std::map<std::string, int>::value_type(strRecordName, nIndex));
+        }
     }
 
     return pRecord;
@@ -53,4 +58,20 @@ void NFCRecordManager::GetRelationRows(const std::string& strSrcRecord, const st
     }
     
     pRelatedRecord->FindRowByColValue(strRelatedTag, var, outRowList);
+}
+
+const std::map<std::string, int>& NFCRecordManager::GetRecordIndex()
+{
+    return mxRecordIndexMap;
+}
+
+const int NFCRecordManager::GetRecordIndex( const std::string& strRecordName )
+{
+    std::map<std::string, int>::iterator it = mxRecordIndexMap.find(strRecordName);
+    if (it != mxRecordIndexMap.end())
+    {
+        return it->second;
+    }
+
+    return 0;
 }
