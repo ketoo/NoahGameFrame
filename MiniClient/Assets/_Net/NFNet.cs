@@ -271,8 +271,8 @@ public class NFNet
 
     public string strLoginAccount = "server1";
     public string strPassword = "123456";
-    public string stCreaterRoleName = "";
-    public UInt32 nSeleroleID = 0;
+    public string strRoleName = "";
+    public Int64 nSeleroleID = 0;
 
     public int nServerID = 0;
     public Int64 ntarget = 0;

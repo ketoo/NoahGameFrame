@@ -251,31 +251,66 @@ public class NFBinarySendLogic
         SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_WORLD_LIST, stream);
     }
 
-    public void RequireCharList()
+    public void RequireCharList(int nGameID)
     {
 
+        NFMsg.ReqRoleList xData = new NFMsg.ReqRoleList();
+        xData.game_id = nGameID;
 
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqRoleList>(stream, xData);
+
+        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_ROLE_LIST, stream);
     }
 
-    public void RequireCreateChar( string strRoleName, byte byCareer, byte bySex, UInt32 nCitizenship)
+    public void RequireCreateChar(string strRoleName, int byCareer, int bySex, int nGameID)
     {
         if (strRoleName.Length >= 20 || strRoleName.Length < 4)
         {
             return;
         }
 
+        NFMsg.ReqCreateRole xData = new NFMsg.ReqCreateRole();
+        xData.career = byCareer;
+        xData.sex = bySex;
+        xData.noob_name = UnicodeEncoding.Default.GetBytes(strRoleName);
+        xData.race = 0;
+        xData.noob_head = 0;
+        xData.noob_body = 0;
+        xData.noob_foot = 0;
+        xData.noob_weapon = 0;
+        xData.noob_pic = 0;
+        xData.game_id = nGameID;
 
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqCreateRole>(stream, xData);
+
+        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_CREATE_ROLE, stream);
     }
 
-    public void RequireDelChar(Int64 charID)
+    public void RequireDelChar(string strRoleName)
     {
+        NFMsg.ReqDeleteRole xData = new NFMsg.ReqDeleteRole();
+        xData.name = UnicodeEncoding.Default.GetBytes(strRoleName);
 
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqDeleteRole>(stream, xData);
+
+        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_DELETE_ROLE, stream);
     }
 
-    public void RequireEnterGameServer(Int32 iServerID, Int64 charID)
+    public void RequireEnterGameServer(int iServerID, string strRoleName)
     {
+        NFMsg.ReqEnterGameServer xData = new NFMsg.ReqEnterGameServer();
+        xData.server_id = UnicodeEncoding.Default.GetBytes(strRoleName);
 
 
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqDeleteRole>(stream, xData);
+
+        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_DELETE_ROLE, stream);
     }
 
     public void RequireHeartBeat()

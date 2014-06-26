@@ -710,7 +710,7 @@ public:
 
     bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFCScriptVarList& varData, const NFCScriptVarList& varKey, const NFCScriptVarList& varDesc, const NFCScriptVarList& varTag, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex)
     {
-        return m_pKernelModule->AddRecord(self, strRecordName, varData.GetVar(), varKey.GetVar(), varDesc.GetVar(), varTag.GetVar(), nRows, bPublic, bPrivate, bSave, nIndex);
+        return m_pKernelModule->AddRecord(self, strRecordName, varData.GetVar(), varKey.GetVar(), varDesc.GetVar(), varTag.GetVar(), varTag.GetVar(), nRows, bPublic, bPrivate, bSave, nIndex);
     }
 
 protected:

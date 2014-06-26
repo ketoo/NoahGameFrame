@@ -36,8 +36,13 @@ public:
 	
 	virtual NFIDENTID Self();
 
+    virtual const std::map<std::string, int>& GetPropertyIndex();
+
+    virtual const int GetPropertyIndex(const std::string& strProperty);
+
 private:
 	NFIDENTID mSelf;
+    std::map<std::string, int> mxPropertyIndexMap;
 };
 
 

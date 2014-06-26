@@ -2123,21 +2123,26 @@ class ReqDeleteRole : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 char_id = 1;
-  inline bool has_char_id() const;
-  inline void clear_char_id();
-  static const int kCharIdFieldNumber = 1;
-  inline ::google::protobuf::int32 char_id() const;
-  inline void set_char_id(::google::protobuf::int32 value);
+  // required bytes name = 1;
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 1;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const void* value, size_t size);
+  inline ::std::string* mutable_name();
+  inline ::std::string* release_name();
+  inline void set_allocated_name(::std::string* name);
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqDeleteRole)
  private:
-  inline void set_has_char_id();
-  inline void clear_has_char_id();
+  inline void set_has_name();
+  inline void clear_has_name();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int32 char_id_;
+  ::std::string* name_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -2205,21 +2210,26 @@ class ReqRecoverRole : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 char_id = 1;
-  inline bool has_char_id() const;
-  inline void clear_char_id();
-  static const int kCharIdFieldNumber = 1;
-  inline ::google::protobuf::int32 char_id() const;
-  inline void set_char_id(::google::protobuf::int32 value);
+  // required bytes name = 1;
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 1;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const void* value, size_t size);
+  inline ::std::string* mutable_name();
+  inline ::std::string* release_name();
+  inline void set_allocated_name(::std::string* name);
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqRecoverRole)
  private:
-  inline void set_has_char_id();
-  inline void clear_has_char_id();
+  inline void set_has_name();
+  inline void clear_has_name();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int32 char_id_;
+  ::std::string* name_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -4838,52 +4848,148 @@ inline void ReqCreateRole::set_game_id(::google::protobuf::int32 value) {
 
 // ReqDeleteRole
 
-// required int32 char_id = 1;
-inline bool ReqDeleteRole::has_char_id() const {
+// required bytes name = 1;
+inline bool ReqDeleteRole::has_name() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqDeleteRole::set_has_char_id() {
+inline void ReqDeleteRole::set_has_name() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqDeleteRole::clear_has_char_id() {
+inline void ReqDeleteRole::clear_has_name() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqDeleteRole::clear_char_id() {
-  char_id_ = 0;
-  clear_has_char_id();
+inline void ReqDeleteRole::clear_name() {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    name_->clear();
+  }
+  clear_has_name();
 }
-inline ::google::protobuf::int32 ReqDeleteRole::char_id() const {
-  return char_id_;
+inline const ::std::string& ReqDeleteRole::name() const {
+  return *name_;
 }
-inline void ReqDeleteRole::set_char_id(::google::protobuf::int32 value) {
-  set_has_char_id();
-  char_id_ = value;
+inline void ReqDeleteRole::set_name(const ::std::string& value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void ReqDeleteRole::set_name(const char* value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void ReqDeleteRole::set_name(const void* value, size_t size) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqDeleteRole::mutable_name() {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  return name_;
+}
+inline ::std::string* ReqDeleteRole::release_name() {
+  clear_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = name_;
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqDeleteRole::set_allocated_name(::std::string* name) {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_;
+  }
+  if (name) {
+    set_has_name();
+    name_ = name;
+  } else {
+    clear_has_name();
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
 
 // ReqRecoverRole
 
-// required int32 char_id = 1;
-inline bool ReqRecoverRole::has_char_id() const {
+// required bytes name = 1;
+inline bool ReqRecoverRole::has_name() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqRecoverRole::set_has_char_id() {
+inline void ReqRecoverRole::set_has_name() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqRecoverRole::clear_has_char_id() {
+inline void ReqRecoverRole::clear_has_name() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqRecoverRole::clear_char_id() {
-  char_id_ = 0;
-  clear_has_char_id();
+inline void ReqRecoverRole::clear_name() {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    name_->clear();
+  }
+  clear_has_name();
 }
-inline ::google::protobuf::int32 ReqRecoverRole::char_id() const {
-  return char_id_;
+inline const ::std::string& ReqRecoverRole::name() const {
+  return *name_;
 }
-inline void ReqRecoverRole::set_char_id(::google::protobuf::int32 value) {
-  set_has_char_id();
-  char_id_ = value;
+inline void ReqRecoverRole::set_name(const ::std::string& value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void ReqRecoverRole::set_name(const char* value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void ReqRecoverRole::set_name(const void* value, size_t size) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqRecoverRole::mutable_name() {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  return name_;
+}
+inline ::std::string* ReqRecoverRole::release_name() {
+  clear_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = name_;
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqRecoverRole::set_allocated_name(::std::string* name) {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_;
+  }
+  if (name) {
+    set_has_name();
+    name_ = name;
+  } else {
+    clear_has_name();
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 
