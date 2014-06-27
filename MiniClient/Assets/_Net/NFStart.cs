@@ -356,7 +356,7 @@ public class NFStart : MonoBehaviour
             switch (eState)
             {
                 case NFTCPClientState.Connecting:
-                    GUI.Label(new Rect(25, nOffest, 150, height), "连接中......");
+                    //GUI.Label(new Rect(25, nOffest, 150, height), "连接中......");
                     break;
 
                 case NFTCPClientState.Connected:
@@ -374,39 +374,42 @@ public class NFStart : MonoBehaviour
                     break;
             }
 
+            if (null != netFocus)
+            {
+                ////////////////////
+                string strState = netFocus.strLoginAccount + " 连接中...";
+                if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_PLAYER_LOGINING)
+                {
+                    strState = netFocus.strLoginAccount + " 登录中...";
+                }
+                else if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_HAS_PLAYER_LOGIN)
+                {
+                    strState = netFocus.strLoginAccount + " 登录成功";
+                }
+                else if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_HAS_PLAYER_SELECTSERVER)
+                {
+                    strState = netFocus.strLoginAccount + " 获取服务器列表成功";
+                    //展示服务器，选择服务器后自动创建角色
+                }
+                else if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_HAS_PLAYER_ROLELIST)
+                {
+                    strState = netFocus.strLoginAccount + " 获取角色列表成功";
+                    //展示自动创建了的角色，提供进入游戏按钮
+                    netFocus.nServerID = mConfig.GetServerID();
+                }
+                else if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_DISCOUNT)
+                {
+                    strState = netFocus.strLoginAccount + " 已掉线,正自动重连...";
+                    netFocus.StartConnect(strTargetIP, nTargetPort);
+                }
+                else if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_PLAYER_GAMEING)
+                {
+                    strState = netFocus.strLoginAccount + " 已进入游戏。";
+                }
 
-            ////////////////////
-            string strState = netFocus.strLoginAccount + " 连接中...";
-            if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_PLAYER_LOGINING)
-            {
-                strState = netFocus.strLoginAccount + " 登录中...";
+                GUI.Label(new Rect(25, nOffest, 150, height), strState);
             }
-            else if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_HAS_PLAYER_LOGIN)
-            {
-                strState = netFocus.strLoginAccount + " 登录成功";
-            }
-            else if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_HAS_PLAYER_SELECTSERVER)
-            {
-                strState = netFocus.strLoginAccount + " 获取服务器列表成功";
-                //展示服务器，选择服务器后自动创建角色
-            }
-            else if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_HAS_PLAYER_ROLELIST)
-            {
-                strState = netFocus.strLoginAccount + " 获取角色列表成功";
-                //展示自动创建了的角色，提供进入游戏按钮
-                netFocus.nServerID = mConfig.GetServerID();
-            }
-            else if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_DISCOUNT)
-            {
-                strState = netFocus.strLoginAccount + " 已掉线,正自动重连...";
-                netFocus.StartConnect(strTargetIP, nTargetPort);
-            }
-            else if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_PLAYER_GAMEING)
-            {
-                strState = netFocus.strLoginAccount + " 已进入游戏。";
-            }
-
-            GUI.Label(new Rect(25, nOffest, 150, height), strState);
+            
         }
     }
 
@@ -658,7 +661,7 @@ public class NFStart : MonoBehaviour
         }
         else
         {
-            if (netFocus.nSeleroleID > 0)
+            if (netFocus.strRoleName.Length > 0)
             {
                 if (GUI.Button(new Rect(400 / 2 + 75, 200, 200, 50), "删除角色"))
                 {
@@ -667,7 +670,7 @@ public class NFStart : MonoBehaviour
 
                 if (GUI.Button(new Rect(300 / 2, 400, 200, 50), "进入游戏"))
                 {
-                    netFocus.sendLogic.RequireEnterGameServer(netFocus.nServerID, netFocus.nSeleroleID);
+                    netFocus.sendLogic.RequireEnterGameServer(netFocus.nServerID, netFocus.strRoleName);
                 }
             }
         }

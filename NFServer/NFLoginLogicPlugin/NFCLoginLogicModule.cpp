@@ -48,7 +48,7 @@ int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventI
     //int nState = m_pDataBaseModule->ConfirmAccountInfo(strAccount, strPassword);
     //m_pNoSqlModule->AddAccountInfo(strAccount, strPassword);
 
-    int nState = m_pNoSqlModule->ConfirmAccountInfo(strAccount, strPassword);
+    int nState = 0;//= m_pNoSqlModule->ConfirmAccountInfo(strAccount, strPassword);
  
     NFCValueList valEventInfo;
     valEventInfo << nState << nAddress << strAccount;
@@ -164,12 +164,12 @@ bool NFCLoginLogicModule::AfterInit()
 
     //////////////////////////////////////////////////////////////////////////
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-    m_pNoSqlModule = dynamic_cast<NFIPlatformDataModule*>(pPluginManager->FindModule("NFCPlatformDataModule"));
+    //m_pNoSqlModule = dynamic_cast<NFIPlatformDataModule*>(pPluginManager->FindModule("NFCPlatformDataModule"));
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
 
 
     assert(NULL != m_pEventProcessModule);
-    assert(NULL != m_pNoSqlModule);
+    //assert(NULL != m_pNoSqlModule);
     assert(NULL != m_pKernelModule);
 
     //////////////////////////////////////////////////////////////////////////
