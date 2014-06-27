@@ -304,13 +304,13 @@ public class NFBinarySendLogic
     public void RequireEnterGameServer(int iServerID, string strRoleName)
     {
         NFMsg.ReqEnterGameServer xData = new NFMsg.ReqEnterGameServer();
-        xData.server_id = UnicodeEncoding.Default.GetBytes(strRoleName);
+        xData.server_id = net.nServerID;
 
 
         MemoryStream stream = new MemoryStream();
-        Serializer.Serialize<NFMsg.ReqDeleteRole>(stream, xData);
+        Serializer.Serialize<NFMsg.ReqEnterGameServer>(stream, xData);
 
-        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_DELETE_ROLE, stream);
+        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_ENTER_GAME, stream);
     }
 
     public void RequireHeartBeat()
