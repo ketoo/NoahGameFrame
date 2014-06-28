@@ -52,6 +52,11 @@ protected:
 	void OnClientConnected(const int nSockIndex);
 
 protected:
+    int OnProxyServerRegisteredProcess(const NFIPacket& msg);
+    int OnProxyServerUnRegisteredProcess(const NFIPacket& msg);
+    int OnRefreshProxyServerInfoProcess(const NFIPacket& msg);
+
+protected:
 
     void OnCreateRoleGameProcess(const NFIPacket& msg);
     void OnDeleteRoleGameProcess(const NFIPacket& msg);
@@ -104,7 +109,29 @@ protected:
     int OnSwapSceneResultEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
     // 发送聊天结果
     int OnChatResultEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
+private:
 
+    struct ServerData 
+    {
+        ServerData()
+        {
+            pData = new NFMsg::ServerInfoReport();
+            nFD = 0;
+        }
+        ~ServerData()
+        {
+            nFD = 0;
+            delete pData;
+            pData = NULL;
+        }
+
+        int nFD;
+        NFMsg::ServerInfoReport* pData;
+    };
+
+private:
+    //serverid,data
+    NFMap<int, ServerData> mProxyMap;
 protected:
 
     //要管理当前所有的对象所在的actor，以便转移
@@ -112,7 +139,8 @@ protected:
     {
         std::string strAccount;
         int32_t nAccountID;
-        NFIDENTID NGateID;
+        NFIDENTID nGateID;
+        int nFD;
         NFIDENTID nPlayerID;
     };
 
@@ -120,9 +148,6 @@ protected:
 private:
 
     NFMap<NFIDENTID, BaseData> mBaseData;
-
-	int mnRoleHallContainer;
-	int mnProxyContainer;;
 
     NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
