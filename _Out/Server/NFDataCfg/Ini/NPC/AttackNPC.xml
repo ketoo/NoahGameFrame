@@ -1,5 +1,5 @@
 <XML>
-  <Object ID="MOB1" SubType="1" Level="60" ClassName="AttackNPC" ShowName="刺客" BossPic="" BossNamePic="" ModelId="10001" EXP="80" HP="0" MAXHP="272" MAXSA="0" DEF_VALUE="0" ATK_VALUE="29" MOVE_SPEED="100" RESIST_VALUE="0" DEF_HALT_VALUE="1" DEF_SLOW_VALUE="1" DEF_SILENCE_VALUE="1" DEF_DIZZY_VALUE="1" DEF_FREZE_VALUE="1" NPCConfigID="" DropGroudID1="" />
-  <Object ID="MOB1_1" SubType="1" Level="1" ClassName="AttackNPC" ShowName="刺客" BossPic="" BossNamePic="" ModelId="10001" EXP="250" HP="0" MAXHP="420" MAXSA="0" DEF_VALUE="0" ATK_VALUE="42" MOVE_SPEED="100" RESIST_VALUE="0" DEF_HALT_VALUE="1" DEF_SLOW_VALUE="1" DEF_SILENCE_VALUE="1" DEF_DIZZY_VALUE="1" DEF_FREZE_VALUE="1" NPCConfigID="" DropGroudID1="" />
-  <Object ID="MOB_T_1" SubType="1" Level="1" ClassName="AttackNPC" ShowName="刺客" BossPic="" BossNamePic="" ModelId="10001" EXP="0" HP="1" MAXHP="420" MAXSA="0" DEF_VALUE="0" ATK_VALUE="0" MOVE_SPEED="100" RESIST_VALUE="0" DEF_HALT_VALUE="0" DEF_SLOW_VALUE="0" DEF_SILENCE_VALUE="0" DEF_DIZZY_VALUE="0" DEF_FREZE_VALUE="0" NPCConfigID="" DropGroudID1="" />
+  <Object ID="att1" SubType="1" Level="1"  ShowName="刺客" NPCConfigID="" DropGroudID1="" />
+  <Object ID="att2" SubType="1" Level="1" ShowName="刺客"  NPCConfigID="" DropGroudID1="" />
+  <Object ID="att3" SubType="1" Level="1" ShowName="刺客"  NPCConfigID="" DropGroudID1="" />
 </XML>
