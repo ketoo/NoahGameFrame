@@ -44,8 +44,6 @@ protected:
     void OnClientConnected(const int nAddress);
 
 private:
-    int mnConnectContainer;
-    int mnRoleHallContainer;
 
     int mnGameServerID;
 
