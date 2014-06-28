@@ -268,24 +268,6 @@ namespace NFTCPClient
 
         }
 
-        public void Send(string message)
-        {
-
-            if (!IsConnected())
-                return;
-            //添加包长在前面4位长度
-            int nLen = message.Length;
-            string strLen = nLen.ToString().PadLeft(4, '0');
-
-            StringBuilder strInfo = new StringBuilder();
-            strInfo.Append(strLen);
-            strInfo.Append(message);
-
-            _writer.WriteLine(strInfo.ToString());
-            _writer.Flush();
-
-        }
-
         public void SendBytes(byte[] bytes)
         {
             SendBytes(bytes, 0, bytes.Length);
