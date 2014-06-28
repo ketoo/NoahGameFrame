@@ -251,6 +251,17 @@ public class NFBinarySendLogic
         SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_WORLD_LIST, stream);
     }
 
+    public void RequireSelectServer(int nServerID)
+    {
+        NFMsg.ReqSelectServer xData = new NFMsg.ReqSelectServer();
+        xData.world_id = nServerID;
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqSelectServer>(stream, xData);
+
+        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_SELECT_SERVER, stream);
+    }
+
     public void RequireCharList(int nGameID)
     {
 

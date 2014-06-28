@@ -350,30 +350,8 @@ public class NFStart : MonoBehaviour
                     netFocus.sendLogic.LoginPB(netFocus.strLoginAccount, netFocus.strPassword, "");
                 }
             }
+
             nOffest += height;
-
-            NFTCPClientState eState = netFocus.client.GetState();
-            switch (eState)
-            {
-                case NFTCPClientState.Connecting:
-                    //GUI.Label(new Rect(25, nOffest, 150, height), "连接中......");
-                    break;
-
-                case NFTCPClientState.Connected:
-                    GUI.Label(new Rect(25, nOffest, 150, height), "连接成功!");
-                    break;
-
-                case NFTCPClientState.Disconnected:
-                    {
-                        netFocus.mPlayerState = NFNet.PLAYER_STATE.E_WAITING_PLAYER_LOGIN;
-                        netFocus = null;
-                        GUI.Label(new Rect(25, nOffest, 150, height), "掉线!");
-                    }
-                    break;
-                default:
-                    break;
-            }
-
             if (null != netFocus)
             {
                 ////////////////////
@@ -590,12 +568,12 @@ public class NFStart : MonoBehaviour
 
             NFMsg.ServerInfo info = (NFMsg.ServerInfo)netFocus.listener.aServerList[i];
 
-            if (GUI.Button(new Rect(0, nOffest, 200, 50), info.name + " " + info.server_id + " " + info.status))
+            if (GUI.Button(new Rect(0, nOffest, 200, 50), System.Text.Encoding.Default.GetString(info.name) + " " + info.server_id + " " + info.status))
             {
                 netFocus.mPlayerState = NFNet.PLAYER_STATE.E_HAS_PLAYER_ROLELIST;
-
                 netFocus.nServerID = info.server_id;
 
+                netFocus.sendLogic.RequireSelectServer(info.server_id);
             }
 
 
