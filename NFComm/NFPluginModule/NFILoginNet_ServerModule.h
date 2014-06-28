@@ -18,7 +18,6 @@ class NFILoginNet_ServerModule
 {
 
 public:
-	virtual void SynWorldToClient() = 0;;
 
 };
 

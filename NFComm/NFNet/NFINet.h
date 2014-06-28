@@ -107,8 +107,6 @@ public:
         //把后面的挪到前面来
         mstrBuff.erase(nStart, nLen);
 
-        std::cout << "剩余长度:" << mstrBuff.length() << std::endl;
-
         return mstrBuff.length();
     }
 
@@ -152,6 +150,16 @@ public:
         mnUserData = nData;
     }
 
+    const std::string& GetUserStrData() const
+    {
+        return mstrUserData;
+    }
+
+    void SetUserStrData(const std::string& strData)
+    {
+        mstrUserData = strData;
+    }
+
     int IncreaseError(const int nError = 1)
     {
         return mnErrorCount += nError;
@@ -175,6 +183,7 @@ private:
     uint16_t mnErrorCount;
     int32_t mnLogicState;
     int32_t mnUserData;
+    std::string mstrUserData;
 
     NFINet* m_pNet;
 };

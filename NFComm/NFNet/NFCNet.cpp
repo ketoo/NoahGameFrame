@@ -31,7 +31,6 @@ void NFCNet::conn_writecb(struct bufferevent *bev, void *user_data)
 {
     //每次收到发送消息的时候事件
     // 	struct evbuffer *output = bufferevent_get_output(bev);
-    printf("发送消息!!!\n");
 }
 
 void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data)
@@ -111,7 +110,6 @@ void NFCNet::listener_cb(struct evconnlistener *listener, evutil_socket_t fd, st
 
     //我获得一个新连接。为其创建一个bufferevent--FD需要管理
     struct sockaddr_in* pSin = (sockaddr_in*)sa;
-    printf("新登录 fd:%d IP: %s\n", fd, inet_ntoa(pSin->sin_addr));
 
     NetObject* pObject = new NetObject(pNet, fd, *pSin, bev);
     pObject->GetNet()->AddNetObject(fd, pObject);
@@ -156,7 +154,6 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
     }
 
     size_t len = evbuffer_get_length(input);
-    printf("收到消息，长度%d\n", len);
 
     //返回给客户端
     //  	struct evbuffer *output = bufferevent_get_output(bev);
