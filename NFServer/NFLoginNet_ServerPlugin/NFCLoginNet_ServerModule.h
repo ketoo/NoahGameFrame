@@ -58,9 +58,6 @@ public:
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
 
-	virtual void SynWorldToClient();
-
-
 protected:
 	int OnRecivePack(const NFIPacket& msg);
 	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
@@ -94,10 +91,7 @@ protected:
 protected:
 	void SynWorldToClient(const int nFD);
 
-
-
 private:
-	int mnClientConnectContainer;
 
     NFILoginNet_ClientModule* m_pLoginNet_ClientModule;
     NFIEventProcessModule* m_pEventProcessModule;

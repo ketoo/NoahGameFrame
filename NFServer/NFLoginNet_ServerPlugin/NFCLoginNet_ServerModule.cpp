@@ -15,7 +15,6 @@ const std::string PROPERTY_VERIFIED = "Verified";
 
 bool NFCLoginNet_ServerModule::Init()
 {
-    mnClientConnectContainer = -1;
 	mstrConfigIdent = "LoginServer";
 	return true;
 }
@@ -70,9 +69,6 @@ bool NFCLoginNet_ServerModule::AfterInit()
 	{
 		assert(0);
 	}
-
-
-	m_pKernelModule->CreateContainer(mnClientConnectContainer, "");
 
 	return true;
 }
@@ -284,22 +280,6 @@ int NFCLoginNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_
     }
 
 	return 0;	
-}
-
-void NFCLoginNet_ServerModule::SynWorldToClient()
-{
-
-	NFCValueList varLoginObjectList;
-	m_pKernelModule->GetContainerOnLineList(mnClientConnectContainer, varLoginObjectList);
-	if (varLoginObjectList.GetCount() > 0)
-	{
-		for (int i = 0; i < varLoginObjectList.GetCount(); i++)
-		{
-			NFIDENTID ident = varLoginObjectList.ObjectVal(i);
-			int nFD = m_pKernelModule->QueryPropertyInt(ident, "FD");
-			SynWorldToClient(nFD);
-		}
-	}
 }
 
 void NFCLoginNet_ServerModule::SynWorldToClient( const int nFD )
