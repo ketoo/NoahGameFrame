@@ -11,14 +11,15 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
+#include "NFComm\NFMessageDefine\NFMsgPreGame.pb.h"
 
 class NFILoginNet_ClientModule
-    : public NFILogicModule
+    : public NFINetModule
 {
 
 public:
 
-
+    virtual NFMap<int, NFMsg::ServerInfoReport>* GetWorldMap() = 0;
 };
 
 #endif

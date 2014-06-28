@@ -252,8 +252,6 @@ int NFCLoginNet_ClientModule::OnWorldInfoProcess( const NFIPacket& msg )
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSize, "", "WorldInfo");
 
-	m_pLoginNet_ServerModule->SynWorldToClient();
-
 	return 0;
 }
 
