@@ -175,16 +175,17 @@ bool NFCItemModule::CheckConfig()
 		}
 
 		int nQuality = m_pElementInfoModule->QueryPropertyInt(strConfigID, "Quality");
-		if (nQuality <= 0)
+		if (nQuality < 0)
 		{
 			assert(0);
 		}
 
-		int nCoolDown = m_pElementInfoModule->QueryPropertyInt(strConfigID, "CoolDwnTime");
-		if (nCoolDown < 0)
-		{
-			assert(0);
-		}
+// 		int nCoolDown = m_pElementInfoModule->QueryPropertyInt(strConfigID, "CoolDwnTime");
+// 		if (nCoolDown <= 0)
+// 		{
+// 			assert(0);
+// 		}
+
 		int nOverlayCount = m_pElementInfoModule->QueryPropertyInt(strConfigID, "OverlayCount");
 		if (nOverlayCount <= 0)
 		{
