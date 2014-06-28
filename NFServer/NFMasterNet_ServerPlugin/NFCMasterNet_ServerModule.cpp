@@ -12,9 +12,6 @@
 
 bool NFCMasterNet_ServerModule::Init()
 {
-    mnWorldContainerID = - 2;
-    mnLoginContainerID = -1;
-
 	mstrConfigIdent = "MasterServer";
 	return true;
 }
@@ -36,37 +33,15 @@ int NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const NFIPacket& msg)
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-
-        NFCValueList varList;
-        GetWorldObject(pData->server_id(), varList);
-        if (varList.GetCount() != 0)
+        ServerData* pServerData =  mWorldMap.GetElement(pData->server_id());
+        if (!pServerData)
         {
-            NFIObject* pObject = m_pKernelModule->GetObject(varList.ObjectVal(i));
-            if (pObject)
-            {
-                pObject->SetPropertyInt("FD", msg.GetFd());
-                pObject->SetPropertyInt("State", pData->server_state());
-                pObject->SetPropertyInt("ServerID", pData->server_id());
-                pObject->SetPropertyString("Name", pData->server_name());
-                pObject->SetPropertyInt("MaxConnect", pData->server_max_online());
-                pObject->SetPropertyInt("OnlineCount", pData->server_cur_count());
-            }
-            return 0;
+            pServerData = new ServerData();
+            mWorldMap.AddElement(pData->server_id(), pServerData);
         }
 
-        //默认都0号分组
-        NFCValueList arg;
-        arg << "FD" << msg.GetFd();
-        NFIObject* pObject = m_pKernelModule->CreateObject(0, mnWorldContainerID, 0, "WorldServer", "", arg);
-        if (pObject)
-        {
-			pObject->SetPropertyInt("FD", msg.GetFd());
-			pObject->SetPropertyInt("State", pData->server_state());
-            pObject->SetPropertyInt("ServerID", pData->server_id());
-            pObject->SetPropertyString("Name", pData->server_name());
-            pObject->SetPropertyInt("MaxConnect", pData->server_max_online());
-            pObject->SetPropertyInt("OnlineCount", pData->server_cur_count());
-        }
+        pServerData->nFD = msg.GetFd();
+        *(pServerData->pData) = *pData;
 
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "WorldRegistered");
     }
@@ -89,18 +64,14 @@ int NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const NFIPacket& msg)
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-
-        NFCValueList varList;
-        GetWorldObject(pData->server_id(), varList);
-        if (varList.GetCount() <= 0)
+        ServerData* pServerData =  mWorldMap.RemoveElement(pData->server_id());
+        if (pServerData)
         {
-            return 0;
+            delete pServerData;
+            pServerData = NULL;
         }
 
-        m_pKernelModule->DestroyObject(varList.ObjectVal(0));
-
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "WorldUnRegistered");
-
     }
 
 	SynWorldToLogin();
@@ -120,22 +91,15 @@ int NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFIPacket& msg)
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-
-        NFCValueList varList;
-        GetWorldObject(pData->server_id(), varList);
-        if (varList.GetCount() != 1)
+        ServerData* pServerData =  mWorldMap.GetElement(pData->server_id());
+        if (!pServerData)
         {
-            return 0;
+            pServerData = new ServerData();
+            mWorldMap.AddElement(pData->server_id(), pServerData);
         }
 
-        NFIDENTID ident = varList.ObjectVal(0);
-		NFIObject* pObject = m_pKernelModule->GetObject(ident);
-		if (pObject)
-		{
-			pObject->SetPropertyInt("State", pData->server_state());
-			pObject->SetPropertyInt("MaxConnect", pData->server_max_online());
-			pObject->SetPropertyInt("OnlineCount", pData->server_cur_count());
-		}
+        pServerData->nFD = msg.GetFd();
+        *(pServerData->pData) = *pData;
 
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "RefreshWorldInfo");
 
@@ -158,27 +122,15 @@ int NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const NFIPacket& msg)
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
+        ServerData* pServerData =  mLoginMap.GetElement(pData->server_id());
+        if (!pServerData)
+        {
+            pServerData = new ServerData();
+            mLoginMap.AddElement(pData->server_id(), pServerData);
+        }
 
-	    NFCValueList varList;
-	    GetLoginObject(pData->server_id(), varList);
-	    if (varList.GetCount() != 0)
-	    {
-		    return 0;
-	    }
-
-	    //默认都0号分组
-	    NFCValueList arg;
-	    arg << "FD" << msg.GetFd();
-	    NFIObject* pObject = m_pKernelModule->CreateObject(0, mnLoginContainerID, 0, "LoginServer", "", arg);
-	    if (pObject)
-	    {
-			pObject->SetPropertyInt("FD", msg.GetFd());
-			pObject->SetPropertyInt("State", pData->server_state());
-			pObject->SetPropertyInt("ServerID", pData->server_id());
-			pObject->SetPropertyString("Name", pData->server_name());
-			pObject->SetPropertyInt("MaxConnect", pData->server_max_online());
-			pObject->SetPropertyInt("OnlineCount", pData->server_cur_count());
-	    }
+        pServerData->nFD = msg.GetFd();
+        *(pServerData->pData) = *pData;
 
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "LoginRegistered");
     }
@@ -200,15 +152,12 @@ int NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const NFIPacket& msg)
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-
-        NFCValueList varList;
-        GetLoginObject(pData->server_id(), varList);
-        if (varList.GetCount() != 1)
+        ServerData* pServerData =  mLoginMap.RemoveElement(pData->server_id());
+        if (pServerData)
         {
-            return 0;
+            delete pServerData;
+            pServerData = NULL;
         }
-
-        m_pKernelModule->DestroyObject(varList.ObjectVal(0));
 
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "LoginUnRegistered");
 
@@ -230,22 +179,15 @@ int NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess(const NFIPacket& msg)
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-
-        NFCValueList varList;
-        GetLoginObject(pData->server_id(), varList);
-        if (varList.GetCount() != 1)
+        ServerData* pServerData =  mLoginMap.GetElement(pData->server_id());
+        if (!pServerData)
         {
-            return 0;
+            pServerData = new ServerData();
+            mLoginMap.AddElement(pData->server_id(), pServerData);
         }
 
-		NFIDENTID ident = varList.ObjectVal(0);
-		NFIObject* pObject = m_pKernelModule->GetObject(ident);
-		if (pObject)
-		{
-			pObject->SetPropertyInt("State", pData->server_state());
-			pObject->SetPropertyInt("MaxConnect", pData->server_max_online());
-			pObject->SetPropertyInt("OnlineCount", pData->server_cur_count());
-		}
+        pServerData->nFD = msg.GetFd();
+        *(pServerData->pData) = *pData;
 
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "RefreshLoginInfo");
 
@@ -263,16 +205,14 @@ int NFCMasterNet_ServerModule::OnSelectWorldProcess(const NFIPacket& msg)
 		return 0;
 	}
 
-	NFCValueList varList;
-	GetWorldObject(xMsg.world_id(), varList);
-	if (varList.GetCount() != 1)
-	{
-		return 0;
-	}
+    ServerData* pServerData =  mWorldMap.GetElement(xMsg.world_id());
+    if (!pServerData)
+    {
+        return 0;
+    }
 
 	//转发送到世界服务器
-	uint16_t nSocket = m_pKernelModule->QueryPropertyInt(varList.ObjectVal(0), "FD");
-	SendMsgPB(NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xMsg, nSocket);
+	SendMsgPB(NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xMsg, pServerData->nFD);
 
 	return 0;
 }
@@ -284,29 +224,6 @@ bool NFCMasterNet_ServerModule::Execute(const float fLasFrametime, const float f
 	return true;
 }
 
-int NFCMasterNet_ServerModule::OnWorldServerObjectEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var)
-{
-    //std::cout << "AddClassCallBack：" << strClassName << " EventID:" << eClassEvent << std::endl;
-	return 0;
-}
-
-int NFCMasterNet_ServerModule::OnWorldServerObjectPropertyEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar)
-{
-    //std::cout << "AddPropertyCallBack：" << strPropertyName << std::endl;
-	//统计全世界总在线多少人等
-	if (oldVar.GetCount() <= 0)
-	{
-		return 0;
-	}
-
-	return 0;
-}
-
-int NFCMasterNet_ServerModule::GetWorldObject(const int nWorldID, NFIValueList& varObjectList)
-{
-	return m_pKernelModule->GetObjectByProperty(mnWorldContainerID, "ServerID", NFCValueList() << nWorldID, varObjectList);
-}
-
 int NFCMasterNet_ServerModule::OnSelectServerResultProcess(const NFIPacket& msg)
 {
 	int64_t nPlayerID = 0;
@@ -316,23 +233,16 @@ int NFCMasterNet_ServerModule::OnSelectServerResultProcess(const NFIPacket& msg)
 		return 0;
 	}
 
-	NFCValueList varList;
-	GetLoginObject(xMsg.login_id(), varList);
-	if (varList.GetCount() != 1)
-	{
-		return 0;
-	}
+    ServerData* pServerData =  mLoginMap.GetElement(xMsg.world_id());
+    if (!pServerData)
+    {
+        return 0;
+    }
 
 	//转发送到登录服务器
-	uint16_t nSocket = m_pKernelModule->QueryPropertyInt(varList.ObjectVal(0), "FD");
-	SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD, xMsg, nSocket);
+	SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD, xMsg, pServerData->nFD);
 
 	return 0;
-}
-
-int NFCMasterNet_ServerModule::GetLoginObject(const int nLoginID, NFIValueList& varObjectList)
-{
-	return m_pKernelModule->GetObjectByProperty(mnLoginContainerID, "ServerID", NFCValueList() << nLoginID, varObjectList);
 }
 
 bool NFCMasterNet_ServerModule::AfterInit()
@@ -351,19 +261,6 @@ bool NFCMasterNet_ServerModule::AfterInit()
 	assert(NULL != m_pLogicClassModule);
 	assert(NULL != m_pElementInfoModule);
 
-    m_pEventProcessModule->AddClassCallBack("WorldServer", this, &NFCMasterNet_ServerModule::OnWorldServerObjectEvent);
-    //m_pEventProcessModule->AddClassCallBack("LoginServer", this, &NFCMasterNet_ServerModule::OnWorldServerObjectEvent);
-    //m_pEventProcessModule->AddEventCallBack(0, 1, this, &NFCMasterNet_ServerModule::OnTestEvent);
-    //m_pEventProcessModule->DoEvent(0, 1, NFCValueList());
-
-	//////////////////////////////////////////////////////////////////////////
-
-
-
-	m_pKernelModule->CreateContainer(mnLoginContainerID, "");
-	m_pKernelModule->CreateContainer(mnWorldContainerID, "");
-
-
 	const int nServerID = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerID");
 	const int nServerPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerPort");
 	const std::string& strName = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "Name");
@@ -380,12 +277,6 @@ bool NFCMasterNet_ServerModule::AfterInit()
 
 	return true;
 }
-
-//int NFCMasterNet_ServerModule::OnTestEvent(const NFIDENTID& self, const int nEventID, const NFIValueList& var)
-//{
-//    std::cout << "AddEventCallBack：" << self.nData64 << std::endl;
-//    return 0;
-//}
 
 int NFCMasterNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 {
@@ -465,20 +356,45 @@ int NFCMasterNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET
 void NFCMasterNet_ServerModule::OnClientDisconnect( const int nAddress )
 {
 	//不管是login还是world都要找出来,替他反注册
-	NFCValueList varList;
-	m_pKernelModule->GetObjectByProperty(mnWorldContainerID, "FD", NFCValueList() << nAddress, varList);
-	if (varList.GetCount() > 0)
-	{
-		m_pKernelModule->SetPropertyInt(varList.ObjectVal(0), "State", NFMsg::EST_CRASH);
-		SynWorldToLogin();
-	}
+    ServerData* pServerData =  mWorldMap.First();
+    while (pServerData)
+    {
+        if (nAddress == pServerData->nFD)
+        {
+            pServerData->pData->set_server_state(NFMsg::EST_CRASH);
+            pServerData->nFD = 0;
 
-	varList.Clear();
-	m_pKernelModule->GetObjectByProperty(mnLoginContainerID, "FD", NFCValueList() << nAddress, varList);
-	if (varList.GetCount() > 0)
-	{
-		m_pKernelModule->DestroyObject(varList.ObjectVal(0));
-	}
+            SynWorldToLogin();
+            return;
+        }
+
+        pServerData = mWorldMap.Next();
+    }
+    
+    //////////////////////////////////////////////////////////////////////////
+
+    int nServerID = 0;
+    pServerData =  mLoginMap.First();
+    while (pServerData)
+    {
+        if (nAddress == pServerData->nFD)
+        {
+            nServerID = pServerData->pData->server_id();
+            break;
+        }
+
+        pServerData = mLoginMap.Next();
+    }
+
+    if (nServerID != 0)
+    {
+        ServerData* pRmServerData = mLoginMap.RemoveElement(nServerID);
+        if (pRmServerData)
+        {
+            delete pRmServerData;
+            pRmServerData = NULL;
+        }
+    }
 }
 
 void NFCMasterNet_ServerModule::OnClientConnected( const int nAddress )
@@ -488,41 +404,23 @@ void NFCMasterNet_ServerModule::OnClientConnected( const int nAddress )
 
 void NFCMasterNet_ServerModule::SynWorldToLogin()
 {
-	NFCValueList varObjectList;
-	m_pKernelModule->GetContainerOnLineList(mnWorldContainerID, varObjectList);
+    NFMsg::ServerInfoReportList xData;
 
+    ServerData* pServerData =  mWorldMap.First();
+    while (pServerData)
+    {
+        NFMsg::ServerInfoReport* pData = xData.add_server_list();
+        *pData = *(pServerData->pData);
 
-	if (varObjectList.GetCount() > 0)
-	{
-		NFList<NFIPropertyManager*> list;
+        pServerData = mWorldMap.Next();
+    }
 
-		for (int i = 0; i < varObjectList.GetCount(); i++)
-		{
-			NFIDENTID ident = varObjectList.ObjectVal(i);
+    //广播给所有loginserver
+    pServerData =  mLoginMap.First();
+    while (pServerData)
+    {
+        SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, pServerData->nFD);
 
-			NFIObject* pObject = m_pKernelModule->GetObject(ident);
-			if (pObject)
-			{
-				list.Add(pObject->GetPropertyManager());
-			}
-		}
-
-		NFMsg::MultiObjectPropertyList xData;
-		PropertyListToString(list, xData, E_CHECK_TYPE::ECT_PUBLIC, true);
-
-		//////////////////////////////////////////////////////////////////////////
-
-		NFCValueList varLoginObjectList;
-		m_pKernelModule->GetContainerOnLineList(mnLoginContainerID, varLoginObjectList);
-		if (varLoginObjectList.GetCount() > 0)
-		{
-			for (int i = 0; i < varLoginObjectList.GetCount(); i++)
-			{
-				NFIDENTID ident = varLoginObjectList.ObjectVal(i);
-				int nFD = m_pKernelModule->QueryPropertyInt(ident, "FD");
-
-				SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
-			}
-		}
-	}
+        pServerData = mLoginMap.Next();
+    }
 }
