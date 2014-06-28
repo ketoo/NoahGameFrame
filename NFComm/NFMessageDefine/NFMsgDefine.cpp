@@ -315,7 +315,7 @@ bool PropertyFormString( NFIPropertyManager* pProManager, const NFMsg::ObjectPro
 	return true;
 }
 
-bool PropertyListToString( NFList<NFIPropertyManager*>& pProManagerList, NFMsg::MultiObjectPropertyList& propertyDB, E_CHECK_TYPE nCheckType, const bool bCheck )
+bool PropertyListToString( NFList<NFIPropertyManager*>& pProManagerList, NFMsg::MultiObjectPropertyList& xPropertyDB, E_CHECK_TYPE nCheckType, const bool bCheck )
 {
 	if (pProManagerList.Count() <= 0)
 	{
@@ -328,7 +328,7 @@ bool PropertyListToString( NFList<NFIPropertyManager*>& pProManagerList, NFMsg::
 	{
 		NFIDENTID ident = pProManager->Self();
 
-		NFMsg::ObjectPropertyList* pPropertyList = propertyDB.add_multi_player_property();
+		NFMsg::ObjectPropertyList* pPropertyList = xPropertyDB.add_multi_player_property();
 		pPropertyList->set_player_id(ident.nData64);
 		PropertyToString(pProManager, *pPropertyList, nCheckType, bCheck);
 
