@@ -56,17 +56,9 @@ protected:
 
 	bool InThisWorld(const std::string& strAccount);
 
-    //////////////////////////////////////////////////////////////////////////
-    int GetGameServerObject(const int nServerID, NFIValueList& varObjectList);
-    //NFIDENTID GetDataBaseObject(const int nDataBaseID);
-    int GetProxyObject(const int nProxyID, NFIValueList& varObjectList);
-
     int OnGameServerRegisteredProcess(const NFIPacket& msg);
     int OnGameServerUnRegisteredProcess(const NFIPacket& msg);
     int OnRefreshGameServerInfoProcess(const NFIPacket& msg);
-
-    //     int OnDataBaseRegisteredProcess(const NFIPacket& msg);    //
-    //     int OnDataBaseUnRegisteredProcess(const NFIPacket& msg);
 
     int OnProxyServerRegisteredProcess(const NFIPacket& msg);
     int OnProxyServerUnRegisteredProcess(const NFIPacket& msg);
@@ -75,10 +67,6 @@ protected:
     int OnLeaveGameProcess(const NFIPacket& msg);
     //////////////////////////////////////////////////////////////////////////
 
-    //     int OnLoadRoleDataBeginProcess(const NFIPacket& msg);
-    //     int OnLoadRoleDataFinalProcess(const NFIPacket& msg);
-    //     int OnSaveRoleDataProcess(const NFIPacket& msg);
-    //     int OnWantToSwapGSProcess(const NFIPacket& msg);
 	void SynGameToProxy();
 	void SynGameToProxy( const int nFD );
 
@@ -106,15 +94,6 @@ private:
     //serverid,data
     NFMap<int, ServerData> mGameMap;
     NFMap<int, ServerData> mProxyMap;
-
-    //world server container:-3
-    int mnGameServerContainerID;
-
-    //data server container:-4
-    int mnDataBaseContainerID;
-
-    //login server container:-10
-    int mnProxyContainerID;
 
 	NFIElementInfoModule* m_pElementInfoModule;
 	NFILogicClassModule* m_pLogicClassModule;
