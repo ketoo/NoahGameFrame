@@ -19,9 +19,10 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFILoginNet_ClientModule.h"
 
 class NFCLoginNet_ClientModule
-    : public NFINetModule
+    : public NFILoginNet_ClientModule
 {
 public:
     NFCLoginNet_ClientModule(NFIPluginManager* p)
@@ -40,6 +41,8 @@ public:
 
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
+
+    virtual NFMap<int, NFMsg::ServerInfoReport>* GetWorldMap();
 
 protected:
 	int OnRecivePack(const NFIPacket& msg);
@@ -66,8 +69,7 @@ private:
 	int mnSocketFD;
 
 private:
-    //world server container:-2
-    int mnWorldContainerID;
+    NFMap<int, NFMsg::ServerInfoReport> mWorldMap;
 
 	NFILoginLogicModule* m_pLoginLogicModule;
 	NFILoginNet_ServerModule* m_pLoginNet_ServerModule;

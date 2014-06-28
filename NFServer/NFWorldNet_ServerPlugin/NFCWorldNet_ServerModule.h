@@ -11,19 +11,19 @@
 
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
-#include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIWorldNet_ClientModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
-#include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIWorldLogicModule.h"
-#include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFNet/NFIPacket.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
+#include "NFComm/NFCore/NFMap.h"
+#include "NFComm\NFPluginModule\NFIKernelModule.h"
 
 class NFCWorldNet_ServerModule
-    : public NFINetModule,
-  public NFMap<NFIDENTID,NFList<std::string>>//帐号--应该是网关->帐号列表
+    : public NFIWorldNet_ServerModule
 {
 public:
     NFCWorldNet_ServerModule(NFIPluginManager* p)
@@ -81,7 +81,32 @@ protected:
     //     int OnWantToSwapGSProcess(const NFIPacket& msg);
 	void SynGameToProxy();
 	void SynGameToProxy( const int nFD );
+
 private:
+
+    struct ServerData 
+    {
+        ServerData()
+        {
+            pData = new NFMsg::ServerInfoReport();
+            nFD = 0;
+        }
+        ~ServerData()
+        {
+            nFD = 0;
+            delete pData;
+            pData = NULL;
+        }
+
+        int nFD;
+        NFMsg::ServerInfoReport* pData;
+    };
+
+private:
+    //serverid,data
+    NFMap<int, ServerData> mGameMap;
+    NFMap<int, ServerData> mProxyMap;
+
     //world server container:-3
     int mnGameServerContainerID;
 
