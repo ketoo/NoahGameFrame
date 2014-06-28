@@ -13,7 +13,6 @@
 bool NFCLoginNet_ClientModule::Init()
 {
 	mstrConfigIdent = "LoginServer";
-    mnWorldContainerID = -2;
 	return true;
 }
 
@@ -58,8 +57,6 @@ bool NFCLoginNet_ClientModule::AfterInit()
 	{
 		assert(0);
 	}
-
-	m_pKernelModule->CreateContainer(mnWorldContainerID, "");
 
 	return true;
 }
@@ -231,27 +228,26 @@ int NFCLoginNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF_NET_
 int NFCLoginNet_ClientModule::OnWorldInfoProcess( const NFIPacket& msg )
 {
 	int64_t nPlayerID = 0;	
-	NFMsg::MultiObjectPropertyList xMsg;
+	NFMsg::ServerInfoReportList xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
 		return 0;
 	}
 
-	int nSize = xMsg.multi_player_property_size();
+	int nSize = xMsg.server_list_size();
 	for (int i = 0; i < nSize; ++i)
 	{
-		const NFMsg::ObjectPropertyList& xData = xMsg.multi_player_property(i);
-		NFIObject* pObject = m_pKernelModule->GetObject(xData.player_id());
-		if (!pObject)
-		{
-			pObject = m_pKernelModule->CreateObject(0, mnWorldContainerID, 0, "WorldServer", "", NFCValueList());
-		}
+		const NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
 
-		NFIPropertyManager* pProManager = pObject->GetPropertyManager();
-		if (pProManager)
-		{
-			PropertyFormString(pProManager, xData);
-		}
+        NFMsg::ServerInfoReport* pServerData = mWorldMap.GetElement(pData->server_id());
+        if (!pServerData)
+        {
+            pServerData = new NFMsg::ServerInfoReport();
+            *pServerData = *pData;
+
+            mWorldMap.AddElement(pData->server_id(), pServerData);
+        }
+      
 	}
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSize, "", "WorldInfo");
@@ -259,6 +255,11 @@ int NFCLoginNet_ClientModule::OnWorldInfoProcess( const NFIPacket& msg )
 	m_pLoginNet_ServerModule->SynWorldToClient();
 
 	return 0;
+}
+
+NFMap<int, NFMsg::ServerInfoReport>* NFCLoginNet_ClientModule::GetWorldMap()
+{
+    return &mWorldMap;
 }
 
 

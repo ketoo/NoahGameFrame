@@ -21,7 +21,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFCWorldNet_ClientModule
-    : public NFINetModule
+    : public NFIWorldNet_ClientModule
 {
 public:
     NFCWorldNet_ClientModule(NFIPluginManager* p)

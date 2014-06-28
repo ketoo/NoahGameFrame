@@ -31,10 +31,6 @@ public:
 
 	}
 
-	void operator()() 
-	{
-	}
-
     virtual void LogRecive(const char* str){};
     virtual void LogSend(const char* str){};
 

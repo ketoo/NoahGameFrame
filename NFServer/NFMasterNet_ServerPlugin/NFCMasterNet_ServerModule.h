@@ -49,11 +49,6 @@ protected:
 	void OnClientConnected(const int nAddress);
 	
 protected:
-
-	//////////////////////////////////////////////////////////////////////////
-	int GetWorldObject(const int nWorldID, NFIValueList& varObjectList);
-	int GetLoginObject(const int nLoginID, NFIValueList& varObjectList);
-
 	//世界服务器注册，刷新信息
 	int OnWorldRegisteredProcess(const NFIPacket& msg);
 	int OnWorldUnRegisteredProcess(const NFIPacket& msg);
@@ -71,18 +66,32 @@ protected:
 
 	//////////////////////////////////////////////////////////////////////////
 
-	int OnWorldServerObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var);
-	int OnWorldServerObjectPropertyEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar);
-    //int OnTestEvent(const NFIDENTID& self, const int nEventID, const NFIValueList& var);
 	void SynWorldToLogin();
 
 private:
-	//world server container:-2
-	int mnWorldContainerID;
 
-	//login server container:-1
-	int mnLoginContainerID;
+    struct ServerData 
+    {
+        ServerData()
+        {
+            pData = new NFMsg::ServerInfoReport();
+            nFD = 0;
+        }
+        ~ServerData()
+        {
+            nFD = 0;
+            delete pData;
+            pData = NULL;
+        }
 
+        int nFD;
+        NFMsg::ServerInfoReport* pData;
+    };
+
+private:
+    //serverid,data
+    NFMap<int, ServerData> mWorldMap;
+    NFMap<int, ServerData> mLoginMap;
 
 	
 	NFIElementInfoModule* m_pElementInfoModule;

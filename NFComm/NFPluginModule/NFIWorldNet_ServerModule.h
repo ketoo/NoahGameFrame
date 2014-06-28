@@ -11,9 +11,10 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
+#include "NFComm/NFNet/NFIPacket.h"
 
 class NFIWorldNet_ServerModule
-    : public NFILogicModule
+    : public NFINetModule
 {
 
 public:
