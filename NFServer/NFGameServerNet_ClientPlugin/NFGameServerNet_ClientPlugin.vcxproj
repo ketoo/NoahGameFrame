@@ -97,7 +97,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCGameServerPublicProxyModule.h" />
     <ClInclude Include="NFCGameServerNet_ClientModule.h" />
     <ClInclude Include="NFGameServerNet_ClientPlugin.h" />
   </ItemGroup>
@@ -110,7 +109,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCGameServerPublicProxyModule.cpp" />
     <ClCompile Include="NFCGameServerNet_ClientModule.cpp" />
     <ClCompile Include="NFGameServerNet_ClientPlugin.cpp" />
   </ItemGroup>

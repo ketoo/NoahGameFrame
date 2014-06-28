@@ -12,12 +12,7 @@
 
 bool NFCGameServerNet_ServerModule::Init()
 {
-    mnRoleHallContainer = -3;
-    mnProxyContainer = -4;
     mstrConfigIdent = "GameServer";
-    
-
-
 
     return true;
 }
@@ -95,6 +90,18 @@ int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
     //不上actor的情况
     switch (msg.GetMsgHead()->GetMsgID())
     {
+    case NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REFRESH:
+        OnRefreshProxyServerInfoProcess(msg);
+        break;
+
+    case NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED:
+        OnProxyServerRegisteredProcess(msg);
+        break;
+
+    case NFMsg::EGameMsgID::EGMI_PTWG_PROXY_UNREGISTERED:
+        OnProxyServerUnRegisteredProcess(msg);
+        break;
+        //////////////////////////////////////////////////////////////////////////
     case NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME:
         OnClienEnterGameProcess(msg);
         break;
@@ -144,17 +151,34 @@ int NFCGameServerNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF
 
 void NFCGameServerNet_ServerModule::OnClientDisconnect( const int nAddress )
 {
+    //只可能是网关丢了
+    int nServerID = 0;
+    ServerData* pServerData =  mProxyMap.First();
+    while (pServerData)
+    {
+        if (nAddress == pServerData->nFD)
+        {
+            nServerID = pServerData->pData->server_id();
+            break;
+        }
 
+        pServerData = mProxyMap.Next();
+    }
+
+    if (nServerID != 0)
+    {
+        ServerData* pRmServerData = mProxyMap.RemoveElement(nServerID);
+        if (pRmServerData)
+        {
+            delete pRmServerData;
+            pRmServerData = NULL;
+        }
+    }
 }
 
 void NFCGameServerNet_ServerModule::OnClientConnected( const int nAddress )
 {
-	NFCValueList varList;
-	m_pKernelModule->GetObjectByProperty(mnProxyContainer, "FD", NFCValueList() << nAddress, varList);
-	if (varList.GetCount() > 0)
-	{
-		m_pKernelModule->DestroyObject(varList.ObjectVal(0));		
-	}
+
 }
 
 void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& msg )
@@ -176,10 +200,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
     //gate_id
 
     int nSceneID = 1;
-    NFCValueList valArg;
-    valArg << "ProxyID";
-    valArg << xMsg.gate_id();
-    NFIObject* pObject = m_pKernelModule->CreateObject( nPlayerID, nSceneID, 0, "Player", "", valArg );
+    NFIObject* pObject = m_pKernelModule->CreateObject( 0, nSceneID, 0, "Player", "", NFCValueList() );
     if ( NULL == pObject )
     {
         return;
@@ -257,6 +278,20 @@ int NFCGameServerNet_ServerModule::GetBroadCastObject( const NFIDENTID& self, co
 
 int NFCGameServerNet_ServerModule::OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var )
 {
+    if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
+    {
+        //SaveDataToNoSql( self, true );
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self.nData64, "Player Offline", "");
+    }
+    else if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
+    {
+        //LoadDataFormNoSql( self );
+    }
+    else if ( CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent )
+    {
+        NFIObject* pObject = m_pKernelModule->GetObject(self);
+    }
+
     return 0;
 }
 
@@ -343,4 +378,84 @@ void NFCGameServerNet_ServerModule::OnClienChatProcess( const NFIPacket& msg )
 void NFCGameServerNet_ServerModule::OnClienUseItem( const NFIPacket& msg )
 {
 
+}
+
+int NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess( const NFIPacket& msg )
+{
+    int64_t nPlayerID = 0;
+    NFMsg::ServerInfoReportList xMsg;
+    if (!RecivePB(msg, xMsg, nPlayerID))
+    {
+        return 0;
+    }
+
+    for (int i = 0; i < xMsg.server_list_size(); ++i)
+    {
+        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
+        ServerData* pServerData =  mProxyMap.GetElement(pData->server_id());
+        if (!pServerData)
+        {
+            pServerData = new ServerData();
+            mProxyMap.AddElement(pData->server_id(), pServerData);
+        }
+
+        pServerData->nFD = msg.GetFd();
+        *(pServerData->pData) = *pData;
+
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Proxy Registered");
+    }
+
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnProxyServerUnRegisteredProcess( const NFIPacket& msg )
+{
+    int64_t nPlayerID = 0;
+    NFMsg::ServerInfoReportList xMsg;
+    if (!RecivePB(msg, xMsg, nPlayerID))
+    {
+        return 0;
+    }
+
+    for (int i = 0; i < xMsg.server_list_size(); ++i)
+    {
+        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
+        ServerData* pServerData =  mProxyMap.RemoveElement(pData->server_id());
+        if (pServerData)
+        {
+            delete pServerData;
+            pServerData = NULL;
+        }
+
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Proxy UnRegistered");
+    }
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess( const NFIPacket& msg )
+{
+    int64_t nPlayerID = 0;
+    NFMsg::ServerInfoReportList xMsg;
+    if (!RecivePB(msg, xMsg, nPlayerID))
+    {
+        return 0;
+    }
+
+    for (int i = 0; i < xMsg.server_list_size(); ++i)
+    {
+        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
+        ServerData* pServerData =  mProxyMap.GetElement(pData->server_id());
+        if (!pServerData)
+        {
+            pServerData = new ServerData();
+            mProxyMap.AddElement(pData->server_id(), pServerData);
+        }
+
+        pServerData->nFD = msg.GetFd();
+        *(pServerData->pData) = *pData;
+
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Proxy Registered");
+    }
+
+    return 0;
 }
