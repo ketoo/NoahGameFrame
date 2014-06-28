@@ -21,6 +21,7 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIActor.h"
+#include "NFComm/NFPluginModule/NFILoginNet_ClientModule.h"
 
 #define NET_MSG_PROCESS(xNFMsg, msg) \
     int64_t nPlayerID = 0; \
@@ -69,36 +70,37 @@ protected:
 	void OnClientDisconnect(const int nAddress);
 	//有连接
 	void OnClientConnected(const int nAddress);
+
 	//登入 
 	int OnLoginProcess(const NFIPacket& msg);
-	//登出
-	int OnLogoutProcess(const NFIPacket& msg);
+    
 	//选择大世界
 	int OnSelectWorldProcess(const NFIPacket& msg);
+    
 	//申请查看世界列表
 	int OnViewWorldProcess(const NFIPacket& msg);
-	//////////////////////////////////////////////////////////////////////////
-	//登录结果
-	int OnLoginResultsEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
-	//登出结果
-	int OnLogOutResultsEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
-	//选择大世界结果(发下key等给客户端)
-	int OnSelectWorldResultsEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
+
+    //////////////////////////////////////////////////////////////////////////
+
+    //选择大世界结果(发下key等给客户端)
+    int OnSelectWorldResultsEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
+
+    //登入结果
+    int OnLoginResultsEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
+
 
 protected:
-	//大世界对象事件
-	int OnWorldServerObjectEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var);
 
 protected:
-	int GetConnectObjectByAddress(const int nAddress, NFIValueList& varObjectList);
 	void SynWorldToClient(const int nFD);
+
 
 
 private:
 	int mnClientConnectContainer;
-	int mnWorldContainerID;
 
-	NFIEventProcessModule* m_pEventProcessModule;
+    NFILoginNet_ClientModule* m_pLoginNet_ClientModule;
+    NFIEventProcessModule* m_pEventProcessModule;
 	NFILogicClassModule* m_pLogicClassModule;
 	NFIElementInfoModule* m_pElementInfoModule;	
 	NFIKernelModule* m_pKernelModule;
