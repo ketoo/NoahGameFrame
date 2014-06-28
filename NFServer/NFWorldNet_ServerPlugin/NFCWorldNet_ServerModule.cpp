@@ -272,6 +272,7 @@ int NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess(const NFIPacket& m
 
         SynGameToProxy(msg.GetFd());
     }
+
     return 0;
 }
 
@@ -283,8 +284,35 @@ int NFCWorldNet_ServerModule::OnLeaveGameProcess(const NFIPacket& msg)
 
 int NFCWorldNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 {
-    return 0;
+    switch (msg.GetMsgHead()->GetMsgID())
+    {
+        case NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REFRESH:
+            OnRefreshProxyServerInfoProcess(msg);
+            break;
 
+        case NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED:
+            OnProxyServerRegisteredProcess(msg);
+            break;
+
+        case NFMsg::EGameMsgID::EGMI_PTWG_PROXY_UNREGISTERED:
+            OnProxyServerUnRegisteredProcess(msg);
+            break;
+
+        case NFMsg::EGameMsgID::EGMI_GTW_GAME_REGISTERED:
+            OnGameServerRegisteredProcess(msg);
+            break;
+
+        case NFMsg::EGameMsgID::EGMI_GTW_GAME_UNREGISTERED:
+            OnGameServerUnRegisteredProcess(msg);
+            break;
+
+        case NFMsg::EGameMsgID::EGMI_GTW_GAME_REFRESH:
+            OnRefreshGameServerInfoProcess(msg);
+            break;
+        default:
+            break;
+    }
+    return 0;
 }
 
 int NFCWorldNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
