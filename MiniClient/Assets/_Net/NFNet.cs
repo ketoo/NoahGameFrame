@@ -28,7 +28,8 @@ public class NFNet
         E_WAITING_PLAYER_LOGIN,//等待登录
         E_PLAYER_LOGINING,//登录中
         E_HAS_PLAYER_LOGIN,//登录成功
-        E_HAS_PLAYER_SELECTSERVER,//等待选择服务器
+        E_HAS_PLAYER_SELECTSERVER,//已选择服务器
+        E_HAS_PLAYER_GATE,//已连接gate
         E_HAS_PLAYER_ROLELIST,//等待角色列表
         E_PLAYER_WAITING_TO_GAME,//申请了进游戏，等待进入
         E_PLAYER_GAMEING,//游戏中

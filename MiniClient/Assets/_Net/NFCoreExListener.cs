@@ -80,6 +80,8 @@ namespace NFTCPClient
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_WORLS_LIST, EGMI_ACK_WORLD_LIST);
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_EVENT_RESULT, EGMI_EVENT_RESULT);
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_ROLE_LIST, EGMI_ACK_ROLE_LIST);
+            mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_CONNECT_WORLD, EGMI_ACK_CONNECT_WORLD);
+
 
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_OBJECT_ENTRY, EGMI_ACK_OBJECT_ENTRY);
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_OBJECT_LEAVE, EGMI_ACK_OBJECT_LEAVE);
@@ -152,6 +154,24 @@ namespace NFTCPClient
             mNet.mPlayerState = NFNet.PLAYER_STATE.E_HAS_PLAYER_SELECTSERVER;
         }
 
+        private void EGMI_ACK_CONNECT_WORLD(MsgHead head, MemoryStream stream)
+        {
+            mNet.client.Disconnect();
+
+            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
+            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+
+            NFMsg.AckConnectWorldResult xData = new NFMsg.AckConnectWorldResult();
+            xData = Serializer.Deserialize<NFMsg.AckConnectWorldResult>(new MemoryStream(xMsg.msg_data));
+
+
+            NFNet net = new NFNet();
+            net.mPlayerState = NFNet.PLAYER_STATE.E_HAS_PLAYER_SELECTSERVER;
+            net.StartConnect(System.Text.Encoding.Default.GetString(xData.world_ip), xData.world_port);
+
+        }
+
+        
         private void EGMI_ACK_ROLE_LIST(MsgHead head, MemoryStream stream)
         {
         }
