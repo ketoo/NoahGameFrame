@@ -32,12 +32,12 @@ namespace NFMsg
       get { return _gate_id; }
       set { _gate_id = value; }
     }
-    private int _player_id;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"player_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int player_id
+    private byte[] _name;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] name
     {
-      get { return _player_id; }
-      set { _player_id = value; }
+      get { return _name; }
+      set { _name = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

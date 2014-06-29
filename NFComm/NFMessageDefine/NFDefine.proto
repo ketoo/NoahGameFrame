@@ -82,7 +82,7 @@ enum EGameMsgID
 	EGMI_REQ_LOGOUT									= 103;		// 登出帐号
 
 	EGMI_REQ_WORLD_LIST							= 110;			// 申请世界列表
-	EGMI_ACK_WORLS_LIST							= 111;			//
+	EGMI_ACK_WORLD_LIST							= 111;			//
 	EGMI_REQ_CONNECT_WORLD						= 112;			// 申请连接到世界
 	EGMI_ACK_CONNECT_WORLD						= 113;
 	EGMI_REQ_KICK_CLIENT_INWORLD				= 114;			//要求在此世界T人
