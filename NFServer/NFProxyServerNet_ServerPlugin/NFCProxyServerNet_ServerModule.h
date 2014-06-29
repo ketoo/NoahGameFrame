@@ -69,6 +69,31 @@ protected:
     int OnWantToConnectObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var);
 
 protected:
+    struct ConnectData 
+    {
+        ConnectData()
+        {
+            strAccount = "";
+            strConnectKey = "";
+        }
+
+        std::string strAccount;
+        std::string strConnectKey;
+    };
+
+    struct ServerData
+    {
+        ServerData()
+        {
+            nServerID = 0;
+            eState = NFMsg::EST_CRASH;
+        }
+
+        int nServerID;
+        NFMsg::EServerState eState;
+    };
+
+protected:
     //新建立的连接对象，等待他们自己发验证KEY，KEY验证后删掉
     //-1
     int mnConnectContainer;
@@ -80,6 +105,15 @@ protected:
     //-3
     int mnGameContainerID;
 
+    // 世界服务器发过来，谁想登录此服务器的那个对象，包含帐号和KEY信息，KEY验证后删掉
+    typedef NFMap<std::string, ConnectData> ConnectionMap; // map<Account, ConnectData>
+    ConnectionMap mnWantConnectionMap;
+
+    // Game容器
+    typedef NFMap<int, ServerData> ServerDataMap;
+    ServerDataMap mnGameDataMap;
+
+protected:
     NFIProxyServerNet_ClientModule* m_pProxyServerNet_ClientModule;
 	NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
