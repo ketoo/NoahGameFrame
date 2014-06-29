@@ -138,6 +138,30 @@ int NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const NFIPacket& msg)
         }
     }
 
+    //ConnectData* pConnectData = mnWantConnectionMap.GetElement(xMsg.account());
+    //if (NULL != pConnectData)
+    //{
+    //    if (pConnectData->strConnectKey == xMsg.security_code())
+    //    {
+    //        //可以进入,设置标志，选单服,心跳延迟,进入gs创建角色和删除角色,这里只是转发
+    //        NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
+    //        if (pNetObject)
+    //        {
+    //            pNetObject->SetLogicState(1);
+
+    //            NFMsg::AckEventResult xMsg;
+    //            xMsg.set_event_code(NFMsg::EGEC_VERIFY_KEY_SUCCESS);
+    //            SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_KEY, xMsg, msg.GetFd());
+    //        }
+    //    }
+    //    else
+    //    {
+    //        NFMsg::AckEventResult xMsg;
+    //        xMsg.set_event_code(NFMsg::EGEC_VERIFY_KEY_FAIL);
+    //        SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_KEY, xMsg, msg.GetFd());
+    //    }
+    //}
+
     return 0;
 }
 
@@ -187,9 +211,7 @@ int NFCProxyServerNet_ServerModule::OnSocketEvent( const int nSockIndex, const N
         OnClientConnected(nSockIndex);
     }
 
-
 	return 0;
-
 }
 
 void NFCProxyServerNet_ServerModule::OnClientDisconnect( const int nAddress )
@@ -250,11 +272,27 @@ int NFCProxyServerNet_ServerModule::OnSelectServerProcess( const NFIPacket& msg 
                     NFMsg::AckEventResult xMsg;
                     xMsg.set_event_code(NFMsg::EGameEventCode::EGEC_VERIFY_KEY_SUCCESS);
                     SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, msg.GetFd());
+                    return 0;
                 }
             }
         }
-        
     }
+
+    //ServerData* pServerData = mnGameDataMap.GetElement(xMsg.world_id());
+    //if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
+    //{
+    //    //选择成功
+    //    NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
+    //    if (pNetObject)
+    //    {
+    //        pNetObject->SetUserData(xMsg.world_id());
+
+    //        NFMsg::AckEventResult xMsg;
+    //        xMsg.set_event_code(NFMsg::EGameEventCode::EGEC_VERIFY_KEY_SUCCESS);
+    //        SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, msg.GetFd());
+    //        return 0;
+    //    }
+    //}
 
     NFMsg::AckEventResult xSendMsg;
     xSendMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SELECTSERVER_FAIL);
@@ -307,7 +345,7 @@ int NFCProxyServerNet_ServerModule::OnReqServerListProcess( const NFIPacket& msg
             }
         }
 
-        SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_WORLS_LIST, xData, msg.GetFd());
+        SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_WORLD_LIST, xData, msg.GetFd());
     }
 
     return 0;

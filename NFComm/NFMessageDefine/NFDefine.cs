@@ -217,8 +217,8 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_WORLD_LIST", Value=110)]
       EGMI_REQ_WORLD_LIST = 110,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_WORLS_LIST", Value=111)]
-      EGMI_ACK_WORLS_LIST = 111,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_WORLD_LIST", Value=111)]
+      EGMI_ACK_WORLD_LIST = 111,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CONNECT_WORLD", Value=112)]
       EGMI_REQ_CONNECT_WORLD = 112,
