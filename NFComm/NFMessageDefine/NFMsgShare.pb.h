@@ -187,12 +187,17 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 gate_id() const;
   inline void set_gate_id(::google::protobuf::int32 value);
 
-  // required int32 player_id = 3;
-  inline bool has_player_id() const;
-  inline void clear_player_id();
-  static const int kPlayerIdFieldNumber = 3;
-  inline ::google::protobuf::int32 player_id() const;
-  inline void set_player_id(::google::protobuf::int32 value);
+  // required bytes name = 3;
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 3;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const void* value, size_t size);
+  inline ::std::string* mutable_name();
+  inline ::std::string* release_name();
+  inline void set_allocated_name(::std::string* name);
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqEnterGameServer)
  private:
@@ -200,14 +205,14 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
   inline void clear_has_server_id();
   inline void set_has_gate_id();
   inline void clear_has_gate_id();
-  inline void set_has_player_id();
-  inline void clear_has_player_id();
+  inline void set_has_name();
+  inline void clear_has_name();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int32 server_id_;
   ::google::protobuf::int32 gate_id_;
-  ::google::protobuf::int32 player_id_;
+  ::std::string* name_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
@@ -2179,26 +2184,74 @@ inline void ReqEnterGameServer::set_gate_id(::google::protobuf::int32 value) {
   gate_id_ = value;
 }
 
-// required int32 player_id = 3;
-inline bool ReqEnterGameServer::has_player_id() const {
+// required bytes name = 3;
+inline bool ReqEnterGameServer::has_name() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void ReqEnterGameServer::set_has_player_id() {
+inline void ReqEnterGameServer::set_has_name() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void ReqEnterGameServer::clear_has_player_id() {
+inline void ReqEnterGameServer::clear_has_name() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void ReqEnterGameServer::clear_player_id() {
-  player_id_ = 0;
-  clear_has_player_id();
+inline void ReqEnterGameServer::clear_name() {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    name_->clear();
+  }
+  clear_has_name();
 }
-inline ::google::protobuf::int32 ReqEnterGameServer::player_id() const {
-  return player_id_;
+inline const ::std::string& ReqEnterGameServer::name() const {
+  return *name_;
 }
-inline void ReqEnterGameServer::set_player_id(::google::protobuf::int32 value) {
-  set_has_player_id();
-  player_id_ = value;
+inline void ReqEnterGameServer::set_name(const ::std::string& value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void ReqEnterGameServer::set_name(const char* value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void ReqEnterGameServer::set_name(const void* value, size_t size) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqEnterGameServer::mutable_name() {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  return name_;
+}
+inline ::std::string* ReqEnterGameServer::release_name() {
+  clear_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = name_;
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqEnterGameServer::set_allocated_name(::std::string* name) {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_;
+  }
+  if (name) {
+    set_has_name();
+    name_ = name;
+  } else {
+    clear_has_name();
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
