@@ -277,6 +277,12 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OBJECT_LEAVE", Value=201)]
       EGMI_ACK_OBJECT_LEAVE = 201,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OBJECT_PROPERTY_ENTRY", Value=202)]
+      EGMI_ACK_OBJECT_PROPERTY_ENTRY = 202,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OBJECT_RECORD_ENTRY", Value=203)]
+      EGMI_ACK_OBJECT_RECORD_ENTRY = 203,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_PROPERTY_INT", Value=210)]
       EGMI_ACK_PROPERTY_INT = 210,
             

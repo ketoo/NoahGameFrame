@@ -301,7 +301,7 @@ void NFCLoginNet_ServerModule::SynWorldToClient( const int nFD )
         pWorldData = pWorldMap->Next();
     }
 
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_WORLS_LIST, xData, nFD);
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_WORLD_LIST, xData, nFD);
 }
 
 int NFCLoginNet_ServerModule::OnViewWorldProcess( const NFIPacket& msg )
