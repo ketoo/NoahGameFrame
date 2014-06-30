@@ -32,8 +32,8 @@ bool NFCElementInfoModule::Init()
 
     assert(NULL != m_pLogicClassModule);
 
-	Clear();
-    Load();
+//     Clear();
+//     Load();
 
     return true;
 }
@@ -388,5 +388,6 @@ bool NFCElementInfoModule::Clear()
         pElementConfigInfo = Next();
     }
 
+    mbLoaded = false;
 	return true;
 }
