@@ -110,7 +110,10 @@ enum EGameMsgID
 
 	EGMI_ACK_OBJECT_ENTRY						= 200;			// 有对象进入
 	EGMI_ACK_OBJECT_LEAVE						= 201;			// 有对象出去
-
+	
+	EGMI_ACK_OBJECT_PROPERTY_ENTRY				= 202;			// 有对象属性进入
+	EGMI_ACK_OBJECT_RECORD_ENTRY				= 203;			// 有对象表进入
+	
 	EGMI_ACK_PROPERTY_INT						= 210;			// 属性变更
 	EGMI_ACK_PROPERTY_FLOAT						= 211;			// 属性变更
 	EGMI_ACK_PROPERTY_STRING					= 212;			// 属性变更
@@ -125,6 +128,8 @@ enum EGameMsgID
 	EGMI_ACK_RECORD_DOUBLE						= 225;
 	EGMI_ACK_RECORD_STRING						= 226;
 	EGMI_ACK_RECORD_OBJECT						= 227;
+	EGMI_ACK_RECORD_CLEAR						= 228;
+	EGMI_ACK_RECORD_SORT						= 229;
 
 	EGMI_REQ_MOVE								= 230;
 	EGMI_ACK_MOVE								= 231;

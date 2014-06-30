@@ -77,7 +77,7 @@ protected:
     void OnClienChatProcess(const NFIPacket& msg);
 
 protected:
-    //将self的全部属性广播给argVar
+    //将self的全部属性广播给argVar[应该是多对多]
     int OnPropertyEnter( const NFIDENTID& self, const NFIValueList& argVar );
     int OnRecordEnter( const NFIDENTID& self, const NFIValueList& argVar );
 

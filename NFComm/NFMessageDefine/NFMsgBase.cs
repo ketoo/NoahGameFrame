@@ -231,17 +231,17 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ObjectRecordBase")]
-  public partial class ObjectRecordBase : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RecordAddRowStruct")]
+  public partial class RecordAddRowStruct : global::ProtoBuf.IExtensible
   {
-    public ObjectRecordBase() {}
+    public RecordAddRowStruct() {}
     
-    private byte[] _record_name;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"record_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public byte[] record_name
+    private int _row;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"row", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int row
     {
-      get { return _record_name; }
-      set { _record_name = value; }
+      get { return _row; }
+      set { _row = value; }
     }
     private readonly global::System.Collections.Generic.List<NFMsg.RecordInt> _record_int_list = new global::System.Collections.Generic.List<NFMsg.RecordInt>();
     [global::ProtoBuf.ProtoMember(2, Name=@"record_int_list", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -269,6 +269,30 @@ namespace NFMsg
     public global::System.Collections.Generic.List<NFMsg.RecordObject> record_object_list
     {
       get { return _record_object_list; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ObjectRecordBase")]
+  public partial class ObjectRecordBase : global::ProtoBuf.IExtensible
+  {
+    public ObjectRecordBase() {}
+    
+    private byte[] _record_name;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"record_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] record_name
+    {
+      get { return _record_name; }
+      set { _record_name = value; }
+    }
+    private readonly global::System.Collections.Generic.List<NFMsg.RecordAddRowStruct> _row_struct = new global::System.Collections.Generic.List<NFMsg.RecordAddRowStruct>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"row_struct", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFMsg.RecordAddRowStruct> row_struct
+    {
+      get { return _row_struct; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -645,51 +669,6 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RecordAddStruct")]
-  public partial class RecordAddStruct : global::ProtoBuf.IExtensible
-  {
-    public RecordAddStruct() {}
-    
-    private int _row;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"row", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int row
-    {
-      get { return _row; }
-      set { _row = value; }
-    }
-    private readonly global::System.Collections.Generic.List<NFMsg.RecordInt> _int_list = new global::System.Collections.Generic.List<NFMsg.RecordInt>();
-    [global::ProtoBuf.ProtoMember(2, Name=@"int_list", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFMsg.RecordInt> int_list
-    {
-      get { return _int_list; }
-    }
-  
-    private readonly global::System.Collections.Generic.List<NFMsg.RecordFloat> _float_list = new global::System.Collections.Generic.List<NFMsg.RecordFloat>();
-    [global::ProtoBuf.ProtoMember(3, Name=@"float_list", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFMsg.RecordFloat> float_list
-    {
-      get { return _float_list; }
-    }
-  
-    private readonly global::System.Collections.Generic.List<NFMsg.RecordString> _string_list = new global::System.Collections.Generic.List<NFMsg.RecordString>();
-    [global::ProtoBuf.ProtoMember(4, Name=@"string_list", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFMsg.RecordString> string_list
-    {
-      get { return _string_list; }
-    }
-  
-    private readonly global::System.Collections.Generic.List<NFMsg.RecordObject> _object_list = new global::System.Collections.Generic.List<NFMsg.RecordObject>();
-    [global::ProtoBuf.ProtoMember(5, Name=@"object_list", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFMsg.RecordObject> object_list
-    {
-      get { return _object_list; }
-    }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ObjectRecordAddRow")]
   public partial class ObjectRecordAddRow : global::ProtoBuf.IExtensible
   {
@@ -709,9 +688,9 @@ namespace NFMsg
       get { return _record_name; }
       set { _record_name = value; }
     }
-    private readonly global::System.Collections.Generic.List<NFMsg.RecordAddStruct> _row_data = new global::System.Collections.Generic.List<NFMsg.RecordAddStruct>();
+    private readonly global::System.Collections.Generic.List<NFMsg.RecordAddRowStruct> _row_data = new global::System.Collections.Generic.List<NFMsg.RecordAddRowStruct>();
     [global::ProtoBuf.ProtoMember(3, Name=@"row_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFMsg.RecordAddStruct> row_data
+    public global::System.Collections.Generic.List<NFMsg.RecordAddRowStruct> row_data
     {
       get { return _row_data; }
     }
