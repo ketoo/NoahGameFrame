@@ -74,7 +74,9 @@ public:
 	virtual void LogSend(const char* str){}
 
     virtual int Transpond(int nGameServerID, const NFIPacket& msg);
-
+    virtual ConnectData* GetConnectData(const std::string& strAccount);
+    virtual GameData* GetGameData(int nGameID);
+    virtual GameDataMap& GetGameDataMap() { return mGameDataMap; }
 protected:
 
 	int OnRecivePack(const NFIPacket& msg);
@@ -95,11 +97,15 @@ protected:
     int OnSelectServerResultProcess(const NFIPacket& msg);
     int OnGameInfoProcess(const NFIPacket& msg);
 
+
+
 private:
     int mnSocketFD;
-    int mnWantToConnectContainer;
-    int mnGameContainerID;
+    //int mnWantToConnectContainer;
+    //int mnGameContainerID;
     
+    ConnectDataMap mWantToConnectMap;
+    GameDataMap mGameDataMap;
 private:
 
     NFILogModule* m_pLogModule;
