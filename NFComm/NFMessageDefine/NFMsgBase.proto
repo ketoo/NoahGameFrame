@@ -58,13 +58,18 @@ message RecordObject//基础结构，不直接发送
 	required int64      data = 3;
 }
 
+message RecordAddRowStruct//表添加基础行结构，不直接发送
+{
+	required int32 				row = 1;
+	repeated RecordInt			record_int_list = 2;
+	repeated RecordFloat		record_float_list = 3;
+	repeated RecordString		record_string_list = 4;
+	repeated RecordObject		record_object_list = 5;
+}
 message ObjectRecordBase//基础结构，不直接发送
 { 
 	required bytes  record_name = 1;
-	repeated RecordInt  record_int_list = 2;
-	repeated RecordFloat  record_float_list = 3;
-	repeated RecordString  record_string_list = 4;
-	repeated RecordObject  record_object_list = 5;
+	repeated RecordAddRowStruct row_struct = 2;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -156,20 +161,13 @@ message ObjectRecordSwap//个人玩家单类型属性数据，可直接发送---变化时
 
 //////////////////////////////
 
-message RecordAddStruct//表添加基础结构，不直接发送
-{
-	required int32 				row = 1;
-	repeated RecordInt			int_list = 2;
-	repeated RecordFloat		float_list = 3;
-	repeated RecordString		string_list = 4;
-	repeated RecordObject		object_list = 5;
-}
+
 
 message ObjectRecordAddRow//个人玩家单类型属性数据，可直接发送---变化时
 {
 	required int64     			player_id = 1;
-	required bytes     		record_name = 2;
-	repeated RecordAddStruct    row_data = 3;
+	required bytes     			record_name = 2;
+	repeated RecordAddRowStruct    row_data = 3;
 }
 
 message ObjectRecordRemove//个人玩家单类型属性数据，可直接发送---变化时
