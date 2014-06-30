@@ -15,8 +15,8 @@
 bool NFCProxyServerNet_ClientModule::Init()
 {
 	mstrConfigIdent = "ProxyServer";
-    mnWantToConnectContainer = -2;
-    mnGameContainerID = -3;
+    //mnWantToConnectContainer = -2;
+    //mnGameContainerID = -3;
     //是连接world的
 
     return true;
@@ -38,7 +38,6 @@ bool NFCProxyServerNet_ClientModule::Execute(const float fLasFrametime, const fl
 
         pProxy = Next();
     }
-
 
     return m_pNet->Execute(fLasFrametime, fStartedTime);
 }
@@ -66,60 +65,58 @@ int NFCProxyServerNet_ClientModule::OnRecivePack( const NFIPacket& msg )
 int NFCProxyServerNet_ClientModule::OnGameInfoProcess( const NFIPacket& msg )
 {
     int64_t nPlayerID = 0;	
-    NFMsg::MultiObjectPropertyList xMsg;
+    NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
         return 0;
     }
 
-    int nSize = xMsg.multi_player_property_size();
+    int nSize = xMsg.server_list_size();
     for (int i = 0; i < nSize; ++i)
     {
-        const NFMsg::ObjectPropertyList& xData = xMsg.multi_player_property(i);
-        NFIObject* pObject = m_pKernelModule->GetObject(xData.player_id());
-        if (!pObject)
-        {
-            pObject = m_pKernelModule->CreateObject(xData.player_id(), mnGameContainerID, 0, "GameServer", "", NFCValueList());
-        }
+        const NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
 
-        NFIPropertyManager* pProManager = pObject->GetPropertyManager();
-        if (pProManager)
+        GameData* pServerData = mGameDataMap.GetElement(pData->server_id());
+        if (!pServerData)
         {
-            //PropertyFormString(pProManager, xData);
+            pServerData = new GameData();
+            pServerData->nGameID = pData->server_id();
+            pServerData->strIP = pData->server_ip();
+            pServerData->nPort = pData->server_port();
+            pServerData->strName = pData->server_name();
+            pServerData->eState = pData->server_state();
+
+            mGameDataMap.AddElement(pData->server_id(), pServerData);
+        }
+        else
+        {
+            pServerData->strIP = pData->server_ip();
+            pServerData->nPort = pData->server_port();
+            pServerData->strName = pData->server_name();
+            pServerData->eState = pData->server_state();
+
         }
     }
-
     //////////////////////////////////////////////////////////////////////////
-    for (int i = 0; i < nSize; ++i)
+    GameData* pGameData = mGameDataMap.First();
+    while (pGameData)
     {
-        const NFMsg::ObjectPropertyList& xData = xMsg.multi_player_property(i);
-        NFCValueList varList;
-        m_pKernelModule->GetObjectByProperty(mnGameContainerID, "ServerID", NFCValueList() << NFIDENTID(xData.player_id()), varList);
-        if (varList.GetCount() == 1)
+        if (NULL != pGameData)
         {
-            NFIDENTID ident = varList.ObjectVal(i);
-            if (!ident.IsNull())
-            {
-                NFINetModule* pNetObject = GetElement(xData.player_id());
+            NFINetModule* pNetObject = GetElement(pGameData->nGameID);
                 if (!pNetObject)
                 {
-                    pNetObject = new NFCProxyConnectObject(xData.player_id(), pPluginManager);
-                    AddElement(xData.player_id(), pNetObject);
+                pNetObject = new NFCProxyConnectObject(pGameData->nGameID, pPluginManager);
+                AddElement(pGameData->nGameID, pNetObject);
 
+                pNetObject->GetNet()->Initialization(pGameData->strIP.c_str(), pGameData->nPort);
 
-                    const std::string& strIP = m_pKernelModule->QueryPropertyString(ident, "IP");
-                    const int nPort = m_pKernelModule->QueryPropertyInt(ident, "Port");
-
-                    pNetObject->GetNet()->Initialization(strIP.c_str(), nPort);
-
-                    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, xData.player_id(), strIP, nPort, "Initialization to connect GameServer");
+                m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pGameData->nGameID, pGameData->strIP, pGameData->nPort, "Initialization to connect GameServer");
                 }
             }
 
+        pGameData = mGameDataMap.Next();
         }
-    }
-
-
 
     return 0;
 }
@@ -261,24 +258,47 @@ int NFCProxyServerNet_ClientModule::OnSelectServerResultProcess(const NFIPacket&
         return 0;
     }
 
-    // 保存起来，等待客户端连接
-    NFCValueList varObjectList;
-    //帐号相等的只能有一个
-    int nCount = m_pKernelModule->GetObjectByProperty(mnWantToConnectContainer, "Account", NFCValueList() << xMsg.account(), varObjectList);
-    if (1 == nCount)
+    //// 保存起来，等待客户端连接
+    //NFCValueList varObjectList;
+    ////帐号相等的只能有一个
+    //int nCount = m_pKernelModule->GetObjectByProperty(mnWantToConnectContainer, "Account", NFCValueList() << xMsg.account(), varObjectList);
+    //if (1 == nCount)
+    //{
+    //    m_pKernelModule->SetPropertyString(varObjectList.ObjectVal(0), "ConnectKey", xMsg.world_key());
+    //    return 0;
+    //}
+
+    //NFCValueList arg;
+    //arg << "Account" << xMsg.account();
+    //arg << "ConnectKey" << xMsg.world_key();
+    //m_pKernelModule->CreateObject(0, mnWantToConnectContainer, 0, "WantToConnect", "", arg);
+
+    ConnectData* pConnectData = mWantToConnectMap.GetElement(xMsg.account());
+    if (NULL != pConnectData)
     {
-        m_pKernelModule->SetPropertyString(varObjectList.ObjectVal(0), "ConnectKey", xMsg.world_key());
+        pConnectData->strConnectKey = xMsg.world_key();
         return 0;
     }
 
-
-    NFCValueList arg;
-    arg << "Account" << xMsg.account();
-    arg << "ConnectKey" << xMsg.world_key();
-    m_pKernelModule->CreateObject(0, mnWantToConnectContainer, 0, "WantToConnect", "", arg);
+    ConnectData xConnectData;
+    xConnectData.strAccount = xMsg.account();
+    xConnectData.strConnectKey = xMsg.world_key();
+    mWantToConnectMap.AddElement(xConnectData.strAccount, &xConnectData);
 
     return 0;
 }
+
+NFIProxyServerNet_ClientModule::ConnectData* NFCProxyServerNet_ClientModule::GetConnectData(const std::string& strAccount)
+{
+    return mWantToConnectMap.GetElement(strAccount);
+}
+
+NFIProxyServerNet_ClientModule::GameData* NFCProxyServerNet_ClientModule::GetGameData(int nGameID)
+{
+    return mGameDataMap.GetElement(nGameID);
+}
+
+//////////////////////////////////////////////////////////////////////////
 
 bool NFCProxyConnectObject::Execute(float fFrameTime, float fTotalTime)
 {
