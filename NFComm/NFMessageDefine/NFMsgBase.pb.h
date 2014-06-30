@@ -43,6 +43,7 @@ class RecordInt;
 class RecordFloat;
 class RecordString;
 class RecordObject;
+class RecordAddRowStruct;
 class ObjectRecordBase;
 class ObjectPropertyList;
 class MultiObjectPropertyList;
@@ -57,7 +58,6 @@ class ObjectRecordFloat;
 class ObjectRecordString;
 class ObjectRecordObject;
 class ObjectRecordSwap;
-class RecordAddStruct;
 class ObjectRecordAddRow;
 class ObjectRecordRemove;
 class MsgBase;
@@ -894,6 +894,140 @@ class RecordObject : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class RecordAddRowStruct : public ::google::protobuf::Message {
+ public:
+  RecordAddRowStruct();
+  virtual ~RecordAddRowStruct();
+
+  RecordAddRowStruct(const RecordAddRowStruct& from);
+
+  inline RecordAddRowStruct& operator=(const RecordAddRowStruct& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RecordAddRowStruct& default_instance();
+
+  void Swap(RecordAddRowStruct* other);
+
+  // implements Message ----------------------------------------------
+
+  RecordAddRowStruct* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RecordAddRowStruct& from);
+  void MergeFrom(const RecordAddRowStruct& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 row = 1;
+  inline bool has_row() const;
+  inline void clear_row();
+  static const int kRowFieldNumber = 1;
+  inline ::google::protobuf::int32 row() const;
+  inline void set_row(::google::protobuf::int32 value);
+
+  // repeated .NFMsg.RecordInt record_int_list = 2;
+  inline int record_int_list_size() const;
+  inline void clear_record_int_list();
+  static const int kRecordIntListFieldNumber = 2;
+  inline const ::NFMsg::RecordInt& record_int_list(int index) const;
+  inline ::NFMsg::RecordInt* mutable_record_int_list(int index);
+  inline ::NFMsg::RecordInt* add_record_int_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt >&
+      record_int_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt >*
+      mutable_record_int_list();
+
+  // repeated .NFMsg.RecordFloat record_float_list = 3;
+  inline int record_float_list_size() const;
+  inline void clear_record_float_list();
+  static const int kRecordFloatListFieldNumber = 3;
+  inline const ::NFMsg::RecordFloat& record_float_list(int index) const;
+  inline ::NFMsg::RecordFloat* mutable_record_float_list(int index);
+  inline ::NFMsg::RecordFloat* add_record_float_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat >&
+      record_float_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat >*
+      mutable_record_float_list();
+
+  // repeated .NFMsg.RecordString record_string_list = 4;
+  inline int record_string_list_size() const;
+  inline void clear_record_string_list();
+  static const int kRecordStringListFieldNumber = 4;
+  inline const ::NFMsg::RecordString& record_string_list(int index) const;
+  inline ::NFMsg::RecordString* mutable_record_string_list(int index);
+  inline ::NFMsg::RecordString* add_record_string_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString >&
+      record_string_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString >*
+      mutable_record_string_list();
+
+  // repeated .NFMsg.RecordObject record_object_list = 5;
+  inline int record_object_list_size() const;
+  inline void clear_record_object_list();
+  static const int kRecordObjectListFieldNumber = 5;
+  inline const ::NFMsg::RecordObject& record_object_list(int index) const;
+  inline ::NFMsg::RecordObject* mutable_record_object_list(int index);
+  inline ::NFMsg::RecordObject* add_record_object_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject >&
+      record_object_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject >*
+      mutable_record_object_list();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.RecordAddRowStruct)
+ private:
+  inline void set_has_row();
+  inline void clear_has_row();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt > record_int_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat > record_float_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString > record_string_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject > record_object_list_;
+  ::google::protobuf::int32 row_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void protobuf_AssignDesc_NFMsgBase_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
+
+  void InitAsDefaultInstance();
+  static RecordAddRowStruct* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class ObjectRecordBase : public ::google::protobuf::Message {
  public:
   ObjectRecordBase();
@@ -960,53 +1094,17 @@ class ObjectRecordBase : public ::google::protobuf::Message {
   inline ::std::string* release_record_name();
   inline void set_allocated_record_name(::std::string* record_name);
 
-  // repeated .NFMsg.RecordInt record_int_list = 2;
-  inline int record_int_list_size() const;
-  inline void clear_record_int_list();
-  static const int kRecordIntListFieldNumber = 2;
-  inline const ::NFMsg::RecordInt& record_int_list(int index) const;
-  inline ::NFMsg::RecordInt* mutable_record_int_list(int index);
-  inline ::NFMsg::RecordInt* add_record_int_list();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt >&
-      record_int_list() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt >*
-      mutable_record_int_list();
-
-  // repeated .NFMsg.RecordFloat record_float_list = 3;
-  inline int record_float_list_size() const;
-  inline void clear_record_float_list();
-  static const int kRecordFloatListFieldNumber = 3;
-  inline const ::NFMsg::RecordFloat& record_float_list(int index) const;
-  inline ::NFMsg::RecordFloat* mutable_record_float_list(int index);
-  inline ::NFMsg::RecordFloat* add_record_float_list();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat >&
-      record_float_list() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat >*
-      mutable_record_float_list();
-
-  // repeated .NFMsg.RecordString record_string_list = 4;
-  inline int record_string_list_size() const;
-  inline void clear_record_string_list();
-  static const int kRecordStringListFieldNumber = 4;
-  inline const ::NFMsg::RecordString& record_string_list(int index) const;
-  inline ::NFMsg::RecordString* mutable_record_string_list(int index);
-  inline ::NFMsg::RecordString* add_record_string_list();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString >&
-      record_string_list() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString >*
-      mutable_record_string_list();
-
-  // repeated .NFMsg.RecordObject record_object_list = 5;
-  inline int record_object_list_size() const;
-  inline void clear_record_object_list();
-  static const int kRecordObjectListFieldNumber = 5;
-  inline const ::NFMsg::RecordObject& record_object_list(int index) const;
-  inline ::NFMsg::RecordObject* mutable_record_object_list(int index);
-  inline ::NFMsg::RecordObject* add_record_object_list();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject >&
-      record_object_list() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject >*
-      mutable_record_object_list();
+  // repeated .NFMsg.RecordAddRowStruct row_struct = 2;
+  inline int row_struct_size() const;
+  inline void clear_row_struct();
+  static const int kRowStructFieldNumber = 2;
+  inline const ::NFMsg::RecordAddRowStruct& row_struct(int index) const;
+  inline ::NFMsg::RecordAddRowStruct* mutable_row_struct(int index);
+  inline ::NFMsg::RecordAddRowStruct* add_row_struct();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordAddRowStruct >&
+      row_struct() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordAddRowStruct >*
+      mutable_row_struct();
 
   // @@protoc_insertion_point(class_scope:NFMsg.ObjectRecordBase)
  private:
@@ -1016,13 +1114,10 @@ class ObjectRecordBase : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* record_name_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt > record_int_list_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat > record_float_list_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString > record_string_list_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject > record_object_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordAddRowStruct > row_struct_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
@@ -2384,140 +2479,6 @@ class ObjectRecordSwap : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class RecordAddStruct : public ::google::protobuf::Message {
- public:
-  RecordAddStruct();
-  virtual ~RecordAddStruct();
-
-  RecordAddStruct(const RecordAddStruct& from);
-
-  inline RecordAddStruct& operator=(const RecordAddStruct& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const RecordAddStruct& default_instance();
-
-  void Swap(RecordAddStruct* other);
-
-  // implements Message ----------------------------------------------
-
-  RecordAddStruct* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const RecordAddStruct& from);
-  void MergeFrom(const RecordAddStruct& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required int32 row = 1;
-  inline bool has_row() const;
-  inline void clear_row();
-  static const int kRowFieldNumber = 1;
-  inline ::google::protobuf::int32 row() const;
-  inline void set_row(::google::protobuf::int32 value);
-
-  // repeated .NFMsg.RecordInt int_list = 2;
-  inline int int_list_size() const;
-  inline void clear_int_list();
-  static const int kIntListFieldNumber = 2;
-  inline const ::NFMsg::RecordInt& int_list(int index) const;
-  inline ::NFMsg::RecordInt* mutable_int_list(int index);
-  inline ::NFMsg::RecordInt* add_int_list();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt >&
-      int_list() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt >*
-      mutable_int_list();
-
-  // repeated .NFMsg.RecordFloat float_list = 3;
-  inline int float_list_size() const;
-  inline void clear_float_list();
-  static const int kFloatListFieldNumber = 3;
-  inline const ::NFMsg::RecordFloat& float_list(int index) const;
-  inline ::NFMsg::RecordFloat* mutable_float_list(int index);
-  inline ::NFMsg::RecordFloat* add_float_list();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat >&
-      float_list() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat >*
-      mutable_float_list();
-
-  // repeated .NFMsg.RecordString string_list = 4;
-  inline int string_list_size() const;
-  inline void clear_string_list();
-  static const int kStringListFieldNumber = 4;
-  inline const ::NFMsg::RecordString& string_list(int index) const;
-  inline ::NFMsg::RecordString* mutable_string_list(int index);
-  inline ::NFMsg::RecordString* add_string_list();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString >&
-      string_list() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString >*
-      mutable_string_list();
-
-  // repeated .NFMsg.RecordObject object_list = 5;
-  inline int object_list_size() const;
-  inline void clear_object_list();
-  static const int kObjectListFieldNumber = 5;
-  inline const ::NFMsg::RecordObject& object_list(int index) const;
-  inline ::NFMsg::RecordObject* mutable_object_list(int index);
-  inline ::NFMsg::RecordObject* add_object_list();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject >&
-      object_list() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject >*
-      mutable_object_list();
-
-  // @@protoc_insertion_point(class_scope:NFMsg.RecordAddStruct)
- private:
-  inline void set_has_row();
-  inline void clear_has_row();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt > int_list_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat > float_list_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString > string_list_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject > object_list_;
-  ::google::protobuf::int32 row_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
-
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
-  friend void protobuf_AssignDesc_NFMsgBase_2eproto();
-  friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
-
-  void InitAsDefaultInstance();
-  static RecordAddStruct* default_instance_;
-};
-// -------------------------------------------------------------------
-
 class ObjectRecordAddRow : public ::google::protobuf::Message {
  public:
   ObjectRecordAddRow();
@@ -2591,16 +2552,16 @@ class ObjectRecordAddRow : public ::google::protobuf::Message {
   inline ::std::string* release_record_name();
   inline void set_allocated_record_name(::std::string* record_name);
 
-  // repeated .NFMsg.RecordAddStruct row_data = 3;
+  // repeated .NFMsg.RecordAddRowStruct row_data = 3;
   inline int row_data_size() const;
   inline void clear_row_data();
   static const int kRowDataFieldNumber = 3;
-  inline const ::NFMsg::RecordAddStruct& row_data(int index) const;
-  inline ::NFMsg::RecordAddStruct* mutable_row_data(int index);
-  inline ::NFMsg::RecordAddStruct* add_row_data();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordAddStruct >&
+  inline const ::NFMsg::RecordAddRowStruct& row_data(int index) const;
+  inline ::NFMsg::RecordAddRowStruct* mutable_row_data(int index);
+  inline ::NFMsg::RecordAddRowStruct* add_row_data();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordAddRowStruct >&
       row_data() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordAddStruct >*
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordAddRowStruct >*
       mutable_row_data();
 
   // @@protoc_insertion_point(class_scope:NFMsg.ObjectRecordAddRow)
@@ -2614,7 +2575,7 @@ class ObjectRecordAddRow : public ::google::protobuf::Message {
 
   ::google::protobuf::int64 player_id_;
   ::std::string* record_name_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordAddStruct > row_data_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordAddRowStruct > row_data_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
@@ -3756,6 +3717,132 @@ inline void RecordObject::set_data(::google::protobuf::int64 value) {
 
 // -------------------------------------------------------------------
 
+// RecordAddRowStruct
+
+// required int32 row = 1;
+inline bool RecordAddRowStruct::has_row() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void RecordAddRowStruct::set_has_row() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void RecordAddRowStruct::clear_has_row() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void RecordAddRowStruct::clear_row() {
+  row_ = 0;
+  clear_has_row();
+}
+inline ::google::protobuf::int32 RecordAddRowStruct::row() const {
+  return row_;
+}
+inline void RecordAddRowStruct::set_row(::google::protobuf::int32 value) {
+  set_has_row();
+  row_ = value;
+}
+
+// repeated .NFMsg.RecordInt record_int_list = 2;
+inline int RecordAddRowStruct::record_int_list_size() const {
+  return record_int_list_.size();
+}
+inline void RecordAddRowStruct::clear_record_int_list() {
+  record_int_list_.Clear();
+}
+inline const ::NFMsg::RecordInt& RecordAddRowStruct::record_int_list(int index) const {
+  return record_int_list_.Get(index);
+}
+inline ::NFMsg::RecordInt* RecordAddRowStruct::mutable_record_int_list(int index) {
+  return record_int_list_.Mutable(index);
+}
+inline ::NFMsg::RecordInt* RecordAddRowStruct::add_record_int_list() {
+  return record_int_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt >&
+RecordAddRowStruct::record_int_list() const {
+  return record_int_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt >*
+RecordAddRowStruct::mutable_record_int_list() {
+  return &record_int_list_;
+}
+
+// repeated .NFMsg.RecordFloat record_float_list = 3;
+inline int RecordAddRowStruct::record_float_list_size() const {
+  return record_float_list_.size();
+}
+inline void RecordAddRowStruct::clear_record_float_list() {
+  record_float_list_.Clear();
+}
+inline const ::NFMsg::RecordFloat& RecordAddRowStruct::record_float_list(int index) const {
+  return record_float_list_.Get(index);
+}
+inline ::NFMsg::RecordFloat* RecordAddRowStruct::mutable_record_float_list(int index) {
+  return record_float_list_.Mutable(index);
+}
+inline ::NFMsg::RecordFloat* RecordAddRowStruct::add_record_float_list() {
+  return record_float_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat >&
+RecordAddRowStruct::record_float_list() const {
+  return record_float_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat >*
+RecordAddRowStruct::mutable_record_float_list() {
+  return &record_float_list_;
+}
+
+// repeated .NFMsg.RecordString record_string_list = 4;
+inline int RecordAddRowStruct::record_string_list_size() const {
+  return record_string_list_.size();
+}
+inline void RecordAddRowStruct::clear_record_string_list() {
+  record_string_list_.Clear();
+}
+inline const ::NFMsg::RecordString& RecordAddRowStruct::record_string_list(int index) const {
+  return record_string_list_.Get(index);
+}
+inline ::NFMsg::RecordString* RecordAddRowStruct::mutable_record_string_list(int index) {
+  return record_string_list_.Mutable(index);
+}
+inline ::NFMsg::RecordString* RecordAddRowStruct::add_record_string_list() {
+  return record_string_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString >&
+RecordAddRowStruct::record_string_list() const {
+  return record_string_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString >*
+RecordAddRowStruct::mutable_record_string_list() {
+  return &record_string_list_;
+}
+
+// repeated .NFMsg.RecordObject record_object_list = 5;
+inline int RecordAddRowStruct::record_object_list_size() const {
+  return record_object_list_.size();
+}
+inline void RecordAddRowStruct::clear_record_object_list() {
+  record_object_list_.Clear();
+}
+inline const ::NFMsg::RecordObject& RecordAddRowStruct::record_object_list(int index) const {
+  return record_object_list_.Get(index);
+}
+inline ::NFMsg::RecordObject* RecordAddRowStruct::mutable_record_object_list(int index) {
+  return record_object_list_.Mutable(index);
+}
+inline ::NFMsg::RecordObject* RecordAddRowStruct::add_record_object_list() {
+  return record_object_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject >&
+RecordAddRowStruct::record_object_list() const {
+  return record_object_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject >*
+RecordAddRowStruct::mutable_record_object_list() {
+  return &record_object_list_;
+}
+
+// -------------------------------------------------------------------
+
 // ObjectRecordBase
 
 // required bytes record_name = 1;
@@ -3828,104 +3915,29 @@ inline void ObjectRecordBase::set_allocated_record_name(::std::string* record_na
   }
 }
 
-// repeated .NFMsg.RecordInt record_int_list = 2;
-inline int ObjectRecordBase::record_int_list_size() const {
-  return record_int_list_.size();
+// repeated .NFMsg.RecordAddRowStruct row_struct = 2;
+inline int ObjectRecordBase::row_struct_size() const {
+  return row_struct_.size();
 }
-inline void ObjectRecordBase::clear_record_int_list() {
-  record_int_list_.Clear();
+inline void ObjectRecordBase::clear_row_struct() {
+  row_struct_.Clear();
 }
-inline const ::NFMsg::RecordInt& ObjectRecordBase::record_int_list(int index) const {
-  return record_int_list_.Get(index);
+inline const ::NFMsg::RecordAddRowStruct& ObjectRecordBase::row_struct(int index) const {
+  return row_struct_.Get(index);
 }
-inline ::NFMsg::RecordInt* ObjectRecordBase::mutable_record_int_list(int index) {
-  return record_int_list_.Mutable(index);
+inline ::NFMsg::RecordAddRowStruct* ObjectRecordBase::mutable_row_struct(int index) {
+  return row_struct_.Mutable(index);
 }
-inline ::NFMsg::RecordInt* ObjectRecordBase::add_record_int_list() {
-  return record_int_list_.Add();
+inline ::NFMsg::RecordAddRowStruct* ObjectRecordBase::add_row_struct() {
+  return row_struct_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt >&
-ObjectRecordBase::record_int_list() const {
-  return record_int_list_;
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordAddRowStruct >&
+ObjectRecordBase::row_struct() const {
+  return row_struct_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt >*
-ObjectRecordBase::mutable_record_int_list() {
-  return &record_int_list_;
-}
-
-// repeated .NFMsg.RecordFloat record_float_list = 3;
-inline int ObjectRecordBase::record_float_list_size() const {
-  return record_float_list_.size();
-}
-inline void ObjectRecordBase::clear_record_float_list() {
-  record_float_list_.Clear();
-}
-inline const ::NFMsg::RecordFloat& ObjectRecordBase::record_float_list(int index) const {
-  return record_float_list_.Get(index);
-}
-inline ::NFMsg::RecordFloat* ObjectRecordBase::mutable_record_float_list(int index) {
-  return record_float_list_.Mutable(index);
-}
-inline ::NFMsg::RecordFloat* ObjectRecordBase::add_record_float_list() {
-  return record_float_list_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat >&
-ObjectRecordBase::record_float_list() const {
-  return record_float_list_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat >*
-ObjectRecordBase::mutable_record_float_list() {
-  return &record_float_list_;
-}
-
-// repeated .NFMsg.RecordString record_string_list = 4;
-inline int ObjectRecordBase::record_string_list_size() const {
-  return record_string_list_.size();
-}
-inline void ObjectRecordBase::clear_record_string_list() {
-  record_string_list_.Clear();
-}
-inline const ::NFMsg::RecordString& ObjectRecordBase::record_string_list(int index) const {
-  return record_string_list_.Get(index);
-}
-inline ::NFMsg::RecordString* ObjectRecordBase::mutable_record_string_list(int index) {
-  return record_string_list_.Mutable(index);
-}
-inline ::NFMsg::RecordString* ObjectRecordBase::add_record_string_list() {
-  return record_string_list_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString >&
-ObjectRecordBase::record_string_list() const {
-  return record_string_list_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString >*
-ObjectRecordBase::mutable_record_string_list() {
-  return &record_string_list_;
-}
-
-// repeated .NFMsg.RecordObject record_object_list = 5;
-inline int ObjectRecordBase::record_object_list_size() const {
-  return record_object_list_.size();
-}
-inline void ObjectRecordBase::clear_record_object_list() {
-  record_object_list_.Clear();
-}
-inline const ::NFMsg::RecordObject& ObjectRecordBase::record_object_list(int index) const {
-  return record_object_list_.Get(index);
-}
-inline ::NFMsg::RecordObject* ObjectRecordBase::mutable_record_object_list(int index) {
-  return record_object_list_.Mutable(index);
-}
-inline ::NFMsg::RecordObject* ObjectRecordBase::add_record_object_list() {
-  return record_object_list_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject >&
-ObjectRecordBase::record_object_list() const {
-  return record_object_list_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject >*
-ObjectRecordBase::mutable_record_object_list() {
-  return &record_object_list_;
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordAddRowStruct >*
+ObjectRecordBase::mutable_row_struct() {
+  return &row_struct_;
 }
 
 // -------------------------------------------------------------------
@@ -5063,132 +5075,6 @@ inline void ObjectRecordSwap::set_row_target(::google::protobuf::int32 value) {
 
 // -------------------------------------------------------------------
 
-// RecordAddStruct
-
-// required int32 row = 1;
-inline bool RecordAddStruct::has_row() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void RecordAddStruct::set_has_row() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void RecordAddStruct::clear_has_row() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void RecordAddStruct::clear_row() {
-  row_ = 0;
-  clear_has_row();
-}
-inline ::google::protobuf::int32 RecordAddStruct::row() const {
-  return row_;
-}
-inline void RecordAddStruct::set_row(::google::protobuf::int32 value) {
-  set_has_row();
-  row_ = value;
-}
-
-// repeated .NFMsg.RecordInt int_list = 2;
-inline int RecordAddStruct::int_list_size() const {
-  return int_list_.size();
-}
-inline void RecordAddStruct::clear_int_list() {
-  int_list_.Clear();
-}
-inline const ::NFMsg::RecordInt& RecordAddStruct::int_list(int index) const {
-  return int_list_.Get(index);
-}
-inline ::NFMsg::RecordInt* RecordAddStruct::mutable_int_list(int index) {
-  return int_list_.Mutable(index);
-}
-inline ::NFMsg::RecordInt* RecordAddStruct::add_int_list() {
-  return int_list_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt >&
-RecordAddStruct::int_list() const {
-  return int_list_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt >*
-RecordAddStruct::mutable_int_list() {
-  return &int_list_;
-}
-
-// repeated .NFMsg.RecordFloat float_list = 3;
-inline int RecordAddStruct::float_list_size() const {
-  return float_list_.size();
-}
-inline void RecordAddStruct::clear_float_list() {
-  float_list_.Clear();
-}
-inline const ::NFMsg::RecordFloat& RecordAddStruct::float_list(int index) const {
-  return float_list_.Get(index);
-}
-inline ::NFMsg::RecordFloat* RecordAddStruct::mutable_float_list(int index) {
-  return float_list_.Mutable(index);
-}
-inline ::NFMsg::RecordFloat* RecordAddStruct::add_float_list() {
-  return float_list_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat >&
-RecordAddStruct::float_list() const {
-  return float_list_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat >*
-RecordAddStruct::mutable_float_list() {
-  return &float_list_;
-}
-
-// repeated .NFMsg.RecordString string_list = 4;
-inline int RecordAddStruct::string_list_size() const {
-  return string_list_.size();
-}
-inline void RecordAddStruct::clear_string_list() {
-  string_list_.Clear();
-}
-inline const ::NFMsg::RecordString& RecordAddStruct::string_list(int index) const {
-  return string_list_.Get(index);
-}
-inline ::NFMsg::RecordString* RecordAddStruct::mutable_string_list(int index) {
-  return string_list_.Mutable(index);
-}
-inline ::NFMsg::RecordString* RecordAddStruct::add_string_list() {
-  return string_list_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString >&
-RecordAddStruct::string_list() const {
-  return string_list_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString >*
-RecordAddStruct::mutable_string_list() {
-  return &string_list_;
-}
-
-// repeated .NFMsg.RecordObject object_list = 5;
-inline int RecordAddStruct::object_list_size() const {
-  return object_list_.size();
-}
-inline void RecordAddStruct::clear_object_list() {
-  object_list_.Clear();
-}
-inline const ::NFMsg::RecordObject& RecordAddStruct::object_list(int index) const {
-  return object_list_.Get(index);
-}
-inline ::NFMsg::RecordObject* RecordAddStruct::mutable_object_list(int index) {
-  return object_list_.Mutable(index);
-}
-inline ::NFMsg::RecordObject* RecordAddStruct::add_object_list() {
-  return object_list_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject >&
-RecordAddStruct::object_list() const {
-  return object_list_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject >*
-RecordAddStruct::mutable_object_list() {
-  return &object_list_;
-}
-
-// -------------------------------------------------------------------
-
 // ObjectRecordAddRow
 
 // required int64 player_id = 1;
@@ -5283,27 +5169,27 @@ inline void ObjectRecordAddRow::set_allocated_record_name(::std::string* record_
   }
 }
 
-// repeated .NFMsg.RecordAddStruct row_data = 3;
+// repeated .NFMsg.RecordAddRowStruct row_data = 3;
 inline int ObjectRecordAddRow::row_data_size() const {
   return row_data_.size();
 }
 inline void ObjectRecordAddRow::clear_row_data() {
   row_data_.Clear();
 }
-inline const ::NFMsg::RecordAddStruct& ObjectRecordAddRow::row_data(int index) const {
+inline const ::NFMsg::RecordAddRowStruct& ObjectRecordAddRow::row_data(int index) const {
   return row_data_.Get(index);
 }
-inline ::NFMsg::RecordAddStruct* ObjectRecordAddRow::mutable_row_data(int index) {
+inline ::NFMsg::RecordAddRowStruct* ObjectRecordAddRow::mutable_row_data(int index) {
   return row_data_.Mutable(index);
 }
-inline ::NFMsg::RecordAddStruct* ObjectRecordAddRow::add_row_data() {
+inline ::NFMsg::RecordAddRowStruct* ObjectRecordAddRow::add_row_data() {
   return row_data_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordAddStruct >&
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordAddRowStruct >&
 ObjectRecordAddRow::row_data() const {
   return row_data_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordAddStruct >*
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordAddRowStruct >*
 ObjectRecordAddRow::mutable_row_data() {
   return &row_data_;
 }
