@@ -85,7 +85,7 @@ int NFCProxyServerNet_ClientModule::OnGameInfoProcess( const NFIPacket& msg )
         NFIPropertyManager* pProManager = pObject->GetPropertyManager();
         if (pProManager)
         {
-            PropertyFormString(pProManager, xData);
+            //PropertyFormString(pProManager, xData);
         }
     }
 
