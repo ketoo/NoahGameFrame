@@ -12,9 +12,9 @@
 
 bool NFCProxyServerNet_ServerModule::Init()
 {
-    mnConnectContainer = -1;
-    mnWantToConnectContainer = -2;
-    mnGameContainerID = -3;
+    //mnConnectContainer = -1;
+    //mnWantToConnectContainer = -2;
+    //mnGameContainerID = -3;
 
     mstrConfigIdent = "ProxyServer";
 
@@ -38,13 +38,13 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
 	assert(NULL != m_pLogModule);
 	assert(NULL != m_pElementInfoModule);
 
-    m_pEventProcessModule->AddClassCallBack("WantToConnect", this, &NFCProxyServerNet_ServerModule::OnWantToConnectObjectEvent);
+    //m_pEventProcessModule->AddClassCallBack("WantToConnect", this, &NFCProxyServerNet_ServerModule::OnWantToConnectObjectEvent);
     //m_pEventProcessModule->AddClassCallBack("ClientConnect", this, &NFCProxyServerNet_ServerModule::OnConnectObjectEvent);
 
     //////////////////////////////////////////////////////////////////////////
 
-    m_pKernelModule->CreateContainer(mnConnectContainer, "");
-    m_pKernelModule->CreateContainer(mnWantToConnectContainer, "");
+    //m_pKernelModule->CreateContainer(mnConnectContainer, "");
+    //m_pKernelModule->CreateContainer(mnWantToConnectContainer, "");
 
 	const int nServerID = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerID");
 	const int nServerPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerPort");
@@ -87,20 +87,20 @@ int NFCProxyServerNet_ServerModule::GetServerPort()
     return 0;//GetPort();
 }
 
-int NFCProxyServerNet_ServerModule::OnWantToConnectObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var)
-{
-    if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
-    {
-        //60秒客户端还不连接就删掉[还是一直等着他连接算了把]
-        m_pKernelModule->AddHeartBeat( self, "HB_OnPlayerWantToConnect", this, &NFCProxyServerNet_ServerModule::HB_OnPlayerWantToConnect, NFCValueList(), 60.0f, 1 );
-    }
-    else if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
-    {
-        //销毁
-    }
-
-    return 0;
-}
+//int NFCProxyServerNet_ServerModule::OnWantToConnectObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var)
+//{
+//    if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
+//    {
+//        //60秒客户端还不连接就删掉[还是一直等着他连接算了把]
+//        m_pKernelModule->AddHeartBeat( self, "HB_OnPlayerWantToConnect", this, &NFCProxyServerNet_ServerModule::HB_OnPlayerWantToConnect, NFCValueList(), 60.0f, 1 );
+//    }
+//    else if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
+//    {
+//        //销毁
+//    }
+//
+//    return 0;
+//}
 
 int NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const NFIPacket& msg)
 {
@@ -111,37 +111,13 @@ int NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const NFIPacket& msg)
         return 0;
     }
 
-    NFCValueList varObjectList;
-    m_pKernelModule->GetObjectByProperty(mnWantToConnectContainer, "Account", NFCValueList() << xMsg.account(), varObjectList);
-    if (varObjectList.GetCount() == 1)
-    {
-        NFIDENTID ident = varObjectList.ObjectVal(0);
-        const std::string& strConnectKey = m_pKernelModule->QueryPropertyString(ident, "ConnectKey");
-        if (strConnectKey == xMsg.security_code())
-        {
-            //可以进入,设置标志，选单服,心跳延迟,进入gs创建角色和删除角色,这里只是转发
-            NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
-            if (pNetObject)
-            {
-                pNetObject->SetLogicState(1);
-
-                NFMsg::AckEventResult xMsg;
-                xMsg.set_event_code(NFMsg::EGEC_VERIFY_KEY_SUCCESS);
-                SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_KEY, xMsg, msg.GetFd());
-            }
-        }
-        else
-        {
-            NFMsg::AckEventResult xMsg;
-            xMsg.set_event_code(NFMsg::EGEC_VERIFY_KEY_FAIL);
-            SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_KEY, xMsg, msg.GetFd());
-        }
-    }
-
-    //ConnectData* pConnectData = mnWantConnectionMap.GetElement(xMsg.account());
-    //if (NULL != pConnectData)
+    //NFCValueList varObjectList;
+    //m_pKernelModule->GetObjectByProperty(mnWantToConnectContainer, "Account", NFCValueList() << xMsg.account(), varObjectList);
+    //if (varObjectList.GetCount() == 1)
     //{
-    //    if (pConnectData->strConnectKey == xMsg.security_code())
+    //    NFIDENTID ident = varObjectList.ObjectVal(0);
+    //    const std::string& strConnectKey = m_pKernelModule->QueryPropertyString(ident, "ConnectKey");
+    //    if (strConnectKey == xMsg.security_code())
     //    {
     //        //可以进入,设置标志，选单服,心跳延迟,进入gs创建角色和删除角色,这里只是转发
     //        NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
@@ -161,6 +137,30 @@ int NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const NFIPacket& msg)
     //        SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_KEY, xMsg, msg.GetFd());
     //    }
     //}
+
+    NFIProxyServerNet_ClientModule::ConnectData* pConnectData = m_pProxyServerNet_ClientModule->GetConnectData(xMsg.account());
+    if (NULL != pConnectData)
+    {
+        if (pConnectData->strConnectKey == xMsg.security_code())
+        {
+            //可以进入,设置标志，选单服,心跳延迟,进入gs创建角色和删除角色,这里只是转发
+            NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
+            if (pNetObject)
+            {
+                pNetObject->SetLogicState(1);
+
+                NFMsg::AckEventResult xSendMsg;
+                xSendMsg.set_event_code(NFMsg::EGEC_VERIFY_KEY_SUCCESS);
+                SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_KEY, xSendMsg, msg.GetFd());
+            }
+        }
+        else
+        {
+            NFMsg::AckEventResult xSendMsg;
+            xSendMsg.set_event_code(NFMsg::EGEC_VERIFY_KEY_FAIL);
+            SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_KEY, xSendMsg, msg.GetFd());
+        }
+    }
 
     return 0;
 }
@@ -219,12 +219,12 @@ void NFCProxyServerNet_ServerModule::OnClientDisconnect( const int nAddress )
 
 }
 
-int NFCProxyServerNet_ServerModule::HB_OnPlayerWantToConnect( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
-{
-    m_pKernelModule->DestroyObject( self );
-
-    return 0;
-}
+//int NFCProxyServerNet_ServerModule::HB_OnPlayerWantToConnect( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
+//{
+//    m_pKernelModule->DestroyObject( self );
+//
+//    return 0;
+//}
 
 int NFCProxyServerNet_ServerModule::OnTranspondProcess( const NFIPacket& msg )
 {
@@ -252,47 +252,21 @@ int NFCProxyServerNet_ServerModule::OnSelectServerProcess( const NFIPacket& msg 
         return 0;
     }
 
-    NFCValueList varGameServerList;
-    m_pKernelModule->GetObjectByProperty(mnGameContainerID, "ServerID", NFCValueList() << xMsg.world_id(), varGameServerList);
-    if (varGameServerList.GetCount() == 1)
+    NFIProxyServerNet_ClientModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xMsg.world_id());
+    if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
     {
-        NFIDENTID ident = varGameServerList.ObjectVal(0);
-        NFIObject* pObject = m_pKernelModule->GetObject(ident);
-        if (pObject)
+        //选择成功
+        NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
+        if (pNetObject)
         {
-            NFMsg::EServerState eState = (NFMsg::EServerState)pObject->QueryPropertyInt("State");
-            if (eState != NFMsg::EST_CRASH)
-            {
-                //选择成功
-                NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
-                if (pNetObject)
-                {
-                    pNetObject->SetUserData(xMsg.world_id());
+            pNetObject->SetUserData(xMsg.world_id());
 
-                    NFMsg::AckEventResult xMsg;
-                    xMsg.set_event_code(NFMsg::EGameEventCode::EGEC_VERIFY_KEY_SUCCESS);
-                    SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, msg.GetFd());
-                    return 0;
-                }
-            }
+            NFMsg::AckEventResult xMsg;
+            xMsg.set_event_code(NFMsg::EGameEventCode::EGEC_VERIFY_KEY_SUCCESS);
+            SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, msg.GetFd());
+            return 0;
         }
     }
-
-    //ServerData* pServerData = mnGameDataMap.GetElement(xMsg.world_id());
-    //if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
-    //{
-    //    //选择成功
-    //    NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
-    //    if (pNetObject)
-    //    {
-    //        pNetObject->SetUserData(xMsg.world_id());
-
-    //        NFMsg::AckEventResult xMsg;
-    //        xMsg.set_event_code(NFMsg::EGameEventCode::EGEC_VERIFY_KEY_SUCCESS);
-    //        SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, msg.GetFd());
-    //        return 0;
-    //    }
-    //}
 
     NFMsg::AckEventResult xSendMsg;
     xSendMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SELECTSERVER_FAIL);
@@ -322,27 +296,16 @@ int NFCProxyServerNet_ServerModule::OnReqServerListProcess( const NFIPacket& msg
         NFMsg::AckServerList xData;
         xData.set_type(NFMsg::RSLT_GAMES_ERVER);
 
-        NFCValueList varGameServerList;
-        m_pKernelModule->GetContainerOnLineList(mnGameContainerID, varGameServerList);
-        if (varGameServerList.GetCount() > 0)
+        NFIProxyServerNet_ClientModule::GameDataMap& xGameDataMap = m_pProxyServerNet_ClientModule->GetGameDataMap();
+        NFIProxyServerNet_ClientModule::GameData* pGameData = xGameDataMap.First();
+        while (NULL != pGameData)
         {
-            for (int i = 0; i < varGameServerList.GetCount(); i++)
-            {
-                NFIDENTID ident = varGameServerList.ObjectVal(i);
-                NFIObject* pObject = m_pKernelModule->GetObject(ident);
-                if (pObject)
-                {
-                    NFMsg::ServerInfo* pServerInfo = xData.add_info();
-                    int nServerID = pObject->QueryPropertyInt("ServerID");
-                    int nState = pObject->QueryPropertyInt("State");
-                    const std::string& strName = pObject->QueryPropertyString("Name");
+            NFMsg::ServerInfo* pServerInfo = xData.add_info();
 
-                    pServerInfo->set_name(strName);
-                    pServerInfo->set_status((NFMsg::EServerState)nState);
-                    pServerInfo->set_server_id(nServerID);
-                    pServerInfo->set_wait_count(0);
-                }
-            }
+            pServerInfo->set_name(pGameData->strName);
+            pServerInfo->set_status(pGameData->eState);
+            pServerInfo->set_server_id(pGameData->nGameID);
+            pServerInfo->set_wait_count(0);
         }
 
         SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_WORLD_LIST, xData, msg.GetFd());
