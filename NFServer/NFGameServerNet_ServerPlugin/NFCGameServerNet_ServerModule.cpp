@@ -190,11 +190,6 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
         return;
     }
 
-<<<<<<< .mine
-
-=======
-    //nPlayerID = xMsg.player_id();
->>>>>>> .theirs
     //server_id
     //gate_id
 
