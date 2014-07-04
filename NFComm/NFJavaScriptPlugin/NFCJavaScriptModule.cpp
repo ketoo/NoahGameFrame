@@ -14,10 +14,19 @@ bool NFCJavaScriptModule::Init()
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
     m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
+    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
 
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pLogicClassModule);
+    assert(NULL != m_pElementInfoModule);
+
+    m_pScriptKernelModule = new NFCScriptKernelModule(m_pKernelModule, this, m_pElementInfoModule, m_pEventProcessModule);
+
+    //add all callback
+    m_pKernelModule->ResgisterCommonPropertyEvent(this, &NFCJavaScriptModule::OnPropertyCommEvent);
+    m_pKernelModule->ResgisterCommonRecordEvent(this, &NFCJavaScriptModule::OnRecordCommonEvent);
+    m_pKernelModule->ResgisterCommonClassEvent(this, &NFCJavaScriptModule::OnClassCommonEvent);
 
 
     return true;
@@ -25,14 +34,19 @@ bool NFCJavaScriptModule::Init()
 
 bool NFCJavaScriptModule::AfterInit()
 {
+    return true;
+}
 
+bool NFCJavaScriptModule::BeforeShut()
+{
+    delete m_pScriptKernelModule;
+    m_pScriptKernelModule = NULL;
 
     return true;
 }
 
 bool NFCJavaScriptModule::Shut()
 {
-
     return true;
 }
 
@@ -66,12 +80,23 @@ int NFCJavaScriptModule::DoScriptRecordCallBack( const NFIDENTID& self, const st
     return 0;
 }
 
-int NFCJavaScriptModule::DoHeartBeatCommonCB( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
+int NFCJavaScriptModule::OnPropertyCommEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& arg )
 {
+    DoPropertyCommEvent(m_pScriptKernelModule, self,strPropertyName, oldVar, newVar, arg);
+
     return 0;
 }
 
-int NFCJavaScriptModule::DoEventCommonCB( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
+int NFCJavaScriptModule::OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& arg )
 {
+    DoRecordCommonEvent(m_pScriptKernelModule, self,strRecordName, nOpType, nRow, nCol, oldVar, newVar, arg);
+
+    return 0;
+}
+
+int NFCJavaScriptModule::OnClassCommonEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var )
+{
+    DoClassCommonEvent(m_pLogicClassModule, self, strClassName, eClassEvent, var);
+
     return 0;
 }
