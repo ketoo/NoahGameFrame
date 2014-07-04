@@ -31,7 +31,4 @@
 	<class Id = "Buff" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/Buff.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Buff.xml" public = "false" Desc = "NPC"/>
 	<class Id = "Task" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/Task.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Task.xml" public = "false" Desc = "TASK"/>
 	<!-- <class Id = "EffectData" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/EffectData.xml" InstancePath = "../../NFDataCfg/Ini/NPC/EffectData.xml" public = "false" Desc = "TASK"/> -->
-	<class Id = "IComponent" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Component/IComponent.xml" InstancePath = "../../NFDataCfg/Ini/Components/IComponent.xml" public = "false" Desc = "NPC">
-		<class Id = "NFCUseItemModule" Type = "TYPE_NPC" Path = "../../NFDataCfg/Struct/Component/NFCUseItemModule.xml" InstancePath = "../../NFDataCfg/Ini/Components/NFCUseItemModule.xml" public = "false" Desc = "难点：1：如何设计，此组建对哪些事件拥有被通知权限 2：获得被通知权限，如何自动进行事件通知(类似UNITY，基类组建提供通用事件的虚接口)"/>
-	</class>
 </XML>

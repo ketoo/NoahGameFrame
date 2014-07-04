@@ -70,7 +70,7 @@
 		</Record>
 	</Records>
 	<Components>
-		<Component Name="NFCUseItemComponent" Enable="true" Desc="使用物品组件"/>
+		<Component Name="Test" Enable="true" Language="Lua" Desc="测试组件"/>
 	</Components>
 	<Includes>
 		<Include Id="../../NFDataCfg/Struct/Class/Player/PlayerBase.xml"/>
