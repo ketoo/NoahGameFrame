@@ -1,0 +1,14 @@
+import modules ;
+
+lib glut : : <name>glut ;
+lib glu : : <name>glu ;
+lib gl : : <name>gl ;
+
+exe glut_bind
+    : glut_bind.cpp gl glu glut
+      /luabind//lualib
+      /luabind//luabind
+    ;
+
+stage . : glut_bind ;
+ 

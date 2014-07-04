@@ -1,0 +1,3423 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.8: http://docutils.sourceforge.net/" />
+<title>luabind 0.9.1</title>
+<meta name="author" content="Daniel Wallin, Arvid Norberg" />
+<meta name="copyright" content="Copyright Daniel Wallin, Arvid Norberg 2003." />
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:date: $Date$
+:version: $Revision$
+:copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+*/
+
+p {
+  text-align: justify;
+}
+
+.first {
+  margin-top: 0 }
+
+.last {
+  margin-bottom: 0 }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+dt { /* used in FAQ */
+  font-weight: bold ;
+  margin-bottom: 0.2em
+}
+
+dl {
+  margin-left: 0.5em ;
+  margin-right: 10em 
+}
+
+h3 {
+  font-size: 90%
+}
+
+dd {
+  margin-bottom: 0.5em }
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.attention, div.caution, div.danger, div.error, div.hint,
+div.important, div.note, div.tip, div.warning, div.admonition {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.hint p.admonition-title, div.important p.admonition-title,
+div.note p.admonition-title, div.tip p.admonition-title,
+div.admonition p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em }
+
+div.footer, div.header {
+  font-size: smaller }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ;
+  padding: 0em 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr {
+  width: 75% }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.line-block {
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em ;
+/*  padding-left: 1em ;*/
+  background-color: #eeeeee ;
+/*  border-left: solid 3px #c0c0c0*/ }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.option-argument {
+  font-style: italic }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+table {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.citation {
+  border-left: solid thin gray ;
+  padding-left: 0.5ex }
+
+table.docinfo {
+  margin: 2em 4em ;
+  border: none }
+
+table.footnote {
+  border-left: solid thin black ;
+  padding-left: 0.5ex }
+
+td, th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+th.docinfo-name, th.field-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  border: none ;
+  background-color: #f0f0f0
+ }
+
+h1 tt, h2 tt, h3 tt, h4 tt, h5 tt, h6 tt {
+  font-size: 100% ;
+  font-family: serif }
+
+/*h1 { font-family: Arial, Helvetica, sans-serif; font-weight: bold; text-align: left; font-size: 140%; }
+h2 { font-family: Arial, Helvetica, sans-serif; font-weight: bold; text-align: left; font-size: 110%; }
+h3 { font-family: "courier new", courier, monospace; font-weight: bold; text-align: left; font-size: 100%; }
+*/
+tt {
+  /*background-color: #eeeeee*/
+  color: #102eb0
+}
+
+ul.auto-toc {
+  list-style-type: none }
+
+/* --- */
+
+table {
+  border-collapse: collapse;
+  border: none;
+/*  border-bottom: 1px solid black;*/
+  margin-left: 1em;
+}
+
+td, th {
+  border: none;
+}
+
+th {
+/* border-top: 1px solid black;*/
+  border-bottom: 1px solid black;
+  text-align: left;
+}
+
+a:link
+{
+	font-weight: bold;
+	color: #003366;
+	text-decoration: none;
+}
+
+a:visited
+{
+	font-weight: bold;
+	color: #003366;
+	text-decoration: none;
+}
+
+h3 {
+  text-transform: uppercase 
+}
+
+</style>
+</head>
+<body>
+<div class="document" id="luabind-version">
+<h1 class="title">luabind 0.9.1</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr><th class="docinfo-name">Author:</th>
+<td>Daniel Wallin, Arvid Norberg</td></tr>
+<tr><th class="docinfo-name">Copyright:</th>
+<td>Copyright Daniel Wallin, Arvid Norberg 2003.</td></tr>
+<tr class="field"><th class="docinfo-name">License:</th><td class="field-body"><p class="first">Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the &quot;Software&quot;),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.</p>
+<p class="last">THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF
+ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
+ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+OR OTHER DEALINGS IN THE SOFTWARE.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="auto-toc simple">
+<li><a class="reference internal" href="#introduction" id="id46">1&nbsp;&nbsp;&nbsp;Introduction</a></li>
+<li><a class="reference internal" href="#features" id="id47">2&nbsp;&nbsp;&nbsp;Features</a></li>
+<li><a class="reference internal" href="#portability" id="id48">3&nbsp;&nbsp;&nbsp;Portability</a></li>
+<li><a class="reference internal" href="#building-luabind" id="id49">4&nbsp;&nbsp;&nbsp;Building luabind</a><ul class="auto-toc">
+<li><a class="reference internal" href="#prerequisites" id="id50">4.1&nbsp;&nbsp;&nbsp;Prerequisites</a></li>
+<li><a class="reference internal" href="#windows" id="id51">4.2&nbsp;&nbsp;&nbsp;Windows</a></li>
+<li><a class="reference internal" href="#linux-and-other-nix-flavors" id="id52">4.3&nbsp;&nbsp;&nbsp;Linux and other *nix flavors</a></li>
+<li><a class="reference internal" href="#building-and-testing" id="id53">4.4&nbsp;&nbsp;&nbsp;Building and testing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#basic-usage" id="id54">5&nbsp;&nbsp;&nbsp;Basic usage</a><ul class="auto-toc">
+<li><a class="reference internal" href="#hello-world" id="id55">5.1&nbsp;&nbsp;&nbsp;Hello world</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#scopes" id="id56">6&nbsp;&nbsp;&nbsp;Scopes</a></li>
+<li><a class="reference internal" href="#binding-functions-to-lua" id="id57">7&nbsp;&nbsp;&nbsp;Binding functions to Lua</a><ul class="auto-toc">
+<li><a class="reference internal" href="#overloaded-functions" id="id58">7.1&nbsp;&nbsp;&nbsp;Overloaded functions</a></li>
+<li><a class="reference internal" href="#signature-matching" id="id59">7.2&nbsp;&nbsp;&nbsp;Signature matching</a></li>
+<li><a class="reference internal" href="#calling-lua-functions" id="id60">7.3&nbsp;&nbsp;&nbsp;Calling Lua functions</a></li>
+<li><a class="reference internal" href="#using-lua-threads" id="id61">7.4&nbsp;&nbsp;&nbsp;Using Lua threads</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#binding-classes-to-lua" id="id62">8&nbsp;&nbsp;&nbsp;Binding classes to Lua</a><ul class="auto-toc">
+<li><a class="reference internal" href="#overloaded-member-functions" id="id63">8.1&nbsp;&nbsp;&nbsp;Overloaded member functions</a></li>
+<li><a class="reference internal" href="#properties" id="id64">8.2&nbsp;&nbsp;&nbsp;Properties</a></li>
+<li><a class="reference internal" href="#enums" id="id65">8.3&nbsp;&nbsp;&nbsp;Enums</a></li>
+<li><a class="reference internal" href="#operators" id="id66">8.4&nbsp;&nbsp;&nbsp;Operators</a></li>
+<li><a class="reference internal" href="#nested-scopes-and-static-functions" id="id67">8.5&nbsp;&nbsp;&nbsp;Nested scopes and static functions</a></li>
+<li><a class="reference internal" href="#derived-classes" id="id68">8.6&nbsp;&nbsp;&nbsp;Derived classes</a></li>
+<li><a class="reference internal" href="#smart-pointers" id="id69">8.7&nbsp;&nbsp;&nbsp;Smart pointers</a></li>
+<li><a class="reference internal" href="#splitting-class-registrations" id="id70">8.8&nbsp;&nbsp;&nbsp;Splitting class registrations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#adding-converters-for-user-defined-types" id="id71">9&nbsp;&nbsp;&nbsp;Adding converters for user defined types</a></li>
+<li><a class="reference internal" href="#binding-function-objects-with-explicit-signatures" id="id72">10&nbsp;&nbsp;&nbsp;Binding function objects with explicit signatures</a></li>
+<li><a class="reference internal" href="#object" id="id73">11&nbsp;&nbsp;&nbsp;Object</a><ul class="auto-toc">
+<li><a class="reference internal" href="#iterators" id="id74">11.1&nbsp;&nbsp;&nbsp;Iterators</a></li>
+<li><a class="reference internal" href="#related-functions" id="id75">11.2&nbsp;&nbsp;&nbsp;Related functions</a></li>
+<li><a class="reference internal" href="#assigning-nil" id="id76">11.3&nbsp;&nbsp;&nbsp;Assigning nil</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#defining-classes-in-lua" id="id77">12&nbsp;&nbsp;&nbsp;Defining classes in Lua</a><ul class="auto-toc">
+<li><a class="reference internal" href="#deriving-in-lua" id="id78">12.1&nbsp;&nbsp;&nbsp;Deriving in lua</a></li>
+<li><a class="reference internal" href="#overloading-operators" id="id79">12.2&nbsp;&nbsp;&nbsp;Overloading operators</a></li>
+<li><a class="reference internal" href="#finalizers" id="id80">12.3&nbsp;&nbsp;&nbsp;Finalizers</a></li>
+<li><a class="reference internal" href="#slicing" id="id81">12.4&nbsp;&nbsp;&nbsp;Slicing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#exceptions" id="id82">13&nbsp;&nbsp;&nbsp;Exceptions</a></li>
+<li><a class="reference internal" href="#policies" id="id83">14&nbsp;&nbsp;&nbsp;Policies</a><ul class="auto-toc">
+<li><a class="reference internal" href="#adopt" id="id84">14.1&nbsp;&nbsp;&nbsp;adopt</a></li>
+<li><a class="reference internal" href="#dependency" id="id85">14.2&nbsp;&nbsp;&nbsp;dependency</a></li>
+<li><a class="reference internal" href="#out-value" id="id86">14.3&nbsp;&nbsp;&nbsp;out_value</a></li>
+<li><a class="reference internal" href="#pure-out-value" id="id87">14.4&nbsp;&nbsp;&nbsp;pure_out_value</a></li>
+<li><a class="reference internal" href="#return-reference-to" id="id88">14.5&nbsp;&nbsp;&nbsp;return_reference_to</a></li>
+<li><a class="reference internal" href="#copy" id="id89">14.6&nbsp;&nbsp;&nbsp;copy</a></li>
+<li><a class="reference internal" href="#discard-result" id="id90">14.7&nbsp;&nbsp;&nbsp;discard_result</a></li>
+<li><a class="reference internal" href="#return-stl-iterator" id="id91">14.8&nbsp;&nbsp;&nbsp;return_stl_iterator</a></li>
+<li><a class="reference internal" href="#raw" id="id92">14.9&nbsp;&nbsp;&nbsp;raw</a></li>
+<li><a class="reference internal" href="#yield" id="id93">14.10&nbsp;&nbsp;&nbsp;yield</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#splitting-up-the-registration" id="id94">15&nbsp;&nbsp;&nbsp;Splitting up the registration</a></li>
+<li><a class="reference internal" href="#error-handling" id="id95">16&nbsp;&nbsp;&nbsp;Error Handling</a><ul class="auto-toc">
+<li><a class="reference internal" href="#pcall-errorfunc" id="id96">16.1&nbsp;&nbsp;&nbsp;pcall errorfunc</a></li>
+<li><a class="reference internal" href="#file-and-line-numbers" id="id97">16.2&nbsp;&nbsp;&nbsp;file and line numbers</a></li>
+<li><a class="reference internal" href="#lua-panic" id="id98">16.3&nbsp;&nbsp;&nbsp;lua panic</a></li>
+<li><a class="reference internal" href="#structured-exceptions-msvc" id="id99">16.4&nbsp;&nbsp;&nbsp;structured exceptions (MSVC)</a></li>
+<li><a class="reference internal" href="#error-messages" id="id100">16.5&nbsp;&nbsp;&nbsp;Error messages</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#build-options" id="id101">17&nbsp;&nbsp;&nbsp;Build options</a></li>
+<li><a class="reference internal" href="#implementation-notes" id="id102">18&nbsp;&nbsp;&nbsp;Implementation notes</a></li>
+<li><a class="reference internal" href="#faq" id="id103">19&nbsp;&nbsp;&nbsp;FAQ</a></li>
+<li><a class="reference internal" href="#known-issues" id="id104">20&nbsp;&nbsp;&nbsp;Known issues</a></li>
+<li><a class="reference internal" href="#acknowledgments" id="id105">21&nbsp;&nbsp;&nbsp;Acknowledgments</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h1>1&nbsp;&nbsp;&nbsp;Introduction</h1>
+<p>Luabind is a library that helps you create bindings between C++ and Lua. It has
+the ability to expose functions and classes, written in C++, to Lua. It will
+also supply the functionality to define classes in Lua and let them derive from
+other Lua classes or C++ classes. Lua classes can override virtual functions
+from their C++ base classes. It is written towards Lua 5.0, and does not work
+with Lua 4.</p>
+<p>It is implemented utilizing template meta programming. That means that you
+don't need an extra preprocess pass to compile your project (it is done by the
+compiler). It also means you don't (usually) have to know the exact signature
+of each function you register, since the library will generate code depending
+on the compile-time type of the function (which includes the signature). The
+main drawback of this approach is that the compilation time will increase for
+the file that does the registration, it is therefore recommended that you
+register everything in the same cpp-file.</p>
+<p>Luabind is released under the terms of the <a class="reference external" href="http://www.opensource.org/licenses/mit-license.php">MIT license</a>.</p>
+<p>We are very interested in hearing about projects that use luabind, please let
+us know about your project.</p>
+<p>The main channel for help and feedback is the <a class="reference external" href="https://lists.sourceforge.net/lists/listinfo/luabind-user">luabind mailing list</a>.
+There's also an IRC channel <tt class="docutils literal">#luabind</tt> on irc.freenode.net.</p>
+</div>
+<div class="section" id="features">
+<h1>2&nbsp;&nbsp;&nbsp;Features</h1>
+<p>Luabind supports:</p>
+<blockquote>
+<ul class="simple">
+<li>Overloaded free functions</li>
+<li>C++ classes in Lua</li>
+<li>Overloaded member functions</li>
+<li>Operators</li>
+<li>Properties</li>
+<li>Enums</li>
+<li>Lua functions in C++</li>
+<li>Lua classes in C++</li>
+<li>Lua classes (single inheritance)</li>
+<li>Derives from Lua or C++ classes</li>
+<li>Override virtual functions from C++ classes</li>
+<li>Implicit casts between registered types</li>
+<li>Best match signature matching</li>
+<li>Return value policies and parameter policies</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="portability">
+<h1>3&nbsp;&nbsp;&nbsp;Portability</h1>
+<p>Luabind has been tested to work on the following compilers:</p>
+<blockquote>
+<ul class="simple">
+<li>Visual Studio 7.1</li>
+<li>Intel C++ 6.0 (Windows)</li>
+<li>GCC 2.95.3 (cygwin)</li>
+<li>GCC 3.0.4 (Debian/Linux)</li>
+<li>GCC 3.1 (SunOS 5.8)</li>
+<li>GCC 3.2 (cygwin)</li>
+<li>GCC 3.3.1 (cygwin)</li>
+<li>GCC 3.3 (Apple, MacOS X)</li>
+<li>GCC 4.0 (Apple, MacOS X)</li>
+</ul>
+</blockquote>
+<p>It has been confirmed not to work with:</p>
+<blockquote>
+<ul class="simple">
+<li>GCC 2.95.2 (SunOS 5.8)</li>
+</ul>
+</blockquote>
+<p>Metrowerks 8.3 (Windows) compiles but fails the const-test. This
+means that const member functions are treated as non-const member
+functions.</p>
+<p>If you have tried luabind with a compiler not listed here, let us know
+your result with it.</p>
+</div>
+<div class="section" id="building-luabind">
+<h1>4&nbsp;&nbsp;&nbsp;Building luabind</h1>
+<div class="section" id="prerequisites">
+<h2>4.1&nbsp;&nbsp;&nbsp;Prerequisites</h2>
+<p>Luabind depends on a number of Boost 1.34 libraries. It also depends on
+Boost Jam and Boost Build V2 to build the library and run the tests.
+Boost provides <a class="reference external" href="http://sourceforge.net/project/showfiles.php?group_id=7586&amp;package_id=72941">precompiled bjam binaries</a> for a number of platforms.
+If there isn't a precompiled binary available for your platform, you may
+need to <a class="reference external" href="http://www.boost.org/doc/libs/1_36_0/doc/html/jam/building.html">build it yourself</a>.</p>
+</div>
+<div class="section" id="windows">
+<h2>4.2&nbsp;&nbsp;&nbsp;Windows</h2>
+<p>The environment varaible <tt class="docutils literal">LUA_PATH</tt> needs to be set to point to a
+directory containing the Lua include directory and built libraries. At
+least for the purpose of running the test suite, the recommended way to
+get these is the <a class="reference external" href="http://luabinaries.luaforge.net">Lua Binaries</a> <em>Windows x86 DLL and Includes</em> package.</p>
+<p>Furthermore, the environment variable <tt class="docutils literal">BOOST_ROOT</tt> must point to
+a Boost installation directory.</p>
+</div>
+<div class="section" id="linux-and-other-nix-flavors">
+<h2>4.3&nbsp;&nbsp;&nbsp;Linux and other *nix flavors</h2>
+<p>If your system already has Lua installed, it is very likely that the
+build system will automatically find it and just work. If you have
+Lua installed in a non-standard location, you may need to set
+<tt class="docutils literal">LUA_PATH</tt> to point to the installation prefix.</p>
+<p><tt class="docutils literal">BOOST_ROOT</tt> can be set to a Boost installation directory. If left
+unset, the build system will try to use boost headers from the standard
+include path.</p>
+<div class="section" id="macosx">
+<h3>4.3.1&nbsp;&nbsp;&nbsp;MacOSX</h3>
+<p>If you have both the 10.4 and 10.5 SDK installed, Boost Build seems to
+default to 10.4. Lua, at least when installed from MacPorts, will be
+linked with the 10.5 SDK. If the luabind build fails with link errors,
+you may need to explicitly build with the 10.5 SDK:</p>
+<pre class="literal-block">
+$ bjam macosx-version=10.5
+</pre>
+</div>
+</div>
+<div class="section" id="building-and-testing">
+<h2>4.4&nbsp;&nbsp;&nbsp;Building and testing</h2>
+<p>Building the default variant of the library, which is a shared debug
+library, is simply done by invoking <tt class="docutils literal">bjam</tt> in the luabind root
+directory:</p>
+<pre class="literal-block">
+$ bjam
+...patience...
+...found 714 targets...
+...updating 23 targets...
+</pre>
+<p>When building with GCC on Linux, this results in:</p>
+<pre class="literal-block">
+bin/gcc-4.2.3/debug/libluabind.so
+</pre>
+<p>On Windows a dll and matching import library would be produced.</p>
+<p>To run the unit tests, invoke <tt class="docutils literal">bjam</tt> with the <tt class="docutils literal">test</tt> target:</p>
+<pre class="literal-block">
+$ bjam test
+</pre>
+<p>This will build and run the unit tests in four different variants:
+debug, release, debug-static-lib, release-static-lib. A clean test run
+output should end with something like:</p>
+<pre class="literal-block">
+... updated <em>xxx</em> targets...
+</pre>
+<p>A failed run would end with something like:</p>
+<pre class="literal-block">
+...failed updating <em>xxx</em> target...
+...skipped <em>xxx</em> targets...
+</pre>
+<p>If you are not using Boost Build to build your application, and want to
+use the shared library variant, <tt class="docutils literal">LUABIND_DYNAMIC_LINK</tt> needs to be
+defined to properly import symbols.</p>
+</div>
+</div>
+<div class="section" id="basic-usage">
+<h1>5&nbsp;&nbsp;&nbsp;Basic usage</h1>
+<p>To use luabind, you must include <tt class="docutils literal">lua.h</tt> and luabind's main header file:</p>
+<pre class="literal-block">
+extern &quot;C&quot;
+{
+    #include &quot;lua.h&quot;
+}
+
+#include &lt;luabind/luabind.hpp&gt;
+</pre>
+<p>This includes support for both registering classes and functions. If you just
+want to have support for functions or classes you can include
+<tt class="docutils literal">luabind/function.hpp</tt> and <tt class="docutils literal">luabind/class.hpp</tt> separately:</p>
+<pre class="literal-block">
+#include &lt;luabind/function.hpp&gt;
+#include &lt;luabind/class.hpp&gt;
+</pre>
+<p>The first thing you need to do is to call <tt class="docutils literal"><span class="pre">luabind::open(lua_State*)</span></tt> which
+will register the functions to create classes from Lua, and initialize some
+state-global structures used by luabind. If you don't call this function you
+will hit asserts later in the library. There is no corresponding close function
+because once a class has been registered in Lua, there really isn't any good
+way to remove it. Partly because any remaining instances of that class relies
+on the class being there. Everything will be cleaned up when the state is
+closed though.</p>
+<!-- Isn't this wrong? Don't we include lua.h using lua_include.hpp ? -->
+<p>Luabind's headers will never include <tt class="docutils literal">lua.h</tt> directly, but through
+<tt class="docutils literal">&lt;luabind/lua_include.hpp&gt;</tt>. If you for some reason need to include another
+Lua header, you can modify this file.</p>
+<div class="section" id="hello-world">
+<h2>5.1&nbsp;&nbsp;&nbsp;Hello world</h2>
+<pre class="literal-block">
+#include &lt;iostream&gt;
+#include &lt;luabind/luabind.hpp&gt;
+
+void greet()
+{
+    std::cout &lt;&lt; &quot;hello world!\n&quot;;
+}
+
+extern &quot;C&quot; int init(lua_State* L)
+{
+    using namespace luabind;
+
+    open(L);
+
+    module(L)
+    [
+        def(&quot;greet&quot;, &amp;greet)
+    ];
+
+    return 0;
+}
+</pre>
+<pre class="literal-block">
+Lua 5.0  Copyright (C) 1994-2003 Tecgraf, PUC-Rio
+&gt; loadlib('hello_world.dll', 'init')()
+&gt; greet()
+Hello world!
+&gt;
+</pre>
+</div>
+</div>
+<div class="section" id="scopes">
+<h1>6&nbsp;&nbsp;&nbsp;Scopes</h1>
+<p>Everything that gets registered in Lua is registered in a namespace (Lua
+tables) or in the global scope (called module). All registrations must be
+surrounded by its scope. To define a module, the <tt class="docutils literal"><span class="pre">luabind::module</span></tt> class is
+used. It is used like this:</p>
+<pre class="literal-block">
+module(L)
+[
+    // declarations
+];
+</pre>
+<p>This will register all declared functions or classes in the global namespace in
+Lua. If you want to have a namespace for your module (like the standard
+libraries) you can give a name to the constructor, like this:</p>
+<pre class="literal-block">
+module(L, &quot;my_library&quot;)
+[
+    // declarations
+];
+</pre>
+<p>Here all declarations will be put in the my_library table.</p>
+<p>If you want nested namespace's you can use the <tt class="docutils literal"><span class="pre">luabind::namespace_</span></tt> class. It
+works exactly as <tt class="docutils literal"><span class="pre">luabind::module</span></tt> except that it doesn't take a lua_State*
+in it's constructor. An example of its usage could look like this:</p>
+<pre class="literal-block">
+module(L, &quot;my_library&quot;)
+[
+    // declarations
+
+    namespace_(&quot;detail&quot;)
+    [
+        // library-private declarations
+    ]
+];
+</pre>
+<p>As you might have figured out, the following declarations are equivalent:</p>
+<pre class="literal-block">
+module(L)
+[
+    namespace_(&quot;my_library&quot;)
+    [
+        // declarations
+    ]
+
+];
+</pre>
+<pre class="literal-block">
+module(L, &quot;my_library&quot;)
+[
+    // declarations
+];
+</pre>
+<p>Each declaration must be separated by a comma, like this:</p>
+<pre class="literal-block">
+module(L)
+[
+    def(&quot;f&quot;, &amp;f),
+    def(&quot;g&quot;, &amp;g),
+    class_&lt;A&gt;(&quot;A&quot;)
+        .def(constructor&lt;int, int&gt;),
+    def(&quot;h&quot;, &amp;h)
+];
+</pre>
+<p>More about the actual declarations in the <a class="reference internal" href="#binding-functions-to-lua">Binding functions to Lua</a> and
+<a class="reference internal" href="#binding-classes-to-lua">Binding classes to Lua</a> sections.</p>
+<p>A word of caution, if you are in really bad need for performance, putting your
+functions in tables will increase the lookup time.</p>
+</div>
+<div class="section" id="binding-functions-to-lua">
+<h1>7&nbsp;&nbsp;&nbsp;Binding functions to Lua</h1>
+<p>To bind functions to Lua you use the function <tt class="docutils literal"><span class="pre">luabind::def()</span></tt>. It has the
+following synopsis:</p>
+<pre class="literal-block">
+template&lt;class F, class policies&gt;
+void def(const char* name, F f, const Policies&amp;);
+</pre>
+<ul class="simple">
+<li>name is the name the function will have within Lua.</li>
+<li>F is the function pointer you want to register.</li>
+<li>The Policies parameter is used to describe how parameters and return values
+are treated by the function, this is an optional parameter. More on this in
+the <a class="reference internal" href="#policies">policies</a> section.</li>
+</ul>
+<p>An example usage could be if you want to register the function <tt class="docutils literal">float
+<span class="pre">std::sin(float)</span></tt>:</p>
+<pre class="literal-block">
+module(L)
+[
+    def(&quot;sin&quot;, &amp;std::sin)
+];
+</pre>
+<div class="section" id="overloaded-functions">
+<h2>7.1&nbsp;&nbsp;&nbsp;Overloaded functions</h2>
+<p>If you have more than one function with the same name, and want to register
+them in Lua, you have to explicitly give the signature. This is to let C++ know
+which function you refer to. For example, if you have two functions, <tt class="docutils literal">int
+f(const char*)</tt> and <tt class="docutils literal">void f(int)</tt>.</p>
+<pre class="literal-block">
+module(L)
+[
+    def(&quot;f&quot;, (int(*)(const char*)) &amp;f),
+    def(&quot;f&quot;, (void(*)(int)) &amp;f)
+];
+</pre>
+</div>
+<div class="section" id="signature-matching">
+<h2>7.2&nbsp;&nbsp;&nbsp;Signature matching</h2>
+<p>luabind will generate code that checks the Lua stack to see if the values there
+can match your functions' signatures. It will handle implicit typecasts between
+derived classes, and it will prefer matches with the least number of implicit
+casts. In a function call, if the function is overloaded and there's no
+overload that match the parameters better than the other, you have an
+ambiguity. This will spawn a run-time error, stating that the function call is
+ambiguous. A simple example of this is to register one function that takes an
+int and one that takes a float. Since Lua doesn't distinguish between floats and
+integers, both will always match.</p>
+<p>Since all overloads are tested, it will always find the best match (not the
+first match). This also means that it can handle situations where the only
+difference in the signature is that one member function is const and the other
+isn't.</p>
+<div class="sidebar">
+<p class="first sidebar-title">Ownership transfer</p>
+<p class="last">To correctly handle ownership transfer, create_a() would need an adopt
+return value policy. More on this in the <a class="reference internal" href="#policies">Policies</a> section.</p>
+</div>
+<p>For example, if the following function and class is registered:</p>
+<pre class="literal-block">
+struct A
+{
+    void f();
+    void f() const;
+};
+
+const A* create_a();
+
+struct B: A {};
+struct C: B {};
+
+void g(A*);
+void g(B*);
+</pre>
+<p>And the following Lua code is executed:</p>
+<pre class="literal-block">
+a1 = create_a()
+a1:f() -- the const version is called
+
+a2 = A()
+a2:f() -- the non-const version is called
+
+a = A()
+b = B()
+c = C()
+
+g(a) -- calls g(A*)
+g(b) -- calls g(B*)
+g(c) -- calls g(B*)
+</pre>
+</div>
+<div class="section" id="calling-lua-functions">
+<h2>7.3&nbsp;&nbsp;&nbsp;Calling Lua functions</h2>
+<p>To call a Lua function, you can either use <tt class="docutils literal">call_function()</tt> or
+an <tt class="docutils literal">object</tt>.</p>
+<pre class="literal-block">
+template&lt;class Ret&gt;
+Ret call_function(lua_State* L, const char* name, ...)
+template&lt;class Ret&gt;
+Ret call_function(object const&amp; obj, ...)
+</pre>
+<p>There are two overloads of the <tt class="docutils literal">call_function</tt> function, one that calls
+a function given its name, and one that takes an object that should be a Lua
+value that can be called as a function.</p>
+<p>The overload that takes a name can only call global Lua functions. The ...
+represents a variable number of parameters that are sent to the Lua
+function. This function call may throw <tt class="docutils literal"><span class="pre">luabind::error</span></tt> if the function
+call fails.</p>
+<p>The return value isn't actually Ret (the template parameter), but a proxy
+object that will do the function call. This enables you to give policies to the
+call. You do this with the operator[]. You give the policies within the
+brackets, like this:</p>
+<pre class="literal-block">
+int ret = call_function&lt;int&gt;(
+    L
+  , &quot;a_lua_function&quot;
+  , new complex_class()
+)[ adopt(_1) ];
+</pre>
+<p>If you want to pass a parameter as a reference, you have to wrap it with the
+<a class="reference external" href="http://www.boost.org/doc/html/ref.html">Boost.Ref</a>.</p>
+<p>Like this:</p>
+<pre class="literal-block">
+int ret = call_function(L, &quot;fun&quot;, boost::ref(val));
+</pre>
+<p>If you want to use a custom error handler for the function call, see
+<tt class="docutils literal">set_pcall_callback</tt> under <a class="reference internal" href="#pcall-errorfunc">pcall errorfunc</a>.</p>
+</div>
+<div class="section" id="using-lua-threads">
+<h2>7.4&nbsp;&nbsp;&nbsp;Using Lua threads</h2>
+<p>To start a Lua thread, you have to call <tt class="docutils literal">lua_resume()</tt>, this means that you
+cannot use the previous function <tt class="docutils literal">call_function()</tt> to start a thread. You have
+to use</p>
+<pre class="literal-block">
+template&lt;class Ret&gt;
+Ret resume_function(lua_State* L, const char* name, ...)
+template&lt;class Ret&gt;
+Ret resume_function(object const&amp; obj, ...)
+</pre>
+<p>and</p>
+<pre class="literal-block">
+template&lt;class Ret&gt;
+Ret resume(lua_State* L, ...)
+</pre>
+<p>The first time you start the thread, you have to give it a function to execute. i.e. you
+have to use <tt class="docutils literal">resume_function</tt>, when the Lua function yields, it will return the first
+value passed in to <tt class="docutils literal">lua_yield()</tt>. When you want to continue the execution, you just call
+<tt class="docutils literal">resume()</tt> on your <tt class="docutils literal">lua_State</tt>, since it's already executing a function, you don't pass
+it one. The parameters to <tt class="docutils literal">resume()</tt> will be returned by <tt class="docutils literal">yield()</tt> on the Lua side.</p>
+<p>For yielding C++-functions (without the support of passing data back and forth between the
+Lua side and the c++ side), you can use the <a class="reference internal" href="#yield">yield</a> policy.</p>
+<p>With the overload of <tt class="docutils literal">resume_function</tt> that takes an <a class="reference internal" href="#object">object</a>, it is important that the
+object was constructed with the thread as its <tt class="docutils literal">lua_State*</tt>. Like this:</p>
+<pre class="literal-block">
+lua_State* thread = lua_newthread(L);
+object fun = get_global(<strong>thread</strong>)[&quot;my_thread_fun&quot;];
+resume_function(fun);
+</pre>
+</div>
+</div>
+<div class="section" id="binding-classes-to-lua">
+<h1>8&nbsp;&nbsp;&nbsp;Binding classes to Lua</h1>
+<p>To register classes you use a class called <tt class="docutils literal">class_</tt>. Its name is supposed to
+resemble the C++ keyword, to make it look more intuitive. It has an overloaded
+member function <tt class="docutils literal">def()</tt> that is used to register member functions, operators,
+constructors, enums and properties on the class. It will return its
+this-pointer, to let you register more members directly.</p>
+<p>Let's start with a simple example. Consider the following C++ class:</p>
+<pre class="literal-block">
+class testclass
+{
+public:
+    testclass(const std::string&amp; s): m_string(s) {}
+    void print_string() { std::cout &lt;&lt; m_string &lt;&lt; &quot;\n&quot;; }
+
+private:
+    std::string m_string;
+};
+</pre>
+<p>To register it with a Lua environment, write as follows (assuming you are using
+namespace luabind):</p>
+<pre class="literal-block">
+module(L)
+[
+    class_&lt;testclass&gt;(&quot;testclass&quot;)
+        .def(constructor&lt;const std::string&amp;&gt;())
+        .def(&quot;print_string&quot;, &amp;testclass::print_string)
+];
+</pre>
+<p>This will register the class with the name testclass and constructor that takes
+a string as argument and one member function with the name <tt class="docutils literal">print_string</tt>.</p>
+<pre class="literal-block">
+Lua 5.0  Copyright (C) 1994-2003 Tecgraf, PUC-Rio
+&gt; a = testclass('a string')
+&gt; a:print_string()
+a string
+</pre>
+<p>It is also possible to register free functions as member functions. The
+requirement on the function is that it takes a pointer, const pointer,
+reference or const reference to the class type as the first parameter. The rest
+of the parameters are the ones that are visible in Lua, while the object
+pointer is given as the first parameter. If we have the following C++ code:</p>
+<pre class="literal-block">
+struct A
+{
+    int a;
+};
+
+int plus(A* o, int v) { return o-&gt;a + v; }
+</pre>
+<p>You can register <tt class="docutils literal">plus()</tt> as if it was a member function of A like this:</p>
+<pre class="literal-block">
+class_&lt;A&gt;(&quot;A&quot;)
+    .def(&quot;plus&quot;, &amp;plus)
+</pre>
+<p><tt class="docutils literal">plus()</tt> can now be called as a member function on A with one parameter, int.
+If the object pointer parameter is const, the function will act as if it was a
+const member function (it can be called on const objects).</p>
+<div class="section" id="overloaded-member-functions">
+<h2>8.1&nbsp;&nbsp;&nbsp;Overloaded member functions</h2>
+<p>When binding more than one overloads of a member function, or just binding
+one overload of an overloaded member function, you have to disambiguate
+the member function pointer you pass to <tt class="docutils literal">def</tt>. To do this, you can use an
+ordinary C-style cast, to cast it to the right overload. To do this, you have
+to know how to express member function types in C++, here's a short tutorial
+(for more info, refer to your favorite book on C++).</p>
+<p>The syntax for member function pointer follows:</p>
+<pre class="literal-block">
+<em>return-value</em> (<em>class-name</em>::*)(<em>arg1-type</em>, <em>arg2-type</em>, <em>...</em>)
+</pre>
+<p>Here's an example illlustrating this:</p>
+<pre class="literal-block">
+struct A
+{
+    void f(int);
+    void f(int, int);
+};
+</pre>
+<pre class="literal-block">
+class_&lt;A&gt;()
+    .def(&quot;f&quot;, (void(A::*)(int))&amp;A::f)
+</pre>
+<p>This selects the first overload of the function <tt class="docutils literal">f</tt> to bind. The second
+overload is not bound.</p>
+</div>
+<div class="section" id="properties">
+<h2>8.2&nbsp;&nbsp;&nbsp;Properties</h2>
+<p>To register a global data member with a class is easily done. Consider the
+following class:</p>
+<pre class="literal-block">
+struct A
+{
+    int a;
+};
+</pre>
+<p>This class is registered like this:</p>
+<pre class="literal-block">
+module(L)
+[
+    class_&lt;A&gt;(&quot;A&quot;)
+        .def_readwrite(&quot;a&quot;, &amp;A::a)
+];
+</pre>
+<p>This gives read and write access to the member variable <tt class="docutils literal"><span class="pre">A::a</span></tt>. It is also
+possible to register attributes with read-only access:</p>
+<pre class="literal-block">
+module(L)
+[
+    class_&lt;A&gt;(&quot;A&quot;)
+        .def_readonly(&quot;a&quot;, &amp;A::a)
+];
+</pre>
+<p>When binding members that are a non-primitive type, the auto generated getter
+function will return a reference to it. This is to allow chained .-operators.
+For example, when having a struct containing another struct. Like this:</p>
+<pre class="literal-block">
+struct A { int m; };
+struct B { A a; };
+</pre>
+<p>When binding <tt class="docutils literal">B</tt> to lua, the following expression code should work:</p>
+<pre class="literal-block">
+b = B()
+b.a.m = 1
+assert(b.a.m == 1)
+</pre>
+<p>This requires the first lookup (on <tt class="docutils literal">a</tt>) to return a reference to <tt class="docutils literal">A</tt>, and
+not a copy. In that case, luabind will automatically use the dependency policy
+to make the return value dependent on the object in which it is stored. So, if
+the returned reference lives longer than all references to the object (b in
+this case) it will keep the object alive, to avoid being a dangling pointer.</p>
+<p>You can also register getter and setter functions and make them look as if they
+were a public data member. Consider the following class:</p>
+<pre class="literal-block">
+class A
+{
+public:
+    void set_a(int x) { a = x; }
+    int get_a() const { return a; }
+
+private:
+    int a;
+};
+</pre>
+<p>It can be registered as if it had a public data member a like this:</p>
+<pre class="literal-block">
+class_&lt;A&gt;(&quot;A&quot;)
+    .property(&quot;a&quot;, &amp;A::get_a, &amp;A::set_a)
+</pre>
+<p>This way the <tt class="docutils literal">get_a()</tt> and <tt class="docutils literal">set_a()</tt> functions will be called instead of
+just writing  to the data member. If you want to make it read only you can just
+omit the last parameter. Please note that the get function <strong>has to be
+const</strong>, otherwise it won't compile. This seems to be a common source of errors.</p>
+</div>
+<div class="section" id="enums">
+<h2>8.3&nbsp;&nbsp;&nbsp;Enums</h2>
+<p>If your class contains enumerated constants (enums), you can register them as
+well to make them available in Lua. Note that they will not be type safe, all
+enums are integers in Lua, and all functions that takes an enum, will accept
+any integer. You register them like this:</p>
+<pre class="literal-block">
+module(L)
+[
+    class_&lt;A&gt;(&quot;A&quot;)
+        .enum_(&quot;constants&quot;)
+        [
+            value(&quot;my_enum&quot;, 4),
+            value(&quot;my_2nd_enum&quot;, 7),
+            value(&quot;another_enum&quot;, 6)
+        ]
+];
+</pre>
+<p>In Lua they are accessed like any data member, except that they are read-only
+and reached on the class itself rather than on an instance of the class.</p>
+<pre class="literal-block">
+Lua 5.0  Copyright (C) 1994-2003 Tecgraf, PUC-Rio
+&gt; print(A.my_enum)
+4
+&gt; print(A.another_enum)
+6
+</pre>
+</div>
+<div class="section" id="operators">
+<h2>8.4&nbsp;&nbsp;&nbsp;Operators</h2>
+<p>To bind operators you have to include <tt class="docutils literal">&lt;luabind/operator.hpp&gt;</tt>.</p>
+<p>The mechanism for registering operators on your class is pretty simple. You use
+a global name <tt class="docutils literal"><span class="pre">luabind::self</span></tt> to refer to the class itself and then you just
+write the operator expression inside the <tt class="docutils literal">def()</tt> call. This class:</p>
+<pre class="literal-block">
+struct vec
+{
+    vec operator+(int s);
+};
+</pre>
+<p>Is registered like this:</p>
+<pre class="literal-block">
+module(L)
+[
+    class_&lt;vec&gt;(&quot;vec&quot;)
+        .def(<strong>self + int()</strong>)
+];
+</pre>
+<p>This will work regardless if your plus operator is defined inside your class or
+as a free function.</p>
+<p>If your operator is const (or, when defined as a free function, takes a const
+reference to the class itself) you have to use <tt class="docutils literal">const_self</tt> instead of
+<tt class="docutils literal">self</tt>. Like this:</p>
+<pre class="literal-block">
+module(L)
+[
+    class_&lt;vec&gt;(&quot;vec&quot;)
+        .def(<strong>const_self</strong> + int())
+];
+</pre>
+<p>The operators supported are those available in Lua:</p>
+<pre class="literal-block">
++    -    *    /    ==    &lt;    &lt;=
+</pre>
+<p>This means, no in-place operators. The equality operator (<tt class="docutils literal">==</tt>) has a little
+hitch; it will not be called if the references are equal. This means that the
+<tt class="docutils literal">==</tt> operator has to do pretty much what's it's expected to do.</p>
+<p>Lua does not support operators such as <tt class="docutils literal">!=</tt>, <tt class="docutils literal">&gt;</tt> or <tt class="docutils literal">&gt;=</tt>. That's why you
+can only register the operators listed above. When you invoke one of the
+mentioned operators, lua will define it in terms of one of the available
+operators.</p>
+<p>In the above example the other operand type is instantiated by writing
+<tt class="docutils literal">int()</tt>. If the operand type is a complex type that cannot easily be
+instantiated you can wrap the type in a class called <tt class="docutils literal">other&lt;&gt;</tt>. For example:</p>
+<p>To register this class, we don't want to instantiate a string just to register
+the operator.</p>
+<pre class="literal-block">
+struct vec
+{
+    vec operator+(std::string);
+};
+</pre>
+<p>Instead we use the <tt class="docutils literal">other&lt;&gt;</tt> wrapper like this:</p>
+<pre class="literal-block">
+module(L)
+[
+    class_&lt;vec&gt;(&quot;vec&quot;)
+        .def(self + <strong>other&lt;std::string&gt;()</strong>)
+];
+</pre>
+<p>To register an application (function call-) operator:</p>
+<pre class="literal-block">
+module(L)
+[
+    class_&lt;vec&gt;(&quot;vec&quot;)
+        .def( <strong>self(int())</strong> )
+];
+</pre>
+<p>There's one special operator. In Lua it's called <tt class="docutils literal">__tostring</tt>, it's not
+really an operator. It is used for converting objects to strings in a standard
+way in Lua. If you register this functionality, you will be able to use the lua
+standard function <tt class="docutils literal">tostring()</tt> for converting your object to a string.</p>
+<p>To implement this operator in C++ you should supply an <tt class="docutils literal">operator&lt;&lt;</tt> for
+std::ostream. Like this example:</p>
+<pre class="literal-block">
+class number {};
+std::ostream&amp; operator&lt;&lt;(std::ostream&amp;, number&amp;);
+
+...
+
+module(L)
+[
+    class_&lt;number&gt;(&quot;number&quot;)
+        .def(<strong>tostring(self)</strong>)
+];
+</pre>
+</div>
+<div class="section" id="nested-scopes-and-static-functions">
+<h2>8.5&nbsp;&nbsp;&nbsp;Nested scopes and static functions</h2>
+<p>It is possible to add nested scopes to a class. This is useful when you need
+to wrap a nested class, or a static function.</p>
+<pre class="literal-block">
+class_&lt;foo&gt;(&quot;foo&quot;)
+    .def(constructor&lt;&gt;())
+    <strong>.scope
+    [
+        class_&lt;inner&gt;(&quot;nested&quot;),
+        def(&quot;f&quot;, &amp;f)
+    ]</strong>;
+</pre>
+<p>In this example, <tt class="docutils literal">f</tt> will behave like a static member function of the class
+<tt class="docutils literal">foo</tt>, and the class <tt class="docutils literal">nested</tt> will behave like a nested class of <tt class="docutils literal">foo</tt>.</p>
+<p>It's also possible to add namespaces to classes using the same syntax.</p>
+</div>
+<div class="section" id="derived-classes">
+<h2>8.6&nbsp;&nbsp;&nbsp;Derived classes</h2>
+<p>If you want to register classes that derives from other classes, you can
+specify a template parameter <tt class="docutils literal">bases&lt;&gt;</tt> to the <tt class="docutils literal">class_</tt> instantiation. The
+following hierarchy:</p>
+<pre class="literal-block">
+struct A {};
+struct B : A {};
+</pre>
+<p>Would be registered like this:</p>
+<pre class="literal-block">
+module(L)
+[
+    class_&lt;A&gt;(&quot;A&quot;),
+    class_&lt;B, A&gt;(&quot;B&quot;)
+];
+</pre>
+<p>If you have multiple inheritance you can specify more than one base. If B would
+also derive from a class C, it would be registered like this:</p>
+<pre class="literal-block">
+module(L)
+[
+    class_&lt;B, bases&lt;A, C&gt; &gt;(&quot;B&quot;)
+];
+</pre>
+<p>Note that you can omit <tt class="docutils literal">bases&lt;&gt;</tt> when using single inheritance.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you don't specify that classes derive from each other, luabind will not
+be able to implicitly cast pointers between the types.</p>
+</div>
+</div>
+<div class="section" id="smart-pointers">
+<h2>8.7&nbsp;&nbsp;&nbsp;Smart pointers</h2>
+<p>When registering a class you can tell luabind to hold all instances
+explicitly created in Lua in a specific smart pointer type, rather than
+the default raw pointer. This is done by passing an additional template
+parameter to <tt class="docutils literal">class_</tt>:</p>
+<pre class="literal-block">
+class_&lt;X, <strong>P</strong>&gt;(…)
+</pre>
+<p>Where the requirements of <tt class="docutils literal">P</tt> are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="62%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Expression</th>
+<th class="head">Returns</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">P(raw)</tt></td>
+<td>&nbsp;</td>
+</tr>
+<tr><td><tt class="docutils literal">get_pointer(p)</tt></td>
+<td>Convertible to <tt class="docutils literal">X*</tt></td>
+</tr>
+</tbody>
+</table>
+<p>where:</p>
+<ul class="simple">
+<li><tt class="docutils literal">raw</tt> is of type <tt class="docutils literal">X*</tt></li>
+<li><tt class="docutils literal">p</tt> is an instance of <tt class="docutils literal">P</tt></li>
+</ul>
+<p><tt class="docutils literal">get_pointer()</tt> overloads are provided for the smart pointers in
+Boost, and <tt class="docutils literal"><span class="pre">std::auto_ptr&lt;&gt;</span></tt>. Should you need to provide your own
+overload, note that it is called unqualified and is expected to be found
+by <em>argument dependent lookup</em>. Thus it should be defined in the same
+namespace as the pointer type it operates on.</p>
+<p>For example:</p>
+<pre class="literal-block">
+class_&lt;X, <strong>boost::scoped_ptr&lt;X&gt;</strong> &gt;(&quot;X&quot;)
+  .def(constructor&lt;&gt;())
+</pre>
+<p>Will cause luabind to hold any instance created on the Lua side in a
+<tt class="docutils literal"><span class="pre">boost::scoped_ptr&lt;X&gt;</span></tt>. Note that this doesn't mean <strong>all</strong> instances
+will be held by a <tt class="docutils literal"><span class="pre">boost::scoped_ptr&lt;X&gt;</span></tt>. If, for example, you
+register a function:</p>
+<pre class="literal-block">
+std::auto_ptr&lt;X&gt; make_X();
+</pre>
+<p>the instance returned by that will be held in <tt class="docutils literal"><span class="pre">std::auto_ptr&lt;X&gt;</span></tt>. This
+is handled automatically for all smart pointers that implement a
+<tt class="docutils literal">get_pointer()</tt> overload.</p>
+<div class="important">
+<p class="first admonition-title">Important</p>
+<p class="last"><tt class="docutils literal">get_const_holder()</tt> has been removed. Automatic conversions
+between <tt class="docutils literal">smart_ptr&lt;X&gt;</tt> and <tt class="docutils literal">smart_ptr&lt;X const&gt;</tt> no longer work.</p>
+</div>
+<div class="important">
+<p class="first admonition-title">Important</p>
+<p><tt class="docutils literal">__ok</tt>  has been removed. Similar functionality can be implemented
+for specific pointer types by doing something along the lines of:</p>
+<pre class="last literal-block">
+bool is_non_null(std::auto_ptr&lt;X&gt; const&amp; p)
+{
+    return p.get();
+}
+
+…
+
+def(&quot;is_non_null&quot;, &amp;is_non_null)
+</pre>
+</div>
+<p>When registering a hierarchy of classes, where all instances are to be held
+by a smart pointer, all the classes should have the baseclass' holder type.
+Like this:</p>
+<pre class="literal-block">
+module(L)
+[
+    class_&lt;base, boost::shared_ptr&lt;base&gt; &gt;(&quot;base&quot;)
+        .def(constructor&lt;&gt;()),
+    class_&lt;derived, base, <strong>boost::shared_ptr&lt;base&gt;</strong> &gt;(&quot;base&quot;)
+        .def(constructor&lt;&gt;())
+];
+</pre>
+<p>Internally, luabind will do the necessary conversions on the raw pointers, which
+are first extracted from the holder type.</p>
+</div>
+<div class="section" id="splitting-class-registrations">
+<h2>8.8&nbsp;&nbsp;&nbsp;Splitting class registrations</h2>
+<p>In some situations it may be desirable to split a registration of a class
+across different compilation units. Partly to save rebuild time when changing
+in one part of the binding, and in some cases compiler limits may force you
+to split it. To do this is very simple. Consider the following sample code:</p>
+<pre class="literal-block">
+void register_part1(class_&lt;X&gt;&amp; x)
+{
+    x.def(/*...*/);
+}
+
+void register_part2(class_&lt;X&gt;&amp; x)
+{
+    x.def(/*...*/);
+}
+
+void register_(lua_State* L)
+{
+    class_&lt;X&gt; x(&quot;x&quot;);
+
+    register_part1(x);
+    register_part2(x);
+
+    module(L) [ x ];
+}
+</pre>
+<p>Here, the class <tt class="docutils literal">X</tt> is registered in two steps. The two functions
+<tt class="docutils literal">register_part1</tt> and <tt class="docutils literal">register_part2</tt> may be put in separate compilation
+units.</p>
+<p>To separate the module registration and the classes to be registered, see
+<a class="reference internal" href="#splitting-up-the-registration">Splitting up the registration</a>.</p>
+</div>
+</div>
+<div class="section" id="adding-converters-for-user-defined-types">
+<h1>9&nbsp;&nbsp;&nbsp;Adding converters for user defined types</h1>
+<p>It is possible to get luabind to handle user defined types like it does
+the built in types by specializing <tt class="docutils literal"><span class="pre">luabind::default_converter&lt;&gt;</span></tt>:</p>
+<pre class="literal-block">
+struct int_wrapper
+{
+    int_wrapper(int value)
+      : value(value)
+    {}
+
+    int value;
+};
+
+namespace luabind
+{
+    template &lt;&gt;
+    struct default_converter&lt;X&gt;
+      : native_converter_base&lt;X&gt;
+    {
+        static int compute_score(lua_State* L, int index)
+        {
+            return lua_type(L, index) == LUA_TNUMBER ? 0 : -1;
+        }
+
+        X from(lua_State* L, int index)
+        {
+            return X(lua_tonumber(L, index));
+        }
+
+        void to(lua_State* L, X const&amp; x)
+        {
+            lua_pushnumber(L, x.value);
+        }
+    };
+
+    template &lt;&gt;
+    struct default_converter&lt;X const&amp;&gt;
+      : default_converter&lt;X&gt;
+    {};
+}
+</pre>
+<p>Note that <tt class="docutils literal">default_converter&lt;&gt;</tt> is instantiated for the actual argument and
+return types of the bound functions. In the above example, we add a
+specialization for <tt class="docutils literal">X const&amp;</tt> that simply forwards to the <tt class="docutils literal">X</tt> converter.
+This lets us export functions which accept <tt class="docutils literal">X</tt> by const reference.</p>
+<p><tt class="docutils literal">native_converter_base&lt;&gt;</tt> should be used as the base class for the
+specialized converters. It simplifies the converter interface, and
+provides a mean for backward compatibility since the underlying
+interface is in flux.</p>
+</div>
+<div class="section" id="binding-function-objects-with-explicit-signatures">
+<h1>10&nbsp;&nbsp;&nbsp;Binding function objects with explicit signatures</h1>
+<p>Using <tt class="docutils literal"><span class="pre">luabind::tag_function&lt;&gt;</span></tt> it is possible to export function objects
+from which luabind can't automatically deduce a signature. This can be used to
+slightly alter the signature of a bound function, or even to bind stateful
+function objects.</p>
+<p>Synopsis:</p>
+<pre class="literal-block">
+template &lt;class Signature, class F&gt;
+<em>implementation-defined</em> tag_function(F f);
+</pre>
+<p>Where <tt class="docutils literal">Signature</tt> is a function type describing the signature of <tt class="docutils literal">F</tt>.
+It can be used like this:</p>
+<pre class="literal-block">
+int f(int x);
+
+// alter the signature so that the return value is ignored
+def(&quot;f&quot;, tag_function&lt;void(int)&gt;(f));
+
+struct plus
+{
+    plus(int x)
+      : x(x)
+    {}
+
+    int operator()(int y) const
+    {
+        return x + y;
+    }
+};
+
+// bind a stateful function object
+def(&quot;plus3&quot;, tag_function&lt;int(int)&gt;(plus(3)));
+</pre>
+</div>
+<div class="section" id="object">
+<h1>11&nbsp;&nbsp;&nbsp;Object</h1>
+<p>Since functions have to be able to take Lua values (of variable type) we need a
+wrapper around them. This wrapper is called <tt class="docutils literal"><span class="pre">luabind::object</span></tt>. If the
+function you register takes an object, it will match any Lua value. To use it,
+you need to include <tt class="docutils literal">&lt;luabind/object.hpp&gt;</tt>.</p>
+<div class="topic">
+<p class="topic-title first">Synopsis</p>
+<pre class="literal-block">
+class object
+{
+public:
+    template&lt;class T&gt;
+    object(lua_State*, T const&amp; value);
+    object(from_stack const&amp;);
+    object(object const&amp;);
+    object();
+
+    ~object();
+
+    lua_State* interpreter() const;
+    void push() const;
+    bool is_valid() const;
+    operator <em>safe_bool_type</em> () const;
+
+    template&lt;class Key&gt;
+    <em>implementation-defined</em> operator[](Key const&amp;);
+
+    template&lt;class T&gt;
+    object&amp; operator=(T const&amp;);
+    object&amp; operator=(object const&amp;);
+
+    bool operator==(object const&amp;) const;
+    bool operator&lt;(object const&amp;) const;
+    bool operator&lt;=(object const&amp;) const;
+    bool operator&gt;(object const&amp;) const;
+    bool operator&gt;=(object const&amp;) const;
+    bool operator!=(object const&amp;) const;
+
+    template &lt;class T&gt;
+    <em>implementation-defined</em> operator[](T const&amp; key) const
+
+    void swap(object&amp;);
+
+    <em>implementation-defined</em> operator()();
+
+    template&lt;class A0&gt;
+    <em>implementation-defined</em> operator()(A0 const&amp; a0);
+
+    template&lt;class A0, class A1&gt;
+    <em>implementation-defined</em> operator()(A0 const&amp; a0, A1 const&amp; a1);
+
+    /* ... */
+};
+</pre>
+</div>
+<p>When you have a Lua object, you can assign it a new value with the assignment
+operator (=). When you do this, the <tt class="docutils literal">default_policy</tt> will be used to make the
+conversion from C++ value to Lua. If your <tt class="docutils literal"><span class="pre">luabind::object</span></tt> is a table you
+can access its members through the operator[] or the <a class="reference internal" href="#iterators">Iterators</a>. The value
+returned from the operator[] is a proxy object that can be used both for
+reading and writing values into the table (using operator=).</p>
+<p>Note that it is impossible to know if a Lua value is indexable or not
+(<tt class="docutils literal">lua_gettable</tt> doesn't fail, it succeeds or crashes). This means that if
+you're trying to index something that cannot be indexed, you're on your own.
+Lua will call its <tt class="docutils literal">panic()</tt> function. See <a class="reference internal" href="#lua-panic">lua panic</a>.</p>
+<p>There are also free functions that can be used for indexing the table, see
+<a class="reference internal" href="#related-functions">Related functions</a>.</p>
+<p>The constructor that takes a <tt class="docutils literal">from_stack</tt> object is used when you want to
+initialize the object with a value from the lua stack. The <tt class="docutils literal">from_stack</tt>
+type has the following constructor:</p>
+<pre class="literal-block">
+from_stack(lua_State* L, int index);
+</pre>
+<p>The index is an ordinary lua stack index, negative values are indexed from the
+top of the stack. You use it like this:</p>
+<pre class="literal-block">
+object o(from_stack(L, -1));
+</pre>
+<p>This will create the object <tt class="docutils literal">o</tt> and copy the value from the top of the lua stack.</p>
+<p>The <tt class="docutils literal">interpreter()</tt> function returns the Lua state where this object is stored.
+If you want to manipulate the object with Lua functions directly you can push
+it onto the Lua stack by calling <tt class="docutils literal">push()</tt>.</p>
+<p>The operator== will call lua_equal() on the operands and return its result.</p>
+<p>The <tt class="docutils literal">is_valid()</tt> function tells you whether the object has been initialized
+or not. When created with its default constructor, objects are invalid. To make
+an object valid, you can assign it a value. If you want to invalidate an object
+you can simply assign it an invalid object.</p>
+<p>The <tt class="docutils literal">operator safe_bool_type()</tt> is equivalent to <tt class="docutils literal">is_valid()</tt>. This means
+that these snippets are equivalent:</p>
+<pre class="literal-block">
+object o;
+// ...
+if (o)
+{
+    // ...
+}
+
+...
+
+object o;
+// ...
+if (o.is_valid())
+{
+    // ...
+}
+</pre>
+<p>The application operator will call the value as if it was a function. You can
+give it any number of parameters (currently the <tt class="docutils literal">default_policy</tt> will be used
+for the conversion). The returned object refers to the return value (currently
+only one return value is supported). This operator may throw <tt class="docutils literal"><span class="pre">luabind::error</span></tt>
+if the function call fails. If you want to specify policies to your function
+call, you can use index-operator (operator[]) on the function call, and give
+the policies within the [ and ]. Like this:</p>
+<pre class="literal-block">
+my_function_object(
+    2
+  , 8
+  , new my_complex_structure(6)
+) [ adopt(_3) ];
+</pre>
+<p>This tells luabind to make Lua adopt the ownership and responsibility for the
+pointer passed in to the lua-function.</p>
+<p>It's important that all instances of object have been destructed by the time
+the Lua state is closed. The object will keep a pointer to the lua state and
+release its Lua object in its destructor.</p>
+<p>Here's an example of how a function can use a table:</p>
+<pre class="literal-block">
+void my_function(object const&amp; table)
+{
+    if (type(table) == LUA_TTABLE)
+    {
+        table[&quot;time&quot;] = std::clock();
+        table[&quot;name&quot;] = std::rand() &lt; 500 ? &quot;unusual&quot; : &quot;usual&quot;;
+
+        std::cout &lt;&lt; object_cast&lt;std::string&gt;(table[5]) &lt;&lt; &quot;\n&quot;;
+    }
+}
+</pre>
+<p>If you take a <tt class="docutils literal"><span class="pre">luabind::object</span></tt> as a parameter to a function, any Lua value
+will match that parameter. That's why we have to make sure it's a table before
+we index into it.</p>
+<pre class="literal-block">
+std::ostream&amp; operator&lt;&lt;(std::ostream&amp;, object const&amp;);
+</pre>
+<p>There's a stream operator that makes it possible to print objects or use
+<tt class="docutils literal"><span class="pre">boost::lexical_cast</span></tt> to convert it to a string. This will use lua's string
+conversion function. So if you convert a C++ object with a <tt class="docutils literal">tostring</tt>
+operator, the stream operator for that type will be used.</p>
+<div class="section" id="iterators">
+<h2>11.1&nbsp;&nbsp;&nbsp;Iterators</h2>
+<p>There are two kinds of iterators. The normal iterator that will use the metamethod
+of the object (if there is any) when the value is retrieved. This iterator is simply
+called <tt class="docutils literal"><span class="pre">luabind::iterator</span></tt>. The other iterator is called <tt class="docutils literal"><span class="pre">luabind::raw_iterator</span></tt>
+and will bypass the metamethod and give the true contents of the table. They have
+identical interfaces, which implements the <a class="reference external" href="http://www.sgi.com/tech/stl/ForwardIterator.html">ForwardIterator</a> concept. Apart from
+the members of standard iterators, they have the following members and constructors:</p>
+<pre class="literal-block">
+class iterator
+{
+    iterator();
+    iterator(object const&amp;);
+
+    object key() const;
+
+    <em>standard iterator members</em>
+};
+</pre>
+<p>The constructor that takes a <tt class="docutils literal"><span class="pre">luabind::object</span></tt> is actually a template that can be
+used with object. Passing an object as the parameter to the iterator will
+construct the iterator to refer to the first element in the object.</p>
+<p>The default constructor will initialize the iterator to the one-past-end
+iterator. This is used to test for the end of the sequence.</p>
+<p>The value type of the iterator is an implementation defined proxy type which
+supports the same operations as <tt class="docutils literal"><span class="pre">luabind::object</span></tt>. Which means that in most
+cases you can just treat it as an ordinary object. The difference is that any
+assignments to this proxy will result in the value being inserted at the
+iterators position, in the table.</p>
+<p>The <tt class="docutils literal">key()</tt> member returns the key used by the iterator when indexing the
+associated Lua table.</p>
+<p>An example using iterators:</p>
+<pre class="literal-block">
+for (iterator i(globals(L)[&quot;a&quot;]), end; i != end; ++i)
+{
+  *i = 1;
+}
+</pre>
+<p>The iterator named <tt class="docutils literal">end</tt> will be constructed using the default constructor
+and hence refer to the end of the sequence. This example will simply iterate
+over the entries in the global table <tt class="docutils literal">a</tt> and set all its values to 1.</p>
+</div>
+<div class="section" id="related-functions">
+<h2>11.2&nbsp;&nbsp;&nbsp;Related functions</h2>
+<p>There are a couple of functions related to objects and tables.</p>
+<pre class="literal-block">
+int type(object const&amp;);
+</pre>
+<p>This function will return the lua type index of the given object.
+i.e. <tt class="docutils literal">LUA_TNIL</tt>, <tt class="docutils literal">LUA_TNUMBER</tt> etc.</p>
+<pre class="literal-block">
+template&lt;class T, class K&gt;
+void settable(object const&amp; o, K const&amp; key, T const&amp; value);
+template&lt;class K&gt;
+object gettable(object const&amp; o, K const&amp; key);
+template&lt;class T, class K&gt;
+void rawset(object const&amp; o, K const&amp; key, T const&amp; value);
+template&lt;class K&gt;
+object rawget(object const&amp; o, K const&amp; key);
+</pre>
+<p>These functions are used for indexing into tables. <tt class="docutils literal">settable</tt> and <tt class="docutils literal">gettable</tt>
+translates into calls to <tt class="docutils literal">lua_settable</tt> and <tt class="docutils literal">lua_gettable</tt> respectively. Which
+means that you could just as well use the index operator of the object.</p>
+<p><tt class="docutils literal">rawset</tt> and <tt class="docutils literal">rawget</tt> will translate into calls to <tt class="docutils literal">lua_rawset</tt> and
+<tt class="docutils literal">lua_rawget</tt> respectively. So they will bypass any metamethod and give you the
+true value of the table entry.</p>
+<pre class="literal-block">
+template&lt;class T&gt;
+T object_cast&lt;T&gt;(object const&amp;);
+template&lt;class T, class Policies&gt;
+T object_cast&lt;T&gt;(object const&amp;, Policies);
+
+template&lt;class T&gt;
+boost::optional&lt;T&gt; object_cast_nothrow&lt;T&gt;(object const&amp;);
+template&lt;class T, class Policies&gt;
+boost::optional&lt;T&gt; object_cast_nothrow&lt;T&gt;(object const&amp;, Policies);
+</pre>
+<p>The <tt class="docutils literal">object_cast</tt> function casts the value of an object to a C++ value.
+You can supply a policy to handle the conversion from lua to C++. If the cast
+cannot be made a <tt class="docutils literal">cast_failed</tt> exception will be thrown. If you have
+defined LUABIND_NO_ERROR_CHECKING (see <a class="reference internal" href="#build-options">Build options</a>) no checking will occur,
+and if the cast is invalid the application may very well crash. The nothrow
+versions will return an uninitialized <tt class="docutils literal"><span class="pre">boost::optional&lt;T&gt;</span></tt> object, to
+indicate that the cast could not be performed.</p>
+<p>The function signatures of all of the above functions are really templates
+for the object parameter, but the intention is that you should only pass
+objects in there, that's why it's left out of the documentation.</p>
+<pre class="literal-block">
+object globals(lua_State*);
+object registry(lua_State*);
+</pre>
+<p>These functions return the global environment table and the registry table respectively.</p>
+<pre class="literal-block">
+object newtable(lua_State*);
+</pre>
+<p>This function creates a new table and returns it as an object.</p>
+<pre class="literal-block">
+object getmetatable(object const&amp; obj);
+void setmetatable(object const&amp; obj, object const&amp; metatable);
+</pre>
+<p>These functions get and set the metatable of a Lua object.</p>
+<pre class="literal-block">
+lua_CFunction tocfunction(object const&amp; value);
+template &lt;class T&gt; T* touserdata(object const&amp; value)
+</pre>
+<p>These extract values from the object at a lower level than <tt class="docutils literal">object_cast()</tt>.</p>
+<pre class="literal-block">
+object getupvalue(object const&amp; function, int index);
+void setupvalue(object const&amp; function, int index, object const&amp; value);
+</pre>
+<p>These get and set the upvalues of <tt class="docutils literal">function</tt>.</p>
+</div>
+<div class="section" id="assigning-nil">
+<h2>11.3&nbsp;&nbsp;&nbsp;Assigning nil</h2>
+<p>To set a table entry to <tt class="docutils literal">nil</tt>, you can use <tt class="docutils literal"><span class="pre">luabind::nil</span></tt>. It will avoid
+having to take the detour by first assigning <tt class="docutils literal">nil</tt> to an object and then
+assign that to the table entry. It will simply result in a <tt class="docutils literal">lua_pushnil()</tt>
+call, instead of copying an object.</p>
+<p>Example:</p>
+<pre class="literal-block">
+using luabind;
+object table = newtable(L);
+table[&quot;foo&quot;] = &quot;bar&quot;;
+
+// now, clear the &quot;foo&quot;-field
+table[&quot;foo&quot;] = nil;
+</pre>
+</div>
+</div>
+<div class="section" id="defining-classes-in-lua">
+<h1>12&nbsp;&nbsp;&nbsp;Defining classes in Lua</h1>
+<p>In addition to binding C++ functions and classes with Lua, luabind also provide
+an OO-system in Lua.</p>
+<pre class="literal-block">
+class 'lua_testclass'
+
+function lua_testclass:__init(name)
+    self.name = name
+end
+
+function lua_testclass:print()
+    print(self.name)
+end
+
+a = lua_testclass('example')
+a:print()
+</pre>
+<p>Inheritance can be used between lua-classes:</p>
+<pre class="literal-block">
+class 'derived' (lua_testclass)
+
+function derived:__init()
+    lua_testclass.__init(self, 'derived name')
+end
+
+function derived:print()
+    print('Derived:print() -&gt; ')
+    lua_testclass.print(self)
+end
+</pre>
+<p>The base class is initialized explicitly by calling its <tt class="docutils literal">__init()</tt>
+function.</p>
+<p>As you can see in this example, you can call the base class member functions.
+You can find all member functions in the base class, but you will have to give
+the this-pointer (<tt class="docutils literal">self</tt>) as first argument.</p>
+<div class="section" id="deriving-in-lua">
+<h2>12.1&nbsp;&nbsp;&nbsp;Deriving in lua</h2>
+<p>It is also possible to derive Lua classes from C++ classes, and override
+virtual functions with Lua functions. To do this we have to create a wrapper
+class for our C++ base class. This is the class that will hold the Lua object
+when we instantiate a Lua class.</p>
+<pre class="literal-block">
+class base
+{
+public:
+    base(const char* s)
+    { std::cout &lt;&lt; s &lt;&lt; &quot;\n&quot;; }
+
+    virtual void f(int a)
+    { std::cout &lt;&lt; &quot;f(&quot; &lt;&lt; a &lt;&lt; &quot;)\n&quot;; }
+};
+
+struct base_wrapper : base, luabind::wrap_base
+{
+    base_wrapper(const char* s)
+        : base(s)
+    {}
+
+    virtual void f(int a)
+    {
+        call&lt;void&gt;(&quot;f&quot;, a);
+    }
+
+    static void default_f(base* ptr, int a)
+    {
+        return ptr-&gt;base::f(a);
+    }
+};
+
+...
+
+module(L)
+[
+    class_&lt;base, base_wrapper&gt;(&quot;base&quot;)
+        .def(constructor&lt;const char*&gt;())
+        .def(&quot;f&quot;, &amp;base::f, &amp;base_wrapper::default_f)
+];
+</pre>
+<div class="important">
+<p class="first admonition-title">Important</p>
+<p class="last">Since MSVC6.5 doesn't support explicit template parameters
+to member functions, instead of using the member function <tt class="docutils literal">call()</tt>
+you call a free function <tt class="docutils literal">call_member()</tt> and pass the this-pointer
+as first parameter.</p>
+</div>
+<p>Note that if you have both base classes and a base class wrapper, you must give
+both bases and the base class wrapper type as template parameter to
+<tt class="docutils literal">class_</tt> (as done in the example above). The order in which you specify
+them is not important. You must also register both the static version and the
+virtual version of the function from the wrapper, this is necessary in order
+to allow luabind to use both dynamic and static dispatch when calling the function.</p>
+<div class="important">
+<p class="first admonition-title">Important</p>
+<p class="last">It is extremely important that the signatures of the static (default) function
+is identical to the virtual function. The fact that one of them is a free
+function and the other a member function doesn't matter, but the parameters
+as seen from lua must match. It would not have worked if the static function
+took a <tt class="docutils literal">base_wrapper*</tt> as its first argument, since the virtual function
+takes a <tt class="docutils literal">base*</tt> as its first argument (its this pointer). There's currently
+no check in luabind to make sure the signatures match.</p>
+</div>
+<p>If we didn't have a class wrapper, it would not be possible to pass a Lua class
+back to C++. Since the entry points of the virtual functions would still point
+to the C++ base class, and not to the functions defined in Lua. That's why we
+need one function that calls the base class' real function (used if the lua
+class doesn't redefine it) and one virtual function that dispatches the call
+into luabind, to allow it to select if a Lua function should be called, or if
+the original function should be called. If you don't intend to derive from a
+C++ class, or if it doesn't have any virtual member functions, you can register
+it without a class wrapper.</p>
+<p>You don't need to have a class wrapper in order to derive from a class, but if
+it has virtual functions you may have silent errors.</p>
+<!-- Unnecessary? The rule of thumb is:
+If your class has virtual functions, create a wrapper type, if it doesn't
+don't create a wrapper type. -->
+<p>The wrappers must derive from <tt class="docutils literal"><span class="pre">luabind::wrap_base</span></tt>, it contains a Lua reference
+that will hold the Lua instance of the object to make it possible to dispatch
+virtual function calls into Lua. This is done through an overloaded member function:</p>
+<pre class="literal-block">
+template&lt;class Ret&gt;
+Ret call(char const* name, ...)
+</pre>
+<p>Its used in a similar way as <tt class="docutils literal">call_function</tt>, with the exception that it doesn't
+take a <tt class="docutils literal">lua_State</tt> pointer, and the name is a member function in the Lua class.</p>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The current implementation of <tt class="docutils literal">call_member</tt> is not able to distinguish const
+member functions from non-const. If you have a situation where you have an overloaded
+virtual function where the only difference in their signatures is their constness, the
+wrong overload will be called by <tt class="docutils literal">call_member</tt>. This is rarely the case though.</p>
+</div>
+<div class="section" id="object-identity">
+<h3>12.1.1&nbsp;&nbsp;&nbsp;Object identity</h3>
+<p>When a pointer or reference to a registered class with a wrapper is passed
+to Lua, luabind will query for it's dynamic type. If the dynamic type
+inherits from <tt class="docutils literal">wrap_base</tt>, object identity is preserved.</p>
+<pre class="literal-block">
+struct A { .. };
+struct A_wrap : A, wrap_base { .. };
+
+A* f(A* ptr) { return ptr; }
+
+module(L)
+[
+    class_&lt;A, A_wrap&gt;(&quot;A&quot;),
+    def(&quot;f&quot;, &amp;f)
+];
+</pre>
+<pre class="literal-block">
+&gt; class 'B' (A)
+&gt; x = B()
+&gt; assert(x == f(x)) -- object identity is preserved when object is
+                    -- passed through C++
+</pre>
+<p>This functionality relies on RTTI being enabled (that <tt class="docutils literal">LUABIND_NO_RTTI</tt> is
+not defined).</p>
+</div>
+</div>
+<div class="section" id="overloading-operators">
+<h2>12.2&nbsp;&nbsp;&nbsp;Overloading operators</h2>
+<p>You can overload most operators in Lua for your classes. You do this by simply
+declaring a member function with the same name as an operator (the name of the
+metamethods in Lua). The operators you can overload are:</p>
+<blockquote>
+<ul class="simple">
+<li><tt class="docutils literal">__add</tt></li>
+<li><tt class="docutils literal">__sub</tt></li>
+<li><tt class="docutils literal">__mul</tt></li>
+<li><tt class="docutils literal">__div</tt></li>
+<li><tt class="docutils literal">__pow</tt></li>
+<li><tt class="docutils literal">__lt</tt></li>
+<li><tt class="docutils literal">__le</tt></li>
+<li><tt class="docutils literal">__eq</tt></li>
+<li><tt class="docutils literal">__call</tt></li>
+<li><tt class="docutils literal">__unm</tt></li>
+<li><tt class="docutils literal">__tostring</tt></li>
+<li><tt class="docutils literal">__len</tt></li>
+</ul>
+</blockquote>
+<p><tt class="docutils literal">__tostring</tt> isn't really an operator, but it's the metamethod that is called
+by the standard library's <tt class="docutils literal">tostring()</tt> function. There's one strange behavior
+regarding binary operators. You are not guaranteed that the self pointer you
+get actually refers to an instance of your class. This is because Lua doesn't
+distinguish the two cases where you get the other operand as left hand value or
+right hand value. Consider the following examples:</p>
+<pre class="literal-block">
+class 'my_class'
+
+  function my_class:__init(v)
+      self.val = v
+  end
+
+  function my_class:__sub(v)
+      return my_class(self.val - v.val)
+  end
+
+  function my_class:__tostring()
+      return self.val
+  end
+</pre>
+<p>This will work well as long as you only subtracts instances of my_class with
+each other. But If you want to be able to subtract ordinary numbers from your
+class too, you have to manually check the type of both operands, including the
+self object.</p>
+<pre class="literal-block">
+function my_class:__sub(v)
+    if (type(self) == 'number') then
+        return my_class(self - v.val)
+
+    elseif (type(v) == 'number') then
+        return my_class(self.val - v)
+
+    else
+        -- assume both operands are instances of my_class
+        return my_class(self.val - v.val)
+
+    end
+end
+</pre>
+<p>The reason why <tt class="docutils literal">__sub</tt> is used as an example is because subtraction is not
+commutative (the order of the operands matters). That's why luabind cannot
+change order of the operands to make the self reference always refer to the
+actual class instance.</p>
+<p>If you have two different Lua classes with an overloaded operator, the operator
+of the right hand side type will be called. If the other operand is a C++ class
+with the same operator overloaded, it will be prioritized over the Lua class'
+operator. If none of the C++ overloads matches, the Lua class operator will be
+called.</p>
+</div>
+<div class="section" id="finalizers">
+<h2>12.3&nbsp;&nbsp;&nbsp;Finalizers</h2>
+<p>If an object needs to perform actions when it's collected we provide a
+<tt class="docutils literal">__finalize</tt> function that can be overridden in lua-classes. The
+<tt class="docutils literal">__finalize</tt> functions will be called on all classes in the inheritance
+chain, starting with the most derived type.</p>
+<pre class="literal-block">
+...
+
+function lua_testclass:__finalize()
+    -- called when the an object is collected
+end
+</pre>
+</div>
+<div class="section" id="slicing">
+<h2>12.4&nbsp;&nbsp;&nbsp;Slicing</h2>
+<p>If your lua C++ classes don't have wrappers (see <a class="reference internal" href="#deriving-in-lua">Deriving in lua</a>) and
+you derive from them in lua, they may be sliced. Meaning, if an object
+is passed into C++ as a pointer to its base class, the lua part will be
+separated from the C++ base part. This means that if you call virtual
+functions on that C++ object, they will not be dispatched to the lua
+class. It also means that if you adopt the object, the lua part will be
+garbage collected.</p>
+<pre class="literal-block">
++--------------------+
+| C++ object         |    &lt;- ownership of this part is transferred
+|                    |       to c++ when adopted
++--------------------+
+| lua class instance |    &lt;- this part is garbage collected when
+| and lua members    |       instance is adopted, since it cannot
++--------------------+       be held by c++.
+</pre>
+<p>The problem can be illustrated by this example:</p>
+<pre class="literal-block">
+struct A {};
+
+A* filter_a(A* a) { return a; }
+void adopt_a(A* a) { delete a; }
+</pre>
+<pre class="literal-block">
+using namespace luabind;
+
+module(L)
+[
+    class_&lt;A&gt;(&quot;A&quot;),
+    def(&quot;filter_a&quot;, &amp;filter_a),
+    def(&quot;adopt_a&quot;, &amp;adopt_a, adopt(_1))
+]
+</pre>
+<p>In lua:</p>
+<pre class="literal-block">
+a = A()
+b = filter_a(a)
+adopt_a(b)
+</pre>
+<p>In this example, lua cannot know that <tt class="docutils literal">b</tt> actually is the same object as
+<tt class="docutils literal">a</tt>, and it will therefore consider the object to be owned by the C++ side.
+When the <tt class="docutils literal">b</tt> pointer then is adopted, a runtime error will be raised because
+an object not owned by lua is being adopted to C++.</p>
+<p>If you have a wrapper for your class, none of this will happen, see
+<a class="reference internal" href="#object-identity">Object identity</a>.</p>
+</div>
+</div>
+<div class="section" id="exceptions">
+<h1>13&nbsp;&nbsp;&nbsp;Exceptions</h1>
+<p>If any of the functions you register throws an exception when called, that
+exception will be caught by luabind and converted to an error string and
+<tt class="docutils literal">lua_error()</tt> will be invoked. If the exception is a <tt class="docutils literal"><span class="pre">std::exception</span></tt> or a
+<tt class="docutils literal">const char*</tt> the string that is pushed on the Lua stack, as error message,
+will be the string returned by <tt class="docutils literal"><span class="pre">std::exception::what()</span></tt> or the string itself
+respectively. If the exception is unknown, a generic string saying that the
+function threw an exception will be pushed.</p>
+<p>If you have an exception type that isn't derived from
+<tt class="docutils literal"><span class="pre">std::exception</span></tt>, or you wish to change the error message from the
+default result of <tt class="docutils literal">what()</tt>, it is possible to register custom
+exception handlers:</p>
+<pre class="literal-block">
+struct my_exception
+{};
+
+void translate_my_exception(lua_State* L, my_exception const&amp;)
+{
+    lua_pushstring(L, &quot;my_exception&quot;);
+}
+
+…
+
+luabind::register_exception_handler&lt;my_exception&gt;(&amp;translate_my_exception);
+</pre>
+<p><tt class="docutils literal">translate_my_exception()</tt> will be called by luabind whenever a
+<tt class="docutils literal">my_exception</tt> is caught. <tt class="docutils literal">lua_error()</tt> will be called after the
+handler function returns, so it is expected that the function will push
+an error string on the stack.</p>
+<p>Any function that invokes Lua code may throw <tt class="docutils literal"><span class="pre">luabind::error</span></tt>. This exception
+means that a Lua run-time error occurred. The error message is found on top of
+the Lua stack. The reason why the exception doesn't contain the error string
+itself is because it would then require heap allocation which may fail. If an
+exception class throws an exception while it is being thrown itself, the
+application will be terminated.</p>
+<p>Error's synopsis is:</p>
+<pre class="literal-block">
+class error : public std::exception
+{
+public:
+    error(lua_State*);
+    lua_State* state() const throw();
+    virtual const char* what() const throw();
+};
+</pre>
+<p>The state function returns a pointer to the Lua state in which the error was
+thrown. This pointer may be invalid if you catch this exception after the lua
+state is destructed. If the Lua state is valid you can use it to retrieve the
+error message from the top of the Lua stack.</p>
+<p>An example of where the Lua state pointer may point to an invalid state
+follows:</p>
+<pre class="literal-block">
+struct lua_state
+{
+    lua_state(lua_State* L): m_L(L) {}
+    ~lua_state() { lua_close(m_L); }
+    operator lua_State*() { return m_L; }
+    lua_State* m_L;
+};
+
+int main()
+{
+    try
+    {
+        lua_state L = lua_open();
+        /* ... */
+    }
+    catch(luabind::error&amp; e)
+    {
+        lua_State* L = e.state();
+        // L will now point to the destructed
+        // Lua state and be invalid
+        /* ... */
+    }
+}
+</pre>
+<p>There's another exception that luabind may throw: <tt class="docutils literal"><span class="pre">luabind::cast_failed</span></tt>,
+this exception is thrown from <tt class="docutils literal">call_function&lt;&gt;</tt> or <tt class="docutils literal">call_member&lt;&gt;</tt>. It
+means that the return value from the Lua function couldn't be converted to
+a C++ value. It is also thrown from <tt class="docutils literal">object_cast&lt;&gt;</tt> if the cast cannot
+be made.</p>
+<p>The synopsis for <tt class="docutils literal"><span class="pre">luabind::cast_failed</span></tt> is:</p>
+<pre class="literal-block">
+class cast_failed : public std::exception
+{
+public:
+    cast_failed(lua_State*);
+    lua_State* state() const throw();
+    LUABIND_TYPE_INFO info() const throw();
+    virtual const char* what() const throw();
+};
+</pre>
+<p>Again, the state member function returns a pointer to the Lua state where the
+error occurred. See the example above to see where this pointer may be invalid.</p>
+<p>The info member function returns the user defined <tt class="docutils literal">LUABIND_TYPE_INFO</tt>, which
+defaults to a <tt class="docutils literal">const <span class="pre">std::type_info*</span></tt>. This type info describes the type that
+we tried to cast a Lua value to.</p>
+<p>If you have defined <tt class="docutils literal">LUABIND_NO_EXCEPTIONS</tt> none of these exceptions will be
+thrown, instead you can set two callback functions that are called instead.
+These two functions are only defined if <tt class="docutils literal">LUABIND_NO_EXCEPTIONS</tt> are defined.</p>
+<pre class="literal-block">
+luabind::set_error_callback(void(*)(lua_State*))
+</pre>
+<p>The function you set will be called when a runtime-error occur in Lua code. You
+can find an error message on top of the Lua stack. This function is not
+expected to return, if it does luabind will call <tt class="docutils literal"><span class="pre">std::terminate()</span></tt>.</p>
+<pre class="literal-block">
+luabind::set_cast_failed_callback(void(*)(lua_State*, LUABIND_TYPE_INFO))
+</pre>
+<p>The function you set is called instead of throwing <tt class="docutils literal">cast_failed</tt>. This function
+is not expected to return, if it does luabind will call <tt class="docutils literal"><span class="pre">std::terminate()</span></tt>.</p>
+</div>
+<div class="section" id="policies">
+<h1>14&nbsp;&nbsp;&nbsp;Policies</h1>
+<p>Sometimes it is necessary to control how luabind passes arguments and return
+value, to do this we have policies. All policies use an index to associate
+them with an argument in the function signature. These indices are <tt class="docutils literal">result</tt>
+and <tt class="docutils literal">_N</tt> (where <tt class="docutils literal">N &gt;= 1</tt>). When dealing with member functions <tt class="docutils literal">_1</tt> refers
+to the <tt class="docutils literal">this</tt> pointer.</p>
+<div class="contents local topic" id="policies-currently-implemented">
+<p class="topic-title first">Policies currently implemented</p>
+<ul class="auto-toc simple">
+<li><a class="reference internal" href="#adopt" id="id106">14.1&nbsp;&nbsp;&nbsp;adopt</a></li>
+<li><a class="reference internal" href="#dependency" id="id107">14.2&nbsp;&nbsp;&nbsp;dependency</a></li>
+<li><a class="reference internal" href="#out-value" id="id108">14.3&nbsp;&nbsp;&nbsp;out_value</a></li>
+<li><a class="reference internal" href="#pure-out-value" id="id109">14.4&nbsp;&nbsp;&nbsp;pure_out_value</a></li>
+<li><a class="reference internal" href="#return-reference-to" id="id110">14.5&nbsp;&nbsp;&nbsp;return_reference_to</a></li>
+<li><a class="reference internal" href="#copy" id="id111">14.6&nbsp;&nbsp;&nbsp;copy</a></li>
+<li><a class="reference internal" href="#discard-result" id="id112">14.7&nbsp;&nbsp;&nbsp;discard_result</a></li>
+<li><a class="reference internal" href="#return-stl-iterator" id="id113">14.8&nbsp;&nbsp;&nbsp;return_stl_iterator</a></li>
+<li><a class="reference internal" href="#raw" id="id114">14.9&nbsp;&nbsp;&nbsp;raw</a></li>
+<li><a class="reference internal" href="#yield" id="id115">14.10&nbsp;&nbsp;&nbsp;yield</a></li>
+</ul>
+</div>
+<div class="section" id="adopt">
+<h2><a class="toc-backref" href="#id106">14.1&nbsp;&nbsp;&nbsp;adopt</a></h2>
+<div class="section" id="motivation">
+<h3>14.1.1&nbsp;&nbsp;&nbsp;Motivation</h3>
+<p>Used to transfer ownership across language boundaries.</p>
+</div>
+<div class="section" id="defined-in">
+<h3>14.1.2&nbsp;&nbsp;&nbsp;Defined in</h3>
+<pre class="literal-block">
+#include &lt;luabind/adopt_policy.hpp&gt;
+</pre>
+</div>
+<div class="section" id="synopsis">
+<h3>14.1.3&nbsp;&nbsp;&nbsp;Synopsis</h3>
+<pre class="literal-block">
+adopt(index)
+</pre>
+</div>
+<div class="section" id="parameters">
+<h3>14.1.4&nbsp;&nbsp;&nbsp;Parameters</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">index</tt></td>
+<td>The index which should transfer ownership, <tt class="docutils literal">_N</tt> or <tt class="docutils literal">result</tt></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="example">
+<h3>14.1.5&nbsp;&nbsp;&nbsp;Example</h3>
+<pre class="literal-block">
+X* create()
+{
+    return new X;
+}
+
+...
+
+module(L)
+[
+    def(&quot;create&quot;, &amp;create, <strong>adopt(result)</strong>)
+];
+</pre>
+</div>
+</div>
+<div class="section" id="dependency">
+<h2><a class="toc-backref" href="#id107">14.2&nbsp;&nbsp;&nbsp;dependency</a></h2>
+<div class="section" id="id4">
+<h3>14.2.1&nbsp;&nbsp;&nbsp;Motivation</h3>
+<p>The dependency policy is used to create life-time dependencies between values.
+This is needed for example when returning internal references to some class.</p>
+</div>
+<div class="section" id="id5">
+<h3>14.2.2&nbsp;&nbsp;&nbsp;Defined in</h3>
+<pre class="literal-block">
+#include &lt;luabind/dependency_policy.hpp&gt;
+</pre>
+</div>
+<div class="section" id="id6">
+<h3>14.2.3&nbsp;&nbsp;&nbsp;Synopsis</h3>
+<pre class="literal-block">
+dependency(nurse_index, patient_index)
+</pre>
+</div>
+<div class="section" id="id7">
+<h3>14.2.4&nbsp;&nbsp;&nbsp;Parameters</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">nurse_index</tt></td>
+<td>The index which will keep the patient alive.</td>
+</tr>
+<tr><td><tt class="docutils literal">patient_index</tt></td>
+<td>The index which will be kept alive.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id8">
+<h3>14.2.5&nbsp;&nbsp;&nbsp;Example</h3>
+<pre class="literal-block">
+struct X
+{
+    B member;
+    B&amp; get() { return member; }
+};
+
+module(L)
+[
+    class_&lt;X&gt;(&quot;X&quot;)
+        .def(&quot;get&quot;, &amp;X::get, <strong>dependency(result, _1)</strong>)
+];
+</pre>
+</div>
+</div>
+<div class="section" id="out-value">
+<h2><a class="toc-backref" href="#id108">14.3&nbsp;&nbsp;&nbsp;out_value</a></h2>
+<div class="section" id="id9">
+<h3>14.3.1&nbsp;&nbsp;&nbsp;Motivation</h3>
+<p>This policy makes it possible to wrap functions that take non-const references
+or pointer to non-const as it's parameters with the intention to write return
+values to them. Since it's impossible to pass references to primitive types
+in lua, this policy will add another return value with the value after the
+call. If the function already has one return value, one instance of this
+policy will add another return value (read about multiple return values in
+the lua manual).</p>
+</div>
+<div class="section" id="id10">
+<h3>14.3.2&nbsp;&nbsp;&nbsp;Defined in</h3>
+<pre class="literal-block">
+#include &lt;luabind/out_value_policy.hpp&gt;
+</pre>
+</div>
+<div class="section" id="id11">
+<h3>14.3.3&nbsp;&nbsp;&nbsp;Synopsis</h3>
+<pre class="literal-block">
+out_value(index, policies = none)
+</pre>
+</div>
+<div class="section" id="id12">
+<h3>14.3.4&nbsp;&nbsp;&nbsp;Parameters</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">index</tt></td>
+<td>The index of the parameter to be used as an out parameter.</td>
+</tr>
+<tr><td><tt class="docutils literal">policies</tt></td>
+<td>The policies used internally to convert the out parameter
+to/from Lua. <tt class="docutils literal">_1</tt> means <strong>to</strong> C++, <tt class="docutils literal">_2</tt> means <strong>from</strong>
+C++.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id13">
+<h3>14.3.5&nbsp;&nbsp;&nbsp;Example</h3>
+<pre class="literal-block">
+void f1(float&amp; val) { val = val + 10.f; }
+void f2(float* val) { *val = *val + 10.f; }
+
+module(L)
+[
+    def(&quot;f&quot;, &amp;f, <strong>out_value(_1)</strong>)
+];
+
+Lua 5.0  Copyright (C) 1994-2003 Tecgraf, PUC-Rio
+&gt; print(f1(10))
+20
+&gt; print(f2(10))
+20
+</pre>
+</div>
+</div>
+<div class="section" id="pure-out-value">
+<h2><a class="toc-backref" href="#id109">14.4&nbsp;&nbsp;&nbsp;pure_out_value</a></h2>
+<div class="section" id="id14">
+<h3>14.4.1&nbsp;&nbsp;&nbsp;Motivation</h3>
+<p>This works exactly like <tt class="docutils literal">out_value</tt>, except that it will pass a
+default constructed object instead of converting an argument from
+Lua. This means that the parameter will be removed from the lua
+signature.</p>
+</div>
+<div class="section" id="id15">
+<h3>14.4.2&nbsp;&nbsp;&nbsp;Defined in</h3>
+<pre class="literal-block">
+#include &lt;luabind/out_value_policy.hpp&gt;
+</pre>
+</div>
+<div class="section" id="id16">
+<h3>14.4.3&nbsp;&nbsp;&nbsp;Synopsis</h3>
+<pre class="literal-block">
+pure_out_value(index, policies = none)
+</pre>
+</div>
+<div class="section" id="id17">
+<h3>14.4.4&nbsp;&nbsp;&nbsp;Parameters</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">index</tt></td>
+<td>The index of the parameter to be used as an out parameter.</td>
+</tr>
+<tr><td><tt class="docutils literal">policies</tt></td>
+<td>The policies used internally to convert the out parameter
+to Lua. <tt class="docutils literal">_1</tt> is used as the internal index.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id18">
+<h3>14.4.5&nbsp;&nbsp;&nbsp;Example</h3>
+<p>Note that no values are passed to the calls to <tt class="docutils literal">f1</tt> and <tt class="docutils literal">f2</tt>.</p>
+<pre class="literal-block">
+void f1(float&amp; val) { val = 10.f; }
+void f2(float* val) { *val = 10.f; }
+
+module(L)
+[
+    def(&quot;f&quot;, &amp;f, <strong>pure_out_value(_1)</strong>)
+];
+
+Lua 5.0  Copyright (C) 1994-2003 Tecgraf, PUC-Rio
+&gt; print(f1())
+10
+&gt; print(f2())
+10
+</pre>
+</div>
+</div>
+<div class="section" id="return-reference-to">
+<h2><a class="toc-backref" href="#id110">14.5&nbsp;&nbsp;&nbsp;return_reference_to</a></h2>
+<div class="section" id="id19">
+<h3>14.5.1&nbsp;&nbsp;&nbsp;Motivation</h3>
+<p>It is very common to return references to arguments or the this-pointer to
+allow for chaining in C++.</p>
+<pre class="literal-block">
+struct A
+{
+    float val;
+
+    A&amp; set(float v)
+    {
+        val = v;
+        return *this;
+    }
+};
+</pre>
+<p>When luabind generates code for this, it will create a new object for the
+return-value, pointing to the self-object. This isn't a problem, but could be a
+bit inefficient. When using the return_reference_to-policy we have the ability
+to tell luabind that the return-value is already on the lua stack.</p>
+</div>
+<div class="section" id="id20">
+<h3>14.5.2&nbsp;&nbsp;&nbsp;Defined in</h3>
+<pre class="literal-block">
+#include &lt;luabind/return_reference_to_policy.hpp&gt;
+</pre>
+</div>
+<div class="section" id="id21">
+<h3>14.5.3&nbsp;&nbsp;&nbsp;Synopsis</h3>
+<pre class="literal-block">
+return_reference_to(index)
+</pre>
+</div>
+<div class="section" id="id22">
+<h3>14.5.4&nbsp;&nbsp;&nbsp;Parameters</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">index</tt></td>
+<td>The argument index to return a reference to, any argument but
+not <tt class="docutils literal">result</tt>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id23">
+<h3>14.5.5&nbsp;&nbsp;&nbsp;Example</h3>
+<pre class="literal-block">
+struct A
+{
+    float val;
+
+    A&amp; set(float v)
+    {
+        val = v;
+        return *this;
+    }
+};
+
+module(L)
+[
+    class_&lt;A&gt;(&quot;A&quot;)
+        .def(constructor&lt;&gt;())
+        .def(&quot;set&quot;, &amp;A::set, <strong>return_reference_to(_1)</strong>)
+];
+</pre>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This policy ignores all type information and should be used only it
+situations where the parameter type is a perfect match to the
+return-type (such as in the example).</p>
+</div>
+</div>
+</div>
+<div class="section" id="copy">
+<h2><a class="toc-backref" href="#id111">14.6&nbsp;&nbsp;&nbsp;copy</a></h2>
+<div class="section" id="id24">
+<h3>14.6.1&nbsp;&nbsp;&nbsp;Motivation</h3>
+<p>This will make a copy of the parameter. This is the default behavior when
+passing parameters by-value. Note that this can only be used when passing from
+C++ to Lua. This policy requires that the parameter type has an accessible copy
+constructor.</p>
+</div>
+<div class="section" id="id25">
+<h3>14.6.2&nbsp;&nbsp;&nbsp;Defined in</h3>
+<pre class="literal-block">
+#include &lt;luabind/copy_policy.hpp&gt;
+</pre>
+</div>
+<div class="section" id="id26">
+<h3>14.6.3&nbsp;&nbsp;&nbsp;Synopsis</h3>
+<pre class="literal-block">
+copy(index)
+</pre>
+</div>
+<div class="section" id="id27">
+<h3>14.6.4&nbsp;&nbsp;&nbsp;Parameters</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">index</tt></td>
+<td>The index to copy. <tt class="docutils literal">result</tt> when used while wrapping C++
+functions. <tt class="docutils literal">_N</tt> when passing arguments to Lua.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id28">
+<h3>14.6.5&nbsp;&nbsp;&nbsp;Example</h3>
+<pre class="literal-block">
+X* get()
+{
+    static X instance;
+    return &amp;instance;
+}
+
+...
+
+module(L)
+[
+    def(&quot;create&quot;, &amp;create, <strong>copy(result)</strong>)
+];
+</pre>
+</div>
+</div>
+<div class="section" id="discard-result">
+<h2><a class="toc-backref" href="#id112">14.7&nbsp;&nbsp;&nbsp;discard_result</a></h2>
+<div class="section" id="id29">
+<h3>14.7.1&nbsp;&nbsp;&nbsp;Motivation</h3>
+<p>This is a very simple policy which makes it possible to throw away
+the value returned by a C++ function, instead of converting it to
+Lua.</p>
+</div>
+<div class="section" id="id30">
+<h3>14.7.2&nbsp;&nbsp;&nbsp;Defined in</h3>
+<pre class="literal-block">
+#include &lt;luabind/discard_result_policy.hpp&gt;
+</pre>
+</div>
+<div class="section" id="id31">
+<h3>14.7.3&nbsp;&nbsp;&nbsp;Synopsis</h3>
+<pre class="literal-block">
+discard_result
+</pre>
+</div>
+<div class="section" id="id32">
+<h3>14.7.4&nbsp;&nbsp;&nbsp;Example</h3>
+<pre class="literal-block">
+struct X
+{
+    X&amp; set(T n)
+    {
+        ...
+        return *this;
+    }
+};
+
+...
+
+module(L)
+[
+    class_&lt;X&gt;(&quot;X&quot;)
+        .def(&quot;set&quot;, &amp;simple::set, <strong>discard_result</strong>)
+];
+</pre>
+</div>
+</div>
+<div class="section" id="return-stl-iterator">
+<h2><a class="toc-backref" href="#id113">14.8&nbsp;&nbsp;&nbsp;return_stl_iterator</a></h2>
+<div class="section" id="id33">
+<h3>14.8.1&nbsp;&nbsp;&nbsp;Motivation</h3>
+<p>This policy converts an STL container to a generator function that can be used
+in lua to iterate over the container. It works on any container that defines
+<tt class="docutils literal">begin()</tt> and <tt class="docutils literal">end()</tt> member functions (they have to return iterators).</p>
+</div>
+<div class="section" id="id34">
+<h3>14.8.2&nbsp;&nbsp;&nbsp;Defined in</h3>
+<pre class="literal-block">
+#include &lt;luabind/iterator_policy.hpp&gt;
+</pre>
+</div>
+<div class="section" id="id35">
+<h3>14.8.3&nbsp;&nbsp;&nbsp;Synopsis</h3>
+<pre class="literal-block">
+return_stl_iterator
+</pre>
+</div>
+<div class="section" id="id36">
+<h3>14.8.4&nbsp;&nbsp;&nbsp;Example</h3>
+<pre class="literal-block">
+struct X
+{
+    std::vector&lt;std::string&gt; names;
+};
+
+...
+
+module(L)
+[
+    class_&lt;A&gt;(&quot;A&quot;)
+        .def_readwrite(&quot;names&quot;, &amp;X::names, <strong>return_stl_iterator</strong>)
+];
+
+...
+
+&gt; a = A()
+&gt; for name in a.names do
+&gt;  print(name)
+&gt; end
+</pre>
+</div>
+</div>
+<div class="section" id="raw">
+<h2><a class="toc-backref" href="#id114">14.9&nbsp;&nbsp;&nbsp;raw</a></h2>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last"><tt class="docutils literal">raw()</tt> has been deprecated. <tt class="docutils literal">lua_State*</tt> parameters are
+automatically handled by luabind.</p>
+</div>
+<div class="section" id="id37">
+<h3>14.9.1&nbsp;&nbsp;&nbsp;Motivation</h3>
+<p>This converter policy will pass through the <tt class="docutils literal">lua_State*</tt> unmodified.
+This can be useful for example when binding functions that need to
+return a <tt class="docutils literal"><span class="pre">luabind::object</span></tt>. The parameter will be removed from the
+function signature, decreasing the function arity by one.</p>
+</div>
+<div class="section" id="id38">
+<h3>14.9.2&nbsp;&nbsp;&nbsp;Defined in</h3>
+<pre class="literal-block">
+#include &lt;luabind/raw_policy.hpp&gt;
+</pre>
+</div>
+<div class="section" id="id39">
+<h3>14.9.3&nbsp;&nbsp;&nbsp;Synopsis</h3>
+<pre class="literal-block">
+raw(index)
+</pre>
+</div>
+<div class="section" id="id40">
+<h3>14.9.4&nbsp;&nbsp;&nbsp;Parameters</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">index</tt></td>
+<td>The index of the lua_State* parameter.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id41">
+<h3>14.9.5&nbsp;&nbsp;&nbsp;Example</h3>
+<pre class="literal-block">
+void greet(lua_State* L)
+{
+    lua_pushstring(L, &quot;hello&quot;);
+}
+
+...
+
+module(L)
+[
+    def(&quot;greet&quot;, &amp;greet, <strong>raw(_1)</strong>)
+];
+
+&gt; print(greet())
+hello
+</pre>
+</div>
+</div>
+<div class="section" id="yield">
+<h2><a class="toc-backref" href="#id115">14.10&nbsp;&nbsp;&nbsp;yield</a></h2>
+<div class="section" id="id42">
+<h3>14.10.1&nbsp;&nbsp;&nbsp;Motivation</h3>
+<p>Makes a C++ function yield when returning.</p>
+</div>
+<div class="section" id="id43">
+<h3>14.10.2&nbsp;&nbsp;&nbsp;Defined in</h3>
+<pre class="literal-block">
+#include &lt;luabind/yield_policy.hpp&gt;
+</pre>
+</div>
+<div class="section" id="id44">
+<h3>14.10.3&nbsp;&nbsp;&nbsp;Synopsis</h3>
+<pre class="literal-block">
+yield
+</pre>
+</div>
+<div class="section" id="id45">
+<h3>14.10.4&nbsp;&nbsp;&nbsp;Example</h3>
+<pre class="literal-block">
+void do_thing_that_takes_time()
+{
+    ...
+}
+
+...
+
+module(L)
+[
+    def(&quot;do_thing_that_takes_time&quot;, &amp;do_thing_that_takes_time, <strong>yield</strong>)
+];
+</pre>
+<!-- old policies section
+===================================================
+
+Copy
+- - - -
+
+This will make a copy of the parameter. This is the default behavior when
+passing parameters by-value. Note that this can only be used when passing from
+C++ to Lua. This policy requires that the parameter type has a copy
+constructor.
+
+To use this policy you need to include ``luabind/copy_policy.hpp``.
+
+
+Adopt
+- - - - -
+
+This will transfer ownership of the parameter.
+
+Consider making a factory function in C++ and exposing it to lua::
+
+    base* create_base()
+    {
+        return new base();
+    }
+
+    ...
+
+    module(L)
+    [
+        def("create_base", create_base)
+    ];
+
+Here we need to make sure Lua understands that it should adopt the pointer
+returned by the factory-function. This can be done using the adopt-policy.
+
+::
+
+    module(L)
+    [
+        def(L, "create_base", adopt(return_value))
+    ];
+
+To specify multiple policies we just separate them with '+'.
+
+::
+
+    base* set_and_get_new(base* ptr)
+    {
+        base_ptrs.push_back(ptr);
+        return new base();
+    }
+
+    module(L)
+    [
+        def("set_and_get_new", &set_and_get_new,
+            adopt(return_value) + adopt(_1))
+    ];
+
+When Lua adopts a pointer, it will call delete on it. This means that it cannot
+adopt pointers allocated with another allocator than new (no malloc for
+example).
+
+To use this policy you need to include ``luabind/adopt_policy.hpp``.
+
+
+Dependency
+- - - - - - - - - -
+
+The dependency policy is used to create life-time dependencies between values.
+Consider the following example::
+
+    struct A
+    {
+        B member;
+
+        const B& get_member()
+        {
+            return member;
+        }
+    };
+
+When wrapping this class, we would do something like::
+
+    module(L)
+    [
+        class_<A>("A")
+            .def(constructor<>())
+            .def("get_member", &A::get_member)
+    ];
+
+
+However, since the return value of get_member is a reference to a member of A,
+this will create some life-time issues. For example::
+
+    Lua 5.0  Copyright (C) 1994-2003 Tecgraf, PUC-Rio
+    a = A()
+    b = a:get_member() - - b points to a member of a
+    a = nil
+    collectgarbage(0)  - - since there are no references left to a, it is
+                       - - removed
+                       - - at this point, b is pointing into a removed object
+
+When using the dependency-policy, it is possible to tell luabind to tie the
+lifetime of one object to another, like this::
+
+    module(L)
+    [
+        class_<A>("A")
+            .def(constructor<>())
+            .def("get_member", &A::get_member, dependency(result, _1))
+    ];
+
+This will create a dependency between the return-value of the function, and the
+self-object. This means that the self-object will be kept alive as long as the
+result is still alive. ::
+
+    Lua 5.0  Copyright (C) 1994-2003 Tecgraf, PUC-Rio
+    a = A()
+    b = a:get_member() - - b points to a member of a
+    a = nil
+    collectgarbage(0)  - - a is dependent on b, so it isn't removed
+    b = nil
+    collectgarbage(0)  - - all dependencies to a gone, a is removed
+
+To use this policy you need to include ``luabind/dependency_policy.hpp``.
+
+
+Return reference to
+- - - - - - - - - - - - - - - - - - -
+
+It is very common to return references to arguments or the this-pointer to
+allow for chaining in C++.
+
+::
+
+    struct A
+    {
+        float val;
+
+        A& set(float v)
+        {
+            val = v;
+            return *this;
+        }
+    };
+
+When luabind generates code for this, it will create a new object for the
+return-value, pointing to the self-object. This isn't a problem, but could be a
+bit inefficient. When using the return_reference_to-policy we have the ability
+to tell luabind that the return-value is already on the Lua stack.
+
+::
+
+    module(L)
+    [
+        class_<A>("A")
+            .def(constructor<>())
+            .def("set", &A::set, return_reference_to(_1))
+    ];
+
+Instead of creating a new object, luabind will just copy the object that is
+already on the stack.
+
+.. warning::
+   This policy ignores all type information and should be used only it
+   situations where the parameter type is a perfect match to the
+   return-type (such as in the example).
+
+To use this policy you need to include ``luabind/return_reference_to_policy.hpp``.
+
+
+Out value
+- - - - - - - - -
+
+This policy makes it possible to wrap functions that take non const references
+as its parameters with the intention to write return values to them.
+
+::
+
+    void f(float& val) { val = val + 10.f; }
+
+or
+
+::
+
+    void f(float* val) { *val = *val + 10.f; }
+
+Can be wrapped by doing::
+
+    module(L)
+    [
+        def("f", &f, out_value(_1))
+    ];
+
+When invoking this function from Lua it will return the value assigned to its
+parameter.
+
+::
+
+    Lua 5.0  Copyright (C) 1994-2003 Tecgraf, PUC-Rio
+    > a = f(10)
+    > print(a)
+    20
+
+When this policy is used in conjunction with user define types we often need
+to do ownership transfers.
+
+::
+
+    struct A;
+
+    void f1(A*& obj) { obj = new A(); }
+    void f2(A** obj) { *obj = new A(); }
+
+Here we need to make sure luabind takes control over object returned, for
+this we use the adopt policy::
+
+    module(L)
+    [
+        class_<A>("A"),
+        def("f1", &f1, out_value(_1, adopt(_2)))
+        def("f2", &f2, out_value(_1, adopt(_2)))
+    ];
+
+Here we are using adopt as an internal policy to out_value. The index
+specified, _2, means adopt will be used to convert the value back to Lua.
+Using _1 means the policy will be used when converting from Lua to C++.
+
+To use this policy you need to include ``luabind/out_value_policy.hpp``.
+
+Pure out value
+- - - - - - - - - - - - - -
+
+This policy works in exactly the same way as out_value, except that it
+replaces the parameters with default-constructed objects.
+
+::
+
+    void get(float& x, float& y)
+    {
+        x = 3.f;
+        y = 4.f;
+    }
+
+    ...
+
+    module(L)
+    [
+        def("get", &get,
+            pure_out_value(_1) + pure_out_value(_2))
+    ];
+
+::
+
+    Lua 5.0  Copyright (C) 1994-2003 Tecgraf, PUC-Rio
+    > x, y = get()
+    > print(x, y)
+    3    5
+
+Like out_value, it is possible to specify an internal policy used then
+converting the values back to Lua.
+
+::
+
+    void get(test_class*& obj)
+    {
+        obj = new test_class();
+    }
+
+    ...
+
+    module(L)
+    [
+        def("get", &get, pure_out_value(_1, adopt(_1)))
+    ];
+
+
+Discard result
+- - - - - - - - - - - - - -
+
+This is a very simple policy which makes it possible to throw away
+the value returned by a C++ function, instead of converting it to
+Lua. This example makes sure the this reference never gets converted
+to Lua.
+
+::
+
+    struct simple
+    {
+        simple& set_name(const std::string& n)
+        {
+            name = n;
+            return *this;
+        }
+
+        std::string name;
+    };
+
+    ...
+
+    module(L)
+    [
+        class_<simple>("simple")
+            .def("set_name", &simple::set_name, discard_result)
+    ];
+
+To use this policy you need to include ``luabind/discard_result_policy.hpp``.
+
+
+Return STL iterator
+- - - - - - - - - - - - - - - - - - -
+
+This policy converts an STL container to a generator function that can be used
+in Lua to iterate over the container. It works on any container that defines
+``begin()`` and ``end()`` member functions (they have to return iterators). It
+can be used like this::
+
+    struct A
+    {
+        std::vector<std::string> names;
+    };
+
+
+    module(L)
+    [
+        class_<A>("A")
+            .def_readwrite("names", &A::names, return_stl_iterator)
+    ];
+
+The Lua code to iterate over the container::
+
+    a = A()
+
+    for name in a.names do
+      print(name)
+    end
+
+
+To use this policy you need to include ``luabind/iterator_policy.hpp``.
+
+
+Yield
+- - - - -
+
+This policy will cause the function to always yield the current thread when
+returning. See the Lua manual for restrictions on yield. -->
+</div>
+</div>
+</div>
+<div class="section" id="splitting-up-the-registration">
+<h1>15&nbsp;&nbsp;&nbsp;Splitting up the registration</h1>
+<p>It is possible to split up a module registration into several
+translation units without making each registration dependent
+on the module it's being registered in.</p>
+<p><tt class="docutils literal">a.cpp</tt>:</p>
+<pre class="literal-block">
+luabind::scope register_a()
+{
+    return
+        class_&lt;a&gt;(&quot;a&quot;)
+            .def(&quot;f&quot;, &amp;a::f)
+            ;
+}
+</pre>
+<p><tt class="docutils literal">b.cpp</tt>:</p>
+<pre class="literal-block">
+luabind::scope register_b()
+{
+    return
+        class_&lt;b&gt;(&quot;b&quot;)
+            .def(&quot;g&quot;, &amp;b::g)
+            ;
+}
+</pre>
+<p><tt class="docutils literal">module_ab.cpp</tt>:</p>
+<pre class="literal-block">
+luabind::scope register_a();
+luabind::scope register_b();
+
+void register_module(lua_State* L)
+{
+    module(&quot;b&quot;, L)
+    [
+        register_a(),
+        register_b()
+    ];
+}
+</pre>
+</div>
+<div class="section" id="error-handling">
+<h1>16&nbsp;&nbsp;&nbsp;Error Handling</h1>
+<div class="section" id="pcall-errorfunc">
+<h2>16.1&nbsp;&nbsp;&nbsp;pcall errorfunc</h2>
+<p>As mentioned in the <a class="reference external" href="http://www.lua.org/manual/5.0/manual.html">Lua documentation</a>, it is possible to pass an
+error handler function to <tt class="docutils literal">lua_pcall()</tt>. Luabind makes use of
+<tt class="docutils literal">lua_pcall()</tt> internally when calling member functions and free functions.
+It is possible to set the error handler function that Luabind will use
+globally:</p>
+<pre class="literal-block">
+typedef int(*pcall_callback_fun)(lua_State*);
+void set_pcall_callback(pcall_callback_fun fn);
+</pre>
+<p>This is primarily useful for adding more information to the error message
+returned by a failed protected call. For more information on how to use the
+pcall_callback function, see <tt class="docutils literal">errfunc</tt> under the
+<a class="reference external" href="http://www.lua.org/manual/5.0/manual.html#3.15">pcall section of the lua manual</a>.</p>
+<p>For more information on how to retrieve debugging information from lua, see
+<a class="reference external" href="http://www.lua.org/manual/5.0/manual.html#4">the debug section of the lua manual</a>.</p>
+<p>The message returned by the <tt class="docutils literal">pcall_callback</tt> is accessable as the top lua
+value on the stack. For example, if you would like to access it as a luabind
+object, you could do like this:</p>
+<pre class="literal-block">
+catch(error&amp; e)
+{
+    object error_msg(from_stack(e.state(), -1));
+    std::cout &lt;&lt; error_msg &lt;&lt; std::endl;
+}
+</pre>
+</div>
+<div class="section" id="file-and-line-numbers">
+<h2>16.2&nbsp;&nbsp;&nbsp;file and line numbers</h2>
+<p>If you want to add file name and line number to the error messages generated
+by luabind you can define your own <a class="reference internal" href="#pcall-errorfunc">pcall errorfunc</a>. You may want to modify
+this callback to better suit your needs, but the basic functionality could be
+implemented like this:</p>
+<pre class="literal-block">
+int add_file_and_line(lua_State* L)
+{
+   lua_Debug d;
+   lua_getstack(L, 1, &amp;d);
+   lua_getinfo(L, &quot;Sln&quot;, &amp;d);
+   std::string err = lua_tostring(L, -1);
+   lua_pop(L, 1);
+   std::stringstream msg;
+   msg &lt;&lt; d.short_src &lt;&lt; &quot;:&quot; &lt;&lt; d.currentline;
+
+   if (d.name != 0)
+   {
+      msg &lt;&lt; &quot;(&quot; &lt;&lt; d.namewhat &lt;&lt; &quot; &quot; &lt;&lt; d.name &lt;&lt; &quot;)&quot;;
+   }
+   msg &lt;&lt; &quot; &quot; &lt;&lt; err;
+   lua_pushstring(L, msg.str().c_str());
+   return 1;
+}
+</pre>
+<p>For more information about what kind of information you can add to the error
+message, see <a class="reference external" href="http://www.lua.org/manual/5.0/manual.html#4">the debug section of the lua manual</a>.</p>
+<p>Note that the callback set by <tt class="docutils literal">set_pcall_callback()</tt> will only be used when
+luabind executes lua code. Anytime when you call <tt class="docutils literal">lua_pcall</tt> yourself, you
+have to supply your function if you want error messages translated.</p>
+</div>
+<div class="section" id="lua-panic">
+<h2>16.3&nbsp;&nbsp;&nbsp;lua panic</h2>
+<p>When lua encounters a fatal error caused by a bug from the C/C++ side, it will
+call its internal panic function. This can happen, for example,  when you call
+<tt class="docutils literal">lua_gettable</tt> on a value that isn't a table. If you do the same thing from
+within lua, it will of course just fail with an error message.</p>
+<p>The default panic function will <tt class="docutils literal">exit()</tt> the application. If you want to
+handle this case without terminating your application, you can define your own
+panic function using <tt class="docutils literal">lua_atpanic</tt>. The best way to continue from the panic
+function is to make sure lua is compiled as C++ and throw an exception from
+the panic function. Throwing an exception instead of using <tt class="docutils literal">setjmp</tt> and
+<tt class="docutils literal">longjmp</tt> will make sure the stack is correctly unwound.</p>
+<p>When the panic function is called, the lua state is invalid, and the only
+allowed operation on it is to close it.</p>
+<p>For more information, see the <a class="reference external" href="http://www.lua.org/manual/5.0/manual.html#3.19">lua manual section 3.19</a>.</p>
+</div>
+<div class="section" id="structured-exceptions-msvc">
+<h2>16.4&nbsp;&nbsp;&nbsp;structured exceptions (MSVC)</h2>
+<p>Since lua is generally built as a C library, any callbacks called from lua
+cannot under any circumstance throw an exception. Because of that, luabind has
+to catch all exceptions and translate them into proper lua errors (by calling
+<tt class="docutils literal">lua_error()</tt>). This means we have a <tt class="docutils literal"><span class="pre">catch(...)</span> {}</tt> in there.</p>
+<p>In Visual Studio, <tt class="docutils literal">catch <span class="pre">(...)</span></tt> will not only catch C++ exceptions, it will
+also catch structured exceptions, such as segmentation fault. This means that if
+your function, that gets called from luabind, makes an invalid memory
+adressing, you won't notice it. All that will happen is that lua will return
+an error message saying &quot;unknown exception&quot;.</p>
+<p>To remedy this, you can create your own <em>exception translator</em>:</p>
+<pre class="literal-block">
+void straight_to_debugger(unsigned int, _EXCEPTION_POINTERS*)
+{ throw; }
+
+#ifdef _MSC_VER
+   ::_set_se_translator(straight_to_debugger);
+#endif
+</pre>
+<p>This will make structured exceptions, like segmentation fault, to actually get
+caught by the debugger.</p>
+</div>
+<div class="section" id="error-messages">
+<h2>16.5&nbsp;&nbsp;&nbsp;Error messages</h2>
+<p>These are the error messages that can be generated by luabind, with a more
+in-depth explanation.</p>
+<ul>
+<li><pre class="first literal-block">
+the attribute '<em>class-name.attribute-name</em>' is read only
+</pre>
+<p>There is no data member named <em>attribute-name</em> in the class <em>class-name</em>,
+or there's no setter-function registered on that property name. See the
+<a class="reference internal" href="#properties">Properties</a> section.</p>
+</li>
+<li><pre class="first literal-block">
+the attribute '<em>class-name.attribute-name</em>' is of type: (<em>class-name</em>) and does not match (<em>class_name</em>)
+</pre>
+<p>This error is generated if you try to assign an attribute with a value
+of a type that cannot be converted to the attributes type.</p>
+</li>
+<li><pre class="first literal-block">
+<em>class-name()</em> threw an exception, <em>class-name:function-name()</em> threw an exception
+</pre>
+<p>The class' constructor or member function threw an unknown exception.
+Known exceptions are const char*, std::exception. See the
+<a class="reference internal" href="#exceptions">exceptions</a> section.</p>
+</li>
+<li><pre class="first literal-block">
+no overload of '<em>class-name:function-name</em>' matched the arguments (<em>parameter-types</em>)
+no match for function call '<em>function-name</em>' with the parameters (<em>parameter-types</em>)
+no constructor of <em>class-name</em> matched the arguments (<em>parameter-types</em>)
+no operator <em>operator-name</em> matched the arguments (<em>parameter-types</em>)
+</pre>
+<p>No function/operator with the given name takes the parameters you gave
+it. You have either misspelled the function name, or given it incorrect
+parameters. This error is followed by a list of possible candidate
+functions to help you figure out what parameter has the wrong type. If
+the candidate list is empty there's no function at all with that name.
+See the signature matching section.</p>
+</li>
+<li><pre class="first literal-block">
+call of overloaded '<em>class-name:function-name*(*parameter-types</em>)' is ambiguous
+ambiguous match for function call '<em>function-name</em>' with the parameters (<em>parameter-types</em>)
+call of overloaded constructor '<em>class-name*(*parameter-types</em>)' is ambiguous
+call of overloaded operator <em>operator-name</em> (<em>parameter-types</em>) is ambiguous
+</pre>
+<p>This means that the function/operator you are trying to call has at least
+one other overload that matches the arguments just as good as the first
+overload.</p>
+</li>
+<li><pre class="first literal-block">
+cannot derive from C++ class '<em>class-name</em>'. It does not have a wrapped type.
+</pre>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="build-options">
+<h1>17&nbsp;&nbsp;&nbsp;Build options</h1>
+<p>There are a number of configuration options available when building luabind.
+It is very important that your project has the exact same configuration
+options as the ones given when the library was build! The exceptions are the
+<tt class="docutils literal">LUABIND_MAX_ARITY</tt> and <tt class="docutils literal">LUABIND_MAX_BASES</tt> which are template-based
+options and only matters when you use the library (which means they can
+differ from the settings of the library).</p>
+<p>The default settings which will be used if no other settings are given
+can be found in <tt class="docutils literal">luabind/config.hpp</tt>.</p>
+<p>If you want to change the settings of the library, you can modify the
+config file. It is included and used by all makefiles. You can change paths
+to Lua and boost in there as well.</p>
+<dl class="docutils">
+<dt>LUABIND_MAX_ARITY</dt>
+<dd>Controls the maximum arity of functions that are registered with luabind.
+You can't register functions that takes more parameters than the number
+this macro is set to. It defaults to 5, so, if your functions have greater
+arity you have to redefine it. A high limit will increase compilation time.</dd>
+<dt>LUABIND_MAX_BASES</dt>
+<dd>Controls the maximum number of classes one class can derive from in
+luabind (the number of classes specified within <tt class="docutils literal">bases&lt;&gt;</tt>).
+<tt class="docutils literal">LUABIND_MAX_BASES</tt> defaults to 4. A high limit will increase
+compilation time.</dd>
+<dt>LUABIND_NO_ERROR_CHECKING</dt>
+<dd><p class="first">If this macro is defined, all the Lua code is expected only to make legal
+calls. If illegal function calls are made (e.g. giving parameters that
+doesn't match the function signature) they will not be detected by luabind
+and the application will probably crash. Error checking could be disabled
+when shipping a release build (given that no end-user has access to write
+custom Lua code). Note that function parameter matching will be done if a
+function is overloaded, since otherwise it's impossible to know which one
+was called. Functions will still be able to throw exceptions when error
+checking is disabled.</p>
+<p class="last">If a function throws an exception it will be caught by luabind and
+propagated with <tt class="docutils literal">lua_error()</tt>.</p>
+</dd>
+<dt>LUABIND_NO_EXCEPTIONS</dt>
+<dd><p class="first">This define will disable all usage of try, catch and throw in luabind.
+This will in many cases disable run-time errors, when performing invalid
+casts or calling Lua functions that fails or returns values that cannot
+be converted by the given policy. luabind requires that no function called
+directly or indirectly by luabind throws an exception (throwing exceptions
+through Lua has undefined behavior).</p>
+<p class="last">Where exceptions are the only way to get an error report from luabind,
+they will be replaced with calls to the callback functions set with
+<tt class="docutils literal">set_error_callback()</tt> and <tt class="docutils literal">set_cast_failed_callback()</tt>.</p>
+</dd>
+<dt>LUA_API</dt>
+<dd>If you want to link dynamically against Lua, you can set this define to
+the import-keyword on your compiler and platform. On Windows in Visual Studio
+this should be <tt class="docutils literal">__declspec(dllimport)</tt> if you want to link against Lua
+as a dll.</dd>
+<dt>LUABIND_DYNAMIC_LINK</dt>
+<dd>Must be defined if you intend to link against the luabind shared
+library.</dd>
+<dt>LUABIND_NO_RTTI</dt>
+<dd>You can define this if you don't want luabind to use <tt class="docutils literal">dynamic_cast&lt;&gt;</tt>.
+It will disable <a class="reference internal" href="#object-identity">Object identity</a>.</dd>
+<dt>NDEBUG</dt>
+<dd>This define will disable all asserts and should be defined in a release
+build.</dd>
+</dl>
+</div>
+<div class="section" id="implementation-notes">
+<h1>18&nbsp;&nbsp;&nbsp;Implementation notes</h1>
+<p>The classes and objects are implemented as user data in Lua. To make sure that
+the user data really is the internal structure it is supposed to be, we tag
+their metatables. A user data who's metatable contains a boolean member named
+<tt class="docutils literal">__luabind_classrep</tt> is expected to be a class exported by luabind. A user
+data who's metatable contains a boolean member named <tt class="docutils literal">__luabind_class</tt> is
+expected to be an instantiation of a luabind class.</p>
+<p>This means that if you make your own user data and tags its metatable with the
+exact same names, you can very easily fool luabind and crash the application.</p>
+<p>In the Lua registry, luabind keeps an entry called <tt class="docutils literal">__luabind_classes</tt>. It
+should not be removed or overwritten.</p>
+<p>In the global table, a variable called <tt class="docutils literal">super</tt> is used every time a
+constructor in a lua-class is called. This is to make it easy for that
+constructor to call its base class' constructor. So, if you have a global
+variable named super it may be overwritten. This is probably not the best
+solution, and this restriction may be removed in the future.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p>Deprecated</p>
+<p><tt class="docutils literal">super()</tt> has been deprecated since version 0.8 in favor of directly
+invoking the base class' <tt class="docutils literal">__init()</tt> function:</p>
+<pre class="last literal-block">
+function Derived:__init()
+    Base.__init(self)
+end
+</pre>
+</div>
+<p>Luabind uses two upvalues for functions that it registers. The first is a
+userdata containing a list of overloads for the function, the other is a light
+userdata with the value 0x1337, this last value is used to identify functions
+registered by luabind. It should be virtually impossible to have such a pointer
+as secondary upvalue by pure chance. This means, if you are trying to replace
+an existing function with a luabind function, luabind will see that the
+secondary upvalue isn't the magic id number and replace it. If it can identify
+the function to be a luabind function, it won't replace it, but rather add
+another overload to it.</p>
+<p>Inside the luabind namespace, there's another namespace called detail. This
+namespace contains non-public classes and are not supposed to be used directly.</p>
+</div>
+<div class="section" id="faq">
+<h1>19&nbsp;&nbsp;&nbsp;FAQ</h1>
+<dl class="docutils">
+<dt>What's up with __cdecl and __stdcall?</dt>
+<dd>If you're having problem with functions
+that cannot be converted from <tt class="docutils literal">void (__stdcall <span class="pre">*)(int,int)</span></tt> to
+<tt class="docutils literal">void <span class="pre">(__cdecl*)(int,int)</span></tt>. You can change the project settings to make the
+compiler generate functions with __cdecl calling conventions. This is
+a problem in developer studio.</dd>
+<dt>What's wrong with functions taking variable number of arguments?</dt>
+<dd>You cannot register a function with ellipses in its signature. Since
+ellipses don't preserve type safety, those should be avoided anyway.</dd>
+<dt>Internal structure overflow in VC</dt>
+<dd>If you, in visual studio, get fatal error C1204: compiler limit :
+internal structure overflow. You should try to split that compilation
+unit up in smaller ones. See <a class="reference internal" href="#splitting-up-the-registration">Splitting up the registration</a> and
+<a class="reference internal" href="#splitting-class-registrations">Splitting class registrations</a>.</dd>
+<dt>What's wrong with precompiled headers in VC?</dt>
+<dd>Visual Studio doesn't like anonymous namespaces in its precompiled
+headers. If you encounter this problem you can disable precompiled
+headers for the compilation unit (cpp-file) that uses luabind.</dd>
+<dt>error C1076: compiler limit - internal heap limit reached in VC</dt>
+<dd>In visual studio you will probably hit this error. To fix it you have to
+increase the internal heap with a command-line option. We managed to
+compile the test suit with /Zm300, but you may need a larger heap then
+that.</dd>
+<dt>error C1055: compiler limit : out of keys in VC</dt>
+<dd>It seems that this error occurs when too many assert() are used in a
+program, or more specifically, the __LINE__ macro. It seems to be fixed by
+changing /ZI (Program database for edit and continue) to /Zi
+(Program database).</dd>
+<dt>How come my executable is huge?</dt>
+<dd><p class="first">If you're compiling in debug mode, you will probably have a lot of
+debug-info and symbols (luabind consists of a lot of functions). Also,
+if built in debug mode, no optimizations were applied, luabind relies on
+that the compiler is able to inline functions. If you built in release
+mode, try running strip on your executable to remove export-symbols,
+this will trim down the size.</p>
+<p class="last">Our tests suggests that cygwin's gcc produces much bigger executables
+compared to gcc on other platforms and other compilers.</p>
+</dd>
+</dl>
+<!-- HUH?! // check the magic number that identifies luabind's functions -->
+<dl class="docutils">
+<dt>Can I register class templates with luabind?</dt>
+<dd><p class="first">Yes you can, but you can only register explicit instantiations of the
+class. Because there's no Lua counterpart to C++ templates. For example,
+you can register an explicit instantiation of std::vector&lt;&gt; like this:</p>
+<pre class="last literal-block">
+module(L)
+[
+    class_&lt;std::vector&lt;int&gt; &gt;(&quot;vector&quot;)
+        .def(constructor&lt;int&gt;)
+        .def(&quot;push_back&quot;, &amp;std::vector&lt;int&gt;::push_back)
+];
+</pre>
+</dd>
+</dl>
+<!-- Again, irrelevant to docs: Note that the space between the two > is required by C++. -->
+<dl class="docutils">
+<dt>Do I have to register destructors for my classes?</dt>
+<dd><p class="first">No, the destructor of a class is always called by luabind when an
+object is collected. Note that Lua has to own the object to collect it.
+If you pass it to C++ and gives up ownership (with adopt policy) it will
+no longer be owned by Lua, and not collected.</p>
+<p class="last">If you have a class hierarchy, you should make the destructor virtual if
+you want to be sure that the correct destructor is called (this apply to C++
+in general).</p>
+</dd>
+</dl>
+<!-- And again, the above is irrelevant to docs. This isn't a general C++ FAQ. But it saves us support questions. -->
+<dl class="docutils">
+<dt>Fatal Error C1063 compiler limit : compiler stack overflow in VC</dt>
+<dd>VC6.5 chokes on warnings, if you are getting alot of warnings from your
+code try suppressing them with a pragma directive, this should solve the
+problem.</dd>
+<dt>Crashes when linking against luabind as a dll in Windows</dt>
+<dd>When you build luabind, Lua and you project, make sure you link against
+the runtime dynamically (as a dll).</dd>
+<dt>I cannot register a function with a non-const parameter</dt>
+<dd>This is because there is no way to get a reference to a Lua value. Have
+a look at <a class="reference internal" href="#out-value">out_value</a> and <a class="reference internal" href="#pure-out-value">pure_out_value</a> policies.</dd>
+</dl>
+</div>
+<div class="section" id="known-issues">
+<h1>20&nbsp;&nbsp;&nbsp;Known issues</h1>
+<ul class="simple">
+<li>You cannot use strings with extra nulls in them as member names that refers
+to C++ members.</li>
+<li>If one class registers two functions with the same name and the same
+signature, there's currently no error. The last registered function will
+be the one that's used.</li>
+<li>In VC7, classes can not be called test.</li>
+<li>If you register a function and later rename it, error messages will use the
+original function name.</li>
+<li>luabind does not support class hierarchies with virtual inheritance. Casts are
+done with static pointer offsets.</li>
+</ul>
+</div>
+<div class="section" id="acknowledgments">
+<h1>21&nbsp;&nbsp;&nbsp;Acknowledgments</h1>
+<p>Written by Daniel Wallin and Arvid Norberg. © Copyright 2003.
+All rights reserved.</p>
+<p>Evan Wies has contributed with thorough testing, countless bug reports
+and feature ideas.</p>
+<p>This library was highly inspired by Dave Abrahams' <a class="reference external" href="http://www.boost.org/libraries/python">Boost.Python</a> library.</p>
+</div>
+</div>
+</body>
+</html>
