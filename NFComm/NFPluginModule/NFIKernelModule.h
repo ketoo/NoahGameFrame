@@ -98,7 +98,8 @@ public:
     {
         HEART_BEAT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4, _5);
         HEART_BEAT_FUNCTOR_PTR functorPtr(new HEART_BEAT_FUNCTOR(functor));
-        return ResgisterCommonHeartBeat(functorPtr);
+        //return ResgisterCommonHeartBeat(functorPtr);
+        return false;
     }
 
     template<typename BaseType>
@@ -106,7 +107,8 @@ public:
     {
         EVENT_PROCESS_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3);
         EVENT_PROCESS_FUNCTOR_PTR functorPtr(new EVENT_PROCESS_FUNCTOR(functor));
-        return ResgisterCommonEvent(functorPtr);
+        //return ResgisterCommonEvent(functorPtr);
+        return false;
     }
    
     /////////////////////////////////////////////////////////////////
@@ -237,11 +239,11 @@ protected:
     //只能网络模块注册，回调用来同步对象类表事件,所有的类表都会回调
     virtual bool ResgisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
 
-    //只能网络[脚本]模块注册，回调心跳,所有的心跳都会回调
-    virtual bool ResgisterCommonHeartBeat(const HEART_BEAT_FUNCTOR_PTR& cb) = 0;
-
-    //只能网络[脚本]模块注册，回调事件,所有的事件都会回调
-    virtual bool ResgisterCommonEvent(const EVENT_PROCESS_FUNCTOR_PTR& cb) = 0;
+//     //只能网络[脚本]模块注册，回调心跳,所有的心跳都会回调
+//     virtual bool ResgisterCommonHeartBeat(const HEART_BEAT_FUNCTOR_PTR& cb) = 0;
+// 
+//     //只能网络[脚本]模块注册，回调事件,所有的事件都会回调
+//     virtual bool ResgisterCommonEvent(const EVENT_PROCESS_FUNCTOR_PTR& cb) = 0;
 
 };
 
