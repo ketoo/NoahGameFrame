@@ -98,6 +98,7 @@ public:
 
     virtual NFIPropertyManager* GetPropertyManager(const std::string& strConfigName);
     virtual NFIRecordManager* GetRecordManager(const std::string& strConfigName);
+    virtual NFIComponentManager* GetComponentManager(const std::string& strConfigName);
 
     virtual int QueryPropertyInt(const std::string& strConfigName, const std::string& strPropertyName);
     virtual float QueryPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName);

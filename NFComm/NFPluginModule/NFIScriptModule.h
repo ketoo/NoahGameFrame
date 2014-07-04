@@ -14,6 +14,7 @@
 #include "NFComm\NFCore\NFCValueList.h"
 #include "NFComm\NFCore\NFIdentID.h"
 #include "NFComm\NFPluginModule\NFIElementInfoModule.h"
+#include "NFComm\NFPluginModule\NFIKernelModule.h"
 
 static  NFIValueList* NFVarList_New()
 {
@@ -209,7 +210,7 @@ public:
     // ÊÇ·ñÎª¿Õ
     bool IsEmpty() const
     {
-        mVar.IsEmpty();
+        return mVar.IsEmpty();
     }
 
     int GetCount() const
@@ -293,6 +294,51 @@ private:
     NFCValueList mVar;
 };
 
+
+class NFScriptInt64
+{
+public:
+    NFScriptInt64(){};
+    NFScriptInt64(const NFIDENTID& ID)
+    {
+        mID = ID;
+    }
+
+    NFIDENTID ObjectVal() const
+    {
+        return mID;
+    }
+
+    NFINT64 Int64Val() const
+    {
+        return mID.nData64;
+    }
+
+public:
+    NFINT32 GetA()
+    {
+        return mID.nIdent;
+    }
+
+    NFINT32 GetB()
+    {
+        return mID.nSerial;
+    }
+
+    void SetA( NFINT32 var)
+    {
+        mID.nIdent = var;
+    }
+
+    void SetB( NFINT32 var)
+    {
+        mID.nSerial = var;
+    }
+
+private:
+    NFIDENTID mID;
+};
+
 //////////////////////////////////////////////////////////////////////////
 
 class NFCScriptName
@@ -345,31 +391,34 @@ protected:
 private:
 };
 
-class NFIScriptModule;
+class NFIScriptModule
+    : public NFILogicModule
+{
+
+public:
+    virtual int DoHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var) = 0;
+    virtual int DoEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIValueList& var) = 0;
+
+    //call script
+    virtual int DoScript(const NFIDENTID& self, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg) = 0;
+    virtual int DoEventScript(const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg) = 0;
+    virtual int DoHeartBeatScript(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg) = 0;
+
+
+    virtual int DoScriptPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& oldVar, const NFCScriptVarList& newVar, const NFCScriptVarList& arg) = 0;
+    virtual int DoScriptRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCScriptVarList& oldVar, const NFCScriptVarList& newVar, const NFCScriptVarList& arg) = 0;
+
+};
+
 class NFCScriptKernelModule : public NFMap<NFIDENTID, NFCSriptData>
 {
 public:
-    NFCScriptKernelModule(NFIKernelModule* pKernelModule, NFIScriptModule* pScriptModule, NFIElementInfoModule* pElementInfoModule)
+    NFCScriptKernelModule(NFIKernelModule* pKernelModule, NFIScriptModule* pScriptModule, NFIElementInfoModule* pElementInfoModule, NFIEventProcessModule* pEventProcessModule)
     {
         m_pKernelModule = pKernelModule;
         m_pScriptModule = pScriptModule;
         m_pElementInfoModule = pElementInfoModule;
-    }
-
-    bool QueryEnableComponent(const NFIDENTID self, const std::string& strComponentName)
-    {
-        NFIObject* pObject = m_pKernelModule->GetObject(self);
-        if (!pObject)
-        {
-            return false;
-        }
-
-        if(!pObject->GetComponentManager()->QueryEnable(strComponentName))
-        {
-            return false;
-        }
-
-        return true;
+        m_pEventProcessModule = pEventProcessModule;
     }
 
     //becall from script
@@ -435,7 +484,7 @@ public:
     bool DoEvent(const NFIDENTID& objectID, const int nEventID, const NFCScriptVarList& valueList)
     {
         //do c++ event
-
+        m_pEventProcessModule->DoEvent(objectID, nEventID, valueList.GetVar());
         return false;
     }
 
@@ -474,6 +523,7 @@ public:
         if (!pScriptNameList)
         {
             pScriptNameList = new NFList<NFCScriptName>();
+            pScriptData->mxPropertyCallBackData.AddElement(strPropertyName, pScriptNameList);
         }
 
         NFCScriptName xScriptName(strComponentName, strFunction);
@@ -495,6 +545,7 @@ public:
         if (!pScriptNameList)
         {
             pScriptNameList = new NFList<NFCScriptName>();
+            pScriptData->mxRecordCallBackData.AddElement(strRecordName, pScriptNameList);
         }
 
         NFCScriptName xScriptName(strComponentName, strFunction);
@@ -522,7 +573,15 @@ public:
         NFCScriptName xScriptName(strComponentName, strFunction);
         pScriptNameList->Add(xScriptName);
 
+        m_pKernelModule->AddEventCallBack(self, nEventID, this, &NFCScriptKernelModule::OnEventCommonCB);
+
         return true;
+    }
+
+    int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIValueList& var)
+    {
+        m_pScriptModule->DoEventCommonCB(self, nEventID, var);
+        return 0;
     }
 
     bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, const std::string& strComponentName, const std::string& strFunction, const float fTime, const int nCount)
@@ -545,7 +604,15 @@ public:
         NFCScriptName xScriptName(strComponentName, strFunction);
         pScriptNameList->Add(xScriptName);
 
+        m_pKernelModule->AddHeartBeat(self, strHeartBeatName, this, &NFCScriptKernelModule::OnHeartBeatCommonCB, NFCValueList(), fTime, nCount);
+
         return true;
+    }
+    
+    int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var)
+    {
+        m_pScriptModule->DoHeartBeatCommonCB(self, strHeartBeat, fTime, nCount, var);
+        return 0;
     }
 
     bool FindHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName)
@@ -594,6 +661,11 @@ public:
     bool QueryComponentEnable(const NFIDENTID& self, const std::string& strComponentName)
     {
         return m_pKernelModule->QueryComponentEnable(self, strComponentName);
+    }
+
+    NFIDENTID CreateContainer(const int nContainerIndex, const std::string& strSceneConfigID)
+    {
+        return m_pKernelModule->CreateContainer(nContainerIndex, strSceneConfigID);
     }
 
     bool ExistContainer(const int nContainerIndex)
@@ -719,22 +791,469 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFIElementInfoModule* m_pElementInfoModule;
     NFIScriptModule*m_pScriptModule;
+    NFIEventProcessModule* m_pEventProcessModule;
 };
 
-class NFIScriptModule
-    : public NFILogicModule
+static bool KernelModule_HasEventCallBack(const NFScriptInt64& nPtrKernelModule,
+                        const NFScriptInt64& objectID, const int nEventID)
 {
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->HasEventCallBack(objectID.ObjectVal(), nEventID);
+    }
 
-public:
-    //call script
-    virtual int DoScript(const NFIDENTID& self, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg) = 0;
-    virtual int DoEventScript(const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg) = 0;
-    virtual int DoHeartBeatScript(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg) = 0;
+    return false;
+}
 
+static bool KernelModule_RemoveEvent(const NFScriptInt64& nPtrKernelModule,
+                        const NFScriptInt64& objectID)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->RemoveEvent(objectID.ObjectVal());
+    }
 
-    virtual int DoScriptPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& oldVar, const NFCScriptVarList& neVar, const NFCScriptVarList& arg) = 0;
-    virtual int DoScriptRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCScriptVarList& oldVar, const NFCScriptVarList& newVar, const NFCScriptVarList& arg) = 0;
+    return false;
+}
 
-};
+static bool KernelModule_RemoveEventCallBack(const NFScriptInt64& nPtrKernelModule,
+                        const NFScriptInt64& objectID, const int nEventID)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->RemoveEventCallBack(objectID.ObjectVal(), nEventID);
+    }
+
+    return false;
+}
+
+static bool KernelModule_DoEvent(const NFScriptInt64& nPtrKernelModule,
+                                const NFScriptInt64& objectID, const int nEventID, const NFCScriptVarList& valueList)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->DoEvent(objectID.ObjectVal(), nEventID, valueList);
+    }
+
+    return false;
+}
+
+static bool KernelModule_ExistElement(const NFScriptInt64& nPtrKernelModule,
+                                const std::string& strConfigName)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->ExistElement(strConfigName);
+    }
+
+    return false;
+}
+
+static int KernelModule_QueryPropertyInt(const NFScriptInt64& nPtrKernelModule,
+                         const std::string& strConfigName, const std::string& strPropertyName)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->QueryPropertyInt(strConfigName, strPropertyName);
+    }
+
+    return 0;
+}
+
+static float KernelModule_QueryPropertyFloat(const NFScriptInt64& nPtrKernelModule,
+                             const std::string& strConfigName, const std::string& strPropertyName)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->QueryPropertyFloat(strConfigName, strPropertyName);
+    }
+
+    return 0.0f;
+}
+
+static const std::string& KernelModule_QueryPropertyString(const NFScriptInt64& nPtrKernelModule,
+                                const std::string& strConfigName, const std::string& strPropertyName)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->QueryPropertyString(strConfigName, strPropertyName);
+    }
+
+    return NULL_STR;
+}
+
+static bool KernelModule_AddPropertyCallBack(const NFScriptInt64& nPtrKernelModule,
+    const NFScriptInt64& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->AddPropertyCallBack(self.ObjectVal(), strPropertyName, strComponentName, strFunction);
+    }
+
+    return false;
+}
+
+static bool KernelModule_AddRecordCallBack(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                              const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->AddRecordCallBack(self.ObjectVal(), strRecordName, strComponentName, strFunction);
+    }
+
+    return false;
+}
+
+static bool KernelModule_AddEventCallBack(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                             const int nEventID, const std::string& strComponentName, const std::string& strFunction)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->AddEventCallBack(self.ObjectVal(), nEventID, strComponentName, strFunction);
+    }
+
+    return false;
+}
+
+static bool KernelModule_AddHeartBeat(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64 self, 
+    const std::string& strHeartBeatName, const std::string& strComponentName, const std::string& strFunction, const float fTime, const int nCount)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->AddHeartBeat(self.ObjectVal(), strHeartBeatName, strComponentName, strFunction, fTime, nCount);
+    }
+
+    return false;
+}
+
+static bool KernelModule_FindHeartBeat(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, const std::string& strHeartBeatName)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->FindHeartBeat(self.ObjectVal(), strHeartBeatName);
+    }
+
+    return false;
+}
+
+static bool KernelModule_RemoveHeartBeat(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, const std::string& strHeartBeatName)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->RemoveHeartBeat(self.ObjectVal(), strHeartBeatName);
+    }
+
+    return false;
+}
+
+static bool KernelModule_SetComponentEnable(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                               const std::string& strComponentName, const bool bEnable)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->SetComponentEnable(self.ObjectVal(), strComponentName, bEnable);
+    }
+
+    return false;
+}
+
+static bool KernelModule_QueryComponentEnable(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                                 const std::string& strComponentName)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->QueryComponentEnable(self.ObjectVal(), strComponentName);
+    }
+
+    return false;
+}
+
+static NFScriptInt64 KernelModule_CreateContainer(const NFScriptInt64& nPtrKernelModule, const int nContainerIndex, const std::string& strSceneConfigID)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return  pScriptKernelModule->CreateContainer(nContainerIndex, strSceneConfigID);
+    }
+
+    return false;
+}
+
+static bool KernelModule_ExistContainer(const NFScriptInt64& nPtrKernelModule, const int nContainerIndex)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->ExistContainer(nContainerIndex);
+    }
+
+    return false;
+}
+
+static bool KernelModule_CreateObject(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                         const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFCScriptVarList& arg)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->CreateObject(self.ObjectVal(), nContainerID, nGroupID, strClassName, strConfigIndex, arg);
+    }
+
+    return false;
+}
+
+static  bool KernelModule_DestroyObject(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->DestroyObject(self.ObjectVal());
+    }
+
+    return false;
+}
+static bool KernelModule_FindProperty(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, const std::string& strPropertyName)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->FindProperty(self.ObjectVal(), strPropertyName);
+    }
+
+    return false;
+}
+
+static bool KernelModule_SetPropertyInt(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, const std::string& strPropertyName, const int nValue)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->SetPropertyInt(self.ObjectVal(), strPropertyName, nValue);
+    }
+
+    return false;
+}
+
+static bool KernelModule_SetPropertyFloat(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                             const std::string& strPropertyName,  const float fValue)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->SetPropertyFloat(self.ObjectVal(), strPropertyName, fValue);
+    }
+
+    return false;
+}
+
+static bool KernelModule_SetPropertyString(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                              const std::string& strPropertyName, const std::string& strValue)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->SetPropertyString(self.ObjectVal(), strPropertyName, strValue);
+    }
+
+    return false;
+}
+
+static bool KernelModule_SetPropertyObject(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                              const std::string& strPropertyName, const NFScriptInt64& objectValue)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->SetPropertyObject(self.ObjectVal(), strPropertyName, objectValue.ObjectVal());
+    }
+
+    return false;
+}
+
+static int KernelModule_QueryPropertyInt(const NFScriptInt64& nKernelModule, const NFScriptInt64& self, 
+                            const std::string& strPropertyName)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->QueryPropertyInt(self.ObjectVal(), strPropertyName);
+    }
+
+    return 0;
+}
+
+static float KernelModule_QueryPropertyFloat(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                                const std::string& strPropertyName)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->QueryPropertyFloat(self.ObjectVal(), strPropertyName);
+    }
+
+    return 0.0f;
+}
+
+static const std::string& KernelModule_QueryPropertyString(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self,
+                                              const std::string& strPropertyName)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->QueryPropertyString(self.ObjectVal(), strPropertyName);
+    }
+
+    return NULL_STR;
+}
+
+static NFIDENTID KernelModule_QueryPropertyObject(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                                     const std::string& strPropertyName)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->QueryPropertyObject(self.ObjectVal(), strPropertyName);
+    }
+
+    return 0;
+}
+
+static bool KernelModule_SetRecordInt(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                         const std::string& strRecordName, const int nRow, const int nCol, const int nValue)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->SetRecordInt(self.ObjectVal(), strRecordName, nRow, nCol, nValue);
+    }
+
+    return false;
+}
+
+static bool KernelModule_SetRecordFloat(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                           const std::string& strRecordName, const int nRow, const int nCol,  const float fValue)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->SetRecordFloat(self.ObjectVal(), strRecordName, nRow, nCol, fValue);
+    }
+
+    return false;
+}
+
+static bool KernelModule_SetRecordString(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                            const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->SetRecordString(self.ObjectVal(), strRecordName, nRow, nCol, strValue);
+    }
+
+    return false;
+}
+
+static bool KernelModule_SetRecordObject(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                            const std::string& strRecordName, const int nRow, const int nCol, const NFScriptInt64& objectValue)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->SetRecordObject(self.ObjectVal(), strRecordName, nRow, nCol, objectValue.ObjectVal());
+    }
+
+    return false;
+}
+
+static int KernelModule_QueryRecordInt(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                          const std::string& strRecordName, const int nRow, const int nCol)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->QueryRecordInt(self.ObjectVal(), strRecordName, nRow, nCol);
+    }
+
+    return 0;
+}
+
+static float KernelModule_QueryRecordFloat(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                              const std::string& strRecordName, const int nRow, const int nCol)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->QueryRecordFloat(self.ObjectVal(), strRecordName, nRow, nCol);
+    }
+
+    return 0.0f;
+}
+
+static const std::string& KernelModule_QueryRecordString(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                                            const std::string& strRecordName, const int nRow, const int nCol)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->QueryRecordString(self.ObjectVal(), strRecordName, nRow, nCol);
+    }
+
+    return NULL_STR;
+}
+
+static NFIDENTID KernelModule_QueryRecordObject(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+                                   const std::string& strRecordName, const int nRow, const int nCol)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->QueryRecordObject(self.ObjectVal(), strRecordName, nRow, nCol);
+    }
+
+    return 0;
+}
+
+static bool KernelModule_AddProperty(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self,
+                        const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic ,  bool bPrivate ,  
+                        bool bSave, int nIndex, const std::string& strScriptFunction)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->AddProperty(self.ObjectVal(), strPropertyName, varType, bPublic, bPrivate, bSave, nIndex, strScriptFunction);
+    }
+
+    return false;
+}
+
+static bool KernelModule_AddRecord(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, const std::string& strRecordName, 
+                      const NFCScriptVarList& varData, const NFCScriptVarList& varKey, const NFCScriptVarList& varDesc, const NFCScriptVarList& varTag, 
+                      const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->AddRecord(self.ObjectVal(), strRecordName, varData, varKey, varDesc, varTag, nRows, bPublic, bPrivate, bSave, nIndex);
+    }
+
+    return false;
+}
 
 #endif
