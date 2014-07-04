@@ -51,6 +51,8 @@ protected:
     virtual int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var);
     virtual int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIValueList& var);
 
+    virtual int DoHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var);
+    virtual int DoEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIValueList& var);
 
 protected:
 

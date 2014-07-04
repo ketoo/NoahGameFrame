@@ -69,3 +69,13 @@ int NFCMonoScriptModule::DoScriptRecordCallBack( const NFIDENTID& self, const st
 {
     return 0;
 }
+
+int NFCMonoScriptModule::DoHeartBeatCommonCB( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
+{
+    return 0;
+}
+
+int NFCMonoScriptModule::DoEventCommonCB( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
+{
+    return 0;
+}
