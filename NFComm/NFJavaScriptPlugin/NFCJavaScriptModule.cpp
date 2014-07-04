@@ -40,3 +40,38 @@ bool NFCJavaScriptModule::Execute(const float fLasFrametime, const float fStarte
 {
     return true;
 }
+
+int NFCJavaScriptModule::DoScript( const NFIDENTID& self, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg )
+{
+    return 0;
+}
+
+int NFCJavaScriptModule::DoEventScript( const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg )
+{
+    return 0;
+}
+
+int NFCJavaScriptModule::DoHeartBeatScript( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg )
+{
+    return 0;
+}
+
+int NFCJavaScriptModule::DoScriptPropertyCallBack( const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& oldVar, const NFCScriptVarList& neVar, const NFCScriptVarList& arg )
+{
+    return 0;
+}
+
+int NFCJavaScriptModule::DoScriptRecordCallBack( const NFIDENTID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCScriptVarList& oldVar, const NFCScriptVarList& newVar, const NFCScriptVarList& arg )
+{
+    return 0;
+}
+
+int NFCJavaScriptModule::DoHeartBeatCommonCB( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
+{
+    return 0;
+}
+
+int NFCJavaScriptModule::DoEventCommonCB( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
+{
+    return 0;
+}
