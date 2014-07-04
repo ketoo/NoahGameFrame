@@ -1,0 +1,7 @@
+import modules ;
+
+exe any_converter
+    : any_converter.cpp 
+      /luabind//luabind
+    ;
+
