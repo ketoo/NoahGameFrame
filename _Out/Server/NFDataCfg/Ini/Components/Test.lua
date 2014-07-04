@@ -11,6 +11,7 @@ function Test:AfterInit(kernel, self, arg)
 	local nMaxhp = QueryPropertyInt(kernel, self, "MAXHP");
 	io.write("Hello Lua MAXHP:" ..nMaxhp .. "\n");
 	
+	--property callback
 	AddPropertyCallBack(kernel, self, "MAXHP", "Test", "MaxPropertyCallBack");
 	SetPropertyInt(kernel, self, "MAXHP", 400);	
 	
@@ -23,7 +24,7 @@ function Test:AfterInit(kernel, self, arg)
 	local obj = NFCVarList();
 	DoEvent(kernel, self, 1, obj);
 	
-	--event Hearback
+	--Hearback
 	AddHeartBeat(kernel, self, "strHeartBeatName","Test", "HearCallBack", 5, 5);	
 	
 
