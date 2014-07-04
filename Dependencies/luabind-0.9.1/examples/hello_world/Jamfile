@@ -1,0 +1,9 @@
+import modules ;
+
+use-project /luabind : ../../ ;
+
+lib hello_world 
+    : hello_world.cpp /luabind//luabind/<link>static /luabind//lua ;
+
+stage . : hello_world ;
+

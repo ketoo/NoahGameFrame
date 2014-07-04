@@ -1,0 +1,9 @@
+import modules ;
+
+exe intrusive_ptr
+    : intrusive_ptr.cpp 
+      /luabind//luabind
+    ;
+
+stage . : intrusive_ptr ;
+
