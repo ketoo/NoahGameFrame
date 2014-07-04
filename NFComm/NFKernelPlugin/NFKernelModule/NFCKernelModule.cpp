@@ -1795,55 +1795,55 @@ bool NFCKernelModule::AddClassCallBack( const std::string& strClassName, const C
     return m_pEventProcessModule->AddClassCallBack(strClassName, cb);
 }
 
-bool NFCKernelModule::ResgisterCommonHeartBeat( const HEART_BEAT_FUNCTOR_PTR& cb )
-{
-    mtCommonHeartBeatCallBackList.push_back(cb);
-    
-    return true;
-}
+// bool NFCKernelModule::ResgisterCommonHeartBeat( const HEART_BEAT_FUNCTOR_PTR& cb )
+// {
+//     mtCommonHeartBeatCallBackList.push_back(cb);
+//     
+//     return true;
+// }
+// 
+// bool NFCKernelModule::ResgisterCommonEvent( const EVENT_PROCESS_FUNCTOR_PTR& cb )
+// {
+//     mtCommonEventCallBackList.push_back(cb);
+// 
+//     return true;
+// }
 
-bool NFCKernelModule::ResgisterCommonEvent( const EVENT_PROCESS_FUNCTOR_PTR& cb )
-{
-    mtCommonEventCallBackList.push_back(cb);
-
-    return true;
-}
-
-int NFCKernelModule::OnHeartBeatCommonCB( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
-{
-    if (IsContainer(self))
-    {
-        return 0;
-    }
-
-    std::list<HEART_BEAT_FUNCTOR_PTR>::iterator it = mtCommonHeartBeatCallBackList.begin();
-    for (it; it != mtCommonHeartBeatCallBackList.end(); it++)
-    {
-        HEART_BEAT_FUNCTOR_PTR pFunPtr = *it;
-        HEART_BEAT_FUNCTOR* pFun = pFunPtr.get();
-        pFun->operator()(self, strHeartBeat, fTime, nCount, var);
-    }
-
-    return 0;
-}
-
-int NFCKernelModule::OnEventCommonCB( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
-{
-    if (IsContainer(self))
-    {
-        return 0;
-    }
-
-    std::list<EVENT_PROCESS_FUNCTOR_PTR>::iterator it = mtCommonEventCallBackList.begin();
-    for (it; it != mtCommonEventCallBackList.end(); it++)
-    {
-        EVENT_PROCESS_FUNCTOR_PTR pFunPtr = *it;
-        EVENT_PROCESS_FUNCTOR* pFun = pFunPtr.get();
-        pFun->operator()(self, nEventID, var);
-    }
-
-    return 0;
-}
+// int NFCKernelModule::OnHeartBeatCommonCB( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
+// {
+//     if (IsContainer(self))
+//     {
+//         return 0;
+//     }
+// 
+//     std::list<HEART_BEAT_FUNCTOR_PTR>::iterator it = mtCommonHeartBeatCallBackList.begin();
+//     for (it; it != mtCommonHeartBeatCallBackList.end(); it++)
+//     {
+//         HEART_BEAT_FUNCTOR_PTR pFunPtr = *it;
+//         HEART_BEAT_FUNCTOR* pFun = pFunPtr.get();
+//         pFun->operator()(self, strHeartBeat, fTime, nCount, var);
+//     }
+// 
+//     return 0;
+// }
+// 
+// int NFCKernelModule::OnEventCommonCB( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
+// {
+//     if (IsContainer(self))
+//     {
+//         return 0;
+//     }
+// 
+//     std::list<EVENT_PROCESS_FUNCTOR_PTR>::iterator it = mtCommonEventCallBackList.begin();
+//     for (it; it != mtCommonEventCallBackList.end(); it++)
+//     {
+//         EVENT_PROCESS_FUNCTOR_PTR pFunPtr = *it;
+//         EVENT_PROCESS_FUNCTOR* pFun = pFunPtr.get();
+//         pFun->operator()(self, nEventID, var);
+//     }
+// 
+//     return 0;
+// }
 
 bool NFCKernelModule::AddRecordCallBack( const NFIDENTID& self, const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb )
 {

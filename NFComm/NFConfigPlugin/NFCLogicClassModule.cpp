@@ -242,22 +242,26 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCL
     return true;
 }
 
-bool NFCLogicClassModule::AddComponents( rapidxml::xml_node<>* componentRootNode, NFCLogicClass* pClass )
+bool NFCLogicClassModule::AddComponents( rapidxml::xml_node<>* pComponentRootNode, NFCLogicClass* pClass )
 {
-    for (rapidxml::xml_node<>* componentNode = componentRootNode->first_node(); componentNode; componentNode = componentNode->next_sibling())
+    for (rapidxml::xml_node<>* pComponentNode = pComponentRootNode->first_node(); pComponentNode; pComponentNode = pComponentNode->next_sibling())
     {
-        if (componentNode)
+        if (pComponentNode)
         {
-            const char* strComponentName = componentNode->first_attribute("Id")->value();
-            const char* strLanguageModule = componentNode->first_attribute("LanguageModule")->value();
-            if (pClass->GetComponentManager()->GetElement(strComponentName))
+            const char* strComponentName = pComponentNode->first_attribute("Name")->value();
+            const char* strLanguage = pComponentNode->first_attribute("Language")->value();
+            const char* strEnable = pComponentNode->first_attribute("Enable")->value();
+            if(0 == strcmp(strEnable, "true"))
             {
-                //error
-                NFASSERT(0, strComponentName, __FILE__, __FUNCTION__);
-                continue;
-            }
+                if (pClass->GetComponentManager()->GetElement(strComponentName))
+                {
+                    //error
+                    NFASSERT(0, strComponentName, __FILE__, __FUNCTION__);
+                    continue;
+                }
 
-            pClass->GetComponentManager()->AddComponent(std::string(strComponentName), std::string(strLanguageModule));
+                pClass->GetComponentManager()->AddComponent(std::string(strComponentName), std::string(strLanguage));
+            }
         }
     }
 
@@ -293,6 +297,12 @@ bool NFCLogicClassModule::AddClassInclude(const char* pstrClassFilePath, NFCLogi
         AddRecords(pRecordRootNode, pClass);
     }
 
+    rapidxml::xml_node<>* pComponentRootNode = root->first_node("Components");
+    if (pComponentRootNode)
+    {
+        AddComponents(pComponentRootNode, pClass);
+    }
+    
     //pClass->mvIncludeFile.push_back( pstrClassFilePath );
     //and include file
     rapidxml::xml_node<>* pIncludeRootNode = root->first_node("Includes");
