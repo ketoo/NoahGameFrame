@@ -121,6 +121,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua", "Dependencies\lua-5.1
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Luabind", "Dependencies\luabind-0.9.1\win\Luabind\Luabind\Luabind.vcxproj", "{292476FF-A75F-4A78-AECA-676D4A58963A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFJavaScriptPlugin", "NFComm\NFJavaScriptPlugin\NFJavaScriptPlugin.vcxproj", "{CBEAC608-1168-4940-BA94-26001A2D00A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -369,6 +371,12 @@ Global
 		{292476FF-A75F-4A78-AECA-676D4A58963A}.Release|Win32.Build.0 = Release|Win32
 		{292476FF-A75F-4A78-AECA-676D4A58963A}.Release|x64.ActiveCfg = Release|x64
 		{292476FF-A75F-4A78-AECA-676D4A58963A}.Release|x64.Build.0 = Release|x64
+		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Debug|Win32.ActiveCfg = Debug|x64
+		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Debug|x64.ActiveCfg = Debug|x64
+		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Debug|x64.Build.0 = Debug|x64
+		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Release|Win32.ActiveCfg = Release|x64
+		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Release|x64.ActiveCfg = Release|x64
+		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -421,5 +429,6 @@ Global
 		{025E2E28-AC32-410D-A7A6-B25BD5556D28} = {2DCBF986-AFB1-4C2F-A747-109F0CAF2886}
 		{0D7E27F4-11C2-4F1D-8900-CC24297E4397} = {2DCBF986-AFB1-4C2F-A747-109F0CAF2886}
 		{4FE770A5-37BD-4E50-A1AD-8E19770CAA11} = {2DCBF986-AFB1-4C2F-A747-109F0CAF2886}
+		{CBEAC608-1168-4940-BA94-26001A2D00A3} = {2DCBF986-AFB1-4C2F-A747-109F0CAF2886}
 	EndGlobalSection
 EndGlobal
