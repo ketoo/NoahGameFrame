@@ -15,285 +15,8 @@
 #include "NFComm\NFCore\NFIdentID.h"
 #include "NFComm\NFPluginModule\NFIElementInfoModule.h"
 #include "NFComm\NFPluginModule\NFIKernelModule.h"
-
-static  NFIValueList* NFVarList_New()
-{
-    NFIValueList* pVarList = new NFCValueList();
-    return pVarList;
-}
-
-static void NFVarList_Del(NFIValueList* pVarList)
-{
-    if (pVarList)
-    {
-        delete pVarList;
-        pVarList = NULL;
-    }
-}
-
-static void NFVarList_Clear(NFIValueList* pVarList)
-{
-    if (pVarList)
-    {
-        pVarList->Clear();
-    }
-}
-
-static bool NFVarList_IsEmpty(NFIValueList* pVarList)
-{
-    if (pVarList)
-    {
-        pVarList->IsEmpty();
-    }
-
-    return false;
-}
-
-static int NFVarList_GetCount(NFIValueList* pVarList)
-{
-    if (pVarList)
-    {
-        return pVarList->GetCount();
-    }
-
-    return 0;
-}
-
-static VARIANT_TYPE NFVarList_Type(NFIValueList* pVarList, const int index)
-{
-    if (pVarList)
-    {
-        return pVarList->Type(index);
-    }
-
-    return VTYPE_UNKNOWN;
-}
-
-static bool NFVarList_AddInt(NFIValueList* pVarList, const int value)
-{
-    if (pVarList)
-    {
-        return pVarList->AddInt(value);
-    }
-
-    return false;
-}
-
-static bool NFVarList_AddFloat(NFIValueList* pVarList, const float value)
-{
-    if (pVarList)
-    {
-        return pVarList->AddFloat(value);
-    }
-
-    return false;
-}
-
-static bool NFVarList_AddString(NFIValueList* pVarList, const char* value)
-{
-    if (pVarList)
-    {
-        return pVarList->AddString(value);
-    }
-
-    return false;
-}
-
-static bool NFVarList_AddObject(NFIValueList* pVarList, const NFIDENTID& value)
-{
-    if (pVarList)
-    {
-        return pVarList->AddObject(value);
-    }
-
-    return false;
-}
-
-static bool NFVarList_SetInt(NFIValueList* pVarList, const int index, const int value)
-{
-    if (pVarList)
-    {
-        return pVarList->SetInt(index, value);
-    }
-
-    return false;
-}
-
-static bool NFVarList_SetFloat(NFIValueList* pVarList, const int index, const float value)
-{
-    if (pVarList)
-    {
-        return pVarList->SetFloat(index, value);
-    }
-
-    return false;
-}
-
-static bool NFVarList_SetString(NFIValueList* pVarList, const int index, const char* value)
-{
-    if (pVarList)
-    {
-        return pVarList->SetString(index, value);
-    }
-
-    return false;
-}
-
-static bool NFVarList_SetObject(NFIValueList* pVarList, const int index, const NFIDENTID& value)
-{
-    if (pVarList)
-    {
-        return pVarList->SetObject(index, value);
-    }
-
-    return false;
-}
-
-static int NFVarList_IntVal(NFIValueList* pVarList, const int index)
-{
-    if (pVarList)
-    {
-        return pVarList->IntVal(index);
-    }
-
-    return 0;
-}
-
-static float NFVarList_FloatVal(NFIValueList* pVarList, const int index)
-{
-    if (pVarList)
-    {
-        return pVarList->FloatVal(index);
-    }
-
-    return 0.0f;
-}
-
-static const std::string& NFVarList_StringVal(NFIValueList* pVarList, const int index)
-{
-    if (pVarList)
-    {
-        return pVarList->StringVal(index);
-    }
-
-    return NULL_STR;
-}
-
-static NFIDENTID NFVarList_ObjectVal(NFIValueList* pVarList, const int index)
-{
-    if (pVarList)
-    {
-        return pVarList->ObjectVal(index);
-    }
-
-    return 0;
-}
-
-class NFCScriptVarList
-{
-public:
-    NFCScriptVarList()
-    {
-
-    }
-
-    NFCScriptVarList(const NFIValueList& varList)
-    {
-        mVar = varList;
-    }
-
-    void Clear()
-    {
-        mVar.Clear();
-    }
-
-    // ÊÇ·ñÎª¿Õ
-    bool IsEmpty() const
-    {
-        return mVar.IsEmpty();
-    }
-
-    int GetCount() const
-    {
-        return mVar.GetCount();
-    }
-
-    VARIANT_TYPE Type(const int index) const
-    {
-        return mVar.Type(index);
-    }
-
-    bool AddInt(const int value)
-    {
-        return mVar.AddInt(value);
-    }
-
-    bool AddFloat(const float value)
-    {
-        return mVar.AddFloat(value);
-    }
-
-    bool AddString(const char* value)
-    {
-        return mVar.AddString(value);
-    }
-
-    bool AddObject(const NFIDENTID& value)
-    {
-        return mVar.AddObject(value);
-    }
-
-    bool SetInt(const int index, const int value)
-    {
-        return mVar.SetInt(index, value);
-    }
-
-    bool SetFloat(const int index, const float value)
-    {
-        return mVar.SetFloat(index, value);
-    }
-
-    bool SetString(const int index, const char* value)
-    {
-        return mVar.SetString(index, value);
-    }
-
-    bool SetObject(const int index, const NFIDENTID& value)
-    {
-        return mVar.SetObject(index, value);
-    }
-
-    int IntVal(const int index) const
-    {
-        return mVar.IntVal(index);
-    }
-
-    float FloatVal(const int index) const
-    {
-        return mVar.FloatVal(index);
-    }
-
-    const std::string& StringVal(const int index) const
-    {
-        return mVar.StringVal(index);
-    }
-
-    NFIDENTID ObjectVal(const int index) const
-    {
-        return mVar.ObjectVal(index);
-    }
-
-    //////////dont't export this function////////////////////////////////////////////////////////////////
-    const NFIValueList& GetVar() const
-    {
-        return mVar;
-    }
-
-protected:
-private:
-    NFCValueList mVar;
-};
-
+#include "NFComm\NFPluginModule\NFIScriptKernelModule.h"
+#include "NFComm\NFPluginModule\NFILogicClassModule.h"
 
 class NFScriptInt64
 {
@@ -341,63 +64,142 @@ private:
 
 //////////////////////////////////////////////////////////////////////////
 
-class NFCScriptName
-{
-public:
-    bool operator < (const NFCScriptName& id) const
-    {
-        return this->strComponentName.length() < id.strComponentName.length() && this->strFunctionName.length() < id.strFunctionName.length();
-    }
-
-    bool operator == (const NFCScriptName& id) const
-    {
-        if (this->strComponentName != id.strComponentName
-            || this->strFunctionName != id.strFunctionName)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-    NFCScriptName(){}
-
-    NFCScriptName(const std::string& strComponentName, const std::string& strFunctionName)
-    {
-        this->strComponentName = strComponentName;
-        this->strFunctionName = strFunctionName;
-    }
-
-    std::string strComponentName;
-    std::string strFunctionName;
-};
-
-class NFCSriptData
-{
-public:
-    //eventlist: id->ScriptName,FunctionName
-    NFMap<int, NFList<NFCScriptName>> mxEventData;
-
-    //heartbeatlist: name->ScriptName,FunctionName
-    NFMap<std::string, NFList<NFCScriptName>> mxHeartBeatData;
-
-    //propertycblist: name->ScriptName,FunctionName
-    NFMap<std::string, NFList<NFCScriptName>> mxPropertyCallBackData;
-
-    //recordcblist: name->ScriptName,FunctionName
-    NFMap<std::string, NFList<NFCScriptName>> mxRecordCallBackData;
-
-protected:
-private:
-};
-
 class NFIScriptModule
     : public NFILogicModule
 {
 
 public:
-    virtual int DoHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var) = 0;
-    virtual int DoEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIValueList& var) = 0;
+    virtual int DoHeartBeatCommonCB(NFIScriptKernelModule* pScriptKernelModule, const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var)
+    {
+        NFCSriptData* pScriptData = pScriptKernelModule->GetElement(self);
+        if (pScriptData)
+        {
+            NFList<NFCScriptName>* pList = pScriptData->mxHeartBeatData.GetElement(strHeartBeat);
+            if (pList)
+            {
+                NFCScriptName xScriptName;
+                bool bRet = pList->First(xScriptName);
+                while (bRet)
+                {
+                    DoHeartBeatScript(self, strHeartBeat, fTime, nCount, xScriptName.strComponentName, xScriptName.strFunctionName, NFCScriptVarList(var));
+
+                    bRet = pList->Next(xScriptName);
+                }
+            }
+        }
+        return 0;
+    }
+
+    virtual int DoEventCommonCB(NFIScriptKernelModule* pScriptKernelModule, const NFIDENTID& self, const int nEventID, const NFIValueList& var)
+    {
+        NFCSriptData* pScriptData = pScriptKernelModule->GetElement(self);
+        if (pScriptData)
+        {
+            NFList<NFCScriptName>* pList = pScriptData->mxEventData.GetElement(nEventID);
+            if (pList)
+            {
+                NFCScriptName xScriptName;
+                bool bRet = pList->First(xScriptName);
+                while (bRet)
+                {
+                    //(const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg)
+                    DoEventScript(self, nEventID, xScriptName.strComponentName, xScriptName.strFunctionName, NFCScriptVarList(var));
+
+                    bRet = pList->Next(xScriptName);
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    virtual int DoPropertyCommEvent(NFIScriptKernelModule* pScriptKernelModule, const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& arg)
+    {
+        NFCSriptData* pScriptData = pScriptKernelModule->GetElement(self);
+        if (pScriptData)
+        {
+            NFList<NFCScriptName>* pList = pScriptData->mxPropertyCallBackData.GetElement(strPropertyName);
+            if (pList)
+            {
+                NFCScriptName xScriptName;
+                bool bRet = pList->First(xScriptName);
+                while (bRet)
+                {
+                    DoScriptPropertyCallBack(self, strPropertyName, xScriptName.strComponentName, xScriptName.strFunctionName, NFCScriptVarList(oldVar), NFCScriptVarList(newVar), NFCScriptVarList(arg));
+
+                    bRet = pList->Next(xScriptName);
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    virtual int DoRecordCommonEvent(NFIScriptKernelModule* pScriptKernelModule, const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& arg)
+    {
+        NFCSriptData* pScriptData = pScriptKernelModule->GetElement(self);
+        if (pScriptData)
+        {
+            NFList<NFCScriptName>* pList = pScriptData->mxRecordCallBackData.GetElement(strRecordName);
+            if (pList)
+            {
+                NFCScriptName xScriptName;
+                bool bRet = pList->First(xScriptName);
+                while (bRet)
+                {
+                    DoScriptRecordCallBack(self, strRecordName, xScriptName.strComponentName, xScriptName.strFunctionName, nOpType, nRow, nCol, NFCScriptVarList(oldVar), NFCScriptVarList(newVar), NFCScriptVarList(arg));
+
+                    bRet = pList->Next(xScriptName);
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    virtual int DoClassCommonEvent(NFILogicClassModule* pLogicClassModule, const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var)
+    {
+        std::string strSerializationName;
+
+        switch (eClassEvent)
+        {
+        case COE_CREATE_NODATA:
+            strSerializationName = "Init";
+            break;
+
+        case COE_CREATE_HASDATA:
+            strSerializationName = "AfterInit";
+            break;
+
+        case COE_BEFOREDESTROY:
+            strSerializationName = "BeforeShut";
+            break;
+
+        case COE_DESTROY:
+            strSerializationName = "Shut";
+            break;
+
+        default:
+            break;
+        }
+
+        if (!strSerializationName.empty())
+        {
+            NFIComponentManager* pComponentManager = pLogicClassModule->GetClassComponentManager(strClassName);
+            if (pComponentManager)
+            {
+                NFIComponent* pComponent = pComponentManager->First();
+                while (pComponent && pComponent->Enable())
+                {
+                    DoScript(self, pComponent->ComponentName(), strSerializationName, NFCScriptVarList(var));
+
+                    pComponent = pComponentManager->Next();
+                }
+            }
+        }
+
+        return 0;
+    }
 
     //call script
     virtual int DoScript(const NFIDENTID& self, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg) = 0;
@@ -407,10 +209,9 @@ public:
 
     virtual int DoScriptPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& oldVar, const NFCScriptVarList& newVar, const NFCScriptVarList& arg) = 0;
     virtual int DoScriptRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCScriptVarList& oldVar, const NFCScriptVarList& newVar, const NFCScriptVarList& arg) = 0;
-
 };
 
-class NFCScriptKernelModule : public NFMap<NFIDENTID, NFCSriptData>
+class NFCScriptKernelModule : public NFIScriptKernelModule
 {
 public:
     NFCScriptKernelModule(NFIKernelModule* pKernelModule, NFIScriptModule* pScriptModule, NFIElementInfoModule* pElementInfoModule, NFIEventProcessModule* pEventProcessModule)
@@ -484,8 +285,7 @@ public:
     bool DoEvent(const NFIDENTID& objectID, const int nEventID, const NFCScriptVarList& valueList)
     {
         //do c++ event
-        m_pEventProcessModule->DoEvent(objectID, nEventID, valueList.GetVar());
-        return false;
+        return m_pEventProcessModule->DoEvent(objectID, nEventID, valueList.GetVar());
     }
 
     bool ExistElement(const std::string& strConfigName)
@@ -580,7 +380,7 @@ public:
 
     int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIValueList& var)
     {
-        m_pScriptModule->DoEventCommonCB(self, nEventID, var);
+        m_pScriptModule->DoEventCommonCB(this, self, nEventID, var);
         return 0;
     }
 
@@ -611,7 +411,7 @@ public:
     
     int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var)
     {
-        m_pScriptModule->DoHeartBeatCommonCB(self, strHeartBeat, fTime, nCount, var);
+        m_pScriptModule->DoHeartBeatCommonCB(this, self, strHeartBeat, fTime, nCount, var);
         return 0;
     }
 
@@ -793,6 +593,185 @@ private:
     NFIScriptModule*m_pScriptModule;
     NFIEventProcessModule* m_pEventProcessModule;
 };
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+static  NFIValueList* NFVarList_New()
+{
+    NFIValueList* pVarList = new NFCValueList();
+    return pVarList;
+}
+
+static void NFVarList_Del(NFIValueList* pVarList)
+{
+    if (pVarList)
+    {
+        delete pVarList;
+        pVarList = NULL;
+    }
+}
+
+static void NFVarList_Clear(NFIValueList* pVarList)
+{
+    if (pVarList)
+    {
+        pVarList->Clear();
+    }
+}
+
+static bool NFVarList_IsEmpty(NFIValueList* pVarList)
+{
+    if (pVarList)
+    {
+        pVarList->IsEmpty();
+    }
+
+    return false;
+}
+
+static int NFVarList_GetCount(NFIValueList* pVarList)
+{
+    if (pVarList)
+    {
+        return pVarList->GetCount();
+    }
+
+    return 0;
+}
+
+static VARIANT_TYPE NFVarList_Type(NFIValueList* pVarList, const int index)
+{
+    if (pVarList)
+    {
+        return pVarList->Type(index);
+    }
+
+    return VTYPE_UNKNOWN;
+}
+
+static bool NFVarList_AddInt(NFIValueList* pVarList, const int value)
+{
+    if (pVarList)
+    {
+        return pVarList->AddInt(value);
+    }
+
+    return false;
+}
+
+static bool NFVarList_AddFloat(NFIValueList* pVarList, const float value)
+{
+    if (pVarList)
+    {
+        return pVarList->AddFloat(value);
+    }
+
+    return false;
+}
+
+static bool NFVarList_AddString(NFIValueList* pVarList, const char* value)
+{
+    if (pVarList)
+    {
+        return pVarList->AddString(value);
+    }
+
+    return false;
+}
+
+static bool NFVarList_AddObject(NFIValueList* pVarList, const NFIDENTID& value)
+{
+    if (pVarList)
+    {
+        return pVarList->AddObject(value);
+    }
+
+    return false;
+}
+
+static bool NFVarList_SetInt(NFIValueList* pVarList, const int index, const int value)
+{
+    if (pVarList)
+    {
+        return pVarList->SetInt(index, value);
+    }
+
+    return false;
+}
+
+static bool NFVarList_SetFloat(NFIValueList* pVarList, const int index, const float value)
+{
+    if (pVarList)
+    {
+        return pVarList->SetFloat(index, value);
+    }
+
+    return false;
+}
+
+static bool NFVarList_SetString(NFIValueList* pVarList, const int index, const char* value)
+{
+    if (pVarList)
+    {
+        return pVarList->SetString(index, value);
+    }
+
+    return false;
+}
+
+static bool NFVarList_SetObject(NFIValueList* pVarList, const int index, const NFIDENTID& value)
+{
+    if (pVarList)
+    {
+        return pVarList->SetObject(index, value);
+    }
+
+    return false;
+}
+
+static int NFVarList_IntVal(NFIValueList* pVarList, const int index)
+{
+    if (pVarList)
+    {
+        return pVarList->IntVal(index);
+    }
+
+    return 0;
+}
+
+static float NFVarList_FloatVal(NFIValueList* pVarList, const int index)
+{
+    if (pVarList)
+    {
+        return pVarList->FloatVal(index);
+    }
+
+    return 0.0f;
+}
+
+static const std::string& NFVarList_StringVal(NFIValueList* pVarList, const int index)
+{
+    if (pVarList)
+    {
+        return pVarList->StringVal(index);
+    }
+
+    return NULL_STR;
+}
+
+static NFIDENTID NFVarList_ObjectVal(NFIValueList* pVarList, const int index)
+{
+    if (pVarList)
+    {
+        return pVarList->ObjectVal(index);
+    }
+
+    return 0;
+}
+
+//////////////////////////////////////////////////////////////////////////
 
 static bool KernelModule_HasEventCallBack(const NFScriptInt64& nPtrKernelModule,
                         const NFScriptInt64& objectID, const int nEventID)
@@ -1255,5 +1234,7 @@ static bool KernelModule_AddRecord(const NFScriptInt64& nPtrKernelModule, const 
 
     return false;
 }
+
+
 
 #endif
