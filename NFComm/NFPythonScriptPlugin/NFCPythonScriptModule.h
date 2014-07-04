@@ -47,17 +47,10 @@ protected:
     virtual int OnPropertyCommEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& arg);
     virtual int OnRecordCommonEvent(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& arg);
     virtual int OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var);
-    
-    virtual int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var);
-    virtual int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIValueList& var);
-
-    virtual int DoHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var);
-    virtual int DoEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIValueList& var);
 
 protected:
 
-    NFCScriptKernelModule* m_pScriptKernelModule;
-    
+    NFIScriptKernelModule* m_pScriptKernelModule;
     NFIElementInfoModule* m_pElementInfoModule;
     NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;

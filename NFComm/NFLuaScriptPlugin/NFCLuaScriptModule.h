@@ -40,9 +40,6 @@ public:
     virtual bool AfterInit();
     virtual bool BeforeShut();
 
-    virtual int DoHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var);
-    virtual int DoEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIValueList& var);
-
     //call script
     virtual int DoScript(const NFIDENTID& self, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg);
     virtual int DoEventScript(const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg);
@@ -64,8 +61,8 @@ protected:
     bool CheckCompomentStatus(const std::string& strComponentName);
 
 protected:
-    NFCScriptKernelModule* m_pScriptKernelModule;
 
+    NFIScriptKernelModule* m_pScriptKernelModule;
     NFIElementInfoModule* m_pElementInfoModule;
     NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
