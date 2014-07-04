@@ -27,7 +27,7 @@ bool NFCPythonScriptModule::AfterInit()
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pElementInfoModule);
 
-    m_pScriptKernelModule = new NFCScriptKernelModule(m_pKernelModule, this, m_pElementInfoModule);
+    m_pScriptKernelModule = new NFCScriptKernelModule(m_pKernelModule, this, m_pElementInfoModule, m_pEventProcessModule);
 
     //add all callback
     m_pKernelModule->ResgisterCommonPropertyEvent(this, &NFCPythonScriptModule::OnPropertyCommEvent);
@@ -196,6 +196,16 @@ int NFCPythonScriptModule::DoHeartBeatScript( const NFIDENTID& self, const std::
 }
 
 int NFCPythonScriptModule::DoEventScript( const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg )
+{
+    return 0;
+}
+
+int NFCPythonScriptModule::DoHeartBeatCommonCB( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
+{
+    return 0;
+}
+
+int NFCPythonScriptModule::DoEventCommonCB( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
 {
     return 0;
 }
