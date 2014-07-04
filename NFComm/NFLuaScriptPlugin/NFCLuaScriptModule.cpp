@@ -78,133 +78,21 @@ bool NFCLuaScriptModule::BeforeShut()
 
 int NFCLuaScriptModule::OnPropertyCommEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& arg )
 {
-    NFCSriptData* pScriptData = m_pScriptKernelModule->GetElement(self);
-    if (pScriptData)
-    {
-        NFList<NFCScriptName>* pList = pScriptData->mxPropertyCallBackData.GetElement(strPropertyName);
-        if (pList)
-        {
-            NFCScriptName xScriptName;
-            bool bRet = pList->First(xScriptName);
-            while (bRet)
-            {
-                DoScriptPropertyCallBack(self, strPropertyName, xScriptName.strComponentName, xScriptName.strFunctionName, NFCScriptVarList(oldVar), NFCScriptVarList(newVar), NFCScriptVarList(arg));
-
-                bRet = pList->Next(xScriptName);
-            }
-        }
-    }
+    DoPropertyCommEvent(m_pScriptKernelModule, self,strPropertyName, oldVar, newVar, arg);
 
     return 0;
 }
 
 int NFCLuaScriptModule::OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& arg )
 {
-    NFCSriptData* pScriptData = m_pScriptKernelModule->GetElement(self);
-    if (pScriptData)
-    {
-        NFList<NFCScriptName>* pList = pScriptData->mxRecordCallBackData.GetElement(strRecordName);
-        if (pList)
-        {
-            NFCScriptName xScriptName;
-            bool bRet = pList->First(xScriptName);
-            while (bRet)
-            {
-                DoScriptRecordCallBack(self, strRecordName, xScriptName.strComponentName, xScriptName.strFunctionName, nOpType, nRow, nCol, NFCScriptVarList(oldVar), NFCScriptVarList(newVar), NFCScriptVarList(arg));
-
-                bRet = pList->Next(xScriptName);
-            }
-        }
-    }
+    DoRecordCommonEvent(m_pScriptKernelModule, self,strRecordName, nOpType, nRow, nCol, oldVar, newVar, arg);
 
     return 0;
 }
 
 int NFCLuaScriptModule::OnClassCommonEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var )
 {
-    std::string strSerializationName;
-
-    switch (eClassEvent)
-    {
-    case COE_CREATE_NODATA:
-        strSerializationName = "Init";
-        break;
-
-    case COE_CREATE_HASDATA:
-        strSerializationName = "AfterInit";
-        break;
-
-    case COE_BEFOREDESTROY:
-        strSerializationName = "BeforeShut";
-        break;
-
-    case COE_DESTROY:
-        strSerializationName = "Shut";
-        break;
-
-    default:
-        break;
-    }
-
-    if (!strSerializationName.empty())
-    {
-        NFIComponentManager* pComponentManager = m_pLogicClassModule->GetClassComponentManager(strClassName);
-        if (pComponentManager)
-        {
-            NFIComponent* pComponent = pComponentManager->First();
-            while (pComponent && pComponent->Enable())
-            {
-                DoScript(self, pComponent->ComponentName(), strSerializationName, NFCScriptVarList(var));
-
-                pComponent = pComponentManager->Next();
-            }
-        }
-    }
-
-    return 0;
-}
-
-int NFCLuaScriptModule::DoHeartBeatCommonCB( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
-{
-    NFCSriptData* pScriptData = m_pScriptKernelModule->GetElement(self);
-    if (pScriptData)
-    {
-        NFList<NFCScriptName>* pList = pScriptData->mxHeartBeatData.GetElement(strHeartBeat);
-        if (pList)
-        {
-            NFCScriptName xScriptName;
-            bool bRet = pList->First(xScriptName);
-            while (bRet)
-            {
-                DoHeartBeatScript(self, strHeartBeat, fTime, nCount, xScriptName.strComponentName, xScriptName.strFunctionName, NFCScriptVarList(var));
-
-                bRet = pList->Next(xScriptName);
-            }
-        }
-    }
-
-    return 0;
-}
-
-int NFCLuaScriptModule::DoEventCommonCB( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
-{
-    NFCSriptData* pScriptData = m_pScriptKernelModule->GetElement(self);
-    if (pScriptData)
-    {
-        NFList<NFCScriptName>* pList = pScriptData->mxEventData.GetElement(nEventID);
-        if (pList)
-        {
-            NFCScriptName xScriptName;
-            bool bRet = pList->First(xScriptName);
-            while (bRet)
-            {
-                //(const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg)
-                DoEventScript(self, nEventID, xScriptName.strComponentName, xScriptName.strFunctionName, NFCScriptVarList(var));
-
-                bRet = pList->Next(xScriptName);
-            }
-        }
-    }
+    DoClassCommonEvent(m_pLogicClassModule, self, strClassName, eClassEvent, var);
 
     return 0;
 }
