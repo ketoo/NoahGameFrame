@@ -86,7 +86,9 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(Solutio
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName)_d.exe
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName)_d.pdb
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName)_d.exe
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName)_d.pdb</Command>
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName)_d.pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName)_d.exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName)_d.pdb</Command>
     </PostBuildEvent>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -128,7 +130,9 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName).exe
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName).pdb
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName).exe
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName).pdb</Command>
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName).pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName).exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName).pdb</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

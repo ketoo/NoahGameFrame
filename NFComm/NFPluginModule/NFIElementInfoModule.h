@@ -14,6 +14,7 @@
 #include "NFComm/NFCore/NFCValueList.h"
 #include "NFComm/NFCore/NFCPropertyManager.h"
 #include "NFComm/NFCore/NFCRecordManager.h"
+#include "NFComm/NFCore/NFIComponentManager.h"
 
 class NFIElementInfoModule
     : public NFILogicModule
@@ -30,6 +31,7 @@ public:
 
     virtual NFIPropertyManager* GetPropertyManager(const std::string& strConfigName) = 0;
     virtual NFIRecordManager* GetRecordManager(const std::string& strConfigName) = 0;
+    virtual NFIComponentManager* GetComponentManager(const std::string& strConfigName) = 0;
 
     virtual int QueryPropertyInt(const std::string& strConfigName, const std::string& strPropertyName) = 0;
     virtual float QueryPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName) = 0;

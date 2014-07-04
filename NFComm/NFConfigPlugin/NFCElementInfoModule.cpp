@@ -391,3 +391,14 @@ bool NFCElementInfoModule::Clear()
     mbLoaded = false;
 	return true;
 }
+
+NFIComponentManager* NFCElementInfoModule::GetComponentManager( const std::string& strConfigName )
+{
+    ElementConfigInfo* pElementInfo = GetElement(strConfigName);
+    if (pElementInfo)
+    {
+        return pElementInfo->GetComponentManager();
+    }
+
+    return NULL;
+}
