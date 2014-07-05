@@ -150,7 +150,7 @@ int NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess(const NFIPacket& ms
 int NFCWorldNet_ServerModule::OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
 {
     if (4 != var.GetCount()
-        || !var.TypeEx(VARIANT_TYPE::VTYPE_STRING, VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_UNKNOWN))
+        || !var.TypeEx(VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_STRING, VARIANT_TYPE::VTYPE_UNKNOWN))
     {
         return 0;
     }
@@ -180,7 +180,7 @@ int NFCWorldNet_ServerModule::OnSelectServerEvent(const NFIDENTID& object, const
         xData.set_world_port(pServerData->pData->server_port());
         xData.set_world_key(strAccount);
 
-        SendMsgPB(NFMsg::EGMI_REQ_CONNECT_WORLD, xData, pServerData->nFD);
+        SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xData, pServerData->nFD);
 
         //½á¹û
         NFCValueList varResult;
@@ -207,7 +207,7 @@ int NFCWorldNet_ServerModule::OnProxyServerRegisteredProcess(const NFIPacket& ms
         if (!pServerData)
         {
             pServerData = new ServerData();
-            mGameMap.AddElement(pData->server_id(), pServerData);
+            mProxyMap.AddElement(pData->server_id(), pServerData);
         }
 
         pServerData->nFD = msg.GetFd();

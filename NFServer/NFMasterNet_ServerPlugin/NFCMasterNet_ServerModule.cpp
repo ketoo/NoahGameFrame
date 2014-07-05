@@ -233,7 +233,7 @@ int NFCMasterNet_ServerModule::OnSelectServerResultProcess(const NFIPacket& msg)
 		return 0;
 	}
 
-    ServerData* pServerData =  mLoginMap.GetElement(xMsg.world_id());
+    ServerData* pServerData =  mLoginMap.GetElement(xMsg.login_id());
     if (!pServerData)
     {
         return 0;
