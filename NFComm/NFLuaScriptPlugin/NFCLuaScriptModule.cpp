@@ -128,6 +128,8 @@ bool NFCLuaScriptModule::CheckCompomentStatus(const std::string& strComponentNam
 {
     if( !CheckCompomentStatus(strComponentName))
     {
+        assert(0);
+
         return false;
     }
 
@@ -141,6 +143,7 @@ bool NFCLuaScriptModule::CheckCompomentStatus(const std::string& strComponentNam
     luabind::object objFun = objCompoment[strFuncName];
     if (luabind::type(objFun) != LUA_TFUNCTION)
     {
+        assert(0);
         return false;
     }
 
