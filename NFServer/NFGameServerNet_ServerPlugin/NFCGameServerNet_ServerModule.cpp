@@ -68,7 +68,7 @@ bool NFCGameServerNet_ServerModule::Shut()
 
 bool NFCGameServerNet_ServerModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
-    return true;
+    return m_pNet->Execute(fLasFrametime, fStartedTime);
 }
 
 int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
@@ -104,10 +104,13 @@ int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
         OnClienLeaveGameProcess(msg);
         break;
     case NFMsg::EGameMsgID::EGMI_REQ_ROLE_LIST:
+        OnReqiureRoleListProcess(msg);
         break;
     case NFMsg::EGameMsgID::EGMI_REQ_CREATE_ROLE:
+        OnCreateRoleGameProcess(msg);
         break;
     case NFMsg::EGameMsgID::EGMI_REQ_DELETE_ROLE:
+        OnDeleteRoleGameProcess(msg);
         break;
     case NFMsg::EGameMsgID::EGMI_REQ_RECOVER_ROLE:
         break;
@@ -1375,6 +1378,35 @@ int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent( const NFIDENTID& self
 int NFCGameServerNet_ServerModule::OnChatResultEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
 {
     return 0;
+}
+
+void NFCGameServerNet_ServerModule::OnReqiureRoleListProcess( const NFIPacket& msg )
+{
+    //fd
+    int64_t nPlayerID = 0;
+    NFMsg::ReqRoleList xMsg;
+    if (!RecivePB(msg, xMsg, nPlayerID))
+    {
+        return;
+    }
+
+    NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
+    NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
+    pData->set_career(0);
+    pData->set_sex(0);
+    pData->set_race(0);
+    pData->set_noob_name("test_role");
+    pData->set_game_id(xMsg.game_id());  
+    pData->set_role_level(0);
+    pData->set_role_level(0);
+    pData->set_delete_time(0);
+    pData->set_reg_time(0);
+    pData->set_last_offline_time(0);
+    pData->set_last_offline_ip(0);
+    pData->set_view_record("");
+
+
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, msg.GetFd(), nPlayerID);
 }
 
 void NFCGameServerNet_ServerModule::OnCreateRoleGameProcess( const NFIPacket& msg )
