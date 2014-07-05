@@ -18,51 +18,6 @@
 #include "NFComm\NFPluginModule\NFIScriptKernelModule.h"
 #include "NFComm\NFPluginModule\NFILogicClassModule.h"
 
-class NFScriptInt64
-{
-public:
-    NFScriptInt64(){};
-    NFScriptInt64(const NFIDENTID& ID)
-    {
-        mID = ID;
-    }
-
-    NFIDENTID ObjectVal() const
-    {
-        return mID;
-    }
-
-    NFINT64 Int64Val() const
-    {
-        return mID.nData64;
-    }
-
-public:
-    NFINT32 GetA()
-    {
-        return mID.nIdent;
-    }
-
-    NFINT32 GetB()
-    {
-        return mID.nSerial;
-    }
-
-    void SetA( NFINT32 var)
-    {
-        mID.nIdent = var;
-    }
-
-    void SetB( NFINT32 var)
-    {
-        mID.nSerial = var;
-    }
-
-private:
-    NFIDENTID mID;
-};
-
-//////////////////////////////////////////////////////////////////////////
 
 class NFIScriptModule
     : public NFILogicModule
@@ -578,6 +533,20 @@ public:
     bool AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction)
     {
         return m_pKernelModule->AddProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, nIndex, strScriptFunction);
+    }
+
+    bool AddRow(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& var)
+    {
+        NFIRecord* pRecord = m_pKernelModule->FindRecord(self, strRecordName);
+        if ( pRecord )
+        {
+            if (pRecord->AddRow(-1,var) >= 0)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFCScriptVarList& varData, const NFCScriptVarList& varKey, const NFCScriptVarList& varDesc, const NFCScriptVarList& varTag, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex)
@@ -1101,7 +1070,7 @@ static const std::string& KernelModule_QueryPropertyString(const NFScriptInt64& 
     return NULL_STR;
 }
 
-static NFIDENTID KernelModule_QueryPropertyObject(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+static NFScriptInt64 KernelModule_QueryPropertyObject(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
                                      const std::string& strPropertyName)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
@@ -1222,6 +1191,17 @@ static bool KernelModule_AddProperty(const NFScriptInt64& nPtrKernelModule, cons
     return false;
 }
 
+static bool KernelModule_AddRow(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self,
+                                     const std::string& strRecordName, const NFCScriptVarList& var)
+{
+    NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
+    if (pScriptKernelModule)
+    {
+        return pScriptKernelModule->AddRow(self.ObjectVal(), strRecordName, var.GetVar());
+    }
+
+    return false;
+}
 static bool KernelModule_AddRecord(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, const std::string& strRecordName, 
                       const NFCScriptVarList& varData, const NFCScriptVarList& varKey, const NFCScriptVarList& varDesc, const NFCScriptVarList& varTag, 
                       const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex)
