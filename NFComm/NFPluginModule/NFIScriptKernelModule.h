@@ -67,6 +67,50 @@ protected:
 private:
 };
 
+class NFScriptInt64
+{
+public:
+    NFScriptInt64(){};
+    NFScriptInt64(const NFIDENTID& ID)
+    {
+        mID = ID;
+    }
+
+    NFIDENTID ObjectVal() const
+    {
+        return mID;
+    }
+
+    NFINT64 Int64Val() const
+    {
+        return mID.nData64;
+    }
+
+public:
+    NFINT32 GetIdent()
+    {
+        return mID.nIdent;
+    }
+
+    NFINT32 GetnSerial()
+    {
+        return mID.nSerial;
+    }
+
+    void SetIdent( NFINT32 var)
+    {
+        mID.nIdent = var;
+    }
+
+    void SetnSerial( NFINT32 var)
+    {
+        mID.nSerial = var;
+    }
+
+private:
+    NFIDENTID mID;
+};
+
 class NFCScriptVarList
 {
 public:
@@ -116,9 +160,9 @@ public:
         return mVar.AddString(value);
     }
 
-    bool AddObject(const NFIDENTID& value)
+    bool AddObject(const NFScriptInt64& value)
     {
-        return mVar.AddObject(value);
+        return mVar.AddObject(value.ObjectVal());
     }
 
     bool SetInt(const int index, const int value)
@@ -136,9 +180,9 @@ public:
         return mVar.SetString(index, value);
     }
 
-    bool SetObject(const int index, const NFIDENTID& value)
+    bool SetObject(const int index, const NFScriptInt64& value)
     {
-        return mVar.SetObject(index, value);
+        return mVar.SetObject(index, value.ObjectVal());
     }
 
     int IntVal(const int index) const
@@ -156,7 +200,7 @@ public:
         return mVar.StringVal(index);
     }
 
-    NFIDENTID ObjectVal(const int index) const
+    NFScriptInt64 ObjectVal(const int index) const
     {
         return mVar.ObjectVal(index);
     }
