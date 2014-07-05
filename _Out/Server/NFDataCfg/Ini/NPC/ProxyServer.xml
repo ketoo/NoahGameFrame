@@ -1,4 +1,0 @@
-<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
-<XML>
-	<Object ID="ProxyServer" CpuCount="8" PassWord="kytoo" Port="20000" MaxConnect="20000" OnlineCount="0" SqlIP="" SqlPort="0" SqlAccount="" SqlPwd="" ServerIP="127.0.0.1" ServerPort="8000" ServerID="0" ServerPwd="kytoo" Name="" IsOK="0"/>
-</XML>
