@@ -47,7 +47,7 @@ void NFCGameServerNet_ClientModule::Register()
     pData->set_server_name(strName);
     pData->set_server_cur_count(0);
     pData->set_server_ip(strServerIP);
-    pData->set_server_port(nServerPort);
+    pData->set_server_port(nPort);
     pData->set_server_max_online(50000);
     pData->set_server_state(NFMsg::EST_NARMAL);
 
@@ -59,7 +59,7 @@ void NFCGameServerNet_ClientModule::Register()
 void NFCGameServerNet_ClientModule::UnRegister()
 {
 	const int nServerID = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerID");
-	const std::string& strServerIP = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "ServerIP");
+	const std::string& strSelfIP = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "IP");
 	const std::string& strName = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "Name");
 	const int nServerPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerPort");
 	const int nMaxConnect = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "MaxConnect");
@@ -72,7 +72,7 @@ void NFCGameServerNet_ClientModule::UnRegister()
     pData->set_server_id(nServerID);
     pData->set_server_name(strName);
     pData->set_server_cur_count(0);
-    pData->set_server_ip(strServerIP);
+    pData->set_server_ip(strSelfIP);
     pData->set_server_port(nPort);
     pData->set_server_max_online(50000);
     pData->set_server_state(NFMsg::EST_MAINTEN);
@@ -381,6 +381,7 @@ int NFCGameServerNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF
     else  if (eEvent == NF_NET_EVENT_CONNECTED)
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+        OnClientConnected(nSockIndex);
     }
 
     return 0;
@@ -394,5 +395,5 @@ void NFCGameServerNet_ClientModule::OnClientDisconnect( const int nAddress )
 
 void NFCGameServerNet_ClientModule::OnClientConnected( const int nAddress )
 {
-
+    Register();
 }
