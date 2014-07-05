@@ -126,6 +126,8 @@ public:
 		return m_pNet;
 	}
 
+    //if you are a client
+    virtual int GetFD(){return 0;}
 
 	std::string mstrConfigIdent;
 
