@@ -441,6 +441,14 @@ namespace NFMsg
       get { return _game_id; }
       set { _game_id = value; }
     }
+    private byte[] _account = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"account", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] account
+    {
+      get { return _account; }
+      set { _account = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -451,124 +459,82 @@ namespace NFMsg
   {
     public RoleLiteInfo() {}
     
-    private int _char_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"char_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int char_id
-    {
-      get { return _char_id; }
-      set { _char_id = value; }
-    }
     private int _career;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"career", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"career", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int career
     {
       get { return _career; }
       set { _career = value; }
     }
     private int _sex;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"sex", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"sex", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int sex
     {
       get { return _sex; }
       set { _sex = value; }
     }
     private int _race;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"race", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"race", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int race
     {
       get { return _race; }
       set { _race = value; }
     }
     private byte[] _noob_name;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"noob_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"noob_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public byte[] noob_name
     {
       get { return _noob_name; }
       set { _noob_name = value; }
     }
     private int _game_id;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int game_id
     {
       get { return _game_id; }
       set { _game_id = value; }
     }
-    private int _char_level;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"char_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int char_level
+    private int _role_level;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"role_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int role_level
     {
-      get { return _char_level; }
-      set { _char_level = value; }
-    }
-    private int _char_exp;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"char_exp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int char_exp
-    {
-      get { return _char_exp; }
-      set { _char_exp = value; }
-    }
-    private int _money;
-    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"money", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int money
-    {
-      get { return _money; }
-      set { _money = value; }
-    }
-    private int _cash;
-    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"cash", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int cash
-    {
-      get { return _cash; }
-      set { _cash = value; }
-    }
-    private int _vip_level;
-    [global::ProtoBuf.ProtoMember(11, IsRequired = true, Name=@"vip_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int vip_level
-    {
-      get { return _vip_level; }
-      set { _vip_level = value; }
+      get { return _role_level; }
+      set { _role_level = value; }
     }
     private int _delete_time;
-    [global::ProtoBuf.ProtoMember(12, IsRequired = true, Name=@"delete_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"delete_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int delete_time
     {
       get { return _delete_time; }
       set { _delete_time = value; }
     }
     private int _reg_time;
-    [global::ProtoBuf.ProtoMember(13, IsRequired = true, Name=@"reg_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"reg_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int reg_time
     {
       get { return _reg_time; }
       set { _reg_time = value; }
     }
     private int _last_offline_time;
-    [global::ProtoBuf.ProtoMember(15, IsRequired = true, Name=@"last_offline_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"last_offline_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int last_offline_time
     {
       get { return _last_offline_time; }
       set { _last_offline_time = value; }
     }
     private int _last_offline_ip;
-    [global::ProtoBuf.ProtoMember(16, IsRequired = true, Name=@"last_offline_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"last_offline_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int last_offline_ip
     {
       get { return _last_offline_ip; }
       set { _last_offline_ip = value; }
     }
     private byte[] _view_record;
-    [global::ProtoBuf.ProtoMember(17, IsRequired = true, Name=@"view_record", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(11, IsRequired = true, Name=@"view_record", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public byte[] view_record
     {
       get { return _view_record; }
       set { _view_record = value; }
-    }
-    private byte[] _pet_record;
-    [global::ProtoBuf.ProtoMember(18, IsRequired = true, Name=@"pet_record", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public byte[] pet_record
-    {
-      get { return _pet_record; }
-      set { _pet_record = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
