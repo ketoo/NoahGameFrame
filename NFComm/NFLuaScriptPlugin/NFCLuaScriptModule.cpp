@@ -73,6 +73,9 @@ bool NFCLuaScriptModule::BeforeShut()
     delete m_pScriptKernelModule;
     m_pScriptKernelModule = NULL;
 
+    lua_close(mpLuaState);
+    mpLuaState = NULL;
+
     return true;
 }
 
