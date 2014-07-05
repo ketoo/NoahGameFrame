@@ -56,6 +56,9 @@ protected:
     int OnConnectKeyProcess(const NFIPacket& msg);
     int OnReqServerListProcess(const NFIPacket& msg);
     int OnSelectServerProcess(const NFIPacket& msg);
+    int OnReqRoleListProcess(const NFIPacket& msg);
+
+
     int OnTranspondProcess(const NFIPacket& msg);
 
     //客户端的连接60秒删掉
