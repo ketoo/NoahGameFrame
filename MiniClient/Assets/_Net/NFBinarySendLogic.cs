@@ -240,10 +240,52 @@ public class NFBinarySendLogic
         net.mPlayerState = NFNet.PLAYER_STATE.E_PLAYER_LOGINING;
     }
 
-    public void RequireServerList()
+    public void RequireWorldList()
     {
         NFMsg.ReqServerList xData = new NFMsg.ReqServerList();
         xData.type = NFMsg.ReqServerListType.RSLT_WORLD_SERVER;
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqServerList>(stream, xData);
+
+        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_WORLD_LIST, stream);
+    }
+
+    public void RequireConnectWorld(int nWorldID)
+    {
+        NFMsg.ReqConnectWorld xData = new NFMsg.ReqConnectWorld();
+        xData.world_id = nWorldID;
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqConnectWorld>(stream, xData);
+
+        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_CONNECT_WORLD, stream);
+    }
+
+    public void RequireVerifyWorldKey(string strAccount, string strKey)
+    {
+        NFMsg.ReqAccountLogin xData = new NFMsg.ReqAccountLogin();
+        xData.account = System.Text.Encoding.Default.GetBytes(strAccount);
+        xData.password = System.Text.Encoding.Default.GetBytes("");
+        xData.security_code = System.Text.Encoding.Default.GetBytes(strKey);
+        xData.signBuff = System.Text.Encoding.Default.GetBytes("");
+        xData.clientVersion = 1;
+        xData.loginMode = 0;
+        xData.clientIP = 0;
+        xData.clientMAC = 0;
+        xData.device_info = System.Text.Encoding.Default.GetBytes("");
+        xData.extra_info = System.Text.Encoding.Default.GetBytes("");
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqAccountLogin>(stream, xData);
+
+        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_CONNECT_KEY, stream);
+    }
+
+    public void RequireServerList()
+    {
+        NFMsg.ReqServerList xData = new NFMsg.ReqServerList();
+        xData.type = NFMsg.ReqServerListType.RSLT_GAMES_ERVER;
 
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqServerList>(stream, xData);
@@ -262,9 +304,8 @@ public class NFBinarySendLogic
         SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_SELECT_SERVER, stream);
     }
 
-    public void RequireCharList(int nGameID)
+    public void RequireRoleList(int nGameID)
     {
-
         NFMsg.ReqRoleList xData = new NFMsg.ReqRoleList();
         xData.game_id = nGameID;
 
@@ -275,7 +316,7 @@ public class NFBinarySendLogic
         SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_ROLE_LIST, stream);
     }
 
-    public void RequireCreateChar(string strRoleName, int byCareer, int bySex, int nGameID)
+    public void RequireCreateRole(string strRoleName, int byCareer, int bySex, int nGameID)
     {
         if (strRoleName.Length >= 20 || strRoleName.Length < 4)
         {
@@ -300,7 +341,7 @@ public class NFBinarySendLogic
         SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_CREATE_ROLE, stream);
     }
 
-    public void RequireDelChar(string strRoleName)
+    public void RequireDelRole(string strRoleName)
     {
         NFMsg.ReqDeleteRole xData = new NFMsg.ReqDeleteRole();
         xData.name = UnicodeEncoding.Default.GetBytes(strRoleName);

@@ -17,6 +17,7 @@ namespace NFTCPClient
 	public class NFCoreExListener
 	{
         NFNet mNet = null;
+        public ArrayList aWorldList = new ArrayList();
         public ArrayList aServerList = new ArrayList();
         public ArrayList aCharList = new ArrayList();
         public ArrayList aObjectList = new ArrayList();
@@ -47,7 +48,7 @@ namespace NFTCPClient
 
             FinalLog();
 
-            fs = new FileStream("./log/MsgLog_" + mNet.strLoginAccount + ".txt", FileMode.Create);
+            fs = new FileStream("./log/MsgLog_" + mNet.strAccount + ".txt", FileMode.Create);
             sw = new StreamWriter(fs, Encoding.Default);
         }
 
@@ -77,11 +78,13 @@ namespace NFTCPClient
 		{
 
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_LOGIN, EGMI_ACK_LOGIN);
-            mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_WORLS_LIST, EGMI_ACK_WORLD_LIST);
+            mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_WORLD_LIST, EGMI_ACK_WORLD_LIST);
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_EVENT_RESULT, EGMI_EVENT_RESULT);
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_ROLE_LIST, EGMI_ACK_ROLE_LIST);
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_CONNECT_WORLD, EGMI_ACK_CONNECT_WORLD);
-
+            mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_CONNECT_KEY, EGMI_ACK_CONNECT_KEY);
+            mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_SELECT_SERVER, EGMI_ACK_SELECT_SERVER);
+            
 
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_OBJECT_ENTRY, EGMI_ACK_OBJECT_ENTRY);
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_OBJECT_LEAVE, EGMI_ACK_OBJECT_LEAVE);
@@ -130,7 +133,7 @@ namespace NFTCPClient
             {
                 mNet.mPlayerState = NFNet.PLAYER_STATE.E_HAS_PLAYER_LOGIN;
 
-                mNet.sendLogic.RequireServerList();
+                mNet.sendLogic.RequireWorldList();
             }
         }
 
@@ -147,16 +150,23 @@ namespace NFTCPClient
                 for(int i = 0; i < xData.info.Count; ++i)
                 {
                     ServerInfo info = xData.info[i];
+                    aWorldList.Add(info);
+                }
+            }
+            else if (ReqServerListType.RSLT_GAMES_ERVER == xData.type)
+            {
+                for (int i = 0; i < xData.info.Count; ++i)
+                {
+                    ServerInfo info = xData.info[i];
                     aServerList.Add(info);
                 }
             }
-
-            mNet.mPlayerState = NFNet.PLAYER_STATE.E_HAS_PLAYER_SELECTSERVER;
         }
 
         private void EGMI_ACK_CONNECT_WORLD(MsgHead head, MemoryStream stream)
         {
             mNet.client.Disconnect();
+            mNet.listener.FinalLog();
 
             NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
             xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
@@ -164,24 +174,63 @@ namespace NFTCPClient
             NFMsg.AckConnectWorldResult xData = new NFMsg.AckConnectWorldResult();
             xData = Serializer.Deserialize<NFMsg.AckConnectWorldResult>(new MemoryStream(xMsg.msg_data));
 
-
-            NFNet net = new NFNet();
-            net.mPlayerState = NFNet.PLAYER_STATE.E_HAS_PLAYER_SELECTSERVER;
-            net.StartConnect(System.Text.Encoding.Default.GetString(xData.world_ip), xData.world_port);
-
+            ///
+            mNet.mPlayerState = NFNet.PLAYER_STATE.E_WAITING_PLAYER_TO_GATE;
+            mNet.strKey = System.Text.Encoding.Default.GetString(xData.world_key);
+            mNet.strWorldIP = System.Text.Encoding.Default.GetString(xData.world_ip);
+            mNet.nWorldPort = xData.world_port;
         }
 
+        private void EGMI_ACK_CONNECT_KEY(MsgHead head, MemoryStream stream)
+        {
+            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
+            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+
+            NFMsg.AckEventResult xData = new NFMsg.AckEventResult();
+            xData = Serializer.Deserialize<NFMsg.AckEventResult>(new MemoryStream(xMsg.msg_data));
+
+            if (xData.event_code == EGameEventCode.EGEC_VERIFY_KEY_SUCCESS)
+            {
+                //验证成功
+                mNet.mPlayerState = NFNet.PLAYER_STATE.E_HAS_VERIFY;
+                //申请世界内的服务器列表
+                mNet.sendLogic.RequireServerList();
+            }
+        }
+
+        private void EGMI_ACK_SELECT_SERVER(MsgHead head, MemoryStream stream)
+        {
+            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
+            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+
+            NFMsg.AckEventResult xData = new NFMsg.AckEventResult();
+            xData = Serializer.Deserialize<NFMsg.AckEventResult>(new MemoryStream(xMsg.msg_data));
+
+            if (xData.event_code == EGameEventCode.EGEC_SELECTSERVER_SUCCESS)
+            {
+                //申请角色列表
+                mNet.sendLogic.RequireRoleList(mNet.nServerID);
+            }
+        }
+        
         
         private void EGMI_ACK_ROLE_LIST(MsgHead head, MemoryStream stream)
         {
+            mNet.mPlayerState = NFNet.PLAYER_STATE.E_HAS_PLAYER_ROLELIST;
+
+            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
+            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+
+            NFMsg.AckRoleLiteInfoList xData = new NFMsg.AckRoleLiteInfoList();
+            xData = Serializer.Deserialize<NFMsg.AckRoleLiteInfoList>(new MemoryStream(xMsg.msg_data));
+
+            for (int i = 0; i < xData.char_data.Count; ++i)
+            {
+                NFMsg.RoleLiteInfo info = xData.char_data[i];
+                aCharList.Add(info);
+            }
         }
-	
-        /// <summary>
-        /// 
-        /// 
-        /// </summary>
-        /// <param name="head"></param>
-        /// <param name="stream"></param>
+
         private void EGMI_ACK_OBJECT_ENTRY(MsgHead head, MemoryStream stream)
         {
             NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
@@ -379,15 +428,15 @@ namespace NFTCPClient
 
             for (int i = 0; i < recordData.row_data.Count; i++)
             {
-                NFMsg.RecordAddStruct addStruct = recordData.row_data[i];
+                NFMsg.RecordAddRowStruct addStruct = recordData.row_data[i];
 
 
                 Hashtable recordVecDesc = new Hashtable();
                 Hashtable recordVecData = new Hashtable();
 
-                for (int k = 0; k < addStruct.int_list.Count; ++k)
+                for (int k = 0; k < addStruct.record_int_list.Count; ++k)
                 {
-                    NFMsg.RecordInt addIntStruct = (NFMsg.RecordInt)addStruct.int_list[k];
+                    NFMsg.RecordInt addIntStruct = (NFMsg.RecordInt)addStruct.record_int_list[k];
 
                     if (addIntStruct.col >= 0)
                     {
@@ -396,9 +445,9 @@ namespace NFTCPClient
                     }
                 }
 
-                for (int k = 0; k < addStruct.float_list.Count; ++k)
+                for (int k = 0; k < addStruct.record_float_list.Count; ++k)
                 {
-                    NFMsg.RecordFloat addFloatStruct = (NFMsg.RecordFloat)addStruct.float_list[k];
+                    NFMsg.RecordFloat addFloatStruct = (NFMsg.RecordFloat)addStruct.record_float_list[k];
 
                     if (addFloatStruct.col >= 0)
                     {
@@ -408,9 +457,9 @@ namespace NFTCPClient
                     }
                 }
 
-                for (int k = 0; k < addStruct.string_list.Count; ++k)
+                for (int k = 0; k < addStruct.record_string_list.Count; ++k)
                 {
-                    NFMsg.RecordString addStringStruct = (NFMsg.RecordString)addStruct.string_list[k];
+                    NFMsg.RecordString addStringStruct = (NFMsg.RecordString)addStruct.record_string_list[k];
 
                     if (addStringStruct.col >= 0)
                     {
@@ -420,9 +469,9 @@ namespace NFTCPClient
                     }
                 }
 
-                for (int k = 0; k < addStruct.object_list.Count; ++k)
+                for (int k = 0; k < addStruct.record_object_list.Count; ++k)
                 {
-                    NFMsg.RecordObject addObjectStruct = (NFMsg.RecordObject)addStruct.object_list[k];
+                    NFMsg.RecordObject addObjectStruct = (NFMsg.RecordObject)addStruct.record_object_list[k];
 
                     if (addObjectStruct.col >= 0)
                     {

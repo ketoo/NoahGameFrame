@@ -217,8 +217,8 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_WORLD_LIST", Value=110)]
       EGMI_REQ_WORLD_LIST = 110,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_WORLS_LIST", Value=111)]
-      EGMI_ACK_WORLS_LIST = 111,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_WORLD_LIST", Value=111)]
+      EGMI_ACK_WORLD_LIST = 111,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CONNECT_WORLD", Value=112)]
       EGMI_REQ_CONNECT_WORLD = 112,
@@ -277,6 +277,12 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OBJECT_LEAVE", Value=201)]
       EGMI_ACK_OBJECT_LEAVE = 201,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OBJECT_PROPERTY_ENTRY", Value=202)]
+      EGMI_ACK_OBJECT_PROPERTY_ENTRY = 202,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OBJECT_RECORD_ENTRY", Value=203)]
+      EGMI_ACK_OBJECT_RECORD_ENTRY = 203,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_PROPERTY_INT", Value=210)]
       EGMI_ACK_PROPERTY_INT = 210,
             
@@ -315,6 +321,12 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_OBJECT", Value=227)]
       EGMI_ACK_RECORD_OBJECT = 227,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_CLEAR", Value=228)]
+      EGMI_ACK_RECORD_CLEAR = 228,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_SORT", Value=229)]
+      EGMI_ACK_RECORD_SORT = 229,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MOVE", Value=230)]
       EGMI_REQ_MOVE = 230,

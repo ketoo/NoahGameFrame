@@ -10,7 +10,6 @@ using System.Threading;
 using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
-using NFTCPClient;
 using NFCoreEx;
 
 public class NFNet
@@ -23,14 +22,18 @@ public class NFNet
     public NFIKernel kernel = null;
     public NFBinraryMessageEvent binMsgEvent = null;
 
+
     public enum PLAYER_STATE
     {
-        E_WAITING_PLAYER_LOGIN,//等待登录
+        E_NONE,//等待选择服务器登录
+        E_WAITING_PLAYER_LOGIN,//等待登录(已经连接成功)
         E_PLAYER_LOGINING,//登录中
         E_HAS_PLAYER_LOGIN,//登录成功
-        E_HAS_PLAYER_SELECTSERVER,//已选择服务器
-        E_HAS_PLAYER_GATE,//已连接gate
-        E_HAS_PLAYER_ROLELIST,//等待角色列表
+        E_HAS_PLAYER_SELECT_WORLD,//已选择服务器
+        E_WAITING_PLAYER_TO_GATE,//等待连接网关
+        E_HAS_PLAYER_GATE,//已连接gate(等待验证KEY)
+        E_HAS_VERIFY,//验证成功
+        E_HAS_PLAYER_ROLELIST,//有了角色列表
         E_PLAYER_WAITING_TO_GAME,//申请了进游戏，等待进入
         E_PLAYER_GAMEING,//游戏中
         E_DISCOUNT,//掉线
@@ -87,7 +90,6 @@ public class NFNet
     public string strType = "type";
     public string strChatData = "data";
 
-    Vector2 scrollVec = new Vector2();
     Vector2 scrollVecChatMsg = new Vector2();
     Vector2 scrollVecMsg = new Vector2();
     Vector2 scrollVecBtn = new Vector2();
@@ -97,7 +99,7 @@ public class NFNet
         //////////////////////////////////
         if (null != client
             && client.IsConnected()
-            && 0 != nSeleroleID
+            && 0 != nSelfID
             && mPlayerState == PLAYER_STATE.E_PLAYER_GAMEING)
         {
 
@@ -133,7 +135,7 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 0, 100, 50), "切换场景"))
             {
-                sendLogic.RequireSwapScene(nSeleroleID, 0, uint.Parse(strReqSwapSceneID), int.Parse(strReqSwapSceneLine));
+                sendLogic.RequireSwapScene(nSelfID, 0, uint.Parse(strReqSwapSceneID), int.Parse(strReqSwapSceneLine));
             }
             strReqSwapSceneID = GUI.TextField(new Rect(100, 0, 100, 50), strReqSwapSceneID);
             strReqSwapSceneLine = GUI.TextField(new Rect(200, 0, 100, 50), strReqSwapSceneLine);
@@ -142,7 +144,7 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 50, 100, 50), "移动"))
             {
-                sendLogic.RequireMove(nSeleroleID, nSeleroleID, float.Parse(strReqMoveX), float.Parse(strReqMoveZ));
+                sendLogic.RequireMove(nSelfID, nSelfID, float.Parse(strReqMoveX), float.Parse(strReqMoveZ));
             }
             strReqMoveX = GUI.TextField(new Rect(100, 50, 100, 50), strReqMoveX);
             strReqMoveZ = GUI.TextField(new Rect(200, 50, 100, 50), strReqMoveZ);
@@ -151,7 +153,7 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 100, 100, 50), "接任务"))
             {
-                sendLogic.RequireAcceptTask(nSeleroleID, long.Parse(strReqAcceptTaskNPC), strReqAcceptTaskID);
+                sendLogic.RequireAcceptTask(nSelfID, long.Parse(strReqAcceptTaskNPC), strReqAcceptTaskID);
             }
             strReqAcceptTaskNPC = GUI.TextField(new Rect(100, 100, 100, 50), strReqAcceptTaskNPC);
             strReqAcceptTaskID = GUI.TextField(new Rect(200, 100, 100, 50), strReqAcceptTaskID);
@@ -160,7 +162,7 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 150, 100, 50), "交任务"))
             {
-                sendLogic.RequireCompeleteTask(nSeleroleID, long.Parse(strReqAcceptTaskNPC), strReqAcceptTaskID);
+                sendLogic.RequireCompeleteTask(nSelfID, long.Parse(strReqAcceptTaskNPC), strReqAcceptTaskID);
             }
             strReqAcceptTaskNPC = GUI.TextField(new Rect(100, 150, 100, 50), strReqAcceptTaskNPC);
             strReqAcceptTaskID = GUI.TextField(new Rect(200, 150, 100, 50), strReqAcceptTaskID);
@@ -169,7 +171,7 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 200, 100, 50), "杀怪"))
             {
-                sendLogic.RequireSkill(nSeleroleID, strReqKillID, long.Parse(strReqKillNPCID));
+                sendLogic.RequireSkill(nSelfID, strReqKillID, long.Parse(strReqKillNPCID));
             }
             strReqKillID = GUI.TextField(new Rect(100, 200, 100, 50), strReqKillID);
             strReqKillNPCID = GUI.TextField(new Rect(200, 200, 100, 50), strReqKillNPCID);
@@ -178,7 +180,7 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 250, 100, 50), "结算副本"))
             {
-                sendLogic.RequirePullDownCustom(nSeleroleID, int.Parse(strPullCustom));
+                sendLogic.RequirePullDownCustom(nSelfID, int.Parse(strPullCustom));
             }
             strPullCustom = GUI.TextField(new Rect(100, 250, 100, 50), strPullCustom);
 
@@ -186,7 +188,7 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 300, 100, 50), "拾取"))
             {
-                sendLogic.RequirePickUpItem(nSeleroleID, strPickUpItemID, long.Parse(strPickUpNPCID), int.Parse(strPickUpRow));
+                sendLogic.RequirePickUpItem(nSelfID, strPickUpItemID, long.Parse(strPickUpNPCID), int.Parse(strPickUpRow));
             }
             strPickUpItemID = GUI.TextField(new Rect(100, 300, 100, 50), strPickUpItemID);
             strPickUpNPCID = GUI.TextField(new Rect(200, 300, 100, 50), strPickUpNPCID);
@@ -196,7 +198,7 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 350, 100, 50), "设置属性"))
             {
-                sendLogic.RequireProperty(nSeleroleID, strReqSetProperty, int.Parse(strReqPropertyValue));
+                sendLogic.RequireProperty(nSelfID, strReqSetProperty, int.Parse(strReqPropertyValue));
             }
             strReqSetProperty = GUI.TextField(new Rect(100, 350, 100, 50), strReqSetProperty);
             strReqPropertyValue = GUI.TextField(new Rect(200, 350, 100, 50), strReqPropertyValue);
@@ -205,7 +207,7 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 400, 100, 50), "添加道具"))
             {
-                sendLogic.RequireItem(nSeleroleID, strReqAddItem, uint.Parse(strAddCount));
+                sendLogic.RequireItem(nSelfID, strReqAddItem, uint.Parse(strAddCount));
             }
             strReqAddItem = GUI.TextField(new Rect(100, 400, 100, 50), strReqAddItem);
             strAddCount = GUI.TextField(new Rect(200, 400, 100, 50), strAddCount);
@@ -214,7 +216,7 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 450, 100, 50), "切换Row"))
             {
-                sendLogic.RequireSwapEquip(nSeleroleID, uint.Parse(strSwapOrigin), uint.Parse(strSwapTarget));
+                sendLogic.RequireSwapEquip(nSelfID, uint.Parse(strSwapOrigin), uint.Parse(strSwapTarget));
             }
             strSwapOrigin = GUI.TextField(new Rect(100, 450, 100, 50), strSwapOrigin);
             strSwapTarget = GUI.TextField(new Rect(200, 450, 100, 50), strSwapTarget);
@@ -223,7 +225,7 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 500, 100, 50), "聊天"))
             {
-                sendLogic.RequireChat(nSeleroleID, uint.Parse(strChatTargetID), int.Parse(strType), strChatData);
+                sendLogic.RequireChat(nSelfID, uint.Parse(strChatTargetID), int.Parse(strType), strChatData);
             }
             strChatTargetID = GUI.TextField(new Rect(100, 500, 100, 50), strChatTargetID);
             strType = GUI.TextField(new Rect(200, 500, 100, 50), strType);
@@ -270,14 +272,19 @@ public class NFNet
         }
     }
 
-    public string strLoginAccount = "server1";
+    public string strWorldIP = "";
+    public int nWorldPort = 0;
+    public string strKey = "";
+
+    public string strAccount = "server1";
     public string strPassword = "123456";
     public string strRoleName = "";
-    public Int64 nSeleroleID = 0;
 
     public int nServerID = 0;
+    public Int64 nSelfID = 0;
+
     public Int64 ntarget = 0;
     public Int64 nSceneID = 0;
     public Int64 nLineID = 0;
-    public PLAYER_STATE mPlayerState = NFNet.PLAYER_STATE.E_WAITING_PLAYER_LOGIN;
+    public PLAYER_STATE mPlayerState = NFNet.PLAYER_STATE.E_NONE;
 }
