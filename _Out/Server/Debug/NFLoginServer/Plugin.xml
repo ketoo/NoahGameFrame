@@ -1,5 +1,4 @@
 <XML>
-	<Plugin Name="NFDataNoSqlPlugin" Main="1"/>
 	<Plugin Name="NFEventProcessPlugin" Main="1"/>
 	<Plugin Name="NFKernelPlugin" Main="1"/>
 	<Plugin Name="NFConfigPlugin" Main="1"/>
