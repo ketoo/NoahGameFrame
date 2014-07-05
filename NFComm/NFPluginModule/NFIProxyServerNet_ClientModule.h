@@ -17,17 +17,6 @@ class NFIProxyServerNet_ClientModule
     : public  NFINetModule, public NFMap<int64_t, NFINetModule>
 {
 public:
-    struct ConnectData 
-    {
-        ConnectData()
-        {
-            strAccount = "";
-            strConnectKey = "";
-        }
-
-        std::string strAccount;
-        std::string strConnectKey;
-    };
 
     struct GameData 
     {
@@ -47,15 +36,14 @@ public:
         NFMsg::EServerState eState;
     };
 
-    typedef NFMap<std::string, ConnectData> ConnectDataMap;
+    
     typedef NFMap<int, GameData> GameDataMap;
+
 public:
-    //>0 gs_id, ==0 all gs, < 0 worldserver
-    //     virtual int Transpond( int nGameServerID, NFIPacket* pMsgPacket ) = 0;
-    //     virtual int Transpond( int nGameServerID, RakNet::BitStream* pBitStream ) = 0;
     virtual int Transpond(int nGameServerID, const NFIPacket& msg) = 0;
 
-    virtual ConnectData* GetConnectData(const std::string& strAccount) = 0;
+    virtual bool VerifyConnectData(const std::string& strAccount, const std::string& strKey) = 0;
+
     virtual GameData* GetGameData(int nGameID) = 0;
     virtual GameDataMap& GetGameDataMap() = 0;
 };
