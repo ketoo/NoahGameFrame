@@ -119,28 +119,23 @@ message ReqKickFromWorld//玩家想退出游戏世界
 ////////////////////////////////////////////
 message ReqRoleList//请求得到角色列表
 {
-	required int32   game_id = 1;	
+	required int32   game_id = 1;
+	optional bytes   account = 2;	
 }
 
 message RoleLiteInfo//角色基础信息
 {
-	required int32 		char_id = 1;
-	required int32 		career = 2;
-    required int32 		sex = 3;
-    required int32 		race = 4;
-    required bytes 		noob_name = 5;
-    required int32 		game_id = 6;
-	required int32 		char_level = 7;
-	required int32		char_exp = 8;
-	required int32		money = 9;
-	required int32		cash = 10;
-	required int32		vip_level = 11;
-	required int32		delete_time = 12;
-	required int32		reg_time = 13;
-	required int32		last_offline_time = 15;
-	required int32		last_offline_ip = 16;
-	required bytes		view_record = 17;
-	required bytes		pet_record = 18;
+	required int32 		career = 1;
+    required int32 		sex = 2;
+    required int32 		race = 3;
+    required bytes 		noob_name = 4;
+    required int32 		game_id = 5;
+	required int32 		role_level = 6;
+	required int32		delete_time = 7;
+	required int32		reg_time = 8;
+	required int32		last_offline_time = 9;
+	required int32		last_offline_ip = 10;
+	required bytes		view_record = 11;
 }
 
 message AckRoleLiteInfoList//角色基础信息列表
