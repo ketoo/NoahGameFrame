@@ -58,6 +58,7 @@ protected:
 
 protected:
 
+    void OnReqiureRoleListProcess(const NFIPacket& msg);
     void OnCreateRoleGameProcess(const NFIPacket& msg);
     void OnDeleteRoleGameProcess(const NFIPacket& msg);
     void OnClienCommand(const NFIPacket& msg);
