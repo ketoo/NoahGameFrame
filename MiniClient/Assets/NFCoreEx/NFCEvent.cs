@@ -16,14 +16,14 @@ namespace NFCoreEx
 
 		public override void RegisterCallback(NFIEvent.EventHandler handler)
 		{
-			doHandlerDel += handler;
+			mHandlerDel += handler;
 		}
 
 		public override void DoEvent(NFIValueList valueList)
 		{
-			if (null != doHandlerDel)
+			if (null != mHandlerDel)
 			{
-				doHandlerDel(mSelf, mnEventID, mArgValueList, valueList);
+				mHandlerDel(mSelf, mnEventID, mArgValueList, valueList);
 			}
 		}
 
@@ -32,6 +32,6 @@ namespace NFCoreEx
 		int mnEventID;
 		NFIValueList mArgValueList;
 
-		NFIEvent.EventHandler doHandlerDel;
+		NFIEvent.EventHandler mHandlerDel;
 	}
 }

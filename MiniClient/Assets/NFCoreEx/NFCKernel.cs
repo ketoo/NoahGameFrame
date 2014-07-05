@@ -36,30 +36,30 @@ namespace NFCoreEx
 
 		public override bool AddHeartBeat(NFIDENTID self, string strHeartBeatName, NFIHeartBeat.HeartBeatEventHandler handler, float fTime, NFIValueList valueList)
 		{
-            NFIObject gameObject = GetObject(self);
-            if (null != gameObject)
+            NFIObject xGameObject = GetObject(self);
+            if (null != xGameObject)
             {
-                gameObject.GetHeartBeatManager().AddHeartBeat(strHeartBeatName, fTime, valueList);
-                gameObject.GetHeartBeatManager().RegisterCallback(strHeartBeatName, handler);
+                xGameObject.GetHeartBeatManager().AddHeartBeat(strHeartBeatName, fTime, valueList);
+                xGameObject.GetHeartBeatManager().RegisterCallback(strHeartBeatName, handler);
             }
 			return true;
 		}
 
 		public override void RegisterPropertyCallback(NFIDENTID self, string strPropertyName, NFIProperty.PropertyEventHandler handler)
 		{
-			NFIObject gameObject = GetObject(self);
-			if (null != gameObject)
+			NFIObject xGameObject = GetObject(self);
+			if (null != xGameObject)
 			{
-				gameObject.GetPropertyManager().RegisterCallback(strPropertyName, handler);
+				xGameObject.GetPropertyManager().RegisterCallback(strPropertyName, handler);
 			}
 		}
 
 		public override void RegisterRecordCallback(NFIDENTID self, string strRecordName, NFIRecord.RecordEventHandler handler)
 		{
-			NFIObject gameObject = GetObject(self);
-			if (null != gameObject)
+			NFIObject xGameObject = GetObject(self);
+			if (null != xGameObject)
 			{
-				gameObject.GetRecordManager().RegisterCallback(strRecordName, handler);
+				xGameObject.GetRecordManager().RegisterCallback(strRecordName, handler);
 			}
 		}
 
@@ -67,40 +67,40 @@ namespace NFCoreEx
 		{
 			if(mhtClassHandleDel.ContainsKey(strClassName))
 			{
-				ClassHandleDel handleDel = (ClassHandleDel)mhtClassHandleDel[strClassName];
-				handleDel.AddDel(handler);
+				ClassHandleDel xHandleDel = (ClassHandleDel)mhtClassHandleDel[strClassName];
+				xHandleDel.AddDel(handler);
 				
 			}
 			else
 			{
-				ClassHandleDel handleDel = new ClassHandleDel();
-				handleDel.AddDel(handler);
-				mhtClassHandleDel[strClassName] = handleDel;
+				ClassHandleDel xHandleDel = new ClassHandleDel();
+				xHandleDel.AddDel(handler);
+				mhtClassHandleDel[strClassName] = xHandleDel;
 			}
 		}
 
 		public override void RegisterHeartBeatCallBack(NFIDENTID self, string strHeartBeatName, NFIHeartBeat.HeartBeatEventHandler handler)
 		{
-			NFIObject gameObject = GetObject(self);
-			if (null != gameObject)
+			NFIObject xGameObject = GetObject(self);
+			if (null != xGameObject)
 			{
-				gameObject.GetHeartBeatManager().RegisterCallback(strHeartBeatName, handler);
+				xGameObject.GetHeartBeatManager().RegisterCallback(strHeartBeatName, handler);
 			}
 		}
 
 		public override void RegisterEventCallBack(NFIDENTID self, int nEventID, NFIEvent.EventHandler handler, NFIValueList valueList)
 		{
-			NFIObject gameObject = GetObject(self);
-			if (null != gameObject)
+			NFIObject xGameObject = GetObject(self);
+			if (null != xGameObject)
 			{
-				gameObject.GetEventManager().RegisterCallback(nEventID, handler, valueList);
+				xGameObject.GetEventManager().RegisterCallback(nEventID, handler, valueList);
 			}
 		}
 
 		public override bool FindHeartBeat(NFIDENTID self, string strHeartBeatName)
 		{
-			NFIObject gameObject = GetObject(self);
-			if (null != gameObject)
+			NFIObject xGameObject = GetObject(self);
+			if (null != xGameObject)
 			{
 				//gameObject.GetHeartBeatManager().AddHeartBeat()
 			}
@@ -117,8 +117,8 @@ namespace NFCoreEx
         {
             foreach (System.Collections.DictionaryEntry gameObject in mhtObject)
             {
-                NFIObject gmObject = (NFIObject)gameObject.Value;
-                gmObject.GetHeartBeatManager().Update(fTime);
+                NFIObject xGameObject = (NFIObject)gameObject.Value;
+                xGameObject.GetHeartBeatManager().Update(fTime);
             }
 
             return true;
@@ -149,27 +149,27 @@ namespace NFCoreEx
 		{
 			if (!mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject newObject = new NFCObject(self, nContainerID, nGroupID, strClassName, strConfigIndex);
-				mhtObject.Add(self.nData64, newObject);
+				NFIObject xNewObject = new NFCObject(self, nContainerID, nGroupID, strClassName, strConfigIndex);
+				mhtObject.Add(self.nData64, xNewObject);
 
                 NFCValueList varConfigID = new NFCValueList();
                 varConfigID.AddString(strConfigIndex);
-                newObject.GetPropertyManager().AddProperty("ConfigID", varConfigID);
+                xNewObject.GetPropertyManager().AddProperty("ConfigID", varConfigID);
 
                 NFCValueList varConfigClass = new NFCValueList();
                 varConfigClass.AddString(strClassName);
-                newObject.GetPropertyManager().AddProperty("ClassName", varConfigClass);
+                xNewObject.GetPropertyManager().AddProperty("ClassName", varConfigClass);
 
 
-				ClassHandleDel handleDel = (ClassHandleDel)mhtClassHandleDel[strClassName];
-                if (null != handleDel && null != handleDel.GetHandler())
+				ClassHandleDel xHandleDel = (ClassHandleDel)mhtClassHandleDel[strClassName];
+                if (null != xHandleDel && null != xHandleDel.GetHandler())
                 {
-					NFIObject.ClassEventHandler handlerList = handleDel.GetHandler();
-                    handlerList(self, nContainerID, nGroupID, NFIObject.CLASS_EVENT_TYPE.OBJECT_CREATE, strClassName, strConfigIndex);
-					handlerList(self, nContainerID, nGroupID, NFIObject.CLASS_EVENT_TYPE.OBJECT_LOADDATA, strClassName, strConfigIndex);
-					handlerList(self, nContainerID, nGroupID, NFIObject.CLASS_EVENT_TYPE.OBJECT_CREATE_FINISH, strClassName, strConfigIndex);
+					NFIObject.ClassEventHandler xHandlerList = xHandleDel.GetHandler();
+                    xHandlerList(self, nContainerID, nGroupID, NFIObject.CLASS_EVENT_TYPE.OBJECT_CREATE, strClassName, strConfigIndex);
+					xHandlerList(self, nContainerID, nGroupID, NFIObject.CLASS_EVENT_TYPE.OBJECT_LOADDATA, strClassName, strConfigIndex);
+					xHandlerList(self, nContainerID, nGroupID, NFIObject.CLASS_EVENT_TYPE.OBJECT_CREATE_FINISH, strClassName, strConfigIndex);
 				}
-				return newObject;
+				return xNewObject;
 			}
 
 			return null;
@@ -180,13 +180,13 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				string strClassName = gameObject.ClassName();
-				ClassHandleDel handleDel = (ClassHandleDel)mhtClassHandleDel[strClassName];
-                if (null != handleDel && null != handleDel.GetHandler())
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				string strClassName = xGameObject.ClassName();
+				ClassHandleDel xHandleDel = (ClassHandleDel)mhtClassHandleDel[strClassName];
+                if (null != xHandleDel && null != xHandleDel.GetHandler())
                 {
-					NFIObject.ClassEventHandler handlerList = handleDel.GetHandler();
-                    handlerList(self, gameObject.ContainerID(), gameObject.GroupID(), NFIObject.CLASS_EVENT_TYPE.OBJECT_DESTROY, gameObject.ClassName(), gameObject.ConfigIndex());
+					NFIObject.ClassEventHandler xHandlerList = xHandleDel.GetHandler();
+                    xHandlerList(self, xGameObject.ContainerID(), xGameObject.GroupID(), NFIObject.CLASS_EVENT_TYPE.OBJECT_DESTROY, xGameObject.ClassName(), xGameObject.ConfigIndex());
                 }
 				mhtObject.Remove(self.nData64);
 				
@@ -200,8 +200,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.FindProperty(strPropertyName);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.FindProperty(strPropertyName);
 			}
 
 			return false;
@@ -211,8 +211,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.SetPropertyInt(strPropertyName, nValue);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.SetPropertyInt(strPropertyName, nValue);
 			}
 
 			return false;
@@ -222,8 +222,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.SetPropertyFloat(strPropertyName, fValue);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.SetPropertyFloat(strPropertyName, fValue);
 			}
 
 			return false;
@@ -233,8 +233,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.SetPropertyDouble(strPropertyName, dValue);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.SetPropertyDouble(strPropertyName, dValue);
 			}
 
 			return false;
@@ -244,8 +244,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.SetPropertyString(strPropertyName, strValue);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.SetPropertyString(strPropertyName, strValue);
 			}
 
 			return false;
@@ -255,8 +255,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.SetPropertyObject(strPropertyName, objectValue);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.SetPropertyObject(strPropertyName, objectValue);
 			}
 
 			return false;
@@ -267,8 +267,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.QueryPropertyInt(strPropertyName);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.QueryPropertyInt(strPropertyName);
 			}
 
 			return 0;
@@ -278,8 +278,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.QueryPropertyFloat(strPropertyName);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.QueryPropertyFloat(strPropertyName);
 			}
 
 			return 0.0f;
@@ -289,8 +289,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.QueryPropertyDouble(strPropertyName);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.QueryPropertyDouble(strPropertyName);
 			}
 
 			return 0.0;
@@ -300,8 +300,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.QueryPropertyString(strPropertyName);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.QueryPropertyString(strPropertyName);
 			}
 
 			return "";
@@ -311,8 +311,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.QueryPropertyObject(strPropertyName);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.QueryPropertyObject(strPropertyName);
 			}
 
 			return new NFIDENTID();
@@ -323,8 +323,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.GetRecordManager().GetRecord(strRecordName);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.GetRecordManager().GetRecord(strRecordName);
 			}
 
 			return null;
@@ -335,8 +335,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.SetRecordInt(strRecordName, nRow, nCol, nValue);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.SetRecordInt(strRecordName, nRow, nCol, nValue);
 			}
 
 			return false;
@@ -346,8 +346,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.SetRecordFloat(strRecordName, nRow, nCol, fValue);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.SetRecordFloat(strRecordName, nRow, nCol, fValue);
 			}
 
 			return false;
@@ -357,8 +357,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.SetRecordDouble(strRecordName, nRow, nCol, dwValue);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.SetRecordDouble(strRecordName, nRow, nCol, dwValue);
 			}
 
 			return false;
@@ -368,8 +368,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.SetRecordString(strRecordName, nRow, nCol, strValue);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.SetRecordString(strRecordName, nRow, nCol, strValue);
 			}
 
 			return false;
@@ -379,8 +379,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.SetRecordObject(strRecordName, nRow, nCol, objectValue);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.SetRecordObject(strRecordName, nRow, nCol, objectValue);
 			}
 
 			return false;
@@ -391,8 +391,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.QueryRecordInt(strRecordName, nRow, nCol);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.QueryRecordInt(strRecordName, nRow, nCol);
 			}
 
 			return 0;
@@ -402,8 +402,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.QueryRecordFloat(strRecordName, nRow, nCol);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.QueryRecordFloat(strRecordName, nRow, nCol);
 			}
 
 			return 0.0f;
@@ -413,8 +413,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.QueryRecordDouble(strRecordName, nRow, nCol);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.QueryRecordDouble(strRecordName, nRow, nCol);
 			}
 
 			return 0.0;
@@ -424,8 +424,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.QueryRecordString(strRecordName, nRow, nCol);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.QueryRecordString(strRecordName, nRow, nCol);
 			}
 
 			return "";
@@ -435,8 +435,8 @@ namespace NFCoreEx
 		{
 			if (mhtObject.ContainsKey(self.nData64))
 			{
-				NFIObject gameObject = (NFIObject)mhtObject[self.nData64];
-				return gameObject.QueryRecordObject(strRecordName, nRow, nCol);
+				NFIObject xGameObject = (NFIObject)mhtObject[self.nData64];
+				return xGameObject.QueryRecordObject(strRecordName, nRow, nCol);
 			}
 
 			return new NFIDENTID();
@@ -469,16 +469,16 @@ namespace NFCoreEx
 				if (!mhtHandleDelList.ContainsKey(handler))
 				{
 					mhtHandleDelList.Add(handler, handler.ToString());
-					doHandleDel += handler;
+					mHandleDel += handler;
 				}
 			}
 			
 			public NFIObject.ClassEventHandler GetHandler()
 			{
-				return doHandleDel;
+				return mHandleDel;
 			}
 			
-			private NFIObject.ClassEventHandler doHandleDel;
+			private NFIObject.ClassEventHandler mHandleDel;
 			Hashtable mhtHandleDelList;
 		}
         
