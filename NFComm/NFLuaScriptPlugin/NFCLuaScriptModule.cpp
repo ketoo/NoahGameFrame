@@ -241,9 +241,9 @@ bool NFCLuaScriptModule::Regisger()
 
     module(mpLuaState)
         [  
-            def ("NFVarList_New", &NFVarList_New),
-            def ("NFVarList_Del", &NFVarList_Del),
-            def ("NFVarList_Clear", &NFVarList_Clear),            def ("NFVarList_IsEmpty", &NFVarList_IsEmpty),            def ("NFVarList_GetCount", &NFVarList_GetCount),            def ("NFVarList_Type", &NFVarList_Type),            def ("NFVarList_AddInt", &NFVarList_AddInt),            def ("NFVarList_AddFloat", &NFVarList_AddFloat),            def ("NFVarList_AddString", &NFVarList_AddString),            def ("NFVarList_AddObject", &NFVarList_AddObject),            def ("NFVarList_SetInt", &NFVarList_SetInt),            def ("NFVarList_SetFloat", &NFVarList_SetFloat),            def ("NFVarList_SetString", &NFVarList_SetString),            def ("NFVarList_SetObject", &NFVarList_SetObject),            def ("NFVarList_IntVal", &NFVarList_IntVal),            def ("NFVarList_FloatVal", &NFVarList_FloatVal),            def ("NFVarList_StringVal", &NFVarList_StringVal),            def ("NFVarList_ObjectVal", &NFVarList_ObjectVal),
+//            def ("NFVarList_New", &NFVarList_New),
+//            def ("NFVarList_Del", &NFVarList_Del),
+//            def ("NFVarList_Clear", &NFVarList_Clear),//            def ("NFVarList_IsEmpty", &NFVarList_IsEmpty),//            def ("NFVarList_GetCount", &NFVarList_GetCount),//            def ("NFVarList_Type", &NFVarList_Type),//            def ("NFVarList_AddInt", &NFVarList_AddInt),//            def ("NFVarList_AddFloat", &NFVarList_AddFloat),//            def ("NFVarList_AddString", &NFVarList_AddString),//            def ("NFVarList_AddObject", &NFVarList_AddObject),//            def ("NFVarList_SetInt", &NFVarList_SetInt),//            def ("NFVarList_SetFloat", &NFVarList_SetFloat),//            def ("NFVarList_SetString", &NFVarList_SetString),//            def ("NFVarList_SetObject", &NFVarList_SetObject),//            def ("NFVarList_IntVal", &NFVarList_IntVal),//            def ("NFVarList_FloatVal", &NFVarList_FloatVal),//            def ("NFVarList_StringVal", &NFVarList_StringVal),//            def ("NFVarList_ObjectVal", &NFVarList_ObjectVal),
 
             def ("HasEventCallBack", &KernelModule_HasEventCallBack),
             def ("RemoveEvent", &KernelModule_RemoveEvent),
@@ -283,6 +283,7 @@ bool NFCLuaScriptModule::Regisger()
             def ("QueryRecordFloat", &KernelModule_QueryRecordFloat),
             def ("QueryRecordString", &KernelModule_QueryRecordString),
             def ("QueryRecordObject", &KernelModule_QueryRecordObject),
+            def ("AddRow", &KernelModule_AddRow),
             def ("AddProperty", &KernelModule_AddProperty),
             //        def ("KernelModule_AddRecord", &KernelModule_AddRecord),
 
@@ -306,10 +307,10 @@ bool NFCLuaScriptModule::Regisger()
 
             class_ <NFScriptInt64> ("NFINT64")
             .def(luabind::constructor<>())
-            .def ("GetA", &NFScriptInt64::GetA)    
-            .def ("GetB", &NFScriptInt64::GetB)    
-            .def ("SetA", &NFScriptInt64::SetA)    
-            .def ("SetB", &NFScriptInt64::SetB)    
+            .def ("GetIdent", &NFScriptInt64::GetIdent)    
+            .def ("GetnSerial", &NFScriptInt64::GetnSerial)    
+            .def ("SetIdent", &NFScriptInt64::SetIdent)    
+            .def ("SetnSerial", &NFScriptInt64::SetnSerial)    
         ]; 
 
     return true;
