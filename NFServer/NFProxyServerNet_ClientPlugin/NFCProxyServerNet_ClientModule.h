@@ -10,8 +10,9 @@
 #ifndef _NFC_PROXYSERVER_NETCLIENT_MODULE_H_
 #define _NFC_PROXYSERVER_NETCLIENT_MODULE_H_
 
-//  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
+#include <string>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
+#include "NFComm/NFCore/NFCHeartBeatManager.h"
 #include "NFComm/NFPluginModule/NFIProxyServerNet_ClientModule.h"
 #include "NFComm/NFPluginModule/NFIProxyServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
@@ -19,7 +20,6 @@
 #include "NFComm/NFPluginModule/NFIProxyLogicModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
-#include "NFComm/NFCore/NFCHeartBeatManager.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
 
@@ -27,11 +27,12 @@
 class NFCProxyConnectObject :   public NFINetModule
 {
 public:
-    NFCProxyConnectObject(int nGameServerID, NFIPluginManager* p);
+    NFCProxyConnectObject(int nGameServerID, const std::string& strIP, const int nPort, NFIPluginManager* p);
 
     virtual bool Execute(float fFrameTime, float fTotalTime);
     virtual void LogRecive(const char* str){}
     virtual void LogSend(const char* str){}
+    virtual int GetFD(){return mnSocketFD;}
 
 protected:
 
@@ -43,10 +44,15 @@ protected:
     //спа╛╫с
     void OnClientConnected(const int nAddress);
 
+    void Register();
+    void UnRegister();
 private:
 
     int mnGameServerID;
+    int mnSocketFD;
 
+    NFIElementInfoModule* m_pElementInfoModule;
+    NFILogModule* m_pLogModule;
     NFIProxyServerNet_ServerModule* m_pProxyServerNet_ServerModule;
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
@@ -74,7 +80,9 @@ public:
 	virtual void LogSend(const char* str){}
 
     virtual int Transpond(int nGameServerID, const NFIPacket& msg);
-    virtual ConnectData* GetConnectData(const std::string& strAccount);
+
+    virtual bool VerifyConnectData(const std::string& strAccount, const std::string& strKey);
+
     virtual GameData* GetGameData(int nGameID);
     virtual GameDataMap& GetGameDataMap() { return mGameDataMap; }
 protected:
@@ -97,14 +105,24 @@ protected:
     int OnSelectServerResultProcess(const NFIPacket& msg);
     int OnGameInfoProcess(const NFIPacket& msg);
 
+private:
+    struct ConnectData 
+    {
+        ConnectData()
+        {
+            strAccount = "";
+            strConnectKey = "";
+        }
+
+        std::string strAccount;
+        std::string strConnectKey;
+    };
 
 
 private:
     int mnSocketFD;
-    //int mnWantToConnectContainer;
-    //int mnGameContainerID;
-    
-    ConnectDataMap mWantToConnectMap;
+
+    NFMap<std::string, ConnectData> mWantToConnectMap;
     GameDataMap mGameDataMap;
 private:
 

@@ -192,12 +192,12 @@ int NFCLoginNet_ServerModule::OnLoginProcess( const NFIPacket& msg )
 
 int NFCLoginNet_ServerModule::OnSelectWorldProcess( const NFIPacket& msg )
 {
-	const int nServerID = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerID");
-	const int nServerPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerPort");
-	const std::string& strName = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "Name");
-	const int nMaxConnect = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "MaxConnect");
-	const int nCpus = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "CpuCount");
-	const int nPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "Port");
+    const int nServerID = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerID");
+//     const int nServerPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerPort");
+//     const std::string& strName = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "Name");
+//     const int nMaxConnect = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "MaxConnect");
+//     const int nCpus = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "CpuCount");
+//     const int nPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "Port");
 
 	int64_t nPlayerID = 0;
 	NFMsg::ReqConnectWorld xMsg;
@@ -210,7 +210,7 @@ int NFCLoginNet_ServerModule::OnSelectWorldProcess( const NFIPacket& msg )
     if (pNetObject)
     {
         //µÇÂ¼¹ý
-        if (pNetObject->GetLogicState() > 0)
+        if (pNetObject->GetUserData() > 0)
         {
             NFCValueList val;
             val << xMsg.world_id() << msg.GetFd() << nServerID << pNetObject->GetUserStrData().c_str();
