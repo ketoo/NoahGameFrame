@@ -19,6 +19,7 @@ namespace NFTCPClient
         public void OnClientConnect(NFTCPEventParams eventParams)
         {
             Debug.Log("Client connected");
+            client.net.mPlayerState = NFNet.PLAYER_STATE.E_WAITING_PLAYER_LOGIN;
         }
 
         public void OnClientDisconnect(NFTCPEventParams eventParams)
