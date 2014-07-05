@@ -18,8 +18,8 @@ namespace NFCoreEx
 		{
 			if (!mhtHeartBeat.ContainsKey(strHeartBeatName))
 			{
-                NFIHeartBeat heartBeat = new NFCHeartBeat(mSelf, strHeartBeatName, fTime, valueList);
-                mhtHeartBeat.Add(strHeartBeatName, heartBeat);
+                NFIHeartBeat xHeartBeat = new NFCHeartBeat(mSelf, strHeartBeatName, fTime, valueList);
+                mhtHeartBeat.Add(strHeartBeatName, xHeartBeat);
 			}
 		}
 
@@ -27,8 +27,8 @@ namespace NFCoreEx
 		{
 			if (mhtHeartBeat.ContainsKey(strHeartBeatName))
 			{
-				NFIHeartBeat heartBeat = (NFIHeartBeat)mhtHeartBeat[strHeartBeatName];
-				heartBeat.RegisterCallback(handler);
+				NFIHeartBeat xHeartBeat = (NFIHeartBeat)mhtHeartBeat[strHeartBeatName];
+				xHeartBeat.RegisterCallback(handler);
 			}
 		}
 

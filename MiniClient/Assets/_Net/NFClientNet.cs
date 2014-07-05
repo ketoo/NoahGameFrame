@@ -71,9 +71,6 @@ namespace NFTCPClient
             _packets = new Queue<NFSocketPacket>();
         }
         // MonoBehaviour
-
-        private string hostname = "localhost";
-        private int port = 1998;
         private int bufferSize = 65536;
 
         private NFTCPClientState _state;
@@ -236,9 +233,6 @@ namespace NFTCPClient
             {
                 return;
             }
-
-            this.hostname = hostname;
-            this.port = port;
 
             _state = NFTCPClientState.Connecting;
 

@@ -9,8 +9,6 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using System.Linq;
-using System.Text;
 using System.Runtime.InteropServices;
 
 public class NFConfig
@@ -19,7 +17,7 @@ public class NFConfig
     private XmlNode root = null;
 
     private int mnServerID = 0;
-    private ArrayList aServerList = null;
+    private ArrayList aWorldList = null;
     private int mnCloneID = 0;
     private int mnCloneMinTime = 0;
     private int mnCloneMaxTime = 0;
@@ -61,9 +59,9 @@ public class NFConfig
 
     public ArrayList GetServerList()
     {
-        if (null == aServerList)
+        if (null == aWorldList)
         {
-            aServerList = new ArrayList();
+            aWorldList = new ArrayList();
 
             XmlNode node = root.SelectSingleNode("Server");
 
@@ -75,12 +73,12 @@ public class NFConfig
                 XmlAttribute strPort = nodeServer.Attributes["Port"];
 
                 string strServer = strIP.Value + ":" + strPort.Value;
-                aServerList.Add(strServer);
+                aWorldList.Add(strServer);
             }
         }
         
 
-        return aServerList;
+        return aWorldList;
     }
 
     public int GetRobotCloneID()
@@ -171,10 +169,6 @@ public class NFConfig
         }
 
         System.Random ro = new System.Random();
-        int nRD = ro.Next(0, mstrArray.Count());
-
-
-
         string strPosRnd = mstrArray[0];
         string[] strPosArrayRnd = strPosRnd.Split(',');
         fX = float.Parse(strPosArrayRnd[0]);
