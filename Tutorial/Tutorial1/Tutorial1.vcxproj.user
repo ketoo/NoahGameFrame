@@ -6,8 +6,8 @@
     <LocalDebuggerWorkingDirectory>$(NFBIN_SERVER)\$(Configuration)\NFLoginServer\</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LocalDebuggerWorkingDirectory>D:\NoahGameFrame\trunk\_Out\Server\Debug\Tutorial1</LocalDebuggerWorkingDirectory>
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)\_Out\Server\Debug\Tutorial1</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommand>D:\NoahGameFrame\trunk\_Out\Server\Debug\Tutorial1\NFPluginLoader_d.exe</LocalDebuggerCommand>
+    <LocalDebuggerCommand>$(SolutionDir)\_Out\Server\Debug\Tutorial1\NFPluginLoader_d.exe</LocalDebuggerCommand>
   </PropertyGroup>
 </Project>
