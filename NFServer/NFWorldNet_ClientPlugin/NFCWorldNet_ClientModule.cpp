@@ -144,7 +144,7 @@ int NFCWorldNet_ClientModule::OnSelectServerProcess(const NFIPacket& msg)
 int NFCWorldNet_ClientModule::OnSelectServerResultsEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
 {
     if (var.GetCount() != 7
-        || var.TypeEx(VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_INT,
+        || !var.TypeEx(VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_INT,
 		VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_STRING, VARIANT_TYPE::VTYPE_STRING,
 		VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_STRING, VARIANT_TYPE::VTYPE_UNKNOWN))
     {
@@ -169,7 +169,7 @@ int NFCWorldNet_ClientModule::OnSelectServerResultsEvent(const NFIDENTID& object
     xMsg.set_world_ip(strWorldAddress);
     xMsg.set_world_key(strKey);
 
-	SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xMsg, 0);
+	SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xMsg, mnSocketFD);
 
     return 0;
 }
