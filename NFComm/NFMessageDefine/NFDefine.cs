@@ -322,6 +322,12 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_OBJECT", Value=227)]
       EGMI_ACK_RECORD_OBJECT = 227,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_CLEAR", Value=228)]
+      EGMI_ACK_RECORD_CLEAR = 228,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_SORT", Value=229)]
+      EGMI_ACK_RECORD_SORT = 229,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MOVE", Value=230)]
       EGMI_REQ_MOVE = 230,
             
