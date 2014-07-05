@@ -1529,17 +1529,32 @@ class ReqRoleList : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 game_id() const;
   inline void set_game_id(::google::protobuf::int32 value);
 
+  // optional bytes account = 2;
+  inline bool has_account() const;
+  inline void clear_account();
+  static const int kAccountFieldNumber = 2;
+  inline const ::std::string& account() const;
+  inline void set_account(const ::std::string& value);
+  inline void set_account(const char* value);
+  inline void set_account(const void* value, size_t size);
+  inline ::std::string* mutable_account();
+  inline ::std::string* release_account();
+  inline void set_allocated_account(::std::string* account);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqRoleList)
  private:
   inline void set_has_game_id();
   inline void clear_has_game_id();
+  inline void set_has_account();
+  inline void clear_has_account();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::std::string* account_;
   ::google::protobuf::int32 game_id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
@@ -1604,38 +1619,31 @@ class RoleLiteInfo : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 char_id = 1;
-  inline bool has_char_id() const;
-  inline void clear_char_id();
-  static const int kCharIdFieldNumber = 1;
-  inline ::google::protobuf::int32 char_id() const;
-  inline void set_char_id(::google::protobuf::int32 value);
-
-  // required int32 career = 2;
+  // required int32 career = 1;
   inline bool has_career() const;
   inline void clear_career();
-  static const int kCareerFieldNumber = 2;
+  static const int kCareerFieldNumber = 1;
   inline ::google::protobuf::int32 career() const;
   inline void set_career(::google::protobuf::int32 value);
 
-  // required int32 sex = 3;
+  // required int32 sex = 2;
   inline bool has_sex() const;
   inline void clear_sex();
-  static const int kSexFieldNumber = 3;
+  static const int kSexFieldNumber = 2;
   inline ::google::protobuf::int32 sex() const;
   inline void set_sex(::google::protobuf::int32 value);
 
-  // required int32 race = 4;
+  // required int32 race = 3;
   inline bool has_race() const;
   inline void clear_race();
-  static const int kRaceFieldNumber = 4;
+  static const int kRaceFieldNumber = 3;
   inline ::google::protobuf::int32 race() const;
   inline void set_race(::google::protobuf::int32 value);
 
-  // required bytes noob_name = 5;
+  // required bytes noob_name = 4;
   inline bool has_noob_name() const;
   inline void clear_noob_name();
-  static const int kNoobNameFieldNumber = 5;
+  static const int kNoobNameFieldNumber = 4;
   inline const ::std::string& noob_name() const;
   inline void set_noob_name(const ::std::string& value);
   inline void set_noob_name(const char* value);
@@ -1644,80 +1652,52 @@ class RoleLiteInfo : public ::google::protobuf::Message {
   inline ::std::string* release_noob_name();
   inline void set_allocated_noob_name(::std::string* noob_name);
 
-  // required int32 game_id = 6;
+  // required int32 game_id = 5;
   inline bool has_game_id() const;
   inline void clear_game_id();
-  static const int kGameIdFieldNumber = 6;
+  static const int kGameIdFieldNumber = 5;
   inline ::google::protobuf::int32 game_id() const;
   inline void set_game_id(::google::protobuf::int32 value);
 
-  // required int32 char_level = 7;
-  inline bool has_char_level() const;
-  inline void clear_char_level();
-  static const int kCharLevelFieldNumber = 7;
-  inline ::google::protobuf::int32 char_level() const;
-  inline void set_char_level(::google::protobuf::int32 value);
+  // required int32 role_level = 6;
+  inline bool has_role_level() const;
+  inline void clear_role_level();
+  static const int kRoleLevelFieldNumber = 6;
+  inline ::google::protobuf::int32 role_level() const;
+  inline void set_role_level(::google::protobuf::int32 value);
 
-  // required int32 char_exp = 8;
-  inline bool has_char_exp() const;
-  inline void clear_char_exp();
-  static const int kCharExpFieldNumber = 8;
-  inline ::google::protobuf::int32 char_exp() const;
-  inline void set_char_exp(::google::protobuf::int32 value);
-
-  // required int32 money = 9;
-  inline bool has_money() const;
-  inline void clear_money();
-  static const int kMoneyFieldNumber = 9;
-  inline ::google::protobuf::int32 money() const;
-  inline void set_money(::google::protobuf::int32 value);
-
-  // required int32 cash = 10;
-  inline bool has_cash() const;
-  inline void clear_cash();
-  static const int kCashFieldNumber = 10;
-  inline ::google::protobuf::int32 cash() const;
-  inline void set_cash(::google::protobuf::int32 value);
-
-  // required int32 vip_level = 11;
-  inline bool has_vip_level() const;
-  inline void clear_vip_level();
-  static const int kVipLevelFieldNumber = 11;
-  inline ::google::protobuf::int32 vip_level() const;
-  inline void set_vip_level(::google::protobuf::int32 value);
-
-  // required int32 delete_time = 12;
+  // required int32 delete_time = 7;
   inline bool has_delete_time() const;
   inline void clear_delete_time();
-  static const int kDeleteTimeFieldNumber = 12;
+  static const int kDeleteTimeFieldNumber = 7;
   inline ::google::protobuf::int32 delete_time() const;
   inline void set_delete_time(::google::protobuf::int32 value);
 
-  // required int32 reg_time = 13;
+  // required int32 reg_time = 8;
   inline bool has_reg_time() const;
   inline void clear_reg_time();
-  static const int kRegTimeFieldNumber = 13;
+  static const int kRegTimeFieldNumber = 8;
   inline ::google::protobuf::int32 reg_time() const;
   inline void set_reg_time(::google::protobuf::int32 value);
 
-  // required int32 last_offline_time = 15;
+  // required int32 last_offline_time = 9;
   inline bool has_last_offline_time() const;
   inline void clear_last_offline_time();
-  static const int kLastOfflineTimeFieldNumber = 15;
+  static const int kLastOfflineTimeFieldNumber = 9;
   inline ::google::protobuf::int32 last_offline_time() const;
   inline void set_last_offline_time(::google::protobuf::int32 value);
 
-  // required int32 last_offline_ip = 16;
+  // required int32 last_offline_ip = 10;
   inline bool has_last_offline_ip() const;
   inline void clear_last_offline_ip();
-  static const int kLastOfflineIpFieldNumber = 16;
+  static const int kLastOfflineIpFieldNumber = 10;
   inline ::google::protobuf::int32 last_offline_ip() const;
   inline void set_last_offline_ip(::google::protobuf::int32 value);
 
-  // required bytes view_record = 17;
+  // required bytes view_record = 11;
   inline bool has_view_record() const;
   inline void clear_view_record();
-  static const int kViewRecordFieldNumber = 17;
+  static const int kViewRecordFieldNumber = 11;
   inline const ::std::string& view_record() const;
   inline void set_view_record(const ::std::string& value);
   inline void set_view_record(const char* value);
@@ -1726,22 +1706,8 @@ class RoleLiteInfo : public ::google::protobuf::Message {
   inline ::std::string* release_view_record();
   inline void set_allocated_view_record(::std::string* view_record);
 
-  // required bytes pet_record = 18;
-  inline bool has_pet_record() const;
-  inline void clear_pet_record();
-  static const int kPetRecordFieldNumber = 18;
-  inline const ::std::string& pet_record() const;
-  inline void set_pet_record(const ::std::string& value);
-  inline void set_pet_record(const char* value);
-  inline void set_pet_record(const void* value, size_t size);
-  inline ::std::string* mutable_pet_record();
-  inline ::std::string* release_pet_record();
-  inline void set_allocated_pet_record(::std::string* pet_record);
-
   // @@protoc_insertion_point(class_scope:NFMsg.RoleLiteInfo)
  private:
-  inline void set_has_char_id();
-  inline void clear_has_char_id();
   inline void set_has_career();
   inline void clear_has_career();
   inline void set_has_sex();
@@ -1752,16 +1718,8 @@ class RoleLiteInfo : public ::google::protobuf::Message {
   inline void clear_has_noob_name();
   inline void set_has_game_id();
   inline void clear_has_game_id();
-  inline void set_has_char_level();
-  inline void clear_has_char_level();
-  inline void set_has_char_exp();
-  inline void clear_has_char_exp();
-  inline void set_has_money();
-  inline void clear_has_money();
-  inline void set_has_cash();
-  inline void clear_has_cash();
-  inline void set_has_vip_level();
-  inline void clear_has_vip_level();
+  inline void set_has_role_level();
+  inline void clear_has_role_level();
   inline void set_has_delete_time();
   inline void clear_has_delete_time();
   inline void set_has_reg_time();
@@ -1772,31 +1730,23 @@ class RoleLiteInfo : public ::google::protobuf::Message {
   inline void clear_has_last_offline_ip();
   inline void set_has_view_record();
   inline void clear_has_view_record();
-  inline void set_has_pet_record();
-  inline void clear_has_pet_record();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int32 char_id_;
   ::google::protobuf::int32 career_;
   ::google::protobuf::int32 sex_;
-  ::google::protobuf::int32 race_;
   ::std::string* noob_name_;
+  ::google::protobuf::int32 race_;
   ::google::protobuf::int32 game_id_;
-  ::google::protobuf::int32 char_level_;
-  ::google::protobuf::int32 char_exp_;
-  ::google::protobuf::int32 money_;
-  ::google::protobuf::int32 cash_;
-  ::google::protobuf::int32 vip_level_;
+  ::google::protobuf::int32 role_level_;
   ::google::protobuf::int32 delete_time_;
   ::google::protobuf::int32 reg_time_;
   ::google::protobuf::int32 last_offline_time_;
-  ::google::protobuf::int32 last_offline_ip_;
   ::std::string* view_record_;
-  ::std::string* pet_record_;
+  ::google::protobuf::int32 last_offline_ip_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(17 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(11 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
@@ -4021,41 +3971,89 @@ inline void ReqRoleList::set_game_id(::google::protobuf::int32 value) {
   game_id_ = value;
 }
 
+// optional bytes account = 2;
+inline bool ReqRoleList::has_account() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqRoleList::set_has_account() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqRoleList::clear_has_account() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqRoleList::clear_account() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    account_->clear();
+  }
+  clear_has_account();
+}
+inline const ::std::string& ReqRoleList::account() const {
+  return *account_;
+}
+inline void ReqRoleList::set_account(const ::std::string& value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqRoleList::set_account(const char* value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqRoleList::set_account(const void* value, size_t size) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqRoleList::mutable_account() {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  return account_;
+}
+inline ::std::string* ReqRoleList::release_account() {
+  clear_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = account_;
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqRoleList::set_allocated_account(::std::string* account) {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
+  if (account) {
+    set_has_account();
+    account_ = account;
+  } else {
+    clear_has_account();
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
 // -------------------------------------------------------------------
 
 // RoleLiteInfo
 
-// required int32 char_id = 1;
-inline bool RoleLiteInfo::has_char_id() const {
+// required int32 career = 1;
+inline bool RoleLiteInfo::has_career() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void RoleLiteInfo::set_has_char_id() {
+inline void RoleLiteInfo::set_has_career() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void RoleLiteInfo::clear_has_char_id() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void RoleLiteInfo::clear_char_id() {
-  char_id_ = 0;
-  clear_has_char_id();
-}
-inline ::google::protobuf::int32 RoleLiteInfo::char_id() const {
-  return char_id_;
-}
-inline void RoleLiteInfo::set_char_id(::google::protobuf::int32 value) {
-  set_has_char_id();
-  char_id_ = value;
-}
-
-// required int32 career = 2;
-inline bool RoleLiteInfo::has_career() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void RoleLiteInfo::set_has_career() {
-  _has_bits_[0] |= 0x00000002u;
-}
 inline void RoleLiteInfo::clear_has_career() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void RoleLiteInfo::clear_career() {
   career_ = 0;
@@ -4069,15 +4067,15 @@ inline void RoleLiteInfo::set_career(::google::protobuf::int32 value) {
   career_ = value;
 }
 
-// required int32 sex = 3;
+// required int32 sex = 2;
 inline bool RoleLiteInfo::has_sex() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
 inline void RoleLiteInfo::set_has_sex() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000002u;
 }
 inline void RoleLiteInfo::clear_has_sex() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void RoleLiteInfo::clear_sex() {
   sex_ = 0;
@@ -4091,15 +4089,15 @@ inline void RoleLiteInfo::set_sex(::google::protobuf::int32 value) {
   sex_ = value;
 }
 
-// required int32 race = 4;
+// required int32 race = 3;
 inline bool RoleLiteInfo::has_race() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void RoleLiteInfo::set_has_race() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void RoleLiteInfo::clear_has_race() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void RoleLiteInfo::clear_race() {
   race_ = 0;
@@ -4113,15 +4111,15 @@ inline void RoleLiteInfo::set_race(::google::protobuf::int32 value) {
   race_ = value;
 }
 
-// required bytes noob_name = 5;
+// required bytes noob_name = 4;
 inline bool RoleLiteInfo::has_noob_name() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void RoleLiteInfo::set_has_noob_name() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void RoleLiteInfo::clear_has_noob_name() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void RoleLiteInfo::clear_noob_name() {
   if (noob_name_ != &::google::protobuf::internal::kEmptyString) {
@@ -4183,15 +4181,15 @@ inline void RoleLiteInfo::set_allocated_noob_name(::std::string* noob_name) {
   }
 }
 
-// required int32 game_id = 6;
+// required int32 game_id = 5;
 inline bool RoleLiteInfo::has_game_id() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void RoleLiteInfo::set_has_game_id() {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void RoleLiteInfo::clear_has_game_id() {
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void RoleLiteInfo::clear_game_id() {
   game_id_ = 0;
@@ -4205,125 +4203,37 @@ inline void RoleLiteInfo::set_game_id(::google::protobuf::int32 value) {
   game_id_ = value;
 }
 
-// required int32 char_level = 7;
-inline bool RoleLiteInfo::has_char_level() const {
+// required int32 role_level = 6;
+inline bool RoleLiteInfo::has_role_level() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void RoleLiteInfo::set_has_role_level() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void RoleLiteInfo::clear_has_role_level() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void RoleLiteInfo::clear_role_level() {
+  role_level_ = 0;
+  clear_has_role_level();
+}
+inline ::google::protobuf::int32 RoleLiteInfo::role_level() const {
+  return role_level_;
+}
+inline void RoleLiteInfo::set_role_level(::google::protobuf::int32 value) {
+  set_has_role_level();
+  role_level_ = value;
+}
+
+// required int32 delete_time = 7;
+inline bool RoleLiteInfo::has_delete_time() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
-inline void RoleLiteInfo::set_has_char_level() {
+inline void RoleLiteInfo::set_has_delete_time() {
   _has_bits_[0] |= 0x00000040u;
 }
-inline void RoleLiteInfo::clear_has_char_level() {
-  _has_bits_[0] &= ~0x00000040u;
-}
-inline void RoleLiteInfo::clear_char_level() {
-  char_level_ = 0;
-  clear_has_char_level();
-}
-inline ::google::protobuf::int32 RoleLiteInfo::char_level() const {
-  return char_level_;
-}
-inline void RoleLiteInfo::set_char_level(::google::protobuf::int32 value) {
-  set_has_char_level();
-  char_level_ = value;
-}
-
-// required int32 char_exp = 8;
-inline bool RoleLiteInfo::has_char_exp() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
-}
-inline void RoleLiteInfo::set_has_char_exp() {
-  _has_bits_[0] |= 0x00000080u;
-}
-inline void RoleLiteInfo::clear_has_char_exp() {
-  _has_bits_[0] &= ~0x00000080u;
-}
-inline void RoleLiteInfo::clear_char_exp() {
-  char_exp_ = 0;
-  clear_has_char_exp();
-}
-inline ::google::protobuf::int32 RoleLiteInfo::char_exp() const {
-  return char_exp_;
-}
-inline void RoleLiteInfo::set_char_exp(::google::protobuf::int32 value) {
-  set_has_char_exp();
-  char_exp_ = value;
-}
-
-// required int32 money = 9;
-inline bool RoleLiteInfo::has_money() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
-}
-inline void RoleLiteInfo::set_has_money() {
-  _has_bits_[0] |= 0x00000100u;
-}
-inline void RoleLiteInfo::clear_has_money() {
-  _has_bits_[0] &= ~0x00000100u;
-}
-inline void RoleLiteInfo::clear_money() {
-  money_ = 0;
-  clear_has_money();
-}
-inline ::google::protobuf::int32 RoleLiteInfo::money() const {
-  return money_;
-}
-inline void RoleLiteInfo::set_money(::google::protobuf::int32 value) {
-  set_has_money();
-  money_ = value;
-}
-
-// required int32 cash = 10;
-inline bool RoleLiteInfo::has_cash() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
-}
-inline void RoleLiteInfo::set_has_cash() {
-  _has_bits_[0] |= 0x00000200u;
-}
-inline void RoleLiteInfo::clear_has_cash() {
-  _has_bits_[0] &= ~0x00000200u;
-}
-inline void RoleLiteInfo::clear_cash() {
-  cash_ = 0;
-  clear_has_cash();
-}
-inline ::google::protobuf::int32 RoleLiteInfo::cash() const {
-  return cash_;
-}
-inline void RoleLiteInfo::set_cash(::google::protobuf::int32 value) {
-  set_has_cash();
-  cash_ = value;
-}
-
-// required int32 vip_level = 11;
-inline bool RoleLiteInfo::has_vip_level() const {
-  return (_has_bits_[0] & 0x00000400u) != 0;
-}
-inline void RoleLiteInfo::set_has_vip_level() {
-  _has_bits_[0] |= 0x00000400u;
-}
-inline void RoleLiteInfo::clear_has_vip_level() {
-  _has_bits_[0] &= ~0x00000400u;
-}
-inline void RoleLiteInfo::clear_vip_level() {
-  vip_level_ = 0;
-  clear_has_vip_level();
-}
-inline ::google::protobuf::int32 RoleLiteInfo::vip_level() const {
-  return vip_level_;
-}
-inline void RoleLiteInfo::set_vip_level(::google::protobuf::int32 value) {
-  set_has_vip_level();
-  vip_level_ = value;
-}
-
-// required int32 delete_time = 12;
-inline bool RoleLiteInfo::has_delete_time() const {
-  return (_has_bits_[0] & 0x00000800u) != 0;
-}
-inline void RoleLiteInfo::set_has_delete_time() {
-  _has_bits_[0] |= 0x00000800u;
-}
 inline void RoleLiteInfo::clear_has_delete_time() {
-  _has_bits_[0] &= ~0x00000800u;
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void RoleLiteInfo::clear_delete_time() {
   delete_time_ = 0;
@@ -4337,15 +4247,15 @@ inline void RoleLiteInfo::set_delete_time(::google::protobuf::int32 value) {
   delete_time_ = value;
 }
 
-// required int32 reg_time = 13;
+// required int32 reg_time = 8;
 inline bool RoleLiteInfo::has_reg_time() const {
-  return (_has_bits_[0] & 0x00001000u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 inline void RoleLiteInfo::set_has_reg_time() {
-  _has_bits_[0] |= 0x00001000u;
+  _has_bits_[0] |= 0x00000080u;
 }
 inline void RoleLiteInfo::clear_has_reg_time() {
-  _has_bits_[0] &= ~0x00001000u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 inline void RoleLiteInfo::clear_reg_time() {
   reg_time_ = 0;
@@ -4359,15 +4269,15 @@ inline void RoleLiteInfo::set_reg_time(::google::protobuf::int32 value) {
   reg_time_ = value;
 }
 
-// required int32 last_offline_time = 15;
+// required int32 last_offline_time = 9;
 inline bool RoleLiteInfo::has_last_offline_time() const {
-  return (_has_bits_[0] & 0x00002000u) != 0;
+  return (_has_bits_[0] & 0x00000100u) != 0;
 }
 inline void RoleLiteInfo::set_has_last_offline_time() {
-  _has_bits_[0] |= 0x00002000u;
+  _has_bits_[0] |= 0x00000100u;
 }
 inline void RoleLiteInfo::clear_has_last_offline_time() {
-  _has_bits_[0] &= ~0x00002000u;
+  _has_bits_[0] &= ~0x00000100u;
 }
 inline void RoleLiteInfo::clear_last_offline_time() {
   last_offline_time_ = 0;
@@ -4381,15 +4291,15 @@ inline void RoleLiteInfo::set_last_offline_time(::google::protobuf::int32 value)
   last_offline_time_ = value;
 }
 
-// required int32 last_offline_ip = 16;
+// required int32 last_offline_ip = 10;
 inline bool RoleLiteInfo::has_last_offline_ip() const {
-  return (_has_bits_[0] & 0x00004000u) != 0;
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
 inline void RoleLiteInfo::set_has_last_offline_ip() {
-  _has_bits_[0] |= 0x00004000u;
+  _has_bits_[0] |= 0x00000200u;
 }
 inline void RoleLiteInfo::clear_has_last_offline_ip() {
-  _has_bits_[0] &= ~0x00004000u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline void RoleLiteInfo::clear_last_offline_ip() {
   last_offline_ip_ = 0;
@@ -4403,15 +4313,15 @@ inline void RoleLiteInfo::set_last_offline_ip(::google::protobuf::int32 value) {
   last_offline_ip_ = value;
 }
 
-// required bytes view_record = 17;
+// required bytes view_record = 11;
 inline bool RoleLiteInfo::has_view_record() const {
-  return (_has_bits_[0] & 0x00008000u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 inline void RoleLiteInfo::set_has_view_record() {
-  _has_bits_[0] |= 0x00008000u;
+  _has_bits_[0] |= 0x00000400u;
 }
 inline void RoleLiteInfo::clear_has_view_record() {
-  _has_bits_[0] &= ~0x00008000u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 inline void RoleLiteInfo::clear_view_record() {
   if (view_record_ != &::google::protobuf::internal::kEmptyString) {
@@ -4470,76 +4380,6 @@ inline void RoleLiteInfo::set_allocated_view_record(::std::string* view_record) 
   } else {
     clear_has_view_record();
     view_record_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required bytes pet_record = 18;
-inline bool RoleLiteInfo::has_pet_record() const {
-  return (_has_bits_[0] & 0x00010000u) != 0;
-}
-inline void RoleLiteInfo::set_has_pet_record() {
-  _has_bits_[0] |= 0x00010000u;
-}
-inline void RoleLiteInfo::clear_has_pet_record() {
-  _has_bits_[0] &= ~0x00010000u;
-}
-inline void RoleLiteInfo::clear_pet_record() {
-  if (pet_record_ != &::google::protobuf::internal::kEmptyString) {
-    pet_record_->clear();
-  }
-  clear_has_pet_record();
-}
-inline const ::std::string& RoleLiteInfo::pet_record() const {
-  return *pet_record_;
-}
-inline void RoleLiteInfo::set_pet_record(const ::std::string& value) {
-  set_has_pet_record();
-  if (pet_record_ == &::google::protobuf::internal::kEmptyString) {
-    pet_record_ = new ::std::string;
-  }
-  pet_record_->assign(value);
-}
-inline void RoleLiteInfo::set_pet_record(const char* value) {
-  set_has_pet_record();
-  if (pet_record_ == &::google::protobuf::internal::kEmptyString) {
-    pet_record_ = new ::std::string;
-  }
-  pet_record_->assign(value);
-}
-inline void RoleLiteInfo::set_pet_record(const void* value, size_t size) {
-  set_has_pet_record();
-  if (pet_record_ == &::google::protobuf::internal::kEmptyString) {
-    pet_record_ = new ::std::string;
-  }
-  pet_record_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* RoleLiteInfo::mutable_pet_record() {
-  set_has_pet_record();
-  if (pet_record_ == &::google::protobuf::internal::kEmptyString) {
-    pet_record_ = new ::std::string;
-  }
-  return pet_record_;
-}
-inline ::std::string* RoleLiteInfo::release_pet_record() {
-  clear_has_pet_record();
-  if (pet_record_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = pet_record_;
-    pet_record_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void RoleLiteInfo::set_allocated_pet_record(::std::string* pet_record) {
-  if (pet_record_ != &::google::protobuf::internal::kEmptyString) {
-    delete pet_record_;
-  }
-  if (pet_record) {
-    set_has_pet_record();
-    pet_record_ = pet_record;
-  } else {
-    clear_has_pet_record();
-    pet_record_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
