@@ -11,22 +11,10 @@
 		<class Id = "Item" Type = "TYPE_ITEM" Path = "../../NFDataCfg/Struct/Class/Item.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Item.xml"  public = "false" Desc = "NPC">
 			<!-- <class Id = "Equip" Type = "TYPE_EQUIP" Path = "../../NFDataCfg/Struct/Class/Equip.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Equip.xml" public = "false" Desc = "NPC"/> -->
 		</class>
-		
 		<!-- <class Id = "Skill" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/Skill.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Skill.xml" public = "false" Desc = "NPC"/> -->
 		<class Id = "Scene" Type = "TYPE_SCENE" Path = "../../NFDataCfg/Struct/Class/Scene.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Scene.xml" public = "false" Desc = "NPC"/> 
-		
-		<class Id = "ServerData" Type = "TYPE_WORLD" Path = "../../NFDataCfg/Struct/Class/ServerData.xml" InstancePath = "../../NFDataCfg/Ini/NPC/ServerData.xml" public = "true" Desc = "NPC"> 
-			<class Id = "WorldServer" Type = "TYPE_WORLD" Path = "../../NFDataCfg/Struct/Class/WorldServer.xml" InstancePath = "../../NFDataCfg/Ini/NPC/WorldServer.xml" public = "true" Desc = "NPC"/> 
-			<class Id = "MasterServer" Type = "TYPE_WORLD" Path = "../../NFDataCfg/Struct/Class/MasterServer.xml" InstancePath = "../../NFDataCfg/Ini/NPC/MasterServer.xml" public = "true" Desc = "NPC"/> 
-			<class Id = "DataBaseServer" Type = "TYPE_DataBase" Path = "../../NFDataCfg/Struct/Class/DataBaseServer.xml" InstancePath = "../../NFDataCfg/Ini/NPC/DataBaseServer.xml" public = "false" Desc = "NPC"/> 
-			<class Id = "ProxyServer" Type = "TYPE_PROXY" Path = "../../NFDataCfg/Struct/Class/ProxyServer.xml" InstancePath = "../../NFDataCfg/Ini/NPC/ProxyServer.xml" public = "false" Desc = "NPC"/> 
-			<class Id = "LoginServer" Type = "TYPE_LOGIN" Path = "../../NFDataCfg/Struct/Class/LoginServer.xml" InstancePath = "../../NFDataCfg/Ini/NPC/LoginServer.xml" public = "false" Desc = "NPC"/> 
-			<class Id = "GameServer" Type = "TYPE_LOGIN" Path = "../../NFDataCfg/Struct/Class/GameServer.xml" InstancePath = "../../NFDataCfg/Ini/NPC/GameServer.xml" public = "false" Desc = "NPC"/> 
-			<class Id = "ClientConnect" Type = "TYPE_CLIENT" Path = "../../NFDataCfg/Struct/Class/ClientConnect.xml" InstancePath = "../../NFDataCfg/Ini/NPC/ClientConnect.xml" public = "false" Desc = "NPC"/> 
-			<class Id = "WantToConnect" Type = "TYPE_CLIENT" Path = "../../NFDataCfg/Struct/Class/WantToConnect.xml" InstancePath = "../../NFDataCfg/Ini/NPC/WantToConnect.xml" public = "false" Desc = "AI Creator"/>
-			<class Id = "PlayerAccount" Type = "TYPE_CLIENT" Path = "../../NFDataCfg/Struct/Class/PlayerAccount.xml" InstancePath = "../../NFDataCfg/Ini/NPC/PlayerAccount.xml" public = "false" Desc = "AI Creator"/>
-		</class>
 	</class>
+	<class Id = "ServerData" Type = "TYPE_WORLD" Path = "../../NFDataCfg/Struct/Class/ServerData.xml" InstancePath = "../../NFDataCfg/Ini/NPC/ServerData.xml" public = "true" Desc = "NPC"/>
 	<class Id = "NPCSeed" Type = "TYPE_WORLD" Path = "../../NFDataCfg/Struct/Class/NPCSeed.xml" InstancePath = "" public = "false" Desc = "NPC"/> 
 	<class Id = "Buff" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/Buff.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Buff.xml" public = "false" Desc = "NPC"/>
 	<class Id = "Task" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/Task.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Task.xml" public = "false" Desc = "TASK"/>
