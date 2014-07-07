@@ -17,7 +17,6 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
-#include "NFComm/NFPluginModule/NFILevelConfigModule.h"
 
 class NFCPropertyModule
     : public NFIPropertyModule
@@ -44,40 +43,20 @@ public:
     virtual int AddPropertyValue( const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue );
     virtual int SubPropertyValue( const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue );
 
-    virtual int FullHPMP( const NFIDENTID& self );
+    virtual bool FullHPMP( const NFIDENTID& self );
+    virtual bool AddHP( const NFIDENTID& self, int nValue );
+    virtual bool ConsumeHP( const NFIDENTID& self, int nValue );
 
-    virtual int AddHP( const NFIDENTID& self, int nValue );
-    virtual int ConsumeHP( const NFIDENTID& self, int nValue );
+    virtual bool AddMP( const NFIDENTID& self, int nValue );
+    virtual bool ConsumeMP( const NFIDENTID& self, int nValue );    
 
-    virtual int AddMP( const NFIDENTID& self, int nValue );
-    virtual int ConsumeMP( const NFIDENTID& self, int nValue );    
+    virtual bool ConsumeSP( const NFIDENTID& self, int nValue );
+    virtual bool FullSP( const NFIDENTID& self );
+    virtual bool AddSP( const NFIDENTID& self, int nValue );
 
-    virtual int ConsumeSP( const NFIDENTID& self, int nValue );
-    virtual int FullSP( const NFIDENTID& self );
-    virtual int AddSP( const NFIDENTID& self, int nValue );
+    virtual bool ConsumeMoney( const NFIDENTID& self, int nValue );
+    virtual bool AddMoney( const NFIDENTID& self, int nValue );
 
-    virtual int ConsumeVP( const NFIDENTID& self, int nValue );
-    virtual int FullVP( const NFIDENTID& self );
-    virtual int RestoreVP( const NFIDENTID& self );
-    virtual int AddVP( const NFIDENTID& self, int nValue );
-
-    virtual int ConsumeActivityVP( const NFIDENTID& self, int nValue );
-    virtual int FullActivityVP( const NFIDENTID& self );
-    virtual int AddActivityVP( const NFIDENTID& self, int nValue );
-
-    virtual int ConsumeMoney( const NFIDENTID& self, int nValue );
-    virtual int AddMoney( const NFIDENTID& self, int nValue );
-
-    virtual int ConsumeYBP(const NFIDENTID& self, int nValue);
-
-    virtual int ConsumeSoulStone( const NFIDENTID& self, int nValue );
-    virtual int AddSoulStone( const NFIDENTID& self, int nValue );
-
-    virtual int ConsumeEssence( const NFIDENTID& self, int nValue );
-    virtual int AddEssence( const NFIDENTID& self, int nValue );
-
-	virtual int AddHonour(const NFIDENTID& self, int nValue);
-	virtual int ConsumeHonour(const NFIDENTID& self, int nValue);
 protected:
 
 
@@ -94,11 +73,6 @@ protected:
 
     int OnReqModifyData( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
 
-    int OnHPRecoverHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var );
-    int OnMPRecoverHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var );
-    int OnSPRecoverHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var );
-    int OnVPRecoverHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var );
-    int OnActivityVPRecoverHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var );
 private:
     //NFConfig mConfig;
 private:
@@ -109,7 +83,6 @@ private:
     NFIPropertyConfigModule* m_pPropertyConfigModule;
     NFIElementInfoModule* m_pElementInfoModule;
     NFILogicClassModule* m_pLogicClassModule;
-    NFILevelConfigModule* m_pLevelConfigModule;
 
     NFMap<std::string, int>  mPropertyColList; //主要是运行时表property->col那里
     NFMap<int, std::string>  mColPropertyList; //主要是运行时表col->property
