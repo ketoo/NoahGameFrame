@@ -304,11 +304,11 @@ public class NFBinarySendLogic
         SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_SELECT_SERVER, stream);
     }
 
-    public void RequireRoleList(int nGameID)
+    public void RequireRoleList(string strAccount, int nGameID)
     {
         NFMsg.ReqRoleList xData = new NFMsg.ReqRoleList();
         xData.game_id = nGameID;
-
+        xData.account = UnicodeEncoding.Default.GetBytes(strAccount);
 
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqRoleList>(stream, xData);
@@ -316,7 +316,7 @@ public class NFBinarySendLogic
         SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_ROLE_LIST, stream);
     }
 
-    public void RequireCreateRole(string strRoleName, int byCareer, int bySex, int nGameID)
+    public void RequireCreateRole(string strAccount, string strRoleName, int byCareer, int bySex, int nGameID)
     {
         if (strRoleName.Length >= 20 || strRoleName.Length < 4)
         {
@@ -327,12 +327,8 @@ public class NFBinarySendLogic
         xData.career = byCareer;
         xData.sex = bySex;
         xData.noob_name = UnicodeEncoding.Default.GetBytes(strRoleName);
+        xData.account = UnicodeEncoding.Default.GetBytes(strAccount);
         xData.race = 0;
-        xData.noob_head = 0;
-        xData.noob_body = 0;
-        xData.noob_foot = 0;
-        xData.noob_weapon = 0;
-        xData.noob_pic = 0;
         xData.game_id = nGameID;
 
         MemoryStream stream = new MemoryStream();
@@ -341,11 +337,12 @@ public class NFBinarySendLogic
         SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_CREATE_ROLE, stream);
     }
 
-    public void RequireDelRole(string strRoleName)
+    public void RequireDelRole(string strAccount, string strRoleName, int nGameID)
     {
         NFMsg.ReqDeleteRole xData = new NFMsg.ReqDeleteRole();
         xData.name = UnicodeEncoding.Default.GetBytes(strRoleName);
-
+        xData.account = UnicodeEncoding.Default.GetBytes(strAccount);
+        xData.game_id = nGameID;
 
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqDeleteRole>(stream, xData);
@@ -353,11 +350,12 @@ public class NFBinarySendLogic
         SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_DELETE_ROLE, stream);
     }
 
-    public void RequireEnterGameServer(int iServerID, string strRoleName)
+    public void RequireEnterGameServer(string strAccount, string strRoleName, int nServerID)
     {
         NFMsg.ReqEnterGameServer xData = new NFMsg.ReqEnterGameServer();
-        xData.server_id = net.nServerID;
-
+        xData.name = UnicodeEncoding.Default.GetBytes(strRoleName);
+        xData.account = UnicodeEncoding.Default.GetBytes(strAccount);
+        xData.game_id = nServerID;
 
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqEnterGameServer>(stream, xData);
