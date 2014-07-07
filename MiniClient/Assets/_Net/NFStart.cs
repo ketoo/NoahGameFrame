@@ -368,19 +368,24 @@ public class NFStart : MonoBehaviour
 
         if (netFocus.strRoleName.Length > 0)
         {
-            if (GUI.Button(new Rect(400 / 2 + 75, 100, 200, 50), "创建角色"))
+            if (netFocus.listener.aCharList.Count <= 0)
             {
-                netFocus.sendLogic.RequireCreateRole(netFocus.strRoleName, 0, 1, (int)netFocus.nServerID);
+                if (GUI.Button(new Rect(400 / 2 + 75, 100, 200, 50), "创建角色"))
+                {
+                    netFocus.sendLogic.RequireCreateRole(netFocus.strAccount, netFocus.strRoleName, 0, 1, netFocus.nServerID);
+                }
             }
-
-            if (GUI.Button(new Rect(400 / 2 + 75, 200, 200, 50), "删除角色"))
+            else
             {
-                netFocus.sendLogic.RequireDelRole(netFocus.strRoleName);
-            }
+                if (GUI.Button(new Rect(400 / 2 + 75, 200, 200, 50), "删除角色"))
+                {
+                    netFocus.sendLogic.RequireDelRole(netFocus.strAccount, netFocus.strRoleName, netFocus.nServerID);
+                }
 
-            if (GUI.Button(new Rect(300 / 2, 400, 200, 50), "进入游戏"))
-            {
-                netFocus.sendLogic.RequireEnterGameServer(netFocus.nServerID, netFocus.strRoleName);
+                if (GUI.Button(new Rect(300 / 2, 400, 200, 50), "进入游戏"))
+                {
+                    netFocus.sendLogic.RequireEnterGameServer(netFocus.strAccount, netFocus.strRoleName, netFocus.nServerID);
+                }
             }
         }
     }
