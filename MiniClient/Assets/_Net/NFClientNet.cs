@@ -65,35 +65,35 @@ namespace NFTCPClient
 
             binListener = new NFBinaryClientListener(this);
 
-            _state = NFTCPClientState.Disconnected;
-            _events = new Queue<NFTCPEventType>();
-            _messages = new Queue<string>();
-            _packets = new Queue<NFSocketPacket>();
+            mxState = NFTCPClientState.Disconnected;
+            mxEvents = new Queue<NFTCPEventType>();
+            mxMessages = new Queue<string>();
+            mxPackets = new Queue<NFSocketPacket>();
         }
         // MonoBehaviour
         private int bufferSize = 65536;
 
-        private NFTCPClientState _state;
-        private NetworkStream _stream;
-        private StreamWriter _writer;
-        private StreamReader _reader;
-        private Thread _readThread;
-        private TcpClient _client;
-        private Queue<NFTCPEventType> _events;
-        private Queue<string> _messages;
-        private Queue<NFSocketPacket> _packets;
+        private NFTCPClientState mxState;
+        private NetworkStream mxStream;
+        private StreamWriter mxWriter;
+        private StreamReader mxReader;
+        private Thread mxReadThread;
+        private TcpClient mxClient;
+        private Queue<NFTCPEventType> mxEvents;
+        private Queue<string> mxMessages;
+        private Queue<NFSocketPacket> mxPackets;
 
         private NFBinaryClientListener binListener;
 
 
         public bool IsConnected()
         {
-            return _state == NFTCPClientState.Connected;
+            return mxState == NFTCPClientState.Connected;
         }
 
         public NFTCPClientState GetState()
         {
-            return _state;
+            return mxState;
         }
 
         public NFBinaryClientListener GetBinListener()
@@ -104,16 +104,16 @@ namespace NFTCPClient
         public void Update()
         {
 			
-            while (_events.Count > 0)
+            while (mxEvents.Count > 0)
             {
-                lock (_events)
+                lock (mxEvents)
                 {
-                    NFTCPEventType eventType = _events.Dequeue();
+                    NFTCPEventType eventType = mxEvents.Dequeue();
 
                     NFTCPEventParams eventParams = new NFTCPEventParams();
                     eventParams.eventType = eventType;
                     eventParams.client = this;
-                    eventParams.socket = _client;
+                    eventParams.socket = mxClient;
 
                     if (eventType == NFTCPEventType.Connected)
                     {
@@ -123,16 +123,16 @@ namespace NFTCPClient
                     {
                         binListener.OnClientDisconnect(eventParams);
 
-                        _reader.Close();
-                        _writer.Close();
-                        _client.Close();
+                        mxReader.Close();
+                        mxWriter.Close();
+                        mxClient.Close();
 
                     }
                     else if (eventType == NFTCPEventType.DataReceived)
                     {
-                        lock (_packets)
+                        lock (mxPackets)
                         {
-                            eventParams.packet = _packets.Dequeue();
+                            eventParams.packet = mxPackets.Dequeue();
                         
                             binListener.OnDataReceived(eventParams);
                         }
@@ -169,9 +169,9 @@ namespace NFTCPClient
             }
             catch (Exception e)
             {
-                lock (_events)
+                lock (mxEvents)
                 {
-                    _events.Enqueue(NFTCPEventType.ConnectionRefused);
+                    mxEvents.Enqueue(NFTCPEventType.ConnectionRefused);
                 }
 
             }
@@ -188,7 +188,7 @@ namespace NFTCPClient
                byte[] bytes = new byte[bufferSize];
                try
                {
-                   bytesRead = _stream.Read(bytes, 0, bufferSize);
+                   bytesRead = mxStream.Read(bytes, 0, bufferSize);
                }
                catch (Exception e)
                {
@@ -203,25 +203,25 @@ namespace NFTCPClient
                }
                else
                {
-                   lock (_events)
+                   lock (mxEvents)
                    {
 
-                       _events.Enqueue(NFTCPEventType.DataReceived);
+                       mxEvents.Enqueue(NFTCPEventType.DataReceived);
                    }
-                   lock (_packets)
+                   lock (mxPackets)
                    {
-                       _packets.Enqueue(new NFSocketPacket(bytes, bytesRead));
+                       mxPackets.Enqueue(new NFSocketPacket(bytes, bytesRead));
                    }
 
                }
             }
 
-            _state = NFTCPClientState.Disconnected;
+            mxState = NFTCPClientState.Disconnected;
 
-            _client.Close();
-            lock (_events)
+            mxClient.Close();
+            lock (mxEvents)
             {
-                _events.Enqueue(NFTCPEventType.Disconnected);
+                mxEvents.Enqueue(NFTCPEventType.Disconnected);
             }
 
         }
@@ -229,35 +229,35 @@ namespace NFTCPClient
         // Public
         public void Connect(string hostname, int port)
         {
-            if (_state == NFTCPClientState.Connected)
+            if (mxState == NFTCPClientState.Connected)
             {
                 return;
             }
 
-            _state = NFTCPClientState.Connecting;
+            mxState = NFTCPClientState.Connecting;
 
-            _messages.Clear();
-            _events.Clear();
+            mxMessages.Clear();
+            mxEvents.Clear();
 
-            _client = new TcpClient();
+            mxClient = new TcpClient();
 
-            _client.BeginConnect(hostname,
+            mxClient.BeginConnect(hostname,
                                  port,
                                  new AsyncCallback(ConnectCallback),
-                                 _client);
+                                 mxClient);
 
         }
 
         public void Disconnect()
         {
 
-            _state = NFTCPClientState.Disconnected;
+            mxState = NFTCPClientState.Disconnected;
 
-            try { if (_reader != null) _reader.Close(); }
+            try { if (mxReader != null) mxReader.Close(); }
             catch (Exception e) { e.ToString(); }
-            try { if (_writer != null) _writer.Close(); }
+            try { if (mxWriter != null) mxWriter.Close(); }
             catch (Exception e) { e.ToString(); }
-            try { if (_client != null) _client.Close(); }
+            try { if (mxClient != null) mxClient.Close(); }
             catch (Exception e) { e.ToString(); }
 
         }
@@ -273,34 +273,34 @@ namespace NFTCPClient
             if (!IsConnected())
                 return;
 
-            _stream.Write(bytes, offset, size);
-            _stream.Flush();
+            mxStream.Write(bytes, offset, size);
+            mxStream.Flush();
 
         }
 
         public void SetTcpClient(TcpClient tcpClient)
         {
 
-            _client = tcpClient;
+            mxClient = tcpClient;
 
-            if (_client.Connected)
+            if (mxClient.Connected)
             {
 
-                _stream = _client.GetStream();
-                _reader = new StreamReader(_stream);
-                _writer = new StreamWriter(_stream);
+                mxStream = mxClient.GetStream();
+                mxReader = new StreamReader(mxStream);
+                mxWriter = new StreamWriter(mxStream);
 
-                _state = NFTCPClientState.Connected;
+                mxState = NFTCPClientState.Connected;
 
-                _events.Enqueue(NFTCPEventType.Connected);
+                mxEvents.Enqueue(NFTCPEventType.Connected);
 
-                _readThread = new Thread(ReadData);
-                _readThread.IsBackground = true;
-                _readThread.Start();
+                mxReadThread = new Thread(ReadData);
+                mxReadThread.IsBackground = true;
+                mxReadThread.Start();
             }
             else
             {
-                _state = NFTCPClientState.Disconnected;
+                mxState = NFTCPClientState.Disconnected;
             }
 
         }
