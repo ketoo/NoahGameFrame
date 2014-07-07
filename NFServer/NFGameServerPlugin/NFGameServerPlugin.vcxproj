@@ -114,7 +114,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClInclude Include="NFCNPCRefreshModule.h" />
     <ClInclude Include="NFCPotionItemConsumeProcessModule.h" />
     <ClInclude Include="NFCItemModule.h" />
-    <ClInclude Include="NFCLevelConfigModule.h" />
     <ClInclude Include="NFCLevelModule.h" />
     <ClInclude Include="NFCPackModule.h" />
     <ClInclude Include="NFCPropertyConfigModule.h" />
@@ -125,7 +124,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClInclude Include="NFCBriefSkillConsumeProcessModule.h" />
     <ClInclude Include="NFCSkillModule.h" />
     <ClInclude Include="NFGameServerPlugin.h" />
-    <ClInclude Include="NFCGameServerConfigModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -145,7 +143,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClCompile Include="NFCNPCRefreshModule.cpp" />
     <ClCompile Include="NFCPotionItemConsumeProcessModule.cpp" />
     <ClCompile Include="NFCItemModule.cpp" />
-    <ClCompile Include="NFCLevelConfigModule.cpp" />
     <ClCompile Include="NFCLevelModule.cpp" />
     <ClCompile Include="NFCPackModule.cpp" />
     <ClCompile Include="NFCPropertyConfigModule.cpp" />
@@ -156,7 +153,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClCompile Include="NFCBriefSkillConsumeProcessModule.cpp" />
     <ClCompile Include="NFCSkillModule.cpp" />
     <ClCompile Include="NFGameServerPlugin.cpp" />
-    <ClCompile Include="NFCGameServerConfigModule.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

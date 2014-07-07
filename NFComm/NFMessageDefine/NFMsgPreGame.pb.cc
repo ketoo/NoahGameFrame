@@ -353,15 +353,11 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckRoleLiteInfoList));
   ReqCreateRole_descriptor_ = file->message_type(15);
-  static const int ReqCreateRole_offsets_[10] = {
+  static const int ReqCreateRole_offsets_[6] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCreateRole, account_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCreateRole, career_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCreateRole, sex_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCreateRole, race_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCreateRole, noob_head_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCreateRole, noob_body_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCreateRole, noob_foot_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCreateRole, noob_weapon_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCreateRole, noob_pic_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCreateRole, noob_name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCreateRole, game_id_),
   };
@@ -377,8 +373,10 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqCreateRole));
   ReqDeleteRole_descriptor_ = file->message_type(16);
-  static const int ReqDeleteRole_offsets_[1] = {
+  static const int ReqDeleteRole_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqDeleteRole, account_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqDeleteRole, name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqDeleteRole, game_id_),
   };
   ReqDeleteRole_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -392,8 +390,10 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqDeleteRole));
   ReqRecoverRole_descriptor_ = file->message_type(17);
-  static const int ReqRecoverRole_offsets_[1] = {
+  static const int ReqRecoverRole_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqRecoverRole, account_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqRecoverRole, name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqRecoverRole, game_id_),
   };
   ReqRecoverRole_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -540,25 +540,24 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
     "\n\017ReqSelectServer\022\020\n\010world_id\030\001 \002(\005\"5\n\020R"
     "eqKickFromWorld\022\020\n\010world_id\030\001 \002(\005\022\017\n\007acc"
     "ount\030\002 \002(\014\"/\n\013ReqRoleList\022\017\n\007game_id\030\001 \002"
-    "(\005\022\017\n\007account\030\002 \001(\014\"\341\001\n\014RoleLiteInfo\022\016\n\006"
+    "(\005\022\017\n\007account\030\002 \002(\014\"\341\001\n\014RoleLiteInfo\022\016\n\006"
     "career\030\001 \002(\005\022\013\n\003sex\030\002 \002(\005\022\014\n\004race\030\003 \002(\005\022"
     "\021\n\tnoob_name\030\004 \002(\014\022\017\n\007game_id\030\005 \002(\005\022\022\n\nr"
     "ole_level\030\006 \002(\005\022\023\n\013delete_time\030\007 \002(\005\022\020\n\010"
     "reg_time\030\010 \002(\005\022\031\n\021last_offline_time\030\t \002("
     "\005\022\027\n\017last_offline_ip\030\n \002(\005\022\023\n\013view_recor"
     "d\030\013 \002(\014\"=\n\023AckRoleLiteInfoList\022&\n\tchar_d"
-    "ata\030\001 \003(\0132\023.NFMsg.RoleLiteInfo\"\276\001\n\rReqCr"
-    "eateRole\022\016\n\006career\030\001 \002(\005\022\013\n\003sex\030\002 \002(\005\022\014\n"
-    "\004race\030\003 \002(\005\022\021\n\tnoob_head\030\004 \002(\005\022\021\n\tnoob_b"
-    "ody\030\005 \002(\005\022\021\n\tnoob_foot\030\006 \002(\005\022\023\n\013noob_wea"
-    "pon\030\007 \002(\005\022\020\n\010noob_pic\030\010 \002(\005\022\021\n\tnoob_name"
-    "\030\t \002(\014\022\017\n\007game_id\030\n \002(\005\"\035\n\rReqDeleteRole"
-    "\022\014\n\004name\030\001 \002(\014\"\036\n\016ReqRecoverRole\022\014\n\004name"
-    "\030\001 \002(\014*Z\n\014EServerState\022\r\n\tEST_CRASH\020\000\022\016\n"
-    "\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST_FIRE\020"
-    "\003\022\017\n\013EST_MAINTEN\020\004*@\n\021ReqServerListType\022"
-    "\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GAMES_ERV"
-    "ER\020\001", 2004);
+    "ata\030\001 \003(\0132\023.NFMsg.RoleLiteInfo\"o\n\rReqCre"
+    "ateRole\022\017\n\007account\030\001 \002(\014\022\016\n\006career\030\002 \002(\005"
+    "\022\013\n\003sex\030\003 \002(\005\022\014\n\004race\030\004 \002(\005\022\021\n\tnoob_name"
+    "\030\005 \002(\014\022\017\n\007game_id\030\006 \002(\005\"\?\n\rReqDeleteRole"
+    "\022\017\n\007account\030\001 \002(\014\022\014\n\004name\030\002 \002(\014\022\017\n\007game_"
+    "id\030\003 \002(\005\"@\n\016ReqRecoverRole\022\017\n\007account\030\001 "
+    "\002(\014\022\014\n\004name\030\002 \002(\014\022\017\n\007game_id\030\003 \002(\005*Z\n\014ES"
+    "erverState\022\r\n\tEST_CRASH\020\000\022\016\n\nEST_NARMAL\020"
+    "\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST_FIRE\020\003\022\017\n\013EST_MAI"
+    "NTEN\020\004*@\n\021ReqServerListType\022\025\n\021RSLT_WORL"
+    "D_SERVER\020\000\022\024\n\020RSLT_GAMES_ERVER\020\001", 1992);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgPreGame.proto", &protobuf_RegisterTypes);
   ServerInfoReport::default_instance_ = new ServerInfoReport();
@@ -4605,7 +4604,7 @@ bool ReqRoleList::MergePartialFromCodedStream(
         break;
       }
 
-      // optional bytes account = 2;
+      // required bytes account = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -4642,7 +4641,7 @@ void ReqRoleList::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->game_id(), output);
   }
 
-  // optional bytes account = 2;
+  // required bytes account = 2;
   if (has_account()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
       2, this->account(), output);
@@ -4661,7 +4660,7 @@ void ReqRoleList::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->game_id(), target);
   }
 
-  // optional bytes account = 2;
+  // required bytes account = 2;
   if (has_account()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
@@ -4686,7 +4685,7 @@ int ReqRoleList::ByteSize() const {
           this->game_id());
     }
 
-    // optional bytes account = 2;
+    // required bytes account = 2;
     if (has_account()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
@@ -4743,7 +4742,7 @@ void ReqRoleList::CopyFrom(const ReqRoleList& from) {
 }
 
 bool ReqRoleList::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
@@ -5607,14 +5606,10 @@ void AckRoleLiteInfoList::Swap(AckRoleLiteInfoList* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int ReqCreateRole::kAccountFieldNumber;
 const int ReqCreateRole::kCareerFieldNumber;
 const int ReqCreateRole::kSexFieldNumber;
 const int ReqCreateRole::kRaceFieldNumber;
-const int ReqCreateRole::kNoobHeadFieldNumber;
-const int ReqCreateRole::kNoobBodyFieldNumber;
-const int ReqCreateRole::kNoobFootFieldNumber;
-const int ReqCreateRole::kNoobWeaponFieldNumber;
-const int ReqCreateRole::kNoobPicFieldNumber;
 const int ReqCreateRole::kNoobNameFieldNumber;
 const int ReqCreateRole::kGameIdFieldNumber;
 #endif  // !_MSC_VER
@@ -5635,14 +5630,10 @@ ReqCreateRole::ReqCreateRole(const ReqCreateRole& from)
 
 void ReqCreateRole::SharedCtor() {
   _cached_size_ = 0;
+  account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   career_ = 0;
   sex_ = 0;
   race_ = 0;
-  noob_head_ = 0;
-  noob_body_ = 0;
-  noob_foot_ = 0;
-  noob_weapon_ = 0;
-  noob_pic_ = 0;
   noob_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   game_id_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -5653,6 +5644,9 @@ ReqCreateRole::~ReqCreateRole() {
 }
 
 void ReqCreateRole::SharedDtor() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
   if (noob_name_ != &::google::protobuf::internal::kEmptyString) {
     delete noob_name_;
   }
@@ -5683,16 +5677,14 @@ ReqCreateRole* ReqCreateRole::New() const {
 
 void ReqCreateRole::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_account()) {
+      if (account_ != &::google::protobuf::internal::kEmptyString) {
+        account_->clear();
+      }
+    }
     career_ = 0;
     sex_ = 0;
     race_ = 0;
-    noob_head_ = 0;
-    noob_body_ = 0;
-    noob_foot_ = 0;
-    noob_weapon_ = 0;
-    noob_pic_ = 0;
-  }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (has_noob_name()) {
       if (noob_name_ != &::google::protobuf::internal::kEmptyString) {
         noob_name_->clear();
@@ -5710,10 +5702,24 @@ bool ReqCreateRole::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 career = 1;
+      // required bytes account = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_account()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_career;
+        break;
+      }
+
+      // required int32 career = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_career:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &career_)));
@@ -5721,12 +5727,12 @@ bool ReqCreateRole::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_sex;
+        if (input->ExpectTag(24)) goto parse_sex;
         break;
       }
 
-      // required int32 sex = 2;
-      case 2: {
+      // required int32 sex = 3;
+      case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_sex:
@@ -5737,12 +5743,12 @@ bool ReqCreateRole::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_race;
+        if (input->ExpectTag(32)) goto parse_race;
         break;
       }
 
-      // required int32 race = 3;
-      case 3: {
+      // required int32 race = 4;
+      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_race:
@@ -5753,92 +5759,12 @@ bool ReqCreateRole::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(32)) goto parse_noob_head;
+        if (input->ExpectTag(42)) goto parse_noob_name;
         break;
       }
 
-      // required int32 noob_head = 4;
-      case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_noob_head:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &noob_head_)));
-          set_has_noob_head();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(40)) goto parse_noob_body;
-        break;
-      }
-
-      // required int32 noob_body = 5;
+      // required bytes noob_name = 5;
       case 5: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_noob_body:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &noob_body_)));
-          set_has_noob_body();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(48)) goto parse_noob_foot;
-        break;
-      }
-
-      // required int32 noob_foot = 6;
-      case 6: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_noob_foot:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &noob_foot_)));
-          set_has_noob_foot();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(56)) goto parse_noob_weapon;
-        break;
-      }
-
-      // required int32 noob_weapon = 7;
-      case 7: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_noob_weapon:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &noob_weapon_)));
-          set_has_noob_weapon();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(64)) goto parse_noob_pic;
-        break;
-      }
-
-      // required int32 noob_pic = 8;
-      case 8: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_noob_pic:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &noob_pic_)));
-          set_has_noob_pic();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(74)) goto parse_noob_name;
-        break;
-      }
-
-      // required bytes noob_name = 9;
-      case 9: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_noob_name:
@@ -5847,12 +5773,12 @@ bool ReqCreateRole::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(80)) goto parse_game_id;
+        if (input->ExpectTag(48)) goto parse_game_id;
         break;
       }
 
-      // required int32 game_id = 10;
-      case 10: {
+      // required int32 game_id = 6;
+      case 6: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_game_id:
@@ -5885,55 +5811,36 @@ bool ReqCreateRole::MergePartialFromCodedStream(
 
 void ReqCreateRole::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int32 career = 1;
+  // required bytes account = 1;
+  if (has_account()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      1, this->account(), output);
+  }
+
+  // required int32 career = 2;
   if (has_career()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->career(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->career(), output);
   }
 
-  // required int32 sex = 2;
+  // required int32 sex = 3;
   if (has_sex()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->sex(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->sex(), output);
   }
 
-  // required int32 race = 3;
+  // required int32 race = 4;
   if (has_race()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->race(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->race(), output);
   }
 
-  // required int32 noob_head = 4;
-  if (has_noob_head()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->noob_head(), output);
-  }
-
-  // required int32 noob_body = 5;
-  if (has_noob_body()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->noob_body(), output);
-  }
-
-  // required int32 noob_foot = 6;
-  if (has_noob_foot()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->noob_foot(), output);
-  }
-
-  // required int32 noob_weapon = 7;
-  if (has_noob_weapon()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->noob_weapon(), output);
-  }
-
-  // required int32 noob_pic = 8;
-  if (has_noob_pic()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->noob_pic(), output);
-  }
-
-  // required bytes noob_name = 9;
+  // required bytes noob_name = 5;
   if (has_noob_name()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      9, this->noob_name(), output);
+      5, this->noob_name(), output);
   }
 
-  // required int32 game_id = 10;
+  // required int32 game_id = 6;
   if (has_game_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(10, this->game_id(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->game_id(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -5944,56 +5851,38 @@ void ReqCreateRole::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqCreateRole::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int32 career = 1;
+  // required bytes account = 1;
+  if (has_account()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        1, this->account(), target);
+  }
+
+  // required int32 career = 2;
   if (has_career()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->career(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->career(), target);
   }
 
-  // required int32 sex = 2;
+  // required int32 sex = 3;
   if (has_sex()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->sex(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->sex(), target);
   }
 
-  // required int32 race = 3;
+  // required int32 race = 4;
   if (has_race()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->race(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->race(), target);
   }
 
-  // required int32 noob_head = 4;
-  if (has_noob_head()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->noob_head(), target);
-  }
-
-  // required int32 noob_body = 5;
-  if (has_noob_body()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->noob_body(), target);
-  }
-
-  // required int32 noob_foot = 6;
-  if (has_noob_foot()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->noob_foot(), target);
-  }
-
-  // required int32 noob_weapon = 7;
-  if (has_noob_weapon()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->noob_weapon(), target);
-  }
-
-  // required int32 noob_pic = 8;
-  if (has_noob_pic()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->noob_pic(), target);
-  }
-
-  // required bytes noob_name = 9;
+  // required bytes noob_name = 5;
   if (has_noob_name()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        9, this->noob_name(), target);
+        5, this->noob_name(), target);
   }
 
-  // required int32 game_id = 10;
+  // required int32 game_id = 6;
   if (has_game_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(10, this->game_id(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->game_id(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -6007,72 +5896,42 @@ int ReqCreateRole::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 career = 1;
+    // required bytes account = 1;
+    if (has_account()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->account());
+    }
+
+    // required int32 career = 2;
     if (has_career()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->career());
     }
 
-    // required int32 sex = 2;
+    // required int32 sex = 3;
     if (has_sex()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->sex());
     }
 
-    // required int32 race = 3;
+    // required int32 race = 4;
     if (has_race()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->race());
     }
 
-    // required int32 noob_head = 4;
-    if (has_noob_head()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->noob_head());
-    }
-
-    // required int32 noob_body = 5;
-    if (has_noob_body()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->noob_body());
-    }
-
-    // required int32 noob_foot = 6;
-    if (has_noob_foot()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->noob_foot());
-    }
-
-    // required int32 noob_weapon = 7;
-    if (has_noob_weapon()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->noob_weapon());
-    }
-
-    // required int32 noob_pic = 8;
-    if (has_noob_pic()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->noob_pic());
-    }
-
-  }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // required bytes noob_name = 9;
+    // required bytes noob_name = 5;
     if (has_noob_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->noob_name());
     }
 
-    // required int32 game_id = 10;
+    // required int32 game_id = 6;
     if (has_game_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -6106,6 +5965,9 @@ void ReqCreateRole::MergeFrom(const ::google::protobuf::Message& from) {
 void ReqCreateRole::MergeFrom(const ReqCreateRole& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_account()) {
+      set_account(from.account());
+    }
     if (from.has_career()) {
       set_career(from.career());
     }
@@ -6115,23 +5977,6 @@ void ReqCreateRole::MergeFrom(const ReqCreateRole& from) {
     if (from.has_race()) {
       set_race(from.race());
     }
-    if (from.has_noob_head()) {
-      set_noob_head(from.noob_head());
-    }
-    if (from.has_noob_body()) {
-      set_noob_body(from.noob_body());
-    }
-    if (from.has_noob_foot()) {
-      set_noob_foot(from.noob_foot());
-    }
-    if (from.has_noob_weapon()) {
-      set_noob_weapon(from.noob_weapon());
-    }
-    if (from.has_noob_pic()) {
-      set_noob_pic(from.noob_pic());
-    }
-  }
-  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_noob_name()) {
       set_noob_name(from.noob_name());
     }
@@ -6155,21 +6000,17 @@ void ReqCreateRole::CopyFrom(const ReqCreateRole& from) {
 }
 
 bool ReqCreateRole::IsInitialized() const {
-  if ((_has_bits_[0] & 0x000003ff) != 0x000003ff) return false;
+  if ((_has_bits_[0] & 0x0000003f) != 0x0000003f) return false;
 
   return true;
 }
 
 void ReqCreateRole::Swap(ReqCreateRole* other) {
   if (other != this) {
+    std::swap(account_, other->account_);
     std::swap(career_, other->career_);
     std::swap(sex_, other->sex_);
     std::swap(race_, other->race_);
-    std::swap(noob_head_, other->noob_head_);
-    std::swap(noob_body_, other->noob_body_);
-    std::swap(noob_foot_, other->noob_foot_);
-    std::swap(noob_weapon_, other->noob_weapon_);
-    std::swap(noob_pic_, other->noob_pic_);
     std::swap(noob_name_, other->noob_name_);
     std::swap(game_id_, other->game_id_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -6190,7 +6031,9 @@ void ReqCreateRole::Swap(ReqCreateRole* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int ReqDeleteRole::kAccountFieldNumber;
 const int ReqDeleteRole::kNameFieldNumber;
+const int ReqDeleteRole::kGameIdFieldNumber;
 #endif  // !_MSC_VER
 
 ReqDeleteRole::ReqDeleteRole()
@@ -6209,7 +6052,9 @@ ReqDeleteRole::ReqDeleteRole(const ReqDeleteRole& from)
 
 void ReqDeleteRole::SharedCtor() {
   _cached_size_ = 0;
+  account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  game_id_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -6218,6 +6063,9 @@ ReqDeleteRole::~ReqDeleteRole() {
 }
 
 void ReqDeleteRole::SharedDtor() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
   if (name_ != &::google::protobuf::internal::kEmptyString) {
     delete name_;
   }
@@ -6248,11 +6096,17 @@ ReqDeleteRole* ReqDeleteRole::New() const {
 
 void ReqDeleteRole::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_account()) {
+      if (account_ != &::google::protobuf::internal::kEmptyString) {
+        account_->clear();
+      }
+    }
     if (has_name()) {
       if (name_ != &::google::protobuf::internal::kEmptyString) {
         name_->clear();
       }
     }
+    game_id_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -6264,12 +6118,42 @@ bool ReqDeleteRole::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required bytes name = 1;
+      // required bytes account = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_account()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_name;
+        break;
+      }
+
+      // required bytes name = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_name:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_name()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(24)) goto parse_game_id;
+        break;
+      }
+
+      // required int32 game_id = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_game_id:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &game_id_)));
+          set_has_game_id();
         } else {
           goto handle_uninterpreted;
         }
@@ -6295,10 +6179,21 @@ bool ReqDeleteRole::MergePartialFromCodedStream(
 
 void ReqDeleteRole::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required bytes name = 1;
+  // required bytes account = 1;
+  if (has_account()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      1, this->account(), output);
+  }
+
+  // required bytes name = 2;
   if (has_name()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      1, this->name(), output);
+      2, this->name(), output);
+  }
+
+  // required int32 game_id = 3;
+  if (has_game_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->game_id(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -6309,11 +6204,23 @@ void ReqDeleteRole::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqDeleteRole::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required bytes name = 1;
+  // required bytes account = 1;
+  if (has_account()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        1, this->account(), target);
+  }
+
+  // required bytes name = 2;
   if (has_name()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        1, this->name(), target);
+        2, this->name(), target);
+  }
+
+  // required int32 game_id = 3;
+  if (has_game_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->game_id(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -6327,11 +6234,25 @@ int ReqDeleteRole::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required bytes name = 1;
+    // required bytes account = 1;
+    if (has_account()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->account());
+    }
+
+    // required bytes name = 2;
     if (has_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->name());
+    }
+
+    // required int32 game_id = 3;
+    if (has_game_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->game_id());
     }
 
   }
@@ -6361,8 +6282,14 @@ void ReqDeleteRole::MergeFrom(const ::google::protobuf::Message& from) {
 void ReqDeleteRole::MergeFrom(const ReqDeleteRole& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_account()) {
+      set_account(from.account());
+    }
     if (from.has_name()) {
       set_name(from.name());
+    }
+    if (from.has_game_id()) {
+      set_game_id(from.game_id());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -6381,14 +6308,16 @@ void ReqDeleteRole::CopyFrom(const ReqDeleteRole& from) {
 }
 
 bool ReqDeleteRole::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
 
 void ReqDeleteRole::Swap(ReqDeleteRole* other) {
   if (other != this) {
+    std::swap(account_, other->account_);
     std::swap(name_, other->name_);
+    std::swap(game_id_, other->game_id_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -6407,7 +6336,9 @@ void ReqDeleteRole::Swap(ReqDeleteRole* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int ReqRecoverRole::kAccountFieldNumber;
 const int ReqRecoverRole::kNameFieldNumber;
+const int ReqRecoverRole::kGameIdFieldNumber;
 #endif  // !_MSC_VER
 
 ReqRecoverRole::ReqRecoverRole()
@@ -6426,7 +6357,9 @@ ReqRecoverRole::ReqRecoverRole(const ReqRecoverRole& from)
 
 void ReqRecoverRole::SharedCtor() {
   _cached_size_ = 0;
+  account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  game_id_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -6435,6 +6368,9 @@ ReqRecoverRole::~ReqRecoverRole() {
 }
 
 void ReqRecoverRole::SharedDtor() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
   if (name_ != &::google::protobuf::internal::kEmptyString) {
     delete name_;
   }
@@ -6465,11 +6401,17 @@ ReqRecoverRole* ReqRecoverRole::New() const {
 
 void ReqRecoverRole::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_account()) {
+      if (account_ != &::google::protobuf::internal::kEmptyString) {
+        account_->clear();
+      }
+    }
     if (has_name()) {
       if (name_ != &::google::protobuf::internal::kEmptyString) {
         name_->clear();
       }
     }
+    game_id_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -6481,12 +6423,42 @@ bool ReqRecoverRole::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required bytes name = 1;
+      // required bytes account = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_account()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_name;
+        break;
+      }
+
+      // required bytes name = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_name:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_name()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(24)) goto parse_game_id;
+        break;
+      }
+
+      // required int32 game_id = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_game_id:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &game_id_)));
+          set_has_game_id();
         } else {
           goto handle_uninterpreted;
         }
@@ -6512,10 +6484,21 @@ bool ReqRecoverRole::MergePartialFromCodedStream(
 
 void ReqRecoverRole::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required bytes name = 1;
+  // required bytes account = 1;
+  if (has_account()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      1, this->account(), output);
+  }
+
+  // required bytes name = 2;
   if (has_name()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      1, this->name(), output);
+      2, this->name(), output);
+  }
+
+  // required int32 game_id = 3;
+  if (has_game_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->game_id(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -6526,11 +6509,23 @@ void ReqRecoverRole::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqRecoverRole::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required bytes name = 1;
+  // required bytes account = 1;
+  if (has_account()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        1, this->account(), target);
+  }
+
+  // required bytes name = 2;
   if (has_name()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        1, this->name(), target);
+        2, this->name(), target);
+  }
+
+  // required int32 game_id = 3;
+  if (has_game_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->game_id(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -6544,11 +6539,25 @@ int ReqRecoverRole::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required bytes name = 1;
+    // required bytes account = 1;
+    if (has_account()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->account());
+    }
+
+    // required bytes name = 2;
     if (has_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->name());
+    }
+
+    // required int32 game_id = 3;
+    if (has_game_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->game_id());
     }
 
   }
@@ -6578,8 +6587,14 @@ void ReqRecoverRole::MergeFrom(const ::google::protobuf::Message& from) {
 void ReqRecoverRole::MergeFrom(const ReqRecoverRole& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_account()) {
+      set_account(from.account());
+    }
     if (from.has_name()) {
       set_name(from.name());
+    }
+    if (from.has_game_id()) {
+      set_game_id(from.game_id());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -6598,14 +6613,16 @@ void ReqRecoverRole::CopyFrom(const ReqRecoverRole& from) {
 }
 
 bool ReqRecoverRole::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
 
 void ReqRecoverRole::Swap(ReqRecoverRole* other) {
   if (other != this) {
+    std::swap(account_, other->account_);
     std::swap(name_, other->name_);
+    std::swap(game_id_, other->game_id_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
