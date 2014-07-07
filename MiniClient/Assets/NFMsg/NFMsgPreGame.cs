@@ -441,17 +441,8 @@ namespace NFMsg
       get { return _game_id; }
       set { _game_id = value; }
     }
-    private int _fd = default(int);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"fd", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
-    public int fd
-    {
-      get { return _fd; }
-      set { _fd = value; }
-    }
-    private byte[] _account = null;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"account", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    private byte[] _account;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"account", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public byte[] account
     {
       get { return _account; }
@@ -571,71 +562,43 @@ namespace NFMsg
   {
     public ReqCreateRole() {}
     
+    private byte[] _account;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"account", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] account
+    {
+      get { return _account; }
+      set { _account = value; }
+    }
     private int _career;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"career", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"career", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int career
     {
       get { return _career; }
       set { _career = value; }
     }
     private int _sex;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"sex", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"sex", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int sex
     {
       get { return _sex; }
       set { _sex = value; }
     }
     private int _race;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"race", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"race", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int race
     {
       get { return _race; }
       set { _race = value; }
     }
-    private int _noob_head;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"noob_head", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int noob_head
-    {
-      get { return _noob_head; }
-      set { _noob_head = value; }
-    }
-    private int _noob_body;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"noob_body", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int noob_body
-    {
-      get { return _noob_body; }
-      set { _noob_body = value; }
-    }
-    private int _noob_foot;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"noob_foot", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int noob_foot
-    {
-      get { return _noob_foot; }
-      set { _noob_foot = value; }
-    }
-    private int _noob_weapon;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"noob_weapon", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int noob_weapon
-    {
-      get { return _noob_weapon; }
-      set { _noob_weapon = value; }
-    }
-    private int _noob_pic;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"noob_pic", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int noob_pic
-    {
-      get { return _noob_pic; }
-      set { _noob_pic = value; }
-    }
     private byte[] _noob_name;
-    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"noob_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"noob_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public byte[] noob_name
     {
       get { return _noob_name; }
       set { _noob_name = value; }
     }
     private int _game_id;
-    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int game_id
     {
       get { return _game_id; }
@@ -651,12 +614,26 @@ namespace NFMsg
   {
     public ReqDeleteRole() {}
     
+    private byte[] _account;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"account", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] account
+    {
+      get { return _account; }
+      set { _account = value; }
+    }
     private byte[] _name;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public byte[] name
     {
       get { return _name; }
       set { _name = value; }
+    }
+    private int _game_id;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int game_id
+    {
+      get { return _game_id; }
+      set { _game_id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -668,12 +645,26 @@ namespace NFMsg
   {
     public ReqRecoverRole() {}
     
+    private byte[] _account;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"account", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] account
+    {
+      get { return _account; }
+      set { _account = value; }
+    }
     private byte[] _name;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public byte[] name
     {
       get { return _name; }
       set { _name = value; }
+    }
+    private int _game_id;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int game_id
+    {
+      get { return _game_id; }
+      set { _game_id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

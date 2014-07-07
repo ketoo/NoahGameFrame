@@ -20,7 +20,7 @@ namespace NFTCPClient
         public ArrayList aWorldList = new ArrayList();
         public ArrayList aServerList = new ArrayList();
         public ArrayList aCharList = new ArrayList();
-        public ArrayList aObjectList = new ArrayList();
+
         public ArrayList aChatMsgList = new ArrayList();
         public ArrayList aMsgList = new ArrayList();
 
@@ -209,7 +209,7 @@ namespace NFTCPClient
             if (xData.event_code == EGameEventCode.EGEC_SELECTSERVER_SUCCESS)
             {
                 //ÉêÇë½ÇÉ«ÁÐ±í
-                mNet.sendLogic.RequireRoleList(mNet.nServerID);
+                mNet.sendLogic.RequireRoleList(mNet.strAccount, mNet.nServerID);
             }
         }
         
@@ -223,7 +223,8 @@ namespace NFTCPClient
 
             NFMsg.AckRoleLiteInfoList xData = new NFMsg.AckRoleLiteInfoList();
             xData = Serializer.Deserialize<NFMsg.AckRoleLiteInfoList>(new MemoryStream(xMsg.msg_data));
-
+            
+            aCharList.Clear();
             for (int i = 0; i < xData.char_data.Count; ++i)
             {
                 NFMsg.RoleLiteInfo info = xData.char_data[i];
@@ -236,13 +237,42 @@ namespace NFTCPClient
             NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
             xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
 
-//             NFMsg.ACKENTRy xData = new NFMsg.AckServerList();
-//             xData = Serializer.Deserialize<NFMsg.AckServerList>(new MemoryStream(xMsg.msg_data));
+            NFMsg.AckPlayerEntryList xData = new NFMsg.AckPlayerEntryList();
+            xData = Serializer.Deserialize<NFMsg.AckPlayerEntryList>(new MemoryStream(xMsg.msg_data));
+
+            for (int i = 0; i < xData.object_list.Count; ++i)
+            {
+                NFMsg.PlayerEntryInfo xInfo = xData.object_list[i];
+
+                NFIValueList var = new NFCValueList();
+                var.AddString("X");
+                var.AddFloat(xInfo.x);
+                var.AddString("Y");
+                var.AddFloat(xInfo.y);
+                var.AddString("Z");
+                var.AddFloat(xInfo.z);
+                NFIObject xGO = mNet.kernel.CreateObject(new NFIDENTID(xInfo.object_guid), xInfo.scene_id, 0, "Player", System.Text.Encoding.Default.GetString(xInfo.config_id), var);
+                if (null == xGO)
+                {
+                    Debug.LogError("ID³åÍ»: " + xInfo.object_guid + "  ConfigID:" + System.Text.Encoding.Default.GetString(xInfo.config_id));
+                    continue;
+                }
+            }
         }
 
         private void EGMI_ACK_OBJECT_LEAVE(MsgHead head, MemoryStream stream)
 		{
+            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
+            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
 
+            NFMsg.AckPlayerLeaveList xData = new NFMsg.AckPlayerLeaveList();
+            xData = Serializer.Deserialize<NFMsg.AckPlayerLeaveList>(new MemoryStream(xMsg.msg_data));
+
+            for (int i = 0; i < xData.object_list.Count; ++i)
+            {
+                long ident = xData.object_list[i];
+                mNet.kernel.DestroyObject(new NFIDENTID(ident));
+            }
 		}
 
         private void EGMI_ACK_MOVE(MsgHead head, MemoryStream stream)
