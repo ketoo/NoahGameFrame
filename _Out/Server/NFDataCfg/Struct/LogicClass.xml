@@ -18,5 +18,6 @@
 	<class Id = "NPCSeed" Type = "TYPE_WORLD" Path = "../../NFDataCfg/Struct/Class/NPCSeed.xml" InstancePath = "" public = "false" Desc = "NPC"/> 
 	<class Id = "Buff" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/Buff.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Buff.xml" public = "false" Desc = "NPC"/>
 	<class Id = "Task" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/Task.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Task.xml" public = "false" Desc = "TASK"/>
-	<!-- <class Id = "EffectData" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/EffectData.xml" InstancePath = "../../NFDataCfg/Ini/NPC/EffectData.xml" public = "false" Desc = "TASK"/> -->
+	<class Id = "InitProperty" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/InitProperty.xml" InstancePath = "../../NFDataCfg/Ini/NPC/InitProperty.xml" public = "false" Desc = "TASK"/>
+	<class Id = "EffectData" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/EffectData.xml" InstancePath = "../../NFDataCfg/Ini/NPC/EffectData.xml" public = "false" Desc = "TASK"/>
 </XML>

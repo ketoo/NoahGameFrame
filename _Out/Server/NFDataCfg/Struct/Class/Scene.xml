@@ -12,6 +12,7 @@
 		<Property Id="Width" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="场景宽度"/>
 		<Property Id="SoundList" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="场景背景音乐列表"/>
 		<Property Id="CanClone" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="是否副本"/>
+		<Property Id="ActorID" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="acctorid"/>
 	
 	</Propertys>
 	<Records>
