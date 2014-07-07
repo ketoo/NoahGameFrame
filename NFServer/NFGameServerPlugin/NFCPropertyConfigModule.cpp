@@ -7,10 +7,11 @@
 // -------------------------------------------------------------------------
 
 #include "NFCPropertyConfigModule.h"
+#include "NFComm\NFPluginModule\NFIPluginManager.h"
 
 bool NFCPropertyConfigModule::Init()
 {
-    
+
     return true;
 }
 
@@ -27,6 +28,12 @@ bool NFCPropertyConfigModule::Execute( const float fLasFrametime, const float fS
 
 bool NFCPropertyConfigModule::AfterInit()
 {
+    m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
+    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
+    
+    assert(NULL != m_pLogicClassModule);
+    assert(NULL != m_pElementInfoModule);
+
     Load();
 
     InitViewPropertyList();
@@ -57,69 +64,41 @@ bool NFCPropertyConfigModule::NeedView(const std::string& strProperty)
     return mViewPropertyList.Find(strProperty);
 }
 
-// int NFCPropertyConfigModule::CalculateBaseValue( const NFJobType nJob, const int nLevel, NFRumTimeColIndex eProperty)
-// {
-//     if (nJob >= 0 && nJob < NFJobType::NJT_MAX)
-//     {
-// //         if (eProperty >= 0 && eProperty < NFRumTimeColIndex::NFRTC_END)
-// //         {
-// //             Coefficien* pCoefficien = mhtCoefficienData[nJob].GetElement(nLevel);
-// //             if (pCoefficien)
-// //             {
-// //                 return pCoefficien->nCoefficienValue * nLevel + pCoefficien->nConstantValue;
-// //             }
-// //         }
-//     }
-//
-//     return 0;
-// }
-
 int NFCPropertyConfigModule::CalculateBaseValue( const NFJobType nJob, const int nLevel, const std::string& strProperty )
 {
     if ( nJob >= 0 && nJob < NFJobType::NJT_MAX )
     {
-        JOB_PROPERTY_STRUCT* pCoefficien = mhtCoefficienData[nJob].GetElement( nLevel );
-        if ( pCoefficien )
+        std::string* pstrEffectData = mhtCoefficienData[nJob].GetElement( nLevel );
+        if ( pstrEffectData )
         {
-            JOB_PROPERTY_STRUCT::iterator it = pCoefficien->find(strProperty);
-            if (it != pCoefficien->end())
-            {
-                return it->second;
-            }
+            return m_pElementInfoModule->QueryPropertyInt(*pstrEffectData, strProperty);
         }
     }
+
     return 0;
 }
 
 void NFCPropertyConfigModule::Load()
 {
-    rapidxml::file<> fdoc( "../../NFDataCfg/Ini/NFZoneServer/InitProperty.xml" );
-    rapidxml::xml_document<>  doc;
-    doc.parse<0>( fdoc.data() );
 
-    rapidxml::xml_node<>* root = doc.first_node();
-    for ( rapidxml::xml_node<>* jobNode = root->first_node(); jobNode; jobNode = jobNode->next_sibling() )
+    NFILogicClass* pLogicClass = m_pLogicClassModule->GetElement("InitProperty");
+    if (pLogicClass)
     {
-        const char* strJob = jobNode->first_attribute( "Job" )->value();
-        const char* strLevel = jobNode->first_attribute( "Level" )->value();
-        int nJob = boost::lexical_cast<int>( strJob );
-        int nLevel = boost::lexical_cast<int>( strLevel );
-        if ( nJob >= 0 && nJob < NFJobType::NJT_MAX )
+        NFList<std::string>& xList = pLogicClass->GetConfigNameList();
+        std::string strData;
+        bool bRet = xList.First(strData);
+        while (bRet)
         {
-            JOB_PROPERTY_STRUCT* structProperty = new JOB_PROPERTY_STRUCT();
-            for ( rapidxml::xml_attribute<>* levelAttribute = jobNode->first_attribute(); levelAttribute; levelAttribute = levelAttribute->next_attribute())
+            NFIPropertyManager* pPropertyManager = m_pElementInfoModule->GetPropertyManager(strData);
+            if (pPropertyManager)
             {
-                if (0 == strcmp( levelAttribute->name(), "Job" )
-                    || 0 == strcmp( levelAttribute->name(), "Level" ))
-                {
-                    continue;
-                }
-
-                int nPropertyValue = boost::lexical_cast<int>( levelAttribute->value() );
-                structProperty->insert(std::make_pair( levelAttribute->name(), nPropertyValue ));
+                int nJob = m_pElementInfoModule->QueryPropertyInt(strData, "Job");
+                int nLevel = m_pElementInfoModule->QueryPropertyInt(strData, "Level");
+                std::string strEffectData = m_pElementInfoModule->QueryPropertyString(strData, "EffectData");
+                mhtCoefficienData[nJob].AddElement( nLevel, new std::string(strEffectData) );
             }
 
-            mhtCoefficienData[nJob].AddElement( nLevel, structProperty );
+            bRet = xList.Next(strData);
         }
     }
 }

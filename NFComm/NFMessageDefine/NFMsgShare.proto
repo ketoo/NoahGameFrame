@@ -9,9 +9,9 @@ import "NFMsgBaseEx.proto";
 
 message ReqEnterGameServer
 {
-    required int32 server_id = 1;
-	required int32 gate_id = 2;
-	required bytes name = 3;
+	required bytes 		account = 1;
+    required int32 		game_id = 2;
+	required bytes 		name = 3;
 }
 
 message ReqLeaveGameServer
@@ -139,16 +139,13 @@ message ReqPullDownCustoms// 申请结算关卡
 message PlayerEntryInfo//对象出现基本信息
 {
 	required int64	object_guid = 1;
-	required int32	char_type = 2;
-	required float	x = 3;
-	required float	y = 4;
-	required float	z = 5;
-	required int32	career_type = 6;
-	required int32	player_state = 7;
-	required bytes config_id = 8;
-	optional bytes class_name = 9;
-	optional int32 scene_id = 10;
-
+	required float	x = 2;
+	required float	y = 3;
+	required float	z = 4;
+	required int32	career_type = 5;
+	required int32	player_state = 6;
+	required bytes  config_id = 7;
+	required int32  scene_id = 8;
 }
 
 message AckPlayerEntryList//对象出现列表

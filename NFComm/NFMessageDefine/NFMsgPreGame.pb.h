@@ -1529,7 +1529,7 @@ class ReqRoleList : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 game_id() const;
   inline void set_game_id(::google::protobuf::int32 value);
 
-  // optional bytes account = 2;
+  // required bytes account = 2;
   inline bool has_account() const;
   inline void clear_account();
   static const int kAccountFieldNumber = 2;
@@ -1896,66 +1896,43 @@ class ReqCreateRole : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 career = 1;
+  // required bytes account = 1;
+  inline bool has_account() const;
+  inline void clear_account();
+  static const int kAccountFieldNumber = 1;
+  inline const ::std::string& account() const;
+  inline void set_account(const ::std::string& value);
+  inline void set_account(const char* value);
+  inline void set_account(const void* value, size_t size);
+  inline ::std::string* mutable_account();
+  inline ::std::string* release_account();
+  inline void set_allocated_account(::std::string* account);
+
+  // required int32 career = 2;
   inline bool has_career() const;
   inline void clear_career();
-  static const int kCareerFieldNumber = 1;
+  static const int kCareerFieldNumber = 2;
   inline ::google::protobuf::int32 career() const;
   inline void set_career(::google::protobuf::int32 value);
 
-  // required int32 sex = 2;
+  // required int32 sex = 3;
   inline bool has_sex() const;
   inline void clear_sex();
-  static const int kSexFieldNumber = 2;
+  static const int kSexFieldNumber = 3;
   inline ::google::protobuf::int32 sex() const;
   inline void set_sex(::google::protobuf::int32 value);
 
-  // required int32 race = 3;
+  // required int32 race = 4;
   inline bool has_race() const;
   inline void clear_race();
-  static const int kRaceFieldNumber = 3;
+  static const int kRaceFieldNumber = 4;
   inline ::google::protobuf::int32 race() const;
   inline void set_race(::google::protobuf::int32 value);
 
-  // required int32 noob_head = 4;
-  inline bool has_noob_head() const;
-  inline void clear_noob_head();
-  static const int kNoobHeadFieldNumber = 4;
-  inline ::google::protobuf::int32 noob_head() const;
-  inline void set_noob_head(::google::protobuf::int32 value);
-
-  // required int32 noob_body = 5;
-  inline bool has_noob_body() const;
-  inline void clear_noob_body();
-  static const int kNoobBodyFieldNumber = 5;
-  inline ::google::protobuf::int32 noob_body() const;
-  inline void set_noob_body(::google::protobuf::int32 value);
-
-  // required int32 noob_foot = 6;
-  inline bool has_noob_foot() const;
-  inline void clear_noob_foot();
-  static const int kNoobFootFieldNumber = 6;
-  inline ::google::protobuf::int32 noob_foot() const;
-  inline void set_noob_foot(::google::protobuf::int32 value);
-
-  // required int32 noob_weapon = 7;
-  inline bool has_noob_weapon() const;
-  inline void clear_noob_weapon();
-  static const int kNoobWeaponFieldNumber = 7;
-  inline ::google::protobuf::int32 noob_weapon() const;
-  inline void set_noob_weapon(::google::protobuf::int32 value);
-
-  // required int32 noob_pic = 8;
-  inline bool has_noob_pic() const;
-  inline void clear_noob_pic();
-  static const int kNoobPicFieldNumber = 8;
-  inline ::google::protobuf::int32 noob_pic() const;
-  inline void set_noob_pic(::google::protobuf::int32 value);
-
-  // required bytes noob_name = 9;
+  // required bytes noob_name = 5;
   inline bool has_noob_name() const;
   inline void clear_noob_name();
-  static const int kNoobNameFieldNumber = 9;
+  static const int kNoobNameFieldNumber = 5;
   inline const ::std::string& noob_name() const;
   inline void set_noob_name(const ::std::string& value);
   inline void set_noob_name(const char* value);
@@ -1964,31 +1941,23 @@ class ReqCreateRole : public ::google::protobuf::Message {
   inline ::std::string* release_noob_name();
   inline void set_allocated_noob_name(::std::string* noob_name);
 
-  // required int32 game_id = 10;
+  // required int32 game_id = 6;
   inline bool has_game_id() const;
   inline void clear_game_id();
-  static const int kGameIdFieldNumber = 10;
+  static const int kGameIdFieldNumber = 6;
   inline ::google::protobuf::int32 game_id() const;
   inline void set_game_id(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqCreateRole)
  private:
+  inline void set_has_account();
+  inline void clear_has_account();
   inline void set_has_career();
   inline void clear_has_career();
   inline void set_has_sex();
   inline void clear_has_sex();
   inline void set_has_race();
   inline void clear_has_race();
-  inline void set_has_noob_head();
-  inline void clear_has_noob_head();
-  inline void set_has_noob_body();
-  inline void clear_has_noob_body();
-  inline void set_has_noob_foot();
-  inline void clear_has_noob_foot();
-  inline void set_has_noob_weapon();
-  inline void clear_has_noob_weapon();
-  inline void set_has_noob_pic();
-  inline void clear_has_noob_pic();
   inline void set_has_noob_name();
   inline void clear_has_noob_name();
   inline void set_has_game_id();
@@ -1996,19 +1965,15 @@ class ReqCreateRole : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::std::string* account_;
   ::google::protobuf::int32 career_;
   ::google::protobuf::int32 sex_;
-  ::google::protobuf::int32 race_;
-  ::google::protobuf::int32 noob_head_;
-  ::google::protobuf::int32 noob_body_;
-  ::google::protobuf::int32 noob_foot_;
-  ::google::protobuf::int32 noob_weapon_;
-  ::google::protobuf::int32 noob_pic_;
   ::std::string* noob_name_;
+  ::google::protobuf::int32 race_;
   ::google::protobuf::int32 game_id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
@@ -2073,10 +2038,22 @@ class ReqDeleteRole : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required bytes name = 1;
+  // required bytes account = 1;
+  inline bool has_account() const;
+  inline void clear_account();
+  static const int kAccountFieldNumber = 1;
+  inline const ::std::string& account() const;
+  inline void set_account(const ::std::string& value);
+  inline void set_account(const char* value);
+  inline void set_account(const void* value, size_t size);
+  inline ::std::string* mutable_account();
+  inline ::std::string* release_account();
+  inline void set_allocated_account(::std::string* account);
+
+  // required bytes name = 2;
   inline bool has_name() const;
   inline void clear_name();
-  static const int kNameFieldNumber = 1;
+  static const int kNameFieldNumber = 2;
   inline const ::std::string& name() const;
   inline void set_name(const ::std::string& value);
   inline void set_name(const char* value);
@@ -2085,17 +2062,30 @@ class ReqDeleteRole : public ::google::protobuf::Message {
   inline ::std::string* release_name();
   inline void set_allocated_name(::std::string* name);
 
+  // required int32 game_id = 3;
+  inline bool has_game_id() const;
+  inline void clear_game_id();
+  static const int kGameIdFieldNumber = 3;
+  inline ::google::protobuf::int32 game_id() const;
+  inline void set_game_id(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqDeleteRole)
  private:
+  inline void set_has_account();
+  inline void clear_has_account();
   inline void set_has_name();
   inline void clear_has_name();
+  inline void set_has_game_id();
+  inline void clear_has_game_id();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::std::string* account_;
   ::std::string* name_;
+  ::google::protobuf::int32 game_id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
@@ -2160,10 +2150,22 @@ class ReqRecoverRole : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required bytes name = 1;
+  // required bytes account = 1;
+  inline bool has_account() const;
+  inline void clear_account();
+  static const int kAccountFieldNumber = 1;
+  inline const ::std::string& account() const;
+  inline void set_account(const ::std::string& value);
+  inline void set_account(const char* value);
+  inline void set_account(const void* value, size_t size);
+  inline ::std::string* mutable_account();
+  inline ::std::string* release_account();
+  inline void set_allocated_account(::std::string* account);
+
+  // required bytes name = 2;
   inline bool has_name() const;
   inline void clear_name();
-  static const int kNameFieldNumber = 1;
+  static const int kNameFieldNumber = 2;
   inline const ::std::string& name() const;
   inline void set_name(const ::std::string& value);
   inline void set_name(const char* value);
@@ -2172,17 +2174,30 @@ class ReqRecoverRole : public ::google::protobuf::Message {
   inline ::std::string* release_name();
   inline void set_allocated_name(::std::string* name);
 
+  // required int32 game_id = 3;
+  inline bool has_game_id() const;
+  inline void clear_game_id();
+  static const int kGameIdFieldNumber = 3;
+  inline ::google::protobuf::int32 game_id() const;
+  inline void set_game_id(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqRecoverRole)
  private:
+  inline void set_has_account();
+  inline void clear_has_account();
   inline void set_has_name();
   inline void clear_has_name();
+  inline void set_has_game_id();
+  inline void clear_has_game_id();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::std::string* account_;
   ::std::string* name_;
+  ::google::protobuf::int32 game_id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
@@ -3971,7 +3986,7 @@ inline void ReqRoleList::set_game_id(::google::protobuf::int32 value) {
   game_id_ = value;
 }
 
-// optional bytes account = 2;
+// required bytes account = 2;
 inline bool ReqRoleList::has_account() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -4416,15 +4431,85 @@ AckRoleLiteInfoList::mutable_char_data() {
 
 // ReqCreateRole
 
-// required int32 career = 1;
-inline bool ReqCreateRole::has_career() const {
+// required bytes account = 1;
+inline bool ReqCreateRole::has_account() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqCreateRole::set_has_career() {
+inline void ReqCreateRole::set_has_account() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqCreateRole::clear_has_career() {
+inline void ReqCreateRole::clear_has_account() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqCreateRole::clear_account() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    account_->clear();
+  }
+  clear_has_account();
+}
+inline const ::std::string& ReqCreateRole::account() const {
+  return *account_;
+}
+inline void ReqCreateRole::set_account(const ::std::string& value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqCreateRole::set_account(const char* value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqCreateRole::set_account(const void* value, size_t size) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqCreateRole::mutable_account() {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  return account_;
+}
+inline ::std::string* ReqCreateRole::release_account() {
+  clear_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = account_;
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqCreateRole::set_allocated_account(::std::string* account) {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
+  if (account) {
+    set_has_account();
+    account_ = account;
+  } else {
+    clear_has_account();
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required int32 career = 2;
+inline bool ReqCreateRole::has_career() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqCreateRole::set_has_career() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqCreateRole::clear_has_career() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqCreateRole::clear_career() {
   career_ = 0;
@@ -4438,15 +4523,15 @@ inline void ReqCreateRole::set_career(::google::protobuf::int32 value) {
   career_ = value;
 }
 
-// required int32 sex = 2;
+// required int32 sex = 3;
 inline bool ReqCreateRole::has_sex() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void ReqCreateRole::set_has_sex() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void ReqCreateRole::clear_has_sex() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void ReqCreateRole::clear_sex() {
   sex_ = 0;
@@ -4460,15 +4545,15 @@ inline void ReqCreateRole::set_sex(::google::protobuf::int32 value) {
   sex_ = value;
 }
 
-// required int32 race = 3;
+// required int32 race = 4;
 inline bool ReqCreateRole::has_race() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void ReqCreateRole::set_has_race() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void ReqCreateRole::clear_has_race() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void ReqCreateRole::clear_race() {
   race_ = 0;
@@ -4482,125 +4567,15 @@ inline void ReqCreateRole::set_race(::google::protobuf::int32 value) {
   race_ = value;
 }
 
-// required int32 noob_head = 4;
-inline bool ReqCreateRole::has_noob_head() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void ReqCreateRole::set_has_noob_head() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void ReqCreateRole::clear_has_noob_head() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void ReqCreateRole::clear_noob_head() {
-  noob_head_ = 0;
-  clear_has_noob_head();
-}
-inline ::google::protobuf::int32 ReqCreateRole::noob_head() const {
-  return noob_head_;
-}
-inline void ReqCreateRole::set_noob_head(::google::protobuf::int32 value) {
-  set_has_noob_head();
-  noob_head_ = value;
-}
-
-// required int32 noob_body = 5;
-inline bool ReqCreateRole::has_noob_body() const {
+// required bytes noob_name = 5;
+inline bool ReqCreateRole::has_noob_name() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void ReqCreateRole::set_has_noob_body() {
+inline void ReqCreateRole::set_has_noob_name() {
   _has_bits_[0] |= 0x00000010u;
 }
-inline void ReqCreateRole::clear_has_noob_body() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void ReqCreateRole::clear_noob_body() {
-  noob_body_ = 0;
-  clear_has_noob_body();
-}
-inline ::google::protobuf::int32 ReqCreateRole::noob_body() const {
-  return noob_body_;
-}
-inline void ReqCreateRole::set_noob_body(::google::protobuf::int32 value) {
-  set_has_noob_body();
-  noob_body_ = value;
-}
-
-// required int32 noob_foot = 6;
-inline bool ReqCreateRole::has_noob_foot() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void ReqCreateRole::set_has_noob_foot() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void ReqCreateRole::clear_has_noob_foot() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void ReqCreateRole::clear_noob_foot() {
-  noob_foot_ = 0;
-  clear_has_noob_foot();
-}
-inline ::google::protobuf::int32 ReqCreateRole::noob_foot() const {
-  return noob_foot_;
-}
-inline void ReqCreateRole::set_noob_foot(::google::protobuf::int32 value) {
-  set_has_noob_foot();
-  noob_foot_ = value;
-}
-
-// required int32 noob_weapon = 7;
-inline bool ReqCreateRole::has_noob_weapon() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
-}
-inline void ReqCreateRole::set_has_noob_weapon() {
-  _has_bits_[0] |= 0x00000040u;
-}
-inline void ReqCreateRole::clear_has_noob_weapon() {
-  _has_bits_[0] &= ~0x00000040u;
-}
-inline void ReqCreateRole::clear_noob_weapon() {
-  noob_weapon_ = 0;
-  clear_has_noob_weapon();
-}
-inline ::google::protobuf::int32 ReqCreateRole::noob_weapon() const {
-  return noob_weapon_;
-}
-inline void ReqCreateRole::set_noob_weapon(::google::protobuf::int32 value) {
-  set_has_noob_weapon();
-  noob_weapon_ = value;
-}
-
-// required int32 noob_pic = 8;
-inline bool ReqCreateRole::has_noob_pic() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
-}
-inline void ReqCreateRole::set_has_noob_pic() {
-  _has_bits_[0] |= 0x00000080u;
-}
-inline void ReqCreateRole::clear_has_noob_pic() {
-  _has_bits_[0] &= ~0x00000080u;
-}
-inline void ReqCreateRole::clear_noob_pic() {
-  noob_pic_ = 0;
-  clear_has_noob_pic();
-}
-inline ::google::protobuf::int32 ReqCreateRole::noob_pic() const {
-  return noob_pic_;
-}
-inline void ReqCreateRole::set_noob_pic(::google::protobuf::int32 value) {
-  set_has_noob_pic();
-  noob_pic_ = value;
-}
-
-// required bytes noob_name = 9;
-inline bool ReqCreateRole::has_noob_name() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
-}
-inline void ReqCreateRole::set_has_noob_name() {
-  _has_bits_[0] |= 0x00000100u;
-}
 inline void ReqCreateRole::clear_has_noob_name() {
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void ReqCreateRole::clear_noob_name() {
   if (noob_name_ != &::google::protobuf::internal::kEmptyString) {
@@ -4662,15 +4637,15 @@ inline void ReqCreateRole::set_allocated_noob_name(::std::string* noob_name) {
   }
 }
 
-// required int32 game_id = 10;
+// required int32 game_id = 6;
 inline bool ReqCreateRole::has_game_id() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void ReqCreateRole::set_has_game_id() {
-  _has_bits_[0] |= 0x00000200u;
+  _has_bits_[0] |= 0x00000020u;
 }
 inline void ReqCreateRole::clear_has_game_id() {
-  _has_bits_[0] &= ~0x00000200u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void ReqCreateRole::clear_game_id() {
   game_id_ = 0;
@@ -4688,15 +4663,85 @@ inline void ReqCreateRole::set_game_id(::google::protobuf::int32 value) {
 
 // ReqDeleteRole
 
-// required bytes name = 1;
-inline bool ReqDeleteRole::has_name() const {
+// required bytes account = 1;
+inline bool ReqDeleteRole::has_account() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqDeleteRole::set_has_name() {
+inline void ReqDeleteRole::set_has_account() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqDeleteRole::clear_has_name() {
+inline void ReqDeleteRole::clear_has_account() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqDeleteRole::clear_account() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    account_->clear();
+  }
+  clear_has_account();
+}
+inline const ::std::string& ReqDeleteRole::account() const {
+  return *account_;
+}
+inline void ReqDeleteRole::set_account(const ::std::string& value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqDeleteRole::set_account(const char* value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqDeleteRole::set_account(const void* value, size_t size) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqDeleteRole::mutable_account() {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  return account_;
+}
+inline ::std::string* ReqDeleteRole::release_account() {
+  clear_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = account_;
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqDeleteRole::set_allocated_account(::std::string* account) {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
+  if (account) {
+    set_has_account();
+    account_ = account;
+  } else {
+    clear_has_account();
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required bytes name = 2;
+inline bool ReqDeleteRole::has_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqDeleteRole::set_has_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqDeleteRole::clear_has_name() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqDeleteRole::clear_name() {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
@@ -4758,19 +4803,111 @@ inline void ReqDeleteRole::set_allocated_name(::std::string* name) {
   }
 }
 
+// required int32 game_id = 3;
+inline bool ReqDeleteRole::has_game_id() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqDeleteRole::set_has_game_id() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqDeleteRole::clear_has_game_id() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqDeleteRole::clear_game_id() {
+  game_id_ = 0;
+  clear_has_game_id();
+}
+inline ::google::protobuf::int32 ReqDeleteRole::game_id() const {
+  return game_id_;
+}
+inline void ReqDeleteRole::set_game_id(::google::protobuf::int32 value) {
+  set_has_game_id();
+  game_id_ = value;
+}
+
 // -------------------------------------------------------------------
 
 // ReqRecoverRole
 
-// required bytes name = 1;
-inline bool ReqRecoverRole::has_name() const {
+// required bytes account = 1;
+inline bool ReqRecoverRole::has_account() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqRecoverRole::set_has_name() {
+inline void ReqRecoverRole::set_has_account() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqRecoverRole::clear_has_name() {
+inline void ReqRecoverRole::clear_has_account() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqRecoverRole::clear_account() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    account_->clear();
+  }
+  clear_has_account();
+}
+inline const ::std::string& ReqRecoverRole::account() const {
+  return *account_;
+}
+inline void ReqRecoverRole::set_account(const ::std::string& value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqRecoverRole::set_account(const char* value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqRecoverRole::set_account(const void* value, size_t size) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqRecoverRole::mutable_account() {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  return account_;
+}
+inline ::std::string* ReqRecoverRole::release_account() {
+  clear_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = account_;
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqRecoverRole::set_allocated_account(::std::string* account) {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
+  if (account) {
+    set_has_account();
+    account_ = account;
+  } else {
+    clear_has_account();
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required bytes name = 2;
+inline bool ReqRecoverRole::has_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqRecoverRole::set_has_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqRecoverRole::clear_has_name() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqRecoverRole::clear_name() {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
@@ -4830,6 +4967,28 @@ inline void ReqRecoverRole::set_allocated_name(::std::string* name) {
     clear_has_name();
     name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
+}
+
+// required int32 game_id = 3;
+inline bool ReqRecoverRole::has_game_id() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqRecoverRole::set_has_game_id() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqRecoverRole::clear_has_game_id() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqRecoverRole::clear_game_id() {
+  game_id_ = 0;
+  clear_has_game_id();
+}
+inline ::google::protobuf::int32 ReqRecoverRole::game_id() const {
+  return game_id_;
+}
+inline void ReqRecoverRole::set_game_id(::google::protobuf::int32 value) {
+  set_has_game_id();
+  game_id_ = value;
 }
 
 

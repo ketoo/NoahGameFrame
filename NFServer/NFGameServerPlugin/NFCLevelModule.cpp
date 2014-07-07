@@ -31,14 +31,12 @@ bool NFCLevelModule::AfterInit()
 {
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>( pPluginManager->FindModule( "NFCEventProcessModule" ) );
     m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
-    m_pLevelConfigModule = dynamic_cast<NFILevelConfigModule*>( pPluginManager->FindModule( "NFCLevelConfigModule" ) );
     m_pLogModule = dynamic_cast<NFILogModule*>( pPluginManager->FindModule( "NFCLogModule" ) );
 
     
 
     assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
-    assert( NULL != m_pLevelConfigModule );
     assert( NULL != m_pLogModule );
 
     m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCLevelModule::OnObjectClassEvent );
@@ -51,7 +49,8 @@ int NFCLevelModule::AddExp( const NFIDENTID& self, const int nExp)
 {
     int nCurExp = m_pKernelModule->QueryPropertyInt( self, "EXP" );
     int nLevel = m_pKernelModule->QueryPropertyInt( self, "Level" );
-    int nMaxExp = m_pLevelConfigModule->GetNeedExp( nLevel );
+    int nMaxExp = 10;
+
     nCurExp += nExp;
 
     int nRemainExp = nCurExp - nMaxExp;
@@ -64,7 +63,7 @@ int NFCLevelModule::AddExp( const NFIDENTID& self, const int nExp)
 
         nCurExp = nRemainExp;
 
-        nMaxExp = m_pLevelConfigModule->GetNeedExp( nLevel );
+        nMaxExp = 10;
         if (nMaxExp <= 0)
         {
             break;
@@ -139,8 +138,7 @@ int NFCLevelModule::OnObjectLevelEvent( const NFIDENTID& self, const std::string
     //得到等级后，设置新的MAXEXP
 
     int nLevel = newVar.IntVal( 0 );
-    //int nLevel = m_pKernelModule->QueryPropertyInt(self, "Level");
-    int nMaxExp = m_pLevelConfigModule->GetNeedExp( nLevel );
+    int nMaxExp = 10;
     m_pKernelModule->SetPropertyInt( self, "MAXEXP", nMaxExp );
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "Object Level Up", nLevel);
