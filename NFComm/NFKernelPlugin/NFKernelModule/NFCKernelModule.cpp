@@ -1054,31 +1054,31 @@ NFIDENTID NFCKernelModule::CreateContainer(const int nContainerIndex, const std:
     NFCContainerInfo* pSceneInfo = m_pContainerModule->GetElement(nContainerIndex);
     if (pSceneInfo)
     {
-        sceneIdent = pSceneInfo->GetObjectSelf();
-
-        // print error
-        return sceneIdent;
+        return 0;
     }
 
     int nWidth = 0;
     NFIPropertyManager* pConfigPropertyManager = m_pElementInfoModule->GetPropertyManager(strSceneConfigID);
     if (NULL != pConfigPropertyManager)
     {
-        NFIProperty* gtProperty = pConfigPropertyManager->GetElement("Width");
-        nWidth = gtProperty->QueryInt();
+        NFIProperty* pProperty = pConfigPropertyManager->GetElement("Width");
+        if (!pProperty)
+        {
+            return 0;
+        }
+
+        nWidth = pProperty->QueryInt();
     }
 
 
     //ÈÝÆ÷nSceneIndex
     pSceneInfo = new NFCContainerInfo(nContainerIndex, nWidth);
-    // pSceneInfo = m_pContainerModule->CreateElement( nContainerIndex );
     if (NULL != pSceneInfo)
     {
         m_pContainerModule->AddElement(nContainerIndex, pSceneInfo);
 
         //Ä¬ÈÏ·Ö×é0
         NFCContainerGroupInfo* pGroupInfo = new NFCContainerGroupInfo(nContainerIndex, nWidth);
-        //NFCContainerGroupInfo* pGroupInfo = pSceneInfo->CreateElement( 0 );
         if (NULL != pGroupInfo)
         {
             pSceneInfo->AddElement(0, pGroupInfo);

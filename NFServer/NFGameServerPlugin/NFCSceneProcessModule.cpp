@@ -23,7 +23,6 @@ bool NFCSceneProcessModule::Init()
     m_pGameLogicModule = dynamic_cast<NFIGameLogicModule*>( pPluginManager->FindModule( "NFCGameLogicModule" ) );
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>( pPluginManager->FindModule( "NFCElementInfoModule" ) );
     m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>( pPluginManager->FindModule( "NFCLogicClassModule" ) );
-    m_pGameServerConfigModule = dynamic_cast<NFIGameServerConfigModule*>( pPluginManager->FindModule( "NFCGameServerConfigModule" ) );
     m_pPropertyModule = dynamic_cast<NFIPropertyModule*>( pPluginManager->FindModule( "NFCPropertyModule" ) );
     m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
 
@@ -32,7 +31,6 @@ bool NFCSceneProcessModule::Init()
     assert( NULL != m_pGameLogicModule );
     assert( NULL != m_pElementInfoModule );
     assert( NULL != m_pLogicClassModule );
-    assert( NULL != m_pGameServerConfigModule );
     assert( NULL != m_pPropertyModule );
     assert( NULL != m_pLogModule );
 
@@ -68,37 +66,20 @@ bool NFCSceneProcessModule::AfterInit()
         bool bRet = list.First(strData);
         while (bRet)
         {
-            int nSceneIndex = m_pElementInfoModule->QueryPropertyInt( strData, "SceneID" );
+            int nSceneID = boost::lexical_cast<int>(strData);
+
             const std::string& strFilePath = m_pElementInfoModule->QueryPropertyString( strData, "FilePath" );
-            int nGameServerID = m_pGameServerConfigModule->GetActorID( nSceneIndex );
-            //去掉serverID
-            if ( nGameServerID == nSelfActorID && nSceneIndex > 0 )
+            const int nActorID = m_pElementInfoModule->QueryPropertyInt( strData, "ActorID" );
+            
+            if ( nActorID == nSelfActorID && nSceneID > 0 )
             {
-                m_pKernelModule->CreateContainer( nSceneIndex, strData );
+                m_pKernelModule->CreateContainer( nSceneID, strData );
             }
 
 
             bRet = list.Next(strData);
         }
     }
-//     //查找到所有此gameID的场景容器,并且初始化
-//     for ( int i = 1; i < 1000000; i++ )
-//     {
-//         char szSceneConfigID[MAX_PATH] = { 0 };
-//         sprintf( szSceneConfigID, "%d", i );
-// 
-//         if(m_pElementInfoModule->ExistElement(szSceneConfigID))
-//         {
-//             int nSceneIndex = m_pElementInfoModule->QueryPropertyInt( szSceneConfigID, "SceneID" );
-//             const std::string& strFilePath = m_pElementInfoModule->QueryPropertyString( szSceneConfigID, "FilePath" );
-//             int nGameServerID = m_pGameServerConfigModule->GetGameServerID( nSceneIndex );
-//             //去掉serverID
-//             if ( nGameServerID == nSelfServerID && nSceneIndex > 0 )
-//             {
-//                 m_pKernelModule->CreateContainer( nSceneIndex, szSceneConfigID );
-//             }
-//         }        
-//     }
 
     return true;
 }

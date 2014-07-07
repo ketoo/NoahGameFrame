@@ -142,7 +142,16 @@ int NFCProxyServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
     case NFMsg::EGameMsgID::EGMI_REQ_ROLE_LIST:
         OnReqRoleListProcess(msg);
         break;
-
+    case NFMsg::EGameMsgID::EGMI_REQ_CREATE_ROLE:
+        OnReqCreateRoleProcess(msg);
+        break;
+    case NFMsg::EGameMsgID::EGMI_REQ_DELETE_ROLE:
+        OnReqDelRoleProcess(msg);
+        break;
+    case NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME:
+        OnReqEnterGameServer(msg);
+        break;
+        
     default:
         OnTranspondProcess(msg);
         break;
@@ -318,11 +327,10 @@ int NFCProxyServerNet_ServerModule::OnReqRoleListProcess( const NFIPacket& msg )
     {
         //数据匹配
         NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
-        if (pNetObject && pNetObject->GetUserData() == xData.game_id())
+        if (pNetObject
+            && pNetObject->GetUserData() == xData.game_id()
+            && pNetObject->GetUserStrData() == xData.account())
         {
-            xData.set_account(pNetObject->GetUserStrData());
-
-            //////////////////////////////////////////////////////////////////////////
             NFMsg::MsgBase xMsg;
             if (!xData.SerializeToString(xMsg.mutable_msg_data()))
             {
@@ -340,6 +348,155 @@ int NFCProxyServerNet_ServerModule::OnReqRoleListProcess( const NFIPacket& msg )
 
             NFCPacket xPacket(m_pNet->GetHeadLen());
             if(!xPacket.EnCode(NFMsg::EGameMsgID::EGMI_REQ_ROLE_LIST, strMsg.c_str(), strMsg.length()))
+            {
+                return false;
+            }
+
+            xPacket.SetFd(msg.GetFd());
+
+            OnTranspondProcess(xPacket);
+        }
+    }
+
+    return 0;
+}
+
+int NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess( const NFIPacket& msg )
+{
+    //在没有正式进入游戏之前，nPlayerID都是FD
+    int64_t nPlayerID = 0;
+    NFMsg::ReqCreateRole xData;
+    if (!RecivePB(msg, xData, nPlayerID))
+    {
+        return 0;
+    }
+
+    NFIProxyServerNet_ClientModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
+    if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
+    {
+        //数据匹配
+        NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
+        if (pNetObject
+            && pNetObject->GetUserData() == xData.game_id()
+            && pNetObject->GetUserStrData() == xData.account())
+        {
+            NFMsg::MsgBase xMsg;
+            if (!xData.SerializeToString(xMsg.mutable_msg_data()))
+            {
+                return false;
+            }
+
+            //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
+            xMsg.set_player_id(msg.GetFd());
+
+            std::string strMsg;
+            if(!xMsg.SerializeToString(&strMsg))
+            {
+                return false;
+            }
+
+            NFCPacket xPacket(m_pNet->GetHeadLen());
+            if(!xPacket.EnCode(NFMsg::EGameMsgID::EGMI_REQ_CREATE_ROLE, strMsg.c_str(), strMsg.length()))
+            {
+                return false;
+            }
+
+            xPacket.SetFd(msg.GetFd());
+
+            OnTranspondProcess(xPacket);
+        }
+    }
+
+    return 0;
+}
+
+int NFCProxyServerNet_ServerModule::OnReqDelRoleProcess( const NFIPacket& msg )
+{
+    //在没有正式进入游戏之前，nPlayerID都是FD
+    int64_t nPlayerID = 0;
+    NFMsg::ReqDeleteRole xData;
+    if (!RecivePB(msg, xData, nPlayerID))
+    {
+        return 0;
+    }
+
+    NFIProxyServerNet_ClientModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
+    if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
+    {
+        //数据匹配
+        NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
+        if (pNetObject
+            && pNetObject->GetUserData() == xData.game_id()
+            && pNetObject->GetUserStrData() == xData.account())
+        {
+            NFMsg::MsgBase xMsg;
+            if (!xData.SerializeToString(xMsg.mutable_msg_data()))
+            {
+                return false;
+            }
+
+            //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
+            xMsg.set_player_id(msg.GetFd());
+
+            std::string strMsg;
+            if(!xMsg.SerializeToString(&strMsg))
+            {
+                return false;
+            }
+
+            NFCPacket xPacket(m_pNet->GetHeadLen());
+            if(!xPacket.EnCode(NFMsg::EGameMsgID::EGMI_REQ_DELETE_ROLE, strMsg.c_str(), strMsg.length()))
+            {
+                return false;
+            }
+
+            xPacket.SetFd(msg.GetFd());
+
+            OnTranspondProcess(xPacket);
+        }
+    }
+
+    return 0;
+}
+
+int NFCProxyServerNet_ServerModule::OnReqEnterGameServer( const NFIPacket& msg )
+{
+    //在没有正式进入游戏之前，nPlayerID都是FD
+    int64_t nPlayerID = 0;
+    NFMsg::ReqEnterGameServer xData;
+    if (!RecivePB(msg, xData, nPlayerID))
+    {
+        return 0;
+    }
+
+    NFIProxyServerNet_ClientModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
+    if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
+    {
+        //数据匹配
+        NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
+        if (pNetObject
+            && pNetObject->GetUserData() == xData.game_id()
+            && pNetObject->GetUserStrData() == xData.account()
+            && !xData.name().empty()
+            && !xData.account().empty())
+        {
+            NFMsg::MsgBase xMsg;
+            if (!xData.SerializeToString(xMsg.mutable_msg_data()))
+            {
+                return false;
+            }
+
+            //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
+            xMsg.set_player_id(msg.GetFd());
+
+            std::string strMsg;
+            if(!xMsg.SerializeToString(&strMsg))
+            {
+                return false;
+            }
+
+            NFCPacket xPacket(m_pNet->GetHeadLen());
+            if(!xPacket.EnCode(NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME, strMsg.c_str(), strMsg.length()))
             {
                 return false;
             }

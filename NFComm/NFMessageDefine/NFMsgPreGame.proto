@@ -120,7 +120,7 @@ message ReqKickFromWorld//玩家想退出游戏世界
 message ReqRoleList//请求得到角色列表
 {
 	required int32   game_id = 1;
-	optional bytes   account = 2;	
+	required bytes   account = 2;	
 }
 
 message RoleLiteInfo//角色基础信息
@@ -144,25 +144,25 @@ message AckRoleLiteInfoList//角色基础信息列表
 }
 
 message ReqCreateRole//创建角色
-{ 
-    required int32 		career = 1;
-    required int32 		sex = 2;
-    required int32 		race = 3;
-    required int32 		noob_head = 4;
-    required int32 		noob_body = 5;
-    required int32 		noob_foot = 6;
-    required int32 		noob_weapon = 7;
-    required int32 		noob_pic = 8;
-    required bytes 		noob_name = 9;
-    required int32 		game_id = 10;
+{
+	required bytes 		account = 1;
+	required int32 		career = 2;
+    required int32 		sex = 3;
+    required int32 		race = 4;
+    required bytes 		noob_name = 5;
+    required int32 		game_id = 6;
 }
 
 message ReqDeleteRole//删除角色
 {
-    required bytes	name = 1;
+	required bytes 	account = 1;
+    required bytes	name = 2;
+	required int32 	game_id = 3;
 }
 
 message ReqRecoverRole//恢复角色
 {
-    required bytes	name = 1;
+	required bytes 	account = 1;
+    required bytes	name = 2;
+	required int32 	game_id = 3;
 }
