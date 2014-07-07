@@ -10,14 +10,12 @@
 ////#include "stdafx.h"
 #include "NFGameServerPlugin.h"
 #include "NFCGameLogicModule.h"
-#include "NFCGameServerConfigModule.h"
 #include "NFCSceneProcessModule.h"
 #include "NFCBuffModule.h"
 #include "NFCItemModule.h"
 #include "NFCPackModule.h"
 #include "NFCPropertyModule.h"
 #include "NFCSkillModule.h"
-#include "NFCLevelConfigModule.h"
 #include "NFCLevelModule.h"
 #include "NFCPropertyConfigModule.h"
 #include "NFCBulletSkillConsumeProcessModule.h"
@@ -62,7 +60,6 @@ void NFGameServerPlugin::Install()
 {
 
     REGISTER_MODULE( pPluginManager, NFCGameLogicModule )
-    REGISTER_MODULE( pPluginManager, NFCGameServerConfigModule )
     REGISTER_MODULE( pPluginManager, NFCSceneProcessModule )
     REGISTER_MODULE( pPluginManager, NFCDataProcessModule )
 
@@ -73,7 +70,6 @@ void NFGameServerPlugin::Install()
     REGISTER_MODULE( pPluginManager, NFCSkillModule )
     REGISTER_MODULE( pPluginManager, NFCNPCRefreshModule )
 
-    REGISTER_MODULE( pPluginManager, NFCLevelConfigModule )
     REGISTER_MODULE( pPluginManager, NFCLevelModule )
     REGISTER_MODULE( pPluginManager, NFCPropertyConfigModule )
 
@@ -104,7 +100,6 @@ void NFGameServerPlugin::Uninstall()
 
     UNREGISTER_MODULE( pPluginManager, NFCPropertyConfigModule )
     UNREGISTER_MODULE( pPluginManager, NFCLevelModule )
-    UNREGISTER_MODULE( pPluginManager, NFCLevelConfigModule )
 
     UNREGISTER_MODULE( pPluginManager, NFCNPCRefreshModule )
     UNREGISTER_MODULE( pPluginManager, NFCSkillModule )
@@ -115,6 +110,5 @@ void NFGameServerPlugin::Uninstall()
 
     UNREGISTER_MODULE( pPluginManager, NFCDataProcessModule )
     UNREGISTER_MODULE( pPluginManager, NFCSceneProcessModule )
-    UNREGISTER_MODULE( pPluginManager, NFCGameServerConfigModule )
     UNREGISTER_MODULE( pPluginManager, NFCGameLogicModule )
 }

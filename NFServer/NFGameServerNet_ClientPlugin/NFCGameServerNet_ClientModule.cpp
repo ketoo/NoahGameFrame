@@ -360,6 +360,8 @@ int NFCGameServerNet_ClientModule::OnClassCommonEvent(const NFIDENTID& self, con
 
 int NFCGameServerNet_ClientModule::OnRecivePack( const NFIPacket& msg )
 {
+
+
     return 0;
 
 }

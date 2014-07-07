@@ -36,9 +36,6 @@
     <ClInclude Include="NFCSceneProcessModule.h">
       <Filter>NFSceneModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCGameServerConfigModule.h">
-      <Filter>NFSceneModule</Filter>
-    </ClInclude>
     <ClInclude Include="NFCPropertyModule.h">
       <Filter>NFPropertyModule</Filter>
     </ClInclude>
@@ -55,9 +52,6 @@
       <Filter>NFPackModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCLevelModule.h">
-      <Filter>NFLevelModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCLevelConfigModule.h">
       <Filter>NFLevelModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCItemConsumeManagerModule.h">
@@ -98,9 +92,6 @@
     <ClCompile Include="NFCSceneProcessModule.cpp">
       <Filter>NFSceneModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFCGameServerConfigModule.cpp">
-      <Filter>NFSceneModule</Filter>
-    </ClCompile>
     <ClCompile Include="NFCPropertyModule.cpp">
       <Filter>NFPropertyModule</Filter>
     </ClCompile>
@@ -117,9 +108,6 @@
       <Filter>NFPackModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCLevelModule.cpp">
-      <Filter>NFLevelModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCLevelConfigModule.cpp">
       <Filter>NFLevelModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCItemConsumeManagerModule.cpp">

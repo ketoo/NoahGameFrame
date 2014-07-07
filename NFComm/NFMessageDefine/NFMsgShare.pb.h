@@ -173,19 +173,24 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 server_id = 1;
-  inline bool has_server_id() const;
-  inline void clear_server_id();
-  static const int kServerIdFieldNumber = 1;
-  inline ::google::protobuf::int32 server_id() const;
-  inline void set_server_id(::google::protobuf::int32 value);
+  // required bytes account = 1;
+  inline bool has_account() const;
+  inline void clear_account();
+  static const int kAccountFieldNumber = 1;
+  inline const ::std::string& account() const;
+  inline void set_account(const ::std::string& value);
+  inline void set_account(const char* value);
+  inline void set_account(const void* value, size_t size);
+  inline ::std::string* mutable_account();
+  inline ::std::string* release_account();
+  inline void set_allocated_account(::std::string* account);
 
-  // required int32 gate_id = 2;
-  inline bool has_gate_id() const;
-  inline void clear_gate_id();
-  static const int kGateIdFieldNumber = 2;
-  inline ::google::protobuf::int32 gate_id() const;
-  inline void set_gate_id(::google::protobuf::int32 value);
+  // required int32 game_id = 2;
+  inline bool has_game_id() const;
+  inline void clear_game_id();
+  static const int kGameIdFieldNumber = 2;
+  inline ::google::protobuf::int32 game_id() const;
+  inline void set_game_id(::google::protobuf::int32 value);
 
   // required bytes name = 3;
   inline bool has_name() const;
@@ -201,18 +206,18 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqEnterGameServer)
  private:
-  inline void set_has_server_id();
-  inline void clear_has_server_id();
-  inline void set_has_gate_id();
-  inline void clear_has_gate_id();
+  inline void set_has_account();
+  inline void clear_has_account();
+  inline void set_has_game_id();
+  inline void clear_has_game_id();
   inline void set_has_name();
   inline void clear_has_name();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int32 server_id_;
-  ::google::protobuf::int32 gate_id_;
+  ::std::string* account_;
   ::std::string* name_;
+  ::google::protobuf::int32 game_id_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
@@ -1844,52 +1849,45 @@ class PlayerEntryInfo : public ::google::protobuf::Message {
   inline ::google::protobuf::int64 object_guid() const;
   inline void set_object_guid(::google::protobuf::int64 value);
 
-  // required int32 char_type = 2;
-  inline bool has_char_type() const;
-  inline void clear_char_type();
-  static const int kCharTypeFieldNumber = 2;
-  inline ::google::protobuf::int32 char_type() const;
-  inline void set_char_type(::google::protobuf::int32 value);
-
-  // required float x = 3;
+  // required float x = 2;
   inline bool has_x() const;
   inline void clear_x();
-  static const int kXFieldNumber = 3;
+  static const int kXFieldNumber = 2;
   inline float x() const;
   inline void set_x(float value);
 
-  // required float y = 4;
+  // required float y = 3;
   inline bool has_y() const;
   inline void clear_y();
-  static const int kYFieldNumber = 4;
+  static const int kYFieldNumber = 3;
   inline float y() const;
   inline void set_y(float value);
 
-  // required float z = 5;
+  // required float z = 4;
   inline bool has_z() const;
   inline void clear_z();
-  static const int kZFieldNumber = 5;
+  static const int kZFieldNumber = 4;
   inline float z() const;
   inline void set_z(float value);
 
-  // required int32 career_type = 6;
+  // required int32 career_type = 5;
   inline bool has_career_type() const;
   inline void clear_career_type();
-  static const int kCareerTypeFieldNumber = 6;
+  static const int kCareerTypeFieldNumber = 5;
   inline ::google::protobuf::int32 career_type() const;
   inline void set_career_type(::google::protobuf::int32 value);
 
-  // required int32 player_state = 7;
+  // required int32 player_state = 6;
   inline bool has_player_state() const;
   inline void clear_player_state();
-  static const int kPlayerStateFieldNumber = 7;
+  static const int kPlayerStateFieldNumber = 6;
   inline ::google::protobuf::int32 player_state() const;
   inline void set_player_state(::google::protobuf::int32 value);
 
-  // required bytes config_id = 8;
+  // required bytes config_id = 7;
   inline bool has_config_id() const;
   inline void clear_config_id();
-  static const int kConfigIdFieldNumber = 8;
+  static const int kConfigIdFieldNumber = 7;
   inline const ::std::string& config_id() const;
   inline void set_config_id(const ::std::string& value);
   inline void set_config_id(const char* value);
@@ -1898,22 +1896,10 @@ class PlayerEntryInfo : public ::google::protobuf::Message {
   inline ::std::string* release_config_id();
   inline void set_allocated_config_id(::std::string* config_id);
 
-  // optional bytes class_name = 9;
-  inline bool has_class_name() const;
-  inline void clear_class_name();
-  static const int kClassNameFieldNumber = 9;
-  inline const ::std::string& class_name() const;
-  inline void set_class_name(const ::std::string& value);
-  inline void set_class_name(const char* value);
-  inline void set_class_name(const void* value, size_t size);
-  inline ::std::string* mutable_class_name();
-  inline ::std::string* release_class_name();
-  inline void set_allocated_class_name(::std::string* class_name);
-
-  // optional int32 scene_id = 10;
+  // required int32 scene_id = 8;
   inline bool has_scene_id() const;
   inline void clear_scene_id();
-  static const int kSceneIdFieldNumber = 10;
+  static const int kSceneIdFieldNumber = 8;
   inline ::google::protobuf::int32 scene_id() const;
   inline void set_scene_id(::google::protobuf::int32 value);
 
@@ -1921,8 +1907,6 @@ class PlayerEntryInfo : public ::google::protobuf::Message {
  private:
   inline void set_has_object_guid();
   inline void clear_has_object_guid();
-  inline void set_has_char_type();
-  inline void clear_has_char_type();
   inline void set_has_x();
   inline void clear_has_x();
   inline void set_has_y();
@@ -1935,26 +1919,22 @@ class PlayerEntryInfo : public ::google::protobuf::Message {
   inline void clear_has_player_state();
   inline void set_has_config_id();
   inline void clear_has_config_id();
-  inline void set_has_class_name();
-  inline void clear_has_class_name();
   inline void set_has_scene_id();
   inline void clear_has_scene_id();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int64 object_guid_;
-  ::google::protobuf::int32 char_type_;
   float x_;
   float y_;
   float z_;
   ::google::protobuf::int32 career_type_;
-  ::google::protobuf::int32 player_state_;
   ::std::string* config_id_;
-  ::std::string* class_name_;
+  ::google::protobuf::int32 player_state_;
   ::google::protobuf::int32 scene_id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -2140,48 +2120,96 @@ class AckPlayerLeaveList : public ::google::protobuf::Message {
 
 // ReqEnterGameServer
 
-// required int32 server_id = 1;
-inline bool ReqEnterGameServer::has_server_id() const {
+// required bytes account = 1;
+inline bool ReqEnterGameServer::has_account() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqEnterGameServer::set_has_server_id() {
+inline void ReqEnterGameServer::set_has_account() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqEnterGameServer::clear_has_server_id() {
+inline void ReqEnterGameServer::clear_has_account() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqEnterGameServer::clear_server_id() {
-  server_id_ = 0;
-  clear_has_server_id();
+inline void ReqEnterGameServer::clear_account() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    account_->clear();
+  }
+  clear_has_account();
 }
-inline ::google::protobuf::int32 ReqEnterGameServer::server_id() const {
-  return server_id_;
+inline const ::std::string& ReqEnterGameServer::account() const {
+  return *account_;
 }
-inline void ReqEnterGameServer::set_server_id(::google::protobuf::int32 value) {
-  set_has_server_id();
-  server_id_ = value;
+inline void ReqEnterGameServer::set_account(const ::std::string& value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqEnterGameServer::set_account(const char* value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqEnterGameServer::set_account(const void* value, size_t size) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqEnterGameServer::mutable_account() {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  return account_;
+}
+inline ::std::string* ReqEnterGameServer::release_account() {
+  clear_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = account_;
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqEnterGameServer::set_allocated_account(::std::string* account) {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
+  if (account) {
+    set_has_account();
+    account_ = account;
+  } else {
+    clear_has_account();
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
-// required int32 gate_id = 2;
-inline bool ReqEnterGameServer::has_gate_id() const {
+// required int32 game_id = 2;
+inline bool ReqEnterGameServer::has_game_id() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ReqEnterGameServer::set_has_gate_id() {
+inline void ReqEnterGameServer::set_has_game_id() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void ReqEnterGameServer::clear_has_gate_id() {
+inline void ReqEnterGameServer::clear_has_game_id() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void ReqEnterGameServer::clear_gate_id() {
-  gate_id_ = 0;
-  clear_has_gate_id();
+inline void ReqEnterGameServer::clear_game_id() {
+  game_id_ = 0;
+  clear_has_game_id();
 }
-inline ::google::protobuf::int32 ReqEnterGameServer::gate_id() const {
-  return gate_id_;
+inline ::google::protobuf::int32 ReqEnterGameServer::game_id() const {
+  return game_id_;
 }
-inline void ReqEnterGameServer::set_gate_id(::google::protobuf::int32 value) {
-  set_has_gate_id();
-  gate_id_ = value;
+inline void ReqEnterGameServer::set_game_id(::google::protobuf::int32 value) {
+  set_has_game_id();
+  game_id_ = value;
 }
 
 // required bytes name = 3;
@@ -3620,37 +3648,15 @@ inline void PlayerEntryInfo::set_object_guid(::google::protobuf::int64 value) {
   object_guid_ = value;
 }
 
-// required int32 char_type = 2;
-inline bool PlayerEntryInfo::has_char_type() const {
+// required float x = 2;
+inline bool PlayerEntryInfo::has_x() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void PlayerEntryInfo::set_has_char_type() {
+inline void PlayerEntryInfo::set_has_x() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void PlayerEntryInfo::clear_has_char_type() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void PlayerEntryInfo::clear_char_type() {
-  char_type_ = 0;
-  clear_has_char_type();
-}
-inline ::google::protobuf::int32 PlayerEntryInfo::char_type() const {
-  return char_type_;
-}
-inline void PlayerEntryInfo::set_char_type(::google::protobuf::int32 value) {
-  set_has_char_type();
-  char_type_ = value;
-}
-
-// required float x = 3;
-inline bool PlayerEntryInfo::has_x() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void PlayerEntryInfo::set_has_x() {
-  _has_bits_[0] |= 0x00000004u;
-}
 inline void PlayerEntryInfo::clear_has_x() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void PlayerEntryInfo::clear_x() {
   x_ = 0;
@@ -3664,15 +3670,15 @@ inline void PlayerEntryInfo::set_x(float value) {
   x_ = value;
 }
 
-// required float y = 4;
+// required float y = 3;
 inline bool PlayerEntryInfo::has_y() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void PlayerEntryInfo::set_has_y() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void PlayerEntryInfo::clear_has_y() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void PlayerEntryInfo::clear_y() {
   y_ = 0;
@@ -3686,15 +3692,15 @@ inline void PlayerEntryInfo::set_y(float value) {
   y_ = value;
 }
 
-// required float z = 5;
+// required float z = 4;
 inline bool PlayerEntryInfo::has_z() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void PlayerEntryInfo::set_has_z() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void PlayerEntryInfo::clear_has_z() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void PlayerEntryInfo::clear_z() {
   z_ = 0;
@@ -3708,15 +3714,15 @@ inline void PlayerEntryInfo::set_z(float value) {
   z_ = value;
 }
 
-// required int32 career_type = 6;
+// required int32 career_type = 5;
 inline bool PlayerEntryInfo::has_career_type() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void PlayerEntryInfo::set_has_career_type() {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void PlayerEntryInfo::clear_has_career_type() {
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void PlayerEntryInfo::clear_career_type() {
   career_type_ = 0;
@@ -3730,15 +3736,15 @@ inline void PlayerEntryInfo::set_career_type(::google::protobuf::int32 value) {
   career_type_ = value;
 }
 
-// required int32 player_state = 7;
+// required int32 player_state = 6;
 inline bool PlayerEntryInfo::has_player_state() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void PlayerEntryInfo::set_has_player_state() {
-  _has_bits_[0] |= 0x00000040u;
+  _has_bits_[0] |= 0x00000020u;
 }
 inline void PlayerEntryInfo::clear_has_player_state() {
-  _has_bits_[0] &= ~0x00000040u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void PlayerEntryInfo::clear_player_state() {
   player_state_ = 0;
@@ -3752,15 +3758,15 @@ inline void PlayerEntryInfo::set_player_state(::google::protobuf::int32 value) {
   player_state_ = value;
 }
 
-// required bytes config_id = 8;
+// required bytes config_id = 7;
 inline bool PlayerEntryInfo::has_config_id() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
 inline void PlayerEntryInfo::set_has_config_id() {
-  _has_bits_[0] |= 0x00000080u;
+  _has_bits_[0] |= 0x00000040u;
 }
 inline void PlayerEntryInfo::clear_has_config_id() {
-  _has_bits_[0] &= ~0x00000080u;
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void PlayerEntryInfo::clear_config_id() {
   if (config_id_ != &::google::protobuf::internal::kEmptyString) {
@@ -3822,85 +3828,15 @@ inline void PlayerEntryInfo::set_allocated_config_id(::std::string* config_id) {
   }
 }
 
-// optional bytes class_name = 9;
-inline bool PlayerEntryInfo::has_class_name() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
-}
-inline void PlayerEntryInfo::set_has_class_name() {
-  _has_bits_[0] |= 0x00000100u;
-}
-inline void PlayerEntryInfo::clear_has_class_name() {
-  _has_bits_[0] &= ~0x00000100u;
-}
-inline void PlayerEntryInfo::clear_class_name() {
-  if (class_name_ != &::google::protobuf::internal::kEmptyString) {
-    class_name_->clear();
-  }
-  clear_has_class_name();
-}
-inline const ::std::string& PlayerEntryInfo::class_name() const {
-  return *class_name_;
-}
-inline void PlayerEntryInfo::set_class_name(const ::std::string& value) {
-  set_has_class_name();
-  if (class_name_ == &::google::protobuf::internal::kEmptyString) {
-    class_name_ = new ::std::string;
-  }
-  class_name_->assign(value);
-}
-inline void PlayerEntryInfo::set_class_name(const char* value) {
-  set_has_class_name();
-  if (class_name_ == &::google::protobuf::internal::kEmptyString) {
-    class_name_ = new ::std::string;
-  }
-  class_name_->assign(value);
-}
-inline void PlayerEntryInfo::set_class_name(const void* value, size_t size) {
-  set_has_class_name();
-  if (class_name_ == &::google::protobuf::internal::kEmptyString) {
-    class_name_ = new ::std::string;
-  }
-  class_name_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* PlayerEntryInfo::mutable_class_name() {
-  set_has_class_name();
-  if (class_name_ == &::google::protobuf::internal::kEmptyString) {
-    class_name_ = new ::std::string;
-  }
-  return class_name_;
-}
-inline ::std::string* PlayerEntryInfo::release_class_name() {
-  clear_has_class_name();
-  if (class_name_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = class_name_;
-    class_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void PlayerEntryInfo::set_allocated_class_name(::std::string* class_name) {
-  if (class_name_ != &::google::protobuf::internal::kEmptyString) {
-    delete class_name_;
-  }
-  if (class_name) {
-    set_has_class_name();
-    class_name_ = class_name;
-  } else {
-    clear_has_class_name();
-    class_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// optional int32 scene_id = 10;
+// required int32 scene_id = 8;
 inline bool PlayerEntryInfo::has_scene_id() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 inline void PlayerEntryInfo::set_has_scene_id() {
-  _has_bits_[0] |= 0x00000200u;
+  _has_bits_[0] |= 0x00000080u;
 }
 inline void PlayerEntryInfo::clear_has_scene_id() {
-  _has_bits_[0] &= ~0x00000200u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 inline void PlayerEntryInfo::clear_scene_id() {
   scene_id_ = 0;
