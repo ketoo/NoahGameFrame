@@ -14,7 +14,6 @@
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFILevelModule.h"
-#include "NFComm/NFPluginModule/NFILevelConfigModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFCLevelModule
@@ -53,7 +52,6 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-    NFILevelConfigModule* m_pLevelConfigModule;
 
 };
 

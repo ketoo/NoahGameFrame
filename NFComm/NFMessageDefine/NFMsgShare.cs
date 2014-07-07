@@ -18,19 +18,19 @@ namespace NFMsg
   {
     public ReqEnterGameServer() {}
     
-    private int _server_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"server_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int server_id
+    private byte[] _account;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"account", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] account
     {
-      get { return _server_id; }
-      set { _server_id = value; }
+      get { return _account; }
+      set { _account = value; }
     }
-    private int _gate_id;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"gate_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int gate_id
+    private int _game_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int game_id
     {
-      get { return _gate_id; }
-      set { _gate_id = value; }
+      get { return _game_id; }
+      set { _game_id = value; }
     }
     private byte[] _name;
     [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -537,66 +537,50 @@ namespace NFMsg
       get { return _object_guid; }
       set { _object_guid = value; }
     }
-    private int _char_type;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"char_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int char_type
-    {
-      get { return _char_type; }
-      set { _char_type = value; }
-    }
     private float _x;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"x", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"x", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     public float x
     {
       get { return _x; }
       set { _x = value; }
     }
     private float _y;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"y", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"y", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     public float y
     {
       get { return _y; }
       set { _y = value; }
     }
     private float _z;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"z", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"z", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     public float z
     {
       get { return _z; }
       set { _z = value; }
     }
     private int _career_type;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"career_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"career_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int career_type
     {
       get { return _career_type; }
       set { _career_type = value; }
     }
     private int _player_state;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"player_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"player_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int player_state
     {
       get { return _player_state; }
       set { _player_state = value; }
     }
     private byte[] _config_id;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"config_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"config_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public byte[] config_id
     {
       get { return _config_id; }
       set { _config_id = value; }
     }
-    private byte[] _class_name = null;
-    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"class_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public byte[] class_name
-    {
-      get { return _class_name; }
-      set { _class_name = value; }
-    }
-    private int _scene_id = default(int);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"scene_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    private int _scene_id;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"scene_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int scene_id
     {
       get { return _scene_id; }

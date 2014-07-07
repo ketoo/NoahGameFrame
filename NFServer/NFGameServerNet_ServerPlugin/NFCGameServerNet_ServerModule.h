@@ -23,6 +23,7 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include <vector>
 
 class NFCGameServerNet_ServerModule
     : public NFINetModule
@@ -66,6 +67,8 @@ protected:
 
     void OnClienEnterGameProcess(const NFIPacket& msg);
     void OnClienLeaveGameProcess(const NFIPacket& msg);
+    
+    //////////////////////////////////////////////////////////////////////////
 
     void OnClienSwapSceneProcess(const NFIPacket& msg);
     void OnClienUseSkill(const NFIPacket& msg);
@@ -128,27 +131,38 @@ private:
 
         int nFD;
         NFMsg::ServerInfoReport* pData;
+
+        //此网关上所有的对象<角色ID,gate_FD>
+        std::map<NFIDENTID, int> xRoleInfo;
     };
 
 private:
-    //serverid,data
+    //gateid,data
     NFMap<int, ServerData> mProxyMap;
 protected:
 
-    //要管理当前所有的对象所在的actor，以便转移
+    //要管理当前所有的对象所在的actor,gateid,fd等
     struct BaseData 
     {
-        std::string strAccount;
-        int32_t nAccountID;
-        NFIDENTID nGateID;
+        BaseData()
+        {
+            nActorID = 0;
+            nGateID = 0;
+            nFD = 0;
+        }
+
+        int nActorID;
+        int nGateID;
         int nFD;
-        NFIDENTID nPlayerID;
     };
 
 
 private:
 
-    NFMap<NFIDENTID, BaseData> mBaseData;
+    NFMap<NFIDENTID, BaseData> mRoleBaseData;
+
+    //临时保存角色是否已经等待创建的状态,角色创建后删除
+    NFMap<std::string, BaseData> mRoleState;
 
     NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
