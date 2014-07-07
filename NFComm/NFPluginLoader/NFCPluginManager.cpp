@@ -196,17 +196,11 @@ bool NFCPluginManager::Init()
 
 #endif
 
-
-
-
     PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
     for (itInstance; itInstance != mPluginInstanceMap.end(); itInstance++)
     {
         itInstance->second->Init();
     }
-
-
-
 
     return true;
 }

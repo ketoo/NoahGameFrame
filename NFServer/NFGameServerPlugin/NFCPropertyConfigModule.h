@@ -15,6 +15,8 @@
 #include "NFComm/RapidXML/rapidxml_print.hpp"
 #include "NFComm/RapidXML/rapidxml_utils.hpp"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
+#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 
 class NFCPropertyConfigModule
     : public NFIPropertyConfigModule
@@ -41,11 +43,13 @@ protected:
     void Load();
     void InitViewPropertyList();
 private:
-    typedef std::map<std::string, int> JOB_PROPERTY_STRUCT;
-    //等级->(属性名，属性值)
-    NFMap<int, JOB_PROPERTY_STRUCT> mhtCoefficienData[( int )NFJobType::NJT_MAX];
+    //等级->EffectData
+    NFMap<int, std::string> mhtCoefficienData[( int )NFJobType::NJT_MAX];
 
     NFList<std::string> mViewPropertyList; // 客户端查看角色属性表
+
+    NFILogicClassModule* m_pLogicClassModule;
+    NFIElementInfoModule* m_pElementInfoModule;
 };
 
 

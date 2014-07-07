@@ -57,6 +57,9 @@ protected:
     int OnReqServerListProcess(const NFIPacket& msg);
     int OnSelectServerProcess(const NFIPacket& msg);
     int OnReqRoleListProcess(const NFIPacket& msg);
+    int OnReqCreateRoleProcess(const NFIPacket& msg);
+    int OnReqDelRoleProcess(const NFIPacket& msg);
+    int OnReqEnterGameServer(const NFIPacket& msg);
 
 
     int OnTranspondProcess(const NFIPacket& msg);
