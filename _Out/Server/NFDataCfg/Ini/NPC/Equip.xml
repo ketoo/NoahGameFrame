@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is config xml-->
 <XML>
-  <Object ID="EQUIP_ZS_M_0_WEAPON_10001" ItemType="2" ItemSubType="0" Level="1" Job="" Quality="1" ShowName="é¥®è¡€åˆ€" Desc="" EffectData="Equip_100" PrefabPath="Dao/Dao_001"  DropPrePath="Prefabs/Misc/Drop/Drop_Weapon"  BuyPrice="0" SalePrice="0" SuitID="0" SuitBuffID="0"   />
-  <Object ID="EQUIP_ZS_M_0_WEAPON_10002" ItemType="2" ItemSubType="0" Level="5" Job="" Quality="1" ShowName="çš‡è€…åˆ€" Desc="" EffectData="Equip_101" PrefabPath="Dao/Dao_001"  DropPrePath="Prefabs/Misc/Drop/Drop_Weapon"  BuyPrice="0" SalePrice="0" SuitID="0" SuitBuffID="0"   />
+    <Object BuyPrice="0" Desc="" DropPrePath="Prefabs/Misc/Drop/Drop_Weapon" EffectData="Equip_100" ID="EQUIP_ZS_M_0_WEAPON_10001" ItemSubType="0" ItemType="2" Job="" Level="1" PrefabPath="Dao/Dao_001" Quality="1" SalePrice="0" ShowName="ÒûÑªµ¶" SuitBuffID="0" SuitID="0"/>
+    <Object BuyPrice="0" Desc="" DropPrePath="Prefabs/Misc/Drop/Drop_Weapon" EffectData="Equip_101" ID="EQUIP_ZS_M_0_WEAPON_10002" ItemSubType="0" ItemType="2" Job="" Level="5" PrefabPath="Dao/Dao_001" Quality="1" SalePrice="0" ShowName="»ÊÕßµ¶" SuitBuffID="0" SuitID="0"/>
 </XML>
