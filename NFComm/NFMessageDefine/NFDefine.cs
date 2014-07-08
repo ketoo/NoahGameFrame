@@ -262,14 +262,23 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ENTER_GAME", Value=150)]
       EGMI_REQ_ENTER_GAME = 150,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_LEAVE_GAME", Value=151)]
-      EGMI_REQ_LEAVE_GAME = 151,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ENTER_GAME", Value=151)]
+      EGMI_ACK_ENTER_GAME = 151,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SWAP_GAME", Value=152)]
-      EGMI_REQ_SWAP_GAME = 152,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_LEAVE_GAME", Value=152)]
+      EGMI_REQ_LEAVE_GAME = 152,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SWAP_SCENE", Value=153)]
-      EGMI_REQ_SWAP_SCENE = 153,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_LEAVE_GAME", Value=153)]
+      EGMI_ACK_LEAVE_GAME = 153,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SWAP_GAME", Value=154)]
+      EGMI_REQ_SWAP_GAME = 154,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SWAP_SCENE", Value=155)]
+      EGMI_REQ_SWAP_SCENE = 155,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SWAP_SCENE", Value=156)]
+      EGMI_ACK_SWAP_SCENE = 156,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OBJECT_ENTRY", Value=200)]
       EGMI_ACK_OBJECT_ENTRY = 200,
