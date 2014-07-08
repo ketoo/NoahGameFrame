@@ -14,17 +14,6 @@
 bool NFCLoginLogicModule::Init()
 {
 
-//     NFConfig config;
-//     bool bLoad =  config.Load("NFLoginConfig.cfg");
-//     if (!bLoad)
-//     {
-//         assert(0);
-// 
-//         return true;
-//     }
-// 
-//     mnLoginID = config["LoginID"].toNumber<int>();
-
     return true;
 }
 
@@ -56,45 +45,6 @@ int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventI
   
     return 0;
 }
-
-int NFCLoginLogicModule::OnLogOutEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
-{
-    if (2 != var.GetCount()
-        || !var.TypeEx(VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_STRING, VARIANT_TYPE::VTYPE_UNKNOWN))
-    {
-        return -1;
-    }
-
-    int  nAddress = var.IntVal(0);
-    const std::string& strAccount = var.StringVal(1);
-
-    NFCValueList valEventInfo;
-    valEventInfo << nAddress << strAccount.c_str();
-    m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_LOGOUT_RESULTS, valEventInfo);
-
-    return 0;
-}
-
-// int NFCLoginLogicModule::OnRequireServerListEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var )
-// {
-//  if ( 1 != var.GetCount())
-//  {
-//      return -1;
-//  }
-//
-//  std::string strAddress = var.StringVal(0);
-//  WorldServerInfo* pInfo = First();
-//  while ( pInfo )
-//  {
-//      NFCValueList valWorldInfo;
-//      valWorldInfo << strAddress << pInfo->nWorldID << pInfo->strWorldName << pInfo->nMaxOnline << pInfo->nOnlineCount;
-//      m_pEventProcessModule->DoEvent( 0, NFED_ON_CLIENT_REQUIRE_SERVER_LIST_RESULTS, valWorldInfo );
-//
-//      pInfo = Next();
-//  }
-//
-//  return 0;
-// }
 
 int NFCLoginLogicModule::OnDisconnectEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
 {
@@ -174,12 +124,7 @@ bool NFCLoginLogicModule::AfterInit()
 
     //////////////////////////////////////////////////////////////////////////
     // register event calback
-
     m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_LOGIN, this, &NFCLoginLogicModule::OnLoginEvent);
-    m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_LOGOUT, this, &NFCLoginLogicModule::OnLogOutEvent);
-    m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_DISCONNECT, this, &NFCLoginLogicModule::OnDisconnectEvent);
-
-    //m_pKernelModule->SetIdentSerialID(mnLoginID);
 
     return true;
 }
