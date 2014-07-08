@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is config xml-->
 <XML>
-  <Object ID="Task1" TaskName="tas1" Type="1" NextTaskID="Task2" KillMonsterName="att1" KillCount="5" LevelReq="1" AwardExp="100" AwardGold="110" AwardPack="" />
-  <Object ID="Task2" TaskName="tas2" Type="1" NextTaskID="Task3" KillMonsterName="att2" KillCount="5" LevelReq="2" AwardExp="200" AwardGold="220" AwardPack="" />
-  <Object ID="Task3" TaskName="tas3" Type="1" NextTaskID="Task4" KillMonsterName="att3" KillCount="1" LevelReq="3" AwardExp="300" AwardGold="330" AwardPack="" />
- </XML>
+    <Object AwardExp="100" AwardGold="110" AwardPack="" ID="Task1" KillCount="5" KillMonsterName="att1" LevelReq="1" NextTaskID="Task2" TaskName="tas1" Type="1"/>
+    <Object AwardExp="200" AwardGold="220" AwardPack="" ID="Task2" KillCount="5" KillMonsterName="att2" LevelReq="2" NextTaskID="Task3" TaskName="tas2" Type="1"/>
+    <Object AwardExp="300" AwardGold="330" AwardPack="" ID="Task3" KillCount="1" KillMonsterName="att3" LevelReq="3" NextTaskID="Task4" TaskName="tas3" Type="1"/>
+</XML>
