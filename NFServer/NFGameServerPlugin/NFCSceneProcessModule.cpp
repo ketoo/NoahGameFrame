@@ -34,9 +34,6 @@ bool NFCSceneProcessModule::Init()
     assert( NULL != m_pPropertyModule );
     assert( NULL != m_pLogModule );
 
-    //     m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_SELECTROLE_ENTER, OnEnterWorldEvent);
-    //     m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_LEAVE_GAME, OnAcountDisConnectEvent);
-
     m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCSceneProcessModule::OnObjectClassEvent );
     m_pEventProcessModule->AddClassCallBack( "Scene", this, &NFCSceneProcessModule::OnContainerObjectEvent );
 
@@ -486,10 +483,9 @@ int NFCSceneProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std:
         }
         else if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )
         {
-            m_pEventProcessModule->AddEventCallBack( self, NFED_ON_OBJECT_ENTER_SCENE, this, &NFCSceneProcessModule::OnEnterSceneEvent );
-            m_pEventProcessModule->AddEventCallBack( self, NFED_ON_OBJECT_LEAVE_SCENE, this, &NFCSceneProcessModule::OnLeaveSceneEvent );
+            m_pEventProcessModule->AddEventCallBack( self, NFED_ON_CLIENT_ENTER_SCENE, this, &NFCSceneProcessModule::OnEnterSceneEvent );
+            m_pEventProcessModule->AddEventCallBack( self, NFED_ON_CLIENT_LEAVE_SCENE, this, &NFCSceneProcessModule::OnLeaveSceneEvent );
         }
-
     }
 
     return 0;
