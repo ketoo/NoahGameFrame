@@ -21,37 +21,13 @@ enum NFEventDefine
 	//state,address,account
     NFED_ON_CLIENT_LOGIN_RESULTS,
 
-    //arg[0]:address,account
-    NFED_ON_CLIENT_LOGOUT,
-    NFED_ON_CLIENT_LOGOUT_RESULTS,
-
-    //arg[0]:address,account
-    NFED_ON_CLIENT_DISCONNECT,
-
     //arg[0]:_nWorldID,ClientAddress, _nLoginID, _szAccount
     NFED_ON_CLIENT_SELECT_SERVER,
     //arg[0]:_nWorldID,_Ident, _nLoginID, _szWorldAddress, _nPort, _szWorldKey
     NFED_ON_CLIENT_SELECT_SERVER_RESULTS,
 
-    //arg[0]:gaeserverid,account,roleName,sceneIndex
-    NFED_ON_CLIENT_SELECTROLE_ENTER,
-    //arg[0]:address[other game server address]
-    NFED_ON_CLIENT_SELECT_ENTER_RESULTS,
-
-    //arg[0]:account,roleName,ident
-    NFED_ON_CLIENT_LEAVE_GAME,
-
     //arg[0]:gsID,account,roleName,SceneID
 	NFED_ON_KICK_FROM_SERVER,
-    ///
-    //arg[0]:address,roleName,roleSex,roleJob,roleRace,roleCamp,
-    NFED_ON_CLIENT_CREATEROLE,
-    //arg[0]:address,roleName,roleSex,roleJob,roleRace,roleCamp,
-    NFED_ON_CLIENT_CREATEROLE_RESULTS,
-    //arg[0]:account,roleName
-    NFED_ON_CLIENT_DELETEROLE,
-
-    
 
     ////////////////Has Self---logic//////////////////////////////////////////////////////////
     //arg[0]:resultID[EGameErrorCode]
@@ -78,15 +54,16 @@ enum NFEventDefine
     NFED_ON_CLIENT_USE_ITEM_POS_RESULT,
 
     //arg[0]:object,type,sceneID,line
-    NFED_ON_OBJECT_ENTER_SCENE,
+    NFED_ON_CLIENT_ENTER_SCENE,
+    //arg[0]:object
+    NFED_ON_CLIENT_LEAVE_SCENE,
+
     //arg[0]:object,type,sceneID,line
     NFED_ON_OBJECT_ENTER_SCENE_BEFORE,
     NFED_ON_OBJECT_ENTER_SCENE_RESULT,
-    //arg[0]:object
-    NFED_ON_OBJECT_LEAVE_SCENE,
+    
     NFED_ON_CLIENT_SWAP_TABLE,
 
-    //////////////////////////////////////////////////////////////////////////
     NFED_ON_OBJECT_BE_KILLED,
 };
 
