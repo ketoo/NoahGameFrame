@@ -1,5 +1,6 @@
-<!-- edited with XMLSpy v2011 (http://www.altova.com) by heh (dadad) -->
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is config xml-->
 <XML>
-	<Object ID="Skill_1" Name="skill1" NextLevelID="Skill_2" NeedMoney="300" NeedLevel="5" />
-	<Object ID="Skill_2" Name="skill2" NextLevelID="" NeedMoney="600" NeedLevel="5"/>
+    <Object ID="Skill_1" Name="skill1" NeedLevel="5" NeedMoney="300" NextLevelID="Skill_2"/>
+    <Object ID="Skill_2" Name="skill2" NeedLevel="5" NeedMoney="600" NextLevelID=""/>
 </XML>
