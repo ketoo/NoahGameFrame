@@ -1,6 +1,6 @@
 NoahGameFrame
 =============
-Copyright © http://www.yowoyo.com
+######Copyright © http://www.yowoyo.com
 
 ##The features:
 
