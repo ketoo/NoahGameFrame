@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is config xml-->
 <XML>
-	<Object ID="Item_Cash_1" ItemType="1" ItemSubType="12" Level="0" ShowName="é’±ç›’å­" Desc="è£…äº†å¥½å¤šé’±" Icon="1017" CoolDownTime="0" OverlayCount="1" BuyPrice="0" SalePrice="0"/>
-	<Object ID="Item_HP" ItemType="0" ItemSubType="4" Level="0" ShowName="ç”Ÿå‘½è¯æ°´" Desc="ç”Ÿå‘½è¯æ°´" Icon="1017" CoolDownTime="0" OverlayCount="1" BuyPrice="0" SalePrice="0"/>
-	<Object ID="Item_MP" ItemType="0" ItemSubType="4" Level="0" ShowName="è“è¯" Desc="è“è¯" Icon="1018" CoolDownTime="0" OverlayCount="1" BuyPrice="0" SalePrice="0"/>
-	<Object ID="Item_EXP" ItemType="0" ItemSubType="4" Level="0" ShowName="ç»éªŒè¯" Desc="ç»éªŒè¯" Icon="1019" CoolDownTime="0" OverlayCount="1" BuyPrice="0" SalePrice="0"/>
-	<Object ID="Item_ZS_SKILL10" ItemType="0" ItemSubType="5" Level="0" ShowName="æ–°æ‰‹å¤§ç¤¼åŒ…" Desc="æ–°æ‰‹å¤§ç¤¼åŒ…" Icon="1018" CoolDownTime="0" OverlayCount="1" BuyPrice="0" SalePrice="0"/>
-	<Object ID="Gold_1" ItemType="1" ItemSubType="16" Level="0" ShowName="é‡‘å¸" Desc="é‡‘å¸" Icon="QDJL-JB" CoolDownTime="0" OverlayCount="1" BuyPrice="0" SalePrice="0"/>
-	<Object ID="Active_Token" ItemType="1" ItemSubType="21" Level="0" ShowName="æ´»åŠ¨ä»¤ç‰Œ" Desc="æ´»åŠ¨ä»¤ç‰Œ" Icon="1017" CoolDownTime="0" OverlayCount="10000" BuyPrice="0" SalePrice="0"/>
+    <Object BuyPrice="0" CoolDownTime="0" Desc="×°ÁËºÃ¶àÇ®" ID="Item_Cash_1" Icon="1017" ItemSubType="12" ItemType="1" Level="0" OverlayCount="1" SalePrice="0" ShowName="Ç®ºÐ×Ó"/>
+    <Object BuyPrice="0" CoolDownTime="0" Desc="ÉúÃüÒ©Ë®" ID="Item_HP" Icon="1017" ItemSubType="4" ItemType="0" Level="0" OverlayCount="1" SalePrice="0" ShowName="ÉúÃüÒ©Ë®"/>
+    <Object BuyPrice="0" CoolDownTime="0" Desc="À¶Ò©" ID="Item_MP" Icon="1018" ItemSubType="4" ItemType="0" Level="0" OverlayCount="1" SalePrice="0" ShowName="À¶Ò©"/>
+    <Object BuyPrice="0" CoolDownTime="0" Desc="¾­ÑéÒ©" ID="Item_EXP" Icon="1019" ItemSubType="4" ItemType="0" Level="0" OverlayCount="1" SalePrice="0" ShowName="¾­ÑéÒ©"/>
+    <Object BuyPrice="0" CoolDownTime="0" Desc="ÐÂÊÖ´óÀñ°ü" ID="Item_ZS_SKILL10" Icon="1018" ItemSubType="5" ItemType="0" Level="0" OverlayCount="1" SalePrice="0" ShowName="ÐÂÊÖ´óÀñ°ü"/>
+    <Object BuyPrice="0" CoolDownTime="0" Desc="½ð±Ò" ID="Gold_1" Icon="QDJL-JB" ItemSubType="16" ItemType="1" Level="0" OverlayCount="1" SalePrice="0" ShowName="½ð±Ò"/>
+    <Object BuyPrice="0" CoolDownTime="0" Desc="»î¶¯ÁîÅÆ" ID="Active_Token" Icon="1017" ItemSubType="21" ItemType="1" Level="0" OverlayCount="10000" SalePrice="0" ShowName="»î¶¯ÁîÅÆ"/>
 </XML>
