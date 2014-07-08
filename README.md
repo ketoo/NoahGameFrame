@@ -1,7 +1,8 @@
 NoahGameFrame
 =============
+######Copyright © http://www.yowoyo.com
 
-The features:
+##The features:
 
 <p>1: it is easy to use interface oriented design minimise the effort;</p>
 <p>2: extensible plugin framework makes getting your application running is quick and simple;</p>
