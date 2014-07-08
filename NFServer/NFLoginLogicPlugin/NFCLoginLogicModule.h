@@ -37,18 +37,9 @@ protected:
     // client event
     int OnLoginEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
 
-    int OnLogOutEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
-
     int OnDisconnectEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
 
-    //int OnRequireServerListEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var );
-
-    //////////////////////////////////////////////////////////////////////////
-
-
 protected:
-
-    //int mnLoginID;
 
     NFIEventProcessModule* m_pEventProcessModule;
     NFIPlatformDataModule* m_pNoSqlModule;
