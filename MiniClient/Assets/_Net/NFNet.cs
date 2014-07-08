@@ -40,9 +40,13 @@ public class NFNet
 
     };
 
-    public void StartConnect(string strIP, int nPort)
+    public NFNet()
     {
         kernel = new NFCKernel();
+    }
+
+    public void StartConnect(string strIP, int nPort)
+    {
         objectElement = new NFObjectElement();
 
         client = new NFClientNet(this);        
@@ -260,7 +264,6 @@ public class NFNet
                     sendLogic.RequireHeartBeat();
                 }
             }
-
         }
     }
 

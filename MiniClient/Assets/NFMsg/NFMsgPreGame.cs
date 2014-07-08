@@ -100,6 +100,14 @@ namespace NFMsg
       get { return _event_code; }
       set { _event_code = value; }
     }
+    private long _event_arg = default(long);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"event_arg", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(long))]
+    public long event_arg
+    {
+      get { return _event_arg; }
+      set { _event_arg = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

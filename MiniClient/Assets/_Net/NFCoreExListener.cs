@@ -193,6 +193,8 @@ namespace NFTCPClient
             {
                 //验证成功
                 mNet.mPlayerState = NFNet.PLAYER_STATE.E_HAS_VERIFY;
+                mNet.nSelfID = xData.event_arg;
+
                 //申请世界内的服务器列表
                 mNet.sendLogic.RequireServerList();
             }
@@ -212,7 +214,6 @@ namespace NFTCPClient
                 mNet.sendLogic.RequireRoleList(mNet.strAccount, mNet.nServerID);
             }
         }
-        
         
         private void EGMI_ACK_ROLE_LIST(MsgHead head, MemoryStream stream)
         {
