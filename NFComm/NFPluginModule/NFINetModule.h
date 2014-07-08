@@ -60,6 +60,26 @@ public:
         return true;
 	}
 
+    bool VerifyProtocol(const NFIPacket& msg, const int64_t nPlayer)
+    {
+        NFMsg::MsgBase xMsg;
+        if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
+        {
+            char szData[MAX_PATH] = { 0 };
+            sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
+            LogRecive(szData);
+
+            return false;
+        }
+
+        if(nPlayer != xMsg.player_id())
+        {
+            return false;
+        }
+
+        return true;
+    }
+
 	virtual bool Execute(const float fLasFrametime, const float fStartedTime)
 	{
 		return m_pNet->Execute(fLasFrametime, fStartedTime);

@@ -396,17 +396,27 @@ class AckEventResult : public ::google::protobuf::Message {
   inline ::NFMsg::EGameEventCode event_code() const;
   inline void set_event_code(::NFMsg::EGameEventCode value);
 
+  // optional int64 event_arg = 2;
+  inline bool has_event_arg() const;
+  inline void clear_event_arg();
+  static const int kEventArgFieldNumber = 2;
+  inline ::google::protobuf::int64 event_arg() const;
+  inline void set_event_arg(::google::protobuf::int64 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.AckEventResult)
  private:
   inline void set_has_event_code();
   inline void clear_has_event_code();
+  inline void set_has_event_arg();
+  inline void clear_has_event_arg();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::google::protobuf::int64 event_arg_;
   int event_code_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
@@ -2518,6 +2528,28 @@ inline void AckEventResult::set_event_code(::NFMsg::EGameEventCode value) {
   assert(::NFMsg::EGameEventCode_IsValid(value));
   set_has_event_code();
   event_code_ = value;
+}
+
+// optional int64 event_arg = 2;
+inline bool AckEventResult::has_event_arg() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckEventResult::set_has_event_arg() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckEventResult::clear_has_event_arg() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckEventResult::clear_event_arg() {
+  event_arg_ = GOOGLE_LONGLONG(0);
+  clear_has_event_arg();
+}
+inline ::google::protobuf::int64 AckEventResult::event_arg() const {
+  return event_arg_;
+}
+inline void AckEventResult::set_event_arg(::google::protobuf::int64 value) {
+  set_has_event_arg();
+  event_arg_ = value;
 }
 
 // -------------------------------------------------------------------
