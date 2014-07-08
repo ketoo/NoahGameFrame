@@ -30,6 +30,4 @@ public class NFCResultLogic
     {
         mNet.mPlayerState = NFNet.PLAYER_STATE.E_HAS_PLAYER_LOGIN;
     }
-    
-
 }

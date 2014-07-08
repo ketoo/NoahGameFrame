@@ -27,11 +27,16 @@ namespace NFCoreEx
 		{
 			mhtObject = new Hashtable();
 			mhtClassHandleDel = new Hashtable();
+
+            mxLogicClassManager = new NFCLogicClassManager();
+            mxElementManager = new NFCElementManager();
 		}
 
 		~NFCKernel()
 		{
 			mhtObject = null;
+            mxElementManager = null;
+            mxLogicClassManager = null;
 		}
 
 		public override bool AddHeartBeat(NFIDENTID self, string strHeartBeatName, NFIHeartBeat.HeartBeatEventHandler handler, float fTime, NFIValueList valueList)
@@ -456,7 +461,9 @@ namespace NFCoreEx
 		
 		Hashtable mhtObject;
 		Hashtable mhtClassHandleDel;
-		
+        NFIElementManager mxElementManager;
+        NFILogicClassManager mxLogicClassManager;
+
 		class ClassHandleDel
 		{
 			public ClassHandleDel()
