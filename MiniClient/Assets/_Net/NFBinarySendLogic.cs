@@ -189,7 +189,7 @@ public class NFBinarySendLogic
         net = clientnet;
     }
 
-    public void SendMsg(Int32 charID, NFMsg.EGameMsgID unMsgID, MemoryStream stream)
+    public void SendMsg(Int64 charID, NFMsg.EGameMsgID unMsgID, MemoryStream stream)
     {     
         NFMsg.MsgBase xData = new NFMsg.MsgBase();
         xData.player_id = charID;
@@ -235,7 +235,7 @@ public class NFBinarySendLogic
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqAccountLogin>(stream, xData);
 
-        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_LOGIN, stream);
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_LOGIN, stream);
 
         net.mPlayerState = NFNet.PLAYER_STATE.E_PLAYER_LOGINING;
     }
@@ -248,7 +248,7 @@ public class NFBinarySendLogic
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqServerList>(stream, xData);
 
-        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_WORLD_LIST, stream);
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_WORLD_LIST, stream);
     }
 
     public void RequireConnectWorld(int nWorldID)
@@ -259,7 +259,7 @@ public class NFBinarySendLogic
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqConnectWorld>(stream, xData);
 
-        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_CONNECT_WORLD, stream);
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_CONNECT_WORLD, stream);
     }
 
     public void RequireVerifyWorldKey(string strAccount, string strKey)
@@ -279,7 +279,7 @@ public class NFBinarySendLogic
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqAccountLogin>(stream, xData);
 
-        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_CONNECT_KEY, stream);
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_CONNECT_KEY, stream);
     }
 
     public void RequireServerList()
@@ -290,7 +290,7 @@ public class NFBinarySendLogic
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqServerList>(stream, xData);
 
-        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_WORLD_LIST, stream);
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_WORLD_LIST, stream);
     }
 
     public void RequireSelectServer(int nServerID)
@@ -301,7 +301,7 @@ public class NFBinarySendLogic
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqSelectServer>(stream, xData);
 
-        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_SELECT_SERVER, stream);
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_SELECT_SERVER, stream);
     }
 
     public void RequireRoleList(string strAccount, int nGameID)
@@ -313,7 +313,7 @@ public class NFBinarySendLogic
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqRoleList>(stream, xData);
 
-        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_ROLE_LIST, stream);
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_ROLE_LIST, stream);
     }
 
     public void RequireCreateRole(string strAccount, string strRoleName, int byCareer, int bySex, int nGameID)
@@ -334,7 +334,7 @@ public class NFBinarySendLogic
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqCreateRole>(stream, xData);
 
-        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_CREATE_ROLE, stream);
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_CREATE_ROLE, stream);
     }
 
     public void RequireDelRole(string strAccount, string strRoleName, int nGameID)
@@ -347,7 +347,7 @@ public class NFBinarySendLogic
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqDeleteRole>(stream, xData);
 
-        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_DELETE_ROLE, stream);
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_DELETE_ROLE, stream);
     }
 
     public void RequireEnterGameServer(string strAccount, string strRoleName, int nServerID)
@@ -360,7 +360,7 @@ public class NFBinarySendLogic
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqEnterGameServer>(stream, xData);
 
-        SendMsg(0, NFMsg.EGameMsgID.EGMI_REQ_ENTER_GAME, stream);
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_ENTER_GAME, stream);
     }
 
     public void RequireHeartBeat()
