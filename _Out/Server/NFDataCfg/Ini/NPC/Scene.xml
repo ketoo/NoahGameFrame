@@ -1,9 +1,7 @@
-<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is config xml-->
 <XML>
-	<Object ID="1" ActorID="1" SceneName="Login" SceneShowName="NewerScene" RelivePos="-0.7,1.5,-1.64" Width="500" MaxGroup="10" MaxGroupPlayers="200" FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/PioneerNoob/" SoundList="Sound/FutureWorld_Darkness_Loop,Sound/FutureWorld_Darkness_Loop_02" > 
-	</Object>
-	<Object ID="2" ActorID="1" SceneName="Stage001" SceneShowName="NewerScene" RelivePos="-0.7,1.5,-1.64" Width="500" MaxGroup="10" MaxGroupPlayers="200" FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/PioneerNoob/" SoundList="Sound/FutureWorld_Darkness_Loop,Sound/FutureWorld_Darkness_Loop_02" > 
-	</Object>
-	<Object ID="3" ActorID="1" SceneName="Stage001" SceneShowName="NewerScene" RelivePos="-0.7,1.5,-1.64" Width="500" MaxGroup="10" MaxGroupPlayers="200" FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/RebellerNoob/" SoundList="Sound/FutureWorld_Darkness_Loop,Sound/FutureWorld_Darkness_Loop_02" > 
-	</Object>
+    <Object FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/PioneerNoob/" ID="Scene0" MaxGroup="10" MaxGroupPlayers="200" RelivePos="-0.7,1.5,-1.64" SceneID="0" SceneName="Login" SceneShowName="NewerScene" SoundList="" Width="500"/>
+    <Object FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/PioneerNoob/" ID="Scene1" MaxGroup="10" MaxGroupPlayers="200" RelivePos="-0.7,1.5,-1.64" SceneID="1" SceneName="Stage001" SceneShowName="NewerScene" SoundList="" Width="500"/>
+    <Object FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/RebellerNoob/" ID="Scene2" MaxGroup="10" MaxGroupPlayers="200" RelivePos="-0.7,1.5,-1.64" SceneID="2" SceneName="Stage001" SceneShowName="NewerScene" SoundList="" Width="500"/>
 </XML>
