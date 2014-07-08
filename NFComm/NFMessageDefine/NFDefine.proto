@@ -103,10 +103,12 @@ enum EGameMsgID
 
 
 	EGMI_REQ_ENTER_GAME							= 150;			// 申请进入游戏世界
-	EGMI_REQ_LEAVE_GAME							= 151;			// 申请离开游戏世界, 回到选人
-	EGMI_REQ_SWAP_GAME							= 152;			//
-	EGMI_REQ_SWAP_SCENE							= 153;			// 
-
+	EGMI_ACK_ENTER_GAME							= 151;			// 回复进入了游戏世界成功
+	EGMI_REQ_LEAVE_GAME							= 152;			// 申请离开游戏世界, 回到选人
+	EGMI_ACK_LEAVE_GAME							= 153;			// 回复,申请离开游戏世界
+	EGMI_REQ_SWAP_GAME							= 154;			//
+	EGMI_REQ_SWAP_SCENE							= 155;			// 
+	EGMI_ACK_SWAP_SCENE							= 156;			// 
 
 	EGMI_ACK_OBJECT_ENTRY						= 200;			// 有对象进入
 	EGMI_ACK_OBJECT_LEAVE						= 201;			// 有对象出去

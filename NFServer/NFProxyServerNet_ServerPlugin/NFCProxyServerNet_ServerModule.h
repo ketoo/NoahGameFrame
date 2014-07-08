@@ -35,9 +35,6 @@ public:
 
     virtual bool AfterInit();
 
-
-    virtual int GetServerPort();
-
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
 

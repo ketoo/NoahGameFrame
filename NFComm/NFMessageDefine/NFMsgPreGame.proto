@@ -34,7 +34,8 @@ message ServerInfoReportList//服务器之间报告服务器状态
 
 message AckEventResult//返回事件结果(对或错等详细)
 {
-	required EGameEventCode event_code = 1; 
+	required EGameEventCode event_code = 1;
+	optional int64 event_arg = 2;
 }
 
 ////////////////////////////////////////////////////

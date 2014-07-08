@@ -245,6 +245,13 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
 
     
     m_pEventProcessModule->DoEvent(pObject->Self(), "Player", CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCValueList() );
+
+    NFCValueList varEntry;
+    varEntry << pObject->Self();
+    varEntry << 0;
+    varEntry << nSceneID;
+    varEntry << -1;
+    m_pEventProcessModule->DoEvent( pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, var );
 }
 
 void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess( const NFIPacket& msg )
@@ -1230,8 +1237,12 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent( const NFIDENTID& self, co
 // 
 //         pDataBase->nGateID = xMsg.gate_id();
 //         pDataBase->nFD = nPlayerID;
-
-
+        //回复客户端角色进入游戏世界成功了
+//         NFMsg::AckEventResult xMsg;
+//         xMsg.set_event_code(NFMsg::EGEC_ACCOUNTPWD_INVALID);
+//         xMsg.set_event_arg(self.nData64);
+// 
+//         SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ENTER_GAME, xMsg, unAddress);
     }
     else if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
     {
@@ -1292,7 +1303,7 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const st
             OnObjectListLeave( NFCValueList() << self, valueAllOldObjectList );
         }
 
-        m_pEventProcessModule->DoEvent(self, NFED_ON_OBJECT_LEAVE_SCENE, NFCValueList() << nOldGroupID);
+        m_pEventProcessModule->DoEvent(self, NFED_ON_CLIENT_LEAVE_SCENE, NFCValueList() << nOldGroupID);
 
     }
 
@@ -1562,7 +1573,7 @@ int NFCGameServerNet_ServerModule::OnObjectClassEvent( const NFIDENTID& self, co
     }
     else if ( CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent )
     {
-        NFIObject* pObject = m_pKernelModule->GetObject(self);
+        m_pEventProcessModule->AddEventCallBack( self, NFED_ON_OBJECT_ENTER_SCENE_BEFORE, this, &NFCGameServerNet_ServerModule::OnSwapSceneResultEvent );
     }
 
     return 0;
@@ -1587,6 +1598,41 @@ int NFCGameServerNet_ServerModule::OnUseSkillResultEvent( const NFIDENTID& self,
 
 int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
 {
+    if ( var.GetCount() != 9 ||
+        !var.TypeEx(VARIANT_TYPE::VTYPE_OBJECT, VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_INT, 
+        VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_FLOAT,
+        VARIANT_TYPE::VTYPE_FLOAT, VARIANT_TYPE::VTYPE_FLOAT, VARIANT_TYPE::VTYPE_UNKNOWN)
+        )
+    {
+        return 1;
+    }
+
+    NFIDENTID ident = var.NumberVal<NFINT64>( 0 );
+    int nType = var.NumberVal<int>( 1 );
+    int nTargetScene = var.NumberVal<int>( 2 );
+    int nTargetGroupID = var.NumberVal<int>( 3 );
+    int nSceneType = var.NumberVal<int>( 4 );
+    float fX = var.NumberVal<float>( 5 );
+    float fY = var.NumberVal<float>( 6 );
+    float fZ = var.NumberVal<float>( 7 );
+
+
+
+    NFMsg::ReqAckSwapScene xSwapScene;
+    xSwapScene.set_transfer_type( NFMsg::ReqAckSwapScene::EGameSwapType::ReqAckSwapScene_EGameSwapType_EGST_NARMAL );
+    xSwapScene.set_scene_id( nTargetScene );
+    xSwapScene.set_line_id( nTargetGroupID );
+
+    BaseData* pData = mRoleBaseData.GetElement(self);
+    if (pData)
+    {
+        ServerData* pProxyData = mProxyMap.GetElement(pData->nGateID);
+        if (pProxyData)
+        {
+            SendMsgPB(NFMsg::EGMI_ACK_SWAP_SCENE, xSwapScene, pProxyData->nFD, pData->nFD);
+        }
+    }
+
     return 0;
 }
 
