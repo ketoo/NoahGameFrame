@@ -65,15 +65,11 @@ class ReqCommand;
 
 enum ReqCommand_EGameCommandType {
   ReqCommand_EGameCommandType_EGCT_MODIY_PROPERTY = 0,
-  ReqCommand_EGameCommandType_EGCT_MODIY_ITEM = 1,
-  ReqCommand_EGameCommandType_EGCT_MODIY_TASK = 2,
-  ReqCommand_EGameCommandType_EGCT_MODIY_CLONE = 3,
-  ReqCommand_EGameCommandType_EGCT_MODIY_KILL = 4,
-  ReqCommand_EGameCommandType_EGCT_SWAP_SCENE = 5
+  ReqCommand_EGameCommandType_EGCT_MODIY_ITEM = 1
 };
 bool ReqCommand_EGameCommandType_IsValid(int value);
 const ReqCommand_EGameCommandType ReqCommand_EGameCommandType_EGameCommandType_MIN = ReqCommand_EGameCommandType_EGCT_MODIY_PROPERTY;
-const ReqCommand_EGameCommandType ReqCommand_EGameCommandType_EGameCommandType_MAX = ReqCommand_EGameCommandType_EGCT_SWAP_SCENE;
+const ReqCommand_EGameCommandType ReqCommand_EGameCommandType_EGameCommandType_MAX = ReqCommand_EGameCommandType_EGCT_MODIY_ITEM;
 const int ReqCommand_EGameCommandType_EGameCommandType_ARRAYSIZE = ReqCommand_EGameCommandType_EGameCommandType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ReqCommand_EGameCommandType_descriptor();
@@ -2864,10 +2860,6 @@ class ReqCommand : public ::google::protobuf::Message {
   typedef ReqCommand_EGameCommandType EGameCommandType;
   static const EGameCommandType EGCT_MODIY_PROPERTY = ReqCommand_EGameCommandType_EGCT_MODIY_PROPERTY;
   static const EGameCommandType EGCT_MODIY_ITEM = ReqCommand_EGameCommandType_EGCT_MODIY_ITEM;
-  static const EGameCommandType EGCT_MODIY_TASK = ReqCommand_EGameCommandType_EGCT_MODIY_TASK;
-  static const EGameCommandType EGCT_MODIY_CLONE = ReqCommand_EGameCommandType_EGCT_MODIY_CLONE;
-  static const EGameCommandType EGCT_MODIY_KILL = ReqCommand_EGameCommandType_EGCT_MODIY_KILL;
-  static const EGameCommandType EGCT_SWAP_SCENE = ReqCommand_EGameCommandType_EGCT_SWAP_SCENE;
   static inline bool EGameCommandType_IsValid(int value) {
     return ReqCommand_EGameCommandType_IsValid(value);
   }
