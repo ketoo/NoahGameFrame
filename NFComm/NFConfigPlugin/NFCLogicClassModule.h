@@ -133,7 +133,6 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-	virtual void OnReload(const char* strModuleName, NFILogicModule* pModule);
 
     virtual bool Load();
     virtual bool Save();

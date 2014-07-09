@@ -26,11 +26,16 @@ class NFILogicModule
 {
 
 public:
-	NFILogicModule(){}
+	NFILogicModule()
+    {
+        bCanReload = true;
+    }
+
 	virtual ~NFILogicModule(){}
 	
 	virtual bool Init()
     {
+        
         return true;
     }
 
@@ -69,6 +74,7 @@ public:
 	}
 
     std::string strName;
+    bool  bCanReload;
 
 protected:
     NFIPluginManager* pPluginManager;
