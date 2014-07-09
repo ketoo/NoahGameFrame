@@ -147,10 +147,6 @@ bool NFCKernelModule::Execute(const float fLasFrametime, const float fStartedTim
     return true;
 }
 
-void NFCKernelModule::OnReload(const char* strModuleName, NFILogicModule* pModule)
-{
-}
-
 bool NFCKernelModule::SetComponentEnable( const NFIDENTID& self, const std::string& strComponentName, const bool bEnable )
 {
     NFIObject* pObject = GetElement(self);
