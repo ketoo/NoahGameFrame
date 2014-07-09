@@ -124,7 +124,7 @@ private:
 public:
 
     NFIActorManager* GetActorManager(){return m_pActorManager;}
-    NFIActorManager::EACTOR GetActor(){return meMainActor; }
+    NFIActorManager::EACTOR GetActorID(){return meMainActor; }
 
 #else
 class NFIActor : public NFILogicModule

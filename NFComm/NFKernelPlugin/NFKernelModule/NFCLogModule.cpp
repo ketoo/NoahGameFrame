@@ -27,7 +27,7 @@ bool NFCLogModule::Init()
 #ifdef NF_DYNAMIC_PLUGIN
 
     NFIActor* pActor = (NFIActor*)(pPluginManager);
-    if(pActor->GetActor() == NFIActorManager::EACTOR_MAIN)
+    if(pActor->GetActorID() == NFIActorManager::EACTOR_MAIN)
     {
 #endif
 
@@ -75,7 +75,7 @@ bool NFCLogModule::Shut()
 {
 #ifdef NF_DYNAMIC_PLUGIN
     NFIActor* pActor = (NFIActor*)(pPluginManager);
-    if(pActor->GetActor() == NFIActorManager::EACTOR_MAIN)
+    if(pActor->GetActorID() == NFIActorManager::EACTOR_MAIN)
     {
         google::ShutdownGoogleLogging();
     }
@@ -121,7 +121,7 @@ bool NFCLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
 
 #ifdef NF_DYNAMIC_PLUGIN
     NFIActor* pActor = (NFIActor*)(pPluginManager);
-    if(!pActor->GetActor() == NFIActorManager::EACTOR_MAIN)
+    if(!pActor->GetActorID() == NFIActorManager::EACTOR_MAIN)
     {
         NFIActorMessage message;
         message.eType = NFIActorMessage::EACTOR_LOG_MSG;

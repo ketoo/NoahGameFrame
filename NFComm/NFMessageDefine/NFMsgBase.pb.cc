@@ -761,14 +761,12 @@ void protobuf_AddDesc_NFMsgBase_2eproto() {
     "er_id\030\001 \002(\003\022\023\n\013record_name\030\002 \002(\014\022\022\n\nremo"
     "ve_row\030\003 \003(\005\"F\n\007MsgBase\022\021\n\tplayer_id\030\001 \002"
     "(\003\022\020\n\010msg_data\030\002 \002(\014\022\026\n\016player_fd_list\030\003"
-    " \003(\003\"\242\002\n\nReqCommand\022\022\n\ncontrol_id\030\001 \002(\003\022"
+    " \003(\003\"\314\001\n\nReqCommand\022\022\n\ncontrol_id\030\001 \002(\003\022"
     "6\n\ncommand_id\030\002 \002(\0162\".NFMsg.ReqCommand.E"
     "GameCommandType\022\031\n\021command_str_value\030\003 \001"
-    "(\014\022\025\n\rcommand_value\030\004 \001(\003\"\225\001\n\020EGameComma"
-    "ndType\022\027\n\023EGCT_MODIY_PROPERTY\020\000\022\023\n\017EGCT_"
-    "MODIY_ITEM\020\001\022\023\n\017EGCT_MODIY_TASK\020\002\022\024\n\020EGC"
-    "T_MODIY_CLONE\020\003\022\023\n\017EGCT_MODIY_KILL\020\004\022\023\n\017"
-    "EGCT_SWAP_SCENE\020\005", 2737);
+    "(\014\022\025\n\rcommand_value\030\004 \001(\003\"@\n\020EGameComman"
+    "dType\022\027\n\023EGCT_MODIY_PROPERTY\020\000\022\023\n\017EGCT_M"
+    "ODIY_ITEM\020\001", 2651);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgBase.proto", &protobuf_RegisterTypes);
   PropertyInt::default_instance_ = new PropertyInt();
@@ -8230,10 +8228,6 @@ bool ReqCommand_EGameCommandType_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
       return true;
     default:
       return false;
@@ -8243,10 +8237,6 @@ bool ReqCommand_EGameCommandType_IsValid(int value) {
 #ifndef _MSC_VER
 const ReqCommand_EGameCommandType ReqCommand::EGCT_MODIY_PROPERTY;
 const ReqCommand_EGameCommandType ReqCommand::EGCT_MODIY_ITEM;
-const ReqCommand_EGameCommandType ReqCommand::EGCT_MODIY_TASK;
-const ReqCommand_EGameCommandType ReqCommand::EGCT_MODIY_CLONE;
-const ReqCommand_EGameCommandType ReqCommand::EGCT_MODIY_KILL;
-const ReqCommand_EGameCommandType ReqCommand::EGCT_SWAP_SCENE;
 const ReqCommand_EGameCommandType ReqCommand::EGameCommandType_MIN;
 const ReqCommand_EGameCommandType ReqCommand::EGameCommandType_MAX;
 const int ReqCommand::EGameCommandType_ARRAYSIZE;
