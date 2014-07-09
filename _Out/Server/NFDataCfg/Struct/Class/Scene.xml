@@ -1,8 +1,6 @@
 <!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
 <XML>
 	<Propertys>
-		<!--Property Id="SceneIndex" Type="int" Public="false" Private="false" Save="false" SceneID代替-->
-		<Property Id="GameServerID" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc=""/>
 		<Property Id="SceneName" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc=""/>
 		<Property Id="SceneShowName" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc=""/>
 		<Property Id="MaxGroup" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="最大组"/>

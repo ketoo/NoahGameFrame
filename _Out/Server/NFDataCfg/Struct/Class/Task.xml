@@ -2,8 +2,6 @@
 <XML>
 	<Propertys>
 		<Property Id="Type" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="任务类别"/>
-		<Property Id="State" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="任务状态，0未开始(可接)，1进行中，2已完成，3已领取奖励"/>
-		<Property Id="Progress" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="任务进度，比如杀了的怪数量"/>
 		<Property Id="NextTaskID" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="下一个任务ID"/>
 		<Property Id="KillMonsterName" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="要求杀的怪，逗号分开"/>
 		<Property Id="KillCount" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="要求杀的怪数量，逗号分开"/>
@@ -11,12 +9,6 @@
 		<Property Id="AwardExp" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="奖励的经验"/>
 		<Property Id="AwardGold" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="奖励的金币"/>
 		<Property Id="AwardPack" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="奖励包"/>
-		<Property Id="HandonMan" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="接任务npc"/>
-		<Property Id="HandoffMan" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="交任务npc"/>
-		<Property Id="HandoffSceneID" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="交任务npc场景ID（方便自动寻路）"/>
-		<Property Id="HandonSceneID" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="接任务npc场景ID（方便自动寻路）"/>
-		<Property Id="KillMonsterSceneID" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="杀怪场景ID（方便传送至副本）"/>		
-		<Property Id="IsFinalTask" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="是否是最终任务"/>		
 		<Property Id="Desc" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="任务描述"/>
 		
 	</Propertys>

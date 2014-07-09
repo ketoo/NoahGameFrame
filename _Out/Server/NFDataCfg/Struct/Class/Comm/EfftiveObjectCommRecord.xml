@@ -3,37 +3,15 @@
 	<Propertys>
 	</Propertys>
 	<Records>
-		<Record Id="CommPropertyValue" Row="15" Col="50" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="所有和战斗，药水有关的，都在这里NPC怪物只有基础和BUFF影响，因此针对玩家和怪物，分2个表.0职业等级叠加属性,1装备属性,2永久BUFF属性,3动态BUFF属性">
+		<Record Id="CommPropertyValue" Row="15" Col="24" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" ScriptFunction="所有和战斗，药水有关的，都在这里NPC怪物只有基础和BUFF影响，因此针对玩家和怪物，分2个表.0职业等级叠加属性,1装备属性,2永久BUFF属性,3动态BUFF属性">
 			<Col Type="int" Desc="MAXHP"/>
 			<Col Type="int" Desc="MAXMP"/>
-			<Col Type="int" Desc="MAXSP"/>		
-			<Col Type="int" Desc="MAXVP"/>	
-			<Col Type="int" Desc="MAXActivityVP"/>				
+			<Col Type="int" Desc="MAXSP"/>				
 			<Col Type="int" Desc="HPREGEN"/>
 			<Col Type="int" Desc="SPREGEN"/>
-			<Col Type="int" Desc="MPREGEN"/>
-			<Col Type="int" Desc="VPREGEN"/>
-			<Col Type="int" Desc="ACTIVETYVPREGEN"/>
-			<Col Type="int" Desc="EXP_SCALE"/>
-			<Col Type="int" Desc="GOLD_SCALE"/>
-			<Col Type="int" Desc="EQUIP_SCALE"/>			
-			<Col Type="int" Desc="HIT_VALUE"/>
-			<Col Type="int" Desc="ESSENCE_SCALE"/>
-			<Col Type="int" Desc="DODGE_VALUE"/>					
-			<Col Type="int" Desc="CRITICAL_VALUE"/>
-			<Col Type="int" Desc="BROKEN_VALUE"/>	
-			<Col Type="int" Desc="DAMAGE_REFOUND"/>
-			<Col Type="int" Desc="DAMAGE_GETHP"/>
-			<Col Type="int" Desc="RESIST_VALUE"/>
+			<Col Type="int" Desc="MPREGEN"/>		
 			<Col Type="int" Desc="ATK_VALUE"/>
-			<Col Type="int" Desc="DEF_VALUE"/>
-			<Col Type="int" Desc="CRITICAL_RATIO_VALUE"/>	
-			<Col Type="int" Desc="DEF_CRITICAL_RATIO_VALUE"/>	
-			<Col Type="int" Desc="DEF_HALT_VALUE"/>	
-			<Col Type="int" Desc="DEF_SLOW_VALUE"/>	
-			<Col Type="int" Desc="DEF_SILENCE_VALUE"/>	
-			<Col Type="int" Desc="DEF_DIZZY_VALUE"/>	
-			<Col Type="int" Desc="DEF_FREZE_VALUE"/>		
+			<Col Type="int" Desc="DEF_VALUE"/>	
 			<Col Type="int" Desc="MOVE_SPEED"/>
 			<Col Type="int" Desc="ATK_SPEED"/>
 			<Col Type="int" Desc="ATK_FIRE"/>
@@ -44,10 +22,6 @@
 			<Col Type="int" Desc="DEF_LIGHT"/>
 			<Col Type="int" Desc="DEF_ICE"/>
 			<Col Type="int" Desc="DEF_POISON"/>
-			<Col Type="int" Desc="MAGIC_BREAK"/>
-			<Col Type="int" Desc="PHYSICAL_BREAK"/>
-			<Col Type="int" Desc="MAGIC_REFLECTION"/>
-			<Col Type="int" Desc="PHYSICAL_REFLECTION"/>
 			<Col Type="int" Desc="DIZZY_GATE"/>
 			<Col Type="int" Desc="MOVE_GATE"/>
 			<Col Type="int" Desc="SKILL_GATE"/>
