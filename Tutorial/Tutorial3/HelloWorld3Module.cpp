@@ -39,7 +39,7 @@ int HelloWorld3Module::OnClassCallBackEvent(const NFIDENTID& self, const std::st
     if (event == COE_CREATE_HASDATA)
     {
 
-        if(pPluginManager->GetActor() == NFIActorManager::EACTOR_MAIN)
+        if(pPluginManager->GetActorID() == NFIActorManager::EACTOR_MAIN)
         {
             m_pEventProcessModule->AddEventCallBack(self, 11111111, this, &HelloWorld3Module::OnEvent);
 

@@ -20,7 +20,7 @@ int HelloWorld2::OnPropertyCallBackEvent( const NFIDENTID& self, const std::stri
 
 bool HelloWorld2::AfterInit()
 {
-    if(pPluginManager->GetActor() == NFIActorManager::EACTOR_MAIN)
+    if(pPluginManager->GetActorID() == NFIActorManager::EACTOR_MAIN)
     {
         //³õÊ¼»¯Íê±Ï
         std::cout << "Hello, world2, AfterInit" << std::endl;
