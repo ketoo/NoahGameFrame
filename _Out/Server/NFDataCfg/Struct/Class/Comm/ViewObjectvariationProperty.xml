@@ -5,9 +5,7 @@
 		<Property Id="HP" Type="int" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="生命值"/>
 		<Property Id="SP" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="体力"/>
 		<Property Id="MP" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="法力值"/>
-		<Property Id="VP" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="关卡疲劳值"/>
 		<Property Id="Money" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="钱"/>
-		<Property Id="ActivityVP" Type="int" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="活动疲劳值"/>
 	</Propertys>
 	<Records>
 
