@@ -84,6 +84,7 @@ namespace NFTCPClient
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_CONNECT_WORLD, EGMI_ACK_CONNECT_WORLD);
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_CONNECT_KEY, EGMI_ACK_CONNECT_KEY);
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_SELECT_SERVER, EGMI_ACK_SELECT_SERVER);
+            mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_SWAP_SCENE, EGMI_ACK_SWAP_SCENE);
             
 
             mNet.binMsgEvent.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_OBJECT_ENTRY, EGMI_ACK_OBJECT_ENTRY);
@@ -231,6 +232,12 @@ namespace NFTCPClient
                 NFMsg.RoleLiteInfo info = xData.char_data[i];
                 aCharList.Add(info);
             }
+        }
+
+        private void EGMI_ACK_SWAP_SCENE(MsgHead head, MemoryStream stream)
+        {
+            mNet.mPlayerState = NFNet.PLAYER_STATE.E_PLAYER_GAMEING;
+
         }
 
         private void EGMI_ACK_OBJECT_ENTRY(MsgHead head, MemoryStream stream)
