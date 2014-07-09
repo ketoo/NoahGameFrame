@@ -5,8 +5,7 @@
 		<Property Id="EnchantmentBuffList" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="附魔对应的BUFF列表，最大10次附魔那么就9个逗号隔开，对应10个BUFF"/>
 		<Property Id="SuitID" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="套装ID"/>
 		<Property Id="SuitBuffID" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="套装BUFFID"/>
-		<Property Id="RandomProperty" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="随机属性包"/>
-		<Property Id="BaseProperty" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="固定属性包"/>
+
 	</Propertys>
 	<Records>
 	</Records>
