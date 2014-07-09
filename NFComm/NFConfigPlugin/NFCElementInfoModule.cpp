@@ -369,14 +369,6 @@ bool NFCElementInfoModule::Execute( const float fLasFrametime, const float fStar
 
 }
 
-void NFCElementInfoModule::OnReload( const char* strModuleName, NFILogicModule* pModule )
-{
-	
-
-	return;
-
-}
-
 bool NFCElementInfoModule::Clear()
 {
     ElementConfigInfo* pElementConfigInfo = First();
@@ -387,6 +379,8 @@ bool NFCElementInfoModule::Clear()
 
         pElementConfigInfo = Next();
     }
+
+    ClearAll();
 
     mbLoaded = false;
 	return true;

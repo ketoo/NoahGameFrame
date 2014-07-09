@@ -71,8 +71,6 @@ public:
 
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
 
-    virtual void OnReload(const char* strModuleName, NFILogicModule* pModule);
-
     ///////////////////////////////////////////////////////////////////////
     virtual void LogStack();
 

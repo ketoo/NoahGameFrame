@@ -46,6 +46,10 @@ public:
         delete m_pComponentManager;
         delete m_pRecordManager;
         delete m_pPropertyManager;
+
+        m_pComponentManager = NULL;
+        m_pRecordManager = NULL;
+        m_pPropertyManager = NULL;
     }
 
     NFIPropertyManager* GetPropertyManager()
@@ -85,8 +89,6 @@ public:
 	virtual bool AfterInit();
 	virtual bool BeforeShut();
 	virtual bool Execute(const float fLasFrametime, const float fStartedTime);
-	virtual void OnReload(const char* strModuleName, NFILogicModule* pModule);
-
 
     virtual bool Load();
     virtual bool Save();

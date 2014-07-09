@@ -104,12 +104,6 @@ bool NFCLogModule::Execute(const float fLasFrametime, const float fStartedTime)
 
 }
 
-void NFCLogModule::OnReload(const char* strModuleName, NFILogicModule* pModule)
-{
-    return;
-
-}
-
 bool NFCLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
 {
     char szBuffer[1024 * 10] = {0};
