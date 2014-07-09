@@ -14,9 +14,9 @@ bool NFCActorManager::Init()
     m_pFramework = new Theron::Framework();
 
     //首个主线程
-    mActorVec.push_back(new NFCPluginManager(*m_pFramework, this, EACTOR::EACTOR_MAIN));
+    //mActorVec.push_back(new NFCPluginManager(*m_pFramework, this, EACTOR::EACTOR_MAIN));
 
-	for (int i = EACTOR::EACTOR_LOGIC1; i < EACTOR::EACTOR_END; ++i)
+	for (int i = EACTOR::EACTOR_MAIN; i < EACTOR::EACTOR_END; ++i)
 	{
 		mActorVec.push_back(new NFCPluginManager(*m_pFramework, this, (EACTOR)i));
 	}
@@ -101,7 +101,7 @@ bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTi
 	{
         NFIActor* pActor = *it;
         int nMsgCount = pActor->GetNumQueuedMessages();
-        if (nMsgCount <= 10)
+        if (nMsgCount <= 1)
         {
             NFIActorMessage message;
             message.eType = NFIActorMessage::EACTOR_EXCUTE;
@@ -114,7 +114,7 @@ bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTi
 
 const Theron::Address NFCActorManager::GetAddress( NFIActorManager::EACTOR eActor )
 {
-	if (eActor >= NFIActorManager::EACTOR_LOGIC1
+	if (eActor >= NFIActorManager::EACTOR_MAIN
 		&& eActor < NFIActorManager::EACTOR_END)
 	{
 		return mActorVec[eActor]->GetAddress();

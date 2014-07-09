@@ -12,14 +12,6 @@
 #include <iostream>
 #include "NFILogicModule.h"
 
-struct  NFSwapSceneAccountInfo
-{
-    int nTargetGSID;
-    std::string strAccount;
-    std::string strRoleName;
-    int nTargetSceneID;
-};
-
 enum E_SCENE_TYPE
 {
 	SCENE_TYPE_NORMAL,
@@ -29,8 +21,7 @@ enum E_SCENE_TYPE
 };
 
 class NFISceneProcessModule
-    : public NFILogicModule,
-  public NFMap<std::string, NFSwapSceneAccountInfo>
+    : public NFILogicModule
 {
 
 public:

@@ -84,7 +84,6 @@ private:
     NFIElementInfoModule* m_pElementInfoModule;
     NFIPropertyModule* m_pPropertyModule;
     NFILogicClassModule* m_pLogicClassModule;
-    NFIGameServerConfigModule* m_pGameServerConfigModule;
     NFIKernelModule* m_pKernelModule;
     NFIEventProcessModule* m_pEventProcessModule;
     NFILogModule* m_pLogModule;

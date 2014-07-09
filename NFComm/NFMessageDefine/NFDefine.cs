@@ -205,6 +205,9 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_STS_NET_INFO", Value=50)]
       EGMI_STS_NET_INFO = 50,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_STS_HEART_BEAT", Value=100)]
+      EGMI_STS_HEART_BEAT = 100,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_LOGIN", Value=101)]
       EGMI_REQ_LOGIN = 101,
             
@@ -394,8 +397,8 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ACCEPT_TASK", Value=256)]
       EGMI_REQ_ACCEPT_TASK = 256,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_PULLDOWNCUSTOM", Value=257)]
-      EGMI_REQ_PULLDOWNCUSTOM = 257
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_COMPELETE_TASK", Value=257)]
+      EGMI_REQ_COMPELETE_TASK = 257
     }
   
 }

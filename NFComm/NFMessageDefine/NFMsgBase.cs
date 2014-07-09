@@ -805,19 +805,7 @@ namespace NFMsg
       EGCT_MODIY_PROPERTY = 0,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGCT_MODIY_ITEM", Value=1)]
-      EGCT_MODIY_ITEM = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGCT_MODIY_TASK", Value=2)]
-      EGCT_MODIY_TASK = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGCT_MODIY_CLONE", Value=3)]
-      EGCT_MODIY_CLONE = 3,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGCT_MODIY_KILL", Value=4)]
-      EGCT_MODIY_KILL = 4,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGCT_SWAP_SCENE", Value=5)]
-      EGCT_SWAP_SCENE = 5
+      EGCT_MODIY_ITEM = 1
     }
   
     private global::ProtoBuf.IExtension extensionObject;
