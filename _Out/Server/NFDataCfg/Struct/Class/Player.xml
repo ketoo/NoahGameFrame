@@ -48,16 +48,7 @@
 			<Col Type="object" Desc="得到此物品的日期"/>
 			<Col Type="string" Desc="固定属性ATK_VALUE,10;DEF_VALUE,20;"/>
 		</Record>
-		
-		<Record Id="DropItemList" Row="256" Col="7" Public="false" Private="true" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="副本中掉路物品列表，进副本产生，出副本销毁">
-			<Col Type="object" Desc="掉落怪物ID,最后可能加一个过关奖励的装备,此时ID是0"/>
-			<Col Type="string" Desc="物品配置ID"/>
-			<Col Type="int" Desc="物品数量"/>
-			<Col Type="int" Desc="是否可以获得这个物品"/>
-			<Col Type="int" Desc="是否已获得这个物品"/>
-			<Col Type="string" Desc="如果是装备，则可能有随机属性"/>
-			<Col Type="string" Desc="如果是装备，则可能有固定属性"/>
-		</Record>
+
 		<Record Id="TaskMonsterList" Row="8" Col="4" Public="false" Private="true" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="任务杀怪表">
 			<Col Type="string" Desc="怪物配置ID"/>
 			<Col Type="int" Desc="当前击杀量"/>
@@ -76,7 +67,6 @@
 		<Include Id="../../NFDataCfg/Struct/Class/Player/PlayerBase.xml"/>
 		<Include Id="../../NFDataCfg/Struct/Class/Comm/MoveProperty.xml"/>
 		<Include Id="../../NFDataCfg/Struct/Class/Comm/SkillTable.xml"/>
-		<Include Id="../../NFDataCfg/Struct/Class/Comm/CoolDown.xml"/>
 		<Include Id="../../NFDataCfg/Struct/Class/Comm/FightTmpData.xml"/>
 		<Include Id="../../NFDataCfg/Struct/Class/Comm/FightTmpData.xml"/>
 	</Includes>

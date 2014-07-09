@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--this is config xml-->
-<XML>
-    <Object DropGroudID1="" ID="att1" Level="1" NPCConfigID="" ShowName="´Ì¿Í" SubType="1"/>
-    <Object DropGroudID1="" ID="att2" Level="1" NPCConfigID="" ShowName="´Ì¿Í" SubType="1"/>
-    <Object DropGroudID1="" ID="att3" Level="1" NPCConfigID="" ShowName="´Ì¿Í" SubType="1"/>
-</XML>
