@@ -192,10 +192,7 @@ message ReqCommand//GM命令
 	{
 		EGCT_MODIY_PROPERTY		= 0;//修改属性[property_name,value]
 		EGCT_MODIY_ITEM			= 1;//得到物品[item_id,count]
-		EGCT_MODIY_TASK			= 2;//接受任务，完成任务[task_id,0:accept-1:compelete]
-		EGCT_MODIY_CLONE		= 3;//完成副本进度[clone_id,none]
-		EGCT_MODIY_KILL			= 4;//杀怪[monster_id,monster_guid]
-		EGCT_SWAP_SCENE			= 5;//传送[scene_id,scene_id]
+
 	}
 	required int64 control_id = 1;
 	required EGameCommandType command_id = 2;

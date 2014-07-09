@@ -76,7 +76,7 @@ public:
 #ifdef NF_DYNAMIC_PLUGIN
         //主插件，时刻updata
         //次要插件，100毫秒一次updata
-        if(pPluginManager->GetActor() != NFIActorManager::EACTOR_MAIN)
+        if(pPluginManager->GetActorID() != NFIActorManager::EACTOR_MAIN)
         {
 
             if (fLastTotal < 0.1f)

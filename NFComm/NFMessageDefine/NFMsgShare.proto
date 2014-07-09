@@ -14,6 +14,10 @@ message ReqEnterGameServer
 	required bytes 		name = 3;
 }
 
+message ReqHeartBeat
+{
+}
+
 message ReqLeaveGameServer
 {
 }
@@ -25,9 +29,9 @@ message ReqAckPlayerMove
 	required float	target_x = 3;
 	optional float	target_y = 4;
 	required float	target_z = 5;
-	required float	source_x = 6;
+	optional float	source_x = 6;
 	optional float	source_y = 7;
-	required float	source_z = 8;
+	optional float	source_z = 8;
 }
 
 message ReqAckPlayerChat
@@ -55,12 +59,11 @@ message ReqAckUseSkill
 
 message ReqAckUseItem
 {
-	required int32 row = 1;
-	required int64 item_guid	= 2;
-	repeated int64 effect_ident = 3;
-	repeated int32 effect_value = 4;
-	repeated int32 effect_rlt = 5;
-	optional bytes key_value = 6;
+	required int64 item_guid	= 1;
+	repeated int64 effect_ident = 2;
+	repeated int32 effect_value = 3;
+	repeated int32 effect_rlt = 4;
+	optional bytes key_value = 5;
 }
 
 message ReqAckSwapScene
@@ -81,26 +84,9 @@ message ReqAckSwapScene
 	optional float 		z = 6;
 }
 
-message ReqSellItem// 出售物品 
-{
-	required int64 item_guid = 1;
-	required int64 item_count = 2;
-}
-
-message ReqSplitItem//拆分
-{
-	required int64 item_guid = 1;  // 物品GUID
-}
-
-message ReqProduceItem// 合成物品
-{
-	required bytes item_id  = 1; // 物品ID
-	optional int32 count = 2;//合成数量
-}
 
 message ReqPickDropItem//拾取物品
 {
-	required int64 npc_guid = 1;
 	required int64 item_guid = 2;
 }
 
@@ -109,28 +95,9 @@ message ReqAcceptTask//接受任务
 	required bytes task_id = 1;
 }
 
-message ReqPullDownTask//完成任务后申请领奖
+message ReqCompeleteTask//完成任务后申请领奖
 {
 	required bytes task_id = 1;
-}
-
-
-message CloneCustomItem
-{
-	required int64 object_guid = 1;
-	repeated bytes item_id = 2;
-}
-
-message ReqPullDownCustoms// 申请结算关卡
-{
-	enum EGameCloneResult
-	{
-		EGCR_SUCCESS = 0;
-		EGCR_FAILED = 1;
-	}
-
-	required EGameCloneResult result_value = 1;
-	repeated CloneCustomItem item_list = 2;
 }
 
 
