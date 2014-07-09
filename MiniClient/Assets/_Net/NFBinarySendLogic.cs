@@ -182,7 +182,6 @@ class StructureTransform
 public class NFBinarySendLogic
 {
     NFNet net;
-    Hashtable mhtID;
 
     public NFBinarySendLogic(NFNet clientnet)
     {
@@ -365,76 +364,143 @@ public class NFBinarySendLogic
 
     public void RequireHeartBeat()
     {
+        NFMsg.ReqHeartBeat xData = new NFMsg.ReqHeartBeat();
+        
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqHeartBeat>(stream, xData);
 
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_STS_HEART_BEAT, stream);
     }
 
     //有可能是他副本的NPC移动,因此增加64对象ID
-    public void RequireMove(Int64 charID, Int64 objectID, float fX, float fZ)
+    public void RequireMove(Int64 objectID, float fX, float fZ)
     {
+        NFMsg.ReqAckPlayerMove xData = new NFMsg.ReqAckPlayerMove();
+        xData.mover = objectID;
+        xData.moveType = 0;
+        xData.target_x = fX;
+        xData.target_z = fZ;
 
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqAckPlayerMove>(stream, xData);
 
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_MOVE_IMMUNE, stream);
     }
 
     //有可能是他副本的NPC移动,因此增加64对象ID
-    public void RequireSkill(Int64 charID, string strKillID, Int64 nTargetID)
+    public void RequireUseSkill(string strKillID, Int64 nTargetID)
     {
+        NFMsg.ReqAckUseSkill xData = new NFMsg.ReqAckUseSkill();
+        xData.skill_id = UnicodeEncoding.Default.GetBytes(strKillID);
+        xData.effect_ident.Add(nTargetID);
+        xData.effect_value.Add(0);
+        xData.effect_rlt.Add(0);
 
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqAckUseSkill>(stream, xData);
+
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_SKILL_OBJECTX, stream);
+    }
+
+    public void RequireUseItem(Int64 nGuid, Int64 nTargetID)
+    {
+        NFMsg.ReqAckUseItem xData = new NFMsg.ReqAckUseItem();
+        xData.item_guid = nGuid;
+        xData.effect_ident.Add(nTargetID);
+        xData.effect_value.Add(0);
+        xData.effect_rlt.Add(0);
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqAckUseItem>(stream, xData);
+
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_ITEM_OBJECT, stream);
+    }
+
+    public void RequireChat(Int64 targetID, int nType, string strData)
+    {
+        NFMsg.ReqAckPlayerChat xData = new NFMsg.ReqAckPlayerChat();
+        xData.chat_id = targetID;
+        xData.chat_type = (NFMsg.ReqAckPlayerChat.EGameChatType)nType;
+        xData.chat_info = UnicodeEncoding.Default.GetBytes(strData);
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqAckPlayerChat>(stream, xData);
+
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_CHAT, stream);
 
     }
 
-    public void RequireItem(Int64 charID, string strItem, uint nCount)
+    public void RequireSwapScene(Int64 charID, Int32 nTransferType, int nSceneID, int nLineIndex)
     {
+        NFMsg.ReqAckSwapScene xData = new NFMsg.ReqAckSwapScene();
+        xData.transfer_type = (NFMsg.ReqAckSwapScene.EGameSwapType)nTransferType;
+        xData.scene_id = (int)nSceneID;
+        xData.line_id = nLineIndex;
 
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqAckSwapScene>(stream, xData);
 
-    }
-
-    public void RequireChat(Int64 charID, UInt32 targetID, int nType, string strData)
-    {
-
-
-    }
-
-    public void RequireSwapEquip(Int64 charID, uint nOriginRow, uint nTargetRow)
-    {
-
-
-    }
-
-    public void RequireSwapScene(Int64 charID, Int32 nTransferType, UInt32 nSceneID, int nLineIndex)
-    {
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_SWAP_SCENE, stream);
     }
 
     public void RequireProperty(Int64 charID, string strPropertyName, int nValue)
     {
+        NFMsg.ReqCommand xData = new NFMsg.ReqCommand();
+        xData.control_id = charID;
+        xData.command_id = ReqCommand.EGameCommandType.EGCT_MODIY_PROPERTY;
+        xData.command_str_value = UnicodeEncoding.Default.GetBytes(strPropertyName);
+        xData.command_value = nValue;
 
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqCommand>(stream, xData);
+
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_COMMAND, stream);
     }
 
-    public void RequireAcceptTask(Int64 charID, Int64 nTargetID, string strTaskID)
+    public void RequireItem(string strItemName, int nCount)
     {
+        NFMsg.ReqCommand xData = new NFMsg.ReqCommand();
+        xData.control_id = net.nSelfID;
+        xData.command_id = ReqCommand.EGameCommandType.EGCT_MODIY_ITEM;
+        xData.command_str_value = UnicodeEncoding.Default.GetBytes(strItemName);
+        xData.command_value = nCount;
 
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqCommand>(stream, xData);
+
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_COMMAND, stream);
     }
 
-    public void RequireCompeleteTask(Int64 charID, Int64 nTargetID, string strTaskID)
+    public void RequireAcceptTask(string strTaskID)
     {
+        NFMsg.ReqAcceptTask xData = new NFMsg.ReqAcceptTask();
+        xData.task_id = UnicodeEncoding.Default.GetBytes(strTaskID);
 
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqAcceptTask>(stream, xData);
+
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_ACCEPT_TASK, stream);
     }
 
-    public void RequirePullDownCustom(Int64 charID, int nResult)
+    public void RequireCompeleteTask(Int64 charID, string strTaskID)
     {
+        NFMsg.ReqCompeleteTask xData = new NFMsg.ReqCompeleteTask();
+        xData.task_id = UnicodeEncoding.Default.GetBytes(strTaskID);
 
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqCompeleteTask>(stream, xData);
+
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_COMPELETE_TASK, stream);
     }
 
-    public void RequirePickUpItem(Int64 charID, string strItemID, Int64 nNPCID, int nRow)
+    public void RequirePickUpItem(Int64 nItemID)
     {
-    }
+        NFMsg.ReqPickDropItem xData = new NFMsg.ReqPickDropItem();
+        xData.item_guid = nItemID;
 
-    public void ReqProduceItem(Int64 charID, string strItemID)
-    {
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqPickDropItem>(stream, xData);
 
-    }
-
-    public void ReqDestroyItem(Int64 charID, Int64 nID, Int32 nRow)
-    {
-
+        SendMsg(net.nSelfID, NFMsg.EGameMsgID.EGMI_REQ_PICK_ITEM, stream);
     }
 }
