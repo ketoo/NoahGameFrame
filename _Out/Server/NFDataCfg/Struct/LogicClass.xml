@@ -1,23 +1,16 @@
 <XML>
 	<class Id = "IObject" Type = "TYPE_OBJECT" Path = "../../NFDataCfg/Struct/Class/IObject.xml" InstancePath = "../../NFDataCfg/Ini/NPC/IObject.xml" public = "false" Desc = "IObject"> 
-		<class Id = "NPC" Type = "TYPE_NPC" Path = "../../NFDataCfg/Struct/Class/NPC.xml" InstancePath = "../../NFDataCfg/Ini/NPC/NPC.xml" public = "true" Desc = "NPC">
-			<class Id = "CreatorNPC" Type = "TYPE_NPC" Path = "../../NFDataCfg/Struct/Class/CreatorNPC.xml" InstancePath = "../../NFDataCfg/Ini/NPC/CreatorNPC.xml" public = "false" Desc = "AI Creator"/>
-			<class Id = "AttackNPC" Type = "TYPE_NPC" Path = "../../NFDataCfg/Struct/Class/AttackNPC.xml" InstancePath = "../../NFDataCfg/Ini/NPC/AttackNPC.xml" public = "true" Desc = "根据新的AI状态机计划，可以省略掉绝大部分NPC"/>
-		</class>
-		<!-- <class Id = "DropNPC" Type = "TYPE_PLAYER" Path = "../../NFDataCfg/Struct/Class/DropNPC.xml" InstancePath = "../../NFDataCfg/Ini/NPC/DropNPC.xml"  public = "true" Desc = "NPC"/> -->
-		<class Id = "Player" Type = "TYPE_PLAYER" Path = "../../NFDataCfg/Struct/Class/Player.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Player.xml"  public = "true" Desc = "NPC"/>
-		<class Id = "PublicPlayer" Type = "TYPE_PLAYER" Path = "../../NFDataCfg/Struct/Class/PublicPlayer.xml" InstancePath = "../../NFDataCfg/Ini/NPC/PublicPlayer.xml"  public = "true" Desc = "工会，拍卖等公共数据对象"/>
-		
+		<class Id = "NPC" Type = "TYPE_NPC" Path = "../../NFDataCfg/Struct/Class/NPC.xml" InstancePath = "../../NFDataCfg/Ini/NPC/NPC.xml" public = "true" Desc = "NPC"/>
+		<class Id = "Player" Type = "TYPE_PLAYER" Path = "../../NFDataCfg/Struct/Class/Player.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Player.xml"  public = "true" Desc = "NPC"/>		
 		<class Id = "Item" Type = "TYPE_ITEM" Path = "../../NFDataCfg/Struct/Class/Item.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Item.xml"  public = "false" Desc = "NPC">
-			<!-- <class Id = "Equip" Type = "TYPE_EQUIP" Path = "../../NFDataCfg/Struct/Class/Equip.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Equip.xml" public = "false" Desc = "NPC"/> -->
+			<class Id = "Equip" Type = "TYPE_EQUIP" Path = "../../NFDataCfg/Struct/Class/Equip.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Equip.xml" public = "false" Desc = "NPC"/>
 		</class>
-		<!-- <class Id = "Skill" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/Skill.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Skill.xml" public = "false" Desc = "NPC"/> -->
+		<class Id = "Skill" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/Skill.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Skill.xml" public = "false" Desc = "NPC"/>
 		<class Id = "Scene" Type = "TYPE_SCENE" Path = "../../NFDataCfg/Struct/Class/Scene.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Scene.xml" public = "false" Desc = "NPC"/> 
+		<class Id = "ServerData" Type = "TYPE_WORLD" Path = "../../NFDataCfg/Struct/Class/ServerData.xml" InstancePath = "../../NFDataCfg/Ini/NPC/ServerData.xml" public = "true" Desc = "NPC"/>
+		<class Id = "Buff" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/Buff.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Buff.xml" public = "false" Desc = "NPC"/>
+		<class Id = "Task" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/Task.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Task.xml" public = "false" Desc = "TASK"/>
+		<class Id = "InitProperty" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/InitProperty.xml" InstancePath = "../../NFDataCfg/Ini/NPC/InitProperty.xml" public = "false" Desc = "TASK"/>
+		<class Id = "EffectData" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/EffectData.xml" InstancePath = "../../NFDataCfg/Ini/NPC/EffectData.xml" public = "false" Desc = "TASK"/>
 	</class>
-	<class Id = "ServerData" Type = "TYPE_WORLD" Path = "../../NFDataCfg/Struct/Class/ServerData.xml" InstancePath = "../../NFDataCfg/Ini/NPC/ServerData.xml" public = "true" Desc = "NPC"/>
-	<class Id = "NPCSeed" Type = "TYPE_WORLD" Path = "../../NFDataCfg/Struct/Class/NPCSeed.xml" InstancePath = "" public = "false" Desc = "NPC"/> 
-	<class Id = "Buff" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/Buff.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Buff.xml" public = "false" Desc = "NPC"/>
-	<class Id = "Task" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/Task.xml" InstancePath = "../../NFDataCfg/Ini/NPC/Task.xml" public = "false" Desc = "TASK"/>
-	<class Id = "InitProperty" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/InitProperty.xml" InstancePath = "../../NFDataCfg/Ini/NPC/InitProperty.xml" public = "false" Desc = "TASK"/>
-	<class Id = "EffectData" Type = "TYPE_SKILL" Path = "../../NFDataCfg/Struct/Class/EffectData.xml" InstancePath = "../../NFDataCfg/Ini/NPC/EffectData.xml" public = "false" Desc = "TASK"/>
 </XML>
