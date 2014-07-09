@@ -180,7 +180,7 @@ void NFCGameServerNet_ServerModule::OnClientConnected( const int nAddress )
 }
 
 void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& msg )
-{
+ {
     //在进入游戏之前nPlayerID为其在网关的FD
     int64_t nPlayerID = 0;	
     NFMsg::ReqEnterGameServer xMsg;
@@ -197,10 +197,13 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
         //角色已经在创建中
         return;
     }
+
+    mRoleState.AddElement(xMsg.name(), new int(nPlayerID));
+
     //////////////////////////////////////////////////////////////////////////
     //拉取数据
     //////////////////////////////////////////////////////////////////////////
-    mRoleState.AddElement(xMsg.name(), 0);
+    
 
     int nGateID = -1;
     ServerData* pServerData =  mProxyMap.First();
@@ -251,7 +254,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
     varEntry << 0;
     varEntry << nSceneID;
     varEntry << -1;
-    m_pEventProcessModule->DoEvent( pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, var );
+    m_pEventProcessModule->DoEvent( pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry );
 }
 
 void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess( const NFIPacket& msg )
@@ -445,12 +448,9 @@ int NFCGameServerNet_ServerModule::OnRecordEnter( const NFIDENTID& self, const N
     NFIObject* pObject = m_pKernelModule->GetObject( self );
     if ( pObject )
     {
-        NFMsg::ObjectRecordList* pPublicData = xPublicMsg.add_multi_player_record();
-        NFMsg::ObjectRecordList* pPrivateData = xPrivateMsg.add_multi_player_record();
-        pPublicData->set_player_id(self.nData64);
-        pPrivateData->set_player_id(self.nData64);
-
-
+        NFMsg::ObjectRecordList* pPublicData = NULL;
+        NFMsg::ObjectRecordList* pPrivateData = NULL;
+        
         NFIRecordManager* pRecordManager = pObject->GetRecordManager();
         NFIRecord* pRecord = pRecordManager->First();
         while ( pRecord )
@@ -464,14 +464,33 @@ int NFCGameServerNet_ServerModule::OnRecordEnter( const NFIDENTID& self, const N
             NFMsg::ObjectRecordBase* pRecordBase = NULL;
             if (pRecord->GetPublic())
             {
+                if (!pPublicData)
+                {
+                    pPublicData = xPublicMsg.add_multi_player_record();
+                    pPublicData->set_player_id(self.nData64);
+                }
                 pRecordBase = pPublicData->add_record_list();
             }
+
             if (pRecord->GetPrivate())
             {
+                if (!pPrivateData)
+                {
+                    pPrivateData = xPrivateMsg.add_multi_player_record();
+                    pPrivateData->set_player_id(self.nData64);
+                }
                 pRecordBase = pPrivateData->add_record_list();
             }
 
+            if (!pRecordBase)
+            {
+                pRecord = pRecordManager->Next();
+                continue;
+            }
+
             pRecordBase->set_record_name(pRecord->GetName());
+
+            printf("Record::::    %s", pRecord->GetName().c_str());
 
             //add row 需要完整的row
             for ( int i = 0; i < pRecord->GetRows(); i ++ )
@@ -1193,8 +1212,11 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent( const NFIDENTID& self, co
     {
         //删除在线标志
         const std::string& strRole = m_pKernelModule->QueryPropertyString( self, "Name" );
-        mRoleState.RemoveElement(strRole);
-        
+        int* pInt = mRoleState.RemoveElement(strRole);
+        if (pInt)
+        {
+            delete pInt;
+        }
         //////////////////////////////////////////////////////////////////////////
 
         int nObjectContainerID = m_pKernelModule->QueryPropertyInt( self, "SceneID" );
@@ -1598,9 +1620,9 @@ int NFCGameServerNet_ServerModule::OnUseSkillResultEvent( const NFIDENTID& self,
 
 int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
 {
-    if ( var.GetCount() != 9 ||
+    if ( var.GetCount() != 7 ||
         !var.TypeEx(VARIANT_TYPE::VTYPE_OBJECT, VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_INT, 
-        VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_FLOAT,
+        VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_FLOAT,
         VARIANT_TYPE::VTYPE_FLOAT, VARIANT_TYPE::VTYPE_FLOAT, VARIANT_TYPE::VTYPE_UNKNOWN)
         )
     {
@@ -1611,12 +1633,9 @@ int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent( const NFIDENTID& self
     int nType = var.NumberVal<int>( 1 );
     int nTargetScene = var.NumberVal<int>( 2 );
     int nTargetGroupID = var.NumberVal<int>( 3 );
-    int nSceneType = var.NumberVal<int>( 4 );
-    float fX = var.NumberVal<float>( 5 );
-    float fY = var.NumberVal<float>( 6 );
-    float fZ = var.NumberVal<float>( 7 );
-
-
+    float fX = var.NumberVal<float>( 4 );
+    float fY = var.NumberVal<float>( 5 );
+    float fZ = var.NumberVal<float>( 6 );
 
     NFMsg::ReqAckSwapScene xSwapScene;
     xSwapScene.set_transfer_type( NFMsg::ReqAckSwapScene::EGameSwapType::ReqAckSwapScene_EGameSwapType_EGST_NARMAL );

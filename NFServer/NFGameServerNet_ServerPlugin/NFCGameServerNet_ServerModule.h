@@ -162,9 +162,8 @@ private:
     NFMap<NFIDENTID, BaseData> mRoleBaseData;
     //<角色fd(在网关),角色id>
     std::map<int, NFIDENTID> mRoleFDData;
-
-    //临时保存角色是否已经等待创建的状态,角色创建后删除
-    NFMap<std::string, BaseData> mRoleState;
+    //临时保存角色是否已经等待创建的状态<角色名，fd>
+    NFMap<std::string, int> mRoleState;
 
     NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;

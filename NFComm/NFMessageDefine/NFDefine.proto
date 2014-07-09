@@ -75,7 +75,7 @@ enum EGameMsgID
 	EGMI_GTW_GAME_REFRESH			= 42;
 
 	EGMI_STS_NET_INFO				= 50;
-
+	EGMI_STS_HEART_BEAT				= 100;
 	//////////////////////////////////////////////////////////////////////////////////////
 	EGMI_REQ_LOGIN									= 101;     // µÇÂ½ÕÊºÅ
 	EGMI_ACK_LOGIN									= 102;     // µÇÂ½ÕÊºÅ
@@ -155,6 +155,6 @@ enum EGameMsgID
 	EGMI_REQ_PRODUCE_ITEM						= 254;
 	EGMI_REQ_PICK_ITEM							= 255;
 	EGMI_REQ_ACCEPT_TASK						= 256;
-	EGMI_REQ_PULLDOWNCUSTOM						= 257;
+	EGMI_REQ_COMPELETE_TASK						= 257;
 }
 

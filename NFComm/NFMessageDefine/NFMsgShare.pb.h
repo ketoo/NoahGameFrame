@@ -38,20 +38,16 @@ void protobuf_AssignDesc_NFMsgShare_2eproto();
 void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
 class ReqEnterGameServer;
+class ReqHeartBeat;
 class ReqLeaveGameServer;
 class ReqAckPlayerMove;
 class ReqAckPlayerChat;
 class ReqAckUseSkill;
 class ReqAckUseItem;
 class ReqAckSwapScene;
-class ReqSellItem;
-class ReqSplitItem;
-class ReqProduceItem;
 class ReqPickDropItem;
 class ReqAcceptTask;
-class ReqPullDownTask;
-class CloneCustomItem;
-class ReqPullDownCustoms;
+class ReqCompeleteTask;
 class PlayerEntryInfo;
 class AckPlayerEntryList;
 class AckPlayerLeaveList;
@@ -97,25 +93,6 @@ inline bool ReqAckSwapScene_EGameSwapType_Parse(
     const ::std::string& name, ReqAckSwapScene_EGameSwapType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<ReqAckSwapScene_EGameSwapType>(
     ReqAckSwapScene_EGameSwapType_descriptor(), name, value);
-}
-enum ReqPullDownCustoms_EGameCloneResult {
-  ReqPullDownCustoms_EGameCloneResult_EGCR_SUCCESS = 0,
-  ReqPullDownCustoms_EGameCloneResult_EGCR_FAILED = 1
-};
-bool ReqPullDownCustoms_EGameCloneResult_IsValid(int value);
-const ReqPullDownCustoms_EGameCloneResult ReqPullDownCustoms_EGameCloneResult_EGameCloneResult_MIN = ReqPullDownCustoms_EGameCloneResult_EGCR_SUCCESS;
-const ReqPullDownCustoms_EGameCloneResult ReqPullDownCustoms_EGameCloneResult_EGameCloneResult_MAX = ReqPullDownCustoms_EGameCloneResult_EGCR_FAILED;
-const int ReqPullDownCustoms_EGameCloneResult_EGameCloneResult_ARRAYSIZE = ReqPullDownCustoms_EGameCloneResult_EGameCloneResult_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* ReqPullDownCustoms_EGameCloneResult_descriptor();
-inline const ::std::string& ReqPullDownCustoms_EGameCloneResult_Name(ReqPullDownCustoms_EGameCloneResult value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ReqPullDownCustoms_EGameCloneResult_descriptor(), value);
-}
-inline bool ReqPullDownCustoms_EGameCloneResult_Parse(
-    const ::std::string& name, ReqPullDownCustoms_EGameCloneResult* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ReqPullDownCustoms_EGameCloneResult>(
-    ReqPullDownCustoms_EGameCloneResult_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -228,6 +205,78 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ReqEnterGameServer* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqHeartBeat : public ::google::protobuf::Message {
+ public:
+  ReqHeartBeat();
+  virtual ~ReqHeartBeat();
+
+  ReqHeartBeat(const ReqHeartBeat& from);
+
+  inline ReqHeartBeat& operator=(const ReqHeartBeat& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqHeartBeat& default_instance();
+
+  void Swap(ReqHeartBeat* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqHeartBeat* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqHeartBeat& from);
+  void MergeFrom(const ReqHeartBeat& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqHeartBeat)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[1];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqHeartBeat* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -392,7 +441,7 @@ class ReqAckPlayerMove : public ::google::protobuf::Message {
   inline float target_z() const;
   inline void set_target_z(float value);
 
-  // required float source_x = 6;
+  // optional float source_x = 6;
   inline bool has_source_x() const;
   inline void clear_source_x();
   static const int kSourceXFieldNumber = 6;
@@ -406,7 +455,7 @@ class ReqAckPlayerMove : public ::google::protobuf::Message {
   inline float source_y() const;
   inline void set_source_y(float value);
 
-  // required float source_z = 8;
+  // optional float source_z = 8;
   inline bool has_source_z() const;
   inline void clear_source_z();
   static const int kSourceZFieldNumber = 8;
@@ -783,24 +832,17 @@ class ReqAckUseItem : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 row = 1;
-  inline bool has_row() const;
-  inline void clear_row();
-  static const int kRowFieldNumber = 1;
-  inline ::google::protobuf::int32 row() const;
-  inline void set_row(::google::protobuf::int32 value);
-
-  // required int64 item_guid = 2;
+  // required int64 item_guid = 1;
   inline bool has_item_guid() const;
   inline void clear_item_guid();
-  static const int kItemGuidFieldNumber = 2;
+  static const int kItemGuidFieldNumber = 1;
   inline ::google::protobuf::int64 item_guid() const;
   inline void set_item_guid(::google::protobuf::int64 value);
 
-  // repeated int64 effect_ident = 3;
+  // repeated int64 effect_ident = 2;
   inline int effect_ident_size() const;
   inline void clear_effect_ident();
-  static const int kEffectIdentFieldNumber = 3;
+  static const int kEffectIdentFieldNumber = 2;
   inline ::google::protobuf::int64 effect_ident(int index) const;
   inline void set_effect_ident(int index, ::google::protobuf::int64 value);
   inline void add_effect_ident(::google::protobuf::int64 value);
@@ -809,10 +851,10 @@ class ReqAckUseItem : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
       mutable_effect_ident();
 
-  // repeated int32 effect_value = 4;
+  // repeated int32 effect_value = 3;
   inline int effect_value_size() const;
   inline void clear_effect_value();
-  static const int kEffectValueFieldNumber = 4;
+  static const int kEffectValueFieldNumber = 3;
   inline ::google::protobuf::int32 effect_value(int index) const;
   inline void set_effect_value(int index, ::google::protobuf::int32 value);
   inline void add_effect_value(::google::protobuf::int32 value);
@@ -821,10 +863,10 @@ class ReqAckUseItem : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_effect_value();
 
-  // repeated int32 effect_rlt = 5;
+  // repeated int32 effect_rlt = 4;
   inline int effect_rlt_size() const;
   inline void clear_effect_rlt();
-  static const int kEffectRltFieldNumber = 5;
+  static const int kEffectRltFieldNumber = 4;
   inline ::google::protobuf::int32 effect_rlt(int index) const;
   inline void set_effect_rlt(int index, ::google::protobuf::int32 value);
   inline void add_effect_rlt(::google::protobuf::int32 value);
@@ -833,10 +875,10 @@ class ReqAckUseItem : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_effect_rlt();
 
-  // optional bytes key_value = 6;
+  // optional bytes key_value = 5;
   inline bool has_key_value() const;
   inline void clear_key_value();
-  static const int kKeyValueFieldNumber = 6;
+  static const int kKeyValueFieldNumber = 5;
   inline const ::std::string& key_value() const;
   inline void set_key_value(const ::std::string& value);
   inline void set_key_value(const char* value);
@@ -847,8 +889,6 @@ class ReqAckUseItem : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckUseItem)
  private:
-  inline void set_has_row();
-  inline void clear_has_row();
   inline void set_has_item_guid();
   inline void clear_has_item_guid();
   inline void set_has_key_value();
@@ -861,10 +901,9 @@ class ReqAckUseItem : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > effect_value_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > effect_rlt_;
   ::std::string* key_value_;
-  ::google::protobuf::int32 row_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -1033,277 +1072,6 @@ class ReqAckSwapScene : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqSellItem : public ::google::protobuf::Message {
- public:
-  ReqSellItem();
-  virtual ~ReqSellItem();
-
-  ReqSellItem(const ReqSellItem& from);
-
-  inline ReqSellItem& operator=(const ReqSellItem& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqSellItem& default_instance();
-
-  void Swap(ReqSellItem* other);
-
-  // implements Message ----------------------------------------------
-
-  ReqSellItem* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ReqSellItem& from);
-  void MergeFrom(const ReqSellItem& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required int64 item_guid = 1;
-  inline bool has_item_guid() const;
-  inline void clear_item_guid();
-  static const int kItemGuidFieldNumber = 1;
-  inline ::google::protobuf::int64 item_guid() const;
-  inline void set_item_guid(::google::protobuf::int64 value);
-
-  // required int64 item_count = 2;
-  inline bool has_item_count() const;
-  inline void clear_item_count();
-  static const int kItemCountFieldNumber = 2;
-  inline ::google::protobuf::int64 item_count() const;
-  inline void set_item_count(::google::protobuf::int64 value);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqSellItem)
- private:
-  inline void set_has_item_guid();
-  inline void clear_has_item_guid();
-  inline void set_has_item_count();
-  inline void clear_has_item_count();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::int64 item_guid_;
-  ::google::protobuf::int64 item_count_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
-
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
-  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
-  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
-
-  void InitAsDefaultInstance();
-  static ReqSellItem* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class ReqSplitItem : public ::google::protobuf::Message {
- public:
-  ReqSplitItem();
-  virtual ~ReqSplitItem();
-
-  ReqSplitItem(const ReqSplitItem& from);
-
-  inline ReqSplitItem& operator=(const ReqSplitItem& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqSplitItem& default_instance();
-
-  void Swap(ReqSplitItem* other);
-
-  // implements Message ----------------------------------------------
-
-  ReqSplitItem* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ReqSplitItem& from);
-  void MergeFrom(const ReqSplitItem& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required int64 item_guid = 1;
-  inline bool has_item_guid() const;
-  inline void clear_item_guid();
-  static const int kItemGuidFieldNumber = 1;
-  inline ::google::protobuf::int64 item_guid() const;
-  inline void set_item_guid(::google::protobuf::int64 value);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqSplitItem)
- private:
-  inline void set_has_item_guid();
-  inline void clear_has_item_guid();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::int64 item_guid_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
-
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
-  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
-  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
-
-  void InitAsDefaultInstance();
-  static ReqSplitItem* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class ReqProduceItem : public ::google::protobuf::Message {
- public:
-  ReqProduceItem();
-  virtual ~ReqProduceItem();
-
-  ReqProduceItem(const ReqProduceItem& from);
-
-  inline ReqProduceItem& operator=(const ReqProduceItem& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqProduceItem& default_instance();
-
-  void Swap(ReqProduceItem* other);
-
-  // implements Message ----------------------------------------------
-
-  ReqProduceItem* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ReqProduceItem& from);
-  void MergeFrom(const ReqProduceItem& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required bytes item_id = 1;
-  inline bool has_item_id() const;
-  inline void clear_item_id();
-  static const int kItemIdFieldNumber = 1;
-  inline const ::std::string& item_id() const;
-  inline void set_item_id(const ::std::string& value);
-  inline void set_item_id(const char* value);
-  inline void set_item_id(const void* value, size_t size);
-  inline ::std::string* mutable_item_id();
-  inline ::std::string* release_item_id();
-  inline void set_allocated_item_id(::std::string* item_id);
-
-  // optional int32 count = 2;
-  inline bool has_count() const;
-  inline void clear_count();
-  static const int kCountFieldNumber = 2;
-  inline ::google::protobuf::int32 count() const;
-  inline void set_count(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqProduceItem)
- private:
-  inline void set_has_item_id();
-  inline void clear_has_item_id();
-  inline void set_has_count();
-  inline void clear_has_count();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::std::string* item_id_;
-  ::google::protobuf::int32 count_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
-
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
-  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
-  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
-
-  void InitAsDefaultInstance();
-  static ReqProduceItem* default_instance_;
-};
-// -------------------------------------------------------------------
-
 class ReqPickDropItem : public ::google::protobuf::Message {
  public:
   ReqPickDropItem();
@@ -1358,13 +1126,6 @@ class ReqPickDropItem : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 npc_guid = 1;
-  inline bool has_npc_guid() const;
-  inline void clear_npc_guid();
-  static const int kNpcGuidFieldNumber = 1;
-  inline ::google::protobuf::int64 npc_guid() const;
-  inline void set_npc_guid(::google::protobuf::int64 value);
-
   // required int64 item_guid = 2;
   inline bool has_item_guid() const;
   inline void clear_item_guid();
@@ -1374,18 +1135,15 @@ class ReqPickDropItem : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqPickDropItem)
  private:
-  inline void set_has_npc_guid();
-  inline void clear_has_npc_guid();
   inline void set_has_item_guid();
   inline void clear_has_item_guid();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 npc_guid_;
   ::google::protobuf::int64 item_guid_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -1483,14 +1241,14 @@ class ReqAcceptTask : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqPullDownTask : public ::google::protobuf::Message {
+class ReqCompeleteTask : public ::google::protobuf::Message {
  public:
-  ReqPullDownTask();
-  virtual ~ReqPullDownTask();
+  ReqCompeleteTask();
+  virtual ~ReqCompeleteTask();
 
-  ReqPullDownTask(const ReqPullDownTask& from);
+  ReqCompeleteTask(const ReqCompeleteTask& from);
 
-  inline ReqPullDownTask& operator=(const ReqPullDownTask& from) {
+  inline ReqCompeleteTask& operator=(const ReqCompeleteTask& from) {
     CopyFrom(from);
     return *this;
   }
@@ -1504,17 +1262,17 @@ class ReqPullDownTask : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqPullDownTask& default_instance();
+  static const ReqCompeleteTask& default_instance();
 
-  void Swap(ReqPullDownTask* other);
+  void Swap(ReqCompeleteTask* other);
 
   // implements Message ----------------------------------------------
 
-  ReqPullDownTask* New() const;
+  ReqCompeleteTask* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ReqPullDownTask& from);
-  void MergeFrom(const ReqPullDownTask& from);
+  void CopyFrom(const ReqCompeleteTask& from);
+  void MergeFrom(const ReqCompeleteTask& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -1549,7 +1307,7 @@ class ReqPullDownTask : public ::google::protobuf::Message {
   inline ::std::string* release_task_id();
   inline void set_allocated_task_id(::std::string* task_id);
 
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqPullDownTask)
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqCompeleteTask)
  private:
   inline void set_has_task_id();
   inline void clear_has_task_id();
@@ -1566,225 +1324,7 @@ class ReqPullDownTask : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
   void InitAsDefaultInstance();
-  static ReqPullDownTask* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class CloneCustomItem : public ::google::protobuf::Message {
- public:
-  CloneCustomItem();
-  virtual ~CloneCustomItem();
-
-  CloneCustomItem(const CloneCustomItem& from);
-
-  inline CloneCustomItem& operator=(const CloneCustomItem& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const CloneCustomItem& default_instance();
-
-  void Swap(CloneCustomItem* other);
-
-  // implements Message ----------------------------------------------
-
-  CloneCustomItem* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const CloneCustomItem& from);
-  void MergeFrom(const CloneCustomItem& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required int64 object_guid = 1;
-  inline bool has_object_guid() const;
-  inline void clear_object_guid();
-  static const int kObjectGuidFieldNumber = 1;
-  inline ::google::protobuf::int64 object_guid() const;
-  inline void set_object_guid(::google::protobuf::int64 value);
-
-  // repeated bytes item_id = 2;
-  inline int item_id_size() const;
-  inline void clear_item_id();
-  static const int kItemIdFieldNumber = 2;
-  inline const ::std::string& item_id(int index) const;
-  inline ::std::string* mutable_item_id(int index);
-  inline void set_item_id(int index, const ::std::string& value);
-  inline void set_item_id(int index, const char* value);
-  inline void set_item_id(int index, const void* value, size_t size);
-  inline ::std::string* add_item_id();
-  inline void add_item_id(const ::std::string& value);
-  inline void add_item_id(const char* value);
-  inline void add_item_id(const void* value, size_t size);
-  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& item_id() const;
-  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_item_id();
-
-  // @@protoc_insertion_point(class_scope:NFMsg.CloneCustomItem)
- private:
-  inline void set_has_object_guid();
-  inline void clear_has_object_guid();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::int64 object_guid_;
-  ::google::protobuf::RepeatedPtrField< ::std::string> item_id_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
-
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
-  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
-  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
-
-  void InitAsDefaultInstance();
-  static CloneCustomItem* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class ReqPullDownCustoms : public ::google::protobuf::Message {
- public:
-  ReqPullDownCustoms();
-  virtual ~ReqPullDownCustoms();
-
-  ReqPullDownCustoms(const ReqPullDownCustoms& from);
-
-  inline ReqPullDownCustoms& operator=(const ReqPullDownCustoms& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqPullDownCustoms& default_instance();
-
-  void Swap(ReqPullDownCustoms* other);
-
-  // implements Message ----------------------------------------------
-
-  ReqPullDownCustoms* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ReqPullDownCustoms& from);
-  void MergeFrom(const ReqPullDownCustoms& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  typedef ReqPullDownCustoms_EGameCloneResult EGameCloneResult;
-  static const EGameCloneResult EGCR_SUCCESS = ReqPullDownCustoms_EGameCloneResult_EGCR_SUCCESS;
-  static const EGameCloneResult EGCR_FAILED = ReqPullDownCustoms_EGameCloneResult_EGCR_FAILED;
-  static inline bool EGameCloneResult_IsValid(int value) {
-    return ReqPullDownCustoms_EGameCloneResult_IsValid(value);
-  }
-  static const EGameCloneResult EGameCloneResult_MIN =
-    ReqPullDownCustoms_EGameCloneResult_EGameCloneResult_MIN;
-  static const EGameCloneResult EGameCloneResult_MAX =
-    ReqPullDownCustoms_EGameCloneResult_EGameCloneResult_MAX;
-  static const int EGameCloneResult_ARRAYSIZE =
-    ReqPullDownCustoms_EGameCloneResult_EGameCloneResult_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  EGameCloneResult_descriptor() {
-    return ReqPullDownCustoms_EGameCloneResult_descriptor();
-  }
-  static inline const ::std::string& EGameCloneResult_Name(EGameCloneResult value) {
-    return ReqPullDownCustoms_EGameCloneResult_Name(value);
-  }
-  static inline bool EGameCloneResult_Parse(const ::std::string& name,
-      EGameCloneResult* value) {
-    return ReqPullDownCustoms_EGameCloneResult_Parse(name, value);
-  }
-
-  // accessors -------------------------------------------------------
-
-  // required .NFMsg.ReqPullDownCustoms.EGameCloneResult result_value = 1;
-  inline bool has_result_value() const;
-  inline void clear_result_value();
-  static const int kResultValueFieldNumber = 1;
-  inline ::NFMsg::ReqPullDownCustoms_EGameCloneResult result_value() const;
-  inline void set_result_value(::NFMsg::ReqPullDownCustoms_EGameCloneResult value);
-
-  // repeated .NFMsg.CloneCustomItem item_list = 2;
-  inline int item_list_size() const;
-  inline void clear_item_list();
-  static const int kItemListFieldNumber = 2;
-  inline const ::NFMsg::CloneCustomItem& item_list(int index) const;
-  inline ::NFMsg::CloneCustomItem* mutable_item_list(int index);
-  inline ::NFMsg::CloneCustomItem* add_item_list();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::CloneCustomItem >&
-      item_list() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::CloneCustomItem >*
-      mutable_item_list();
-
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqPullDownCustoms)
- private:
-  inline void set_has_result_value();
-  inline void clear_has_result_value();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::CloneCustomItem > item_list_;
-  int result_value_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
-
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
-  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
-  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
-
-  void InitAsDefaultInstance();
-  static ReqPullDownCustoms* default_instance_;
+  static ReqCompeleteTask* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -2284,6 +1824,10 @@ inline void ReqEnterGameServer::set_allocated_name(::std::string* name) {
 
 // -------------------------------------------------------------------
 
+// ReqHeartBeat
+
+// -------------------------------------------------------------------
+
 // ReqLeaveGameServer
 
 // -------------------------------------------------------------------
@@ -2400,7 +1944,7 @@ inline void ReqAckPlayerMove::set_target_z(float value) {
   target_z_ = value;
 }
 
-// required float source_x = 6;
+// optional float source_x = 6;
 inline bool ReqAckPlayerMove::has_source_x() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
@@ -2444,7 +1988,7 @@ inline void ReqAckPlayerMove::set_source_y(float value) {
   source_y_ = value;
 }
 
-// required float source_z = 8;
+// optional float source_z = 8;
 inline bool ReqAckPlayerMove::has_source_z() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
@@ -2808,37 +2352,15 @@ inline void ReqAckUseSkill::set_allocated_key_value(::std::string* key_value) {
 
 // ReqAckUseItem
 
-// required int32 row = 1;
-inline bool ReqAckUseItem::has_row() const {
+// required int64 item_guid = 1;
+inline bool ReqAckUseItem::has_item_guid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqAckUseItem::set_has_row() {
+inline void ReqAckUseItem::set_has_item_guid() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqAckUseItem::clear_has_row() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ReqAckUseItem::clear_row() {
-  row_ = 0;
-  clear_has_row();
-}
-inline ::google::protobuf::int32 ReqAckUseItem::row() const {
-  return row_;
-}
-inline void ReqAckUseItem::set_row(::google::protobuf::int32 value) {
-  set_has_row();
-  row_ = value;
-}
-
-// required int64 item_guid = 2;
-inline bool ReqAckUseItem::has_item_guid() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ReqAckUseItem::set_has_item_guid() {
-  _has_bits_[0] |= 0x00000002u;
-}
 inline void ReqAckUseItem::clear_has_item_guid() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void ReqAckUseItem::clear_item_guid() {
   item_guid_ = GOOGLE_LONGLONG(0);
@@ -2852,7 +2374,7 @@ inline void ReqAckUseItem::set_item_guid(::google::protobuf::int64 value) {
   item_guid_ = value;
 }
 
-// repeated int64 effect_ident = 3;
+// repeated int64 effect_ident = 2;
 inline int ReqAckUseItem::effect_ident_size() const {
   return effect_ident_.size();
 }
@@ -2877,7 +2399,7 @@ ReqAckUseItem::mutable_effect_ident() {
   return &effect_ident_;
 }
 
-// repeated int32 effect_value = 4;
+// repeated int32 effect_value = 3;
 inline int ReqAckUseItem::effect_value_size() const {
   return effect_value_.size();
 }
@@ -2902,7 +2424,7 @@ ReqAckUseItem::mutable_effect_value() {
   return &effect_value_;
 }
 
-// repeated int32 effect_rlt = 5;
+// repeated int32 effect_rlt = 4;
 inline int ReqAckUseItem::effect_rlt_size() const {
   return effect_rlt_.size();
 }
@@ -2927,15 +2449,15 @@ ReqAckUseItem::mutable_effect_rlt() {
   return &effect_rlt_;
 }
 
-// optional bytes key_value = 6;
+// optional bytes key_value = 5;
 inline bool ReqAckUseItem::has_key_value() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void ReqAckUseItem::set_has_key_value() {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void ReqAckUseItem::clear_has_key_value() {
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void ReqAckUseItem::clear_key_value() {
   if (key_value_ != &::google::protobuf::internal::kEmptyString) {
@@ -3136,209 +2658,17 @@ inline void ReqAckSwapScene::set_z(float value) {
 
 // -------------------------------------------------------------------
 
-// ReqSellItem
-
-// required int64 item_guid = 1;
-inline bool ReqSellItem::has_item_guid() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ReqSellItem::set_has_item_guid() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ReqSellItem::clear_has_item_guid() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ReqSellItem::clear_item_guid() {
-  item_guid_ = GOOGLE_LONGLONG(0);
-  clear_has_item_guid();
-}
-inline ::google::protobuf::int64 ReqSellItem::item_guid() const {
-  return item_guid_;
-}
-inline void ReqSellItem::set_item_guid(::google::protobuf::int64 value) {
-  set_has_item_guid();
-  item_guid_ = value;
-}
-
-// required int64 item_count = 2;
-inline bool ReqSellItem::has_item_count() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ReqSellItem::set_has_item_count() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void ReqSellItem::clear_has_item_count() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void ReqSellItem::clear_item_count() {
-  item_count_ = GOOGLE_LONGLONG(0);
-  clear_has_item_count();
-}
-inline ::google::protobuf::int64 ReqSellItem::item_count() const {
-  return item_count_;
-}
-inline void ReqSellItem::set_item_count(::google::protobuf::int64 value) {
-  set_has_item_count();
-  item_count_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// ReqSplitItem
-
-// required int64 item_guid = 1;
-inline bool ReqSplitItem::has_item_guid() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ReqSplitItem::set_has_item_guid() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ReqSplitItem::clear_has_item_guid() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ReqSplitItem::clear_item_guid() {
-  item_guid_ = GOOGLE_LONGLONG(0);
-  clear_has_item_guid();
-}
-inline ::google::protobuf::int64 ReqSplitItem::item_guid() const {
-  return item_guid_;
-}
-inline void ReqSplitItem::set_item_guid(::google::protobuf::int64 value) {
-  set_has_item_guid();
-  item_guid_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// ReqProduceItem
-
-// required bytes item_id = 1;
-inline bool ReqProduceItem::has_item_id() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ReqProduceItem::set_has_item_id() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ReqProduceItem::clear_has_item_id() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ReqProduceItem::clear_item_id() {
-  if (item_id_ != &::google::protobuf::internal::kEmptyString) {
-    item_id_->clear();
-  }
-  clear_has_item_id();
-}
-inline const ::std::string& ReqProduceItem::item_id() const {
-  return *item_id_;
-}
-inline void ReqProduceItem::set_item_id(const ::std::string& value) {
-  set_has_item_id();
-  if (item_id_ == &::google::protobuf::internal::kEmptyString) {
-    item_id_ = new ::std::string;
-  }
-  item_id_->assign(value);
-}
-inline void ReqProduceItem::set_item_id(const char* value) {
-  set_has_item_id();
-  if (item_id_ == &::google::protobuf::internal::kEmptyString) {
-    item_id_ = new ::std::string;
-  }
-  item_id_->assign(value);
-}
-inline void ReqProduceItem::set_item_id(const void* value, size_t size) {
-  set_has_item_id();
-  if (item_id_ == &::google::protobuf::internal::kEmptyString) {
-    item_id_ = new ::std::string;
-  }
-  item_id_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqProduceItem::mutable_item_id() {
-  set_has_item_id();
-  if (item_id_ == &::google::protobuf::internal::kEmptyString) {
-    item_id_ = new ::std::string;
-  }
-  return item_id_;
-}
-inline ::std::string* ReqProduceItem::release_item_id() {
-  clear_has_item_id();
-  if (item_id_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = item_id_;
-    item_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void ReqProduceItem::set_allocated_item_id(::std::string* item_id) {
-  if (item_id_ != &::google::protobuf::internal::kEmptyString) {
-    delete item_id_;
-  }
-  if (item_id) {
-    set_has_item_id();
-    item_id_ = item_id;
-  } else {
-    clear_has_item_id();
-    item_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// optional int32 count = 2;
-inline bool ReqProduceItem::has_count() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ReqProduceItem::set_has_count() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void ReqProduceItem::clear_has_count() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void ReqProduceItem::clear_count() {
-  count_ = 0;
-  clear_has_count();
-}
-inline ::google::protobuf::int32 ReqProduceItem::count() const {
-  return count_;
-}
-inline void ReqProduceItem::set_count(::google::protobuf::int32 value) {
-  set_has_count();
-  count_ = value;
-}
-
-// -------------------------------------------------------------------
-
 // ReqPickDropItem
-
-// required int64 npc_guid = 1;
-inline bool ReqPickDropItem::has_npc_guid() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ReqPickDropItem::set_has_npc_guid() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ReqPickDropItem::clear_has_npc_guid() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ReqPickDropItem::clear_npc_guid() {
-  npc_guid_ = GOOGLE_LONGLONG(0);
-  clear_has_npc_guid();
-}
-inline ::google::protobuf::int64 ReqPickDropItem::npc_guid() const {
-  return npc_guid_;
-}
-inline void ReqPickDropItem::set_npc_guid(::google::protobuf::int64 value) {
-  set_has_npc_guid();
-  npc_guid_ = value;
-}
 
 // required int64 item_guid = 2;
 inline bool ReqPickDropItem::has_item_guid() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
 inline void ReqPickDropItem::set_has_item_guid() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000001u;
 }
 inline void ReqPickDropItem::clear_has_item_guid() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void ReqPickDropItem::clear_item_guid() {
   item_guid_ = GOOGLE_LONGLONG(0);
@@ -3428,56 +2758,56 @@ inline void ReqAcceptTask::set_allocated_task_id(::std::string* task_id) {
 
 // -------------------------------------------------------------------
 
-// ReqPullDownTask
+// ReqCompeleteTask
 
 // required bytes task_id = 1;
-inline bool ReqPullDownTask::has_task_id() const {
+inline bool ReqCompeleteTask::has_task_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqPullDownTask::set_has_task_id() {
+inline void ReqCompeleteTask::set_has_task_id() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqPullDownTask::clear_has_task_id() {
+inline void ReqCompeleteTask::clear_has_task_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqPullDownTask::clear_task_id() {
+inline void ReqCompeleteTask::clear_task_id() {
   if (task_id_ != &::google::protobuf::internal::kEmptyString) {
     task_id_->clear();
   }
   clear_has_task_id();
 }
-inline const ::std::string& ReqPullDownTask::task_id() const {
+inline const ::std::string& ReqCompeleteTask::task_id() const {
   return *task_id_;
 }
-inline void ReqPullDownTask::set_task_id(const ::std::string& value) {
+inline void ReqCompeleteTask::set_task_id(const ::std::string& value) {
   set_has_task_id();
   if (task_id_ == &::google::protobuf::internal::kEmptyString) {
     task_id_ = new ::std::string;
   }
   task_id_->assign(value);
 }
-inline void ReqPullDownTask::set_task_id(const char* value) {
+inline void ReqCompeleteTask::set_task_id(const char* value) {
   set_has_task_id();
   if (task_id_ == &::google::protobuf::internal::kEmptyString) {
     task_id_ = new ::std::string;
   }
   task_id_->assign(value);
 }
-inline void ReqPullDownTask::set_task_id(const void* value, size_t size) {
+inline void ReqCompeleteTask::set_task_id(const void* value, size_t size) {
   set_has_task_id();
   if (task_id_ == &::google::protobuf::internal::kEmptyString) {
     task_id_ = new ::std::string;
   }
   task_id_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* ReqPullDownTask::mutable_task_id() {
+inline ::std::string* ReqCompeleteTask::mutable_task_id() {
   set_has_task_id();
   if (task_id_ == &::google::protobuf::internal::kEmptyString) {
     task_id_ = new ::std::string;
   }
   return task_id_;
 }
-inline ::std::string* ReqPullDownTask::release_task_id() {
+inline ::std::string* ReqCompeleteTask::release_task_id() {
   clear_has_task_id();
   if (task_id_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
@@ -3487,7 +2817,7 @@ inline ::std::string* ReqPullDownTask::release_task_id() {
     return temp;
   }
 }
-inline void ReqPullDownTask::set_allocated_task_id(::std::string* task_id) {
+inline void ReqCompeleteTask::set_allocated_task_id(::std::string* task_id) {
   if (task_id_ != &::google::protobuf::internal::kEmptyString) {
     delete task_id_;
   }
@@ -3498,128 +2828,6 @@ inline void ReqPullDownTask::set_allocated_task_id(::std::string* task_id) {
     clear_has_task_id();
     task_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
-}
-
-// -------------------------------------------------------------------
-
-// CloneCustomItem
-
-// required int64 object_guid = 1;
-inline bool CloneCustomItem::has_object_guid() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void CloneCustomItem::set_has_object_guid() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void CloneCustomItem::clear_has_object_guid() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void CloneCustomItem::clear_object_guid() {
-  object_guid_ = GOOGLE_LONGLONG(0);
-  clear_has_object_guid();
-}
-inline ::google::protobuf::int64 CloneCustomItem::object_guid() const {
-  return object_guid_;
-}
-inline void CloneCustomItem::set_object_guid(::google::protobuf::int64 value) {
-  set_has_object_guid();
-  object_guid_ = value;
-}
-
-// repeated bytes item_id = 2;
-inline int CloneCustomItem::item_id_size() const {
-  return item_id_.size();
-}
-inline void CloneCustomItem::clear_item_id() {
-  item_id_.Clear();
-}
-inline const ::std::string& CloneCustomItem::item_id(int index) const {
-  return item_id_.Get(index);
-}
-inline ::std::string* CloneCustomItem::mutable_item_id(int index) {
-  return item_id_.Mutable(index);
-}
-inline void CloneCustomItem::set_item_id(int index, const ::std::string& value) {
-  item_id_.Mutable(index)->assign(value);
-}
-inline void CloneCustomItem::set_item_id(int index, const char* value) {
-  item_id_.Mutable(index)->assign(value);
-}
-inline void CloneCustomItem::set_item_id(int index, const void* value, size_t size) {
-  item_id_.Mutable(index)->assign(
-    reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* CloneCustomItem::add_item_id() {
-  return item_id_.Add();
-}
-inline void CloneCustomItem::add_item_id(const ::std::string& value) {
-  item_id_.Add()->assign(value);
-}
-inline void CloneCustomItem::add_item_id(const char* value) {
-  item_id_.Add()->assign(value);
-}
-inline void CloneCustomItem::add_item_id(const void* value, size_t size) {
-  item_id_.Add()->assign(reinterpret_cast<const char*>(value), size);
-}
-inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
-CloneCustomItem::item_id() const {
-  return item_id_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::std::string>*
-CloneCustomItem::mutable_item_id() {
-  return &item_id_;
-}
-
-// -------------------------------------------------------------------
-
-// ReqPullDownCustoms
-
-// required .NFMsg.ReqPullDownCustoms.EGameCloneResult result_value = 1;
-inline bool ReqPullDownCustoms::has_result_value() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ReqPullDownCustoms::set_has_result_value() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ReqPullDownCustoms::clear_has_result_value() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ReqPullDownCustoms::clear_result_value() {
-  result_value_ = 0;
-  clear_has_result_value();
-}
-inline ::NFMsg::ReqPullDownCustoms_EGameCloneResult ReqPullDownCustoms::result_value() const {
-  return static_cast< ::NFMsg::ReqPullDownCustoms_EGameCloneResult >(result_value_);
-}
-inline void ReqPullDownCustoms::set_result_value(::NFMsg::ReqPullDownCustoms_EGameCloneResult value) {
-  assert(::NFMsg::ReqPullDownCustoms_EGameCloneResult_IsValid(value));
-  set_has_result_value();
-  result_value_ = value;
-}
-
-// repeated .NFMsg.CloneCustomItem item_list = 2;
-inline int ReqPullDownCustoms::item_list_size() const {
-  return item_list_.size();
-}
-inline void ReqPullDownCustoms::clear_item_list() {
-  item_list_.Clear();
-}
-inline const ::NFMsg::CloneCustomItem& ReqPullDownCustoms::item_list(int index) const {
-  return item_list_.Get(index);
-}
-inline ::NFMsg::CloneCustomItem* ReqPullDownCustoms::mutable_item_list(int index) {
-  return item_list_.Mutable(index);
-}
-inline ::NFMsg::CloneCustomItem* ReqPullDownCustoms::add_item_list() {
-  return item_list_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::CloneCustomItem >&
-ReqPullDownCustoms::item_list() const {
-  return item_list_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::CloneCustomItem >*
-ReqPullDownCustoms::mutable_item_list() {
-  return &item_list_;
 }
 
 // -------------------------------------------------------------------
@@ -3924,10 +3132,6 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckPlayerChat_EGameC
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckSwapScene_EGameSwapType>() {
   return ::NFMsg::ReqAckSwapScene_EGameSwapType_descriptor();
-}
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqPullDownCustoms_EGameCloneResult>() {
-  return ::NFMsg::ReqPullDownCustoms_EGameCloneResult_descriptor();
 }
 
 }  // namespace google

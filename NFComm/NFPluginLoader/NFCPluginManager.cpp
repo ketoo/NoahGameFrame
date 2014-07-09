@@ -59,7 +59,7 @@ bool NFCPluginManager::LoadPlugin()
         {
             //主模块只能运行在主actor上只
             //非主模块则所有的actor都创建
-            if (GetActor() == NFIActorManager::EACTOR_MAIN)
+            if (GetActorID() == NFIActorManager::EACTOR_MAIN)
             {
                 mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, bMain));
             }
