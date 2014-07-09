@@ -53,7 +53,7 @@ bool NFCSceneProcessModule::Execute( const float fLasFrametime, const float fSta
 bool NFCSceneProcessModule::AfterInit()
 {
     //初始化场景容器
-    int nSelfActorID = pPluginManager->GetAddress().AsInteger();
+    int nSelfActorID = pPluginManager->GetActorID();
     NFILogicClass* pLogicClass =  m_pLogicClassModule->GetElement("Scene");
     if (pLogicClass)
     {
@@ -322,7 +322,9 @@ bool NFCSceneProcessModule::DestroyCloneScene( const int& nContainerID, const in
 
 int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
 {
-    if ( var.GetCount() != 5 )
+    if ( var.GetCount() != 4 
+        || !var.TypeEx(VARIANT_TYPE::VTYPE_OBJECT, VARIANT_TYPE::VTYPE_INT, 
+        VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_UNKNOWN))
     {
         return 0;
     }
@@ -331,11 +333,12 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
     int nType = var.NumberVal<int>( 1 );
     int nTargetScene = var.NumberVal<int>( 2 );
     int nTargetGroupID = var.NumberVal<int>( 3 );
-    int nSceneType = var.NumberVal<int>( 4 );
     int nOldSceneID = m_pKernelModule->QueryPropertyInt( self, "SceneID" );
 
-    int nSelfActorID = pPluginManager->GetActor();
-    int nActorID = m_pGameServerConfigModule->GetActorID( nTargetScene );
+    char szSceneID[MAX_PATH] = {0};
+    sprintf(szSceneID, "%d", nTargetScene);
+    int nActorID = m_pElementInfoModule->QueryPropertyInt(szSceneID, "ActorID");
+    int nSelfActorID = pPluginManager->GetActorID();
     if (nSelfActorID != nActorID)
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, ident, "target scene not runing in this server", nTargetScene);
@@ -369,74 +372,50 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
         }
     }
 
+    nTargetGroupID = CreateCloneScene( nTargetScene, nTargetGroupID, strResource, NFCValueList() );
+    if ( nTargetGroupID <= 0 )
+    {
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "CreateCloneScene failed", nTargetScene);
+        return 0;
+    }
+
     char szSceneIDName[MAX_PATH] = { 0 };
     sprintf( szSceneIDName, "%d", nTargetScene );
-    NFIPropertyManager* propertyManager = m_pElementInfoModule->GetPropertyManager( szSceneIDName );
-    if ( propertyManager )
+
+    //得到坐标
+    float fX = 0.0f;
+    float fY = 0.0f;
+    float fZ = 0.0f;
+
+    const std::string& strRelivePosList = m_pElementInfoModule->QueryPropertyString(szSceneIDName, "RelivePos");
+    NFCValueList valueRelivePosList( strRelivePosList.c_str(), ";" );
+    if ( valueRelivePosList.GetCount() >= 1 )
     {
-        NFIProperty* pProperty = propertyManager->GetElement( "RelivePos" );
-        if ( pProperty )
+        NFCValueList valueRelivePos( valueRelivePosList.StringVal( 0 ).c_str(), "," );
+        if ( valueRelivePos.GetCount() == 3 )
         {
-            bool bCanEnter = true;
-            if ( bCanEnter )
-            {
-                nTargetGroupID = CreateCloneScene( nTargetScene, nTargetGroupID, strResource, NFCValueList() );
-                if ( nTargetGroupID <= 0 )
-                {
-                    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "CreateCloneScene failed", nTargetScene);
-					return 0;
-				}
-                {
-                    //得到坐标
-                    float fX = 0.0f;
-                    float fY = 0.0f;
-                    float fZ = 0.0f;
-                    const std::string& strRelivePosList = pProperty->QueryString();
-                    NFCValueList valueRelivePosList( strRelivePosList.c_str(), ";" );
-                    if ( valueRelivePosList.GetCount() >= 1 )
-                    {
-                        NFCValueList valueRelivePos( valueRelivePosList.StringVal( 0 ).c_str(), "," );
-                        if ( valueRelivePos.GetCount() == 3 )
-                        {
-                            fX = boost::lexical_cast<float>( valueRelivePos.StringVal( 0 ) );
-                            fY = boost::lexical_cast<float>( valueRelivePos.StringVal( 1 ) );
-                            fZ = boost::lexical_cast<float>( valueRelivePos.StringVal( 2 ) );
-                        }
-                    }
-
-                    NFCValueList sceneResult( var );
-                    sceneResult.AddFloat( fX );
-                    sceneResult.AddFloat( fY );
-                    sceneResult.AddFloat( fZ );
-
-                    m_pEventProcessModule->DoEvent( self, NFED_ON_OBJECT_ENTER_SCENE_BEFORE, sceneResult );
-
-                    if(!m_pKernelModule->SwitchScene( self, nTargetScene, nTargetGroupID, fX, fY, fZ, 0.0f, var ))
-                    {
-                        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "SwitchScene failed", nTargetScene);
-
-                        return 0;
-                    }
-
-                    sceneResult.SetInt(3, nTargetGroupID);
-                    m_pEventProcessModule->DoEvent( self, NFED_ON_OBJECT_ENTER_SCENE_RESULT, sceneResult );
-
-
-                    if ( GetCloneSceneType( nTargetScene ) == SCENE_TYPE_MAINLINE_CLONE )
-                    {
-                        m_pKernelModule->SetPropertyInt(self, "LastCloneSceneID", nTargetScene);
-                        m_pKernelModule->SetPropertyInt(self, "LastCloneSceneMode", nSceneType);
-
-                        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "CreateCloneSceneGroup", nTargetGroupID);
-                    }
-                    else
-                    {
-                        m_pKernelModule->SetPropertyInt(self, "LastContainerID", nTargetScene);
-                    }
-                }
-            }
+            fX = boost::lexical_cast<float>( valueRelivePos.StringVal( 0 ) );
+            fY = boost::lexical_cast<float>( valueRelivePos.StringVal( 1 ) );
+            fZ = boost::lexical_cast<float>( valueRelivePos.StringVal( 2 ) );
         }
     }
+
+    NFCValueList xSceneResult( var );
+    xSceneResult.AddFloat( fX );
+    xSceneResult.AddFloat( fY );
+    xSceneResult.AddFloat( fZ );
+
+    m_pEventProcessModule->DoEvent( self, NFED_ON_OBJECT_ENTER_SCENE_BEFORE, xSceneResult );
+
+    if(!m_pKernelModule->SwitchScene( self, nTargetScene, nTargetGroupID, fX, fY, fZ, 0.0f, var ))
+    {
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "SwitchScene failed", nTargetScene);
+
+        return 0;
+    }
+
+    xSceneResult.SetInt(3, nTargetGroupID);
+    m_pEventProcessModule->DoEvent( self, NFED_ON_OBJECT_ENTER_SCENE_RESULT, xSceneResult );
 
     return 0;
 }
