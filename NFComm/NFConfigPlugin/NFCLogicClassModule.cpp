@@ -36,6 +36,9 @@ bool NFCLogicClassModule::Shut()
         pLogicClass = NULL;
         pLogicClass = Next();
     }
+
+    ClearAll();
+
     return true;
 }
 
@@ -107,7 +110,11 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
             const char* pstrPropertyIndex = pPropertyNode->first_attribute("Index")->value();
 
             const char* pstrSave = pPropertyNode->first_attribute("Save")->value();
-            const char* pstrRelationValue = pPropertyNode->first_attribute("RelationValue")->value();
+            const char* pstrRelationValue = NULL_STR.c_str();
+            if (pPropertyNode->first_attribute("RelationValue"))
+            {
+                pstrRelationValue = pPropertyNode->first_attribute("RelationValue")->value();
+            }
 
             bool bPublic = (0 == strcmp("true", pstrPublic)) ? true : false;
             bool bPrivate = (0 == strcmp("true", pstrPrivate)) ? true : false;
@@ -479,10 +486,3 @@ bool NFCLogicClassModule::Clear()
 	return true;
 
 }
-
-void NFCLogicClassModule::OnReload( const char* strModuleName, NFILogicModule* pModule )
-{
-	Clear();
-	Load();
-}
-
