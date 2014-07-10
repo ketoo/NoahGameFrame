@@ -174,6 +174,10 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
             {
                 pNet->Dismantle(pObject);
             }
+            else
+            {
+                break;
+            }
         } 
     }
 
