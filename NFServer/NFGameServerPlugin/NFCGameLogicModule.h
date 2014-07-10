@@ -33,14 +33,10 @@ public:
     virtual bool AfterInit();
     virtual bool BeforeShut();
 
-    virtual NFINT16 GetAreaID();
 
 protected:
 
-    NFINT16 mnAreaID;
-    NFIDENTID mIdent;
 
-    NFINT32 mnGSContainerID;
 protected:
     NFILogicClassModule* m_pLogicClassModule;
     NFIDataNoSqlModule* m_pNoSqlModule;
