@@ -34,7 +34,6 @@ public:
     virtual bool AfterInit();
 
     //基础值=等级+系数+常数
-    //virtual int CalculateBaseValue(const NFJobType nJob, const int nLevel, NFRumTimeColIndex eProperty);
     virtual int CalculateBaseValue( const NFJobType nJob, const int nLevel, const std::string& strProperty );
 
     virtual bool NeedView(const std::string& strProperty);
