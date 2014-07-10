@@ -101,7 +101,7 @@ bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTi
 	{
         NFIActor* pActor = *it;
         int nMsgCount = pActor->GetNumQueuedMessages();
-        if (nMsgCount <= 1)
+        if (nMsgCount <= 10)
         {
             NFIActorMessage message;
             message.eType = NFIActorMessage::EACTOR_EXCUTE;

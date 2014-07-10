@@ -105,24 +105,12 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCBuffModule.h" />
-    <ClInclude Include="NFCBulletSkillConsumeProcessModule.h" />
-    <ClInclude Include="NFCCardItemConsumeProcessModule.h" />
     <ClInclude Include="NFCDataProcessModule.h" />
     <ClInclude Include="NFCGameLogicModule.h" />
-    <ClInclude Include="NFCItemConsumeManagerModule.h" />
-    <ClInclude Include="NFCNPCRefreshModule.h" />
-    <ClInclude Include="NFCPotionItemConsumeProcessModule.h" />
-    <ClInclude Include="NFCItemModule.h" />
     <ClInclude Include="NFCLevelModule.h" />
-    <ClInclude Include="NFCPackModule.h" />
     <ClInclude Include="NFCPropertyConfigModule.h" />
     <ClInclude Include="NFCPropertyModule.h" />
-    <ClInclude Include="NFCRebornItemConsumeProcessModule.h" />
     <ClInclude Include="NFCSceneProcessModule.h" />
-    <ClInclude Include="NFCSkillConsumeManagerModule.h" />
-    <ClInclude Include="NFCBriefSkillConsumeProcessModule.h" />
-    <ClInclude Include="NFCSkillModule.h" />
     <ClInclude Include="NFGameServerPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -134,24 +122,12 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCBuffModule.cpp" />
-    <ClCompile Include="NFCBulletSkillConsumeProcessModule.cpp" />
-    <ClCompile Include="NFCCardItemConsumeProcessModule.cpp" />
     <ClCompile Include="NFCDataProcessModule.cpp" />
     <ClCompile Include="NFCGameLogicModule.cpp" />
-    <ClCompile Include="NFCItemConsumeManagerModule.cpp" />
-    <ClCompile Include="NFCNPCRefreshModule.cpp" />
-    <ClCompile Include="NFCPotionItemConsumeProcessModule.cpp" />
-    <ClCompile Include="NFCItemModule.cpp" />
     <ClCompile Include="NFCLevelModule.cpp" />
-    <ClCompile Include="NFCPackModule.cpp" />
     <ClCompile Include="NFCPropertyConfigModule.cpp" />
     <ClCompile Include="NFCPropertyModule.cpp" />
-    <ClCompile Include="NFCRebornItemConsumeProcessModule.cpp" />
     <ClCompile Include="NFCSceneProcessModule.cpp" />
-    <ClCompile Include="NFCSkillConsumeManagerModule.cpp" />
-    <ClCompile Include="NFCBriefSkillConsumeProcessModule.cpp" />
-    <ClCompile Include="NFCSkillModule.cpp" />
     <ClCompile Include="NFGameServerPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

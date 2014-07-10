@@ -21,6 +21,7 @@ public:
     NFEventProcessPlugin(NFIPluginManager* p)
     {
         pPluginManager = p;
+        bCanReload = false;
     }
 
     virtual const int GetPluginVersion();

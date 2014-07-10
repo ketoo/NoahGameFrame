@@ -31,7 +31,8 @@ public class NFNet
         E_HAS_PLAYER_LOGIN,//登录成功
         E_HAS_PLAYER_SELECT_WORLD,//已选择服务器
         E_WAITING_PLAYER_TO_GATE,//等待连接网关
-        E_HAS_PLAYER_GATE,//已连接gate(等待验证KEY)
+        E_HAS_PLAYER_GATE,//已连接gate
+        E_WATING_VERIFY,//已连接gate(等待验证KEY)
         E_HAS_VERIFY,//验证成功
         E_HAS_PLAYER_ROLELIST,//有了角色列表
         E_PLAYER_WAITING_TO_GAME,//申请了进游戏，等待进入
