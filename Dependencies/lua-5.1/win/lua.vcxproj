@@ -18,6 +18,65 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\lapi.h" />
+    <ClInclude Include="..\src\lauxlib.h" />
+    <ClInclude Include="..\src\lcode.h" />
+    <ClInclude Include="..\src\ldebug.h" />
+    <ClInclude Include="..\src\ldo.h" />
+    <ClInclude Include="..\src\lfunc.h" />
+    <ClInclude Include="..\src\lgc.h" />
+    <ClInclude Include="..\src\llex.h" />
+    <ClInclude Include="..\src\llimits.h" />
+    <ClInclude Include="..\src\lmem.h" />
+    <ClInclude Include="..\src\lobject.h" />
+    <ClInclude Include="..\src\lopcodes.h" />
+    <ClInclude Include="..\src\lparser.h" />
+    <ClInclude Include="..\src\lstate.h" />
+    <ClInclude Include="..\src\lstring.h" />
+    <ClInclude Include="..\src\ltable.h" />
+    <ClInclude Include="..\src\ltm.h" />
+    <ClInclude Include="..\src\lua.h" />
+    <ClInclude Include="..\src\luaconf.h" />
+    <ClInclude Include="..\src\lualib.h" />
+    <ClInclude Include="..\src\lundump.h" />
+    <ClInclude Include="..\src\lvm.h" />
+    <ClInclude Include="..\src\lzio.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\lapi.c" />
+    <ClCompile Include="..\src\lauxlib.c" />
+    <ClCompile Include="..\src\lbaselib.c" />
+    <ClCompile Include="..\src\lcode.c" />
+    <ClCompile Include="..\src\ldblib.c" />
+    <ClCompile Include="..\src\ldebug.c" />
+    <ClCompile Include="..\src\ldo.c" />
+    <ClCompile Include="..\src\ldump.c" />
+    <ClCompile Include="..\src\lfunc.c" />
+    <ClCompile Include="..\src\lgc.c" />
+    <ClCompile Include="..\src\linit.c" />
+    <ClCompile Include="..\src\liolib.c" />
+    <ClCompile Include="..\src\llex.c" />
+    <ClCompile Include="..\src\lmathlib.c" />
+    <ClCompile Include="..\src\lmem.c" />
+    <ClCompile Include="..\src\loadlib.c" />
+    <ClCompile Include="..\src\lobject.c" />
+    <ClCompile Include="..\src\lopcodes.c" />
+    <ClCompile Include="..\src\loslib.c" />
+    <ClCompile Include="..\src\lparser.c" />
+    <ClCompile Include="..\src\lstate.c" />
+    <ClCompile Include="..\src\lstring.c" />
+    <ClCompile Include="..\src\lstrlib.c" />
+    <ClCompile Include="..\src\ltable.c" />
+    <ClCompile Include="..\src\ltablib.c" />
+    <ClCompile Include="..\src\ltm.c" />
+    <ClCompile Include="..\src\lua.c" />
+    <ClCompile Include="..\src\luac.c" />
+    <ClCompile Include="..\src\lundump.c" />
+    <ClCompile Include="..\src\lvm.c" />
+    <ClCompile Include="..\src\lzio.c" />
+    <ClCompile Include="..\src\print.c" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{62DAEB9D-66AE-4B69-8284-8A34C5AFBCE8}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -70,7 +129,7 @@
     <TargetName>$(ProjectName)-d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <TargetName>$(ProjectName)-d</TargetName>
+    <TargetName>$(ProjectName)_d</TargetName>
     <OutDir>$(SolutionDir)\_Out\Comm\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -141,68 +200,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\src\lapi.c" />
-    <ClCompile Include="..\..\..\src\lauxlib.c" />
-    <ClCompile Include="..\..\..\src\lbaselib.c" />
-    <ClCompile Include="..\..\..\src\lcode.c" />
-    <ClCompile Include="..\..\..\src\ldblib.c" />
-    <ClCompile Include="..\..\..\src\ldebug.c" />
-    <ClCompile Include="..\..\..\src\ldo.c" />
-    <ClCompile Include="..\..\..\src\ldump.c" />
-    <ClCompile Include="..\..\..\src\lfunc.c" />
-    <ClCompile Include="..\..\..\src\lgc.c" />
-    <ClCompile Include="..\..\..\src\linit.c" />
-    <ClCompile Include="..\..\..\src\liolib.c" />
-    <ClCompile Include="..\..\..\src\llex.c" />
-    <ClCompile Include="..\..\..\src\lmathlib.c" />
-    <ClCompile Include="..\..\..\src\lmem.c" />
-    <ClCompile Include="..\..\..\src\loadlib.c" />
-    <ClCompile Include="..\..\..\src\lobject.c" />
-    <ClCompile Include="..\..\..\src\lopcodes.c" />
-    <ClCompile Include="..\..\..\src\loslib.c" />
-    <ClCompile Include="..\..\..\src\lparser.c" />
-    <ClCompile Include="..\..\..\src\lstate.c" />
-    <ClCompile Include="..\..\..\src\lstring.c" />
-    <ClCompile Include="..\..\..\src\lstrlib.c" />
-    <ClCompile Include="..\..\..\src\ltable.c" />
-    <ClCompile Include="..\..\..\src\ltablib.c" />
-    <ClCompile Include="..\..\..\src\ltm.c" />
-    <ClCompile Include="..\..\..\src\lua.c" />
-    <ClCompile Include="..\..\..\src\luac.c" />
-    <ClCompile Include="..\..\..\src\lundump.c" />
-    <ClCompile Include="..\..\..\src\lvm.c" />
-    <ClCompile Include="..\..\..\src\lzio.c" />
-    <ClCompile Include="..\..\..\src\print.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\src\lapi.h" />
-    <ClInclude Include="..\..\..\src\lauxlib.h" />
-    <ClInclude Include="..\..\..\src\lcode.h" />
-    <ClInclude Include="..\..\..\src\ldebug.h" />
-    <ClInclude Include="..\..\..\src\ldo.h" />
-    <ClInclude Include="..\..\..\src\lfunc.h" />
-    <ClInclude Include="..\..\..\src\lgc.h" />
-    <ClInclude Include="..\..\..\src\llex.h" />
-    <ClInclude Include="..\..\..\src\llimits.h" />
-    <ClInclude Include="..\..\..\src\lmem.h" />
-    <ClInclude Include="..\..\..\src\lobject.h" />
-    <ClInclude Include="..\..\..\src\lopcodes.h" />
-    <ClInclude Include="..\..\..\src\lparser.h" />
-    <ClInclude Include="..\..\..\src\lstate.h" />
-    <ClInclude Include="..\..\..\src\lstring.h" />
-    <ClInclude Include="..\..\..\src\ltable.h" />
-    <ClInclude Include="..\..\..\src\ltm.h" />
-    <ClInclude Include="..\..\..\src\lua.h" />
-    <ClInclude Include="..\..\..\src\luaconf.h" />
-    <ClInclude Include="..\..\..\src\lualib.h" />
-    <ClInclude Include="..\..\..\src\lundump.h" />
-    <ClInclude Include="..\..\..\src\lvm.h" />
-    <ClInclude Include="..\..\..\src\lzio.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
