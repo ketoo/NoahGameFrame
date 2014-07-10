@@ -17,7 +17,6 @@ class NFIGameLogicModule
 {
 
 public:
-    virtual NFINT16 GetAreaID() = 0;
 };
 
 #endif
