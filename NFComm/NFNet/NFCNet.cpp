@@ -167,7 +167,14 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
     {
         pObject->AddBuff(strData, len);
 
-        pNet->Dismantle(pObject);
+        while (1)
+        {
+            int len = pObject->GetBuffLen();
+            if (len > pNet->mnHeadLength)
+            {
+                pNet->Dismantle(pObject);
+            }
+        } 
     }
 
     delete[] strData;
@@ -306,10 +313,6 @@ bool NFCNet::Dismantle(NetObject* pObject )
 
 			//添加到队列
 			pObject->RemoveBuff(0, nUsedLen);
-			
-			//继续解包
-
-            Dismantle(pObject);
 		}
 		else if (0 == nUsedLen)
 		{

@@ -277,6 +277,7 @@ public class NFStart : MonoBehaviour
             GUI.Label(new Rect(25, 50, 150, 50), "已成功连接网关...等待验证key...");
 
             netFocus.sendLogic.RequireVerifyWorldKey(netFocus.strAccount, netFocus.strKey);
+            //netFocus.mPlayerState = NFNet.PLAYER_STATE.E_WATING_VERIFY;
         }
     }
 
