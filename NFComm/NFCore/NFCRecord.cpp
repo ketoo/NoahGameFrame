@@ -55,6 +55,7 @@ NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, co
         }
     }
 
+    // TODO:可以考虑在此处直接加入默认值
     for (int i = 0; i < GetRows() * GetCols(); i++)
     {
         mtRecordVec.push_back(std::shared_ptr<NFIValueList::VarData>());
