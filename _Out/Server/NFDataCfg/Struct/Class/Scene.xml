@@ -1,20 +1,18 @@
-<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is a class xml-->
 <XML>
-	<Propertys>
-		<Property Id="SceneName" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc=""/>
-		<Property Id="SceneShowName" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc=""/>
-		<Property Id="MaxGroup" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æœ€å¤§ç»„"/>
-		<Property Id="MaxGroupPlayers" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ¯ç»„æœ€å¤§äººæ•°"/>
-		<Property Id="FilePath" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ–‡ä»¶è·¯å¾„"/>
-		<Property Id="RelivePos" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å¤æ´»åæ ‡åˆ—è¡¨"/>
-		<Property Id="Width" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="åœºæ™¯å®½åº¦"/>
-		<Property Id="SoundList" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="åœºæ™¯èƒŒæ™¯éŸ³ä¹åˆ—è¡¨"/>
-		<Property Id="CanClone" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ˜¯å¦å‰¯æœ¬"/>
-		<Property Id="ActorID" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="acctorid"/>
-	
-	</Propertys>
-	<Records>
-	</Records>
-	<Includes>
-	</Includes>
+    <Propertys>
+        <Property Desc="" Id="SceneName" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="" Id="SceneShowName" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="×î´ó×é" Id="MaxGroup" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="Ã¿×é×î´óÈËÊý" Id="MaxGroupPlayers" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="ÎÄ¼þÂ·¾¶" Id="FilePath" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="¸´»î×ø±êÁÐ±í" Id="RelivePos" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="³¡¾°¿í¶È" Id="Width" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="³¡¾°±³¾°ÒôÀÖÁÐ±í" Id="SoundList" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="ÊÇ·ñ¸±±¾" Id="CanClone" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="acctorid" Id="ActorID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+    </Propertys>
+    <Includes/>
+    <Components/>
 </XML>
