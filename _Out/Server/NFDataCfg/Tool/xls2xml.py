@@ -156,16 +156,26 @@ def traverse_struct_xls(path):
     root_node = xml_doc.createElement("XML")
     xml_doc.appendChild(root_node)
 
+    #IObject类是父类，其他从它继承
+    i_object_node = xml_doc.createElement("Class")
+    root_node.appendChild(i_object_node)
+    i_object_node.setAttribute(str("Id"), str("IObject"))
+    i_object_node.setAttribute(str("Type"), str("TYPE_IOBJECT"))
+    i_object_node.setAttribute(str("Path"), str("../../NFDataCfg/Struct/Class/IObject.xml"))
+    i_object_node.setAttribute(str("InstancePath"), str("../../NFDataCfg/Ini/NPC/IObject.xml"))
+    i_object_node.setAttribute(str("Public"), str("0"))
+    i_object_node.setAttribute(str("Desc"), str("IObject"))
+
     for root, dirs, files in os.walk(path):
         for file in files:
             if os.path.isfile(root + file):
                 prename = str(file).rsplit(".")[0]
                 ext = os.path.splitext(file)[1]  #此处ext还带着点
                 #print(ext)
-                if ext == ".xls" or ext == ".xlsx":
+                if (ext == ".xls" or ext == ".xlsx") and prename != "IObject":
                     #print("Filename:" + file)
                     class_node = xml_doc.createElement("Class")
-                    root_node.appendChild(class_node)
+                    i_object_node.appendChild(class_node)
                     class_node.setAttribute(str("Id"), str(prename))
                     class_node.setAttribute(str("Type"), str("TYPE_") + str(prename).upper())
                     class_node.setAttribute(str("Path"),
