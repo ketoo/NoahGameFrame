@@ -89,7 +89,7 @@ public class NFObjectElement
 				}
 			}
 			//////////////////
-            scrollPositionSecond = GUI.BeginScrollView(new Rect(nElementWidth / 2 + 20, nElementHeight, nElementWidth+20, nHeight/2), scrollPositionSecond, new Rect(0, 0, nElementWidth, nAllElement * (nElementHeight)));
+            scrollPositionSecond = GUI.BeginScrollView(new Rect(nElementWidth / 2 + 20, nElementHeight, nElementWidth+20, nHeight/2), scrollPositionSecond, new Rect(0, 0, nElementWidth, (nAllElement+1) * (nElementHeight) + 1));
 
 			int nElementIndex = 0;
 			GUI.Button(new Rect(0, nElementIndex*nElementHeight, nElementWidth, nElementHeight), targetIdent.nData64.ToString());
