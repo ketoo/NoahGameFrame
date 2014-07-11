@@ -1,18 +1,17 @@
-<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is a class xml-->
 <XML>
-	<Propertys>
-		<Property Id="EffectType" Type="string" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å½±å“å±žæ€§ç±»åž‹(æ•ˆæžœç±»åž‹)  ç”Ÿå‘½ï¼Œæ³•åŠ›(å¯ç»„åˆ,å åŠ )"/>
-		<Property Id="EffectValueType" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å½±å“å€¼ç±»åž‹ ç™¾åˆ†æ¯” ç»å¯¹å€¼--å¦‚æžœæ˜¯æŽ§åˆ¶å±žæ€§å¼€å…³ï¼Œåˆ™åªèƒ½æ˜¯ç»å¯¹å€¼"/>
-		<Property Id="EffectValueReferType" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å½±å“å€¼å‚è€ƒç±»åž‹"/>
-		<Property Id="EffectTimeValue" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ€»å…±äº§ç”Ÿå‡ æ¬¡"/>
-		<Property Id="EffectTimeInterval" Type="float" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ¯æ¬¡é—´éš”æ—¶é—´0.5få€æ•°"/>
-		<Property Id="WashGroupID" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ¯æ¬¡é—´éš”æ—¶é—´0.5få€æ•°"/>
-		<Property Id="ReverseReferType" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ˜¯å¦è¿˜åŽŸï¼Œä¸è¿˜åŽŸçš„åœ¨è®¡ç®—çš„æ—¶å€™ä¸èƒ½ä¿å­˜åœ¨runTimeInfo,åªèƒ½ç´¯è®¡åœ¨æœ€ç»ˆå€¼å†…"/>
-		<Property Id="EffectClearOnDead" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ­»äº¡æ˜¯å¦æ¸…é™¤"/>
-		<Property Id="DownSaveType" Type="int" Public="false" Private="false" Save="true" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä¸‹çº¿æ˜¯å¦ä¿å­˜"/>
-	</Propertys>
-	<Records>
-	</Records>
-	<Includes>
-	</Includes>
+    <Propertys>
+        <Property Desc="Ó°ÏìÊôÐÔÀàÐÍ(Ð§¹ûÀàÐÍ)  ÉúÃü£¬·¨Á¦(¿É×éºÏ,µþ¼Ó)" Id="EffectType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="string"/>
+        <Property Desc="Ó°ÏìÖµÀàÐÍ °Ù·Ö±È ¾ø¶ÔÖµ--Èç¹ûÊÇ¿ØÖÆÊôÐÔ¿ª¹Ø£¬ÔòÖ»ÄÜÊÇ¾ø¶ÔÖµ" Id="EffectValueType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int"/>
+        <Property Desc="Ó°ÏìÖµ²Î¿¼ÀàÐÍ" Id="EffectValueReferType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int"/>
+        <Property Desc="×Ü¹²²úÉú¼¸´Î" Id="EffectTimeValue" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int"/>
+        <Property Desc="Ã¿´Î¼ä¸ôÊ±¼ä0.5f±¶Êý" Id="EffectTimeInterval" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="float"/>
+        <Property Desc="Ã¿´Î¼ä¸ôÊ±¼ä0.5f±¶Êý" Id="WashGroupID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int"/>
+        <Property Desc="ÊÇ·ñ»¹Ô­£¬²»»¹Ô­µÄÔÚ¼ÆËãµÄÊ±ºò²»ÄÜ±£´æÔÚrunTimeInfo,Ö»ÄÜÀÛ¼ÆÔÚ×îÖÕÖµÄÚ" Id="ReverseReferType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int"/>
+        <Property Desc="ËÀÍöÊÇ·ñÇå³ý" Id="EffectClearOnDead" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int"/>
+        <Property Desc="ÏÂÏßÊÇ·ñ±£´æ" Id="DownSaveType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int"/>
+    </Propertys>
+    <Includes/>
+    <Components/>
 </XML>
