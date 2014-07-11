@@ -1,14 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is a class xml-->
 <XML>
-	<Propertys>
-		<Property Id="Sex" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="NFSexType"/>
-		<Property Id="IntensiveBuffList" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å¼ºåŒ–å¯¹åº”çš„BUFFåˆ—è¡¨ï¼Œæœ€å¤§10æ¬¡å¼ºåŒ–é‚£ä¹ˆå°±9ä¸ªé€—å·éš”å¼€ï¼Œå¯¹åº”10ä¸ªBUFF"/>
-		<Property Id="EnchantmentBuffList" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="é™„é­”å¯¹åº”çš„BUFFåˆ—è¡¨ï¼Œæœ€å¤§10æ¬¡é™„é­”é‚£ä¹ˆå°±9ä¸ªé€—å·éš”å¼€ï¼Œå¯¹åº”10ä¸ªBUFF"/>
-		<Property Id="SuitID" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å¥—è£…ID"/>
-		<Property Id="SuitBuffID" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å¥—è£…BUFFID"/>
-
-	</Propertys>
-	<Records>
-	</Records>
-	<Includes>
-	</Includes>
+    <Propertys>
+        <Property Desc="NFSexType" Id="Sex" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="Ç¿»¯¶ÔÓ¦µÄBUFFÁÐ±í£¬×î´ó10´ÎÇ¿»¯ÄÇÃ´¾Í9¸ö¶ººÅ¸ô¿ª£¬¶ÔÓ¦10¸öBUFF" Id="IntensiveBuffList" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="¸½Ä§¶ÔÓ¦µÄBUFFÁÐ±í£¬×î´ó10´Î¸½Ä§ÄÇÃ´¾Í9¸ö¶ººÅ¸ô¿ª£¬¶ÔÓ¦10¸öBUFF" Id="EnchantmentBuffList" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="Ì××°ID" Id="SuitID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="Ì××°BUFFID" Id="SuitBuffID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+    </Propertys>
+    <Includes/>
+    <Components/>
 </XML>

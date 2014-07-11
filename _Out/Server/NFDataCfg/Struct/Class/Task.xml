@@ -1,19 +1,17 @@
-<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is a class xml-->
 <XML>
-	<Propertys>
-		<Property Id="Type" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä»»åŠ¡ç±»åˆ«"/>
-		<Property Id="NextTaskID" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä¸‹ä¸€ä¸ªä»»åŠ¡ID"/>
-		<Property Id="KillMonsterName" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="è¦æ±‚æ€çš„æ€ªï¼Œé€—å·åˆ†å¼€"/>
-		<Property Id="KillCount" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="è¦æ±‚æ€çš„æ€ªæ•°é‡ï¼Œé€—å·åˆ†å¼€"/>
-		<Property Id="LevelReq" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä»»åŠ¡é™åˆ¶ç­‰çº§"/>
-		<Property Id="AwardExp" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å¥–åŠ±çš„ç»éªŒ"/>
-		<Property Id="AwardGold" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å¥–åŠ±çš„é‡‘å¸"/>
-		<Property Id="AwardPack" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å¥–åŠ±åŒ…"/>
-		<Property Id="Desc" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä»»åŠ¡æè¿°"/>
-		
-	</Propertys>
-	<Records>
-	</Records>
-	<Includes>
-	</Includes>
+    <Propertys>
+        <Property Desc="ÈÎÎñÀà±ð" Id="Type" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="ÏÂÒ»¸öÈÎÎñID" Id="NextTaskID" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="ÒªÇóÉ±µÄ¹Ö£¬¶ººÅ·Ö¿ª" Id="KillMonsterName" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="ÒªÇóÉ±µÄ¹ÖÊýÁ¿£¬¶ººÅ·Ö¿ª" Id="KillCount" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="ÈÎÎñÏÞÖÆµÈ¼¶" Id="LevelReq" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="½±ÀøµÄ¾­Ñé" Id="AwardExp" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="½±ÀøµÄ½ð±Ò" Id="AwardGold" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="½±Àø°ü" Id="AwardPack" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="ÈÎÎñÃèÊö" Id="Desc" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+    </Propertys>
+    <Includes/>
+    <Components/>
 </XML>

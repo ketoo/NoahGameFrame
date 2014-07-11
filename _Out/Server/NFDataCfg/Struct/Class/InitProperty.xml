@@ -1,13 +1,11 @@
-<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is a class xml-->
 <XML>
-	<Propertys>
-		<Property Id="Job" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc=""/>
-		<Property Id="Level" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc=""/>
-		<Property Id="EffectData" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc=""/>
-
-	</Propertys>
-	<Records>
-	</Records>
-	<Includes>
-	</Includes>
+    <Propertys>
+        <Property Desc="" Id="Job" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="" Id="Level" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="" Id="EffectData" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+    </Propertys>
+    <Includes/>
+    <Components/>
 </XML>
