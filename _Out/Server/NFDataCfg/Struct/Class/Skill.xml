@@ -1,44 +1,43 @@
-<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is a class xml-->
 <XML>
-	<Propertys>
-		<Property Id="SkillType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="//æ™®é€š0çŸ­åˆƒç±»//1æ™®é€šå­å¼¹ç±»(ä¸ç©¿é€)//2æ™®é€šå­å¼¹ç±»ç©¿//3æ™®é€šå­å¼¹ç±»å•ä½“ç›®æ ‡èŒƒå›´(æ¯äººå¤´é¡¶é—ªç”µé‚£æ ·)/3æ™®é€šå­å¼¹ç±»çˆ†ç‚¸ç›®æ ‡èŒƒå›´(ç«çŸ›ä»Žå¤©è€Œé™é‚£æ ·position)"/>
-		<Property Id="ClientState" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æŠ€èƒ½å¯¹åº”çš„å®¢æˆ·ç«¯åŠ¨ä½œçŠ¶æ€"/>
-		<Property Id="ShowName" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="è£…å¤‡åå­—å­—ç¬¦ä¸²ç´¢å¼•"/>
-		<Property Id="Desc" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="è£…å¤‡æè¿°å­—ç¬¦ä¸²ç´¢å¼•"/>
-		<Property Id="Job" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="NFJobType"/>
-		<Property Id="ConsumeProperty" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ¶ˆè€—å±žæ€§"/>
-		<Property Id="ConsumeValue" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ¶ˆè€—å€¼"/>
-		<Property Id="ConsumeType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ¶ˆè€—ç±»åž‹ï¼Œ0ä¸ºç»å¯¹å€¼ï¼Œ1ä¸ºå½“å‰å€¼ç™¾åˆ†æ¯”ï¼Œ2ä¸ºæœ€å¤§å€¼ç™¾åˆ†æ¯”"/>
-		<Property Id="DamageProperty" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä¼¤å®³å±žæ€§"/>
-		<Property Id="DamageValue" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä¼¤å®³å€¼"/>
-		<Property Id="DamageType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä¼¤å®³ç±»åž‹ï¼Œ0ä¸ºç»å¯¹å€¼ï¼Œ1ä¸ºå½“å‰å€¼ç™¾åˆ†æ¯”ï¼Œ2ä¸ºæœ€å¤§å€¼ç™¾åˆ†æ¯”"/>
-		<Property Id="GetBuffList" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä½¿ç”¨åŽèŽ·å¾—çš„BUFF"/>
-		<Property Id="SendBuffList" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä½¿ç”¨åŽå¯¹æ–¹èŽ·å¾—çš„BUFF"/>
-		<Property Id="CoolDownTime" Type="float" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä½¿ç”¨å†·å´CD"/>
-		<Property Id="RequireDistance" Type="float" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="é‡Šæ”¾è¦æ±‚ç›®æ ‡è·ç¦»"/>
-		<Property Id="DamageDistance" Type="float" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä¼¤å®³è·ç¦»--ç¾¤ä¼¤éœ€è¦"/>
-		<Property Id="TargetType" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ç›®æ ‡ç±»åˆ«0æ•Œäºº1è‡ªå·±2é˜Ÿå‹"/>
-		<Property Id="FlashDistance" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="çž¬ç§»è·ç¦»"/>
-		<Property Id="NewObject" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="äº§ç”Ÿæ–°çš„å¯¹è±¡--å¬å”¤"/>
-		<Property Id="PerformanceTime" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="3ä¸ªè¿‡ç¨‹éŸ³æ•ˆ--èµ·å§‹ï¼Œé‡Šæ”¾ï¼Œå‘½ä¸­ è¿œç¨‹çš„è¯åˆ™å‘½ä¸­æ—¶é—´ä¸æ˜¯ç®—"/>
-		<Property Id="PerformanceSoundTime" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="3ä¸ªè¿‡ç¨‹éŸ³æ•ˆ--èµ·å§‹ï¼Œé‡Šæ”¾ï¼Œå‘½ä¸­ è¿œç¨‹çš„è¯åˆ™å‘½ä¸­æ—¶é—´ä¸æ˜¯ç®—"/>
-		<Property Id="PerformanceEffectTime" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="3ä¸ªè¿‡ç¨‹éŸ³æ•ˆ--èµ·å§‹ï¼Œé‡Šæ”¾ï¼Œå‘½ä¸­ è¿œç¨‹çš„è¯åˆ™å‘½ä¸­æ—¶é—´ä¸æ˜¯ç®—"/>
-		<Property Id="PerformanceEffect" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="3ä¸ªè¿‡ç¨‹éŸ³æ•ˆ--èµ·å§‹ï¼Œé‡Šæ”¾ï¼Œå‘½ä¸­"/>
-		<Property Id="PerformanceSound" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="3ä¸ªè¿‡ç¨‹éŸ³æ•ˆ--èµ·å§‹ï¼Œé‡Šæ”¾ï¼Œå‘½ä¸­"/>
-		<Property Id="ManSound" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æŠ€èƒ½é‡Šæ”¾ç”·å¼"/>
-		<Property Id="FemanSound" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æŠ€èƒ½é‡Šæ”¾å¥³å¼"/>
-		<Property Id="BeatBackDistance" Type="float" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å‡»é€€è·ç¦»"/>
-		<Property Id="CamShakeArg" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å‘½ä¸­æ—¶æ‘„åƒæœºéœ‡åŠ¨å‚æ•° æ—¶é—´ï¼Œåæ ‡"/>
-		<Property Id="Icon" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ICON"/>
-		<Property Id="Atlas" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å›¾é›†"/>
-		<Property Id="BulletPrefabPath" Type="string" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å­å¼¹é¢„è®¾"/>
-		<Property Id="BulletSpeed" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å­å¼¹é£žè¡Œé€Ÿåº¦(>=100å°±ä¸ºçž¬é—´åˆ°è¾¾)"/>
-		<Property Id="NeedLevel" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å‡çº§éœ€è¦çš„ç­‰çº§"/>
-		<Property Id="ReqLevel" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å¼€æ”¾æŠ€èƒ½éœ€è¦çš„ç­‰çº§"/>
-		<Property Id="PlayerSkill" Type="int" Public="false" Private="false" Save="false" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ˜¯å¦çŽ©å®¶æŠ€èƒ½"/>
-	</Propertys>
-	<Records>
-	</Records>
-	<Includes>
-	</Includes>
+    <Propertys>
+        <Property Desc="//ÆÕÍ¨0¶ÌÈÐÀà//1ÆÕÍ¨×Óµ¯Àà(²»´©Í¸)//2ÆÕÍ¨×Óµ¯Àà´©//3ÆÕÍ¨×Óµ¯Ààµ¥ÌåÄ¿±ê·¶Î§(Ã¿ÈËÍ·¶¥ÉÁµçÄÇÑù)/3ÆÕÍ¨×Óµ¯Àà±¬Õ¨Ä¿±ê·¶Î§(»ðÃ¬´ÓÌì¶ø½µÄÇÑùposition)" Id="SkillType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="¼¼ÄÜ¶ÔÓ¦µÄ¿Í»§¶Ë¶¯×÷×´Ì¬" Id="ClientState" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="×°±¸Ãû×Ö×Ö·û´®Ë÷Òý" Id="ShowName" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="×°±¸ÃèÊö×Ö·û´®Ë÷Òý" Id="Desc" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="NFJobType" Id="Job" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="ÏûºÄÊôÐÔ" Id="ConsumeProperty" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="ÏûºÄÖµ" Id="ConsumeValue" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="ÏûºÄÀàÐÍ£¬0Îª¾ø¶ÔÖµ£¬1Îªµ±Ç°Öµ°Ù·Ö±È£¬2Îª×î´óÖµ°Ù·Ö±È" Id="ConsumeType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="ÉËº¦ÊôÐÔ" Id="DamageProperty" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="ÉËº¦Öµ" Id="DamageValue" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="ÉËº¦ÀàÐÍ£¬0Îª¾ø¶ÔÖµ£¬1Îªµ±Ç°Öµ°Ù·Ö±È£¬2Îª×î´óÖµ°Ù·Ö±È" Id="DamageType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="Ê¹ÓÃºó»ñµÃµÄBUFF" Id="GetBuffList" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="Ê¹ÓÃºó¶Ô·½»ñµÃµÄBUFF" Id="SendBuffList" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="Ê¹ÓÃÀäÈ´CD" Id="CoolDownTime" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float"/>
+        <Property Desc="ÊÍ·ÅÒªÇóÄ¿±ê¾àÀë" Id="RequireDistance" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float"/>
+        <Property Desc="ÉËº¦¾àÀë--ÈºÉËÐèÒª" Id="DamageDistance" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float"/>
+        <Property Desc="Ä¿±êÀà±ð0µÐÈË1×Ô¼º2¶ÓÓÑ" Id="TargetType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="Ë²ÒÆ¾àÀë" Id="FlashDistance" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="²úÉúÐÂµÄ¶ÔÏó--ÕÙ»½" Id="NewObject" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="3¸ö¹ý³ÌÒôÐ§--ÆðÊ¼£¬ÊÍ·Å£¬ÃüÖÐ Ô¶³ÌµÄ»°ÔòÃüÖÐÊ±¼ä²»ÊÇËã" Id="PerformanceTime" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="3¸ö¹ý³ÌÒôÐ§--ÆðÊ¼£¬ÊÍ·Å£¬ÃüÖÐ Ô¶³ÌµÄ»°ÔòÃüÖÐÊ±¼ä²»ÊÇËã" Id="PerformanceSoundTime" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="3¸ö¹ý³ÌÒôÐ§--ÆðÊ¼£¬ÊÍ·Å£¬ÃüÖÐ Ô¶³ÌµÄ»°ÔòÃüÖÐÊ±¼ä²»ÊÇËã" Id="PerformanceEffectTime" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="3¸ö¹ý³ÌÒôÐ§--ÆðÊ¼£¬ÊÍ·Å£¬ÃüÖÐ" Id="PerformanceEffect" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="3¸ö¹ý³ÌÒôÐ§--ÆðÊ¼£¬ÊÍ·Å£¬ÃüÖÐ" Id="PerformanceSound" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="¼¼ÄÜÊÍ·ÅÄÐºð" Id="ManSound" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="¼¼ÄÜÊÍ·ÅÅ®ºð" Id="FemanSound" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="»÷ÍË¾àÀë" Id="BeatBackDistance" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float"/>
+        <Property Desc="ÃüÖÐÊ±ÉãÏñ»úÕð¶¯²ÎÊý Ê±¼ä£¬×ø±ê" Id="CamShakeArg" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="ICON" Id="Icon" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="Í¼¼¯" Id="Atlas" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="×Óµ¯Ô¤Éè" Id="BulletPrefabPath" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="×Óµ¯·ÉÐÐËÙ¶È(&gt;=100¾ÍÎªË²¼äµ½´ï)" Id="BulletSpeed" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="Éý¼¶ÐèÒªµÄµÈ¼¶" Id="NeedLevel" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="¿ª·Å¼¼ÄÜÐèÒªµÄµÈ¼¶" Id="ReqLevel" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="ÊÇ·ñÍæ¼Ò¼¼ÄÜ" Id="PlayerSkill" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+    </Propertys>
+    <Includes/>
+    <Components/>
 </XML>
