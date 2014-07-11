@@ -114,6 +114,9 @@ int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
         break;
     case NFMsg::EGameMsgID::EGMI_REQ_RECOVER_ROLE:
         break;
+    case NFMsg::EGameMsgID::EGMI_REQ_SWAP_SCENE:
+        OnClienSwapSceneProcess(msg);
+         break;
     default:
         break;
     }
@@ -229,10 +232,10 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
 
     BaseData* pDataBase = new BaseData();
     mRoleBaseData.AddElement(ident, pDataBase);
+    mRoleFDData.AddElement(nPlayerID, new NFIDENTID(ident));
 
     pDataBase->nGateID = nGateID;
     pDataBase->nFD = nPlayerID;
-
 
     int nSceneID = 1;
     NFCValueList var;
@@ -243,6 +246,9 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
     NFIObject* pObject = m_pKernelModule->CreateObject(ident, nSceneID, 0, "Player", "",  var);
     if ( NULL == pObject )
     {
+        //内存泄漏
+        //mRoleBaseData
+        //mRoleFDData
         return;
     }
 
@@ -271,7 +277,12 @@ void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess( const NFIPacket& ms
         return;
     }
 
-    m_pKernelModule->DestroyObject(nPlayerID);
+    NFIDENTID* pIdent = mRoleFDData.RemoveElement(nPlayerID);
+    if (pIdent)
+    {
+        m_pKernelModule->DestroyObject(*pIdent);
+    }
+
 }
 
 int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDENTID& self, const NFIValueList& argVar )
@@ -435,6 +446,94 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDENTID& self, const
     return 0;
 }
 
+bool OnRecordEnterPack(NFIRecord* pRecord, NFMsg::ObjectRecordBase* pObjectRecordBase)
+{
+    if (!pRecord || !pObjectRecordBase)
+    {
+        return false;
+    }
+
+    for ( int i = 0; i < pRecord->GetRows(); i ++ )
+    {
+        if ( pRecord->IsUsed( i ) )
+        {
+            //不管public还是private都要加上，不然public广播了那不是private就广播不了了
+            NFMsg::RecordAddRowStruct* pAddRowStruct = pObjectRecordBase->add_row_struct();
+            pAddRowStruct->set_row( i );
+
+            for ( int j = 0; j < pRecord->GetCols(); j++ )
+            {
+                //如果是0就不发送了，因为客户端默认是0
+                NFCValueList valueList;
+                VARIANT_TYPE eType = pRecord->GetColType( j );
+                switch ( eType )
+                {
+                case VARIANT_TYPE::VTYPE_INT:
+                    {
+                        int nValue = pRecord->QueryInt( i, j );
+                        //if ( 0 != nValue )
+                        {
+                            NFMsg::RecordInt* pRecordInt = pAddRowStruct->add_record_int_list();
+                            pRecordInt->set_row( i );
+                            pRecordInt->set_col( j );
+                            pRecordInt->set_data( nValue );
+                        }
+                    }
+                    break;
+                case VARIANT_TYPE::VTYPE_DOUBLE:
+                    {
+                        double dwValue = pRecord->QueryDouble( i, j );
+                        //if ( dwValue < -0.01f || dwValue > 0.01f )
+                        {
+                            NFMsg::RecordFloat* pAddData = pAddRowStruct->add_record_float_list();
+                            pAddData->set_col( j );
+                            pAddData->set_data( dwValue );
+                        }
+                    }
+                    break;
+                case VARIANT_TYPE::VTYPE_FLOAT:
+                    {
+                        float fValue = pRecord->QueryFloat( i, j );
+                        //if ( fValue < -0.01f || fValue > 0.01f )
+                        {
+                            NFMsg::RecordFloat* pAddData = pAddRowStruct->add_record_float_list();
+                            pAddData->set_col( j );
+                            pAddData->set_data( fValue );
+                        }
+                    }
+                    break;
+                case VARIANT_TYPE::VTYPE_STRING:
+                    {
+                        const std::string& strData = pRecord->QueryString( i, j );
+                        //if ( !strData.empty() )
+                        {
+                            NFMsg::RecordString* pAddData = pAddRowStruct->add_record_string_list();
+                            pAddData->set_col( j );
+                            pAddData->set_data( strData );
+                        }
+                    }
+                    break;
+                case VARIANT_TYPE::VTYPE_OBJECT:
+                    {
+                        NFIDENTID ident = pRecord->QueryObject( i, j );
+                        //if ( !ident.IsNull() )
+                        {
+                            NFMsg::RecordObject* pAddData = pAddRowStruct->add_record_object_list();
+                            pAddData->set_col( j );
+                            pAddData->set_data( ident.nData64 );
+                        }
+                    }
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+    }
+
+    return true;
+}
+
 int NFCGameServerNet_ServerModule::OnRecordEnter( const NFIDENTID& self, const NFIValueList& argVar )
 {
     if ( argVar.GetCount() <= 0 || self.IsNull() )
@@ -461,7 +560,8 @@ int NFCGameServerNet_ServerModule::OnRecordEnter( const NFIDENTID& self, const N
                 continue;
             }
 
-            NFMsg::ObjectRecordBase* pRecordBase = NULL;
+            NFMsg::ObjectRecordBase* pPrivateRecordBase = NULL;
+            NFMsg::ObjectRecordBase* pPublicRecordBase = NULL;
             if (pRecord->GetPublic())
             {
                 if (!pPublicData)
@@ -469,7 +569,10 @@ int NFCGameServerNet_ServerModule::OnRecordEnter( const NFIDENTID& self, const N
                     pPublicData = xPublicMsg.add_multi_player_record();
                     pPublicData->set_player_id(self.nData64);
                 }
-                pRecordBase = pPublicData->add_record_list();
+                pPublicRecordBase = pPublicData->add_record_list();
+                pPublicRecordBase->set_record_name(pRecord->GetName());
+
+                OnRecordEnterPack(pRecord, pPublicRecordBase);
             }
 
             if (pRecord->GetPrivate())
@@ -479,95 +582,10 @@ int NFCGameServerNet_ServerModule::OnRecordEnter( const NFIDENTID& self, const N
                     pPrivateData = xPrivateMsg.add_multi_player_record();
                     pPrivateData->set_player_id(self.nData64);
                 }
-                pRecordBase = pPrivateData->add_record_list();
-            }
+                pPrivateRecordBase = pPrivateData->add_record_list();
+                pPrivateRecordBase->set_record_name(pRecord->GetName());
 
-            if (!pRecordBase)
-            {
-                pRecord = pRecordManager->Next();
-                continue;
-            }
-
-            pRecordBase->set_record_name(pRecord->GetName());
-
-            printf("Record::::    %s", pRecord->GetName().c_str());
-
-            //add row 需要完整的row
-            for ( int i = 0; i < pRecord->GetRows(); i ++ )
-            {
-                if ( pRecord->IsUsed( i ) )
-                {
-                    NFMsg::RecordAddRowStruct* pAddRowStruct = pRecordBase->add_row_struct();
-                    pAddRowStruct->set_row( i );
-
-                    for ( int j = 0; j < pRecord->GetCols(); j++ )
-                    {
-                        //如果是0就不发送了，因为客户端默认是0
-                        NFCValueList valueList;
-                        VARIANT_TYPE eType = pRecord->GetColType( j );
-                        switch ( eType )
-                        {
-                        case VARIANT_TYPE::VTYPE_INT:
-                            {
-                                int nValue = pRecord->QueryInt( i, j );
-                                //if ( 0 != nValue )
-                                {
-                                    NFMsg::RecordInt* pRecordInt = pAddRowStruct->add_record_int_list();
-                                    pRecordInt->set_row( i );
-                                    pRecordInt->set_col( j );
-                                    pRecordInt->set_data( nValue );
-                                }
-                            }
-                            break;
-                        case VARIANT_TYPE::VTYPE_DOUBLE:
-                            {
-                                double dwValue = pRecord->QueryDouble( i, j );
-                                //if ( dwValue < -0.01f || dwValue > 0.01f )
-                                {
-                                    NFMsg::RecordFloat* pAddData = pAddRowStruct->add_record_float_list();
-                                    pAddData->set_col( j );
-                                    pAddData->set_data( dwValue );
-                                }
-                            }
-                            break;
-                        case VARIANT_TYPE::VTYPE_FLOAT:
-                            {
-                                float fValue = pRecord->QueryFloat( i, j );
-                                //if ( fValue < -0.01f || fValue > 0.01f )
-                                {
-                                    NFMsg::RecordFloat* pAddData = pAddRowStruct->add_record_float_list();
-                                    pAddData->set_col( j );
-                                    pAddData->set_data( fValue );
-                                }
-                            }
-                            break;
-                        case VARIANT_TYPE::VTYPE_STRING:
-                            {
-                                const std::string& strData = pRecord->QueryString( i, j );
-                                //if ( !strData.empty() )
-                                {
-                                    NFMsg::RecordString* pAddData = pAddRowStruct->add_record_string_list();
-                                    pAddData->set_col( j );
-                                    pAddData->set_data( strData );
-                                }
-                            }
-                            break;
-                        case VARIANT_TYPE::VTYPE_OBJECT:
-                            {
-                                NFIDENTID ident = pRecord->QueryObject( i, j );
-                                //if ( !ident.IsNull() )
-                                {
-                                    NFMsg::RecordObject* pAddData = pAddRowStruct->add_record_object_list();
-                                    pAddData->set_col( j );
-                                    pAddData->set_data( ident.nData64 );
-                                }
-                            }
-                            break;
-                        default:
-                            break;
-                        }
-                    }
-                }
+                OnRecordEnterPack(pRecord, pPrivateRecordBase);
             }
 
             pRecord = pRecordManager->Next();
@@ -579,27 +597,35 @@ int NFCGameServerNet_ServerModule::OnRecordEnter( const NFIDENTID& self, const N
             NFIDENTID identOther = argVar.ObjectVal( i );
             if ( self == identOther )
             {
-                //找到他所在网关的FD
-                BaseData* pData = mRoleBaseData.GetElement(identOther);
-                if (pData)
+                if (xPrivateMsg.multi_player_record_size() > 0)
                 {
-                    ServerData* pProxyData = mProxyMap.GetElement(pData->nGateID);
-                    if (pProxyData)
+                    //如果是自己，那么只广播私有的，但是如果私有的没数据呢
+                    //找到他所在网关的FD
+                    BaseData* pData = mRoleBaseData.GetElement(identOther);
+                    if (pData)
                     {
-                        SendMsgPB(NFMsg::EGMI_ACK_OBJECT_RECORD_ENTRY, xPrivateMsg, pProxyData->nFD, pData->nFD);
+                        ServerData* pProxyData = mProxyMap.GetElement(pData->nGateID);
+                        if (pProxyData)
+                        {
+                            SendMsgPB(NFMsg::EGMI_ACK_OBJECT_RECORD_ENTRY, xPrivateMsg, pProxyData->nFD, pData->nFD);
 
+                        }
                     }
                 }
             }
             else
             {
-                BaseData* pData = mRoleBaseData.GetElement(identOther);
-                if (pData)
+                if (xPublicMsg.multi_player_record_size() > 0)
                 {
-                    ServerData* pProxyData = mProxyMap.GetElement(pData->nGateID);
-                    if (pProxyData)
+                    //如果不是自己，那么广播公有的，但是如果公有的没数据呢
+                    BaseData* pData = mRoleBaseData.GetElement(identOther);
+                    if (pData)
                     {
-                        SendMsgPB(NFMsg::EGMI_ACK_OBJECT_RECORD_ENTRY, xPublicMsg, pProxyData->nFD, pData->nFD);
+                        ServerData* pProxyData = mProxyMap.GetElement(pData->nGateID);
+                        if (pProxyData)
+                        {
+                            SendMsgPB(NFMsg::EGMI_ACK_OBJECT_RECORD_ENTRY, xPublicMsg, pProxyData->nFD, pData->nFD);
+                        }
                     }
                 }
             }
@@ -1729,7 +1755,24 @@ void NFCGameServerNet_ServerModule::OnDeleteRoleGameProcess( const NFIPacket& ms
 
 void NFCGameServerNet_ServerModule::OnClienSwapSceneProcess( const NFIPacket& msg )
 {
+    int64_t nPlayerID = 0;
+    NFMsg::ReqAckSwapScene xMsg;
+    if (!RecivePB(msg, xMsg, nPlayerID))
+    {
+        return;
+    }
 
+    NFIDENTID* pIdent = mRoleFDData.RemoveElement(nPlayerID);
+    if (pIdent)
+    {
+        NFCValueList var;
+        var << *pIdent;
+        var << xMsg.transfer_type();
+        var << xMsg.scene_id();
+        var << xMsg.line_id();
+
+        m_pEventProcessModule->DoEvent( *pIdent, NFED_ON_CLIENT_ENTER_SCENE, var );
+    }
 }
 
 void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
