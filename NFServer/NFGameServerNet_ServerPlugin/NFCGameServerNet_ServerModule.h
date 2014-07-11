@@ -161,7 +161,7 @@ private:
     //<角色id,角色基础信息>
     NFMap<NFIDENTID, BaseData> mRoleBaseData;
     //<角色fd(在网关),角色id>
-    std::map<int, NFIDENTID> mRoleFDData;
+    NFMap<int, NFIDENTID> mRoleFDData;
     //临时保存角色是否已经等待创建的状态<角色名，fd>
     NFMap<std::string, int> mRoleState;
 
