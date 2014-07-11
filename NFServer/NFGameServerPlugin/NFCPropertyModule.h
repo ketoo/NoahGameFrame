@@ -37,8 +37,6 @@ public:
 
     virtual int GetPropertyValue( const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType );
     virtual int SetPropertyValue( const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue );
-    virtual int GetPropertyValue( const NFIDENTID& self, const NFIPropertyConfigModule::NFRumTimeColIndex nCol, const NFPropertyGroup eGroupType );
-    virtual int SetPropertyValue( const NFIDENTID& self, const NFIPropertyConfigModule::NFRumTimeColIndex nCol, const NFPropertyGroup eGroupType, const int nValue );
 
     virtual int AddPropertyValue( const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue );
     virtual int SubPropertyValue( const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue );
@@ -83,13 +81,6 @@ private:
     NFIPropertyConfigModule* m_pPropertyConfigModule;
     NFIElementInfoModule* m_pElementInfoModule;
     NFILogicClassModule* m_pLogicClassModule;
-
-    NFMap<std::string, int>  mPropertyColList; //主要是运行时表property->col那里
-    NFMap<int, std::string>  mColPropertyList; //主要是运行时表col->property
-
-
-    //     char* mstrPropertyName[(int)NFPropertyColIndex::PROPERTY_MAX];
-    //char* mstrRumTimeTableIndex[(int)NFRumTimeColIndex::NFRTC_END];
 };
 
 
