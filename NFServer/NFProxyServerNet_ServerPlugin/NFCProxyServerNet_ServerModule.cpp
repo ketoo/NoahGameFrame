@@ -181,7 +181,39 @@ int NFCProxyServerNet_ServerModule::OnSocketEvent( const int nSockIndex, const N
 
 void NFCProxyServerNet_ServerModule::OnClientDisconnect( const int nAddress )
 {
+    NetObject* pNetObject = this->GetNet()->GetNetObject(nAddress);
+    if (pNetObject)
+    {
+        int nUserData = pNetObject->GetUserData();
+        if (nUserData > 0)
+        {
+            //掉线
+            NFMsg::ReqLeaveGameServer xData;
 
+            NFCPacket msg(this->GetNet()->GetHeadLen());
+            NFMsg::MsgBase xMsg;
+            if (!xData.SerializeToString(xMsg.mutable_msg_data()))
+            {
+                return;
+            }
+
+            //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
+            xMsg.set_player_id(nAddress);
+
+            std::string strMsg;
+            if(!xMsg.SerializeToString(&strMsg))
+            {
+                return;
+            }
+
+            if(!msg.EnCode(NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GAME, strMsg.c_str(), strMsg.length()))
+            {
+                return;
+            }
+
+            m_pProxyServerNet_ClientModule->Transpond(nUserData, msg);
+        }
+    }
 }
 
 int NFCProxyServerNet_ServerModule::OnTranspondProcess( const NFIPacket& msg )
