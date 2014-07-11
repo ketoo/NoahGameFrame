@@ -44,46 +44,22 @@ bool NFCPropertyModule::Execute( const float fLasFrametime, const float fStarted
 
 bool NFCPropertyModule::AfterInit()
 {
-    //做好动态表ID和属性名的映射,得到表的描述
-    NFIRecordManager* pRecordMmanager = m_pLogicClassModule->GetClassRecordManager( "Player" );
-    NFIRecord* pRecord = pRecordMmanager->GetElement( mstrCommPropertyName );
-    const NFIValueList& descList = pRecord->GetInitDesc();
-
-    for ( int i = 0; i < descList.GetCount(); i++ )
-    {
-        const std::string& strPropertyName = descList.StringVal( i );
-        int* pCol = new int( i );
-        mPropertyColList.AddElement( strPropertyName, pCol );
-        mColPropertyList.AddElement( *pCol, new std::string( strPropertyName ) );
-    }
-
     return true;
 }
 
 int NFCPropertyModule::GetPropertyValue( const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType )
 {
-    int* pTableCol = mPropertyColList.GetElement( strPropertyName );
-    if ( pTableCol && NFPropertyGroup::NPG_ALL != eGroupType )
+    if ( NFPropertyGroup::NPG_ALL != eGroupType )
     {
-        return m_pKernelModule->QueryRecordInt( self, mstrCommPropertyName, eGroupType, *pTableCol );
+        return m_pKernelModule->QueryRecordInt( self, mstrCommPropertyName, eGroupType, "strPropertyName" );
     }
 
     return m_pKernelModule->QueryPropertyInt( self, mstrCommPropertyName );
 }
 
-int NFCPropertyModule::GetPropertyValue( const NFIDENTID& self, const NFIPropertyConfigModule::NFRumTimeColIndex nCol, const NFPropertyGroup eGroupType )
-{
-    if ( NFPropertyGroup::NPG_ALL != eGroupType )
-    {
-        return m_pKernelModule->QueryRecordInt( self, mstrCommPropertyName, eGroupType, nCol );
-    }
-    return 0;
-}
-
 int NFCPropertyModule::SetPropertyValue( const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue )
 {
-    int* pTableCol = mPropertyColList.GetElement( strPropertyName );
-    if ( pTableCol && NFPropertyGroup::NPG_ALL != eGroupType )
+    if ( NFPropertyGroup::NPG_ALL != eGroupType )
     {
         NFIObject* pObject = m_pKernelModule->GetObject(self);
         if (pObject)
@@ -92,7 +68,7 @@ int NFCPropertyModule::SetPropertyValue( const NFIDENTID& self, const std::strin
             if (pRecord)
             {
                 pRecord->SetUsed(eGroupType, true);
-                return pRecord->SetInt( eGroupType, *pTableCol, nValue );
+                return pRecord->SetInt( eGroupType, strPropertyName, nValue );
             }
         }
 
@@ -105,7 +81,8 @@ int NFCPropertyModule::SetPropertyValue( const NFIDENTID& self, const std::strin
     return 0;
 }
 
-int NFCPropertyModule::SetPropertyValue( const NFIDENTID& self, const NFIPropertyConfigModule::NFRumTimeColIndex nCol, const NFPropertyGroup eGroupType, const int nValue )
+
+int NFCPropertyModule::AddPropertyValue( const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue )
 {
     if ( NFPropertyGroup::NPG_ALL != eGroupType )
     {
@@ -116,29 +93,9 @@ int NFCPropertyModule::SetPropertyValue( const NFIDENTID& self, const NFIPropert
             if (pRecord)
             {
                 pRecord->SetUsed(eGroupType, true);
-                return pRecord->SetInt( eGroupType, nCol, nValue );
-            }
-        }
-    }
+                int nPropertyValue = pRecord->QueryInt(eGroupType, strPropertyName );
 
-    return 0;
-}
-
-int NFCPropertyModule::AddPropertyValue( const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue )
-{
-    int* pTableCol = mPropertyColList.GetElement( strPropertyName );
-    if ( pTableCol && NFPropertyGroup::NPG_ALL != eGroupType )
-    {
-        NFIObject* pObject = m_pKernelModule->GetObject(self);
-        if (pObject)
-        {
-            NFIRecord* pRecord = pObject->GetRecordManager()->GetElement(mstrCommPropertyName);
-            if (pRecord)
-            {
-                pRecord->SetUsed(eGroupType, true);
-                int nPropertyValue = pRecord->QueryInt(eGroupType, *pTableCol );
-
-                return pRecord->SetInt( eGroupType, *pTableCol, nPropertyValue + nValue );
+                return pRecord->SetInt( eGroupType, strPropertyName, nPropertyValue + nValue );
             }
         }
     }
@@ -148,8 +105,7 @@ int NFCPropertyModule::AddPropertyValue( const NFIDENTID& self, const std::strin
 
 int NFCPropertyModule::SubPropertyValue( const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue )
 {
-    int* pTableCol = mPropertyColList.GetElement( strPropertyName );
-    if ( pTableCol && NFPropertyGroup::NPG_ALL != eGroupType )
+    if ( NFPropertyGroup::NPG_ALL != eGroupType )
     {
         NFIObject* pObject = m_pKernelModule->GetObject(self);
         if (pObject)
@@ -158,9 +114,9 @@ int NFCPropertyModule::SubPropertyValue( const NFIDENTID& self, const std::strin
             if (pRecord)
             {
                 pRecord->SetUsed(eGroupType, true);
-                int nPropertyValue = pRecord->QueryInt(eGroupType, *pTableCol );
+                int nPropertyValue = pRecord->QueryInt(eGroupType, strPropertyName );
 
-                return pRecord->SetInt( eGroupType, *pTableCol, nPropertyValue - nValue );
+                return pRecord->SetInt( eGroupType, strPropertyName, nPropertyValue - nValue );
             }
         }
     }
@@ -190,8 +146,7 @@ int NFCPropertyModule::OnRecordPropertyEvent( const NFIDENTID& self, const std::
     //row 分层
 
     int nAllValue = 0;
-    NFIObject* pObject = m_pKernelModule->GetObject( self );
-    NFIRecord* pRecord = pObject->GetRecordManager()->GetElement( mstrCommPropertyName );
+    NFIRecord* pRecord = m_pKernelModule->FindRecord(self, mstrCommPropertyName);
     for ( int i = 0; i < ( int )( NFPropertyGroup::NPG_ALL ); i++ )
     {
         if ( i < pRecord->GetRows() )
@@ -201,12 +156,7 @@ int NFCPropertyModule::OnRecordPropertyEvent( const NFIDENTID& self, const std::
         }
     }
 
-    std::string* strProperty = mColPropertyList.GetElement( nCol );
-    if ( strProperty )
-    {
-        pObject->SetPropertyInt( ( *strProperty ).c_str(), nAllValue );
-    }
-
+    m_pKernelModule->SetPropertyInt( self, pRecord->GetColTag(nCol), nAllValue );
 
     return 0;
 }
@@ -230,12 +180,8 @@ int NFCPropertyModule::OnObjectClassEvent( const NFIDENTID& self, const std::str
             if ( nOnlineCount <= 0 && m_pKernelModule->QueryPropertyInt( self, "SceneID" ) > 0 )
             {
                 //第一次出生，设置基础属性
-                RefreshBaseProperty( self );
+                m_pKernelModule->SetPropertyInt( self, "Level", 1 );
             }
-
-            //上线后满状态
-            FullHPMP( self );
-            FullSP(self);
         }
         else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
         {
@@ -252,11 +198,13 @@ int NFCPropertyModule::RefreshBaseProperty( const NFIDENTID& self )
     NFJobType eJobType = ( NFJobType )m_pKernelModule->QueryPropertyInt( self, "Job" );
     int nLevel = m_pKernelModule->QueryPropertyInt( self, "Level" );
 
-    for ( int i = 0; i < NFIPropertyConfigModule::NFRumTimeColIndex::NFRTC_END; ++i )
+    
+    NFIRecord* pRecord = m_pKernelModule->FindRecord(self, mstrCommPropertyName);
+    for ( int i = 0; i < pRecord->GetCols(); ++i )
     {
-        std::string* strPropertyName = mColPropertyList.GetElement( i );
-        int nValue = m_pPropertyConfigModule->CalculateBaseValue( eJobType, nLevel, *strPropertyName );
-        SetPropertyValue( self, ( NFIPropertyConfigModule::NFRumTimeColIndex )i, NFPropertyGroup::NPG_JOBLEVEL, nValue );
+        const std::string& strColTag = pRecord->GetColTag(i);
+        int nValue = m_pPropertyConfigModule->CalculateBaseValue( eJobType, nLevel, strColTag );
+        SetPropertyValue( self, strColTag, NFPropertyGroup::NPG_JOBLEVEL, nValue );
     }
 
     return 1;
