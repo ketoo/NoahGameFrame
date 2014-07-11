@@ -1,7 +1,7 @@
 <XML>
-  <Object ID="InitProperty1"  Job="0" Level="1"   EffectData="" />
-  <Object ID="InitProperty2"  Job="0" Level="2"   EffectData="" />
-  <Object ID="InitProperty3"  Job="0" Level="3"   EffectData="" />
+  <Object ID="InitProperty1"  Job="0" Level="1"   EffectData="PlayerAtt1" />
+  <Object ID="InitProperty2"  Job="0" Level="2"   EffectData="PlayerAtt2" />
+  <Object ID="InitProperty3"  Job="0" Level="3"   EffectData="PlayerAtt3" />
   <Object ID="InitProperty4"  Job="0" Level="4"   EffectData="" />
   <Object ID="InitProperty5"  Job="0" Level="5"   EffectData="" />
   <Object ID="InitProperty6"  Job="0" Level="6"   EffectData="" />
