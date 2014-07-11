@@ -257,7 +257,7 @@ public class NFStart : MonoBehaviour
         }
         else if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_WAITING_PLAYER_TO_GATE)
         {
-            GUI.Label(new Rect(25, 50, 150, 50), "正在连接网关...");
+            GUI.Label(new Rect(25, 50, 150, 50), "key到手，正在尝试连接网关...");
 
             string strWorpdIP = netFocus.strWorldIP;
             string strWorpdKey = netFocus.strKey;
@@ -270,14 +270,16 @@ public class NFStart : MonoBehaviour
             netFocus.strAccount = strAccount;
             netFocus.nWorldPort = nPort;
 
+            netFocus.mPlayerState = NFNet.PLAYER_STATE.E_START_CONNECT_TO_GATE;
             netFocus.StartConnect(netFocus.strWorldIP, nPort);
+            netFocus.listener.InitLog();
         }
         else if (netFocus.mPlayerState == NFNet.PLAYER_STATE.E_HAS_PLAYER_GATE)
         {
             GUI.Label(new Rect(25, 50, 150, 50), "已成功连接网关...等待验证key...");
 
             netFocus.sendLogic.RequireVerifyWorldKey(netFocus.strAccount, netFocus.strKey);
-            //netFocus.mPlayerState = NFNet.PLAYER_STATE.E_WATING_VERIFY;
+            netFocus.mPlayerState = NFNet.PLAYER_STATE.E_WATING_VERIFY;
         }
     }
 
