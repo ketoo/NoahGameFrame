@@ -117,11 +117,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFPythonScriptPlugin", "NFC
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial6Plugin", "Tutorial\Tutorial6\Tutorial6.vcxproj", "{40EB8091-2F23-43C7-A339-2CD64FBADEA8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua", "Dependencies\lua-5.1\win\lua\lua\lua.vcxproj", "{62DAEB9D-66AE-4B69-8284-8A34C5AFBCE8}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Luabind", "Dependencies\luabind-0.9.1\win\Luabind\Luabind\Luabind.vcxproj", "{292476FF-A75F-4A78-AECA-676D4A58963A}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFJavaScriptPlugin", "NFComm\NFJavaScriptPlugin\NFJavaScriptPlugin.vcxproj", "{CBEAC608-1168-4940-BA94-26001A2D00A3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua", "Dependencies\lua-5.1\win\lua.vcxproj", "{62DAEB9D-66AE-4B69-8284-8A34C5AFBCE8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luabind", "Dependencies\luabind-0.9.1\win\luabind.vcxproj", "{292476FF-A75F-4A78-AECA-676D4A58963A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -355,6 +355,12 @@ Global
 		{40EB8091-2F23-43C7-A339-2CD64FBADEA8}.Release|Win32.ActiveCfg = Release|x64
 		{40EB8091-2F23-43C7-A339-2CD64FBADEA8}.Release|x64.ActiveCfg = Release|x64
 		{40EB8091-2F23-43C7-A339-2CD64FBADEA8}.Release|x64.Build.0 = Release|x64
+		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Debug|Win32.ActiveCfg = Debug|x64
+		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Debug|x64.ActiveCfg = Debug|x64
+		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Debug|x64.Build.0 = Debug|x64
+		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Release|Win32.ActiveCfg = Release|x64
+		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Release|x64.ActiveCfg = Release|x64
+		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Release|x64.Build.0 = Release|x64
 		{62DAEB9D-66AE-4B69-8284-8A34C5AFBCE8}.Debug|Win32.ActiveCfg = Debug|Win32
 		{62DAEB9D-66AE-4B69-8284-8A34C5AFBCE8}.Debug|Win32.Build.0 = Debug|Win32
 		{62DAEB9D-66AE-4B69-8284-8A34C5AFBCE8}.Debug|x64.ActiveCfg = Debug|x64
@@ -371,12 +377,6 @@ Global
 		{292476FF-A75F-4A78-AECA-676D4A58963A}.Release|Win32.Build.0 = Release|Win32
 		{292476FF-A75F-4A78-AECA-676D4A58963A}.Release|x64.ActiveCfg = Release|x64
 		{292476FF-A75F-4A78-AECA-676D4A58963A}.Release|x64.Build.0 = Release|x64
-		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Debug|Win32.ActiveCfg = Debug|x64
-		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Debug|x64.ActiveCfg = Debug|x64
-		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Debug|x64.Build.0 = Debug|x64
-		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Release|Win32.ActiveCfg = Release|x64
-		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Release|x64.ActiveCfg = Release|x64
-		{CBEAC608-1168-4940-BA94-26001A2D00A3}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
