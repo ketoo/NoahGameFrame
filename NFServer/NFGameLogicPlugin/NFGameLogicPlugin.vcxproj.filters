@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="NFBuffModule">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="NFItemModule">
+      <UniqueIdentifier>{aca86d9b-804f-493c-99f8-fbaa0a951d79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NFSkillModule">
+      <UniqueIdentifier>{64e4498b-a722-4265-83c7-878f6081a67f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NFPackModule">
+      <UniqueIdentifier>{c6ede39e-606e-4c1c-af62-bd5348fb7990}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NFCGameLogicModule.h" />
+    <ClInclude Include="NFCBuffModule.h">
+      <Filter>NFBuffModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCSkillModule.h">
+      <Filter>NFSkillModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCItemModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCPackModule.h">
+      <Filter>NFPackModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCItemConsumeManagerModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCSkillConsumeManagerModule.h">
+      <Filter>NFSkillModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCBriefSkillConsumeProcessModule.h">
+      <Filter>NFSkillModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCBulletSkillConsumeProcessModule.h">
+      <Filter>NFSkillModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCCardItemConsumeProcessModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCPotionItemConsumeProcessModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCRebornItemConsumeProcessModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFGameLogicPlugin.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="NFCGameLogicModule.cpp" />
+    <ClCompile Include="NFCBuffModule.cpp">
+      <Filter>NFBuffModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCSkillModule.cpp">
+      <Filter>NFSkillModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCItemModule.cpp">
+      <Filter>NFItemModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCPackModule.cpp">
+      <Filter>NFPackModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCItemConsumeManagerModule.cpp">
+      <Filter>NFItemModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCSkillConsumeManagerModule.cpp">
+      <Filter>NFSkillModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCBriefSkillConsumeProcessModule.cpp">
+      <Filter>NFSkillModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCBulletSkillConsumeProcessModule.cpp">
+      <Filter>NFSkillModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCCardItemConsumeProcessModule.cpp">
+      <Filter>NFItemModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCPotionItemConsumeProcessModule.cpp">
+      <Filter>NFItemModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCRebornItemConsumeProcessModule.cpp">
+      <Filter>NFItemModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFGameLogicPlugin.cpp" />
+  </ItemGroup>
+</Project>
