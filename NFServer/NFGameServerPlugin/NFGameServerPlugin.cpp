@@ -9,7 +9,7 @@
 
 ////#include "stdafx.h"
 #include "NFGameServerPlugin.h"
-#include "NFCGameLogicModule.h"
+#include "NFCGameServerModule.h"
 #include "NFCSceneProcessModule.h"
 #include "NFCPropertyModule.h"
 #include "NFCLevelModule.h"
@@ -47,7 +47,7 @@ const std::string NFGameServerPlugin::GetPluginName()
 void NFGameServerPlugin::Install()
 {
 
-    REGISTER_MODULE( pPluginManager, NFCGameLogicModule )
+    REGISTER_MODULE( pPluginManager, NFCGameServerModule )
     REGISTER_MODULE( pPluginManager, NFCSceneProcessModule )
     REGISTER_MODULE( pPluginManager, NFCDataProcessModule )
 
@@ -66,5 +66,5 @@ void NFGameServerPlugin::Uninstall()
 
     UNREGISTER_MODULE( pPluginManager, NFCDataProcessModule )
     UNREGISTER_MODULE( pPluginManager, NFCSceneProcessModule )
-    UNREGISTER_MODULE( pPluginManager, NFCGameLogicModule )
+    UNREGISTER_MODULE( pPluginManager, NFCGameServerModule )
 }
