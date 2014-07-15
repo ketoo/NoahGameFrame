@@ -31,7 +31,7 @@
     <ClInclude Include="NFCDataProcessModule.h">
       <Filter>NFDataProcessModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCGameLogicModule.h" />
+    <ClInclude Include="NFCGameServerModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -51,6 +51,6 @@
     <ClCompile Include="NFCDataProcessModule.cpp">
       <Filter>NFDataProcessModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFCGameLogicModule.cpp" />
+    <ClCompile Include="NFCGameServerModule.cpp" />
   </ItemGroup>
 </Project>
