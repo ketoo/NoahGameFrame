@@ -80,7 +80,6 @@ private:
     int mnContainerLine;
     int mnLineMaxPlayer;
 
-    NFIGameLogicModule* m_pGameLogicModule;
     NFIElementInfoModule* m_pElementInfoModule;
     NFIPropertyModule* m_pPropertyModule;
     NFILogicClassModule* m_pLogicClassModule;

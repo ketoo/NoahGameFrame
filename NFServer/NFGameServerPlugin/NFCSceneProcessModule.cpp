@@ -20,7 +20,6 @@ bool NFCSceneProcessModule::Init()
     
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>( pPluginManager->FindModule( "NFCEventProcessModule" ) );
     m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
-    m_pGameLogicModule = dynamic_cast<NFIGameLogicModule*>( pPluginManager->FindModule( "NFCGameLogicModule" ) );
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>( pPluginManager->FindModule( "NFCElementInfoModule" ) );
     m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>( pPluginManager->FindModule( "NFCLogicClassModule" ) );
     m_pPropertyModule = dynamic_cast<NFIPropertyModule*>( pPluginManager->FindModule( "NFCPropertyModule" ) );
@@ -28,7 +27,6 @@ bool NFCSceneProcessModule::Init()
 
     assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
-    assert( NULL != m_pGameLogicModule );
     assert( NULL != m_pElementInfoModule );
     assert( NULL != m_pLogicClassModule );
     assert( NULL != m_pPropertyModule );
