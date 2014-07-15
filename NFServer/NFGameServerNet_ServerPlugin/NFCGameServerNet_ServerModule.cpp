@@ -23,7 +23,6 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
     m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
     m_pSceneProcessModule = dynamic_cast<NFISceneProcessModule*>(pPluginManager->FindModule("NFCSceneProcessModule"));
-    m_pGameLogicModule = dynamic_cast<NFIGameLogicModule*>(pPluginManager->FindModule("NFCGameLogicModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
     m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
 
@@ -31,7 +30,6 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pSceneProcessModule);
-    assert(NULL != m_pGameLogicModule);
     assert(NULL != m_pElementInfoModule);
     assert(NULL != m_pLogModule);
 

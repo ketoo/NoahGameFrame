@@ -171,7 +171,6 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFIElementInfoModule* m_pElementInfoModule;
-    NFIGameLogicModule* m_pGameLogicModule;
 };
 
 #endif

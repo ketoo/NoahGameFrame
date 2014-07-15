@@ -75,7 +75,6 @@ private:
     int mnSocketFD;
 
     NFILogModule* m_pLogModule;
-    NFIGameLogicModule* m_pGameLogicModule;
     NFIKernelModule* m_pKernelModule;
     NFIEventProcessModule* m_pEventProcessModule;
     NFILogicClassModule* m_pLogicClassModule;
