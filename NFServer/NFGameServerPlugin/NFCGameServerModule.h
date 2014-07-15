@@ -1,30 +1,30 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCGameLogicModule.h
+//    @FileName      :    NFCGameServerModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
-//    @Module           :    NFCGameLogicModule
+//    @Module           :    NFCGameServerModule
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_GAMELOGIC_MODULE_H_
-#define _NFC_GAMELOGIC_MODULE_H_
+#ifndef _NFC_GAMESERVER_MODULE_H_
+#define _NFC_GAMESERVER_MODULE_H_
 
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIDataNoSqlModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 
-class NFCGameLogicModule
-    : public NFIGameLogicModule
+class NFCGameServerModule
+    : public NFIGameServerModule
 {
 public:
-    NFCGameLogicModule( NFIPluginManager* p )
+    NFCGameServerModule( NFIPluginManager* p )
     {
         pPluginManager = p;
     }
-    virtual ~NFCGameLogicModule() {};
+    virtual ~NFCGameServerModule() {};
 
     virtual bool Init();
     virtual bool Shut();
