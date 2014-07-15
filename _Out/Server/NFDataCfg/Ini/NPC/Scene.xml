@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--this is config xml-->
 <XML>
-    <Object FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/PioneerNoob/" ID="Scene0" MaxGroup="10" MaxGroupPlayers="200" RelivePos="-0.7,1.5,-1.64" SceneID="0" SceneName="Login" SceneShowName="NewerScene" SoundList="" Width="500"/>
-    <Object FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/PioneerNoob/" ID="Scene1" MaxGroup="10" MaxGroupPlayers="200" RelivePos="-0.7,1.5,-1.64" SceneID="1" SceneName="Stage001" SceneShowName="NewerScene" SoundList="" Width="500"/>
-    <Object FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/RebellerNoob/" ID="Scene2" MaxGroup="10" MaxGroupPlayers="200" RelivePos="-0.7,1.5,-1.64" SceneID="2" SceneName="Stage001" SceneShowName="NewerScene" SoundList="" Width="500"/>
+    <Object FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/PioneerNoob/" ID="0" MaxGroup="10" MaxGroupPlayers="200" RelivePos="-0.7,1.5,-1.64" SceneName="Login" SceneShowName="NewerScene" SoundList="" Width="500"/>
+    <Object FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/PioneerNoob/" ID="1" MaxGroup="10" MaxGroupPlayers="200" RelivePos="-0.7,1.5,-1.64" SceneName="Stage001" SceneShowName="NewerScene" SoundList="" Width="500"/>
+    <Object FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/RebellerNoob/" ID="2" MaxGroup="10" MaxGroupPlayers="200" RelivePos="-0.7,1.5,-1.64" SceneName="Stage001" SceneShowName="NewerScene" SoundList="" Width="500"/>
 </XML>
