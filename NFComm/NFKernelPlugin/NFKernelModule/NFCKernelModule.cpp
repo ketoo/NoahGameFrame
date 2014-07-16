@@ -1207,7 +1207,7 @@ int NFCKernelModule::GetContainerOnLineList(const int nContainerID, NFIValueList
     return var.GetCount();
 }
 
-int NFCKernelModule::RequestGroupScene(const int nContainerID, const std::string& strSceneResource)
+int NFCKernelModule::RequestGroupScene(const int nContainerID)
 {
     NFCContainerInfo* pSceneInfo = m_pContainerModule->GetElement(nContainerID);
     if (NULL != pSceneInfo)
