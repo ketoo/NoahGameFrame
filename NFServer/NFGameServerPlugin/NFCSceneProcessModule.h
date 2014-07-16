@@ -53,30 +53,24 @@ public:
     virtual E_SCENE_TYPE GetCloneSceneType(const int nContainerID);
 
 protected:
-    bool CreateContinerNPCObject( const int nContainerID, const int nGroupID, const std::string& strSeedID );
     int CreateCloneScene( const int& nContainerID, const int nGroupID, const std::string& strResourceID, const NFIValueList& arg );
     bool DestroyCloneScene( const int& nContainerID, const int& nGroupID, const NFIValueList& arg );
 
+
 protected:
-    int CreateContinerNPCObjectByFile( const int nContainerID, const int nGroupID, const std::string& strFileName );
+    bool LoadInitFileResource( const int& nContainerID );
+
+    bool CreateContinerObjectByFile( const int nContainerID, const int nGroupID, const std::string& strFileName );
+    bool CreateContinerObject( const int nContainerID, const int nGroupID, const std::string& strFileName, const std::string& strSeedID );
 
 protected:
 
-    int OnContainerObjectEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var );
     int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var );
 
     int OnEnterSceneEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var );
-
     int OnLeaveSceneEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var );
 
 private:
-    //新建立的连接对象，等待他们自己发验证KEY，KEY验证后删掉
-    //-1
-    //int mnConnectContainer;
-    //选人大厅容器
-    //-3
-    int mnRoleHallContainer;
-
     int mnContainerLine;
     int mnLineMaxPlayer;
 
@@ -86,14 +80,27 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFIEventProcessModule* m_pEventProcessModule;
     NFILogModule* m_pLogModule;
-    //场景ID<资源ID,<NPCID列表>>
+    
+    //////////////////////////////////////////////////////////////////////////
+    struct SceneSeedResource
+    {
+        std::string strSeedID;
+        std::string strConfigID;
+        float fSeedX;
+        float fSeedY;
+        float fSeedZ;
+    };
+
     struct SceneGroupResource
     {
         bool bCanClone;
-        NFMap<std::string, NFList<std::string>> mtSceneGroupResource;
+        //资源文件ID,<NPC种子列表>
+        NFMap<std::string, NFMap<std::string, SceneSeedResource>> mtSceneGroupResource;
     };
 
+    //场景ID,对应资源
     NFMap<int, SceneGroupResource> mtSceneResourceConfig;
+    //////////////////////////////////////////////////////////////////////////
 };
 
 #endif

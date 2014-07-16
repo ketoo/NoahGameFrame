@@ -36,32 +36,7 @@ bool NFCPropertyConfigModule::AfterInit()
 
     Load();
 
-    InitViewPropertyList();
     return true;
-}
-
-void NFCPropertyConfigModule::InitViewPropertyList()
-{
-    mViewPropertyList.Add("MAXHP");
-    mViewPropertyList.Add("HPREGEN");
-    mViewPropertyList.Add("MAXSP");
-    mViewPropertyList.Add("SPREGEN");
-    mViewPropertyList.Add("ATK_VALUE");
-    mViewPropertyList.Add("DEF_VALUE");
-    mViewPropertyList.Add("DODGE_VALUE");
-    mViewPropertyList.Add("CRITICAL_VALUE");
-    mViewPropertyList.Add("CRITICAL_RATIO_VALUE");
-    mViewPropertyList.Add("DEF_CRITICAL_RATIO_VALUE");
-    mViewPropertyList.Add("MOVE_SPEED");
-    mViewPropertyList.Add("PHYSICAL_BREAK");
-    mViewPropertyList.Add("Level");
-    mViewPropertyList.Add("Sex");
-    mViewPropertyList.Add("FightValue");
-}
-
-bool NFCPropertyConfigModule::NeedView(const std::string& strProperty)
-{
-    return mViewPropertyList.Find(strProperty);
 }
 
 int NFCPropertyConfigModule::CalculateBaseValue( const NFJobType nJob, const int nLevel, const std::string& strProperty )
