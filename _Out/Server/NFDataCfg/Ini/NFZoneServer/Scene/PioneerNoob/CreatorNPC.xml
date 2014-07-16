@@ -1,8 +1,0 @@
-<XML>
-	<Object ID = "QH_CreatorNpc1" NPCConfigID = "ATKNPC1"  ClassName = "NPCSeed" > 
-	</Object>               
-	<Object ID = "QH_CreatorNpc2" NPCConfigID = "ATKNPC2" ClassName = "NPCSeed" > 
-	</Object>               
-	<Object ID = "QH_CreatorNpc3" NPCConfigID = "ATKNPC3" ClassName = "NPCSeed"  > 
-	</Object>
-</XML>

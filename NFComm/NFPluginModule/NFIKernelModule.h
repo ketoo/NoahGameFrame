@@ -199,7 +199,7 @@ public:
     virtual int GetContainerOnLineList(const int nContainerID, NFIValueList& var) = 0;
     virtual int GetAllContainerObjectList(NFIValueList& var) = 0;
 
-    virtual int RequestGroupScene(const int nContainerID, const std::string& strSceneResource) = 0;
+    virtual int RequestGroupScene(const int nContainerID) = 0;
 
     virtual bool ReleaseGroupScene(const int nContainerID, const int nGroupID) = 0;
 
