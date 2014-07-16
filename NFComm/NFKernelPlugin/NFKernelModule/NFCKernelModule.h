@@ -140,7 +140,7 @@ public:
     virtual int GetContainerOnLineList(const int nContainerID, NFIValueList& var);
     virtual int GetAllContainerObjectList(NFIValueList& var);
 
-    virtual int RequestGroupScene(const int nContainerID, const std::string& strSceneResource);
+    virtual int RequestGroupScene(const int nContainerID);
 
     //virtual int AddObjectToGroup(const int nContainerID,const int nGroupID, const NFIValueList& var);
 

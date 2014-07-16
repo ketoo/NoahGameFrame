@@ -33,19 +33,13 @@ public:
     virtual bool Execute( const float fLasFrametime, const float fStartedTime );
     virtual bool AfterInit();
 
-    //基础值=等级+系数+常数
     virtual int CalculateBaseValue( const NFJobType nJob, const int nLevel, const std::string& strProperty );
-
-    virtual bool NeedView(const std::string& strProperty);
 
 protected:
     void Load();
-    void InitViewPropertyList();
 private:
     //等级->EffectData
     NFMap<int, std::string> mhtCoefficienData[( int )NFJobType::NJT_MAX];
-
-    NFList<std::string> mViewPropertyList; // 客户端查看角色属性表
 
     NFILogicClassModule* m_pLogicClassModule;
     NFIElementInfoModule* m_pElementInfoModule;
