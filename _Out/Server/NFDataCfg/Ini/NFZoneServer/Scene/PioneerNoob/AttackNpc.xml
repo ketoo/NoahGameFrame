@@ -1,9 +1,0 @@
-<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
-<XML>   
-	<Object ID="QH_AttackNpc1" NPCConfigID="MOB10001" ClassName = "NPCSeed" SeedX="0" SeedY="1" SeedZ="4" Batch="1" Weight="5"> 
-	</Object>
-	<Object ID="QH_AttackNpc2" NPCConfigID="MOB10001" ClassName = "NPCSeed"  SeedX="1" SeedY="1" SeedZ="3" Batch="1"  Weight="5"> 
-	</Object>
-	<Object ID="QH_AttackNpc3" NPCConfigID="MOB10002" ClassName = "NPCSeed" SeedX="2" SeedY="1" SeedZ="2" Batch="1"  Weight="5"> 
-	</Object>
-</XML>
