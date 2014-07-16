@@ -12,12 +12,9 @@
 
 bool NFCSceneProcessModule::Init()
 {
-    mnRoleHallContainer = -3;
-    mnContainerLine = 50;//默认30条线
+    mnContainerLine = 500;
+    mnLineMaxPlayer = 100;
 
-    mnLineMaxPlayer = 30;//每条线最大30人
-
-    
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>( pPluginManager->FindModule( "NFCEventProcessModule" ) );
     m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>( pPluginManager->FindModule( "NFCElementInfoModule" ) );
@@ -33,7 +30,6 @@ bool NFCSceneProcessModule::Init()
     assert( NULL != m_pLogModule );
 
     m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCSceneProcessModule::OnObjectClassEvent );
-    m_pEventProcessModule->AddClassCallBack( "Scene", this, &NFCSceneProcessModule::OnContainerObjectEvent );
 
     return true;
 }
@@ -65,12 +61,13 @@ bool NFCSceneProcessModule::AfterInit()
 
             const std::string& strFilePath = m_pElementInfoModule->QueryPropertyString( strData, "FilePath" );
             const int nActorID = m_pElementInfoModule->QueryPropertyInt( strData, "ActorID" );
-            
+
             if ( nActorID == nSelfActorID && nSceneID > 0 )
             {
+                LoadInitFileResource( nSceneID );
+
                 m_pKernelModule->CreateContainer( nSceneID, strData );
             }
-
 
             bRet = list.Next(strData);
         }
@@ -79,167 +76,49 @@ bool NFCSceneProcessModule::AfterInit()
     return true;
 }
 
-int NFCSceneProcessModule::OnContainerObjectEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var )
-{
-    if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )
-    {
-        //容器已经创建成功，应该加载NPC了
-        const std::string& strSceneFilePath = m_pKernelModule->QueryPropertyString( self, "FilePath" );
-        if ( !strSceneFilePath.empty() )
-        {
-            int nSceneID = m_pKernelModule->QueryPropertyInt( self, "SceneID" );
-            //如果特意是克隆副本，则第一次创建容器时不创建NPC
-            int nCanClone = m_pKernelModule->QueryPropertyInt( self, "CanClone" );
-            //if (nCanClone <= 0)
-            {
-                for ( int i = 0; i < 20; i++ )
-                {
-                    //最多20套资源
-                    NFConfig loadConfig;
-                    std::string strFilePathName( strSceneFilePath );
-                    char szFileName[MAX_PATH] = { 0 };
-                    sprintf( szFileName, "File%d.cfg", i );
-                    strFilePathName.append( szFileName );
-                    bool bLoad =  loadConfig.Load( strFilePathName );
-                    if ( bLoad )
-                    {
-                        SceneGroupResource* pResourceMap = mtSceneResourceConfig.GetElement( nSceneID );
-                        if ( NULL == pResourceMap )
-                        {
-                            pResourceMap = new SceneGroupResource();
-                            pResourceMap->bCanClone = (nCanClone > 0 ? true : false);
-                            mtSceneResourceConfig.AddElement( nSceneID, pResourceMap );
-                        }
-
-                        NFList<std::string>* pNPCResourceList = pResourceMap->mtSceneGroupResource.GetElement( szFileName );
-                        if ( NULL == pNPCResourceList )
-                        {
-                            pNPCResourceList = new NFList<std::string>();
-                            pResourceMap->mtSceneGroupResource.AddElement( szFileName, pNPCResourceList );
-                        }
-
-                        std::vector<std::string>::iterator it = loadConfig.vec.begin();
-                        for ( ; it != loadConfig.vec.end(); it++ )
-                        {
-                            std::string strObjectFileName( strSceneFilePath );
-                            std::string strClassFileName = *it ;
-                            strObjectFileName.append( strClassFileName );
-                            strObjectFileName.append( ".xml" );
-
-                            m_pElementInfoModule->LoadSceneInfo( strObjectFileName, "NPCSeed" );
-
-                            rapidxml::file<> fdoc( strObjectFileName.c_str() );
-                            rapidxml::xml_document<>  doc;
-                            doc.parse<0>( fdoc.data() );
-
-                            rapidxml::xml_node<>* root = doc.first_node();
-                            for ( rapidxml::xml_node<>* attrNode = root->first_node(); attrNode; attrNode = attrNode->next_sibling() )
-                            {
-                                //内存中NPC ConfigID，并与场景ID以及资源ID关联起来
-                                std::string strSeedConfigID = attrNode->first_attribute( "ID" )->value();
-                                std::string strNormalConfigID = attrNode->first_attribute( "NPCConfigID" )->value();
-                                pNPCResourceList->Add( strSeedConfigID );
-                            }
-                        }
-                    }
-                }
-
-                if ( nCanClone <= 0 )
-                {
-                    CreateContinerNPCObjectByFile( nSceneID, 0, "File0.cfg" );
-
-                    //城镇,一上线就给11条线(0线为NPC，1-10为玩家，尼玛肯定够了，否则游戏火爆了)
-                    for ( int i = 0; i < mnContainerLine; i++ )
-                    {
-                        m_pKernelModule->RequestGroupScene( nSceneID, "" );
-                    }
-                }
-            }
-        }
-    }
-
-    return 0;
-}
-
-int NFCSceneProcessModule::CreateContinerNPCObjectByFile( const int nContainerID, const int nGroupID, const std::string& strFileName )
+bool NFCSceneProcessModule::CreateContinerObjectByFile( const int nContainerID, const int nGroupID, const std::string& strFileName )
 {
     SceneGroupResource* pResourceMap = mtSceneResourceConfig.GetElement( nContainerID );
     if ( NULL != pResourceMap )
     {
-        //std::string为NPC列表
-        NFList<std::string>* pNPCResourceList = pResourceMap->mtSceneGroupResource.GetElement( strFileName );
+        NFMap<std::string, SceneSeedResource>* pNPCResourceList = pResourceMap->mtSceneGroupResource.GetElement( strFileName );
         if ( NULL != pNPCResourceList )
         {
-            std::string str;
-            bool bRet = pNPCResourceList->First( str );
-            while ( bRet )
+            SceneSeedResource* pResource = pNPCResourceList->First( );
+            while ( pResource )
             {
-                CreateContinerNPCObject( nContainerID, nGroupID, str );
+                CreateContinerObject( nContainerID, nGroupID, strFileName, pResource->strSeedID );
 
-                bRet = pNPCResourceList->Next( str );
+                pResource = pNPCResourceList->Next();
             }
         }
     }
 
-    return 0;
+    return true;
 }
 
-bool NFCSceneProcessModule::CreateContinerNPCObject( const int nContainerID, const int nGroupID, const std::string& strSeedID )
+bool NFCSceneProcessModule::CreateContinerObject( const int nContainerID, const int nGroupID, const std::string& strFileName, const std::string& strSeedID )
 {
-    NFIPropertyManager* pSeedPropertyManager = m_pElementInfoModule->GetPropertyManager( strSeedID );
-    NFIPropertyManager* pSeedClassPropertyManager = m_pLogicClassModule->GetClassPropertyManager( "NPCSeed" );
-
-    if ( pSeedPropertyManager && pSeedClassPropertyManager )
+    SceneGroupResource* pResourceMap = mtSceneResourceConfig.GetElement( nContainerID );
+    if ( NULL != pResourceMap )
     {
-        NFIProperty* pProperty = pSeedPropertyManager->GetElement( "NPCConfigID" );
-        if ( pProperty )
+        NFMap<std::string, SceneSeedResource>* pResourceList = pResourceMap->mtSceneGroupResource.GetElement( strFileName );
+        if ( NULL != pResourceList )
         {
-           const std::string& strNormalConfigID = pProperty->QueryString();
-            NFIPropertyManager* pNormalPropertyManager = m_pElementInfoModule->GetPropertyManager( strNormalConfigID );
-            if ( pNormalPropertyManager )
+            SceneSeedResource* pResourceObject = pResourceList->GetElement( strSeedID );
+            if ( NULL != pResourceObject )
             {
-               const std::string& strClassName = pNormalPropertyManager ->GetElement( "ClassName" )->QueryString();
+                const std::string& strClassName = m_pElementInfoModule->QueryPropertyString(strSeedID, "ClassName");
 
                 NFCValueList arg;
-                NFIProperty* pProperty = pSeedPropertyManager->First();
-                while ( pProperty )
-                {
-                    const std::string& strPropertyName = pProperty->GetKey();
-//                     if ( "SeedX" == strPropertyName )
-//                     {
-//                         arg << "X";
-//                         arg.Append( pProperty->GetValue() );
-//                     }
-//                     if ( "SeedY" == strPropertyName )
-//                     {
-//                         arg << "Y";
-//                         arg.Append( pProperty->GetValue() );
-//                     }
-//                     if ( "SeedZ" == strPropertyName )
-//                     {
-//                         arg << "Z";
-//                         arg.Append( pProperty->GetValue() );
-//                     }
+                arg << "X" << pResourceObject->fSeedX;
+                arg << "Y" << pResourceObject->fSeedY;
+                arg << "Z" << pResourceObject->fSeedZ;
+                arg << "SeedID" << strSeedID;
 
-//                     if ( "Bacth" == strPropertyName )
-//                     {
-//                         arg << "Bacth";
-//                         arg.Append( pProperty->GetValue() );
-//                     }
-
-//                     arg << pProperty->GetKey();
-//                     arg.Append( pProperty->GetValue() );
-
-                    pProperty = pSeedPropertyManager->Next();
-                }
-
-                arg << "NPCConfigID" << strSeedID;
-                m_pKernelModule->CreateObject( 0, nContainerID, nGroupID, strClassName, strNormalConfigID, arg );
+                m_pKernelModule->CreateObject( 0, nContainerID, nGroupID, strClassName, pResourceObject->strConfigID, arg );
             }
-
         }
-
-
     }
 
     return true;
@@ -250,10 +129,10 @@ int NFCSceneProcessModule::CreateCloneScene( const int& nContainerID, const int 
     int nTargetGroupID = 0;
     if ( GetCloneSceneType( nContainerID ) == SCENE_TYPE_NORMAL)
     {
-        //城镇，想换指定的线
+        //城镇
         if ( nGroupID <= 0 )
         {
-            //看人数是否满了,自动分线
+            //随机换线
             for ( int i = 1; i <= 10; i++ )
             {
                 int nCount = m_pKernelModule->GetContainerOnLineCount( nContainerID, i );
@@ -266,7 +145,7 @@ int NFCSceneProcessModule::CreateCloneScene( const int& nContainerID, const int 
         }
         else
         {
-            //随机换线
+            //想换指定的线，看人数是否满了
             int nCount = m_pKernelModule->GetContainerOnLineCount( nContainerID, nGroupID );
             if ( nCount < mnLineMaxPlayer )
             {
@@ -275,20 +154,20 @@ int NFCSceneProcessModule::CreateCloneScene( const int& nContainerID, const int 
             else
             {
                 //次线人数满
-                return 0;
+                return -1;
             }
         }
     }
     else
     {
         //副本，申请分层ID
-        nTargetGroupID = m_pKernelModule->RequestGroupScene( nContainerID, "" );
+        nTargetGroupID = m_pKernelModule->RequestGroupScene( nContainerID );
     }
 
     if ( nTargetGroupID > 0
-		&& GetCloneSceneType( nContainerID ) == SCENE_TYPE_MAINLINE_CLONE)
+        && GetCloneSceneType( nContainerID ) == SCENE_TYPE_MAINLINE_CLONE)
     {
-       CreateContinerNPCObjectByFile( nContainerID, nTargetGroupID, strResourceID );
+        CreateContinerObjectByFile( nContainerID, nTargetGroupID, strResourceID );
     }
 
     return nTargetGroupID;
@@ -307,10 +186,6 @@ bool NFCSceneProcessModule::DestroyCloneScene( const int& nContainerID, const in
         {
             m_pKernelModule->DestroyObject(ident);
         }
-//         else
-//         {
-//             m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, ident, "There is no object",  __FUNCTION__, __LINE__);
-//         }
     }
 
     m_pKernelModule->ReleaseGroupScene(nContainerID, nGroupID);
@@ -353,7 +228,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
     std::string strResource = "";
     if ( GetCloneSceneType(nTargetScene) == SCENE_TYPE_MAINLINE_CLONE)
     {
-        strResource = "File0.cfg";
+        strResource = "File.cfg";
     }
     else
     {
@@ -366,7 +241,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
             //本来就是这个层这个场景就别切换了
             m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "in same scene and group but it not a clone scene", nTargetScene);
 
-             return 1;
+            return 1;
         }
     }
 
@@ -377,15 +252,12 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
         return 0;
     }
 
-    char szSceneIDName[MAX_PATH] = { 0 };
-    sprintf( szSceneIDName, "%d", nTargetScene );
-
     //得到坐标
     float fX = 0.0f;
     float fY = 0.0f;
     float fZ = 0.0f;
 
-    const std::string& strRelivePosList = m_pElementInfoModule->QueryPropertyString(szSceneIDName, "RelivePos");
+    const std::string& strRelivePosList = m_pElementInfoModule->QueryPropertyString(szSceneID, "RelivePos");
     NFCValueList valueRelivePosList( strRelivePosList.c_str(), ";" );
     if ( valueRelivePosList.GetCount() >= 1 )
     {
@@ -412,7 +284,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
         return 0;
     }
 
-    xSceneResult.SetInt(3, nTargetGroupID);
+    xSceneResult.SetInt(3, nTargetGroupID);//spicial
     m_pEventProcessModule->DoEvent( self, NFED_ON_OBJECT_ENTER_SCENE_RESULT, xSceneResult );
 
     return 0;
@@ -470,12 +342,91 @@ int NFCSceneProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std:
 
 E_SCENE_TYPE NFCSceneProcessModule::GetCloneSceneType( const int nContainerID )
 {
-	char szSceneIDName[MAX_PATH] = { 0 };
-	sprintf( szSceneIDName, "%d", nContainerID );
-	if (m_pElementInfoModule->ExistElement(szSceneIDName))
-	{
-		return (E_SCENE_TYPE)m_pElementInfoModule->QueryPropertyInt(szSceneIDName, "SceneType");
-	}
+    char szSceneIDName[MAX_PATH] = { 0 };
+    sprintf( szSceneIDName, "%d", nContainerID );
+    if (m_pElementInfoModule->ExistElement(szSceneIDName))
+    {
+        return (E_SCENE_TYPE)m_pElementInfoModule->QueryPropertyInt(szSceneIDName, "SceneType");
+    }
 
     return SCENE_TYPE_ERROR;
+}
+
+bool NFCSceneProcessModule::LoadInitFileResource( const int& nContainerID )
+{
+    char szSceneIDName[MAX_PATH] = { 0 };
+    sprintf( szSceneIDName, "%d", nContainerID );
+
+    const std::string& strSceneFilePath = m_pElementInfoModule->QueryPropertyString( szSceneIDName, "FilePath" );
+    const int nCanClone = m_pElementInfoModule->QueryPropertyInt( szSceneIDName, "CanClone" );
+
+    //场景对应资源
+    SceneGroupResource* pResourceMap = mtSceneResourceConfig.GetElement( nContainerID );
+    if ( NULL == pResourceMap )
+    {
+        pResourceMap = new SceneGroupResource();
+        pResourceMap->bCanClone = (nCanClone > 0 ? true : false);
+        mtSceneResourceConfig.AddElement( nContainerID, pResourceMap );
+    }
+
+    if ( !strSceneFilePath.empty() )
+    {
+        std::string strFilePathName( strSceneFilePath );
+        strFilePathName.append( "File.xml" );
+
+        rapidxml::file<> xFileSource( strFilePathName.c_str() );
+        rapidxml::xml_document<>  xFileDoc;
+        xFileDoc.parse<0>( xFileSource.data() );
+
+        //资源文件列表
+        rapidxml::xml_node<>* pSeedFileRoot = xFileDoc.first_node();
+        for ( rapidxml::xml_node<>* pSeedFileNode = pSeedFileRoot->first_node(); pSeedFileNode; pSeedFileNode = pSeedFileNode->next_sibling() )
+        {
+            std::string strSeedFileName = pSeedFileNode->first_attribute( "ID" )->value();
+            
+            //资源对应种子列表
+            NFMap<std::string, SceneSeedResource>* pSeedResourceList = pResourceMap->mtSceneGroupResource.GetElement(strSeedFileName);
+            if ( NULL == pSeedResourceList )
+            {
+                pSeedResourceList = new NFMap<std::string, SceneSeedResource>;
+                pResourceMap->mtSceneGroupResource.AddElement( strSeedFileName, pSeedResourceList );
+            }
+
+            std::string strObjectFileName( strSceneFilePath );
+            strObjectFileName.append( strSeedFileName );
+            strObjectFileName.append( ".xml" );
+
+
+            rapidxml::file<> xSeedListSource( strObjectFileName.c_str() );
+            rapidxml::xml_document<>  xFileDoc;
+            xFileDoc.parse<0>( xSeedListSource.data() );
+            rapidxml::xml_node<>* pSeedObjectRoot = xFileDoc.first_node();
+            for ( rapidxml::xml_node<>* pSeedObjectNode = pSeedObjectRoot->first_node(); pSeedObjectNode; pSeedObjectNode = pSeedObjectNode->next_sibling() )
+            {
+                //种子具体信息
+                std::string strSeedName = pSeedObjectNode->first_attribute( "ID" )->value();
+                std::string strConfigID = pSeedObjectNode->first_attribute( "NPCConfigID" )->value();
+
+                if (!m_pElementInfoModule->ExistElement(strConfigID))
+                {
+                    assert(0);
+                }
+
+                SceneSeedResource* pSeedResource = pSeedResourceList->GetElement(strSeedName);
+                if ( NULL == pSeedResource )
+                {
+                    pSeedResource = new SceneSeedResource();
+                    pSeedResourceList->AddElement( strSeedName, pSeedResource );
+                }
+
+                pSeedResource->strSeedID = strSeedName;
+                pSeedResource->strConfigID = strConfigID;
+                pSeedResource->fSeedX = boost::lexical_cast<float>(pSeedObjectNode->first_attribute( "SeedX" )->value());
+                pSeedResource->fSeedY = boost::lexical_cast<float>(pSeedObjectNode->first_attribute( "SeedY" )->value());
+                pSeedResource->fSeedZ = boost::lexical_cast<float>(pSeedObjectNode->first_attribute( "SeedZ" )->value());
+            }
+        }
+    }
+    
+    return true;
 }
