@@ -26,7 +26,6 @@ bool NFCPropertyModule::Init()
     assert( NULL != m_pPropertyConfigModule );
 
     m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCPropertyModule::OnObjectClassEvent );
-    m_pEventProcessModule->AddClassCallBack( "NPC", this, &NFCPropertyModule::OnObjectClassEvent );
 
     return true;
 }
@@ -124,11 +123,6 @@ int NFCPropertyModule::SubPropertyValue( const NFIDENTID& self, const std::strin
     return 0;
 }
 
-int NFCPropertyModule::OnObjectPropertyEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar )
-{
-    return 0;
-}
-
 int NFCPropertyModule::OnObjectLevelEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar )
 {
     RefreshBaseProperty( self );
@@ -142,9 +136,7 @@ int NFCPropertyModule::OnObjectLevelEvent( const NFIDENTID& self, const std::str
 int NFCPropertyModule::OnRecordPropertyEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar )
 {
     //计算总值
-    //col 属性值枚举
-    //row 分层
-
+ 
     int nAllValue = 0;
     NFIRecord* pRecord = m_pKernelModule->FindRecord(self, mstrCommPropertyName);
     for ( int i = 0; i < ( int )( NFPropertyGroup::NPG_ALL ); i++ )
@@ -168,10 +160,8 @@ int NFCPropertyModule::OnObjectClassEvent( const NFIDENTID& self, const std::str
         if ( CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
         {
             m_pKernelModule->AddPropertyCallBack( self, "Level", this, &NFCPropertyModule::OnObjectLevelEvent );
-            m_pKernelModule->AddPropertyCallBack( self, "HP", this, &NFCPropertyModule::OnObjectHPEvent );
-
+            
             // TODO:一级属性回调
-
             m_pKernelModule->AddRecordCallBack( self, mstrCommPropertyName, this, &NFCPropertyModule::OnRecordPropertyEvent );
         }
         else if ( CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA == eClassEvent )
@@ -225,18 +215,6 @@ bool NFCPropertyModule::FullHPMP( const NFIDENTID& self )
     }
 
     return true;
-}
-
-int NFCPropertyModule::OnObjectHPEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar )
-{
-    if ( newVar.IntVal( 0 ) <= 0 )
-    {
-        //m_pKernelModule->DestroyObject(self);
-    }
-
-    //std::cout << strPropertyName << "=======" << newVar.IntVal(0) << std::endl;
-
-    return 0;
 }
 
 bool NFCPropertyModule::AddHP( const NFIDENTID& self, int nValue )
@@ -386,20 +364,6 @@ int NFCPropertyModule::OnReqModifyData( const NFIDENTID& self, const int nEventI
     if (identSelf == self
         && identSelf == identOther)
     {
-
-		if(strName == "YBP" || strName == "Cash")
-		{
-			NFIDENTID nCurValue  = m_pKernelModule->QueryPropertyObject(self, strName);
-			if (1 == nType)
-			{
-				m_pKernelModule->SetPropertyObject( self, strName, nValue + nCurValue.nData64);
-			}
-			else if (2 == nType)
-			{
-				m_pKernelModule->SetPropertyObject( self, strName, nCurValue.nData64 - nValue );
-			}
-		}
-
         int nCurValue = m_pKernelModule->QueryPropertyInt( self, strName );
         if (0 == nType)
         {
