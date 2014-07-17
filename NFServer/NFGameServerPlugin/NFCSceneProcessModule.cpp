@@ -12,7 +12,7 @@
 
 bool NFCSceneProcessModule::Init()
 {
-    mnContainerLine = 500;
+    mnContainerLine = 10;
     mnLineMaxPlayer = 100;
 
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>( pPluginManager->FindModule( "NFCEventProcessModule" ) );
@@ -126,14 +126,15 @@ bool NFCSceneProcessModule::CreateContinerObject( const int nContainerID, const 
 
 int NFCSceneProcessModule::CreateCloneScene( const int& nContainerID, const int nGroupID, const std::string& strResourceID, const NFIValueList& arg )
 {
-    int nTargetGroupID = 0;
-    if ( GetCloneSceneType( nContainerID ) == SCENE_TYPE_NORMAL)
+    int nTargetGroupID = -1;
+    const E_SCENE_TYPE eType = GetCloneSceneType( nContainerID );
+    if ( eType == SCENE_TYPE_NORMAL)
     {
         //城镇
         if ( nGroupID <= 0 )
         {
-            //随机换线
-            for ( int i = 1; i <= 10; i++ )
+            //随服务器自动安排线路
+            for ( int i = 1; i <= mnContainerLine; i++ )
             {
                 int nCount = m_pKernelModule->GetContainerOnLineCount( nContainerID, i );
                 if ( nCount < mnLineMaxPlayer )
@@ -158,14 +159,13 @@ int NFCSceneProcessModule::CreateCloneScene( const int& nContainerID, const int 
             }
         }
     }
-    else
+    else if ( eType == SCENE_TYPE_MAINLINE_CLONE)
     {
         //副本，申请分层ID
         nTargetGroupID = m_pKernelModule->RequestGroupScene( nContainerID );
     }
 
-    if ( nTargetGroupID > 0
-        && GetCloneSceneType( nContainerID ) == SCENE_TYPE_MAINLINE_CLONE)
+    if ( nTargetGroupID > 0 && eType == SCENE_TYPE_MAINLINE_CLONE)
     {
         CreateContinerObjectByFile( nContainerID, nTargetGroupID, strResourceID );
     }
@@ -224,28 +224,18 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
         return 1;
     }
 
-
-    std::string strResource = "";
-    if ( GetCloneSceneType(nTargetScene) == SCENE_TYPE_MAINLINE_CLONE)
+    const int nNowContainerID = m_pKernelModule->QueryPropertyInt(self, "SceneID");
+    const int nNowGroupID = m_pKernelModule->QueryPropertyInt(self, "GroupID");
+    if (nNowContainerID == nTargetScene
+        && nNowGroupID == nTargetGroupID)
     {
-        strResource = "File.cfg";
-    }
-    else
-    {
-        //不是副本，那么是否是同一场景同层
-        const int nNowContainerID = m_pKernelModule->QueryPropertyInt(self, "SceneID");
-        const int nNowGroupID = m_pKernelModule->QueryPropertyInt(self, "GroupID");
-        if (nNowContainerID == nTargetScene
-            && nNowGroupID == nTargetGroupID)
-        {
-            //本来就是这个层这个场景就别切换了
-            m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "in same scene and group but it not a clone scene", nTargetScene);
+        //本来就是这个层这个场景就别切换了
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "in same scene and group but it not a clone scene", nTargetScene);
 
-            return 1;
-        }
+        return 1;
     }
 
-    nTargetGroupID = CreateCloneScene( nTargetScene, nTargetGroupID, strResource, NFCValueList() );
+    nTargetGroupID = CreateCloneScene( nTargetScene, nTargetGroupID, "File.cfg", NFCValueList() );
     if ( nTargetGroupID <= 0 )
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "CreateCloneScene failed", nTargetScene);

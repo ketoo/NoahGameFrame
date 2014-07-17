@@ -285,8 +285,5 @@ typedef long long NFINT64;
 #define NFASSERT(exp_, msg_, file_, func_)
 #endif
 
-#endif
 
-// #ifndef THERON_CPP11
-// #    define THERON_CPP11
-//#endif
+#endif
