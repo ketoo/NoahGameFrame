@@ -6,10 +6,7 @@
 //
 // -------------------------------------------------------------------------
 
-//#include "stdafx.h"
 #include "NFCDynLib.h"
-
-
 
 bool NFCDynLib::Load()
 {
@@ -27,5 +24,4 @@ bool NFCDynLib::UnLoad()
 void* NFCDynLib::GetSymbol(const char* szProcName)
 {
     return (DYNLIB_HANDLE)DYNLIB_GETSYM(mInst, szProcName);
-    //return (void*)::GetProcAddress( (HMODULE)mInst, szProcName );
 }
