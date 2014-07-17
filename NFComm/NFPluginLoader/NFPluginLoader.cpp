@@ -22,14 +22,6 @@
 
 #pragma comment( lib, "DbgHelp" )
 
-#if NF_PLATFORM == NF_PLATFORM_WIN \
-    || NF_PLATFORM == NF_PLATFORM_APPLE \
-    || NF_PLATFORM == NF_PLATFORM_LINUX
-
-#ifdef NF_DEBUG_MODE
-#define new   new(_NORMAL_BLOCK, __FILE__, __LINE__)
-#endif
-
 // 创建Dump文件
 void CreateDumpFile(const std::string& strDumpFilePathName, EXCEPTION_POINTERS* pException)
 {
@@ -128,28 +120,17 @@ int main()
 
 #endif
 {
-#ifndef NF_DEBUG_MODE
     SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
-#endif
-
-#ifdef NF_DEBUG_MODE
-    _CrtSetDbgFlag(_CrtSetDbgFlag(_CRTDBG_REPORT_FLAG) | _CRTDBG_LEAK_CHECK_DF);
-#endif
 
 	NFCActorManager::GetSingletonPtr()->Init();
 	NFCActorManager::GetSingletonPtr()->AfterInit();
 
-#if defined( __CLIENT__ )
-    RunCheckPoint();
-#endif
-
     PrintfLogo();
+
     CloseXButton();
     CreateBackThread();
 
-#ifndef NF_DEBUG_MODE
     while (!bExitApp)    //DEBUG版本崩溃，RELEASE不崩
-#endif
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         while (true)
@@ -161,17 +142,13 @@ int main()
 			
 			std::this_thread::sleep_for(std::chrono::milliseconds(5));
 
-#ifndef NF_DEBUG_MODE
             __try
-#endif
             {
                 NFCActorManager::GetSingletonPtr()->Execute(0.005f, 0.005f);
             }
-#ifndef NF_DEBUG_MODE
             __except (ApplicationCrashHandler(GetExceptionInformation()))
             {
             }
-#endif
         }
     }
 
@@ -182,7 +159,3 @@ int main()
 
     return 0;
 }
-
-#else
-
-#endif

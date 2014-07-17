@@ -140,7 +140,10 @@ bool NFCLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
             LOG(WARNING) << szBuffer;
             break;
         case NFILogModule::NLL_ERROR_NORMAL:
-            LOG(ERROR) << szBuffer;
+            {
+                LOG(ERROR) << szBuffer;
+                LogStack();
+            }
             break;
         default:
             LOG(INFO) << szBuffer;
@@ -160,7 +163,6 @@ bool NFCLogModule::LogElement(const NF_LOG_LEVEL nll, const NFIDENTID ident, con
     {
         Log(nll, "[ELEMENT] Ident=%lld Element=%s %s\n", ident.nData64, strElement.c_str(), strDesc.c_str());
     }
-    LogStack();
 
     return true;
 }
@@ -175,8 +177,6 @@ bool NFCLogModule::LogProperty(const NF_LOG_LEVEL nll, const NFIDENTID ident, co
     {
         Log(nll, "[PROPERTY] Ident=%lld Element=%s %s\n", ident.nData64, strProperty.c_str(), strDesc.c_str());
     }
-
-    LogStack();
 
     return true;
 
@@ -193,8 +193,6 @@ bool NFCLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
         Log(nll, "[RECORD] Ident=%lld Record=%s Row=%d Col=%d %s \n", ident.nData64, strRecord.c_str(), nRow, nCol, strDesc.c_str());
     }
 
-    LogStack();
-
     return true;
 
 }
@@ -210,8 +208,6 @@ bool NFCLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
         Log(nll, "[RECORD] Ident=%lld Record=%s %s\n", ident.nData64, strRecord.c_str(), strDesc.c_str());
     }
 
-    LogStack();
-
     return true;
 }
 
@@ -226,15 +222,39 @@ bool NFCLogModule::LogObject(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
         Log(nll, "[OBJECT] Ident=%lld %s\n", ident.nData64, strDesc.c_str());
     }
 
-    LogStack();
-
     return true;
 
 }
 
+void NFDumpCrashLog()
+{
+#ifdef NF_DEBUG_MODE
+    time_t t = time(0);
+    char szDmupName[MAX_PATH];
+    tm* ptm = localtime(&t);
+
+    sprintf(szDmupName, "%d_%d_%d_%d_%d_%d.dmp",  ptm->tm_year + 1900, ptm->tm_mon, ptm->tm_mday, ptm->tm_hour, ptm->tm_min, ptm->tm_sec);
+    // 创建Dump文件
+    HANDLE hDumpFile = CreateFile(szDmupName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+
+    // Dump信息
+    MINIDUMP_EXCEPTION_INFORMATION dumpInfo;
+    //dumpInfo.ExceptionPointers = pException;
+    dumpInfo.ThreadId = GetCurrentThreadId();
+    dumpInfo.ClientPointers = TRUE;
+
+    // 写入Dump文件内容
+    MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hDumpFile, MiniDumpNormal, &dumpInfo, NULL, NULL);
+
+    CloseHandle(hDumpFile);
+
+    FatalAppExit(-1,  szDmupName);
+#endif
+}
+
 void NFCLogModule::LogStack()
 {
-
+    NFDumpCrashLog();
 }
 
 bool NFCLogModule::LogNormal( const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strInfo, const std::string& strDesc,  char* func, int line )
@@ -247,7 +267,7 @@ bool NFCLogModule::LogNormal( const NF_LOG_LEVEL nll, const NFIDENTID ident, con
     {
         Log(nll, "[NORMAL] Ident=%lld  %s %s \n", ident.nData64, strInfo.c_str(), strDesc.c_str());
     }
-    LogStack();
+
     return true;
 }
 
@@ -262,7 +282,6 @@ bool NFCLogModule::LogNormal( const NF_LOG_LEVEL nll, const NFIDENTID ident, con
         Log(nll, "[NORMAL] Ident=%lld  %s %d\n", ident.nData64, strInfo.c_str(), nDesc);
     }
 
-    LogStack();
     return true;
 }
 
