@@ -116,10 +116,10 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
                 pstrRelationValue = pPropertyNode->first_attribute("RelationValue")->value();
             }
 
-            bool bPublic = (0 == strcmp("true", pstrPublic)) ? true : false;
-            bool bPrivate = (0 == strcmp("true", pstrPrivate)) ? true : false;
-            bool bSave = (0 == strcmp("true", pstrSave)) ? true : false;
-            int nIndex = atoi(pstrPropertyIndex);
+            bool bPublic = boost::lexical_cast<int>(pstrPublic);
+            bool bPrivate = boost::lexical_cast<int>(pstrPrivate);
+            bool bSave = boost::lexical_cast<int>(pstrSave);
+            int nIndex = boost::lexical_cast<int>(pstrPropertyIndex);
 
             if (bPublic || bPrivate)
             {
@@ -171,10 +171,10 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCL
             const char* pstrSave = pRecordNode->first_attribute("Save")->value();
             const char* pstrIndex = pRecordNode->first_attribute("Index")->value();
 
-            bool bPublic = (0 == strcmp("true", pstrPublic)) ? true : false;
-            bool bPrivate = (0 == strcmp("true", pstrPrivate)) ? true : false;
-            bool bSave = (0 == strcmp("true", pstrSave)) ? true : false;
-            int nIndex = atoi(pstrIndex);
+            bool bPublic = boost::lexical_cast<int>(pstrPublic);
+            bool bPrivate = boost::lexical_cast<int>(pstrPrivate);
+            bool bSave = boost::lexical_cast<int>(pstrSave);
+            int nIndex = boost::lexical_cast<int>(pstrIndex);
 
             NFCValueList recordVar;
             NFCValueList recordKey;
@@ -197,7 +197,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCL
                 if (recordColNode->first_attribute("Key") != NULL)
                 {
                     const char* pstrKey = recordColNode->first_attribute("Key")->value();
-                    bool bKey = (0 == strcmp("true", pstrKey)) ? true : false;
+                    bool bKey = boost::lexical_cast<int>(pstrKey);
                     if (bKey)
                     {
                         recordKey.AddInt(1);
@@ -258,7 +258,8 @@ bool NFCLogicClassModule::AddComponents( rapidxml::xml_node<>* pComponentRootNod
             const char* strComponentName = pComponentNode->first_attribute("Name")->value();
             const char* strLanguage = pComponentNode->first_attribute("Language")->value();
             const char* strEnable = pComponentNode->first_attribute("Enable")->value();
-            if(0 == strcmp(strEnable, "true"))
+            bool bEnable = boost::lexical_cast<int>(strEnable);
+            if(bEnable)
             {
                 if (pClass->GetComponentManager()->GetElement(strComponentName))
                 {
