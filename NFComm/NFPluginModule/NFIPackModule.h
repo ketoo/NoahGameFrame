@@ -30,19 +30,6 @@ enum PackTableType
 class NFIPackModule
     : public NFILogicModule
 {
-public:
-
-    enum DropListColType
-    {
-        DropNPC  = 0, // 掉落怪物ID
-        DropItemID = 1, // 物品配置ID
-        DropCount = 2, // 物品数量
-        DropValid = 3, // 是否可以获得这个物品
-        DropPick = 4, // 是否已获得这个物品
-        DropRandProperty = 5, // 如果是装备，则是随机属性
-        DropBaseProperty = 6, // 如果是装备，则是固定属性
-    };
-
 
 public:
     //添加装备:装备config,装备过期类型,孔数量，空里宝石列表，强化等级，附魔等级，元素卡片列表
@@ -63,7 +50,7 @@ public:
 
     //////////////////////////////////////////////////////////////////////////
     //得到此格子的configID
-    virtual std::string GetGridConfigID(const NFIDENTID& self, const int nRow, const PackTableType name = PackTableType::NormalPack) = 0;
+    virtual const std::string& GetGridConfigID(const NFIDENTID& self, const int nRow, const PackTableType name = PackTableType::NormalPack) = 0;
 
     //设置道具数量
     virtual bool SetGridCount(const NFIDENTID& self, const int nOrigin, const int nCount, const PackTableType name = PackTableType::NormalPack) = 0;
@@ -83,7 +70,7 @@ public:
 
     //设置装镶嵌宝石ID
     virtual bool SetEquipInlayCard(const NFIDENTID& self, const int nOrigin, const EGameItemStoreType eSlotIndex, const std::string& strCardIndex) = 0;
-    virtual std::string GetEquipInlayCard(const NFIDENTID& self, const int nOrigin, const EGameItemStoreType eSlotIndex) = 0;
+    virtual const std::string& GetEquipInlayCard(const NFIDENTID& self, const int nOrigin, const EGameItemStoreType eSlotIndex) = 0;
 
     //设置装备附魔等级
     virtual bool SetEquipEnchantmentLevel(const NFIDENTID& self, const int nOrigin, const int nLevel) = 0;
@@ -91,11 +78,11 @@ public:
 
     //设置装附魔宝石ID
     virtual bool SetEquipEnchantmentCard(const NFIDENTID& self, const int nOrigin, const std::string& strCardIndex) = 0;
-    virtual std::string GetEquipEnchantmentCard(const NFIDENTID& self, const int nOrigin) = 0;
+    virtual const std::string& GetEquipEnchantmentCard(const NFIDENTID& self, const int nOrigin) = 0;
 
     //设置创建时间(如果是非永久道具)
     virtual bool SetEquipCreatTime(const NFIDENTID& self, const int nOrigin, const std::string& strTime) = 0;
-    virtual std::string GetEquipCreatTime(const NFIDENTID& self, const int nOrigin) = 0;
+    virtual const std::string& GetEquipCreatTime(const NFIDENTID& self, const int nOrigin) = 0;
 
     // 修改属性
     virtual bool SetGridData(const NFIDENTID& self, const int mRow, const int nCol, const NFIValueList& var, const PackTableType name = PackTableType::NormalPack) = 0;

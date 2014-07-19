@@ -22,8 +22,7 @@ NFCDataNoSqlModule::~NFCDataNoSqlModule()
 
 bool NFCDataNoSqlModule::Init()
 {
-    m_pPlayerDataDriver = new NFCDataNoSqlDriver();
-	m_pPlayerDataDriver->Connect("127.0.0.1");
+
 
     return true;
 }
@@ -49,6 +48,14 @@ bool NFCDataNoSqlModule::AfterInit()
 
 bool NFCDataNoSqlModule::Execute( const float fLasFrametime, const float fStartedTime )
 {
+    return true;
+}
+
+bool NFCDataNoSqlModule::ConnectSql( const std::string& strIP )
+{
+    m_pPlayerDataDriver = new NFCDataNoSqlDriver();
+    m_pPlayerDataDriver->Connect(strIP);
+
     return true;
 }
 

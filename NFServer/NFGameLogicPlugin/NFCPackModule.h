@@ -57,7 +57,7 @@ public:
 
     //////////////////////////////////////////////////////////////////////////
     //得到configID
-    virtual std::string GetGridConfigID( const NFIDENTID& self, const int nRow, const PackTableType name = PackTableType::NormalPack );
+    virtual const std::string& GetGridConfigID( const NFIDENTID& self, const int nRow, const PackTableType name = PackTableType::NormalPack );
 
     //设置道具数量
     virtual bool SetGridCount( const NFIDENTID& self, const int nOrigin, const int nCount, const PackTableType name = PackTableType::NormalPack );
@@ -77,7 +77,7 @@ public:
 
     //设置装镶嵌宝石ID
     virtual bool SetEquipInlayCard( const NFIDENTID& self, const int nOrigin, const EGameItemStoreType eSlotIndex, const std::string& strCardIndex );
-    virtual std::string GetEquipInlayCard( const NFIDENTID& self, const int nOrigin, const EGameItemStoreType eSlotIndex );
+    virtual const std::string& GetEquipInlayCard( const NFIDENTID& self, const int nOrigin, const EGameItemStoreType eSlotIndex );
 
     //设置装备附魔等级
     virtual bool SetEquipEnchantmentLevel( const NFIDENTID& self, const int nOrigin, const int nLevel );
@@ -85,11 +85,11 @@ public:
 
     //设置装附魔宝石ID
     virtual bool SetEquipEnchantmentCard( const NFIDENTID& self, const int nOrigin, const std::string& strCardIndex );
-    virtual std::string GetEquipEnchantmentCard( const NFIDENTID& self, const int nOrigin );
+    virtual const std::string& GetEquipEnchantmentCard( const NFIDENTID& self, const int nOrigin );
 
     //设置创建时间(如果是非永久道具)
     virtual bool SetEquipCreatTime( const NFIDENTID& self, const int nOrigin, const std::string& strTime );
-    virtual std::string GetEquipCreatTime( const NFIDENTID& self, const int nOrigin );
+    virtual const std::string& GetEquipCreatTime( const NFIDENTID& self, const int nOrigin );
 
     virtual bool SetGridData( const NFIDENTID& self, const int nRow, const int nCol, const NFIValueList& var, const PackTableType name = PackTableType::NormalPack );
 
