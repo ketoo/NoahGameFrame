@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--this is a class xml-->
 <XML>
+    <Records/>
     <Propertys>
         <Property Desc="种子ID" Id="SeedID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
         <Property Desc="经验获得,如果是怪物，则是掉落经验" Id="EXP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int"/>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--this is a class xml-->
 <XML>
+    <Records/>
     <Propertys>
         <Property Desc="//普通0短刃类//1普通子弹类(不穿透)//2普通子弹类穿//3普通子弹类单体目标范围(每人头顶闪电那样)/3普通子弹类爆炸目标范围(火矛从天而降那样position)" Id="SkillType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
         <Property Desc="技能对应的客户端动作状态" Id="ClientState" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
