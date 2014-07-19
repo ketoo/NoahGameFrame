@@ -64,3 +64,11 @@ int NFCPlatformDataModule::SetAccountState( const std::string& strAccount, const
 	return 0;
 
 }
+
+bool NFCPlatformDataModule::ConnectSql( const std::string& strIP )
+{
+    m_pPlayerDataDriver = new NFCDataNoSqlDriver();
+    m_pPlayerDataDriver->Connect(strIP);
+
+    return true;
+}
