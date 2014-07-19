@@ -484,7 +484,7 @@ bool NFCPackModule::SetEquipInlayCard( const NFIDENTID& self, const int nOrigin,
     return false;
 }
 
-std::string NFCPackModule::GetEquipInlayCard( const NFIDENTID& self, const int nOrigin, const EGameItemStoreType eSlotIndex )
+const std::string& NFCPackModule::GetEquipInlayCard( const NFIDENTID& self, const int nOrigin, const EGameItemStoreType eSlotIndex )
 {
     //判断nOrigin合法性(越界以及是否是装备),eSlotIndex是否合法，越界
 
@@ -498,7 +498,7 @@ std::string NFCPackModule::GetEquipInlayCard( const NFIDENTID& self, const int n
         }
     }
 
-    return "";
+    return NULL_STR;
 }
 
 bool NFCPackModule::SetEquipEnchantmentLevel( const NFIDENTID& self, const int nOrigin, const int nLevel )
@@ -552,7 +552,7 @@ bool NFCPackModule::SetEquipEnchantmentCard( const NFIDENTID& self, const int nO
     return false;
 }
 
-std::string NFCPackModule::GetEquipEnchantmentCard( const NFIDENTID& self, const int nOrigin )
+const std::string& NFCPackModule::GetEquipEnchantmentCard( const NFIDENTID& self, const int nOrigin )
 {
     //判断nOrigin合法性(越界以及是否是装备)
 
@@ -566,7 +566,7 @@ std::string NFCPackModule::GetEquipEnchantmentCard( const NFIDENTID& self, const
         }
     }
 
-    return "";
+    return NULL_STR;
 }
 
 bool NFCPackModule::SetEquipCreatTime( const NFIDENTID& self, const int nOrigin, const std::string& strTime )
@@ -586,7 +586,7 @@ bool NFCPackModule::SetEquipCreatTime( const NFIDENTID& self, const int nOrigin,
     return false;
 }
 
-std::string NFCPackModule::GetEquipCreatTime( const NFIDENTID& self, const int nOrigin )
+const std::string& NFCPackModule::GetEquipCreatTime( const NFIDENTID& self, const int nOrigin )
 {
     //判断nOrigin合法性(越界以及是否是装备)
 
@@ -600,7 +600,7 @@ std::string NFCPackModule::GetEquipCreatTime( const NFIDENTID& self, const int n
         }
     }
 
-    return "";
+    return NULL_STR;
 }
 
 bool NFCPackModule::CreateItem( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nCount )
@@ -966,7 +966,7 @@ int NFCPackModule::OnObjectPackViewRecordEvent( const NFIDENTID& self, const std
     return 0;
 }
 
-std::string NFCPackModule::GetGridConfigID( const NFIDENTID& self, const int nRow, const PackTableType name/* = PackTableType::NormalPack*/ )
+const std::string& NFCPackModule::GetGridConfigID( const NFIDENTID& self, const int nRow, const PackTableType name/* = PackTableType::NormalPack*/ )
 {
     NFIObject* pObject = m_pKernelModule->GetObject( self );
     if ( pObject )
@@ -978,7 +978,7 @@ std::string NFCPackModule::GetGridConfigID( const NFIDENTID& self, const int nRo
         }
     }
 
-    return "";
+    return NULL_STR;
 }
 
 bool NFCPackModule::pack_item_type_greater( NFIValueList* elem1, NFIValueList* elem2 )

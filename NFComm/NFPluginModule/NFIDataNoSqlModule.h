@@ -61,6 +61,7 @@ class NFIDataNoSqlModule
 public:
 
     virtual NFIDataNoSqlDriver* GetDriver() = 0;
+    virtual bool ConnectSql(const std::string& strIP) = 0;
 
 };
 
