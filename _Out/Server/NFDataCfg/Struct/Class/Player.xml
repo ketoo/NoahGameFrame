@@ -1,6 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--this is a class xml-->
 <XML>
+    <Records>
+        <Record Col="4" Desc="" Id="PlayerViewItem" Index="0" Private="1" Public="1" RelationValue="Friend" Row="11" Save="1" SaveInterval="0">
+            <Col Tag="ConfigID" Type="string"/>
+            <Col Tag="EnhanceLevel" Type="int"/>
+            <Col Tag="InlayStone" Type="string"/>
+            <Col Tag="SagecraftLevel" Type="string"/>
+        </Record>
+        <Record Col="24" Desc="所有和战斗，药水有关的，都在这里NPC怪物只有基础和BUFF影响，因此针对玩家和怪物，分2个表.0职业等级叠加属性,1装备属性,2永久BUFF属性,3动态BUFF属性" Id="CommPropertyValue" Index="0" Private="1" Public="0" RelationValue="Friend" Row="15" Save="0" SaveInterval="0">
+            <Col Tag="MAXHP" Type="int"/>
+            <Col Tag="MAXMP" Type="int"/>
+            <Col Tag="MAXSP" Type="int"/>
+            <Col Tag="HPREGEN" Type="int"/>
+            <Col Tag="SPREGEN" Type="int"/>
+            <Col Tag="MPREGEN" Type="int"/>
+            <Col Tag="ATK_VALUE" Type="int"/>
+            <Col Tag="DEF_VALUE" Type="int"/>
+            <Col Tag="MOVE_SPEED" Type="int"/>
+            <Col Tag="ATK_SPEED" Type="int"/>
+            <Col Tag="ATK_FIRE" Type="int"/>
+            <Col Tag="ATK_LIGHT" Type="int"/>
+            <Col Tag="ATK_ICE" Type="int"/>
+            <Col Tag="ATK_POISON" Type="int"/>
+            <Col Tag="DEF_FIRE" Type="int"/>
+            <Col Tag="DEF_LIGHT" Type="int"/>
+            <Col Tag="DEF_ICE" Type="int"/>
+            <Col Tag="DEF_POISON" Type="int"/>
+            <Col Tag="DIZZY_GATE" Type="int"/>
+            <Col Tag="MOVE_GATE" Type="int"/>
+            <Col Tag="SKILL_GATE" Type="int"/>
+            <Col Tag="PHYSICAL_GATE" Type="int"/>
+            <Col Tag="MAGIC_GATE" Type="int"/>
+            <Col Tag="BUFF_GATE" Type="int"/>
+        </Record>
+        <Record Col="18" Desc="普通背包" Id="BagItemList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="211" Save="1" SaveInterval="0">
+            <Col Tag="GUID" Type="object"/>
+            <Col Tag="ConfigID" Type="string"/>
+            <Col Tag="ItemCount" Type="int"/>
+            <Col Tag="Bound" Type="int"/>
+            <Col Tag="ExpiredType" Type="int"/>
+            <Col Tag="SlotCount" Type="int"/>
+            <Col Tag="InlayStone1" Type="string"/>
+            <Col Tag="InlayStone2" Type="string"/>
+            <Col Tag="InlayStone3" Type="string"/>
+            <Col Tag="InlayStone4" Type="string"/>
+            <Col Tag="InlayStone5" Type="string"/>
+            <Col Tag="InlayStone6" Type="string"/>
+            <Col Tag="EnhancedLevel" Type="string"/>
+            <Col Tag="SagecraftLevel" Type="int"/>
+            <Col Tag="SagecraftStone" Type="string"/>
+            <Col Tag="RandProperty" Type="int"/>
+            <Col Tag="Date" Type="object"/>
+            <Col Tag="BaseProperty" Type="string"/>
+        </Record>
+        <Record Col="4" Desc="" Id="SkillTable" Index="0" Private="1" Public="0" RelationValue="Friend" Row="32" Save="1" SaveInterval="0">
+            <Col Tag="SkillID" Type="string"/>
+            <Col Tag="SkillLevel" Type="int"/>
+            <Col Tag="SkillStone" Type="string"/>
+            <Col Tag="SkillSoulLevel" Type="int"/>
+        </Record>
+        <Record Col="4" Desc="任务杀怪表" Id="TaskMonsterList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="8" Save="1" SaveInterval="0">
+            <Col Tag="MonsterID" Type="string"/>
+            <Col Tag="CurrentKillCount" Type="int"/>
+            <Col Tag="RequireKillCount" Type="int"/>
+            <Col Tag="TaskID" Type="string"/>
+        </Record>
+        <Record Col="2" Desc="任务表" Id="TaskList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="512" Save="1" SaveInterval="0">
+            <Col Tag="TaskID" Type="string"/>
+            <Col Tag="TaskStatus" Type="int"/>
+        </Record>
+    </Records>
     <Propertys>
         <Property Desc="角色名" Id="RoleName" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string"/>
         <Property Desc="性别" Id="Sex" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int"/>
@@ -75,86 +145,6 @@
         <Property Desc="" Id="TargetZ" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float"/>
         <Property Desc="" Id="PathStep" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
     </Propertys>
-    <Records>
-        <Record Col="4" Desc="" Id="PlayerViewItem" Index="0" Private="1" Public="1" RelationValue="Friend" Row="11" Save="1" SaveInterval="0">
-            <Col Tag="ConfigID" Type="string"/>
-            <Col Tag="EnhanceLevel" Type="int"/>
-            <Col Tag="InlayStone" Type="string"/>
-            <Col Tag="SagecraftLevel" Type="string"/>
-        </Record>
-    </Records>
-    <Records>
-        <Record Col="24" Desc="所有和战斗，药水有关的，都在这里NPC怪物只有基础和BUFF影响，因此针对玩家和怪物，分2个表.0职业等级叠加属性,1装备属性,2永久BUFF属性,3动态BUFF属性" Id="CommPropertyValue" Index="0" Private="1" Public="0" RelationValue="Friend" Row="15" Save="0" SaveInterval="0">
-            <Col Tag="MAXHP" Type="int"/>
-            <Col Tag="MAXMP" Type="int"/>
-            <Col Tag="MAXSP" Type="int"/>
-            <Col Tag="HPREGEN" Type="int"/>
-            <Col Tag="SPREGEN" Type="int"/>
-            <Col Tag="MPREGEN" Type="int"/>
-            <Col Tag="ATK_VALUE" Type="int"/>
-            <Col Tag="DEF_VALUE" Type="int"/>
-            <Col Tag="MOVE_SPEED" Type="int"/>
-            <Col Tag="ATK_SPEED" Type="int"/>
-            <Col Tag="ATK_FIRE" Type="int"/>
-            <Col Tag="ATK_LIGHT" Type="int"/>
-            <Col Tag="ATK_ICE" Type="int"/>
-            <Col Tag="ATK_POISON" Type="int"/>
-            <Col Tag="DEF_FIRE" Type="int"/>
-            <Col Tag="DEF_LIGHT" Type="int"/>
-            <Col Tag="DEF_ICE" Type="int"/>
-            <Col Tag="DEF_POISON" Type="int"/>
-            <Col Tag="DIZZY_GATE" Type="int"/>
-            <Col Tag="MOVE_GATE" Type="int"/>
-            <Col Tag="SKILL_GATE" Type="int"/>
-            <Col Tag="PHYSICAL_GATE" Type="int"/>
-            <Col Tag="MAGIC_GATE" Type="int"/>
-            <Col Tag="BUFF_GATE" Type="int"/>
-        </Record>
-    </Records>
-    <Records>
-        <Record Col="18" Desc="普通背包" Id="BagItemList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="211" Save="1" SaveInterval="0">
-            <Col Tag="GUID" Type="object"/>
-            <Col Tag="ConfigID" Type="string"/>
-            <Col Tag="ItemCount" Type="int"/>
-            <Col Tag="Bound" Type="int"/>
-            <Col Tag="ExpiredType" Type="int"/>
-            <Col Tag="SlotCount" Type="int"/>
-            <Col Tag="InlayStone1" Type="string"/>
-            <Col Tag="InlayStone2" Type="string"/>
-            <Col Tag="InlayStone3" Type="string"/>
-            <Col Tag="InlayStone4" Type="string"/>
-            <Col Tag="InlayStone5" Type="string"/>
-            <Col Tag="InlayStone6" Type="string"/>
-            <Col Tag="EnhancedLevel" Type="string"/>
-            <Col Tag="SagecraftLevel" Type="int"/>
-            <Col Tag="SagecraftStone" Type="string"/>
-            <Col Tag="RandProperty" Type="int"/>
-            <Col Tag="Date" Type="object"/>
-            <Col Tag="BaseProperty" Type="string"/>
-        </Record>
-    </Records>
-    <Records>
-        <Record Col="4" Desc="" Id="SkillTable" Index="0" Private="1" Public="0" RelationValue="Friend" Row="32" Save="1" SaveInterval="0">
-            <Col Tag="SkillID" Type="string"/>
-            <Col Tag="SkillLevel" Type="int"/>
-            <Col Tag="SkillStone" Type="string"/>
-            <Col Tag="SkillSoulLevel" Type="int"/>
-        </Record>
-    </Records>
-    <Records>
-        <Record Col="4" Desc="任务杀怪表" Id="TaskMonsterList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="8" Save="1" SaveInterval="0">
-            <Col Tag="MonsterID" Type="string"/>
-            <Col Tag="CurrentKillCount" Type="int"/>
-            <Col Tag="RequireKillCount" Type="int"/>
-            <Col Tag="TaskID" Type="string"/>
-        </Record>
-    </Records>
-    <Records>
-        <Record Col="2" Desc="任务表" Id="TaskList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="512" Save="1" SaveInterval="0">
-            <Col Tag="TaskID" Type="string"/>
-            <Col Tag="TaskStatus" Type="int"/>
-        </Record>
-    </Records>
     <Includes/>
     <Components/>
 </XML>
