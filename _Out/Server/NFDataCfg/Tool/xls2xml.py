@@ -79,7 +79,10 @@ def excel_to_xml(path, file):
     # 写入XML root标签
     root_node = xml_doc.createElement("XML")
     xml_doc.appendChild(root_node)
-
+	
+	record_nodes = xml_doc.createElement("Records")
+    root_node.appendChild(record_nodes)
+	
     for sheet_index in range(0, xls_file.nsheets):
         sheet_name = xls_file.sheet_names()[sheet_index]
         sheet_data = xls_file.sheets()[sheet_index]
@@ -105,8 +108,7 @@ def excel_to_xml(path, file):
             print("next step is to process component")
         else:
             #写入Records标签
-            record_nodes = xml_doc.createElement("Records")
-            root_node.appendChild(record_nodes)
+            
             #0行是标签名 0行0列-0行9列是Record信息值 0行10列-0行n列是record中的列名
             #1行是标签的值
             #2行10列-2行n列是record列名的值
