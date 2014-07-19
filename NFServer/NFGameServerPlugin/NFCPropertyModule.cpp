@@ -184,12 +184,16 @@ int NFCPropertyModule::OnObjectClassEvent( const NFIDENTID& self, const std::str
 
 int NFCPropertyModule::RefreshBaseProperty( const NFIDENTID& self )
 {
+    NFIRecord* pRecord = m_pKernelModule->FindRecord(self, mstrCommPropertyName);
+    if (!pRecord)
+    {
+        return 1;
+    }
+
     //初始属性+等级属性(职业决定)
     NFJobType eJobType = ( NFJobType )m_pKernelModule->QueryPropertyInt( self, "Job" );
     int nLevel = m_pKernelModule->QueryPropertyInt( self, "Level" );
-
     
-    NFIRecord* pRecord = m_pKernelModule->FindRecord(self, mstrCommPropertyName);
     for ( int i = 0; i < pRecord->GetCols(); ++i )
     {
         const std::string& strColTag = pRecord->GetColTag(i);
