@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--this is a class xml-->
 <XML>
+    <Records/>
     <Propertys>
         <Property Desc="" Id="ServerID" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
         <Property Desc="" Id="Name" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
