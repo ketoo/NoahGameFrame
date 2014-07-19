@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--this is a class xml-->
 <XML>
+    <Records/>
     <Propertys>
         <Property Desc="影响属性类型(效果类型)  生命，法力(可组合,叠加)" Id="EffectType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="string"/>
         <Property Desc="影响值类型 百分比 绝对值--如果是控制属性开关，则只能是绝对值" Id="EffectValueType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int"/>
