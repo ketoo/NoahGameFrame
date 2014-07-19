@@ -27,6 +27,8 @@ public:
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
     virtual bool AfterInit();
 
+    virtual bool ConnectSql(const std::string& strIP);
+
 	virtual int AddAccountInfo(const std::string& strAccount, const std::string& strPassword);
 
 	//int& nState:0为正确可登录，>0为其他各种错误,比如封号等
