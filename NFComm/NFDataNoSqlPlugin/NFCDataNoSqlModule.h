@@ -27,6 +27,8 @@ public:
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
     virtual bool AfterInit();
 
+    virtual bool ConnectSql(const std::string& strIP);
+
     virtual NFIDataNoSqlDriver* GetDriver()
     {
         return m_pPlayerDataDriver;
