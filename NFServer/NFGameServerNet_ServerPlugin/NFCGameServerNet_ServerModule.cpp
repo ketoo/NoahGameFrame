@@ -1760,7 +1760,7 @@ void NFCGameServerNet_ServerModule::OnClienSwapSceneProcess( const NFIPacket& ms
         return;
     }
 
-    NFIDENTID* pIdent = mRoleFDData.RemoveElement(nPlayerID);
+    NFIDENTID* pIdent = mRoleFDData.GetElement(nPlayerID);
     if (pIdent)
     {
         NFCValueList var;
