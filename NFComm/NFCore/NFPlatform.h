@@ -280,7 +280,8 @@ typedef long long NFINT64;
 #define NFASSERT(exp_, msg_, file_, func_)  \
     std::string strInfo("Message:");        \
     strInfo += msg_ + std::string(" don't exist or some warning") + std::string("\n\nFile:") + std::string(file_) + std::string("\n Function:") + func_; \
-    MessageBox(0, TEXT(strInfo.c_str()), TEXT("Error_"#exp_), MB_RETRYCANCEL | MB_ICONERROR);
+    MessageBox(0, TEXT(strInfo.c_str()), TEXT("Error_"#exp_), MB_RETRYCANCEL | MB_ICONERROR); \
+    assert(0);
 #else
 #define NFASSERT(exp_, msg_, file_, func_)
 #endif
