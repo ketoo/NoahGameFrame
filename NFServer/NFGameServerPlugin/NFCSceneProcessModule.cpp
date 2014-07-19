@@ -67,6 +67,14 @@ bool NFCSceneProcessModule::AfterInit()
                 LoadInitFileResource( nSceneID );
 
                 m_pKernelModule->CreateContainer( nSceneID, strData );
+
+                if ( E_SCENE_TYPE::SCENE_TYPE_NORMAL == GetCloneSceneType(nSceneID) )
+                {
+                    for (int i = 0; i < mnContainerLine; ++i)
+                    {
+                        m_pKernelModule->RequestGroupScene( nSceneID);
+                    }
+                }
             }
 
             bRet = list.Next(strData);
