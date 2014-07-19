@@ -79,8 +79,8 @@ def excel_to_xml(path, file):
     # 写入XML root标签
     root_node = xml_doc.createElement("XML")
     xml_doc.appendChild(root_node)
-	
-	record_nodes = xml_doc.createElement("Records")
+
+    record_nodes = xml_doc.createElement("Records")
     root_node.appendChild(record_nodes)
 	
     for sheet_index in range(0, xls_file.nsheets):
