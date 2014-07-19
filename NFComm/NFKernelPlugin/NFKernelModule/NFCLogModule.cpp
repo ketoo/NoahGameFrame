@@ -226,7 +226,7 @@ bool NFCLogModule::LogObject(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
 
 }
 
-void NFDumpCrashLog()
+void NFCLogModule::LogStack()
 {
 #ifdef NF_DEBUG_MODE
     time_t t = time(0);
@@ -248,13 +248,7 @@ void NFDumpCrashLog()
 
     CloseHandle(hDumpFile);
 
-    FatalAppExit(-1,  szDmupName);
 #endif
-}
-
-void NFCLogModule::LogStack()
-{
-    NFDumpCrashLog();
 }
 
 bool NFCLogModule::LogNormal( const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strInfo, const std::string& strDesc,  char* func, int line )
