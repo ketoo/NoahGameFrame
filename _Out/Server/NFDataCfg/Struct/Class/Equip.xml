@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--this is a class xml-->
 <XML>
+    <Records/>
     <Propertys>
         <Property Desc="NFSexType" Id="Sex" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
         <Property Desc="强化对应的BUFF列表，最大10次强化那么就9个逗号隔开，对应10个BUFF" Id="IntensiveBuffList" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
