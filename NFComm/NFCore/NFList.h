@@ -16,19 +16,19 @@
 #include <algorithm>
 #include "NFPlatform.h"
 
-template < typename idType >
+template < typename T >
 class NFList
 {
 public:
     virtual ~NFList() {}
-    bool                    Add(const idType& id);
-    bool                    Find(const idType& id);
-    bool                    Remove(const idType& id);
+    bool                    Add(const T& id);
+    bool                    Find(const T& id);
+    bool                    Remove(const T& id);
     bool                    ClearAll();
 
-    bool                    First(idType& id);
-	bool                    Next(idType& id);
-    bool                    Get(const int32_t index, idType& id);
+    bool                    First(T& id);
+	bool                    Next(T& id);
+    bool                    Get(const int32_t index, T& id);
     int                       Count();
 
 // 	idType& operator [] (const int32_t index)
@@ -46,15 +46,15 @@ public:
 
 protected:
 	//idType normal;
-    typedef     std::list<idType>   TLISTOBJCONFIGLIST;
+    typedef     std::list<T>   TLISTOBJCONFIGLIST;
     TLISTOBJCONFIGLIST          mtObjConfigList;
-    typename std::list<idType>::iterator mCurIter;
+    typename std::list<T>::iterator mCurIter;
 
 private:
 };
 
-template < typename idType >
-bool NFList<idType>::Add(const idType& id)
+template < typename T >
+bool NFList<T>::Add(const T& id)
 {
     if (!Find(id))
     {
@@ -65,8 +65,8 @@ bool NFList<idType>::Add(const idType& id)
     return false;
 }
 
-template < typename idType >
-bool NFList<idType>::Remove(const idType& id)
+template < typename T >
+bool NFList<T>::Remove(const T& id)
 {
     if (Find(id))
     {
@@ -77,15 +77,15 @@ bool NFList<idType>::Remove(const idType& id)
     return false;
 }
 
-template < typename idType >
-bool NFList<idType>::ClearAll()
+template < typename T >
+bool NFList<T>::ClearAll()
 {
     mtObjConfigList.clear();
     return true;
 }
 
-template < typename idType >
-bool NFList<idType>::First(idType& id)
+template < typename T >
+bool NFList<T>::First(T& id)
 {
     if (mtObjConfigList.size() <= 0)
     {
@@ -102,8 +102,8 @@ bool NFList<idType>::First(idType& id)
     return false;
 }
 
-template < typename idType >
-bool NFList<idType>::Next(idType& id)
+template < typename T >
+bool NFList<T>::Next(T& id)
 {
     ++mCurIter;
     if (mCurIter != mtObjConfigList.end())
@@ -115,8 +115,8 @@ bool NFList<idType>::Next(idType& id)
     return false;
 }
 
-template < typename idType >
-bool NFList<idType>::Find(const idType& id)
+template < typename T >
+bool NFList<T>::Find(const T& id)
 {
     typename TLISTOBJCONFIGLIST::iterator it = std::find(mtObjConfigList.begin(), mtObjConfigList.end(), id);
     if (it != mtObjConfigList.end())
@@ -127,15 +127,15 @@ bool NFList<idType>::Find(const idType& id)
     return false;
 }
 
-template < typename idType >
-bool NFList<idType>::Get(const int32_t index, idType& id)
+template < typename T >
+bool NFList<T>::Get(const int32_t index, T& id)
 {
 	if (index >= mtObjConfigList.size())
 	{
 		return false;;
 	}
 	
-	std::list<idType>::iterator it = this->mtObjConfigList.begin();
+	std::list<T>::iterator it = this->mtObjConfigList.begin();
 	std::advance(it, index);
 
 	id = *it;
@@ -143,8 +143,8 @@ bool NFList<idType>::Get(const int32_t index, idType& id)
 	return true;
 }
 
-template < typename idType >
-int NFList<idType>::Count()
+template < typename T >
+int NFList<T>::Count()
 {
     return (int)(mtObjConfigList.size());
 }

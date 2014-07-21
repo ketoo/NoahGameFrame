@@ -19,11 +19,11 @@ class NFCProperty : public NFIProperty
 public:
     NFCProperty();
 
-    NFCProperty(const NFIDENTID& self, const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, int nIndex, const std::string& strScriptFunction);
+    NFCProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, int nIndex, const std::string& strScriptFunction);
 
     virtual ~NFCProperty();
 
-    virtual void SetValue(const NFIValueList::VarData& varData);
+    virtual void SetValue(const NFIValueList::TData& TData);
     virtual void SetValue(const NFIProperty* pProperty);
 
     virtual bool SetInt(int value);
@@ -33,7 +33,7 @@ public:
     virtual bool SetObject(const NFIDENTID& value);
     virtual bool SetPointer(void* value);
 
-    virtual const VARIANT_TYPE GetType() const;
+    virtual const TDATA_TYPE GetType() const;
     virtual const bool GeUsed() const;
     virtual const std::string& GetKey() const;
     virtual const bool GetSave() const;
@@ -61,12 +61,12 @@ public:
 
 
 protected:
-    virtual NFIValueList::VarData GetValue() const;
+    virtual NFIValueList::TData GetValue() const;
 
     //int OnEventHandler(const NFIValueList& oldVar, const NFIValueList& newVar);
     int OnEventHandler(const NFIValueList& oldVar, const NFIValueList& newVar);
 private:
-//     typedef std::map<PROPERTY_EVENT_FUNC, NFIValueList::VarData> TPROPERTYCALLBACK;
+//     typedef std::map<PROPERTY_EVENT_FUNC, NFIValueList::TData> TPROPERTYCALLBACK;
 //     TPROPERTYCALLBACK mtPropertyCallback;
 
     typedef std::vector<PROPERTY_EVENT_FUNCTOR_PTR> TPROPERTYCALLBACKEX;
@@ -74,10 +74,10 @@ private:
 
     NFIDENTID mSelf;
     std::string msPropertyName;//可以想办法与基本类型共用
-    VARIANT_TYPE eType;//只有在不存在指针的时候才用这个判断类型--为节约内存
+    TDATA_TYPE eType;//只有在不存在指针的时候才用这个判断类型--为节约内存
     //NFCValueList    mVarProperty;
-    //NFIValueList::VarData* m_pVarData;
-    std::shared_ptr<NFIValueList::VarData> m_pVarData;
+    //NFIValueList::TData* m_pTData;
+    std::shared_ptr<NFIValueList::TData> m_pTData;
 
     bool mbPublic;
     bool mbPrivate;
