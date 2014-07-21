@@ -75,19 +75,19 @@ bool NFCValueList::Append(const NFIValueList& src, const int start, const int co
     return true;
 }
 
-bool NFCValueList::Append(const NFIValueList::VarData& varData)
+bool NFCValueList::Append(const NFIValueList::TData& TData)
 {
-    if (varData.nType <= VTYPE_UNKNOWN
-        || varData.nType >= VTYPE_MAX)
+    if (TData.nType <= TDATA_UNKNOWN
+        || TData.nType >= TDATA_MAX)
     {
         return false;
     }
 
-    VarData* pVar = GetStack(mnSize);
+    NFIValueList::TData* pVar = GetStack(mnSize);
     if (pVar)
     {
-        pVar->nType = varData.nType;
-        pVar->variantData = varData.variantData;
+        pVar->nType = TData.nType;
+        pVar->variantData = TData.variantData;
         mnSize++;
 
         return true;
@@ -98,25 +98,25 @@ bool NFCValueList::Append(const NFIValueList::VarData& varData)
 
 bool NFCValueList::AddInt(const int value)
 {
-    return NFIValueList::AddNumber<int>(VTYPE_INT, value);
+    return NFIValueList::AddNumber<int>(TDATA_INT, value);
 }
 
 bool NFCValueList::AddFloat(const float value)
 {
-    return AddNumber<float>(VTYPE_FLOAT, value);
+    return AddNumber<float>(TDATA_FLOAT, value);
 }
 
 bool NFCValueList::AddDouble(const double value)
 {
-    return AddNumber<double>(VTYPE_DOUBLE, value);
+    return AddNumber<double>(TDATA_DOUBLE, value);
 }
 
 bool NFCValueList::AddString(const char* value)
 {
-    VarData* pVar = GetStack(mnSize);
+    TData* pVar = GetStack(mnSize);
     if (pVar)
     {
-        pVar->nType = VTYPE_STRING;
+        pVar->nType = TDATA_STRING;
         pVar->variantData = (std::string)value;
         mnSize++;
     }
@@ -127,12 +127,12 @@ bool NFCValueList::AddString(const char* value)
 
 bool NFCValueList::AddObject(const NFIDENTID& value)
 {
-    return AddNumber<NFINT64>(VTYPE_OBJECT, value.nData64);
+    return AddNumber<NFINT64>(TDATA_OBJECT, value.nData64);
 }
 
 bool NFCValueList::AddPointer(const void* value)
 {
-    return AddNumber<const void*>(VTYPE_POINTER, value);
+    return AddNumber<const void*>(TDATA_POINTER, value);
 }
 
 bool NFCValueList::SetInt(const int index, const int value)
@@ -151,8 +151,8 @@ bool NFCValueList::SetString(const int index, const char* value)
 {
     if (index < mnSize && index > 0)
     {
-        VarData* var = GetStack(index);
-        if (var && VTYPE_STRING == var->nType)
+        TData* var = GetStack(index);
+        if (var && TDATA_STRING == var->nType)
         {
             var->variantData = (std::string)value;
             return true;
@@ -191,8 +191,8 @@ const std::string& NFCValueList::StringVal(const int index) const
 {
     if (index < mnSize)
     {
-        const VarData* var = GetStackConst(index);
-        if (var && VTYPE_STRING == var->nType)
+        const TData* var = GetStackConst(index);
+        if (var && TDATA_STRING == var->nType)
         {
             return boost::get<const std::string&>(var->variantData);
         }
@@ -263,11 +263,11 @@ bool NFCValueList::Split( const char* str, const char* strSplit )
 	return true;
 }
 
-VARIANT_TYPE NFCValueList::Type(const int index) const
+TDATA_TYPE NFCValueList::Type(const int index) const
 {
     if (index >= mnSize || index < 0)
     {
-        return VTYPE_UNKNOWN;
+        return TDATA_UNKNOWN;
     }
 
     if (index < STACK_SIZE)
@@ -276,35 +276,35 @@ VARIANT_TYPE NFCValueList::Type(const int index) const
     }
     else
     {
-        const VarData* pData = GetStackConst(index);
+        const TData* pData = GetStackConst(index);
         if (pData)
         {
             return pData->nType;
         }
     }
 
-    return VTYPE_UNKNOWN;
+    return TDATA_UNKNOWN;
 }
 
 bool NFCValueList::TypeEx(const int nType, ...) const
 {
     bool bRet = true;
 
-    if (VTYPE_UNKNOWN == nType)
+    if (TDATA_UNKNOWN == nType)
     {
         bRet = false;
         return bRet;
     }
 
-    VARIANT_TYPE pareType = (VARIANT_TYPE)nType;
+    TDATA_TYPE pareType = (TDATA_TYPE)nType;
     va_list arg_ptr;
     va_start(arg_ptr, nType);
     int index = 0;
 
-    while (pareType != VTYPE_UNKNOWN)
+    while (pareType != TDATA_UNKNOWN)
     {
         //比较
-        VARIANT_TYPE varType = Type(index);
+        TDATA_TYPE varType = Type(index);
         if (varType != pareType)
         {
             bRet = false;
@@ -312,7 +312,7 @@ bool NFCValueList::TypeEx(const int nType, ...) const
         }
 
         ++index;
-        pareType = (VARIANT_TYPE)va_arg(arg_ptr, int);   //获取下一个参数
+        pareType = (TDATA_TYPE)va_arg(arg_ptr, int);   //获取下一个参数
     }
 
     va_end(arg_ptr); //结束
@@ -330,12 +330,12 @@ void NFCValueList::Clear()
 {
     for (int i = 0; i < STACK_SIZE; i++)
     {
-        mvStack[i].nType = VTYPE_UNKNOWN;
+        mvStack[i].nType = TDATA_UNKNOWN;
     }
 
     for (int i = 0; i < mvList.size(); i++)
     {
-        VarData* data = mvList[i];
+        TData* data = mvList[i];
         delete[] data;
         data = NULL;
     }
@@ -362,25 +362,25 @@ void NFCValueList::InnerAppendEx(const NFIValueList& src, const int start, const
 {
     for (int i = start; i < end; ++i)
     {
-        VARIANT_TYPE vType = src.Type(i);
+        TDATA_TYPE vType = src.Type(i);
         switch (vType)
         {
-            case VTYPE_INT:
+            case TDATA_INT:
                 AddNumber<int>(vType, src.NumberVal<int>(i));
                 break;
-            case VTYPE_FLOAT:
+            case TDATA_FLOAT:
                 AddNumber<float>(vType, src.NumberVal<float>(i));
                 break;
-            case VTYPE_DOUBLE:
+            case TDATA_DOUBLE:
                 AddNumber<double>(vType, src.NumberVal<double>(i));
                 break;
-            case VTYPE_STRING:
+            case TDATA_STRING:
                 AddString(src.StringVal(i).c_str());
                 break;
-            case VTYPE_OBJECT:
+            case TDATA_OBJECT:
                 AddNumber<NFINT64>(vType, src.NumberVal<NFINT64>(i));
                 break;
-            case VTYPE_POINTER:
+            case TDATA_POINTER:
                 AddNumber<void*>(vType, src.NumberVal<void*>(i));
                 break;
             default:
@@ -394,13 +394,13 @@ std::string NFCValueList::StringValEx(const int index, const bool bForce) const
 {
     if (index < mnSize && index >= 0)
     {
-        VARIANT_TYPE type =  Type(index);
-        if (type == VTYPE_STRING)
+        TDATA_TYPE type =  Type(index);
+        if (type == TDATA_STRING)
         {
             return StringVal(index);
         }
 
-        const VarData* var = GetStackConst(index);
+        const TData* var = GetStackConst(index);
         if (var)
         {
             return boost::lexical_cast<std::string>(var->variantData);

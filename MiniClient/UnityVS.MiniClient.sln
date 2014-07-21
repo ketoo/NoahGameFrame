@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.MiniClient.CSharp", "UnityVS.MiniClient.CSharp.csproj", "{CD42A412-9861-7159-4F64-AD79731CEE1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.MiniClient.CSharp.Editor", "UnityVS.MiniClient.CSharp.Editor.csproj", "{8EBF1899-25FE-E584-9681-0941620850F9}"
+EndProject
 Project("{1FAC5C55-277D-4884-94A4-83DBDAF57E56}") = "UnityVS.MiniClient.UnityScript", "UnityVS.MiniClient.UnityScript.unityproj", "{09212257-B8AC-8DC1-A7D9-AAA6D57DF41B}"
 EndProject
 Global
@@ -15,6 +17,10 @@ Global
 		{CD42A412-9861-7159-4F64-AD79731CEE1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD42A412-9861-7159-4F64-AD79731CEE1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD42A412-9861-7159-4F64-AD79731CEE1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EBF1899-25FE-E584-9681-0941620850F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EBF1899-25FE-E584-9681-0941620850F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EBF1899-25FE-E584-9681-0941620850F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EBF1899-25FE-E584-9681-0941620850F9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{09212257-B8AC-8DC1-A7D9-AAA6D57DF41B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{09212257-B8AC-8DC1-A7D9-AAA6D57DF41B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09212257-B8AC-8DC1-A7D9-AAA6D57DF41B}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -165,13 +165,13 @@ public class NFNet
             strReqAcceptTaskID = GUI.TextField(new Rect(100, 150, 100, 50), strReqAcceptTaskID);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////
-
+            
             if (GUI.Button(new Rect(0, 200, 100, 50), "杀怪"))
             {
                 sendLogic.RequireUseSkill("", long.Parse(strReqKillNPCID));
             }
             strReqKillNPCID = GUI.TextField(new Rect(100, 200, 100, 50), strReqKillNPCID);
-
+            
             ////////////////////////////////////////////////////////////////////////////////////////////////
             if (GUI.Button(new Rect(0, 250, 100, 50), "使用道具"))
             {
@@ -188,7 +188,7 @@ public class NFNet
             strPickUpItemID = GUI.TextField(new Rect(100, 300, 100, 50), strPickUpItemID);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////
-
+            */
             if (GUI.Button(new Rect(0, 350, 100, 50), "设置属性"))
             {
                 sendLogic.RequireProperty(nSelfID, strReqSetProperty, int.Parse(strReqPropertyValue));
@@ -197,7 +197,7 @@ public class NFNet
             strReqPropertyValue = GUI.TextField(new Rect(200, 350, 100, 50), strReqPropertyValue);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////
-
+            /*
             if (GUI.Button(new Rect(0, 400, 100, 50), "添加道具"))
             {
                 sendLogic.RequireItem(strReqAddItem, int.Parse(strAddCount));
@@ -231,6 +231,8 @@ public class NFNet
     float fTime = 0.0f;
     public void Update()
     {
+        ntarget = objectElement.targetIdent.nData64;
+
         if (null != client)
         {
             client.Update();
