@@ -52,7 +52,7 @@ public class NFObjectElement
 			NFIDENTID ident = objectList.ObjectVal(i);
 			int nSerial = (int)(ident.nData64 >>32 & 0xFFFFFFFF);
 			int nIdent = (int)(ident.nData64 & 0xFFFFFFFF);
-			if(GUI.Button(new Rect(0, i*nElementHeight, nElementWidth/2, nElementHeight), nSerial.ToString() + " " + nIdent.ToString()))
+			if(GUI.Button(new Rect(0, i*nElementHeight, nElementWidth/2, nElementHeight), ident.nData64.ToString()))
 			{
 				targetIdent = ident;
 				strTableName = "";
