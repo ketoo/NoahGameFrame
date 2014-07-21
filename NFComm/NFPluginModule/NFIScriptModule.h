@@ -530,7 +530,7 @@ public:
         return m_pKernelModule->QueryRecordObject(self, strRecordName, nRow, nCol);
     }
 
-    bool AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction)
+    bool AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction)
     {
         return m_pKernelModule->AddProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, nIndex, strScriptFunction);
     }
@@ -549,9 +549,9 @@ public:
         return false;
     }
 
-    bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFCScriptVarList& varData, const NFCScriptVarList& varKey, const NFCScriptVarList& varDesc, const NFCScriptVarList& varTag, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex)
+    bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFCScriptVarList& TData, const NFCScriptVarList& varKey, const NFCScriptVarList& varDesc, const NFCScriptVarList& varTag, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex)
     {
-        return m_pKernelModule->AddRecord(self, strRecordName, varData.GetVar(), varKey.GetVar(), varDesc.GetVar(), varTag.GetVar(), varTag.GetVar(), nRows, bPublic, bPrivate, bSave, nIndex);
+        return m_pKernelModule->AddRecord(self, strRecordName, TData.GetVar(), varKey.GetVar(), varDesc.GetVar(), varTag.GetVar(), varTag.GetVar(), nRows, bPublic, bPrivate, bSave, nIndex);
     }
 
 protected:
@@ -610,14 +610,14 @@ static int NFVarList_GetCount(NFIValueList* pVarList)
     return 0;
 }
 
-static VARIANT_TYPE NFVarList_Type(NFIValueList* pVarList, const int index)
+static TDATA_TYPE NFVarList_Type(NFIValueList* pVarList, const int index)
 {
     if (pVarList)
     {
         return pVarList->Type(index);
     }
 
-    return VTYPE_UNKNOWN;
+    return TDATA_UNKNOWN;
 }
 
 static bool NFVarList_AddInt(NFIValueList* pVarList, const int value)
@@ -1179,7 +1179,7 @@ static NFIDENTID KernelModule_QueryRecordObject(const NFScriptInt64& nPtrKernelM
 }
 
 static bool KernelModule_AddProperty(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self,
-                        const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic ,  bool bPrivate ,  
+                        const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic ,  bool bPrivate ,  
                         bool bSave, int nIndex, const std::string& strScriptFunction)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
@@ -1203,13 +1203,13 @@ static bool KernelModule_AddRow(const NFScriptInt64& nPtrKernelModule, const NFS
     return false;
 }
 static bool KernelModule_AddRecord(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, const std::string& strRecordName, 
-                      const NFCScriptVarList& varData, const NFCScriptVarList& varKey, const NFCScriptVarList& varDesc, const NFCScriptVarList& varTag, 
+                      const NFCScriptVarList& TData, const NFCScriptVarList& varKey, const NFCScriptVarList& varDesc, const NFCScriptVarList& varTag, 
                       const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
     if (pScriptKernelModule)
     {
-        return pScriptKernelModule->AddRecord(self.ObjectVal(), strRecordName, varData, varKey, varDesc, varTag, nRows, bPublic, bPrivate, bSave, nIndex);
+        return pScriptKernelModule->AddRecord(self.ObjectVal(), strRecordName, TData, varKey, varDesc, varTag, nRows, bPublic, bPrivate, bSave, nIndex);
     }
 
     return false;
