@@ -6,7 +6,7 @@ using NFCoreEx;
 public class NFObjectElement
 {
 	
-	private NFIDENTID targetIdent = new NFIDENTID();
+	public NFIDENTID targetIdent = new NFIDENTID();
 	private string strTableName = "";
     private string strInfo = "";
     private string strCommand = "";
@@ -54,7 +54,7 @@ public class NFObjectElement
 			int nIdent = (int)(ident.nData64 & 0xFFFFFFFF);
 			if(GUI.Button(new Rect(0, i*nElementHeight, nElementWidth/2, nElementHeight), ident.nData64.ToString()))
 			{
-				targetIdent = ident;
+                targetIdent = ident;
 				strTableName = "";
 			}
 			
