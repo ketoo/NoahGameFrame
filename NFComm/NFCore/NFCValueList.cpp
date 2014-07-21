@@ -75,19 +75,19 @@ bool NFCValueList::Append(const NFIValueList& src, const int start, const int co
     return true;
 }
 
-bool NFCValueList::Append(const NFIValueList::VarData& varData)
+bool NFCValueList::Append(const NFIValueList::TData& TData)
 {
-    if (varData.nType <= VTYPE_UNKNOWN
-        || varData.nType >= VTYPE_MAX)
+    if (TData.nType <= VTYPE_UNKNOWN
+        || TData.nType >= VTYPE_MAX)
     {
         return false;
     }
 
-    VarData* pVar = GetStack(mnSize);
+    NFIValueList::TData* pVar = GetStack(mnSize);
     if (pVar)
     {
-        pVar->nType = varData.nType;
-        pVar->variantData = varData.variantData;
+        pVar->nType = TData.nType;
+        pVar->variantData = TData.variantData;
         mnSize++;
 
         return true;
@@ -113,7 +113,7 @@ bool NFCValueList::AddDouble(const double value)
 
 bool NFCValueList::AddString(const char* value)
 {
-    VarData* pVar = GetStack(mnSize);
+    TData* pVar = GetStack(mnSize);
     if (pVar)
     {
         pVar->nType = VTYPE_STRING;
@@ -151,7 +151,7 @@ bool NFCValueList::SetString(const int index, const char* value)
 {
     if (index < mnSize && index > 0)
     {
-        VarData* var = GetStack(index);
+        TData* var = GetStack(index);
         if (var && VTYPE_STRING == var->nType)
         {
             var->variantData = (std::string)value;
@@ -191,7 +191,7 @@ const std::string& NFCValueList::StringVal(const int index) const
 {
     if (index < mnSize)
     {
-        const VarData* var = GetStackConst(index);
+        const TData* var = GetStackConst(index);
         if (var && VTYPE_STRING == var->nType)
         {
             return boost::get<const std::string&>(var->variantData);
@@ -263,7 +263,7 @@ bool NFCValueList::Split( const char* str, const char* strSplit )
 	return true;
 }
 
-VARIANT_TYPE NFCValueList::Type(const int index) const
+TDATA_TYPE NFCValueList::Type(const int index) const
 {
     if (index >= mnSize || index < 0)
     {
@@ -276,7 +276,7 @@ VARIANT_TYPE NFCValueList::Type(const int index) const
     }
     else
     {
-        const VarData* pData = GetStackConst(index);
+        const TData* pData = GetStackConst(index);
         if (pData)
         {
             return pData->nType;
@@ -296,7 +296,7 @@ bool NFCValueList::TypeEx(const int nType, ...) const
         return bRet;
     }
 
-    VARIANT_TYPE pareType = (VARIANT_TYPE)nType;
+    TDATA_TYPE pareType = (TDATA_TYPE)nType;
     va_list arg_ptr;
     va_start(arg_ptr, nType);
     int index = 0;
@@ -304,7 +304,7 @@ bool NFCValueList::TypeEx(const int nType, ...) const
     while (pareType != VTYPE_UNKNOWN)
     {
         //比较
-        VARIANT_TYPE varType = Type(index);
+        TDATA_TYPE varType = Type(index);
         if (varType != pareType)
         {
             bRet = false;
@@ -312,7 +312,7 @@ bool NFCValueList::TypeEx(const int nType, ...) const
         }
 
         ++index;
-        pareType = (VARIANT_TYPE)va_arg(arg_ptr, int);   //获取下一个参数
+        pareType = (TDATA_TYPE)va_arg(arg_ptr, int);   //获取下一个参数
     }
 
     va_end(arg_ptr); //结束
@@ -335,7 +335,7 @@ void NFCValueList::Clear()
 
     for (int i = 0; i < mvList.size(); i++)
     {
-        VarData* data = mvList[i];
+        TData* data = mvList[i];
         delete[] data;
         data = NULL;
     }
@@ -362,7 +362,7 @@ void NFCValueList::InnerAppendEx(const NFIValueList& src, const int start, const
 {
     for (int i = start; i < end; ++i)
     {
-        VARIANT_TYPE vType = src.Type(i);
+        TDATA_TYPE vType = src.Type(i);
         switch (vType)
         {
             case VTYPE_INT:
@@ -394,13 +394,13 @@ std::string NFCValueList::StringValEx(const int index, const bool bForce) const
 {
     if (index < mnSize && index >= 0)
     {
-        VARIANT_TYPE type =  Type(index);
+        TDATA_TYPE type =  Type(index);
         if (type == VTYPE_STRING)
         {
             return StringVal(index);
         }
 
-        const VarData* var = GetStackConst(index);
+        const TData* var = GetStackConst(index);
         if (var)
         {
             return boost::lexical_cast<std::string>(var->variantData);

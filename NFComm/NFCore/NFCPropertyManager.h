@@ -28,9 +28,9 @@ public:
 
     virtual NFIProperty* AddProperty(const NFIDENTID& self, NFIProperty* pProperty);
 
-    virtual NFIProperty* AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction);
+    virtual NFIProperty* AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction);
 
-    virtual bool SetProperty(const std::string& strPropertyName, const NFIValueList::VarData& varData);
+    virtual bool SetProperty(const std::string& strPropertyName, const NFIValueList::TData& TData);
 
     virtual bool SetProperty(const NFIProperty* pProperty);
 	
