@@ -218,8 +218,8 @@ bool NFCSceneProcessModule::DestroyCloneScene( const int& nContainerID, const in
 int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
 {
     if ( var.GetCount() != 4 
-        || !var.TypeEx(VARIANT_TYPE::VTYPE_OBJECT, VARIANT_TYPE::VTYPE_INT, 
-        VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_UNKNOWN))
+        || !var.TypeEx(TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_INT, 
+        TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_UNKNOWN))
     {
         return 0;
     }
@@ -305,7 +305,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
 int NFCSceneProcessModule::OnLeaveSceneEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var )
 {
     if (1 != var.GetCount()
-        || !var.TypeEx(VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_UNKNOWN))
+        || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_UNKNOWN))
     {
         return -1;
     }
