@@ -146,8 +146,8 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
             continue;
         }
 
-        NFIValueList::VarData var;
-        VARIANT_TYPE eType = temProperty->GetType();
+        NFIValueList::TData var;
+        TDATA_TYPE eType = temProperty->GetType();
         var.nType = eType;
         switch (eType)
         {

@@ -33,7 +33,7 @@
 #include <boost/algorithm/string.hpp>
 
 //变量类型
-enum VARIANT_TYPE
+enum TDATA_TYPE
 {
     VTYPE_UNKNOWN,  // 未知
     VTYPE_INT,              // 32位整数
@@ -51,20 +51,20 @@ const static std::string NULL_STR = "";
 class NFIValueList
 {
 public:
-    struct VarData
+    struct TData
     {
     public:
-        VarData()
+        TData()
         {
             nType = VTYPE_UNKNOWN;
         }
 
-        ~VarData()
+        ~TData()
         {
             nType = VTYPE_UNKNOWN;
         }
 
-        VARIANT_TYPE nType;
+        TDATA_TYPE nType;
         boost::variant<bool, int, float, double, std::string, NFINT64, void*> variantData;
     };
 
@@ -79,14 +79,14 @@ public:
         NumberType result = 0;
         if (index < mnSize && index >= 0)
         {
-            VARIANT_TYPE type =  Type(index);
+            TDATA_TYPE type =  Type(index);
             if (type == VTYPE_DOUBLE
                 || type == VTYPE_FLOAT
                 || type == VTYPE_INT
                 || type == VTYPE_OBJECT
                 || type == VTYPE_POINTER)
             {
-                const VarData* var = GetStackConst(index);
+                const TData* var = GetStackConst(index);
                 result = boost::get<NumberType>(var->variantData);
             }
         }
@@ -99,14 +99,14 @@ public:
     {
         if (index < mnSize && index >= 0)
         {
-            VARIANT_TYPE type =  Type(index);
+            TDATA_TYPE type =  Type(index);
             if (type == VTYPE_DOUBLE
                 || type == VTYPE_FLOAT
                 || type == VTYPE_INT
                 || type == VTYPE_OBJECT
                 || type == VTYPE_POINTER)
             {
-                VarData* var = GetStack(index);
+                TData* var = GetStack(index);
                 var->variantData = value;
                 return true;
             }
@@ -116,10 +116,10 @@ public:
     }
 
     template<typename NumberType>
-    bool AddNumber(const VARIANT_TYPE eType, const NumberType& value)
+    bool AddNumber(const TDATA_TYPE eType, const NumberType& value)
     {
 
-        VarData* var = GetStack(mnSize);
+        TData* var = GetStack(mnSize);
         if (var)
         {
             var->nType = eType;
@@ -151,7 +151,7 @@ protected:
         return nOrder;
     }
 
-    VarData* GetStack(const int index)
+    TData* GetStack(const int index)
     {
         //mnNewSize是8的阶层
         if (index < STACK_SIZE)
@@ -164,13 +164,13 @@ protected:
             int nOrder = GetOrder(index, nOrderIndex);
             if (nOrder >= 0)
             {
-                VarData* pData = mvList[nOrder];
+                TData* pData = mvList[nOrder];
                 return &pData[nOrderIndex];
             }
         }
         else if (index == mnCapacity)
         {
-            VarData* pData = new VarData[mnNextOrderCapacity];
+            TData* pData = new TData[mnNextOrderCapacity];
             mvList.push_back(pData);
             mvList[mnOrder] = pData;
             mnOrder += 1;
@@ -184,7 +184,7 @@ protected:
     }
 
 public:
-    const VarData* GetStackConst(const int index) const
+    const TData* GetStackConst(const int index) const
     {
         //mnNewSize是8的阶层
         if (index < STACK_SIZE)
@@ -197,7 +197,7 @@ public:
             int nOrder = GetOrder(index, nOrderIndex);
             if (nOrder >= 0)
             {
-                VarData* pData = mvList[nOrder];
+                TData* pData = mvList[nOrder];
                 return &pData[nOrderIndex];
             }
         }
@@ -211,7 +211,7 @@ public:
     // 部分添加
     virtual bool Append(const NFIValueList& src, int start, int count) = 0;
     // 部分添加
-    virtual bool Append(const NFIValueList::VarData& svarData) = 0;
+    virtual bool Append(const NFIValueList::TData& sTData) = 0;
     // 清空
     virtual void Clear() = 0;
     // 是否为空
@@ -219,7 +219,7 @@ public:
     // 数据数量
     virtual int GetCount() const = 0;
     // 数据类型
-    virtual VARIANT_TYPE Type(const int index) const = 0;
+    virtual TDATA_TYPE Type(const int index) const = 0;
     //数据类型检测
     virtual bool TypeEx(const  int nType, ...) const = 0;
     //新进入拆分
@@ -248,7 +248,7 @@ public:
     virtual NFIDENTID ObjectVal(const int index) const = 0;
     virtual void* PointerVal(const int index) const = 0;
 
-    static bool Valid(const NFIValueList::VarData& var)
+    static bool Valid(const NFIValueList::TData& var)
     {
         bool bChanged = false;
 
@@ -462,8 +462,8 @@ protected:
     int mnSize;         //当前使用了的对象数量
     int mnNextOrderCapacity;
     NFINT16 mnOrder;            //扩充了几阶
-    boost::array<VarData, STACK_SIZE> mvStack;
-    std::vector<VarData*> mvList;
+    boost::array<TData, STACK_SIZE> mvStack;
+    std::vector<TData*> mvList;
 };
 
 inline NFIValueList::~NFIValueList() {}

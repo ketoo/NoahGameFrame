@@ -44,7 +44,7 @@
 //		{
 //			for ( int j = 0; j < pRecord->GetCols(); j++ )
 //			{
-//				VARIANT_TYPE varType = pRecord->GetColType( j );
+//				TDATA_TYPE varType = pRecord->GetColType( j );
 //				switch ( varType )
 //				{
 //				case VTYPE_INT:
@@ -218,7 +218,7 @@
 //
 //        if (bCheckType && bCheckType == bCheck)
 //        {
-//            VARIANT_TYPE varType = pProperty->GetType();
+//            TDATA_TYPE varType = pProperty->GetType();
 //            switch ( varType )
 //            {
 //            case VTYPE_INT:
@@ -270,10 +270,10 @@
 //		const std::string& strName = propertyInt.property_name();
 //		int nData = propertyInt.data();
 //
-//		NFIValueList::VarData varData;
-//		varData.nType = VARIANT_TYPE::VTYPE_INT;
-//		varData.variantData = nData;
-//		pProManager->SetProperty( strName, varData );
+//		NFIValueList::TData TData;
+//		TData.nType = TDATA_TYPE::VTYPE_INT;
+//		TData.variantData = nData;
+//		pProManager->SetProperty( strName, TData );
 //	}
 //
 //	for ( int i = 0; i < propertyDB.property_float_list_size(); i++ )
@@ -282,10 +282,10 @@
 //		const std::string& strName = propertyFloat.property_name();
 //		float fData = propertyFloat.data();
 //
-//		NFIValueList::VarData varData;
-//		varData.nType = VARIANT_TYPE::VTYPE_FLOAT;
-//		varData.variantData = fData;
-//		pProManager->SetProperty( strName, varData );
+//		NFIValueList::TData TData;
+//		TData.nType = TDATA_TYPE::VTYPE_FLOAT;
+//		TData.variantData = fData;
+//		pProManager->SetProperty( strName, TData );
 //	}
 //
 //	for ( int i = 0; i < propertyDB.property_string_list_size(); i++ )
@@ -294,10 +294,10 @@
 //		const std::string& strName = propertyString.property_name();
 //		const std::string& strData = propertyString.data();
 //
-//		NFIValueList::VarData varData;
-//		varData.nType = VARIANT_TYPE::VTYPE_STRING;
-//		varData.variantData = strData;
-//		pProManager->SetProperty( strName, varData );
+//		NFIValueList::TData TData;
+//		TData.nType = TDATA_TYPE::VTYPE_STRING;
+//		TData.variantData = strData;
+//		pProManager->SetProperty( strName, TData );
 //	}
 //
 //	for ( int i = 0; i < propertyDB.property_object_list_size(); i++ )
@@ -306,10 +306,10 @@
 //		const std::string& strName = propertyObject.property_name();
 //		int64_t nData = propertyObject.data();
 //
-//		NFIValueList::VarData varData;
-//		varData.nType = VARIANT_TYPE::VTYPE_OBJECT;
-//		varData.variantData = nData;
-//		pProManager->SetProperty( strName, varData );
+//		NFIValueList::TData TData;
+//		TData.nType = TDATA_TYPE::VTYPE_OBJECT;
+//		TData.variantData = nData;
+//		pProManager->SetProperty( strName, TData );
 //	}
 //
 //	return true;
