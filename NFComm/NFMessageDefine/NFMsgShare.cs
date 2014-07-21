@@ -459,6 +459,13 @@ namespace NFMsg
       get { return _scene_id; }
       set { _scene_id = value; }
     }
+    private byte[] _class_id;
+    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"class_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] class_id
+    {
+      get { return _class_id; }
+      set { _class_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

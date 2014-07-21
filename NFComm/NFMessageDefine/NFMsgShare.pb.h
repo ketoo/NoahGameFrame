@@ -1443,6 +1443,18 @@ class PlayerEntryInfo : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 scene_id() const;
   inline void set_scene_id(::google::protobuf::int32 value);
 
+  // required bytes class_id = 9;
+  inline bool has_class_id() const;
+  inline void clear_class_id();
+  static const int kClassIdFieldNumber = 9;
+  inline const ::std::string& class_id() const;
+  inline void set_class_id(const ::std::string& value);
+  inline void set_class_id(const char* value);
+  inline void set_class_id(const void* value, size_t size);
+  inline ::std::string* mutable_class_id();
+  inline ::std::string* release_class_id();
+  inline void set_allocated_class_id(::std::string* class_id);
+
   // @@protoc_insertion_point(class_scope:NFMsg.PlayerEntryInfo)
  private:
   inline void set_has_object_guid();
@@ -1461,6 +1473,8 @@ class PlayerEntryInfo : public ::google::protobuf::Message {
   inline void clear_has_config_id();
   inline void set_has_scene_id();
   inline void clear_has_scene_id();
+  inline void set_has_class_id();
+  inline void clear_has_class_id();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -1472,9 +1486,10 @@ class PlayerEntryInfo : public ::google::protobuf::Message {
   ::std::string* config_id_;
   ::google::protobuf::int32 player_state_;
   ::google::protobuf::int32 scene_id_;
+  ::std::string* class_id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -3056,6 +3071,76 @@ inline ::google::protobuf::int32 PlayerEntryInfo::scene_id() const {
 inline void PlayerEntryInfo::set_scene_id(::google::protobuf::int32 value) {
   set_has_scene_id();
   scene_id_ = value;
+}
+
+// required bytes class_id = 9;
+inline bool PlayerEntryInfo::has_class_id() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void PlayerEntryInfo::set_has_class_id() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void PlayerEntryInfo::clear_has_class_id() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void PlayerEntryInfo::clear_class_id() {
+  if (class_id_ != &::google::protobuf::internal::kEmptyString) {
+    class_id_->clear();
+  }
+  clear_has_class_id();
+}
+inline const ::std::string& PlayerEntryInfo::class_id() const {
+  return *class_id_;
+}
+inline void PlayerEntryInfo::set_class_id(const ::std::string& value) {
+  set_has_class_id();
+  if (class_id_ == &::google::protobuf::internal::kEmptyString) {
+    class_id_ = new ::std::string;
+  }
+  class_id_->assign(value);
+}
+inline void PlayerEntryInfo::set_class_id(const char* value) {
+  set_has_class_id();
+  if (class_id_ == &::google::protobuf::internal::kEmptyString) {
+    class_id_ = new ::std::string;
+  }
+  class_id_->assign(value);
+}
+inline void PlayerEntryInfo::set_class_id(const void* value, size_t size) {
+  set_has_class_id();
+  if (class_id_ == &::google::protobuf::internal::kEmptyString) {
+    class_id_ = new ::std::string;
+  }
+  class_id_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* PlayerEntryInfo::mutable_class_id() {
+  set_has_class_id();
+  if (class_id_ == &::google::protobuf::internal::kEmptyString) {
+    class_id_ = new ::std::string;
+  }
+  return class_id_;
+}
+inline ::std::string* PlayerEntryInfo::release_class_id() {
+  clear_has_class_id();
+  if (class_id_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = class_id_;
+    class_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void PlayerEntryInfo::set_allocated_class_id(::std::string* class_id) {
+  if (class_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete class_id_;
+  }
+  if (class_id) {
+    set_has_class_id();
+    class_id_ = class_id;
+  } else {
+    clear_has_class_id();
+    class_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
