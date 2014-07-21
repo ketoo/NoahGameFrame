@@ -115,6 +115,9 @@ int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
     case NFMsg::EGameMsgID::EGMI_REQ_SWAP_SCENE:
         OnClienSwapSceneProcess(msg);
          break;
+    case NFMsg::EGameMsgID::EGMI_REQ_COMMAND:
+        OnClienGMProcess(msg);
+        break;
     default:
         break;
     }
@@ -250,6 +253,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
         return;
     }
 
+    pObject->SetPropertyInt("LoadPropertyFinish", 1);
     
     m_pEventProcessModule->DoEvent(pObject->Self(), "Player", CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCValueList() );
 
@@ -312,7 +316,7 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDENTID& self, const
             {
                 switch ( pPropertyInfo->GetType())
                 {
-                case VTYPE_INT:
+                case TDATA_INT:
                     {
                         if ( pPropertyInfo->GetPublic() )
                         {
@@ -330,7 +334,7 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDENTID& self, const
                     }
                     break;
 
-                case VTYPE_FLOAT:
+                case TDATA_FLOAT:
                     {
                         if ( pPropertyInfo->GetPublic() )
                         {
@@ -348,7 +352,7 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDENTID& self, const
                     }
                     break;
 
-                case VTYPE_DOUBLE:
+                case TDATA_DOUBLE:
                     {
                         if ( pPropertyInfo->GetPublic() )
                         {
@@ -366,7 +370,7 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDENTID& self, const
                     }
                     break;
 
-                case VTYPE_STRING:
+                case TDATA_STRING:
                     {
                         if ( pPropertyInfo->GetPublic() )
                         {
@@ -384,7 +388,7 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDENTID& self, const
                     }
                     break;
 
-                case VTYPE_OBJECT:
+                case TDATA_OBJECT:
                     {
                         if ( pPropertyInfo->GetPublic() )
                         {
@@ -463,10 +467,10 @@ bool OnRecordEnterPack(NFIRecord* pRecord, NFMsg::ObjectRecordBase* pObjectRecor
             {
                 //如果是0就不发送了，因为客户端默认是0
                 NFCValueList valueList;
-                VARIANT_TYPE eType = pRecord->GetColType( j );
+                TDATA_TYPE eType = pRecord->GetColType( j );
                 switch ( eType )
                 {
-                case VARIANT_TYPE::VTYPE_INT:
+                case TDATA_TYPE::TDATA_INT:
                     {
                         int nValue = pRecord->QueryInt( i, j );
                         //if ( 0 != nValue )
@@ -478,7 +482,7 @@ bool OnRecordEnterPack(NFIRecord* pRecord, NFMsg::ObjectRecordBase* pObjectRecor
                         }
                     }
                     break;
-                case VARIANT_TYPE::VTYPE_DOUBLE:
+                case TDATA_TYPE::TDATA_DOUBLE:
                     {
                         double dwValue = pRecord->QueryDouble( i, j );
                         //if ( dwValue < -0.01f || dwValue > 0.01f )
@@ -489,7 +493,7 @@ bool OnRecordEnterPack(NFIRecord* pRecord, NFMsg::ObjectRecordBase* pObjectRecor
                         }
                     }
                     break;
-                case VARIANT_TYPE::VTYPE_FLOAT:
+                case TDATA_TYPE::TDATA_FLOAT:
                     {
                         float fValue = pRecord->QueryFloat( i, j );
                         //if ( fValue < -0.01f || fValue > 0.01f )
@@ -500,7 +504,7 @@ bool OnRecordEnterPack(NFIRecord* pRecord, NFMsg::ObjectRecordBase* pObjectRecor
                         }
                     }
                     break;
-                case VARIANT_TYPE::VTYPE_STRING:
+                case TDATA_TYPE::TDATA_STRING:
                     {
                         const std::string& strData = pRecord->QueryString( i, j );
                         //if ( !strData.empty() )
@@ -511,7 +515,7 @@ bool OnRecordEnterPack(NFIRecord* pRecord, NFMsg::ObjectRecordBase* pObjectRecor
                         }
                     }
                     break;
-                case VARIANT_TYPE::VTYPE_OBJECT:
+                case TDATA_TYPE::TDATA_OBJECT:
                     {
                         NFIDENTID ident = pRecord->QueryObject( i, j );
                         //if ( !ident.IsNull() )
@@ -779,7 +783,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 
     switch ( oldVar.Type( 0 ) )
     {
-    case VTYPE_INT:
+    case TDATA_INT:
         {
             NFMsg::ObjectPropertyInt xPropertyInt;
             xPropertyInt.set_player_id( self.nData64 );
@@ -803,7 +807,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
         }
         break;
 
-    case VTYPE_FLOAT:
+    case TDATA_FLOAT:
         {
             NFMsg::ObjectPropertyFloat xPropertyFloat;
             xPropertyFloat.set_player_id( self.nData64 );
@@ -827,7 +831,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
         }
         break;
 
-    case VTYPE_DOUBLE:
+    case TDATA_DOUBLE:
         {
             NFMsg::ObjectPropertyFloat xPropertyDouble;
             xPropertyDouble.set_player_id( self.nData64 );
@@ -851,7 +855,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
         }
         break;
 
-    case VTYPE_STRING:
+    case TDATA_STRING:
         {
             NFMsg::ObjectPropertyString xPropertyString;
             xPropertyString.set_player_id( self.nData64 );
@@ -875,7 +879,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
         }
         break;
 
-    case VTYPE_OBJECT:
+    case TDATA_OBJECT:
         {
             NFMsg::ObjectPropertyObject xPropertyObject;
             xPropertyObject.set_player_id( self.nData64 );
@@ -946,7 +950,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
             {
                 switch ( newVar.Type( i ) )
                 {
-                case VTYPE_INT:
+                case TDATA_INT:
                     {
                         //添加的时候数据要全s
                         int nValue = newVar.IntVal( i );
@@ -958,7 +962,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                         }                        
                     }
                     break;
-                case VTYPE_FLOAT:
+                case TDATA_FLOAT:
                     {
                         float fValue = newVar.FloatVal( i );
                         //if ( fValue > 0.001f  || fValue < -0.001f )
@@ -969,7 +973,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                         }                        
                     }
                     break;
-                case VTYPE_DOUBLE:
+                case TDATA_DOUBLE:
                     {
                         float fValue = newVar.DoubleVal( i );
                         //if ( fValue > 0.001f  || fValue < -0.001f )
@@ -980,7 +984,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                         }                        
                     }
                     break;
-                case VTYPE_STRING:
+                case TDATA_STRING:
                     {
                         const std::string& str = newVar.StringVal( i );
                         //if (!str.empty())
@@ -991,7 +995,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                         }                        
                     }
                     break;
-                case VTYPE_OBJECT:
+                case TDATA_OBJECT:
                     {
                         NFIDENTID identValue = newVar.ObjectVal( i );
                         //if (!identValue.IsNull())
@@ -1074,7 +1078,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
         {
             switch ( oldVar.Type( 0 ) )
             {
-            case VTYPE_INT:
+            case TDATA_INT:
                 {
                     NFMsg::ObjectRecordInt xRecordChanged;
                     xRecordChanged.set_player_id( self.nData64 );
@@ -1101,7 +1105,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                 }
                 break;
 
-            case VTYPE_FLOAT:
+            case TDATA_FLOAT:
                 {
                     NFMsg::ObjectRecordFloat xRecordChanged;
                     xRecordChanged.set_player_id( self.nData64 );
@@ -1125,7 +1129,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                         }
                     }
                 }
-            case VTYPE_DOUBLE:
+            case TDATA_DOUBLE:
                 {
                     NFMsg::ObjectRecordFloat xRecordChanged;
                     xRecordChanged.set_player_id( self.nData64 );
@@ -1150,7 +1154,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                     }
                 }
                 break;
-            case VTYPE_STRING:
+            case TDATA_STRING:
                 {
                     NFMsg::ObjectRecordString xRecordChanged;
                     xRecordChanged.set_player_id( self.nData64 );
@@ -1175,7 +1179,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                     }
                 }
                 break;
-            case VTYPE_OBJECT:
+            case TDATA_OBJECT:
                 {
                     NFMsg::ObjectRecordObject xRecordChanged;
                     xRecordChanged.set_player_id( self.nData64 );
@@ -1646,9 +1650,9 @@ int NFCGameServerNet_ServerModule::OnUseSkillResultEvent( const NFIDENTID& self,
 int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
 {
     if ( var.GetCount() != 7 ||
-        !var.TypeEx(VARIANT_TYPE::VTYPE_OBJECT, VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_INT, 
-        VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_FLOAT,
-        VARIANT_TYPE::VTYPE_FLOAT, VARIANT_TYPE::VTYPE_FLOAT, VARIANT_TYPE::VTYPE_UNKNOWN)
+        !var.TypeEx(TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT, 
+        TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_FLOAT,
+        TDATA_TYPE::TDATA_FLOAT, TDATA_TYPE::TDATA_FLOAT, TDATA_TYPE::TDATA_UNKNOWN)
         )
     {
         return 1;
@@ -1897,4 +1901,34 @@ int NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess( const NFIPac
     }
 
     return 0;
+}
+
+void NFCGameServerNet_ServerModule::OnClienGMProcess( const NFIPacket& msg )
+{
+    int64_t nPlayerID = 0;
+    NFMsg::ReqCommand xMsg;
+    if (!RecivePB(msg, xMsg, nPlayerID))
+    {
+        return;
+    }
+
+    NFIDENTID* pIdent = mRoleFDData.GetElement(nPlayerID);
+    NFIDENTID* pControl = mRoleFDData.GetElement(xMsg.control_id());
+    if (!pIdent || !pControl)
+    {
+        return;
+    }
+
+    switch (xMsg.command_id())
+    {
+    case NFMsg::ReqCommand_EGameCommandType_EGCT_MODIY_PROPERTY:
+        {
+            const std::string& strPropertyName = xMsg.command_str_value();
+            const int nValue = xMsg.command_value();
+            m_pKernelModule->SetPropertyInt(*pControl, strPropertyName, nValue);
+        }
+        break;
+    default:
+        break;
+    }
 }
