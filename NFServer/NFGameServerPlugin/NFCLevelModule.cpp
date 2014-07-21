@@ -114,7 +114,7 @@ int NFCLevelModule::OnObjectClassEvent( const NFIDENTID& self, const std::string
 
 int NFCLevelModule::OnObjectBeKilled( const NFIDENTID& object, const int nEventID, const NFIValueList& var )
 {
-    if ( var.GetCount() == 1 && var.Type( 0 ) == VTYPE_OBJECT )
+    if ( var.GetCount() == 1 && var.Type( 0 ) == TDATA_OBJECT )
     {
         NFIDENTID identKiller = var.ObjectVal( 0 );
         if ( m_pKernelModule->GetObject( identKiller ) )

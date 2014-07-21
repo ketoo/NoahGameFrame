@@ -333,19 +333,19 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
                 {
                     switch (pArgProperty->GetType())
                     {
-                        case VTYPE_INT:
+                        case TDATA_INT:
                             pObject->SetPropertyInt(strPropertyName, arg.IntVal(i + 1));
                             break;
-                        case VTYPE_FLOAT:
+                        case TDATA_FLOAT:
                             pObject->SetPropertyFloat(strPropertyName, arg.FloatVal(i + 1));
                             break;
-                        case VTYPE_DOUBLE:
+                        case TDATA_DOUBLE:
                             pObject->SetPropertyDouble(strPropertyName, arg.DoubleVal(i + 1));
                             break;
-                        case VTYPE_STRING:
+                        case TDATA_STRING:
                             pObject->SetPropertyString(strPropertyName, arg.StringVal(i + 1));
                             break;
-                        case VTYPE_OBJECT:
+                        case TDATA_OBJECT:
                             pObject->SetPropertyObject(strPropertyName, arg.ObjectVal(i + 1));
                             break;
                         default:
@@ -1495,7 +1495,7 @@ bool NFCKernelModule::IsContainer(const NFIDENTID& self)
 
 int NFCKernelModule::Command(const NFIValueList& var)
 {
-    if (var.GetCount() > 0 && VTYPE_STRING ==  var.Type(0))
+    if (var.GetCount() > 0 && TDATA_STRING ==  var.Type(0))
     {
         std::string strCommand = var.StringVal(0);
         if ("queryObject" == strCommand && 3 == var.GetCount())
@@ -1538,7 +1538,7 @@ int NFCKernelModule::GetObjectByProperty(const int nContainerID, const std::stri
             TDATA_TYPE eType = valueArg.Type(0);
             switch (eType)
             {
-                case VTYPE_INT:
+                case TDATA_INT:
                 {
                     int nValue = QueryPropertyInt(ident, strPropertyName.c_str());
                     if (valueArg.IntVal(0) == nValue)
@@ -1547,7 +1547,7 @@ int NFCKernelModule::GetObjectByProperty(const int nContainerID, const std::stri
                     }
                 }
                 break;
-                case VTYPE_STRING:
+                case TDATA_STRING:
                 {
                     std::string strValue = QueryPropertyString(ident, strPropertyName.c_str());
                     std::string strCompareValue = valueArg.StringVal(0);
@@ -1557,7 +1557,7 @@ int NFCKernelModule::GetObjectByProperty(const int nContainerID, const std::stri
                     }
                 }
                 break;
-                case VTYPE_OBJECT:
+                case TDATA_OBJECT:
                 {
                     NFIDENTID identObject = QueryPropertyObject(ident, strPropertyName.c_str());
                     if (valueArg.ObjectVal(0) == identObject)

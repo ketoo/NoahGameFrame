@@ -617,7 +617,7 @@ static TDATA_TYPE NFVarList_Type(NFIValueList* pVarList, const int index)
         return pVarList->Type(index);
     }
 
-    return VTYPE_UNKNOWN;
+    return TDATA_UNKNOWN;
 }
 
 static bool NFVarList_AddInt(NFIValueList* pVarList, const int value)
