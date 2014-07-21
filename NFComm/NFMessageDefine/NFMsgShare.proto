@@ -113,6 +113,7 @@ message PlayerEntryInfo//对象出现基本信息
 	required int32	player_state = 6;
 	required bytes  config_id = 7;
 	required int32  scene_id = 8;
+	required bytes  class_id = 9;
 }
 
 message AckPlayerEntryList//对象出现列表
