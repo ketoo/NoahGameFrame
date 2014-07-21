@@ -149,6 +149,7 @@ int NFCDataProcessModule::LoadProperty( const NFIDENTID& self, NFIPropertyManage
 
 int NFCDataProcessModule::LoadRecord( const NFIDENTID& self, NFIRecordManager* pRecord )
 {
+
     return 0;
 }
 

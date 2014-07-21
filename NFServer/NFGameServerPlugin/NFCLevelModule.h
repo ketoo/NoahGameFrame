@@ -15,6 +15,7 @@
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFILevelModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
 
 class NFCLevelModule
     : public NFILevelModule
@@ -48,7 +49,7 @@ protected:
     int OnObjectLevelEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar );
 
 private:
-
+    NFIPropertyConfigModule* m_pPropertyConfigModule;
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;

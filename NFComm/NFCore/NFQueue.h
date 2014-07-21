@@ -20,7 +20,7 @@
 
 const int QUEUE_SIZE = 10000;  
 
-template<typename Object>  
+template<typename T>  
 class NFQueue  
 {  
 public:  
@@ -28,8 +28,8 @@ public:
 	virtual ~NFQueue();  
 public:  
 
-	bool Push(const Object& object);  
-	bool Pop(Object& object);
+	bool Push(const T& object);  
+	bool Pop(T& object);
 
 protected:
 
@@ -40,14 +40,14 @@ private:
 // 	int front;  
 // 	int rear;  
 // 	int size; 
-	std::list<Object> mList;
+	std::list<T> mList;
 	//Object list[QUEUE_SIZE];  
 	std::mutex queueMutex;  
 };  
 
 //------------------------------------------------------  
-template<typename Object>  
-NFQueue<Object>::NFQueue()  
+template<typename T>  
+NFQueue<T>::NFQueue()  
 {  
 // 	front = rear = 0; 
 // 	size = QUEUE_SIZE;
@@ -55,8 +55,8 @@ NFQueue<Object>::NFQueue()
 
 }  
 //------------------------------------------------------  
-template<typename Object>  
-bool NFQueue<Object>::Push(const Object& object)  
+template<typename T>  
+bool NFQueue<T>::Push(const T& object)  
 {  
 	queueMutex.lock();
 	if(Full())  
@@ -76,8 +76,8 @@ bool NFQueue<Object>::Push(const Object& object)
 	return true;  
 }  
 //------------------------------------------------------  
-template<typename Object>  
-bool NFQueue<Object>::Pop(Object& object)  
+template<typename T>  
+bool NFQueue<T>::Pop(T& object)  
 {
 	queueMutex.lock();
 	if(Empty())  
@@ -96,8 +96,8 @@ bool NFQueue<Object>::Pop(Object& object)
 	return true;  
 }  
 //------------------------------------------------------  
-template<typename Object>  
-bool NFQueue<Object>::Empty()  
+template<typename T>  
+bool NFQueue<T>::Empty()  
 {  
 	return mList.empty();
 // 	if(rear == front)  
@@ -115,8 +115,8 @@ bool NFQueue<Object>::Empty()
 // 		return false;  
 // }  
 //------------------------------------------------------  
-template<typename Object>  
-NFQueue<Object>::~NFQueue()  
+template<typename T>  
+NFQueue<T>::~NFQueue()  
 {  
 	mList.clear(); 
 }  
