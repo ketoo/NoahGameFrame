@@ -77,3 +77,14 @@ void NFCPropertyConfigModule::Load()
         }
     }
 }
+
+bool NFCPropertyConfigModule::LegalLevel( const NFJobType nJob, const int nLevel )
+{
+    std::string* pstrEffectData = mhtCoefficienData[nJob].GetElement( nLevel );
+    if (pstrEffectData)
+    {
+        return true;
+    }
+
+    return false;
+}

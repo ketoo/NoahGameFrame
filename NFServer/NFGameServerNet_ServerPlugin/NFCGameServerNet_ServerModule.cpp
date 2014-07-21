@@ -115,6 +115,9 @@ int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
     case NFMsg::EGameMsgID::EGMI_REQ_SWAP_SCENE:
         OnClienSwapSceneProcess(msg);
          break;
+    case NFMsg::EGameMsgID::EGMI_REQ_COMMAND:
+        OnClienGMProcess(msg);
+        break;
     default:
         break;
     }
@@ -250,6 +253,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
         return;
     }
 
+    pObject->SetPropertyInt("LoadPropertyFinish", 1);
     
     m_pEventProcessModule->DoEvent(pObject->Self(), "Player", CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCValueList() );
 
@@ -1897,4 +1901,34 @@ int NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess( const NFIPac
     }
 
     return 0;
+}
+
+void NFCGameServerNet_ServerModule::OnClienGMProcess( const NFIPacket& msg )
+{
+    int64_t nPlayerID = 0;
+    NFMsg::ReqCommand xMsg;
+    if (!RecivePB(msg, xMsg, nPlayerID))
+    {
+        return;
+    }
+
+    NFIDENTID* pIdent = mRoleFDData.GetElement(nPlayerID);
+    NFIDENTID* pControl = mRoleFDData.GetElement(xMsg.control_id());
+    if (!pIdent || !pControl)
+    {
+        return;
+    }
+
+    switch (xMsg.command_id())
+    {
+    case NFMsg::ReqCommand_EGameCommandType_EGCT_MODIY_PROPERTY:
+        {
+            const std::string& strPropertyName = xMsg.command_str_value();
+            const int nValue = xMsg.command_value();
+            m_pKernelModule->SetPropertyInt(*pControl, strPropertyName, nValue);
+        }
+        break;
+    default:
+        break;
+    }
 }

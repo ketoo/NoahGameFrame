@@ -34,6 +34,7 @@ public:
     virtual bool AfterInit();
 
     virtual int CalculateBaseValue( const NFJobType nJob, const int nLevel, const std::string& strProperty );
+    virtual bool LegalLevel( const NFJobType nJob, const int nLevel );
 
 protected:
     void Load();
