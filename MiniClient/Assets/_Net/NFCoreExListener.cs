@@ -263,7 +263,7 @@ namespace NFTCPClient
                 var.AddFloat(xInfo.y);
                 var.AddString("Z");
                 var.AddFloat(xInfo.z);
-                NFIObject xGO = mNet.kernel.CreateObject(new NFIDENTID(xInfo.object_guid), xInfo.scene_id, 0, "Player", System.Text.Encoding.Default.GetString(xInfo.config_id), var);
+                NFIObject xGO = mNet.kernel.CreateObject(new NFIDENTID(xInfo.object_guid), xInfo.scene_id, 0, System.Text.Encoding.Default.GetString(xInfo.class_id), System.Text.Encoding.Default.GetString(xInfo.config_id), var);
                 if (null == xGO)
                 {
                     Debug.LogError("ID³åÍ»: " + xInfo.object_guid + "  ConfigID:" + System.Text.Encoding.Default.GetString(xInfo.config_id));
