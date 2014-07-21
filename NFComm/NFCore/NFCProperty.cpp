@@ -14,12 +14,12 @@ NFCProperty::NFCProperty()
     mbPrivate = false;
     mbSave = false;
     mSelf = 0;
-    eType = VTYPE_UNKNOWN;
+    eType = TDATA_UNKNOWN;
 
     msPropertyName = "";
 }
 
-NFCProperty::NFCProperty(const NFIDENTID& self, const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, int nIndex, const std::string& strScriptFunction)
+NFCProperty::NFCProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, int nIndex, const std::string& strScriptFunction)
 {
 
     mbPublic = bPublic;
@@ -40,35 +40,35 @@ NFCProperty::~NFCProperty()
     }
 
     mtPropertyCallback.clear();
-    m_pVarData.reset();
+    m_pTData.reset();
 }
 
-void NFCProperty::SetValue(const NFIValueList::VarData& varData)
+void NFCProperty::SetValue(const NFIValueList::TData& TData)
 {
-    if (eType != varData.nType)
+    if (eType != TData.nType)
     {
         return;
     }
 
-    if (!m_pVarData.get())
+    if (!m_pTData.get())
     {
-    	if (!NFIValueList::Valid(varData))
+    	if (!NFIValueList::Valid(TData))
     	{
         	return;
     	}
 
-        m_pVarData = std::shared_ptr<NFIValueList::VarData>(new NFIValueList::VarData());
-    	m_pVarData->nType = varData.nType;
-        m_pVarData->variantData = varData.variantData;
+        m_pTData = std::shared_ptr<NFIValueList::TData>(new NFIValueList::TData());
+    	m_pTData->nType = TData.nType;
+        m_pTData->variantData = TData.variantData;
     }
 
     NFCValueList oldValue;
-    oldValue.Append(*m_pVarData);
+    oldValue.Append(*m_pTData);
 
-    m_pVarData->variantData = varData.variantData;
+    m_pTData->variantData = TData.variantData;
 
     NFCValueList newValue;
-    newValue.Append(*m_pVarData);
+    newValue.Append(*m_pTData);
 
     OnEventHandler(oldValue , newValue);
 }
@@ -80,14 +80,14 @@ void NFCProperty::SetValue(const NFIProperty* pProperty)
     //SetValue(pProperty->GetValue());
 }
 
-NFIValueList::VarData NFCProperty::GetValue() const
+NFIValueList::TData NFCProperty::GetValue() const
 {
-    if (m_pVarData.get())
+    if (m_pTData.get())
     {
-        return *m_pVarData;
+        return *m_pTData;
     }
 
-    return NFIValueList::VarData();
+    return NFIValueList::TData();
 }
 
 const std::string&  NFCProperty::GetKey() const
@@ -142,14 +142,14 @@ void NFCProperty::SetScriptFunction(const std::string& strScriptFunction)
 
 int NFCProperty::QueryInt() const
 {
-    if (!m_pVarData.get())
+    if (!m_pTData.get())
     {
         return 0;
     }
 
-    if (VTYPE_INT == m_pVarData->nType)
+    if (TDATA_INT == m_pTData->nType)
     {
-        return boost::get<int>(m_pVarData->variantData);
+        return boost::get<int>(m_pTData->variantData);
     }
 
     return 0;
@@ -157,14 +157,14 @@ int NFCProperty::QueryInt() const
 
 float NFCProperty::QueryFloat() const
 {
-    if (!m_pVarData.get())
+    if (!m_pTData.get())
     {
         return 0.0f;
     }
 
-    if (VTYPE_FLOAT == m_pVarData->nType)
+    if (TDATA_FLOAT == m_pTData->nType)
     {
-        return boost::get<float>(m_pVarData->variantData);
+        return boost::get<float>(m_pTData->variantData);
     }
 
     return 0.0f;
@@ -172,14 +172,14 @@ float NFCProperty::QueryFloat() const
 
 double NFCProperty::QueryDouble() const
 {
-    if (!m_pVarData.get())
+    if (!m_pTData.get())
     {
         return 0.0f;
     }
 
-    if (VTYPE_DOUBLE == m_pVarData->nType)
+    if (TDATA_DOUBLE == m_pTData->nType)
     {
-        return boost::get<double>(m_pVarData->variantData);
+        return boost::get<double>(m_pTData->variantData);
     }
 
     return 0.0f;
@@ -187,14 +187,14 @@ double NFCProperty::QueryDouble() const
 
 const std::string& NFCProperty::QueryString() const
 {
-    if (!m_pVarData.get())
+    if (!m_pTData.get())
     {
         return NULL_STR;
     }
 
-    if (VTYPE_STRING == m_pVarData->nType)
+    if (TDATA_STRING == m_pTData->nType)
     {
-        return boost::get<const std::string&>(m_pVarData->variantData);
+        return boost::get<const std::string&>(m_pTData->variantData);
     }
 
     return NULL_STR;
@@ -202,14 +202,14 @@ const std::string& NFCProperty::QueryString() const
 
 NFIDENTID NFCProperty::QueryObject() const
 {
-    if (!m_pVarData.get())
+    if (!m_pTData.get())
     {
         return NFIDENTID();
     }
 
-    if (VTYPE_OBJECT == m_pVarData->nType)
+    if (TDATA_OBJECT == m_pTData->nType)
     {
-        return boost::get<NFINT64>(m_pVarData->variantData);
+        return boost::get<NFINT64>(m_pTData->variantData);
     }
 
     return NFIDENTID();
@@ -217,14 +217,14 @@ NFIDENTID NFCProperty::QueryObject() const
 
 void* NFCProperty::QueryPointer() const
 {
-    if (!m_pVarData.get())
+    if (!m_pTData.get())
     {
         return NULL;
     }
 
-    if (VTYPE_POINTER == m_pVarData->nType)
+    if (TDATA_POINTER == m_pTData->nType)
     {
-        return boost::get<void*>(m_pVarData->variantData);
+        return boost::get<void*>(m_pTData->variantData);
     }
 
     return NULL;
@@ -257,42 +257,42 @@ int NFCProperty::OnEventHandler(const NFIValueList& oldVar, const NFIValueList& 
 
 bool NFCProperty::SetInt(int value)
 {
-    if (eType != VTYPE_INT)
+    if (eType != TDATA_INT)
     {
         return false;
     }
 
-    NFIValueList::VarData varData;
-    varData.variantData = value;
-    varData.nType = VTYPE_INT;
+    NFIValueList::TData TData;
+    TData.variantData = value;
+    TData.nType = TDATA_INT;
 
-    if (!m_pVarData.get())
+    if (!m_pTData.get())
     {
         //本身是空就是因为没数据，还来个没数据的就不存了
-        if (!NFIValueList::Valid(varData))
+        if (!NFIValueList::Valid(TData))
         {
             return false;
         }
 
-        m_pVarData = std::shared_ptr<NFIValueList::VarData>(new NFIValueList::VarData());
-        m_pVarData->nType = VTYPE_INT;
-        m_pVarData->variantData = (int)0;
+        m_pTData = std::shared_ptr<NFIValueList::TData>(new NFIValueList::TData());
+        m_pTData->nType = TDATA_INT;
+        m_pTData->variantData = (int)0;
     }
 
-    if (varData.variantData == m_pVarData->variantData)
+    if (TData.variantData == m_pTData->variantData)
     {
         return false;
     }
 
-    if (VTYPE_INT == m_pVarData->nType)
+    if (TDATA_INT == m_pTData->nType)
     {
         NFCValueList oldValue;
-        oldValue.Append(*m_pVarData);
+        oldValue.Append(*m_pTData);
 
-        m_pVarData->variantData = value;
+        m_pTData->variantData = value;
 
         NFCValueList newValue;
-        newValue.Append(*m_pVarData);
+        newValue.Append(*m_pTData);
 
         OnEventHandler(oldValue , newValue);
 
@@ -304,42 +304,42 @@ bool NFCProperty::SetInt(int value)
 
 bool NFCProperty::SetFloat(float value)
 {
-    if (eType != VTYPE_FLOAT)
+    if (eType != TDATA_FLOAT)
     {
         return false;
     }
 
-    NFIValueList::VarData varData;
-    varData.variantData = value;
-    varData.nType = VTYPE_FLOAT;
+    NFIValueList::TData TData;
+    TData.variantData = value;
+    TData.nType = TDATA_FLOAT;
 
-    if (!m_pVarData.get())
+    if (!m_pTData.get())
     {
         //本身是空就是因为没数据，还来个没数据的就不存了
-        if (!NFIValueList::Valid(varData))
+        if (!NFIValueList::Valid(TData))
         {
             return false;
         }
 
-        m_pVarData = std::shared_ptr<NFIValueList::VarData>(new NFIValueList::VarData());
-        m_pVarData->nType = VTYPE_FLOAT;
-        m_pVarData->variantData = (float)0.0f;
+        m_pTData = std::shared_ptr<NFIValueList::TData>(new NFIValueList::TData());
+        m_pTData->nType = TDATA_FLOAT;
+        m_pTData->variantData = (float)0.0f;
     }
 
-    if (varData.variantData == m_pVarData->variantData)
+    if (TData.variantData == m_pTData->variantData)
     {
         return false;
     }
 
-    if (VTYPE_FLOAT == m_pVarData->nType)
+    if (TDATA_FLOAT == m_pTData->nType)
     {
         NFCValueList oldValue;
-        oldValue.Append(*m_pVarData);
+        oldValue.Append(*m_pTData);
 
-        m_pVarData->variantData = value;
+        m_pTData->variantData = value;
 
         NFCValueList newValue;
-        newValue.Append(*m_pVarData);
+        newValue.Append(*m_pTData);
 
         OnEventHandler(oldValue , newValue);
 
@@ -351,43 +351,43 @@ bool NFCProperty::SetFloat(float value)
 
 bool NFCProperty::SetDouble(double value)
 {
-    if (eType != VTYPE_DOUBLE)
+    if (eType != TDATA_DOUBLE)
     {
         return false;
     }
 
-    NFIValueList::VarData varData;
-    varData.variantData = value;
-    varData.nType = VTYPE_DOUBLE;
+    NFIValueList::TData TData;
+    TData.variantData = value;
+    TData.nType = TDATA_DOUBLE;
 
-    if (!m_pVarData.get())
+    if (!m_pTData.get())
     {
         //本身是空就是因为没数据，还来个没数据的就不存了
-        if (!NFIValueList::Valid(varData))
+        if (!NFIValueList::Valid(TData))
         {
             return false;
         }
 
-        m_pVarData = std::shared_ptr<NFIValueList::VarData>(new NFIValueList::VarData());
-        m_pVarData->nType = VTYPE_DOUBLE;
-        m_pVarData->variantData = (double)0.0f;
+        m_pTData = std::shared_ptr<NFIValueList::TData>(new NFIValueList::TData());
+        m_pTData->nType = TDATA_DOUBLE;
+        m_pTData->variantData = (double)0.0f;
 
     }
 
-    if (varData.variantData == m_pVarData->variantData)
+    if (TData.variantData == m_pTData->variantData)
     {
         return false;
     }
 
-    if (VTYPE_DOUBLE == m_pVarData->nType)
+    if (TDATA_DOUBLE == m_pTData->nType)
     {
         NFCValueList oldValue;
-        oldValue.Append(*m_pVarData);
+        oldValue.Append(*m_pTData);
 
-        m_pVarData->variantData = value;
+        m_pTData->variantData = value;
 
         NFCValueList newValue;
-        newValue.Append(*m_pVarData);
+        newValue.Append(*m_pTData);
 
         OnEventHandler(oldValue , newValue);
 
@@ -399,42 +399,42 @@ bool NFCProperty::SetDouble(double value)
 
 bool NFCProperty::SetString(const std::string& value)
 {
-    if (eType != VTYPE_STRING)
+    if (eType != TDATA_STRING)
     {
         return false;
     }
 
-    NFIValueList::VarData varData;
-    varData.variantData = value;
-    varData.nType = VTYPE_STRING;
+    NFIValueList::TData TData;
+    TData.variantData = value;
+    TData.nType = TDATA_STRING;
 
-    if (!m_pVarData.get())
+    if (!m_pTData.get())
     {
         //本身是空就是因为没数据，还来个没数据的就不存了
-        if (!NFIValueList::Valid(varData))
+        if (!NFIValueList::Valid(TData))
         {
             return false;
         }
 
-        m_pVarData = std::shared_ptr<NFIValueList::VarData>(new NFIValueList::VarData());
-        m_pVarData->nType = VTYPE_STRING;
-        m_pVarData->variantData = NULL_STR;
+        m_pTData = std::shared_ptr<NFIValueList::TData>(new NFIValueList::TData());
+        m_pTData->nType = TDATA_STRING;
+        m_pTData->variantData = NULL_STR;
     }
 
-    if (varData.variantData == m_pVarData->variantData)
+    if (TData.variantData == m_pTData->variantData)
     {
         return false;
     }
 
-    if (VTYPE_STRING == m_pVarData->nType)
+    if (TDATA_STRING == m_pTData->nType)
     {
         NFCValueList oldValue;
-        oldValue.Append(*m_pVarData);
+        oldValue.Append(*m_pTData);
 
-        m_pVarData->variantData = value;
+        m_pTData->variantData = value;
 
         NFCValueList newValue;
-        newValue.Append(*m_pVarData);
+        newValue.Append(*m_pTData);
 
         OnEventHandler(oldValue , newValue);
 
@@ -446,43 +446,43 @@ bool NFCProperty::SetString(const std::string& value)
 
 bool NFCProperty::SetObject(const NFIDENTID& value)
 {
-    if (eType != VTYPE_OBJECT)
+    if (eType != TDATA_OBJECT)
     {
         return false;
     }
 
-    NFIValueList::VarData varData;
-    varData.variantData = value.nData64;
-    varData.nType = VTYPE_OBJECT;
+    NFIValueList::TData TData;
+    TData.variantData = value.nData64;
+    TData.nType = TDATA_OBJECT;
 
-    if (!m_pVarData.get())
+    if (!m_pTData.get())
     {
         //本身是空就是因为没数据，还来个没数据的就不存了
-        if (!NFIValueList::Valid(varData))
+        if (!NFIValueList::Valid(TData))
         {
             return false;
         }
 
-        m_pVarData = std::shared_ptr<NFIValueList::VarData>(new NFIValueList::VarData());
-        m_pVarData->nType = VTYPE_OBJECT;
-        m_pVarData->variantData = (NFINT64)0;
+        m_pTData = std::shared_ptr<NFIValueList::TData>(new NFIValueList::TData());
+        m_pTData->nType = TDATA_OBJECT;
+        m_pTData->variantData = (NFINT64)0;
 
     }
 
-    if (varData.variantData == m_pVarData->variantData)
+    if (TData.variantData == m_pTData->variantData)
     {
         return false;
     }
 
-    if (VTYPE_OBJECT == m_pVarData->nType)
+    if (TDATA_OBJECT == m_pTData->nType)
     {
         NFCValueList oldValue;
-        oldValue.Append(*m_pVarData);
+        oldValue.Append(*m_pTData);
 
-        m_pVarData->variantData = value.nData64;
+        m_pTData->variantData = value.nData64;
 
         NFCValueList newValue;
-        newValue.Append(*m_pVarData);
+        newValue.Append(*m_pTData);
 
         OnEventHandler(oldValue , newValue);
 
@@ -494,42 +494,42 @@ bool NFCProperty::SetObject(const NFIDENTID& value)
 
 bool NFCProperty::SetPointer(void* value)
 {
-    if (eType != VTYPE_POINTER)
+    if (eType != TDATA_POINTER)
     {
         return false;
     }
 
-    NFIValueList::VarData varData;
-    varData.variantData = value;
-    varData.nType = VTYPE_POINTER;
+    NFIValueList::TData TData;
+    TData.variantData = value;
+    TData.nType = TDATA_POINTER;
 
-    if (!m_pVarData.get())
+    if (!m_pTData.get())
     {
         //本身是空就是因为没数据，还来个没数据的就不存了
-        if (!NFIValueList::Valid(varData))
+        if (!NFIValueList::Valid(TData))
         {
             return false;
         }
 
-        m_pVarData = std::shared_ptr<NFIValueList::VarData>(new NFIValueList::VarData());
-        m_pVarData->nType = VTYPE_POINTER;
-        m_pVarData->variantData = (void*)NULL;
+        m_pTData = std::shared_ptr<NFIValueList::TData>(new NFIValueList::TData());
+        m_pTData->nType = TDATA_POINTER;
+        m_pTData->variantData = (void*)NULL;
     }
 
-    if (varData.variantData == m_pVarData->variantData)
+    if (TData.variantData == m_pTData->variantData)
     {
         return false;
     }
 
-    if (VTYPE_POINTER == m_pVarData->nType)
+    if (TDATA_POINTER == m_pTData->nType)
     {
         NFCValueList oldValue;
-        oldValue.Append(*m_pVarData);
+        oldValue.Append(*m_pTData);
 
-        m_pVarData->variantData = value;
+        m_pTData->variantData = value;
 
         NFCValueList newValue;
-        newValue.Append(*m_pVarData);
+        newValue.Append(*m_pTData);
 
         OnEventHandler(oldValue , newValue);
 
@@ -544,14 +544,14 @@ bool NFCProperty::Changed() const
     return NFIValueList::Valid(GetValue());
 }
 
-const VARIANT_TYPE NFCProperty::GetType() const
+const TDATA_TYPE NFCProperty::GetType() const
 {
     return eType;
 }
 
 const bool NFCProperty::GeUsed() const
 {
-    if (m_pVarData.get())
+    if (m_pTData.get())
     {
         return true;
     }
