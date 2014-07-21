@@ -47,7 +47,7 @@
 //				TDATA_TYPE varType = pRecord->GetColType( j );
 //				switch ( varType )
 //				{
-//				case VTYPE_INT:
+//				case TDATA_INT:
 //					{
 //						NFMsg::RecordInt* recordInt = recordBase.add_record_int_list();
 //						recordInt->set_row( i );
@@ -56,7 +56,7 @@
 //					}
 //
 //					break;
-//				case VTYPE_FLOAT:
+//				case TDATA_FLOAT:
 //					{
 //						NFMsg::RecordFloat* recordFloat = recordBase.add_record_float_list();
 //						recordFloat->set_row( i );
@@ -64,7 +64,7 @@
 //						recordFloat->set_data( pRecord->QueryFloat( i, j ) );
 //					}
 //					break;
-//				case VTYPE_STRING:
+//				case TDATA_STRING:
 //					{
 //						NFMsg::RecordString* recordString = recordBase.add_record_string_list();
 //						recordString->set_row( i );
@@ -72,7 +72,7 @@
 //						recordString->set_data( pRecord->QueryString( i, j ) );
 //					}
 //					break;
-//				case VTYPE_OBJECT:
+//				case TDATA_OBJECT:
 //					{
 //						NFMsg::RecordObject* recordObejct = recordBase.add_record_object_list();
 //						recordObejct->set_row( i );
@@ -221,7 +221,7 @@
 //            TDATA_TYPE varType = pProperty->GetType();
 //            switch ( varType )
 //            {
-//            case VTYPE_INT:
+//            case TDATA_INT:
 //                {
 //                    NFMsg::PropertyInt* propertyInt = propertyDB.add_property_int_list();
 //                    propertyInt->set_property_name( pProperty->GetKey() );
@@ -229,21 +229,21 @@
 //                }
 //
 //                break;
-//            case VTYPE_FLOAT:
+//            case TDATA_FLOAT:
 //                {
 //                    NFMsg::PropertyFloat* propertyFloat = propertyDB.add_property_float_list();
 //                    propertyFloat->set_property_name( pProperty->GetKey() );
 //                    propertyFloat->set_data( pProperty->QueryFloat() );
 //                }
 //                break;
-//            case VTYPE_STRING:
+//            case TDATA_STRING:
 //                {
 //                    NFMsg::PropertyString* propertyString = propertyDB.add_property_string_list();
 //                    propertyString->set_property_name( pProperty->GetKey() );
 //                    propertyString->set_data( pProperty->QueryString() );
 //                }
 //                break;
-//            case VTYPE_OBJECT:
+//            case TDATA_OBJECT:
 //                {
 //                    NFMsg::PropertyObject* propertyObject = propertyDB.add_property_object_list();
 //                    propertyObject->set_property_name( pProperty->GetKey() );
@@ -271,7 +271,7 @@
 //		int nData = propertyInt.data();
 //
 //		NFIValueList::TData TData;
-//		TData.nType = TDATA_TYPE::VTYPE_INT;
+//		TData.nType = TDATA_TYPE::TDATA_INT;
 //		TData.variantData = nData;
 //		pProManager->SetProperty( strName, TData );
 //	}
@@ -283,7 +283,7 @@
 //		float fData = propertyFloat.data();
 //
 //		NFIValueList::TData TData;
-//		TData.nType = TDATA_TYPE::VTYPE_FLOAT;
+//		TData.nType = TDATA_TYPE::TDATA_FLOAT;
 //		TData.variantData = fData;
 //		pProManager->SetProperty( strName, TData );
 //	}
@@ -295,7 +295,7 @@
 //		const std::string& strData = propertyString.data();
 //
 //		NFIValueList::TData TData;
-//		TData.nType = TDATA_TYPE::VTYPE_STRING;
+//		TData.nType = TDATA_TYPE::TDATA_STRING;
 //		TData.variantData = strData;
 //		pProManager->SetProperty( strName, TData );
 //	}
@@ -307,7 +307,7 @@
 //		int64_t nData = propertyObject.data();
 //
 //		NFIValueList::TData TData;
-//		TData.nType = TDATA_TYPE::VTYPE_OBJECT;
+//		TData.nType = TDATA_TYPE::TDATA_OBJECT;
 //		TData.variantData = nData;
 //		pProManager->SetProperty( strName, TData );
 //	}

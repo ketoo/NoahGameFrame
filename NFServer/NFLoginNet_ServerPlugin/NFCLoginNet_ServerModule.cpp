@@ -76,7 +76,7 @@ bool NFCLoginNet_ServerModule::AfterInit()
 int NFCLoginNet_ServerModule::OnLoginResultsEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
 {
 	if (3 != var.GetCount()
-		|| !var.TypeEx(TDATA_TYPE::VTYPE_INT, TDATA_TYPE::VTYPE_INT, TDATA_TYPE::VTYPE_STRING, TDATA_TYPE::VTYPE_UNKNOWN))
+		|| !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
 	{
 		return -1;
 	}
@@ -123,8 +123,8 @@ int NFCLoginNet_ServerModule::OnLoginResultsEvent(const NFIDENTID& object, const
 int NFCLoginNet_ServerModule::OnSelectWorldResultsEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
 {
 	if (7 != var.GetCount()
-		|| !var.TypeEx(TDATA_TYPE::VTYPE_INT, TDATA_TYPE::VTYPE_INT, TDATA_TYPE::VTYPE_INT, TDATA_TYPE::VTYPE_STRING,
-		TDATA_TYPE::VTYPE_STRING, TDATA_TYPE::VTYPE_INT, TDATA_TYPE::VTYPE_STRING, TDATA_TYPE::VTYPE_UNKNOWN))
+		|| !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING,
+		TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
 	{
 		return -1;
 	}

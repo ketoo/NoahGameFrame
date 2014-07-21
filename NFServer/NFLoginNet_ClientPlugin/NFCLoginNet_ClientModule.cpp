@@ -75,8 +75,8 @@ bool NFCLoginNet_ClientModule::BeforeShut()
 int NFCLoginNet_ClientModule::OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
 {
 	if (4 != var.GetCount()
-		|| !var.TypeEx(TDATA_TYPE::VTYPE_INT, TDATA_TYPE::VTYPE_INT,
-		TDATA_TYPE::VTYPE_INT, TDATA_TYPE::VTYPE_STRING, TDATA_TYPE::VTYPE_UNKNOWN))
+		|| !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT,
+		TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
 	{
 		return -1;
 	}

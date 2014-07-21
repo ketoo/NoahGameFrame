@@ -14,7 +14,7 @@ NFCProperty::NFCProperty()
     mbPrivate = false;
     mbSave = false;
     mSelf = 0;
-    eType = VTYPE_UNKNOWN;
+    eType = TDATA_UNKNOWN;
 
     msPropertyName = "";
 }
@@ -147,7 +147,7 @@ int NFCProperty::QueryInt() const
         return 0;
     }
 
-    if (VTYPE_INT == m_pTData->nType)
+    if (TDATA_INT == m_pTData->nType)
     {
         return boost::get<int>(m_pTData->variantData);
     }
@@ -162,7 +162,7 @@ float NFCProperty::QueryFloat() const
         return 0.0f;
     }
 
-    if (VTYPE_FLOAT == m_pTData->nType)
+    if (TDATA_FLOAT == m_pTData->nType)
     {
         return boost::get<float>(m_pTData->variantData);
     }
@@ -177,7 +177,7 @@ double NFCProperty::QueryDouble() const
         return 0.0f;
     }
 
-    if (VTYPE_DOUBLE == m_pTData->nType)
+    if (TDATA_DOUBLE == m_pTData->nType)
     {
         return boost::get<double>(m_pTData->variantData);
     }
@@ -192,7 +192,7 @@ const std::string& NFCProperty::QueryString() const
         return NULL_STR;
     }
 
-    if (VTYPE_STRING == m_pTData->nType)
+    if (TDATA_STRING == m_pTData->nType)
     {
         return boost::get<const std::string&>(m_pTData->variantData);
     }
@@ -207,7 +207,7 @@ NFIDENTID NFCProperty::QueryObject() const
         return NFIDENTID();
     }
 
-    if (VTYPE_OBJECT == m_pTData->nType)
+    if (TDATA_OBJECT == m_pTData->nType)
     {
         return boost::get<NFINT64>(m_pTData->variantData);
     }
@@ -222,7 +222,7 @@ void* NFCProperty::QueryPointer() const
         return NULL;
     }
 
-    if (VTYPE_POINTER == m_pTData->nType)
+    if (TDATA_POINTER == m_pTData->nType)
     {
         return boost::get<void*>(m_pTData->variantData);
     }
@@ -257,14 +257,14 @@ int NFCProperty::OnEventHandler(const NFIValueList& oldVar, const NFIValueList& 
 
 bool NFCProperty::SetInt(int value)
 {
-    if (eType != VTYPE_INT)
+    if (eType != TDATA_INT)
     {
         return false;
     }
 
     NFIValueList::TData TData;
     TData.variantData = value;
-    TData.nType = VTYPE_INT;
+    TData.nType = TDATA_INT;
 
     if (!m_pTData.get())
     {
@@ -275,7 +275,7 @@ bool NFCProperty::SetInt(int value)
         }
 
         m_pTData = std::shared_ptr<NFIValueList::TData>(new NFIValueList::TData());
-        m_pTData->nType = VTYPE_INT;
+        m_pTData->nType = TDATA_INT;
         m_pTData->variantData = (int)0;
     }
 
@@ -284,7 +284,7 @@ bool NFCProperty::SetInt(int value)
         return false;
     }
 
-    if (VTYPE_INT == m_pTData->nType)
+    if (TDATA_INT == m_pTData->nType)
     {
         NFCValueList oldValue;
         oldValue.Append(*m_pTData);
@@ -304,14 +304,14 @@ bool NFCProperty::SetInt(int value)
 
 bool NFCProperty::SetFloat(float value)
 {
-    if (eType != VTYPE_FLOAT)
+    if (eType != TDATA_FLOAT)
     {
         return false;
     }
 
     NFIValueList::TData TData;
     TData.variantData = value;
-    TData.nType = VTYPE_FLOAT;
+    TData.nType = TDATA_FLOAT;
 
     if (!m_pTData.get())
     {
@@ -322,7 +322,7 @@ bool NFCProperty::SetFloat(float value)
         }
 
         m_pTData = std::shared_ptr<NFIValueList::TData>(new NFIValueList::TData());
-        m_pTData->nType = VTYPE_FLOAT;
+        m_pTData->nType = TDATA_FLOAT;
         m_pTData->variantData = (float)0.0f;
     }
 
@@ -331,7 +331,7 @@ bool NFCProperty::SetFloat(float value)
         return false;
     }
 
-    if (VTYPE_FLOAT == m_pTData->nType)
+    if (TDATA_FLOAT == m_pTData->nType)
     {
         NFCValueList oldValue;
         oldValue.Append(*m_pTData);
@@ -351,14 +351,14 @@ bool NFCProperty::SetFloat(float value)
 
 bool NFCProperty::SetDouble(double value)
 {
-    if (eType != VTYPE_DOUBLE)
+    if (eType != TDATA_DOUBLE)
     {
         return false;
     }
 
     NFIValueList::TData TData;
     TData.variantData = value;
-    TData.nType = VTYPE_DOUBLE;
+    TData.nType = TDATA_DOUBLE;
 
     if (!m_pTData.get())
     {
@@ -369,7 +369,7 @@ bool NFCProperty::SetDouble(double value)
         }
 
         m_pTData = std::shared_ptr<NFIValueList::TData>(new NFIValueList::TData());
-        m_pTData->nType = VTYPE_DOUBLE;
+        m_pTData->nType = TDATA_DOUBLE;
         m_pTData->variantData = (double)0.0f;
 
     }
@@ -379,7 +379,7 @@ bool NFCProperty::SetDouble(double value)
         return false;
     }
 
-    if (VTYPE_DOUBLE == m_pTData->nType)
+    if (TDATA_DOUBLE == m_pTData->nType)
     {
         NFCValueList oldValue;
         oldValue.Append(*m_pTData);
@@ -399,14 +399,14 @@ bool NFCProperty::SetDouble(double value)
 
 bool NFCProperty::SetString(const std::string& value)
 {
-    if (eType != VTYPE_STRING)
+    if (eType != TDATA_STRING)
     {
         return false;
     }
 
     NFIValueList::TData TData;
     TData.variantData = value;
-    TData.nType = VTYPE_STRING;
+    TData.nType = TDATA_STRING;
 
     if (!m_pTData.get())
     {
@@ -417,7 +417,7 @@ bool NFCProperty::SetString(const std::string& value)
         }
 
         m_pTData = std::shared_ptr<NFIValueList::TData>(new NFIValueList::TData());
-        m_pTData->nType = VTYPE_STRING;
+        m_pTData->nType = TDATA_STRING;
         m_pTData->variantData = NULL_STR;
     }
 
@@ -426,7 +426,7 @@ bool NFCProperty::SetString(const std::string& value)
         return false;
     }
 
-    if (VTYPE_STRING == m_pTData->nType)
+    if (TDATA_STRING == m_pTData->nType)
     {
         NFCValueList oldValue;
         oldValue.Append(*m_pTData);
@@ -446,14 +446,14 @@ bool NFCProperty::SetString(const std::string& value)
 
 bool NFCProperty::SetObject(const NFIDENTID& value)
 {
-    if (eType != VTYPE_OBJECT)
+    if (eType != TDATA_OBJECT)
     {
         return false;
     }
 
     NFIValueList::TData TData;
     TData.variantData = value.nData64;
-    TData.nType = VTYPE_OBJECT;
+    TData.nType = TDATA_OBJECT;
 
     if (!m_pTData.get())
     {
@@ -464,7 +464,7 @@ bool NFCProperty::SetObject(const NFIDENTID& value)
         }
 
         m_pTData = std::shared_ptr<NFIValueList::TData>(new NFIValueList::TData());
-        m_pTData->nType = VTYPE_OBJECT;
+        m_pTData->nType = TDATA_OBJECT;
         m_pTData->variantData = (NFINT64)0;
 
     }
@@ -474,7 +474,7 @@ bool NFCProperty::SetObject(const NFIDENTID& value)
         return false;
     }
 
-    if (VTYPE_OBJECT == m_pTData->nType)
+    if (TDATA_OBJECT == m_pTData->nType)
     {
         NFCValueList oldValue;
         oldValue.Append(*m_pTData);
@@ -494,14 +494,14 @@ bool NFCProperty::SetObject(const NFIDENTID& value)
 
 bool NFCProperty::SetPointer(void* value)
 {
-    if (eType != VTYPE_POINTER)
+    if (eType != TDATA_POINTER)
     {
         return false;
     }
 
     NFIValueList::TData TData;
     TData.variantData = value;
-    TData.nType = VTYPE_POINTER;
+    TData.nType = TDATA_POINTER;
 
     if (!m_pTData.get())
     {
@@ -512,7 +512,7 @@ bool NFCProperty::SetPointer(void* value)
         }
 
         m_pTData = std::shared_ptr<NFIValueList::TData>(new NFIValueList::TData());
-        m_pTData->nType = VTYPE_POINTER;
+        m_pTData->nType = TDATA_POINTER;
         m_pTData->variantData = (void*)NULL;
     }
 
@@ -521,7 +521,7 @@ bool NFCProperty::SetPointer(void* value)
         return false;
     }
 
-    if (VTYPE_POINTER == m_pTData->nType)
+    if (TDATA_POINTER == m_pTData->nType)
     {
         NFCValueList oldValue;
         oldValue.Append(*m_pTData);

@@ -25,7 +25,7 @@ bool NFCLoginLogicModule::Shut()
 int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
 {
     if (3 != var.GetCount()
-        || !var.TypeEx(TDATA_TYPE::VTYPE_INT, TDATA_TYPE::VTYPE_STRING, TDATA_TYPE::VTYPE_STRING, TDATA_TYPE::VTYPE_UNKNOWN))
+        || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
     {
         return -1;
     }
@@ -49,7 +49,7 @@ int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventI
 int NFCLoginLogicModule::OnDisconnectEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
 {
     if (2 != var.GetCount()
-        || !var.TypeEx(TDATA_TYPE::VTYPE_STRING, TDATA_TYPE::VTYPE_STRING, TDATA_TYPE::VTYPE_UNKNOWN))
+        || !var.TypeEx(TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
     {
         return -1;
     }
