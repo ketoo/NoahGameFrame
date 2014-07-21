@@ -58,7 +58,7 @@ NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, co
     // TODO:可以考虑在此处直接加入默认值
     for (int i = 0; i < GetRows() * GetCols(); i++)
     {
-        mtRecordVec.push_back(std::shared_ptr<NFIValueList::VarData>());
+        mtRecordVec.push_back(std::shared_ptr<NFIValueList::TData>());
     }
 
     for (int i = 0; i < mVarRecordTag.GetCount(); ++i)
@@ -123,7 +123,7 @@ int NFCRecord::GetRows() const
     return mnMaxRow;
 }
 
-VARIANT_TYPE NFCRecord::GetColType(const int nCol) const
+TDATA_TYPE NFCRecord::GetColType(const int nCol) const
 {
     return mVarRecordType.Type(nCol);
 }
@@ -140,7 +140,7 @@ int NFCRecord::AddRow(const int nRow)
 }
 
 //类型，新值，原值==给原值赋新值，没有就new
-bool ValidAdd(VARIANT_TYPE eType, const NFIValueList::VarData& var, std::shared_ptr<NFIValueList::VarData>& pVar)
+bool ValidAdd(TDATA_TYPE eType, const NFIValueList::TData& var, std::shared_ptr<NFIValueList::TData>& pVar)
 {
     if (var.nType != eType)
     {
@@ -154,7 +154,7 @@ bool ValidAdd(VARIANT_TYPE eType, const NFIValueList::VarData& var, std::shared_
             return false;
         }
 
-        pVar = std::shared_ptr<NFIValueList::VarData>(new NFIValueList::VarData());
+        pVar = std::shared_ptr<NFIValueList::TData>(new NFIValueList::TData());
         pVar->nType = eType;
     }
 
@@ -214,7 +214,7 @@ int NFCRecord::AddRow(const int nRow, const NFIValueList& var)
         mVecUsedState[nFindRow] = 1;
         for (int i = 0; i < GetCols(); ++i)
         {
-            std::shared_ptr<NFIValueList::VarData>& pVar = mtRecordVec.at(GetPos(nFindRow, i));//GetVarData(nFindRow, i);
+            std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nFindRow, i));//GetTData(nFindRow, i);
             if(!ValidAdd(GetColType(i), *var.GetStackConst(i), pVar))
             {
                 //添加失败--不存在这样的情况，因为类型上面已经监测过，如果返回的话，那么添加的数据是0的话就会返回，导致结果错误
@@ -237,11 +237,11 @@ bool NFCRecord::SetInt(const int nRow, const int nCol, const int value)
         return false;
     }
 
-    NFIValueList::VarData var;
+    NFIValueList::TData var;
     var.nType = VTYPE_INT;
     var.variantData = value;
 
-    std::shared_ptr<NFIValueList::VarData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if(!ValidAdd(GetColType(nCol), var, pVar))
     {
         return false;
@@ -278,11 +278,11 @@ bool NFCRecord::SetFloat(const int nRow, const int nCol, const float value)
         return false;
     }
 
-    NFIValueList::VarData var;
+    NFIValueList::TData var;
     var.nType = VTYPE_FLOAT;
     var.variantData = value;
 
-    std::shared_ptr<NFIValueList::VarData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if(!ValidAdd(GetColType(nCol), var, pVar))
     {
         return false;
@@ -319,11 +319,11 @@ bool NFCRecord::SetDouble(const int nRow, const int nCol, const double value)
         return false;
     }
 
-    NFIValueList::VarData var;
+    NFIValueList::TData var;
     var.nType = VTYPE_DOUBLE;
     var.variantData = value;
 
-    std::shared_ptr<NFIValueList::VarData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if(!ValidAdd(GetColType(nCol), var, pVar))
     {
         return false;
@@ -360,11 +360,11 @@ bool NFCRecord::SetString(const int nRow, const int nCol, const char* value)
         return false;
     }
 
-    NFIValueList::VarData var;
+    NFIValueList::TData var;
     var.nType = VTYPE_STRING;
     var.variantData = std::string(value);
 
-    std::shared_ptr<NFIValueList::VarData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if(!ValidAdd(GetColType(nCol), var, pVar))
     {
         return false;
@@ -401,11 +401,11 @@ bool NFCRecord::SetObject(const int nRow, const int nCol, const NFIDENTID& value
         return false;
     }
 
-    NFIValueList::VarData var;
+    NFIValueList::TData var;
     var.nType = VTYPE_OBJECT;
     var.variantData = (NFINT64)value.nData64;
 
-    std::shared_ptr<NFIValueList::VarData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if(!ValidAdd(GetColType(nCol), var, pVar))
     {
         return false;
@@ -458,7 +458,7 @@ bool NFCRecord::QueryRow(const int nRow, NFIValueList& varList)
     varList.Clear();
     for (int i = 0; i < GetCols(); ++i)
     {
-        std::shared_ptr<NFIValueList::VarData> pVar = mtRecordVec.at(GetPos(nRow, i));
+        std::shared_ptr<NFIValueList::TData> pVar = mtRecordVec.at(GetPos(nRow, i));
         if (pVar.get())
         {
             varList.Append(*pVar);
@@ -508,7 +508,7 @@ int NFCRecord::QueryInt(const int nRow, const int nCol) const
         return 0;
     }
 
-    const std::shared_ptr<NFIValueList::VarData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    const std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if (!pVar.get())
     {
         return 0;
@@ -535,7 +535,7 @@ float NFCRecord::QueryFloat(const int nRow, const int nCol) const
         return 0.0f;
     }
 
-    const std::shared_ptr<NFIValueList::VarData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    const std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if (!pVar.get())
     {
         return 0.0f;
@@ -562,7 +562,7 @@ double NFCRecord::QueryDouble(const int nRow, const int nCol) const
         return 0.0f;
     }
 
-    const std::shared_ptr<NFIValueList::VarData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    const std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if (!pVar.get())
     {
         return 0.0f;
@@ -589,7 +589,7 @@ const std::string& NFCRecord::QueryString(const int nRow, const int nCol) const
         return NULL_STR;
     }
 
-    const std::shared_ptr<NFIValueList::VarData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    const std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if (!pVar.get())
     {
         return NULL_STR;
@@ -616,7 +616,7 @@ NFIDENTID NFCRecord::QueryObject(const int nRow, const int nCol) const
         return NFIDENTID();
     }
 
-   const  std::shared_ptr<NFIValueList::VarData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+   const  std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if (!pVar.get())
     {
         return NFIDENTID();
@@ -638,7 +638,7 @@ NFIDENTID NFCRecord::QueryObject( const int nRow, const std::string& strColTag )
 
 void* NFCRecord::QueryPointer(const int nRow, const int nCol) const
 {
-    //     NFIValueList::VarData* pVar = GetVarData(nRow, nCol);
+    //     NFIValueList::TData* pVar = GetTData(nRow, nCol);
     //     if (pVar && VTYPE_POINTER == pVar->nType)
     //     {
     //         return boost::get<void*>(pVar->variantData);
@@ -660,7 +660,7 @@ int NFCRecord::FindRowByColValue(const int nCol, const NFIValueList& var, NFIVal
         return -1;
     }
 
-    VARIANT_TYPE eType = var.Type(0);
+    TDATA_TYPE eType = var.Type(0);
     if (eType != mVarRecordType.Type(nCol))
     {
         return -1;
@@ -925,7 +925,7 @@ bool NFCRecord::Remove(const int nRow)
 
 //             for (int i = 0; i < GetCols(); ++i)
 //             {
-//                 std::shared_ptr<NFIValueList::VarData>& var = mtRecordVec.at(GetPos(nRow, i));
+//                 std::shared_ptr<NFIValueList::TData>& var = mtRecordVec.at(GetPos(nRow, i));
 //                 var.reset();
 //            }
 
@@ -1035,7 +1035,7 @@ bool NFCRecord::SwapRowInfo(const int nOriginRow, const int nTargetRow)
     {
         for (int i = 0; i < GetCols(); ++i)
         {
-            std::shared_ptr<NFIValueList::VarData> pOrigin = mtRecordVec.at(GetPos(nOriginRow, i));
+            std::shared_ptr<NFIValueList::TData> pOrigin = mtRecordVec.at(GetPos(nOriginRow, i));
             mtRecordVec[GetPos(nOriginRow, i)] = mtRecordVec.at(GetPos(nTargetRow, i));
             mtRecordVec[GetPos(nTargetRow, i)] = pOrigin;
         }

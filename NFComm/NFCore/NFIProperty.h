@@ -17,7 +17,7 @@ class NFIProperty
 public:
     virtual ~NFIProperty() {}
 
-    virtual void SetValue(const NFIValueList::VarData& varData) = 0;
+    virtual void SetValue(const NFIValueList::TData& TData) = 0;
     virtual void SetValue(const NFIProperty* pProperty) = 0;
     virtual bool SetInt(int value) = 0;
     virtual bool SetFloat(float value) = 0;
@@ -26,7 +26,7 @@ public:
     virtual bool SetObject(const NFIDENTID& value) = 0;
     virtual bool SetPointer(void* value) = 0;
 
-    virtual const VARIANT_TYPE GetType() const = 0;
+    virtual const TDATA_TYPE GetType() const = 0;
     virtual const bool GeUsed() const = 0;
     virtual const std::string& GetKey() const = 0;
     virtual const bool GetSave() const = 0;
@@ -53,7 +53,7 @@ public:
 
 protected:
 
-    virtual NFIValueList::VarData GetValue() const = 0;
+    virtual NFIValueList::TData GetValue() const = 0;
 
 };
 

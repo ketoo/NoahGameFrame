@@ -54,7 +54,7 @@ NFCLogicClassModule::~NFCLogicClassModule()
 
 }
 
-VARIANT_TYPE NFCLogicClassModule::ComputerType(const char* pstrTypeName, NFIValueList::VarData& var)
+TDATA_TYPE NFCLogicClassModule::ComputerType(const char* pstrTypeName, NFIValueList::TData& var)
 {
     if (0 == strcmp(pstrTypeName, "int"))
     {
@@ -129,7 +129,7 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
                 mxPropertyIndexMap.insert(std::map<std::string, int>::value_type(strPropertyName, mnPropertyIndex));
             }
 
-            NFIValueList::VarData varProperty;
+            NFIValueList::TData varProperty;
             if (VTYPE_UNKNOWN == ComputerType(pstrType, varProperty))
             {
                 //std::cout << "error:" << pClass->GetTypeName() << "  " << pClass->GetInstancePath() << ": " << strPropertyName << " type error!!!" << std::endl;
@@ -184,15 +184,15 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCL
             for (rapidxml::xml_node<>* recordColNode = pRecordNode->first_node(); recordColNode;  recordColNode = recordColNode->next_sibling())
             {
                 //const char* pstrColName = recordColNode->first_attribute( "Id" )->value();
-                NFIValueList::VarData varData;
+                NFIValueList::TData TData;
                 const char* pstrColType = recordColNode->first_attribute("Type")->value();
-                if (VTYPE_UNKNOWN == ComputerType(pstrColType, varData))
+                if (VTYPE_UNKNOWN == ComputerType(pstrColType, TData))
                 {
                     //assert(0);
                     NFASSERT(0, pstrRecordName, __FILE__, __FUNCTION__);
                 }
 
-                recordVar.Append(varData);
+                recordVar.Append(TData);
                 //////////////////////////////////////////////////////////////////////////
                 if (recordColNode->first_attribute("Key") != NULL)
                 {

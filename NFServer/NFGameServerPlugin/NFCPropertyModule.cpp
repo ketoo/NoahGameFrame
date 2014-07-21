@@ -352,8 +352,8 @@ bool NFCPropertyModule::AddMoney( const NFIDENTID& self, int nValue )
 int NFCPropertyModule::OnReqModifyData( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
 {
     if (var.GetCount() != 6
-        || !var.TypeEx(VARIANT_TYPE::VTYPE_OBJECT, VARIANT_TYPE::VTYPE_OBJECT, VARIANT_TYPE::VTYPE_STRING, 
-        VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_STRING, VARIANT_TYPE::VTYPE_UNKNOWN))
+        || !var.TypeEx(TDATA_TYPE::VTYPE_OBJECT, TDATA_TYPE::VTYPE_OBJECT, TDATA_TYPE::VTYPE_STRING, 
+        TDATA_TYPE::VTYPE_INT, TDATA_TYPE::VTYPE_INT, TDATA_TYPE::VTYPE_STRING, TDATA_TYPE::VTYPE_UNKNOWN))
     {
         return 1;
     }
