@@ -140,7 +140,7 @@ public class NFNet
             strReqSwapSceneID = GUI.TextField(new Rect(100, 0, 100, 50), strReqSwapSceneID);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////
-
+/*
             if (GUI.Button(new Rect(0, 50, 100, 50), "ÒÆ¶¯"))
             {
                 sendLogic.RequireMove(nSelfID, float.Parse(strReqMoveX), float.Parse(strReqMoveZ));
@@ -214,7 +214,7 @@ public class NFNet
             strChatTargetID = GUI.TextField(new Rect(100, 450, 100, 50), strChatTargetID);
             strType = GUI.TextField(new Rect(200, 450, 100, 50), strType);
             strChatData = GUI.TextField(new Rect(300, 450, 100, 50), strChatData);
-
+*/
 
             GUI.EndScrollView();
         }
