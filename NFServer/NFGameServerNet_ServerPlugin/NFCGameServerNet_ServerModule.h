@@ -67,9 +67,10 @@ protected:
 
     void OnClienEnterGameProcess(const NFIPacket& msg);
     void OnClienLeaveGameProcess(const NFIPacket& msg);
-    
-    //////////////////////////////////////////////////////////////////////////
+    void OnClienGMProcess(const NFIPacket& msg);
 
+    //////////////////////////////////////////////////////////////////////////
+    
     void OnClienSwapSceneProcess(const NFIPacket& msg);
     void OnClienUseSkill(const NFIPacket& msg);
     void OnClienUseItem(const NFIPacket& msg);
