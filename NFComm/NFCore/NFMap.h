@@ -15,11 +15,11 @@
 #include <iostream>
 #include <typeinfo>
 
-template <typename idType , typename dataType>
+template <typename T , typename TD>
 class NFMap
 {
 public:
-    typedef std::map<idType, dataType*> NFMapOBJECT;
+    typedef std::map<T, TD*> NFMapOBJECT;
 
     NFMap() {};
     virtual ~NFMap()
@@ -29,7 +29,7 @@ public:
         //DeleteAllElement();
     };
 
-    virtual bool AddElement(const idType& name, dataType* data)
+    virtual bool AddElement(const T& name, TD* data)
     {
         typename NFMapOBJECT::iterator itr = mObjectList.find(name);
         if (itr == mObjectList.end())
@@ -42,9 +42,9 @@ public:
         return false;
     }
 
-    virtual dataType* RemoveElement(const idType& name)
+    virtual TD* RemoveElement(const T& name)
     {
-        dataType* pData = NULL;
+        TD* pData = NULL;
         typename NFMapOBJECT::iterator itr = mObjectList.find(name);
         if (itr != mObjectList.end())
         {
@@ -55,7 +55,7 @@ public:
         return pData;
     }
 
-    virtual dataType* GetElement(const idType& name)
+    virtual TD* GetElement(const T& name)
     {
         typename NFMapOBJECT::iterator itr = mObjectList.find(name);
         if (itr != mObjectList.end())
@@ -68,7 +68,7 @@ public:
         }
     }
 
-    virtual dataType* First()
+    virtual TD* First()
     {
         if (mObjectList.size() <= 0 )
         {
@@ -86,7 +86,7 @@ public:
         }
     }
 
-    virtual dataType* Next()
+    virtual TD* Next()
     {
         ++mObjectCurIter;
         if (mObjectCurIter != mObjectList.end())
@@ -99,7 +99,7 @@ public:
         }
     }
 
-    virtual dataType* First(idType& name)
+    virtual TD* First(T& name)
     {
         if (mObjectList.size() <= 0 )
         {
@@ -118,7 +118,7 @@ public:
         }
     }
 
-    virtual dataType* Next(idType& name)
+    virtual TD* Next(T& name)
     {
         mObjectCurIter++;
         if (mObjectCurIter != mObjectList.end())
