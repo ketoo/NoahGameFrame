@@ -4,12 +4,6 @@
 //    @Date             :    2013-04-14
 //    @Module           :    NFCSceneProcessModule
 //
-//      种子NPC加载原理：
-//      种子NPC有个专门的类(NPCSeed),种子NPC和NPC有一份共用的属性配置文件
-//      NPC生成的时候，会查询种子NPC配置的这些属性，把种子NPC的属性赋予普通NPC
-//
-//      场景第一次启动时，会创建第一批NPC，此后不在主动创建NPC，完全靠NPC自己的死亡消息自己维护NPC种群的数量和类型
-//      最为关键的是，种子NPC一直只是作为属性参考对象，并不会在场景容器中真是的创建与存在，他提供NPC被创建出来需要赋予的一些属性的索引
 // -------------------------------------------------------------------------
 
 #ifndef _NFC_SCENEPROCESS_MODULE_H_
@@ -95,11 +89,15 @@ private:
     {
         bool bCanClone;
         //资源文件ID,<NPC种子列表>
-        NFMap<std::string, NFMap<std::string, SceneSeedResource>> mtSceneGroupResource;
+        //NPC.xml
+        NFMap<std::string, NFMap<std::string, SceneSeedResource>> xSceneGroupResource;
     };
 
     //场景ID,对应资源
-    NFMap<int, SceneGroupResource> mtSceneResourceConfig;
+    //Map<int, SceneGroupResource> mtSceneResourceConfig;
+    //场景ID,(File.xml,分组资源)
+    NFMap<int, NFMap<std::string, SceneGroupResource>> mtSceneResourceConfig;
+
     //////////////////////////////////////////////////////////////////////////
 };
 
