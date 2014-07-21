@@ -32,12 +32,12 @@ bool NFCLevelModule::AfterInit()
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>( pPluginManager->FindModule( "NFCEventProcessModule" ) );
     m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
     m_pLogModule = dynamic_cast<NFILogModule*>( pPluginManager->FindModule( "NFCLogModule" ) );
-
-    
+    m_pPropertyConfigModule = dynamic_cast<NFIPropertyConfigModule*>( pPluginManager->FindModule( "NFCPropertyConfigModule" ) );
 
     assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pLogModule );
+    assert( NULL != m_pPropertyConfigModule );
 
     m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCLevelModule::OnObjectClassEvent );
     m_pEventProcessModule->AddClassCallBack( "AttackNPC", this, &NFCLevelModule::OnObjectClassEvent );
@@ -47,9 +47,10 @@ bool NFCLevelModule::AfterInit()
 
 int NFCLevelModule::AddExp( const NFIDENTID& self, const int nExp)
 {
+    NFJobType eJobType = ( NFJobType )m_pKernelModule->QueryPropertyInt( self, "Job" );
     int nCurExp = m_pKernelModule->QueryPropertyInt( self, "EXP" );
     int nLevel = m_pKernelModule->QueryPropertyInt( self, "Level" );
-    int nMaxExp = 10;
+    int nMaxExp = m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, "MAXEXP");
 
     nCurExp += nExp;
 
@@ -63,7 +64,7 @@ int NFCLevelModule::AddExp( const NFIDENTID& self, const int nExp)
 
         nCurExp = nRemainExp;
 
-        nMaxExp = 10;
+        nMaxExp = m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, "MAXEXP");
         if (nMaxExp <= 0)
         {
             break;
@@ -103,7 +104,7 @@ int NFCLevelModule::OnObjectClassEvent( const NFIDENTID& self, const std::string
         m_pKernelModule->AddPropertyCallBack( self, "Level", this, &NFCLevelModule::OnObjectLevelEvent );
     }
 
-    if ( strClassName == "AttackNPC"
+    if ( strClassName == "NPC"
          && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
     {
         m_pEventProcessModule->AddEventCallBack( self, NFED_ON_OBJECT_BE_KILLED, this, &NFCLevelModule::OnObjectBeKilled );
@@ -135,13 +136,7 @@ int NFCLevelModule::OnObjectBeKilled( const NFIDENTID& object, const int nEventI
 
 int NFCLevelModule::OnObjectLevelEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar )
 {
-    //得到等级后，设置新的MAXEXP
 
-    int nLevel = newVar.IntVal( 0 );
-    int nMaxExp = 10;
-    m_pKernelModule->SetPropertyInt( self, "MAXEXP", nMaxExp );
-
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "Object Level Up", nLevel);
 
     return 0;
 }

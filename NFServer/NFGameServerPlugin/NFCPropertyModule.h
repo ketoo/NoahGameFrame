@@ -64,9 +64,6 @@ protected:
     int OnObjectLevelEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar );
 
     int OnRecordPropertyEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar );
-
-    int OnReqModifyData( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
-
 private:
     //NFConfig mConfig;
 private:
