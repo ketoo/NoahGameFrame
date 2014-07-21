@@ -264,7 +264,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqCompeleteTask));
   PlayerEntryInfo_descriptor_ = file->message_type(11);
-  static const int PlayerEntryInfo_offsets_[8] = {
+  static const int PlayerEntryInfo_offsets_[9] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerEntryInfo, object_guid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerEntryInfo, x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerEntryInfo, y_),
@@ -273,6 +273,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerEntryInfo, player_state_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerEntryInfo, config_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerEntryInfo, scene_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerEntryInfo, class_id_),
   };
   PlayerEntryInfo_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -428,13 +429,14 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "\n\013EGST_MIRROR\020\003\"$\n\017ReqPickDropItem\022\021\n\tit"
     "em_guid\030\002 \002(\003\" \n\rReqAcceptTask\022\017\n\007task_i"
     "d\030\001 \002(\014\"#\n\020ReqCompeleteTask\022\017\n\007task_id\030\001"
-    " \002(\014\"\227\001\n\017PlayerEntryInfo\022\023\n\013object_guid\030"
+    " \002(\014\"\251\001\n\017PlayerEntryInfo\022\023\n\013object_guid\030"
     "\001 \002(\003\022\t\n\001x\030\002 \002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002(\002\022\023"
     "\n\013career_type\030\005 \002(\005\022\024\n\014player_state\030\006 \002("
-    "\005\022\021\n\tconfig_id\030\007 \002(\014\022\020\n\010scene_id\030\010 \002(\005\"A"
-    "\n\022AckPlayerEntryList\022+\n\013object_list\030\001 \003("
-    "\0132\026.NFMsg.PlayerEntryInfo\")\n\022AckPlayerLe"
-    "aveList\022\023\n\013object_list\030\001 \003(\003", 1388);
+    "\005\022\021\n\tconfig_id\030\007 \002(\014\022\020\n\010scene_id\030\010 \002(\005\022\020"
+    "\n\010class_id\030\t \002(\014\"A\n\022AckPlayerEntryList\022+"
+    "\n\013object_list\030\001 \003(\0132\026.NFMsg.PlayerEntryI"
+    "nfo\")\n\022AckPlayerLeaveList\022\023\n\013object_list"
+    "\030\001 \003(\003", 1406);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -3795,6 +3797,7 @@ const int PlayerEntryInfo::kCareerTypeFieldNumber;
 const int PlayerEntryInfo::kPlayerStateFieldNumber;
 const int PlayerEntryInfo::kConfigIdFieldNumber;
 const int PlayerEntryInfo::kSceneIdFieldNumber;
+const int PlayerEntryInfo::kClassIdFieldNumber;
 #endif  // !_MSC_VER
 
 PlayerEntryInfo::PlayerEntryInfo()
@@ -3821,6 +3824,7 @@ void PlayerEntryInfo::SharedCtor() {
   player_state_ = 0;
   config_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   scene_id_ = 0;
+  class_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -3831,6 +3835,9 @@ PlayerEntryInfo::~PlayerEntryInfo() {
 void PlayerEntryInfo::SharedDtor() {
   if (config_id_ != &::google::protobuf::internal::kEmptyString) {
     delete config_id_;
+  }
+  if (class_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete class_id_;
   }
   if (this != default_instance_) {
   }
@@ -3871,6 +3878,13 @@ void PlayerEntryInfo::Clear() {
       }
     }
     scene_id_ = 0;
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (has_class_id()) {
+      if (class_id_ != &::google::protobuf::internal::kEmptyString) {
+        class_id_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -4003,6 +4017,20 @@ bool PlayerEntryInfo::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(74)) goto parse_class_id;
+        break;
+      }
+
+      // required bytes class_id = 9;
+      case 9: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_class_id:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_class_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -4066,6 +4094,12 @@ void PlayerEntryInfo::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->scene_id(), output);
   }
 
+  // required bytes class_id = 9;
+  if (has_class_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      9, this->class_id(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -4114,6 +4148,13 @@ void PlayerEntryInfo::SerializeWithCachedSizes(
   // required int32 scene_id = 8;
   if (has_scene_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->scene_id(), target);
+  }
+
+  // required bytes class_id = 9;
+  if (has_class_id()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        9, this->class_id(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -4178,6 +4219,15 @@ int PlayerEntryInfo::ByteSize() const {
     }
 
   }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    // required bytes class_id = 9;
+    if (has_class_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->class_id());
+    }
+
+  }
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -4229,6 +4279,11 @@ void PlayerEntryInfo::MergeFrom(const PlayerEntryInfo& from) {
       set_scene_id(from.scene_id());
     }
   }
+  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (from.has_class_id()) {
+      set_class_id(from.class_id());
+    }
+  }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -4245,7 +4300,7 @@ void PlayerEntryInfo::CopyFrom(const PlayerEntryInfo& from) {
 }
 
 bool PlayerEntryInfo::IsInitialized() const {
-  if ((_has_bits_[0] & 0x000000ff) != 0x000000ff) return false;
+  if ((_has_bits_[0] & 0x000001ff) != 0x000001ff) return false;
 
   return true;
 }
@@ -4260,6 +4315,7 @@ void PlayerEntryInfo::Swap(PlayerEntryInfo* other) {
     std::swap(player_state_, other->player_state_);
     std::swap(config_id_, other->config_id_);
     std::swap(scene_id_, other->scene_id_);
+    std::swap(class_id_, other->class_id_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

@@ -659,6 +659,7 @@ int NFCGameServerNet_ServerModule::OnObjectListEnter( const NFIValueList& self, 
         pEntryInfo->set_player_state( m_pKernelModule->QueryPropertyInt( identOld, "State" ) );
         pEntryInfo->set_config_id( m_pKernelModule->QueryPropertyString( identOld, "ConfigID" ) );
         pEntryInfo->set_scene_id( m_pKernelModule->QueryPropertyInt( identOld, "SceneID" ) );
+        pEntryInfo->set_class_id( m_pKernelModule->QueryPropertyString( identOld, "ClassName" ) );
 
     }
 
