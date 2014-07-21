@@ -58,36 +58,36 @@ TDATA_TYPE NFCLogicClassModule::ComputerType(const char* pstrTypeName, NFIValueL
 {
     if (0 == strcmp(pstrTypeName, "int"))
     {
-        var.nType = VTYPE_INT;
+        var.nType = TDATA_INT;
         var.variantData = (int)0;
-        return VTYPE_INT;
+        return TDATA_INT;
     }
     else if (0 == strcmp(pstrTypeName, "float"))
     {
-        var.nType = VTYPE_FLOAT;
+        var.nType = TDATA_FLOAT;
         var.variantData = (float)0.0f;
-        return VTYPE_FLOAT;
+        return TDATA_FLOAT;
     }
     else if (0 == strcmp(pstrTypeName, "string"))
     {
-        var.nType = VTYPE_STRING;
+        var.nType = TDATA_STRING;
         var.variantData = NULL_STR;
-        return VTYPE_STRING;
+        return TDATA_STRING;
     }
     else if (0 == strcmp(pstrTypeName, "double"))
     {
-        var.nType = VTYPE_DOUBLE;
+        var.nType = TDATA_DOUBLE;
         var.variantData = (double)0.0f;
-        return VTYPE_DOUBLE;
+        return TDATA_DOUBLE;
     }
     else if (0 == strcmp(pstrTypeName, "object"))
     {
-        var.nType = VTYPE_OBJECT;
+        var.nType = TDATA_OBJECT;
         var.variantData = NFINT64(0);
-        return VTYPE_OBJECT;
+        return TDATA_OBJECT;
     }
 
-    return VTYPE_UNKNOWN;
+    return TDATA_UNKNOWN;
 }
 
 bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NFCLogicClass* pClass)
@@ -130,7 +130,7 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
             }
 
             NFIValueList::TData varProperty;
-            if (VTYPE_UNKNOWN == ComputerType(pstrType, varProperty))
+            if (TDATA_UNKNOWN == ComputerType(pstrType, varProperty))
             {
                 //std::cout << "error:" << pClass->GetTypeName() << "  " << pClass->GetInstancePath() << ": " << strPropertyName << " type error!!!" << std::endl;
 
@@ -186,7 +186,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCL
                 //const char* pstrColName = recordColNode->first_attribute( "Id" )->value();
                 NFIValueList::TData TData;
                 const char* pstrColType = recordColNode->first_attribute("Type")->value();
-                if (VTYPE_UNKNOWN == ComputerType(pstrColType, TData))
+                if (TDATA_UNKNOWN == ComputerType(pstrColType, TData))
                 {
                     //assert(0);
                     NFASSERT(0, pstrRecordName, __FILE__, __FUNCTION__);

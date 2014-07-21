@@ -35,14 +35,14 @@
 //变量类型
 enum TDATA_TYPE
 {
-    VTYPE_UNKNOWN,  // 未知
-    VTYPE_INT,              // 32位整数
-    VTYPE_FLOAT,            // 单精度浮点数
-    VTYPE_DOUBLE,       // 双精度浮点数
-    VTYPE_STRING,       // 字符串
-    VTYPE_OBJECT,       // 对象ID
-    VTYPE_POINTER,      // 指针
-    VTYPE_MAX,
+    TDATA_UNKNOWN,  // 未知
+    TDATA_INT,              // 32位整数
+    TDATA_FLOAT,            // 单精度浮点数
+    TDATA_DOUBLE,       // 双精度浮点数
+    TDATA_STRING,       // 字符串
+    TDATA_OBJECT,       // 对象ID
+    TDATA_POINTER,      // 指针
+    TDATA_MAX,
 };
 
 const static std::string NULL_STR = "";
@@ -56,12 +56,12 @@ public:
     public:
         TData()
         {
-            nType = VTYPE_UNKNOWN;
+            nType = TDATA_UNKNOWN;
         }
 
         ~TData()
         {
-            nType = VTYPE_UNKNOWN;
+            nType = TDATA_UNKNOWN;
         }
 
         TDATA_TYPE nType;
@@ -73,38 +73,38 @@ public:
     virtual std::string StringValEx(const int index, const bool bForce) const = 0;
     virtual bool ToString(OUT std::string& str, const char* strSplit) = 0;
 
-    template<typename NumberType>
-    NumberType NumberVal(const int index) const
+    template<typename T>
+    T NumberVal(const int index) const
     {
-        NumberType result = 0;
+        T result = 0;
         if (index < mnSize && index >= 0)
         {
             TDATA_TYPE type =  Type(index);
-            if (type == VTYPE_DOUBLE
-                || type == VTYPE_FLOAT
-                || type == VTYPE_INT
-                || type == VTYPE_OBJECT
-                || type == VTYPE_POINTER)
+            if (type == TDATA_DOUBLE
+                || type == TDATA_FLOAT
+                || type == TDATA_INT
+                || type == TDATA_OBJECT
+                || type == TDATA_POINTER)
             {
                 const TData* var = GetStackConst(index);
-                result = boost::get<NumberType>(var->variantData);
+                result = boost::get<T>(var->variantData);
             }
         }
 
         return result;
     }
 
-    template<typename NumberType>
-    bool SetNumber(const int index, const NumberType& value)
+    template<typename T>
+    bool SetNumber(const int index, const T& value)
     {
         if (index < mnSize && index >= 0)
         {
             TDATA_TYPE type =  Type(index);
-            if (type == VTYPE_DOUBLE
-                || type == VTYPE_FLOAT
-                || type == VTYPE_INT
-                || type == VTYPE_OBJECT
-                || type == VTYPE_POINTER)
+            if (type == TDATA_DOUBLE
+                || type == TDATA_FLOAT
+                || type == TDATA_INT
+                || type == TDATA_OBJECT
+                || type == TDATA_POINTER)
             {
                 TData* var = GetStack(index);
                 var->variantData = value;
@@ -115,8 +115,8 @@ public:
         return false;
     }
 
-    template<typename NumberType>
-    bool AddNumber(const TDATA_TYPE eType, const NumberType& value)
+    template<typename T>
+    bool AddNumber(const TDATA_TYPE eType, const T& value)
     {
 
         TData* var = GetStack(mnSize);
@@ -254,7 +254,7 @@ public:
 
         switch (var.nType)
         {
-        case VTYPE_INT:
+        case TDATA_INT:
             {
                 if (0 != boost::get<int>(var.variantData))
                 {
@@ -262,7 +262,7 @@ public:
                 }
             }
             break;
-        case VTYPE_FLOAT:
+        case TDATA_FLOAT:
             {
                 float fValue = boost::get<float>(var.variantData);
                 if (fValue > 0.001f  || fValue < -0.001f)
@@ -271,7 +271,7 @@ public:
                 }
             }
             break;
-        case VTYPE_DOUBLE:
+        case TDATA_DOUBLE:
             {
                 float fValue = boost::get<float>(var.variantData);
                 if (fValue > 0.001f  || fValue < -0.001f)
@@ -280,7 +280,7 @@ public:
                 }
             }
             break;
-        case VTYPE_STRING:
+        case TDATA_STRING:
             {
                 const std::string& strData = boost::get<const std::string&>(var.variantData);
                 if (!strData.empty())
@@ -289,7 +289,7 @@ public:
                 }
             }
             break;
-        case VTYPE_OBJECT:
+        case TDATA_OBJECT:
             {
                 if (0 != boost::get<NFINT64>(var.variantData))
                 {
@@ -297,7 +297,7 @@ public:
                 }
             }
             break;
-        case VTYPE_POINTER:
+        case TDATA_POINTER:
             {
                 if (0 != boost::get<void*>(var.variantData))
                 {
@@ -320,27 +320,27 @@ public:
         {
             switch (src.Type(nPos))
             {
-                case VTYPE_INT:
+                case TDATA_INT:
                     return IntVal(nPos) == src.IntVal(nPos);
                     break;
 
-                case VTYPE_FLOAT:
+                case TDATA_FLOAT:
                     return fabs(FloatVal(nPos) - src.FloatVal(nPos)) < 0.001f;
                     break;
 
-                case VTYPE_DOUBLE:
+                case TDATA_DOUBLE:
                     return fabs(DoubleVal(nPos) - src.DoubleVal(nPos)) < 0.001f;
                     break;
 
-                case VTYPE_STRING:
+                case TDATA_STRING:
                     return StringVal(nPos) == src.StringVal(nPos);
                     break;
 
-                case VTYPE_OBJECT:
+                case TDATA_OBJECT:
                     return ObjectVal(nPos) == src.ObjectVal(nPos);
                     break;
 
-                case VTYPE_POINTER:
+                case TDATA_POINTER:
                     return PointerVal(nPos) == src.PointerVal(nPos);
                     break;
 

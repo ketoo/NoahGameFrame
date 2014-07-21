@@ -151,7 +151,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
         var.nType = eType;
         switch (eType)
         {
-            case VTYPE_INT:
+            case TDATA_INT:
 				{
 					if(!LegalNumber(pstrConfigValue))
 					{
@@ -160,7 +160,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
 					var.variantData = (int)atoi(pstrConfigValue);
 				}
                 break;
-            case VTYPE_FLOAT:
+            case TDATA_FLOAT:
                 {
                     if (strlen(pstrConfigValue) <= 0)
                     {
@@ -169,7 +169,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
                     var.variantData = (float)atof(pstrConfigValue);
                 }
                 break;
-            case VTYPE_DOUBLE:
+            case TDATA_DOUBLE:
                 {
                     if (strlen(pstrConfigValue) <= 0)
                     {
@@ -178,10 +178,10 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
                     var.variantData = (double)atof(pstrConfigValue);
                 }                
                 break;
-            case VTYPE_STRING:
+            case TDATA_STRING:
                 var.variantData = std::string(pstrConfigValue);
                 break;
-            case VTYPE_OBJECT:
+            case TDATA_OBJECT:
                 {
                     if (strlen(pstrConfigValue) <= 0)
                     {
@@ -191,7 +191,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
                 }
                 
                 break;
-            case VTYPE_POINTER:
+            case TDATA_POINTER:
                 var.variantData = (void*)NULL;
                 break;
             default:
