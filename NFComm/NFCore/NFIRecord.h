@@ -26,7 +26,7 @@ public:
         Sort,
     };
 
-    typedef std::vector<std::shared_ptr<NFIValueList::VarData>> TRECORDVEC;
+    typedef std::vector<std::shared_ptr<NFIValueList::TData>> TRECORDVEC;
     typedef TRECORDVEC::const_iterator TRECORDVECCONSTITER;
 
     virtual ~NFIRecord() {}
@@ -39,7 +39,7 @@ public:
     virtual int GetCols() const  = 0;
     virtual int GetRows() const  = 0;
 
-    virtual VARIANT_TYPE GetColType(const int nCol) const = 0;
+    virtual TDATA_TYPE GetColType(const int nCol) const = 0;
     virtual const std::string& GetColTag(const int nCol) const = 0;
 
     // Ìí¼ÓÊý¾Ý

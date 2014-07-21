@@ -50,7 +50,7 @@ NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, NFIProperty*
     return pOldProperty;
 }
 
-NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, int nIndex, const std::string& strScriptFunction)
+NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, int nIndex, const std::string& strScriptFunction)
 {
     NFIProperty* pProperty = GetElement(strPropertyName);
     if (!pProperty)
@@ -67,12 +67,12 @@ NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, const std::s
     return pProperty;
 }
 
-bool NFCPropertyManager::SetProperty(const std::string& strPropertyName, const NFIValueList::VarData& varData)
+bool NFCPropertyManager::SetProperty(const std::string& strPropertyName, const NFIValueList::TData& TData)
 {
     NFIProperty* pProperty = GetElement(strPropertyName);
     if (pProperty)
     {
-        pProperty->SetValue(varData);
+        pProperty->SetValue(TData);
 
         return true;
     }
