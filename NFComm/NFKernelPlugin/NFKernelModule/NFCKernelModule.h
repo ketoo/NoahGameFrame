@@ -121,8 +121,8 @@ public:
 
     virtual bool SwitchScene(const NFIDENTID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIValueList& arg);
 
-    virtual bool AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction);
-    virtual bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& varData, const NFIValueList& varKey, const NFIValueList& varDesc, const NFIValueList& varTag, const NFIValueList& varRelatedRecord, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex);
+    virtual bool AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction);
+    virtual bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& TData, const NFIValueList& varKey, const NFIValueList& varDesc, const NFIValueList& varTag, const NFIValueList& varRelatedRecord, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex);
     ////////////////////////////////////////////////////////////////
 
     virtual NFIDENTID CreateContainer(const int nContainerIndex, const std::string& strSceneConfigID);
@@ -224,7 +224,7 @@ protected:
 //     std::list<EVENT_PROCESS_FUNCTOR_PTR> mtCommonEventCallBackList;
 private:
 	//属性的KEY，比如HP=1，会以这个建立KEY，那么可以快速查询所有HP=1的对象而不用遍历
-    //     std::map<std::string,std::map<VarData, NFList<NFIDENTID>>>
+    //     std::map<std::string,std::map<TData, NFList<NFIDENTID>>>
     //     std::map<"Scene", std::map<10, NFList<NFIDENTID>>>
 
 private:

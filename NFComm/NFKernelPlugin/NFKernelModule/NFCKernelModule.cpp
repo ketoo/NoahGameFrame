@@ -1535,7 +1535,7 @@ int NFCKernelModule::GetObjectByProperty(const int nContainerID, const std::stri
         NFIDENTID ident = varObjectList.ObjectVal(i);
         if (this->FindProperty(ident, strPropertyName))
         {
-            VARIANT_TYPE eType = valueArg.Type(0);
+            TDATA_TYPE eType = valueArg.Type(0);
             switch (eType)
             {
                 case VTYPE_INT:
@@ -1652,7 +1652,7 @@ bool NFCKernelModule::LogSelfInfo(const NFIDENTID ident)
     return false;
 }
 
-bool NFCKernelModule::AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const VARIANT_TYPE varType, bool bPublic , bool bPrivate , bool bSave, int nIndex, const std::string& strScriptFunction)
+bool NFCKernelModule::AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic , bool bPrivate , bool bSave, int nIndex, const std::string& strScriptFunction)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
@@ -1668,12 +1668,12 @@ bool NFCKernelModule::AddProperty(const NFIDENTID& self, const std::string& strP
     return false;
 }
 
-bool NFCKernelModule::AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& varData, const NFIValueList& varKey, const NFIValueList& varDesc, const NFIValueList& varTag, const NFIValueList& varRelatedRecord, const int nRows, bool bPublic, bool bPrivate, bool bSave, int nIndex)
+bool NFCKernelModule::AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& TData, const NFIValueList& varKey, const NFIValueList& varDesc, const NFIValueList& varTag, const NFIValueList& varRelatedRecord, const int nRows, bool bPublic, bool bPrivate, bool bSave, int nIndex)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        pObject->GetRecordManager()->AddRecord(self, strRecordName, varData, varKey, varDesc, varTag, varRelatedRecord, nRows, bPublic, bPrivate, bSave, nIndex);
+        pObject->GetRecordManager()->AddRecord(self, strRecordName, TData, varKey, varDesc, varTag, varRelatedRecord, nRows, bPublic, bPrivate, bSave, nIndex);
 
         //通用回调，方便NET同步
         RECORD_EVENT_FUNCTOR functor = boost::bind(&NFCKernelModule::OnRecordCommonEvent, this, _1, _2, _3, _4, _5, _6, _7, _8);

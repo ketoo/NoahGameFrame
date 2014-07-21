@@ -150,7 +150,7 @@ int NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess(const NFIPacket& ms
 int NFCWorldNet_ServerModule::OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
 {
     if (4 != var.GetCount()
-        || !var.TypeEx(VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_STRING, VARIANT_TYPE::VTYPE_UNKNOWN))
+        || !var.TypeEx(TDATA_TYPE::VTYPE_INT, TDATA_TYPE::VTYPE_INT, TDATA_TYPE::VTYPE_INT, TDATA_TYPE::VTYPE_STRING, TDATA_TYPE::VTYPE_UNKNOWN))
     {
         return 0;
     }

@@ -463,10 +463,10 @@ bool OnRecordEnterPack(NFIRecord* pRecord, NFMsg::ObjectRecordBase* pObjectRecor
             {
                 //如果是0就不发送了，因为客户端默认是0
                 NFCValueList valueList;
-                VARIANT_TYPE eType = pRecord->GetColType( j );
+                TDATA_TYPE eType = pRecord->GetColType( j );
                 switch ( eType )
                 {
-                case VARIANT_TYPE::VTYPE_INT:
+                case TDATA_TYPE::VTYPE_INT:
                     {
                         int nValue = pRecord->QueryInt( i, j );
                         //if ( 0 != nValue )
@@ -478,7 +478,7 @@ bool OnRecordEnterPack(NFIRecord* pRecord, NFMsg::ObjectRecordBase* pObjectRecor
                         }
                     }
                     break;
-                case VARIANT_TYPE::VTYPE_DOUBLE:
+                case TDATA_TYPE::VTYPE_DOUBLE:
                     {
                         double dwValue = pRecord->QueryDouble( i, j );
                         //if ( dwValue < -0.01f || dwValue > 0.01f )
@@ -489,7 +489,7 @@ bool OnRecordEnterPack(NFIRecord* pRecord, NFMsg::ObjectRecordBase* pObjectRecor
                         }
                     }
                     break;
-                case VARIANT_TYPE::VTYPE_FLOAT:
+                case TDATA_TYPE::VTYPE_FLOAT:
                     {
                         float fValue = pRecord->QueryFloat( i, j );
                         //if ( fValue < -0.01f || fValue > 0.01f )
@@ -500,7 +500,7 @@ bool OnRecordEnterPack(NFIRecord* pRecord, NFMsg::ObjectRecordBase* pObjectRecor
                         }
                     }
                     break;
-                case VARIANT_TYPE::VTYPE_STRING:
+                case TDATA_TYPE::VTYPE_STRING:
                     {
                         const std::string& strData = pRecord->QueryString( i, j );
                         //if ( !strData.empty() )
@@ -511,7 +511,7 @@ bool OnRecordEnterPack(NFIRecord* pRecord, NFMsg::ObjectRecordBase* pObjectRecor
                         }
                     }
                     break;
-                case VARIANT_TYPE::VTYPE_OBJECT:
+                case TDATA_TYPE::VTYPE_OBJECT:
                     {
                         NFIDENTID ident = pRecord->QueryObject( i, j );
                         //if ( !ident.IsNull() )
@@ -1646,9 +1646,9 @@ int NFCGameServerNet_ServerModule::OnUseSkillResultEvent( const NFIDENTID& self,
 int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
 {
     if ( var.GetCount() != 7 ||
-        !var.TypeEx(VARIANT_TYPE::VTYPE_OBJECT, VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_INT, 
-        VARIANT_TYPE::VTYPE_INT, VARIANT_TYPE::VTYPE_FLOAT,
-        VARIANT_TYPE::VTYPE_FLOAT, VARIANT_TYPE::VTYPE_FLOAT, VARIANT_TYPE::VTYPE_UNKNOWN)
+        !var.TypeEx(TDATA_TYPE::VTYPE_OBJECT, TDATA_TYPE::VTYPE_INT, TDATA_TYPE::VTYPE_INT, 
+        TDATA_TYPE::VTYPE_INT, TDATA_TYPE::VTYPE_FLOAT,
+        TDATA_TYPE::VTYPE_FLOAT, TDATA_TYPE::VTYPE_FLOAT, TDATA_TYPE::VTYPE_UNKNOWN)
         )
     {
         return 1;

@@ -31,7 +31,7 @@ public:
 
     virtual int GetRows() const;
 
-    virtual VARIANT_TYPE GetColType(const int nCol) const;
+    virtual TDATA_TYPE GetColType(const int nCol) const;
     virtual const std::string& GetColTag(const int nCol) const;
 
     // Ìí¼ÓÊý¾Ý
