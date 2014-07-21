@@ -29,7 +29,7 @@ public:
     virtual bool Append(const NFIValueList& src, int start, int count);
 
     // 添加
-    virtual bool Append(const NFIValueList::VarData& varData);
+    virtual bool Append(const NFIValueList::TData& TData);
 
     // 清空
     virtual void Clear();
@@ -47,7 +47,7 @@ public:
 
 
     // 数据类型
-    virtual VARIANT_TYPE Type(const int index) const;
+    virtual TDATA_TYPE Type(const int index) const;
     //数据类型检测
     virtual bool TypeEx(const  int nType, ...) const;
 
