@@ -59,8 +59,8 @@ bool NFCSceneProcessModule::AfterInit()
         {
             int nSceneID = boost::lexical_cast<int>(strData);
 
-            const std::string& strFilePath = m_pElementInfoModule->QueryPropertyString( strData, "FilePath" );
-            const int nActorID = m_pElementInfoModule->QueryPropertyInt( strData, "ActorID" );
+            const std::string& strFilePath = m_pElementInfoModule->GetPropertyString( strData, "FilePath" );
+            const int nActorID = m_pElementInfoModule->GetPropertyInt( strData, "ActorID" );
 
             if ( nActorID == nSelfActorID && nSceneID > 0 )
             {
@@ -129,7 +129,7 @@ bool NFCSceneProcessModule::CreateContinerObject( const int nContainerID, const 
                 SceneSeedResource* pResourceObject = pResourceList->GetElement( strSeedID );
                 if ( NULL != pResourceObject )
                 {
-                    const std::string& strClassName = m_pElementInfoModule->QueryPropertyString(pResourceObject->strConfigID, "ClassName");
+                    const std::string& strClassName = m_pElementInfoModule->GetPropertyString(pResourceObject->strConfigID, "ClassName");
 
                     NFCValueList arg;
                     arg << "X" << pResourceObject->fSeedX;
@@ -203,7 +203,7 @@ bool NFCSceneProcessModule::DestroyCloneScene( const int& nContainerID, const in
     for (int i = 0; i < valueAllObjectList.GetCount(); ++i)
     {
         NFIDENTID ident = valueAllObjectList.ObjectVal( i );
-        std::string strObjClassName = m_pKernelModule->QueryPropertyString( ident, "ClassName" );
+        std::string strObjClassName = m_pKernelModule->GetPropertyString( ident, "ClassName" );
         if ( "Player" != strObjClassName )
         {
             m_pKernelModule->DestroyObject(ident);
@@ -228,11 +228,11 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
     int nType = var.NumberVal<int>( 1 );
     int nTargetScene = var.NumberVal<int>( 2 );
     int nTargetGroupID = var.NumberVal<int>( 3 );
-    int nOldSceneID = m_pKernelModule->QueryPropertyInt( self, "SceneID" );
+    int nOldSceneID = m_pKernelModule->GetPropertyInt( self, "SceneID" );
 
     char szSceneID[MAX_PATH] = {0};
     sprintf(szSceneID, "%d", nTargetScene);
-    int nActorID = m_pElementInfoModule->QueryPropertyInt(szSceneID, "ActorID");
+    int nActorID = m_pElementInfoModule->GetPropertyInt(szSceneID, "ActorID");
     int nSelfActorID = pPluginManager->GetActorID();
     if (nSelfActorID != nActorID)
     {
@@ -246,8 +246,8 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
         return 1;
     }
 
-    const int nNowContainerID = m_pKernelModule->QueryPropertyInt(self, "SceneID");
-    const int nNowGroupID = m_pKernelModule->QueryPropertyInt(self, "GroupID");
+    const int nNowContainerID = m_pKernelModule->GetPropertyInt(self, "SceneID");
+    const int nNowGroupID = m_pKernelModule->GetPropertyInt(self, "GroupID");
     if (nNowContainerID == nTargetScene
         && nNowGroupID == nTargetGroupID)
     {
@@ -269,7 +269,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
     float fY = 0.0f;
     float fZ = 0.0f;
 
-    const std::string& strRelivePosList = m_pElementInfoModule->QueryPropertyString(szSceneID, "RelivePos");
+    const std::string& strRelivePosList = m_pElementInfoModule->GetPropertyString(szSceneID, "RelivePos");
     NFCValueList valueRelivePosList( strRelivePosList.c_str(), ";" );
     if ( valueRelivePosList.GetCount() >= 1 )
     {
@@ -315,7 +315,7 @@ int NFCSceneProcessModule::OnLeaveSceneEvent( const NFIDENTID& object, const int
     NFIObject* pObject = m_pKernelModule->GetObject(object);
     if (pObject && nOldGroupID > 0)
     {
-        int nContainerID = pObject->QueryPropertyInt("SceneID");
+        int nContainerID = pObject->GetPropertyInt("SceneID");
         if (GetCloneSceneType(nContainerID) == SCENE_TYPE_MAINLINE_CLONE)
         {
             m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, object, "DestroyCloneSceneGroup", nOldGroupID);
@@ -333,10 +333,10 @@ int NFCSceneProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std:
         if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
         {
             //如果在副本中,则删除他的那个副本
-            int nContainerID = m_pKernelModule->QueryPropertyInt(self, "SceneID");
+            int nContainerID = m_pKernelModule->GetPropertyInt(self, "SceneID");
             if (GetCloneSceneType(nContainerID) == SCENE_TYPE_MAINLINE_CLONE)
             {
-                int nGroupID = m_pKernelModule->QueryPropertyInt(self, "GroupID");
+                int nGroupID = m_pKernelModule->GetPropertyInt(self, "GroupID");
 
                 m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "DestroyCloneSceneGroup", nGroupID);
                 DestroyCloneScene(nContainerID, nGroupID, NFCValueList());
@@ -358,7 +358,7 @@ E_SCENE_TYPE NFCSceneProcessModule::GetCloneSceneType( const int nContainerID )
     sprintf( szSceneIDName, "%d", nContainerID );
     if (m_pElementInfoModule->ExistElement(szSceneIDName))
     {
-        return (E_SCENE_TYPE)m_pElementInfoModule->QueryPropertyInt(szSceneIDName, "SceneType");
+        return (E_SCENE_TYPE)m_pElementInfoModule->GetPropertyInt(szSceneIDName, "SceneType");
     }
 
     return SCENE_TYPE_ERROR;
@@ -369,8 +369,8 @@ bool NFCSceneProcessModule::LoadInitFileResource( const int& nContainerID )
     char szSceneIDName[MAX_PATH] = { 0 };
     sprintf( szSceneIDName, "%d", nContainerID );
 
-    const std::string& strSceneFilePath = m_pElementInfoModule->QueryPropertyString( szSceneIDName, "FilePath" );
-    const int nCanClone = m_pElementInfoModule->QueryPropertyInt( szSceneIDName, "CanClone" );
+    const std::string& strSceneFilePath = m_pElementInfoModule->GetPropertyString( szSceneIDName, "FilePath" );
+    const int nCanClone = m_pElementInfoModule->GetPropertyInt( szSceneIDName, "CanClone" );
 
     //场景对应资源
     NFMap<std::string, SceneGroupResource>* pSceneResourceMap = mtSceneResourceConfig.GetElement( nContainerID );
