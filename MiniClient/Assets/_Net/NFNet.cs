@@ -231,7 +231,10 @@ public class NFNet
     float fTime = 0.0f;
     public void Update()
     {
-        ntarget = objectElement.targetIdent.nData64;
+        if (null != objectElement)
+        {
+            ntarget = objectElement.targetIdent.nData64;
+        }
 
         if (null != client)
         {

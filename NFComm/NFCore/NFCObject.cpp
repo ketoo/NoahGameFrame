@@ -169,7 +169,7 @@ bool NFCObject::SetPropertyObject(const std::string& strPropertyName, const NFID
     return false;
 }
 
-int NFCObject::QueryPropertyInt(const std::string& strPropertyName)
+int NFCObject::GetPropertyInt(const std::string& strPropertyName)
 {
     NFIProperty* pProperty = GetPropertyManager()->GetElement(strPropertyName);
     if (pProperty)
@@ -181,7 +181,7 @@ int NFCObject::QueryPropertyInt(const std::string& strPropertyName)
     return -1;
 }
 
-float NFCObject::QueryPropertyFloat(const std::string& strPropertyName)
+float NFCObject::GetPropertyFloat(const std::string& strPropertyName)
 {
     NFIProperty* pProperty = GetPropertyManager()->GetElement(strPropertyName);
     if (pProperty)
@@ -193,7 +193,7 @@ float NFCObject::QueryPropertyFloat(const std::string& strPropertyName)
     return 0.0f;
 }
 
-double NFCObject::QueryPropertyDouble(const std::string& strPropertyName)
+double NFCObject::GetPropertyDouble(const std::string& strPropertyName)
 {
     NFIProperty* pProperty = GetPropertyManager()->GetElement(strPropertyName);
     if (pProperty)
@@ -205,7 +205,7 @@ double NFCObject::QueryPropertyDouble(const std::string& strPropertyName)
     return 0.0;
 }
 
-const std::string& NFCObject::QueryPropertyString(const std::string& strPropertyName)
+const std::string& NFCObject::GetPropertyString(const std::string& strPropertyName)
 {
     NFIProperty* pProperty = GetPropertyManager()->GetElement(strPropertyName);
     if (pProperty)
@@ -217,7 +217,7 @@ const std::string& NFCObject::QueryPropertyString(const std::string& strProperty
     return NULL_STR;
 }
 
-NFIDENTID NFCObject::QueryPropertyObject(const std::string& strPropertyName)
+NFIDENTID NFCObject::GetPropertyObject(const std::string& strPropertyName)
 {
     NFIProperty* pProperty = GetPropertyManager()->GetElement(strPropertyName);
     if (pProperty)
@@ -351,7 +351,7 @@ bool NFCObject::SetRecordObject( const std::string& strRecordName, const int nRo
     return false;
 }
 
-int NFCObject::QueryRecordInt(const std::string& strRecordName, const int nRow, const int nCol)
+int NFCObject::GetRecordInt(const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIRecord* pRecord = GetRecordManager()->GetElement(strRecordName);
     if (pRecord)
@@ -362,7 +362,7 @@ int NFCObject::QueryRecordInt(const std::string& strRecordName, const int nRow, 
     return 0;
 }
 
-int NFCObject::QueryRecordInt( const std::string& strRecordName, const int nRow, const std::string& strColTag )
+int NFCObject::GetRecordInt( const std::string& strRecordName, const int nRow, const std::string& strColTag )
 {
     NFIRecord* pRecord = GetRecordManager()->GetElement(strRecordName);
     if (pRecord)
@@ -374,7 +374,7 @@ int NFCObject::QueryRecordInt( const std::string& strRecordName, const int nRow,
 }
 
 
-float NFCObject::QueryRecordFloat(const std::string& strRecordName, const int nRow, const int nCol)
+float NFCObject::GetRecordFloat(const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIRecord* pRecord = GetRecordManager()->GetElement(strRecordName);
     if (pRecord)
@@ -386,7 +386,7 @@ float NFCObject::QueryRecordFloat(const std::string& strRecordName, const int nR
 }
 
 
-float NFCObject::QueryRecordFloat( const std::string& strRecordName, const int nRow, const std::string& strColTag )
+float NFCObject::GetRecordFloat( const std::string& strRecordName, const int nRow, const std::string& strColTag )
 {
     NFIRecord* pRecord = GetRecordManager()->GetElement(strRecordName);
     if (pRecord)
@@ -397,7 +397,7 @@ float NFCObject::QueryRecordFloat( const std::string& strRecordName, const int n
     return 0;
 }
 
-double NFCObject::QueryRecordDouble(const std::string& strRecordName, const int nRow, const int nCol)
+double NFCObject::GetRecordDouble(const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIRecord* pRecord = GetRecordManager()->GetElement(strRecordName);
     if (pRecord)
@@ -408,7 +408,7 @@ double NFCObject::QueryRecordDouble(const std::string& strRecordName, const int 
     return 0.0;
 }
 
-double NFCObject::QueryRecordDouble( const std::string& strRecordName, const int nRow, const std::string& strColTag )
+double NFCObject::GetRecordDouble( const std::string& strRecordName, const int nRow, const std::string& strColTag )
 {
     NFIRecord* pRecord = GetRecordManager()->GetElement(strRecordName);
     if (pRecord)
@@ -419,7 +419,7 @@ double NFCObject::QueryRecordDouble( const std::string& strRecordName, const int
     return 0.0;
 }
 
-const std::string& NFCObject::QueryRecordString(const std::string& strRecordName, const int nRow, const int nCol)
+const std::string& NFCObject::GetRecordString(const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIRecord* pRecord = GetRecordManager()->GetElement(strRecordName);
     if (pRecord)
@@ -430,7 +430,7 @@ const std::string& NFCObject::QueryRecordString(const std::string& strRecordName
     return NULL_STR;
 }
 
-const std::string& NFCObject::QueryRecordString( const std::string& strRecordName, const int nRow, const std::string& strColTag )
+const std::string& NFCObject::GetRecordString( const std::string& strRecordName, const int nRow, const std::string& strColTag )
 {
     NFIRecord* pRecord = GetRecordManager()->GetElement(strRecordName);
     if (pRecord)
@@ -441,7 +441,7 @@ const std::string& NFCObject::QueryRecordString( const std::string& strRecordNam
     return NULL_STR;
 }
 
-NFIDENTID NFCObject::QueryRecordObject(const std::string& strRecordName, const int nRow, const int nCol)
+NFIDENTID NFCObject::GetRecordObject(const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIRecord* pRecord = GetRecordManager()->GetElement(strRecordName);
     if (pRecord)
@@ -452,7 +452,7 @@ NFIDENTID NFCObject::QueryRecordObject(const std::string& strRecordName, const i
     return 0;
 }
 
-NFIDENTID NFCObject::QueryRecordObject( const std::string& strRecordName, const int nRow, const std::string& strColTag )
+NFIDENTID NFCObject::GetRecordObject( const std::string& strRecordName, const int nRow, const std::string& strColTag )
 {
     NFIRecord* pRecord = GetRecordManager()->GetElement(strRecordName);
     if (pRecord)

@@ -50,10 +50,10 @@ int NFCPropertyModule::GetPropertyValue( const NFIDENTID& self, const std::strin
 {
     if ( NFPropertyGroup::NPG_ALL != eGroupType )
     {
-        return m_pKernelModule->QueryRecordInt( self, mstrCommPropertyName, eGroupType, "strPropertyName" );
+        return m_pKernelModule->GetRecordInt( self, mstrCommPropertyName, eGroupType, "strPropertyName" );
     }
 
-    return m_pKernelModule->QueryPropertyInt( self, mstrCommPropertyName );
+    return m_pKernelModule->GetPropertyInt( self, mstrCommPropertyName );
 }
 
 int NFCPropertyModule::SetPropertyValue( const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue )
@@ -166,8 +166,8 @@ int NFCPropertyModule::OnObjectClassEvent( const NFIDENTID& self, const std::str
         }
         else if ( CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA == eClassEvent )
         {
-            int nOnlineCount = m_pKernelModule->QueryPropertyInt( self, "OnlineCount" );
-            if ( nOnlineCount <= 0 && m_pKernelModule->QueryPropertyInt( self, "SceneID" ) > 0 )
+            int nOnlineCount = m_pKernelModule->GetPropertyInt( self, "OnlineCount" );
+            if ( nOnlineCount <= 0 && m_pKernelModule->GetPropertyInt( self, "SceneID" ) > 0 )
             {
                 //第一次出生，设置基础属性
                 m_pKernelModule->SetPropertyInt( self, "Level", 1 );
@@ -191,8 +191,8 @@ int NFCPropertyModule::RefreshBaseProperty( const NFIDENTID& self )
     }
 
     //初始属性+等级属性(职业决定)
-    NFJobType eJobType = ( NFJobType )m_pKernelModule->QueryPropertyInt( self, "Job" );
-    int nLevel = m_pKernelModule->QueryPropertyInt( self, "Level" );
+    NFJobType eJobType = ( NFJobType )m_pKernelModule->GetPropertyInt( self, "Job" );
+    int nLevel = m_pKernelModule->GetPropertyInt( self, "Level" );
     
     for ( int i = 0; i < pRecord->GetCols(); ++i )
     {
@@ -206,13 +206,13 @@ int NFCPropertyModule::RefreshBaseProperty( const NFIDENTID& self )
 
 bool NFCPropertyModule::FullHPMP( const NFIDENTID& self )
 {
-    int nMaxHP = m_pKernelModule->QueryPropertyInt( self, "MAXHP" );
+    int nMaxHP = m_pKernelModule->GetPropertyInt( self, "MAXHP" );
     if ( nMaxHP > 0 )
     {
         m_pKernelModule->SetPropertyInt( self, "HP", nMaxHP );
     }
 
-    int nMaxMP = m_pKernelModule->QueryPropertyInt( self, "MAXMP" );
+    int nMaxMP = m_pKernelModule->GetPropertyInt( self, "MAXMP" );
     if ( nMaxMP > 0 )
     {
         m_pKernelModule->SetPropertyInt( self, "MP", nMaxMP );
@@ -223,8 +223,8 @@ bool NFCPropertyModule::FullHPMP( const NFIDENTID& self )
 
 bool NFCPropertyModule::AddHP( const NFIDENTID& self, int nValue )
 {
-    int nCurValue = m_pKernelModule->QueryPropertyInt( self, "HP" );
-    int nMaxValue = m_pKernelModule->QueryPropertyInt( self, "MAXHP" );
+    int nCurValue = m_pKernelModule->GetPropertyInt( self, "HP" );
+    int nMaxValue = m_pKernelModule->GetPropertyInt( self, "MAXHP" );
 
     if ( nCurValue > 0 )
     {
@@ -241,8 +241,8 @@ bool NFCPropertyModule::AddHP( const NFIDENTID& self, int nValue )
 
 bool NFCPropertyModule::AddMP( const NFIDENTID& self, int nValue )
 {
-    int nCurValue = m_pKernelModule->QueryPropertyInt( self, "MP" );
-    int nMaxValue = m_pKernelModule->QueryPropertyInt( self, "MAXMP" );
+    int nCurValue = m_pKernelModule->GetPropertyInt( self, "MP" );
+    int nMaxValue = m_pKernelModule->GetPropertyInt( self, "MAXMP" );
 
     nCurValue += nValue;
     if ( nCurValue > nMaxValue )
@@ -257,7 +257,7 @@ bool NFCPropertyModule::AddMP( const NFIDENTID& self, int nValue )
 
 bool NFCPropertyModule::ConsumeHP( const NFIDENTID& self, int nValue )
 {
-    int nCurValue = m_pKernelModule->QueryPropertyInt( self, "HP" );
+    int nCurValue = m_pKernelModule->GetPropertyInt( self, "HP" );
     if ( ( nCurValue > 0 ) && ( nCurValue - nValue >= 0 ) )
     {
         nCurValue -= nValue;
@@ -271,7 +271,7 @@ bool NFCPropertyModule::ConsumeHP( const NFIDENTID& self, int nValue )
 
 bool NFCPropertyModule::ConsumeMP( const NFIDENTID& self, int nValue )
 {
-    int nCurValue = m_pKernelModule->QueryPropertyInt( self, "MP" );
+    int nCurValue = m_pKernelModule->GetPropertyInt( self, "MP" );
     if ( ( nCurValue > 0 ) && ( nCurValue - nValue >= 0 ) )
     {
         nCurValue -= nValue;
@@ -285,7 +285,7 @@ bool NFCPropertyModule::ConsumeMP( const NFIDENTID& self, int nValue )
 
 bool NFCPropertyModule::ConsumeSP( const NFIDENTID& self, int nValue )
 {
-    int nCSP = m_pKernelModule->QueryPropertyInt( self, "SP" );
+    int nCSP = m_pKernelModule->GetPropertyInt( self, "SP" );
     if ( ( nCSP > 0 ) && ( nCSP - nValue >= 0 ) )
     {
         nCSP -= nValue;
@@ -299,7 +299,7 @@ bool NFCPropertyModule::ConsumeSP( const NFIDENTID& self, int nValue )
 
 bool NFCPropertyModule::FullSP( const NFIDENTID& self )
 {
-    int nMAXCSP = m_pKernelModule->QueryPropertyInt( self, "MAXSP" );
+    int nMAXCSP = m_pKernelModule->GetPropertyInt( self, "MAXSP" );
     if ( nMAXCSP > 0 )
     {
         m_pKernelModule->SetPropertyInt( self, "SP", nMAXCSP );
@@ -312,8 +312,8 @@ bool NFCPropertyModule::FullSP( const NFIDENTID& self )
 
 bool NFCPropertyModule::AddSP( const NFIDENTID& self, int nValue )
 {
-    int nCurValue = m_pKernelModule->QueryPropertyInt( self, "SP" );
-    int nMaxValue = m_pKernelModule->QueryPropertyInt( self, "MAXSP" );
+    int nCurValue = m_pKernelModule->GetPropertyInt( self, "SP" );
+    int nMaxValue = m_pKernelModule->GetPropertyInt( self, "MAXSP" );
 
     nCurValue += nValue;
     if ( nCurValue > nMaxValue )
@@ -328,7 +328,7 @@ bool NFCPropertyModule::AddSP( const NFIDENTID& self, int nValue )
 
 bool NFCPropertyModule::ConsumeMoney( const NFIDENTID& self, int nValue )
 {
-    int nCurValue = m_pKernelModule->QueryPropertyInt( self, "Money" );
+    int nCurValue = m_pKernelModule->GetPropertyInt( self, "Money" );
     nCurValue -= nValue;
     if (nCurValue >= 0)
     {
@@ -342,7 +342,7 @@ bool NFCPropertyModule::ConsumeMoney( const NFIDENTID& self, int nValue )
 
 bool NFCPropertyModule::AddMoney( const NFIDENTID& self, int nValue )
 {
-    int nCurValue = m_pKernelModule->QueryPropertyInt( self, "Money" );
+    int nCurValue = m_pKernelModule->GetPropertyInt( self, "Money" );
     nCurValue += nValue;
     m_pKernelModule->SetPropertyInt( self, "Money", nCurValue);
 

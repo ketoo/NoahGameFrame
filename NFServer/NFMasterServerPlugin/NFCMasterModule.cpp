@@ -52,10 +52,10 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 // 
 //                     char szInfo[MAX_PATH] = { 0 };
 //                     sprintf_s(szInfo, "WorldID:%d, WorldName:%s, WorldMaxOnline:%d, WorldOnlineCount:%d",
-//                               m_pKernelModule->QueryPropertyInt(ident, "WorldID"),
-//                               m_pKernelModule->QueryPropertyString(ident, "WorldName"),
-//                               m_pKernelModule->QueryPropertyInt(ident, "WorldMaxOnline"),
-//                               m_pKernelModule->QueryPropertyInt(ident, "WorldOnlineCount"));
+//                               m_pKernelModule->GetPropertyInt(ident, "WorldID"),
+//                               m_pKernelModule->GetPropertyString(ident, "WorldName"),
+//                               m_pKernelModule->GetPropertyInt(ident, "WorldMaxOnline"),
+//                               m_pKernelModule->GetPropertyInt(ident, "WorldOnlineCount"));
 // 
 //                     m_pKernelModule->LogInfo(szInfo);
 //                 }
@@ -70,10 +70,10 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 // 
 //                     char szInfo[MAX_PATH] = { 0 };
 //                     sprintf_s(szInfo, "LoginID:%d, LoginName:%s, LoginMaxOnline:%d, LoginOnlineCount:%d",
-//                               m_pKernelModule->QueryPropertyInt(ident, "LoginID"),
-//                               m_pKernelModule->QueryPropertyString(ident, "LoginName"),
-//                               m_pKernelModule->QueryPropertyInt(ident, "LoginMaxOnline"),
-//                               m_pKernelModule->QueryPropertyInt(ident, "LoginOnlineCount"));
+//                               m_pKernelModule->GetPropertyInt(ident, "LoginID"),
+//                               m_pKernelModule->GetPropertyString(ident, "LoginName"),
+//                               m_pKernelModule->GetPropertyInt(ident, "LoginMaxOnline"),
+//                               m_pKernelModule->GetPropertyInt(ident, "LoginOnlineCount"));
 // 
 //                     m_pKernelModule->LogInfo(szInfo);
 //                 }
@@ -88,10 +88,10 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 //                 //
 //                 //                  char szInfo[MAX_PATH] = { 0 };
 //                 //                  sprintf_s( szInfo, "LoginID:%d, LoginName:%s, LoginMaxOnline:%d, LoginOnlineCount:%d",
-//                 //                      m_pKernelModule->QueryPropertyInt( ident, "LoginID" ),
-//                 //                      m_pKernelModule->QueryPropertyString( ident, "LoginName" ),
-//                 //                      m_pKernelModule->QueryPropertyInt( ident, "LoginMaxOnline" ),
-//                 //                      m_pKernelModule->QueryPropertyInt( ident, "LoginOnlineCount" ) );
+//                 //                      m_pKernelModule->GetPropertyInt( ident, "LoginID" ),
+//                 //                      m_pKernelModule->GetPropertyString( ident, "LoginName" ),
+//                 //                      m_pKernelModule->GetPropertyInt( ident, "LoginMaxOnline" ),
+//                 //                      m_pKernelModule->GetPropertyInt( ident, "LoginOnlineCount" ) );
 //                 //
 //                 //                  m_pKernelModule->PrintInfo( szInfo );
 //                 //              }
@@ -106,10 +106,10 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 //                 //
 //                 //                  char szInfo[MAX_PATH] = { 0 };
 //                 //                  sprintf_s( szInfo, "LoginID:%d, LoginName:%s, LoginMaxOnline:%d, LoginOnlineCount:%d",
-//                 //                      m_pKernelModule->QueryPropertyInt( ident, "LoginID" ),
-//                 //                      m_pKernelModule->QueryPropertyString( ident, "LoginName" ),
-//                 //                      m_pKernelModule->QueryPropertyInt( ident, "LoginMaxOnline" ),
-//                 //                      m_pKernelModule->QueryPropertyInt( ident, "LoginOnlineCount" ) );
+//                 //                      m_pKernelModule->GetPropertyInt( ident, "LoginID" ),
+//                 //                      m_pKernelModule->GetPropertyString( ident, "LoginName" ),
+//                 //                      m_pKernelModule->GetPropertyInt( ident, "LoginMaxOnline" ),
+//                 //                      m_pKernelModule->GetPropertyInt( ident, "LoginOnlineCount" ) );
 //                 //
 //                 //                  m_pKernelModule->PrintInfo( szInfo );
 //                 //              }

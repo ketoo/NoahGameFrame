@@ -56,12 +56,12 @@ bool NFCLoginNet_ServerModule::AfterInit()
 	m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_LOGIN_RESULTS, this, &NFCLoginNet_ServerModule::OnLoginResultsEvent);
 	m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_SELECT_SERVER_RESULTS, this, &NFCLoginNet_ServerModule::OnSelectWorldResultsEvent);
 
-	const int nServerID = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerID");
-	const int nServerPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerPort");
-	const std::string& strName = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "Name");
-	const int nMaxConnect = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "MaxConnect");
-	const int nCpus = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "CpuCount");
-	const int nPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "Port");
+	const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
+	const int nServerPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerPort");
+	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
+	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
+	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
+	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
 	m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCLoginNet_ServerModule::OnRecivePack, &NFCLoginNet_ServerModule::OnSocketEvent);
 	int nRet = m_pNet->Initialization(nMaxConnect, nPort, nCpus);
@@ -192,12 +192,12 @@ int NFCLoginNet_ServerModule::OnLoginProcess( const NFIPacket& msg )
 
 int NFCLoginNet_ServerModule::OnSelectWorldProcess( const NFIPacket& msg )
 {
-    const int nServerID = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerID");
-//     const int nServerPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerPort");
-//     const std::string& strName = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "Name");
-//     const int nMaxConnect = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "MaxConnect");
-//     const int nCpus = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "CpuCount");
-//     const int nPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "Port");
+    const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
+//     const int nServerPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerPort");
+//     const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
+//     const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
+//     const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
+//     const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
 	int64_t nPlayerID = 0;
 	NFMsg::ReqConnectWorld xMsg;
