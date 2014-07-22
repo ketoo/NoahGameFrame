@@ -31,7 +31,7 @@ bool HelloWorld2::AfterInit()
 
         pObject->SetPropertyInt("World", 1111);
 
-        const int nProperty1 = pObject->QueryPropertyInt("World");
+        const int nProperty1 = pObject->GetPropertyInt("World");
         std::cout << "Property World:" << nProperty1 << std::endl;
 
         //添加属性事件
@@ -39,7 +39,7 @@ bool HelloWorld2::AfterInit()
 
         pObject->SetPropertyInt("World", 2222);
 
-        const int nProperty2 = pObject->QueryPropertyInt("World");
+        const int nProperty2 = pObject->GetPropertyInt("World");
         std::cout << "Property World:" << nProperty2 << std::endl;
     }
     
