@@ -33,10 +33,10 @@ public:
     virtual NFIRecordManager* GetRecordManager(const std::string& strConfigName) = 0;
     virtual NFIComponentManager* GetComponentManager(const std::string& strConfigName) = 0;
 
-    virtual int QueryPropertyInt(const std::string& strConfigName, const std::string& strPropertyName) = 0;
-    virtual float QueryPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName) = 0;
-    virtual double QueryPropertyDouble(const std::string& strConfigName, const std::string& strPropertyName) = 0;
-    virtual const std::string& QueryPropertyString(const std::string& strConfigName, const std::string& strPropertyName) = 0;
+    virtual int GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName) = 0;
+    virtual float GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName) = 0;
+    virtual double GetPropertyDouble(const std::string& strConfigName, const std::string& strPropertyName) = 0;
+    virtual const std::string& GetPropertyString(const std::string& strConfigName, const std::string& strPropertyName) = 0;
 
 protected:
 private:

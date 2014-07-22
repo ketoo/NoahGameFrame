@@ -248,19 +248,19 @@ public:
         return m_pElementInfoModule->ExistElement(strConfigName);
     }
 
-    int QueryPropertyInt(const std::string& strConfigName, const std::string& strPropertyName)
+    int GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName)
     {
-        return m_pElementInfoModule->QueryPropertyInt(strConfigName, strPropertyName);
+        return m_pElementInfoModule->GetPropertyInt(strConfigName, strPropertyName);
     }
 
-    float QueryPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName)
+    float GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName)
     {
-        return m_pElementInfoModule->QueryPropertyFloat(strConfigName, strPropertyName);
+        return m_pElementInfoModule->GetPropertyFloat(strConfigName, strPropertyName);
     }
 
-    const std::string& QueryPropertyString(const std::string& strConfigName, const std::string& strPropertyName)
+    const std::string& GetPropertyString(const std::string& strConfigName, const std::string& strPropertyName)
     {
-        return m_pElementInfoModule->QueryPropertyString(strConfigName, strPropertyName);
+        return m_pElementInfoModule->GetPropertyString(strConfigName, strPropertyName);
     }
     //////////////////////////////////////////////////////////////////
 
@@ -469,24 +469,24 @@ public:
         return m_pKernelModule->SetPropertyObject(self, strPropertyName, objectValue);
     }
 
-    int QueryPropertyInt(const NFIDENTID& self, const std::string& strPropertyName)
+    int GetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName)
     {
-        return m_pKernelModule->QueryPropertyInt(self, strPropertyName);
+        return m_pKernelModule->GetPropertyInt(self, strPropertyName);
     }
 
-    float QueryPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName)
+    float GetPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName)
     {
-        return m_pKernelModule->QueryPropertyFloat(self, strPropertyName);
+        return m_pKernelModule->GetPropertyFloat(self, strPropertyName);
     }
 
-    const std::string& QueryPropertyString(const NFIDENTID& self, const std::string& strPropertyName)
+    const std::string& GetPropertyString(const NFIDENTID& self, const std::string& strPropertyName)
     {
-        return m_pKernelModule->QueryPropertyString(self, strPropertyName);
+        return m_pKernelModule->GetPropertyString(self, strPropertyName);
     }
 
-    NFIDENTID QueryPropertyObject(const NFIDENTID& self, const std::string& strPropertyName)
+    NFIDENTID GetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName)
     {
-        return m_pKernelModule->QueryPropertyObject(self, strPropertyName);
+        return m_pKernelModule->GetPropertyObject(self, strPropertyName);
     }
 
     bool SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const int nValue)
@@ -509,25 +509,25 @@ public:
         return m_pKernelModule->SetRecordObject(self, strRecordName, nRow, nCol, objectValue);
     }
 
-    int QueryRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+    int GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
     {
-        return m_pKernelModule->QueryRecordInt(self, strRecordName, nRow, nCol);
+        return m_pKernelModule->GetRecordInt(self, strRecordName, nRow, nCol);
     }
 
-    float QueryRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+    float GetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
     {
 
-        return m_pKernelModule->QueryRecordFloat(self, strRecordName, nRow, nCol);
+        return m_pKernelModule->GetRecordFloat(self, strRecordName, nRow, nCol);
     }
 
-    const std::string& QueryRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+    const std::string& GetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
     {
-        return m_pKernelModule->QueryRecordString(self, strRecordName, nRow, nCol);
+        return m_pKernelModule->GetRecordString(self, strRecordName, nRow, nCol);
     }
 
-    NFIDENTID QueryRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+    NFIDENTID GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
     {
-        return m_pKernelModule->QueryRecordObject(self, strRecordName, nRow, nCol);
+        return m_pKernelModule->GetRecordObject(self, strRecordName, nRow, nCol);
     }
 
     bool AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction)
@@ -802,37 +802,37 @@ static bool KernelModule_ExistElement(const NFScriptInt64& nPtrKernelModule,
     return false;
 }
 
-static int KernelModule_QueryPropertyInt(const NFScriptInt64& nPtrKernelModule,
+static int KernelModule_GetPropertyInt(const NFScriptInt64& nPtrKernelModule,
                          const std::string& strConfigName, const std::string& strPropertyName)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
     if (pScriptKernelModule)
     {
-        return pScriptKernelModule->QueryPropertyInt(strConfigName, strPropertyName);
+        return pScriptKernelModule->GetPropertyInt(strConfigName, strPropertyName);
     }
 
     return 0;
 }
 
-static float KernelModule_QueryPropertyFloat(const NFScriptInt64& nPtrKernelModule,
+static float KernelModule_GetPropertyFloat(const NFScriptInt64& nPtrKernelModule,
                              const std::string& strConfigName, const std::string& strPropertyName)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
     if (pScriptKernelModule)
     {
-        return pScriptKernelModule->QueryPropertyFloat(strConfigName, strPropertyName);
+        return pScriptKernelModule->GetPropertyFloat(strConfigName, strPropertyName);
     }
 
     return 0.0f;
 }
 
-static const std::string& KernelModule_QueryPropertyString(const NFScriptInt64& nPtrKernelModule,
+static const std::string& KernelModule_GetPropertyString(const NFScriptInt64& nPtrKernelModule,
                                 const std::string& strConfigName, const std::string& strPropertyName)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
     if (pScriptKernelModule)
     {
-        return pScriptKernelModule->QueryPropertyString(strConfigName, strPropertyName);
+        return pScriptKernelModule->GetPropertyString(strConfigName, strPropertyName);
     }
 
     return NULL_STR;
@@ -1034,49 +1034,49 @@ static bool KernelModule_SetPropertyObject(const NFScriptInt64& nPtrKernelModule
     return false;
 }
 
-static int KernelModule_QueryPropertyInt(const NFScriptInt64& nKernelModule, const NFScriptInt64& self, 
+static int KernelModule_GetPropertyInt(const NFScriptInt64& nKernelModule, const NFScriptInt64& self, 
                             const std::string& strPropertyName)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nKernelModule.Int64Val();
     if (pScriptKernelModule)
     {
-        return pScriptKernelModule->QueryPropertyInt(self.ObjectVal(), strPropertyName);
+        return pScriptKernelModule->GetPropertyInt(self.ObjectVal(), strPropertyName);
     }
 
     return 0;
 }
 
-static float KernelModule_QueryPropertyFloat(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+static float KernelModule_GetPropertyFloat(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
                                 const std::string& strPropertyName)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
     if (pScriptKernelModule)
     {
-        return pScriptKernelModule->QueryPropertyFloat(self.ObjectVal(), strPropertyName);
+        return pScriptKernelModule->GetPropertyFloat(self.ObjectVal(), strPropertyName);
     }
 
     return 0.0f;
 }
 
-static const std::string& KernelModule_QueryPropertyString(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self,
+static const std::string& KernelModule_GetPropertyString(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self,
                                               const std::string& strPropertyName)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
     if (pScriptKernelModule)
     {
-        return pScriptKernelModule->QueryPropertyString(self.ObjectVal(), strPropertyName);
+        return pScriptKernelModule->GetPropertyString(self.ObjectVal(), strPropertyName);
     }
 
     return NULL_STR;
 }
 
-static NFScriptInt64 KernelModule_QueryPropertyObject(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+static NFScriptInt64 KernelModule_GetPropertyObject(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
                                      const std::string& strPropertyName)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
     if (pScriptKernelModule)
     {
-        return pScriptKernelModule->QueryPropertyObject(self.ObjectVal(), strPropertyName);
+        return pScriptKernelModule->GetPropertyObject(self.ObjectVal(), strPropertyName);
     }
 
     return 0;
@@ -1130,49 +1130,49 @@ static bool KernelModule_SetRecordObject(const NFScriptInt64& nPtrKernelModule, 
     return false;
 }
 
-static int KernelModule_QueryRecordInt(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+static int KernelModule_GetRecordInt(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
                           const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
     if (pScriptKernelModule)
     {
-        return pScriptKernelModule->QueryRecordInt(self.ObjectVal(), strRecordName, nRow, nCol);
+        return pScriptKernelModule->GetRecordInt(self.ObjectVal(), strRecordName, nRow, nCol);
     }
 
     return 0;
 }
 
-static float KernelModule_QueryRecordFloat(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+static float KernelModule_GetRecordFloat(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
                               const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
     if (pScriptKernelModule)
     {
-        return pScriptKernelModule->QueryRecordFloat(self.ObjectVal(), strRecordName, nRow, nCol);
+        return pScriptKernelModule->GetRecordFloat(self.ObjectVal(), strRecordName, nRow, nCol);
     }
 
     return 0.0f;
 }
 
-static const std::string& KernelModule_QueryRecordString(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+static const std::string& KernelModule_GetRecordString(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
                                             const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
     if (pScriptKernelModule)
     {
-        return pScriptKernelModule->QueryRecordString(self.ObjectVal(), strRecordName, nRow, nCol);
+        return pScriptKernelModule->GetRecordString(self.ObjectVal(), strRecordName, nRow, nCol);
     }
 
     return NULL_STR;
 }
 
-static NFIDENTID KernelModule_QueryRecordObject(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+static NFIDENTID KernelModule_GetRecordObject(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
                                    const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
     if (pScriptKernelModule)
     {
-        return pScriptKernelModule->QueryRecordObject(self.ObjectVal(), strRecordName, nRow, nCol);
+        return pScriptKernelModule->GetRecordObject(self.ObjectVal(), strRecordName, nRow, nCol);
     }
 
     return 0;

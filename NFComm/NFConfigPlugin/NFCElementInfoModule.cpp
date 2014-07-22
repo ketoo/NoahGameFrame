@@ -214,9 +214,9 @@ bool NFCElementInfoModule::Save()
     return true;
 }
 
-int NFCElementInfoModule::QueryPropertyInt(const std::string& strConfigName, const std::string& strPropertyName)
+int NFCElementInfoModule::GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName)
 {
-    NFIProperty* pProperty = QueryProperty(strConfigName, strPropertyName);
+    NFIProperty* pProperty = GetProperty(strConfigName, strPropertyName);
     if (pProperty)
     {
         return pProperty->QueryInt();
@@ -225,9 +225,9 @@ int NFCElementInfoModule::QueryPropertyInt(const std::string& strConfigName, con
     return 0;
 }
 
-float NFCElementInfoModule::QueryPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName)
+float NFCElementInfoModule::GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName)
 {
-    NFIProperty* pProperty = QueryProperty(strConfigName, strPropertyName);
+    NFIProperty* pProperty = GetProperty(strConfigName, strPropertyName);
     if (pProperty)
     {
         return pProperty->QueryFloat();
@@ -236,9 +236,9 @@ float NFCElementInfoModule::QueryPropertyFloat(const std::string& strConfigName,
     return 0.0f;
 }
 
-double NFCElementInfoModule::QueryPropertyDouble(const std::string& strConfigName, const std::string& strPropertyName)
+double NFCElementInfoModule::GetPropertyDouble(const std::string& strConfigName, const std::string& strPropertyName)
 {
-    NFIProperty* pProperty = QueryProperty(strConfigName, strPropertyName);
+    NFIProperty* pProperty = GetProperty(strConfigName, strPropertyName);
     if (pProperty)
     {
         return pProperty->QueryDouble();
@@ -247,9 +247,9 @@ double NFCElementInfoModule::QueryPropertyDouble(const std::string& strConfigNam
     return 0.0;
 }
 
-const std::string& NFCElementInfoModule::QueryPropertyString(const std::string& strConfigName, const std::string& strPropertyName)
+const std::string& NFCElementInfoModule::GetPropertyString(const std::string& strConfigName, const std::string& strPropertyName)
 {
-    NFIProperty* pProperty = QueryProperty(strConfigName, strPropertyName);
+    NFIProperty* pProperty = GetProperty(strConfigName, strPropertyName);
     if (pProperty)
     {
         return pProperty->QueryString();
@@ -258,7 +258,7 @@ const std::string& NFCElementInfoModule::QueryPropertyString(const std::string& 
     return  NULL_STR;
 }
 
-NFIProperty* NFCElementInfoModule::QueryProperty(const std::string& strConfigName, const std::string& strPropertyName)
+NFIProperty* NFCElementInfoModule::GetProperty(const std::string& strConfigName, const std::string& strPropertyName)
 {
     ElementConfigInfo* pElementInfo = GetElement(strConfigName);
     if (pElementInfo)
