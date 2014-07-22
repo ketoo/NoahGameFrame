@@ -84,11 +84,11 @@ public:
     virtual bool SetPropertyString(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strValue);
     virtual bool SetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName, const NFIDENTID& objectValue);
 
-    virtual int QueryPropertyInt(const NFIDENTID& self, const std::string& strPropertyName);
-    virtual float QueryPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName);
-    virtual double QueryPropertyDouble(const NFIDENTID& self, const std::string& strPropertyName);
-    virtual const std::string& QueryPropertyString(const NFIDENTID& self, const std::string& strPropertyName);
-    virtual NFIDENTID QueryPropertyObject(const NFIDENTID& self, const std::string& strPropertyName);
+    virtual int GetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName);
+    virtual float GetPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName);
+    virtual double GetPropertyDouble(const NFIDENTID& self, const std::string& strPropertyName);
+    virtual const std::string& GetPropertyString(const NFIDENTID& self, const std::string& strPropertyName);
+    virtual NFIDENTID GetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName);
 
     //////////////////////////////////////////////////////////////////////////
     virtual NFIRecord* FindRecord(const NFIDENTID& self, const std::string& strRecordName);
@@ -107,17 +107,17 @@ public:
     virtual bool SetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const std::string& value);
     virtual bool SetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFIDENTID& value);
 
-    virtual int QueryRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
-    virtual float QueryRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
-    virtual double QueryRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
-    virtual const std::string& QueryRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
-    virtual NFIDENTID QueryRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
+    virtual int GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
+    virtual float GetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
+    virtual double GetRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
+    virtual const std::string& GetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
+    virtual NFIDENTID GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
 
-    virtual int QueryRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-    virtual float QueryRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-    virtual double QueryRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-    virtual const std::string& QueryRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-    virtual NFIDENTID QueryRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
+    virtual int GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
+    virtual float GetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
+    virtual double GetRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
+    virtual const std::string& GetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
+    virtual NFIDENTID GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
 
     virtual bool SwitchScene(const NFIDENTID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIValueList& arg);
 
