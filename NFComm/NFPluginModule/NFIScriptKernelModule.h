@@ -229,11 +229,11 @@ class NFIScriptKernelModule : public NFMap<NFIDENTID, NFCSriptData>
 
     virtual bool ExistElement(const std::string& strConfigName) = 0;
 
-    virtual int QueryPropertyInt(const std::string& strConfigName, const std::string& strPropertyName) = 0;
+    virtual int GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName) = 0;
 
-    virtual float QueryPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName) = 0;
+    virtual float GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName) = 0;
 
-    virtual const std::string& QueryPropertyString(const std::string& strConfigName, const std::string& strPropertyName) = 0;
+    virtual const std::string& GetPropertyString(const std::string& strConfigName, const std::string& strPropertyName) = 0;
 
     virtual bool AddPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction) = 0;
 
@@ -274,13 +274,13 @@ class NFIScriptKernelModule : public NFMap<NFIDENTID, NFCSriptData>
 
     virtual bool SetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName, const NFIDENTID& objectValue) = 0;
 
-    virtual int QueryPropertyInt(const NFIDENTID& self, const std::string& strPropertyName) = 0;
+    virtual int GetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName) = 0;
 
-    virtual float QueryPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName) = 0;
+    virtual float GetPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName) = 0;
 
-    virtual const std::string& QueryPropertyString(const NFIDENTID& self, const std::string& strPropertyName) = 0;
+    virtual const std::string& GetPropertyString(const NFIDENTID& self, const std::string& strPropertyName) = 0;
 
-    virtual NFIDENTID QueryPropertyObject(const NFIDENTID& self, const std::string& strPropertyName) = 0;
+    virtual NFIDENTID GetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName) = 0;
 
     virtual bool SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const int nValue) = 0;
 
@@ -290,13 +290,13 @@ class NFIScriptKernelModule : public NFMap<NFIDENTID, NFCSriptData>
 
     virtual bool SetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFIDENTID& objectValue) = 0;
 
-    virtual int QueryRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
+    virtual int GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
 
-    virtual float QueryRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
+    virtual float GetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
 
-    virtual const std::string& QueryRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
+    virtual const std::string& GetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
 
-    virtual NFIDENTID QueryRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
+    virtual NFIDENTID GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
 
     virtual bool AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction) = 0;
 

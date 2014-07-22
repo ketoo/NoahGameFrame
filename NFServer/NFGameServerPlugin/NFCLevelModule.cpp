@@ -47,9 +47,9 @@ bool NFCLevelModule::AfterInit()
 
 int NFCLevelModule::AddExp( const NFIDENTID& self, const int nExp)
 {
-    NFJobType eJobType = ( NFJobType )m_pKernelModule->QueryPropertyInt( self, "Job" );
-    int nCurExp = m_pKernelModule->QueryPropertyInt( self, "EXP" );
-    int nLevel = m_pKernelModule->QueryPropertyInt( self, "Level" );
+    NFJobType eJobType = ( NFJobType )m_pKernelModule->GetPropertyInt( self, "Job" );
+    int nCurExp = m_pKernelModule->GetPropertyInt( self, "EXP" );
+    int nLevel = m_pKernelModule->GetPropertyInt( self, "Level" );
     int nMaxExp = m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, "MAXEXP");
 
     nCurExp += nExp;
@@ -120,7 +120,7 @@ int NFCLevelModule::OnObjectBeKilled( const NFIDENTID& object, const int nEventI
         NFIDENTID identKiller = var.ObjectVal( 0 );
         if ( m_pKernelModule->GetObject( identKiller ) )
         {
-            int nExp = m_pKernelModule->QueryPropertyInt( object, "EXP" );
+            int nExp = m_pKernelModule->GetPropertyInt( object, "EXP" );
             AddExp( identKiller, nExp);
             // TODO:¼Ó¹ÖÎïµôÂä½ðÇ®
             m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, identKiller, "Add Exp for kill monster", nExp);

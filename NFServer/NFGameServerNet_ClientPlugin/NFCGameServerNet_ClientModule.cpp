@@ -32,13 +32,13 @@ void NFCGameServerNet_ClientModule::Register()
 {
     //成功就注册
 
-	const int nServerID = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerID");
-	const std::string& strServerIP = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "ServerIP");
-	const std::string& strName = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "Name");
-	const int nServerPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerPort");
-	const int nMaxConnect = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "MaxConnect");
-	const int nCpus = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "CpuCount");
-	const int nPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "Port");
+	const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
+	const std::string& strServerIP = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "ServerIP");
+	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
+	const int nServerPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerPort");
+	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
+	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
+	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
     NFMsg::ServerInfoReportList xMsg;
     NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
@@ -58,13 +58,13 @@ void NFCGameServerNet_ClientModule::Register()
 
 void NFCGameServerNet_ClientModule::UnRegister()
 {
-	const int nServerID = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerID");
-	const std::string& strSelfIP = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "IP");
-	const std::string& strName = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "Name");
-	const int nServerPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerPort");
-	const int nMaxConnect = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "MaxConnect");
-	const int nCpus = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "CpuCount");
-	const int nPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "Port");
+	const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
+	const std::string& strSelfIP = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "IP");
+	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
+	const int nServerPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerPort");
+	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
+	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
+	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
     NFMsg::ServerInfoReportList xMsg;
     NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
@@ -125,13 +125,13 @@ bool NFCGameServerNet_ClientModule::AfterInit()
     // 连接world server
     mstrConfigIdent = "GameServer";
 
-	const int nServerID = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerID");
-	const std::string& strServerIP = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "ServerIP");
-	const std::string& strName = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "Name");
-	const int nServerPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerPort");
-	const int nMaxConnect = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "MaxConnect");
-	const int nCpus = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "CpuCount");
-	const int nPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "Port");
+	const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
+	const std::string& strServerIP = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "ServerIP");
+	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
+	const int nServerPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerPort");
+	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
+	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
+	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
     m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerNet_ClientModule::OnRecivePack, &NFCGameServerNet_ClientModule::OnSocketEvent);
     mnSocketFD = m_pNet->Initialization(strServerIP.c_str(), nServerPort);
@@ -332,7 +332,7 @@ int NFCGameServerNet_ClientModule::OnClassCommonEvent(const NFIDENTID& self, con
 //     if (strClassName == "Player")
 //     {
 //         if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent
-//             && m_pKernelModule->QueryPropertyInt(self, "SceneID") > 0)
+//             && m_pKernelModule->GetPropertyInt(self, "SceneID") > 0)
 //         {
 //             //被删除，也有可能是大厅角色，因此场景ID一定大于0才行
 //             //删除他的连接和连接信息,包括世界服务器
@@ -340,7 +340,7 @@ int NFCGameServerNet_ClientModule::OnClassCommonEvent(const NFIDENTID& self, con
 //             NFMsg::WantToExitWorld xMsg;
 // 
 //             xMsg.set_world_id(0);
-//             xMsg.set_account(m_pKernelModule->QueryPropertyString(self, "Account"));
+//             xMsg.set_account(m_pKernelModule->GetPropertyString(self, "Account"));
 // 
 //             if (xMsg.SerializeToString(&baseMsg.strSyncInfo))
 //             {
