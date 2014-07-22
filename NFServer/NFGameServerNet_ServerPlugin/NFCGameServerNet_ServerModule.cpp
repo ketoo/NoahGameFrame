@@ -39,13 +39,13 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 
     m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCGameServerNet_ServerModule::OnObjectClassEvent );
 
-    const int nServerID = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerID");
-    const std::string& strServerIP = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "ServerIP");
-    const std::string& strName = m_pElementInfoModule->QueryPropertyString(mstrConfigIdent, "Name");
-    const int nServerPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "ServerPort");
-    const int nMaxConnect = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "MaxConnect");
-    const int nCpus = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "CpuCount");
-    const int nPort = m_pElementInfoModule->QueryPropertyInt(mstrConfigIdent, "Port");
+    const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
+    const std::string& strServerIP = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "ServerIP");
+    const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
+    const int nServerPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerPort");
+    const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
+    const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
+    const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
     m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerNet_ServerModule::OnRecivePack, &NFCGameServerNet_ServerModule::OnSocketEvent);
     int nRet = m_pNet->Initialization(nMaxConnect, nPort, nCpus);
@@ -656,14 +656,14 @@ int NFCGameServerNet_ServerModule::OnObjectListEnter( const NFIValueList& self, 
 
         NFMsg::PlayerEntryInfo* pEntryInfo = xPlayerEntryInfoList.add_object_list();
         pEntryInfo->set_object_guid( identOld.nData64 );
-        pEntryInfo->set_x( m_pKernelModule->QueryPropertyFloat( identOld, "X" ) );
-        pEntryInfo->set_y( m_pKernelModule->QueryPropertyFloat( identOld, "Y" ) );
-        pEntryInfo->set_z( m_pKernelModule->QueryPropertyFloat( identOld, "Z" ) );
-        pEntryInfo->set_career_type( m_pKernelModule->QueryPropertyInt( identOld, "Job" ) );
-        pEntryInfo->set_player_state( m_pKernelModule->QueryPropertyInt( identOld, "State" ) );
-        pEntryInfo->set_config_id( m_pKernelModule->QueryPropertyString( identOld, "ConfigID" ) );
-        pEntryInfo->set_scene_id( m_pKernelModule->QueryPropertyInt( identOld, "SceneID" ) );
-        pEntryInfo->set_class_id( m_pKernelModule->QueryPropertyString( identOld, "ClassName" ) );
+        pEntryInfo->set_x( m_pKernelModule->GetPropertyFloat( identOld, "X" ) );
+        pEntryInfo->set_y( m_pKernelModule->GetPropertyFloat( identOld, "Y" ) );
+        pEntryInfo->set_z( m_pKernelModule->GetPropertyFloat( identOld, "Z" ) );
+        pEntryInfo->set_career_type( m_pKernelModule->GetPropertyInt( identOld, "Job" ) );
+        pEntryInfo->set_player_state( m_pKernelModule->GetPropertyInt( identOld, "State" ) );
+        pEntryInfo->set_config_id( m_pKernelModule->GetPropertyString( identOld, "ConfigID" ) );
+        pEntryInfo->set_scene_id( m_pKernelModule->GetPropertyInt( identOld, "SceneID" ) );
+        pEntryInfo->set_class_id( m_pKernelModule->GetPropertyString( identOld, "ClassName" ) );
 
     }
 
@@ -744,7 +744,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
         return 0;
     }
 
-    if ( "Player" == m_pKernelModule->QueryPropertyString( self, "ClassName" ) )
+    if ( "Player" == m_pKernelModule->GetPropertyString( self, "ClassName" ) )
     {
         if ( "GroupID" == strPropertyName )
         {
@@ -758,7 +758,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
             OnContainerEvent( self, strPropertyName, oldVar, newVar, argVar );
         }
 
-        if ( m_pKernelModule->QueryPropertyInt( self, "LoadPropertyFinish" ) <= 0 )
+        if ( m_pKernelModule->GetPropertyInt( self, "LoadPropertyFinish" ) <= 0 )
         {
             return 0;
         }
@@ -914,17 +914,17 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 
 int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar )
 {
-    int nObjectContainerID = m_pKernelModule->QueryPropertyInt( self, "SceneID" );
-    int nObjectGroupID = m_pKernelModule->QueryPropertyInt( self, "GroupID" );
+    int nObjectContainerID = m_pKernelModule->GetPropertyInt( self, "SceneID" );
+    int nObjectGroupID = m_pKernelModule->GetPropertyInt( self, "GroupID" );
 
     if ( nObjectGroupID < 0 )
     {
         //容器
         return 0;
     }
-    if ( "Player" == m_pKernelModule->QueryPropertyString( self, "ClassName" ) )
+    if ( "Player" == m_pKernelModule->GetPropertyString( self, "ClassName" ) )
     {
-        if (m_pKernelModule->QueryPropertyInt(self, "LoadPropertyFinish") <= 0)
+        if (m_pKernelModule->GetPropertyInt(self, "LoadPropertyFinish") <= 0)
         {
             return 0;
         }
@@ -1240,7 +1240,7 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent( const NFIDENTID& self, co
     if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
     {
         //删除在线标志
-        const std::string& strRole = m_pKernelModule->QueryPropertyString( self, "Name" );
+        const std::string& strRole = m_pKernelModule->GetPropertyString( self, "Name" );
         int* pInt = mRoleState.RemoveElement(strRole);
         if (pInt)
         {
@@ -1248,8 +1248,8 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent( const NFIDENTID& self, co
         }
         //////////////////////////////////////////////////////////////////////////
 
-        int nObjectContainerID = m_pKernelModule->QueryPropertyInt( self, "SceneID" );
-        int nObjectGroupID = m_pKernelModule->QueryPropertyInt( self, "GroupID" );
+        int nObjectContainerID = m_pKernelModule->GetPropertyInt( self, "SceneID" );
+        int nObjectGroupID = m_pKernelModule->GetPropertyInt( self, "GroupID" );
 
         if ( nObjectGroupID < 0 )
         {
@@ -1265,7 +1265,7 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent( const NFIDENTID& self, co
         for ( int i = 0; i < valueAllObjectList.GetCount(); i++ )
         {
             NFIDENTID identBC = valueAllObjectList.ObjectVal( i );
-            const std::string& strClassName = m_pKernelModule->QueryPropertyString( identBC, "ClassName" );
+            const std::string& strClassName = m_pKernelModule->GetPropertyString( identBC, "ClassName" );
             if ( "Player" == strClassName )
             {
                 valueBroadCaseList.AddObject( identBC );
@@ -1320,7 +1320,7 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const st
 {
     //容器发生变化，只可能从A容器的0层切换到B容器的0层
     //需要注意的是------------任何层改变的时候，此玩家其实还未进入层，因此，层改变的时候获取的玩家列表，目标层是不包含自己的
-    int nSceneID = m_pKernelModule->QueryPropertyInt( self, "SceneID" );
+    int nSceneID = m_pKernelModule->GetPropertyInt( self, "SceneID" );
 
     //广播给别人自己离去(层降或者跃层)
     int nOldGroupID = oldVar.NumberVal<int>( 0 );
@@ -1341,7 +1341,7 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const st
                     valueAllOldObjectList.SetObject(i, 0);
                 }
 
-                const std::string& strClassName = m_pKernelModule->QueryPropertyString( identBC, "ClassName" );
+                const std::string& strClassName = m_pKernelModule->GetPropertyString( identBC, "ClassName" );
                 if ( "Player" == strClassName )
                 {
                     valueAllOldPlayerList.AddObject(identBC );
@@ -1372,7 +1372,7 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const st
         for ( int i = 0; i < valueNewObjectList.GetCount(); i++ )
         {
             NFIDENTID identBC = valueNewObjectList.ObjectVal( i );
-            const std::string& strClassName = m_pKernelModule->QueryPropertyString( identBC, "ClassName" );
+            const std::string& strClassName = m_pKernelModule->GetPropertyString( identBC, "ClassName" );
             if ( "Player" == strClassName )
             {
                 valueBroadCaseList.AddObject( identBC );
@@ -1452,7 +1452,7 @@ int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, cons
     for ( int i = 0; i < valueNewAllObjectList.GetCount(); i++ )
     {
         NFIDENTID identBC = valueNewAllObjectList.ObjectVal( i );
-        const std::string& strClassName = m_pKernelModule->QueryPropertyString( identBC, "ClassName" );
+        const std::string& strClassName = m_pKernelModule->GetPropertyString( identBC, "ClassName" );
         if ( "Player" == strClassName )
         {
             valueBroadCaseList.AddObject( identBC );
@@ -1510,11 +1510,11 @@ int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, cons
 
 int NFCGameServerNet_ServerModule::GetBroadCastObject( const NFIDENTID& self, const std::string& strPropertyName, const bool bTable, NFIValueList& valueObject )
 {
-    int nObjectContainerID = m_pKernelModule->QueryPropertyInt( self, "SceneID" );
-    int nObjectGroupID = m_pKernelModule->QueryPropertyInt( self, "GroupID" );
+    int nObjectContainerID = m_pKernelModule->GetPropertyInt( self, "SceneID" );
+    int nObjectGroupID = m_pKernelModule->GetPropertyInt( self, "GroupID" );
 
     //普通场景容器，判断广播属性
-    std::string strClassName = m_pKernelModule->QueryPropertyString( self, "ClassName" );
+    std::string strClassName = m_pKernelModule->GetPropertyString( self, "ClassName" );
     NFIRecordManager* pClassRecordManager = m_pLogicClassModule->GetClassRecordManager( strClassName );
     NFIPropertyManager* pClassPropertyManager = m_pLogicClassModule->GetClassPropertyManager( strClassName );
 
@@ -1601,7 +1601,7 @@ int NFCGameServerNet_ServerModule::GetBroadCastObject( const int nObjectContaine
     m_pKernelModule->GetGroupObjectList( nObjectContainerID, nGroupID, valContainerObjectList );
     for ( int i  = 0; i < valContainerObjectList.GetCount(); i++ )
     {
-        const std::string& strObjClassName = m_pKernelModule->QueryPropertyString( valContainerObjectList.ObjectVal( i ), "ClassName" );
+        const std::string& strObjClassName = m_pKernelModule->GetPropertyString( valContainerObjectList.ObjectVal( i ), "ClassName" );
         if ( "Player" == strObjClassName )
         {
             valueObject.AddObject( valContainerObjectList.ObjectVal( i ) );

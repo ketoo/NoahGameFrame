@@ -46,7 +46,7 @@ int NFCPropertyConfigModule::CalculateBaseValue( const NFJobType nJob, const int
         std::string* pstrEffectData = mhtCoefficienData[nJob].GetElement( nLevel );
         if ( pstrEffectData )
         {
-            return m_pElementInfoModule->QueryPropertyInt(*pstrEffectData, strProperty);
+            return m_pElementInfoModule->GetPropertyInt(*pstrEffectData, strProperty);
         }
     }
 
@@ -67,9 +67,9 @@ void NFCPropertyConfigModule::Load()
             NFIPropertyManager* pPropertyManager = m_pElementInfoModule->GetPropertyManager(strData);
             if (pPropertyManager)
             {
-                int nJob = m_pElementInfoModule->QueryPropertyInt(strData, "Job");
-                int nLevel = m_pElementInfoModule->QueryPropertyInt(strData, "Level");
-                std::string strEffectData = m_pElementInfoModule->QueryPropertyString(strData, "EffectData");
+                int nJob = m_pElementInfoModule->GetPropertyInt(strData, "Job");
+                int nLevel = m_pElementInfoModule->GetPropertyInt(strData, "Level");
+                std::string strEffectData = m_pElementInfoModule->GetPropertyString(strData, "EffectData");
                 mhtCoefficienData[nJob].AddElement( nLevel, new std::string(strEffectData) );
             }
 
