@@ -82,10 +82,10 @@ bool NFCLoginLogicModule::Execute(const float fLasFrametime, const float fStarte
     //
     //                     char szInfo[MAX_PATH] = { 0 };
     //                     sprintf_s(szInfo, "WorldID:%d, WorldName:%s, WorldMaxOnline:%d, WorldOnlineCount:%d",
-    //                               m_pKernelModule->QueryPropertyInt(ident, "WorldID"),
-    //                               m_pKernelModule->QueryPropertyString(ident, "WorldName"),
-    //                               m_pKernelModule->QueryPropertyInt(ident, "WorldMaxOnline"),
-    //                               m_pKernelModule->QueryPropertyInt(ident, "WorldOnlineCount"));
+    //                               m_pKernelModule->GetPropertyInt(ident, "WorldID"),
+    //                               m_pKernelModule->GetPropertyString(ident, "WorldName"),
+    //                               m_pKernelModule->GetPropertyInt(ident, "WorldMaxOnline"),
+    //                               m_pKernelModule->GetPropertyInt(ident, "WorldOnlineCount"));
     //
     //                     m_pKernelModule->LogInfo(szInfo);
     //                 }

@@ -199,7 +199,7 @@ int NFCKernelModule::Type(const NFIDENTID& self)
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->QueryPropertyInt("Type");
+        return pObject->GetPropertyInt("Type");
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
@@ -445,15 +445,15 @@ bool NFCKernelModule::DestroyObject(const NFIDENTID& self)
     }
 
     //需要同时从容器中删掉
-    int nGroupID = QueryPropertyInt(self, "GroupID");
-    int nContainerID = QueryPropertyInt(self, "SceneID");
+    int nGroupID = GetPropertyInt(self, "GroupID");
+    int nContainerID = GetPropertyInt(self, "SceneID");
 
     NFCContainerInfo* pContainerInfo = m_pContainerModule->GetElement(nContainerID);
     if (pContainerInfo)
     {
         //////////////////////////////////////////////////////////////////////////
         //判断自己是否是场景容器
-        const std::string& strClassName = QueryPropertyString(self, "ClassName");
+        const std::string& strClassName = GetPropertyString(self, "ClassName");
         if (strClassName == std::string("Scene"))
         {
             return true;
@@ -570,12 +570,12 @@ bool NFCKernelModule::SetPropertyObject(const NFIDENTID& self, const std::string
     return false;
 }
 
-int NFCKernelModule::QueryPropertyInt(const NFIDENTID& self, const std::string& strPropertyName)
+int NFCKernelModule::GetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->QueryPropertyInt(strPropertyName);
+        return pObject->GetPropertyInt(strPropertyName);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
@@ -583,12 +583,12 @@ int NFCKernelModule::QueryPropertyInt(const NFIDENTID& self, const std::string& 
     return 0;
 }
 
-float NFCKernelModule::QueryPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName)
+float NFCKernelModule::GetPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->QueryPropertyFloat(strPropertyName);
+        return pObject->GetPropertyFloat(strPropertyName);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
@@ -596,12 +596,12 @@ float NFCKernelModule::QueryPropertyFloat(const NFIDENTID& self, const std::stri
     return 0.0f;
 }
 
-double NFCKernelModule::QueryPropertyDouble(const NFIDENTID& self, const std::string& strPropertyName)
+double NFCKernelModule::GetPropertyDouble(const NFIDENTID& self, const std::string& strPropertyName)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->QueryPropertyDouble(strPropertyName);
+        return pObject->GetPropertyDouble(strPropertyName);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
@@ -609,12 +609,12 @@ double NFCKernelModule::QueryPropertyDouble(const NFIDENTID& self, const std::st
     return 0.0;
 }
 
-const std::string& NFCKernelModule::QueryPropertyString(const NFIDENTID& self, const std::string& strPropertyName)
+const std::string& NFCKernelModule::GetPropertyString(const NFIDENTID& self, const std::string& strPropertyName)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->QueryPropertyString(strPropertyName);
+        return pObject->GetPropertyString(strPropertyName);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
@@ -622,12 +622,12 @@ const std::string& NFCKernelModule::QueryPropertyString(const NFIDENTID& self, c
     return NULL_STR;
 }
 
-NFIDENTID NFCKernelModule::QueryPropertyObject(const NFIDENTID& self, const std::string& strPropertyName)
+NFIDENTID NFCKernelModule::GetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->QueryPropertyObject(strPropertyName);
+        return pObject->GetPropertyObject(strPropertyName);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
@@ -861,12 +861,12 @@ bool NFCKernelModule::SetRecordObject( const NFIDENTID& self, const std::string&
     return false;
 }
 
-int NFCKernelModule::QueryRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+int NFCKernelModule::GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->QueryRecordInt(strRecordName, nRow, nCol);
+        return pObject->GetRecordInt(strRecordName, nRow, nCol);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
@@ -874,12 +874,12 @@ int NFCKernelModule::QueryRecordInt(const NFIDENTID& self, const std::string& st
     return 0;
 }
 
-int NFCKernelModule::QueryRecordInt( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag )
+int NFCKernelModule::GetRecordInt( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag )
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->QueryRecordInt(strRecordName, nRow, strColTag);
+        return pObject->GetRecordInt(strRecordName, nRow, strColTag);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
@@ -887,12 +887,12 @@ int NFCKernelModule::QueryRecordInt( const NFIDENTID& self, const std::string& s
     return 0;
 }
 
-float NFCKernelModule::QueryRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+float NFCKernelModule::GetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->QueryRecordFloat(strRecordName, nRow, nCol);
+        return pObject->GetRecordFloat(strRecordName, nRow, nCol);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
@@ -900,12 +900,12 @@ float NFCKernelModule::QueryRecordFloat(const NFIDENTID& self, const std::string
     return 0.0f;
 }
 
-float NFCKernelModule::QueryRecordFloat( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag )
+float NFCKernelModule::GetRecordFloat( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag )
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->QueryRecordFloat(strRecordName, nRow, strColTag);
+        return pObject->GetRecordFloat(strRecordName, nRow, strColTag);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
@@ -913,12 +913,12 @@ float NFCKernelModule::QueryRecordFloat( const NFIDENTID& self, const std::strin
     return 0.0f;
 }
 
-double NFCKernelModule::QueryRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+double NFCKernelModule::GetRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->QueryRecordDouble(strRecordName, nRow, nCol);
+        return pObject->GetRecordDouble(strRecordName, nRow, nCol);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
@@ -926,12 +926,12 @@ double NFCKernelModule::QueryRecordDouble(const NFIDENTID& self, const std::stri
     return 0.0;
 }
 
-double NFCKernelModule::QueryRecordDouble( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag )
+double NFCKernelModule::GetRecordDouble( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag )
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->QueryRecordDouble(strRecordName, nRow, strColTag);
+        return pObject->GetRecordDouble(strRecordName, nRow, strColTag);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
@@ -939,12 +939,12 @@ double NFCKernelModule::QueryRecordDouble( const NFIDENTID& self, const std::str
     return 0.0;
 }
 
-const std::string& NFCKernelModule::QueryRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+const std::string& NFCKernelModule::GetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->QueryRecordString(strRecordName, nRow, nCol);
+        return pObject->GetRecordString(strRecordName, nRow, nCol);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
@@ -952,12 +952,12 @@ const std::string& NFCKernelModule::QueryRecordString(const NFIDENTID& self, con
     return NULL_STR;
 }
 
-const std::string& NFCKernelModule::QueryRecordString( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag )
+const std::string& NFCKernelModule::GetRecordString( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag )
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->QueryRecordString(strRecordName, nRow, strColTag);
+        return pObject->GetRecordString(strRecordName, nRow, strColTag);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
@@ -965,12 +965,12 @@ const std::string& NFCKernelModule::QueryRecordString( const NFIDENTID& self, co
     return NULL_STR;
 }
 
-NFIDENTID NFCKernelModule::QueryRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+NFIDENTID NFCKernelModule::GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->QueryRecordObject(strRecordName, nRow, nCol);
+        return pObject->GetRecordObject(strRecordName, nRow, nCol);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object",  __FUNCTION__, __LINE__);
@@ -978,12 +978,12 @@ NFIDENTID NFCKernelModule::QueryRecordObject(const NFIDENTID& self, const std::s
     return 0;
 }
 
-NFIDENTID NFCKernelModule::QueryRecordObject( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag )
+NFIDENTID NFCKernelModule::GetRecordObject( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag )
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->QueryRecordObject(strRecordName, nRow, strColTag);
+        return pObject->GetRecordObject(strRecordName, nRow, strColTag);
     }
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object",  __FUNCTION__, __LINE__);
@@ -996,8 +996,8 @@ bool NFCKernelModule::SwitchScene(const NFIDENTID& self, const int nTargetSceneI
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        int nOldSceneID = pObject->QueryPropertyInt("SceneID");
-        int nOldGroupID = pObject->QueryPropertyInt("GroupID");
+        int nOldSceneID = pObject->GetPropertyInt("SceneID");
+        int nOldGroupID = pObject->GetPropertyInt("GroupID");
 
         NFCContainerInfo* pOldSceneInfo = m_pContainerModule->GetElement(nOldSceneID);
         NFCContainerInfo* pNewSceneInfo = m_pContainerModule->GetElement(nTargetSceneID);
@@ -1422,7 +1422,7 @@ bool NFCKernelModule::LogInfo(const NFIDENTID ident)
     {
         if (IsContainer(ident))
         {
-            int nContainerID = QueryPropertyInt(ident, "SceneID");
+            int nContainerID = GetPropertyInt(ident, "SceneID");
 
             m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "//----------child object list-------- SceneID = ", nContainerID);
 
@@ -1478,7 +1478,7 @@ bool NFCKernelModule::IsContainer(const NFIDENTID& self)
     NFIObject* pObject = GetObject(self);
     if (pObject)
     {
-        if (pObject->QueryPropertyInt("GroupID") < 0)
+        if (pObject->GetPropertyInt("GroupID") < 0)
         {
             return true;
         }
@@ -1540,7 +1540,7 @@ int NFCKernelModule::GetObjectByProperty(const int nContainerID, const std::stri
             {
                 case TDATA_INT:
                 {
-                    int nValue = QueryPropertyInt(ident, strPropertyName.c_str());
+                    int nValue = GetPropertyInt(ident, strPropertyName.c_str());
                     if (valueArg.IntVal(0) == nValue)
                     {
                         list.AddObject(ident);
@@ -1549,7 +1549,7 @@ int NFCKernelModule::GetObjectByProperty(const int nContainerID, const std::stri
                 break;
                 case TDATA_STRING:
                 {
-                    std::string strValue = QueryPropertyString(ident, strPropertyName.c_str());
+                    std::string strValue = GetPropertyString(ident, strPropertyName.c_str());
                     std::string strCompareValue = valueArg.StringVal(0);
                     if (strValue == strCompareValue)
                     {
@@ -1559,7 +1559,7 @@ int NFCKernelModule::GetObjectByProperty(const int nContainerID, const std::stri
                 break;
                 case TDATA_OBJECT:
                 {
-                    NFIDENTID identObject = QueryPropertyObject(ident, strPropertyName.c_str());
+                    NFIDENTID identObject = GetPropertyObject(ident, strPropertyName.c_str());
                     if (valueArg.ObjectVal(0) == identObject)
                     {
                         list.AddObject(ident);

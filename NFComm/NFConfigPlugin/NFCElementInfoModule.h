@@ -102,13 +102,13 @@ public:
     virtual NFIRecordManager* GetRecordManager(const std::string& strConfigName);
     virtual NFIComponentManager* GetComponentManager(const std::string& strConfigName);
 
-    virtual int QueryPropertyInt(const std::string& strConfigName, const std::string& strPropertyName);
-    virtual float QueryPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName);
-    virtual double QueryPropertyDouble(const std::string& strConfigName, const std::string& strPropertyName);
-    virtual const std::string& QueryPropertyString(const std::string& strConfigName, const std::string& strPropertyName);
+    virtual int GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName);
+    virtual float GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName);
+    virtual double GetPropertyDouble(const std::string& strConfigName, const std::string& strPropertyName);
+    virtual const std::string& GetPropertyString(const std::string& strConfigName, const std::string& strPropertyName);
 
 protected:
-    virtual NFIProperty* QueryProperty(const std::string& strConfigName, const std::string& strPropertyName);
+    virtual NFIProperty* GetProperty(const std::string& strConfigName, const std::string& strPropertyName);
 
     virtual bool Load(rapidxml::xml_node<>* attrNode, NFILogicClass* pLogicClass);
 
