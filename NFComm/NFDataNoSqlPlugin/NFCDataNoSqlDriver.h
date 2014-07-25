@@ -25,6 +25,7 @@ public:
     //key
     virtual int Del(const std::string& strKey);
     virtual int Exists(const std::string& strKey);
+    virtual int Expired(const std::string& strKey, unsigned int nSecs);
 
     //element
     virtual int Set(const std::string& strKey, const std::string& strValue);
