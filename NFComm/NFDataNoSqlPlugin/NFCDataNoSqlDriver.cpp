@@ -41,6 +41,12 @@ int NFCDataNoSqlDriver::Exists(const std::string& strKey)
     return (int)m_pRedisClient->exists(strKey);
 }
 
+int NFCDataNoSqlDriver::Expired(const std::string& strKey, unsigned int nSecs)
+{
+    m_pRedisClient->expire(strKey, nSecs);
+    return 0;
+}
+
 int NFCDataNoSqlDriver::Set(const std::string& strKey, const std::string& strValue)
 {
     if (strKey.length() > 0)
