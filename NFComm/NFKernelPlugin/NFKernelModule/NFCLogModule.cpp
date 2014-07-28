@@ -142,7 +142,7 @@ bool NFCLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
         case NFILogModule::NLL_ERROR_NORMAL:
             {
                 LOG(ERROR) << szBuffer;
-                LogStack();
+                //LogStack();
             }
             break;
         default:
