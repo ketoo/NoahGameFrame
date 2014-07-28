@@ -17,10 +17,10 @@
 -- SetPropertyString(kernel, self, strPropertyName, strValue)
 -- SetPropertyObject(kernel, self, strPropertyName, n64Value)
 
--- QueryPropertyInt(kernel, self, strPropertyName)
--- QueryPropertyFloat(kernel, self, strPropertyName)
--- QueryPropertyString(kernel, self, strPropertyName)
--- QueryPropertyObject(kernel, self, strPropertyName)
+-- GetPropertyInt(kernel, self, strPropertyName)
+-- GetPropertyFloat(kernel, self, strPropertyName)
+-- GetPropertyString(kernel, self, strPropertyName)
+-- GetPropertyObject(kernel, self, strPropertyName)
 
 -- AddRow(kernel, self, strRecordName, var)
 -- SetRecordInt(kernel, self, strRecordName, nRow, nCol, nValue)
@@ -28,10 +28,10 @@
 -- SetRecordString(kernel, self, strRecordName, nRow, nCol, strValue)
 -- SetRecordObject(kernel, self, strRecordName, nRow, nCol, n64Value)
 
--- QueryRecordInt(kernel, self, strRecordName, nRow, nCol)
--- QueryRecordFloat(kernel, self, strRecordName, nRow, nCol)
--- QueryRecordString(kernel, self, strRecordName, nRow, nCol)
--- QueryRecordObject(kernel, self, strRecordName, nRow, nCol)
+-- GetRecordInt(kernel, self, strRecordName, nRow, nCol)
+-- GetRecordFloat(kernel, self, strRecordName, nRow, nCol)
+-- GetRecordString(kernel, self, strRecordName, nRow, nCol)
+-- GetRecordObject(kernel, self, strRecordName, nRow, nCol)
 
 -- HasEventCallBack(kernel, self, nEventID)
 -- RemoveEvent(kernel, nEventID)
@@ -43,9 +43,9 @@
 
 
 -- ExistElement(kernel, strConfig)
--- QueryPropertyInt(kernel, strConfig, strPropertyName)
--- QueryPropertyFloat(kernel, strConfig, strPropertyName)
--- QueryPropertyString(kernel, strConfig, strPropertyName)
+-- GetPropertyInt(kernel, strConfig, strPropertyName)
+-- GetPropertyFloat(kernel, strConfig, strPropertyName)
+-- GetPropertyString(kernel, strConfig, strPropertyName)
 
 -- AddPropertyCallBack(kernel, self, strPropertyName, strComponentName, strFunction)
 -- -- eg:look at "Test:MaxPropertyCallBack(kernel, self, propertyName, oldVar, newVar, arg)" in Test.lua
