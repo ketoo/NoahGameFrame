@@ -8,15 +8,15 @@ end
 function Test:AfterInit(kernel, self, arg)
 	io.write("Hello Lua AfterInit!\n");
 	
-	local nMaxhp = QueryPropertyInt(kernel, self, "MAXHP");
+	local nMaxhp = GetPropertyInt(kernel, self, "MAXHP");
 	io.write("Hello Lua MAXHP:" ..nMaxhp .. "\n");
 	
 	--property callback
 	AddPropertyCallBack(kernel, self, "MAXHP", "Test", "MaxPropertyCallBack");
 	SetPropertyInt(kernel, self, "MAXHP", 400);	
 	
-	nMaxhp = QueryPropertyInt(kernel, self, "MAXHP");
-	io.write("Hello Lua QueryPropertyInt MAXHP:" ..nMaxhp .. "\n");
+	nMaxhp = GetPropertyInt(kernel, self, "MAXHP");
+	io.write("Hello Lua GetPropertyInt MAXHP:" ..nMaxhp .. "\n");
 	
 	--record callback
 	AddRecordCallBack(kernel, self, "TaskList","Test", "TaskListCallBack");	
