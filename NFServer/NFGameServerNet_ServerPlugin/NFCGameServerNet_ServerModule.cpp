@@ -322,14 +322,14 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDENTID& self, const
                         {
                             NFMsg::PropertyInt* pDataInt = pPublicData->add_property_int_list();
                             pDataInt->set_property_name( pPropertyInfo->GetKey() );
-                            pDataInt->set_data( pPropertyInfo->QueryInt() );
+                            pDataInt->set_data( pPropertyInfo->GetInt() );
                         }
 
                         if ( pPropertyInfo->GetPrivate() )
                         {
                             NFMsg::PropertyInt* pDataInt = pPrivateData->add_property_int_list();
                             pDataInt->set_property_name( pPropertyInfo->GetKey() );
-                            pDataInt->set_data( pPropertyInfo->QueryInt() );
+                            pDataInt->set_data( pPropertyInfo->GetInt() );
                         }
                     }
                     break;
@@ -340,14 +340,14 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDENTID& self, const
                         {
                             NFMsg::PropertyFloat* pDataFloat = pPublicData->add_property_float_list();
                             pDataFloat->set_property_name( pPropertyInfo->GetKey() );
-                            pDataFloat->set_data( pPropertyInfo->QueryFloat() );
+                            pDataFloat->set_data( pPropertyInfo->GetInt() );
                         }
 
                         if ( pPropertyInfo->GetPrivate() )
                         {
                             NFMsg::PropertyFloat* pDataFloat = pPrivateData->add_property_float_list();
                             pDataFloat->set_property_name( pPropertyInfo->GetKey() );
-                            pDataFloat->set_data( pPropertyInfo->QueryFloat() );
+                            pDataFloat->set_data( pPropertyInfo->GetFloat() );
                         }
                     }
                     break;
@@ -358,14 +358,14 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDENTID& self, const
                         {
                             NFMsg::PropertyFloat* pDataFloat = pPublicData->add_property_float_list();
                             pDataFloat->set_property_name( pPropertyInfo->GetKey() );
-                            pDataFloat->set_data( pPropertyInfo->QueryDouble() );
+                            pDataFloat->set_data( pPropertyInfo->GetDouble() );
                         }
 
                         if ( pPropertyInfo->GetPrivate() )
                         {
                             NFMsg::PropertyFloat* pDataFloat = pPrivateData->add_property_float_list();
                             pDataFloat->set_property_name( pPropertyInfo->GetKey() );
-                            pDataFloat->set_data( pPropertyInfo->QueryDouble() );
+                            pDataFloat->set_data( pPropertyInfo->GetDouble() );
                         }
                     }
                     break;
@@ -376,14 +376,14 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDENTID& self, const
                         {
                             NFMsg::PropertyString* pDataString = pPublicData->add_property_string_list();
                             pDataString->set_property_name( pPropertyInfo->GetKey() );
-                            pDataString->set_data( pPropertyInfo->QueryString() );
+                            pDataString->set_data( pPropertyInfo->GetString() );
                         }
 
                         if ( pPropertyInfo->GetPrivate() )
                         {
                             NFMsg::PropertyString* pDataString = pPrivateData->add_property_string_list();
                             pDataString->set_property_name( pPropertyInfo->GetKey() );
-                            pDataString->set_data( pPropertyInfo->QueryString() );
+                            pDataString->set_data( pPropertyInfo->GetString() );
                         }
                     }
                     break;
@@ -394,14 +394,14 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDENTID& self, const
                         {
                             NFMsg::PropertyObject* pDataObject = pPublicData->add_property_object_list();
                             pDataObject->set_property_name( pPropertyInfo->GetKey() );
-                            pDataObject->set_data( pPropertyInfo->QueryObject().nData64 );
+                            pDataObject->set_data( pPropertyInfo->GetObject().nData64 );
                         }
 
                         if ( pPropertyInfo->GetPrivate() )
                         {
                             NFMsg::PropertyObject* pDataObject = pPrivateData->add_property_object_list();
                             pDataObject->set_property_name( pPropertyInfo->GetKey() );
-                            pDataObject->set_data( pPropertyInfo->QueryObject().nData64 );
+                            pDataObject->set_data( pPropertyInfo->GetObject().nData64 );
                         }
                     }
                     break;
@@ -472,7 +472,7 @@ bool OnRecordEnterPack(NFIRecord* pRecord, NFMsg::ObjectRecordBase* pObjectRecor
                 {
                 case TDATA_TYPE::TDATA_INT:
                     {
-                        int nValue = pRecord->QueryInt( i, j );
+                        int nValue = pRecord->GetInt( i, j );
                         //if ( 0 != nValue )
                         {
                             NFMsg::RecordInt* pRecordInt = pAddRowStruct->add_record_int_list();
@@ -484,7 +484,7 @@ bool OnRecordEnterPack(NFIRecord* pRecord, NFMsg::ObjectRecordBase* pObjectRecor
                     break;
                 case TDATA_TYPE::TDATA_DOUBLE:
                     {
-                        double dwValue = pRecord->QueryDouble( i, j );
+                        double dwValue = pRecord->GetDouble( i, j );
                         //if ( dwValue < -0.01f || dwValue > 0.01f )
                         {
                             NFMsg::RecordFloat* pAddData = pAddRowStruct->add_record_float_list();
@@ -495,7 +495,7 @@ bool OnRecordEnterPack(NFIRecord* pRecord, NFMsg::ObjectRecordBase* pObjectRecor
                     break;
                 case TDATA_TYPE::TDATA_FLOAT:
                     {
-                        float fValue = pRecord->QueryFloat( i, j );
+                        float fValue = pRecord->GetFloat( i, j );
                         //if ( fValue < -0.01f || fValue > 0.01f )
                         {
                             NFMsg::RecordFloat* pAddData = pAddRowStruct->add_record_float_list();
@@ -506,7 +506,7 @@ bool OnRecordEnterPack(NFIRecord* pRecord, NFMsg::ObjectRecordBase* pObjectRecor
                     break;
                 case TDATA_TYPE::TDATA_STRING:
                     {
-                        const std::string& strData = pRecord->QueryString( i, j );
+                        const std::string& strData = pRecord->GetString( i, j );
                         //if ( !strData.empty() )
                         {
                             NFMsg::RecordString* pAddData = pAddRowStruct->add_record_string_list();
@@ -517,7 +517,7 @@ bool OnRecordEnterPack(NFIRecord* pRecord, NFMsg::ObjectRecordBase* pObjectRecor
                     break;
                 case TDATA_TYPE::TDATA_OBJECT:
                     {
-                        NFIDENTID ident = pRecord->QueryObject( i, j );
+                        NFIDENTID ident = pRecord->GetObject( i, j );
                         //if ( !ident.IsNull() )
                         {
                             NFMsg::RecordObject* pAddData = pAddRowStruct->add_record_object_list();
