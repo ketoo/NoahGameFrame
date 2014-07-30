@@ -92,7 +92,7 @@ int NFCPropertyModule::AddPropertyValue( const NFIDENTID& self, const std::strin
             if (pRecord)
             {
                 pRecord->SetUsed(eGroupType, true);
-                int nPropertyValue = pRecord->QueryInt(eGroupType, strPropertyName );
+                int nPropertyValue = pRecord->GetInt(eGroupType, strPropertyName );
 
                 return pRecord->SetInt( eGroupType, strPropertyName, nPropertyValue + nValue );
             }
@@ -113,7 +113,7 @@ int NFCPropertyModule::SubPropertyValue( const NFIDENTID& self, const std::strin
             if (pRecord)
             {
                 pRecord->SetUsed(eGroupType, true);
-                int nPropertyValue = pRecord->QueryInt(eGroupType, strPropertyName );
+                int nPropertyValue = pRecord->GetInt(eGroupType, strPropertyName );
 
                 return pRecord->SetInt( eGroupType, strPropertyName, nPropertyValue - nValue );
             }
@@ -143,7 +143,7 @@ int NFCPropertyModule::OnRecordPropertyEvent( const NFIDENTID& self, const std::
     {
         if ( i < pRecord->GetRows() )
         {
-            int nValue = pRecord->QueryInt( i, nCol );
+            int nValue = pRecord->GetInt( i, nCol );
             nAllValue += nValue;
         }
     }
