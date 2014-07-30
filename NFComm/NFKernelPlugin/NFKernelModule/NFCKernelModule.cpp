@@ -163,7 +163,7 @@ bool NFCKernelModule::QueryComponentEnable( const NFIDENTID& self, const std::st
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->GetComponentManager()->QueryEnable(strComponentName);
+        return pObject->GetComponentManager()->Enable(strComponentName);
     }
 
     return false;
@@ -1063,7 +1063,7 @@ NFIDENTID NFCKernelModule::CreateContainer(const int nContainerIndex, const std:
             return 0;
         }
 
-        nWidth = pProperty->QueryInt();
+        nWidth = pProperty->GetInt();
     }
 
 
@@ -1326,9 +1326,9 @@ bool NFCKernelModule::GetRangObjectList(const NFIDENTID& self, const int nContai
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        float fX = pObject->GetPropertyManager()->GetElement("X")->QueryFloat();
-        float fY = pObject->GetPropertyManager()->GetElement("Y")->QueryFloat();
-        float fZ = pObject->GetPropertyManager()->GetElement("Z")->QueryFloat();
+        float fX = pObject->GetPropertyManager()->GetElement("X")->GetFloat();
+        float fY = pObject->GetPropertyManager()->GetElement("Y")->GetFloat();
+        float fZ = pObject->GetPropertyManager()->GetElement("Z")->GetFloat();
 
         // collect info
         return GetRangObjectList(fX, fY, fZ, nContainerID, nGroupID, fRang, list);
