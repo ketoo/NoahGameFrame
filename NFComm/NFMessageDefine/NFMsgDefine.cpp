@@ -225,7 +225,7 @@
 //                {
 //                    NFMsg::PropertyInt* propertyInt = propertyDB.add_property_int_list();
 //                    propertyInt->set_property_name( pProperty->GetKey() );
-//                    propertyInt->set_data( pProperty->QueryInt() );
+//                    propertyInt->set_data( pProperty->GetInt() );
 //                }
 //
 //                break;
@@ -233,7 +233,7 @@
 //                {
 //                    NFMsg::PropertyFloat* propertyFloat = propertyDB.add_property_float_list();
 //                    propertyFloat->set_property_name( pProperty->GetKey() );
-//                    propertyFloat->set_data( pProperty->QueryFloat() );
+//                    propertyFloat->set_data( pProperty->GetFloat() );
 //                }
 //                break;
 //            case TDATA_STRING:
