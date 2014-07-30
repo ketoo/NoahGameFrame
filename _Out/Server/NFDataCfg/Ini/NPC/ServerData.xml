@@ -6,6 +6,8 @@
 	<Object ID="LoginSalveServer" CpuCount="4" PassWord="kytoo" IP=""				Port="9000" MaxConnect="10000" OnlineCount="0" 		SqlIP="" SqlPort="3306" SqlAccount="" SqlPwd="" ServerIP="127.0.0.1" ServerPort="7000" ServerID="3" ServerPwd="kytoo" Name="" IsOK="0"/>
 	<Object ID="MasterServer" CpuCount="4" PassWord="kytoo" IP=""				Port="7000" MaxConnect="10000" OnlineCount="0" 		SqlIP="" SqlPort="0" SqlAccount="" SqlPwd="" ServerIP="" ServerPort="0" ServerID="4" ServerPwd="" Name="" IsOK="0"/>
 	<Object ID="MasterSalveServer" CpuCount="4" PassWord="kytoo" IP=""				Port="7000" MaxConnect="10000" OnlineCount="0" 		SqlIP="" SqlPort="0" SqlAccount="" SqlPwd="" ServerIP="" ServerPort="0" ServerID="4" ServerPwd="" Name="" IsOK="0"/>
+	<Object ID="RedisServer" CpuCount="4" PassWord="kytoo" IP=""				Port="7000" MaxConnect="10000" OnlineCount="0" 		SqlIP="" SqlPort="0" SqlAccount="" SqlPwd="" ServerIP="" ServerPort="0" ServerID="4" ServerPwd="" Name="" IsOK="0"/>
+	<Object ID="RedisSalveServer" CpuCount="4" PassWord="kytoo" IP=""				Port="7000" MaxConnect="10000" OnlineCount="0" 		SqlIP="" SqlPort="0" SqlAccount="" SqlPwd="" ServerIP="" ServerPort="0" ServerID="4" ServerPwd="" Name="" IsOK="0"/>
 	
 	<Object ID="GameServer" CpuCount="4" PassWord="kytoo" IP="127.0.0.1" Port="10000" MaxConnect="50000" OnlineCount="0" 	SqlIP="" SqlPort="0" SqlAccount="" SqlPwd="" ServerIP="127.0.0.1" ServerPort="8000" ServerID="100" ServerPwd="kytoo" Name="test_server1" IsOK="0"/>
 </XML>
