@@ -88,6 +88,11 @@ public:
 
     virtual TD* Next()
     {
+        if (mObjectCurIter == mObjectList.end())
+        {
+            return NULL;
+        }
+
         ++mObjectCurIter;
         if (mObjectCurIter != mObjectList.end())
         {
@@ -120,6 +125,11 @@ public:
 
     virtual TD* Next(T& name)
     {
+        if (mObjectCurIter == mObjectList.end())
+        {
+            return NULL;
+        }
+
         mObjectCurIter++;
         if (mObjectCurIter != mObjectList.end())
         {
