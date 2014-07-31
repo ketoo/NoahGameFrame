@@ -147,7 +147,7 @@ int NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess(const NFIPacket& ms
     return 0;
 }
 
-int NFCWorldNet_ServerModule::OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
+int NFCWorldNet_ServerModule::OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
     if (4 != var.GetCount()
         || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
@@ -183,7 +183,7 @@ int NFCWorldNet_ServerModule::OnSelectServerEvent(const NFIDENTID& object, const
         SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xData, pServerData->nFD);
 
         //½á¹û
-        NFCValueList varResult;
+        NFCDataList varResult;
         varResult << nWorldID << nSenderAddress << nLoginID << strAccount << pServerData->pData->server_ip() << pServerData->pData->server_port() << strAccount;
         m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_SELECT_SERVER_RESULTS, varResult);
     }

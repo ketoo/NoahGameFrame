@@ -47,8 +47,8 @@ public:
     virtual E_SCENE_TYPE GetCloneSceneType(const int nContainerID);
 
 protected:
-    int CreateCloneScene( const int& nContainerID, const int nGroupID, const std::string& strResourceID, const NFIValueList& arg );
-    bool DestroyCloneScene( const int& nContainerID, const int& nGroupID, const NFIValueList& arg );
+    int CreateCloneScene( const int& nContainerID, const int nGroupID, const std::string& strResourceID, const NFIDataList& arg );
+    bool DestroyCloneScene( const int& nContainerID, const int& nGroupID, const NFIDataList& arg );
 
 
 protected:
@@ -59,10 +59,10 @@ protected:
 
 protected:
 
-    int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var );
+    int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    int OnEnterSceneEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var );
-    int OnLeaveSceneEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var );
+    int OnEnterSceneEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
+    int OnLeaveSceneEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
 
 private:
     int mnContainerLine;

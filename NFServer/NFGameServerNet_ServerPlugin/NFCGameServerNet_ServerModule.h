@@ -83,37 +83,37 @@ protected:
 
 protected:
     //将self的全部属性广播给argVar[应该是多对多]
-    int OnPropertyEnter( const NFIDENTID& self, const NFIValueList& argVar );
-    int OnRecordEnter( const NFIDENTID& self, const NFIValueList& argVar );
+    int OnPropertyEnter( const NFIDENTID& self, const NFIDataList& argVar );
+    int OnRecordEnter( const NFIDENTID& self, const NFIDataList& argVar );
 
     //把argVar这些人的出现或者离去广播给self这些人
-    int OnObjectListEnter( const NFIValueList& self, const NFIValueList& argVar );
-    int OnObjectListLeave( const NFIValueList& self, const NFIValueList& argVar );
+    int OnObjectListEnter( const NFIDataList& self, const NFIDataList& argVar );
+    int OnObjectListLeave( const NFIDataList& self, const NFIDataList& argVar );
 
     //网络同步
-    int OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar );
-    int OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar );
-    int OnClassCommonEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var );
+    int OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
+    int OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
+    int OnClassCommonEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    int OnGroupEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar );
-    int OnContainerEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar );
+    int OnGroupEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
+    int OnContainerEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
 
-    int GetBroadCastObject( const NFIDENTID& self, const std::string& strPropertyName, const bool bTable, NFIValueList& valueObject );
-    int GetBroadCastObject( const int nObjectContainerID, const int nGroupID, NFIValueList& valueObject );
+    int GetBroadCastObject( const NFIDENTID& self, const std::string& strPropertyName, const bool bTable, NFIDataList& valueObject );
+    int GetBroadCastObject( const int nObjectContainerID, const int nGroupID, NFIDataList& valueObject );
     //////////////////////////////////////////////////////////////////////////
-    int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var );
+    int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
     //////////////////////////////////////////////////////////////////////////
     // 回馈事件
-    int OnReturnEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
+    int OnReturnEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
     // 移动广播
-    int OnMoveEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
+    int OnMoveEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
     // 技能结算结果事件
-    int OnUseSkillResultEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
+    int OnUseSkillResultEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
     // 跨场景结果事件
-    int OnSwapSceneResultEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
+    int OnSwapSceneResultEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
     // 发送聊天结果
-    int OnChatResultEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
+    int OnChatResultEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
 private:
 
     struct ServerData 

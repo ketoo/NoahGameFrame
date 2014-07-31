@@ -62,14 +62,14 @@ protected:
     int OnTranspondProcess(const NFIPacket& msg);
 
     //客户端的连接60秒删掉
-    int HB_OnConnectCheckTime( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var );
+    int HB_OnConnectCheckTime( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var );
 
     //保存的世界服务器发过来的KEY,60秒删掉
-    int HB_OnPlayerWantToConnect(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var );
+    int HB_OnPlayerWantToConnect(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var );
     //////////////////////////////////////////////////////////////////////////
 
     //保存的世界服务器发过来的信息对象
-    int OnWantToConnectObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var);
+    int OnWantToConnectObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
 protected:
     //新建立的连接对象，等待他们自己发验证KEY，KEY验证后删掉

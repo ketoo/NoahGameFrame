@@ -237,7 +237,7 @@ bool NFCEventProcessModule::RemoveEventCallBack(const NFIDENTID& objectID, const
     return false;
 }
 
-bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventID, const NFIValueList& valueList)
+bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventID, const NFIDataList& valueList)
 {
     NFCObjectEventInfo* pObjectEventInfo = mObjectEventInfoMapEx.GetElement(objectID);
     if (!pObjectEventInfo)
@@ -264,7 +264,7 @@ bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventI
     return true;
 }
 
-bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& valueList)
+bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList)
 {
     NFClassEventList* pEventList = m_pClassEventInfoEx->GetElement(strClassName);
     if (pEventList)
