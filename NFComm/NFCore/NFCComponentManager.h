@@ -42,7 +42,7 @@ public:
 
     virtual bool SetEnable(const std::string& strComponentName, const bool bEnable);
 
-    virtual bool QueryEnable(const std::string& strComponentName);
+    virtual bool Enable(const std::string& strComponentName);
 
     virtual NFIDENTID Self();
 

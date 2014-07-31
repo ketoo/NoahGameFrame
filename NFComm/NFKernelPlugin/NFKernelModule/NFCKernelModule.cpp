@@ -21,7 +21,7 @@ NFCKernelModule::NFCKernelModule(NFIPluginManager* p)
     fLastTotal = 0.0f;
     pPluginManager = p;
     
-    m_pContainerModule = new NFCContainerModule();
+    m_pContainerModule = NF_NEW NFCContainerModule();
 
     InitRandom();
 }
@@ -165,7 +165,7 @@ bool NFCKernelModule::QueryComponentEnable( const NFIDENTID& self, const std::st
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        return pObject->GetComponentManager()->QueryEnable(strComponentName);
+        return pObject->GetComponentManager()->Enable(strComponentName);
     }
 
     return false;
@@ -242,7 +242,7 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
     if (pStaticClassPropertyManager && pStaticClassRecordManager && pStaticClasComponentManager)
     {
 
-        pObject = new NFCObject(ident, pPluginManager);
+        pObject = NF_NEW NFCObject(ident, pPluginManager);
         //是否是应该晚点等到事件2时才加入容器，这样能保证进入容器的对象都是有完整数据的，否则因为协程的原因，其他对象找到他时他却没数据或者部分数据
         AddElement(ident, pObject);
 
@@ -265,7 +265,7 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
 
             //通用回调，方便NET同步
             PROPERTY_EVENT_FUNCTOR functor = boost::bind(&NFCKernelModule::OnPropertyCommonEvent, this, _1, _2, _3, _4, _5);
-            PROPERTY_EVENT_FUNCTOR_PTR functorPtr(new PROPERTY_EVENT_FUNCTOR(functor));
+            PROPERTY_EVENT_FUNCTOR_PTR functorPtr(NF_NEW PROPERTY_EVENT_FUNCTOR(functor));
             pObject->AddPropertyCallBack(pStaticConfigPropertyInfo->GetKey(), functorPtr);
 
             pStaticConfigPropertyInfo = pStaticClassPropertyManager->Next();
@@ -289,7 +289,7 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
 
             //通用回调，方便NET同步
             RECORD_EVENT_FUNCTOR functor = boost::bind(&NFCKernelModule::OnRecordCommonEvent, this, _1, _2, _3, _4, _5, _6, _7, _8);
-            RECORD_EVENT_FUNCTOR_PTR functorPtr(new RECORD_EVENT_FUNCTOR(functor));
+            RECORD_EVENT_FUNCTOR_PTR functorPtr(NF_NEW RECORD_EVENT_FUNCTOR(functor));
             pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), functorPtr);
 
             pConfigRecordInfo = pStaticClassRecordManager->Next();
@@ -1065,18 +1065,18 @@ NFIDENTID NFCKernelModule::CreateContainer(const int nContainerIndex, const std:
             return 0;
         }
 
-        nWidth = pProperty->QueryInt();
+        nWidth = pProperty->GetInt();
     }
 
 
     //容器nSceneIndex
-    pSceneInfo = new NFCContainerInfo(nContainerIndex, nWidth);
+    pSceneInfo = NF_NEW NFCContainerInfo(nContainerIndex, nWidth);
     if (NULL != pSceneInfo)
     {
         m_pContainerModule->AddElement(nContainerIndex, pSceneInfo);
 
         //默认分组0
-        NFCContainerGroupInfo* pGroupInfo = new NFCContainerGroupInfo(nContainerIndex, nWidth);
+        NFCContainerGroupInfo* pGroupInfo = NF_NEW NFCContainerGroupInfo(nContainerIndex, nWidth);
         if (NULL != pGroupInfo)
         {
             pSceneInfo->AddElement(0, pGroupInfo);
@@ -1215,7 +1215,7 @@ int NFCKernelModule::RequestGroupScene(const int nContainerID)
     if (NULL != pSceneInfo)
     {
         int nNewGroupID = pSceneInfo->NewGroupID();
-        NFCContainerGroupInfo* pGroupInfo = new NFCContainerGroupInfo(nContainerID, pSceneInfo->GetWidth());
+        NFCContainerGroupInfo* pGroupInfo = NF_NEW NFCContainerGroupInfo(nContainerID, pSceneInfo->GetWidth());
         if (NULL != pGroupInfo)
         {
             pSceneInfo->AddElement(nNewGroupID, pGroupInfo);
@@ -1328,9 +1328,9 @@ bool NFCKernelModule::GetRangObjectList(const NFIDENTID& self, const int nContai
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        float fX = pObject->GetPropertyManager()->GetElement("X")->QueryFloat();
-        float fY = pObject->GetPropertyManager()->GetElement("Y")->QueryFloat();
-        float fZ = pObject->GetPropertyManager()->GetElement("Z")->QueryFloat();
+        float fX = pObject->GetPropertyManager()->GetElement("X")->GetFloat();
+        float fY = pObject->GetPropertyManager()->GetElement("Y")->GetFloat();
+        float fZ = pObject->GetPropertyManager()->GetElement("Z")->GetFloat();
 
         // collect info
         return GetRangObjectList(fX, fY, fZ, nContainerID, nGroupID, fRang, list);
@@ -1663,7 +1663,7 @@ bool NFCKernelModule::AddProperty(const NFIDENTID& self, const std::string& strP
 
         //通用回调，方便NET同步
         PROPERTY_EVENT_FUNCTOR functor = boost::bind(&NFCKernelModule::OnPropertyCommonEvent, this, _1, _2, _3, _4, _5);
-        PROPERTY_EVENT_FUNCTOR_PTR functorPtr(new PROPERTY_EVENT_FUNCTOR(functor));
+        PROPERTY_EVENT_FUNCTOR_PTR functorPtr(NF_NEW PROPERTY_EVENT_FUNCTOR(functor));
         return pObject->AddPropertyCallBack(strPropertyName, functorPtr);
     }
 
@@ -1679,7 +1679,7 @@ bool NFCKernelModule::AddRecord(const NFIDENTID& self, const std::string& strRec
 
         //通用回调，方便NET同步
         RECORD_EVENT_FUNCTOR functor = boost::bind(&NFCKernelModule::OnRecordCommonEvent, this, _1, _2, _3, _4, _5, _6, _7, _8);
-        RECORD_EVENT_FUNCTOR_PTR functorPtr(new RECORD_EVENT_FUNCTOR(functor));
+        RECORD_EVENT_FUNCTOR_PTR functorPtr(NF_NEW RECORD_EVENT_FUNCTOR(functor));
         return pObject->AddRecordCallBack(strRecordName, functorPtr);
     }
 

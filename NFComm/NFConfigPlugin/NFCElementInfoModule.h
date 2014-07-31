@@ -36,9 +36,9 @@ class ElementConfigInfo
 public:
     ElementConfigInfo()
     {
-        m_pPropertyManager = new NFCPropertyManager(NFIDENTID(0));
-        m_pRecordManager = new NFCRecordManager(NFIDENTID(0));
-        m_pComponentManager = new NFCComponentManager(NFIDENTID(0));
+        m_pPropertyManager = NF_NEW NFCPropertyManager(NFIDENTID(0));
+        m_pRecordManager = NF_NEW NFCRecordManager(NFIDENTID(0));
+        m_pComponentManager = NF_NEW NFCComponentManager(NFIDENTID(0));
     }
 
     virtual ~ElementConfigInfo()
