@@ -97,7 +97,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
         return false;
     }
 
-    ElementConfigInfo* pElementInfo = new ElementConfigInfo();
+    ElementConfigInfo* pElementInfo = NF_NEW ElementConfigInfo();
     AddElement(strConfigID, pElementInfo);
 
     //can find all configid by class name
@@ -219,7 +219,7 @@ int NFCElementInfoModule::GetPropertyInt(const std::string& strConfigName, const
     NFIProperty* pProperty = GetProperty(strConfigName, strPropertyName);
     if (pProperty)
     {
-        return pProperty->QueryInt();
+        return pProperty->GetInt();
     }
 
     return 0;
@@ -230,7 +230,7 @@ float NFCElementInfoModule::GetPropertyFloat(const std::string& strConfigName, c
     NFIProperty* pProperty = GetProperty(strConfigName, strPropertyName);
     if (pProperty)
     {
-        return pProperty->QueryFloat();
+        return pProperty->GetFloat();
     }
 
     return 0.0f;
@@ -241,7 +241,7 @@ double NFCElementInfoModule::GetPropertyDouble(const std::string& strConfigName,
     NFIProperty* pProperty = GetProperty(strConfigName, strPropertyName);
     if (pProperty)
     {
-        return pProperty->QueryDouble();
+        return pProperty->GetDouble();
     }
 
     return 0.0;
@@ -252,7 +252,7 @@ const std::string& NFCElementInfoModule::GetPropertyString(const std::string& st
     NFIProperty* pProperty = GetProperty(strConfigName, strPropertyName);
     if (pProperty)
     {
-        return pProperty->QueryString();
+        return pProperty->GetString();
     }
 
     return  NULL_STR;
