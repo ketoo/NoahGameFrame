@@ -37,9 +37,9 @@ public:
         m_pParentClass = NULL;
         mstrClassName = strClassName;
 
-        m_pPropertyManager = new NFCPropertyManager(0);
-        m_pRecordManager = new NFCRecordManager(0);
-        m_pComponentManager = new NFCComponentManager(0);
+        m_pPropertyManager = NF_NEW NFCPropertyManager(0);
+        m_pRecordManager = NF_NEW NFCRecordManager(0);
+        m_pComponentManager = NF_NEW NFCComponentManager(0);
     }
 
     virtual ~NFCLogicClass()

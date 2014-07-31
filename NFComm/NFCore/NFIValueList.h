@@ -170,7 +170,7 @@ protected:
         }
         else if (index == mnCapacity)
         {
-            TData* pData = new TData[mnNextOrderCapacity];
+            TData* pData = NF_NEW TData[mnNextOrderCapacity];
             mvList.push_back(pData);
             mvList[mnOrder] = pData;
             mnOrder += 1;

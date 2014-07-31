@@ -154,7 +154,7 @@ bool ValidAdd(TDATA_TYPE eType, const NFIValueList::TData& var, std::shared_ptr<
             return false;
         }
 
-        pVar = std::shared_ptr<NFIValueList::TData>(new NFIValueList::TData());
+        pVar = std::shared_ptr<NFIValueList::TData>(NF_NEW NFIValueList::TData());
         pVar->nType = eType;
     }
 
