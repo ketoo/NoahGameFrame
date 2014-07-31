@@ -25,7 +25,7 @@ NFIRecord* NFCRecordManager::AddRecord(const NFIDENTID& self, const std::string&
     NFIRecord* pRecord = GetElement(strRecordName);
     if (!pRecord)
     {
-        pRecord = new NFCRecord(self, strRecordName, ValueList, keyList, descList, tagList, relateRecordData, nRows, bPublic, bPrivate, bSave, nIndex);
+        pRecord = NF_NEW NFCRecord(self, strRecordName, ValueList, keyList, descList, tagList, relateRecordData, nRows, bPublic, bPrivate, bSave, nIndex);
         this->AddElement(strRecordName, pRecord);
 
         if (nIndex > 0)
