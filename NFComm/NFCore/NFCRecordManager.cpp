@@ -18,6 +18,8 @@ NFCRecordManager::~NFCRecordManager()
 
         pRecord = this->Next();
     }
+
+    ClearAll();
 }
 
 NFIRecord* NFCRecordManager::AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& ValueList, const NFIValueList& keyList, const NFIValueList& descList, const NFIValueList& tagList, const NFIValueList& relateRecordData, const int nRows, bool bPublic /*= false*/, bool bPrivate /*= false*/, bool bSave /*= false */, int nIndex)

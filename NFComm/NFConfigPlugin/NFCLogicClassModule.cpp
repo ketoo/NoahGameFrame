@@ -34,6 +34,7 @@ bool NFCLogicClassModule::Shut()
 
         delete pLogicClass;
         pLogicClass = NULL;
+
         pLogicClass = Next();
     }
 
@@ -51,7 +52,17 @@ NFCLogicClassModule::NFCLogicClassModule(NFIPluginManager* p)
 
 NFCLogicClassModule::~NFCLogicClassModule()
 {
+    NFILogicClass* pLogicClass = First();
+    while (NULL != pLogicClass)
+    {
+        pLogicClass->ClearAll();
+        delete pLogicClass;
+        pLogicClass = NULL;
 
+        pLogicClass = Next();
+    }
+
+    ClearAll();
 }
 
 TDATA_TYPE NFCLogicClassModule::ComputerType(const char* pstrTypeName, NFIValueList::TData& var)
