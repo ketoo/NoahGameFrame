@@ -202,7 +202,7 @@ bool NFCSceneProcessModule::DestroyCloneScene( const int& nContainerID, const in
     m_pKernelModule->GetGroupObjectList( nContainerID, nGroupID, valueAllObjectList );
     for (int i = 0; i < valueAllObjectList.GetCount(); ++i)
     {
-        NFIDENTID ident = valueAllObjectList.ObjectVal( i );
+        NFIDENTID ident = valueAllObjectList.Object( i );
         std::string strObjClassName = m_pKernelModule->GetPropertyString( ident, "ClassName" );
         if ( "Player" != strObjClassName )
         {
@@ -273,19 +273,19 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
     NFCDataList valueRelivePosList( strRelivePosList.c_str(), ";" );
     if ( valueRelivePosList.GetCount() >= 1 )
     {
-        NFCDataList valueRelivePos( valueRelivePosList.StringVal( 0 ).c_str(), "," );
+        NFCDataList valueRelivePos( valueRelivePosList.String( 0 ).c_str(), "," );
         if ( valueRelivePos.GetCount() == 3 )
         {
-            fX = boost::lexical_cast<float>( valueRelivePos.StringVal( 0 ) );
-            fY = boost::lexical_cast<float>( valueRelivePos.StringVal( 1 ) );
-            fZ = boost::lexical_cast<float>( valueRelivePos.StringVal( 2 ) );
+            fX = boost::lexical_cast<float>( valueRelivePos.String( 0 ) );
+            fY = boost::lexical_cast<float>( valueRelivePos.String( 1 ) );
+            fZ = boost::lexical_cast<float>( valueRelivePos.String( 2 ) );
         }
     }
 
     NFCDataList xSceneResult( var );
-    xSceneResult.AddFloat( fX );
-    xSceneResult.AddFloat( fY );
-    xSceneResult.AddFloat( fZ );
+    xSceneResult.Add( fX );
+    xSceneResult.Add( fY );
+    xSceneResult.Add( fZ );
 
     m_pEventProcessModule->DoEvent( self, NFED_ON_OBJECT_ENTER_SCENE_BEFORE, xSceneResult );
 
@@ -296,7 +296,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
         return 0;
     }
 
-    xSceneResult.SetInt(3, nTargetGroupID);//spicial
+    xSceneResult.Set(3, nTargetGroupID);//spicial
     m_pEventProcessModule->DoEvent( self, NFED_ON_OBJECT_ENTER_SCENE_RESULT, xSceneResult );
 
     return 0;
@@ -310,7 +310,7 @@ int NFCSceneProcessModule::OnLeaveSceneEvent( const NFIDENTID& object, const int
         return -1;
     }
 
-    NFINT32 nOldGroupID = var.IntVal(0);
+    NFINT32 nOldGroupID = var.Int(0);
 
     NFIObject* pObject = m_pKernelModule->GetObject(object);
     if (pObject && nOldGroupID > 0)

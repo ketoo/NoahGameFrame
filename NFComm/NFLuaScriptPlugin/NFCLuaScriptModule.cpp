@@ -300,10 +300,10 @@ bool NFCLuaScriptModule::Regisger()
             .def ("SetFloat", &NFCScriptVarList::SetFloat)
             .def ("SetString", &NFCScriptVarList::SetString)
             .def ("SetObject", &NFCScriptVarList::SetObject)
-            .def ("IntVal", &NFCScriptVarList::IntVal)
-            .def ("FloatVal", &NFCScriptVarList::FloatVal)
-            .def("StringVal", &NFCScriptVarList::StringVal)
-            .def("ObjectVal", &NFCScriptVarList::ObjectVal),
+            .def ("Int", &NFCScriptVarList::Int)
+            .def ("Float", &NFCScriptVarList::Float)
+            .def("String", &NFCScriptVarList::String)
+            .def("Object", &NFCScriptVarList::Object),
 
             class_ <NFScriptInt64> ("NFINT64")
             .def(luabind::constructor<>())

@@ -624,7 +624,7 @@ static bool NFVarList_AddInt(NFIDataList* pVarList, const int value)
 {
     if (pVarList)
     {
-        return pVarList->AddInt(value);
+        return pVarList->Add(value);
     }
 
     return false;
@@ -634,7 +634,7 @@ static bool NFVarList_AddFloat(NFIDataList* pVarList, const float value)
 {
     if (pVarList)
     {
-        return pVarList->AddFloat(value);
+        return pVarList->Add(value);
     }
 
     return false;
@@ -644,7 +644,7 @@ static bool NFVarList_AddString(NFIDataList* pVarList, const char* value)
 {
     if (pVarList)
     {
-        return pVarList->AddString(value);
+        return pVarList->Add(value);
     }
 
     return false;
@@ -654,7 +654,7 @@ static bool NFVarList_AddObject(NFIDataList* pVarList, const NFIDENTID& value)
 {
     if (pVarList)
     {
-        return pVarList->AddObject(value);
+        return pVarList->Add(value);
     }
 
     return false;
@@ -664,7 +664,7 @@ static bool NFVarList_SetInt(NFIDataList* pVarList, const int index, const int v
 {
     if (pVarList)
     {
-        return pVarList->SetInt(index, value);
+        return pVarList->Set(index, value);
     }
 
     return false;
@@ -674,7 +674,7 @@ static bool NFVarList_SetFloat(NFIDataList* pVarList, const int index, const flo
 {
     if (pVarList)
     {
-        return pVarList->SetFloat(index, value);
+        return pVarList->Set(index, value);
     }
 
     return false;
@@ -684,7 +684,7 @@ static bool NFVarList_SetString(NFIDataList* pVarList, const int index, const ch
 {
     if (pVarList)
     {
-        return pVarList->SetString(index, value);
+        return pVarList->Set(index, value);
     }
 
     return false;
@@ -694,7 +694,7 @@ static bool NFVarList_SetObject(NFIDataList* pVarList, const int index, const NF
 {
     if (pVarList)
     {
-        return pVarList->SetObject(index, value);
+        return pVarList->Set(index, value);
     }
 
     return false;
@@ -704,7 +704,7 @@ static int NFVarList_IntVal(NFIDataList* pVarList, const int index)
 {
     if (pVarList)
     {
-        return pVarList->IntVal(index);
+        return pVarList->Int(index);
     }
 
     return 0;
@@ -714,7 +714,7 @@ static float NFVarList_FloatVal(NFIDataList* pVarList, const int index)
 {
     if (pVarList)
     {
-        return pVarList->FloatVal(index);
+        return pVarList->Float(index);
     }
 
     return 0.0f;
@@ -724,7 +724,7 @@ static const std::string& NFVarList_StringVal(NFIDataList* pVarList, const int i
 {
     if (pVarList)
     {
-        return pVarList->StringVal(index);
+        return pVarList->String(index);
     }
 
     return NULL_STR;
@@ -734,7 +734,7 @@ static NFIDENTID NFVarList_ObjectVal(NFIDataList* pVarList, const int index)
 {
     if (pVarList)
     {
-        return pVarList->ObjectVal(index);
+        return pVarList->Object(index);
     }
 
     return 0;

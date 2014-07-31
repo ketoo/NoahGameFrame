@@ -9,7 +9,7 @@
 //#include "stdafx.h"
 #include "NFCWorldNet_ClientModule.h"
 #include "NFWorldNet_ClientPlugin.h"
-
+#include "NFComm\NFCore\NFCDataList.h"
 
 bool NFCWorldNet_ClientModule::Init()
 {
@@ -151,13 +151,13 @@ int NFCWorldNet_ClientModule::OnSelectServerResultsEvent(const NFIDENTID& object
 		return 0;
     }
 
-    const int nWorldID = var.IntVal(0);
-    const int nSenderAddress = var.IntVal(1);
-    const int nLoginID = var.IntVal(2);
-    const std::string& strAccount = var.StringVal(3);
-    const std::string& strWorldAddress = var.StringVal(4);
-    const int nPort = var.IntVal(5);
-    const std::string& strKey = var.StringVal(6);
+    const int nWorldID = var.Int(0);
+    const int nSenderAddress = var.Int(1);
+    const int nLoginID = var.Int(2);
+    const std::string& strAccount = var.String(3);
+    const std::string& strWorldAddress = var.String(4);
+    const int nPort = var.Int(5);
+    const std::string& strKey = var.String(6);
 
     NFMsg::AckConnectWorldResult xMsg;
 

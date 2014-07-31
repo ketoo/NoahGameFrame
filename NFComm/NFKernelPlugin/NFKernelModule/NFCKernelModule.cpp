@@ -324,7 +324,7 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
         //传入的属性赋值
         for (int i = 0; i < arg.GetCount() - 1; i += 2)
         {
-            const std::string& strPropertyName = arg.StringVal(i);
+            const std::string& strPropertyName = arg.String(i);
             if ("ConfigID" != strPropertyName
                 && "ClassName" != strPropertyName
                 && "SceneID" != strPropertyName
@@ -336,19 +336,19 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
                     switch (pArgProperty->GetType())
                     {
                         case TDATA_INT:
-                            pObject->SetPropertyInt(strPropertyName, arg.IntVal(i + 1));
+                            pObject->SetPropertyInt(strPropertyName, arg.Int(i + 1));
                             break;
                         case TDATA_FLOAT:
-                            pObject->SetPropertyFloat(strPropertyName, arg.FloatVal(i + 1));
+                            pObject->SetPropertyFloat(strPropertyName, arg.Float(i + 1));
                             break;
                         case TDATA_DOUBLE:
-                            pObject->SetPropertyDouble(strPropertyName, arg.DoubleVal(i + 1));
+                            pObject->SetPropertyDouble(strPropertyName, arg.Double(i + 1));
                             break;
                         case TDATA_STRING:
-                            pObject->SetPropertyString(strPropertyName, arg.StringVal(i + 1));
+                            pObject->SetPropertyString(strPropertyName, arg.String(i + 1));
                             break;
                         case TDATA_OBJECT:
-                            pObject->SetPropertyObject(strPropertyName, arg.ObjectVal(i + 1));
+                            pObject->SetPropertyObject(strPropertyName, arg.Object(i + 1));
                             break;
                         default:
                             break;
@@ -1197,7 +1197,7 @@ int NFCKernelModule::GetContainerOnLineList(const int nContainerID, NFIDataList&
             bool bRet = pGroupInfo->First(ident);
             while (bRet)
             {
-                var.AddObject(ident);
+                var.Add(ident);
 
                 bRet = pGroupInfo->Next(ident);
             }
@@ -1243,7 +1243,7 @@ bool NFCKernelModule::ReleaseGroupScene(const int nContainerID, const int nGroup
 
                 for (int i = 0; i < listObject.GetCount(); i++)
                 {
-                    SetPropertyInt(listObject.ObjectVal(i), "GroupID", 0);
+                    SetPropertyInt(listObject.Object(i), "GroupID", 0);
                 }
             }
 
@@ -1273,7 +1273,7 @@ bool NFCKernelModule::GetGroupObjectList(const int nContainerID, const int nGrou
             bool bRet = pGroupInfo->First(ident);
             while (bRet)
             {
-                list.AddObject(ident);
+                list.Add(ident);
 
                 bRet = pGroupInfo->Next(ident);
             }
@@ -1432,7 +1432,7 @@ bool NFCKernelModule::LogInfo(const NFIDENTID ident)
             int nCount = GetContainerOnLineList(nContainerID, valObjectList);
             for (int i  = 0; i < nCount; i++)
             {
-                NFIDENTID targetIdent = valObjectList.ObjectVal(i);
+                NFIDENTID targetIdent = valObjectList.Object(i);
                 LogInfo(targetIdent);
             }
         }
@@ -1499,11 +1499,11 @@ int NFCKernelModule::Command(const NFIDataList& var)
 {
     if (var.GetCount() > 0 && TDATA_STRING ==  var.Type(0))
     {
-        std::string strCommand = var.StringVal(0);
+        std::string strCommand = var.String(0);
         if ("queryObject" == strCommand && 3 == var.GetCount())
         {
-            const std::string& strObjectIdent = var.StringVal(1);
-            const std::string& strObjectSerial = var.StringVal(2);
+            const std::string& strObjectIdent = var.String(1);
+            const std::string& strObjectSerial = var.String(2);
 
             NFIDENTID ident;
             ident.nIdent = atoi(strObjectIdent.c_str());
@@ -1534,7 +1534,7 @@ int NFCKernelModule::GetObjectByProperty(const int nContainerID, const std::stri
     int nWorldCount = varObjectList.GetCount();
     for (int i = 0; i < nWorldCount; i++)
     {
-        NFIDENTID ident = varObjectList.ObjectVal(i);
+        NFIDENTID ident = varObjectList.Object(i);
         if (this->FindProperty(ident, strPropertyName))
         {
             TDATA_TYPE eType = valueArg.Type(0);
@@ -1543,28 +1543,28 @@ int NFCKernelModule::GetObjectByProperty(const int nContainerID, const std::stri
                 case TDATA_INT:
                 {
                     int nValue = GetPropertyInt(ident, strPropertyName.c_str());
-                    if (valueArg.IntVal(0) == nValue)
+                    if (valueArg.Int(0) == nValue)
                     {
-                        list.AddObject(ident);
+                        list.Add(ident);
                     }
                 }
                 break;
                 case TDATA_STRING:
                 {
                     std::string strValue = GetPropertyString(ident, strPropertyName.c_str());
-                    std::string strCompareValue = valueArg.StringVal(0);
+                    std::string strCompareValue = valueArg.String(0);
                     if (strValue == strCompareValue)
                     {
-                        list.AddObject(ident);
+                        list.Add(ident);
                     }
                 }
                 break;
                 case TDATA_OBJECT:
                 {
                     NFIDENTID identObject = GetPropertyObject(ident, strPropertyName.c_str());
-                    if (valueArg.ObjectVal(0) == identObject)
+                    if (valueArg.Object(0) == identObject)
                     {
-                        list.AddObject(ident);
+                        list.Add(ident);
                     }
                 }
                 break;
@@ -1751,7 +1751,7 @@ void NFCKernelModule::Random(int nStart, int nEnd, int nCount, NFIDataList& valu
     {
         float fRanValue = mvRandom.at(i);
         int nValue = (nEnd - nStart) * fRanValue + nStart;
-        valueList.AddInt((NFINT32)nValue);
+        valueList.Add((NFINT32)nValue);
     }
 
     mnRandomPos += nCount;
@@ -1770,7 +1770,7 @@ int NFCKernelModule::GetAllContainerObjectList( NFIDataList& var )
             bool bRet = pGroupInfo->First(ident);
             while (bRet)
             {
-                var.AddObject(ident);
+                var.Add(ident);
 
                 bRet = pGroupInfo->Next(ident);
             }
