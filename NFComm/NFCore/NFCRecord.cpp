@@ -48,7 +48,7 @@ NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, co
 
     for (int i = 0; i < keyList.GetCount(); ++i)
     {
-        if (keyList.IntVal(i) > 0)
+        if (keyList.Int(i) > 0)
         {
             mbHasKey = true;
             break;
@@ -63,15 +63,15 @@ NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, co
 
     for (int i = 0; i < mVarRecordTag.GetCount(); ++i)
     {
-        if (!mVarRecordTag.StringVal(i).empty())
+        if (!mVarRecordTag.String(i).empty())
         {
-            mmTag[mVarRecordTag.StringVal(i)] = i;
+            mmTag[mVarRecordTag.String(i)] = i;
         }
     }
 
     for (int i = 0; i < mVarRecordRelation.GetCount(); ++i)
     {
-        const std::string& strRelationData = mVarRecordRelation.StringVal(i);
+        const std::string& strRelationData = mVarRecordRelation.String(i);
         if (!strRelationData.empty())
         {
             continue;
@@ -81,7 +81,7 @@ NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, co
         relationDataList.Split(strRelationData.c_str(), ";");
         for (int j = 0; j < relationDataList.GetCount(); ++j)
         {
-            const std::string& strSingleRelation = relationDataList.StringVal(j);
+            const std::string& strSingleRelation = relationDataList.String(j);
             if (strSingleRelation.empty())
             {
                 continue;
@@ -89,8 +89,8 @@ NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, co
 
             NFCDataList singleRelationList;
             singleRelationList.Split(strRelationData.c_str(), ",");
-            const std::string& strRecord = singleRelationList.StringVal(0);
-            const std::string& strRecordTag =singleRelationList.StringVal(1);
+            const std::string& strRecord = singleRelationList.String(0);
+            const std::string& strRecordTag =singleRelationList.String(1);
             mmRelationRecord.insert(RelationRecordMap::value_type(RelationRecordColType(i, strRecord), strRecordTag));
         }
     }
@@ -130,7 +130,7 @@ TDATA_TYPE NFCRecord::GetColType(const int nCol) const
 
 const std::string& NFCRecord::GetColTag( const int nCol ) const
 {
-    return mVarRecordTag.StringVal(nCol);
+    return mVarRecordTag.String(nCol);
 }
 
 // Ìí¼ÓÊý¾Ý
@@ -253,7 +253,7 @@ bool NFCRecord::SetInt(const int nRow, const int nCol, const int value)
         NFCDataList newValue;
 
         oldValue.Append(*pVar);
-        newValue.AddInt(value);
+        newValue.Add(value);
 
         pVar->variantData = value;
 
@@ -294,7 +294,7 @@ bool NFCRecord::SetFloat(const int nRow, const int nCol, const float value)
         NFCDataList newValue;
 
         oldValue.Append(*pVar);
-        newValue.AddFloat(value);
+        newValue.Add(value);
 
         pVar->variantData = value;
 
@@ -335,7 +335,7 @@ bool NFCRecord::SetDouble(const int nRow, const int nCol, const double value)
         NFCDataList newValue;
 
         oldValue.Append(*pVar);
-        newValue.AddDouble(value);
+        newValue.Add(value);
 
         pVar->variantData = value;
 
@@ -376,7 +376,7 @@ bool NFCRecord::SetString(const int nRow, const int nCol, const char* value)
         NFCDataList newValue;
 
         oldValue.Append(*pVar);
-        newValue.AddString(value);
+        newValue.Add(value);
 
         pVar->variantData = (std::string)value;
 
@@ -417,7 +417,7 @@ bool NFCRecord::SetObject(const int nRow, const int nCol, const NFIDENTID& value
         NFCDataList newValue;
 
         oldValue.Append(*pVar);
-        newValue.AddObject(value);
+        newValue.Add(value);
 
         pVar->variantData = value.nData64;
 
@@ -468,23 +468,23 @@ bool NFCRecord::QueryRow(const int nRow, NFIDataList& varList)
             switch (GetColType(i))
             {
             case TDATA_INT:
-                varList.AddInt(0);
+                varList.Add(0);
             	break;
 
             case TDATA_FLOAT:
-                varList.AddFloat(0.0f);
+                varList.Add(0.0f);
                 break;
 
             case TDATA_DOUBLE:
-                varList.AddDouble(0.0f);
+                varList.Add(0.0f);
                 break;
 
             case TDATA_STRING:
-                varList.AddString(NULL_STR.c_str());
+                varList.Add(NULL_STR.c_str());
                 break;
 
             case TDATA_OBJECT:
-                varList.AddObject(0);
+                varList.Add(0);
                 break;
             default:
                 return false;
@@ -669,23 +669,23 @@ int NFCRecord::FindRowByColValue(const int nCol, const NFIDataList& var, NFIData
     switch (eType)
     {
     case TDATA_INT:
-        return FindInt(nCol, var.IntVal(nCol), varResult);
+        return FindInt(nCol, var.Int(nCol), varResult);
         break;
 
     case TDATA_FLOAT:
-        return FindFloat(nCol, var.FloatVal(nCol), varResult);
+        return FindFloat(nCol, var.Float(nCol), varResult);
         break;
 
     case TDATA_DOUBLE:
-        return FindDouble(nCol, var.DoubleVal(nCol), varResult);
+        return FindDouble(nCol, var.Double(nCol), varResult);
         break;
 
     case TDATA_STRING:
-        return FindString(nCol, var.StringVal(nCol).c_str(), varResult);
+        return FindString(nCol, var.String(nCol).c_str(), varResult);
         break;
 
     case TDATA_OBJECT:
-        return FindObject(nCol, var.ObjectVal(nCol), varResult);
+        return FindObject(nCol, var.Object(nCol), varResult);
         break;
 
     default:
@@ -1095,7 +1095,7 @@ bool NFCRecord::IsKey( const int nRow ) const
 
     if (ValidRow(nRow))
     {
-        return (mVarRecordKey.IntVal(nRow) > 0);
+        return (mVarRecordKey.Int(nRow) > 0);
         //return (m_pRecordKeyState[nRow] > 0);
     }
 

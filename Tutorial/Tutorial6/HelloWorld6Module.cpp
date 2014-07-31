@@ -22,7 +22,7 @@ bool HelloWorld6Module::AfterInit()
     assert( NULL != m_pLuaScriptModule);
     
     m_pKernelModule->CreateContainer(1, "");
-    NFIObject* pObject = m_pKernelModule->CreateObject(0, 1, 0, "Player", "", NFCValueList());
+    NFIObject* pObject = m_pKernelModule->CreateObject(0, 1, 0, "Player", "", NFCDataList());
     if ( !pObject )
     {
         return false;
@@ -31,7 +31,7 @@ bool HelloWorld6Module::AfterInit()
     NFIRecord* pRecord = pObject->GetRecordManager()->GetElement("TaskList");
     if ( pRecord )
     {
-        NFCValueList var;
+        NFCDataList var;
         var << "Task_From_C++";
         var << 0;
         pRecord->AddRow(-1, var);
@@ -40,7 +40,7 @@ bool HelloWorld6Module::AfterInit()
     pObject->SetPropertyInt("MAXHP",100);
 
 
-    m_pEventProcessModule->DoEvent(pObject->Self(), 2222, NFCValueList());
+    m_pEventProcessModule->DoEvent(pObject->Self(), 2222, NFCDataList());
 
     return true;
 }
