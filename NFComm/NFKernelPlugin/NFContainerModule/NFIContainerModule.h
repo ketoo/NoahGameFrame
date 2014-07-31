@@ -29,7 +29,7 @@ class NFCContainerGroupInfo
 public:
     NFCContainerGroupInfo(int nSceneID, int nWidth)
     {
-        m_pGridModule = new NFCGridModule(nSceneID, nWidth);
+        m_pGridModule = NF_NEW NFCGridModule(nSceneID, nWidth);
     }
 
     virtual ~NFCContainerGroupInfo()

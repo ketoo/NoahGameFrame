@@ -90,6 +90,12 @@
     <ClInclude Include="NFCObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NFCMemory .h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NFIMemory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFCore.cpp" />
@@ -121,6 +127,9 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="NFCObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCMemory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
