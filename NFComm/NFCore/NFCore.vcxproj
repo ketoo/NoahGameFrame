@@ -95,6 +95,7 @@
   <ItemGroup>
     <ClInclude Include="NFCComponent.h" />
     <ClInclude Include="NFCComponentManager.h" />
+    <ClInclude Include="NFCDataList.h" />
     <ClInclude Include="NFCHeartBeatManager.h" />
     <ClInclude Include="NFCMemory .h" />
     <ClInclude Include="NFCObject.h" />
@@ -103,6 +104,7 @@
     <ClInclude Include="NFCRecordManager.h" />
     <ClInclude Include="NFIComponent.h" />
     <ClInclude Include="NFIComponentManager.h" />
+    <ClInclude Include="NFIDataList.h" />
     <ClInclude Include="NFIHeartBeatManager.h" />
     <ClInclude Include="NFIMemory.h" />
     <ClInclude Include="NFQueue.h" />
@@ -124,6 +126,7 @@
   <ItemGroup>
     <ClCompile Include="NFCComponent.cpp" />
     <ClCompile Include="NFCComponentManager.cpp" />
+    <ClCompile Include="NFCDataList.cpp" />
     <ClCompile Include="NFCHeartBeatManager.cpp" />
     <ClCompile Include="NFCMemory.cpp" />
     <ClCompile Include="NFCObject.cpp" />

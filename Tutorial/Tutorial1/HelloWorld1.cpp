@@ -1,5 +1,7 @@
 #include "HelloWorld1.h"
 
+extern NFCMemory xMemory;
+
 bool HelloWorld1::Init()
 {
     //初始化
@@ -19,13 +21,18 @@ bool HelloWorld1::AfterInit()
 bool HelloWorld1::Execute( const float fLasFrametime, const float fStartedTime )
 {
     //每帧执行
-    std::cout << "Hello, world1, Execute" << std::endl;
+    //std::cout << "Hello, world1, Execute" << std::endl;
 
     return true;
 }
 
 bool HelloWorld1::BeforeShut()
 {
+    xMemory.Dump();
+    std::cout << "Hello, world1, BeforeShut1111" << std::endl;
+
+    system("PAUSE");
+
     //反初始化之前
     std::cout << "Hello, world1, BeforeShut" << std::endl;
 

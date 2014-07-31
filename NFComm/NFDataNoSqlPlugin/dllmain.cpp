@@ -27,8 +27,8 @@ char szProperty[MAX_PATH] = { 0 };
 char szValue[MAX_PATH] = { 0 };
 sprintf(szProperty, "Property_%d", i);
 sprintf(szValue, "Value_%d", i);
-valueAccountPropertyList.AddString(szProperty);
-valueAccountPropertyValueList.AddString(szValue);
+valueAccountPropertyList.Add(szProperty);
+valueAccountPropertyValueList.Add(szValue);
 }
 
 nRet = pModule->SetAccountProperty("test1", valueAccountPropertyList, valueAccountPropertyValueList);
@@ -39,7 +39,7 @@ valueAccountPropertyValueList.Clear();
 nRet = pModule->QueryAccountProperty("test1", valueAccountPropertyList, valueAccountPropertyValueList);
 for (int i = 0; i < valueAccountPropertyList.GetCount(); i++)
 {
-std::cout << valueAccountPropertyList.StringVal(i) << "  " << valueAccountPropertyValueList.StringVal(i) << std::endl;
+std::cout << valueAccountPropertyList.String(i) << "  " << valueAccountPropertyValueList.String(i) << std::endl;
 }
 //////////////////////////////////////////////////////////////////////////
 //游戏服务器为某帐号创建角色
@@ -51,7 +51,7 @@ NFCDataList valueRoleList;
 nRet = pModule->QueryAccountRoleList("test1", valueRoleList);
 for (int i = 0; i < valueRoleList.GetCount(); i++)
 {
-std::cout << valueRoleList.StringVal(i) << std::endl;
+std::cout << valueRoleList.String(i) << std::endl;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -64,8 +64,8 @@ char szProperty[MAX_PATH] = { 0 };
 char szValue[MAX_PATH] = { 0 };
 sprintf(szProperty, "Property_%d", i);
 sprintf(szValue, "Value_%d", i);
-valueRolePropertyList.AddString(szProperty);
-valueRolePropertyValueList.AddString(szValue);
+valueRolePropertyList.Add(szProperty);
+valueRolePropertyValueList.Add(szValue);
 }
 
 nRet = pModule->SetRoleProperty("Role1", valueRolePropertyList, valueRolePropertyValueList);
@@ -76,7 +76,7 @@ valueRolePropertyValueList.Clear();
 nRet = pModule->QueryRoleProperty("Role1", valueRolePropertyList, valueRolePropertyValueList);
 for (int i = 0; i < valueRolePropertyList.GetCount(); i++)
 {
-std::cout << valueRolePropertyList.StringVal(i) << "  " << valueRolePropertyValueList.StringVal(i) << std::endl;
+std::cout << valueRolePropertyList.String(i) << "  " << valueRolePropertyValueList.String(i) << std::endl;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -86,7 +86,7 @@ for (int i = 0; i < 4; i++)
 {
 for (int j = 0; j < 7; j++)
 {
-valueRoleRecordValueList.AddInt(i*j);
+valueRoleRecordValueList.Add(i*j);
 }
 }
 nRet = pModule->SetRoleRecord("Role1", "record1", 4, 7, valueRoleRecordValueList);
@@ -98,7 +98,7 @@ int nCol = 0;
 nRet = pModule->QueryRoleRecord("Role1", "record1", nRow, nCol, valueRoleRecordValueList);
 for (int i = 0; i < valueRoleRecordValueList.GetCount(); i++)
 {
-std::cout << valueRoleRecordValueList.StringVal(i) << std::endl;
+std::cout << valueRoleRecordValueList.String(i) << std::endl;
 }
 
 return 0;

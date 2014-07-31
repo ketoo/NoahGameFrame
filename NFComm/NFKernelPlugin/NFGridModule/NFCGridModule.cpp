@@ -95,7 +95,7 @@ const int NFCGridModule::GetAroundGrid(NFCSceneGridInfo* pGridInfo, NFIDataList&
         return nObjectCount;
     }
 
-    gridList.AddPointer(pGridInfo);
+    gridList.Add(pGridInfo);
 
     nObjectCount += pGridInfo->Count();
 
@@ -108,7 +108,7 @@ const int NFCGridModule::GetAroundGrid(NFCSceneGridInfo* pGridInfo, NFIDataList&
                 NFCSceneGridInfo* pInfo = pGridInfo->GetConnectGrid((EGRID_DIRECTION)i);
                 if (pInfo)
                 {
-                    gridList.AddPointer(pInfo);
+                    gridList.Add(pInfo);
                     //gridList.push_back( pInfo );
                     nObjectCount += pInfo->Count();
                 }
@@ -150,14 +150,14 @@ const int NFCGridModule::GetAroundObject(NFCSceneGridInfo* pGridInfo, NFIDataLis
     {
         for (int i = 0; i < gridList.GetCount(); i++)
         {
-            NFCSceneGridInfo* pGridInfo = (NFCSceneGridInfo*)(gridList.PointerVal(i));
+            NFCSceneGridInfo* pGridInfo = (NFCSceneGridInfo*)(gridList.Pointer(i));
             if (pGridInfo)
             {
                 NFIDENTID ident = 0;
                 bool bRet = pGridInfo->First(ident);
                 while (bRet)
                 {
-                    objectList.AddObject(ident);
+                    objectList.Add(ident);
                     bRet = pGridInfo->Next(ident);
                 }
             }

@@ -31,9 +31,9 @@ int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventI
     }
 
     //////////////////////////////////////////////////////////////////////////
-    int nAddress = var.IntVal(0);
-    const std::string& strAccount = var.StringVal(1);
-    const std::string& strPassword = var.StringVal(2);
+    int nAddress = var.Int(0);
+    const std::string& strAccount = var.String(1);
+    const std::string& strPassword = var.String(2);
     //int nState = m_pDataBaseModule->ConfirmAccountInfo(strAccount, strPassword);
     //m_pNoSqlModule->AddAccountInfo(strAccount, strPassword);
 
@@ -54,7 +54,7 @@ int NFCLoginLogicModule::OnDisconnectEvent(const NFIDENTID& object, const int nE
         return -1;
     }
 
-    //std::string strAccount = var.StringVal(0);
+    //std::string strAccount = var.String(0);
 
     return 0;
 }
@@ -70,7 +70,7 @@ bool NFCLoginLogicModule::Execute(const float fLasFrametime, const float fStarte
     //         NFCDataList val(szContent, ",");
     //         if (val.GetCount() > 0)
     //         {
-    //             const std::string& strCmd = val.StringVal(0);
+    //             const std::string& strCmd = val.String(0);
     //             //if (0 == strcmp("listworldserver", pstrCmd))
     //             if ("listworldserver" == strCmd)
     //             {
@@ -78,7 +78,7 @@ bool NFCLoginLogicModule::Execute(const float fLasFrametime, const float fStarte
     //                 int nCount = m_pKernelModule->GetContainerOnLineList(-2, valOobjectList);
     //                 for (int i = 0; i < nCount; i++)
     //                 {
-    //                     NFIDENTID ident = valOobjectList.ObjectVal(i);
+    //                     NFIDENTID ident = valOobjectList.Object(i);
     //
     //                     char szInfo[MAX_PATH] = { 0 };
     //                     sprintf_s(szInfo, "WorldID:%d, WorldName:%s, WorldMaxOnline:%d, WorldOnlineCount:%d",
