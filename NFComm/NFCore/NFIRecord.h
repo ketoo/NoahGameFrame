@@ -99,7 +99,7 @@ public:
     {
         for (int i  = 0; i < varRows.GetCount(); ++i)
         {
-            Remove(varRows.IntVal(i));
+            Remove(varRows.Int(i));
         }
 
         return true;

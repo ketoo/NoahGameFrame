@@ -223,7 +223,7 @@ int NFCGameServerNet_ClientModule::OnDataLoadBeginEvent(const NFIDENTID& object,
     {
         //      _tagMTD_LOAD_ROLEDATA loadData;
         //
-        //      strcpy(loadData._szAccountName, var.StringVal(0));
+        //      strcpy(loadData._szAccountName, var.String(0));
         //      RakNet::BitStream oBitStream;
         //      loadData.EnCode(oBitStream);
         //
@@ -245,10 +245,10 @@ int NFCGameServerNet_ClientModule::OnDataLoadBeginEvent(const NFIDENTID& object,
 //
 //  if (m_pGameLogicModule->GetGameID() == 1)
 //  {
-//      int nGameServer = var.IntVal( 0 );
-//      const char* pstrAccount = var.StringVal( 1 );
-//      const char* pstrRoleName = var.StringVal( 2 );
-//      int nSceneIndex = var.IntVal( 3 );
+//      int nGameServer = var.Int( 0 );
+//      const char* pstrAccount = var.String( 1 );
+//      const char* pstrRoleName = var.String( 2 );
+//      int nSceneIndex = var.Int( 3 );
 //
 //      RakNet::BitStream oBitStream;
 //      _tagGTG_SWAP_GAMESERVER swapWorld;
@@ -284,11 +284,11 @@ int NFCGameServerNet_ClientModule::OnSwapGSEvent(const NFIDENTID& object, const 
         return 0;
     }
 
-    //     int nGameServerID = var.IntVal(0);
-    //     const std::string& strAccount = var.StringVal(1);
-    //     const std::string& strRoleName = var.StringVal(2);
-    //     int nSceneIndex = var.IntVal(3);
-    //     int nPlayerConfigIndex = var.IntVal(4);
+    //     int nGameServerID = var.Int(0);
+    //     const std::string& strAccount = var.String(1);
+    //     const std::string& strRoleName = var.String(2);
+    //     int nSceneIndex = var.Int(3);
+    //     int nPlayerConfigIndex = var.Int(4);
     //
     //     _tagGTG_SWAP_GAMESERVER swapGS;
     //
