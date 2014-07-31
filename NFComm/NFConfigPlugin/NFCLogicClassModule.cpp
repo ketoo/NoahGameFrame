@@ -381,7 +381,7 @@ bool NFCLogicClassModule::AddClass(const std::string& strClassName, const std::s
     NFILogicClass* pChildClass = GetElement(strClassName);
     if (!pChildClass)
     {
-        pChildClass = new NFCLogicClass(strClassName);
+        pChildClass = NF_NEW NFCLogicClass(strClassName);
         AddElement(strClassName, pChildClass);
         //pChildClass = CreateElement( strClassName );
 
@@ -409,7 +409,7 @@ bool NFCLogicClassModule::Load(rapidxml::xml_node<>* attrNode, NFCLogicClass* pP
     //printf( "-----------------------------------------------------\n");
     //printf( "%s:\n", pstrLogicClassName );
 
-    NFCLogicClass* pClass = new NFCLogicClass(pstrLogicClassName);
+    NFCLogicClass* pClass = NF_NEW NFCLogicClass(pstrLogicClassName);
     AddElement(pstrLogicClassName, pClass);
     pClass->SetParent(pParentClass);
     pClass->SetTypeName(pstrType);

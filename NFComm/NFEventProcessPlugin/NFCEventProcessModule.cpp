@@ -11,7 +11,7 @@
 NFCEventProcessModule::NFCEventProcessModule(NFIPluginManager* p)
 {
     pPluginManager = p;
-    m_pClassEventInfoEx = new NFCClassEventInfo();
+    m_pClassEventInfoEx = NF_NEW NFCClassEventInfo();
 }
 
 NFCEventProcessModule::~NFCEventProcessModule()
@@ -83,7 +83,7 @@ bool NFCEventProcessModule::AddEventCallBack(const NFIDENTID& objectID, const in
     NFCObjectEventInfo* pObjectEventInfo = mObjectEventInfoMapEx.GetElement(objectID);
     if (!pObjectEventInfo)
     {
-        pObjectEventInfo = new NFCObjectEventInfo();
+        pObjectEventInfo = NF_NEW NFCObjectEventInfo();
         mObjectEventInfoMapEx.AddElement(objectID, pObjectEventInfo);
     }
     assert(NULL != pObjectEventInfo);
@@ -91,7 +91,7 @@ bool NFCEventProcessModule::AddEventCallBack(const NFIDENTID& objectID, const in
     NFEventList* pEventInfo = pObjectEventInfo->GetElement(nEventID);
     if (!pEventInfo)
     {
-        pEventInfo = new NFEventList();
+        pEventInfo = NF_NEW NFEventList();
         pObjectEventInfo->AddElement(nEventID, pEventInfo);
     }
 
@@ -195,7 +195,7 @@ bool NFCEventProcessModule::RemoveEventCallBack(const NFIDENTID& objectID, const
             NFList<int>* pList = mRemoveEventListEx.GetElement(objectID);
             if (!pList)
             {
-                pList = new NFList<int>();
+                pList = NF_NEW NFList<int>();
                 mRemoveEventListEx.AddElement(objectID, pList);
             }
 
@@ -271,7 +271,7 @@ bool NFCEventProcessModule::AddClassCallBack(const std::string& strClassName, co
     NFClassEventList* pEventList = m_pClassEventInfoEx->GetElement(strClassName);
     if (!pEventList)
     {
-        pEventList = new NFClassEventList();
+        pEventList = NF_NEW NFClassEventList();
         m_pClassEventInfoEx->AddElement(strClassName, pEventList);
     }
 
