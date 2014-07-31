@@ -89,13 +89,13 @@ int NFCLevelModule::OnDead( const NFIDENTID& self, const NFIDENTID& other )
     return 0;
 }
 
-int NFCLevelModule::OnObjectExpEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar )
+int NFCLevelModule::OnObjectExpEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
 {
 
     return 0;
 }
 
-int NFCLevelModule::OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var )
+int NFCLevelModule::OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
     if ( strClassName == "Player"
          && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
@@ -113,7 +113,7 @@ int NFCLevelModule::OnObjectClassEvent( const NFIDENTID& self, const std::string
     return 0;
 }
 
-int NFCLevelModule::OnObjectBeKilled( const NFIDENTID& object, const int nEventID, const NFIValueList& var )
+int NFCLevelModule::OnObjectBeKilled( const NFIDENTID& object, const int nEventID, const NFIDataList& var )
 {
     if ( var.GetCount() == 1 && var.Type( 0 ) == TDATA_OBJECT )
     {
@@ -134,7 +134,7 @@ int NFCLevelModule::OnObjectBeKilled( const NFIDENTID& object, const int nEventI
     return 0;
 }
 
-int NFCLevelModule::OnObjectLevelEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar )
+int NFCLevelModule::OnObjectLevelEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
 {
 
 
