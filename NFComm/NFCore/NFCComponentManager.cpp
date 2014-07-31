@@ -21,7 +21,7 @@ NFIComponent* NFCComponentManager::AddComponent( const std::string& strComponent
         return NULL;
     }
 
-    pComponent = new NFCComponent(mSelf, strComponentName, strLanguageName);
+    pComponent = NF_NEW NFCComponent(mSelf, strComponentName, strLanguageName);
     AddElement(strComponentName, pComponent);
 
     return pComponent;
