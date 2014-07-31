@@ -96,6 +96,7 @@
     <ClInclude Include="NFCComponent.h" />
     <ClInclude Include="NFCComponentManager.h" />
     <ClInclude Include="NFCHeartBeatManager.h" />
+    <ClInclude Include="NFCMemory .h" />
     <ClInclude Include="NFCObject.h" />
     <ClInclude Include="NFCProperty.h" />
     <ClInclude Include="NFCPropertyManager.h" />
@@ -103,6 +104,7 @@
     <ClInclude Include="NFIComponent.h" />
     <ClInclude Include="NFIComponentManager.h" />
     <ClInclude Include="NFIHeartBeatManager.h" />
+    <ClInclude Include="NFIMemory.h" />
     <ClInclude Include="NFQueue.h" />
     <ClInclude Include="NFSingleton.h" />
     <ClInclude Include="NFCore.h" />
@@ -125,6 +127,7 @@
     <ClCompile Include="NFCComponent.cpp" />
     <ClCompile Include="NFCComponentManager.cpp" />
     <ClCompile Include="NFCHeartBeatManager.cpp" />
+    <ClCompile Include="NFCMemory.cpp" />
     <ClCompile Include="NFCObject.cpp" />
     <ClCompile Include="NFCProperty.cpp" />
     <ClCompile Include="NFCPropertyManager.cpp" />

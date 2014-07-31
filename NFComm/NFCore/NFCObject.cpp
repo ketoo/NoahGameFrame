@@ -17,10 +17,10 @@ NFCObject::NFCObject(const NFIDENTID& self, NFIPluginManager* pLuginManager)
     mSelf = self;
     m_pPluginManager = pLuginManager;
 
-    m_pRecordManager = new NFCRecordManager(mSelf);
-    m_pHeartBeatManager = new NFCHeartBeatManager(mSelf);
-    m_pPropertyManager = new NFCPropertyManager(mSelf);
-    m_pComponentManager = new NFCComponentManager(mSelf);
+    m_pRecordManager = NF_NEW NFCRecordManager(mSelf);
+    m_pHeartBeatManager = NF_NEW NFCHeartBeatManager(mSelf);
+    m_pPropertyManager = NF_NEW NFCPropertyManager(mSelf);
+    m_pComponentManager = NF_NEW NFCComponentManager(mSelf);
 }
 
 NFCObject::~NFCObject()
