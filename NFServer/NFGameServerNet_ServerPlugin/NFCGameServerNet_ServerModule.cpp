@@ -416,7 +416,7 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDENTID& self, const
 
         for ( int i = 0; i < argVar.GetCount(); i++ )
         {
-            NFIDENTID identOther = argVar.ObjectVal( i );
+            NFIDENTID identOther = argVar.Object( i );
             if ( self == identOther )
             {
                 //找到他所在网关的FD
@@ -596,7 +596,7 @@ int NFCGameServerNet_ServerModule::OnRecordEnter( const NFIDENTID& self, const N
 
         for ( int i = 0; i < argVar.GetCount(); i++ )
         {
-            NFIDENTID identOther = argVar.ObjectVal( i );
+            NFIDENTID identOther = argVar.Object( i );
             if ( self == identOther )
             {
                 if (xPrivateMsg.multi_player_record_size() > 0)
@@ -647,7 +647,7 @@ int NFCGameServerNet_ServerModule::OnObjectListEnter( const NFIDataList& self, c
     NFMsg::AckPlayerEntryList xPlayerEntryInfoList;
     for ( int i = 0; i < argVar.GetCount(); i++ )
     {
-        NFIDENTID identOld = argVar.ObjectVal( i );
+        NFIDENTID identOld = argVar.Object( i );
         //排除空对象
         if (identOld.IsNull())
         {
@@ -674,7 +674,7 @@ int NFCGameServerNet_ServerModule::OnObjectListEnter( const NFIDataList& self, c
 
     for (int i = 0; i < self.GetCount(); i++)
     {
-        NFIDENTID ident = self.ObjectVal(i);
+        NFIDENTID ident = self.Object(i);
         if (ident.IsNull())
         {
             continue;
@@ -705,19 +705,19 @@ int NFCGameServerNet_ServerModule::OnObjectListLeave( const NFIDataList& self, c
     NFMsg::AckPlayerLeaveList xPlayerLeaveInfoList;
     for ( int i = 0; i < argVar.GetCount(); i++ )
     {
-        NFIDENTID identOld = argVar.ObjectVal( i );
+        NFIDENTID identOld = argVar.Object( i );
         //排除空对象
         if (identOld.IsNull())
         {
             continue;
         }
 
-        xPlayerLeaveInfoList.add_object_list(argVar.ObjectVal(i).nData64);
+        xPlayerLeaveInfoList.add_object_list(argVar.Object(i).nData64);
     }
 
     for (int i = 0; i < self.GetCount(); i++)
     {
-        NFIDENTID ident = self.ObjectVal(i);
+        NFIDENTID ident = self.Object(i);
         if (ident.IsNull())
         {
             continue;
@@ -789,11 +789,11 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
             xPropertyInt.set_player_id( self.nData64 );
             NFMsg::PropertyInt* pDataInt = xPropertyInt.add_property_list();
             pDataInt->set_property_name( strPropertyName );
-            pDataInt->set_data( newVar.IntVal( 0 ) );
+            pDataInt->set_data( newVar.Int( 0 ) );
             
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
-                NFIDENTID identOld = valueBroadCaseList.ObjectVal( i );
+                NFIDENTID identOld = valueBroadCaseList.Object( i );
                 BaseData* pData = mRoleBaseData.GetElement(identOld);
                 if (pData)
                 {
@@ -813,11 +813,11 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
             xPropertyFloat.set_player_id( self.nData64 );
             NFMsg::PropertyFloat* pDataFloat = xPropertyFloat.add_property_list();
             pDataFloat->set_property_name( strPropertyName );
-            pDataFloat->set_data( newVar.FloatVal( 0 ) );
+            pDataFloat->set_data( newVar.Float( 0 ) );
             
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
-                NFIDENTID identOld = valueBroadCaseList.ObjectVal( i );
+                NFIDENTID identOld = valueBroadCaseList.Object( i );
                 BaseData* pData = mRoleBaseData.GetElement(identOld);
                 if (pData)
                 {
@@ -837,11 +837,11 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
             xPropertyDouble.set_player_id( self.nData64 );
             NFMsg::PropertyFloat* pDataFloat = xPropertyDouble.add_property_list();
             pDataFloat->set_property_name( strPropertyName );
-            pDataFloat->set_data( newVar.DoubleVal( 0 ) );
+            pDataFloat->set_data( newVar.Double( 0 ) );
             
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
-                NFIDENTID identOld = valueBroadCaseList.ObjectVal( i );
+                NFIDENTID identOld = valueBroadCaseList.Object( i );
                 BaseData* pData = mRoleBaseData.GetElement(identOld);
                 if (pData)
                 {
@@ -861,11 +861,11 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
             xPropertyString.set_player_id( self.nData64 );
             NFMsg::PropertyString* pDataString = xPropertyString.add_property_list();
             pDataString->set_property_name( strPropertyName );
-            pDataString->set_data( newVar.StringVal( 0 ) );
+            pDataString->set_data( newVar.String( 0 ) );
             
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
-                NFIDENTID identOld = valueBroadCaseList.ObjectVal( i );
+                NFIDENTID identOld = valueBroadCaseList.Object( i );
                 BaseData* pData = mRoleBaseData.GetElement(identOld);
                 if (pData)
                 {
@@ -886,11 +886,11 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 
             NFMsg::PropertyObject* pDataObject = xPropertyObject.add_property_list();
             pDataObject->set_property_name( strPropertyName );
-            pDataObject->set_data( newVar.ObjectVal( 0 ).nData64 );
+            pDataObject->set_data( newVar.Object( 0 ).nData64 );
 
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
-                NFIDENTID identOld = valueBroadCaseList.ObjectVal( i );
+                NFIDENTID identOld = valueBroadCaseList.Object( i );
                 BaseData* pData = mRoleBaseData.GetElement(identOld);
                 if (pData)
                 {
@@ -953,7 +953,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                 case TDATA_INT:
                     {
                         //添加的时候数据要全s
-                        int nValue = newVar.IntVal( i );
+                        int nValue = newVar.Int( i );
                         //if ( 0 != nValue )
                         {
                             NFMsg::RecordInt* pAddData = pAddRowData->add_record_int_list();
@@ -964,7 +964,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                     break;
                 case TDATA_FLOAT:
                     {
-                        float fValue = newVar.FloatVal( i );
+                        float fValue = newVar.Float( i );
                         //if ( fValue > 0.001f  || fValue < -0.001f )
                         {
                             NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
@@ -975,7 +975,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                     break;
                 case TDATA_DOUBLE:
                     {
-                        float fValue = newVar.DoubleVal( i );
+                        float fValue = newVar.Double( i );
                         //if ( fValue > 0.001f  || fValue < -0.001f )
                         {
                             NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
@@ -986,7 +986,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                     break;
                 case TDATA_STRING:
                     {
-                        const std::string& str = newVar.StringVal( i );
+                        const std::string& str = newVar.String( i );
                         //if (!str.empty())
                         {
                             NFMsg::RecordString* pAddData = pAddRowData->add_record_string_list();
@@ -997,7 +997,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                     break;
                 case TDATA_OBJECT:
                     {
-                        NFIDENTID identValue = newVar.ObjectVal( i );
+                        NFIDENTID identValue = newVar.Object( i );
                         //if (!identValue.IsNull())
                         {
                             NFMsg::RecordObject* pAddData = pAddRowData->add_record_object_list();
@@ -1014,7 +1014,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
   
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
-                NFIDENTID identOther = valueBroadCaseList.ObjectVal( i );
+                NFIDENTID identOther = valueBroadCaseList.Object( i );
                 BaseData* pData = mRoleBaseData.GetElement(identOther);
                 if (pData)
                 {
@@ -1036,7 +1036,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
             
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
-                NFIDENTID identOther = valueBroadCaseList.ObjectVal( i );
+                NFIDENTID identOther = valueBroadCaseList.Object( i );
                 BaseData* pData = mRoleBaseData.GetElement(identOther);
                 if (pData)
                 {
@@ -1061,7 +1061,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
 
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
-                NFIDENTID identOther = valueBroadCaseList.ObjectVal( i );
+                NFIDENTID identOther = valueBroadCaseList.Object( i );
                 BaseData* pData = mRoleBaseData.GetElement(identOther);
                 if (pData)
                 {
@@ -1086,12 +1086,12 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                     NFMsg::RecordInt* recordProperty = xRecordChanged.add_property_list();
                     recordProperty->set_row( nRow );
                     recordProperty->set_col( nCol );
-                    int nData = newVar.IntVal( 0 );
+                    int nData = newVar.Int( 0 );
                     recordProperty->set_data( nData );
 
                     for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
                     {
-                        NFIDENTID identOther = valueBroadCaseList.ObjectVal( i );
+                        NFIDENTID identOther = valueBroadCaseList.Object( i );
                         BaseData* pData = mRoleBaseData.GetElement(identOther);
                         if (pData)
                         {
@@ -1113,11 +1113,11 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                     NFMsg::RecordFloat* recordProperty = xRecordChanged.add_property_list();
                     recordProperty->set_row( nRow );
                     recordProperty->set_col( nCol );
-                    recordProperty->set_data( newVar.FloatVal( 0 ) );
+                    recordProperty->set_data( newVar.Float( 0 ) );
 
                     for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
                     {
-                        NFIDENTID identOther = valueBroadCaseList.ObjectVal( i );
+                        NFIDENTID identOther = valueBroadCaseList.Object( i );
                         BaseData* pData = mRoleBaseData.GetElement(identOther);
                         if (pData)
                         {
@@ -1137,11 +1137,11 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                     NFMsg::RecordFloat* recordProperty = xRecordChanged.add_property_list();
                     recordProperty->set_row( nRow );
                     recordProperty->set_col( nCol );
-                    recordProperty->set_data( newVar.DoubleVal( 0 ) );
+                    recordProperty->set_data( newVar.Double( 0 ) );
 
                     for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
                     {
-                        NFIDENTID identOther = valueBroadCaseList.ObjectVal( i );
+                        NFIDENTID identOther = valueBroadCaseList.Object( i );
                         BaseData* pData = mRoleBaseData.GetElement(identOther);
                         if (pData)
                         {
@@ -1162,11 +1162,11 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                     NFMsg::RecordString* recordProperty = xRecordChanged.add_property_list();
                     recordProperty->set_row( nRow );
                     recordProperty->set_col( nCol );
-                    recordProperty->set_data( newVar.StringVal( 0 ) );
+                    recordProperty->set_data( newVar.String( 0 ) );
 
                     for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
                     {
-                        NFIDENTID identOther = valueBroadCaseList.ObjectVal( i );
+                        NFIDENTID identOther = valueBroadCaseList.Object( i );
                         BaseData* pData = mRoleBaseData.GetElement(identOther);
                         if (pData)
                         {
@@ -1187,11 +1187,11 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                     NFMsg::RecordObject* recordProperty = xRecordChanged.add_property_list();
                     recordProperty->set_row( nRow );
                     recordProperty->set_col( nCol );
-                    recordProperty->set_data( newVar.ObjectVal( 0 ).nData64 );
+                    recordProperty->set_data( newVar.Object( 0 ).nData64 );
 
                     for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
                     {
-                        NFIDENTID identOther = valueBroadCaseList.ObjectVal( i );
+                        NFIDENTID identOther = valueBroadCaseList.Object( i );
                         BaseData* pData = mRoleBaseData.GetElement(identOther);
                         if (pData)
                         {
@@ -1222,7 +1222,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
 // 
 //             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 //             {
-//                 NFIDENTID identOther = valueBroadCaseList.ObjectVal( i );
+//                 NFIDENTID identOther = valueBroadCaseList.Object( i );
 //                 SendMsgPB(NFMsg::EGMI_ACK_RECORD_CLEAR, xRecordChanged, 0);
 //             }
         }
@@ -1264,14 +1264,14 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent( const NFIDENTID& self, co
 
         for ( int i = 0; i < valueAllObjectList.GetCount(); i++ )
         {
-            NFIDENTID identBC = valueAllObjectList.ObjectVal( i );
+            NFIDENTID identBC = valueAllObjectList.Object( i );
             const std::string& strClassName = m_pKernelModule->GetPropertyString( identBC, "ClassName" );
             if ( "Player" == strClassName )
             {
-                valueBroadCaseList.AddObject( identBC );
+                valueBroadCaseList.Add( identBC );
                 if (identBC != self)
                 {
-                    valueBroadListNoSelf.AddObject( identBC );
+                    valueBroadListNoSelf.Add( identBC );
                 }
             }
         }
@@ -1334,17 +1334,17 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const st
             //自己只需要广播其他玩家
             for ( int i = 0; i < valueAllOldObjectList.GetCount(); i++ )
             {
-                NFIDENTID identBC = valueAllOldObjectList.ObjectVal( i );
+                NFIDENTID identBC = valueAllOldObjectList.Object( i );
 
-                if(valueAllOldObjectList.ObjectVal(i) == self)
+                if(valueAllOldObjectList.Object(i) == self)
                 {
-                    valueAllOldObjectList.SetObject(i, 0);
+                    valueAllOldObjectList.Set(i, NFIDENTID(0));
                 }
 
                 const std::string& strClassName = m_pKernelModule->GetPropertyString( identBC, "ClassName" );
                 if ( "Player" == strClassName )
                 {
-                    valueAllOldPlayerList.AddObject(identBC );
+                    valueAllOldPlayerList.Add(identBC );
                 }
             }
 
@@ -1371,20 +1371,20 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const st
         m_pKernelModule->GetGroupObjectList( nSceneID, nNewGroupID, valueNewObjectList );
         for ( int i = 0; i < valueNewObjectList.GetCount(); i++ )
         {
-            NFIDENTID identBC = valueNewObjectList.ObjectVal( i );
+            NFIDENTID identBC = valueNewObjectList.Object( i );
             const std::string& strClassName = m_pKernelModule->GetPropertyString( identBC, "ClassName" );
             if ( "Player" == strClassName )
             {
-                valueBroadCaseList.AddObject( identBC );
+                valueBroadCaseList.Add( identBC );
                 if (identBC != self)
                 {
-                    valueBroadCaseListNoSelf.AddObject( identBC );
+                    valueBroadCaseListNoSelf.Add( identBC );
                 }
             }
 
             if (identBC != self)
             {
-                valueNewObjectListNoSelf.AddObject( identBC );
+                valueNewObjectListNoSelf.Add( identBC );
             }
         }
 
@@ -1404,7 +1404,7 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const st
         {
             //此时不用再广播自己的属性给自己
             //把已经存在的人的属性广播给新来的人
-            NFIDENTID identOld = valueNewObjectListNoSelf.ObjectVal( i );
+            NFIDENTID identOld = valueNewObjectListNoSelf.Object( i );
             OnPropertyEnter( identOld, NFCDataList() << self );
             //把已经存在的人的表广播给新来的人
             OnRecordEnter( identOld, NFCDataList() << self );
@@ -1442,29 +1442,29 @@ int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, cons
 
     for ( int i = 0; i < valueOldAllObjectList.GetCount(); i++ )
     {
-        NFIDENTID identBC = valueOldAllObjectList.ObjectVal( i );
+        NFIDENTID identBC = valueOldAllObjectList.Object( i );
         if (identBC == self)
         {
-            valueOldAllObjectList.SetObject(i, 0);
+            valueOldAllObjectList.Set(i, NFIDENTID(0));
         }
     }
 
     for ( int i = 0; i < valueNewAllObjectList.GetCount(); i++ )
     {
-        NFIDENTID identBC = valueNewAllObjectList.ObjectVal( i );
+        NFIDENTID identBC = valueNewAllObjectList.Object( i );
         const std::string& strClassName = m_pKernelModule->GetPropertyString( identBC, "ClassName" );
         if ( "Player" == strClassName )
         {
-            valueBroadCaseList.AddObject( identBC );
+            valueBroadCaseList.Add( identBC );
             if (identBC != self)
             {
-                valueBroadListNoSelf.AddObject( identBC );
+                valueBroadListNoSelf.Add( identBC );
             }
         }
 
         if (identBC != self)
         {
-            valueAllObjectListNoSelf.AddObject( identBC );
+            valueAllObjectListNoSelf.Add( identBC );
         }
     }
     //////////////////////////////////////////////////////////////////////////
@@ -1492,7 +1492,7 @@ int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, cons
     ////////////////////把已经存在的人的属性广播给新来的人//////////////////////////////////////////////////////
     for ( int i = 0; i < valueAllObjectListNoSelf.GetCount(); i++ )
     {
-        NFIDENTID identOld = valueAllObjectListNoSelf.ObjectVal( i );
+        NFIDENTID identOld = valueAllObjectListNoSelf.Object( i );
         OnPropertyEnter( identOld, NFCDataList() << self );
         ////////////////////把已经存在的人的表广播给新来的人//////////////////////////////////////////////////////
         OnRecordEnter( identOld, NFCDataList() << self );
@@ -1556,7 +1556,7 @@ int NFCGameServerNet_ServerModule::GetBroadCastObject( const NFIDENTID& self, co
             }
             else if ( pRecord->GetPrivate() )
             {
-                valueObject.AddObject( self );
+                valueObject.Add( self );
             }
         }
         else
@@ -1567,7 +1567,7 @@ int NFCGameServerNet_ServerModule::GetBroadCastObject( const NFIDENTID& self, co
             }
             else if ( pProperty->GetPrivate() )
             {
-                valueObject.AddObject( self );
+                valueObject.Add( self );
             }
         }
         //一个玩家都不广播
@@ -1601,10 +1601,10 @@ int NFCGameServerNet_ServerModule::GetBroadCastObject( const int nObjectContaine
     m_pKernelModule->GetGroupObjectList( nObjectContainerID, nGroupID, valContainerObjectList );
     for ( int i  = 0; i < valContainerObjectList.GetCount(); i++ )
     {
-        const std::string& strObjClassName = m_pKernelModule->GetPropertyString( valContainerObjectList.ObjectVal( i ), "ClassName" );
+        const std::string& strObjClassName = m_pKernelModule->GetPropertyString( valContainerObjectList.Object( i ), "ClassName" );
         if ( "Player" == strObjClassName )
         {
-            valueObject.AddObject( valContainerObjectList.ObjectVal( i ) );
+            valueObject.Add( valContainerObjectList.Object( i ) );
         }
     }
 

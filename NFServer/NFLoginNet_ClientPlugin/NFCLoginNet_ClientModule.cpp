@@ -81,10 +81,10 @@ int NFCLoginNet_ClientModule::OnSelectServerEvent(const NFIDENTID& object, const
 		return -1;
 	}
 
-	int nServerID = var.IntVal(0);
-	int nSenderAddress = var.IntVal(1);
-	int nLoginID = var.IntVal(2);
-	const std::string& strAccount = var.StringVal(3);
+	int nServerID = var.Int(0);
+	int nSenderAddress = var.Int(1);
+	int nLoginID = var.Int(2);
+	const std::string& strAccount = var.String(3);
 
 	NFMsg::ReqConnectWorld xData;
 	xData.set_world_id(nServerID);
