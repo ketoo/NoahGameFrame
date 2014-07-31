@@ -43,13 +43,23 @@ public:
 
     virtual ~ElementConfigInfo()
     {
-        delete m_pComponentManager;
-        delete m_pRecordManager;
-        delete m_pPropertyManager;
-
-        m_pComponentManager = NULL;
-        m_pRecordManager = NULL;
-        m_pPropertyManager = NULL;
+        if (NULL != m_pComponentManager)
+        {
+            delete m_pComponentManager;
+            m_pComponentManager = NULL;
+        }
+        
+        if (NULL != m_pRecordManager)
+        {
+            delete m_pRecordManager;
+            m_pRecordManager = NULL;
+        }
+        
+        if (NULL != m_pPropertyManager)
+        {
+            delete m_pPropertyManager;
+            m_pPropertyManager = NULL;
+        }
     }
 
     NFIPropertyManager* GetPropertyManager()
