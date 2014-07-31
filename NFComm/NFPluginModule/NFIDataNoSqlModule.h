@@ -11,7 +11,7 @@
 
 #include <set>
 #include "NFComm/Config/NFConfig.h"
-#include "NFComm/NFCore/NFCValueList.h"
+#include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
 
 class NFIDataNoSqlDriver

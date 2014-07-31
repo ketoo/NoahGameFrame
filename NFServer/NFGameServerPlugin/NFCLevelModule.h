@@ -40,13 +40,13 @@ public:
 
 protected:
 
-    int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var );
+    int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    int OnObjectExpEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar );
+    int OnObjectExpEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
 
-    int OnObjectBeKilled( const NFIDENTID& object, const int nEventID, const NFIValueList& var );
+    int OnObjectBeKilled( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
 
-    int OnObjectLevelEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar );
+    int OnObjectLevelEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
 
 private:
     NFIPropertyConfigModule* m_pPropertyConfigModule;
