@@ -8,7 +8,7 @@
 
 //#include "stdafx.h"
 #include "NFCGridModule.h"
-#include "NFComm/NFCore/NFCValueList.h"
+#include "NFComm/NFCore/NFCDataList.h"
 
 NFCGridModule::NFCGridModule(const int& sceneID, const int nSceneWidth)
 {
@@ -80,13 +80,13 @@ const NFIDENTID NFCGridModule::GetStepLenth(const NFIDENTID& selfGrid, const NFI
     return abs(otherGrid.nIdent - selfGrid.nIdent) + abs(otherGrid.nSerial - selfGrid.nSerial);
 }
 
-const int NFCGridModule::GetAroundGrid(const NFIDENTID& selfGrid, NFIValueList& gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+const int NFCGridModule::GetAroundGrid(const NFIDENTID& selfGrid, NFIDataList& gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
 {
     NFCSceneGridInfo* pGridInfo = GetGridInfo(selfGrid);
     return GetAroundGrid(pGridInfo, gridList, eAround);
 }
 
-const int NFCGridModule::GetAroundGrid(NFCSceneGridInfo* pGridInfo, NFIValueList& gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+const int NFCGridModule::GetAroundGrid(NFCSceneGridInfo* pGridInfo, NFIDataList& gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
 {
     int nObjectCount = 0;
 
@@ -128,7 +128,7 @@ const int NFCGridModule::GetAroundGrid(NFCSceneGridInfo* pGridInfo, NFIValueList
     return nObjectCount;
 }
 
-const int NFCGridModule::GetAroundObject(const NFIDENTID& selfGrid, NFIValueList& objectList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+const int NFCGridModule::GetAroundObject(const NFIDENTID& selfGrid, NFIDataList& objectList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
 {
     NFCSceneGridInfo* pGridInfo = GetGridInfo(selfGrid);
     if (pGridInfo)
@@ -138,14 +138,14 @@ const int NFCGridModule::GetAroundObject(const NFIDENTID& selfGrid, NFIValueList
     return 0;
 }
 
-const int NFCGridModule::GetAroundObject(NFCSceneGridInfo* pGridInfo, NFIValueList& objectList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+const int NFCGridModule::GetAroundObject(NFCSceneGridInfo* pGridInfo, NFIDataList& objectList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
 {
     if (!pGridInfo)
     {
         return 0;
     }
 
-    NFCValueList gridList;
+    NFCDataList gridList;
     if (GetAroundGrid(pGridInfo, gridList, eAround) > 0)
     {
         for (int i = 0; i < gridList.GetCount(); i++)

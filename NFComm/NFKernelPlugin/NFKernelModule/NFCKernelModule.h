@@ -15,7 +15,7 @@
 #include <boost/random.hpp>
 #include "NFComm/NFCore/NFIdentID.h"
 #include "NFComm/NFCore/NFCObject.h"
-#include "NFComm/NFCore/NFCValueList.h"
+#include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -54,7 +54,7 @@ public:
     virtual void SetIdentID(NFINT32 nID);
     virtual NFINT32 GetIdentID();
 
-    virtual int Command(const NFIValueList& var);
+    virtual int Command(const NFIDataList& var);
 
     virtual bool IsContainer(const NFIDENTID& self);
 
@@ -64,7 +64,7 @@ public:
 
     virtual NFIObject* GetObject(const NFIDENTID& ident);
 
-    virtual NFIObject* CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIValueList& arg);
+    virtual NFIObject* CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg);
 
     virtual bool DestroyObject(const NFIDENTID& self);
 
@@ -119,10 +119,10 @@ public:
     virtual const std::string& GetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
     virtual NFIDENTID GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
 
-    virtual bool SwitchScene(const NFIDENTID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIValueList& arg);
+    virtual bool SwitchScene(const NFIDENTID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIDataList& arg);
 
     virtual bool AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction);
-    virtual bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& TData, const NFIValueList& varKey, const NFIValueList& varDesc, const NFIValueList& varTag, const NFIValueList& varRelatedRecord, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex);
+    virtual bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& varKey, const NFIDataList& varDesc, const NFIDataList& varTag, const NFIDataList& varRelatedRecord, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex);
     ////////////////////////////////////////////////////////////////
 
     virtual NFIDENTID CreateContainer(const int nContainerIndex, const std::string& strSceneConfigID);
@@ -137,30 +137,30 @@ public:
 
     virtual int GetContainerOnLineCount(const int nContainerID, const int nGroupID);
 
-    virtual int GetContainerOnLineList(const int nContainerID, NFIValueList& var);
-    virtual int GetAllContainerObjectList(NFIValueList& var);
+    virtual int GetContainerOnLineList(const int nContainerID, NFIDataList& var);
+    virtual int GetAllContainerObjectList(NFIDataList& var);
 
     virtual int RequestGroupScene(const int nContainerID);
 
-    //virtual int AddObjectToGroup(const int nContainerID,const int nGroupID, const NFIValueList& var);
+    //virtual int AddObjectToGroup(const int nContainerID,const int nGroupID, const NFIDataList& var);
 
     virtual bool ReleaseGroupScene(const int nContainerID, const int nGroupID);
 
-    virtual bool GetGroupObjectList(const int nContainerID, const int nGroupID, NFIValueList& list);
+    virtual bool GetGroupObjectList(const int nContainerID, const int nGroupID, NFIDataList& list);
 
     virtual NFIDENTID GetGridID(const float fX, const float fY, const float fZ);
 
-    virtual bool GetAroundGrid(const int nContainerID, const int nGroupID, const NFIDENTID nGridID, NFIValueList& list);
+    virtual bool GetAroundGrid(const int nContainerID, const int nGroupID, const NFIDENTID nGridID, NFIDataList& list);
 
-    virtual bool GetGridObjectList(const int nContainerID, const int nGroupID, const NFIDENTID nGridID, NFIValueList& list);
+    virtual bool GetGridObjectList(const int nContainerID, const int nGroupID, const NFIDENTID nGridID, NFIDataList& list);
 
-    virtual bool GetRangObjectList(const NFIDENTID& self, const int nContainerID, const int nGroupID, const float fRang, NFIValueList& list);
+    virtual bool GetRangObjectList(const NFIDENTID& self, const int nContainerID, const int nGroupID, const float fRang, NFIDataList& list);
 
-    virtual bool GetRangObjectList(const float fX, const float fY, const float fZ, const int nContainerID, const int nGroupID, const float fRang, NFIValueList& list);
+    virtual bool GetRangObjectList(const float fX, const float fY, const float fZ, const int nContainerID, const int nGroupID, const float fRang, NFIDataList& list);
 
-    virtual int GetObjectByProperty(const int nContainerID, const std::string& strPropertyName, const NFIValueList& valueArgArg, NFIValueList& list);
+    virtual int GetObjectByProperty(const int nContainerID, const std::string& strPropertyName, const NFIDataList& valueArgArg, NFIDataList& list);
 
-    virtual void Random(int nStart, int nEnd, int nCount, NFIValueList& valueList);
+    virtual void Random(int nStart, int nEnd, int nCount, NFIDataList& valueList);
 
     //////////////////////////////////////////////////////////////////////////
     virtual bool LogStack();
@@ -193,19 +193,19 @@ protected:
 
     virtual bool AddRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb);
     virtual bool AddPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const PROPERTY_EVENT_FUNCTOR_PTR& cb);
-    virtual bool AddHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIValueList& var, const float fTime, const int nCount);
+    virtual bool AddHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIDataList& var, const float fTime, const int nCount);
 
 protected:
     void InitRandom();
 
 protected:
 
-    int OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var);
-    int OnPropertyCommonEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar);
-    int OnRecordCommonEvent(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& arg);
+    int OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+    int OnPropertyCommonEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar);
+    int OnRecordCommonEvent(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& arg);
 
-//     int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var);
-//     int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIValueList& var);
+//     int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var);
+//     int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIDataList& var);
 
 protected:
 

@@ -134,14 +134,14 @@ int NFCWorldNet_ClientModule::OnSelectServerProcess(const NFIPacket& msg)
 		return 0;
 	}
 
-    NFCValueList var;
+    NFCDataList var;
     var << xMsg.world_id() << xMsg.sender_ip()  << xMsg.login_id() << xMsg.account();
     m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_SELECT_SERVER, var);
 
     return 0;
 }
 
-int NFCWorldNet_ClientModule::OnSelectServerResultsEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
+int NFCWorldNet_ClientModule::OnSelectServerResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
     if (var.GetCount() != 7
         || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT,
@@ -184,7 +184,7 @@ int NFCWorldNet_ClientModule::OnKickClientProcess(const NFIPacket& msg)
 	}
 
     //T»À,œ¬œﬂ
-    NFCValueList var;
+    NFCDataList var;
     var << xMsg.world_id() << xMsg.account();
     m_pEventProcessModule->DoEvent(0, NFED_ON_KICK_FROM_SERVER, var);
     return 0;

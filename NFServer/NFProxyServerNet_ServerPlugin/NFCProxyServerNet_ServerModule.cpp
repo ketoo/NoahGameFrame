@@ -63,7 +63,7 @@ bool NFCProxyServerNet_ServerModule::Execute(const float fLasFrametime, const fl
     return m_pNet->Execute(fLasFrametime, fStartedTime);
 }
 
-int NFCProxyServerNet_ServerModule::HB_OnConnectCheckTime( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var )
+int NFCProxyServerNet_ServerModule::HB_OnConnectCheckTime( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var )
 {
     m_pKernelModule->DestroyObject(self);
 

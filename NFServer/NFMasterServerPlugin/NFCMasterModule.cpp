@@ -38,13 +38,13 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 //     char szContent[MAX_PATH] = { 0 };
 //     if (kbhit() && gets(szContent))
 //     {
-//         NFCValueList val(szContent, ",");
+//         NFCDataList val(szContent, ",");
 //         if (val.GetCount() > 0)
 //         {
 //             const std::string& strCmd = val.StringVal(0);
 //             if ("listworldserver" == strCmd)
 //             {
-//                 NFCValueList valOobjectList;
+//                 NFCDataList valOobjectList;
 //                 int nCount = m_pKernelModule->GetContainerOnLineList(-2, valOobjectList);
 //                 for (int i = 0; i < nCount; i++)
 //                 {
@@ -62,7 +62,7 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 //             }
 //             else if ("listloginserver" == strCmd)
 //             {
-//                 NFCValueList valOobjectList;
+//                 NFCDataList valOobjectList;
 //                 int nCount = m_pKernelModule->GetContainerOnLineList(-1, valOobjectList);
 //                 for (int i = 0; i < nCount; i++)
 //                 {
@@ -80,7 +80,7 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 //             }
 //             else if ("listcontainer" == strCmd)
 //             {
-//                 //              NFCValueList valOobjectList;
+//                 //              NFCDataList valOobjectList;
 //                 //              int nCount= m_pKernelModule->GetContainerOnLineList( mnLoginContranerID, valOobjectList );
 //                 //              for ( int i = 0; i < nCount; i++ )
 //                 //              {
@@ -98,7 +98,7 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 //             }
 //             else if ("listobject" == strCmd)
 //             {
-//                 //              NFCValueList valOobjectList;
+//                 //              NFCDataList valOobjectList;
 //                 //              int nCount= m_pKernelModule->GetContainerOnLineList( mnLoginContranerID, valOobjectList );
 //                 //              for ( int i = 0; i < nCount; i++ )
 //                 //              {
