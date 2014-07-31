@@ -97,7 +97,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
         return false;
     }
 
-    ElementConfigInfo* pElementInfo = new ElementConfigInfo();
+    ElementConfigInfo* pElementInfo = NF_NEW ElementConfigInfo();
     AddElement(strConfigID, pElementInfo);
 
     //can find all configid by class name
