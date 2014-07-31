@@ -47,12 +47,12 @@ public:
     virtual void SetPrivate(bool bPrivate);
     virtual void SetScriptFunction(const std::string& strScriptFunction);
 
-    virtual int QueryInt() const;
-    virtual float QueryFloat() const;
-    virtual double QueryDouble() const;
-    virtual const std::string& QueryString() const;
-    virtual NFIDENTID QueryObject() const;
-    virtual void* QueryPointer() const;
+    virtual int GetInt() const;
+    virtual float GetFloat() const;
+    virtual double GetDouble() const;
+    virtual const std::string& GetString() const;
+    virtual NFIDENTID GetObject() const;
+    virtual void* GetPointer() const;
 
     virtual bool Changed() const;
 
