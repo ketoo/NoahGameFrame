@@ -25,10 +25,29 @@ NFCObject::NFCObject(const NFIDENTID& self, NFIPluginManager* pLuginManager)
 
 NFCObject::~NFCObject()
 {
-    delete m_pComponentManager;
-    delete m_pPropertyManager;
-    delete m_pRecordManager;
-    delete m_pHeartBeatManager;
+    if (NULL != m_pComponentManager)
+    {
+        delete m_pComponentManager;
+        m_pComponentManager = NULL;
+    }
+    
+    if (NULL != m_pPropertyManager)
+    {
+        delete m_pPropertyManager;
+        m_pPropertyManager = NULL;
+    }
+    
+    if (NULL != m_pRecordManager)
+    {
+        delete m_pRecordManager;
+        m_pRecordManager = NULL;
+    }
+    
+    if (NULL != m_pHeartBeatManager)
+    {
+        delete m_pHeartBeatManager;
+        m_pHeartBeatManager = NULL;
+    }
 }
 
 bool NFCObject::Init()
