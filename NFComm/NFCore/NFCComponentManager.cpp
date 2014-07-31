@@ -21,7 +21,7 @@ NFIComponent* NFCComponentManager::AddComponent( const std::string& strComponent
         return NULL;
     }
 
-    pComponent = new NFCComponent(mSelf, strComponentName, strLanguageName);
+    pComponent = NF_NEW NFCComponent(mSelf, strComponentName, strLanguageName);
     AddElement(strComponentName, pComponent);
 
     return pComponent;
@@ -43,7 +43,7 @@ bool NFCComponentManager::SetEnable( const std::string& strComponentName, const 
     return false;
 }
 
-bool NFCComponentManager::QueryEnable( const std::string& strComponentName )
+bool NFCComponentManager::Enable( const std::string& strComponentName )
 {
     NFIComponent* pComponent = GetElement(strComponentName);
     if (pComponent)

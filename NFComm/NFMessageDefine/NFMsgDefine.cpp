@@ -225,7 +225,7 @@
 //                {
 //                    NFMsg::PropertyInt* propertyInt = propertyDB.add_property_int_list();
 //                    propertyInt->set_property_name( pProperty->GetKey() );
-//                    propertyInt->set_data( pProperty->QueryInt() );
+//                    propertyInt->set_data( pProperty->GetInt() );
 //                }
 //
 //                break;
@@ -233,21 +233,21 @@
 //                {
 //                    NFMsg::PropertyFloat* propertyFloat = propertyDB.add_property_float_list();
 //                    propertyFloat->set_property_name( pProperty->GetKey() );
-//                    propertyFloat->set_data( pProperty->QueryFloat() );
+//                    propertyFloat->set_data( pProperty->GetFloat() );
 //                }
 //                break;
 //            case TDATA_STRING:
 //                {
 //                    NFMsg::PropertyString* propertyString = propertyDB.add_property_string_list();
 //                    propertyString->set_property_name( pProperty->GetKey() );
-//                    propertyString->set_data( pProperty->QueryString() );
+//                    propertyString->set_data( pProperty->GetString() );
 //                }
 //                break;
 //            case TDATA_OBJECT:
 //                {
 //                    NFMsg::PropertyObject* propertyObject = propertyDB.add_property_object_list();
 //                    propertyObject->set_property_name( pProperty->GetKey() );
-//                    propertyObject->set_data( pProperty->QueryObject().nData64 );
+//                    propertyObject->set_data( pProperty->GetObject().nData64 );
 //                }
 //                break;
 //            default:
