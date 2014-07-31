@@ -80,10 +80,10 @@ protected:
     //////////////////////////////////////////////////////////////////////////
 
     //选择大世界结果(发下key等给客户端)
-    int OnSelectWorldResultsEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
+    int OnSelectWorldResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
 
     //登入结果
-    int OnLoginResultsEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
+    int OnLoginResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
 
 
 protected:

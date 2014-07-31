@@ -51,7 +51,7 @@ protected:
 
 protected:
 
-    int OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
+    int OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
 protected:
 
 	bool InThisWorld(const std::string& strAccount);

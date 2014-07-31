@@ -43,7 +43,7 @@ protected:
     virtual void HandlerLog(const NFIActorMessage& message, const Theron::Address from);
 
 protected:
-    int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var );
+    int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
     virtual int LoadProperty( const NFIDENTID& self, NFIPropertyManager* pProManager );
     virtual int LoadRecord( const NFIDENTID& self, NFIRecordManager* pRecord );
