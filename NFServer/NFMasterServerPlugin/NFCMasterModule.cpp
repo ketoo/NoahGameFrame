@@ -41,14 +41,14 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 //         NFCDataList val(szContent, ",");
 //         if (val.GetCount() > 0)
 //         {
-//             const std::string& strCmd = val.StringVal(0);
+//             const std::string& strCmd = val.String(0);
 //             if ("listworldserver" == strCmd)
 //             {
 //                 NFCDataList valOobjectList;
 //                 int nCount = m_pKernelModule->GetContainerOnLineList(-2, valOobjectList);
 //                 for (int i = 0; i < nCount; i++)
 //                 {
-//                     NFIDENTID ident = valOobjectList.ObjectVal(i);
+//                     NFIDENTID ident = valOobjectList.Object(i);
 // 
 //                     char szInfo[MAX_PATH] = { 0 };
 //                     sprintf_s(szInfo, "WorldID:%d, WorldName:%s, WorldMaxOnline:%d, WorldOnlineCount:%d",
@@ -66,7 +66,7 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 //                 int nCount = m_pKernelModule->GetContainerOnLineList(-1, valOobjectList);
 //                 for (int i = 0; i < nCount; i++)
 //                 {
-//                     NFIDENTID ident = valOobjectList.ObjectVal(i);
+//                     NFIDENTID ident = valOobjectList.Object(i);
 // 
 //                     char szInfo[MAX_PATH] = { 0 };
 //                     sprintf_s(szInfo, "LoginID:%d, LoginName:%s, LoginMaxOnline:%d, LoginOnlineCount:%d",
@@ -84,7 +84,7 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 //                 //              int nCount= m_pKernelModule->GetContainerOnLineList( mnLoginContranerID, valOobjectList );
 //                 //              for ( int i = 0; i < nCount; i++ )
 //                 //              {
-//                 //                  NFIDENTID ident = valOobjectList.ObjectVal(i);
+//                 //                  NFIDENTID ident = valOobjectList.Object(i);
 //                 //
 //                 //                  char szInfo[MAX_PATH] = { 0 };
 //                 //                  sprintf_s( szInfo, "LoginID:%d, LoginName:%s, LoginMaxOnline:%d, LoginOnlineCount:%d",
@@ -102,7 +102,7 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 //                 //              int nCount= m_pKernelModule->GetContainerOnLineList( mnLoginContranerID, valOobjectList );
 //                 //              for ( int i = 0; i < nCount; i++ )
 //                 //              {
-//                 //                  NFIDENTID ident = valOobjectList.ObjectVal(i);
+//                 //                  NFIDENTID ident = valOobjectList.Object(i);
 //                 //
 //                 //                  char szInfo[MAX_PATH] = { 0 };
 //                 //                  sprintf_s( szInfo, "LoginID:%d, LoginName:%s, LoginMaxOnline:%d, LoginOnlineCount:%d",

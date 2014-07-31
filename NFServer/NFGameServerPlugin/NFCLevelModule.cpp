@@ -117,7 +117,7 @@ int NFCLevelModule::OnObjectBeKilled( const NFIDENTID& object, const int nEventI
 {
     if ( var.GetCount() == 1 && var.Type( 0 ) == TDATA_OBJECT )
     {
-        NFIDENTID identKiller = var.ObjectVal( 0 );
+        NFIDENTID identKiller = var.Object( 0 );
         if ( m_pKernelModule->GetObject( identKiller ) )
         {
             int nExp = m_pKernelModule->GetPropertyInt( object, "EXP" );

@@ -11,9 +11,9 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
-#include "NFComm/NFCore/NFCValueList.h"
-#include "NFComm/NFCore/NFCPropertyManager.h"
-#include "NFComm/NFCore/NFCRecordManager.h"
+#include "NFComm/NFCore/NFIDataList.h"
+#include "NFComm/NFCore/NFIPropertyManager.h"
+#include "NFComm/NFCore/NFIRecordManager.h"
 #include "NFComm/NFCore/NFIComponentManager.h"
 
 class NFIElementInfoModule

@@ -211,43 +211,43 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCL
                     bool bKey = boost::lexical_cast<int>(pstrKey);
                     if (bKey)
                     {
-                        recordKey.AddInt(1);
+                        recordKey.Add(1);
                     }
                     else
                     {
-                        recordKey.AddInt(0);
+                        recordKey.Add(0);
                     }
                 }
 
                 if (recordColNode->first_attribute("Tag") != NULL)
                 {
                     const char* pstrTag = recordColNode->first_attribute("Tag")->value();
-                    recordTag.AddString(pstrTag);
+                    recordTag.Add(pstrTag);
                 }
                 else
                 {
-                    recordTag.AddString("");
+                    recordTag.Add("");
                 }
 
                 if (recordColNode->first_attribute("RelateRecord") != NULL)
                 {
                     std::string strRelationRecord = recordColNode->first_attribute("RelatedRecord")->value();
-                    recordRelation.AddString(strRelationRecord.c_str());
+                    recordRelation.Add(strRelationRecord.c_str());
                 }
                 else
                 {
-                    recordRelation.AddString("");
+                    recordRelation.Add("");
                 }
 
                 //////////////////////////////////////////////////////////////////////////
                 if (recordColNode->first_attribute("Desc"))
                 {
                     const char* pstrColDesc = recordColNode->first_attribute("Desc")->value();
-                    recordDesc.AddString(pstrColDesc);
+                    recordDesc.Add(pstrColDesc);
                 }
                 else
                 {
-                    recordDesc.AddString("");
+                    recordDesc.Add("");
                 }
 
                 //////////////////////////////////////////////////////////////////////////

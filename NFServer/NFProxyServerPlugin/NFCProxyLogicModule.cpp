@@ -33,7 +33,7 @@ bool NFCProxyLogicModule::Execute(const float fLasFrametime, const float fStarte
     //         NFCDataList val(szContent, ",");
     //         if (val.GetCount() > 0)
     //         {
-    //             //const char* pstrCmd = val.StringVal( 0 );
+    //             //const char* pstrCmd = val.String( 0 );
     //             m_pKernelModule->Command(val);
     //
     //         }
