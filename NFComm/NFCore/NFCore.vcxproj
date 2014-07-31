@@ -109,7 +109,6 @@
     <ClInclude Include="NFSingleton.h" />
     <ClInclude Include="NFCore.h" />
     <ClInclude Include="NFCRecord.h" />
-    <ClInclude Include="NFCValueList.h" />
     <ClInclude Include="NFDefine.h" />
     <ClInclude Include="NFIdentID.h" />
     <ClInclude Include="NFIObject.h" />
@@ -117,7 +116,6 @@
     <ClInclude Include="NFIPropertyManager.h" />
     <ClInclude Include="NFIRecord.h" />
     <ClInclude Include="NFIRecordManager.h" />
-    <ClInclude Include="NFIValueList.h" />
     <ClInclude Include="NFList.h" />
     <ClInclude Include="NFMap.h" />
     <ClInclude Include="NFPlatform.h" />
@@ -134,7 +132,6 @@
     <ClCompile Include="NFCRecordManager.cpp" />
     <ClCompile Include="NFCore.cpp" />
     <ClCompile Include="NFCRecord.cpp" />
-    <ClCompile Include="NFCValueList.cpp" />
     <ClCompile Include="NFTimer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
