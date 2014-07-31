@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
-#include "NFComm\NFCore\NFCValueList.h"
+#include "NFComm\NFCore\NFCDataList.h"
 #include "NFComm\NFCore\NFIdentID.h"
 #include "NFComm\NFPluginModule\NFIElementInfoModule.h"
 #include "NFComm\NFPluginModule\NFIKernelModule.h"
@@ -119,7 +119,7 @@ public:
 
     }
 
-    NFCScriptVarList(const NFIValueList& varList)
+    NFCScriptVarList(const NFIDataList& varList)
     {
         mVar = varList;
     }
@@ -206,14 +206,14 @@ public:
     }
 
     //////////dont't export this function////////////////////////////////////////////////////////////////
-    const NFIValueList& GetVar() const
+    const NFIDataList& GetVar() const
     {
         return mVar;
     }
 
 protected:
 private:
-    NFCValueList mVar;
+    NFCDataList mVar;
 };
 
 
@@ -241,11 +241,11 @@ class NFIScriptKernelModule : public NFMap<NFIDENTID, NFCSriptData>
 
     virtual bool AddEventCallBack(const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction) = 0;
 
-    virtual int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIValueList& var) = 0;
+    virtual int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIDataList& var) = 0;
 
     virtual bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, const std::string& strComponentName, const std::string& strFunction, const float fTime, const int nCount) = 0;
 
-    virtual int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var) = 0;
+    virtual int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var) = 0;
 
     virtual bool FindHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName) = 0;
 

@@ -19,7 +19,7 @@
 #include "NFComm/RapidXML/rapidxml_iterators.hpp"
 #include "NFComm/RapidXML/rapidxml_print.hpp"
 #include "NFComm/RapidXML/rapidxml_utils.hpp"
-#include "NFComm/NFCore/NFCValueList.h"
+#include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
 #include "NFComm/NFCore/NFList.h"
 #include "NFComm/NFCore/NFCPropertyManager.h"
@@ -162,7 +162,7 @@ public:
     virtual bool AddClass(const std::string& strClassName, const std::string& strParentName);
 protected:
 
-    virtual TDATA_TYPE ComputerType(const char* pstrTypeName, NFIValueList::TData& var);
+    virtual TDATA_TYPE ComputerType(const char* pstrTypeName, NFIDataList::TData& var);
     virtual bool AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NFCLogicClass* pClass);
     virtual bool AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCLogicClass* pClass);
     virtual bool AddComponents(rapidxml::xml_node<>* pRecordRootNode, NFCLogicClass* pClass);
