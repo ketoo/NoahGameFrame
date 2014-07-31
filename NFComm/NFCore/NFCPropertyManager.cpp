@@ -15,9 +15,12 @@ NFCPropertyManager::~NFCPropertyManager()
     while (pProperty)
     {
         delete pProperty;
+        pProperty = NULL;
 
         pProperty = this->Next();
     }
+
+    ClearAll();
 }
 
 bool NFCPropertyManager::RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIValueList& argVar)

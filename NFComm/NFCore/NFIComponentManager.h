@@ -16,6 +16,7 @@
 class NFIComponentManager : public NFILogicModule, public NFMap<std::string, NFIComponent>
 {
 public:
+    virtual ~NFIComponentManager() {}
     virtual NFIComponent* AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
     virtual NFIComponent* FindComponent(const std::string& strComponentName) = 0;
 

@@ -18,9 +18,39 @@ NFCEventProcessModule::~NFCEventProcessModule()
 {
     if (NULL != m_pClassEventInfoEx)
     {
+        NFClassEventList* pClassEventList = m_pClassEventInfoEx->First();
+        while (NULL != pClassEventList)
+        {
+            delete pClassEventList;
+            pClassEventList = NULL;
+
+            pClassEventList = m_pClassEventInfoEx->Next();
+        }
+
+        m_pClassEventInfoEx->ClearAll();
         delete m_pClassEventInfoEx;
         m_pClassEventInfoEx = NULL;
     }
+
+    NFList<int>* pRemoveEvent = mRemoveEventListEx.First();
+    while (NULL != pRemoveEvent)
+    {
+        pRemoveEvent->ClearAll();
+
+        delete pRemoveEvent;
+        pRemoveEvent = NULL;
+        pRemoveEvent = mRemoveEventListEx.Next();
+    }
+    mRemoveEventListEx.ClearAll();
+
+    NFCObjectEventInfo* pObjectEventInfo = mObjectEventInfoMapEx.First();
+    while (pObjectEventInfo)
+    {
+        delete pObjectEventInfo;
+        pObjectEventInfo = NULL;
+        pObjectEventInfo = mObjectEventInfoMapEx.Next();
+    }
+    mObjectEventInfoMapEx.ClearAll();
 }
 
 bool NFCEventProcessModule::Init()

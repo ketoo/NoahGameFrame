@@ -44,6 +44,7 @@ NFCKernelModule::~NFCKernelModule()
         if (pSceneObject)
         {
             delete pSceneObject;
+            pSceneObject = NULL;
         }
 
         pContainerInfo->ClearAll();
@@ -55,6 +56,7 @@ NFCKernelModule::~NFCKernelModule()
 
     m_pContainerModule->ClearAll();
     delete m_pContainerModule;
+    m_pContainerModule = NULL;
 }
 
 void NFCKernelModule::InitRandom()
@@ -475,9 +477,9 @@ bool NFCKernelModule::DestroyObject(const NFIDENTID& self)
                     //m_pLogModule->LogObject(NFILogModule::NLL_INFO_NORMAL, self, "Destroy object successed", __FUNCTION__, __LINE__);
                     pObject->Shut();
                     delete pObject;
+                    pObject = NULL;
 
                     m_pEventProcessModule->RemoveEvent(self);
-
                 }
 
                 return true;
