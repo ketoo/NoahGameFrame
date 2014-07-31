@@ -57,19 +57,19 @@ public:
 
     virtual bool SwapRowInfo(const int nOriginRow, const int nTargetRow);
 
-    virtual int QueryInt(const int nRow, const int nCol) const;
-    virtual float QueryFloat(const int nRow, const int nCol) const;
-    virtual double QueryDouble(const int nRow, const int nCol) const;
-    virtual const std::string& QueryString(const int nRow, const int nCol) const;
-    virtual NFIDENTID QueryObject(const int nRow, const int nCol) const;    
-    virtual void* QueryPointer(const int nRow, const int nCol) const;
+    virtual int GetInt(const int nRow, const int nCol) const;
+    virtual float GetFloat(const int nRow, const int nCol) const;
+    virtual double GetDouble(const int nRow, const int nCol) const;
+    virtual const std::string& GetString(const int nRow, const int nCol) const;
+    virtual NFIDENTID GetObject(const int nRow, const int nCol) const;    
+    virtual void* GetPointer(const int nRow, const int nCol) const;
 
-    virtual int QueryInt(const int nRow, const std::string& strColTag) const;
-    virtual float QueryFloat(const int nRow, const std::string& strColTag) const;
-    virtual double QueryDouble(const int nRow, const std::string& strColTag) const;
-    virtual const std::string& QueryString(const int nRow, const std::string& strColTag) const;
-    virtual NFIDENTID QueryObject(const int nRow, const std::string& strColTag) const;
-    virtual void* QueryPointer(const int nRow, const std::string& strColTag) const;
+    virtual int GetInt(const int nRow, const std::string& strColTag) const;
+    virtual float GetFloat(const int nRow, const std::string& strColTag) const;
+    virtual double GetDouble(const int nRow, const std::string& strColTag) const;
+    virtual const std::string& GetString(const int nRow, const std::string& strColTag) const;
+    virtual NFIDENTID GetObject(const int nRow, const std::string& strColTag) const;
+    virtual void* GetPointer(const int nRow, const std::string& strColTag) const;
 
     virtual int FindRowByColValue(const int nCol, const NFIValueList& var, NFIValueList& varResult);
     virtual int FindInt(const int nCol, const int value, NFIValueList& varResult);
