@@ -63,19 +63,19 @@ public:
     virtual bool QueryRow(const int nRow, NFIValueList& varList) = 0;
     virtual bool SwapRowInfo(const int nOriginRow, const int nTargetRow) = 0;
 
-    virtual int QueryInt(const int nRow, const int nCol) const = 0;
-    virtual float QueryFloat(int const nRow, const int nCol) const = 0;
-    virtual double QueryDouble(const int nRow, const int nCol) const = 0;
-    virtual const std::string& QueryString(const int nRow, const int nCol) const = 0;
-    virtual NFIDENTID QueryObject(const int nRow, const int nCol) const = 0;
-    virtual void* QueryPointer(const int nRow, const int nCol) const = 0;
+    virtual int GetInt(const int nRow, const int nCol) const = 0;
+    virtual float GetFloat(int const nRow, const int nCol) const = 0;
+    virtual double GetDouble(const int nRow, const int nCol) const = 0;
+    virtual const std::string& GetString(const int nRow, const int nCol) const = 0;
+    virtual NFIDENTID GetObject(const int nRow, const int nCol) const = 0;
+    virtual void* GetPointer(const int nRow, const int nCol) const = 0;
 
-    virtual int QueryInt(const int nRow, const std::string& strColTag) const = 0;
-    virtual float QueryFloat(const int nRow, const std::string& strColTag) const = 0;
-    virtual double QueryDouble(const int nRow, const std::string& strColTag) const = 0;
-    virtual const std::string& QueryString(const int nRow, const std::string& strColTag) const = 0;
-    virtual NFIDENTID QueryObject(const int nRow, const std::string& strColTag) const = 0;
-    virtual void* QueryPointer(const int nRow, const std::string& strColTag) const = 0;
+    virtual int GetInt(const int nRow, const std::string& strColTag) const = 0;
+    virtual float GetFloat(const int nRow, const std::string& strColTag) const = 0;
+    virtual double GetDouble(const int nRow, const std::string& strColTag) const = 0;
+    virtual const std::string& GetString(const int nRow, const std::string& strColTag) const = 0;
+    virtual NFIDENTID GetObject(const int nRow, const std::string& strColTag) const = 0;
+    virtual void* GetPointer(const int nRow, const std::string& strColTag) const = 0;
 
     virtual int FindRowByColValue(const int nCol, const NFIValueList& var, NFIValueList& varResult) = 0;
     virtual int FindInt(const int nCol, const int value, NFIValueList& varResult) = 0;

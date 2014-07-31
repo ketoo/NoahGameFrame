@@ -249,7 +249,7 @@ bool NFCGridModule::RegisterGrid(const NFIDENTID& grid)
 {
     if (!GetGridInfo(grid))
     {
-        NFCSceneGridInfo* pInfo = new NFCSceneGridInfo(grid);
+        NFCSceneGridInfo* pInfo = NF_NEW NFCSceneGridInfo(grid);
         mtGridInfoMap.insert(TMAP_GRID_INFO::value_type(grid, pInfo));
 
         return true;
