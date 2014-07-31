@@ -56,6 +56,10 @@ private:
 
 
 };
+#ifndef USE_NF_NEW
+#define USE_NF_NEW
+#endif // !USE_NF_NEW
+
 
 #if defined (NF_DEBUG_MODE) && defined(USE_NF_NEW)
 void* operator new (size_t size, const char* file, int line);
