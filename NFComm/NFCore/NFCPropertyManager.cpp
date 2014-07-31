@@ -23,7 +23,7 @@ NFCPropertyManager::~NFCPropertyManager()
     ClearAll();
 }
 
-bool NFCPropertyManager::RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIValueList& argVar)
+bool NFCPropertyManager::RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIDataList& argVar)
 {
     NFIProperty* pProperty = this->GetElement(strProperty);
     if (pProperty)
@@ -70,7 +70,7 @@ NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, const std::s
     return pProperty;
 }
 
-bool NFCPropertyManager::SetProperty(const std::string& strPropertyName, const NFIValueList::TData& TData)
+bool NFCPropertyManager::SetProperty(const std::string& strPropertyName, const NFIDataList::TData& TData)
 {
     NFIProperty* pProperty = GetElement(strPropertyName);
     if (pProperty)
