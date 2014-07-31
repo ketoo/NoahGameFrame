@@ -29,22 +29,21 @@ class NFCContainerGroupInfo
 public:
     NFCContainerGroupInfo(int nSceneID, int nWidth)
     {
-        //m_pGridModule = new NFCGridModule(nSceneID, nWidth);
+        m_pGridModule = NF_NEW NFCGridModule(nSceneID, nWidth);
     }
 
     virtual ~NFCContainerGroupInfo()
     {
-        //if (m_pGridModule)
-        //{
-        //    delete m_pGridModule;
-        //    m_pGridModule = NULL;
-        //}
+        if (m_pGridModule)
+        {
+            delete m_pGridModule;
+            m_pGridModule = NULL;
+        }
     }
 
     NFIGridModule* GetGridModule()
     {
-        return NULL;
-        //return m_pGridModule;
+        return m_pGridModule;
     }
 
     bool Execute(const float fLasFrametime, const float fStartedTime)
@@ -53,7 +52,7 @@ public:
     }
 
 private:
-    //NFIGridModule* m_pGridModule;
+    NFIGridModule* m_pGridModule;
 
 
 };
