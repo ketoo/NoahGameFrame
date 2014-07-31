@@ -10,7 +10,6 @@
 #define _NFI_WORLDLOGIC_MODULE_H_
 
 #include "NFILogicModule.h"
-#include "NFComm/NFCore/NFCValueList.h"
 
 /*
     A user's attributes and the length of the table is fixed in this module,
