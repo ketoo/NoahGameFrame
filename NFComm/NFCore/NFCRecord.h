@@ -11,13 +11,13 @@
 
 #include <vector>
 #include "NFIRecord.h"
-#include "NFCValueList.h"
+#include "NFCDataList.h"
 
 class NFCRecord : public NFIRecord
 {
 public:
     NFCRecord();
-    NFCRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& valueList, const NFIValueList& keyList, const NFIValueList& descList, const NFIValueList& tagList, const NFIValueList& relateRecordList, int nMaxRow, bool bPublic,  bool bPrivate,  bool bSave, int nIndex);
+    NFCRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& valueList, const NFIDataList& keyList, const NFIDataList& descList, const NFIDataList& tagList, const NFIDataList& relateRecordList, int nMaxRow, bool bPublic,  bool bPrivate,  bool bSave, int nIndex);
 
     virtual ~NFCRecord();
 
@@ -37,7 +37,7 @@ public:
     // 添加数据
     virtual int AddRow(const int nRow);
 
-    virtual int AddRow(const int nRow, const NFIValueList& var);
+    virtual int AddRow(const int nRow, const NFIDataList& var);
 
     virtual bool SetInt(const int nRow, const int nCol, const int value);
     virtual bool SetFloat(const int nRow, const int nCol, const float value);
@@ -53,7 +53,7 @@ public:
     virtual bool SetObject(const int nRow, const std::string& strColTag, const NFIDENTID& value);
     virtual bool SetPointer(const int nRow, const std::string& strColTag, const void* value);
 
-    virtual bool QueryRow(const int nRow, NFIValueList& varList);
+    virtual bool QueryRow(const int nRow, NFIDataList& varList);
 
     virtual bool SwapRowInfo(const int nOriginRow, const int nTargetRow);
 
@@ -71,21 +71,21 @@ public:
     virtual NFIDENTID GetObject(const int nRow, const std::string& strColTag) const;
     virtual void* GetPointer(const int nRow, const std::string& strColTag) const;
 
-    virtual int FindRowByColValue(const int nCol, const NFIValueList& var, NFIValueList& varResult);
-    virtual int FindInt(const int nCol, const int value, NFIValueList& varResult);
-    virtual int FindFloat(const int nCol, const float value, NFIValueList& varResult);
-    virtual int FindDouble(const int nCol, const double value, NFIValueList& varResult);
-    virtual int FindString(const int nCol, const char* value, NFIValueList& varResult);
-    virtual int FindObject(const int nCol, const NFIDENTID& value, NFIValueList& varResult);
-    virtual int FindPointer(const int nCol, const void* value, NFIValueList& varResult);
+    virtual int FindRowByColValue(const int nCol, const NFIDataList& var, NFIDataList& varResult);
+    virtual int FindInt(const int nCol, const int value, NFIDataList& varResult);
+    virtual int FindFloat(const int nCol, const float value, NFIDataList& varResult);
+    virtual int FindDouble(const int nCol, const double value, NFIDataList& varResult);
+    virtual int FindString(const int nCol, const char* value, NFIDataList& varResult);
+    virtual int FindObject(const int nCol, const NFIDENTID& value, NFIDataList& varResult);
+    virtual int FindPointer(const int nCol, const void* value, NFIDataList& varResult);
 
-    virtual int FindRowByColValue(const std::string& strColTag, const NFIValueList& var, NFIValueList& varResult);
-    virtual int FindInt(const std::string& strColTag, const int value, NFIValueList& varResult);
-    virtual int FindFloat(const std::string& strColTag, const float value, NFIValueList& varResult);
-    virtual int FindDouble(const std::string& strColTag, const double value, NFIValueList& varResult);
-    virtual int FindString(const std::string& strColTag, const char* value, NFIValueList& varResult);
-    virtual int FindObject(const std::string& strColTag, const NFIDENTID& value, NFIValueList& varResult);
-    virtual int FindPointer(const std::string& strColTag, const void* value, NFIValueList& varResult);
+    virtual int FindRowByColValue(const std::string& strColTag, const NFIDataList& var, NFIDataList& varResult);
+    virtual int FindInt(const std::string& strColTag, const int value, NFIDataList& varResult);
+    virtual int FindFloat(const std::string& strColTag, const float value, NFIDataList& varResult);
+    virtual int FindDouble(const std::string& strColTag, const double value, NFIDataList& varResult);
+    virtual int FindString(const std::string& strColTag, const char* value, NFIDataList& varResult);
+    virtual int FindObject(const std::string& strColTag, const NFIDENTID& value, NFIDataList& varResult);
+    virtual int FindPointer(const std::string& strColTag, const void* value, NFIDataList& varResult);
 
     virtual bool Remove(const int nRow);
 
@@ -111,13 +111,13 @@ public:
 
     virtual void SetName(const char* strName);
 
-	virtual const NFIValueList& GetInitData() const;
-    virtual const NFIValueList& GetKeyState() const;
-    virtual const NFIValueList& GetInitDesc() const;
-    virtual const NFIValueList& GetTag() const;
+	virtual const NFIDataList& GetInitData() const;
+    virtual const NFIDataList& GetKeyState() const;
+    virtual const NFIDataList& GetInitDesc() const;
+    virtual const NFIDataList& GetTag() const;
     virtual const TRECORDVEC& GetRecordVec() const;
     virtual bool GetRelatedTag(const std::string& strSrcTag, const std::string& strRelatedRecord, OUT std::string& strRelatedTag);
-    virtual const NFIValueList& GetRelatedRecord() const;
+    virtual const NFIDataList& GetRelatedRecord() const;
 protected:
     int GetPos(int nRow, int nCol) const;
 
@@ -127,15 +127,15 @@ protected:
     bool ValidRow(int nRow) const;
     bool ValidCol(int nCol) const;
 
-    void OnEventHandler(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar);
+    void OnEventHandler(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar);
 
 protected:
     //记录这个表的Key类型，那样在读取和设置的时候才能保持正确
-    NFCValueList mVarRecordType;//初始值类型--应该引用静态的(或者智能指针)，节约大量内存
-    NFCValueList mVarRecordTag;//col的tag值--应该引用静态的(或者智能指针)，节约大量内存
-	NFCValueList mVarRecordDesc;//初始值描述--应该引用静态的(或者智能指针)，节约大量内存
-    NFCValueList mVarRecordKey;//各row是否是KEY--应该引用静态的(或者智能指针)，节约大量内存
-    NFCValueList mVarRecordRelation; // 表中某个字段与另外一张表中某字段对应关系
+    NFCDataList mVarRecordType;//初始值类型--应该引用静态的(或者智能指针)，节约大量内存
+    NFCDataList mVarRecordTag;//col的tag值--应该引用静态的(或者智能指针)，节约大量内存
+	NFCDataList mVarRecordDesc;//初始值描述--应该引用静态的(或者智能指针)，节约大量内存
+    NFCDataList mVarRecordKey;//各row是否是KEY--应该引用静态的(或者智能指针)，节约大量内存
+    NFCDataList mVarRecordRelation; // 表中某个字段与另外一张表中某字段对应关系
     TRECORDVEC mtRecordVec;//真的数据
     std::vector<int> mVecUsedState;
 
