@@ -19,8 +19,8 @@ nRet = pModule->HasAccount("test1");
 nRet = pModule->CreateAccount("test1", "Password");
 //////////////////////////////////////////////////////////////////////////
 //游戏服务器帐号添加属性
-NFCValueList valueAccountPropertyList;
-NFCValueList valueAccountPropertyValueList;
+NFCDataList valueAccountPropertyList;
+NFCDataList valueAccountPropertyValueList;
 for (int i = 0; i < 10; i++)
 {
 char szProperty[MAX_PATH] = { 0 };
@@ -47,7 +47,7 @@ nRet = pModule->CreateRole("test1", "Role1");
 nRet = pModule->CreateRole("test1", "Role2");
 
 //游戏服务器获得此帐号下角色列表
-NFCValueList valueRoleList;
+NFCDataList valueRoleList;
 nRet = pModule->QueryAccountRoleList("test1", valueRoleList);
 for (int i = 0; i < valueRoleList.GetCount(); i++)
 {
@@ -56,8 +56,8 @@ std::cout << valueRoleList.StringVal(i) << std::endl;
 
 //////////////////////////////////////////////////////////////////////////
 //游戏服务器设置角色属性
-NFCValueList valueRolePropertyList;
-NFCValueList valueRolePropertyValueList;
+NFCDataList valueRolePropertyList;
+NFCDataList valueRolePropertyValueList;
 for (int i = 0; i < 10; i++)
 {
 char szProperty[MAX_PATH] = { 0 };
@@ -81,7 +81,7 @@ std::cout << valueRolePropertyList.StringVal(i) << "  " << valueRolePropertyValu
 
 //////////////////////////////////////////////////////////////////////////
 //游戏服务器设置角色表内容
-NFCValueList valueRoleRecordValueList;
+NFCDataList valueRoleRecordValueList;
 for (int i = 0; i < 4; i++)
 {
 for (int j = 0; j < 7; j++)

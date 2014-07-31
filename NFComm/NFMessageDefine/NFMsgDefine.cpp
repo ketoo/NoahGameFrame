@@ -270,7 +270,7 @@
 //		const std::string& strName = propertyInt.property_name();
 //		int nData = propertyInt.data();
 //
-//		NFIValueList::TData TData;
+//		NFIDataList::TData TData;
 //		TData.nType = TDATA_TYPE::TDATA_INT;
 //		TData.variantData = nData;
 //		pProManager->SetProperty( strName, TData );
@@ -282,7 +282,7 @@
 //		const std::string& strName = propertyFloat.property_name();
 //		float fData = propertyFloat.data();
 //
-//		NFIValueList::TData TData;
+//		NFIDataList::TData TData;
 //		TData.nType = TDATA_TYPE::TDATA_FLOAT;
 //		TData.variantData = fData;
 //		pProManager->SetProperty( strName, TData );
@@ -294,7 +294,7 @@
 //		const std::string& strName = propertyString.property_name();
 //		const std::string& strData = propertyString.data();
 //
-//		NFIValueList::TData TData;
+//		NFIDataList::TData TData;
 //		TData.nType = TDATA_TYPE::TDATA_STRING;
 //		TData.variantData = strData;
 //		pProManager->SetProperty( strName, TData );
@@ -306,7 +306,7 @@
 //		const std::string& strName = propertyObject.property_name();
 //		int64_t nData = propertyObject.data();
 //
-//		NFIValueList::TData TData;
+//		NFIDataList::TData TData;
 //		TData.nType = TDATA_TYPE::TDATA_OBJECT;
 //		TData.variantData = nData;
 //		pProManager->SetProperty( strName, TData );

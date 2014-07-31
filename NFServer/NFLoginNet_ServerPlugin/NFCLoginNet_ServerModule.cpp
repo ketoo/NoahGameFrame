@@ -73,7 +73,7 @@ bool NFCLoginNet_ServerModule::AfterInit()
 	return true;
 }
 
-int NFCLoginNet_ServerModule::OnLoginResultsEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
+int NFCLoginNet_ServerModule::OnLoginResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
 	if (3 != var.GetCount()
 		|| !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
@@ -120,7 +120,7 @@ int NFCLoginNet_ServerModule::OnLoginResultsEvent(const NFIDENTID& object, const
 }
 
 
-int NFCLoginNet_ServerModule::OnSelectWorldResultsEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
+int NFCLoginNet_ServerModule::OnSelectWorldResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
 	if (7 != var.GetCount()
 		|| !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING,
@@ -181,7 +181,7 @@ int NFCLoginNet_ServerModule::OnLoginProcess( const NFIPacket& msg )
         //还没有登录过
         if (pNetObject->GetUserData() == 0)
         {
-            NFCValueList val;
+            NFCDataList val;
             val << msg.GetFd() << xMsg.account() << xMsg.password();
             m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_LOGIN, val);
         }
@@ -212,7 +212,7 @@ int NFCLoginNet_ServerModule::OnSelectWorldProcess( const NFIPacket& msg )
         //登录过
         if (pNetObject->GetUserData() > 0)
         {
-            NFCValueList val;
+            NFCDataList val;
             val << xMsg.world_id() << msg.GetFd() << nServerID << pNetObject->GetUserStrData().c_str();
             m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_SELECT_SERVER, val);
         }
