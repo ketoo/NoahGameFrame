@@ -10,7 +10,7 @@
 #define _NFI_PLATFORM_DATA_MODULE_H_
 
 #include "NFComm/Config/NFConfig.h"
-#include "NFComm/NFCore/NFCValueList.h"
+#include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
 
 /*

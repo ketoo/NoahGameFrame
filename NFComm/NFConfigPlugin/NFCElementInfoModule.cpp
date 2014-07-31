@@ -146,7 +146,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
             continue;
         }
 
-        NFIValueList::TData var;
+        NFIDataList::TData var;
         TDATA_TYPE eType = temProperty->GetType();
         var.nType = eType;
         switch (eType)
@@ -202,7 +202,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
         pElementPropertyManager->SetProperty(pstrConfigName, var);
     }
 
-    NFCValueList varClassName;
+    NFCDataList varClassName;
     varClassName << pLogicClass->GetClassName().c_str();
     pElementPropertyManager->SetProperty("ClassName", *varClassName.GetStackConst(0));
 

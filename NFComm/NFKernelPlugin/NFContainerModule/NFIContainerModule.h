@@ -14,7 +14,7 @@
 #include <algorithm>
 #include "../NFGridModule/NFCGridModule.h"
 #include "NFComm/NFCore/NFIdentID.h"
-#include "NFComm/NFCore/NFCValueList.h"
+#include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFList.h"
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFCore/NFIObject.h"
