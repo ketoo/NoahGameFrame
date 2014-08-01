@@ -104,8 +104,20 @@ def excel_to_xml(path, file):
                         attr_value = int(attr_value)
                     property_node.setAttribute(str(attr_name), str(attr_value))
         elif sheet_name.lower() == "component":
-            #TODO component的处理
-            print("next step is to process component")
+            #写入components的处理
+            component_nodes = xml_doc.createElement("Components")
+            root_node.appendChild(component_nodes)
+            #开始写component数据
+            for row_num in range(1, sheet_row_count):
+                component_node = xml_doc.createElement("Component")
+                component_nodes.appendChild(component_node)
+
+                for col_num in range(0, sheet_col_count):
+                    com_name = sheet_data.row_values(0)[col_num]
+                    com_value = sheet_data.row_values(row_num)[col_num]
+                    if type(com_value) == float:
+                        com_value = int(com_value)
+                    component_node.setAttribute(str(com_name), str(com_value))
         else:
             #写入Records标签
             
@@ -142,8 +154,6 @@ def excel_to_xml(path, file):
     include_nodes = xml_doc.createElement("Includes")
     root_node.appendChild(include_nodes)
 
-    component_nodes = xml_doc.createElement("Components")
-    root_node.appendChild(component_nodes)
     #####################################################################################
     xml_name = file.rsplit(".")[0]
     xml_file = open(path + "../" + xml_struct_dir + xml_name + str(".xml"), "w")
