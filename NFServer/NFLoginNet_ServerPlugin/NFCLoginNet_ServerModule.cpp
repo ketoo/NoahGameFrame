@@ -73,7 +73,7 @@ bool NFCLoginNet_ServerModule::AfterInit()
 	return true;
 }
 
-int NFCLoginNet_ServerModule::OnLoginResultsEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
+int NFCLoginNet_ServerModule::OnLoginResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
 	if (3 != var.GetCount()
 		|| !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
@@ -81,9 +81,9 @@ int NFCLoginNet_ServerModule::OnLoginResultsEvent(const NFIDENTID& object, const
 		return -1;
 	}
 
-	int nState = var.IntVal(0);
-	int unAddress = var.IntVal(1);
-	const std::string& strAccount = var.StringVal(2);
+	int nState = var.Int(0);
+	int unAddress = var.Int(1);
+	const std::string& strAccount = var.String(2);
 
 	if (0 != nState)
 	{
@@ -120,7 +120,7 @@ int NFCLoginNet_ServerModule::OnLoginResultsEvent(const NFIDENTID& object, const
 }
 
 
-int NFCLoginNet_ServerModule::OnSelectWorldResultsEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
+int NFCLoginNet_ServerModule::OnSelectWorldResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
 	if (7 != var.GetCount()
 		|| !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING,
@@ -129,13 +129,13 @@ int NFCLoginNet_ServerModule::OnSelectWorldResultsEvent(const NFIDENTID& object,
 		return -1;
 	}
 
-	const int nWorldID = var.IntVal(0);
-	const uint16_t nSenderAddress = var.IntVal(1);
-	const int nLoginID = var.IntVal(2);
-	const std::string& strAccount = var.StringVal(3);
-	const std::string& strWorldAddress = var.StringVal(4);
-	int nPort = var.IntVal(5);
-	const std::string& strWorldKey = var.StringVal(6);
+	const int nWorldID = var.Int(0);
+	const uint16_t nSenderAddress = var.Int(1);
+	const int nLoginID = var.Int(2);
+	const std::string& strAccount = var.String(3);
+	const std::string& strWorldAddress = var.String(4);
+	int nPort = var.Int(5);
+	const std::string& strWorldKey = var.String(6);
 
 	NFMsg::AckConnectWorldResult xMsg;
 	xMsg.set_world_id(nWorldID);
@@ -181,7 +181,7 @@ int NFCLoginNet_ServerModule::OnLoginProcess( const NFIPacket& msg )
         //还没有登录过
         if (pNetObject->GetUserData() == 0)
         {
-            NFCValueList val;
+            NFCDataList val;
             val << msg.GetFd() << xMsg.account() << xMsg.password();
             m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_LOGIN, val);
         }
@@ -212,7 +212,7 @@ int NFCLoginNet_ServerModule::OnSelectWorldProcess( const NFIPacket& msg )
         //登录过
         if (pNetObject->GetUserData() > 0)
         {
-            NFCValueList val;
+            NFCDataList val;
             val << xMsg.world_id() << msg.GetFd() << nServerID << pNetObject->GetUserStrData().c_str();
             m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_SELECT_SERVER, val);
         }

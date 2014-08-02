@@ -10,14 +10,14 @@
 #define _NFI_PROPERTY_H_
 
 #include "NFDefine.h"
-#include "NFIValueList.h"
+#include "NFIDataList.h"
 
 class NFIProperty
 {
 public:
     virtual ~NFIProperty() {}
 
-    virtual void SetValue(const NFIValueList::TData& TData) = 0;
+    virtual void SetValue(const NFIDataList::TData& TData) = 0;
     virtual void SetValue(const NFIProperty* pProperty) = 0;
     virtual bool SetInt(int value) = 0;
     virtual bool SetFloat(float value) = 0;
@@ -49,11 +49,11 @@ public:
 
     virtual bool Changed() const = 0;
 
-    virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIValueList& argVar) = 0;
+    virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIDataList& argVar) = 0;
 
 protected:
 
-    virtual NFIValueList::TData GetValue() const = 0;
+    virtual NFIDataList::TData GetValue() const = 0;
 
 };
 

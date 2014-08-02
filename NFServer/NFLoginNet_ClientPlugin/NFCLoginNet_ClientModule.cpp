@@ -72,7 +72,7 @@ bool NFCLoginNet_ClientModule::BeforeShut()
     return false;
 }
 
-int NFCLoginNet_ClientModule::OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
+int NFCLoginNet_ClientModule::OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
 	if (4 != var.GetCount()
 		|| !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT,
@@ -81,10 +81,10 @@ int NFCLoginNet_ClientModule::OnSelectServerEvent(const NFIDENTID& object, const
 		return -1;
 	}
 
-	int nServerID = var.IntVal(0);
-	int nSenderAddress = var.IntVal(1);
-	int nLoginID = var.IntVal(2);
-	const std::string& strAccount = var.StringVal(3);
+	int nServerID = var.Int(0);
+	int nSenderAddress = var.Int(1);
+	int nLoginID = var.Int(2);
+	const std::string& strAccount = var.String(3);
 
 	NFMsg::ReqConnectWorld xData;
 	xData.set_world_id(nServerID);
@@ -162,7 +162,7 @@ int NFCLoginNet_ClientModule::OnSelectServerResultProcess(const NFIPacket& msg)
         return 0;
     }
 
-    NFCValueList var;
+    NFCDataList var;
     var << xMsg.world_id()
         << xMsg.sender_ip()
         << xMsg.login_id()

@@ -63,13 +63,13 @@ protected:
 
     int OnSwapGSProcess(const NFIPacket& msg);
 
-    int OnDataLoadBeginEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
+    int OnDataLoadBeginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
 
-    //int OnToWorldEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var );
+    //int OnToWorldEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
 
-    int OnSwapGSEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
+    int OnSwapGSEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
 
-    int OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var);
+    int OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
 private:
     int mnSocketFD;

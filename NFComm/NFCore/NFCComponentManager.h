@@ -24,6 +24,7 @@ public:
     virtual ~NFCComponentManager()
     {
         DestroyAllComponent();
+        ClearAll();
     }
 
     virtual bool Init();

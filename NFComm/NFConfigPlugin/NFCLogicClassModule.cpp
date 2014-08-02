@@ -34,6 +34,7 @@ bool NFCLogicClassModule::Shut()
 
         delete pLogicClass;
         pLogicClass = NULL;
+
         pLogicClass = Next();
     }
 
@@ -51,10 +52,20 @@ NFCLogicClassModule::NFCLogicClassModule(NFIPluginManager* p)
 
 NFCLogicClassModule::~NFCLogicClassModule()
 {
+    NFILogicClass* pLogicClass = First();
+    while (NULL != pLogicClass)
+    {
+        pLogicClass->ClearAll();
+        delete pLogicClass;
+        pLogicClass = NULL;
 
+        pLogicClass = Next();
+    }
+
+    ClearAll();
 }
 
-TDATA_TYPE NFCLogicClassModule::ComputerType(const char* pstrTypeName, NFIValueList::TData& var)
+TDATA_TYPE NFCLogicClassModule::ComputerType(const char* pstrTypeName, NFIDataList::TData& var)
 {
     if (0 == strcmp(pstrTypeName, "int"))
     {
@@ -129,7 +140,7 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
                 mxPropertyIndexMap.insert(std::map<std::string, int>::value_type(strPropertyName, mnPropertyIndex));
             }
 
-            NFIValueList::TData varProperty;
+            NFIDataList::TData varProperty;
             if (TDATA_UNKNOWN == ComputerType(pstrType, varProperty))
             {
                 //std::cout << "error:" << pClass->GetTypeName() << "  " << pClass->GetInstancePath() << ": " << strPropertyName << " type error!!!" << std::endl;
@@ -176,15 +187,15 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCL
             bool bSave = boost::lexical_cast<bool>(pstrSave);
             int nIndex = boost::lexical_cast<int>(pstrIndex);
 
-            NFCValueList recordVar;
-            NFCValueList recordKey;
-            NFCValueList recordDesc;
-            NFCValueList recordTag;
-            NFCValueList recordRelation;
+            NFCDataList recordVar;
+            NFCDataList recordKey;
+            NFCDataList recordDesc;
+            NFCDataList recordTag;
+            NFCDataList recordRelation;
             for (rapidxml::xml_node<>* recordColNode = pRecordNode->first_node(); recordColNode;  recordColNode = recordColNode->next_sibling())
             {
                 //const char* pstrColName = recordColNode->first_attribute( "Id" )->value();
-                NFIValueList::TData TData;
+                NFIDataList::TData TData;
                 const char* pstrColType = recordColNode->first_attribute("Type")->value();
                 if (TDATA_UNKNOWN == ComputerType(pstrColType, TData))
                 {
@@ -200,43 +211,43 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCL
                     bool bKey = boost::lexical_cast<int>(pstrKey);
                     if (bKey)
                     {
-                        recordKey.AddInt(1);
+                        recordKey.Add(1);
                     }
                     else
                     {
-                        recordKey.AddInt(0);
+                        recordKey.Add(0);
                     }
                 }
 
                 if (recordColNode->first_attribute("Tag") != NULL)
                 {
                     const char* pstrTag = recordColNode->first_attribute("Tag")->value();
-                    recordTag.AddString(pstrTag);
+                    recordTag.Add(pstrTag);
                 }
                 else
                 {
-                    recordTag.AddString("");
+                    recordTag.Add("");
                 }
 
                 if (recordColNode->first_attribute("RelateRecord") != NULL)
                 {
                     std::string strRelationRecord = recordColNode->first_attribute("RelatedRecord")->value();
-                    recordRelation.AddString(strRelationRecord.c_str());
+                    recordRelation.Add(strRelationRecord.c_str());
                 }
                 else
                 {
-                    recordRelation.AddString("");
+                    recordRelation.Add("");
                 }
 
                 //////////////////////////////////////////////////////////////////////////
                 if (recordColNode->first_attribute("Desc"))
                 {
                     const char* pstrColDesc = recordColNode->first_attribute("Desc")->value();
-                    recordDesc.AddString(pstrColDesc);
+                    recordDesc.Add(pstrColDesc);
                 }
                 else
                 {
-                    recordDesc.AddString("");
+                    recordDesc.Add("");
                 }
 
                 //////////////////////////////////////////////////////////////////////////
@@ -381,7 +392,7 @@ bool NFCLogicClassModule::AddClass(const std::string& strClassName, const std::s
     NFILogicClass* pChildClass = GetElement(strClassName);
     if (!pChildClass)
     {
-        pChildClass = new NFCLogicClass(strClassName);
+        pChildClass = NF_NEW NFCLogicClass(strClassName);
         AddElement(strClassName, pChildClass);
         //pChildClass = CreateElement( strClassName );
 
@@ -409,7 +420,7 @@ bool NFCLogicClassModule::Load(rapidxml::xml_node<>* attrNode, NFCLogicClass* pP
     //printf( "-----------------------------------------------------\n");
     //printf( "%s:\n", pstrLogicClassName );
 
-    NFCLogicClass* pClass = new NFCLogicClass(pstrLogicClassName);
+    NFCLogicClass* pClass = NF_NEW NFCLogicClass(pstrLogicClassName);
     AddElement(pstrLogicClassName, pClass);
     pClass->SetParent(pParentClass);
     pClass->SetTypeName(pstrType);
