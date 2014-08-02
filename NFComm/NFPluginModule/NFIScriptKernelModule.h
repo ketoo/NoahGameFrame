@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
-#include "NFComm\NFCore\NFCValueList.h"
+#include "NFComm\NFCore\NFCDataList.h"
 #include "NFComm\NFCore\NFIdentID.h"
 #include "NFComm\NFPluginModule\NFIElementInfoModule.h"
 #include "NFComm\NFPluginModule\NFIKernelModule.h"
@@ -119,7 +119,7 @@ public:
 
     }
 
-    NFCScriptVarList(const NFIValueList& varList)
+    NFCScriptVarList(const NFIDataList& varList)
     {
         mVar = varList;
     }
@@ -147,73 +147,72 @@ public:
 
     bool AddInt(const int value)
     {
-        return mVar.AddInt(value);
+        return mVar.Add(value);
     }
 
     bool AddFloat(const float value)
     {
-        return mVar.AddFloat(value);
+        return mVar.Add(value);
     }
 
     bool AddString(const char* value)
     {
-        return mVar.AddString(value);
+        return mVar.Add(value);
     }
 
     bool AddObject(const NFScriptInt64& value)
     {
-        return mVar.AddObject(value.ObjectVal());
+        return mVar.Add(value.ObjectVal());
     }
 
     bool SetInt(const int index, const int value)
     {
-        return mVar.SetInt(index, value);
+        return mVar.Set(index, value);
     }
 
     bool SetFloat(const int index, const float value)
     {
-        return mVar.SetFloat(index, value);
+        return mVar.Set(index, value);
     }
 
     bool SetString(const int index, const char* value)
     {
-        return mVar.SetString(index, value);
+        return mVar.Set(index, value);
     }
 
     bool SetObject(const int index, const NFScriptInt64& value)
     {
-        return mVar.SetObject(index, value.ObjectVal());
+        return mVar.Set(index, value.ObjectVal());
     }
 
-    int IntVal(const int index) const
-    {
-        return mVar.IntVal(index);
+    int Int(const int index) const    {
+        return mVar.Int(index);
     }
 
-    float FloatVal(const int index) const
+    float Float(const int index) const
     {
-        return mVar.FloatVal(index);
+        return mVar.Float(index);
     }
 
-    const std::string& StringVal(const int index) const
+    const std::string& String(const int index) const
     {
-        return mVar.StringVal(index);
+        return mVar.String(index);
     }
 
-    NFScriptInt64 ObjectVal(const int index) const
+    NFScriptInt64 Object(const int index) const
     {
-        return mVar.ObjectVal(index);
+        return mVar.Object(index);
     }
 
     //////////dont't export this function////////////////////////////////////////////////////////////////
-    const NFIValueList& GetVar() const
+    const NFIDataList& GetVar() const
     {
         return mVar;
     }
 
 protected:
 private:
-    NFCValueList mVar;
+    NFCDataList mVar;
 };
 
 
@@ -241,11 +240,11 @@ class NFIScriptKernelModule : public NFMap<NFIDENTID, NFCSriptData>
 
     virtual bool AddEventCallBack(const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction) = 0;
 
-    virtual int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIValueList& var) = 0;
+    virtual int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIDataList& var) = 0;
 
     virtual bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, const std::string& strComponentName, const std::string& strFunction, const float fTime, const int nCount) = 0;
 
-    virtual int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var) = 0;
+    virtual int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var) = 0;
 
     virtual bool FindHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName) = 0;
 

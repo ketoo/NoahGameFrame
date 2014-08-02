@@ -10,7 +10,7 @@
 #define _NFI_RECORD_H_
 
 #include "NFDefine.h"
-#include "NFIValueList.h"
+#include "NFIDataList.h"
 
 class NFIRecord
 {
@@ -26,7 +26,7 @@ public:
         Sort,
     };
 
-    typedef std::vector<std::shared_ptr<NFIValueList::TData>> TRECORDVEC;
+    typedef std::vector<std::shared_ptr<NFIDataList::TData>> TRECORDVEC;
     typedef TRECORDVEC::const_iterator TRECORDVECCONSTITER;
 
     virtual ~NFIRecord() {}
@@ -44,7 +44,7 @@ public:
 
     // 添加数据
     virtual int AddRow(const int nRow) = 0;
-    virtual int AddRow(const int nRow, const NFIValueList& var) = 0;
+    virtual int AddRow(const int nRow, const NFIDataList& var) = 0;
 
     virtual bool SetInt(const int nRow, const int nCol, const int value) = 0;
     virtual bool SetFloat(const int nRow, const int nCol, const float value) = 0;
@@ -60,7 +60,7 @@ public:
     virtual bool SetPointer(const int nRow, const std::string& strColTag, const void* value) = 0;
 
     // 获得数据
-    virtual bool QueryRow(const int nRow, NFIValueList& varList) = 0;
+    virtual bool QueryRow(const int nRow, NFIDataList& varList) = 0;
     virtual bool SwapRowInfo(const int nOriginRow, const int nTargetRow) = 0;
 
     virtual int GetInt(const int nRow, const int nCol) const = 0;
@@ -77,29 +77,29 @@ public:
     virtual NFIDENTID GetObject(const int nRow, const std::string& strColTag) const = 0;
     virtual void* GetPointer(const int nRow, const std::string& strColTag) const = 0;
 
-    virtual int FindRowByColValue(const int nCol, const NFIValueList& var, NFIValueList& varResult) = 0;
-    virtual int FindInt(const int nCol, const int value, NFIValueList& varResult) = 0;
-    virtual int FindFloat(const int nCol, const float value, NFIValueList& varResult) = 0;
-    virtual int FindDouble(const int nCol, const double value, NFIValueList& varResult) = 0;
-    virtual int FindString(const int nCol, const char* value, NFIValueList& varResult) = 0;
-    virtual int FindObject(const int nCol, const NFIDENTID& value, NFIValueList& varResult) = 0;
-    virtual int SortByCol(const int nCol, const bool bOrder, NFIValueList& varResult){return 0;};
+    virtual int FindRowByColValue(const int nCol, const NFIDataList& var, NFIDataList& varResult) = 0;
+    virtual int FindInt(const int nCol, const int value, NFIDataList& varResult) = 0;
+    virtual int FindFloat(const int nCol, const float value, NFIDataList& varResult) = 0;
+    virtual int FindDouble(const int nCol, const double value, NFIDataList& varResult) = 0;
+    virtual int FindString(const int nCol, const char* value, NFIDataList& varResult) = 0;
+    virtual int FindObject(const int nCol, const NFIDENTID& value, NFIDataList& varResult) = 0;
+    virtual int SortByCol(const int nCol, const bool bOrder, NFIDataList& varResult){return 0;};
 
-    virtual int FindRowByColValue(const std::string& strColTag, const NFIValueList& var, NFIValueList& varResult) = 0;
-    virtual int FindInt(const std::string& strColTag, const int value, NFIValueList& varResult) = 0;
-    virtual int FindFloat(const std::string& strColTag, const float value, NFIValueList& varResult) = 0;
-    virtual int FindDouble(const std::string& strColTag, const double value, NFIValueList& varResult) = 0;
-    virtual int FindString(const std::string& strColTag, const char* value, NFIValueList& varResult) = 0;
-    virtual int FindObject(const std::string& strColTag, const NFIDENTID& value, NFIValueList& varResult) = 0;
-    virtual int FindPointer(const std::string& strColTag, const void* value, NFIValueList& varResult) = 0;
-    virtual int SortByTag(const std::string& strColTag, const bool bOrder,  NFIValueList& varResult){return 0;};
+    virtual int FindRowByColValue(const std::string& strColTag, const NFIDataList& var, NFIDataList& varResult) = 0;
+    virtual int FindInt(const std::string& strColTag, const int value, NFIDataList& varResult) = 0;
+    virtual int FindFloat(const std::string& strColTag, const float value, NFIDataList& varResult) = 0;
+    virtual int FindDouble(const std::string& strColTag, const double value, NFIDataList& varResult) = 0;
+    virtual int FindString(const std::string& strColTag, const char* value, NFIDataList& varResult) = 0;
+    virtual int FindObject(const std::string& strColTag, const NFIDENTID& value, NFIDataList& varResult) = 0;
+    virtual int FindPointer(const std::string& strColTag, const void* value, NFIDataList& varResult) = 0;
+    virtual int SortByTag(const std::string& strColTag, const bool bOrder,  NFIDataList& varResult){return 0;};
 
     virtual bool Remove(const int nRow) = 0;
-    virtual bool Remove(NFIValueList& varRows) //need to optimize 
+    virtual bool Remove(NFIDataList& varRows) //need to optimize 
     {
         for (int i  = 0; i < varRows.GetCount(); ++i)
         {
-            Remove(varRows.IntVal(i));
+            Remove(varRows.Int(i));
         }
 
         return true;
@@ -114,10 +114,10 @@ public:
     virtual const bool GetPrivate() = 0;
     virtual const int GetIndex() = 0;
     virtual const std::string& GetName() const = 0;
-	virtual const NFIValueList& GetInitData() const = 0;
-    virtual const NFIValueList& GetKeyState() const = 0;
-    virtual const NFIValueList& GetInitDesc() const = 0;
-    virtual const NFIValueList& GetTag() const = 0;
+	virtual const NFIDataList& GetInitData() const = 0;
+    virtual const NFIDataList& GetKeyState() const = 0;
+    virtual const NFIDataList& GetInitDesc() const = 0;
+    virtual const NFIDataList& GetTag() const = 0;
 
     virtual void SetSave(const bool bSave) = 0;
     virtual void SetPublic(const bool bPublic) = 0;
@@ -126,7 +126,7 @@ public:
 
     virtual const TRECORDVEC& GetRecordVec() const = 0;
     
-    virtual const NFIValueList& GetRelatedRecord() const = 0;
+    virtual const NFIDataList& GetRelatedRecord() const = 0;
     virtual bool GetRelatedTag(const std::string& strSrcTag, const std::string& strRelatedRecord, OUT std::string& strRelatedTag) = 0;
 };
 

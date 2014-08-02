@@ -20,7 +20,7 @@
 #include "NFComm/RapidXML/rapidxml_iterators.hpp"
 #include "NFComm/RapidXML/rapidxml_print.hpp"
 #include "NFComm/RapidXML/rapidxml_utils.hpp"
-#include "NFComm/NFCore/NFCValueList.h"
+#include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
 #include "NFComm/NFCore/NFList.h"
 #include "NFComm/NFCore/NFCPropertyManager.h"
@@ -36,20 +36,30 @@ class ElementConfigInfo
 public:
     ElementConfigInfo()
     {
-        m_pPropertyManager = new NFCPropertyManager(NFIDENTID(0));
-        m_pRecordManager = new NFCRecordManager(NFIDENTID(0));
-        m_pComponentManager = new NFCComponentManager(NFIDENTID(0));
+        m_pPropertyManager = NF_NEW NFCPropertyManager(NFIDENTID(0));
+        m_pRecordManager = NF_NEW NFCRecordManager(NFIDENTID(0));
+        m_pComponentManager = NF_NEW NFCComponentManager(NFIDENTID(0));
     }
 
     virtual ~ElementConfigInfo()
     {
-        delete m_pComponentManager;
-        delete m_pRecordManager;
-        delete m_pPropertyManager;
-
-        m_pComponentManager = NULL;
-        m_pRecordManager = NULL;
-        m_pPropertyManager = NULL;
+        if (NULL != m_pComponentManager)
+        {
+            delete m_pComponentManager;
+            m_pComponentManager = NULL;
+        }
+        
+        if (NULL != m_pRecordManager)
+        {
+            delete m_pRecordManager;
+            m_pRecordManager = NULL;
+        }
+        
+        if (NULL != m_pPropertyManager)
+        {
+            delete m_pPropertyManager;
+            m_pPropertyManager = NULL;
+        }
     }
 
     NFIPropertyManager* GetPropertyManager()

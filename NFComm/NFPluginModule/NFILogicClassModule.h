@@ -40,9 +40,10 @@ public:
 
 class NFILogicClassModule
     : public NFILogicModule,
-  public NFMap<std::string, NFILogicClass>
+      public NFMap<std::string, NFILogicClass>
 {
 public:
+    virtual ~NFILogicClassModule() {}
 	virtual bool Load() = 0;
 	virtual bool Save() = 0;
 	virtual bool Clear() = 0;
