@@ -14,7 +14,7 @@
 #include <map>
 #include "NFIGridModule.h"
 #include "NFComm/NFCore/NFList.h"
-#include "NFComm/NFCore/NFIValueList.h"
+#include "NFComm/NFCore/NFIDataList.h"
 
 class NFCSceneGridInfo
     : public NFList<NFIDENTID>
@@ -81,19 +81,19 @@ public:
     virtual const NFIDENTID GetStepLenth(const NFIDENTID& selfGrid, const NFIDENTID& otherGrid);
 
     // get some grids that around this grid
-    virtual const int GetAroundGrid(const NFIDENTID& selfGrid, NFIValueList& gridList,
+    virtual const int GetAroundGrid(const NFIDENTID& selfGrid, NFIDataList& gridList,
                                     EGRID_AROUND eAround = EGRID_AROUND_9);
 
     // get some grids that around this grid
-    virtual const int GetAroundGrid(NFCSceneGridInfo* pGridInfo, NFIValueList& gridList,
+    virtual const int GetAroundGrid(NFCSceneGridInfo* pGridInfo, NFIDataList& gridList,
                                     EGRID_AROUND eAround = EGRID_AROUND_9);
 
     // get some objects that around this grid
-    virtual const int GetAroundObject(const NFIDENTID& selfGrid, NFIValueList& objectList,
+    virtual const int GetAroundObject(const NFIDENTID& selfGrid, NFIDataList& objectList,
                                       EGRID_AROUND eAround = EGRID_AROUND_9);
 
     // get some objects that around this grid
-    virtual const int GetAroundObject(NFCSceneGridInfo* pGridInfo, NFIValueList& objectList,
+    virtual const int GetAroundObject(NFCSceneGridInfo* pGridInfo, NFIDataList& objectList,
                                       EGRID_AROUND eAround = EGRID_AROUND_9);
 
     // get a grid who connected it by direction

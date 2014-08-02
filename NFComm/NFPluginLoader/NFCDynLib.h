@@ -17,7 +17,7 @@
 #    define DYNLIB_HANDLE hInstance
 #    define DYNLIB_LOAD( a ) LoadLibraryEx( a, NULL, LOAD_WITH_ALTERED_SEARCH_PATH )
 #    define DYNLIB_GETSYM( a, b ) GetProcAddress( a, b )
-#    define DYNLIB_UNLOAD( a ) !FreeLibrary( a )
+#    define DYNLIB_UNLOAD( a ) FreeLibrary( a )
 
 struct HINSTANCE__;
 typedef struct HINSTANCE__* hInstance;

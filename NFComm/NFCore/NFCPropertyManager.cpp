@@ -15,12 +15,15 @@ NFCPropertyManager::~NFCPropertyManager()
     while (pProperty)
     {
         delete pProperty;
+        pProperty = NULL;
 
         pProperty = this->Next();
     }
+
+    ClearAll();
 }
 
-bool NFCPropertyManager::RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIValueList& argVar)
+bool NFCPropertyManager::RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIDataList& argVar)
 {
     NFIProperty* pProperty = this->GetElement(strProperty);
     if (pProperty)
@@ -38,7 +41,7 @@ NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, NFIProperty*
     NFIProperty* pOldProperty = GetElement(strProperty);
     if (!pOldProperty)
     {
-        NFIProperty* pNewProperty = new NFCProperty(self, strProperty, pProperty->GetType(), pProperty->GetPublic(), pProperty->GetPrivate(), pProperty->GetSave(), pProperty->GetIndex(), pProperty->GetRelationValue());
+        NFIProperty* pNewProperty = NF_NEW NFCProperty(self, strProperty, pProperty->GetType(), pProperty->GetPublic(), pProperty->GetPrivate(), pProperty->GetSave(), pProperty->GetIndex(), pProperty->GetRelationValue());
         this->AddElement(strProperty, pNewProperty);
 
         if (pProperty->GetIndex() > 0)
@@ -55,7 +58,7 @@ NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, const std::s
     NFIProperty* pProperty = GetElement(strPropertyName);
     if (!pProperty)
     {
-        pProperty = new NFCProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, nIndex, strScriptFunction);
+        pProperty = NF_NEW NFCProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, nIndex, strScriptFunction);
         this->AddElement(strPropertyName, pProperty);
 
         if (pProperty->GetIndex() > 0)
@@ -67,7 +70,7 @@ NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, const std::s
     return pProperty;
 }
 
-bool NFCPropertyManager::SetProperty(const std::string& strPropertyName, const NFIValueList::TData& TData)
+bool NFCPropertyManager::SetProperty(const std::string& strPropertyName, const NFIDataList::TData& TData)
 {
     NFIProperty* pProperty = GetElement(strPropertyName);
     if (pProperty)
