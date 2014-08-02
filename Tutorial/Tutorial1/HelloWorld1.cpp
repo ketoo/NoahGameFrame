@@ -1,6 +1,5 @@
 #include "HelloWorld1.h"
 
-extern NFCMemory xMemory;
 
 bool HelloWorld1::Init()
 {
@@ -28,7 +27,6 @@ bool HelloWorld1::Execute( const float fLasFrametime, const float fStartedTime )
 
 bool HelloWorld1::BeforeShut()
 {
-    xMemory.Dump();
     std::cout << "Hello, world1, BeforeShut1111" << std::endl;
 
     system("PAUSE");
