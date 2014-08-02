@@ -38,17 +38,17 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 //     char szContent[MAX_PATH] = { 0 };
 //     if (kbhit() && gets(szContent))
 //     {
-//         NFCValueList val(szContent, ",");
+//         NFCDataList val(szContent, ",");
 //         if (val.GetCount() > 0)
 //         {
-//             const std::string& strCmd = val.StringVal(0);
+//             const std::string& strCmd = val.String(0);
 //             if ("listworldserver" == strCmd)
 //             {
-//                 NFCValueList valOobjectList;
+//                 NFCDataList valOobjectList;
 //                 int nCount = m_pKernelModule->GetContainerOnLineList(-2, valOobjectList);
 //                 for (int i = 0; i < nCount; i++)
 //                 {
-//                     NFIDENTID ident = valOobjectList.ObjectVal(i);
+//                     NFIDENTID ident = valOobjectList.Object(i);
 // 
 //                     char szInfo[MAX_PATH] = { 0 };
 //                     sprintf_s(szInfo, "WorldID:%d, WorldName:%s, WorldMaxOnline:%d, WorldOnlineCount:%d",
@@ -62,11 +62,11 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 //             }
 //             else if ("listloginserver" == strCmd)
 //             {
-//                 NFCValueList valOobjectList;
+//                 NFCDataList valOobjectList;
 //                 int nCount = m_pKernelModule->GetContainerOnLineList(-1, valOobjectList);
 //                 for (int i = 0; i < nCount; i++)
 //                 {
-//                     NFIDENTID ident = valOobjectList.ObjectVal(i);
+//                     NFIDENTID ident = valOobjectList.Object(i);
 // 
 //                     char szInfo[MAX_PATH] = { 0 };
 //                     sprintf_s(szInfo, "LoginID:%d, LoginName:%s, LoginMaxOnline:%d, LoginOnlineCount:%d",
@@ -80,11 +80,11 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 //             }
 //             else if ("listcontainer" == strCmd)
 //             {
-//                 //              NFCValueList valOobjectList;
+//                 //              NFCDataList valOobjectList;
 //                 //              int nCount= m_pKernelModule->GetContainerOnLineList( mnLoginContranerID, valOobjectList );
 //                 //              for ( int i = 0; i < nCount; i++ )
 //                 //              {
-//                 //                  NFIDENTID ident = valOobjectList.ObjectVal(i);
+//                 //                  NFIDENTID ident = valOobjectList.Object(i);
 //                 //
 //                 //                  char szInfo[MAX_PATH] = { 0 };
 //                 //                  sprintf_s( szInfo, "LoginID:%d, LoginName:%s, LoginMaxOnline:%d, LoginOnlineCount:%d",
@@ -98,11 +98,11 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 //             }
 //             else if ("listobject" == strCmd)
 //             {
-//                 //              NFCValueList valOobjectList;
+//                 //              NFCDataList valOobjectList;
 //                 //              int nCount= m_pKernelModule->GetContainerOnLineList( mnLoginContranerID, valOobjectList );
 //                 //              for ( int i = 0; i < nCount; i++ )
 //                 //              {
-//                 //                  NFIDENTID ident = valOobjectList.ObjectVal(i);
+//                 //                  NFIDENTID ident = valOobjectList.Object(i);
 //                 //
 //                 //                  char szInfo[MAX_PATH] = { 0 };
 //                 //                  sprintf_s( szInfo, "LoginID:%d, LoginName:%s, LoginMaxOnline:%d, LoginOnlineCount:%d",

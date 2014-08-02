@@ -30,10 +30,10 @@ bool NFCGameServerModule::Execute( const float fLasFrametime, const float fStart
     char szContent[MAX_PATH] = { 0 };
     if (kbhit() && gets(szContent))
     {
-        NFCValueList val(szContent, ",");
+        NFCDataList val(szContent, ",");
         if (val.GetCount() > 0)
         {
-            //const char* pstrCmd = val.StringVal( 0 );
+            //const char* pstrCmd = val.String( 0 );
             m_pKernelModule->Command(val);
 
         }

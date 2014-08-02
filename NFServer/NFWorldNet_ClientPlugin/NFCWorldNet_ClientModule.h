@@ -57,7 +57,7 @@ protected:
     int OnSelectServerProcess(const NFIPacket& msg);
     int OnKickClientProcess(const NFIPacket& msg);
 
-    int OnSelectServerResultsEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
+    int OnSelectServerResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
 
 private:
 	int mnSocketFD;

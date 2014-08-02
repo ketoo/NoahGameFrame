@@ -21,7 +21,7 @@ NFCRecord::NFCRecord()
 
 }
 
-NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& valueList, const NFIValueList& keyList, const NFIValueList& descList, const NFIValueList& tagList, const NFIValueList& relateRecordList, int nMaxRow, bool bPublic,  bool bPrivate,  bool bSave, int nIndex)
+NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& valueList, const NFIDataList& keyList, const NFIDataList& descList, const NFIDataList& tagList, const NFIDataList& relateRecordList, int nMaxRow, bool bPublic,  bool bPrivate,  bool bSave, int nIndex)
 {
     mVarRecordType = valueList;
     mVarRecordDesc = descList;
@@ -48,7 +48,7 @@ NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, co
 
     for (int i = 0; i < keyList.GetCount(); ++i)
     {
-        if (keyList.IntVal(i) > 0)
+        if (keyList.Int(i) > 0)
         {
             mbHasKey = true;
             break;
@@ -58,39 +58,39 @@ NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, co
     // TODO:可以考虑在此处直接加入默认值
     for (int i = 0; i < GetRows() * GetCols(); i++)
     {
-        mtRecordVec.push_back(std::shared_ptr<NFIValueList::TData>());
+        mtRecordVec.push_back(std::shared_ptr<NFIDataList::TData>());
     }
 
     for (int i = 0; i < mVarRecordTag.GetCount(); ++i)
     {
-        if (!mVarRecordTag.StringVal(i).empty())
+        if (!mVarRecordTag.String(i).empty())
         {
-            mmTag[mVarRecordTag.StringVal(i)] = i;
+            mmTag[mVarRecordTag.String(i)] = i;
         }
     }
 
     for (int i = 0; i < mVarRecordRelation.GetCount(); ++i)
     {
-        const std::string& strRelationData = mVarRecordRelation.StringVal(i);
+        const std::string& strRelationData = mVarRecordRelation.String(i);
         if (!strRelationData.empty())
         {
             continue;
         }
 
-        NFCValueList relationDataList;
+        NFCDataList relationDataList;
         relationDataList.Split(strRelationData.c_str(), ";");
         for (int j = 0; j < relationDataList.GetCount(); ++j)
         {
-            const std::string& strSingleRelation = relationDataList.StringVal(j);
+            const std::string& strSingleRelation = relationDataList.String(j);
             if (strSingleRelation.empty())
             {
                 continue;
             }
 
-            NFCValueList singleRelationList;
+            NFCDataList singleRelationList;
             singleRelationList.Split(strRelationData.c_str(), ",");
-            const std::string& strRecord = singleRelationList.StringVal(0);
-            const std::string& strRecordTag =singleRelationList.StringVal(1);
+            const std::string& strRecord = singleRelationList.String(0);
+            const std::string& strRecordTag =singleRelationList.String(1);
             mmRelationRecord.insert(RelationRecordMap::value_type(RelationRecordColType(i, strRecord), strRecordTag));
         }
     }
@@ -130,7 +130,7 @@ TDATA_TYPE NFCRecord::GetColType(const int nCol) const
 
 const std::string& NFCRecord::GetColTag( const int nCol ) const
 {
-    return mVarRecordTag.StringVal(nCol);
+    return mVarRecordTag.String(nCol);
 }
 
 // 添加数据
@@ -140,7 +140,7 @@ int NFCRecord::AddRow(const int nRow)
 }
 
 //类型，新值，原值==给原值赋新值，没有就new
-bool ValidAdd(TDATA_TYPE eType, const NFIValueList::TData& var, std::shared_ptr<NFIValueList::TData>& pVar)
+bool ValidAdd(TDATA_TYPE eType, const NFIDataList::TData& var, std::shared_ptr<NFIDataList::TData>& pVar)
 {
     if (var.nType != eType)
     {
@@ -149,12 +149,12 @@ bool ValidAdd(TDATA_TYPE eType, const NFIValueList::TData& var, std::shared_ptr<
 
     if (!pVar.get())
     {
-        if (!NFIValueList::Valid(var))
+        if (!NFIDataList::Valid(var))
         {
             return false;
         }
 
-        pVar = std::shared_ptr<NFIValueList::TData>(new NFIValueList::TData());
+        pVar = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
         pVar->nType = eType;
     }
 
@@ -168,7 +168,7 @@ bool ValidAdd(TDATA_TYPE eType, const NFIValueList::TData& var, std::shared_ptr<
     return true;
 }
 
-int NFCRecord::AddRow(const int nRow, const NFIValueList& var)
+int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
 {
     int nFindRow = nRow;
     if (nFindRow >= mnMaxRow)
@@ -214,7 +214,7 @@ int NFCRecord::AddRow(const int nRow, const NFIValueList& var)
         mVecUsedState[nFindRow] = 1;
         for (int i = 0; i < GetCols(); ++i)
         {
-            std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nFindRow, i));//GetTData(nFindRow, i);
+            std::shared_ptr<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nFindRow, i));//GetTData(nFindRow, i);
             if(!ValidAdd(GetColType(i), *var.GetStackConst(i), pVar))
             {
                 //添加失败--不存在这样的情况，因为类型上面已经监测过，如果返回的话，那么添加的数据是0的话就会返回，导致结果错误
@@ -237,11 +237,11 @@ bool NFCRecord::SetInt(const int nRow, const int nCol, const int value)
         return false;
     }
 
-    NFIValueList::TData var;
+    NFIDataList::TData var;
     var.nType = TDATA_INT;
     var.variantData = value;
 
-    std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    std::shared_ptr<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if(!ValidAdd(GetColType(nCol), var, pVar))
     {
         return false;
@@ -249,11 +249,11 @@ bool NFCRecord::SetInt(const int nRow, const int nCol, const int value)
 
     if (TDATA_INT == pVar->nType)
     {
-        NFCValueList oldValue;
-        NFCValueList newValue;
+        NFCDataList oldValue;
+        NFCDataList newValue;
 
         oldValue.Append(*pVar);
-        newValue.AddInt(value);
+        newValue.Add(value);
 
         pVar->variantData = value;
 
@@ -278,11 +278,11 @@ bool NFCRecord::SetFloat(const int nRow, const int nCol, const float value)
         return false;
     }
 
-    NFIValueList::TData var;
+    NFIDataList::TData var;
     var.nType = TDATA_FLOAT;
     var.variantData = value;
 
-    std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    std::shared_ptr<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if(!ValidAdd(GetColType(nCol), var, pVar))
     {
         return false;
@@ -290,11 +290,11 @@ bool NFCRecord::SetFloat(const int nRow, const int nCol, const float value)
 
     if (TDATA_FLOAT == pVar->nType)
     {
-        NFCValueList oldValue;
-        NFCValueList newValue;
+        NFCDataList oldValue;
+        NFCDataList newValue;
 
         oldValue.Append(*pVar);
-        newValue.AddFloat(value);
+        newValue.Add(value);
 
         pVar->variantData = value;
 
@@ -319,11 +319,11 @@ bool NFCRecord::SetDouble(const int nRow, const int nCol, const double value)
         return false;
     }
 
-    NFIValueList::TData var;
+    NFIDataList::TData var;
     var.nType = TDATA_DOUBLE;
     var.variantData = value;
 
-    std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    std::shared_ptr<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if(!ValidAdd(GetColType(nCol), var, pVar))
     {
         return false;
@@ -331,11 +331,11 @@ bool NFCRecord::SetDouble(const int nRow, const int nCol, const double value)
 
     if (TDATA_DOUBLE == pVar->nType)
     {
-        NFCValueList oldValue;
-        NFCValueList newValue;
+        NFCDataList oldValue;
+        NFCDataList newValue;
 
         oldValue.Append(*pVar);
-        newValue.AddDouble(value);
+        newValue.Add(value);
 
         pVar->variantData = value;
 
@@ -360,11 +360,11 @@ bool NFCRecord::SetString(const int nRow, const int nCol, const char* value)
         return false;
     }
 
-    NFIValueList::TData var;
+    NFIDataList::TData var;
     var.nType = TDATA_STRING;
     var.variantData = std::string(value);
 
-    std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    std::shared_ptr<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if(!ValidAdd(GetColType(nCol), var, pVar))
     {
         return false;
@@ -372,11 +372,11 @@ bool NFCRecord::SetString(const int nRow, const int nCol, const char* value)
 
     if (TDATA_STRING == pVar->nType)
     {
-        NFCValueList oldValue;
-        NFCValueList newValue;
+        NFCDataList oldValue;
+        NFCDataList newValue;
 
         oldValue.Append(*pVar);
-        newValue.AddString(value);
+        newValue.Add(value);
 
         pVar->variantData = (std::string)value;
 
@@ -401,11 +401,11 @@ bool NFCRecord::SetObject(const int nRow, const int nCol, const NFIDENTID& value
         return false;
     }
 
-    NFIValueList::TData var;
+    NFIDataList::TData var;
     var.nType = TDATA_OBJECT;
     var.variantData = (NFINT64)value.nData64;
 
-    std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    std::shared_ptr<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if(!ValidAdd(GetColType(nCol), var, pVar))
     {
         return false;
@@ -413,11 +413,11 @@ bool NFCRecord::SetObject(const int nRow, const int nCol, const NFIDENTID& value
 
     if (TDATA_OBJECT == pVar->nType)
     {
-        NFCValueList oldValue;
-        NFCValueList newValue;
+        NFCDataList oldValue;
+        NFCDataList newValue;
 
         oldValue.Append(*pVar);
-        newValue.AddObject(value);
+        newValue.Add(value);
 
         pVar->variantData = value.nData64;
 
@@ -448,7 +448,7 @@ bool NFCRecord::SetPointer( const int nRow, const std::string& strColTag, const 
 }
 
 // 获得数据
-bool NFCRecord::QueryRow(const int nRow, NFIValueList& varList)
+bool NFCRecord::QueryRow(const int nRow, NFIDataList& varList)
 {
     if (!ValidRow(nRow))
     {
@@ -458,7 +458,7 @@ bool NFCRecord::QueryRow(const int nRow, NFIValueList& varList)
     varList.Clear();
     for (int i = 0; i < GetCols(); ++i)
     {
-        std::shared_ptr<NFIValueList::TData> pVar = mtRecordVec.at(GetPos(nRow, i));
+        std::shared_ptr<NFIDataList::TData> pVar = mtRecordVec.at(GetPos(nRow, i));
         if (pVar.get())
         {
             varList.Append(*pVar);
@@ -468,23 +468,23 @@ bool NFCRecord::QueryRow(const int nRow, NFIValueList& varList)
             switch (GetColType(i))
             {
             case TDATA_INT:
-                varList.AddInt(0);
+                varList.Add(0);
             	break;
 
             case TDATA_FLOAT:
-                varList.AddFloat(0.0f);
+                varList.Add(0.0f);
                 break;
 
             case TDATA_DOUBLE:
-                varList.AddDouble(0.0f);
+                varList.Add(0.0f);
                 break;
 
             case TDATA_STRING:
-                varList.AddString(NULL_STR.c_str());
+                varList.Add(NULL_STR.c_str());
                 break;
 
             case TDATA_OBJECT:
-                varList.AddObject(0);
+                varList.Add(0);
                 break;
             default:
                 return false;
@@ -508,7 +508,7 @@ int NFCRecord::GetInt(const int nRow, const int nCol) const
         return 0;
     }
 
-    const std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    const std::shared_ptr<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if (!pVar.get())
     {
         return 0;
@@ -535,7 +535,7 @@ float NFCRecord::GetFloat(const int nRow, const int nCol) const
         return 0.0f;
     }
 
-    const std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    const std::shared_ptr<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if (!pVar.get())
     {
         return 0.0f;
@@ -562,7 +562,7 @@ double NFCRecord::GetDouble(const int nRow, const int nCol) const
         return 0.0f;
     }
 
-    const std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    const std::shared_ptr<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if (!pVar.get())
     {
         return 0.0f;
@@ -589,7 +589,7 @@ const std::string& NFCRecord::GetString(const int nRow, const int nCol) const
         return NULL_STR;
     }
 
-    const std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+    const std::shared_ptr<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if (!pVar.get())
     {
         return NULL_STR;
@@ -616,7 +616,7 @@ NFIDENTID NFCRecord::GetObject(const int nRow, const int nCol) const
         return NFIDENTID();
     }
 
-   const  std::shared_ptr<NFIValueList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+   const  std::shared_ptr<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if (!pVar.get())
     {
         return NFIDENTID();
@@ -638,7 +638,7 @@ NFIDENTID NFCRecord::GetObject( const int nRow, const std::string& strColTag ) c
 
 void* NFCRecord::GetPointer(const int nRow, const int nCol) const
 {
-    //     NFIValueList::TData* pVar = GetTData(nRow, nCol);
+    //     NFIDataList::TData* pVar = GetTData(nRow, nCol);
     //     if (pVar && TDATA_POINTER == pVar->nType)
     //     {
     //         return boost::get<void*>(pVar->variantData);
@@ -653,7 +653,7 @@ void* NFCRecord::GetPointer( const int nRow, const std::string& strColTag ) cons
     return GetPointer(nRow, nCol);
 }
 
-int NFCRecord::FindRowByColValue(const int nCol, const NFIValueList& var, NFIValueList& varResult)
+int NFCRecord::FindRowByColValue(const int nCol, const NFIDataList& var, NFIDataList& varResult)
 {
     if (!ValidCol(nCol))
     {
@@ -669,23 +669,23 @@ int NFCRecord::FindRowByColValue(const int nCol, const NFIValueList& var, NFIVal
     switch (eType)
     {
     case TDATA_INT:
-        return FindInt(nCol, var.IntVal(nCol), varResult);
+        return FindInt(nCol, var.Int(nCol), varResult);
         break;
 
     case TDATA_FLOAT:
-        return FindFloat(nCol, var.FloatVal(nCol), varResult);
+        return FindFloat(nCol, var.Float(nCol), varResult);
         break;
 
     case TDATA_DOUBLE:
-        return FindDouble(nCol, var.DoubleVal(nCol), varResult);
+        return FindDouble(nCol, var.Double(nCol), varResult);
         break;
 
     case TDATA_STRING:
-        return FindString(nCol, var.StringVal(nCol).c_str(), varResult);
+        return FindString(nCol, var.String(nCol).c_str(), varResult);
         break;
 
     case TDATA_OBJECT:
-        return FindObject(nCol, var.ObjectVal(nCol), varResult);
+        return FindObject(nCol, var.Object(nCol), varResult);
         break;
 
     default:
@@ -695,13 +695,13 @@ int NFCRecord::FindRowByColValue(const int nCol, const NFIValueList& var, NFIVal
     return -1;
 }
 
-int NFCRecord::FindRowByColValue( const std::string& strColTag, const NFIValueList& var, NFIValueList& varResult )
+int NFCRecord::FindRowByColValue( const std::string& strColTag, const NFIDataList& var, NFIDataList& varResult )
 {
     int nCol = GetCol(strColTag);
     return FindRowByColValue(nCol, var, varResult);
 }
 
-int NFCRecord::FindInt(const int nCol, const int value, NFIValueList& varResult)
+int NFCRecord::FindInt(const int nCol, const int value, NFIDataList& varResult)
 {
     if (!ValidCol(nCol))
     {
@@ -729,7 +729,7 @@ int NFCRecord::FindInt(const int nCol, const int value, NFIValueList& varResult)
     return varResult.GetCount();
 }
 
-int NFCRecord::FindInt( const std::string& strColTag, const int value, NFIValueList& varResult )
+int NFCRecord::FindInt( const std::string& strColTag, const int value, NFIDataList& varResult )
 {
     if (strColTag.empty())
     {
@@ -740,7 +740,7 @@ int NFCRecord::FindInt( const std::string& strColTag, const int value, NFIValueL
     return FindInt(nCol, value, varResult);
 }
 
-int NFCRecord::FindFloat(const int nCol, const float value, NFIValueList& varResult)
+int NFCRecord::FindFloat(const int nCol, const float value, NFIDataList& varResult)
 {
     if (!ValidCol(nCol))
     {
@@ -768,7 +768,7 @@ int NFCRecord::FindFloat(const int nCol, const float value, NFIValueList& varRes
     return varResult.GetCount();
 }
 
-int NFCRecord::FindFloat( const std::string& strColTag, const float value, NFIValueList& varResult )
+int NFCRecord::FindFloat( const std::string& strColTag, const float value, NFIDataList& varResult )
 {
     if (strColTag.empty())
     {
@@ -779,7 +779,7 @@ int NFCRecord::FindFloat( const std::string& strColTag, const float value, NFIVa
     return FindFloat(nCol, value, varResult);
 }
 
-int NFCRecord::FindDouble(const int nCol, const double value, NFIValueList& varResult)
+int NFCRecord::FindDouble(const int nCol, const double value, NFIDataList& varResult)
 {
     if (!ValidCol(nCol))
     {
@@ -807,7 +807,7 @@ int NFCRecord::FindDouble(const int nCol, const double value, NFIValueList& varR
     return varResult.GetCount();
 }
 
-int NFCRecord::FindDouble( const std::string& strColTag, const double value, NFIValueList& varResult )
+int NFCRecord::FindDouble( const std::string& strColTag, const double value, NFIDataList& varResult )
 {
     if (strColTag.empty())
     {
@@ -818,7 +818,7 @@ int NFCRecord::FindDouble( const std::string& strColTag, const double value, NFI
     return FindDouble(nCol, value, varResult);
 }
 
-int NFCRecord::FindString(const int nCol, const char* value, NFIValueList& varResult)
+int NFCRecord::FindString(const int nCol, const char* value, NFIDataList& varResult)
 {
     if (!ValidCol(nCol))
     {
@@ -847,7 +847,7 @@ int NFCRecord::FindString(const int nCol, const char* value, NFIValueList& varRe
     return varResult.GetCount();
 }
 
-int NFCRecord::FindString( const std::string& strColTag, const char* value, NFIValueList& varResult )
+int NFCRecord::FindString( const std::string& strColTag, const char* value, NFIDataList& varResult )
 {
     if (strColTag.empty())
     {
@@ -858,7 +858,7 @@ int NFCRecord::FindString( const std::string& strColTag, const char* value, NFIV
     return FindString(nCol, value, varResult);
 }
 
-int NFCRecord::FindObject(const int nCol, const NFIDENTID& value, NFIValueList& varResult)
+int NFCRecord::FindObject(const int nCol, const NFIDENTID& value, NFIDataList& varResult)
 {
     if (!ValidCol(nCol))
     {
@@ -886,7 +886,7 @@ int NFCRecord::FindObject(const int nCol, const NFIDENTID& value, NFIValueList& 
     return varResult.GetCount();
 }
 
-int NFCRecord::FindObject( const std::string& strColTag, const NFIDENTID& value, NFIValueList& varResult )
+int NFCRecord::FindObject( const std::string& strColTag, const NFIDENTID& value, NFIDataList& varResult )
 {
     if (strColTag.empty())
     {
@@ -897,12 +897,12 @@ int NFCRecord::FindObject( const std::string& strColTag, const NFIDENTID& value,
     return FindObject(nCol, value, varResult);
 }
 
-int NFCRecord::FindPointer(const int nCol, const void* value, NFIValueList& varResult)
+int NFCRecord::FindPointer(const int nCol, const void* value, NFIDataList& varResult)
 {
     return varResult.GetCount();
 }
 
-int NFCRecord::FindPointer( const std::string& strColTag, const void* value, NFIValueList& varResult )
+int NFCRecord::FindPointer( const std::string& strColTag, const void* value, NFIDataList& varResult )
 {
     if (strColTag.empty())
     {
@@ -919,13 +919,13 @@ bool NFCRecord::Remove(const int nRow)
     {
         if (IsUsed(nRow))
         {
-            OnEventHandler(mSelf, mstrRecordName.c_str(), Del, nRow, 0, NFCValueList(), NFCValueList());
+            OnEventHandler(mSelf, mstrRecordName.c_str(), Del, nRow, 0, NFCDataList(), NFCDataList());
 
             mVecUsedState[nRow] = 0;
 
 //             for (int i = 0; i < GetCols(); ++i)
 //             {
-//                 std::shared_ptr<NFIValueList::TData>& var = mtRecordVec.at(GetPos(nRow, i));
+//                 std::shared_ptr<NFIDataList::TData>& var = mtRecordVec.at(GetPos(nRow, i));
 //                 var.reset();
 //            }
 
@@ -1001,20 +1001,20 @@ void NFCRecord::SetName(const char* strName)
     mstrRecordName = strName;
 }
 
-const NFIValueList& NFCRecord::GetInitData() const
+const NFIDataList& NFCRecord::GetInitData() const
 {
     return mVarRecordType;
 }
 
-void NFCRecord::OnEventHandler(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar)
+void NFCRecord::OnEventHandler(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar)
 {
     TRECORDCALLBACKEX::iterator itr = mtRecordCallback.begin();
     TRECORDCALLBACKEX::iterator end = mtRecordCallback.end();
     for (; itr != end; ++itr)
     {
-        //NFIValueList参数:所属对象名string，操作类型int，Row,Col, OLD属性值，NEW属性值
+        //NFIDataList参数:所属对象名string，操作类型int，Row,Col, OLD属性值，NEW属性值
         RECORD_EVENT_FUNCTOR_PTR functorPtr = *itr;
-        functorPtr.get()->operator()(self, strRecordName, nOpType, nRow, nCol, oldVar, newVar, NFCValueList());
+        functorPtr.get()->operator()(self, strRecordName, nOpType, nRow, nCol, oldVar, newVar, NFCDataList());
     }
 }
 
@@ -1035,7 +1035,7 @@ bool NFCRecord::SwapRowInfo(const int nOriginRow, const int nTargetRow)
     {
         for (int i = 0; i < GetCols(); ++i)
         {
-            std::shared_ptr<NFIValueList::TData> pOrigin = mtRecordVec.at(GetPos(nOriginRow, i));
+            std::shared_ptr<NFIDataList::TData> pOrigin = mtRecordVec.at(GetPos(nOriginRow, i));
             mtRecordVec[GetPos(nOriginRow, i)] = mtRecordVec.at(GetPos(nTargetRow, i));
             mtRecordVec[GetPos(nTargetRow, i)] = pOrigin;
         }
@@ -1044,7 +1044,7 @@ bool NFCRecord::SwapRowInfo(const int nOriginRow, const int nTargetRow)
         mVecUsedState[nOriginRow] = mVecUsedState[nTargetRow];
         mVecUsedState[nTargetRow] = nOriginUse;
 
-        OnEventHandler(mSelf, mstrRecordName, Changed, nOriginRow, nTargetRow, NFCValueList(), NFCValueList());
+        OnEventHandler(mSelf, mstrRecordName, Changed, nOriginRow, nTargetRow, NFCDataList(), NFCDataList());
 
         return true;
     }
@@ -1052,17 +1052,17 @@ bool NFCRecord::SwapRowInfo(const int nOriginRow, const int nTargetRow)
     return false;
 }
 
-const NFIValueList& NFCRecord::GetInitDesc() const
+const NFIDataList& NFCRecord::GetInitDesc() const
 {
     return mVarRecordDesc;
 }
 
-const NFIValueList& NFCRecord::GetTag() const
+const NFIDataList& NFCRecord::GetTag() const
 {
     return mVarRecordTag;
 }
 
-const NFIValueList& NFCRecord::GetRelatedRecord() const
+const NFIDataList& NFCRecord::GetRelatedRecord() const
 {
     return mVarRecordRelation;
 }
@@ -1095,14 +1095,14 @@ bool NFCRecord::IsKey( const int nRow ) const
 
     if (ValidRow(nRow))
     {
-        return (mVarRecordKey.IntVal(nRow) > 0);
+        return (mVarRecordKey.Int(nRow) > 0);
         //return (m_pRecordKeyState[nRow] > 0);
     }
 
     return false;
 }
 
-const NFIValueList& NFCRecord::GetKeyState() const
+const NFIDataList& NFCRecord::GetKeyState() const
 {
     return mVarRecordKey;
 }

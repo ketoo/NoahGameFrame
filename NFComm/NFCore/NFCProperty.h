@@ -11,7 +11,7 @@
 
 #include "NFDefine.h"
 #include "NFMap.h"
-#include "NFCValueList.h"
+#include "NFCDataList.h"
 #include "NFIProperty.h"
 
 class NFCProperty : public NFIProperty
@@ -23,7 +23,7 @@ public:
 
     virtual ~NFCProperty();
 
-    virtual void SetValue(const NFIValueList::TData& TData);
+    virtual void SetValue(const NFIDataList::TData& TData);
     virtual void SetValue(const NFIProperty* pProperty);
 
     virtual bool SetInt(int value);
@@ -56,17 +56,17 @@ public:
 
     virtual bool Changed() const;
 
-    //virtual void RegisterCallback(PROPERTY_EVENT_FUNC cb, const NFIValueList& argVar);
-    virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIValueList& argVar);
+    //virtual void RegisterCallback(PROPERTY_EVENT_FUNC cb, const NFIDataList& argVar);
+    virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIDataList& argVar);
 
 
 protected:
-    virtual NFIValueList::TData GetValue() const;
+    virtual NFIDataList::TData GetValue() const;
 
-    //int OnEventHandler(const NFIValueList& oldVar, const NFIValueList& newVar);
-    int OnEventHandler(const NFIValueList& oldVar, const NFIValueList& newVar);
+    //int OnEventHandler(const NFIDataList& oldVar, const NFIDataList& newVar);
+    int OnEventHandler(const NFIDataList& oldVar, const NFIDataList& newVar);
 private:
-//     typedef std::map<PROPERTY_EVENT_FUNC, NFIValueList::TData> TPROPERTYCALLBACK;
+//     typedef std::map<PROPERTY_EVENT_FUNC, NFIDataList::TData> TPROPERTYCALLBACK;
 //     TPROPERTYCALLBACK mtPropertyCallback;
 
     typedef std::vector<PROPERTY_EVENT_FUNCTOR_PTR> TPROPERTYCALLBACKEX;
@@ -75,9 +75,9 @@ private:
     NFIDENTID mSelf;
     std::string msPropertyName;//可以想办法与基本类型共用
     TDATA_TYPE eType;//只有在不存在指针的时候才用这个判断类型--为节约内存
-    //NFCValueList    mVarProperty;
-    //NFIValueList::TData* m_pTData;
-    std::shared_ptr<NFIValueList::TData> m_pTData;
+    //NFCDataList    mVarProperty;
+    //NFIDataList::TData* m_pTData;
+    std::shared_ptr<NFIDataList::TData> m_pTData;
 
     bool mbPublic;
     bool mbPrivate;

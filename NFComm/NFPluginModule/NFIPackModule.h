@@ -34,7 +34,7 @@ class NFIPackModule
 public:
     //添加装备:装备config,装备过期类型,孔数量，空里宝石列表，强化等级，附魔等级，元素卡片列表
     virtual NFIDENTID CreateEquip(const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount,
-                                  const NFIValueList& inlayCardList, const int nIntensiveLevel, const int nEnchantLevel, const std::string& enchantCardList) = 0;
+                                  const NFIDataList& inlayCardList, const int nIntensiveLevel, const int nEnchantLevel, const std::string& enchantCardList) = 0;
 
     //添加装备:装备config,装备过期类型,孔数量
     virtual NFIDENTID CreateEquip(const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount) = 0;
@@ -85,7 +85,7 @@ public:
     virtual const std::string& GetEquipCreatTime(const NFIDENTID& self, const int nOrigin) = 0;
 
     // 修改属性
-    virtual bool SetGridData(const NFIDENTID& self, const int mRow, const int nCol, const NFIValueList& var, const PackTableType name = PackTableType::NormalPack) = 0;
+    virtual bool SetGridData(const NFIDENTID& self, const int mRow, const int nCol, const NFIDataList& var, const PackTableType name = PackTableType::NormalPack) = 0;
 
     //得到还有多少空格子
     virtual int GetCanUsedCount(const NFIDENTID& self, const PackTableType name = PackTableType::NormalPack) const = 0;
