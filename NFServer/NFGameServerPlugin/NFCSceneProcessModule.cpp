@@ -73,7 +73,7 @@ bool NFCSceneProcessModule::AfterInit()
                     for (int i = 1; i <= mnContainerLine; ++i)
                     {
                         const int nTargetGroupID = m_pKernelModule->RequestGroupScene( nSceneID);
-                        const int nCreateGroupID = CreateCloneScene( nSceneID, nTargetGroupID, "File.xml", NFCValueList() );
+                        const int nCreateGroupID = CreateCloneScene( nSceneID, nTargetGroupID, "File.xml", NFCDataList() );
                         if ( nCreateGroupID == nTargetGroupID)
                         {
                             CreateContinerObjectByFile( nSceneID, nTargetGroupID, "File.xml" );
@@ -131,7 +131,7 @@ bool NFCSceneProcessModule::CreateContinerObject( const int nContainerID, const 
                 {
                     const std::string& strClassName = m_pElementInfoModule->GetPropertyString(pResourceObject->strConfigID, "ClassName");
 
-                    NFCValueList arg;
+                    NFCDataList arg;
                     arg << "X" << pResourceObject->fSeedX;
                     arg << "Y" << pResourceObject->fSeedY;
                     arg << "Z" << pResourceObject->fSeedZ;
@@ -146,7 +146,7 @@ bool NFCSceneProcessModule::CreateContinerObject( const int nContainerID, const 
     return true;
 }
 
-int NFCSceneProcessModule::CreateCloneScene( const int& nContainerID, const int nGroupID, const std::string& strResourceID, const NFIValueList& arg )
+int NFCSceneProcessModule::CreateCloneScene( const int& nContainerID, const int nGroupID, const std::string& strResourceID, const NFIDataList& arg )
 {
     int nTargetGroupID = -1;
     const E_SCENE_TYPE eType = GetCloneSceneType( nContainerID );
@@ -195,14 +195,14 @@ int NFCSceneProcessModule::CreateCloneScene( const int& nContainerID, const int 
     return nTargetGroupID;
 }
 
-bool NFCSceneProcessModule::DestroyCloneScene( const int& nContainerID, const int& nGroupID, const NFIValueList& arg )
+bool NFCSceneProcessModule::DestroyCloneScene( const int& nContainerID, const int& nGroupID, const NFIDataList& arg )
 {
     //ÎÞÌõ¼þÉ¾³ý    
-    NFCValueList valueAllObjectList;
+    NFCDataList valueAllObjectList;
     m_pKernelModule->GetGroupObjectList( nContainerID, nGroupID, valueAllObjectList );
     for (int i = 0; i < valueAllObjectList.GetCount(); ++i)
     {
-        NFIDENTID ident = valueAllObjectList.ObjectVal( i );
+        NFIDENTID ident = valueAllObjectList.Object( i );
         std::string strObjClassName = m_pKernelModule->GetPropertyString( ident, "ClassName" );
         if ( "Player" != strObjClassName )
         {
@@ -215,7 +215,7 @@ bool NFCSceneProcessModule::DestroyCloneScene( const int& nContainerID, const in
     return false;
 }
 
-int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
+int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
 {
     if ( var.GetCount() != 4 
         || !var.TypeEx(TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_INT, 
@@ -257,7 +257,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
         return 1;
     }
 
-    nTargetGroupID = CreateCloneScene( nTargetScene, nTargetGroupID, "File.xml", NFCValueList() );
+    nTargetGroupID = CreateCloneScene( nTargetScene, nTargetGroupID, "File.xml", NFCDataList() );
     if ( nTargetGroupID <= 0 )
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "CreateCloneScene failed", nTargetScene);
@@ -270,22 +270,22 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
     float fZ = 0.0f;
 
     const std::string& strRelivePosList = m_pElementInfoModule->GetPropertyString(szSceneID, "RelivePos");
-    NFCValueList valueRelivePosList( strRelivePosList.c_str(), ";" );
+    NFCDataList valueRelivePosList( strRelivePosList.c_str(), ";" );
     if ( valueRelivePosList.GetCount() >= 1 )
     {
-        NFCValueList valueRelivePos( valueRelivePosList.StringVal( 0 ).c_str(), "," );
+        NFCDataList valueRelivePos( valueRelivePosList.String( 0 ).c_str(), "," );
         if ( valueRelivePos.GetCount() == 3 )
         {
-            fX = boost::lexical_cast<float>( valueRelivePos.StringVal( 0 ) );
-            fY = boost::lexical_cast<float>( valueRelivePos.StringVal( 1 ) );
-            fZ = boost::lexical_cast<float>( valueRelivePos.StringVal( 2 ) );
+            fX = boost::lexical_cast<float>( valueRelivePos.String( 0 ) );
+            fY = boost::lexical_cast<float>( valueRelivePos.String( 1 ) );
+            fZ = boost::lexical_cast<float>( valueRelivePos.String( 2 ) );
         }
     }
 
-    NFCValueList xSceneResult( var );
-    xSceneResult.AddFloat( fX );
-    xSceneResult.AddFloat( fY );
-    xSceneResult.AddFloat( fZ );
+    NFCDataList xSceneResult( var );
+    xSceneResult.Add( fX );
+    xSceneResult.Add( fY );
+    xSceneResult.Add( fZ );
 
     m_pEventProcessModule->DoEvent( self, NFED_ON_OBJECT_ENTER_SCENE_BEFORE, xSceneResult );
 
@@ -296,13 +296,13 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
         return 0;
     }
 
-    xSceneResult.SetInt(3, nTargetGroupID);//spicial
+    xSceneResult.Set(3, nTargetGroupID);//spicial
     m_pEventProcessModule->DoEvent( self, NFED_ON_OBJECT_ENTER_SCENE_RESULT, xSceneResult );
 
     return 0;
 }
 
-int NFCSceneProcessModule::OnLeaveSceneEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var )
+int NFCSceneProcessModule::OnLeaveSceneEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var )
 {
     if (1 != var.GetCount()
         || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_UNKNOWN))
@@ -310,7 +310,7 @@ int NFCSceneProcessModule::OnLeaveSceneEvent( const NFIDENTID& object, const int
         return -1;
     }
 
-    NFINT32 nOldGroupID = var.IntVal(0);
+    NFINT32 nOldGroupID = var.Int(0);
 
     NFIObject* pObject = m_pKernelModule->GetObject(object);
     if (pObject && nOldGroupID > 0)
@@ -326,7 +326,7 @@ int NFCSceneProcessModule::OnLeaveSceneEvent( const NFIDENTID& object, const int
     return 0;
 }
 
-int NFCSceneProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var )
+int NFCSceneProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
     if ( strClassName == "Player" )
     {
@@ -339,7 +339,7 @@ int NFCSceneProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std:
                 int nGroupID = m_pKernelModule->GetPropertyInt(self, "GroupID");
 
                 m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "DestroyCloneSceneGroup", nGroupID);
-                DestroyCloneScene(nContainerID, nGroupID, NFCValueList());
+                DestroyCloneScene(nContainerID, nGroupID, NFCDataList());
             }
         }
         else if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )

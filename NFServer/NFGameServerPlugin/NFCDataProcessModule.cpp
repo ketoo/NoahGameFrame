@@ -42,7 +42,7 @@ bool NFCDataProcessModule::AfterInit()
     return true;
 }
 
-int NFCDataProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var )
+int NFCDataProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
     //非完整NF架构目前不使用NOSQL
     return 0;

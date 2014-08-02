@@ -17,18 +17,37 @@ NFCObject::NFCObject(const NFIDENTID& self, NFIPluginManager* pLuginManager)
     mSelf = self;
     m_pPluginManager = pLuginManager;
 
-    m_pRecordManager = new NFCRecordManager(mSelf);
-    m_pHeartBeatManager = new NFCHeartBeatManager(mSelf);
-    m_pPropertyManager = new NFCPropertyManager(mSelf);
-    m_pComponentManager = new NFCComponentManager(mSelf);
+    m_pRecordManager = NF_NEW NFCRecordManager(mSelf);
+    m_pHeartBeatManager = NF_NEW NFCHeartBeatManager(mSelf);
+    m_pPropertyManager = NF_NEW NFCPropertyManager(mSelf);
+    m_pComponentManager = NF_NEW NFCComponentManager(mSelf);
 }
 
 NFCObject::~NFCObject()
 {
-    delete m_pComponentManager;
-    delete m_pPropertyManager;
-    delete m_pRecordManager;
-    delete m_pHeartBeatManager;
+    if (NULL != m_pComponentManager)
+    {
+        delete m_pComponentManager;
+        m_pComponentManager = NULL;
+    }
+    
+    if (NULL != m_pPropertyManager)
+    {
+        delete m_pPropertyManager;
+        m_pPropertyManager = NULL;
+    }
+    
+    if (NULL != m_pRecordManager)
+    {
+        delete m_pRecordManager;
+        m_pRecordManager = NULL;
+    }
+    
+    if (NULL != m_pHeartBeatManager)
+    {
+        delete m_pHeartBeatManager;
+        m_pHeartBeatManager = NULL;
+    }
 }
 
 bool NFCObject::Init()
@@ -51,7 +70,7 @@ bool NFCObject::Execute(const float fLastTime, const float fAllTime)
     return true;
 }
 
-bool NFCObject::AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIValueList& var, const float fTime, const int nCount)
+bool NFCObject::AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIDataList& var, const float fTime, const int nCount)
 {
     return GetHeartBeatManager()->AddHeartBeat(mSelf , strHeartBeatName, cb, var, fTime, nCount);
 }
@@ -84,7 +103,7 @@ bool NFCObject::AddPropertyCallBack(const std::string& strCriticalName, const PR
     NFIProperty* pProperty = GetPropertyManager()->GetElement(strCriticalName);
     if (pProperty)
     {
-        pProperty->RegisterCallback(cb, NFCValueList());
+        pProperty->RegisterCallback(cb, NFCDataList());
 
         return true;
     }

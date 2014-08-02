@@ -11,7 +11,7 @@
 
 #include "NFDefine.h"
 #include "NFMap.h"
-#include "NFIValueList.h"
+#include "NFIDataList.h"
 #include "NFIPropertyManager.h"
 
 class NFCPropertyManager : public NFIPropertyManager
@@ -24,13 +24,13 @@ public:
 
     virtual ~NFCPropertyManager();
 
-    virtual bool RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIValueList& argVar);
+    virtual bool RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIDataList& argVar);
 
     virtual NFIProperty* AddProperty(const NFIDENTID& self, NFIProperty* pProperty);
 
     virtual NFIProperty* AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction);
 
-    virtual bool SetProperty(const std::string& strPropertyName, const NFIValueList::TData& TData);
+    virtual bool SetProperty(const std::string& strPropertyName, const NFIDataList::TData& TData);
 
     virtual bool SetProperty(const NFIProperty* pProperty);
 	

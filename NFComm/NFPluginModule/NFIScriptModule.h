@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
-#include "NFComm\NFCore\NFCValueList.h"
+#include "NFComm\NFCore\NFCDataList.h"
 #include "NFComm\NFCore\NFIdentID.h"
 #include "NFComm\NFPluginModule\NFIElementInfoModule.h"
 #include "NFComm\NFPluginModule\NFIKernelModule.h"
@@ -24,7 +24,7 @@ class NFIScriptModule
 {
 
 public:
-    virtual int DoHeartBeatCommonCB(NFIScriptKernelModule* pScriptKernelModule, const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var)
+    virtual int DoHeartBeatCommonCB(NFIScriptKernelModule* pScriptKernelModule, const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var)
     {
         NFCSriptData* pScriptData = pScriptKernelModule->GetElement(self);
         if (pScriptData)
@@ -45,7 +45,7 @@ public:
         return 0;
     }
 
-    virtual int DoEventCommonCB(NFIScriptKernelModule* pScriptKernelModule, const NFIDENTID& self, const int nEventID, const NFIValueList& var)
+    virtual int DoEventCommonCB(NFIScriptKernelModule* pScriptKernelModule, const NFIDENTID& self, const int nEventID, const NFIDataList& var)
     {
         NFCSriptData* pScriptData = pScriptKernelModule->GetElement(self);
         if (pScriptData)
@@ -68,7 +68,7 @@ public:
         return 0;
     }
 
-    virtual int DoPropertyCommEvent(NFIScriptKernelModule* pScriptKernelModule, const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& arg)
+    virtual int DoPropertyCommEvent(NFIScriptKernelModule* pScriptKernelModule, const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& arg)
     {
         NFCSriptData* pScriptData = pScriptKernelModule->GetElement(self);
         if (pScriptData)
@@ -90,7 +90,7 @@ public:
         return 0;
     }
 
-    virtual int DoRecordCommonEvent(NFIScriptKernelModule* pScriptKernelModule, const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& arg)
+    virtual int DoRecordCommonEvent(NFIScriptKernelModule* pScriptKernelModule, const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& arg)
     {
         NFCSriptData* pScriptData = pScriptKernelModule->GetElement(self);
         if (pScriptData)
@@ -112,7 +112,7 @@ public:
         return 0;
     }
 
-    virtual int DoClassCommonEvent(NFILogicClassModule* pLogicClassModule, const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var)
+    virtual int DoClassCommonEvent(NFILogicClassModule* pLogicClassModule, const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
     {
         std::string strSerializationName;
 
@@ -333,7 +333,7 @@ public:
         return true;
     }
 
-    int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIValueList& var)
+    int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIDataList& var)
     {
         m_pScriptModule->DoEventCommonCB(this, self, nEventID, var);
         return 0;
@@ -359,12 +359,12 @@ public:
         NFCScriptName xScriptName(strComponentName, strFunction);
         pScriptNameList->Add(xScriptName);
 
-        m_pKernelModule->AddHeartBeat(self, strHeartBeatName, this, &NFCScriptKernelModule::OnHeartBeatCommonCB, NFCValueList(), fTime, nCount);
+        m_pKernelModule->AddHeartBeat(self, strHeartBeatName, this, &NFCScriptKernelModule::OnHeartBeatCommonCB, NFCDataList(), fTime, nCount);
 
         return true;
     }
     
-    int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIValueList& var)
+    int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var)
     {
         m_pScriptModule->DoHeartBeatCommonCB(this, self, strHeartBeat, fTime, nCount, var);
         return 0;
@@ -535,7 +535,7 @@ public:
         return m_pKernelModule->AddProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, nIndex, strScriptFunction);
     }
 
-    bool AddRow(const NFIDENTID& self, const std::string& strRecordName, const NFIValueList& var)
+    bool AddRow(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& var)
     {
         NFIRecord* pRecord = m_pKernelModule->FindRecord(self, strRecordName);
         if ( pRecord )
@@ -567,13 +567,13 @@ private:
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-static  NFIValueList* NFVarList_New()
+static  NFIDataList* NFVarList_New()
 {
-    NFIValueList* pVarList = new NFCValueList();
+    NFIDataList* pVarList = new NFCDataList();
     return pVarList;
 }
 
-static void NFVarList_Del(NFIValueList* pVarList)
+static void NFVarList_Del(NFIDataList* pVarList)
 {
     if (pVarList)
     {
@@ -582,7 +582,7 @@ static void NFVarList_Del(NFIValueList* pVarList)
     }
 }
 
-static void NFVarList_Clear(NFIValueList* pVarList)
+static void NFVarList_Clear(NFIDataList* pVarList)
 {
     if (pVarList)
     {
@@ -590,7 +590,7 @@ static void NFVarList_Clear(NFIValueList* pVarList)
     }
 }
 
-static bool NFVarList_IsEmpty(NFIValueList* pVarList)
+static bool NFVarList_IsEmpty(NFIDataList* pVarList)
 {
     if (pVarList)
     {
@@ -600,7 +600,7 @@ static bool NFVarList_IsEmpty(NFIValueList* pVarList)
     return false;
 }
 
-static int NFVarList_GetCount(NFIValueList* pVarList)
+static int NFVarList_GetCount(NFIDataList* pVarList)
 {
     if (pVarList)
     {
@@ -610,7 +610,7 @@ static int NFVarList_GetCount(NFIValueList* pVarList)
     return 0;
 }
 
-static TDATA_TYPE NFVarList_Type(NFIValueList* pVarList, const int index)
+static TDATA_TYPE NFVarList_Type(NFIDataList* pVarList, const int index)
 {
     if (pVarList)
     {
@@ -620,121 +620,121 @@ static TDATA_TYPE NFVarList_Type(NFIValueList* pVarList, const int index)
     return TDATA_UNKNOWN;
 }
 
-static bool NFVarList_AddInt(NFIValueList* pVarList, const int value)
+static bool NFVarList_AddInt(NFIDataList* pVarList, const int value)
 {
     if (pVarList)
     {
-        return pVarList->AddInt(value);
+        return pVarList->Add(value);
     }
 
     return false;
 }
 
-static bool NFVarList_AddFloat(NFIValueList* pVarList, const float value)
+static bool NFVarList_AddFloat(NFIDataList* pVarList, const float value)
 {
     if (pVarList)
     {
-        return pVarList->AddFloat(value);
+        return pVarList->Add(value);
     }
 
     return false;
 }
 
-static bool NFVarList_AddString(NFIValueList* pVarList, const char* value)
+static bool NFVarList_AddString(NFIDataList* pVarList, const char* value)
 {
     if (pVarList)
     {
-        return pVarList->AddString(value);
+        return pVarList->Add(value);
     }
 
     return false;
 }
 
-static bool NFVarList_AddObject(NFIValueList* pVarList, const NFIDENTID& value)
+static bool NFVarList_AddObject(NFIDataList* pVarList, const NFIDENTID& value)
 {
     if (pVarList)
     {
-        return pVarList->AddObject(value);
+        return pVarList->Add(value);
     }
 
     return false;
 }
 
-static bool NFVarList_SetInt(NFIValueList* pVarList, const int index, const int value)
+static bool NFVarList_SetInt(NFIDataList* pVarList, const int index, const int value)
 {
     if (pVarList)
     {
-        return pVarList->SetInt(index, value);
+        return pVarList->Set(index, value);
     }
 
     return false;
 }
 
-static bool NFVarList_SetFloat(NFIValueList* pVarList, const int index, const float value)
+static bool NFVarList_SetFloat(NFIDataList* pVarList, const int index, const float value)
 {
     if (pVarList)
     {
-        return pVarList->SetFloat(index, value);
+        return pVarList->Set(index, value);
     }
 
     return false;
 }
 
-static bool NFVarList_SetString(NFIValueList* pVarList, const int index, const char* value)
+static bool NFVarList_SetString(NFIDataList* pVarList, const int index, const char* value)
 {
     if (pVarList)
     {
-        return pVarList->SetString(index, value);
+        return pVarList->Set(index, value);
     }
 
     return false;
 }
 
-static bool NFVarList_SetObject(NFIValueList* pVarList, const int index, const NFIDENTID& value)
+static bool NFVarList_SetObject(NFIDataList* pVarList, const int index, const NFIDENTID& value)
 {
     if (pVarList)
     {
-        return pVarList->SetObject(index, value);
+        return pVarList->Set(index, value);
     }
 
     return false;
 }
 
-static int NFVarList_IntVal(NFIValueList* pVarList, const int index)
+static int NFVarList_IntVal(NFIDataList* pVarList, const int index)
 {
     if (pVarList)
     {
-        return pVarList->IntVal(index);
+        return pVarList->Int(index);
     }
 
     return 0;
 }
 
-static float NFVarList_FloatVal(NFIValueList* pVarList, const int index)
+static float NFVarList_FloatVal(NFIDataList* pVarList, const int index)
 {
     if (pVarList)
     {
-        return pVarList->FloatVal(index);
+        return pVarList->Float(index);
     }
 
     return 0.0f;
 }
 
-static const std::string& NFVarList_StringVal(NFIValueList* pVarList, const int index)
+static const std::string& NFVarList_StringVal(NFIDataList* pVarList, const int index)
 {
     if (pVarList)
     {
-        return pVarList->StringVal(index);
+        return pVarList->String(index);
     }
 
     return NULL_STR;
 }
 
-static NFIDENTID NFVarList_ObjectVal(NFIValueList* pVarList, const int index)
+static NFIDENTID NFVarList_ObjectVal(NFIDataList* pVarList, const int index)
 {
     if (pVarList)
     {
-        return pVarList->ObjectVal(index);
+        return pVarList->Object(index);
     }
 
     return 0;

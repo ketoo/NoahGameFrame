@@ -93,7 +93,7 @@ NFCUUIDModule::NFCUUIDModule(NFIPluginManager* p)
 
 bool NFCUUIDModule::Init()
 {
-    m_pUUID = new UUIDModule::UUID;
+    m_pUUID = NF_NEW UUIDModule::UUID;
     assert(NULL != m_pUUID);
 
     return true;

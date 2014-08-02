@@ -95,19 +95,22 @@
   <ItemGroup>
     <ClInclude Include="NFCComponent.h" />
     <ClInclude Include="NFCComponentManager.h" />
+    <ClInclude Include="NFCDataList.h" />
     <ClInclude Include="NFCHeartBeatManager.h" />
+    <ClInclude Include="NFCMemory .h" />
     <ClInclude Include="NFCObject.h" />
     <ClInclude Include="NFCProperty.h" />
     <ClInclude Include="NFCPropertyManager.h" />
     <ClInclude Include="NFCRecordManager.h" />
     <ClInclude Include="NFIComponent.h" />
     <ClInclude Include="NFIComponentManager.h" />
+    <ClInclude Include="NFIDataList.h" />
     <ClInclude Include="NFIHeartBeatManager.h" />
+    <ClInclude Include="NFIMemory.h" />
     <ClInclude Include="NFQueue.h" />
     <ClInclude Include="NFSingleton.h" />
     <ClInclude Include="NFCore.h" />
     <ClInclude Include="NFCRecord.h" />
-    <ClInclude Include="NFCValueList.h" />
     <ClInclude Include="NFDefine.h" />
     <ClInclude Include="NFIdentID.h" />
     <ClInclude Include="NFIObject.h" />
@@ -115,7 +118,6 @@
     <ClInclude Include="NFIPropertyManager.h" />
     <ClInclude Include="NFIRecord.h" />
     <ClInclude Include="NFIRecordManager.h" />
-    <ClInclude Include="NFIValueList.h" />
     <ClInclude Include="NFList.h" />
     <ClInclude Include="NFMap.h" />
     <ClInclude Include="NFPlatform.h" />
@@ -124,14 +126,15 @@
   <ItemGroup>
     <ClCompile Include="NFCComponent.cpp" />
     <ClCompile Include="NFCComponentManager.cpp" />
+    <ClCompile Include="NFCDataList.cpp" />
     <ClCompile Include="NFCHeartBeatManager.cpp" />
+    <ClCompile Include="NFCMemory.cpp" />
     <ClCompile Include="NFCObject.cpp" />
     <ClCompile Include="NFCProperty.cpp" />
     <ClCompile Include="NFCPropertyManager.cpp" />
     <ClCompile Include="NFCRecordManager.cpp" />
     <ClCompile Include="NFCore.cpp" />
     <ClCompile Include="NFCRecord.cpp" />
-    <ClCompile Include="NFCValueList.cpp" />
     <ClCompile Include="NFTimer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

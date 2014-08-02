@@ -10,7 +10,7 @@
 #define _NF_DEFINE_H_
 
 #include "NFIDENTID.h"
-#include "NFIValueList.h"
+#include "NFIDataList.h"
 
 #include <boost/function.hpp>
 #include <boost/shared_ptr.hpp>
@@ -32,28 +32,28 @@ enum CLASS_OBJECT_EVENT
 };
 
 ////heart beat call back event func define
-//typedef int(* HEART_BEAT_FUNC)(const NFIDENTID& self, const NFIValueList& var);
+//typedef int(* HEART_BEAT_FUNC)(const NFIDENTID& self, const NFIDataList& var);
 //
 ////property call back event func define
-//typedef int(* PROPERTY_EVENT_FUNC)(const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar);
+//typedef int(* PROPERTY_EVENT_FUNC)(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar);
 //
 ////record call back event func define, nOpType: Add = 0,Del, Changed,    Create, UpData,
-//typedef int(* RECORD_EVENT_FUNC)(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar);
+//typedef int(* RECORD_EVENT_FUNC)(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar);
 ////AddEventCallBack( "Player", CEF_OnDisconnect, SceneModule::OnDisconnect );
 //
 ////class call back event func define. nClassEvent:0[destroy],1[created],2[enterContainer]
-//typedef int(* CLASS_EVENT_FUNC)(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var);
+//typedef int(* CLASS_EVENT_FUNC)(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 ////AddEventCallBack( "Player", CEF_OnDisconnect, SceneModule::OnDisconnect );
 //
 ////event call back event func define
-//typedef int(* EVENT_PROCESS_FUNC)(const NFIDENTID& self, const int nEventID, const NFIValueList& var);
+//typedef int(* EVENT_PROCESS_FUNC)(const NFIDENTID& self, const int nEventID, const NFIDataList& var);
 
 // functor
-typedef boost::function<int(const NFIDENTID&, const std::string&, const float, const int, const NFIValueList&)> HEART_BEAT_FUNCTOR;
-typedef boost::function<int(const NFIDENTID&, const std::string&, const NFIValueList&, const NFIValueList&, const NFIValueList&)> PROPERTY_EVENT_FUNCTOR;
-typedef boost::function<int(const NFIDENTID&, const std::string&, const int, const int, const int, const NFIValueList&, const NFIValueList&, const NFIValueList&)> RECORD_EVENT_FUNCTOR;
-typedef boost::function<int(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIValueList&)> CLASS_EVENT_FUNCTOR;
-typedef boost::function<int(const NFIDENTID&, const int, const NFIValueList&)> EVENT_PROCESS_FUNCTOR;
+typedef boost::function<int(const NFIDENTID&, const std::string&, const float, const int, const NFIDataList&)> HEART_BEAT_FUNCTOR;
+typedef boost::function<int(const NFIDENTID&, const std::string&, const NFIDataList&, const NFIDataList&, const NFIDataList&)> PROPERTY_EVENT_FUNCTOR;
+typedef boost::function<int(const NFIDENTID&, const std::string&, const int, const int, const int, const NFIDataList&, const NFIDataList&, const NFIDataList&)> RECORD_EVENT_FUNCTOR;
+typedef boost::function<int(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIDataList&)> CLASS_EVENT_FUNCTOR;
+typedef boost::function<int(const NFIDENTID&, const int, const NFIDataList&)> EVENT_PROCESS_FUNCTOR;
 
 typedef std::shared_ptr<HEART_BEAT_FUNCTOR> HEART_BEAT_FUNCTOR_PTR;
 typedef std::shared_ptr<PROPERTY_EVENT_FUNCTOR> PROPERTY_EVENT_FUNCTOR_PTR;
