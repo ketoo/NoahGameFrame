@@ -22,5 +22,4 @@
         <Property Desc="" Id="FD" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
     </Propertys>
     <Includes/>
-    <Components/>
 </XML>

@@ -9,7 +9,7 @@
 //#include "stdafx.h"
 #include "NFCWorldNet_ClientModule.h"
 #include "NFWorldNet_ClientPlugin.h"
-
+#include "NFComm\NFCore\NFCDataList.h"
 
 bool NFCWorldNet_ClientModule::Init()
 {
@@ -134,14 +134,14 @@ int NFCWorldNet_ClientModule::OnSelectServerProcess(const NFIPacket& msg)
 		return 0;
 	}
 
-    NFCValueList var;
+    NFCDataList var;
     var << xMsg.world_id() << xMsg.sender_ip()  << xMsg.login_id() << xMsg.account();
     m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_SELECT_SERVER, var);
 
     return 0;
 }
 
-int NFCWorldNet_ClientModule::OnSelectServerResultsEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
+int NFCWorldNet_ClientModule::OnSelectServerResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
     if (var.GetCount() != 7
         || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT,
@@ -151,13 +151,13 @@ int NFCWorldNet_ClientModule::OnSelectServerResultsEvent(const NFIDENTID& object
 		return 0;
     }
 
-    const int nWorldID = var.IntVal(0);
-    const int nSenderAddress = var.IntVal(1);
-    const int nLoginID = var.IntVal(2);
-    const std::string& strAccount = var.StringVal(3);
-    const std::string& strWorldAddress = var.StringVal(4);
-    const int nPort = var.IntVal(5);
-    const std::string& strKey = var.StringVal(6);
+    const int nWorldID = var.Int(0);
+    const int nSenderAddress = var.Int(1);
+    const int nLoginID = var.Int(2);
+    const std::string& strAccount = var.String(3);
+    const std::string& strWorldAddress = var.String(4);
+    const int nPort = var.Int(5);
+    const std::string& strKey = var.String(6);
 
     NFMsg::AckConnectWorldResult xMsg;
 
@@ -184,7 +184,7 @@ int NFCWorldNet_ClientModule::OnKickClientProcess(const NFIPacket& msg)
 	}
 
     //T»À,œ¬œﬂ
-    NFCValueList var;
+    NFCDataList var;
     var << xMsg.world_id() << xMsg.account();
     m_pEventProcessModule->DoEvent(0, NFED_ON_KICK_FROM_SERVER, var);
     return 0;

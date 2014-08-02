@@ -52,7 +52,7 @@ protected:
 protected:
 
     //////////////////////////////////////////////////////////////////////////
-    int OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
+    int OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
 
     int OnSelectServerResultProcess(const NFIPacket& msg);
 

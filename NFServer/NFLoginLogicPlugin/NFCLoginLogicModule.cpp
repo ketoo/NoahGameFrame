@@ -22,7 +22,7 @@ bool NFCLoginLogicModule::Shut()
     return true;
 }
 
-int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
+int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
     if (3 != var.GetCount()
         || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
@@ -31,22 +31,22 @@ int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventI
     }
 
     //////////////////////////////////////////////////////////////////////////
-    int nAddress = var.IntVal(0);
-    const std::string& strAccount = var.StringVal(1);
-    const std::string& strPassword = var.StringVal(2);
+    int nAddress = var.Int(0);
+    const std::string& strAccount = var.String(1);
+    const std::string& strPassword = var.String(2);
     //int nState = m_pDataBaseModule->ConfirmAccountInfo(strAccount, strPassword);
     //m_pNoSqlModule->AddAccountInfo(strAccount, strPassword);
 
     int nState = 0;//= m_pNoSqlModule->ConfirmAccountInfo(strAccount, strPassword);
  
-    NFCValueList valEventInfo;
+    NFCDataList valEventInfo;
     valEventInfo << nState << nAddress << strAccount;
     m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_LOGIN_RESULTS, valEventInfo);
   
     return 0;
 }
 
-int NFCLoginLogicModule::OnDisconnectEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
+int NFCLoginLogicModule::OnDisconnectEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
     if (2 != var.GetCount()
         || !var.TypeEx(TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
@@ -54,7 +54,7 @@ int NFCLoginLogicModule::OnDisconnectEvent(const NFIDENTID& object, const int nE
         return -1;
     }
 
-    //std::string strAccount = var.StringVal(0);
+    //std::string strAccount = var.String(0);
 
     return 0;
 }
@@ -67,18 +67,18 @@ bool NFCLoginLogicModule::Execute(const float fLasFrametime, const float fStarte
     //     char szContent[MAX_PATH] = { 0 };
     //     if (kbhit() && gets(szContent))
     //     {
-    //         NFCValueList val(szContent, ",");
+    //         NFCDataList val(szContent, ",");
     //         if (val.GetCount() > 0)
     //         {
-    //             const std::string& strCmd = val.StringVal(0);
+    //             const std::string& strCmd = val.String(0);
     //             //if (0 == strcmp("listworldserver", pstrCmd))
     //             if ("listworldserver" == strCmd)
     //             {
-    //                 NFCValueList valOobjectList;
+    //                 NFCDataList valOobjectList;
     //                 int nCount = m_pKernelModule->GetContainerOnLineList(-2, valOobjectList);
     //                 for (int i = 0; i < nCount; i++)
     //                 {
-    //                     NFIDENTID ident = valOobjectList.ObjectVal(i);
+    //                     NFIDENTID ident = valOobjectList.Object(i);
     //
     //                     char szInfo[MAX_PATH] = { 0 };
     //                     sprintf_s(szInfo, "WorldID:%d, WorldName:%s, WorldMaxOnline:%d, WorldOnlineCount:%d",

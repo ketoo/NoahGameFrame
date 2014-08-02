@@ -29,5 +29,4 @@
         <Property Desc="BUFFÃâÒß¿ª¹Ø" Id="BUFF_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
     </Propertys>
     <Includes/>
-    <Components/>
 </XML>
