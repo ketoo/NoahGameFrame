@@ -146,8 +146,8 @@
         <Property Desc="" Id="PathStep" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
         <Property Desc="" Id="LoadPropertyFinish" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
     </Propertys>
-    <Includes/>
     <Components>
-		<Component Desc="" Name="Test" Language="lua" Enable="1" />
-	</Components>
+        <Component Desc="²âÊÔ×é¼þ" Enable="1" Language="lua" Name="Test"/>
+    </Components>
+    <Includes/>
 </XML>

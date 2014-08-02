@@ -19,7 +19,7 @@
 #include "NFComm/RapidXML/rapidxml_iterators.hpp"
 #include "NFComm/RapidXML/rapidxml_print.hpp"
 #include "NFComm/RapidXML/rapidxml_utils.hpp"
-#include "NFComm/NFCore/NFCValueList.h"
+#include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
 #include "NFComm/NFCore/NFList.h"
 #include "NFComm/NFCore/NFCPropertyManager.h"
@@ -37,16 +37,32 @@ public:
         m_pParentClass = NULL;
         mstrClassName = strClassName;
 
-        m_pPropertyManager = new NFCPropertyManager(0);
-        m_pRecordManager = new NFCRecordManager(0);
-        m_pComponentManager = new NFCComponentManager(0);
+        m_pPropertyManager = NF_NEW NFCPropertyManager(0);
+        m_pRecordManager = NF_NEW NFCRecordManager(0);
+        m_pComponentManager = NF_NEW NFCComponentManager(0);
     }
 
     virtual ~NFCLogicClass()
     {
-        delete m_pComponentManager;
-        delete m_pRecordManager;
-        delete m_pPropertyManager;
+        if (NULL != m_pComponentManager)
+        {
+            delete m_pComponentManager;
+            m_pComponentManager = NULL;
+        }
+        
+        if (NULL != m_pRecordManager)
+        {
+            delete m_pRecordManager;
+            m_pRecordManager = NULL;
+        }
+        
+        if (NULL != m_pPropertyManager)
+        {
+            delete m_pPropertyManager;
+            m_pPropertyManager = NULL;
+        }
+
+        ClearAll();
     }
 
     NFIPropertyManager* GetPropertyManager()
@@ -146,7 +162,7 @@ public:
     virtual bool AddClass(const std::string& strClassName, const std::string& strParentName);
 protected:
 
-    virtual TDATA_TYPE ComputerType(const char* pstrTypeName, NFIValueList::TData& var);
+    virtual TDATA_TYPE ComputerType(const char* pstrTypeName, NFIDataList::TData& var);
     virtual bool AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NFCLogicClass* pClass);
     virtual bool AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCLogicClass* pClass);
     virtual bool AddComponents(rapidxml::xml_node<>* pRecordRootNode, NFCLogicClass* pClass);

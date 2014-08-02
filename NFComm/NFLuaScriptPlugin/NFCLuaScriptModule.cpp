@@ -79,21 +79,21 @@ bool NFCLuaScriptModule::BeforeShut()
     return true;
 }
 
-int NFCLuaScriptModule::OnPropertyCommEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& arg )
+int NFCLuaScriptModule::OnPropertyCommEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& arg )
 {
     DoPropertyCommEvent(m_pScriptKernelModule, self,strPropertyName, oldVar, newVar, arg);
 
     return 0;
 }
 
-int NFCLuaScriptModule::OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& arg )
+int NFCLuaScriptModule::OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& arg )
 {
     DoRecordCommonEvent(m_pScriptKernelModule, self,strRecordName, nOpType, nRow, nCol, oldVar, newVar, arg);
 
     return 0;
 }
 
-int NFCLuaScriptModule::OnClassCommonEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var )
+int NFCLuaScriptModule::OnClassCommonEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
     DoClassCommonEvent(m_pLogicClassModule, self, strClassName, eClassEvent, var);
 
@@ -300,10 +300,10 @@ bool NFCLuaScriptModule::Regisger()
             .def ("SetFloat", &NFCScriptVarList::SetFloat)
             .def ("SetString", &NFCScriptVarList::SetString)
             .def ("SetObject", &NFCScriptVarList::SetObject)
-            .def ("IntVal", &NFCScriptVarList::IntVal)
-            .def ("FloatVal", &NFCScriptVarList::FloatVal)
-            .def("StringVal", &NFCScriptVarList::StringVal)
-            .def("ObjectVal", &NFCScriptVarList::ObjectVal),
+            .def ("Int", &NFCScriptVarList::Int)
+            .def ("Float", &NFCScriptVarList::Float)
+            .def("String", &NFCScriptVarList::String)
+            .def("Object", &NFCScriptVarList::Object),
 
             class_ <NFScriptInt64> ("NFINT64")
             .def(luabind::constructor<>())
