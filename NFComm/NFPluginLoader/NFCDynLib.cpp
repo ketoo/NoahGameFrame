@@ -18,6 +18,7 @@ bool NFCDynLib::Load()
 
 bool NFCDynLib::UnLoad()
 {
+    DYNLIB_UNLOAD(mInst);    
     return true;
 }
 

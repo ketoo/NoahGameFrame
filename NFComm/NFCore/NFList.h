@@ -105,6 +105,11 @@ bool NFList<T>::First(T& id)
 template < typename T >
 bool NFList<T>::Next(T& id)
 {
+    if (mCurIter == mtObjConfigList.end())
+    {
+        return false;
+    }
+
     ++mCurIter;
     if (mCurIter != mtObjConfigList.end())
     {

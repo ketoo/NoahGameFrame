@@ -160,7 +160,7 @@ int NFCGameServerNet_ClientModule::OnLoadRoleDataBeginProcess(const NFIPacket& m
     //     RakNet::BitStream* pBitStream = pMsgPacket->GetBitStream();
     //     loadData.DeCode(*pBitStream);
     //
-    //     m_pEventProcessModule->DoEvent(0, NFED_ON_DATABASE_SERVER_LOADROE_BEGIN, NFCValueList() << loadData._szAccountName);
+    //     m_pEventProcessModule->DoEvent(0, NFED_ON_DATABASE_SERVER_LOADROE_BEGIN, NFCDataList() << loadData._szAccountName);
 
     return 0;
 }
@@ -174,7 +174,7 @@ int NFCGameServerNet_ClientModule::OnLoadRoleDataFinalProcess(const NFIPacket& m
     //
     //     //创建对象
     //     //开始认领内存，
-    //     NFCValueList valueRoleList;
+    //     NFCDataList valueRoleList;
     //     valueRoleList << loadFinal._szAccountName;
     //     valueRoleList << loadFinal._szRoleName1;
     //     valueRoleList << loadFinal.nPlayerConfidIndex1;
@@ -216,14 +216,14 @@ int NFCGameServerNet_ClientModule::OnLoadRoleDataFinalProcess(const NFIPacket& m
 }
 
 //离开世界回到客户端时，产生
-int NFCGameServerNet_ClientModule::OnDataLoadBeginEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
+int NFCGameServerNet_ClientModule::OnDataLoadBeginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
     //1号gs发送
     //if (1 == m_pGameLogicModule->GetGameID())
     {
         //      _tagMTD_LOAD_ROLEDATA loadData;
         //
-        //      strcpy(loadData._szAccountName, var.StringVal(0));
+        //      strcpy(loadData._szAccountName, var.String(0));
         //      RakNet::BitStream oBitStream;
         //      loadData.EnCode(oBitStream);
         //
@@ -236,7 +236,7 @@ int NFCGameServerNet_ClientModule::OnDataLoadBeginEvent(const NFIDENTID& object,
     return 0;
 }
 
-// int NFCGameServerNet_ClientModule::OnToWorldEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var )
+// int NFCGameServerNet_ClientModule::OnToWorldEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var )
 // {
 //     if ( 4 != var.GetCount() )
 //     {
@@ -245,10 +245,10 @@ int NFCGameServerNet_ClientModule::OnDataLoadBeginEvent(const NFIDENTID& object,
 //
 //  if (m_pGameLogicModule->GetGameID() == 1)
 //  {
-//      int nGameServer = var.IntVal( 0 );
-//      const char* pstrAccount = var.StringVal( 1 );
-//      const char* pstrRoleName = var.StringVal( 2 );
-//      int nSceneIndex = var.IntVal( 3 );
+//      int nGameServer = var.Int( 0 );
+//      const char* pstrAccount = var.String( 1 );
+//      const char* pstrRoleName = var.String( 2 );
+//      int nSceneIndex = var.Int( 3 );
 //
 //      RakNet::BitStream oBitStream;
 //      _tagGTG_SWAP_GAMESERVER swapWorld;
@@ -276,7 +276,7 @@ int NFCGameServerNet_ClientModule::OnEnquireSceneInfoProcess(const NFIPacket& ms
     return 0;
 }
 
-int NFCGameServerNet_ClientModule::OnSwapGSEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
+int NFCGameServerNet_ClientModule::OnSwapGSEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
     //如果是单服，则不允许切换gs
     if (5 != var.GetCount())
@@ -284,11 +284,11 @@ int NFCGameServerNet_ClientModule::OnSwapGSEvent(const NFIDENTID& object, const 
         return 0;
     }
 
-    //     int nGameServerID = var.IntVal(0);
-    //     const std::string& strAccount = var.StringVal(1);
-    //     const std::string& strRoleName = var.StringVal(2);
-    //     int nSceneIndex = var.IntVal(3);
-    //     int nPlayerConfigIndex = var.IntVal(4);
+    //     int nGameServerID = var.Int(0);
+    //     const std::string& strAccount = var.String(1);
+    //     const std::string& strRoleName = var.String(2);
+    //     int nSceneIndex = var.Int(3);
+    //     int nPlayerConfigIndex = var.Int(4);
     //
     //     _tagGTG_SWAP_GAMESERVER swapGS;
     //
@@ -318,7 +318,7 @@ int NFCGameServerNet_ClientModule::OnSwapGSProcess(const NFIPacket& msg)
     //         if (m_pKernelModule->ExistContainer(swapGameServer._nSceneIndex))
     //         {
     //             //OK，可以接纳玩家
-    //             NFCValueList valServerList;
+    //             NFCDataList valServerList;
     //             valServerList << swapGameServer._nGameServerID << swapGameServer._szAccount << swapGameServer._szRoleName << swapGameServer._nSceneIndex << swapGameServer._nPlayerConfigIndex;
     //             m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_SELECTROLE_ENTER, valServerList);
     //         }
@@ -327,7 +327,7 @@ int NFCGameServerNet_ClientModule::OnSwapGSProcess(const NFIPacket& msg)
     return 0;
 }
 
-int NFCGameServerNet_ClientModule::OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var)
+int NFCGameServerNet_ClientModule::OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
 {
 //     if (strClassName == "Player")
 //     {

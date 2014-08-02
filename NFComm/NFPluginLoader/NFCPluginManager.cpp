@@ -101,7 +101,6 @@ void NFCPluginManager::Registered(NFIPlugin* plugin)
             plugin->Install();
         }
     }
-
 }
 
 void NFCPluginManager::UnsRegistered(NFIPlugin* plugin)
@@ -110,8 +109,8 @@ void NFCPluginManager::UnsRegistered(NFIPlugin* plugin)
     if (it != mPluginInstanceMap.end())
     {
         it->second->Uninstall();
-
-        mPluginInstanceMap.erase(it);
+        delete it->second;
+        it->second = NULL;
     }
 }
 
@@ -229,16 +228,13 @@ bool NFCPluginManager::BeforeShut()
 
 bool NFCPluginManager::Shut()
 {
-
-
     PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
-    for (itInstance; itInstance != mPluginInstanceMap.end(); itInstance++)
+    for (itInstance; itInstance != mPluginInstanceMap.end(); ++itInstance)
     {
         itInstance->second->Shut();
     }
 
 #ifdef NF_DYNAMIC_PLUGIN
-#if NF_PLATFORM == NF_PLATFORM_WIN || NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_APPLE
 
     PluginNameMap::iterator it = mPluginNameMap.begin();
     for (it; it != mPluginNameMap.end(); it++)
@@ -246,7 +242,6 @@ bool NFCPluginManager::Shut()
         UnLoadPluginLibrary(it->first);
     }
 
-#endif
 #else
 
     //     DESTROY_PLUGIN(this, NFConfigPlugin)
@@ -254,6 +249,9 @@ bool NFCPluginManager::Shut()
     //     DESTROY_PLUGIN(this, NFKernelPlugin)
 
 #endif
+    mPluginInstanceMap.clear();
+    mPluginNameMap.clear();
+
     return true;
 }
 
@@ -293,9 +291,16 @@ bool NFCPluginManager::UnLoadPluginLibrary(const std::string& strPluginDLLName)
 
         DLL_STOP_PLUGIN_FUNC pFunc = (DLL_STOP_PLUGIN_FUNC)pLib->GetSymbol("DllStopPlugin");
 
-        pFunc(this);
+        if (pFunc)
+        {
+            pFunc(this);
+        }
+        
+        pLib->UnLoad();
 
         delete pLib;
+        pLib = NULL;
+
         mPluginLibMap.erase(it);
 
         return true;

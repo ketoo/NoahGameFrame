@@ -23,7 +23,7 @@
 #define UNREGISTER_MODULE(pManager, className) NFILogicModule* pUnRegisterModule##className =  \
     dynamic_cast<NFILogicModule*>( pManager->FindModule( (#className) ) ); pManager->RemoveModule( (#className) ); delete pUnRegisterModule##className;
 
-#define CREATE_PLUGIN(pManager, className)  NFIPlugin* pCreatePlugin##className= new className(pManager); pManager->Registered( pCreatePlugin##className );
+#define CREATE_PLUGIN(pManager, className)  NFIPlugin* pCreatePlugin##className = new className(pManager); pManager->Registered( pCreatePlugin##className );
 
 #define DESTROY_PLUGIN(pManager, className) pManager->UnsRegistered( pManager->FindPlugin((#className)) );
 
