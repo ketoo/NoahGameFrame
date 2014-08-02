@@ -46,8 +46,6 @@ protected:
 
     int OnObjectBeKilled( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
 
-    int OnObjectLevelEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
-
 private:
     NFIPropertyConfigModule* m_pPropertyConfigModule;
     NFIEventProcessModule* m_pEventProcessModule;
