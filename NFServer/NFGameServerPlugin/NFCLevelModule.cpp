@@ -100,8 +100,6 @@ int NFCLevelModule::OnObjectClassEvent( const NFIDENTID& self, const std::string
     if ( strClassName == "Player"
          && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
     {
-        //在事件1的时候，可能没广播出去(因为广播对象出现也是在事件1)
-        m_pKernelModule->AddPropertyCallBack( self, "Level", this, &NFCLevelModule::OnObjectLevelEvent );
     }
 
     if ( strClassName == "NPC"
@@ -130,13 +128,6 @@ int NFCLevelModule::OnObjectBeKilled( const NFIDENTID& object, const int nEventI
             m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, identKiller, "There is no object", __FUNCTION__, __LINE__);
         }
     }
-
-    return 0;
-}
-
-int NFCLevelModule::OnObjectLevelEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
-{
-
 
     return 0;
 }
