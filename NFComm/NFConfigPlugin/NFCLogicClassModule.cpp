@@ -279,7 +279,7 @@ bool NFCLogicClassModule::AddComponents( rapidxml::xml_node<>* pComponentRootNod
                     continue;
                 }
 
-                pClass->GetComponentManager()->AddComponent(std::string(strComponentName), std::string(strLanguage));
+                pClass->GetComponentManager()->AddComponent(strComponentName, strLanguage);
             }
         }
     }
