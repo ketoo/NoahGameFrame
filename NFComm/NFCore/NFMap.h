@@ -49,7 +49,7 @@ public:
         if (itr != mObjectList.end())
         {
             pData = itr->second;
-            mObjectList.erase(itr);
+            itr = mObjectList.erase(itr);
         }
 
         return pData;
