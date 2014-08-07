@@ -44,7 +44,8 @@ protected:
     float fLastTotal;
 
     NFList<std::string> mRemoveListEx;
-    NFList<NFCHeartBeatElement*> mAddListEx;
+    //NFList<NFCHeartBeatElement*> mAddListEx;
+    std::list<NFCHeartBeatElement> mAddListEx;
     NFMap<std::string, NFCHeartBeatElement> mHeartBeatElementMapEx;
 };
 
