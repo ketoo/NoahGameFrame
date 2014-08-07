@@ -167,6 +167,17 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClCompile Include="NFKernelModule\NFCUUIDModule.cpp" />
     <ClCompile Include="NFKernelPlugin.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NFConfigPlugin\NFConfigPlugin.vcxproj">
+      <Project>{79dd0147-06cd-4f60-a8a5-19e2962b3d56}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NFCore\NFCore.vcxproj">
+      <Project>{b9833fe8-8c0b-40d6-ba01-3cdadeb21166}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NFEventProcessPlugin\NFEventProcessPlugin.vcxproj">
+      <Project>{b73626b4-0aba-4ede-95cf-cdecc424e837}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

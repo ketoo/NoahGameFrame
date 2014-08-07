@@ -21,6 +21,7 @@ NFCEventProcessModule::~NFCEventProcessModule()
         NFClassEventList* pClassEventList = m_pClassEventInfoEx->First();
         while (NULL != pClassEventList)
         {
+            pClassEventList->ClearAll();
             delete pClassEventList;
             pClassEventList = NULL;
 
@@ -46,6 +47,7 @@ NFCEventProcessModule::~NFCEventProcessModule()
     NFCObjectEventInfo* pObjectEventInfo = mObjectEventInfoMapEx.First();
     while (pObjectEventInfo)
     {
+        pObjectEventInfo->ClearAll();
         delete pObjectEventInfo;
         pObjectEventInfo = NULL;
         pObjectEventInfo = mObjectEventInfoMapEx.Next();
@@ -139,7 +141,7 @@ bool NFCEventProcessModule::Execute(const float fLasFrametime, const float fStar
     NFList<int>* pList = mRemoveEventListEx.First(ident);
     while (pList)
     {
-        //删除对象的某个事件
+        //鍒犻櫎瀵硅薄鐨勬煇涓簨浠?
         NFCObjectEventInfo* pObjectEventInfo = mObjectEventInfoMapEx.GetElement(ident);
         if (pObjectEventInfo)
         {
@@ -172,7 +174,7 @@ bool NFCEventProcessModule::Execute(const float fLasFrametime, const float fStar
     mRemoveEventListEx.ClearAll();
 
     //////////////////////////////////////////////////////////////////////////
-    //删除事件对象
+    //鍒犻櫎浜嬩欢瀵硅薄
     bool bRet = mRemoveObjectListEx.First(ident);
     while (bRet)
     {
@@ -252,7 +254,7 @@ bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventI
         return false;
     }
 
-    EVENT_PROCESS_FUNCTOR_PTR cb = std::shared_ptr<EVENT_PROCESS_FUNCTOR>(NULL);
+    EVENT_PROCESS_FUNCTOR_PTR cb;// = std::shared_ptr<EVENT_PROCESS_FUNCTOR>(NULL);
     bool bRet = pEventInfo->First(cb);
     while (bRet)
     {
@@ -269,7 +271,7 @@ bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const std::string
     NFClassEventList* pEventList = m_pClassEventInfoEx->GetElement(strClassName);
     if (pEventList)
     {
-        CLASS_EVENT_FUNCTOR_PTR cb = std::shared_ptr<CLASS_EVENT_FUNCTOR>(NULL);
+        CLASS_EVENT_FUNCTOR_PTR cb;// = std::shared_ptr<CLASS_EVENT_FUNCTOR>(NULL);
         bool bRet = pEventList->First(cb);
         while (bRet)
         {
