@@ -20,7 +20,7 @@ NFCKernelModule::NFCKernelModule(NFIPluginManager* p)
 {
     fLastTotal = 0.0f;
     pPluginManager = p;
-    
+    mnIdentID = 0;
     m_pContainerModule = NF_NEW NFCContainerModule();
 
     InitRandom();
