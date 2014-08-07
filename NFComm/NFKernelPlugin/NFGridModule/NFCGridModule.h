@@ -30,6 +30,11 @@ public:
         }
     }
 
+    virtual ~NFCSceneGridInfo()
+    {
+        // TODO
+    }
+
     void Init(NFCSceneGridInfo** pGridArray)
     {
         for (int i = EGRID_TOP; i < EGRID_DIRECTION_MAXCOUNT; i++)
