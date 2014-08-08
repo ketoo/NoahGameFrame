@@ -60,6 +60,7 @@
       <PreprocessorDefinitions>_X64;_DEBUG;_WINDOWS;THERON_USE_STD_THREADS;NFEVENTTRIGGERPLUGIN_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)..\;$(SolutionDir)\..\Dependencies\;$(SolutionDir)\..\Dependencies\boost_1_53_0\;$(SolutionDir)\..\Dependencies\glog-0.3.3\src\windows\;$(SolutionDir)\..\Dependencies\Theron-6.00.01\Include\;$(SolutionDir)\..\Dependencies\Theron-6.00.01\Include\External\</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -83,6 +84,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_X64;NDEBUG;_WINDOWS;THERON_USE_STD_THREADS;NFEVENTTRIGGERPLUGIN_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)..\;$(SolutionDir)\..\Dependencies\;$(SolutionDir)\..\Dependencies\boost_1_53_0\;$(SolutionDir)\..\Dependencies\glog-0.3.3\src\windows\;$(SolutionDir)\..\Dependencies\Theron-6.00.01\Include\;$(SolutionDir)\..\Dependencies\Theron-6.00.01\Include\External\</AdditionalIncludeDirectories>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
