@@ -403,16 +403,6 @@ public:
         return false;
     }
 
-    virtual void InnerAppendEx(const NFIDataList& src, const int start, const int end) = 0;
-
-    NFIDataList& operator=(const NFIDataList& src)
-    {
-        Clear();
-        InnerAppendEx(src, 0, src.GetCount());
-
-        return *this;
-    }
-
     inline bool operator==(const NFIDataList& src) const
     {
         if (src.GetCount() == GetCount())
