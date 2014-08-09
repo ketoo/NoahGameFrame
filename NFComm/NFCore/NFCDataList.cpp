@@ -47,6 +47,14 @@ NFCDataList::~NFCDataList()
     Clear();
 };
 
+NFCDataList& NFCDataList::operator=(const NFIDataList& src)
+{
+    Clear();
+    InnerAppendEx(src, 0, src.GetCount());
+
+    return *this;
+}
+
 // Ìí¼Ó
 bool NFCDataList::Append(const NFIDataList& src, const int start, const int count)
 {
