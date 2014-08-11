@@ -132,7 +132,8 @@ bool NFCDataList::Add(const NFIDENTID& value)
 
 bool NFCDataList::Add(const void* value)
 {
-    return AddNumber<const void*>(TDATA_POINTER, value);
+    //return AddNumber<const void*>(TDATA_POINTER, value);
+    return true;
 }
 
 bool NFCDataList::Set(const int index, const int value)
@@ -430,9 +431,9 @@ void NFCDataList::InnerAppendEx(const NFIDataList& src, const int start, const i
             case TDATA_OBJECT:
                 AddNumber<NFINT64>(vType, src.NumberVal<NFINT64>(i));
                 break;
-            case TDATA_POINTER:
-                AddNumber<void*>(vType, src.NumberVal<void*>(i));
-                break;
+            //case TDATA_POINTER:
+            //    AddNumber<void*>(vType, src.NumberVal<void*>(i));
+            //    break;
             default:
                 //Assert(0);
                 break;
