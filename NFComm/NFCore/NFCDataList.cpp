@@ -137,15 +137,30 @@ bool NFCDataList::Add(const void* value)
 
 bool NFCDataList::Set(const int index, const int value)
 {
-    return SetNumber(index, value);
+    if (index < mnSize && index >= 0)
+    {
+        return SetNumber(index, value);
+    }
+
+    return false;
 }
 bool NFCDataList::Set(const int index, const float value)
 {
-    return SetNumber(index, value);
+    if (index < mnSize && index >= 0)
+    {
+        return SetNumber(index, value);
+    }
+
+    return false;
 }
 bool NFCDataList::Set(const int index, const double value)
 {
-    return SetNumber(index, value);
+    if (index < mnSize && index >= 0)
+    {
+        return SetNumber(index, value);
+    }
+
+    return false;
 }
 bool NFCDataList::Set(const int index, const char* value)
 {
@@ -163,33 +178,58 @@ bool NFCDataList::Set(const int index, const char* value)
 }
 bool NFCDataList::Set(const int index, const NFIDENTID& value)
 {
-    return SetNumber<NFINT64>(index, value.nData64);
+    if (index < mnSize && index >= 0)
+    {
+        return SetNumber<NFINT64>(index, value.nData64);
+    }
+
+    return false;
 }
 
 bool NFCDataList::Set(const int index, const void* value)
 {
-    return SetNumber(index, value);
+    if (index < mnSize && index >= 0)
+    {
+        return SetNumber(index, value);
+    }
+
+    return false;
 }
 
 int NFCDataList::Int(const int index) const
 {
-    return NumberVal<int>(index);
+    if (index < mnSize && index >= 0)
+    {
+        return NumberVal<int>(index);
+    }
+
+    return 0;
 }
 
 float NFCDataList::Float(const int index) const
 {
-    return NumberVal<float>(index);
+    if (index < mnSize && index >= 0)
+    {
+        return NumberVal<float>(index);
+    }
+
+    return 0.0f;
 }
 
 
 double NFCDataList::Double(const int index) const
 {
-    return NumberVal<double>(index);
+    if (index < mnSize && index >= 0)
+    {
+        return NumberVal<double>(index);
+    }
+
+    return 0.0f;
 }
 
 const std::string& NFCDataList::String(const int index) const
 {
-    if (index < mnSize)
+    if (index < mnSize && index >= 0)
     {
         const TData* var = GetStackConst(index);
         if (var && TDATA_STRING == var->nType)
@@ -204,12 +244,22 @@ const std::string& NFCDataList::String(const int index) const
 
 NFIDENTID NFCDataList::Object(const int index) const
 {
-    return NumberVal<NFINT64>(index);
+    if (index < mnSize && index >= 0)
+    {
+        return NumberVal<NFINT64>(index);
+    }
+
+    return 0;
 }
 
 void* NFCDataList::Pointer(const int index) const
 {
-    return NumberVal<void*>(index);
+    if (index < mnSize && index >= 0)
+    {
+        return NumberVal<void*>(index);
+    }
+
+    return NULL;
 }
 
 // bool NFCDataList::Split(const char* pstr, const char* pstrSplit)
