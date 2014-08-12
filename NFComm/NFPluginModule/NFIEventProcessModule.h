@@ -18,6 +18,9 @@ class NFIEventProcessModule
     : public NFILogicModule
 {
 public:
+
+    virtual ~NFIEventProcessModule(){}
+
     template<typename BaseType>
     bool AddEventCallBack(const NFIDENTID& objectID, const int nEventID, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const int, const NFIDataList&))
     {
