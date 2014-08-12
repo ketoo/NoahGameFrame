@@ -21,42 +21,14 @@ NFCKernelModule::NFCKernelModule(NFIPluginManager* p)
     fLastTotal = 0.0f;
     pPluginManager = p;
     mnIdentID = 0;
-    m_pContainerModule = NF_NEW NFCContainerModule();
+    
 
     InitRandom();
 }
 
 NFCKernelModule::~NFCKernelModule()
 {
-    NFCContainerInfo* pContainerInfo = m_pContainerModule->First();
-    while (pContainerInfo)
-    {
-        NFCContainerGroupInfo* pContainerGroupInfo = pContainerInfo->First();
-        while (pContainerGroupInfo)
-        {
-            delete pContainerGroupInfo;
-            pContainerGroupInfo = NULL;
-            pContainerGroupInfo = pContainerInfo->Next();
-        }
-
-        NFIDENTID ident = pContainerInfo->GetObjectSelf();
-        NFIObject* pSceneObject = RemoveElement(ident);
-        if (pSceneObject)
-        {
-            delete pSceneObject;
-            pSceneObject = NULL;
-        }
-
-        pContainerInfo->ClearAll();
-        delete pContainerInfo;
-        pContainerInfo = NULL;
-
-        pContainerInfo = m_pContainerModule->Next();
-    }
-
-    m_pContainerModule->ClearAll();
-    delete m_pContainerModule;
-    m_pContainerModule = NULL;
+    ClearAll();
 }
 
 void NFCKernelModule::InitRandom()
@@ -77,6 +49,8 @@ void NFCKernelModule::InitRandom()
 
 bool NFCKernelModule::Init()
 {
+    m_pContainerModule = NF_NEW NFCContainerModule();
+
     mtDeleteSelfList.clear();
     //mLogFile.open( "./Log/NFKernel.log" );
 
@@ -1730,6 +1704,42 @@ bool NFCKernelModule::DestroyAll()
 
     // ÎªÁËÊÍ·Åobject
     Execute(0.1f, 0.1f);
+
+    NFCContainerInfo* pContainerInfo = m_pContainerModule->First();
+    while (pContainerInfo)
+    {
+        NFCContainerGroupInfo* pContainerGroupInfo = pContainerInfo->First();
+        while (pContainerGroupInfo)
+        {
+            delete pContainerGroupInfo;
+            pContainerGroupInfo = NULL;
+            pContainerGroupInfo = pContainerInfo->Next();
+        }
+
+        NFIDENTID ident = pContainerInfo->GetObjectSelf();
+        NFIObject* pSceneObject = RemoveElement(ident);
+        if (pSceneObject)
+        {
+            delete pSceneObject;
+            pSceneObject = NULL;
+        }
+
+        pContainerInfo->ClearAll();
+        delete pContainerInfo;
+        pContainerInfo = NULL;
+
+        pContainerInfo = m_pContainerModule->Next();
+    }
+
+    m_pContainerModule->ClearAll();
+    delete m_pContainerModule;
+    m_pContainerModule = NULL;
+
+
+    mvRandom.clear();
+    mtCommonClassCallBackList.clear();
+    mtCommonPropertyCallBackList.clear();
+    mtCommonRecordCallBackList.clear();
 
     return true;
 }
