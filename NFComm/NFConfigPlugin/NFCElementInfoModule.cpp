@@ -191,9 +191,9 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
                 }
                 
                 break;
-            case TDATA_POINTER:
-                var.variantData = (void*)NULL;
-                break;
+            //case TDATA_POINTER:
+            //    var.variantData = (void*)NULL;
+            //    break;
             default:
                NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 break;
