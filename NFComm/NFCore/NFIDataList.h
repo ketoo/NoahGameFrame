@@ -41,7 +41,7 @@ enum TDATA_TYPE
     TDATA_DOUBLE,       // 双精度浮点数
     TDATA_STRING,       // 字符串
     TDATA_OBJECT,       // 对象ID
-    TDATA_POINTER,      // 指针
+    //TDATA_POINTER,      // 指针
     TDATA_MAX,
 };
 
@@ -84,7 +84,7 @@ public:
                 || type == TDATA_FLOAT
                 || type == TDATA_INT
                 || type == TDATA_OBJECT
-                || type == TDATA_POINTER)
+                /*|| type == TDATA_POINTER*/)
             {
                 const TData* var = GetStackConst(index);
                 result = boost::get<T>(var->variantData);
@@ -104,7 +104,7 @@ public:
                 || type == TDATA_FLOAT
                 || type == TDATA_INT
                 || type == TDATA_OBJECT
-                || type == TDATA_POINTER)
+                /*|| type == TDATA_POINTER*/)
             {
                 TData* var = GetStack(index);
                 var->variantData = value;
@@ -347,14 +347,14 @@ public:
                 }
             }
             break;
-        case TDATA_POINTER:
-            {
-                if (0 != boost::get<void*>(var.variantData))
-                {
-                    bChanged = true;
-                }
-            }
-            break;
+        //case TDATA_POINTER:
+        //    {
+        //        if (0 != boost::get<void*>(var.variantData))
+        //        {
+        //            bChanged = true;
+        //        }
+        //    }
+        //    break;
         default:
             break;
         }
@@ -390,9 +390,9 @@ public:
                     return Object(nPos) == src.Object(nPos);
                     break;
 
-                case TDATA_POINTER:
-                    return Pointer(nPos) == src.Pointer(nPos);
-                    break;
+                //case TDATA_POINTER:
+                //    return Pointer(nPos) == src.Pointer(nPos);
+                //    break;
 
                 default:
                     return false;
