@@ -11,10 +11,22 @@
 NFCEventProcessModule::NFCEventProcessModule(NFIPluginManager* p)
 {
     pPluginManager = p;
-    m_pClassEventInfoEx = NF_NEW NFCClassEventInfo();
+    
 }
 
 NFCEventProcessModule::~NFCEventProcessModule()
+{
+
+}
+
+bool NFCEventProcessModule::Init()
+{
+    m_pClassEventInfoEx = NF_NEW NFCClassEventInfo();
+
+    return true;
+}
+
+bool NFCEventProcessModule::Shut()
 {
     if (NULL != m_pClassEventInfoEx)
     {
@@ -53,54 +65,6 @@ NFCEventProcessModule::~NFCEventProcessModule()
         pObjectEventInfo = mObjectEventInfoMapEx.Next();
     }
     mObjectEventInfoMapEx.ClearAll();
-}
-
-bool NFCEventProcessModule::Init()
-{
-
-    return true;
-}
-
-bool NFCEventProcessModule::Shut()
-{
-    NFClassEventList* pEventList = m_pClassEventInfoEx->First();
-    while (pEventList)
-    {
-        CLASS_EVENT_FUNCTOR_PTR classEventFunctorPtr;
-        bool bRet = pEventList->First(classEventFunctorPtr);
-        while (bRet)
-        {
-            classEventFunctorPtr.reset();
-
-            bRet = pEventList->Next(classEventFunctorPtr);
-        }
-
-        pEventList->ClearAll();
-        delete pEventList;
-        pEventList = NULL;
-
-        pEventList = m_pClassEventInfoEx->Next();
-    }
-
-    NFCObjectEventInfo* pObjectEventInfo = mObjectEventInfoMapEx.First();
-    while (pObjectEventInfo)
-    {
-        NFEventList* pEventListEx = pObjectEventInfo->First();
-        while (pEventListEx)
-        {
-            pEventListEx->ClearAll();
-            delete pEventListEx;
-            pEventListEx = NULL;
-
-            pEventListEx = pObjectEventInfo->Next();
-        }
-
-        pObjectEventInfo->ClearAll();
-        delete pObjectEventInfo;
-        pObjectEventInfo = NULL;
-
-        pObjectEventInfo = mObjectEventInfoMapEx.Next();
-    }
 
     return true;
 }
