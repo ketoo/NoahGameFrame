@@ -27,6 +27,8 @@ public:
 
     virtual bool AfterInit();
 
+    virtual bool CheckConfig();
+
     virtual bool BeforeShut();
 
     virtual bool Shut();
