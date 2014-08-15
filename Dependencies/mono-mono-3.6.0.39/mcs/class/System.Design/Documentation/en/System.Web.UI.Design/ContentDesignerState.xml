@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="ContentDesignerState" FullName="System.Web.UI.Design.ContentDesignerState">
+  <TypeSignature Language="C#" Value="public enum ContentDesignerState" />
+  <AssemblyInfo>
+    <AssemblyName>System.Design</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <remarks>To be added.</remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Enumerates the possible settings for the state of a <see cref="T:System.Web.UI.Design.WebControls.ContentDesigner" /> control at design time.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="ShowDefaultContent">
+      <MemberSignature Language="C#" Value="ShowDefaultContent" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.Design.ContentDesignerState</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The associated control displays the default content.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="ShowUserContent">
+      <MemberSignature Language="C#" Value="ShowUserContent" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.Design.ContentDesignerState</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The associated control displays the user content.</para>
+        </summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

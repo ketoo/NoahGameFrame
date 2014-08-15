@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="IComparable" FullName="System.IComparable" FullNameSP="System_IComparable" Maintainer="ecma">
+  <TypeSignature Language="ILASM" Value=".class interface public abstract IComparable" />
+  <TypeSignature Language="C#" Value="public interface IComparable" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IComparable" />
+  <MemberOfLibrary>BCL</MemberOfLibrary>
+  <AssemblyInfo>
+    <AssemblyName>mscorlib</AssemblyName>
+    <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00 ]</AssemblyPublicKey>
+    <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Runtime.InteropServices.ComVisible(true)</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>This interface is implemented by types whose values can be ordered or sorted. It requires that implementing types define a single method, <see cref="M:System.IComparable.CompareTo(System.Object)" />, that indicates whether the position of the current instance in the sort order is before, after, or the same as a second object of the same type. The instance's <see cref="T:System.IComparable" /> implementation is called automatically by methods such as <see cref="M:System.Array.Sort(System.Array)" /> and <see cref="M:System.Collections.ArrayList.Sort" />.</para>
+      <para>The implementation of the <see cref="M:System.IComparable.CompareTo(System.Object)" /> method must return an <see cref="T:System.Int32" /> that has one of three values, as shown in the following table. </para>
+      <list type="table">
+        <listheader>
+          <item>
+            <term>
+              <para>Value </para>
+            </term>
+            <description>
+              <para>Meaning </para>
+            </description>
+          </item>
+        </listheader>
+        <item>
+          <term>
+            <para>Less than zero </para>
+          </term>
+          <description>
+            <para>The current instance precedes the object specified by the <see cref="M:System.IComparable.CompareTo(System.Object)" /> method in the sort order.</para>
+          </description>
+        </item>
+        <item>
+          <term>
+            <para>Zero </para>
+          </term>
+          <description>
+            <para>This current instance occurs in the same position in the sort order as the object specified by the <see cref="M:System.IComparable.CompareTo(System.Object)" /> method. </para>
+          </description>
+        </item>
+        <item>
+          <term>
+            <para>Greater than zero </para>
+          </term>
+          <description>
+            <para>This current instance follows the object specified by the <see cref="M:System.IComparable.CompareTo(System.Object)" /> method in the sort order. </para>
+          </description>
+        </item>
+      </list>
+      <para>All numeric types (such as <see cref="T:System.Int32" /> and <see cref="T:System.Double" />) implement <see cref="T:System.IComparable" />, as do <see cref="T:System.String" />, <see cref="T:System.Char" />, and <see cref="T:System.DateTime" />. Custom types should also provide their own implementation of <see cref="T:System.IComparable" /> to enable object instances to be ordered or sorted.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Defines a generalized type-specific comparison method that a value type or class implements to order or sort its instances.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="CompareTo">
+      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual abstract int32 CompareTo(object obj)" />
+      <MemberSignature Language="C#" Value="public int CompareTo (object obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance int32 CompareTo(object obj) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="M:System.IComparable.CompareTo(System.Object)" /> method is implemented by types whose values can be ordered or sorted. It is called automatically by methods of non-generic collection objects, such as <see cref="M:System.Array.Sort(System.Array)" />, to order each member of the array. If a custom class or structure does not implement <see cref="T:System.IComparable" />, its members cannot be ordered and the sort operation can throw an <see cref="T:System.InvalidOperationException" />. </para>
+          <para>This method is only a definition and must be implemented by a specific class or value type to have effect. The meaning of the comparisons specified in the Return Value section ("precedes", "occurs in the same position as", and "follows") depends on the particular implementation.</para>
+          <para>By definition, any object compares greater than (or follows) null, and two null references compare equal to each other.</para>
+          <para>The parameter, <paramref name="obj" />, must be the same type as the class or value type that implements this interface; otherwise, an <see cref="T:System.ArgumentException" /> is thrown.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>A value that indicates the relative order of the objects being compared. The return value has these meanings: </para>
+          <list type="table">
+            <listheader>
+              <item>
+                <term>
+                  <para>Value </para>
+                </term>
+                <description>
+                  <para>Meaning </para>
+                </description>
+              </item>
+            </listheader>
+            <item>
+              <term>
+                <para>Less than zero </para>
+              </term>
+              <description>
+                <para>This instance precedes <paramref name="obj" /> in the sort order. </para>
+              </description>
+            </item>
+            <item>
+              <term>
+                <para>Zero </para>
+              </term>
+              <description>
+                <para>This instance occurs in the same position in the sort order as <paramref name="obj" />. </para>
+              </description>
+            </item>
+            <item>
+              <term>
+                <para>Greater than zero </para>
+              </term>
+              <description>
+                <para>This instance follows <paramref name="obj" /> in the sort order. </para>
+              </description>
+            </item>
+          </list>
+        </returns>
+        <param name="obj">
+          <attribution license="cc4" from="Microsoft" modified="false" />An object to compare with this instance. </param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+  </Members>
+  <TypeExcluded>0</TypeExcluded>
+</Type>

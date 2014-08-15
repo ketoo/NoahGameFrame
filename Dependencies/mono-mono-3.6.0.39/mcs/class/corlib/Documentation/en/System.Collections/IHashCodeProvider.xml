@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="IHashCodeProvider" FullName="System.Collections.IHashCodeProvider" FullNameSP="System_Collections_IHashCodeProvider" Maintainer="ecma">
+  <TypeSignature Language="ILASM" Value=".class interface public abstract IHashCodeProvider" />
+  <TypeSignature Language="C#" Value="public interface IHashCodeProvider" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IHashCodeProvider" />
+  <MemberOfLibrary>BCL</MemberOfLibrary>
+  <AssemblyInfo>
+    <AssemblyName>mscorlib</AssemblyName>
+    <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00 ]</AssemblyPublicKey>
+    <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Obsolete("Please use IEqualityComparer instead.")</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Runtime.InteropServices.ComVisible(true)</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The <see cref="T:System.Collections.IHashCodeProvider" /> interface is used in conjunction with the <see cref="T:System.Collections.Hashtable" /> class. The objects used as keys by a <see cref="T:System.Collections.Hashtable" /> object must override the <see cref="M:System.Object.GetHashCode" /> and <see cref="M:System.Object.Equals(System.Object)" /> methods. <see cref="M:System.Object.GetHashCode" /> or the key's implementation of <see cref="M:System.Object.GetHashCode" /> is used as the hash code provider. <see cref="M:System.Object.Equals(System.Object)" /> or the key's implementation of <see cref="M:System.Object.Equals(System.Object)" /> is used as the comparer.</para>
+      <para>However, some overloads of the <see cref="T:System.Collections.Hashtable" /> constructor take a parameter that is an <see cref="T:System.Collections.IHashCodeProvider" /> implementation, or a parameter that is an <see cref="T:System.Collections.IComparer" /> implementation, or both. If an <see cref="T:System.Collections.IHashCodeProvider" /> implementation is passed to the constructor, the <see cref="M:System.Collections.IHashCodeProvider.GetHashCode(System.Object)" /> method of that implementation is used as the hash code provider. If an <see cref="T:System.Collections.IComparer" /> implementation is passed to the constructor, the <see cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" /> method of that implementation is used as the comparer.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Supplies a hash code for an object, using a custom hash function.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="GetHashCode">
+      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual abstract int32 GetHashCode(object obj)" />
+      <MemberSignature Language="C#" Value="public int GetHashCode (object obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance int32 GetHashCode(object obj) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="obj " /> is <see langword="null" />.</exception>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The return value from this method must not be persisted for two reasons. First, the hash function of a class might be altered to generate a better distribution, rendering any values from the old hash function useless. Second, the default implementation of this class does not guarantee that the same value will be returned by different instances.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Returns a hash code for the specified object.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>A hash code for the specified object.</para>
+        </returns>
+        <param name="obj">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Object" /> for which a hash code is to be returned. </param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+  </Members>
+  <TypeExcluded>0</TypeExcluded>
+</Type>
