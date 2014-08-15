@@ -1,0 +1,1379 @@
+		       The Internals of the Mono C# Compiler
+	
+				Miguel de Icaza
+			      (miguel@ximian.com)
+			       2002, 2007, 2009
+
+* Abstract
+
+	The Mono C# compiler is a C# compiler written in C# itself.
+	Its goals are to provide a free and alternate implementation
+	of the C# language.  The Mono C# compiler generates ECMA CIL
+	images through the use of the System.Reflection.Emit API which
+	enable the compiler to be platform independent.
+	
+* Overview: How the compiler fits together
+
+	The compilation process is managed by the compiler driver (it
+	lives in driver.cs).
+
+	The compiler reads a set of C# source code files, and parses
+	them.  Any assemblies or modules that the user might want to
+	use with his project are loaded after parsing is done.
+
+	Once all the files have been parsed, the type hierarchy is
+	resolved.  First interfaces are resolved, then types and
+	enumerations.
+
+	Once the type hierarchy is resolved, every type is populated:
+	fields, methods, indexers, properties, events and delegates
+	are entered into the type system.  
+
+	At this point the program skeleton has been completed.  The
+	next process is to actually emit the code for each of the
+	executable methods.  The compiler drives this from
+	RootContext.EmitCode.
+
+	Each type then has to populate its methods: populating a
+	method requires creating a structure that is used as the state
+	of the block being emitted (this is the EmitContext class) and
+	then generating code for the topmost statement (the Block).
+
+	Code generation has two steps: the first step is the semantic
+	analysis (Resolve method) that resolves any pending tasks, and
+	guarantees that the code is correct.  The second phase is the
+	actual code emission.  All errors are flagged during in the
+	"Resolution" process. 
+
+	After all code has been emitted, then the compiler closes all
+	the types (this basically tells the Reflection.Emit library to
+	finish up the types), resources, and definition of the entry
+	point are done at this point, and the output is saved to
+	disk. 
+
+	The following list will give you an idea of where the
+	different pieces of the compiler live:
+
+	Infrastructure:
+
+	    driver.cs:
+		This drives the compilation process: loading of
+		command line options; parsing the inputs files;
+		loading the referenced assemblies; resolving the type
+		hierarchy and emitting the code. 
+
+	    codegen.cs:
+		
+		The state tracking for code generation. 
+
+	    attribute.cs:
+
+		Code to do semantic analysis and emit the attributes
+		is here.
+
+	    module.cs:
+
+		Keeps track of the types defined in the source code,
+		as well as the assemblies loaded.  
+
+	    typemanager.cs:
+
+	  	This contains the MCS type system.
+
+	    report.cs:
+
+		Error and warning reporting methods.
+
+	    support.cs:
+
+		Assorted utility functions used by the compiler.
+		
+	Parsing
+
+	    cs-tokenizer.cs:
+
+		The tokenizer for the C# language, it includes also
+		the C# pre-processor.
+
+	    cs-parser.jay, cs-parser.cs:
+
+		The parser is implemented using a C# port of the Yacc
+		parser.  The parser lives in the cs-parser.jay file,
+		and cs-parser.cs is the generated parser.
+
+	    location.cs:
+
+		The `location' structure is a compact representation
+		of a file, line, column where a token, or a high-level
+		construct appears.  This is used to report errors.
+
+	Expressions:
+	  
+	    ecore.cs
+	
+		Basic expression classes, and interfaces most shared
+		code and static methods are here.
+
+	    expression.cs:
+
+		Most of the different kinds of expressions classes
+		live in this file.
+
+	    assign.cs:
+
+		The assignment expression got its own file.
+
+	    constant.cs:
+
+		The classes that represent the constant expressions.
+
+	    literal.cs
+		
+		Literals are constants that have been entered manually
+		in the source code, like `1' or `true'.  The compiler
+		needs to tell constants from literals apart during the
+		compilation process, as literals sometimes have some
+		implicit extra conversions defined for them. 
+
+	    cfold.cs:
+
+		The constant folder for binary expressions.
+
+	Statements
+
+	    statement.cs:
+
+		All of the abstract syntax tree elements for
+		statements live in this file.  This also drives the
+		semantic analysis process.
+
+	    iterators.cs:
+
+	 	Contains the support for implementing iterators from
+		the C# 2.0 specification.
+
+	Declarations, Classes, Structs, Enumerations
+
+	    decl.cs
+
+		This contains the base class for Members and
+		Declaration Spaces.   A declaration space introduces
+		new names in types, so classes, structs, delegates and
+		enumerations derive from it.
+
+	    class.cs:
+		
+		Methods for holding and defining class and struct
+		information, and every member that can be in these
+		(methods, fields, delegates, events, etc).
+
+		The most interesting type here is the `TypeContainer'
+		which is a derivative of the `DeclSpace' 
+
+	    delegate.cs:
+
+		Handles delegate definition and use. 
+
+	    enum.cs:
+
+		Handles enumerations.
+
+	    interface.cs:
+
+		Holds and defines interfaces.  All the code related to
+		interface declaration lives here.
+
+	    parameter.cs:
+
+		During the parsing process, the compiler encapsulates
+		parameters in the Parameter and Parameters classes.
+		These classes provide definition and resolution tools
+		for them.
+
+	    pending.cs:
+
+		Routines to track pending implementations of abstract
+		methods and interfaces.  These are used by the
+		TypeContainer-derived classes to track whether every
+		method required is implemented.
+
+	
+* The parsing process
+
+	All the input files that make up a program need to be read in
+	advance, because C# allows declarations to happen after an
+	entity is used, for example, the following is a valid program:
+
+	class X : Y {
+		static void Main ()
+		{
+			a = "hello"; b = "world";
+		}
+		string a;
+	}
+	
+	class Y {
+		public string b;
+	}
+
+	At the time the assignment expression `a = "hello"' is parsed,
+	it is not know whether a is a class field from this class, or
+	its parents, or whether it is a property access or a variable
+	reference.  The actual meaning of `a' will not be discovered
+	until the semantic analysis phase.
+
+** The Tokenizer and the pre-processor
+
+	The tokenizer is contained in the file `cs-tokenizer.cs', and
+	the main entry point is the `token ()' method.  The tokenizer
+	implements the `yyParser.yyInput' interface, which is what the
+	Yacc/Jay parser will use when fetching tokens.  
+
+	Token definitions are generated by jay during the compilation
+	process, and those can be references from the tokenizer class
+	with the `Token.' prefix. 
+
+	Each time a token is returned, the location for the token is
+	recorded into the `Location' property, that can be accessed by
+	the parser.  The parser retrieves the Location properties as
+	it builds its internal representation to allow the semantic
+	analysis phase to produce error messages that can pin point
+	the location of the problem. 
+
+	Some tokens have values associated with it, for example when
+	the tokenizer encounters a string, it will return a
+	LITERAL_STRING token, and the actual string parsed will be
+	available in the `Value' property of the tokenizer.   The same
+	mechanism is used to return integers and floating point
+	numbers. 
+
+	C# has a limited pre-processor that allows conditional
+	compilation, but it is not as fully featured as the C
+	pre-processor, and most notably, macros are missing.  This
+	makes it simple to implement in very few lines and mesh it
+	with the tokenizer.
+
+	The `handle_preprocessing_directive' method in the tokenizer
+	handles all the pre-processing, and it is invoked when the '#'
+	symbol is found as the first token in a line.  
+
+	The state of the pre-processor is contained in a Stack called
+	`ifstack', this state is used to track the if/elif/else/endif
+	nesting and the current state.  The state is encoded in the
+	top of the stack as a number of values `TAKING',
+	`TAKEN_BEFORE', `ELSE_SEEN', `PARENT_TAKING'.
+
+	To debug problems in your grammar, you need to edit the
+	Makefile and make sure that the -ct options are passed to
+	jay.   The current incarnation says:
+
+	./../jay/jay -c < ./../jay/skeleton.cs cs-parser.jay
+
+	During debugging, you want to change this to:
+
+	./../jay/jay -cvt < ./../jay/skeleton.cs cs-parser.jay
+
+	This generates a parser with debugging information and allows
+	you to activate verbose parser output in both the csharp
+	command and the mcs command by passing the "-v -v" flag (-v
+	twice).
+
+	When you do this, standard output will have a dump of the
+	tokens parsed and how the parser reacted to those.   You can
+	look up the states with the y.output file that contains the
+	entire parser state diagram in human readable form.
+
+** Locations
+
+	Locations are encoded as a 32-bit number (the Location
+	struct) that map each input source line to a linear number.
+	As new files are parsed, the Location manager is informed of
+	the new file, to allow it to map back from an int constant to
+	a file + line number.
+
+	Prior to parsing/tokenizing any source files, the compiler
+	generates a list of all the source files and then reserves the
+	low N bits of the location to hold the source file, where N is
+	large enough to hold at least twice as many source files as were
+	specified on the command line (to allow for a #line in each file).
+	The upper 32-N bits are the line number in that file.
+
+	The token 0 is reserved for ``anonymous'' locations, ie. if we
+	don't know the location (Location.Null).
+
+* The Parser
+
+	The parser is written using Jay, which is a port of Berkeley
+	Yacc to Java, that I later ported to C#. 
+
+	Many people ask why the grammar of the parser does not match
+	exactly the definition in the C# specification.  The reason is
+	simple: the grammar in the C# specification is designed to be
+	consumed by humans, and not by a computer program.  Before
+	you can feed this grammar to a tool, it needs to be simplified
+	to allow the tool to generate a correct parser for it. 
+
+	In the Mono C# compiler, we use a class for each of the
+	statements and expressions in the C# language.  For example,
+	there is a `While' class for the the `while' statement, a
+	`Cast' class to represent a cast expression and so on.
+
+	There is a Statement class, and an Expression class which are
+	the base classes for statements and expressions. 
+
+** Namespaces
+	
+	Using list.
+
+* Internal Representation
+
+** Expressions
+
+	Expressions in the Mono C# compiler are represented by the
+	`Expression' class.  This is an abstract class that particular
+	kinds of expressions have to inherit from and override a few
+	methods.
+
+	The base Expression class contains two fields: `eclass' which
+	represents the "expression classification" (from the C#
+	specs) and the type of the expression.
+
+	During parsing, the compiler will create the various trees of
+	expressions.  These expressions have to be resolved before they
+	can be used.    The semantic analysis is implemented by
+	resolving each of the expressions created during parsing and
+	creating fully resolved expressions.
+
+	A common pattern that you will notice in the compiler is this:
+
+		  Expression expr;
+		  ...
+	
+		  expr = expr.Resolve (ec);
+		  if (expr == null)
+		     	// There was an error, stop processing by returning
+
+	The resolution process is implemented by overriding the
+	`DoResolve' method.  The DoResolve method has to set the `eclass'
+	field and the `type', perform all error checking and computations
+	that will be required for code generation at this stage.
+
+	The return value from DoResolve is an expression.  Most of the
+	time an Expression derived class will return itself (return
+	this) when it will handle the emission of the code itself, or
+	it can return a new Expression.
+
+	For example, the parser will create an "ElementAccess" class
+	for:
+
+		a [0] = 1;
+
+	During the resolution process, the compiler will know whether
+	this is an array access, or an indexer access.  And will
+	return either an ArrayAccess expression or an IndexerAccess
+	expression from DoResolve.
+
+	All errors must be reported during the resolution phase
+	(DoResolve) and if an error is detected the DoResolve method
+	will return null which is used to flag that an error condition
+	has occurred, this will be used to stop compilation later on.
+	This means that anyone that calls Expression.Resolve must
+	check the return value for null which would indicate an error
+	condition.
+
+	The second stage that Expressions participate in is code
+	generation, this is done by overwriting the "Emit" method of
+	the Expression class.  No error checking must be performed
+	during this stage.
+
+	We take advantage of the distinction between the expressions that
+	are generated by the parser and the expressions that are the
+	result of the semantic analysis phase for lambda expressions (more
+	information in the "Lambda Expressions" section).
+
+	But what is important is that expressions and statements that are
+	generated by the parser should implement the cloning
+	functionality.  This is used lambda expressions require the
+	compiler to attempt to resolve a given block of code with
+	different possible types for parameters that have their types
+	implicitly inferred. 
+
+** Simple Names, MemberAccess
+
+	One of the most important classes in the compiler is
+	"SimpleName" which represents a simple name (from the C#
+	specification).  The names during the resolution time are
+	bound to field names, parameter names or local variable names.
+
+	More complicated expressions like:
+
+		Math.Sin
+
+	Are composed using the MemberAccess class which contains a
+	name (Math) and a SimpleName (Sin), this helps driving the
+	resolution process.
+
+** Types
+
+	The parser creates expressions to represent types during
+	compilation.  For example:
+
+	   class Sample {
+
+		Version vers;
+
+	   }
+
+
+	That will produce a "SimpleName" expression for the "Version"
+	word.  And in this particular case, the parser will introduce
+	"Version vers" as a field declaration.
+
+	During the resolution process for the fields, the compiler
+	will have to resolve the word "Version" to a type.  This is
+	done by using the "ResolveAsType" method in Expression instead
+	of using "Resolve".
+
+	ResolveAsType just turns on a different set of code paths for
+	things like SimpleNames and does a different kind of error
+	checking than the one used by regular expressions. 
+
+** Constants
+
+	Constants in the Mono C# compiler are represented by the
+	abstract class `Constant'.  Constant is in turn derived from
+	Expression.  The base constructor for `Constant' just sets the
+	expression class to be an `ExprClass.Value', Constants are
+	born in a fully resolved state, so the `DoResolve' method
+	only returns a reference to itself.
+
+	Each Constant should implement the `GetValue' method which
+	returns an object with the actual contents of this constant, a
+	utility virtual method called `AsString' is used to render a
+	diagnostic message.  The output of AsString is shown to the
+	developer when an error or a warning is triggered.
+
+	Constant classes also participate in the constant folding
+	process.  Constant folding is invoked by those expressions
+	that can be constant folded invoking the functionality
+	provided by the ConstantFold class (cfold.cs).   
+
+	Each Constant has to implement a number of methods to convert
+	itself into a Constant of a different type.  These methods are
+	called `ConvertToXXXX' and they are invoked by the wrapper
+	functions `ToXXXX'.  These methods only perform implicit
+	numeric conversions.  Explicit conversions are handled by the
+	`Cast' expression class.
+
+	The `ToXXXX' methods are the entry point, and provide error
+	reporting in case a conversion can not be performed.
+
+** Constant Folding
+
+	The C# language requires constant folding to be implemented.
+	Constant folding is hooked up in the Binary.Resolve method.
+	If both sides of a binary expression are constants, then the
+	ConstantFold.BinaryFold routine is invoked.  
+
+	This routine implements all the binary operator rules, it
+	is a mirror of the code that generates code for binary
+	operators, but that has to be evaluated at runtime.
+
+	If the constants can be folded, then a new constant expression
+	is returned, if not, then the null value is returned (for
+	example, the concatenation of a string constant and a numeric
+	constant is deferred to the runtime). 
+
+** Side effects
+
+	a [i++]++ 
+	a [i++] += 5;
+	
+** Optimalizations
+
+	Compiler does some limited high-level optimalizations when
+	-optimize option is used
+
+*** Instance field initializer to default value
+
+	Code to optimize:
+
+	class C
+	{
+		enum E
+		{
+			Test
+		}
+    
+		int i = 0;  // Field will not be redundantly assigned
+		int i2 = new int (); // This will be also completely optimized out
+    
+		E e = E.Test; // Even this will go out.
+	}
+
+** Statements
+
+*** Invariant meaning in a block
+
+	The seemingly small section in the standard entitled
+	"invariant meaning in a block" has several subtleties
+	involved, especially when we try to implement the semantics
+	efficiently.
+
+	Most of the semantics are trivial, and basically prevent local
+	variables from shadowing parameters and other local variables.
+	However, this notion is not limited to that, but affects all
+	simple name accesses within a block.  And therein lies the rub
+	-- instead of just worrying about the issue when we arrive at
+	variable declarations, we need to verify this property at
+	every use of a simple name within a block.
+
+	The key notion that helps us is to note the bi-directional
+	action of a variable declaration.  The declaration together
+	with anti-shadowing rules can maintain the IMiaB property for
+	the block containing the declaration and all nested sub
+	blocks.  But, the IMiaB property also forces all surrounding
+	blocks to avoid using the name.  We thus need to maintain a
+	blacklist of taboo names in all surrounding blocks -- and we
+	take the expedient of doing so simply: actually maintaining a
+	(superset of the) blacklist in each block data structure, which
+	we call the 'known_variable' list.
+
+	Because we create the 'known_variable' list during the parse
+	process, by the time we do simple name resolution, all the
+	blacklists are fully populated.  So, we can just enforce the
+	rest of the IMiaB property by looking up a couple of lists.
+
+	This turns out to be quite efficient: when we used a block
+	tree walk, a test case took 5-10mins, while with this simple
+	mildly-redundant data structure, the time taken for the same
+	test case came down to a couple of seconds.
+
+	The IKnownVariable interface is a small wrinkle.  Firstly, the
+	IMiaB also applies to parameter names, especially those of
+	anonymous methods.  Secondly, we need more information than
+	just the name in the blacklist -- we need the location of the
+	name and where it's declared.  We use the IKnownVariable
+	interface to abstract out the parser information stored for
+	local variables and parameters.
+
+* The semantic analysis 
+
+	Hence, the compiler driver has to parse all the input files.
+	Once all the input files have been parsed, and an internal
+	representation of the input program exists, the following
+	steps are taken:
+
+		* The interface hierarchy is resolved first.
+	 	  As the interface hierarchy is constructed,
+		  TypeBuilder objects are created for each one of
+		  them. 
+
+		* Classes and structure hierarchy is resolved next,
+		  TypeBuilder objects are created for them.
+
+		* Constants and enumerations are resolved.
+
+		* Method, indexer, properties, delegates and event
+		  definitions are now entered into the TypeBuilders. 
+
+		* Elements that contain code are now invoked to
+		  perform semantic analysis and code generation.
+		  
+* References loading
+
+	Most programs use external references (assemblies and modules).
+	Compiler loads all referenced top-level types from referenced
+	assemblies into import cached. It imports initialy only C#
+	valid top-level types all other members are imported on demand
+	when needed.
+
+* Namespaces definition
+
+	Before any type resolution can be done we define all compiled
+	namespaces. This is mainly done to prepare using clauses of each
+	namespace block before any type resolution takes a place.
+
+* Types definition
+
+	The first step of type definition is to resolve base class or
+	base interfaces to correctly setup type hierarchy before any
+	member is defined.
+	
+	At this point we do some error checking and verify that the
+	members inheritance is correct and some other members
+	oriented checks.
+
+	By the time we are done, all classes, structs and interfaces
+	have been defined and all their members have been defined as
+	well.
+	
+* MemberCache
+
+	MemberCache is one of core compiler components. It maintains information
+	about types and their members. It tries to be as fast as possible
+	because almost all resolve operations end up querying members info in
+	some way.
+	
+	MemberCache is not definition but specification oriented to maintain
+	differences between inflated versions of generic types. This makes usage
+	of MemberCache simple because consumer does not need to care how to inflate
+	current member and returned type information will always give correctly
+	inflated type. However setting MemberCache up is one of the most complicated
+	parts of the compiler due to possible dependencies when types are defined
+	and complexity of nested types.
+
+* Output Generation
+
+** Code Generation
+
+	The EmitContext class is created any time that IL code is to
+	be generated (methods, properties, indexers and attributes all
+	create EmitContexts).  
+
+	The EmitContext keeps track of the current namespace and type
+	container.  This is used during name resolution.
+
+	An EmitContext is used by the underlying code generation
+	facilities to track the state of code generation:
+
+		* The ILGenerator used to generate code for this
+		  method.
+
+		* The TypeContainer where the code lives, this is used
+		  to access the TypeBuilder.
+
+		* The DeclSpace, this is used to resolve names through
+	 	  RootContext.LookupType in the various statements and
+	 	  expressions. 
+	
+	Code generation state is also tracked here:
+
+		* CheckState:
+
+		  This variable tracks the `checked' state of the
+		  compilation, it controls whether we should generate
+		  code that does overflow checking, or if we generate
+		  code that ignores overflows.
+		  
+		  The default setting comes from the command line
+		  option to generate checked or unchecked code plus
+		  any source code changes using the checked/unchecked
+		  statements or expressions.  Contrast this with the
+		  ConstantCheckState flag.
+
+		* ConstantCheckState
+		  
+		  The constant check state is always set to `true' and
+		  cant be changed from the command line.  The source
+		  code can change this setting with the `checked' and
+		  `unchecked' statements and expressions.
+		  
+		* IsStatic
+		  
+		  Whether we are emitting code inside a static or
+		  instance method
+		  
+		* ReturnType
+		  
+		  The value that is allowed to be returned or NULL if
+		  there is no return type.
+		  
+		* ReturnLabel 
+
+	  	  A `Label' used by the code if it must jump to it.
+		  This is used by a few routines that deals with exception
+		  handling.
+
+		* HasReturnLabel
+
+		  Whether we have a return label defined by the toplevel
+	   	  driver.
+		  
+		* ContainerType
+		  
+		  Points to the Type (extracted from the
+		  TypeContainer) that declares this body of code
+		  summary>
+		  
+		  
+		* IsConstructor
+		  
+		  Whether this is generating code for a constructor
+
+		* CurrentBlock
+
+		  Tracks the current block being generated.
+
+		* ReturnLabel;
+		
+		  The location where return has to jump to return the
+		  value
+
+	A few variables are used to track the state for checking in
+	for loops, or in try/catch statements:
+
+		* InFinally
+		
+		  Whether we are in a Finally block
+
+		* InTry
+
+		  Whether we are in a Try block
+
+		* InCatch
+		  
+		  Whether we are in a Catch block
+
+		* InUnsafe
+		  Whether we are inside an unsafe block
+
+	Methods exposed by the EmitContext:
+
+		* EmitTopBlock()
+
+		  This emits a toplevel block. 
+
+		  This routine is very simple, to allow the anonymous
+		  method support to roll its two-stage version of this
+		  routine on its own.
+
+		* NeedReturnLabel ():
+
+		  This is used to flag during the resolution phase that 
+		  the driver needs to initialize the `ReturnLabel'
+
+* Anonymous Methods
+
+	The introduction of anonymous methods in the compiler changed
+	various ways of doing things in the compiler.  The most
+	significant one is the hard split between the resolution phase
+	and the emission phases of the compiler.
+
+	For instance, routines that referenced local variables no
+	longer can safely create temporary variables during the
+	resolution phase: they must do so from the emission phase,
+	since the variable might have been "captured", hence access to
+	it can not be done with the local-variable operations from the
+	runtime.
+
+	The code emission is in:
+
+		EmitTopBlock ()
+
+	Which drives the process, it first resolves the topblock, then
+	emits the required metadata (local variable definitions) and
+	finally emits the code.
+
+	A detailed description of anonymous methods and iterators is
+	on the new-anonymous-design.txt file in this directory.
+
+* Lambda Expressions
+
+	Lambda expressions can come in two forms: those that have implicit
+	parameter types and those that have explicit parameter types, for
+	example:
+
+		Explicit:	
+
+		        Foo ((int x) => x + 1);
+
+		Implicit:
+
+			Foo (x => x + 1)
+
+
+	One of the problems that we faced with lambda expressions is
+	that lambda expressions need to be "probed" with different
+	types until a working combination is found.
+
+	For example:
+
+	    x => x.i
+
+	The above expression could mean vastly different things depending
+	on the type of "x".  The compiler determines the type of "x" (left
+	hand side "x") at the moment the above expression is "bound",
+	which means that during the compilation process it will try to
+	match the above lambda with all the possible types available, for
+	example:
+
+        delegate int di (int x);
+        delegate string ds (string s);
+        ..
+        Foo (di x) {}
+        Foo (ds x) {}
+        ...
+        Foo (x => "string")
+
+	In the above example, overload resolution will try "x" as an "int"
+	and will try "x" as a string.  And if one of them "compiles" thats
+	the one it picks (and it also copes with ambiguities if there was
+	more than one matching method).
+
+	To compile this, we need to hook into the resolution process,
+	but since the resolution process has side effects (calling
+	Resolve can either return instances of the resolved expression
+	type, or can alter field internals) it was necessary to
+	incorporate a framework to "clone" expressions before we
+	probe.
+
+	The support for cloning was added into Statements and
+	Expressions and is only necessary for objects of those types
+	that are created during parsing.   It is not necessary to
+	support these in the classes that are the result of calling
+	Resolve.   This means that SimpleName needs support for
+	Cloning, but FieldExpr does not need it (SimpleName is created
+	by the parser, FieldExpr is created during semantic analysis
+	resolution).   
+
+	The work happens through the public method called "Clone" that
+	clones the given Statement or Expression.  The base method in
+	Statement and Expression merely does a MemberwiseCopy of the
+	elements and then calls the virtual CloneTo method to complete
+	the copy.    By default this method throws an exception, this
+	is useful to catch cases where we forgot to override CloneTo
+	for a given Statement/Expression. 
+
+	With the cloning capability it became possible to call resolve
+	multiple times (once for each Cloned copy) and based on this
+	picking the one implementation that would compile and that
+	would not be ambiguous.
+
+	The cloning process is basically a deep copy that happens in the
+	LambdaExpression class and it clones the top-level block for the
+	lambda expression.    The cloning has the side effect of cloning
+	the entire containing block as well. 
+
+	This happens inside this method:
+
+        public override bool ImplicitStandardConversionExists (Type delegate_type)
+
+	This is used to determine if the current Lambda expression can be
+	implicitly converted to the given delegate type.
+
+	And also happens as a result of the generic method parameter
+	type inferencing. 
+
+** Lambda Expressions and Cloning
+
+	All statements that are created during the parsing method should
+	implement the CloneTo method:
+
+                protected virtual void CloneTo (CloneContext clonectx, Statement target)
+
+	This method is called by the Statement.Clone method after it has
+	done a shallow-copy of all the fields in the statement, and they
+	should typically Clone any child statements.
+
+	Expressions should implement the CloneTo method as well:
+
+                protected virtual void CloneTo (CloneContext clonectx, Expression target)
+
+** Lambda Expressions and Contextual Return
+
+	When an expression is parsed as a lambda expression, the parser
+	inserts a call to a special statement, the contextual return.
+
+	The expression:
+
+	    a => a+1
+
+	Is actually compiled as:
+
+	    a => contextual_return (a+1)
+
+	The contextual_return statement will behave differently depending
+	on the return type of the delegate that the expression will be
+	converted to.
+
+	If the delegate return type is void, the above will basically turn
+	into an empty operation.   Otherwise the above will become
+	a return statement that can infer return types.
+
+* Debugger support
+
+	Compiler produces .mdb symbol file for better debugging experience. The
+	process is quite straightforward. For every statement or a block there
+	is an entry in symbol file. Each entry includes of start location of
+	the statement and it's starting IL offset in the method. For most statements
+	this is easy but few need special handling (e.g. do, while).
+	
+	When sequence point is needed to represent original location and no IL
+	entry is written for the line we emit `nop' instruction. This is done only
+	for very few constructs (e.g. block opening brace).
+	
+	Captured variables are not treated differently at the moment. Debugger has
+	internal knowledge of their mangled names and how to decode them.
+
+* IKVM.Reflection vs System.Reflection
+
+	Mono compiler can be compiled using different reflection backends. At the
+	moment we support System.Reflection and IKVM.Reflection they both use same
+	API as official System.Reflection.Emit API which allows us to maintain only
+	single version of compiler with few using aliases to specialise.
+	
+	The backends are not plug-able but require compiler to be compiled with
+	specific STATIC define when targeting IKVM.Reflection.
+	
+	IKVM.Reflection is used for static compilation. This means the compiler runs
+	in batch mode like most compilers do. It can target any runtime version and
+	use any mscorlib. The mcs.exe is using IKVM.Reflection.
+	
+	System.Reflection is used for dynamic compilation. This mode is used by
+	our REPL and Evaluator API. Produced IL code is not written to disc but
+	executed by runtime (JIT). Mono.CSharp.dll is using System.Reflection and
+	System.Reflection.Emit.
+
+* Evaluation API
+
+	The compiler can now be used as a library, the API exposed
+	lives in the Mono.CSharp.Evaluator class and it can currently
+	compile statements and expressions passed as strings and
+	compile or compile and execute immediately.
+
+	As of April 2009 this creates a new in-memory assembly for
+	each statement evaluated.   
+
+	To support this evaluator mode, the evaluator API primes the
+	tokenizer with an initial character that would not appear in
+	valid C# code and is one of:
+
+	    int EvalStatementParserCharacter = 0x2190;   // Unicode Left Arrow
+	    int EvalCompilationUnitParserCharacter = 0x2191;  // Unicode Arrow
+	    int EvalUsingDeclarationsParserCharacter = 0x2192;  // Unicode Arrow
+
+        These character are turned into the following tokens:
+
+	  %token EVAL_STATEMENT_PARSER
+	  %token EVAL_COMPILATION_UNIT_PARSER
+	  %token EVAL_USING_DECLARATIONS_UNIT_PARSER
+
+	This means that the first token returned by the tokenizer when
+	used by the Evalutor API is a special token that helps the
+	yacc parser go from the traditional parsing of a full
+	compilation-unit to the interactive parsing:
+
+	The entry production for the compiler basically becomes:
+
+	  compilation_unit
+		//
+		// The standard rules
+		//
+	        : outer_declarations opt_EOF  
+	        | outer_declarations global_attributes opt_EOF
+	        | global_attributes opt_EOF
+	  	| opt_EOF /* allow empty files */
+
+		//
+		// The rule that allows interactive parsing
+		//
+	  	| interactive_parsing  { Lexer.CompleteOnEOF = false; } opt_EOF
+	  	;
+	  
+	  //
+	  // This is where Evaluator API drives the compilation
+	  //
+	  interactive_parsing
+	  	: EVAL_STATEMENT_PARSER EOF 
+	  	| EVAL_USING_DECLARATIONS_UNIT_PARSER using_directives
+	  	| EVAL_STATEMENT_PARSER 
+	  	  interactive_statement_list opt_COMPLETE_COMPLETION 
+	  	| EVAL_COMPILATION_UNIT_PARSER 
+	  	  interactive_compilation_unit
+	  	;
+	
+	Since there is a little bit of ambiguity for example in the
+	presence of the using directive and the using statement a
+	micro-predicting parser with multiple token look aheads is
+	used in eval.cs to resolve the ambiguity and produce the
+	actual token that will drive the compilation.
+
+	This helps this scenario:
+	     using System;
+	   vs
+	     using (var x = File.OpenRead) {}
+
+	This is the meaning of these new initial tokens:
+
+	     EVAL_STATEMENT_PARSER
+	     	Used to parse statements or expressions as statements.
+
+	     EVAL_USING_DECLARATIONS_UNIT_PARSER
+	        This instructs the parser to merely do using-directive
+	        parsing instead of statement parsing. 
+
+	     EVAL_COMPILATION_UNIT_PARSER
+		Used to evaluate toplevel declarations like namespaces
+		and classes.   
+
+		The feature is currently disabled because later stages
+		of the compiler are not yet able to lookup previous
+		definitions of classes.   
+
+		What happens is that between each call to Evaluate()
+		we reset the compiler state and at this stage we drop
+		also any existing definitions, so evaluating "class X
+		{}" followed by "class Y : X {}" does not currently
+		work. 
+
+		We need to make sure that new type definitions used
+		interactively are preseved from one evaluation to the
+		next. 
+
+	The evaluator the expression or statement `BODY' is hosted
+	inside a wrapper class.   If the statement is a variable
+	declaration then the declaration is split from the assignment
+	into a DECLARATION and BODY.   
+
+	This is what the code generated looks like:
+
+	     public class Foo : $InteractiveBaseClass {
+	     	    DECLARATION
+
+	     	    static void Host (ref object $retval)
+		    {
+			BODY
+		    }
+	     }
+
+	Since both statements and expressions are mixed together and
+	it is useful to use the Evaluator to compute expressions we
+	return expressions for example for "1+2" in the `retval'
+	reference object. 
+
+	To support this, the reference retval parameter is set to a
+	special internal value that means "Value was not set" before
+	the method Host is invoked.    During parsing the parser turns
+	expressions like "1+2" into:
+
+		    retval = 1 + 2;
+
+	This is done using a special OptionalAssign
+	ExpressionStatement class. 
+
+	When the Host method return, if the value of retval is still
+	the special flag no value was set.  Otherwise the result of
+	the expression is in retval.
+
+	The `InteractiveBaseClass' is the base class for the method,
+	this allows for embedders to provide different base classes
+	that could expose new static methods that could be useful
+	during expression evaluation.
+	
+	Our default implementation is InteractiveBaseClass and new
+	implementations should derive from this and set the property
+	in the Evaluator to it. 
+
+	In the future we will move to creating dynamic methods as the
+	wrapper for this code.
+
+* Code Completion
+
+	Support for code completion is available to allow the compiler
+	to provide a list of possible completions at any given point
+	int he parsing process.   This is used for Tab-completion in
+	an interactive shell or visual aids in GUI shells for possible
+	method completions. 
+
+	This method is available as part of the Evaluator API where a
+	special method GetCompletions returns a list of possible
+	completions given a partial input.
+
+	The parser and tokenizer work together so that the tokenizer
+	upon reaching the end of the input generates the following
+	tokens: GENERATE_COMPLETION followed by as many
+	COMPLETE_COMPLETION token and finally the EOF token.
+
+	GENERATE_COMPLETION needs to be handled in every production
+	where the user is likely to press the TAB key in the shell (or
+	in the future the GUI, or an explicit request in an IDE).
+	COMPLETE_COMPLETION must be handled throughout the grammar to
+	provide a way of completing the parsed expression.  See below
+	for details.
+
+	For the member access case, I have added productions that
+	mirror the non-completing productions, for example:
+
+	  primary_expression DOT IDENTIFIER GENERATE_COMPLETION 
+	  {
+	        LocatedToken lt = (LocatedToken) $3;
+	        $$ = new CompletionMemberAccess ((Expression) $1, lt.Value, lt.Location);
+	  }
+	
+	This mirrors:
+
+	  primary_expression DOT IDENTIFIER opt_type_argument_list
+	  {
+	        LocatedToken lt = (LocatedToken) $3;
+	        $$ = new MemberAccess ((Expression) $1, lt.Value, (TypeArguments) $4, lt.Location);
+	  }
+	
+	The CompletionMemberAccess is a new kind of
+	Mono.CSharp.Expression that does the actual lookup.  It
+	internally mimics some of the MemberAccess code but has been
+	tuned for this particular use.
+
+	After this initial token is processed GENERATE_COMPLETION the
+	tokenizer will emit COMPLETE_COMPLETION tokens.  This is done
+	to help the parser basically produce a valid result from the
+	partial input it received.  For example it is able to produce
+	a valid AST from "(x" even if no parenthesis has been closed.
+	This is achieved by sprinkling the grammar with productions
+	that can cope with this "winding down" token, for example this
+	is what parenthesized_expression looks like now:
+
+	  parenthesized_expression
+	          : OPEN_PARENS expression CLOSE_PARENS
+	            {
+	                  $$ = new ParenthesizedExpression ((Expression) $2);
+	            }
+	          //
+	          // New production
+	          //
+	          | OPEN_PARENS expression COMPLETE_COMPLETION
+	            {
+	                  $$ = new ParenthesizedExpression ((Expression) $2);
+	            }
+	          ;
+	  
+	  Once we have wrapped up everything we generate the last EOF token.
+
+	When the AST is complete we actually trigger the regular
+	semantic analysis process.  The DoResolve method of each node
+	in our abstract syntax tree will compute the result and
+	communicate the possible completions by throwing an exception
+	of type CompletionResult.
+
+	So for example if the user type "T" and the completion is
+	"ToString" we return "oString".
+
+** Enhancing Completion
+
+	Code completion is a process that will be curated over time.  
+	Just like producing good error reports and warnings is an
+	iterative process, to find a good balance, the code completion
+	engine in the compiler will require tuning to find the right
+	balance for the end user. 
+
+	This section explains the basic process by which you can
+	improve the code completion by using a real life sample.
+
+	Once you add the GENERATE_COMPLETION token to your grammar
+	rule, chances are, you will need to alter the grammar to
+	support COMPLETE_COMPLETION all the way up to the toplevel
+	production.
+
+	To debug this, you will want to try the completion with either
+	a sample program or with the `csharp' tool.
+
+	I use this setup:
+
+	$ csharp -v -v
+
+	This will turn on the parser debugging output and will
+	generate a lot of data when parsing its input (make sure that
+	your parser has been compiled with the -v flag, see above for 
+	details).
+
+	To start with a new completion scheme, type your C# code and
+	then hit the tab key to trigger the completion engine.  In the
+	generated output you will want to look for the first time that
+	the parser got the GENERATE_COMPLETION token, it will look
+	like this:
+
+	lex	state 414	reading	GENERATE_COMPLETION value {interactive}(1,35):
+
+	The first word `lex' indicates that the parser called the
+	lexer at state 414 (more on this in a second) and it got back
+	from the lexer the token GENERATE_COMPLETION.   If this is a
+	kind of completion chances are, you will get an error
+	immediately as the rules at that point do not know how to cope
+	with the stream of COMPLETE_COMPLETION tokens that will
+	follow, they will look like this:
+
+	error	syntax error
+	pop	state 414	on error
+	pop	state 805	on error
+	pop	state 628	on error
+	pop	state 417	on error
+	
+	The first line means that the parser has entered the error
+	state and will pop states until it can find a production that
+	can deal with the error.   At that point an error message will
+	be displayed.
+
+	Open the file `y.output' which describes the parser states
+	generated by jay and search for the state that was reported
+	previously in `lex' that got the GENERATE_COMPLETION:
+
+	state 414
+		object_or_collection_initializer : OPEN_BRACE . opt_member_initializer_list CLOSE_BRACE  (444)
+		object_or_collection_initializer : OPEN_BRACE . member_initializer_list COMMA CLOSE_BRACE  (445)
+		opt_member_initializer_list : .  (446)
+	
+	We now know that the parser was in the middle of parsing an
+	`object_or_collection_initializer' and had alread seen the
+	OPEN_BRACE token.
+
+	The `.' after OPEN_BRACE indicates the current state of the
+	parser, and this is where our parser got the
+	GENERATE_COMPLETION token.   As you can see from the three
+	rules in this sample, support for GENERATE_COMPLETION did not
+	exist.
+
+	So we must edit the grammar to add a production for this case,
+	I made the code look like this:
+
+	member_initializer
+		[...]
+		| GENERATE_COMPLETION 
+		  {
+		  	LocatedToken lt = $1 as LocatedToken;
+			$$ = new CompletionElementInitializer (GetLocation ($1));
+		  }
+		[...]
+
+	This new production creates the class
+	CompletionElementInitializer and returns this as the value for
+	this.   The following is a trivial implementation that always
+	returns "foo" and "bar" as the two completions and it
+	illustrates how things work:
+
+	public class CompletionElementInitializer : CompletingExpression {
+		public CompletionElementInitializer (Location l)
+		{
+			this.loc = l;
+		}
+
+		public override Expression DoResolve (EmitContext ec)
+		{
+			string [] = new string [] { "foo", "bar" };
+			throw new CompletionResult ("", result);
+		}
+
+		// 
+		// You should implement CloneTo if your CompletingExpression
+		// keeps copies to Statements or Expressions.   CloneTo
+		// is used by the lambda engine, so you should always
+		// implement this
+		//
+		protected override void CloneTo (CloneContext clonectx, Expression t)
+		{
+			// We do not keep references to anything interesting
+			// so cloning is an empty operation.
+		}
+	}
+	
+
+	We then rebuild our compiler:
+
+	(cd mcs/; make cs-parser.jay)
+	(cd class/Mono.CSharp; make install)
+
+	And re-run csharp:
+
+	(cd tools/csharp; csharp -v -v)
+
+	Chances are, you will get another error, but this time it will
+	not be for the GENERATE_COMPLETION, we already handled that
+	one.   This time it will be for COMPLETE_COMPLETION.  
+
+	The remaining of the process is iterative: you need to locate
+	the state where this error happens.   It will look like this:
+
+	lex	state 623	reading COMPLETE_COMPLETION	value {interactive}(1,35):
+	error	syntax error
+	
+	And make sure that the state can handle at this point a
+	COMPLETE_COMPLETION.   When receiving COMPLETE_COMPLETION the
+	parser needs to complete constructing the parse tree, so
+	productions that handle COMPLETE_COMPLETION need to wrap
+	things up with whatever data they have available and just make
+	it so that the parser can complete.
+
+	To avoid rule duplication you can use the
+	opt_COMPLETE_COMPLETION production and append it to an
+	existing production:
+
+	foo : bar opt_COMPLETE_COMPLETION {
+	    ..
+	}
+
+* Miscellaneous
+
+** Error Processing.
+
+	Errors are reported during the various stages of the
+	compilation process.  The compiler stops its processing if
+	there are errors between the various phases.  This simplifies
+	the code, because it is safe to assume always that the data
+	structures that the compiler is operating on are always
+	consistent.
+
+	The error codes in the Mono C# compiler are the same as those
+	found in the Microsoft C# compiler, with a few exceptions
+	(where we report a few more errors, those are documented in
+	mcs/errors/errors.txt).  The goal is to reduce confusion to
+	the users, and also to help us track the progress of the
+	compiler in terms of the errors we report. 
+
+	The Report class provides error and warning display functions,
+	and also keeps an error count which is used to stop the
+	compiler between the phases.  
+
+	A couple of debugging tools are available here, and are useful
+	when extending or fixing bugs in the compiler.  If the
+	`--fatal' flag is passed to the compiler, the Report.Error
+	routine will throw an exception.  This can be used to pinpoint
+	the location of the bug and examine the variables around the
+	error location.	 If you pass a number to --fatal the exception
+	will only be thrown when the error count reaches the specified
+	count. 
+
+	Warnings can be turned into errors by using the `--werror'
+	flag to the compiler. 
+
+	The report class also ignores warnings that have been
+	specified on the command line with the `--nowarn' flag.
+
+	Finally, code in the compiler uses the global variable
+	RootContext.WarningLevel in a few places to decide whether a
+	warning is worth reporting to the user or not.  
+
+** Debugging the compiler
+
+	Sometimes it is convenient to find *how* a particular error
+	message is being reported from, to do that, you might want to use
+	the --fatal flag to mcs.  The flag will instruct the compiler to 
+	abort with a stack trace execution when the error is reported.
+
+	You can use this with -warnaserror to obtain the same effect
+	with warnings. 
+
+** Debugging the Parser.
+
+	A useful trick while debugging the parser is to pass the -v
+	command line option to the compiler.
+
+	The -v command line option will dump the various Yacc states
+	as well as the tokens that are being returned from the
+	tokenizer to the compiler.
+
+	This is useful when tracking down problems when the compiler
+	is not able to parse an expression correctly.
+
+	You can match the states reported with the contents of the
+	y.output file, a file that contains the parsing tables and
+	human-readable information about the generated parser.
+
+* Editing the compiler sources
+
+	The compiler sources are intended to be edited with 134
+	columns of width.
+
+* Quick Hacks
+
+	Once you have a full build of mcs, you can improve your
+	development time by just issuing make in the `mcs' directory or
+	using `make qh' in the gmcs directory.

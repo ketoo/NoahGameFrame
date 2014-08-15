@@ -1,0 +1,43 @@
+Tasks necessary to complete the embedding:
+
+	* Pass the main executable as the first argument to the
+	  mono_main routine so it starts executing it.
+
+Files:
+
+	* Need to trace a typical execution and locate the files that this
+	  will require at runtime, provide hooks of some form.
+
+Windows Issues:
+
+	* --static is not currently supported:
+
+		The GC needs to be notified about new threads that is also
+		possible using TLS callbacks. IMAGE_DIRECTORY_ENTRY_TLS
+		has to be set in the PE image to an IMAGE_TLS_DIRECTORY
+		containing PIMAGE_TLS_CALLBACKs that have the same
+		functionality and signature as DllMain. This is also
+		supported for EXE images. Visual C++ and Microsoft Linker
+		have support for this but I don't know whether this is
+		supported GCC.
+		TLS callbacks should be implemented in the GC that would
+		enable static linking.
+
+		References:
+		http://blog.dkbza.org/2007_03_01_archive.html
+		http://www.nynaeve.net/?p=183
+
+		Using a statically linked eglib instead of glib could also
+		reduce DLL dependency.
+
+	* Document that the following DLLs are required to be deployed
+	  along with the bundle. Do we need some legal blub if we
+	  incite the user to deploy these binaries?
+
+		[Mm]ono*.dll
+		libglib*.dll
+		libgmodule*.dll
+		libgthread*.dll
+		iconv.dll
+		intl.dll
+		zlib1.dll

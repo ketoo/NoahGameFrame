@@ -1,0 +1,8 @@
+SqliteCommandUnitTests.cs
+SqliteConnectionTest.cs
+SqliteDataAdapterUnitTests.cs
+SqliteDataReaderTest.cs
+SqliteExceptionUnitTests.cs
+SqliteParameterUnitTests.cs
+SqliteFunctionTests.cs
+

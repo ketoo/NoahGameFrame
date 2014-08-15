@@ -1,0 +1,2 @@
+SUBDIRS = locale-builder sgen
+

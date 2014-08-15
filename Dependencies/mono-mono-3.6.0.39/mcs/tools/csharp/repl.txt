@@ -1,0 +1,117 @@
+Things to do for the REPL support in MCS:
+
+Documentation for the REPL mode for MCS can be found here:
+
+	      http://mono-project.com/CsharpRepl
+
+* Embedding API
+
+	* Booting the compiler without Main ()
+	* Expose LoadAssembly/LoadPackage
+	* Register fields?
+	* Register a lookup function for fields?
+	* Register classes to expose to REPL
+
+* Embedded Library
+
+	* Run a REPL on a socket (from Joe Shaw)
+	* Host a REPL on XSP (from Nat).
+
+* TODO
+
+	Clear struct fields inside the clearing code.
+
+* Other ideas:
+
+	MD addin for "csharp"
+
+* Mix statements with other top-level declarations.
+
+csharp> class Y {static void Main () {Console.WriteLine ("Foo"); }}
+csharp> typeof (Y);
+Y
+csharp> Y.Main ();
+Exception caught by the compiler while compiling:
+   Block that caused the problem begin at: Internal(1,1):
+                     Block being compiled: [<interactive>(1,2):,<interactive>(1,11):]
+System.NotSupportedException: The invoked member is not supported in a dynamic module.
+Internal compiler error at Internal(1,1):: exception caught while emitting MethodBuilder [Class2::Host]
+System.NotSupportedException: The invoked member is not supported in a dynamic module.
+  at System.Reflection.Emit.AssemblyBuilder.get_Location () [0x00000] in /second/home/cvs/mcs/class/corlib/System.Reflection.Emit/AssemblyBuilder.cs:214 
+  at Mono.CSharp.Report.SymbolRelatedToPreviousError (System.Reflection.MemberInfo mi) [0x00036] in /second/home/cvs/mcs/mcs/report.cs:664 
+  at Mono.CSharp.Expression.Error_MemberLookupFailed (System.Type container_type, System.Type qualifier_type, System.Type queried_type, System.String name, System.String class_name, MemberTypes mt, BindingFlags bf) [0x00121] in /second/home/cvs/mcs/mcs/ecore.cs:857 
+  at Mono.CSharp.MemberAccess.DoResolve (Mono.CSharp.EmitContext ec, Mono.CSharp.Expression right_side) [0x00230] in /second/home/cvs/mcs/mcs/expression.cs:7426 
+  at Mono.CSharp.MemberAccess.DoResolve (Mono.CSharp.EmitContext ec) [0x00000] in /second/home/cvs/mcs/mcs/expression.cs:7494 
+  at Mono.CSharp.Expression.Resolve (Mono.CSharp.EmitContext ec, ResolveFlags flags) [0x00075] in /second/home/cvs/mcs/mcs/ecore.cs:479 
+  at Mono.CSharp.Invocation.DoResolve (Mono.CSharp.EmitContext ec) [0x0000d] in /second/home/cvs/mcs/mcs/expression.cs:4725 
+  at Mono.CSharp.Expression.Resolve (Mono.CSharp.EmitContext ec, ResolveFlags flags) [0x00075] in /second/home/cvs/mcs/mcs/ecore.cs:479 
+  at Mono.CSharp.Expression.Resolve (Mono.CSharp.EmitContext ec) [0x00000] in /second/home/cvs/mcs/mcs/ecore.cs:506 
+  at Mono.CSharp.OptionalAssign.DoResolve (Mono.CSharp.EmitContext ec) [0x00013] in /second/home/cvs/mcs/mcs/repl.cs:681 
+  at Mono.CSharp.Expression.Resolve (Mono.CSharp.EmitContext ec, ResolveFlags flags) [0x00075] in /second/home/cvs/mcs/mcs/ecore.cs:479 
+  at Mono.CSharp.Expression.Resolve (Mono.CSharp.EmitContext ec) [0x00000] in /second/home/cvs/mcs/mcs/ecore.cs:506 
+  at Mono.CSharp.ExpressionStatement.ResolveStatement (Mono.CSharp.EmitContext ec) [0x00000] in /second/home/cvs/mcs/mcs/ecore.cs:1307 
+  at Mono.CSharp.StatementExpression.Resolve (Mono.CSharp.EmitContext ec) [0x0000b] in /second/home/cvs/mcs/mcs/statement.cs:743 
+  at Mono.CSharp.Block.Resolve (Mono.CSharp.EmitContext ec) [0x000f0] in /second/home/cvs/mcs/mcs/statement.cs:2254 
+  at Mono.CSharp.ExplicitBlock.Resolve (Mono.CSharp.EmitContext ec) [0x00000] in /second/home/cvs/mcs/mcs/statement.cs:2550 
+  at Mono.CSharp.EmitContext.ResolveTopBlock (Mono.CSharp.EmitContext anonymous_method_host, Mono.CSharp.ToplevelBlock block, Mono.CSharp.Parameters ip, IMethodData md, System.Boolean& unreachable) [0x00087] in /second/home/cvs/mcs/mcs/codegen.cs:796 
+csharp>  
+
+* Another one:
+
+csharp> class X { X (){ Console.WriteLine ("Called"); } }              
+csharp> new X ();
+Exception caught by the compiler while compiling:
+   Block that caused the problem begin at: Internal(1,1):
+                     Block being compiled: [<interactive>(1,2):,<interactive>(1,10):]
+System.NotSupportedException: The invoked member is not supported in a dynamic module.
+Internal compiler error at Internal(1,1):: exception caught while emitting MethodBuilder [Class0::Host]
+System.NotSupportedException: The invoked member is not supported in a dynamic module.
+  at System.Reflection.Emit.AssemblyBuilder.get_Location () [0x00000] in /second/home/cvs/mcs/class/corlib/System.Reflection.Emit/AssemblyBuilder.cs:214 
+  at Mono.CSharp.Report.SymbolRelatedToPreviousError (System.Reflection.MemberInfo mi) [0x00036] in /second/home/cvs/mcs/mcs/report.cs:664 
+  at Mono.CSharp.Expression.Error_MemberLookupFailed (System.Type container_type, System.Type qualifier_type, System.Type queried_type, System.String name, System.String class_name, MemberTypes mt, BindingFlags bf) [0x00121] in /second/home/cvs/mcs/mcs/ecore.cs:857 
+  at Mono.CSharp.Expression.MemberLookupFinal (Mono.CSharp.EmitContext ec, System.Type qualifier_type, System.Type queried_type, System.String name, MemberTypes mt, BindingFlags bf, Location loc) [0x0002f] in /second/home/cvs/mcs/mcs/ecore.cs:804 
+  at Mono.CSharp.New.DoResolve (Mono.CSharp.EmitContext ec) [0x002ad] in /second/home/cvs/mcs/mcs/expression.cs:5486 
+  at Mono.CSharp.Expression.Resolve (Mono.CSharp.EmitContext ec, ResolveFlags flags) [0x00075] in /second/home/cvs/mcs/mcs/ecore.cs:479 
+  at Mono.CSharp.Expression.Resolve (Mono.CSharp.EmitContext ec) [0x00000] in /second/home/cvs/mcs/mcs/ecore.cs:506 
+  at Mono.CSharp.OptionalAssign.DoResolve (Mono.CSharp.EmitContext ec) [0x00013] in /second/home/cvs/mcs/mcs/repl.cs:687 
+  at Mono.CSharp.Expression.Resolve (Mono.CSharp.EmitContext ec, ResolveFlags flags) [0x00075] in /second/home/cvs/mcs/mcs/ecore.cs:479 
+  at Mono.CSharp.Expression.Resolve (Mono.CSharp.EmitContext ec) [0x00000] in /second/home/cvs/mcs/mcs/ecore.cs:506 
+  at Mono.CSharp.ExpressionStatement.ResolveStatement (Mono.CSharp.EmitContext ec) [0x00000] in /second/home/cvs/mcs/mcs/ecore.cs:1307 
+  at Mono.CSharp.StatementExpression.Resolve (Mono.CSharp.EmitContext ec) [0x0000b] in /second/home/cvs/mcs/mcs/statement.cs:743 
+  at Mono.CSharp.Block.Resolve (Mono.CSharp.EmitContext ec) [0x000f0] in /second/home/cvs/mcs/mcs/statement.cs:2254 
+  at Mono.CSharp.ExplicitBlock.Resolve (Mono.CSharp.EmitContext ec) [0x00000] in /second/home/cvs/mcs/mcs/statement.cs:2550 
+  at Mono.CSharp.EmitContext.ResolveTopBlock (Mono.CSharp.EmitContext anonymous_method_host, Mono.CSharp.ToplevelBlock block, Mono.CSharp.Parameters ip, IMethodData md, System.Boolean& unreachable) [0x00087] in /second/home/cvs/mcs/mcs/codegen.cs:796 
+csharp>  
+
+* Important: we need to replace TypeBuidlers with Types after things
+  have been emitted, or stuff like this happens:
+
+csharp> public class y  {}
+csharp> typeof (y); 
+Class1
+
+
+* Clearing data
+
+	TODO: when clearing data for variables that have been overwritten
+	we need to check for structs and clear all the fields that contain
+	reference types.
+
+* DEBATABLE: Implement auto-insert-semicolon
+
+	This is easy to implement, just retry the parse with a
+	semicolon, the question is whether this is a good idea to do
+	in the first place or not.
+
+* Tab Completion
+
+	Implement tab completion on names, variables and type lookups.
+
+	This could be implemented by having the TAB key force the
+	expression to be evaluated with a special COMPLETE token
+	at the end.
+
+	Then the various productions (one by one) would have to
+	add support for COMPLETE, and having Resolve methods be
+	aware of this.
+

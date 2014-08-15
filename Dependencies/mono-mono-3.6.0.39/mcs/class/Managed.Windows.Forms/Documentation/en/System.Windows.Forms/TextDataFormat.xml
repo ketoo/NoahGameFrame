@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="TextDataFormat" FullName="System.Windows.Forms.TextDataFormat">
+  <TypeSignature Language="C#" Value="public enum TextDataFormat" />
+  <AssemblyInfo>
+    <AssemblyName>System.Windows.Forms</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>This enumeration contains values that are similar to the text-related fields of the <see cref="T:System.Windows.Forms.DataFormats" /> type.</para>
+      <para>This enumeration is used with the following methods:</para>
+      <list type="bullet">
+        <item>
+          <para>
+            <see cref="M:System.Windows.Forms.Clipboard.ContainsText(System.Windows.Forms.TextDataFormat)" />
+          </para>
+        </item>
+        <item>
+          <para>
+            <see cref="M:System.Windows.Forms.Clipboard.GetText(System.Windows.Forms.TextDataFormat)" />
+          </para>
+        </item>
+        <item>
+          <para>
+            <see cref="M:System.Windows.Forms.Clipboard.SetText(System.String,System.Windows.Forms.TextDataFormat)" />
+          </para>
+        </item>
+        <item>
+          <para>
+            <see cref="M:System.Windows.Forms.DataObject.ContainsText(System.Windows.Forms.TextDataFormat)" />
+          </para>
+        </item>
+        <item>
+          <para>
+            <see cref="M:System.Windows.Forms.DataObject.GetText(System.Windows.Forms.TextDataFormat)" />
+          </para>
+        </item>
+        <item>
+          <para>
+            <see cref="M:System.Windows.Forms.DataObject.SetText(System.String,System.Windows.Forms.TextDataFormat)" />
+          </para>
+        </item>
+      </list>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Specifies the formats used with text-related methods of the <see cref="T:System.Windows.Forms.Clipboard" /> and <see cref="T:System.Windows.Forms.DataObject" /> classes.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="CommaSeparatedValue">
+      <MemberSignature Language="C#" Value="CommaSeparatedValue" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.TextDataFormat</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Specifies a comma-separated value (CSV) format, which is a common interchange format used by spreadsheets.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Html">
+      <MemberSignature Language="C#" Value="Html" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.TextDataFormat</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Specifies text consisting of HTML data.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Rtf">
+      <MemberSignature Language="C#" Value="Rtf" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.TextDataFormat</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Specifies text consisting of rich text format (RTF) data.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Text">
+      <MemberSignature Language="C#" Value="Text" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.TextDataFormat</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Specifies the standard ANSI text format.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="UnicodeText">
+      <MemberSignature Language="C#" Value="UnicodeText" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.TextDataFormat</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Specifies the standard Windows Unicode text format.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

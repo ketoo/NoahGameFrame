@@ -1,0 +1,48 @@
+--- DocTest-v1.cs	2008-12-02 10:38:46.000000000 -0500
++++ DocTest.cs	2008-12-02 11:28:55.000000000 -0500
+@@ -2,6 +2,9 @@
+ using System.Collections;
+ using System.Collections.Generic;
+ using System.Linq;
++using System.Reflection;
++
++[assembly: AssemblyVersion ("2.0.0.0")]
+ 
+ public class NoNamespace {}
+ 
+@@ -43,16 +46,7 @@
+ 		{
+ 			throw new InvalidOperationException ();
+ 		}
+-
+-		// ECMA docs *incorrectly* document parameter -- skip
+-		public static void Resize<T> (ref T[] array, int newSize)
+-		{
+-			throw new Exception ();
+-		}
+ 	}
+-
+-	// to test ECMA doc importing...
+-	public delegate void AsyncCallback (IAsyncResult ar);
+ }
+ 
+ namespace Mono.DocTest {
+@@ -397,6 +391,9 @@
+ 		/// <remarks><c>M:Mono.DocTest.UseLists.UseHelper``3(Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2})</c>.</remarks>
+ 		public void UseHelper<T,U,V> (Generic.MyList<T>.Helper<U,V> helper) {}
+ 	}
++
++	public class AddedType {
++	}
+ }
+ 
+ namespace Mono.DocTest.Generic {
+@@ -471,6 +468,8 @@
+ 			return default(U);
+ 		}
+ 
++		public void AddedInVersion0_1_0_0 () {}
++
+ 		/// <remarks><c>F:Mono.DocTest.GenericBase`1.StaticField1</c></remarks>
+ 		public static readonly GenericBase<U> StaticField1 = new GenericBase<U> ();
+ 
