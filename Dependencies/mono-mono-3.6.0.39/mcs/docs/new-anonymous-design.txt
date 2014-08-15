@@ -1,0 +1,200 @@
+Anonymous Methods and the TypeContainer resolve order
+-----------------------------------------------------
+
+Anonymous methods add another resolving pass to the TypeContainer framework.
+The new code works like this:
+
+* Parsing
+
+  We can already determine whether or not a method contains anonymous
+  methods or iterators at parsing time, but we can't determine their
+  types yet.
+
+  This means that at the end of the parsing stage, we already know
+  about all anonymous methods and iterators, but didn't resolve them
+  yet.
+
+* DefineType
+
+  Anonymous method containers are not created until they are needed
+  which means we cannot use standard DefineType to setup type
+  container.
+  
+  Note: Even if block looks like anonymous method, it does not necessary
+  mean it's anonymous method, expression trees are good example.
+
+* EmitType
+
+  At this point we enter anonymous methods land. We call Resolve on
+  method block which when hits anonymous method expression we start
+  anonymous method definition.
+
+One of the hardest parts of the new anonymous methods implementation
+was getting this resolve order right.  It may sound complicated, but
+there are reasons why it's done this way.
+
+Let's have a look at a small example:
+
+	=====
+	delegate void Foo ();
+
+	class X {
+		public void Hello<U> (U u)
+
+		public void Test<T> (T t)
+		{
+			T u = t;
+			Hello (u);
+			Foo foo = delegate {
+				Hello (u);
+			};
+			foo ();
+		}
+	}
+	=====
+
+After parsing this file, we already know that Test() contains an
+anonymous method, but we don't know whether it needs to capture local
+variable or access this pointer.
+
+Because Test() is a generic method, it complicates things further
+as we may need to create generic type container and transform all method
+type parameters into class type parameters to keep method signature
+compatible with requested delegate signature.
+
+One key feature of the new code is using minimal possible anonymous
+method overhead. Based on whether an anonymous method needs access to
+this pointer or has access to local variables from outher scope new
+TypeContainer (anonymous method storey) is created. We may end up with
+up to 3 scenarios.
+
+1. No access to local variable or this
+
+	Anonymous method is emitted in a compiler generated static method
+inside same class as current block.
+
+2. No access to local variable but this is accessible
+
+	Anonymous method is emitted in a compiler generated instance method
+inside same class as current block.
+
+3. Local variable is accessible
+
+	New nested class (anonymous method storey) is created and anonymous
+method block is emitted as an instance method inside this nested class.
+
+Note: The important detail for cases 1 and 2 is that both methods are
+created inside current block class, which means they can end up inside
+anonymous method storey when parent scope needs access to local variable.
+
+One important thing to keep in mind is that we neither know the type
+of the anonymous methods nor any captured variables until resolving
+`Test'.  Note that a method's block isn't resolved until
+TypeContainer.EmitCode(), so we can't call DefineMembers() on our
+CompilerGeneratedClass'es until we emitted all methods.
+
+Anonymous Methods and Scopes:
+-----------------------------
+
+The new code fundamentally changes the concept of CaptureContexts and
+ScopeInfos. CaptureContext is completely gone together with ScopeInfo.
+
+Unfortunately, computing the optimal "root scope" of an anonymous
+method is very difficult and was the primary reason for the update in
+late November 2006.  Consider the following example:
+
+	====
+	TestDelegate d = null;
+	for (int i = 1; i <= 5; i++) {
+		int k = i;
+		TestDelegate temp = delegate {
+			Console.WriteLine ("i = {0}, k = {1}", i, k);
+			sum_i += 1 << i;
+			sum_k += 1 << k;
+		};
+		temp ();
+		d += temp;
+	}
+	====
+
+Note that we're instantiating the same anonymous method multiple times
+inside a loop.  The important thing is that each instantiation must
+get the current version of `k'; ie. we must create a new instance 'k's
+helper-class for each instantiation.  They all share `i's helper-class.
+
+This means that the anonymous method needs to be hosted in the inner
+helper-class.
+
+Because of that, we need to compute all the scopes before actually
+creating the anonymous method.
+
+Anonymous Methods and Generics:
+-------------------------------
+
+Creating and consuming generic types is very difficult and you have to
+follow certain rules to do it right (the most important one is that
+you may not use the class until it's fully created).
+
+GMCS already has working code to do that - and one very important
+policy in the new anonymous methods code is that it must not interfer
+with GMCS's way of resolving and defining generic types; ie. everything
+related to generics is handled during the normal TypeContainer
+resolving process.
+
+However, there is a problem when we are dealing with generics variables.
+They may end up to be captured but their local generic type has been
+already resolved. To handle this scenario type mutation was introduced,
+to convert any method type parameter (MVAR) to generic type parameter
+(VAR). This process is not straighforward due to way how S.R.E deals
+with generics and we have to recontruct each reference of mutated
+(MVAR->VAR) generic type.
+
+
+The new `Variable' abstraction:
+-------------------------------
+
+There is a new `Variable' abstraction which is used for locals and
+parameters; all the knowledge about how to access a variable and
+whether it's captured or not is now in that new abstract `Variable'
+class.  The `LocalVariableReference' and `ParameterReference' now
+share most of their code and have a common `VariableReference' base
+class, which is also used by `This'.
+
+`Variable' also controls whether or not we need to create a temporary
+copy of a variable.
+
+`Parameter' and `LocalInfo' both have a new ResolveVariable() method
+which creates an instance of the new `Variable' class for each of
+them.
+
+If we're captured, a `Field' has already been created for the variable
+and since we're called during the normal TypeContainer resolve / emit
+process, there' no additional "magic" required; it "just works".
+
+    CAUTION: Inside the anonymous method, the `Variable's type
+             determines the variable's actual type - outside it
+             is the ParameterReference / LocalVariableReference's
+             type !
+
+    To make it more clear:
+
+        The type of a ParameterReference / LocalVariableReference
+        depends upon whether we're inside our outside the anonymous
+        method - and in case of generic, they are different !!!
+
+        The normal situation is that outside the anonymous method,
+        we may use the generic method parameters directly (ie.
+        MONO_TYPE_MVAR) - but inside the anonymous method, we're in
+        and generic class, not a generic method - so it's a generic
+        type parameter (MONO_TYPE_VAR).
+
+        There are several tests for this in my new test suite.
+
+    This does not only apply to variables; it's the same for types -
+    the same `T' may mean a completely different type depending upon
+    whether we're inside or outside the anonymous method: outside,
+    it's a generic method parameter (MONO_TYPE_MVAR) and inside, it's
+    a generic type parameter (MONO_TYPE_VAR) - so we already need to
+    handle this in the EmitContext to make SimpleNameResolve work.
+
+

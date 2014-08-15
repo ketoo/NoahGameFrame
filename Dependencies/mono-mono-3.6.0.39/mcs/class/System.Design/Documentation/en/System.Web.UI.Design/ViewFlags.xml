@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="ViewFlags" FullName="System.Web.UI.Design.ViewFlags">
+  <TypeSignature Language="C#" Value="public enum ViewFlags" />
+  <AssemblyInfo>
+    <AssemblyName>System.Design</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Flags</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <remarks>To be added.</remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Indicates which features are enabled with the <see cref="M:System.Web.UI.Design.ControlDesigner.SetViewFlags(System.Web.UI.Design.ViewFlags,System.Boolean)" /> method of a designer.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="CustomPaint">
+      <MemberSignature Language="C#" Value="CustomPaint" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.Design.ViewFlags</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Enables painting events for displaying a custom control at design time.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="DesignTimeHtmlRequiresLoadComplete">
+      <MemberSignature Language="C#" Value="DesignTimeHtmlRequiresLoadComplete" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.Design.ViewFlags</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Postpones all events until after the control is completely loaded.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="TemplateEditing">
+      <MemberSignature Language="C#" Value="TemplateEditing" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.Design.ViewFlags</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Enables template editing at design time.</para>
+        </summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

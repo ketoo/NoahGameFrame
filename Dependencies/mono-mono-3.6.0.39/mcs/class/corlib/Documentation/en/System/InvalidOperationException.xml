@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="InvalidOperationException" FullName="System.InvalidOperationException" FullNameSP="System_InvalidOperationException" Maintainer="ecma">
+  <TypeSignature Language="ILASM" Value=".class public serializable InvalidOperationException extends System.SystemException" />
+  <TypeSignature Language="C#" Value="public class InvalidOperationException : SystemException" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit InvalidOperationException extends System.SystemException" />
+  <MemberOfLibrary>BCL</MemberOfLibrary>
+  <AssemblyInfo>
+    <AssemblyName>mscorlib</AssemblyName>
+    <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00 ]</AssemblyPublicKey>
+    <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <ThreadingSafetyStatement>All public static members of this type are safe for multithreaded operations. No instance members are guaranteed to be thread safe.</ThreadingSafetyStatement>
+  <Base>
+    <BaseTypeName>System.SystemException</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Runtime.InteropServices.ComVisible(true)</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <example>
+      <para>The following example demonstrates an error that causes
+      a <see cref="T:System.InvalidOperationException" /> exception.</para>
+      <code lang="C#">using System;
+using System.Collections;
+public class InvalidOpExample  {
+  public static void Main()  {
+    int[] array = {0,0};
+    IEnumerator enumerator = array.GetEnumerator();
+    Console.Write("{0}",enumerator.Current);
+  }
+}
+   </code>
+      <para>The output is</para>
+      <c>
+        <para>Unhandled Exception: System.InvalidOperationException: Enumeration has not
+         started. Call MoveNext.</para>
+        <para>at System.SZArrayEnumerator.get_Current()</para>
+        <para>at InvalidOpExample.Main()</para>
+      </c>
+    </example>
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>
+        <see cref="T:System.InvalidOperationException" /> is used in cases when the failure to invoke a method is caused by reasons other than invalid arguments. For example, <see cref="T:System.InvalidOperationException" /> is thrown by: </para>
+      <list type="bullet">
+        <item>
+          <para>
+            <see cref="M:System.Collections.IEnumerator.MoveNext" /> if objects of a collection are modified after the enumerator is created.</para>
+        </item>
+        <item>
+          <para>
+            <see cref="M:System.Resources.ResourceSet.GetString(System.String)" /> if the resource set is closed before the method call is made.</para>
+        </item>
+      </list>
+      <para>To determine the precise cause of the exception, consult the exception information for the method call that throws the exception. </para>
+      <para>If the method invocation failure is due to invalid arguments, then <see cref="T:System.ArgumentException" /> or one of its derived classes, <see cref="T:System.ArgumentNullException" /> or <see cref="T:System.ArgumentOutOfRangeException" />, should be thrown instead.</para>
+      <list type="bullet">
+        <item>
+          <para>The <see cref="F:System.Reflection.Emit.OpCodes.Ldflda" /> Microsoft intermediate language (MSIL) instruction throws <see cref="T:System.InvalidOperationException" />.</para>
+        </item>
+      </list>
+      <para>
+        <see cref="T:System.InvalidOperationException" /> uses the HRESULT COR_E_INVALIDOPERATION, which has the value 0x80131509.</para>
+      <para>For a list of initial property values for an instance of <see cref="T:System.InvalidOperationException" />, see the <see cref="M:System.InvalidOperationException.#ctor" /> constructors.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The exception that is thrown when a method call is invalid for the object's current state.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor()" />
+      <MemberSignature Language="C#" Value="public InvalidOperationException ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue />
+      <Parameters />
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "The requested operation cannot be performed." This message takes into account the current system culture.</para>
+          <para>The following table shows the initial property values for an instance of <see cref="T:System.InvalidOperationException" />.</para>
+          <list type="table">
+            <listheader>
+              <item>
+                <term>
+                  <para>Property </para>
+                </term>
+                <description>
+                  <para>Value </para>
+                </description>
+              </item>
+            </listheader>
+            <item>
+              <term>
+                <para>
+                  <see cref="P:System.Exception.InnerException" /> </para>
+              </term>
+              <description>
+                <para>A null reference (Nothing in Visual Basic). </para>
+              </description>
+            </item>
+            <item>
+              <term>
+                <para>
+                  <see cref="P:System.Exception.Message" /> </para>
+              </term>
+              <description>
+                <para>The localized error message string. </para>
+              </description>
+            </item>
+          </list>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.InvalidOperationException" /> class.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor(string message)" />
+      <MemberSignature Language="C#" Value="public InvalidOperationException (string message);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="message" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new exception using the <paramref name="message" /> parameter. The content of <paramref name="message" /> is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para>
+          <para>The following table shows the initial property values for an instance of <see cref="T:System.InvalidOperationException" />.</para>
+          <list type="table">
+            <listheader>
+              <item>
+                <term>
+                  <para>Property </para>
+                </term>
+                <description>
+                  <para>Value </para>
+                </description>
+              </item>
+            </listheader>
+            <item>
+              <term>
+                <para>
+                  <see cref="P:System.Exception.InnerException" /> </para>
+              </term>
+              <description>
+                <para>A null reference (Nothing in Visual Basic). </para>
+              </description>
+            </item>
+            <item>
+              <term>
+                <para>
+                  <see cref="P:System.Exception.Message" /> </para>
+              </term>
+              <description>
+                <para>The error message string. </para>
+              </description>
+            </item>
+          </list>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.InvalidOperationException" /> class with a specified error message.</para>
+        </summary>
+        <param name="message">
+          <attribution license="cc4" from="Microsoft" modified="false" />The message that describes the error. </param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected InvalidOperationException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="info" Type="System.Runtime.Serialization.SerializationInfo" />
+        <Parameter Name="context" Type="System.Runtime.Serialization.StreamingContext" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html"><a href="832AC524-21BC-419A-A27B-CA8BFC45840F">[&lt;topic://cpconSerialization&gt;]</a></format>.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.InvalidOperationException" /> class with serialized data.</para>
+        </summary>
+        <param name="info">
+          <attribution license="cc4" from="Microsoft" modified="false" />The object that holds the serialized object data. </param>
+        <param name="context">
+          <attribution license="cc4" from="Microsoft" modified="false" />The contextual information about the source or destination. </param>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor(string message, class System.Exception innerException)" />
+      <MemberSignature Language="C#" Value="public InvalidOperationException (string message, Exception innerException);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message, class System.Exception innerException) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="message" Type="System.String" />
+        <Parameter Name="innerException" Type="System.Exception" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para>
+          <para>The following table shows the initial property values for an instance of <see cref="T:System.InvalidOperationException" />.</para>
+          <list type="table">
+            <listheader>
+              <item>
+                <term>
+                  <para>Property </para>
+                </term>
+                <description>
+                  <para>Value </para>
+                </description>
+              </item>
+            </listheader>
+            <item>
+              <term>
+                <para>
+                  <see cref="P:System.Exception.InnerException" /> </para>
+              </term>
+              <description>
+                <para>The inner exception reference. </para>
+              </description>
+            </item>
+            <item>
+              <term>
+                <para>
+                  <see cref="P:System.Exception.Message" /> </para>
+              </term>
+              <description>
+                <para>The error message string. </para>
+              </description>
+            </item>
+          </list>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.InvalidOperationException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
+        </summary>
+        <param name="message">
+          <attribution license="cc4" from="Microsoft" modified="false" />The error message that explains the reason for the exception. </param>
+        <param name="innerException">
+          <attribution license="cc4" from="Microsoft" modified="false" />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not a null reference (Nothing in Visual Basic), the current exception is raised in a catch block that handles the inner exception. </param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+  </Members>
+  <TypeExcluded>0</TypeExcluded>
+</Type>

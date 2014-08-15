@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="SocketOptionLevel" FullName="System.Net.Sockets.SocketOptionLevel" FullNameSP="System_Net_Sockets_SocketOptionLevel" Maintainer="ecma">
+  <TypeSignature Language="ILASM" Value=".class public sealed serializable SocketOptionLevel extends System.Enum" />
+  <TypeSignature Language="C#" Value="public enum SocketOptionLevel" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed SocketOptionLevel extends System.Enum" />
+  <MemberOfLibrary>Networking</MemberOfLibrary>
+  <AssemblyInfo>
+    <AssemblyName>System</AssemblyName>
+    <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00 ]</AssemblyPublicKey>
+    <AssemblyVersion>1.0.x.x</AssemblyVersion>
+    <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The <see cref="T:System.Net.Sockets.SocketOptionLevel" /> enumeration defines the socket option levels that can be passed to the <see cref="M:System.Net.Sockets.Socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)" /> and <see cref="M:System.Net.Sockets.Socket.GetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName)" /> methods. <see cref="T:System.Net.Sockets.SocketOptionName" /> enumerated values are grouped by <see cref="T:System.Net.Sockets.SocketOptionLevel" />. </para>
+      <para>Note   To use <see cref="F:System.Net.Sockets.SocketOptionLevel.IPv6" /> on Windows XP, install Advance Networking Pack for Windows XP.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Defines socket option levels for the <see cref="M:System.Net.Sockets.Socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)" /> and <see cref="M:System.Net.Sockets.Socket.GetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName)" /> methods.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="IP">
+      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.Sockets.SocketOptionLevel IP = 0" />
+      <MemberSignature Language="C#" Value="IP" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Sockets.SocketOptionLevel IP = int32(0)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Net.Sockets.SocketOptionLevel</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <MemberValue>IP</MemberValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>
+            <see cref="T:System.Net.Sockets.Socket" /> options apply only to IP sockets.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="IPv6">
+      <MemberSignature Language="C#" Value="IPv6" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Sockets.SocketOptionLevel IPv6 = int32(41)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Net.Sockets.SocketOptionLevel</ReturnType>
+      </ReturnValue>
+      <MemberValue>IPv6</MemberValue>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>
+            <see cref="T:System.Net.Sockets.Socket" /> options apply only to IPv6 sockets.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="Socket">
+      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.Sockets.SocketOptionLevel Socket = 65535" />
+      <MemberSignature Language="C#" Value="Socket" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Sockets.SocketOptionLevel Socket = int32(65535)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Net.Sockets.SocketOptionLevel</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <MemberValue>Socket</MemberValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>
+            <see cref="T:System.Net.Sockets.Socket" /> options apply to all sockets.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="Tcp">
+      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.Sockets.SocketOptionLevel Tcp = 6" />
+      <MemberSignature Language="C#" Value="Tcp" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Sockets.SocketOptionLevel Tcp = int32(6)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Net.Sockets.SocketOptionLevel</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <MemberValue>Tcp</MemberValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>
+            <see cref="T:System.Net.Sockets.Socket" /> options apply only to TCP sockets.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="Udp">
+      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.Sockets.SocketOptionLevel Udp = 17" />
+      <MemberSignature Language="C#" Value="Udp" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Sockets.SocketOptionLevel Udp = int32(17)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Net.Sockets.SocketOptionLevel</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <MemberValue>Udp</MemberValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>
+            <see cref="T:System.Net.Sockets.Socket" /> options apply only to UDP sockets.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+  </Members>
+  <TypeExcluded>0</TypeExcluded>
+</Type>

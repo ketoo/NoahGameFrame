@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="GlobalizationSection" FullName="System.Web.Configuration.GlobalizationSection">
+  <TypeSignature Language="C#" Value="public sealed class GlobalizationSection : System.Configuration.ConfigurationSection" />
+  <AssemblyInfo>
+    <AssemblyName>System.Web</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Configuration.ConfigurationSection</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The <see cref="T:System.Web.Configuration.GlobalizationSection" /> class provides a way to programmatically access and modify the content of the globalization section of the configuration file.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Defines configuration settings that are used to support the globalization infrastructure of Web applications. This class cannot be inherited.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public GlobalizationSection ();" />
+      <MemberType>Constructor</MemberType>
+      <Parameters />
+      <Docs>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="M:System.Web.Configuration.GlobalizationSection.#ctor" /> constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.GlobalizationSection" /> class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" /> method.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.GlobalizationSection" /> class by using default settings.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Culture">
+      <MemberSignature Language="C#" Value="public string Culture { set; get; }" />
+      <MemberType>Property</MemberType>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Configuration.ConfigurationProperty("culture", DefaultValue="")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="P:System.Web.Configuration.GlobalizationSection.Culture" /> property returns the default culture for processing incoming Web requests.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets a value specifying the default culture for processing incoming Web requests.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="EnableBestFitResponseEncoding">
+      <MemberSignature Language="C#" Value="public bool EnableBestFitResponseEncoding { set; get; }" />
+      <MemberType>Property</MemberType>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Configuration.ConfigurationProperty("enableBestFitResponseEncoding", DefaultValue="False")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets a value indicating whether the best-fit character encoding for a response is enabled.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="EnableClientBasedCulture">
+      <MemberSignature Language="C#" Value="public bool EnableClientBasedCulture { set; get; }" />
+      <MemberType>Property</MemberType>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Configuration.ConfigurationProperty("enableClientBasedCulture", DefaultValue="False")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>When the <see cref="P:System.Web.Configuration.GlobalizationSection.EnableClientBasedCulture" /> property is enabled, the <see cref="P:System.Web.Configuration.GlobalizationSection.Culture" /> and <see cref="P:System.Web.Configuration.GlobalizationSection.UICulture" /> properties are based on the <see cref="F:System.Net.HttpRequestHeader.AcceptLanguage" /> header field value that is sent by the client browser. If the <see cref="F:System.Net.HttpRequestHeader.AcceptLanguage" /> header value cannot be mapped to a specific culture, the <see cref="P:System.Web.Configuration.GlobalizationSection.Culture" /> and <see cref="P:System.Web.Configuration.GlobalizationSection.UICulture" /> values are used. The default value is false.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets a value indicating whether the <see cref="P:System.Web.Configuration.GlobalizationSection.Culture" /> and <see cref="P:System.Web.Configuration.GlobalizationSection.UICulture" /> properties should be based on the <see cref="F:System.Net.HttpRequestHeader.AcceptLanguage" /> header field value that is sent by the client browser.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="FileEncoding">
+      <MemberSignature Language="C#" Value="public System.Text.Encoding FileEncoding { set; get; }" />
+      <MemberType>Property</MemberType>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Configuration.ConfigurationProperty("fileEncoding")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Text.Encoding</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="P:System.Web.Configuration.GlobalizationSection.FileEncoding" /> property specifies the default encoding that is used to interpret the data that is included in the .aspx, .asmx, and .asax file types. If the file encoding is specified in the Web.config file, the actual file must be saved in the same encoding. Unicode files and UTF-8 files that are saved with the byte order mark prefix <see cref="P:Microsoft.SqlServer.Server.SqlUserDefinedTypeAttribute.IsByteOrdered" /> property are automatically recognized regardless of the value of the <see cref="P:System.Web.Configuration.GlobalizationSection.FileEncoding" />.</para>
+          <para>If the <see cref="P:System.Web.Configuration.GlobalizationSection.FileEncoding" /> property setting for the server or application is configured to use UTF-16, and if UTF-16 is not the encoding that is used for an .aspx page in the scope of the configuration file, the output that is sent to the client browser is corrupted. For this reason, ensure that the configured <see cref="P:System.Web.Configuration.GlobalizationSection.FileEncoding" /> value matches the encoding that is used in the .aspx page.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets a value specifying the default encoding for .aspx, .asmx, and .asax file parsing.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="PostDeserialize">
+      <MemberSignature Language="C#" Value="protected override void PostDeserialize ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="PreSerialize">
+      <MemberSignature Language="C#" Value="protected override void PreSerialize (System.Xml.XmlWriter writer);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="writer" Type="System.Xml.XmlWriter" />
+      </Parameters>
+      <Docs>
+        <param name="writer">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Properties">
+      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="RequestEncoding">
+      <MemberSignature Language="C#" Value="public System.Text.Encoding RequestEncoding { set; get; }" />
+      <MemberType>Property</MemberType>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Configuration.ConfigurationProperty("requestEncoding", DefaultValue="utf-8")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Text.Encoding</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="P:System.Web.Configuration.GlobalizationSection.RequestEncoding" /> property specifies the assumed encoding of each incoming HTTP request, including posted data and query-string data. If the request comes with a request header containing a <see cref="F:System.Net.HttpRequestHeader.ContentType" /> field, the <see cref="F:System.Net.HttpRequestHeader.AcceptCharset" /> field of the request header overrides the <see cref="P:System.Web.Configuration.GlobalizationSection.RequestEncoding" /> of the configuration.</para>
+          <para>The default encoding is UTF-8, specified in the globalization section of the Machine.config file that was created when the .NET Framework was installed. If the <see cref="P:System.Web.Configuration.GlobalizationSection.RequestEncoding" /> property is not specified in the Machine.config or Web.config file, encoding defaults to the Regional Options locale setting on the computer. For single-server applications, the <see cref="P:System.Web.Configuration.GlobalizationSection.RequestEncoding" /> and <see cref="P:System.Web.Configuration.GlobalizationSection.ResponseEncoding" /> properties should be the same. When using multiple server applications where the default server encodings are different, you can use local Web.config files to vary the <see cref="P:System.Web.Configuration.GlobalizationSection.RequestEncoding" /> and <see cref="P:System.Web.Configuration.GlobalizationSection.ResponseEncoding" /> properties.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets a value specifying the content encoding of HTTP requests.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="ResourceProviderFactoryType">
+      <MemberSignature Language="C#" Value="public string ResourceProviderFactoryType { set; get; }" />
+      <MemberType>Property</MemberType>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Configuration.ConfigurationProperty("resourceProviderFactoryType", DefaultValue="")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets the factory type of the resource provider.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="ResponseEncoding">
+      <MemberSignature Language="C#" Value="public System.Text.Encoding ResponseEncoding { set; get; }" />
+      <MemberType>Property</MemberType>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Configuration.ConfigurationProperty("responseEncoding", DefaultValue="utf-8")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Text.Encoding</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="P:System.Web.Configuration.GlobalizationSection.ResponseEncoding" />  property gets or sets a value specifying the content encoding of HTTP responses. The default encoding is UTF-8.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets a value specifying the content encoding of HTTP responses.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="ResponseHeaderEncoding">
+      <MemberSignature Language="C#" Value="public System.Text.Encoding ResponseHeaderEncoding { set; get; }" />
+      <MemberType>Property</MemberType>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Configuration.ConfigurationProperty("responseHeaderEncoding", DefaultValue="utf-8")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Text.Encoding</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="P:System.Web.Configuration.GlobalizationSection.ResponseHeaderEncoding" /> property gets or sets a value specifying the header encoding of HTTP responses. The default encoding is UTF-8.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets a value specifying the header encoding of HTTP responses.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="UICulture">
+      <MemberSignature Language="C#" Value="public string UICulture { set; get; }" />
+      <MemberType>Property</MemberType>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Configuration.ConfigurationProperty("uiCulture", DefaultValue="")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="P:System.Web.Configuration.GlobalizationSection.UICulture" /> property specifies the default culture for processing locale-dependent resource searches.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets a value specifying the default culture for processing locale-dependent resource searches.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

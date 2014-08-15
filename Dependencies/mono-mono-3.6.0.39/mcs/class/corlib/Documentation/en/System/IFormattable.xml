@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="IFormattable" FullName="System.IFormattable" FullNameSP="System_IFormattable" Maintainer="ecma">
+  <TypeSignature Language="ILASM" Value=".class interface public abstract IFormattable" />
+  <TypeSignature Language="C#" Value="public interface IFormattable" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IFormattable" />
+  <MemberOfLibrary>BCL</MemberOfLibrary>
+  <AssemblyInfo>
+    <AssemblyName>mscorlib</AssemblyName>
+    <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00 ]</AssemblyPublicKey>
+    <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Runtime.InteropServices.ComVisible(true)</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The <see cref="T:System.IFormattable" /> interface converts an object to its string representation based on a format string and a format provider. </para>
+      <para>A format string typically defines the general appearance of an object. For example, the .NET Framework supports the following:</para>
+      <list type="bullet">
+        <item>
+          <para>Standard format strings for formatting enumeration values (see <format type="text/html"><a href="dd1ff672-1052-42cf-8666-4924fb6cd1a1">Enumeration Format Strings</a></format>).</para>
+        </item>
+        <item>
+          <para>Standard and custom format strings for formatting numeric values (see <format type="text/html"><a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a></format> and <format type="text/html"><a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a></format>).</para>
+        </item>
+        <item>
+          <para>Standard and custom format strings for formatting date and time values (see <format type="text/html"><a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b">Standard Date and Time Format Strings</a></format> and <format type="text/html"><a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom Date and Time Format Strings</a></format>).</para>
+        </item>
+        <item>
+          <para>Standard and custom format strings for formatting time intervals (see <format type="text/html"><a href="9f6c95eb-63ae-4dcc-9c32-f81985c75794">Standard TimeSpan Format Strings</a></format> and <format type="text/html"><a href="a63ebf55-7269-416b-b4f5-286f6c03bf0e">Custom TimeSpan Format Strings</a></format>).</para>
+        </item>
+      </list>
+      <para>You can also define your own format strings to support formatting of your application-defined types.</para>
+      <para>A format provider returns a formatting object that typically defines the symbols used in converting an object to its string representation. For example, when you convert a number to a currency value, a format provider defines the currency symbol that appears in the result string. The .NET Framework defines three format providers:</para>
+      <list type="bullet">
+        <item>
+          <para>The <see cref="T:System.Globalization.CultureInfo" /> class, which returns either a <see cref="T:System.Globalization.NumberFormatInfo" /> object for formatting numeric values, or a <see cref="T:System.Globalization.DateTimeFormatInfo" /> object for formatting date and time values.</para>
+        </item>
+        <item>
+          <para>The <see cref="T:System.Globalization.NumberFormatInfo" /> class, which returns an instance of itself for formatting numeric values.</para>
+        </item>
+        <item>
+          <para>The <see cref="T:System.Globalization.DateTimeFormatInfo" /> class, which returns an instance of itself for formatting date and time values. </para>
+        </item>
+      </list>
+      <para>In addition, you can define your own custom format providers to supply culture-specific, profession-specific, or industry-specific information used in formatting. For more information about implementing custom formatting by using a custom format provider, see <see cref="T:System.ICustomFormatter" />.</para>
+      <para>The <see cref="T:System.IFormattable" /> interface defines a single method, <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />, that supplies formatting services for the implementing type. The <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" /> method can be called directly. In addition, it is called automatically by the <see cref="M:System.Convert.ToString(System.Object)" /> and <see cref="M:System.Convert.ToString(System.Object,System.IFormatProvider)" /> methods, and by methods that use the <format type="text/html"><a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting feature</a></format> in the .NET Framework. Such methods include <see cref="M:System.Console.WriteLine(System.String,System.Object)" />, <see cref="M:System.String.Format(System.String,System.Object[])" />, and <see cref="M:System.Text.StringBuilder.AppendFormat(System.String,System.Object)" />, among others. The <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" /> method is called for each format item in the method's format string. </para>
+      <para>The <see cref="T:System.IFormattable" /> interface is implemented by the base data types.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Provides functionality to format the value of an object into a string representation.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="ToString">
+      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual abstract string ToString(string format, class System.IFormatProvider formatProvider)" />
+      <MemberSignature Language="C#" Value="public string ToString (string format, IFormatProvider formatProvider);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string ToString(string format, class System.IFormatProvider formatProvider) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="format" Type="System.String" />
+        <Parameter Name="formatProvider" Type="System.IFormatProvider" />
+      </Parameters>
+      <Docs>
+        <exception cref="T:System.FormatException">The specified <paramref name="format" /> is invalid or cannot be used with the type of the current instance.</exception>
+        <example>
+          <para>The following example demonstrates using the <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+method to display values in a variety of formats. The current system culture is
+U.S. English, which provides the default values for the <paramref name="formatProvider" />
+parameter of <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />.</para>
+          <code lang="C#">using System;
+class FormattableExample {
+    public static void Main() {
+    double d = 123.12345678901234;
+    string[] formats = {"C","E","e","F","G","N","P","R"};
+    for (int i = 0; i&lt; formats.Length;i++) 
+        Console.WriteLine("{0:R} as {1}:  {2}",d,formats[i],d.ToString(formats[i],null));
+
+    string[]intFormats = {"D","x","X"};
+    int val = 255;
+    for (int i = 0; i&lt; intFormats.Length;i++) 
+        Console.WriteLine("{0} as {1}:  {2}",val,intFormats[i],val.ToString(intFormats[i],null));
+
+    }
+}
+</code>
+          <para>The output is</para>
+          <c>
+            <para>123.12345678901234 as C: $123.12</para>
+            <para>123.12345678901234 as E: 1.231235E+002</para>
+            <para>123.12345678901234 as e: 1.231235e+002</para>
+            <para>123.12345678901234 as F: 123.12</para>
+            <para>123.12345678901234 as G: 123.123456789012</para>
+            <para>123.12345678901234 as N: 123.12</para>
+            <para>123.12345678901234 as P: 12,312.35 %</para>
+            <para>123.12345678901234 as R: 123.12345678901234</para>
+            <para>255 as D: 255</para>
+            <para>255 as x: ff</para>
+            <para>255 as X: FF</para>
+          </c>
+        </example>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" /> method converts a value to a string representation that can be expressed in multiple ways. Its precise format depends on specific symbols or a specified order defined by specific cultures, professions, or industries. You can call the method directly. It is also called automatically by the <see cref="M:System.Convert.ToString(System.Object)" /> and <see cref="M:System.Convert.ToString(System.Object,System.IFormatProvider)" /> methods, and by methods that use the composite formatting feature in the .NET Framework, such as <see cref="M:System.String.Format(System.String,System.Object[])" />, <see cref="M:System.Console.WriteLine(System.String,System.Object[])" />, and <see cref="M:System.Text.StringBuilder.AppendFormat(System.String,System.Object[])" />. (For more information, see <format type="text/html"><a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a></format>.)</para>
+          <para>Composite formatting methods call the <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" /> method once for each format item in a format string. The parameters passed to the method depend on the specific formatting method that is called and on the content of the format item, as follows:</para>
+          <list type="bullet">
+            <item>
+              <para>If the format item does not include a format string (for example, if the format item is simply {0}), it is passed null as the value of the <see cref="T:System.String" /> parameter.</para>
+            </item>
+            <item>
+              <para>If the format item includes a format string (for example, {0:G}), that format string is passed as the value of the <see cref="T:System.String" /> parameter.</para>
+            </item>
+            <item>
+              <para>If the original method call does not include an <see cref="T:System.IFormatProvider" /> parameter, <see cref="P:System.Globalization.CultureInfo.CurrentCulture" /> is passed as the value of the <see cref="T:System.IFormatProvider" /> parameter.</para>
+            </item>
+            <item>
+              <para>If the original method call includes an <see cref="T:System.IFormatProvider" /> parameter, the provider that is supplied in the method call is passed as the value of the <see cref="T:System.IFormatProvider" /> parameter.</para>
+            </item>
+          </list>
+          <block subset="none" type="note">
+            <para>An object's <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" /> implementation is called by composite formatting methods only if they are not passed an <see cref="T:System.ICustomFormatter" /> format provider, or if the <see cref="M:System.ICustomFormatter.Format(System.String,System.Object,System.IFormatProvider)" /> method of the custom format provider returns null.</para>
+          </block>
+          <para>The .NET Framework includes three format providers, all of which implement the <see cref="T:System.IFormatProvider" /> interface:</para>
+          <list type="bullet">
+            <item>
+              <para>
+                <see cref="T:System.Globalization.NumberFormatInfo" /> supplies numeric formatting information, such as the characters to use for decimal and group separators, and the spelling and placement of currency symbols in monetary values.</para>
+            </item>
+            <item>
+              <para>
+                <see cref="T:System.Globalization.DateTimeFormatInfo" /> supplies date-related and time-related formatting information, such as the position of the month, the day, and the year in a date pattern.</para>
+            </item>
+            <item>
+              <para>
+                <see cref="T:System.Globalization.CultureInfo" /> contains the default formatting information in a specific culture, including the numeric format information, and date-related and time-related formatting information.</para>
+            </item>
+          </list>
+          <para>In addition, you can define your own custom format provider.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Formats the value of the current instance using the specified format.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The value of the current instance in the specified format.</para>
+        </returns>
+        <param name="format">
+          <attribution license="cc4" from="Microsoft" modified="false" />The format to use.</param>
+        <param name="formatProvider">
+          <attribution license="cc4" from="Microsoft" modified="false" />The provider to use to format the value.</param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+  </Members>
+  <TypeExcluded>0</TypeExcluded>
+</Type>

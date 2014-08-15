@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="HitTestOptions" FullName="System.Windows.Forms.VisualStyles.HitTestOptions">
+  <TypeSignature Language="C#" Value="public enum HitTestOptions" />
+  <AssemblyInfo>
+    <AssemblyName>System.Windows.Forms</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Flags</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The <see cref="T:System.Windows.Forms.VisualStyles.HitTestOptions" /> values are used as an argument in the <see cref="Overload:System.Windows.Forms.VisualStyles.VisualStyleRenderer.HitTestBackground" /> method.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Specifies the options that can be used when performing a hit test on the background specified by a visual style.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="BackgroundSegment">
+      <MemberSignature Language="C#" Value="BackgroundSegment" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.HitTestOptions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The hit test option for the background segment.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Caption">
+      <MemberSignature Language="C#" Value="Caption" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.HitTestOptions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The hit test option for the caption.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="FixedBorder">
+      <MemberSignature Language="C#" Value="FixedBorder" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.HitTestOptions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The hit test option for the fixed border.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="ResizingBorder">
+      <MemberSignature Language="C#" Value="ResizingBorder" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.HitTestOptions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The hit test option for the resizing border.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="ResizingBorderBottom">
+      <MemberSignature Language="C#" Value="ResizingBorderBottom" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.HitTestOptions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The hit test option for the bottom resizing border.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="ResizingBorderLeft">
+      <MemberSignature Language="C#" Value="ResizingBorderLeft" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.HitTestOptions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The hit test option for the left resizing border.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="ResizingBorderRight">
+      <MemberSignature Language="C#" Value="ResizingBorderRight" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.HitTestOptions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The hit test option for the right resizing border.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="ResizingBorderTop">
+      <MemberSignature Language="C#" Value="ResizingBorderTop" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.HitTestOptions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The hit test option for the top resizing border.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="SizingTemplate">
+      <MemberSignature Language="C#" Value="SizingTemplate" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.HitTestOptions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The resizing border is specified as a template, not just window edges. This option is mutually exclusive with <see cref="F:System.Windows.Forms.VisualStyles.HitTestOptions.SystemSizingMargins" />; <see cref="F:System.Windows.Forms.VisualStyles.HitTestOptions.SizingTemplate" /> takes precedence.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="SystemSizingMargins">
+      <MemberSignature Language="C#" Value="SystemSizingMargins" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.HitTestOptions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The system resizing border width is used instead of visual style content margins. This option is mutually exclusive with <see cref="F:System.Windows.Forms.VisualStyles.HitTestOptions.SizingTemplate" />; <see cref="F:System.Windows.Forms.VisualStyles.HitTestOptions.SizingTemplate" /> takes precedence.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

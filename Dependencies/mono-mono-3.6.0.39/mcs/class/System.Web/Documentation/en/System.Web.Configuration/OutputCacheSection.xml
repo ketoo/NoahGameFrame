@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="OutputCacheSection" FullName="System.Web.Configuration.OutputCacheSection">
+  <TypeSignature Language="C#" Value="public sealed class OutputCacheSection : System.Configuration.ConfigurationSection" />
+  <AssemblyInfo>
+    <AssemblyName>System.Web</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Configuration.ConfigurationSection</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The <see cref="T:System.Web.Configuration.OutputCacheSection" /> class allows you to programmatically access and modify the OutputCache section. </para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Configures the output cache for a Web application. This class cannot be inherited.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public OutputCacheSection ();" />
+      <MemberType>Constructor</MemberType>
+      <Parameters />
+      <Docs>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="M:System.Web.Configuration.OutputCacheSection.#ctor" /> constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.OutputCacheSection" /> class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" /> method.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.OutputCacheSection" /> class.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="EnableFragmentCache">
+      <MemberSignature Language="C#" Value="public bool EnableFragmentCache { set; get; }" />
+      <MemberType>Property</MemberType>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Configuration.ConfigurationProperty("enableFragmentCache", DefaultValue="True")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>If the <see cref="P:System.Web.Configuration.OutputCacheSection.EnableFragmentCache" /> property is set to false, no user control output is cached, regardless of the <format type="text/html"><a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">OutputCache</a></format> directive or caching profile used. For more information, see <see cref="T:System.Web.Configuration.OutputCacheSettingsSection" /> and <see cref="T:System.Web.Configuration.OutputCacheProfile" />. </para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets a value indicating whether the fragment cache is enabled.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="EnableKernelCacheForVaryByStar">
+      <MemberSignature Language="C#" Value="public bool EnableKernelCacheForVaryByStar { set; get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Configuration.ConfigurationProperty("enableKernelCacheForVaryByStar", DefaultValue="False")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>If static compression is enabled for the request but the client requested an uncompressed response, then kernel caching is disabled. Only compressed responses are cached in kernel. </para>
+          <para>Setting the <see cref="P:System.Web.Configuration.OutputCacheSection.EnableKernelCacheForVaryByStar" /> property to true doesn’t ensure kernel caching of responses. Modules in the processing pipeline must set the kernel cache policy.</para>
+          <para>
+            <see cref="P:System.Web.Configuration.OutputCacheSection.EnableKernelCacheForVaryByStar" /> is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html"><a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a></format>.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets a value indicating whether kernel caching is enabled.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="EnableOutputCache">
+      <MemberSignature Language="C#" Value="public bool EnableOutputCache { set; get; }" />
+      <MemberType>Property</MemberType>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Configuration.ConfigurationProperty("enableOutputCache", DefaultValue="True")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>If the <see cref="P:System.Web.Configuration.OutputCacheSection.EnableFragmentCache" /> property is set to false, no page is cached on the server, regardless of the settings in <format type="text/html"><a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a></format> directive or caching profile used by the page. For more information, see <see cref="T:System.Web.Configuration.OutputCacheSettingsSection" /> and <see cref="T:System.Web.Configuration.OutputCacheProfile" />. </para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets a value indicating whether the output cache is enabled.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="OmitVaryStar">
+      <MemberSignature Language="C#" Value="public bool OmitVaryStar { set; get; }" />
+      <MemberType>Property</MemberType>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Configuration.ConfigurationProperty("omitVaryStar", DefaultValue="False")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The vary header indicates the request-header fields that the server uses to determine which of multiple cached responses are sent in response to a client request. The default for the <see cref="P:System.Web.Configuration.OutputCacheSection.OmitVaryStar" /> property is false. By default, ASP.NET sends the vary header in all POST requests, as well as in all GET-request query strings. If the <see cref="P:System.Web.Configuration.OutputCacheSection.OmitVaryStar" /> is true, ASP.NET omits the vary header when returning the response for cached pages, provided that the GET request to a response is cached with no VaryByCustom property and the POST request to a response is cached with no VaryByParam property and no VaryByCustom property.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets a value indicating whether the vary header is enabled.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Properties">
+      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="SendCacheControlHeader">
+      <MemberSignature Language="C#" Value="public bool SendCacheControlHeader { set; get; }" />
+      <MemberType>Property</MemberType>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Configuration.ConfigurationProperty("sendCacheControlHeader", DefaultValue="True")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="P:System.Web.Configuration.OutputCacheSection.SendCacheControlHeader" /> applies to content with no output caching specified. When it is set to false, the cache-control:private header is not sent by default.</para>
+          <block subset="none" type="note">
+            <para>This setting enables the content to be cached on the client by default.</para>
+          </block>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets a value indicating whether the cache-control:private header is sent by the output cache module by default.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

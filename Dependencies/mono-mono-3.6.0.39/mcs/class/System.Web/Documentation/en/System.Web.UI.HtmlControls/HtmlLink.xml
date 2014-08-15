@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="HtmlLink" FullName="System.Web.UI.HtmlControls.HtmlLink">
+  <TypeSignature Language="C#" Value="public class HtmlLink : System.Web.UI.HtmlControls.HtmlControl" />
+  <AssemblyInfo>
+    <AssemblyName>System.Web</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Web.UI.HtmlControls.HtmlControl</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Web.UI.ControlBuilder(typeof(System.Web.UI.HtmlControls.HtmlEmptyTagControlBuilder))</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The <see cref="T:System.Web.UI.HtmlControls.HtmlLink" /> control allows programmatic access to the HTML link element on the server. The <see cref="T:System.Web.UI.HtmlControls.HtmlLink" /> control can be used to programmatically specify a cascading style sheet (CSS) reference in a Web page. </para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Allows programmatic access to the HTML link element on the server.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public HtmlLink ();" />
+      <MemberType>Constructor</MemberType>
+      <Parameters />
+      <Docs>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlLink" /> control.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlLink" /> class.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Href">
+      <MemberSignature Language="C#" Value="public virtual string Href { set; get; }" />
+      <MemberType>Property</MemberType>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.UrlProperty</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="P:System.Web.UI.HtmlControls.HtmlLink.Href" /> property specifies the URL target of the link specified in the <see cref="T:System.Web.UI.HtmlControls.HtmlLink" /> control. You can use this property to specify the location of an external cascading style sheet (CSS).</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets the URL target of the link specified in the <see cref="T:System.Web.UI.HtmlControls.HtmlLink" /> control. </para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Render">
+      <MemberSignature Language="C#" Value="protected override void Render (System.Web.UI.HtmlTextWriter writer);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="writer" Type="System.Web.UI.HtmlTextWriter" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="M:System.Web.UI.HtmlControls.HtmlLink.Render(System.Web.UI.HtmlTextWriter)" /> method renders a <see cref="F:System.Web.UI.HtmlTextWriter.SelfClosingTagEnd" /> closing bracket (/&gt;) if the ASP.NET application is configured to render XHTML-compliant markup. By default, ASP.NET pages and controls render markup that is compatible with the XHTML 1.1 standard. For more information on configuring an ASP.NET Web site for non-XHTML rendering, see <format type="text/html"><a href="42483a54-f1ae-44e1-88e6-4370f8690149">How to: Configure ASP.NET Web Sites for Non-XHTML Rendering</a></format>. </para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Renders the <see cref="T:System.Web.UI.HtmlControls.HtmlLink" /> control to the specified <see cref="T:System.Web.UI.HtmlTextWriter" /> object. </para>
+        </summary>
+        <param name="writer">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.UI.HtmlTextWriter" /> that receives the rendered content.</param>
+      </Docs>
+    </Member>
+    <Member MemberName="RenderAttributes">
+      <MemberSignature Language="C#" Value="protected override void RenderAttributes (System.Web.UI.HtmlTextWriter writer);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="writer" Type="System.Web.UI.HtmlTextWriter" />
+      </Parameters>
+      <Docs>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="M:System.Web.UI.HtmlControls.HtmlLink.RenderAttributes(System.Web.UI.HtmlTextWriter)" /> method resolves the <see cref="P:System.Web.UI.HtmlControls.HtmlLink.Href" /> property before calling the base class's <see cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" /> method.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Renders the <see cref="T:System.Web.UI.HtmlControls.HtmlLink" /> control's attributes to the specified <see cref="T:System.Web.UI.HtmlTextWriter" /> object.</para>
+        </summary>
+        <param name="writer">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.UI.HtmlTextWriter" /> that receives the rendered content.</param>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

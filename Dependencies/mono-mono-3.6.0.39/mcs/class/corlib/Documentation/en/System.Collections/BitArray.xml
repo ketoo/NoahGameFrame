@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="BitArray" FullName="System.Collections.BitArray">
+  <TypeSignature Maintainer="auto" Language="C#" Value="public sealed class BitArray : ICloneable, System.Collections.ICollection" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit BitArray extends System.Object implements class System.Collections.ICollection, class System.Collections.IEnumerable, class System.ICloneable" />
+  <AssemblyInfo>
+    <AssemblyName>mscorlib</AssemblyName>
+    <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
+    <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the &lt;link location="node:gtk-sharp/programming/threads"&gt;Gtk# Thread Programming&lt;/link&gt; for details.</ThreadSafetyStatement>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.Collections.ICollection</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.ICloneable</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Runtime.InteropServices.ComVisible(true)</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The size of a <see cref="T:System.Collections.BitArray" /> is controlled by the client; indexing past the end of the <see cref="T:System.Collections.BitArray" /> throws an <see cref="T:System.ArgumentException" />.</para>
+      <para>Elements in this collection can be accessed using an integer index.  Indexes in this collection are zero-based.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Manages a compact array of bit values, which are represented as Booleans, where true indicates that the bit is on (1) and false indicates the bit is off (0).</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public BitArray (bool[] values);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool[] values) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="values" Type="System.Boolean[]" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This constructor is an O(<paramref name="n" />) operation, where <paramref name="n" /> is the number of elements in <paramref name="values" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.Collections.BitArray" /> class that contains bit values copied from the specified array of Booleans.</para>
+        </summary>
+        <param name="values">
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of Booleans to copy. </param>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public BitArray (byte[] bytes);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] bytes) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="bytes" Type="System.Byte[]" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The first byte in the array represents bits 0 through 7, the second byte represents bits 8 through 15, and so on. The Least Significant Bit of each byte represents the lowest index value: " <paramref name="bytes" /> [0] &amp; 1" represents bit 0, " <paramref name="bytes" /> [0] &amp; 2" represents bit 1, " <paramref name="bytes" /> [0] &amp; 4" represents bit 2, and so on.</para>
+          <para>This constructor is an O(<paramref name="n" />) operation, where <paramref name="n" /> is the number of elements in <paramref name="bytes" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.Collections.BitArray" /> class that contains bit values copied from the specified array of bytes.</para>
+        </summary>
+        <param name="bytes">
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes containing the values to copy, where each byte represents eight consecutive bits. </param>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public BitArray (System.Collections.BitArray bits);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.BitArray bits) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="bits" Type="System.Collections.BitArray" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This constructor is an O(<paramref name="n" />) operation, where <paramref name="n" /> is the number of elements in <paramref name="bits" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.Collections.BitArray" /> class that contains bit values copied from the specified <see cref="T:System.Collections.BitArray" />.</para>
+        </summary>
+        <param name="bits">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Collections.BitArray" /> to copy. </param>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public BitArray (int length);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 length) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="length" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This constructor is an O(<paramref name="n" />) operation, where <paramref name="n" /> is <paramref name="length" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.Collections.BitArray" /> class that can hold the specified number of bit values, which are initially set to false.</para>
+        </summary>
+        <param name="length">
+          <attribution license="cc4" from="Microsoft" modified="false" />The number of bit values in the new <see cref="T:System.Collections.BitArray" />. </param>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public BitArray (int[] values);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32[] values) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="values" Type="System.Int32[]" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The number in the first <paramref name="values" /> array element represents bits 0 through 31, the second number in the array represents bits 32 through 63, and so on. The Least Significant Bit of each integer represents the lowest index value: " <paramref name="values" /> [0] &amp; 1" represents bit 0, " <paramref name="values" /> [0] &amp; 2" represents bit 1, " <paramref name="values" /> [0] &amp; 4" represents bit 2, and so on.</para>
+          <para>This constructor is an O(<paramref name="n" />) operation, where <paramref name="n" /> is the number of elements in <paramref name="values" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.Collections.BitArray" /> class that contains bit values copied from the specified array of 32-bit integers.</para>
+        </summary>
+        <param name="values">
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of integers containing the values to copy, where each integer represents 32 consecutive bits. </param>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public BitArray (int length, bool defaultValue);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 length, bool defaultValue) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="length" Type="System.Int32" />
+        <Parameter Name="defaultValue" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This constructor is an O(<paramref name="n" />) operation, where <paramref name="n" /> is <paramref name="length" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.Collections.BitArray" /> class that can hold the specified number of bit values, which are initially set to the specified value.</para>
+        </summary>
+        <param name="length">
+          <attribution license="cc4" from="Microsoft" modified="false" />The number of bit values in the new <see cref="T:System.Collections.BitArray" />. </param>
+        <param name="defaultValue">
+          <attribution license="cc4" from="Microsoft" modified="false" />The Boolean value to assign to each bit. </param>
+      </Docs>
+    </Member>
+    <Member MemberName="And">
+      <MemberSignature Language="C#" Value="public System.Collections.BitArray And (System.Collections.BitArray value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.BitArray And(class System.Collections.BitArray value) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.BitArray</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.Collections.BitArray" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The bitwise AND operation returns true if both operands are true, and returns false if one or both operands are false.</para>
+          <para>This method is an O(<paramref name="n" />) operation, where <paramref name="n" /> is <see cref="P:System.Collections.BitArray.Count" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Performs the bitwise AND operation on the elements in the current <see cref="T:System.Collections.BitArray" /> against the corresponding elements in the specified <see cref="T:System.Collections.BitArray" />.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The current instance containing the result of the bitwise AND operation on the elements in the current <see cref="T:System.Collections.BitArray" /> against the corresponding elements in the specified <see cref="T:System.Collections.BitArray" />.</para>
+        </returns>
+        <param name="value">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Collections.BitArray" /> with which to perform the bitwise AND operation. </param>
+      </Docs>
+    </Member>
+    <Member MemberName="Clone">
+      <MemberSignature Language="C#" Value="public object Clone ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object Clone() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>A shallow copy of a collection copies only the elements of the collection, whether they are reference types or value types, but it does not copy the objects that the references refer to. The references in the new collection point to the same objects that the references in the original collection point to.</para>
+          <para>In contrast, a deep copy of a collection copies the elements and everything directly or indirectly referenced by the elements.</para>
+          <para>This method is an O(<paramref name="n" />) operation, where <paramref name="n" /> is <see cref="P:System.Collections.BitArray.Count" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Creates a shallow copy of the <see cref="T:System.Collections.BitArray" />.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>A shallow copy of the <see cref="T:System.Collections.BitArray" />.</para>
+        </returns>
+      </Docs>
+    </Member>
+    <Member MemberName="CopyTo">
+      <MemberSignature Language="C#" Value="public void CopyTo (Array array, int index);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void CopyTo(class System.Array array, int32 index) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="array" Type="System.Array" />
+        <Parameter Name="index" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The specified array must be of a compatible type. Only bool, int, and byte types of arrays are supported.</para>
+          <para>This method uses <see cref="M:System.Array.Copy(System.Array,System.Array,System.Int32)" /> to copy the elements.</para>
+          <para>This method is an O(<paramref name="n" />) operation, where <paramref name="n" /> is <see cref="P:System.Collections.BitArray.Count" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Copies the entire <see cref="T:System.Collections.BitArray" /> to a compatible one-dimensional <see cref="T:System.Array" />, starting at the specified index of the target array.</para>
+        </summary>
+        <param name="array">
+          <attribution license="cc4" from="Microsoft" modified="false" />The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from <see cref="T:System.Collections.BitArray" />. The <see cref="T:System.Array" /> must have zero-based indexing. </param>
+        <param name="index">
+          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index in <paramref name="array" /> at which copying begins. </param>
+      </Docs>
+    </Member>
+    <Member MemberName="Count">
+      <MemberSignature Language="C#" Value="public int Count { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Count" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>
+          <para> A <see cref="T:System.Int32" /> that specifies the number of elements contained in the current
+   instance.</para>
+        </value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>
+            <see cref="P:System.Collections.BitArray.Length" /> and <see cref="P:System.Collections.BitArray.Count" /> return the same value. <see cref="P:System.Collections.BitArray.Length" /> can be set to a specific value, but <see cref="P:System.Collections.BitArray.Count" /> is read-only.</para>
+          <para>Retrieving the value of this property is an O(1) operation.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the number of elements contained in the <see cref="T:System.Collections.BitArray" />.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="Get">
+      <MemberSignature Language="C#" Value="public bool Get (int index);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Get(int32 index) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="index" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This method is an O(1) operation.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the value of the bit at a specific position in the <see cref="T:System.Collections.BitArray" />.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The value of the bit at position <paramref name="index" />.</para>
+        </returns>
+        <param name="index">
+          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index of the value to get. </param>
+      </Docs>
+    </Member>
+    <Member MemberName="GetEnumerator">
+      <MemberSignature Language="C#" Value="public System.Collections.IEnumerator GetEnumerator ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.IEnumerator GetEnumerator() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.IEnumerator</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
+          <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
+          <para>Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" /> also brings the enumerator back to this position.  At this position, <see cref="P:System.Collections.IEnumerator.Current" /> is undefined. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" /> to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />.</para>
+          <para>
+            <see cref="P:System.Collections.IEnumerator.Current" /> returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" /> or <see cref="M:System.Collections.IEnumerator.Reset" /> is called. <see cref="M:System.Collections.IEnumerator.MoveNext" /> sets <see cref="P:System.Collections.IEnumerator.Current" /> to the next element.</para>
+          <para>If <see cref="M:System.Collections.IEnumerator.MoveNext" /> passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" /> returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" /> also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" /> returned false, <see cref="P:System.Collections.IEnumerator.Current" /> is undefined. To set <see cref="P:System.Collections.IEnumerator.Current" /> to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" /> followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />.</para>
+          <para>An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and its behavior is undefined.</para>
+          <para>The enumerator does not have exclusive access to the collection; therefore, enumerating through a collection is intrinsically not a thread-safe procedure.  To guarantee thread safety during enumeration, you can lock the collection during the entire enumeration.  To allow the collection to be accessed by multiple threads for reading and writing, you must implement your own synchronization.</para>
+          <para>This method is an O(1) operation.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Returns an enumerator that iterates through the <see cref="T:System.Collections.BitArray" />.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>An <see cref="T:System.Collections.IEnumerator" /> for the entire <see cref="T:System.Collections.BitArray" />.</para>
+        </returns>
+      </Docs>
+    </Member>
+    <Member MemberName="IsReadOnly">
+      <MemberSignature Language="C#" Value="public bool IsReadOnly { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsReadOnly" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>
+          <para>
+The value of this property is always <c>false</c>.
+</para>
+        </value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>
+            <see cref="T:System.Collections.BitArray" /> implements the <see cref="P:System.Collections.BitArray.IsReadOnly" /> property because it is required by the <see cref="T:System.Collections.IList" /> interface.</para>
+          <para>A collection that is read-only does not allow the addition, removal, or modification of elements after the collection is created.</para>
+          <para>A collection that is read-only is simply a collection with a wrapper that prevents modifying the collection; therefore, if changes are made to the underlying collection, the read-only collection reflects those changes.</para>
+          <para>This method is an O(1) operation.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets a value indicating whether the <see cref="T:System.Collections.BitArray" /> is read-only.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="IsSynchronized">
+      <MemberSignature Language="C#" Value="public bool IsSynchronized { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsSynchronized" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>
+          <para>
+The value of this property is always <c>false</c>.
+</para>
+        </value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>
+            <see cref="T:System.Collections.BitArray" /> implements the <see cref="P:System.Collections.BitArray.IsSynchronized" /> property because it is required by the <see cref="T:System.Collections.ICollection" /> interface.</para>
+          <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets a value indicating whether access to the <see cref="T:System.Collections.BitArray" /> is synchronized (thread safe).</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="Item">
+      <MemberSignature Language="C#" Value="public bool this[int index] { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Item(int32)" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="index" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="index">A <see cref="T:System.Int32" /> that specifies the zero-based index of the element in the current instance to get or set. This value must be greater than or equal to 0, and less than the <see cref="P:System.Collections.BitArray.Count" /> of the current instance.</param>
+        <summary>
+          <para> Gets or sets the element at the specified index of the current instance.</para>
+        </summary>
+        <value>
+          <para>The element at the specified index of the current instance.</para>
+        </value>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Length">
+      <MemberSignature Language="C#" Value="public int Length { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Length" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+      </Parameters>
+      <Docs>
+        <value>
+          <para> A <see cref="T:System.Int32" /> that specifies the number of elements contained in the current
+   instance.</para>
+        </value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>
+            <see cref="P:System.Collections.BitArray.Length" /> and <see cref="P:System.Collections.BitArray.Count" /> return the same value. <see cref="P:System.Collections.BitArray.Length" /> can be set to a specific value, but <see cref="P:System.Collections.BitArray.Count" /> is read-only.</para>
+          <para>If <see cref="P:System.Collections.BitArray.Length" /> is set to a value that is less than <see cref="P:System.Collections.BitArray.Count" />, the <see cref="T:System.Collections.BitArray" /> is truncated and the elements after the index <paramref name="value" /> -1 are deleted.</para>
+          <para>If <see cref="P:System.Collections.BitArray.Length" /> is set to a value that is greater than <see cref="P:System.Collections.BitArray.Count" />, the new elements are set to false.</para>
+          <para>Retrieving the value of this property is an O(1) operation. Setting this property is an O(<paramref name="n" />) operation.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets the number of elements in the <see cref="T:System.Collections.BitArray" />.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="Not">
+      <MemberSignature Language="C#" Value="public System.Collections.BitArray Not ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.BitArray Not() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.BitArray</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This method is an O(<paramref name="n" />) operation, where <paramref name="n" /> is <see cref="P:System.Collections.BitArray.Count" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Inverts all the bit values in the current <see cref="T:System.Collections.BitArray" />, so that elements set to true are changed to false, and elements set to false are changed to true.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The current instance with inverted bit values.</para>
+        </returns>
+      </Docs>
+    </Member>
+    <Member MemberName="Or">
+      <MemberSignature Language="C#" Value="public System.Collections.BitArray Or (System.Collections.BitArray value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.BitArray Or(class System.Collections.BitArray value) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.BitArray</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.Collections.BitArray" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The bitwise OR operation returns true if one or both operands are true, and returns false if both operands are false.</para>
+          <para>This method is an O(<paramref name="n" />) operation, where <paramref name="n" /> is <see cref="P:System.Collections.BitArray.Count" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Performs the bitwise OR operation on the elements in the current <see cref="T:System.Collections.BitArray" /> against the corresponding elements in the specified <see cref="T:System.Collections.BitArray" />.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The current instance containing the result of the bitwise OR operation on the elements in the current <see cref="T:System.Collections.BitArray" /> against the corresponding elements in the specified <see cref="T:System.Collections.BitArray" />.</para>
+        </returns>
+        <param name="value">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Collections.BitArray" /> with which to perform the bitwise OR operation. </param>
+      </Docs>
+    </Member>
+    <Member MemberName="Set">
+      <MemberSignature Language="C#" Value="public void Set (int index, bool value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Set(int32 index, bool value) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="index" Type="System.Int32" />
+        <Parameter Name="value" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This method is an O(1) operation.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Sets the bit at a specific position in the <see cref="T:System.Collections.BitArray" /> to the specified value.</para>
+        </summary>
+        <param name="index">
+          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index of the bit to set. </param>
+        <param name="value">
+          <attribution license="cc4" from="Microsoft" modified="false" />The Boolean value to assign to the bit. </param>
+      </Docs>
+    </Member>
+    <Member MemberName="SetAll">
+      <MemberSignature Language="C#" Value="public void SetAll (bool value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetAll(bool value) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This method is an O(<paramref name="n" />) operation, where <paramref name="n" /> is <see cref="P:System.Collections.BitArray.Count" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Sets all bits in the <see cref="T:System.Collections.BitArray" /> to the specified value.</para>
+        </summary>
+        <param name="value">
+          <attribution license="cc4" from="Microsoft" modified="false" />The Boolean value to assign to all bits. </param>
+      </Docs>
+    </Member>
+    <Member MemberName="SyncRoot">
+      <MemberSignature Language="C#" Value="public object SyncRoot { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance object SyncRoot" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>
+          <para>A <see cref="T:System.Object" /> that can be used to synchronize access to the
+   current instance.</para>
+        </value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Derived classes can provide their own synchronized version of the <see cref="T:System.Collections.BitArray" /> using the <see cref="P:System.Collections.BitArray.SyncRoot" /> property. The synchronizing code must perform operations on the <see cref="P:System.Collections.BitArray.SyncRoot" /> of the <see cref="T:System.Collections.BitArray" />, not directly on the <see cref="T:System.Collections.BitArray" />. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see cref="T:System.Collections.BitArray" /> object.</para>
+          <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.BitArray" />.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="Xor">
+      <MemberSignature Language="C#" Value="public System.Collections.BitArray Xor (System.Collections.BitArray value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.BitArray Xor(class System.Collections.BitArray value) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.BitArray</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.Collections.BitArray" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The bitwise exclusive OR operation returns true if exactly one operand is true, and returns false if both operands have the same Boolean value.</para>
+          <para>This method is an O(<paramref name="n" />) operation, where <paramref name="n" /> is <see cref="P:System.Collections.BitArray.Count" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Performs the bitwise exclusive OR operation on the elements in the current <see cref="T:System.Collections.BitArray" /> against the corresponding elements in the specified <see cref="T:System.Collections.BitArray" />.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The current instance containing the result of the bitwise exclusive OR operation on the elements in the current <see cref="T:System.Collections.BitArray" /> against the corresponding elements in the specified <see cref="T:System.Collections.BitArray" />. </para>
+        </returns>
+        <param name="value">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Collections.BitArray" /> with which to perform the bitwise exclusive OR operation. </param>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

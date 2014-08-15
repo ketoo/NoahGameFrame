@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="MethodImplOptions" FullName="System.Runtime.CompilerServices.MethodImplOptions" FullNameSP="System_Runtime_CompilerServices_MethodImplOptions" Maintainer="ecma">
+  <TypeSignature Language="ILASM" Value=".class public sealed serializable MethodImplOptions extends System.Enum" />
+  <TypeSignature Language="C#" Value="public enum MethodImplOptions" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed MethodImplOptions extends System.Enum" />
+  <MemberOfLibrary>RuntimeInfrastructure</MemberOfLibrary>
+  <AssemblyInfo>
+    <AssemblyName>mscorlib</AssemblyName>
+    <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00 ]</AssemblyPublicKey>
+    <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Flags</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Runtime.InteropServices.ComVisible(true)</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>This enumeration is used with the <see cref="T:System.Runtime.CompilerServices.MethodImplAttribute" />attribute.</para>
+      <para>You can specify multiple <see cref="T:System.Runtime.CompilerServices.MethodImplOptions" /> values by using the bitwise OR operator.</para>
+      <block subset="none" type="note">
+        <para>Locking on the instance or on the type, as with the <see cref="F:System.Runtime.CompilerServices.MethodImplOptions.Synchronized" /> flag, is not recommended for public types, because code other than your own can take locks on public types and instances. This might cause deadlocks or other synchronization problems. </para>
+      </block>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Defines the details of how a method is implemented.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="AggressiveInlining">
+      <MemberSignature Language="C#" Value="AggressiveInlining" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.CompilerServices.MethodImplOptions AggressiveInlining = int32(256)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Runtime.CompilerServices.MethodImplOptions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The method should be inlined if possible.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="ForwardRef">
+      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Runtime.CompilerServices.MethodImplOptions ForwardRef = 16" />
+      <MemberSignature Language="C#" Value="ForwardRef" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.CompilerServices.MethodImplOptions ForwardRef = int32(16)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Runtime.CompilerServices.MethodImplOptions</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <MemberValue>ForwardRef</MemberValue>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The method is declared, but its implementation is provided elsewhere.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="InternalCall">
+      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Runtime.CompilerServices.MethodImplOptions InternalCall = 4096" />
+      <MemberSignature Language="C#" Value="InternalCall" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.CompilerServices.MethodImplOptions InternalCall = int32(4096)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Runtime.CompilerServices.MethodImplOptions</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <MemberValue>InternalCall</MemberValue>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The call is internal, that is, it calls a method that is implemented within the common language runtime.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="NoInlining">
+      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Runtime.CompilerServices.MethodImplOptions NoInlining = 8" />
+      <MemberSignature Language="C#" Value="NoInlining" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.CompilerServices.MethodImplOptions NoInlining = int32(8)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Runtime.CompilerServices.MethodImplOptions</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <MemberValue>NoInlining</MemberValue>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The method cannot be inlined. Inlining is an optimization by which a method call is replaced with the method body.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="NoOptimization">
+      <MemberSignature Language="C#" Value="NoOptimization" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.CompilerServices.MethodImplOptions NoOptimization = int32(64)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Runtime.CompilerServices.MethodImplOptions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The method is not optimized by the just-in-time (JIT) compiler or by native code generation (see <format type="text/html"><a href="44bf97aa-a9a4-4eba-9a0d-cfaa6fc53a66">Ngen.exe</a></format>) when debugging possible code generation problems.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="PreserveSig">
+      <MemberSignature Language="C#" Value="PreserveSig" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.CompilerServices.MethodImplOptions PreserveSig = int32(128)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Runtime.CompilerServices.MethodImplOptions</ReturnType>
+      </ReturnValue>
+      <MemberValue>PreserveSig</MemberValue>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The method signature is exported exactly as declared.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="Synchronized">
+      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Runtime.CompilerServices.MethodImplOptions Synchronized = 32" />
+      <MemberSignature Language="C#" Value="Synchronized" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.CompilerServices.MethodImplOptions Synchronized = int32(32)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Runtime.CompilerServices.MethodImplOptions</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <MemberValue>Synchronized</MemberValue>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The method can be executed by only one thread at a time. Static methods lock on the type, whereas instance methods lock on the instance. Only one thread can execute in any of the instance functions, and only one thread can execute in any of a class's static functions.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="Unmanaged">
+      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Runtime.CompilerServices.MethodImplOptions Unmanaged = 4" />
+      <MemberSignature Language="C#" Value="Unmanaged" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.CompilerServices.MethodImplOptions Unmanaged = int32(4)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Runtime.CompilerServices.MethodImplOptions</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <MemberValue>Unmanaged</MemberValue>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The method is implemented in unmanaged code.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+  </Members>
+  <TypeExcluded>0</TypeExcluded>
+</Type>

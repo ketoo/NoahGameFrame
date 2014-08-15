@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="ScrollBars" FullName="System.Windows.Forms.ScrollBars">
+  <TypeSignature Language="C#" Value="public enum ScrollBars" />
+  <AssemblyInfo>
+    <AssemblyName>System.Windows.Forms</AssemblyName>
+    <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>This enumeration is used by <see cref="P:System.Windows.Forms.TextBox.ScrollBars" />.</para>
+      <para>Not all controls support scroll bars. Use this enumeration to specify which scroll bars will be visible on a control, either under some or all circumstances.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Specifies which scroll bars will be visible on a control.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="Both">
+      <MemberSignature Language="C#" Value="Both" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.ScrollBars</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Both horizontal and vertical scroll bars are shown.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Horizontal">
+      <MemberSignature Language="C#" Value="Horizontal" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.ScrollBars</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Only horizontal scroll bars are shown.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="None">
+      <MemberSignature Language="C#" Value="None" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.ScrollBars</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>No scroll bars are shown.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Vertical">
+      <MemberSignature Language="C#" Value="Vertical" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.ScrollBars</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Only vertical scroll bars are shown.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>
