@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="DataGridViewColumnStateChangedEventArgs" FullName="System.Windows.Forms.DataGridViewColumnStateChangedEventArgs">
+  <TypeSignature Language="C#" Value="public class DataGridViewColumnStateChangedEventArgs : EventArgs" />
+  <AssemblyInfo>
+    <AssemblyName>System.Windows.Forms</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.EventArgs</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>This event is raised when the value of one of the following column properties changes for a <see cref="T:System.Windows.Forms.DataGridViewColumn" /> in a <see cref="T:System.Windows.Forms.DataGridView" /> control </para>
+      <list type="bullet">
+        <item>
+          <para>
+            <see cref="P:System.Windows.Forms.DataGridViewBand.Displayed" />
+          </para>
+        </item>
+        <item>
+          <para>
+            <see cref="P:System.Windows.Forms.DataGridViewColumn.Frozen" />
+          </para>
+        </item>
+        <item>
+          <para>
+            <see cref="P:System.Windows.Forms.DataGridViewColumn.ReadOnly" />
+          </para>
+        </item>
+        <item>
+          <para>
+            <see cref="P:System.Windows.Forms.DataGridViewColumn.Resizable" />
+          </para>
+        </item>
+        <item>
+          <para>
+            <see cref="P:System.Windows.Forms.DataGridViewBand.Selected" />
+          </para>
+        </item>
+        <item>
+          <para>
+            <see cref="P:System.Windows.Forms.DataGridViewColumn.Visible" />
+          </para>
+        </item>
+      </list>
+      <para>For more information about handling events, see <format type="text/html"><a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a></format>.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Provides data for the <see cref="E:System.Windows.Forms.DataGridView.ColumnStateChanged" /> event. </para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DataGridViewColumnStateChangedEventArgs (System.Windows.Forms.DataGridViewColumn dataGridViewColumn, System.Windows.Forms.DataGridViewElementStates stateChanged);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="dataGridViewColumn" Type="System.Windows.Forms.DataGridViewColumn" />
+        <Parameter Name="stateChanged" Type="System.Windows.Forms.DataGridViewElementStates" />
+      </Parameters>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewColumnStateChangedEventArgs" /> class. </para>
+        </summary>
+        <param name="dataGridViewColumn">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.DataGridViewColumn" /> whose state has changed.</param>
+        <param name="stateChanged">
+          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.DataGridViewElementStates" /> values.</param>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Column">
+      <MemberSignature Language="C#" Value="public System.Windows.Forms.DataGridViewColumn Column { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.DataGridViewColumn</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the column whose state changed.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="StateChanged">
+      <MemberSignature Language="C#" Value="public System.Windows.Forms.DataGridViewElementStates StateChanged { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.DataGridViewElementStates</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the new column state.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

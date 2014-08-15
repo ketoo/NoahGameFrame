@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="DnsPermission" FullName="System.Net.DnsPermission" FullNameSP="System_Net_DnsPermission" Maintainer="ecma">
+  <TypeSignature Language="ILASM" Value=".class public serializable DnsPermission extends System.Security.CodeAccessPermission" />
+  <TypeSignature Language="C#" Value="public sealed class DnsPermission : System.Security.CodeAccessPermission, System.Security.Permissions.IUnrestrictedPermission" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit DnsPermission extends System.Security.CodeAccessPermission implements class System.Security.Permissions.IUnrestrictedPermission" />
+  <MemberOfLibrary>Networking</MemberOfLibrary>
+  <AssemblyInfo>
+    <AssemblyName>System</AssemblyName>
+    <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00 ]</AssemblyPublicKey>
+    <AssemblyVersion>1.0.x.x</AssemblyVersion>
+    <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <ThreadingSafetyStatement>All public static members of this type are safe for multithreaded operations. No instance members are guaranteed to be thread safe.</ThreadingSafetyStatement>
+  <Base>
+    <BaseTypeName>System.Security.CodeAccessPermission</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.Security.Permissions.IUnrestrictedPermission</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The default permissions allow all local and Intranet zone applications to access DNS services, and no DNS permission for Internet zone applications.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Controls rights to access Domain Name System (DNS) servers on the network.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor(valuetype System.Security.Permissions.PermissionState state)" />
+      <MemberSignature Language="C#" Value="public DnsPermission (System.Security.Permissions.PermissionState state);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Permissions.PermissionState state) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="state" Type="System.Security.Permissions.PermissionState" />
+      </Parameters>
+      <Docs>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="state" /> is not a valid <see cref="T:System.Security.Permissions.PermissionState" /> value.</exception>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>If <paramref name="state" /> is <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />, the <see cref="T:System.Net.DnsPermission" /> instance passes all demands. If <paramref name="state" /> contains any other value, the <see cref="T:System.Net.DnsPermission" /> instance fails all demands.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Creates a new instance of the <see cref="T:System.Net.DnsPermission" /> class that either allows unrestricted DNS access or disallows DNS access.</para>
+        </summary>
+        <param name="state">
+          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="Copy">
+      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual class System.Security.IPermission Copy()" />
+      <MemberSignature Language="C#" Value="public override System.Security.IPermission Copy ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.IPermission Copy() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Security.IPermission</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>A copy of a <see cref="T:System.Net.DnsPermission" /> instance provides the same access to DNS servers as the original permission instance.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Creates an identical copy of the current permission instance.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>A new instance of the <see cref="T:System.Net.DnsPermission" /> class that is an identical copy of the current instance.</para>
+        </returns>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="FromXml">
+      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual void FromXml(class System.Security.SecurityElement securityElement)" />
+      <MemberSignature Language="C#" Value="public override void FromXml (System.Security.SecurityElement securityElement);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void FromXml(class System.Security.SecurityElement securityElement) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="securityElement" Type="System.Security.SecurityElement" />
+      </Parameters>
+      <Docs>
+        <exception cref="T:System.ArgumentNullException">
+          <para>
+            <paramref name="securityElement " />is <see langword="null" /></para>
+        </exception>
+        <exception cref="T:System.ArgumentException">
+          <para>
+            <paramref name="securityElement " />is not a <see cref="T:System.Net.DnsPermission" /> element.</para>
+        </exception>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="M:System.Net.DnsPermission.FromXml(System.Security.SecurityElement)" /> method reconstructs a <see cref="T:System.Net.DnsPermission" /> instance from an XML encoding defined by the <see cref="T:System.Security.SecurityElement" /> class.</para>
+          <para>Use the <see cref="M:System.Net.DnsPermission.ToXml" /> method to XML-encode the <see cref="T:System.Net.DnsPermission" /> instance, including state information.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Reconstructs a <see cref="T:System.Net.DnsPermission" /> instance from an XML encoding.</para>
+        </summary>
+        <param name="securityElement">
+          <attribution license="cc4" from="Microsoft" modified="false" />The XML encoding to use to reconstruct the <see cref="T:System.Net.DnsPermission" /> instance. </param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="Intersect">
+      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual class System.Security.IPermission Intersect(class System.Security.IPermission target)" />
+      <MemberSignature Language="C#" Value="public override System.Security.IPermission Intersect (System.Security.IPermission target);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.IPermission Intersect(class System.Security.IPermission target) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Security.IPermission</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="target" Type="System.Security.IPermission" />
+      </Parameters>
+      <Docs>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="target " />is <see langword="null" />.</exception>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="M:System.Net.DnsPermission.Intersect(System.Security.IPermission)" /> method returns a <see cref="T:System.Net.DnsPermission" /> instance that allows the access defined by both the current <see cref="T:System.Net.DnsPermission" /> instance and the specified <see cref="T:System.Net.DnsPermission" /> instance. Any demand must pass both permissions to pass their intersection.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Creates a permission instance that is the intersection of the current permission instance and the specified permission instance.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>A <see cref="T:System.Net.DnsPermission" /> instance that represents the intersection of the current <see cref="T:System.Net.DnsPermission" /> instance with the specified <see cref="T:System.Net.DnsPermission" /> instance, or null if the intersection is empty. If both the current instance and <paramref name="target" /> are unrestricted, this method returns a new <see cref="T:System.Net.DnsPermission" /> instance that is unrestricted; otherwise, it returns null.</para>
+        </returns>
+        <param name="target">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Net.DnsPermission" /> instance to intersect with the current instance. </param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="IsSubsetOf">
+      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual bool IsSubsetOf(class System.Security.IPermission target)" />
+      <MemberSignature Language="C#" Value="public override bool IsSubsetOf (System.Security.IPermission target);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool IsSubsetOf(class System.Security.IPermission target) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="target" Type="System.Security.IPermission" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The current <see cref="T:System.Net.DnsPermission" /> instance is a subset of the specified <see cref="T:System.Net.DnsPermission" /> instance if the current <see cref="T:System.Net.DnsPermission" /> instance specifies a set of operations that is wholly contained by the specified <see cref="T:System.Net.DnsPermission" /> instance.</para>
+          <para>If the <see cref="M:System.Net.DnsPermission.IsSubsetOf(System.Security.IPermission)" /> method returns true, the current <see cref="T:System.Net.DnsPermission" /> instance allows no more access to DNS servers than does the specified <see cref="T:System.Net.DnsPermission" /> instance.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Determines whether the current permission instance is a subset of the specified permission instance.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>false if the current instance is unrestricted and <paramref name="target" /> is either null or unrestricted; otherwise, true.</para>
+        </returns>
+        <param name="target">
+          <attribution license="cc4" from="Microsoft" modified="false" />The second <see cref="T:System.Net.DnsPermission" /> instance to be tested for the subset relationship. </param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="IsUnrestricted">
+      <MemberSignature Language="C#" Value="public bool IsUnrestricted ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsUnrestricted() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Checks the overall permission state of the object.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>true if the <see cref="T:System.Net.DnsPermission" /> instance was created with <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />; otherwise, false.</para>
+        </returns>
+      </Docs>
+    </Member>
+    <Member MemberName="ToXml">
+      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual class System.Security.SecurityElement ToXml()" />
+      <MemberSignature Language="C#" Value="public override System.Security.SecurityElement ToXml ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.SecurityElement ToXml() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Security.SecurityElement</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="M:System.Net.DnsPermission.ToXml" /> method creates a <see cref="T:System.Security.SecurityElement" /> instance to XML-encode a representation of the <see cref="T:System.Net.DnsPermission" /> instance, including state information.</para>
+          <para>Use the <see cref="M:System.Net.DnsPermission.FromXml(System.Security.SecurityElement)" /> method to restore the state information from a <see cref="T:System.Security.SecurityElement" /> instance.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Creates an XML encoding of a <see cref="T:System.Net.DnsPermission" /> instance and its current state.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>A <see cref="T:System.Security.SecurityElement" /> instance that contains an XML-encoded representation of the security object, including state information.</para>
+        </returns>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="Union">
+      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual class System.Security.IPermission Union(class System.Security.IPermission target)" />
+      <MemberSignature Language="C#" Value="public override System.Security.IPermission Union (System.Security.IPermission target);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.IPermission Union(class System.Security.IPermission target) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Security.IPermission</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="target" Type="System.Security.IPermission" />
+      </Parameters>
+      <Docs>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="target " />is <see langword="null" />.</exception>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="M:System.Net.DnsPermission.Union(System.Security.IPermission)" /> method returns a <see cref="T:System.Net.DnsPermission" /> instance that allows the access defined by either the current <see cref="T:System.Net.DnsPermission" /> instance or the specified <see cref="T:System.Net.DnsPermission" /> instance. Any demand that passes either permission passes their union.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Creates a permission instance that is the union of the current permission instance and the specified permission instance.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>A <see cref="T:System.Net.DnsPermission" /> instance that represents the union of the current <see cref="T:System.Net.DnsPermission" /> instance with the specified <see cref="T:System.Net.DnsPermission" /> instance. If <paramref name="target" /> is null, this method returns a copy of the current instance. If the current instance or <paramref name="target" /> is unrestricted, this method returns a <see cref="T:System.Net.DnsPermission" /> instance that is unrestricted; otherwise, it returns a <see cref="T:System.Net.DnsPermission" /> instance that is restricted.</para>
+        </returns>
+        <param name="target">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Net.DnsPermission" /> instance to combine with the current instance. </param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+  </Members>
+  <TypeExcluded>0</TypeExcluded>
+</Type>

@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="WebBaseEvent" FullName="System.Web.Management.WebBaseEvent">
+  <TypeSignature Language="C#" Value="public class WebBaseEvent" />
+  <AssemblyInfo>
+    <AssemblyName>System.Web</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>ASP.NET health monitoring allows production and operations staff to manage deployed Web applications. The <see cref="N:System.Web.Management" /> namespace contains the health-event types responsible for packaging application health-status data and the provider types responsible for processing this data. It also contains supporting types that help during the management of health events.</para>
+      <para>The <see cref="T:System.Web.Management.WebBaseEvent" /> class is the root of the inheritance tree for all the ASP.NET health-monitoring event types. It uses the <see cref="T:System.Web.Management.WebApplicationInformation" /> class to obtain application information that is available to its derived class.</para>
+      <block subset="none" type="note">
+        <para>In most cases you will be able to use the ASP.NET health-monitoring types as implemented, and you will control the health-monitoring system by specifying values in the &lt;healthMonitoring&gt; configuration section. You can also derive from the health-monitoring types to create your own custom events and providers. For an example of deriving from the <see cref="T:System.Web.Management.WebBaseEvent" /> class, see the example provided in this topic.</para>
+      </block>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Defines the base class for the ASP.NET health-monitoring events.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected WebBaseEvent (string message, object event_source, int event_code);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="message" Type="System.String" />
+        <Parameter Name="event_source" Type="System.Object" />
+        <Parameter Name="event_code" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="event_source">To be added.</param>
+        <param name="event_code">To be added.</param>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This constructor is used internally by the ASP.NET health-monitoring system. You will never use it to create an instance of the <see cref="T:System.Web.Management.WebBaseEvent" /> class, but you can call this constructor when you implement your own event type that inherits from this class.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.Web.Management.WebBaseEvent" /> class using the supplied parameters.</para>
+        </summary>
+        <param name="message">
+          <attribution license="cc4" from="Microsoft" modified="false" />The description of the event. </param>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected WebBaseEvent (string message, object event_source, int event_code, int event_detail_code);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="message" Type="System.String" />
+        <Parameter Name="event_source" Type="System.Object" />
+        <Parameter Name="event_code" Type="System.Int32" />
+        <Parameter Name="event_detail_code" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="event_source">To be added.</param>
+        <param name="event_code">To be added.</param>
+        <param name="event_detail_code">To be added.</param>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This constructor is used internally by the ASP.NET health-monitoring system. You will never use it to create an instance of the <see cref="T:System.Web.Management.WebBaseEvent" /> class, but you can call this constructor when you implement your own event type that inherits from this class.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.Web.Management.WebBaseEvent" /> class using the supplied parameters.</para>
+        </summary>
+        <param name="message">
+          <attribution license="cc4" from="Microsoft" modified="false" />The description of the raised event. </param>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="ApplicationInformation">
+      <MemberSignature Language="C#" Value="public static System.Web.Management.WebApplicationInformation ApplicationInformation { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.Management.WebApplicationInformation</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets a <see cref="T:System.Web.Management.WebApplicationInformation" /> object that contains information about the current application being monitored.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="EventCode">
+      <MemberSignature Language="C#" Value="public int EventCode { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>More information about the event is contained in the related <see cref="P:System.Web.Management.WebBaseEvent.Message" /> value.</para>
+          <block subset="none" type="note">
+            <para>If you inherit from the <see cref="T:System.Web.Management.WebBaseEvent" /> class, the event code you specify for your custom event must be greater than <see cref="F:System.Web.Management.WebEventCodes.WebExtendedBase" />.</para>
+          </block>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the code value associated with the event.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="EventDetailCode">
+      <MemberSignature Language="C#" Value="public int EventDetailCode { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the event detail code.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="EventID">
+      <MemberSignature Language="C#" Value="public Guid EventID { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the identifier associated with the event.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="EventSequence">
+      <MemberSignature Language="C#" Value="public long EventSequence { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This is a counter that indicates how many instances of the event have been raised by the application.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the number of times the event has been raised by the application.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="EventSource">
+      <MemberSignature Language="C#" Value="public object EventSource { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the object that raises the event.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="EventTime">
+      <MemberSignature Language="C#" Value="public DateTime EventTime { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the time when the event was raised.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="EventTimeUtc">
+      <MemberSignature Language="C#" Value="public DateTime EventTimeUtc { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the time when the event was raised.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="FormatCustomEventDetails">
+      <MemberSignature Language="C#" Value="public virtual void FormatCustomEventDetails (System.Web.Management.WebEventFormatter formatter);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="formatter" Type="System.Web.Management.WebEventFormatter" />
+      </Parameters>
+      <Docs>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" /> method provides a uniform format for event information, which is useful if the event data must be logged and later presented to the user. It is called internally when the provider invokes one of the <see cref="Overload:System.Web.Management.WebBaseEvent.ToString" /> methods.</para>
+          <block subset="none" type="note">
+            <para>When you format your custom event information for display, override the <see cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" /> method rather than the <see cref="Overload:System.Web.Management.WebBaseEvent.ToString" /> method. This will avoid overwriting or tampering with sensitive system information.</para>
+          </block>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Provides standard formatting of the event information.</para>
+        </summary>
+        <param name="formatter">
+          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.Management.WebEventFormatter" /> object that contains the formatted event information.</param>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Message">
+      <MemberSignature Language="C#" Value="public string Message { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This property describes the meaning of the <see cref="T:System.Web.Management.WebEventCodes" /> code value associated with the raised event.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the message that describes the event.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Raise">
+      <MemberSignature Language="C#" Value="public virtual void Raise ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>If you override this method, the event raised is your custom event.</para>
+          <block subset="none" type="note">
+            <para>Medium trust or higher is required to raise an event.</para>
+          </block>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Raises an event by notifying any configured provider that the event has occurred.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Raise">
+      <MemberSignature Language="C#" Value="public static void Raise (System.Web.Management.WebBaseEvent event_raised);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="event_raised" Type="System.Web.Management.WebBaseEvent" />
+      </Parameters>
+      <Docs>
+        <param name="event_raised">To be added.</param>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This method raises the specified event by notifying any configured provider that the event has occurred.</para>
+          <block subset="none" type="note">
+            <para>Medium trust or higher is required to raise an event.</para>
+          </block>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Raises the specified event by notifying any configured provider that the event has occurred.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="ToString">
+      <MemberSignature Language="C#" Value="public override string ToString ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="M:System.Web.Management.WebBaseEvent.ToString" /> method is generally invoked by the provider that processes the event. The method ensures that the standard <see cref="T:System.Web.Management.WebApplicationInformation" /> object is provided with the event-specific data. It formats event information by calling the event-specific <see cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" /> method.</para>
+          <block subset="none" type="note">
+            <para>When you format your custom event information for display, override the <see cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" /> method rather than the <see cref="Overload:System.Web.Management.WebBaseEvent.ToString" /> method. This will avoid overwriting or tampering with sensitive system information.</para>
+          </block>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Formats event information for display purposes.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The event information.</para>
+        </returns>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="ToString">
+      <MemberSignature Language="C#" Value="public virtual string ToString (bool include_app_info, bool include_custom_event_details);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="include_app_info" Type="System.Boolean" />
+        <Parameter Name="include_custom_event_details" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="include_app_info">To be added.</param>
+        <param name="include_custom_event_details">To be added.</param>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="M:System.Web.Management.WebBaseEvent.ToString" /> method is generally invoked by the provider that processes the event. It formats event information by calling the event-specific <see cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" /> method. If <paramref name="includeAppInfo" /> is true, the standard <see cref="T:System.Web.Management.WebApplicationInformation" /> object is provided with the event-specific data.</para>
+          <block subset="none" type="note">
+            <para>When you format your custom event information for display, override the <see cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" /> method rather than the <see cref="Overload:System.Web.Management.WebBaseEvent.ToString" /> method. This will avoid overwriting or tampering with sensitive system information.</para>
+          </block>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Formats event information for display purposes.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The event information.</para>
+        </returns>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

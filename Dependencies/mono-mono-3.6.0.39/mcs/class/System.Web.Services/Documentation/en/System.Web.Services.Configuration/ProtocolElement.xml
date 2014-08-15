@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="ProtocolElement" FullName="System.Web.Services.Configuration.ProtocolElement">
+  <TypeSignature Language="C#" Value="public sealed class ProtocolElement : System.Configuration.ConfigurationElement" />
+  <AssemblyInfo>
+    <AssemblyName>System.Web.Services</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Configuration.ConfigurationElement</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <remarks>To be added.</remarks>
+    <since version=".NET 2.0" />
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Represents a protocol element in the Web Services configuration file. The class cannot be inherited.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ProtocolElement ();" />
+      <MemberType>Constructor</MemberType>
+      <Parameters />
+      <Docs>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Creates an instance of this class.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ProtocolElement (System.Web.Services.Configuration.WebServiceProtocols protocol);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="protocol" Type="System.Web.Services.Configuration.WebServiceProtocols" />
+      </Parameters>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Creates an instance of this class, and initializes the <see cref="P:System.Web.Services.Configuration.ProtocolElement.Name" /> property.</para>
+        </summary>
+        <param name="protocol">
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to initialize <see cref="P:System.Web.Services.Configuration.ProtocolElement.Name" />.</param>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Name">
+      <MemberSignature Language="C#" Value="public System.Web.Services.Configuration.WebServiceProtocols Name { set; get; }" />
+      <MemberType>Property</MemberType>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Configuration.ConfigurationProperty("name", DefaultValue=System.Web.Services.Configuration.WebServiceProtocols.Unknown, Options=System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Web.Services.Configuration.WebServiceProtocols</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets the protocol name.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Properties">
+      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

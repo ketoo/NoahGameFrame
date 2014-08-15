@@ -1,0 +1,53 @@
+* purpose
+
+	This tool is to generate globalization information from Unicode CLDR, with some changes
+	to fill the gap between .NET(Windows)-ism and the global standard.
+
+* input resources
+
+	There is only an external resource: unicode CLDR. It can be downloaded from
+	http://www.unicode.org/Public/cldr/
+
+	CLDR specificatin can be found at http://www.unicode.org/reports/tr35/
+
+	All content has to me extracted into CLDR folder. The latest version used is 21.
+
+	There is an extra mono resource included in this directory called lcids.xml for LCIDs. It's
+	extracted from National Language Support (NLS) API Reference.
+	http://msdn.microsoft.com/en-us/goglobal/bb896001.aspx
+
+* generated file
+
+	culture-info-table.h contains the following sections:
+
+	- datetime_format_entries
+	  See DateTimeFormatEntry.AppendTableRow() in DateTimeFormatEntry.cs.
+	- number_format_entries
+	  See NumberFormatEntry.AppendTableRow() in NumberFormatEntry.cs.
+	- culture_entries
+	  See CultureInfoEntry.AppendTableRow() in CultureInfoEntry.cs.
+	- culture_name_entries
+	  See Driver.Run() in Driver.cs.
+	- region_entries
+	  See RegionInfoEntry.AppendTableRow() in RegionInfoEntry.cs.
+	- region_name_entries
+	  See Driver.Run() in Driver.cs.
+	- locale_strings
+	  See Driver.Run() in Driver.cs.
+
+	In each entry, strings are extracted to locale_strings table, and in each structure they are
+	represented as an index to the string.
+
+* updating the data
+
+	Update Makefile.am to get the latest CLDR data. However, CLDR is not complete and
+	it's missing data for many rarely used cultures. In such cases we provide empty value
+	but when someone has the knowleadge what the values should be it's recommended to
+	use online CLDR tool to fill the data gap.
+
+	To create the files used by the runtime after an update, run:
+		make culture-table
+		make install-culture-table
+
+	At the start of Makefile.am there are additional instructions for specific builds.
+

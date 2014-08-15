@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="DataControlCellType" FullName="System.Web.UI.WebControls.DataControlCellType">
+  <TypeSignature Language="C#" Value="public enum DataControlCellType" />
+  <AssemblyInfo>
+    <AssemblyName>System.Web</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>
+        <see cref="T:System.Web.UI.WebControls.DataControlField" /> objects and the data-bound controls that use them use the <see cref="T:System.Web.UI.WebControls.DataControlCellType" /> enumeration to identify the type of cell, and therefore what attributes it should have when rendered. The <see cref="F:System.Web.UI.WebControls.DataControlCellType.DataCell" /> cell type identifies a data-bound cell in a <see cref="T:System.Web.UI.WebControls.GridView" /> or <see cref="T:System.Web.UI.WebControls.DetailsView" /> control, whereas the <see cref="F:System.Web.UI.WebControls.DataControlCellType.Header" /> and <see cref="F:System.Web.UI.WebControls.DataControlCellType.Footer" /> cells identify cell types that are not bound data cells that contain other, non-data-bound content.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Describes the function of a <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> object. </para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="DataCell">
+      <MemberSignature Language="C#" Value="DataCell" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.WebControls.DataControlCellType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>A <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> that contains data. </para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Footer">
+      <MemberSignature Language="C#" Value="Footer" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.WebControls.DataControlCellType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>A <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> that is the footer cell of a table. Items in the cell are not bound to data.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Header">
+      <MemberSignature Language="C#" Value="Header" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.WebControls.DataControlCellType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>A <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> that is the header cell of a table. Items in the cell are not bound to data.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

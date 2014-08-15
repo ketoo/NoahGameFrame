@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="WebServiceProtocols" FullName="System.Web.Services.Configuration.WebServiceProtocols">
+  <TypeSignature Language="C#" Value="public enum WebServiceProtocols" />
+  <AssemblyInfo>
+    <AssemblyName>System.Web.Services</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Flags</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <block subset="none" type="note">
+        <para>Using the <see cref="F:System.Web.Services.Configuration.WebServiceProtocols.HttpPostLocalhost" /> value of this enumeration does not prevent access to the test or web service from remote computers. This value checks only the host header of the request; no other validation, authentication, or authorization checks are performed. This check mitigates only browser-based redirection attacks. Authentication and authorization are still required to restrict access to a Web service.</para>
+      </block>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Specifies the transmission protocols that are used to decrypt data sent from a client browser in the HTTP request.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="AnyHttpSoap">
+      <MemberSignature Language="C#" Value="AnyHttpSoap" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.Services.Configuration.WebServiceProtocols</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Any version of the HTTP SOAP protocol.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Documentation">
+      <MemberSignature Language="C#" Value="Documentation" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.Services.Configuration.WebServiceProtocols</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The Web Services Documentation protocol.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="HttpGet">
+      <MemberSignature Language="C#" Value="HttpGet" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.Services.Configuration.WebServiceProtocols</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The HTTP GET protocol.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="HttpPost">
+      <MemberSignature Language="C#" Value="HttpPost" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.Services.Configuration.WebServiceProtocols</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The HTTP POST protocol.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="HttpPostLocalhost">
+      <MemberSignature Language="C#" Value="HttpPostLocalhost" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.Services.Configuration.WebServiceProtocols</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <block subset="none" type="note">
+            <para>See the Remarks section. This value only checks the request's host header to mitigate only browser-redirect attacks. Authentication and authorization are still required to restrict access to a Web service.</para>
+          </block>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The HTTP POST LOCALHOST protocol.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="HttpSoap">
+      <MemberSignature Language="C#" Value="HttpSoap" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.Services.Configuration.WebServiceProtocols</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The HTTP SOAP protocol.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="HttpSoap12">
+      <MemberSignature Language="C#" Value="HttpSoap12" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.Services.Configuration.WebServiceProtocols</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The HTTP SOAP version 1.2 protocol.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Unknown">
+      <MemberSignature Language="C#" Value="Unknown" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.Services.Configuration.WebServiceProtocols</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Unknown protocol.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>
