@@ -40,6 +40,7 @@
         <Property Desc="物理免疫开关" Id="PHYSICAL_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
         <Property Desc="魔法免疫开关" Id="MAGIC_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
         <Property Desc="BUFF免疫开关" Id="BUFF_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="客户端预设模型" Id="Prefab" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
     </Propertys>
     <Includes/>
 </XML>
