@@ -9,7 +9,7 @@
 #include "NFCMonoScriptModule.h"
 #include "NFMonoScriptPlugin.h"
 #include "mono\metadata\metadata.h"
-#include "mono\jit\jit.h"
+#include "mono\mini\jit.h"
 #include "mono\metadata\assembly.h"
 
 bool NFCMonoScriptModule::Init()
