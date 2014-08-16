@@ -14,7 +14,7 @@
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIScriptModule.h"
 
-#include "mono/jit/jit.h"
+#include "mono/mini/jit.h"
 #include "mono/metadata/assembly.h"
 #include "mono/metadata/debug-helpers.h"
 #include "mono/metadata/metadata.h"
