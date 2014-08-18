@@ -79,6 +79,10 @@ echo Start to extract nessasery lib
 7z x "..\Dependencies\lib.zip" -o"..\Dependencies\" -y
 
 echo Extract nessasery lib completed!
+
+7z x "..\Dependencies\mono-3.6.0.39\mono-3.6.0.39.rar" -o"..\Dependencies\mono-3.6.0.39\" -y
+
+echo Extract mono-3.6.0.39 completed!
 rem ====================================================================================
 
 pause
