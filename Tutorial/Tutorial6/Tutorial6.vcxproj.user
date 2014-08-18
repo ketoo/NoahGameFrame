@@ -2,7 +2,9 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LocalDebuggerCommand>$(SolutionDir)\_Out\Server\Debug\Tutorial6\NFPluginLoader_d.exe</LocalDebuggerCommand>
-    <LocalDebuggerCommandArguments>$(SolutionDir)\_Out\Server\Debug\Tutorial6</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>
+    </LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)\_Out\Server\Debug\Tutorial6</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
 </Project>

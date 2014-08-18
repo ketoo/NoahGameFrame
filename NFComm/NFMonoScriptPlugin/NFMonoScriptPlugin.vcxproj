@@ -57,13 +57,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_X64;_DEBUG;_WINDOWS;_USRDLL;THERON_USE_STD_THREADS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\boost_1_53_0\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\include\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\WIN32-Code\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\compat\;$(SolutionDir)\Dependencies\protobuf-2.5.0\src\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\boost_1_53_0\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\include\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\WIN32-Code\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\compat\;$(SolutionDir)\Dependencies\protobuf-2.5.0\src\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\;$(SolutionDir)\Dependencies\mono-3.6.0.39\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\_Out\Comm\$(Configuration)\;$(SolutionDir)\Dependencies\lib\$(Configuration)\;$(SolutionDir)\Dependencies\boost_1_53_0\stage\lib\x64\vs11_0\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\_Out\Comm\$(Configuration)\;$(SolutionDir)\Dependencies\lib\$(Configuration)\;$(SolutionDir)\Dependencies\boost_1_53_0\stage\lib\x64\vs11_0\;$(SolutionDir)\Dependencies\mono-3.6.0.39\msvc\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\NFGameServer1\$(ProjectName)_d.dll
@@ -83,14 +83,14 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(Solutio
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_X64;_WINDOWS;_USRDLL;THERON_USE_STD_THREADS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\boost_1_53_0\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\include\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\WIN32-Code\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\compat\;$(SolutionDir)\Dependencies\protobuf-2.5.0\src\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\boost_1_53_0\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\include\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\WIN32-Code\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\compat\;$(SolutionDir)\Dependencies\protobuf-2.5.0\src\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\;$(SolutionDir)\Dependencies\mono-3.6.0.39\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)\_Out\Comm\$(Configuration)\;$(SolutionDir)\Dependencies\lib\$(Configuration)\;$(SolutionDir)\Dependencies\boost_1_53_0\stage\lib\x64\vs11_0\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\_Out\Comm\$(Configuration)\;$(SolutionDir)\Dependencies\lib\$(Configuration)\;$(SolutionDir)\Dependencies\boost_1_53_0\stage\lib\x64\vs11_0\;$(SolutionDir)\Dependencies\mono-3.6.0.39\msvc\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\NFGameServer1\$(ProjectName).dll
