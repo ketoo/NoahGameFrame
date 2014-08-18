@@ -217,6 +217,17 @@ bool NFCPluginManager::AfterInit()
     return true;
 }
 
+bool NFCPluginManager::CheckConfig()
+{
+    PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
+    for (itCheckInstance; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
+    {
+        itCheckInstance->second->CheckConfig();
+    }
+
+    return true;
+}
+
 bool NFCPluginManager::BeforeShut()
 {
     PluginInstanceMap::iterator itBeforeInstance = mPluginInstanceMap.begin();
@@ -336,6 +347,12 @@ bool NFCPluginManager::ReInitialize()
     for ( ; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++ )
     {
         itAfterInstance->second->AfterInit();
+    }
+
+    PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
+    for (itCheckInstance; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
+    {
+        itCheckInstance->second->CheckConfig();
     }
 
     return true;
