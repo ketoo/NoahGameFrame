@@ -25,6 +25,8 @@ public:
 
 	virtual bool AfterInit();
 
+    virtual bool CheckConfig();    
+
 	virtual bool BeforeShut();
 
 	virtual bool Shut();
@@ -37,12 +39,6 @@ public:
 
 		AfterInit();
 	}
-
-	virtual void OnCheckConfig()
-	{
-
-	}
-
 
 	virtual const Theron::Address GetAddress( NFIActorManager::EACTOR eActor);
 
