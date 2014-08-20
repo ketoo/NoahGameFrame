@@ -163,6 +163,11 @@ bool ValidAdd(TDATA_TYPE eType, const NFIDataList::TData& var, std::shared_ptr<N
         return false;
     }
 
+    if (pVar->variantData == var.variantData)
+    {
+        return false;
+    }
+
     pVar->variantData = var.variantData;
    
     return true;
