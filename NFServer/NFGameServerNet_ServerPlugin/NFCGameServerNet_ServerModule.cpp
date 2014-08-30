@@ -118,6 +118,14 @@ int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
     case NFMsg::EGameMsgID::EGMI_REQ_COMMAND:
         OnClienGMProcess(msg);
         break;
+
+    case NFMsg::EGameMsgID::EGMI_REQ_SKILL_OBJECTX:
+        OnClienUseSkill(msg);
+        break;
+    case NFMsg::EGameMsgID::EGMI_REQ_MOVE:
+        OnClienMove(msg);
+        break;
+
     default:
         break;
     }
@@ -1758,34 +1766,59 @@ void NFCGameServerNet_ServerModule::OnDeleteRoleGameProcess( const NFIPacket& ms
 
 void NFCGameServerNet_ServerModule::OnClienSwapSceneProcess( const NFIPacket& msg )
 {
+
+}
+
+void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
+{
     int64_t nPlayerID = 0;
-    NFMsg::ReqAckSwapScene xMsg;
+    NFMsg::ReqAckUseSkill xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
         return;
     }
 
+    //bc
     NFIDENTID* pIdent = mRoleFDData.GetElement(nPlayerID);
     if (pIdent)
     {
-        NFCDataList var;
-        var << *pIdent;
-        var << xMsg.transfer_type();
-        var << xMsg.scene_id();
-        var << xMsg.line_id();
-
-        m_pEventProcessModule->DoEvent( *pIdent, NFED_ON_CLIENT_ENTER_SCENE, var );
+        int nContianerID = m_pKernelModule->GetPropertyInt(*pIdent, "SceneID");
+        int nGroupID = m_pKernelModule->GetPropertyInt(*pIdent, "GroupID");
+        NFCDataList xDataList;
+        m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
+        for (int i = 0; i < xDataList.GetCount(); ++i)
+        {
+            BaseData* pData = mRoleBaseData.GetElement(xDataList.Object(i));
+            if (pData)
+            {
+                SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SKILL_OBJECTX, xMsg, msg.GetFd(), pData->nFD);
+            }
+        }
     }
-}
-
-void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
-{
-
 }
 
 void NFCGameServerNet_ServerModule::OnClienMove( const NFIPacket& msg )
 {
+    int64_t nPlayerID = 0;
+    NFMsg::ReqAckPlayerMove xMsg;
+    if (!RecivePB(msg, xMsg, nPlayerID))
+    {
+        return;
+    }
 
+    //bc
+    int nContianerID = m_pKernelModule->GetPropertyInt(xMsg.mover(), "SceneID");
+    int nGroupID = m_pKernelModule->GetPropertyInt(xMsg.mover(), "GroupID");
+    NFCDataList xDataList;
+    m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
+    for (int i = 0; i < xDataList.GetCount(); ++i)
+    {
+        BaseData* pData = mRoleBaseData.GetElement(xDataList.Object(i));
+        if (pData)
+        {
+            SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_MOVE, xMsg, msg.GetFd(), pData->nFD);
+        }
+    }
 }
 
 void NFCGameServerNet_ServerModule::OnClienCommand( const NFIPacket& msg )
