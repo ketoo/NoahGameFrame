@@ -43,16 +43,16 @@ public:
     virtual int SetSkillGemLevel( const NFIDENTID& self, const std::string& strSkillName, const int nLevel );
 
     virtual int GetSkillLevel( const NFIDENTID& self, const std::string& strSkillName );
-    virtual std::string GetSkillGem( const NFIDENTID& self, const std::string& strSkillName );
+    virtual const std::string& GetSkillGem( const NFIDENTID& self, const std::string& strSkillName );
     virtual int GetSkillGemLevel( const NFIDENTID& self, const std::string& strSkillName );
 
     virtual int AddNewerSkill( const NFIDENTID& self );
 protected:
 
-    int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var );
+    int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-	int OnRequireUseSkillEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
-	int OnRequireUseSkillPosEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
+	int OnRequireUseSkillEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
+	int OnRequireUseSkillPosEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
 private:
     char* mstrSkillTableName;
 
