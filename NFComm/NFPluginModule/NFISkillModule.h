@@ -38,7 +38,7 @@ public:
     \
 
     //得到技能宝石
-    virtual std::string GetSkillGem(const NFIDENTID& self, const std::string& strSkillName) = 0;
+    virtual const std::string& GetSkillGem(const NFIDENTID& self, const std::string& strSkillName) = 0;
 
     //得到技能宝石等级
     virtual int GetSkillGemLevel(const NFIDENTID& self, const std::string& strSkillName) = 0;

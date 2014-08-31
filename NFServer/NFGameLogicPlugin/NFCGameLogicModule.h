@@ -16,8 +16,7 @@
 #include "NFComm/NFPluginModule/NFIDataNoSqlModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
-#include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCGameLogicModule
     : public NFIGameLogicModule
@@ -36,10 +35,14 @@ public:
     virtual bool AfterInit();
     virtual bool BeforeShut();
 
+    virtual NFINT16 GetAreaID();
 
 protected:
 
+    NFINT16 mnAreaID;
+    NFIDENTID mIdent;
 
+    NFINT32 mnGSContainerID;
 protected:
     NFILogicClassModule* m_pLogicClassModule;
     NFIDataNoSqlModule* m_pNoSqlModule;
