@@ -9,9 +9,7 @@
 #ifndef _NFC_GAMESERVER_SERVER_MODULE_H_
 #define _NFC_GAMESERVER_SERVER_MODULE_H_
 
-//#include "GameServerPCH.h"
-//#include "NW_Helper.h"
-//  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
+#include <vector>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
@@ -23,7 +21,7 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-#include <vector>
+#include "NFComm/NFPluginModule/NFISkillModule.h"
 
 class NFCGameServerNet_ServerModule
     : public NFINetModule
@@ -167,7 +165,8 @@ private:
     //临时保存角色是否已经等待创建的状态<角色名，fd>
     NFMap<std::string, int> mRoleState;
 
-    NFIKernelModule* m_pKernelModule;
+	NFIKernelModule* m_pKernelModule;
+	NFISkillModule* m_pSkillModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFILogModule* m_pLogModule;
     NFIEventProcessModule* m_pEventProcessModule;

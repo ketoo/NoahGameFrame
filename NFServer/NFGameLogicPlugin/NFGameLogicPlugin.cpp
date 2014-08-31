@@ -1,14 +1,15 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFGameServerPlugin.cpp
+//    @FileName      :    NFGameLogicPlugin.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-07-14 08:51
-//    @Module           :    NFGameServerPlugin
+//    @Module           :    NFGameLogicPlugin
 //
 // -------------------------------------------------------------------------
 
+
+////#include "stdafx.h"
 #include "NFGameLogicPlugin.h"
 #include "NFCGameLogicModule.h"
-#include "NFCBuffModule.h"
 #include "NFCItemModule.h"
 #include "NFCPackModule.h"
 #include "NFCSkillModule.h"
@@ -18,13 +19,14 @@
 #include "NFCPotionItemConsumeProcessModule.h"
 #include "NFCCardItemConsumeProcessModule.h"
 #include "NFCItemConsumeManagerModule.h"
-#include "NFCNPCRefreshModule.h"
 #include "NFCRebornItemConsumeProcessModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
 extern "C"  __declspec( dllexport ) void DllStartPlugin( NFIPluginManager* pm )
 {
+	SetConsoleTitle( "NFGameServer" );
+
     CREATE_PLUGIN( pm, NFGameLogicPlugin )
 
 };
@@ -52,7 +54,6 @@ void NFGameLogicPlugin::Install()
 
     REGISTER_MODULE( pPluginManager, NFCGameLogicModule )
 
-    REGISTER_MODULE( pPluginManager, NFCBuffModule )
     REGISTER_MODULE( pPluginManager, NFCItemModule )
     REGISTER_MODULE( pPluginManager, NFCPackModule )
     REGISTER_MODULE( pPluginManager, NFCSkillModule )
@@ -85,7 +86,6 @@ void NFGameLogicPlugin::Uninstall()
     UNREGISTER_MODULE( pPluginManager, NFCSkillModule )
     UNREGISTER_MODULE( pPluginManager, NFCPackModule )
     UNREGISTER_MODULE( pPluginManager, NFCItemModule )
-    UNREGISTER_MODULE( pPluginManager, NFCBuffModule )
 
     UNREGISTER_MODULE( pPluginManager, NFCGameLogicModule )
 }
