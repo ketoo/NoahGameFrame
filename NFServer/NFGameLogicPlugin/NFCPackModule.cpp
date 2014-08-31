@@ -54,6 +54,7 @@ bool NFCPackModule::AfterInit()
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>( pPluginManager->FindModule( "NFCEventProcessModule" ) );
     m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>( pPluginManager->FindModule( "NFCElementInfoModule" ) );
+    m_pGameLogicModule = dynamic_cast<NFIGameLogicModule*>( pPluginManager->FindModule( "NFCGameLogicModule" ) );
     m_pSceneProcessModule = dynamic_cast<NFISceneProcessModule*>( pPluginManager->FindModule( "NFCSceneProcessModule" ) );
     m_pPropertyModule = dynamic_cast<NFIPropertyModule*>( pPluginManager->FindModule( "NFCPropertyModule" ) );
     m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
@@ -61,6 +62,7 @@ bool NFCPackModule::AfterInit()
     assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pElementInfoModule );
+    assert( NULL != m_pGameLogicModule );
     assert( NULL != m_pSceneProcessModule );
     assert( NULL != m_pPropertyModule );
     assert( NULL != m_pLogModule );
@@ -95,7 +97,7 @@ PackTableType NFCPackModule::GetPackType( const std::string& name )
     return PackTableType::None_Pack;
 }
 
-NFIDENTID NFCPackModule::CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount, const NFIValueList& inlayCardList, const int nIntensiveLevel, const int nEnchantLevel, const std::string& strEnchantCard )
+NFIDENTID NFCPackModule::CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount, const NFIDataList& inlayCardList, const int nIntensiveLevel, const int nEnchantLevel, const std::string& strEnchantCard )
 {
     if (nSoltCount > mnMaxSlotCount || inlayCardList.GetCount() > mnMaxSlotCount)
     {
@@ -122,14 +124,14 @@ NFIDENTID NFCPackModule::CreateEquip( const NFIDENTID& self, const std::string& 
     }
 
     // 判断物品是否为装备
-    int nItemType = pPropertyType->QueryInt();
+    int nItemType = pPropertyType->GetInt();
     if ( EGameItemType::EGIT_Equip != nItemType )
     {
         return 0;
     }
 
     NFIRecord* pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-    const int nPackCount = pObject->QueryPropertyInt("PackCount"); // 背包格子数量
+    const int nPackCount = pObject->GetPropertyInt("PackCount"); // 背包格子数量
 
     //前面10个是装备区
     int nHasUsedCount = 0;
@@ -148,21 +150,21 @@ NFIDENTID NFCPackModule::CreateEquip( const NFIDENTID& self, const std::string& 
         }
 
         NFIDENTID ident = NFIDENTID::CreateGUID();
-        NFCValueList var;
+        NFCDataList var;
         var << ident;
         var << strConfigName.c_str() ;
         var << 1;
 
         // 绑定属性
         NFIProperty* pBoundProperty = pPropertyManager->GetElement( "Bound" );
-        var << (NULL != pBoundProperty ? pBoundProperty->QueryInt() : 0);
+        var << (NULL != pBoundProperty ? pBoundProperty->GetInt() : 0);
         var << (NFINT32)eExpiredType;
         var << nSoltCount;
 
         for ( int j = 0; j < 6; j++ )
         {
             int nInlayCardCount = inlayCardList.GetCount();
-            var << (j < nInlayCardCount ? inlayCardList.StringVal( j ).c_str() : NULL_STR);
+            var << (j < nInlayCardCount ? inlayCardList.String( j ).c_str() : NULL_STR);
         }
 
         var << nIntensiveLevel;
@@ -192,64 +194,10 @@ NFIDENTID NFCPackModule::CreateEquip( const NFIDENTID& self, const std::string& 
 {
     if ( nSoltCount <= mnMaxSlotCount )
     {
-        return CreateEquip( self, strConfigName, eExpiredType, nSoltCount, NFCValueList(), 0, 0, "" );
+        return CreateEquip( self, strConfigName, eExpiredType, nSoltCount, NFCDataList(), 0, 0, "" );
     }
 
     return 0;
-}
-
-bool NFCPackModule::can_normal_pack_item_swap( const NFIDENTID& self, NFIRecord* pOriginRecord, NFIRecord* pTargetRecord, const int origin, const int target )
-{
-    if ( pOriginRecord == NULL || pTargetRecord == NULL )
-    {
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "pRecord is NULL", "can_normal_pack_item_swap", __FUNCTION__, __LINE__);
-        return false;
-    }
-
-    const std::string& strOriginID = pOriginRecord->QueryString( origin, EGIT_TYPE_CONFIGID );
-    NFIPropertyManager* pOriginPropertyManager = m_pElementInfoModule->GetPropertyManager( strOriginID );
-
-    if ( NULL == pOriginPropertyManager )
-    {
-        m_pLogModule->LogElement(NFILogModule::NLL_ERROR_NORMAL, 0, strOriginID, "There is no element", __FUNCTION__, __LINE__);
-
-        return false;
-    }
-
-    int nOriginItemType = pOriginPropertyManager->GetElement( "ItemType" )->QueryInt();
-
-    // 判断物品是否为装备
-    if ( nOriginItemType != EGameItemType::EGIT_Equip )
-    {
-        m_pLogModule->LogElement(NFILogModule::NLL_ERROR_NORMAL, 0, strOriginID, "ItemType  is a error value", __FUNCTION__, __LINE__);
-
-        return false;
-    }
-
-    if (m_pKernelModule->QueryPropertyInt(self, "Level") < pOriginPropertyManager->GetElement("Level")->QueryInt() )
-    {
-        return false;
-    }
-
-    // 小类型不一致
-    if ( pOriginPropertyManager->GetElement( "ItemSubType" )->QueryInt() != target )
-    {
-        return false;
-    }
-
-    // 职业不符
-    if ( pOriginPropertyManager->GetElement( "Job" )->QueryInt() != m_pKernelModule->QueryPropertyInt(self, "Job") )
-    {
-        return false;
-    }
-
-    // 性别不符
-//     if ( pOriginPropertyManager->GetElement( "CharType" )->QueryInt() != m_pKernelModule->QueryPropertyInt(self, "CharType") )
-//     {
-//         return false;
-//     }
-
-    return true;
 }
 
 bool NFCPackModule::SwapGrid( const NFIDENTID& self, const int nOrigin, const int nTarget, const PackTableType origin_name/* = PackTableType::NormalPack*/, const PackTableType target_name/* = PackTableType::NormalPack*/ )
@@ -267,8 +215,8 @@ bool NFCPackModule::SwapGrid( const NFIDENTID& self, const int nOrigin, const in
         return false;
     }
 
-    NFCValueList originRow;
-    NFCValueList targetRow;
+    NFCDataList originRow;
+    NFCDataList targetRow;
     
     bool bOrigin = pOriginRecord->QueryRow( nOrigin, originRow);
     bool bTarget = pTargetRecord->QueryRow( nTarget, targetRow );
@@ -288,17 +236,12 @@ bool NFCPackModule::SwapGrid( const NFIDENTID& self, const int nOrigin, const in
                 {
                 case NormalPack:
                     {
-                        if ( !can_normal_pack_item_swap( self, pOriginRecord, pTargetRecord, nOrigin, nTarget ) )
-                        {
-                            return false;
-                        }
-
                         return pOriginRecord->SwapRowInfo(nOrigin, nTarget);
                     }
                     break;
                 case BuyBackPack:
                     {
-                        NFCValueList var( targetRow );
+                        NFCDataList var( targetRow );
 
                         if ( !pTargetRecord->IsUsed( nTarget ) )
                         {
@@ -324,7 +267,7 @@ bool NFCPackModule::SwapGrid( const NFIDENTID& self, const int nOrigin, const in
                 {
                 case NormalPack:
                     {
-                        NFCValueList var( targetRow );
+                        NFCDataList var( targetRow );
 
                         if ( !pTargetRecord->IsUsed( nTarget ) )
                         {
@@ -397,7 +340,7 @@ int NFCPackModule::GetGridCount( const NFIDENTID& self, const int nOrigin, const
         NFIRecord* pRecord = pObject->GetRecordManager()->GetElement( GetPackName( name ) );
         if ( pRecord )
         {
-            return pRecord->QueryInt( nOrigin, EGameItemStoreType::EGIT_TYPE_ITEMCOUNT );
+            return pRecord->GetInt( nOrigin, EGameItemStoreType::EGIT_TYPE_ITEMCOUNT );
         }
     }
 
@@ -429,7 +372,7 @@ int NFCPackModule::GetEquipIntensiveLevel( const NFIDENTID& self, const int nOri
         NFIRecord* pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
         if ( pRecord )
         {
-            return pRecord->QueryInt( nOrigin, EGameItemStoreType::EGIT_TYPE_INTENSIVE_LEVEL );
+            return pRecord->GetInt( nOrigin, EGameItemStoreType::EGIT_TYPE_INTENSIVE_LEVEL );
         }
     }
 
@@ -461,7 +404,7 @@ int NFCPackModule::GetEquipSlotCount( const NFIDENTID& self, const int nOrigin )
         NFIRecord* pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
         if ( pRecord )
         {
-            return pRecord->QueryInt( nOrigin, EGameItemStoreType::EGIT_TYPE_SOLTCOUNT );
+            return pRecord->GetInt( nOrigin, EGameItemStoreType::EGIT_TYPE_SOLTCOUNT );
         }
     }
 
@@ -494,7 +437,7 @@ const std::string& NFCPackModule::GetEquipInlayCard( const NFIDENTID& self, cons
         NFIRecord* pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
         if ( pRecord )
         {
-            return pRecord->QueryString( nOrigin, eSlotIndex );
+            return pRecord->GetString( nOrigin, eSlotIndex );
         }
     }
 
@@ -528,7 +471,7 @@ int NFCPackModule::GetEquipEnchantmentLevel( const NFIDENTID& self, const int nO
         NFIRecord* pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
         if ( pRecord )
         {
-            return pRecord->QueryInt( nOrigin,  EGameItemStoreType::EGIT_TYPE_ENCHANTMENT_LEVEL );
+            return pRecord->GetInt( nOrigin,  EGameItemStoreType::EGIT_TYPE_ENCHANTMENT_LEVEL );
         }
     }
 
@@ -562,7 +505,7 @@ const std::string& NFCPackModule::GetEquipEnchantmentCard( const NFIDENTID& self
         NFIRecord* pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
         if ( pRecord )
         {
-            return pRecord->QueryString( nOrigin,  EGameItemStoreType::EGIT_TYPE_ENCHANTMENT_CARD );
+            return pRecord->GetString( nOrigin,  EGameItemStoreType::EGIT_TYPE_ENCHANTMENT_CARD );
         }
     }
 
@@ -596,7 +539,7 @@ const std::string& NFCPackModule::GetEquipCreatTime( const NFIDENTID& self, cons
         NFIRecord* pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
         if ( pRecord )
         {
-            return pRecord->QueryString( nOrigin,  EGameItemStoreType::EGIT_TYPE_CREATE_TIME );
+            return pRecord->GetString( nOrigin,  EGameItemStoreType::EGIT_TYPE_CREATE_TIME );
         }
     }
 
@@ -628,7 +571,7 @@ bool NFCPackModule::CreateItem( const NFIDENTID& self, const std::string& strCon
         return false;
     }
 
-    int nItemType = pPropertyType->QueryInt();
+    int nItemType = pPropertyType->GetInt();
     switch (nItemType)
     {
     case EGameItemType::EGIT_Item:
@@ -638,7 +581,7 @@ bool NFCPackModule::CreateItem( const NFIDENTID& self, const std::string& strCon
             NFIProperty* pPropertySubType =  pPropertyManager->GetElement("ItemSubType");
 // 			if (NULL != pPropertySubType)
 // 			{
-// 				int nItemSubType = pPropertySubType->QueryInt();
+// 				int nItemSubType = pPropertySubType->GetInt();
 // 				switch (nItemSubType)
 // 				{
 // 				case EGameItemSubType::EGIT_ITEM_GOLD:
@@ -655,7 +598,7 @@ bool NFCPackModule::CreateItem( const NFIDENTID& self, const std::string& strCon
 // 				}
 // 			}
 
-            int nOverlayCount = pPropertyManager->GetElement("OverlayCount")->QueryInt();
+            int nOverlayCount = pPropertyManager->GetElement("OverlayCount")->GetInt();
             int nNewCount = nCount;
             if (nCount > nOverlayCount)
             {
@@ -668,20 +611,20 @@ bool NFCPackModule::CreateItem( const NFIDENTID& self, const std::string& strCon
                 return false;
             }
 
-            const int nPackCount = pObject->QueryPropertyInt("PackCount");
-            NFCValueList matchItemList;
+            const int nPackCount = pObject->GetPropertyInt("PackCount");
+            NFCDataList matchItemList;
             int nMatchCount = pRecord->FindString(EGIT_TYPE_CONFIGID, strConfigName.c_str(), matchItemList);
 
             // 给已有的增加至堆叠上限
             for (int i = 0; i < nMatchCount; ++i)
             {
-                int nRow = matchItemList.IntVal(i);
+                int nRow = matchItemList.Int(i);
                 if (nRow < mnPackStart)
                 {// 前11个是已装备物品
                     continue;
                 }
 
-                int nCurrRowItemCount = pRecord->QueryInt(nRow, EGIT_TYPE_ITEMCOUNT);
+                int nCurrRowItemCount = pRecord->GetInt(nRow, EGIT_TYPE_ITEMCOUNT);
                 if (nCurrRowItemCount == nOverlayCount)
                 {// 本行数量已满
                     continue;
@@ -706,13 +649,13 @@ bool NFCPackModule::CreateItem( const NFIDENTID& self, const std::string& strCon
                 {
                     if (!pRecord->IsUsed(i))
                     {
-                        NFCValueList var;
+                        NFCDataList var;
                         var << NFIDENTID::CreateGUID();
                         var << strConfigName.c_str() ;
                         var << nNewCount;
 
                         NFIProperty* pBoundProperty = pPropertyManager->GetElement( "Bound" );
-                        var << (pBoundProperty != NULL ? pBoundProperty->QueryInt() : 0);
+                        var << (pBoundProperty != NULL ? pBoundProperty->GetInt() : 0);
                         var << (NFINT32)eExpiredType;
                         var << 0;
 
@@ -753,7 +696,7 @@ bool NFCPackModule::GetGridBan( const NFIDENTID& self, const int nOrigin )
     return false;
 }
 
-int NFCPackModule::OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var )
+int NFCPackModule::OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
     if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
     {
@@ -778,14 +721,14 @@ int NFCPackModule::OnClassObjectEvent( const NFIDENTID& self, const std::string&
     return 0;
 }
 
-int NFCPackModule::OnSwapTableRowEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var )
+int NFCPackModule::OnSwapTableRowEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var )
 {
     if ( 4 == var.GetCount() )
     {
-        const std::string& strOriginTableName = var.StringVal( 0 );
-        const std::string& strTargetTableName = var.StringVal( 1 );
-        int nOrigin = var.IntVal( 2 );
-        int nTarget = var.IntVal( 3 );
+        const std::string& strOriginTableName = var.String( 0 );
+        const std::string& strTargetTableName = var.String( 1 );
+        int nOrigin = var.Int( 2 );
+        int nTarget = var.Int( 3 );
 
         NFIObject* pObject = m_pKernelModule->GetObject(object);
         if (pObject)
@@ -812,7 +755,7 @@ int NFCPackModule::OnSwapTableRowEvent( const NFIDENTID& object, const int nEven
     return 0;
 }
 
-int NFCPackModule::OnObjectPackRecordEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar )
+int NFCPackModule::OnObjectPackRecordEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
 {
     NFIObject* pObject = m_pKernelModule->GetObject( self );
     if ( pObject )
@@ -826,7 +769,7 @@ int NFCPackModule::OnObjectPackRecordEvent( const NFIDENTID& self, const std::st
                 {
                     if ( nRow >= 0 && nRow < mnPackStart)
                     {
-                        const std::string& strConfigID = pPackRecord->QueryString( nRow, ( int )EGameItemStoreType::EGIT_TYPE_CONFIGID );
+                        const std::string& strConfigID = pPackRecord->GetString( nRow, ( int )EGameItemStoreType::EGIT_TYPE_CONFIGID );
                         AddEquipProperty(self, strConfigID, nRow);
                     }
                 }
@@ -836,7 +779,7 @@ int NFCPackModule::OnObjectPackRecordEvent( const NFIDENTID& self, const std::st
                 {
                     if ( nRow >= 0 && nRow < mnPackStart)
                     {
-                        const std::string& strOldConfigID = pPackRecord->QueryString( nRow, ( int )EGameItemStoreType::EGIT_TYPE_CONFIGID );
+                        const std::string& strOldConfigID = pPackRecord->GetString( nRow, ( int )EGameItemStoreType::EGIT_TYPE_CONFIGID );
                         RemoveEquipProperty(self, strOldConfigID, nRow);
                     }
                 }
@@ -849,12 +792,12 @@ int NFCPackModule::OnObjectPackRecordEvent( const NFIDENTID& self, const std::st
                     if ( nCol >= 0 && nCol < mnPackStart)
                     {
                         //VIEW显示部分
-                        const std::string& strConfigID = pPackRecord->QueryString( nCol, ( int )EGameItemStoreType::EGIT_TYPE_CONFIGID );
+                        const std::string& strConfigID = pPackRecord->GetString( nCol, ( int )EGameItemStoreType::EGIT_TYPE_CONFIGID );
                         if ( !strConfigID.empty() )
                         {
                             //////////////////////////////////////////////////////////////////////////
                             // 清装备属性
-                            const std::string& strOldConfigID = pPackRecord->QueryString( nRow, ( int )EGameItemStoreType::EGIT_TYPE_CONFIGID );
+                            const std::string& strOldConfigID = pPackRecord->GetString( nRow, ( int )EGameItemStoreType::EGIT_TYPE_CONFIGID );
                             if (nRow >= 0 && nRow < mnPackStart)
                             {
 								RemoveEquipProperty(self, strOldConfigID, nRow);
@@ -879,7 +822,7 @@ int NFCPackModule::OnObjectPackRecordEvent( const NFIDENTID& self, const std::st
     return 0;
 }
 
-int NFCPackModule::OnObjectPackViewRecordEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nTargetRow, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar )
+int NFCPackModule::OnObjectPackViewRecordEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nTargetRow, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
 {
     NFIObject* pObject = m_pKernelModule->GetObject( self );
     if ( pObject )
@@ -894,12 +837,12 @@ int NFCPackModule::OnObjectPackViewRecordEvent( const NFIDENTID& self, const std
                 {
                     if ( nRow >= 0 && nRow < pViewRecord->GetRows() )
                     {
-                        const std::string& strConfigID = pPackRecord->QueryString( nRow, ( int )EGameItemStoreType::EGIT_TYPE_CONFIGID );
-                        int nIntensiveLevel = pPackRecord->QueryInt( nRow, ( int )EGameItemStoreType::EGIT_TYPE_INTENSIVE_LEVEL );
-                        const std::string& strConfigGemID = pPackRecord->QueryString( nRow, ( int )EGameItemStoreType::EGIT_TYPE_ENCHANTMENT_CARD );
-                        int nEnchentmentLevel = pPackRecord->QueryInt( nRow, ( int )EGameItemStoreType::EGIT_TYPE_ENCHANTMENT_LEVEL );
+                        const std::string& strConfigID = pPackRecord->GetString( nRow, ( int )EGameItemStoreType::EGIT_TYPE_CONFIGID );
+                        int nIntensiveLevel = pPackRecord->GetInt( nRow, ( int )EGameItemStoreType::EGIT_TYPE_INTENSIVE_LEVEL );
+                        const std::string& strConfigGemID = pPackRecord->GetString( nRow, ( int )EGameItemStoreType::EGIT_TYPE_ENCHANTMENT_CARD );
+                        int nEnchentmentLevel = pPackRecord->GetInt( nRow, ( int )EGameItemStoreType::EGIT_TYPE_ENCHANTMENT_LEVEL );
 
-                        NFCValueList val;
+                        NFCDataList val;
                         val << strConfigID.c_str();
                         val << nIntensiveLevel;
                         val << strConfigGemID.c_str();
@@ -926,19 +869,19 @@ int NFCPackModule::OnObjectPackViewRecordEvent( const NFIDENTID& self, const std
                     if ( nTargetRow >= 0 && nTargetRow < pViewRecord->GetRows() )
                     {
                         //VIEW显示部分
-                        const std::string& strConfigID = pPackRecord->QueryString( nTargetRow, ( int )EGameItemStoreType::EGIT_TYPE_CONFIGID );
+                        const std::string& strConfigID = pPackRecord->GetString( nTargetRow, ( int )EGameItemStoreType::EGIT_TYPE_CONFIGID );
                         if ( !strConfigID.empty() )
                         {
-                            int nIntensiveLevel = pPackRecord->QueryInt( nTargetRow, ( int )EGameItemStoreType::EGIT_TYPE_INTENSIVE_LEVEL );
-                            const std::string& strConfigGemID = pPackRecord->QueryString( nTargetRow, ( int )EGameItemStoreType::EGIT_TYPE_ENCHANTMENT_CARD );
-                            int nEnchentmentLevel = pPackRecord->QueryInt( nTargetRow, ( int )EGameItemStoreType::EGIT_TYPE_ENCHANTMENT_LEVEL );
+                            int nIntensiveLevel = pPackRecord->GetInt( nTargetRow, ( int )EGameItemStoreType::EGIT_TYPE_INTENSIVE_LEVEL );
+                            const std::string& strConfigGemID = pPackRecord->GetString( nTargetRow, ( int )EGameItemStoreType::EGIT_TYPE_ENCHANTMENT_CARD );
+                            int nEnchentmentLevel = pPackRecord->GetInt( nTargetRow, ( int )EGameItemStoreType::EGIT_TYPE_ENCHANTMENT_LEVEL );
 
                             if (pViewRecord->IsUsed( nTargetRow ) )
                             {
                                 pViewRecord->Remove(nTargetRow);
                             }
 
-                            NFCValueList val;
+                            NFCDataList val;
                             val << strConfigID.c_str();
                             val << nIntensiveLevel;
                             val << strConfigGemID.c_str();
@@ -974,29 +917,11 @@ const std::string& NFCPackModule::GetGridConfigID( const NFIDENTID& self, const 
         NFIRecord* pRecord = pObject->GetRecordManager()->GetElement( GetPackName( name ) );
         if ( pRecord )
         {
-            return pRecord->QueryString( nRow, EGameItemStoreType::EGIT_TYPE_CONFIGID );
+            return pRecord->GetString( nRow, EGameItemStoreType::EGIT_TYPE_CONFIGID );
         }
     }
 
     return NULL_STR;
-}
-
-bool NFCPackModule::pack_item_type_greater( NFIValueList* elem1, NFIValueList* elem2 )
-{
-    std::string config_id1 = elem1->StringVal( EGameItemStoreType::EGIT_TYPE_CONFIGID );
-    int item_type1 = m_pElementInfoModule->QueryPropertyInt( config_id1, "ItemType" );
-    int item_subtype1 = m_pElementInfoModule->QueryPropertyInt( config_id1, "ItemSubType" );
-
-    std::string config_id2 = elem2->StringVal( EGameItemStoreType::EGIT_TYPE_CONFIGID );
-    int item_type2 = m_pElementInfoModule->QueryPropertyInt( config_id2, "ItemType" );
-    int item_subtype2 = m_pElementInfoModule->QueryPropertyInt( config_id2, "ItemSubType" );
-
-    if ( item_type1 != item_type2 )
-    {
-        return item_type1 < item_type2;
-    }
-
-    return item_subtype1 < item_subtype2;
 }
 
 int NFCPackModule::GetCanUsedCount(const NFIDENTID& self, const PackTableType name/* = PackTableType::NormalPack*/) const
@@ -1025,7 +950,7 @@ int NFCPackModule::GetCanUsedCount(const NFIDENTID& self, const PackTableType na
     return nCount;
 }
 
-bool NFCPackModule::SetGridData( const NFIDENTID& self, const int nRow, const int nCol, const NFIValueList& var, const PackTableType name /*= PackTableType::NormalPack*/ )
+bool NFCPackModule::SetGridData( const NFIDENTID& self, const int nRow, const int nCol, const NFIDataList& var, const PackTableType name /*= PackTableType::NormalPack*/ )
 {
     NFIObject* pObject = m_pKernelModule->GetObject( self );
     if ( NULL == pObject )
@@ -1039,7 +964,7 @@ bool NFCPackModule::SetGridData( const NFIDENTID& self, const int nRow, const in
         return false;
     }
 
-    if ( !pRecord->SetInt( nRow, nCol, var.IntVal( 0 ) ) )
+    if ( !pRecord->SetInt( nRow, nCol, var.Int( 0 ) ) )
     {
         // log
     }
@@ -1078,7 +1003,7 @@ int NFCPackModule::RefreshEquipProperty( const NFIDENTID& self, const int nRow )
         return 1;
     }
 
-    const std::string& strConfigID = pRecord->QueryString( nRow, ( int )EGameItemStoreType::EGIT_TYPE_CONFIGID );
+    const std::string& strConfigID = pRecord->GetString( nRow, ( int )EGameItemStoreType::EGIT_TYPE_CONFIGID );
     if (strConfigID.empty())
     {
         return 1;
@@ -1125,7 +1050,7 @@ int NFCPackModule::AddEquipProperty( const NFIDENTID& self, const std::string& s
         return 1;
     }
 
-    NFIPropertyManager* pEffectDataPropertyManager = m_pElementInfoModule->GetPropertyManager(pEffectDataProperty->QueryString());
+    NFIPropertyManager* pEffectDataPropertyManager = m_pElementInfoModule->GetPropertyManager(pEffectDataProperty->GetString());
     if (!pEffectDataPropertyManager)
     {
         return 1;
@@ -1134,9 +1059,9 @@ int NFCPackModule::AddEquipProperty( const NFIDENTID& self, const std::string& s
    NFIProperty* pProperty = pEffectDataPropertyManager->First();
    while (pProperty)
    {
-       if (pProperty->QueryInt() != 0)
+       if (pProperty->GetInt() != 0)
        {
-           m_pPropertyModule->AddPropertyValue( self, pProperty->GetKey(), NFIPropertyModule::NPG_EQUIP, pProperty->QueryInt() );
+           m_pPropertyModule->AddPropertyValue( self, pProperty->GetKey(), NFIPropertyModule::NPG_EQUIP, pProperty->GetInt() );
        }
 
        pProperty = pEffectDataPropertyManager->Next();
@@ -1178,7 +1103,7 @@ int NFCPackModule::RemoveEquipProperty( const NFIDENTID& self, const std::string
         return 1;
     }
 
-    NFIPropertyManager* pEffectDataPropertyManager = m_pElementInfoModule->GetPropertyManager(pEffectDataProperty->QueryString());
+    NFIPropertyManager* pEffectDataPropertyManager = m_pElementInfoModule->GetPropertyManager(pEffectDataProperty->GetString());
     if (!pEffectDataPropertyManager)
     {
         return 1;
@@ -1187,9 +1112,9 @@ int NFCPackModule::RemoveEquipProperty( const NFIDENTID& self, const std::string
     NFIProperty* pProperty = pEffectDataPropertyManager->First();
     while (pProperty)
     {
-        if (pProperty->QueryInt() != 0)
+        if (pProperty->GetInt() != 0)
         {
-            m_pPropertyModule->SubPropertyValue( self, pProperty->GetKey(), NFIPropertyModule::NPG_EQUIP, pProperty->QueryInt() );
+            m_pPropertyModule->SubPropertyValue( self, pProperty->GetKey(), NFIPropertyModule::NPG_EQUIP, pProperty->GetInt() );
         }
 
         pProperty = pEffectDataPropertyManager->Next();
@@ -1223,9 +1148,9 @@ int NFCPackModule::QueryCount( const NFIDENTID& self, const std::string& strItem
     int nCount = 0;
     for (int i = mnPackStart; i < pRecord->GetRows(); ++i)
     {
-        if (pRecord->IsUsed(i) && pRecord->QueryString(i, EGameItemStoreType::EGIT_TYPE_CONFIGID) == strItemConfigID)
+        if (pRecord->IsUsed(i) && pRecord->GetString(i, EGameItemStoreType::EGIT_TYPE_CONFIGID) == strItemConfigID)
         {
-            nCount += pRecord->QueryInt(i, EGameItemStoreType::EGIT_TYPE_ITEMCOUNT);
+            nCount += pRecord->GetInt(i, EGameItemStoreType::EGIT_TYPE_ITEMCOUNT);
         }
     }
 
@@ -1262,9 +1187,9 @@ bool NFCPackModule::DeleteItem( const NFIDENTID& self, const std::string& strIte
             break;
         }
 
-        if (pRecord->IsUsed(i) && pRecord->QueryString(i, EGameItemStoreType::EGIT_TYPE_CONFIGID) == strItemConfigID)
+        if (pRecord->IsUsed(i) && pRecord->GetString(i, EGameItemStoreType::EGIT_TYPE_CONFIGID) == strItemConfigID)
         {
-            const int nGridCount = pRecord->QueryInt(i, EGameItemStoreType::EGIT_TYPE_ITEMCOUNT);
+            const int nGridCount = pRecord->GetInt(i, EGameItemStoreType::EGIT_TYPE_ITEMCOUNT);
             if (nGridCount < nRemainDelCount)
             {
                 //此格子数量不够
