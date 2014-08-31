@@ -57,7 +57,7 @@ bool NFCSkillModule::AfterInit()
     return true;
 }
 
-int NFCSkillModule::OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var )
+int NFCSkillModule::OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
     if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
     {
@@ -78,7 +78,7 @@ int NFCSkillModule::OnClassObjectEvent( const NFIDENTID& self, const std::string
     return 0;
 }
 
-int NFCSkillModule::OnRequireUseSkillEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
+int NFCSkillModule::OnRequireUseSkillEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
 {
     if ( var.GetCount() < 3)
     {
@@ -86,7 +86,7 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFIDENTID& self, const int nEv
     }
 
     //EGameErrorCode errorCode = EGameErrorCode::EGEC_INVALID_SKILL;
-    NFIObject* pObejct = m_pKernelModule->GetObject( var.ObjectVal( 0 ) );
+    NFIObject* pObejct = m_pKernelModule->GetObject( var.Object( 0 ) );
     if ( pObejct == NULL )
     {
         return 1;
@@ -98,7 +98,7 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFIDENTID& self, const int nEv
         return 1;
     }
 
-    NFIPropertyManager* pPropertyManager = m_pElementInfoModule->GetPropertyManager( var.StringVal( 2 ) );
+    NFIPropertyManager* pPropertyManager = m_pElementInfoModule->GetPropertyManager( var.String( 2 ) );
     if ( pPropertyManager == NULL )
     {
         return 1;
@@ -111,14 +111,14 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFIDENTID& self, const int nEv
     }
 
     //配置表中真的有这么个技能类别
-    EGameSkillType eItemType = ( EGameSkillType )pItemTypeProperty->QueryInt();
+    EGameSkillType eItemType = ( EGameSkillType )pItemTypeProperty->GetInt();
     NFISkillConsumeProcessModule* pConsumeProcessModule = m_pSkillConsumeManagerModule->GetConsumeModule( EGameSkillType::EGST_JOBSKILL_BRIEF );
     if ( pConsumeProcessModule == NULL )
     {
         return 1;
     }
 
-    NFCValueList valueOther;
+    NFCDataList valueOther;
     valueOther.Append( var, 3, var.GetCount() - 3 ); // 被攻击玩家数量 3表示从第几个参数开始是被攻击玩家
     //     if ( pConsumeProcessModule->ConsumeLegal( var.ObjectVal( 0 ), var.StringVal( 2 ), valueOther ) != 0 )
     //     {
@@ -130,12 +130,12 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFIDENTID& self, const int nEv
     //         return 1;
     //     }
     // 
-    NFCValueList damageValueList;
-    NFCValueList damageResultList;
-    int nResult = pConsumeProcessModule->ConsumeProcess( var.ObjectVal( 0 ), var.StringVal( 2 ), valueOther, damageValueList, damageResultList );
+    NFCDataList damageValueList;
+    NFCDataList damageResultList;
+    int nResult = pConsumeProcessModule->ConsumeProcess( var.Object( 0 ), var.String( 2 ), valueOther, damageValueList, damageResultList );
     for (int i = 0; i < valueOther.GetCount(); i++)
     {
-        m_pKernelModule->SetPropertyInt(valueOther.ObjectVal(i), "HP", 0);
+        m_pKernelModule->SetPropertyInt(valueOther.Object(i), "HP", 0);
         damageValueList.AddInt(0);
         damageResultList.AddInt(0);
     }
@@ -144,8 +144,8 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFIDENTID& self, const int nEv
     if ( damageValueList.GetCount() == damageResultList.GetCount()
         && damageValueList.GetCount() == valueOther.GetCount() )
     {
-        NFCValueList valueResult;
-        valueResult.AddString( var.StringVal( 2 ).c_str() );
+        NFCDataList valueResult;
+        valueResult.AddString( var.String( 2 ).c_str() );
         valueResult.AddInt( valueOther.GetCount() );
         valueResult.Append( valueOther, 0, valueOther.GetCount() ); //伤害对象
         valueResult.Append( damageValueList, 0, damageValueList.GetCount() ); //伤害值
@@ -158,22 +158,22 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFIDENTID& self, const int nEv
     return 0;
 }
 
-int NFCSkillModule::OnRequireUseSkillPosEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
+int NFCSkillModule::OnRequireUseSkillPosEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
 {
     if ( var.GetCount() < 4 ||
-        !var.TypeEx(VARIANT_TYPE::VTYPE_OBJECT, VARIANT_TYPE::VTYPE_FLOAT, VARIANT_TYPE::VTYPE_FLOAT, VARIANT_TYPE::VTYPE_FLOAT, VARIANT_TYPE::VTYPE_OBJECT))
+        !var.TypeEx(TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_FLOAT, TDATA_TYPE::TDATA_FLOAT, TDATA_TYPE::TDATA_FLOAT, TDATA_TYPE::TDATA_OBJECT))
     {
         return 1;
     }
 
-    int nSkillID = var.IntVal( 0 );
-    float fX = var.FloatVal( 1 );
-    float fY = var.FloatVal( 2 );
-    float fZ = var.FloatVal( 3 );
+    int nSkillID = var.Int( 0 );
+    float fX = var.Float( 1 );
+    float fY = var.Float( 2 );
+    float fZ = var.Float( 3 );
     //群伤，就只计算第一个人的闪避
 
     //结果事件
-    //  NFCValueList valueResult;
+    //  NFCDataList valueResult;
     //  valueResult.AddInt(nSkillID);
     //  valueResult.AddInt(nResult);
     //  valueResult.Append(var, 4, var.GetCount());
@@ -192,7 +192,7 @@ int NFCSkillModule::AddSkill( const NFIDENTID& self, const std::string& strSkill
             NFIRecord* pRecord =  m_pKernelModule->FindRecord( self, mstrSkillTableName );
             if ( pRecord )
             {
-                return pRecord->AddRow( -1,  NFCValueList() << strSkillName.c_str());
+                return pRecord->AddRow( -1,  NFCDataList() << strSkillName.c_str());
                 //                 if ( nRow >= 0 )
                 //                 {
                 //                     return pRecord->SetString( nRow, EGameSkillStoreType::EGSST_TYPE_SKILL_CONFIGID, strSkillName.c_str() );
@@ -211,11 +211,11 @@ int NFCSkillModule::ExistSkill( const NFIDENTID& self, const std::string& strSki
     NFIRecord* pRecord =  m_pKernelModule->FindRecord( self, mstrSkillTableName );
     if ( pRecord )
     {
-        NFCValueList varResult;
+        NFCDataList varResult;
         pRecord->FindString( EGameSkillStoreType::EGSST_TYPE_SKILL_CONFIGID, strSkillName.c_str(), varResult );
         if ( varResult.GetCount() == 1 )
         {
-            return varResult.IntVal( 0 );
+            return varResult.Int( 0 );
         }
     }
 
@@ -266,7 +266,7 @@ int NFCSkillModule::GetSkillLevel( const NFIDENTID& self, const std::string& str
     return 0;
 }
 
-std::string NFCSkillModule::GetSkillGem( const NFIDENTID& self, const std::string& strSkillName )
+const std::string& NFCSkillModule::GetSkillGem( const NFIDENTID& self, const std::string& strSkillName )
 {
     int nFindRow = ExistSkill( self, strSkillName );
     if ( nFindRow >= 0 )

@@ -24,14 +24,16 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
     m_pSceneProcessModule = dynamic_cast<NFISceneProcessModule*>(pPluginManager->FindModule("NFCSceneProcessModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-    m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
-
-    assert(NULL != m_pEventProcessModule);
+	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
+	m_pSkillModule = dynamic_cast<NFISkillModule*>(pPluginManager->FindModule("NFCSkillModule"));
+    
+	assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pSceneProcessModule);
     assert(NULL != m_pElementInfoModule);
-    assert(NULL != m_pLogModule);
+	assert(NULL != m_pLogModule);
+	//assert(NULL != m_pSkillModule);
 
     m_pKernelModule->ResgisterCommonClassEvent( this, &NFCGameServerNet_ServerModule::OnClassCommonEvent );
     m_pKernelModule->ResgisterCommonPropertyEvent( this, &NFCGameServerNet_ServerModule::OnPropertyCommonEvent );
@@ -1778,22 +1780,29 @@ void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
         return;
     }
 
+	
     //bc
     NFIDENTID* pIdent = mRoleFDData.GetElement(nPlayerID);
     if (pIdent)
     {
-        int nContianerID = m_pKernelModule->GetPropertyInt(*pIdent, "SceneID");
-        int nGroupID = m_pKernelModule->GetPropertyInt(*pIdent, "GroupID");
-        NFCDataList xDataList;
-        m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
-        for (int i = 0; i < xDataList.GetCount(); ++i)
-        {
-            BaseData* pData = mRoleBaseData.GetElement(xDataList.Object(i));
-            if (pData)
-            {
-                SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SKILL_OBJECTX, xMsg, msg.GetFd(), pData->nFD);
-            }
-        }
+		if (m_pSkillModule)
+		{
+		}
+		else
+		{
+			int nContianerID = m_pKernelModule->GetPropertyInt(*pIdent, "SceneID");
+			int nGroupID = m_pKernelModule->GetPropertyInt(*pIdent, "GroupID");
+			NFCDataList xDataList;
+			m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
+			for (int i = 0; i < xDataList.GetCount(); ++i)
+			{
+				BaseData* pData = mRoleBaseData.GetElement(xDataList.Object(i));
+				if (pData)
+				{
+					SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SKILL_OBJECTX, xMsg, msg.GetFd(), pData->nFD);
+				}
+			}
+		}
     }
 }
 
