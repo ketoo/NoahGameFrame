@@ -40,7 +40,7 @@ public:
 
     //添加装备:装备config,装备过期类型,孔数量，空里宝石列表，强化等级，附魔等级，元素卡片列表
     virtual NFIDENTID CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount,
-                           const NFIValueList& inlayCardList, const int nIntensiveLevel, const int nEnchantLevel, const std::string& enchantCardList );
+                           const NFIDataList& inlayCardList, const int nIntensiveLevel, const int nEnchantLevel, const std::string& enchantCardList );
 
     //添加装备:装备config,装备过期类型,孔数量
     virtual NFIDENTID CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount );
@@ -91,7 +91,7 @@ public:
     virtual bool SetEquipCreatTime( const NFIDENTID& self, const int nOrigin, const std::string& strTime );
     virtual const std::string& GetEquipCreatTime( const NFIDENTID& self, const int nOrigin );
 
-    virtual bool SetGridData( const NFIDENTID& self, const int nRow, const int nCol, const NFIValueList& var, const PackTableType name = PackTableType::NormalPack );
+    virtual bool SetGridData( const NFIDENTID& self, const int nRow, const int nCol, const NFIDataList& var, const PackTableType name = PackTableType::NormalPack );
 
 	virtual int GetCanUsedCount(const NFIDENTID& self, const PackTableType name = PackTableType::NormalPack) const;
 
@@ -112,30 +112,25 @@ protected:
 private:
 
 protected:
-    int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var );
+    int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
 
-    int OnSwapTableRowEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var );
+    int OnSwapTableRowEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
+
 protected:
-    int OnObjectPackRecordEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar );
-    int OnObjectPackViewRecordEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nTargetRow, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar );
+    int OnObjectPackRecordEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
+    int OnObjectPackViewRecordEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nTargetRow, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
 
 protected:
     PackTableType GetPackType( const std::string& name );
-    bool pack_item_type_greater( NFIValueList* elem1, NFIValueList* elem2 );
-    bool can_normal_pack_item_swap( const NFIDENTID& self, NFIRecord* pOriginRecord, NFIRecord* pTargetRecord, const int origin, const int target ); // 判断是否可以交换普通背包物品(装备特殊判断)
+
 private:
-    //char* mstrPackTableName;
-    //char* mstrViewTableName;
-    //   char* mstrBuyBackPackTableName;
-
-
-
 
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
     NFIElementInfoModule* m_pElementInfoModule;
+    NFIGameLogicModule* m_pGameLogicModule;
     NFISceneProcessModule* m_pSceneProcessModule;
     NFIPropertyModule* m_pPropertyModule;
 

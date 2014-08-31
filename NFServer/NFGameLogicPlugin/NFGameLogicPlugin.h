@@ -1,13 +1,13 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFZoneLogicPlugin.h
+//    @FileName      :    NFGameLogicPlugin.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-07-14 08:51
-//    @Module           :   NFZoneLogicPlugin
+//    @Module           :   NFGameLogicPlugin
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_GAMELOGICLUGIN_H_
-#define _NFC_GAMELOGICLUGIN_H_
+#ifndef _NFC_GAME_LOGIC_PLUGIN_H_
+#define _NFC_GAME_LOGIC_PLUGIN_H_
 
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
