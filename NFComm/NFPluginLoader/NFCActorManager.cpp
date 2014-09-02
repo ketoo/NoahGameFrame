@@ -26,9 +26,9 @@ bool NFCActorManager::Init()
 	{
 		Theron::Receiver receiver;
 
-		NFIActorMessage message;
-		message.eType = NFIActorMessage::EACTOR_INIT;
-		m_pFramework->Send(message, receiver.GetAddress(), (*it)->GetAddress());
+		NFIActorMessage xMessage;
+		xMessage.eType = NFIActorMessage::EACTOR_INIT;
+		m_pFramework->Send(xMessage, receiver.GetAddress(), (*it)->GetAddress());
 
 		receiver.Wait();
 	}
@@ -41,15 +41,31 @@ bool NFCActorManager::AfterInit()
 	std::vector<NFIActor*>::iterator it = mActorVec.begin();
 	for (; it != mActorVec.end(); ++it)
 	{
-		Theron::Receiver receiver;
+		Theron::Receiver xReceiver;
 
-		NFIActorMessage message;
-		message.eType = NFIActorMessage::EACTOR_AFTER_INIT;
-		m_pFramework->Send(message, receiver.GetAddress(), (*it)->GetAddress());
+		NFIActorMessage xMessage;
+		xMessage.eType = NFIActorMessage::EACTOR_AFTER_INIT;
+		m_pFramework->Send(xMessage, xReceiver.GetAddress(), (*it)->GetAddress());
 
-		receiver.Wait();
+		xReceiver.Wait();
 	}
 	return true;
+}
+
+bool NFCActorManager::CheckConfig()
+{
+    std::vector<NFIActor*>::iterator it = mActorVec.begin();
+    for (; it != mActorVec.end(); ++it)
+    {
+        Theron::Receiver xReceiver;
+
+        NFIActorMessage xMessage;
+        xMessage.eType = NFIActorMessage::EACTOR_CHECKCONFIG;
+        m_pFramework->Send(xMessage, xReceiver.GetAddress(), (*it)->GetAddress());
+
+        xReceiver.Wait();
+    }
+    return true;
 }
 
 bool NFCActorManager::BeforeShut()
@@ -57,13 +73,13 @@ bool NFCActorManager::BeforeShut()
 	std::vector<NFIActor*>::iterator it = mActorVec.begin();
 	for (; it != mActorVec.end(); ++it)
 	{
-		Theron::Receiver receiver;
+		Theron::Receiver xReceiver;
 
-		NFIActorMessage message;
-		message.eType = NFIActorMessage::EACTOR_BEFORE_SHUT;
-		m_pFramework->Send(message, receiver.GetAddress(), (*it)->GetAddress());
+		NFIActorMessage xMessage;
+		xMessage.eType = NFIActorMessage::EACTOR_BEFORE_SHUT;
+		m_pFramework->Send(xMessage, xReceiver.GetAddress(), (*it)->GetAddress());
 
-		receiver.Wait();
+		xReceiver.Wait();
 	}
 	return true;
 }
@@ -73,13 +89,13 @@ bool NFCActorManager::Shut()
 	std::vector<NFIActor*>::iterator it = mActorVec.begin();
 	for (; it != mActorVec.end(); ++it)
 	{
-		Theron::Receiver receiver;
+		Theron::Receiver xReceiver;
 
-		NFIActorMessage message;
-		message.eType = NFIActorMessage::EACTOR_SHUT;
-		m_pFramework->Send(message, receiver.GetAddress(), (*it)->GetAddress());
+		NFIActorMessage xMessage;
+		xMessage.eType = NFIActorMessage::EACTOR_SHUT;
+		m_pFramework->Send(xMessage, xReceiver.GetAddress(), (*it)->GetAddress());
 
-		receiver.Wait();
+		xReceiver.Wait();
 	}
 
 	it = mActorVec.begin();

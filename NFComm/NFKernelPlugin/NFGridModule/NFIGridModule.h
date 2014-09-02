@@ -44,7 +44,7 @@ enum EGRID_AROUND
 class NFIGridModule
 {
 public:
-
+    virtual ~NFIGridModule(){}
     // the event that a object are moving
     virtual const NFIDENTID OnObjectMove(const NFIDENTID& self, const int& sceneID,
                                          const NFIDENTID& lastGrid, const int nX, const int nY, const int nZ) = 0;

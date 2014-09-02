@@ -136,3 +136,10 @@ int64_t NFCUUIDModule::CreateGUID()
 {
     return m_pUUID->generate();
 }
+
+int64_t NFCUUIDModule::CreateGUID( const std::string& strName )
+{
+    boost::crc_optimal<64, 0x04C11DB7, 0, 0, false, false> crc;
+    crc.process_bytes (strName.data(), strName.length());
+    return crc.checksum();
+}

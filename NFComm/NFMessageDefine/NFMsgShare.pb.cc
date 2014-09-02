@@ -160,7 +160,8 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       sizeof(ReqAckPlayerChat));
   ReqAckPlayerChat_EGameChatType_descriptor_ = ReqAckPlayerChat_descriptor_->enum_type(0);
   ReqAckUseSkill_descriptor_ = file->message_type(5);
-  static const int ReqAckUseSkill_offsets_[5] = {
+  static const int ReqAckUseSkill_offsets_[6] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, user_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, skill_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, effect_ident_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, effect_value_),
@@ -179,7 +180,8 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckUseSkill));
   ReqAckUseItem_descriptor_ = file->message_type(6);
-  static const int ReqAckUseItem_offsets_[5] = {
+  static const int ReqAckUseItem_offsets_[6] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseItem, user_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseItem, item_guid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseItem, effect_ident_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseItem, effect_value_),
@@ -414,29 +416,29 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     " \002(\0162%.NFMsg.ReqAckPlayerChat.EGameChatT"
     "ype\022\021\n\tchat_info\030\003 \002(\014\"Q\n\rEGameChatType\022"
     "\017\n\013EGCT_NARMAL\020\000\022\020\n\014EGCT_PRIVATE\020\001\022\r\n\tEG"
-    "CT_TEAM\020\002\022\016\n\nEGCT_WORLD\020\003\"u\n\016ReqAckUseSk"
-    "ill\022\020\n\010skill_id\030\001 \002(\014\022\024\n\014effect_ident\030\002 "
-    "\003(\003\022\024\n\014effect_value\030\003 \003(\005\022\022\n\neffect_rlt\030"
-    "\004 \003(\005\022\021\n\tkey_value\030\005 \001(\014\"u\n\rReqAckUseIte"
-    "m\022\021\n\titem_guid\030\001 \002(\003\022\024\n\014effect_ident\030\002 \003"
-    "(\003\022\024\n\014effect_value\030\003 \003(\005\022\022\n\neffect_rlt\030\004"
-    " \003(\005\022\021\n\tkey_value\030\005 \001(\014\"\345\001\n\017ReqAckSwapSc"
-    "ene\022;\n\rtransfer_type\030\001 \002(\0162$.NFMsg.ReqAc"
-    "kSwapScene.EGameSwapType\022\020\n\010scene_id\030\002 \002"
-    "(\005\022\017\n\007line_id\030\003 \002(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001("
-    "\002\022\t\n\001z\030\006 \001(\002\"Q\n\rEGameSwapType\022\017\n\013EGST_NA"
-    "RMAL\020\000\022\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017"
-    "\n\013EGST_MIRROR\020\003\"$\n\017ReqPickDropItem\022\021\n\tit"
-    "em_guid\030\002 \002(\003\" \n\rReqAcceptTask\022\017\n\007task_i"
-    "d\030\001 \002(\014\"#\n\020ReqCompeleteTask\022\017\n\007task_id\030\001"
-    " \002(\014\"\251\001\n\017PlayerEntryInfo\022\023\n\013object_guid\030"
-    "\001 \002(\003\022\t\n\001x\030\002 \002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002(\002\022\023"
-    "\n\013career_type\030\005 \002(\005\022\024\n\014player_state\030\006 \002("
-    "\005\022\021\n\tconfig_id\030\007 \002(\014\022\020\n\010scene_id\030\010 \002(\005\022\020"
-    "\n\010class_id\030\t \002(\014\"A\n\022AckPlayerEntryList\022+"
-    "\n\013object_list\030\001 \003(\0132\026.NFMsg.PlayerEntryI"
-    "nfo\")\n\022AckPlayerLeaveList\022\023\n\013object_list"
-    "\030\001 \003(\003", 1406);
+    "CT_TEAM\020\002\022\016\n\nEGCT_WORLD\020\003\"\203\001\n\016ReqAckUseS"
+    "kill\022\014\n\004user\030\001 \002(\003\022\020\n\010skill_id\030\002 \002(\014\022\024\n\014"
+    "effect_ident\030\003 \003(\003\022\024\n\014effect_value\030\004 \003(\005"
+    "\022\022\n\neffect_rlt\030\005 \003(\005\022\021\n\tkey_value\030\006 \001(\014\""
+    "\203\001\n\rReqAckUseItem\022\014\n\004user\030\001 \002(\003\022\021\n\titem_"
+    "guid\030\002 \002(\003\022\024\n\014effect_ident\030\003 \003(\003\022\024\n\014effe"
+    "ct_value\030\004 \003(\005\022\022\n\neffect_rlt\030\005 \003(\005\022\021\n\tke"
+    "y_value\030\006 \001(\014\"\345\001\n\017ReqAckSwapScene\022;\n\rtra"
+    "nsfer_type\030\001 \002(\0162$.NFMsg.ReqAckSwapScene"
+    ".EGameSwapType\022\020\n\010scene_id\030\002 \002(\005\022\017\n\007line"
+    "_id\030\003 \002(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006 \001"
+    "(\002\"Q\n\rEGameSwapType\022\017\n\013EGST_NARMAL\020\000\022\016\n\n"
+    "EGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n\013EGST_MIR"
+    "ROR\020\003\"$\n\017ReqPickDropItem\022\021\n\titem_guid\030\002 "
+    "\002(\003\" \n\rReqAcceptTask\022\017\n\007task_id\030\001 \002(\014\"#\n"
+    "\020ReqCompeleteTask\022\017\n\007task_id\030\001 \002(\014\"\251\001\n\017P"
+    "layerEntryInfo\022\023\n\013object_guid\030\001 \002(\003\022\t\n\001x"
+    "\030\002 \002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002(\002\022\023\n\013career_t"
+    "ype\030\005 \002(\005\022\024\n\014player_state\030\006 \002(\005\022\021\n\tconfi"
+    "g_id\030\007 \002(\014\022\020\n\010scene_id\030\010 \002(\005\022\020\n\010class_id"
+    "\030\t \002(\014\"A\n\022AckPlayerEntryList\022+\n\013object_l"
+    "ist\030\001 \003(\0132\026.NFMsg.PlayerEntryInfo\")\n\022Ack"
+    "PlayerLeaveList\022\023\n\013object_list\030\001 \003(\003", 1436);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -1902,6 +1904,7 @@ void ReqAckPlayerChat::Swap(ReqAckPlayerChat* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int ReqAckUseSkill::kUserFieldNumber;
 const int ReqAckUseSkill::kSkillIdFieldNumber;
 const int ReqAckUseSkill::kEffectIdentFieldNumber;
 const int ReqAckUseSkill::kEffectValueFieldNumber;
@@ -1925,6 +1928,7 @@ ReqAckUseSkill::ReqAckUseSkill(const ReqAckUseSkill& from)
 
 void ReqAckUseSkill::SharedCtor() {
   _cached_size_ = 0;
+  user_ = GOOGLE_LONGLONG(0);
   skill_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   key_value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -1968,6 +1972,7 @@ ReqAckUseSkill* ReqAckUseSkill::New() const {
 
 void ReqAckUseSkill::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    user_ = GOOGLE_LONGLONG(0);
     if (has_skill_id()) {
       if (skill_id_ != &::google::protobuf::internal::kEmptyString) {
         skill_id_->clear();
@@ -1992,27 +1997,43 @@ bool ReqAckUseSkill::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required bytes skill_id = 1;
+      // required int64 user = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &user_)));
+          set_has_user();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_skill_id;
+        break;
+      }
+
+      // required bytes skill_id = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_skill_id:
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_skill_id()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_effect_ident;
+        if (input->ExpectTag(24)) goto parse_effect_ident;
         break;
       }
 
-      // repeated int64 effect_ident = 2;
-      case 2: {
+      // repeated int64 effect_ident = 3;
+      case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_effect_ident:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 1, 16, input, this->mutable_effect_ident())));
+                 1, 24, input, this->mutable_effect_ident())));
         } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
                    == ::google::protobuf::internal::WireFormatLite::
                       WIRETYPE_LENGTH_DELIMITED) {
@@ -2022,19 +2043,19 @@ bool ReqAckUseSkill::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_effect_ident;
-        if (input->ExpectTag(24)) goto parse_effect_value;
+        if (input->ExpectTag(24)) goto parse_effect_ident;
+        if (input->ExpectTag(32)) goto parse_effect_value;
         break;
       }
 
-      // repeated int32 effect_value = 3;
-      case 3: {
+      // repeated int32 effect_value = 4;
+      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_effect_value:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 1, 24, input, this->mutable_effect_value())));
+                 1, 32, input, this->mutable_effect_value())));
         } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
                    == ::google::protobuf::internal::WireFormatLite::
                       WIRETYPE_LENGTH_DELIMITED) {
@@ -2044,19 +2065,19 @@ bool ReqAckUseSkill::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_effect_value;
-        if (input->ExpectTag(32)) goto parse_effect_rlt;
+        if (input->ExpectTag(32)) goto parse_effect_value;
+        if (input->ExpectTag(40)) goto parse_effect_rlt;
         break;
       }
 
-      // repeated int32 effect_rlt = 4;
-      case 4: {
+      // repeated int32 effect_rlt = 5;
+      case 5: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_effect_rlt:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 1, 32, input, this->mutable_effect_rlt())));
+                 1, 40, input, this->mutable_effect_rlt())));
         } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
                    == ::google::protobuf::internal::WireFormatLite::
                       WIRETYPE_LENGTH_DELIMITED) {
@@ -2066,13 +2087,13 @@ bool ReqAckUseSkill::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(32)) goto parse_effect_rlt;
-        if (input->ExpectTag(42)) goto parse_key_value;
+        if (input->ExpectTag(40)) goto parse_effect_rlt;
+        if (input->ExpectTag(50)) goto parse_key_value;
         break;
       }
 
-      // optional bytes key_value = 5;
-      case 5: {
+      // optional bytes key_value = 6;
+      case 6: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_key_value:
@@ -2103,34 +2124,39 @@ bool ReqAckUseSkill::MergePartialFromCodedStream(
 
 void ReqAckUseSkill::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required bytes skill_id = 1;
+  // required int64 user = 1;
+  if (has_user()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->user(), output);
+  }
+
+  // required bytes skill_id = 2;
   if (has_skill_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      1, this->skill_id(), output);
+      2, this->skill_id(), output);
   }
 
-  // repeated int64 effect_ident = 2;
+  // repeated int64 effect_ident = 3;
   for (int i = 0; i < this->effect_ident_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(
-      2, this->effect_ident(i), output);
+      3, this->effect_ident(i), output);
   }
 
-  // repeated int32 effect_value = 3;
+  // repeated int32 effect_value = 4;
   for (int i = 0; i < this->effect_value_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(
-      3, this->effect_value(i), output);
+      4, this->effect_value(i), output);
   }
 
-  // repeated int32 effect_rlt = 4;
+  // repeated int32 effect_rlt = 5;
   for (int i = 0; i < this->effect_rlt_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(
-      4, this->effect_rlt(i), output);
+      5, this->effect_rlt(i), output);
   }
 
-  // optional bytes key_value = 5;
+  // optional bytes key_value = 6;
   if (has_key_value()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      5, this->key_value(), output);
+      6, this->key_value(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -2141,36 +2167,41 @@ void ReqAckUseSkill::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqAckUseSkill::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required bytes skill_id = 1;
+  // required int64 user = 1;
+  if (has_user()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->user(), target);
+  }
+
+  // required bytes skill_id = 2;
   if (has_skill_id()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        1, this->skill_id(), target);
+        2, this->skill_id(), target);
   }
 
-  // repeated int64 effect_ident = 2;
+  // repeated int64 effect_ident = 3;
   for (int i = 0; i < this->effect_ident_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt64ToArray(2, this->effect_ident(i), target);
+      WriteInt64ToArray(3, this->effect_ident(i), target);
   }
 
-  // repeated int32 effect_value = 3;
+  // repeated int32 effect_value = 4;
   for (int i = 0; i < this->effect_value_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt32ToArray(3, this->effect_value(i), target);
+      WriteInt32ToArray(4, this->effect_value(i), target);
   }
 
-  // repeated int32 effect_rlt = 4;
+  // repeated int32 effect_rlt = 5;
   for (int i = 0; i < this->effect_rlt_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt32ToArray(4, this->effect_rlt(i), target);
+      WriteInt32ToArray(5, this->effect_rlt(i), target);
   }
 
-  // optional bytes key_value = 5;
+  // optional bytes key_value = 6;
   if (has_key_value()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        5, this->key_value(), target);
+        6, this->key_value(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2184,14 +2215,21 @@ int ReqAckUseSkill::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required bytes skill_id = 1;
+    // required int64 user = 1;
+    if (has_user()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->user());
+    }
+
+    // required bytes skill_id = 2;
     if (has_skill_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->skill_id());
     }
 
-    // optional bytes key_value = 5;
+    // optional bytes key_value = 6;
     if (has_key_value()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
@@ -2199,7 +2237,7 @@ int ReqAckUseSkill::ByteSize() const {
     }
 
   }
-  // repeated int64 effect_ident = 2;
+  // repeated int64 effect_ident = 3;
   {
     int data_size = 0;
     for (int i = 0; i < this->effect_ident_size(); i++) {
@@ -2209,7 +2247,7 @@ int ReqAckUseSkill::ByteSize() const {
     total_size += 1 * this->effect_ident_size() + data_size;
   }
 
-  // repeated int32 effect_value = 3;
+  // repeated int32 effect_value = 4;
   {
     int data_size = 0;
     for (int i = 0; i < this->effect_value_size(); i++) {
@@ -2219,7 +2257,7 @@ int ReqAckUseSkill::ByteSize() const {
     total_size += 1 * this->effect_value_size() + data_size;
   }
 
-  // repeated int32 effect_rlt = 4;
+  // repeated int32 effect_rlt = 5;
   {
     int data_size = 0;
     for (int i = 0; i < this->effect_rlt_size(); i++) {
@@ -2258,6 +2296,9 @@ void ReqAckUseSkill::MergeFrom(const ReqAckUseSkill& from) {
   effect_value_.MergeFrom(from.effect_value_);
   effect_rlt_.MergeFrom(from.effect_rlt_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_user()) {
+      set_user(from.user());
+    }
     if (from.has_skill_id()) {
       set_skill_id(from.skill_id());
     }
@@ -2281,13 +2322,14 @@ void ReqAckUseSkill::CopyFrom(const ReqAckUseSkill& from) {
 }
 
 bool ReqAckUseSkill::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
 
 void ReqAckUseSkill::Swap(ReqAckUseSkill* other) {
   if (other != this) {
+    std::swap(user_, other->user_);
     std::swap(skill_id_, other->skill_id_);
     effect_ident_.Swap(&other->effect_ident_);
     effect_value_.Swap(&other->effect_value_);
@@ -2311,6 +2353,7 @@ void ReqAckUseSkill::Swap(ReqAckUseSkill* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int ReqAckUseItem::kUserFieldNumber;
 const int ReqAckUseItem::kItemGuidFieldNumber;
 const int ReqAckUseItem::kEffectIdentFieldNumber;
 const int ReqAckUseItem::kEffectValueFieldNumber;
@@ -2334,6 +2377,7 @@ ReqAckUseItem::ReqAckUseItem(const ReqAckUseItem& from)
 
 void ReqAckUseItem::SharedCtor() {
   _cached_size_ = 0;
+  user_ = GOOGLE_LONGLONG(0);
   item_guid_ = GOOGLE_LONGLONG(0);
   key_value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -2374,6 +2418,7 @@ ReqAckUseItem* ReqAckUseItem::New() const {
 
 void ReqAckUseItem::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    user_ = GOOGLE_LONGLONG(0);
     item_guid_ = GOOGLE_LONGLONG(0);
     if (has_key_value()) {
       if (key_value_ != &::google::protobuf::internal::kEmptyString) {
@@ -2394,10 +2439,26 @@ bool ReqAckUseItem::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int64 item_guid = 1;
+      // required int64 user = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &user_)));
+          set_has_user();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_item_guid;
+        break;
+      }
+
+      // required int64 item_guid = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_item_guid:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
                  input, &item_guid_)));
@@ -2405,18 +2466,18 @@ bool ReqAckUseItem::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_effect_ident;
+        if (input->ExpectTag(24)) goto parse_effect_ident;
         break;
       }
 
-      // repeated int64 effect_ident = 2;
-      case 2: {
+      // repeated int64 effect_ident = 3;
+      case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_effect_ident:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 1, 16, input, this->mutable_effect_ident())));
+                 1, 24, input, this->mutable_effect_ident())));
         } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
                    == ::google::protobuf::internal::WireFormatLite::
                       WIRETYPE_LENGTH_DELIMITED) {
@@ -2426,19 +2487,19 @@ bool ReqAckUseItem::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_effect_ident;
-        if (input->ExpectTag(24)) goto parse_effect_value;
+        if (input->ExpectTag(24)) goto parse_effect_ident;
+        if (input->ExpectTag(32)) goto parse_effect_value;
         break;
       }
 
-      // repeated int32 effect_value = 3;
-      case 3: {
+      // repeated int32 effect_value = 4;
+      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_effect_value:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 1, 24, input, this->mutable_effect_value())));
+                 1, 32, input, this->mutable_effect_value())));
         } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
                    == ::google::protobuf::internal::WireFormatLite::
                       WIRETYPE_LENGTH_DELIMITED) {
@@ -2448,19 +2509,19 @@ bool ReqAckUseItem::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_effect_value;
-        if (input->ExpectTag(32)) goto parse_effect_rlt;
+        if (input->ExpectTag(32)) goto parse_effect_value;
+        if (input->ExpectTag(40)) goto parse_effect_rlt;
         break;
       }
 
-      // repeated int32 effect_rlt = 4;
-      case 4: {
+      // repeated int32 effect_rlt = 5;
+      case 5: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_effect_rlt:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 1, 32, input, this->mutable_effect_rlt())));
+                 1, 40, input, this->mutable_effect_rlt())));
         } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
                    == ::google::protobuf::internal::WireFormatLite::
                       WIRETYPE_LENGTH_DELIMITED) {
@@ -2470,13 +2531,13 @@ bool ReqAckUseItem::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(32)) goto parse_effect_rlt;
-        if (input->ExpectTag(42)) goto parse_key_value;
+        if (input->ExpectTag(40)) goto parse_effect_rlt;
+        if (input->ExpectTag(50)) goto parse_key_value;
         break;
       }
 
-      // optional bytes key_value = 5;
-      case 5: {
+      // optional bytes key_value = 6;
+      case 6: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_key_value:
@@ -2507,33 +2568,38 @@ bool ReqAckUseItem::MergePartialFromCodedStream(
 
 void ReqAckUseItem::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int64 item_guid = 1;
-  if (has_item_guid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->item_guid(), output);
+  // required int64 user = 1;
+  if (has_user()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->user(), output);
   }
 
-  // repeated int64 effect_ident = 2;
+  // required int64 item_guid = 2;
+  if (has_item_guid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->item_guid(), output);
+  }
+
+  // repeated int64 effect_ident = 3;
   for (int i = 0; i < this->effect_ident_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(
-      2, this->effect_ident(i), output);
+      3, this->effect_ident(i), output);
   }
 
-  // repeated int32 effect_value = 3;
+  // repeated int32 effect_value = 4;
   for (int i = 0; i < this->effect_value_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(
-      3, this->effect_value(i), output);
+      4, this->effect_value(i), output);
   }
 
-  // repeated int32 effect_rlt = 4;
+  // repeated int32 effect_rlt = 5;
   for (int i = 0; i < this->effect_rlt_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(
-      4, this->effect_rlt(i), output);
+      5, this->effect_rlt(i), output);
   }
 
-  // optional bytes key_value = 5;
+  // optional bytes key_value = 6;
   if (has_key_value()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      5, this->key_value(), output);
+      6, this->key_value(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -2544,34 +2610,39 @@ void ReqAckUseItem::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqAckUseItem::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int64 item_guid = 1;
-  if (has_item_guid()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->item_guid(), target);
+  // required int64 user = 1;
+  if (has_user()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->user(), target);
   }
 
-  // repeated int64 effect_ident = 2;
+  // required int64 item_guid = 2;
+  if (has_item_guid()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->item_guid(), target);
+  }
+
+  // repeated int64 effect_ident = 3;
   for (int i = 0; i < this->effect_ident_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt64ToArray(2, this->effect_ident(i), target);
+      WriteInt64ToArray(3, this->effect_ident(i), target);
   }
 
-  // repeated int32 effect_value = 3;
+  // repeated int32 effect_value = 4;
   for (int i = 0; i < this->effect_value_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt32ToArray(3, this->effect_value(i), target);
+      WriteInt32ToArray(4, this->effect_value(i), target);
   }
 
-  // repeated int32 effect_rlt = 4;
+  // repeated int32 effect_rlt = 5;
   for (int i = 0; i < this->effect_rlt_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt32ToArray(4, this->effect_rlt(i), target);
+      WriteInt32ToArray(5, this->effect_rlt(i), target);
   }
 
-  // optional bytes key_value = 5;
+  // optional bytes key_value = 6;
   if (has_key_value()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        5, this->key_value(), target);
+        6, this->key_value(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2585,14 +2656,21 @@ int ReqAckUseItem::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int64 item_guid = 1;
+    // required int64 user = 1;
+    if (has_user()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->user());
+    }
+
+    // required int64 item_guid = 2;
     if (has_item_guid()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int64Size(
           this->item_guid());
     }
 
-    // optional bytes key_value = 5;
+    // optional bytes key_value = 6;
     if (has_key_value()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
@@ -2600,7 +2678,7 @@ int ReqAckUseItem::ByteSize() const {
     }
 
   }
-  // repeated int64 effect_ident = 2;
+  // repeated int64 effect_ident = 3;
   {
     int data_size = 0;
     for (int i = 0; i < this->effect_ident_size(); i++) {
@@ -2610,7 +2688,7 @@ int ReqAckUseItem::ByteSize() const {
     total_size += 1 * this->effect_ident_size() + data_size;
   }
 
-  // repeated int32 effect_value = 3;
+  // repeated int32 effect_value = 4;
   {
     int data_size = 0;
     for (int i = 0; i < this->effect_value_size(); i++) {
@@ -2620,7 +2698,7 @@ int ReqAckUseItem::ByteSize() const {
     total_size += 1 * this->effect_value_size() + data_size;
   }
 
-  // repeated int32 effect_rlt = 4;
+  // repeated int32 effect_rlt = 5;
   {
     int data_size = 0;
     for (int i = 0; i < this->effect_rlt_size(); i++) {
@@ -2659,6 +2737,9 @@ void ReqAckUseItem::MergeFrom(const ReqAckUseItem& from) {
   effect_value_.MergeFrom(from.effect_value_);
   effect_rlt_.MergeFrom(from.effect_rlt_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_user()) {
+      set_user(from.user());
+    }
     if (from.has_item_guid()) {
       set_item_guid(from.item_guid());
     }
@@ -2682,13 +2763,14 @@ void ReqAckUseItem::CopyFrom(const ReqAckUseItem& from) {
 }
 
 bool ReqAckUseItem::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
 
 void ReqAckUseItem::Swap(ReqAckUseItem* other) {
   if (other != this) {
+    std::swap(user_, other->user_);
     std::swap(item_guid_, other->item_guid_);
     effect_ident_.Swap(&other->effect_ident_);
     effect_value_.Swap(&other->effect_value_);
