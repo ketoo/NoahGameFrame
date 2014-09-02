@@ -22,7 +22,7 @@
 #include <vector>
 #include "boost/mpl/size_t_fwd.hpp"
 #include <boost/lexical_cast.hpp>
-#include "../mono/utils/mono-publib.h"
+//#include "../mono/utils/mono-publib.h"
 
 class MemoryInfo  
 {  

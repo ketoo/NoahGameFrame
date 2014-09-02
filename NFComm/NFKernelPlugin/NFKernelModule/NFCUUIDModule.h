@@ -10,6 +10,9 @@
 #define _NFC_UUID_MODULE_H_
 
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
+#include <boost/functional/hash.hpp>
+#include <boost/format.hpp>
+#include <boost/crc.hpp>
 
 namespace UUIDModule
 {
@@ -33,6 +36,7 @@ public:
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
 
     virtual int64_t CreateGUID();
+    virtual int64_t CreateGUID(const std::string& strName);
 
 private:
     UUIDModule::UUID* m_pUUID;

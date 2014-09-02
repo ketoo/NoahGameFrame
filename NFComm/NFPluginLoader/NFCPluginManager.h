@@ -27,6 +27,8 @@ public:
 
     virtual bool AfterInit();
 
+    virtual bool CheckConfig();
+
     virtual bool BeforeShut();
 
     virtual bool Shut();
@@ -37,9 +39,9 @@ public:
 
     // virtual bool UnLoadPlugin();
 
-    virtual void Registered(NFIPlugin* plugin);
+    virtual void Registered(NFIPlugin* pPlugin);
 
-    virtual void UnsRegistered(NFIPlugin* plugin);
+    virtual void UnsRegistered(NFIPlugin* pPlugin);
 
 	virtual bool ReInitialize();
     //////////////////////////////////////////////////////////////////////////

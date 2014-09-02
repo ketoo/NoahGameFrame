@@ -22,6 +22,8 @@ public:
         mstrLanguageName = strLanguageName;
     }
 
+    virtual ~NFCComponent() {}
+
     virtual bool SetEnable(const bool bEnable);
 
     virtual bool Enable();
