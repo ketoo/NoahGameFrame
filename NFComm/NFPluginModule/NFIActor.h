@@ -32,6 +32,7 @@ public:
         EACTOR_UNKNOW,
 		EACTOR_INIT,
 		EACTOR_AFTER_INIT,
+        EACTOR_CHECKCONFIG,
 		EACTOR_EXCUTE,
 		EACTOR_BEFORE_SHUT,
 		EACTOR_SHUT,
@@ -83,6 +84,12 @@ private:
 				AfterInit();
 				Send(message, from);
 			}
+            break;
+        case NFIActorMessage::EACTOR_CHECKCONFIG:
+            {
+                CheckConfig();
+                Send(message, from);
+            }
             break;
 
         case NFIActorMessage::EACTOR_EXCUTE:

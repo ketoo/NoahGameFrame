@@ -59,7 +59,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN;_DEBUG;_WINDOWS;_USRDLL;THERON_CPP11</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(NF_HOME);$(NF_HOME)\Dependencies\;$(NF_HOME)\Dependencies\boost_1_53_0\;$(NF_HOME)\Dependencies\libevent-2.0.21-stable\;$(NF_HOME)\Dependencies\libevent-2.0.21-stable\include\;$(NF_HOME)\Dependencies\libevent-2.0.21-stable\WIN32-Code\;$(NF_HOME)\Dependencies\libevent-2.0.21-stable\compat\;$(NF_HOME)\Dependencies\protobuf-2.5.0\src\;$(NF_HOME)\Dependencies\Theron-6.00.01\Include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\boost_1_53_0\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\include\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\WIN32-Code\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\compat\;$(SolutionDir)\Dependencies\protobuf-2.5.0\src\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -69,8 +69,8 @@
       <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y $(NF_HOME)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName)_d.dll
-copy /y $(NF_HOME)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName)_d.pdb</Command>
+      <Command>copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName)_d.dll
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName)_d.pdb</Command>
     </PostBuildEvent>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>

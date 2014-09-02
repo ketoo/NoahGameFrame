@@ -237,7 +237,11 @@ bool NFCGridModule::Final()
     TMAP_GRID_INFO::iterator it = mtGridInfoMap.begin();
     for (it; it != mtGridInfoMap.end(); it++)
     {
-        delete it->second;
+        if (NULL != it->second)
+        {
+            delete it->second;
+            it->second = NULL;
+        }
     }
 
     mtGridInfoMap.clear();
