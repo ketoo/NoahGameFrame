@@ -691,10 +691,17 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required bytes skill_id = 1;
+  // required int64 user = 1;
+  inline bool has_user() const;
+  inline void clear_user();
+  static const int kUserFieldNumber = 1;
+  inline ::google::protobuf::int64 user() const;
+  inline void set_user(::google::protobuf::int64 value);
+
+  // required bytes skill_id = 2;
   inline bool has_skill_id() const;
   inline void clear_skill_id();
-  static const int kSkillIdFieldNumber = 1;
+  static const int kSkillIdFieldNumber = 2;
   inline const ::std::string& skill_id() const;
   inline void set_skill_id(const ::std::string& value);
   inline void set_skill_id(const char* value);
@@ -703,10 +710,10 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
   inline ::std::string* release_skill_id();
   inline void set_allocated_skill_id(::std::string* skill_id);
 
-  // repeated int64 effect_ident = 2;
+  // repeated int64 effect_ident = 3;
   inline int effect_ident_size() const;
   inline void clear_effect_ident();
-  static const int kEffectIdentFieldNumber = 2;
+  static const int kEffectIdentFieldNumber = 3;
   inline ::google::protobuf::int64 effect_ident(int index) const;
   inline void set_effect_ident(int index, ::google::protobuf::int64 value);
   inline void add_effect_ident(::google::protobuf::int64 value);
@@ -715,10 +722,10 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
       mutable_effect_ident();
 
-  // repeated int32 effect_value = 3;
+  // repeated int32 effect_value = 4;
   inline int effect_value_size() const;
   inline void clear_effect_value();
-  static const int kEffectValueFieldNumber = 3;
+  static const int kEffectValueFieldNumber = 4;
   inline ::google::protobuf::int32 effect_value(int index) const;
   inline void set_effect_value(int index, ::google::protobuf::int32 value);
   inline void add_effect_value(::google::protobuf::int32 value);
@@ -727,10 +734,10 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_effect_value();
 
-  // repeated int32 effect_rlt = 4;
+  // repeated int32 effect_rlt = 5;
   inline int effect_rlt_size() const;
   inline void clear_effect_rlt();
-  static const int kEffectRltFieldNumber = 4;
+  static const int kEffectRltFieldNumber = 5;
   inline ::google::protobuf::int32 effect_rlt(int index) const;
   inline void set_effect_rlt(int index, ::google::protobuf::int32 value);
   inline void add_effect_rlt(::google::protobuf::int32 value);
@@ -739,10 +746,10 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_effect_rlt();
 
-  // optional bytes key_value = 5;
+  // optional bytes key_value = 6;
   inline bool has_key_value() const;
   inline void clear_key_value();
-  static const int kKeyValueFieldNumber = 5;
+  static const int kKeyValueFieldNumber = 6;
   inline const ::std::string& key_value() const;
   inline void set_key_value(const ::std::string& value);
   inline void set_key_value(const char* value);
@@ -753,6 +760,8 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckUseSkill)
  private:
+  inline void set_has_user();
+  inline void clear_has_user();
   inline void set_has_skill_id();
   inline void clear_has_skill_id();
   inline void set_has_key_value();
@@ -760,6 +769,7 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::google::protobuf::int64 user_;
   ::std::string* skill_id_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int64 > effect_ident_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > effect_value_;
@@ -767,7 +777,7 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
   ::std::string* key_value_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -832,17 +842,24 @@ class ReqAckUseItem : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 item_guid = 1;
+  // required int64 user = 1;
+  inline bool has_user() const;
+  inline void clear_user();
+  static const int kUserFieldNumber = 1;
+  inline ::google::protobuf::int64 user() const;
+  inline void set_user(::google::protobuf::int64 value);
+
+  // required int64 item_guid = 2;
   inline bool has_item_guid() const;
   inline void clear_item_guid();
-  static const int kItemGuidFieldNumber = 1;
+  static const int kItemGuidFieldNumber = 2;
   inline ::google::protobuf::int64 item_guid() const;
   inline void set_item_guid(::google::protobuf::int64 value);
 
-  // repeated int64 effect_ident = 2;
+  // repeated int64 effect_ident = 3;
   inline int effect_ident_size() const;
   inline void clear_effect_ident();
-  static const int kEffectIdentFieldNumber = 2;
+  static const int kEffectIdentFieldNumber = 3;
   inline ::google::protobuf::int64 effect_ident(int index) const;
   inline void set_effect_ident(int index, ::google::protobuf::int64 value);
   inline void add_effect_ident(::google::protobuf::int64 value);
@@ -851,10 +868,10 @@ class ReqAckUseItem : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
       mutable_effect_ident();
 
-  // repeated int32 effect_value = 3;
+  // repeated int32 effect_value = 4;
   inline int effect_value_size() const;
   inline void clear_effect_value();
-  static const int kEffectValueFieldNumber = 3;
+  static const int kEffectValueFieldNumber = 4;
   inline ::google::protobuf::int32 effect_value(int index) const;
   inline void set_effect_value(int index, ::google::protobuf::int32 value);
   inline void add_effect_value(::google::protobuf::int32 value);
@@ -863,10 +880,10 @@ class ReqAckUseItem : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_effect_value();
 
-  // repeated int32 effect_rlt = 4;
+  // repeated int32 effect_rlt = 5;
   inline int effect_rlt_size() const;
   inline void clear_effect_rlt();
-  static const int kEffectRltFieldNumber = 4;
+  static const int kEffectRltFieldNumber = 5;
   inline ::google::protobuf::int32 effect_rlt(int index) const;
   inline void set_effect_rlt(int index, ::google::protobuf::int32 value);
   inline void add_effect_rlt(::google::protobuf::int32 value);
@@ -875,10 +892,10 @@ class ReqAckUseItem : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_effect_rlt();
 
-  // optional bytes key_value = 5;
+  // optional bytes key_value = 6;
   inline bool has_key_value() const;
   inline void clear_key_value();
-  static const int kKeyValueFieldNumber = 5;
+  static const int kKeyValueFieldNumber = 6;
   inline const ::std::string& key_value() const;
   inline void set_key_value(const ::std::string& value);
   inline void set_key_value(const char* value);
@@ -889,6 +906,8 @@ class ReqAckUseItem : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckUseItem)
  private:
+  inline void set_has_user();
+  inline void clear_has_user();
   inline void set_has_item_guid();
   inline void clear_has_item_guid();
   inline void set_has_key_value();
@@ -896,6 +915,7 @@ class ReqAckUseItem : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::google::protobuf::int64 user_;
   ::google::protobuf::int64 item_guid_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int64 > effect_ident_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > effect_value_;
@@ -903,7 +923,7 @@ class ReqAckUseItem : public ::google::protobuf::Message {
   ::std::string* key_value_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -2148,15 +2168,37 @@ inline void ReqAckPlayerChat::set_allocated_chat_info(::std::string* chat_info) 
 
 // ReqAckUseSkill
 
-// required bytes skill_id = 1;
-inline bool ReqAckUseSkill::has_skill_id() const {
+// required int64 user = 1;
+inline bool ReqAckUseSkill::has_user() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqAckUseSkill::set_has_skill_id() {
+inline void ReqAckUseSkill::set_has_user() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqAckUseSkill::clear_has_skill_id() {
+inline void ReqAckUseSkill::clear_has_user() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckUseSkill::clear_user() {
+  user_ = GOOGLE_LONGLONG(0);
+  clear_has_user();
+}
+inline ::google::protobuf::int64 ReqAckUseSkill::user() const {
+  return user_;
+}
+inline void ReqAckUseSkill::set_user(::google::protobuf::int64 value) {
+  set_has_user();
+  user_ = value;
+}
+
+// required bytes skill_id = 2;
+inline bool ReqAckUseSkill::has_skill_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckUseSkill::set_has_skill_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckUseSkill::clear_has_skill_id() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqAckUseSkill::clear_skill_id() {
   if (skill_id_ != &::google::protobuf::internal::kEmptyString) {
@@ -2218,7 +2260,7 @@ inline void ReqAckUseSkill::set_allocated_skill_id(::std::string* skill_id) {
   }
 }
 
-// repeated int64 effect_ident = 2;
+// repeated int64 effect_ident = 3;
 inline int ReqAckUseSkill::effect_ident_size() const {
   return effect_ident_.size();
 }
@@ -2243,7 +2285,7 @@ ReqAckUseSkill::mutable_effect_ident() {
   return &effect_ident_;
 }
 
-// repeated int32 effect_value = 3;
+// repeated int32 effect_value = 4;
 inline int ReqAckUseSkill::effect_value_size() const {
   return effect_value_.size();
 }
@@ -2268,7 +2310,7 @@ ReqAckUseSkill::mutable_effect_value() {
   return &effect_value_;
 }
 
-// repeated int32 effect_rlt = 4;
+// repeated int32 effect_rlt = 5;
 inline int ReqAckUseSkill::effect_rlt_size() const {
   return effect_rlt_.size();
 }
@@ -2293,15 +2335,15 @@ ReqAckUseSkill::mutable_effect_rlt() {
   return &effect_rlt_;
 }
 
-// optional bytes key_value = 5;
+// optional bytes key_value = 6;
 inline bool ReqAckUseSkill::has_key_value() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void ReqAckUseSkill::set_has_key_value() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000020u;
 }
 inline void ReqAckUseSkill::clear_has_key_value() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void ReqAckUseSkill::clear_key_value() {
   if (key_value_ != &::google::protobuf::internal::kEmptyString) {
@@ -2367,15 +2409,37 @@ inline void ReqAckUseSkill::set_allocated_key_value(::std::string* key_value) {
 
 // ReqAckUseItem
 
-// required int64 item_guid = 1;
-inline bool ReqAckUseItem::has_item_guid() const {
+// required int64 user = 1;
+inline bool ReqAckUseItem::has_user() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqAckUseItem::set_has_item_guid() {
+inline void ReqAckUseItem::set_has_user() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqAckUseItem::clear_has_item_guid() {
+inline void ReqAckUseItem::clear_has_user() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckUseItem::clear_user() {
+  user_ = GOOGLE_LONGLONG(0);
+  clear_has_user();
+}
+inline ::google::protobuf::int64 ReqAckUseItem::user() const {
+  return user_;
+}
+inline void ReqAckUseItem::set_user(::google::protobuf::int64 value) {
+  set_has_user();
+  user_ = value;
+}
+
+// required int64 item_guid = 2;
+inline bool ReqAckUseItem::has_item_guid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckUseItem::set_has_item_guid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckUseItem::clear_has_item_guid() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqAckUseItem::clear_item_guid() {
   item_guid_ = GOOGLE_LONGLONG(0);
@@ -2389,7 +2453,7 @@ inline void ReqAckUseItem::set_item_guid(::google::protobuf::int64 value) {
   item_guid_ = value;
 }
 
-// repeated int64 effect_ident = 2;
+// repeated int64 effect_ident = 3;
 inline int ReqAckUseItem::effect_ident_size() const {
   return effect_ident_.size();
 }
@@ -2414,7 +2478,7 @@ ReqAckUseItem::mutable_effect_ident() {
   return &effect_ident_;
 }
 
-// repeated int32 effect_value = 3;
+// repeated int32 effect_value = 4;
 inline int ReqAckUseItem::effect_value_size() const {
   return effect_value_.size();
 }
@@ -2439,7 +2503,7 @@ ReqAckUseItem::mutable_effect_value() {
   return &effect_value_;
 }
 
-// repeated int32 effect_rlt = 4;
+// repeated int32 effect_rlt = 5;
 inline int ReqAckUseItem::effect_rlt_size() const {
   return effect_rlt_.size();
 }
@@ -2464,15 +2528,15 @@ ReqAckUseItem::mutable_effect_rlt() {
   return &effect_rlt_;
 }
 
-// optional bytes key_value = 5;
+// optional bytes key_value = 6;
 inline bool ReqAckUseItem::has_key_value() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void ReqAckUseItem::set_has_key_value() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000020u;
 }
 inline void ReqAckUseItem::clear_has_key_value() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void ReqAckUseItem::clear_key_value() {
   if (key_value_ != &::google::protobuf::internal::kEmptyString) {

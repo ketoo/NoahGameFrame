@@ -38,7 +38,11 @@ public:
         self = 0;
     };
 
-    ~NFCHeartBeatElement() {};
+    virtual ~NFCHeartBeatElement()
+    {
+        var.Clear();
+    }
+
     void DoHeartBeatEvent();
 
     float fBeatTime;

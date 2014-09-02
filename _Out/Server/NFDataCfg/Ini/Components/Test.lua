@@ -59,8 +59,8 @@ function Test:Shut(kernel, self, arg)
 end
 
 function Test:MaxPropertyCallBack(kernel, self, propertyName, oldVar, newVar, arg)
-	local nOldVar = oldVar:IntVal(0);
-	local nNewVar = newVar:IntVal(0);
+	local nOldVar = oldVar:Int(0);
+	local nNewVar = newVar:Int(0);
 
 	local obj = NFCVarList();
 	io.write("Hello Lua MaxPropertyCallBack oldVar:".. nOldVar .." newVar:" .. nNewVar .. "\n");
@@ -68,15 +68,15 @@ end
 
 function Test:TaskListCallBack(kernel, self, recordName, nOpType, nRow, nCol, oldVar, newVar, arg)
 	if nCol == 0 then
-		local nOldVar = oldVar:StringVal(0);
-		local nNewVar = newVar:StringVal(0);
+		local nOldVar = oldVar:String(0);
+		local nNewVar = newVar:String(0);
 
 		io.write("Hello Lua TaskListCallBack nOpType:".. nOpType.. " oldVar:".. nOldVar .." newVar:" .. nNewVar .. "\n");
 	end
 	
 	if nCol == 1 then
-		local nOldVar = oldVar:IntVal(0);
-		local nNewVar = newVar:IntVal(0);
+		local nOldVar = oldVar:Int(0);
+		local nNewVar = newVar:Int(0);
 
 		io.write("Hello Lua TaskListCallBack nOpType:".. nOpType.. " oldVar:".. nOldVar .." newVar:" .. nNewVar .. "\n");
 	end
@@ -85,11 +85,11 @@ end
 
 function Test:EventCallBack(kernel, self, nEventID, arg)
 	
-	local nValue =arg:IntVal(0);
-	local fValue =arg:FloatVal(1);
-	local strValue =arg:StringVal(2);
+	local nValue =arg:Int(0);
+	local fValue =arg:Float(1);
+	local strValue =arg:String(2);
 	
-	local n64Value =arg:ObjectVal(3);	
+	local n64Value =arg:Object(3);	
 	local nIdent = n64Value:GetIdent();
 	local nSerial = n64Value:GetnSerial();
 	

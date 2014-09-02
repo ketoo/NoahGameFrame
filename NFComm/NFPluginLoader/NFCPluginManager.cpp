@@ -101,6 +101,7 @@ void NFCPluginManager::Registered(NFIPlugin* plugin)
             plugin->Install();
         }
     }
+
 }
 
 void NFCPluginManager::UnsRegistered(NFIPlugin* plugin)
@@ -109,8 +110,9 @@ void NFCPluginManager::UnsRegistered(NFIPlugin* plugin)
     if (it != mPluginInstanceMap.end())
     {
         it->second->Uninstall();
-        delete it->second;
+		delete it->second;
         it->second = NULL;
+        mPluginInstanceMap.erase(it);
     }
 }
 
@@ -215,6 +217,17 @@ bool NFCPluginManager::AfterInit()
     return true;
 }
 
+bool NFCPluginManager::CheckConfig()
+{
+    PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
+    for (itCheckInstance; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
+    {
+        itCheckInstance->second->CheckConfig();
+    }
+
+    return true;
+}
+
 bool NFCPluginManager::BeforeShut()
 {
     PluginInstanceMap::iterator itBeforeInstance = mPluginInstanceMap.begin();
@@ -228,6 +241,8 @@ bool NFCPluginManager::BeforeShut()
 
 bool NFCPluginManager::Shut()
 {
+
+
     PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
     for (itInstance; itInstance != mPluginInstanceMap.end(); ++itInstance)
     {
@@ -242,6 +257,7 @@ bool NFCPluginManager::Shut()
         UnLoadPluginLibrary(it->first);
     }
 
+
 #else
 
     //     DESTROY_PLUGIN(this, NFConfigPlugin)
@@ -249,10 +265,9 @@ bool NFCPluginManager::Shut()
     //     DESTROY_PLUGIN(this, NFKernelPlugin)
 
 #endif
-    mPluginInstanceMap.clear();
-    mPluginNameMap.clear();
-
-    return true;
+	mPluginInstanceMap.clear();
+    mPluginNameMap.clear();    
+	return true;
 }
 
 bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
@@ -300,7 +315,6 @@ bool NFCPluginManager::UnLoadPluginLibrary(const std::string& strPluginDLLName)
 
         delete pLib;
         pLib = NULL;
-
         mPluginLibMap.erase(it);
 
         return true;
@@ -333,6 +347,12 @@ bool NFCPluginManager::ReInitialize()
     for ( ; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++ )
     {
         itAfterInstance->second->AfterInit();
+    }
+
+    PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
+    for (itCheckInstance; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
+    {
+        itCheckInstance->second->CheckConfig();
     }
 
     return true;

@@ -40,6 +40,11 @@ public:
         return true;
     }
 
+    virtual bool CheckConfig()
+    {
+        return true;
+    }
+
     virtual bool BeforeShut()
     {
         return true;
