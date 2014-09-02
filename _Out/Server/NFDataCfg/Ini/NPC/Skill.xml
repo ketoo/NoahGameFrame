@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--this is config xml-->
 <XML>
-    <Object ID="Skill_1" Name="skill1" NeedLevel="5" NeedMoney="300" NextLevelID="Skill_2"/>
-    <Object ID="Skill_2" Name="skill2" NeedLevel="5" NeedMoney="600" NextLevelID=""/>
+    <Object AnimaState="60" ID="NormalAtk1" Name="skill1" NeedLevel="5" NeedMoney="300" NextLevelID="NormalAtk2" ShowName="" SkillType="0"/>
+    <Object AnimaState="61" ID="NormalAtk2" Name="skill1" NeedLevel="5" NeedMoney="300" NextLevelID="NormalAtk3" ShowName="" SkillType="0"/>
+    <Object AnimaState="62" ID="NormalAtk3" Name="skill1" NeedLevel="5" NeedMoney="300" NextLevelID="NormalThump" ShowName="" SkillType="0"/>
+    <Object AnimaState="63" ID="NormalThump" Name="skill1" NeedLevel="5" NeedMoney="300" NextLevelID="Skill5" ShowName="" SkillType="0"/>
+    <Object AnimaState="100" ID="Skill5" Name="skill1" NeedLevel="5" NeedMoney="300" NextLevelID="" ShowName="" SkillType="0"/>
 </XML>
