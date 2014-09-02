@@ -16,6 +16,8 @@ class NFIUUIDModule
 {
 public:
     virtual int64_t CreateGUID() = 0;
+    virtual int64_t CreateGUID(const std::string& strName) = 0;
+
 };
 
 #endif // !_NFI_UUID_MODULE_H_

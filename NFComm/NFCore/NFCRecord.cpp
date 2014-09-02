@@ -163,8 +163,46 @@ bool ValidAdd(TDATA_TYPE eType, const NFIDataList::TData& var, std::shared_ptr<N
         return false;
     }
 
-    pVar->variantData = var.variantData;
+    if (pVar->variantData == var.variantData)
+    {
+        return false;
+    }
+
+    //pVar->variantData = var.variantData;
    
+    return true;
+}
+
+bool ValidSet(TDATA_TYPE eType, const NFIDataList::TData& var, std::shared_ptr<NFIDataList::TData>& pVar)
+{
+    if (var.nType != eType)
+    {
+        return false;
+    }
+
+    if (!pVar.get())
+    {
+        if (!NFIDataList::Valid(var))
+        {
+            return false;
+        }
+
+        pVar = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
+        pVar->nType = eType;
+    }
+
+    if (pVar->nType != eType)
+    {
+        return false;
+    }
+
+    if (pVar->variantData == var.variantData)
+    {
+        return false;
+    }
+
+    pVar->variantData = var.variantData;
+
     return true;
 }
 
@@ -215,7 +253,7 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
         for (int i = 0; i < GetCols(); ++i)
         {
             std::shared_ptr<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nFindRow, i));//GetTData(nFindRow, i);
-            if(!ValidAdd(GetColType(i), *var.GetStackConst(i), pVar))
+            if(!ValidSet(GetColType(i), *var.GetStackConst(i), pVar))
             {
                 //添加失败--不存在这样的情况，因为类型上面已经监测过，如果返回的话，那么添加的数据是0的话就会返回，导致结果错误
 //                 mVecUsedState[nFindRow] = 0;

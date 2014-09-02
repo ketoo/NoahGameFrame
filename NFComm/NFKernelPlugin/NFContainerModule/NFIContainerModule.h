@@ -12,7 +12,7 @@
 #include <list>
 #include <iostream>
 #include <algorithm>
-#include "../NFGridModule/NFCGridModule.h"
+#include "NFComm/NFKernelPlugin/NFGridModule/NFCGridModule.h"
 #include "NFComm/NFCore/NFIdentID.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFList.h"
@@ -53,8 +53,6 @@ public:
 
 private:
     NFIGridModule* m_pGridModule;
-
-
 };
 
 // all group in this scene
@@ -67,6 +65,18 @@ public:
         mnGroupIndex = 0;
         mnSceneID = nSceneID;
         mnWidth = nWidth;
+    }
+
+    virtual ~NFCContainerInfo()
+    {
+        NFCContainerGroupInfo* pInfo = First();
+        while (pInfo)
+        {
+            delete pInfo;
+            pInfo = NULL;
+
+            pInfo = Next();
+        }
     }
 
     int NewGroupID()
@@ -134,6 +144,17 @@ class NFIContainerModule
     : public NFMap<int, NFCContainerInfo>
 {
 public:
+    virtual ~NFIContainerModule()
+    {
+        NFCContainerInfo* pInfo = First();
+        while (pInfo)
+        {
+            delete pInfo;
+            pInfo = NULL;
+
+            pInfo = Next();
+        }
+    }
 
 protected:
 private:

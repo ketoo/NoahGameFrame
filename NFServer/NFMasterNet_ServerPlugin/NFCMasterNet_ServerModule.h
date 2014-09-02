@@ -77,6 +77,7 @@ private:
             pData = new NFMsg::ServerInfoReport();
             nFD = 0;
         }
+
         ~ServerData()
         {
             nFD = 0;

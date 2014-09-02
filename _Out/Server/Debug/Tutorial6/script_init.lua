@@ -73,10 +73,10 @@
 -- Var:SetFloat(index, fValue)
 -- Var:SetString(index, strValue)
 -- Var:SetObject(index, n64Value)
--- Var:IntVal(index)
--- Var:FloatVal(index)
--- Var:StringVal(index)
--- Var:ObjectVal(index)
+-- Var:Int(index)
+-- Var:Float(index)
+-- Var:String(index)
+-- Var:Object(index)
 
 -- local n64Var = NFINT64();
 -- n64Var:GetIdent()

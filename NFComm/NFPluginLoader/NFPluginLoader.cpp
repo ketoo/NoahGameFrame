@@ -124,6 +124,7 @@ int main()
 
 	NFCActorManager::GetSingletonPtr()->Init();
 	NFCActorManager::GetSingletonPtr()->AfterInit();
+    NFCActorManager::GetSingletonPtr()->CheckConfig();
 
     PrintfLogo();
 
