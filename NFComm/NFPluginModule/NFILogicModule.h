@@ -44,6 +44,11 @@ public:
         return true;
     }
 
+    virtual bool CheckConfig()
+    {
+        return true;
+    }
+
     virtual bool BeforeShut()
     {
         return true;
@@ -66,12 +71,7 @@ public:
 
 		Init();
 		AfterInit();
-    }
-
-    virtual void OnCheckConfig()
-	{
-
-	}
+    }    
 
     std::string strName;
     bool  bCanReload;
