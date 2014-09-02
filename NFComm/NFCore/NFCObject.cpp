@@ -36,17 +36,17 @@ NFCObject::~NFCObject()
         delete m_pPropertyManager;
         m_pPropertyManager = NULL;
     }
-    
-    if (NULL != m_pRecordManager)
-    {
-        delete m_pRecordManager;
-        m_pRecordManager = NULL;
-    }
-    
+
     if (NULL != m_pHeartBeatManager)
     {
         delete m_pHeartBeatManager;
         m_pHeartBeatManager = NULL;
+    }
+
+    if (NULL != m_pRecordManager)
+    {
+        delete m_pRecordManager;
+        m_pRecordManager = NULL;
     }
 }
 
@@ -57,7 +57,6 @@ bool NFCObject::Init()
 
 bool NFCObject::Shut()
 {
-
     return true;
 }
 
@@ -126,9 +125,7 @@ bool NFCObject::SetPropertyInt(const std::string& strPropertyName, const int nVa
     NFIProperty* pProperty = GetPropertyManager()->GetElement(strPropertyName);
     if (pProperty)
     {
-        pProperty->SetInt(nValue);
-
-        return true;
+        return pProperty->SetInt(nValue);
     }
 
     return false;
@@ -139,11 +136,8 @@ bool NFCObject::SetPropertyFloat(const std::string& strPropertyName,  const floa
     NFIProperty* pProperty = GetPropertyManager()->GetElement(strPropertyName);
     if (pProperty)
     {
-        pProperty->SetFloat(fValue);
-
-        return true;
+        return pProperty->SetFloat(fValue);
     }
-
 
     return false;
 }
@@ -153,11 +147,8 @@ bool NFCObject::SetPropertyDouble(const std::string& strPropertyName, const doub
     NFIProperty* pProperty = GetPropertyManager()->GetElement(strPropertyName);
     if (pProperty)
     {
-        pProperty->SetDouble(dwValue);
-
-        return true;
+        return pProperty->SetDouble(dwValue);
     }
-
 
     return false;
 }
@@ -167,9 +158,7 @@ bool NFCObject::SetPropertyString(const std::string& strPropertyName, const std:
     NFIProperty* pProperty = GetPropertyManager()->GetElement(strPropertyName);
     if (pProperty)
     {
-        pProperty->SetString(strValue);
-
-        return true;
+        return pProperty->SetString(strValue);
     }
 
     return false;
@@ -180,9 +169,7 @@ bool NFCObject::SetPropertyObject(const std::string& strPropertyName, const NFID
     NFIProperty* pProperty = GetPropertyManager()->GetElement(strPropertyName);
     if (pProperty)
     {
-        pProperty->SetObject(obj);
-
-        return true;
+        return pProperty->SetObject(obj);
     }
 
     return false;
@@ -193,7 +180,6 @@ int NFCObject::GetPropertyInt(const std::string& strPropertyName)
     NFIProperty* pProperty = GetPropertyManager()->GetElement(strPropertyName);
     if (pProperty)
     {
-
         return pProperty->GetInt();
     }
 
@@ -205,7 +191,6 @@ float NFCObject::GetPropertyFloat(const std::string& strPropertyName)
     NFIProperty* pProperty = GetPropertyManager()->GetElement(strPropertyName);
     if (pProperty)
     {
-
         return pProperty->GetFloat();
     }
 
@@ -217,7 +202,6 @@ double NFCObject::GetPropertyDouble(const std::string& strPropertyName)
     NFIProperty* pProperty = GetPropertyManager()->GetElement(strPropertyName);
     if (pProperty)
     {
-
         return pProperty->GetDouble();
     }
 

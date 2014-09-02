@@ -15,9 +15,6 @@
     <ClInclude Include="NFCRecord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFCValueList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NFDefine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -28,9 +25,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NFIRecord.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NFIValueList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NFPlatform.h">
@@ -90,13 +84,16 @@
     <ClInclude Include="NFCObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NFCDataList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NFIDataList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFCore.cpp" />
     <ClCompile Include="NFCRecord.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCValueList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NFCRecordManager.cpp">
@@ -121,6 +118,9 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="NFCObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCDataList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

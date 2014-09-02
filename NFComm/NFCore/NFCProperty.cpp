@@ -217,15 +217,15 @@ NFIDENTID NFCProperty::GetObject() const
 
 void* NFCProperty::GetPointer() const
 {
-    if (!m_pTData.get())
-    {
-        return NULL;
-    }
+    //if (!m_pTData.get())
+    //{
+    //    return NULL;
+    //}
 
-    if (TDATA_POINTER == m_pTData->nType)
-    {
-        return boost::get<void*>(m_pTData->variantData);
-    }
+    //if (TDATA_POINTER == m_pTData->nType)
+    //{
+    //    return boost::get<void*>(m_pTData->variantData);
+    //}
 
     return NULL;
 }
@@ -494,47 +494,47 @@ bool NFCProperty::SetObject(const NFIDENTID& value)
 
 bool NFCProperty::SetPointer(void* value)
 {
-    if (eType != TDATA_POINTER)
-    {
-        return false;
-    }
+    //if (eType != TDATA_POINTER)
+    //{
+    //    return false;
+    //}
 
-    NFIDataList::TData TData;
-    TData.variantData = value;
-    TData.nType = TDATA_POINTER;
+    //NFIDataList::TData TData;
+    //TData.variantData = value;
+    //TData.nType = TDATA_POINTER;
 
-    if (!m_pTData.get())
-    {
-        //本身是空就是因为没数据，还来个没数据的就不存了
-        if (!NFIDataList::Valid(TData))
-        {
-            return false;
-        }
+    //if (!m_pTData.get())
+    //{
+    //    //本身是空就是因为没数据，还来个没数据的就不存了
+    //    if (!NFIDataList::Valid(TData))
+    //    {
+    //        return false;
+    //    }
 
-        m_pTData = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
-        m_pTData->nType = TDATA_POINTER;
-        m_pTData->variantData = (void*)NULL;
-    }
+    //    m_pTData = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
+    //    m_pTData->nType = TDATA_POINTER;
+    //    m_pTData->variantData = (void*)NULL;
+    //}
 
-    if (TData.variantData == m_pTData->variantData)
-    {
-        return false;
-    }
+    //if (TData.variantData == m_pTData->variantData)
+    //{
+    //    return false;
+    //}
 
-    if (TDATA_POINTER == m_pTData->nType)
-    {
-        NFCDataList oldValue;
-        oldValue.Append(*m_pTData);
+    //if (TDATA_POINTER == m_pTData->nType)
+    //{
+    //    NFCDataList oldValue;
+    //    oldValue.Append(*m_pTData);
 
-        m_pTData->variantData = value;
+    //    m_pTData->variantData = value;
 
-        NFCDataList newValue;
-        newValue.Append(*m_pTData);
+    //    NFCDataList newValue;
+    //    newValue.Append(*m_pTData);
 
-        OnEventHandler(oldValue , newValue);
+    //    OnEventHandler(oldValue , newValue);
 
-        return true;
-    }
+    //    return true;
+    //}
 
     return false;
 }

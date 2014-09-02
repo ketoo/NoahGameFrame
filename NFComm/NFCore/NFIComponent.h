@@ -15,6 +15,7 @@
 class NFIComponent : public NFILogicModule
 {
 public:
+    virtual ~NFIComponent() {}
     virtual bool SetEnable(const bool bEnable) = 0;
 
     virtual bool Enable() = 0;

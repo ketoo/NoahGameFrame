@@ -63,10 +63,22 @@ public:
         while (pModule)
         {
             pModule->AfterInit();
-            pModule->OnCheckConfig();
 
             pModule = Next();
         }
+        return true;
+    }
+
+    virtual bool CheckConfig()
+    {
+        NFILogicModule* pModule = First();
+        while (pModule)
+        {
+            pModule->CheckConfig();
+
+            pModule = Next();
+        }
+
         return true;
     }
 
