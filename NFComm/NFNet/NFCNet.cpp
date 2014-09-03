@@ -378,7 +378,7 @@ int NFCNet::InitClientNet()
         printf("bufferevent_socket_new ");
         return -1;
     }
-	
+
 	int sockfd = bufferevent_socket_connect(bev, (struct sockaddr *)&addr, sizeof(addr));
 	if (0 != sockfd)
 	{
@@ -387,6 +387,7 @@ int NFCNet::InitClientNet()
 		return -1;
 	}
 
+    sockfd = bufferevent_getfd(bev);
 	NetObject* pObject = new NetObject(this, sockfd, addr, bev);
 	if (!AddNetObject(sockfd, pObject))
 	{
