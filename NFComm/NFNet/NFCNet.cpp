@@ -387,7 +387,7 @@ int NFCNet::InitClientNet()
 		return -1;
 	}
 
-    sockfd = bufferevent_getfd(bev);
+    //sockfd = bufferevent_getfd(bev);
 	NetObject* pObject = new NetObject(this, sockfd, addr, bev);
 	if (!AddNetObject(sockfd, pObject))
 	{
