@@ -10,6 +10,15 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="NFCSLGModule.cpp" />
+    <ClCompile Include="NFSLGPlugin.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NFCSLGModule.h" />
+    <ClInclude Include="NFSLGPlugin.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B47C9434-3A9C-4AFA-9212-71AF4DD04D81}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -104,44 +113,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <TargetMachine>MachineX64</TargetMachine>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="NFCBuffModule.h" />
-    <ClInclude Include="NFCBulletSkillConsumeProcessModule.h" />
-    <ClInclude Include="NFCCardItemConsumeProcessModule.h" />
-    <ClInclude Include="NFCGameLogicModule.h" />
-    <ClInclude Include="NFCItemConsumeManagerModule.h" />
-    <ClInclude Include="NFCPotionItemConsumeProcessModule.h" />
-    <ClInclude Include="NFCItemModule.h" />
-    <ClInclude Include="NFCPackModule.h" />
-    <ClInclude Include="NFCRebornItemConsumeProcessModule.h" />
-    <ClInclude Include="NFCSkillConsumeManagerModule.h" />
-    <ClInclude Include="NFCBriefSkillConsumeProcessModule.h" />
-    <ClInclude Include="NFCSkillModule.h" />
-    <ClInclude Include="NFGameLogicPlugin.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="dllmain.cpp">
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</CompileAsManaged>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      </PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="NFCBuffModule.cpp" />
-    <ClCompile Include="NFCBulletSkillConsumeProcessModule.cpp" />
-    <ClCompile Include="NFCCardItemConsumeProcessModule.cpp" />
-    <ClCompile Include="NFCGameLogicModule.cpp" />
-    <ClCompile Include="NFCItemConsumeManagerModule.cpp" />
-    <ClCompile Include="NFCPotionItemConsumeProcessModule.cpp" />
-    <ClCompile Include="NFCItemModule.cpp" />
-    <ClCompile Include="NFCPackModule.cpp" />
-    <ClCompile Include="NFCRebornItemConsumeProcessModule.cpp" />
-    <ClCompile Include="NFCSkillConsumeManagerModule.cpp" />
-    <ClCompile Include="NFCBriefSkillConsumeProcessModule.cpp" />
-    <ClCompile Include="NFCSkillModule.cpp" />
-    <ClCompile Include="NFGameLogicPlugin.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
