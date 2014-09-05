@@ -316,7 +316,6 @@ bool NFCNet::CloseNetObject( const int nSockIndex )
     return false;
 }
 
-
 bool NFCNet::Dismantle(NetObject* pObject )
 {
     bool bRet = true;
