@@ -1,29 +1,27 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCGameServerModule.cpp
+//    @FileName      :    NFCSLGModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
-//    @Module           :    NFCGameServerModule
+//    @Module           :    NFCSLGModule
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-////#include "stdafx.h"
-//#include "NFGameServerPlugin.h"
-#include "NFCGameServerModule.h"
+#include "NFSLGPlugin.h"
+#include "NFCSLGModule.h"
 #include "NFComm/Config/NFConfig.h"
 
-
-bool NFCGameServerModule::Init()
+bool NFCSLGModule::Init()
 {
     return true;
 }
 
-bool NFCGameServerModule::Shut()
+bool NFCSLGModule::Shut()
 {
 
     return true;
 }
 
-bool NFCGameServerModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCSLGModule::Execute( const float fLasFrametime, const float fStartedTime )
 {
 #ifdef _DEBUG
     /*
@@ -45,7 +43,7 @@ bool NFCGameServerModule::Execute( const float fLasFrametime, const float fStart
     return true;
 }
 
-bool NFCGameServerModule::AfterInit()
+bool NFCSLGModule::AfterInit()
 {
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>( pPluginManager->FindModule( "NFCEventProcessModule" ) );
     m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
@@ -58,7 +56,7 @@ bool NFCGameServerModule::AfterInit()
     return true;
 }
 
-bool NFCGameServerModule::BeforeShut()
+bool NFCSLGModule::BeforeShut()
 {
 
     return true;
