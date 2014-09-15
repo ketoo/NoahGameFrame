@@ -8,7 +8,7 @@
 
 
 ////#include "stdafx.h"
-#include "NFGameServerPlugin.h"
+//#include "NFGameServerPlugin.h"
 #include "NFCGameServerModule.h"
 #include "NFCSceneProcessModule.h"
 #include "NFCPropertyModule.h"
