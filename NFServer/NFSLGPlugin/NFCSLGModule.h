@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCGameServerModule.h
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2012-12-15
-//    @Module           :    NFCGameServerModule
+//    @FileName         £º    NFISLGModule.h
+//    @Author           £º    eliteYang
+//    @Date             £º    2014-09-11
+//    @Module           £º    NFISLGModule
 //
 // -------------------------------------------------------------------------
 
@@ -11,20 +11,19 @@
 
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameServerModule.h"
+#include "NFComm/NFPluginModule/NFISLGModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIDataNoSqlModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 
-class NFCGameServerModule
-    : public NFIGameServerModule
+class NFCSLGModule : public NFISLGModule
 {
 public:
-    NFCGameServerModule( NFIPluginManager* p )
+    NFCSLGModule( NFIPluginManager* p )
     {
         pPluginManager = p;
     }
-    virtual ~NFCGameServerModule() {};
+    virtual ~NFCSLGModule() {};
 
     virtual bool Init();
     virtual bool Shut();
@@ -38,7 +37,6 @@ protected:
 
 
 protected:
-    NFILogicClassModule* m_pLogicClassModule;
     NFIDataNoSqlModule* m_pNoSqlModule;
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
