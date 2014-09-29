@@ -559,7 +559,7 @@ void NFCNet::HeartPack()
 bool NFCNet::CloseSocketAll()
 {
     std::map<int, NetObject*>::iterator it = mmObject.begin();
-    for (it; it != mmObject.end(); it++)
+    for (it; it != mmObject.end();)
     {
         NetObject* pObject = it->second;
 
@@ -569,7 +569,7 @@ bool NFCNet::CloseSocketAll()
         bufferevent_free(bev);
         evutil_closesocket(pObject->GetFd());
 
-        mmObject.erase(it);
+        it = mmObject.erase(it);
 
         delete pObject;
         pObject = NULL;
