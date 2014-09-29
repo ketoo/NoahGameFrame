@@ -1,21 +1,21 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFZoneLogicPlugin.h
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2012-07-14 08:51
-//    @Module           :   NFZoneLogicPlugin
+//    @FileName         :    NFSLGPlugin.h
+//    @Author           :    eliteYang
+//    @Date             :    2014/9/9
+//    @Module           :    NFSLGPlugin
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_GAMESERVERPLUGIN_H_
-#define _NFC_GAMESERVERPLUGIN_H_
+#ifndef __NFC_SLG_PLUGIN_H__
+#define __NFC_SLG_PLUGIN_H__
 
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-class NFGameServerPlugin : public NFIPlugin
+class NFSLGPlugin : public NFIPlugin
 {
 public:
-    NFGameServerPlugin( NFIPluginManager* p )
+    NFSLGPlugin( NFIPluginManager* p )
     {
         pPluginManager = p;
     }
@@ -28,4 +28,4 @@ public:
     virtual void Uninstall();
 };
 
-#endif
+#endif // !__NFC_SLG_PLUGIN_H__
