@@ -2,7 +2,9 @@
 <!--this is logic class xml-->
 <XML>
     <Class Desc="IObject" Id="IObject" InstancePath="../../NFDataCfg/Ini/NPC/IObject.xml" Path="../../NFDataCfg/Struct/Class/IObject.xml" Public="0" Type="TYPE_IOBJECT">
+        <Class Desc="BB_Player" Id="BB_Player" InstancePath="../../NFDataCfg/Ini/NPC/BB_Player.xml" Path="../../NFDataCfg/Struct/Class/BB_Player.xml" Public="0" Type="TYPE_BB_PLAYER"/>
         <Class Desc="Buff" Id="Buff" InstancePath="../../NFDataCfg/Ini/NPC/Buff.xml" Path="../../NFDataCfg/Struct/Class/Buff.xml" Public="0" Type="TYPE_BUFF"/>
+        <Class Desc="Build" Id="Build" InstancePath="../../NFDataCfg/Ini/NPC/Build.xml" Path="../../NFDataCfg/Struct/Class/Build.xml" Public="0" Type="TYPE_BUILD"/>
         <Class Desc="EffectData" Id="EffectData" InstancePath="../../NFDataCfg/Ini/NPC/EffectData.xml" Path="../../NFDataCfg/Struct/Class/EffectData.xml" Public="0" Type="TYPE_EFFECTDATA"/>
         <Class Desc="Equip" Id="Equip" InstancePath="../../NFDataCfg/Ini/NPC/Equip.xml" Path="../../NFDataCfg/Struct/Class/Equip.xml" Public="0" Type="TYPE_EQUIP"/>
         <Class Desc="InitProperty" Id="InitProperty" InstancePath="../../NFDataCfg/Ini/NPC/InitProperty.xml" Path="../../NFDataCfg/Struct/Class/InitProperty.xml" Public="0" Type="TYPE_INITPROPERTY"/>
@@ -11,6 +13,7 @@
         <Class Desc="Player" Id="Player" InstancePath="../../NFDataCfg/Ini/NPC/Player.xml" Path="../../NFDataCfg/Struct/Class/Player.xml" Public="0" Type="TYPE_PLAYER"/>
         <Class Desc="Scene" Id="Scene" InstancePath="../../NFDataCfg/Ini/NPC/Scene.xml" Path="../../NFDataCfg/Struct/Class/Scene.xml" Public="0" Type="TYPE_SCENE"/>
         <Class Desc="ServerData" Id="ServerData" InstancePath="../../NFDataCfg/Ini/NPC/ServerData.xml" Path="../../NFDataCfg/Struct/Class/ServerData.xml" Public="0" Type="TYPE_SERVERDATA"/>
+        <Class Desc="Shop" Id="Shop" InstancePath="../../NFDataCfg/Ini/NPC/Shop.xml" Path="../../NFDataCfg/Struct/Class/Shop.xml" Public="0" Type="TYPE_SHOP"/>
         <Class Desc="Skill" Id="Skill" InstancePath="../../NFDataCfg/Ini/NPC/Skill.xml" Path="../../NFDataCfg/Struct/Class/Skill.xml" Public="0" Type="TYPE_SKILL"/>
         <Class Desc="Task" Id="Task" InstancePath="../../NFDataCfg/Ini/NPC/Task.xml" Path="../../NFDataCfg/Struct/Class/Task.xml" Public="0" Type="TYPE_TASK"/>
     </Class>
