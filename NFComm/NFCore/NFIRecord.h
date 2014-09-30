@@ -31,10 +31,10 @@ public:
 
     virtual ~NFIRecord() {}
 
-	virtual bool IsUsed(const int nRow) const  = 0;
+    virtual bool IsUsed(const int nRow) const  = 0;
     virtual bool IsKey(const int nRow) const  = 0;
     virtual bool SetUsed(const int nRow, const int bUse)  = 0;
-	virtual bool SetKey(const int nRow, const int bKey) = 0;
+    virtual bool SetKey(const int nRow, const int bKey) = 0;
 
     virtual int GetCols() const  = 0;
     virtual int GetRows() const  = 0;
@@ -83,7 +83,10 @@ public:
     virtual int FindDouble(const int nCol, const double value, NFIDataList& varResult) = 0;
     virtual int FindString(const int nCol, const char* value, NFIDataList& varResult) = 0;
     virtual int FindObject(const int nCol, const NFIDENTID& value, NFIDataList& varResult) = 0;
-    virtual int SortByCol(const int nCol, const bool bOrder, NFIDataList& varResult){return 0;};
+    virtual int SortByCol(const int nCol, const bool bOrder, NFIDataList& varResult)
+    {
+        return 0;
+    };
 
     virtual int FindRowByColValue(const std::string& strColTag, const NFIDataList& var, NFIDataList& varResult) = 0;
     virtual int FindInt(const std::string& strColTag, const int value, NFIDataList& varResult) = 0;
@@ -92,10 +95,13 @@ public:
     virtual int FindString(const std::string& strColTag, const char* value, NFIDataList& varResult) = 0;
     virtual int FindObject(const std::string& strColTag, const NFIDENTID& value, NFIDataList& varResult) = 0;
     virtual int FindPointer(const std::string& strColTag, const void* value, NFIDataList& varResult) = 0;
-    virtual int SortByTag(const std::string& strColTag, const bool bOrder,  NFIDataList& varResult){return 0;};
+    virtual int SortByTag(const std::string& strColTag, const bool bOrder,  NFIDataList& varResult)
+    {
+        return 0;
+    };
 
     virtual bool Remove(const int nRow) = 0;
-    virtual bool Remove(NFIDataList& varRows) //need to optimize 
+    virtual bool Remove(NFIDataList& varRows) //need to optimize
     {
         for (int i  = 0; i < varRows.GetCount(); ++i)
         {
@@ -110,24 +116,26 @@ public:
     virtual void AddRecordHook(const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
 
     virtual const bool GetSave() = 0;
+    virtual const bool GetView() = 0;
     virtual const bool GetPublic() = 0;
     virtual const bool GetPrivate() = 0;
     virtual const int GetIndex() = 0;
     virtual const std::string& GetName() const = 0;
-	virtual const NFIDataList& GetInitData() const = 0;
+    virtual const NFIDataList& GetInitData() const = 0;
     virtual const NFIDataList& GetKeyState() const = 0;
     virtual const NFIDataList& GetInitDesc() const = 0;
     virtual const NFIDataList& GetTag() const = 0;
 
     virtual void SetSave(const bool bSave) = 0;
+    virtual void SetView(const bool bView) = 0;
     virtual void SetPublic(const bool bPublic) = 0;
     virtual void SetPrivate(const bool bPrivate) = 0;
     virtual void SetName(const char* strName) = 0;
 
     virtual const TRECORDVEC& GetRecordVec() const = 0;
-    
+
     virtual const NFIDataList& GetRelatedRecord() const = 0;
-    virtual bool GetRelatedTag(const std::string& strSrcTag, const std::string& strRelatedRecord, OUT std::string& strRelatedTag) = 0;
+    virtual bool GetRelatedTag(const std::string& strSrcTag, const std::string& strRelatedRecord, std::string& strRelatedTag) = 0;
 };
 
 #endif

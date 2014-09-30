@@ -9,7 +9,6 @@
 #define GLOG_NO_ABBREVIATED_SEVERITIES
 #include "glog/logging.h"
 #include <time.h>
-#include "NFStackWalker.h"
 #include "NFCLogModule.h"
 #include <boost/filesystem.hpp>
 #include "NFComm/NFPluginModule/NFIActorManager.h"

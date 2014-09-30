@@ -16,11 +16,13 @@ struct MachineData
         strIP = "";
         nPort = 0;
         nWeight = 0;//总共多少权重即是多少虚拟节点
+        nMachineID = 0;
     }
 
     std::string strIP;
     int nPort;
     int nWeight;
+    int nMachineID;
 };
 
 //虚拟节点

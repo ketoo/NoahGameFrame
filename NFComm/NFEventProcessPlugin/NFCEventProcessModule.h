@@ -12,12 +12,12 @@
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 
 struct NFEventList
-    : public NFList<EVENT_PROCESS_FUNCTOR_PTR>
+        : public NFList<EVENT_PROCESS_FUNCTOR_PTR>
 {
 
 };
 struct NFClassEventList
-    : public NFList<CLASS_EVENT_FUNCTOR_PTR>
+        : public NFList<CLASS_EVENT_FUNCTOR_PTR>
 {
 
 };
@@ -41,7 +41,7 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    
+
     virtual void OnReload(const char* strModuleName, NFILogicModule* pModule);
 
 

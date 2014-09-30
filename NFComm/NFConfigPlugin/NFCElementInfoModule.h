@@ -48,13 +48,13 @@ public:
             delete m_pComponentManager;
             m_pComponentManager = NULL;
         }
-        
+
         if (NULL != m_pRecordManager)
         {
             delete m_pRecordManager;
             m_pRecordManager = NULL;
         }
-        
+
         if (NULL != m_pPropertyManager)
         {
             delete m_pPropertyManager;
@@ -96,13 +96,13 @@ public:
     virtual bool Init();
     virtual bool Shut();
 
-	virtual bool AfterInit();
-	virtual bool BeforeShut();
-	virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool AfterInit();
+    virtual bool BeforeShut();
+    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
 
     virtual bool Load();
     virtual bool Save();
-	virtual bool Clear();
+    virtual bool Clear();
 
     virtual bool LoadSceneInfo(const std::string& strFileName, const std::string& strClassName);
 
@@ -122,7 +122,7 @@ protected:
 
     virtual bool Load(rapidxml::xml_node<>* attrNode, NFILogicClass* pLogicClass);
 
-	virtual bool LegalNumber(const char* str);
+    virtual bool LegalNumber(const char* str);
 protected:
     NFILogicClassModule* m_pLogicClassModule;
     bool mbLoaded;

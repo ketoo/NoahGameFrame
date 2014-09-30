@@ -27,25 +27,25 @@ public:
     bool                    ClearAll();
 
     bool                    First(T& id);
-	bool                    Next(T& id);
+    bool                    Next(T& id);
     bool                    Get(const int32_t index, T& id);
     int                       Count();
 
-// 	idType& operator [] (const int32_t index)
-// 	{
-// 		if (it >= this->mtObjConfigList.size())
-// 		{
-// 			return normal;
-// 		}
-// 
-// 		std::list<idType>::iterator it = this->mtObjConfigList.begin();
-// 		std::advance(it + index);
-// 
-// 		return *it;
-// 	}
+    //  idType& operator [] (const int32_t index)
+    //  {
+    //      if (it >= this->mtObjConfigList.size())
+    //      {
+    //          return normal;
+    //      }
+    //
+    //      std::list<idType>::iterator it = this->mtObjConfigList.begin();
+    //      std::advance(it + index);
+    //
+    //      return *it;
+    //  }
 
 protected:
-	//idType normal;
+    //idType normal;
     typedef     std::list<T>   TLISTOBJCONFIGLIST;
     TLISTOBJCONFIGLIST          mtObjConfigList;
     typename std::list<T>::iterator mCurIter;
@@ -135,17 +135,17 @@ bool NFList<T>::Find(const T& id)
 template < typename T >
 bool NFList<T>::Get(const int32_t index, T& id)
 {
-	if (index >= mtObjConfigList.size())
-	{
-		return false;;
-	}
-	
-	std::list<T>::iterator it = this->mtObjConfigList.begin();
-	std::advance(it, index);
+    if (index >= mtObjConfigList.size())
+    {
+        return false;
+    }
 
-	id = *it;
+    typename std::list<T>::iterator it = this->mtObjConfigList.begin();
+    std::advance(it, index);
 
-	return true;
+    id = *it;
+
+    return true;
 }
 
 template < typename T >

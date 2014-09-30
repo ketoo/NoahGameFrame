@@ -11,7 +11,7 @@
 NFCEventProcessModule::NFCEventProcessModule(NFIPluginManager* p)
 {
     pPluginManager = p;
-    
+
 }
 
 NFCEventProcessModule::~NFCEventProcessModule()
