@@ -7,6 +7,7 @@
 
 ///
 #include "NFComm/NFPluginModule/NFIPlugin.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 #ifdef NFLOGICCLASSPLUGIN_EXPORTS
 #define NFLOGICCLASSCPLUGIN_API __declspec(dllexport)

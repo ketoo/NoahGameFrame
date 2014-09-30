@@ -49,13 +49,13 @@ public:
             delete m_pComponentManager;
             m_pComponentManager = NULL;
         }
-        
+
         if (NULL != m_pRecordManager)
         {
             delete m_pRecordManager;
             m_pRecordManager = NULL;
         }
-        
+
         if (NULL != m_pPropertyManager)
         {
             delete m_pPropertyManager;
@@ -131,7 +131,7 @@ private:
     NFIPropertyManager* m_pPropertyManager;
     NFIRecordManager* m_pRecordManager;
     NFIComponentManager* m_pComponentManager;
-    
+
     NFILogicClass* m_pParentClass;
     std::string mstrType;
     std::string mstrClassName;
@@ -152,7 +152,7 @@ public:
 
     virtual bool Load();
     virtual bool Save();
-	virtual bool Clear();
+    virtual bool Clear();
 
     virtual NFIPropertyManager* GetClassPropertyManager(const std::string& strClassName);
     virtual NFIRecordManager* GetClassRecordManager(const std::string& strClassName);

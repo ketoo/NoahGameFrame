@@ -70,7 +70,7 @@ public:
 
     virtual TD* First()
     {
-        if (mObjectList.size() <= 0 )
+        if (mObjectList.size() <= 0)
         {
             return NULL;
         }
@@ -111,7 +111,7 @@ public:
 
     virtual TD* First(T& name)
     {
-        if (mObjectList.size() <= 0 )
+        if (mObjectList.size() <= 0)
         {
             return NULL;
         }

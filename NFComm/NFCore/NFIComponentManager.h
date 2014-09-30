@@ -11,7 +11,7 @@
 
 #include "NFMap.h"
 #include "NFIComponent.h"
-#include "NFComm\NFPluginModule\NFILogicModule.h"
+#include "NFComm/NFPluginModule/NFILogicModule.h"
 
 class NFIComponentManager : public NFILogicModule, public NFMap<std::string, NFIComponent>
 {

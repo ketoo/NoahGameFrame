@@ -26,7 +26,7 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
-#include "NFIDENTID.h"
+#include "NFIdentID.h"
 #include "NFPlatform.h"
 #include <boost/lexical_cast.hpp>
 #include <boost/variant.hpp>
@@ -68,10 +68,18 @@ public:
         boost::variant<bool, int, float, double, std::string, NFINT64, void*> variantData;
     };
 
+    NFIDataList()
+    {
+        mnCapacity = STACK_SIZE;
+        mnNextOrderCapacity = mnCapacity * 2;
+        mnSize = 0;
+        mnOrder = 0;
+    }
+
     virtual ~NFIDataList() = 0;
 
     virtual std::string StringValEx(const int index, const bool bForce) const = 0;
-    virtual bool ToString(OUT std::string& str, const char* strSplit) = 0;
+    virtual bool ToString(std::string& str, const char* strSplit) = 0;
 
     template<typename T>
     T NumberVal(const int index) const
@@ -304,7 +312,7 @@ public:
 
         switch (var.nType)
         {
-        case TDATA_INT:
+            case TDATA_INT:
             {
                 if (0 != boost::get<int>(var.variantData))
                 {
@@ -312,7 +320,7 @@ public:
                 }
             }
             break;
-        case TDATA_FLOAT:
+            case TDATA_FLOAT:
             {
                 float fValue = boost::get<float>(var.variantData);
                 if (fValue > 0.001f  || fValue < -0.001f)
@@ -321,7 +329,7 @@ public:
                 }
             }
             break;
-        case TDATA_DOUBLE:
+            case TDATA_DOUBLE:
             {
                 float fValue = boost::get<float>(var.variantData);
                 if (fValue > 0.001f  || fValue < -0.001f)
@@ -330,7 +338,7 @@ public:
                 }
             }
             break;
-        case TDATA_STRING:
+            case TDATA_STRING:
             {
                 const std::string& strData = boost::get<const std::string&>(var.variantData);
                 if (!strData.empty())
@@ -339,7 +347,7 @@ public:
                 }
             }
             break;
-        case TDATA_OBJECT:
+            case TDATA_OBJECT:
             {
                 if (0 != boost::get<NFINT64>(var.variantData))
                 {
@@ -347,16 +355,16 @@ public:
                 }
             }
             break;
-        //case TDATA_POINTER:
-        //    {
-        //        if (0 != boost::get<void*>(var.variantData))
-        //        {
-        //            bChanged = true;
-        //        }
-        //    }
-        //    break;
-        default:
-            break;
+            //case TDATA_POINTER:
+            //    {
+            //        if (0 != boost::get<void*>(var.variantData))
+            //        {
+            //            bChanged = true;
+            //        }
+            //    }
+            //    break;
+            default:
+                break;
         }
 
         return bChanged;
@@ -390,9 +398,9 @@ public:
                     return Object(nPos) == src.Object(nPos);
                     break;
 
-                //case TDATA_POINTER:
-                //    return Pointer(nPos) == src.Pointer(nPos);
-                //    break;
+                    //case TDATA_POINTER:
+                    //    return Pointer(nPos) == src.Pointer(nPos);
+                    //    break;
 
                 default:
                     return false;
@@ -486,11 +494,18 @@ public:
         Add(value.c_str());
         return *this;
     }
-    //     inline NFIDataList& operator<<( const NFINT64 value )
-    //     {
-    //         Add( NFIDENTID( value ) );
-    //         return *this;
-    //     }
+
+    //inline NFIDataList& operator<<(const NFINT64& value)
+    //{
+    //    Add(NFIDENTID(value));
+    //    return *this;
+    //}
+    inline NFIDataList& operator<<(const int64_t& value)
+    {
+        Add(NFIDENTID(value));
+        return *this;
+    }
+
     inline NFIDataList& operator<<(const NFIDENTID& value)
     {
         Add(value);
@@ -501,6 +516,7 @@ public:
         Add(value);
         return *this;
     }
+
     inline NFIDataList& operator<<(const NFIDataList& value)
     {
         Concat(value);
