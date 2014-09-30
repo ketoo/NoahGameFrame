@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="NFLogModule">
+      <UniqueIdentifier>{372efc96-e7a4-45c2-96e0-692ea419fc04}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="NFCLogModule.cpp">
+      <Filter>NFLogModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFLogPlugin.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NFCLogModule.h">
+      <Filter>NFLogModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFLogPlugin.h" />
+  </ItemGroup>
+</Project>

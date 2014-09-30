@@ -22,7 +22,6 @@
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
-#include "NFComm/NFPluginModule/NFIDataNoSqlModule.h"
 #include "NFComm/NFKernelPlugin/NFContainerModule/NFCContainerModule.h"
 
 class NFCKernelModule
@@ -50,7 +49,7 @@ public:
 
     virtual NFIDENTID NewIdentID();
     virtual void SetIdentSerialID(int nSerialID);
-    
+
     virtual void SetIdentID(NFINT32 nID);
     virtual NFINT32 GetIdentID();
 
@@ -100,7 +99,7 @@ public:
     virtual bool SetRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const double dwValue);
     virtual bool SetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue);
     virtual bool SetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFIDENTID& objectValue);
-    
+
     virtual bool SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const int value);
     virtual bool SetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const float value);
     virtual bool SetRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const double value);
@@ -121,8 +120,8 @@ public:
 
     virtual bool SwitchScene(const NFIDENTID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIDataList& arg);
 
-    virtual bool AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction);
-    virtual bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& varKey, const NFIDataList& varDesc, const NFIDataList& varTag, const NFIDataList& varRelatedRecord, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex);
+    virtual bool AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex, const std::string& strScriptFunction);
+    virtual bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& varKey, const NFIDataList& varDesc, const NFIDataList& varTag, const NFIDataList& varRelatedRecord, const int nRows, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex);
     ////////////////////////////////////////////////////////////////
 
     virtual NFIDENTID CreateContainer(const int nContainerIndex, const std::string& strSceneConfigID);
@@ -171,20 +170,20 @@ public:
 
 protected:
 
-    //Ö»ÄÜÍøÂç[½Å±¾]Ä£¿é×¢²á£¬»Øµ÷ÓÃÀ´Í¬²½¶ÔÏóÀàÊÂ¼ş,ËùÓĞµÄÀà¶ÔÏó¶¼»á»Øµ÷
+    //åªèƒ½ç½‘ç»œ[è„šæœ¬]æ¨¡å—æ³¨å†Œï¼Œå›è°ƒç”¨æ¥åŒæ­¥å¯¹è±¡ç±»äº‹ä»¶,æ‰€æœ‰çš„ç±»å¯¹è±¡éƒ½ä¼šå›è°ƒ
     virtual bool ResgisterCommonClassEvent(const CLASS_EVENT_FUNCTOR_PTR& cb);
 
-    //Ö»ÄÜÍøÂç[½Å±¾]Ä£¿é×¢²á£¬»Øµ÷ÓÃÀ´Í¬²½¶ÔÏóÊôĞÔÊÂ¼ş,ËùÓĞµÄÀàÊôĞÔ¶¼»á»Øµ÷
+    //åªèƒ½ç½‘ç»œ[è„šæœ¬]æ¨¡å—æ³¨å†Œï¼Œå›è°ƒç”¨æ¥åŒæ­¥å¯¹è±¡å±æ€§äº‹ä»¶,æ‰€æœ‰çš„ç±»å±æ€§éƒ½ä¼šå›è°ƒ
     virtual bool ResgisterCommonPropertyEvent(const PROPERTY_EVENT_FUNCTOR_PTR& cb);
 
-    //Ö»ÄÜÍøÂç[½Å±¾]Ä£¿é×¢²á£¬»Øµ÷ÓÃÀ´Í¬²½¶ÔÏóÀà±íÊÂ¼ş,ËùÓĞµÄÀà±í¶¼»á»Øµ÷
+    //åªèƒ½ç½‘ç»œ[è„šæœ¬]æ¨¡å—æ³¨å†Œï¼Œå›è°ƒç”¨æ¥åŒæ­¥å¯¹è±¡ç±»è¡¨äº‹ä»¶,æ‰€æœ‰çš„ç±»è¡¨éƒ½ä¼šå›è°ƒ
     virtual bool ResgisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& cb);
-   
-//     //Ö»ÄÜÍøÂç[½Å±¾]Ä£¿é×¢²á£¬»Øµ÷ĞÄÌø,ËùÓĞµÄĞÄÌø¶¼»á»Øµ÷
-//     virtual bool ResgisterCommonHeartBeat(const HEART_BEAT_FUNCTOR_PTR& cb);
-// 
-//     //Ö»ÄÜÍøÂç[½Å±¾]Ä£¿é×¢²á£¬»Øµ÷ÊÂ¼ş,ËùÓĞµÄÊÂ¼ş¶¼»á»Øµ÷
-//     virtual bool ResgisterCommonEvent(const EVENT_PROCESS_FUNCTOR_PTR& cb);
+
+    //     //åªèƒ½ç½‘ç»œ[è„šæœ¬]æ¨¡å—æ³¨å†Œï¼Œå›è°ƒå¿ƒè·³,æ‰€æœ‰çš„å¿ƒè·³éƒ½ä¼šå›è°ƒ
+    //     virtual bool ResgisterCommonHeartBeat(const HEART_BEAT_FUNCTOR_PTR& cb);
+    //
+    //     //åªèƒ½ç½‘ç»œ[è„šæœ¬]æ¨¡å—æ³¨å†Œï¼Œå›è°ƒäº‹ä»¶,æ‰€æœ‰çš„äº‹ä»¶éƒ½ä¼šå›è°ƒ
+    //     virtual bool ResgisterCommonEvent(const EVENT_PROCESS_FUNCTOR_PTR& cb);
 
 protected:
 
@@ -204,26 +203,26 @@ protected:
     int OnPropertyCommonEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar);
     int OnRecordCommonEvent(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& arg);
 
-//     int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var);
-//     int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIDataList& var);
+    //     int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var);
+    //     int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIDataList& var);
 
 protected:
 
     std::list<NFIDENTID> mtDeleteSelfList;
 
     //////////////////////////////////////////////////////////////////////////
-    //Í¨ÓÃ¶ÔÏóÀàÊÂ¼ş»Øµ÷,ÒÔ±ãÍ¬²½
+    //é€šç”¨å¯¹è±¡ç±»äº‹ä»¶å›è°ƒ,ä»¥ä¾¿åŒæ­¥
     std::list<CLASS_EVENT_FUNCTOR_PTR> mtCommonClassCallBackList;
-    //Í¨ÓÃÊôĞÔ±ä¶¯»Øµ÷,ÒÔ±ãÍ¬²½
+    //é€šç”¨å±æ€§å˜åŠ¨å›è°ƒ,ä»¥ä¾¿åŒæ­¥
     std::list<PROPERTY_EVENT_FUNCTOR_PTR> mtCommonPropertyCallBackList;
-    //Í¨ÓÃ±í±ä¶¯»Øµ÷,ÒÔ±ãÍ¬²½
+    //é€šç”¨è¡¨å˜åŠ¨å›è°ƒ,ä»¥ä¾¿åŒæ­¥
     std::list<RECORD_EVENT_FUNCTOR_PTR> mtCommonRecordCallBackList;
-//     //Í¨ÓÃĞÄÌø»Øµ÷
-//     std::list<HEART_BEAT_FUNCTOR_PTR> mtCommonHeartBeatCallBackList;
-//     //Í¨ÓÃÊÂ¼ş»Øµ÷
-//     std::list<EVENT_PROCESS_FUNCTOR_PTR> mtCommonEventCallBackList;
+    //     //é€šç”¨å¿ƒè·³å›è°ƒ
+    //     std::list<HEART_BEAT_FUNCTOR_PTR> mtCommonHeartBeatCallBackList;
+    //     //é€šç”¨äº‹ä»¶å›è°ƒ
+    //     std::list<EVENT_PROCESS_FUNCTOR_PTR> mtCommonEventCallBackList;
 private:
-	//ÊôĞÔµÄKEY£¬±ÈÈçHP=1£¬»áÒÔÕâ¸ö½¨Á¢KEY£¬ÄÇÃ´¿ÉÒÔ¿ìËÙ²éÑ¯ËùÓĞHP=1µÄ¶ÔÏó¶ø²»ÓÃ±éÀú
+    //å±æ€§çš„KEYï¼Œæ¯”å¦‚HP=1ï¼Œä¼šä»¥è¿™ä¸ªå»ºç«‹KEYï¼Œé‚£ä¹ˆå¯ä»¥å¿«é€ŸæŸ¥è¯¢æ‰€æœ‰HP=1çš„å¯¹è±¡è€Œä¸ç”¨éå†
     //     std::map<std::string,std::map<TData, NFList<NFIDENTID>>>
     //     std::map<"Scene", std::map<10, NFList<NFIDENTID>>>
 

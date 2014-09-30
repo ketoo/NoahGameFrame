@@ -80,10 +80,10 @@ struct NFIDENTID
         nIdent = ident;
     }
 
-//     NFIDENTID( const char* strIdent )
-//     {
-//         nData64 = boost::lexical_cast<NFINT64>( strIdent );
-//     }
+    //     NFIDENTID( const char* strIdent )
+    //     {
+    //         nData64 = boost::lexical_cast<NFINT64>( strIdent );
+    //     }
 
     bool IsNull() const
     {
@@ -113,12 +113,12 @@ struct NFIDENTID
     static NFINT64 GetCPUTime()
     {
 
-        #if NF_PLATFORM == NF_PLATFORM_WIN
-            return __rdtsc(); // Generates the rdtsc instruction, which returns the processor time stamp. The processor time stamp records the number of clock cycles since the last reset
-        #else
-            return 0;
+#if NF_PLATFORM == NF_PLATFORM_WIN
+        return __rdtsc(); // Generates the rdtsc instruction, which returns the processor time stamp. The processor time stamp records the number of clock cycles since the last reset
+#else
+        return 0;
 
-        #endif
+#endif
         //__asm {RDTSC} // 32位下可以通过 64位下无法内嵌汇编
     }
 

@@ -14,6 +14,7 @@
         <Class Desc="Scene" Id="Scene" InstancePath="../../NFDataCfg/Ini/NPC/Scene.xml" Path="../../NFDataCfg/Struct/Class/Scene.xml" Public="0" Type="TYPE_SCENE"/>
         <Class Desc="ServerData" Id="ServerData" InstancePath="../../NFDataCfg/Ini/NPC/ServerData.xml" Path="../../NFDataCfg/Struct/Class/ServerData.xml" Public="0" Type="TYPE_SERVERDATA"/>
         <Class Desc="Shop" Id="Shop" InstancePath="../../NFDataCfg/Ini/NPC/Shop.xml" Path="../../NFDataCfg/Struct/Class/Shop.xml" Public="0" Type="TYPE_SHOP"/>
+        <Class Desc="ShopMenu" Id="ShopMenu" InstancePath="../../NFDataCfg/Ini/NPC/ShopMenu.xml" Path="../../NFDataCfg/Struct/Class/ShopMenu.xml" Public="0" Type="TYPE_SHOPMENU"/>
         <Class Desc="Skill" Id="Skill" InstancePath="../../NFDataCfg/Ini/NPC/Skill.xml" Path="../../NFDataCfg/Struct/Class/Skill.xml" Public="0" Type="TYPE_SKILL"/>
         <Class Desc="Task" Id="Task" InstancePath="../../NFDataCfg/Ini/NPC/Task.xml" Path="../../NFDataCfg/Struct/Class/Task.xml" Public="0" Type="TYPE_TASK"/>
     </Class>
