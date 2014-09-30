@@ -138,7 +138,7 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
             bool bPublic = boost::lexical_cast<bool>(pstrPublic);
             bool bPrivate = boost::lexical_cast<bool>(pstrPrivate);
             bool bSave = boost::lexical_cast<bool>(pstrSave);
-            bool bView = (strView.empty() ? (boost::lexical_cast<bool>(strView)) : false);
+            bool bView = (strView.empty() ? false : (boost::lexical_cast<bool>(strView)));
             int nIndex = boost::lexical_cast<int>(pstrPropertyIndex);
 
             if (bPublic || bPrivate)
@@ -201,7 +201,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCL
             bool bPublic = boost::lexical_cast<bool>(pstrPublic);
             bool bPrivate = boost::lexical_cast<bool>(pstrPrivate);
             bool bSave = boost::lexical_cast<bool>(pstrSave);
-            bool bView = (strView.empty() ? (boost::lexical_cast<bool>(strView)) : false);
+            bool bView = (strView.empty() ? false : (boost::lexical_cast<bool>(strView)));
             int nIndex = boost::lexical_cast<int>(pstrIndex);
 
             NFCDataList recordVar;
