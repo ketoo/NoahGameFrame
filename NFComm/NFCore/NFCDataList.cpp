@@ -6,9 +6,11 @@
 //
 // -------------------------------------------------------------------------
 
+#include <cstdarg>
 #include "NFCDataList.h"
 
 NFCDataList::NFCDataList()
+: NFIDataList()
 {
     mnCapacity = STACK_SIZE;
     mnNextOrderCapacity = mnCapacity * 2;
@@ -30,6 +32,18 @@ NFCDataList::NFCDataList(const char* str, const char* strSplit)
     Split(str, strSplit);
 }
 
+NFCDataList::NFCDataList(const NFCDataList& src)
+{
+    mnSize = 0;
+    mnOrder = 0;
+    mnCapacity = STACK_SIZE;
+    mnNextOrderCapacity = mnCapacity * 2;
+
+    Clear();
+
+    InnerAppendEx(src, 0, src.GetCount());
+}
+
 NFCDataList::NFCDataList(const NFIDataList& src)
 {
     mnSize = 0;
@@ -46,6 +60,14 @@ NFCDataList::~NFCDataList()
 {
     Clear();
 };
+
+NFCDataList& NFCDataList::operator=(const NFCDataList& src)
+{
+    Clear();
+    InnerAppendEx(src, 0, src.GetCount());
+
+    return *this;
+}
 
 NFCDataList& NFCDataList::operator=(const NFIDataList& src)
 {
@@ -266,13 +288,13 @@ void* NFCDataList::Pointer(const int index) const
 // bool NFCDataList::Split(const char* pstr, const char* pstrSplit)
 // {
 //     Clear();
-// 
+//
 //     int nLen = strlen(pstr);
 //     char* szInput = new char[nLen + 1];
 //     memset(szInput, 0, nLen + 1);
-// 
+//
 //     strcpy_s(szInput, nLen + 1, pstr);
-// 
+//
 //     char* p = NULL;
 //     p = strtok(szInput, pstrSplit);
 //     while (p != NULL)
@@ -280,38 +302,38 @@ void* NFCDataList::Pointer(const int index) const
 //         Add(p);
 //         p = strtok(NULL, pstrSplit);
 //     }
-// 
+//
 //     delete[] szInput;
-// 
+//
 //     return true;
 // }
 
-bool NFCDataList::Split( const char* str, const char* strSplit )
+bool NFCDataList::Split(const char* str, const char* strSplit)
 {
-	std::string strData(str);
+    std::string strData(str);
     if (strData.empty())
     {
         return true;
     }
 
-	std::string temstrSplit(strSplit);
-	std::string::size_type pos;
-	strData += temstrSplit;
-	std::string::size_type size = strData.length();
+    std::string temstrSplit(strSplit);
+    std::string::size_type pos;
+    strData += temstrSplit;
+    std::string::size_type size = strData.length();
 
-	for (std::string::size_type i = 0; i < size; i++)
-	{
-		pos = int(strData.find(temstrSplit, i));
-		if (pos < size)
-		{
-			std::string strSub = strData.substr(i, pos - i);
-			Add(strSub.c_str());
+    for (std::string::size_type i = 0; i < size; i++)
+    {
+        pos = int(strData.find(temstrSplit, i));
+        if (pos < size)
+        {
+            std::string strSub = strData.substr(i, pos - i);
+            Add(strSub.c_str());
 
-			i = pos + temstrSplit.size() - 1;
-		}
-	}
+            i = pos + temstrSplit.size() - 1;
+        }
+    }
 
-	return true;
+    return true;
 }
 
 TDATA_TYPE NFCDataList::Type(const int index) const
@@ -431,9 +453,9 @@ void NFCDataList::InnerAppendEx(const NFIDataList& src, const int start, const i
             case TDATA_OBJECT:
                 AddNumber<NFINT64>(vType, src.NumberVal<NFINT64>(i));
                 break;
-            //case TDATA_POINTER:
-            //    AddNumber<void*>(vType, src.NumberVal<void*>(i));
-            //    break;
+                //case TDATA_POINTER:
+                //    AddNumber<void*>(vType, src.NumberVal<void*>(i));
+                //    break;
             default:
                 //Assert(0);
                 break;
@@ -461,7 +483,7 @@ std::string NFCDataList::StringValEx(const int index, const bool bForce) const
     return NULL_STR;
 }
 
-bool NFCDataList::ToString(OUT std::string& str, const char* strSplit)
+bool NFCDataList::ToString(std::string& str, const char* strSplit)
 {
     for (int i = 0; i < GetCount(); ++i)
     {
@@ -479,3 +501,5 @@ bool NFCDataList::ToString(OUT std::string& str, const char* strSplit)
 
     return true;
 }
+
+NFCDataList NFCDataList::nullData;
