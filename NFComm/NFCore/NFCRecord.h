@@ -17,7 +17,7 @@ class NFCRecord : public NFIRecord
 {
 public:
     NFCRecord();
-    NFCRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& valueList, const NFIDataList& keyList, const NFIDataList& descList, const NFIDataList& tagList, const NFIDataList& relateRecordList, int nMaxRow, bool bPublic,  bool bPrivate,  bool bSave, int nIndex);
+    NFCRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& valueList, const NFIDataList& keyList, const NFIDataList& descList, const NFIDataList& tagList, const NFIDataList& relateRecordList, int nMaxRow, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex);
 
     virtual ~NFCRecord();
 
@@ -95,6 +95,8 @@ public:
 
     virtual const bool GetSave();
 
+    virtual const bool GetView();
+
     virtual const bool GetPublic();
 
     virtual const bool GetPrivate();
@@ -104,6 +106,8 @@ public:
     virtual const std::string& GetName() const;
 
     virtual void SetSave(const bool bSave);
+
+    virtual void SetView(const bool bView);
 
     virtual void SetPublic(const bool bPublic);
 
@@ -149,6 +153,7 @@ protected:
 
     NFIDENTID mSelf;
     bool mbSave;
+    bool mbView;
     bool mbPublic;
     bool mbPrivate;
 	bool mbHasKey;
