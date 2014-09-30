@@ -22,7 +22,7 @@ public:
     virtual bool RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIDataList& argVar) = 0;
 
     virtual NFIProperty* AddProperty(const NFIDENTID& self, NFIProperty* pProperty) = 0;
-    virtual NFIProperty* AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction) = 0;
+    virtual NFIProperty* AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, bool bView, int nIndex, const std::string& strScriptFunction) = 0;
 
     virtual bool SetProperty(const std::string& strPropertyName, const NFIDataList::TData& TData) = 0;
     virtual bool SetProperty(const NFIProperty* pProperty) = 0;
