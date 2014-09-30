@@ -16,10 +16,10 @@
   <ItemGroup>
     <ClInclude Include="NFCSLGModule.h" />
     <ClInclude Include="NFSLGPlugin.h" />
-    <ClInclude Include="..\..\NFComm\NFPluginModule\NFISLGBuildingModule.h">
+    <ClInclude Include="NFCSLGBuildingModule.h">
       <Filter>NFBuildingModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCSLGBuildingModule.h">
+    <ClInclude Include="NFISLGBuildingModule.h">
       <Filter>NFBuildingModule</Filter>
     </ClInclude>
   </ItemGroup>
