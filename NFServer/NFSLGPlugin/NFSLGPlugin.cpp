@@ -1,17 +1,12 @@
-// -------------------------------------------------------------------------
-//    @FileName      :    NFSLGPlugin.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2012-07-14 08:51
-//    @Module           :    NFSLGPlugin
-//
-// -------------------------------------------------------------------------
-
 #include "NFSLGPlugin.h"
+#include "NFCSLGModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
 extern "C"  __declspec( dllexport ) void DllStartPlugin( NFIPluginManager* pm )
 {
+	SetConsoleTitle( "NFSLG" );
+
     CREATE_PLUGIN( pm, NFSLGPlugin )
 
 };
@@ -36,11 +31,10 @@ const std::string NFSLGPlugin::GetPluginName()
 
 void NFSLGPlugin::Install()
 {
-
-
+    REGISTER_MODULE( pPluginManager, NFCSLGModule )
 }
 
 void NFSLGPlugin::Uninstall()
 {
-
+    UNREGISTER_MODULE( pPluginManager, NFCSLGModule )
 }
