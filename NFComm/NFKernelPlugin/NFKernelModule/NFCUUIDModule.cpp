@@ -15,75 +15,75 @@ namespace UUIDModule
 #define EPOCHFILETIME 11644473600000000Ui64
 #endif
 
-    uint64_t get_time()
-    {
+uint64_t get_time()
+{
 #ifndef _MSC_VER
-        struct timeval tv;
-        gettimeofday(&tv, NULL);
-        uint64 time = tv.tv_usec;
-        time /= 1000;
-        time += (tv.tv_sec * 1000);
-        return time;
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    int time = tv.tv_usec;
+    time /= 1000;
+    time += (tv.tv_sec * 1000);
+    return time;
 #else
-        FILETIME filetime;
-        uint64_t time = 0;
-        GetSystemTimeAsFileTime(&filetime);
+    FILETIME filetime;
+    uint64_t time = 0;
+    GetSystemTimeAsFileTime(&filetime);
 
-        time |= filetime.dwHighDateTime;
-        time <<= 32;
-        time |= filetime.dwLowDateTime;
+    time |= filetime.dwHighDateTime;
+    time <<= 32;
+    time |= filetime.dwLowDateTime;
 
-        time /= 10;
-        time -= EPOCHFILETIME;
-        return time / 1000;
+    time /= 10;
+    time -= EPOCHFILETIME;
+    return time / 1000;
 #endif
+}
+
+class UUID
+{
+public:
+    UUID() : epoch_(0), time_(0), machine_(0), sequence_(0)
+    {
     }
 
-    class UUID
+    ~UUID() {}
+
+    void set_epoch(uint64_t epoch)
     {
-    public:
-        UUID() : epoch_(0), time_(0), machine_(0), sequence_(0)
+        epoch_ = epoch;
+    }
+
+    void set_machine(int32_t machine)
+    {
+        machine_ = machine;
+    }
+
+    int64_t generate()
+    {
+        int64_t value = 0;
+        uint64_t time = UUIDModule::get_time() - epoch_;
+
+        // ä¿ç•™åŽ41ä½æ—¶é—´
+        value = time << 22;
+
+        // ä¸­é—´10ä½æ˜¯æœºå™¨ID
+        value |= (machine_ & 0x3FF) << 12;
+
+        // æœ€åŽ12ä½æ˜¯sequenceID
+        value |= sequence_++ & 0xFFF;
+        if (sequence_ == 0x1000)
         {
+            sequence_ = 0;
         }
 
-        ~UUID() {}
-
-        void set_epoch(uint64_t epoch)
-        {
-            epoch_ = epoch;
-        }
-
-        void set_machine(int32_t machine)
-        {
-            machine_ = machine;
-        }
-
-        int64_t generate()
-        {
-            int64_t value = 0;
-            uint64_t time = UUIDModule::get_time() - epoch_;
-
-            // ±£Áôºó41Î»Ê±¼ä
-            value = time << 22;
-
-            // ÖÐ¼ä10Î»ÊÇ»úÆ÷ID
-            value |= (machine_ & 0x3FF) << 12;
-
-            // ×îºó12Î»ÊÇsequenceID
-            value |= sequence_++ & 0xFFF;
-            if (sequence_ == 0x1000)
-            {
-                sequence_ = 0;
-            }
-
-            return value;
-        }
-    private:
-        uint64_t epoch_;
-        uint64_t time_;
-        int32_t machine_;
-        int32_t sequence_;
-    };
+        return value;
+    }
+private:
+    uint64_t epoch_;
+    uint64_t time_;
+    int32_t machine_;
+    int32_t sequence_;
+};
 }
 
 NFCUUIDModule::NFCUUIDModule(NFIPluginManager* p)
@@ -119,7 +119,7 @@ bool NFCUUIDModule::AfterInit()
     NFIKernelModule* pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
     assert(NULL != pKernelModule);
 
-    // ³õÊ¼»¯uuid
+    // åˆå§‹åŒ–uuid
     NFINT32 nID = pKernelModule->GetIdentID();
     m_pUUID->set_machine(nID);
     m_pUUID->set_epoch(uint64_t(1367505795100));
@@ -137,9 +137,9 @@ int64_t NFCUUIDModule::CreateGUID()
     return m_pUUID->generate();
 }
 
-int64_t NFCUUIDModule::CreateGUID( const std::string& strName )
+int64_t NFCUUIDModule::CreateGUID(const std::string& strName)
 {
     boost::crc_optimal<64, 0x04C11DB7, 0, 0, false, false> crc;
-    crc.process_bytes (strName.data(), strName.length());
+    crc.process_bytes(strName.data(), strName.length());
     return crc.checksum();
 }

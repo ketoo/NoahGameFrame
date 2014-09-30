@@ -58,12 +58,12 @@ class NFIHeartBeatManager
 {
 public:
     virtual ~NFIHeartBeatManager() {}
-	
-	virtual NFIDENTID Self() = 0;
+
+    virtual NFIDENTID Self() = 0;
 
     virtual bool Execute(const float fLastTime, const float fAllTime) = 0;
     virtual bool Exist(const std::string& strHeartBeatName) = 0;
-    
+
     virtual bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIDataList& var, const float fTime, const int nCount) = 0;
     virtual bool RemoveHeartBeat(const std::string& strHeartBeatName) = 0;
 

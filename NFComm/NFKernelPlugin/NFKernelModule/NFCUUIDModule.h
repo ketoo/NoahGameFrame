@@ -16,8 +16,8 @@
 
 namespace UUIDModule
 {
-    extern uint64_t get_time();
-    class UUID;
+extern uint64_t get_time();
+class UUID;
 }
 
 class NFCUUIDModule
