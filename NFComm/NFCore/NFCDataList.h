@@ -15,14 +15,18 @@
 class NFCDataList: public NFIDataList
 {
 public:
+    static NFCDataList nullData;
+public:
     NFCDataList();
 
     NFCDataList(const char* str, const char* strSplit);
 
+    NFCDataList(const NFCDataList& src);
     NFCDataList(const NFIDataList& src);
 
     virtual ~NFCDataList();
 
+    NFCDataList& operator=(const NFCDataList& src);
     NFCDataList& operator=(const NFIDataList& src);
 
     // Ìí¼Ó
@@ -82,7 +86,7 @@ public:
     virtual float Float(const int index) const;
     virtual double Double(const int index) const;
     virtual std::string StringValEx(const int index, const bool bForce) const;
-    virtual bool ToString(OUT std::string& str, const char* strSplit);
+    virtual bool ToString(std::string& str, const char* strSplit);
     virtual const std::string& String(const int index) const;
     virtual NFIDENTID Object(const int index) const;
     virtual void* Pointer(const int index) const;

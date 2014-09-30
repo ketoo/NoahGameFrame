@@ -32,8 +32,8 @@ bool NFCElementInfoModule::Init()
 
     assert(NULL != m_pLogicClassModule);
 
-//     Clear();
-//     Load();
+    //     Clear();
+    //     Load();
 
     return true;
 }
@@ -85,15 +85,15 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
 {
     //attrNode is the node of a object
     std::string strConfigID = attrNode->first_attribute("ID")->value();
-	if (strConfigID.empty())
-	{
-		NFASSERT(0, strConfigID, __FILE__, __FUNCTION__);
-		return false;
-	}
+    if (strConfigID.empty())
+    {
+        NFASSERT(0, strConfigID, __FILE__, __FUNCTION__);
+        return false;
+    }
 
     if (ExistElement(strConfigID))
     {
-		NFASSERT(0, strConfigID, __FILE__, __FUNCTION__);
+        NFASSERT(0, strConfigID, __FILE__, __FUNCTION__);
         return false;
     }
 
@@ -125,7 +125,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
         NFIRecord* pRecord = pClassRecordManager->First();
         while (pRecord)
         {
-            pElementRecordManager->AddRecord(0, pRecord->GetName(), pRecord->GetInitData(), pRecord->GetKeyState(), pRecord->GetInitDesc(), pRecord->GetTag(), pRecord->GetRelatedRecord(), pRecord->GetRows(), pRecord->GetPublic(), pRecord->GetPrivate(), pRecord->GetSave(), pRecord->GetIndex());
+            pElementRecordManager->AddRecord(0, pRecord->GetName(), pRecord->GetInitData(), pRecord->GetKeyState(), pRecord->GetInitDesc(), pRecord->GetTag(), pRecord->GetRelatedRecord(), pRecord->GetRows(), pRecord->GetPublic(), pRecord->GetPrivate(), pRecord->GetSave(), pRecord->GetView(), pRecord->GetIndex());
             pRecord = pClassRecordManager->Next();
         }
 
@@ -152,50 +152,50 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
         switch (eType)
         {
             case TDATA_INT:
-				{
-					if(!LegalNumber(pstrConfigValue))
-					{
-                        NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
-					}
-					var.variantData = (int)atoi(pstrConfigValue);
-				}
-                break;
-            case TDATA_FLOAT:
+            {
+                if (!LegalNumber(pstrConfigValue))
                 {
-                    if (strlen(pstrConfigValue) <= 0)
-                    {
-                        NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
-                    }
-                    var.variantData = (float)atof(pstrConfigValue);
+                    NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 }
-                break;
-            case TDATA_DOUBLE:
+                var.variantData = (int)atoi(pstrConfigValue);
+            }
+            break;
+            case TDATA_FLOAT:
+            {
+                if (strlen(pstrConfigValue) <= 0)
                 {
-                    if (strlen(pstrConfigValue) <= 0)
-                    {
-                        NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
-                    }
-                    var.variantData = (double)atof(pstrConfigValue);
-                }                
-                break;
+                    NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
+                }
+                var.variantData = (float)atof(pstrConfigValue);
+            }
+            break;
+            case TDATA_DOUBLE:
+            {
+                if (strlen(pstrConfigValue) <= 0)
+                {
+                    NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
+                }
+                var.variantData = (double)atof(pstrConfigValue);
+            }
+            break;
             case TDATA_STRING:
                 var.variantData = std::string(pstrConfigValue);
                 break;
             case TDATA_OBJECT:
+            {
+                if (strlen(pstrConfigValue) <= 0)
                 {
-                    if (strlen(pstrConfigValue) <= 0)
-                    {
-                        NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
-                    }
-                    var.variantData = (NFINT64)0;
+                    NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 }
-                
-                break;
+                var.variantData = (NFINT64)0;
+            }
+
+            break;
             //case TDATA_POINTER:
             //    var.variantData = (void*)NULL;
             //    break;
             default:
-               NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
+                NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 break;
         }
 
@@ -326,46 +326,46 @@ bool NFCElementInfoModule::ExistElement(const std::string& strConfigName)
     return false;
 }
 
-bool NFCElementInfoModule::LegalNumber( const char* str )
+bool NFCElementInfoModule::LegalNumber(const char* str)
 {
-	int nLen = int(strlen(str));
-	if (nLen <= 0)
-	{
-		return false;
-	}
+    int nLen = int(strlen(str));
+    if (nLen <= 0)
+    {
+        return false;
+    }
 
-	int nStart = 0;
-	if('-' == str[0])
-	{
-		nStart = 1;
-	}
+    int nStart = 0;
+    if ('-' == str[0])
+    {
+        nStart = 1;
+    }
 
-	for (int i = nStart; i < nLen; ++i)
-	{
-		if(!isdigit(str[i]))
-		{
-			return false;
-		}
-	}
+    for (int i = nStart; i < nLen; ++i)
+    {
+        if (!isdigit(str[i]))
+        {
+            return false;
+        }
+    }
 
-	return true;
+    return true;
 }
 
 bool NFCElementInfoModule::AfterInit()
 {
-	return true;
+    return true;
 
 }
 
 bool NFCElementInfoModule::BeforeShut()
 {
-	return true;
+    return true;
 
 }
 
-bool NFCElementInfoModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCElementInfoModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
-	return true;
+    return true;
 
 }
 
@@ -383,10 +383,10 @@ bool NFCElementInfoModule::Clear()
     ClearAll();
 
     mbLoaded = false;
-	return true;
+    return true;
 }
 
-NFIComponentManager* NFCElementInfoModule::GetComponentManager( const std::string& strConfigName )
+NFIComponentManager* NFCElementInfoModule::GetComponentManager(const std::string& strConfigName)
 {
     ElementConfigInfo* pElementInfo = GetElement(strConfigName);
     if (pElementInfo)

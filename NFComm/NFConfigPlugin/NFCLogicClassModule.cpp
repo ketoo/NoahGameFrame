@@ -6,7 +6,7 @@
 //
 // -------------------------------------------------------------------------
 
-////#include "stdafx.h"
+#include <time.h>
 #include <algorithm>
 #include "NFConfigPlugin.h"
 #include "NFCElementInfoModule.h"
@@ -45,7 +45,8 @@ bool NFCLogicClassModule::Shut()
 
 NFCLogicClassModule::NFCLogicClassModule(NFIPluginManager* p)
 {
-    mnPropertyIndex = GetTickCount() % 10 + 1;
+    mnPropertyIndex = NF_GetTickCount() % 10 + 1;
+
     pPluginManager = p;
     msConfigFileName = "../../NFDataCfg/Struct/LogicClass.xml";
 }
@@ -121,6 +122,13 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
             const char* pstrPropertyIndex = pPropertyNode->first_attribute("Index")->value();
 
             const char* pstrSave = pPropertyNode->first_attribute("Save")->value();
+            
+            std::string strView;
+            if (pPropertyNode->first_attribute("View") != NULL)
+            {
+                strView = pPropertyNode->first_attribute("View")->value();
+            }
+
             const char* pstrRelationValue = NULL_STR.c_str();
             if (pPropertyNode->first_attribute("RelationValue"))
             {
@@ -130,6 +138,7 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
             bool bPublic = boost::lexical_cast<bool>(pstrPublic);
             bool bPrivate = boost::lexical_cast<bool>(pstrPrivate);
             bool bSave = boost::lexical_cast<bool>(pstrSave);
+            bool bView = (strView.empty() ? (boost::lexical_cast<bool>(strView)) : false);
             int nIndex = boost::lexical_cast<int>(pstrPropertyIndex);
 
             if (bPublic || bPrivate)
@@ -150,7 +159,7 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
 
             //printf( " Property:%s[%s]\n", pstrPropertyName, pstrType );
 
-            pClass->GetPropertyManager()->AddProperty(0, strPropertyName,  varProperty.nType, bPublic,  bPrivate, bSave, nIndex, pstrRelationValue);
+            pClass->GetPropertyManager()->AddProperty(0, strPropertyName, varProperty.nType, bPublic,  bPrivate, bSave, bView, nIndex, pstrRelationValue);
         }
     }
 
@@ -180,11 +189,19 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCL
             const char* pstrPublic = pRecordNode->first_attribute("Public")->value();
             const char* pstrPrivate = pRecordNode->first_attribute("Private")->value();
             const char* pstrSave = pRecordNode->first_attribute("Save")->value();
+            
+            std::string strView;
+            if (pRecordNode->first_attribute("View") != NULL)
+            {
+                strView = pRecordNode->first_attribute("View")->value();
+            }
+
             const char* pstrIndex = pRecordNode->first_attribute("Index")->value();
 
             bool bPublic = boost::lexical_cast<bool>(pstrPublic);
             bool bPrivate = boost::lexical_cast<bool>(pstrPrivate);
             bool bSave = boost::lexical_cast<bool>(pstrSave);
+            bool bView = (strView.empty() ? (boost::lexical_cast<bool>(strView)) : false);
             int nIndex = boost::lexical_cast<int>(pstrIndex);
 
             NFCDataList recordVar;
@@ -253,14 +270,14 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCL
                 //////////////////////////////////////////////////////////////////////////
             }
 
-            pClass->GetRecordManager()->AddRecord(0, pstrRecordName, recordVar, recordKey, recordDesc, recordTag, recordRelation, atoi(pstrRow), bPublic, bPrivate, bSave, nIndex);
+            pClass->GetRecordManager()->AddRecord(0, pstrRecordName, recordVar, recordKey, recordDesc, recordTag, recordRelation, atoi(pstrRow), bPublic, bPrivate, bSave, bView, nIndex);
         }
     }
 
     return true;
 }
 
-bool NFCLogicClassModule::AddComponents( rapidxml::xml_node<>* pComponentRootNode, NFCLogicClass* pClass )
+bool NFCLogicClassModule::AddComponents(rapidxml::xml_node<>* pComponentRootNode, NFCLogicClass* pClass)
 {
     for (rapidxml::xml_node<>* pComponentNode = pComponentRootNode->first_node(); pComponentNode; pComponentNode = pComponentNode->next_sibling())
     {
@@ -270,7 +287,7 @@ bool NFCLogicClassModule::AddComponents( rapidxml::xml_node<>* pComponentRootNod
             const char* strLanguage = pComponentNode->first_attribute("Language")->value();
             const char* strEnable = pComponentNode->first_attribute("Enable")->value();
             bool bEnable = boost::lexical_cast<int>(strEnable);
-            if(bEnable)
+            if (bEnable)
             {
                 if (pClass->GetComponentManager()->GetElement(strComponentName))
                 {
@@ -321,7 +338,7 @@ bool NFCLogicClassModule::AddClassInclude(const char* pstrClassFilePath, NFCLogi
     {
         AddComponents(pComponentRootNode, pClass);
     }
-    
+
     //pClass->mvIncludeFile.push_back( pstrClassFilePath );
     //and include file
     rapidxml::xml_node<>* pIncludeRootNode = root->first_node("Includes");
@@ -338,7 +355,7 @@ bool NFCLogicClassModule::AddClassInclude(const char* pstrClassFilePath, NFCLogi
             }
         }
     }
-    
+
 
     return true;
 }
@@ -482,7 +499,7 @@ NFIRecordManager* NFCLogicClassModule::GetClassRecordManager(const std::string& 
     return NULL;
 }
 
-NFIComponentManager* NFCLogicClassModule::GetClassComponentManager( const std::string& strClassName )
+NFIComponentManager* NFCLogicClassModule::GetClassComponentManager(const std::string& strClassName)
 {
     NFILogicClass* pClass = GetElement(strClassName);
     if (pClass)
@@ -495,6 +512,6 @@ NFIComponentManager* NFCLogicClassModule::GetClassComponentManager( const std::s
 
 bool NFCLogicClassModule::Clear()
 {
-	return true;
+    return true;
 
 }

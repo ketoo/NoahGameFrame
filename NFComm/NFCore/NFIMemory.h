@@ -23,17 +23,17 @@
 
 #pragma pack(push, 1)
 
-class NFIMemory  
-{  
-public:  
-    NFIMemory(){};  
-    virtual ~NFIMemory(){};  
-    virtual void Add (void * p, char const * file, int line) = 0;  
-    virtual void Remove (void * p) = 0;  
-    virtual void Dump () = 0;  
+class NFIMemory
+{
+public:
+    NFIMemory() {};
+    virtual ~NFIMemory() {};
+    virtual void Add(void* p, char const* file, int line) = 0;
+    virtual void Remove(void* p) = 0;
+    virtual void Dump() = 0;
 
 
-};  
+};
 
 #pragma pack(pop)
 #endif
