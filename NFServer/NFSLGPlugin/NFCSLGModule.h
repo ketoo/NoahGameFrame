@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_GAMESERVER_MODULE_H_
-#define _NFC_GAMESERVER_MODULE_H_
+#ifndef _NFC_SLG_SERVER_MODULE_H_
+#define _NFC_SLG_SERVER_MODULE_H_
 
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -43,4 +43,4 @@ protected:
 private:
 };
 
-#endif
+#endif // !_NFC_SLG_SERVER_MODULE_H_

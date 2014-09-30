@@ -234,6 +234,7 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
                 pStaticConfigPropertyInfo->GetPublic(),
                 pStaticConfigPropertyInfo->GetPrivate(),
                 pStaticConfigPropertyInfo->GetSave(),
+                pStaticConfigPropertyInfo->GetView(),
                 pStaticConfigPropertyInfo->GetIndex(),
                 pStaticConfigPropertyInfo->GetRelationValue());
 
@@ -259,6 +260,7 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
                 pConfigRecordInfo->GetPublic(),
                 pConfigRecordInfo->GetPrivate(),
                 pConfigRecordInfo->GetSave(),
+                pConfigRecordInfo->GetView(),
                 pConfigRecordInfo->GetIndex());
 
             //通用回调，方便NET同步
@@ -1628,12 +1630,12 @@ bool NFCKernelModule::LogSelfInfo(const NFIDENTID ident)
     return false;
 }
 
-bool NFCKernelModule::AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic , bool bPrivate , bool bSave, int nIndex, const std::string& strScriptFunction)
+bool NFCKernelModule::AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic , bool bPrivate , bool bSave, bool bView, int nIndex, const std::string& strScriptFunction)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        pObject->GetPropertyManager()->AddProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, nIndex, strScriptFunction);
+        pObject->GetPropertyManager()->AddProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, bView, nIndex, strScriptFunction);
 
         //通用回调，方便NET同步
         PROPERTY_EVENT_FUNCTOR functor = boost::bind(&NFCKernelModule::OnPropertyCommonEvent, this, _1, _2, _3, _4, _5);
@@ -1644,12 +1646,12 @@ bool NFCKernelModule::AddProperty(const NFIDENTID& self, const std::string& strP
     return false;
 }
 
-bool NFCKernelModule::AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& varKey, const NFIDataList& varDesc, const NFIDataList& varTag, const NFIDataList& varRelatedRecord, const int nRows, bool bPublic, bool bPrivate, bool bSave, int nIndex)
+bool NFCKernelModule::AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& varKey, const NFIDataList& varDesc, const NFIDataList& varTag, const NFIDataList& varRelatedRecord, const int nRows, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
     {
-        pObject->GetRecordManager()->AddRecord(self, strRecordName, TData, varKey, varDesc, varTag, varRelatedRecord, nRows, bPublic, bPrivate, bSave, nIndex);
+        pObject->GetRecordManager()->AddRecord(self, strRecordName, TData, varKey, varDesc, varTag, varRelatedRecord, nRows, bPublic, bPrivate, bSave, bView, nIndex);
 
         //通用回调，方便NET同步
         RECORD_EVENT_FUNCTOR functor = boost::bind(&NFCKernelModule::OnRecordCommonEvent, this, _1, _2, _3, _4, _5, _6, _7, _8);

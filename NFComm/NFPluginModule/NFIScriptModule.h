@@ -530,9 +530,9 @@ public:
         return m_pKernelModule->GetRecordObject(self, strRecordName, nRow, nCol);
     }
 
-    bool AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction)
+    bool AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex, const std::string& strScriptFunction)
     {
-        return m_pKernelModule->AddProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, nIndex, strScriptFunction);
+        return m_pKernelModule->AddProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, bView, nIndex, strScriptFunction);
     }
 
     bool AddRow(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& var)
@@ -549,9 +549,9 @@ public:
         return false;
     }
 
-    bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFCScriptVarList& TData, const NFCScriptVarList& varKey, const NFCScriptVarList& varDesc, const NFCScriptVarList& varTag, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex)
+    bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFCScriptVarList& TData, const NFCScriptVarList& varKey, const NFCScriptVarList& varDesc, const NFCScriptVarList& varTag, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex)
     {
-        return m_pKernelModule->AddRecord(self, strRecordName, TData.GetVar(), varKey.GetVar(), varDesc.GetVar(), varTag.GetVar(), varTag.GetVar(), nRows, bPublic, bPrivate, bSave, nIndex);
+        return m_pKernelModule->AddRecord(self, strRecordName, TData.GetVar(), varKey.GetVar(), varDesc.GetVar(), varTag.GetVar(), varTag.GetVar(), nRows, bPublic, bPrivate, bSave, bView, nIndex);
     }
 
 protected:
@@ -1179,13 +1179,13 @@ static NFIDENTID KernelModule_GetRecordObject(const NFScriptInt64& nPtrKernelMod
 }
 
 static bool KernelModule_AddProperty(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self,
-                        const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic ,  bool bPrivate ,  
-                        bool bSave, int nIndex, const std::string& strScriptFunction)
+                        const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  
+                        bool bSave, bool bView, int nIndex, const std::string& strScriptFunction)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
     if (pScriptKernelModule)
     {
-        return pScriptKernelModule->AddProperty(self.ObjectVal(), strPropertyName, varType, bPublic, bPrivate, bSave, nIndex, strScriptFunction);
+        return pScriptKernelModule->AddProperty(self.ObjectVal(), strPropertyName, varType, bPublic, bPrivate, bSave, bView, nIndex, strScriptFunction);
     }
 
     return false;
@@ -1204,12 +1204,12 @@ static bool KernelModule_AddRow(const NFScriptInt64& nPtrKernelModule, const NFS
 }
 static bool KernelModule_AddRecord(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, const std::string& strRecordName, 
                       const NFCScriptVarList& TData, const NFCScriptVarList& varKey, const NFCScriptVarList& varDesc, const NFCScriptVarList& varTag, 
-                      const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex)
+                      const int nRows, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
     if (pScriptKernelModule)
     {
-        return pScriptKernelModule->AddRecord(self.ObjectVal(), strRecordName, TData, varKey, varDesc, varTag, nRows, bPublic, bPrivate, bSave, nIndex);
+        return pScriptKernelModule->AddRecord(self.ObjectVal(), strRecordName, TData, varKey, varDesc, varTag, nRows, bPublic, bPrivate, bSave, bView, nIndex);
     }
 
     return false;
