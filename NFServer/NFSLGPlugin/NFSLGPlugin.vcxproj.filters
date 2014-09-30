@@ -4,11 +4,23 @@
     <Filter Include="NFBuildingModule">
       <UniqueIdentifier>{83bb9cee-b5c5-4855-b4df-9b18a91663b7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFBarrackModule">
-      <UniqueIdentifier>{4b9ced9f-6854-4836-9432-e07b7d70cae0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NFCampModule">
-      <UniqueIdentifier>{035076e2-f63d-46c0-bc62-21d0060e9da8}</UniqueIdentifier>
-    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="NFCSLGModule.cpp" />
+    <ClCompile Include="NFSLGPlugin.cpp" />
+    <ClCompile Include="NFCSLGBuildingModule.cpp">
+      <Filter>NFBuildingModule</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NFCSLGModule.h" />
+    <ClInclude Include="NFSLGPlugin.h" />
+    <ClInclude Include="..\..\NFComm\NFPluginModule\NFISLGBuildingModule.h">
+      <Filter>NFBuildingModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCSLGBuildingModule.h">
+      <Filter>NFBuildingModule</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
