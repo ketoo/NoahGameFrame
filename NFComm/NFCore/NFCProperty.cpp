@@ -19,12 +19,13 @@ NFCProperty::NFCProperty()
     msPropertyName = "";
 }
 
-NFCProperty::NFCProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, int nIndex, const std::string& strScriptFunction)
+NFCProperty::NFCProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex, const std::string& strScriptFunction)
 {
 
     mbPublic = bPublic;
     mbPrivate = bPrivate;
     mbSave = bSave;
+    mbView = bView;
     mnIndex = nIndex;
     mSelf = self;
 
@@ -100,6 +101,11 @@ const bool NFCProperty::GetSave() const
     return mbSave;
 }
 
+const bool NFCProperty::GetView() const
+{
+    return mbView;
+}
+
 const bool NFCProperty::GetPublic() const
 {
     return mbPublic;
@@ -123,6 +129,11 @@ const std::string& NFCProperty::GetRelationValue() const
 void NFCProperty::SetSave(bool bSave)
 {
     mbSave = bSave;
+}
+
+void NFCProperty::SetView(bool bView)
+{
+    mbView = bView;
 }
 
 void NFCProperty::SetPublic(bool bPublic)

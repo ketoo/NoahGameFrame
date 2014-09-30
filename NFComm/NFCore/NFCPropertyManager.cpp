@@ -41,7 +41,7 @@ NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, NFIProperty*
     NFIProperty* pOldProperty = GetElement(strProperty);
     if (!pOldProperty)
     {
-        NFIProperty* pNewProperty = NF_NEW NFCProperty(self, strProperty, pProperty->GetType(), pProperty->GetPublic(), pProperty->GetPrivate(), pProperty->GetSave(), pProperty->GetIndex(), pProperty->GetRelationValue());
+        NFIProperty* pNewProperty = NF_NEW NFCProperty(self, strProperty, pProperty->GetType(), pProperty->GetPublic(), pProperty->GetPrivate(), pProperty->GetSave(), pProperty->GetView(), pProperty->GetIndex(), pProperty->GetRelationValue());
         this->AddElement(strProperty, pNewProperty);
 
         if (pProperty->GetIndex() > 0)
@@ -53,12 +53,12 @@ NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, NFIProperty*
     return pOldProperty;
 }
 
-NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, int nIndex, const std::string& strScriptFunction)
+NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex, const std::string& strScriptFunction)
 {
     NFIProperty* pProperty = GetElement(strPropertyName);
     if (!pProperty)
     {
-        pProperty = NF_NEW NFCProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, nIndex, strScriptFunction);
+        pProperty = NF_NEW NFCProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, bView, nIndex, strScriptFunction);
         this->AddElement(strPropertyName, pProperty);
 
         if (pProperty->GetIndex() > 0)
