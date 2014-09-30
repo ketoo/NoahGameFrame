@@ -5,7 +5,6 @@
 #include "NFConfigPlugin.h"
 #include "NFCLogicClassModule.h"
 #include "NFCElementInfoModule.h"
-#include "NFComm\NFPluginModule\NFIPluginManager.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 

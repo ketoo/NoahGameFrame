@@ -1,5 +1,5 @@
 /**
-* @brief   µ÷ÊÔ¹¤¾ß
+* @brief   è°ƒè¯•å·¥å…·
 * @author  dongbo
 * @date    2010-3-17
 * @remarks
@@ -34,8 +34,8 @@ public:
 
 public:
     /**
-    * @brief Èç¹ûÄã²»´«µÝ²ÎÊý£¬ÄÇÃ´Äã½«µÃµ½µ±Ç°Ê±¿ÌµÄµ÷ÓÃ¶ÑÕ»
-    *        Èç¹ûÄãÊ¹ÓÃËüÀ´´¦ÀíSEHÒì³££¬ÄÇÃ´Çë½«LPEXCEPTION_POINTERS->ContextRecord´«½øÈ¥
+    * @brief å¦‚æžœä½ ä¸ä¼ é€’å‚æ•°ï¼Œé‚£ä¹ˆä½ å°†å¾—åˆ°å½“å‰æ—¶åˆ»çš„è°ƒç”¨å †æ ˆ
+    *        å¦‚æžœä½ ä½¿ç”¨å®ƒæ¥å¤„ç†SEHå¼‚å¸¸ï¼Œé‚£ä¹ˆè¯·å°†LPEXCEPTION_POINTERS->ContextRecordä¼ è¿›åŽ»
     **/
     static CALLSTACK_PTR generate(const void* pContext = NULL);
 

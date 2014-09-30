@@ -83,6 +83,12 @@ echo Extract nessasery lib completed!
 7z x "..\Dependencies\mono-3.6.0.39\mono-3.6.0.39.rar" -o"..\Dependencies\mono-3.6.0.39\" -y
 
 echo Extract mono-3.6.0.39 completed!
+
+echo Start to extract google-breakpad lib
+
+7z x "..\Dependencies\google-breakpad.zip" -o"..\Dependencies\google-breakpad\" -y
+
+echo Extract mono-3.6.0.39 completed!
 rem ====================================================================================
 
 pause

@@ -13,7 +13,7 @@ NFIDENTID NFCComponentManager::Self()
     return mSelf;
 }
 
-NFIComponent* NFCComponentManager::AddComponent( const std::string& strComponentName, const std::string& strLanguageName)
+NFIComponent* NFCComponentManager::AddComponent(const std::string& strComponentName, const std::string& strLanguageName)
 {
     NFIComponent* pComponent = GetElement(strComponentName);
     if (pComponent)
@@ -27,12 +27,12 @@ NFIComponent* NFCComponentManager::AddComponent( const std::string& strComponent
     return pComponent;
 }
 
-NFIComponent* NFCComponentManager::FindComponent( const std::string& strComponentName )
+NFIComponent* NFCComponentManager::FindComponent(const std::string& strComponentName)
 {
     return GetElement(strComponentName);
 }
 
-bool NFCComponentManager::SetEnable( const std::string& strComponentName, const bool bEnable )
+bool NFCComponentManager::SetEnable(const std::string& strComponentName, const bool bEnable)
 {
     NFIComponent* pComponent = GetElement(strComponentName);
     if (pComponent)
@@ -43,7 +43,7 @@ bool NFCComponentManager::SetEnable( const std::string& strComponentName, const 
     return false;
 }
 
-bool NFCComponentManager::Enable( const std::string& strComponentName )
+bool NFCComponentManager::Enable(const std::string& strComponentName)
 {
     NFIComponent* pComponent = GetElement(strComponentName);
     if (pComponent)
@@ -120,7 +120,7 @@ bool NFCComponentManager::Shut()
     return true;
 }
 
-bool NFCComponentManager::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCComponentManager::Execute(const float fLasFrametime, const float fStartedTime)
 {
     NFIComponent* pComponent = First();
     while (pComponent && pComponent->Enable())

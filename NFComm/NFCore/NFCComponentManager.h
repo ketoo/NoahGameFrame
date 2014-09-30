@@ -20,7 +20,7 @@ public:
     {
         mSelf = self;
     }
-    
+
     virtual ~NFCComponentManager()
     {
         DestroyAllComponent();
