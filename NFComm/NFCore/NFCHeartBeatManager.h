@@ -18,21 +18,21 @@
 class NFCHeartBeatManager : public NFIHeartBeatManager
 {
 public:
-	NFCHeartBeatManager()
+    NFCHeartBeatManager()
     {
         mSelf = 0;
         fLastTotal = 0.0f;
     }
 
-	NFCHeartBeatManager(const NFIDENTID& self)
-	{
-		mSelf = self;
+    NFCHeartBeatManager(const NFIDENTID& self)
+    {
+        mSelf = self;
         fLastTotal = 0.0f;
-	}
+    }
 
     virtual ~NFCHeartBeatManager();
 
-	virtual NFIDENTID Self();
+    virtual NFIDENTID Self();
 
     virtual bool Execute(const float fLastTime, const float fAllTime);
     virtual bool Exist(const std::string& strHeartBeatName);
@@ -40,7 +40,7 @@ public:
     virtual bool RemoveHeartBeat(const std::string& strHeartBeatName);
 
 protected:
-	NFIDENTID mSelf;
+    NFIDENTID mSelf;
     float fLastTotal;
 
     NFList<std::string> mRemoveListEx;

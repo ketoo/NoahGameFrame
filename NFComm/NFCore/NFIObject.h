@@ -62,7 +62,7 @@ public:
     virtual bool FindHeartBeat(const std::string& strHeartBeatName) = 0;
 
     virtual bool RemoveHeartBeat(const std::string& strHeartBeatName) = 0;
-    
+
     /////////////////////////////////////////////////////////////////
 
     virtual bool FindProperty(const std::string& strPropertyName) = 0;
@@ -112,7 +112,7 @@ public:
     virtual NFIHeartBeatManager* GetHeartBeatManager() = 0;
     virtual NFIPropertyManager* GetPropertyManager() = 0;
     virtual NFIComponentManager* GetComponentManager() = 0;
-    
+
 
 
 private:

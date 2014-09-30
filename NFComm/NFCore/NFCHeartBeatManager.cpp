@@ -115,14 +115,14 @@ bool NFCHeartBeatManager::Execute(const float fLastTime, const float fAllTime)
     return true;
 }
 
-bool NFCHeartBeatManager::RemoveHeartBeat( const std::string& strHeartBeatName )
+bool NFCHeartBeatManager::RemoveHeartBeat(const std::string& strHeartBeatName)
 {
     return mRemoveListEx.Add(strHeartBeatName);
 }
 
 NFIDENTID NFCHeartBeatManager::Self()
 {
-	return mSelf;
+    return mSelf;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -151,9 +151,9 @@ bool NFCHeartBeatManager::AddHeartBeat(const NFIDENTID self, const std::string& 
     return true;
 }
 
-bool NFCHeartBeatManager::Exist( const std::string& strHeartBeatName )
+bool NFCHeartBeatManager::Exist(const std::string& strHeartBeatName)
 {
-    if(mHeartBeatElementMapEx.GetElement(strHeartBeatName))
+    if (mHeartBeatElementMapEx.GetElement(strHeartBeatName))
     {
         return true;
     }

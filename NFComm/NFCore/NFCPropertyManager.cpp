@@ -41,7 +41,7 @@ NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, NFIProperty*
     NFIProperty* pOldProperty = GetElement(strProperty);
     if (!pOldProperty)
     {
-        NFIProperty* pNewProperty = NF_NEW NFCProperty(self, strProperty, pProperty->GetType(), pProperty->GetPublic(), pProperty->GetPrivate(), pProperty->GetSave(), pProperty->GetIndex(), pProperty->GetRelationValue());
+        NFIProperty* pNewProperty = NF_NEW NFCProperty(self, strProperty, pProperty->GetType(), pProperty->GetPublic(), pProperty->GetPrivate(), pProperty->GetSave(), pProperty->GetView(), pProperty->GetIndex(), pProperty->GetRelationValue());
         this->AddElement(strProperty, pNewProperty);
 
         if (pProperty->GetIndex() > 0)
@@ -49,16 +49,16 @@ NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, NFIProperty*
             mxPropertyIndexMap.insert(std::map<std::string, int>::value_type(strProperty, pProperty->GetIndex()));
         }
     }
-    
+
     return pOldProperty;
 }
 
-NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, int nIndex, const std::string& strScriptFunction)
+NFIProperty* NFCPropertyManager::AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex, const std::string& strScriptFunction)
 {
     NFIProperty* pProperty = GetElement(strPropertyName);
     if (!pProperty)
     {
-        pProperty = NF_NEW NFCProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, nIndex, strScriptFunction);
+        pProperty = NF_NEW NFCProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, bView, nIndex, strScriptFunction);
         this->AddElement(strPropertyName, pProperty);
 
         if (pProperty->GetIndex() > 0)
@@ -83,7 +83,7 @@ bool NFCPropertyManager::SetProperty(const std::string& strPropertyName, const N
     return false;
 }
 
-bool NFCPropertyManager::SetProperty(const NFIProperty* pProperty )
+bool NFCPropertyManager::SetProperty(const NFIProperty* pProperty)
 {
     NFIProperty* pSelfProperty = GetElement(pProperty->GetKey());
     if (pSelfProperty)
@@ -98,7 +98,7 @@ bool NFCPropertyManager::SetProperty(const NFIProperty* pProperty )
 
 NFIDENTID NFCPropertyManager::Self()
 {
-	return mSelf;
+    return mSelf;
 }
 
 const std::map<std::string, int>& NFCPropertyManager::GetPropertyIndex()
@@ -106,7 +106,7 @@ const std::map<std::string, int>& NFCPropertyManager::GetPropertyIndex()
     return mxPropertyIndexMap;
 }
 
-const int NFCPropertyManager::GetPropertyIndex( const std::string& strProperty )
+const int NFCPropertyManager::GetPropertyIndex(const std::string& strProperty)
 {
     std::map<std::string, int>::iterator it = mxPropertyIndexMap.find(strProperty);
     if (it != mxPropertyIndexMap.end())
