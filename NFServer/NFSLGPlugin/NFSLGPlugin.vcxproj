@@ -14,11 +14,13 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFCSLGBuildingModule.cpp" />
     <ClCompile Include="NFCSLGModule.cpp" />
+    <ClCompile Include="NFCSLGShopModule.cpp" />
     <ClCompile Include="NFSLGPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCSLGBuildingModule.h" />
     <ClInclude Include="NFCSLGModule.h" />
+    <ClInclude Include="NFCSLGShopModule.h" />
     <ClInclude Include="NFSLGPlugin.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
