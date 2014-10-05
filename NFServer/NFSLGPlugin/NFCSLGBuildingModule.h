@@ -8,7 +8,10 @@
 #ifndef __NFC_SLG_BUILDING_MODULE_H__
 #define __NFC_SLG_BUILDING_MODULE_H__
 
-#include "NFISLGBuildingModule.h"
+#include "NFComm/NFPluginModule/NFISLGBuildingModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCSLGBuildingModule : public NFISLGBuildingModule
 {
@@ -26,7 +29,8 @@ public:
 public:
     virtual int AddBuilding(const NFIDENTID& self, const std::string& strBuilding);
 private:
-
+	NFIKernelModule* m_pKernelModule;
+	NFILogModule* m_pLogModule;
 };
 
 #endif // !__NFC_SLG_BUILDING_MODULE_H__
