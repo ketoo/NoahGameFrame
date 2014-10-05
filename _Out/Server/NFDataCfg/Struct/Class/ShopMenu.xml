@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is a class xml-->
+<XML>
+    <Records/>
+    <Propertys>
+        <Property Desc="" Id="Type" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int"/>
+        <Property Desc="" Id="Atlas" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="string"/>
+    </Propertys>
+    <Includes/>
+</XML>
