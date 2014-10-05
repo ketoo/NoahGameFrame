@@ -23,7 +23,7 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-#include <vector>
+#include "NFComm/NFPluginModule/NFISLGShopModule.h"
 
 class NFCGameServerNet_ServerModule
     : public NFINetModule
@@ -81,6 +81,13 @@ protected:
     void OnClienPushCustom(const NFIPacket& msg);
     void OnClienChatProcess(const NFIPacket& msg);
 
+	/////////SLG_START/////////////////////////////////////////////////////////////////
+	void OnSLGClienBuyItem(const NFIPacket& msg);
+	void OnSLGClienMoveObject(const NFIPacket& msg);
+	void OnSLGClienUpBuildLvl(const NFIPacket& msg);
+	void OnSLGClienCreateItem(const NFIPacket& msg);
+
+	/////////SLG_END/////////////////////////////////////////////////////////////////
 protected:
     //将self的全部属性广播给argVar[应该是多对多]
     int OnPropertyEnter( const NFIDENTID& self, const NFIDataList& argVar );
@@ -173,6 +180,7 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFIElementInfoModule* m_pElementInfoModule;
+	NFISLGShopModule* m_pSLGShopModule;
 };
 
 #endif
