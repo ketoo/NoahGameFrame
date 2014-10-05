@@ -43,5 +43,9 @@ bool NFCSLGShopModule::AfterInit()
 
 bool NFCSLGShopModule::OnReqBuyItem(const NFIDENTID& self, const std::string& strID, const int nCount, const float fX, const float fY, const float fZ )
 {
+	//扣除货币
+	//添加进表
+	//
+
 	return true;
 }
