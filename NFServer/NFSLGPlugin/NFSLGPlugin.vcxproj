@@ -19,7 +19,6 @@
   <ItemGroup>
     <ClInclude Include="NFCSLGBuildingModule.h" />
     <ClInclude Include="NFCSLGModule.h" />
-    <ClInclude Include="NFISLGBuildingModule.h" />
     <ClInclude Include="NFSLGPlugin.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
