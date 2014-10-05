@@ -19,8 +19,5 @@
     <ClInclude Include="NFCSLGBuildingModule.h">
       <Filter>NFBuildingModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFISLGBuildingModule.h">
-      <Filter>NFBuildingModule</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
