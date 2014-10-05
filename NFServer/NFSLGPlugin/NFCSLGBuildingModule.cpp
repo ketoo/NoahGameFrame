@@ -1,4 +1,5 @@
 #include "NFCSLGBuildingModule.h"
+#include "NFComm\NFCore\NFIObject.h"
 
 NFCSLGBuildingModule::NFCSLGBuildingModule(NFIPluginManager* p)
 {
@@ -12,6 +13,12 @@ bool NFCSLGBuildingModule::Init()
 
 bool NFCSLGBuildingModule::AfterInit()
 {
+	m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
+	m_pLogModule = dynamic_cast<NFILogModule*>( pPluginManager->FindModule( "NFCLogModule" ) );
+	
+	assert( NULL != m_pKernelModule );
+	assert( NULL != m_pLogModule );
+
     return true;
 }
 
