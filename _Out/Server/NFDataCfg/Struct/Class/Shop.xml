@@ -3,13 +3,13 @@
 <XML>
     <Records/>
     <Propertys>
-        <Property Desc="" Id="Type" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int"/>
-        <Property Desc="" Id="ItemID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="string"/>
-        <Property Desc="" Id="Gold" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int"/>
-        <Property Desc="" Id="Steel" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int"/>
-        <Property Desc="" Id="Stone" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int"/>
-        <Property Desc="" Id="Diamond" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int"/>
-        <Property Desc="" Id="Level" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int"/>
+        <Property Desc="" Id="Type" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="" Id="ItemID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="" Id="Gold" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="" Id="Steel" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="" Id="Stone" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="" Id="Diamond" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="" Id="Level" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
     </Propertys>
     <Includes/>
 </XML>
