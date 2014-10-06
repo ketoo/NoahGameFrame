@@ -35,6 +35,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::EnumDescriptor* ESLGBuildingType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ESLGBuildingSubType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ESLGArmyType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* ESLGFuncType_descriptor_ = NULL;
 
 }  // namespace
 
@@ -117,6 +118,7 @@ void protobuf_AssignDesc_NFSLGDefine_2eproto() {
   ESLGBuildingType_descriptor_ = file->enum_type(0);
   ESLGBuildingSubType_descriptor_ = file->enum_type(1);
   ESLGArmyType_descriptor_ = file->enum_type(2);
+  ESLGFuncType_descriptor_ = file->enum_type(3);
 }
 
 namespace {
@@ -202,7 +204,14 @@ void protobuf_AddDesc_NFSLGDefine_2eproto() {
     "_HEALER\020\006\022\016\n\nEAT_WIZARD\020\007\022\016\n\nEAT_DRAGON\020"
     "\010\022\r\n\tEAT_PEKKA\020\t\022\016\n\nEAT_MINION\020\024\022\021\n\rEAT_"
     "HOG_RIDER\020\025\022\020\n\014EAT_VALKYRIE\020\026\022\r\n\tEAT_GOL"
-    "EM\020\027", 1724);
+    "EM\020\027*\225\002\n\014ESLGFuncType\022\014\n\010EFT_INFO\020\000\022\016\n\nE"
+    "FT_BOOOST\020\001\022\r\n\tEFT_LVLUP\020\002\022\025\n\021EFT_CREATE"
+    "_SOLDER\020\003\022\024\n\020EFT_CREATE_SPEEL\020\004\022\020\n\014EFT_R"
+    "ESEARCH\020\005\022\024\n\020EFT_COLLECT_GOLD\020\006\022\025\n\021EFT_C"
+    "OLLECT_STONE\020\007\022\025\n\021EFT_COLLECT_STEEL\020\010\022\027\n"
+    "\023EFT_COLLECT_DIAMOND\020\t\022\014\n\010EFT_SELL\020\n\022\016\n\n"
+    "EFT_REPAIR\020\013\022\016\n\nEFT_CANCEL\020\014\022\016\n\nEFT_FINI"
+    "SH\020\r", 2004);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFSLGDefine.proto", &protobuf_RegisterTypes);
   ReqAckBuyObjectFormShop::default_instance_ = new ReqAckBuyObjectFormShop();
@@ -322,6 +331,32 @@ bool ESLGArmyType_IsValid(int value) {
     case 21:
     case 22:
     case 23:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* ESLGFuncType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ESLGFuncType_descriptor_;
+}
+bool ESLGFuncType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
       return true;
     default:
       return false;
