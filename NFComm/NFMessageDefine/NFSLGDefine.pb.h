@@ -160,6 +160,37 @@ inline bool ESLGArmyType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ESLGArmyType>(
     ESLGArmyType_descriptor(), name, value);
 }
+enum ESLGFuncType {
+  EFT_INFO = 0,
+  EFT_BOOOST = 1,
+  EFT_LVLUP = 2,
+  EFT_CREATE_SOLDER = 3,
+  EFT_CREATE_SPEEL = 4,
+  EFT_RESEARCH = 5,
+  EFT_COLLECT_GOLD = 6,
+  EFT_COLLECT_STONE = 7,
+  EFT_COLLECT_STEEL = 8,
+  EFT_COLLECT_DIAMOND = 9,
+  EFT_SELL = 10,
+  EFT_REPAIR = 11,
+  EFT_CANCEL = 12,
+  EFT_FINISH = 13
+};
+bool ESLGFuncType_IsValid(int value);
+const ESLGFuncType ESLGFuncType_MIN = EFT_INFO;
+const ESLGFuncType ESLGFuncType_MAX = EFT_FINISH;
+const int ESLGFuncType_ARRAYSIZE = ESLGFuncType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ESLGFuncType_descriptor();
+inline const ::std::string& ESLGFuncType_Name(ESLGFuncType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ESLGFuncType_descriptor(), value);
+}
+inline bool ESLGFuncType_Parse(
+    const ::std::string& name, ESLGFuncType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ESLGFuncType>(
+    ESLGFuncType_descriptor(), name, value);
+}
 // ===================================================================
 
 class ReqAckBuyObjectFormShop : public ::google::protobuf::Message {
@@ -1009,6 +1040,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ESLGBuildingSubType>() 
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ESLGArmyType>() {
   return ::NFMsg::ESLGArmyType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ESLGFuncType>() {
+  return ::NFMsg::ESLGFuncType_descriptor();
 }
 
 }  // namespace google
