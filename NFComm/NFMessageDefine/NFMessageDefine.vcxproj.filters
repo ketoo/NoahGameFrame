@@ -8,6 +8,7 @@
     <ClInclude Include="NFMsgBase.pb.h" />
     <ClInclude Include="NFMsgBaseEx.pb.h" />
     <ClInclude Include="NFMsgPreGame.pb.h" />
+    <ClInclude Include="NFSLGDefine.pb.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFMsgShare.pb.cc" />
@@ -16,12 +17,6 @@
     <ClCompile Include="NFMsgBaseEx.pb.cc" />
     <ClCompile Include="NFMsgPreGame.pb.cc" />
     <ClCompile Include="NFMsgDefine.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="NFMsgShare.proto" />
-    <None Include="NFDefine.proto" />
-    <None Include="NFMsgBase.proto" />
-    <None Include="NFMsgBaseEx.proto" />
-    <None Include="NFMsgPreGame.proto" />
+    <ClCompile Include="NFSLGDefine.pb.cc" />
   </ItemGroup>
 </Project>
