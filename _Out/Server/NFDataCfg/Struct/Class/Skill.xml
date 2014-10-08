@@ -3,33 +3,33 @@
 <XML>
     <Records/>
     <Propertys>
-        <Property Desc="//普通0短刃类//1普通子弹类(不穿透)//2普通子弹类穿//3普通子弹类单体目标范围(每人头顶闪电那样)/3普通子弹类爆炸目标范围(火矛从天而降那样position)" Id="SkillType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="技能对应的客户端动作状态" Id="AnimaState" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="装备名字字符串索引" Id="ShowName" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="装备描述字符串索引" Id="Desc" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="NFJobType" Id="Job" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="消耗属性" Id="ConsumeProperty" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="消耗值" Id="ConsumeValue" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="消耗类型，0为绝对值，1为当前值百分比，2为最大值百分比" Id="ConsumeType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="伤害属性" Id="DamageProperty" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="伤害值" Id="DamageValue" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="伤害类型，0为绝对值，1为当前值百分比，2为最大值百分比" Id="DamageType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="使用后获得的BUFF" Id="GetBuffList" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="使用后对方获得的BUFF" Id="SendBuffList" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="使用冷却CD" Id="CoolDownTime" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float"/>
-        <Property Desc="释放要求目标距离" Id="RequireDistance" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float"/>
-        <Property Desc="伤害距离--群伤需要" Id="DamageDistance" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float"/>
-        <Property Desc="目标类别0敌人1自己2队友" Id="TargetType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="瞬移距离" Id="FlashDistance" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="产生新的对象--召唤" Id="NewObject" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="击退距离" Id="BeatBackDistance" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float"/>
-        <Property Desc="ICON" Id="Icon" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="图集" Id="Atlas" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="子弹预设" Id="BulletPrefabPath" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="子弹飞行速度(&gt;=100就为瞬间到达)" Id="BulletSpeed" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="升级需要的等级" Id="NeedLevel" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="开放技能需要的等级" Id="ReqLevel" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="是否玩家技能" Id="PlayerSkill" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="//普通0短刃类//1普通子弹类(不穿透)//2普通子弹类穿//3普通子弹类单体目标范围(每人头顶闪电那样)/3普通子弹类爆炸目标范围(火矛从天而降那样position)" Id="SkillType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="技能对应的客户端动作状态" Id="AnimaState" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="装备名字字符串索引" Id="ShowName" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="装备描述字符串索引" Id="Desc" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="NFJobType" Id="Job" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="消耗属性" Id="ConsumeProperty" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="消耗值" Id="ConsumeValue" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="消耗类型，0为绝对值，1为当前值百分比，2为最大值百分比" Id="ConsumeType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="伤害属性" Id="DamageProperty" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="伤害值" Id="DamageValue" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="伤害类型，0为绝对值，1为当前值百分比，2为最大值百分比" Id="DamageType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="使用后获得的BUFF" Id="GetBuffList" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="使用后对方获得的BUFF" Id="SendBuffList" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="使用冷却CD" Id="CoolDownTime" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float" View="1"/>
+        <Property Desc="释放要求目标距离" Id="RequireDistance" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float" View="1"/>
+        <Property Desc="伤害距离--群伤需要" Id="DamageDistance" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float" View="1"/>
+        <Property Desc="目标类别0敌人1自己2队友" Id="TargetType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="瞬移距离" Id="FlashDistance" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="产生新的对象--召唤" Id="NewObject" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="击退距离" Id="BeatBackDistance" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float" View="1"/>
+        <Property Desc="ICON" Id="Icon" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="图集" Id="Atlas" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="子弹预设" Id="BulletPrefabPath" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="子弹飞行速度(&gt;=100就为瞬间到达)" Id="BulletSpeed" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="升级需要的等级" Id="NeedLevel" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="开放技能需要的等级" Id="ReqLevel" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="是否玩家技能" Id="PlayerSkill" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
     </Propertys>
     <Includes/>
 </XML>
