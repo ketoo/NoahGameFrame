@@ -4,6 +4,9 @@
     <Filter Include="NFBuildingModule">
       <UniqueIdentifier>{83bb9cee-b5c5-4855-b4df-9b18a91663b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFShopModule">
+      <UniqueIdentifier>{e990448f-a89a-489f-84b6-6aa6206aef37}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -12,6 +15,9 @@
     <ClCompile Include="NFCSLGBuildingModule.cpp">
       <Filter>NFBuildingModule</Filter>
     </ClCompile>
+    <ClCompile Include="NFCSLGShopModule.cpp">
+      <Filter>NFShopModule</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCSLGModule.h" />
@@ -19,8 +25,8 @@
     <ClInclude Include="NFCSLGBuildingModule.h">
       <Filter>NFBuildingModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFISLGBuildingModule.h">
-      <Filter>NFBuildingModule</Filter>
+    <ClInclude Include="NFCSLGShopModule.h">
+      <Filter>NFShopModule</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

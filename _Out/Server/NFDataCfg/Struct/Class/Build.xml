@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is a class xml-->
+<XML>
+    <Records/>
+    <Propertys>
+        <Property Desc="影响属性类型(效果类型)  生命，法力(可组合,叠加)" Id="EffectType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="影响值类型 百分比 绝对值--如果是控制属性开关，则只能是绝对值" Id="EffectValueType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="影响值参考类型" Id="EffectValueReferType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="总共产生几次" Id="EffectTimeValue" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="每次间隔时间0.5f倍数" Id="EffectTimeInterval" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View="1"/>
+        <Property Desc="每次间隔时间0.5f倍数" Id="WashGroupID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="是否还原，不还原的在计算的时候不能保存在runTimeInfo,只能累计在最终值内" Id="ReverseReferType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="死亡是否清除" Id="EffectClearOnDead" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="下线是否保存" Id="DownSaveType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+    </Propertys>
+    <Includes/>
+</XML>
