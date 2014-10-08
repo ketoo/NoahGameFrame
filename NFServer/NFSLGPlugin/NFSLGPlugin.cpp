@@ -1,5 +1,7 @@
 #include "NFSLGPlugin.h"
 #include "NFCSLGModule.h"
+#include "NFCSLGBuildingModule.h"
+#include "NFCSLGShopModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -31,10 +33,14 @@ const std::string NFSLGPlugin::GetPluginName()
 
 void NFSLGPlugin::Install()
 {
-    REGISTER_MODULE( pPluginManager, NFCSLGModule )
+	REGISTER_MODULE( pPluginManager, NFCSLGModule )
+	REGISTER_MODULE( pPluginManager, NFCSLGBuildingModule )
+	REGISTER_MODULE( pPluginManager, NFCSLGShopModule )
 }
 
 void NFSLGPlugin::Uninstall()
 {
+	UNREGISTER_MODULE( pPluginManager, NFCSLGShopModule )
+	UNREGISTER_MODULE( pPluginManager, NFCSLGBuildingModule )
     UNREGISTER_MODULE( pPluginManager, NFCSLGModule )
 }

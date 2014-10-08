@@ -3,15 +3,15 @@
 <XML>
     <Records/>
     <Propertys>
-        <Property Desc="任务类别" Id="Type" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="下一个任务ID" Id="NextTaskID" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="要求杀的怪，逗号分开" Id="KillMonsterName" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="要求杀的怪数量，逗号分开" Id="KillCount" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="任务限制等级" Id="LevelReq" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="奖励的经验" Id="AwardExp" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="奖励的金币" Id="AwardGold" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="奖励包" Id="AwardPack" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="任务描述" Id="Desc" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
+        <Property Desc="任务类别" Id="Type" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="下一个任务ID" Id="NextTaskID" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="要求杀的怪，逗号分开" Id="KillMonsterName" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="要求杀的怪数量，逗号分开" Id="KillCount" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="任务限制等级" Id="LevelReq" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="奖励的经验" Id="AwardExp" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="奖励的金币" Id="AwardGold" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="奖励包" Id="AwardPack" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="任务描述" Id="Desc" Includes="" Index="0" Private="0" Public="0" Records="" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
     </Propertys>
     <Includes/>
 </XML>
