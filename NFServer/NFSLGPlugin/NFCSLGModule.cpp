@@ -27,7 +27,7 @@ bool NFCSLGModule::AfterInit()
 
     assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
-    assert( NULL != m_pNoSqlModule );
+    //assert( NULL != m_pNoSqlModule );
 
     return true;
 }

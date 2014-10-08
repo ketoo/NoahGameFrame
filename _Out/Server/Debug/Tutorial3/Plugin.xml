@@ -3,4 +3,5 @@
 	<Plugin Name="NFKernelPlugin" Main="1"/>
 	<Plugin Name="NFConfigPlugin" Main="1"/>
 	<Plugin Name="Tutorial3Plugin" Main="1"/>
+	<Plugin Name="NFLogPlugin" Main="1"/>
 </XML>
