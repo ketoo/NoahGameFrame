@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is config xml-->
+<XML>
+    <Object Atlas_ResID="" ID="EFT_INFO"/>
+    <Object Atlas_ResID="" ID="EFT_BOOOST"/>
+    <Object Atlas_ResID="" ID="EFT_LVLUP"/>
+    <Object Atlas_ResID="" ID="EFT_CREATE_SOLDER"/>
+    <Object Atlas_ResID="" ID="EFT_CREATE_SPEEL"/>
+    <Object Atlas_ResID="" ID="EFT_RESEARCH"/>
+    <Object Atlas_ResID="" ID="EFT_COLLECT_GOLD"/>
+    <Object Atlas_ResID="" ID="EFT_COLLECT_STONE"/>
+    <Object Atlas_ResID="" ID="EFT_COLLECT_STEEL"/>
+    <Object Atlas_ResID="" ID="EFT_COLLECT_DIAMOND"/>
+    <Object Atlas_ResID="" ID="EFT_SELL"/>
+    <Object Atlas_ResID="" ID="EFT_REPAIR"/>
+    <Object Atlas_ResID="" ID="EFT_CANCEL"/>
+    <Object Atlas_ResID="" ID="EFT_FINISH"/>
+</XML>
