@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is config xml-->
+<XML>
+    <Object Atlas="Item1" ID="ShopMenu1" Type="1"/>
+    <Object Atlas="Item2" ID="ShopMenu2" Type="2"/>
+    <Object Atlas="Item3" ID="ShopMenu3" Type="3"/>
+    <Object Atlas="Item4" ID="ShopMenu4" Type="4"/>
+    <Object Atlas="Item5" ID="ShopMenu5" Type="5"/>
+    <Object Atlas="Item6" ID="ShopMenu6" Type="6"/>
+</XML>

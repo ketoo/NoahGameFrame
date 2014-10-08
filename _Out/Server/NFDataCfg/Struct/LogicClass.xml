@@ -16,6 +16,8 @@
         <Class Desc="Shop" Id="Shop" InstancePath="../../NFDataCfg/Ini/NPC/Shop.xml" Path="../../NFDataCfg/Struct/Class/Shop.xml" Public="0" Type="TYPE_SHOP"/>
         <Class Desc="ShopMenu" Id="ShopMenu" InstancePath="../../NFDataCfg/Ini/NPC/ShopMenu.xml" Path="../../NFDataCfg/Struct/Class/ShopMenu.xml" Public="0" Type="TYPE_SHOPMENU"/>
         <Class Desc="Skill" Id="Skill" InstancePath="../../NFDataCfg/Ini/NPC/Skill.xml" Path="../../NFDataCfg/Struct/Class/Skill.xml" Public="0" Type="TYPE_SKILL"/>
+        <Class Desc="StateFuncResources" Id="StateFuncResources" InstancePath="../../NFDataCfg/Ini/NPC/StateFuncResources.xml" Path="../../NFDataCfg/Struct/Class/StateFuncResources.xml" Public="0" Type="TYPE_STATEFUNCRESOURCES"/>
+        <Class Desc="StateFunction" Id="StateFunction" InstancePath="../../NFDataCfg/Ini/NPC/StateFunction.xml" Path="../../NFDataCfg/Struct/Class/StateFunction.xml" Public="0" Type="TYPE_STATEFUNCTION"/>
         <Class Desc="Task" Id="Task" InstancePath="../../NFDataCfg/Ini/NPC/Task.xml" Path="../../NFDataCfg/Struct/Class/Task.xml" Public="0" Type="TYPE_TASK"/>
     </Class>
 </XML>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is config xml-->
+<XML>
+    <Object EffectData="PlayerAtt1" ID="Build_0_0" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_0_0" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt2" ID="Build_0_70" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_0_70" SubType="70" Type="0" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt3" ID="Build_0_71" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_0_71" SubType="71" Type="0" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt4" ID="Build_0_72" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_0_72" SubType="72" Type="0" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt5" ID="Build_0_73" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_0_73" SubType="73" Type="0" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt6" ID="Build_0_74" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_0_74" SubType="74" Type="0" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt7" ID="Build_0_75" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_0_75" SubType="75" Type="0" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt8" ID="Build_0_76" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_0_76" SubType="76" Type="0" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt9" ID="Build_0_77" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_0_77" SubType="77" Type="0" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt10" ID="Build_0_78" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_0_78" SubType="78" Type="0" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt11" ID="Build_0_79" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_0_79" SubType="79" Type="0" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt12" ID="Build_0_80" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_0_80" SubType="80" Type="0" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt13" ID="Build_0_81" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_0_81" SubType="81" Type="0" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt14" ID="Build_0_82" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_0_82" SubType="82" Type="0" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt15" ID="Build_0_83" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_0_83" SubType="83" Type="0" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt16" ID="Build_0_84" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_0_84" SubType="84" Type="0" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt17" ID="Build_0_85" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_0_85" SubType="85" Type="0" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt18" ID="Build_1_01" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_1_01" SubType="1" Type="1" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt19" ID="Build_1_02" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_1_02" SubType="2" Type="1" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt20" ID="Build_1_03" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_1_03" SubType="3" Type="1" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt21" ID="Build_1_04" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_1_04" SubType="4" Type="1" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt22" ID="Build_1_05" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_1_05" SubType="5" Type="1" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt23" ID="Build_1_06" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_1_06" SubType="6" Type="1" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt24" ID="Build_1_07" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_1_07" SubType="7" Type="1" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt25" ID="Build_1_08" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_1_08" SubType="8" Type="1" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt26" ID="Build_1_09" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_1_09" SubType="9" Type="1" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt27" ID="Build_1_10" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_1_10" SubType="10" Type="1" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt28" ID="Build_1_11" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_1_11" SubType="11" Type="1" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt29" ID="Build_1_12" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_1_12" SubType="12" Type="1" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt30" ID="Build_2_01" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_2_01" SubType="1" Type="2" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt31" ID="Build_2_02" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_2_02" SubType="2" Type="2" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt32" ID="Build_2_03" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_2_03" SubType="3" Type="2" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt33" ID="Build_2_04" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_2_04" SubType="4" Type="2" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt34" ID="Build_2_05" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_2_05" SubType="5" Type="2" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt35" ID="Build_2_06" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_2_06" SubType="6" Type="2" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt36" ID="Build_3_00" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_3_00" SubType="0" Type="3" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt37" ID="Build_3_01" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_3_01" SubType="1" Type="3" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt38" ID="Build_3_02" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_3_02" SubType="2" Type="3" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt39" ID="Build_3_03" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_3_03" SubType="3" Type="3" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt40" ID="Build_3_04" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_3_04" SubType="4" Type="3" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt41" ID="Build_3_05" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_3_05" SubType="5" Type="3" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt42" ID="Build_3_06" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_3_06" SubType="6" Type="3" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt43" ID="Build_3_07" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_3_07" SubType="7" Type="3" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt44" ID="Build_3_08" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_3_08" SubType="8" Type="3" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt45" ID="Build_4_00" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_4_00" SubType="0" Type="4" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt46" ID="Build_4_01" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_4_01" SubType="1" Type="4" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt47" ID="Build_5_00" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_5_00" SubType="0" Type="5" UpStateFunc="Func1"/>
+    <Object EffectData="PlayerAtt48" ID="Build_6_00" NormalStateFunc="Func1" Prefab="Prefabs/Object/Build_6_00" SubType="0" Type="6" UpStateFunc="Func1"/>
+</XML>
