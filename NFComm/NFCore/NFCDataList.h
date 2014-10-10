@@ -15,8 +15,6 @@
 class NFCDataList: public NFIDataList
 {
 public:
-    static NFCDataList nullData;
-public:
     NFCDataList();
 
     NFCDataList(const char* str, const char* strSplit);
