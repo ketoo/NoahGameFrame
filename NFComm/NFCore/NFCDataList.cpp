@@ -501,5 +501,3 @@ bool NFCDataList::ToString(std::string& str, const char* strSplit)
 
     return true;
 }
-
-NFCDataList NFCDataList::nullData;
