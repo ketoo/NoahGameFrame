@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <boost/lexical_cast.hpp>
 
-#pragma pack(push, 1)
+//#pragma pack(push, 1)
 
 struct NFIDENTID
 {
@@ -137,5 +137,5 @@ struct NFIDENTID
         return value;
     }
 };
-#pragma pack(pop)
+//#pragma pack(pop)
 #endif
