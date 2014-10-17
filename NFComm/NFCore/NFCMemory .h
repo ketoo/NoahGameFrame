@@ -9,7 +9,7 @@
 #ifndef _NFC_MEMORY_H_
 #define _NFC_MEMORY_H_
 
-#pragma pack(push, 1)
+//#pragma pack(push, 1)
 
 #include "NFPlatform.h"
 #include "NFIMemory.h"
@@ -85,5 +85,5 @@ void operator delete[](void* p);
 #define NF_NEW new
 #endif
 
-#pragma pack(pop)
+//#pragma pack(pop)
 #endif
