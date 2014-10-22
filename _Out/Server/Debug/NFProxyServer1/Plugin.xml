@@ -5,7 +5,7 @@
 	<Plugin Name="NFProxyPlugin" Main="0"/>
 	<Plugin Name="NFProxyServerNet_ClientPlugin" Main="1"/>
 	<Plugin Name="NFProxyServerNet_ServerPlugin" Main="1"/>
-	<Plugin Name="NFLogPlugin" Main="1"/>
+	<Plugin Name="NFLogPlugin" Main="0"/>
 	
 	<ActorDataModule Name="NFCDataProcessModule" />
 </XML>
