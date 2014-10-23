@@ -54,7 +54,6 @@ public:
         munMsgID = 0;
     }
 
-
     virtual uint32_t GetHeadLength() const { return NF_HEAD_LENGTH; }
 
     virtual int EnCode(char* strData)
@@ -108,7 +107,6 @@ public:
 protected:
     uint32_t munSize;
     uint16_t munMsgID;
-
 };
 
 class NFIPacket

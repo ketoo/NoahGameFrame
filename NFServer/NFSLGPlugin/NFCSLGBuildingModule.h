@@ -27,7 +27,12 @@ public:
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
 
 public:
-    virtual int AddBuilding(const NFIDENTID& self, const std::string& strBuilding);
+    virtual int AddBuilding(const NFIDENTID& self, const std::string& strBuilding, const float fX, const float fY, const float fZ);
+    virtual int OnUpgrade(const NFIDENTID& self, const NFIDataList& var);
+    virtual int OnBoost(const NFIDENTID& self, const NFIDataList& var);
+    virtual int OnProduce(const NFIDENTID& self, const NFIDataList& var);
+    virtual int OnMove(const NFIDENTID& self, const NFIDataList& var);
+
 private:
 	NFIKernelModule* m_pKernelModule;
 	NFILogModule* m_pLogModule;

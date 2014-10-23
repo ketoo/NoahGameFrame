@@ -104,13 +104,12 @@ void NFCGameServerNet_ClientModule::RefreshWorldInfo()
 
 bool NFCGameServerNet_ClientModule::AfterInit()
 {
-    
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
     m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
     m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
-    
+
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pLogicClassModule);
@@ -359,38 +358,28 @@ int NFCGameServerNet_ClientModule::OnClassCommonEvent(const NFIDENTID& self, con
 int NFCGameServerNet_ClientModule::OnRecivePack( const NFIPacket& msg )
 {
 
-
     return 0;
-
 }
 
 int NFCGameServerNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {
-    if (eEvent & NF_NET_EVENT_EOF) 
+    if (eEvent == NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
-    } 
-    else if (eEvent & NF_NET_EVENT_ERROR) 
-    {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
-    }
-    else if (eEvent & NF_NET_EVENT_TIMEOUT)
-    {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
-    }
-    else  if (eEvent == NF_NET_EVENT_CONNECTED)
-    {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_CONNECTED", "Connected success", __FUNCTION__, __LINE__);
         OnClientConnected(nSockIndex);
+    }
+    else
+    {
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_EOF", "Connection closed or Got an error!", __FUNCTION__, __LINE__);
+        OnClientDisconnect(nSockIndex);
     }
 
     return 0;
-
 }
 
 void NFCGameServerNet_ClientModule::OnClientDisconnect( const int nAddress )
 {
-
+    UnRegister();
 }
 
 void NFCGameServerNet_ClientModule::OnClientConnected( const int nAddress )

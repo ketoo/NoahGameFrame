@@ -14,6 +14,9 @@
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFISLGShopModule.h"
+#include "NFComm/NFPluginModule/NFISLGBuildingModule.h"
+#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIPropertyModule.h"
 
 class NFCSLGShopModule
     : public NFISLGShopModule
@@ -30,14 +33,15 @@ public:
     virtual bool Execute( const float fLasFrametime, const float fStartedTime );
     virtual bool AfterInit();
 
-	virtual bool OnReqBuyItem(const NFIDENTID& self, const std::string& strID, const int nCount, const float fX, const float fY, const float fZ);
-protected:
+	virtual bool OnReqBuyItem(const NFIDENTID& self, const NFIDataList& var);
 
 private:
+    NFIElementInfoModule* m_pElementInfoModule;
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-
+    NFISLGBuildingModule* m_pSLGBuildingModule;
+    NFIPropertyModule* m_pPropertyModule;
 };
 
 
