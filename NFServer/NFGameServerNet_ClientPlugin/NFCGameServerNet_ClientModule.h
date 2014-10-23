@@ -20,7 +20,6 @@
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-//#include "NFComm/NFPluginModule/NFIShareMemoryModule.h"
 
 class NFCGameServerNet_ClientModule : public NFINetModule
 {
@@ -79,8 +78,6 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIElementInfoModule* m_pElementInfoModule;
-    //NFIShareMemoryModule* m_pShareMemoryModule;
-
 };
 
 #endif
