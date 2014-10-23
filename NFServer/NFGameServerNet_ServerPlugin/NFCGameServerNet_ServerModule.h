@@ -24,6 +24,28 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFISLGShopModule.h"
+#include "NFComm/NFPluginModule/NFISLGBuildingModule.h"
+#include "NFComm/NFMessageDefine/NFSLGDefine.pb.h"
+
+////////////////////////////////////////////////////////////////////////////
+// 客户端消息处理宏
+#define CLIENT_MSG_PROCESS(packet, msg)                 \
+    int64_t nPlayerID = 0;                              \
+    msg xMsg;                                           \
+    if (!RecivePB(packet, xMsg, nPlayerID))              \
+    {                                                   \
+        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, 0, "ReqAckBuyObjectFormShop", "Parse msg error", __FUNCTION__, __LINE__); \
+        return;                                         \
+    }                                                   \
+                                                        \
+    NFIObject* pObject = m_pKernelModule->GetObject(nPlayerID); \
+    if ( NULL == pObject )                              \
+    {                                                   \
+        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "FromClient Object do not Exist", "", __FUNCTION__, __LINE__); \
+        return;                                         \
+    }
+//////////////////////////////////////////////////////////////////////////
+
 
 class NFCGameServerNet_ServerModule
     : public NFINetModule
@@ -84,7 +106,7 @@ protected:
 	/////////SLG_START/////////////////////////////////////////////////////////////////
 	void OnSLGClienBuyItem(const NFIPacket& msg);
 	void OnSLGClienMoveObject(const NFIPacket& msg);
-	void OnSLGClienUpBuildLvl(const NFIPacket& msg);
+	void OnSLGClienUpgradeBuilding(const NFIPacket& msg);
 	void OnSLGClienCreateItem(const NFIPacket& msg);
 
 	/////////SLG_END/////////////////////////////////////////////////////////////////
@@ -180,7 +202,10 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFIElementInfoModule* m_pElementInfoModule;
+    //////////////////////////////////////////////////////////////////////////
+    //SLG模块
 	NFISLGShopModule* m_pSLGShopModule;
+    NFISLGBuildingModule* m_pSLGBuildingModule;
 };
 
 #endif

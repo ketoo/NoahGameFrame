@@ -8,7 +8,7 @@
 
 //#include "stdafx.h"
 #include "NFCGameServerNet_ServerModule.h"
-#include "NFComm\NFPluginModule\NFILogicModule.h"
+#include "NFComm/NFPluginModule/NFILogicModule.h"
 
 bool NFCGameServerNet_ServerModule::Init()
 {
@@ -26,7 +26,8 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
 	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
 	m_pSLGShopModule = dynamic_cast<NFISLGShopModule*>(pPluginManager->FindModule("NFCSLGShopModule"));
-	
+	m_pSLGBuildingModule = dynamic_cast<NFISLGBuildingModule*>(pPluginManager->FindModule("NFCSLGBuildingModule"));
+    
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pLogicClassModule);
@@ -34,6 +35,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     assert(NULL != m_pElementInfoModule);
 	assert(NULL != m_pLogModule);
 	assert(NULL != m_pSLGShopModule);
+    assert(NULL != m_pSLGBuildingModule);
 
     m_pKernelModule->ResgisterCommonClassEvent( this, &NFCGameServerNet_ServerModule::OnClassCommonEvent );
     m_pKernelModule->ResgisterCommonPropertyEvent( this, &NFCGameServerNet_ServerModule::OnPropertyCommonEvent );
@@ -55,7 +57,6 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     {
         assert(0);
     }
-
 
     return true;
 }
@@ -127,7 +128,7 @@ int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
     case NFMsg::EGameMsgID::EGMI_REQ_MOVE:
         OnClienMove(msg);
         break;
-		/////////////SLG/////////////////////////////////////////////////////////////
+	/////////////SLG/////////////////////////////////////////////////////////////
 	case NFMsg::EGameMsgID::EGMI_REQ_BUY_FORM_SHOP:
 		OnSLGClienBuyItem(msg);
 		break;
@@ -135,12 +136,13 @@ int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 		OnSLGClienMoveObject(msg);
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_UP_BUILD_LVL:
-		OnSLGClienUpBuildLvl(msg);
+		OnSLGClienUpgradeBuilding(msg);
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_CREATE_ITEM:
 		OnSLGClienCreateItem(msg);
 		break;
-		//////////////////////////////////////////////////////////////////////////
+
+
     default:
         break;
     }
@@ -1981,29 +1983,38 @@ void NFCGameServerNet_ServerModule::OnClienGMProcess( const NFIPacket& msg )
     }
 }
 
-void NFCGameServerNet_ServerModule::OnSLGClienBuyItem( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnSLGClienBuyItem(const NFIPacket& msg)
 {
-	int64_t nPlayerID = 0;
-	NFMsg::ReqAckBuyObjectFormShop xMsg;
-	if (!RecivePB(msg, xMsg, nPlayerID))
-	{
-		return;
-	}
+    CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckBuyObjectFormShop);
 
-	m_pSLGShopModule->OnReqBuyItem(nPlayerID, xMsg.config_id(), 1, xMsg.x(), xMsg.y(), xMsg.z());
+    NFCDataList var;
+    var << xMsg.config_id() << xMsg.x() << xMsg.y() << xMsg.z();
+    m_pSLGShopModule->OnReqBuyItem(nPlayerID, var);
 }
 
-void NFCGameServerNet_ServerModule::OnSLGClienMoveObject( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnSLGClienMoveObject(const NFIPacket& msg)
 {
+    CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckMoveBuildObject);
 
+    NFCDataList var;
+    var << xMsg.object_guid() << xMsg.x() << xMsg.y() << xMsg.z();
+    m_pSLGBuildingModule->OnMove(nPlayerID, var);
 }
 
-void NFCGameServerNet_ServerModule::OnSLGClienUpBuildLvl( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnSLGClienUpgradeBuilding(const NFIPacket& msg)
 {
+    CLIENT_MSG_PROCESS(msg, NFMsg::ReqUpBuildLv);
 
+    NFCDataList var;
+    var << xMsg.object_guid();
+    m_pSLGBuildingModule->OnUpgrade(nPlayerID, var);
 }
 
-void NFCGameServerNet_ServerModule::OnSLGClienCreateItem( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnSLGClienCreateItem(const NFIPacket& msg)
 {
+    CLIENT_MSG_PROCESS(msg, NFMsg::ReqCreateItem);
 
+    NFCDataList var;
+    var << xMsg.object_guid() << xMsg.config_id() << xMsg.count();
+    m_pSLGBuildingModule->OnProduce(nPlayerID, var);
 }
