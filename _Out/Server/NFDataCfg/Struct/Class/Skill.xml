@@ -30,6 +30,8 @@
         <Property Desc="升级需要的等级" Id="NeedLevel" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="开放技能需要的等级" Id="ReqLevel" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="是否玩家技能" Id="PlayerSkill" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="与目标最合适的攻击距离" Id="AtkDis" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="是否必须有目标才能释放" Id="NeedTar" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
     </Propertys>
     <Includes/>
 </XML>
