@@ -14,7 +14,21 @@
 class NFISLGBuildingModule : public NFILogicModule
 {
 public:
-    virtual int AddBuilding(const NFIDENTID& self, const std::string& strBuilding) = 0;
+    enum EBuildingListColType
+    {
+        BUILDING_CONFIG_ID  = 0 ,
+        BUILDING_GUID           ,
+        BUILDING_STATE          ,
+        BUILDINNG_X             ,
+        BUILDINNG_Y             ,
+        BUILDINNG_Z             ,
+    };
+
+    virtual int AddBuilding(const NFIDENTID& self, const std::string& strBuilding, const float fX, const float fY, const float fZ) = 0;
+    virtual int OnUpgrade(const NFIDENTID& self, const NFIDataList& var) = 0;
+    virtual int OnBoost(const NFIDENTID& self, const NFIDataList& var) = 0;
+    virtual int OnProduce(const NFIDENTID& self, const NFIDataList& var) = 0;
+    virtual int OnMove(const NFIDENTID& self, const NFIDataList& var) = 0;
 };
 
 #endif // !__NFI_SLG_BUILDING_MODULE_H__
