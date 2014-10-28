@@ -160,13 +160,14 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       sizeof(ReqAckPlayerChat));
   ReqAckPlayerChat_EGameChatType_descriptor_ = ReqAckPlayerChat_descriptor_->enum_type(0);
   ReqAckUseSkill_descriptor_ = file->message_type(5);
-  static const int ReqAckUseSkill_offsets_[6] = {
+  static const int ReqAckUseSkill_offsets_[7] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, user_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, skill_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, now_pos_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, tar_pos_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, effect_ident_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, effect_value_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, effect_rlt_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, key_value_),
   };
   ReqAckUseSkill_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -416,29 +417,31 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     " \002(\0162%.NFMsg.ReqAckPlayerChat.EGameChatT"
     "ype\022\021\n\tchat_info\030\003 \002(\014\"Q\n\rEGameChatType\022"
     "\017\n\013EGCT_NARMAL\020\000\022\020\n\014EGCT_PRIVATE\020\001\022\r\n\tEG"
-    "CT_TEAM\020\002\022\016\n\nEGCT_WORLD\020\003\"\203\001\n\016ReqAckUseS"
-    "kill\022\014\n\004user\030\001 \002(\003\022\020\n\010skill_id\030\002 \002(\014\022\024\n\014"
-    "effect_ident\030\003 \003(\003\022\024\n\014effect_value\030\004 \003(\005"
-    "\022\022\n\neffect_rlt\030\005 \003(\005\022\021\n\tkey_value\030\006 \001(\014\""
-    "\203\001\n\rReqAckUseItem\022\014\n\004user\030\001 \002(\003\022\021\n\titem_"
-    "guid\030\002 \002(\003\022\024\n\014effect_ident\030\003 \003(\003\022\024\n\014effe"
-    "ct_value\030\004 \003(\005\022\022\n\neffect_rlt\030\005 \003(\005\022\021\n\tke"
-    "y_value\030\006 \001(\014\"\345\001\n\017ReqAckSwapScene\022;\n\rtra"
-    "nsfer_type\030\001 \002(\0162$.NFMsg.ReqAckSwapScene"
-    ".EGameSwapType\022\020\n\010scene_id\030\002 \002(\005\022\017\n\007line"
-    "_id\030\003 \002(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006 \001"
-    "(\002\"Q\n\rEGameSwapType\022\017\n\013EGST_NARMAL\020\000\022\016\n\n"
-    "EGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n\013EGST_MIR"
-    "ROR\020\003\"$\n\017ReqPickDropItem\022\021\n\titem_guid\030\002 "
-    "\002(\003\" \n\rReqAcceptTask\022\017\n\007task_id\030\001 \002(\014\"#\n"
-    "\020ReqCompeleteTask\022\017\n\007task_id\030\001 \002(\014\"\251\001\n\017P"
-    "layerEntryInfo\022\023\n\013object_guid\030\001 \002(\003\022\t\n\001x"
-    "\030\002 \002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002(\002\022\023\n\013career_t"
-    "ype\030\005 \002(\005\022\024\n\014player_state\030\006 \002(\005\022\021\n\tconfi"
-    "g_id\030\007 \002(\014\022\020\n\010scene_id\030\010 \002(\005\022\020\n\010class_id"
-    "\030\t \002(\014\"A\n\022AckPlayerEntryList\022+\n\013object_l"
-    "ist\030\001 \003(\0132\026.NFMsg.PlayerEntryInfo\")\n\022Ack"
-    "PlayerLeaveList\022\023\n\013object_list\030\001 \003(\003", 1436);
+    "CT_TEAM\020\002\022\016\n\nEGCT_WORLD\020\003\"\264\001\n\016ReqAckUseS"
+    "kill\022\014\n\004user\030\001 \002(\003\022\020\n\010skill_id\030\002 \002(\014\022 \n\007"
+    "now_pos\030\003 \002(\0132\017.NFMsg.Position\022 \n\007tar_po"
+    "s\030\004 \002(\0132\017.NFMsg.Position\022\024\n\014effect_ident"
+    "\030\005 \003(\003\022\024\n\014effect_value\030\006 \003(\005\022\022\n\neffect_r"
+    "lt\030\007 \003(\005\"\203\001\n\rReqAckUseItem\022\014\n\004user\030\001 \002(\003"
+    "\022\021\n\titem_guid\030\002 \002(\003\022\024\n\014effect_ident\030\003 \003("
+    "\003\022\024\n\014effect_value\030\004 \003(\005\022\022\n\neffect_rlt\030\005 "
+    "\003(\005\022\021\n\tkey_value\030\006 \001(\014\"\345\001\n\017ReqAckSwapSce"
+    "ne\022;\n\rtransfer_type\030\001 \002(\0162$.NFMsg.ReqAck"
+    "SwapScene.EGameSwapType\022\020\n\010scene_id\030\002 \002("
+    "\005\022\017\n\007line_id\030\003 \002(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002"
+    "\022\t\n\001z\030\006 \001(\002\"Q\n\rEGameSwapType\022\017\n\013EGST_NAR"
+    "MAL\020\000\022\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n"
+    "\013EGST_MIRROR\020\003\"$\n\017ReqPickDropItem\022\021\n\tite"
+    "m_guid\030\002 \002(\003\" \n\rReqAcceptTask\022\017\n\007task_id"
+    "\030\001 \002(\014\"#\n\020ReqCompeleteTask\022\017\n\007task_id\030\001 "
+    "\002(\014\"\251\001\n\017PlayerEntryInfo\022\023\n\013object_guid\030\001"
+    " \002(\003\022\t\n\001x\030\002 \002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002(\002\022\023\n"
+    "\013career_type\030\005 \002(\005\022\024\n\014player_state\030\006 \002(\005"
+    "\022\021\n\tconfig_id\030\007 \002(\014\022\020\n\010scene_id\030\010 \002(\005\022\020\n"
+    "\010class_id\030\t \002(\014\"A\n\022AckPlayerEntryList\022+\n"
+    "\013object_list\030\001 \003(\0132\026.NFMsg.PlayerEntryIn"
+    "fo\")\n\022AckPlayerLeaveList\022\023\n\013object_list\030"
+    "\001 \003(\003", 1485);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -1906,10 +1909,11 @@ void ReqAckPlayerChat::Swap(ReqAckPlayerChat* other) {
 #ifndef _MSC_VER
 const int ReqAckUseSkill::kUserFieldNumber;
 const int ReqAckUseSkill::kSkillIdFieldNumber;
+const int ReqAckUseSkill::kNowPosFieldNumber;
+const int ReqAckUseSkill::kTarPosFieldNumber;
 const int ReqAckUseSkill::kEffectIdentFieldNumber;
 const int ReqAckUseSkill::kEffectValueFieldNumber;
 const int ReqAckUseSkill::kEffectRltFieldNumber;
-const int ReqAckUseSkill::kKeyValueFieldNumber;
 #endif  // !_MSC_VER
 
 ReqAckUseSkill::ReqAckUseSkill()
@@ -1918,6 +1922,8 @@ ReqAckUseSkill::ReqAckUseSkill()
 }
 
 void ReqAckUseSkill::InitAsDefaultInstance() {
+  now_pos_ = const_cast< ::NFMsg::Position*>(&::NFMsg::Position::default_instance());
+  tar_pos_ = const_cast< ::NFMsg::Position*>(&::NFMsg::Position::default_instance());
 }
 
 ReqAckUseSkill::ReqAckUseSkill(const ReqAckUseSkill& from)
@@ -1930,7 +1936,8 @@ void ReqAckUseSkill::SharedCtor() {
   _cached_size_ = 0;
   user_ = GOOGLE_LONGLONG(0);
   skill_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  key_value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  now_pos_ = NULL;
+  tar_pos_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1942,10 +1949,9 @@ void ReqAckUseSkill::SharedDtor() {
   if (skill_id_ != &::google::protobuf::internal::kEmptyString) {
     delete skill_id_;
   }
-  if (key_value_ != &::google::protobuf::internal::kEmptyString) {
-    delete key_value_;
-  }
   if (this != default_instance_) {
+    delete now_pos_;
+    delete tar_pos_;
   }
 }
 
@@ -1978,10 +1984,11 @@ void ReqAckUseSkill::Clear() {
         skill_id_->clear();
       }
     }
-    if (has_key_value()) {
-      if (key_value_ != &::google::protobuf::internal::kEmptyString) {
-        key_value_->clear();
-      }
+    if (has_now_pos()) {
+      if (now_pos_ != NULL) now_pos_->::NFMsg::Position::Clear();
+    }
+    if (has_tar_pos()) {
+      if (tar_pos_ != NULL) tar_pos_->::NFMsg::Position::Clear();
     }
   }
   effect_ident_.Clear();
@@ -2022,18 +2029,46 @@ bool ReqAckUseSkill::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_effect_ident;
+        if (input->ExpectTag(26)) goto parse_now_pos;
         break;
       }
 
-      // repeated int64 effect_ident = 3;
+      // required .NFMsg.Position now_pos = 3;
       case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_now_pos:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_now_pos()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(34)) goto parse_tar_pos;
+        break;
+      }
+
+      // required .NFMsg.Position tar_pos = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_tar_pos:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_tar_pos()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(40)) goto parse_effect_ident;
+        break;
+      }
+
+      // repeated int64 effect_ident = 5;
+      case 5: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_effect_ident:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 1, 24, input, this->mutable_effect_ident())));
+                 1, 40, input, this->mutable_effect_ident())));
         } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
                    == ::google::protobuf::internal::WireFormatLite::
                       WIRETYPE_LENGTH_DELIMITED) {
@@ -2043,19 +2078,19 @@ bool ReqAckUseSkill::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_effect_ident;
-        if (input->ExpectTag(32)) goto parse_effect_value;
+        if (input->ExpectTag(40)) goto parse_effect_ident;
+        if (input->ExpectTag(48)) goto parse_effect_value;
         break;
       }
 
-      // repeated int32 effect_value = 4;
-      case 4: {
+      // repeated int32 effect_value = 6;
+      case 6: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_effect_value:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 1, 32, input, this->mutable_effect_value())));
+                 1, 48, input, this->mutable_effect_value())));
         } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
                    == ::google::protobuf::internal::WireFormatLite::
                       WIRETYPE_LENGTH_DELIMITED) {
@@ -2065,19 +2100,19 @@ bool ReqAckUseSkill::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(32)) goto parse_effect_value;
-        if (input->ExpectTag(40)) goto parse_effect_rlt;
+        if (input->ExpectTag(48)) goto parse_effect_value;
+        if (input->ExpectTag(56)) goto parse_effect_rlt;
         break;
       }
 
-      // repeated int32 effect_rlt = 5;
-      case 5: {
+      // repeated int32 effect_rlt = 7;
+      case 7: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_effect_rlt:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 1, 40, input, this->mutable_effect_rlt())));
+                 1, 56, input, this->mutable_effect_rlt())));
         } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
                    == ::google::protobuf::internal::WireFormatLite::
                       WIRETYPE_LENGTH_DELIMITED) {
@@ -2087,21 +2122,7 @@ bool ReqAckUseSkill::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(40)) goto parse_effect_rlt;
-        if (input->ExpectTag(50)) goto parse_key_value;
-        break;
-      }
-
-      // optional bytes key_value = 6;
-      case 6: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_key_value:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_key_value()));
-        } else {
-          goto handle_uninterpreted;
-        }
+        if (input->ExpectTag(56)) goto parse_effect_rlt;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -2135,28 +2156,34 @@ void ReqAckUseSkill::SerializeWithCachedSizes(
       2, this->skill_id(), output);
   }
 
-  // repeated int64 effect_ident = 3;
+  // required .NFMsg.Position now_pos = 3;
+  if (has_now_pos()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->now_pos(), output);
+  }
+
+  // required .NFMsg.Position tar_pos = 4;
+  if (has_tar_pos()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, this->tar_pos(), output);
+  }
+
+  // repeated int64 effect_ident = 5;
   for (int i = 0; i < this->effect_ident_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(
-      3, this->effect_ident(i), output);
+      5, this->effect_ident(i), output);
   }
 
-  // repeated int32 effect_value = 4;
+  // repeated int32 effect_value = 6;
   for (int i = 0; i < this->effect_value_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(
-      4, this->effect_value(i), output);
+      6, this->effect_value(i), output);
   }
 
-  // repeated int32 effect_rlt = 5;
+  // repeated int32 effect_rlt = 7;
   for (int i = 0; i < this->effect_rlt_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(
-      5, this->effect_rlt(i), output);
-  }
-
-  // optional bytes key_value = 6;
-  if (has_key_value()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      6, this->key_value(), output);
+      7, this->effect_rlt(i), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -2179,29 +2206,36 @@ void ReqAckUseSkill::SerializeWithCachedSizes(
         2, this->skill_id(), target);
   }
 
-  // repeated int64 effect_ident = 3;
+  // required .NFMsg.Position now_pos = 3;
+  if (has_now_pos()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->now_pos(), target);
+  }
+
+  // required .NFMsg.Position tar_pos = 4;
+  if (has_tar_pos()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        4, this->tar_pos(), target);
+  }
+
+  // repeated int64 effect_ident = 5;
   for (int i = 0; i < this->effect_ident_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt64ToArray(3, this->effect_ident(i), target);
+      WriteInt64ToArray(5, this->effect_ident(i), target);
   }
 
-  // repeated int32 effect_value = 4;
+  // repeated int32 effect_value = 6;
   for (int i = 0; i < this->effect_value_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt32ToArray(4, this->effect_value(i), target);
+      WriteInt32ToArray(6, this->effect_value(i), target);
   }
 
-  // repeated int32 effect_rlt = 5;
+  // repeated int32 effect_rlt = 7;
   for (int i = 0; i < this->effect_rlt_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt32ToArray(5, this->effect_rlt(i), target);
-  }
-
-  // optional bytes key_value = 6;
-  if (has_key_value()) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        6, this->key_value(), target);
+      WriteInt32ToArray(7, this->effect_rlt(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2229,15 +2263,22 @@ int ReqAckUseSkill::ByteSize() const {
           this->skill_id());
     }
 
-    // optional bytes key_value = 6;
-    if (has_key_value()) {
+    // required .NFMsg.Position now_pos = 3;
+    if (has_now_pos()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->key_value());
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->now_pos());
+    }
+
+    // required .NFMsg.Position tar_pos = 4;
+    if (has_tar_pos()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->tar_pos());
     }
 
   }
-  // repeated int64 effect_ident = 3;
+  // repeated int64 effect_ident = 5;
   {
     int data_size = 0;
     for (int i = 0; i < this->effect_ident_size(); i++) {
@@ -2247,7 +2288,7 @@ int ReqAckUseSkill::ByteSize() const {
     total_size += 1 * this->effect_ident_size() + data_size;
   }
 
-  // repeated int32 effect_value = 4;
+  // repeated int32 effect_value = 6;
   {
     int data_size = 0;
     for (int i = 0; i < this->effect_value_size(); i++) {
@@ -2257,7 +2298,7 @@ int ReqAckUseSkill::ByteSize() const {
     total_size += 1 * this->effect_value_size() + data_size;
   }
 
-  // repeated int32 effect_rlt = 5;
+  // repeated int32 effect_rlt = 7;
   {
     int data_size = 0;
     for (int i = 0; i < this->effect_rlt_size(); i++) {
@@ -2302,8 +2343,11 @@ void ReqAckUseSkill::MergeFrom(const ReqAckUseSkill& from) {
     if (from.has_skill_id()) {
       set_skill_id(from.skill_id());
     }
-    if (from.has_key_value()) {
-      set_key_value(from.key_value());
+    if (from.has_now_pos()) {
+      mutable_now_pos()->::NFMsg::Position::MergeFrom(from.now_pos());
+    }
+    if (from.has_tar_pos()) {
+      mutable_tar_pos()->::NFMsg::Position::MergeFrom(from.tar_pos());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -2322,8 +2366,14 @@ void ReqAckUseSkill::CopyFrom(const ReqAckUseSkill& from) {
 }
 
 bool ReqAckUseSkill::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
 
+  if (has_now_pos()) {
+    if (!this->now_pos().IsInitialized()) return false;
+  }
+  if (has_tar_pos()) {
+    if (!this->tar_pos().IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -2331,10 +2381,11 @@ void ReqAckUseSkill::Swap(ReqAckUseSkill* other) {
   if (other != this) {
     std::swap(user_, other->user_);
     std::swap(skill_id_, other->skill_id_);
+    std::swap(now_pos_, other->now_pos_);
+    std::swap(tar_pos_, other->tar_pos_);
     effect_ident_.Swap(&other->effect_ident_);
     effect_value_.Swap(&other->effect_value_);
     effect_rlt_.Swap(&other->effect_rlt_);
-    std::swap(key_value_, other->key_value_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
