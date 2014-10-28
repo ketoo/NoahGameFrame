@@ -191,6 +191,26 @@ inline bool ESLGFuncType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ESLGFuncType>(
     ESLGFuncType_descriptor(), name, value);
 }
+enum ESLGBuildingState {
+  EBS_IDLE = 0,
+  EBS_BOOST = 1,
+  EBS_UPGRADE = 2
+};
+bool ESLGBuildingState_IsValid(int value);
+const ESLGBuildingState ESLGBuildingState_MIN = EBS_IDLE;
+const ESLGBuildingState ESLGBuildingState_MAX = EBS_UPGRADE;
+const int ESLGBuildingState_ARRAYSIZE = ESLGBuildingState_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ESLGBuildingState_descriptor();
+inline const ::std::string& ESLGBuildingState_Name(ESLGBuildingState value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ESLGBuildingState_descriptor(), value);
+}
+inline bool ESLGBuildingState_Parse(
+    const ::std::string& name, ESLGBuildingState* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ESLGBuildingState>(
+    ESLGBuildingState_descriptor(), name, value);
+}
 // ===================================================================
 
 class ReqAckBuyObjectFormShop : public ::google::protobuf::Message {
@@ -247,17 +267,10 @@ class ReqAckBuyObjectFormShop : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 object_guid = 1;
-  inline bool has_object_guid() const;
-  inline void clear_object_guid();
-  static const int kObjectGuidFieldNumber = 1;
-  inline ::google::protobuf::int64 object_guid() const;
-  inline void set_object_guid(::google::protobuf::int64 value);
-
-  // required string config_id = 2;
+  // required string config_id = 1;
   inline bool has_config_id() const;
   inline void clear_config_id();
-  static const int kConfigIdFieldNumber = 2;
+  static const int kConfigIdFieldNumber = 1;
   inline const ::std::string& config_id() const;
   inline void set_config_id(const ::std::string& value);
   inline void set_config_id(const char* value);
@@ -266,31 +279,29 @@ class ReqAckBuyObjectFormShop : public ::google::protobuf::Message {
   inline ::std::string* release_config_id();
   inline void set_allocated_config_id(::std::string* config_id);
 
-  // required float x = 3;
+  // required float x = 2;
   inline bool has_x() const;
   inline void clear_x();
-  static const int kXFieldNumber = 3;
+  static const int kXFieldNumber = 2;
   inline float x() const;
   inline void set_x(float value);
 
-  // required float y = 4;
+  // required float y = 3;
   inline bool has_y() const;
   inline void clear_y();
-  static const int kYFieldNumber = 4;
+  static const int kYFieldNumber = 3;
   inline float y() const;
   inline void set_y(float value);
 
-  // required float z = 5;
+  // required float z = 4;
   inline bool has_z() const;
   inline void clear_z();
-  static const int kZFieldNumber = 5;
+  static const int kZFieldNumber = 4;
   inline float z() const;
   inline void set_z(float value);
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckBuyObjectFormShop)
  private:
-  inline void set_has_object_guid();
-  inline void clear_has_object_guid();
   inline void set_has_config_id();
   inline void clear_has_config_id();
   inline void set_has_x();
@@ -302,14 +313,13 @@ class ReqAckBuyObjectFormShop : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 object_guid_;
   ::std::string* config_id_;
   float x_;
   float y_;
   float z_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFSLGDefine_2eproto();
   friend void protobuf_AssignDesc_NFSLGDefine_2eproto();
@@ -374,10 +384,17 @@ class ReqAckMoveBuildObject : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 object_guid = 1;
+  // optional int32 row = 1;
+  inline bool has_row() const;
+  inline void clear_row();
+  static const int kRowFieldNumber = 1;
+  inline ::google::protobuf::int32 row() const;
+  inline void set_row(::google::protobuf::int32 value);
+
+  // required int64 object_guid = 2;
   inline bool has_object_guid() const;
   inline void clear_object_guid();
-  static const int kObjectGuidFieldNumber = 1;
+  static const int kObjectGuidFieldNumber = 2;
   inline ::google::protobuf::int64 object_guid() const;
   inline void set_object_guid(::google::protobuf::int64 value);
 
@@ -404,6 +421,8 @@ class ReqAckMoveBuildObject : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckMoveBuildObject)
  private:
+  inline void set_has_row();
+  inline void clear_has_row();
   inline void set_has_object_guid();
   inline void clear_has_object_guid();
   inline void set_has_x();
@@ -416,12 +435,13 @@ class ReqAckMoveBuildObject : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int64 object_guid_;
+  ::google::protobuf::int32 row_;
   float x_;
   float y_;
   float z_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFSLGDefine_2eproto();
   friend void protobuf_AssignDesc_NFSLGDefine_2eproto();
@@ -486,24 +506,34 @@ class ReqUpBuildLv : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 object_guid = 1;
+  // optional int32 row = 1;
+  inline bool has_row() const;
+  inline void clear_row();
+  static const int kRowFieldNumber = 1;
+  inline ::google::protobuf::int32 row() const;
+  inline void set_row(::google::protobuf::int32 value);
+
+  // required int64 object_guid = 2;
   inline bool has_object_guid() const;
   inline void clear_object_guid();
-  static const int kObjectGuidFieldNumber = 1;
+  static const int kObjectGuidFieldNumber = 2;
   inline ::google::protobuf::int64 object_guid() const;
   inline void set_object_guid(::google::protobuf::int64 value);
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqUpBuildLv)
  private:
+  inline void set_has_row();
+  inline void clear_has_row();
   inline void set_has_object_guid();
   inline void clear_has_object_guid();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int64 object_guid_;
+  ::google::protobuf::int32 row_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFSLGDefine_2eproto();
   friend void protobuf_AssignDesc_NFSLGDefine_2eproto();
@@ -568,17 +598,24 @@ class ReqCreateItem : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 object_guid = 1;
+  // optional int32 row = 1;
+  inline bool has_row() const;
+  inline void clear_row();
+  static const int kRowFieldNumber = 1;
+  inline ::google::protobuf::int32 row() const;
+  inline void set_row(::google::protobuf::int32 value);
+
+  // required int64 object_guid = 2;
   inline bool has_object_guid() const;
   inline void clear_object_guid();
-  static const int kObjectGuidFieldNumber = 1;
+  static const int kObjectGuidFieldNumber = 2;
   inline ::google::protobuf::int64 object_guid() const;
   inline void set_object_guid(::google::protobuf::int64 value);
 
-  // required string config_id = 2;
+  // required string config_id = 3;
   inline bool has_config_id() const;
   inline void clear_config_id();
-  static const int kConfigIdFieldNumber = 2;
+  static const int kConfigIdFieldNumber = 3;
   inline const ::std::string& config_id() const;
   inline void set_config_id(const ::std::string& value);
   inline void set_config_id(const char* value);
@@ -587,15 +624,17 @@ class ReqCreateItem : public ::google::protobuf::Message {
   inline ::std::string* release_config_id();
   inline void set_allocated_config_id(::std::string* config_id);
 
-  // required int32 count = 3;
+  // required int32 count = 4;
   inline bool has_count() const;
   inline void clear_count();
-  static const int kCountFieldNumber = 3;
+  static const int kCountFieldNumber = 4;
   inline ::google::protobuf::int32 count() const;
   inline void set_count(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqCreateItem)
  private:
+  inline void set_has_row();
+  inline void clear_has_row();
   inline void set_has_object_guid();
   inline void clear_has_object_guid();
   inline void set_has_config_id();
@@ -606,11 +645,12 @@ class ReqCreateItem : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int64 object_guid_;
-  ::std::string* config_id_;
+  ::google::protobuf::int32 row_;
   ::google::protobuf::int32 count_;
+  ::std::string* config_id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFSLGDefine_2eproto();
   friend void protobuf_AssignDesc_NFSLGDefine_2eproto();
@@ -626,37 +666,15 @@ class ReqCreateItem : public ::google::protobuf::Message {
 
 // ReqAckBuyObjectFormShop
 
-// required int64 object_guid = 1;
-inline bool ReqAckBuyObjectFormShop::has_object_guid() const {
+// required string config_id = 1;
+inline bool ReqAckBuyObjectFormShop::has_config_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqAckBuyObjectFormShop::set_has_object_guid() {
+inline void ReqAckBuyObjectFormShop::set_has_config_id() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqAckBuyObjectFormShop::clear_has_object_guid() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ReqAckBuyObjectFormShop::clear_object_guid() {
-  object_guid_ = GOOGLE_LONGLONG(0);
-  clear_has_object_guid();
-}
-inline ::google::protobuf::int64 ReqAckBuyObjectFormShop::object_guid() const {
-  return object_guid_;
-}
-inline void ReqAckBuyObjectFormShop::set_object_guid(::google::protobuf::int64 value) {
-  set_has_object_guid();
-  object_guid_ = value;
-}
-
-// required string config_id = 2;
-inline bool ReqAckBuyObjectFormShop::has_config_id() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ReqAckBuyObjectFormShop::set_has_config_id() {
-  _has_bits_[0] |= 0x00000002u;
-}
 inline void ReqAckBuyObjectFormShop::clear_has_config_id() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void ReqAckBuyObjectFormShop::clear_config_id() {
   if (config_id_ != &::google::protobuf::internal::kEmptyString) {
@@ -718,15 +736,15 @@ inline void ReqAckBuyObjectFormShop::set_allocated_config_id(::std::string* conf
   }
 }
 
-// required float x = 3;
+// required float x = 2;
 inline bool ReqAckBuyObjectFormShop::has_x() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
 inline void ReqAckBuyObjectFormShop::set_has_x() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000002u;
 }
 inline void ReqAckBuyObjectFormShop::clear_has_x() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqAckBuyObjectFormShop::clear_x() {
   x_ = 0;
@@ -740,15 +758,15 @@ inline void ReqAckBuyObjectFormShop::set_x(float value) {
   x_ = value;
 }
 
-// required float y = 4;
+// required float y = 3;
 inline bool ReqAckBuyObjectFormShop::has_y() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void ReqAckBuyObjectFormShop::set_has_y() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void ReqAckBuyObjectFormShop::clear_has_y() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void ReqAckBuyObjectFormShop::clear_y() {
   y_ = 0;
@@ -762,15 +780,15 @@ inline void ReqAckBuyObjectFormShop::set_y(float value) {
   y_ = value;
 }
 
-// required float z = 5;
+// required float z = 4;
 inline bool ReqAckBuyObjectFormShop::has_z() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void ReqAckBuyObjectFormShop::set_has_z() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void ReqAckBuyObjectFormShop::clear_has_z() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void ReqAckBuyObjectFormShop::clear_z() {
   z_ = 0;
@@ -788,15 +806,37 @@ inline void ReqAckBuyObjectFormShop::set_z(float value) {
 
 // ReqAckMoveBuildObject
 
-// required int64 object_guid = 1;
-inline bool ReqAckMoveBuildObject::has_object_guid() const {
+// optional int32 row = 1;
+inline bool ReqAckMoveBuildObject::has_row() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqAckMoveBuildObject::set_has_object_guid() {
+inline void ReqAckMoveBuildObject::set_has_row() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqAckMoveBuildObject::clear_has_object_guid() {
+inline void ReqAckMoveBuildObject::clear_has_row() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckMoveBuildObject::clear_row() {
+  row_ = 0;
+  clear_has_row();
+}
+inline ::google::protobuf::int32 ReqAckMoveBuildObject::row() const {
+  return row_;
+}
+inline void ReqAckMoveBuildObject::set_row(::google::protobuf::int32 value) {
+  set_has_row();
+  row_ = value;
+}
+
+// required int64 object_guid = 2;
+inline bool ReqAckMoveBuildObject::has_object_guid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckMoveBuildObject::set_has_object_guid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckMoveBuildObject::clear_has_object_guid() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqAckMoveBuildObject::clear_object_guid() {
   object_guid_ = GOOGLE_LONGLONG(0);
@@ -812,13 +852,13 @@ inline void ReqAckMoveBuildObject::set_object_guid(::google::protobuf::int64 val
 
 // required float x = 3;
 inline bool ReqAckMoveBuildObject::has_x() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void ReqAckMoveBuildObject::set_has_x() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void ReqAckMoveBuildObject::clear_has_x() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void ReqAckMoveBuildObject::clear_x() {
   x_ = 0;
@@ -834,13 +874,13 @@ inline void ReqAckMoveBuildObject::set_x(float value) {
 
 // required float y = 4;
 inline bool ReqAckMoveBuildObject::has_y() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void ReqAckMoveBuildObject::set_has_y() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void ReqAckMoveBuildObject::clear_has_y() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void ReqAckMoveBuildObject::clear_y() {
   y_ = 0;
@@ -856,13 +896,13 @@ inline void ReqAckMoveBuildObject::set_y(float value) {
 
 // required float z = 5;
 inline bool ReqAckMoveBuildObject::has_z() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void ReqAckMoveBuildObject::set_has_z() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void ReqAckMoveBuildObject::clear_has_z() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void ReqAckMoveBuildObject::clear_z() {
   z_ = 0;
@@ -880,15 +920,37 @@ inline void ReqAckMoveBuildObject::set_z(float value) {
 
 // ReqUpBuildLv
 
-// required int64 object_guid = 1;
-inline bool ReqUpBuildLv::has_object_guid() const {
+// optional int32 row = 1;
+inline bool ReqUpBuildLv::has_row() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqUpBuildLv::set_has_object_guid() {
+inline void ReqUpBuildLv::set_has_row() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqUpBuildLv::clear_has_object_guid() {
+inline void ReqUpBuildLv::clear_has_row() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqUpBuildLv::clear_row() {
+  row_ = 0;
+  clear_has_row();
+}
+inline ::google::protobuf::int32 ReqUpBuildLv::row() const {
+  return row_;
+}
+inline void ReqUpBuildLv::set_row(::google::protobuf::int32 value) {
+  set_has_row();
+  row_ = value;
+}
+
+// required int64 object_guid = 2;
+inline bool ReqUpBuildLv::has_object_guid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqUpBuildLv::set_has_object_guid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqUpBuildLv::clear_has_object_guid() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqUpBuildLv::clear_object_guid() {
   object_guid_ = GOOGLE_LONGLONG(0);
@@ -906,15 +968,37 @@ inline void ReqUpBuildLv::set_object_guid(::google::protobuf::int64 value) {
 
 // ReqCreateItem
 
-// required int64 object_guid = 1;
-inline bool ReqCreateItem::has_object_guid() const {
+// optional int32 row = 1;
+inline bool ReqCreateItem::has_row() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqCreateItem::set_has_object_guid() {
+inline void ReqCreateItem::set_has_row() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqCreateItem::clear_has_object_guid() {
+inline void ReqCreateItem::clear_has_row() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqCreateItem::clear_row() {
+  row_ = 0;
+  clear_has_row();
+}
+inline ::google::protobuf::int32 ReqCreateItem::row() const {
+  return row_;
+}
+inline void ReqCreateItem::set_row(::google::protobuf::int32 value) {
+  set_has_row();
+  row_ = value;
+}
+
+// required int64 object_guid = 2;
+inline bool ReqCreateItem::has_object_guid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqCreateItem::set_has_object_guid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqCreateItem::clear_has_object_guid() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqCreateItem::clear_object_guid() {
   object_guid_ = GOOGLE_LONGLONG(0);
@@ -928,15 +1012,15 @@ inline void ReqCreateItem::set_object_guid(::google::protobuf::int64 value) {
   object_guid_ = value;
 }
 
-// required string config_id = 2;
+// required string config_id = 3;
 inline bool ReqCreateItem::has_config_id() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void ReqCreateItem::set_has_config_id() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void ReqCreateItem::clear_has_config_id() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void ReqCreateItem::clear_config_id() {
   if (config_id_ != &::google::protobuf::internal::kEmptyString) {
@@ -998,15 +1082,15 @@ inline void ReqCreateItem::set_allocated_config_id(::std::string* config_id) {
   }
 }
 
-// required int32 count = 3;
+// required int32 count = 4;
 inline bool ReqCreateItem::has_count() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void ReqCreateItem::set_has_count() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void ReqCreateItem::clear_has_count() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void ReqCreateItem::clear_count() {
   count_ = 0;
@@ -1044,6 +1128,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ESLGArmyType>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ESLGFuncType>() {
   return ::NFMsg::ESLGFuncType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ESLGBuildingState>() {
+  return ::NFMsg::ESLGBuildingState_descriptor();
 }
 
 }  // namespace google
