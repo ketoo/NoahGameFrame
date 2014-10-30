@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--this is config xml-->
 <XML>
-    <Object ActorID="0" CanClone="1" FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/CloneScene/" ID="3" MaxGroup="10" MaxGroupPlayers="200" RelivePos="186,6.89,88" SceneName="Scene2" SceneShowName="Scene2" SoundList="" Width="500"/>
-    <Object ActorID="0" CanClone="0" FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/PioneerNoob/" ID="1" MaxGroup="10" MaxGroupPlayers="200" RelivePos="186,6.89,88" SceneName="Demo1" SceneShowName="Demo1" SoundList="" Width="500"/>
-    <Object ActorID="0" CanClone="0" FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/RebellerNoob/" ID="2" MaxGroup="10" MaxGroupPlayers="200" RelivePos="186,6.89,88" SceneName="Scene1" SceneShowName="Scene1" SoundList="" Width="500"/>
+    <Object ActorID="0" CanClone="1" FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/CloneScene/" ID="3" MaxGroup="10" MaxGroupPlayers="200" RelivePos="186,0,88" SceneName="Scene2" SceneShowName="Scene2" SoundList="" Width="500"/>
+    <Object ActorID="0" CanClone="0" FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/PioneerNoob/" ID="1" MaxGroup="10" MaxGroupPlayers="200" RelivePos="186,0,88" SceneName="Demo1" SceneShowName="Demo1" SoundList="" Width="500"/>
+    <Object ActorID="0" CanClone="0" FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/RebellerNoob/" ID="2" MaxGroup="10" MaxGroupPlayers="200" RelivePos="186,0,88" SceneName="Scene1" SceneShowName="Scene1" SoundList="" Width="500"/>
 </XML>
