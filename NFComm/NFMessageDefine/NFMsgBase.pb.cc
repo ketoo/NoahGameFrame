@@ -786,12 +786,12 @@ void protobuf_AddDesc_NFMsgBase_2eproto() {
     "ve_row\030\003 \003(\005\"F\n\007MsgBase\022\021\n\tplayer_id\030\001 \002"
     "(\003\022\020\n\010msg_data\030\002 \002(\014\022\026\n\016player_fd_list\030\003"
     " \003(\003\"+\n\010Position\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t"
-    "\n\001z\030\003 \002(\002\"\314\001\n\nReqCommand\022\022\n\ncontrol_id\030\001"
+    "\n\001z\030\003 \002(\002\"\344\001\n\nReqCommand\022\022\n\ncontrol_id\030\001"
     " \002(\003\0226\n\ncommand_id\030\002 \002(\0162\".NFMsg.ReqComm"
     "and.EGameCommandType\022\031\n\021command_str_valu"
-    "e\030\003 \001(\014\022\025\n\rcommand_value\030\004 \001(\003\"@\n\020EGameC"
+    "e\030\003 \001(\014\022\025\n\rcommand_value\030\004 \001(\003\"X\n\020EGameC"
     "ommandType\022\027\n\023EGCT_MODIY_PROPERTY\020\000\022\023\n\017E"
-    "GCT_MODIY_ITEM\020\001", 2696);
+    "GCT_MODIY_ITEM\020\001\022\026\n\022EGCT_CREATE_OBJECT\020\002", 2720);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgBase.proto", &protobuf_RegisterTypes);
   PropertyInt::default_instance_ = new PropertyInt();
@@ -8538,6 +8538,7 @@ bool ReqCommand_EGameCommandType_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
+    case 2:
       return true;
     default:
       return false;
@@ -8547,6 +8548,7 @@ bool ReqCommand_EGameCommandType_IsValid(int value) {
 #ifndef _MSC_VER
 const ReqCommand_EGameCommandType ReqCommand::EGCT_MODIY_PROPERTY;
 const ReqCommand_EGameCommandType ReqCommand::EGCT_MODIY_ITEM;
+const ReqCommand_EGameCommandType ReqCommand::EGCT_CREATE_OBJECT;
 const ReqCommand_EGameCommandType ReqCommand::EGameCommandType_MIN;
 const ReqCommand_EGameCommandType ReqCommand::EGameCommandType_MAX;
 const int ReqCommand::EGameCommandType_ARRAYSIZE;
