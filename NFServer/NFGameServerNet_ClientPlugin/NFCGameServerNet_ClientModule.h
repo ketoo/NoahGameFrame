@@ -49,7 +49,7 @@ protected:
     //спа╛╫с
     void OnClientConnected(const int nAddress);
 protected:
-
+    void KeepAlive(float fLasFrametime);
     void Register();
     void UnRegister();
     void RefreshWorldInfo();
@@ -72,6 +72,7 @@ protected:
 
 private:
     int mnSocketFD;
+    float mfLastHBTime;
 
     NFILogModule* m_pLogModule;
     NFIKernelModule* m_pKernelModule;
