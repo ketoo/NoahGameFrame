@@ -130,7 +130,6 @@ int NFCProxyServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
     case NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME:
         OnReqEnterGameServer(msg);
         break;
-        
     default:
         {
             if (!VerifyProtocol(msg, msg.GetFd()))
