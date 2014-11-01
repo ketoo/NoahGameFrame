@@ -9,21 +9,21 @@
 //#include "stdafx.h"
 #include "NFCWorldNet_ClientModule.h"
 #include "NFWorldNet_ClientPlugin.h"
-#include "NFComm\NFCore\NFCDataList.h"
+#include "NFComm/NFCore/NFCDataList.h"
+#include "NFComm/NFMessageDefine/NFMsgPreGame.pb.h"
 
 bool NFCWorldNet_ClientModule::Init()
 {
-
 	mstrConfigIdent = "WorldServer";
+    mfLastHBTime = 0.0f;
+    mnSocketFD = -1;
+
     return true;
 }
 
 bool NFCWorldNet_ClientModule::Shut()
 {
-    
-
     m_pNet->Final();
-
     return true;
 }
 
@@ -67,7 +67,24 @@ bool NFCWorldNet_ClientModule::AfterInit()
 
 bool NFCWorldNet_ClientModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
+    KeepAlive(fLasFrametime);
     return m_pNet->Execute(fLasFrametime, fStartedTime);
+}
+
+void NFCWorldNet_ClientModule::KeepAlive(float fLasFrametime)
+{
+    if (mfLastHBTime < 10.0f)
+    {
+        mfLastHBTime += fLasFrametime;
+        return;
+    }
+
+    mfLastHBTime = 0.0f;
+
+    NFMsg::ServerHeartBeat xMsg;
+    xMsg.set_count(0);
+
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT, xMsg, mnSocketFD);
 }
 
 void NFCWorldNet_ClientModule::Register()

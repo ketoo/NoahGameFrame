@@ -44,6 +44,7 @@ protected:
 	int OnRecivePack(const NFIPacket& msg);
 	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
 
+    void KeepAlive(float fLasFrametime);
 	//连接丢失,删2层(连接对象，帐号对象)
 	void OnClientDisconnect(const int nAddress);
 	//有连接
@@ -61,6 +62,8 @@ protected:
 
 private:
 	int mnSocketFD;
+    float mfLastHBTime;
+
     NFILogModule* m_pLogModule;
 	NFIElementInfoModule* m_pElementInfoModule;
 	NFILogicClassModule* m_pLogicClassModule;
