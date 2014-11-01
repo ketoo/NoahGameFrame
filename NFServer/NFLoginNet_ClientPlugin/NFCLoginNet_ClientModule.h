@@ -48,6 +48,7 @@ protected:
 	int OnRecivePack(const NFIPacket& msg);
     int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
 
+    void KeepAlive(float fLasFrametime);
 
 protected:
 
@@ -67,7 +68,7 @@ protected:
 
 private:
 	int mnSocketFD;
-
+    float mfLastHBTime;
 private:
     NFMap<int, NFMsg::ServerInfoReport> mWorldMap;
 
