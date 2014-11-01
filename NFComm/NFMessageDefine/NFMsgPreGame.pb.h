@@ -54,6 +54,7 @@ class AckRoleLiteInfoList;
 class ReqCreateRole;
 class ReqDeleteRole;
 class ReqRecoverRole;
+class ServerHeartBeat;
 
 enum EServerState {
   EST_CRASH = 0,
@@ -2215,6 +2216,88 @@ class ReqRecoverRole : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ReqRecoverRole* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ServerHeartBeat : public ::google::protobuf::Message {
+ public:
+  ServerHeartBeat();
+  virtual ~ServerHeartBeat();
+
+  ServerHeartBeat(const ServerHeartBeat& from);
+
+  inline ServerHeartBeat& operator=(const ServerHeartBeat& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ServerHeartBeat& default_instance();
+
+  void Swap(ServerHeartBeat* other);
+
+  // implements Message ----------------------------------------------
+
+  ServerHeartBeat* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ServerHeartBeat& from);
+  void MergeFrom(const ServerHeartBeat& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 count = 1;
+  inline bool has_count() const;
+  inline void clear_count();
+  static const int kCountFieldNumber = 1;
+  inline ::google::protobuf::int32 count() const;
+  inline void set_count(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ServerHeartBeat)
+ private:
+  inline void set_has_count();
+  inline void clear_has_count();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 count_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+
+  void InitAsDefaultInstance();
+  static ServerHeartBeat* default_instance_;
 };
 // ===================================================================
 
@@ -5021,6 +5104,32 @@ inline ::google::protobuf::int32 ReqRecoverRole::game_id() const {
 inline void ReqRecoverRole::set_game_id(::google::protobuf::int32 value) {
   set_has_game_id();
   game_id_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ServerHeartBeat
+
+// optional int32 count = 1;
+inline bool ServerHeartBeat::has_count() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ServerHeartBeat::set_has_count() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ServerHeartBeat::clear_has_count() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ServerHeartBeat::clear_count() {
+  count_ = 0;
+  clear_has_count();
+}
+inline ::google::protobuf::int32 ServerHeartBeat::count() const {
+  return count_;
+}
+inline void ServerHeartBeat::set_count(::google::protobuf::int32 value) {
+  set_has_count();
+  count_ = value;
 }
 
 
