@@ -74,6 +74,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* ReqRecoverRole_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqRecoverRole_reflection_ = NULL;
+const ::google::protobuf::Descriptor* ServerHeartBeat_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ServerHeartBeat_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* EServerState_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ReqServerListType_descriptor_ = NULL;
 
@@ -407,6 +410,21 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqRecoverRole));
+  ServerHeartBeat_descriptor_ = file->message_type(18);
+  static const int ServerHeartBeat_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerHeartBeat, count_),
+  };
+  ServerHeartBeat_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ServerHeartBeat_descriptor_,
+      ServerHeartBeat::default_instance_,
+      ServerHeartBeat_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerHeartBeat, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerHeartBeat, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ServerHeartBeat));
   EServerState_descriptor_ = file->enum_type(0);
   ReqServerListType_descriptor_ = file->enum_type(1);
 }
@@ -457,6 +475,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
     ReqDeleteRole_descriptor_, &ReqDeleteRole::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqRecoverRole_descriptor_, &ReqRecoverRole::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ServerHeartBeat_descriptor_, &ServerHeartBeat::default_instance());
 }
 
 }  // namespace
@@ -498,6 +518,8 @@ void protobuf_ShutdownFile_NFMsgPreGame_2eproto() {
   delete ReqDeleteRole_reflection_;
   delete ReqRecoverRole::default_instance_;
   delete ReqRecoverRole_reflection_;
+  delete ServerHeartBeat::default_instance_;
+  delete ServerHeartBeat_reflection_;
 }
 
 void protobuf_AddDesc_NFMsgPreGame_2eproto() {
@@ -555,11 +577,12 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
     "(\005\"\?\n\rReqDeleteRole\022\017\n\007account\030\001 \002(\014\022\014\n\004"
     "name\030\002 \002(\014\022\017\n\007game_id\030\003 \002(\005\"@\n\016ReqRecove"
     "rRole\022\017\n\007account\030\001 \002(\014\022\014\n\004name\030\002 \002(\014\022\017\n\007"
-    "game_id\030\003 \002(\005*Z\n\014EServerState\022\r\n\tEST_CRA"
-    "SH\020\000\022\016\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010ES"
-    "T_FIRE\020\003\022\017\n\013EST_MAINTEN\020\004*@\n\021ReqServerLi"
-    "stType\022\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GA"
-    "MES_ERVER\020\001", 2011);
+    "game_id\030\003 \002(\005\" \n\017ServerHeartBeat\022\r\n\005coun"
+    "t\030\001 \001(\005*Z\n\014EServerState\022\r\n\tEST_CRASH\020\000\022\016"
+    "\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST_FIRE"
+    "\020\003\022\017\n\013EST_MAINTEN\020\004*@\n\021ReqServerListType"
+    "\022\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GAMES_ER"
+    "VER\020\001", 2045);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgPreGame.proto", &protobuf_RegisterTypes);
   ServerInfoReport::default_instance_ = new ServerInfoReport();
@@ -580,6 +603,7 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
   ReqCreateRole::default_instance_ = new ReqCreateRole();
   ReqDeleteRole::default_instance_ = new ReqDeleteRole();
   ReqRecoverRole::default_instance_ = new ReqRecoverRole();
+  ServerHeartBeat::default_instance_ = new ServerHeartBeat();
   ServerInfoReport::default_instance_->InitAsDefaultInstance();
   ServerInfoReportList::default_instance_->InitAsDefaultInstance();
   AckEventResult::default_instance_->InitAsDefaultInstance();
@@ -598,6 +622,7 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
   ReqCreateRole::default_instance_->InitAsDefaultInstance();
   ReqDeleteRole::default_instance_->InitAsDefaultInstance();
   ReqRecoverRole::default_instance_->InitAsDefaultInstance();
+  ServerHeartBeat::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFMsgPreGame_2eproto);
 }
 
@@ -6676,6 +6701,214 @@ void ReqRecoverRole::Swap(ReqRecoverRole* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = ReqRecoverRole_descriptor_;
   metadata.reflection = ReqRecoverRole_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ServerHeartBeat::kCountFieldNumber;
+#endif  // !_MSC_VER
+
+ServerHeartBeat::ServerHeartBeat()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void ServerHeartBeat::InitAsDefaultInstance() {
+}
+
+ServerHeartBeat::ServerHeartBeat(const ServerHeartBeat& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ServerHeartBeat::SharedCtor() {
+  _cached_size_ = 0;
+  count_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ServerHeartBeat::~ServerHeartBeat() {
+  SharedDtor();
+}
+
+void ServerHeartBeat::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void ServerHeartBeat::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ServerHeartBeat::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ServerHeartBeat_descriptor_;
+}
+
+const ServerHeartBeat& ServerHeartBeat::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgPreGame_2eproto();
+  return *default_instance_;
+}
+
+ServerHeartBeat* ServerHeartBeat::default_instance_ = NULL;
+
+ServerHeartBeat* ServerHeartBeat::New() const {
+  return new ServerHeartBeat;
+}
+
+void ServerHeartBeat::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    count_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ServerHeartBeat::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int32 count = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &count_)));
+          set_has_count();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void ServerHeartBeat::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // optional int32 count = 1;
+  if (has_count()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->count(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* ServerHeartBeat::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // optional int32 count = 1;
+  if (has_count()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->count(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int ServerHeartBeat::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional int32 count = 1;
+    if (has_count()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->count());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ServerHeartBeat::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ServerHeartBeat* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ServerHeartBeat*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ServerHeartBeat::MergeFrom(const ServerHeartBeat& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_count()) {
+      set_count(from.count());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ServerHeartBeat::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ServerHeartBeat::CopyFrom(const ServerHeartBeat& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ServerHeartBeat::IsInitialized() const {
+
+  return true;
+}
+
+void ServerHeartBeat::Swap(ServerHeartBeat* other) {
+  if (other != this) {
+    std::swap(count_, other->count_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ServerHeartBeat::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ServerHeartBeat_descriptor_;
+  metadata.reflection = ServerHeartBeat_reflection_;
   return metadata;
 }
 
