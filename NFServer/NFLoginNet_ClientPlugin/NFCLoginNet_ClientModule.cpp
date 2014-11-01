@@ -9,10 +9,13 @@
 //#include "stdafx.h"
 #include "NFCLoginNet_ClientModule.h"
 #include "NFLoginNet_ClientPlugin.h"
+#include "NFComm/NFMessageDefine/NFMsgDefine.h"
 
 bool NFCLoginNet_ClientModule::Init()
 {
 	mstrConfigIdent = "LoginServer";
+    mfLastHBTime = 0;
+    mnSocketFD = -1;
 	return true;
 }
 
@@ -23,42 +26,40 @@ bool NFCLoginNet_ClientModule::Shut()
 
 bool NFCLoginNet_ClientModule::AfterInit()
 {
+    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
+    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
+    m_pLoginLogicModule = dynamic_cast<NFILoginLogicModule*>(pPluginManager->FindModule("NFCLoginLogicModule"));
+    m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
+    m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
+    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
+    m_pLoginNet_ServerModule = dynamic_cast<NFILoginNet_ServerModule*>(pPluginManager->FindModule("NFCLoginNet_ServerModule"));
 
-	
-	m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-	m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
-	m_pLoginLogicModule = dynamic_cast<NFILoginLogicModule*>(pPluginManager->FindModule("NFCLoginLogicModule"));
-	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
-	m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
-	m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-	m_pLoginNet_ServerModule = dynamic_cast<NFILoginNet_ServerModule*>(pPluginManager->FindModule("NFCLoginNet_ServerModule"));
-	
-	assert(NULL != m_pEventProcessModule);
-	assert(NULL != m_pKernelModule);
-	assert(NULL != m_pLoginLogicModule);
-	assert(NULL != m_pLogModule);
-	assert(NULL != m_pLogicClassModule);
-	assert(NULL != m_pElementInfoModule);
-	assert(NULL != m_pLoginNet_ServerModule);
+    assert(NULL != m_pEventProcessModule);
+    assert(NULL != m_pKernelModule);
+    assert(NULL != m_pLoginLogicModule);
+    assert(NULL != m_pLogModule);
+    assert(NULL != m_pLogicClassModule);
+    assert(NULL != m_pElementInfoModule);
+    assert(NULL != m_pLoginNet_ServerModule);
 
-	m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_SELECT_SERVER, this, &NFCLoginNet_ClientModule::OnSelectServerEvent);
+    m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_SELECT_SERVER, this, &NFCLoginNet_ClientModule::OnSelectServerEvent);
 
-	const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
-	const std::string& strServerIP = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "ServerIP");
-	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
-	const int nServerPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerPort");
-	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
-	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
-	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
+    const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
+    const std::string& strServerIP = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "ServerIP");
+    const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
+    const int nServerPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerPort");
+    const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
+    const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
+    const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
-	m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCLoginNet_ClientModule::OnRecivePack, &NFCLoginNet_ClientModule::OnSocketEvent);
-	mnSocketFD = m_pNet->Initialization(strServerIP.c_str(), nServerPort);
-	if (mnSocketFD < 0)
-	{
-		assert(0);
-	}
+    m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCLoginNet_ClientModule::OnRecivePack, &NFCLoginNet_ClientModule::OnSocketEvent);
+    mnSocketFD = m_pNet->Initialization(strServerIP.c_str(), nServerPort);
+    if (mnSocketFD < 0)
+    {
+        assert(0);
+    }
 
-	return true;
+    return true;
 }
 
 bool NFCLoginNet_ClientModule::BeforeShut()
@@ -99,7 +100,24 @@ int NFCLoginNet_ClientModule::OnSelectServerEvent(const NFIDENTID& object, const
 
 bool NFCLoginNet_ClientModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
+    KeepAlive(fLasFrametime);
 	return m_pNet->Execute(fLasFrametime, fStartedTime);
+}
+
+void NFCLoginNet_ClientModule::KeepAlive(float fLasFrametime)
+{
+    if (mfLastHBTime < 10.0f)
+    {
+        mfLastHBTime += fLasFrametime;
+        return;
+    }
+
+    mfLastHBTime = 0.0f;
+
+    NFMsg::ServerHeartBeat xMsg;
+    xMsg.set_count(0);
+
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT, xMsg, mnSocketFD);
 }
 
 void NFCLoginNet_ClientModule::Register()
@@ -178,29 +196,23 @@ int NFCLoginNet_ClientModule::OnSelectServerResultProcess(const NFIPacket& msg)
 
 int NFCLoginNet_ClientModule::OnRecivePack(const NFIPacket& msg )
 {
-	//统一解包
-	int nMsgID = msg.GetMsgHead()->GetMsgID();
-	switch (nMsgID)
-	{
+    //统一解包
+    int nMsgID = msg.GetMsgHead()->GetMsgID();
+    switch (nMsgID)
+    {
+    case NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD:
+        OnSelectServerResultProcess(msg);
+        break;
+    case NFMsg::EGameMsgID::EGMI_STS_NET_INFO:
+        OnWorldInfoProcess(msg);
+        break;
+    default:
+        printf("NFNet || 非法消息:unMsgID=%d\n", nMsgID);
+        break;
+    }
 
-	case NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD:
-		OnSelectServerResultProcess(msg);
-		break;
-
-	case NFMsg::EGameMsgID::EGMI_STS_NET_INFO:
-		OnWorldInfoProcess(msg);
-		break;
-
-	default:
-		printf("NFNet || 非法消息:unMsgID=%d\n", nMsgID);
-		break;
-	}
-
-	return 0;
-
+    return 0;
 }
-
-
 
 int NFCLoginNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {

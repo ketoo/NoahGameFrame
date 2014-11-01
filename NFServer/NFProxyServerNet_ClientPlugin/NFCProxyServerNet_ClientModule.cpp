@@ -39,7 +39,25 @@ bool NFCProxyServerNet_ClientModule::Execute(const float fLasFrametime, const fl
         pProxy = Next();
     }
 
+    KeepAlive(fLasFrametime);
+
     return m_pNet->Execute(fLasFrametime, fStartedTime);
+}
+
+void NFCProxyServerNet_ClientModule::KeepAlive(const float fLasFrametime)
+{
+    if (mfLastHBTime < 10.0f)
+    {
+        mfLastHBTime += fLasFrametime;
+        return;
+    }
+
+    mfLastHBTime = 0.0f;
+
+    NFMsg::ServerHeartBeat xMsg;
+    xMsg.set_count(0);
+
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT, xMsg, mnSocketFD);
 }
 
 int NFCProxyServerNet_ClientModule::OnRecivePack( const NFIPacket& msg )
