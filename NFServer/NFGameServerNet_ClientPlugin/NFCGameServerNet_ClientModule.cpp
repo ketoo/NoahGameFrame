@@ -9,10 +9,12 @@
 //#include "stdafx.h"
 #include "NFCGameServerNet_ClientModule.h"
 #include "NFGameServerNet_ClientPlugin.h"
+#include "NFComm/NFMessageDefine/NFMsgDefine.h"
 
 bool NFCGameServerNet_ClientModule::Init()
 {
-
+    mfLastHBTime = 0.0f;
+    mnSocketFD = -1;
     return true;
 }
 
@@ -25,7 +27,24 @@ bool NFCGameServerNet_ClientModule::Shut()
 
 bool NFCGameServerNet_ClientModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
+    KeepAlive(fLasFrametime);
     return m_pNet->Execute(fLasFrametime, fStartedTime);
+}
+
+void NFCGameServerNet_ClientModule::KeepAlive(float fLasFrametime)
+{
+    if (mfLastHBTime < 10.0f)
+    {
+        mfLastHBTime += fLasFrametime;
+        return;
+    }
+
+    mfLastHBTime = 0.0f;
+
+    NFMsg::ServerHeartBeat xMsg;
+    xMsg.set_count(0);
+
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT, xMsg, mnSocketFD);
 }
 
 void NFCGameServerNet_ClientModule::Register()
@@ -357,7 +376,6 @@ int NFCGameServerNet_ClientModule::OnClassCommonEvent(const NFIDENTID& self, con
 
 int NFCGameServerNet_ClientModule::OnRecivePack( const NFIPacket& msg )
 {
-
     return 0;
 }
 
