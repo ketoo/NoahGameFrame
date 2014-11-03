@@ -8,9 +8,9 @@
 
 #include "NFCMonoScriptModule.h"
 #include "NFMonoScriptPlugin.h"
-#include "mono\metadata\metadata.h"
-#include "mono\mini\jit.h"
-#include "mono\metadata\assembly.h"
+#include "mono/metadata/metadata.h"
+#include "mono-3.6.0.39/mono/mini/jit.h"
+#include "mono-3.6.0.39/mono/metadata/assembly.h"
 
 bool NFCMonoScriptModule::Init()
 {
@@ -28,9 +28,17 @@ bool NFCMonoScriptModule::Init()
 
 bool NFCMonoScriptModule::AfterInit()
 {
-    //mono_set_assemblies_path("E:\\Projects\\MonoTest\\MonoTest\\");
-    //MonoDomain* domain = mono_jit_init("ScriptDomain");
+    mono_set_assemblies_path(".\\MonoTest\\");
+    MonoDomain* domain = mono_jit_init("ScriptDomain");
 
+    MonoAssembly* assembly = mono_domain_assembly_open(domain, "test.dll");
+    if(!assembly)
+    {
+        std::cout << "err" << std::endl;
+        abort();
+    }
+
+    MonoImage* image = mono_assembly_get_image(assembly);
     return true;
 }
 
