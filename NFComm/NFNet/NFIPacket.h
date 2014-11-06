@@ -26,6 +26,61 @@
 
 #pragma pack(push, 1)
 
+
+int64_t NF_HTONLL(int64_t nData)
+{
+#ifdef _MSC_VER
+    return htonll(nData);
+#else
+    return htobe64(nData);
+#endif
+}
+
+int64_t NF_NTOHLL(int64_t nData)
+{
+#ifdef _MSC_VER
+    return ntohll(nData);
+#else
+    return be64toh(nData);
+#endif
+}
+
+int32_t NF_HTONL(int32_t nData)
+{
+#ifdef _MSC_VER
+    return htonl(nData);
+#else
+    return htobe32(nData);
+#endif
+}
+
+int32_t NF_NTOHL(int32_t nData)
+{
+#ifdef _MSC_VER
+    return ntohl(nData);
+#else
+    return be32toh(nData);
+#endif
+}
+
+int16_t NF_HTONS(int16_t nData)
+{
+#ifdef _MSC_VER
+    return htons(nData);
+#else
+    return htobe16(nData);
+#endif
+}
+
+int16_t NF_NTOHS(int16_t nData)
+{
+#ifdef _MSC_VER
+    return ntohs(nData);
+#else
+    return be16toh(nData);
+#endif
+}
+
 struct  NFIMsgHead
 {
     enum NF_Head
