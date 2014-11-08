@@ -33,17 +33,9 @@ bool NFCLogModule::Init()
 #endif
 
         char szName[MAX_PATH] = {0};
+        google::InitGoogleLogging(szName);
 
-#ifdef _MSC_VER
-        GetConsoleTitle(szName, MAX_PATH);
-        std::string strLogFile(szName);
-#else
-        std::string strLogFile ="LinuxLogFileName";
-#endif // _MSC_VER
-
-        google::InitGoogleLogging(strLogFile.c_str());
-
-        std::string strPath = std::string("./log/") + szName;
+        std::string strPath = std::string("./log/");
         if (!boost::filesystem::exists(strPath))
         {
             boost::filesystem::create_directories(strPath);
@@ -52,15 +44,12 @@ bool NFCLogModule::Init()
 #ifdef NF_DEBUG_MODE
         google::SetStderrLogging(google::GLOG_INFO); //设置级别高于 google::INFO 的日志同时输出到屏幕
 #else
-        google::SetStderrLogging(google::GLOG_FATAL);//设置级别高于 google::FATAL 的日志同时输出到屏幕
+        google::SetStderrLogging(google::GLOG_ERROR);//设置级别高于 google::ERROR 的日志同时输出到屏幕
 #endif
 
-#ifdef _MSC_VER
         FLAGS_colorlogtostderr = true;    //设置输出到屏幕的日志显示相应颜色
         FLAGS_servitysinglelog = true;
-#else
 
-#endif // _MSC_VER
         google::SetLogDestination(google::GLOG_FATAL, std::string(strPath + "/log_fatal_").c_str());
         google::SetLogDestination(google::GLOG_ERROR, std::string(strPath + "/log_error_").c_str());      //设置 google::error 级别的日志存储路径和文件名前缀
         google::SetLogDestination(google::GLOG_WARNING, std::string(strPath + "/log_warning_").c_str());  //设置 google::WARNING 级别的日志存储路径和文件名前缀
