@@ -66,9 +66,10 @@ public:
         mnErrorCount = 0;
         mnLogicState = 0;
         mnUserData = 0;
+		mbRemoveState = false;
     }
 
-    ~NetObject()
+    virtual ~NetObject()
     {
     }
 
@@ -160,6 +161,16 @@ public:
         mstrUserData = strData;
     }
 
+	const bool GetRemoveState() const
+	{
+		return mbRemoveState;
+	}
+
+	void SetRemoveState(const bool bState)
+	{
+		mbRemoveState = bState;
+	}
+
     int IncreaseError(const int nError = 1)
     {
         return mnErrorCount += nError;
@@ -184,7 +195,7 @@ private:
     int32_t mnLogicState;
     int32_t mnUserData;
     std::string mstrUserData;
-
+	bool mbRemoveState;
     NFINet* m_pNet;
 };
 
