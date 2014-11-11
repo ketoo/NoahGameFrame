@@ -76,12 +76,15 @@ public:
     virtual NFIMsgHead::NF_Head GetHeadLen(){return mnHeadLength;};
 
 private:
+	virtual void ExecuteClose();
+
     virtual bool CloseSocketAll();
 
 	virtual bool Dismantle(NetObject* pObject);
 
 	virtual int InitClientNet();
 	virtual int InitServerNet();
+	virtual void CloseObject(const int nSockIndex);
 
 	static void listener_cb(struct evconnlistener *listener, evutil_socket_t fd,struct sockaddr *sa, int socklen, void *user_data);
 	static void conn_readcb(struct bufferevent *bev, void *user_data);
@@ -91,6 +94,7 @@ private:
 private:
 	//<fd,object>
 	std::map<int, NetObject*> mmObject;
+	std::vector<int> mvRemoveObject;
     
     NFIMsgHead::NF_Head mnHeadLength;
 
