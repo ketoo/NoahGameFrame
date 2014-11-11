@@ -147,6 +147,11 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
         return;
     }
 
+	if (pObject->GetRemoveState())
+	{
+		return;
+	}
+
     struct evbuffer *input = bufferevent_get_input(bev);
     if (!input)
     {
@@ -169,8 +174,8 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
 
         while (1)
         {
-            int len = pObject->GetBuffLen();
-            if (len > pNet->mnHeadLength)
+            int nDataLen = pObject->GetBuffLen();
+            if (nDataLen > pNet->mnHeadLength)
             {
                 pNet->Dismantle(pObject);
             }
@@ -188,6 +193,9 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
 
 bool NFCNet::Execute(const float fLasFrametime, const float fStartedTime)
 {
+	ExecuteClose();
+	
+
     //std::cout << "Running:" << mbRuning << std::endl;
     if (base)
     {
@@ -293,27 +301,16 @@ bool NFCNet::SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex,
 
 bool NFCNet::CloseNetObject( const int nSockIndex )
 {
-    std::map<int, NetObject*>::iterator it = mmObject.find(nSockIndex);
-    if (it != mmObject.end())
-    {
-        NetObject* pObject = it->second;
+	std::map<int, NetObject*>::iterator it = mmObject.find(nSockIndex);
+	if (it != mmObject.end())
+	{
+		NetObject* pObject = it->second;
 
-        struct bufferevent* bev = pObject->GetBuffEvent();
-        //bev->cbarg = NULL;
-
-        bufferevent_free(bev);
-        evutil_closesocket(nSockIndex);
-
-        mmObject.erase(it);
-
-        delete pObject;
-        pObject = NULL;
-
-        return true;
-    }
+		pObject->SetRemoveState(true);
+	}
 
 
-    return false;
+    return true;
 }
 
 bool NFCNet::Dismantle(NetObject* pObject )
@@ -559,23 +556,15 @@ void NFCNet::HeartPack()
 bool NFCNet::CloseSocketAll()
 {
     std::map<int, NetObject*>::iterator it = mmObject.begin();
-    for (it; it != mmObject.end();)
+    for (it; it != mmObject.end(); ++it)
     {
-        NetObject* pObject = it->second;
-
-        struct bufferevent* bev = pObject->GetBuffEvent();
-        bev->cbarg = NULL;
-
-        bufferevent_free(bev);
-        evutil_closesocket(pObject->GetFd());
-
-        it = mmObject.erase(it);
-
-        delete pObject;
-        pObject = NULL;
+		int nFD = it->first;
+		mvRemoveObject.push_back(nFD);
     }
 
-    mmObject.clear();
+	ExecuteClose();
+    
+	mmObject.clear();
 
     return true;
 }
@@ -589,4 +578,35 @@ NetObject* NFCNet::GetNetObject( const int nSockIndex )
     }
 
     return NULL;
+}
+
+void NFCNet::CloseObject( const int nSockIndex )
+{
+	std::map<int, NetObject*>::iterator it = mmObject.find(nSockIndex);
+	if (it != mmObject.end())
+	{
+		NetObject* pObject = it->second;
+
+		struct bufferevent* bev = pObject->GetBuffEvent();
+		//bev->cbarg = NULL;
+
+		bufferevent_free(bev);
+		evutil_closesocket(nSockIndex);
+
+		mmObject.erase(it);
+
+		delete pObject;
+		pObject = NULL;
+	}
+}
+
+void NFCNet::ExecuteClose()
+{
+	for (int i = 0; i < mvRemoveObject.size(); ++i)
+	{
+		int nSocketIndex = mvRemoveObject[i];
+		CloseObject(nSocketIndex);
+	}
+
+	mvRemoveObject.clear();
 }
