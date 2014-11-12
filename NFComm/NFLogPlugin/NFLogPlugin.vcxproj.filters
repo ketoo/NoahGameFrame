@@ -10,6 +10,7 @@
       <Filter>NFLogModule</Filter>
     </ClCompile>
     <ClCompile Include="NFLogPlugin.cpp" />
+    <ClCompile Include="dllmain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCLogModule.h">
