@@ -307,10 +307,12 @@ bool NFCNet::CloseNetObject( const int nSockIndex )
 		NetObject* pObject = it->second;
 
 		pObject->SetRemoveState(true);
+        mvRemoveObject.push_back(nSockIndex);
+
+        return true;
 	}
 
-
-    return true;
+    return false;
 }
 
 bool NFCNet::Dismantle(NetObject* pObject )
