@@ -5,6 +5,7 @@
     <ClCompile Include="NFCCrashModule.cpp">
       <Filter>NFCrashModule</Filter>
     </ClCompile>
+    <ClCompile Include="dllmain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCrashPlugin.h" />
