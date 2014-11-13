@@ -285,7 +285,8 @@ int NFCMasterNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 	{
 	case NFMsg::EGameMsgID::EGMI_UNKNOW:
 		break;
-
+    case NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT:
+        break;
 	case NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED:
 		OnWorldRegisteredProcess(msg);
 		break;
