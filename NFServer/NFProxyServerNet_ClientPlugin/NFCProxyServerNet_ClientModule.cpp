@@ -18,7 +18,7 @@ bool NFCProxyServerNet_ClientModule::Init()
     //mnWantToConnectContainer = -2;
     //mnGameContainerID = -3;
     //是连接world的
-
+    
     return true;
 }
 
@@ -314,11 +314,30 @@ bool NFCProxyServerNet_ClientModule::VerifyConnectData( const std::string& strAc
 
 bool NFCProxyConnectObject::Execute(float fFrameTime, float fTotalTime)
 {
+    KeepAlive(fFrameTime);
     return m_pNet->Execute(fFrameTime, fTotalTime);
+}
+
+void NFCProxyConnectObject::KeepAlive(float fLasFrametime)
+{
+    if (mfLastHBTime < 10.0f)
+    {
+        mfLastHBTime += fLasFrametime;
+        return;
+    }
+
+    mfLastHBTime = 0.0f;
+
+    NFMsg::ServerHeartBeat xMsg;
+    xMsg.set_count(0);
+
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT, xMsg, mnSocketFD);
 }
 
 NFCProxyConnectObject::NFCProxyConnectObject(int nGameServerID, const std::string& strIP, const int nPort,  NFIPluginManager* p)
 {
+    mfLastHBTime = 0.0f;
+
     mstrConfigIdent = "ProxyServer";
     mnGameServerID = nGameServerID;
     pPluginManager = p;
