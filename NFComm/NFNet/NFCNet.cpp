@@ -226,10 +226,8 @@ int NFCNet::Initialization( const unsigned int nMaxClient, const unsigned short 
 
 bool NFCNet::Final()
 {
-    if (mbServer)
-    {
-        CloseSocketAll();
-    }
+
+    CloseSocketAll();
 
     if (listener)
     {
