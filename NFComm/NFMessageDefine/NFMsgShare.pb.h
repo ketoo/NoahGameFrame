@@ -420,47 +420,29 @@ class ReqAckPlayerMove : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 movetype() const;
   inline void set_movetype(::google::protobuf::int32 value);
 
-  // required float target_x = 3;
-  inline bool has_target_x() const;
-  inline void clear_target_x();
-  static const int kTargetXFieldNumber = 3;
-  inline float target_x() const;
-  inline void set_target_x(float value);
+  // repeated .NFMsg.Position target_pos = 3;
+  inline int target_pos_size() const;
+  inline void clear_target_pos();
+  static const int kTargetPosFieldNumber = 3;
+  inline const ::NFMsg::Position& target_pos(int index) const;
+  inline ::NFMsg::Position* mutable_target_pos(int index);
+  inline ::NFMsg::Position* add_target_pos();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >&
+      target_pos() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >*
+      mutable_target_pos();
 
-  // optional float target_y = 4;
-  inline bool has_target_y() const;
-  inline void clear_target_y();
-  static const int kTargetYFieldNumber = 4;
-  inline float target_y() const;
-  inline void set_target_y(float value);
-
-  // required float target_z = 5;
-  inline bool has_target_z() const;
-  inline void clear_target_z();
-  static const int kTargetZFieldNumber = 5;
-  inline float target_z() const;
-  inline void set_target_z(float value);
-
-  // optional float source_x = 6;
-  inline bool has_source_x() const;
-  inline void clear_source_x();
-  static const int kSourceXFieldNumber = 6;
-  inline float source_x() const;
-  inline void set_source_x(float value);
-
-  // optional float source_y = 7;
-  inline bool has_source_y() const;
-  inline void clear_source_y();
-  static const int kSourceYFieldNumber = 7;
-  inline float source_y() const;
-  inline void set_source_y(float value);
-
-  // optional float source_z = 8;
-  inline bool has_source_z() const;
-  inline void clear_source_z();
-  static const int kSourceZFieldNumber = 8;
-  inline float source_z() const;
-  inline void set_source_z(float value);
+  // repeated .NFMsg.Position source_pos = 4;
+  inline int source_pos_size() const;
+  inline void clear_source_pos();
+  static const int kSourcePosFieldNumber = 4;
+  inline const ::NFMsg::Position& source_pos(int index) const;
+  inline ::NFMsg::Position* mutable_source_pos(int index);
+  inline ::NFMsg::Position* add_source_pos();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >&
+      source_pos() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >*
+      mutable_source_pos();
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckPlayerMove)
  private:
@@ -468,32 +450,16 @@ class ReqAckPlayerMove : public ::google::protobuf::Message {
   inline void clear_has_mover();
   inline void set_has_movetype();
   inline void clear_has_movetype();
-  inline void set_has_target_x();
-  inline void clear_has_target_x();
-  inline void set_has_target_y();
-  inline void clear_has_target_y();
-  inline void set_has_target_z();
-  inline void clear_has_target_z();
-  inline void set_has_source_x();
-  inline void clear_has_source_x();
-  inline void set_has_source_y();
-  inline void clear_has_source_y();
-  inline void set_has_source_z();
-  inline void clear_has_source_z();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int64 mover_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Position > target_pos_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Position > source_pos_;
   ::google::protobuf::int32 movetype_;
-  float target_x_;
-  float target_y_;
-  float target_z_;
-  float source_x_;
-  float source_y_;
-  float source_z_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -1922,136 +1888,54 @@ inline void ReqAckPlayerMove::set_movetype(::google::protobuf::int32 value) {
   movetype_ = value;
 }
 
-// required float target_x = 3;
-inline bool ReqAckPlayerMove::has_target_x() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+// repeated .NFMsg.Position target_pos = 3;
+inline int ReqAckPlayerMove::target_pos_size() const {
+  return target_pos_.size();
 }
-inline void ReqAckPlayerMove::set_has_target_x() {
-  _has_bits_[0] |= 0x00000004u;
+inline void ReqAckPlayerMove::clear_target_pos() {
+  target_pos_.Clear();
 }
-inline void ReqAckPlayerMove::clear_has_target_x() {
-  _has_bits_[0] &= ~0x00000004u;
+inline const ::NFMsg::Position& ReqAckPlayerMove::target_pos(int index) const {
+  return target_pos_.Get(index);
 }
-inline void ReqAckPlayerMove::clear_target_x() {
-  target_x_ = 0;
-  clear_has_target_x();
+inline ::NFMsg::Position* ReqAckPlayerMove::mutable_target_pos(int index) {
+  return target_pos_.Mutable(index);
 }
-inline float ReqAckPlayerMove::target_x() const {
-  return target_x_;
+inline ::NFMsg::Position* ReqAckPlayerMove::add_target_pos() {
+  return target_pos_.Add();
 }
-inline void ReqAckPlayerMove::set_target_x(float value) {
-  set_has_target_x();
-  target_x_ = value;
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >&
+ReqAckPlayerMove::target_pos() const {
+  return target_pos_;
 }
-
-// optional float target_y = 4;
-inline bool ReqAckPlayerMove::has_target_y() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void ReqAckPlayerMove::set_has_target_y() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void ReqAckPlayerMove::clear_has_target_y() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void ReqAckPlayerMove::clear_target_y() {
-  target_y_ = 0;
-  clear_has_target_y();
-}
-inline float ReqAckPlayerMove::target_y() const {
-  return target_y_;
-}
-inline void ReqAckPlayerMove::set_target_y(float value) {
-  set_has_target_y();
-  target_y_ = value;
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >*
+ReqAckPlayerMove::mutable_target_pos() {
+  return &target_pos_;
 }
 
-// required float target_z = 5;
-inline bool ReqAckPlayerMove::has_target_z() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+// repeated .NFMsg.Position source_pos = 4;
+inline int ReqAckPlayerMove::source_pos_size() const {
+  return source_pos_.size();
 }
-inline void ReqAckPlayerMove::set_has_target_z() {
-  _has_bits_[0] |= 0x00000010u;
+inline void ReqAckPlayerMove::clear_source_pos() {
+  source_pos_.Clear();
 }
-inline void ReqAckPlayerMove::clear_has_target_z() {
-  _has_bits_[0] &= ~0x00000010u;
+inline const ::NFMsg::Position& ReqAckPlayerMove::source_pos(int index) const {
+  return source_pos_.Get(index);
 }
-inline void ReqAckPlayerMove::clear_target_z() {
-  target_z_ = 0;
-  clear_has_target_z();
+inline ::NFMsg::Position* ReqAckPlayerMove::mutable_source_pos(int index) {
+  return source_pos_.Mutable(index);
 }
-inline float ReqAckPlayerMove::target_z() const {
-  return target_z_;
+inline ::NFMsg::Position* ReqAckPlayerMove::add_source_pos() {
+  return source_pos_.Add();
 }
-inline void ReqAckPlayerMove::set_target_z(float value) {
-  set_has_target_z();
-  target_z_ = value;
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >&
+ReqAckPlayerMove::source_pos() const {
+  return source_pos_;
 }
-
-// optional float source_x = 6;
-inline bool ReqAckPlayerMove::has_source_x() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void ReqAckPlayerMove::set_has_source_x() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void ReqAckPlayerMove::clear_has_source_x() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void ReqAckPlayerMove::clear_source_x() {
-  source_x_ = 0;
-  clear_has_source_x();
-}
-inline float ReqAckPlayerMove::source_x() const {
-  return source_x_;
-}
-inline void ReqAckPlayerMove::set_source_x(float value) {
-  set_has_source_x();
-  source_x_ = value;
-}
-
-// optional float source_y = 7;
-inline bool ReqAckPlayerMove::has_source_y() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
-}
-inline void ReqAckPlayerMove::set_has_source_y() {
-  _has_bits_[0] |= 0x00000040u;
-}
-inline void ReqAckPlayerMove::clear_has_source_y() {
-  _has_bits_[0] &= ~0x00000040u;
-}
-inline void ReqAckPlayerMove::clear_source_y() {
-  source_y_ = 0;
-  clear_has_source_y();
-}
-inline float ReqAckPlayerMove::source_y() const {
-  return source_y_;
-}
-inline void ReqAckPlayerMove::set_source_y(float value) {
-  set_has_source_y();
-  source_y_ = value;
-}
-
-// optional float source_z = 8;
-inline bool ReqAckPlayerMove::has_source_z() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
-}
-inline void ReqAckPlayerMove::set_has_source_z() {
-  _has_bits_[0] |= 0x00000080u;
-}
-inline void ReqAckPlayerMove::clear_has_source_z() {
-  _has_bits_[0] &= ~0x00000080u;
-}
-inline void ReqAckPlayerMove::clear_source_z() {
-  source_z_ = 0;
-  clear_has_source_z();
-}
-inline float ReqAckPlayerMove::source_z() const {
-  return source_z_;
-}
-inline void ReqAckPlayerMove::set_source_z(float value) {
-  set_has_source_z();
-  source_z_ = value;
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >*
+ReqAckPlayerMove::mutable_source_pos() {
+  return &source_pos_;
 }
 
 // -------------------------------------------------------------------
