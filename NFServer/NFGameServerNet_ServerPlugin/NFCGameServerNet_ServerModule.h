@@ -98,6 +98,7 @@ protected:
     void OnClienUseItem(const NFIPacket& msg);
     void OnClienPickItem(const NFIPacket& msg);
     void OnClienMove(const NFIPacket& msg);
+    void OnClienMoveImmune(const NFIPacket& msg);
     void OnClienAcceptTask(const NFIPacket& msg);
     void OnClienPushTask(const NFIPacket& msg);
     void OnClienPushCustom(const NFIPacket& msg);

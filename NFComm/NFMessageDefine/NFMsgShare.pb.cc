@@ -120,15 +120,11 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqLeaveGameServer));
   ReqAckPlayerMove_descriptor_ = file->message_type(3);
-  static const int ReqAckPlayerMove_offsets_[8] = {
+  static const int ReqAckPlayerMove_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, mover_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, movetype_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, target_x_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, target_y_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, target_z_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, source_x_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, source_y_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, source_z_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, target_pos_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, source_pos_),
   };
   ReqAckPlayerMove_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -408,40 +404,39 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "o\032\017NFMsgBase.proto\032\021NFMsgBaseEx.proto\"D\n"
     "\022ReqEnterGameServer\022\017\n\007account\030\001 \002(\014\022\017\n\007"
     "game_id\030\002 \002(\005\022\014\n\004name\030\003 \002(\014\"\016\n\014ReqHeartB"
-    "eat\"\024\n\022ReqLeaveGameServer\"\237\001\n\020ReqAckPlay"
-    "erMove\022\r\n\005mover\030\001 \001(\003\022\020\n\010moveType\030\002 \002(\005\022"
-    "\020\n\010target_x\030\003 \002(\002\022\020\n\010target_y\030\004 \001(\002\022\020\n\010t"
-    "arget_z\030\005 \002(\002\022\020\n\010source_x\030\006 \001(\002\022\020\n\010sourc"
-    "e_y\030\007 \001(\002\022\020\n\010source_z\030\010 \001(\002\"\303\001\n\020ReqAckPl"
-    "ayerChat\022\017\n\007chat_id\030\001 \002(\003\0228\n\tchat_type\030\002"
-    " \002(\0162%.NFMsg.ReqAckPlayerChat.EGameChatT"
-    "ype\022\021\n\tchat_info\030\003 \002(\014\"Q\n\rEGameChatType\022"
-    "\017\n\013EGCT_NARMAL\020\000\022\020\n\014EGCT_PRIVATE\020\001\022\r\n\tEG"
-    "CT_TEAM\020\002\022\016\n\nEGCT_WORLD\020\003\"\264\001\n\016ReqAckUseS"
-    "kill\022\014\n\004user\030\001 \002(\003\022\020\n\010skill_id\030\002 \002(\014\022 \n\007"
-    "now_pos\030\003 \002(\0132\017.NFMsg.Position\022 \n\007tar_po"
-    "s\030\004 \002(\0132\017.NFMsg.Position\022\024\n\014effect_ident"
-    "\030\005 \003(\003\022\024\n\014effect_value\030\006 \003(\005\022\022\n\neffect_r"
-    "lt\030\007 \003(\005\"\203\001\n\rReqAckUseItem\022\014\n\004user\030\001 \002(\003"
-    "\022\021\n\titem_guid\030\002 \002(\003\022\024\n\014effect_ident\030\003 \003("
-    "\003\022\024\n\014effect_value\030\004 \003(\005\022\022\n\neffect_rlt\030\005 "
-    "\003(\005\022\021\n\tkey_value\030\006 \001(\014\"\345\001\n\017ReqAckSwapSce"
-    "ne\022;\n\rtransfer_type\030\001 \002(\0162$.NFMsg.ReqAck"
-    "SwapScene.EGameSwapType\022\020\n\010scene_id\030\002 \002("
-    "\005\022\017\n\007line_id\030\003 \002(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002"
-    "\022\t\n\001z\030\006 \001(\002\"Q\n\rEGameSwapType\022\017\n\013EGST_NAR"
-    "MAL\020\000\022\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n"
-    "\013EGST_MIRROR\020\003\"$\n\017ReqPickDropItem\022\021\n\tite"
-    "m_guid\030\002 \002(\003\" \n\rReqAcceptTask\022\017\n\007task_id"
-    "\030\001 \002(\014\"#\n\020ReqCompeleteTask\022\017\n\007task_id\030\001 "
-    "\002(\014\"\251\001\n\017PlayerEntryInfo\022\023\n\013object_guid\030\001"
-    " \002(\003\022\t\n\001x\030\002 \002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002(\002\022\023\n"
-    "\013career_type\030\005 \002(\005\022\024\n\014player_state\030\006 \002(\005"
-    "\022\021\n\tconfig_id\030\007 \002(\014\022\020\n\010scene_id\030\010 \002(\005\022\020\n"
-    "\010class_id\030\t \002(\014\"A\n\022AckPlayerEntryList\022+\n"
-    "\013object_list\030\001 \003(\0132\026.NFMsg.PlayerEntryIn"
-    "fo\")\n\022AckPlayerLeaveList\022\023\n\013object_list\030"
-    "\001 \003(\003", 1485);
+    "eat\"\024\n\022ReqLeaveGameServer\"}\n\020ReqAckPlaye"
+    "rMove\022\r\n\005mover\030\001 \001(\003\022\020\n\010moveType\030\002 \002(\005\022#"
+    "\n\ntarget_pos\030\003 \003(\0132\017.NFMsg.Position\022#\n\ns"
+    "ource_pos\030\004 \003(\0132\017.NFMsg.Position\"\303\001\n\020Req"
+    "AckPlayerChat\022\017\n\007chat_id\030\001 \002(\003\0228\n\tchat_t"
+    "ype\030\002 \002(\0162%.NFMsg.ReqAckPlayerChat.EGame"
+    "ChatType\022\021\n\tchat_info\030\003 \002(\014\"Q\n\rEGameChat"
+    "Type\022\017\n\013EGCT_NARMAL\020\000\022\020\n\014EGCT_PRIVATE\020\001\022"
+    "\r\n\tEGCT_TEAM\020\002\022\016\n\nEGCT_WORLD\020\003\"\264\001\n\016ReqAc"
+    "kUseSkill\022\014\n\004user\030\001 \002(\003\022\020\n\010skill_id\030\002 \002("
+    "\014\022 \n\007now_pos\030\003 \002(\0132\017.NFMsg.Position\022 \n\007t"
+    "ar_pos\030\004 \002(\0132\017.NFMsg.Position\022\024\n\014effect_"
+    "ident\030\005 \003(\003\022\024\n\014effect_value\030\006 \003(\005\022\022\n\neff"
+    "ect_rlt\030\007 \003(\005\"\203\001\n\rReqAckUseItem\022\014\n\004user\030"
+    "\001 \002(\003\022\021\n\titem_guid\030\002 \002(\003\022\024\n\014effect_ident"
+    "\030\003 \003(\003\022\024\n\014effect_value\030\004 \003(\005\022\022\n\neffect_r"
+    "lt\030\005 \003(\005\022\021\n\tkey_value\030\006 \001(\014\"\345\001\n\017ReqAckSw"
+    "apScene\022;\n\rtransfer_type\030\001 \002(\0162$.NFMsg.R"
+    "eqAckSwapScene.EGameSwapType\022\020\n\010scene_id"
+    "\030\002 \002(\005\022\017\n\007line_id\030\003 \002(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030"
+    "\005 \001(\002\022\t\n\001z\030\006 \001(\002\"Q\n\rEGameSwapType\022\017\n\013EGS"
+    "T_NARMAL\020\000\022\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA"
+    "\020\002\022\017\n\013EGST_MIRROR\020\003\"$\n\017ReqPickDropItem\022\021"
+    "\n\titem_guid\030\002 \002(\003\" \n\rReqAcceptTask\022\017\n\007ta"
+    "sk_id\030\001 \002(\014\"#\n\020ReqCompeleteTask\022\017\n\007task_"
+    "id\030\001 \002(\014\"\251\001\n\017PlayerEntryInfo\022\023\n\013object_g"
+    "uid\030\001 \002(\003\022\t\n\001x\030\002 \002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002"
+    "(\002\022\023\n\013career_type\030\005 \002(\005\022\024\n\014player_state\030"
+    "\006 \002(\005\022\021\n\tconfig_id\030\007 \002(\014\022\020\n\010scene_id\030\010 \002"
+    "(\005\022\020\n\010class_id\030\t \002(\014\"A\n\022AckPlayerEntryLi"
+    "st\022+\n\013object_list\030\001 \003(\0132\026.NFMsg.PlayerEn"
+    "tryInfo\")\n\022AckPlayerLeaveList\022\023\n\013object_"
+    "list\030\001 \003(\003", 1450);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -1104,12 +1099,8 @@ void ReqLeaveGameServer::Swap(ReqLeaveGameServer* other) {
 #ifndef _MSC_VER
 const int ReqAckPlayerMove::kMoverFieldNumber;
 const int ReqAckPlayerMove::kMoveTypeFieldNumber;
-const int ReqAckPlayerMove::kTargetXFieldNumber;
-const int ReqAckPlayerMove::kTargetYFieldNumber;
-const int ReqAckPlayerMove::kTargetZFieldNumber;
-const int ReqAckPlayerMove::kSourceXFieldNumber;
-const int ReqAckPlayerMove::kSourceYFieldNumber;
-const int ReqAckPlayerMove::kSourceZFieldNumber;
+const int ReqAckPlayerMove::kTargetPosFieldNumber;
+const int ReqAckPlayerMove::kSourcePosFieldNumber;
 #endif  // !_MSC_VER
 
 ReqAckPlayerMove::ReqAckPlayerMove()
@@ -1130,12 +1121,6 @@ void ReqAckPlayerMove::SharedCtor() {
   _cached_size_ = 0;
   mover_ = GOOGLE_LONGLONG(0);
   movetype_ = 0;
-  target_x_ = 0;
-  target_y_ = 0;
-  target_z_ = 0;
-  source_x_ = 0;
-  source_y_ = 0;
-  source_z_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1173,13 +1158,9 @@ void ReqAckPlayerMove::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     mover_ = GOOGLE_LONGLONG(0);
     movetype_ = 0;
-    target_x_ = 0;
-    target_y_ = 0;
-    target_z_ = 0;
-    source_x_ = 0;
-    source_y_ = 0;
-    source_z_ = 0;
   }
+  target_pos_.Clear();
+  source_pos_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -1217,102 +1198,36 @@ bool ReqAckPlayerMove::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(29)) goto parse_target_x;
+        if (input->ExpectTag(26)) goto parse_target_pos;
         break;
       }
 
-      // required float target_x = 3;
+      // repeated .NFMsg.Position target_pos = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
-         parse_target_x:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &target_x_)));
-          set_has_target_x();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_target_pos:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_target_pos()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(37)) goto parse_target_y;
+        if (input->ExpectTag(26)) goto parse_target_pos;
+        if (input->ExpectTag(34)) goto parse_source_pos;
         break;
       }
 
-      // optional float target_y = 4;
+      // repeated .NFMsg.Position source_pos = 4;
       case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
-         parse_target_y:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &target_y_)));
-          set_has_target_y();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_source_pos:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_source_pos()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(45)) goto parse_target_z;
-        break;
-      }
-
-      // required float target_z = 5;
-      case 5: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
-         parse_target_z:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &target_z_)));
-          set_has_target_z();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(53)) goto parse_source_x;
-        break;
-      }
-
-      // optional float source_x = 6;
-      case 6: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
-         parse_source_x:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &source_x_)));
-          set_has_source_x();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(61)) goto parse_source_y;
-        break;
-      }
-
-      // optional float source_y = 7;
-      case 7: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
-         parse_source_y:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &source_y_)));
-          set_has_source_y();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(69)) goto parse_source_z;
-        break;
-      }
-
-      // optional float source_z = 8;
-      case 8: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
-         parse_source_z:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &source_z_)));
-          set_has_source_z();
-        } else {
-          goto handle_uninterpreted;
-        }
+        if (input->ExpectTag(34)) goto parse_source_pos;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -1345,34 +1260,16 @@ void ReqAckPlayerMove::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->movetype(), output);
   }
 
-  // required float target_x = 3;
-  if (has_target_x()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->target_x(), output);
+  // repeated .NFMsg.Position target_pos = 3;
+  for (int i = 0; i < this->target_pos_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->target_pos(i), output);
   }
 
-  // optional float target_y = 4;
-  if (has_target_y()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->target_y(), output);
-  }
-
-  // required float target_z = 5;
-  if (has_target_z()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->target_z(), output);
-  }
-
-  // optional float source_x = 6;
-  if (has_source_x()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(6, this->source_x(), output);
-  }
-
-  // optional float source_y = 7;
-  if (has_source_y()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(7, this->source_y(), output);
-  }
-
-  // optional float source_z = 8;
-  if (has_source_z()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(8, this->source_z(), output);
+  // repeated .NFMsg.Position source_pos = 4;
+  for (int i = 0; i < this->source_pos_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, this->source_pos(i), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -1393,34 +1290,18 @@ void ReqAckPlayerMove::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->movetype(), target);
   }
 
-  // required float target_x = 3;
-  if (has_target_x()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->target_x(), target);
+  // repeated .NFMsg.Position target_pos = 3;
+  for (int i = 0; i < this->target_pos_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->target_pos(i), target);
   }
 
-  // optional float target_y = 4;
-  if (has_target_y()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->target_y(), target);
-  }
-
-  // required float target_z = 5;
-  if (has_target_z()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->target_z(), target);
-  }
-
-  // optional float source_x = 6;
-  if (has_source_x()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(6, this->source_x(), target);
-  }
-
-  // optional float source_y = 7;
-  if (has_source_y()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(7, this->source_y(), target);
-  }
-
-  // optional float source_z = 8;
-  if (has_source_z()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(8, this->source_z(), target);
+  // repeated .NFMsg.Position source_pos = 4;
+  for (int i = 0; i < this->source_pos_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        4, this->source_pos(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -1448,37 +1329,23 @@ int ReqAckPlayerMove::ByteSize() const {
           this->movetype());
     }
 
-    // required float target_x = 3;
-    if (has_target_x()) {
-      total_size += 1 + 4;
-    }
-
-    // optional float target_y = 4;
-    if (has_target_y()) {
-      total_size += 1 + 4;
-    }
-
-    // required float target_z = 5;
-    if (has_target_z()) {
-      total_size += 1 + 4;
-    }
-
-    // optional float source_x = 6;
-    if (has_source_x()) {
-      total_size += 1 + 4;
-    }
-
-    // optional float source_y = 7;
-    if (has_source_y()) {
-      total_size += 1 + 4;
-    }
-
-    // optional float source_z = 8;
-    if (has_source_z()) {
-      total_size += 1 + 4;
-    }
-
   }
+  // repeated .NFMsg.Position target_pos = 3;
+  total_size += 1 * this->target_pos_size();
+  for (int i = 0; i < this->target_pos_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->target_pos(i));
+  }
+
+  // repeated .NFMsg.Position source_pos = 4;
+  total_size += 1 * this->source_pos_size();
+  for (int i = 0; i < this->source_pos_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->source_pos(i));
+  }
+
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -1504,30 +1371,14 @@ void ReqAckPlayerMove::MergeFrom(const ::google::protobuf::Message& from) {
 
 void ReqAckPlayerMove::MergeFrom(const ReqAckPlayerMove& from) {
   GOOGLE_CHECK_NE(&from, this);
+  target_pos_.MergeFrom(from.target_pos_);
+  source_pos_.MergeFrom(from.source_pos_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_mover()) {
       set_mover(from.mover());
     }
     if (from.has_movetype()) {
       set_movetype(from.movetype());
-    }
-    if (from.has_target_x()) {
-      set_target_x(from.target_x());
-    }
-    if (from.has_target_y()) {
-      set_target_y(from.target_y());
-    }
-    if (from.has_target_z()) {
-      set_target_z(from.target_z());
-    }
-    if (from.has_source_x()) {
-      set_source_x(from.source_x());
-    }
-    if (from.has_source_y()) {
-      set_source_y(from.source_y());
-    }
-    if (from.has_source_z()) {
-      set_source_z(from.source_z());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -1546,8 +1397,14 @@ void ReqAckPlayerMove::CopyFrom(const ReqAckPlayerMove& from) {
 }
 
 bool ReqAckPlayerMove::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000016) != 0x00000016) return false;
+  if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
 
+  for (int i = 0; i < target_pos_size(); i++) {
+    if (!this->target_pos(i).IsInitialized()) return false;
+  }
+  for (int i = 0; i < source_pos_size(); i++) {
+    if (!this->source_pos(i).IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -1555,12 +1412,8 @@ void ReqAckPlayerMove::Swap(ReqAckPlayerMove* other) {
   if (other != this) {
     std::swap(mover_, other->mover_);
     std::swap(movetype_, other->movetype_);
-    std::swap(target_x_, other->target_x_);
-    std::swap(target_y_, other->target_y_);
-    std::swap(target_z_, other->target_z_);
-    std::swap(source_x_, other->source_x_);
-    std::swap(source_y_, other->source_y_);
-    std::swap(source_z_, other->source_z_);
+    target_pos_.Swap(&other->target_pos_);
+    source_pos_.Swap(&other->source_pos_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
