@@ -8,7 +8,7 @@
             <Col Tag="InlayStone" Type="string"/>
             <Col Tag="SagecraftLevel" Type="string"/>
         </Record>
-        <Record Col="24" Desc="所有和战斗，药水有关的，都在这里NPC怪物只有基础和BUFF影响，因此针对玩家和怪物，分2个表.0职业等级叠加属性,1装备属性,2永久BUFF属性,3动态BUFF属性" Id="CommPropertyValue" Index="0" Private="1" Public="0" RelationValue="Friend" Row="15" Save="0" SaveInterval="0" View="1">
+        <Record Col="24" Desc="所有和战斗，药水有关的，都在这里NPC怪物只有基础和BUFF影响，因此针对玩家和怪物，分2个表.0职业等级叠加属性,1装备属性,2永久BUFF属性,3动态BUFF属性" Id="CommPropertyValue" Index="0" Private="1" Public="1" RelationValue="Friend" Row="15" Save="0" SaveInterval="0" View="1">
             <Col Tag="MAXHP" Type="int"/>
             <Col Tag="MAXMP" Type="int"/>
             <Col Tag="MAXSP" Type="int"/>
@@ -34,7 +34,7 @@
             <Col Tag="MAGIC_GATE" Type="int"/>
             <Col Tag="BUFF_GATE" Type="int"/>
         </Record>
-        <Record Col="18" Desc="普通背包" Id="BagItemList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="211" Save="1" SaveInterval="0" View="1">
+        <Record Col="18" Desc="普通背包" Id="BagItemList" Index="0" Private="1" Public="1" RelationValue="Friend" Row="211" Save="1" SaveInterval="0" View="1">
             <Col Tag="GUID" Type="object"/>
             <Col Tag="ConfigID" Type="string"/>
             <Col Tag="ItemCount" Type="int"/>
@@ -54,19 +54,19 @@
             <Col Tag="Date" Type="object"/>
             <Col Tag="BaseProperty" Type="string"/>
         </Record>
-        <Record Col="4" Desc="" Id="SkillTable" Index="0" Private="1" Public="0" RelationValue="Friend" Row="32" Save="1" SaveInterval="0" View="1">
+        <Record Col="4" Desc="" Id="SkillTable" Index="0" Private="1" Public="1" RelationValue="Friend" Row="32" Save="1" SaveInterval="0" View="1">
             <Col Tag="SkillID" Type="string"/>
             <Col Tag="SkillLevel" Type="int"/>
             <Col Tag="SkillStone" Type="string"/>
             <Col Tag="SkillSoulLevel" Type="int"/>
         </Record>
-        <Record Col="4" Desc="任务杀怪表" Id="TaskMonsterList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="8" Save="1" SaveInterval="0" View="1">
+        <Record Col="4" Desc="任务杀怪表" Id="TaskMonsterList" Index="0" Private="1" Public="1" RelationValue="Friend" Row="8" Save="1" SaveInterval="0" View="1">
             <Col Tag="MonsterID" Type="string"/>
             <Col Tag="CurrentKillCount" Type="int"/>
             <Col Tag="RequireKillCount" Type="int"/>
             <Col Tag="TaskID" Type="string"/>
         </Record>
-        <Record Col="2" Desc="任务表" Id="TaskList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="512" Save="1" SaveInterval="0" View="1">
+        <Record Col="2" Desc="任务表" Id="TaskList" Index="0" Private="1" Public="1" RelationValue="Friend" Row="512" Save="1" SaveInterval="0" View="1">
             <Col Tag="TaskID" Type="string"/>
             <Col Tag="TaskStatus" Type="int"/>
         </Record>
@@ -76,75 +76,75 @@
         <Property Desc="性别" Id="Sex" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="种族" Id="Race" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="阵营" Id="Camp" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="玩家下线的时候需要保存上次在线的场景" Id="LastContainerID" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="玩家下线的时候需要保存上次在线的场景" Id="LastContainerID" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="等级,属性名不能超过20字符,重要的是，分层的属性，不能保存，因为表会自动保存" Id="Level" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="显示的名字" Id="ShowName" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="预设路径" Id="PrefabPath" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="首要目标" Id="FirstTarget" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="object" View="1"/>
-        <Property Desc="0呆着1跑2走3闪烁4技能飞移5死6平常技能中" Id="State" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="角色类型" Id="CharType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="显示的名字" Id="ShowName" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="预设路径" Id="PrefabPath" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="首要目标" Id="FirstTarget" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="object" View="1"/>
+        <Property Desc="0呆着1跑2走3闪烁4技能飞移5死6平常技能中" Id="State" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="角色类型" Id="CharType" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="职业" Id="Job" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="经验获得,如果是怪物，则是掉落经验" Id="EXP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="生命值" Id="HP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="体力" Id="SP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="法力值" Id="MP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="钱" Id="Money" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="玩家的帐号" Id="Account" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="玩家连接服务器的KEY" Id="ConnectKey" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="玩家金钱" Id="Gold" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="升级需要的经验" Id="MAXEXP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="死亡次数--需要保存的都是因为不分层的属性，分层属性不需要保存，保存各层的值即可" Id="DEAD_COUNT" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="转生次数" Id="RELIVE_SOUL" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="工会ID名字" Id="GUILD_NAME" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="配偶名字" Id="SPOUSE_NAME" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="佩戴的队旗卡ID" Id="TEAM_CARD" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="佩戴的PVP攻击卡" Id="PVP_ATK_CARD" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="佩戴的PVP防御卡" Id="PVP_DEF_CARD" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="佩戴的幸运卡ID" Id="LUCKLY_CARD" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="PVP攻击力" Id="ATK_PVP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="PVP防御力" Id="DEF_PVP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="信用值" Id="CreditValue" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="武魂值" Id="SoulValue" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="上线次数" Id="OnlineCount" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="在线时间" Id="TotalTime" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="创建帐号服务器" Id="Citizenship" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="上次下线时间" Id="LastOfflineTime" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="object" View="1"/>
-        <Property Desc="本次上线时间" Id="OnlineTime" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="object" View="1"/>
-        <Property Desc="今日在线时长{截至至本次上线时间}" Id="TotalLineTime" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="object" View="1"/>
-        <Property Desc="GM等级" Id="GMLevel" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="LastAttacker" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="object" View="1"/>
-        <Property Desc="生命值" Id="MAXHP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="法力值" Id="MAXMP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="体力" Id="MAXSP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="生命值回复" Id="HPREGEN" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="体力回复" Id="SPREGEN" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="MP回复" Id="MPREGEN" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="物理攻击力" Id="ATK_VALUE" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="物理防御力" Id="DEF_VALUE" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="移动速度,默认单位是10000=1米" Id="MOVE_SPEED" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="攻击速度默认10000" Id="ATK_SPEED" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="火" Id="ATK_FIRE" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="雷电" Id="ATK_LIGHT" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="冰" Id="ATK_ICE" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="毒" Id="ATK_POISON" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="火抗" Id="DEF_FIRE" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="雷电抗" Id="DEF_LIGHT" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="冰抗" Id="DEF_ICE" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="毒抗" Id="DEF_POISON" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="眩晕开关" Id="DIZZY_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="移动开关" Id="MOVE_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="技能开关" Id="SKILL_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="物理免疫开关" Id="PHYSICAL_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="魔法免疫开关" Id="MAGIC_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="BUFF免疫开关" Id="BUFF_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="X" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View=""/>
-        <Property Desc="" Id="Y" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View=""/>
-        <Property Desc="" Id="Z" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View=""/>
-        <Property Desc="" Id="TargetX" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float" View=""/>
-        <Property Desc="" Id="TargetY" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float" View=""/>
-        <Property Desc="" Id="TargetZ" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float" View=""/>
-        <Property Desc="" Id="PathStep" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View=""/>
-        <Property Desc="" Id="LoadPropertyFinish" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View=""/>
+        <Property Desc="经验获得,如果是怪物，则是掉落经验" Id="EXP" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="生命值" Id="HP" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="体力" Id="SP" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="法力值" Id="MP" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="钱" Id="Money" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="玩家的帐号" Id="Account" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="玩家连接服务器的KEY" Id="ConnectKey" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="玩家金钱" Id="Gold" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="升级需要的经验" Id="MAXEXP" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="死亡次数--需要保存的都是因为不分层的属性，分层属性不需要保存，保存各层的值即可" Id="DEAD_COUNT" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="转生次数" Id="RELIVE_SOUL" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="工会ID名字" Id="GUILD_NAME" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="配偶名字" Id="SPOUSE_NAME" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="佩戴的队旗卡ID" Id="TEAM_CARD" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="佩戴的PVP攻击卡" Id="PVP_ATK_CARD" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="佩戴的PVP防御卡" Id="PVP_DEF_CARD" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="佩戴的幸运卡ID" Id="LUCKLY_CARD" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="PVP攻击力" Id="ATK_PVP" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="PVP防御力" Id="DEF_PVP" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="信用值" Id="CreditValue" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="武魂值" Id="SoulValue" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="上线次数" Id="OnlineCount" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="在线时间" Id="TotalTime" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="创建帐号服务器" Id="Citizenship" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="上次下线时间" Id="LastOfflineTime" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="object" View="1"/>
+        <Property Desc="本次上线时间" Id="OnlineTime" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="object" View="1"/>
+        <Property Desc="今日在线时长{截至至本次上线时间}" Id="TotalLineTime" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="object" View="1"/>
+        <Property Desc="GM等级" Id="GMLevel" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="" Id="LastAttacker" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="object" View="1"/>
+        <Property Desc="生命值" Id="MAXHP" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="法力值" Id="MAXMP" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="体力" Id="MAXSP" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="生命值回复" Id="HPREGEN" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="体力回复" Id="SPREGEN" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="MP回复" Id="MPREGEN" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="物理攻击力" Id="ATK_VALUE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="物理防御力" Id="DEF_VALUE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="移动速度,默认单位是10000=1米" Id="MOVE_SPEED" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="攻击速度默认10000" Id="ATK_SPEED" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="火" Id="ATK_FIRE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="雷电" Id="ATK_LIGHT" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="冰" Id="ATK_ICE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="毒" Id="ATK_POISON" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="火抗" Id="DEF_FIRE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="雷电抗" Id="DEF_LIGHT" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="冰抗" Id="DEF_ICE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="毒抗" Id="DEF_POISON" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="眩晕开关" Id="DIZZY_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="移动开关" Id="MOVE_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="技能开关" Id="SKILL_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="物理免疫开关" Id="PHYSICAL_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="魔法免疫开关" Id="MAGIC_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="BUFF免疫开关" Id="BUFF_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="" Id="X" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View=""/>
+        <Property Desc="" Id="Y" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View=""/>
+        <Property Desc="" Id="Z" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View=""/>
+        <Property Desc="" Id="TargetX" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View=""/>
+        <Property Desc="" Id="TargetY" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View=""/>
+        <Property Desc="" Id="TargetZ" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View=""/>
+        <Property Desc="" Id="PathStep" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View=""/>
+        <Property Desc="" Id="LoadPropertyFinish" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View=""/>
     </Propertys>
     <Components>
         <Component Desc="测试组件" Enable="1" Language="lua" Name="Test"/>
