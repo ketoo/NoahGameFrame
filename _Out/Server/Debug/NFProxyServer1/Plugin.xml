@@ -1,11 +1,11 @@
 <XML>
-	<Plugin Name="NFEventProcessPlugin" Main="0"/>
-	<Plugin Name="NFKernelPlugin" Main="0"/>
-	<Plugin Name="NFConfigPlugin" Main="0"/>
-	<Plugin Name="NFProxyPlugin" Main="0"/>
+	<Plugin Name="NFEventProcessPlugin" Main="1"/>
+	<Plugin Name="NFKernelPlugin" Main="1"/>
+	<Plugin Name="NFConfigPlugin" Main="1"/>
+	<Plugin Name="NFProxyPlugin" Main="1"/>
 	<Plugin Name="NFProxyServerNet_ClientPlugin" Main="1"/>
 	<Plugin Name="NFProxyServerNet_ServerPlugin" Main="1"/>
-	<Plugin Name="NFLogPlugin" Main="0"/>
+	<Plugin Name="NFLogPlugin" Main="1"/>
 	
 	<ActorDataModule Name="NFCDataProcessModule" />
 </XML>
