@@ -26,9 +26,9 @@ bool NFCFightState::Execute(const NFIDENTID& self)
     NFIDENTID ident = m_pHateModule->QueryMaxHateObject(self);
     if (!ident.IsNull())
     {
-        if (m_pKernelModule->QueryPropertyInt(self, "HP") > 0)
+        if (m_pKernelModule->GetPropertyInt(self, "HP") > 0)
         {
-            if (m_pKernelModule->QueryPropertyInt(ident, "HP") > 0)
+            if (m_pKernelModule->GetPropertyInt(ident, "HP") > 0)
             {
                 NFSkillTestSkillResult eResult = (NFSkillTestSkillResult)m_pAIModule->CanUseAnySkill(self, ident);
                 if (NFSkillTestSkillResult::NFSTSR_OK == eResult)
@@ -36,7 +36,7 @@ bool NFCFightState::Execute(const NFIDENTID& self)
                     float fSkillConsumeTime = m_pAIModule->UseAnySkill(self, ident);
                     m_pKernelModule->SetPropertyInt(self, "StateType", (int)NFObjectStateType::NOST_SKILLUSE);
                     //添加心跳，还原状态StateType
-                    m_pKernelModule->AddHeartBeat(self, "OnSkillConsumeTime", OnSkillConsumeTime, NFCValueList(), fSkillConsumeTime, 1);
+                    m_pKernelModule->AddHeartBeat(self, "OnSkillConsumeTime", this, &NFCFightState::OnSkillConsumeTime, NFCDataList(), fSkillConsumeTime, 1);
                 }
                 else if (NFSkillTestSkillResult::NFSTSR_DISTANCE == eResult)
                 {
@@ -76,12 +76,6 @@ bool NFCFightState::DoRule(const NFIDENTID& self)
     return true;
 }
 
-int NFCFightState::OnSkillConsumeTime(const NFIDENTID& self, const NFIValueList& var)
-{
-    m_pKernelModule->SetPropertyInt(self, "StateType", (int)NFObjectStateType::NOST_IDEL);
-    return 0;
-}
-
 bool NFCFightState::RunInFightArea(const NFIDENTID& self)
 {
     //需要回调知道已经走到了,moving事件
@@ -92,4 +86,11 @@ bool NFCFightState::RunCloseTarget(const NFIDENTID& self)
 {
     //需要回调知道已经走到了,moving事件
     return true;
+}
+
+int NFCFightState::OnSkillConsumeTime( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& arg )
+{
+	m_pKernelModule->SetPropertyInt(self, "StateType", (int)NFObjectStateType::NOST_IDEL);
+	
+	return 0;
 }
