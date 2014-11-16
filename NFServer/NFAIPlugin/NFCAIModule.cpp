@@ -11,16 +11,9 @@
 #include "NFCHateModule.h"
 #include "NFAIPlugin.h"
 
-//
-
-NFIKernelModule* NFCAIModule::m_pKernelModule = NULL;
-NFIHateModule* NFCAIModule::m_pHateModule = NULL;
-NFIEventProcessModule* NFCAIModule::m_pEventProcessModule = NULL;
-NFCAIModule* NFCAIModule::m_pThis = NULL;
 
 bool NFCAIModule::Init()
 {
-    m_pThis = this;
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
 
@@ -192,11 +185,11 @@ void NFCAIModule::OnSpring(const NFIDENTID& self, const NFIDENTID& other)
 {
     //根据职业,等级,血量,防御
     //战斗状态只打仇恨列表内的人，巡逻,休闲状态才重新找对象打
-    NF_AI_SUB_TYPE subType = (NF_AI_SUB_TYPE)m_pKernelModule->QueryPropertyInt(self, "SubType");
+    NF_AI_SUB_TYPE subType = (NF_AI_SUB_TYPE)m_pKernelModule->GetPropertyInt(self, "SubType");
     if (NF_AI_SUB_TYPE::NFAST_INITATIVE == subType)
     {
         //玩家或者PET进入
-        const std::string& strClassName = m_pKernelModule->QueryPropertyString(other, "ClassName");
+        const std::string& strClassName = m_pKernelModule->GetPropertyString(other, "ClassName");
         if ("Player" == strClassName
             || "Pet" == strClassName)
         {
@@ -245,16 +238,16 @@ float NFCAIModule::UseAnySkill(const NFIDENTID& self, const NFIDENTID& other)
     return 0.5f;
 }
 
-int NFCAIModule::OnAIObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var)
+int NFCAIModule::OnAIObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
 {
     if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
     {
-        m_pThis->DelAIObject(self);
+        DelAIObject(self);
     }
     else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
     {
         //m_pEventProcessModule->AddEventCallBack(self, NFED_ON_SERVER_MOVEING, OnMoveRquireEvent);
-        m_pThis->CreateAIObject(self);
+        CreateAIObject(self);
     }
 
     return 0;
@@ -262,8 +255,9 @@ int NFCAIModule::OnAIObjectEvent(const NFIDENTID& self, const std::string& strCl
 
 bool NFCAIModule::AfterInit()
 {
-    m_pEventProcessModule->AddClassCallBack("AttackNPC", OnAIObjectEvent);
-    m_pEventProcessModule->AddClassCallBack("Pet", OnAIObjectEvent);
+	m_pEventProcessModule->AddClassCallBack("AttackNPC", this, &NFCAIModule::OnAIObjectEvent);
+	m_pEventProcessModule->AddClassCallBack("NPC", this, &NFCAIModule::OnAIObjectEvent);
+    m_pEventProcessModule->AddClassCallBack("Pet",this, &NFCAIModule::OnAIObjectEvent);
     return true;
 }
 

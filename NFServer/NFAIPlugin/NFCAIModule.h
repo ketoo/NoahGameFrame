@@ -57,8 +57,7 @@ protected:
     virtual bool DelAIObject(const NFIDENTID& self);
 
     //////////////////////////////////////////////////////////////////////////
-    static int OnAIObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var);
-
+    virtual int OnAIObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
     //////////////////////////////////////////////////////////////////////////
 
@@ -83,10 +82,9 @@ private:
     typedef std::map<NFIDENTID, NFIStateMachine*> TOBJECTSTATEMACHINE;
     TOBJECTSTATEMACHINE mtObjectStateMachine;
 
-    static NFIHateModule* m_pHateModule;
-    static NFIKernelModule* m_pKernelModule;
-    static NFIEventProcessModule* m_pEventProcessModule;
-    static NFCAIModule* m_pThis;
+    NFIHateModule* m_pHateModule;
+    NFIKernelModule* m_pKernelModule;
+    NFIEventProcessModule* m_pEventProcessModule;
 };
 
 #endif

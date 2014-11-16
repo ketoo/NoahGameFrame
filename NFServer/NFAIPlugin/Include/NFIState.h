@@ -9,7 +9,7 @@
 #ifndef _NFI_STATE_H_
 #define _NFI_STATE_H_
 
-#include "NFComm/NFCore/NFIValueList.h"
+#include "NFComm/NFCore/NFIDataList.h"
 
 class NFIMoveModule;
 class NFIAIModule;
