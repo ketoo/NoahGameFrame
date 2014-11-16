@@ -13,12 +13,11 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
-					<Add option="-DWIN32" />
+					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
-					<Add option="-D_USRDLL" />
-					<Add option="-DTHERON_CPP11" />
-					<Add directory="../Include/External" />
-					<Add directory="../Include" />
+					<Add option="-DTHERON_USE_STD_THREADS" />
+					<Add directory="D:/NoahGameFrame/trunk/Dependencies/Theron-6.00.01/Theron/../Include/" />
+					<Add directory="D:/NoahGameFrame/trunk/Dependencies/Theron-6.00.01/Theron/../Include/External/" />
 				</Compiler>
 			</Target>
 			<Target title="Release x64">
@@ -28,12 +27,11 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
-					<Add option="-DWIN32" />
+					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
-					<Add option="-D_USRDLL" />
-					<Add option="-DTHERON_CPP11" />
-					<Add directory="../Include/External" />
-					<Add directory="../Include" />
+					<Add option="-DTHERON_USE_STD_THREADS" />
+					<Add directory="D:/NoahGameFrame/trunk/Dependencies/Theron-6.00.01/Theron/../Include/" />
+					<Add directory="D:/NoahGameFrame/trunk/Dependencies/Theron-6.00.01/Theron/../Include/External/" />
 				</Compiler>
 			</Target>
 		</Build>

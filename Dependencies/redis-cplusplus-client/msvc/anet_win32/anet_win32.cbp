@@ -6,13 +6,6 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="Debug Win32">
-				<Option output="anet_win32" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="" />
-				<Option type="2" />
-				<Option compiler="gcc" />
-				<Option createDefFile="1" />
-			</Target>
 			<Target title="Debug x64">
 				<Option output="anet_win32" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
@@ -21,13 +14,6 @@
 				<Option createDefFile="1" />
 			</Target>
 			<Target title="Release x64">
-				<Option output="anet_win32" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="" />
-				<Option type="2" />
-				<Option compiler="gcc" />
-				<Option createDefFile="1" />
-			</Target>
-			<Target title="Release Win32">
 				<Option output="anet_win32" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option type="2" />
@@ -43,6 +29,7 @@
 			<code_completion />
 			<envvars />
 			<debugger />
+			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
