@@ -18,20 +18,20 @@
 					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
 					<Add option="-DTHERON_CPP11" />
-					<Add directory="$(NF_HOME)" />
-					<Add directory="$(BOOST_HOME)" />
-					<Add directory="$(NF_DEP)" />
-					<Add directory="$(NF_LIBEVENT)" />
-					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/include" />
-					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/WIN32-Code" />
-					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/compat" />
-					<Add directory="$(NF_DEP)/protobuf-2.5.0/src" />
-					<Add directory="$(THERON_HOME)" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/WIN32-Code/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
+					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
-					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
-					<Add directory="$(BOOST_LIB)" />
+					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/Dependencies/lib/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
 			</Target>
 			<Target title="Release x64">
@@ -45,63 +45,35 @@
 					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
 					<Add option="-DTHERON_CPP11" />
-					<Add directory="$(NF_HOME)" />
-					<Add directory="$(BOOST_HOME)" />
-					<Add directory="$(NF_DEP)" />
-					<Add directory="$(NF_LIBEVENT)" />
-					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/include" />
-					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/WIN32-Code" />
-					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/compat" />
-					<Add directory="$(NF_DEP)/protobuf-2.5.0/src" />
-					<Add directory="$(THERON_HOME)" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/WIN32-Code/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
+					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
-					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
-					<Add directory="$(BOOST_LIB)" />
+					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/Dependencies/lib/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
 			</Target>
 		</Build>
-		<Unit filename="NFCBriefSkillConsumeProcessModule.cpp" />
-		<Unit filename="NFCBriefSkillConsumeProcessModule.h" />
-		<Unit filename="NFCBuffModule.cpp" />
-		<Unit filename="NFCBuffModule.h" />
-		<Unit filename="NFCBulletSkillConsumeProcessModule.cpp" />
-		<Unit filename="NFCBulletSkillConsumeProcessModule.h" />
-		<Unit filename="NFCCardItemConsumeProcessModule.cpp" />
-		<Unit filename="NFCCardItemConsumeProcessModule.h" />
 		<Unit filename="NFCDataProcessModule.cpp" />
 		<Unit filename="NFCDataProcessModule.h" />
-		<Unit filename="NFCGameLogicModule.cpp" />
-		<Unit filename="NFCGameLogicModule.h" />
-		<Unit filename="NFCGameServerConfigModule.cpp" />
-		<Unit filename="NFCGameServerConfigModule.h" />
-		<Unit filename="NFCItemConsumeManagerModule.cpp" />
-		<Unit filename="NFCItemConsumeManagerModule.h" />
-		<Unit filename="NFCItemModule.cpp" />
-		<Unit filename="NFCItemModule.h" />
-		<Unit filename="NFCLevelConfigModule.cpp" />
-		<Unit filename="NFCLevelConfigModule.h" />
+		<Unit filename="NFCGameServerModule.cpp" />
+		<Unit filename="NFCGameServerModule.h" />
 		<Unit filename="NFCLevelModule.cpp" />
 		<Unit filename="NFCLevelModule.h" />
-		<Unit filename="NFCNPCRefreshModule.cpp" />
-		<Unit filename="NFCNPCRefreshModule.h" />
-		<Unit filename="NFCPackModule.cpp" />
-		<Unit filename="NFCPackModule.h" />
-		<Unit filename="NFCPotionItemConsumeProcessModule.cpp" />
-		<Unit filename="NFCPotionItemConsumeProcessModule.h" />
 		<Unit filename="NFCPropertyConfigModule.cpp" />
 		<Unit filename="NFCPropertyConfigModule.h" />
 		<Unit filename="NFCPropertyModule.cpp" />
 		<Unit filename="NFCPropertyModule.h" />
-		<Unit filename="NFCRebornItemConsumeProcessModule.cpp" />
-		<Unit filename="NFCRebornItemConsumeProcessModule.h" />
 		<Unit filename="NFCSceneProcessModule.cpp" />
 		<Unit filename="NFCSceneProcessModule.h" />
-		<Unit filename="NFCSkillConsumeManagerModule.cpp" />
-		<Unit filename="NFCSkillConsumeManagerModule.h" />
-		<Unit filename="NFCSkillModule.cpp" />
-		<Unit filename="NFCSkillModule.h" />
 		<Unit filename="NFGameServerPlugin.cpp" />
 		<Unit filename="NFGameServerPlugin.h" />
 		<Unit filename="dllmain.cpp" />
