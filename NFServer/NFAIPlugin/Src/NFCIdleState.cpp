@@ -76,7 +76,7 @@ bool NFCIdleState::Execute(const NFIDENTID& self)
             }
             else
             {
-                if (m_pKernelModule->QueryPropertyInt(self, "MoveSpeed") > 0)
+                if (m_pKernelModule->GetPropertyInt(self, "MoveSpeed") > 0)
                 {
                     RandomIdle(pStateMachine);
                 }

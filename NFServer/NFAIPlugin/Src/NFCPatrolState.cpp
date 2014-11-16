@@ -61,7 +61,7 @@ bool NFCPatrolState::RandomPatrol(const NFIDENTID& self)
     //首先，得看有没路径
 
     //没有的话，随机找个地址走吧(以出生点为中心开始找,种子地址)NPCConfigID
-    const std::string& strConfigID = m_pKernelModule->QueryPropertyString(self, "NPCConfigID");
+    const std::string& strConfigID = m_pKernelModule->GetPropertyString(self, "NPCConfigID");
     if (strConfigID.length() > 0)
     {
         NFIPropertyManager* propertyManager = m_pElementInfoModule->GetPropertyManager(strConfigID.c_str());
@@ -69,9 +69,9 @@ bool NFCPatrolState::RandomPatrol(const NFIDENTID& self)
         NFIProperty* propertyY =  propertyManager->GetElement("SeedY");
         NFIProperty* propertyZ =  propertyManager->GetElement("SeedZ");
 
-        float fCurX = propertyX->QueryFloat();
-        float fCurY = propertyY->QueryFloat();
-        float fCurZ = propertyZ->QueryFloat();
+        float fCurX = propertyX->GetFloat();
+        float fCurY = propertyY->GetFloat();
+        float fCurZ = propertyZ->GetFloat();
 
         float fPosOffestX = (float)(rand() / double(RAND_MAX) - 0.5f);
         float fPosOffestZ = (float)(rand() / double(RAND_MAX) - 0.5f);
@@ -91,7 +91,7 @@ bool NFCPatrolState::RandomPatrol(const NFIDENTID& self)
                 eStateType = NFObjectStateType::NOST_WALK;
             }
 
-            NFCValueList valueList;
+            NFCDataList valueList;
             valueList.AddFloat(fCurX);
             valueList.AddFloat(fCurY);
             valueList.AddFloat(fCurZ);

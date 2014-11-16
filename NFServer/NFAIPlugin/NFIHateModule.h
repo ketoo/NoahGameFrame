@@ -9,7 +9,7 @@
 #ifndef _NFI_HATE_MODULE_H_
 #define _NFI_HATE_MODULE_H_
 
-#include "NFComm/NFCore/NFIValueList.h"
+#include "NFComm/NFCore/NFIDataList.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
 
 class NFIHateModule
