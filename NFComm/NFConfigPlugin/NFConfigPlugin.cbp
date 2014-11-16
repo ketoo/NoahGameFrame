@@ -2,26 +2,27 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="NFConfigPlugin" />
+		<Option title="NFKernelPlugin" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="../../Lib/NFConfigPlugin_d" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="" />
-				<Option type="2" />
+				<Option output="NFConfigPlugin" prefix_auto="1" extension_auto="1" />
+				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-g" />
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
+					<Add option="-D_USRDLL" />
 					<Add option="-DTHERON_USE_STD_THREADS" />
-					<Add directory="../../../Dependency" />
-					<Add directory="../../../Dependency/boost_1_53_0" />
-					<Add directory="../../../Common/Include" />
-					<Add directory="../../../Dependency/Theron-6.00.01/Include" />
-					<Add directory="../../../Dependency/protobuf-2.5.0/src" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+					<Add directory="$(SolutionDir)/Dependencies/glog-0.3.3/src/windows/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/External/" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
@@ -29,20 +30,22 @@
 				</Linker>
 			</Target>
 			<Target title="Release x64">
-				<Option output="../../Lib/NFConfigPlugin" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="" />
-				<Option type="2" />
+				<Option output="NFConfigPlugin" prefix_auto="1" extension_auto="1" />
+				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
+					<Add option="-D_USRDLL" />
 					<Add option="-DTHERON_USE_STD_THREADS" />
-					<Add directory="../../../Dependency" />
-					<Add directory="../../../Dependency/boost_1_53_0" />
-					<Add directory="../../../Common/Include" />
-					<Add directory="../../../Dependency/Theron-6.00.01/Include" />
-					<Add directory="../../../Dependency/protobuf-2.5.0/src" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+					<Add directory="$(SolutionDir)/Dependencies/glog-0.3.3/src/windows/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/External/" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
@@ -59,6 +62,7 @@
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
+			<envvars />
 			<debugger />
 		</Extensions>
 	</Project>
