@@ -269,7 +269,7 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
     return nFindRow;
 }
 
-bool NFCRecord::SetInt(const int nRow, const int nCol, const int value)
+bool NFCRecord::SetInt(const int nRow, const int nCol, const NFINT64 value)
 {
     if (!ValidPos(nRow, nCol))
     {
@@ -304,7 +304,7 @@ bool NFCRecord::SetInt(const int nRow, const int nCol, const int value)
     return false;
 }
 
-bool NFCRecord::SetInt(const int nRow, const std::string& strColTag, const int value)
+bool NFCRecord::SetInt(const int nRow, const std::string& strColTag, const NFINT64 value)
 {
     int nCol = GetCol(strColTag);
     return SetInt(nRow, nCol, value);
@@ -507,7 +507,7 @@ bool NFCRecord::QueryRow(const int nRow, NFIDataList& varList)
             switch (GetColType(i))
             {
                 case TDATA_INT:
-                    varList.Add(0);
+                    varList.Add(NFINT64(0));
                     break;
 
                 case TDATA_FLOAT:
@@ -523,7 +523,7 @@ bool NFCRecord::QueryRow(const int nRow, NFIDataList& varList)
                     break;
 
                 case TDATA_OBJECT:
-                    varList.Add(0);
+                    varList.Add(NFIDENTID());
                     break;
                 default:
                     return false;
@@ -540,7 +540,7 @@ bool NFCRecord::QueryRow(const int nRow, NFIDataList& varList)
     return true;
 }
 
-int NFCRecord::GetInt(const int nRow, const int nCol) const
+NFINT64 NFCRecord::GetInt(const int nRow, const int nCol) const
 {
     if (!ValidPos(nRow, nCol))
     {
@@ -555,13 +555,13 @@ int NFCRecord::GetInt(const int nRow, const int nCol) const
 
     if (TDATA_INT == pVar->nType)
     {
-        return boost::get<int>(pVar->variantData);
+        return boost::get<NFINT64>(pVar->variantData);
     }
 
     return 0;
 }
 
-int NFCRecord::GetInt(const int nRow, const std::string& strColTag) const
+NFINT64 NFCRecord::GetInt(const int nRow, const std::string& strColTag) const
 {
     int nCol = GetCol(strColTag);
     return GetInt(nRow, nCol);
@@ -740,7 +740,7 @@ int NFCRecord::FindRowByColValue(const std::string& strColTag, const NFIDataList
     return FindRowByColValue(nCol, var, varResult);
 }
 
-int NFCRecord::FindInt(const int nCol, const int value, NFIDataList& varResult)
+int NFCRecord::FindInt(const int nCol, const NFINT64 value, NFIDataList& varResult)
 {
     if (!ValidCol(nCol))
     {
@@ -768,7 +768,7 @@ int NFCRecord::FindInt(const int nCol, const int value, NFIDataList& varResult)
     return varResult.GetCount();
 }
 
-int NFCRecord::FindInt(const std::string& strColTag, const int value, NFIDataList& varResult)
+int NFCRecord::FindInt(const std::string& strColTag, const NFINT64 value, NFIDataList& varResult)
 {
     if (strColTag.empty())
     {
