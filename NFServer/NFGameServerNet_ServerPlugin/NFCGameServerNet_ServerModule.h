@@ -26,11 +26,12 @@
 #include "NFComm/NFPluginModule/NFISLGShopModule.h"
 #include "NFComm/NFPluginModule/NFISLGBuildingModule.h"
 #include "NFComm/NFMessageDefine/NFSLGDefine.pb.h"
+#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 
 ////////////////////////////////////////////////////////////////////////////
 // 客户端消息处理宏
 #define CLIENT_MSG_PROCESS(packet, msg)                 \
-    int64_t nPlayerID = 0;                              \
+    NFIDENTID nPlayerID = 0;                              \
     msg xMsg;                                           \
     if (!RecivePB(packet, xMsg, nPlayerID))              \
     {                                                   \
@@ -193,9 +194,9 @@ private:
     //<角色id,角色基础信息>
     NFMap<NFIDENTID, BaseData> mRoleBaseData;
     //<角色fd(在网关),角色id>
-    NFMap<int, NFIDENTID> mRoleFDData;
+    NFMap<NFIDENTID, NFIDENTID> mRoleFDData;
     //临时保存角色是否已经等待创建的状态<角色名，fd>
-    NFMap<std::string, int> mRoleState;
+    NFMap<std::string, NFIDENTID> mRoleState;
 
     NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
@@ -203,6 +204,7 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFIElementInfoModule* m_pElementInfoModule;
+	NFIUUIDModule* m_pUUIDModule;
     //////////////////////////////////////////////////////////////////////////
     //SLG模块
 	NFISLGShopModule* m_pSLGShopModule;
