@@ -71,7 +71,7 @@ TDATA_TYPE NFCLogicClassModule::ComputerType(const char* pstrTypeName, NFIDataLi
     if (0 == strcmp(pstrTypeName, "int"))
     {
         var.nType = TDATA_INT;
-        var.variantData = (int)0;
+        var.variantData = (NFINT64)0;
         return TDATA_INT;
     }
     else if (0 == strcmp(pstrTypeName, "float"))
@@ -95,7 +95,7 @@ TDATA_TYPE NFCLogicClassModule::ComputerType(const char* pstrTypeName, NFIDataLi
     else if (0 == strcmp(pstrTypeName, "object"))
     {
         var.nType = TDATA_OBJECT;
-        var.variantData = NFINT64(0);
+        var.variantData = NFIDENTID();
         return TDATA_OBJECT;
     }
 
@@ -228,11 +228,11 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCL
                     bool bKey = boost::lexical_cast<int>(pstrKey);
                     if (bKey)
                     {
-                        recordKey.Add(1);
+                        recordKey.Add(NFINT64(1));
                     }
                     else
                     {
-                        recordKey.Add(0);
+                        recordKey.Add(NFINT64(0));
                     }
                 }
 
