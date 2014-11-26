@@ -34,7 +34,25 @@ public:
     virtual void LogRecive(const char* str){};
     virtual void LogSend(const char* str){};
 
-	bool RecivePB(const NFIPacket& msg, google::protobuf::Message& xData, int64_t& nPlayer)
+	static NFIDENTID PBToNF(NFMsg::Ident xID)
+	{
+		NFIDENTID  xIdent;
+		xIdent.nSvrID = xID.svrid();
+		xIdent.nData64 = xID.index();
+
+		return xIdent;
+	}
+
+	static NFMsg::Ident NFToPB(NFIDENTID xID)
+	{
+		NFMsg::Ident  xIdent;
+		xIdent.set_svrid(xID.nSvrID);
+		xIdent.set_index(xID.nData64);
+
+		return xIdent;
+	}
+
+	bool RecivePB(const NFIPacket& msg, google::protobuf::Message& xData, NFIDENTID& nPlayer)
 	{
         NFMsg::MsgBase xMsg;
         if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
@@ -55,12 +73,12 @@ public:
             return false;
         }
 
-        nPlayer = xMsg.player_id();
+        nPlayer = PBToNF(xMsg.player_id());
 
         return true;
 	}
 
-    bool VerifyProtocol(const NFIPacket& msg, const int64_t nPlayer)
+    bool VerifyProtocol(const NFIPacket& msg, const NFIDENTID nPlayer)
     {
         NFMsg::MsgBase xMsg;
         if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
@@ -72,7 +90,7 @@ public:
             return false;
         }
 
-        if(nPlayer != xMsg.player_id())
+        if(nPlayer != PBToNF(xMsg.player_id()))
         {
             return false;
         }
@@ -85,7 +103,7 @@ public:
 		return m_pNet->Execute(fLasFrametime, fStartedTime);
 	}
 
-	bool SendMsgPB(const uint16_t nMsgID, google::protobuf::Message& xData, const uint32_t nSockIndex = 0, const int32_t nPlayer = 0, const std::vector<int>* pFdList = NULL, bool bBroadcast = false)
+	bool SendMsgPB(const uint16_t nMsgID, google::protobuf::Message& xData, const uint32_t nSockIndex = 0, const NFIDENTID nPlayer = 0, const std::vector<int>* pFdList = NULL, bool bBroadcast = false)
 	{
 		if (!m_pNet)
 		{
@@ -107,7 +125,8 @@ public:
 		}
 
 		//playerid主要是网关转发消息的时候做识别使用，其他使用不使用
-        xMsg.set_player_id(nPlayer);
+        NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
+		*pPlayerID = NFToPB(nPlayer);
         if (pFdList)
         {
             for (int i = 0; i < pFdList->size(); ++i)

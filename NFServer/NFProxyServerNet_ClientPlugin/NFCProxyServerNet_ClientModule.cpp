@@ -82,7 +82,7 @@ int NFCProxyServerNet_ClientModule::OnRecivePack( const NFIPacket& msg )
 
 int NFCProxyServerNet_ClientModule::OnGameInfoProcess( const NFIPacket& msg )
 {
-    int64_t nPlayerID = 0;	
+    NFIDENTID nPlayerID = 0;	
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -264,7 +264,7 @@ int NFCProxyServerNet_ClientModule::Transpond(int nGameServerID, const NFIPacket
 int NFCProxyServerNet_ClientModule::OnSelectServerResultProcess(const NFIPacket& msg)
 {
     //保持记录,直到下线,或者1分钟不上线即可删除
-    int64_t nPlayerID = 0;
+    NFIDENTID nPlayerID = 0;
     NFMsg::AckConnectWorldResult xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {

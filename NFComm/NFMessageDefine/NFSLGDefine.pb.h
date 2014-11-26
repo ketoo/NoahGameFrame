@@ -25,6 +25,7 @@
 #include <google/protobuf/extension_set.h>
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
+#include "NFMsgBase.pb.h"
 // @@protoc_insertion_point(includes)
 
 namespace NFMsg {
@@ -391,12 +392,14 @@ class ReqAckMoveBuildObject : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 row() const;
   inline void set_row(::google::protobuf::int32 value);
 
-  // required int64 object_guid = 2;
+  // required .NFMsg.Ident object_guid = 2;
   inline bool has_object_guid() const;
   inline void clear_object_guid();
   static const int kObjectGuidFieldNumber = 2;
-  inline ::google::protobuf::int64 object_guid() const;
-  inline void set_object_guid(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& object_guid() const;
+  inline ::NFMsg::Ident* mutable_object_guid();
+  inline ::NFMsg::Ident* release_object_guid();
+  inline void set_allocated_object_guid(::NFMsg::Ident* object_guid);
 
   // required float x = 3;
   inline bool has_x() const;
@@ -434,7 +437,7 @@ class ReqAckMoveBuildObject : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 object_guid_;
+  ::NFMsg::Ident* object_guid_;
   ::google::protobuf::int32 row_;
   float x_;
   float y_;
@@ -513,12 +516,14 @@ class ReqUpBuildLv : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 row() const;
   inline void set_row(::google::protobuf::int32 value);
 
-  // required int64 object_guid = 2;
+  // required .NFMsg.Ident object_guid = 2;
   inline bool has_object_guid() const;
   inline void clear_object_guid();
   static const int kObjectGuidFieldNumber = 2;
-  inline ::google::protobuf::int64 object_guid() const;
-  inline void set_object_guid(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& object_guid() const;
+  inline ::NFMsg::Ident* mutable_object_guid();
+  inline ::NFMsg::Ident* release_object_guid();
+  inline void set_allocated_object_guid(::NFMsg::Ident* object_guid);
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqUpBuildLv)
  private:
@@ -529,7 +534,7 @@ class ReqUpBuildLv : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 object_guid_;
+  ::NFMsg::Ident* object_guid_;
   ::google::protobuf::int32 row_;
 
   mutable int _cached_size_;
@@ -605,12 +610,14 @@ class ReqCreateItem : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 row() const;
   inline void set_row(::google::protobuf::int32 value);
 
-  // required int64 object_guid = 2;
+  // required .NFMsg.Ident object_guid = 2;
   inline bool has_object_guid() const;
   inline void clear_object_guid();
   static const int kObjectGuidFieldNumber = 2;
-  inline ::google::protobuf::int64 object_guid() const;
-  inline void set_object_guid(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& object_guid() const;
+  inline ::NFMsg::Ident* mutable_object_guid();
+  inline ::NFMsg::Ident* release_object_guid();
+  inline void set_allocated_object_guid(::NFMsg::Ident* object_guid);
 
   // required string config_id = 3;
   inline bool has_config_id() const;
@@ -644,7 +651,7 @@ class ReqCreateItem : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 object_guid_;
+  ::NFMsg::Ident* object_guid_;
   ::google::protobuf::int32 row_;
   ::google::protobuf::int32 count_;
   ::std::string* config_id_;
@@ -828,7 +835,7 @@ inline void ReqAckMoveBuildObject::set_row(::google::protobuf::int32 value) {
   row_ = value;
 }
 
-// required int64 object_guid = 2;
+// required .NFMsg.Ident object_guid = 2;
 inline bool ReqAckMoveBuildObject::has_object_guid() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -839,15 +846,31 @@ inline void ReqAckMoveBuildObject::clear_has_object_guid() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqAckMoveBuildObject::clear_object_guid() {
-  object_guid_ = GOOGLE_LONGLONG(0);
+  if (object_guid_ != NULL) object_guid_->::NFMsg::Ident::Clear();
   clear_has_object_guid();
 }
-inline ::google::protobuf::int64 ReqAckMoveBuildObject::object_guid() const {
+inline const ::NFMsg::Ident& ReqAckMoveBuildObject::object_guid() const {
+  return object_guid_ != NULL ? *object_guid_ : *default_instance_->object_guid_;
+}
+inline ::NFMsg::Ident* ReqAckMoveBuildObject::mutable_object_guid() {
+  set_has_object_guid();
+  if (object_guid_ == NULL) object_guid_ = new ::NFMsg::Ident;
   return object_guid_;
 }
-inline void ReqAckMoveBuildObject::set_object_guid(::google::protobuf::int64 value) {
-  set_has_object_guid();
-  object_guid_ = value;
+inline ::NFMsg::Ident* ReqAckMoveBuildObject::release_object_guid() {
+  clear_has_object_guid();
+  ::NFMsg::Ident* temp = object_guid_;
+  object_guid_ = NULL;
+  return temp;
+}
+inline void ReqAckMoveBuildObject::set_allocated_object_guid(::NFMsg::Ident* object_guid) {
+  delete object_guid_;
+  object_guid_ = object_guid;
+  if (object_guid) {
+    set_has_object_guid();
+  } else {
+    clear_has_object_guid();
+  }
 }
 
 // required float x = 3;
@@ -942,7 +965,7 @@ inline void ReqUpBuildLv::set_row(::google::protobuf::int32 value) {
   row_ = value;
 }
 
-// required int64 object_guid = 2;
+// required .NFMsg.Ident object_guid = 2;
 inline bool ReqUpBuildLv::has_object_guid() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -953,15 +976,31 @@ inline void ReqUpBuildLv::clear_has_object_guid() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqUpBuildLv::clear_object_guid() {
-  object_guid_ = GOOGLE_LONGLONG(0);
+  if (object_guid_ != NULL) object_guid_->::NFMsg::Ident::Clear();
   clear_has_object_guid();
 }
-inline ::google::protobuf::int64 ReqUpBuildLv::object_guid() const {
+inline const ::NFMsg::Ident& ReqUpBuildLv::object_guid() const {
+  return object_guid_ != NULL ? *object_guid_ : *default_instance_->object_guid_;
+}
+inline ::NFMsg::Ident* ReqUpBuildLv::mutable_object_guid() {
+  set_has_object_guid();
+  if (object_guid_ == NULL) object_guid_ = new ::NFMsg::Ident;
   return object_guid_;
 }
-inline void ReqUpBuildLv::set_object_guid(::google::protobuf::int64 value) {
-  set_has_object_guid();
-  object_guid_ = value;
+inline ::NFMsg::Ident* ReqUpBuildLv::release_object_guid() {
+  clear_has_object_guid();
+  ::NFMsg::Ident* temp = object_guid_;
+  object_guid_ = NULL;
+  return temp;
+}
+inline void ReqUpBuildLv::set_allocated_object_guid(::NFMsg::Ident* object_guid) {
+  delete object_guid_;
+  object_guid_ = object_guid;
+  if (object_guid) {
+    set_has_object_guid();
+  } else {
+    clear_has_object_guid();
+  }
 }
 
 // -------------------------------------------------------------------
@@ -990,7 +1029,7 @@ inline void ReqCreateItem::set_row(::google::protobuf::int32 value) {
   row_ = value;
 }
 
-// required int64 object_guid = 2;
+// required .NFMsg.Ident object_guid = 2;
 inline bool ReqCreateItem::has_object_guid() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -1001,15 +1040,31 @@ inline void ReqCreateItem::clear_has_object_guid() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqCreateItem::clear_object_guid() {
-  object_guid_ = GOOGLE_LONGLONG(0);
+  if (object_guid_ != NULL) object_guid_->::NFMsg::Ident::Clear();
   clear_has_object_guid();
 }
-inline ::google::protobuf::int64 ReqCreateItem::object_guid() const {
+inline const ::NFMsg::Ident& ReqCreateItem::object_guid() const {
+  return object_guid_ != NULL ? *object_guid_ : *default_instance_->object_guid_;
+}
+inline ::NFMsg::Ident* ReqCreateItem::mutable_object_guid() {
+  set_has_object_guid();
+  if (object_guid_ == NULL) object_guid_ = new ::NFMsg::Ident;
   return object_guid_;
 }
-inline void ReqCreateItem::set_object_guid(::google::protobuf::int64 value) {
-  set_has_object_guid();
-  object_guid_ = value;
+inline ::NFMsg::Ident* ReqCreateItem::release_object_guid() {
+  clear_has_object_guid();
+  ::NFMsg::Ident* temp = object_guid_;
+  object_guid_ = NULL;
+  return temp;
+}
+inline void ReqCreateItem::set_allocated_object_guid(::NFMsg::Ident* object_guid) {
+  delete object_guid_;
+  object_guid_ = object_guid;
+  if (object_guid) {
+    set_has_object_guid();
+  } else {
+    clear_has_object_guid();
+  }
 }
 
 // required string config_id = 3;

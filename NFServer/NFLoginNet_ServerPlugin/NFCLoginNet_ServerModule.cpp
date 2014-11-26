@@ -168,7 +168,7 @@ void NFCLoginNet_ServerModule::OnClientDisconnect(const int nAddress)
 
 int NFCLoginNet_ServerModule::OnLoginProcess( const NFIPacket& msg )
 {
-	int64_t nPlayerID = 0;
+	NFIDENTID nPlayerID = 0;
 	NFMsg::ReqAccountLogin xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
@@ -199,7 +199,7 @@ int NFCLoginNet_ServerModule::OnSelectWorldProcess( const NFIPacket& msg )
 //     const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
 //     const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
-	int64_t nPlayerID = 0;
+	NFIDENTID nPlayerID = 0;
 	NFMsg::ReqConnectWorld xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
@@ -306,7 +306,7 @@ void NFCLoginNet_ServerModule::SynWorldToClient( const int nFD )
 
 int NFCLoginNet_ServerModule::OnViewWorldProcess( const NFIPacket& msg )
 {
-	int64_t nPlayerID = 0;
+	NFIDENTID nPlayerID = 0;
 	NFMsg::ReqServerList xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
