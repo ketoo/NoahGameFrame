@@ -118,9 +118,9 @@ bool NFCDataList::Append(const NFIDataList::TData& TData)
     return false;
 }
 
-bool NFCDataList::Add(const int value)
+bool NFCDataList::Add(const NFINT64 value)
 {
-    return NFIDataList::AddNumber<int>(TDATA_INT, value);
+    return NFIDataList::AddNumber<NFINT64>(TDATA_INT, value);
 }
 
 bool NFCDataList::Add(const float value)
@@ -158,7 +158,7 @@ bool NFCDataList::Add(const void* value)
     return true;
 }
 
-bool NFCDataList::Set(const int index, const int value)
+bool NFCDataList::Set(const int index, const NFINT64 value)
 {
     if (index < mnSize && index >= 0)
     {
@@ -213,17 +213,17 @@ bool NFCDataList::Set(const int index, const void* value)
 {
     if (index < mnSize && index >= 0)
     {
-        return SetNumber(index, value);
+        //return SetNumber(index, value);
     }
 
     return false;
 }
 
-int NFCDataList::Int(const int index) const
+NFINT64 NFCDataList::Int(const int index) const
 {
     if (index < mnSize && index >= 0)
     {
-        return NumberVal<int>(index);
+        return NumberVal<NFINT64>(index);
     }
 
     return 0;
@@ -439,7 +439,7 @@ void NFCDataList::InnerAppendEx(const NFIDataList& src, const int start, const i
         switch (vType)
         {
             case TDATA_INT:
-                AddNumber<int>(vType, src.NumberVal<int>(i));
+                AddNumber<NFINT64>(vType, src.NumberVal<NFINT64>(i));
                 break;
             case TDATA_FLOAT:
                 AddNumber<float>(vType, src.NumberVal<float>(i));
@@ -451,7 +451,7 @@ void NFCDataList::InnerAppendEx(const NFIDataList& src, const int start, const i
                 Add(src.String(i).c_str());
                 break;
             case TDATA_OBJECT:
-                AddNumber<NFINT64>(vType, src.NumberVal<NFINT64>(i));
+                AddNumber<NFIDENTID>(vType, src.NumberVal<NFIDENTID>(i));
                 break;
                 //case TDATA_POINTER:
                 //    AddNumber<void*>(vType, src.NumberVal<void*>(i));
@@ -476,7 +476,7 @@ std::string NFCDataList::StringValEx(const int index, const bool bForce) const
         const TData* var = GetStackConst(index);
         if (var)
         {
-            return boost::lexical_cast<std::string>(var->variantData);
+            //return boost::lexical_cast<std::string>(var->variantData);
         }
     }
 

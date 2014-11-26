@@ -72,7 +72,7 @@ int NFCProxyServerNet_ServerModule::HB_OnConnectCheckTime( const NFIDENTID& self
 
 int NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const NFIPacket& msg)
 {
-    int64_t nPlayerID = 0;
+    NFIDENTID nPlayerID = 0;
     NFMsg::ReqAccountLogin xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -197,7 +197,8 @@ void NFCProxyServerNet_ServerModule::OnClientDisconnect( const int nAddress )
             }
 
             //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
-            xMsg.set_player_id(nAddress);
+            NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
+			pPlayerID->set_index(nAddress);
 
             std::string strMsg;
             if(!xMsg.SerializeToString(&strMsg))
@@ -234,14 +235,14 @@ int NFCProxyServerNet_ServerModule::OnTranspondProcess( const NFIPacket& msg )
 
 int NFCProxyServerNet_ServerModule::OnSelectServerProcess( const NFIPacket& msg )
 {
-    int64_t nPlayerID = 0;
+    NFIDENTID nPlayerID = 0;
     NFMsg::ReqSelectServer xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
         return 0;
     }
 
-    if (msg.GetFd() != nPlayerID)
+    if (msg.GetFd() != nPlayerID.nData64)
     {
         return 0;
     }
@@ -271,14 +272,14 @@ int NFCProxyServerNet_ServerModule::OnSelectServerProcess( const NFIPacket& msg 
 
 int NFCProxyServerNet_ServerModule::OnReqServerListProcess( const NFIPacket& msg )
 {
-    int64_t nPlayerID = 0;
+    NFIDENTID nPlayerID = 0;
     NFMsg::ReqServerList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
         return 0;
     }
 
-    if (msg.GetFd() != nPlayerID)
+    if (msg.GetFd() != nPlayerID.nData64)
     {
         return 0;
     }
@@ -335,7 +336,7 @@ int NFCProxyServerNet_ServerModule::Transpond(const NFIPacket& msg )
     if(xMsg.player_fd_list_size() <= 0)
     {
         //playerid==fd
-        GetNet()->SendMsg(msg, xMsg.player_id());
+        GetNet()->SendMsg(msg, xMsg.player_id().index());
     }
 
     return true;
@@ -349,7 +350,7 @@ void NFCProxyServerNet_ServerModule::OnClientConnected( const int nAddress )
 int NFCProxyServerNet_ServerModule::OnReqRoleListProcess( const NFIPacket& msg )
 {
     //在没有正式进入游戏之前，nPlayerID都是FD
-    int64_t nPlayerID = 0;
+    NFIDENTID nPlayerID = 0;
     NFMsg::ReqRoleList xData;
     if (!RecivePB(msg, xData, nPlayerID))
     {
@@ -373,7 +374,8 @@ int NFCProxyServerNet_ServerModule::OnReqRoleListProcess( const NFIPacket& msg )
             }
 
             //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
-            xMsg.set_player_id(msg.GetFd());
+            NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
+			pPlayerID->set_index(msg.GetFd());
 
             std::string strMsg;
             if(!xMsg.SerializeToString(&strMsg))
@@ -401,14 +403,14 @@ int NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess( const NFIPacket& msg
     //在没有正式进入游戏之前，nPlayerID都是FD
 
 
-    int64_t nPlayerID = 0;
+    NFIDENTID nPlayerID = 0;
     NFMsg::ReqCreateRole xData;
     if (!RecivePB(msg, xData, nPlayerID))
     {
         return 0;
     }
 
-    if (msg.GetFd() != nPlayerID)
+    if (msg.GetFd() != nPlayerID.nData64)
     {
         return 0;
     }
@@ -433,14 +435,14 @@ int NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess( const NFIPacket& msg
 int NFCProxyServerNet_ServerModule::OnReqDelRoleProcess( const NFIPacket& msg )
 {
     //在没有正式进入游戏之前，nPlayerID都是FD
-    int64_t nPlayerID = 0;
+    NFIDENTID nPlayerID = 0;
     NFMsg::ReqDeleteRole xData;
     if (!RecivePB(msg, xData, nPlayerID))
     {
         return 0;
     }
 
-    if (msg.GetFd() != nPlayerID)
+    if (msg.GetFd() != nPlayerID.nData64)
     {
         return 0;
     }
@@ -465,14 +467,14 @@ int NFCProxyServerNet_ServerModule::OnReqDelRoleProcess( const NFIPacket& msg )
 int NFCProxyServerNet_ServerModule::OnReqEnterGameServer( const NFIPacket& msg )
 {
     //在没有正式进入游戏之前，nPlayerID都是FD
-    int64_t nPlayerID = 0;
+    NFIDENTID nPlayerID = 0;
     NFMsg::ReqEnterGameServer xData;
     if (!RecivePB(msg, xData, nPlayerID))
     {
         return 0;
     }
 
-    if (msg.GetFd() != nPlayerID)
+    if (msg.GetFd() != nPlayerID.nData64)
     {
         return 0;
     }
