@@ -23,7 +23,7 @@ bool NFCMasterNet_ServerModule::Shut()
 
 int NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const NFIPacket& msg)
 {
-	int64_t nPlayerID = 0;
+	NFIDENTID nPlayerID = 0;
 	NFMsg::ServerInfoReportList xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
@@ -54,7 +54,7 @@ int NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const NFIPacket& msg)
 
 int NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const NFIPacket& msg)
 {
-	int64_t nPlayerID = 0;
+	NFIDENTID nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -81,7 +81,7 @@ int NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const NFIPacket& msg)
 
 int NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFIPacket& msg)
 {
-	int64_t nPlayerID = 0;
+	NFIDENTID nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -112,7 +112,7 @@ int NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFIPacket& msg)
 
 int NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const NFIPacket& msg)
 {
-	int64_t nPlayerID = 0;
+	NFIDENTID nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -142,7 +142,7 @@ int NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const NFIPacket& msg)
 
 int NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const NFIPacket& msg)
 {
-	int64_t nPlayerID = 0;
+	NFIDENTID nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -169,7 +169,7 @@ int NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const NFIPacket& msg)
 
 int NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess(const NFIPacket& msg)
 {
-	int64_t nPlayerID = 0;
+	NFIDENTID nPlayerID = 0;
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -198,7 +198,7 @@ int NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess(const NFIPacket& msg)
 
 int NFCMasterNet_ServerModule::OnSelectWorldProcess(const NFIPacket& msg)
 {
-	int64_t nPlayerID = 0;
+	NFIDENTID nPlayerID = 0;
 	NFMsg::ReqConnectWorld xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
@@ -226,7 +226,7 @@ bool NFCMasterNet_ServerModule::Execute(const float fLasFrametime, const float f
 
 int NFCMasterNet_ServerModule::OnSelectServerResultProcess(const NFIPacket& msg)
 {
-	int64_t nPlayerID = 0;
+	NFIDENTID nPlayerID = 0;
 	NFMsg::AckConnectWorldResult xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{

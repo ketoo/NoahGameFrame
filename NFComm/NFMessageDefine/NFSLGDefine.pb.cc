@@ -164,60 +164,62 @@ void protobuf_AddDesc_NFSLGDefine_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
+  ::NFMsg::protobuf_AddDesc_NFMsgBase_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\021NFSLGDefine.proto\022\005NFMsg\"M\n\027ReqAckBuyO"
-    "bjectFormShop\022\021\n\tconfig_id\030\001 \002(\t\022\t\n\001x\030\002 "
-    "\002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002(\002\"Z\n\025ReqAckMoveB"
-    "uildObject\022\013\n\003row\030\001 \001(\005\022\023\n\013object_guid\030\002"
-    " \002(\003\022\t\n\001x\030\003 \002(\002\022\t\n\001y\030\004 \002(\002\022\t\n\001z\030\005 \002(\002\"0\n"
-    "\014ReqUpBuildLv\022\013\n\003row\030\001 \001(\005\022\023\n\013object_gui"
-    "d\030\002 \002(\003\"S\n\rReqCreateItem\022\013\n\003row\030\001 \001(\005\022\023\n"
-    "\013object_guid\030\002 \002(\003\022\021\n\tconfig_id\030\003 \002(\t\022\r\n"
-    "\005count\030\004 \002(\005*\201\001\n\020ESLGBuildingType\022\014\n\010EBT"
-    "_BASE\020\000\022\017\n\013EBT_DEFENSE\020\001\022\014\n\010EBT_ARMY\020\002\022\020"
-    "\n\014EBT_RESOURCE\020\003\022\r\n\tEBT_GUILD\020\004\022\016\n\nEBT_T"
-    "EMPLE\020\005\022\017\n\013EBT_NUCLEAR\020\006*\200\010\n\023ESLGBuildin"
-    "gSubType\022\r\n\tEBST_HALL\020\000\022\021\n\rEBST_MASHROOM"
-    "\020F\022\r\n\tEBST_BUSH\020G\022\021\n\rEBST_BRANCH_1\020H\022\021\n\r"
-    "EBST_BRANCH_2\020I\022\021\n\rEBST_BRANCH_3\020J\022\017\n\013EB"
-    "ST_TREE_1\020K\022\017\n\013EBST_TREE_2\020L\022\017\n\013EBST_TRE"
-    "E_3\020M\022\020\n\014EBST_STONE_1\020N\022\020\n\014EBST_STONE_2\020"
-    "O\022\020\n\014EBST_STONE_3\020P\022\r\n\tEBST_TOMB\020Q\022\022\n\016EB"
-    "ST_DARK_TOMB\020R\022\016\n\nEBST_PYXIS\020S\022\016\n\nEBST_T"
-    "ORCH\020T\022\024\n\020EBST__WHITE_FLAG\020U\022\017\n\013EBST_CAN"
-    "NON\020e\022\017\n\013EBST_MORTAR\020f\022\025\n\021EBST_ARCHER_TO"
-    "WER\020g\022\025\n\021EBST_WIZARD_TOWER\020h\022\022\n\016EBST_AIR"
-    "_TOWER\020i\022\024\n\020EBST_TESLA_TOWER\020j\022\r\n\tEBST_W"
-    "ALL\020k\022\016\n\nEBST_X_BOW\020l\022\r\n\tEBST_BOMB\020m\022\021\n\r"
-    "EBST_AIR_BOMB\020n\022\024\n\020EBST_SPRING_TRAP\020o\022\023\n"
-    "\017EBST_HELL_TOWER\020p\022\016\n\tEBST_CAMP\020\310\001\022\021\n\014EB"
-    "ST_BARRACK\020\311\001\022\025\n\020EBST_TEC_FACTORY\020\312\001\022\026\n\021"
-    "EBST_DARK_BARRACK\020\313\001\022\026\n\021EBST_DRUG_FACTOR"
-    "Y\020\314\001\022\024\n\017EBST_KING_ALTAR\020\315\001\022\025\n\020EBST_QUEEN"
-    "_ALTAR\020\316\001\022\030\n\023EBST_GOLD_COLLECTOR\020\254\002\022\026\n\021E"
-    "BST_GOLD_STORAGE\020\255\002\022\031\n\024EBST_STONE_COLLEC"
-    "TOR\020\256\002\022\027\n\022EBST_STONE_STORAGE\020\257\002\022\031\n\024EBST_"
-    "STEEL_COLLECTOR\020\260\002\022\027\n\022EBST_STEEL_STORAGE"
-    "\020\261\002\022\033\n\026EBST_DIAMOND_COLLECTOR\020\262\002\022\031\n\024EBST"
-    "_DIAMOND_STORAGE\020\263\002\022\r\n\010EBST_HUT\020\264\002\022\026\n\021EB"
-    "ST_GUILD_CASTLE\020\220\003\022\025\n\020EBST_GUILD_CRYPT\020\221"
-    "\003\022\025\n\020EBST_ELEMENT_LAB\020\364\003\022\031\n\024EBST_NUCLEAR"
-    "_FACTORY\020\330\004*\370\001\n\014ESLGArmyType\022\017\n\013EAT_FOOT"
-    "MAN\020\000\022\016\n\nEAT_ARCHER\020\001\022\016\n\nEAT_GOBLIN\020\002\022\r\n"
-    "\tEAT_GIANT\020\003\022\024\n\020EAT_WALL_BREAKER\020\004\022\017\n\013EA"
-    "T_BALLOON\020\005\022\016\n\nEAT_HEALER\020\006\022\016\n\nEAT_WIZAR"
-    "D\020\007\022\016\n\nEAT_DRAGON\020\010\022\r\n\tEAT_PEKKA\020\t\022\016\n\nEA"
-    "T_MINION\020\024\022\021\n\rEAT_HOG_RIDER\020\025\022\020\n\014EAT_VAL"
-    "KYRIE\020\026\022\r\n\tEAT_GOLEM\020\027*\225\002\n\014ESLGFuncType\022"
-    "\014\n\010EFT_INFO\020\000\022\016\n\nEFT_BOOOST\020\001\022\r\n\tEFT_LVL"
-    "UP\020\002\022\025\n\021EFT_CREATE_SOLDER\020\003\022\024\n\020EFT_CREAT"
-    "E_SPEEL\020\004\022\020\n\014EFT_RESEARCH\020\005\022\024\n\020EFT_COLLE"
-    "CT_GOLD\020\006\022\025\n\021EFT_COLLECT_STONE\020\007\022\025\n\021EFT_"
-    "COLLECT_STEEL\020\010\022\027\n\023EFT_COLLECT_DIAMOND\020\t"
-    "\022\014\n\010EFT_SELL\020\n\022\016\n\nEFT_REPAIR\020\013\022\016\n\nEFT_CA"
-    "NCEL\020\014\022\016\n\nEFT_FINISH\020\r*A\n\021ESLGBuildingSt"
-    "ate\022\014\n\010EBS_IDLE\020\000\022\r\n\tEBS_BOOST\020\001\022\017\n\013EBS_"
-    "UPGRADE\020\002", 2089);
+    "\n\021NFSLGDefine.proto\022\005NFMsg\032\017NFMsgBase.pr"
+    "oto\"M\n\027ReqAckBuyObjectFormShop\022\021\n\tconfig"
+    "_id\030\001 \002(\t\022\t\n\001x\030\002 \002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002"
+    "(\002\"h\n\025ReqAckMoveBuildObject\022\013\n\003row\030\001 \001(\005"
+    "\022!\n\013object_guid\030\002 \002(\0132\014.NFMsg.Ident\022\t\n\001x"
+    "\030\003 \002(\002\022\t\n\001y\030\004 \002(\002\022\t\n\001z\030\005 \002(\002\">\n\014ReqUpBui"
+    "ldLv\022\013\n\003row\030\001 \001(\005\022!\n\013object_guid\030\002 \002(\0132\014"
+    ".NFMsg.Ident\"a\n\rReqCreateItem\022\013\n\003row\030\001 \001"
+    "(\005\022!\n\013object_guid\030\002 \002(\0132\014.NFMsg.Ident\022\021\n"
+    "\tconfig_id\030\003 \002(\t\022\r\n\005count\030\004 \002(\005*\201\001\n\020ESLG"
+    "BuildingType\022\014\n\010EBT_BASE\020\000\022\017\n\013EBT_DEFENS"
+    "E\020\001\022\014\n\010EBT_ARMY\020\002\022\020\n\014EBT_RESOURCE\020\003\022\r\n\tE"
+    "BT_GUILD\020\004\022\016\n\nEBT_TEMPLE\020\005\022\017\n\013EBT_NUCLEA"
+    "R\020\006*\200\010\n\023ESLGBuildingSubType\022\r\n\tEBST_HALL"
+    "\020\000\022\021\n\rEBST_MASHROOM\020F\022\r\n\tEBST_BUSH\020G\022\021\n\r"
+    "EBST_BRANCH_1\020H\022\021\n\rEBST_BRANCH_2\020I\022\021\n\rEB"
+    "ST_BRANCH_3\020J\022\017\n\013EBST_TREE_1\020K\022\017\n\013EBST_T"
+    "REE_2\020L\022\017\n\013EBST_TREE_3\020M\022\020\n\014EBST_STONE_1"
+    "\020N\022\020\n\014EBST_STONE_2\020O\022\020\n\014EBST_STONE_3\020P\022\r"
+    "\n\tEBST_TOMB\020Q\022\022\n\016EBST_DARK_TOMB\020R\022\016\n\nEBS"
+    "T_PYXIS\020S\022\016\n\nEBST_TORCH\020T\022\024\n\020EBST__WHITE"
+    "_FLAG\020U\022\017\n\013EBST_CANNON\020e\022\017\n\013EBST_MORTAR\020"
+    "f\022\025\n\021EBST_ARCHER_TOWER\020g\022\025\n\021EBST_WIZARD_"
+    "TOWER\020h\022\022\n\016EBST_AIR_TOWER\020i\022\024\n\020EBST_TESL"
+    "A_TOWER\020j\022\r\n\tEBST_WALL\020k\022\016\n\nEBST_X_BOW\020l"
+    "\022\r\n\tEBST_BOMB\020m\022\021\n\rEBST_AIR_BOMB\020n\022\024\n\020EB"
+    "ST_SPRING_TRAP\020o\022\023\n\017EBST_HELL_TOWER\020p\022\016\n"
+    "\tEBST_CAMP\020\310\001\022\021\n\014EBST_BARRACK\020\311\001\022\025\n\020EBST"
+    "_TEC_FACTORY\020\312\001\022\026\n\021EBST_DARK_BARRACK\020\313\001\022"
+    "\026\n\021EBST_DRUG_FACTORY\020\314\001\022\024\n\017EBST_KING_ALT"
+    "AR\020\315\001\022\025\n\020EBST_QUEEN_ALTAR\020\316\001\022\030\n\023EBST_GOL"
+    "D_COLLECTOR\020\254\002\022\026\n\021EBST_GOLD_STORAGE\020\255\002\022\031"
+    "\n\024EBST_STONE_COLLECTOR\020\256\002\022\027\n\022EBST_STONE_"
+    "STORAGE\020\257\002\022\031\n\024EBST_STEEL_COLLECTOR\020\260\002\022\027\n"
+    "\022EBST_STEEL_STORAGE\020\261\002\022\033\n\026EBST_DIAMOND_C"
+    "OLLECTOR\020\262\002\022\031\n\024EBST_DIAMOND_STORAGE\020\263\002\022\r"
+    "\n\010EBST_HUT\020\264\002\022\026\n\021EBST_GUILD_CASTLE\020\220\003\022\025\n"
+    "\020EBST_GUILD_CRYPT\020\221\003\022\025\n\020EBST_ELEMENT_LAB"
+    "\020\364\003\022\031\n\024EBST_NUCLEAR_FACTORY\020\330\004*\370\001\n\014ESLGA"
+    "rmyType\022\017\n\013EAT_FOOTMAN\020\000\022\016\n\nEAT_ARCHER\020\001"
+    "\022\016\n\nEAT_GOBLIN\020\002\022\r\n\tEAT_GIANT\020\003\022\024\n\020EAT_W"
+    "ALL_BREAKER\020\004\022\017\n\013EAT_BALLOON\020\005\022\016\n\nEAT_HE"
+    "ALER\020\006\022\016\n\nEAT_WIZARD\020\007\022\016\n\nEAT_DRAGON\020\010\022\r"
+    "\n\tEAT_PEKKA\020\t\022\016\n\nEAT_MINION\020\024\022\021\n\rEAT_HOG"
+    "_RIDER\020\025\022\020\n\014EAT_VALKYRIE\020\026\022\r\n\tEAT_GOLEM\020"
+    "\027*\225\002\n\014ESLGFuncType\022\014\n\010EFT_INFO\020\000\022\016\n\nEFT_"
+    "BOOOST\020\001\022\r\n\tEFT_LVLUP\020\002\022\025\n\021EFT_CREATE_SO"
+    "LDER\020\003\022\024\n\020EFT_CREATE_SPEEL\020\004\022\020\n\014EFT_RESE"
+    "ARCH\020\005\022\024\n\020EFT_COLLECT_GOLD\020\006\022\025\n\021EFT_COLL"
+    "ECT_STONE\020\007\022\025\n\021EFT_COLLECT_STEEL\020\010\022\027\n\023EF"
+    "T_COLLECT_DIAMOND\020\t\022\014\n\010EFT_SELL\020\n\022\016\n\nEFT"
+    "_REPAIR\020\013\022\016\n\nEFT_CANCEL\020\014\022\016\n\nEFT_FINISH\020"
+    "\r*A\n\021ESLGBuildingState\022\014\n\010EBS_IDLE\020\000\022\r\n\t"
+    "EBS_BOOST\020\001\022\017\n\013EBS_UPGRADE\020\002", 2148);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFSLGDefine.proto", &protobuf_RegisterTypes);
   ReqAckBuyObjectFormShop::default_instance_ = new ReqAckBuyObjectFormShop();
@@ -741,6 +743,7 @@ ReqAckMoveBuildObject::ReqAckMoveBuildObject()
 }
 
 void ReqAckMoveBuildObject::InitAsDefaultInstance() {
+  object_guid_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 ReqAckMoveBuildObject::ReqAckMoveBuildObject(const ReqAckMoveBuildObject& from)
@@ -752,7 +755,7 @@ ReqAckMoveBuildObject::ReqAckMoveBuildObject(const ReqAckMoveBuildObject& from)
 void ReqAckMoveBuildObject::SharedCtor() {
   _cached_size_ = 0;
   row_ = 0;
-  object_guid_ = GOOGLE_LONGLONG(0);
+  object_guid_ = NULL;
   x_ = 0;
   y_ = 0;
   z_ = 0;
@@ -765,6 +768,7 @@ ReqAckMoveBuildObject::~ReqAckMoveBuildObject() {
 
 void ReqAckMoveBuildObject::SharedDtor() {
   if (this != default_instance_) {
+    delete object_guid_;
   }
 }
 
@@ -792,7 +796,9 @@ ReqAckMoveBuildObject* ReqAckMoveBuildObject::New() const {
 void ReqAckMoveBuildObject::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     row_ = 0;
-    object_guid_ = GOOGLE_LONGLONG(0);
+    if (has_object_guid()) {
+      if (object_guid_ != NULL) object_guid_->::NFMsg::Ident::Clear();
+    }
     x_ = 0;
     y_ = 0;
     z_ = 0;
@@ -818,19 +824,17 @@ bool ReqAckMoveBuildObject::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_object_guid;
+        if (input->ExpectTag(18)) goto parse_object_guid;
         break;
       }
 
-      // required int64 object_guid = 2;
+      // required .NFMsg.Ident object_guid = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_object_guid:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &object_guid_)));
-          set_has_object_guid();
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_object_guid()));
         } else {
           goto handle_uninterpreted;
         }
@@ -909,9 +913,10 @@ void ReqAckMoveBuildObject::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->row(), output);
   }
 
-  // required int64 object_guid = 2;
+  // required .NFMsg.Ident object_guid = 2;
   if (has_object_guid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->object_guid(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->object_guid(), output);
   }
 
   // required float x = 3;
@@ -942,9 +947,11 @@ void ReqAckMoveBuildObject::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->row(), target);
   }
 
-  // required int64 object_guid = 2;
+  // required .NFMsg.Ident object_guid = 2;
   if (has_object_guid()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->object_guid(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->object_guid(), target);
   }
 
   // required float x = 3;
@@ -980,10 +987,10 @@ int ReqAckMoveBuildObject::ByteSize() const {
           this->row());
     }
 
-    // required int64 object_guid = 2;
+    // required .NFMsg.Ident object_guid = 2;
     if (has_object_guid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int64Size(
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->object_guid());
     }
 
@@ -1033,7 +1040,7 @@ void ReqAckMoveBuildObject::MergeFrom(const ReqAckMoveBuildObject& from) {
       set_row(from.row());
     }
     if (from.has_object_guid()) {
-      set_object_guid(from.object_guid());
+      mutable_object_guid()->::NFMsg::Ident::MergeFrom(from.object_guid());
     }
     if (from.has_x()) {
       set_x(from.x());
@@ -1063,6 +1070,9 @@ void ReqAckMoveBuildObject::CopyFrom(const ReqAckMoveBuildObject& from) {
 bool ReqAckMoveBuildObject::IsInitialized() const {
   if ((_has_bits_[0] & 0x0000001e) != 0x0000001e) return false;
 
+  if (has_object_guid()) {
+    if (!this->object_guid().IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -1101,6 +1111,7 @@ ReqUpBuildLv::ReqUpBuildLv()
 }
 
 void ReqUpBuildLv::InitAsDefaultInstance() {
+  object_guid_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 ReqUpBuildLv::ReqUpBuildLv(const ReqUpBuildLv& from)
@@ -1112,7 +1123,7 @@ ReqUpBuildLv::ReqUpBuildLv(const ReqUpBuildLv& from)
 void ReqUpBuildLv::SharedCtor() {
   _cached_size_ = 0;
   row_ = 0;
-  object_guid_ = GOOGLE_LONGLONG(0);
+  object_guid_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1122,6 +1133,7 @@ ReqUpBuildLv::~ReqUpBuildLv() {
 
 void ReqUpBuildLv::SharedDtor() {
   if (this != default_instance_) {
+    delete object_guid_;
   }
 }
 
@@ -1149,7 +1161,9 @@ ReqUpBuildLv* ReqUpBuildLv::New() const {
 void ReqUpBuildLv::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     row_ = 0;
-    object_guid_ = GOOGLE_LONGLONG(0);
+    if (has_object_guid()) {
+      if (object_guid_ != NULL) object_guid_->::NFMsg::Ident::Clear();
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -1172,19 +1186,17 @@ bool ReqUpBuildLv::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_object_guid;
+        if (input->ExpectTag(18)) goto parse_object_guid;
         break;
       }
 
-      // required int64 object_guid = 2;
+      // required .NFMsg.Ident object_guid = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_object_guid:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &object_guid_)));
-          set_has_object_guid();
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_object_guid()));
         } else {
           goto handle_uninterpreted;
         }
@@ -1215,9 +1227,10 @@ void ReqUpBuildLv::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->row(), output);
   }
 
-  // required int64 object_guid = 2;
+  // required .NFMsg.Ident object_guid = 2;
   if (has_object_guid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->object_guid(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->object_guid(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -1233,9 +1246,11 @@ void ReqUpBuildLv::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->row(), target);
   }
 
-  // required int64 object_guid = 2;
+  // required .NFMsg.Ident object_guid = 2;
   if (has_object_guid()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->object_guid(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->object_guid(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -1256,10 +1271,10 @@ int ReqUpBuildLv::ByteSize() const {
           this->row());
     }
 
-    // required int64 object_guid = 2;
+    // required .NFMsg.Ident object_guid = 2;
     if (has_object_guid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int64Size(
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->object_guid());
     }
 
@@ -1294,7 +1309,7 @@ void ReqUpBuildLv::MergeFrom(const ReqUpBuildLv& from) {
       set_row(from.row());
     }
     if (from.has_object_guid()) {
-      set_object_guid(from.object_guid());
+      mutable_object_guid()->::NFMsg::Ident::MergeFrom(from.object_guid());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -1315,6 +1330,9 @@ void ReqUpBuildLv::CopyFrom(const ReqUpBuildLv& from) {
 bool ReqUpBuildLv::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
 
+  if (has_object_guid()) {
+    if (!this->object_guid().IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -1352,6 +1370,7 @@ ReqCreateItem::ReqCreateItem()
 }
 
 void ReqCreateItem::InitAsDefaultInstance() {
+  object_guid_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 ReqCreateItem::ReqCreateItem(const ReqCreateItem& from)
@@ -1363,7 +1382,7 @@ ReqCreateItem::ReqCreateItem(const ReqCreateItem& from)
 void ReqCreateItem::SharedCtor() {
   _cached_size_ = 0;
   row_ = 0;
-  object_guid_ = GOOGLE_LONGLONG(0);
+  object_guid_ = NULL;
   config_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   count_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -1378,6 +1397,7 @@ void ReqCreateItem::SharedDtor() {
     delete config_id_;
   }
   if (this != default_instance_) {
+    delete object_guid_;
   }
 }
 
@@ -1405,7 +1425,9 @@ ReqCreateItem* ReqCreateItem::New() const {
 void ReqCreateItem::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     row_ = 0;
-    object_guid_ = GOOGLE_LONGLONG(0);
+    if (has_object_guid()) {
+      if (object_guid_ != NULL) object_guid_->::NFMsg::Ident::Clear();
+    }
     if (has_config_id()) {
       if (config_id_ != &::google::protobuf::internal::kEmptyString) {
         config_id_->clear();
@@ -1434,19 +1456,17 @@ bool ReqCreateItem::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_object_guid;
+        if (input->ExpectTag(18)) goto parse_object_guid;
         break;
       }
 
-      // required int64 object_guid = 2;
+      // required .NFMsg.Ident object_guid = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_object_guid:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &object_guid_)));
-          set_has_object_guid();
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_object_guid()));
         } else {
           goto handle_uninterpreted;
         }
@@ -1510,9 +1530,10 @@ void ReqCreateItem::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->row(), output);
   }
 
-  // required int64 object_guid = 2;
+  // required .NFMsg.Ident object_guid = 2;
   if (has_object_guid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->object_guid(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->object_guid(), output);
   }
 
   // required string config_id = 3;
@@ -1542,9 +1563,11 @@ void ReqCreateItem::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->row(), target);
   }
 
-  // required int64 object_guid = 2;
+  // required .NFMsg.Ident object_guid = 2;
   if (has_object_guid()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->object_guid(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->object_guid(), target);
   }
 
   // required string config_id = 3;
@@ -1580,10 +1603,10 @@ int ReqCreateItem::ByteSize() const {
           this->row());
     }
 
-    // required int64 object_guid = 2;
+    // required .NFMsg.Ident object_guid = 2;
     if (has_object_guid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int64Size(
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->object_guid());
     }
 
@@ -1632,7 +1655,7 @@ void ReqCreateItem::MergeFrom(const ReqCreateItem& from) {
       set_row(from.row());
     }
     if (from.has_object_guid()) {
-      set_object_guid(from.object_guid());
+      mutable_object_guid()->::NFMsg::Ident::MergeFrom(from.object_guid());
     }
     if (from.has_config_id()) {
       set_config_id(from.config_id());
@@ -1659,6 +1682,9 @@ void ReqCreateItem::CopyFrom(const ReqCreateItem& from) {
 bool ReqCreateItem::IsInitialized() const {
   if ((_has_bits_[0] & 0x0000000e) != 0x0000000e) return false;
 
+  if (has_object_guid()) {
+    if (!this->object_guid().IsInitialized()) return false;
+  }
   return true;
 }
 

@@ -35,6 +35,7 @@ void  protobuf_AddDesc_NFMsgBase_2eproto();
 void protobuf_AssignDesc_NFMsgBase_2eproto();
 void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
+class Ident;
 class PropertyInt;
 class PropertyFloat;
 class PropertyString;
@@ -85,6 +86,98 @@ inline bool ReqCommand_EGameCommandType_Parse(
     ReqCommand_EGameCommandType_descriptor(), name, value);
 }
 // ===================================================================
+
+class Ident : public ::google::protobuf::Message {
+ public:
+  Ident();
+  virtual ~Ident();
+
+  Ident(const Ident& from);
+
+  inline Ident& operator=(const Ident& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Ident& default_instance();
+
+  void Swap(Ident* other);
+
+  // implements Message ----------------------------------------------
+
+  Ident* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const Ident& from);
+  void MergeFrom(const Ident& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int64 svrid = 1;
+  inline bool has_svrid() const;
+  inline void clear_svrid();
+  static const int kSvridFieldNumber = 1;
+  inline ::google::protobuf::int64 svrid() const;
+  inline void set_svrid(::google::protobuf::int64 value);
+
+  // required int64 index = 2;
+  inline bool has_index() const;
+  inline void clear_index();
+  static const int kIndexFieldNumber = 2;
+  inline ::google::protobuf::int64 index() const;
+  inline void set_index(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.Ident)
+ private:
+  inline void set_has_svrid();
+  inline void clear_has_svrid();
+  inline void set_has_index();
+  inline void clear_has_index();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int64 svrid_;
+  ::google::protobuf::int64 index_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void protobuf_AssignDesc_NFMsgBase_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
+
+  void InitAsDefaultInstance();
+  static Ident* default_instance_;
+};
+// -------------------------------------------------------------------
 
 class PropertyInt : public ::google::protobuf::Message {
  public:
@@ -152,12 +245,12 @@ class PropertyInt : public ::google::protobuf::Message {
   inline ::std::string* release_property_name();
   inline void set_allocated_property_name(::std::string* property_name);
 
-  // required int32 data = 2;
+  // required int64 data = 2;
   inline bool has_data() const;
   inline void clear_data();
   static const int kDataFieldNumber = 2;
-  inline ::google::protobuf::int32 data() const;
-  inline void set_data(::google::protobuf::int32 value);
+  inline ::google::protobuf::int64 data() const;
+  inline void set_data(::google::protobuf::int64 value);
 
   // @@protoc_insertion_point(class_scope:NFMsg.PropertyInt)
  private:
@@ -169,7 +262,7 @@ class PropertyInt : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* property_name_;
-  ::google::protobuf::int32 data_;
+  ::google::protobuf::int64 data_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
@@ -448,12 +541,14 @@ class PropertyObject : public ::google::protobuf::Message {
   inline ::std::string* release_property_name();
   inline void set_allocated_property_name(::std::string* property_name);
 
-  // required int64 data = 2;
+  // required .NFMsg.Ident data = 2;
   inline bool has_data() const;
   inline void clear_data();
   static const int kDataFieldNumber = 2;
-  inline ::google::protobuf::int64 data() const;
-  inline void set_data(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& data() const;
+  inline ::NFMsg::Ident* mutable_data();
+  inline ::NFMsg::Ident* release_data();
+  inline void set_allocated_data(::NFMsg::Ident* data);
 
   // @@protoc_insertion_point(class_scope:NFMsg.PropertyObject)
  private:
@@ -465,7 +560,7 @@ class PropertyObject : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* property_name_;
-  ::google::protobuf::int64 data_;
+  ::NFMsg::Ident* data_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
@@ -547,12 +642,12 @@ class RecordInt : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 col() const;
   inline void set_col(::google::protobuf::int32 value);
 
-  // required int32 data = 3;
+  // required int64 data = 3;
   inline bool has_data() const;
   inline void clear_data();
   static const int kDataFieldNumber = 3;
-  inline ::google::protobuf::int32 data() const;
-  inline void set_data(::google::protobuf::int32 value);
+  inline ::google::protobuf::int64 data() const;
+  inline void set_data(::google::protobuf::int64 value);
 
   // @@protoc_insertion_point(class_scope:NFMsg.RecordInt)
  private:
@@ -567,7 +662,7 @@ class RecordInt : public ::google::protobuf::Message {
 
   ::google::protobuf::int32 row_;
   ::google::protobuf::int32 col_;
-  ::google::protobuf::int32 data_;
+  ::google::protobuf::int64 data_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
@@ -858,12 +953,14 @@ class RecordObject : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 col() const;
   inline void set_col(::google::protobuf::int32 value);
 
-  // required int64 data = 3;
+  // required .NFMsg.Ident data = 3;
   inline bool has_data() const;
   inline void clear_data();
   static const int kDataFieldNumber = 3;
-  inline ::google::protobuf::int64 data() const;
-  inline void set_data(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& data() const;
+  inline ::NFMsg::Ident* mutable_data();
+  inline ::NFMsg::Ident* release_data();
+  inline void set_allocated_data(::NFMsg::Ident* data);
 
   // @@protoc_insertion_point(class_scope:NFMsg.RecordObject)
  private:
@@ -878,7 +975,7 @@ class RecordObject : public ::google::protobuf::Message {
 
   ::google::protobuf::int32 row_;
   ::google::protobuf::int32 col_;
-  ::google::protobuf::int64 data_;
+  ::NFMsg::Ident* data_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
@@ -1180,12 +1277,14 @@ class ObjectPropertyList : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 player_id = 1;
+  // required .NFMsg.Ident player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline ::google::protobuf::int64 player_id() const;
-  inline void set_player_id(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& player_id() const;
+  inline ::NFMsg::Ident* mutable_player_id();
+  inline ::NFMsg::Ident* release_player_id();
+  inline void set_allocated_player_id(::NFMsg::Ident* player_id);
 
   // repeated .NFMsg.PropertyInt property_int_list = 2;
   inline int property_int_list_size() const;
@@ -1242,7 +1341,7 @@ class ObjectPropertyList : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 player_id_;
+  ::NFMsg::Ident* player_id_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyInt > property_int_list_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyFloat > property_float_list_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyString > property_string_list_;
@@ -1399,12 +1498,14 @@ class ObjectRecordList : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 player_id = 1;
+  // required .NFMsg.Ident player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline ::google::protobuf::int64 player_id() const;
-  inline void set_player_id(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& player_id() const;
+  inline ::NFMsg::Ident* mutable_player_id();
+  inline ::NFMsg::Ident* release_player_id();
+  inline void set_allocated_player_id(::NFMsg::Ident* player_id);
 
   // repeated .NFMsg.ObjectRecordBase record_list = 2;
   inline int record_list_size() const;
@@ -1425,7 +1526,7 @@ class ObjectRecordList : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 player_id_;
+  ::NFMsg::Ident* player_id_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::ObjectRecordBase > record_list_;
 
   mutable int _cached_size_;
@@ -1579,12 +1680,14 @@ class ObjectPropertyInt : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 player_id = 1;
+  // required .NFMsg.Ident player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline ::google::protobuf::int64 player_id() const;
-  inline void set_player_id(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& player_id() const;
+  inline ::NFMsg::Ident* mutable_player_id();
+  inline ::NFMsg::Ident* release_player_id();
+  inline void set_allocated_player_id(::NFMsg::Ident* player_id);
 
   // repeated .NFMsg.PropertyInt property_list = 2;
   inline int property_list_size() const;
@@ -1605,7 +1708,7 @@ class ObjectPropertyInt : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 player_id_;
+  ::NFMsg::Ident* player_id_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyInt > property_list_;
 
   mutable int _cached_size_;
@@ -1674,12 +1777,14 @@ class ObjectPropertyFloat : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 player_id = 1;
+  // required .NFMsg.Ident player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline ::google::protobuf::int64 player_id() const;
-  inline void set_player_id(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& player_id() const;
+  inline ::NFMsg::Ident* mutable_player_id();
+  inline ::NFMsg::Ident* release_player_id();
+  inline void set_allocated_player_id(::NFMsg::Ident* player_id);
 
   // repeated .NFMsg.PropertyFloat property_list = 2;
   inline int property_list_size() const;
@@ -1700,7 +1805,7 @@ class ObjectPropertyFloat : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 player_id_;
+  ::NFMsg::Ident* player_id_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyFloat > property_list_;
 
   mutable int _cached_size_;
@@ -1769,12 +1874,14 @@ class ObjectPropertyString : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 player_id = 1;
+  // required .NFMsg.Ident player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline ::google::protobuf::int64 player_id() const;
-  inline void set_player_id(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& player_id() const;
+  inline ::NFMsg::Ident* mutable_player_id();
+  inline ::NFMsg::Ident* release_player_id();
+  inline void set_allocated_player_id(::NFMsg::Ident* player_id);
 
   // repeated .NFMsg.PropertyString property_list = 2;
   inline int property_list_size() const;
@@ -1795,7 +1902,7 @@ class ObjectPropertyString : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 player_id_;
+  ::NFMsg::Ident* player_id_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyString > property_list_;
 
   mutable int _cached_size_;
@@ -1864,12 +1971,14 @@ class ObjectPropertyObject : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 player_id = 1;
+  // required .NFMsg.Ident player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline ::google::protobuf::int64 player_id() const;
-  inline void set_player_id(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& player_id() const;
+  inline ::NFMsg::Ident* mutable_player_id();
+  inline ::NFMsg::Ident* release_player_id();
+  inline void set_allocated_player_id(::NFMsg::Ident* player_id);
 
   // repeated .NFMsg.PropertyObject property_list = 2;
   inline int property_list_size() const;
@@ -1890,7 +1999,7 @@ class ObjectPropertyObject : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 player_id_;
+  ::NFMsg::Ident* player_id_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyObject > property_list_;
 
   mutable int _cached_size_;
@@ -1959,12 +2068,14 @@ class ObjectRecordInt : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 player_id = 1;
+  // required .NFMsg.Ident player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline ::google::protobuf::int64 player_id() const;
-  inline void set_player_id(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& player_id() const;
+  inline ::NFMsg::Ident* mutable_player_id();
+  inline ::NFMsg::Ident* release_player_id();
+  inline void set_allocated_player_id(::NFMsg::Ident* player_id);
 
   // required bytes record_name = 2;
   inline bool has_record_name() const;
@@ -1999,7 +2110,7 @@ class ObjectRecordInt : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 player_id_;
+  ::NFMsg::Ident* player_id_;
   ::std::string* record_name_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt > property_list_;
 
@@ -2069,12 +2180,14 @@ class ObjectRecordFloat : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 player_id = 1;
+  // required .NFMsg.Ident player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline ::google::protobuf::int64 player_id() const;
-  inline void set_player_id(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& player_id() const;
+  inline ::NFMsg::Ident* mutable_player_id();
+  inline ::NFMsg::Ident* release_player_id();
+  inline void set_allocated_player_id(::NFMsg::Ident* player_id);
 
   // required bytes record_name = 2;
   inline bool has_record_name() const;
@@ -2109,7 +2222,7 @@ class ObjectRecordFloat : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 player_id_;
+  ::NFMsg::Ident* player_id_;
   ::std::string* record_name_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat > property_list_;
 
@@ -2179,12 +2292,14 @@ class ObjectRecordString : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 player_id = 1;
+  // required .NFMsg.Ident player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline ::google::protobuf::int64 player_id() const;
-  inline void set_player_id(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& player_id() const;
+  inline ::NFMsg::Ident* mutable_player_id();
+  inline ::NFMsg::Ident* release_player_id();
+  inline void set_allocated_player_id(::NFMsg::Ident* player_id);
 
   // required bytes record_name = 2;
   inline bool has_record_name() const;
@@ -2219,7 +2334,7 @@ class ObjectRecordString : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 player_id_;
+  ::NFMsg::Ident* player_id_;
   ::std::string* record_name_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString > property_list_;
 
@@ -2289,12 +2404,14 @@ class ObjectRecordObject : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 player_id = 1;
+  // required .NFMsg.Ident player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline ::google::protobuf::int64 player_id() const;
-  inline void set_player_id(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& player_id() const;
+  inline ::NFMsg::Ident* mutable_player_id();
+  inline ::NFMsg::Ident* release_player_id();
+  inline void set_allocated_player_id(::NFMsg::Ident* player_id);
 
   // required bytes record_name = 2;
   inline bool has_record_name() const;
@@ -2329,7 +2446,7 @@ class ObjectRecordObject : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 player_id_;
+  ::NFMsg::Ident* player_id_;
   ::std::string* record_name_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject > property_list_;
 
@@ -2399,12 +2516,14 @@ class ObjectRecordSwap : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 player_id = 1;
+  // required .NFMsg.Ident player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline ::google::protobuf::int64 player_id() const;
-  inline void set_player_id(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& player_id() const;
+  inline ::NFMsg::Ident* mutable_player_id();
+  inline ::NFMsg::Ident* release_player_id();
+  inline void set_allocated_player_id(::NFMsg::Ident* player_id);
 
   // required bytes origin_record_name = 2;
   inline bool has_origin_record_name() const;
@@ -2459,7 +2578,7 @@ class ObjectRecordSwap : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 player_id_;
+  ::NFMsg::Ident* player_id_;
   ::std::string* origin_record_name_;
   ::std::string* target_record_name_;
   ::google::protobuf::int32 row_origin_;
@@ -2531,12 +2650,14 @@ class ObjectRecordAddRow : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 player_id = 1;
+  // required .NFMsg.Ident player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline ::google::protobuf::int64 player_id() const;
-  inline void set_player_id(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& player_id() const;
+  inline ::NFMsg::Ident* mutable_player_id();
+  inline ::NFMsg::Ident* release_player_id();
+  inline void set_allocated_player_id(::NFMsg::Ident* player_id);
 
   // required bytes record_name = 2;
   inline bool has_record_name() const;
@@ -2571,7 +2692,7 @@ class ObjectRecordAddRow : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 player_id_;
+  ::NFMsg::Ident* player_id_;
   ::std::string* record_name_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordAddRowStruct > row_data_;
 
@@ -2641,12 +2762,14 @@ class ObjectRecordRemove : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 player_id = 1;
+  // required .NFMsg.Ident player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline ::google::protobuf::int64 player_id() const;
-  inline void set_player_id(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& player_id() const;
+  inline ::NFMsg::Ident* mutable_player_id();
+  inline ::NFMsg::Ident* release_player_id();
+  inline void set_allocated_player_id(::NFMsg::Ident* player_id);
 
   // required bytes record_name = 2;
   inline bool has_record_name() const;
@@ -2681,7 +2804,7 @@ class ObjectRecordRemove : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 player_id_;
+  ::NFMsg::Ident* player_id_;
   ::std::string* record_name_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > remove_row_;
 
@@ -2751,12 +2874,14 @@ class MsgBase : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 player_id = 1;
+  // required .NFMsg.Ident player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline ::google::protobuf::int64 player_id() const;
-  inline void set_player_id(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& player_id() const;
+  inline ::NFMsg::Ident* mutable_player_id();
+  inline ::NFMsg::Ident* release_player_id();
+  inline void set_allocated_player_id(::NFMsg::Ident* player_id);
 
   // required bytes msg_data = 2;
   inline bool has_msg_data() const;
@@ -2770,16 +2895,16 @@ class MsgBase : public ::google::protobuf::Message {
   inline ::std::string* release_msg_data();
   inline void set_allocated_msg_data(::std::string* msg_data);
 
-  // repeated int64 player_fd_list = 3;
+  // repeated int32 player_fd_list = 3;
   inline int player_fd_list_size() const;
   inline void clear_player_fd_list();
   static const int kPlayerFdListFieldNumber = 3;
-  inline ::google::protobuf::int64 player_fd_list(int index) const;
-  inline void set_player_fd_list(int index, ::google::protobuf::int64 value);
-  inline void add_player_fd_list(::google::protobuf::int64 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
+  inline ::google::protobuf::int32 player_fd_list(int index) const;
+  inline void set_player_fd_list(int index, ::google::protobuf::int32 value);
+  inline void add_player_fd_list(::google::protobuf::int32 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
       player_fd_list() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_player_fd_list();
 
   // @@protoc_insertion_point(class_scope:NFMsg.MsgBase)
@@ -2791,9 +2916,9 @@ class MsgBase : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 player_id_;
+  ::NFMsg::Ident* player_id_;
   ::std::string* msg_data_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int64 > player_fd_list_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > player_fd_list_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
@@ -2988,12 +3113,14 @@ class ReqCommand : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 control_id = 1;
+  // required .NFMsg.Ident control_id = 1;
   inline bool has_control_id() const;
   inline void clear_control_id();
   static const int kControlIdFieldNumber = 1;
-  inline ::google::protobuf::int64 control_id() const;
-  inline void set_control_id(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& control_id() const;
+  inline ::NFMsg::Ident* mutable_control_id();
+  inline ::NFMsg::Ident* release_control_id();
+  inline void set_allocated_control_id(::NFMsg::Ident* control_id);
 
   // required .NFMsg.ReqCommand.EGameCommandType command_id = 2;
   inline bool has_command_id() const;
@@ -3034,7 +3161,7 @@ class ReqCommand : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 control_id_;
+  ::NFMsg::Ident* control_id_;
   ::std::string* command_str_value_;
   ::google::protobuf::int64 command_value_;
   int command_id_;
@@ -3053,6 +3180,54 @@ class ReqCommand : public ::google::protobuf::Message {
 
 
 // ===================================================================
+
+// Ident
+
+// required int64 svrid = 1;
+inline bool Ident::has_svrid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void Ident::set_has_svrid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void Ident::clear_has_svrid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void Ident::clear_svrid() {
+  svrid_ = GOOGLE_LONGLONG(0);
+  clear_has_svrid();
+}
+inline ::google::protobuf::int64 Ident::svrid() const {
+  return svrid_;
+}
+inline void Ident::set_svrid(::google::protobuf::int64 value) {
+  set_has_svrid();
+  svrid_ = value;
+}
+
+// required int64 index = 2;
+inline bool Ident::has_index() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Ident::set_has_index() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Ident::clear_has_index() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void Ident::clear_index() {
+  index_ = GOOGLE_LONGLONG(0);
+  clear_has_index();
+}
+inline ::google::protobuf::int64 Ident::index() const {
+  return index_;
+}
+inline void Ident::set_index(::google::protobuf::int64 value) {
+  set_has_index();
+  index_ = value;
+}
+
+// -------------------------------------------------------------------
 
 // PropertyInt
 
@@ -3126,7 +3301,7 @@ inline void PropertyInt::set_allocated_property_name(::std::string* property_nam
   }
 }
 
-// required int32 data = 2;
+// required int64 data = 2;
 inline bool PropertyInt::has_data() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -3137,13 +3312,13 @@ inline void PropertyInt::clear_has_data() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void PropertyInt::clear_data() {
-  data_ = 0;
+  data_ = GOOGLE_LONGLONG(0);
   clear_has_data();
 }
-inline ::google::protobuf::int32 PropertyInt::data() const {
+inline ::google::protobuf::int64 PropertyInt::data() const {
   return data_;
 }
-inline void PropertyInt::set_data(::google::protobuf::int32 value) {
+inline void PropertyInt::set_data(::google::protobuf::int64 value) {
   set_has_data();
   data_ = value;
 }
@@ -3462,7 +3637,7 @@ inline void PropertyObject::set_allocated_property_name(::std::string* property_
   }
 }
 
-// required int64 data = 2;
+// required .NFMsg.Ident data = 2;
 inline bool PropertyObject::has_data() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -3473,15 +3648,31 @@ inline void PropertyObject::clear_has_data() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void PropertyObject::clear_data() {
-  data_ = GOOGLE_LONGLONG(0);
+  if (data_ != NULL) data_->::NFMsg::Ident::Clear();
   clear_has_data();
 }
-inline ::google::protobuf::int64 PropertyObject::data() const {
+inline const ::NFMsg::Ident& PropertyObject::data() const {
+  return data_ != NULL ? *data_ : *default_instance_->data_;
+}
+inline ::NFMsg::Ident* PropertyObject::mutable_data() {
+  set_has_data();
+  if (data_ == NULL) data_ = new ::NFMsg::Ident;
   return data_;
 }
-inline void PropertyObject::set_data(::google::protobuf::int64 value) {
-  set_has_data();
-  data_ = value;
+inline ::NFMsg::Ident* PropertyObject::release_data() {
+  clear_has_data();
+  ::NFMsg::Ident* temp = data_;
+  data_ = NULL;
+  return temp;
+}
+inline void PropertyObject::set_allocated_data(::NFMsg::Ident* data) {
+  delete data_;
+  data_ = data;
+  if (data) {
+    set_has_data();
+  } else {
+    clear_has_data();
+  }
 }
 
 // -------------------------------------------------------------------
@@ -3532,7 +3723,7 @@ inline void RecordInt::set_col(::google::protobuf::int32 value) {
   col_ = value;
 }
 
-// required int32 data = 3;
+// required int64 data = 3;
 inline bool RecordInt::has_data() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -3543,13 +3734,13 @@ inline void RecordInt::clear_has_data() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void RecordInt::clear_data() {
-  data_ = 0;
+  data_ = GOOGLE_LONGLONG(0);
   clear_has_data();
 }
-inline ::google::protobuf::int32 RecordInt::data() const {
+inline ::google::protobuf::int64 RecordInt::data() const {
   return data_;
 }
-inline void RecordInt::set_data(::google::protobuf::int32 value) {
+inline void RecordInt::set_data(::google::protobuf::int64 value) {
   set_has_data();
   data_ = value;
 }
@@ -3790,7 +3981,7 @@ inline void RecordObject::set_col(::google::protobuf::int32 value) {
   col_ = value;
 }
 
-// required int64 data = 3;
+// required .NFMsg.Ident data = 3;
 inline bool RecordObject::has_data() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -3801,15 +3992,31 @@ inline void RecordObject::clear_has_data() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void RecordObject::clear_data() {
-  data_ = GOOGLE_LONGLONG(0);
+  if (data_ != NULL) data_->::NFMsg::Ident::Clear();
   clear_has_data();
 }
-inline ::google::protobuf::int64 RecordObject::data() const {
+inline const ::NFMsg::Ident& RecordObject::data() const {
+  return data_ != NULL ? *data_ : *default_instance_->data_;
+}
+inline ::NFMsg::Ident* RecordObject::mutable_data() {
+  set_has_data();
+  if (data_ == NULL) data_ = new ::NFMsg::Ident;
   return data_;
 }
-inline void RecordObject::set_data(::google::protobuf::int64 value) {
-  set_has_data();
-  data_ = value;
+inline ::NFMsg::Ident* RecordObject::release_data() {
+  clear_has_data();
+  ::NFMsg::Ident* temp = data_;
+  data_ = NULL;
+  return temp;
+}
+inline void RecordObject::set_allocated_data(::NFMsg::Ident* data) {
+  delete data_;
+  data_ = data;
+  if (data) {
+    set_has_data();
+  } else {
+    clear_has_data();
+  }
 }
 
 // -------------------------------------------------------------------
@@ -4041,7 +4248,7 @@ ObjectRecordBase::mutable_row_struct() {
 
 // ObjectPropertyList
 
-// required int64 player_id = 1;
+// required .NFMsg.Ident player_id = 1;
 inline bool ObjectPropertyList::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -4052,15 +4259,31 @@ inline void ObjectPropertyList::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ObjectPropertyList::clear_player_id() {
-  player_id_ = GOOGLE_LONGLONG(0);
+  if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
   clear_has_player_id();
 }
-inline ::google::protobuf::int64 ObjectPropertyList::player_id() const {
+inline const ::NFMsg::Ident& ObjectPropertyList::player_id() const {
+  return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
+}
+inline ::NFMsg::Ident* ObjectPropertyList::mutable_player_id() {
+  set_has_player_id();
+  if (player_id_ == NULL) player_id_ = new ::NFMsg::Ident;
   return player_id_;
 }
-inline void ObjectPropertyList::set_player_id(::google::protobuf::int64 value) {
-  set_has_player_id();
-  player_id_ = value;
+inline ::NFMsg::Ident* ObjectPropertyList::release_player_id() {
+  clear_has_player_id();
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
+  return temp;
+}
+inline void ObjectPropertyList::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  delete player_id_;
+  player_id_ = player_id;
+  if (player_id) {
+    set_has_player_id();
+  } else {
+    clear_has_player_id();
+  }
 }
 
 // repeated .NFMsg.PropertyInt property_int_list = 2;
@@ -4196,7 +4419,7 @@ MultiObjectPropertyList::mutable_multi_player_property() {
 
 // ObjectRecordList
 
-// required int64 player_id = 1;
+// required .NFMsg.Ident player_id = 1;
 inline bool ObjectRecordList::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -4207,15 +4430,31 @@ inline void ObjectRecordList::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ObjectRecordList::clear_player_id() {
-  player_id_ = GOOGLE_LONGLONG(0);
+  if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
   clear_has_player_id();
 }
-inline ::google::protobuf::int64 ObjectRecordList::player_id() const {
+inline const ::NFMsg::Ident& ObjectRecordList::player_id() const {
+  return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
+}
+inline ::NFMsg::Ident* ObjectRecordList::mutable_player_id() {
+  set_has_player_id();
+  if (player_id_ == NULL) player_id_ = new ::NFMsg::Ident;
   return player_id_;
 }
-inline void ObjectRecordList::set_player_id(::google::protobuf::int64 value) {
-  set_has_player_id();
-  player_id_ = value;
+inline ::NFMsg::Ident* ObjectRecordList::release_player_id() {
+  clear_has_player_id();
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
+  return temp;
+}
+inline void ObjectRecordList::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  delete player_id_;
+  player_id_ = player_id;
+  if (player_id) {
+    set_has_player_id();
+  } else {
+    clear_has_player_id();
+  }
 }
 
 // repeated .NFMsg.ObjectRecordBase record_list = 2;
@@ -4276,7 +4515,7 @@ MultiObjectRecordList::mutable_multi_player_record() {
 
 // ObjectPropertyInt
 
-// required int64 player_id = 1;
+// required .NFMsg.Ident player_id = 1;
 inline bool ObjectPropertyInt::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -4287,15 +4526,31 @@ inline void ObjectPropertyInt::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ObjectPropertyInt::clear_player_id() {
-  player_id_ = GOOGLE_LONGLONG(0);
+  if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
   clear_has_player_id();
 }
-inline ::google::protobuf::int64 ObjectPropertyInt::player_id() const {
+inline const ::NFMsg::Ident& ObjectPropertyInt::player_id() const {
+  return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
+}
+inline ::NFMsg::Ident* ObjectPropertyInt::mutable_player_id() {
+  set_has_player_id();
+  if (player_id_ == NULL) player_id_ = new ::NFMsg::Ident;
   return player_id_;
 }
-inline void ObjectPropertyInt::set_player_id(::google::protobuf::int64 value) {
-  set_has_player_id();
-  player_id_ = value;
+inline ::NFMsg::Ident* ObjectPropertyInt::release_player_id() {
+  clear_has_player_id();
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
+  return temp;
+}
+inline void ObjectPropertyInt::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  delete player_id_;
+  player_id_ = player_id;
+  if (player_id) {
+    set_has_player_id();
+  } else {
+    clear_has_player_id();
+  }
 }
 
 // repeated .NFMsg.PropertyInt property_list = 2;
@@ -4327,7 +4582,7 @@ ObjectPropertyInt::mutable_property_list() {
 
 // ObjectPropertyFloat
 
-// required int64 player_id = 1;
+// required .NFMsg.Ident player_id = 1;
 inline bool ObjectPropertyFloat::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -4338,15 +4593,31 @@ inline void ObjectPropertyFloat::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ObjectPropertyFloat::clear_player_id() {
-  player_id_ = GOOGLE_LONGLONG(0);
+  if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
   clear_has_player_id();
 }
-inline ::google::protobuf::int64 ObjectPropertyFloat::player_id() const {
+inline const ::NFMsg::Ident& ObjectPropertyFloat::player_id() const {
+  return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
+}
+inline ::NFMsg::Ident* ObjectPropertyFloat::mutable_player_id() {
+  set_has_player_id();
+  if (player_id_ == NULL) player_id_ = new ::NFMsg::Ident;
   return player_id_;
 }
-inline void ObjectPropertyFloat::set_player_id(::google::protobuf::int64 value) {
-  set_has_player_id();
-  player_id_ = value;
+inline ::NFMsg::Ident* ObjectPropertyFloat::release_player_id() {
+  clear_has_player_id();
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
+  return temp;
+}
+inline void ObjectPropertyFloat::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  delete player_id_;
+  player_id_ = player_id;
+  if (player_id) {
+    set_has_player_id();
+  } else {
+    clear_has_player_id();
+  }
 }
 
 // repeated .NFMsg.PropertyFloat property_list = 2;
@@ -4378,7 +4649,7 @@ ObjectPropertyFloat::mutable_property_list() {
 
 // ObjectPropertyString
 
-// required int64 player_id = 1;
+// required .NFMsg.Ident player_id = 1;
 inline bool ObjectPropertyString::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -4389,15 +4660,31 @@ inline void ObjectPropertyString::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ObjectPropertyString::clear_player_id() {
-  player_id_ = GOOGLE_LONGLONG(0);
+  if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
   clear_has_player_id();
 }
-inline ::google::protobuf::int64 ObjectPropertyString::player_id() const {
+inline const ::NFMsg::Ident& ObjectPropertyString::player_id() const {
+  return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
+}
+inline ::NFMsg::Ident* ObjectPropertyString::mutable_player_id() {
+  set_has_player_id();
+  if (player_id_ == NULL) player_id_ = new ::NFMsg::Ident;
   return player_id_;
 }
-inline void ObjectPropertyString::set_player_id(::google::protobuf::int64 value) {
-  set_has_player_id();
-  player_id_ = value;
+inline ::NFMsg::Ident* ObjectPropertyString::release_player_id() {
+  clear_has_player_id();
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
+  return temp;
+}
+inline void ObjectPropertyString::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  delete player_id_;
+  player_id_ = player_id;
+  if (player_id) {
+    set_has_player_id();
+  } else {
+    clear_has_player_id();
+  }
 }
 
 // repeated .NFMsg.PropertyString property_list = 2;
@@ -4429,7 +4716,7 @@ ObjectPropertyString::mutable_property_list() {
 
 // ObjectPropertyObject
 
-// required int64 player_id = 1;
+// required .NFMsg.Ident player_id = 1;
 inline bool ObjectPropertyObject::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -4440,15 +4727,31 @@ inline void ObjectPropertyObject::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ObjectPropertyObject::clear_player_id() {
-  player_id_ = GOOGLE_LONGLONG(0);
+  if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
   clear_has_player_id();
 }
-inline ::google::protobuf::int64 ObjectPropertyObject::player_id() const {
+inline const ::NFMsg::Ident& ObjectPropertyObject::player_id() const {
+  return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
+}
+inline ::NFMsg::Ident* ObjectPropertyObject::mutable_player_id() {
+  set_has_player_id();
+  if (player_id_ == NULL) player_id_ = new ::NFMsg::Ident;
   return player_id_;
 }
-inline void ObjectPropertyObject::set_player_id(::google::protobuf::int64 value) {
-  set_has_player_id();
-  player_id_ = value;
+inline ::NFMsg::Ident* ObjectPropertyObject::release_player_id() {
+  clear_has_player_id();
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
+  return temp;
+}
+inline void ObjectPropertyObject::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  delete player_id_;
+  player_id_ = player_id;
+  if (player_id) {
+    set_has_player_id();
+  } else {
+    clear_has_player_id();
+  }
 }
 
 // repeated .NFMsg.PropertyObject property_list = 2;
@@ -4480,7 +4783,7 @@ ObjectPropertyObject::mutable_property_list() {
 
 // ObjectRecordInt
 
-// required int64 player_id = 1;
+// required .NFMsg.Ident player_id = 1;
 inline bool ObjectRecordInt::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -4491,15 +4794,31 @@ inline void ObjectRecordInt::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ObjectRecordInt::clear_player_id() {
-  player_id_ = GOOGLE_LONGLONG(0);
+  if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
   clear_has_player_id();
 }
-inline ::google::protobuf::int64 ObjectRecordInt::player_id() const {
+inline const ::NFMsg::Ident& ObjectRecordInt::player_id() const {
+  return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
+}
+inline ::NFMsg::Ident* ObjectRecordInt::mutable_player_id() {
+  set_has_player_id();
+  if (player_id_ == NULL) player_id_ = new ::NFMsg::Ident;
   return player_id_;
 }
-inline void ObjectRecordInt::set_player_id(::google::protobuf::int64 value) {
-  set_has_player_id();
-  player_id_ = value;
+inline ::NFMsg::Ident* ObjectRecordInt::release_player_id() {
+  clear_has_player_id();
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
+  return temp;
+}
+inline void ObjectRecordInt::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  delete player_id_;
+  player_id_ = player_id;
+  if (player_id) {
+    set_has_player_id();
+  } else {
+    clear_has_player_id();
+  }
 }
 
 // required bytes record_name = 2;
@@ -4601,7 +4920,7 @@ ObjectRecordInt::mutable_property_list() {
 
 // ObjectRecordFloat
 
-// required int64 player_id = 1;
+// required .NFMsg.Ident player_id = 1;
 inline bool ObjectRecordFloat::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -4612,15 +4931,31 @@ inline void ObjectRecordFloat::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ObjectRecordFloat::clear_player_id() {
-  player_id_ = GOOGLE_LONGLONG(0);
+  if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
   clear_has_player_id();
 }
-inline ::google::protobuf::int64 ObjectRecordFloat::player_id() const {
+inline const ::NFMsg::Ident& ObjectRecordFloat::player_id() const {
+  return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
+}
+inline ::NFMsg::Ident* ObjectRecordFloat::mutable_player_id() {
+  set_has_player_id();
+  if (player_id_ == NULL) player_id_ = new ::NFMsg::Ident;
   return player_id_;
 }
-inline void ObjectRecordFloat::set_player_id(::google::protobuf::int64 value) {
-  set_has_player_id();
-  player_id_ = value;
+inline ::NFMsg::Ident* ObjectRecordFloat::release_player_id() {
+  clear_has_player_id();
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
+  return temp;
+}
+inline void ObjectRecordFloat::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  delete player_id_;
+  player_id_ = player_id;
+  if (player_id) {
+    set_has_player_id();
+  } else {
+    clear_has_player_id();
+  }
 }
 
 // required bytes record_name = 2;
@@ -4722,7 +5057,7 @@ ObjectRecordFloat::mutable_property_list() {
 
 // ObjectRecordString
 
-// required int64 player_id = 1;
+// required .NFMsg.Ident player_id = 1;
 inline bool ObjectRecordString::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -4733,15 +5068,31 @@ inline void ObjectRecordString::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ObjectRecordString::clear_player_id() {
-  player_id_ = GOOGLE_LONGLONG(0);
+  if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
   clear_has_player_id();
 }
-inline ::google::protobuf::int64 ObjectRecordString::player_id() const {
+inline const ::NFMsg::Ident& ObjectRecordString::player_id() const {
+  return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
+}
+inline ::NFMsg::Ident* ObjectRecordString::mutable_player_id() {
+  set_has_player_id();
+  if (player_id_ == NULL) player_id_ = new ::NFMsg::Ident;
   return player_id_;
 }
-inline void ObjectRecordString::set_player_id(::google::protobuf::int64 value) {
-  set_has_player_id();
-  player_id_ = value;
+inline ::NFMsg::Ident* ObjectRecordString::release_player_id() {
+  clear_has_player_id();
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
+  return temp;
+}
+inline void ObjectRecordString::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  delete player_id_;
+  player_id_ = player_id;
+  if (player_id) {
+    set_has_player_id();
+  } else {
+    clear_has_player_id();
+  }
 }
 
 // required bytes record_name = 2;
@@ -4843,7 +5194,7 @@ ObjectRecordString::mutable_property_list() {
 
 // ObjectRecordObject
 
-// required int64 player_id = 1;
+// required .NFMsg.Ident player_id = 1;
 inline bool ObjectRecordObject::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -4854,15 +5205,31 @@ inline void ObjectRecordObject::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ObjectRecordObject::clear_player_id() {
-  player_id_ = GOOGLE_LONGLONG(0);
+  if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
   clear_has_player_id();
 }
-inline ::google::protobuf::int64 ObjectRecordObject::player_id() const {
+inline const ::NFMsg::Ident& ObjectRecordObject::player_id() const {
+  return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
+}
+inline ::NFMsg::Ident* ObjectRecordObject::mutable_player_id() {
+  set_has_player_id();
+  if (player_id_ == NULL) player_id_ = new ::NFMsg::Ident;
   return player_id_;
 }
-inline void ObjectRecordObject::set_player_id(::google::protobuf::int64 value) {
-  set_has_player_id();
-  player_id_ = value;
+inline ::NFMsg::Ident* ObjectRecordObject::release_player_id() {
+  clear_has_player_id();
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
+  return temp;
+}
+inline void ObjectRecordObject::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  delete player_id_;
+  player_id_ = player_id;
+  if (player_id) {
+    set_has_player_id();
+  } else {
+    clear_has_player_id();
+  }
 }
 
 // required bytes record_name = 2;
@@ -4964,7 +5331,7 @@ ObjectRecordObject::mutable_property_list() {
 
 // ObjectRecordSwap
 
-// required int64 player_id = 1;
+// required .NFMsg.Ident player_id = 1;
 inline bool ObjectRecordSwap::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -4975,15 +5342,31 @@ inline void ObjectRecordSwap::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ObjectRecordSwap::clear_player_id() {
-  player_id_ = GOOGLE_LONGLONG(0);
+  if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
   clear_has_player_id();
 }
-inline ::google::protobuf::int64 ObjectRecordSwap::player_id() const {
+inline const ::NFMsg::Ident& ObjectRecordSwap::player_id() const {
+  return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
+}
+inline ::NFMsg::Ident* ObjectRecordSwap::mutable_player_id() {
+  set_has_player_id();
+  if (player_id_ == NULL) player_id_ = new ::NFMsg::Ident;
   return player_id_;
 }
-inline void ObjectRecordSwap::set_player_id(::google::protobuf::int64 value) {
-  set_has_player_id();
-  player_id_ = value;
+inline ::NFMsg::Ident* ObjectRecordSwap::release_player_id() {
+  clear_has_player_id();
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
+  return temp;
+}
+inline void ObjectRecordSwap::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  delete player_id_;
+  player_id_ = player_id;
+  if (player_id) {
+    set_has_player_id();
+  } else {
+    clear_has_player_id();
+  }
 }
 
 // required bytes origin_record_name = 2;
@@ -5174,7 +5557,7 @@ inline void ObjectRecordSwap::set_row_target(::google::protobuf::int32 value) {
 
 // ObjectRecordAddRow
 
-// required int64 player_id = 1;
+// required .NFMsg.Ident player_id = 1;
 inline bool ObjectRecordAddRow::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -5185,15 +5568,31 @@ inline void ObjectRecordAddRow::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ObjectRecordAddRow::clear_player_id() {
-  player_id_ = GOOGLE_LONGLONG(0);
+  if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
   clear_has_player_id();
 }
-inline ::google::protobuf::int64 ObjectRecordAddRow::player_id() const {
+inline const ::NFMsg::Ident& ObjectRecordAddRow::player_id() const {
+  return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
+}
+inline ::NFMsg::Ident* ObjectRecordAddRow::mutable_player_id() {
+  set_has_player_id();
+  if (player_id_ == NULL) player_id_ = new ::NFMsg::Ident;
   return player_id_;
 }
-inline void ObjectRecordAddRow::set_player_id(::google::protobuf::int64 value) {
-  set_has_player_id();
-  player_id_ = value;
+inline ::NFMsg::Ident* ObjectRecordAddRow::release_player_id() {
+  clear_has_player_id();
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
+  return temp;
+}
+inline void ObjectRecordAddRow::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  delete player_id_;
+  player_id_ = player_id;
+  if (player_id) {
+    set_has_player_id();
+  } else {
+    clear_has_player_id();
+  }
 }
 
 // required bytes record_name = 2;
@@ -5295,7 +5694,7 @@ ObjectRecordAddRow::mutable_row_data() {
 
 // ObjectRecordRemove
 
-// required int64 player_id = 1;
+// required .NFMsg.Ident player_id = 1;
 inline bool ObjectRecordRemove::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -5306,15 +5705,31 @@ inline void ObjectRecordRemove::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ObjectRecordRemove::clear_player_id() {
-  player_id_ = GOOGLE_LONGLONG(0);
+  if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
   clear_has_player_id();
 }
-inline ::google::protobuf::int64 ObjectRecordRemove::player_id() const {
+inline const ::NFMsg::Ident& ObjectRecordRemove::player_id() const {
+  return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
+}
+inline ::NFMsg::Ident* ObjectRecordRemove::mutable_player_id() {
+  set_has_player_id();
+  if (player_id_ == NULL) player_id_ = new ::NFMsg::Ident;
   return player_id_;
 }
-inline void ObjectRecordRemove::set_player_id(::google::protobuf::int64 value) {
-  set_has_player_id();
-  player_id_ = value;
+inline ::NFMsg::Ident* ObjectRecordRemove::release_player_id() {
+  clear_has_player_id();
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
+  return temp;
+}
+inline void ObjectRecordRemove::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  delete player_id_;
+  player_id_ = player_id;
+  if (player_id) {
+    set_has_player_id();
+  } else {
+    clear_has_player_id();
+  }
 }
 
 // required bytes record_name = 2;
@@ -5416,7 +5831,7 @@ ObjectRecordRemove::mutable_remove_row() {
 
 // MsgBase
 
-// required int64 player_id = 1;
+// required .NFMsg.Ident player_id = 1;
 inline bool MsgBase::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -5427,15 +5842,31 @@ inline void MsgBase::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void MsgBase::clear_player_id() {
-  player_id_ = GOOGLE_LONGLONG(0);
+  if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
   clear_has_player_id();
 }
-inline ::google::protobuf::int64 MsgBase::player_id() const {
+inline const ::NFMsg::Ident& MsgBase::player_id() const {
+  return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
+}
+inline ::NFMsg::Ident* MsgBase::mutable_player_id() {
+  set_has_player_id();
+  if (player_id_ == NULL) player_id_ = new ::NFMsg::Ident;
   return player_id_;
 }
-inline void MsgBase::set_player_id(::google::protobuf::int64 value) {
-  set_has_player_id();
-  player_id_ = value;
+inline ::NFMsg::Ident* MsgBase::release_player_id() {
+  clear_has_player_id();
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
+  return temp;
+}
+inline void MsgBase::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  delete player_id_;
+  player_id_ = player_id;
+  if (player_id) {
+    set_has_player_id();
+  } else {
+    clear_has_player_id();
+  }
 }
 
 // required bytes msg_data = 2;
@@ -5508,27 +5939,27 @@ inline void MsgBase::set_allocated_msg_data(::std::string* msg_data) {
   }
 }
 
-// repeated int64 player_fd_list = 3;
+// repeated int32 player_fd_list = 3;
 inline int MsgBase::player_fd_list_size() const {
   return player_fd_list_.size();
 }
 inline void MsgBase::clear_player_fd_list() {
   player_fd_list_.Clear();
 }
-inline ::google::protobuf::int64 MsgBase::player_fd_list(int index) const {
+inline ::google::protobuf::int32 MsgBase::player_fd_list(int index) const {
   return player_fd_list_.Get(index);
 }
-inline void MsgBase::set_player_fd_list(int index, ::google::protobuf::int64 value) {
+inline void MsgBase::set_player_fd_list(int index, ::google::protobuf::int32 value) {
   player_fd_list_.Set(index, value);
 }
-inline void MsgBase::add_player_fd_list(::google::protobuf::int64 value) {
+inline void MsgBase::add_player_fd_list(::google::protobuf::int32 value) {
   player_fd_list_.Add(value);
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
 MsgBase::player_fd_list() const {
   return player_fd_list_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
 MsgBase::mutable_player_fd_list() {
   return &player_fd_list_;
 }
@@ -5607,7 +6038,7 @@ inline void Position::set_z(float value) {
 
 // ReqCommand
 
-// required int64 control_id = 1;
+// required .NFMsg.Ident control_id = 1;
 inline bool ReqCommand::has_control_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -5618,15 +6049,31 @@ inline void ReqCommand::clear_has_control_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ReqCommand::clear_control_id() {
-  control_id_ = GOOGLE_LONGLONG(0);
+  if (control_id_ != NULL) control_id_->::NFMsg::Ident::Clear();
   clear_has_control_id();
 }
-inline ::google::protobuf::int64 ReqCommand::control_id() const {
+inline const ::NFMsg::Ident& ReqCommand::control_id() const {
+  return control_id_ != NULL ? *control_id_ : *default_instance_->control_id_;
+}
+inline ::NFMsg::Ident* ReqCommand::mutable_control_id() {
+  set_has_control_id();
+  if (control_id_ == NULL) control_id_ = new ::NFMsg::Ident;
   return control_id_;
 }
-inline void ReqCommand::set_control_id(::google::protobuf::int64 value) {
-  set_has_control_id();
-  control_id_ = value;
+inline ::NFMsg::Ident* ReqCommand::release_control_id() {
+  clear_has_control_id();
+  ::NFMsg::Ident* temp = control_id_;
+  control_id_ = NULL;
+  return temp;
+}
+inline void ReqCommand::set_allocated_control_id(::NFMsg::Ident* control_id) {
+  delete control_id_;
+  control_id_ = control_id;
+  if (control_id) {
+    set_has_control_id();
+  } else {
+    clear_has_control_id();
+  }
 }
 
 // required .NFMsg.ReqCommand.EGameCommandType command_id = 2;
