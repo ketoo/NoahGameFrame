@@ -224,10 +224,10 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
         return 0;
     }
 
-    NFIDENTID ident = var.NumberVal<NFINT64>( 0 );
-    int nType = var.NumberVal<int>( 1 );
-    int nTargetScene = var.NumberVal<int>( 2 );
-    int nTargetGroupID = var.NumberVal<int>( 3 );
+    NFIDENTID ident = var.Object( 0 );
+    int nType = var.Int( 1 );
+    int nTargetScene = var.Int( 2 );
+    int nTargetGroupID = var.Int( 3 );
     int nOldSceneID = m_pKernelModule->GetPropertyInt( self, "SceneID" );
 
     char szSceneID[MAX_PATH] = {0};
@@ -296,7 +296,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
         return 0;
     }
 
-    xSceneResult.Set(3, nTargetGroupID);//spicial
+    xSceneResult.Set(3, NFINT64(nTargetGroupID));//spicial
     m_pEventProcessModule->DoEvent( self, NFED_ON_OBJECT_ENTER_SCENE_RESULT, xSceneResult );
 
     return 0;

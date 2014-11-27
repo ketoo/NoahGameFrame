@@ -65,7 +65,7 @@ public:
         }
 
         TDATA_TYPE nType;
-        boost::variant<bool, int, float, double, std::string, NFINT64, void*> variantData;
+        boost::variant<NFINT64, float, double, std::string, NFIDENTID, void*> variantData;
     };
 
     NFIDataList()
@@ -234,14 +234,14 @@ public:
     virtual bool Split(const char* str, const char* strSplit) = 0;
 
     // 添加数据
-    virtual bool Add(const int value) = 0;
+    virtual bool Add(const NFINT64 value) = 0;
     virtual bool Add(const float value) = 0;
     virtual bool Add(const double value) = 0;
     virtual bool Add(const char* value) = 0;
     virtual bool Add(const NFIDENTID& value) = 0;
     virtual bool Add(const void* value) = 0;
 
-    virtual bool Set(const int index, const int value) = 0;
+    virtual bool Set(const int index, const NFINT64 value) = 0;
     virtual bool Set(const int index, const float value) = 0;
     virtual bool Set(const int index, const double value) = 0;
     virtual bool Set(const int index, const char* value) = 0;
@@ -249,14 +249,14 @@ public:
     virtual bool Set(const int index, const void* value) = 0;
 
     // 获得数据
-    virtual int Int(const int index) const = 0;
+    virtual NFINT64 Int(const int index) const = 0;
     virtual float Float(const int index) const = 0;
     virtual double Double(const int index) const = 0;
     virtual const std::string& String(const int index) const = 0;
     virtual NFIDENTID Object(const int index) const = 0;
     virtual void* Pointer(const int index) const = 0;
 
-    bool AddInt(const int value)
+    bool AddInt(const NFINT64 value)
     {
         return Add(value);
     }
@@ -281,7 +281,7 @@ public:
         return Add(value);
     }
 
-    bool SetInt(const int index, const int value)
+    bool SetInt(const int index, const NFINT64 value)
     {
         return Set(index, value);
     }
@@ -436,42 +436,42 @@ public:
 
     inline NFIDataList& operator<<(const char value)
     {
-        Add((int)value);
+        Add((NFINT64)value);
         return *this;
     }
     inline NFIDataList& operator<<(const unsigned char value)
     {
-        Add((int)value);
+        Add((NFINT64)value);
         return *this;
     }
     inline NFIDataList& operator<<(const short value)
     {
-        Add((int)value);
+        Add((NFINT64)value);
         return *this;
     }
     inline NFIDataList& operator<<(const unsigned short value)
     {
-        Add((int)value);
+        Add((NFINT64)value);
         return *this;
     }
     inline NFIDataList& operator<<(const int value)
     {
-        Add((int)value);
+        Add((NFINT64)value);
         return *this;
     }
     inline NFIDataList& operator<<(const unsigned int value)
     {
-        Add((int)value);
+        Add((NFINT64)value);
         return *this;
     }
     inline NFIDataList& operator<<(const long value)
     {
-        Add((int)value);
+        Add((NFINT64)value);
         return *this;
     }
     inline NFIDataList& operator<<(const unsigned long value)
     {
-        Add((int)value);
+        Add((NFINT64)value);
         return *this;
     }
     inline NFIDataList& operator<<(const float value)
@@ -502,7 +502,7 @@ public:
     //}
     inline NFIDataList& operator<<(const int64_t& value)
     {
-        Add(NFIDENTID(value));
+        Add(NFINT64(value));
         return *this;
     }
 

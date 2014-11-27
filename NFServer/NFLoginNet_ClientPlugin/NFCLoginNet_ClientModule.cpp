@@ -173,7 +173,7 @@ void NFCLoginNet_ClientModule::UnRegister()
 
 int NFCLoginNet_ClientModule::OnSelectServerResultProcess(const NFIPacket& msg)
 {
-    int64_t nPlayerID = 0;	
+    NFIDENTID nPlayerID = 0;	
     NFMsg::AckConnectWorldResult xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -239,7 +239,7 @@ int NFCLoginNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF_NET_
 
 int NFCLoginNet_ClientModule::OnWorldInfoProcess( const NFIPacket& msg )
 {
-	int64_t nPlayerID = 0;	
+	NFIDENTID nPlayerID = 0;	
 	NFMsg::ServerInfoReportList xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
