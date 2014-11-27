@@ -34,11 +34,11 @@ public:
 
     virtual ~NFCContainerGroupInfo()
     {
-        if (m_pGridModule)
-        {
-            delete m_pGridModule;
-            m_pGridModule = NULL;
-        }
+//         if (m_pGridModule)
+//         {
+//             delete m_pGridModule;
+//             m_pGridModule = NULL;
+//         }
     }
 
     NFIGridModule* GetGridModule()

@@ -38,7 +38,11 @@ public:
 
     virtual NFIDENTID CreateGUID();
 
+    virtual NFINT64 GetIdentID();
+    virtual void SetIdentID(NFINT64 nID);
 private:
+
+    NFINT64 mnIdent;
     UUIDModule::UUID* m_pUUID;
 	NFIKernelModule* m_pKernelModule;
 };
