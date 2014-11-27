@@ -26,12 +26,12 @@ public:
     virtual void SetValue(const NFIDataList::TData& TData);
     virtual void SetValue(const NFIProperty* pProperty);
 
-    virtual bool SetInt(int value);
-    virtual bool SetFloat(float value);
-    virtual bool SetDouble(double value);
+    virtual bool SetInt(const NFINT64 value);
+    virtual bool SetFloat(const float value);
+    virtual bool SetDouble(const double value);
     virtual bool SetString(const std::string& value);
     virtual bool SetObject(const NFIDENTID& value);
-    virtual bool SetPointer(void* value);
+    virtual bool SetPointer(const void* value);
 
     virtual const TDATA_TYPE GetType() const;
     virtual const bool GeUsed() const;
@@ -49,7 +49,7 @@ public:
     virtual void SetPrivate(bool bPrivate);
     virtual void SetScriptFunction(const std::string& strScriptFunction);
 
-    virtual int GetInt() const;
+    virtual NFINT64 GetInt() const;
     virtual float GetFloat() const;
     virtual double GetDouble() const;
     virtual const std::string& GetString() const;
