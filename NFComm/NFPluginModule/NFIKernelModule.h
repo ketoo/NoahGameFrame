@@ -113,9 +113,6 @@ public:
    
     /////////////////////////////////////////////////////////////////
 
-    virtual NFINT32 GetIdentID() = 0;
-    virtual void SetIdentID(NFINT32 nID) = 0;
-
     virtual int Command(const NFIDataList& var) = 0;
 
     virtual int Type(const NFIDENTID& self) = 0;
