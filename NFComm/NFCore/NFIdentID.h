@@ -49,27 +49,32 @@ struct NFIDENTID
 
     bool IsNull() const
     {
-        return 0 == nData64 && 0 == nSvrID;
+        return (0 == nData64) && (0 == nSvrID);
     }
 
     bool operator == (const NFIDENTID& id) const
     {
-        return this->nData64 == id.nData64 && this->nSvrID == id.nSvrID;
+        return (this->nData64 == id.nData64) && (this->nSvrID == id.nSvrID);
     }
 
     bool operator != (const NFIDENTID& id) const
     {
-        return this->nData64 != id.nData64 || this->nSvrID != id.nSvrID;
+        return (this->nData64 != id.nData64) || (this->nSvrID != id.nSvrID);
     }
 
     bool operator < (const NFIDENTID& id) const
     {
-        return this->nSvrID < id.nSvrID;
+        return (this->nData64 < id.nData64) && (this->nSvrID < id.nSvrID); 
     }
 
     std::string ToString()
     {
-        return boost::lexical_cast<std::string>(this->nSvrID) + boost::lexical_cast<std::string>(this->nData64);
+        return boost::lexical_cast<std::string>(this->nSvrID) + "-" + boost::lexical_cast<std::string>(this->nData64);
+    }
+
+    bool FormString(const char* str)
+    {
+        //return boost::lexical_cast<std::string>(this->nSvrID) + "-" + boost::lexical_cast<std::string>(this->nData64);
     }
 };
 //#pragma pack(pop)
