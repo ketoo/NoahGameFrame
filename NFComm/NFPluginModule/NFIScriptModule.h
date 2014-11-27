@@ -620,7 +620,7 @@ static TDATA_TYPE NFVarList_Type(NFIDataList* pVarList, const int index)
     return TDATA_UNKNOWN;
 }
 
-static bool NFVarList_AddInt(NFIDataList* pVarList, const int value)
+static bool NFVarList_AddInt(NFIDataList* pVarList, const NFINT64 value)
 {
     if (pVarList)
     {
@@ -660,7 +660,7 @@ static bool NFVarList_AddObject(NFIDataList* pVarList, const NFIDENTID& value)
     return false;
 }
 
-static bool NFVarList_SetInt(NFIDataList* pVarList, const int index, const int value)
+static bool NFVarList_SetInt(NFIDataList* pVarList, const int index, const NFINT64 value)
 {
     if (pVarList)
     {
