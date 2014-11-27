@@ -86,27 +86,6 @@ public:
         return mID.nData64;
     }
 
-public:
-    NFINT32 GetIdent()
-    {
-        return mID.nIdent;
-    }
-
-    NFINT32 GetnSerial()
-    {
-        return mID.nSerial;
-    }
-
-    void SetIdent( NFINT32 var)
-    {
-        mID.nIdent = var;
-    }
-
-    void SetnSerial( NFINT32 var)
-    {
-        mID.nSerial = var;
-    }
-
 private:
     NFIDENTID mID;
 };
@@ -145,7 +124,7 @@ public:
         return mVar.Type(index);
     }
 
-    bool AddInt(const int value)
+    bool AddInt(const NFINT64 value)
     {
         return mVar.Add(value);
     }
@@ -165,7 +144,7 @@ public:
         return mVar.Add(value.ObjectVal());
     }
 
-    bool SetInt(const int index, const int value)
+    bool SetInt(const int index, const NFINT64 value)
     {
         return mVar.Set(index, value);
     }
@@ -185,7 +164,8 @@ public:
         return mVar.Set(index, value.ObjectVal());
     }
 
-    int Int(const int index) const    {
+    NFINT64 Int(const int index) const   
+    {
         return mVar.Int(index);
     }
 
