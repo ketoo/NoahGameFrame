@@ -120,7 +120,7 @@ bool NFCObject::FindProperty(const std::string& strPropertyName)
     return false;
 }
 
-bool NFCObject::SetPropertyInt(const std::string& strPropertyName, const int nValue)
+bool NFCObject::SetPropertyInt(const std::string& strPropertyName, const NFINT64 nValue)
 {
     NFIProperty* pProperty = GetPropertyManager()->GetElement(strPropertyName);
     if (pProperty)
@@ -175,7 +175,7 @@ bool NFCObject::SetPropertyObject(const std::string& strPropertyName, const NFID
     return false;
 }
 
-int NFCObject::GetPropertyInt(const std::string& strPropertyName)
+NFINT64 NFCObject::GetPropertyInt(const std::string& strPropertyName)
 {
     NFIProperty* pProperty = GetPropertyManager()->GetElement(strPropertyName);
     if (pProperty)
@@ -243,7 +243,7 @@ bool NFCObject::FindRecord(const std::string& strRecordName)
     return false;
 }
 
-bool NFCObject::SetRecordInt(const std::string& strRecordName, const int nRow, const int nCol, const int nValue)
+bool NFCObject::SetRecordInt(const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue)
 {
     NFIRecord* pRecord = GetRecordManager()->GetElement(strRecordName);
     if (pRecord)
@@ -254,7 +254,7 @@ bool NFCObject::SetRecordInt(const std::string& strRecordName, const int nRow, c
     return false;
 }
 
-bool NFCObject::SetRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag, const int value)
+bool NFCObject::SetRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFINT64 value)
 {
     NFIRecord* pRecord = GetRecordManager()->GetElement(strRecordName);
     if (pRecord)
@@ -354,7 +354,7 @@ bool NFCObject::SetRecordObject(const std::string& strRecordName, const int nRow
     return false;
 }
 
-int NFCObject::GetRecordInt(const std::string& strRecordName, const int nRow, const int nCol)
+NFINT64 NFCObject::GetRecordInt(const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIRecord* pRecord = GetRecordManager()->GetElement(strRecordName);
     if (pRecord)
@@ -365,7 +365,7 @@ int NFCObject::GetRecordInt(const std::string& strRecordName, const int nRow, co
     return 0;
 }
 
-int NFCObject::GetRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag)
+NFINT64 NFCObject::GetRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag)
 {
     NFIRecord* pRecord = GetRecordManager()->GetElement(strRecordName);
     if (pRecord)

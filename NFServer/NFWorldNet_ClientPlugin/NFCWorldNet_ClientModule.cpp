@@ -144,7 +144,7 @@ void NFCWorldNet_ClientModule::RefreshWorldInfo()
 
 int NFCWorldNet_ClientModule::OnSelectServerProcess(const NFIPacket& msg)
 {
-	int64_t nPlayerID = 0;
+	NFIDENTID nPlayerID = 0;
 	NFMsg::ReqConnectWorld xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
@@ -193,7 +193,7 @@ int NFCWorldNet_ClientModule::OnSelectServerResultsEvent(const NFIDENTID& object
 
 int NFCWorldNet_ClientModule::OnKickClientProcess(const NFIPacket& msg)
 {
-	int64_t nPlayerID = 0;
+	NFIDENTID nPlayerID = 0;
 	NFMsg::ReqKickFromWorld xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{

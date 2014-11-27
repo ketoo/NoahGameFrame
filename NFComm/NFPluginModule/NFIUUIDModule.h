@@ -15,8 +15,7 @@ class NFIUUIDModule
     : public NFILogicModule
 {
 public:
-    virtual int64_t CreateGUID() = 0;
-    virtual int64_t CreateGUID(const std::string& strName) = 0;
+    virtual NFIDENTID CreateGUID() = 0;
 
 };
 

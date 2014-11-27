@@ -12,6 +12,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 
 class NFCSLGBuildingModule : public NFISLGBuildingModule
 {
@@ -36,6 +37,7 @@ public:
 private:
 	NFIKernelModule* m_pKernelModule;
 	NFILogModule* m_pLogModule;
+	NFIUUIDModule* m_pUUIDModule;
 };
 
 #endif // !__NFC_SLG_BUILDING_MODULE_H__
