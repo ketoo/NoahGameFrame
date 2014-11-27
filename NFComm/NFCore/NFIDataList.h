@@ -314,7 +314,7 @@ public:
         {
             case TDATA_INT:
             {
-                if (0 != boost::get<int>(var.variantData))
+                if (0 != boost::get<NFINT64>(var.variantData))
                 {
                     bChanged = true;
                 }
@@ -331,7 +331,7 @@ public:
             break;
             case TDATA_DOUBLE:
             {
-                float fValue = boost::get<float>(var.variantData);
+                float fValue = boost::get<double>(var.variantData);
                 if (fValue > 0.001f  || fValue < -0.001f)
                 {
                     bChanged = true;
@@ -349,7 +349,7 @@ public:
             break;
             case TDATA_OBJECT:
             {
-                if (0 != boost::get<NFINT64>(var.variantData))
+                if (NFIDENTID() != boost::get<NFIDENTID>(var.variantData))
                 {
                     bChanged = true;
                 }
