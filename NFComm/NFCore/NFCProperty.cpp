@@ -151,7 +151,7 @@ void NFCProperty::SetScriptFunction(const std::string& strScriptFunction)
     //msScriptFunction = strScriptFunction;
 }
 
-int NFCProperty::GetInt() const
+NFINT64 NFCProperty::GetInt() const
 {
     if (!m_pTData.get())
     {
@@ -160,7 +160,7 @@ int NFCProperty::GetInt() const
 
     if (TDATA_INT == m_pTData->nType)
     {
-        return boost::get<int>(m_pTData->variantData);
+        return boost::get<NFINT64>(m_pTData->variantData);
     }
 
     return 0;
@@ -266,7 +266,7 @@ int NFCProperty::OnEventHandler(const NFIDataList& oldVar, const NFIDataList& ne
     return 0;
 }
 
-bool NFCProperty::SetInt(int value)
+bool NFCProperty::SetInt(const NFINT64 value)
 {
     if (eType != TDATA_INT)
     {
@@ -287,7 +287,7 @@ bool NFCProperty::SetInt(int value)
 
         m_pTData = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
         m_pTData->nType = TDATA_INT;
-        m_pTData->variantData = (int)0;
+        m_pTData->variantData = (NFINT64)0;
     }
 
     if (TData.variantData == m_pTData->variantData)
@@ -313,7 +313,7 @@ bool NFCProperty::SetInt(int value)
     return false;
 }
 
-bool NFCProperty::SetFloat(float value)
+bool NFCProperty::SetFloat(const float value)
 {
     if (eType != TDATA_FLOAT)
     {
@@ -360,7 +360,7 @@ bool NFCProperty::SetFloat(float value)
     return false;
 }
 
-bool NFCProperty::SetDouble(double value)
+bool NFCProperty::SetDouble(const double value)
 {
     if (eType != TDATA_DOUBLE)
     {
@@ -503,7 +503,7 @@ bool NFCProperty::SetObject(const NFIDENTID& value)
     return false;
 }
 
-bool NFCProperty::SetPointer(void* value)
+bool NFCProperty::SetPointer(const void* value)
 {
     //if (eType != TDATA_POINTER)
     //{
