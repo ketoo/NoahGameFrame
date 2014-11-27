@@ -88,6 +88,7 @@ private:
 
 NFCUUIDModule::NFCUUIDModule(NFIPluginManager* p)
 {
+	m_pKernelModule = NULL;
     pPluginManager = p;
 }
 
@@ -116,11 +117,11 @@ bool NFCUUIDModule::BeforeShut()
 
 bool NFCUUIDModule::AfterInit()
 {
-    NFIKernelModule* pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
-    assert(NULL != pKernelModule);
+    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
+    assert(NULL != m_pKernelModule);
 
     // 初始化uuid
-    NFINT32 nID = pKernelModule->GetIdentID();
+    NFINT32 nID = m_pKernelModule->GetIdentID();
     m_pUUID->set_machine(nID);
     m_pUUID->set_epoch(uint64_t(1367505795100));
 
@@ -132,14 +133,11 @@ bool NFCUUIDModule::Execute(const float fLasFrametime, const float fStartedTime)
     return true;
 }
 
-int64_t NFCUUIDModule::CreateGUID()
+NFIDENTID NFCUUIDModule::CreateGUID()
 {
-    return m_pUUID->generate();
-}
-
-int64_t NFCUUIDModule::CreateGUID(const std::string& strName)
-{
-    boost::crc_optimal<64, 0x04C11DB7, 0, 0, false, false> crc;
-    crc.process_bytes(strName.data(), strName.length());
-    return crc.checksum();
+	NFIDENTID xID;
+	xID.nSvrID = (NFINT64)(m_pKernelModule->GetIdentID());
+	xID.nData64 = m_pUUID->generate();
+	
+    return xID;
 }
