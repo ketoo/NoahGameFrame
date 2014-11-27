@@ -47,9 +47,6 @@ public:
 
     virtual bool RemoveHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName);
 
-    virtual void SetIdentID(NFINT32 nID);
-    virtual NFINT32 GetIdentID();
-
     virtual int Command(const NFIDataList& var);
 
     virtual bool IsContainer(const NFIDENTID& self);
@@ -227,8 +224,6 @@ private:
     std::vector<float> mvRandom;
     int mnRandomPos;
 
-    NFINT32 mnIdentID;
-    NFIDENTID mnIdentIndex;
     NFIDENTID mnCurExeObject;
     float fLastTotal;
 
