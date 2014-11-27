@@ -15,9 +15,11 @@ bool NFCSLGBuildingModule::AfterInit()
 {
 	m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
 	m_pLogModule = dynamic_cast<NFILogModule*>( pPluginManager->FindModule( "NFCLogModule" ) );
+	m_pUUIDModule = dynamic_cast<NFIUUIDModule*>( pPluginManager->FindModule( "NFCUUIDModule" ) );
 	
 	assert( NULL != m_pKernelModule );
 	assert( NULL != m_pLogModule );
+	assert( NULL != m_pUUIDModule );
 
     return true;
 }
@@ -67,7 +69,7 @@ int NFCSLGBuildingModule::AddBuilding(const NFIDENTID& self, const std::string& 
 
     NFCDataList xDataList;
     xDataList << strBuilding;
-    xDataList << NFIDENTID::CreateGUID();
+    xDataList << m_pUUIDModule->CreateGUID();
     xDataList << 0; // state
     xDataList << int(0); // x
     xDataList << int(0); // y
