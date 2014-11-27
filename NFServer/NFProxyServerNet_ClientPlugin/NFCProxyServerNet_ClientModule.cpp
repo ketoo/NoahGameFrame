@@ -242,8 +242,8 @@ bool NFCProxyServerNet_ClientModule::AfterInit()
     const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
     m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyServerNet_ClientModule::OnRecivePack, &NFCProxyServerNet_ClientModule::OnSocketEvent);
-    int nRet = m_pNet->Initialization(strServerIP.c_str(), nServerPort);
-    if (nRet < 0)
+    mnSocketFD = m_pNet->Initialization(strServerIP.c_str(), nServerPort);
+    if (mnSocketFD < 0)
     {
         assert(0);
     }
