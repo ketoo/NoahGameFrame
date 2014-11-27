@@ -16,7 +16,8 @@ class NFIUUIDModule
 {
 public:
     virtual NFIDENTID CreateGUID() = 0;
-
+    virtual NFINT64 GetIdentID() = 0;
+    virtual void SetIdentID(NFINT64 nID) = 0;
 };
 
 #endif // !_NFI_UUID_MODULE_H_
