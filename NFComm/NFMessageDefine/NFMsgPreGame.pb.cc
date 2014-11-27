@@ -126,8 +126,9 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ServerInfoReportList));
   AckEventResult_descriptor_ = file->message_type(2);
-  static const int AckEventResult_offsets_[2] = {
+  static const int AckEventResult_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckEventResult, event_code_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckEventResult, event_object_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckEventResult, event_arg_),
   };
   AckEventResult_reflection_ =
@@ -539,50 +540,51 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
     "ur_count\030\006 \002(\005\022)\n\014server_state\030\007 \002(\0162\023.N"
     "FMsg.EServerState\"D\n\024ServerInfoReportLis"
     "t\022,\n\013server_list\030\001 \003(\0132\027.NFMsg.ServerInf"
-    "oReport\"N\n\016AckEventResult\022)\n\nevent_code\030"
-    "\001 \002(\0162\025.NFMsg.EGameEventCode\022\021\n\tevent_ar"
-    "g\030\002 \001(\003\"\325\001\n\017ReqAccountLogin\022\017\n\007account\030\002"
-    " \002(\014\022\020\n\010password\030\003 \002(\014\022\025\n\rsecurity_code\030"
-    "\004 \002(\014\022\020\n\010signBuff\030\005 \002(\014\022\025\n\rclientVersion"
-    "\030\006 \002(\005\022\021\n\tloginMode\030\007 \002(\005\022\020\n\010clientIP\030\010 "
-    "\002(\005\022\021\n\tclientMAC\030\t \002(\003\022\023\n\013device_info\030\n "
-    "\002(\014\022\022\n\nextra_info\030\013 \002(\014\"7\n\020ReqAccountLog"
-    "out\022\017\n\007account\030\002 \002(\014\022\022\n\nextra_info\030\003 \002(\014"
-    "\"f\n\nServerInfo\022\021\n\tserver_id\030\001 \002(\005\022\014\n\004nam"
-    "e\030\002 \002(\014\022\022\n\nwait_count\030\003 \002(\005\022#\n\006status\030\004 "
-    "\002(\0162\023.NFMsg.EServerState\"7\n\rReqServerLis"
-    "t\022&\n\004type\030\001 \002(\0162\030.NFMsg.ReqServerListTyp"
-    "e\"X\n\rAckServerList\022&\n\004type\030\001 \002(\0162\030.NFMsg"
-    ".ReqServerListType\022\037\n\004info\030\002 \003(\0132\021.NFMsg"
-    ".ServerInfo\"Y\n\017ReqConnectWorld\022\020\n\010world_"
-    "id\030\001 \002(\005\022\017\n\007account\030\002 \001(\014\022\021\n\tsender_ip\030\003"
-    " \001(\005\022\020\n\010login_id\030\004 \001(\005\"\230\001\n\025AckConnectWor"
-    "ldResult\022\020\n\010world_id\030\001 \002(\005\022\021\n\tsender_ip\030"
-    "\002 \002(\005\022\020\n\010login_id\030\003 \002(\005\022\017\n\007account\030\004 \002(\014"
-    "\022\020\n\010world_ip\030\005 \002(\014\022\022\n\nworld_port\030\006 \002(\005\022\021"
-    "\n\tworld_key\030\007 \002(\014\"#\n\017ReqSelectServer\022\020\n\010"
-    "world_id\030\001 \002(\005\"5\n\020ReqKickFromWorld\022\020\n\010wo"
-    "rld_id\030\001 \002(\005\022\017\n\007account\030\002 \002(\014\"/\n\013ReqRole"
-    "List\022\017\n\007game_id\030\001 \002(\005\022\017\n\007account\030\002 \002(\014\"\341"
-    "\001\n\014RoleLiteInfo\022\016\n\006career\030\001 \002(\005\022\013\n\003sex\030\002"
-    " \002(\005\022\014\n\004race\030\003 \002(\005\022\021\n\tnoob_name\030\004 \002(\014\022\017\n"
-    "\007game_id\030\005 \002(\005\022\022\n\nrole_level\030\006 \002(\005\022\023\n\013de"
-    "lete_time\030\007 \002(\005\022\020\n\010reg_time\030\010 \002(\005\022\031\n\021las"
-    "t_offline_time\030\t \002(\005\022\027\n\017last_offline_ip\030"
-    "\n \002(\005\022\023\n\013view_record\030\013 \002(\014\"=\n\023AckRoleLit"
-    "eInfoList\022&\n\tchar_data\030\001 \003(\0132\023.NFMsg.Rol"
-    "eLiteInfo\"o\n\rReqCreateRole\022\017\n\007account\030\001 "
-    "\002(\014\022\016\n\006career\030\002 \002(\005\022\013\n\003sex\030\003 \002(\005\022\014\n\004race"
-    "\030\004 \002(\005\022\021\n\tnoob_name\030\005 \002(\014\022\017\n\007game_id\030\006 \002"
-    "(\005\"\?\n\rReqDeleteRole\022\017\n\007account\030\001 \002(\014\022\014\n\004"
-    "name\030\002 \002(\014\022\017\n\007game_id\030\003 \002(\005\"@\n\016ReqRecove"
-    "rRole\022\017\n\007account\030\001 \002(\014\022\014\n\004name\030\002 \002(\014\022\017\n\007"
-    "game_id\030\003 \002(\005\" \n\017ServerHeartBeat\022\r\n\005coun"
-    "t\030\001 \001(\005*Z\n\014EServerState\022\r\n\tEST_CRASH\020\000\022\016"
-    "\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST_FIRE"
-    "\020\003\022\017\n\013EST_MAINTEN\020\004*@\n\021ReqServerListType"
-    "\022\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GAMES_ER"
-    "VER\020\001", 2045);
+    "oReport\"r\n\016AckEventResult\022)\n\nevent_code\030"
+    "\001 \002(\0162\025.NFMsg.EGameEventCode\022\"\n\014event_ob"
+    "ject\030\002 \001(\0132\014.NFMsg.Ident\022\021\n\tevent_arg\030\003 "
+    "\001(\003\"\325\001\n\017ReqAccountLogin\022\017\n\007account\030\002 \002(\014"
+    "\022\020\n\010password\030\003 \002(\014\022\025\n\rsecurity_code\030\004 \002("
+    "\014\022\020\n\010signBuff\030\005 \002(\014\022\025\n\rclientVersion\030\006 \002"
+    "(\005\022\021\n\tloginMode\030\007 \002(\005\022\020\n\010clientIP\030\010 \002(\005\022"
+    "\021\n\tclientMAC\030\t \002(\003\022\023\n\013device_info\030\n \002(\014\022"
+    "\022\n\nextra_info\030\013 \002(\014\"7\n\020ReqAccountLogout\022"
+    "\017\n\007account\030\002 \002(\014\022\022\n\nextra_info\030\003 \002(\014\"f\n\n"
+    "ServerInfo\022\021\n\tserver_id\030\001 \002(\005\022\014\n\004name\030\002 "
+    "\002(\014\022\022\n\nwait_count\030\003 \002(\005\022#\n\006status\030\004 \002(\0162"
+    "\023.NFMsg.EServerState\"7\n\rReqServerList\022&\n"
+    "\004type\030\001 \002(\0162\030.NFMsg.ReqServerListType\"X\n"
+    "\rAckServerList\022&\n\004type\030\001 \002(\0162\030.NFMsg.Req"
+    "ServerListType\022\037\n\004info\030\002 \003(\0132\021.NFMsg.Ser"
+    "verInfo\"Y\n\017ReqConnectWorld\022\020\n\010world_id\030\001"
+    " \002(\005\022\017\n\007account\030\002 \001(\014\022\021\n\tsender_ip\030\003 \001(\005"
+    "\022\020\n\010login_id\030\004 \001(\005\"\230\001\n\025AckConnectWorldRe"
+    "sult\022\020\n\010world_id\030\001 \002(\005\022\021\n\tsender_ip\030\002 \002("
+    "\005\022\020\n\010login_id\030\003 \002(\005\022\017\n\007account\030\004 \002(\014\022\020\n\010"
+    "world_ip\030\005 \002(\014\022\022\n\nworld_port\030\006 \002(\005\022\021\n\two"
+    "rld_key\030\007 \002(\014\"#\n\017ReqSelectServer\022\020\n\010worl"
+    "d_id\030\001 \002(\005\"5\n\020ReqKickFromWorld\022\020\n\010world_"
+    "id\030\001 \002(\005\022\017\n\007account\030\002 \002(\014\"/\n\013ReqRoleList"
+    "\022\017\n\007game_id\030\001 \002(\005\022\017\n\007account\030\002 \002(\014\"\341\001\n\014R"
+    "oleLiteInfo\022\016\n\006career\030\001 \002(\005\022\013\n\003sex\030\002 \002(\005"
+    "\022\014\n\004race\030\003 \002(\005\022\021\n\tnoob_name\030\004 \002(\014\022\017\n\007gam"
+    "e_id\030\005 \002(\005\022\022\n\nrole_level\030\006 \002(\005\022\023\n\013delete"
+    "_time\030\007 \002(\005\022\020\n\010reg_time\030\010 \002(\005\022\031\n\021last_of"
+    "fline_time\030\t \002(\005\022\027\n\017last_offline_ip\030\n \002("
+    "\005\022\023\n\013view_record\030\013 \002(\014\"=\n\023AckRoleLiteInf"
+    "oList\022&\n\tchar_data\030\001 \003(\0132\023.NFMsg.RoleLit"
+    "eInfo\"o\n\rReqCreateRole\022\017\n\007account\030\001 \002(\014\022"
+    "\016\n\006career\030\002 \002(\005\022\013\n\003sex\030\003 \002(\005\022\014\n\004race\030\004 \002"
+    "(\005\022\021\n\tnoob_name\030\005 \002(\014\022\017\n\007game_id\030\006 \002(\005\"\?"
+    "\n\rReqDeleteRole\022\017\n\007account\030\001 \002(\014\022\014\n\004name"
+    "\030\002 \002(\014\022\017\n\007game_id\030\003 \002(\005\"@\n\016ReqRecoverRol"
+    "e\022\017\n\007account\030\001 \002(\014\022\014\n\004name\030\002 \002(\014\022\017\n\007game"
+    "_id\030\003 \002(\005\" \n\017ServerHeartBeat\022\r\n\005count\030\001 "
+    "\001(\005*Z\n\014EServerState\022\r\n\tEST_CRASH\020\000\022\016\n\nES"
+    "T_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST_FIRE\020\003\022\017"
+    "\n\013EST_MAINTEN\020\004*@\n\021ReqServerListType\022\025\n\021"
+    "RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GAMES_ERVER\020"
+    "\001", 2081);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgPreGame.proto", &protobuf_RegisterTypes);
   ServerInfoReport::default_instance_ = new ServerInfoReport();
@@ -1345,6 +1347,7 @@ void ServerInfoReportList::Swap(ServerInfoReportList* other) {
 
 #ifndef _MSC_VER
 const int AckEventResult::kEventCodeFieldNumber;
+const int AckEventResult::kEventObjectFieldNumber;
 const int AckEventResult::kEventArgFieldNumber;
 #endif  // !_MSC_VER
 
@@ -1354,6 +1357,7 @@ AckEventResult::AckEventResult()
 }
 
 void AckEventResult::InitAsDefaultInstance() {
+  event_object_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 AckEventResult::AckEventResult(const AckEventResult& from)
@@ -1365,6 +1369,7 @@ AckEventResult::AckEventResult(const AckEventResult& from)
 void AckEventResult::SharedCtor() {
   _cached_size_ = 0;
   event_code_ = 0;
+  event_object_ = NULL;
   event_arg_ = GOOGLE_LONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -1375,6 +1380,7 @@ AckEventResult::~AckEventResult() {
 
 void AckEventResult::SharedDtor() {
   if (this != default_instance_) {
+    delete event_object_;
   }
 }
 
@@ -1402,6 +1408,9 @@ AckEventResult* AckEventResult::New() const {
 void AckEventResult::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     event_code_ = 0;
+    if (has_event_object()) {
+      if (event_object_ != NULL) event_object_->::NFMsg::Ident::Clear();
+    }
     event_arg_ = GOOGLE_LONGLONG(0);
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -1430,12 +1439,26 @@ bool AckEventResult::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_event_arg;
+        if (input->ExpectTag(18)) goto parse_event_object;
         break;
       }
 
-      // optional int64 event_arg = 2;
+      // optional .NFMsg.Ident event_object = 2;
       case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_event_object:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_event_object()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(24)) goto parse_event_arg;
+        break;
+      }
+
+      // optional int64 event_arg = 3;
+      case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_event_arg:
@@ -1474,9 +1497,15 @@ void AckEventResult::SerializeWithCachedSizes(
       1, this->event_code(), output);
   }
 
-  // optional int64 event_arg = 2;
+  // optional .NFMsg.Ident event_object = 2;
+  if (has_event_object()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->event_object(), output);
+  }
+
+  // optional int64 event_arg = 3;
   if (has_event_arg()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->event_arg(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(3, this->event_arg(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -1493,9 +1522,16 @@ void AckEventResult::SerializeWithCachedSizes(
       1, this->event_code(), target);
   }
 
-  // optional int64 event_arg = 2;
+  // optional .NFMsg.Ident event_object = 2;
+  if (has_event_object()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->event_object(), target);
+  }
+
+  // optional int64 event_arg = 3;
   if (has_event_arg()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->event_arg(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(3, this->event_arg(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -1515,7 +1551,14 @@ int AckEventResult::ByteSize() const {
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->event_code());
     }
 
-    // optional int64 event_arg = 2;
+    // optional .NFMsg.Ident event_object = 2;
+    if (has_event_object()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->event_object());
+    }
+
+    // optional int64 event_arg = 3;
     if (has_event_arg()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int64Size(
@@ -1552,6 +1595,9 @@ void AckEventResult::MergeFrom(const AckEventResult& from) {
     if (from.has_event_code()) {
       set_event_code(from.event_code());
     }
+    if (from.has_event_object()) {
+      mutable_event_object()->::NFMsg::Ident::MergeFrom(from.event_object());
+    }
     if (from.has_event_arg()) {
       set_event_arg(from.event_arg());
     }
@@ -1574,12 +1620,16 @@ void AckEventResult::CopyFrom(const AckEventResult& from) {
 bool AckEventResult::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
+  if (has_event_object()) {
+    if (!this->event_object().IsInitialized()) return false;
+  }
   return true;
 }
 
 void AckEventResult::Swap(AckEventResult* other) {
   if (other != this) {
     std::swap(event_code_, other->event_code_);
+    std::swap(event_object_, other->event_object_);
     std::swap(event_arg_, other->event_arg_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
