@@ -64,12 +64,14 @@ bool NFCKernelModule::Init()
     m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-    m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
+	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
+	m_pUUIDModule = dynamic_cast<NFIUUIDModule*>(pPluginManager->FindModule("NFCUUIDModule"));
 
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pElementInfoModule);
-    assert(NULL != m_pLogModule);
+	assert(NULL != m_pLogModule);
+	assert(NULL != m_pUUIDModule);
 
     return true;
 }
@@ -196,7 +198,7 @@ NFIObject* NFCKernelModule::CreateObject(const NFIDENTID& self, const int nConta
     //默认为1分组，0则是所有分组都看得见,-1则是容器
     if (ident.IsNull())
     {
-        ident = NFIDENTID::CreateGUID();
+        ident = m_pUUIDModule->CreateGUID();
     }
 
     if (GetElement(ident))
@@ -485,7 +487,7 @@ bool NFCKernelModule::FindProperty(const NFIDENTID& self, const std::string& str
     return false;
 }
 
-bool NFCKernelModule::SetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName, const int nValue)
+bool NFCKernelModule::SetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName, const NFINT64 nValue)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
@@ -551,7 +553,7 @@ bool NFCKernelModule::SetPropertyObject(const NFIDENTID& self, const std::string
     return false;
 }
 
-int NFCKernelModule::GetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName)
+NFINT64 NFCKernelModule::GetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
@@ -642,7 +644,7 @@ bool NFCKernelModule::ClearRecord(const NFIDENTID& self, const std::string& strR
     return false;
 }
 
-bool NFCKernelModule::SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const int nValue)
+bool NFCKernelModule::SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
@@ -662,7 +664,7 @@ bool NFCKernelModule::SetRecordInt(const NFIDENTID& self, const std::string& str
     return false;
 }
 
-bool NFCKernelModule::SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const int value)
+bool NFCKernelModule::SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFINT64 value)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
@@ -842,7 +844,7 @@ bool NFCKernelModule::SetRecordObject(const NFIDENTID& self, const std::string& 
     return false;
 }
 
-int NFCKernelModule::GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+NFINT64 NFCKernelModule::GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
@@ -855,7 +857,7 @@ int NFCKernelModule::GetRecordInt(const NFIDENTID& self, const std::string& strR
     return 0;
 }
 
-int NFCKernelModule::GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag)
+NFINT64 NFCKernelModule::GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag)
 {
     NFIObject* pObject = GetElement(self);
     if (pObject)
@@ -1340,19 +1342,6 @@ bool NFCKernelModule::GetRangObjectList(const float fX, const float fY, const fl
     return false;
 }
 
-NFIDENTID NFCKernelModule::NewIdentID()
-{
-    // nSerial = time[013 09 12 ]+ serverID[99]+[]
-    // the nSerial will be changed when the nIdent is fulled a day is passed.
-    mnIdentIndex.nIdent++;
-    //if (mnIdentIndex.nIdent < 0)
-    //{
-    //    mnIdentIndex.nSerial *= 10;
-    //    mnIdentIndex.nIdent = 0;
-    //}
-    return mnIdentIndex;
-}
-
 bool NFCKernelModule::LogStack()
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
@@ -1491,10 +1480,10 @@ int NFCKernelModule::Command(const NFIDataList& var)
             const std::string& strObjectSerial = var.String(2);
 
             NFIDENTID ident;
-            ident.nIdent = atoi(strObjectIdent.c_str());
-            ident.nSerial = atoi(strObjectSerial.c_str());
-
-            LogInfo(ident);
+//             ident.nIdent = atoi(strObjectIdent.c_str());
+//             ident.nSerial = atoi(strObjectSerial.c_str());
+// 
+//             LogInfo(ident);
 
         }
         else if ("queryObjectProperty" == strCommand)
@@ -1671,11 +1660,6 @@ bool NFCKernelModule::AddRecord(const NFIDENTID& self, const std::string& strRec
     return false;
 }
 
-void NFCKernelModule::SetIdentSerialID(int nSerialID)
-{
-    mnIdentIndex = NFIDENTID(0, (NFINT16)nSerialID, 0);
-}
-
 void NFCKernelModule::SetIdentID(NFINT32 nID)
 {
     mnIdentID = nID;
@@ -1772,7 +1756,7 @@ void NFCKernelModule::Random(int nStart, int nEnd, int nCount, NFIDataList& valu
     {
         float fRanValue = mvRandom.at(i);
         int nValue = (nEnd - nStart) * fRanValue + nStart;
-        valueList.Add((NFINT32)nValue);
+        valueList.Add((NFINT64)nValue);
     }
 
     mnRandomPos += nCount;
