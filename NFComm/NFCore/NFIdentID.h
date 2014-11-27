@@ -64,7 +64,8 @@ struct NFIDENTID
 
     bool operator < (const NFIDENTID& id) const
     {
-        return (this->nData64 < id.nData64) && (this->nSvrID < id.nSvrID); 
+        //return (this->nData64 < id.nData64) && (this->nSvrID < id.nSvrID); 
+        return (this->nSvrID < id.nSvrID) || (!(id.nSvrID < this->nSvrID) && (this->nData64 < id.nData64));
     }
 
     std::string ToString()
