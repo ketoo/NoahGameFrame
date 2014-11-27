@@ -9,9 +9,6 @@
 #ifndef _NF_LIMIT_H_
 #define _NF_LIMIT_H_
 
-#include "NFMsgBase.pb.h"
-#include "NFComm/NFCore/NFIdentID.h"
-
 #pragma pack(push,1)
 
 //定义极限值

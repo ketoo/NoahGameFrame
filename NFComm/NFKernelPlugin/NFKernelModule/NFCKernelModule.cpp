@@ -23,8 +23,6 @@ NFCKernelModule::NFCKernelModule(NFIPluginManager* p)
 {
     fLastTotal = 0.0f;
     pPluginManager = p;
-    mnIdentID = 0;
-
 
     InitRandom();
 }
@@ -1658,16 +1656,6 @@ bool NFCKernelModule::AddRecord(const NFIDENTID& self, const std::string& strRec
     }
 
     return false;
-}
-
-void NFCKernelModule::SetIdentID(NFINT32 nID)
-{
-    mnIdentID = nID;
-}
-
-NFINT32 NFCKernelModule::GetIdentID()
-{
-    return mnIdentID;
 }
 
 NFIDENTID NFCKernelModule::GetGridID(const float fX, const float fY, const float fZ)
