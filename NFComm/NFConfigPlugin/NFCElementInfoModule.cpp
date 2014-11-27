@@ -157,7 +157,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
                 {
                     NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 }
-                var.variantData = (int)atoi(pstrConfigValue);
+                var.variantData = boost::lexical_cast<NFINT64>(pstrConfigValue);
             }
             break;
             case TDATA_FLOAT:
@@ -187,7 +187,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
                 {
                     NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 }
-                var.variantData = (NFINT64)0;
+                var.variantData = NFIDENTID(0);
             }
 
             break;
@@ -214,7 +214,7 @@ bool NFCElementInfoModule::Save()
     return true;
 }
 
-int NFCElementInfoModule::GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName)
+NFINT64 NFCElementInfoModule::GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName)
 {
     NFIProperty* pProperty = GetProperty(strConfigName, strPropertyName);
     if (pProperty)
