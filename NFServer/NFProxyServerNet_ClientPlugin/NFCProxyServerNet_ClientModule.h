@@ -88,6 +88,8 @@ public:
 
     virtual GameData* GetGameData(int nGameID);
     virtual GameDataMap& GetGameDataMap() { return mGameDataMap; }
+    virtual int GetFD(){return mnSocketFD;}
+
 protected:
 
 	int OnRecivePack(const NFIPacket& msg);
