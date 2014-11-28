@@ -15,13 +15,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <boost/lexical_cast.hpp>
-
+#include <boost/multiprecision/cpp_int.hpp>
 //#pragma pack(push, 1)
 
 struct NFIDENTID
 {
 	NFINT64 nSvrID;
 	NFINT64 nData64;
+    //boost::multiprecision::int128_t xID;
+
 
     NFIDENTID()
     {
@@ -64,8 +66,20 @@ struct NFIDENTID
 
     bool operator < (const NFIDENTID& id) const
     {
+        if (this->nSvrID < id.nSvrID) 
+        {
+            return true;
+        }
+        else if (this->nSvrID == id.nSvrID) 
+        {
+            return this->nData64 < id.nData64;
+        }
+        else
+        {
+            return false;
+        }
         //return (this->nData64 < id.nData64) && (this->nSvrID < id.nSvrID); 
-        return (this->nSvrID < id.nSvrID) || (!(id.nSvrID < this->nSvrID) && (this->nData64 < id.nData64));
+        //return (this->nSvrID < id.nSvrID) || ((id.nSvrID >= this->nSvrID) && (this->nData64 < id.nData64));
     }
 
     std::string ToString()
