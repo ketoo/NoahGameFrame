@@ -219,23 +219,12 @@ void NFCGameServerNet_ServerModule::OnClientConnected( const int nAddress )
 void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& msg )
  {
     //在进入游戏之前nPlayerID为其在网关的FD
-    NFIDENTID nPlayerID = 0;	
+    NFIDENTID nPlayerID = 0;
     NFMsg::ReqEnterGameServer xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
         return;
     }
-
-    //server_id
-    //gate_id
-
-    if (mRoleState.GetElement(xMsg.name()))
-    {
-        //角色已经在创建中
-        return;
-    }
-
-    mRoleState.AddElement(xMsg.name(), new NFIDENTID(nPlayerID));
 
     //////////////////////////////////////////////////////////////////////////
     //拉取数据
@@ -262,15 +251,16 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
     }
 
     //id和fd,gateid绑定
+    //这里每次创建新的GUID，因为正式的时候可以从数据库拉出GUID赋值
+
     NFIDENTID ident = m_pUUIDModule->CreateGUID();
 
     BaseData* pDataBase = new BaseData();
     mRoleBaseData.AddElement(ident, pDataBase);
-    mRoleFDData.AddElement(nPlayerID, new NFIDENTID(ident));
-
     pDataBase->nGateID = nGateID;
     pDataBase->nFD = nPlayerID.nData64;
 
+    //默认1号场景
     int nSceneID = 1;
     NFCDataList var;
     var << "Name" << xMsg.name();
@@ -312,11 +302,7 @@ void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess( const NFIPacket& ms
         return;
     }
 
-    NFIDENTID* pIdent = mRoleFDData.RemoveElement(nPlayerID);
-    if (pIdent)
-    {
-        m_pKernelModule->DestroyObject(*pIdent);
-    }
+    m_pKernelModule->DestroyObject(nPlayerID);
 
 }
 
@@ -1296,12 +1282,7 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent( const NFIDENTID& self, co
     if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
     {
         //删除在线标志
-        const std::string& strRole = m_pKernelModule->GetPropertyString( self, "Name" );
-        NFIDENTID* pIdent = mRoleState.RemoveElement(strRole);
-        if (pIdent)
-        {
-            delete pIdent;
-        }
+ 
         //////////////////////////////////////////////////////////////////////////
 
         int nObjectContainerID = m_pKernelModule->GetPropertyInt( self, "SceneID" );
@@ -1830,11 +1811,9 @@ void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
     }
 
     //bc
-    NFIDENTID* pIdent = mRoleFDData.GetElement(nPlayerID);
-    if (pIdent)
-    {
-        int nContianerID = m_pKernelModule->GetPropertyInt(*pIdent, "SceneID");
-        int nGroupID = m_pKernelModule->GetPropertyInt(*pIdent, "GroupID");
+
+        int nContianerID = m_pKernelModule->GetPropertyInt(nPlayerID, "SceneID");
+        int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, "GroupID");
         NFCDataList xDataList;
         m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
         for (int i = 0; i < xDataList.GetCount(); ++i)
@@ -1845,7 +1824,6 @@ void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
                 SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SKILL_OBJECTX, xMsg, msg.GetFd(), pData->nFD);
             }
         }
-    }
 }
 
 void NFCGameServerNet_ServerModule::OnClienMove( const NFIPacket& msg )
@@ -1857,9 +1835,7 @@ void NFCGameServerNet_ServerModule::OnClienMove( const NFIPacket& msg )
         return;
     }
 
-    NFIDENTID* pIdent = mRoleFDData.GetElement(nPlayerID);
-    if (pIdent)
-    {
+
         m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "X", xMsg.target_pos(0).x());
         m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Y", xMsg.target_pos(0).x());
         m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Z", xMsg.target_pos(0).z());
@@ -1878,7 +1854,6 @@ void NFCGameServerNet_ServerModule::OnClienMove( const NFIPacket& msg )
                 SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_MOVE, xMsg, msg.GetFd(), pData->nFD);
             }
         }
-    }
 }
 
 void NFCGameServerNet_ServerModule::OnClienMoveImmune( const NFIPacket& msg )
@@ -1890,9 +1865,7 @@ void NFCGameServerNet_ServerModule::OnClienMoveImmune( const NFIPacket& msg )
         return;
     }
 
-    NFIDENTID* pIdent = mRoleFDData.GetElement(nPlayerID);
-    if (pIdent)
-    {
+
         m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "X", xMsg.target_pos(0).x());
         m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Y", xMsg.target_pos(0).x());
         m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Z", xMsg.target_pos(0).z());
@@ -1911,7 +1884,6 @@ void NFCGameServerNet_ServerModule::OnClienMoveImmune( const NFIPacket& msg )
                 SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_MOVE_IMMUNE, xMsg, msg.GetFd(), pData->nFD);
             }
         }
-    }
 }
 
 void NFCGameServerNet_ServerModule::OnClienCommand( const NFIPacket& msg )
@@ -2057,9 +2029,7 @@ void NFCGameServerNet_ServerModule::OnClienGMProcess( const NFIPacket& msg )
         return;
     }
 
-    NFIDENTID* pIdent = mRoleFDData.GetElement(nPlayerID);
-    NFIDENTID* pControl = mRoleFDData.GetElement(PBToNF(xMsg.control_id()));
-    if (!pIdent || !pControl || nPlayerID != PBToNF(xMsg.control_id()))
+    if (nPlayerID != PBToNF(xMsg.control_id()))
     {
         return;
     }
@@ -2070,7 +2040,7 @@ void NFCGameServerNet_ServerModule::OnClienGMProcess( const NFIPacket& msg )
         {
             const std::string& strPropertyName = xMsg.command_str_value();
             const int nValue = xMsg.command_value();
-            m_pKernelModule->SetPropertyInt(*pControl, strPropertyName, nValue);
+            m_pKernelModule->SetPropertyInt(nPlayerID, strPropertyName, nValue);
         }
         break;
     case NFMsg::ReqCommand_EGameCommandType_EGCT_CREATE_OBJECT:

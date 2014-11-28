@@ -169,11 +169,6 @@ private:
         std::map<NFIDENTID, int> xRoleInfo;
     };
 
-private:
-    //gateid,data
-    NFMap<int, ServerData> mProxyMap;
-protected:
-
     //要管理当前所有的对象所在的actor,gateid,fd等
     struct BaseData 
     {
@@ -189,15 +184,13 @@ protected:
         int nFD;
     };
 
-
 private:
-    //<角色id,角色基础信息>
+    //<角色id,角色网关基础信息>//其实可以在object系统中被代替
     NFMap<NFIDENTID, BaseData> mRoleBaseData;
-    //<角色fd(在网关),角色id>
-    NFMap<NFIDENTID, NFIDENTID> mRoleFDData;
-    //临时保存角色是否已经等待创建的状态<角色名，fd>
-    NFMap<std::string, NFIDENTID> mRoleState;
+    //gateid,data
+    NFMap<int, ServerData> mProxyMap;
 
+    //////////////////////////////////////////////////////////////////////////
     NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFILogModule* m_pLogModule;
