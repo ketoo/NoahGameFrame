@@ -42,7 +42,7 @@ public:
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
 
-    virtual NFMap<int, NFMsg::ServerInfoReport>* GetWorldMap();
+    virtual NFMapEx<int, NFMsg::ServerInfoReport>* GetWorldMap();
 
 protected:
 	int OnRecivePack(const NFIPacket& msg);
@@ -70,7 +70,7 @@ private:
 	int mnSocketFD;
     float mfLastHBTime;
 private:
-    NFMap<int, NFMsg::ServerInfoReport> mWorldMap;
+    NFMapEx<int, NFMsg::ServerInfoReport> mWorldMap;
 
 	NFILoginLogicModule* m_pLoginLogicModule;
 	NFILoginNet_ServerModule* m_pLoginNet_ServerModule;

@@ -121,9 +121,9 @@ public:
 
     virtual bool ExistContainer(const int nContainerIndex) = 0;
 
-    virtual NFIObject* GetObject(const NFIDENTID& ident) = 0;
+    virtual std::shared_ptr<NFIObject> GetObject(const NFIDENTID& ident) = 0;
 
-    virtual NFIObject* CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg) = 0;
+    virtual std::shared_ptr<NFIObject> CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg) = 0;
 
     virtual bool DestroyObject(const NFIDENTID& self) = 0;
 
@@ -146,7 +146,7 @@ public:
     virtual const std::string& GetPropertyString(const NFIDENTID& self, const std::string& strPropertyName) = 0;
     virtual NFIDENTID GetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName) = 0;
 
-    virtual NFIRecord* FindRecord(const NFIDENTID& self, const std::string& strRecordName) = 0;
+    virtual std::shared_ptr<NFIRecord> FindRecord(const NFIDENTID& self, const std::string& strRecordName) = 0;
 
     virtual bool ClearRecord(const NFIDENTID& self, const std::string& strRecordName) = 0;
 

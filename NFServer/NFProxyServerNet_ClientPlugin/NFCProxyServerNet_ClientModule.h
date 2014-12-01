@@ -128,7 +128,7 @@ private:
 private:
     int mnSocketFD;
     float mfLastHBTime;
-    NFMap<std::string, ConnectData> mWantToConnectMap;
+    NFMapEx<std::string, ConnectData> mWantToConnectMap;
     GameDataMap mGameDataMap;
 private:
 

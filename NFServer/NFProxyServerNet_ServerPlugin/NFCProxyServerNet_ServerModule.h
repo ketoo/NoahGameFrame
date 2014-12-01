@@ -84,10 +84,10 @@ protected:
     //int mnGameContainerID;
 
     //// 世界服务器发过来，谁想登录此服务器的那个对象，包含帐号和KEY信息，KEY验证后删掉
-    //NFMap<std::string, ConnectData> mWantConnectionMap;
+    //NFMapEx<std::string, ConnectData> mWantConnectionMap;
 
     //// Game容器
-    //NFMap<int, ServerData> mnGameDataMap;
+    //NFMapEx<int, ServerData> mnGameDataMap;
 
 protected:
     NFIProxyServerNet_ClientModule* m_pProxyServerNet_ClientModule;

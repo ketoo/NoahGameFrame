@@ -140,11 +140,11 @@ public:
 
         if (!strSerializationName.empty())
         {
-            NFIComponentManager* pComponentManager = pLogicClassModule->GetClassComponentManager(strClassName);
-            if (pComponentManager)
+            std::shared_ptr<NFIComponentManager> pComponentManager = pLogicClassModule->GetClassComponentManager(strClassName);
+            if (pComponentManager.get())
             {
-                NFIComponent* pComponent = pComponentManager->First();
-                while (pComponent && pComponent->Enable())
+                std::shared_ptr<NFIComponent> pComponent = pComponentManager->First();
+                while (pComponent.get() && pComponent->Enable())
                 {
                     DoScript(self, pComponent->ComponentName(), strSerializationName, NFCScriptVarList(var));
 
@@ -430,8 +430,8 @@ public:
 
     bool CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFCScriptVarList& arg)
     {
-        NFIObject* pObject = m_pKernelModule->CreateObject(self, nContainerID, nGroupID, strClassName, strConfigIndex, arg.GetVar());
-        if (pObject)
+        std::shared_ptr<NFIObject> pObject = m_pKernelModule->CreateObject(self, nContainerID, nGroupID, strClassName, strConfigIndex, arg.GetVar());
+        if (pObject.get())
         {
             return true;
         }
@@ -537,10 +537,10 @@ public:
 
     bool AddRow(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& var)
     {
-        NFIRecord* pRecord = m_pKernelModule->FindRecord(self, strRecordName);
-        if ( pRecord )
+        std::shared_ptr<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, strRecordName);
+        if ( pRecord.get() )
         {
-            if (pRecord->AddRow(-1,var) >= 0)
+            if (pRecord->AddRow(-1, var) >= 0)
             {
                 return true;
             }

@@ -15,6 +15,7 @@
 #include "NFComm\NFCore\NFIdentID.h"
 #include "NFComm\NFPluginModule\NFIElementInfoModule.h"
 #include "NFComm\NFPluginModule\NFIKernelModule.h"
+#include "NFComm\NFCore\NFMap.h"
 
 class NFCScriptName
 {
