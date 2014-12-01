@@ -19,7 +19,7 @@ class NFILoginNet_ClientModule
 
 public:
 
-    virtual NFMap<int, NFMsg::ServerInfoReport>* GetWorldMap() = 0;
+    virtual NFMapEx<int, NFMsg::ServerInfoReport>* GetWorldMap() = 0;
 };
 
 #endif

@@ -21,14 +21,14 @@ class NFILogicClass
 public:
     virtual ~NFILogicClass(){}
 
-    virtual NFIPropertyManager* GetPropertyManager() = 0;
+    virtual std::shared_ptr<NFIPropertyManager> GetPropertyManager() = 0;
 
-    virtual NFIRecordManager* GetRecordManager() = 0;
+    virtual std::shared_ptr<NFIRecordManager> GetRecordManager() = 0;
 
-    virtual NFIComponentManager* GetComponentManager() = 0;
+    virtual std::shared_ptr<NFIComponentManager> GetComponentManager() = 0;
 
-    virtual void SetParent(NFILogicClass* pClass) = 0;
-    virtual NFILogicClass* GetParent() = 0;
+    virtual void SetParent(std::shared_ptr<NFILogicClass> pClass) = 0;
+    virtual std::shared_ptr<NFILogicClass> GetParent() = 0;
     virtual void SetTypeName(const char* strType) = 0;
     virtual const std::string& GetTypeName() = 0;
     virtual const std::string& GetClassName() = 0;
@@ -40,7 +40,7 @@ public:
 
 class NFILogicClassModule
     : public NFILogicModule,
-      public NFMap<std::string, NFILogicClass>
+      public NFMapEx<std::string, NFILogicClass>
 {
 public:
     virtual ~NFILogicClassModule() {}
@@ -48,11 +48,11 @@ public:
 	virtual bool Save() = 0;
 	virtual bool Clear() = 0;
 
-    virtual NFIPropertyManager* GetClassPropertyManager(const std::string& strClassName) = 0;
+    virtual std::shared_ptr<NFIPropertyManager> GetClassPropertyManager(const std::string& strClassName) = 0;
 
-    virtual NFIRecordManager* GetClassRecordManager(const std::string& strClassName) = 0;
+    virtual std::shared_ptr<NFIRecordManager> GetClassRecordManager(const std::string& strClassName) = 0;
 
-    virtual NFIComponentManager* GetClassComponentManager(const std::string& strClassName) = 0;
+    virtual std::shared_ptr<NFIComponentManager> GetClassComponentManager(const std::string& strClassName) = 0;
 
 };
 

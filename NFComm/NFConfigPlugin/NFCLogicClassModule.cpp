@@ -16,7 +16,7 @@
 
 bool NFCLogicClassModule::Init()
 {
-    m_pElementInfoModule = dynamic_cast<NFCElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
+    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
 
     assert(NULL != m_pElementInfoModule);
 
@@ -27,17 +27,6 @@ bool NFCLogicClassModule::Init()
 
 bool NFCLogicClassModule::Shut()
 {
-    NFILogicClass* pLogicClass = First();
-    while (pLogicClass)
-    {
-        pLogicClass->ClearAll();
-
-        delete pLogicClass;
-        pLogicClass = NULL;
-
-        pLogicClass = Next();
-    }
-
     ClearAll();
 
     return true;
@@ -53,16 +42,6 @@ NFCLogicClassModule::NFCLogicClassModule(NFIPluginManager* p)
 
 NFCLogicClassModule::~NFCLogicClassModule()
 {
-    NFILogicClass* pLogicClass = First();
-    while (NULL != pLogicClass)
-    {
-        pLogicClass->ClearAll();
-        delete pLogicClass;
-        pLogicClass = NULL;
-
-        pLogicClass = Next();
-    }
-
     ClearAll();
 }
 
@@ -102,7 +81,7 @@ TDATA_TYPE NFCLogicClassModule::ComputerType(const char* pstrTypeName, NFIDataLi
     return TDATA_UNKNOWN;
 }
 
-bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NFCLogicClass* pClass)
+bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, std::shared_ptr<NFILogicClass> pClass)
 {
     for (rapidxml::xml_node<>* pPropertyNode = pPropertyRootNode->first_node(); pPropertyNode; pPropertyNode = pPropertyNode->next_sibling())
     {
@@ -166,7 +145,7 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
     return true;
 }
 
-bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCLogicClass* pClass)
+bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, std::shared_ptr<NFILogicClass> pClass)
 {
     for (rapidxml::xml_node<>* pRecordNode = pRecordRootNode->first_node(); pRecordNode;  pRecordNode = pRecordNode->next_sibling())
     {
@@ -277,7 +256,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCL
     return true;
 }
 
-bool NFCLogicClassModule::AddComponents(rapidxml::xml_node<>* pComponentRootNode, NFCLogicClass* pClass)
+bool NFCLogicClassModule::AddComponents(rapidxml::xml_node<>* pComponentRootNode, std::shared_ptr<NFILogicClass> pClass)
 {
     for (rapidxml::xml_node<>* pComponentNode = pComponentRootNode->first_node(); pComponentNode; pComponentNode = pComponentNode->next_sibling())
     {
@@ -304,7 +283,7 @@ bool NFCLogicClassModule::AddComponents(rapidxml::xml_node<>* pComponentRootNode
     return true;
 }
 
-bool NFCLogicClassModule::AddClassInclude(const char* pstrClassFilePath, NFCLogicClass* pClass)
+bool NFCLogicClassModule::AddClassInclude(const char* pstrClassFilePath, std::shared_ptr<NFILogicClass> pClass)
 {
     if (pClass->Find(pstrClassFilePath))
     {
@@ -360,14 +339,14 @@ bool NFCLogicClassModule::AddClassInclude(const char* pstrClassFilePath, NFCLogi
     return true;
 }
 
-bool NFCLogicClassModule::AddClass(const char* pstrClassFilePath, NFCLogicClass* pClass)
+bool NFCLogicClassModule::AddClass(const char* pstrClassFilePath, std::shared_ptr<NFILogicClass> pClass)
 {
 
     std::ofstream file;
     file.open("./Log/NFLogicClass.log");
 
-    NFILogicClass* pParent = pClass->GetParent();
-    while (pParent)
+    std::shared_ptr<NFILogicClass> pParent = pClass->GetParent();
+    while (pParent.get())
     {
         //inherited some properties form class of parent
         std::string strFileName = "";
@@ -405,11 +384,11 @@ bool NFCLogicClassModule::AddClass(const char* pstrClassFilePath, NFCLogicClass*
 
 bool NFCLogicClassModule::AddClass(const std::string& strClassName, const std::string& strParentName)
 {
-    NFILogicClass* pParentClass = GetElement(strParentName);
-    NFILogicClass* pChildClass = GetElement(strClassName);
-    if (!pChildClass)
+    std::shared_ptr<NFILogicClass> pParentClass = GetElement(strParentName);
+    std::shared_ptr<NFILogicClass> pChildClass = GetElement(strClassName);
+    if (!pChildClass.get())
     {
-        pChildClass = NF_NEW NFCLogicClass(strClassName);
+        pChildClass = std::shared_ptr<NFILogicClass>(NF_NEW NFCLogicClass(strClassName));
         AddElement(strClassName, pChildClass);
         //pChildClass = CreateElement( strClassName );
 
@@ -426,7 +405,7 @@ bool NFCLogicClassModule::AddClass(const std::string& strClassName, const std::s
     return true;
 }
 
-bool NFCLogicClassModule::Load(rapidxml::xml_node<>* attrNode, NFCLogicClass* pParentClass)
+bool NFCLogicClassModule::Load(rapidxml::xml_node<>* attrNode, std::shared_ptr<NFILogicClass> pParentClass)
 {
 
     const char* pstrLogicClassName = attrNode->first_attribute("Id")->value();
@@ -437,7 +416,7 @@ bool NFCLogicClassModule::Load(rapidxml::xml_node<>* attrNode, NFCLogicClass* pP
     //printf( "-----------------------------------------------------\n");
     //printf( "%s:\n", pstrLogicClassName );
 
-    NFCLogicClass* pClass = NF_NEW NFCLogicClass(pstrLogicClassName);
+    std::shared_ptr<NFILogicClass> pClass(NF_NEW NFCLogicClass(pstrLogicClassName));
     AddElement(pstrLogicClassName, pClass);
     pClass->SetParent(pParentClass);
     pClass->SetTypeName(pstrType);
@@ -477,10 +456,10 @@ bool NFCLogicClassModule::Save()
     return true;
 }
 
-NFIPropertyManager* NFCLogicClassModule::GetClassPropertyManager(const std::string& strClassName)
+std::shared_ptr<NFIPropertyManager> NFCLogicClassModule::GetClassPropertyManager(const std::string& strClassName)
 {
-    NFILogicClass* pClass = GetElement(strClassName);
-    if (pClass)
+    std::shared_ptr<NFILogicClass> pClass = GetElement(strClassName);
+    if (pClass.get())
     {
         return pClass->GetPropertyManager();
     }
@@ -488,10 +467,10 @@ NFIPropertyManager* NFCLogicClassModule::GetClassPropertyManager(const std::stri
     return NULL;
 }
 
-NFIRecordManager* NFCLogicClassModule::GetClassRecordManager(const std::string& strClassName)
+std::shared_ptr<NFIRecordManager> NFCLogicClassModule::GetClassRecordManager(const std::string& strClassName)
 {
-    NFILogicClass* pClass = GetElement(strClassName);
-    if (pClass)
+    std::shared_ptr<NFILogicClass> pClass = GetElement(strClassName);
+    if (pClass.get())
     {
         return pClass->GetRecordManager();
     }
@@ -499,10 +478,10 @@ NFIRecordManager* NFCLogicClassModule::GetClassRecordManager(const std::string& 
     return NULL;
 }
 
-NFIComponentManager* NFCLogicClassModule::GetClassComponentManager(const std::string& strClassName)
+std::shared_ptr<NFIComponentManager> NFCLogicClassModule::GetClassComponentManager(const std::string& strClassName)
 {
-    NFILogicClass* pClass = GetElement(strClassName);
-    if (pClass)
+    std::shared_ptr<NFILogicClass> pClass = GetElement(strClassName);
+    if (pClass.get())
     {
         return pClass->GetComponentManager();
     }
