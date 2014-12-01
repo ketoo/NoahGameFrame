@@ -29,19 +29,14 @@ class NFCContainerGroupInfo
 public:
     NFCContainerGroupInfo(int nSceneID, int nWidth)
     {
-        m_pGridModule = NF_NEW NFCGridModule(nSceneID, nWidth);
+        m_pGridModule = std::shared_ptr<NFIGridModule>(NF_NEW NFCGridModule(nSceneID, nWidth));
     }
 
     virtual ~NFCContainerGroupInfo()
     {
-//         if (m_pGridModule)
-//         {
-//             delete m_pGridModule;
-//             m_pGridModule = NULL;
-//         }
     }
 
-    NFIGridModule* GetGridModule()
+    std::shared_ptr<NFIGridModule> GetGridModule()
     {
         return m_pGridModule;
     }
@@ -52,12 +47,12 @@ public:
     }
 
 private:
-    NFIGridModule* m_pGridModule;
+    std::shared_ptr<NFIGridModule> m_pGridModule;
 };
 
 // all group in this scene
 class NFCContainerInfo
-    : public NFMap<int, NFCContainerGroupInfo>
+    : public NFMapEx<int, NFCContainerGroupInfo>
 {
 public:
     NFCContainerInfo(int nSceneID, int nWidth)
@@ -69,14 +64,7 @@ public:
 
     virtual ~NFCContainerInfo()
     {
-        NFCContainerGroupInfo* pInfo = First();
-        while (pInfo)
-        {
-            delete pInfo;
-            pInfo = NULL;
-
-            pInfo = Next();
-        }
+        ClearAll();
     }
 
     int NewGroupID()
@@ -101,8 +89,8 @@ public:
 
     bool AddObjectToGroup(const int nGroupID, const NFIDENTID& ident)
     {
-        NFCContainerGroupInfo* pInfo = GetElement(nGroupID);
-        if (pInfo)
+        std::shared_ptr<NFCContainerGroupInfo> pInfo = GetElement(nGroupID);
+        if (pInfo.get())
         {
             return pInfo->Add(ident);
         }
@@ -112,8 +100,8 @@ public:
 
     bool RemoveObjectFromGroup(const int nGroupID, const NFIDENTID& ident)
     {
-        NFCContainerGroupInfo* pInfo = GetElement(nGroupID);
-        if (pInfo)
+        std::shared_ptr<NFCContainerGroupInfo> pInfo = GetElement(nGroupID);
+        if (pInfo.get())
         {
             return pInfo->Remove(ident);
         }
@@ -123,8 +111,8 @@ public:
 
     bool Execute(const float fLasFrametime, const float fStartedTime)
     {
-        NFCContainerGroupInfo* pGroupInfo = First();
-        while (pGroupInfo)
+        std::shared_ptr<NFCContainerGroupInfo> pGroupInfo = First();
+        while (pGroupInfo.get())
         {
             pGroupInfo->Execute(fLasFrametime, fStartedTime);
 
@@ -141,19 +129,12 @@ private:
 };
 
 class NFIContainerModule
-    : public NFMap<int, NFCContainerInfo>
+    : public NFMapEx<int, NFCContainerInfo>
 {
 public:
     virtual ~NFIContainerModule()
     {
-        NFCContainerInfo* pInfo = First();
-        while (pInfo)
-        {
-            delete pInfo;
-            pInfo = NULL;
-
-            pInfo = Next();
-        }
+        ClearAll();
     }
 
 protected:
