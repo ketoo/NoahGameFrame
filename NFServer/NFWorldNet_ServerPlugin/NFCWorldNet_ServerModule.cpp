@@ -75,10 +75,10 @@ int NFCWorldNet_ServerModule::OnGameServerRegisteredProcess(const NFIPacket& msg
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        ServerData* pServerData =  mGameMap.GetElement(pData->server_id());
-        if (!pServerData)
+        std::shared_ptr<ServerData> pServerData =  mGameMap.GetElement(pData->server_id());
+        if (!pServerData.get())
         {
-            pServerData = new ServerData();
+            pServerData = std::shared_ptr<ServerData>(NF_NEW ServerData());
             mGameMap.AddElement(pData->server_id(), pServerData);
         }
 
@@ -105,12 +105,7 @@ int NFCWorldNet_ServerModule::OnGameServerUnRegisteredProcess(const NFIPacket& m
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        ServerData* pServerData =  mGameMap.RemoveElement(pData->server_id());
-        if (pServerData)
-        {
-            delete pServerData;
-            pServerData = NULL;
-        }
+        mGameMap.RemoveElement(pData->server_id());
 
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "GameServerRegistered");
     }
@@ -129,10 +124,10 @@ int NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess(const NFIPacket& ms
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        ServerData* pServerData =  mGameMap.GetElement(pData->server_id());
-        if (!pServerData)
+        std::shared_ptr<ServerData> pServerData =  mGameMap.GetElement(pData->server_id());
+        if (!pServerData.get())
         {
-            pServerData = new ServerData();
+            pServerData = std::shared_ptr<ServerData>(NF_NEW ServerData());
             mGameMap.AddElement(pData->server_id(), pServerData);
         }
 
@@ -166,8 +161,8 @@ int NFCWorldNet_ServerModule::OnSelectServerEvent(const NFIDENTID& object, const
         return 0;
     }
 
-    ServerData* pServerData = mProxyMap.First();
-    if (pServerData)
+    std::shared_ptr<ServerData> pServerData = mProxyMap.First();
+    if (pServerData.get())
     {
         NFMsg::AckConnectWorldResult xData;
 
@@ -203,10 +198,10 @@ int NFCWorldNet_ServerModule::OnProxyServerRegisteredProcess(const NFIPacket& ms
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        ServerData* pServerData =  mProxyMap.GetElement(pData->server_id());
+        std::shared_ptr<ServerData> pServerData =  mProxyMap.GetElement(pData->server_id());
         if (!pServerData)
         {
-            pServerData = new ServerData();
+            pServerData = std::shared_ptr<ServerData>(NF_NEW ServerData());
             mProxyMap.AddElement(pData->server_id(), pServerData);
         }
 
@@ -233,12 +228,7 @@ int NFCWorldNet_ServerModule::OnProxyServerUnRegisteredProcess(const NFIPacket& 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        ServerData* pServerData =  mGameMap.RemoveElement(pData->server_id());
-        if (pServerData)
-        {
-            delete pServerData;
-            pServerData = NULL;
-        }
+        mGameMap.RemoveElement(pData->server_id());
 
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Proxy UnRegistered");
     }
@@ -258,10 +248,10 @@ int NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess(const NFIPacket& m
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        ServerData* pServerData =  mProxyMap.GetElement(pData->server_id());
-        if (!pServerData)
+        std::shared_ptr<ServerData> pServerData =  mProxyMap.GetElement(pData->server_id());
+        if (!pServerData.get())
         {
-            pServerData = new ServerData();
+            pServerData = std::shared_ptr<ServerData>(NF_NEW ServerData());
             mGameMap.AddElement(pData->server_id(), pServerData);
         }
 
@@ -347,8 +337,8 @@ void NFCWorldNet_ServerModule::SynGameToProxy()
 {
     NFMsg::ServerInfoReportList xData;
 
-    ServerData* pServerData =  mProxyMap.First();
-    while (pServerData)
+    std::shared_ptr<ServerData> pServerData =  mProxyMap.First();
+    while (pServerData.get())
     {
         SynGameToProxy(pServerData->nFD);
 
@@ -360,8 +350,8 @@ void NFCWorldNet_ServerModule::SynGameToProxy( const int nFD )
 {
     NFMsg::ServerInfoReportList xData;
 
-    ServerData* pServerData =  mGameMap.First();
-    while (pServerData)
+    std::shared_ptr<ServerData> pServerData =  mGameMap.First();
+    while (pServerData.get())
     {
         NFMsg::ServerInfoReport* pData = xData.add_server_list();
         *pData = *(pServerData->pData);
@@ -375,8 +365,8 @@ void NFCWorldNet_ServerModule::SynGameToProxy( const int nFD )
 void NFCWorldNet_ServerModule::OnClientDisconnect( const int nAddress )
 {
     //不管是game还是proxy都要找出来,替他反注册
-    ServerData* pServerData =  mGameMap.First();
-    while (pServerData)
+    std::shared_ptr<ServerData> pServerData =  mGameMap.First();
+    while (pServerData.get())
     {
         if (nAddress == pServerData->nFD)
         {
@@ -405,15 +395,7 @@ void NFCWorldNet_ServerModule::OnClientDisconnect( const int nAddress )
         pServerData = mProxyMap.Next();
     }
 
-    if (nServerID != 0)
-    {
-        ServerData* pRmServerData = mProxyMap.RemoveElement(nServerID);
-        if (pRmServerData)
-        {
-            delete pRmServerData;
-            pRmServerData = NULL;
-        }
-    }
+    mProxyMap.RemoveElement(nServerID);
 }
 
 void NFCWorldNet_ServerModule::OnClientConnected( const int nAddress )
