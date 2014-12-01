@@ -13,11 +13,11 @@
 #include "NFMap.h"
 
 class NFIRecordManager
-    : public NFMap<std::string, NFIRecord>
+    : public NFMapEx<std::string, NFIRecord>
 {
 public:
     virtual ~NFIRecordManager() {}
-    virtual NFIRecord* AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& keyList, const NFIDataList& descData, const NFIDataList& tagData, const NFIDataList& relateRecordData, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex) = 0;
+    virtual std::shared_ptr<NFIRecord> AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& keyList, const NFIDataList& descData, const NFIDataList& tagData, const NFIDataList& relateRecordData, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex) = 0;
     virtual NFIDENTID Self() = 0;
     virtual void GetRelationRows(const std::string& strScrRecord, const std::string& strSrcTag, const NFIDataList& var, const std::string& strRelatedRecord, NFIDataList& outRowList) = 0;
 

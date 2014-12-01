@@ -28,8 +28,8 @@ bool NFCCrashModule::AfterInit()
     // TODO:因为google-breakpad要求unicode，所以win下multi-bytes程序无法使用
     std::cout << "google-breakpad is not suitable for multibytes application in windows!" << std::endl;
 #else
-    m_pDumpDescriptor = NF_NEW google_breakpad::MinidumpDescriptor("./dump");
-    m_pExceptionHandler = NF_NEW google_breakpad::ExceptionHandler(*m_pDumpDescriptor, NULL, DumpCallback, NULL, true, -1);
+    m_pDumpDescriptor = std::shared_ptr<google_breakpad::MinidumpDescriptor>(NF_NEW google_breakpad::MinidumpDescriptor("./dump"));
+    m_pExceptionHandler = std::shared_ptr<google_breakpad::ExceptionHandler>(NF_NEW google_breakpad::ExceptionHandler(*m_pDumpDescriptor, NULL, DumpCallback, NULL, true, -1));
 #endif
     return true;
 }

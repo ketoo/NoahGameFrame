@@ -14,6 +14,7 @@
 #include <string>
 #include <iostream>
 #include <typeinfo>
+#include <memory>
 
 template <typename T , typename TD>
 class NFMapEx
@@ -26,20 +27,26 @@ public:
     {
     };
 
-    virtual bool AddElement(const T& name, TD* data)
+    virtual bool AddElement(const T& name, const std::shared_ptr<TD> data)
     {
         typename NFMapOBJECT::iterator itr = mObjectList.find(name);
         if (itr == mObjectList.end())
         {
-            mObjectList.insert(typename NFMapOBJECT::value_type(name, std::shared_ptr<TD>(data)));
-            // mObjectList[name] = data;
+            mObjectList.insert(typename NFMapOBJECT::value_type(name, data));
             return true;
         }
 
         return false;
     }
 
-    virtual std::shared_ptr<TD> RemoveElement(const T& name)
+    virtual bool SetElement(const T& name, const std::shared_ptr<TD> data)
+    {
+        mObjectList[name] = data;
+
+        return true;
+    }
+
+    virtual bool RemoveElement(const T& name)
     {
         std::shared_ptr<TD> pData(NULL);
         typename NFMapOBJECT::iterator itr = mObjectList.find(name);
@@ -47,9 +54,11 @@ public:
         {
             pData = itr->second;
             itr = mObjectList.erase(itr);
+
+            return true;
         }
 
-        return pData;
+        return false;
     }
 
     virtual std::shared_ptr<TD> GetElement(const T& name)

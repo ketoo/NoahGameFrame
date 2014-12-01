@@ -90,13 +90,13 @@ private:
         bool bCanClone;
         //资源文件ID,<NPC种子列表>
         //NPC.xml
-        NFMap<std::string, NFMap<std::string, SceneSeedResource>> xSceneGroupResource;
+        NFMapEx<std::string, NFMapEx<std::string, SceneSeedResource>> xSceneGroupResource;
     };
 
     //场景ID,对应资源
     //Map<int, SceneGroupResource> mtSceneResourceConfig;
     //场景ID,(File.xml,分组资源)
-    NFMap<int, NFMap<std::string, SceneGroupResource>> mtSceneResourceConfig;
+    NFMapEx<int, NFMapEx<std::string, SceneGroupResource>> mtSceneResourceConfig;
 
     //////////////////////////////////////////////////////////////////////////
 };

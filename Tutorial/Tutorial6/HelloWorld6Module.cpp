@@ -22,14 +22,14 @@ bool HelloWorld6Module::AfterInit()
     assert( NULL != m_pLuaScriptModule);
     
     m_pKernelModule->CreateContainer(1, "");
-    NFIObject* pObject = m_pKernelModule->CreateObject(0, 1, 0, "Player", "", NFCDataList());
-    if ( !pObject )
+    std::shared_ptr<NFIObject> pObject = m_pKernelModule->CreateObject(0, 1, 0, "Player", "", NFCDataList());
+    if ( !pObject.get() )
     {
         return false;
     }
 
-    NFIRecord* pRecord = pObject->GetRecordManager()->GetElement("TaskList");
-    if ( pRecord )
+    std::shared_ptr<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement("TaskList");
+    if ( pRecord.get() )
     {
         NFCDataList var;
         var << "Task_From_C++";
