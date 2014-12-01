@@ -14,6 +14,7 @@
 #include <string>
 #include <iostream>
 #include <typeinfo>
+#include "NFMapEx.h"
 
 template <typename T , typename TD>
 class NFMap
@@ -166,6 +167,5 @@ private:
     NFMapOBJECT     mObjectList;
     typename NFMapOBJECT::iterator mObjectCurIter;
 };
-
 
 #endif

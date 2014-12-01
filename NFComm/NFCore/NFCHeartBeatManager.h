@@ -46,7 +46,7 @@ protected:
     NFList<std::string> mRemoveListEx;
     //NFList<NFCHeartBeatElement*> mAddListEx;
     std::list<NFCHeartBeatElement> mAddListEx;
-    NFMap<std::string, NFCHeartBeatElement> mHeartBeatElementMapEx;
+    NFMapEx<std::string, NFCHeartBeatElement> mHeartBeatElementMapEx;
 };
 
 #endif

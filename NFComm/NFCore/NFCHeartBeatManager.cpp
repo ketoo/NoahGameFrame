@@ -10,12 +10,7 @@
 
 NFCHeartBeatManager::~NFCHeartBeatManager()
 {
-    NFCHeartBeatElement* pElementEx = mHeartBeatElementMapEx.First();
-    while (pElementEx)
-    {
-        delete pElementEx;
-        pElementEx = mHeartBeatElementMapEx.Next();
-    }
+    mHeartBeatElementMapEx.ClearAll();
 }
 
 void NFCHeartBeatElement::DoHeartBeatEvent()
@@ -32,8 +27,8 @@ void NFCHeartBeatElement::DoHeartBeatEvent()
 //////////////////////////////////////////////////////////////////////////
 bool NFCHeartBeatManager::Execute(const float fLastTime, const float fAllTime)
 {
-    NFCHeartBeatElement* pElement = mHeartBeatElementMapEx.First();
-    while (pElement)
+    std::shared_ptr<NFCHeartBeatElement> pElement = mHeartBeatElementMapEx.First();
+    while (pElement.get())
     {
         int nCount = pElement->nCount;
         float fTime = pElement->fTime;
@@ -79,37 +74,25 @@ bool NFCHeartBeatManager::Execute(const float fLastTime, const float fAllTime)
     bool bRet = mRemoveListEx.First(strHeartBeatName);
     while (bRet)
     {
-        NFCHeartBeatElement* pElement = mHeartBeatElementMapEx.RemoveElement(strHeartBeatName);
-        if (pElement)
-        {
-            HEART_BEAT_FUNCTOR_PTR heartFunctorPtr;
-            bool bRemoveRet = pElement->First(heartFunctorPtr);
-            while (bRemoveRet)
-            {
-                heartFunctorPtr.reset();
-
-                bRemoveRet = pElement->Next(heartFunctorPtr);
-            }
-
-            pElement->ClearAll();
-            delete pElement;
-            pElement = NULL;
-        }
+        mHeartBeatElementMapEx.RemoveElement(strHeartBeatName);
 
         bRet = mRemoveListEx.Next(strHeartBeatName);
     }
+
     mRemoveListEx.ClearAll();
+
     //////////////////////////////////////////////////////////////////////////
     //添加新心跳也是延时添加的
     for (std::list<NFCHeartBeatElement>::iterator iter = mAddListEx.begin(); iter != mAddListEx.end(); ++iter)
     {
         if (NULL == mHeartBeatElementMapEx.GetElement(iter->strBeatName))
         {
-            NFCHeartBeatElement* pHeartBeatEx = NF_NEW NFCHeartBeatElement();
+            std::shared_ptr<NFCHeartBeatElement> pHeartBeatEx(NF_NEW NFCHeartBeatElement());
             *pHeartBeatEx = *iter;
             mHeartBeatElementMapEx.AddElement(pHeartBeatEx->strBeatName, pHeartBeatEx);
         }
     }
+
     mAddListEx.clear();
 
     return true;
