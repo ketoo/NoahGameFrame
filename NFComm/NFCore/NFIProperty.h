@@ -53,8 +53,6 @@ public:
 
     virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIDataList& argVar) = 0;
 
-protected:
-
     virtual NFIDataList::TData GetValue() const = 0;
 
 };

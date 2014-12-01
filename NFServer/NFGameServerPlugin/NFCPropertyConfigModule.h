@@ -40,7 +40,7 @@ protected:
     void Load();
 private:
     //µÈ¼¶->EffectData
-    NFMap<int, std::string> mhtCoefficienData[( int )NFJobType::NJT_MAX];
+    NFMapEx<int, std::string> mhtCoefficienData[( int )NFJobType::NJT_MAX];
 
     NFILogicClassModule* m_pLogicClassModule;
     NFIElementInfoModule* m_pElementInfoModule;
