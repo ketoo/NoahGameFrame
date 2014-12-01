@@ -10,24 +10,16 @@
 
 NFCRecordManager::~NFCRecordManager()
 {
-    NFIRecord* pRecord = this->First();
-    while (pRecord)
-    {
-        delete pRecord;
-        pRecord = NULL;
-
-        pRecord = this->Next();
-    }
-
     ClearAll();
 }
 
-NFIRecord* NFCRecordManager::AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& ValueList, const NFIDataList& keyList, const NFIDataList& descList, const NFIDataList& tagList, const NFIDataList& relateRecordData, const int nRows, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex)
+std::shared_ptr<NFIRecord> NFCRecordManager::AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& ValueList, const NFIDataList& keyList, const NFIDataList& descList, const NFIDataList& tagList, const NFIDataList& relateRecordData, const int nRows, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex)
 {
-    NFIRecord* pRecord = GetElement(strRecordName);
-    if (!pRecord)
+    std::shared_ptr<NFIRecord> pRecord = GetElement(strRecordName);
+    if (!pRecord.get())
     {
-        pRecord = NF_NEW NFCRecord(self, strRecordName, ValueList, keyList, descList, tagList, relateRecordData, nRows, bPublic, bPrivate, bSave, bView, nIndex);
+        //std::shared_ptr<NFIRecord>
+        pRecord = std::shared_ptr<NFIRecord>(NF_NEW NFCRecord(self, strRecordName, ValueList, keyList, descList, tagList, relateRecordData, nRows, bPublic, bPrivate, bSave, bView, nIndex));
         this->AddElement(strRecordName, pRecord);
 
         if (nIndex > 0)
@@ -46,9 +38,9 @@ NFIDENTID NFCRecordManager::Self()
 
 void NFCRecordManager::GetRelationRows(const std::string& strSrcRecord, const std::string& strSrcTag, const NFIDataList& var, const std::string& strRelatedRecord, NFIDataList& outRowList)
 {
-    NFIRecord* pSrcRecord = GetElement(strSrcRecord);
-    NFIRecord* pRelatedRecord = GetElement(strRelatedRecord);
-    if (NULL == pSrcRecord || NULL == pRelatedRecord)
+    std::shared_ptr<NFIRecord> pSrcRecord = GetElement(strSrcRecord);
+    std::shared_ptr<NFIRecord> pRelatedRecord = GetElement(strRelatedRecord);
+    if (NULL == pSrcRecord.get() || NULL == pRelatedRecord.get())
     {
         return;
     }

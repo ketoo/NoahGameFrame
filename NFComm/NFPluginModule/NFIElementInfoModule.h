@@ -29,9 +29,9 @@ public:
 
     virtual bool ExistElement(const std::string& strConfigName) = 0;
 
-    virtual NFIPropertyManager* GetPropertyManager(const std::string& strConfigName) = 0;
-    virtual NFIRecordManager* GetRecordManager(const std::string& strConfigName) = 0;
-    virtual NFIComponentManager* GetComponentManager(const std::string& strConfigName) = 0;
+    virtual std::shared_ptr<NFIPropertyManager> GetPropertyManager(const std::string& strConfigName) = 0;
+    virtual std::shared_ptr<NFIRecordManager> GetRecordManager(const std::string& strConfigName) = 0;
+    virtual std::shared_ptr<NFIComponentManager> GetComponentManager(const std::string& strConfigName) = 0;
 
     virtual NFINT64 GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName) = 0;
     virtual float GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName) = 0;

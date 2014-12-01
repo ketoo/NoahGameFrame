@@ -53,15 +53,15 @@ int NFCSLGBuildingModule::AddBuilding(const NFIDENTID& self, const std::string& 
         return 1;
     }
 
-    NFIObject* pObject = m_pKernelModule->GetObject(self);
-    if (NULL == pObject)
+    std::shared_ptr<NFIObject> pObject = m_pKernelModule->GetObject(self);
+    if (pObject.get())
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "this is no object!", "", __FUNCTION__, __LINE__);
         return 1;
     }
 
-    NFIRecord* pRecord = pObject->GetRecordManager()->GetElement("BuildingList");
-    if (NULL == pRecord)
+    std::shared_ptr<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement("BuildingList");
+    if (!pRecord.get())
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "this is no [BuildingList] Record!", "", __FUNCTION__, __LINE__);
         return 1;
@@ -112,15 +112,15 @@ int NFCSLGBuildingModule::OnMove(const NFIDENTID& self, const NFIDataList& var)
     float fY = var.Float(2);
     float fZ = var.Float(3);
 
-    NFIObject* pObject = m_pKernelModule->GetObject(self);
-    if (NULL == pObject)
+    std::shared_ptr<NFIObject> pObject = m_pKernelModule->GetObject(self);
+    if (NULL == pObject.get())
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "this is no object!", "", __FUNCTION__, __LINE__);
         return 1;
     }
 
-    NFIRecord* pRecord = pObject->GetRecordManager()->GetElement("BuildingList");
-    if (NULL == pRecord)
+    std::shared_ptr<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement("BuildingList");
+    if (NULL == pRecord.get())
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "this is no [BuildingList] Record!", "", __FUNCTION__, __LINE__);
         return 1;

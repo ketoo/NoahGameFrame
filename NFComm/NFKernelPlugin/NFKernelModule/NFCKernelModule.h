@@ -27,7 +27,7 @@
 
 class NFCKernelModule
     : public NFIKernelModule,
-  public NFMap<NFIDENTID, NFIObject>
+  public NFMapEx<NFIDENTID, NFIObject>
 {
 public:
     NFCKernelModule(NFIPluginManager* p);
@@ -55,9 +55,9 @@ public:
 
     virtual int Type(const NFIDENTID& self);
 
-    virtual NFIObject* GetObject(const NFIDENTID& ident);
+    virtual std::shared_ptr<NFIObject> GetObject(const NFIDENTID& ident);
 
-    virtual NFIObject* CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg);
+    virtual std::shared_ptr<NFIObject> CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg);
 
     virtual bool DestroyObject(const NFIDENTID& self);
 
@@ -84,7 +84,7 @@ public:
     virtual NFIDENTID GetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName);
 
     //////////////////////////////////////////////////////////////////////////
-    virtual NFIRecord* FindRecord(const NFIDENTID& self, const std::string& strRecordName);
+    virtual std::shared_ptr<NFIRecord> FindRecord(const NFIDENTID& self, const std::string& strRecordName);
 
     virtual bool ClearRecord(const NFIDENTID& self, const std::string& strRecordName);
 
@@ -227,8 +227,8 @@ private:
     NFIDENTID mnCurExeObject;
     float fLastTotal;
 
-    NFIContainerModule* m_pContainerModule;
-
+    std::shared_ptr<NFIContainerModule> m_pContainerModule;
+    
     NFILogModule* m_pLogModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIElementInfoModule* m_pElementInfoModule;

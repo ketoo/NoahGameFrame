@@ -21,6 +21,7 @@
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm\NFPluginModule\NFIKernelModule.h"
+#include <memory>
 
 class NFCWorldNet_ServerModule
     : public NFIWorldNet_ServerModule
@@ -76,24 +77,23 @@ private:
     {
         ServerData()
         {
-            pData = new NFMsg::ServerInfoReport();
+            pData = std::shared_ptr<NFMsg::ServerInfoReport>(NF_NEW NFMsg::ServerInfoReport());
             nFD = 0;
         }
         ~ServerData()
         {
             nFD = 0;
-            delete pData;
             pData = NULL;
         }
 
         int nFD;
-        NFMsg::ServerInfoReport* pData;
+        std::shared_ptr<NFMsg::ServerInfoReport> pData;
     };
 
 private:
     //serverid,data
-    NFMap<int, ServerData> mGameMap;
-    NFMap<int, ServerData> mProxyMap;
+    NFMapEx<int, ServerData> mGameMap;
+    NFMapEx<int, ServerData> mProxyMap;
 
 	NFIElementInfoModule* m_pElementInfoModule;
 	NFILogicClassModule* m_pLogicClassModule;

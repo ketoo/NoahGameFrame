@@ -271,14 +271,14 @@ int NFCProxyServerNet_ClientModule::OnSelectServerResultProcess(const NFIPacket&
         return 0;
     }
 
-    ConnectData* pConnectData = mWantToConnectMap.GetElement(xMsg.account());
-    if (NULL != pConnectData)
+    std::shared_ptr<ConnectData> pConnectData = mWantToConnectMap.GetElement(xMsg.account());
+    if (NULL != pConnectData.get())
     {
         pConnectData->strConnectKey = xMsg.world_key();
         return 0;
     }
 
-    pConnectData = new ConnectData();
+    pConnectData = std::shared_ptr<ConnectData>(NF_NEW ConnectData());
     pConnectData->strAccount = xMsg.account();
     pConnectData->strConnectKey = xMsg.world_key();
     mWantToConnectMap.AddElement(pConnectData->strAccount, pConnectData);
@@ -293,21 +293,9 @@ NFIProxyServerNet_ClientModule::GameData* NFCProxyServerNet_ClientModule::GetGam
 
 bool NFCProxyServerNet_ClientModule::VerifyConnectData( const std::string& strAccount, const std::string& strKey )
 {
-    bool bRet = false;
+    mWantToConnectMap.RemoveElement(strAccount);
 
-    ConnectData* pConnectData = mWantToConnectMap.RemoveElement(strAccount);
-    if (pConnectData)
-    {
-        if (strKey == pConnectData->strConnectKey)
-        {
-            bRet = true;
-        }
-            
-        delete pConnectData;
-        pConnectData = NULL;
-    }
-
-    return bRet;
+    return true;
 }
 
 //////////////////////////////////////////////////////////////////////////
