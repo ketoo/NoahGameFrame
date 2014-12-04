@@ -83,7 +83,7 @@ bool HelloWorld3Module::AfterInit()
     m_pEventProcessModule->AddClassCallBack("Player", this, &HelloWorld3Module::OnClassCallBackEvent);
 
     //创建对象，挂类回调和属性回调,然后事件处理对象
-    std::shared_ptr<NFIObject> pObject = m_pKernelModule->CreateObject(10, 1, 0, "Player", "", NFCDataList());
+    std::shared_ptr<NFIObject> pObject = m_pKernelModule->CreateObject(NFIDENTID(0, 10), 1, 0, "Player", "", NFCDataList());
     if (!pObject.get())
     {
         return false;

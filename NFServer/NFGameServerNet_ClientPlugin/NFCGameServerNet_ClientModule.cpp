@@ -72,7 +72,7 @@ void NFCGameServerNet_ClientModule::Register()
 
     SendMsgPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_REGISTERED, xMsg, mnSocketFD);
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Register");
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 }
 
 void NFCGameServerNet_ClientModule::UnRegister()
@@ -98,7 +98,7 @@ void NFCGameServerNet_ClientModule::UnRegister()
 
     SendMsgPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_UNREGISTERED, xMsg, mnSocketFD);
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "UnRegister");
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "UnRegister");
 
 }
 
@@ -178,7 +178,7 @@ int NFCGameServerNet_ClientModule::OnLoadRoleDataBeginProcess(const NFIPacket& m
     //     RakNet::BitStream* pBitStream = pMsgPacket->GetBitStream();
     //     loadData.DeCode(*pBitStream);
     //
-    //     m_pEventProcessModule->DoEvent(0, NFED_ON_DATABASE_SERVER_LOADROE_BEGIN, NFCDataList() << loadData._szAccountName);
+    //     m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_DATABASE_SERVER_LOADROE_BEGIN, NFCDataList() << loadData._szAccountName);
 
     return 0;
 }
@@ -203,7 +203,7 @@ int NFCGameServerNet_ClientModule::OnLoadRoleDataFinalProcess(const NFIPacket& m
     //     valueRoleList << loadFinal._szRoleName4;
     //     valueRoleList << loadFinal.nPlayerConfidIndex4;
     //
-    //     m_pEventProcessModule->DoEvent(0, NFED_ON_DATABASE_SERVER_LOADROE_FINAL_RESULTS, valueRoleList);
+    //     m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_DATABASE_SERVER_LOADROE_FINAL_RESULTS, valueRoleList);
 
 
     //test
@@ -338,7 +338,7 @@ int NFCGameServerNet_ClientModule::OnSwapGSProcess(const NFIPacket& msg)
     //             //OK，可以接纳玩家
     //             NFCDataList valServerList;
     //             valServerList << swapGameServer._nGameServerID << swapGameServer._szAccount << swapGameServer._szRoleName << swapGameServer._nSceneIndex << swapGameServer._nPlayerConfigIndex;
-    //             m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_SELECTROLE_ENTER, valServerList);
+    //             m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_SELECTROLE_ENTER, valServerList);
     //         }
     //     }
 
@@ -383,12 +383,12 @@ int NFCGameServerNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF
 {
     if (eEvent == NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_CONNECTED", "Connected success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "Connected success", __FUNCTION__, __LINE__);
         OnClientConnected(nSockIndex);
     }
     else
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_EOF", "Connection closed or Got an error!", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed or Got an error!", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     }
 
