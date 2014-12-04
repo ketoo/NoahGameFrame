@@ -75,7 +75,8 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       "NFMsgShare.proto");
   GOOGLE_CHECK(file != NULL);
   ReqEnterGameServer_descriptor_ = file->message_type(0);
-  static const int ReqEnterGameServer_offsets_[3] = {
+  static const int ReqEnterGameServer_offsets_[4] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqEnterGameServer, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqEnterGameServer, account_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqEnterGameServer, game_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqEnterGameServer, name_),
@@ -401,45 +402,46 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ::NFMsg::protobuf_AddDesc_NFMsgBaseEx_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\020NFMsgShare.proto\022\005NFMsg\032\016NFDefine.prot"
-    "o\032\017NFMsgBase.proto\032\021NFMsgBaseEx.proto\"D\n"
-    "\022ReqEnterGameServer\022\017\n\007account\030\001 \002(\014\022\017\n\007"
-    "game_id\030\002 \002(\005\022\014\n\004name\030\003 \002(\014\"\016\n\014ReqHeartB"
-    "eat\"\024\n\022ReqLeaveGameServer\"\213\001\n\020ReqAckPlay"
-    "erMove\022\033\n\005mover\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010m"
-    "oveType\030\002 \002(\005\022#\n\ntarget_pos\030\003 \003(\0132\017.NFMs"
-    "g.Position\022#\n\nsource_pos\030\004 \003(\0132\017.NFMsg.P"
-    "osition\"\321\001\n\020ReqAckPlayerChat\022\035\n\007chat_id\030"
-    "\001 \002(\0132\014.NFMsg.Ident\0228\n\tchat_type\030\002 \002(\0162%"
-    ".NFMsg.ReqAckPlayerChat.EGameChatType\022\021\n"
-    "\tchat_info\030\003 \002(\014\"Q\n\rEGameChatType\022\017\n\013EGC"
-    "T_NARMAL\020\000\022\020\n\014EGCT_PRIVATE\020\001\022\r\n\tEGCT_TEA"
-    "M\020\002\022\016\n\nEGCT_WORLD\020\003\"\320\001\n\016ReqAckUseSkill\022\032"
-    "\n\004user\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010skill_id\030\002"
-    " \002(\014\022 \n\007now_pos\030\003 \002(\0132\017.NFMsg.Position\022 "
-    "\n\007tar_pos\030\004 \002(\0132\017.NFMsg.Position\022\"\n\014effe"
-    "ct_ident\030\005 \003(\0132\014.NFMsg.Ident\022\024\n\014effect_v"
-    "alue\030\006 \003(\005\022\022\n\neffect_rlt\030\007 \003(\005\"\255\001\n\rReqAc"
-    "kUseItem\022\032\n\004user\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\t"
-    "item_guid\030\002 \002(\0132\014.NFMsg.Ident\022\"\n\014effect_"
-    "ident\030\003 \003(\0132\014.NFMsg.Ident\022\024\n\014effect_valu"
-    "e\030\004 \003(\005\022\022\n\neffect_rlt\030\005 \003(\005\022\021\n\tkey_value"
-    "\030\006 \001(\014\"\345\001\n\017ReqAckSwapScene\022;\n\rtransfer_t"
-    "ype\030\001 \002(\0162$.NFMsg.ReqAckSwapScene.EGameS"
-    "wapType\022\020\n\010scene_id\030\002 \002(\005\022\017\n\007line_id\030\003 \002"
-    "(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006 \001(\002\"Q\n\rE"
-    "GameSwapType\022\017\n\013EGST_NARMAL\020\000\022\016\n\nEGST_CL"
-    "ONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n\013EGST_MIRROR\020\003\"2"
-    "\n\017ReqPickDropItem\022\037\n\titem_guid\030\002 \002(\0132\014.N"
-    "FMsg.Ident\" \n\rReqAcceptTask\022\017\n\007task_id\030\001"
-    " \002(\014\"#\n\020ReqCompeleteTask\022\017\n\007task_id\030\001 \002("
-    "\014\"\267\001\n\017PlayerEntryInfo\022!\n\013object_guid\030\001 \002"
-    "(\0132\014.NFMsg.Ident\022\t\n\001x\030\002 \002(\002\022\t\n\001y\030\003 \002(\002\022\t"
-    "\n\001z\030\004 \002(\002\022\023\n\013career_type\030\005 \002(\005\022\024\n\014player"
-    "_state\030\006 \002(\005\022\021\n\tconfig_id\030\007 \002(\014\022\020\n\010scene"
-    "_id\030\010 \002(\005\022\020\n\010class_id\030\t \002(\014\"A\n\022AckPlayer"
-    "EntryList\022+\n\013object_list\030\001 \003(\0132\026.NFMsg.P"
-    "layerEntryInfo\"7\n\022AckPlayerLeaveList\022!\n\013"
-    "object_list\030\001 \003(\0132\014.NFMsg.Ident", 1591);
+    "o\032\017NFMsgBase.proto\032\021NFMsgBaseEx.proto\"^\n"
+    "\022ReqEnterGameServer\022\030\n\002id\030\001 \002(\0132\014.NFMsg."
+    "Ident\022\017\n\007account\030\002 \002(\014\022\017\n\007game_id\030\003 \002(\005\022"
+    "\014\n\004name\030\004 \002(\014\"\016\n\014ReqHeartBeat\"\024\n\022ReqLeav"
+    "eGameServer\"\213\001\n\020ReqAckPlayerMove\022\033\n\005move"
+    "r\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010moveType\030\002 \002(\005\022"
+    "#\n\ntarget_pos\030\003 \003(\0132\017.NFMsg.Position\022#\n\n"
+    "source_pos\030\004 \003(\0132\017.NFMsg.Position\"\321\001\n\020Re"
+    "qAckPlayerChat\022\035\n\007chat_id\030\001 \002(\0132\014.NFMsg."
+    "Ident\0228\n\tchat_type\030\002 \002(\0162%.NFMsg.ReqAckP"
+    "layerChat.EGameChatType\022\021\n\tchat_info\030\003 \002"
+    "(\014\"Q\n\rEGameChatType\022\017\n\013EGCT_NARMAL\020\000\022\020\n\014"
+    "EGCT_PRIVATE\020\001\022\r\n\tEGCT_TEAM\020\002\022\016\n\nEGCT_WO"
+    "RLD\020\003\"\320\001\n\016ReqAckUseSkill\022\032\n\004user\030\001 \002(\0132\014"
+    ".NFMsg.Ident\022\020\n\010skill_id\030\002 \002(\014\022 \n\007now_po"
+    "s\030\003 \002(\0132\017.NFMsg.Position\022 \n\007tar_pos\030\004 \002("
+    "\0132\017.NFMsg.Position\022\"\n\014effect_ident\030\005 \003(\013"
+    "2\014.NFMsg.Ident\022\024\n\014effect_value\030\006 \003(\005\022\022\n\n"
+    "effect_rlt\030\007 \003(\005\"\255\001\n\rReqAckUseItem\022\032\n\004us"
+    "er\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\titem_guid\030\002 \002("
+    "\0132\014.NFMsg.Ident\022\"\n\014effect_ident\030\003 \003(\0132\014."
+    "NFMsg.Ident\022\024\n\014effect_value\030\004 \003(\005\022\022\n\neff"
+    "ect_rlt\030\005 \003(\005\022\021\n\tkey_value\030\006 \001(\014\"\345\001\n\017Req"
+    "AckSwapScene\022;\n\rtransfer_type\030\001 \002(\0162$.NF"
+    "Msg.ReqAckSwapScene.EGameSwapType\022\020\n\010sce"
+    "ne_id\030\002 \002(\005\022\017\n\007line_id\030\003 \002(\005\022\t\n\001x\030\004 \001(\002\022"
+    "\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006 \001(\002\"Q\n\rEGameSwapType\022\017"
+    "\n\013EGST_NARMAL\020\000\022\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_"
+    "ARENA\020\002\022\017\n\013EGST_MIRROR\020\003\"2\n\017ReqPickDropI"
+    "tem\022\037\n\titem_guid\030\002 \002(\0132\014.NFMsg.Ident\" \n\r"
+    "ReqAcceptTask\022\017\n\007task_id\030\001 \002(\014\"#\n\020ReqCom"
+    "peleteTask\022\017\n\007task_id\030\001 \002(\014\"\267\001\n\017PlayerEn"
+    "tryInfo\022!\n\013object_guid\030\001 \002(\0132\014.NFMsg.Ide"
+    "nt\022\t\n\001x\030\002 \002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002(\002\022\023\n\013c"
+    "areer_type\030\005 \002(\005\022\024\n\014player_state\030\006 \002(\005\022\021"
+    "\n\tconfig_id\030\007 \002(\014\022\020\n\010scene_id\030\010 \002(\005\022\020\n\010c"
+    "lass_id\030\t \002(\014\"A\n\022AckPlayerEntryList\022+\n\013o"
+    "bject_list\030\001 \003(\0132\026.NFMsg.PlayerEntryInfo"
+    "\"7\n\022AckPlayerLeaveList\022!\n\013object_list\030\001 "
+    "\003(\0132\014.NFMsg.Ident", 1617);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -483,6 +485,7 @@ struct StaticDescriptorInitializer_NFMsgShare_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int ReqEnterGameServer::kIdFieldNumber;
 const int ReqEnterGameServer::kAccountFieldNumber;
 const int ReqEnterGameServer::kGameIdFieldNumber;
 const int ReqEnterGameServer::kNameFieldNumber;
@@ -494,6 +497,7 @@ ReqEnterGameServer::ReqEnterGameServer()
 }
 
 void ReqEnterGameServer::InitAsDefaultInstance() {
+  id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 ReqEnterGameServer::ReqEnterGameServer(const ReqEnterGameServer& from)
@@ -504,6 +508,7 @@ ReqEnterGameServer::ReqEnterGameServer(const ReqEnterGameServer& from)
 
 void ReqEnterGameServer::SharedCtor() {
   _cached_size_ = 0;
+  id_ = NULL;
   account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   game_id_ = 0;
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
@@ -522,6 +527,7 @@ void ReqEnterGameServer::SharedDtor() {
     delete name_;
   }
   if (this != default_instance_) {
+    delete id_;
   }
 }
 
@@ -548,6 +554,9 @@ ReqEnterGameServer* ReqEnterGameServer::New() const {
 
 void ReqEnterGameServer::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_id()) {
+      if (id_ != NULL) id_->::NFMsg::Ident::Clear();
+    }
     if (has_account()) {
       if (account_ != &::google::protobuf::internal::kEmptyString) {
         account_->clear();
@@ -570,21 +579,35 @@ bool ReqEnterGameServer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required bytes account = 1;
+      // required .NFMsg.Ident id = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_account;
+        break;
+      }
+
+      // required bytes account = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_account:
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_account()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_game_id;
+        if (input->ExpectTag(24)) goto parse_game_id;
         break;
       }
 
-      // required int32 game_id = 2;
-      case 2: {
+      // required int32 game_id = 3;
+      case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_game_id:
@@ -595,12 +618,12 @@ bool ReqEnterGameServer::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(26)) goto parse_name;
+        if (input->ExpectTag(34)) goto parse_name;
         break;
       }
 
-      // required bytes name = 3;
-      case 3: {
+      // required bytes name = 4;
+      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_name:
@@ -631,21 +654,27 @@ bool ReqEnterGameServer::MergePartialFromCodedStream(
 
 void ReqEnterGameServer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required bytes account = 1;
+  // required .NFMsg.Ident id = 1;
+  if (has_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->id(), output);
+  }
+
+  // required bytes account = 2;
   if (has_account()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      1, this->account(), output);
+      2, this->account(), output);
   }
 
-  // required int32 game_id = 2;
+  // required int32 game_id = 3;
   if (has_game_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->game_id(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->game_id(), output);
   }
 
-  // required bytes name = 3;
+  // required bytes name = 4;
   if (has_name()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      3, this->name(), output);
+      4, this->name(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -656,23 +685,30 @@ void ReqEnterGameServer::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqEnterGameServer::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required bytes account = 1;
+  // required .NFMsg.Ident id = 1;
+  if (has_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->id(), target);
+  }
+
+  // required bytes account = 2;
   if (has_account()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        1, this->account(), target);
+        2, this->account(), target);
   }
 
-  // required int32 game_id = 2;
+  // required int32 game_id = 3;
   if (has_game_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->game_id(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->game_id(), target);
   }
 
-  // required bytes name = 3;
+  // required bytes name = 4;
   if (has_name()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        3, this->name(), target);
+        4, this->name(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -686,21 +722,28 @@ int ReqEnterGameServer::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required bytes account = 1;
+    // required .NFMsg.Ident id = 1;
+    if (has_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->id());
+    }
+
+    // required bytes account = 2;
     if (has_account()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->account());
     }
 
-    // required int32 game_id = 2;
+    // required int32 game_id = 3;
     if (has_game_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->game_id());
     }
 
-    // required bytes name = 3;
+    // required bytes name = 4;
     if (has_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
@@ -734,6 +777,9 @@ void ReqEnterGameServer::MergeFrom(const ::google::protobuf::Message& from) {
 void ReqEnterGameServer::MergeFrom(const ReqEnterGameServer& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_id()) {
+      mutable_id()->::NFMsg::Ident::MergeFrom(from.id());
+    }
     if (from.has_account()) {
       set_account(from.account());
     }
@@ -760,13 +806,17 @@ void ReqEnterGameServer::CopyFrom(const ReqEnterGameServer& from) {
 }
 
 bool ReqEnterGameServer::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
 
+  if (has_id()) {
+    if (!this->id().IsInitialized()) return false;
+  }
   return true;
 }
 
 void ReqEnterGameServer::Swap(ReqEnterGameServer* other) {
   if (other != this) {
+    std::swap(id_, other->id_);
     std::swap(account_, other->account_);
     std::swap(game_id_, other->game_id_);
     std::swap(name_, other->name_);

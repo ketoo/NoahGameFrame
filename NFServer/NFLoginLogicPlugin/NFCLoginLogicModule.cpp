@@ -41,7 +41,7 @@ int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventI
  
     NFCDataList valEventInfo;
     valEventInfo << nState << nAddress << strAccount;
-    m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_LOGIN_RESULTS, valEventInfo);
+    m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_LOGIN_RESULTS, valEventInfo);
   
     return 0;
 }
@@ -124,7 +124,7 @@ bool NFCLoginLogicModule::AfterInit()
 
     //////////////////////////////////////////////////////////////////////////
     // register event calback
-    m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_LOGIN, this, &NFCLoginLogicModule::OnLoginEvent);
+    m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_CLIENT_LOGIN, this, &NFCLoginLogicModule::OnLoginEvent);
 
     return true;
 }
