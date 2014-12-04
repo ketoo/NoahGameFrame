@@ -156,11 +156,11 @@ bool NFCLogModule::LogElement(const NF_LOG_LEVEL nll, const NFIDENTID ident, con
 {
     if (line > 0)
     {
-        Log(nll, "[ELEMENT] Ident=%lld Element=%s %s %s %d\n", ident.nData64, strElement.c_str(), strDesc.c_str(), func, line);
+        Log(nll, "[ELEMENT] Ident=%s Element=%s %s %s %d\n", ident.ToString(), strElement.c_str(), strDesc.c_str(), func, line);
     }
     else
     {
-        Log(nll, "[ELEMENT] Ident=%lld Element=%s %s\n", ident.nData64, strElement.c_str(), strDesc.c_str());
+        Log(nll, "[ELEMENT] Ident=%s Element=%s %s\n", ident.ToString(), strElement.c_str(), strDesc.c_str());
     }
 
     return true;
@@ -170,11 +170,11 @@ bool NFCLogModule::LogProperty(const NF_LOG_LEVEL nll, const NFIDENTID ident, co
 {
     if (line > 0)
     {
-        Log(nll, "[PROPERTY] Ident=%lld Element=%s %s %s %d\n", ident.nData64, strProperty.c_str(), strDesc.c_str(), func, line);
+        Log(nll, "[PROPERTY] Ident=%s Element=%s %s %s %d\n", ident.ToString(), strProperty.c_str(), strDesc.c_str(), func, line);
     }
     else
     {
-        Log(nll, "[PROPERTY] Ident=%lld Element=%s %s\n", ident.nData64, strProperty.c_str(), strDesc.c_str());
+        Log(nll, "[PROPERTY] Ident=%s Element=%s %s\n", ident.ToString(), strProperty.c_str(), strDesc.c_str());
     }
 
     return true;
@@ -185,11 +185,11 @@ bool NFCLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
 {
     if (line > 0)
     {
-        Log(nll, "[RECORD] Ident=%lld Record=%s Row=%d Col=%d %s %s %d\n", ident.nData64, strRecord.c_str(), nRow, nCol, strDesc.c_str(), func, line);
+        Log(nll, "[RECORD] Ident=%s Record=%s Row=%d Col=%d %s %s %d\n", ident.ToString(), strRecord.c_str(), nRow, nCol, strDesc.c_str(), func, line);
     }
     else
     {
-        Log(nll, "[RECORD] Ident=%lld Record=%s Row=%d Col=%d %s \n", ident.nData64, strRecord.c_str(), nRow, nCol, strDesc.c_str());
+        Log(nll, "[RECORD] Ident=%s Record=%s Row=%d Col=%d %s \n", ident.ToString(), strRecord.c_str(), nRow, nCol, strDesc.c_str());
     }
 
     return true;
@@ -200,11 +200,11 @@ bool NFCLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
 {
     if (line > 0)
     {
-        Log(nll, "[RECORD] Ident=%lld Record=%s %s %s %d\n", ident.nData64, strRecord.c_str(), strDesc.c_str(), func, line);
+        Log(nll, "[RECORD] Ident=%s Record=%s %s %s %d\n", ident.ToString(), strRecord.c_str(), strDesc.c_str(), func, line);
     }
     else
     {
-        Log(nll, "[RECORD] Ident=%lld Record=%s %s\n", ident.nData64, strRecord.c_str(), strDesc.c_str());
+        Log(nll, "[RECORD] Ident=%s Record=%s %s\n", ident.ToString(), strRecord.c_str(), strDesc.c_str());
     }
 
     return true;
@@ -214,11 +214,11 @@ bool NFCLogModule::LogObject(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
 {
     if (line > 0)
     {
-        Log(nll, "[OBJECT] Ident=%lld %s %s %d\n", ident.nData64,  strDesc.c_str(), func, line);
+        Log(nll, "[OBJECT] Ident=%s %s %s %d\n", ident.ToString(),  strDesc.c_str(), func, line);
     }
     else
     {
-        Log(nll, "[OBJECT] Ident=%lld %s\n", ident.nData64, strDesc.c_str());
+        Log(nll, "[OBJECT] Ident=%s %s\n", ident.ToString(), strDesc.c_str());
     }
 
     return true;
@@ -258,11 +258,11 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
 {
     if (line > 0)
     {
-        Log(nll, "[NORMAL] Ident=%lld  %s %s %s %d\n", ident.nData64, strInfo.c_str(), strDesc.c_str(), func, line);
+        Log(nll, "[NORMAL] Ident=%s  %s %s %s %d\n", ident.ToString().c_str(), strInfo.c_str(), strDesc.c_str(), func, line);
     }
     else
     {
-        Log(nll, "[NORMAL] Ident=%lld  %s %s \n", ident.nData64, strInfo.c_str(), strDesc.c_str());
+        Log(nll, "[NORMAL] Ident=%s  %s %s \n", ident.ToString().c_str(), strInfo.c_str(), strDesc.c_str());
     }
 
     return true;
@@ -272,11 +272,11 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
 {
     if (line > 0)
     {
-        Log(nll, "[NORMAL] Ident=%lld  %s %d %s %d\n", ident.nData64, strInfo.c_str(), nDesc, func, line);
+        Log(nll, "[NORMAL] Ident=%s  %s %d %s %d\n", ident.ToString().c_str(), strInfo.c_str(), nDesc, func, line);
     }
     else
     {
-        Log(nll, "[NORMAL] Ident=%lld  %s %d\n", ident.nData64, strInfo.c_str(), nDesc);
+        Log(nll, "[NORMAL] Ident=%s  %s %d\n", ident.ToString().c_str(), strInfo.c_str(), nDesc);
     }
 
     return true;
@@ -290,11 +290,11 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
         {
             if (0 == line)
             {
-                LOG(INFO) << "[NORMAL] Ident=" << ident.nData64 << " " << stream.str();
+                LOG(INFO) << "[NORMAL] Ident=" << ident.ToString() << " " << stream.str();
             }
             else
             {
-                LOG(INFO) << "[NORMAL] Ident=" << ident.nData64 << " " << stream.str() << " " << func << " " << line;
+                LOG(INFO) << "[NORMAL] Ident=" << ident.ToString() << " " << stream.str() << " " << func << " " << line;
             }
         }
         break;
@@ -302,11 +302,11 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
         {
             if (0 == line)
             {
-                LOG(WARNING) << "[NORMAL] Ident=" << ident.nData64 << " " << stream.str();
+                LOG(WARNING) << "[NORMAL] Ident=" << ident.ToString() << " " << stream.str();
             }
             else
             {
-                LOG(WARNING) << "[NORMAL] Ident=" << ident.nData64 << " " << stream.str() << " " << func << " " << line;
+                LOG(WARNING) << "[NORMAL] Ident=" << ident.ToString() << " " << stream.str() << " " << func << " " << line;
             }
         }
         break;
@@ -314,11 +314,11 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
         {
             if (0 == line)
             {
-                LOG(ERROR) << "[NORMAL] Ident=" << ident.nData64 << " " << stream.str();
+                LOG(ERROR) << "[NORMAL] Ident=" << ident.ToString() << " " << stream.str();
             }
             else
             {
-                LOG(ERROR) << "[NORMAL] Ident=" << ident.nData64 << " " << stream.str() << " " << func << " " << line;
+                LOG(ERROR) << "[NORMAL] Ident=" << ident.ToString() << " " << stream.str() << " " << func << " " << line;
             }
         }
         break;
@@ -332,11 +332,11 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
 {
     if (line > 0)
     {
-        Log(nll, "[NORMAL] Ident=%lld  %s %s %d\n", ident.nData64, strInfo.c_str(), func, line);
+        Log(nll, "[NORMAL] Ident=%s  %s %s %d\n", ident.ToString().c_str(), strInfo.c_str(), func, line);
     }
     else
     {
-        Log(nll, "[NORMAL] Ident=%lld  %s\n", ident.nData64, strInfo.c_str());
+        Log(nll, "[NORMAL] Ident=%s  %s\n", ident.ToString().c_str(), strInfo.c_str());
     }
 
     return true;

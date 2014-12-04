@@ -149,7 +149,7 @@ bool NFCDataList::Add(const char* value)
 
 bool NFCDataList::Add(const NFIDENTID& value)
 {
-    return AddNumber<NFINT64>(TDATA_OBJECT, value.nData64);
+    return AddNumber<NFIDENTID>(TDATA_OBJECT, value);
 }
 
 bool NFCDataList::Add(const void* value)
@@ -199,11 +199,12 @@ bool NFCDataList::Set(const int index, const char* value)
 
     return false;
 }
+
 bool NFCDataList::Set(const int index, const NFIDENTID& value)
 {
     if (index < mnSize && index >= 0)
     {
-        return SetNumber<NFINT64>(index, value.nData64);
+        return SetNumber<NFIDENTID>(index, value);
     }
 
     return false;
@@ -267,12 +268,23 @@ const std::string& NFCDataList::String(const int index) const
 
 NFIDENTID NFCDataList::Object(const int index) const
 {
+	NFIDENTID result;
+
     if (index < mnSize && index >= 0)
     {
-        return NumberVal<NFINT64>(index);
+		
+		if (index < mnSize && index >= 0)
+		{
+			TDATA_TYPE type =  Type(index);
+			if (type == TDATA_OBJECT)
+			{
+				const TData* var = GetStackConst(index);
+				result = boost::get<NFIDENTID>(var->variantData);
+			}
+		}
     }
 
-    return 0;
+    return result;
 }
 
 void* NFCDataList::Pointer(const int index) const
@@ -439,19 +451,19 @@ void NFCDataList::InnerAppendEx(const NFIDataList& src, const int start, const i
         switch (vType)
         {
             case TDATA_INT:
-                AddNumber<NFINT64>(vType, src.NumberVal<NFINT64>(i));
+                AddNumber<NFINT64>(vType, src.Int(i));
                 break;
             case TDATA_FLOAT:
-                AddNumber<float>(vType, src.NumberVal<float>(i));
+                AddNumber<float>(vType, src.Float(i));
                 break;
             case TDATA_DOUBLE:
-                AddNumber<double>(vType, src.NumberVal<double>(i));
+                AddNumber<double>(vType, src.Double(i));
                 break;
             case TDATA_STRING:
-                Add(src.String(i).c_str());
+                AddString(src.String(i).c_str());
                 break;
             case TDATA_OBJECT:
-                AddNumber<NFIDENTID>(vType, src.NumberVal<NFIDENTID>(i));
+                AddNumber<NFIDENTID>(vType, src.Object(i));
                 break;
                 //case TDATA_POINTER:
                 //    AddNumber<void*>(vType, src.NumberVal<void*>(i));
