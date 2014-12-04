@@ -84,7 +84,7 @@ bool NFCKernelModule::Shut()
 
 bool NFCKernelModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
-    mnCurExeObject = 0;
+    mnCurExeObject = NFIDENTID();
 
     if (mtDeleteSelfList.size() > 0)
     {
@@ -117,7 +117,7 @@ bool NFCKernelModule::Execute(const float fLasFrametime, const float fStartedTim
     {
         mnCurExeObject = pObject->Self();
         pObject->Execute(fLastTotal, fStartedTime);
-        mnCurExeObject = 0;
+        mnCurExeObject = NFIDENTID();
 
         pObject = Next();
     }
@@ -209,7 +209,7 @@ std::shared_ptr<NFIObject> NFCKernelModule::CreateObject(const NFIDENTID& self, 
     std::shared_ptr<NFCContainerInfo> pContainerInfo = m_pContainerModule->GetElement(nContainerID);
     if (!pContainerInfo.get())
     {
-        m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, nContainerID, "There is no object", __FUNCTION__, __LINE__);
+        m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(0, nContainerID), "There is no object", __FUNCTION__, __LINE__);
 
         return pObject;
     }
@@ -612,7 +612,7 @@ NFIDENTID NFCKernelModule::GetPropertyObject(const NFIDENTID& self, const std::s
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
 
-    return 0;
+    return NFIDENTID();
 }
 
 std::shared_ptr<NFIRecord> NFCKernelModule::FindRecord(const NFIDENTID& self, const std::string& strRecordName)
@@ -955,7 +955,7 @@ NFIDENTID NFCKernelModule::GetRecordObject(const NFIDENTID& self, const std::str
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object",  __FUNCTION__, __LINE__);
 
-    return 0;
+    return NFIDENTID();
 }
 
 NFIDENTID NFCKernelModule::GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag)
@@ -968,7 +968,7 @@ NFIDENTID NFCKernelModule::GetRecordObject(const NFIDENTID& self, const std::str
 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object",  __FUNCTION__, __LINE__);
 
-    return 0;
+    return NFIDENTID();
 }
 
 bool NFCKernelModule::SwitchScene(const NFIDENTID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIDataList& arg)
@@ -1030,7 +1030,7 @@ NFIDENTID NFCKernelModule::CreateContainer(const int nContainerIndex, const std:
     std::shared_ptr<NFCContainerInfo> pSceneInfo = m_pContainerModule->GetElement(nContainerIndex);
     if (pSceneInfo.get())
     {
-        return 0;
+        return NFIDENTID();
     }
 
     int nWidth = 0;
@@ -1040,7 +1040,7 @@ NFIDENTID NFCKernelModule::CreateContainer(const int nContainerIndex, const std:
         std::shared_ptr<NFIProperty> pProperty = pConfigPropertyManager->GetElement("Width");
         if (!pProperty.get())
         {
-            return 0;
+            return NFIDENTID();
         }
 
         nWidth = pProperty->GetInt();
@@ -1063,7 +1063,7 @@ NFIDENTID NFCKernelModule::CreateContainer(const int nContainerIndex, const std:
             arg << nContainerIndex;
             arg << nContainerIndex;
 
-            std::shared_ptr<NFIObject> pContainer = CreateObject(0, nContainerIndex, -1, strClassName, strSceneConfigID, arg);
+            std::shared_ptr<NFIObject> pContainer = CreateObject(NFIDENTID(), nContainerIndex, -1, strClassName, strSceneConfigID, arg);
             if (pContainer.get())
             {
                 sceneIdent = pContainer->Self();
@@ -1235,7 +1235,7 @@ bool NFCKernelModule::GetGroupObjectList(const int nContainerID, const int nGrou
         std::shared_ptr<NFCContainerGroupInfo> pGroupInfo = pSceneInfo->GetElement(nGroupID);
         if (pGroupInfo.get())
         {
-            NFIDENTID ident = 0;
+            NFIDENTID ident;
             bool bRet = pGroupInfo->First(ident);
             while (bRet)
             {

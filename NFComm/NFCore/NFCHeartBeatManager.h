@@ -20,7 +20,7 @@ class NFCHeartBeatManager : public NFIHeartBeatManager
 public:
     NFCHeartBeatManager()
     {
-        mSelf = 0;
+        mSelf = NFIDENTID();
         fLastTotal = 0.0f;
     }
 
