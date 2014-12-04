@@ -82,7 +82,7 @@ int NFCProxyServerNet_ClientModule::OnRecivePack( const NFIPacket& msg )
 
 int NFCProxyServerNet_ClientModule::OnGameInfoProcess( const NFIPacket& msg )
 {
-    NFIDENTID nPlayerID = 0;	
+    NFIDENTID nPlayerID;	
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -125,7 +125,7 @@ int NFCProxyServerNet_ClientModule::OnGameInfoProcess( const NFIPacket& msg )
             pNetObject = new NFCProxyConnectObject(pGameData->nGameID, pGameData->strIP, pGameData->nPort, pPluginManager);
             AddElement(pGameData->nGameID, pNetObject);
 
-            m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pGameData->nGameID, pGameData->strIP, pGameData->nPort, "Initialization to connect GameServer");
+            m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pGameData->nGameID), pGameData->strIP, pGameData->nPort, "Initialization to connect GameServer");
         }
 
         pGameData = mGameDataMap.Next();
@@ -138,19 +138,19 @@ int NFCProxyServerNet_ClientModule::OnSocketEvent( const int nSockIndex, const N
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
     } 
     else if (eEvent & NF_NET_EVENT_ERROR) 
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
     }
     else if (eEvent & NF_NET_EVENT_TIMEOUT)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
     }
     else  if (eEvent == NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
         Register();
     }
 
@@ -188,7 +188,7 @@ void NFCProxyServerNet_ClientModule::Register()
 
     SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg, mnSocketFD);
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Register");
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 }
 
 void NFCProxyServerNet_ClientModule::UnRegister()
@@ -213,7 +213,7 @@ void NFCProxyServerNet_ClientModule::UnRegister()
 
     SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_UNREGISTERED, xMsg, mnSocketFD);
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "UnRegister");
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "UnRegister");
 }
 
 bool NFCProxyServerNet_ClientModule::AfterInit()
@@ -264,7 +264,7 @@ int NFCProxyServerNet_ClientModule::Transpond(int nGameServerID, const NFIPacket
 int NFCProxyServerNet_ClientModule::OnSelectServerResultProcess(const NFIPacket& msg)
 {
     //保持记录,直到下线,或者1分钟不上线即可删除
-    NFIDENTID nPlayerID = 0;
+    NFIDENTID nPlayerID;
     NFMsg::AckConnectWorldResult xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -380,7 +380,7 @@ int NFCProxyConnectObject::OnSocketEvent( const int nSockIndex, const NF_NET_EVE
     }
     else  if (eEvent == NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
         Register();
     }
 
@@ -407,7 +407,7 @@ void NFCProxyConnectObject::Register()
 
     SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg, mnSocketFD);
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Register");
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 }
 
 void NFCProxyConnectObject::UnRegister()
@@ -433,6 +433,6 @@ void NFCProxyConnectObject::UnRegister()
 
     Execute(0.0f, 0.0f);
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "UnRegister");
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "UnRegister");
 
 }

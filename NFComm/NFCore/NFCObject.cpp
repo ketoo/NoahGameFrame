@@ -205,7 +205,7 @@ NFIDENTID NFCObject::GetPropertyObject(const std::string& strPropertyName)
         return pProperty->GetObject();
     }
 
-    return 0;
+    return NFIDENTID();
 }
 
 bool NFCObject::FindRecord(const std::string& strRecordName)
@@ -428,7 +428,7 @@ NFIDENTID NFCObject::GetRecordObject(const std::string& strRecordName, const int
         return pRecord->GetObject(nRow, nCol);
     }
 
-    return 0;
+    return NFIDENTID();
 }
 
 NFIDENTID NFCObject::GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag)
@@ -439,7 +439,7 @@ NFIDENTID NFCObject::GetRecordObject(const std::string& strRecordName, const int
         return pRecord->GetObject(nRow, strColTag);
     }
 
-    return 0;
+    return NFIDENTID();
 }
 
 std::shared_ptr<NFIRecordManager> NFCObject::GetRecordManager()

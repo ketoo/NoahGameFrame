@@ -214,11 +214,11 @@ bool NFCLogModule::LogObject(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
 {
     if(line > 0)
     {
-        Log(nll, "[OBJECT] Ident=%lld %s %s %d\n", ident.nData64,  strDesc.c_str(), func, line);
+        Log(nll, "[OBJECT] Ident=%s %s %s %d\n", ident.ToString(),  strDesc.c_str(), func, line);
     }
     else
     {
-        Log(nll, "[OBJECT] Ident=%lld %s\n", ident.nData64, strDesc.c_str());
+        Log(nll, "[OBJECT] Ident=%s %s\n", ident.ToString(), strDesc.c_str());
     }
 
     return true;

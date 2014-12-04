@@ -13,7 +13,7 @@ NFCProperty::NFCProperty()
     mbPublic = false;
     mbPrivate = false;
     mbSave = false;
-    mSelf = 0;
+    mSelf = NFIDENTID();
     eType = TDATA_UNKNOWN;
 
     msPropertyName = "";
@@ -220,7 +220,7 @@ NFIDENTID NFCProperty::GetObject() const
 
     if (TDATA_OBJECT == m_pTData->nType)
     {
-        return boost::get<NFINT64>(m_pTData->variantData);
+        return boost::get<NFIDENTID>(m_pTData->variantData);
     }
 
     return NFIDENTID();
