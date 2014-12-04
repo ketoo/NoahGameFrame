@@ -37,9 +37,9 @@ public:
         m_pParentClass = NULL;
         mstrClassName = strClassName;
 
-        m_pPropertyManager = std::shared_ptr<NFIPropertyManager>(NF_NEW NFCPropertyManager(0));
-        m_pRecordManager = std::shared_ptr<NFIRecordManager>(NF_NEW NFCRecordManager(0));
-        m_pComponentManager = std::shared_ptr<NFIComponentManager>(NF_NEW NFCComponentManager(0));
+        m_pPropertyManager = std::shared_ptr<NFIPropertyManager>(NF_NEW NFCPropertyManager(NFIDENTID()));
+        m_pRecordManager = std::shared_ptr<NFIRecordManager>(NF_NEW NFCRecordManager(NFIDENTID()));
+        m_pComponentManager = std::shared_ptr<NFIComponentManager>(NF_NEW NFCComponentManager(NFIDENTID()));
     }
 
     virtual ~NFCLogicClass()

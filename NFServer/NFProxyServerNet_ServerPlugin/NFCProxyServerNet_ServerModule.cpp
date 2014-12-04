@@ -72,7 +72,7 @@ int NFCProxyServerNet_ServerModule::HB_OnConnectCheckTime( const NFIDENTID& self
 
 int NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const NFIPacket& msg)
 {
-    NFIDENTID nPlayerID = 0;
+    NFIDENTID nPlayerID;
     NFMsg::ReqAccountLogin xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -133,7 +133,7 @@ int NFCProxyServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
         break;
     default:
         {
-            if (!VerifyProtocol(msg, msg.GetFd()))
+            if (!VerifyProtocol(msg, NFIDENTID(0, msg.GetFd())))
             {
                 break;
             }
@@ -157,22 +157,22 @@ int NFCProxyServerNet_ServerModule::OnSocketEvent( const int nSockIndex, const N
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     } 
     else if (eEvent & NF_NET_EVENT_ERROR) 
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     }
     else if (eEvent & NF_NET_EVENT_TIMEOUT)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     }
     else  if (eEvent == NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
         OnClientConnected(nSockIndex);
     }
 
@@ -237,7 +237,7 @@ int NFCProxyServerNet_ServerModule::OnTranspondProcess( const NFIPacket& msg )
 
 int NFCProxyServerNet_ServerModule::OnSelectServerProcess( const NFIPacket& msg )
 {
-    NFIDENTID nPlayerID = 0;
+    NFIDENTID nPlayerID;
     NFMsg::ReqSelectServer xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -269,7 +269,7 @@ int NFCProxyServerNet_ServerModule::OnSelectServerProcess( const NFIPacket& msg 
 
 int NFCProxyServerNet_ServerModule::OnReqServerListProcess( const NFIPacket& msg )
 {
-    NFIDENTID nPlayerID = 0;
+    NFIDENTID nPlayerID;
     NFMsg::ReqServerList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -342,7 +342,7 @@ void NFCProxyServerNet_ServerModule::OnClientConnected( const int nAddress )
 int NFCProxyServerNet_ServerModule::OnReqRoleListProcess( const NFIPacket& msg )
 {
     //在没有正式进入游戏之前，nPlayerID都是FD
-    NFIDENTID nPlayerID = 0;
+    NFIDENTID nPlayerID;
     NFMsg::ReqRoleList xData;
     if (!RecivePB(msg, xData, nPlayerID))
     {
@@ -396,7 +396,7 @@ int NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess( const NFIPacket& msg
     //在没有正式进入游戏之前，nPlayerID都是FD
 
 
-    NFIDENTID nPlayerID = 0;
+    NFIDENTID nPlayerID;
     NFMsg::ReqCreateRole xData;
     if (!RecivePB(msg, xData, nPlayerID))
     {
@@ -449,7 +449,7 @@ int NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess( const NFIPacket& msg
 int NFCProxyServerNet_ServerModule::OnReqDelRoleProcess( const NFIPacket& msg )
 {
     //在没有正式进入游戏之前，nPlayerID都是FD
-    NFIDENTID nPlayerID = 0;
+    NFIDENTID nPlayerID;
     NFMsg::ReqDeleteRole xData;
     if (!RecivePB(msg, xData, nPlayerID))
     {
@@ -476,7 +476,7 @@ int NFCProxyServerNet_ServerModule::OnReqDelRoleProcess( const NFIPacket& msg )
 int NFCProxyServerNet_ServerModule::OnReqEnterGameServer( const NFIPacket& msg )
 {
     //在没有正式进入游戏之前，nPlayerID都是FD
-    NFIDENTID nPlayerID = 0;
+    NFIDENTID nPlayerID;
     NFMsg::ReqEnterGameServer xData;
     if (!RecivePB(msg, xData, nPlayerID))
     {
