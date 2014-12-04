@@ -138,7 +138,7 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
 
             //printf( " Property:%s[%s]\n", pstrPropertyName, pstrType );
 
-            pClass->GetPropertyManager()->AddProperty(0, strPropertyName, varProperty.nType, bPublic,  bPrivate, bSave, bView, nIndex, pstrRelationValue);
+            pClass->GetPropertyManager()->AddProperty(NFIDENTID(), strPropertyName, varProperty.nType, bPublic,  bPrivate, bSave, bView, nIndex, pstrRelationValue);
         }
     }
 
@@ -249,7 +249,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, std:
                 //////////////////////////////////////////////////////////////////////////
             }
 
-            pClass->GetRecordManager()->AddRecord(0, pstrRecordName, recordVar, recordKey, recordDesc, recordTag, recordRelation, atoi(pstrRow), bPublic, bPrivate, bSave, bView, nIndex);
+            pClass->GetRecordManager()->AddRecord(NFIDENTID(), pstrRecordName, recordVar, recordKey, recordDesc, recordTag, recordRelation, atoi(pstrRow), bPublic, bPrivate, bSave, bView, nIndex);
         }
     }
 
