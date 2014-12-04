@@ -35,7 +35,6 @@ public:
         fTime = 0.0f;
         nCount = 0;
         strBeatName = "";
-        self = 0;
     };
 
     virtual ~NFCHeartBeatElement()

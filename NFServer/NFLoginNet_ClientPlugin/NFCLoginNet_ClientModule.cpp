@@ -42,7 +42,7 @@ bool NFCLoginNet_ClientModule::AfterInit()
     assert(NULL != m_pElementInfoModule);
     assert(NULL != m_pLoginNet_ServerModule);
 
-    m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_SELECT_SERVER, this, &NFCLoginNet_ClientModule::OnSelectServerEvent);
+    m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, this, &NFCLoginNet_ClientModule::OnSelectServerEvent);
 
     const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
     const std::string& strServerIP = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "ServerIP");
@@ -142,7 +142,7 @@ void NFCLoginNet_ClientModule::Register()
 
 	SendMsgPB(NFMsg::EGameMsgID::EGMI_LTM_LOGIN_REGISTERED, xMsg, mnSocketFD);
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Register");
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 }
 
 void NFCLoginNet_ClientModule::UnRegister()
@@ -167,13 +167,13 @@ void NFCLoginNet_ClientModule::UnRegister()
 
 	SendMsgPB(NFMsg::EGameMsgID::EGMI_LTM_LOGIN_UNREGISTERED, xMsg, mnSocketFD);
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "UnRegister");
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "UnRegister");
 	//Execute(0.0f, 0.0f);
 }
 
 int NFCLoginNet_ClientModule::OnSelectServerResultProcess(const NFIPacket& msg)
 {
-    NFIDENTID nPlayerID = 0;	
+    NFIDENTID nPlayerID;	
     NFMsg::AckConnectWorldResult xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
@@ -189,7 +189,7 @@ int NFCLoginNet_ClientModule::OnSelectServerResultProcess(const NFIPacket& msg)
         << xMsg.world_port()
         << xMsg.world_key();
 
-    m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_SELECT_SERVER_RESULTS, var);
+    m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER_RESULTS, var);
 
 	return 0;
 }
@@ -218,19 +218,19 @@ int NFCLoginNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF_NET_
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
     } 
     else if (eEvent & NF_NET_EVENT_ERROR) 
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
     }
     else if (eEvent & NF_NET_EVENT_TIMEOUT)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
     }
     else  if (eEvent == NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
         Register();
     }
 
@@ -239,7 +239,7 @@ int NFCLoginNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF_NET_
 
 int NFCLoginNet_ClientModule::OnWorldInfoProcess( const NFIPacket& msg )
 {
-	NFIDENTID nPlayerID = 0;	
+	NFIDENTID nPlayerID ;	
 	NFMsg::ServerInfoReportList xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
@@ -262,7 +262,7 @@ int NFCLoginNet_ClientModule::OnWorldInfoProcess( const NFIPacket& msg )
       
 	}
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSize, "", "WorldInfo");
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSize), "", "WorldInfo");
 
 	return 0;
 }

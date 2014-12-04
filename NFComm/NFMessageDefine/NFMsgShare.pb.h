@@ -150,10 +150,19 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required bytes account = 1;
+  // required .NFMsg.Ident id = 1;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& id() const;
+  inline ::NFMsg::Ident* mutable_id();
+  inline ::NFMsg::Ident* release_id();
+  inline void set_allocated_id(::NFMsg::Ident* id);
+
+  // required bytes account = 2;
   inline bool has_account() const;
   inline void clear_account();
-  static const int kAccountFieldNumber = 1;
+  static const int kAccountFieldNumber = 2;
   inline const ::std::string& account() const;
   inline void set_account(const ::std::string& value);
   inline void set_account(const char* value);
@@ -162,17 +171,17 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
   inline ::std::string* release_account();
   inline void set_allocated_account(::std::string* account);
 
-  // required int32 game_id = 2;
+  // required int32 game_id = 3;
   inline bool has_game_id() const;
   inline void clear_game_id();
-  static const int kGameIdFieldNumber = 2;
+  static const int kGameIdFieldNumber = 3;
   inline ::google::protobuf::int32 game_id() const;
   inline void set_game_id(::google::protobuf::int32 value);
 
-  // required bytes name = 3;
+  // required bytes name = 4;
   inline bool has_name() const;
   inline void clear_name();
-  static const int kNameFieldNumber = 3;
+  static const int kNameFieldNumber = 4;
   inline const ::std::string& name() const;
   inline void set_name(const ::std::string& value);
   inline void set_name(const char* value);
@@ -183,6 +192,8 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqEnterGameServer)
  private:
+  inline void set_has_id();
+  inline void clear_has_id();
   inline void set_has_account();
   inline void clear_has_account();
   inline void set_has_game_id();
@@ -192,12 +203,13 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::NFMsg::Ident* id_;
   ::std::string* account_;
   ::std::string* name_;
   ::google::protobuf::int32 game_id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -1684,15 +1696,53 @@ class AckPlayerLeaveList : public ::google::protobuf::Message {
 
 // ReqEnterGameServer
 
-// required bytes account = 1;
-inline bool ReqEnterGameServer::has_account() const {
+// required .NFMsg.Ident id = 1;
+inline bool ReqEnterGameServer::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqEnterGameServer::set_has_account() {
+inline void ReqEnterGameServer::set_has_id() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqEnterGameServer::clear_has_account() {
+inline void ReqEnterGameServer::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqEnterGameServer::clear_id() {
+  if (id_ != NULL) id_->::NFMsg::Ident::Clear();
+  clear_has_id();
+}
+inline const ::NFMsg::Ident& ReqEnterGameServer::id() const {
+  return id_ != NULL ? *id_ : *default_instance_->id_;
+}
+inline ::NFMsg::Ident* ReqEnterGameServer::mutable_id() {
+  set_has_id();
+  if (id_ == NULL) id_ = new ::NFMsg::Ident;
+  return id_;
+}
+inline ::NFMsg::Ident* ReqEnterGameServer::release_id() {
+  clear_has_id();
+  ::NFMsg::Ident* temp = id_;
+  id_ = NULL;
+  return temp;
+}
+inline void ReqEnterGameServer::set_allocated_id(::NFMsg::Ident* id) {
+  delete id_;
+  id_ = id;
+  if (id) {
+    set_has_id();
+  } else {
+    clear_has_id();
+  }
+}
+
+// required bytes account = 2;
+inline bool ReqEnterGameServer::has_account() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqEnterGameServer::set_has_account() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqEnterGameServer::clear_has_account() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqEnterGameServer::clear_account() {
   if (account_ != &::google::protobuf::internal::kEmptyString) {
@@ -1754,15 +1804,15 @@ inline void ReqEnterGameServer::set_allocated_account(::std::string* account) {
   }
 }
 
-// required int32 game_id = 2;
+// required int32 game_id = 3;
 inline bool ReqEnterGameServer::has_game_id() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void ReqEnterGameServer::set_has_game_id() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void ReqEnterGameServer::clear_has_game_id() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void ReqEnterGameServer::clear_game_id() {
   game_id_ = 0;
@@ -1776,15 +1826,15 @@ inline void ReqEnterGameServer::set_game_id(::google::protobuf::int32 value) {
   game_id_ = value;
 }
 
-// required bytes name = 3;
+// required bytes name = 4;
 inline bool ReqEnterGameServer::has_name() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void ReqEnterGameServer::set_has_name() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void ReqEnterGameServer::clear_has_name() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void ReqEnterGameServer::clear_name() {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
