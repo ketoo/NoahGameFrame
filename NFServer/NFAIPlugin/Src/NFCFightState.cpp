@@ -40,7 +40,7 @@ bool NFCFightState::Execute(const NFIDENTID& self)
                 }
                 else if (NFSkillTestSkillResult::NFSTSR_DISTANCE == eResult)
                 {
-                    RunCloseTarget(self);
+                    RunCloseTarget(self, ident);
                 }
                 else if (NFSkillTestSkillResult::NFSTSR_CD == eResult)
                 {
@@ -82,15 +82,14 @@ bool NFCFightState::RunInFightArea(const NFIDENTID& self)
     return true;
 }
 
-bool NFCFightState::RunCloseTarget(const NFIDENTID& self)
+bool NFCFightState::RunCloseTarget(const NFIDENTID& self, const NFIDENTID& target)
 {
-    //需要回调知道已经走到了,moving事件
     return true;
 }
 
 int NFCFightState::OnSkillConsumeTime( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& arg )
 {
-	m_pKernelModule->SetPropertyInt(self, "StateType", (int)NFObjectStateType::NOST_IDEL);
+	m_pKernelModule->SetPropertyInt(self, "StateType", (int)NFObjectStateType::NOST_IDLE);
 	
 	return 0;
 }
