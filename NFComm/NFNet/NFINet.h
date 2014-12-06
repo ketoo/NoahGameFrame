@@ -38,6 +38,7 @@
 #include <event2/event_compat.h>
 #include <event2/event.h>
 #include <vector>
+#include "NFComm/NFCore/NFIdentID.h"
 
 #pragma pack(push, 1)
 
@@ -66,6 +67,7 @@ public:
         mnErrorCount = 0;
         mnLogicState = 0;
         mnUserData = 0;
+        mnUserID = NFIDENTID();
 		mbRemoveState = false;
     }
 
@@ -171,6 +173,16 @@ public:
 		mbRemoveState = bState;
 	}
 
+    const NFIDENTID& GetUserID()
+    {
+        return mnUserID;
+    }
+
+    void SetUserID(const NFIDENTID& nUserID)
+    {
+        mnUserID = nUserID;
+    }
+
     int IncreaseError(const int nError = 1)
     {
         return mnErrorCount += nError;
@@ -196,6 +208,7 @@ private:
     int32_t mnUserData;
     std::string mstrUserData;
 	bool mbRemoveState;
+    NFIDENTID mnUserID;
     NFINet* m_pNet;
 };
 
