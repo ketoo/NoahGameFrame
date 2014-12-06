@@ -23,10 +23,11 @@ class NFIPluginManager;
 enum NFAI_STATE
 {
     State_Error = 0,
-    IdleState,                   //ÐÝÏÐ×´Ì¬
-    PatrolState,                //Ñ²Âß×´Ì¬
-    FightState,                 //Õ½¶·×´Ì¬
-    DeadState,                  //ËÀÍö×´Ì¬
+    IdleState,                  // ÐÝÏÐ×´Ì¬
+    PatrolState,                // Ñ²Âß×´Ì¬
+    FightState,                 // Õ½¶·×´Ì¬
+    ChaseState,                 // ×·»÷×´Ì¬
+    DeadState,                  // ËÀÍö×´Ì¬
 };
 
 class NFIState
