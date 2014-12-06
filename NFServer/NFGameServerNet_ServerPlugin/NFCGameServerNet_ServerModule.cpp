@@ -1309,17 +1309,21 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent( const NFIDENTID& self, co
     else if ( CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
     {
         //id和fd,gateid绑定
-        //         std::shared_ptr<BaseData> pDataBase = new BaseData();
-        //         mRoleBaseData.AddElement(self, pDataBase);
-        // 
-        //         pDataBase->nGateID = xMsg.gate_id();
-        //         pDataBase->nFD = nPlayerID;
-        //回复客户端角色进入游戏世界成功了
-        //         NFMsg::AckEventResult xMsg;
-        //         xMsg.set_event_code(NFMsg::EGEC_ACCOUNTPWD_INVALID);
-        //         xMsg.set_event_arg(self.nData64);
-        // 
-        //         SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ENTER_GAME, xMsg, unAddress);
+        std::shared_ptr<BaseData> pDataBase = mRoleBaseData.GetElement(self);
+        if (pDataBase.get())
+        {
+            std::shared_ptr<ServerData> pGateData = mProxyMap.GetElement(pDataBase->nGateID);
+            if (pGateData.get())
+            {
+                //回复客户端角色进入游戏世界成功了
+                NFMsg::AckEventResult xMsg;
+                xMsg.set_event_code(NFMsg::EGEC_ENTER_GAME_SUCCESS);
+                xMsg.set_event_arg(pDataBase->nFD);
+                *xMsg.mutable_event_object() = NFToPB(self);
+
+                SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ENTER_GAME, xMsg, pGateData->nFD, self);
+            }
+        }
     }
     else if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
     {
