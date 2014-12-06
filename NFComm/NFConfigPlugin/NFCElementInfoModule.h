@@ -36,9 +36,9 @@ class ElementConfigInfo
 public:
     ElementConfigInfo()
     {
-        m_pPropertyManager = std::shared_ptr<NFIPropertyManager>(NF_NEW NFCPropertyManager(NFIDENTID(0)));
-        m_pRecordManager = std::shared_ptr<NFIRecordManager>(NF_NEW NFCRecordManager(NFIDENTID(0)));
-        m_pComponentManager = std::shared_ptr<NFIComponentManager>(NF_NEW NFCComponentManager(NFIDENTID(0)));
+        m_pPropertyManager = std::shared_ptr<NFIPropertyManager>(NF_NEW NFCPropertyManager(NFIDENTID()));
+        m_pRecordManager = std::shared_ptr<NFIRecordManager>(NF_NEW NFCRecordManager(NFIDENTID()));
+        m_pComponentManager = std::shared_ptr<NFIComponentManager>(NF_NEW NFCComponentManager(NFIDENTID()));
     }
 
     virtual ~ElementConfigInfo()

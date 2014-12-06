@@ -11,7 +11,7 @@
 
 NFCRecord::NFCRecord()
 {
-    mSelf = 0;
+    mSelf = NFIDENTID();
     mbSave = false;
     mbPublic = false;
     mbPrivate = false;
@@ -663,7 +663,7 @@ NFIDENTID NFCRecord::GetObject(const int nRow, const int nCol) const
 
     if (TDATA_OBJECT == pVar->nType)
     {
-        return boost::get<NFINT64>(pVar->variantData);
+        return boost::get<NFIDENTID>(pVar->variantData);
     }
 
     return NFIDENTID();
@@ -916,7 +916,7 @@ int NFCRecord::FindObject(const int nCol, const NFIDENTID& value, NFIDataList& v
             continue;
         }
 
-        if (GetObject(i, nCol) == value.nData64)
+        if (GetObject(i, nCol) == value)
         {
             varResult << NFINT32(i);
         }
