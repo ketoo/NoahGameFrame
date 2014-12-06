@@ -177,7 +177,10 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
             int nDataLen = pObject->GetBuffLen();
             if (nDataLen > pNet->mnHeadLength)
             {
-                pNet->Dismantle(pObject);
+                if (!pNet->Dismantle(pObject))
+				{
+					break;
+				}
             }
             else
             {
@@ -338,6 +341,8 @@ bool NFCNet::Dismantle(NetObject* pObject )
 
             //添加到队列
             pObject->RemoveBuff(0, nUsedLen);
+
+			Dismantle(pObject);
         }
         else if (0 == nUsedLen)
         {
@@ -348,10 +353,14 @@ bool NFCNet::Dismantle(NetObject* pObject )
             //累计错误太多了--可以适当清空给机会
             pObject->IncreaseError();
 
+			bRet = false;
+
         }
         if (pObject->GetErrorCount() > 5)
         {
             CloseNetObject(pObject->GetFd());
+
+			bRet = false;
         }
     }
 
