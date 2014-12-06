@@ -32,11 +32,11 @@
 ////////////////////////////////////////////////////////////////////////////
 // 客户端消息处理宏
 #define CLIENT_MSG_PROCESS(packet, msg)                 \
-    NFIDENTID nPlayerID = 0;                              \
+    NFIDENTID nPlayerID;                              \
     msg xMsg;                                           \
     if (!RecivePB(packet, xMsg, nPlayerID))              \
     {                                                   \
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, 0, "ReqAckBuyObjectFormShop", "Parse msg error", __FUNCTION__, __LINE__); \
+        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), "ReqAckBuyObjectFormShop", "Parse msg error", __FUNCTION__, __LINE__); \
         return;                                         \
     }                                                   \
                                                         \
@@ -198,13 +198,13 @@ private:
     NFMapEx<int, ServerData> mProxyMap;
 
     //////////////////////////////////////////////////////////////////////////
-    NFIKernelModule* m_pKernelModule;
+	NFIUUIDModule* m_pUUIDModule;
+	NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFILogModule* m_pLogModule;
     NFIEventProcessModule* m_pEventProcessModule;
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFIElementInfoModule* m_pElementInfoModule;
-	NFIUUIDModule* m_pUUIDModule;
     //////////////////////////////////////////////////////////////////////////
     //SLG模块
 	NFISLGShopModule* m_pSLGShopModule;
