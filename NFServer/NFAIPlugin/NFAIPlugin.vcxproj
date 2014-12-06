@@ -89,6 +89,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Include\NFCChaseState.h" />
     <ClInclude Include="Include\NFCDeadState.h" />
     <ClInclude Include="Include\NFCFightState.h" />
     <ClInclude Include="Include\NFCIdleState.h" />
@@ -114,6 +115,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClCompile Include="NFCAIModule.cpp" />
     <ClCompile Include="NFCHateModule.cpp" />
     <ClCompile Include="NFCStateMachine.cpp" />
+    <ClCompile Include="Src\NFCChaseState.cpp" />
     <ClCompile Include="Src\NFCDeadState.cpp" />
     <ClCompile Include="Src\NFCFightState.cpp" />
     <ClCompile Include="Src\NFCIdleState.cpp" />
