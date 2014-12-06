@@ -13,6 +13,7 @@
 #include "Include/NFCFightState.h"
 #include "Include/NFCIdleState.h"
 #include "Include/NFCPatrolState.h"
+#include "Include/NFCChaseState.h"
 
 class NFIStateMachine
 {
