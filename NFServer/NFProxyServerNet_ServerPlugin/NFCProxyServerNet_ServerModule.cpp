@@ -207,9 +207,7 @@ void NFCProxyServerNet_ServerModule::OnClientDisconnect( const int nAddress )
             }
 
             //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
-            NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
-            pPlayerID->set_svrid(0);
-			pPlayerID->set_index(nAddress);
+            *xMsg.mutable_player_id() = NFToPB(pNetObject->GetUserID());
 
             std::string strMsg;
             if(!xMsg.SerializeToString(&strMsg))
