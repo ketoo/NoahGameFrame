@@ -24,7 +24,7 @@
 
 
 //这个连接是连的gameserver
-class NFCProxyConnectObject :   public NFINetModule
+class NFCProxyConnectObject : public NFINetModule
 {
 public:
     NFCProxyConnectObject(int nGameServerID, const std::string& strIP, const int nPort, NFIPluginManager* p);
@@ -47,6 +47,8 @@ protected:
 
     void Register();
     void UnRegister();
+
+    void OnAckEnterGame(const NFIPacket& msg);
 private:
 
     int mnGameServerID;
@@ -110,7 +112,6 @@ protected:
 
     int OnSelectServerResultProcess(const NFIPacket& msg);
     int OnGameInfoProcess(const NFIPacket& msg);
-
 private:
     struct ConnectData 
     {
