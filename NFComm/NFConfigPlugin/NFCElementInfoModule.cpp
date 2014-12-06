@@ -117,7 +117,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, std::shared_ptr<
         while (pProperty.get())
         {
 
-            pElementPropertyManager->AddProperty(0, pProperty);
+            pElementPropertyManager->AddProperty(NFIDENTID(), pProperty);
 
             pProperty = pClassPropertyManager->Next();
         }
@@ -125,7 +125,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, std::shared_ptr<
         std::shared_ptr<NFIRecord> pRecord = pClassRecordManager->First();
         while (pRecord.get())
         {
-            pElementRecordManager->AddRecord(0, pRecord->GetName(), pRecord->GetInitData(), pRecord->GetKeyState(), pRecord->GetInitDesc(), pRecord->GetTag(), pRecord->GetRelatedRecord(), pRecord->GetRows(), pRecord->GetPublic(), pRecord->GetPrivate(), pRecord->GetSave(), pRecord->GetView(), pRecord->GetIndex());
+            pElementRecordManager->AddRecord(NFIDENTID(), pRecord->GetName(), pRecord->GetInitData(), pRecord->GetKeyState(), pRecord->GetInitDesc(), pRecord->GetTag(), pRecord->GetRelatedRecord(), pRecord->GetRows(), pRecord->GetPublic(), pRecord->GetPrivate(), pRecord->GetSave(), pRecord->GetView(), pRecord->GetIndex());
             pRecord = pClassRecordManager->Next();
         }
 
@@ -187,7 +187,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, std::shared_ptr<
                 {
                     NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 }
-                var.variantData = NFIDENTID(0);
+                var.variantData = NFIDENTID();
             }
 
             break;

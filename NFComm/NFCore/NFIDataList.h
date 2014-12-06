@@ -81,6 +81,7 @@ public:
     virtual std::string StringValEx(const int index, const bool bForce) const = 0;
     virtual bool ToString(std::string& str, const char* strSplit) = 0;
 
+ protected:
     template<typename T>
     T NumberVal(const int index) const
     {
@@ -91,7 +92,7 @@ public:
             if (type == TDATA_DOUBLE
                 || type == TDATA_FLOAT
                 || type == TDATA_INT
-                || type == TDATA_OBJECT
+                /*|| type == TDATA_OBJECT*/
                 /*|| type == TDATA_POINTER*/)
             {
                 const TData* var = GetStackConst(index);
@@ -124,19 +125,24 @@ public:
     }
 
     template<typename T>
-    bool AddNumber(const TDATA_TYPE eType, const T& value)
+    bool AddNumber(const TDATA_TYPE type, const T& value)
     {
-
-        TData* var = GetStack(mnSize);
-        if (var)
+        if (type == TDATA_DOUBLE
+            || type == TDATA_FLOAT
+            || type == TDATA_INT
+            || type == TDATA_OBJECT
+            /*|| type == TDATA_POINTER*/)
         {
-            var->nType = eType;
-            var->variantData = value;
-            mnSize++;
+            TData* var = GetStack(mnSize);
+            if (var)
+            {
+                var->nType = type;
+                var->variantData = value;
+                mnSize++;
 
-            return true;
+                return true;
+            }
         }
-
         return false;
     }
 
