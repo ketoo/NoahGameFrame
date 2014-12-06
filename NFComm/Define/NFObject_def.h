@@ -53,7 +53,7 @@ enum NFCampType
 //0呆着1跑2走3闪烁4技能飞移5死6平常技能中
 enum NFObjectStateType
 {
-    NOST_IDEL,
+    NOST_IDLE,
     NOST_RUN,
     NOST_WALK,
     NOST_WILK,
