@@ -131,32 +131,32 @@ public:
         return mnErrorCount;
     }
 
-    int GetLogicState() const
+    int GetConnectKeyState() const
     {
         return mnLogicState;
     }
 
-    void SetLogicState(const int nState)
+    void SetConnectKeyState(const int nState)
     {
         mnLogicState = nState;
     }
 
-    int GetUserData() const
+    int GetGameID() const
     {
         return mnUserData;
     }
 
-    void SetUserData(const int nData)
+    void SetGameID(const int nData)
     {
         mnUserData = nData;
     }
 
-    const std::string& GetUserStrData() const
+    const std::string& GetAccount() const
     {
         return mstrUserData;
     }
 
-    void SetUserStrData(const std::string& strData)
+    void SetAccount(const std::string& strData)
     {
         mstrUserData = strData;
     }
