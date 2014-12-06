@@ -22,7 +22,7 @@ bool HelloWorld6Module::AfterInit()
     assert( NULL != m_pLuaScriptModule);
     
     m_pKernelModule->CreateContainer(1, "");
-    std::shared_ptr<NFIObject> pObject = m_pKernelModule->CreateObject(0, 1, 0, "Player", "", NFCDataList());
+    std::shared_ptr<NFIObject> pObject = m_pKernelModule->CreateObject(NFIDENTID(), 1, 0, "Player", "", NFCDataList());
     if ( !pObject.get() )
     {
         return false;

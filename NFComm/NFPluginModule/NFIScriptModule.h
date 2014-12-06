@@ -737,7 +737,7 @@ static NFIDENTID NFVarList_ObjectVal(NFIDataList* pVarList, const int index)
         return pVarList->Object(index);
     }
 
-    return 0;
+    return NFIDENTID();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -940,7 +940,7 @@ static NFScriptInt64 KernelModule_CreateContainer(const NFScriptInt64& nPtrKerne
         return  pScriptKernelModule->CreateContainer(nContainerIndex, strSceneConfigID);
     }
 
-    return false;
+    return NFIDENTID();
 }
 
 static bool KernelModule_ExistContainer(const NFScriptInt64& nPtrKernelModule, const int nContainerIndex)
@@ -1079,7 +1079,7 @@ static NFScriptInt64 KernelModule_GetPropertyObject(const NFScriptInt64& nPtrKer
         return pScriptKernelModule->GetPropertyObject(self.ObjectVal(), strPropertyName);
     }
 
-    return 0;
+    return NFIDENTID();
 }
 
 static bool KernelModule_SetRecordInt(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
@@ -1175,7 +1175,7 @@ static NFIDENTID KernelModule_GetRecordObject(const NFScriptInt64& nPtrKernelMod
         return pScriptKernelModule->GetRecordObject(self.ObjectVal(), strRecordName, nRow, nCol);
     }
 
-    return 0;
+    return NFIDENTID();
 }
 
 static bool KernelModule_AddProperty(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self,
