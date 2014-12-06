@@ -78,11 +78,12 @@ enum EGameEventCode {
   EGEC_GANGS_TITLE_OUTOF = 140,
   EGEC_ENTER_GATEWAY_FAILD = 141,
   EGEC_NO_SERVER4ZONE = 142,
-  EGEC_INVALID_SKILL = 143
+  EGEC_INVALID_SKILL = 143,
+  EGEC_ENTER_GAME_SUCCESS = 144
 };
 bool EGameEventCode_IsValid(int value);
 const EGameEventCode EGameEventCode_MIN = EGEC_UNKOWN_ERROR;
-const EGameEventCode EGameEventCode_MAX = EGEC_INVALID_SKILL;
+const EGameEventCode EGameEventCode_MAX = EGEC_ENTER_GAME_SUCCESS;
 const int EGameEventCode_ARRAYSIZE = EGameEventCode_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EGameEventCode_descriptor();
