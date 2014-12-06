@@ -362,7 +362,15 @@ void NFCProxyConnectObject::OnClientConnected( const int nAddress )
 
 int NFCProxyConnectObject::OnRecivePack( const NFIPacket& msg )
 {
-    m_pProxyServerNet_ServerModule->Transpond(msg);
+    switch (msg.GetMsgHead()->GetMsgID())
+    {
+    case NFMsg::EGMI_ACK_ENTER_GAME:
+        OnAckEnterGame(msg);
+        break;
+    default:
+        m_pProxyServerNet_ServerModule->Transpond(msg);
+        break;
+    }
 
     return 0;
 }
@@ -435,4 +443,24 @@ void NFCProxyConnectObject::UnRegister()
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "UnRegister");
 
+}
+
+void NFCProxyConnectObject::OnAckEnterGame(const NFIPacket& msg)
+{
+    NFIDENTID nPlayerID;
+    NFMsg::AckEventResult xData;
+    if (!RecivePB(msg, xData, nPlayerID))
+    {
+        return;
+    }
+
+    if (xData.event_code() == NFMsg::EGEC_ENTER_GAME_SUCCESS)
+    {
+        NFINT64 nFD = xData.event_arg();
+        NetObject* pNetObject = m_pProxyServerNet_ServerModule->GetNet()->GetNetObject(nFD);
+        if (pNetObject)
+        {
+            pNetObject->SetUserID(PBToNF(xData.event_object()));
+        }
+    }
 }
