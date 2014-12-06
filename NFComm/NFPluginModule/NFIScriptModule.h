@@ -248,7 +248,7 @@ public:
         return m_pElementInfoModule->ExistElement(strConfigName);
     }
 
-    int GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName)
+    NFINT64 GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName)
     {
         return m_pElementInfoModule->GetPropertyInt(strConfigName, strPropertyName);
     }
@@ -449,7 +449,7 @@ public:
         return m_pKernelModule->FindProperty(self, strPropertyName);
     }
 
-    bool SetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName, const int nValue)
+    bool SetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName, const NFINT64 nValue)
     {
         return m_pKernelModule->SetPropertyInt(self, strPropertyName, nValue);
     }
@@ -469,7 +469,7 @@ public:
         return m_pKernelModule->SetPropertyObject(self, strPropertyName, objectValue);
     }
 
-    int GetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName)
+    NFINT64 GetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName)
     {
         return m_pKernelModule->GetPropertyInt(self, strPropertyName);
     }
@@ -489,7 +489,7 @@ public:
         return m_pKernelModule->GetPropertyObject(self, strPropertyName);
     }
 
-    bool SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const int nValue)
+    bool SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue)
     {
         return m_pKernelModule->SetRecordInt(self, strRecordName, nRow, nCol, nValue);
     }
@@ -509,7 +509,7 @@ public:
         return m_pKernelModule->SetRecordObject(self, strRecordName, nRow, nCol, objectValue);
     }
 
-    int GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+    NFINT64 GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
     {
         return m_pKernelModule->GetRecordInt(self, strRecordName, nRow, nCol);
     }
@@ -700,7 +700,7 @@ static bool NFVarList_SetObject(NFIDataList* pVarList, const int index, const NF
     return false;
 }
 
-static int NFVarList_IntVal(NFIDataList* pVarList, const int index)
+static NFINT64 NFVarList_IntVal(NFIDataList* pVarList, const int index)
 {
     if (pVarList)
     {
@@ -802,7 +802,7 @@ static bool KernelModule_ExistElement(const NFScriptInt64& nPtrKernelModule,
     return false;
 }
 
-static int KernelModule_GetPropertyInt(const NFScriptInt64& nPtrKernelModule,
+static NFINT64 KernelModule_GetPropertyInt(const NFScriptInt64& nPtrKernelModule,
                          const std::string& strConfigName, const std::string& strPropertyName)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
@@ -987,7 +987,7 @@ static bool KernelModule_FindProperty(const NFScriptInt64& nPtrKernelModule, con
     return false;
 }
 
-static bool KernelModule_SetPropertyInt(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, const std::string& strPropertyName, const int nValue)
+static bool KernelModule_SetPropertyInt(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, const std::string& strPropertyName, const NFINT64 nValue)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
     if (pScriptKernelModule)
@@ -1034,7 +1034,7 @@ static bool KernelModule_SetPropertyObject(const NFScriptInt64& nPtrKernelModule
     return false;
 }
 
-static int KernelModule_GetPropertyInt(const NFScriptInt64& nKernelModule, const NFScriptInt64& self, 
+static NFINT64 KernelModule_GetPropertyInt(const NFScriptInt64& nKernelModule, const NFScriptInt64& self, 
                             const std::string& strPropertyName)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nKernelModule.Int64Val();
@@ -1083,7 +1083,7 @@ static NFScriptInt64 KernelModule_GetPropertyObject(const NFScriptInt64& nPtrKer
 }
 
 static bool KernelModule_SetRecordInt(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
-                         const std::string& strRecordName, const int nRow, const int nCol, const int nValue)
+                         const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
     if (pScriptKernelModule)
@@ -1130,7 +1130,7 @@ static bool KernelModule_SetRecordObject(const NFScriptInt64& nPtrKernelModule, 
     return false;
 }
 
-static int KernelModule_GetRecordInt(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
+static NFINT64 KernelModule_GetRecordInt(const NFScriptInt64& nPtrKernelModule, const NFScriptInt64& self, 
                           const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
