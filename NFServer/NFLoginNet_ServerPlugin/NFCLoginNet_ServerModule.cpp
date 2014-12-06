@@ -101,8 +101,8 @@ int NFCLoginNet_ServerModule::OnLoginResultsEvent(const NFIDENTID& object, const
     if (pNetObject)
     {
         //记录他登录过
-        pNetObject->SetUserData(1);
-        pNetObject->SetUserStrData(strAccount);
+        pNetObject->SetConnectKeyState(1);
+        pNetObject->SetAccount(strAccount);
     }
 
 	//把服务器列表广播下去
@@ -179,7 +179,7 @@ int NFCLoginNet_ServerModule::OnLoginProcess( const NFIPacket& msg )
     if (pNetObject)
     {
         //还没有登录过
-        if (pNetObject->GetUserData() == 0)
+        if (pNetObject->GetConnectKeyState() == 0)
         {
             NFCDataList val;
             val << msg.GetFd() << xMsg.account() << xMsg.password();
@@ -210,10 +210,10 @@ int NFCLoginNet_ServerModule::OnSelectWorldProcess( const NFIPacket& msg )
     if (pNetObject)
     {
         //登录过
-        if (pNetObject->GetUserData() > 0)
+        if (pNetObject->GetConnectKeyState() > 0)
         {
             NFCDataList val;
-            val << xMsg.world_id() << msg.GetFd() << nServerID << pNetObject->GetUserStrData().c_str();
+            val << xMsg.world_id() << msg.GetFd() << nServerID << pNetObject->GetAccount().c_str();
             m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, val);
         }
     }

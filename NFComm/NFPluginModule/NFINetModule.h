@@ -78,25 +78,30 @@ public:
         return true;
 	}
 
-    bool VerifyProtocol(const NFIPacket& msg, const NFIDENTID nPlayer)
-    {
-        NFMsg::MsgBase xMsg;
-        if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
-        {
-            char szData[MAX_PATH] = { 0 };
-            sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
-            LogRecive(szData);
-
-            return false;
-        }
-
-        if(nPlayer != PBToNF(xMsg.player_id()))
-        {
-            return false;
-        }
-
-        return true;
-    }
+//     bool VerifyProtocol(const NFIPacket& msg, const int nFD)
+//     {
+//         NFMsg::MsgBase xMsg;
+//         if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
+//         {
+//             char szData[MAX_PATH] = { 0 };
+//             sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
+//             LogRecive(szData);
+// 
+//             return false;
+//         }
+// 
+// 		NetObject* pObject = GetNet()->GetNetObject(nFD);
+// 		if (pObject)
+// 		{
+// 			pObject->get
+// 		}
+//         if(nPlayer != PBToNF(xMsg.player_id()))
+//         {
+//             return false;
+//         }
+// 
+//         return true;
+//     }
 
 	virtual bool Execute(const float fLasFrametime, const float fStartedTime)
 	{
