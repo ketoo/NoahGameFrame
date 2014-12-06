@@ -84,11 +84,6 @@ bool NFCFightState::RunInFightArea(const NFIDENTID& self)
 
 bool NFCFightState::RunCloseTarget(const NFIDENTID& self, const NFIDENTID& target)
 {
-    // ÉèÖÃ×´Ì¬Îªrun
-    m_pKernelModule->SetPropertyInt(self, "StateType", NFObjectStateType::NOST_RUN);
-
-    x, y, z
-
     return true;
 }
 
