@@ -154,28 +154,18 @@ bool NFCLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
 
 bool NFCLogModule::LogElement(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strElement, const std::string& strDesc, const char* func, int line)
 {
-    if (line > 0)
-    {
-        Log(nll, "[ELEMENT] Ident=%s Element=%s %s %s %d\n", ident.ToString(), strElement.c_str(), strDesc.c_str(), func, line);
-    }
-    else
-    {
-        Log(nll, "[ELEMENT] Ident=%s Element=%s %s\n", ident.ToString(), strElement.c_str(), strDesc.c_str());
-    }
+	std::ostringstream stream;
+	stream << " Element= " <<  strElement << " Desc=  " << strDesc;
+	LogNormal(nll, ident, stream, func, line);
 
     return true;
 }
 
 bool NFCLogModule::LogProperty(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strProperty, const std::string& strDesc, const char* func, int line)
 {
-    if (line > 0)
-    {
-        Log(nll, "[PROPERTY] Ident=%s Element=%s %s %s %d\n", ident.ToString(), strProperty.c_str(), strDesc.c_str(), func, line);
-    }
-    else
-    {
-        Log(nll, "[PROPERTY] Ident=%s Element=%s %s\n", ident.ToString(), strProperty.c_str(), strDesc.c_str());
-    }
+	std::ostringstream stream;
+	stream << " Property= " <<  strProperty << " Desc=  " << strDesc;
+	LogNormal(nll, ident, stream, func, line);
 
     return true;
 
@@ -183,14 +173,9 @@ bool NFCLogModule::LogProperty(const NF_LOG_LEVEL nll, const NFIDENTID ident, co
 
 bool NFCLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strRecord, const std::string& strDesc, const int nRow, const int nCol, const char* func, int line)
 {
-    if (line > 0)
-    {
-        Log(nll, "[RECORD] Ident=%s Record=%s Row=%d Col=%d %s %s %d\n", ident.ToString(), strRecord.c_str(), nRow, nCol, strDesc.c_str(), func, line);
-    }
-    else
-    {
-        Log(nll, "[RECORD] Ident=%s Record=%s Row=%d Col=%d %s \n", ident.ToString(), strRecord.c_str(), nRow, nCol, strDesc.c_str());
-    }
+	std::ostringstream stream;
+	stream << " Record= " <<  strRecord << " Desc=  " << strDesc << " Row= " << nRow << " Col=" << nCol;
+	LogNormal(nll, ident, stream, func, line);
 
     return true;
 
@@ -198,28 +183,18 @@ bool NFCLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
 
 bool NFCLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strRecord, const std::string& strDesc, const char* func, int line)
 {
-    if (line > 0)
-    {
-        Log(nll, "[RECORD] Ident=%s Record=%s %s %s %d\n", ident.ToString(), strRecord.c_str(), strDesc.c_str(), func, line);
-    }
-    else
-    {
-        Log(nll, "[RECORD] Ident=%s Record=%s %s\n", ident.ToString(), strRecord.c_str(), strDesc.c_str());
-    }
+	std::ostringstream stream;
+	stream << " Record= " <<  strRecord << " Desc=  " << strDesc;
+	LogNormal(nll, ident, stream, func, line);
 
     return true;
 }
 
 bool NFCLogModule::LogObject(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strDesc, const char* func, int line)
 {
-    if (line > 0)
-    {
-        Log(nll, "[OBJECT] Ident=%s %s %s %d\n", ident.ToString(),  strDesc.c_str(), func, line);
-    }
-    else
-    {
-        Log(nll, "[OBJECT] Ident=%s %s\n", ident.ToString(), strDesc.c_str());
-    }
+	std::ostringstream stream;
+	stream << " Desc=  " << strDesc;
+	LogNormal(nll, ident, stream, func, line);
 
     return true;
 
@@ -256,28 +231,18 @@ void NFCLogModule::LogStack()
 
 bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strInfo, const std::string& strDesc, const char* func, int line)
 {
-    if (line > 0)
-    {
-        Log(nll, "[NORMAL] Ident=%s  %s %s %s %d\n", ident.ToString().c_str(), strInfo.c_str(), strDesc.c_str(), func, line);
-    }
-    else
-    {
-        Log(nll, "[NORMAL] Ident=%s  %s %s \n", ident.ToString().c_str(), strInfo.c_str(), strDesc.c_str());
-    }
+	std::ostringstream stream;
+	stream << " Info= " <<  strInfo << " Desc=  " << strDesc;
+	LogNormal(nll, ident, stream, func, line);
 
     return true;
 }
 
 bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strInfo, const int nDesc, const char* func, int line)
 {
-    if (line > 0)
-    {
-        Log(nll, "[NORMAL] Ident=%s  %s %d %s %d\n", ident.ToString().c_str(), strInfo.c_str(), nDesc, func, line);
-    }
-    else
-    {
-        Log(nll, "[NORMAL] Ident=%s  %s %d\n", ident.ToString().c_str(), strInfo.c_str(), nDesc);
-    }
+	std::ostringstream stream;
+	stream << " Info= " <<  strInfo << " Desc=  " << nDesc;
+	LogNormal(nll, ident, stream, func, line);
 
     return true;
 }
@@ -330,14 +295,9 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
 
 bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strInfo, const char* func /*= ""*/, int line /*= 0*/)
 {
-    if (line > 0)
-    {
-        Log(nll, "[NORMAL] Ident=%s  %s %s %d\n", ident.ToString().c_str(), strInfo.c_str(), func, line);
-    }
-    else
-    {
-        Log(nll, "[NORMAL] Ident=%s  %s\n", ident.ToString().c_str(), strInfo.c_str());
-    }
+	std::ostringstream stream;
+	stream << " Info= " <<  strInfo;
+	LogNormal(nll, ident, stream, func, line);
 
     return true;
 }
