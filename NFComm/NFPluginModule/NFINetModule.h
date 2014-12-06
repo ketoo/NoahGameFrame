@@ -103,7 +103,7 @@ public:
 		return m_pNet->Execute(fLasFrametime, fStartedTime);
 	}
 
-	bool SendMsgPB(const uint16_t nMsgID, google::protobuf::Message& xData, const uint32_t nSockIndex = 0, const NFIDENTID nPlayer = 0, const std::vector<int>* pFdList = NULL, bool bBroadcast = false)
+	bool SendMsgPB(const uint16_t nMsgID, google::protobuf::Message& xData, const uint32_t nSockIndex = 0, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<int>* pFdList = NULL, bool bBroadcast = false)
 	{
 		if (!m_pNet)
 		{

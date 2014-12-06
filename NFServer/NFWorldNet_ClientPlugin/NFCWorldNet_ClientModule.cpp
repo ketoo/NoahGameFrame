@@ -42,7 +42,7 @@ bool NFCWorldNet_ClientModule::AfterInit()
     assert(NULL != m_pElementInfoModule);
     assert(NULL != m_pLogModule);
 
-	m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_SELECT_SERVER_RESULTS, this, &NFCWorldNet_ClientModule::OnSelectServerResultsEvent);
+	m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER_RESULTS, this, &NFCWorldNet_ClientModule::OnSelectServerResultsEvent);
 
 
 
@@ -107,7 +107,7 @@ void NFCWorldNet_ClientModule::Register()
 
     SendMsgPB(NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED, xMsg, mnSocketFD);
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Register");
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 }
 
 void NFCWorldNet_ClientModule::UnRegister()
@@ -133,7 +133,7 @@ void NFCWorldNet_ClientModule::UnRegister()
 
     Execute(0.0f, 0.0f);
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "UnRegister");
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "UnRegister");
 
 }
 
@@ -144,7 +144,7 @@ void NFCWorldNet_ClientModule::RefreshWorldInfo()
 
 int NFCWorldNet_ClientModule::OnSelectServerProcess(const NFIPacket& msg)
 {
-	NFIDENTID nPlayerID = 0;
+	NFIDENTID nPlayerID;
 	NFMsg::ReqConnectWorld xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
@@ -153,7 +153,7 @@ int NFCWorldNet_ClientModule::OnSelectServerProcess(const NFIPacket& msg)
 
     NFCDataList var;
     var << xMsg.world_id() << xMsg.sender_ip()  << xMsg.login_id() << xMsg.account();
-    m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_SELECT_SERVER, var);
+    m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, var);
 
     return 0;
 }
@@ -193,7 +193,7 @@ int NFCWorldNet_ClientModule::OnSelectServerResultsEvent(const NFIDENTID& object
 
 int NFCWorldNet_ClientModule::OnKickClientProcess(const NFIPacket& msg)
 {
-	NFIDENTID nPlayerID = 0;
+	NFIDENTID nPlayerID;
 	NFMsg::ReqKickFromWorld xMsg;
 	if (!RecivePB(msg, xMsg, nPlayerID))
 	{
@@ -203,7 +203,7 @@ int NFCWorldNet_ClientModule::OnKickClientProcess(const NFIPacket& msg)
     //T»À,œ¬œﬂ
     NFCDataList var;
     var << xMsg.world_id() << xMsg.account();
-    m_pEventProcessModule->DoEvent(0, NFED_ON_KICK_FROM_SERVER, var);
+    m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_KICK_FROM_SERVER, var);
     return 0;
 }
 
@@ -232,19 +232,19 @@ int NFCWorldNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF_NET_
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
     } 
     else if (eEvent & NF_NET_EVENT_ERROR) 
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
     }
     else if (eEvent & NF_NET_EVENT_TIMEOUT)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
     }
     else  if (eEvent == NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
         Register();
     }
 
