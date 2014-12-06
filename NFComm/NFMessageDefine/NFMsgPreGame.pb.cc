@@ -318,7 +318,8 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqRoleList));
   RoleLiteInfo_descriptor_ = file->message_type(13);
-  static const int RoleLiteInfo_offsets_[11] = {
+  static const int RoleLiteInfo_offsets_[12] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RoleLiteInfo, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RoleLiteInfo, career_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RoleLiteInfo, sex_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RoleLiteInfo, race_),
@@ -531,60 +532,62 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
 
   ::NFMsg::protobuf_AddDesc_NFDefine_2eproto();
   ::NFMsg::protobuf_AddDesc_NFMsgBase_2eproto();
+  ::NFMsg::protobuf_AddDesc_NFMsgBaseEx_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\022NFMsgPreGame.proto\022\005NFMsg\032\016NFDefine.pr"
-    "oto\032\017NFMsgBase.proto\"\302\001\n\020ServerInfoRepor"
-    "t\022\021\n\tserver_id\030\001 \002(\005\022\023\n\013server_name\030\002 \002("
-    "\014\022\021\n\tserver_ip\030\003 \002(\014\022\023\n\013server_port\030\004 \002("
-    "\005\022\031\n\021server_max_online\030\005 \002(\005\022\030\n\020server_c"
-    "ur_count\030\006 \002(\005\022)\n\014server_state\030\007 \002(\0162\023.N"
-    "FMsg.EServerState\"D\n\024ServerInfoReportLis"
-    "t\022,\n\013server_list\030\001 \003(\0132\027.NFMsg.ServerInf"
-    "oReport\"r\n\016AckEventResult\022)\n\nevent_code\030"
-    "\001 \002(\0162\025.NFMsg.EGameEventCode\022\"\n\014event_ob"
-    "ject\030\002 \001(\0132\014.NFMsg.Ident\022\021\n\tevent_arg\030\003 "
-    "\001(\003\"\325\001\n\017ReqAccountLogin\022\017\n\007account\030\002 \002(\014"
-    "\022\020\n\010password\030\003 \002(\014\022\025\n\rsecurity_code\030\004 \002("
-    "\014\022\020\n\010signBuff\030\005 \002(\014\022\025\n\rclientVersion\030\006 \002"
-    "(\005\022\021\n\tloginMode\030\007 \002(\005\022\020\n\010clientIP\030\010 \002(\005\022"
-    "\021\n\tclientMAC\030\t \002(\003\022\023\n\013device_info\030\n \002(\014\022"
-    "\022\n\nextra_info\030\013 \002(\014\"7\n\020ReqAccountLogout\022"
-    "\017\n\007account\030\002 \002(\014\022\022\n\nextra_info\030\003 \002(\014\"f\n\n"
-    "ServerInfo\022\021\n\tserver_id\030\001 \002(\005\022\014\n\004name\030\002 "
-    "\002(\014\022\022\n\nwait_count\030\003 \002(\005\022#\n\006status\030\004 \002(\0162"
-    "\023.NFMsg.EServerState\"7\n\rReqServerList\022&\n"
-    "\004type\030\001 \002(\0162\030.NFMsg.ReqServerListType\"X\n"
-    "\rAckServerList\022&\n\004type\030\001 \002(\0162\030.NFMsg.Req"
-    "ServerListType\022\037\n\004info\030\002 \003(\0132\021.NFMsg.Ser"
-    "verInfo\"Y\n\017ReqConnectWorld\022\020\n\010world_id\030\001"
-    " \002(\005\022\017\n\007account\030\002 \001(\014\022\021\n\tsender_ip\030\003 \001(\005"
-    "\022\020\n\010login_id\030\004 \001(\005\"\230\001\n\025AckConnectWorldRe"
-    "sult\022\020\n\010world_id\030\001 \002(\005\022\021\n\tsender_ip\030\002 \002("
-    "\005\022\020\n\010login_id\030\003 \002(\005\022\017\n\007account\030\004 \002(\014\022\020\n\010"
-    "world_ip\030\005 \002(\014\022\022\n\nworld_port\030\006 \002(\005\022\021\n\two"
-    "rld_key\030\007 \002(\014\"#\n\017ReqSelectServer\022\020\n\010worl"
-    "d_id\030\001 \002(\005\"5\n\020ReqKickFromWorld\022\020\n\010world_"
-    "id\030\001 \002(\005\022\017\n\007account\030\002 \002(\014\"/\n\013ReqRoleList"
-    "\022\017\n\007game_id\030\001 \002(\005\022\017\n\007account\030\002 \002(\014\"\341\001\n\014R"
-    "oleLiteInfo\022\016\n\006career\030\001 \002(\005\022\013\n\003sex\030\002 \002(\005"
-    "\022\014\n\004race\030\003 \002(\005\022\021\n\tnoob_name\030\004 \002(\014\022\017\n\007gam"
-    "e_id\030\005 \002(\005\022\022\n\nrole_level\030\006 \002(\005\022\023\n\013delete"
-    "_time\030\007 \002(\005\022\020\n\010reg_time\030\010 \002(\005\022\031\n\021last_of"
-    "fline_time\030\t \002(\005\022\027\n\017last_offline_ip\030\n \002("
-    "\005\022\023\n\013view_record\030\013 \002(\014\"=\n\023AckRoleLiteInf"
-    "oList\022&\n\tchar_data\030\001 \003(\0132\023.NFMsg.RoleLit"
-    "eInfo\"o\n\rReqCreateRole\022\017\n\007account\030\001 \002(\014\022"
-    "\016\n\006career\030\002 \002(\005\022\013\n\003sex\030\003 \002(\005\022\014\n\004race\030\004 \002"
-    "(\005\022\021\n\tnoob_name\030\005 \002(\014\022\017\n\007game_id\030\006 \002(\005\"\?"
-    "\n\rReqDeleteRole\022\017\n\007account\030\001 \002(\014\022\014\n\004name"
-    "\030\002 \002(\014\022\017\n\007game_id\030\003 \002(\005\"@\n\016ReqRecoverRol"
-    "e\022\017\n\007account\030\001 \002(\014\022\014\n\004name\030\002 \002(\014\022\017\n\007game"
-    "_id\030\003 \002(\005\" \n\017ServerHeartBeat\022\r\n\005count\030\001 "
-    "\001(\005*Z\n\014EServerState\022\r\n\tEST_CRASH\020\000\022\016\n\nES"
-    "T_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST_FIRE\020\003\022\017"
-    "\n\013EST_MAINTEN\020\004*@\n\021ReqServerListType\022\025\n\021"
-    "RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GAMES_ERVER\020"
-    "\001", 2081);
+    "oto\032\017NFMsgBase.proto\032\021NFMsgBaseEx.proto\""
+    "\302\001\n\020ServerInfoReport\022\021\n\tserver_id\030\001 \002(\005\022"
+    "\023\n\013server_name\030\002 \002(\014\022\021\n\tserver_ip\030\003 \002(\014\022"
+    "\023\n\013server_port\030\004 \002(\005\022\031\n\021server_max_onlin"
+    "e\030\005 \002(\005\022\030\n\020server_cur_count\030\006 \002(\005\022)\n\014ser"
+    "ver_state\030\007 \002(\0162\023.NFMsg.EServerState\"D\n\024"
+    "ServerInfoReportList\022,\n\013server_list\030\001 \003("
+    "\0132\027.NFMsg.ServerInfoReport\"r\n\016AckEventRe"
+    "sult\022)\n\nevent_code\030\001 \002(\0162\025.NFMsg.EGameEv"
+    "entCode\022\"\n\014event_object\030\002 \001(\0132\014.NFMsg.Id"
+    "ent\022\021\n\tevent_arg\030\003 \001(\003\"\325\001\n\017ReqAccountLog"
+    "in\022\017\n\007account\030\002 \002(\014\022\020\n\010password\030\003 \002(\014\022\025\n"
+    "\rsecurity_code\030\004 \002(\014\022\020\n\010signBuff\030\005 \002(\014\022\025"
+    "\n\rclientVersion\030\006 \002(\005\022\021\n\tloginMode\030\007 \002(\005"
+    "\022\020\n\010clientIP\030\010 \002(\005\022\021\n\tclientMAC\030\t \002(\003\022\023\n"
+    "\013device_info\030\n \002(\014\022\022\n\nextra_info\030\013 \002(\014\"7"
+    "\n\020ReqAccountLogout\022\017\n\007account\030\002 \002(\014\022\022\n\ne"
+    "xtra_info\030\003 \002(\014\"f\n\nServerInfo\022\021\n\tserver_"
+    "id\030\001 \002(\005\022\014\n\004name\030\002 \002(\014\022\022\n\nwait_count\030\003 \002"
+    "(\005\022#\n\006status\030\004 \002(\0162\023.NFMsg.EServerState\""
+    "7\n\rReqServerList\022&\n\004type\030\001 \002(\0162\030.NFMsg.R"
+    "eqServerListType\"X\n\rAckServerList\022&\n\004typ"
+    "e\030\001 \002(\0162\030.NFMsg.ReqServerListType\022\037\n\004inf"
+    "o\030\002 \003(\0132\021.NFMsg.ServerInfo\"Y\n\017ReqConnect"
+    "World\022\020\n\010world_id\030\001 \002(\005\022\017\n\007account\030\002 \001(\014"
+    "\022\021\n\tsender_ip\030\003 \001(\005\022\020\n\010login_id\030\004 \001(\005\"\230\001"
+    "\n\025AckConnectWorldResult\022\020\n\010world_id\030\001 \002("
+    "\005\022\021\n\tsender_ip\030\002 \002(\005\022\020\n\010login_id\030\003 \002(\005\022\017"
+    "\n\007account\030\004 \002(\014\022\020\n\010world_ip\030\005 \002(\014\022\022\n\nwor"
+    "ld_port\030\006 \002(\005\022\021\n\tworld_key\030\007 \002(\014\"#\n\017ReqS"
+    "electServer\022\020\n\010world_id\030\001 \002(\005\"5\n\020ReqKick"
+    "FromWorld\022\020\n\010world_id\030\001 \002(\005\022\017\n\007account\030\002"
+    " \002(\014\"/\n\013ReqRoleList\022\017\n\007game_id\030\001 \002(\005\022\017\n\007"
+    "account\030\002 \002(\014\"\373\001\n\014RoleLiteInfo\022\030\n\002id\030\001 \002"
+    "(\0132\014.NFMsg.Ident\022\016\n\006career\030\002 \002(\005\022\013\n\003sex\030"
+    "\003 \002(\005\022\014\n\004race\030\004 \002(\005\022\021\n\tnoob_name\030\005 \002(\014\022\017"
+    "\n\007game_id\030\006 \002(\005\022\022\n\nrole_level\030\007 \002(\005\022\023\n\013d"
+    "elete_time\030\010 \002(\005\022\020\n\010reg_time\030\t \002(\005\022\031\n\021la"
+    "st_offline_time\030\n \002(\005\022\027\n\017last_offline_ip"
+    "\030\013 \002(\005\022\023\n\013view_record\030\014 \002(\014\"=\n\023AckRoleLi"
+    "teInfoList\022&\n\tchar_data\030\001 \003(\0132\023.NFMsg.Ro"
+    "leLiteInfo\"o\n\rReqCreateRole\022\017\n\007account\030\001"
+    " \002(\014\022\016\n\006career\030\002 \002(\005\022\013\n\003sex\030\003 \002(\005\022\014\n\004rac"
+    "e\030\004 \002(\005\022\021\n\tnoob_name\030\005 \002(\014\022\017\n\007game_id\030\006 "
+    "\002(\005\"\?\n\rReqDeleteRole\022\017\n\007account\030\001 \002(\014\022\014\n"
+    "\004name\030\002 \002(\014\022\017\n\007game_id\030\003 \002(\005\"@\n\016ReqRecov"
+    "erRole\022\017\n\007account\030\001 \002(\014\022\014\n\004name\030\002 \002(\014\022\017\n"
+    "\007game_id\030\003 \002(\005\" \n\017ServerHeartBeat\022\r\n\005cou"
+    "nt\030\001 \001(\005*Z\n\014EServerState\022\r\n\tEST_CRASH\020\000\022"
+    "\016\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST_FIR"
+    "E\020\003\022\017\n\013EST_MAINTEN\020\004*@\n\021ReqServerListTyp"
+    "e\022\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GAMES_E"
+    "RVER\020\001", 2126);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgPreGame.proto", &protobuf_RegisterTypes);
   ServerInfoReport::default_instance_ = new ServerInfoReport();
@@ -4886,6 +4889,7 @@ void ReqRoleList::Swap(ReqRoleList* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int RoleLiteInfo::kIdFieldNumber;
 const int RoleLiteInfo::kCareerFieldNumber;
 const int RoleLiteInfo::kSexFieldNumber;
 const int RoleLiteInfo::kRaceFieldNumber;
@@ -4905,6 +4909,7 @@ RoleLiteInfo::RoleLiteInfo()
 }
 
 void RoleLiteInfo::InitAsDefaultInstance() {
+  id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 RoleLiteInfo::RoleLiteInfo(const RoleLiteInfo& from)
@@ -4915,6 +4920,7 @@ RoleLiteInfo::RoleLiteInfo(const RoleLiteInfo& from)
 
 void RoleLiteInfo::SharedCtor() {
   _cached_size_ = 0;
+  id_ = NULL;
   career_ = 0;
   sex_ = 0;
   race_ = 0;
@@ -4941,6 +4947,7 @@ void RoleLiteInfo::SharedDtor() {
     delete view_record_;
   }
   if (this != default_instance_) {
+    delete id_;
   }
 }
 
@@ -4967,6 +4974,9 @@ RoleLiteInfo* RoleLiteInfo::New() const {
 
 void RoleLiteInfo::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_id()) {
+      if (id_ != NULL) id_->::NFMsg::Ident::Clear();
+    }
     career_ = 0;
     sex_ = 0;
     race_ = 0;
@@ -4978,9 +4988,9 @@ void RoleLiteInfo::Clear() {
     game_id_ = 0;
     role_level_ = 0;
     delete_time_ = 0;
-    reg_time_ = 0;
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    reg_time_ = 0;
     last_offline_time_ = 0;
     last_offline_ip_ = 0;
     if (has_view_record()) {
@@ -4999,10 +5009,24 @@ bool RoleLiteInfo::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 career = 1;
+      // required .NFMsg.Ident id = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_career;
+        break;
+      }
+
+      // required int32 career = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_career:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &career_)));
@@ -5010,12 +5034,12 @@ bool RoleLiteInfo::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_sex;
+        if (input->ExpectTag(24)) goto parse_sex;
         break;
       }
 
-      // required int32 sex = 2;
-      case 2: {
+      // required int32 sex = 3;
+      case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_sex:
@@ -5026,12 +5050,12 @@ bool RoleLiteInfo::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_race;
+        if (input->ExpectTag(32)) goto parse_race;
         break;
       }
 
-      // required int32 race = 3;
-      case 3: {
+      // required int32 race = 4;
+      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_race:
@@ -5042,12 +5066,12 @@ bool RoleLiteInfo::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(34)) goto parse_noob_name;
+        if (input->ExpectTag(42)) goto parse_noob_name;
         break;
       }
 
-      // required bytes noob_name = 4;
-      case 4: {
+      // required bytes noob_name = 5;
+      case 5: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_noob_name:
@@ -5056,12 +5080,12 @@ bool RoleLiteInfo::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(40)) goto parse_game_id;
+        if (input->ExpectTag(48)) goto parse_game_id;
         break;
       }
 
-      // required int32 game_id = 5;
-      case 5: {
+      // required int32 game_id = 6;
+      case 6: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_game_id:
@@ -5072,12 +5096,12 @@ bool RoleLiteInfo::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(48)) goto parse_role_level;
+        if (input->ExpectTag(56)) goto parse_role_level;
         break;
       }
 
-      // required int32 role_level = 6;
-      case 6: {
+      // required int32 role_level = 7;
+      case 7: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_role_level:
@@ -5088,12 +5112,12 @@ bool RoleLiteInfo::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(56)) goto parse_delete_time;
+        if (input->ExpectTag(64)) goto parse_delete_time;
         break;
       }
 
-      // required int32 delete_time = 7;
-      case 7: {
+      // required int32 delete_time = 8;
+      case 8: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_delete_time:
@@ -5104,12 +5128,12 @@ bool RoleLiteInfo::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(64)) goto parse_reg_time;
+        if (input->ExpectTag(72)) goto parse_reg_time;
         break;
       }
 
-      // required int32 reg_time = 8;
-      case 8: {
+      // required int32 reg_time = 9;
+      case 9: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_reg_time:
@@ -5120,12 +5144,12 @@ bool RoleLiteInfo::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(72)) goto parse_last_offline_time;
+        if (input->ExpectTag(80)) goto parse_last_offline_time;
         break;
       }
 
-      // required int32 last_offline_time = 9;
-      case 9: {
+      // required int32 last_offline_time = 10;
+      case 10: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_last_offline_time:
@@ -5136,12 +5160,12 @@ bool RoleLiteInfo::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(80)) goto parse_last_offline_ip;
+        if (input->ExpectTag(88)) goto parse_last_offline_ip;
         break;
       }
 
-      // required int32 last_offline_ip = 10;
-      case 10: {
+      // required int32 last_offline_ip = 11;
+      case 11: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_last_offline_ip:
@@ -5152,12 +5176,12 @@ bool RoleLiteInfo::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(90)) goto parse_view_record;
+        if (input->ExpectTag(98)) goto parse_view_record;
         break;
       }
 
-      // required bytes view_record = 11;
-      case 11: {
+      // required bytes view_record = 12;
+      case 12: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_view_record:
@@ -5188,61 +5212,67 @@ bool RoleLiteInfo::MergePartialFromCodedStream(
 
 void RoleLiteInfo::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int32 career = 1;
+  // required .NFMsg.Ident id = 1;
+  if (has_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->id(), output);
+  }
+
+  // required int32 career = 2;
   if (has_career()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->career(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->career(), output);
   }
 
-  // required int32 sex = 2;
+  // required int32 sex = 3;
   if (has_sex()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->sex(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->sex(), output);
   }
 
-  // required int32 race = 3;
+  // required int32 race = 4;
   if (has_race()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->race(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->race(), output);
   }
 
-  // required bytes noob_name = 4;
+  // required bytes noob_name = 5;
   if (has_noob_name()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      4, this->noob_name(), output);
+      5, this->noob_name(), output);
   }
 
-  // required int32 game_id = 5;
+  // required int32 game_id = 6;
   if (has_game_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->game_id(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->game_id(), output);
   }
 
-  // required int32 role_level = 6;
+  // required int32 role_level = 7;
   if (has_role_level()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->role_level(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->role_level(), output);
   }
 
-  // required int32 delete_time = 7;
+  // required int32 delete_time = 8;
   if (has_delete_time()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->delete_time(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->delete_time(), output);
   }
 
-  // required int32 reg_time = 8;
+  // required int32 reg_time = 9;
   if (has_reg_time()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->reg_time(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(9, this->reg_time(), output);
   }
 
-  // required int32 last_offline_time = 9;
+  // required int32 last_offline_time = 10;
   if (has_last_offline_time()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(9, this->last_offline_time(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(10, this->last_offline_time(), output);
   }
 
-  // required int32 last_offline_ip = 10;
+  // required int32 last_offline_ip = 11;
   if (has_last_offline_ip()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(10, this->last_offline_ip(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(11, this->last_offline_ip(), output);
   }
 
-  // required bytes view_record = 11;
+  // required bytes view_record = 12;
   if (has_view_record()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      11, this->view_record(), output);
+      12, this->view_record(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -5253,63 +5283,70 @@ void RoleLiteInfo::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* RoleLiteInfo::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int32 career = 1;
+  // required .NFMsg.Ident id = 1;
+  if (has_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->id(), target);
+  }
+
+  // required int32 career = 2;
   if (has_career()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->career(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->career(), target);
   }
 
-  // required int32 sex = 2;
+  // required int32 sex = 3;
   if (has_sex()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->sex(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->sex(), target);
   }
 
-  // required int32 race = 3;
+  // required int32 race = 4;
   if (has_race()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->race(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->race(), target);
   }
 
-  // required bytes noob_name = 4;
+  // required bytes noob_name = 5;
   if (has_noob_name()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        4, this->noob_name(), target);
+        5, this->noob_name(), target);
   }
 
-  // required int32 game_id = 5;
+  // required int32 game_id = 6;
   if (has_game_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->game_id(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->game_id(), target);
   }
 
-  // required int32 role_level = 6;
+  // required int32 role_level = 7;
   if (has_role_level()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->role_level(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->role_level(), target);
   }
 
-  // required int32 delete_time = 7;
+  // required int32 delete_time = 8;
   if (has_delete_time()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->delete_time(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->delete_time(), target);
   }
 
-  // required int32 reg_time = 8;
+  // required int32 reg_time = 9;
   if (has_reg_time()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->reg_time(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(9, this->reg_time(), target);
   }
 
-  // required int32 last_offline_time = 9;
+  // required int32 last_offline_time = 10;
   if (has_last_offline_time()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(9, this->last_offline_time(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(10, this->last_offline_time(), target);
   }
 
-  // required int32 last_offline_ip = 10;
+  // required int32 last_offline_ip = 11;
   if (has_last_offline_ip()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(10, this->last_offline_ip(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(11, this->last_offline_ip(), target);
   }
 
-  // required bytes view_record = 11;
+  // required bytes view_record = 12;
   if (has_view_record()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        11, this->view_record(), target);
+        12, this->view_record(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -5323,79 +5360,86 @@ int RoleLiteInfo::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 career = 1;
+    // required .NFMsg.Ident id = 1;
+    if (has_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->id());
+    }
+
+    // required int32 career = 2;
     if (has_career()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->career());
     }
 
-    // required int32 sex = 2;
+    // required int32 sex = 3;
     if (has_sex()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->sex());
     }
 
-    // required int32 race = 3;
+    // required int32 race = 4;
     if (has_race()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->race());
     }
 
-    // required bytes noob_name = 4;
+    // required bytes noob_name = 5;
     if (has_noob_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->noob_name());
     }
 
-    // required int32 game_id = 5;
+    // required int32 game_id = 6;
     if (has_game_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->game_id());
     }
 
-    // required int32 role_level = 6;
+    // required int32 role_level = 7;
     if (has_role_level()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->role_level());
     }
 
-    // required int32 delete_time = 7;
+    // required int32 delete_time = 8;
     if (has_delete_time()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->delete_time());
     }
 
-    // required int32 reg_time = 8;
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    // required int32 reg_time = 9;
     if (has_reg_time()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->reg_time());
     }
 
-  }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // required int32 last_offline_time = 9;
+    // required int32 last_offline_time = 10;
     if (has_last_offline_time()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->last_offline_time());
     }
 
-    // required int32 last_offline_ip = 10;
+    // required int32 last_offline_ip = 11;
     if (has_last_offline_ip()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->last_offline_ip());
     }
 
-    // required bytes view_record = 11;
+    // required bytes view_record = 12;
     if (has_view_record()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
@@ -5429,6 +5473,9 @@ void RoleLiteInfo::MergeFrom(const ::google::protobuf::Message& from) {
 void RoleLiteInfo::MergeFrom(const RoleLiteInfo& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_id()) {
+      mutable_id()->::NFMsg::Ident::MergeFrom(from.id());
+    }
     if (from.has_career()) {
       set_career(from.career());
     }
@@ -5450,11 +5497,11 @@ void RoleLiteInfo::MergeFrom(const RoleLiteInfo& from) {
     if (from.has_delete_time()) {
       set_delete_time(from.delete_time());
     }
+  }
+  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_reg_time()) {
       set_reg_time(from.reg_time());
     }
-  }
-  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_last_offline_time()) {
       set_last_offline_time(from.last_offline_time());
     }
@@ -5481,13 +5528,17 @@ void RoleLiteInfo::CopyFrom(const RoleLiteInfo& from) {
 }
 
 bool RoleLiteInfo::IsInitialized() const {
-  if ((_has_bits_[0] & 0x000007ff) != 0x000007ff) return false;
+  if ((_has_bits_[0] & 0x00000fff) != 0x00000fff) return false;
 
+  if (has_id()) {
+    if (!this->id().IsInitialized()) return false;
+  }
   return true;
 }
 
 void RoleLiteInfo::Swap(RoleLiteInfo* other) {
   if (other != this) {
+    std::swap(id_, other->id_);
     std::swap(career_, other->career_);
     std::swap(sex_, other->sex_);
     std::swap(race_, other->race_);

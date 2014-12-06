@@ -31,18 +31,6 @@ struct NFIDENTID
         nData64 = 0;
     }
 
-    NFIDENTID(NFINT32 nData)
-    {
-        nSvrID = 0;
-        nData64 = nData;
-    }
-    
-    NFIDENTID(NFINT64 nData)
-    {
-		nSvrID = 0;
-        nData64 = nData;
-    }
-
 	NFIDENTID(NFINT64 nSvr, NFINT64 nData)
 	{
 		nSvrID = nSvr;
@@ -66,23 +54,15 @@ struct NFIDENTID
 
     bool operator < (const NFIDENTID& id) const
     {
-        if (this->nSvrID < id.nSvrID) 
-        {
-            return true;
-        }
-        else if (this->nSvrID == id.nSvrID) 
+        if (this->nSvrID == id.nSvrID)
         {
             return this->nData64 < id.nData64;
         }
-        else
-        {
-            return false;
-        }
-        //return (this->nData64 < id.nData64) && (this->nSvrID < id.nSvrID); 
-        //return (this->nSvrID < id.nSvrID) || ((id.nSvrID >= this->nSvrID) && (this->nData64 < id.nData64));
+
+        return this->nSvrID < id.nSvrID;
     }
 
-    std::string ToString()
+    std::string ToString() const
     {
         return boost::lexical_cast<std::string>(this->nSvrID) + "-" + boost::lexical_cast<std::string>(this->nData64);
     }

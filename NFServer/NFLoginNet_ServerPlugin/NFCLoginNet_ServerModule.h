@@ -24,7 +24,7 @@
 #include "NFComm/NFPluginModule/NFILoginNet_ClientModule.h"
 
 #define NET_MSG_PROCESS(xNFMsg, msg) \
-    NFIDENTID nPlayerID = 0; \
+    NFIDENTID nPlayerID; \
     xNFMsg xMsg; \
     if (!RecivePB(msg, xMsg, nPlayerID)) \
     { \
