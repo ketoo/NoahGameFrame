@@ -32,7 +32,7 @@ public:
 
 protected:
     bool RunInFightArea(const NFIDENTID& self);
-    bool RunCloseTarget(const NFIDENTID& self);
+    bool RunCloseTarget(const NFIDENTID& self, const NFIDENTID& target);
 
 	int OnSkillConsumeTime(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& arg);
 

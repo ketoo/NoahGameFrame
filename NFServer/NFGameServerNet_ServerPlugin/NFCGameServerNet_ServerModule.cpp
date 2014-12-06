@@ -1824,25 +1824,24 @@ void NFCGameServerNet_ServerModule::OnClienMove( const NFIPacket& msg )
         return;
     }
 
+    m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "X", xMsg.target_pos(0).x());
+    m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Y", xMsg.target_pos(0).x());
+    m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Z", xMsg.target_pos(0).z());
 
-        m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "X", xMsg.target_pos(0).x());
-        m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Y", xMsg.target_pos(0).x());
-        m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Z", xMsg.target_pos(0).z());
+    //bc
+    int nContianerID = m_pKernelModule->GetPropertyInt(PBToNF(xMsg.mover()), "SceneID");
+    int nGroupID = m_pKernelModule->GetPropertyInt(PBToNF(xMsg.mover()), "GroupID");
 
-        //bc
-        int nContianerID = m_pKernelModule->GetPropertyInt(PBToNF(xMsg.mover()), "SceneID");
-        int nGroupID = m_pKernelModule->GetPropertyInt(PBToNF(xMsg.mover()), "GroupID");
-
-        NFCDataList xDataList;
-        m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
-        for (int i = 0; i < xDataList.GetCount(); ++i)
+    NFCDataList xDataList;
+    m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
+    for (int i = 0; i < xDataList.GetCount(); ++i)
+    {
+        std::shared_ptr<BaseData> pData = mRoleBaseData.GetElement(xDataList.Object(i));
+        if (pData.get())
         {
-            std::shared_ptr<BaseData> pData = mRoleBaseData.GetElement(xDataList.Object(i));
-            if (pData.get())
-            {
-                SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_MOVE, xMsg, msg.GetFd(), pData->nFD);
-            }
+            SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_MOVE, xMsg, msg.GetFd(), pData->nFD);
         }
+    }
 }
 
 void NFCGameServerNet_ServerModule::OnClienMoveImmune( const NFIPacket& msg )
@@ -1854,25 +1853,24 @@ void NFCGameServerNet_ServerModule::OnClienMoveImmune( const NFIPacket& msg )
         return;
     }
 
+    m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "X", xMsg.target_pos(0).x());
+    m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Y", xMsg.target_pos(0).x());
+    m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Z", xMsg.target_pos(0).z());
 
-        m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "X", xMsg.target_pos(0).x());
-        m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Y", xMsg.target_pos(0).x());
-        m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Z", xMsg.target_pos(0).z());
+    //bc
+    int nContianerID = m_pKernelModule->GetPropertyInt(PBToNF(xMsg.mover()), "SceneID");
+    int nGroupID = m_pKernelModule->GetPropertyInt(PBToNF(xMsg.mover()), "GroupID");
 
-        //bc
-        int nContianerID = m_pKernelModule->GetPropertyInt(PBToNF(xMsg.mover()), "SceneID");
-        int nGroupID = m_pKernelModule->GetPropertyInt(PBToNF(xMsg.mover()), "GroupID");
-
-        NFCDataList xDataList;
-        m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
-        for (int i = 0; i < xDataList.GetCount(); ++i)
+    NFCDataList xDataList;
+    m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
+    for (int i = 0; i < xDataList.GetCount(); ++i)
+    {
+        std::shared_ptr<BaseData> pData = mRoleBaseData.GetElement(xDataList.Object(i));
+        if (pData.get())
         {
-            std::shared_ptr<BaseData> pData = mRoleBaseData.GetElement(xDataList.Object(i));
-            if (pData.get())
-            {
-                SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_MOVE_IMMUNE, xMsg, msg.GetFd(), pData->nFD);
-            }
+            SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_MOVE_IMMUNE, xMsg, msg.GetFd(), pData->nFD);
         }
+    }
 }
 
 void NFCGameServerNet_ServerModule::OnClienCommand( const NFIPacket& msg )
