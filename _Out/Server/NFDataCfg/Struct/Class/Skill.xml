@@ -32,6 +32,7 @@
         <Property Desc="是否玩家技能" Id="PlayerSkill" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="与目标最合适的攻击距离" Id="AtkDis" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float" View="1"/>
         <Property Desc="是否必须有目标才能释放" Id="NeedTar" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="缺省打击时间（本来应该打到但是物理没碰撞到或者其他原因）" Id="DefaultHitTime" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float" View="1"/>
     </Propertys>
     <Includes/>
 </XML>
