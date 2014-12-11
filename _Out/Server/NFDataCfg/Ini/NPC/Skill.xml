@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--this is config xml-->
 <XML>
-    <Object AnimaState="60" AtkDis="2" DefaultHitTime="0" ID="NORMALATTACK1" Name="skill1" NeedLevel="5" NeedMoney="300" NeedTar="0" NextLevelID="NORMALATTACK2" ShowName="" SkillType="0"/>
-    <Object AnimaState="61" AtkDis="2" DefaultHitTime="0" ID="NORMALATTACK2" Name="skill1" NeedLevel="5" NeedMoney="300" NeedTar="0" NextLevelID="NORMALATTACK2" ShowName="" SkillType="0"/>
-    <Object AnimaState="62" AtkDis="2" DefaultHitTime="0" ID="NORMALATTACK3" Name="skill1" NeedLevel="5" NeedMoney="300" NeedTar="0" NextLevelID="NORMALATTACK2" ShowName="" SkillType="0"/>
-    <Object AnimaState="63" AtkDis="2" DefaultHitTime="0" ID="NORMALTHUMP" Name="skill1" NeedLevel="5" NeedMoney="300" NeedTar="0" NextLevelID="NORMALATTACK2" ShowName="" SkillType="0"/>
-    <Object AnimaState="101" AtkDis="2" DefaultHitTime="0" ID="SKILL1" Name="skill1" NeedLevel="5" NeedMoney="300" NeedTar="0" NextLevelID="NORMALATTACK2" ShowName="" SkillType="0"/>
-    <Object AnimaState="102" AtkDis="2" DefaultHitTime="0" ID="SKILL2" Name="skill1" NeedLevel="5" NeedMoney="300" NeedTar="0" NextLevelID="NORMALATTACK2" ShowName="" SkillType="0"/>
-    <Object AnimaState="103" AtkDis="2" DefaultHitTime="0" ID="SKILL3" Name="skill1" NeedLevel="5" NeedMoney="300" NeedTar="0" NextLevelID="NORMALATTACK2" ShowName="" SkillType="0"/>
-    <Object AnimaState="104" AtkDis="2" DefaultHitTime="0" ID="SKILL4" Name="skill1" NeedLevel="5" NeedMoney="300" NeedTar="0" NextLevelID="NORMALATTACK2" ShowName="" SkillType="0"/>
+    <Object AnimaState="60" AtkDis="2.5" DefaultHitTime="0.8" ID="NORMALATTACK1" Name="skill1" NeedLevel="5" NeedMoney="300" NeedTar="0" NextLevelID="NORMALATTACK2" ShowName="" SkillType="0"/>
+    <Object AnimaState="61" AtkDis="2.5" DefaultHitTime="0.8" ID="NORMALATTACK2" Name="skill1" NeedLevel="5" NeedMoney="300" NeedTar="0" NextLevelID="NORMALATTACK2" ShowName="" SkillType="0"/>
+    <Object AnimaState="62" AtkDis="2.5" DefaultHitTime="0.8" ID="NORMALATTACK3" Name="skill1" NeedLevel="5" NeedMoney="300" NeedTar="0" NextLevelID="NORMALATTACK2" ShowName="" SkillType="0"/>
+    <Object AnimaState="63" AtkDis="2.5" DefaultHitTime="0.8" ID="NORMALTHUMP" Name="skill1" NeedLevel="5" NeedMoney="300" NeedTar="0" NextLevelID="NORMALATTACK2" ShowName="" SkillType="0"/>
+    <Object AnimaState="101" AtkDis="2.5" DefaultHitTime="0.8" ID="SKILL1" Name="skill1" NeedLevel="5" NeedMoney="300" NeedTar="0" NextLevelID="NORMALATTACK2" ShowName="" SkillType="0"/>
+    <Object AnimaState="102" AtkDis="2.5" DefaultHitTime="0.8" ID="SKILL2" Name="skill1" NeedLevel="5" NeedMoney="300" NeedTar="0" NextLevelID="NORMALATTACK2" ShowName="" SkillType="0"/>
+    <Object AnimaState="103" AtkDis="2.5" DefaultHitTime="0.8" ID="SKILL3" Name="skill1" NeedLevel="5" NeedMoney="300" NeedTar="0" NextLevelID="NORMALATTACK2" ShowName="" SkillType="0"/>
+    <Object AnimaState="104" AtkDis="2.5" DefaultHitTime="0.8" ID="SKILL4" Name="skill1" NeedLevel="5" NeedMoney="300" NeedTar="0" NextLevelID="NORMALATTACK2" ShowName="" SkillType="0"/>
 </XML>
