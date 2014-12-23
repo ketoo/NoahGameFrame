@@ -409,15 +409,15 @@ int NFCNet::InitClientNet()
         return -1;
     }
 
-    int sockfd = bufferevent_socket_connect(bev, (struct sockaddr *)&addr, sizeof(addr));
-    if (0 != sockfd)
+    int bRet = bufferevent_socket_connect(bev, (struct sockaddr *)&addr, sizeof(addr));
+    if (0 != bRet)
     {
         int nError = GetLastError();
         printf("bufferevent_socket_connect error");
         return -1;
     }
 
-    //sockfd = bufferevent_getfd(bev);
+	int sockfd = bufferevent_getfd(bev);
     NetObject* pObject = new NetObject(this, sockfd, addr, bev);
     if (!AddNetObject(sockfd, pObject))
     {
