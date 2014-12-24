@@ -271,6 +271,8 @@ bool NFCMasterNet_ServerModule::AfterInit()
 
 int NFCMasterNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 {
+	std::cout << "OnRecivePack::thread id=" << GetCurrentThreadId() << std::endl;
+
 	int nMsgID = msg.GetMsgHead()->GetMsgID();
 	switch (nMsgID)
 	{
@@ -321,6 +323,8 @@ int NFCMasterNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 
 int NFCMasterNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {
+	std::cout << "OnSocketEvent::thread id=" << GetCurrentThreadId() << std::endl;
+
     if (eEvent & NF_NET_EVENT_EOF) 
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
