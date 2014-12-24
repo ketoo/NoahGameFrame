@@ -15,6 +15,7 @@
 #include "NFComm/NFNet/NFCPacket.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
+#include "NFComm/NFCore/NFQueue.h"
 
 class NetEventPack
 {
