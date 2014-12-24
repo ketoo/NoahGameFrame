@@ -27,6 +27,7 @@ public:
 	};
 
 	NetEventType eMsgType;
+	NF_NET_EVENT eSocketEvt;
 	NFCPacket xPacket;
 };
 
@@ -119,6 +120,43 @@ public:
 
 	virtual bool Execute(const float fLasFrametime, const float fStartedTime)
 	{
+		//把上次的数据处理了
+		while (!mxQueue.Empty())
+		{
+			NetEventPack xEventPack;
+			if (mxQueue.Pop(xEventPack))
+			{
+				switch (xEventPack.eMsgType)
+				{
+				case NetEventPack::ON_RECIVE:
+					{
+						if(!mRecvCB._Empty())
+						{
+							mRecvCB(xEventPack.eSocketEvt);
+						}
+					}
+					break;
+				case NetEventPack::ON_SEND:
+					{
+						m_pNet->SendMsg(xEventPack.xPacket, xEventPack.xPacket.GetFd());
+					}
+					break;
+				case NetEventPack::ON_SOCKET_EVT:
+					{
+						if(!mEventCB._Empty())
+						{
+							mEventCB(xEventPack.xPacket.GetFd(), xEventPack.eSocketEvt);
+						}
+					}
+					break;
+				}
+			}
+		}
+		//1:recive
+		//2:send
+		//3:socket_evt
+
+		//////////////////////////////////////////////////////////////////////////
 		return m_pNet->Execute(fLasFrametime, fStartedTime);
 	}
 
@@ -184,13 +222,34 @@ public:
 		return m_pNet;
 	}
 
-    //if you are a client
-    virtual int GetFD(){return 0;}
+protected:
 
-	std::string mstrConfigIdent;
+	int OnRecivePack(const NFIPacket& msg)
+	{
+		NetEventPack xNetEventPack;
+		xNetEventPack.eMsgType = NetEventPack::ON_RECIVE;
+		xNetEventPack.xPacket = msg;
+		mxQueue.Push(xNetEventPack);
+
+		return 0;
+	}
+
+	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent)
+	{
+		NetEventPack xNetEventPack;
+		xNetEventPack.eMsgType = NetEventPack::ON_SOCKET_EVT;
+		xNetEventPack.eSocketEvt = eEvent
+		xNetEventPack.xPacket.SetFd(nSockIndex);
+		mxQueue.Push(xNetEventPack);
+
+		return 0;
+	}
 
 protected:
 	NFINet* m_pNet;
+
+	RECIEVE_FUNCTOR mRecvCB;
+	EVENT_FUNCTOR mEventCB;
 	NFQueue<NetEventPack> mxQueue;
 
 };
