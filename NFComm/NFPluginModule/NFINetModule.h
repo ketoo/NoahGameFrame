@@ -16,6 +16,20 @@
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
+class NetEventPack
+{
+public:
+	enum NetEventType
+	{
+		ON_RECIVE = 0,
+		ON_SEND = 1,
+		ON_SOCKET_EVT = 2,
+	};
+
+	NetEventType eMsgType;
+	NFCPacket xPacket;
+};
+
 class NFINetModule
 	: public NFILogicModule
 {
@@ -177,6 +191,7 @@ public:
 
 protected:
 	NFINet* m_pNet;
+	NFQueue<NetEventPack> mxQueue;
 
 };
 
