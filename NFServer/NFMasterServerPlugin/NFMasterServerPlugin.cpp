@@ -21,6 +21,7 @@ NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 
     CREATE_PLUGIN(pm, NFMasterServerPlugin)
 
+	std::cout << "DllStartPlugin::thread id=" << GetCurrentThreadId() << std::endl;
 };
 
 NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
