@@ -20,16 +20,31 @@
 class NetEventPack
 {
 public:
+	NetEventPack()
+	{
+		eMsgType = ON_NONE;
+	}
+	
+	void operator = (const NetEventPack&  ep)
+	{
+		this->eMsgType = ep.eMsgType;//消息类型
+		this->nMsgID = ep.nMsgID;//消息ID，如果是网络事件，则为事件ID
+		this->nFD = ep.nFD;//FD
+		this->strData = ep.strData;//数据
+	}
+
 	enum NetEventType
 	{
-		ON_RECIVE = 0,
-		ON_SEND = 1,
-		ON_SOCKET_EVT = 2,
+		ON_NONE = 0,
+		ON_RECIVE = 1,
+		ON_SEND = 2,
+		ON_SOCKET_EVT = 3,
 	};
 
-	NetEventType eMsgType;
-	NF_NET_EVENT eSocketEvt;
-	NFCPacket xPacket;
+	int eMsgType;//消息类型
+	int nMsgID;//消息ID，如果是网络事件，则为事件ID
+	int nFD;//FD
+	std::string strData;//数据
 };
 
 class NFINetModule
@@ -66,6 +81,27 @@ public:
 		xIdent.set_index(xID.nData64);
 
 		return xIdent;
+	}
+
+	
+	template<typename BaseType>
+	int Initialization(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT), const char* strIP, const unsigned short nPort)
+	{
+		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
+		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2);
+
+		m_pNet = new NFCNet(nHeadLength, this, &NFINetModule::OnRecivePack, &NFINetModule::OnSocketEvent);
+		return m_pNet->Initialization(strIP, nPort);
+	}
+
+	template<typename BaseType>
+	int Initialization(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT), const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4)
+	{
+		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
+		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2);
+
+		m_pNet = new NFCNet(nHeadLength, this, &NFINetModule::OnRecivePack, &NFINetModule::OnSocketEvent);
+		return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
 	}
 
 	bool RecivePB(const NFIPacket& msg, google::protobuf::Message& xData, NFIDENTID& nPlayer)
@@ -122,10 +158,9 @@ public:
 	virtual bool Execute(const float fLasFrametime, const float fStartedTime)
 	{
 		//把上次的数据处理了
-		while (!mxQueue.Empty())
-		{
+
 			NetEventPack xEventPack;
-			if (mxQueue.Pop(xEventPack))
+			while (mxQueue.Pop(xEventPack))
 			{
 				switch (xEventPack.eMsgType)
 				{
@@ -133,26 +168,35 @@ public:
 					{
 						if(!mRecvCB._Empty())
 						{
-							mRecvCB(xEventPack.eSocketEvt);
+				
+							NFCPacket xPacket(m_pNet->GetHeadLen());
+							xPacket.SetFd(xEventPack.nFD);
+							//xPacket.DeCode(xEventPack.strData.c_str(), xEventPack.strData.length());
+							xPacket.EnCode(xEventPack.nMsgID, xEventPack.strData.c_str(), xEventPack.strData.length());
+
+							mRecvCB(xPacket);
 						}
 					}
 					break;
 				case NetEventPack::ON_SEND:
 					{
-						m_pNet->SendMsg(xEventPack.xPacket, xEventPack.xPacket.GetFd());
+						NFCPacket xPacket(m_pNet->GetHeadLen());
+						if(xPacket.EnCode(xEventPack.nMsgID, xEventPack.strData.c_str(), xEventPack.strData.length()))
+						{
+							m_pNet->SendMsg(xPacket, xEventPack.nFD);
+						}
 					}
 					break;
 				case NetEventPack::ON_SOCKET_EVT:
 					{
 						if(!mEventCB._Empty())
 						{
-							mEventCB(xEventPack.xPacket.GetFd(), xEventPack.eSocketEvt);
+							mEventCB(xEventPack.nFD, (NF_NET_EVENT)xEventPack.nMsgID);
 						}
 					}
 					break;
 				}
 			}
-		}
 		//1:recive
 		//2:send
 		//3:socket_evt
@@ -204,17 +248,25 @@ public:
 			return false;
 		}
 
-		NFCPacket xPacket(m_pNet->GetHeadLen());
-		if(!xPacket.EnCode(nMsgID, strMsg.c_str(), strMsg.length()))
-		{
-			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Send Message to %d Failed For Encode of MsgData, MessageID: %d, MessageLen: %d\n", nSockIndex, nMsgID, strMsg.length());
-			LogSend(szData);
+// 		NFCPacket xPacket(m_pNet->GetHeadLen());
+// 		if(!xPacket.EnCode(nMsgID, strMsg.c_str(), strMsg.length()))
+// 		{
+// 			char szData[MAX_PATH] = { 0 };
+// 			sprintf(szData, "Send Message to %d Failed For Encode of MsgData, MessageID: %d, MessageLen: %d\n", nSockIndex, nMsgID, strMsg.length());
+// 			LogSend(szData);
+// 
+// 			return false;
+// 		}
 
-			return false;
-		}
+		NetEventPack xNetEventPack;
+		xNetEventPack.eMsgType = NetEventPack::ON_SEND;
+		xNetEventPack.nMsgID = nMsgID;
+		xNetEventPack.nFD = nSockIndex;
+		xNetEventPack.strData = strMsg;//可以待优化,SerializeToString直接进来
 
-		return m_pNet->SendMsg(xPacket, nSockIndex, bBroadcast);
+		return mxQueue.Push(xNetEventPack);
+
+		//return m_pNet->SendMsg(xPacket, nSockIndex, bBroadcast);
 
 	}
 
@@ -229,7 +281,10 @@ protected:
 	{
 		NetEventPack xNetEventPack;
 		xNetEventPack.eMsgType = NetEventPack::ON_RECIVE;
-		xNetEventPack.xPacket = msg;
+		xNetEventPack.nMsgID = msg.GetMsgHead()->GetMsgID();
+		xNetEventPack.nFD = msg.GetFd();
+		xNetEventPack.strData.assign(msg.GetData(), msg.GetDataLen());
+
 		mxQueue.Push(xNetEventPack);
 
 		return 0;
@@ -239,13 +294,15 @@ protected:
 	{
 		NetEventPack xNetEventPack;
 		xNetEventPack.eMsgType = NetEventPack::ON_SOCKET_EVT;
-		xNetEventPack.eSocketEvt = eEvent
-		xNetEventPack.xPacket.SetFd(nSockIndex);
+		xNetEventPack.nMsgID = eEvent;
+		xNetEventPack.nFD = nSockIndex;
+
 		mxQueue.Push(xNetEventPack);
 
 		return 0;
 	}
 
+	std::string mstrConfigIdent;
 protected:
 	NFINet* m_pNet;
 
