@@ -24,78 +24,59 @@ template<typename T>
 class NFQueue
 {
 public:
-    NFQueue();
-    virtual ~NFQueue();
-public:
+    NFQueue()
+	{
+	}
+    virtual ~NFQueue()
+	{
+		mList.clear();
+	}
 
-    bool Push(const T& object);
-    bool Pop(T& object);
+    bool Push(const T& object)
+	{
+		queueMutex.lock();
+		if (!Empty())
+		{
+			queueMutex.unlock();
+
+			return false;
+		}
+
+		mList.push_back(object);
+
+		queueMutex.unlock();
+
+
+		return true;
+	}
+
+    bool Pop(T& object)
+	{
+		queueMutex.lock();
+		if (Empty())
+		{
+			queueMutex.unlock();
+
+			return false;
+		}
+
+		object = mList.pop_front();
+
+		queueMutex.unlock();
+
+		return true;
+	}
 
 protected:
 
-    bool Empty();
+    bool Empty()
+	{
+		return mList.empty();
+	}
 
 private:
     std::list<T> mList;
     std::mutex queueMutex;
 };
-
-//------------------------------------------------------
-template<typename T>
-NFQueue<T>::NFQueue()
-{
-
-}
-//------------------------------------------------------
-template<typename T>
-bool NFQueue<T>::Push(const T& object)
-{
-    queueMutex.lock();
-    if (!Empty())
-    {
-        queueMutex.unlock();
-
-        return false;
-    }
-
-    mList.push_back(object);
-
-    queueMutex.unlock();
-
-
-    return true;
-}
-//------------------------------------------------------
-template<typename T>
-bool NFQueue<T>::Pop(T& object)
-{
-    queueMutex.lock();
-    if (Empty())
-    {
-        queueMutex.unlock();
-
-        return false;
-    }
-
-    object = mList.pop_front();
-
-    queueMutex.unlock();
-
-    return true;
-}
-//------------------------------------------------------
-template<typename T>
-bool NFQueue<T>::Empty()
-{
-    return mList.empty();
-}
-//------------------------------------------------------
-template<typename T>
-NFQueue<T>::~NFQueue()
-{
-    mList.clear();
-}
-//------------------------------------------------------
-
 
 #endif
