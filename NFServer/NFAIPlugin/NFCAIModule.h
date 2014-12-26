@@ -43,7 +43,7 @@ public:
     virtual NFIStateMachine* GetStateMachine(const NFIDENTID& self);
 
     virtual NFIHateModule* GetHateModule();
-
+    virtual NFIKernelModule* GetKernelModule();
     //找可视范围内的所有人
 
 

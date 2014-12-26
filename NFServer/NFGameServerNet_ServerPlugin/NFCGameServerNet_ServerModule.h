@@ -134,7 +134,7 @@ protected:
     int GetBroadCastObject( const int nObjectContainerID, const int nGroupID, NFIDataList& valueObject );
     //////////////////////////////////////////////////////////////////////////
     int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
-
+    int OnObjectNPCClassEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
     //////////////////////////////////////////////////////////////////////////
     // »ØÀ¡ÊÂ¼þ
     int OnReturnEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
