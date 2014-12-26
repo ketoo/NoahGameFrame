@@ -12,12 +12,15 @@
 
 NFCStateMachine::NFCStateMachine(const NFIDENTID& self, NFIAIModule* pControl)
     : mOwnerID(self),
-      meCurrentState(IdleState),
+      meCurrentState(PatrolState), // 默认一开始就巡逻
       meLastState(IdleState),
       m_pAIControlInterface(pControl)
 {
     NFIState* pState = m_pAIControlInterface->GetState(CurrentState());
     mfHeartBeatTime = pState->GetHeartBeatTime();
+
+    m_pKernelModule = pControl->GetKernelModule();
+    assert(NULL != m_pKernelModule);
 }
 
 NFCStateMachine::~NFCStateMachine()
@@ -40,9 +43,9 @@ void NFCStateMachine::UpData(float fFrameTime, float fAllTime)
             pState->Execute(mOwnerID);
 
             //设置心跳时间
-            float fRandTime = (float)(rand() / double(RAND_MAX));
-
-            mfHeartBeatTime = pState->GetHeartBeatTime() + fRandTime;
+            NFCDataList xDataList;
+            m_pKernelModule->Random(0, 10, 1, xDataList);
+            mfHeartBeatTime = pState->GetHeartBeatTime() + xDataList.Int(0);
         }
     }
 }

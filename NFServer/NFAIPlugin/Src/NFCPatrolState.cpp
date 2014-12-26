@@ -9,6 +9,18 @@
 ////#include "stdafx.h"
 #include "../NFCAIModule.h"
 
+NFCPatrolState::NFCPatrolState(float fHeartBeatTime, NFIPluginManager* p)
+    : NFIState(PatrolState, fHeartBeatTime, p)
+{
+    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
+    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
+    m_pAIModule = dynamic_cast<NFIAIModule*>(pPluginManager->FindModule("NFCAIModule"));
+    m_pMoveModule = dynamic_cast<NFIMoveModule*>(pPluginManager->FindModule("NFCMoveModule"));
+    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
+
+    m_pHateModule = m_pAIModule->GetHateModule();
+}
+
 bool NFCPatrolState::Enter(const NFIDENTID& self)
 {
     if (!NFIState::Enter(self))
@@ -61,17 +73,25 @@ bool NFCPatrolState::RandomPatrol(const NFIDENTID& self)
     //首先，得看有没路径
 
     //没有的话，随机找个地址走吧(以出生点为中心开始找,种子地址)NPCConfigID
-    const std::string& strConfigID = m_pKernelModule->GetPropertyString(self, "NPCConfigID");
-    if (strConfigID.length() > 0)
-    {
-        std::shared_ptr<NFIPropertyManager> propertyManager = m_pElementInfoModule->GetPropertyManager(strConfigID.c_str());
-        std::shared_ptr<NFIProperty> propertyX =  propertyManager->GetElement("SeedX");
-        std::shared_ptr<NFIProperty> propertyY =  propertyManager->GetElement("SeedY");
-        std::shared_ptr<NFIProperty> propertyZ =  propertyManager->GetElement("SeedZ");
+    //const std::string& strConfigID = m_pKernelModule->GetPropertyString(self, "NPCConfigID");
+    //const std::string& strNPCID = m_pKernelModule->GetPropertyString(self, "ConfigID");
+    //if (strConfigID.length() > 0)
+    //{
+        //std::shared_ptr<NFIPropertyManager> propertyManager = m_pElementInfoModule->GetPropertyManager(strConfigID.c_str());
+        //std::shared_ptr<NFIProperty> propertyX =  propertyManager->GetElement("SeedX");
+        //std::shared_ptr<NFIProperty> propertyY =  propertyManager->GetElement("SeedY");
+        //std::shared_ptr<NFIProperty> propertyZ =  propertyManager->GetElement("SeedZ");
 
-        float fCurX = propertyX->GetFloat();
-        float fCurY = propertyY->GetFloat();
-        float fCurZ = propertyZ->GetFloat();
+        //float fCurX = propertyX->GetFloat();
+        //float fCurY = propertyY->GetFloat();
+        //float fCurZ = propertyZ->GetFloat();
+    //if (场景里有人)
+    //{
+        const std::string& strClassName =  m_pKernelModule->GetPropertyString(self, "ClassName");
+
+        float fCurX = m_pKernelModule->GetPropertyFloat(self, "X");
+        float fCurY = m_pKernelModule->GetPropertyFloat(self, "Y");
+        float fCurZ = m_pKernelModule->GetPropertyFloat(self, "Z");
 
         float fPosOffestX = (float)(rand() / double(RAND_MAX) - 0.5f);
         float fPosOffestZ = (float)(rand() / double(RAND_MAX) - 0.5f);
@@ -97,10 +117,14 @@ bool NFCPatrolState::RandomPatrol(const NFIDENTID& self)
             valueList.AddFloat(fCurZ);
             m_pEventProcessModule->DoEvent(self, NFED_ON_CLIENT_REQUIRE_MOVE, valueList);
 
+            m_pKernelModule->SetPropertyFloat(self, "X", fCurX);
+            m_pKernelModule->SetPropertyFloat(self, "Y", fCurY);
+            m_pKernelModule->SetPropertyFloat(self, "Z", fCurZ);
+
             return true;
         }
 
-    }
+    //}
 
     return false;
 }
