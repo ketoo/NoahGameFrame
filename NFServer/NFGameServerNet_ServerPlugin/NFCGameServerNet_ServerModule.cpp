@@ -45,6 +45,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     m_pKernelModule->ResgisterCommonRecordEvent( this, &NFCGameServerNet_ServerModule::OnRecordCommonEvent );
 
     m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCGameServerNet_ServerModule::OnObjectClassEvent );
+    m_pEventProcessModule->AddClassCallBack( "NPC", this, &NFCGameServerNet_ServerModule::OnObjectNPCClassEvent );
 
     const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
     const std::string& strServerIP = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "ServerIP");
@@ -1660,6 +1661,16 @@ int NFCGameServerNet_ServerModule::OnObjectClassEvent( const NFIDENTID& self, co
     return 0;
 }
 
+int NFCGameServerNet_ServerModule::OnObjectNPCClassEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+{
+    if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )
+    {
+        m_pEventProcessModule->AddEventCallBack( self, NFED_ON_CLIENT_REQUIRE_MOVE, this, &NFCGameServerNet_ServerModule::OnMoveEvent );
+    }
+
+    return 0;
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 int NFCGameServerNet_ServerModule::OnReturnEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
@@ -1669,6 +1680,44 @@ int NFCGameServerNet_ServerModule::OnReturnEvent( const NFIDENTID& self, const i
 
 int NFCGameServerNet_ServerModule::OnMoveEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
 {
+    if (var.GetCount() != 3 || !var.TypeEx(TDATA_FLOAT, TDATA_FLOAT, TDATA_FLOAT, TDATA_UNKNOWN))
+    {
+        return 1;
+    }
+
+    NFMsg::ReqAckPlayerMove xMsg;
+    NFMsg::Position* pPos = xMsg.add_target_pos();
+
+    *xMsg.mutable_mover() = NFToPB(self);
+    xMsg.set_movetype(1);   // 移动类型暂时随便给一个
+    pPos->set_x(var.Float(0));
+    pPos->set_y(var.Float(1));
+    pPos->set_z(var.Float(2));
+
+    //bc
+    int nContianerID = m_pKernelModule->GetPropertyInt(PBToNF(xMsg.mover()), "SceneID");
+    int nGroupID = m_pKernelModule->GetPropertyInt(PBToNF(xMsg.mover()), "GroupID");
+
+    NFCDataList xDataList;
+    m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
+    for (int i = 0; i < xDataList.GetCount(); ++i)
+    {
+        const NFIDENTID& xIdent = xDataList.Object(i);
+        std::shared_ptr<BaseData> pData = mRoleBaseData.GetElement(xIdent);
+        if (!pData.get())
+        {
+            continue;
+        }
+
+        std::shared_ptr<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
+        if (!pProxyData.get())
+        {
+            continue;
+        }
+
+        SendMsgPB(NFMsg::EGMI_ACK_MOVE, xMsg, pProxyData->nFD, NFIDENTID(0, pData->nFD));
+    }
+
     return 0;
 }
 

@@ -10,15 +10,13 @@
 #define _NFC_PATROL_H_
 
 #include "NFIState.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCPatrolState
     : public NFIState
 {
 public:
-    NFCPatrolState(float fHeartBeatTime, NFIPluginManager* p)
-        : NFIState(PatrolState, fHeartBeatTime, p)
-    {
-    }
+    NFCPatrolState(float fHeartBeatTime, NFIPluginManager* p);
 
     virtual ~NFCPatrolState() {}
 
