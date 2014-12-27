@@ -31,7 +31,7 @@ bool NFCAIModule::Init()
     mtStateMap.insert(TMAPSTATE::value_type(DeadState, new NFCDeadState(5.0f, pPluginManager)));
     mtStateMap.insert(TMAPSTATE::value_type(FightState, new NFCFightState(1.0f, pPluginManager)));
     mtStateMap.insert(TMAPSTATE::value_type(IdleState, new NFCIdleState(3.0f, pPluginManager)));
-    mtStateMap.insert(TMAPSTATE::value_type(PatrolState, new NFCPatrolState(10.0f, pPluginManager)));
+    mtStateMap.insert(TMAPSTATE::value_type(PatrolState, new NFCPatrolState(5.0f, pPluginManager)));
 
 
     return true;
@@ -120,6 +120,11 @@ NFIStateMachine* NFCAIModule::GetStateMachine(const NFIDENTID& self)
 NFIHateModule* NFCAIModule::GetHateModule()
 {
     return m_pHateModule;
+}
+
+NFIKernelModule* NFCAIModule::GetKernelModule()
+{
+    return m_pKernelModule;
 }
 
 void NFCAIModule::OnBeKilled(const NFIDENTID& self, const NFIDENTID& other)
