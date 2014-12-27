@@ -10,15 +10,6 @@
 #include "../NFCAIModule.h"
 #include "../NFAIPlugin.h"
 
-//
-
-NFIKernelModule* NFIState::m_pKernelModule = NULL;
-NFIHateModule* NFIState::m_pHateModule = NULL;
-NFIEventProcessModule* NFIState::m_pEventProcessModule = NULL;
-NFIMoveModule* NFIState::m_pMoveModule = NULL;
-NFIAIModule* NFIState::m_pAIModule = NULL;
-NFIElementInfoModule* NFIState::m_pElementInfoModule = NULL;
-
 NFCIdleState::NFCIdleState(float fHeartBeatTime, NFIPluginManager* p)
     : NFIState(IdleState, fHeartBeatTime, p)
 {
