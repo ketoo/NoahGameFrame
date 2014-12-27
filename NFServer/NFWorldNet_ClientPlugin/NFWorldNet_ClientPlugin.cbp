@@ -19,20 +19,20 @@
 					<Add option="-D_USRDLL" />
 					<Add option="-D_X64" />
 					<Add option="-DTHERON_CPP11" />
-					<Add directory="$(SolutionDir)" />
-					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/WIN32-Code/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
-					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/include/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/WIN32-Code/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/compat/" />
+					<Add directory="../../../trunk/Dependencies/protobuf-2.5.0/src/" />
+					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
-					<Add directory="$(SolutionDir)/Dependencies/lib/$(Configuration)/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
+					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
+					<Add directory="../../../trunk/Dependencies/lib/$(Configuration)/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
 			</Target>
 			<Target title="Release x64">
@@ -46,20 +46,20 @@
 					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
 					<Add option="-DTHERON_CPP11" />
-					<Add directory="$(SolutionDir)" />
-					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/WIN32-Code/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
-					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/include/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/WIN32-Code/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/compat/" />
+					<Add directory="../../../trunk/Dependencies/protobuf-2.5.0/src/" />
+					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
-					<Add directory="$(SolutionDir)/Dependencies/lib/$(Configuration)/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
+					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
+					<Add directory="../../../trunk/Dependencies/lib/$(Configuration)/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
 			</Target>
 		</Build>
