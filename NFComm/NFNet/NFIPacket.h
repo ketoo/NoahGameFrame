@@ -19,7 +19,6 @@
 #ifdef _MSC_VER
 
 #include <WinSock2.h>
-#include <winsock.h>
 #else
 
 #include <arpa/inet.h>
