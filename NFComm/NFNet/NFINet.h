@@ -16,7 +16,7 @@
 #include <stdint.h>
 #include <iostream>
 #include <map>
-#include <xtree>
+//#include <xtree>
 
 #if NF_PLATFORM != NF_PLATFORM_WIN
 #include <netinet/in.h>
@@ -28,7 +28,7 @@
 
 #include "NFIPacket.h"
 
-#include <event2/event.h> 
+#include <event2/event.h>
 #include <event2/bufferevent.h>
 #include <event2/buffer.h>
 #include <event2/listener.h>
@@ -52,7 +52,7 @@ enum NF_NET_EVENT
 
 class NFINet;
 
-class NetObject 
+class NetObject
 {
 public:
     NetObject(NFINet* pThis, int32_t nFd, sockaddr_in& addr, bufferevent* pBev)
@@ -225,7 +225,7 @@ public:
 
 	virtual bool SendMsg(const NFIPacket& msg, const int nSockIndex = 0, bool bBroadcast = false) = 0;
 	virtual bool SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex = 0, bool bBroadcast = false) = 0;
-	
+
 	virtual int OnRecivePacket(const int nSockIndex, const char* msg, const uint32_t nLen){return 1;};
 
 	virtual bool CloseNetObject(const int nSockIndex) = 0;

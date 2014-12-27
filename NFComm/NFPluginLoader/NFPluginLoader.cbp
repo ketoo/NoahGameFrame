@@ -63,10 +63,10 @@
 		<Unit filename="NFCPluginManager.h" />
 		<Unit filename="NFPluginLoader.cpp" />
 		<Extensions>
-			<code_completion />
 			<envvars />
-			<debugger />
+			<code_completion />
 			<lib_finder disable_auto="1" />
+			<debugger />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
