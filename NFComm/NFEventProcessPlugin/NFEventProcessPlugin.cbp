@@ -7,11 +7,11 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="NFEventProcessPlugin" prefix_auto="1" extension_auto="1" />
-				<Option type="3" />
+				<Option output="../../../trunk/Dependencies/lib/Debug/NFEventProcessPlugin" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
@@ -26,11 +26,11 @@
 				</Linker>
 			</Target>
 			<Target title="Release x64">
-				<Option output="NFEventProcessPlugin" prefix_auto="1" extension_auto="1" />
-				<Option type="3" />
+				<Option output="../../../trunk/Dependencies/lib/Release/NFEventProcessPlugin" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
