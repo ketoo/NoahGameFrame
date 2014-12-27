@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="SystemFonts" FullName="System.Drawing.SystemFonts">
+  <TypeSignature Language="C#" Value="public sealed class SystemFonts" />
+  <AssemblyInfo>
+    <AssemblyName>System.Drawing</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Each property of the <see cref="T:System.Drawing.SystemFonts" /> class returns a <see cref="T:System.Drawing.Font" /> used to display text in a particular Windows display element, such as the title bar of a window. These fonts reflect the current settings in Control Panel.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Specifies the fonts used to display text in Windows display elements.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="CaptionFont">
+      <MemberSignature Language="C#" Value="public static System.Drawing.Font CaptionFont { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Drawing.Font</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets a <see cref="T:System.Drawing.Font" /> that is used to display text in the title bars of windows.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="DefaultFont">
+      <MemberSignature Language="C#" Value="public static System.Drawing.Font DefaultFont { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Drawing.Font</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The following table describes the value returned by the <see cref="P:System.Drawing.SystemFonts.DefaultFont" /> property depending on the operating system and local culture.</para>
+          <list type="table">
+            <listheader>
+              <item>
+                <term>
+                  <para>System and/or culture</para>
+                </term>
+                <description>
+                  <para>Font</para>
+                </description>
+              </item>
+            </listheader>
+            <item>
+              <term>
+                <para>Windows NT 4x, Japanese version</para>
+              </term>
+              <description>
+                <para>MS UI Gothic, 9 point</para>
+              </description>
+            </item>
+            <item>
+              <term>
+                <para>Arabic Windows</para>
+              </term>
+              <description>
+                <para>Tahoma, 8 point</para>
+              </description>
+            </item>
+            <item>
+              <term>
+                <para>Other operating system/culture</para>
+              </term>
+              <description>
+                <para>MS Shell Dlg logical font, typically Microsoft Sans Serif, 8 point</para>
+              </description>
+            </item>
+          </list>
+          <para>MS Shell Dlg maps to a font set in the system registry.</para>
+          <para>If the above fonts are not installed, the default font is Tahoma, 8 point. If Tahoma, 8 point, is not installed, <see cref="P:System.Drawing.SystemFonts.DefaultFont" /> returns the value of the <see cref="P:System.Drawing.FontFamily.GenericSansSerif" /> property.</para>
+          <para>The <see cref="T:System.Drawing.Font" /> returned by <see cref="P:System.Drawing.SystemFonts.DefaultFont" /> does not change when the user is in High Contrast mode. For a font that changes when the user is in High Contrast mode use another system font such as <see cref="P:System.Drawing.SystemFonts.IconTitleFont" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the default font that applications can use for dialog boxes and forms.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="DialogFont">
+      <MemberSignature Language="C#" Value="public static System.Drawing.Font DialogFont { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Drawing.Font</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>If the operating system is Windows 2000 or Windows XP, the <see cref="P:System.Drawing.SystemFonts.DialogFont" /> property returns Tahoma, 8 point. Otherwise, <see cref="P:System.Drawing.SystemFonts.DialogFont" /> returns the value of the <see cref="P:System.Drawing.SystemFonts.DefaultFont" /> property. The <see cref="T:System.Drawing.Font" /> returned by <see cref="P:System.Drawing.SystemFonts.DialogFont" /> does not change when the user is in High Contrast mode. For a font that changes when the user is in High Contrast mode use another system font such as <see cref="P:System.Drawing.SystemFonts.IconTitleFont" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets a font that applications can use for dialog boxes and forms.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="GetFontByName">
+      <MemberSignature Language="C#" Value="public static System.Drawing.Font GetFontByName (string systemFontName);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Drawing.Font</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="systemFontName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="M:System.Drawing.SystemFonts.GetFontByName(System.String)" /> method returns null if the specified name does not match a font in the <see cref="T:System.Drawing.SystemFonts" /> enumeration.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Returns a font object that corresponds to the specified system font name.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>A <see cref="T:System.Drawing.Font" /> if the specified name matches a value in <see cref="T:System.Drawing.SystemFonts" />; otherwise, null.</para>
+        </returns>
+        <param name="systemFontName">
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the system font you need a font object for.</param>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="IconTitleFont">
+      <MemberSignature Language="C#" Value="public static System.Drawing.Font IconTitleFont { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Drawing.Font</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets a <see cref="T:System.Drawing.Font" /> that is used for icon titles.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="MenuFont">
+      <MemberSignature Language="C#" Value="public static System.Drawing.Font MenuFont { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Drawing.Font</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets a <see cref="T:System.Drawing.Font" /> that is used for menus.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="MessageBoxFont">
+      <MemberSignature Language="C#" Value="public static System.Drawing.Font MessageBoxFont { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Drawing.Font</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets a <see cref="T:System.Drawing.Font" /> that is used for message boxes.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="SmallCaptionFont">
+      <MemberSignature Language="C#" Value="public static System.Drawing.Font SmallCaptionFont { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Drawing.Font</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets a <see cref="T:System.Drawing.Font" /> that is used to display text in the title bars of small windows, such as tool windows.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="StatusFont">
+      <MemberSignature Language="C#" Value="public static System.Drawing.Font StatusFont { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Drawing.Font</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets a <see cref="T:System.Drawing.Font" /> that is used to display text in the status bar.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

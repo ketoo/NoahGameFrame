@@ -1,0 +1,5 @@
+<configuration>
+	<appSettings>
+		<add key="ConnectionString" value="Data Source=;User ID=GHTDB;Password=GHTDB;" />
+	</appSettings>
+</configuration>

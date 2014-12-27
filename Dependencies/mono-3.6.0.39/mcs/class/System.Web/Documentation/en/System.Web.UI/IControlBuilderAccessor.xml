@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="IControlBuilderAccessor" FullName="System.Web.UI.IControlBuilderAccessor">
+  <TypeSignature Language="C#" Value="public interface IControlBuilderAccessor" />
+  <AssemblyInfo>
+    <AssemblyName>System.Web</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The <see cref="T:System.Web.UI.IControlBuilderAccessor" /> interface defines the property a control must implement to allow a control serializer to access the control's builder. <see cref="T:System.Web.UI.Control" /> implements this interface, so all controls deriving from <see cref="T:System.Web.UI.Control" /> have an implementation of this property.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Allows the control serializer to get to the builder for a control.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="ControlBuilder">
+      <MemberSignature Language="C#" Value="public System.Web.UI.ControlBuilder ControlBuilder { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.ControlBuilder</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="P:System.Web.UI.IControlBuilderAccessor.ControlBuilder" /> property allows a control serializer to access the builder that built the control that implements <see cref="T:System.Web.UI.IControlBuilderAccessor" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the control builder for this control.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

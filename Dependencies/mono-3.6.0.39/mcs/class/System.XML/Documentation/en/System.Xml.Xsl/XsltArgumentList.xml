@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="XsltArgumentList" FullName="System.Xml.Xsl.XsltArgumentList">
+  <TypeSignature Maintainer="auto" Language="C#" Value="public class XsltArgumentList" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit XsltArgumentList extends System.Object" />
+  <AssemblyInfo>
+    <AssemblyName>System.Xml</AssemblyName>
+    <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
+    <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <ThreadSafetyStatement>To be added</ThreadSafetyStatement>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>This class is used by the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" /> method. It allows parameters and extension objects to be invoked from within the style sheet.</para>
+      <para>When the parameters and objects are added to the <see cref="T:System.Xml.Xsl.XsltArgumentList" />, they are associated with a namespace qualified name and a namespace URI, respectively.</para>
+      <para>The following are advantages to passing an object rather than using an embedded script such as &lt;msxsl:script&gt;: </para>
+      <list type="bullet">
+        <item>
+          <para>Provides better encapsulation and reuse of classes.</para>
+        </item>
+        <item>
+          <para>Allows style sheets to be smaller and more easily maintained.</para>
+        </item>
+        <item>
+          <para>Supports passing node fragments (through the <see cref="T:System.Xml.XPath.XPathNavigator" />) to the style sheet.</para>
+        </item>
+      </list>
+      <para>For more information about using the <see cref="T:System.Xml.Xsl.XsltArgumentList" />, see <format type="text/html"><a href="a4ebdbad-087c-4cfe-acc0-17c48142f81a">XSLT Extension Objects</a></format> and <format type="text/html"><a href="fe60aaa0-ae43-4b1c-9be1-426af66ba757">XSLT Parameters</a></format>.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Contains a variable number of arguments which are either XSLT parameters or extension objects.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public XsltArgumentList ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue />
+      <Parameters />
+      <Docs>
+        <remarks>None.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Implements a new instance of the <see cref="T:System.Xml.Xsl.XsltArgumentList" />.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="AddExtensionObject">
+      <MemberSignature Language="C#" Value="public void AddExtensionObject (string namespaceUri, object extension);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddExtensionObject(string namespaceUri, object extension) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="namespaceUri" Type="System.String" />
+        <Parameter Name="extension" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The params keyword, which allows an unspecified number of parameters to be passed, is currently not supported. XSLT style sheets that utilize methods defined with the params keyword does not work correctly. For more information, see <format type="text/html"><a href="1690815e-b52b-4967-8380-5780aff08012">params</a></format>.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Adds a new object to the <see cref="T:System.Xml.Xsl.XsltArgumentList" /> and associates it with the namespace URI.</para>
+        </summary>
+        <param name="namespaceUri">
+          <attribution license="cc4" from="Microsoft" modified="false" />The namespace URI to associate with the object. To use the default namespace, specify an empty string. </param>
+        <param name="extension">
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to add to the list. </param>
+      </Docs>
+    </Member>
+    <Member MemberName="AddParam">
+      <MemberSignature Language="C#" Value="public void AddParam (string name, string namespaceUri, object parameter);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddParam(string name, string namespaceUri, object parameter) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="namespaceUri" Type="System.String" />
+        <Parameter Name="parameter" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <paramref name="parameter" /> should correspond to a W3C type. The following table shows the W3C types, either XPath or XSLT, and the corresponding.NET class.</para>
+          <list type="table">
+            <listheader>
+              <item>
+                <term>
+                  <para>W3C Type </para>
+                </term>
+                <description>
+                  <para>Equivalent.NET Class (Type) </para>
+                </description>
+              </item>
+            </listheader>
+            <item>
+              <term>
+                <para>String (XPath)</para>
+              </term>
+              <description>
+                <para>
+                  <see cref="T:System.String" />
+                </para>
+              </description>
+            </item>
+            <item>
+              <term>
+                <para>Boolean (XPath)</para>
+              </term>
+              <description>
+                <para>
+                  <see cref="T:System.Boolean" />
+                </para>
+              </description>
+            </item>
+            <item>
+              <term>
+                <para>Number (XPath)</para>
+              </term>
+              <description>
+                <para>
+                  <see cref="T:System.Double" />
+                </para>
+              </description>
+            </item>
+            <item>
+              <term>
+                <para>Result Tree Fragment (XSLT)</para>
+              </term>
+              <description>
+                <para>
+                  <see cref="T:System.Xml.XPath.XPathNavigator" />
+                </para>
+              </description>
+            </item>
+            <item>
+              <term>
+                <para>Node Set (XPath)</para>
+              </term>
+              <description>
+                <para>
+                  <see cref="T:System.Xml.XPath.XPathNodeIterator" />
+                </para>
+                <para>XPathNavigator[]</para>
+              </description>
+            </item>
+            <item>
+              <term>
+                <para>Node* (XPath)</para>
+              </term>
+              <description>
+                <para>
+                  <see cref="T:System.Xml.XPath.XPathNavigator" />
+                </para>
+              </description>
+            </item>
+          </list>
+          <para>*This is equivalent to a node set that contains a single node.</para>
+          <para>If the parameter object being invoked from within the style sheet  is not one of the above, it is converted according to the following rules:</para>
+          <list type="bullet">
+            <item>
+              <para>CLR numeric types are converted to <see cref="T:System.Double" />.</para>
+            </item>
+            <item>
+              <para>The <see cref="T:System.DateTime" /> type is converted to <see cref="T:System.String" />.</para>
+            </item>
+            <item>
+              <para>
+                <see cref="T:System.Xml.XPath.IXPathNavigable" /> types are converted to <see cref="T:System.Xml.XPath.XPathNavigator" />. XPathNavigator[] is converted to <see cref="T:System.Xml.XPath.XPathNodeIterator" />.</para>
+            </item>
+          </list>
+          <para>All other types throw an error.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Adds a parameter to the <see cref="T:System.Xml.Xsl.XsltArgumentList" /> and associates it with the namespace qualified name.</para>
+        </summary>
+        <param name="name">
+          <attribution license="cc4" from="Microsoft" modified="false" />The name to associate with the parameter. </param>
+        <param name="namespaceUri">
+          <attribution license="cc4" from="Microsoft" modified="false" />The namespace URI to associate with the parameter. To use the default namespace, specify an empty string. </param>
+        <param name="parameter">
+          <attribution license="cc4" from="Microsoft" modified="false" />The parameter value or object to add to the list. </param>
+      </Docs>
+    </Member>
+    <Member MemberName="Clear">
+      <MemberSignature Language="C#" Value="public void Clear ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Clear() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <remarks>None.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Removes all parameters and extension objects from the <see cref="T:System.Xml.Xsl.XsltArgumentList" />.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="GetExtensionObject">
+      <MemberSignature Language="C#" Value="public object GetExtensionObject (string namespaceUri);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance object GetExtensionObject(string namespaceUri) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="namespaceUri" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <remarks>None.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the object associated with the given namespace.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The namespace URI object or null if one was not found.</para>
+        </returns>
+        <param name="namespaceUri">
+          <attribution license="cc4" from="Microsoft" modified="false" />The namespace URI of the object. </param>
+      </Docs>
+    </Member>
+    <Member MemberName="GetParam">
+      <MemberSignature Language="C#" Value="public object GetParam (string name, string namespaceUri);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance object GetParam(string name, string namespaceUri) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="namespaceUri" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <remarks>None.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the parameter associated with the namespace qualified name.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The parameter object or null if one was not found.</para>
+        </returns>
+        <param name="name">
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the parameter. <see cref="T:System.Xml.Xsl.XsltArgumentList" /> does not check to ensure the name passed is a valid local name; however, the name cannot be null. </param>
+        <param name="namespaceUri">
+          <attribution license="cc4" from="Microsoft" modified="false" />The namespace URI associated with the parameter. </param>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveExtensionObject">
+      <MemberSignature Language="C#" Value="public object RemoveExtensionObject (string namespaceUri);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance object RemoveExtensionObject(string namespaceUri) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="namespaceUri" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <remarks>None.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Removes the object with the namespace URI from the <see cref="T:System.Xml.Xsl.XsltArgumentList" />.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The object with the namespace URI or null if one was not found.</para>
+        </returns>
+        <param name="namespaceUri">
+          <attribution license="cc4" from="Microsoft" modified="false" />The namespace URI associated with the object to remove. </param>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveParam">
+      <MemberSignature Language="C#" Value="public object RemoveParam (string name, string namespaceUri);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance object RemoveParam(string name, string namespaceUri) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="namespaceUri" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <remarks>None.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Removes the parameter from the <see cref="T:System.Xml.Xsl.XsltArgumentList" />.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The parameter object or null if one was not found.</para>
+        </returns>
+        <param name="name">
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the parameter to remove. <see cref="T:System.Xml.Xsl.XsltArgumentList" /> does not check to ensure the name passed is a valid local name; however, the name cannot be null. </param>
+        <param name="namespaceUri">
+          <attribution license="cc4" from="Microsoft" modified="false" />The namespace URI of the parameter to remove. </param>
+      </Docs>
+    </Member>
+    <Member MemberName="XsltMessageEncountered">
+      <MemberSignature Language="C#" Value="public event System.Xml.Xsl.XsltMessageEncounteredEventHandler XsltMessageEncountered;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.Xml.Xsl.XsltMessageEncounteredEventHandler XsltMessageEncountered" />
+      <MemberType>Event</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Xml.Xsl.XsltMessageEncounteredEventHandler</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>If the event is not registered, all messages are piped to standard out.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Occurs when a message is specified in the style sheet by the xsl:message element. </para>
+        </summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

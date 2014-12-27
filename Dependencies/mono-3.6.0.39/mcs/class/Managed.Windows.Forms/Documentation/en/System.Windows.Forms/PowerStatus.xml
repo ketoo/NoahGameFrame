@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="PowerStatus" FullName="System.Windows.Forms.PowerStatus">
+  <TypeSignature Language="C#" Value="public class PowerStatus" />
+  <AssemblyInfo>
+    <AssemblyName>System.Windows.Forms</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The <see cref="T:System.Windows.Forms.PowerStatus" /> class represents information about the current AC line power status, battery charging status, and battery charge status.</para>
+      <para>This class is used by the <see cref="P:System.Windows.Forms.SystemInformation.PowerStatus" /> property of the <see cref="T:System.Windows.Forms.SystemInformation" /> class to indicate current system power information.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Indicates current system power status information.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="BatteryChargeStatus">
+      <MemberSignature Language="C#" Value="public System.Windows.Forms.BatteryChargeStatus BatteryChargeStatus { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.BatteryChargeStatus</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This property indicates the current battery charge level or battery charging status.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the current battery charge status.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="BatteryFullLifetime">
+      <MemberSignature Language="C#" Value="public int BatteryFullLifetime { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the reported full charge lifetime of the primary battery power source in seconds.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="BatteryLifePercent">
+      <MemberSignature Language="C#" Value="public float BatteryLifePercent { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Single</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the approximate amount of full battery charge remaining.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="BatteryLifeRemaining">
+      <MemberSignature Language="C#" Value="public int BatteryLifeRemaining { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the approximate number of seconds of battery time remaining.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="PowerLineStatus">
+      <MemberSignature Language="C#" Value="public System.Windows.Forms.PowerLineStatus PowerLineStatus { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.PowerLineStatus</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This property indicates whether the system power is online, or that the system power status is unknown.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the current system power status.</para>
+        </summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

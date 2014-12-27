@@ -1,0 +1,232 @@
+# Copyright 2003 Rene Rivera
+# Distributed under the Boost Software License, Version 1.0.
+# (See accompanying file LICENSE_1_0.txt or http://www.boost.org/LICENSE_1_0.txt)
+
+# Modifiers are generalized generators that mutate targets in specific ways.
+# This structure allows for grouping a variety of functionality in an
+# orthogonal way to the functionality in toolsets, and without specifying
+# more target variations. In turn the modifiers can be used as building
+# blocks to implement simple requests, like the <version> feature.
+
+import modules ;
+import feature ;
+import errors ;
+import type ;
+import "class" : new ;
+import generators ;
+import property ;
+import virtual-target ;
+import numbers ;
+import sequence ;
+import symlink ;
+import property-set ;
+
+# Base generator for creating targets that are modifications of existing
+# targets.
+#
+class modifier : generator
+{
+    rule __init__ (
+        id
+        composing ?
+        : source-types *
+        : target-types-and-names +
+        : requirements *
+        )
+    {
+        generator.__init__ $(id) $(composing)
+            : $(source-types)
+            : $(target-types-and-names)
+            : $(requirements) ;
+
+        self.targets-in-progress = ;
+    }
+
+    # Wraps the generation of the target to call before and after rules to
+    # affect the real target.
+    #
+    rule run ( project name ? : property-set : sources + )
+    {
+        local result ;
+        local current-target = $(project)^$(name) ;
+        if ! $(current-target) in $(self.targets-in-progress)
+        {
+            # Before modifications...
+            local project_ =
+                [ modify-project-before
+                    $(project) $(name) : $(property-set) : $(sources) ] ;
+            local name_ =
+                [ modify-name-before
+                    $(project) $(name) : $(property-set) : $(sources) ] ;
+            local property-set_ =
+                [ modify-properties-before
+                    $(project) $(name) : $(property-set) : $(sources) ] ;
+            local sources_ =
+                [ modify-sources-before
+                    $(project) $(name) : $(property-set) : $(sources) ] ;
+            project = $(project_) ;
+            name = $(name_) ;
+            property-set = $(property-set_) ;
+            sources = $(sources_) ;
+
+            # Generate the real target...
+            local target-type-p =
+                [ property.select <main-target-type> : [ $(property-set).raw ] ] ;
+            self.targets-in-progress += $(current-target) ;
+            result =
+                [ generators.construct $(project) $(name)
+                    : $(target-type-p:G=)
+                    : $(property-set)
+                    : $(sources) ] ;
+            self.targets-in-progress = $(self.targets-in-progress[1--2]) ;
+
+            # After modifications...
+            result =
+                [ modify-target-after $(result)
+                    : $(project) $(name)
+                    : $(property-set)
+                    : $(sources) ] ;
+        }
+        return $(result) ;
+    }
+
+    rule modify-project-before ( project name ? : property-set : sources + )
+    {
+        return $(project) ;
+    }
+
+    rule modify-name-before ( project name ? : property-set : sources + )
+    {
+        return $(name) ;
+    }
+
+    rule modify-properties-before ( project name ? : property-set : sources + )
+    {
+        return $(property-set) ;
+    }
+
+    rule modify-sources-before ( project name ? : property-set : sources + )
+    {
+        return $(sources) ;
+    }
+
+    rule modify-target-after ( target : project name ? : property-set : sources + )
+    {
+        return $(target) ;
+    }
+
+    # Utility, clones a file-target with optional changes to the name, type and
+    # project of the target.
+    # NOTE: This functionality should be moved, and generalized, to
+    # virtual-targets.
+    #
+    rule clone-file-target ( target : new-name ? : new-type ? : new-project ? )
+    {
+        # Need a MUTCH better way to clone a target...
+        new-name ?= [ $(target).name ] ;
+        new-type ?= [ $(target).type ] ;
+        new-project ?= [ $(target).project ] ;
+        local result = [ new file-target $(new-name) : $(new-type) : $(new-project) ] ;
+
+        if [ $(target).dependencies ] { $(result).depends [ $(target).dependencies ] ; }
+        $(result).root [ $(target).root ] ;
+        $(result).set-usage-requirements [ $(target).usage-requirements ] ;
+
+        local action = [ $(target).action ] ;
+        local action-class = [ modules.peek $(action) : __class__ ] ;
+
+        local ps = [ $(action).properties ] ;
+        local cloned-action = [ new $(action-class) $(result) :
+          [ $(action).sources ] : [ $(action).action-name ] : $(ps) ] ;
+        $(result).action $(cloned-action) ;
+
+        return $(result) ;
+    }
+}
+
+
+# A modifier that changes the name of a target, after it's generated, given a
+# regular expression to split the name, and a set of token to insert between the
+# split tokens of the name. This also exposes the target for other uses with a
+# symlink to the original name (optionally).
+#
+class name-modifier : modifier
+{
+    rule __init__ ( )
+    {
+        # Apply ourselves to EXE targets, for now.
+        modifier.__init__ name.modifier : : EXE LIB : <name-modify>yes ;
+    }
+
+    # Modifies the name, by cloning the target with the new name.
+    #
+    rule modify-target-after ( target : project name ? : property-set : sources + )
+    {
+        local result = $(target) ;
+
+        local name-mod-p = [ property.select <name-modifier> : [ $(property-set).raw ] ] ;
+        if $(name-mod-p)
+        {
+            local new-name = [ modify-name [ $(target).name ] : $(name-mod-p:G=) ] ;
+            if $(new-name) != [ $(target).name ]
+            {
+                result = [ clone-file-target $(target) : $(new-name) ] ;
+            }
+            local expose-original-as-symlink = [ MATCH "<symlink>(.*)" : $(name-mod-p) ] ;
+            if $(expose-original-as-symlink)
+            {
+                local symlink-t = [ new symlink-targets $(project) : $(name) : [ $(result).name ] ] ;
+                result = [ $(symlink-t).construct $(result)
+                    : [ property-set.create [ $(property-set).raw ] <symlink-location>build-relative ] ] ;
+            }
+        }
+
+        return $(result) ;
+    }
+
+    # Do the transformation of the name.
+    #
+    rule modify-name ( name : modifier-spec + )
+    {
+        local match = [ MATCH "<match>(.*)" : $(modifier-spec) ] ;
+        local name-parts = [ MATCH $(match) : $(name) ] ;
+        local insertions = [ sequence.insertion-sort [ MATCH "(<[0123456789]+>.*)" : $(modifier-spec) ] ] ;
+        local new-name-parts ;
+        local insert-position = 1 ;
+        while $(insertions)
+        {
+            local insertion = [ MATCH "<$(insert-position)>(.*)" : $(insertions[1]) ] ;
+            if $(insertion)
+            {
+                new-name-parts += $(insertion) ;
+                insertions = $(insertions[2-]) ;
+            }
+            new-name-parts += $(name-parts[1]) ;
+            name-parts = $(name-parts[2-]) ;
+            insert-position = [ numbers.increment $(insert-position) ] ;
+        }
+        new-name-parts += $(name-parts) ;
+        return [ sequence.join $(new-name-parts) ] ;
+    }
+
+    rule optional-properties ( )
+    {
+        return <name-modify>yes ;
+    }
+}
+feature.feature name-modifier : : free ;
+feature.feature name-modify : no yes : incidental optional ;
+generators.register [ new name-modifier ] ;
+
+# Translates <version> property to a set of modification properties
+# that are applied by the name-modifier, and symlink-modifier.
+#
+rule version-to-modifier ( property : properties * )
+{
+    return
+        <name-modify>yes
+            <name-modifier><match>"^([^.]*)(.*)" <name-modifier><2>.$(property:G=)
+            <name-modifier><symlink>yes
+        ;
+}
+feature.action <version> : version-to-modifier ;

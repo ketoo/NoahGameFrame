@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="WebResourceAttribute" FullName="System.Web.UI.WebResourceAttribute">
+  <TypeSignature Language="C#" Value="public sealed class WebResourceAttribute : Attribute" />
+  <AssemblyInfo>
+    <AssemblyName>System.Web</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Attribute</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.AttributeUsage(System.AttributeTargets.Assembly, AllowMultiple=true)</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The <see cref="T:System.Web.UI.WebResourceAttribute" /> class is valid only when used on assembly declarations. It is used to enable a specified embedded resource in an assembly for use as a Web resource. </para>
+      <para>For more information on resources, see <format type="text/html"><a href="0936b3b2-9e6e-4abe-9c06-364efef9dbbd">ASP.NET Web Page Resources Overview</a></format>. </para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Defines the metadata attribute that enables an embedded resource in an assembly. This class cannot be inherited. </para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public WebResourceAttribute (string webResource, string contentType);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="webResource" Type="System.String" />
+        <Parameter Name="contentType" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.Web.UI.WebResourceAttribute" /> class with the specified Web resource and resource content type.</para>
+        </summary>
+        <param name="webResource">
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the of Web resource.</param>
+        <param name="contentType">
+          <attribution license="cc4" from="Microsoft" modified="false" />The type of resource, such as "image/gif" or "text/javascript".</param>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="ContentType">
+      <MemberSignature Language="C#" Value="public string ContentType { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Examples of content types are "image/jpeg" and "text/xml". For more information on MIME types, go to the <see cref="http://go.microsoft.com/fwlink/?LinkId=43988">Internet Assigned Numbers Authority</see> Web site and refer to the section on media types. </para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets a string containing the MIME type of the resource that is referenced by the <see cref="T:System.Web.UI.WebResourceAttribute" /> class.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="PerformSubstitution">
+      <MemberSignature Language="C#" Value="public bool PerformSubstitution { set; get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>When a resource is streamed from the assembly to the response, references to other Web resources in the embedded resources can be resolved at this time, if the <see cref="P:System.Web.UI.WebResourceAttribute.PerformSubstitution" /> property is set to true.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets a Boolean value that determines whether, during processing of the embedded resource referenced by the <see cref="T:System.Web.UI.WebResourceAttribute" /> class, other Web resource URLs are parsed and replaced with the full path to the resource.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="WebResource">
+      <MemberSignature Language="C#" Value="public string WebResource { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets a string containing the name of the resource that is referenced by the <see cref="T:System.Web.UI.WebResourceAttribute" /> class.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>
