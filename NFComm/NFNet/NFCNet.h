@@ -24,6 +24,8 @@
 #include <functional>
 #include <memory>
 #include <list>
+#include <vector>
+#include "NFComm/NFCore/NFIdentID.h"
 
 #pragma pack(push, 1)
 
@@ -101,7 +103,7 @@ private:
 	//<fd,object>
 	std::map<int, NetObject*> mmObject;
 	std::vector<int> mvRemoveObject;
-    
+
     NFIMsgHead::NF_Head mnHeadLength;
 
 	int mnMaxConnect;
