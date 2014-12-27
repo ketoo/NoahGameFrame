@@ -24,7 +24,7 @@ int64_t GameTime::HQ_TimeGetTime()
 #else
     struct timeval start;
     gettimeofday(&start, NULL);
-    return start.tv_sec * 1000 + start.tv_usec / 1000;
+    return start.tv_sec;
 #endif
 }
 // 
