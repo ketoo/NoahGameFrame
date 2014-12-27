@@ -16,8 +16,8 @@
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
 					<Add option="-DTHERON_USE_STD_THREADS" />
-					<Add directory="D:/NoahGameFrame/trunk/Dependencies/Theron-6.00.01/Theron/../Include/" />
-					<Add directory="D:/NoahGameFrame/trunk/Dependencies/Theron-6.00.01/Theron/../Include/External/" />
+					<Add directory="/home/shadow/trunk/Dependencies/Theron-6.00.01/Theron/../Include/" />
+					<Add directory="/home/shadow/trunk/Dependencies/Theron-6.00.01/Theron/../Include/External/" />
 				</Compiler>
 			</Target>
 			<Target title="Release x64">
@@ -30,8 +30,8 @@
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
 					<Add option="-DTHERON_USE_STD_THREADS" />
-					<Add directory="D:/NoahGameFrame/trunk/Dependencies/Theron-6.00.01/Theron/../Include/" />
-					<Add directory="D:/NoahGameFrame/trunk/Dependencies/Theron-6.00.01/Theron/../Include/External/" />
+					<Add directory="/home/shadow/trunk/Dependencies/Theron-6.00.01/Theron/../Include/" />
+					<Add directory="/home/shadow/trunk/Dependencies/Theron-6.00.01/Theron/../Include/External/" />
 				</Compiler>
 			</Target>
 		</Build>
@@ -134,8 +134,9 @@
 		<Unit filename="Theron.def" />
 		<Unit filename="YieldPolicy.cpp" />
 		<Extensions>
-			<code_completion />
 			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
 			<debugger />
 		</Extensions>
 	</Project>

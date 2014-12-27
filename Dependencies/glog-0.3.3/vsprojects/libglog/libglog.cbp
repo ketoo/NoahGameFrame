@@ -15,7 +15,7 @@
 					<Add option="-D_DEBUG" />
 					<Add option="-D_WINDOWS" />
 					<Add option="-DLIBGLOG_EXPORTS" />
-					<Add directory="D:/NoahGameFrame/trunk/Dependencies/glog-0.3.3/vsprojects/libglog/../../src/windows" />
+					<Add directory="/home/shadow/trunk/Dependencies/glog-0.3.3/vsprojects/libglog/../../src/windows" />
 				</Compiler>
 			</Target>
 			<Target title="Release x64">
@@ -27,7 +27,7 @@
 					<Add option="-DNDEBUG" />
 					<Add option="-D_WINDOWS" />
 					<Add option="-DLIBGLOG_EXPORTS" />
-					<Add directory="D:/NoahGameFrame/trunk/Dependencies/glog-0.3.3/vsprojects/libglog/../../src/windows" />
+					<Add directory="/home/shadow/trunk/Dependencies/glog-0.3.3/vsprojects/libglog/../../src/windows" />
 				</Compiler>
 			</Target>
 		</Build>
@@ -48,8 +48,9 @@
 		<Unit filename="../../src/windows/port.cc" />
 		<Unit filename="../../src/windows/port.h" />
 		<Extensions>
-			<code_completion />
 			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
 			<debugger />
 		</Extensions>
 	</Project>

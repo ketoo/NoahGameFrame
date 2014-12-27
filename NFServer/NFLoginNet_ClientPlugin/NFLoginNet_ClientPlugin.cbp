@@ -70,8 +70,9 @@
 		<Unit filename="NFLoginNet_ClientPlugin.h" />
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
-			<code_completion />
 			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
 			<debugger />
 		</Extensions>
 	</Project>
