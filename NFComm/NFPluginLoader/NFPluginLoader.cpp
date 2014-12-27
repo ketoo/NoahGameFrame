@@ -114,8 +114,13 @@ void PrintfLogo()
     std::cout << "\n" << std::endl;
 }
 
+<<<<<<< HEAD
 unsigned long unStartTickTime = 0;
 unsigned long unLastTickTime = 0;
+=======
+unsigned long nStartTickTime = 0;
+unsigned long nLastTickTime = 0;
+>>>>>>> fc41e1f3b83190429904de8a9203e116d5ec564e
 
 #if NF_PLATFORM == NF_PLATFORM_WIN || NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_APPLE
 int main()
@@ -133,6 +138,9 @@ int main()
 
     CloseXButton();
     CreateBackThread();
+
+    nStartTickTime = ::NF_GetTickCount();
+    nLastTickTime = nStartTickTime;
 
     while (!bExitApp)    //DEBUG∞Ê±æ±¿¿££¨RELEASE≤ª±¿
     {
@@ -159,8 +167,25 @@ int main()
 			}
             __try
             {
+<<<<<<< HEAD
                 NFCActorManager::GetSingletonPtr()->Execute(fLastTime, fStartedTime);
 				unLastTickTime = unNowTickTime;
+=======
+                unsigned long nNowTickTime = ::NF_GetTickCount();
+                float fStartedTime = float(nNowTickTime - nStartTickTime) / 1000;
+                float fLastTime = float(nNowTickTime - nLastTickTime) / 1000;
+                if (fStartedTime < 0.001f)
+                {
+                    fStartedTime = 0.0f;
+                }
+
+                if (fLastTime < 0.001f)
+                {
+                    fLastTime = 0.0f;
+                }
+
+                NFCActorManager::GetSingletonPtr()->Execute(fLastTime, fStartedTime);
+>>>>>>> fc41e1f3b83190429904de8a9203e116d5ec564e
             }
             __except (ApplicationCrashHandler(GetExceptionInformation()))
             {
