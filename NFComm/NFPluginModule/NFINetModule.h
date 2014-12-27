@@ -15,36 +15,47 @@
 #include "NFComm/NFNet/NFCPacket.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
-#include "NFComm/NFCore/NFQueue.h"
+#include "NFComm\NFCore\NFQueue.h"
 
-class NetEventPack
+
+
+class QueueEventPack
 {
 public:
-	NetEventPack()
+	QueueEventPack()
 	{
-		eMsgType = ON_NONE;
-	}
-	
-	void operator = (const NetEventPack&  ep)
-	{
-		this->eMsgType = ep.eMsgType;//消息类型
-		this->nMsgID = ep.nMsgID;//消息ID，如果是网络事件，则为事件ID
-		this->nFD = ep.nFD;//FD
-		this->strData = ep.strData;//数据
+		eMsgType = ON_NET_NONE;
 	}
 
 	enum NetEventType
 	{
-		ON_NONE = 0,
-		ON_RECIVE = 1,
-		ON_SEND = 2,
-		ON_SOCKET_EVT = 3,
+		ON_NET_NONE = 0,
+		ON_NET_RECIVE = 1,
+		ON_NET_SEND = 2,
+		ON_NET_FD_EVT = 3,
 	};
 
-	int eMsgType;//消息类型
-	int nMsgID;//消息ID，如果是网络事件，则为事件ID
 	int nFD;//FD
+	NetEventType eMsgType;//消息类型
+	int nMsgID;//消息ID，如果是网络事件，则为事件ID
 	std::string strData;//数据
+};
+
+class ConnectObject
+{
+public:
+	ConnectObject()
+	{
+		m_pNet = NULL;
+		mfLastHBTime = 0.0f;
+	}
+
+protected:
+private:
+	NFINet* m_pNet;
+	float mfLastHBTime;
+	RECIEVE_FUNCTOR mRecvCB;
+	EVENT_FUNCTOR mEventCB;
 };
 
 class NFINetModule
@@ -54,16 +65,19 @@ class NFINetModule
 public:
 	NFINetModule()
 	{
+		mfLastHBTime = 0.0f;
 		m_pNet = NULL;
 	}
 
 	virtual ~NFINetModule()
 	{
-
+		m_pNet->Final();
+		delete m_pNet;
+		m_pNet = NULL;
 	}
 
-    virtual void LogRecive(const char* str){};
-    virtual void LogSend(const char* str){};
+	virtual void LogRecive(const char* str){};
+	virtual void LogSend(const char* str){};
 
 	static NFIDENTID PBToNF(NFMsg::Ident xID)
 	{
@@ -83,7 +97,7 @@ public:
 		return xIdent;
 	}
 
-	
+
 	template<typename BaseType>
 	int Initialization(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT), const char* strIP, const unsigned short nPort)
 	{
@@ -91,6 +105,8 @@ public:
 		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2);
 
 		m_pNet = new NFCNet(nHeadLength, this, &NFINetModule::OnRecivePack, &NFINetModule::OnSocketEvent);
+
+		//这里返回的是作为client的fd
 		return m_pNet->Initialization(strIP, nPort);
 	}
 
@@ -106,100 +122,99 @@ public:
 
 	bool RecivePB(const NFIPacket& msg, google::protobuf::Message& xData, NFIDENTID& nPlayer)
 	{
-        NFMsg::MsgBase xMsg;
-        if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
-        {
-            char szData[MAX_PATH] = { 0 };
-            sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
-            LogRecive(szData);
+		NFMsg::MsgBase xMsg;
+		if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
+		{
+			char szData[MAX_PATH] = { 0 };
+			sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
+			LogRecive(szData);
 
-            return false;
-        }
+			return false;
+		}
 
-        if (!xData.ParseFromString(xMsg.msg_data()))
-        {
-            char szData[MAX_PATH] = { 0 };
-            sprintf(szData, "Parse Message Failed from MsgData to ProtocolData, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
-            LogRecive(szData);
+		if (!xData.ParseFromString(xMsg.msg_data()))
+		{
+			char szData[MAX_PATH] = { 0 };
+			sprintf(szData, "Parse Message Failed from MsgData to ProtocolData, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
+			LogRecive(szData);
 
-            return false;
-        }
+			return false;
+		}
 
-        nPlayer = PBToNF(xMsg.player_id());
+		nPlayer = PBToNF(xMsg.player_id());
 
-        return true;
+		return true;
 	}
 
-//     bool VerifyProtocol(const NFIPacket& msg, const int nFD)
-//     {
-//         NFMsg::MsgBase xMsg;
-//         if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
-//         {
-//             char szData[MAX_PATH] = { 0 };
-//             sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
-//             LogRecive(szData);
-// 
-//             return false;
-//         }
-// 
-// 		NetObject* pObject = GetNet()->GetNetObject(nFD);
-// 		if (pObject)
-// 		{
-// 			pObject->get
-// 		}
-//         if(nPlayer != PBToNF(xMsg.player_id()))
-//         {
-//             return false;
-//         }
-// 
-//         return true;
-//     }
+	//     bool VerifyProtocol(const NFIPacket& msg, const int nFD)
+	//     {
+	//         NFMsg::MsgBase xMsg;
+	//         if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
+	//         {
+	//             char szData[MAX_PATH] = { 0 };
+	//             sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
+	//             LogRecive(szData);
+	// 
+	//             return false;
+	//         }
+	// 
+	// 		NetObject* pObject = GetNet()->GetNetObject(nFD);
+	// 		if (pObject)
+	// 		{
+	// 			pObject->get
+	// 		}
+	//         if(nPlayer != PBToNF(xMsg.player_id()))
+	//         {
+	//             return false;
+	//         }
+	// 
+	//         return true;
+	//     }
 
 	virtual bool Execute(const float fLasFrametime, const float fStartedTime)
 	{
 		//把上次的数据处理了
+		KeepAlive(fLasFrametime);
 
-			NetEventPack xEventPack;
-			while (mxQueue.Pop(xEventPack))
+		//////////////////////////////////////////////////////////////////////////
+		QueueEventPack xEventPack;
+		while (mxQueue.Pop(xEventPack))
+		{
+			switch (xEventPack.eMsgType)
 			{
-				switch (xEventPack.eMsgType)
+			case QueueEventPack::ON_NET_RECIVE:
 				{
-				case NetEventPack::ON_RECIVE:
+					if(!mRecvCB._Empty())
 					{
-						if(!mRecvCB._Empty())
-						{
-				
-							NFCPacket xPacket(m_pNet->GetHeadLen());
-							xPacket.SetFd(xEventPack.nFD);
-							//xPacket.DeCode(xEventPack.strData.c_str(), xEventPack.strData.length());
-							xPacket.EnCode(xEventPack.nMsgID, xEventPack.strData.c_str(), xEventPack.strData.length());
 
-							mRecvCB(xPacket);
-						}
-					}
-					break;
-				case NetEventPack::ON_SEND:
-					{
 						NFCPacket xPacket(m_pNet->GetHeadLen());
-						if(xPacket.EnCode(xEventPack.nMsgID, xEventPack.strData.c_str(), xEventPack.strData.length()))
-						{
-							m_pNet->SendMsg(xPacket, xEventPack.nFD);
-						}
+						xPacket.SetFd(xEventPack.nFD);
+						//xPacket.DeCode(xEventPack.strData.c_str(), xEventPack.strData.length());
+						xPacket.EnCode(xEventPack.nMsgID, xEventPack.strData.c_str(), xEventPack.strData.length());
+
+						mRecvCB(xPacket);
 					}
-					break;
-				case NetEventPack::ON_SOCKET_EVT:
-					{
-						if(!mEventCB._Empty())
-						{
-							mEventCB(xEventPack.nFD, (NF_NET_EVENT)xEventPack.nMsgID);
-						}
-					}
-					break;
 				}
+				break;
+			case QueueEventPack::ON_NET_SEND:
+				{
+					NFCPacket xPacket(m_pNet->GetHeadLen());
+					if(xPacket.EnCode(xEventPack.nMsgID, xEventPack.strData.c_str(), xEventPack.strData.length()))
+					{
+						m_pNet->SendMsg(xPacket, xEventPack.nFD);
+					}
+				}
+				break;
+			case QueueEventPack::ON_NET_FD_EVT:
+				{
+					if(!mEventCB._Empty())
+					{
+						mEventCB(xEventPack.nFD, (NF_NET_EVENT)xEventPack.nMsgID);
+					}
+				}
+				break;
 			}
-		//1:recive
-		//2:send
-		//3:socket_evt
+		}
 
 		//////////////////////////////////////////////////////////////////////////
 		return m_pNet->Execute(fLasFrametime, fStartedTime);
@@ -227,15 +242,15 @@ public:
 		}
 
 		//playerid主要是网关转发消息的时候做识别使用，其他使用不使用
-        NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
+		NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
 		*pPlayerID = NFToPB(nPlayer);
-        if (pFdList)
-        {
-            for (int i = 0; i < pFdList->size(); ++i)
-            {
-                xMsg.add_player_fd_list((*pFdList)[i]);
-            }
-        }
+		if (pFdList)
+		{
+			for (int i = 0; i < pFdList->size(); ++i)
+			{
+				xMsg.add_player_fd_list((*pFdList)[i]);
+			}
+		}
 
 
 		std::string strMsg;
@@ -248,18 +263,18 @@ public:
 			return false;
 		}
 
-// 		NFCPacket xPacket(m_pNet->GetHeadLen());
-// 		if(!xPacket.EnCode(nMsgID, strMsg.c_str(), strMsg.length()))
-// 		{
-// 			char szData[MAX_PATH] = { 0 };
-// 			sprintf(szData, "Send Message to %d Failed For Encode of MsgData, MessageID: %d, MessageLen: %d\n", nSockIndex, nMsgID, strMsg.length());
-// 			LogSend(szData);
-// 
-// 			return false;
-// 		}
+		// 		NFCPacket xPacket(m_pNet->GetHeadLen());
+		// 		if(!xPacket.EnCode(nMsgID, strMsg.c_str(), strMsg.length()))
+		// 		{
+		// 			char szData[MAX_PATH] = { 0 };
+		// 			sprintf(szData, "Send Message to %d Failed For Encode of MsgData, MessageID: %d, MessageLen: %d\n", nSockIndex, nMsgID, strMsg.length());
+		// 			LogSend(szData);
+		// 
+		// 			return false;
+		// 		}
 
-		NetEventPack xNetEventPack;
-		xNetEventPack.eMsgType = NetEventPack::ON_SEND;
+		QueueEventPack xNetEventPack;
+		xNetEventPack.eMsgType = QueueEventPack::ON_NET_SEND;
 		xNetEventPack.nMsgID = nMsgID;
 		xNetEventPack.nFD = nSockIndex;
 		xNetEventPack.strData = strMsg;//可以待优化,SerializeToString直接进来
@@ -277,10 +292,31 @@ public:
 
 protected:
 
+	void KeepAlive(float fLasFrametime)
+	{
+		if (m_pNet->IsServer())
+		{
+			return;
+		}
+
+		if (mfLastHBTime < 10.0f)
+		{
+			mfLastHBTime += fLasFrametime;
+			return;
+		}
+
+		mfLastHBTime = 0.0f;
+
+		NFMsg::ServerHeartBeat xMsg;
+		xMsg.set_count(0);
+
+		SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT, xMsg, m_pNet->FD());
+	}
+
 	int OnRecivePack(const NFIPacket& msg)
 	{
-		NetEventPack xNetEventPack;
-		xNetEventPack.eMsgType = NetEventPack::ON_RECIVE;
+		QueueEventPack xNetEventPack;
+		xNetEventPack.eMsgType = QueueEventPack::ON_NET_RECIVE;
 		xNetEventPack.nMsgID = msg.GetMsgHead()->GetMsgID();
 		xNetEventPack.nFD = msg.GetFd();
 		xNetEventPack.strData.assign(msg.GetData(), msg.GetDataLen());
@@ -292,8 +328,8 @@ protected:
 
 	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent)
 	{
-		NetEventPack xNetEventPack;
-		xNetEventPack.eMsgType = NetEventPack::ON_SOCKET_EVT;
+		QueueEventPack xNetEventPack;
+		xNetEventPack.eMsgType = QueueEventPack::ON_NET_FD_EVT;
 		xNetEventPack.nMsgID = eEvent;
 		xNetEventPack.nFD = nSockIndex;
 
@@ -303,12 +339,16 @@ protected:
 	}
 
 	std::string mstrConfigIdent;
-protected:
-	NFINet* m_pNet;
 
+
+private:
+
+	NFINet* m_pNet;
+	float mfLastHBTime;
 	RECIEVE_FUNCTOR mRecvCB;
 	EVENT_FUNCTOR mEventCB;
-	NFQueue<NetEventPack> mxQueue;
+
+	NFQueue<QueueEventPack> mxQueue;
 
 };
 

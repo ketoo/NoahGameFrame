@@ -114,10 +114,12 @@ void NFCDataProcessModule::Handler( const NFIActorMessage& message, const Theron
     }
 }
 
+#ifdef NF_USE_ACTOR
 Theron::Address NFCDataProcessModule::GetActorID( const NFIDENTID& self )
 {
     return Theron::Address();
 }
+#endif
 
 void NFCDataProcessModule::HandlerEx( const NFIActorMessage& message, const Theron::Address from )
 {

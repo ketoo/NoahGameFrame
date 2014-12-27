@@ -13,8 +13,6 @@
 
 bool NFCGameServerNet_ClientModule::Init()
 {
-    mfLastHBTime = 0.0f;
-    mnSocketFD = -1;
     return true;
 }
 
@@ -27,24 +25,7 @@ bool NFCGameServerNet_ClientModule::Shut()
 
 bool NFCGameServerNet_ClientModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
-    KeepAlive(fLasFrametime);
-    return m_pNet->Execute(fLasFrametime, fStartedTime);
-}
-
-void NFCGameServerNet_ClientModule::KeepAlive(float fLasFrametime)
-{
-    if (mfLastHBTime < 10.0f)
-    {
-        mfLastHBTime += fLasFrametime;
-        return;
-    }
-
-    mfLastHBTime = 0.0f;
-
-    NFMsg::ServerHeartBeat xMsg;
-    xMsg.set_count(0);
-
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT, xMsg, mnSocketFD);
+	return NFINetModule::Execute(fLasFrametime, fStartedTime);
 }
 
 void NFCGameServerNet_ClientModule::Register()
@@ -70,7 +51,7 @@ void NFCGameServerNet_ClientModule::Register()
     pData->set_server_max_online(50000);
     pData->set_server_state(NFMsg::EST_NARMAL);
 
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_REGISTERED, xMsg, mnSocketFD);
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_REGISTERED, xMsg, GetNet()->FD());
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 }
@@ -96,7 +77,7 @@ void NFCGameServerNet_ClientModule::UnRegister()
     pData->set_server_max_online(50000);
     pData->set_server_state(NFMsg::EST_MAINTEN);
 
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_UNREGISTERED, xMsg, mnSocketFD);
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_UNREGISTERED, xMsg, GetNet()->FD());
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "UnRegister");
 
@@ -151,12 +132,7 @@ bool NFCGameServerNet_ClientModule::AfterInit()
 	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
 	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
-    m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerNet_ClientModule::OnRecivePack, &NFCGameServerNet_ClientModule::OnSocketEvent);
-    mnSocketFD = m_pNet->Initialization(strServerIP.c_str(), nServerPort);
-    if (mnSocketFD < 0)
-    {
-        assert(0);
-    }
+	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerNet_ClientModule::OnRecivePack, &NFCGameServerNet_ClientModule::OnSocketEvent, strServerIP.c_str(), nServerPort);
 
     m_pKernelModule->CreateContainer(-2, "");
 

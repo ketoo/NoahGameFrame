@@ -235,8 +235,9 @@ public:
 	virtual bool AddBan(const int nSockIndex, const int32_t nTime = -1) = 0;
 	virtual bool RemoveBan(const int nSockIndex) = 0;
 
-    virtual void HeartPack() = 0;
-    virtual NFIMsgHead::NF_Head GetHeadLen() = 0;
+	virtual NFIMsgHead::NF_Head GetHeadLen() = 0;
+	virtual bool IsServer() = 0;
+	virtual int FD() = 0;
 
 protected:
 private:
