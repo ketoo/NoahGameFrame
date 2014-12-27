@@ -37,7 +37,7 @@ class NFCNet : public NFINet
 {
 public:
     template<typename BaseType>
-    NFCNet(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT))
+    NFCNet(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT), const int nResetCount = -1, const float nReseTime = 5.0f)
     {
         base = NULL;
         listener = NULL;
@@ -47,7 +47,11 @@ public:
         mstrIP = "";
         mnPort = 0;
         mnCpuCount = 0;
+		mnResetCount = nResetCount;
+		mfReseTime = nReseTime;
+		mfRunTimeReseTime = 0.0f;
         mbServer = false;
+		mnFD = 0;
         ev = NULL;
         mnHeadLength = nHeadLength;
     }
@@ -72,13 +76,15 @@ public:
 
 	virtual bool AddBan(const int nSockIndex, const int32_t nTime = -1){return true;};
 	virtual bool RemoveBan(const int nSockIndex){return true;};
-	virtual void HeartPack();
     virtual NFIMsgHead::NF_Head GetHeadLen(){return mnHeadLength;};
+	virtual bool IsServer(){return mbServer;};
+	virtual int FD(){return mnFD;};
 
 private:
 	virtual void ExecuteClose();
-
+	virtual void ExeReset( const float fLastFrameTime );
     virtual bool CloseSocketAll();
+	virtual bool ReqReset();
 
 	virtual bool Dismantle(NetObject* pObject);
 
@@ -103,6 +109,11 @@ private:
 	int mnPort;
 	int mnCpuCount;
 	bool mbServer;
+	int mnResetCount;
+	float mfReseTime;
+	float mfRunTimeReseTime;
+
+	int mnFD;//client有效
     bool mbUsePacket;//是否使用我们的包
 	struct event_base *base;
 	struct evconnlistener *listener;

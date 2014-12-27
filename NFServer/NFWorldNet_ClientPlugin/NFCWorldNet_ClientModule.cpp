@@ -15,16 +15,13 @@
 bool NFCWorldNet_ClientModule::Init()
 {
 	mstrConfigIdent = "WorldServer";
-    mfLastHBTime = 0.0f;
-    mnSocketFD = -1;
 
     return true;
 }
 
 bool NFCWorldNet_ClientModule::Shut()
 {
-    m_pNet->Final();
-    return true;
+	return true;
 }
 
 bool NFCWorldNet_ClientModule::AfterInit()
@@ -54,12 +51,8 @@ bool NFCWorldNet_ClientModule::AfterInit()
 	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
 	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
-	m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCWorldNet_ClientModule::OnRecivePack, &NFCWorldNet_ClientModule::OnSocketEvent);
-	mnSocketFD = m_pNet->Initialization(strServerIP.c_str(), nServerPort);
-	if (mnSocketFD < 0)
-	{
-		assert(0);
-	}
+
+	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCWorldNet_ClientModule::OnRecivePack, &NFCWorldNet_ClientModule::OnSocketEvent, strServerIP.c_str(), nServerPort);
 
 	return true;
 }
@@ -67,24 +60,7 @@ bool NFCWorldNet_ClientModule::AfterInit()
 
 bool NFCWorldNet_ClientModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
-    KeepAlive(fLasFrametime);
-    return m_pNet->Execute(fLasFrametime, fStartedTime);
-}
-
-void NFCWorldNet_ClientModule::KeepAlive(float fLasFrametime)
-{
-    if (mfLastHBTime < 10.0f)
-    {
-        mfLastHBTime += fLasFrametime;
-        return;
-    }
-
-    mfLastHBTime = 0.0f;
-
-    NFMsg::ServerHeartBeat xMsg;
-    xMsg.set_count(0);
-
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT, xMsg, mnSocketFD);
+	return NFINetModule::Execute(fLasFrametime, fStartedTime);
 }
 
 void NFCWorldNet_ClientModule::Register()
@@ -105,7 +81,7 @@ void NFCWorldNet_ClientModule::Register()
     pData->set_server_max_online(100000);
     pData->set_server_state(NFMsg::EST_NARMAL);
 
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED, xMsg, mnSocketFD);
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED, xMsg, GetNet()->FD());
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 }
@@ -129,7 +105,7 @@ void NFCWorldNet_ClientModule::UnRegister()
     pData->set_server_max_online(100000);
     pData->set_server_state(NFMsg::EST_NARMAL);
 
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_MTL_WORLD_UNREGISTERED, xMsg, mnSocketFD);
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_MTL_WORLD_UNREGISTERED, xMsg, GetNet()->FD());
 
     Execute(0.0f, 0.0f);
 
@@ -186,7 +162,7 @@ int NFCWorldNet_ClientModule::OnSelectServerResultsEvent(const NFIDENTID& object
     xMsg.set_world_ip(strWorldAddress);
     xMsg.set_world_key(strKey);
 
-	SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xMsg, mnSocketFD);
+	SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xMsg, GetNet()->FD());
 
     return 0;
 }

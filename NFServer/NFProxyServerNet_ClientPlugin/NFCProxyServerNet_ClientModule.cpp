@@ -39,25 +39,7 @@ bool NFCProxyServerNet_ClientModule::Execute(const float fLasFrametime, const fl
         pProxy = Next();
     }
 
-    KeepAlive(fLasFrametime);
-
-    return m_pNet->Execute(fLasFrametime, fStartedTime);
-}
-
-void NFCProxyServerNet_ClientModule::KeepAlive(const float fLasFrametime)
-{
-    if (mfLastHBTime < 10.0f)
-    {
-        mfLastHBTime += fLasFrametime;
-        return;
-    }
-
-    mfLastHBTime = 0.0f;
-
-    NFMsg::ServerHeartBeat xMsg;
-    xMsg.set_count(0);
-
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT, xMsg, mnSocketFD);
+	return NFINetModule::Execute(fLasFrametime, fStartedTime);
 }
 
 int NFCProxyServerNet_ClientModule::OnRecivePack( const NFIPacket& msg )
@@ -186,7 +168,7 @@ void NFCProxyServerNet_ClientModule::Register()
     pData->set_server_max_online(100000);
     pData->set_server_state(NFMsg::EST_NARMAL);
 
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg, mnSocketFD);
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg, GetNet()->FD());
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 }
@@ -211,7 +193,7 @@ void NFCProxyServerNet_ClientModule::UnRegister()
     pData->set_server_max_online(100000);
     pData->set_server_state(NFMsg::EST_MAINTEN);
 
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_UNREGISTERED, xMsg, mnSocketFD);
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_UNREGISTERED, xMsg, GetNet()->FD());
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "UnRegister");
 }
@@ -241,12 +223,8 @@ bool NFCProxyServerNet_ClientModule::AfterInit()
     const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
     const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
-    m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyServerNet_ClientModule::OnRecivePack, &NFCProxyServerNet_ClientModule::OnSocketEvent);
-    mnSocketFD = m_pNet->Initialization(strServerIP.c_str(), nServerPort);
-    if (mnSocketFD < 0)
-    {
-        assert(0);
-    }
+	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyServerNet_ClientModule::OnRecivePack, &NFCProxyServerNet_ClientModule::OnSocketEvent, strServerIP.c_str(), nServerPort);
+
     return true;
 }
 
@@ -255,7 +233,7 @@ int NFCProxyServerNet_ClientModule::Transpond(int nGameServerID, const NFIPacket
     NFINetModule* pProxy = GetElement(nGameServerID);
     if (pProxy)
     {
-        pProxy->GetNet()->SendMsg(msg, pProxy->GetFD());
+        pProxy->GetNet()->SendMsg(msg, pProxy->GetNet()->FD());
     }
 
     return 0;
@@ -302,29 +280,11 @@ bool NFCProxyServerNet_ClientModule::VerifyConnectData( const std::string& strAc
 
 bool NFCProxyConnectObject::Execute(float fFrameTime, float fTotalTime)
 {
-    KeepAlive(fFrameTime);
-    return m_pNet->Execute(fFrameTime, fTotalTime);
-}
-
-void NFCProxyConnectObject::KeepAlive(float fLasFrametime)
-{
-    if (mfLastHBTime < 10.0f)
-    {
-        mfLastHBTime += fLasFrametime;
-        return;
-    }
-
-    mfLastHBTime = 0.0f;
-
-    NFMsg::ServerHeartBeat xMsg;
-    xMsg.set_count(0);
-
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT, xMsg, mnSocketFD);
+	return NFINetModule::Execute(fFrameTime, fTotalTime);
 }
 
 NFCProxyConnectObject::NFCProxyConnectObject(int nGameServerID, const std::string& strIP, const int nPort,  NFIPluginManager* p)
 {
-    mfLastHBTime = 0.0f;
 
     mstrConfigIdent = "ProxyServer";
     mnGameServerID = nGameServerID;
@@ -343,12 +303,8 @@ NFCProxyConnectObject::NFCProxyConnectObject(int nGameServerID, const std::strin
         //
     }
 
-    m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyConnectObject::OnRecivePack, &NFCProxyConnectObject::OnSocketEvent);
-    mnSocketFD = m_pNet->Initialization(strIP.c_str(), nPort);
-    if (mnSocketFD < 0)
-    {
-        assert(0);
-    }
+	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyConnectObject::OnRecivePack, &NFCProxyConnectObject::OnSocketEvent, strIP.c_str(), nPort);
+
 }
 
 void NFCProxyConnectObject::OnClientDisconnect( const int nAddress )
@@ -413,7 +369,7 @@ void NFCProxyConnectObject::Register()
     pData->set_server_max_online(100000);
     pData->set_server_state(NFMsg::EST_NARMAL);
 
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg, mnSocketFD);
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg, GetNet()->FD());
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 }
@@ -437,7 +393,7 @@ void NFCProxyConnectObject::UnRegister()
     pData->set_server_max_online(100000);
     pData->set_server_state(NFMsg::EST_NARMAL);
 
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_UNREGISTERED, xMsg, mnSocketFD);
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_UNREGISTERED, xMsg, GetNet()->FD());
 
     Execute(0.0f, 0.0f);
 
