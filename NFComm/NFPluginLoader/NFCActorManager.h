@@ -47,7 +47,10 @@ public:
 
 private:
 	std::vector<NFIActor*> mActorVec;
+
+#ifdef NF_USE_ACTOR
     Theron::Framework* m_pFramework;
+#endif
 	//Theron::Framework framework; // ªª÷∏’Î
 };
 
