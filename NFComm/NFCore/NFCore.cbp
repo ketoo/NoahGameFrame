@@ -15,8 +15,8 @@
 				<Compiler>
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
-					<Add directory="$(SolutionDir)" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(BOOST_LIB)" />
@@ -31,8 +31,8 @@
 				<Compiler>
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
-					<Add directory="$(SolutionDir)" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
 				</Compiler>
 			</Target>
 		</Build>
