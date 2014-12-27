@@ -17,8 +17,13 @@
 #include <assert.h>
 
 #ifdef _MSC_VER
+
 #include <WinSock2.h>
+#include <winsock.h>
 #else
+
+#include <arpa/inet.h>
+#include <netinet/in.h>
 
 #endif
 
@@ -118,11 +123,11 @@ public:
     {
         uint32_t nOffset = 0;
 
-        uint16_t nMsgID = htons(munMsgID);
+        uint16_t nMsgID = NF_HTONS(munMsgID);
         memcpy(strData + nOffset, (void*)(&nMsgID), sizeof(munMsgID));
         nOffset += sizeof(munMsgID);
 
-        uint32_t nSize = htonl(munSize);
+        uint32_t nSize = NF_HTONL(munSize);
         memcpy(strData + nOffset, (void*)(&nSize), sizeof(munSize));
         nOffset += sizeof(munSize);
 
@@ -140,12 +145,12 @@ public:
 
         uint16_t nMsgID = 0;
         memcpy(&nMsgID, strData + nOffset, sizeof(munMsgID));
-        munMsgID = ntohs(nMsgID);
+        munMsgID = NF_NTOHS(nMsgID);
         nOffset += sizeof(munMsgID);
 
         uint32_t nSize = 0;
         memcpy(&nSize, strData + nOffset, sizeof(munSize));
-        munSize = ntohl(nSize);
+        munSize = NF_NTOHL(nSize);
         nOffset += sizeof(munSize);
 
         if (nOffset != GetHeadLength())
