@@ -38,8 +38,9 @@ int HelloWorld3Module::OnClassCallBackEvent(const NFIDENTID& self, const std::st
 
     if (event == COE_CREATE_HASDATA)
     {
-
+#ifdef NF_USE_ACTOR
         if(pPluginManager->GetActorID() == NFIActorManager::EACTOR_MAIN)
+#endif
         {
             m_pEventProcessModule->AddEventCallBack(self, 11111111, this, &HelloWorld3Module::OnEvent);
 

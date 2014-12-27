@@ -26,7 +26,6 @@ class NFCGameServerNet_ClientModule : public NFINetModule
 public:
     NFCGameServerNet_ClientModule(NFIPluginManager* p)
     {
-        mnSocketFD = 0;
         pPluginManager = p;
     }
     virtual bool Init();
@@ -48,8 +47,8 @@ protected:
     void OnClientDisconnect(const int nAddress);
     //спа╛╫с
     void OnClientConnected(const int nAddress);
+
 protected:
-    void KeepAlive(float fLasFrametime);
     void Register();
     void UnRegister();
     void RefreshWorldInfo();
@@ -71,8 +70,6 @@ protected:
     int OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
 private:
-    int mnSocketFD;
-    float mfLastHBTime;
 
     NFILogModule* m_pLogModule;
     NFIKernelModule* m_pKernelModule;

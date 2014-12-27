@@ -50,7 +50,7 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
         if (!pNet->mbServer)
         {
             //客户端断线重连
-            pNet->Reset();
+            pNet->ReqReset();
         }
     } 
     else if (events & BEV_EVENT_ERROR) 
@@ -60,7 +60,7 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
         if (!pNet->mbServer)
         {
             //客户端断线重连
-            pNet->Reset();
+            pNet->ReqReset();
         }
     }
     else if (events & BEV_EVENT_TIMEOUT)
@@ -71,7 +71,7 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
         if (!pNet->mbServer)
         {
             //客户端断线重连
-            pNet->Reset();
+            pNet->ReqReset();
         }
     }
     else if (events & BEV_EVENT_CONNECTED)
@@ -197,7 +197,7 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
 bool NFCNet::Execute(const float fLasFrametime, const float fStartedTime)
 {
 	ExecuteClose();
-	
+	ExeReset(fLasFrametime);
 
     //std::cout << "Running:" << mbRuning << std::endl;
     if (base)
@@ -438,6 +438,7 @@ int NFCNet::InitClientNet()
     evtimer_add(ev, &tv);
 
     //event_base_loop(base, EVLOOP_ONCE|EVLOOP_NONBLOCK);
+	mnFD = sockfd;
 
     return sockfd;
 }
@@ -549,17 +550,11 @@ bool NFCNet::Reset()
     {
         Final();
         InitClientNet();
+
+		return true;
     }
 
     return true;
-}
-
-void NFCNet::HeartPack()
-{
-    NFCPacket msg(mnHeadLength);
-    msg.EnCode(0, "", 0);
-
-    SendMsg(msg, 0);
 }
 
 bool NFCNet::CloseSocketAll()
@@ -618,4 +613,45 @@ void NFCNet::ExecuteClose()
 	}
 
 	mvRemoveObject.clear();
+}
+
+void NFCNet::ExeReset( const float fLastFrameTime )
+{
+	if (!mbServer)
+	{
+		if (mfRunTimeReseTime > 0.000f)
+		{
+			mfRunTimeReseTime -= fLastFrameTime;
+
+			if (mfRunTimeReseTime < 0.0000f)
+			{
+				if (mnResetCount > 0)
+				{
+					Reset();
+					mnResetCount --;
+					mfRunTimeReseTime = mfReseTime;
+				}
+				else if (0 == mnResetCount)
+				{
+				}
+				else if (mnResetCount < 0)
+				{
+					Reset();
+					mfRunTimeReseTime = mfReseTime;
+				}
+			}
+		}
+	}
+}
+
+bool NFCNet::ReqReset()
+{
+	if (!mbServer)
+	{
+		mfRunTimeReseTime = mfReseTime;
+
+		return true;
+	}
+
+	return false;
 }
