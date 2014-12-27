@@ -1,0 +1,60 @@
+# Copyright 2003 Vladimir Prus 
+# Distributed under the Boost Software License, Version 1.0. 
+# (See accompanying file LICENSE_1_0.txt or http://www.boost.org/LICENSE_1_0.txt) 
+
+
+import type ;
+import generators ;
+import print ;
+import virtual-target ;
+import "class" : new ;
+import modules ;
+import targets ;
+import project ;
+
+
+type.register X : x ;
+
+class test-target-class : basic-target
+{
+    rule __init__ ( name : project )
+    {
+        basic-target.__init__ $(name) : $(project) ;
+    }
+        
+    rule construct ( name : source-targets * : property-set )
+    {
+        if [ modules.peek : GENERATE_NOTHING ]
+        {
+            return [ property-set.empty ] ;
+        }
+        else if [ modules.peek : GENERATE_ONLY_UNUSABLE ] 
+        {
+            return [ property-set.empty ]
+              [ virtual-target.from-file b.x : . : $(self.project) ] 
+              ;             
+        }
+        else
+        {            
+            return [ property-set.empty ]
+              [ virtual-target.from-file b.x : . : $(self.project) ] 
+              [ virtual-target.from-file b.cpp : . : $(self.project) ] 
+                ; 
+        }        
+    }
+    
+    rule compute-usage-requirements ( rproperties : targets * )
+    {
+        return [ property-set.create <define>FOO ] ;
+    }
+}
+
+rule make-b-main-target
+{
+    local project = [ project.current ] ;    
+    
+    targets.main-target-alternative 
+      [ new test-target-class b : $(project) ] ;
+}
+
+IMPORT $(__name__) : make-b-main-target : : make-b-main-target ;

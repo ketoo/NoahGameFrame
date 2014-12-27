@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="SoapHeaderHandling" FullName="System.Web.Services.Protocols.SoapHeaderHandling">
+  <TypeSignature Language="C#" Value="public sealed class SoapHeaderHandling" />
+  <AssemblyInfo>
+    <AssemblyName>System.Web.Services</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <remarks>To be added.</remarks>
+    <since version=".NET 2.0" />
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The <see cref="T:System.Web.Services.Protocols.SoapHeaderHandling" /> class is used to get, set, write, and read SOAP header content to and from SOAP messages.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SoapHeaderHandling ();" />
+      <MemberType>Constructor</MemberType>
+      <Parameters />
+      <Docs>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of <see cref="T:System.Web.Services.Protocols.SoapHeaderHandling" />.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="EnsureHeadersUnderstood">
+      <MemberSignature Language="C#" Value="public static void EnsureHeadersUnderstood (System.Web.Services.Protocols.SoapHeaderCollection headers);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="headers" Type="System.Web.Services.Protocols.SoapHeaderCollection" />
+      </Parameters>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Checks to ensure that the SOAP headers that must be understood have been understood; if not, this method throws an exception.</para>
+        </summary>
+        <param name="headers">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" /> that contains the SOAP headers.</param>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="GetHeaderMembers">
+      <MemberSignature Language="C#" Value="public static void GetHeaderMembers (System.Web.Services.Protocols.SoapHeaderCollection headers, object target, System.Web.Services.Protocols.SoapHeaderMapping[] mappings, System.Web.Services.Protocols.SoapHeaderDirection direction, bool client);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="headers" Type="System.Web.Services.Protocols.SoapHeaderCollection" />
+        <Parameter Name="target" Type="System.Object" />
+        <Parameter Name="mappings" Type="System.Web.Services.Protocols.SoapHeaderMapping[]" />
+        <Parameter Name="direction" Type="System.Web.Services.Protocols.SoapHeaderDirection" />
+        <Parameter Name="client" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the SOAP header content for the specified SOAP message.</para>
+        </summary>
+        <param name="headers">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" /> that contains the SOAP headers.</param>
+        <param name="target">
+          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Object" /> that represents the SOAP message.</param>
+        <param name="mappings">
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of type <see cref="T:System.Web.Services.Protocols.SoapHeaderMapping" /> that contains the mappings for the SOAP headers.</param>
+        <param name="direction">
+          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.Services.Protocols.SoapHeaderDirection" /> value that indicates the direction of the SOAP headers.</param>
+        <param name="client">
+          <attribution license="cc4" from="Microsoft" modified="false" />This parameter is currently not used.</param>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="ReadHeaders">
+      <MemberSignature Language="C#" Value="public string ReadHeaders (System.Xml.XmlReader reader, System.Xml.Serialization.XmlSerializer serializer, System.Web.Services.Protocols.SoapHeaderCollection headers, System.Web.Services.Protocols.SoapHeaderMapping[] mappings, System.Web.Services.Protocols.SoapHeaderDirection direction, string envelopeNS, string encodingStyle, bool checkRequiredHeaders);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="reader" Type="System.Xml.XmlReader" />
+        <Parameter Name="serializer" Type="System.Xml.Serialization.XmlSerializer" />
+        <Parameter Name="headers" Type="System.Web.Services.Protocols.SoapHeaderCollection" />
+        <Parameter Name="mappings" Type="System.Web.Services.Protocols.SoapHeaderMapping[]" />
+        <Parameter Name="direction" Type="System.Web.Services.Protocols.SoapHeaderDirection" />
+        <Parameter Name="envelopeNS" Type="System.String" />
+        <Parameter Name="encodingStyle" Type="System.String" />
+        <Parameter Name="checkRequiredHeaders" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Returns a <see cref="T:System.String" /> that contains the SOAP header content of the SOAP message.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>A <see cref="T:System.String" /> that contains the SOAP header content of the SOAP message.</para>
+        </returns>
+        <param name="reader">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlReader" /> to be used in writing the headers.</param>
+        <param name="serializer">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.Serialization.XmlSerializer" /> to be used in reading the headers.</param>
+        <param name="headers">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" /> that contains the SOAP headers.</param>
+        <param name="mappings">
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of type <see cref="T:System.Web.Services.Protocols.SoapHeaderMapping" /> that contains the mappings for the SOAP headers.</param>
+        <param name="direction">
+          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.Services.Protocols.SoapHeaderDirection" /> value that indicates the direction of the SOAP headers.</param>
+        <param name="envelopeNS">
+          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the namespace for the SOAP message envelope.</param>
+        <param name="encodingStyle">
+          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the encoding style for the SOAP headers.</param>
+        <param name="checkRequiredHeaders">
+          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Boolean" /> that indicates whether to check for the required SOAP headers.</param>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="SetHeaderMembers">
+      <MemberSignature Language="C#" Value="public static void SetHeaderMembers (System.Web.Services.Protocols.SoapHeaderCollection headers, object target, System.Web.Services.Protocols.SoapHeaderMapping[] mappings, System.Web.Services.Protocols.SoapHeaderDirection direction, bool client);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="headers" Type="System.Web.Services.Protocols.SoapHeaderCollection" />
+        <Parameter Name="target" Type="System.Object" />
+        <Parameter Name="mappings" Type="System.Web.Services.Protocols.SoapHeaderMapping[]" />
+        <Parameter Name="direction" Type="System.Web.Services.Protocols.SoapHeaderDirection" />
+        <Parameter Name="client" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Sets the SOAP header content for the specified SOAP message.</para>
+        </summary>
+        <param name="headers">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" /> that contains the SOAP headers.</param>
+        <param name="target">
+          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Object" /> that represents the SOAP message.</param>
+        <param name="mappings">
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of type <see cref="T:System.Web.Services.Protocols.SoapHeaderMapping" /> that contains the mappings for the SOAP headers.</param>
+        <param name="direction">
+          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.Services.Protocols.SoapHeaderDirection" /> value that indicates the direction of the SOAP headers.</param>
+        <param name="client">
+          <attribution license="cc4" from="Microsoft" modified="false" />This parameter is currently not used.</param>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="WriteHeaders">
+      <MemberSignature Language="C#" Value="public static void WriteHeaders (System.Xml.XmlWriter writer, System.Xml.Serialization.XmlSerializer serializer, System.Web.Services.Protocols.SoapHeaderCollection headers, System.Web.Services.Protocols.SoapHeaderMapping[] mappings, System.Web.Services.Protocols.SoapHeaderDirection direction, bool isEncoded, string defaultNS, bool serviceDefaultIsEncoded, string envelopeNS);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="writer" Type="System.Xml.XmlWriter" />
+        <Parameter Name="serializer" Type="System.Xml.Serialization.XmlSerializer" />
+        <Parameter Name="headers" Type="System.Web.Services.Protocols.SoapHeaderCollection" />
+        <Parameter Name="mappings" Type="System.Web.Services.Protocols.SoapHeaderMapping[]" />
+        <Parameter Name="direction" Type="System.Web.Services.Protocols.SoapHeaderDirection" />
+        <Parameter Name="isEncoded" Type="System.Boolean" />
+        <Parameter Name="defaultNS" Type="System.String" />
+        <Parameter Name="serviceDefaultIsEncoded" Type="System.Boolean" />
+        <Parameter Name="envelopeNS" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Writes the specified SOAP header content to the SOAP message.</para>
+        </summary>
+        <param name="writer">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlWriter" /> to be used in writing the headers.</param>
+        <param name="serializer">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.Serialization.XmlSerializer" /> to be used in writing the headers.</param>
+        <param name="headers">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" /> that contains the SOAP headers to be written.</param>
+        <param name="mappings">
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of type <see cref="T:System.Web.Services.Protocols.SoapHeaderMapping" /> that contains the mappings for the SOAP headers.</param>
+        <param name="direction">
+          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.Services.Protocols.SoapHeaderDirection" /> value that indicates the direction of the SOAP headers.</param>
+        <param name="isEncoded">
+          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Boolean" /> that indicates whether the SOAP headers are encoded.</param>
+        <param name="defaultNS">
+          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the default namespace for the XML Web service.</param>
+        <param name="serviceDefaultIsEncoded">
+          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Boolean" /> that indicates whether data sent to and from the XML Web service is encoded by default.</param>
+        <param name="envelopeNS">
+          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the namespace for the SOAP message envelope.</param>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="WriteUnknownHeaders">
+      <MemberSignature Language="C#" Value="public static void WriteUnknownHeaders (System.Xml.XmlWriter writer, System.Web.Services.Protocols.SoapHeaderCollection headers, string envelopeNS);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="writer" Type="System.Xml.XmlWriter" />
+        <Parameter Name="headers" Type="System.Web.Services.Protocols.SoapHeaderCollection" />
+        <Parameter Name="envelopeNS" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Writes the specified SOAP header content to the SOAP message.</para>
+        </summary>
+        <param name="writer">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlWriter" /> to be used in writing the headers.</param>
+        <param name="headers">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" /> that contains the SOAP headers to be written.</param>
+        <param name="envelopeNS">
+          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the namespace for the SOAP message envelope.</param>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>
