@@ -9,12 +9,13 @@
 #ifndef _NFI_ACTOR_MANAGER_H_
 #define _NFI_ACTOR_MANAGER_H_
 
-#ifndef NF_USE_ACTOR
+#ifdef NF_USE_ACTOR
 #include "Theron/Receiver.h"
 #include "Theron/Actor.h"
 #include "Theron/Framework.h"
 #include "Theron/Detail/Handlers/ReceiverHandler.h"
 #endif
+
 #include "NFComm/NFPluginModule/NFILogicModule.h"
 
 class NFIActorManager : public NFILogicModule

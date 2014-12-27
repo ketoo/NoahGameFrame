@@ -9,14 +9,14 @@
 #include "NFCNet.h"
 #include "NFCPacket.h"
 #include <string.h>
-#include "event2/bufferevent_struct.h"
 
 #ifdef _MSC_VER
 #include <WS2tcpip.h>
 #include <winsock2.h>
-#else
-
 #endif
+
+#include "event2\bufferevent_struct.h"
+#include "event2\event.h"
 
 void NFCNet::time_cb(evutil_socket_t fd, short _event, void *argc)
 {

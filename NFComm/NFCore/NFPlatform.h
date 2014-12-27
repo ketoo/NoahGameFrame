@@ -291,9 +291,7 @@ typedef int64_t NFINT64;
 #define NFASSERT(exp_, msg_, file_, func_)
 #endif
 
-#ifndef THERON_CPP11
-#define THERON_CPP11
-#endif
+
 //#define GOOGLE_GLOG_DLL_DECL=
 
 ///////////////////////////////////////////////////////////////
@@ -331,7 +329,12 @@ inline unsigned long NF_GetTickCount()
 #endif
 
 #ifdef NF_USE_ACTOR
+#ifndef THERON_USE_STD_THREADS
 #define THERON_USE_STD_THREADS
+#endif
+#ifndef THERON_CPP11
+#define THERON_CPP11
+#endif
 #endif
 
 
