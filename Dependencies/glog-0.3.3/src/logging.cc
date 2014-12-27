@@ -958,10 +958,18 @@ void LogFileObject::Write(bool force_flush,
                     << setw(2) << tm_time.tm_mday
                     << '-'
                     << setw(2) << tm_time.tm_hour
+                    << "."
                     << setw(2) << tm_time.tm_min
+                    << "."
                     << setw(2) << tm_time.tm_sec
-                    << '.'
+                    << "-pid."
                     << GetMainThreadPid()
+                    << "-thread."
+#ifdef _MSC_VER
+                    << GetCurrentThreadId()
+#else
+                    << pthread_self()
+#endif
                     << ".log";
     const string& time_pid_string = time_pid_stream.str();
 
