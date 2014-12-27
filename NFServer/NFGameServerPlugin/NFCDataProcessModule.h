@@ -34,7 +34,9 @@ public:
 
     virtual int LoadDataFormNoSql( const NFIDENTID& self );
     virtual int SaveDataToNoSql( const NFIDENTID& self, bool bOffline = false );
-    virtual Theron::Address GetActorID(const NFIDENTID& self);
+#ifdef NF_USE_ACTOR
+	virtual Theron::Address GetActorID(const NFIDENTID& self);
+#endif
 
 protected:
     virtual void Handler(const NFIActorMessage& message, const Theron::Address from);

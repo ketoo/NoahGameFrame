@@ -210,8 +210,7 @@ int NFCMasterNet_ServerModule::OnSelectWorldProcess(const NFIPacket& msg)
 
 bool NFCMasterNet_ServerModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
-	m_pNet->Execute(fLasFrametime, fStartedTime);
-
+	NFINetModule::Execute(fLasFrametime, fStartedTime);
 	return true;
 }
 
@@ -238,8 +237,6 @@ int NFCMasterNet_ServerModule::OnSelectServerResultProcess(const NFIPacket& msg)
 
 bool NFCMasterNet_ServerModule::AfterInit()
 {
-	
-
 	m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
 	m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
 	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
@@ -259,12 +256,7 @@ bool NFCMasterNet_ServerModule::AfterInit()
 	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
 	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
-	m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCMasterNet_ServerModule::OnRecivePack, &NFCMasterNet_ServerModule::OnSocketEvent);
-	int nRet = m_pNet->Initialization(nMaxConnect, nPort, nCpus);
-	if (nRet <= 0)
-	{
-		assert(0);
-	}
+	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCMasterNet_ServerModule::OnRecivePack, &NFCMasterNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
 
 	return true;
 }

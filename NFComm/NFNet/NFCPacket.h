@@ -32,7 +32,7 @@ public:
         }
 	}
 
-    ~NFCPacket()
+    virtual ~NFCPacket()
     {
         if (pHead)
         {
@@ -40,6 +40,11 @@ public:
             pHead = NULL;
         }
     }
+
+	void operator = (const NFIPacket& id)
+	{
+		
+	}
 
 	virtual const NFIMsgHead* GetMsgHead() const
 	{

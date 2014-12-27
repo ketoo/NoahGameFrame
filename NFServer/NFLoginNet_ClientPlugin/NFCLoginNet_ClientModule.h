@@ -27,7 +27,6 @@ class NFCLoginNet_ClientModule
 public:
     NFCLoginNet_ClientModule(NFIPluginManager* p)
     {
-		mnSocketFD = 0;
         pPluginManager = p;
     }
 
@@ -48,8 +47,6 @@ protected:
 	int OnRecivePack(const NFIPacket& msg);
     int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
 
-    void KeepAlive(float fLasFrametime);
-
 protected:
 
     //////////////////////////////////////////////////////////////////////////
@@ -66,9 +63,6 @@ protected:
     void Register();
     void UnRegister();
 
-private:
-	int mnSocketFD;
-    float mfLastHBTime;
 private:
     NFMapEx<int, NFMsg::ServerInfoReport> mWorldMap;
 

@@ -52,22 +52,26 @@ bool NFCPluginManager::LoadPlugin()
     {
         const char* strPluginName = pPluginNode->first_attribute( "Name" )->value();
         const char* strMain = pPluginNode->first_attribute( "Main" )->value();
-
-        int nMain = boost::lexical_cast<int>( strMain );
-        bool bMain = (nMain > 0 ? true : false);
-        if (bMain)
-        {
-            //主模块只能运行在主actor上只
-            //非主模块则所有的actor都创建
-            if (GetActorID() == NFIActorManager::EACTOR_MAIN)
-            {
-                mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, bMain));
-            }
-        }
-        else
-        {
-            mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, bMain));
-        }
+#ifdef NF_USE_ACTOR
+		int nMain = boost::lexical_cast<int>( strMain );
+		bool bMain = (nMain > 0 ? true : false);
+		if (bMain)
+		{
+			//主模块只能运行在主actor上只
+			//非主模块则所有的actor都创建
+			if (GetActorID() == NFIActorManager::EACTOR_MAIN)
+			{
+				mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, bMain));
+			}
+		}
+		else
+		{
+			mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, bMain));
+		}
+#else
+		mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, true));
+#endif
+       
     }
 
     rapidxml::xml_node<>* pActorDataNode = pRoot->first_node("ActorDataModule");
