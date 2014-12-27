@@ -97,12 +97,12 @@ protected:
     float               mfHeartBeatTime;
     NFIPluginManager* pPluginManager;
 
-    static NFIAIModule* m_pAIModule;
-    static NFIHateModule* m_pHateModule;
-    static NFIKernelModule* m_pKernelModule;
-    static NFIMoveModule* m_pMoveModule;
-    static NFIElementInfoModule* m_pElementInfoModule;
-    static NFIEventProcessModule* m_pEventProcessModule;
+    NFIAIModule* m_pAIModule;
+    NFIHateModule* m_pHateModule;
+    NFIKernelModule* m_pKernelModule;
+    NFIMoveModule* m_pMoveModule;
+    NFIElementInfoModule* m_pElementInfoModule;
+    NFIEventProcessModule* m_pEventProcessModule;
 
 };
 
