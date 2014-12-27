@@ -42,13 +42,13 @@ public:
 private:
     NFIAIModule*    m_pAIControlInterface;
 
-    NFIDENTID                           mOwnerID;
-    float                                   mfHeartBeatTime;
-    NFAI_STATE                      meCurrentState;
-    NFAI_STATE                      meLastState;
+    NFIDENTID mOwnerID;
+    float mfHeartBeatTime;
+    NFAI_STATE meCurrentState;
+    NFAI_STATE meLastState;
 
 protected:
-private:
+    NFIKernelModule* m_pKernelModule;
 };
 
 #endif

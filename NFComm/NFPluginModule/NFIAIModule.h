@@ -36,7 +36,7 @@ public:
 
     //³ðºÞÄ£¿é
     virtual NFIHateModule* GetHateModule() = 0;
-
+    virtual NFIKernelModule* GetKernelModule() = 0;
 	//////////////////////////////////////////////////////////////////////////
 	virtual void OnBeKilled(const NFIDENTID& self, const NFIDENTID& other) = 0;
 
