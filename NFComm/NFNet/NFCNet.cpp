@@ -8,11 +8,15 @@
 
 #include "NFCNet.h"
 #include "NFCPacket.h"
+#include <string.h>
+#include "event2/bufferevent_struct.h"
+
+#ifdef _MSC_VER
 #include <WS2tcpip.h>
 #include <winsock2.h>
-#include <string.h>
-#include "event2\bufferevent_struct.h"
-#include "event2\event.h"
+#else
+
+#endif
 
 void NFCNet::time_cb(evutil_socket_t fd, short _event, void *argc)
 {
@@ -21,7 +25,7 @@ void NFCNet::time_cb(evutil_socket_t fd, short _event, void *argc)
     //     {
     //         NFCNet* pNet = (NFCNet*)pObject->GetNet();
     //         pNet->HeartPack();
-    // 
+    //
     //         evtimer_add(pNet->ev, &(pNet->tv));
     //     }
 
@@ -38,12 +42,12 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
 
     NetObject* pObject = (NetObject*)user_data;
     NFCNet* pNet = (NFCNet*)pObject->GetNet();
-    if(!pNet->mEventCB._Empty())
+    if(!pNet->mEventCB)
     {
         pNet->mEventCB(pObject->GetFd(), NF_NET_EVENT(events));
     }
 
-    if (events & BEV_EVENT_EOF) 
+    if (events & BEV_EVENT_EOF)
     {
         printf("%d Connection closed.\n", pObject->GetFd());
         pNet->CloseNetObject(pObject->GetFd());
@@ -52,8 +56,8 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
             //客户端断线重连
             pNet->ReqReset();
         }
-    } 
-    else if (events & BEV_EVENT_ERROR) 
+    }
+    else if (events & BEV_EVENT_ERROR)
     {
         printf("%d Got an error on the connection: %d\n", pObject->GetFd(),	errno);/*XXX win32*/
         pNet->CloseNetObject(pObject->GetFd());
@@ -100,7 +104,7 @@ void NFCNet::listener_cb(struct evconnlistener *listener, evutil_socket_t fd, st
     struct event_base *base = pNet->base;
     //创建一个基于socket的bufferevent
     struct bufferevent *bev = bufferevent_socket_new(base, fd, BEV_OPT_CLOSE_ON_FREE);
-    if (!bev) 
+    if (!bev)
     {
         //应该T掉，拒绝
         fprintf(stderr, "Error constructing bufferevent!");
@@ -127,7 +131,7 @@ void NFCNet::listener_cb(struct evconnlistener *listener, evutil_socket_t fd, st
     struct timeval tv;
     /* 设置读超时120秒, 可做为心跳机制, 120秒没收到消息就T */
     tv.tv_sec = 120;
-    tv.tv_usec = 0; 
+    tv.tv_usec = 0;
     bufferevent_set_timeouts(bev, &tv, NULL);
 }
 
@@ -186,7 +190,7 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
             {
                 break;
             }
-        } 
+        }
     }
 
     delete[] strData;
@@ -330,7 +334,7 @@ bool NFCNet::Dismantle(NetObject* pObject )
             packet.SetFd(pObject->GetFd());
 
             int nRet = 0;
-            if (!mRecvCB._Empty())
+            if (!mRecvCB)
             {
                 mRecvCB(packet);
             }
@@ -396,14 +400,14 @@ int NFCNet::InitClientNet()
     }
 
     base = event_base_new();
-    if (base == NULL) 
+    if (base == NULL)
     {
         printf("event_base_new ");
         return -1;
     }
 
     bev = bufferevent_socket_new(base, -1, BEV_OPT_CLOSE_ON_FREE);
-    if (bev == NULL) 
+    if (bev == NULL)
     {
         printf("bufferevent_socket_new ");
         return -1;
@@ -412,7 +416,7 @@ int NFCNet::InitClientNet()
     int bRet = bufferevent_socket_connect(bev, (struct sockaddr *)&addr, sizeof(addr));
     if (0 != bRet)
     {
-        int nError = GetLastError();
+        //int nError = GetLastError();
         printf("bufferevent_socket_connect error");
         return -1;
     }
@@ -431,7 +435,7 @@ int NFCNet::InitClientNet()
     bufferevent_enable(bev, EV_READ|EV_WRITE);
 
     ev = evtimer_new(base, time_cb, (void*)pObject);
-    evutil_timerclear(&tv); 
+    evutil_timerclear(&tv);
     tv.tv_sec = 10; //间隔
     tv.tv_usec = 0;
 
@@ -458,7 +462,7 @@ int NFCNet::InitServerNet()
 #endif
     //////////////////////////////////////////////////////////////////////////
 
-    struct event_config *cfg = event_config_new(); 
+    struct event_config *cfg = event_config_new();
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
@@ -480,7 +484,7 @@ int NFCNet::InitServerNet()
 
 #else
 
-    //event_config_avoid_method(cfg, "epoll"); 
+    //event_config_avoid_method(cfg, "epoll");
     if(event_config_set_flag(cfg, EVENT_BASE_FLAG_EPOLL_USE_CHANGELIST) < 0)
     {
         //使用EPOLL
@@ -499,7 +503,7 @@ int NFCNet::InitServerNet()
 
     //////////////////////////////////////////////////////////////////////////
 
-    if (!base) 
+    if (!base)
     {
         fprintf(stderr, "Could not initialize libevent!\n");
         Final();
@@ -530,7 +534,7 @@ int NFCNet::InitServerNet()
     }
 
     //     signal_event = evsignal_new(base, SIGINT, signal_cb, (void *)this);
-    // 
+    //
     //     if (!signal_event || event_add(signal_event, NULL)<0)
     //     {
     //         fprintf(stderr, "Could not create/add a signal event!\n");
@@ -567,7 +571,7 @@ bool NFCNet::CloseSocketAll()
     }
 
 	ExecuteClose();
-    
+
 	mmObject.clear();
 
     return true;

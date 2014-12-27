@@ -11,8 +11,6 @@
 
 
 #include "NFIPacket.h"
-#include <winsock2.h>
-#include <string>
 
 #pragma pack(push, 1)
 
@@ -43,7 +41,7 @@ public:
 
 	void operator = (const NFIPacket& id)
 	{
-		
+
 	}
 
 	virtual const NFIMsgHead* GetMsgHead() const
