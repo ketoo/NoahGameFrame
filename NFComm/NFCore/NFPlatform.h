@@ -330,7 +330,9 @@ inline unsigned long NF_GetTickCount()
 //#define NF_USE_ACTOR
 #endif
 
-
+#ifdef NF_USE_ACTOR
+#define THERON_USE_STD_THREADS
+#endif
 
 
 #endif
