@@ -21,7 +21,7 @@
 					<Add directory="../../../trunk" />
 					<Add directory="../../../trunk/Dependencies/" />
 					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
-					<Add directory="../../../trunk/Dependencies/glog-0.3.3/src/windows/" />
+					<Add directory="../../../trunk/Dependencies/glog-0.3.3/src/" />
 					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
@@ -45,7 +45,7 @@
 					<Add directory="../../../trunk" />
 					<Add directory="../../../trunk/Dependencies/" />
 					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
-					<Add directory="../../../trunk/Dependencies/glog-0.3.3/src/windows/" />
+					<Add directory="../../../trunk/Dependencies/glog-0.3.3/src/" />
 					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
