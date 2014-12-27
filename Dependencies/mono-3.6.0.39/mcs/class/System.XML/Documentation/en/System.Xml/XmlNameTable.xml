@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="XmlNameTable" FullName="System.Xml.XmlNameTable" FullNameSP="System_Xml_XmlNameTable" Maintainer="ecma">
+  <TypeSignature Language="ILASM" Value=".class public abstract XmlNameTable extends System.Object" />
+  <TypeSignature Language="C#" Value="public abstract class XmlNameTable" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit XmlNameTable extends System.Object" />
+  <MemberOfLibrary>XML</MemberOfLibrary>
+  <AssemblyInfo>
+    <AssemblyName>System.Xml</AssemblyName>
+    <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00 ]</AssemblyPublicKey>
+    <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <ThreadingSafetyStatement>All public static members of this type are safe for multithreaded operations. No instance members are guaranteed to be thread safe.</ThreadingSafetyStatement>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <example>
+      <para>See the <see cref="T:System.Xml.NameTable" /> class for an example using this 
+   class.</para>
+    </example>
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Several classes, such as <see cref="T:System.Xml.XmlDocument" /> and <see cref="T:System.Xml.XmlReader" />, use the XmlNameTable class internally to store attribute and element names. When an element or attribute name occurs multiple times in an XML document, it is stored only once in the XmlNameTable.</para>
+      <para>The names are stored as common language runtime (CLR) object types. This enables you to do object comparisons on these strings rather than a more expensive string comparison. These string objects are referred to as  atomized strings.</para>
+      <para>XmlNameTable is implemented in the <see cref="T:System.Xml.NameTable" /> class.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Table of atomized string objects.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="ILASM" Value="family specialname instance void .ctor()" />
+      <MemberSignature Language="C#" Value="protected XmlNameTable ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue />
+      <Parameters />
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.Xml.XmlNameTable" /> class. </para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="Add">
+      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual abstract string Add(string array)" />
+      <MemberSignature Language="C#" Value="public abstract string Add (string array);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string Add(string array) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="array" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="array" /> is <see langword="null" />.</exception>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>For more information on atomized strings, see <see cref="T:System.Xml.XmlNameTable" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>When overridden in a derived class, atomizes the specified string and adds it to the XmlNameTable.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The new atomized string or the existing one if it already exists.</para>
+        </returns>
+        <param name="array">
+          <attribution license="cc4" from="Microsoft" modified="false" />The name to add. </param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="Add">
+      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual abstract string Add(class System.Char[] array, int32 offset, int32 length)" />
+      <MemberSignature Language="C#" Value="public abstract string Add (char[] array, int offset, int length);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string Add(char[] array, int32 offset, int32 length) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="array" Type="System.Char[]" />
+        <Parameter Name="offset" Type="System.Int32" />
+        <Parameter Name="length" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <exception cref="T:System.IndexOutOfRangeException">
+          <para>
+            <paramref name="offset" /> &lt; 0.</para>
+          <para>- or -</para>
+          <para>
+            <paramref name="offset" /> &gt;= <paramref name="array" />.Length.</para>
+          <para>- or -</para>
+          <para>
+            <paramref name="length" /> &gt; <paramref name="array" />.Length - <paramref name="offset" />.</para>
+          <para>The above conditions do not cause an exception to be thrown if <paramref name="length" /> = 0.</para>
+        </exception>
+        <exception cref="T:System.ArgumentOutOfRangeException">
+          <paramref name="length" /> &lt; 0.</exception>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>For more information on atomized strings, see <see cref="T:System.Xml.XmlNameTable" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>When overridden in a derived class, atomizes the specified string and adds it to the XmlNameTable.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The new atomized string or the existing one if it already exists. If length is zero, String.Empty is returned.</para>
+        </returns>
+        <param name="array">
+          <attribution license="cc4" from="Microsoft" modified="false" />The character array containing the name to add. </param>
+        <param name="offset">
+          <attribution license="cc4" from="Microsoft" modified="false" />Zero-based index into the array specifying the first character of the name. </param>
+        <param name="length">
+          <attribution license="cc4" from="Microsoft" modified="false" />The number of characters in the name. </param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="Get">
+      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual abstract string Get(string array)" />
+      <MemberSignature Language="C#" Value="public abstract string Get (string array);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string Get(string array) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="array" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="array" /> is <see langword="null" />.</exception>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>For more information on atomized strings, see <see cref="T:System.Xml.XmlNameTable" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>When overridden in a derived class, gets the atomized string containing the same value as the specified string.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The atomized string or null if the string has not already been atomized.</para>
+        </returns>
+        <param name="array">
+          <attribution license="cc4" from="Microsoft" modified="false" />The name to look up. </param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="Get">
+      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual abstract string Get(class System.Char[] array, int32 offset, int32 length)" />
+      <MemberSignature Language="C#" Value="public abstract string Get (char[] array, int offset, int length);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string Get(char[] array, int32 offset, int32 length) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="array" Type="System.Char[]" />
+        <Parameter Name="offset" Type="System.Int32" />
+        <Parameter Name="length" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <exception cref="T:System.IndexOutOfRangeException">
+          <paramref name="offset" /> &lt; 0. <para>- or -</para><para><paramref name="offset" /> &gt;= <paramref name="array" />.Length.</para><para>- or -</para><para><paramref name="length" /> &gt; <paramref name="array" />.Length - <paramref name="offset" />.</para><para>The above conditions do not cause an exception to be thrown if <paramref name="length" /> = 0.</para></exception>
+        <exception cref="T:System.ArgumentOutOfRangeException">
+          <paramref name="length" /> &lt; 0.</exception>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>For more information on atomized strings, see <see cref="T:System.Xml.XmlNameTable" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>When overridden in a derived class, gets the atomized string containing the same characters as the specified range of characters in the given array.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The atomized string or null if the string has not already been atomized. If <paramref name="length" /> is zero, String.Empty is returned.</para>
+        </returns>
+        <param name="array">
+          <attribution license="cc4" from="Microsoft" modified="false" />The character array containing the name to look up. </param>
+        <param name="offset">
+          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index into the array specifying the first character of the name. </param>
+        <param name="length">
+          <attribution license="cc4" from="Microsoft" modified="false" />The number of characters in the name. </param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+  </Members>
+  <TypeExcluded>0</TypeExcluded>
+</Type>
