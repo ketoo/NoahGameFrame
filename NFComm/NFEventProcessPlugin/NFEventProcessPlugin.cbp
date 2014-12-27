@@ -17,12 +17,12 @@
 					<Add option="-D_DEBUG" />
 					<Add option="-D_USRDLL" />
 					<Add option="-DTHERON_USE_STD_THREADS" />
-					<Add directory="$(SolutionDir)" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
+					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)" />
+					<Add directory="../../../trunk/_Out/Comm/$(Configuration)" />
 				</Linker>
 			</Target>
 			<Target title="Release x64">
@@ -36,12 +36,12 @@
 					<Add option="-DNDEBUG" />
 					<Add option="-D_USRDLL" />
 					<Add option="-DTHERON_USE_STD_THREADS" />
-					<Add directory="$(SolutionDir)" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
+					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)" />
+					<Add directory="../../../trunk/_Out/Comm/$(Configuration)" />
 				</Linker>
 			</Target>
 		</Build>
