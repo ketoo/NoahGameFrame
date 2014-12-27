@@ -18,16 +18,16 @@
 					<Add option="-D_USRDLL" />
 					<Add option="-DTHERON_USE_STD_THREADS" />
 					<Add option="-DGOOGLE_GLOG_DLL_DECL=" />
-					<Add directory="$(SolutionDir)" />
-					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/glog-0.3.3/src/windows/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
+					<Add directory="../../../trunk/Dependencies/glog-0.3.3/src/windows/" />
+					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
-					<Add directory="$(SolutionDir)/lib/$(Configuration)/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
+					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
+					<Add directory="../../../trunk/lib/$(Configuration)/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
 			</Target>
 			<Target title="Release x64">
@@ -42,16 +42,16 @@
 					<Add option="-D_USRDLL" />
 					<Add option="-DTHERON_USE_STD_THREADS" />
 					<Add option="-DGOOGLE_GLOG_DLL_DECL=" />
-					<Add directory="$(SolutionDir)" />
-					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/glog-0.3.3/src/windows/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
+					<Add directory="../../../trunk/Dependencies/glog-0.3.3/src/windows/" />
+					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
-					<Add directory="$(SolutionDir)/lib/$(Configuration)/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
+					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
+					<Add directory="../../../trunk/lib/$(Configuration)/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
 			</Target>
 		</Build>
