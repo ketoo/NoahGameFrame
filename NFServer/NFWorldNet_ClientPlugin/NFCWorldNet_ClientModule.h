@@ -26,7 +26,6 @@ class NFCWorldNet_ClientModule
 public:
     NFCWorldNet_ClientModule(NFIPluginManager* p)
     {
-        mnSocketFD = 0;
         pPluginManager = p;
     }
 
@@ -44,7 +43,6 @@ protected:
 	int OnRecivePack(const NFIPacket& msg);
 	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
 
-    void KeepAlive(float fLasFrametime);
 	//连接丢失,删2层(连接对象，帐号对象)
 	void OnClientDisconnect(const int nAddress);
 	//有连接
@@ -61,8 +59,6 @@ protected:
     int OnSelectServerResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
 
 private:
-	int mnSocketFD;
-    float mfLastHBTime;
 
     NFILogModule* m_pLogModule;
 	NFIElementInfoModule* m_pElementInfoModule;

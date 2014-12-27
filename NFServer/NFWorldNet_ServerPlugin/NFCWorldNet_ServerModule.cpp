@@ -42,25 +42,20 @@ bool NFCWorldNet_ServerModule::AfterInit()
     const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
     const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
-    m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCWorldNet_ServerModule::OnRecivePack, &NFCWorldNet_ServerModule::OnSocketEvent);
-    int nRet = m_pNet->Initialization(nMaxConnect, nPort, nCpus);
-    if (nRet <= 0)
-    {
-        assert(0);
-    }
+	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCWorldNet_ServerModule::OnRecivePack, &NFCWorldNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
+
     return true;
 }
 
 bool NFCWorldNet_ServerModule::Shut()
 {
-    m_pNet->Final();
 
     return true;
 }
 
 bool NFCWorldNet_ServerModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
-    return m_pNet->Execute(fLasFrametime, fStartedTime);
+	return NFINetModule::Execute(fLasFrametime, fStartedTime);
 }
 
 int NFCWorldNet_ServerModule::OnGameServerRegisteredProcess(const NFIPacket& msg)
