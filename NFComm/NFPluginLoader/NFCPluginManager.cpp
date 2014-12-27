@@ -361,7 +361,7 @@ bool NFCPluginManager::ReInitialize()
 
     return true;
 }
-
+#ifdef NF_USE_ACTOR
 void NFCPluginManager::HandlerEx( const NFIActorMessage& message, const Theron::Address from )
 {
     if (message.eType != NFIActorMessage::EACTOR_UNKNOW)
@@ -374,3 +374,4 @@ void NFCPluginManager::HandlerEx( const NFIActorMessage& message, const Theron::
         }
     }
 }
+#endif
