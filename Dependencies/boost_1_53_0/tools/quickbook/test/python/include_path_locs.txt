@@ -1,0 +1,6 @@
++ include_path.qbk
+- a.qbk
++ sub1/a.qbk
+- b.qbk
+- sub1/b.qbk
++ sub2/b.qbk

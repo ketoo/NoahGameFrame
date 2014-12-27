@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="DesignerActionMethodItem" FullName="System.ComponentModel.Design.DesignerActionMethodItem">
+  <TypeSignature Language="C#" Value="public class DesignerActionMethodItem : System.ComponentModel.Design.DesignerActionItem" />
+  <AssemblyInfo>
+    <AssemblyName>System.Design</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.ComponentModel.Design.DesignerActionItem</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" /> class represents individual items in a smart tag panel. An item of this type is displayed as an active user interface element, such as a hyperlink, that invokes a programmer-supplied method in a class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" />. The association between the item and the method is maintained through the value of the <see cref="P:System.ComponentModel.Design.DesignerActionMethodItem.MemberName" /> property. The method that this item invokes must neither take parameters nor return a value.</para>
+      <para>Individual panel items are associated together to form a panel by a call to the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" /> method of the <see cref="T:System.ComponentModel.Design.DesignerActionList" /> class.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Represents a smart tag panel item that is associated with a method in a class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" />.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DesignerActionMethodItem (System.ComponentModel.Design.DesignerActionList actionList, string memberName, string displayName);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="actionList" Type="System.ComponentModel.Design.DesignerActionList" />
+        <Parameter Name="memberName" Type="System.String" />
+        <Parameter Name="displayName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="M:System.ComponentModel.Design.DesignerActionMethodItem.#ctor(System.ComponentModel.Design.DesignerActionList,System.String,System.String)" /> constructor sets the <see cref="P:System.ComponentModel.Design.DesignerActionItem.Category" /> and <see cref="P:System.ComponentModel.Design.DesignerActionItem.Description" /> properties to null, and the <see cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" /> property to false.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" /> class, with the specified method and display names.</para>
+        </summary>
+        <param name="actionList">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ComponentModel.Design.DesignerActionList" /> that contains the method this item is associated with.</param>
+        <param name="memberName">
+          <attribution license="cc4" from="Microsoft" modified="false" />The case-sensitive name of the method in the class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" /> to invoke through the panel item.</param>
+        <param name="displayName">
+          <attribution license="cc4" from="Microsoft" modified="false" />The panel text for this item.</param>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DesignerActionMethodItem (System.ComponentModel.Design.DesignerActionList actionList, string memberName, string displayName, bool includeAsDesignerVerb);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="actionList" Type="System.ComponentModel.Design.DesignerActionList" />
+        <Parameter Name="memberName" Type="System.String" />
+        <Parameter Name="displayName" Type="System.String" />
+        <Parameter Name="includeAsDesignerVerb" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>If the <paramref name="includeAsDesignerVerb" /> parameter is set to true, then this item is also considered a <see cref="T:System.ComponentModel.Design.DesignerVerb" />; therefore, it will be added to the component's design-time shortcut menu. In vsprvs, a command will also be added to the <ui>Attributes</ui> pane of the Properties window. A list of designer verbs can be accessed through the designer's <see cref="P:System.ComponentModel.Design.ComponentDesigner.Verbs" /> collection property.</para>
+          <para>The <see cref="M:System.ComponentModel.Design.DesignerActionMethodItem.#ctor(System.ComponentModel.Design.DesignerActionList,System.String,System.String,System.Boolean)" /> constructor sets the <see cref="P:System.ComponentModel.Design.DesignerActionItem.Category" /> and <see cref="P:System.ComponentModel.Design.DesignerActionItem.Description" /> properties to null.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" /> class, with the specified method and display names, and a flag that indicates whether the item should appear in other user interface contexts.</para>
+        </summary>
+        <param name="actionList">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ComponentModel.Design.DesignerActionList" /> that contains the method this item is associated with.</param>
+        <param name="memberName">
+          <attribution license="cc4" from="Microsoft" modified="false" />The case-sensitive name of the method in the class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" /> to invoke through the panel item.</param>
+        <param name="displayName">
+          <attribution license="cc4" from="Microsoft" modified="false" />The panel text for this item.</param>
+        <param name="includeAsDesignerVerb">
+          <attribution license="cc4" from="Microsoft" modified="false" />A flag that specifies whether to also treat the associated method as a designer verb.</param>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DesignerActionMethodItem (System.ComponentModel.Design.DesignerActionList actionList, string memberName, string displayName, string category);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="actionList" Type="System.ComponentModel.Design.DesignerActionList" />
+        <Parameter Name="memberName" Type="System.String" />
+        <Parameter Name="displayName" Type="System.String" />
+        <Parameter Name="category" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="M:System.ComponentModel.Design.DesignerActionMethodItem.#ctor(System.ComponentModel.Design.DesignerActionList,System.String,System.String,System.String)" /> constructor sets the <see cref="P:System.ComponentModel.Design.DesignerActionItem.Description" /> property to null and the <see cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" /> property to false.</para>
+          <para>For more information about how the <paramref name="category" /> parameter is used to group items on a panel, see the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" /> method.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" /> class, with the specified method, display, and category names.</para>
+        </summary>
+        <param name="actionList">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ComponentModel.Design.DesignerActionList" /> that contains the method this item is associated with.</param>
+        <param name="memberName">
+          <attribution license="cc4" from="Microsoft" modified="false" />The case-sensitive name of the method in the class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" /> to invoke through the panel item.</param>
+        <param name="displayName">
+          <attribution license="cc4" from="Microsoft" modified="false" />The panel text for this item.</param>
+        <param name="category">
+          <attribution license="cc4" from="Microsoft" modified="false" />The case-sensitive <see cref="T:System.String" /> used to group similar items on the panel.</param>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DesignerActionMethodItem (System.ComponentModel.Design.DesignerActionList actionList, string memberName, string displayName, string category, bool includeAsDesignerVerb);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="actionList" Type="System.ComponentModel.Design.DesignerActionList" />
+        <Parameter Name="memberName" Type="System.String" />
+        <Parameter Name="displayName" Type="System.String" />
+        <Parameter Name="category" Type="System.String" />
+        <Parameter Name="includeAsDesignerVerb" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>If the <paramref name="includeAsDesignerVerb" /> parameter is set to true, then the item is also considered a <see cref="T:System.ComponentModel.Design.DesignerVerb" />; therefore, it will be added to the component's design-time shortcut menu. A list of designer verbs can be accessed through the designer's <see cref="P:System.ComponentModel.Design.ComponentDesigner.Verbs" /> collection property.</para>
+          <para>The <see cref="M:System.ComponentModel.Design.DesignerActionMethodItem.#ctor(System.ComponentModel.Design.DesignerActionList,System.String,System.String,System.String,System.Boolean)" /> constructor sets the <see cref="P:System.ComponentModel.Design.DesignerActionItem.Description" /> property to null.</para>
+          <para>For more information on how the <paramref name="category" /> parameter is used to group items on a panel, see the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" /> method.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" /> class, with the specified method, display, and category names, and a flag that indicates whether the item should appear in other user interface contexts.</para>
+        </summary>
+        <param name="actionList">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ComponentModel.Design.DesignerActionList" /> that contains the method this item is associated with.</param>
+        <param name="memberName">
+          <attribution license="cc4" from="Microsoft" modified="false" />The case-sensitive name of the method in the class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" /> to invoke through the panel item.</param>
+        <param name="displayName">
+          <attribution license="cc4" from="Microsoft" modified="false" />The panel text for this item.</param>
+        <param name="category">
+          <attribution license="cc4" from="Microsoft" modified="false" />The case-sensitive <see cref="T:System.String" /> used to group similar items on the panel.</param>
+        <param name="includeAsDesignerVerb">
+          <attribution license="cc4" from="Microsoft" modified="false" />A flag that specifies whether to also treat the associated method as a designer verb for the associated component.</param>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DesignerActionMethodItem (System.ComponentModel.Design.DesignerActionList actionList, string memberName, string displayName, string category, string description);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="actionList" Type="System.ComponentModel.Design.DesignerActionList" />
+        <Parameter Name="memberName" Type="System.String" />
+        <Parameter Name="displayName" Type="System.String" />
+        <Parameter Name="category" Type="System.String" />
+        <Parameter Name="description" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="M:System.ComponentModel.Design.DesignerActionMethodItem.#ctor(System.ComponentModel.Design.DesignerActionList,System.String,System.String,System.String,System.String)" /> constructor sets the <see cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" /> property to false.</para>
+          <para>For more information on how the <paramref name="category" /> parameter is used to group items on a panel, see the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" /> method.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" /> class, with the specified method and category names, and display and description text.</para>
+        </summary>
+        <param name="actionList">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ComponentModel.Design.DesignerActionList" /> that contains the method this item is associated with.</param>
+        <param name="memberName">
+          <attribution license="cc4" from="Microsoft" modified="false" />The case-sensitive name of the method in the class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" /> to invoke through the panel item.</param>
+        <param name="displayName">
+          <attribution license="cc4" from="Microsoft" modified="false" />The panel text for this item.</param>
+        <param name="category">
+          <attribution license="cc4" from="Microsoft" modified="false" />The case-sensitive <see cref="T:System.String" /> used to group similar items on the panel.</param>
+        <param name="description">
+          <attribution license="cc4" from="Microsoft" modified="false" />Supplemental text for this item, used in ToolTips or the status bar.</param>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DesignerActionMethodItem (System.ComponentModel.Design.DesignerActionList actionList, string memberName, string displayName, string category, string description, bool includeAsDesignerVerb);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="actionList" Type="System.ComponentModel.Design.DesignerActionList" />
+        <Parameter Name="memberName" Type="System.String" />
+        <Parameter Name="displayName" Type="System.String" />
+        <Parameter Name="category" Type="System.String" />
+        <Parameter Name="description" Type="System.String" />
+        <Parameter Name="includeAsDesignerVerb" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>If the <paramref name="includeAsDesignerVerb" /> parameter is set to true, then this item is also considered a <see cref="T:System.ComponentModel.Design.DesignerVerb" />; therefore, it will be added to the component's design-time shortcut menu. A list of designer verbs can be accessed through the designer's <see cref="P:System.ComponentModel.Design.ComponentDesigner.Verbs" /> collection property.</para>
+          <para>For more information about how the <paramref name="category" /> parameter is used to group items on a panel, see the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" /> method.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" /> class, with the specified method and category names, display and description text, and a flag that indicates whether the item should appear in other user interface contexts.</para>
+        </summary>
+        <param name="actionList">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ComponentModel.Design.DesignerActionList" /> that contains the method this item is associated with.</param>
+        <param name="memberName">
+          <attribution license="cc4" from="Microsoft" modified="false" />The case-sensitive name of the method in the class derived from <see cref="T:System.ComponentModel.Design.DesignerActionList" /> to invoke through the panel item.</param>
+        <param name="displayName">
+          <attribution license="cc4" from="Microsoft" modified="false" />The panel text for this item.</param>
+        <param name="category">
+          <attribution license="cc4" from="Microsoft" modified="false" />The case-sensitive <see cref="T:System.String" /> used to group similar items on the panel.</param>
+        <param name="description">
+          <attribution license="cc4" from="Microsoft" modified="false" />Supplemental text for this item, used in ToolTips or the status bar.</param>
+        <param name="includeAsDesignerVerb">
+          <attribution license="cc4" from="Microsoft" modified="false" />A flag that specifies whether to also treat the associated method as a designer verb for the associated component.</param>
+      </Docs>
+    </Member>
+    <Member MemberName="IncludeAsDesignerVerb">
+      <MemberSignature Language="C#" Value="public virtual bool IncludeAsDesignerVerb { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>If the <see cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" /> property is set to true, then the item is also considered a <see cref="T:System.ComponentModel.Design.DesignerVerb" />; therefore, it will be added to the component's design-time shortcut menu. A list of designer verbs can be accessed through the designer's <see cref="P:System.ComponentModel.Design.ComponentDesigner.Verbs" /> collection property.</para>
+          <para>The value of the <see cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" /> property is set in the constructor for this class.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets a value that indicates the <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" /> should appear in other user interface contexts.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="Invoke">
+      <MemberSignature Language="C#" Value="public virtual void Invoke ();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>If the <see cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" /> property is initialized to true, the associated method can also be invoked through the corresponding designer verb event.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Programmatically executes the method associated with the <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="MemberName">
+      <MemberSignature Language="C#" Value="public virtual string MemberName { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="P:System.ComponentModel.Design.DesignerActionMethodItem.MemberName" /> property specifies which property, in the class derived from the <see cref="T:System.ComponentModel.Design.DesignerActionList" /> class, that the item should be bound to. When the programmer interacts with the panel item through the user interface (UI), this associated property will be set.</para>
+          <para>The bound method should neither take parameters nor return a value.</para>
+          <para>This property is set in the constructor. It is case-sensitive.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the name of the method that this <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" /> is associated with.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="RelatedComponent">
+      <MemberSignature Language="C#" Value="public System.ComponentModel.IComponent RelatedComponent { set; get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.ComponentModel.IComponent</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The <see cref="P:System.ComponentModel.Design.DesignerActionPropertyItem.RelatedComponent" /> property allows another component to lend its smart tag panel items to the current list. For example, a user control might aggregate the items from one of its constituent standard controls. </para>
+          <para>This property works in conjunction with the <see cref="P:System.ComponentModel.Design.DesignerActionItem.AllowAssociate" /> property.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets a component that contributes its <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" /> objects to the current panel.</para>
+        </summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

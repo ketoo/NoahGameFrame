@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="ParameterGenerationOption" FullName="System.Data.Design.ParameterGenerationOption">
+  <TypeSignature Language="C#" Value="public enum ParameterGenerationOption" />
+  <AssemblyInfo>
+    <AssemblyName>System.Design</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The <see cref="T:System.Data.Design.ParameterGenerationOption" /> enumeration is used to tell the <see cref="T:System.Data.Design.MethodSignatureGenerator" /> the type of parameters to generate in a typed dataset.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Sets the type of parameters that are generated in a typed <see cref="T:System.Data.DataSet" /> class.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="ClrTypes">
+      <MemberSignature Language="C#" Value="ClrTypes" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Design.ParameterGenerationOption</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Parameters in the typed dataset are CLR types.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="Objects">
+      <MemberSignature Language="C#" Value="Objects" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Design.ParameterGenerationOption</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Parameters in the typed dataset are all of <see cref="T:System.Object" />.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="SqlTypes">
+      <MemberSignature Language="C#" Value="SqlTypes" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Design.ParameterGenerationOption</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Parameters in the typed dataset are Sql types.</para>
+        </summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

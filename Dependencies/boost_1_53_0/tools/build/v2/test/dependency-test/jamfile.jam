@@ -1,0 +1,25 @@
+# Copyright 2002, 2003, 2005 Vladimir Prus 
+# Distributed under the Boost Software License, Version 1.0. 
+# (See accompanying file LICENSE_1_0.txt or http://www.boost.org/LICENSE_1_0.txt) 
+
+
+project test 
+    : requirements <include>src1 
+    ;
+
+exe a 
+    : x.foo a.cpp a_c.c
+    ;
+    
+exe b
+    : b.cpp
+    ;    
+    
+# Because of <define>, c.cpp will be compiled to different
+# directory than everything for main target "a". Therefore
+# without <implicit-dependency>, it won't find "x.h", which is part
+# of "a"'s dependency graph.
+exe c
+    : c.cpp 
+    : <define>FOO <implicit-dependency>a
+    ;    
