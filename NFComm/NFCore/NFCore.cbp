@@ -78,8 +78,9 @@
 		<Unit filename="NFTimer.cpp" />
 		<Unit filename="NFTimer.h" />
 		<Extensions>
-			<code_completion />
 			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
 			<debugger />
 		</Extensions>
 	</Project>
