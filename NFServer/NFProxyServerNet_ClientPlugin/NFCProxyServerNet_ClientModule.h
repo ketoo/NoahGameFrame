@@ -32,13 +32,12 @@ public:
     virtual bool Execute(float fFrameTime, float fTotalTime);
     virtual void LogRecive(const char* str){}
     virtual void LogSend(const char* str){}
-    virtual int GetFD(){return mnSocketFD;}
+    virtual int GetFD(){return GetNet()->FD();}
 
 protected:
 
     int OnRecivePack(const NFIPacket& msg);
     int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
-    void KeepAlive(float fLasFrametime);
 
     //连接丢失,删2层(连接对象，帐号对象)
     void OnClientDisconnect(const int nAddress);
@@ -52,8 +51,6 @@ protected:
 private:
 
     int mnGameServerID;
-    int mnSocketFD;
-    float mfLastHBTime;
 
     NFIElementInfoModule* m_pElementInfoModule;
     NFILogModule* m_pLogModule;
@@ -70,8 +67,6 @@ public:
 
     NFCProxyServerNet_ClientModule(NFIPluginManager* p)
     {
-        mnSocketFD = 0;
-        mfLastHBTime = 0.0f;
         pPluginManager = p;
     }
 
@@ -90,13 +85,12 @@ public:
 
     virtual GameData* GetGameData(int nGameID);
     virtual GameDataMap& GetGameDataMap() { return mGameDataMap; }
-    virtual int GetFD(){return mnSocketFD;}
+    virtual int GetFD(){return GetNet()->FD();}
 
 protected:
 
 	int OnRecivePack(const NFIPacket& msg);
 	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
-    void KeepAlive(const float fLasFrametime);
 
 	//连接丢失,删2层(连接对象，帐号对象)
 	void OnClientDisconnect(const int nAddress);
@@ -127,8 +121,6 @@ private:
 
 
 private:
-    int mnSocketFD;
-    float mfLastHBTime;
     NFMapEx<std::string, ConnectData> mWantToConnectMap;
     GameDataMap mGameDataMap;
 private:

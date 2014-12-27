@@ -41,26 +41,20 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
 	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
 	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
-	m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyServerNet_ServerModule::OnRecivePack, &NFCProxyServerNet_ServerModule::OnSocketEvent);
-	int nRet = m_pNet->Initialization(nMaxConnect, nPort, nCpus);
-	if (nRet <= 0)
-	{
-		assert(0);
-	}
+	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyServerNet_ServerModule::OnRecivePack, &NFCProxyServerNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
 
     return true;
 }
 
 bool NFCProxyServerNet_ServerModule::Shut()
 {
-    m_pNet->Final();
 
     return true;
 }
 
 bool NFCProxyServerNet_ServerModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
-    return m_pNet->Execute(fLasFrametime, fStartedTime);
+	return NFINetModule::Execute(fLasFrametime, fStartedTime);
 }
 
 int NFCProxyServerNet_ServerModule::HB_OnConnectCheckTime( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var )
@@ -383,7 +377,7 @@ int NFCProxyServerNet_ServerModule::OnReqRoleListProcess( const NFIPacket& msg )
                 return false;
             }
 
-            NFCPacket xPacket(m_pNet->GetHeadLen());
+            NFCPacket xPacket(GetNet()->GetHeadLen());
             if(!xPacket.EnCode(NFMsg::EGameMsgID::EGMI_REQ_ROLE_LIST, strMsg.c_str(), strMsg.length()))
             {
                 return false;
@@ -437,7 +431,7 @@ int NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess( const NFIPacket& msg
                 return false;
             }
 
-            NFCPacket xPacket(m_pNet->GetHeadLen());
+            NFCPacket xPacket(GetNet()->GetHeadLen());
             if(!xPacket.EnCode(NFMsg::EGameMsgID::EGMI_REQ_CREATE_ROLE, strMsg.c_str(), strMsg.length()))
             {
                 return false;
@@ -519,7 +513,7 @@ int NFCProxyServerNet_ServerModule::OnReqEnterGameServer( const NFIPacket& msg )
                 return false;
             }
 
-            NFCPacket xPacket(m_pNet->GetHeadLen());
+            NFCPacket xPacket(GetNet()->GetHeadLen());
             if(!xPacket.EnCode(NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME, strMsg.c_str(), strMsg.length()))
             {
                 return false;

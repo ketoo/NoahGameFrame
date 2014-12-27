@@ -325,7 +325,10 @@ inline unsigned long NF_GetTickCount()
 #endif
 
 
-
+//use actor mode
+#ifndef NF_USE_ACTOR
+//#define NF_USE_ACTOR
+#endif
 
 
 

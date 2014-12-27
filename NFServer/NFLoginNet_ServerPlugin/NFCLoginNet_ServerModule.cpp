@@ -26,10 +26,6 @@ bool NFCLoginNet_ServerModule::Shut()
 
 bool NFCLoginNet_ServerModule::BeforeShut()
 {
-    m_pNet->Final();
-    delete m_pNet;
-    m_pNet = NULL;
-
 	return true;
 }
 
@@ -63,12 +59,7 @@ bool NFCLoginNet_ServerModule::AfterInit()
 	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
 	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
-	m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCLoginNet_ServerModule::OnRecivePack, &NFCLoginNet_ServerModule::OnSocketEvent);
-	int nRet = m_pNet->Initialization(nMaxConnect, nPort, nCpus);
-	if (nRet <= 0)
-	{
-		assert(0);
-	}
+	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCLoginNet_ServerModule::OnRecivePack, &NFCLoginNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
 
 	return true;
 }
@@ -153,7 +144,7 @@ int NFCLoginNet_ServerModule::OnSelectWorldResultsEvent(const NFIDENTID& object,
 
 bool NFCLoginNet_ServerModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
-	return m_pNet->Execute(fLasFrametime, fStartedTime);
+	return NFINetModule::Execute(fLasFrametime, fStartedTime);
 }
 
 void NFCLoginNet_ServerModule::OnClientConnected(const int nAddress)

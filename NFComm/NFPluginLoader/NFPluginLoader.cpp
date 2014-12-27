@@ -114,6 +114,9 @@ void PrintfLogo()
     std::cout << "\n" << std::endl;
 }
 
+unsigned long unStartTickTime = 0;
+unsigned long unLastTickTime = 0;
+
 #if NF_PLATFORM == NF_PLATFORM_WIN || NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_APPLE
 int main()
 #elif  NF_PLATFORM == NF_PLATFORM_ANDROID || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
@@ -141,11 +144,23 @@ int main()
                 break;
             }
 			
-			std::this_thread::sleep_for(std::chrono::milliseconds(5));
+			unsigned long unNowTickTime = ::NF_GetTickCount();
+			float fStartedTime = float(unNowTickTime - unStartTickTime) / 1000;
+			float fLastTime = float(unNowTickTime - unLastTickTime) / 1000;
 
+			if (fStartedTime < 0.001f)
+			{
+				fStartedTime = 0.0f;
+			}
+
+			if (fLastTime < 0.001f)
+			{
+				fLastTime = 0.0f;
+			}
             __try
             {
-                NFCActorManager::GetSingletonPtr()->Execute(0.005f, 0.005f);
+                NFCActorManager::GetSingletonPtr()->Execute(fLastTime, fStartedTime);
+				unLastTickTime = unNowTickTime;
             }
             __except (ApplicationCrashHandler(GetExceptionInformation()))
             {

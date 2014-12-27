@@ -18,8 +18,6 @@
 #include <mutex>
 #include "NFPlatform.h"
 
-const int QUEUE_SIZE = 10000;
-
 template<typename T>
 class NFQueue
 {
@@ -34,17 +32,11 @@ public:
 
     bool Push(const T& object)
 	{
-		queueMutex.lock();
-		if (!Empty())
-		{
-			queueMutex.unlock();
-
-			return false;
-		}
+		mxQueueMutex.lock();
 
 		mList.push_back(object);
 
-		queueMutex.unlock();
+		mxQueueMutex.unlock();
 
 
 		return true;
@@ -52,31 +44,25 @@ public:
 
     bool Pop(T& object)
 	{
-		queueMutex.lock();
-		if (Empty())
+		mxQueueMutex.lock();
+		if (mList.empty())
 		{
-			queueMutex.unlock();
+			mxQueueMutex.unlock();
 
 			return false;
 		}
 
-		object = mList.pop_front();
+		object = mList.front();
+		mList.pop_front();
 
-		queueMutex.unlock();
+		mxQueueMutex.unlock();
 
 		return true;
 	}
 
-protected:
-
-    bool Empty()
-	{
-		return mList.empty();
-	}
-
 private:
     std::list<T> mList;
-    std::mutex queueMutex;
+    std::mutex mxQueueMutex;
 };
 
 #endif
