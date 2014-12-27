@@ -11,8 +11,9 @@
 
 bool NFCActorManager::Init()
 {
+#ifdef NF_USE_ACTOR
     m_pFramework = new Theron::Framework();
-
+#endif
     //首个主线程
     //mActorVec.push_back(new NFCPluginManager(*m_pFramework, this, EACTOR::EACTOR_MAIN));
 
@@ -140,9 +141,11 @@ bool NFCActorManager::Shut()
 
 	mActorVec.clear();
 
+	
+#ifdef NF_USE_ACTOR
     delete m_pFramework;
     m_pFramework = NULL;
-
+#endif
 	return true;
 }
 

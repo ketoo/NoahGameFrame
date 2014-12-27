@@ -11,12 +11,14 @@
 
 #include <map>
 #include <string>
-#ifndef NF_USE_ACTOR
+
+#ifdef NF_USE_ACTOR
 #include "Theron/Actor.h"
 #include "Theron/Address.h"
 #include "Theron/Framework.h"
 #include "Theron/Detail/Handlers/ReceiverHandler.h"
 #endif
+
 #include "NFILogicModule.h"
 #include "NFIActorManager.h"
 
