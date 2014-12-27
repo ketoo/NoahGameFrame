@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_LIB" />
@@ -23,7 +24,6 @@
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/WIN32-Code/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
 				</Compiler>
 			</Target>
@@ -34,6 +34,7 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-DWIN32" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_LIB" />
@@ -44,7 +45,6 @@
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/WIN32-Code/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
 				</Compiler>
 			</Target>
@@ -56,8 +56,9 @@
 		<Unit filename="NFINet.h" />
 		<Unit filename="NFIPacket.h" />
 		<Extensions>
-			<code_completion />
 			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
 			<debugger />
 		</Extensions>
 	</Project>
