@@ -23,12 +23,12 @@ NFCLogModule::NFCLogModule(NFIPluginManager* p)
 
 bool NFCLogModule::Init()
 {
-#ifdef NF_DYNAMIC_PLUGIN
+#ifdef NF_USE_ACTOR
 
     NFIActor* pActor = (NFIActor*)(pPluginManager);
     if(pActor->GetActorID() == NFIActorManager::EACTOR_MAIN)
-    {
 #endif
+    {
 
         char szName[MAX_PATH] = {0};
 
@@ -59,9 +59,7 @@ bool NFCLogModule::Init()
         FLAGS_max_log_size = 100;                   //最大日志大小为 100MB
         FLAGS_stop_logging_if_full_disk = true;     //当磁盘被写满时，停止日志输出
        
-#ifdef NF_DYNAMIC_PLUGIN
     }
-#endif
 
     //google::SetLogFilenameExtension("91_");   //设置文件名扩展，如平台？或其它需要区分的信息
     //google::InstallFailureSignalHandler();    //捕捉 core dumped
@@ -72,7 +70,7 @@ bool NFCLogModule::Init()
 
 bool NFCLogModule::Shut()
 {
-#ifdef NF_DYNAMIC_PLUGIN
+#ifdef NF_USE_ACTOR
     NFIActor* pActor = (NFIActor*)(pPluginManager);
     if(pActor->GetActorID() == NFIActorManager::EACTOR_MAIN)
     {
@@ -112,7 +110,7 @@ bool NFCLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
     _vsnprintf(szBuffer, sizeof(szBuffer) - 1, format, args);
     va_end(args);
 
-#ifdef NF_DYNAMIC_PLUGIN
+#ifdef NF_USE_ACTOR
     NFIActor* pActor = (NFIActor*)(pPluginManager);
     if(!pActor->GetActorID() == NFIActorManager::EACTOR_MAIN)
     {
