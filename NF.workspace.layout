@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_workspace_layout_file>
-	<ActiveProject path="NFComm/NFNet/NFNet.cbp" />
+	<FileVersion major="1" minor="0" />
+	<ActiveProject path="NFComm/NFCore/NFCore.cbp" />
 	<PreferredTarget name="Debug x64" />
+	<EditorTabsLayout layout="04ffe000549e727302a8324e00000002=2;NFWorldLogicPlugin:dllmain.cpp,0;NFPluginLoader:NFCActorManager.h,8;NFCore:NFIMemory.h,*3;NFKernelPlugin:NFKernelModule/NFCLogModule.h,1;NFPluginLoader:NFCDynLib.h,9;NFCore:NFPlatform.h,5;NFKernelPlugin:NFConfigPlugin.cpp,6;NFKernelPlugin:dllmain.cpp,7;NFKernelPlugin:NFCLogicClassModule.cpp,4;@layout2|name=dummy;caption=;state=2098174;dir=3;layer=0;row=0;pos=0;prop=100000;bestw=648;besth=321;minw=648;minh=321;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=04ffe000549e727302a8324e00000002;caption=;state=2098172;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=200;besth=200;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(5,0,0)=202|" />
 </CodeBlocks_workspace_layout_file>
