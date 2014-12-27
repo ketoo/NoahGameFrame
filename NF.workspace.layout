@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_workspace_layout_file>
-	<ActiveProject path="NFComm/NFNet/NFNet.cbp" />
+	<ActiveProject path="NFComm/NFMessageDefine/NFMessageDefine.cbp" />
 	<PreferredTarget name="Debug x64" />
 </CodeBlocks_workspace_layout_file>
