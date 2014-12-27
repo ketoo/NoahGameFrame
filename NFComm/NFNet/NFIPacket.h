@@ -23,7 +23,7 @@
 #endif
 
 #include <string>
-#include "boost\math\special_functions\hypot.hpp"
+#include "boost/math/special_functions/hypot.hpp"
 
 #pragma pack(push, 1)
 
