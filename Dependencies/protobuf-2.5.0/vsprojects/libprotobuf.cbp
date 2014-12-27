@@ -15,8 +15,8 @@
 					<Add option="-D_DEBUG" />
 					<Add option="-D_WINDOWS" />
 					<Add option="-DLIBPROTOBUF_EXPORTS" />
-					<Add directory="D:/NoahGameFrame/trunk/Dependencies/protobuf-2.5.0/vsprojects/" />
-					<Add directory="D:/NoahGameFrame/trunk/Dependencies/protobuf-2.5.0/vsprojects/../src/" />
+					<Add directory="/home/shadow/trunk/Dependencies/protobuf-2.5.0/vsprojects/" />
+					<Add directory="/home/shadow/trunk/Dependencies/protobuf-2.5.0/vsprojects/../src/" />
 				</Compiler>
 			</Target>
 			<Target title="Release x64">
@@ -28,8 +28,8 @@
 					<Add option="-DNDEBUG" />
 					<Add option="-D_WINDOWS" />
 					<Add option="-DLIBPROTOBUF_EXPORTS" />
-					<Add directory="D:/NoahGameFrame/trunk/Dependencies/protobuf-2.5.0/vsprojects/" />
-					<Add directory="D:/NoahGameFrame/trunk/Dependencies/protobuf-2.5.0/vsprojects/../src/" />
+					<Add directory="/home/shadow/trunk/Dependencies/protobuf-2.5.0/vsprojects/" />
+					<Add directory="/home/shadow/trunk/Dependencies/protobuf-2.5.0/vsprojects/../src/" />
 				</Compiler>
 			</Target>
 		</Build>
@@ -108,8 +108,9 @@
 		<Unit filename="../src/google/protobuf/wire_format_lite_inl.h" />
 		<Unit filename="config.h" />
 		<Extensions>
-			<code_completion />
 			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
 			<debugger />
 		</Extensions>
 	</Project>
