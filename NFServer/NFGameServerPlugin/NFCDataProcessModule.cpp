@@ -95,6 +95,7 @@ int NFCDataProcessModule::SaveDataToNoSql(const NFIDENTID& self, bool bOffline/*
     return 0;
 }
 
+#ifdef NF_USE_ACTOR
 void NFCDataProcessModule::Handler( const NFIActorMessage& message, const Theron::Address from )
 {
     //收到的消息协议
@@ -114,12 +115,10 @@ void NFCDataProcessModule::Handler( const NFIActorMessage& message, const Theron
     }
 }
 
-#ifdef NF_USE_ACTOR
 Theron::Address NFCDataProcessModule::GetActorID( const NFIDENTID& self )
 {
     return Theron::Address();
 }
-#endif
 
 void NFCDataProcessModule::HandlerEx( const NFIActorMessage& message, const Theron::Address from )
 {
@@ -139,6 +138,7 @@ void NFCDataProcessModule::HandlerLog( const NFIActorMessage& message, const The
 {
     //日志
 }
+#endif
 
 int NFCDataProcessModule::LoadProperty( const NFIDENTID& self, std::shared_ptr<NFIPropertyManager> pProManager )
 {
