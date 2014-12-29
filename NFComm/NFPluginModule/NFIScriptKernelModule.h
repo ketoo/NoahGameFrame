@@ -11,11 +11,11 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
-#include "NFComm\NFCore\NFCDataList.h"
-#include "NFComm\NFCore\NFIdentID.h"
-#include "NFComm\NFPluginModule\NFIElementInfoModule.h"
-#include "NFComm\NFPluginModule\NFIKernelModule.h"
-#include "NFComm\NFCore\NFMap.h"
+#include "NFComm/NFCore/NFCDataList.h"
+#include "NFComm/NFCore/NFIdentID.h"
+#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFCore/NFMap.h"
 
 class NFCScriptName
 {
@@ -165,7 +165,7 @@ public:
         return mVar.Set(index, value.ObjectVal());
     }
 
-    NFINT64 Int(const int index) const   
+    NFINT64 Int(const int index) const
     {
         return mVar.Int(index);
     }
