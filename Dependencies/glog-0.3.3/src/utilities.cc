@@ -232,24 +232,6 @@ bool PidHasChanged() {
   return true;
 }
 
-static int32 g_main_day = 0;
-bool DayHasChanged()
-{
-    time_t raw_time;
-    struct tm* tm_info;
-
-    time(&raw_time);
-    tm_info = localtime(&raw_time);
-
-    if (tm_info->tm_mday != g_main_day)
-    {
-        g_main_day = tm_info->tm_mday;
-        return true;
-    }
-    
-    return false;
-}
-
 pid_t GetTID() {
   // On Linux and MacOSX, we try to use gettid().
 #if defined OS_LINUX || defined OS_MACOSX
