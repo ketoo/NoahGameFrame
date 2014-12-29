@@ -13,12 +13,9 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-DWIN" />
 					<Add option="-D_DEBUG" />
-					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
 					<Add option="-D_X64" />
-					<Add option="-DTHERON_CPP11" />
 					<Add directory="../../../trunk" />
 					<Add directory="../../../trunk/Dependencies/" />
 					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
@@ -42,10 +39,7 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-DWIN" />
-					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
-					<Add option="-DTHERON_CPP11" />
 					<Add directory="../../../trunk" />
 					<Add directory="../../../trunk/Dependencies/" />
 					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />

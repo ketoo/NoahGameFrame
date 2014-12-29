@@ -2,65 +2,70 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="NFLoginNet_ClientPlugin" />
+		<Option title="NFGameServerPlugin" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="NFLoginNet_ClientPlugin" prefix_auto="1" extension_auto="1" />
+				<Option output="NFSLGPlugin" prefix_auto="1" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-fpic" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_USRDLL" />
-					<Add option="-D_X64" />
-					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/" />
 					<Add directory="../../../trunk/Dependencies/" />
 					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
 					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/" />
 					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/include/" />
-					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/WIN32-Code/" />
 					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/compat/" />
 					<Add directory="../../../trunk/Dependencies/protobuf-2.5.0/src/" />
 					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
-					<Add directory="../../../trunk/Dependencies/lib/$(Configuration)/" />
-					<Add directory="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
+					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/Dependencies/lib/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
 			</Target>
 			<Target title="Release x64">
-				<Option output="NFLoginNet_ClientPlugin" prefix_auto="1" extension_auto="1" />
+				<Option output="NFSLGPlugin" prefix_auto="1" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-fpic" />
 					<Add option="-D_USRDLL" />
-					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/" />
 					<Add directory="../../../trunk/Dependencies/" />
 					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
 					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/" />
 					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/include/" />
-					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/WIN32-Code/" />
 					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/compat/" />
 					<Add directory="../../../trunk/Dependencies/protobuf-2.5.0/src/" />
 					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
-					<Add directory="../../../trunk/Dependencies/lib/$(Configuration)/" />
-					<Add directory="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
+					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/Dependencies/lib/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
 			</Target>
 		</Build>
-		<Unit filename="NFCLoginNet_ClientModule.cpp" />
-		<Unit filename="NFCLoginNet_ClientModule.h" />
-		<Unit filename="NFLoginNet_ClientPlugin.cpp" />
-		<Unit filename="NFLoginNet_ClientPlugin.h" />
+		<Unit filename="NFCSLGBuildingModule.cpp" />
+		<Unit filename="NFCSLGBuildingModule.h" />
+		<Unit filename="NFCSLGModule.cpp" />
+		<Unit filename="NFCSLGModule.h" />
+		<Unit filename="NFCSLGShopModule.cpp" />
+		<Unit filename="NFCSLGShopModule.h" />
+		<Unit filename="NFSLGPlugin.cpp" />
+		<Unit filename="NFSLGPlugin.h" />
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<envvars />
