@@ -147,6 +147,11 @@ bool NFCDataList::Add(const char* value)
     //return AddStringEx(value);
 }
 
+bool NFCDataList::Add(const std::string& value)
+{
+    return Add(value.c_str());
+}
+
 bool NFCDataList::Add(const NFIDENTID& value)
 {
     return AddNumber<NFIDENTID>(TDATA_OBJECT, value);
@@ -272,7 +277,7 @@ NFIDENTID NFCDataList::Object(const int index) const
 
     if (index < mnSize && index >= 0)
     {
-		
+
 		if (index < mnSize && index >= 0)
 		{
 			TDATA_TYPE type =  Type(index);
