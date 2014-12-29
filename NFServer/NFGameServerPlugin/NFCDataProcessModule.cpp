@@ -8,7 +8,7 @@
 
 
 #include "NFCDataProcessModule.h"
-#include "NFComm\NFMessageDefine\NFDefine.pb.h"
+#include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
 bool NFCDataProcessModule::Init()
 {
@@ -16,7 +16,7 @@ bool NFCDataProcessModule::Init()
     m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
     m_pNoSqlModule = dynamic_cast<NFIDataNoSqlModule*>( pPluginManager->FindModule( "NFCDataNoSqlModule" ) );
     m_pGameLogicModule = dynamic_cast<NFIGameLogicModule*>( pPluginManager->FindModule( "NFCGameLogicModule" ) );
-    
+
 
     m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCDataProcessModule::OnObjectClassEvent );
 

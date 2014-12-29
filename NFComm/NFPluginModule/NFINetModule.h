@@ -15,7 +15,7 @@
 #include "NFComm/NFNet/NFCPacket.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
-#include "NFComm\NFCore\NFQueue.h"
+#include "NFComm/NFCore/NFQueue.h"
 
 
 
@@ -154,10 +154,10 @@ public:
 	//             char szData[MAX_PATH] = { 0 };
 	//             sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
 	//             LogRecive(szData);
-	// 
+	//
 	//             return false;
 	//         }
-	// 
+	//
 	// 		NetObject* pObject = GetNet()->GetNetObject(nFD);
 	// 		if (pObject)
 	// 		{
@@ -167,7 +167,7 @@ public:
 	//         {
 	//             return false;
 	//         }
-	// 
+	//
 	//         return true;
 	//     }
 
@@ -184,7 +184,7 @@ public:
 			{
 			case QueueEventPack::ON_NET_RECIVE:
 				{
-					if(!mRecvCB._Empty())
+					if(!mRecvCB)
 					{
 
 						NFCPacket xPacket(m_pNet->GetHeadLen());
@@ -207,7 +207,7 @@ public:
 				break;
 			case QueueEventPack::ON_NET_FD_EVT:
 				{
-					if(!mEventCB._Empty())
+					if(!mEventCB)
 					{
 						mEventCB(xEventPack.nFD, (NF_NET_EVENT)xEventPack.nMsgID);
 					}
@@ -269,7 +269,7 @@ public:
 		// 			char szData[MAX_PATH] = { 0 };
 		// 			sprintf(szData, "Send Message to %d Failed For Encode of MsgData, MessageID: %d, MessageLen: %d\n", nSockIndex, nMsgID, strMsg.length());
 		// 			LogSend(szData);
-		// 
+		//
 		// 			return false;
 		// 		}
 

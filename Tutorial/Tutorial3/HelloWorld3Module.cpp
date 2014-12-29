@@ -1,5 +1,5 @@
 #include "HelloWorld3Module.h"
-#include "NFComm\NFCore\NFTimer.h"
+#include "NFComm/NFCore/NFTimer.h"
 
 bool HelloWorld3Module::Init()
 {
@@ -22,7 +22,8 @@ int HelloWorld3Module::OnEvent(const NFIDENTID& self, const int event, const NFI
 
 int HelloWorld3Module::OnHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& arg)
 {
-    unsigned long unNowTime = ::GetTickCount();
+
+    unsigned long unNowTime = NF_GetTickCount();
 
     std::cout << "strHeartBeat: " << fTime << " Count: " << nCount << "  TimeDis: " << unNowTime - mLastTime << std::endl;
 
@@ -46,7 +47,7 @@ int HelloWorld3Module::OnClassCallBackEvent(const NFIDENTID& self, const std::st
 
             m_pKernelModule->AddHeartBeat(self, "OnHeartBeat", this, &HelloWorld3Module::OnHeartBeat, NFCDataList(), 5.0f, 9999 );
 
-            mLastTime = ::GetTickCount();
+            mLastTime = NF_GetTickCount();
         }
     }
 
