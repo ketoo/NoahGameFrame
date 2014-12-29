@@ -36,14 +36,14 @@ public:
     virtual int SaveDataToNoSql( const NFIDENTID& self, bool bOffline = false );
 #ifdef NF_USE_ACTOR
 	virtual Theron::Address GetActorID(const NFIDENTID& self);
-#endif
+
 
 protected:
     virtual void Handler(const NFIActorMessage& message, const Theron::Address from);
     virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
     virtual void HandlerTrans(const NFIActorMessage& message, const Theron::Address from);
     virtual void HandlerLog(const NFIActorMessage& message, const Theron::Address from);
-
+#endif
 protected:
     int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
