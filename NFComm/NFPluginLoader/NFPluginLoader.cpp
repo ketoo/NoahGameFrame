@@ -21,7 +21,8 @@
 #include "boost/thread.hpp"
 
 #pragma comment( lib, "DbgHelp" )
-/*
+#ifdef NF_PLATFORM == NF_PLATFORM_WIN
+
 // 创建Dump文件
 void CreateDumpFile(const std::string& strDumpFilePathName, EXCEPTION_POINTERS* pException)
 {
@@ -54,7 +55,8 @@ long ApplicationCrashHandler(EXCEPTION_POINTERS* pException)
 
     return EXCEPTION_EXECUTE_HANDLER;
 }
-*/
+#endif
+
 void CloseXButton()
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
