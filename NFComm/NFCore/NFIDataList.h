@@ -244,6 +244,8 @@ public:
     virtual bool Add(const float value) = 0;
     virtual bool Add(const double value) = 0;
     virtual bool Add(const char* value) = 0;
+
+    virtual bool Add(const std::string& value) = 0;
     virtual bool Add(const NFIDENTID& value) = 0;
     virtual bool Add(const void* value) = 0;
 
@@ -275,6 +277,10 @@ public:
         return Add(value);
     }
     bool AddString(const char* value)
+    {
+        return Add(value);
+    }
+    bool AddString(const std::string& value)
     {
         return Add(value);
     }
