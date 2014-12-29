@@ -20,7 +20,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFCore/NFMap.h"
-#include "NFComm\NFPluginModule\NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include <memory>
 
 class NFCWorldNet_ServerModule
@@ -73,7 +73,7 @@ protected:
 
 private:
 
-    struct ServerData 
+    struct ServerData
     {
         ServerData()
         {
