@@ -5,15 +5,16 @@
 
 #ifdef NF_DYNAMIC_PLUGIN
 
-extern "C"  __declspec( dllexport ) void DllStartPlugin( NFIPluginManager* pm )
+NF_EXPORT void DllStartPlugin( NFIPluginManager* pm )
 {
+#if NF_PLATFORM == NF_PLATFORM_WIN
 	SetConsoleTitle( "NFSLG" );
-
+#endif
     CREATE_PLUGIN( pm, NFSLGPlugin )
 
 };
 
-extern "C" __declspec( dllexport ) void DllStopPlugin( NFIPluginManager* pm )
+NF_EXPORT void DllStopPlugin( NFIPluginManager* pm )
 {
     DESTROY_PLUGIN( pm, NFSLGPlugin )
 };
