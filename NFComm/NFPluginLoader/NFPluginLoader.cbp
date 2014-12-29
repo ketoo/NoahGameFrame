@@ -12,8 +12,6 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-std=c++11" />
-					<Add option="-fpic" />
-					<Add option="-ldl" />
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
 					<Add directory="../../../trunk" />
@@ -38,10 +36,6 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-std=c++11" />
-					<Add option="-fpic" />
-					<Add option="-ldl" />
-					<Add option="LOCAL_SHARED_LIBRARIES" />
-					<Add option="libdl" />
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
 					<Add directory="../../../trunk" />
