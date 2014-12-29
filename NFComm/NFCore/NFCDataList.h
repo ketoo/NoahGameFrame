@@ -62,6 +62,7 @@ public:
     virtual bool Add(const double value);
 
     virtual bool Add(const char* value);
+    virtual bool Add(const std::string& value);
 
     virtual bool Add(const NFIDENTID& value);
 

@@ -13,6 +13,7 @@
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-fpic" />
+					<Add option="-ldl" />
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
 					<Add directory="../../../trunk" />
@@ -22,6 +23,10 @@
 					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/External/" />
 				</Compiler>
 				<Linker>
+					<Add option="-ldl" />
+					<Add option="-pthread" />
+					<Add library="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_system-gcc48-mt-s-1_53.a" />
+					<Add library="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_thread-gcc48-mt-s-1_53.a" />
 					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
 					<Add directory="../../../trunk/Dependencies/lib/$(Configuration)/" />
 					<Add directory="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
@@ -34,6 +39,9 @@
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-fpic" />
+					<Add option="-ldl" />
+					<Add option="LOCAL_SHARED_LIBRARIES" />
+					<Add option="libdl" />
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
 					<Add directory="../../../trunk" />
@@ -43,6 +51,10 @@
 					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/External/" />
 				</Compiler>
 				<Linker>
+					<Add option="-ldl" />
+					<Add option="-pthread" />
+					<Add library="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_system-gcc48-mt-s-1_53.a" />
+					<Add library="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_thread-gcc48-mt-s-1_53.a" />
 					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
 					<Add directory="../../../trunk/Dependencies/lib/$(Configuration)/" />
 					<Add directory="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
