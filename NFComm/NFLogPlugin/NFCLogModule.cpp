@@ -47,7 +47,7 @@ bool NFCLogModule::Init()
 #endif
 
         FLAGS_colorlogtostderr = true;    //设置输出到屏幕的日志显示相应颜色
-        FLAGS_servitysinglelog = true;
+        //FLAGS_servitysinglelog = true;
 
         google::SetLogDestination(google::GLOG_FATAL, std::string(strPath + "/log_fatal_").c_str());
         google::SetLogDestination(google::GLOG_ERROR, std::string(strPath + "/log_error_").c_str());      //设置 google::error 级别的日志存储路径和文件名前缀
