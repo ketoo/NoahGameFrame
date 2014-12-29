@@ -18,15 +18,16 @@
 
 #ifdef NF_DYNAMIC_PLUGIN
 
-extern "C"  __declspec( dllexport ) void DllStartPlugin( NFIPluginManager* pm )
+NF_EXPORT void DllStartPlugin( NFIPluginManager* pm )
 {
+#if NF_PLATFORM == NF_PLATFORM_WIN
 	SetConsoleTitle( "NFGameServer" );
-
+#endif // NF_PLATFORM
     CREATE_PLUGIN( pm, NFGameServerPlugin )
 
 };
 
-extern "C" __declspec( dllexport ) void DllStopPlugin( NFIPluginManager* pm )
+NF_EXPORT void DllStopPlugin( NFIPluginManager* pm )
 {
     DESTROY_PLUGIN( pm, NFGameServerPlugin )
 };
@@ -59,7 +60,7 @@ void NFGameServerPlugin::Install()
 
 void NFGameServerPlugin::Uninstall()
 {
-	
+
     UNREGISTER_MODULE( pPluginManager, NFCPropertyConfigModule )
     UNREGISTER_MODULE( pPluginManager, NFCLevelModule )
     UNREGISTER_MODULE( pPluginManager, NFCPropertyModule )
