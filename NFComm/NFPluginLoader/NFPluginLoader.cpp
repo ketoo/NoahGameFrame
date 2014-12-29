@@ -21,7 +21,7 @@
 #include "boost/thread.hpp"
 
 #pragma comment( lib, "DbgHelp" )
-
+/*
 // 创建Dump文件
 void CreateDumpFile(const std::string& strDumpFilePathName, EXCEPTION_POINTERS* pException)
 {
@@ -54,16 +54,16 @@ long ApplicationCrashHandler(EXCEPTION_POINTERS* pException)
 
     return EXCEPTION_EXECUTE_HANDLER;
 }
-
+*/
 void CloseXButton()
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
-    HWND hWnd = GetConsoleWindow();  
-    if(hWnd)  
-    {  
-        HMENU hMenu = GetSystemMenu(hWnd, FALSE);  
-        EnableMenuItem(hMenu, SC_CLOSE, MF_DISABLED | MF_BYCOMMAND);  
+    HWND hWnd = GetConsoleWindow();
+    if(hWnd)
+    {
+        HMENU hMenu = GetSystemMenu(hWnd, FALSE);
+        EnableMenuItem(hMenu, SC_CLOSE, MF_DISABLED | MF_BYCOMMAND);
     }
 
 #endif
@@ -146,7 +146,7 @@ int main()
             {
                 break;
             }
-			
+
 			unsigned long unNowTickTime = ::NF_GetTickCount();
 			float fStartedTime = float(unNowTickTime - unStartTickTime) / 1000;
 			float fLastTime = float(unNowTickTime - unLastTickTime) / 1000;
