@@ -13,6 +13,8 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-fpic" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_USRDLL" />
 					<Add directory="../../../trunk" />
@@ -37,6 +39,8 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-fpic" />
 					<Add option="-D_USRDLL" />
 					<Add directory="../../../trunk" />
 					<Add directory="../../../trunk/Dependencies/" />
