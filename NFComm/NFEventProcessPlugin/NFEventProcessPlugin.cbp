@@ -17,7 +17,6 @@
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_USRDLL" />
-					<Add option="-DTHERON_USE_STD_THREADS" />
 					<Add directory="../../../trunk" />
 					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
 					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
@@ -37,7 +36,6 @@
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_USRDLL" />
-					<Add option="-DTHERON_USE_STD_THREADS" />
 					<Add directory="../../../trunk" />
 					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
 					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />

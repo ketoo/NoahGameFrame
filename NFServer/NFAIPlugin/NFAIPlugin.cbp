@@ -22,7 +22,6 @@
 					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
 					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/" />
 					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/include/" />
-					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/WIN32-Code/" />
 					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/compat/" />
 					<Add directory="../../../trunk/Dependencies/protobuf-2.5.0/src/" />
 					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
@@ -49,7 +48,6 @@
 					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
 					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/" />
 					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/include/" />
-					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/WIN32-Code/" />
 					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/compat/" />
 					<Add directory="../../../trunk/Dependencies/protobuf-2.5.0/src/" />
 					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
