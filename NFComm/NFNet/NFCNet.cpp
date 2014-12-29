@@ -15,8 +15,8 @@
 #include <winsock2.h>
 #endif
 
-#include "event2\bufferevent_struct.h"
-#include "event2\event.h"
+#include "event2/bufferevent_struct.h"
+#include "event2/event.h"
 
 void NFCNet::time_cb(evutil_socket_t fd, short _event, void *argc)
 {
