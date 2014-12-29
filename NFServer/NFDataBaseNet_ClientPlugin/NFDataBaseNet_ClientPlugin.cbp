@@ -13,11 +13,8 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-DWIN32" />
 					<Add option="-D_DEBUG" />
-					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
-					<Add option="-DNFLOGINNET_CLIENTPLUGIN_EXPORTS" />
 					<Add directory="$(NF_HOME)" />
 				</Compiler>
 				<Linker>
@@ -32,11 +29,8 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-DWIN32" />
 					<Add option="-DNDEBUG" />
-					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
-					<Add option="-DNFLOGINNET_CLIENTPLUGIN_EXPORTS" />
 				</Compiler>
 			</Target>
 		</Build>
