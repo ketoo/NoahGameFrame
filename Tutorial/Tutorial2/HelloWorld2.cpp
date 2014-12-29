@@ -1,5 +1,5 @@
 #include "HelloWorld2.h"
-#include "NFComm\NFCore\NFCObject.h"
+#include "NFComm/NFCore/NFCObject.h"
 
 bool HelloWorld2::Init()
 {
