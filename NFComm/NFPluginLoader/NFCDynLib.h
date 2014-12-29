@@ -23,6 +23,7 @@ struct HINSTANCE__;
 typedef struct HINSTANCE__* hInstance;
 
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
+#include <dlfcn.h>
 #define DYNLIB_HANDLE void*
 #define DYNLIB_LOAD( a ) dlopen( a, RTLD_LAZY | RTLD_GLOBAL)
 #define DYNLIB_GETSYM( a, b ) dlsym( a, b )
