@@ -104,8 +104,6 @@ GLOG_DEFINE_bool(alsologtostderr, BoolFromEnv("GOOGLE_ALSOLOGTOSTDERR", false),
                  "log messages go to stderr in addition to logfiles");
 GLOG_DEFINE_bool(colorlogtostderr, false,
                  "color messages logged to stderr (if supported by terminal)");
-GLOG_DEFINE_bool(servitysinglelog, false,
-                 "one serity in single log file");
 #ifdef OS_LINUX
 GLOG_DEFINE_bool(drop_log_memory, true, "Drop in-memory buffers of log contents. "
                  "Logs can grow very quickly and they are rarely read before they "
@@ -240,7 +238,7 @@ static GLogColor SeverityToColor(LogSeverity severity) {
   GLogColor color = COLOR_DEFAULT;
   switch (severity) {
   case GLOG_INFO:
-    color = COLOR_GREEN;
+    color = COLOR_DEFAULT;
     break;
   case GLOG_WARNING:
     color = COLOR_YELLOW;
@@ -729,15 +727,8 @@ inline void LogDestination::LogToAllLogfiles(LogSeverity severity,
   if ( FLAGS_logtostderr ) {           // global flag: never log to file
     ColoredWriteToStderr(severity, message, len);
   } else {
-      if (FLAGS_servitysinglelog)
-      {
-          LogDestination::MaybeLogToLogfile(severity, timestamp, message, len);
-      }
-      else
-      {
-          for (int i = severity; i >= 0; --i)
-              LogDestination::MaybeLogToLogfile(i, timestamp, message, len);
-      }
+    for (int i = severity; i >= 0; --i)
+      LogDestination::MaybeLogToLogfile(i, timestamp, message, len);
   }
 }
 
@@ -932,7 +923,7 @@ void LogFileObject::Write(bool force_flush,
   }
 
   if (static_cast<int>(file_length_ >> 20) >= MaxLogSize() ||
-      PidHasChanged() || DayHasChanged()) {
+      PidHasChanged()) {
     if (file_ != NULL) fclose(file_);
     file_ = NULL;
     file_length_ = bytes_since_flush_ = 0;
@@ -958,19 +949,10 @@ void LogFileObject::Write(bool force_flush,
                     << setw(2) << tm_time.tm_mday
                     << '-'
                     << setw(2) << tm_time.tm_hour
-                    << "."
                     << setw(2) << tm_time.tm_min
-                    << "."
                     << setw(2) << tm_time.tm_sec
-                    << "-pid."
-                    << GetMainThreadPid()
-                    << "-thread."
-#ifdef _MSC_VER
-                    << GetCurrentThreadId()
-#else
-                    << pthread_self()
-#endif
-                    << ".log";
+                    << '.'
+                    << GetMainThreadPid();
     const string& time_pid_string = time_pid_stream.str();
 
     if (base_filename_selected_) {
@@ -1044,7 +1026,7 @@ void LogFileObject::Write(bool force_flush,
                        << setw(2) << tm_time.tm_sec << '\n'
                        << "Running on machine: "
                        << LogDestination::hostname() << '\n'
-                       << "[Log line format: yyyy/mm/dd hh:mm:ss.mmm "
+                       << "Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu "
                        << "threadid file:line] msg" << '\n';
     const string& file_header_string = file_header_stream.str();
 
@@ -1225,25 +1207,19 @@ void LogMessage::Init(const char* file,
   //    (log level, GMT month, date, time, thread_id, file basename, line)
   // We exclude the thread_id for the default thread.
   if (FLAGS_log_prefix && (line != kNoLogPrefix)) {
-    stream() << "["
-             << LogSeverityNames[severity]
-             << ' '
-             << setw(4) << 1900+data_->tm_time_.tm_year
-             << '/'
+    stream() << LogSeverityNames[severity][0]
              << setw(2) << 1+data_->tm_time_.tm_mon
-             << '/'
              << setw(2) << data_->tm_time_.tm_mday
              << ' '
              << setw(2) << data_->tm_time_.tm_hour  << ':'
              << setw(2) << data_->tm_time_.tm_min   << ':'
              << setw(2) << data_->tm_time_.tm_sec   << "."
-             << setw(3) << usecs / 1000
-             //<< ' '
-             //<< setfill(' ') << setw(5)
-             //<< static_cast<unsigned int>(GetTID()) << setfill('0')
-             //<< ' '
-             //<< data_->basename_ << ':' << data_->line_ 
-             << "] ";
+             << setw(6) << usecs
+             << ' '
+             << setfill(' ') << setw(5)
+             << static_cast<unsigned int>(GetTID()) << setfill('0')
+             << ' '
+             << data_->basename_ << ':' << data_->line_ << "] ";
   }
   data_->num_prefix_chars_ = data_->stream_->pcount();
 
@@ -1460,7 +1436,7 @@ void LogMessage::RecordCrashReason(
 static void logging_fail() ATTRIBUTE_NORETURN;
 
 static void logging_fail() {
-#if defined(_DEBUG) && defined(_MSC_VER) && !defined(_WIN64)
+#if defined(_DEBUG) && defined(_MSC_VER)
   // When debugging on windows, avoid the obnoxious dialog and make
   // it possible to continue past a LOG(FATAL) in the debugger
   _asm int 3
