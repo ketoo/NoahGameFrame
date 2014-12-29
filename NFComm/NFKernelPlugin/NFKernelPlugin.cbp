@@ -18,7 +18,6 @@
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_USRDLL" />
-					<Add option="-DGOOGLE_GLOG_DLL_DECL=" />
 					<Add directory="../../../trunk" />
 					<Add directory="../../../trunk/Dependencies/" />
 					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
@@ -42,7 +41,6 @@
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_USRDLL" />
-					<Add option="-DGOOGLE_GLOG_DLL_DECL=" />
 					<Add directory="../../../trunk" />
 					<Add directory="../../../trunk/Dependencies/" />
 					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
