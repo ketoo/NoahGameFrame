@@ -13,14 +13,9 @@
 				<Compiler>
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
-					<Add option="-D_CONSOLE" />
-					<Add option="-DNF_DYNAMIC_PLUGIN" />
-					<Add option="-DTHERON_USE_STD_THREADS" />
-					<Add option="-DGOOGLE_GLOG_DLL_DECL=" />
 					<Add directory="../../../trunk" />
 					<Add directory="../../../trunk/Dependencies/" />
 					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
-					<Add directory="../../../trunk/Dependencies/glog-0.3.3/src/windows/" />
 					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
 					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/External/" />
 				</Compiler>
@@ -37,14 +32,9 @@
 				<Compiler>
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
-					<Add option="-D_CONSOLE" />
-					<Add option="-DNF_DYNAMIC_PLUGIN" />
-					<Add option="-D_WIN64" />
-					<Add option="-DTHERON_USE_STD_THREADS" />
 					<Add directory="../../../trunk" />
 					<Add directory="../../../trunk/Dependencies/" />
 					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
-					<Add directory="../../../trunk/Dependencies/glog-0.3.3/src/windows/" />
 					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
 					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/External/" />
 				</Compiler>
