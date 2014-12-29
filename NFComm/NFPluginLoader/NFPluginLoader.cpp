@@ -6,7 +6,7 @@
 //
 // -------------------------------------------------------------------------
 
-#include <crtdbg.h>
+//#include <crtdbg.h>
 #include <time.h>
 #include <stdio.h>
 #include <iostream>
@@ -21,7 +21,7 @@
 #include "boost/thread.hpp"
 
 #pragma comment( lib, "DbgHelp" )
-#ifdef NF_PLATFORM == NF_PLATFORM_WIN
+#if NF_PLATFORM == NF_PLATFORM_WIN
 
 // 创建Dump文件
 void CreateDumpFile(const std::string& strDumpFilePathName, EXCEPTION_POINTERS* pException)
@@ -95,8 +95,10 @@ void CreateBackThread()
     //std::cout << "CreateBackThread, thread ID = " << gThread.get_id() << std::endl;
 }
 
+
 void PrintfLogo()
 {
+#if NF_PLATFORM == NF_PLATFORM_WIN
     std::cout << "\n" << std::endl;
 
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
@@ -114,6 +116,7 @@ void PrintfLogo()
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
     std::cout << "\n" << std::endl;
+#endif // NF_PLATFORM
 }
 
 unsigned long unStartTickTime = 0;
@@ -125,8 +128,9 @@ int main()
 
 #endif
 {
+#if NF_PLATFORM == NF_PLATFORM_WIN
     SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
-
+#endif
 	NFCActorManager::GetSingletonPtr()->Init();
 	NFCActorManager::GetSingletonPtr()->AfterInit();
     NFCActorManager::GetSingletonPtr()->CheckConfig();
@@ -162,14 +166,18 @@ int main()
 			{
 				fLastTime = 0.0f;
 			}
+#if NF_PLATFORM == NF_PLATFORM_WIN
             __try
             {
+#endif
                 NFCActorManager::GetSingletonPtr()->Execute(fLastTime, fStartedTime);
 				unLastTickTime = unNowTickTime;
+#if NF_PLATFORM == NF_PLATFORM_WIN
             }
             __except (ApplicationCrashHandler(GetExceptionInformation()))
             {
             }
+#endif
         }
     }
 

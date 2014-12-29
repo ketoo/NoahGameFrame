@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------
 
 #include "NFCPropertyConfigModule.h"
-#include "NFComm\NFPluginModule\NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 bool NFCPropertyConfigModule::Init()
 {
@@ -30,7 +30,7 @@ bool NFCPropertyConfigModule::AfterInit()
 {
     m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-    
+
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pElementInfoModule);
 

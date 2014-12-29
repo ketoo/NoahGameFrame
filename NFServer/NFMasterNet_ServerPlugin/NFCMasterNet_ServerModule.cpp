@@ -45,7 +45,7 @@ int NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const NFIPacket& msg)
 
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "WorldRegistered");
     }
-	
+
 
 	SynWorldToLogin();
 
@@ -242,7 +242,7 @@ bool NFCMasterNet_ServerModule::AfterInit()
 	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
 	m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
 	m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-	
+
 	assert(NULL != m_pEventProcessModule);
 	assert(NULL != m_pKernelModule);
 	assert(NULL != m_pLogModule);
@@ -263,7 +263,7 @@ bool NFCMasterNet_ServerModule::AfterInit()
 
 int NFCMasterNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 {
-	std::cout << "OnRecivePack::thread id=" << GetCurrentThreadId() << std::endl;
+	//std::cout << "OnRecivePack::thread id=" << GetCurrentThreadId() << std::endl;
 
 	int nMsgID = msg.GetMsgHead()->GetMsgID();
 	switch (nMsgID)
@@ -315,14 +315,14 @@ int NFCMasterNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 
 int NFCMasterNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {
-	std::cout << "OnSocketEvent::thread id=" << GetCurrentThreadId() << std::endl;
+	//std::cout << "OnSocketEvent::thread id=" << GetCurrentThreadId() << std::endl;
 
-    if (eEvent & NF_NET_EVENT_EOF) 
+    if (eEvent & NF_NET_EVENT_EOF)
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
-    } 
-    else if (eEvent & NF_NET_EVENT_ERROR) 
+    }
+    else if (eEvent & NF_NET_EVENT_ERROR)
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
@@ -358,7 +358,7 @@ void NFCMasterNet_ServerModule::OnClientDisconnect( const int nAddress )
 
         pServerData = mWorldMap.Next();
     }
-    
+
     //////////////////////////////////////////////////////////////////////////
 
     int nServerID = 0;
