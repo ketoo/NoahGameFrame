@@ -329,9 +329,6 @@ DECLARE_bool(alsologtostderr);
 // Set color messages logged to stderr (if supported by terminal).
 DECLARE_bool(colorlogtostderr);
 
-// Set single servity type in single log file
-DECLARE_bool(servitysinglelog);
-
 // Log messages at a level >= this flag are automatically sent to
 // stderr in addition to log files.
 DECLARE_int32(stderrthreshold);
