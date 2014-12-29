@@ -1,11 +1,5 @@
 #include "NFComm/NFCore/NFPlatform.h"
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
-
-
-#endif
-
-
 #ifdef NF_DEBUG_MODE
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
