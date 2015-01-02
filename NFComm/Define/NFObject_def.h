@@ -62,6 +62,13 @@ enum NFObjectStateType
     NOST_SKILLUSE,
 };
 
+enum NFLogicStateType
+{
+	NLST_FREE,//自由状态
+	NLST_PVP,//PVP状态（内部再有自己的小状态）
+	NLST_PVE,//PVE状态（内部再有自己的小状态）
+};
+
 enum NFGMComandID
 {
     NGMC_ID_ADDEXP,
