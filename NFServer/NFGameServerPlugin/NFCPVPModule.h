@@ -32,11 +32,11 @@ public:
     virtual bool Execute( const float fLasFrametime, const float fStartedTime );
     virtual bool AfterInit();
 
-	virtual bool MatchPVPObject(const NFIDENTID& self) = 0;
+	virtual bool MatchPVPObject(const NFIDENTID& self);
 
-	virtual bool StartPVPWar(const NFIDENTID& self) = 0;
+	virtual bool StartPVPWar(const NFIDENTID& self);
 
-	virtual bool ExitPVPWar(const NFIDENTID& self) = 0;
+	virtual bool ExitPVPWar(const NFIDENTID& self);
 
 private:
     NFIEventProcessModule* m_pEventProcessModule;
