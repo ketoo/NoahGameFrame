@@ -32,6 +32,10 @@ public:
     virtual bool Execute( const float fLasFrametime, const float fStartedTime );
     virtual bool AfterInit();
 
+public:
+	virtual bool StartRouteEvent(const NFIDENTID& self, const NFIDataList& xDataList);
+
+	virtual bool ReceiveRouteEvent(const NFIDENTID& self, const NFIDataList& xDataList);
 
 private:
     NFIEventProcessModule* m_pEventProcessModule;
