@@ -41,3 +41,13 @@ bool NFCEventRouteModule::AfterInit()
     return true;
 }
 
+bool NFCEventRouteModule::StartRouteEvent( const NFIDENTID& self, const NFIDataList& xDataList )
+{
+	return false;
+}
+
+bool NFCEventRouteModule::ReceiveRouteEvent( const NFIDENTID& self, const NFIDataList& xDataList )
+{
+	return false;
+}
+
