@@ -82,6 +82,7 @@
         <Property Desc="预设路径" Id="PrefabPath" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
         <Property Desc="首要目标" Id="FirstTarget" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="object" View="1"/>
         <Property Desc="0呆着1跑2走3闪烁4技能飞移5死6平常技能中" Id="State" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="逻辑状态，或者说模块独占状态" Id="LogicState" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="角色类型" Id="CharType" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="职业" Id="Job" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="经验获得,如果是怪物，则是掉落经验" Id="EXP" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
