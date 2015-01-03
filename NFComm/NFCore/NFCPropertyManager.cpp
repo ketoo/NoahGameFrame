@@ -16,7 +16,7 @@ NFCPropertyManager::~NFCPropertyManager()
 
 bool NFCPropertyManager::RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIDataList& argVar)
 {
-    std::shared_ptr<NFIProperty> pProperty = this->GetElement(strProperty);
+    NF_SHARE_PTR<NFIProperty> pProperty = this->GetElement(strProperty);
     if (pProperty.get())
     {
         pProperty->RegisterCallback(cb, argVar);
@@ -26,13 +26,13 @@ bool NFCPropertyManager::RegisterCallback(const std::string& strProperty, const 
     return false;
 }
 
-std::shared_ptr<NFIProperty> NFCPropertyManager::AddProperty(const NFIDENTID& self, std::shared_ptr<NFIProperty> pProperty)
+NF_SHARE_PTR<NFIProperty> NFCPropertyManager::AddProperty(const NFIDENTID& self, NF_SHARE_PTR<NFIProperty> pProperty)
 {
     const std::string& strProperty = pProperty->GetKey();
-    std::shared_ptr<NFIProperty> pOldProperty = this->GetElement(strProperty);
+    NF_SHARE_PTR<NFIProperty> pOldProperty = this->GetElement(strProperty);
     if (!pOldProperty.get())
     {
-        std::shared_ptr<NFIProperty> pNewProperty(NF_NEW NFCProperty(self, strProperty, pProperty->GetType(), pProperty->GetPublic(), pProperty->GetPrivate(), pProperty->GetSave(), pProperty->GetView(), pProperty->GetIndex(), pProperty->GetRelationValue()));
+        NF_SHARE_PTR<NFIProperty> pNewProperty(NF_NEW NFCProperty(self, strProperty, pProperty->GetType(), pProperty->GetPublic(), pProperty->GetPrivate(), pProperty->GetSave(), pProperty->GetView(), pProperty->GetIndex(), pProperty->GetRelationValue()));
         this->AddElement(strProperty, pNewProperty);
 
         if (pProperty->GetIndex() > 0)
@@ -44,12 +44,12 @@ std::shared_ptr<NFIProperty> NFCPropertyManager::AddProperty(const NFIDENTID& se
     return pOldProperty;
 }
 
-std::shared_ptr<NFIProperty> NFCPropertyManager::AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex, const std::string& strScriptFunction)
+NF_SHARE_PTR<NFIProperty> NFCPropertyManager::AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex, const std::string& strScriptFunction)
 {
-    std::shared_ptr<NFIProperty> pProperty = this->GetElement(strPropertyName);
+    NF_SHARE_PTR<NFIProperty> pProperty = this->GetElement(strPropertyName);
     if (!pProperty.get())
     {
-        pProperty = std::shared_ptr<NFIProperty>(NF_NEW NFCProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, bView, nIndex, strScriptFunction));
+        pProperty = NF_SHARE_PTR<NFIProperty>(NF_NEW NFCProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, bView, nIndex, strScriptFunction));
         this->AddElement(strPropertyName, pProperty);
 
         if (pProperty->GetIndex() > 0)
@@ -63,7 +63,7 @@ std::shared_ptr<NFIProperty> NFCPropertyManager::AddProperty(const NFIDENTID& se
 
 bool NFCPropertyManager::SetProperty(const std::string& strPropertyName, const NFIDataList::TData& TData)
 {
-    std::shared_ptr<NFIProperty> pProperty = GetElement(strPropertyName);
+    NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
     if (pProperty.get())
     {
         pProperty->SetValue(TData);
@@ -76,7 +76,7 @@ bool NFCPropertyManager::SetProperty(const std::string& strPropertyName, const N
 
 // bool NFCPropertyManager::SetProperty(const NFIProperty* pProperty)
 // {
-//     std::shared_ptr<NFIProperty> pSelfProperty = GetElement(pProperty->GetKey());
+//     NF_SHARE_PTR<NFIProperty> pSelfProperty = GetElement(pProperty->GetKey());
 //     if (pSelfProperty.get())
 //     {
 //         pSelfProperty->SetValue(pProperty);

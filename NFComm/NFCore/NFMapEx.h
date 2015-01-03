@@ -20,14 +20,14 @@ template <typename T , typename TD>
 class NFMapEx
 {
 public:
-    typedef std::map<T, std::shared_ptr<TD> > NFMapOBJECT;
+    typedef std::map<T, NF_SHARE_PTR<TD> > NFMapOBJECT;
 
     NFMapEx() {};
     virtual ~NFMapEx()
     {
     };
 
-    virtual bool AddElement(const T& name, const std::shared_ptr<TD> data)
+    virtual bool AddElement(const T& name, const NF_SHARE_PTR<TD> data)
     {
         typename NFMapOBJECT::iterator itr = mObjectList.find(name);
         if (itr == mObjectList.end())
@@ -39,7 +39,7 @@ public:
         return false;
     }
 
-    virtual bool SetElement(const T& name, const std::shared_ptr<TD> data)
+    virtual bool SetElement(const T& name, const NF_SHARE_PTR<TD> data)
     {
         mObjectList[name] = data;
 
@@ -48,12 +48,12 @@ public:
 
     virtual bool RemoveElement(const T& name)
     {
-        std::shared_ptr<TD> pData(NULL);
+        NF_SHARE_PTR<TD> pData(NULL);
         typename NFMapOBJECT::iterator itr = mObjectList.find(name);
         if (itr != mObjectList.end())
         {
             pData = itr->second;
-            itr = mObjectList.erase(itr);
+            ObjectList.erase(itr);
 
             return true;
         }
@@ -61,7 +61,7 @@ public:
         return false;
     }
 
-    virtual std::shared_ptr<TD> GetElement(const T& name)
+    virtual NF_SHARE_PTR<TD> GetElement(const T& name)
     {
         typename NFMapOBJECT::iterator itr = mObjectList.find(name);
         if (itr != mObjectList.end())
@@ -70,15 +70,15 @@ public:
         }
         else
         {
-            return std::shared_ptr<TD>(NULL);
+            return NF_SHARE_PTR<TD>(NULL);
         }
     }
 
-    virtual std::shared_ptr<TD> First()
+    virtual NF_SHARE_PTR<TD> First()
     {
         if (mObjectList.size() <= 0)
         {
-            return std::shared_ptr<TD>(NULL);
+            return NF_SHARE_PTR<TD>(NULL);
         }
 
         mObjectCurIter = mObjectList.begin();
@@ -88,20 +88,20 @@ public:
         }
         else
         {
-            return std::shared_ptr<TD>(NULL);
+            return NF_SHARE_PTR<TD>(NULL);
         }
     }
 
-    virtual std::shared_ptr<TD> Next()
+    virtual NF_SHARE_PTR<TD> Next()
     {
         if (mObjectCurIter == mObjectList.end())
         {
-            return std::shared_ptr<TD>(NULL);
+            return NF_SHARE_PTR<TD>(NULL);
         }
 
         if (mObjectCurIter == mObjectList.end())
         {
-            return std::shared_ptr<TD>(NULL);
+            return NF_SHARE_PTR<TD>(NULL);
         }
 
         ++mObjectCurIter;
@@ -111,15 +111,15 @@ public:
         }
         else
         {
-            return std::shared_ptr<TD>(NULL);
+            return NF_SHARE_PTR<TD>(NULL);
         }
     }
 
-    virtual std::shared_ptr<TD> First(T& name)
+    virtual NF_SHARE_PTR<TD> First(T& name)
     {
         if (mObjectList.size() <= 0)
         {
-            return std::shared_ptr<TD>(NULL);
+            return NF_SHARE_PTR<TD>(NULL);
         }
 
         mObjectCurIter = mObjectList.begin();
@@ -130,20 +130,20 @@ public:
         }
         else
         {
-            return std::shared_ptr<TD>(NULL);
+            return NF_SHARE_PTR<TD>(NULL);
         }
     }
 
-    virtual std::shared_ptr<TD> Next(T& name)
+    virtual NF_SHARE_PTR<TD> Next(T& name)
     {
         if (mObjectCurIter == mObjectList.end())
         {
-            return std::shared_ptr<TD>(NULL);
+            return NF_SHARE_PTR<TD>(NULL);
         }
 
         if (mObjectCurIter == mObjectList.end())
         {
-            return std::shared_ptr<TD>(NULL);
+            return NF_SHARE_PTR<TD>(NULL);
         }
 
         mObjectCurIter++;
@@ -154,7 +154,7 @@ public:
         }
         else
         {
-            return std::shared_ptr<TD>(NULL);
+            return NF_SHARE_PTR<TD>(NULL);
         }
     }
 

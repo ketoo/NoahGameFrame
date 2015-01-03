@@ -228,10 +228,10 @@ int NFCLoginNet_ClientModule::OnWorldInfoProcess( const NFIPacket& msg )
 	{
 		const NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
 
-        std::shared_ptr<NFMsg::ServerInfoReport> pServerData = mWorldMap.GetElement(pData->server_id());
+        NF_SHARE_PTR<NFMsg::ServerInfoReport> pServerData = mWorldMap.GetElement(pData->server_id());
         if (!pServerData.get())
         {
-            pServerData = std::shared_ptr<NFMsg::ServerInfoReport>(NF_NEW NFMsg::ServerInfoReport());
+            pServerData = NF_SHARE_PTR<NFMsg::ServerInfoReport>(NF_NEW NFMsg::ServerInfoReport());
             *pServerData = *pData;
 
             mWorldMap.AddElement(pData->server_id(), pServerData);

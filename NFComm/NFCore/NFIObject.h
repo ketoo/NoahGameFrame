@@ -105,13 +105,13 @@ public:
     virtual const std::string& GetRecordString(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
     virtual NFIDENTID GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
 
-    virtual std::shared_ptr<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
-    virtual std::shared_ptr<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
+    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
+    virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
 
-    virtual std::shared_ptr<NFIRecordManager> GetRecordManager() = 0;
-    virtual std::shared_ptr<NFIHeartBeatManager> GetHeartBeatManager() = 0;
-    virtual std::shared_ptr<NFIPropertyManager> GetPropertyManager() = 0;
-    virtual std::shared_ptr<NFIComponentManager> GetComponentManager() = 0;
+    virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager() = 0;
+    virtual NF_SHARE_PTR<NFIHeartBeatManager> GetHeartBeatManager() = 0;
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager() = 0;
+    virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager() = 0;
 
 
 

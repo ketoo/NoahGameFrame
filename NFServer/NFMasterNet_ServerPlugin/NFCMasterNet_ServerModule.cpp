@@ -33,10 +33,10 @@ int NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const NFIPacket& msg)
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        std::shared_ptr<ServerData> pServerData =  mWorldMap.GetElement(pData->server_id());
+        NF_SHARE_PTR<ServerData> pServerData =  mWorldMap.GetElement(pData->server_id());
         if (!pServerData.get())
         {
-            pServerData = std::shared_ptr<ServerData>(NF_NEW ServerData());
+            pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
             mWorldMap.AddElement(pData->server_id(), pServerData);
         }
 
@@ -87,10 +87,10 @@ int NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFIPacket& msg)
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        std::shared_ptr<ServerData> pServerData =  mWorldMap.GetElement(pData->server_id());
+        NF_SHARE_PTR<ServerData> pServerData =  mWorldMap.GetElement(pData->server_id());
         if (!pServerData.get())
         {
-            pServerData = std::shared_ptr<ServerData>(NF_NEW ServerData());
+            pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
             mWorldMap.AddElement(pData->server_id(), pServerData);
         }
 
@@ -118,10 +118,10 @@ int NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const NFIPacket& msg)
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        std::shared_ptr<ServerData> pServerData =  mLoginMap.GetElement(pData->server_id());
+        NF_SHARE_PTR<ServerData> pServerData =  mLoginMap.GetElement(pData->server_id());
         if (!pServerData.get())
         {
-            pServerData = std::shared_ptr<ServerData>(NF_NEW ServerData());
+            pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
             mLoginMap.AddElement(pData->server_id(), pServerData);
         }
 
@@ -170,10 +170,10 @@ int NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess(const NFIPacket& msg)
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        std::shared_ptr<ServerData> pServerData =  mLoginMap.GetElement(pData->server_id());
+        NF_SHARE_PTR<ServerData> pServerData =  mLoginMap.GetElement(pData->server_id());
         if (!pServerData.get())
         {
-            pServerData = std::shared_ptr<ServerData>(NF_NEW ServerData());
+            pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
             mLoginMap.AddElement(pData->server_id(), pServerData);
         }
 
@@ -196,7 +196,7 @@ int NFCMasterNet_ServerModule::OnSelectWorldProcess(const NFIPacket& msg)
 		return 0;
 	}
 
-    std::shared_ptr<ServerData> pServerData =  mWorldMap.GetElement(xMsg.world_id());
+    NF_SHARE_PTR<ServerData> pServerData =  mWorldMap.GetElement(xMsg.world_id());
     if (!pServerData.get())
     {
         return 0;
@@ -223,7 +223,7 @@ int NFCMasterNet_ServerModule::OnSelectServerResultProcess(const NFIPacket& msg)
 		return 0;
 	}
 
-    std::shared_ptr<ServerData> pServerData =  mLoginMap.GetElement(xMsg.login_id());
+    NF_SHARE_PTR<ServerData> pServerData =  mLoginMap.GetElement(xMsg.login_id());
     if (!pServerData.get())
     {
         return 0;
@@ -344,7 +344,7 @@ int NFCMasterNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET
 void NFCMasterNet_ServerModule::OnClientDisconnect( const int nAddress )
 {
 	//不管是login还是world都要找出来,替他反注册
-    std::shared_ptr<ServerData> pServerData =  mWorldMap.First();
+    NF_SHARE_PTR<ServerData> pServerData =  mWorldMap.First();
     while (pServerData.get())
     {
         if (nAddress == pServerData->nFD)
@@ -387,7 +387,7 @@ void NFCMasterNet_ServerModule::SynWorldToLogin()
 {
     NFMsg::ServerInfoReportList xData;
 
-    std::shared_ptr<ServerData> pServerData =  mWorldMap.First();
+    NF_SHARE_PTR<ServerData> pServerData =  mWorldMap.First();
     while (pServerData.get())
     {
         NFMsg::ServerInfoReport* pData = xData.add_server_list();
