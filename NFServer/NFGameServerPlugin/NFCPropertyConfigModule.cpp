@@ -43,7 +43,7 @@ int NFCPropertyConfigModule::CalculateBaseValue( const NFJobType nJob, const int
 {
     if ( nJob >= 0 && nJob < NFJobType::NJT_MAX )
     {
-        std::shared_ptr<std::string> pstrEffectData = mhtCoefficienData[nJob].GetElement( nLevel );
+        NF_SHARE_PTR<std::string> pstrEffectData = mhtCoefficienData[nJob].GetElement( nLevel );
         if ( pstrEffectData.get() )
         {
             return m_pElementInfoModule->GetPropertyInt(*pstrEffectData, strProperty);
@@ -55,7 +55,7 @@ int NFCPropertyConfigModule::CalculateBaseValue( const NFJobType nJob, const int
 
 void NFCPropertyConfigModule::Load()
 {
-    std::shared_ptr<NFILogicClass> pLogicClass = m_pLogicClassModule->GetElement("InitProperty");
+    NF_SHARE_PTR<NFILogicClass> pLogicClass = m_pLogicClassModule->GetElement("InitProperty");
     if (pLogicClass.get())
     {
         NFList<std::string>& xList = pLogicClass->GetConfigNameList();
@@ -63,13 +63,13 @@ void NFCPropertyConfigModule::Load()
         bool bRet = xList.First(strData);
         while (bRet)
         {
-            std::shared_ptr<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager(strData);
+            NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager(strData);
             if (pPropertyManager.get())
             {
                 int nJob = m_pElementInfoModule->GetPropertyInt(strData, "Job");
                 int nLevel = m_pElementInfoModule->GetPropertyInt(strData, "Level");
                 std::string strEffectData = m_pElementInfoModule->GetPropertyString(strData, "EffectData");
-                mhtCoefficienData[nJob].AddElement( nLevel, std::shared_ptr<std::string>(NF_NEW std::string(strEffectData)) );
+                mhtCoefficienData[nJob].AddElement( nLevel, NF_SHARE_PTR<std::string>(NF_NEW std::string(strEffectData)) );
             }
 
             bRet = xList.Next(strData);
@@ -79,7 +79,7 @@ void NFCPropertyConfigModule::Load()
 
 bool NFCPropertyConfigModule::LegalLevel( const NFJobType nJob, const int nLevel )
 {
-    std::shared_ptr<std::string> strEffectData = mhtCoefficienData[nJob].GetElement( nLevel );
+    NF_SHARE_PTR<std::string> strEffectData = mhtCoefficienData[nJob].GetElement( nLevel );
     if (strEffectData.get())
     {
         return true;

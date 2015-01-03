@@ -30,10 +30,10 @@
 #pragma pack(push, 1)
 
 typedef std::function<int(const NFIPacket& msg)> RECIEVE_FUNCTOR;
-typedef std::shared_ptr<RECIEVE_FUNCTOR> RECIEVE_FUNCTOR_PTR;
+typedef NF_SHARE_PTR<RECIEVE_FUNCTOR> RECIEVE_FUNCTOR_PTR;
 
 typedef std::function<int(const int nSockIndex, const NF_NET_EVENT nEvent)> EVENT_FUNCTOR;
-typedef std::shared_ptr<EVENT_FUNCTOR> EVENT_FUNCTOR_PTR;
+typedef NF_SHARE_PTR<EVENT_FUNCTOR> EVENT_FUNCTOR_PTR;
 
 class NFCNet : public NFINet
 {

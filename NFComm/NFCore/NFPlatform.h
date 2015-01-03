@@ -337,5 +337,10 @@ inline unsigned long NF_GetTickCount()
 #endif
 #endif
 
+#if NF_PLATFORM == NF_PLATFORM_WIN || __cplusplus >= 201103L
+#define NF_SHARE_PTR std::shared_ptr
+#else
+#define NF_SHARE_PTR boost::shared_ptr
+#endif
 
 #endif
