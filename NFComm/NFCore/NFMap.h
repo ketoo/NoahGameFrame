@@ -50,7 +50,7 @@ public:
         if (itr != mObjectList.end())
         {
             pData = itr->second;
-            itr = mObjectList.erase(itr);
+            mObjectList.erase(itr);
         }
 
         return pData;

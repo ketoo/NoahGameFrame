@@ -36,26 +36,26 @@ class ElementConfigInfo
 public:
     ElementConfigInfo()
     {
-        m_pPropertyManager = std::shared_ptr<NFIPropertyManager>(NF_NEW NFCPropertyManager(NFIDENTID()));
-        m_pRecordManager = std::shared_ptr<NFIRecordManager>(NF_NEW NFCRecordManager(NFIDENTID()));
-        m_pComponentManager = std::shared_ptr<NFIComponentManager>(NF_NEW NFCComponentManager(NFIDENTID()));
+        m_pPropertyManager = NF_SHARE_PTR<NFIPropertyManager>(NF_NEW NFCPropertyManager(NFIDENTID()));
+        m_pRecordManager = NF_SHARE_PTR<NFIRecordManager>(NF_NEW NFCRecordManager(NFIDENTID()));
+        m_pComponentManager = NF_SHARE_PTR<NFIComponentManager>(NF_NEW NFCComponentManager(NFIDENTID()));
     }
 
     virtual ~ElementConfigInfo()
     {
     }
 
-    std::shared_ptr<NFIPropertyManager> GetPropertyManager()
+    NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager()
     {
         return m_pPropertyManager;
     }
 
-    std::shared_ptr<NFIRecordManager> GetRecordManager()
+    NF_SHARE_PTR<NFIRecordManager> GetRecordManager()
     {
         return m_pRecordManager;
     }
 
-    std::shared_ptr<NFIComponentManager> GetComponentManager()
+    NF_SHARE_PTR<NFIComponentManager> GetComponentManager()
     {
         return m_pComponentManager;
     }
@@ -63,9 +63,9 @@ protected:
 
     //std::string mstrConfigID;
 
-    std::shared_ptr<NFIPropertyManager> m_pPropertyManager;
-    std::shared_ptr<NFIRecordManager> m_pRecordManager;
-    std::shared_ptr<NFIComponentManager> m_pComponentManager;
+    NF_SHARE_PTR<NFIPropertyManager> m_pPropertyManager;
+    NF_SHARE_PTR<NFIRecordManager> m_pRecordManager;
+    NF_SHARE_PTR<NFIComponentManager> m_pComponentManager;
 };
 
 class NFCElementInfoModule
@@ -91,9 +91,9 @@ public:
 
     virtual bool ExistElement(const std::string& strConfigName);
 
-    virtual std::shared_ptr<NFIPropertyManager> GetPropertyManager(const std::string& strConfigName);
-    virtual std::shared_ptr<NFIRecordManager> GetRecordManager(const std::string& strConfigName);
-    virtual std::shared_ptr<NFIComponentManager> GetComponentManager(const std::string& strConfigName);
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager(const std::string& strConfigName);
+    virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager(const std::string& strConfigName);
+    virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager(const std::string& strConfigName);
 
     virtual NFINT64 GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName);
     virtual float GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName);
@@ -101,9 +101,9 @@ public:
     virtual const std::string& GetPropertyString(const std::string& strConfigName, const std::string& strPropertyName);
 
 protected:
-    virtual std::shared_ptr<NFIProperty> GetProperty(const std::string& strConfigName, const std::string& strPropertyName);
+    virtual NF_SHARE_PTR<NFIProperty> GetProperty(const std::string& strConfigName, const std::string& strPropertyName);
 
-    virtual bool Load(rapidxml::xml_node<>* attrNode, std::shared_ptr<NFILogicClass> pLogicClass);
+    virtual bool Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFILogicClass> pLogicClass);
 
     virtual bool LegalNumber(const char* str);
 protected:

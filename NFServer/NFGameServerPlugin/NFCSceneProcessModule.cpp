@@ -50,7 +50,7 @@ bool NFCSceneProcessModule::AfterInit()
 #ifdef NF_USE_ACTOR
 	int nSelfActorID = pPluginManager->GetActorID();
 #endif
-    std::shared_ptr<NFILogicClass> pLogicClass =  m_pLogicClassModule->GetElement("Scene");
+    NF_SHARE_PTR<NFILogicClass> pLogicClass =  m_pLogicClassModule->GetElement("Scene");
     if (pLogicClass.get())
     {
         NFList<std::string>& list = pLogicClass->GetConfigNameList();
@@ -96,16 +96,16 @@ bool NFCSceneProcessModule::AfterInit()
 
 bool NFCSceneProcessModule::CreateContinerObjectByFile( const int nContainerID, const int nGroupID, const std::string& strFileName )
 {
-    std::shared_ptr<NFMapEx<std::string, SceneGroupResource>> pSceneResource = mtSceneResourceConfig.GetElement( nContainerID );
+    NF_SHARE_PTR<NFMapEx<std::string, SceneGroupResource>> pSceneResource = mtSceneResourceConfig.GetElement( nContainerID );
     if ( pSceneResource.get() )
     {
-        std::shared_ptr<SceneGroupResource> pResourceMap = pSceneResource->GetElement( strFileName );
+        NF_SHARE_PTR<SceneGroupResource> pResourceMap = pSceneResource->GetElement( strFileName );
         if ( pResourceMap.get() )
         {
-            std::shared_ptr<NFMapEx<std::string, SceneSeedResource>> pNPCResourceList = pResourceMap->xSceneGroupResource.GetElement( "NPC" );
+            NF_SHARE_PTR<NFMapEx<std::string, SceneSeedResource>> pNPCResourceList = pResourceMap->xSceneGroupResource.GetElement( "NPC" );
             if ( pNPCResourceList.get() )
             {
-                std::shared_ptr<SceneSeedResource> pResource = pNPCResourceList->First( );
+                NF_SHARE_PTR<SceneSeedResource> pResource = pNPCResourceList->First( );
                 while ( pResource.get() )
                 {
                     CreateContinerObject( nContainerID, nGroupID, strFileName, pResource->strSeedID );
@@ -122,16 +122,16 @@ bool NFCSceneProcessModule::CreateContinerObjectByFile( const int nContainerID, 
 
 bool NFCSceneProcessModule::CreateContinerObject( const int nContainerID, const int nGroupID, const std::string& strFileName, const std::string& strSeedID )
 {
-    std::shared_ptr<NFMapEx<std::string, SceneGroupResource>> pSceneResource = mtSceneResourceConfig.GetElement( nContainerID );
+    NF_SHARE_PTR<NFMapEx<std::string, SceneGroupResource>> pSceneResource = mtSceneResourceConfig.GetElement( nContainerID );
     if ( pSceneResource.get() )
     {
-        std::shared_ptr<SceneGroupResource> pGroupResource = pSceneResource->GetElement( strFileName );
+        NF_SHARE_PTR<SceneGroupResource> pGroupResource = pSceneResource->GetElement( strFileName );
         if ( pSceneResource.get() )
         {
-            std::shared_ptr<NFMapEx<std::string, SceneSeedResource>> pResourceList = pGroupResource->xSceneGroupResource.GetElement( "NPC" );
+            NF_SHARE_PTR<NFMapEx<std::string, SceneSeedResource>> pResourceList = pGroupResource->xSceneGroupResource.GetElement( "NPC" );
             if ( pResourceList.get() )
             {
-                std::shared_ptr<SceneSeedResource> pResourceObject = pResourceList->GetElement( strSeedID );
+                NF_SHARE_PTR<SceneSeedResource> pResourceObject = pResourceList->GetElement( strSeedID );
                 if ( pResourceObject.get() )
                 {
                     const std::string& strClassName = m_pElementInfoModule->GetPropertyString(pResourceObject->strConfigID, "ClassName");
@@ -318,7 +318,7 @@ int NFCSceneProcessModule::OnLeaveSceneEvent( const NFIDENTID& object, const int
 
     NFINT32 nOldGroupID = var.Int(0);
 
-    std::shared_ptr<NFIObject> pObject = m_pKernelModule->GetObject(object);
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(object);
     if (pObject.get() && nOldGroupID > 0)
     {
         int nContainerID = pObject->GetPropertyInt("SceneID");
@@ -379,10 +379,10 @@ bool NFCSceneProcessModule::LoadInitFileResource( const int& nContainerID )
     const int nCanClone = m_pElementInfoModule->GetPropertyInt( szSceneIDName, "CanClone" );
 
     //场景对应资源
-    std::shared_ptr<NFMapEx<std::string, SceneGroupResource>> pSceneResourceMap = mtSceneResourceConfig.GetElement( nContainerID );
+    NF_SHARE_PTR<NFMapEx<std::string, SceneGroupResource>> pSceneResourceMap = mtSceneResourceConfig.GetElement( nContainerID );
     if ( !pSceneResourceMap.get() )
     {
-        pSceneResourceMap = std::shared_ptr<NFMapEx<std::string, SceneGroupResource>>(NF_NEW NFMapEx<std::string, SceneGroupResource>());
+        pSceneResourceMap = NF_SHARE_PTR<NFMapEx<std::string, SceneGroupResource>>(NF_NEW NFMapEx<std::string, SceneGroupResource>());
         mtSceneResourceConfig.AddElement( nContainerID, pSceneResourceMap );
     }
 
@@ -391,10 +391,10 @@ bool NFCSceneProcessModule::LoadInitFileResource( const int& nContainerID )
         std::string strFilePathName( strSceneFilePath );
         strFilePathName.append( "File.xml" );
 
-        std::shared_ptr<SceneGroupResource> pSceneGroupResource = pSceneResourceMap->GetElement( "File.xml" );
+        NF_SHARE_PTR<SceneGroupResource> pSceneGroupResource = pSceneResourceMap->GetElement( "File.xml" );
         if ( !pSceneGroupResource.get() )
         {
-            pSceneGroupResource = std::shared_ptr<SceneGroupResource>(NF_NEW SceneGroupResource());
+            pSceneGroupResource = NF_SHARE_PTR<SceneGroupResource>(NF_NEW SceneGroupResource());
             pSceneGroupResource->bCanClone = (nCanClone > 0 ? true : false);
             pSceneResourceMap->AddElement( "File.xml", pSceneGroupResource );
         }
@@ -410,10 +410,10 @@ bool NFCSceneProcessModule::LoadInitFileResource( const int& nContainerID )
             std::string strSeedFileName = pSeedFileNode->first_attribute( "ID" )->value();
             
             //资源对应种子列表
-            std::shared_ptr<NFMapEx<std::string, SceneSeedResource>> pSeedResourceList = pSceneGroupResource->xSceneGroupResource.GetElement(strSeedFileName);
+            NF_SHARE_PTR<NFMapEx<std::string, SceneSeedResource>> pSeedResourceList = pSceneGroupResource->xSceneGroupResource.GetElement(strSeedFileName);
             if ( !pSeedResourceList.get() )
             {
-                pSeedResourceList = std::shared_ptr<NFMapEx<std::string, SceneSeedResource>>(NF_NEW NFMapEx<std::string, SceneSeedResource>());
+                pSeedResourceList = NF_SHARE_PTR<NFMapEx<std::string, SceneSeedResource>>(NF_NEW NFMapEx<std::string, SceneSeedResource>());
                 pSceneGroupResource->xSceneGroupResource.AddElement( strSeedFileName, pSeedResourceList );
             }
 
@@ -437,10 +437,10 @@ bool NFCSceneProcessModule::LoadInitFileResource( const int& nContainerID )
                     assert(0);
                 }
 
-                std::shared_ptr<SceneSeedResource> pSeedResource = pSeedResourceList->GetElement(strSeedName);
+                NF_SHARE_PTR<SceneSeedResource> pSeedResource = pSeedResourceList->GetElement(strSeedName);
                 if ( !pSeedResource.get() )
                 {
-                    pSeedResource = std::shared_ptr<SceneSeedResource>(NF_NEW SceneSeedResource());
+                    pSeedResource = NF_SHARE_PTR<SceneSeedResource>(NF_NEW SceneSeedResource());
                     pSeedResourceList->AddElement( strSeedName, pSeedResource );
                 }
 

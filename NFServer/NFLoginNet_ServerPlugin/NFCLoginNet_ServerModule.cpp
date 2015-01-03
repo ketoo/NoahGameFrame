@@ -279,7 +279,7 @@ void NFCLoginNet_ServerModule::SynWorldToClient( const int nFD )
     xData.set_type(NFMsg::RSLT_WORLD_SERVER);
 
     NFMapEx<int, NFMsg::ServerInfoReport>* pWorldMap = m_pLoginNet_ClientModule->GetWorldMap();
-    std::shared_ptr<NFMsg::ServerInfoReport> pWorldData =  pWorldMap->First();
+    NF_SHARE_PTR<NFMsg::ServerInfoReport> pWorldData =  pWorldMap->First();
     while (pWorldData.get())
     {
         NFMsg::ServerInfo* pServerInfo = xData.add_info();
