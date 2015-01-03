@@ -26,9 +26,9 @@ public:
 
     virtual bool RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIDataList& argVar);
 
-    virtual std::shared_ptr<NFIProperty> AddProperty(const NFIDENTID& self, std::shared_ptr<NFIProperty> pProperty);
+    virtual NF_SHARE_PTR<NFIProperty> AddProperty(const NFIDENTID& self, NF_SHARE_PTR<NFIProperty> pProperty);
 
-    virtual std::shared_ptr<NFIProperty> AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex, const std::string& strScriptFunction);
+    virtual NF_SHARE_PTR<NFIProperty> AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex, const std::string& strScriptFunction);
 
     virtual bool SetProperty(const std::string& strPropertyName, const NFIDataList::TData& TData);
 

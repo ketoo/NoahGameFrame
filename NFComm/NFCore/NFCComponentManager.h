@@ -37,8 +37,8 @@ public:
 
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
 
-    virtual std::shared_ptr<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName);
-    virtual std::shared_ptr<NFIComponent> FindComponent(const std::string& strComponentName);
+    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName);
+    virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName);
 
     virtual bool SetEnable(const std::string& strComponentName, const bool bEnable);
 

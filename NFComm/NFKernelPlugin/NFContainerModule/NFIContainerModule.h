@@ -29,14 +29,14 @@ class NFCContainerGroupInfo
 public:
     NFCContainerGroupInfo(int nSceneID, int nWidth)
     {
-        m_pGridModule = std::shared_ptr<NFIGridModule>(NF_NEW NFCGridModule(nSceneID, nWidth));
+        m_pGridModule = NF_SHARE_PTR<NFIGridModule>(NF_NEW NFCGridModule(nSceneID, nWidth));
     }
 
     virtual ~NFCContainerGroupInfo()
     {
     }
 
-    std::shared_ptr<NFIGridModule> GetGridModule()
+    NF_SHARE_PTR<NFIGridModule> GetGridModule()
     {
         return m_pGridModule;
     }
@@ -47,7 +47,7 @@ public:
     }
 
 private:
-    std::shared_ptr<NFIGridModule> m_pGridModule;
+    NF_SHARE_PTR<NFIGridModule> m_pGridModule;
 };
 
 // all group in this scene
@@ -89,7 +89,7 @@ public:
 
     bool AddObjectToGroup(const int nGroupID, const NFIDENTID& ident)
     {
-        std::shared_ptr<NFCContainerGroupInfo> pInfo = GetElement(nGroupID);
+        NF_SHARE_PTR<NFCContainerGroupInfo> pInfo = GetElement(nGroupID);
         if (pInfo.get())
         {
             return pInfo->Add(ident);
@@ -100,7 +100,7 @@ public:
 
     bool RemoveObjectFromGroup(const int nGroupID, const NFIDENTID& ident)
     {
-        std::shared_ptr<NFCContainerGroupInfo> pInfo = GetElement(nGroupID);
+        NF_SHARE_PTR<NFCContainerGroupInfo> pInfo = GetElement(nGroupID);
         if (pInfo.get())
         {
             return pInfo->Remove(ident);
@@ -111,7 +111,7 @@ public:
 
     bool Execute(const float fLasFrametime, const float fStartedTime)
     {
-        std::shared_ptr<NFCContainerGroupInfo> pGroupInfo = First();
+        NF_SHARE_PTR<NFCContainerGroupInfo> pGroupInfo = First();
         while (pGroupInfo.get())
         {
             pGroupInfo->Execute(fLasFrametime, fStartedTime);

@@ -70,10 +70,10 @@ int NFCWorldNet_ServerModule::OnGameServerRegisteredProcess(const NFIPacket& msg
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        std::shared_ptr<ServerData> pServerData =  mGameMap.GetElement(pData->server_id());
+        NF_SHARE_PTR<ServerData> pServerData =  mGameMap.GetElement(pData->server_id());
         if (!pServerData.get())
         {
-            pServerData = std::shared_ptr<ServerData>(NF_NEW ServerData());
+            pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
             mGameMap.AddElement(pData->server_id(), pServerData);
         }
 
@@ -119,10 +119,10 @@ int NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess(const NFIPacket& ms
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        std::shared_ptr<ServerData> pServerData =  mGameMap.GetElement(pData->server_id());
+        NF_SHARE_PTR<ServerData> pServerData =  mGameMap.GetElement(pData->server_id());
         if (!pServerData.get())
         {
-            pServerData = std::shared_ptr<ServerData>(NF_NEW ServerData());
+            pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
             mGameMap.AddElement(pData->server_id(), pServerData);
         }
 
@@ -156,7 +156,7 @@ int NFCWorldNet_ServerModule::OnSelectServerEvent(const NFIDENTID& object, const
         return 0;
     }
 
-    std::shared_ptr<ServerData> pServerData = mProxyMap.First();
+    NF_SHARE_PTR<ServerData> pServerData = mProxyMap.First();
     if (pServerData.get())
     {
         NFMsg::AckConnectWorldResult xData;
@@ -193,10 +193,10 @@ int NFCWorldNet_ServerModule::OnProxyServerRegisteredProcess(const NFIPacket& ms
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        std::shared_ptr<ServerData> pServerData =  mProxyMap.GetElement(pData->server_id());
+        NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.GetElement(pData->server_id());
         if (!pServerData)
         {
-            pServerData = std::shared_ptr<ServerData>(NF_NEW ServerData());
+            pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
             mProxyMap.AddElement(pData->server_id(), pServerData);
         }
 
@@ -243,10 +243,10 @@ int NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess(const NFIPacket& m
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        std::shared_ptr<ServerData> pServerData =  mProxyMap.GetElement(pData->server_id());
+        NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.GetElement(pData->server_id());
         if (!pServerData.get())
         {
-            pServerData = std::shared_ptr<ServerData>(NF_NEW ServerData());
+            pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
             mGameMap.AddElement(pData->server_id(), pServerData);
         }
 
@@ -332,7 +332,7 @@ void NFCWorldNet_ServerModule::SynGameToProxy()
 {
     NFMsg::ServerInfoReportList xData;
 
-    std::shared_ptr<ServerData> pServerData =  mProxyMap.First();
+    NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.First();
     while (pServerData.get())
     {
         SynGameToProxy(pServerData->nFD);
@@ -345,7 +345,7 @@ void NFCWorldNet_ServerModule::SynGameToProxy( const int nFD )
 {
     NFMsg::ServerInfoReportList xData;
 
-    std::shared_ptr<ServerData> pServerData =  mGameMap.First();
+    NF_SHARE_PTR<ServerData> pServerData =  mGameMap.First();
     while (pServerData.get())
     {
         NFMsg::ServerInfoReport* pData = xData.add_server_list();
@@ -360,7 +360,7 @@ void NFCWorldNet_ServerModule::SynGameToProxy( const int nFD )
 void NFCWorldNet_ServerModule::OnClientDisconnect( const int nAddress )
 {
     //不管是game还是proxy都要找出来,替他反注册
-    std::shared_ptr<ServerData> pServerData =  mGameMap.First();
+    NF_SHARE_PTR<ServerData> pServerData =  mGameMap.First();
     while (pServerData.get())
     {
         if (nAddress == pServerData->nFD)

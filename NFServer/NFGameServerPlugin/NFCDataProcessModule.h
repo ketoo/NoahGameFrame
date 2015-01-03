@@ -47,11 +47,11 @@ protected:
 protected:
     int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    virtual int LoadProperty( const NFIDENTID& self, std::shared_ptr<NFIPropertyManager> pProManager );
-    virtual int LoadRecord( const NFIDENTID& self, std::shared_ptr<NFIRecordManager> pRecord );
+    virtual int LoadProperty( const NFIDENTID& self, NF_SHARE_PTR<NFIPropertyManager> pProManager );
+    virtual int LoadRecord( const NFIDENTID& self, NF_SHARE_PTR<NFIRecordManager> pRecord );
 
-    virtual int SaveProperty( const NFIDENTID& self, std::shared_ptr<NFIPropertyManager> pProManager );
-    virtual int SaveRecord( const NFIDENTID& self, std::shared_ptr<NFIRecordManager> pRecordManager );
+    virtual int SaveProperty( const NFIDENTID& self, NF_SHARE_PTR<NFIPropertyManager> pProManager );
+    virtual int SaveRecord( const NFIDENTID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager );
 
 private:
 
