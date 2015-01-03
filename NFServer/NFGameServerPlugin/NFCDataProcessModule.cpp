@@ -64,16 +64,16 @@ int NFCDataProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std::
 
 int NFCDataProcessModule::LoadDataFormNoSql( const NFIDENTID& self )
 {
-    std::shared_ptr<NFIObject> pObject = m_pKernelModule->GetObject( self );
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
     if ( pObject.get() )
     {
-        std::shared_ptr<NFIPropertyManager> pProManager = pObject->GetPropertyManager();
+        NF_SHARE_PTR<NFIPropertyManager> pProManager = pObject->GetPropertyManager();
         if ( pProManager.get() )
         {
             LoadProperty( self, pProManager );
         }
 
-        std::shared_ptr<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
+        NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
         if ( pRecordManager.get() )
         {
             LoadRecord( self, pRecordManager );
@@ -85,7 +85,7 @@ int NFCDataProcessModule::LoadDataFormNoSql( const NFIDENTID& self )
 
 int NFCDataProcessModule::SaveDataToNoSql(const NFIDENTID& self, bool bOffline/* = false*/)
 {
-    std::shared_ptr<NFIObject> pObject = m_pKernelModule->GetObject( self );
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
     if ( pObject.get() )
     {
         SaveProperty( self, pObject->GetPropertyManager() );
@@ -140,7 +140,7 @@ void NFCDataProcessModule::HandlerLog( const NFIActorMessage& message, const The
 }
 #endif
 
-int NFCDataProcessModule::LoadProperty( const NFIDENTID& self, std::shared_ptr<NFIPropertyManager> pProManager )
+int NFCDataProcessModule::LoadProperty( const NFIDENTID& self, NF_SHARE_PTR<NFIPropertyManager> pProManager )
 {
     //m_pNoSqlModule->QueryRoleProperty();
 
@@ -149,18 +149,18 @@ int NFCDataProcessModule::LoadProperty( const NFIDENTID& self, std::shared_ptr<N
     return 0;
 }
 
-int NFCDataProcessModule::LoadRecord( const NFIDENTID& self, std::shared_ptr<NFIRecordManager> pRecord )
+int NFCDataProcessModule::LoadRecord( const NFIDENTID& self, NF_SHARE_PTR<NFIRecordManager> pRecord )
 {
 
     return 0;
 }
 
-int NFCDataProcessModule::SaveProperty( const NFIDENTID& self, std::shared_ptr<NFIPropertyManager> pProManager )
+int NFCDataProcessModule::SaveProperty( const NFIDENTID& self, NF_SHARE_PTR<NFIPropertyManager> pProManager )
 {
     return 0;
 }
 
-int NFCDataProcessModule::SaveRecord( const NFIDENTID& self, std::shared_ptr<NFIRecordManager> pRecord )
+int NFCDataProcessModule::SaveRecord( const NFIDENTID& self, NF_SHARE_PTR<NFIRecordManager> pRecord )
 {
     return 0;
 }

@@ -107,6 +107,7 @@
     <ClInclude Include="NFIDataList.h" />
     <ClInclude Include="NFIHeartBeatManager.h" />
     <ClInclude Include="NFIMemory.h" />
+    <ClInclude Include="NFMapEx.h" />
     <ClInclude Include="NFQueue.h" />
     <ClInclude Include="NFSingleton.h" />
     <ClInclude Include="NFCore.h" />

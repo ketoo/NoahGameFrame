@@ -60,10 +60,10 @@ int NFCPropertyModule::SetPropertyValue( const NFIDENTID& self, const std::strin
 {
     if ( NFPropertyGroup::NPG_ALL != eGroupType )
     {
-        std::shared_ptr<NFIObject> pObject = m_pKernelModule->GetObject(self);
+        NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
         if (pObject.get())
         {
-            std::shared_ptr<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(mstrCommPropertyName);
+            NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(mstrCommPropertyName);
             if (pRecord.get())
             {
                 pRecord->SetUsed(eGroupType, true);
@@ -85,10 +85,10 @@ int NFCPropertyModule::AddPropertyValue( const NFIDENTID& self, const std::strin
 {
     if ( NFPropertyGroup::NPG_ALL != eGroupType )
     {
-        std::shared_ptr<NFIObject> pObject = m_pKernelModule->GetObject(self);
+        NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
         if (pObject.get())
         {
-            std::shared_ptr<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(mstrCommPropertyName);
+            NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(mstrCommPropertyName);
             if (pRecord.get())
             {
                 pRecord->SetUsed(eGroupType, true);
@@ -106,10 +106,10 @@ int NFCPropertyModule::SubPropertyValue( const NFIDENTID& self, const std::strin
 {
     if ( NFPropertyGroup::NPG_ALL != eGroupType )
     {
-        std::shared_ptr<NFIObject> pObject = m_pKernelModule->GetObject(self);
+        NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
         if (pObject.get())
         {
-            std::shared_ptr<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(mstrCommPropertyName);
+            NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(mstrCommPropertyName);
             if (pRecord.get())
             {
                 pRecord->SetUsed(eGroupType, true);
@@ -138,7 +138,7 @@ int NFCPropertyModule::OnRecordPropertyEvent( const NFIDENTID& self, const std::
     //¼ÆËã×ÜÖµ
  
     int nAllValue = 0;
-    std::shared_ptr<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, mstrCommPropertyName);
+    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, mstrCommPropertyName);
     for ( int i = 0; i < ( int )( NFPropertyGroup::NPG_ALL ); i++ )
     {
         if ( i < pRecord->GetRows() )
@@ -184,7 +184,7 @@ int NFCPropertyModule::OnObjectClassEvent( const NFIDENTID& self, const std::str
 
 int NFCPropertyModule::RefreshBaseProperty( const NFIDENTID& self )
 {
-    std::shared_ptr<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, mstrCommPropertyName);
+    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, mstrCommPropertyName);
     if (!pRecord.get())
     {
         return 1;
