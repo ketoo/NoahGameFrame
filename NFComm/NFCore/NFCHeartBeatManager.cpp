@@ -27,7 +27,7 @@ void NFCHeartBeatElement::DoHeartBeatEvent()
 //////////////////////////////////////////////////////////////////////////
 bool NFCHeartBeatManager::Execute(const float fLastTime, const float fAllTime)
 {
-    std::shared_ptr<NFCHeartBeatElement> pElement = mHeartBeatElementMapEx.First();
+    NF_SHARE_PTR<NFCHeartBeatElement> pElement = mHeartBeatElementMapEx.First();
     while (pElement.get())
     {
         int nCount = pElement->nCount;
@@ -87,7 +87,7 @@ bool NFCHeartBeatManager::Execute(const float fLastTime, const float fAllTime)
     {
         if (NULL == mHeartBeatElementMapEx.GetElement(iter->strBeatName))
         {
-            std::shared_ptr<NFCHeartBeatElement> pHeartBeatEx(NF_NEW NFCHeartBeatElement());
+            NF_SHARE_PTR<NFCHeartBeatElement> pHeartBeatEx(NF_NEW NFCHeartBeatElement());
             *pHeartBeatEx = *iter;
             mHeartBeatElementMapEx.AddElement(pHeartBeatEx->strBeatName, pHeartBeatEx);
         }

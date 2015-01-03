@@ -55,9 +55,9 @@ public:
 
     virtual int Type(const NFIDENTID& self);
 
-    virtual std::shared_ptr<NFIObject> GetObject(const NFIDENTID& ident);
+    virtual NF_SHARE_PTR<NFIObject> GetObject(const NFIDENTID& ident);
 
-    virtual std::shared_ptr<NFIObject> CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg);
+    virtual NF_SHARE_PTR<NFIObject> CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg);
 
     virtual bool DestroyObject(const NFIDENTID& self);
 
@@ -84,7 +84,7 @@ public:
     virtual NFIDENTID GetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName);
 
     //////////////////////////////////////////////////////////////////////////
-    virtual std::shared_ptr<NFIRecord> FindRecord(const NFIDENTID& self, const std::string& strRecordName);
+    virtual NF_SHARE_PTR<NFIRecord> FindRecord(const NFIDENTID& self, const std::string& strRecordName);
 
     virtual bool ClearRecord(const NFIDENTID& self, const std::string& strRecordName);
 
@@ -227,7 +227,7 @@ private:
     NFIDENTID mnCurExeObject;
     float fLastTotal;
 
-    std::shared_ptr<NFIContainerModule> m_pContainerModule;
+    NF_SHARE_PTR<NFIContainerModule> m_pContainerModule;
     
     NFILogModule* m_pLogModule;
     NFILogicClassModule* m_pLogicClassModule;

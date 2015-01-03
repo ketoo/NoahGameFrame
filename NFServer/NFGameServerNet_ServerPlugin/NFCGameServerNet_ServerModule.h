@@ -40,7 +40,7 @@
         return;                                         \
     }                                                   \
                                                         \
-    std::shared_ptr<NFIObject> pObject = m_pKernelModule->GetObject(nPlayerID); \
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(nPlayerID); \
     if ( NULL == pObject.get() )                              \
     {                                                   \
         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "FromClient Object do not Exist", "", __FUNCTION__, __LINE__); \
@@ -152,7 +152,7 @@ private:
     {
         ServerData()
         {
-            pData = std::shared_ptr<NFMsg::ServerInfoReport>(NF_NEW NFMsg::ServerInfoReport());
+            pData = NF_SHARE_PTR<NFMsg::ServerInfoReport>(NF_NEW NFMsg::ServerInfoReport());
             nFD = 0;
         }
 
@@ -163,7 +163,7 @@ private:
         }
 
         int nFD;
-        std::shared_ptr<NFMsg::ServerInfoReport> pData;
+        NF_SHARE_PTR<NFMsg::ServerInfoReport> pData;
 
         //此网关上所有的对象<角色ID,gate_FD>
         std::map<NFIDENTID, int> xRoleInfo;
