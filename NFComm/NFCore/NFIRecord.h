@@ -26,7 +26,7 @@ public:
         Sort,
     };
 
-    typedef std::vector<std::shared_ptr<NFIDataList::TData>> TRECORDVEC;
+    typedef std::vector<NF_SHARE_PTR<NFIDataList::TData>> TRECORDVEC;
     typedef TRECORDVEC::const_iterator TRECORDVECCONSTITER;
 
     virtual ~NFIRecord() {}

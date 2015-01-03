@@ -77,10 +77,10 @@ bool NFCPatrolState::RandomPatrol(const NFIDENTID& self)
     //const std::string& strNPCID = m_pKernelModule->GetPropertyString(self, "ConfigID");
     //if (strConfigID.length() > 0)
     //{
-        //std::shared_ptr<NFIPropertyManager> propertyManager = m_pElementInfoModule->GetPropertyManager(strConfigID.c_str());
-        //std::shared_ptr<NFIProperty> propertyX =  propertyManager->GetElement("SeedX");
-        //std::shared_ptr<NFIProperty> propertyY =  propertyManager->GetElement("SeedY");
-        //std::shared_ptr<NFIProperty> propertyZ =  propertyManager->GetElement("SeedZ");
+        //NF_SHARE_PTR<NFIPropertyManager> propertyManager = m_pElementInfoModule->GetPropertyManager(strConfigID.c_str());
+        //NF_SHARE_PTR<NFIProperty> propertyX =  propertyManager->GetElement("SeedX");
+        //NF_SHARE_PTR<NFIProperty> propertyY =  propertyManager->GetElement("SeedY");
+        //NF_SHARE_PTR<NFIProperty> propertyZ =  propertyManager->GetElement("SeedZ");
 
         //float fCurX = propertyX->GetFloat();
         //float fCurY = propertyY->GetFloat();

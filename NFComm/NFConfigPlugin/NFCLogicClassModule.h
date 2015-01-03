@@ -37,9 +37,9 @@ public:
         m_pParentClass = NULL;
         mstrClassName = strClassName;
 
-        m_pPropertyManager = std::shared_ptr<NFIPropertyManager>(NF_NEW NFCPropertyManager(NFIDENTID()));
-        m_pRecordManager = std::shared_ptr<NFIRecordManager>(NF_NEW NFCRecordManager(NFIDENTID()));
-        m_pComponentManager = std::shared_ptr<NFIComponentManager>(NF_NEW NFCComponentManager(NFIDENTID()));
+        m_pPropertyManager = NF_SHARE_PTR<NFIPropertyManager>(NF_NEW NFCPropertyManager(NFIDENTID()));
+        m_pRecordManager = NF_SHARE_PTR<NFIRecordManager>(NF_NEW NFCRecordManager(NFIDENTID()));
+        m_pComponentManager = NF_SHARE_PTR<NFIComponentManager>(NF_NEW NFCComponentManager(NFIDENTID()));
     }
 
     virtual ~NFCLogicClass()
@@ -47,27 +47,27 @@ public:
         ClearAll();
     }
 
-    virtual std::shared_ptr<NFIPropertyManager> GetPropertyManager()
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager()
     {
         return m_pPropertyManager;
     }
 
-    virtual std::shared_ptr<NFIRecordManager> GetRecordManager()
+    virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager()
     {
         return m_pRecordManager;
     }
 
-    virtual std::shared_ptr<NFIComponentManager> GetComponentManager()
+    virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager()
     {
         return m_pComponentManager;
     }
 
-    void SetParent(std::shared_ptr<NFILogicClass> pClass)
+    void SetParent(NF_SHARE_PTR<NFILogicClass> pClass)
     {
         m_pParentClass = pClass;
     }
 
-    std::shared_ptr<NFILogicClass> GetParent()
+    NF_SHARE_PTR<NFILogicClass> GetParent()
     {
         return m_pParentClass;
     }
@@ -110,11 +110,11 @@ public:
     }
 
 private:
-    std::shared_ptr<NFIPropertyManager> m_pPropertyManager;
-    std::shared_ptr<NFIRecordManager> m_pRecordManager;
-    std::shared_ptr<NFIComponentManager> m_pComponentManager;
+    NF_SHARE_PTR<NFIPropertyManager> m_pPropertyManager;
+    NF_SHARE_PTR<NFIRecordManager> m_pRecordManager;
+    NF_SHARE_PTR<NFIComponentManager> m_pComponentManager;
 
-    std::shared_ptr<NFILogicClass> m_pParentClass;
+    NF_SHARE_PTR<NFILogicClass> m_pParentClass;
     std::string mstrType;
     std::string mstrClassName;
     std::string mstrClassInstancePath;
@@ -136,23 +136,23 @@ public:
     virtual bool Save();
     virtual bool Clear();
 
-    virtual std::shared_ptr<NFIPropertyManager> GetClassPropertyManager(const std::string& strClassName);
-    virtual std::shared_ptr<NFIRecordManager> GetClassRecordManager(const std::string& strClassName);
-    virtual std::shared_ptr<NFIComponentManager> GetClassComponentManager(const std::string& strClassName);
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetClassPropertyManager(const std::string& strClassName);
+    virtual NF_SHARE_PTR<NFIRecordManager> GetClassRecordManager(const std::string& strClassName);
+    virtual NF_SHARE_PTR<NFIComponentManager> GetClassComponentManager(const std::string& strClassName);
 
 
     virtual bool AddClass(const std::string& strClassName, const std::string& strParentName);
 protected:
 
     virtual TDATA_TYPE ComputerType(const char* pstrTypeName, NFIDataList::TData& var);
-    virtual bool AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, std::shared_ptr<NFILogicClass> pClass);
-    virtual bool AddRecords(rapidxml::xml_node<>* pRecordRootNode, std::shared_ptr<NFILogicClass> pClass);
-    virtual bool AddComponents(rapidxml::xml_node<>* pRecordRootNode, std::shared_ptr<NFILogicClass> pClass);
-    virtual bool AddClassInclude(const char* pstrClassFilePath, std::shared_ptr<NFILogicClass> pClass);
-    virtual bool AddClass(const char* pstrClassFilePath, std::shared_ptr<NFILogicClass> pClass);
+    virtual bool AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NF_SHARE_PTR<NFILogicClass> pClass);
+    virtual bool AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_PTR<NFILogicClass> pClass);
+    virtual bool AddComponents(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_PTR<NFILogicClass> pClass);
+    virtual bool AddClassInclude(const char* pstrClassFilePath, NF_SHARE_PTR<NFILogicClass> pClass);
+    virtual bool AddClass(const char* pstrClassFilePath, NF_SHARE_PTR<NFILogicClass> pClass);
 
     //加载此节点的类
-    virtual bool Load(rapidxml::xml_node<>* attrNode, std::shared_ptr<NFILogicClass> pParentClass);
+    virtual bool Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFILogicClass> pParentClass);
 
 protected:
     NFIElementInfoModule* m_pElementInfoModule;

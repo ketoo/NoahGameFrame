@@ -17,8 +17,8 @@ class NFIComponentManager : public NFILogicModule, public NFMapEx<std::string, N
 {
 public:
     virtual ~NFIComponentManager() {}
-    virtual std::shared_ptr<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
-    virtual std::shared_ptr<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
+    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
+    virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
 
     virtual bool SetEnable(const std::string& strComponentName, const bool bEnable) = 0;
 
