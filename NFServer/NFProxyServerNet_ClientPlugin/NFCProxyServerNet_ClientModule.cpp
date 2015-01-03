@@ -249,14 +249,14 @@ int NFCProxyServerNet_ClientModule::OnSelectServerResultProcess(const NFIPacket&
         return 0;
     }
 
-    std::shared_ptr<ConnectData> pConnectData = mWantToConnectMap.GetElement(xMsg.account());
+    NF_SHARE_PTR<ConnectData> pConnectData = mWantToConnectMap.GetElement(xMsg.account());
     if (NULL != pConnectData.get())
     {
         pConnectData->strConnectKey = xMsg.world_key();
         return 0;
     }
 
-    pConnectData = std::shared_ptr<ConnectData>(NF_NEW ConnectData());
+    pConnectData = NF_SHARE_PTR<ConnectData>(NF_NEW ConnectData());
     pConnectData->strAccount = xMsg.account();
     pConnectData->strConnectKey = xMsg.world_key();
     mWantToConnectMap.AddElement(pConnectData->strAccount, pConnectData);

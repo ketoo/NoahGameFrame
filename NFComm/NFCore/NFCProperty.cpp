@@ -58,7 +58,7 @@ void NFCProperty::SetValue(const NFIDataList::TData& TData)
             return;
         }
 
-        m_pTData = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
+        m_pTData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
         m_pTData->nType = TData.nType;
         m_pTData->variantData = TData.variantData;
     }
@@ -285,7 +285,7 @@ bool NFCProperty::SetInt(const NFINT64 value)
             return false;
         }
 
-        m_pTData = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
+        m_pTData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
         m_pTData->nType = TDATA_INT;
         m_pTData->variantData = (NFINT64)0;
     }
@@ -332,7 +332,7 @@ bool NFCProperty::SetFloat(const float value)
             return false;
         }
 
-        m_pTData = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
+        m_pTData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
         m_pTData->nType = TDATA_FLOAT;
         m_pTData->variantData = (float)0.0f;
     }
@@ -379,7 +379,7 @@ bool NFCProperty::SetDouble(const double value)
             return false;
         }
 
-        m_pTData = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
+        m_pTData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
         m_pTData->nType = TDATA_DOUBLE;
         m_pTData->variantData = (double)0.0f;
 
@@ -427,7 +427,7 @@ bool NFCProperty::SetString(const std::string& value)
             return false;
         }
 
-        m_pTData = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
+        m_pTData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
         m_pTData->nType = TDATA_STRING;
         m_pTData->variantData = NULL_STR;
     }
@@ -474,7 +474,7 @@ bool NFCProperty::SetObject(const NFIDENTID& value)
             return false;
         }
 
-        m_pTData = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
+        m_pTData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
         m_pTData->nType = TDATA_OBJECT;
         m_pTData->variantData = (NFINT64)0;
 
@@ -522,7 +522,7 @@ bool NFCProperty::SetPointer(const void* value)
     //        return false;
     //    }
 
-    //    m_pTData = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
+    //    m_pTData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
     //    m_pTData->nType = TDATA_POINTER;
     //    m_pTData->variantData = (void*)NULL;
     //}

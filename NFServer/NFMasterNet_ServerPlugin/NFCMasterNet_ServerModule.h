@@ -74,7 +74,7 @@ private:
     {
         ServerData()
         {
-            pData = std::shared_ptr<NFMsg::ServerInfoReport>(NF_NEW NFMsg::ServerInfoReport());
+            pData = NF_SHARE_PTR<NFMsg::ServerInfoReport>(NF_NEW NFMsg::ServerInfoReport());
             nFD = 0;
         }
 
@@ -85,7 +85,7 @@ private:
         }
 
         int nFD;
-        std::shared_ptr<NFMsg::ServerInfoReport> pData;
+        NF_SHARE_PTR<NFMsg::ServerInfoReport> pData;
     };
 
 private:
