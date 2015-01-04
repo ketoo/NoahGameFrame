@@ -38,7 +38,7 @@ bool NFCLoginNet_ServerModule::AfterInit()
 	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
 	m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-    m_pLoginNet_ClientModule = dynamic_cast<NFILoginNet_ClientModule*>(pPluginManager->FindModule("NFCLoginNet_ClientModule"));
+    m_pLoginNet_ClientModule = dynamic_cast<NFILoginToMasterModule*>(pPluginManager->FindModule("NFCLoginNet_ClientModule"));
     
 
 	assert(NULL != m_pEventProcessModule);

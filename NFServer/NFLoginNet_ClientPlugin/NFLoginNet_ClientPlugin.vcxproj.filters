@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="NFLoginNet_ClientPlugin.h" />
-    <ClInclude Include="NFCLoginNet_ClientModule.h" />
+    <ClInclude Include="NFCLoginToMasterModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFLoginNet_ClientPlugin.cpp" />
-    <ClCompile Include="NFCLoginNet_ClientModule.cpp" />
+    <ClCompile Include="NFCLoginToMasterModule.cpp" />
   </ItemGroup>
 </Project>
