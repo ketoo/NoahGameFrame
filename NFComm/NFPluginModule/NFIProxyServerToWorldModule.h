@@ -13,7 +13,7 @@
 #include "NFILogicModule.h"
 #include "NFINetModule.h"
 
-class NFIProxyServerNet_ClientModule
+class NFIProxyServerToWorldModule
     : public  NFINetModule, public NFMap<int64_t, NFINetModule>
 {
 public:
