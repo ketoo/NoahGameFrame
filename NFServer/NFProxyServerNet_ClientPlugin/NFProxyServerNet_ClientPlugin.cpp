@@ -8,7 +8,7 @@
 
 
 //#include "stdafx.h"
-#include "NFCProxyServerNet_ClientModule.h"
+#include "NFCProxyServerToWorldModule.h"
 #include "NFProxyServerNet_ClientPlugin.h"
 
 //
@@ -41,11 +41,11 @@ const std::string NFProxyServerNet_ClientPlugin::GetPluginName()
 
 void NFProxyServerNet_ClientPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFCProxyServerNet_ClientModule)
+    REGISTER_MODULE(pPluginManager, NFCProxyServerToWorldModule)
 
 }
 
 void NFProxyServerNet_ClientPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCProxyServerNet_ClientModule)
+    UNREGISTER_MODULE(pPluginManager, NFCProxyServerToWorldModule)
 }

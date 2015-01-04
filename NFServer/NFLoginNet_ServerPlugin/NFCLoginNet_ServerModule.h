@@ -21,7 +21,7 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIActor.h"
-#include "NFComm/NFPluginModule/NFILoginNet_ClientModule.h"
+#include "NFComm/NFPluginModule/NFILoginToMasterModule.h"
 
 #define NET_MSG_PROCESS(xNFMsg, msg) \
     NFIDENTID nPlayerID; \
@@ -93,7 +93,7 @@ protected:
 
 private:
 
-    NFILoginNet_ClientModule* m_pLoginNet_ClientModule;
+    NFILoginToMasterModule* m_pLoginNet_ClientModule;
     NFIEventProcessModule* m_pEventProcessModule;
 	NFILogicClassModule* m_pLogicClassModule;
 	NFIElementInfoModule* m_pElementInfoModule;	

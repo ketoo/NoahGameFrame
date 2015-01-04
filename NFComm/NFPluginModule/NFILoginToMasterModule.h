@@ -13,7 +13,7 @@
 #include "NFILogicModule.h"
 #include "NFComm/NFMessageDefine/NFMsgPreGame.pb.h"
 
-class NFILoginNet_ClientModule
+class NFILoginToMasterModule
     : public NFINetModule
 {
 
