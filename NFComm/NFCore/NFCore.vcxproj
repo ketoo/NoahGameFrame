@@ -95,6 +95,7 @@
   <ItemGroup>
     <ClInclude Include="NFCComponent.h" />
     <ClInclude Include="NFCComponentManager.h" />
+    <ClInclude Include="NFCConsistentHash.hpp" />
     <ClInclude Include="NFCDataList.h" />
     <ClInclude Include="NFCHeartBeatManager.h" />
     <ClInclude Include="NFCMemory .h" />
