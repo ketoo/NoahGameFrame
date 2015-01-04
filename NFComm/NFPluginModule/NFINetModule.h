@@ -184,7 +184,7 @@ public:
 			{
 			case QueueEventPack::ON_NET_RECIVE:
 				{
-					if(!mRecvCB)
+					if(mRecvCB)
 					{
 
 						NFCPacket xPacket(m_pNet->GetHeadLen());
@@ -207,7 +207,7 @@ public:
 				break;
 			case QueueEventPack::ON_NET_FD_EVT:
 				{
-					if(!mEventCB)
+					if(mEventCB)
 					{
 						mEventCB(xEventPack.nFD, (NF_NET_EVENT)xEventPack.nMsgID);
 					}
