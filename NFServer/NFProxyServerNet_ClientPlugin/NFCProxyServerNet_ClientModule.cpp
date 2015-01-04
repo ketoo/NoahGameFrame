@@ -154,18 +154,20 @@ void NFCProxyServerNet_ClientModule::Register()
 {
 
     int nProxyID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
-    const std::string& strIP = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "IP");
+	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
     int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
+	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
+	const std::string& strIP = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "IP");
 
     NFMsg::ServerInfoReportList xMsg;
     NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
 
     pData->set_server_id(nProxyID);
-    pData->set_server_name("代理服务器1");
+    pData->set_server_name(strName);
     pData->set_server_cur_count(0);
     pData->set_server_ip(strIP);
     pData->set_server_port(nPort);
-    pData->set_server_max_online(100000);
+    pData->set_server_max_online(nMaxConnect);
     pData->set_server_state(NFMsg::EST_NARMAL);
 
     SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg, GetNet()->FD());
@@ -175,22 +177,23 @@ void NFCProxyServerNet_ClientModule::Register()
 
 void NFCProxyServerNet_ClientModule::UnRegister()
 {
-    int nProxyID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
-    const std::string& strIP = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "IP");
-    int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Cpu");
-    int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
-    int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
+    const int nProxyID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
+	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
+    const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Cpu");
+    const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
+	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
+	const std::string& strIP = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "IP");
 
 
     NFMsg::ServerInfoReportList xMsg;
     NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
 
     pData->set_server_id(nProxyID);
-    pData->set_server_name("代理服务器1");
+    pData->set_server_name(strName);
     pData->set_server_cur_count(0);
     pData->set_server_ip("");
     pData->set_server_port(0);
-    pData->set_server_max_online(100000);
+    pData->set_server_max_online(nMaxConnect);
     pData->set_server_state(NFMsg::EST_MAINTEN);
 
     SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_UNREGISTERED, xMsg, GetNet()->FD());
@@ -376,21 +379,23 @@ void NFCProxyConnectObject::Register()
 
 void NFCProxyConnectObject::UnRegister()
 {
-    const int nID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
-    const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
-    const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
-    const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
+	const int nProxyID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
+	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
+	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Cpu");
+	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
+	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
+	const std::string& strIP = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "IP");
 
 
     NFMsg::ServerInfoReportList xMsg;
     NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
 
-    pData->set_server_id(nID);
-    pData->set_server_name("代理1");
+    pData->set_server_id(nProxyID);
+    pData->set_server_name(strName);
     pData->set_server_cur_count(0);
     pData->set_server_ip("");
     pData->set_server_port(0);
-    pData->set_server_max_online(100000);
+    pData->set_server_max_online(nMaxConnect);
     pData->set_server_state(NFMsg::EST_NARMAL);
 
     SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_UNREGISTERED, xMsg, GetNet()->FD());

@@ -69,16 +69,17 @@ void NFCWorldNet_ClientModule::Register()
 	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
 	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
+	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
 
     NFMsg::ServerInfoReportList xMsg;
     NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
 
     pData->set_server_id(nID);
-    pData->set_server_name("世界服务器1");
+    pData->set_server_name(strName);
     pData->set_server_cur_count(0);
     pData->set_server_ip("");
     pData->set_server_port(0);
-    pData->set_server_max_online(100000);
+    pData->set_server_max_online(nMaxConnect);
     pData->set_server_state(NFMsg::EST_NARMAL);
 
     SendMsgPB(NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED, xMsg, GetNet()->FD());
@@ -92,17 +93,17 @@ void NFCWorldNet_ClientModule::UnRegister()
 	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
 	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
-
+	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
 
     NFMsg::ServerInfoReportList xMsg;
     NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
 
     pData->set_server_id(nID);
-    pData->set_server_name("世界服务器1");
+    pData->set_server_name(strName);
     pData->set_server_cur_count(0);
     pData->set_server_ip("");
     pData->set_server_port(0);
-    pData->set_server_max_online(100000);
+    pData->set_server_max_online(nMaxConnect);
     pData->set_server_state(NFMsg::EST_NARMAL);
 
     SendMsgPB(NFMsg::EGameMsgID::EGMI_MTL_WORLD_UNREGISTERED, xMsg, GetNet()->FD());

@@ -42,14 +42,14 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
 
     NetObject* pObject = (NetObject*)user_data;
     NFCNet* pNet = (NFCNet*)pObject->GetNet();
-    if(!pNet->mEventCB)
+    if(pNet->mEventCB)
     {
         pNet->mEventCB(pObject->GetFd(), NF_NET_EVENT(events));
     }
 
     if (events & BEV_EVENT_EOF)
     {
-        printf("%d Connection closed.\n", pObject->GetFd());
+        //printf("%d Connection closed.\n", pObject->GetFd());
         pNet->CloseNetObject(pObject->GetFd());
         if (!pNet->mbServer)
         {
@@ -59,7 +59,7 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
     }
     else if (events & BEV_EVENT_ERROR)
     {
-        printf("%d Got an error on the connection: %d\n", pObject->GetFd(),	errno);/*XXX win32*/
+        //printf("%d Got an error on the connection: %d\n", pObject->GetFd(),	errno);/*XXX win32*/
         pNet->CloseNetObject(pObject->GetFd());
         if (!pNet->mbServer)
         {
@@ -69,7 +69,7 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
     }
     else if (events & BEV_EVENT_TIMEOUT)
     {
-        printf("%d read timeout: %d\n", pObject->GetFd(), errno);/*XXX win32*/
+        //printf("%d read timeout: %d\n", pObject->GetFd(), errno);/*XXX win32*/
         pNet->CloseNetObject(pObject->GetFd());
 
         if (!pNet->mbServer)
@@ -80,7 +80,8 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
     }
     else if (events & BEV_EVENT_CONNECTED)
     {
-        printf("%d Connection successed\n", pObject->GetFd());/*XXX win32*/
+		pNet->mfRunTimeReseTime = 0.0f;
+        //printf("%d Connection successed\n", pObject->GetFd());/*XXX win32*/
     }
 }
 
@@ -334,7 +335,7 @@ bool NFCNet::Dismantle(NetObject* pObject )
             packet.SetFd(pObject->GetFd());
 
             int nRet = 0;
-            if (!mRecvCB)
+            if (mRecvCB)
             {
                 mRecvCB(packet);
             }
@@ -623,11 +624,11 @@ void NFCNet::ExeReset( const float fLastFrameTime )
 {
 	if (!mbServer)
 	{
-		if (mfRunTimeReseTime > 0.000f)
+		if (mfRunTimeReseTime > 0.0001f)
 		{
 			mfRunTimeReseTime -= fLastFrameTime;
 
-			if (mfRunTimeReseTime < 0.0000f)
+			if (mfRunTimeReseTime < 0.0001f)
 			{
 				if (mnResetCount > 0)
 				{
