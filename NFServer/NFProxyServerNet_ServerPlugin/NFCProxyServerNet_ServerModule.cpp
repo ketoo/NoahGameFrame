@@ -23,7 +23,7 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
     m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
-    m_pProxyServerNet_ClientModule = dynamic_cast<NFIProxyServerNet_ClientModule*>(pPluginManager->FindModule("NFCProxyServerNet_ClientModule"));
+    m_pProxyServerNet_ClientModule = dynamic_cast<NFIProxyServerToWorldModule*>(pPluginManager->FindModule("NFCProxyServerNet_ClientModule"));
 	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
 	m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
 	
@@ -245,7 +245,7 @@ int NFCProxyServerNet_ServerModule::OnSelectServerProcess( const NFIPacket& msg 
         return 0;
     }
 
-    NFIProxyServerNet_ClientModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xMsg.world_id());
+    NFIProxyServerToWorldModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xMsg.world_id());
     if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
     {
         //选择成功
@@ -289,8 +289,8 @@ int NFCProxyServerNet_ServerModule::OnReqServerListProcess( const NFIPacket& msg
         NFMsg::AckServerList xData;
         xData.set_type(NFMsg::RSLT_GAMES_ERVER);
 
-        NFIProxyServerNet_ClientModule::GameDataMap& xGameDataMap = m_pProxyServerNet_ClientModule->GetGameDataMap();
-        NFIProxyServerNet_ClientModule::GameData* pGameData = xGameDataMap.First();
+        NFIProxyServerToWorldModule::GameDataMap& xGameDataMap = m_pProxyServerNet_ClientModule->GetGameDataMap();
+        NFIProxyServerToWorldModule::GameData* pGameData = xGameDataMap.First();
         while (NULL != pGameData)
         {
             NFMsg::ServerInfo* pServerInfo = xData.add_info();
@@ -350,7 +350,7 @@ int NFCProxyServerNet_ServerModule::OnReqRoleListProcess( const NFIPacket& msg )
         return 0;
     }
 
-    NFIProxyServerNet_ClientModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
+    NFIProxyServerToWorldModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
     if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
     {
         //数据匹配
@@ -404,7 +404,7 @@ int NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess( const NFIPacket& msg
         return 0;
     }
 
-    NFIProxyServerNet_ClientModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
+    NFIProxyServerToWorldModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
     if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
     {
         //数据匹配
@@ -457,7 +457,7 @@ int NFCProxyServerNet_ServerModule::OnReqDelRoleProcess( const NFIPacket& msg )
         return 0;
     }
 
-    NFIProxyServerNet_ClientModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
+    NFIProxyServerToWorldModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
     if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
     {
         //数据匹配
@@ -484,7 +484,7 @@ int NFCProxyServerNet_ServerModule::OnReqEnterGameServer( const NFIPacket& msg )
         return 0;
     }
 
-    NFIProxyServerNet_ClientModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
+    NFIProxyServerToWorldModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
     if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
     {
         //数据匹配

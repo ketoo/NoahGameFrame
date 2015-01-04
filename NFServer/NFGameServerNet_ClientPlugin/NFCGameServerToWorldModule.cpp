@@ -7,28 +7,28 @@
 // -------------------------------------------------------------------------
 
 //#include "stdafx.h"
-#include "NFCGameServerNet_ClientModule.h"
+#include "NFCGameServerToWorldModule.h"
 #include "NFGameServerNet_ClientPlugin.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 
-bool NFCGameServerNet_ClientModule::Init()
+bool NFCGameServerToWorldModule::Init()
 {
     return true;
 }
 
-bool NFCGameServerNet_ClientModule::Shut()
+bool NFCGameServerToWorldModule::Shut()
 {
 
     return true;
 }
 
 
-bool NFCGameServerNet_ClientModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCGameServerToWorldModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
 	return NFINetModule::Execute(fLasFrametime, fStartedTime);
 }
 
-void NFCGameServerNet_ClientModule::Register()
+void NFCGameServerToWorldModule::Register()
 {
     //成功就注册
 
@@ -56,7 +56,7 @@ void NFCGameServerNet_ClientModule::Register()
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 }
 
-void NFCGameServerNet_ClientModule::UnRegister()
+void NFCGameServerToWorldModule::UnRegister()
 {
 	const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
 	const std::string& strSelfIP = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "IP");
@@ -83,7 +83,7 @@ void NFCGameServerNet_ClientModule::UnRegister()
 
 }
 
-void NFCGameServerNet_ClientModule::RefreshWorldInfo()
+void NFCGameServerToWorldModule::RefreshWorldInfo()
 {
 //     _tagPT_KEY_BASE_MSG baseMsg;
 //     NFMsg::ServerInfoReport xMsg;
@@ -102,7 +102,7 @@ void NFCGameServerNet_ClientModule::RefreshWorldInfo()
 //     }
 }
 
-bool NFCGameServerNet_ClientModule::AfterInit()
+bool NFCGameServerToWorldModule::AfterInit()
 {
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
@@ -119,7 +119,7 @@ bool NFCGameServerNet_ClientModule::AfterInit()
     //m_pEventProcessModule->AddEventCallBack(0, NFED_ON_DATABASE_SERVER_LOADROE_BEGIN, this, &NFCGameServerNet_ClientModule::OnDataLoadBeginEvent);
     //m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_WANTO_SWAP_GS, this, &NFCGameServerNet_ClientModule::OnSwapGSEvent);
 
-    m_pKernelModule->ResgisterCommonClassEvent(this, &NFCGameServerNet_ClientModule::OnClassCommonEvent);
+    m_pKernelModule->ResgisterCommonClassEvent(this, &NFCGameServerToWorldModule::OnClassCommonEvent);
     
     // 连接world server
     mstrConfigIdent = "GameServer";
@@ -132,14 +132,14 @@ bool NFCGameServerNet_ClientModule::AfterInit()
 	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
 	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
-	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerNet_ClientModule::OnRecivePack, &NFCGameServerNet_ClientModule::OnSocketEvent, strServerIP.c_str(), nServerPort);
+	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerToWorldModule::OnRecivePack, &NFCGameServerToWorldModule::OnSocketEvent, strServerIP.c_str(), nServerPort);
 
     m_pKernelModule->CreateContainer(-2, "");
 
     return true;
 }
 
-int NFCGameServerNet_ClientModule::OnLoadRoleDataBeginProcess(const NFIPacket& msg)
+int NFCGameServerToWorldModule::OnLoadRoleDataBeginProcess(const NFIPacket& msg)
 {
     //     _tagPT_KEY_BASE_MSG baseMsg;
     //     pMsgPacket->DeCode(&baseMsg);
@@ -159,7 +159,7 @@ int NFCGameServerNet_ClientModule::OnLoadRoleDataBeginProcess(const NFIPacket& m
     return 0;
 }
 
-int NFCGameServerNet_ClientModule::OnLoadRoleDataFinalProcess(const NFIPacket& msg)
+int NFCGameServerToWorldModule::OnLoadRoleDataFinalProcess(const NFIPacket& msg)
 {
 
     //     _tagDTM_LOAD_ROLEDATA_FINAL loadFinal;
@@ -210,7 +210,7 @@ int NFCGameServerNet_ClientModule::OnLoadRoleDataFinalProcess(const NFIPacket& m
 }
 
 //离开世界回到客户端时，产生
-int NFCGameServerNet_ClientModule::OnDataLoadBeginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
+int NFCGameServerToWorldModule::OnDataLoadBeginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
     //1号gs发送
     //if (1 == m_pGameLogicModule->GetGameID())
@@ -260,7 +260,7 @@ int NFCGameServerNet_ClientModule::OnDataLoadBeginEvent(const NFIDENTID& object,
 //     return 0;
 // }
 
-int NFCGameServerNet_ClientModule::OnEnquireSceneInfoProcess(const NFIPacket& msg)
+int NFCGameServerToWorldModule::OnEnquireSceneInfoProcess(const NFIPacket& msg)
 {
     //  _tagWTG_ENQUIRE_SCENE_INFO enquireSceneInfo;
     //  RakNet::BitStream* pBitStream = pMsgPacket->GetBitStream();
@@ -270,7 +270,7 @@ int NFCGameServerNet_ClientModule::OnEnquireSceneInfoProcess(const NFIPacket& ms
     return 0;
 }
 
-int NFCGameServerNet_ClientModule::OnSwapGSEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
+int NFCGameServerToWorldModule::OnSwapGSEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
     //如果是单服，则不允许切换gs
     if (5 != var.GetCount())
@@ -300,7 +300,7 @@ int NFCGameServerNet_ClientModule::OnSwapGSEvent(const NFIDENTID& object, const 
     return 0;
 }
 
-int NFCGameServerNet_ClientModule::OnSwapGSProcess(const NFIPacket& msg)
+int NFCGameServerToWorldModule::OnSwapGSProcess(const NFIPacket& msg)
 {
     //查看此GSID是否正确
     //     _tagGTG_SWAP_GAMESERVER swapGameServer;
@@ -321,7 +321,7 @@ int NFCGameServerNet_ClientModule::OnSwapGSProcess(const NFIPacket& msg)
     return 0;
 }
 
-int NFCGameServerNet_ClientModule::OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+int NFCGameServerToWorldModule::OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
 {
 //     if (strClassName == "Player")
 //     {
@@ -350,12 +350,12 @@ int NFCGameServerNet_ClientModule::OnClassCommonEvent(const NFIDENTID& self, con
     return 0;
 }
 
-int NFCGameServerNet_ClientModule::OnRecivePack( const NFIPacket& msg )
+int NFCGameServerToWorldModule::OnRecivePack( const NFIPacket& msg )
 {
     return 0;
 }
 
-int NFCGameServerNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
+int NFCGameServerToWorldModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {
     if (eEvent == NF_NET_EVENT_CONNECTED)
     {
@@ -371,12 +371,12 @@ int NFCGameServerNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF
     return 0;
 }
 
-void NFCGameServerNet_ClientModule::OnClientDisconnect( const int nAddress )
+void NFCGameServerToWorldModule::OnClientDisconnect( const int nAddress )
 {
     UnRegister();
 }
 
-void NFCGameServerNet_ClientModule::OnClientConnected( const int nAddress )
+void NFCGameServerToWorldModule::OnClientConnected( const int nAddress )
 {
     Register();
 }

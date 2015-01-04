@@ -17,7 +17,16 @@
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 #include "NFComm/NFCore/NFQueue.h"
 
-
+enum NF_SERVER_TYPE
+{
+	NFST_CIENT = 0,
+	NFST_MAXTER_SERVER = 1,
+	NFST_WORLD_SERVER = 2,
+	NFST_GAME_SERVER = 3,
+	NFST_PROXY_SERVER = 4,
+	NFST_LOGIN_SERVER = 5,
+	NFST_NOSQL_SERVER = 6,
+};
 
 class QueueEventPack
 {
