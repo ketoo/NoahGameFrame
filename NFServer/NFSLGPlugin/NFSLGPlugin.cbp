@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="NFSLGPlugin" prefix_auto="1" extension_auto="1" />
+				<Option output="../../../trunk/_Out/Comm/Debug/NFSLGPlugin_d" prefix_auto="1" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -33,7 +33,7 @@
 				</Linker>
 			</Target>
 			<Target title="Release x64">
-				<Option output="NFSLGPlugin" prefix_auto="1" extension_auto="1" />
+				<Option output="../../../trunk/_Out/Comm/Debug/NFSLGPlugin" prefix_auto="1" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
