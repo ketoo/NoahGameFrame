@@ -7,12 +7,12 @@
 // -------------------------------------------------------------------------
 
 //#include "stdafx.h"
-#include "NFCProxyServerNet_ClientModule.h"
+#include "NFCProxyServerToWorldModule.h"
 #include "NFProxyServerNet_ClientPlugin.h"
 #include "NFComm/NFCore/NFIHeartBeatManager.h"
 #include "NFComm/NFCore/NFCHeartBeatManager.h"
 
-bool NFCProxyServerNet_ClientModule::Init()
+bool NFCProxyServerToWorldModule::Init()
 {
     mstrConfigIdent = "ProxyServer";
     //mnWantToConnectContainer = -2;
@@ -22,14 +22,14 @@ bool NFCProxyServerNet_ClientModule::Init()
     return true;
 }
 
-bool NFCProxyServerNet_ClientModule::Shut()
+bool NFCProxyServerToWorldModule::Shut()
 {
     //Final();
     //Clear();
     return true;
 }
 
-bool NFCProxyServerNet_ClientModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCProxyServerToWorldModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
     NFINetModule* pProxy = First();
     while (pProxy)
@@ -42,7 +42,7 @@ bool NFCProxyServerNet_ClientModule::Execute(const float fLasFrametime, const fl
 	return NFINetModule::Execute(fLasFrametime, fStartedTime);
 }
 
-int NFCProxyServerNet_ClientModule::OnRecivePack( const NFIPacket& msg )
+int NFCProxyServerToWorldModule::OnRecivePack( const NFIPacket& msg )
 {
     //这里是worldserver发来的消息
     switch (msg.GetMsgHead()->GetMsgID())
@@ -62,7 +62,7 @@ int NFCProxyServerNet_ClientModule::OnRecivePack( const NFIPacket& msg )
     return 0;
 }
 
-int NFCProxyServerNet_ClientModule::OnGameInfoProcess( const NFIPacket& msg )
+int NFCProxyServerToWorldModule::OnGameInfoProcess( const NFIPacket& msg )
 {
     NFIDENTID nPlayerID;	
     NFMsg::ServerInfoReportList xMsg;
@@ -104,7 +104,7 @@ int NFCProxyServerNet_ClientModule::OnGameInfoProcess( const NFIPacket& msg )
         NFINetModule* pNetObject = GetElement(pGameData->nGameID);
         if (!pNetObject)
         {
-            pNetObject = new NFCProxyConnectObject(pGameData->nGameID, pGameData->strIP, pGameData->nPort, pPluginManager);
+            pNetObject = new NFCProxyConnectToGameServer(pGameData->nGameID, pGameData->strIP, pGameData->nPort, pPluginManager);
             AddElement(pGameData->nGameID, pNetObject);
 
             m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pGameData->nGameID), pGameData->strIP, pGameData->nPort, "Initialization to connect GameServer");
@@ -116,7 +116,7 @@ int NFCProxyServerNet_ClientModule::OnGameInfoProcess( const NFIPacket& msg )
     return 0;
 }
 
-int NFCProxyServerNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
+int NFCProxyServerToWorldModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -139,18 +139,18 @@ int NFCProxyServerNet_ClientModule::OnSocketEvent( const int nSockIndex, const N
     return 0;
 }
 
-void NFCProxyServerNet_ClientModule::OnClientDisconnect( const int nAddress )
+void NFCProxyServerToWorldModule::OnClientDisconnect( const int nAddress )
 {
 
 }
 
-void NFCProxyServerNet_ClientModule::OnClientConnected( const int nAddress )
+void NFCProxyServerToWorldModule::OnClientConnected( const int nAddress )
 {
     Register();
 }
 
 
-void NFCProxyServerNet_ClientModule::Register()
+void NFCProxyServerToWorldModule::Register()
 {
 
     int nProxyID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
@@ -175,7 +175,7 @@ void NFCProxyServerNet_ClientModule::Register()
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 }
 
-void NFCProxyServerNet_ClientModule::UnRegister()
+void NFCProxyServerToWorldModule::UnRegister()
 {
     const int nProxyID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
 	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
@@ -201,7 +201,7 @@ void NFCProxyServerNet_ClientModule::UnRegister()
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "UnRegister");
 }
 
-bool NFCProxyServerNet_ClientModule::AfterInit()
+bool NFCProxyServerToWorldModule::AfterInit()
 {
 
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
@@ -226,12 +226,12 @@ bool NFCProxyServerNet_ClientModule::AfterInit()
     const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
     const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
-	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyServerNet_ClientModule::OnRecivePack, &NFCProxyServerNet_ClientModule::OnSocketEvent, strServerIP.c_str(), nServerPort);
+	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyServerToWorldModule::OnRecivePack, &NFCProxyServerToWorldModule::OnSocketEvent, strServerIP.c_str(), nServerPort);
 
     return true;
 }
 
-int NFCProxyServerNet_ClientModule::Transpond(int nGameServerID, const NFIPacket& msg)
+int NFCProxyServerToWorldModule::Transpond(int nGameServerID, const NFIPacket& msg)
 {
     NFINetModule* pProxy = GetElement(nGameServerID);
     if (pProxy)
@@ -242,7 +242,7 @@ int NFCProxyServerNet_ClientModule::Transpond(int nGameServerID, const NFIPacket
     return 0;
 }
 
-int NFCProxyServerNet_ClientModule::OnSelectServerResultProcess(const NFIPacket& msg)
+int NFCProxyServerToWorldModule::OnSelectServerResultProcess(const NFIPacket& msg)
 {
     //保持记录,直到下线,或者1分钟不上线即可删除
     NFIDENTID nPlayerID;
@@ -267,12 +267,12 @@ int NFCProxyServerNet_ClientModule::OnSelectServerResultProcess(const NFIPacket&
     return 0;
 }
 
-NFIProxyServerNet_ClientModule::GameData* NFCProxyServerNet_ClientModule::GetGameData(int nGameID)
+NFIProxyServerToWorldModule::GameData* NFCProxyServerToWorldModule::GetGameData(int nGameID)
 {
     return mGameDataMap.GetElement(nGameID);
 }
 
-bool NFCProxyServerNet_ClientModule::VerifyConnectData( const std::string& strAccount, const std::string& strKey )
+bool NFCProxyServerToWorldModule::VerifyConnectData( const std::string& strAccount, const std::string& strKey )
 {
     mWantToConnectMap.RemoveElement(strAccount);
 
@@ -281,12 +281,12 @@ bool NFCProxyServerNet_ClientModule::VerifyConnectData( const std::string& strAc
 
 //////////////////////////////////////////////////////////////////////////
 
-bool NFCProxyConnectObject::Execute(float fFrameTime, float fTotalTime)
+bool NFCProxyConnectToGameServer::Execute(float fFrameTime, float fTotalTime)
 {
 	return NFINetModule::Execute(fFrameTime, fTotalTime);
 }
 
-NFCProxyConnectObject::NFCProxyConnectObject(int nGameServerID, const std::string& strIP, const int nPort,  NFIPluginManager* p)
+NFCProxyConnectToGameServer::NFCProxyConnectToGameServer(int nGameServerID, const std::string& strIP, const int nPort,  NFIPluginManager* p)
 {
 
     mstrConfigIdent = "ProxyServer";
@@ -306,20 +306,20 @@ NFCProxyConnectObject::NFCProxyConnectObject(int nGameServerID, const std::strin
         //
     }
 
-	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyConnectObject::OnRecivePack, &NFCProxyConnectObject::OnSocketEvent, strIP.c_str(), nPort);
+	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyConnectToGameServer::OnRecivePack, &NFCProxyConnectToGameServer::OnSocketEvent, strIP.c_str(), nPort);
 
 }
 
-void NFCProxyConnectObject::OnClientDisconnect( const int nAddress )
+void NFCProxyConnectToGameServer::OnClientDisconnect( const int nAddress )
 {
 }
 
-void NFCProxyConnectObject::OnClientConnected( const int nAddress )
+void NFCProxyConnectToGameServer::OnClientConnected( const int nAddress )
 {
 
 }
 
-int NFCProxyConnectObject::OnRecivePack( const NFIPacket& msg )
+int NFCProxyConnectToGameServer::OnRecivePack( const NFIPacket& msg )
 {
     switch (msg.GetMsgHead()->GetMsgID())
     {
@@ -334,7 +334,7 @@ int NFCProxyConnectObject::OnRecivePack( const NFIPacket& msg )
     return 0;
 }
 
-int NFCProxyConnectObject::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
+int NFCProxyConnectToGameServer::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -354,7 +354,7 @@ int NFCProxyConnectObject::OnSocketEvent( const int nSockIndex, const NF_NET_EVE
     return 0;
 }
 
-void NFCProxyConnectObject::Register()
+void NFCProxyConnectToGameServer::Register()
 {
     const int nID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
     const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
@@ -377,7 +377,7 @@ void NFCProxyConnectObject::Register()
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 }
 
-void NFCProxyConnectObject::UnRegister()
+void NFCProxyConnectToGameServer::UnRegister()
 {
 	const int nProxyID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
 	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
@@ -406,7 +406,7 @@ void NFCProxyConnectObject::UnRegister()
 
 }
 
-void NFCProxyConnectObject::OnAckEnterGame(const NFIPacket& msg)
+void NFCProxyConnectToGameServer::OnAckEnterGame(const NFIPacket& msg)
 {
     NFIDENTID nPlayerID;
     NFMsg::AckEventResult xData;

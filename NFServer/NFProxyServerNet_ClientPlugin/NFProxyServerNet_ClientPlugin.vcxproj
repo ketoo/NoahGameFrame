@@ -99,11 +99,11 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCProxyServerNet_ClientModule.cpp" />
+    <ClCompile Include="NFCProxyServerToWorldModule.cpp" />
     <ClCompile Include="NFProxyServerNet_ClientPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCProxyServerNet_ClientModule.h" />
+    <ClInclude Include="NFCProxyServerToWorldModule.h" />
     <ClInclude Include="NFProxyServerNet_ClientPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
