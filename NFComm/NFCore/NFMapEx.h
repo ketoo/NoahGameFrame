@@ -15,6 +15,7 @@
 #include <iostream>
 #include <typeinfo>
 #include <memory>
+#include "NFPlatform.h"
 
 template <typename T , typename TD>
 class NFMapEx
@@ -53,7 +54,7 @@ public:
         if (itr != mObjectList.end())
         {
             pData = itr->second;
-            ObjectList.erase(itr);
+            mObjectList.erase(itr);
 
             return true;
         }
