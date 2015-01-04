@@ -59,7 +59,7 @@ public:
             return true;
         }
 
-        return false;
+        return false;../../../trunk/_Out/Comm/Debug/libNFLogPlugin_d.so
     }
 
     virtual NF_SHARE_PTR<TD> GetElement(const T& name)
