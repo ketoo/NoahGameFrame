@@ -13,7 +13,7 @@
 #include "NFILogicModule.h"
 #include "NFINetModule.h"
 
-class NFIWorldNet_ClientModule
+class NFIWorldToMasterModule
     : public NFINetModule
 {
 
