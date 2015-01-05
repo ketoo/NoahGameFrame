@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--this is config xml-->
-<XML/>
+<XML>
+    <Object CpuCount="1" ID="GameServer_1" IP="127.0.0.1" MaxOnline="5000" Name="GameServer_1" Port="4001" ServerID="000104001"/>
+</XML>
