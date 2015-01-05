@@ -100,7 +100,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCLoginNet_ClientModule.h" />
+    <ClInclude Include="NFCLoginToMasterModule.h" />
     <ClInclude Include="NFLoginNet_ClientPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -112,7 +112,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCLoginNet_ClientModule.cpp" />
+    <ClCompile Include="NFCLoginToMasterModule.cpp" />
     <ClCompile Include="NFLoginNet_ClientPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
