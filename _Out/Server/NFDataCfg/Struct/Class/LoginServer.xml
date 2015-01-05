@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is a class xml-->
+<XML>
+    <Records/>
+    <Propertys>
+        <Property Desc="服务器ID" Id="ServerID" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="服务器名字" Id="Name" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="作为服务器时：服务器最大连接" Id="MaxOnline" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="CPU个数（机器）" Id="CpuCount" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="IP地址" Id="IP" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="作为服务器时：相对客户端的port" Id="Port" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+    </Propertys>
+    <Includes/>
+</XML>
