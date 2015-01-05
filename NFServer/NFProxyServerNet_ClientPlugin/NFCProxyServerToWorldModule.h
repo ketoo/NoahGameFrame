@@ -21,6 +21,7 @@
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFILogicClassModule.h"
 
 
 //这个连接是连的gameserver
@@ -58,6 +59,8 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFIProxyLogicModule* m_pProxyLogicModule;
+	NFILogicClassModule* m_pLogicClassModule;
+
 };
 
 //策略是，开始先连到world，然后拿到gameserverlist，再连gameserver，因此这个连接是连到worldserver
@@ -131,6 +134,8 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIProxyServerNet_ServerModule* m_pProxyServerNet_ServerModule;
 	NFIElementInfoModule* m_pElementInfoModule;
+	NFILogicClassModule* m_pLogicClassModule;
+
 };
 
 #endif
