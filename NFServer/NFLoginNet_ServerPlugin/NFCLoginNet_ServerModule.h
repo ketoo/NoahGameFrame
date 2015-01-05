@@ -93,7 +93,7 @@ protected:
 
 private:
 
-    NFILoginToMasterModule* m_pLoginNet_ClientModule;
+    NFILoginToMasterModule* m_pLoginToMasterModule;
     NFIEventProcessModule* m_pEventProcessModule;
 	NFILogicClassModule* m_pLogicClassModule;
 	NFIElementInfoModule* m_pElementInfoModule;	
