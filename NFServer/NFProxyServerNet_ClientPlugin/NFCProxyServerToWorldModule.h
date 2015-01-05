@@ -13,7 +13,7 @@
 #include <string>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFCore/NFCHeartBeatManager.h"
-#include "NFComm/NFPluginModule/NFIProxyServerNet_ClientModule.h"
+#include "NFComm/NFPluginModule/NFIProxyServerToWorldModule.h"
 #include "NFComm/NFPluginModule/NFIProxyServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -24,10 +24,10 @@
 
 
 //这个连接是连的gameserver
-class NFCProxyConnectObject : public NFINetModule
+class NFCProxyConnectToGameServer : public NFINetModule
 {
 public:
-    NFCProxyConnectObject(int nGameServerID, const std::string& strIP, const int nPort, NFIPluginManager* p);
+    NFCProxyConnectToGameServer(int nGameServerID, const std::string& strIP, const int nPort, NFIPluginManager* p);
 
     virtual bool Execute(float fFrameTime, float fTotalTime);
     virtual void LogRecive(const char* str){}
@@ -61,11 +61,11 @@ private:
 };
 
 //策略是，开始先连到world，然后拿到gameserverlist，再连gameserver，因此这个连接是连到worldserver
-class NFCProxyServerNet_ClientModule : public NFIProxyServerNet_ClientModule
+class NFCProxyServerToWorldModule : public NFIProxyServerToWorldModule
 {
 public:
 
-    NFCProxyServerNet_ClientModule(NFIPluginManager* p)
+    NFCProxyServerToWorldModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }

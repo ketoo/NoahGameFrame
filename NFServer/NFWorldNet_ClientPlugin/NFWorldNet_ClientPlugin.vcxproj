@@ -101,7 +101,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCWorldNet_ClientModule.h" />
+    <ClInclude Include="NFCWorldToMasterModule.h" />
     <ClInclude Include="NFWorldNet_ClientPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -113,7 +113,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCWorldNet_ClientModule.cpp" />
+    <ClCompile Include="NFCWorldToMasterModule.cpp" />
     <ClCompile Include="NFWorldNet_ClientPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
