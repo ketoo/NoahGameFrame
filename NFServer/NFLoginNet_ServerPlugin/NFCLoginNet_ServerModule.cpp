@@ -15,7 +15,6 @@ const std::string PROPERTY_VERIFIED = "Verified";
 
 bool NFCLoginNet_ServerModule::Init()
 {
-	mstrConfigIdent = "LoginServer";
 	return true;
 }
 
@@ -38,7 +37,7 @@ bool NFCLoginNet_ServerModule::AfterInit()
 	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
 	m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-    m_pLoginNet_ClientModule = dynamic_cast<NFILoginToMasterModule*>(pPluginManager->FindModule("NFCLoginNet_ClientModule"));
+    m_pLoginToMasterModule = dynamic_cast<NFILoginToMasterModule*>(pPluginManager->FindModule("NFCLoginToMasterModule"));
     
 
 	assert(NULL != m_pEventProcessModule);
@@ -47,20 +46,27 @@ bool NFCLoginNet_ServerModule::AfterInit()
 	assert(NULL != m_pLogModule);
 	assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pElementInfoModule);
-    assert(NULL != m_pLoginNet_ClientModule);
+    assert(NULL != m_pLoginToMasterModule);
 
 	m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_CLIENT_LOGIN_RESULTS, this, &NFCLoginNet_ServerModule::OnLoginResultsEvent);
 	m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER_RESULTS, this, &NFCLoginNet_ServerModule::OnSelectWorldResultsEvent);
 
-	const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
-	const int nServerPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerPort");
-	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
-	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
-	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
-	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
+	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("LoginServer");
+	if (xLogicClass.get())
+	{
+		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
+		std::string strConfigName; 
+		if (xNameList.Get(0, strConfigName))
+		{
+			const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
+			const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
+			const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
 
-	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCLoginNet_ServerModule::OnRecivePack, &NFCLoginNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
+			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCLoginNet_ServerModule::OnRecivePack, &NFCLoginNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);		
+		}
 
+	}
+	
 	return true;
 }
 
@@ -183,31 +189,37 @@ int NFCLoginNet_ServerModule::OnLoginProcess( const NFIPacket& msg )
 
 int NFCLoginNet_ServerModule::OnSelectWorldProcess( const NFIPacket& msg )
 {
-    const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
-//     const int nServerPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerPort");
-//     const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
-//     const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
-//     const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
-//     const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
-
-	NFIDENTID nPlayerID;
-	NFMsg::ReqConnectWorld xMsg;
-	if (!RecivePB(msg, xMsg, nPlayerID))
+	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("LoginServer");
+	if (xLogicClass.get())
 	{
-		return 0;
+		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
+		std::string strConfigName; 
+		if (xNameList.Get(0, strConfigName))
+		{
+			const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+
+			NFIDENTID nPlayerID;
+			NFMsg::ReqConnectWorld xMsg;
+			if (!RecivePB(msg, xMsg, nPlayerID))
+			{
+				return 0;
+			}
+
+			NetObject* pNetObject = GetNet()->GetNetObject(msg.GetFd());
+			if (pNetObject)
+			{
+				//µÇÂ¼¹ý
+				if (pNetObject->GetConnectKeyState() > 0)
+				{
+					NFCDataList val;
+					val << xMsg.world_id() << msg.GetFd() << nServerID << pNetObject->GetAccount().c_str();
+					m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, val);
+				}
+			}
+		}
 	}
 
-    NetObject* pNetObject = GetNet()->GetNetObject(msg.GetFd());
-    if (pNetObject)
-    {
-        //µÇÂ¼¹ý
-        if (pNetObject->GetConnectKeyState() > 0)
-        {
-            NFCDataList val;
-            val << xMsg.world_id() << msg.GetFd() << nServerID << pNetObject->GetAccount().c_str();
-            m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, val);
-        }
-    }
+	
 
 	return 0;
 }
@@ -278,7 +290,7 @@ void NFCLoginNet_ServerModule::SynWorldToClient( const int nFD )
     NFMsg::AckServerList xData;
     xData.set_type(NFMsg::RSLT_WORLD_SERVER);
 
-    NFMapEx<int, NFMsg::ServerInfoReport>* pWorldMap = m_pLoginNet_ClientModule->GetWorldMap();
+    NFMapEx<int, NFMsg::ServerInfoReport>* pWorldMap = m_pLoginToMasterModule->GetWorldMap();
     NF_SHARE_PTR<NFMsg::ServerInfoReport> pWorldData =  pWorldMap->First();
     while (pWorldData.get())
     {
