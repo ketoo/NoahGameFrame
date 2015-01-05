@@ -3,7 +3,7 @@
 
 //#include "stdafx.h"
 #include "NFWorldNet_ClientPlugin.h"
-#include "NFCWorldNet_ClientModule.h"
+#include "NFCWorldToMasterModule.h"
 
 //
 //
@@ -36,10 +36,10 @@ const std::string NFWorldNet_ClientPlugin::GetPluginName()
 
 void NFWorldNet_ClientPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFCWorldNet_ClientModule)
+    REGISTER_MODULE(pPluginManager, NFCWorldToMasterModule)
 }
 
 void NFWorldNet_ClientPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCWorldNet_ClientModule)
+    UNREGISTER_MODULE(pPluginManager, NFCWorldToMasterModule)
 }

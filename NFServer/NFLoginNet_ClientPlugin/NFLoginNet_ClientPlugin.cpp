@@ -3,7 +3,7 @@
 
 //#include "stdafx.h"
 #include "NFLoginNet_ClientPlugin.h"
-#include "NFCLoginNet_ClientModule.h"
+#include "NFCLoginToMasterModule.h"
 
 //
 //
@@ -38,10 +38,10 @@ void NFLoginNet_ClientPlugin::Install()
 {
     //NFILogicModule* pModule = new NFCLoginNet_ClientModule();
 
-    REGISTER_MODULE(pPluginManager, NFCLoginNet_ClientModule)
+    REGISTER_MODULE(pPluginManager, NFCLoginToMasterModule)
 }
 
 void NFLoginNet_ClientPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCLoginNet_ClientModule)
+    UNREGISTER_MODULE(pPluginManager, NFCLoginToMasterModule)
 }
