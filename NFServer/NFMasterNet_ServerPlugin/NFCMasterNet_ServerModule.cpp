@@ -12,7 +12,6 @@
 
 bool NFCMasterNet_ServerModule::Init()
 {
-	mstrConfigIdent = "MasterServer";
 	return true;
 }
 
@@ -249,14 +248,24 @@ bool NFCMasterNet_ServerModule::AfterInit()
 	assert(NULL != m_pLogicClassModule);
 	assert(NULL != m_pElementInfoModule);
 
-	const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
-	const int nServerPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerPort");
-	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
-	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
-	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
-	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
+	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("MasterServer");
+	if (xLogicClass.get())
+	{
+		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
+		std::string strConfigName; 
+		if (xNameList.Get(0, strConfigName))
+		{
+			const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+			const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
+			const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
+			const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
+			const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
+			const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
 
-	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCMasterNet_ServerModule::OnRecivePack, &NFCMasterNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
+			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCMasterNet_ServerModule::OnRecivePack, &NFCMasterNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
+
+		}
+	}
 
 	return true;
 }

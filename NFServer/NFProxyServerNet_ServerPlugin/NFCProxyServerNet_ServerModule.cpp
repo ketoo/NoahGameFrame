@@ -12,8 +12,6 @@
 
 bool NFCProxyServerNet_ServerModule::Init()
 {
-    mstrConfigIdent = "ProxyServer";
-
     return true;
 }
 
@@ -23,25 +21,36 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
     m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
-    m_pProxyServerNet_ClientModule = dynamic_cast<NFIProxyServerToWorldModule*>(pPluginManager->FindModule("NFCProxyServerNet_ClientModule"));
+    m_pProxyToWorldModule = dynamic_cast<NFIProxyServerToWorldModule*>(pPluginManager->FindModule("NFCProxyServerToWorldModule"));
 	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
 	m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
 	
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pLogicClassModule);
-    assert(NULL != m_pProxyServerNet_ClientModule);
+    assert(NULL != m_pProxyToWorldModule);
 	assert(NULL != m_pLogModule);
 	assert(NULL != m_pElementInfoModule);
 
-	const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
-	const int nServerPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerPort");
-	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
-	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
-	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
-	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
+	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("ProxyServer");
+	if (xLogicClass.get())
+	{
+		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
+		std::string strConfigName; 
+		if (xNameList.Get(0, strConfigName))
+		{
+			const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+			const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
+			const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
+			const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
+			const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
+			const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
 
-	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyServerNet_ServerModule::OnRecivePack, &NFCProxyServerNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
+			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyServerNet_ServerModule::OnRecivePack, &NFCProxyServerNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
+
+		}
+	}
+
 
     return true;
 }
@@ -73,7 +82,7 @@ int NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const NFIPacket& msg)
         return 0;
     }
 
-    bool bRet = m_pProxyServerNet_ClientModule->VerifyConnectData(xMsg.account(), xMsg.security_code());
+    bool bRet = m_pProxyToWorldModule->VerifyConnectData(xMsg.account(), xMsg.security_code());
     if (bRet)
     {
         //可以进入,设置标志，选单服,心跳延迟,进入gs创建角色和删除角色,这里只是转发
@@ -214,7 +223,7 @@ void NFCProxyServerNet_ServerModule::OnClientDisconnect( const int nAddress )
                 return;
             }
 
-            m_pProxyServerNet_ClientModule->Transpond(nUserData, msg);
+            m_pProxyToWorldModule->Transpond(nUserData, msg);
         }
     }
 }
@@ -229,7 +238,7 @@ int NFCProxyServerNet_ServerModule::OnTranspondProcess( const NFIPacket& msg )
         if (nUserData > 0)
         {
             //广播给谁呢，看他在哪个服务器上
-            return m_pProxyServerNet_ClientModule->Transpond(nUserData, msg);
+            return m_pProxyToWorldModule->Transpond(nUserData, msg);
         }
     }
 
@@ -245,7 +254,7 @@ int NFCProxyServerNet_ServerModule::OnSelectServerProcess( const NFIPacket& msg 
         return 0;
     }
 
-    NFIProxyServerToWorldModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xMsg.world_id());
+    NFIProxyServerToWorldModule::GameData* pServerData = m_pProxyToWorldModule->GetGameData(xMsg.world_id());
     if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
     {
         //选择成功
@@ -289,7 +298,7 @@ int NFCProxyServerNet_ServerModule::OnReqServerListProcess( const NFIPacket& msg
         NFMsg::AckServerList xData;
         xData.set_type(NFMsg::RSLT_GAMES_ERVER);
 
-        NFIProxyServerToWorldModule::GameDataMap& xGameDataMap = m_pProxyServerNet_ClientModule->GetGameDataMap();
+        NFIProxyServerToWorldModule::GameDataMap& xGameDataMap = m_pProxyToWorldModule->GetGameDataMap();
         NFIProxyServerToWorldModule::GameData* pGameData = xGameDataMap.First();
         while (NULL != pGameData)
         {
@@ -350,7 +359,7 @@ int NFCProxyServerNet_ServerModule::OnReqRoleListProcess( const NFIPacket& msg )
         return 0;
     }
 
-    NFIProxyServerToWorldModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
+    NFIProxyServerToWorldModule::GameData* pServerData = m_pProxyToWorldModule->GetGameData(xData.game_id());
     if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
     {
         //数据匹配
@@ -404,7 +413,7 @@ int NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess( const NFIPacket& msg
         return 0;
     }
 
-    NFIProxyServerToWorldModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
+    NFIProxyServerToWorldModule::GameData* pServerData = m_pProxyToWorldModule->GetGameData(xData.game_id());
     if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
     {
         //数据匹配
@@ -457,7 +466,7 @@ int NFCProxyServerNet_ServerModule::OnReqDelRoleProcess( const NFIPacket& msg )
         return 0;
     }
 
-    NFIProxyServerToWorldModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
+    NFIProxyServerToWorldModule::GameData* pServerData = m_pProxyToWorldModule->GetGameData(xData.game_id());
     if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
     {
         //数据匹配
@@ -484,7 +493,7 @@ int NFCProxyServerNet_ServerModule::OnReqEnterGameServer( const NFIPacket& msg )
         return 0;
     }
 
-    NFIProxyServerToWorldModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
+    NFIProxyServerToWorldModule::GameData* pServerData = m_pProxyToWorldModule->GetGameData(xData.game_id());
     if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
     {
         //数据匹配

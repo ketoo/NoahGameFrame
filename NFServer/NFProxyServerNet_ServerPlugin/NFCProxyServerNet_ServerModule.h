@@ -90,7 +90,7 @@ protected:
     //NFMapEx<int, ServerData> mnGameDataMap;
 
 protected:
-    NFIProxyServerToWorldModule* m_pProxyServerNet_ClientModule;
+    NFIProxyServerToWorldModule* m_pProxyToWorldModule;
 	NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFIElementInfoModule* m_pElementInfoModule;

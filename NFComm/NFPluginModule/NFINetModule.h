@@ -81,9 +81,12 @@ public:
 
 	virtual ~NFINetModule()
 	{
-		m_pNet->Final();
-		delete m_pNet;
-		m_pNet = NULL;
+		if (m_pNet)
+		{
+			m_pNet->Final();
+			delete m_pNet;
+			m_pNet = NULL;
+		}
 	}
 
 	virtual void LogRecive(const char* str){};
@@ -183,6 +186,11 @@ public:
 
 	virtual bool Execute(const float fLasFrametime, const float fStartedTime)
 	{
+		if (!m_pNet)
+		{
+			return false;
+		}
+
 		//把上次的数据处理了
 		KeepAlive(fLasFrametime);
 
@@ -304,6 +312,11 @@ protected:
 
 	void KeepAlive(float fLasFrametime)
 	{
+		if (!m_pNet)
+		{
+			return;
+		}
+
 		if (m_pNet->IsServer())
 		{
 			return;
@@ -347,9 +360,6 @@ protected:
 
 		return 0;
 	}
-
-	std::string mstrConfigIdent;
-
 
 private:
 
