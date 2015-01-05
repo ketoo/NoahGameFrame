@@ -13,7 +13,7 @@
 
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIProxyServerNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFIProxyServerNet_ClientModule.h"
+#include "NFComm/NFPluginModule/NFIProxyServerToWorldModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
@@ -90,7 +90,7 @@ protected:
     //NFMapEx<int, ServerData> mnGameDataMap;
 
 protected:
-    NFIProxyServerNet_ClientModule* m_pProxyServerNet_ClientModule;
+    NFIProxyServerToWorldModule* m_pProxyServerNet_ClientModule;
 	NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFIElementInfoModule* m_pElementInfoModule;
