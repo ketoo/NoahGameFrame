@@ -21,10 +21,10 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
-class NFCGameServerNet_ClientModule : public NFINetModule
+class NFCGameServerToWorldModule : public NFINetModule
 {
 public:
-    NFCGameServerNet_ClientModule(NFIPluginManager* p)
+    NFCGameServerToWorldModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }

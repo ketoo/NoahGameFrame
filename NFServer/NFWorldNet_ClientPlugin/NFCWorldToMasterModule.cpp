@@ -7,24 +7,24 @@
 // -------------------------------------------------------------------------
 
 //#include "stdafx.h"
-#include "NFCWorldNet_ClientModule.h"
+#include "NFCWorldToMasterModule.h"
 #include "NFWorldNet_ClientPlugin.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFMessageDefine/NFMsgPreGame.pb.h"
 
-bool NFCWorldNet_ClientModule::Init()
+bool NFCWorldToMasterModule::Init()
 {
 	mstrConfigIdent = "WorldServer";
 
     return true;
 }
 
-bool NFCWorldNet_ClientModule::Shut()
+bool NFCWorldToMasterModule::Shut()
 {
 	return true;
 }
 
-bool NFCWorldNet_ClientModule::AfterInit()
+bool NFCWorldToMasterModule::AfterInit()
 {
 	
 	m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
@@ -39,7 +39,7 @@ bool NFCWorldNet_ClientModule::AfterInit()
     assert(NULL != m_pElementInfoModule);
     assert(NULL != m_pLogModule);
 
-	m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER_RESULTS, this, &NFCWorldNet_ClientModule::OnSelectServerResultsEvent);
+	m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER_RESULTS, this, &NFCWorldToMasterModule::OnSelectServerResultsEvent);
 
 
 
@@ -52,18 +52,18 @@ bool NFCWorldNet_ClientModule::AfterInit()
 	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
 
 
-	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCWorldNet_ClientModule::OnRecivePack, &NFCWorldNet_ClientModule::OnSocketEvent, strServerIP.c_str(), nServerPort);
+	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCWorldToMasterModule::OnRecivePack, &NFCWorldToMasterModule::OnSocketEvent, strServerIP.c_str(), nServerPort);
 
 	return true;
 }
 
 
-bool NFCWorldNet_ClientModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCWorldToMasterModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
 	return NFINetModule::Execute(fLasFrametime, fStartedTime);
 }
 
-void NFCWorldNet_ClientModule::Register()
+void NFCWorldToMasterModule::Register()
 {
 	const int nID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
 	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
@@ -87,7 +87,7 @@ void NFCWorldNet_ClientModule::Register()
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 }
 
-void NFCWorldNet_ClientModule::UnRegister()
+void NFCWorldToMasterModule::UnRegister()
 {
 	const int nID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
 	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
@@ -114,12 +114,12 @@ void NFCWorldNet_ClientModule::UnRegister()
 
 }
 
-void NFCWorldNet_ClientModule::RefreshWorldInfo()
+void NFCWorldToMasterModule::RefreshWorldInfo()
 {
 
 }
 
-int NFCWorldNet_ClientModule::OnSelectServerProcess(const NFIPacket& msg)
+int NFCWorldToMasterModule::OnSelectServerProcess(const NFIPacket& msg)
 {
 	NFIDENTID nPlayerID;
 	NFMsg::ReqConnectWorld xMsg;
@@ -135,7 +135,7 @@ int NFCWorldNet_ClientModule::OnSelectServerProcess(const NFIPacket& msg)
     return 0;
 }
 
-int NFCWorldNet_ClientModule::OnSelectServerResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
+int NFCWorldToMasterModule::OnSelectServerResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
     if (var.GetCount() != 7
         || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT,
@@ -168,7 +168,7 @@ int NFCWorldNet_ClientModule::OnSelectServerResultsEvent(const NFIDENTID& object
     return 0;
 }
 
-int NFCWorldNet_ClientModule::OnKickClientProcess(const NFIPacket& msg)
+int NFCWorldToMasterModule::OnKickClientProcess(const NFIPacket& msg)
 {
 	NFIDENTID nPlayerID;
 	NFMsg::ReqKickFromWorld xMsg;
@@ -184,7 +184,7 @@ int NFCWorldNet_ClientModule::OnKickClientProcess(const NFIPacket& msg)
     return 0;
 }
 
-int NFCWorldNet_ClientModule::OnRecivePack( const NFIPacket& msg )
+int NFCWorldToMasterModule::OnRecivePack( const NFIPacket& msg )
 {
 	int nMsgID = msg.GetMsgHead()->GetMsgID();
 	switch (nMsgID)
@@ -205,7 +205,7 @@ int NFCWorldNet_ClientModule::OnRecivePack( const NFIPacket& msg )
 	return 0;
 }
 
-int NFCWorldNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
+int NFCWorldToMasterModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -228,17 +228,17 @@ int NFCWorldNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF_NET_
 	return 0;
 }
 
-void NFCWorldNet_ClientModule::OnClientDisconnect( const int nAddress )
+void NFCWorldToMasterModule::OnClientDisconnect( const int nAddress )
 {
 
 }
 
-void NFCWorldNet_ClientModule::OnClientConnected( const int nAddress )
+void NFCWorldToMasterModule::OnClientConnected( const int nAddress )
 {
 
 }
 
-bool NFCWorldNet_ClientModule::BeforeShut()
+bool NFCWorldToMasterModule::BeforeShut()
 {
     UnRegister();
 
