@@ -149,7 +149,15 @@ bool NFCDataList::Add(const char* value)
 
 bool NFCDataList::Add(const std::string& value)
 {
-    return Add(value.c_str());
+    TData* pVar = GetStack(mnSize);
+    if (pVar)
+    {
+        pVar->nType = TDATA_STRING;
+        pVar->variantData = value;
+        mnSize++;
+    }
+
+    return true;
 }
 
 bool NFCDataList::Add(const NFIDENTID& value)
