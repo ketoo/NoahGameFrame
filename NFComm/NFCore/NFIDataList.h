@@ -503,7 +503,7 @@ public:
     }
     inline NFIDataList& operator<<(const std::string& value)
     {
-        Add(value.c_str());
+        Add(value);
         return *this;
     }
 
