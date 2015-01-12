@@ -12,7 +12,7 @@
 bool NFCActorManager::Init()
 {
 #ifdef NF_USE_ACTOR
-    m_pFramework = new Theron::Framework();
+    m_pFramework = new Theron::Framework(1);
 #endif
     //首个主线程
     //mActorVec.push_back(new NFCPluginManager(*m_pFramework, this, EACTOR::EACTOR_MAIN));
