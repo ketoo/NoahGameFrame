@@ -67,14 +67,14 @@ public:
         value = time << 16;
 
         // 最后16位是sequenceID
-        value |= sequence_++ & 0xFFFF;
+        //value |= sequence_++ & 0xFFFF;
 
-        if (sequence_ == 0xFFFF)
+        if (sequence_ == 0x7FFF)
         {
             sequence_ = 0;
         }
 
-        return value;
+        return value + sequence_;
     }
 private:
     uint64_t epoch_;
