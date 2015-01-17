@@ -61,20 +61,20 @@ public:
     int64_t generate()
     {
         int64_t value = 0;
-        uint64_t time = UUIDModule::get_time() - epoch_;
+        uint64_t time = UUIDModule::get_time();
 
         // 保留后48位时间
         value = time << 16;
 
         // 最后16位是sequenceID
-        //value |= sequence_++ & 0xFFFF;
+        value |= sequence_++;
 
         if (sequence_ == 0x7FFF)
         {
             sequence_ = 0;
         }
 
-        return value + sequence_;
+        return value;
     }
 private:
     uint64_t epoch_;
