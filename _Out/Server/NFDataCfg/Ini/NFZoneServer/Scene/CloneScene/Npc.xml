@@ -1,6 +1,6 @@
 <!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
 <XML>   
-	<Object ID="CLOENT_Npc1" NPCConfigID="AttackNpc1" SeedX="171" SeedY="0" SeedZ="88" /> 
-	<Object ID="CLOENT_Npc2" NPCConfigID="AttackNpc1" SeedX="158" SeedY="0" SeedZ="90" /> 
-	<Object ID="CLOENT_Npc3" NPCConfigID="AttackNpc1" SeedX="162" SeedY="0" SeedZ="84" /> 
+	<Object ID="CLOENT_Npc1" NPCConfigID="AttackNpc1" SeedX="-20" SeedY="0" SeedZ="-60" /> 
+	<Object ID="CLOENT_Npc2" NPCConfigID="AttackNpc1" SeedX="-20" SeedY="0" SeedZ="-60" /> 
+	<Object ID="CLOENT_Npc3" NPCConfigID="AttackNpc1" SeedX="-20" SeedY="0" SeedZ="-60" /> 
 </XML>
