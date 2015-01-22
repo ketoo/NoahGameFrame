@@ -101,7 +101,7 @@ bool NFCPatrolState::RandomPatrol(const NFIDENTID& self)
         fCurX += fPosOffestX;
         fCurZ += fPosOffestZ;
 
-        if (fCurX > 0.0f && fCurZ > 0.0f)
+        //if (fCurX > 0.0f && fCurZ > 0.0f)
         {
             //看能否寻路，不能寻路则重来
             NFObjectStateType eStateType = NFObjectStateType::NOST_RUN;

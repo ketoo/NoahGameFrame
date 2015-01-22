@@ -1504,10 +1504,7 @@ int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, cons
             valueAllObjectListNoSelf.Add( identBC );
         }
     }
-    //////////////////////////////////////////////////////////////////////////
-    //特别的，把5牛人也转发给他
-    NFCDataList varMasterPlayerList;
-    valueAllObjectListNoSelf.Append(varMasterPlayerList, 0, varMasterPlayerList.GetCount());
+
     //////////////////////////////////////////////////////////////////////////
 
     //但是旧场景0层的NPC需要广播
