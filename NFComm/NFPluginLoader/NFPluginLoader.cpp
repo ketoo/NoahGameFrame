@@ -162,10 +162,6 @@ int main()
 				fStartedTime = 0.0f;
 			}
 
-			if (fLastTime < 0.001f)
-			{
-				fLastTime = 0.0f;
-			}
 #if NF_PLATFORM == NF_PLATFORM_WIN
             __try
             {
