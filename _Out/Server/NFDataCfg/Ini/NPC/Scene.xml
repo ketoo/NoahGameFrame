@@ -3,5 +3,4 @@
 <XML>
     <Object ActorID="0" CanClone="0" FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/PioneerNoob/" ID="1" MaxGroup="10" MaxGroupPlayers="200" RelivePos="-20,0,-60" SceneName="villageScene" SceneShowName="villageScene" SoundList="" Width="500"/>
     <Object ActorID="0" CanClone="0" FilePath="" ID="2" MaxGroup="10" MaxGroupPlayers="200" RelivePos="186,0,88" SceneName="Demo1" SceneShowName="Demo1" SoundList="" Width="500"/>
-    <Object ActorID="0" CanClone="0" FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/PioneerNoob/" ID="3" MaxGroup="10" MaxGroupPlayers="200" RelivePos="-20,0,-60" SceneName="fuben1" SceneShowName="fuben1" SoundList="" Width="500"/>
 </XML>
