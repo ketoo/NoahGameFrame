@@ -157,6 +157,30 @@ bool ValidAdd(TDATA_TYPE eType, const NFIDataList::TData& var, NF_SHARE_PTR<NFID
 
         pVar = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
         pVar->nType = eType;
+        switch (eType)
+        {
+        case TDATA_UNKNOWN:
+            break;
+        case TDATA_INT:
+            pVar->variantData = (NFINT64)0;
+            break;
+        case TDATA_FLOAT:
+            pVar->variantData = (float)0.0f;
+            break;
+        case TDATA_DOUBLE:
+            pVar->variantData = (double)0.0f;
+            break;
+        case TDATA_STRING:
+            pVar->variantData = std::string("");
+            break;
+        case TDATA_OBJECT:
+            pVar->variantData = NFIDENTID();
+            break;
+        case TDATA_MAX:
+            break;
+        default:
+            break;
+        }
     }
 
     if (pVar->nType != eType)
