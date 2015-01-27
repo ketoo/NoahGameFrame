@@ -5,6 +5,7 @@
 #include <algorithm>
 #include "boost/crc.hpp"
 #include "boost/format/free_funcs.hpp"
+#include "boost/lexical_cast.hpp"
 
 #ifndef __CONSISTENT_HASH_H__
 #define __CONSISTENT_HASH_H__
@@ -32,10 +33,11 @@ public:
 	}
 
 	virtual std::string GetDataStr() = 0;
+	virtual int GetDataID() = 0;
 
     std::string ToStr() const 
     {
-        return boost::str(boost::format("%1%-%2%") % GetDataStr() % nVirtualIndex);
+        return boost::str(boost::format("%1%-%2%-%3%") % boost::lexical_cast<std::string>(GetDataID()) % GetDataStr() % nVirtualIndex);
     }
 
 private:
@@ -65,6 +67,11 @@ class NFCMachineNode : public NFIVirtualNode
 	virtual std::string GetDataStr()
 	{
 		return strIP;
+	}
+
+	virtual int GetDataID()
+	{
+		return nMachineID;
 	}
 
 	std::string strIP;
@@ -130,6 +137,17 @@ public:
         }
     }
 
+	bool Exist(const NFIVirtualNode& xInNode)
+	{
+		uint32_t hash = m_pHasher->GetHashValue(xInNode);
+		TMAP_TYPE::iterator it = mxNodes.find(hash);
+		if (it != mxNodes.end())
+		{
+			return true;
+		}
+
+		return false;
+	}
 
     std::size_t Erase(const NFIVirtualNode& xNode) 
     {
@@ -137,7 +155,38 @@ public:
         return mxNodes.erase(hash);
     }
 
-	bool SuitNode(uint32_t hashValue, NFIVirtualNode& node)
+	bool GetSuitNode(NFIVirtualNode& node)
+	{
+		int nID = 0;
+		return GetSuitNode(nID, node);
+	}
+
+	bool GetSuitNode(const int nID, NFIVirtualNode& node)
+	{
+		std::string strData = boost::lexical_cast<std::string>(nID);
+		if (GetSuitNode(strData, node))
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	bool GetSuitNode(const std::string& str, NFIVirtualNode& node)
+	{
+		boost::crc_32_type ret;
+		ret.process_bytes(str.c_str(), str.length());
+		uint32_t nCRC32 = ret.checksum();
+
+		if (GetSuitNode(nCRC32, node))
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	bool GetSuitNode(uint32_t hashValue, NFIVirtualNode& node)
 	{
 		if(mxNodes.empty())
 		{
@@ -155,6 +204,49 @@ public:
 
 		return true;
 	}
+
+	bool GetMasterNodeReverse(NFIVirtualNode& node)
+	{
+		if(mxNodes.empty())
+		{
+			return false;
+		}
+
+		int nID = 0;
+		TMAP_TYPE::iterator it = mxNodes.begin();
+		for (; it != mxNodes.end(); ++it)
+		{
+			if (it->second.GetDataID() > nID)
+			{
+				node = it->second;
+				nID = it->second.GetDataID();
+			}
+		}
+
+		return true;
+	}
+
+	bool GetMasterNodeSequence(NFIVirtualNode& node)
+	{
+		if(mxNodes.empty())
+		{
+			return false;
+		}
+
+		int nID = mxNodes.begin()->second.GetDataID();
+		TMAP_TYPE::iterator it = mxNodes.begin();
+		for (; it != mxNodes.end(); ++it)
+		{
+			if (it->second.GetDataID() < nID)
+			{
+				node = it->second;
+				nID = it->second.GetDataID();
+			}
+		}
+
+		return true;
+	}
+
 private:
 	typedef std::map<uint32_t, NFIVirtualNode> TMAP_TYPE;
 	typedef TMAP_TYPE::iterator iterator;
