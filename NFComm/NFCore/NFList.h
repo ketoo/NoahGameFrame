@@ -1,4 +1,3 @@
-#pragma once
 // -------------------------------------------------------------------------
 //    @FileName      :    NFList.h
 //    @Author      :    LvSheng.Huang
