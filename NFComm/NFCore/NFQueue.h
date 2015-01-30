@@ -1,4 +1,3 @@
-#pragma once
 // -------------------------------------------------------------------------
 //    @FileName      :    NFQueue.h
 //    @Author      :    LvSheng.Huang

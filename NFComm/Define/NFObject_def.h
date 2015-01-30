@@ -1,5 +1,3 @@
-#pragma once
-
 // -------------------------------------------------------------------------
 //    文件名      :    NFSkill_def.h
 //    创建者      :    LvSheng.Huang
@@ -7,6 +5,8 @@
 //    功能描述    :    对象的结构体
 //
 // -------------------------------------------------------------------------
+#ifndef _NFC_OBJECT_DEF_H_
+#define _NFC_OBJECT_DEF_H_
 
 #include "NFItem_def.h"
 //#include <vector>
@@ -97,3 +97,4 @@ enum NFGMComandID
 
 
 #pragma pack(pop)
+#endif
