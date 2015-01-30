@@ -1,5 +1,3 @@
-#pragma once
-
 // -------------------------------------------------------------------------
 //    文件名      :    NFItem_def.h
 //    创建者      :    LvSheng.Huang
@@ -7,6 +5,8 @@
 //    功能描述    :    物品的结构体
 //
 // -------------------------------------------------------------------------
+#ifndef _NFC_ITEM_DEF_H_
+#define _NFC_ITEM_DEF_H_
 
 #pragma pack(push,1)
 
@@ -165,3 +165,5 @@ enum EGamePlayerViewType
 };
 
 #pragma pack(pop)
+
+#endif
