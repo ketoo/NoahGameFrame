@@ -1,3 +1,0 @@
-//[unclosed
-
-int main() {}
