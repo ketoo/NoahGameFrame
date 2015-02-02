@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="ToolStripManagerRenderMode" FullName="System.Windows.Forms.ToolStripManagerRenderMode">
+  <TypeSignature Language="C#" Value="public enum ToolStripManagerRenderMode" />
+  <AssemblyInfo>
+    <AssemblyName>System.Windows.Forms</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The <see cref="T:System.Windows.Forms.ToolStripManagerRenderMode" /> is used by the <see cref="T:System.Windows.Forms.ToolStripManager" /> class and sets the painting style for <see cref="T:System.Windows.Forms.ToolStrip" /> objects that have their <see cref="P:System.Windows.Forms.ToolStrip.RenderMode" /> property set to <see cref="F:System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode" />. </para>
+      <para>You cannot explicitly set the <see cref="P:System.Windows.Forms.ToolStripManager.RenderMode" /> to <see cref="F:System.Windows.Forms.ToolStripManagerRenderMode.Custom" />, however the <see cref="P:System.Windows.Forms.ToolStripManager.RenderMode" /> is returned <see cref="F:System.Windows.Forms.ToolStripManagerRenderMode.Custom" /> when the <see cref="P:System.Windows.Forms.ToolStripManager.Renderer" /> is set to an extension of the <see cref="T:System.Windows.Forms.ToolStripRenderer" /> class that is not <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" /> or <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" />. </para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Specifies the painting style applied to multiple <see cref="T:System.Windows.Forms.ToolStrip" /> objects contained in a form.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="Custom">
+      <MemberSignature Language="C#" Value="Custom" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.ToolStripManagerRenderMode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Indicates the use of a <see cref="T:System.Windows.Forms.ToolStripRenderer" /> other than <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" /> or <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" />.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+    </Member>
+    <Member MemberName="Professional">
+      <MemberSignature Language="C#" Value="Professional" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.ToolStripManagerRenderMode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Indicates the use of a <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" /> to paint.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="System">
+      <MemberSignature Language="C#" Value="System" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.ToolStripManagerRenderMode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Indicates the use of a <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" /> to paint.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

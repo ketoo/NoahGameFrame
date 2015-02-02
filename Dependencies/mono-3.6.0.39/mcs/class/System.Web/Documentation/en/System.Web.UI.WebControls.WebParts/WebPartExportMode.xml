@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="WebPartExportMode" FullName="System.Web.UI.WebControls.WebParts.WebPartExportMode">
+  <TypeSignature Language="C#" Value="public enum WebPartExportMode" />
+  <AssemblyInfo>
+    <AssemblyName>System.Web</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>A value from the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartExportMode" /> enumerator can be applied to the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.ExportMode" /> property to specify which properties from a Web Parts control can be exported. By default, the properties of a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control cannot be exported and the control's <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.ExportMode" /> property is set to <see cref="F:System.Web.UI.WebControls.WebParts.WebPartExportMode.None" />. To enable exporting all properties for the control, set the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.ExportMode" /> value to <see cref="F:System.Web.UI.WebControls.WebParts.WebPartExportMode.All" />. To export only certain properties while preventing the export of properties that contain sensitive data, you set the property value to <see cref="F:System.Web.UI.WebControls.WebParts.WebPartExportMode.NonSensitiveData" />.</para>
+      <para>A property can be marked as sensitive through the <see cref="T:System.Web.UI.WebControls.WebParts.PersonalizableAttribute" /> attribute.</para>
+      <block subset="none" type="note">
+        <para>To enable the export feature for a Web application that includes Web Parts controls, in the Web.config file for your application, you must add an attribute to the &lt;webParts&gt; element within the &lt;system.web&gt; section, as in the following markup.</para>
+        <para>&lt;webParts enableExport="true"&gt;</para>
+        <para>&lt;/webParts&gt;</para>
+      </block>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Specifies whether all, some, or none of a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control's properties can be exported.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="All">
+      <MemberSignature Language="C#" Value="All" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.WebControls.WebParts.WebPartExportMode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>All of a Web Parts control's properties can be exported.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="None">
+      <MemberSignature Language="C#" Value="None" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.WebControls.WebParts.WebPartExportMode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>None of a Web Parts control's properties can be exported. </para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="NonSensitiveData">
+      <MemberSignature Language="C#" Value="NonSensitiveData" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.WebControls.WebParts.WebPartExportMode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Only properties of a Web Parts control that have been defined as non-sensitive can be exported.  </para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="TextBoxState" FullName="System.Windows.Forms.VisualStyles.TextBoxState">
+  <TypeSignature Language="C#" Value="public enum TextBoxState" />
+  <AssemblyInfo>
+    <AssemblyName>System.Windows.Forms</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The <see cref="T:System.Windows.Forms.VisualStyles.TextBoxState" /> values correspond to the states of the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" /> objects exposed by the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox.TextEdit" /> class. The <see cref="T:System.Windows.Forms.VisualStyles.TextBoxState" /> values are also used as an argument in the <see cref="Overload:System.Windows.Forms.TextBoxRenderer.DrawTextBox" /> method.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Specifies the visual state of a text box that is drawn with visual styles.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="Assist">
+      <MemberSignature Language="C#" Value="Assist" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.TextBoxState</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The text box appears in assist mode.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Disabled">
+      <MemberSignature Language="C#" Value="Disabled" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.TextBoxState</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The text box appears disabled.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Hot">
+      <MemberSignature Language="C#" Value="Hot" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.TextBoxState</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The text box appears hot.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Normal">
+      <MemberSignature Language="C#" Value="Normal" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.TextBoxState</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The text box appears normal.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Readonly">
+      <MemberSignature Language="C#" Value="Readonly" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.TextBoxState</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The text box appears read-only.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Selected">
+      <MemberSignature Language="C#" Value="Selected" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.TextBoxState</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The text box appears selected.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

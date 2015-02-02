@@ -30,9 +30,6 @@
     <ClInclude Include="NFContainerModule\NFIContainerModule.h">
       <Filter>NFContainerModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFKernelModule\NFCLogModule.h">
-      <Filter>NFKernelModule</Filter>
-    </ClInclude>
     <ClInclude Include="NFKernelModule\NFCConcurrentModule.h">
       <Filter>NFKernelModule</Filter>
     </ClInclude>
@@ -51,9 +48,6 @@
     </ClCompile>
     <ClCompile Include="NFContainerModule\NFCContainerModule.cpp">
       <Filter>NFContainerModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFKernelModule\NFCLogModule.cpp">
-      <Filter>NFKernelModule</Filter>
     </ClCompile>
     <ClCompile Include="NFKernelModule\NFCConcurrentModule.cpp">
       <Filter>NFKernelModule</Filter>

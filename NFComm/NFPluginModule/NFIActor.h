@@ -11,10 +11,14 @@
 
 #include <map>
 #include <string>
+
+#ifdef NF_USE_ACTOR
 #include "Theron/Actor.h"
 #include "Theron/Address.h"
 #include "Theron/Framework.h"
 #include "Theron/Detail/Handlers/ReceiverHandler.h"
+#endif
+
 #include "NFILogicModule.h"
 #include "NFIActorManager.h"
 
@@ -48,7 +52,7 @@ protected:
 private:
 };
 
-#ifdef NF_DYNAMIC_PLUGIN
+#ifdef NF_USE_ACTOR
 class NFIActor : public Theron::Actor, public NFILogicModule
 {
 public:
@@ -101,6 +105,8 @@ private:
                 Execute(fLastTime, fStartedTime);
 
                 unLastTickTime = unNowTickTime;
+
+				Send(message, from);
             }
             break;
 
@@ -137,7 +143,7 @@ public:
 class NFIActor : public NFILogicModule
 {
 public:
-    NFIActor()
+    NFIActor(NFIActorManager* pManager)
     {
     }
 #endif

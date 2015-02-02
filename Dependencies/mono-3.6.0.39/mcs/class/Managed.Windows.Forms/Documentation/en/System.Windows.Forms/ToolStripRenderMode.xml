@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="ToolStripRenderMode" FullName="System.Windows.Forms.ToolStripRenderMode">
+  <TypeSignature Language="C#" Value="public enum ToolStripRenderMode" />
+  <AssemblyInfo>
+    <AssemblyName>System.Windows.Forms</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>You cannot explicitly set the <see cref="P:System.Windows.Forms.ToolStrip.RenderMode" /> to <see cref="F:System.Windows.Forms.ToolStripRenderMode.Custom" />. However, the <see cref="P:System.Windows.Forms.ToolStrip.RenderMode" /> returns <see cref="F:System.Windows.Forms.ToolStripRenderMode.Custom" /> when the <see cref="P:System.Windows.Forms.ToolStrip.Renderer" /> is set to an extension of the <see cref="T:System.Windows.Forms.ToolStripRenderer" /> class that is not <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" /> or <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" />. </para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Specifies the painting style applied to one <see cref="T:System.Windows.Forms.ToolStrip" /> contained in a form.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="Custom">
+      <MemberSignature Language="C#" Value="Custom" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.ToolStripRenderMode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Indicates that the <see cref="P:System.Windows.Forms.ToolStrip.RenderMode" /> is not determined by the <see cref="T:System.Windows.Forms.ToolStripManager" /> or the use of a <see cref="T:System.Windows.Forms.ToolStripRenderer" /> other than <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />, <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" /></para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+    </Member>
+    <Member MemberName="ManagerRenderMode">
+      <MemberSignature Language="C#" Value="ManagerRenderMode" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.ToolStripRenderMode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Indicates that the <see cref="P:System.Windows.Forms.ToolStripManager.RenderMode" /> or <see cref="P:System.Windows.Forms.ToolStripManager.Renderer" /> determines the painting style.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Professional">
+      <MemberSignature Language="C#" Value="Professional" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.ToolStripRenderMode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Indicates the use of a <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" /> to paint.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="System">
+      <MemberSignature Language="C#" Value="System" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.ToolStripRenderMode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Indicates the use of a <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" /> to paint.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

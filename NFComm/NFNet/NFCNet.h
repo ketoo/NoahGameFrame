@@ -24,20 +24,22 @@
 #include <functional>
 #include <memory>
 #include <list>
+#include <vector>
+#include "NFComm/NFCore/NFIdentID.h"
 
 #pragma pack(push, 1)
 
 typedef std::function<int(const NFIPacket& msg)> RECIEVE_FUNCTOR;
-typedef std::shared_ptr<RECIEVE_FUNCTOR> RECIEVE_FUNCTOR_PTR;
+typedef NF_SHARE_PTR<RECIEVE_FUNCTOR> RECIEVE_FUNCTOR_PTR;
 
 typedef std::function<int(const int nSockIndex, const NF_NET_EVENT nEvent)> EVENT_FUNCTOR;
-typedef std::shared_ptr<EVENT_FUNCTOR> EVENT_FUNCTOR_PTR;
+typedef NF_SHARE_PTR<EVENT_FUNCTOR> EVENT_FUNCTOR_PTR;
 
 class NFCNet : public NFINet
 {
 public:
     template<typename BaseType>
-    NFCNet(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT))
+    NFCNet(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT), const int nResetCount = -1, const float nReseTime = 5.0f)
     {
         base = NULL;
         listener = NULL;
@@ -47,7 +49,11 @@ public:
         mstrIP = "";
         mnPort = 0;
         mnCpuCount = 0;
+		mnResetCount = nResetCount;
+		mfReseTime = nReseTime;
+		mfRunTimeReseTime = 0.0f;
         mbServer = false;
+		mnFD = 0;
         ev = NULL;
         mnHeadLength = nHeadLength;
     }
@@ -72,16 +78,21 @@ public:
 
 	virtual bool AddBan(const int nSockIndex, const int32_t nTime = -1){return true;};
 	virtual bool RemoveBan(const int nSockIndex){return true;};
-	virtual void HeartPack();
     virtual NFIMsgHead::NF_Head GetHeadLen(){return mnHeadLength;};
+	virtual bool IsServer(){return mbServer;};
+	virtual int FD(){return mnFD;};
 
 private:
+	virtual void ExecuteClose();
+	virtual void ExeReset( const float fLastFrameTime );
     virtual bool CloseSocketAll();
+	virtual bool ReqReset();
 
 	virtual bool Dismantle(NetObject* pObject);
 
 	virtual int InitClientNet();
 	virtual int InitServerNet();
+	virtual void CloseObject(const int nSockIndex);
 
 	static void listener_cb(struct evconnlistener *listener, evutil_socket_t fd,struct sockaddr *sa, int socklen, void *user_data);
 	static void conn_readcb(struct bufferevent *bev, void *user_data);
@@ -91,7 +102,8 @@ private:
 private:
 	//<fd,object>
 	std::map<int, NetObject*> mmObject;
-    
+	std::vector<int> mvRemoveObject;
+
     NFIMsgHead::NF_Head mnHeadLength;
 
 	int mnMaxConnect;
@@ -99,6 +111,11 @@ private:
 	int mnPort;
 	int mnCpuCount;
 	bool mbServer;
+	int mnResetCount;
+	float mfReseTime;
+	float mfRunTimeReseTime;
+
+	int mnFD;//client有效
     bool mbUsePacket;//是否使用我们的包
 	struct event_base *base;
 	struct evconnlistener *listener;

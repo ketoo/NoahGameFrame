@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="MarginProperty" FullName="System.Windows.Forms.VisualStyles.MarginProperty">
+  <TypeSignature Language="C#" Value="public enum MarginProperty" />
+  <AssemblyInfo>
+    <AssemblyName>System.Windows.Forms</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The <see cref="T:System.Windows.Forms.VisualStyles.MarginProperty" /> enumeration represents a set of margin properties that describe the placement of visual style elements. The <see cref="T:System.Windows.Forms.VisualStyles.MarginProperty" /> values are used as an argument in the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetMargins(System.Drawing.IDeviceContext,System.Windows.Forms.VisualStyles.MarginProperty)" /> method to specify which property value to retrieve for the element that the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" /> currently represents. </para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Identifies the margin properties of a visual style element.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="CaptionMargins">
+      <MemberSignature Language="C#" Value="CaptionMargins" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.MarginProperty</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Specifies where caption text can be placed.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="ContentMargins">
+      <MemberSignature Language="C#" Value="ContentMargins" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.MarginProperty</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Specifies where content can be placed.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="SizingMargins">
+      <MemberSignature Language="C#" Value="SizingMargins" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Windows.Forms.VisualStyles.MarginProperty</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Specifies a margin used for nine-grid sizing.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

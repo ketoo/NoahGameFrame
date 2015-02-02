@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="MenuCommandsChangedType" FullName="System.ComponentModel.Design.MenuCommandsChangedType">
+  <TypeSignature Language="C#" Value="public enum MenuCommandsChangedType" />
+  <AssemblyInfo>
+    <AssemblyName>System.Design</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Runtime.InteropServices.ComVisible(true)</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <remarks>To be added.</remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Specifies the type of action that occurred to the related object's <see cref="T:System.Windows.Forms.Design.MenuCommands" /> collection.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="CommandAdded">
+      <MemberSignature Language="C#" Value="CommandAdded" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.ComponentModel.Design.MenuCommandsChangedType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Specifies that one or more command objects were added.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="CommandChanged">
+      <MemberSignature Language="C#" Value="CommandChanged" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.ComponentModel.Design.MenuCommandsChangedType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Specifies that one or more commands have changed their status.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="CommandRemoved">
+      <MemberSignature Language="C#" Value="CommandRemoved" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.ComponentModel.Design.MenuCommandsChangedType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Specifies that one or more commands were removed.</para>
+        </summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

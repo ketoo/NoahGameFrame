@@ -5,8 +5,9 @@
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
+#if NF_PLATFORM == NF_PLATFORM_WIN
     SetConsoleTitle("Tutorial6");
-
+#endif
     CREATE_PLUGIN(pm, Tutorial6Plugin)
 
 };
