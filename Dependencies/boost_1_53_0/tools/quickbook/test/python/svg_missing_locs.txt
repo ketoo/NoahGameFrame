@@ -1,2 +1,0 @@
-- html/missing.svg
-+ svg_missing.qbk

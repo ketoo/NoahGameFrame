@@ -1,6 +1,0 @@
-[quickbook 1.5]
-[article Missing Relative]
-
-[include ../missing.qbk]
-[include missing-dir/x.qbk]
-[include missing-dir/../../x.qbk]
