@@ -1,5 +1,5 @@
 #include "HelloWorld3Module.h"
-#include "NFComm\NFCore\NFTimer.h"
+#include "NFComm/NFCore/NFTimer.h"
 
 bool HelloWorld3Module::Init()
 {
@@ -22,7 +22,8 @@ int HelloWorld3Module::OnEvent(const NFIDENTID& self, const int event, const NFI
 
 int HelloWorld3Module::OnHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& arg)
 {
-    unsigned long unNowTime = ::GetTickCount();
+
+    unsigned long unNowTime = NF_GetTickCount();
 
     std::cout << "strHeartBeat: " << fTime << " Count: " << nCount << "  TimeDis: " << unNowTime - mLastTime << std::endl;
 
@@ -38,14 +39,15 @@ int HelloWorld3Module::OnClassCallBackEvent(const NFIDENTID& self, const std::st
 
     if (event == COE_CREATE_HASDATA)
     {
-
+#ifdef NF_USE_ACTOR
         if(pPluginManager->GetActorID() == NFIActorManager::EACTOR_MAIN)
+#endif
         {
             m_pEventProcessModule->AddEventCallBack(self, 11111111, this, &HelloWorld3Module::OnEvent);
 
             m_pKernelModule->AddHeartBeat(self, "OnHeartBeat", this, &HelloWorld3Module::OnHeartBeat, NFCDataList(), 5.0f, 9999 );
 
-            mLastTime = ::GetTickCount();
+            mLastTime = NF_GetTickCount();
         }
     }
 
@@ -83,10 +85,14 @@ bool HelloWorld3Module::AfterInit()
     m_pEventProcessModule->AddClassCallBack("Player", this, &HelloWorld3Module::OnClassCallBackEvent);
 
     //创建对象，挂类回调和属性回调,然后事件处理对象
-    NFIObject* pObject = m_pKernelModule->CreateObject(10, 1, 0, "Player", "", NFCDataList());
-    
-    pObject->GetPropertyManager()->AddProperty(pObject->Self(), "Hello", TDATA_STRING, true, true, true, 0, "");
-    pObject->GetPropertyManager()->AddProperty(pObject->Self(), "World", TDATA_INT, true, true, true, 0, "");
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(NFIDENTID(0, 10), 1, 0, "Player", "", NFCDataList());
+    if (!pObject.get())
+    {
+        return false;
+    }
+
+    pObject->GetPropertyManager()->AddProperty(pObject->Self(), "Hello", TDATA_STRING, true, true, true, true, 0, "");
+    pObject->GetPropertyManager()->AddProperty(pObject->Self(), "World", TDATA_INT, true, true, true, true, 0, "");
 
     pObject->AddPropertyCallBack("Hello", this, &HelloWorld3Module::OnPropertyStrCallBackEvent);
     pObject->AddPropertyCallBack("World", this, &HelloWorld3Module::OnPropertyCallBackEvent);

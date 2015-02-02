@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is config xml-->
+<XML>
+    <Object ID="SqlServer_1" IP="127.0.0.1" Port="7001" Pwd="123456" ServerID="000107001"/>
+</XML>

@@ -8,7 +8,7 @@
 
 
 #include "NFCDataProcessModule.h"
-#include "NFComm\NFMessageDefine\NFDefine.pb.h"
+#include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
 bool NFCDataProcessModule::Init()
 {
@@ -16,7 +16,7 @@ bool NFCDataProcessModule::Init()
     m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
     m_pNoSqlModule = dynamic_cast<NFIDataNoSqlModule*>( pPluginManager->FindModule( "NFCDataNoSqlModule" ) );
     m_pGameLogicModule = dynamic_cast<NFIGameLogicModule*>( pPluginManager->FindModule( "NFCGameLogicModule" ) );
-    
+
 
     m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCDataProcessModule::OnObjectClassEvent );
 
@@ -64,17 +64,17 @@ int NFCDataProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std::
 
 int NFCDataProcessModule::LoadDataFormNoSql( const NFIDENTID& self )
 {
-    NFIObject* pObject = m_pKernelModule->GetObject( self );
-    if ( pObject )
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+    if ( pObject.get() )
     {
-        NFIPropertyManager* pProManager = pObject->GetPropertyManager();
-        if ( pProManager )
+        NF_SHARE_PTR<NFIPropertyManager> pProManager = pObject->GetPropertyManager();
+        if ( pProManager.get() )
         {
             LoadProperty( self, pProManager );
         }
 
-        NFIRecordManager* pRecordManager = pObject->GetRecordManager();
-        if ( pRecordManager )
+        NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
+        if ( pRecordManager.get() )
         {
             LoadRecord( self, pRecordManager );
         }
@@ -85,8 +85,8 @@ int NFCDataProcessModule::LoadDataFormNoSql( const NFIDENTID& self )
 
 int NFCDataProcessModule::SaveDataToNoSql(const NFIDENTID& self, bool bOffline/* = false*/)
 {
-    NFIObject* pObject = m_pKernelModule->GetObject( self );
-    if ( pObject )
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+    if ( pObject.get() )
     {
         SaveProperty( self, pObject->GetPropertyManager() );
         SaveRecord( self, pObject->GetRecordManager() );
@@ -95,6 +95,7 @@ int NFCDataProcessModule::SaveDataToNoSql(const NFIDENTID& self, bool bOffline/*
     return 0;
 }
 
+#ifdef NF_USE_ACTOR
 void NFCDataProcessModule::Handler( const NFIActorMessage& message, const Theron::Address from )
 {
     //收到的消息协议
@@ -137,8 +138,9 @@ void NFCDataProcessModule::HandlerLog( const NFIActorMessage& message, const The
 {
     //日志
 }
+#endif
 
-int NFCDataProcessModule::LoadProperty( const NFIDENTID& self, NFIPropertyManager* pProManager )
+int NFCDataProcessModule::LoadProperty( const NFIDENTID& self, NF_SHARE_PTR<NFIPropertyManager> pProManager )
 {
     //m_pNoSqlModule->QueryRoleProperty();
 
@@ -147,18 +149,18 @@ int NFCDataProcessModule::LoadProperty( const NFIDENTID& self, NFIPropertyManage
     return 0;
 }
 
-int NFCDataProcessModule::LoadRecord( const NFIDENTID& self, NFIRecordManager* pRecord )
+int NFCDataProcessModule::LoadRecord( const NFIDENTID& self, NF_SHARE_PTR<NFIRecordManager> pRecord )
 {
 
     return 0;
 }
 
-int NFCDataProcessModule::SaveProperty( const NFIDENTID& self, NFIPropertyManager* pProManager )
+int NFCDataProcessModule::SaveProperty( const NFIDENTID& self, NF_SHARE_PTR<NFIPropertyManager> pProManager )
 {
     return 0;
 }
 
-int NFCDataProcessModule::SaveRecord( const NFIDENTID& self, NFIRecordManager* pRecord )
+int NFCDataProcessModule::SaveRecord( const NFIDENTID& self, NF_SHARE_PTR<NFIRecordManager> pRecord )
 {
     return 0;
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is a class xml-->
+<XML>
+    <Records>
+        <Record Col="4" Desc="任务杀怪表" Id="TaskMonsterList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="8" Save="1" SaveInterval="0" View="1">
+            <Col Tag="MonsterID" Type="string"/>
+            <Col Tag="CurrentKillCount" Type="int"/>
+            <Col Tag="RequireKillCount" Type="int"/>
+            <Col Tag="TaskID" Type="string"/>
+        </Record>
+        <Record Col="6" Desc="" Id="BuildingList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="128" Save="1" SaveInterval="0" View="1">
+            <Col Tag="BuildingID" Type="string"/>
+            <Col Tag="BuildingGUID" Type="string"/>
+            <Col Tag="State" Type="int"/>
+            <Col Tag="PosX" Type="int"/>
+            <Col Tag="PosY" Type="int"/>
+            <Col Tag="PosZ" Type="int"/>
+        </Record>
+    </Records>
+    <Propertys>
+        <Property Desc="角色名" Id="RoleName" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="性别" Id="Sex" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="种族" Id="Race" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="阵营" Id="Camp" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="玩家下线的时候需要保存上次在线的场景" Id="LastContainerID" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="等级,属性名不能超过20字符,重要的是，分层的属性，不能保存，因为表会自动保存" Id="Level" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="显示的名字" Id="ShowName" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="拥有的金钱" Id="Gold" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="拥有的石头" Id="Stone" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="拥有的铁" Id="Steel" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="拥有的钻石" Id="Diamond" Index="1" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+    </Propertys>
+    <Components/>
+    <Includes/>
+</XML>

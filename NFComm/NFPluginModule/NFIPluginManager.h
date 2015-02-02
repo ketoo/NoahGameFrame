@@ -14,7 +14,7 @@
 
 class NFIPlugin;
 
-#ifdef NF_DYNAMIC_PLUGIN
+#ifdef NF_USE_ACTOR
 class NFIPluginManager : public NFIActor
 {
 public:
@@ -26,7 +26,7 @@ public:
 class NFIPluginManager : public NFIActor
 {
 public:
-    NFIPluginManager()
+    NFIPluginManager(NFIActorManager* pManager): NFIActor(pManager)
     {
     }
 

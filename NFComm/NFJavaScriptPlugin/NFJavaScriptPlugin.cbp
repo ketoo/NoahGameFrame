@@ -2,61 +2,59 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="NFGameServerNet_ServerPlugin" />
+		<Option title="NFJavaScriptPlugin" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="NFJavaScriptPlugin" prefix_auto="1" extension_auto="1" />
+				<Option output="../../../trunk/_Out/Comm/Debug/NFJavaScriptPlugin_d" prefix_auto="1" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-DWIN" />
+					<Add option="-std=c++11" />
+					<Add option="-fpic" />
 					<Add option="-D_DEBUG" />
-					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
-					<Add option="-DTHERON_CPP11" />
-					<Add directory="$(NF_HOME)" />
-					<Add directory="$(BOOST_HOME)" />
-					<Add directory="$(NF_DEP)" />
-					<Add directory="$(NF_LIBEVENT)" />
-					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/include" />
-					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/WIN32-Code" />
-					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/compat" />
-					<Add directory="$(NF_DEP)/protobuf-2.5.0/src" />
-					<Add directory="$(THERON_HOME)" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/include/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/compat/" />
+					<Add directory="../../../trunk/Dependencies/protobuf-2.5.0/src/" />
+					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
-					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
+					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
+					<Add directory="../../../trunk/Dependencies/lib/$(Configuration)/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
 			</Target>
 			<Target title="Release x64">
-				<Option output="NFJavaScriptPlugin" prefix_auto="1" extension_auto="1" />
+				<Option output="../../../trunk/_Out/Comm/Release/NFJavaScriptPlugin" prefix_auto="1" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-DWIN" />
-					<Add option="-D_WINDOWS" />
+					<Add option="-std=c++11" />
+					<Add option="-fpic" />
 					<Add option="-D_USRDLL" />
-					<Add option="-DTHERON_CPP11" />
-					<Add directory="$(NF_HOME)" />
-					<Add directory="$(BOOST_HOME)" />
-					<Add directory="$(NF_DEP)" />
-					<Add directory="$(NF_LIBEVENT)" />
-					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/include" />
-					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/WIN32-Code" />
-					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/compat" />
-					<Add directory="$(NF_DEP)/protobuf-2.5.0/src" />
-					<Add directory="$(THERON_HOME)" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/include/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/compat/" />
+					<Add directory="../../../trunk/Dependencies/protobuf-2.5.0/src/" />
+					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
-					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
+					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
+					<Add directory="../../../trunk/Dependencies/lib/$(Configuration)/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
 			</Target>
 		</Build>
@@ -66,8 +64,9 @@
 		<Unit filename="NFJavaScriptPlugin.h" />
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
-			<code_completion />
 			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
 			<debugger />
 		</Extensions>
 	</Project>

@@ -18,11 +18,17 @@ class NFCPluginManager
     : public NFIPluginManager
 {
 public:
+#ifdef NF_USE_ACTOR
 	NFCPluginManager(Theron::Framework &framework, NFIActorManager* pManager, NFIActorManager::EACTOR eActor) : NFIPluginManager(framework, pManager, eActor)
 	{
 		mbOnReloadPlugin = false;
 	}
-
+#else
+	NFCPluginManager(NFIActorManager* pManager) : NFIPluginManager(pManager)
+	{
+		mbOnReloadPlugin = false;
+	}
+#endif
     virtual bool Init();
 
     virtual bool AfterInit();
@@ -65,9 +71,9 @@ protected:
 
     virtual bool LoadPluginLibrary(const std::string& strPluginDLLName);
     virtual bool UnLoadPluginLibrary(const std::string& strPluginDLLName);
-
+#ifdef NF_USE_ACTOR
     virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
-
+#endif
 private:
     bool mbOnReloadPlugin;
 

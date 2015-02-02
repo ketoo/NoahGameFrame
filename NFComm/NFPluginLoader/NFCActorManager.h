@@ -40,11 +40,17 @@ public:
 		AfterInit();
 	}
 
+#ifdef NF_USE_ACTOR
 	virtual const Theron::Address GetAddress( NFIActorManager::EACTOR eActor);
+#else
+#endif
 
 private:
 	std::vector<NFIActor*> mActorVec;
+
+#ifdef NF_USE_ACTOR
     Theron::Framework* m_pFramework;
+#endif
 	//Theron::Framework framework; // ªª÷∏’Î
 };
 

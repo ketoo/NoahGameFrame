@@ -13,7 +13,7 @@
 
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIProxyServerNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFIProxyServerNet_ClientModule.h"
+#include "NFComm/NFPluginModule/NFIProxyServerToWorldModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
@@ -84,13 +84,13 @@ protected:
     //int mnGameContainerID;
 
     //// 世界服务器发过来，谁想登录此服务器的那个对象，包含帐号和KEY信息，KEY验证后删掉
-    //NFMap<std::string, ConnectData> mWantConnectionMap;
+    //NFMapEx<std::string, ConnectData> mWantConnectionMap;
 
     //// Game容器
-    //NFMap<int, ServerData> mnGameDataMap;
+    //NFMapEx<int, ServerData> mnGameDataMap;
 
 protected:
-    NFIProxyServerNet_ClientModule* m_pProxyServerNet_ClientModule;
+    NFIProxyServerToWorldModule* m_pProxyToWorldModule;
 	NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFIElementInfoModule* m_pElementInfoModule;
