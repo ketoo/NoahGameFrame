@@ -14,9 +14,7 @@
 				<Option createDefFile="1" />
 				<Compiler>
 					<Add option="-D_DEBUG" />
-					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
-					<Add option="-DNFCLIENTLOGICPLUGIN_EXPORTS" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
@@ -31,9 +29,7 @@
 				<Option createDefFile="1" />
 				<Compiler>
 					<Add option="-DNDEBUG" />
-					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
-					<Add option="-DNFCLIENTLOGICPLUGIN_EXPORTS" />
 				</Compiler>
 			</Target>
 		</Build>

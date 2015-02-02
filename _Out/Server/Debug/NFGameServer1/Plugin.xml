@@ -5,6 +5,9 @@
 	<Plugin Name="NFGameServerPlugin" Main="1"/>
 	<Plugin Name="NFGameServerNet_ServerPlugin" Main="1"/>
 	<Plugin Name="NFGameServerNet_ClientPlugin" Main="1"/>
+	<Plugin Name="NFLogPlugin" Main="1"/>
+	<Plugin Name="NFSLGPlugin" Main="1"/>
+	<Plugin Name="NFAIPlugin" Main="1"/>
 	
 	<ActorDataModule Name="NFCDataProcessModule" />
 </XML>

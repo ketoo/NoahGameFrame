@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------
 
 #include "NFCPropertyConfigModule.h"
-#include "NFComm\NFPluginModule\NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 bool NFCPropertyConfigModule::Init()
 {
@@ -30,7 +30,7 @@ bool NFCPropertyConfigModule::AfterInit()
 {
     m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-    
+
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pElementInfoModule);
 
@@ -43,8 +43,8 @@ int NFCPropertyConfigModule::CalculateBaseValue( const NFJobType nJob, const int
 {
     if ( nJob >= 0 && nJob < NFJobType::NJT_MAX )
     {
-        std::string* pstrEffectData = mhtCoefficienData[nJob].GetElement( nLevel );
-        if ( pstrEffectData )
+        NF_SHARE_PTR<std::string> pstrEffectData = mhtCoefficienData[nJob].GetElement( nLevel );
+        if ( pstrEffectData.get() )
         {
             return m_pElementInfoModule->GetPropertyInt(*pstrEffectData, strProperty);
         }
@@ -55,22 +55,21 @@ int NFCPropertyConfigModule::CalculateBaseValue( const NFJobType nJob, const int
 
 void NFCPropertyConfigModule::Load()
 {
-
-    NFILogicClass* pLogicClass = m_pLogicClassModule->GetElement("InitProperty");
-    if (pLogicClass)
+    NF_SHARE_PTR<NFILogicClass> pLogicClass = m_pLogicClassModule->GetElement("InitProperty");
+    if (pLogicClass.get())
     {
         NFList<std::string>& xList = pLogicClass->GetConfigNameList();
         std::string strData;
         bool bRet = xList.First(strData);
         while (bRet)
         {
-            NFIPropertyManager* pPropertyManager = m_pElementInfoModule->GetPropertyManager(strData);
-            if (pPropertyManager)
+            NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager(strData);
+            if (pPropertyManager.get())
             {
                 int nJob = m_pElementInfoModule->GetPropertyInt(strData, "Job");
                 int nLevel = m_pElementInfoModule->GetPropertyInt(strData, "Level");
                 std::string strEffectData = m_pElementInfoModule->GetPropertyString(strData, "EffectData");
-                mhtCoefficienData[nJob].AddElement( nLevel, new std::string(strEffectData) );
+                mhtCoefficienData[nJob].AddElement( nLevel, NF_SHARE_PTR<std::string>(NF_NEW std::string(strEffectData)) );
             }
 
             bRet = xList.Next(strData);
@@ -80,8 +79,8 @@ void NFCPropertyConfigModule::Load()
 
 bool NFCPropertyConfigModule::LegalLevel( const NFJobType nJob, const int nLevel )
 {
-    std::string* pstrEffectData = mhtCoefficienData[nJob].GetElement( nLevel );
-    if (pstrEffectData)
+    NF_SHARE_PTR<std::string> strEffectData = mhtCoefficienData[nJob].GetElement( nLevel );
+    if (strEffectData.get())
     {
         return true;
     }

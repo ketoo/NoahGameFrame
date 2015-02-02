@@ -13,7 +13,7 @@ NFIDENTID NFCComponent::Self()
     return mSelf;
 }
 
-bool NFCComponent::SetEnable( const bool bEnable )
+bool NFCComponent::SetEnable(const bool bEnable)
 {
     mbEnable = bEnable;
     return true;

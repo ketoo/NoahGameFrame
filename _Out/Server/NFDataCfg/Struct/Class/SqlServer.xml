@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is a class xml-->
+<XML>
+    <Records/>
+    <Propertys>
+        <Property Desc="" Id="ServerID" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="" Id="IP" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="" Id="Port" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="" Id="Pwd" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+    </Propertys>
+    <Includes/>
+</XML>

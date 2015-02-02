@@ -12,6 +12,7 @@
 //#include "GameServerPCH.h"
 //#include "NW_Helper.h"
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
+#include <memory>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
@@ -23,7 +24,30 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-#include <vector>
+#include "NFComm/NFPluginModule/NFISLGShopModule.h"
+#include "NFComm/NFPluginModule/NFISLGBuildingModule.h"
+#include "NFComm/NFMessageDefine/NFSLGDefine.pb.h"
+#include "NFComm/NFPluginModule/NFIUUIDModule.h"
+
+////////////////////////////////////////////////////////////////////////////
+// 客户端消息处理宏
+#define CLIENT_MSG_PROCESS(packet, msg)                 \
+    NFIDENTID nPlayerID;                              \
+    msg xMsg;                                           \
+    if (!RecivePB(packet, xMsg, nPlayerID))              \
+    {                                                   \
+        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), "ReqAckBuyObjectFormShop", "Parse msg error", __FUNCTION__, __LINE__); \
+        return;                                         \
+    }                                                   \
+                                                        \
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(nPlayerID); \
+    if ( NULL == pObject.get() )                              \
+    {                                                   \
+        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "FromClient Object do not Exist", "", __FUNCTION__, __LINE__); \
+        return;                                         \
+    }
+//////////////////////////////////////////////////////////////////////////
+
 
 class NFCGameServerNet_ServerModule
     : public NFINetModule
@@ -76,11 +100,19 @@ protected:
     void OnClienUseItem(const NFIPacket& msg);
     void OnClienPickItem(const NFIPacket& msg);
     void OnClienMove(const NFIPacket& msg);
+    void OnClienMoveImmune(const NFIPacket& msg);
     void OnClienAcceptTask(const NFIPacket& msg);
     void OnClienPushTask(const NFIPacket& msg);
     void OnClienPushCustom(const NFIPacket& msg);
     void OnClienChatProcess(const NFIPacket& msg);
 
+	/////////SLG_START/////////////////////////////////////////////////////////////////
+	void OnSLGClienBuyItem(const NFIPacket& msg);
+	void OnSLGClienMoveObject(const NFIPacket& msg);
+	void OnSLGClienUpgradeBuilding(const NFIPacket& msg);
+	void OnSLGClienCreateItem(const NFIPacket& msg);
+
+	/////////SLG_END/////////////////////////////////////////////////////////////////
 protected:
     //将self的全部属性广播给argVar[应该是多对多]
     int OnPropertyEnter( const NFIDENTID& self, const NFIDataList& argVar );
@@ -102,7 +134,7 @@ protected:
     int GetBroadCastObject( const int nObjectContainerID, const int nGroupID, NFIDataList& valueObject );
     //////////////////////////////////////////////////////////////////////////
     int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
-
+    int OnObjectNPCClassEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
     //////////////////////////////////////////////////////////////////////////
     // 回馈事件
     int OnReturnEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
@@ -120,28 +152,22 @@ private:
     {
         ServerData()
         {
-            pData = new NFMsg::ServerInfoReport();
+            pData = NF_SHARE_PTR<NFMsg::ServerInfoReport>(NF_NEW NFMsg::ServerInfoReport());
             nFD = 0;
         }
 
         ~ServerData()
         {
             nFD = 0;
-            delete pData;
             pData = NULL;
         }
 
         int nFD;
-        NFMsg::ServerInfoReport* pData;
+        NF_SHARE_PTR<NFMsg::ServerInfoReport> pData;
 
         //此网关上所有的对象<角色ID,gate_FD>
         std::map<NFIDENTID, int> xRoleInfo;
     };
-
-private:
-    //gateid,data
-    NFMap<int, ServerData> mProxyMap;
-protected:
 
     //要管理当前所有的对象所在的actor,gateid,fd等
     struct BaseData 
@@ -153,26 +179,36 @@ protected:
             nFD = 0;
         }
 
+        BaseData(const int gateID, const int fd)
+        {
+            nActorID = 0;
+            nGateID = gateID;
+            nFD = fd;
+        }
+
         int nActorID;
         int nGateID;
         int nFD;
     };
 
-
 private:
-    //<角色id,角色基础信息>
-    NFMap<NFIDENTID, BaseData> mRoleBaseData;
-    //<角色fd(在网关),角色id>
-    NFMap<int, NFIDENTID> mRoleFDData;
-    //临时保存角色是否已经等待创建的状态<角色名，fd>
-    NFMap<std::string, int> mRoleState;
+    //<角色id,角色网关基础信息>//其实可以在object系统中被代替
+    NFMapEx<NFIDENTID, BaseData> mRoleBaseData;
+    //gateid,data
+    NFMapEx<int, ServerData> mProxyMap;
 
-    NFIKernelModule* m_pKernelModule;
+    //////////////////////////////////////////////////////////////////////////
+	NFIUUIDModule* m_pUUIDModule;
+	NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFILogModule* m_pLogModule;
     NFIEventProcessModule* m_pEventProcessModule;
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFIElementInfoModule* m_pElementInfoModule;
+    //////////////////////////////////////////////////////////////////////////
+    //SLG模块
+	NFISLGShopModule* m_pSLGShopModule;
+    NFISLGBuildingModule* m_pSLGBuildingModule;
 };
 
 #endif

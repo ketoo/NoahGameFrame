@@ -150,10 +150,19 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required bytes account = 1;
+  // required .NFMsg.Ident id = 1;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& id() const;
+  inline ::NFMsg::Ident* mutable_id();
+  inline ::NFMsg::Ident* release_id();
+  inline void set_allocated_id(::NFMsg::Ident* id);
+
+  // required bytes account = 2;
   inline bool has_account() const;
   inline void clear_account();
-  static const int kAccountFieldNumber = 1;
+  static const int kAccountFieldNumber = 2;
   inline const ::std::string& account() const;
   inline void set_account(const ::std::string& value);
   inline void set_account(const char* value);
@@ -162,17 +171,17 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
   inline ::std::string* release_account();
   inline void set_allocated_account(::std::string* account);
 
-  // required int32 game_id = 2;
+  // required int32 game_id = 3;
   inline bool has_game_id() const;
   inline void clear_game_id();
-  static const int kGameIdFieldNumber = 2;
+  static const int kGameIdFieldNumber = 3;
   inline ::google::protobuf::int32 game_id() const;
   inline void set_game_id(::google::protobuf::int32 value);
 
-  // required bytes name = 3;
+  // required bytes name = 4;
   inline bool has_name() const;
   inline void clear_name();
-  static const int kNameFieldNumber = 3;
+  static const int kNameFieldNumber = 4;
   inline const ::std::string& name() const;
   inline void set_name(const ::std::string& value);
   inline void set_name(const char* value);
@@ -183,6 +192,8 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqEnterGameServer)
  private:
+  inline void set_has_id();
+  inline void clear_has_id();
   inline void set_has_account();
   inline void clear_has_account();
   inline void set_has_game_id();
@@ -192,12 +203,13 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::NFMsg::Ident* id_;
   ::std::string* account_;
   ::std::string* name_;
   ::google::protobuf::int32 game_id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -406,12 +418,14 @@ class ReqAckPlayerMove : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional int64 mover = 1;
+  // required .NFMsg.Ident mover = 1;
   inline bool has_mover() const;
   inline void clear_mover();
   static const int kMoverFieldNumber = 1;
-  inline ::google::protobuf::int64 mover() const;
-  inline void set_mover(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& mover() const;
+  inline ::NFMsg::Ident* mutable_mover();
+  inline ::NFMsg::Ident* release_mover();
+  inline void set_allocated_mover(::NFMsg::Ident* mover);
 
   // required int32 moveType = 2;
   inline bool has_movetype() const;
@@ -420,47 +434,29 @@ class ReqAckPlayerMove : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 movetype() const;
   inline void set_movetype(::google::protobuf::int32 value);
 
-  // required float target_x = 3;
-  inline bool has_target_x() const;
-  inline void clear_target_x();
-  static const int kTargetXFieldNumber = 3;
-  inline float target_x() const;
-  inline void set_target_x(float value);
+  // repeated .NFMsg.Position target_pos = 3;
+  inline int target_pos_size() const;
+  inline void clear_target_pos();
+  static const int kTargetPosFieldNumber = 3;
+  inline const ::NFMsg::Position& target_pos(int index) const;
+  inline ::NFMsg::Position* mutable_target_pos(int index);
+  inline ::NFMsg::Position* add_target_pos();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >&
+      target_pos() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >*
+      mutable_target_pos();
 
-  // optional float target_y = 4;
-  inline bool has_target_y() const;
-  inline void clear_target_y();
-  static const int kTargetYFieldNumber = 4;
-  inline float target_y() const;
-  inline void set_target_y(float value);
-
-  // required float target_z = 5;
-  inline bool has_target_z() const;
-  inline void clear_target_z();
-  static const int kTargetZFieldNumber = 5;
-  inline float target_z() const;
-  inline void set_target_z(float value);
-
-  // optional float source_x = 6;
-  inline bool has_source_x() const;
-  inline void clear_source_x();
-  static const int kSourceXFieldNumber = 6;
-  inline float source_x() const;
-  inline void set_source_x(float value);
-
-  // optional float source_y = 7;
-  inline bool has_source_y() const;
-  inline void clear_source_y();
-  static const int kSourceYFieldNumber = 7;
-  inline float source_y() const;
-  inline void set_source_y(float value);
-
-  // optional float source_z = 8;
-  inline bool has_source_z() const;
-  inline void clear_source_z();
-  static const int kSourceZFieldNumber = 8;
-  inline float source_z() const;
-  inline void set_source_z(float value);
+  // repeated .NFMsg.Position source_pos = 4;
+  inline int source_pos_size() const;
+  inline void clear_source_pos();
+  static const int kSourcePosFieldNumber = 4;
+  inline const ::NFMsg::Position& source_pos(int index) const;
+  inline ::NFMsg::Position* mutable_source_pos(int index);
+  inline ::NFMsg::Position* add_source_pos();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >&
+      source_pos() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >*
+      mutable_source_pos();
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckPlayerMove)
  private:
@@ -468,32 +464,16 @@ class ReqAckPlayerMove : public ::google::protobuf::Message {
   inline void clear_has_mover();
   inline void set_has_movetype();
   inline void clear_has_movetype();
-  inline void set_has_target_x();
-  inline void clear_has_target_x();
-  inline void set_has_target_y();
-  inline void clear_has_target_y();
-  inline void set_has_target_z();
-  inline void clear_has_target_z();
-  inline void set_has_source_x();
-  inline void clear_has_source_x();
-  inline void set_has_source_y();
-  inline void clear_has_source_y();
-  inline void set_has_source_z();
-  inline void clear_has_source_z();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 mover_;
+  ::NFMsg::Ident* mover_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Position > target_pos_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Position > source_pos_;
   ::google::protobuf::int32 movetype_;
-  float target_x_;
-  float target_y_;
-  float target_z_;
-  float source_x_;
-  float source_y_;
-  float source_z_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -584,12 +564,14 @@ class ReqAckPlayerChat : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 chat_id = 1;
+  // required .NFMsg.Ident chat_id = 1;
   inline bool has_chat_id() const;
   inline void clear_chat_id();
   static const int kChatIdFieldNumber = 1;
-  inline ::google::protobuf::int64 chat_id() const;
-  inline void set_chat_id(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& chat_id() const;
+  inline ::NFMsg::Ident* mutable_chat_id();
+  inline ::NFMsg::Ident* release_chat_id();
+  inline void set_allocated_chat_id(::NFMsg::Ident* chat_id);
 
   // required .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 2;
   inline bool has_chat_type() const;
@@ -621,7 +603,7 @@ class ReqAckPlayerChat : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 chat_id_;
+  ::NFMsg::Ident* chat_id_;
   ::std::string* chat_info_;
   int chat_type_;
 
@@ -691,12 +673,14 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 user = 1;
+  // required .NFMsg.Ident user = 1;
   inline bool has_user() const;
   inline void clear_user();
   static const int kUserFieldNumber = 1;
-  inline ::google::protobuf::int64 user() const;
-  inline void set_user(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& user() const;
+  inline ::NFMsg::Ident* mutable_user();
+  inline ::NFMsg::Ident* release_user();
+  inline void set_allocated_user(::NFMsg::Ident* user);
 
   // required bytes skill_id = 2;
   inline bool has_skill_id() const;
@@ -710,22 +694,40 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
   inline ::std::string* release_skill_id();
   inline void set_allocated_skill_id(::std::string* skill_id);
 
-  // repeated int64 effect_ident = 3;
+  // required .NFMsg.Position now_pos = 3;
+  inline bool has_now_pos() const;
+  inline void clear_now_pos();
+  static const int kNowPosFieldNumber = 3;
+  inline const ::NFMsg::Position& now_pos() const;
+  inline ::NFMsg::Position* mutable_now_pos();
+  inline ::NFMsg::Position* release_now_pos();
+  inline void set_allocated_now_pos(::NFMsg::Position* now_pos);
+
+  // required .NFMsg.Position tar_pos = 4;
+  inline bool has_tar_pos() const;
+  inline void clear_tar_pos();
+  static const int kTarPosFieldNumber = 4;
+  inline const ::NFMsg::Position& tar_pos() const;
+  inline ::NFMsg::Position* mutable_tar_pos();
+  inline ::NFMsg::Position* release_tar_pos();
+  inline void set_allocated_tar_pos(::NFMsg::Position* tar_pos);
+
+  // repeated .NFMsg.Ident effect_ident = 5;
   inline int effect_ident_size() const;
   inline void clear_effect_ident();
-  static const int kEffectIdentFieldNumber = 3;
-  inline ::google::protobuf::int64 effect_ident(int index) const;
-  inline void set_effect_ident(int index, ::google::protobuf::int64 value);
-  inline void add_effect_ident(::google::protobuf::int64 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
+  static const int kEffectIdentFieldNumber = 5;
+  inline const ::NFMsg::Ident& effect_ident(int index) const;
+  inline ::NFMsg::Ident* mutable_effect_ident(int index);
+  inline ::NFMsg::Ident* add_effect_ident();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
       effect_ident() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
       mutable_effect_ident();
 
-  // repeated int32 effect_value = 4;
+  // repeated int32 effect_value = 6;
   inline int effect_value_size() const;
   inline void clear_effect_value();
-  static const int kEffectValueFieldNumber = 4;
+  static const int kEffectValueFieldNumber = 6;
   inline ::google::protobuf::int32 effect_value(int index) const;
   inline void set_effect_value(int index, ::google::protobuf::int32 value);
   inline void add_effect_value(::google::protobuf::int32 value);
@@ -734,10 +736,10 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_effect_value();
 
-  // repeated int32 effect_rlt = 5;
+  // repeated int32 effect_rlt = 7;
   inline int effect_rlt_size() const;
   inline void clear_effect_rlt();
-  static const int kEffectRltFieldNumber = 5;
+  static const int kEffectRltFieldNumber = 7;
   inline ::google::protobuf::int32 effect_rlt(int index) const;
   inline void set_effect_rlt(int index, ::google::protobuf::int32 value);
   inline void add_effect_rlt(::google::protobuf::int32 value);
@@ -746,38 +748,29 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_effect_rlt();
 
-  // optional bytes key_value = 6;
-  inline bool has_key_value() const;
-  inline void clear_key_value();
-  static const int kKeyValueFieldNumber = 6;
-  inline const ::std::string& key_value() const;
-  inline void set_key_value(const ::std::string& value);
-  inline void set_key_value(const char* value);
-  inline void set_key_value(const void* value, size_t size);
-  inline ::std::string* mutable_key_value();
-  inline ::std::string* release_key_value();
-  inline void set_allocated_key_value(::std::string* key_value);
-
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckUseSkill)
  private:
   inline void set_has_user();
   inline void clear_has_user();
   inline void set_has_skill_id();
   inline void clear_has_skill_id();
-  inline void set_has_key_value();
-  inline void clear_has_key_value();
+  inline void set_has_now_pos();
+  inline void clear_has_now_pos();
+  inline void set_has_tar_pos();
+  inline void clear_has_tar_pos();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 user_;
+  ::NFMsg::Ident* user_;
   ::std::string* skill_id_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int64 > effect_ident_;
+  ::NFMsg::Position* now_pos_;
+  ::NFMsg::Position* tar_pos_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > effect_ident_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > effect_value_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > effect_rlt_;
-  ::std::string* key_value_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -842,30 +835,34 @@ class ReqAckUseItem : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 user = 1;
+  // required .NFMsg.Ident user = 1;
   inline bool has_user() const;
   inline void clear_user();
   static const int kUserFieldNumber = 1;
-  inline ::google::protobuf::int64 user() const;
-  inline void set_user(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& user() const;
+  inline ::NFMsg::Ident* mutable_user();
+  inline ::NFMsg::Ident* release_user();
+  inline void set_allocated_user(::NFMsg::Ident* user);
 
-  // required int64 item_guid = 2;
+  // required .NFMsg.Ident item_guid = 2;
   inline bool has_item_guid() const;
   inline void clear_item_guid();
   static const int kItemGuidFieldNumber = 2;
-  inline ::google::protobuf::int64 item_guid() const;
-  inline void set_item_guid(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& item_guid() const;
+  inline ::NFMsg::Ident* mutable_item_guid();
+  inline ::NFMsg::Ident* release_item_guid();
+  inline void set_allocated_item_guid(::NFMsg::Ident* item_guid);
 
-  // repeated int64 effect_ident = 3;
+  // repeated .NFMsg.Ident effect_ident = 3;
   inline int effect_ident_size() const;
   inline void clear_effect_ident();
   static const int kEffectIdentFieldNumber = 3;
-  inline ::google::protobuf::int64 effect_ident(int index) const;
-  inline void set_effect_ident(int index, ::google::protobuf::int64 value);
-  inline void add_effect_ident(::google::protobuf::int64 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
+  inline const ::NFMsg::Ident& effect_ident(int index) const;
+  inline ::NFMsg::Ident* mutable_effect_ident(int index);
+  inline ::NFMsg::Ident* add_effect_ident();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
       effect_ident() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
       mutable_effect_ident();
 
   // repeated int32 effect_value = 4;
@@ -915,9 +912,9 @@ class ReqAckUseItem : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 user_;
-  ::google::protobuf::int64 item_guid_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int64 > effect_ident_;
+  ::NFMsg::Ident* user_;
+  ::NFMsg::Ident* item_guid_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > effect_ident_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > effect_value_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > effect_rlt_;
   ::std::string* key_value_;
@@ -1146,12 +1143,14 @@ class ReqPickDropItem : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 item_guid = 2;
+  // required .NFMsg.Ident item_guid = 2;
   inline bool has_item_guid() const;
   inline void clear_item_guid();
   static const int kItemGuidFieldNumber = 2;
-  inline ::google::protobuf::int64 item_guid() const;
-  inline void set_item_guid(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& item_guid() const;
+  inline ::NFMsg::Ident* mutable_item_guid();
+  inline ::NFMsg::Ident* release_item_guid();
+  inline void set_allocated_item_guid(::NFMsg::Ident* item_guid);
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqPickDropItem)
  private:
@@ -1160,7 +1159,7 @@ class ReqPickDropItem : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 item_guid_;
+  ::NFMsg::Ident* item_guid_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -1402,12 +1401,14 @@ class PlayerEntryInfo : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 object_guid = 1;
+  // required .NFMsg.Ident object_guid = 1;
   inline bool has_object_guid() const;
   inline void clear_object_guid();
   static const int kObjectGuidFieldNumber = 1;
-  inline ::google::protobuf::int64 object_guid() const;
-  inline void set_object_guid(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& object_guid() const;
+  inline ::NFMsg::Ident* mutable_object_guid();
+  inline ::NFMsg::Ident* release_object_guid();
+  inline void set_allocated_object_guid(::NFMsg::Ident* object_guid);
 
   // required float x = 2;
   inline bool has_x() const;
@@ -1498,7 +1499,7 @@ class PlayerEntryInfo : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 object_guid_;
+  ::NFMsg::Ident* object_guid_;
   float x_;
   float y_;
   float z_;
@@ -1659,16 +1660,16 @@ class AckPlayerLeaveList : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // repeated int64 object_list = 1;
+  // repeated .NFMsg.Ident object_list = 1;
   inline int object_list_size() const;
   inline void clear_object_list();
   static const int kObjectListFieldNumber = 1;
-  inline ::google::protobuf::int64 object_list(int index) const;
-  inline void set_object_list(int index, ::google::protobuf::int64 value);
-  inline void add_object_list(::google::protobuf::int64 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
+  inline const ::NFMsg::Ident& object_list(int index) const;
+  inline ::NFMsg::Ident* mutable_object_list(int index);
+  inline ::NFMsg::Ident* add_object_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
       object_list() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
       mutable_object_list();
 
   // @@protoc_insertion_point(class_scope:NFMsg.AckPlayerLeaveList)
@@ -1676,7 +1677,7 @@ class AckPlayerLeaveList : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedField< ::google::protobuf::int64 > object_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > object_list_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -1695,15 +1696,53 @@ class AckPlayerLeaveList : public ::google::protobuf::Message {
 
 // ReqEnterGameServer
 
-// required bytes account = 1;
-inline bool ReqEnterGameServer::has_account() const {
+// required .NFMsg.Ident id = 1;
+inline bool ReqEnterGameServer::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqEnterGameServer::set_has_account() {
+inline void ReqEnterGameServer::set_has_id() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqEnterGameServer::clear_has_account() {
+inline void ReqEnterGameServer::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqEnterGameServer::clear_id() {
+  if (id_ != NULL) id_->::NFMsg::Ident::Clear();
+  clear_has_id();
+}
+inline const ::NFMsg::Ident& ReqEnterGameServer::id() const {
+  return id_ != NULL ? *id_ : *default_instance_->id_;
+}
+inline ::NFMsg::Ident* ReqEnterGameServer::mutable_id() {
+  set_has_id();
+  if (id_ == NULL) id_ = new ::NFMsg::Ident;
+  return id_;
+}
+inline ::NFMsg::Ident* ReqEnterGameServer::release_id() {
+  clear_has_id();
+  ::NFMsg::Ident* temp = id_;
+  id_ = NULL;
+  return temp;
+}
+inline void ReqEnterGameServer::set_allocated_id(::NFMsg::Ident* id) {
+  delete id_;
+  id_ = id;
+  if (id) {
+    set_has_id();
+  } else {
+    clear_has_id();
+  }
+}
+
+// required bytes account = 2;
+inline bool ReqEnterGameServer::has_account() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqEnterGameServer::set_has_account() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqEnterGameServer::clear_has_account() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqEnterGameServer::clear_account() {
   if (account_ != &::google::protobuf::internal::kEmptyString) {
@@ -1765,15 +1804,15 @@ inline void ReqEnterGameServer::set_allocated_account(::std::string* account) {
   }
 }
 
-// required int32 game_id = 2;
+// required int32 game_id = 3;
 inline bool ReqEnterGameServer::has_game_id() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void ReqEnterGameServer::set_has_game_id() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void ReqEnterGameServer::clear_has_game_id() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void ReqEnterGameServer::clear_game_id() {
   game_id_ = 0;
@@ -1787,15 +1826,15 @@ inline void ReqEnterGameServer::set_game_id(::google::protobuf::int32 value) {
   game_id_ = value;
 }
 
-// required bytes name = 3;
+// required bytes name = 4;
 inline bool ReqEnterGameServer::has_name() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void ReqEnterGameServer::set_has_name() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void ReqEnterGameServer::clear_has_name() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void ReqEnterGameServer::clear_name() {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
@@ -1869,7 +1908,7 @@ inline void ReqEnterGameServer::set_allocated_name(::std::string* name) {
 
 // ReqAckPlayerMove
 
-// optional int64 mover = 1;
+// required .NFMsg.Ident mover = 1;
 inline bool ReqAckPlayerMove::has_mover() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1880,15 +1919,31 @@ inline void ReqAckPlayerMove::clear_has_mover() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ReqAckPlayerMove::clear_mover() {
-  mover_ = GOOGLE_LONGLONG(0);
+  if (mover_ != NULL) mover_->::NFMsg::Ident::Clear();
   clear_has_mover();
 }
-inline ::google::protobuf::int64 ReqAckPlayerMove::mover() const {
+inline const ::NFMsg::Ident& ReqAckPlayerMove::mover() const {
+  return mover_ != NULL ? *mover_ : *default_instance_->mover_;
+}
+inline ::NFMsg::Ident* ReqAckPlayerMove::mutable_mover() {
+  set_has_mover();
+  if (mover_ == NULL) mover_ = new ::NFMsg::Ident;
   return mover_;
 }
-inline void ReqAckPlayerMove::set_mover(::google::protobuf::int64 value) {
-  set_has_mover();
-  mover_ = value;
+inline ::NFMsg::Ident* ReqAckPlayerMove::release_mover() {
+  clear_has_mover();
+  ::NFMsg::Ident* temp = mover_;
+  mover_ = NULL;
+  return temp;
+}
+inline void ReqAckPlayerMove::set_allocated_mover(::NFMsg::Ident* mover) {
+  delete mover_;
+  mover_ = mover;
+  if (mover) {
+    set_has_mover();
+  } else {
+    clear_has_mover();
+  }
 }
 
 // required int32 moveType = 2;
@@ -1913,143 +1968,61 @@ inline void ReqAckPlayerMove::set_movetype(::google::protobuf::int32 value) {
   movetype_ = value;
 }
 
-// required float target_x = 3;
-inline bool ReqAckPlayerMove::has_target_x() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+// repeated .NFMsg.Position target_pos = 3;
+inline int ReqAckPlayerMove::target_pos_size() const {
+  return target_pos_.size();
 }
-inline void ReqAckPlayerMove::set_has_target_x() {
-  _has_bits_[0] |= 0x00000004u;
+inline void ReqAckPlayerMove::clear_target_pos() {
+  target_pos_.Clear();
 }
-inline void ReqAckPlayerMove::clear_has_target_x() {
-  _has_bits_[0] &= ~0x00000004u;
+inline const ::NFMsg::Position& ReqAckPlayerMove::target_pos(int index) const {
+  return target_pos_.Get(index);
 }
-inline void ReqAckPlayerMove::clear_target_x() {
-  target_x_ = 0;
-  clear_has_target_x();
+inline ::NFMsg::Position* ReqAckPlayerMove::mutable_target_pos(int index) {
+  return target_pos_.Mutable(index);
 }
-inline float ReqAckPlayerMove::target_x() const {
-  return target_x_;
+inline ::NFMsg::Position* ReqAckPlayerMove::add_target_pos() {
+  return target_pos_.Add();
 }
-inline void ReqAckPlayerMove::set_target_x(float value) {
-  set_has_target_x();
-  target_x_ = value;
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >&
+ReqAckPlayerMove::target_pos() const {
+  return target_pos_;
 }
-
-// optional float target_y = 4;
-inline bool ReqAckPlayerMove::has_target_y() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void ReqAckPlayerMove::set_has_target_y() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void ReqAckPlayerMove::clear_has_target_y() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void ReqAckPlayerMove::clear_target_y() {
-  target_y_ = 0;
-  clear_has_target_y();
-}
-inline float ReqAckPlayerMove::target_y() const {
-  return target_y_;
-}
-inline void ReqAckPlayerMove::set_target_y(float value) {
-  set_has_target_y();
-  target_y_ = value;
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >*
+ReqAckPlayerMove::mutable_target_pos() {
+  return &target_pos_;
 }
 
-// required float target_z = 5;
-inline bool ReqAckPlayerMove::has_target_z() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+// repeated .NFMsg.Position source_pos = 4;
+inline int ReqAckPlayerMove::source_pos_size() const {
+  return source_pos_.size();
 }
-inline void ReqAckPlayerMove::set_has_target_z() {
-  _has_bits_[0] |= 0x00000010u;
+inline void ReqAckPlayerMove::clear_source_pos() {
+  source_pos_.Clear();
 }
-inline void ReqAckPlayerMove::clear_has_target_z() {
-  _has_bits_[0] &= ~0x00000010u;
+inline const ::NFMsg::Position& ReqAckPlayerMove::source_pos(int index) const {
+  return source_pos_.Get(index);
 }
-inline void ReqAckPlayerMove::clear_target_z() {
-  target_z_ = 0;
-  clear_has_target_z();
+inline ::NFMsg::Position* ReqAckPlayerMove::mutable_source_pos(int index) {
+  return source_pos_.Mutable(index);
 }
-inline float ReqAckPlayerMove::target_z() const {
-  return target_z_;
+inline ::NFMsg::Position* ReqAckPlayerMove::add_source_pos() {
+  return source_pos_.Add();
 }
-inline void ReqAckPlayerMove::set_target_z(float value) {
-  set_has_target_z();
-  target_z_ = value;
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >&
+ReqAckPlayerMove::source_pos() const {
+  return source_pos_;
 }
-
-// optional float source_x = 6;
-inline bool ReqAckPlayerMove::has_source_x() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void ReqAckPlayerMove::set_has_source_x() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void ReqAckPlayerMove::clear_has_source_x() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void ReqAckPlayerMove::clear_source_x() {
-  source_x_ = 0;
-  clear_has_source_x();
-}
-inline float ReqAckPlayerMove::source_x() const {
-  return source_x_;
-}
-inline void ReqAckPlayerMove::set_source_x(float value) {
-  set_has_source_x();
-  source_x_ = value;
-}
-
-// optional float source_y = 7;
-inline bool ReqAckPlayerMove::has_source_y() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
-}
-inline void ReqAckPlayerMove::set_has_source_y() {
-  _has_bits_[0] |= 0x00000040u;
-}
-inline void ReqAckPlayerMove::clear_has_source_y() {
-  _has_bits_[0] &= ~0x00000040u;
-}
-inline void ReqAckPlayerMove::clear_source_y() {
-  source_y_ = 0;
-  clear_has_source_y();
-}
-inline float ReqAckPlayerMove::source_y() const {
-  return source_y_;
-}
-inline void ReqAckPlayerMove::set_source_y(float value) {
-  set_has_source_y();
-  source_y_ = value;
-}
-
-// optional float source_z = 8;
-inline bool ReqAckPlayerMove::has_source_z() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
-}
-inline void ReqAckPlayerMove::set_has_source_z() {
-  _has_bits_[0] |= 0x00000080u;
-}
-inline void ReqAckPlayerMove::clear_has_source_z() {
-  _has_bits_[0] &= ~0x00000080u;
-}
-inline void ReqAckPlayerMove::clear_source_z() {
-  source_z_ = 0;
-  clear_has_source_z();
-}
-inline float ReqAckPlayerMove::source_z() const {
-  return source_z_;
-}
-inline void ReqAckPlayerMove::set_source_z(float value) {
-  set_has_source_z();
-  source_z_ = value;
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >*
+ReqAckPlayerMove::mutable_source_pos() {
+  return &source_pos_;
 }
 
 // -------------------------------------------------------------------
 
 // ReqAckPlayerChat
 
-// required int64 chat_id = 1;
+// required .NFMsg.Ident chat_id = 1;
 inline bool ReqAckPlayerChat::has_chat_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -2060,15 +2033,31 @@ inline void ReqAckPlayerChat::clear_has_chat_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ReqAckPlayerChat::clear_chat_id() {
-  chat_id_ = GOOGLE_LONGLONG(0);
+  if (chat_id_ != NULL) chat_id_->::NFMsg::Ident::Clear();
   clear_has_chat_id();
 }
-inline ::google::protobuf::int64 ReqAckPlayerChat::chat_id() const {
+inline const ::NFMsg::Ident& ReqAckPlayerChat::chat_id() const {
+  return chat_id_ != NULL ? *chat_id_ : *default_instance_->chat_id_;
+}
+inline ::NFMsg::Ident* ReqAckPlayerChat::mutable_chat_id() {
+  set_has_chat_id();
+  if (chat_id_ == NULL) chat_id_ = new ::NFMsg::Ident;
   return chat_id_;
 }
-inline void ReqAckPlayerChat::set_chat_id(::google::protobuf::int64 value) {
-  set_has_chat_id();
-  chat_id_ = value;
+inline ::NFMsg::Ident* ReqAckPlayerChat::release_chat_id() {
+  clear_has_chat_id();
+  ::NFMsg::Ident* temp = chat_id_;
+  chat_id_ = NULL;
+  return temp;
+}
+inline void ReqAckPlayerChat::set_allocated_chat_id(::NFMsg::Ident* chat_id) {
+  delete chat_id_;
+  chat_id_ = chat_id;
+  if (chat_id) {
+    set_has_chat_id();
+  } else {
+    clear_has_chat_id();
+  }
 }
 
 // required .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 2;
@@ -2168,7 +2157,7 @@ inline void ReqAckPlayerChat::set_allocated_chat_info(::std::string* chat_info) 
 
 // ReqAckUseSkill
 
-// required int64 user = 1;
+// required .NFMsg.Ident user = 1;
 inline bool ReqAckUseSkill::has_user() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -2179,15 +2168,31 @@ inline void ReqAckUseSkill::clear_has_user() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ReqAckUseSkill::clear_user() {
-  user_ = GOOGLE_LONGLONG(0);
+  if (user_ != NULL) user_->::NFMsg::Ident::Clear();
   clear_has_user();
 }
-inline ::google::protobuf::int64 ReqAckUseSkill::user() const {
+inline const ::NFMsg::Ident& ReqAckUseSkill::user() const {
+  return user_ != NULL ? *user_ : *default_instance_->user_;
+}
+inline ::NFMsg::Ident* ReqAckUseSkill::mutable_user() {
+  set_has_user();
+  if (user_ == NULL) user_ = new ::NFMsg::Ident;
   return user_;
 }
-inline void ReqAckUseSkill::set_user(::google::protobuf::int64 value) {
-  set_has_user();
-  user_ = value;
+inline ::NFMsg::Ident* ReqAckUseSkill::release_user() {
+  clear_has_user();
+  ::NFMsg::Ident* temp = user_;
+  user_ = NULL;
+  return temp;
+}
+inline void ReqAckUseSkill::set_allocated_user(::NFMsg::Ident* user) {
+  delete user_;
+  user_ = user;
+  if (user) {
+    set_has_user();
+  } else {
+    clear_has_user();
+  }
 }
 
 // required bytes skill_id = 2;
@@ -2260,32 +2265,108 @@ inline void ReqAckUseSkill::set_allocated_skill_id(::std::string* skill_id) {
   }
 }
 
-// repeated int64 effect_ident = 3;
+// required .NFMsg.Position now_pos = 3;
+inline bool ReqAckUseSkill::has_now_pos() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckUseSkill::set_has_now_pos() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckUseSkill::clear_has_now_pos() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckUseSkill::clear_now_pos() {
+  if (now_pos_ != NULL) now_pos_->::NFMsg::Position::Clear();
+  clear_has_now_pos();
+}
+inline const ::NFMsg::Position& ReqAckUseSkill::now_pos() const {
+  return now_pos_ != NULL ? *now_pos_ : *default_instance_->now_pos_;
+}
+inline ::NFMsg::Position* ReqAckUseSkill::mutable_now_pos() {
+  set_has_now_pos();
+  if (now_pos_ == NULL) now_pos_ = new ::NFMsg::Position;
+  return now_pos_;
+}
+inline ::NFMsg::Position* ReqAckUseSkill::release_now_pos() {
+  clear_has_now_pos();
+  ::NFMsg::Position* temp = now_pos_;
+  now_pos_ = NULL;
+  return temp;
+}
+inline void ReqAckUseSkill::set_allocated_now_pos(::NFMsg::Position* now_pos) {
+  delete now_pos_;
+  now_pos_ = now_pos;
+  if (now_pos) {
+    set_has_now_pos();
+  } else {
+    clear_has_now_pos();
+  }
+}
+
+// required .NFMsg.Position tar_pos = 4;
+inline bool ReqAckUseSkill::has_tar_pos() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqAckUseSkill::set_has_tar_pos() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqAckUseSkill::clear_has_tar_pos() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqAckUseSkill::clear_tar_pos() {
+  if (tar_pos_ != NULL) tar_pos_->::NFMsg::Position::Clear();
+  clear_has_tar_pos();
+}
+inline const ::NFMsg::Position& ReqAckUseSkill::tar_pos() const {
+  return tar_pos_ != NULL ? *tar_pos_ : *default_instance_->tar_pos_;
+}
+inline ::NFMsg::Position* ReqAckUseSkill::mutable_tar_pos() {
+  set_has_tar_pos();
+  if (tar_pos_ == NULL) tar_pos_ = new ::NFMsg::Position;
+  return tar_pos_;
+}
+inline ::NFMsg::Position* ReqAckUseSkill::release_tar_pos() {
+  clear_has_tar_pos();
+  ::NFMsg::Position* temp = tar_pos_;
+  tar_pos_ = NULL;
+  return temp;
+}
+inline void ReqAckUseSkill::set_allocated_tar_pos(::NFMsg::Position* tar_pos) {
+  delete tar_pos_;
+  tar_pos_ = tar_pos;
+  if (tar_pos) {
+    set_has_tar_pos();
+  } else {
+    clear_has_tar_pos();
+  }
+}
+
+// repeated .NFMsg.Ident effect_ident = 5;
 inline int ReqAckUseSkill::effect_ident_size() const {
   return effect_ident_.size();
 }
 inline void ReqAckUseSkill::clear_effect_ident() {
   effect_ident_.Clear();
 }
-inline ::google::protobuf::int64 ReqAckUseSkill::effect_ident(int index) const {
+inline const ::NFMsg::Ident& ReqAckUseSkill::effect_ident(int index) const {
   return effect_ident_.Get(index);
 }
-inline void ReqAckUseSkill::set_effect_ident(int index, ::google::protobuf::int64 value) {
-  effect_ident_.Set(index, value);
+inline ::NFMsg::Ident* ReqAckUseSkill::mutable_effect_ident(int index) {
+  return effect_ident_.Mutable(index);
 }
-inline void ReqAckUseSkill::add_effect_ident(::google::protobuf::int64 value) {
-  effect_ident_.Add(value);
+inline ::NFMsg::Ident* ReqAckUseSkill::add_effect_ident() {
+  return effect_ident_.Add();
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
 ReqAckUseSkill::effect_ident() const {
   return effect_ident_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
 ReqAckUseSkill::mutable_effect_ident() {
   return &effect_ident_;
 }
 
-// repeated int32 effect_value = 4;
+// repeated int32 effect_value = 6;
 inline int ReqAckUseSkill::effect_value_size() const {
   return effect_value_.size();
 }
@@ -2310,7 +2391,7 @@ ReqAckUseSkill::mutable_effect_value() {
   return &effect_value_;
 }
 
-// repeated int32 effect_rlt = 5;
+// repeated int32 effect_rlt = 7;
 inline int ReqAckUseSkill::effect_rlt_size() const {
   return effect_rlt_.size();
 }
@@ -2335,81 +2416,11 @@ ReqAckUseSkill::mutable_effect_rlt() {
   return &effect_rlt_;
 }
 
-// optional bytes key_value = 6;
-inline bool ReqAckUseSkill::has_key_value() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void ReqAckUseSkill::set_has_key_value() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void ReqAckUseSkill::clear_has_key_value() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void ReqAckUseSkill::clear_key_value() {
-  if (key_value_ != &::google::protobuf::internal::kEmptyString) {
-    key_value_->clear();
-  }
-  clear_has_key_value();
-}
-inline const ::std::string& ReqAckUseSkill::key_value() const {
-  return *key_value_;
-}
-inline void ReqAckUseSkill::set_key_value(const ::std::string& value) {
-  set_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    key_value_ = new ::std::string;
-  }
-  key_value_->assign(value);
-}
-inline void ReqAckUseSkill::set_key_value(const char* value) {
-  set_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    key_value_ = new ::std::string;
-  }
-  key_value_->assign(value);
-}
-inline void ReqAckUseSkill::set_key_value(const void* value, size_t size) {
-  set_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    key_value_ = new ::std::string;
-  }
-  key_value_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqAckUseSkill::mutable_key_value() {
-  set_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    key_value_ = new ::std::string;
-  }
-  return key_value_;
-}
-inline ::std::string* ReqAckUseSkill::release_key_value() {
-  clear_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = key_value_;
-    key_value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void ReqAckUseSkill::set_allocated_key_value(::std::string* key_value) {
-  if (key_value_ != &::google::protobuf::internal::kEmptyString) {
-    delete key_value_;
-  }
-  if (key_value) {
-    set_has_key_value();
-    key_value_ = key_value;
-  } else {
-    clear_has_key_value();
-    key_value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
 // -------------------------------------------------------------------
 
 // ReqAckUseItem
 
-// required int64 user = 1;
+// required .NFMsg.Ident user = 1;
 inline bool ReqAckUseItem::has_user() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -2420,18 +2431,34 @@ inline void ReqAckUseItem::clear_has_user() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ReqAckUseItem::clear_user() {
-  user_ = GOOGLE_LONGLONG(0);
+  if (user_ != NULL) user_->::NFMsg::Ident::Clear();
   clear_has_user();
 }
-inline ::google::protobuf::int64 ReqAckUseItem::user() const {
+inline const ::NFMsg::Ident& ReqAckUseItem::user() const {
+  return user_ != NULL ? *user_ : *default_instance_->user_;
+}
+inline ::NFMsg::Ident* ReqAckUseItem::mutable_user() {
+  set_has_user();
+  if (user_ == NULL) user_ = new ::NFMsg::Ident;
   return user_;
 }
-inline void ReqAckUseItem::set_user(::google::protobuf::int64 value) {
-  set_has_user();
-  user_ = value;
+inline ::NFMsg::Ident* ReqAckUseItem::release_user() {
+  clear_has_user();
+  ::NFMsg::Ident* temp = user_;
+  user_ = NULL;
+  return temp;
+}
+inline void ReqAckUseItem::set_allocated_user(::NFMsg::Ident* user) {
+  delete user_;
+  user_ = user;
+  if (user) {
+    set_has_user();
+  } else {
+    clear_has_user();
+  }
 }
 
-// required int64 item_guid = 2;
+// required .NFMsg.Ident item_guid = 2;
 inline bool ReqAckUseItem::has_item_guid() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -2442,38 +2469,54 @@ inline void ReqAckUseItem::clear_has_item_guid() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqAckUseItem::clear_item_guid() {
-  item_guid_ = GOOGLE_LONGLONG(0);
+  if (item_guid_ != NULL) item_guid_->::NFMsg::Ident::Clear();
   clear_has_item_guid();
 }
-inline ::google::protobuf::int64 ReqAckUseItem::item_guid() const {
+inline const ::NFMsg::Ident& ReqAckUseItem::item_guid() const {
+  return item_guid_ != NULL ? *item_guid_ : *default_instance_->item_guid_;
+}
+inline ::NFMsg::Ident* ReqAckUseItem::mutable_item_guid() {
+  set_has_item_guid();
+  if (item_guid_ == NULL) item_guid_ = new ::NFMsg::Ident;
   return item_guid_;
 }
-inline void ReqAckUseItem::set_item_guid(::google::protobuf::int64 value) {
-  set_has_item_guid();
-  item_guid_ = value;
+inline ::NFMsg::Ident* ReqAckUseItem::release_item_guid() {
+  clear_has_item_guid();
+  ::NFMsg::Ident* temp = item_guid_;
+  item_guid_ = NULL;
+  return temp;
+}
+inline void ReqAckUseItem::set_allocated_item_guid(::NFMsg::Ident* item_guid) {
+  delete item_guid_;
+  item_guid_ = item_guid;
+  if (item_guid) {
+    set_has_item_guid();
+  } else {
+    clear_has_item_guid();
+  }
 }
 
-// repeated int64 effect_ident = 3;
+// repeated .NFMsg.Ident effect_ident = 3;
 inline int ReqAckUseItem::effect_ident_size() const {
   return effect_ident_.size();
 }
 inline void ReqAckUseItem::clear_effect_ident() {
   effect_ident_.Clear();
 }
-inline ::google::protobuf::int64 ReqAckUseItem::effect_ident(int index) const {
+inline const ::NFMsg::Ident& ReqAckUseItem::effect_ident(int index) const {
   return effect_ident_.Get(index);
 }
-inline void ReqAckUseItem::set_effect_ident(int index, ::google::protobuf::int64 value) {
-  effect_ident_.Set(index, value);
+inline ::NFMsg::Ident* ReqAckUseItem::mutable_effect_ident(int index) {
+  return effect_ident_.Mutable(index);
 }
-inline void ReqAckUseItem::add_effect_ident(::google::protobuf::int64 value) {
-  effect_ident_.Add(value);
+inline ::NFMsg::Ident* ReqAckUseItem::add_effect_ident() {
+  return effect_ident_.Add();
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
 ReqAckUseItem::effect_ident() const {
   return effect_ident_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
 ReqAckUseItem::mutable_effect_ident() {
   return &effect_ident_;
 }
@@ -2739,7 +2782,7 @@ inline void ReqAckSwapScene::set_z(float value) {
 
 // ReqPickDropItem
 
-// required int64 item_guid = 2;
+// required .NFMsg.Ident item_guid = 2;
 inline bool ReqPickDropItem::has_item_guid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -2750,15 +2793,31 @@ inline void ReqPickDropItem::clear_has_item_guid() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ReqPickDropItem::clear_item_guid() {
-  item_guid_ = GOOGLE_LONGLONG(0);
+  if (item_guid_ != NULL) item_guid_->::NFMsg::Ident::Clear();
   clear_has_item_guid();
 }
-inline ::google::protobuf::int64 ReqPickDropItem::item_guid() const {
+inline const ::NFMsg::Ident& ReqPickDropItem::item_guid() const {
+  return item_guid_ != NULL ? *item_guid_ : *default_instance_->item_guid_;
+}
+inline ::NFMsg::Ident* ReqPickDropItem::mutable_item_guid() {
+  set_has_item_guid();
+  if (item_guid_ == NULL) item_guid_ = new ::NFMsg::Ident;
   return item_guid_;
 }
-inline void ReqPickDropItem::set_item_guid(::google::protobuf::int64 value) {
-  set_has_item_guid();
-  item_guid_ = value;
+inline ::NFMsg::Ident* ReqPickDropItem::release_item_guid() {
+  clear_has_item_guid();
+  ::NFMsg::Ident* temp = item_guid_;
+  item_guid_ = NULL;
+  return temp;
+}
+inline void ReqPickDropItem::set_allocated_item_guid(::NFMsg::Ident* item_guid) {
+  delete item_guid_;
+  item_guid_ = item_guid;
+  if (item_guid) {
+    set_has_item_guid();
+  } else {
+    clear_has_item_guid();
+  }
 }
 
 // -------------------------------------------------------------------
@@ -2913,7 +2972,7 @@ inline void ReqCompeleteTask::set_allocated_task_id(::std::string* task_id) {
 
 // PlayerEntryInfo
 
-// required int64 object_guid = 1;
+// required .NFMsg.Ident object_guid = 1;
 inline bool PlayerEntryInfo::has_object_guid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -2924,15 +2983,31 @@ inline void PlayerEntryInfo::clear_has_object_guid() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PlayerEntryInfo::clear_object_guid() {
-  object_guid_ = GOOGLE_LONGLONG(0);
+  if (object_guid_ != NULL) object_guid_->::NFMsg::Ident::Clear();
   clear_has_object_guid();
 }
-inline ::google::protobuf::int64 PlayerEntryInfo::object_guid() const {
+inline const ::NFMsg::Ident& PlayerEntryInfo::object_guid() const {
+  return object_guid_ != NULL ? *object_guid_ : *default_instance_->object_guid_;
+}
+inline ::NFMsg::Ident* PlayerEntryInfo::mutable_object_guid() {
+  set_has_object_guid();
+  if (object_guid_ == NULL) object_guid_ = new ::NFMsg::Ident;
   return object_guid_;
 }
-inline void PlayerEntryInfo::set_object_guid(::google::protobuf::int64 value) {
-  set_has_object_guid();
-  object_guid_ = value;
+inline ::NFMsg::Ident* PlayerEntryInfo::release_object_guid() {
+  clear_has_object_guid();
+  ::NFMsg::Ident* temp = object_guid_;
+  object_guid_ = NULL;
+  return temp;
+}
+inline void PlayerEntryInfo::set_allocated_object_guid(::NFMsg::Ident* object_guid) {
+  delete object_guid_;
+  object_guid_ = object_guid;
+  if (object_guid) {
+    set_has_object_guid();
+  } else {
+    clear_has_object_guid();
+  }
 }
 
 // required float x = 2;
@@ -3240,27 +3315,27 @@ AckPlayerEntryList::mutable_object_list() {
 
 // AckPlayerLeaveList
 
-// repeated int64 object_list = 1;
+// repeated .NFMsg.Ident object_list = 1;
 inline int AckPlayerLeaveList::object_list_size() const {
   return object_list_.size();
 }
 inline void AckPlayerLeaveList::clear_object_list() {
   object_list_.Clear();
 }
-inline ::google::protobuf::int64 AckPlayerLeaveList::object_list(int index) const {
+inline const ::NFMsg::Ident& AckPlayerLeaveList::object_list(int index) const {
   return object_list_.Get(index);
 }
-inline void AckPlayerLeaveList::set_object_list(int index, ::google::protobuf::int64 value) {
-  object_list_.Set(index, value);
+inline ::NFMsg::Ident* AckPlayerLeaveList::mutable_object_list(int index) {
+  return object_list_.Mutable(index);
 }
-inline void AckPlayerLeaveList::add_object_list(::google::protobuf::int64 value) {
-  object_list_.Add(value);
+inline ::NFMsg::Ident* AckPlayerLeaveList::add_object_list() {
+  return object_list_.Add();
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
 AckPlayerLeaveList::object_list() const {
   return object_list_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
 AckPlayerLeaveList::mutable_object_list() {
   return &object_list_;
 }

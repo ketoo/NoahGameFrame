@@ -34,22 +34,24 @@ public:
 
     virtual int LoadDataFormNoSql( const NFIDENTID& self );
     virtual int SaveDataToNoSql( const NFIDENTID& self, bool bOffline = false );
-    virtual Theron::Address GetActorID(const NFIDENTID& self);
+#ifdef NF_USE_ACTOR
+	virtual Theron::Address GetActorID(const NFIDENTID& self);
+
 
 protected:
     virtual void Handler(const NFIActorMessage& message, const Theron::Address from);
     virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
     virtual void HandlerTrans(const NFIActorMessage& message, const Theron::Address from);
     virtual void HandlerLog(const NFIActorMessage& message, const Theron::Address from);
-
+#endif
 protected:
     int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    virtual int LoadProperty( const NFIDENTID& self, NFIPropertyManager* pProManager );
-    virtual int LoadRecord( const NFIDENTID& self, NFIRecordManager* pRecord );
+    virtual int LoadProperty( const NFIDENTID& self, NF_SHARE_PTR<NFIPropertyManager> pProManager );
+    virtual int LoadRecord( const NFIDENTID& self, NF_SHARE_PTR<NFIRecordManager> pRecord );
 
-    virtual int SaveProperty( const NFIDENTID& self, NFIPropertyManager* pProManager );
-    virtual int SaveRecord( const NFIDENTID& self, NFIRecordManager* pRecordManager );
+    virtual int SaveProperty( const NFIDENTID& self, NF_SHARE_PTR<NFIPropertyManager> pProManager );
+    virtual int SaveRecord( const NFIDENTID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager );
 
 private:
 

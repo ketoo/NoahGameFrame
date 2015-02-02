@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is config xml-->
+<XML>
+    <Object AnimaState="60" AtkDis="2.5" ID="Hero1_Normal_1" Name="skill1" NeedTar="0"/>
+    <Object AnimaState="61" AtkDis="2.5" ID="Hero1_Normal_2" Name="skill2" NeedTar="0"/>
+    <Object AnimaState="62" AtkDis="2.5" ID="Hero1_Normal_3" Name="skill3" NeedTar="0"/>
+    <Object AnimaState="63" AtkDis="2.5" ID="Hero1_Normal_4" Name="skill4" NeedTar="0"/>
+    <Object AnimaState="101" AtkDis="2.5" ID="Hero1_Skill1" Name="skill5" NeedTar="0"/>
+    <Object AnimaState="101" AtkDis="2.5" ID="Hero1_Skill2" Name="skill6" NeedTar="0"/>
+    <Object AnimaState="101" AtkDis="2.5" ID="Hero1_Skill3" Name="skill7" NeedTar="0"/>
+    <Object AnimaState="101" AtkDis="2.5" ID="Hero1_Skill4" Name="skill8" NeedTar="0"/>
+    <Object AnimaState="60" AtkDis="2.5" ID="Hero2_Normal_1" Name="skill9" NeedTar="0"/>
+    <Object AnimaState="61" AtkDis="2.5" ID="Hero2_Normal_2" Name="skill10" NeedTar="0"/>
+    <Object AnimaState="62" AtkDis="2.5" ID="Hero2_Normal_3" Name="skill11" NeedTar="0"/>
+    <Object AnimaState="63" AtkDis="2.5" ID="Hero2_Normal_4" Name="skill12" NeedTar="0"/>
+    <Object AnimaState="101" AtkDis="2.5" ID="Hero2_Skill1" Name="skill13" NeedTar="0"/>
+    <Object AnimaState="101" AtkDis="2.5" ID="Hero2_Skill2" Name="skill14" NeedTar="0"/>
+    <Object AnimaState="101" AtkDis="2.5" ID="Hero2_Skill3" Name="skill15" NeedTar="0"/>
+    <Object AnimaState="101" AtkDis="2.5" ID="Hero2_Skill4" Name="skill16" NeedTar="0"/>
+    <Object AnimaState="60" AtkDis="2.5" ID="Hero3_Normal_1" Name="skill17" NeedTar="0"/>
+    <Object AnimaState="61" AtkDis="2.5" ID="Hero3_Normal_2" Name="skill18" NeedTar="0"/>
+    <Object AnimaState="62" AtkDis="2.5" ID="Hero3_Normal_3" Name="skill19" NeedTar="0"/>
+    <Object AnimaState="63" AtkDis="2.5" ID="Hero3_Normal_4" Name="skill20" NeedTar="0"/>
+    <Object AnimaState="101" AtkDis="2.5" ID="Hero3_Skill1" Name="skill21" NeedTar="0"/>
+    <Object AnimaState="101" AtkDis="2.5" ID="Hero3_Skill2" Name="skill22" NeedTar="0"/>
+    <Object AnimaState="101" AtkDis="2.5" ID="Hero3_Skill3" Name="skill23" NeedTar="0"/>
+    <Object AnimaState="101" AtkDis="2.5" ID="Hero3_Skill4" Name="skill24" NeedTar="0"/>
+</XML>

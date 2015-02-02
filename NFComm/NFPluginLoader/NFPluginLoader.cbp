@@ -11,22 +11,23 @@
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
-					<Add option="-D_CONSOLE" />
-					<Add option="-DNF_DYNAMIC_PLUGIN" />
-					<Add option="-DTHERON_CPP11" />
-					<Add option="-D_WIN64" />
-					<Add directory="$(NF_HOME)" />
-					<Add directory="$(NF_DEP)" />
-					<Add directory="$(BOOST_HOME)" />
-					<Add directory="$(GLOG_HOME)" />
-					<Add directory="$(THERON_HOME)" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
+					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/External/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
-					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
-					<Add directory="$(BOOST_LIB)" />
+					<Add option="-ldl" />
+					<Add option="-pthread" />
+					<Add library="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_system-gcc48-mt-s-1_53.a" />
+					<Add library="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_thread-gcc48-mt-s-1_53.a" />
+					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
+					<Add directory="../../../trunk/Dependencies/lib/$(Configuration)/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
 			</Target>
 			<Target title="Release x64">
@@ -34,20 +35,23 @@
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
-					<Add option="-D_CONSOLE" />
-					<Add option="-DNF_DYNAMIC_PLUGIN" />
-					<Add option="-D_WIN64" />
-					<Add option="-DTHERON_CPP11" />
-					<Add directory="$(NF_HOME)" />
-					<Add directory="$(BOOST_HOME)" />
-					<Add directory="$(THERON_HOME)" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
+					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/External/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
-					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
-					<Add directory="$(BOOST_LIB)" />
+					<Add option="-ldl" />
+					<Add option="-pthread" />
+					<Add library="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_system-gcc48-mt-s-1_53.a" />
+					<Add library="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_thread-gcc48-mt-s-1_53.a" />
+					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
+					<Add directory="../../../trunk/Dependencies/lib/$(Configuration)/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
 			</Target>
 		</Build>
@@ -59,8 +63,9 @@
 		<Unit filename="NFCPluginManager.h" />
 		<Unit filename="NFPluginLoader.cpp" />
 		<Extensions>
-			<code_completion />
 			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
 			<debugger />
 		</Extensions>
 	</Project>

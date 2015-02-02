@@ -1,22 +1,20 @@
-// -------------------------------------------------------------------------
-//    @FileName      :    NFSLGPlugin.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2012-07-14 08:51
-//    @Module           :    NFSLGPlugin
-//
-// -------------------------------------------------------------------------
-
 #include "NFSLGPlugin.h"
+#include "NFCSLGModule.h"
+#include "NFCSLGBuildingModule.h"
+#include "NFCSLGShopModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
-extern "C"  __declspec( dllexport ) void DllStartPlugin( NFIPluginManager* pm )
+NF_EXPORT void DllStartPlugin( NFIPluginManager* pm )
 {
+#if NF_PLATFORM == NF_PLATFORM_WIN
+	SetConsoleTitle( "NFSLG" );
+#endif
     CREATE_PLUGIN( pm, NFSLGPlugin )
 
 };
 
-extern "C" __declspec( dllexport ) void DllStopPlugin( NFIPluginManager* pm )
+NF_EXPORT void DllStopPlugin( NFIPluginManager* pm )
 {
     DESTROY_PLUGIN( pm, NFSLGPlugin )
 };
@@ -36,11 +34,14 @@ const std::string NFSLGPlugin::GetPluginName()
 
 void NFSLGPlugin::Install()
 {
-
-
+	REGISTER_MODULE( pPluginManager, NFCSLGModule )
+	REGISTER_MODULE( pPluginManager, NFCSLGBuildingModule )
+	REGISTER_MODULE( pPluginManager, NFCSLGShopModule )
 }
 
 void NFSLGPlugin::Uninstall()
 {
-
+	UNREGISTER_MODULE( pPluginManager, NFCSLGShopModule )
+	UNREGISTER_MODULE( pPluginManager, NFCSLGBuildingModule )
+    UNREGISTER_MODULE( pPluginManager, NFCSLGModule )
 }
