@@ -11,14 +11,14 @@
 
 #include "NFMap.h"
 #include "NFIComponent.h"
-#include "NFComm\NFPluginModule\NFILogicModule.h"
+#include "NFComm/NFPluginModule/NFILogicModule.h"
 
-class NFIComponentManager : public NFILogicModule, public NFMap<std::string, NFIComponent>
+class NFIComponentManager : public NFILogicModule, public NFMapEx<std::string, NFIComponent>
 {
 public:
     virtual ~NFIComponentManager() {}
-    virtual NFIComponent* AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
-    virtual NFIComponent* FindComponent(const std::string& strComponentName) = 0;
+    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
+    virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
 
     virtual bool SetEnable(const std::string& strComponentName, const bool bEnable) = 0;
 

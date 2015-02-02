@@ -13,7 +13,7 @@
 #include <string>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFCore/NFCHeartBeatManager.h"
-#include "NFComm/NFPluginModule/NFIProxyServerNet_ClientModule.h"
+#include "NFComm/NFPluginModule/NFIProxyServerToWorldModule.h"
 #include "NFComm/NFPluginModule/NFIProxyServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -21,18 +21,19 @@
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFILogicClassModule.h"
 
 
 //这个连接是连的gameserver
-class NFCProxyConnectObject :   public NFINetModule
+class NFCProxyConnectToGameServer : public NFINetModule
 {
 public:
-    NFCProxyConnectObject(int nGameServerID, const std::string& strIP, const int nPort, NFIPluginManager* p);
+    NFCProxyConnectToGameServer(int nGameServerID, const std::string& strIP, const int nPort, NFIPluginManager* p);
 
     virtual bool Execute(float fFrameTime, float fTotalTime);
     virtual void LogRecive(const char* str){}
     virtual void LogSend(const char* str){}
-    virtual int GetFD(){return mnSocketFD;}
+    virtual int GetFD(){return GetNet()->FD();}
 
 protected:
 
@@ -46,10 +47,11 @@ protected:
 
     void Register();
     void UnRegister();
+
+    void OnAckEnterGame(const NFIPacket& msg);
 private:
 
     int mnGameServerID;
-    int mnSocketFD;
 
     NFIElementInfoModule* m_pElementInfoModule;
     NFILogModule* m_pLogModule;
@@ -57,16 +59,17 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFIProxyLogicModule* m_pProxyLogicModule;
+	NFILogicClassModule* m_pLogicClassModule;
+
 };
 
 //策略是，开始先连到world，然后拿到gameserverlist，再连gameserver，因此这个连接是连到worldserver
-class NFCProxyServerNet_ClientModule : public NFIProxyServerNet_ClientModule
+class NFCProxyServerToWorldModule : public NFIProxyServerToWorldModule
 {
 public:
 
-    NFCProxyServerNet_ClientModule(NFIPluginManager* p)
+    NFCProxyServerToWorldModule(NFIPluginManager* p)
     {
-        mnSocketFD = 0;
         pPluginManager = p;
     }
 
@@ -85,6 +88,8 @@ public:
 
     virtual GameData* GetGameData(int nGameID);
     virtual GameDataMap& GetGameDataMap() { return mGameDataMap; }
+    virtual int GetFD(){return GetNet()->FD();}
+
 protected:
 
 	int OnRecivePack(const NFIPacket& msg);
@@ -104,7 +109,6 @@ protected:
 
     int OnSelectServerResultProcess(const NFIPacket& msg);
     int OnGameInfoProcess(const NFIPacket& msg);
-
 private:
     struct ConnectData 
     {
@@ -120,9 +124,7 @@ private:
 
 
 private:
-    int mnSocketFD;
-
-    NFMap<std::string, ConnectData> mWantToConnectMap;
+    NFMapEx<std::string, ConnectData> mWantToConnectMap;
     GameDataMap mGameDataMap;
 private:
 
@@ -132,6 +134,8 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIProxyServerNet_ServerModule* m_pProxyServerNet_ServerModule;
 	NFIElementInfoModule* m_pElementInfoModule;
+	NFILogicClassModule* m_pLogicClassModule;
+
 };
 
 #endif

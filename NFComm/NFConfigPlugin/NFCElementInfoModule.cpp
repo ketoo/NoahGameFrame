@@ -32,8 +32,8 @@ bool NFCElementInfoModule::Init()
 
     assert(NULL != m_pLogicClassModule);
 
-//     Clear();
-//     Load();
+    //     Clear();
+    //     Load();
 
     return true;
 }
@@ -51,8 +51,8 @@ bool NFCElementInfoModule::Load()
         return false;
     }
 
-    NFILogicClass* pLogicClass = m_pLogicClassModule->First();
-    while (pLogicClass)
+    NF_SHARE_PTR<NFILogicClass> pLogicClass = m_pLogicClassModule->First();
+    while (pLogicClass.get())
     {
         const std::string& strInstancePath = pLogicClass->GetInstancePath();
         if (strInstancePath.length() == 0)
@@ -81,51 +81,51 @@ bool NFCElementInfoModule::Load()
     return true;
 }
 
-bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* pLogicClass)
+bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFILogicClass> pLogicClass)
 {
     //attrNode is the node of a object
     std::string strConfigID = attrNode->first_attribute("ID")->value();
-	if (strConfigID.empty())
-	{
-		NFASSERT(0, strConfigID, __FILE__, __FUNCTION__);
-		return false;
-	}
-
-    if (ExistElement(strConfigID))
+    if (strConfigID.empty())
     {
-		NFASSERT(0, strConfigID, __FILE__, __FUNCTION__);
+        NFASSERT(0, strConfigID, __FILE__, __FUNCTION__);
         return false;
     }
 
-    ElementConfigInfo* pElementInfo = NF_NEW ElementConfigInfo();
+    if (ExistElement(strConfigID))
+    {
+        NFASSERT(0, strConfigID, __FILE__, __FUNCTION__);
+        return false;
+    }
+    
+    NF_SHARE_PTR<ElementConfigInfo> pElementInfo(NF_NEW ElementConfigInfo());
     AddElement(strConfigID, pElementInfo);
 
     //can find all configid by class name
     pLogicClass->AddConfigName(strConfigID);
 
     //ElementConfigInfo* pElementInfo = CreateElement( strConfigID, pElementInfo );
-    NFIPropertyManager* pElementPropertyManager = pElementInfo->GetPropertyManager();
-    NFIRecordManager* pElementRecordManager = pElementInfo->GetRecordManager();
+    NF_SHARE_PTR<NFIPropertyManager> pElementPropertyManager = pElementInfo->GetPropertyManager();
+    NF_SHARE_PTR<NFIRecordManager> pElementRecordManager = pElementInfo->GetRecordManager();
 
     //1.add property
     //2.set the default value  of them
-    NFIPropertyManager* pClassPropertyManager = pLogicClass->GetPropertyManager();
-    NFIRecordManager* pClassRecordManager = pLogicClass->GetRecordManager();
-    if (pClassPropertyManager && pClassRecordManager)
+    NF_SHARE_PTR<NFIPropertyManager> pClassPropertyManager = pLogicClass->GetPropertyManager();
+    NF_SHARE_PTR<NFIRecordManager> pClassRecordManager = pLogicClass->GetRecordManager();
+    if (pClassPropertyManager.get() && pClassRecordManager.get())
     {
-        NFIProperty* pProperty = pClassPropertyManager->First();
-        while (pProperty)
+        NF_SHARE_PTR<NFIProperty> pProperty = pClassPropertyManager->First();
+        while (pProperty.get())
         {
 
-            pElementPropertyManager->AddProperty(0, pProperty);
+            pElementPropertyManager->AddProperty(NFIDENTID(), pProperty);
 
             pProperty = pClassPropertyManager->Next();
         }
 
-        NFIRecord* pRecord = pClassRecordManager->First();
-        while (pRecord)
+        NF_SHARE_PTR<NFIRecord> pRecord = pClassRecordManager->First();
+        while (pRecord.get())
         {
-            pElementRecordManager->AddRecord(0, pRecord->GetName(), pRecord->GetInitData(), pRecord->GetKeyState(), pRecord->GetInitDesc(), pRecord->GetTag(), pRecord->GetRelatedRecord(), pRecord->GetRows(), pRecord->GetPublic(), pRecord->GetPrivate(), pRecord->GetSave(), pRecord->GetIndex());
+            pElementRecordManager->AddRecord(NFIDENTID(), pRecord->GetName(), pRecord->GetInitData(), pRecord->GetKeyState(), pRecord->GetInitDesc(), pRecord->GetTag(), pRecord->GetRelatedRecord(), pRecord->GetRows(), pRecord->GetPublic(), pRecord->GetPrivate(), pRecord->GetSave(), pRecord->GetView(), pRecord->GetIndex());
             pRecord = pClassRecordManager->Next();
         }
 
@@ -140,7 +140,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
         const char* pstrConfigValue = pAttribute->value();
         //printf( "%s : %s\n", pstrConfigName, pstrConfigValue );
 
-        NFIProperty* temProperty = pElementPropertyManager->GetElement(pstrConfigName);
+        NF_SHARE_PTR<NFIProperty> temProperty = pElementPropertyManager->GetElement(pstrConfigName);
         if (!temProperty)
         {
             continue;
@@ -152,50 +152,50 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NFILogicClass* p
         switch (eType)
         {
             case TDATA_INT:
-				{
-					if(!LegalNumber(pstrConfigValue))
-					{
-                        NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
-					}
-					var.variantData = (int)atoi(pstrConfigValue);
-				}
-                break;
-            case TDATA_FLOAT:
+            {
+                if (!LegalNumber(pstrConfigValue))
                 {
-                    if (strlen(pstrConfigValue) <= 0)
-                    {
-                        NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
-                    }
-                    var.variantData = (float)atof(pstrConfigValue);
+                    NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 }
-                break;
-            case TDATA_DOUBLE:
+                var.variantData = boost::lexical_cast<NFINT64>(pstrConfigValue);
+            }
+            break;
+            case TDATA_FLOAT:
+            {
+                if (strlen(pstrConfigValue) <= 0)
                 {
-                    if (strlen(pstrConfigValue) <= 0)
-                    {
-                        NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
-                    }
-                    var.variantData = (double)atof(pstrConfigValue);
-                }                
-                break;
+                    NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
+                }
+                var.variantData = (float)atof(pstrConfigValue);
+            }
+            break;
+            case TDATA_DOUBLE:
+            {
+                if (strlen(pstrConfigValue) <= 0)
+                {
+                    NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
+                }
+                var.variantData = (double)atof(pstrConfigValue);
+            }
+            break;
             case TDATA_STRING:
                 var.variantData = std::string(pstrConfigValue);
                 break;
             case TDATA_OBJECT:
+            {
+                if (strlen(pstrConfigValue) <= 0)
                 {
-                    if (strlen(pstrConfigValue) <= 0)
-                    {
-                        NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
-                    }
-                    var.variantData = (NFINT64)0;
+                    NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 }
-                
-                break;
+                var.variantData = NFIDENTID();
+            }
+
+            break;
             //case TDATA_POINTER:
             //    var.variantData = (void*)NULL;
             //    break;
             default:
-               NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
+                NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 break;
         }
 
@@ -214,10 +214,10 @@ bool NFCElementInfoModule::Save()
     return true;
 }
 
-int NFCElementInfoModule::GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName)
+NFINT64 NFCElementInfoModule::GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName)
 {
-    NFIProperty* pProperty = GetProperty(strConfigName, strPropertyName);
-    if (pProperty)
+    NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
+    if (pProperty.get())
     {
         return pProperty->GetInt();
     }
@@ -227,8 +227,8 @@ int NFCElementInfoModule::GetPropertyInt(const std::string& strConfigName, const
 
 float NFCElementInfoModule::GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName)
 {
-    NFIProperty* pProperty = GetProperty(strConfigName, strPropertyName);
-    if (pProperty)
+    NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
+    if (pProperty.get())
     {
         return pProperty->GetFloat();
     }
@@ -238,8 +238,8 @@ float NFCElementInfoModule::GetPropertyFloat(const std::string& strConfigName, c
 
 double NFCElementInfoModule::GetPropertyDouble(const std::string& strConfigName, const std::string& strPropertyName)
 {
-    NFIProperty* pProperty = GetProperty(strConfigName, strPropertyName);
-    if (pProperty)
+    NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
+    if (pProperty.get())
     {
         return pProperty->GetDouble();
     }
@@ -249,8 +249,8 @@ double NFCElementInfoModule::GetPropertyDouble(const std::string& strConfigName,
 
 const std::string& NFCElementInfoModule::GetPropertyString(const std::string& strConfigName, const std::string& strPropertyName)
 {
-    NFIProperty* pProperty = GetProperty(strConfigName, strPropertyName);
-    if (pProperty)
+    NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
+    if (pProperty.get())
     {
         return pProperty->GetString();
     }
@@ -258,10 +258,10 @@ const std::string& NFCElementInfoModule::GetPropertyString(const std::string& st
     return  NULL_STR;
 }
 
-NFIProperty* NFCElementInfoModule::GetProperty(const std::string& strConfigName, const std::string& strPropertyName)
+NF_SHARE_PTR<NFIProperty> NFCElementInfoModule::GetProperty(const std::string& strConfigName, const std::string& strPropertyName)
 {
-    ElementConfigInfo* pElementInfo = GetElement(strConfigName);
-    if (pElementInfo)
+    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
+    if (pElementInfo.get())
     {
         return pElementInfo->GetPropertyManager()->GetElement(strPropertyName);
     }
@@ -269,10 +269,10 @@ NFIProperty* NFCElementInfoModule::GetProperty(const std::string& strConfigName,
     return NULL;
 }
 
-NFIPropertyManager* NFCElementInfoModule::GetPropertyManager(const std::string& strConfigName)
+NF_SHARE_PTR<NFIPropertyManager> NFCElementInfoModule::GetPropertyManager(const std::string& strConfigName)
 {
-    ElementConfigInfo* pElementInfo = GetElement(strConfigName);
-    if (pElementInfo)
+    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
+    if (pElementInfo.get())
     {
         return pElementInfo->GetPropertyManager();
     }
@@ -280,10 +280,10 @@ NFIPropertyManager* NFCElementInfoModule::GetPropertyManager(const std::string& 
     return NULL;
 }
 
-NFIRecordManager* NFCElementInfoModule::GetRecordManager(const std::string& strConfigName)
+NF_SHARE_PTR<NFIRecordManager> NFCElementInfoModule::GetRecordManager(const std::string& strConfigName)
 {
-    ElementConfigInfo* pElementInfo = GetElement(strConfigName);
-    if (pElementInfo)
+    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
+    if (pElementInfo.get())
     {
         return pElementInfo->GetRecordManager();
     }
@@ -297,8 +297,8 @@ bool NFCElementInfoModule::LoadSceneInfo(const std::string& strFileName, const s
     rapidxml::xml_document<>  doc;
     doc.parse<0>(fdoc.data());
 
-    NFILogicClass* pLogicClass = m_pLogicClassModule->GetElement(strClassName.c_str());
-    if (pLogicClass)
+    NF_SHARE_PTR<NFILogicClass> pLogicClass = m_pLogicClassModule->GetElement(strClassName.c_str());
+    if (pLogicClass.get())
     {
         //support for unlimited layer class inherits
         rapidxml::xml_node<>* root = doc.first_node();
@@ -317,8 +317,8 @@ bool NFCElementInfoModule::LoadSceneInfo(const std::string& strFileName, const s
 
 bool NFCElementInfoModule::ExistElement(const std::string& strConfigName)
 {
-    ElementConfigInfo* pElementInfo = GetElement(strConfigName);
-    if (pElementInfo)
+    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
+    if (pElementInfo.get())
     {
         return true;
     }
@@ -326,73 +326,64 @@ bool NFCElementInfoModule::ExistElement(const std::string& strConfigName)
     return false;
 }
 
-bool NFCElementInfoModule::LegalNumber( const char* str )
+bool NFCElementInfoModule::LegalNumber(const char* str)
 {
-	int nLen = int(strlen(str));
-	if (nLen <= 0)
-	{
-		return false;
-	}
+    int nLen = int(strlen(str));
+    if (nLen <= 0)
+    {
+        return false;
+    }
 
-	int nStart = 0;
-	if('-' == str[0])
-	{
-		nStart = 1;
-	}
+    int nStart = 0;
+    if ('-' == str[0])
+    {
+        nStart = 1;
+    }
 
-	for (int i = nStart; i < nLen; ++i)
-	{
-		if(!isdigit(str[i]))
-		{
-			return false;
-		}
-	}
+    for (int i = nStart; i < nLen; ++i)
+    {
+        if (!isdigit(str[i]))
+        {
+            return false;
+        }
+    }
 
-	return true;
+    return true;
 }
 
 bool NFCElementInfoModule::AfterInit()
 {
-	return true;
+    return true;
 
 }
 
 bool NFCElementInfoModule::BeforeShut()
 {
-	return true;
+    return true;
 
 }
 
-bool NFCElementInfoModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCElementInfoModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
-	return true;
+    return true;
 
 }
 
 bool NFCElementInfoModule::Clear()
 {
-    ElementConfigInfo* pElementConfigInfo = First();
-    while (pElementConfigInfo)
-    {
-        delete pElementConfigInfo;
-        pElementConfigInfo = NULL;
-
-        pElementConfigInfo = Next();
-    }
-
     ClearAll();
 
     mbLoaded = false;
-	return true;
+    return true;
 }
 
-NFIComponentManager* NFCElementInfoModule::GetComponentManager( const std::string& strConfigName )
+NF_SHARE_PTR<NFIComponentManager> NFCElementInfoModule::GetComponentManager(const std::string& strConfigName)
 {
-    ElementConfigInfo* pElementInfo = GetElement(strConfigName);
-    if (pElementInfo)
+    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
+    if (pElementInfo.get())
     {
         return pElementInfo->GetComponentManager();
     }
 
-    return NULL;
+    return NF_SHARE_PTR<NFIComponentManager>(NULL);
 }

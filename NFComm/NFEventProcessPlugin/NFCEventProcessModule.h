@@ -12,23 +12,23 @@
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 
 struct NFEventList
-    : public NFList<EVENT_PROCESS_FUNCTOR_PTR>
+        : public NFList<EVENT_PROCESS_FUNCTOR_PTR>
 {
 
 };
 struct NFClassEventList
-    : public NFList<CLASS_EVENT_FUNCTOR_PTR>
+        : public NFList<CLASS_EVENT_FUNCTOR_PTR>
 {
 
 };
 
 class NFCObjectEventInfo
-    : public NFMap<int, NFEventList>
+    : public NFMapEx<int, NFEventList>
 {
 };
 
 class NFCClassEventInfo
-    : public NFMap<std::string, NFClassEventList>
+    : public NFMapEx<std::string, NFClassEventList>
 {
 };
 
@@ -41,7 +41,7 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    
+
     virtual void OnReload(const char* strModuleName, NFILogicModule* pModule);
 
 
@@ -61,11 +61,11 @@ public:
 
 private:
     NFList<NFIDENTID> mRemoveObjectListEx;
-    NFMap<NFIDENTID, NFList<int> > mRemoveEventListEx;
+    NFMapEx<NFIDENTID, NFList<int> > mRemoveEventListEx;
 
     NFCClassEventInfo* m_pClassEventInfoEx;
 
-    typedef NFMap<NFIDENTID, NFCObjectEventInfo> NFCObjectEventInfoMapEx;
+    typedef NFMapEx<NFIDENTID, NFCObjectEventInfo> NFCObjectEventInfoMapEx;
     NFCObjectEventInfoMapEx mObjectEventInfoMapEx;
 };
 

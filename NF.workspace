@@ -24,19 +24,18 @@
 		<Project filename="NFServer/NFProxyServerNet_ServerPlugin/NFProxyServerNet_ServerPlugin.cbp" />
 		<Project filename="NFServer/NFProxyServerPlugin/NFProxyPlugin.cbp" />
 		<Project filename="NFServer/NFProxyServerNet_ClientPlugin/NFProxyServerNet_ClientPlugin.cbp" />
-		<Project filename="Dependencies/glog-0.3.3/vsprojects/libglog/libglog.cbp" />
-		<Project filename="Dependencies/protobuf-2.5.0/vsprojects/libprotobuf.cbp" />
-		<Project filename="Dependencies/protobuf-2.5.0/vsprojects/libprotobuf-lite.cbp" />
-		<Project filename="Dependencies/Theron-6.00.01/Theron/Theron.cbp" />
-		<Project filename="Dependencies/redis-cplusplus-client/msvc/anet_win32/anet_win32.cbp" />
 		<Project filename="Tutorial/Tutorial2/Tutorial2.cbp" />
 		<Project filename="Tutorial/Tutorial1/Tutorial1.cbp" />
 		<Project filename="Tutorial/Tutorial3/Tutorial3.cbp" />
-		<Project filename="NFComm/NFNet/NFNet.cbp" />
-		<Project filename="NFComm/NFDataNoSqlPlugin/NFDataNoSqlPlugin.cbp" />
-		<Project filename="NFComm/NFMessageDefine/NFMessageDefine.cbp" />
-		<Project filename="NFComm/NFJavaScriptPlugin/NFJavaScriptPlugin.cbp" />
-		<Project filename="NFComm/NFLuaScriptPlugin/NFLuaScriptPlugin.cbp" />
+		<Project filename="NFComm/NFMonoScriptPlugin/NFMonoScriptPlugin.cbp" />
 		<Project filename="NFComm/NFPythonScriptPlugin/NFPythonScriptPlugin.cbp" />
+		<Project filename="Tutorial/Tutorial6/Tutorial6.cbp" />
+		<Project filename="NFComm/NFJavaScriptPlugin/NFJavaScriptPlugin.cbp" />
+		<Project filename="NFComm/NFMessageDefine/NFMessageDefine.cbp" />
+		<Project filename="NFComm/NFNet/NFNet.cbp" />
+		<Project filename="NFServer/NFSLGPlugin/NFSLGPlugin.cbp" />
+		<Project filename="NFComm/NFLogPlugin/NFLogPlugin.cbp" />
+		<Project filename="NFComm/NFCrashPlugin/NFCrashPlugin.cbp" />
+		<Project filename="NFServer/NFAIPlugin/NFAIPlugin.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

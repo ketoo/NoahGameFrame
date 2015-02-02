@@ -6,7 +6,7 @@
 //
 // -------------------------------------------------------------------------
 
-#include <crtdbg.h>
+//#include <crtdbg.h>
 #include <time.h>
 #include <stdio.h>
 #include <iostream>
@@ -21,6 +21,7 @@
 #include "boost/thread.hpp"
 
 #pragma comment( lib, "DbgHelp" )
+#if NF_PLATFORM == NF_PLATFORM_WIN
 
 // 创建Dump文件
 void CreateDumpFile(const std::string& strDumpFilePathName, EXCEPTION_POINTERS* pException)
@@ -54,16 +55,17 @@ long ApplicationCrashHandler(EXCEPTION_POINTERS* pException)
 
     return EXCEPTION_EXECUTE_HANDLER;
 }
+#endif
 
 void CloseXButton()
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
-    HWND hWnd = GetConsoleWindow();  
-    if(hWnd)  
-    {  
-        HMENU hMenu = GetSystemMenu(hWnd, FALSE);  
-        EnableMenuItem(hMenu, SC_CLOSE, MF_DISABLED | MF_BYCOMMAND);  
+    HWND hWnd = GetConsoleWindow();
+    if(hWnd)
+    {
+        HMENU hMenu = GetSystemMenu(hWnd, FALSE);
+        EnableMenuItem(hMenu, SC_CLOSE, MF_DISABLED | MF_BYCOMMAND);
     }
 
 #endif
@@ -93,8 +95,10 @@ void CreateBackThread()
     //std::cout << "CreateBackThread, thread ID = " << gThread.get_id() << std::endl;
 }
 
+
 void PrintfLogo()
 {
+#if NF_PLATFORM == NF_PLATFORM_WIN
     std::cout << "\n" << std::endl;
 
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
@@ -112,7 +116,11 @@ void PrintfLogo()
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
     std::cout << "\n" << std::endl;
+#endif // NF_PLATFORM
 }
+
+unsigned long unStartTickTime = 0;
+unsigned long unLastTickTime = 0;
 
 #if NF_PLATFORM == NF_PLATFORM_WIN || NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_APPLE
 int main()
@@ -120,8 +128,9 @@ int main()
 
 #endif
 {
+#if NF_PLATFORM == NF_PLATFORM_WIN
     SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
-
+#endif
 	NFCActorManager::GetSingletonPtr()->Init();
 	NFCActorManager::GetSingletonPtr()->AfterInit();
     NFCActorManager::GetSingletonPtr()->CheckConfig();
@@ -130,6 +139,9 @@ int main()
 
     CloseXButton();
     CreateBackThread();
+
+    unStartTickTime = ::NF_GetTickCount();
+    unLastTickTime = unStartTickTime;
 
     while (!bExitApp)    //DEBUG版本崩溃，RELEASE不崩
     {
@@ -140,16 +152,28 @@ int main()
             {
                 break;
             }
-			
-			std::this_thread::sleep_for(std::chrono::milliseconds(5));
 
+			unsigned long unNowTickTime = ::NF_GetTickCount();
+			float fStartedTime = float(unNowTickTime - unStartTickTime) / 1000;
+			float fLastTime = float(unNowTickTime - unLastTickTime) / 1000;
+
+			if (fStartedTime < 0.001f)
+			{
+				fStartedTime = 0.0f;
+			}
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
             __try
             {
-                NFCActorManager::GetSingletonPtr()->Execute(0.005f, 0.005f);
+#endif
+                NFCActorManager::GetSingletonPtr()->Execute(fLastTime, fStartedTime);
+				unLastTickTime = unNowTickTime;
+#if NF_PLATFORM == NF_PLATFORM_WIN
             }
             __except (ApplicationCrashHandler(GetExceptionInformation()))
             {
             }
+#endif
         }
     }
 

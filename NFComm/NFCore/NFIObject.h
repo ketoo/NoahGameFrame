@@ -62,18 +62,18 @@ public:
     virtual bool FindHeartBeat(const std::string& strHeartBeatName) = 0;
 
     virtual bool RemoveHeartBeat(const std::string& strHeartBeatName) = 0;
-    
+
     /////////////////////////////////////////////////////////////////
 
     virtual bool FindProperty(const std::string& strPropertyName) = 0;
 
-    virtual bool SetPropertyInt(const std::string& strPropertyName, const int nValue) = 0;
+    virtual bool SetPropertyInt(const std::string& strPropertyName, const NFINT64 nValue) = 0;
     virtual bool SetPropertyFloat(const std::string& strPropertyName,  const float fValue) = 0;
     virtual bool SetPropertyDouble(const std::string& strPropertyName, const double dwValue) = 0;
     virtual bool SetPropertyString(const std::string& strPropertyName, const std::string& strValue) = 0;
     virtual bool SetPropertyObject(const std::string& strPropertyName, const NFIDENTID& obj) = 0;
 
-    virtual int GetPropertyInt(const std::string& strPropertyName) = 0;
+    virtual NFINT64 GetPropertyInt(const std::string& strPropertyName) = 0;
     virtual float GetPropertyFloat(const std::string& strPropertyName) = 0;
     virtual double GetPropertyDouble(const std::string& strPropertyName) = 0;
     virtual const std::string& GetPropertyString(const std::string& strPropertyName) = 0;
@@ -81,38 +81,38 @@ public:
 
     virtual bool FindRecord(const std::string& strRecordName) = 0;
 
-    virtual bool SetRecordInt(const std::string& strRecordName, const int nRow, const int nCol, const int nValue) = 0;
+    virtual bool SetRecordInt(const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue) = 0;
     virtual bool SetRecordFloat(const std::string& strRecordName, const int nRow, const int nCol,  const float fValue) = 0;
     virtual bool SetRecordDouble(const std::string& strRecordName, const int nRow, const int nCol, const double dwValue) = 0;
     virtual bool SetRecordString(const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue) = 0;
     virtual bool SetRecordObject(const std::string& strRecordName, const int nRow, const int nCol, const NFIDENTID& obj) = 0;
 
-    virtual bool SetRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag, const int value) = 0;
+    virtual bool SetRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFINT64 value) = 0;
     virtual bool SetRecordFloat(const std::string& strRecordName, const int nRow, const std::string& strColTag, const float value) = 0;
     virtual bool SetRecordDouble(const std::string& strRecordName, const int nRow, const std::string& strColTag, const double value) = 0;
     virtual bool SetRecordString(const std::string& strRecordName, const int nRow, const std::string& strColTag, const std::string& value) = 0;
     virtual bool SetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFIDENTID& value) = 0;
 
-    virtual int GetRecordInt(const std::string& strRecordName, const int nRow, const int nCol) = 0;
+    virtual NFINT64 GetRecordInt(const std::string& strRecordName, const int nRow, const int nCol) = 0;
     virtual float GetRecordFloat(const std::string& strRecordName, const int nRow, const int nCol) = 0;
     virtual double GetRecordDouble(const std::string& strRecordName, const int nRow, const int nCol) = 0;
     virtual const std::string& GetRecordString(const std::string& strRecordName, const int nRow, const int nCol) = 0;
     virtual NFIDENTID GetRecordObject(const std::string& strRecordName, const int nRow, const int nCol) = 0;
 
-    virtual int GetRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
+    virtual NFINT64 GetRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
     virtual float GetRecordFloat(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
     virtual double GetRecordDouble(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
     virtual const std::string& GetRecordString(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
     virtual NFIDENTID GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
 
-    virtual NFIComponent* AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
-    virtual NFIComponent* FindComponent(const std::string& strComponentName) = 0;
+    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
+    virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
 
-    virtual NFIRecordManager* GetRecordManager() = 0;
-    virtual NFIHeartBeatManager* GetHeartBeatManager() = 0;
-    virtual NFIPropertyManager* GetPropertyManager() = 0;
-    virtual NFIComponentManager* GetComponentManager() = 0;
-    
+    virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager() = 0;
+    virtual NF_SHARE_PTR<NFIHeartBeatManager> GetHeartBeatManager() = 0;
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager() = 0;
+    virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager() = 0;
+
 
 
 private:

@@ -1,5 +1,5 @@
 /**
-* @brief   µ÷ÊÔ¹¤¾ß
+* @brief   è°ƒè¯•å·¥å…·
 * @author  dongbo
 * @date    2010-3-17
 * @remarks
@@ -156,13 +156,13 @@ NFCallStackImp::func_name NFCallStackImp::_getfuncname(QWORD dwFunc)
 
     if (::SymGetLineFromAddr64(hProcess, dwFunc, &dwSymbolDisplacement, &ImageHelpLine))
     {
-        // ÎÒ¾Í²»ĞÅ£¬4096¶¼²»¹»
+        // æˆ‘å°±ä¸ä¿¡ï¼Œ4096éƒ½ä¸å¤Ÿ
         char szBuf[4096] = {0};
-        sprintf_s(szBuf, "%s£º%d", ImageHelpLine.FileName, ImageHelpLine.LineNumber);
+        sprintf_s(szBuf, "%sï¼š%d", ImageHelpLine.FileName, ImageHelpLine.LineNumber);
 
         strResult += szBuf;
     }
-    //²»ÏëÊ¹ÓÃÄ£¿éÃû
+    //ä¸æƒ³ä½¿ç”¨æ¨¡å—å
     //  IMAGEHLP_MODULE64  ImageHelpModule;
     //  ImageHelpModule.SizeOfStruct = sizeof(ImageHelpModule);
     //
@@ -210,7 +210,7 @@ NFCallStackImp::callstack_ptr NFCallStackImp::generate(const void* pContext)
     static const int gc_iMaxStackDepth = 512;
     QWORD aryStack[gc_iMaxStackDepth] = {0};
 
-    // ÓÉÓÚ_stackwalkÄÚ²¿Ê¹ÓÃSEH Òò´Ë²»ÄÜÔÚÆäÄÚ²¿Ê¹ÓÃC++Àà
+    // ç”±äº_stackwalkå†…éƒ¨ä½¿ç”¨SEH å› æ­¤ä¸èƒ½åœ¨å…¶å†…éƒ¨ä½¿ç”¨C++ç±»
     _stackwalk(aryStack, gc_iMaxStackDepth, &Context);
 
     callstack_ptr spCallStack(new NFCallStack());
@@ -231,7 +231,7 @@ void NFCallStackImp::_initialize()
         return;
     }
 
-    // ÉèÖÃ·ûºÅÒıÇæ
+    // è®¾ç½®ç¬¦å·å¼•æ“
     DWORD SymOpts = ::SymGetOptions();
     SymOpts |= SYMOPT_LOAD_LINES;
     SymOpts |= SYMOPT_DEBUG;
@@ -239,13 +239,13 @@ void NFCallStackImp::_initialize()
 
     if (FALSE == ::SymInitialize(::GetCurrentProcess(), NULL, TRUE))
     {
-        //  DBSOFT_LogMsg( "::SymInitialize³õÊ¼»¯Ê§°Ü..." );
+        //  DBSOFT_LogMsg( "::SymInitializeåˆå§‹åŒ–å¤±è´¥..." );
         return;
     }
 
     if (!_loadAllModules())
     {
-        //  DBSOFT_LogMsg( "LoadModules·¢ÉúÁË´íÁË" );
+        //  DBSOFT_LogMsg( "LoadModuleså‘ç”Ÿäº†é”™äº†" );
     }
 
     m_bInitialized = true;

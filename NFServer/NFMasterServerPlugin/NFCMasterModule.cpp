@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------
 
 //#include "stdafx.h"
-#include <conio.h>
+//#include <conio.h>
 #include "NFCMasterModule.h"
 #include "NFMasterServerPlugin.h"
 
@@ -49,14 +49,14 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 //                 for (int i = 0; i < nCount; i++)
 //                 {
 //                     NFIDENTID ident = valOobjectList.Object(i);
-// 
+//
 //                     char szInfo[MAX_PATH] = { 0 };
 //                     sprintf_s(szInfo, "WorldID:%d, WorldName:%s, WorldMaxOnline:%d, WorldOnlineCount:%d",
 //                               m_pKernelModule->GetPropertyInt(ident, "WorldID"),
 //                               m_pKernelModule->GetPropertyString(ident, "WorldName"),
 //                               m_pKernelModule->GetPropertyInt(ident, "WorldMaxOnline"),
 //                               m_pKernelModule->GetPropertyInt(ident, "WorldOnlineCount"));
-// 
+//
 //                     m_pKernelModule->LogInfo(szInfo);
 //                 }
 //             }
@@ -67,14 +67,14 @@ bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTim
 //                 for (int i = 0; i < nCount; i++)
 //                 {
 //                     NFIDENTID ident = valOobjectList.Object(i);
-// 
+//
 //                     char szInfo[MAX_PATH] = { 0 };
 //                     sprintf_s(szInfo, "LoginID:%d, LoginName:%s, LoginMaxOnline:%d, LoginOnlineCount:%d",
 //                               m_pKernelModule->GetPropertyInt(ident, "LoginID"),
 //                               m_pKernelModule->GetPropertyString(ident, "LoginName"),
 //                               m_pKernelModule->GetPropertyInt(ident, "LoginMaxOnline"),
 //                               m_pKernelModule->GetPropertyInt(ident, "LoginOnlineCount"));
-// 
+//
 //                     m_pKernelModule->LogInfo(szInfo);
 //                 }
 //             }

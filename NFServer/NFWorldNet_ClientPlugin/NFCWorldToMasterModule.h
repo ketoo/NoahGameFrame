@@ -12,7 +12,7 @@
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
-#include "NFComm/NFPluginModule/NFIWorldNet_ClientModule.h"
+#include "NFComm/NFPluginModule/NFIWorldToMasterModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIWorldLogicModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
@@ -20,13 +20,12 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
-class NFCWorldNet_ClientModule
-    : public NFIWorldNet_ClientModule
+class NFCWorldToMasterModule
+    : public NFIWorldToMasterModule
 {
 public:
-    NFCWorldNet_ClientModule(NFIPluginManager* p)
+    NFCWorldToMasterModule(NFIPluginManager* p)
     {
-        mnSocketFD = 0;
         pPluginManager = p;
     }
 
@@ -60,7 +59,7 @@ protected:
     int OnSelectServerResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
 
 private:
-	int mnSocketFD;
+
     NFILogModule* m_pLogModule;
 	NFIElementInfoModule* m_pElementInfoModule;
 	NFILogicClassModule* m_pLogicClassModule;

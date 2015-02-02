@@ -19,10 +19,12 @@ public:
 
     NFCDataList(const char* str, const char* strSplit);
 
+    NFCDataList(const NFCDataList& src);
     NFCDataList(const NFIDataList& src);
 
     virtual ~NFCDataList();
 
+    NFCDataList& operator=(const NFCDataList& src);
     NFCDataList& operator=(const NFIDataList& src);
 
     // 添加
@@ -53,7 +55,7 @@ public:
 
     virtual bool Split(const char* strData, const char* strSplit);
 
-    virtual bool Add(const int value);
+    virtual bool Add(const NFINT64 value);
 
     virtual bool Add(const float value);
 
@@ -61,11 +63,13 @@ public:
 
     virtual bool Add(const char* value);
 
+    virtual bool Add(const std::string& value);
+
     virtual bool Add(const NFIDENTID& value);
 
     virtual bool Add(const void* value);
 
-    virtual bool Set(const int index, const int value);
+    virtual bool Set(const int index, const NFINT64 value);
 
     virtual bool Set(const int index, const float value);
 
@@ -78,11 +82,11 @@ public:
     virtual bool Set(const int index, const void* value);
 
     // 获得数据
-    virtual int Int(const int index) const;
+    virtual NFINT64 Int(const int index) const;
     virtual float Float(const int index) const;
     virtual double Double(const int index) const;
     virtual std::string StringValEx(const int index, const bool bForce) const;
-    virtual bool ToString(OUT std::string& str, const char* strSplit);
+    virtual bool ToString(std::string& str, const char* strSplit);
     virtual const std::string& String(const int index) const;
     virtual NFIDENTID Object(const int index) const;
     virtual void* Pointer(const int index) const;
