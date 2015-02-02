@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="CodeDomLocalizationModel" FullName="System.ComponentModel.Design.Serialization.CodeDomLocalizationModel">
+  <TypeSignature Language="C#" Value="public enum CodeDomLocalizationModel" />
+  <AssemblyInfo>
+    <AssemblyName>System.Design</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <remarks>To be added.</remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Determines the localization model to be used by the CodeDom resource adapter.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="None">
+      <MemberSignature Language="C#" Value="None" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.ComponentModel.Design.Serialization.CodeDomLocalizationModel</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The localization provider should ignore localized properties. It will still write out resources for objects that do not support code generation and are serializable.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="PropertyAssignment">
+      <MemberSignature Language="C#" Value="PropertyAssignment" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.ComponentModel.Design.Serialization.CodeDomLocalizationModel</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The localization provider will write out localized properties by assigning a resource to each property. This model is fast when the number of properties is small, but it scales poorly as the number of properties containing default values grows.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="PropertyReflection">
+      <MemberSignature Language="C#" Value="PropertyReflection" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.ComponentModel.Design.Serialization.CodeDomLocalizationModel</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The localization provider will write localized property values into a resource file and use the <see cref="T:System.ComponentModel.ComponentResourceManager" /> class to reflect on properties by name to fill them at runtime. This uses reflection at runtime so it can be slow, but it scales better for large numbers of properties with default values.</para>
+        </summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

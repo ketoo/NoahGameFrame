@@ -9,14 +9,12 @@
 #ifndef _NF_DEFINE_H_
 #define _NF_DEFINE_H_
 
-#include "NFIDENTID.h"
+#include "NFIdentID.h"
 #include "NFIDataList.h"
-
 #include <boost/function.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/bind/placeholders.hpp>
 #include <boost/bind.hpp>
-
 
 enum CLASS_OBJECT_EVENT
 {
@@ -31,23 +29,6 @@ enum CLASS_OBJECT_EVENT
     COE_CREATE_FINISH,  // ToModify任务创建完成后再挂回调
 };
 
-////heart beat call back event func define
-//typedef int(* HEART_BEAT_FUNC)(const NFIDENTID& self, const NFIDataList& var);
-//
-////property call back event func define
-//typedef int(* PROPERTY_EVENT_FUNC)(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar);
-//
-////record call back event func define, nOpType: Add = 0,Del, Changed,    Create, UpData,
-//typedef int(* RECORD_EVENT_FUNC)(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar);
-////AddEventCallBack( "Player", CEF_OnDisconnect, SceneModule::OnDisconnect );
-//
-////class call back event func define. nClassEvent:0[destroy],1[created],2[enterContainer]
-//typedef int(* CLASS_EVENT_FUNC)(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
-////AddEventCallBack( "Player", CEF_OnDisconnect, SceneModule::OnDisconnect );
-//
-////event call back event func define
-//typedef int(* EVENT_PROCESS_FUNC)(const NFIDENTID& self, const int nEventID, const NFIDataList& var);
-
 // functor
 typedef boost::function<int(const NFIDENTID&, const std::string&, const float, const int, const NFIDataList&)> HEART_BEAT_FUNCTOR;
 typedef boost::function<int(const NFIDENTID&, const std::string&, const NFIDataList&, const NFIDataList&, const NFIDataList&)> PROPERTY_EVENT_FUNCTOR;
@@ -55,11 +36,11 @@ typedef boost::function<int(const NFIDENTID&, const std::string&, const int, con
 typedef boost::function<int(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIDataList&)> CLASS_EVENT_FUNCTOR;
 typedef boost::function<int(const NFIDENTID&, const int, const NFIDataList&)> EVENT_PROCESS_FUNCTOR;
 
-typedef std::shared_ptr<HEART_BEAT_FUNCTOR> HEART_BEAT_FUNCTOR_PTR;
-typedef std::shared_ptr<PROPERTY_EVENT_FUNCTOR> PROPERTY_EVENT_FUNCTOR_PTR;
-typedef std::shared_ptr<RECORD_EVENT_FUNCTOR> RECORD_EVENT_FUNCTOR_PTR;
-typedef std::shared_ptr<CLASS_EVENT_FUNCTOR> CLASS_EVENT_FUNCTOR_PTR;
-typedef std::shared_ptr<EVENT_PROCESS_FUNCTOR> EVENT_PROCESS_FUNCTOR_PTR;
+typedef NF_SHARE_PTR<HEART_BEAT_FUNCTOR> HEART_BEAT_FUNCTOR_PTR;
+typedef NF_SHARE_PTR<PROPERTY_EVENT_FUNCTOR> PROPERTY_EVENT_FUNCTOR_PTR;
+typedef NF_SHARE_PTR<RECORD_EVENT_FUNCTOR> RECORD_EVENT_FUNCTOR_PTR;
+typedef NF_SHARE_PTR<CLASS_EVENT_FUNCTOR> CLASS_EVENT_FUNCTOR_PTR;
+typedef NF_SHARE_PTR<EVENT_PROCESS_FUNCTOR> EVENT_PROCESS_FUNCTOR_PTR;
 
 
 #endif

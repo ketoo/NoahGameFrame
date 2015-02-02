@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Luabind" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug x64">
+				<Option output="luabind" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_LIB" />
+					<Add directory="$(SolutionDir)/Dependencies/luabind-0.9.1/" />
+					<Add directory="$(SolutionDir)/Dependencies/lua-5.1/src/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+				</Compiler>
+			</Target>
+			<Target title="Release x64">
+				<Option output="luabind" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_LIB" />
+					<Add directory="$(SolutionDir)/Dependencies/luabind-0.9.1/" />
+					<Add directory="$(SolutionDir)/Dependencies/lua-5.1/src/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+				</Compiler>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="luabind" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_LIB" />
+				</Compiler>
+			</Target>
+			<Target title="Debug Win32">
+				<Option output="luabind" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_LIB" />
+					<Add directory="$(NF_DEP)/luabind-0.9.1" />
+					<Add directory="$(NF_DEP)/lua-5.1/src" />
+					<Add directory="$(NF_DEP)/boost_1_53_0" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Unit filename="../luabind/adopt_policy.hpp" />
+		<Unit filename="../luabind/back_reference.hpp" />
+		<Unit filename="../luabind/back_reference_fwd.hpp" />
+		<Unit filename="../luabind/class.hpp" />
+		<Unit filename="../luabind/class_info.hpp" />
+		<Unit filename="../luabind/config.hpp" />
+		<Unit filename="../luabind/container_policy.hpp" />
+		<Unit filename="../luabind/copy_policy.hpp" />
+		<Unit filename="../luabind/dependency_policy.hpp" />
+		<Unit filename="../luabind/detail/calc_arity.hpp" />
+		<Unit filename="../luabind/detail/call.hpp" />
+		<Unit filename="../luabind/detail/call_function.hpp" />
+		<Unit filename="../luabind/detail/call_member.hpp" />
+		<Unit filename="../luabind/detail/call_operator_iterate.hpp" />
+		<Unit filename="../luabind/detail/class_cache.hpp" />
+		<Unit filename="../luabind/detail/class_registry.hpp" />
+		<Unit filename="../luabind/detail/class_rep.hpp" />
+		<Unit filename="../luabind/detail/compute_score.hpp" />
+		<Unit filename="../luabind/detail/constructor.hpp" />
+		<Unit filename="../luabind/detail/conversion_storage.hpp" />
+		<Unit filename="../luabind/detail/convert_to_lua.hpp" />
+		<Unit filename="../luabind/detail/debug.hpp" />
+		<Unit filename="../luabind/detail/decorate_type.hpp" />
+		<Unit filename="../luabind/detail/deduce_signature.hpp" />
+		<Unit filename="../luabind/detail/enum_maker.hpp" />
+		<Unit filename="../luabind/detail/format_signature.hpp" />
+		<Unit filename="../luabind/detail/garbage_collector.hpp" />
+		<Unit filename="../luabind/detail/has_get_pointer.hpp" />
+		<Unit filename="../luabind/detail/inheritance.hpp" />
+		<Unit filename="../luabind/detail/instance_holder.hpp" />
+		<Unit filename="../luabind/detail/is_indirect_const.hpp" />
+		<Unit filename="../luabind/detail/link_compatibility.hpp" />
+		<Unit filename="../luabind/detail/make_instance.hpp" />
+		<Unit filename="../luabind/detail/most_derived.hpp" />
+		<Unit filename="../luabind/detail/object_call.hpp" />
+		<Unit filename="../luabind/detail/object_funs.hpp" />
+		<Unit filename="../luabind/detail/object_rep.hpp" />
+		<Unit filename="../luabind/detail/open.hpp" />
+		<Unit filename="../luabind/detail/operator_id.hpp" />
+		<Unit filename="../luabind/detail/other.hpp" />
+		<Unit filename="../luabind/detail/pcall.hpp" />
+		<Unit filename="../luabind/detail/pointee_sizeof.hpp" />
+		<Unit filename="../luabind/detail/pointee_typeid.hpp" />
+		<Unit filename="../luabind/detail/policy.hpp" />
+		<Unit filename="../luabind/detail/primitives.hpp" />
+		<Unit filename="../luabind/detail/property.hpp" />
+		<Unit filename="../luabind/detail/ref.hpp" />
+		<Unit filename="../luabind/detail/signature_match.hpp" />
+		<Unit filename="../luabind/detail/stack_utils.hpp" />
+		<Unit filename="../luabind/detail/typetraits.hpp" />
+		<Unit filename="../luabind/detail/yes_no.hpp" />
+		<Unit filename="../luabind/discard_result_policy.hpp" />
+		<Unit filename="../luabind/error.hpp" />
+		<Unit filename="../luabind/exception_handler.hpp" />
+		<Unit filename="../luabind/from_stack.hpp" />
+		<Unit filename="../luabind/function.hpp" />
+		<Unit filename="../luabind/get_main_thread.hpp" />
+		<Unit filename="../luabind/get_pointer.hpp" />
+		<Unit filename="../luabind/handle.hpp" />
+		<Unit filename="../luabind/iterator_policy.hpp" />
+		<Unit filename="../luabind/lua_include.hpp" />
+		<Unit filename="../luabind/luabind.hpp" />
+		<Unit filename="../luabind/make_function.hpp" />
+		<Unit filename="../luabind/nil.hpp" />
+		<Unit filename="../luabind/object.hpp" />
+		<Unit filename="../luabind/open.hpp" />
+		<Unit filename="../luabind/operator.hpp" />
+		<Unit filename="../luabind/out_value_policy.hpp" />
+		<Unit filename="../luabind/prefix.hpp" />
+		<Unit filename="../luabind/raw_policy.hpp" />
+		<Unit filename="../luabind/return_reference_to_policy.hpp" />
+		<Unit filename="../luabind/scope.hpp" />
+		<Unit filename="../luabind/shared_ptr_converter.hpp" />
+		<Unit filename="../luabind/tag_function.hpp" />
+		<Unit filename="../luabind/typeid.hpp" />
+		<Unit filename="../luabind/value_wrapper.hpp" />
+		<Unit filename="../luabind/version.hpp" />
+		<Unit filename="../luabind/weak_ref.hpp" />
+		<Unit filename="../luabind/wrapper_base.hpp" />
+		<Unit filename="../luabind/yield_policy.hpp" />
+		<Unit filename="../src/class.cpp" />
+		<Unit filename="../src/class_info.cpp" />
+		<Unit filename="../src/class_registry.cpp" />
+		<Unit filename="../src/class_rep.cpp" />
+		<Unit filename="../src/create_class.cpp" />
+		<Unit filename="../src/error.cpp" />
+		<Unit filename="../src/exception_handler.cpp" />
+		<Unit filename="../src/function.cpp" />
+		<Unit filename="../src/inheritance.cpp" />
+		<Unit filename="../src/link_compatibility.cpp" />
+		<Unit filename="../src/object_rep.cpp" />
+		<Unit filename="../src/open.cpp" />
+		<Unit filename="../src/pcall.cpp" />
+		<Unit filename="../src/scope.cpp" />
+		<Unit filename="../src/stack_content_by_name.cpp" />
+		<Unit filename="../src/weak_ref.cpp" />
+		<Unit filename="../src/wrapper_base.cpp" />
+		<Extensions>
+			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

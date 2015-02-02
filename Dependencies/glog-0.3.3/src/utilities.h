@@ -160,7 +160,7 @@ WallTime WallTime_Now();
 
 int32 GetMainThreadPid();
 bool PidHasChanged();
-bool DayHasChanged();
+
 pid_t GetTID();
 
 const std::string& MyUserName();

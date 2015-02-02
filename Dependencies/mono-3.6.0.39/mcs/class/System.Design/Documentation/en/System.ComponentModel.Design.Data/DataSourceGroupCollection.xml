@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="DataSourceGroupCollection" FullName="System.ComponentModel.Design.Data.DataSourceGroupCollection">
+  <TypeSignature Language="C#" Value="public class DataSourceGroupCollection : System.Collections.CollectionBase" />
+  <AssemblyInfo>
+    <AssemblyName>System.Design</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Collections.CollectionBase</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <remarks>To be added.</remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Provides a type-safe collection of <see cref="T:System.ComponentModel.Design.Data.DataSourceGroup" /> objects.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DataSourceGroupCollection ();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DataSourceGroupCollection" /> class.</para>
+        </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="Add">
+      <MemberSignature Language="C#" Value="public int Add (System.ComponentModel.Design.Data.DataSourceGroup value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.ComponentModel.Design.Data.DataSourceGroup" />
+      </Parameters>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Adds a <see cref="T:System.ComponentModel.Design.Data.DataSourceGroup" /> to the collection.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The index of the <see cref="T:System.ComponentModel.Design.Data.DataSourceGroup" /> that was added to the collection.</para>
+        </returns>
+        <param name="value">
+          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.ComponentModel.Design.Data.DataSourceGroup" /> to add to the collection.</param>
+      </Docs>
+    </Member>
+    <Member MemberName="Contains">
+      <MemberSignature Language="C#" Value="public bool Contains (System.ComponentModel.Design.Data.DataSourceGroup value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.ComponentModel.Design.Data.DataSourceGroup" />
+      </Parameters>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets a value indicating whether the <see cref="T:System.ComponentModel.Design.Data.DataSourceGroupCollection" /> contains the specified <see cref="T:System.ComponentModel.Design.Data.DataSourceGroup" />.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>true if the <see cref="T:System.ComponentModel.Design.Data.DataSourceGroup" /> is contained in the collection; otherwise, false.</para>
+        </returns>
+        <param name="value">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ComponentModel.Design.Data.DataSourceGroup" /> to locate.</param>
+      </Docs>
+    </Member>
+    <Member MemberName="CopyTo">
+      <MemberSignature Language="C#" Value="public void CopyTo (System.ComponentModel.Design.Data.DataSourceGroup[] array, int index);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="array" Type="System.ComponentModel.Design.Data.DataSourceGroup[]" />
+        <Parameter Name="index" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Copies the <see cref="T:System.ComponentModel.Design.Data.DataSourceGroupCollection" /> values to a one-dimensional <see cref="T:System.Array" /> at the specified index.</para>
+        </summary>
+        <param name="array">
+          <attribution license="cc4" from="Microsoft" modified="false" />The one-dimensional <see cref="T:System.Array" /> that is the destination of the values copied from the <see cref="T:System.ComponentModel.Design.Data.DataSourceGroupCollection" />.</param>
+        <param name="index">
+          <attribution license="cc4" from="Microsoft" modified="false" />The index in the <paramref name="array" /> where copying begins.</param>
+      </Docs>
+    </Member>
+    <Member MemberName="IndexOf">
+      <MemberSignature Language="C#" Value="public int IndexOf (System.ComponentModel.Design.Data.DataSourceGroup value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.ComponentModel.Design.Data.DataSourceGroup" />
+      </Parameters>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Returns the index of a <see cref="T:System.ComponentModel.Design.Data.DataSourceGroup" /> in the <see cref="T:System.ComponentModel.Design.Data.DataSourceGroupCollection" />.</para>
+        </summary>
+        <returns>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The index of the <see cref="T:System.ComponentModel.Design.Data.DataSourceGroup" /> of <paramref name="value" /> in the <see cref="T:System.ComponentModel.Design.Data.DataSourceGroupCollection" />, if found; otherwise, -1.</para>
+        </returns>
+        <param name="value">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ComponentModel.Design.Data.DataSourceGroup" /> to locate.</param>
+      </Docs>
+    </Member>
+    <Member MemberName="Insert">
+      <MemberSignature Language="C#" Value="public void Insert (int index, System.ComponentModel.Design.Data.DataSourceGroup value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="index" Type="System.Int32" />
+        <Parameter Name="value" Type="System.ComponentModel.Design.Data.DataSourceGroup" />
+      </Parameters>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Inserts a <see cref="T:System.ComponentModel.Design.Data.DataSourceGroup" /> into the <see cref="T:System.ComponentModel.Design.Data.DataSourceGroupCollection" /> at the specified index.</para>
+        </summary>
+        <param name="index">
+          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index where <paramref name="value" /> should be inserted.</param>
+        <param name="value">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ComponentModel.Design.Data.DataSourceGroup" /> to insert.</param>
+      </Docs>
+    </Member>
+    <Member MemberName="Item">
+      <MemberSignature Language="C#" Value="public System.ComponentModel.Design.Data.DataSourceGroup this[int index] { set; get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.ComponentModel.Design.Data.DataSourceGroup</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="index" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="index">To be added.</param>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Remove">
+      <MemberSignature Language="C#" Value="public void Remove (System.ComponentModel.Design.Data.DataSourceGroup value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.ComponentModel.Design.Data.DataSourceGroup" />
+      </Parameters>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Removes a specific <see cref="T:System.ComponentModel.Design.Data.DataSourceGroup" /> from the <see cref="T:System.ComponentModel.Design.Data.DataSourceGroupCollection" />.</para>
+        </summary>
+        <param name="value">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ComponentModel.Design.Data.DataSourceGroup" /> to remove from the <see cref="T:System.ComponentModel.Design.Data.DataSourceGroupCollection" />.</param>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

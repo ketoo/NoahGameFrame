@@ -26,7 +26,7 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
-#include "NFIDENTID.h"
+#include "NFIdentID.h"
 #include "NFPlatform.h"
 #include <boost/lexical_cast.hpp>
 #include <boost/variant.hpp>
@@ -65,14 +65,23 @@ public:
         }
 
         TDATA_TYPE nType;
-        boost::variant<bool, int, float, double, std::string, NFINT64, void*> variantData;
+        boost::variant<NFINT64, float, double, std::string, NFIDENTID, void*> variantData;
     };
+
+    NFIDataList()
+    {
+        mnCapacity = STACK_SIZE;
+        mnNextOrderCapacity = mnCapacity * 2;
+        mnSize = 0;
+        mnOrder = 0;
+    }
 
     virtual ~NFIDataList() = 0;
 
     virtual std::string StringValEx(const int index, const bool bForce) const = 0;
-    virtual bool ToString(OUT std::string& str, const char* strSplit) = 0;
+    virtual bool ToString(std::string& str, const char* strSplit) = 0;
 
+ protected:
     template<typename T>
     T NumberVal(const int index) const
     {
@@ -83,7 +92,7 @@ public:
             if (type == TDATA_DOUBLE
                 || type == TDATA_FLOAT
                 || type == TDATA_INT
-                || type == TDATA_OBJECT
+                /*|| type == TDATA_OBJECT*/
                 /*|| type == TDATA_POINTER*/)
             {
                 const TData* var = GetStackConst(index);
@@ -116,19 +125,24 @@ public:
     }
 
     template<typename T>
-    bool AddNumber(const TDATA_TYPE eType, const T& value)
+    bool AddNumber(const TDATA_TYPE type, const T& value)
     {
-
-        TData* var = GetStack(mnSize);
-        if (var)
+        if (type == TDATA_DOUBLE
+            || type == TDATA_FLOAT
+            || type == TDATA_INT
+            || type == TDATA_OBJECT
+            /*|| type == TDATA_POINTER*/)
         {
-            var->nType = eType;
-            var->variantData = value;
-            mnSize++;
+            TData* var = GetStack(mnSize);
+            if (var)
+            {
+                var->nType = type;
+                var->variantData = value;
+                mnSize++;
 
-            return true;
+                return true;
+            }
         }
-
         return false;
     }
 
@@ -226,14 +240,16 @@ public:
     virtual bool Split(const char* str, const char* strSplit) = 0;
 
     // 添加数据
-    virtual bool Add(const int value) = 0;
+    virtual bool Add(const NFINT64 value) = 0;
     virtual bool Add(const float value) = 0;
     virtual bool Add(const double value) = 0;
     virtual bool Add(const char* value) = 0;
+
+    virtual bool Add(const std::string& value) = 0;
     virtual bool Add(const NFIDENTID& value) = 0;
     virtual bool Add(const void* value) = 0;
 
-    virtual bool Set(const int index, const int value) = 0;
+    virtual bool Set(const int index, const NFINT64 value) = 0;
     virtual bool Set(const int index, const float value) = 0;
     virtual bool Set(const int index, const double value) = 0;
     virtual bool Set(const int index, const char* value) = 0;
@@ -241,14 +257,14 @@ public:
     virtual bool Set(const int index, const void* value) = 0;
 
     // 获得数据
-    virtual int Int(const int index) const = 0;
+    virtual NFINT64 Int(const int index) const = 0;
     virtual float Float(const int index) const = 0;
     virtual double Double(const int index) const = 0;
     virtual const std::string& String(const int index) const = 0;
     virtual NFIDENTID Object(const int index) const = 0;
     virtual void* Pointer(const int index) const = 0;
 
-    bool AddInt(const int value)
+    bool AddInt(const NFINT64 value)
     {
         return Add(value);
     }
@@ -264,6 +280,10 @@ public:
     {
         return Add(value);
     }
+    bool AddString(const std::string& value)
+    {
+        return Add(value);
+    }
     bool AddObject(const NFIDENTID& value)
     {
         return Add(value);
@@ -273,7 +293,7 @@ public:
         return Add(value);
     }
 
-    bool SetInt(const int index, const int value)
+    bool SetInt(const int index, const NFINT64 value)
     {
         return Set(index, value);
     }
@@ -304,24 +324,15 @@ public:
 
         switch (var.nType)
         {
-        case TDATA_INT:
+            case TDATA_INT:
             {
-                if (0 != boost::get<int>(var.variantData))
+                if (0 != boost::get<NFINT64>(var.variantData))
                 {
                     bChanged = true;
                 }
             }
             break;
-        case TDATA_FLOAT:
-            {
-                float fValue = boost::get<float>(var.variantData);
-                if (fValue > 0.001f  || fValue < -0.001f)
-                {
-                    bChanged = true;
-                }
-            }
-            break;
-        case TDATA_DOUBLE:
+            case TDATA_FLOAT:
             {
                 float fValue = boost::get<float>(var.variantData);
                 if (fValue > 0.001f  || fValue < -0.001f)
@@ -330,7 +341,16 @@ public:
                 }
             }
             break;
-        case TDATA_STRING:
+            case TDATA_DOUBLE:
+            {
+                float fValue = boost::get<double>(var.variantData);
+                if (fValue > 0.001f  || fValue < -0.001f)
+                {
+                    bChanged = true;
+                }
+            }
+            break;
+            case TDATA_STRING:
             {
                 const std::string& strData = boost::get<const std::string&>(var.variantData);
                 if (!strData.empty())
@@ -339,24 +359,24 @@ public:
                 }
             }
             break;
-        case TDATA_OBJECT:
+            case TDATA_OBJECT:
             {
-                if (0 != boost::get<NFINT64>(var.variantData))
+                if (NFIDENTID() != boost::get<NFIDENTID>(var.variantData))
                 {
                     bChanged = true;
                 }
             }
             break;
-        //case TDATA_POINTER:
-        //    {
-        //        if (0 != boost::get<void*>(var.variantData))
-        //        {
-        //            bChanged = true;
-        //        }
-        //    }
-        //    break;
-        default:
-            break;
+            //case TDATA_POINTER:
+            //    {
+            //        if (0 != boost::get<void*>(var.variantData))
+            //        {
+            //            bChanged = true;
+            //        }
+            //    }
+            //    break;
+            default:
+                break;
         }
 
         return bChanged;
@@ -390,9 +410,9 @@ public:
                     return Object(nPos) == src.Object(nPos);
                     break;
 
-                //case TDATA_POINTER:
-                //    return Pointer(nPos) == src.Pointer(nPos);
-                //    break;
+                    //case TDATA_POINTER:
+                    //    return Pointer(nPos) == src.Pointer(nPos);
+                    //    break;
 
                 default:
                     return false;
@@ -428,42 +448,42 @@ public:
 
     inline NFIDataList& operator<<(const char value)
     {
-        Add((int)value);
+        Add((NFINT64)value);
         return *this;
     }
     inline NFIDataList& operator<<(const unsigned char value)
     {
-        Add((int)value);
+        Add((NFINT64)value);
         return *this;
     }
     inline NFIDataList& operator<<(const short value)
     {
-        Add((int)value);
+        Add((NFINT64)value);
         return *this;
     }
     inline NFIDataList& operator<<(const unsigned short value)
     {
-        Add((int)value);
+        Add((NFINT64)value);
         return *this;
     }
     inline NFIDataList& operator<<(const int value)
     {
-        Add((int)value);
+        Add((NFINT64)value);
         return *this;
     }
     inline NFIDataList& operator<<(const unsigned int value)
     {
-        Add((int)value);
+        Add((NFINT64)value);
         return *this;
     }
     inline NFIDataList& operator<<(const long value)
     {
-        Add((int)value);
+        Add((NFINT64)value);
         return *this;
     }
     inline NFIDataList& operator<<(const unsigned long value)
     {
-        Add((int)value);
+        Add((NFINT64)value);
         return *this;
     }
     inline NFIDataList& operator<<(const float value)
@@ -483,14 +503,21 @@ public:
     }
     inline NFIDataList& operator<<(const std::string& value)
     {
-        Add(value.c_str());
+        Add(value);
         return *this;
     }
-    //     inline NFIDataList& operator<<( const NFINT64 value )
-    //     {
-    //         Add( NFIDENTID( value ) );
-    //         return *this;
-    //     }
+
+    //inline NFIDataList& operator<<(const NFINT64& value)
+    //{
+    //    Add(NFIDENTID(value));
+    //    return *this;
+    //}
+    inline NFIDataList& operator<<(const int64_t& value)
+    {
+        Add(NFINT64(value));
+        return *this;
+    }
+
     inline NFIDataList& operator<<(const NFIDENTID& value)
     {
         Add(value);
@@ -501,6 +528,7 @@ public:
         Add(value);
         return *this;
     }
+
     inline NFIDataList& operator<<(const NFIDataList& value)
     {
         Concat(value);

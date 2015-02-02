@@ -120,7 +120,10 @@
 // Windows Settings
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
+#ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
+#endif
+
 #include <Windows.h>
 #define NF_EXPORT extern "C"  __declspec(dllexport)
 
@@ -258,14 +261,16 @@ typedef uint8_t NFUINT8;
 typedef int32_t NFINT32;
 typedef int16_t NFINT16;
 typedef int8_t NFINT8;
+typedef uint64_t NFUINT64;
+typedef int64_t NFINT64;
 // define uint64 type
-#if NF_COMPILER == NF_COMPILER_MSVC
-typedef unsigned __int64 NFUINT64;
-typedef __int64 NFINT64;
-#else
-typedef unsigned long long NFUINT64;
-typedef long long NFINT64;
-#endif
+//#if NF_COMPILER == NF_COMPILER_MSVC
+//typedef unsigned __int64 NFUINT64;
+//typedef __int64 NFINT64;
+//#else
+//typedef unsigned long int NFUINT64;
+//typedef long int NFINT64;
+//#endif
 
 #ifdef _USRDLL
 #    define NF_DYNAMIC_PLUGIN
@@ -286,5 +291,56 @@ typedef long long NFINT64;
 #define NFASSERT(exp_, msg_, file_, func_)
 #endif
 
+
+//#define GOOGLE_GLOG_DLL_DECL=
+
+///////////////////////////////////////////////////////////////
+#include <time.h>
+
+
+inline unsigned long NF_GetTickCount()
+{
+#if NF_PLATFORM == NF_PLATFORM_WIN
+    return GetTickCount();
+#else
+    struct timespec ts;
+
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+
+    return (ts.tv_sec * 1000 + ts.tv_nsec / 1000000);
+#endif
+
+}
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#define NFSPRINTF sprintf_s
+#define NFSTRICMP stricmp
+#define NFSLEEP(s) Sleep(s)
+#else
+#define NFSPRINTF snprintf
+#define NFSTRICMP strcasecmp
+#define NFSLEEP(s) usleep(s)
+#endif
+
+
+//use actor mode
+#ifndef NF_USE_ACTOR
+//#define NF_USE_ACTOR
+#endif
+
+#ifdef NF_USE_ACTOR
+#ifndef THERON_USE_STD_THREADS
+#define THERON_USE_STD_THREADS
+#endif
+#ifndef THERON_CPP11
+#define THERON_CPP11
+#endif
+#endif
+
+#if NF_PLATFORM == NF_PLATFORM_WIN || __cplusplus >= 201103L
+#define NF_SHARE_PTR std::shared_ptr
+#else
+#define NF_SHARE_PTR boost::shared_ptr
+#endif
 
 #endif

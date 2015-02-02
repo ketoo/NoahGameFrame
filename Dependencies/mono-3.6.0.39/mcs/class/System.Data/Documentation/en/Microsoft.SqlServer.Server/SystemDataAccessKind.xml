@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="SystemDataAccessKind" FullName="Microsoft.SqlServer.Server.SystemDataAccessKind">
+  <TypeSignature Language="C#" Value="public enum SystemDataAccessKind" />
+  <AssemblyInfo>
+    <AssemblyName>System.Data</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Describes the type of access to system data for a user-defined method or function.</para>
+      <para>This enumeration is used in <see cref="T:Microsoft.SqlServer.Server.SqlMethodAttribute" /> and <see cref="T:Microsoft.SqlServer.Server.SqlFunctionAttribute" /> to indicate what type of access to system data the method or function has.</para>
+      <para>Note that methods and functions are not allowed to make changes to the database, so the options for this enumeration are None (meaning no data-access performed by the method or function) and Read (meaning that the method or function performs read-only data-access operations, such as executing SELECT statements).</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Describes the type of access to system data for a user-defined method or function.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="None">
+      <MemberSignature Language="C#" Value="None" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Microsoft.SqlServer.Server.SystemDataAccessKind</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The method or function does not access system data. </para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Read">
+      <MemberSignature Language="C#" Value="Read" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Microsoft.SqlServer.Server.SystemDataAccessKind</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The method or function reads system data.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

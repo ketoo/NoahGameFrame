@@ -7,43 +7,41 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="NFNet" prefix_auto="1" extension_auto="1" />
+				<Option output="../../../trunk/Dependencies/lib/Debug/NFNet" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_LIB" />
-					<Add option="-DWIN32" />
-					<Add option="-DWIN" />
-					<Add directory="$(NF_HOME)" />
-					<Add directory="$(BOOST_HOME)" />
-					<Add directory="$(NF_DEP)" />
-					<Add directory="$(NF_LIBEVENT)" />
-					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/include" />
-					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/WIN32-Code" />
-					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/compat" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/include/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/compat/" />
 				</Compiler>
 			</Target>
 			<Target title="Release x64">
-				<Option output="NFNet" prefix_auto="1" extension_auto="1" />
+				<Option output="../../../trunk/Dependencies/lib/Release/NFNet" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
-					<Add option="-DWIN32" />
+					<Add option="-std=c++11" />
+					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_LIB" />
-					<Add option="-D_X64" />
-					<Add option="-DWIN" />
-					<Add directory="$(NF_HOME)" />
-					<Add directory="$(BOOST_HOME)" />
-					<Add directory="$(NF_DEP)" />
-					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/include" />
-					<Add directory="$(NF_DEP)/libevent-2.0.21-stable/WIN32-Code" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/include/" />
+					<Add directory="../../../trunk/Dependencies/libevent-2.0.21-stable/compat/" />
 				</Compiler>
 			</Target>
 		</Build>
@@ -54,8 +52,9 @@
 		<Unit filename="NFINet.h" />
 		<Unit filename="NFIPacket.h" />
 		<Extensions>
-			<code_completion />
 			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
 			<debugger />
 		</Extensions>
 	</Project>

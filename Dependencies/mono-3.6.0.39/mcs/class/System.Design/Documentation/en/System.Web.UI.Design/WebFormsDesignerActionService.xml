@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="WebFormsDesignerActionService" FullName="System.Web.UI.Design.WebFormsDesignerActionService">
+  <TypeSignature Language="C#" Value="public class WebFormsDesignerActionService : System.ComponentModel.Design.DesignerActionService" />
+  <AssemblyInfo>
+    <AssemblyName>System.Design</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.ComponentModel.Design.DesignerActionService</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <remarks>To be added.</remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Establishes a design-time service that manages the collection of <see cref="T:System.ComponentModel.Design.DesignerActionItem" /> objects for a component.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public WebFormsDesignerActionService (IServiceProvider serviceProvider);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="serviceProvider" Type="System.IServiceProvider" />
+      </Parameters>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Creates a new instance of the <see cref="T:System.Web.UI.Design.WebFormsDesignerActionService" /> class using the provided reference to the design host.</para>
+        </summary>
+        <param name="serviceProvider">
+          <attribution license="cc4" from="Microsoft" modified="false" />A reference to the design host.</param>
+      </Docs>
+    </Member>
+    <Member MemberName="GetComponentDesignerActions">
+      <MemberSignature Language="C#" Value="protected override void GetComponentDesignerActions (System.ComponentModel.IComponent component, System.ComponentModel.Design.DesignerActionListCollection actionLists);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="component" Type="System.ComponentModel.IComponent" />
+        <Parameter Name="actionLists" Type="System.ComponentModel.Design.DesignerActionListCollection" />
+      </Parameters>
+      <Docs>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the smart-tag item lists that are associated with a component.</para>
+        </summary>
+        <param name="component">
+          <attribution license="cc4" from="Microsoft" modified="false" />A reference to the control associated with the designer.</param>
+        <param name="actionLists">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" /> to add the associated smart tags to.</param>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

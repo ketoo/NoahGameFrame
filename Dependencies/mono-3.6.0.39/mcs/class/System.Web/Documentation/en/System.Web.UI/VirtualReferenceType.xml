@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="VirtualReferenceType" FullName="System.Web.UI.VirtualReferenceType">
+  <TypeSignature Language="C#" Value="public enum VirtualReferenceType" />
+  <AssemblyInfo>
+    <AssemblyName>System.Web</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>The <see cref="T:System.Web.UI.VirtualReferenceType" /> enumeration describes the type of resource referenced by a virtual path. The <see cref="T:System.Web.UI.VirtualReferenceType" /> is determined from the parsed extension of the resource.</para>
+      <para>Page and control developers do not use the <see cref="T:System.Web.UI.VirtualReferenceType" /> enumeration directly. Extensibility developers might use the <see cref="T:System.Web.UI.VirtualReferenceType" /> enumeration when extending the <see cref="T:System.Web.UI.PageParserFilter" /> class and overriding its <see cref="M:System.Web.UI.PageParserFilter.AllowVirtualReference(System.String,System.Web.UI.VirtualReferenceType)" /> method.</para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Specifies the type of resource referenced by a parsed virtual path.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName="Master">
+      <MemberSignature Language="C#" Value="Master" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.VirtualReferenceType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The parsed virtual path references a master page file.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Other">
+      <MemberSignature Language="C#" Value="Other" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.VirtualReferenceType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The parsed virtual path references a resource that is not an ASP.NET page, master page, user control, or language-specific code file.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="Page">
+      <MemberSignature Language="C#" Value="Page" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.VirtualReferenceType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The parsed virtual path references an ASP.NET page.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="SourceFile">
+      <MemberSignature Language="C#" Value="SourceFile" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.VirtualReferenceType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The parsed virtual path references a code file that is compiled using a specific language compiler.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="UserControl">
+      <MemberSignature Language="C#" Value="UserControl" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.VirtualReferenceType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <since version=".NET 2.0" />
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The parsed virtual path references an ASP.NET user control.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

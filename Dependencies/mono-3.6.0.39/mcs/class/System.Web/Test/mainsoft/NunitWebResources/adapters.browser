@@ -1,0 +1,25 @@
+<!--
+    You can find existing browser definitions at
+    <windir>\Microsoft.NET\Framework\<ver>\CONFIG\Browsers
+-->
+<browsers>
+  <browser refID="testUserAgent">
+  	<capture>
+  		<userAgent match="^(?'refuacapturename'.*)$" />
+  	</capture>
+    <controlAdapters markupTextWriterType="MonoTests.System.Web.CustomHtmlTextWriter, System.Web_test_net_2_0">
+      <adapter 
+            controlType="MonoTests.System.Web.UI.Customadaptercontrol, System.Web_test_net_2_0"
+            adapterType="MonoTests.System.Web.UI.Customadapter, System.Web_test_net_2_0" 
+      />
+    </controlAdapters>
+    <capabilities>
+    	<capability name="addedInRefNode" value="added" />
+    	<capability name="changedInRefNode" value="changed" />
+    	<capability name="capturedInOrigNode" value="uaInOrig:${capturename}" />
+    	<capability name="capturedInRefNode" value="uaInRef:${refuacapturename}" />
+    	<capability name="multipleSubstitutions" value="uaInOrig:${capturename} uaInRef:${refuacapturename}" />
+    	<capability name="specialCharsInValue" value="10%*$100=$10" />
+    </capabilities>
+  </browser>
+</browsers>

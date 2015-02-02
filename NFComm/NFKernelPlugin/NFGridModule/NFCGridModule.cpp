@@ -33,7 +33,7 @@ const NFIDENTID NFCGridModule::OnObjectMove(const NFIDENTID& self, const int& sc
 {
     if (sceneID != mSceneID)
     {
-        return 0;
+        return NFIDENTID();
     }
     const NFIDENTID& currGrid = ComputerGridID(nX, nY, nZ);
     if (currGrid == lastGrid)
@@ -64,7 +64,7 @@ const NFIDENTID NFCGridModule::OnObjectLeave(const NFIDENTID& self, const int& s
 
     OnMoveOut(self, lastGrid, lastGrid);
 
-    return 0;
+    return NFIDENTID();
 }
 
 const NFIDENTID NFCGridModule::ComputerGridID(const int nX, const int nY, const int nZ)
@@ -77,7 +77,7 @@ const NFIDENTID NFCGridModule::ComputerGridID(const int nX, const int nY, const 
 
 const NFIDENTID NFCGridModule::GetStepLenth(const NFIDENTID& selfGrid, const NFIDENTID& otherGrid)
 {
-    return abs(otherGrid.nIdent - selfGrid.nIdent) + abs(otherGrid.nSerial - selfGrid.nSerial);
+    return NFIDENTID(abs(otherGrid.nSvrID - selfGrid.nSvrID), abs(otherGrid.nData64 - selfGrid.nData64));
 }
 
 const int NFCGridModule::GetAroundGrid(const NFIDENTID& selfGrid, NFIDataList& gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
@@ -153,7 +153,7 @@ const int NFCGridModule::GetAroundObject(NFCSceneGridInfo* pGridInfo, NFIDataLis
             NFCSceneGridInfo* pGridInfo = (NFCSceneGridInfo*)(gridList.Pointer(i));
             if (pGridInfo)
             {
-                NFIDENTID ident = 0;
+                NFIDENTID ident;
                 bool bRet = pGridInfo->First(ident);
                 while (bRet)
                 {

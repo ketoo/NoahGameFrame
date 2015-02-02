@@ -11,8 +11,6 @@
 
 
 #include "NFIPacket.h"
-#include <winsock2.h>
-#include <string>
 
 #pragma pack(push, 1)
 
@@ -32,7 +30,7 @@ public:
         }
 	}
 
-    ~NFCPacket()
+    virtual ~NFCPacket()
     {
         if (pHead)
         {
@@ -40,6 +38,11 @@ public:
             pHead = NULL;
         }
     }
+
+	void operator = (const NFIPacket& id)
+	{
+
+	}
 
 	virtual const NFIMsgHead* GetMsgHead() const
 	{

@@ -13,18 +13,19 @@ NFCProperty::NFCProperty()
     mbPublic = false;
     mbPrivate = false;
     mbSave = false;
-    mSelf = 0;
+    mSelf = NFIDENTID();
     eType = TDATA_UNKNOWN;
 
     msPropertyName = "";
 }
 
-NFCProperty::NFCProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, int nIndex, const std::string& strScriptFunction)
+NFCProperty::NFCProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex, const std::string& strScriptFunction)
 {
 
     mbPublic = bPublic;
     mbPrivate = bPrivate;
     mbSave = bSave;
+    mbView = bView;
     mnIndex = nIndex;
     mSelf = self;
 
@@ -52,13 +53,13 @@ void NFCProperty::SetValue(const NFIDataList::TData& TData)
 
     if (!m_pTData.get())
     {
-    	if (!NFIDataList::Valid(TData))
-    	{
-        	return;
-    	}
+        if (!NFIDataList::Valid(TData))
+        {
+            return;
+        }
 
-        m_pTData = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
-    	m_pTData->nType = TData.nType;
+        m_pTData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
+        m_pTData->nType = TData.nType;
         m_pTData->variantData = TData.variantData;
     }
 
@@ -100,6 +101,11 @@ const bool NFCProperty::GetSave() const
     return mbSave;
 }
 
+const bool NFCProperty::GetView() const
+{
+    return mbView;
+}
+
 const bool NFCProperty::GetPublic() const
 {
     return mbPublic;
@@ -125,6 +131,11 @@ void NFCProperty::SetSave(bool bSave)
     mbSave = bSave;
 }
 
+void NFCProperty::SetView(bool bView)
+{
+    mbView = bView;
+}
+
 void NFCProperty::SetPublic(bool bPublic)
 {
     mbPublic = bPublic;
@@ -140,7 +151,7 @@ void NFCProperty::SetScriptFunction(const std::string& strScriptFunction)
     //msScriptFunction = strScriptFunction;
 }
 
-int NFCProperty::GetInt() const
+NFINT64 NFCProperty::GetInt() const
 {
     if (!m_pTData.get())
     {
@@ -149,7 +160,7 @@ int NFCProperty::GetInt() const
 
     if (TDATA_INT == m_pTData->nType)
     {
-        return boost::get<int>(m_pTData->variantData);
+        return boost::get<NFINT64>(m_pTData->variantData);
     }
 
     return 0;
@@ -209,7 +220,7 @@ NFIDENTID NFCProperty::GetObject() const
 
     if (TDATA_OBJECT == m_pTData->nType)
     {
-        return boost::get<NFINT64>(m_pTData->variantData);
+        return boost::get<NFIDENTID>(m_pTData->variantData);
     }
 
     return NFIDENTID();
@@ -255,7 +266,7 @@ int NFCProperty::OnEventHandler(const NFIDataList& oldVar, const NFIDataList& ne
     return 0;
 }
 
-bool NFCProperty::SetInt(int value)
+bool NFCProperty::SetInt(const NFINT64 value)
 {
     if (eType != TDATA_INT)
     {
@@ -274,9 +285,9 @@ bool NFCProperty::SetInt(int value)
             return false;
         }
 
-        m_pTData = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
+        m_pTData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
         m_pTData->nType = TDATA_INT;
-        m_pTData->variantData = (int)0;
+        m_pTData->variantData = (NFINT64)0;
     }
 
     if (TData.variantData == m_pTData->variantData)
@@ -302,7 +313,7 @@ bool NFCProperty::SetInt(int value)
     return false;
 }
 
-bool NFCProperty::SetFloat(float value)
+bool NFCProperty::SetFloat(const float value)
 {
     if (eType != TDATA_FLOAT)
     {
@@ -321,7 +332,7 @@ bool NFCProperty::SetFloat(float value)
             return false;
         }
 
-        m_pTData = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
+        m_pTData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
         m_pTData->nType = TDATA_FLOAT;
         m_pTData->variantData = (float)0.0f;
     }
@@ -349,7 +360,7 @@ bool NFCProperty::SetFloat(float value)
     return false;
 }
 
-bool NFCProperty::SetDouble(double value)
+bool NFCProperty::SetDouble(const double value)
 {
     if (eType != TDATA_DOUBLE)
     {
@@ -368,7 +379,7 @@ bool NFCProperty::SetDouble(double value)
             return false;
         }
 
-        m_pTData = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
+        m_pTData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
         m_pTData->nType = TDATA_DOUBLE;
         m_pTData->variantData = (double)0.0f;
 
@@ -416,7 +427,7 @@ bool NFCProperty::SetString(const std::string& value)
             return false;
         }
 
-        m_pTData = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
+        m_pTData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
         m_pTData->nType = TDATA_STRING;
         m_pTData->variantData = NULL_STR;
     }
@@ -463,7 +474,7 @@ bool NFCProperty::SetObject(const NFIDENTID& value)
             return false;
         }
 
-        m_pTData = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
+        m_pTData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
         m_pTData->nType = TDATA_OBJECT;
         m_pTData->variantData = (NFINT64)0;
 
@@ -492,7 +503,7 @@ bool NFCProperty::SetObject(const NFIDENTID& value)
     return false;
 }
 
-bool NFCProperty::SetPointer(void* value)
+bool NFCProperty::SetPointer(const void* value)
 {
     //if (eType != TDATA_POINTER)
     //{
@@ -511,7 +522,7 @@ bool NFCProperty::SetPointer(void* value)
     //        return false;
     //    }
 
-    //    m_pTData = std::shared_ptr<NFIDataList::TData>(NF_NEW NFIDataList::TData());
+    //    m_pTData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
     //    m_pTData->nType = TDATA_POINTER;
     //    m_pTData->variantData = (void*)NULL;
     //}
