@@ -4,4 +4,5 @@
 	<Plugin Name="NFConfigPlugin" Main="1"/>
 	<Plugin Name="NFMasterServerPlugin" Main="1"/>
 	<Plugin Name="NFMasterNet_ServerPlugin" Main="1"/>
+	<Plugin Name="NFLogPlugin" Main="1"/>
 </XML>

@@ -3,6 +3,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LocalDebuggerCommandArguments />
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerWorkingDirectory>E:\work\NoahGameFrame\trunk\_Out\Server\Debug\NFWorldServer</LocalDebuggerWorkingDirectory>
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)\_Out\Server\Debug\NFWorldServer</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
 </Project>

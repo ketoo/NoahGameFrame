@@ -75,7 +75,8 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       "NFMsgShare.proto");
   GOOGLE_CHECK(file != NULL);
   ReqEnterGameServer_descriptor_ = file->message_type(0);
-  static const int ReqEnterGameServer_offsets_[3] = {
+  static const int ReqEnterGameServer_offsets_[4] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqEnterGameServer, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqEnterGameServer, account_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqEnterGameServer, game_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqEnterGameServer, name_),
@@ -120,15 +121,11 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqLeaveGameServer));
   ReqAckPlayerMove_descriptor_ = file->message_type(3);
-  static const int ReqAckPlayerMove_offsets_[8] = {
+  static const int ReqAckPlayerMove_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, mover_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, movetype_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, target_x_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, target_y_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, target_z_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, source_x_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, source_y_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, source_z_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, target_pos_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, source_pos_),
   };
   ReqAckPlayerMove_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -160,13 +157,14 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       sizeof(ReqAckPlayerChat));
   ReqAckPlayerChat_EGameChatType_descriptor_ = ReqAckPlayerChat_descriptor_->enum_type(0);
   ReqAckUseSkill_descriptor_ = file->message_type(5);
-  static const int ReqAckUseSkill_offsets_[6] = {
+  static const int ReqAckUseSkill_offsets_[7] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, user_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, skill_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, now_pos_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, tar_pos_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, effect_ident_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, effect_value_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, effect_rlt_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, key_value_),
   };
   ReqAckUseSkill_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -404,41 +402,46 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ::NFMsg::protobuf_AddDesc_NFMsgBaseEx_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\020NFMsgShare.proto\022\005NFMsg\032\016NFDefine.prot"
-    "o\032\017NFMsgBase.proto\032\021NFMsgBaseEx.proto\"D\n"
-    "\022ReqEnterGameServer\022\017\n\007account\030\001 \002(\014\022\017\n\007"
-    "game_id\030\002 \002(\005\022\014\n\004name\030\003 \002(\014\"\016\n\014ReqHeartB"
-    "eat\"\024\n\022ReqLeaveGameServer\"\237\001\n\020ReqAckPlay"
-    "erMove\022\r\n\005mover\030\001 \001(\003\022\020\n\010moveType\030\002 \002(\005\022"
-    "\020\n\010target_x\030\003 \002(\002\022\020\n\010target_y\030\004 \001(\002\022\020\n\010t"
-    "arget_z\030\005 \002(\002\022\020\n\010source_x\030\006 \001(\002\022\020\n\010sourc"
-    "e_y\030\007 \001(\002\022\020\n\010source_z\030\010 \001(\002\"\303\001\n\020ReqAckPl"
-    "ayerChat\022\017\n\007chat_id\030\001 \002(\003\0228\n\tchat_type\030\002"
-    " \002(\0162%.NFMsg.ReqAckPlayerChat.EGameChatT"
-    "ype\022\021\n\tchat_info\030\003 \002(\014\"Q\n\rEGameChatType\022"
-    "\017\n\013EGCT_NARMAL\020\000\022\020\n\014EGCT_PRIVATE\020\001\022\r\n\tEG"
-    "CT_TEAM\020\002\022\016\n\nEGCT_WORLD\020\003\"\203\001\n\016ReqAckUseS"
-    "kill\022\014\n\004user\030\001 \002(\003\022\020\n\010skill_id\030\002 \002(\014\022\024\n\014"
-    "effect_ident\030\003 \003(\003\022\024\n\014effect_value\030\004 \003(\005"
-    "\022\022\n\neffect_rlt\030\005 \003(\005\022\021\n\tkey_value\030\006 \001(\014\""
-    "\203\001\n\rReqAckUseItem\022\014\n\004user\030\001 \002(\003\022\021\n\titem_"
-    "guid\030\002 \002(\003\022\024\n\014effect_ident\030\003 \003(\003\022\024\n\014effe"
-    "ct_value\030\004 \003(\005\022\022\n\neffect_rlt\030\005 \003(\005\022\021\n\tke"
-    "y_value\030\006 \001(\014\"\345\001\n\017ReqAckSwapScene\022;\n\rtra"
-    "nsfer_type\030\001 \002(\0162$.NFMsg.ReqAckSwapScene"
-    ".EGameSwapType\022\020\n\010scene_id\030\002 \002(\005\022\017\n\007line"
-    "_id\030\003 \002(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006 \001"
-    "(\002\"Q\n\rEGameSwapType\022\017\n\013EGST_NARMAL\020\000\022\016\n\n"
-    "EGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n\013EGST_MIR"
-    "ROR\020\003\"$\n\017ReqPickDropItem\022\021\n\titem_guid\030\002 "
-    "\002(\003\" \n\rReqAcceptTask\022\017\n\007task_id\030\001 \002(\014\"#\n"
-    "\020ReqCompeleteTask\022\017\n\007task_id\030\001 \002(\014\"\251\001\n\017P"
-    "layerEntryInfo\022\023\n\013object_guid\030\001 \002(\003\022\t\n\001x"
-    "\030\002 \002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002(\002\022\023\n\013career_t"
-    "ype\030\005 \002(\005\022\024\n\014player_state\030\006 \002(\005\022\021\n\tconfi"
-    "g_id\030\007 \002(\014\022\020\n\010scene_id\030\010 \002(\005\022\020\n\010class_id"
-    "\030\t \002(\014\"A\n\022AckPlayerEntryList\022+\n\013object_l"
-    "ist\030\001 \003(\0132\026.NFMsg.PlayerEntryInfo\")\n\022Ack"
-    "PlayerLeaveList\022\023\n\013object_list\030\001 \003(\003", 1436);
+    "o\032\017NFMsgBase.proto\032\021NFMsgBaseEx.proto\"^\n"
+    "\022ReqEnterGameServer\022\030\n\002id\030\001 \002(\0132\014.NFMsg."
+    "Ident\022\017\n\007account\030\002 \002(\014\022\017\n\007game_id\030\003 \002(\005\022"
+    "\014\n\004name\030\004 \002(\014\"\016\n\014ReqHeartBeat\"\024\n\022ReqLeav"
+    "eGameServer\"\213\001\n\020ReqAckPlayerMove\022\033\n\005move"
+    "r\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010moveType\030\002 \002(\005\022"
+    "#\n\ntarget_pos\030\003 \003(\0132\017.NFMsg.Position\022#\n\n"
+    "source_pos\030\004 \003(\0132\017.NFMsg.Position\"\321\001\n\020Re"
+    "qAckPlayerChat\022\035\n\007chat_id\030\001 \002(\0132\014.NFMsg."
+    "Ident\0228\n\tchat_type\030\002 \002(\0162%.NFMsg.ReqAckP"
+    "layerChat.EGameChatType\022\021\n\tchat_info\030\003 \002"
+    "(\014\"Q\n\rEGameChatType\022\017\n\013EGCT_NARMAL\020\000\022\020\n\014"
+    "EGCT_PRIVATE\020\001\022\r\n\tEGCT_TEAM\020\002\022\016\n\nEGCT_WO"
+    "RLD\020\003\"\320\001\n\016ReqAckUseSkill\022\032\n\004user\030\001 \002(\0132\014"
+    ".NFMsg.Ident\022\020\n\010skill_id\030\002 \002(\014\022 \n\007now_po"
+    "s\030\003 \002(\0132\017.NFMsg.Position\022 \n\007tar_pos\030\004 \002("
+    "\0132\017.NFMsg.Position\022\"\n\014effect_ident\030\005 \003(\013"
+    "2\014.NFMsg.Ident\022\024\n\014effect_value\030\006 \003(\005\022\022\n\n"
+    "effect_rlt\030\007 \003(\005\"\255\001\n\rReqAckUseItem\022\032\n\004us"
+    "er\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\titem_guid\030\002 \002("
+    "\0132\014.NFMsg.Ident\022\"\n\014effect_ident\030\003 \003(\0132\014."
+    "NFMsg.Ident\022\024\n\014effect_value\030\004 \003(\005\022\022\n\neff"
+    "ect_rlt\030\005 \003(\005\022\021\n\tkey_value\030\006 \001(\014\"\345\001\n\017Req"
+    "AckSwapScene\022;\n\rtransfer_type\030\001 \002(\0162$.NF"
+    "Msg.ReqAckSwapScene.EGameSwapType\022\020\n\010sce"
+    "ne_id\030\002 \002(\005\022\017\n\007line_id\030\003 \002(\005\022\t\n\001x\030\004 \001(\002\022"
+    "\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006 \001(\002\"Q\n\rEGameSwapType\022\017"
+    "\n\013EGST_NARMAL\020\000\022\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_"
+    "ARENA\020\002\022\017\n\013EGST_MIRROR\020\003\"2\n\017ReqPickDropI"
+    "tem\022\037\n\titem_guid\030\002 \002(\0132\014.NFMsg.Ident\" \n\r"
+    "ReqAcceptTask\022\017\n\007task_id\030\001 \002(\014\"#\n\020ReqCom"
+    "peleteTask\022\017\n\007task_id\030\001 \002(\014\"\267\001\n\017PlayerEn"
+    "tryInfo\022!\n\013object_guid\030\001 \002(\0132\014.NFMsg.Ide"
+    "nt\022\t\n\001x\030\002 \002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002(\002\022\023\n\013c"
+    "areer_type\030\005 \002(\005\022\024\n\014player_state\030\006 \002(\005\022\021"
+    "\n\tconfig_id\030\007 \002(\014\022\020\n\010scene_id\030\010 \002(\005\022\020\n\010c"
+    "lass_id\030\t \002(\014\"A\n\022AckPlayerEntryList\022+\n\013o"
+    "bject_list\030\001 \003(\0132\026.NFMsg.PlayerEntryInfo"
+    "\"7\n\022AckPlayerLeaveList\022!\n\013object_list\030\001 "
+    "\003(\0132\014.NFMsg.Ident", 1617);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -482,6 +485,7 @@ struct StaticDescriptorInitializer_NFMsgShare_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int ReqEnterGameServer::kIdFieldNumber;
 const int ReqEnterGameServer::kAccountFieldNumber;
 const int ReqEnterGameServer::kGameIdFieldNumber;
 const int ReqEnterGameServer::kNameFieldNumber;
@@ -493,6 +497,7 @@ ReqEnterGameServer::ReqEnterGameServer()
 }
 
 void ReqEnterGameServer::InitAsDefaultInstance() {
+  id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 ReqEnterGameServer::ReqEnterGameServer(const ReqEnterGameServer& from)
@@ -503,6 +508,7 @@ ReqEnterGameServer::ReqEnterGameServer(const ReqEnterGameServer& from)
 
 void ReqEnterGameServer::SharedCtor() {
   _cached_size_ = 0;
+  id_ = NULL;
   account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   game_id_ = 0;
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
@@ -521,6 +527,7 @@ void ReqEnterGameServer::SharedDtor() {
     delete name_;
   }
   if (this != default_instance_) {
+    delete id_;
   }
 }
 
@@ -547,6 +554,9 @@ ReqEnterGameServer* ReqEnterGameServer::New() const {
 
 void ReqEnterGameServer::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_id()) {
+      if (id_ != NULL) id_->::NFMsg::Ident::Clear();
+    }
     if (has_account()) {
       if (account_ != &::google::protobuf::internal::kEmptyString) {
         account_->clear();
@@ -569,21 +579,35 @@ bool ReqEnterGameServer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required bytes account = 1;
+      // required .NFMsg.Ident id = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_account;
+        break;
+      }
+
+      // required bytes account = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_account:
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_account()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_game_id;
+        if (input->ExpectTag(24)) goto parse_game_id;
         break;
       }
 
-      // required int32 game_id = 2;
-      case 2: {
+      // required int32 game_id = 3;
+      case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_game_id:
@@ -594,12 +618,12 @@ bool ReqEnterGameServer::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(26)) goto parse_name;
+        if (input->ExpectTag(34)) goto parse_name;
         break;
       }
 
-      // required bytes name = 3;
-      case 3: {
+      // required bytes name = 4;
+      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_name:
@@ -630,21 +654,27 @@ bool ReqEnterGameServer::MergePartialFromCodedStream(
 
 void ReqEnterGameServer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required bytes account = 1;
+  // required .NFMsg.Ident id = 1;
+  if (has_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->id(), output);
+  }
+
+  // required bytes account = 2;
   if (has_account()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      1, this->account(), output);
+      2, this->account(), output);
   }
 
-  // required int32 game_id = 2;
+  // required int32 game_id = 3;
   if (has_game_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->game_id(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->game_id(), output);
   }
 
-  // required bytes name = 3;
+  // required bytes name = 4;
   if (has_name()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      3, this->name(), output);
+      4, this->name(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -655,23 +685,30 @@ void ReqEnterGameServer::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqEnterGameServer::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required bytes account = 1;
+  // required .NFMsg.Ident id = 1;
+  if (has_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->id(), target);
+  }
+
+  // required bytes account = 2;
   if (has_account()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        1, this->account(), target);
+        2, this->account(), target);
   }
 
-  // required int32 game_id = 2;
+  // required int32 game_id = 3;
   if (has_game_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->game_id(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->game_id(), target);
   }
 
-  // required bytes name = 3;
+  // required bytes name = 4;
   if (has_name()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        3, this->name(), target);
+        4, this->name(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -685,21 +722,28 @@ int ReqEnterGameServer::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required bytes account = 1;
+    // required .NFMsg.Ident id = 1;
+    if (has_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->id());
+    }
+
+    // required bytes account = 2;
     if (has_account()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->account());
     }
 
-    // required int32 game_id = 2;
+    // required int32 game_id = 3;
     if (has_game_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->game_id());
     }
 
-    // required bytes name = 3;
+    // required bytes name = 4;
     if (has_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
@@ -733,6 +777,9 @@ void ReqEnterGameServer::MergeFrom(const ::google::protobuf::Message& from) {
 void ReqEnterGameServer::MergeFrom(const ReqEnterGameServer& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_id()) {
+      mutable_id()->::NFMsg::Ident::MergeFrom(from.id());
+    }
     if (from.has_account()) {
       set_account(from.account());
     }
@@ -759,13 +806,17 @@ void ReqEnterGameServer::CopyFrom(const ReqEnterGameServer& from) {
 }
 
 bool ReqEnterGameServer::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
 
+  if (has_id()) {
+    if (!this->id().IsInitialized()) return false;
+  }
   return true;
 }
 
 void ReqEnterGameServer::Swap(ReqEnterGameServer* other) {
   if (other != this) {
+    std::swap(id_, other->id_);
     std::swap(account_, other->account_);
     std::swap(game_id_, other->game_id_);
     std::swap(name_, other->name_);
@@ -1101,12 +1152,8 @@ void ReqLeaveGameServer::Swap(ReqLeaveGameServer* other) {
 #ifndef _MSC_VER
 const int ReqAckPlayerMove::kMoverFieldNumber;
 const int ReqAckPlayerMove::kMoveTypeFieldNumber;
-const int ReqAckPlayerMove::kTargetXFieldNumber;
-const int ReqAckPlayerMove::kTargetYFieldNumber;
-const int ReqAckPlayerMove::kTargetZFieldNumber;
-const int ReqAckPlayerMove::kSourceXFieldNumber;
-const int ReqAckPlayerMove::kSourceYFieldNumber;
-const int ReqAckPlayerMove::kSourceZFieldNumber;
+const int ReqAckPlayerMove::kTargetPosFieldNumber;
+const int ReqAckPlayerMove::kSourcePosFieldNumber;
 #endif  // !_MSC_VER
 
 ReqAckPlayerMove::ReqAckPlayerMove()
@@ -1115,6 +1162,7 @@ ReqAckPlayerMove::ReqAckPlayerMove()
 }
 
 void ReqAckPlayerMove::InitAsDefaultInstance() {
+  mover_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 ReqAckPlayerMove::ReqAckPlayerMove(const ReqAckPlayerMove& from)
@@ -1125,14 +1173,8 @@ ReqAckPlayerMove::ReqAckPlayerMove(const ReqAckPlayerMove& from)
 
 void ReqAckPlayerMove::SharedCtor() {
   _cached_size_ = 0;
-  mover_ = GOOGLE_LONGLONG(0);
+  mover_ = NULL;
   movetype_ = 0;
-  target_x_ = 0;
-  target_y_ = 0;
-  target_z_ = 0;
-  source_x_ = 0;
-  source_y_ = 0;
-  source_z_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1142,6 +1184,7 @@ ReqAckPlayerMove::~ReqAckPlayerMove() {
 
 void ReqAckPlayerMove::SharedDtor() {
   if (this != default_instance_) {
+    delete mover_;
   }
 }
 
@@ -1168,15 +1211,13 @@ ReqAckPlayerMove* ReqAckPlayerMove::New() const {
 
 void ReqAckPlayerMove::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    mover_ = GOOGLE_LONGLONG(0);
+    if (has_mover()) {
+      if (mover_ != NULL) mover_->::NFMsg::Ident::Clear();
+    }
     movetype_ = 0;
-    target_x_ = 0;
-    target_y_ = 0;
-    target_z_ = 0;
-    source_x_ = 0;
-    source_y_ = 0;
-    source_z_ = 0;
   }
+  target_pos_.Clear();
+  source_pos_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -1187,14 +1228,12 @@ bool ReqAckPlayerMove::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional int64 mover = 1;
+      // required .NFMsg.Ident mover = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &mover_)));
-          set_has_mover();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_mover()));
         } else {
           goto handle_uninterpreted;
         }
@@ -1214,102 +1253,36 @@ bool ReqAckPlayerMove::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(29)) goto parse_target_x;
+        if (input->ExpectTag(26)) goto parse_target_pos;
         break;
       }
 
-      // required float target_x = 3;
+      // repeated .NFMsg.Position target_pos = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
-         parse_target_x:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &target_x_)));
-          set_has_target_x();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_target_pos:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_target_pos()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(37)) goto parse_target_y;
+        if (input->ExpectTag(26)) goto parse_target_pos;
+        if (input->ExpectTag(34)) goto parse_source_pos;
         break;
       }
 
-      // optional float target_y = 4;
+      // repeated .NFMsg.Position source_pos = 4;
       case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
-         parse_target_y:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &target_y_)));
-          set_has_target_y();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_source_pos:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_source_pos()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(45)) goto parse_target_z;
-        break;
-      }
-
-      // required float target_z = 5;
-      case 5: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
-         parse_target_z:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &target_z_)));
-          set_has_target_z();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(53)) goto parse_source_x;
-        break;
-      }
-
-      // optional float source_x = 6;
-      case 6: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
-         parse_source_x:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &source_x_)));
-          set_has_source_x();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(61)) goto parse_source_y;
-        break;
-      }
-
-      // optional float source_y = 7;
-      case 7: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
-         parse_source_y:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &source_y_)));
-          set_has_source_y();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(69)) goto parse_source_z;
-        break;
-      }
-
-      // optional float source_z = 8;
-      case 8: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
-         parse_source_z:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &source_z_)));
-          set_has_source_z();
-        } else {
-          goto handle_uninterpreted;
-        }
+        if (input->ExpectTag(34)) goto parse_source_pos;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -1332,9 +1305,10 @@ bool ReqAckPlayerMove::MergePartialFromCodedStream(
 
 void ReqAckPlayerMove::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // optional int64 mover = 1;
+  // required .NFMsg.Ident mover = 1;
   if (has_mover()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->mover(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->mover(), output);
   }
 
   // required int32 moveType = 2;
@@ -1342,34 +1316,16 @@ void ReqAckPlayerMove::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->movetype(), output);
   }
 
-  // required float target_x = 3;
-  if (has_target_x()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->target_x(), output);
+  // repeated .NFMsg.Position target_pos = 3;
+  for (int i = 0; i < this->target_pos_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->target_pos(i), output);
   }
 
-  // optional float target_y = 4;
-  if (has_target_y()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->target_y(), output);
-  }
-
-  // required float target_z = 5;
-  if (has_target_z()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->target_z(), output);
-  }
-
-  // optional float source_x = 6;
-  if (has_source_x()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(6, this->source_x(), output);
-  }
-
-  // optional float source_y = 7;
-  if (has_source_y()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(7, this->source_y(), output);
-  }
-
-  // optional float source_z = 8;
-  if (has_source_z()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(8, this->source_z(), output);
+  // repeated .NFMsg.Position source_pos = 4;
+  for (int i = 0; i < this->source_pos_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, this->source_pos(i), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -1380,9 +1336,11 @@ void ReqAckPlayerMove::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqAckPlayerMove::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // optional int64 mover = 1;
+  // required .NFMsg.Ident mover = 1;
   if (has_mover()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->mover(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->mover(), target);
   }
 
   // required int32 moveType = 2;
@@ -1390,34 +1348,18 @@ void ReqAckPlayerMove::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->movetype(), target);
   }
 
-  // required float target_x = 3;
-  if (has_target_x()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->target_x(), target);
+  // repeated .NFMsg.Position target_pos = 3;
+  for (int i = 0; i < this->target_pos_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->target_pos(i), target);
   }
 
-  // optional float target_y = 4;
-  if (has_target_y()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->target_y(), target);
-  }
-
-  // required float target_z = 5;
-  if (has_target_z()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->target_z(), target);
-  }
-
-  // optional float source_x = 6;
-  if (has_source_x()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(6, this->source_x(), target);
-  }
-
-  // optional float source_y = 7;
-  if (has_source_y()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(7, this->source_y(), target);
-  }
-
-  // optional float source_z = 8;
-  if (has_source_z()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(8, this->source_z(), target);
+  // repeated .NFMsg.Position source_pos = 4;
+  for (int i = 0; i < this->source_pos_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        4, this->source_pos(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -1431,10 +1373,10 @@ int ReqAckPlayerMove::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional int64 mover = 1;
+    // required .NFMsg.Ident mover = 1;
     if (has_mover()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int64Size(
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->mover());
     }
 
@@ -1445,37 +1387,23 @@ int ReqAckPlayerMove::ByteSize() const {
           this->movetype());
     }
 
-    // required float target_x = 3;
-    if (has_target_x()) {
-      total_size += 1 + 4;
-    }
-
-    // optional float target_y = 4;
-    if (has_target_y()) {
-      total_size += 1 + 4;
-    }
-
-    // required float target_z = 5;
-    if (has_target_z()) {
-      total_size += 1 + 4;
-    }
-
-    // optional float source_x = 6;
-    if (has_source_x()) {
-      total_size += 1 + 4;
-    }
-
-    // optional float source_y = 7;
-    if (has_source_y()) {
-      total_size += 1 + 4;
-    }
-
-    // optional float source_z = 8;
-    if (has_source_z()) {
-      total_size += 1 + 4;
-    }
-
   }
+  // repeated .NFMsg.Position target_pos = 3;
+  total_size += 1 * this->target_pos_size();
+  for (int i = 0; i < this->target_pos_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->target_pos(i));
+  }
+
+  // repeated .NFMsg.Position source_pos = 4;
+  total_size += 1 * this->source_pos_size();
+  for (int i = 0; i < this->source_pos_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->source_pos(i));
+  }
+
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -1501,30 +1429,14 @@ void ReqAckPlayerMove::MergeFrom(const ::google::protobuf::Message& from) {
 
 void ReqAckPlayerMove::MergeFrom(const ReqAckPlayerMove& from) {
   GOOGLE_CHECK_NE(&from, this);
+  target_pos_.MergeFrom(from.target_pos_);
+  source_pos_.MergeFrom(from.source_pos_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_mover()) {
-      set_mover(from.mover());
+      mutable_mover()->::NFMsg::Ident::MergeFrom(from.mover());
     }
     if (from.has_movetype()) {
       set_movetype(from.movetype());
-    }
-    if (from.has_target_x()) {
-      set_target_x(from.target_x());
-    }
-    if (from.has_target_y()) {
-      set_target_y(from.target_y());
-    }
-    if (from.has_target_z()) {
-      set_target_z(from.target_z());
-    }
-    if (from.has_source_x()) {
-      set_source_x(from.source_x());
-    }
-    if (from.has_source_y()) {
-      set_source_y(from.source_y());
-    }
-    if (from.has_source_z()) {
-      set_source_z(from.source_z());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -1543,8 +1455,17 @@ void ReqAckPlayerMove::CopyFrom(const ReqAckPlayerMove& from) {
 }
 
 bool ReqAckPlayerMove::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000016) != 0x00000016) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
+  if (has_mover()) {
+    if (!this->mover().IsInitialized()) return false;
+  }
+  for (int i = 0; i < target_pos_size(); i++) {
+    if (!this->target_pos(i).IsInitialized()) return false;
+  }
+  for (int i = 0; i < source_pos_size(); i++) {
+    if (!this->source_pos(i).IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -1552,12 +1473,8 @@ void ReqAckPlayerMove::Swap(ReqAckPlayerMove* other) {
   if (other != this) {
     std::swap(mover_, other->mover_);
     std::swap(movetype_, other->movetype_);
-    std::swap(target_x_, other->target_x_);
-    std::swap(target_y_, other->target_y_);
-    std::swap(target_z_, other->target_z_);
-    std::swap(source_x_, other->source_x_);
-    std::swap(source_y_, other->source_y_);
-    std::swap(source_z_, other->source_z_);
+    target_pos_.Swap(&other->target_pos_);
+    source_pos_.Swap(&other->source_pos_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -1612,6 +1529,7 @@ ReqAckPlayerChat::ReqAckPlayerChat()
 }
 
 void ReqAckPlayerChat::InitAsDefaultInstance() {
+  chat_id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 ReqAckPlayerChat::ReqAckPlayerChat(const ReqAckPlayerChat& from)
@@ -1622,7 +1540,7 @@ ReqAckPlayerChat::ReqAckPlayerChat(const ReqAckPlayerChat& from)
 
 void ReqAckPlayerChat::SharedCtor() {
   _cached_size_ = 0;
-  chat_id_ = GOOGLE_LONGLONG(0);
+  chat_id_ = NULL;
   chat_type_ = 0;
   chat_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -1637,6 +1555,7 @@ void ReqAckPlayerChat::SharedDtor() {
     delete chat_info_;
   }
   if (this != default_instance_) {
+    delete chat_id_;
   }
 }
 
@@ -1663,7 +1582,9 @@ ReqAckPlayerChat* ReqAckPlayerChat::New() const {
 
 void ReqAckPlayerChat::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    chat_id_ = GOOGLE_LONGLONG(0);
+    if (has_chat_id()) {
+      if (chat_id_ != NULL) chat_id_->::NFMsg::Ident::Clear();
+    }
     chat_type_ = 0;
     if (has_chat_info()) {
       if (chat_info_ != &::google::protobuf::internal::kEmptyString) {
@@ -1681,14 +1602,12 @@ bool ReqAckPlayerChat::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int64 chat_id = 1;
+      // required .NFMsg.Ident chat_id = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &chat_id_)));
-          set_has_chat_id();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_chat_id()));
         } else {
           goto handle_uninterpreted;
         }
@@ -1749,9 +1668,10 @@ bool ReqAckPlayerChat::MergePartialFromCodedStream(
 
 void ReqAckPlayerChat::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int64 chat_id = 1;
+  // required .NFMsg.Ident chat_id = 1;
   if (has_chat_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->chat_id(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->chat_id(), output);
   }
 
   // required .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 2;
@@ -1774,9 +1694,11 @@ void ReqAckPlayerChat::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqAckPlayerChat::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int64 chat_id = 1;
+  // required .NFMsg.Ident chat_id = 1;
   if (has_chat_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->chat_id(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->chat_id(), target);
   }
 
   // required .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 2;
@@ -1803,10 +1725,10 @@ int ReqAckPlayerChat::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int64 chat_id = 1;
+    // required .NFMsg.Ident chat_id = 1;
     if (has_chat_id()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int64Size(
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->chat_id());
     }
 
@@ -1851,7 +1773,7 @@ void ReqAckPlayerChat::MergeFrom(const ReqAckPlayerChat& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_chat_id()) {
-      set_chat_id(from.chat_id());
+      mutable_chat_id()->::NFMsg::Ident::MergeFrom(from.chat_id());
     }
     if (from.has_chat_type()) {
       set_chat_type(from.chat_type());
@@ -1878,6 +1800,9 @@ void ReqAckPlayerChat::CopyFrom(const ReqAckPlayerChat& from) {
 bool ReqAckPlayerChat::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
+  if (has_chat_id()) {
+    if (!this->chat_id().IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -1906,10 +1831,11 @@ void ReqAckPlayerChat::Swap(ReqAckPlayerChat* other) {
 #ifndef _MSC_VER
 const int ReqAckUseSkill::kUserFieldNumber;
 const int ReqAckUseSkill::kSkillIdFieldNumber;
+const int ReqAckUseSkill::kNowPosFieldNumber;
+const int ReqAckUseSkill::kTarPosFieldNumber;
 const int ReqAckUseSkill::kEffectIdentFieldNumber;
 const int ReqAckUseSkill::kEffectValueFieldNumber;
 const int ReqAckUseSkill::kEffectRltFieldNumber;
-const int ReqAckUseSkill::kKeyValueFieldNumber;
 #endif  // !_MSC_VER
 
 ReqAckUseSkill::ReqAckUseSkill()
@@ -1918,6 +1844,9 @@ ReqAckUseSkill::ReqAckUseSkill()
 }
 
 void ReqAckUseSkill::InitAsDefaultInstance() {
+  user_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+  now_pos_ = const_cast< ::NFMsg::Position*>(&::NFMsg::Position::default_instance());
+  tar_pos_ = const_cast< ::NFMsg::Position*>(&::NFMsg::Position::default_instance());
 }
 
 ReqAckUseSkill::ReqAckUseSkill(const ReqAckUseSkill& from)
@@ -1928,9 +1857,10 @@ ReqAckUseSkill::ReqAckUseSkill(const ReqAckUseSkill& from)
 
 void ReqAckUseSkill::SharedCtor() {
   _cached_size_ = 0;
-  user_ = GOOGLE_LONGLONG(0);
+  user_ = NULL;
   skill_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  key_value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  now_pos_ = NULL;
+  tar_pos_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1942,10 +1872,10 @@ void ReqAckUseSkill::SharedDtor() {
   if (skill_id_ != &::google::protobuf::internal::kEmptyString) {
     delete skill_id_;
   }
-  if (key_value_ != &::google::protobuf::internal::kEmptyString) {
-    delete key_value_;
-  }
   if (this != default_instance_) {
+    delete user_;
+    delete now_pos_;
+    delete tar_pos_;
   }
 }
 
@@ -1972,16 +1902,19 @@ ReqAckUseSkill* ReqAckUseSkill::New() const {
 
 void ReqAckUseSkill::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    user_ = GOOGLE_LONGLONG(0);
+    if (has_user()) {
+      if (user_ != NULL) user_->::NFMsg::Ident::Clear();
+    }
     if (has_skill_id()) {
       if (skill_id_ != &::google::protobuf::internal::kEmptyString) {
         skill_id_->clear();
       }
     }
-    if (has_key_value()) {
-      if (key_value_ != &::google::protobuf::internal::kEmptyString) {
-        key_value_->clear();
-      }
+    if (has_now_pos()) {
+      if (now_pos_ != NULL) now_pos_->::NFMsg::Position::Clear();
+    }
+    if (has_tar_pos()) {
+      if (tar_pos_ != NULL) tar_pos_->::NFMsg::Position::Clear();
     }
   }
   effect_ident_.Clear();
@@ -1997,14 +1930,12 @@ bool ReqAckUseSkill::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int64 user = 1;
+      // required .NFMsg.Ident user = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &user_)));
-          set_has_user();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_user()));
         } else {
           goto handle_uninterpreted;
         }
@@ -2022,40 +1953,61 @@ bool ReqAckUseSkill::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_effect_ident;
+        if (input->ExpectTag(26)) goto parse_now_pos;
         break;
       }
 
-      // repeated int64 effect_ident = 3;
+      // required .NFMsg.Position now_pos = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_effect_ident:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 1, 24, input, this->mutable_effect_ident())));
-        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
-                   == ::google::protobuf::internal::WireFormatLite::
-                      WIRETYPE_LENGTH_DELIMITED) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, this->mutable_effect_ident())));
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_now_pos:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_now_pos()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_effect_ident;
-        if (input->ExpectTag(32)) goto parse_effect_value;
+        if (input->ExpectTag(34)) goto parse_tar_pos;
         break;
       }
 
-      // repeated int32 effect_value = 4;
+      // required .NFMsg.Position tar_pos = 4;
       case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_tar_pos:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_tar_pos()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(42)) goto parse_effect_ident;
+        break;
+      }
+
+      // repeated .NFMsg.Ident effect_ident = 5;
+      case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_effect_ident:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_effect_ident()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(42)) goto parse_effect_ident;
+        if (input->ExpectTag(48)) goto parse_effect_value;
+        break;
+      }
+
+      // repeated int32 effect_value = 6;
+      case 6: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_effect_value:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 1, 32, input, this->mutable_effect_value())));
+                 1, 48, input, this->mutable_effect_value())));
         } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
                    == ::google::protobuf::internal::WireFormatLite::
                       WIRETYPE_LENGTH_DELIMITED) {
@@ -2065,19 +2017,19 @@ bool ReqAckUseSkill::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(32)) goto parse_effect_value;
-        if (input->ExpectTag(40)) goto parse_effect_rlt;
+        if (input->ExpectTag(48)) goto parse_effect_value;
+        if (input->ExpectTag(56)) goto parse_effect_rlt;
         break;
       }
 
-      // repeated int32 effect_rlt = 5;
-      case 5: {
+      // repeated int32 effect_rlt = 7;
+      case 7: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_effect_rlt:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 1, 40, input, this->mutable_effect_rlt())));
+                 1, 56, input, this->mutable_effect_rlt())));
         } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
                    == ::google::protobuf::internal::WireFormatLite::
                       WIRETYPE_LENGTH_DELIMITED) {
@@ -2087,21 +2039,7 @@ bool ReqAckUseSkill::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(40)) goto parse_effect_rlt;
-        if (input->ExpectTag(50)) goto parse_key_value;
-        break;
-      }
-
-      // optional bytes key_value = 6;
-      case 6: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_key_value:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_key_value()));
-        } else {
-          goto handle_uninterpreted;
-        }
+        if (input->ExpectTag(56)) goto parse_effect_rlt;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -2124,9 +2062,10 @@ bool ReqAckUseSkill::MergePartialFromCodedStream(
 
 void ReqAckUseSkill::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int64 user = 1;
+  // required .NFMsg.Ident user = 1;
   if (has_user()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->user(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->user(), output);
   }
 
   // required bytes skill_id = 2;
@@ -2135,28 +2074,34 @@ void ReqAckUseSkill::SerializeWithCachedSizes(
       2, this->skill_id(), output);
   }
 
-  // repeated int64 effect_ident = 3;
-  for (int i = 0; i < this->effect_ident_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(
-      3, this->effect_ident(i), output);
+  // required .NFMsg.Position now_pos = 3;
+  if (has_now_pos()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->now_pos(), output);
   }
 
-  // repeated int32 effect_value = 4;
+  // required .NFMsg.Position tar_pos = 4;
+  if (has_tar_pos()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, this->tar_pos(), output);
+  }
+
+  // repeated .NFMsg.Ident effect_ident = 5;
+  for (int i = 0; i < this->effect_ident_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      5, this->effect_ident(i), output);
+  }
+
+  // repeated int32 effect_value = 6;
   for (int i = 0; i < this->effect_value_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(
-      4, this->effect_value(i), output);
+      6, this->effect_value(i), output);
   }
 
-  // repeated int32 effect_rlt = 5;
+  // repeated int32 effect_rlt = 7;
   for (int i = 0; i < this->effect_rlt_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(
-      5, this->effect_rlt(i), output);
-  }
-
-  // optional bytes key_value = 6;
-  if (has_key_value()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      6, this->key_value(), output);
+      7, this->effect_rlt(i), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -2167,9 +2112,11 @@ void ReqAckUseSkill::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqAckUseSkill::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int64 user = 1;
+  // required .NFMsg.Ident user = 1;
   if (has_user()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->user(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->user(), target);
   }
 
   // required bytes skill_id = 2;
@@ -2179,29 +2126,37 @@ void ReqAckUseSkill::SerializeWithCachedSizes(
         2, this->skill_id(), target);
   }
 
-  // repeated int64 effect_ident = 3;
+  // required .NFMsg.Position now_pos = 3;
+  if (has_now_pos()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->now_pos(), target);
+  }
+
+  // required .NFMsg.Position tar_pos = 4;
+  if (has_tar_pos()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        4, this->tar_pos(), target);
+  }
+
+  // repeated .NFMsg.Ident effect_ident = 5;
   for (int i = 0; i < this->effect_ident_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt64ToArray(3, this->effect_ident(i), target);
+      WriteMessageNoVirtualToArray(
+        5, this->effect_ident(i), target);
   }
 
-  // repeated int32 effect_value = 4;
+  // repeated int32 effect_value = 6;
   for (int i = 0; i < this->effect_value_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt32ToArray(4, this->effect_value(i), target);
+      WriteInt32ToArray(6, this->effect_value(i), target);
   }
 
-  // repeated int32 effect_rlt = 5;
+  // repeated int32 effect_rlt = 7;
   for (int i = 0; i < this->effect_rlt_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt32ToArray(5, this->effect_rlt(i), target);
-  }
-
-  // optional bytes key_value = 6;
-  if (has_key_value()) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        6, this->key_value(), target);
+      WriteInt32ToArray(7, this->effect_rlt(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2215,10 +2170,10 @@ int ReqAckUseSkill::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int64 user = 1;
+    // required .NFMsg.Ident user = 1;
     if (has_user()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int64Size(
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->user());
     }
 
@@ -2229,25 +2184,30 @@ int ReqAckUseSkill::ByteSize() const {
           this->skill_id());
     }
 
-    // optional bytes key_value = 6;
-    if (has_key_value()) {
+    // required .NFMsg.Position now_pos = 3;
+    if (has_now_pos()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->key_value());
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->now_pos());
+    }
+
+    // required .NFMsg.Position tar_pos = 4;
+    if (has_tar_pos()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->tar_pos());
     }
 
   }
-  // repeated int64 effect_ident = 3;
-  {
-    int data_size = 0;
-    for (int i = 0; i < this->effect_ident_size(); i++) {
-      data_size += ::google::protobuf::internal::WireFormatLite::
-        Int64Size(this->effect_ident(i));
-    }
-    total_size += 1 * this->effect_ident_size() + data_size;
+  // repeated .NFMsg.Ident effect_ident = 5;
+  total_size += 1 * this->effect_ident_size();
+  for (int i = 0; i < this->effect_ident_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->effect_ident(i));
   }
 
-  // repeated int32 effect_value = 4;
+  // repeated int32 effect_value = 6;
   {
     int data_size = 0;
     for (int i = 0; i < this->effect_value_size(); i++) {
@@ -2257,7 +2217,7 @@ int ReqAckUseSkill::ByteSize() const {
     total_size += 1 * this->effect_value_size() + data_size;
   }
 
-  // repeated int32 effect_rlt = 5;
+  // repeated int32 effect_rlt = 7;
   {
     int data_size = 0;
     for (int i = 0; i < this->effect_rlt_size(); i++) {
@@ -2297,13 +2257,16 @@ void ReqAckUseSkill::MergeFrom(const ReqAckUseSkill& from) {
   effect_rlt_.MergeFrom(from.effect_rlt_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_user()) {
-      set_user(from.user());
+      mutable_user()->::NFMsg::Ident::MergeFrom(from.user());
     }
     if (from.has_skill_id()) {
       set_skill_id(from.skill_id());
     }
-    if (from.has_key_value()) {
-      set_key_value(from.key_value());
+    if (from.has_now_pos()) {
+      mutable_now_pos()->::NFMsg::Position::MergeFrom(from.now_pos());
+    }
+    if (from.has_tar_pos()) {
+      mutable_tar_pos()->::NFMsg::Position::MergeFrom(from.tar_pos());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -2322,8 +2285,20 @@ void ReqAckUseSkill::CopyFrom(const ReqAckUseSkill& from) {
 }
 
 bool ReqAckUseSkill::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
 
+  if (has_user()) {
+    if (!this->user().IsInitialized()) return false;
+  }
+  if (has_now_pos()) {
+    if (!this->now_pos().IsInitialized()) return false;
+  }
+  if (has_tar_pos()) {
+    if (!this->tar_pos().IsInitialized()) return false;
+  }
+  for (int i = 0; i < effect_ident_size(); i++) {
+    if (!this->effect_ident(i).IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -2331,10 +2306,11 @@ void ReqAckUseSkill::Swap(ReqAckUseSkill* other) {
   if (other != this) {
     std::swap(user_, other->user_);
     std::swap(skill_id_, other->skill_id_);
+    std::swap(now_pos_, other->now_pos_);
+    std::swap(tar_pos_, other->tar_pos_);
     effect_ident_.Swap(&other->effect_ident_);
     effect_value_.Swap(&other->effect_value_);
     effect_rlt_.Swap(&other->effect_rlt_);
-    std::swap(key_value_, other->key_value_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -2367,6 +2343,8 @@ ReqAckUseItem::ReqAckUseItem()
 }
 
 void ReqAckUseItem::InitAsDefaultInstance() {
+  user_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+  item_guid_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 ReqAckUseItem::ReqAckUseItem(const ReqAckUseItem& from)
@@ -2377,8 +2355,8 @@ ReqAckUseItem::ReqAckUseItem(const ReqAckUseItem& from)
 
 void ReqAckUseItem::SharedCtor() {
   _cached_size_ = 0;
-  user_ = GOOGLE_LONGLONG(0);
-  item_guid_ = GOOGLE_LONGLONG(0);
+  user_ = NULL;
+  item_guid_ = NULL;
   key_value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -2392,6 +2370,8 @@ void ReqAckUseItem::SharedDtor() {
     delete key_value_;
   }
   if (this != default_instance_) {
+    delete user_;
+    delete item_guid_;
   }
 }
 
@@ -2418,8 +2398,12 @@ ReqAckUseItem* ReqAckUseItem::New() const {
 
 void ReqAckUseItem::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    user_ = GOOGLE_LONGLONG(0);
-    item_guid_ = GOOGLE_LONGLONG(0);
+    if (has_user()) {
+      if (user_ != NULL) user_->::NFMsg::Ident::Clear();
+    }
+    if (has_item_guid()) {
+      if (item_guid_ != NULL) item_guid_->::NFMsg::Ident::Clear();
+    }
     if (has_key_value()) {
       if (key_value_ != &::google::protobuf::internal::kEmptyString) {
         key_value_->clear();
@@ -2439,55 +2423,44 @@ bool ReqAckUseItem::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int64 user = 1;
+      // required .NFMsg.Ident user = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &user_)));
-          set_has_user();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_user()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_item_guid;
+        if (input->ExpectTag(18)) goto parse_item_guid;
         break;
       }
 
-      // required int64 item_guid = 2;
+      // required .NFMsg.Ident item_guid = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_item_guid:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &item_guid_)));
-          set_has_item_guid();
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_item_guid()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_effect_ident;
+        if (input->ExpectTag(26)) goto parse_effect_ident;
         break;
       }
 
-      // repeated int64 effect_ident = 3;
+      // repeated .NFMsg.Ident effect_ident = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_effect_ident:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 1, 24, input, this->mutable_effect_ident())));
-        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
-                   == ::google::protobuf::internal::WireFormatLite::
-                      WIRETYPE_LENGTH_DELIMITED) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, this->mutable_effect_ident())));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_effect_ident()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_effect_ident;
+        if (input->ExpectTag(26)) goto parse_effect_ident;
         if (input->ExpectTag(32)) goto parse_effect_value;
         break;
       }
@@ -2568,19 +2541,21 @@ bool ReqAckUseItem::MergePartialFromCodedStream(
 
 void ReqAckUseItem::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int64 user = 1;
+  // required .NFMsg.Ident user = 1;
   if (has_user()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->user(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->user(), output);
   }
 
-  // required int64 item_guid = 2;
+  // required .NFMsg.Ident item_guid = 2;
   if (has_item_guid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->item_guid(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->item_guid(), output);
   }
 
-  // repeated int64 effect_ident = 3;
+  // repeated .NFMsg.Ident effect_ident = 3;
   for (int i = 0; i < this->effect_ident_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->effect_ident(i), output);
   }
 
@@ -2610,20 +2585,25 @@ void ReqAckUseItem::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqAckUseItem::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int64 user = 1;
+  // required .NFMsg.Ident user = 1;
   if (has_user()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->user(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->user(), target);
   }
 
-  // required int64 item_guid = 2;
+  // required .NFMsg.Ident item_guid = 2;
   if (has_item_guid()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->item_guid(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->item_guid(), target);
   }
 
-  // repeated int64 effect_ident = 3;
+  // repeated .NFMsg.Ident effect_ident = 3;
   for (int i = 0; i < this->effect_ident_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt64ToArray(3, this->effect_ident(i), target);
+      WriteMessageNoVirtualToArray(
+        3, this->effect_ident(i), target);
   }
 
   // repeated int32 effect_value = 4;
@@ -2656,17 +2636,17 @@ int ReqAckUseItem::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int64 user = 1;
+    // required .NFMsg.Ident user = 1;
     if (has_user()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int64Size(
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->user());
     }
 
-    // required int64 item_guid = 2;
+    // required .NFMsg.Ident item_guid = 2;
     if (has_item_guid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int64Size(
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->item_guid());
     }
 
@@ -2678,14 +2658,12 @@ int ReqAckUseItem::ByteSize() const {
     }
 
   }
-  // repeated int64 effect_ident = 3;
-  {
-    int data_size = 0;
-    for (int i = 0; i < this->effect_ident_size(); i++) {
-      data_size += ::google::protobuf::internal::WireFormatLite::
-        Int64Size(this->effect_ident(i));
-    }
-    total_size += 1 * this->effect_ident_size() + data_size;
+  // repeated .NFMsg.Ident effect_ident = 3;
+  total_size += 1 * this->effect_ident_size();
+  for (int i = 0; i < this->effect_ident_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->effect_ident(i));
   }
 
   // repeated int32 effect_value = 4;
@@ -2738,10 +2716,10 @@ void ReqAckUseItem::MergeFrom(const ReqAckUseItem& from) {
   effect_rlt_.MergeFrom(from.effect_rlt_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_user()) {
-      set_user(from.user());
+      mutable_user()->::NFMsg::Ident::MergeFrom(from.user());
     }
     if (from.has_item_guid()) {
-      set_item_guid(from.item_guid());
+      mutable_item_guid()->::NFMsg::Ident::MergeFrom(from.item_guid());
     }
     if (from.has_key_value()) {
       set_key_value(from.key_value());
@@ -2765,6 +2743,15 @@ void ReqAckUseItem::CopyFrom(const ReqAckUseItem& from) {
 bool ReqAckUseItem::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
+  if (has_user()) {
+    if (!this->user().IsInitialized()) return false;
+  }
+  if (has_item_guid()) {
+    if (!this->item_guid().IsInitialized()) return false;
+  }
+  for (int i = 0; i < effect_ident_size(); i++) {
+    if (!this->effect_ident(i).IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -3237,6 +3224,7 @@ ReqPickDropItem::ReqPickDropItem()
 }
 
 void ReqPickDropItem::InitAsDefaultInstance() {
+  item_guid_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 ReqPickDropItem::ReqPickDropItem(const ReqPickDropItem& from)
@@ -3247,7 +3235,7 @@ ReqPickDropItem::ReqPickDropItem(const ReqPickDropItem& from)
 
 void ReqPickDropItem::SharedCtor() {
   _cached_size_ = 0;
-  item_guid_ = GOOGLE_LONGLONG(0);
+  item_guid_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -3257,6 +3245,7 @@ ReqPickDropItem::~ReqPickDropItem() {
 
 void ReqPickDropItem::SharedDtor() {
   if (this != default_instance_) {
+    delete item_guid_;
   }
 }
 
@@ -3283,7 +3272,9 @@ ReqPickDropItem* ReqPickDropItem::New() const {
 
 void ReqPickDropItem::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    item_guid_ = GOOGLE_LONGLONG(0);
+    if (has_item_guid()) {
+      if (item_guid_ != NULL) item_guid_->::NFMsg::Ident::Clear();
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -3295,14 +3286,12 @@ bool ReqPickDropItem::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int64 item_guid = 2;
+      // required .NFMsg.Ident item_guid = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &item_guid_)));
-          set_has_item_guid();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_item_guid()));
         } else {
           goto handle_uninterpreted;
         }
@@ -3328,9 +3317,10 @@ bool ReqPickDropItem::MergePartialFromCodedStream(
 
 void ReqPickDropItem::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int64 item_guid = 2;
+  // required .NFMsg.Ident item_guid = 2;
   if (has_item_guid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->item_guid(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->item_guid(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -3341,9 +3331,11 @@ void ReqPickDropItem::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqPickDropItem::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int64 item_guid = 2;
+  // required .NFMsg.Ident item_guid = 2;
   if (has_item_guid()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->item_guid(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->item_guid(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -3357,10 +3349,10 @@ int ReqPickDropItem::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int64 item_guid = 2;
+    // required .NFMsg.Ident item_guid = 2;
     if (has_item_guid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int64Size(
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->item_guid());
     }
 
@@ -3392,7 +3384,7 @@ void ReqPickDropItem::MergeFrom(const ReqPickDropItem& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_item_guid()) {
-      set_item_guid(from.item_guid());
+      mutable_item_guid()->::NFMsg::Ident::MergeFrom(from.item_guid());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -3413,6 +3405,9 @@ void ReqPickDropItem::CopyFrom(const ReqPickDropItem& from) {
 bool ReqPickDropItem::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
+  if (has_item_guid()) {
+    if (!this->item_guid().IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -3888,6 +3883,7 @@ PlayerEntryInfo::PlayerEntryInfo()
 }
 
 void PlayerEntryInfo::InitAsDefaultInstance() {
+  object_guid_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 PlayerEntryInfo::PlayerEntryInfo(const PlayerEntryInfo& from)
@@ -3898,7 +3894,7 @@ PlayerEntryInfo::PlayerEntryInfo(const PlayerEntryInfo& from)
 
 void PlayerEntryInfo::SharedCtor() {
   _cached_size_ = 0;
-  object_guid_ = GOOGLE_LONGLONG(0);
+  object_guid_ = NULL;
   x_ = 0;
   y_ = 0;
   z_ = 0;
@@ -3922,6 +3918,7 @@ void PlayerEntryInfo::SharedDtor() {
     delete class_id_;
   }
   if (this != default_instance_) {
+    delete object_guid_;
   }
 }
 
@@ -3948,7 +3945,9 @@ PlayerEntryInfo* PlayerEntryInfo::New() const {
 
 void PlayerEntryInfo::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    object_guid_ = GOOGLE_LONGLONG(0);
+    if (has_object_guid()) {
+      if (object_guid_ != NULL) object_guid_->::NFMsg::Ident::Clear();
+    }
     x_ = 0;
     y_ = 0;
     z_ = 0;
@@ -3978,14 +3977,12 @@ bool PlayerEntryInfo::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int64 object_guid = 1;
+      // required .NFMsg.Ident object_guid = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &object_guid_)));
-          set_has_object_guid();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_object_guid()));
         } else {
           goto handle_uninterpreted;
         }
@@ -4135,9 +4132,10 @@ bool PlayerEntryInfo::MergePartialFromCodedStream(
 
 void PlayerEntryInfo::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int64 object_guid = 1;
+  // required .NFMsg.Ident object_guid = 1;
   if (has_object_guid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->object_guid(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->object_guid(), output);
   }
 
   // required float x = 2;
@@ -4190,9 +4188,11 @@ void PlayerEntryInfo::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* PlayerEntryInfo::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int64 object_guid = 1;
+  // required .NFMsg.Ident object_guid = 1;
   if (has_object_guid()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->object_guid(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->object_guid(), target);
   }
 
   // required float x = 2;
@@ -4250,10 +4250,10 @@ int PlayerEntryInfo::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int64 object_guid = 1;
+    // required .NFMsg.Ident object_guid = 1;
     if (has_object_guid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int64Size(
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->object_guid());
     }
 
@@ -4337,7 +4337,7 @@ void PlayerEntryInfo::MergeFrom(const PlayerEntryInfo& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_object_guid()) {
-      set_object_guid(from.object_guid());
+      mutable_object_guid()->::NFMsg::Ident::MergeFrom(from.object_guid());
     }
     if (from.has_x()) {
       set_x(from.x());
@@ -4384,6 +4384,9 @@ void PlayerEntryInfo::CopyFrom(const PlayerEntryInfo& from) {
 bool PlayerEntryInfo::IsInitialized() const {
   if ((_has_bits_[0] & 0x000001ff) != 0x000001ff) return false;
 
+  if (has_object_guid()) {
+    if (!this->object_guid().IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -4686,24 +4689,17 @@ bool AckPlayerLeaveList::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated int64 object_list = 1;
+      // repeated .NFMsg.Ident object_list = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_object_list:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 1, 8, input, this->mutable_object_list())));
-        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
-                   == ::google::protobuf::internal::WireFormatLite::
-                      WIRETYPE_LENGTH_DELIMITED) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, this->mutable_object_list())));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_object_list()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(8)) goto parse_object_list;
+        if (input->ExpectTag(10)) goto parse_object_list;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -4726,9 +4722,9 @@ bool AckPlayerLeaveList::MergePartialFromCodedStream(
 
 void AckPlayerLeaveList::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // repeated int64 object_list = 1;
+  // repeated .NFMsg.Ident object_list = 1;
   for (int i = 0; i < this->object_list_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->object_list(i), output);
   }
 
@@ -4740,10 +4736,11 @@ void AckPlayerLeaveList::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* AckPlayerLeaveList::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // repeated int64 object_list = 1;
+  // repeated .NFMsg.Ident object_list = 1;
   for (int i = 0; i < this->object_list_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt64ToArray(1, this->object_list(i), target);
+      WriteMessageNoVirtualToArray(
+        1, this->object_list(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -4756,14 +4753,12 @@ void AckPlayerLeaveList::SerializeWithCachedSizes(
 int AckPlayerLeaveList::ByteSize() const {
   int total_size = 0;
 
-  // repeated int64 object_list = 1;
-  {
-    int data_size = 0;
-    for (int i = 0; i < this->object_list_size(); i++) {
-      data_size += ::google::protobuf::internal::WireFormatLite::
-        Int64Size(this->object_list(i));
-    }
-    total_size += 1 * this->object_list_size() + data_size;
+  // repeated .NFMsg.Ident object_list = 1;
+  total_size += 1 * this->object_list_size();
+  for (int i = 0; i < this->object_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->object_list(i));
   }
 
   if (!unknown_fields().empty()) {
@@ -4809,6 +4804,9 @@ void AckPlayerLeaveList::CopyFrom(const AckPlayerLeaveList& from) {
 
 bool AckPlayerLeaveList::IsInitialized() const {
 
+  for (int i = 0; i < object_list_size(); i++) {
+    if (!this->object_list(i).IsInitialized()) return false;
+  }
   return true;
 }
 

@@ -16,7 +16,7 @@
 #include <stdint.h>
 #include <iostream>
 #include <map>
-#include <xtree>
+//#include <xtree>
 
 #if NF_PLATFORM != NF_PLATFORM_WIN
 #include <netinet/in.h>
@@ -28,16 +28,14 @@
 
 #include "NFIPacket.h"
 
-#include <event2/event.h> 
 #include <event2/bufferevent.h>
 #include <event2/buffer.h>
 #include <event2/listener.h>
 #include <event2/util.h>
-#include <event2/event.h>
 #include <event2/thread.h>
 #include <event2/event_compat.h>
-#include <event2/event.h>
 #include <vector>
+#include "NFComm/NFCore/NFIdentID.h"
 
 #pragma pack(push, 1)
 
@@ -51,7 +49,7 @@ enum NF_NET_EVENT
 
 class NFINet;
 
-class NetObject 
+class NetObject
 {
 public:
     NetObject(NFINet* pThis, int32_t nFd, sockaddr_in& addr, bufferevent* pBev)
@@ -66,9 +64,11 @@ public:
         mnErrorCount = 0;
         mnLogicState = 0;
         mnUserData = 0;
+        mnUserID = NFIDENTID();
+		mbRemoveState = false;
     }
 
-    ~NetObject()
+    virtual ~NetObject()
     {
     }
 
@@ -130,34 +130,54 @@ public:
         return mnErrorCount;
     }
 
-    int GetLogicState() const
+    int GetConnectKeyState() const
     {
         return mnLogicState;
     }
 
-    void SetLogicState(const int nState)
+    void SetConnectKeyState(const int nState)
     {
         mnLogicState = nState;
     }
 
-    int GetUserData() const
+    int GetGameID() const
     {
         return mnUserData;
     }
 
-    void SetUserData(const int nData)
+    void SetGameID(const int nData)
     {
         mnUserData = nData;
     }
 
-    const std::string& GetUserStrData() const
+    const std::string& GetAccount() const
     {
         return mstrUserData;
     }
 
-    void SetUserStrData(const std::string& strData)
+    void SetAccount(const std::string& strData)
     {
         mstrUserData = strData;
+    }
+
+	const bool GetRemoveState() const
+	{
+		return mbRemoveState;
+	}
+
+	void SetRemoveState(const bool bState)
+	{
+		mbRemoveState = bState;
+	}
+
+    const NFIDENTID& GetUserID()
+    {
+        return mnUserID;
+    }
+
+    void SetUserID(const NFIDENTID& nUserID)
+    {
+        mnUserID = nUserID;
     }
 
     int IncreaseError(const int nError = 1)
@@ -184,7 +204,8 @@ private:
     int32_t mnLogicState;
     int32_t mnUserData;
     std::string mstrUserData;
-
+	bool mbRemoveState;
+    NFIDENTID mnUserID;
     NFINet* m_pNet;
 };
 
@@ -201,7 +222,7 @@ public:
 
 	virtual bool SendMsg(const NFIPacket& msg, const int nSockIndex = 0, bool bBroadcast = false) = 0;
 	virtual bool SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex = 0, bool bBroadcast = false) = 0;
-	
+
 	virtual int OnRecivePacket(const int nSockIndex, const char* msg, const uint32_t nLen){return 1;};
 
 	virtual bool CloseNetObject(const int nSockIndex) = 0;
@@ -211,8 +232,9 @@ public:
 	virtual bool AddBan(const int nSockIndex, const int32_t nTime = -1) = 0;
 	virtual bool RemoveBan(const int nSockIndex) = 0;
 
-    virtual void HeartPack() = 0;
-    virtual NFIMsgHead::NF_Head GetHeadLen() = 0;
+	virtual NFIMsgHead::NF_Head GetHeadLen() = 0;
+	virtual bool IsServer() = 0;
+	virtual int FD() = 0;
 
 protected:
 private:

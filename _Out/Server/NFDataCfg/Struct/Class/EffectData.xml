@@ -3,30 +3,30 @@
 <XML>
     <Records/>
     <Propertys>
-        <Property Desc="生命值" Id="MAXHP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="法力值" Id="MAXMP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="体力" Id="MAXSP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="生命值回复" Id="HPREGEN" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="体力回复" Id="SPREGEN" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="MP回复" Id="MPREGEN" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="物理攻击力" Id="ATK_VALUE" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="物理防御力" Id="DEF_VALUE" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="移动速度,默认单位是10000=1米" Id="MOVE_SPEED" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="攻击速度默认10000" Id="ATK_SPEED" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="火" Id="ATK_FIRE" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="雷电" Id="ATK_LIGHT" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="冰" Id="ATK_ICE" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="毒" Id="ATK_POISON" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="火抗" Id="DEF_FIRE" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="雷电抗" Id="DEF_LIGHT" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="冰抗" Id="DEF_ICE" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="毒抗" Id="DEF_POISON" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="眩晕开关" Id="DIZZY_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="移动开关" Id="MOVE_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="技能开关" Id="SKILL_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="物理免疫开关" Id="PHYSICAL_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="魔法免疫开关" Id="MAGIC_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="BUFF免疫开关" Id="BUFF_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="生命值" Id="MAXHP" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="法力值" Id="MAXMP" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="体力" Id="MAXSP" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="生命值回复" Id="HPREGEN" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="体力回复" Id="SPREGEN" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="MP回复" Id="MPREGEN" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="物理攻击力" Id="ATK_VALUE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="物理防御力" Id="DEF_VALUE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="移动速度,默认单位是10000=1米" Id="MOVE_SPEED" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="攻击速度默认10000" Id="ATK_SPEED" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="火" Id="ATK_FIRE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="雷电" Id="ATK_LIGHT" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="冰" Id="ATK_ICE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="毒" Id="ATK_POISON" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="火抗" Id="DEF_FIRE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="雷电抗" Id="DEF_LIGHT" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="冰抗" Id="DEF_ICE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="毒抗" Id="DEF_POISON" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="眩晕开关" Id="DIZZY_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="移动开关" Id="MOVE_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="技能开关" Id="SKILL_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="物理免疫开关" Id="PHYSICAL_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="魔法免疫开关" Id="MAGIC_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="BUFF免疫开关" Id="BUFF_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
     </Propertys>
     <Includes/>
 </XML>

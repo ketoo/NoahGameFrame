@@ -14,6 +14,7 @@
 #include <string>
 #include <iostream>
 #include <typeinfo>
+#include "NFMapEx.h"
 
 template <typename T , typename TD>
 class NFMap
@@ -49,7 +50,7 @@ public:
         if (itr != mObjectList.end())
         {
             pData = itr->second;
-            itr = mObjectList.erase(itr);
+            mObjectList.erase(itr);
         }
 
         return pData;
@@ -70,7 +71,7 @@ public:
 
     virtual TD* First()
     {
-        if (mObjectList.size() <= 0 )
+        if (mObjectList.size() <= 0)
         {
             return NULL;
         }
@@ -111,7 +112,7 @@ public:
 
     virtual TD* First(T& name)
     {
-        if (mObjectList.size() <= 0 )
+        if (mObjectList.size() <= 0)
         {
             return NULL;
         }
@@ -166,6 +167,5 @@ private:
     NFMapOBJECT     mObjectList;
     typename NFMapOBJECT::iterator mObjectCurIter;
 };
-
 
 #endif
