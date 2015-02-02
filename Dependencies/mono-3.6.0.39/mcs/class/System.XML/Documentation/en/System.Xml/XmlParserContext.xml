@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="XmlParserContext" FullName="System.Xml.XmlParserContext" FullNameSP="System_Xml_XmlParserContext" Maintainer="ecma">
+  <TypeSignature Language="ILASM" Value=".class public XmlParserContext extends System.Object" />
+  <TypeSignature Language="C#" Value="public class XmlParserContext" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit XmlParserContext extends System.Object" />
+  <MemberOfLibrary>XML</MemberOfLibrary>
+  <AssemblyInfo>
+    <AssemblyName>System.Xml</AssemblyName>
+    <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00 ]</AssemblyPublicKey>
+    <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <ThreadingSafetyStatement>All public static members of this type are safe for multithreaded operations. No instance members are guaranteed to be thread safe.</ThreadingSafetyStatement>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <remarks>To be added.</remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Provides all the context information required by the <see cref="T:System.Xml.XmlReader" /> to parse an XML fragment.</para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor(class System.Xml.XmlNameTable nt, class System.Xml.XmlNamespaceManager nsMgr, string xmlLang, valuetype System.Xml.XmlSpace xmlSpace)" />
+      <MemberSignature Language="C#" Value="public XmlParserContext (System.Xml.XmlNameTable nt, System.Xml.XmlNamespaceManager nsMgr, string xmlLang, System.Xml.XmlSpace xmlSpace);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.XmlNameTable nt, class System.Xml.XmlNamespaceManager nsMgr, string xmlLang, valuetype System.Xml.XmlSpace xmlSpace) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="nt" Type="System.Xml.XmlNameTable" />
+        <Parameter Name="nsMgr" Type="System.Xml.XmlNamespaceManager" />
+        <Parameter Name="xmlLang" Type="System.String" />
+        <Parameter Name="xmlSpace" Type="System.Xml.XmlSpace" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <para>This method is equivalent to <see cref="T:System.Xml.XmlParserContext" />(<paramref name="nt" />, <paramref name="nsMgr" />,
+<see langword="null" />, <see langword="null" />, <see langword="null" />, <see langword="null" />, 
+<see cref="F:System.String.Empty" qualify="true" />, <paramref name="xmlLang" />, 
+<paramref name="xmlSpace" />, <see langword="null" />) constructor.</para>
+        </remarks>
+        <exception cref="T:System.Xml.XmlException">
+          <paramref name="nt" /> is not the same <see cref="T:System.Xml.XmlNameTable" /> used to construct <paramref name="nsMgr" />.</exception>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the XmlParserContext class with the specified <see cref="T:System.Xml.XmlNameTable" />, <see cref="T:System.Xml.XmlNamespaceManager" />, xml:lang, and xml:space values.</para>
+        </summary>
+        <param name="nt">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlNameTable" /> to use to atomize strings. If this is null, the name table used to construct the <paramref name="nsMgr" /> is used instead. For more information about atomized strings, see <see cref="T:System.Xml.XmlNameTable" />. </param>
+        <param name="nsMgr">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlNamespaceManager" /> to use for looking up namespace information, or null. </param>
+        <param name="xmlLang">
+          <attribution license="cc4" from="Microsoft" modified="false" />The xml:lang scope. </param>
+        <param name="xmlSpace">
+          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Xml.XmlSpace" /> value indicating the xml:space scope. </param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor(class System.Xml.XmlNameTable nt, class System.Xml.XmlNamespaceManager nsMgr, string xmlLang, valuetype System.Xml.XmlSpace xmlSpace, class System.Text.Encoding enc)" />
+      <MemberSignature Language="C#" Value="public XmlParserContext (System.Xml.XmlNameTable nt, System.Xml.XmlNamespaceManager nsMgr, string xmlLang, System.Xml.XmlSpace xmlSpace, System.Text.Encoding enc);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.XmlNameTable nt, class System.Xml.XmlNamespaceManager nsMgr, string xmlLang, valuetype System.Xml.XmlSpace xmlSpace, class System.Text.Encoding enc) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="nt" Type="System.Xml.XmlNameTable" />
+        <Parameter Name="nsMgr" Type="System.Xml.XmlNamespaceManager" />
+        <Parameter Name="xmlLang" Type="System.String" />
+        <Parameter Name="xmlSpace" Type="System.Xml.XmlSpace" />
+        <Parameter Name="enc" Type="System.Text.Encoding" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <para>This method is equivalent to <see cref="T:System.Xml.XmlParserContext" />(<paramref name="nt" />,
+<paramref name="nsMgr" />, <see langword="null" />, <see langword="null" />, <see langword="null" />, 
+<see langword="null" />, <see cref="F:System.String.Empty" qualify="true" />, <paramref name="xmlLang" />, <paramref name="xmlSpace" />, 
+<paramref name="enc" />).</para>
+        </remarks>
+        <exception cref="T:System.Xml.XmlException">
+          <paramref name="nt" /> is not the same <see cref="T:System.Xml.XmlNameTable" /> used to construct <paramref name="nsMgr" />.</exception>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the XmlParserContext class with the specified <see cref="T:System.Xml.XmlNameTable" />, <see cref="T:System.Xml.XmlNamespaceManager" />, xml:lang, xml:space, and encoding.</para>
+        </summary>
+        <param name="nt">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlNameTable" /> to use to atomize strings. If this is null, the name table used to construct the <paramref name="nsMgr" /> is used instead. For more information on atomized strings, see <see cref="T:System.Xml.XmlNameTable" />. </param>
+        <param name="nsMgr">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlNamespaceManager" /> to use for looking up namespace information, or null. </param>
+        <param name="xmlLang">
+          <attribution license="cc4" from="Microsoft" modified="false" />The xml:lang scope. </param>
+        <param name="xmlSpace">
+          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Xml.XmlSpace" /> value indicating the xml:space scope. </param>
+        <param name="enc">
+          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Text.Encoding" /> object indicating the encoding setting. </param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor(class System.Xml.XmlNameTable nt, class System.Xml.XmlNamespaceManager nsMgr, string docTypeName, string pubId, string sysId, string internalSubset, string baseURI, string xmlLang, valuetype System.Xml.XmlSpace xmlSpace)" />
+      <MemberSignature Language="C#" Value="public XmlParserContext (System.Xml.XmlNameTable nt, System.Xml.XmlNamespaceManager nsMgr, string docTypeName, string pubId, string sysId, string internalSubset, string baseURI, string xmlLang, System.Xml.XmlSpace xmlSpace);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.XmlNameTable nt, class System.Xml.XmlNamespaceManager nsMgr, string docTypeName, string pubId, string sysId, string internalSubset, string baseURI, string xmlLang, valuetype System.Xml.XmlSpace xmlSpace) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="nt" Type="System.Xml.XmlNameTable" />
+        <Parameter Name="nsMgr" Type="System.Xml.XmlNamespaceManager" />
+        <Parameter Name="docTypeName" Type="System.String" />
+        <Parameter Name="pubId" Type="System.String" />
+        <Parameter Name="sysId" Type="System.String" />
+        <Parameter Name="internalSubset" Type="System.String" />
+        <Parameter Name="baseURI" Type="System.String" />
+        <Parameter Name="xmlLang" Type="System.String" />
+        <Parameter Name="xmlSpace" Type="System.Xml.XmlSpace" />
+      </Parameters>
+      <Docs>
+        <exception cref="T:System.Xml.XmlException">
+          <paramref name="nt" /> is not the same <see cref="T:System.Xml.XmlNameTable" /> used to construct <paramref name="nsMgr" />.</exception>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This constructor supplies all DocumentType information required by <see cref="T:System.Xml.XmlValidatingReader" />. If this XmlParserContext is passed to an <see cref="T:System.Xml.XmlTextReader" />, all DTD information is ignored.</para>
+          <para>If you pass a DTD as the <paramref name="internalSubset" />, the DTD is used for entity resolution, not for document validation.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the XmlParserContext class with the specified <see cref="T:System.Xml.XmlNameTable" />, <see cref="T:System.Xml.XmlNamespaceManager" />, base URI, xml:lang, xml:space, and document type values.</para>
+        </summary>
+        <param name="nt">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlNameTable" /> to use to atomize strings. If this is null, the name table used to construct the <paramref name="nsMgr" /> is used instead. For more information about atomized strings, see <see cref="T:System.Xml.XmlNameTable" />. </param>
+        <param name="nsMgr">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlNamespaceManager" /> to use for looking up namespace information, or null. </param>
+        <param name="docTypeName">
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the document type declaration. </param>
+        <param name="pubId">
+          <attribution license="cc4" from="Microsoft" modified="false" />The public identifier. </param>
+        <param name="sysId">
+          <attribution license="cc4" from="Microsoft" modified="false" />The system identifier. </param>
+        <param name="internalSubset">
+          <attribution license="cc4" from="Microsoft" modified="false" />The internal DTD subset. The DTD subset is used for entity resolution, not for document validation.</param>
+        <param name="baseURI">
+          <attribution license="cc4" from="Microsoft" modified="false" />The base URI for the XML fragment (the location from which the fragment was loaded). </param>
+        <param name="xmlLang">
+          <attribution license="cc4" from="Microsoft" modified="false" />The xml:lang scope. </param>
+        <param name="xmlSpace">
+          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Xml.XmlSpace" /> value indicating the xml:space scope. </param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor(class System.Xml.XmlNameTable nt, class System.Xml.XmlNamespaceManager nsMgr, string docTypeName, string pubId, string sysId, string internalSubset, string baseURI, string xmlLang, valuetype System.Xml.XmlSpace xmlSpace, class System.Text.Encoding enc)" />
+      <MemberSignature Language="C#" Value="public XmlParserContext (System.Xml.XmlNameTable nt, System.Xml.XmlNamespaceManager nsMgr, string docTypeName, string pubId, string sysId, string internalSubset, string baseURI, string xmlLang, System.Xml.XmlSpace xmlSpace, System.Text.Encoding enc);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.XmlNameTable nt, class System.Xml.XmlNamespaceManager nsMgr, string docTypeName, string pubId, string sysId, string internalSubset, string baseURI, string xmlLang, valuetype System.Xml.XmlSpace xmlSpace, class System.Text.Encoding enc) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="nt" Type="System.Xml.XmlNameTable" />
+        <Parameter Name="nsMgr" Type="System.Xml.XmlNamespaceManager" />
+        <Parameter Name="docTypeName" Type="System.String" />
+        <Parameter Name="pubId" Type="System.String" />
+        <Parameter Name="sysId" Type="System.String" />
+        <Parameter Name="internalSubset" Type="System.String" />
+        <Parameter Name="baseURI" Type="System.String" />
+        <Parameter Name="xmlLang" Type="System.String" />
+        <Parameter Name="xmlSpace" Type="System.Xml.XmlSpace" />
+        <Parameter Name="enc" Type="System.Text.Encoding" />
+      </Parameters>
+      <Docs>
+        <remarks>
+          <para>The constructor sets <see cref="P:System.Xml.XmlParserContext.BaseURI" /> to <paramref name="baseURI" />, <see cref="P:System.Xml.XmlParserContext.DocTypeName" /> to <paramref name="docTypeName" />, <see cref="P:System.Xml.XmlParserContext.InternalSubset" /> to <paramref name="internalSubset" />, <see cref="P:System.Xml.XmlParserContext.PublicId" /> to <paramref name="pubId" />, <see cref="P:System.Xml.XmlParserContext.SystemId" /> to <paramref name="sysId" />, and <see cref="P:System.Xml.XmlParserContext.XmlLang" /> to <paramref name="xmlLang" />. If
+<see langword="null" /> is passed for any of these parameters, the corresponding 
+   property is set to <see cref="F:System.String.Empty" />. </para>
+          <block subset="none" type="note">
+            <para>The DocumentType (DTD) information stored in this
+      constructor is ignored when an instance of the class is passed to a
+   <see cref="T:System.Xml.XmlTextReader" />.</para>
+          </block>
+        </remarks>
+        <exception cref="T:System.Xml.XmlException">
+          <paramref name="nt" /> is not the same <see cref="T:System.Xml.XmlNameTable" /> used to construct <paramref name="nsMgr" />.</exception>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the XmlParserContext class with the specified <see cref="T:System.Xml.XmlNameTable" />, <see cref="T:System.Xml.XmlNamespaceManager" />, base URI, xml:lang, xml:space, encoding, and document type values.</para>
+        </summary>
+        <param name="nt">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlNameTable" /> to use to atomize strings. If this is null, the name table used to construct the <paramref name="nsMgr" /> is used instead. For more information about atomized strings, see <see cref="T:System.Xml.XmlNameTable" />. </param>
+        <param name="nsMgr">
+          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlNamespaceManager" /> to use for looking up namespace information, or null. </param>
+        <param name="docTypeName">
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the document type declaration. </param>
+        <param name="pubId">
+          <attribution license="cc4" from="Microsoft" modified="false" />The public identifier. </param>
+        <param name="sysId">
+          <attribution license="cc4" from="Microsoft" modified="false" />The system identifier. </param>
+        <param name="internalSubset">
+          <attribution license="cc4" from="Microsoft" modified="false" />The internal DTD subset. The DTD is used for entity resolution, not for document validation.</param>
+        <param name="baseURI">
+          <attribution license="cc4" from="Microsoft" modified="false" />The base URI for the XML fragment (the location from which the fragment was loaded). </param>
+        <param name="xmlLang">
+          <attribution license="cc4" from="Microsoft" modified="false" />The xml:lang scope. </param>
+        <param name="xmlSpace">
+          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Xml.XmlSpace" /> value indicating the xml:space scope. </param>
+        <param name="enc">
+          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Text.Encoding" /> object indicating the encoding setting. </param>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="BaseURI">
+      <MemberSignature Language="ILASM" Value=".property string BaseURI { public hidebysig specialname instance string get_BaseURI() public hidebysig specialname instance void set_BaseURI(string value) }" />
+      <MemberSignature Language="C#" Value="public string BaseURI { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string BaseURI" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <value>
+          <para>A <see cref="T:System.String" qualify="true" /> specifying the base URI to use for resolving the DTD file.</para>
+        </value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>A networked XML document is comprised of chunks of data aggregated using various W3C standard inclusion mechanisms and therefore may contain nodes that come from different places. BaseURI shows where these nodes originated.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets the base URI.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="DocTypeName">
+      <MemberSignature Language="ILASM" Value=".property string DocTypeName { public hidebysig specialname instance string get_DocTypeName() public hidebysig specialname instance void set_DocTypeName(string value) }" />
+      <MemberSignature Language="C#" Value="public string DocTypeName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DocTypeName" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <value>
+          <para>A <see cref="T:System.String" qualify="true" /> specifying the name of the document type.</para>
+        </value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This property, along with <see cref="P:System.Xml.XmlParserContext.PublicId" />, <see cref="P:System.Xml.XmlParserContext.SystemId" />, and <see cref="P:System.Xml.XmlParserContext.InternalSubset" />, provides all the document type declaration information. It is used to find and load the necessary DTD information so that you get all the default attributes and entities defined in the DTD.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets the name of the document type declaration.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="Encoding">
+      <MemberSignature Language="ILASM" Value=".property class System.Text.Encoding Encoding { public hidebysig specialname instance class System.Text.Encoding get_Encoding() public hidebysig specialname instance void set_Encoding(class System.Text.Encoding value) }" />
+      <MemberSignature Language="C#" Value="public System.Text.Encoding Encoding { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Text.Encoding Encoding" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Text.Encoding</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <value>
+          <para> A <see cref="T:System.Text.Encoding" qualify="true" /> indicating the encoding
+   type.</para>
+        </value>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets the encoding type.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="InternalSubset">
+      <MemberSignature Language="ILASM" Value=".property string InternalSubset { public hidebysig specialname instance string get_InternalSubset() public hidebysig specialname instance void set_InternalSubset(string value) }" />
+      <MemberSignature Language="C#" Value="public string InternalSubset { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string InternalSubset" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <value>
+          <para>A <see cref="T:System.String" qualify="true" /> 
+specifying
+the internal subset. </para>
+        </value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This property, along with <see cref="P:System.Xml.XmlParserContext.DocTypeName" />, <see cref="P:System.Xml.XmlParserContext.PublicId" />, and <see cref="P:System.Xml.XmlParserContext.SystemId" />, provides all the document type declaration information. It is used to find and load the necessary DTD information so that you get all the default attributes and entities defined in the DTD.</para>
+          <para>The DTD is used for entity resolution, not for document validation.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets the internal DTD subset.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="NamespaceManager">
+      <MemberSignature Language="ILASM" Value=".property class System.Xml.XmlNamespaceManager NamespaceManager { public hidebysig specialname instance class System.Xml.XmlNamespaceManager get_NamespaceManager() public hidebysig specialname instance void set_NamespaceManager(class System.Xml.XmlNamespaceManager value) }" />
+      <MemberSignature Language="C#" Value="public System.Xml.XmlNamespaceManager NamespaceManager { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.XmlNamespaceManager NamespaceManager" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Xml.XmlNamespaceManager</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <value>
+          <para> The <see cref="T:System.Xml.XmlNamespaceManager" /> used by the current
+   instance.</para>
+        </value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The NamespaceManager defines the current namespace scope and provides methods for looking up namespace information.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets the <see cref="T:System.Xml.XmlNamespaceManager" />.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="NameTable">
+      <MemberSignature Language="ILASM" Value=".property class System.Xml.XmlNameTable NameTable { public hidebysig specialname instance class System.Xml.XmlNameTable get_NameTable() public hidebysig specialname instance void set_NameTable(class System.Xml.XmlNameTable value) }" />
+      <MemberSignature Language="C#" Value="public System.Xml.XmlNameTable NameTable { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.XmlNameTable NameTable" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Xml.XmlNameTable</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <value>
+          <para> The <see cref="T:System.Xml.XmlNameTable" /> used by the current instance.</para>
+        </value>
+        <remarks>To be added.</remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets the <see cref="T:System.Xml.XmlNameTable" /> used to atomize strings. For more information on atomized strings, see <see cref="T:System.Xml.XmlNameTable" />.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="PublicId">
+      <MemberSignature Language="ILASM" Value=".property string PublicId { public hidebysig specialname instance string get_PublicId() public hidebysig specialname instance void set_PublicId(string value) }" />
+      <MemberSignature Language="C#" Value="public string PublicId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string PublicId" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <value>
+          <para>A <see cref="T:System.String" qualify="true" /> 
+specifying the public identifier.</para>
+        </value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This property, along with <see cref="P:System.Xml.XmlParserContext.DocTypeName" />, <see cref="P:System.Xml.XmlParserContext.SystemId" />, and <see cref="P:System.Xml.XmlParserContext.InternalSubset" />, provides all the document type declaration information. It is used to find and load the required DTD information so that you get all the default attributes and entities defined in the DTD.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets the public identifier.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="SystemId">
+      <MemberSignature Language="ILASM" Value=".property string SystemId { public hidebysig specialname instance string get_SystemId() public hidebysig specialname instance void set_SystemId(string value) }" />
+      <MemberSignature Language="C#" Value="public string SystemId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SystemId" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <value>
+          <para>A <see cref="T:System.String" qualify="true" /> 
+specifying the system identifier.</para>
+        </value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This property, along with <see cref="P:System.Xml.XmlParserContext.DocTypeName" />, <see cref="P:System.Xml.XmlParserContext.PublicId" />, and <see cref="P:System.Xml.XmlParserContext.InternalSubset" />, provides all the document type declaration information. It is used to find and load the necessary DTD information so that you get all the default attributes and entities defined in the DTD.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets the system identifier.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="XmlLang">
+      <MemberSignature Language="ILASM" Value=".property string XmlLang { public hidebysig specialname instance string get_XmlLang() public hidebysig specialname instance void set_XmlLang(string value) }" />
+      <MemberSignature Language="C#" Value="public string XmlLang { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string XmlLang" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <value>
+          <para>A <see cref="T:System.String" qualify="true" /> specifying the 
+   current <c>xml:lang</c>
+scope. If there is no <c>xml:lang</c> in scope, <see cref="F:System.String.Empty" /> is returned.</para>
+        </value>
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>For details on valid xml:lang values, refer to section 2.12 of the W3C Extensible Markup Language (XML) 1.0 recommendation.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets the current xml:lang scope.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+    <Member MemberName="XmlSpace">
+      <MemberSignature Language="ILASM" Value=".property valuetype System.Xml.XmlSpace XmlSpace { public hidebysig specialname instance valuetype System.Xml.XmlSpace get_XmlSpace() public hidebysig specialname instance void set_XmlSpace(valuetype System.Xml.XmlSpace value) }" />
+      <MemberSignature Language="C#" Value="public System.Xml.XmlSpace XmlSpace { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Xml.XmlSpace XmlSpace" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.5000.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Xml.XmlSpace</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <value>
+          <para>One of the members of the <see cref="T:System.Xml.XmlSpace" /> enumeration
+   indicating the <c>xml:space</c> scope.</para>
+        </value>
+        <remarks>
+          <block subset="none" type="note">
+            <para>The white space attribute, <c>xml:space</c>, specifies how white space is handled in
+      the current element.</para>
+          </block>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Gets or sets the current xml:space scope.</para>
+        </summary>
+      </Docs>
+      <Excluded>0</Excluded>
+    </Member>
+  </Members>
+  <TypeExcluded>0</TypeExcluded>
+</Type>

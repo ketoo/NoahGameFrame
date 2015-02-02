@@ -10,7 +10,7 @@
 #define _NFI_COMPONENT_H_
 
 #include "NFIdentID.h"
-#include "NFComm\NFPluginModule\NFILogicModule.h"
+#include "NFComm/NFPluginModule/NFILogicModule.h"
 
 class NFIComponent : public NFILogicModule
 {

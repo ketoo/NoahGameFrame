@@ -18,8 +18,10 @@ class NFIActorDataModule
 {
 
 public:
+	
+#ifdef NF_USE_ACTOR
     virtual void Handler(const NFIActorMessage& message, const Theron::Address from) = 0;
-
+#endif
 
 };
 

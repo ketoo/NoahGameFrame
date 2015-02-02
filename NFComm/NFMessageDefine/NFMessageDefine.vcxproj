@@ -95,6 +95,7 @@
     <ClInclude Include="NFMsgDefine.h" />
     <ClInclude Include="NFMsgPreGame.pb.h" />
     <ClInclude Include="NFMsgShare.pb.h" />
+    <ClInclude Include="NFSLGDefine.pb.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFDefine.pb.cc" />
@@ -103,13 +104,7 @@
     <ClCompile Include="NFMsgDefine.cpp" />
     <ClCompile Include="NFMsgPreGame.pb.cc" />
     <ClCompile Include="NFMsgShare.pb.cc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="NFDefine.proto" />
-    <None Include="NFMsgBase.proto" />
-    <None Include="NFMsgBaseEx.proto" />
-    <None Include="NFMsgPreGame.proto" />
-    <None Include="NFMsgShare.proto" />
+    <ClCompile Include="NFSLGDefine.pb.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

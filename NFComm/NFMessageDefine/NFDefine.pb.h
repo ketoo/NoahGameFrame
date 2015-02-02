@@ -78,11 +78,12 @@ enum EGameEventCode {
   EGEC_GANGS_TITLE_OUTOF = 140,
   EGEC_ENTER_GATEWAY_FAILD = 141,
   EGEC_NO_SERVER4ZONE = 142,
-  EGEC_INVALID_SKILL = 143
+  EGEC_INVALID_SKILL = 143,
+  EGEC_ENTER_GAME_SUCCESS = 144
 };
 bool EGameEventCode_IsValid(int value);
 const EGameEventCode EGameEventCode_MIN = EGEC_UNKOWN_ERROR;
-const EGameEventCode EGameEventCode_MAX = EGEC_INVALID_SKILL;
+const EGameEventCode EGameEventCode_MAX = EGEC_ENTER_GAME_SUCCESS;
 const int EGameEventCode_ARRAYSIZE = EGameEventCode_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EGameEventCode_descriptor();
@@ -177,11 +178,17 @@ enum EGameMsgID {
   EGMI_REQ_PRODUCE_ITEM = 254,
   EGMI_REQ_PICK_ITEM = 255,
   EGMI_REQ_ACCEPT_TASK = 256,
-  EGMI_REQ_COMPELETE_TASK = 257
+  EGMI_REQ_COMPELETE_TASK = 257,
+  EGMI_REQ_BUY_FORM_SHOP = 10000,
+  EGMI_ACK_BUY_FORM_SHOP = 10001,
+  EGMI_REQ_MOVE_BUILD_OBJECT = 10002,
+  EGMI_ACK_MOVE_BUILD_OBJECT = 10003,
+  EGMI_REQ_UP_BUILD_LVL = 10101,
+  EGMI_REQ_CREATE_ITEM = 10102
 };
 bool EGameMsgID_IsValid(int value);
 const EGameMsgID EGameMsgID_MIN = EGMI_UNKNOW;
-const EGameMsgID EGameMsgID_MAX = EGMI_REQ_COMPELETE_TASK;
+const EGameMsgID EGameMsgID_MAX = EGMI_REQ_CREATE_ITEM;
 const int EGameMsgID_ARRAYSIZE = EGameMsgID_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EGameMsgID_descriptor();

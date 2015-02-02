@@ -7,50 +7,51 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="NFKernelPlugin" prefix_auto="1" extension_auto="1" />
+				<Option output="../../../trunk/Dependencies/lib/Debug/NFKernelPlugin" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../../trunk/Dependencies/lib/Debug" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-fpic" />
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_USRDLL" />
-					<Add option="-DTHERON_CPP11" />
-					<Add directory="$(NF_HOME)" />
-					<Add directory="$(NF_DEP)" />
-					<Add directory="$(BOOST_HOME)" />
-					<Add directory="$(GLOG_HOME)" />
-					<Add directory="$(THERON_HOME)" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
+					<Add directory="../../../trunk/Dependencies/glog-0.3.3/src/" />
+					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
-					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
-					<Add directory="$(BOOST_LIB)" />
+					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
+					<Add directory="../../../trunk/lib/$(Configuration)/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
 			</Target>
 			<Target title="Release x64">
-				<Option output="NFKernelPlugin" prefix_auto="1" extension_auto="1" />
+				<Option output="../../../trunk/Dependencies/lib/Release/NFKernelPlugin" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../../trunk/Dependencies/lib/Release" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-fpic" />
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_USRDLL" />
-					<Add option="-DTHERON_CPP11" />
-					<Add directory="$(NF_HOME)" />
-					<Add directory="$(BOOST_HOME)" />
-					<Add directory="$(NF_DEP)" />
-					<Add directory="$(GLOG_HOME)" />
-					<Add directory="$(THERON_HOME)" />
-					<Add directory="$(THERON_HOME)/External/" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
+					<Add directory="../../../trunk/Dependencies/glog-0.3.3/src/" />
+					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
-					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
-					<Add directory="$(BOOST_LIB)" />
+					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
+					<Add directory="../../../trunk/lib/$(Configuration)/" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
 			</Target>
 		</Build>
@@ -64,16 +65,15 @@
 		<Unit filename="NFKernelModule/NFCConcurrentModule.h" />
 		<Unit filename="NFKernelModule/NFCKernelModule.cpp" />
 		<Unit filename="NFKernelModule/NFCKernelModule.h" />
-		<Unit filename="NFKernelModule/NFCLogModule.cpp" />
-		<Unit filename="NFKernelModule/NFCLogModule.h" />
 		<Unit filename="NFKernelModule/NFCUUIDModule.cpp" />
 		<Unit filename="NFKernelModule/NFCUUIDModule.h" />
 		<Unit filename="NFKernelPlugin.cpp" />
 		<Unit filename="NFKernelPlugin.h" />
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
-			<code_completion />
 			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
 			<debugger />
 		</Extensions>
 	</Project>

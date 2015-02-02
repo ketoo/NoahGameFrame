@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is config xml-->
+<XML>
+    <Object CpuCount="1" ID="MasterServer_1" IP="127.0.0.1" MaxOnline="5000" Name="MasterServer_1" Port="12001" ServerID="000106001"/>
+</XML>

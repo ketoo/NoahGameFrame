@@ -18,30 +18,30 @@ class NFCPropertyManager : public NFIPropertyManager
 {
 public:
     NFCPropertyManager(const NFIDENTID& self)
-	{
-		mSelf = self;
-	};
+    {
+        mSelf = self;
+    };
 
     virtual ~NFCPropertyManager();
 
     virtual bool RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIDataList& argVar);
 
-    virtual NFIProperty* AddProperty(const NFIDENTID& self, NFIProperty* pProperty);
+    virtual NF_SHARE_PTR<NFIProperty> AddProperty(const NFIDENTID& self, NF_SHARE_PTR<NFIProperty> pProperty);
 
-    virtual NFIProperty* AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction);
+    virtual NF_SHARE_PTR<NFIProperty> AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex, const std::string& strScriptFunction);
 
     virtual bool SetProperty(const std::string& strPropertyName, const NFIDataList::TData& TData);
 
-    virtual bool SetProperty(const NFIProperty* pProperty);
-	
-	virtual NFIDENTID Self();
+    //virtual bool SetProperty(const NFIProperty* pProperty);
+
+    virtual NFIDENTID Self();
 
     virtual const std::map<std::string, int>& GetPropertyIndex();
 
     virtual const int GetPropertyIndex(const std::string& strProperty);
 
 private:
-	NFIDENTID mSelf;
+    NFIDENTID mSelf;
     std::map<std::string, int> mxPropertyIndexMap;
 };
 

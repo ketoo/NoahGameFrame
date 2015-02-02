@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type Name="DataGridViewColumnDividerDoubleClickEventArgs" FullName="System.Windows.Forms.DataGridViewColumnDividerDoubleClickEventArgs">
+  <TypeSignature Language="C#" Value="public class DataGridViewColumnDividerDoubleClickEventArgs : System.Windows.Forms.HandledMouseEventArgs" />
+  <AssemblyInfo>
+    <AssemblyName>System.Windows.Forms</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Windows.Forms.HandledMouseEventArgs</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <since version=".NET 2.0" />
+    <remarks>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>. </para>
+    </remarks>
+    <summary>
+      <attribution license="cc4" from="Microsoft" modified="false" />
+      <para>Provides data for the <see cref="E:System.Windows.Forms.DataGridView.ColumnDividerDoubleClick" /> event of a <see cref="T:System.Windows.Forms.DataGridView" />. </para>
+    </summary>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DataGridViewColumnDividerDoubleClickEventArgs (int columnIndex, System.Windows.Forms.HandledMouseEventArgs e);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="columnIndex" Type="System.Int32" />
+        <Parameter Name="e" Type="System.Windows.Forms.HandledMouseEventArgs" />
+      </Parameters>
+      <Docs>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This constructor initializes the value of the <see cref="P:System.Windows.Forms.DataGridViewColumnDividerDoubleClickEventArgs.ColumnIndex" /> property using the <paramref name="columnIndex" /> value. The values of properties inherited from <see cref="T:System.Windows.Forms.HandledMouseEventArgs" /> are initialized to the values specified in <paramref name="e" />.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewColumnDividerDoubleClickEventArgs" /> class. </para>
+        </summary>
+        <param name="columnIndex">
+          <attribution license="cc4" from="Microsoft" modified="false" />The index of the column next to the column divider that was double-clicked. </param>
+        <param name="e">
+          <attribution license="cc4" from="Microsoft" modified="false" />A new <see cref="T:System.Windows.Forms.HandledMouseEventArgs" /> containing the inherited event data. </param>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+    <Member MemberName="ColumnIndex">
+      <MemberSignature Language="C#" Value="public int ColumnIndex { get; }" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <value>To be added.</value>
+        <since version=".NET 2.0" />
+        <remarks>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>This method indicates the column to the left of the double-clicked divider if the <see cref="T:System.Windows.Forms.DataGridView" /> has a <see cref="P:System.Windows.Forms.Control.RightToLeft" /> property value of <see cref="F:System.Windows.Forms.RightToLeft.No" />; otherwise, it indicates the column to the right of the double-clicked divider. </para>
+          <para>The index is the zero-based index of the column in the <see cref="P:System.Windows.Forms.DataGridView.Columns" /> collection.</para>
+        </remarks>
+        <summary>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+          <para>The index of the column next to the column divider that was double-clicked.</para>
+        </summary>
+      </Docs>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+    </Member>
+  </Members>
+</Type>

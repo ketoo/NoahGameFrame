@@ -3,34 +3,34 @@
 <XML>
     <Records/>
     <Propertys>
-        <Property Desc="物品类别EGameItemType" Id="ItemType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="物品子类别EGameEquipType" Id="ItemSubType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="等级限制" Id="Level" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="职业限制,用分号隔开" Id="Job" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="物品品质" Id="Quality" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="绑定属性" Id="Bound" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="装备名字字符串索引" Id="ShowName" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="装备描述字符串索引" Id="Desc" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="影响属性ViewObjectCommProperty内部填写字符串，分号隔开" Id="EffectProperty" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="影响的属性值，分号给开，数量与影响属性必一样多" Id="EffectValue" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="属性集" Id="EffectData" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="一些恢复属性数值集" Id="ActiveEffectData" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="一些恢复属性百分比集" Id="ActiveEffectDataPercent" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="ICON" Id="Icon" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="图集" Id="Atlas" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="使用后获得的物品" Id="GetItemList" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="使用后获得的BUFF" Id="GetBuffList" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="使用时触发使用的技能" Id="GetSkill" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="使用冷却CD" Id="CoolDownTime" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float"/>
-        <Property Desc="叠加数量" Id="OverlayCount" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="主模型预设路径" Id="PrefabPath" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="使用时的特效" Id="PerformanceEffect" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="物品使用时声音" Id="PerformanceSound" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="过期类型EGameItemExpiredType" Id="ExpiredType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="商店买价格" Id="BuyPrice" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="卖商店价格" Id="SalePrice" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
-        <Property Desc="物品脚本文件" Id="Script" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string"/>
-        <Property Desc="限制时间" Id="Duration" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int"/>
+        <Property Desc="物品类别EGameItemType" Id="ItemType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="物品子类别EGameEquipType" Id="ItemSubType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="等级限制" Id="Level" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="职业限制,用分号隔开" Id="Job" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="物品品质" Id="Quality" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="绑定属性" Id="Bound" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="装备名字字符串索引" Id="ShowName" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="装备描述字符串索引" Id="Desc" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="影响属性ViewObjectCommProperty内部填写字符串，分号隔开" Id="EffectProperty" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="影响的属性值，分号给开，数量与影响属性必一样多" Id="EffectValue" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="属性集" Id="EffectData" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="一些恢复属性数值集" Id="ActiveEffectData" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="一些恢复属性百分比集" Id="ActiveEffectDataPercent" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="ICON" Id="Icon" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="图集" Id="Atlas" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="使用后获得的物品" Id="GetItemList" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="使用后获得的BUFF" Id="GetBuffList" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="使用时触发使用的技能" Id="GetSkill" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="使用冷却CD" Id="CoolDownTime" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float" View="1"/>
+        <Property Desc="叠加数量" Id="OverlayCount" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="主模型预设路径" Id="PrefabPath" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="使用时的特效" Id="PerformanceEffect" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="物品使用时声音" Id="PerformanceSound" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="过期类型EGameItemExpiredType" Id="ExpiredType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="商店买价格" Id="BuyPrice" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="卖商店价格" Id="SalePrice" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="物品脚本文件" Id="Script" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="限制时间" Id="Duration" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
     </Propertys>
     <Includes/>
 </XML>

@@ -17,7 +17,7 @@ int NFCPacket::DeCode( const char* strData, const uint32_t unLen )
         return -1;
     }
 
-	
+
 	if(pHead->GetHeadLength() != pHead->DeCode(strData))
     {
         //È¡°üÍ·Ê§°Ü
@@ -44,7 +44,7 @@ int NFCPacket::EnCode( const uint16_t unMsgID, const char* strData, const uint32
     pHead->SetMsgID(unMsgID);
     pHead->SetMsgLength(unLen + pHead->GetHeadLength());
 
-    char szHead[64] = { 0 };
+    char szHead[255] = { 0 };
     pHead->EnCode(szHead);
 
     mstrPackData.clear();

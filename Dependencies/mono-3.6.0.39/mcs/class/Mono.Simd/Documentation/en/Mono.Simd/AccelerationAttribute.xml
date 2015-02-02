@@ -1,0 +1,60 @@
+<Type Name="AccelerationAttribute" FullName="Mono.Simd.AccelerationAttribute">
+  <TypeSignature Language="C#" Value="public sealed class AccelerationAttribute : Attribute" />
+  <AssemblyInfo>
+    <AssemblyName>Mono.Simd</AssemblyName>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Attribute</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.AttributeUsage(System.AttributeTargets.Constructor | System.AttributeTargets.Method | System.AttributeTargets.Property | System.AttributeTargets.All, Inherited=false)</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Documents the minimal hardware requirements for an operation to be hardware accelerated .</summary>
+    <remarks>
+
+      This attribute is used to decorate methods, constructors and
+      properties to document the minimal hardware requirements for
+      Mono to map the operation to a native hardware operation.
+
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public AccelerationAttribute (Mono.Simd.AccelMode mode);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="mode" Type="Mono.Simd.AccelMode" />
+      </Parameters>
+      <Docs>
+        <param name="mode">The mode to initialize the attribute with.</param>
+        <summary>Initializes the attribute with the specified acceleration mode.</summary>
+        <remarks>This value documents the minimal hardware requirement
+        for the feature to be hardware accelerated.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Mode">
+      <MemberSignature Language="C#" Value="public Mono.Simd.AccelMode Mode { set; get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Mono.Simd.AccelMode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>The minimum hardware required to accelerate this operation.</summary>
+        <value>The minimum hardware requirements to accelerate this operation.</value>
+        <remarks>
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

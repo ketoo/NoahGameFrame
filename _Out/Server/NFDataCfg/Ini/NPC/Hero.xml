@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is config xml-->
+<XML>
+    <Object ID="Hero_1" Name="²Ü²Ù" SkillID1="Hero1_skill1" SkillID2="Hero1_skill2" SkillID3="Hero1_skill3" SkillID4="Hero1_skill4"/>
+    <Object ID="Hero_2" Name="Öî¸ðÁÁ" SkillID1="Hero2_skill1" SkillID2="Hero2_skill2" SkillID3="Hero2_skill3" SkillID4="Hero2_skill4"/>
+    <Object ID="Hero_3" Name="ËïÈ¨" SkillID1="Hero3_skill1" SkillID2="Hero3_skill2" SkillID3="Hero3_skill3" SkillID4="Hero3_skill4"/>
+</XML>

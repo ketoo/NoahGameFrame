@@ -96,6 +96,12 @@
     <ClInclude Include="NFIDataList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NFMapEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCConsistentHash.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFCore.cpp" />
