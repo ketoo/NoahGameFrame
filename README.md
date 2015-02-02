@@ -9,3 +9,5 @@ NoahGameFrame
 <p>3: clean, uncluttered design, stable engine used in several commercial products;</p>
 <p>4: using the actor model has very high performance(by theron);</p>
 <p>5: based on the event-driven and attribute-driver can make business more clearly and easy to maintenance;</p>
+<p>6: based on the standard c + + development, cross-platform support;</p>
+<p>7: with existing c++, c# game client for rapid development;</p>
