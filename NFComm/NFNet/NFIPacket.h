@@ -17,14 +17,21 @@
 #include <assert.h>
 
 #ifdef _MSC_VER
+
 #include <WinSock2.h>
 #else
 
+#include <arpa/inet.h>
+#include <netinet/in.h>
+
 #endif
+
 #include <string>
-#include "boost\math\special_functions\hypot.hpp"
+#include "boost/math/special_functions/hypot.hpp"
 
 #pragma pack(push, 1)
+
+
 
 struct  NFIMsgHead
 {
@@ -43,6 +50,61 @@ struct  NFIMsgHead
 
     virtual uint32_t GetMsgLength() const = 0;
     virtual void SetMsgLength(uint32_t nLength) = 0;
+
+    int64_t NF_HTONLL(int64_t nData)
+    {
+#ifdef _MSC_VER
+        return htonll(nData);
+#else
+        return htobe64(nData);
+#endif
+    }
+
+    int64_t NF_NTOHLL(int64_t nData)
+    {
+#ifdef _MSC_VER
+        return ntohll(nData);
+#else
+        return be64toh(nData);
+#endif
+    }
+
+    int32_t NF_HTONL(int32_t nData)
+    {
+#ifdef _MSC_VER
+        return htonl(nData);
+#else
+        return htobe32(nData);
+#endif
+    }
+
+    int32_t NF_NTOHL(int32_t nData)
+    {
+#ifdef _MSC_VER
+        return ntohl(nData);
+#else
+        return be32toh(nData);
+#endif
+    }
+
+    int16_t NF_HTONS(int16_t nData)
+    {
+#ifdef _MSC_VER
+        return htons(nData);
+#else
+        return htobe16(nData);
+#endif
+    }
+
+    int16_t NF_NTOHS(int16_t nData)
+    {
+#ifdef _MSC_VER
+        return ntohs(nData);
+#else
+        return be16toh(nData);
+#endif
+    }
+
 };
 
 class NFCMsgHead : public NFIMsgHead
@@ -54,18 +116,17 @@ public:
         munMsgID = 0;
     }
 
-
     virtual uint32_t GetHeadLength() const { return NF_HEAD_LENGTH; }
 
     virtual int EnCode(char* strData)
     {
         uint32_t nOffset = 0;
 
-        uint16_t nMsgID = htons(munMsgID);
+        uint16_t nMsgID = NF_HTONS(munMsgID);
         memcpy(strData + nOffset, (void*)(&nMsgID), sizeof(munMsgID));
         nOffset += sizeof(munMsgID);
 
-        uint32_t nSize = htonl(munSize);
+        uint32_t nSize = NF_HTONL(munSize);
         memcpy(strData + nOffset, (void*)(&nSize), sizeof(munSize));
         nOffset += sizeof(munSize);
 
@@ -83,12 +144,12 @@ public:
 
         uint16_t nMsgID = 0;
         memcpy(&nMsgID, strData + nOffset, sizeof(munMsgID));
-        munMsgID = ntohs(nMsgID);
+        munMsgID = NF_NTOHS(nMsgID);
         nOffset += sizeof(munMsgID);
 
         uint32_t nSize = 0;
         memcpy(&nSize, strData + nOffset, sizeof(munSize));
-        munSize = ntohl(nSize);
+        munSize = NF_NTOHL(nSize);
         nOffset += sizeof(munSize);
 
         if (nOffset != GetHeadLength())
@@ -108,7 +169,6 @@ public:
 protected:
     uint32_t munSize;
     uint16_t munMsgID;
-
 };
 
 class NFIPacket

@@ -74,25 +74,24 @@ private:
     {
         ServerData()
         {
-            pData = new NFMsg::ServerInfoReport();
+            pData = NF_SHARE_PTR<NFMsg::ServerInfoReport>(NF_NEW NFMsg::ServerInfoReport());
             nFD = 0;
         }
 
         ~ServerData()
         {
             nFD = 0;
-            delete pData;
             pData = NULL;
         }
 
         int nFD;
-        NFMsg::ServerInfoReport* pData;
+        NF_SHARE_PTR<NFMsg::ServerInfoReport> pData;
     };
 
 private:
     //serverid,data
-    NFMap<int, ServerData> mWorldMap;
-    NFMap<int, ServerData> mLoginMap;
+    NFMapEx<int, ServerData> mWorldMap;
+    NFMapEx<int, ServerData> mLoginMap;
 
 	
 	NFIElementInfoModule* m_pElementInfoModule;

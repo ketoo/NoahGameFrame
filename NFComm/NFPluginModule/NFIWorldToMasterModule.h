@@ -1,25 +1,25 @@
 // -------------------------------------------------------------------------
-//    @FileName         £º    NFILoginNet_ClientModule.h
+//    @FileName         £º    NFIWorldNet_ClientModule.h
 //    @Author           £º    LvSheng.Huang
 //    @Date             £º    2012-12-15
-//    @Module           £º    NFILoginNet_ClientModule
+//    @Module           £º    NFIWorldNet_ClientModule
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_LOGINNET_CLIENTMODULE_H_
-#define _NFI_LOGINNET_CLIENTMODULE_H_
+#ifndef _NFI_WORLDNET_CLIENTMODULE_H_
+#define _NFI_WORLDNET_CLIENTMODULE_H_
 
 #include <iostream>
 #include "NFILogicModule.h"
-#include "NFComm\NFMessageDefine\NFMsgPreGame.pb.h"
+#include "NFINetModule.h"
 
-class NFILoginNet_ClientModule
+class NFIWorldToMasterModule
     : public NFINetModule
 {
 
 public:
 
-    virtual NFMap<int, NFMsg::ServerInfoReport>* GetWorldMap() = 0;
+
 };
 
 #endif

@@ -17,17 +17,17 @@
 #include "NFComm/NFCore/NFCObject.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
+#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
-#include "NFComm/NFPluginModule/NFIDataNoSqlModule.h"
 #include "NFComm/NFKernelPlugin/NFContainerModule/NFCContainerModule.h"
 
 class NFCKernelModule
     : public NFIKernelModule,
-  public NFMap<NFIDENTID, NFIObject>
+  public NFMapEx<NFIDENTID, NFIObject>
 {
 public:
     NFCKernelModule(NFIPluginManager* p);
@@ -47,13 +47,6 @@ public:
 
     virtual bool RemoveHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName);
 
-
-    virtual NFIDENTID NewIdentID();
-    virtual void SetIdentSerialID(int nSerialID);
-    
-    virtual void SetIdentID(NFINT32 nID);
-    virtual NFINT32 GetIdentID();
-
     virtual int Command(const NFIDataList& var);
 
     virtual bool IsContainer(const NFIDENTID& self);
@@ -62,9 +55,9 @@ public:
 
     virtual int Type(const NFIDENTID& self);
 
-    virtual NFIObject* GetObject(const NFIDENTID& ident);
+    virtual NF_SHARE_PTR<NFIObject> GetObject(const NFIDENTID& ident);
 
-    virtual NFIObject* CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg);
+    virtual NF_SHARE_PTR<NFIObject> CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg);
 
     virtual bool DestroyObject(const NFIDENTID& self);
 
@@ -78,42 +71,42 @@ public:
 
     virtual bool FindProperty(const NFIDENTID& self, const std::string& strPropertyName);
 
-    virtual bool SetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName, const int nValue);
+    virtual bool SetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName, const NFINT64 nValue);
     virtual bool SetPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName,  const float fValue);
     virtual bool SetPropertyDouble(const NFIDENTID& self, const std::string& strPropertyName, const double dValue);
     virtual bool SetPropertyString(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strValue);
     virtual bool SetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName, const NFIDENTID& objectValue);
 
-    virtual int GetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName);
+    virtual NFINT64 GetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName);
     virtual float GetPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName);
     virtual double GetPropertyDouble(const NFIDENTID& self, const std::string& strPropertyName);
     virtual const std::string& GetPropertyString(const NFIDENTID& self, const std::string& strPropertyName);
     virtual NFIDENTID GetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName);
 
     //////////////////////////////////////////////////////////////////////////
-    virtual NFIRecord* FindRecord(const NFIDENTID& self, const std::string& strRecordName);
+    virtual NF_SHARE_PTR<NFIRecord> FindRecord(const NFIDENTID& self, const std::string& strRecordName);
 
     virtual bool ClearRecord(const NFIDENTID& self, const std::string& strRecordName);
 
-    virtual bool SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const int nValue);
+    virtual bool SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue);
     virtual bool SetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol,  const float fValue);
     virtual bool SetRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const double dwValue);
     virtual bool SetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue);
     virtual bool SetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFIDENTID& objectValue);
-    
-    virtual bool SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const int value);
+
+    virtual bool SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFINT64 value);
     virtual bool SetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const float value);
     virtual bool SetRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const double value);
     virtual bool SetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const std::string& value);
     virtual bool SetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFIDENTID& value);
 
-    virtual int GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
+    virtual NFINT64 GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
     virtual float GetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
     virtual double GetRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
     virtual const std::string& GetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
     virtual NFIDENTID GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
 
-    virtual int GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
+    virtual NFINT64 GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
     virtual float GetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
     virtual double GetRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
     virtual const std::string& GetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
@@ -121,8 +114,8 @@ public:
 
     virtual bool SwitchScene(const NFIDENTID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIDataList& arg);
 
-    virtual bool AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic ,  bool bPrivate ,  bool bSave, int nIndex, const std::string& strScriptFunction);
-    virtual bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& varKey, const NFIDataList& varDesc, const NFIDataList& varTag, const NFIDataList& varRelatedRecord, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, int nIndex);
+    virtual bool AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex, const std::string& strScriptFunction);
+    virtual bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& varKey, const NFIDataList& varDesc, const NFIDataList& varTag, const NFIDataList& varRelatedRecord, const int nRows, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex);
     ////////////////////////////////////////////////////////////////
 
     virtual NFIDENTID CreateContainer(const int nContainerIndex, const std::string& strSceneConfigID);
@@ -171,20 +164,20 @@ public:
 
 protected:
 
-    //Ö»ÄÜÍøÂç[½Å±¾]Ä£¿é×¢²á£¬»Øµ÷ÓÃÀ´Í¬²½¶ÔÏóÀàÊÂ¼ş,ËùÓĞµÄÀà¶ÔÏó¶¼»á»Øµ÷
+    //åªèƒ½ç½‘ç»œ[è„šæœ¬]æ¨¡å—æ³¨å†Œï¼Œå›è°ƒç”¨æ¥åŒæ­¥å¯¹è±¡ç±»äº‹ä»¶,æ‰€æœ‰çš„ç±»å¯¹è±¡éƒ½ä¼šå›è°ƒ
     virtual bool ResgisterCommonClassEvent(const CLASS_EVENT_FUNCTOR_PTR& cb);
 
-    //Ö»ÄÜÍøÂç[½Å±¾]Ä£¿é×¢²á£¬»Øµ÷ÓÃÀ´Í¬²½¶ÔÏóÊôĞÔÊÂ¼ş,ËùÓĞµÄÀàÊôĞÔ¶¼»á»Øµ÷
+    //åªèƒ½ç½‘ç»œ[è„šæœ¬]æ¨¡å—æ³¨å†Œï¼Œå›è°ƒç”¨æ¥åŒæ­¥å¯¹è±¡å±æ€§äº‹ä»¶,æ‰€æœ‰çš„ç±»å±æ€§éƒ½ä¼šå›è°ƒ
     virtual bool ResgisterCommonPropertyEvent(const PROPERTY_EVENT_FUNCTOR_PTR& cb);
 
-    //Ö»ÄÜÍøÂç[½Å±¾]Ä£¿é×¢²á£¬»Øµ÷ÓÃÀ´Í¬²½¶ÔÏóÀà±íÊÂ¼ş,ËùÓĞµÄÀà±í¶¼»á»Øµ÷
+    //åªèƒ½ç½‘ç»œ[è„šæœ¬]æ¨¡å—æ³¨å†Œï¼Œå›è°ƒç”¨æ¥åŒæ­¥å¯¹è±¡ç±»è¡¨äº‹ä»¶,æ‰€æœ‰çš„ç±»è¡¨éƒ½ä¼šå›è°ƒ
     virtual bool ResgisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& cb);
-   
-//     //Ö»ÄÜÍøÂç[½Å±¾]Ä£¿é×¢²á£¬»Øµ÷ĞÄÌø,ËùÓĞµÄĞÄÌø¶¼»á»Øµ÷
-//     virtual bool ResgisterCommonHeartBeat(const HEART_BEAT_FUNCTOR_PTR& cb);
-// 
-//     //Ö»ÄÜÍøÂç[½Å±¾]Ä£¿é×¢²á£¬»Øµ÷ÊÂ¼ş,ËùÓĞµÄÊÂ¼ş¶¼»á»Øµ÷
-//     virtual bool ResgisterCommonEvent(const EVENT_PROCESS_FUNCTOR_PTR& cb);
+
+    //     //åªèƒ½ç½‘ç»œ[è„šæœ¬]æ¨¡å—æ³¨å†Œï¼Œå›è°ƒå¿ƒè·³,æ‰€æœ‰çš„å¿ƒè·³éƒ½ä¼šå›è°ƒ
+    //     virtual bool ResgisterCommonHeartBeat(const HEART_BEAT_FUNCTOR_PTR& cb);
+    //
+    //     //åªèƒ½ç½‘ç»œ[è„šæœ¬]æ¨¡å—æ³¨å†Œï¼Œå›è°ƒäº‹ä»¶,æ‰€æœ‰çš„äº‹ä»¶éƒ½ä¼šå›è°ƒ
+    //     virtual bool ResgisterCommonEvent(const EVENT_PROCESS_FUNCTOR_PTR& cb);
 
 protected:
 
@@ -204,26 +197,26 @@ protected:
     int OnPropertyCommonEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar);
     int OnRecordCommonEvent(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& arg);
 
-//     int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var);
-//     int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIDataList& var);
+    //     int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var);
+    //     int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIDataList& var);
 
 protected:
 
     std::list<NFIDENTID> mtDeleteSelfList;
 
     //////////////////////////////////////////////////////////////////////////
-    //Í¨ÓÃ¶ÔÏóÀàÊÂ¼ş»Øµ÷,ÒÔ±ãÍ¬²½
+    //é€šç”¨å¯¹è±¡ç±»äº‹ä»¶å›è°ƒ,ä»¥ä¾¿åŒæ­¥
     std::list<CLASS_EVENT_FUNCTOR_PTR> mtCommonClassCallBackList;
-    //Í¨ÓÃÊôĞÔ±ä¶¯»Øµ÷,ÒÔ±ãÍ¬²½
+    //é€šç”¨å±æ€§å˜åŠ¨å›è°ƒ,ä»¥ä¾¿åŒæ­¥
     std::list<PROPERTY_EVENT_FUNCTOR_PTR> mtCommonPropertyCallBackList;
-    //Í¨ÓÃ±í±ä¶¯»Øµ÷,ÒÔ±ãÍ¬²½
+    //é€šç”¨è¡¨å˜åŠ¨å›è°ƒ,ä»¥ä¾¿åŒæ­¥
     std::list<RECORD_EVENT_FUNCTOR_PTR> mtCommonRecordCallBackList;
-//     //Í¨ÓÃĞÄÌø»Øµ÷
-//     std::list<HEART_BEAT_FUNCTOR_PTR> mtCommonHeartBeatCallBackList;
-//     //Í¨ÓÃÊÂ¼ş»Øµ÷
-//     std::list<EVENT_PROCESS_FUNCTOR_PTR> mtCommonEventCallBackList;
+    //     //é€šç”¨å¿ƒè·³å›è°ƒ
+    //     std::list<HEART_BEAT_FUNCTOR_PTR> mtCommonHeartBeatCallBackList;
+    //     //é€šç”¨äº‹ä»¶å›è°ƒ
+    //     std::list<EVENT_PROCESS_FUNCTOR_PTR> mtCommonEventCallBackList;
 private:
-	//ÊôĞÔµÄKEY£¬±ÈÈçHP=1£¬»áÒÔÕâ¸ö½¨Á¢KEY£¬ÄÇÃ´¿ÉÒÔ¿ìËÙ²éÑ¯ËùÓĞHP=1µÄ¶ÔÏó¶ø²»ÓÃ±éÀú
+    //å±æ€§çš„KEYï¼Œæ¯”å¦‚HP=1ï¼Œä¼šä»¥è¿™ä¸ªå»ºç«‹KEYï¼Œé‚£ä¹ˆå¯ä»¥å¿«é€ŸæŸ¥è¯¢æ‰€æœ‰HP=1çš„å¯¹è±¡è€Œä¸ç”¨éå†
     //     std::map<std::string,std::map<TData, NFList<NFIDENTID>>>
     //     std::map<"Scene", std::map<10, NFList<NFIDENTID>>>
 
@@ -231,17 +224,16 @@ private:
     std::vector<float> mvRandom;
     int mnRandomPos;
 
-    NFUINT32 mnIdentID;
-    NFIDENTID mnIdentIndex;
     NFIDENTID mnCurExeObject;
     float fLastTotal;
 
-    NFIContainerModule* m_pContainerModule;
-
+    NF_SHARE_PTR<NFIContainerModule> m_pContainerModule;
+    
     NFILogModule* m_pLogModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIElementInfoModule* m_pElementInfoModule;
-    NFIEventProcessModule* m_pEventProcessModule;
+	NFIEventProcessModule* m_pEventProcessModule;
+	NFIUUIDModule* m_pUUIDModule;
 };
 
 #endif

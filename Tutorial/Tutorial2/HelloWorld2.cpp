@@ -1,5 +1,5 @@
 #include "HelloWorld2.h"
-#include "NFComm\NFCore\NFCObject.h"
+#include "NFComm/NFCore/NFCObject.h"
 
 bool HelloWorld2::Init()
 {
@@ -20,14 +20,16 @@ int HelloWorld2::OnPropertyCallBackEvent( const NFIDENTID& self, const std::stri
 
 bool HelloWorld2::AfterInit()
 {
+#ifdef NF_USE_ACTOR
     if(pPluginManager->GetActorID() == NFIActorManager::EACTOR_MAIN)
+#endif
     {
         //³õÊ¼»¯Íê±Ï
         std::cout << "Hello, world2, AfterInit" << std::endl;
 
-        NFIObject* pObject = new NFCObject(1, pPluginManager);
-        pObject->GetPropertyManager()->AddProperty(pObject->Self(), "Hello", TDATA_STRING, true, true, true, 0, "");
-        pObject->GetPropertyManager()->AddProperty(pObject->Self(), "World", TDATA_INT, true, true, true, 0, "");
+        NFIObject* pObject = new NFCObject(NFIDENTID(0, 1), pPluginManager);
+        pObject->GetPropertyManager()->AddProperty(pObject->Self(), "Hello", TDATA_STRING, true, true, true, true, 0, "");
+        pObject->GetPropertyManager()->AddProperty(pObject->Self(), "World", TDATA_INT, true, true, true, true, 0, "");
 
         pObject->SetPropertyInt("World", 1111);
 
@@ -42,7 +44,6 @@ bool HelloWorld2::AfterInit()
         const int nProperty2 = pObject->GetPropertyInt("World");
         std::cout << "Property World:" << nProperty2 << std::endl;
     }
-    
 
     return true;
 }

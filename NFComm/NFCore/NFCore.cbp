@@ -15,8 +15,8 @@
 				<Compiler>
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
-					<Add directory="$(NF_HOME)" />
-					<Add directory="$(BOOST_HOME)" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(BOOST_LIB)" />
@@ -31,8 +31,8 @@
 				<Compiler>
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
-					<Add directory="$(NF_HOME)" />
-					<Add directory="$(BOOST_HOME)" />
+					<Add directory="../../../trunk" />
+					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
 				</Compiler>
 			</Target>
 		</Build>
@@ -40,8 +40,12 @@
 		<Unit filename="NFCComponent.h" />
 		<Unit filename="NFCComponentManager.cpp" />
 		<Unit filename="NFCComponentManager.h" />
+		<Unit filename="NFCDataList.cpp" />
+		<Unit filename="NFCDataList.h" />
 		<Unit filename="NFCHeartBeatManager.cpp" />
 		<Unit filename="NFCHeartBeatManager.h" />
+		<Unit filename="NFCMemory .h" />
+		<Unit filename="NFCMemory.cpp" />
 		<Unit filename="NFCObject.cpp" />
 		<Unit filename="NFCObject.h" />
 		<Unit filename="NFCProperty.cpp" />
@@ -52,20 +56,19 @@
 		<Unit filename="NFCRecord.h" />
 		<Unit filename="NFCRecordManager.cpp" />
 		<Unit filename="NFCRecordManager.h" />
-		<Unit filename="NFCValueList.cpp" />
-		<Unit filename="NFCValueList.h" />
 		<Unit filename="NFCore.cpp" />
 		<Unit filename="NFCore.h" />
 		<Unit filename="NFDefine.h" />
 		<Unit filename="NFIComponent.h" />
 		<Unit filename="NFIComponentManager.h" />
+		<Unit filename="NFIDataList.h" />
 		<Unit filename="NFIHeartBeatManager.h" />
+		<Unit filename="NFIMemory.h" />
 		<Unit filename="NFIObject.h" />
 		<Unit filename="NFIProperty.h" />
 		<Unit filename="NFIPropertyManager.h" />
 		<Unit filename="NFIRecord.h" />
 		<Unit filename="NFIRecordManager.h" />
-		<Unit filename="NFIValueList.h" />
 		<Unit filename="NFIdentID.h" />
 		<Unit filename="NFList.h" />
 		<Unit filename="NFMap.h" />
@@ -75,8 +78,9 @@
 		<Unit filename="NFTimer.cpp" />
 		<Unit filename="NFTimer.h" />
 		<Extensions>
-			<code_completion />
 			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
 			<debugger />
 		</Extensions>
 	</Project>

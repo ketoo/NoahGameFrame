@@ -7,83 +7,97 @@
 // -------------------------------------------------------------------------
 
 //#include "stdafx.h"
-#include "NFCGameServerNet_ClientModule.h"
+#include "NFCGameServerToWorldModule.h"
 #include "NFGameServerNet_ClientPlugin.h"
+#include "NFComm/NFMessageDefine/NFMsgDefine.h"
 
-bool NFCGameServerNet_ClientModule::Init()
+bool NFCGameServerToWorldModule::Init()
+{
+    return true;
+}
+
+bool NFCGameServerToWorldModule::Shut()
 {
 
     return true;
 }
 
-bool NFCGameServerNet_ClientModule::Shut()
-{
 
-    return true;
+bool NFCGameServerToWorldModule::Execute(const float fLasFrametime, const float fStartedTime)
+{
+	return NFINetModule::Execute(fLasFrametime, fStartedTime);
 }
 
-
-bool NFCGameServerNet_ClientModule::Execute(const float fLasFrametime, const float fStartedTime)
-{
-    return m_pNet->Execute(fLasFrametime, fStartedTime);
-}
-
-void NFCGameServerNet_ClientModule::Register()
+void NFCGameServerToWorldModule::Register()
 {
     //成功就注册
+	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("GameServer");
+	if (xLogicClass.get())
+	{
+		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
+		std::string strConfigName; 
+		if (xNameList.Get(0, strConfigName))
+		{
+			const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+			const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
+			const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
+			const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
+			const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
+			const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
 
-	const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
-	const std::string& strServerIP = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "ServerIP");
-	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
-	const int nServerPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerPort");
-	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
-	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
-	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
+			NFMsg::ServerInfoReportList xMsg;
+			NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
 
-    NFMsg::ServerInfoReportList xMsg;
-    NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
+			pData->set_server_id(nServerID);
+			pData->set_server_name(strName);
+			pData->set_server_cur_count(0);
+			pData->set_server_ip(strIP);
+			pData->set_server_port(nPort);
+			pData->set_server_max_online(nMaxConnect);
+			pData->set_server_state(NFMsg::EST_NARMAL);
 
-    pData->set_server_id(nServerID);
-    pData->set_server_name(strName);
-    pData->set_server_cur_count(0);
-    pData->set_server_ip(strServerIP);
-    pData->set_server_port(nPort);
-    pData->set_server_max_online(50000);
-    pData->set_server_state(NFMsg::EST_NARMAL);
+			SendMsgPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_REGISTERED, xMsg, GetNet()->FD());
 
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_REGISTERED, xMsg, mnSocketFD);
-
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "Register");
+			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
+		}
+	}
 }
 
-void NFCGameServerNet_ClientModule::UnRegister()
+void NFCGameServerToWorldModule::UnRegister()
 {
-	const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
-	const std::string& strSelfIP = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "IP");
-	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
-	const int nServerPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerPort");
-	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
-	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
-	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
+	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("GameServer");
+	if (xLogicClass.get())
+	{
+		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
+		std::string strConfigName; 
+		if (xNameList.Get(0, strConfigName))
+		{
+			const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+			const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
+			const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
+			const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
+			const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
+			const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
 
-    NFMsg::ServerInfoReportList xMsg;
-    NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
+			NFMsg::ServerInfoReportList xMsg;
+			NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
 
-    pData->set_server_id(nServerID);
-    pData->set_server_name(strName);
-    pData->set_server_cur_count(0);
-    pData->set_server_ip(strSelfIP);
-    pData->set_server_port(nPort);
-    pData->set_server_max_online(50000);
-    pData->set_server_state(NFMsg::EST_MAINTEN);
+			pData->set_server_id(nServerID);
+			pData->set_server_name(strName);
+			pData->set_server_cur_count(0);
+			pData->set_server_ip(strIP);
+			pData->set_server_port(nPort);
+			pData->set_server_max_online(nMaxConnect);
+			pData->set_server_state(NFMsg::EST_MAINTEN);
 
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_UNREGISTERED, xMsg, mnSocketFD);
+			SendMsgPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_UNREGISTERED, xMsg, GetNet()->FD());
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "UnRegister");
-
+			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "UnRegister");
+		}
+	}
 }
 
-void NFCGameServerNet_ClientModule::RefreshWorldInfo()
+void NFCGameServerToWorldModule::RefreshWorldInfo()
 {
 //     _tagPT_KEY_BASE_MSG baseMsg;
 //     NFMsg::ServerInfoReport xMsg;
@@ -102,15 +116,14 @@ void NFCGameServerNet_ClientModule::RefreshWorldInfo()
 //     }
 }
 
-bool NFCGameServerNet_ClientModule::AfterInit()
+bool NFCGameServerToWorldModule::AfterInit()
 {
-    
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
     m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
     m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
-    
+
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pLogicClassModule);
@@ -120,32 +133,34 @@ bool NFCGameServerNet_ClientModule::AfterInit()
     //m_pEventProcessModule->AddEventCallBack(0, NFED_ON_DATABASE_SERVER_LOADROE_BEGIN, this, &NFCGameServerNet_ClientModule::OnDataLoadBeginEvent);
     //m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_WANTO_SWAP_GS, this, &NFCGameServerNet_ClientModule::OnSwapGSEvent);
 
-    m_pKernelModule->ResgisterCommonClassEvent(this, &NFCGameServerNet_ClientModule::OnClassCommonEvent);
+    m_pKernelModule->ResgisterCommonClassEvent(this, &NFCGameServerToWorldModule::OnClassCommonEvent);
     
     // 连接world server
-    mstrConfigIdent = "GameServer";
+	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("WorldServer");
+	if (xLogicClass.get())
+	{
+		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
+		std::string strConfigName; 
+		if (xNameList.Get(0, strConfigName))
+		{
+			const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+			const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
+			const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
+			const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
+			const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
+			const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
 
-	const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
-	const std::string& strServerIP = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "ServerIP");
-	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
-	const int nServerPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerPort");
-	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
-	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
-	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
+			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerToWorldModule::OnRecivePack, &NFCGameServerToWorldModule::OnSocketEvent, strIP.c_str(), nPort);
 
-    m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerNet_ClientModule::OnRecivePack, &NFCGameServerNet_ClientModule::OnSocketEvent);
-    mnSocketFD = m_pNet->Initialization(strServerIP.c_str(), nServerPort);
-    if (mnSocketFD < 0)
-    {
-        assert(0);
-    }
+		}
+	}
 
     m_pKernelModule->CreateContainer(-2, "");
 
     return true;
 }
 
-int NFCGameServerNet_ClientModule::OnLoadRoleDataBeginProcess(const NFIPacket& msg)
+int NFCGameServerToWorldModule::OnLoadRoleDataBeginProcess(const NFIPacket& msg)
 {
     //     _tagPT_KEY_BASE_MSG baseMsg;
     //     pMsgPacket->DeCode(&baseMsg);
@@ -160,12 +175,12 @@ int NFCGameServerNet_ClientModule::OnLoadRoleDataBeginProcess(const NFIPacket& m
     //     RakNet::BitStream* pBitStream = pMsgPacket->GetBitStream();
     //     loadData.DeCode(*pBitStream);
     //
-    //     m_pEventProcessModule->DoEvent(0, NFED_ON_DATABASE_SERVER_LOADROE_BEGIN, NFCDataList() << loadData._szAccountName);
+    //     m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_DATABASE_SERVER_LOADROE_BEGIN, NFCDataList() << loadData._szAccountName);
 
     return 0;
 }
 
-int NFCGameServerNet_ClientModule::OnLoadRoleDataFinalProcess(const NFIPacket& msg)
+int NFCGameServerToWorldModule::OnLoadRoleDataFinalProcess(const NFIPacket& msg)
 {
 
     //     _tagDTM_LOAD_ROLEDATA_FINAL loadFinal;
@@ -185,7 +200,7 @@ int NFCGameServerNet_ClientModule::OnLoadRoleDataFinalProcess(const NFIPacket& m
     //     valueRoleList << loadFinal._szRoleName4;
     //     valueRoleList << loadFinal.nPlayerConfidIndex4;
     //
-    //     m_pEventProcessModule->DoEvent(0, NFED_ON_DATABASE_SERVER_LOADROE_FINAL_RESULTS, valueRoleList);
+    //     m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_DATABASE_SERVER_LOADROE_FINAL_RESULTS, valueRoleList);
 
 
     //test
@@ -216,7 +231,7 @@ int NFCGameServerNet_ClientModule::OnLoadRoleDataFinalProcess(const NFIPacket& m
 }
 
 //离开世界回到客户端时，产生
-int NFCGameServerNet_ClientModule::OnDataLoadBeginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
+int NFCGameServerToWorldModule::OnDataLoadBeginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
     //1号gs发送
     //if (1 == m_pGameLogicModule->GetGameID())
@@ -266,7 +281,7 @@ int NFCGameServerNet_ClientModule::OnDataLoadBeginEvent(const NFIDENTID& object,
 //     return 0;
 // }
 
-int NFCGameServerNet_ClientModule::OnEnquireSceneInfoProcess(const NFIPacket& msg)
+int NFCGameServerToWorldModule::OnEnquireSceneInfoProcess(const NFIPacket& msg)
 {
     //  _tagWTG_ENQUIRE_SCENE_INFO enquireSceneInfo;
     //  RakNet::BitStream* pBitStream = pMsgPacket->GetBitStream();
@@ -276,7 +291,7 @@ int NFCGameServerNet_ClientModule::OnEnquireSceneInfoProcess(const NFIPacket& ms
     return 0;
 }
 
-int NFCGameServerNet_ClientModule::OnSwapGSEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
+int NFCGameServerToWorldModule::OnSwapGSEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
     //如果是单服，则不允许切换gs
     if (5 != var.GetCount())
@@ -306,7 +321,7 @@ int NFCGameServerNet_ClientModule::OnSwapGSEvent(const NFIDENTID& object, const 
     return 0;
 }
 
-int NFCGameServerNet_ClientModule::OnSwapGSProcess(const NFIPacket& msg)
+int NFCGameServerToWorldModule::OnSwapGSProcess(const NFIPacket& msg)
 {
     //查看此GSID是否正确
     //     _tagGTG_SWAP_GAMESERVER swapGameServer;
@@ -320,14 +335,14 @@ int NFCGameServerNet_ClientModule::OnSwapGSProcess(const NFIPacket& msg)
     //             //OK，可以接纳玩家
     //             NFCDataList valServerList;
     //             valServerList << swapGameServer._nGameServerID << swapGameServer._szAccount << swapGameServer._szRoleName << swapGameServer._nSceneIndex << swapGameServer._nPlayerConfigIndex;
-    //             m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_SELECTROLE_ENTER, valServerList);
+    //             m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_SELECTROLE_ENTER, valServerList);
     //         }
     //     }
 
     return 0;
 }
 
-int NFCGameServerNet_ClientModule::OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+int NFCGameServerToWorldModule::OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
 {
 //     if (strClassName == "Player")
 //     {
@@ -356,44 +371,33 @@ int NFCGameServerNet_ClientModule::OnClassCommonEvent(const NFIDENTID& self, con
     return 0;
 }
 
-int NFCGameServerNet_ClientModule::OnRecivePack( const NFIPacket& msg )
+int NFCGameServerToWorldModule::OnRecivePack( const NFIPacket& msg )
 {
-
-
     return 0;
-
 }
 
-int NFCGameServerNet_ClientModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
+int NFCGameServerToWorldModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
 {
-    if (eEvent & NF_NET_EVENT_EOF) 
+    if (eEvent == NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
-    } 
-    else if (eEvent & NF_NET_EVENT_ERROR) 
-    {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
-    }
-    else if (eEvent & NF_NET_EVENT_TIMEOUT)
-    {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
-    }
-    else  if (eEvent == NF_NET_EVENT_CONNECTED)
-    {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "Connected success", __FUNCTION__, __LINE__);
         OnClientConnected(nSockIndex);
     }
+    else
+    {
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed or Got an error!", __FUNCTION__, __LINE__);
+        OnClientDisconnect(nSockIndex);
+    }
 
     return 0;
-
 }
 
-void NFCGameServerNet_ClientModule::OnClientDisconnect( const int nAddress )
+void NFCGameServerToWorldModule::OnClientDisconnect( const int nAddress )
 {
-
+    UnRegister();
 }
 
-void NFCGameServerNet_ClientModule::OnClientConnected( const int nAddress )
+void NFCGameServerToWorldModule::OnClientConnected( const int nAddress )
 {
     Register();
 }

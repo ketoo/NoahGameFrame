@@ -11,7 +11,7 @@
 
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
-#include "NFComm/NFPluginModule/NFIWorldNet_ClientModule.h"
+#include "NFComm/NFPluginModule/NFIWorldToMasterModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIWorldLogicModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
@@ -20,7 +20,8 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFCore/NFMap.h"
-#include "NFComm\NFPluginModule\NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include <memory>
 
 class NFCWorldNet_ServerModule
     : public NFIWorldNet_ServerModule
@@ -72,28 +73,27 @@ protected:
 
 private:
 
-    struct ServerData 
+    struct ServerData
     {
         ServerData()
         {
-            pData = new NFMsg::ServerInfoReport();
+            pData = NF_SHARE_PTR<NFMsg::ServerInfoReport>(NF_NEW NFMsg::ServerInfoReport());
             nFD = 0;
         }
         ~ServerData()
         {
             nFD = 0;
-            delete pData;
             pData = NULL;
         }
 
         int nFD;
-        NFMsg::ServerInfoReport* pData;
+        NF_SHARE_PTR<NFMsg::ServerInfoReport> pData;
     };
 
 private:
     //serverid,data
-    NFMap<int, ServerData> mGameMap;
-    NFMap<int, ServerData> mProxyMap;
+    NFMapEx<int, ServerData> mGameMap;
+    NFMapEx<int, ServerData> mProxyMap;
 
 	NFIElementInfoModule* m_pElementInfoModule;
 	NFILogicClassModule* m_pLogicClassModule;

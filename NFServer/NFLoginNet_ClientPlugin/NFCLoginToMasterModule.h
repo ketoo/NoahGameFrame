@@ -19,15 +19,14 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFILoginNet_ClientModule.h"
+#include "NFComm/NFPluginModule/NFILoginToMasterModule.h"
 
-class NFCLoginNet_ClientModule
-    : public NFILoginNet_ClientModule
+class NFCLoginToMasterModule
+    : public NFILoginToMasterModule
 {
 public:
-    NFCLoginNet_ClientModule(NFIPluginManager* p)
+    NFCLoginToMasterModule(NFIPluginManager* p)
     {
-		mnSocketFD = 0;
         pPluginManager = p;
     }
 
@@ -42,12 +41,11 @@ public:
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
 
-    virtual NFMap<int, NFMsg::ServerInfoReport>* GetWorldMap();
+    virtual NFMapEx<int, NFMsg::ServerInfoReport>* GetWorldMap();
 
 protected:
 	int OnRecivePack(const NFIPacket& msg);
     int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
-
 
 protected:
 
@@ -66,10 +64,7 @@ protected:
     void UnRegister();
 
 private:
-	int mnSocketFD;
-
-private:
-    NFMap<int, NFMsg::ServerInfoReport> mWorldMap;
+    NFMapEx<int, NFMsg::ServerInfoReport> mWorldMap;
 
 	NFILoginLogicModule* m_pLoginLogicModule;
 	NFILoginNet_ServerModule* m_pLoginNet_ServerModule;
