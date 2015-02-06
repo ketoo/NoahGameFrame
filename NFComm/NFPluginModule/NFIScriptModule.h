@@ -140,10 +140,10 @@ public:
 
         if (!strSerializationName.empty())
         {
-            std::shared_ptr<NFIComponentManager> pComponentManager = pLogicClassModule->GetClassComponentManager(strClassName);
+            NF_SHARE_PTR<NFIComponentManager> pComponentManager = pLogicClassModule->GetClassComponentManager(strClassName);
             if (pComponentManager.get())
             {
-                std::shared_ptr<NFIComponent> pComponent = pComponentManager->First();
+                NF_SHARE_PTR<NFIComponent> pComponent = pComponentManager->First();
                 while (pComponent.get() && pComponent->Enable())
                 {
                     DoScript(self, pComponent->ComponentName(), strSerializationName, NFCScriptVarList(var));
@@ -418,7 +418,7 @@ public:
         return m_pKernelModule->QueryComponentEnable(self, strComponentName);
     }
 
-    NFIDENTID CreateContainer(const int nContainerIndex, const std::string& strSceneConfigID)
+    bool CreateContainer(const int nContainerIndex, const std::string& strSceneConfigID)
     {
         return m_pKernelModule->CreateContainer(nContainerIndex, strSceneConfigID);
     }
@@ -430,7 +430,7 @@ public:
 
     bool CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFCScriptVarList& arg)
     {
-        std::shared_ptr<NFIObject> pObject = m_pKernelModule->CreateObject(self, nContainerID, nGroupID, strClassName, strConfigIndex, arg.GetVar());
+        NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(self, nContainerID, nGroupID, strClassName, strConfigIndex, arg.GetVar());
         if (pObject.get())
         {
             return true;
@@ -537,7 +537,7 @@ public:
 
     bool AddRow(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& var)
     {
-        std::shared_ptr<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, strRecordName);
+        NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, strRecordName);
         if ( pRecord.get() )
         {
             if (pRecord->AddRow(-1, var) >= 0)
@@ -932,7 +932,7 @@ static bool KernelModule_QueryComponentEnable(const NFScriptInt64& nPtrKernelMod
     return false;
 }
 
-static NFScriptInt64 KernelModule_CreateContainer(const NFScriptInt64& nPtrKernelModule, const int nContainerIndex, const std::string& strSceneConfigID)
+static bool KernelModule_CreateContainer(const NFScriptInt64& nPtrKernelModule, const int nContainerIndex, const std::string& strSceneConfigID)
 {
     NFCScriptKernelModule* pScriptKernelModule = (NFCScriptKernelModule*)nPtrKernelModule.Int64Val();
     if (pScriptKernelModule)
@@ -940,7 +940,7 @@ static NFScriptInt64 KernelModule_CreateContainer(const NFScriptInt64& nPtrKerne
         return  pScriptKernelModule->CreateContainer(nContainerIndex, strSceneConfigID);
     }
 
-    return NFIDENTID();
+    return false;
 }
 
 static bool KernelModule_ExistContainer(const NFScriptInt64& nPtrKernelModule, const int nContainerIndex)
