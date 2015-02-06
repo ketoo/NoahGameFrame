@@ -115,15 +115,13 @@ public:
 
     virtual int Command(const NFIDataList& var) = 0;
 
-    virtual int Type(const NFIDENTID& self) = 0;
-
     virtual bool IsContainer(const NFIDENTID& self) = 0;
 
     virtual bool ExistContainer(const int nContainerIndex) = 0;
 
-    virtual std::shared_ptr<NFIObject> GetObject(const NFIDENTID& ident) = 0;
+    virtual NF_SHARE_PTR<NFIObject> GetObject(const NFIDENTID& ident) = 0;
 
-    virtual std::shared_ptr<NFIObject> CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg) = 0;
+    virtual NF_SHARE_PTR<NFIObject> CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg) = 0;
 
     virtual bool DestroyObject(const NFIDENTID& self) = 0;
 
@@ -146,7 +144,7 @@ public:
     virtual const std::string& GetPropertyString(const NFIDENTID& self, const std::string& strPropertyName) = 0;
     virtual NFIDENTID GetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName) = 0;
 
-    virtual std::shared_ptr<NFIRecord> FindRecord(const NFIDENTID& self, const std::string& strRecordName) = 0;
+    virtual NF_SHARE_PTR<NFIRecord> FindRecord(const NFIDENTID& self, const std::string& strRecordName) = 0;
 
     virtual bool ClearRecord(const NFIDENTID& self, const std::string& strRecordName) = 0;
 
@@ -180,7 +178,7 @@ public:
     virtual bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& varKey, const NFIDataList& varDesc, const NFIDataList& varTag, const NFIDataList& varRelatedRecord, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex) = 0;
     ////////////////////////////////////////////////////////////////
 
-    virtual NFIDENTID CreateContainer(const int nSceneIndex, const std::string& strSceneConfigID) = 0;
+    virtual bool CreateContainer(const int nSceneIndex, const std::string& strSceneConfigID) = 0;
 
     virtual int GetOnLineCount() = 0;
 
