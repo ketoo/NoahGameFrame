@@ -53,8 +53,6 @@ public:
 
     virtual bool ExistContainer(const int nContainerIndex);
 
-    virtual int Type(const NFIDENTID& self);
-
     virtual NF_SHARE_PTR<NFIObject> GetObject(const NFIDENTID& ident);
 
     virtual NF_SHARE_PTR<NFIObject> CreateObject(const NFIDENTID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg);
@@ -118,7 +116,7 @@ public:
     virtual bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& varKey, const NFIDataList& varDesc, const NFIDataList& varTag, const NFIDataList& varRelatedRecord, const int nRows, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex);
     ////////////////////////////////////////////////////////////////
 
-    virtual NFIDENTID CreateContainer(const int nContainerIndex, const std::string& strSceneConfigID);
+    virtual bool CreateContainer(const int nContainerIndex, const std::string& strSceneConfigID);
 
     virtual bool DestroyContainer(const int nContainerIndex);
 

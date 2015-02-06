@@ -202,19 +202,6 @@ int NFCSceneProcessModule::CreateCloneScene( const int& nContainerID, const int 
 
 bool NFCSceneProcessModule::DestroyCloneScene( const int& nContainerID, const int& nGroupID, const NFIDataList& arg )
 {
-    //ÎÞÌõ¼þÉ¾³ý    
-    NFCDataList valueAllObjectList;
-    m_pKernelModule->GetGroupObjectList( nContainerID, nGroupID, valueAllObjectList );
-    for (int i = 0; i < valueAllObjectList.GetCount(); ++i)
-    {
-        NFIDENTID ident = valueAllObjectList.Object( i );
-        std::string strObjClassName = m_pKernelModule->GetPropertyString( ident, "ClassName" );
-        if ( "Player" != strObjClassName )
-        {
-            m_pKernelModule->DestroyObject(ident);
-        }
-    }
-
     m_pKernelModule->ReleaseGroupScene(nContainerID, nGroupID);
 
     return false;

@@ -236,7 +236,7 @@ class NFIScriptKernelModule : public NFMap<NFIDENTID, NFCSriptData>
 
     virtual bool QueryComponentEnable(const NFIDENTID& self, const std::string& strComponentName) = 0;
 
-    virtual NFIDENTID CreateContainer(const int nContainerIndex, const std::string& strSceneConfigID) = 0;
+    virtual bool CreateContainer(const int nContainerIndex, const std::string& strSceneConfigID) = 0;
 
     virtual bool ExistContainer(const int nContainerIndex) = 0;
 
