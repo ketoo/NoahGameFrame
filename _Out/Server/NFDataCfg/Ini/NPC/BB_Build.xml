@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is config xml-->
+<XML>
+    <Object Desc="一级祭坛" ID="Build_Altar_1" NormalStateFunc="Func1" Prefab="COC_Resources/animation/building/altar/1.prefab" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object Desc="一级竞技场" ID="Build_Arena_1" NormalStateFunc="Func1" Prefab="COC_Resources/animation/building/arena/1.prefab" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object Desc="一级兵营" ID="Build_Camp_1" NormalStateFunc="Func1" Prefab="COC_Resources/animation/building/camp/1.prefab" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object Desc="一级金矿" ID="Build_Gold_Mine_1" NormalStateFunc="Func1" Prefab="COC_Resources/animation/building/gold_mine/1.prefab" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object Desc="一级道具屋" ID="Build_Item_Hourse_1" NormalStateFunc="Func1" Prefab="COC_Resources/animation/building/item_hourse/1.prefab" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object Desc="一级公会" ID="Build_League_1" NormalStateFunc="Func1" Prefab="COC_Resources/animation/building/league/1.prefab" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object Desc="一级魔法屋" ID="Build_Magic_Hourse_1" NormalStateFunc="Func1" Prefab="COC_Resources/animation/building/magic_hourse/1.prefab" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object Desc="一级箭塔" ID="Build_Tower_1" NormalStateFunc="Func1" Prefab="COC_Resources/animation/building/tower/1.prefab" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object Desc="一级大厅" ID="Build_Town_1" NormalStateFunc="Func1" Prefab="COC_Resources/animation/building/town/1.prefab" SubType="0" Type="0" UpStateFunc="Func1"/>
+</XML>
