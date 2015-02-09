@@ -304,11 +304,9 @@ int NFCSceneProcessModule::OnLeaveSceneEvent( const NFIDENTID& object, const int
     }
 
     NFINT32 nOldGroupID = var.Int(0);
-
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(object);
-    if (pObject.get() && nOldGroupID > 0)
+    if (nOldGroupID > 0)
     {
-        int nContainerID = pObject->GetPropertyInt("SceneID");
+        int nContainerID = m_pKernelModule->GetPropertyInt(object, "SceneID");
         if (GetCloneSceneType(nContainerID) == SCENE_TYPE_MAINLINE_CLONE)
         {
             m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, object, "DestroyCloneSceneGroup", nOldGroupID);
