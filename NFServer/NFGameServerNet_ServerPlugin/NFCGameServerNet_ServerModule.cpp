@@ -2122,34 +2122,40 @@ void NFCGameServerNet_ServerModule::OnSLGClienBuyItem(const NFIPacket& msg)
 {
     CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckBuyObjectFormShop);
 
-    NFCDataList var;
-    var << xMsg.config_id() << xMsg.x() << xMsg.y() << xMsg.z();
-    m_pSLGShopModule->OnReqBuyItem(nPlayerID, var);
+    const std::string strItemID = xMsg.config_id();
+    const float fX = xMsg.x();
+    const float fY = xMsg.y();
+    const float fZ = xMsg.z();
+    m_pSLGShopModule->ReqBuyItem(nPlayerID, strItemID, fX, fY, fZ);
 }
 
 void NFCGameServerNet_ServerModule::OnSLGClienMoveObject(const NFIPacket& msg)
 {
     CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckMoveBuildObject);
 
-    NFCDataList var;
-    var << PBToNF(xMsg.object_guid()) << xMsg.x() << xMsg.y() << xMsg.z();
-    m_pSLGBuildingModule->OnMove(nPlayerID, var);
+    const NFIDENTID xBuildID = PBToNF(xMsg.object_guid());
+    const float fX = xMsg.x();
+    const float fY = xMsg.y();
+    const float fZ = xMsg.z();
+
+    m_pSLGBuildingModule->Move(nPlayerID, xBuildID, fX, fY, fZ);
 }
 
 void NFCGameServerNet_ServerModule::OnSLGClienUpgradeBuilding(const NFIPacket& msg)
 {
     CLIENT_MSG_PROCESS(msg, NFMsg::ReqUpBuildLv);
 
-    NFCDataList var;
-    var << PBToNF(xMsg.object_guid());
-    m_pSLGBuildingModule->OnUpgrade(nPlayerID, var);
+    const NFIDENTID xBuilID = PBToNF(xMsg.object_guid());
+    m_pSLGBuildingModule->Upgrade(nPlayerID, xBuilID);
 }
 
 void NFCGameServerNet_ServerModule::OnSLGClienCreateItem(const NFIPacket& msg)
 {
     CLIENT_MSG_PROCESS(msg, NFMsg::ReqCreateItem);
 
-    NFCDataList var;
-    var << PBToNF(xMsg.object_guid()) << xMsg.config_id() << xMsg.count();
-    m_pSLGBuildingModule->OnProduce(nPlayerID, var);
+    const NFIDENTID& xBuilID = PBToNF(xMsg.object_guid());
+    const std::string& strItemID = xMsg.config_id();
+    const int nCount = xMsg.count();
+
+    m_pSLGBuildingModule->Produce(nPlayerID, xBuilID, strItemID, nCount);
 }
