@@ -3,13 +3,12 @@
 <XML>
     <Records/>
     <Propertys>
-        <Property Desc="建筑ID" Id="ID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="0"/>
         <Property Desc="建筑类型" Id="Type" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="0"/>
         <Property Desc="建筑子类型" Id="SubType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="0"/>
-        <Property Desc="预设路径" Id="Prefab" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="0"/>
-        <Property Desc="普通状态下函数" Id="NormalStateFunc" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="0"/>
-        <Property Desc="升级状态函数" Id="UpStateFunc" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="0"/>
-        <Property Desc="描述" Id="Desc" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="0"/>
+        <Property Desc="预设路径" Id="Prefab" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="0"/>
+        <Property Desc="普通状态下函数" Id="NormalStateFunc" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="0"/>
+        <Property Desc="升级状态函数" Id="UpStateFunc" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="0"/>
+        <Property Desc="描述" Id="Desc" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="0"/>
     </Propertys>
     <Includes/>
 </XML>

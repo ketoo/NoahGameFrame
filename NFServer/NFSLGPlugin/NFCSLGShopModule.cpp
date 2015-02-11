@@ -46,18 +46,8 @@ bool NFCSLGShopModule::AfterInit()
     return true;
 }
 
-bool NFCSLGShopModule::OnReqBuyItem(const NFIDENTID& self, const NFIDataList& var)
+bool NFCSLGShopModule::ReqBuyItem(const NFIDENTID& self, const std::string& strID, float fX, float fY, float fZ)
 {
-    if (var.GetCount() != 4 || !var.TypeEx(TDATA_STRING, TDATA_FLOAT, TDATA_FLOAT, TDATA_FLOAT, TDATA_UNKNOWN))
-    {
-        return false;
-    }
-
-    const std::string& strID = var.String(0);
-    float fX = var.Float(1);
-    float fY = var.Float(2);
-    float fZ = var.Float(3);
-
     if (!m_pElementInfoModule->ExistElement(strID))
     {
         return false;
