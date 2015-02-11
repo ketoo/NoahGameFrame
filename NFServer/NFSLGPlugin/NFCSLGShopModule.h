@@ -33,7 +33,7 @@ public:
     virtual bool Execute( const float fLasFrametime, const float fStartedTime );
     virtual bool AfterInit();
 
-	virtual bool OnReqBuyItem(const NFIDENTID& self, const NFIDataList& var);
+	virtual bool ReqBuyItem(const NFIDENTID& self, const std::string& strID, float fX, float fY, float fZ);
 
 private:
     NFIElementInfoModule* m_pElementInfoModule;
