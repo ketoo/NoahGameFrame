@@ -2,114 +2,24 @@
 <XML>
 	<NORMALATTACK1>
 		<SuwayyahEvents>
-			<!--Suwayyah--近身刃-刀斧，拳术等
-			EventTime="事件的触发时间" 
-			EventType="单点，左开始范围，右开始范围，分布范围"
-			DamageRang="击打半径大小"
-			ParticlePrefabPath="特效预设"
-			BackHeroDis="子弹碰到目标后击退距离"
-			BackNpcDis="子弹碰到目标后击退距离"
-			BeAttackParticle="子弹碰到目标后被击打特效"
-			
-			MethodCall="要调用的函数名"
-			MethodParam="要调用的函数参数，如果有多个，则用逗号区分"
-			TargetMethodCall="碰到目标后要调用的函数名"
-			TtrgetMethodParam="碰到目标后要调用的函数参数，如果有多个，则用逗号区分"
-			-->
-			
-			<Suwayyah EventTime="" EventType="0"  />
-		<SuwayyahEvents/>
+			<Suwayyah EventTime="0.0"  EventType="0" EndTime="0.0" DamageRang="0.0" BackHeroDis="0.0" BackNpcDis="0.0" BeAttackParticle="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+		</SuwayyahEvents>
 		<BulletEvents>
-			<!--Bullet--远程刃-子弹，范围，轨迹等
-			EventTime="事件的触发时间"
-			EventType="方式：目标还是位置" 
-			Speed="子弹速度,>=1000为瞬时"
-			MaxDis="子弹最大距离"
-			BulletRang="子弹半径大小"
-			BulletBackType="子弹击退方式，后退，俩侧"
-			BackHeroDis="子弹碰到目标后击退距离"
-			BackNpcDis="子弹碰到目标后击退距离"
-			TacheDetroy="子弹碰到目标后是否销毁"
-			BeAttackParticle="子弹碰到目标后被击打特效"
-			FireTacheName="子弹初始挂载节点"
-			FireTacheOffest="子弹初始挂载节点偏移"
-			BulletPrefabPath="子弹预设"
-			MethodCall="要调用的函数名"
-			MethodParam="要调用的函数参数，如果有多个，则用逗号区分"
-			TargetMethodCall="碰到目标后要调用的函数名"
-			TtrgetMethodParam="碰到目标后要调用的函数参数，如果有多个，则用逗号区分"
-			
-			
-			<!-- TacheBomp
-			BompTime="多久后爆炸"
-			BompRang="爆炸半径"
-			BompPrefabPath="爆炸特效的预设"
-			BeAttackParticle="爆炸被击打特效"
-			BackNpcDis="爆炸击退距离"
-			BackHeroDis="子弹碰到目标后击退距离"
-			MethodCall="要调用的函数名"
-			MethodParam="要调用的函数参数，如果有多个，则用逗号区分"
-			TargetMethodCall="碰到目标后要调用的函数名"
-			TtrgetMethodParam="碰到目标后要调用的函数参数，如果有多个，则用逗号区分"
-			-->
-			<!---->
-
-			<Bullet EventTime="" EventType="" Speed="" MaxDis="" BulletRang="" BulletBackType="" BackHeroDis="" BackNpcDis="" TacheDetroy="" BeAttackParticle="" FireTacheName="" FireTacheOffest="" BulletPrefabPath="" MethodCall="" MethodParam="" TargetMethodCall="" TtrgetMethodParam="" >
-				<TacheBomp>
-					<Bomp BompTime="" BompRang="" BompPrefabPath="" BeAttackParticle="" BackNpcDis="" BackHeroDis="" MethodCall="" MethodParam="" TargetMethodCall="" TtrgetMethodParam=""/>
-				</TacheBomp>
+			<Bullet EventTime="0.0" EventType="0" Speed="0.0" MaxDis="0.0" BulletRang="0.0" BulletBackType="0" BackHeroDis="0.0" BackNpcDis="0.0" TacheDetroy="0" BeAttackParticle="" FireTacheName="" FireTacheOffest="0.0,0.0,0.0" BulletPrefabPath="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam="" >
+				<Bomp BompTime="0.0" BompRang="0.0" BompPrefabPath="" BeAttackParticle="" BackNpcDis="0.0" BackHeroDis="0.0" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
 			</Bullet>
-		<BulletEvents/>
-		<AnimatorEvents>
-			<Animator EventTime="" EventType="0"  />
-		</AnimatorEvents>
+		</BulletEvents>
 		<AnimatorMoves>
-			<!--Move
-			EventTime="事件的触发时间" 
-			EventType="public enum HitFeelMoveType { SelfForward, SelfBack, SelfLeft, SelfRight, ControllerForward, ControllBack, ControllLeft, ControllRight }" 
-			MoveDis="移动距离" MoveTime="移动消耗时间"
-			MethodCall="要调用的函数名"
-			MethodParam="要调用的函数参数，如果有多个，则用逗号区分"-->
-			<Move EventTime="" EventType="0" MoveDis="" MoveTime="" MethodCall="" MethodParam=""/>
-		
+			<Move EventTime="0.0" EventType="0" MoveDis="0.0" MoveTime="0.0" MethodCall="" MethodParam=""/>
 		</AnimatorMoves>
 		<CameraControlEvents>
-			<!--Camera
-			EventTime="事件的触发时间" 
-			EventType="public enum CameraType { Earthquake, Explosion, No, FireKick, Stomp, Yes, SprintShake, FreeMode, MainRPGMode }" 
-			AmountParam="震动参数，其实是一个vector：0.1f,0.0f,0.2f"
-			ShakeTime="震动消耗时间"
-			MethodCall="要调用的函数名"
-			MethodParam="要调用的函数参数，如果有多个，则用逗号区分"-->
-			<Camera EventTime="" EventType="0" AmountParam="" ShakeTime="" MethodCall="" MethodParam=""/>
+			<Camera EventTime="0.0" EventType="0" AmountParam="0.0,0.0,0.0" ShakeTime="0.0" MethodCall="" MethodParam=""/>
 		</CameraControlEvents>
 		<ParticleEvents>
-			<!--Particle 
-			EventTime="事件的触发时间"
-			EventType="public enum HitFeelEventType { Instantiate, VirtualStruct, FireMethod }" 
-			Rotation="public enum Rotation { NONE, MatchTarget, Random_X, Random_Y, Random_Z, Random_XY, Random_XZ, Random_YZ, Random_XYZ }"
-			ParticlePath="粒子的预设路径" 
-			TargetTacheName="粒子的挂节点名（如果没有，则为根节点）" 
-			CastToSurface="粒子释放后是否触地"
-			BindTarget="粒子释放后是否绑定在挂节点--如果绑定，则触地选项无效"
-			MethodCall="要调用的函数名"
-			MethodParam="要调用的函数参数，如果有多个，则用逗号区分"-->
-			
-			<Particle EventTime="" EventType="0" Rotation="" ParticlePath="" TargetTacheName="" CastToSurface="" BindTarget="" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0.0" Rotation="0" ParticlePath="" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" MethodCall="" MethodParam=""/>
 		</ParticleEvents>
-		<TrailEvents>
-			<!--Particle 
-			EventTime="事件的触发时间"
-			EventType="public enum HitFeelEventType { Instantiate, VirtualStruct, FireMethod }" 
-			TrailType="public enum TrailType { SmokeTrail, NormalTrail, SmokePlume, SmoothTrail}"
-			TargetTacheName="粒子的挂节点名（如果没有，则为根节点）" 
-			MethodCall="要调用的函数名"
-			MethodParam="要调用的函数参数，如果有多个，则用逗号区分"-->
-			<Trail EventTime="" EventType="0" TrailType="" TargetTacheName="" MethodCall="" MethodParam=""/>
-		</TrailEvents>
-
-		<ProcesData>
-		<ProcesData/>
-	<NORMALATTACK1/>
-	
+		<EnableEvents>
+			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</EnableEvents>
+	</NORMALATTACK1>
 </XML>
