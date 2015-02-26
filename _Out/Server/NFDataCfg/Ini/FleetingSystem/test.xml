@@ -1,0 +1,110 @@
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
+<XML>
+	<WALK>
+		<SuwayyahEvents>
+			<Suwayyah EventTime="0.0"  EventType="0" EndTime="0.0" DamageRang="0.0" BackHeroDis="0.0" BackNpcDis="0.0" BeAttackParticle="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+		</SuwayyahEvents>
+		<BulletEvents>
+			<Bullet EventTime="0.0" EventType="0" Speed="0.0" MaxDis="0.0" BulletRang="0.0" BulletBackType="0" BackHeroDis="0.0" BackNpcDis="0.0" TacheDetroy="0" BeAttackParticle="" FireTacheName="" FireTacheOffest="0.0,0.0,0.0" BulletPrefabPath="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam="" >
+				<Bomp BompTime="0.0" BompRang="0.0" BompPrefabPath="" BeAttackParticle="" BackNpcDis="0.0" BackHeroDis="0.0" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+			</Bullet>
+		</BulletEvents>
+		<AnimatorMoves>
+			<Move EventTime="0.0" EventType="0" MoveDis="0.0" MoveTime="0.0" MethodCall="" MethodParam=""/>
+		</AnimatorMoves>
+		<CameraControlEvents>
+			<Camera EventTime="0.0" EventType="0" AmountParam="0.0,0.0,0.0" ShakeTime="0.0" MethodCall="" MethodParam=""/>
+		</CameraControlEvents>
+		<ParticleEvents>
+			<Particle EventTime="0.0" Rotation="0" ParticlePath="" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" MethodCall="" MethodParam=""/>
+		</ParticleEvents>
+		<EnableEvents>
+			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</EnableEvents>
+	</WALK>
+	<NORMALATTACK1>
+		<SuwayyahEvents>
+			<Suwayyah EventTime="0.0"  EventType="0" EndTime="0.0" DamageRang="0.0" BackHeroDis="0.0" BackNpcDis="0.0" BeAttackParticle="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+		</SuwayyahEvents>
+		<BulletEvents>
+			<Bullet EventTime="0.0" EventType="0" Speed="0.0" MaxDis="0.0" BulletRang="0.0" BulletBackType="0" BackHeroDis="0.0" BackNpcDis="0.0" TacheDetroy="0" BeAttackParticle="" FireTacheName="" FireTacheOffest="0.0,0.0,0.0" BulletPrefabPath="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam="" >
+				<Bomp BompTime="0.0" BompRang="0.0" BompPrefabPath="" BeAttackParticle="" BackNpcDis="0.0" BackHeroDis="0.0" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+			</Bullet>
+		</BulletEvents>
+		<AnimatorMoves>
+			<Move EventTime="0.0" EventType="0" MoveDis="0.0" MoveTime="0.0" MethodCall="" MethodParam=""/>
+		</AnimatorMoves>
+		<CameraControlEvents>
+			<Camera EventTime="0.0" EventType="0" AmountParam="0.0,0.0,0.0" ShakeTime="0.0" MethodCall="" MethodParam=""/>
+		</CameraControlEvents>
+		<ParticleEvents>
+			<Particle EventTime="0.0" Rotation="0" ParticlePath="" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" MethodCall="" MethodParam=""/>
+		</ParticleEvents>
+		<EnableEvents>
+			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</EnableEvents>
+	</NORMALATTACK1>
+	<NORMALATTACK2>
+		<SuwayyahEvents>
+		</SuwayyahEvents>
+		<BulletEvents>
+			<Bullet EventTime="0.0" EventType="0" Speed="0.0" MaxDis="0.0" BulletRang="0.0" BulletBackType="0" BackHeroDis="0.0" BackNpcDis="0.0" TacheDetroy="0" BeAttackParticle="" FireTacheName="" FireTacheOffest="0.0,0.0,0.0" BulletPrefabPath="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam="" >
+				<Bomp BompTime="0.0" BompRang="0.0" BompPrefabPath="" BeAttackParticle="" BackNpcDis="0.0" BackHeroDis="0.0" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+			</Bullet>
+		</BulletEvents>
+		<AnimatorMoves>
+			<Move EventTime="0.0" EventType="0" MoveDis="0.0" MoveTime="0.0" MethodCall="" MethodParam=""/>
+		</AnimatorMoves>
+		<CameraControlEvents>
+			<Camera EventTime="0.0" EventType="0" AmountParam="0.0,0.0,0.0" ShakeTime="0.0" MethodCall="" MethodParam=""/>
+		</CameraControlEvents>
+		<ParticleEvents>
+			<Particle EventTime="0.0" Rotation="0" ParticlePath="" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" MethodCall="" MethodParam=""/>
+		</ParticleEvents>
+		<EnableEvents>
+			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</EnableEvents>
+	</NORMALATTACK2>
+	<NORMALATTACK3>
+		<SuwayyahEvents>
+		</SuwayyahEvents>
+		<BulletEvents>
+			<Bullet EventTime="0.0" EventType="0" Speed="0.0" MaxDis="0.0" BulletRang="0.0" BulletBackType="0" BackHeroDis="0.0" BackNpcDis="0.0" TacheDetroy="0" BeAttackParticle="" FireTacheName="" FireTacheOffest="0.0,0.0,0.0" BulletPrefabPath="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam="" >
+				<Bomp BompTime="0.0" BompRang="0.0" BompPrefabPath="" BeAttackParticle="" BackNpcDis="0.0" BackHeroDis="0.0" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+			</Bullet>
+		</BulletEvents>
+		<AnimatorMoves>
+			<Move EventTime="0.0" EventType="0" MoveDis="0.0" MoveTime="0.0" MethodCall="" MethodParam=""/>
+		</AnimatorMoves>
+		<CameraControlEvents>
+			<Camera EventTime="0.0" EventType="0" AmountParam="0.0,0.0,0.0" ShakeTime="0.0" MethodCall="" MethodParam=""/>
+		</CameraControlEvents>
+		<ParticleEvents>
+			<Particle EventTime="0.0" Rotation="0" ParticlePath="" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" MethodCall="" MethodParam=""/>
+		</ParticleEvents>
+		<EnableEvents>
+			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</EnableEvents>
+	</NORMALATTACK3>
+	<NORMALTHUMP>
+		<SuwayyahEvents>
+		</SuwayyahEvents>
+		<BulletEvents>
+			<Bullet EventTime="0.0" EventType="0" Speed="0.0" MaxDis="0.0" BulletRang="0.0" BulletBackType="0" BackHeroDis="0.0" BackNpcDis="0.0" TacheDetroy="0" BeAttackParticle="" FireTacheName="" FireTacheOffest="0.0,0.0,0.0" BulletPrefabPath="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam="" >
+				<Bomp BompTime="0.0" BompRang="0.0" BompPrefabPath="" BeAttackParticle="" BackNpcDis="0.0" BackHeroDis="0.0" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+			</Bullet>
+		</BulletEvents>
+		<AnimatorMoves>
+			<Move EventTime="0.0" EventType="0" MoveDis="0.0" MoveTime="0.0" MethodCall="" MethodParam=""/>
+		</AnimatorMoves>
+		<CameraControlEvents>
+			<Camera EventTime="0.0" EventType="0" AmountParam="0.0,0.0,0.0" ShakeTime="0.0" MethodCall="" MethodParam=""/>
+		</CameraControlEvents>
+		<ParticleEvents>
+			<Particle EventTime="0.0" Rotation="0" ParticlePath="" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" MethodCall="" MethodParam=""/>
+		</ParticleEvents>
+		<EnableEvents>
+			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</EnableEvents>
+	</NORMALTHUMP>
+</XML>
