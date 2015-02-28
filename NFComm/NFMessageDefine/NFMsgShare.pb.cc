@@ -55,6 +55,11 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* ReqCompeleteTask_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqCompeleteTask_reflection_ = NULL;
+const ::google::protobuf::Descriptor* ReqJoinActivity_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ReqJoinActivity_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* ReqJoinActivity_EGameActivityType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* ReqJoinActivity_EGameActivitySubType_descriptor_ = NULL;
 const ::google::protobuf::Descriptor* PlayerEntryInfo_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   PlayerEntryInfo_reflection_ = NULL;
@@ -263,7 +268,25 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqCompeleteTask));
-  PlayerEntryInfo_descriptor_ = file->message_type(11);
+  ReqJoinActivity_descriptor_ = file->message_type(11);
+  static const int ReqJoinActivity_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqJoinActivity, activity_type_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqJoinActivity, sub_activity_type_),
+  };
+  ReqJoinActivity_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ReqJoinActivity_descriptor_,
+      ReqJoinActivity::default_instance_,
+      ReqJoinActivity_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqJoinActivity, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqJoinActivity, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ReqJoinActivity));
+  ReqJoinActivity_EGameActivityType_descriptor_ = ReqJoinActivity_descriptor_->enum_type(0);
+  ReqJoinActivity_EGameActivitySubType_descriptor_ = ReqJoinActivity_descriptor_->enum_type(1);
+  PlayerEntryInfo_descriptor_ = file->message_type(12);
   static const int PlayerEntryInfo_offsets_[9] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerEntryInfo, object_guid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerEntryInfo, x_),
@@ -286,7 +309,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PlayerEntryInfo));
-  AckPlayerEntryList_descriptor_ = file->message_type(12);
+  AckPlayerEntryList_descriptor_ = file->message_type(13);
   static const int AckPlayerEntryList_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckPlayerEntryList, object_list_),
   };
@@ -301,7 +324,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckPlayerEntryList));
-  AckPlayerLeaveList_descriptor_ = file->message_type(13);
+  AckPlayerLeaveList_descriptor_ = file->message_type(14);
   static const int AckPlayerLeaveList_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckPlayerLeaveList, object_list_),
   };
@@ -351,6 +374,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqCompeleteTask_descriptor_, &ReqCompeleteTask::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ReqJoinActivity_descriptor_, &ReqJoinActivity::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     PlayerEntryInfo_descriptor_, &PlayerEntryInfo::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     AckPlayerEntryList_descriptor_, &AckPlayerEntryList::default_instance());
@@ -383,6 +408,8 @@ void protobuf_ShutdownFile_NFMsgShare_2eproto() {
   delete ReqAcceptTask_reflection_;
   delete ReqCompeleteTask::default_instance_;
   delete ReqCompeleteTask_reflection_;
+  delete ReqJoinActivity::default_instance_;
+  delete ReqJoinActivity_reflection_;
   delete PlayerEntryInfo::default_instance_;
   delete PlayerEntryInfo_reflection_;
   delete AckPlayerEntryList::default_instance_;
@@ -433,15 +460,21 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "ARENA\020\002\022\017\n\013EGST_MIRROR\020\003\"2\n\017ReqPickDropI"
     "tem\022\037\n\titem_guid\030\002 \002(\0132\014.NFMsg.Ident\" \n\r"
     "ReqAcceptTask\022\017\n\007task_id\030\001 \002(\014\"#\n\020ReqCom"
-    "peleteTask\022\017\n\007task_id\030\001 \002(\014\"\267\001\n\017PlayerEn"
-    "tryInfo\022!\n\013object_guid\030\001 \002(\0132\014.NFMsg.Ide"
-    "nt\022\t\n\001x\030\002 \002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002(\002\022\023\n\013c"
-    "areer_type\030\005 \002(\005\022\024\n\014player_state\030\006 \002(\005\022\021"
-    "\n\tconfig_id\030\007 \002(\014\022\020\n\010scene_id\030\010 \002(\005\022\020\n\010c"
-    "lass_id\030\t \002(\014\"A\n\022AckPlayerEntryList\022+\n\013o"
-    "bject_list\030\001 \003(\0132\026.NFMsg.PlayerEntryInfo"
-    "\"7\n\022AckPlayerLeaveList\022!\n\013object_list\030\001 "
-    "\003(\0132\014.NFMsg.Ident", 1617);
+    "peleteTask\022\017\n\007task_id\030\001 \002(\014\"\346\001\n\017ReqJoinA"
+    "ctivity\022\?\n\ractivity_type\030\001 \002(\0162(.NFMsg.R"
+    "eqJoinActivity.EGameActivityType\022F\n\021sub_"
+    "activity_type\030\002 \002(\0162+.NFMsg.ReqJoinActiv"
+    "ity.EGameActivitySubType\"!\n\021EGameActivit"
+    "yType\022\014\n\010EGAT_PVP\020\000\"\'\n\024EGameActivitySubT"
+    "ype\022\017\n\013EGAT_NORMAL\020\000\"\267\001\n\017PlayerEntryInfo"
+    "\022!\n\013object_guid\030\001 \002(\0132\014.NFMsg.Ident\022\t\n\001x"
+    "\030\002 \002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002(\002\022\023\n\013career_t"
+    "ype\030\005 \002(\005\022\024\n\014player_state\030\006 \002(\005\022\021\n\tconfi"
+    "g_id\030\007 \002(\014\022\020\n\010scene_id\030\010 \002(\005\022\020\n\010class_id"
+    "\030\t \002(\014\"A\n\022AckPlayerEntryList\022+\n\013object_l"
+    "ist\030\001 \003(\0132\026.NFMsg.PlayerEntryInfo\"7\n\022Ack"
+    "PlayerLeaveList\022!\n\013object_list\030\001 \003(\0132\014.N"
+    "FMsg.Ident", 1850);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -455,6 +488,7 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqPickDropItem::default_instance_ = new ReqPickDropItem();
   ReqAcceptTask::default_instance_ = new ReqAcceptTask();
   ReqCompeleteTask::default_instance_ = new ReqCompeleteTask();
+  ReqJoinActivity::default_instance_ = new ReqJoinActivity();
   PlayerEntryInfo::default_instance_ = new PlayerEntryInfo();
   AckPlayerEntryList::default_instance_ = new AckPlayerEntryList();
   AckPlayerLeaveList::default_instance_ = new AckPlayerLeaveList();
@@ -469,6 +503,7 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqPickDropItem::default_instance_->InitAsDefaultInstance();
   ReqAcceptTask::default_instance_->InitAsDefaultInstance();
   ReqCompeleteTask::default_instance_->InitAsDefaultInstance();
+  ReqJoinActivity::default_instance_->InitAsDefaultInstance();
   PlayerEntryInfo::default_instance_->InitAsDefaultInstance();
   AckPlayerEntryList::default_instance_->InitAsDefaultInstance();
   AckPlayerLeaveList::default_instance_->InitAsDefaultInstance();
@@ -3859,6 +3894,305 @@ void ReqCompeleteTask::Swap(ReqCompeleteTask* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = ReqCompeleteTask_descriptor_;
   metadata.reflection = ReqCompeleteTask_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* ReqJoinActivity_EGameActivityType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ReqJoinActivity_EGameActivityType_descriptor_;
+}
+bool ReqJoinActivity_EGameActivityType_IsValid(int value) {
+  switch(value) {
+    case 0:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const ReqJoinActivity_EGameActivityType ReqJoinActivity::EGAT_PVP;
+const ReqJoinActivity_EGameActivityType ReqJoinActivity::EGameActivityType_MIN;
+const ReqJoinActivity_EGameActivityType ReqJoinActivity::EGameActivityType_MAX;
+const int ReqJoinActivity::EGameActivityType_ARRAYSIZE;
+#endif  // _MSC_VER
+const ::google::protobuf::EnumDescriptor* ReqJoinActivity_EGameActivitySubType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ReqJoinActivity_EGameActivitySubType_descriptor_;
+}
+bool ReqJoinActivity_EGameActivitySubType_IsValid(int value) {
+  switch(value) {
+    case 0:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const ReqJoinActivity_EGameActivitySubType ReqJoinActivity::EGAT_NORMAL;
+const ReqJoinActivity_EGameActivitySubType ReqJoinActivity::EGameActivitySubType_MIN;
+const ReqJoinActivity_EGameActivitySubType ReqJoinActivity::EGameActivitySubType_MAX;
+const int ReqJoinActivity::EGameActivitySubType_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int ReqJoinActivity::kActivityTypeFieldNumber;
+const int ReqJoinActivity::kSubActivityTypeFieldNumber;
+#endif  // !_MSC_VER
+
+ReqJoinActivity::ReqJoinActivity()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void ReqJoinActivity::InitAsDefaultInstance() {
+}
+
+ReqJoinActivity::ReqJoinActivity(const ReqJoinActivity& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ReqJoinActivity::SharedCtor() {
+  _cached_size_ = 0;
+  activity_type_ = 0;
+  sub_activity_type_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ReqJoinActivity::~ReqJoinActivity() {
+  SharedDtor();
+}
+
+void ReqJoinActivity::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void ReqJoinActivity::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ReqJoinActivity::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ReqJoinActivity_descriptor_;
+}
+
+const ReqJoinActivity& ReqJoinActivity::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
+  return *default_instance_;
+}
+
+ReqJoinActivity* ReqJoinActivity::default_instance_ = NULL;
+
+ReqJoinActivity* ReqJoinActivity::New() const {
+  return new ReqJoinActivity;
+}
+
+void ReqJoinActivity::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    activity_type_ = 0;
+    sub_activity_type_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ReqJoinActivity::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .NFMsg.ReqJoinActivity.EGameActivityType activity_type = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::NFMsg::ReqJoinActivity_EGameActivityType_IsValid(value)) {
+            set_activity_type(static_cast< ::NFMsg::ReqJoinActivity_EGameActivityType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_sub_activity_type;
+        break;
+      }
+
+      // required .NFMsg.ReqJoinActivity.EGameActivitySubType sub_activity_type = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_sub_activity_type:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::NFMsg::ReqJoinActivity_EGameActivitySubType_IsValid(value)) {
+            set_sub_activity_type(static_cast< ::NFMsg::ReqJoinActivity_EGameActivitySubType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(2, value);
+          }
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void ReqJoinActivity::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .NFMsg.ReqJoinActivity.EGameActivityType activity_type = 1;
+  if (has_activity_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->activity_type(), output);
+  }
+
+  // required .NFMsg.ReqJoinActivity.EGameActivitySubType sub_activity_type = 2;
+  if (has_sub_activity_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->sub_activity_type(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* ReqJoinActivity::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required .NFMsg.ReqJoinActivity.EGameActivityType activity_type = 1;
+  if (has_activity_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->activity_type(), target);
+  }
+
+  // required .NFMsg.ReqJoinActivity.EGameActivitySubType sub_activity_type = 2;
+  if (has_sub_activity_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->sub_activity_type(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int ReqJoinActivity::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .NFMsg.ReqJoinActivity.EGameActivityType activity_type = 1;
+    if (has_activity_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->activity_type());
+    }
+
+    // required .NFMsg.ReqJoinActivity.EGameActivitySubType sub_activity_type = 2;
+    if (has_sub_activity_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->sub_activity_type());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ReqJoinActivity::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ReqJoinActivity* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ReqJoinActivity*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ReqJoinActivity::MergeFrom(const ReqJoinActivity& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_activity_type()) {
+      set_activity_type(from.activity_type());
+    }
+    if (from.has_sub_activity_type()) {
+      set_sub_activity_type(from.sub_activity_type());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ReqJoinActivity::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqJoinActivity::CopyFrom(const ReqJoinActivity& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqJoinActivity::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  return true;
+}
+
+void ReqJoinActivity::Swap(ReqJoinActivity* other) {
+  if (other != this) {
+    std::swap(activity_type_, other->activity_type_);
+    std::swap(sub_activity_type_, other->sub_activity_type_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ReqJoinActivity::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ReqJoinActivity_descriptor_;
+  metadata.reflection = ReqJoinActivity_reflection_;
   return metadata;
 }
 
