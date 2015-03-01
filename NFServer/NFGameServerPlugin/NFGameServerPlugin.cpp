@@ -15,6 +15,7 @@
 #include "NFCLevelModule.h"
 #include "NFCPropertyConfigModule.h"
 #include "NFCDataProcessModule.h"
+#include "NFCPVPModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -56,10 +57,12 @@ void NFGameServerPlugin::Install()
     REGISTER_MODULE( pPluginManager, NFCLevelModule )
     REGISTER_MODULE( pPluginManager, NFCPropertyConfigModule )
 
+    REGISTER_MODULE( pPluginManager, NFCPVPModule )
 }
 
 void NFGameServerPlugin::Uninstall()
 {
+    UNREGISTER_MODULE( pPluginManager, NFCPVPModule )
 
     UNREGISTER_MODULE( pPluginManager, NFCPropertyConfigModule )
     UNREGISTER_MODULE( pPluginManager, NFCLevelModule )

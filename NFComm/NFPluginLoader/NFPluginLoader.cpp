@@ -106,12 +106,10 @@ void PrintfLogo()
     std::cout << "¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï" << std::endl;
     std::cout << "¡ï                                            ¡ï" << std::endl;
     std::cout << "¡ï                 NoahFrame                  ¡ï" << std::endl;
-    std::cout << "¡ï     Copyright (c) 2011  kytoo              ¡ï" << std::endl;
+    std::cout << "¡ï   Copyright (c) 2011-2015  NFrame Studio   ¡ï" << std::endl;
     std::cout << "¡ï             All rights reserved.           ¡ï" << std::endl;
     std::cout << "¡ï                                            ¡ï" << std::endl;
-    std::cout << "¡ï               www.yowoyo.com               ¡ï" << std::endl;
-    std::cout << "¡ï                                            ¡ï" << std::endl;
-    std::cout << "¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï\n" << std::endl;
+    std::cout << "¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï" << std::endl;
 
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
