@@ -27,6 +27,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     m_pSLGShopModule = dynamic_cast<NFISLGShopModule*>(pPluginManager->FindModule("NFCSLGShopModule"));
     m_pSLGBuildingModule = dynamic_cast<NFISLGBuildingModule*>(pPluginManager->FindModule("NFCSLGBuildingModule"));
     m_pUUIDModule = dynamic_cast<NFIUUIDModule*>(pPluginManager->FindModule("NFCUUIDModule"));
+    m_pPVPModule = dynamic_cast<NFIPVPModule*>(pPluginManager->FindModule("NFCPVPModule"));
 
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
@@ -37,6 +38,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     assert(NULL != m_pSLGShopModule);
     assert(NULL != m_pSLGBuildingModule);
     assert(NULL != m_pUUIDModule);
+    assert(NULL != m_pPVPModule);
 
     m_pKernelModule->ResgisterCommonClassEvent( this, &NFCGameServerNet_ServerModule::OnClassCommonEvent );
     m_pKernelModule->ResgisterCommonPropertyEvent( this, &NFCGameServerNet_ServerModule::OnPropertyCommonEvent );
@@ -139,7 +141,17 @@ int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
     case NFMsg::EGameMsgID::EGMI_REQ_CHAT:
         OnClienChatProcess(msg);
         break;
-        /////////////SLG/////////////////////////////////////////////////////////////
+    case NFMsg::EGameMsgID::EGMI_REQ_JOIN_PVP:
+        OnClientJoinPVP(msg);
+        break;
+    case NFMsg::EGameMsgID::EGMI_REQ_EXIT_PVP:
+        OnClientExitPVP(msg);
+        break;
+    
+        
+        
+        
+    //SLG////////////////////////////////////////////////////////////////////////
     case NFMsg::EGameMsgID::EGMI_REQ_BUY_FORM_SHOP:
         OnSLGClienBuyItem(msg);
         break;
@@ -152,7 +164,6 @@ int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
     case NFMsg::EGameMsgID::EGMI_REQ_CREATE_ITEM:
         OnSLGClienCreateItem(msg);
         break;
-
 
     default:
         break;
@@ -1987,6 +1998,30 @@ void NFCGameServerNet_ServerModule::OnClienChatProcess( const NFIPacket& msg )
     }
 }
 
+void NFCGameServerNet_ServerModule::OnClientJoinPVP(const NFIPacket& msg)
+{
+    NFIDENTID nPlayerID;
+    NFMsg::ReqJoinActivity xMsg;
+    if (!RecivePB(msg, xMsg, nPlayerID))
+    {
+        return;
+    }
+
+    switch (xMsg.activity_type())
+    {
+    case NFMsg::ReqJoinActivity_EGameActivityType_EGAT_PVP:
+        m_pPVPModule->StartPVPWar(nPlayerID);
+        break;
+    default:
+        break;
+    }
+}
+
+void NFCGameServerNet_ServerModule::OnClientExitPVP(const NFIPacket& msg)
+{
+
+}
+
 void NFCGameServerNet_ServerModule::OnClienUseItem( const NFIPacket& msg )
 {
 
@@ -2118,6 +2153,7 @@ void NFCGameServerNet_ServerModule::OnClienGMProcess( const NFIPacket& msg )
     }
 }
 
+//SLG////////////////////////////////////////////////////////////////////////
 void NFCGameServerNet_ServerModule::OnSLGClienBuyItem(const NFIPacket& msg)
 {
     CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckBuyObjectFormShop);

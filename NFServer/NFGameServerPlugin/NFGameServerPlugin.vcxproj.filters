@@ -13,6 +13,9 @@
     <Filter Include="NFDataProcessModule">
       <UniqueIdentifier>{ab24bac9-1d0d-4fdc-b5de-72433c4b2753}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFPVPModule">
+      <UniqueIdentifier>{abbc1079-9f03-4c6c-b599-04d4c879cc18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFGameServerPlugin.h" />
@@ -32,6 +35,9 @@
       <Filter>NFDataProcessModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCGameServerModule.h" />
+    <ClInclude Include="NFCPVPModule.h">
+      <Filter>NFPVPModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -52,5 +58,8 @@
       <Filter>NFDataProcessModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCGameServerModule.cpp" />
+    <ClCompile Include="NFCPVPModule.cpp">
+      <Filter>NFPVPModule</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
