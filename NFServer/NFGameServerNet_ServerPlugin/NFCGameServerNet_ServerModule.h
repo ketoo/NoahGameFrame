@@ -28,6 +28,7 @@
 #include "NFComm/NFPluginModule/NFISLGBuildingModule.h"
 #include "NFComm/NFMessageDefine/NFSLGDefine.pb.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
+#include "NFComm/NFPluginModule/NFIPVPModule.h"
 
 ////////////////////////////////////////////////////////////////////////////
 // 客户端消息处理宏
@@ -105,6 +106,11 @@ protected:
     void OnClienPushTask(const NFIPacket& msg);
     void OnClienPushCustom(const NFIPacket& msg);
     void OnClienChatProcess(const NFIPacket& msg);
+
+    //////////////////////////////////////////////////////////////////////////
+
+    void OnClientJoinPVP(const NFIPacket& msg);
+    void OnClientExitPVP(const NFIPacket& msg);
 
 	/////////SLG_START/////////////////////////////////////////////////////////////////
 	void OnSLGClienBuyItem(const NFIPacket& msg);
@@ -205,6 +211,8 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFIElementInfoModule* m_pElementInfoModule;
+    NFIPVPModule* m_pPVPModule;
+
     //////////////////////////////////////////////////////////////////////////
     //SLG模块
 	NFISLGShopModule* m_pSLGShopModule;
