@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCPVPModule.h
+//    @FileName         :    NFCPVPModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2015-01-02
 //    @Module           :    NFCPVPModule
@@ -25,6 +25,7 @@ public:
     {
         pPluginManager = p;
     }
+
     virtual ~NFCPVPModule() {};
 
     virtual bool Init();
@@ -43,6 +44,8 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 
+private:
+    NFList<NFIDENTID> mxPVPList; // 报名的队列
 };
 
 
