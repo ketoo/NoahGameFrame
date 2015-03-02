@@ -19,7 +19,7 @@ public:
     {
         Add = 0,
         Del,
-        Changed,//swap
+        Swap,
         Create,
         UpData,
         Cleared,
@@ -32,9 +32,9 @@ public:
     virtual ~NFIRecord() {}
 
     virtual bool IsUsed(const int nRow) const  = 0;
-    virtual bool IsKey(const int nRow) const  = 0;
+    virtual bool IsKey(const int nCol) const  = 0;
     virtual bool SetUsed(const int nRow, const int bUse)  = 0;
-    virtual bool SetKey(const int nRow, const int bKey) = 0;
+    virtual bool SetKey(const int nCol, const int bKey) = 0;
 
     virtual int GetCols() const  = 0;
     virtual int GetRows() const  = 0;
