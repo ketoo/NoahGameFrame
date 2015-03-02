@@ -1,0 +1,248 @@
+import docutils ;
+import os ;
+import errors ;
+import notfile ;
+import package ;
+import path ;
+import virtual-target ;
+
+VERSION = 0.9.0 ;
+BOOST_ROOT = [ os.environ BOOST_ROOT ] ;
+
+rule debug-message ( txt * )
+{
+    if --debug-build in [ modules.peek : ARGV ]
+    {
+        echo [luabind DEBUG] $(txt) ;
+    }
+}
+
+debug-message figuring out which libraries to link to... ;
+debug-message os.name is [ os.name ] ;
+
+if [ os.name ] = NT
+{
+    if ! $(BOOST_ROOT)
+    {
+        errors.user-error "*** BOOST_ROOT must be set to a Boost installation." ;
+    }
+
+    LUA_PATH = [ os.environ LUA_PATH ] ;
+
+    if ! $(LUA_PATH)
+    {
+        errors.user-error "*** LUA_PATH must be set." ;
+    }
+
+    local includes = [ GLOB $(LUA_PATH)/include $(LUA_PATH)/src : lua.h ] ;
+
+    if ! $(includes)
+    {
+        errors.user-error "*** Unable to determine Lua include directory." ;
+    }
+
+    includes = $(includes:D) ;
+
+    debug-message found include directory in $(includes) ;
+
+    if [ GLOB $(LUA_PATH) : lib ]
+    {
+        lib lua : : <link>static <name>lua5.1 <search>$(LUA_PATH)/lib/static : : <include>$(includes) ;
+        lib lua : : <link>shared <name>lua5.1 <search>$(LUA_PATH)/lib : : <include>$(includes) ;
+    }
+    else if [ GLOB $(LUA_PATH) : lua5.1.dll ]
+    {
+        lib lua : : <name>lua5.1 <search>$(LUA_PATH) : : <include>$(includes) ;
+    }
+}
+else if [ os.name ] in LINUX MACOSX FREEBSD
+{
+    LUA_PATH = [ os.environ LUA_PATH ] ;
+    HOME = [ os.environ HOME ] ;
+
+    local possible-prefixes =
+        $(LUA_PATH) $(HOME)/Library/Frameworks /Library/Frameworks /usr /usr/local /opt/local /opt ;
+
+    local possible-suffixes =
+        include/lua5.1 include/lua51 include/lua include ;
+
+    local includes = [ GLOB $(possible-prefixes)/$(possible-suffixes) : lua.h ] ;
+
+    if ! $(includes)
+    {
+        errors.user-error "*** Unable to determine Lua include directory." ;
+    }
+
+    local includes = $(includes[1]:D) ;
+    local prefix = $(includes:D) ;
+
+    if $(prefix:B) = "include"
+    {
+        prefix = $(prefix:D) ;
+    }
+
+    local lib = $(prefix)/lib ;
+
+    local names = liblua5.1 liblua51 liblua ;
+    local extensions = .a .so ;
+
+    library = [ GLOB $(lib)/lua51 $(lib)/lua5.1 $(lib)/lua $(lib) :
+        $(names)$(extensions) ] ;
+    lib-name = [ MATCH "lib(.*)" : $(library[1]:B) ] ;
+
+    debug-message prefix: $(prefix) ;
+    debug-message includes: $(includes) ;
+    debug-message lib: $(library:D) ;
+    debug-message candidates: $(library) ;
+    debug-message linking to: $(lib-name) ;
+
+    if ! $(lib-name)
+    {
+        errors.user-error "*** Unable to find Lua library." ;
+    }
+
+    lib m : : <link>shared ;
+    if [ os.name ] = LINUX
+    {
+        lib dl : : <link>shared ;
+    }
+    else
+    {
+        alias dl ;
+    }
+    lib lua : m dl : <name>$(lib-name) <search>$(library:D) : : <include>$(includes) ;
+}
+
+rule tag-names ( name : type ? : property-set )
+{
+    if $(type) in STATIC_LIB SHARED_LIB IMPORT_LIB &&
+        [ $(property-set).get <variant> ] = debug
+    {
+        name = $(name)d ;
+    }
+
+    local result = [ virtual-target.add-prefix-and-suffix $(name) : $(type) : $(property-set) ] ;
+
+    if $(type) = SHARED_LIB &&
+        ( ! ( [ $(property-set).get <target-os> ] in windows cygwin darwin aix ) &&
+          ! ( [ $(property-set).get <toolset> ] in pgi ) )
+    {
+        result = $(result).$(VERSION) ;
+    }
+
+    return $(result) ;
+}
+
+SOURCES =
+    class.cpp
+    class_info.cpp
+    class_registry.cpp
+    class_rep.cpp
+    create_class.cpp
+    error.cpp
+    exception_handler.cpp
+    function.cpp
+    inheritance.cpp
+    link_compatibility.cpp
+    object_rep.cpp
+    open.cpp
+    pcall.cpp
+    scope.cpp
+    stack_content_by_name.cpp
+    weak_ref.cpp
+    wrapper_base.cpp ;
+
+usage-requirements =
+    <library>lua
+    <toolset>msvc,<link>shared:<cxxflags>/wd4251
+    <link>shared:<define>LUABIND_DYNAMIC_LINK
+    <tag>@tag-names ;
+
+lib luabind
+    : src/$(SOURCES)
+    # requirements
+    : <include>. <include>$(BOOST_ROOT)
+      $(usage-requirements)
+    # default-build
+    :
+    # usage-requirements
+    : <include>. <include>$(BOOST_ROOT)
+      $(usage-requirements)
+    ;
+
+alias test
+  : test//test
+  # requirements
+  :
+  # default-build
+  : <link>static <link>shared release debug ;
+
+explicit test ;
+
+rule git-describe ( )
+{
+    local result = [ SHELL "git describe HEAD 2>&1" : exit-status ] ;
+
+    if $(result[2]) = 0
+    {
+        return [ MATCH "^v([a-zA-Z.0-9\\-]+)" : $(result[1]) ] ;
+    }
+}
+
+version-tag = [ git-describe ] ;
+
+if $(version-tag)
+{
+    actions make-version-file
+    {
+        echo ".. |version| replace:: $(version-tag)" > doc/version.rst
+    }
+
+    notfile make-version-file : @make-version-file ;
+}
+else
+{
+    alias make-version-file ;
+}
+
+if docs in [ modules.peek : ARGV ] 
+{
+    local result = [ SHELL "rst2html.py --version 2>&1" : exit-status ] ;
+    if $(result[2]) = 0
+    {
+        found-rst2html = rst2html.py ;
+    }
+}
+
+html docs.html
+  : doc/docs.rst
+  : <dependency>make-version-file
+    <docutils-cmd>$(found-rst2html)
+    <docutils-html>"--traceback -gdt --stylesheet=style.css --link-stylesheet" ;
+
+stage docs : docs.html : <location>doc ;
+explicit docs docs.html make-version-file ;
+
+headers = [ path.glob-tree luabind : *.hpp ] ;
+
+package.install install
+  : <install-header-subdir>luabind
+    <install-source-root>luabind
+    <install-no-version-symlinks>on
+  :
+  : luabind
+  : $(headers)
+  ;
+
+local stage-locate = [ MATCH "^--stagedir=(.*)" : [ modules.peek : ARGV ] ] ;
+stage-locate ?= stage ;
+
+install stage
+  : luabind
+  : <location>$(stage-locate)
+    <install-no-version-symlinks>on
+    <install-dependencies>on
+    <install-type>LIB
+  ;
+
+explicit stage ;
