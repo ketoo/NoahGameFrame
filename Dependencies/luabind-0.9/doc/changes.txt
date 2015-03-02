@@ -1,0 +1,153 @@
+LUABIND 7.1 changes
+===================
+
+* Applied patches from Evan Wies to support lua 5.1
+* added a new assignment operator and a special value,
+  luabind::nil, to set table entries to nil. 
+
+
+LUABIND BETA 7 changes
+======================
+
+We have introduced a change that may break current code,
+nothing will break silently however.
+
+The change is that the previous way of writing virtual class
+wrappers was to have it contain an object that refered to
+the actual lua object. This would cause a dependency cycle
+and result in the object never being garbage collected until
+the whole lua state was closed. The new way is to use a newly
+introduced type called weak_ref, instead of the object.
+See docs for more info.
+
+
+Changes from beta6
+------------------
+
+* renamed get_globals() and get_registry() to globals()
+  and registry()
+* rewrote object and made a few changes:
+
+  * moved iterators out of the class and removed
+    begin/end/raw_begin/raw_end/array_begin/array_end.
+    See updated docs for how to use the iterators.
+  * removed array_iterator alltogether
+  * renamed pushvalue() to push()
+  * removed set()
+  * replaced the constructor that creates an object from
+    a stack value (with better syntax)
+  * moved out the member functions type(), at() and raw_at()
+    and made them free functions. (type(), gettable(), settable(),
+    rawget() and rawset())
+  * renamed lua_state() to interpreter()
+  * object now supports nested indexing (with []-operator) as
+    well as function calls directly on indexed values (i.e.
+    globals(L)["my_fun"](10)). The indexing has also been made
+    more efficient through the use of expression templates.
+
+* removed functor (use object with call_function() instead)
+
+* using boost-build, and has better support for building
+  as a dll. The makefiles still works.
+* removed the option LUABIND_DONT_COPY_STRING, this means
+  that luabind will not provide storage for name strings.
+  i.e. the strings sent to module, namespace_ and class_
+  are expected to have global storage (it's no problem as
+  long as you use string constants)
+
+
+wrappers
+........
+
+Wrapper classes now have to derive from wrap_base and they don't have
+to contain any references to the lua-part (this is done by the base
+class now). The overload of call_member() that previuosly took a
+weak_ref as first parameter is now a member function of the wrap_base
+class and no longer takes the self reference argument. Example:
+
+struct A
+{
+    virtual ~A() {}
+    virtual std::string f() { return "A:f()"; }
+};
+
+struct A_wrap : A, wrap_base
+{
+    virtual std::string f()
+    {
+        return call_member<std::string>("f");
+    }
+
+    static std::string default_f(A* p)
+    {
+        return p->A::f();
+    }
+};
+
+The changes when registering the virtual functions is that you now
+have to register both the virtual function _and_ the default
+implementation of the function (for static dispatch). Like this:
+
+module(L)
+[
+    class_<A, A_wrap>("A")
+        .def(constructor<>())
+        .def("f", &A::f, &A_wrap::default_f)
+]
+
+If you update your luabind version without changing the way you register
+virtual functions, it will still compile, but may give you runtime
+errors.
+
+With these changes adopt will work as expected on wrapped types (the
+weak reference will be transformed into a strong reference internally).
+
+These changes will also make dynamic function dispatch work from within
+lua (and not just from c++ into lua).
+
+
+policy placeholders
+...................
+
+luabind now handles member functions in a more general way.
+The self reference that is passed as first parameter to
+member functions is now refered to using the _1 placeholder
+(instead of self). This means that the first argument to a
+member function is refered to with _2.
+
+
+additions
+.........
+
+* added __newindex metatable entry on c++ classes
+* moved more code into cpp-files (hopefully reduces user
+  compile time slightly)
+* the iterators are now true models of ForwardIterator
+* error messages when writing non-matching type to a property
+  or attribute.
+* support for inner scopes
+* support for nil to holder_type conversion
+* wrappers for lua_resume() with the same syntax as
+  call_function() (resume_function() and resume())
+
+
+bugfixes
+........
+
+* bugs in the overload resolution could give internal errors
+  in some cases.
+* def_readonly and def_readwrite will now return references
+  if the type is not a primitive type. This will allow
+  chained . operators.
+* object_cast() of uninitialized objects works
+* supports strings with extra nulls in them (not for member
+  names though)
+* fixed reference leakage by reducing the amount of explicit
+  resource management.
+* fixed bug where matchers for getters and setters did not
+  propagate to derived classes.
+* fixed leak when using class wrappers. They had a reference
+  cycle that wouldn't get collected (until the lua_State was
+  closed).
+* lots of other fixes we can't remember 
+
