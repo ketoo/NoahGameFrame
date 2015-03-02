@@ -1,0 +1,9 @@
+this example will build an extension module as a shared library, use
+loadlib() from within the lua interpreter to load the library, it will
+then export a function named greet() which you can call.
+
+> loadlib('hello_world.dll', 'init')()
+> greet()
+Hello world!
+>
+

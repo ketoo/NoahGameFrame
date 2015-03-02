@@ -24,30 +24,34 @@
 if a object in the group of '0', them it can be see by all object in this scene.
 */
 class NFCContainerGroupInfo
-    : public NFList<NFIDENTID>
+    //: public NFList<NFIDENTID>
 {
 public:
-    NFCContainerGroupInfo(int nSceneID, int nWidth)
+    NFCContainerGroupInfo(int nSceneID, int nGroupID, int nWidth)
     {
-        m_pGridModule = NF_SHARE_PTR<NFIGridModule>(NF_NEW NFCGridModule(nSceneID, nWidth));
+        mnGroupID = nGroupID;
+        //m_pGridModule = NF_SHARE_PTR<NFIGridModule>(NF_NEW NFCGridModule(nSceneID, nWidth));
     }
 
     virtual ~NFCContainerGroupInfo()
     {
     }
 
-    NF_SHARE_PTR<NFIGridModule> GetGridModule()
-    {
-        return m_pGridModule;
-    }
+    //NF_SHARE_PTR<NFIGridModule> GetGridModule()
+    //{
+    //    return m_pGridModule;
+    //}
 
     bool Execute(const float fLasFrametime, const float fStartedTime)
     {
         return true;
     }
 
-private:
-    NF_SHARE_PTR<NFIGridModule> m_pGridModule;
+    NFMapEx<NFIDENTID, int> mxPlayerList;
+    NFMapEx<NFIDENTID, int> mxOtherList;
+    int mnGroupID;
+//private:
+//    NF_SHARE_PTR<NFIGridModule> m_pGridModule;
 };
 
 // all group in this scene
@@ -77,33 +81,47 @@ public:
         return mnWidth;
     }
 
-    void SetObjectSelf(const NFIDENTID& ident)
-    {
-        mIdent = ident;
-    }
+    //void SetObjectSelf(const NFIDENTID& ident)
+    //{
+    //    mIdent = ident;
+    //}
 
-    NFIDENTID GetObjectSelf()
-    {
-        return mIdent;
-    }
+    //NFIDENTID GetObjectSelf()
+    //{
+    //    return mIdent;
+    //}
 
-    bool AddObjectToGroup(const int nGroupID, const NFIDENTID& ident)
+    bool AddObjectToGroup(const int nGroupID, const NFIDENTID& ident, bool bPlayer)
     {
         NF_SHARE_PTR<NFCContainerGroupInfo> pInfo = GetElement(nGroupID);
         if (pInfo.get())
         {
-            return pInfo->Add(ident);
+            if (bPlayer)
+            {
+                return pInfo->mxPlayerList.AddElement(ident, NF_SHARE_PTR<int>()); // TODO:Map.second为空，使用的时候千万注意
+            }
+            else
+            {
+                return pInfo->mxOtherList.AddElement(ident, NF_SHARE_PTR<int>()); // TODO:Map.second为空，使用的时候千万注意
+            }
         }
 
         return false;
     }
 
-    bool RemoveObjectFromGroup(const int nGroupID, const NFIDENTID& ident)
+    bool RemoveObjectFromGroup(const int nGroupID, const NFIDENTID& ident, bool bPlayer)
     {
         NF_SHARE_PTR<NFCContainerGroupInfo> pInfo = GetElement(nGroupID);
         if (pInfo.get())
         {
-            return pInfo->Remove(ident);
+            if (bPlayer)
+            {
+                return pInfo->mxPlayerList.RemoveElement(ident);
+            }
+            else
+            {
+                return pInfo->mxOtherList.RemoveElement(ident);
+            }
         }
 
         return false;
@@ -122,7 +140,7 @@ public:
     }
 protected:
 private:
-    NFIDENTID mIdent;
+    //NFIDENTID mIdent;
     int mnGroupIndex;
     int mnSceneID;
     int mnWidth;
