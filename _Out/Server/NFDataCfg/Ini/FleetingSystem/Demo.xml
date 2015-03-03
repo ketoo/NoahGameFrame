@@ -21,5 +21,8 @@
 		<EnableEvents>
 			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
 		</EnableEvents>
+		<TrailEvents>
+			<Trail EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</TrailEvents>
 	</NORMALATTACK1>
 </XML>
