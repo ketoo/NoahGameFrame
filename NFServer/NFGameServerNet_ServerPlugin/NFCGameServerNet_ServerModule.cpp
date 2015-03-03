@@ -1092,7 +1092,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
             }
         }
         break;
-    case NFIRecord::RecordOptype::Changed:
+    case NFIRecord::RecordOptype::Swap:
         {
             //其实是2个row交换
             NFMsg::ObjectRecordSwap xSwapRecord;
