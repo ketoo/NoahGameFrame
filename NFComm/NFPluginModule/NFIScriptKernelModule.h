@@ -68,11 +68,34 @@ protected:
 private:
 };
 
-class NFScriptInt64
+//class NFScriptIdent
+//{
+//public:
+//    NFScriptIdent(){};
+//    NFScriptIdent(const NFIDENTID& ID)
+//    {
+//        mID = ID;
+//    }
+//
+//    NFIDENTID ObjectVal() const
+//    {
+//        return mID;
+//    }
+//
+//    NFINT64 Int64Val() const
+//    {
+//        return mID.nData64;
+//    }
+//
+//private:
+//    NFIDENTID mID;
+//};
+
+class NFScriptIdent
 {
 public:
-    NFScriptInt64(){};
-    NFScriptInt64(const NFIDENTID& ID)
+    NFScriptIdent(){};
+    NFScriptIdent(const NFIDENTID& ID)
     {
         mID = ID;
     }
@@ -85,6 +108,21 @@ public:
     NFINT64 Int64Val() const
     {
         return mID.nData64;
+    }
+
+    void SetData(NFINT64 nID)
+    {
+        mID.nData64 = nID;
+    }
+
+    NFINT64 GetServerID() const
+    {
+        return mID.nSvrID;
+    }
+
+    void SetServerID(NFINT64 nID)
+    {
+        mID.nSvrID = nID;
     }
 
 private:
@@ -140,7 +178,7 @@ public:
         return mVar.Add(value);
     }
 
-    bool AddObject(const NFScriptInt64& value)
+    bool AddObject(const NFScriptIdent& value)
     {
         return mVar.Add(value.ObjectVal());
     }
@@ -160,7 +198,7 @@ public:
         return mVar.Set(index, value);
     }
 
-    bool SetObject(const int index, const NFScriptInt64& value)
+    bool SetObject(const int index, const NFScriptIdent& value)
     {
         return mVar.Set(index, value.ObjectVal());
     }
@@ -180,7 +218,7 @@ public:
         return mVar.String(index);
     }
 
-    NFScriptInt64 Object(const int index) const
+    NFScriptIdent Object(const int index) const
     {
         return mVar.Object(index);
     }
