@@ -29,6 +29,7 @@ enum NF_SERVER_TYPE
 	NFST_NOSQL_SERVER = 7,
 };
 
+#if NF_PLATFORM == NF_PLATFORM_WIN
 class QueueEventPack
 {
 public:
@@ -50,6 +51,7 @@ public:
 	int nMsgID;//消息ID，如果是网络事件，则为事件ID
 	std::string strData;//数据
 };
+#endif
 
 class NFINetModule
 	: public NFILogicModule
@@ -185,7 +187,7 @@ public:
 		KeepAlive(fLasFrametime);
 
 		//////////////////////////////////////////////////////////////////////////
-		#if NF_PLATFORM == NF_PLATFORM_WIN
+#if NF_PLATFORM == NF_PLATFORM_WIN
 		QueueEventPack xEventPack;
 		while (mxQueue.Pop(xEventPack))
 		{
