@@ -214,7 +214,7 @@ class NFINet
 public:
 	virtual  bool Execute(const float fLasFrametime, const float fStartedTime) = 0;
 
-	virtual  int Initialization(const char* strIP, const unsigned short nPort) = 0;
+	virtual  void Initialization(const char* strIP, const unsigned short nPort) = 0;
 	virtual  int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4) = 0;
 
 	virtual  bool Final() = 0;
@@ -234,7 +234,6 @@ public:
 
 	virtual NFIMsgHead::NF_Head GetHeadLen() = 0;
 	virtual bool IsServer() = 0;
-	virtual int FD() = 0;
 
 protected:
 private:
