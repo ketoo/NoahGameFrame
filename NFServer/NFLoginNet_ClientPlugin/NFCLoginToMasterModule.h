@@ -45,7 +45,7 @@ public:
 
 protected:
 	int OnRecivePack(const NFIPacket& msg);
-    int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
+    int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 protected:
 

@@ -19,7 +19,6 @@ struct ServerData
 	{
 		nGameID = 0;
 		nPort = 0;
-		mnFD = 0;
 		strName = "";
 		strIP = "";
 		m_pNetModule = NULL;
@@ -27,7 +26,6 @@ struct ServerData
 		eState = NFMsg::EServerState::EST_CRASH;
 	}
 
-	int mnFD;
 	int nGameID;
 	NF_SERVER_TYPE eServerType;
 	std::string strIP;
@@ -84,24 +82,7 @@ public:
 		}
 	}
 
-	void RemovServer(const int nID)
-	{
-	}
-
-	void AddFD(const int nFD, const int nID)
-	{
-	}
-
-	void RemoveFD(const int nFD)
-	{
-	}
-
 	virtual void SendByServerID(const int nServerID, const std::string& strData)
-	{
-
-	}
-
-	virtual void SendByFD(const int nFD, const std::string& strData)
 	{
 
 	}
@@ -114,5 +95,4 @@ public:
 protected:
 private:
 	NFMap<int, ServerData> mxServerMap;
-	NFMap<int, int> mxFDMap;
 };
