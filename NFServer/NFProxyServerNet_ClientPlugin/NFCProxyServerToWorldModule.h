@@ -33,12 +33,11 @@ public:
     virtual bool Execute(float fFrameTime, float fTotalTime);
     virtual void LogRecive(const char* str){}
     virtual void LogSend(const char* str){}
-    virtual int GetFD(){return GetNet()->FD();}
 
 protected:
 
     int OnRecivePack(const NFIPacket& msg);
-    int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
+    int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     //连接丢失,删2层(连接对象，帐号对象)
     void OnClientDisconnect(const int nAddress);
@@ -88,12 +87,11 @@ public:
 
     virtual GameData* GetGameData(int nGameID);
     virtual GameDataMap& GetGameDataMap() { return mGameDataMap; }
-    virtual int GetFD(){return GetNet()->FD();}
 
 protected:
 
 	int OnRecivePack(const NFIPacket& msg);
-	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
+	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 	//连接丢失,删2层(连接对象，帐号对象)
 	void OnClientDisconnect(const int nAddress);
