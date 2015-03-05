@@ -51,23 +51,6 @@ public:
 	std::string strData;//数据
 };
 
-class ConnectObject
-{
-public:
-	ConnectObject()
-	{
-		m_pNet = NULL;
-		mfLastHBTime = 0.0f;
-	}
-
-protected:
-private:
-	NFINet* m_pNet;
-	float mfLastHBTime;
-	RECIEVE_FUNCTOR mRecvCB;
-	EVENT_FUNCTOR mEventCB;
-};
-
 class NFINetModule
 	: public NFILogicModule
 {
@@ -112,22 +95,21 @@ public:
 
 
 	template<typename BaseType>
-	int Initialization(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT), const char* strIP, const unsigned short nPort)
+	void Initialization(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const char* strIP, const unsigned short nPort)
 	{
 		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
-		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2);
+		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
 		m_pNet = new NFCNet(nHeadLength, this, &NFINetModule::OnRecivePack, &NFINetModule::OnSocketEvent);
 
-		//这里返回的是作为client的fd
-		return m_pNet->Initialization(strIP, nPort);
+		m_pNet->Initialization(strIP, nPort);
 	}
 
 	template<typename BaseType>
-	int Initialization(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT), const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4)
+	int Initialization(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4)
 	{
 		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
-		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2);
+		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
 		m_pNet = new NFCNet(nHeadLength, this, &NFINetModule::OnRecivePack, &NFINetModule::OnSocketEvent);
 		return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
@@ -227,7 +209,7 @@ public:
 				{
 					if(mEventCB)
 					{
-						mEventCB(xEventPack.nFD, (NF_NET_EVENT)xEventPack.nMsgID);
+						mEventCB(xEventPack.nFD, (NF_NET_EVENT)xEventPack.nMsgID, m_pNet);
 					}
 				}
 				break;
@@ -333,7 +315,7 @@ protected:
 		NFMsg::ServerHeartBeat xMsg;
 		xMsg.set_count(0);
 
-		SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT, xMsg, m_pNet->FD());
+		SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT, xMsg, 0);
 	}
 
 	int OnRecivePack(const NFIPacket& msg)
@@ -349,7 +331,7 @@ protected:
 		return 0;
 	}
 
-	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent)
+	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 	{
 		QueueEventPack xNetEventPack;
 		xNetEventPack.eMsgType = QueueEventPack::ON_NET_FD_EVT;

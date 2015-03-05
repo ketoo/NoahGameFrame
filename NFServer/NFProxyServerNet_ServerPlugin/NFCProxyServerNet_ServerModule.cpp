@@ -165,7 +165,7 @@ int NFCProxyServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 	return 0;
 }
 
-int NFCProxyServerNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
+int NFCProxyServerNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
