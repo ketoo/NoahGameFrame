@@ -32,20 +32,20 @@
 typedef std::function<int(const NFIPacket& msg)> RECIEVE_FUNCTOR;
 typedef NF_SHARE_PTR<RECIEVE_FUNCTOR> RECIEVE_FUNCTOR_PTR;
 
-typedef std::function<int(const int nSockIndex, const NF_NET_EVENT nEvent)> EVENT_FUNCTOR;
+typedef std::function<int(const int nSockIndex, const NF_NET_EVENT nEvent, NFINet* pNet)> EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<EVENT_FUNCTOR> EVENT_FUNCTOR_PTR;
 
 class NFCNet : public NFINet
 {
 public:
     template<typename BaseType>
-    NFCNet(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT), const int nResetCount = -1, const float nReseTime = 5.0f)
+    NFCNet(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const int nResetCount = -1, const float nReseTime = 5.0f)
     {
         base = NULL;
         listener = NULL;
 
         mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
-        mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2);
+        mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
         mstrIP = "";
         mnPort = 0;
         mnCpuCount = 0;
@@ -53,7 +53,6 @@ public:
 		mfReseTime = nReseTime;
 		mfRunTimeReseTime = 0.0f;
         mbServer = false;
-		mnFD = 0;
         ev = NULL;
         mnHeadLength = nHeadLength;
     }
@@ -63,7 +62,7 @@ public:
 public:
 	virtual  bool Execute(const float fLasFrametime, const float fStartedTime);
 
-	virtual  int Initialization(const char* strIP, const unsigned short nPort);
+	virtual  void Initialization(const char* strIP, const unsigned short nPort);
 	virtual  int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4);
 
 	virtual  bool Final();
@@ -80,7 +79,6 @@ public:
 	virtual bool RemoveBan(const int nSockIndex){return true;};
     virtual NFIMsgHead::NF_Head GetHeadLen(){return mnHeadLength;};
 	virtual bool IsServer(){return mbServer;};
-	virtual int FD(){return mnFD;};
 
 private:
 	virtual void ExecuteClose();
@@ -115,7 +113,6 @@ private:
 	float mfReseTime;
 	float mfRunTimeReseTime;
 
-	int mnFD;//client有效
     bool mbUsePacket;//是否使用我们的包
 	struct event_base *base;
 	struct evconnlistener *listener;
