@@ -94,6 +94,18 @@ public:
 	}
 
 protected:
+	void AddServerWeightData(NF_SHARE_PTR<ServerData> xInfo)
+	{
+
+	}
+	
+	void RemoveServerWeightData(NF_SHARE_PTR<ServerData> xInfo)
+	{
+
+	}
+
 private:
 	NFMapEx<int, ServerData> mxServerMap;
+	NFCConsistentHash mxConsistentHash;
+
 };
