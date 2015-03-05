@@ -19,34 +19,33 @@ struct ServerData
 	{
 		nGameID = 0;
 		nPort = 0;
-		mnFD = 0;
 		strName = "";
 		strIP = "";
-		m_pNetModule = NULL;
 		eServerType = NFST_NONE;
 		eState = NFMsg::EServerState::EST_CRASH;
 	}
 
-	int mnFD;
 	int nGameID;
 	NF_SERVER_TYPE eServerType;
 	std::string strIP;
 	int nPort;
 	std::string strName;
 	NFMsg::EServerState eState;
-	NFINetModule* m_pNetModule;
+	NF_SHARE_PTR<NFINetModule> mxNetModule;
 
 };
 
 class NFIClusterClientModule
 {
 public:
+	virtual void OnNetCreated(NF_SHARE_PTR<ServerData> xServerData) = 0;
+
 	virtual bool Execute(const float fLastFrametime, const float fStartedTime)
 	{
 		ServerData* pServerData = mxServerMap.First();
 		while (pServerData)
 		{
-			pServerData->m_pNetModule.Execute(fLastFrametime, fStartedTime);
+			pServerData->mxNetModule->Execute(fLastFrametime, fStartedTime);
 
 			pServerData = mxServerMap.Next();
 		}
@@ -57,51 +56,34 @@ public:
 
 	void AddServer(const ServerData& xInfo)
 	{
-		ServerData* pServerData = mxServerMap.find(xInfo.nGameID);
-		if (pServerData)
+		NF_SHARE_PTR<ServerData> xServerData = mxServerMap.find(xInfo.nGameID);
+		if (xServerData)
 		{
-			if (EServerState.EST_MAINTEN == pServerData->eState
-				|| EServerState.EST_CRASH == pServerData->eState)
-			{
-				//宕了
-			}
-			else
-			{
-
-			}
+			//新的信息
 		}
 		else
 		{
-			if (EServerState.EST_MAINTEN == pServerData->eState
-				|| EServerState.EST_CRASH == pServerData->eState)
+			if (EServerState.EST_MAINTEN != xInfo->eState
+				&& EServerState.EST_CRASH != xInfo->eState)
 			{
-				//宕了
-			}
-			else
-			{
+				//正常，添加新服务器
+				xServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
 
+				xServerData->nGameID = xInfo.nGameID;
+				xServerData->eServerType = xInfo->eState;
+				xServerData->strIP = xInfo.strIP;
+				xServerData->strName = xInfo.strName;
+				xServerData->eState = xInfo.eState;
+				xServerData->mxNetModule = NF_SHARE_PTR<NFINetModule>(NF_NEW NFINetModule());
+				OnNetCreated(xServerData);
+				//xServerData->m_pNetModule->Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerNet_ServerModule::OnRecivePack, &NFCGameServerNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
+
+				mxServerMap.AddElement(xInfo.nGameID, xServerData);
 			}
 		}
 	}
 
-	void RemovServer(const int nID)
-	{
-	}
-
-	void AddFD(const int nFD, const int nID)
-	{
-	}
-
-	void RemoveFD(const int nFD)
-	{
-	}
-
 	virtual void SendByServerID(const int nServerID, const std::string& strData)
-	{
-
-	}
-
-	virtual void SendByFD(const int nFD, const std::string& strData)
 	{
 
 	}
@@ -112,7 +94,18 @@ public:
 	}
 
 protected:
+	void AddServerWeightData(NF_SHARE_PTR<ServerData> xInfo)
+	{
+
+	}
+	
+	void RemoveServerWeightData(NF_SHARE_PTR<ServerData> xInfo)
+	{
+
+	}
+
 private:
-	NFMap<int, ServerData> mxServerMap;
-	NFMap<int, int> mxFDMap;
+	NFMapEx<int, ServerData> mxServerMap;
+	NFCConsistentHash mxConsistentHash;
+
 };
