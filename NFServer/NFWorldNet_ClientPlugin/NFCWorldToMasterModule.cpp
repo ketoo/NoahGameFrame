@@ -95,7 +95,7 @@ void NFCWorldToMasterModule::Register()
 			pData->set_server_max_online(nMaxConnect);
 			pData->set_server_state(NFMsg::EST_NARMAL);
 
-			SendMsgPB(NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED, xMsg, GetNet()->FD());
+			SendMsgPB(NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED, xMsg);
 
 			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 		}
@@ -129,7 +129,7 @@ void NFCWorldToMasterModule::UnRegister()
 			pData->set_server_max_online(nMaxConnect);
 			pData->set_server_state(NFMsg::EST_NARMAL);
 
-			SendMsgPB(NFMsg::EGameMsgID::EGMI_MTL_WORLD_UNREGISTERED, xMsg, GetNet()->FD());
+			SendMsgPB(NFMsg::EGameMsgID::EGMI_MTL_WORLD_UNREGISTERED, xMsg);
 
 			Execute(0.0f, 0.0f);
 
@@ -187,7 +187,7 @@ int NFCWorldToMasterModule::OnSelectServerResultsEvent(const NFIDENTID& object, 
     xMsg.set_world_ip(strWorldAddress);
     xMsg.set_world_key(strKey);
 
-	SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xMsg, GetNet()->FD());
+	SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xMsg);
 
     return 0;
 }
@@ -229,7 +229,7 @@ int NFCWorldToMasterModule::OnRecivePack( const NFIPacket& msg )
 	return 0;
 }
 
-int NFCWorldToMasterModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
+int NFCWorldToMasterModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {

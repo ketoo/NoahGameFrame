@@ -29,6 +29,7 @@ enum NF_SERVER_TYPE
 	NFST_NOSQL_SERVER = 7,
 };
 
+#if NF_PLATFORM == NF_PLATFORM_WIN
 class QueueEventPack
 {
 public:
@@ -50,23 +51,7 @@ public:
 	int nMsgID;//消息ID，如果是网络事件，则为事件ID
 	std::string strData;//数据
 };
-
-class ConnectObject
-{
-public:
-	ConnectObject()
-	{
-		m_pNet = NULL;
-		mfLastHBTime = 0.0f;
-	}
-
-protected:
-private:
-	NFINet* m_pNet;
-	float mfLastHBTime;
-	RECIEVE_FUNCTOR mRecvCB;
-	EVENT_FUNCTOR mEventCB;
-};
+#endif
 
 class NFINetModule
 	: public NFILogicModule
@@ -112,24 +97,31 @@ public:
 
 
 	template<typename BaseType>
-	int Initialization(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT), const char* strIP, const unsigned short nPort)
+	void Initialization(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const char* strIP, const unsigned short nPort)
 	{
+#if NF_PLATFORM == NF_PLATFORM_WIN
 		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
-		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2);
+		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
 		m_pNet = new NFCNet(nHeadLength, this, &NFINetModule::OnRecivePack, &NFINetModule::OnSocketEvent);
-
-		//这里返回的是作为client的fd
-		return m_pNet->Initialization(strIP, nPort);
+#else
+		m_pNet = new NFCNet(nHeadLength, this, handleRecieve, handleEvent);
+#endif
+		m_pNet->Initialization(strIP, nPort);
 	}
 
 	template<typename BaseType>
-	int Initialization(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT), const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4)
+	int Initialization(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4)
 	{
+#if NF_PLATFORM == NF_PLATFORM_WIN
 		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
-		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2);
+		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
 		m_pNet = new NFCNet(nHeadLength, this, &NFINetModule::OnRecivePack, &NFINetModule::OnSocketEvent);
+#else
+		m_pNet = new NFCNet(nHeadLength, this, handleRecieve, handleEvent);
+#endif
+
 		return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
 	}
 
@@ -195,6 +187,7 @@ public:
 		KeepAlive(fLasFrametime);
 
 		//////////////////////////////////////////////////////////////////////////
+#if NF_PLATFORM == NF_PLATFORM_WIN
 		QueueEventPack xEventPack;
 		while (mxQueue.Pop(xEventPack))
 		{
@@ -227,13 +220,13 @@ public:
 				{
 					if(mEventCB)
 					{
-						mEventCB(xEventPack.nFD, (NF_NET_EVENT)xEventPack.nMsgID);
+						mEventCB(xEventPack.nFD, (NF_NET_EVENT)xEventPack.nMsgID, m_pNet);
 					}
 				}
 				break;
 			}
 		}
-
+#endif
 		//////////////////////////////////////////////////////////////////////////
 		return m_pNet->Execute(fLasFrametime, fStartedTime);
 	}
@@ -281,16 +274,7 @@ public:
 			return false;
 		}
 
-		// 		NFCPacket xPacket(m_pNet->GetHeadLen());
-		// 		if(!xPacket.EnCode(nMsgID, strMsg.c_str(), strMsg.length()))
-		// 		{
-		// 			char szData[MAX_PATH] = { 0 };
-		// 			sprintf(szData, "Send Message to %d Failed For Encode of MsgData, MessageID: %d, MessageLen: %d\n", nSockIndex, nMsgID, strMsg.length());
-		// 			LogSend(szData);
-		//
-		// 			return false;
-		// 		}
-
+#if NF_PLATFORM == NF_PLATFORM_WIN
 		QueueEventPack xNetEventPack;
 		xNetEventPack.eMsgType = QueueEventPack::ON_NET_SEND;
 		xNetEventPack.nMsgID = nMsgID;
@@ -298,8 +282,19 @@ public:
 		xNetEventPack.strData = strMsg;//可以待优化,SerializeToString直接进来
 
 		return mxQueue.Push(xNetEventPack);
+#else
+		NFCPacket xPacket(m_pNet->GetHeadLen());
+		if(!xPacket.EnCode(nMsgID, strMsg.c_str(), strMsg.length()))
+		{
+			char szData[MAX_PATH] = { 0 };
+			sprintf(szData, "Send Message to %d Failed For Encode of MsgData, MessageID: %d, MessageLen: %d\n", nSockIndex, nMsgID, strMsg.length());
+			LogSend(szData);
 
-		//return m_pNet->SendMsg(xPacket, nSockIndex, bBroadcast);
+			return false;
+		}
+
+		return m_pNet->SendMsg(xPacket, nSockIndex, bBroadcast);
+#endif
 
 	}
 
@@ -333,9 +328,10 @@ protected:
 		NFMsg::ServerHeartBeat xMsg;
 		xMsg.set_count(0);
 
-		SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT, xMsg, m_pNet->FD());
+		SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT, xMsg, 0);
 	}
 
+#if NF_PLATFORM == NF_PLATFORM_WIN
 	int OnRecivePack(const NFIPacket& msg)
 	{
 		QueueEventPack xNetEventPack;
@@ -349,7 +345,7 @@ protected:
 		return 0;
 	}
 
-	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent)
+	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 	{
 		QueueEventPack xNetEventPack;
 		xNetEventPack.eMsgType = QueueEventPack::ON_NET_FD_EVT;
@@ -360,15 +356,19 @@ protected:
 
 		return 0;
 	}
+#endif
 
 private:
 
 	NFINet* m_pNet;
 	float mfLastHBTime;
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
 	RECIEVE_FUNCTOR mRecvCB;
 	EVENT_FUNCTOR mEventCB;
 
 	NFQueue<QueueEventPack> mxQueue;
+#endif
 
 };
 
