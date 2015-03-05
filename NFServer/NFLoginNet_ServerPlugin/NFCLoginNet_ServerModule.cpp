@@ -259,7 +259,7 @@ int NFCLoginNet_ServerModule::OnRecivePack(const NFIPacket& msg )
 	return 0;
 }
 
-int NFCLoginNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
+int NFCLoginNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
