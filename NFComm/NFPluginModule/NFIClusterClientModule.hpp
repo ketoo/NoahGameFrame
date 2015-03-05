@@ -59,24 +59,12 @@ public:
 		NF_SHARE_PTR<ServerData> xServerData = mxServerMap.find(xInfo.nGameID);
 		if (xServerData)
 		{
-			if (EServerState.EST_MAINTEN == xServerData->eState
-				|| EServerState.EST_CRASH == xServerData->eState)
-			{
-				//宕了，进入重连队列
-			}
-			else
-			{
-				//正常，修改详细状态
-			}
+			//新的信息
 		}
 		else
 		{
-			if (EServerState.EST_MAINTEN == xInfo->eState
-				|| EServerState.EST_CRASH == xInfo->eState)
-			{
-				//宕了
-			}
-			else
+			if (EServerState.EST_MAINTEN != xInfo->eState
+				&& EServerState.EST_CRASH != xInfo->eState)
 			{
 				//正常，添加新服务器
 				xServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
@@ -89,7 +77,7 @@ public:
 				xServerData->mxNetModule = NF_SHARE_PTR<NFINetModule>(NF_NEW NFINetModule());
 				OnNetCreated(xServerData);
 				//xServerData->m_pNetModule->Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerNet_ServerModule::OnRecivePack, &NFCGameServerNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
-					
+
 				mxServerMap.AddElement(xInfo.nGameID, xServerData);
 			}
 		}
