@@ -112,7 +112,7 @@ int NFCProxyServerToWorldModule::OnGameInfoProcess( const NFIPacket& msg )
     return 0;
 }
 
-int NFCProxyServerToWorldModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
+int NFCProxyServerToWorldModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -173,7 +173,7 @@ void NFCProxyServerToWorldModule::Register()
 			pData->set_server_max_online(nMaxConnect);
 			pData->set_server_state(NFMsg::EST_NARMAL);
 
-			SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg, GetNet()->FD());
+			SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg);
 
 			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 		}
@@ -208,7 +208,7 @@ void NFCProxyServerToWorldModule::UnRegister()
 			pData->set_server_max_online(nMaxConnect);
 			pData->set_server_state(NFMsg::EST_MAINTEN);
 
-			SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_UNREGISTERED, xMsg, GetNet()->FD());
+			SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_UNREGISTERED, xMsg);
 
 			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "UnRegister");
 		}
@@ -261,7 +261,7 @@ int NFCProxyServerToWorldModule::Transpond(int nGameServerID, const NFIPacket& m
     NFINetModule* pProxy = GetElement(nGameServerID);
     if (pProxy)
     {
-        pProxy->GetNet()->SendMsg(msg, pProxy->GetNet()->FD());
+        pProxy->GetNet()->SendMsg(msg);
     }
 
     return 0;
@@ -358,7 +358,7 @@ int NFCProxyConnectToGameServer::OnRecivePack( const NFIPacket& msg )
     return 0;
 }
 
-int NFCProxyConnectToGameServer::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
+int NFCProxyConnectToGameServer::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -405,7 +405,7 @@ void NFCProxyConnectToGameServer::Register()
 			pData->set_server_max_online(nMaxConnect);
 			pData->set_server_state(NFMsg::EST_NARMAL);
 
-			SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg, GetNet()->FD());
+			SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg);
 
 			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 		}
@@ -439,7 +439,7 @@ void NFCProxyConnectToGameServer::UnRegister()
 			pData->set_server_max_online(nMaxConnect);
 			pData->set_server_state(NFMsg::EST_NARMAL);
 
-			SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_UNREGISTERED, xMsg, GetNet()->FD());
+			SendMsgPB(NFMsg::EGameMsgID::EGMI_PTWG_PROXY_UNREGISTERED, xMsg);
 
 			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "UnRegister");
 
