@@ -56,7 +56,7 @@ void NFCGameServerToWorldModule::Register()
 			pData->set_server_max_online(nMaxConnect);
 			pData->set_server_state(NFMsg::EST_NARMAL);
 
-			SendMsgPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_REGISTERED, xMsg, GetNet()->FD());
+			SendMsgPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_REGISTERED, xMsg, 0);
 
 			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 		}
@@ -90,7 +90,7 @@ void NFCGameServerToWorldModule::UnRegister()
 			pData->set_server_max_online(nMaxConnect);
 			pData->set_server_state(NFMsg::EST_MAINTEN);
 
-			SendMsgPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_UNREGISTERED, xMsg, GetNet()->FD());
+			SendMsgPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_UNREGISTERED, xMsg);
 
 			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "UnRegister");
 		}
@@ -376,7 +376,7 @@ int NFCGameServerToWorldModule::OnRecivePack( const NFIPacket& msg )
     return 0;
 }
 
-int NFCGameServerToWorldModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
+int NFCGameServerToWorldModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent == NF_NET_EVENT_CONNECTED)
     {

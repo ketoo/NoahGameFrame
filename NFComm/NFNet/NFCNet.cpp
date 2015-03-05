@@ -44,7 +44,7 @@ void NFCNet::conn_eventcb(struct bufferevent *bev, short events, void *user_data
     NFCNet* pNet = (NFCNet*)pObject->GetNet();
     if(pNet->mEventCB)
     {
-        pNet->mEventCB(pObject->GetFd(), NF_NET_EVENT(events));
+        pNet->mEventCB(pObject->GetFd(), NF_NET_EVENT(events), pNet);
     }
 
     if (events & BEV_EVENT_EOF)
@@ -214,12 +214,12 @@ bool NFCNet::Execute(const float fLasFrametime, const float fStartedTime)
 }
 
 
-int NFCNet::Initialization( const char* strIP, const unsigned short nPort)
+void NFCNet::Initialization( const char* strIP, const unsigned short nPort)
 {
     mstrIP = strIP;
     mnPort = nPort;
 
-    return InitClientNet();
+    InitClientNet();
 }
 
 int NFCNet::Initialization( const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount)
@@ -423,8 +423,8 @@ int NFCNet::InitClientNet()
     }
 
 	int sockfd = bufferevent_getfd(bev);
-    NetObject* pObject = new NetObject(this, sockfd, addr, bev);
-    if (!AddNetObject(sockfd, pObject))
+    NetObject* pObject = new NetObject(this, 0, addr, bev);
+    if (!AddNetObject(0, pObject))
     {
         assert(0);
         return -1;
@@ -443,7 +443,6 @@ int NFCNet::InitClientNet()
     evtimer_add(ev, &tv);
 
     //event_base_loop(base, EVLOOP_ONCE|EVLOOP_NONBLOCK);
-	mnFD = sockfd;
 
     return sockfd;
 }
