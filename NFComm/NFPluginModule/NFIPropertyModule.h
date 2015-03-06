@@ -27,7 +27,7 @@ public:
 
         NPG_RUNTIME_BUFF    ,//¶¯Ì¬BUFF
 
-        NPG_ALL = 100       ,
+        NPG_ALL ,
     };
 
 
