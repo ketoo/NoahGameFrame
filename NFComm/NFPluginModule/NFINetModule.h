@@ -80,7 +80,7 @@ public:
 	static NFIDENTID PBToNF(NFMsg::Ident xID)
 	{
 		NFIDENTID  xIdent;
-		xIdent.nSvrID = xID.svrid();
+		xIdent.nHead64 = xID.svrid();
 		xIdent.nData64 = xID.index();
 
 		return xIdent;
@@ -89,7 +89,7 @@ public:
 	static NFMsg::Ident NFToPB(NFIDENTID xID)
 	{
 		NFMsg::Ident  xIdent;
-		xIdent.set_svrid(xID.nSvrID);
+		xIdent.set_svrid(xID.nHead64);
 		xIdent.set_index(xID.nData64);
 
 		return xIdent;
