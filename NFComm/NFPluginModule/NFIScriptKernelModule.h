@@ -100,29 +100,34 @@ public:
         mID = ID;
     }
 
-    NFIDENTID ObjectVal() const
+    NFIDENTID GetIdent() const
     {
         return mID;
     }
 
-    NFINT64 Int64Val() const
+    int GetData() const
     {
         return mID.nData64;
     }
 
-    void SetData(NFINT64 nID)
+    void SetData(int nID)
     {
         mID.nData64 = nID;
     }
 
-    NFINT64 GetServerID() const
+    int GetHead() const
     {
-        return mID.nSvrID;
+        return mID.nHead64;
     }
 
-    void SetServerID(NFINT64 nID)
+    void SetHead(int nID)
     {
-        mID.nSvrID = nID;
+        mID.nHead64 = nID;
+    }
+
+    std::string ToString() const
+    {
+        return mID.ToString();
     }
 
 private:
@@ -180,7 +185,7 @@ public:
 
     bool AddObject(const NFScriptIdent& value)
     {
-        return mVar.Add(value.ObjectVal());
+        return mVar.Add(value.GetIdent());
     }
 
     bool SetInt(const int index, const NFINT64 value)
@@ -200,10 +205,10 @@ public:
 
     bool SetObject(const int index, const NFScriptIdent& value)
     {
-        return mVar.Set(index, value.ObjectVal());
+        return mVar.Set(index, value.GetIdent());
     }
 
-    NFINT64 Int(const int index) const
+    int Int(const int index) const
     {
         return mVar.Int(index);
     }
