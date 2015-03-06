@@ -20,56 +20,80 @@
 
 struct NFIDENTID
 {
-	NFINT64 nSvrID;
+	NFINT64 nHead64;
 	NFINT64 nData64;
     //boost::multiprecision::int128_t xID;
 
 
     NFIDENTID()
     {
-		nSvrID = 0;
+		nHead64 = 0;
         nData64 = 0;
     }
 
 	NFIDENTID(NFINT64 nSvr, NFINT64 nData)
 	{
-		nSvrID = nSvr;
+		nHead64 = nSvr;
 		nData64 = nData;
 	}
 
     bool IsNull() const
     {
-        return (0 == nData64) && (0 == nSvrID);
+        return (0 == nData64) && (0 == nHead64);
     }
 
     bool operator == (const NFIDENTID& id) const
     {
-        return (this->nData64 == id.nData64) && (this->nSvrID == id.nSvrID);
+        return (this->nData64 == id.nData64) && (this->nHead64 == id.nHead64);
     }
 
     bool operator != (const NFIDENTID& id) const
     {
-        return (this->nData64 != id.nData64) || (this->nSvrID != id.nSvrID);
+        return (this->nData64 != id.nData64) || (this->nHead64 != id.nHead64);
     }
 
     bool operator < (const NFIDENTID& id) const
     {
-        if (this->nSvrID == id.nSvrID)
+        if (this->nHead64 == id.nHead64)
         {
             return this->nData64 < id.nData64;
         }
 
-        return this->nSvrID < id.nSvrID;
+        return this->nHead64 < id.nHead64;
     }
 
     std::string ToString() const
     {
-        return boost::lexical_cast<std::string>(this->nSvrID) + "-" + boost::lexical_cast<std::string>(this->nData64);
+        return boost::lexical_cast<std::string>(this->nHead64) + "-" + boost::lexical_cast<std::string>(this->nData64);
     }
 
-    bool FormString(const char* str)
+    bool FormString(const std::string& strID)
     {
-        //return boost::lexical_cast<std::string>(this->nSvrID) + "-" + boost::lexical_cast<std::string>(this->nData64);
+        size_t nStrLength = strID.length();
+        size_t nPos = strID.find('-');
+        if (nPos < 0)
+        {
+            return false;
+        }
+
+        std::string strHead = strID.substr(0, nPos);
+        std::string strData = "";
+        if (nPos + 1 < nStrLength)
+        {
+            strData = strID.substr(nPos + 1, nStrLength - nPos);
+        }
+
+        try
+        {
+            nHead64 = boost::lexical_cast<NFINT64>(strHead);
+            nData64 = boost::lexical_cast<NFINT64>(strData);
+
+            return true;
+        }
+        catch (...)
+        {
+            return false;
+        }
     }
 };
 //#pragma pack(pop)
