@@ -159,10 +159,21 @@ int NFCPropertyModule::OnObjectClassEvent( const NFIDENTID& self, const std::str
     {
         if ( CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
         {
+            NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, mstrCommPropertyName);
+            if (pRecord.get())
+            {
+                for(int i =0; i< NPG_ALL; i++)
+                {
+                    pRecord->AddRow(-1);
+                }
+            }
+
             m_pKernelModule->AddPropertyCallBack( self, "Level", this, &NFCPropertyModule::OnObjectLevelEvent );
             
             // TODO:一级属性回调
             m_pKernelModule->AddRecordCallBack( self, mstrCommPropertyName, this, &NFCPropertyModule::OnRecordPropertyEvent );
+
+
         }
         else if ( CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA == eClassEvent )
         {
