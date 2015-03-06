@@ -105,8 +105,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial6Plugin", "Tutorial
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua", "Dependencies\lua-5.3.0\win\lua.vcxproj", "{62DAEB9D-66AE-4B69-8284-8A34C5AFBCE8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFLuaScriptPlugin", "..\nfnet\NFLuaScriptPlugin\NFLuaScriptPlugin.vcxproj", "{0D7E27F4-11C2-4F1D-8900-CC24297E4397}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFMessageDefine", "NFComm\NFMessageDefine\NFMessageDefine.vcxproj", "{3D9DB426-BA46-450B-BBAC-DABB6B6D69DE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFNet", "NFComm\NFNet\NFNet.vcxproj", "{403EB74F-6AF5-4250-8DA5-9D3CBFB7E545}"
@@ -122,6 +120,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libglog_static", "Dependencies\glog-0.3.3\vsprojects\libglog_static\libglog_static.vcxproj", "{772C2111-BBBF-49E6-B912-198A7F7A88E5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luabind", "Dependencies\luabind-0.9\win\luabind.vcxproj", "{292476FF-A75F-4A78-AECA-676D4A58963A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFLuaScriptPlugin", "..\nfnet\NFLuaScriptPlugin\NFLuaScriptPlugin.vcxproj", "{0D7E27F4-11C2-4F1D-8900-CC24297E4397}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -249,10 +249,6 @@ Global
 		{62DAEB9D-66AE-4B69-8284-8A34C5AFBCE8}.Debug|x64.Build.0 = Debug|x64
 		{62DAEB9D-66AE-4B69-8284-8A34C5AFBCE8}.Release|x64.ActiveCfg = Release|x64
 		{62DAEB9D-66AE-4B69-8284-8A34C5AFBCE8}.Release|x64.Build.0 = Release|x64
-		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Debug|x64.ActiveCfg = Debug|x64
-		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Debug|x64.Build.0 = Debug|x64
-		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Release|x64.ActiveCfg = Release|x64
-		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Release|x64.Build.0 = Release|x64
 		{3D9DB426-BA46-450B-BBAC-DABB6B6D69DE}.Debug|x64.ActiveCfg = Debug|x64
 		{3D9DB426-BA46-450B-BBAC-DABB6B6D69DE}.Debug|x64.Build.0 = Debug|x64
 		{3D9DB426-BA46-450B-BBAC-DABB6B6D69DE}.Release|x64.ActiveCfg = Release|x64
@@ -285,6 +281,10 @@ Global
 		{292476FF-A75F-4A78-AECA-676D4A58963A}.Debug|x64.Build.0 = Debug|x64
 		{292476FF-A75F-4A78-AECA-676D4A58963A}.Release|x64.ActiveCfg = Release|x64
 		{292476FF-A75F-4A78-AECA-676D4A58963A}.Release|x64.Build.0 = Release|x64
+		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Debug|x64.ActiveCfg = Debug|x64
+		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Debug|x64.Build.0 = Debug|x64
+		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Release|x64.ActiveCfg = Release|x64
+		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
