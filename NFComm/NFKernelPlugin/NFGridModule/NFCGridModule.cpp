@@ -77,7 +77,7 @@ const NFIDENTID NFCGridModule::ComputerGridID(const int nX, const int nY, const 
 
 const NFIDENTID NFCGridModule::GetStepLenth(const NFIDENTID& selfGrid, const NFIDENTID& otherGrid)
 {
-    return NFIDENTID(abs(otherGrid.nSvrID - selfGrid.nSvrID), abs(otherGrid.nData64 - selfGrid.nData64));
+    return NFIDENTID(abs(otherGrid.nHead64 - selfGrid.nHead64), abs(otherGrid.nData64 - selfGrid.nData64));
 }
 
 const int NFCGridModule::GetAroundGrid(const NFIDENTID& selfGrid, NFIDataList& gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
