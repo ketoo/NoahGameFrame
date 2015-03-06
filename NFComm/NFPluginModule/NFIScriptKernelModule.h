@@ -185,7 +185,7 @@ public:
 
     bool AddObject(const NFScriptIdent& value)
     {
-        return mVar.Add(value.ObjectVal());
+        return mVar.Add(value.GetIdent());
     }
 
     bool SetInt(const int index, const NFINT64 value)
@@ -205,7 +205,7 @@ public:
 
     bool SetObject(const int index, const NFScriptIdent& value)
     {
-        return mVar.Set(index, value.ObjectVal());
+        return mVar.Set(index, value.GetIdent());
     }
 
     int Int(const int index) const
