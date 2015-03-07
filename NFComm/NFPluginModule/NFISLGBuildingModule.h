@@ -22,6 +22,8 @@ public:
         BUILDINNG_X             ,
         BUILDINNG_Y             ,
         BUILDINNG_Z             ,
+		BUILDINNG_STATESTARTTIME,
+		BUILDINNG_STATEENDTIME	,		
     };
 
     virtual int AddBuilding(const NFIDENTID& self, const std::string& strBuilding, const float fX, const float fY, const float fZ) = 0;
