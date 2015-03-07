@@ -60,7 +60,7 @@ int NFCSLGBuildingModule::AddBuilding(const NFIDENTID& self, const std::string& 
     }
 
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-    if (pObject.get())
+    if (!pObject.get())
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "this is no object!", "", __FUNCTION__, __LINE__);
         return 1;
