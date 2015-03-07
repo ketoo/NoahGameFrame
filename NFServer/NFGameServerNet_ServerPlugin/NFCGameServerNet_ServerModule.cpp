@@ -997,6 +997,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                         {
                             NFMsg::RecordInt* pAddData = pAddRowData->add_record_int_list();
                             pAddData->set_col( i );
+							pAddData->set_row( nRow );
                             pAddData->set_data( nValue );
                         }
                     }
@@ -1008,6 +1009,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                         {
                             NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
                             pAddData->set_col( i );
+							pAddData->set_row( nRow );
                             pAddData->set_data( fValue );
                         }
                     }
@@ -1019,6 +1021,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                         {
                             NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
                             pAddData->set_col( i );
+							pAddData->set_row( nRow );
                             pAddData->set_data( fValue );
                         }
                     }
@@ -1030,6 +1033,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                         {
                             NFMsg::RecordString* pAddData = pAddRowData->add_record_string_list();
                             pAddData->set_col( i );
+							pAddData->set_row( nRow );
                             pAddData->set_data( str );
                         }
                     }
@@ -1041,6 +1045,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                         {
                             NFMsg::RecordObject* pAddData = pAddRowData->add_record_object_list();
                             pAddData->set_col( i );
+							pAddData->set_row( nRow );
 
                             *pAddData->mutable_data() = NFToPB(identValue);
                         }

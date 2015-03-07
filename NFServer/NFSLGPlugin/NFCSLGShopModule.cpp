@@ -56,10 +56,16 @@ bool NFCSLGShopModule::ReqBuyItem(const NFIDENTID& self, const std::string& strI
     int nGold = m_pElementInfoModule->GetPropertyInt(strID, "Gold");
     if (!m_pPropertyModule->ConsumeMoney(self, nGold))
     {
-        return false;
+        //return false;
     }
 
+	const std::string strItem = m_pElementInfoModule->GetPropertyString(strID, "ItemID");
+	if (!m_pElementInfoModule->ExistElement(strItem))
+	{
+		return false;
+	}
+
     //Ìí¼Ó½ø±í
-    m_pSLGBuildingModule->AddBuilding(self, strID, fX, fY, fZ);
+    m_pSLGBuildingModule->AddBuilding(self, strItem, fX, fY, fZ);
 	return true;
 }
