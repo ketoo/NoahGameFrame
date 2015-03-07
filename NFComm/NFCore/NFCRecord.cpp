@@ -246,7 +246,7 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
     {
         for (int i = 0; i < mnMaxRow; i++)
         {
-			if(!IsUsed(nRow))
+			if(!IsUsed(i))
 			{
 				nFindRow = i;
 				break;
