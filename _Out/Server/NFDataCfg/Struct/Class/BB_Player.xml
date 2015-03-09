@@ -8,13 +8,15 @@
             <Col Tag="RequireKillCount" Type="int"/>
             <Col Tag="TaskID" Type="string"/>
         </Record>
-        <Record Col="6" Desc="" Id="BuildingList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="128" Save="1" SaveInterval="0" View="1">
+        <Record Col="8" Desc="" Id="BuildingList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="128" Save="1" SaveInterval="0" View="1">
             <Col Tag="BuildingID" Type="string"/>
             <Col Tag="BuildingGUID" Type="object"/>
             <Col Tag="State" Type="int"/>
             <Col Tag="PosX" Type="int"/>
             <Col Tag="PosY" Type="int"/>
             <Col Tag="PosZ" Type="int"/>
+            <Col Tag="StateStartTime" Type="int"/>
+            <Col Tag="StateEndTime" Type="int"/>
         </Record>
         <Record Col="5" Desc="" Id="BuildingProduce" Index="0" Private="1" Public="0" RelationValue="Friend" Row="128" Save="1" SaveInterval="0" View="1">
             <Col Tag="BuildingGUID" Type="object"/>
@@ -36,6 +38,7 @@
         <Property Desc="拥有的石头" Id="Stone" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="拥有的铁" Id="Steel" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="拥有的钻石" Id="Diamond" Index="1" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="" Id="LoadPropertyFinish" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View=""/>
     </Propertys>
     <Components/>
     <Includes/>
