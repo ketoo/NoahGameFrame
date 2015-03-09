@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--this is config xml-->
 <XML>
-    <Object Diamond="100" Gold="1" ID="Shop1" ItemID="Build1" Level="1" Steel="5" Stone="1" Type="1"/>
-    <Object Diamond="200" Gold="1" ID="Shop2" ItemID="Build2" Level="1" Steel="5" Stone="2" Type="1"/>
-    <Object Diamond="300" Gold="1" ID="Shop3" ItemID="Build3" Level="1" Steel="1" Stone="3" Type="2"/>
-    <Object Diamond="400" Gold="1" ID="Shop4" ItemID="Build4" Level="1" Steel="1" Stone="4" Type="2"/>
-    <Object Diamond="500" Gold="1" ID="Shop5" ItemID="Build5" Level="1" Steel="1" Stone="5" Type="2"/>
-    <Object Diamond="600" Gold="1" ID="Shop6" ItemID="Build6" Level="1" Steel="1" Stone="6" Type="2"/>
-    <Object Diamond="700" Gold="1" ID="Shop7" ItemID="Build7" Level="1" Steel="1" Stone="7" Type="2"/>
-    <Object Diamond="800" Gold="1" ID="Shop8" ItemID="Build8" Level="1" Steel="1" Stone="8" Type="2"/>
-    <Object Diamond="900" Gold="1" ID="Shop9" ItemID="Build9" Level="1" Steel="1" Stone="9" Type="2"/>
+    <Object Diamond="100" Gold="1" ID="Shop1" ItemID="Build_Altar_1" Level="1" Steel="5" Stone="1" Type="1"/>
+    <Object Diamond="200" Gold="1" ID="Shop2" ItemID="Build_Arena_1" Level="1" Steel="5" Stone="2" Type="1"/>
+    <Object Diamond="300" Gold="1" ID="Shop3" ItemID="Build_Camp_1" Level="1" Steel="1" Stone="3" Type="2"/>
+    <Object Diamond="400" Gold="1" ID="Shop4" ItemID="Build_Gold_Mine_1" Level="1" Steel="1" Stone="4" Type="2"/>
+    <Object Diamond="500" Gold="1" ID="Shop5" ItemID="Build_Item_Hourse_1" Level="1" Steel="1" Stone="5" Type="2"/>
+    <Object Diamond="600" Gold="1" ID="Shop6" ItemID="Build_League_1" Level="1" Steel="1" Stone="6" Type="2"/>
+    <Object Diamond="700" Gold="1" ID="Shop7" ItemID="Build_Magic_Hourse_1" Level="1" Steel="1" Stone="7" Type="2"/>
+    <Object Diamond="800" Gold="1" ID="Shop8" ItemID="Build_Tower_1" Level="1" Steel="1" Stone="8" Type="2"/>
+    <Object Diamond="900" Gold="1" ID="Shop9" ItemID="Build_Town_1" Level="1" Steel="1" Stone="9" Type="2"/>
     <Object Diamond="1000" Gold="1" ID="Shop10" ItemID="Build10" Level="1" Steel="1" Stone="10" Type="2"/>
     <Object Diamond="1100" Gold="1" ID="Shop11" ItemID="Build11" Level="1" Steel="1" Stone="11" Type="2"/>
     <Object Diamond="1200" Gold="1" ID="Shop12" ItemID="Build12" Level="1" Steel="1" Stone="12" Type="2"/>
