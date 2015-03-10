@@ -18,7 +18,7 @@ function Test:AfterInit(kernel, self, arg)
 
 	local nMaxhp = GetPropertyInt(kernel, self, "MAXHP");
 	io.write("Hello Lua MAXHP:" ..nMaxhp .. "\n");
-
+--[[
 	--property callback
 	AddPropertyCallBack(kernel, self, "MAXHP", "Test", "MaxPropertyCallBack");
 	local maxHP = 400;
@@ -56,7 +56,7 @@ function Test:AfterInit(kernel, self, arg)
 
 	--Hearback
 	AddHeartBeat(kernel, self, "strHeartBeatName","Test", "HearCallBack", 5, 5);
-
+--]]
 end
 
 function Test:BeforeShut(kernel, self, arg)
