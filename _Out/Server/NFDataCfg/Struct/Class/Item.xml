@@ -32,5 +32,6 @@
         <Property Desc="物品脚本文件" Id="Script" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
         <Property Desc="限制时间" Id="Duration" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
     </Propertys>
+    <Components/>
     <Includes/>
 </XML>

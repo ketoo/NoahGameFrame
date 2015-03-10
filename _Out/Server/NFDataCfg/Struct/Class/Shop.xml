@@ -11,5 +11,6 @@
         <Property Desc="" Id="Diamond" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="" Id="Level" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
     </Propertys>
+    <Components/>
     <Includes/>
 </XML>
