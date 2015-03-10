@@ -42,5 +42,6 @@
         <Property Desc="BUFF免疫开关" Id="BUFF_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="客户端预设模型" Id="Prefab" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
     </Propertys>
+    <Components/>
     <Includes/>
 </XML>

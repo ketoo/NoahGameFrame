@@ -18,5 +18,6 @@
         <Property Desc="" Id="EFT_CANCEL" Index="5" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="5" Type="int" View="1"/>
         <Property Desc="" Id="EFT_FINISH" Index="6" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="6" Type="int" View="1"/>
     </Propertys>
+    <Components/>
     <Includes/>
 </XML>
