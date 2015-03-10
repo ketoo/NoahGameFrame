@@ -13,5 +13,6 @@
         <Property Desc="死亡是否清除" Id="EffectClearOnDead" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="下线是否保存" Id="DownSaveType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
     </Propertys>
+    <Components/>
     <Includes/>
 </XML>

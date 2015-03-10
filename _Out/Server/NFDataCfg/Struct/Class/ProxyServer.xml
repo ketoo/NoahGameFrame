@@ -10,5 +10,6 @@
         <Property Desc="IP地址" Id="IP" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
         <Property Desc="作为服务器时：相对客户端的port" Id="Port" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
     </Propertys>
+    <Components/>
     <Includes/>
 </XML>
