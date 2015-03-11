@@ -84,7 +84,7 @@ int NFCSLGBuildingModule::AddBuilding(const NFIDENTID& self, const std::string& 
     xDataList << NFTimeEx::GetNowTime(); // z
     xDataList << int(0); // z
 
-    if (0 != pRecord->AddRow(-1, xDataList))
+    if (0 > pRecord->AddRow(-1, xDataList))
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strBuilding, "cannot be added, [BuildingList] Record is full!", __FUNCTION__, __LINE__);
         return 1;
