@@ -37,9 +37,9 @@
 			<Camera EventTime="0.0" EventType="0" AmountParam="0.0,0.0,0.0" ShakeTime="0.0" MethodCall="" MethodParam=""/>
 		</CameraControlEvents>
 		<ParticleEvents>
-			<Particle EventTime="0.01" Rotation="0" ParticlePath="Prefabs/SFXs/Partner/Male100/male_cast_2_031_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="1" DestroyTime="0.5" MethodCall="" MethodParam=""/>
-			<Particle EventTime="0.01" Rotation="0" ParticlePath="Prefabs/SFXs/Partner/Male100/male_cast_2_031" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="1" DestroyTime="0.5" MethodCall="" MethodParam=""/>
-			<Particle EventTime="0.01" Rotation="0" ParticlePath="Prefabs/SFXs/Partner/Male100/male_cast_2_1001_2_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="1" DestroyTime="0.5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0.01" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_031_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="1" DestroyTime="0.5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0.01" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_031" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="1" DestroyTime="0.5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0.01" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_1001_2_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="1" DestroyTime="0.5" MethodCall="" MethodParam=""/>
 		</ParticleEvents>
 		<EnableEvents>
 			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
@@ -60,7 +60,7 @@
 			<Camera EventTime="0.7" EventType="0" AmountParam="1.0,0.0,1.0" ShakeTime="0.2" MethodCall="" MethodParam=""/>
 		</CameraControlEvents>
 		<ParticleEvents>
-			<Particle EventTime="0.1" Rotation="0" ParticlePath="Prefabs/SFXs/Partner/Male100/male_cast_2_103" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0.1" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_103" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
 		</ParticleEvents>
 		<EnableEvents>
 			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
@@ -84,9 +84,9 @@
 			<Camera EventTime="0.0" EventType="0" AmountParam="0.0,0.0,0.0" ShakeTime="0.0" MethodCall="" MethodParam=""/>
 		</CameraControlEvents>
 		<ParticleEvents>
-			<Particle EventTime="0.0" Rotation="0" ParticlePath="Prefabs/SFXs/Partner/Male100/Male100_102_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
-			<Particle EventTime="0.0" Rotation="0" ParticlePath="Prefabs/SFXs/Partner/Male100/Male100_104_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
-			<Particle EventTime="0.0" Rotation="0" ParticlePath="Prefabs/SFXs/Partner/Male100/male_cast_2_102" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0.0" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/Male100_102_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0.0" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/Male100_104_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0.0" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_102" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
 		
 		</ParticleEvents>
 		<EnableEvents>
@@ -111,7 +111,7 @@
 			<Camera EventTime="0.0" EventType="0" AmountParam="0.0,0.0,0.0" ShakeTime="0.0" MethodCall="" MethodParam=""/>
 		</CameraControlEvents>
 		<ParticleEvents>
-			<Particle EventTime="0.2" Rotation="0" ParticlePath="Prefabs/SFXs/Partner/Male100/male_cast_2_1001_2_3" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0.2" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_1001_2_3" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
 		
 		</ParticleEvents>
 		<EnableEvents>
@@ -136,9 +136,9 @@
 			<Camera EventTime="0.0" EventType="0" AmountParam="0.0,0.0,0.0" ShakeTime="0.0" MethodCall="" MethodParam=""/>
 		</CameraControlEvents>
 		<ParticleEvents>
-			<Particle EventTime="0.1" Rotation="0" ParticlePath="Prefabs/SFXs/Partner/Male100/Male100_102_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
-			<Particle EventTime="0.1" Rotation="0" ParticlePath="Prefabs/SFXs/Partner/Male100/Male100_105_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
-			<Particle EventTime="0.2" Rotation="0" ParticlePath="Prefabs/SFXs/Partner/Male100/male_cast_2_104" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0.1" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/Male100_102_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0.1" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/Male100_105_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0.2" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_104" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
 		
 		</ParticleEvents>
 		<EnableEvents>
