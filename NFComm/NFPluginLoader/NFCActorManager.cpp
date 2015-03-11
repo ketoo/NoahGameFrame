@@ -13,18 +13,15 @@ bool NFCActorManager::Init()
 {
 #ifdef NF_USE_ACTOR
     m_pFramework = new Theron::Framework(1);
-#endif
-    //首个主线程
-    //mActorVec.push_back(new NFCPluginManager(*m_pFramework, this, EACTOR::EACTOR_MAIN));
 
 	for (int i = EACTOR::EACTOR_MAIN; i < EACTOR::EACTOR_END; ++i)
 	{
-#ifdef NF_USE_ACTOR
+
 		mActorVec.push_back(new NFCPluginManager(*m_pFramework, this, (EACTOR)i));
-#else
-		mActorVec.push_back(new NFCPluginManager(this));
-#endif
 	}
+#else
+	mActorVec.push_back(new NFCPluginManager(this));
+#endif
 
 	std::vector<NFIActor*>::iterator it = mActorVec.begin();
 	for (; it != mActorVec.end(); ++it)

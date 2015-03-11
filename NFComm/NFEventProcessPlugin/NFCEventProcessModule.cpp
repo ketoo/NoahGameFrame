@@ -126,7 +126,7 @@ bool NFCEventProcessModule::RemoveEventCallBack(const NFIDENTID& objectID, const
     return false;
 }
 
-bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventID, const NFIDataList& valueList)
+bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventID, const NFIDataList& valueList, const bool bSync)
 {
     NF_SHARE_PTR<NFCObjectEventInfo> pObjectEventInfo = mObjectEventInfoMapEx.GetElement(objectID);
     if (!pObjectEventInfo.get())
@@ -141,19 +141,30 @@ bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventI
         return false;
     }
 
-    EVENT_PROCESS_FUNCTOR_PTR cb;// = NF_SHARE_PTR<EVENT_PROCESS_FUNCTOR>(NULL);
-    bool bRet = pEventInfo->First(cb);
-    while (bRet)
-    {
-        cb.get()->operator()(objectID, nEventID,  valueList);
+	if (bSync)
+	{
+		EVENT_PROCESS_FUNCTOR_PTR cb;// = NF_SHARE_PTR<EVENT_PROCESS_FUNCTOR>(NULL);
+		bool bRet = pEventInfo->First(cb);
+		while (bRet)
+		{
+			cb.get()->operator()(objectID, nEventID,  valueList);
 
-        bRet = pEventInfo->Next(cb);
-    }
+			bRet = pEventInfo->Next(cb);
+		}
+
+	}
+	else
+	{
+		
+#ifdef NF_USE_ACTOR
+		//发给哪个空闲的呢
+		//pPluginManager->Send(, pPluginManager->GetAddress(), pPluginManager->GetActorManager()->GetAddress(NFIActorManager::EACTOR_END-1));
+#endif	}
 
     return true;
 }
 
-bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList)
+bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList, const bool bSync)
 {
     NF_SHARE_PTR<NFClassEventList> pEventList = m_pClassEventInfoEx->GetElement(strClassName);
     if (pEventList.get())
