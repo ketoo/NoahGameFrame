@@ -44,8 +44,8 @@ public:
     virtual bool RemoveEvent(const NFIDENTID& objectID) = 0;
     virtual bool RemoveEventCallBack(const NFIDENTID& objectID, const int nEventID) = 0;
 
-    virtual bool DoEvent(const NFIDENTID& objectID, const int nEventID, const NFIDataList& valueList) = 0;
-    virtual bool DoEvent(const NFIDENTID& objectID,  const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList) = 0;
+    virtual bool DoEvent(const NFIDENTID& objectID, const int nEventID, const NFIDataList& valueList, const bool bSync = true) = 0;
+    virtual bool DoEvent(const NFIDENTID& objectID,  const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList, const bool bSync = true) = 0;
 
     virtual bool AddEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb) = 0;
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb) = 0;
