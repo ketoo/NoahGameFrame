@@ -159,7 +159,8 @@ bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventI
 #ifdef NF_USE_ACTOR
 		//发给哪个空闲的呢
 		//pPluginManager->Send(, pPluginManager->GetAddress(), pPluginManager->GetActorManager()->GetAddress(NFIActorManager::EACTOR_END-1));
-#endif	}
+#endif
+	}
 
     return true;
 }
