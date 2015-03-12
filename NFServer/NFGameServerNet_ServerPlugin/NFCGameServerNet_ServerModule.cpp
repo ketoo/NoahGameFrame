@@ -2006,7 +2006,7 @@ void NFCGameServerNet_ServerModule::OnClienChatProcess( const NFIPacket& msg )
 void NFCGameServerNet_ServerModule::OnClientJoinPVP(const NFIPacket& msg)
 {
     NFIDENTID nPlayerID;
-    NFMsg::ReqJoinActivity xMsg;
+    NFMsg::ReqAckJoinActivity xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
         return;
@@ -2014,7 +2014,7 @@ void NFCGameServerNet_ServerModule::OnClientJoinPVP(const NFIPacket& msg)
 
     switch (xMsg.activity_type())
     {
-    case NFMsg::ReqJoinActivity_EGameActivityType_EGAT_PVP:
+	case NFMsg::ReqAckJoinActivity_EGameActivityType_EGAT_PVP:
         m_pPVPModule->StartPVPWar(nPlayerID);
         break;
     default:
