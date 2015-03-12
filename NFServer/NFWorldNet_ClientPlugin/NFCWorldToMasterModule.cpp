@@ -153,7 +153,7 @@ int NFCWorldToMasterModule::OnSelectServerProcess(const NFIPacket& msg)
 	}
 
     NFCDataList var;
-    var << xMsg.world_id() << xMsg.sender_ip()  << xMsg.login_id() << xMsg.account();
+    var << xMsg.world_id() << PBToNF(xMsg.sender())  << xMsg.login_id() << xMsg.account();
     m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, var);
 
     return 0;
@@ -162,7 +162,7 @@ int NFCWorldToMasterModule::OnSelectServerProcess(const NFIPacket& msg)
 int NFCWorldToMasterModule::OnSelectServerResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
     if (var.GetCount() != 7
-        || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT,
+        || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_OBJECT,
 		TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_STRING,
 		TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
     {
@@ -170,7 +170,7 @@ int NFCWorldToMasterModule::OnSelectServerResultsEvent(const NFIDENTID& object, 
     }
 
     const int nWorldID = var.Int(0);
-    const int nSenderAddress = var.Int(1);
+    const NFIDENTID xClientIdent = var.Object(1);
     const int nLoginID = var.Int(2);
     const std::string& strAccount = var.String(3);
     const std::string& strWorldAddress = var.String(4);
@@ -182,7 +182,7 @@ int NFCWorldToMasterModule::OnSelectServerResultsEvent(const NFIDENTID& object, 
     xMsg.set_world_id(nWorldID);
     xMsg.set_login_id(nLoginID);
     xMsg.set_world_port(nPort);
-    xMsg.set_sender_ip(nSenderAddress);
+    xMsg.mutable_sender()->CopyFrom(NFToPB(xClientIdent));
     xMsg.set_account(strAccount);
     xMsg.set_world_ip(strWorldAddress);
     xMsg.set_world_key(strKey);
