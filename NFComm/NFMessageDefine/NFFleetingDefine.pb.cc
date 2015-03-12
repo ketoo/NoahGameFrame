@@ -69,6 +69,13 @@ const ::google::protobuf::Descriptor* EnableEvents_Enable_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   EnableEvents_Enable_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* EnableEvents_EEETYPE_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* TrailEvents_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  TrailEvents_reflection_ = NULL;
+const ::google::protobuf::Descriptor* TrailEvents_Trail_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  TrailEvents_Trail_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* TrailEvents_TEETYPE_descriptor_ = NULL;
 
 }  // namespace
 
@@ -298,7 +305,7 @@ void protobuf_AssignDesc_NFFleetingDefine_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ParticleEvents));
   ParticleEvents_Particle_descriptor_ = ParticleEvents_descriptor_->nested_type(0);
-  static const int ParticleEvents_Particle_offsets_[9] = {
+  static const int ParticleEvents_Particle_offsets_[10] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ParticleEvents_Particle, eventtime_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ParticleEvents_Particle, rotation_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ParticleEvents_Particle, particlepath_),
@@ -306,6 +313,7 @@ void protobuf_AssignDesc_NFFleetingDefine_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ParticleEvents_Particle, targettacheoffest_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ParticleEvents_Particle, casttosurface_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ParticleEvents_Particle, bindtarget_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ParticleEvents_Particle, destroytime_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ParticleEvents_Particle, methodcall_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ParticleEvents_Particle, methodparam_),
   };
@@ -356,6 +364,41 @@ void protobuf_AssignDesc_NFFleetingDefine_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(EnableEvents_Enable));
   EnableEvents_EEETYPE_descriptor_ = EnableEvents_descriptor_->enum_type(0);
+  TrailEvents_descriptor_ = file->message_type(7);
+  static const int TrailEvents_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TrailEvents, xtraillist_),
+  };
+  TrailEvents_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      TrailEvents_descriptor_,
+      TrailEvents::default_instance_,
+      TrailEvents_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TrailEvents, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TrailEvents, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(TrailEvents));
+  TrailEvents_Trail_descriptor_ = TrailEvents_descriptor_->nested_type(0);
+  static const int TrailEvents_Trail_offsets_[5] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TrailEvents_Trail, eventtime_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TrailEvents_Trail, eventtype_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TrailEvents_Trail, targetname_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TrailEvents_Trail, methodcall_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TrailEvents_Trail, methodparam_),
+  };
+  TrailEvents_Trail_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      TrailEvents_Trail_descriptor_,
+      TrailEvents_Trail::default_instance_,
+      TrailEvents_Trail_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TrailEvents_Trail, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TrailEvents_Trail, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(TrailEvents_Trail));
+  TrailEvents_TEETYPE_descriptor_ = TrailEvents_descriptor_->enum_type(0);
 }
 
 namespace {
@@ -396,6 +439,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
     EnableEvents_descriptor_, &EnableEvents::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     EnableEvents_Enable_descriptor_, &EnableEvents_Enable::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    TrailEvents_descriptor_, &TrailEvents::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    TrailEvents_Trail_descriptor_, &TrailEvents_Trail::default_instance());
 }
 
 }  // namespace
@@ -429,6 +476,10 @@ void protobuf_ShutdownFile_NFFleetingDefine_2eproto() {
   delete EnableEvents_reflection_;
   delete EnableEvents_Enable::default_instance_;
   delete EnableEvents_Enable_reflection_;
+  delete TrailEvents::default_instance_;
+  delete TrailEvents_reflection_;
+  delete TrailEvents_Trail::default_instance_;
+  delete TrailEvents_Trail_reflection_;
 }
 
 void protobuf_AddDesc_NFFleetingDefine_2eproto() {
@@ -490,25 +541,31 @@ void protobuf_AddDesc_NFFleetingDefine_2eproto() {
     "m\030\006 \002(\t\"\202\001\n\007ECEType\022\016\n\nEarthquake\020\000\022\r\n\tE"
     "xplosion\020\001\022\006\n\002No\020\002\022\014\n\010FireKick\020\003\022\t\n\005Stom"
     "p\020\004\022\007\n\003Yes\020\005\022\017\n\013SprintShake\020\006\022\014\n\010FreeMod"
-    "e\020\007\022\017\n\013MainRPGMode\020\010\"\325\003\n\016ParticleEvents\022"
+    "e\020\007\022\017\n\013MainRPGMode\020\010\"\352\003\n\016ParticleEvents\022"
     "4\n\rxParticleList\030\001 \003(\0132\035.NFFS.ParticleEv"
-    "ents.Particle\032\375\001\n\010Particle\022\021\n\tEventTime\030"
+    "ents.Particle\032\222\002\n\010Particle\022\021\n\tEventTime\030"
     "\001 \002(\002\022/\n\010Rotation\030\003 \002(\0162\035.NFFS.ParticleE"
     "vents.EPERTYPE\022\024\n\014ParticlePath\030\004 \002(\t\022\027\n\017"
     "TargetTacheName\030\005 \002(\t\022*\n\021TargetTacheOffe"
     "st\030\006 \002(\0132\017.NFFS.FSVector3\022\025\n\rCastToSurfa"
-    "ce\030\007 \002(\005\022\022\n\nBindTarget\030\010 \002(\005\022\022\n\nMethodCa"
-    "ll\030\t \002(\t\022\023\n\013MethodParam\030\n \002(\t\"\214\001\n\010EPERTY"
-    "PE\022\010\n\004NONE\020\000\022\017\n\013MatchTarget\020\001\022\014\n\010Random_"
-    "X\020\002\022\014\n\010Random_Y\020\003\022\014\n\010Random_Z\020\004\022\r\n\tRando"
-    "m_XY\020\005\022\r\n\tRandom_XZ\020\006\022\r\n\tRandom_YZ\020\007\022\016\n\n"
-    "Random_XYZ\020\010\"\350\001\n\014EnableEvents\022.\n\013xEnable"
-    "List\030\001 \003(\0132\031.NFFS.EnableEvents.Enable\032\207\001"
-    "\n\006Enable\022\021\n\tEventTime\030\001 \002(\002\022-\n\tEventType"
-    "\030\002 \002(\0162\032.NFFS.EnableEvents.EEETYPE\022\022\n\nTa"
-    "rgetName\030\003 \002(\t\022\022\n\nMethodCall\030\004 \002(\t\022\023\n\013Me"
-    "thodParam\030\005 \002(\t\"\036\n\007EEETYPE\022\010\n\004INIT\020\000\022\t\n\005"
-    "FINAL\020\001", 2807);
+    "ce\030\007 \002(\005\022\022\n\nBindTarget\030\010 \002(\005\022\023\n\013DestroyT"
+    "ime\030\t \002(\002\022\022\n\nMethodCall\030\n \002(\t\022\023\n\013MethodP"
+    "aram\030\013 \002(\t\"\214\001\n\010EPERTYPE\022\010\n\004NONE\020\000\022\017\n\013Mat"
+    "chTarget\020\001\022\014\n\010Random_X\020\002\022\014\n\010Random_Y\020\003\022\014"
+    "\n\010Random_Z\020\004\022\r\n\tRandom_XY\020\005\022\r\n\tRandom_XZ"
+    "\020\006\022\r\n\tRandom_YZ\020\007\022\016\n\nRandom_XYZ\020\010\"\350\001\n\014En"
+    "ableEvents\022.\n\013xEnableList\030\001 \003(\0132\031.NFFS.E"
+    "nableEvents.Enable\032\207\001\n\006Enable\022\021\n\tEventTi"
+    "me\030\001 \002(\002\022-\n\tEventType\030\002 \002(\0162\032.NFFS.Enabl"
+    "eEvents.EEETYPE\022\022\n\nTargetName\030\003 \002(\t\022\022\n\nM"
+    "ethodCall\030\004 \002(\t\022\023\n\013MethodParam\030\005 \002(\t\"\036\n\007"
+    "EEETYPE\022\010\n\004INIT\020\000\022\t\n\005FINAL\020\001\"\342\001\n\013TrailEv"
+    "ents\022+\n\nxTrailList\030\001 \003(\0132\027.NFFS.TrailEve"
+    "nts.Trail\032\205\001\n\005Trail\022\021\n\tEventTime\030\001 \002(\002\022,"
+    "\n\tEventType\030\002 \002(\0162\031.NFFS.TrailEvents.TEE"
+    "TYPE\022\022\n\nTargetName\030\003 \002(\t\022\022\n\nMethodCall\030\004"
+    " \002(\t\022\023\n\013MethodParam\030\005 \002(\t\"\036\n\007TEETYPE\022\010\n\004"
+    "INIT\020\000\022\t\n\005FINAL\020\001", 3057);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFFleetingDefine.proto", &protobuf_RegisterTypes);
   FSVector3::default_instance_ = new FSVector3();
@@ -525,6 +582,8 @@ void protobuf_AddDesc_NFFleetingDefine_2eproto() {
   ParticleEvents_Particle::default_instance_ = new ParticleEvents_Particle();
   EnableEvents::default_instance_ = new EnableEvents();
   EnableEvents_Enable::default_instance_ = new EnableEvents_Enable();
+  TrailEvents::default_instance_ = new TrailEvents();
+  TrailEvents_Trail::default_instance_ = new TrailEvents_Trail();
   FSVector3::default_instance_->InitAsDefaultInstance();
   SuwayyahEvents::default_instance_->InitAsDefaultInstance();
   SuwayyahEvents_Suwayyah::default_instance_->InitAsDefaultInstance();
@@ -539,6 +598,8 @@ void protobuf_AddDesc_NFFleetingDefine_2eproto() {
   ParticleEvents_Particle::default_instance_->InitAsDefaultInstance();
   EnableEvents::default_instance_->InitAsDefaultInstance();
   EnableEvents_Enable::default_instance_->InitAsDefaultInstance();
+  TrailEvents::default_instance_->InitAsDefaultInstance();
+  TrailEvents_Trail::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFFleetingDefine_2eproto);
 }
 
@@ -5120,6 +5181,7 @@ const int ParticleEvents_Particle::kTargetTacheNameFieldNumber;
 const int ParticleEvents_Particle::kTargetTacheOffestFieldNumber;
 const int ParticleEvents_Particle::kCastToSurfaceFieldNumber;
 const int ParticleEvents_Particle::kBindTargetFieldNumber;
+const int ParticleEvents_Particle::kDestroyTimeFieldNumber;
 const int ParticleEvents_Particle::kMethodCallFieldNumber;
 const int ParticleEvents_Particle::kMethodParamFieldNumber;
 #endif  // !_MSC_VER
@@ -5148,6 +5210,7 @@ void ParticleEvents_Particle::SharedCtor() {
   targettacheoffest_ = NULL;
   casttosurface_ = 0;
   bindtarget_ = 0;
+  destroytime_ = 0;
   methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -5215,13 +5278,14 @@ void ParticleEvents_Particle::Clear() {
     }
     casttosurface_ = 0;
     bindtarget_ = 0;
+    destroytime_ = 0;
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (has_methodcall()) {
       if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
         methodcall_->clear();
       }
     }
-  }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (has_methodparam()) {
       if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
         methodparam_->clear();
@@ -5350,12 +5414,28 @@ bool ParticleEvents_Particle::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(74)) goto parse_MethodCall;
+        if (input->ExpectTag(77)) goto parse_DestroyTime;
         break;
       }
 
-      // required string MethodCall = 9;
+      // required float DestroyTime = 9;
       case 9: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+         parse_DestroyTime:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &destroytime_)));
+          set_has_destroytime();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(82)) goto parse_MethodCall;
+        break;
+      }
+
+      // required string MethodCall = 10;
+      case 10: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_MethodCall:
@@ -5367,12 +5447,12 @@ bool ParticleEvents_Particle::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(82)) goto parse_MethodParam;
+        if (input->ExpectTag(90)) goto parse_MethodParam;
         break;
       }
 
-      // required string MethodParam = 10;
-      case 10: {
+      // required string MethodParam = 11;
+      case 11: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_MethodParam:
@@ -5451,22 +5531,27 @@ void ParticleEvents_Particle::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->bindtarget(), output);
   }
 
-  // required string MethodCall = 9;
+  // required float DestroyTime = 9;
+  if (has_destroytime()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(9, this->destroytime(), output);
+  }
+
+  // required string MethodCall = 10;
   if (has_methodcall()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->methodcall().data(), this->methodcall().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      9, this->methodcall(), output);
+      10, this->methodcall(), output);
   }
 
-  // required string MethodParam = 10;
+  // required string MethodParam = 11;
   if (has_methodparam()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->methodparam().data(), this->methodparam().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      10, this->methodparam(), output);
+      11, this->methodparam(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -5525,24 +5610,29 @@ void ParticleEvents_Particle::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->bindtarget(), target);
   }
 
-  // required string MethodCall = 9;
+  // required float DestroyTime = 9;
+  if (has_destroytime()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(9, this->destroytime(), target);
+  }
+
+  // required string MethodCall = 10;
   if (has_methodcall()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->methodcall().data(), this->methodcall().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        9, this->methodcall(), target);
+        10, this->methodcall(), target);
   }
 
-  // required string MethodParam = 10;
+  // required string MethodParam = 11;
   if (has_methodparam()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->methodparam().data(), this->methodparam().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        10, this->methodparam(), target);
+        11, this->methodparam(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -5602,16 +5692,21 @@ int ParticleEvents_Particle::ByteSize() const {
           this->bindtarget());
     }
 
-    // required string MethodCall = 9;
+    // required float DestroyTime = 9;
+    if (has_destroytime()) {
+      total_size += 1 + 4;
+    }
+
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    // required string MethodCall = 10;
     if (has_methodcall()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->methodcall());
     }
 
-  }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // required string MethodParam = 10;
+    // required string MethodParam = 11;
     if (has_methodparam()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -5666,11 +5761,14 @@ void ParticleEvents_Particle::MergeFrom(const ParticleEvents_Particle& from) {
     if (from.has_bindtarget()) {
       set_bindtarget(from.bindtarget());
     }
-    if (from.has_methodcall()) {
-      set_methodcall(from.methodcall());
+    if (from.has_destroytime()) {
+      set_destroytime(from.destroytime());
     }
   }
   if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (from.has_methodcall()) {
+      set_methodcall(from.methodcall());
+    }
     if (from.has_methodparam()) {
       set_methodparam(from.methodparam());
     }
@@ -5691,7 +5789,7 @@ void ParticleEvents_Particle::CopyFrom(const ParticleEvents_Particle& from) {
 }
 
 bool ParticleEvents_Particle::IsInitialized() const {
-  if ((_has_bits_[0] & 0x000001ff) != 0x000001ff) return false;
+  if ((_has_bits_[0] & 0x000003ff) != 0x000003ff) return false;
 
   if (has_targettacheoffest()) {
     if (!this->targettacheoffest().IsInitialized()) return false;
@@ -5708,6 +5806,7 @@ void ParticleEvents_Particle::Swap(ParticleEvents_Particle* other) {
     std::swap(targettacheoffest_, other->targettacheoffest_);
     std::swap(casttosurface_, other->casttosurface_);
     std::swap(bindtarget_, other->bindtarget_);
+    std::swap(destroytime_, other->destroytime_);
     std::swap(methodcall_, other->methodcall_);
     std::swap(methodparam_, other->methodparam_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -6578,6 +6677,657 @@ void EnableEvents::Swap(EnableEvents* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = EnableEvents_descriptor_;
   metadata.reflection = EnableEvents_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* TrailEvents_TEETYPE_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return TrailEvents_TEETYPE_descriptor_;
+}
+bool TrailEvents_TEETYPE_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const TrailEvents_TEETYPE TrailEvents::INIT;
+const TrailEvents_TEETYPE TrailEvents::FINAL;
+const TrailEvents_TEETYPE TrailEvents::TEETYPE_MIN;
+const TrailEvents_TEETYPE TrailEvents::TEETYPE_MAX;
+const int TrailEvents::TEETYPE_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int TrailEvents_Trail::kEventTimeFieldNumber;
+const int TrailEvents_Trail::kEventTypeFieldNumber;
+const int TrailEvents_Trail::kTargetNameFieldNumber;
+const int TrailEvents_Trail::kMethodCallFieldNumber;
+const int TrailEvents_Trail::kMethodParamFieldNumber;
+#endif  // !_MSC_VER
+
+TrailEvents_Trail::TrailEvents_Trail()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void TrailEvents_Trail::InitAsDefaultInstance() {
+}
+
+TrailEvents_Trail::TrailEvents_Trail(const TrailEvents_Trail& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void TrailEvents_Trail::SharedCtor() {
+  _cached_size_ = 0;
+  eventtime_ = 0;
+  eventtype_ = 0;
+  targetname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+TrailEvents_Trail::~TrailEvents_Trail() {
+  SharedDtor();
+}
+
+void TrailEvents_Trail::SharedDtor() {
+  if (targetname_ != &::google::protobuf::internal::kEmptyString) {
+    delete targetname_;
+  }
+  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
+    delete methodcall_;
+  }
+  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
+    delete methodparam_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void TrailEvents_Trail::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* TrailEvents_Trail::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return TrailEvents_Trail_descriptor_;
+}
+
+const TrailEvents_Trail& TrailEvents_Trail::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFFleetingDefine_2eproto();
+  return *default_instance_;
+}
+
+TrailEvents_Trail* TrailEvents_Trail::default_instance_ = NULL;
+
+TrailEvents_Trail* TrailEvents_Trail::New() const {
+  return new TrailEvents_Trail;
+}
+
+void TrailEvents_Trail::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    eventtime_ = 0;
+    eventtype_ = 0;
+    if (has_targetname()) {
+      if (targetname_ != &::google::protobuf::internal::kEmptyString) {
+        targetname_->clear();
+      }
+    }
+    if (has_methodcall()) {
+      if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
+        methodcall_->clear();
+      }
+    }
+    if (has_methodparam()) {
+      if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
+        methodparam_->clear();
+      }
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool TrailEvents_Trail::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required float EventTime = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &eventtime_)));
+          set_has_eventtime();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_EventType;
+        break;
+      }
+
+      // required .NFFS.TrailEvents.TEETYPE EventType = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_EventType:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::NFFS::TrailEvents_TEETYPE_IsValid(value)) {
+            set_eventtype(static_cast< ::NFFS::TrailEvents_TEETYPE >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(2, value);
+          }
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_TargetName;
+        break;
+      }
+
+      // required string TargetName = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_TargetName:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_targetname()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->targetname().data(), this->targetname().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(34)) goto parse_MethodCall;
+        break;
+      }
+
+      // required string MethodCall = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_MethodCall:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_methodcall()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->methodcall().data(), this->methodcall().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(42)) goto parse_MethodParam;
+        break;
+      }
+
+      // required string MethodParam = 5;
+      case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_MethodParam:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_methodparam()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->methodparam().data(), this->methodparam().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void TrailEvents_Trail::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required float EventTime = 1;
+  if (has_eventtime()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->eventtime(), output);
+  }
+
+  // required .NFFS.TrailEvents.TEETYPE EventType = 2;
+  if (has_eventtype()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->eventtype(), output);
+  }
+
+  // required string TargetName = 3;
+  if (has_targetname()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->targetname().data(), this->targetname().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      3, this->targetname(), output);
+  }
+
+  // required string MethodCall = 4;
+  if (has_methodcall()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->methodcall().data(), this->methodcall().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      4, this->methodcall(), output);
+  }
+
+  // required string MethodParam = 5;
+  if (has_methodparam()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->methodparam().data(), this->methodparam().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      5, this->methodparam(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* TrailEvents_Trail::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required float EventTime = 1;
+  if (has_eventtime()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->eventtime(), target);
+  }
+
+  // required .NFFS.TrailEvents.TEETYPE EventType = 2;
+  if (has_eventtype()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->eventtype(), target);
+  }
+
+  // required string TargetName = 3;
+  if (has_targetname()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->targetname().data(), this->targetname().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->targetname(), target);
+  }
+
+  // required string MethodCall = 4;
+  if (has_methodcall()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->methodcall().data(), this->methodcall().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->methodcall(), target);
+  }
+
+  // required string MethodParam = 5;
+  if (has_methodparam()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->methodparam().data(), this->methodparam().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        5, this->methodparam(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int TrailEvents_Trail::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required float EventTime = 1;
+    if (has_eventtime()) {
+      total_size += 1 + 4;
+    }
+
+    // required .NFFS.TrailEvents.TEETYPE EventType = 2;
+    if (has_eventtype()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->eventtype());
+    }
+
+    // required string TargetName = 3;
+    if (has_targetname()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->targetname());
+    }
+
+    // required string MethodCall = 4;
+    if (has_methodcall()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->methodcall());
+    }
+
+    // required string MethodParam = 5;
+    if (has_methodparam()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->methodparam());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void TrailEvents_Trail::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const TrailEvents_Trail* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const TrailEvents_Trail*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void TrailEvents_Trail::MergeFrom(const TrailEvents_Trail& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_eventtime()) {
+      set_eventtime(from.eventtime());
+    }
+    if (from.has_eventtype()) {
+      set_eventtype(from.eventtype());
+    }
+    if (from.has_targetname()) {
+      set_targetname(from.targetname());
+    }
+    if (from.has_methodcall()) {
+      set_methodcall(from.methodcall());
+    }
+    if (from.has_methodparam()) {
+      set_methodparam(from.methodparam());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void TrailEvents_Trail::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void TrailEvents_Trail::CopyFrom(const TrailEvents_Trail& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool TrailEvents_Trail::IsInitialized() const {
+  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
+
+  return true;
+}
+
+void TrailEvents_Trail::Swap(TrailEvents_Trail* other) {
+  if (other != this) {
+    std::swap(eventtime_, other->eventtime_);
+    std::swap(eventtype_, other->eventtype_);
+    std::swap(targetname_, other->targetname_);
+    std::swap(methodcall_, other->methodcall_);
+    std::swap(methodparam_, other->methodparam_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata TrailEvents_Trail::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = TrailEvents_Trail_descriptor_;
+  metadata.reflection = TrailEvents_Trail_reflection_;
+  return metadata;
+}
+
+
+// -------------------------------------------------------------------
+
+#ifndef _MSC_VER
+const int TrailEvents::kXTrailListFieldNumber;
+#endif  // !_MSC_VER
+
+TrailEvents::TrailEvents()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void TrailEvents::InitAsDefaultInstance() {
+}
+
+TrailEvents::TrailEvents(const TrailEvents& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void TrailEvents::SharedCtor() {
+  _cached_size_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+TrailEvents::~TrailEvents() {
+  SharedDtor();
+}
+
+void TrailEvents::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void TrailEvents::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* TrailEvents::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return TrailEvents_descriptor_;
+}
+
+const TrailEvents& TrailEvents::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFFleetingDefine_2eproto();
+  return *default_instance_;
+}
+
+TrailEvents* TrailEvents::default_instance_ = NULL;
+
+TrailEvents* TrailEvents::New() const {
+  return new TrailEvents;
+}
+
+void TrailEvents::Clear() {
+  xtraillist_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool TrailEvents::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated .NFFS.TrailEvents.Trail xTrailList = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_xTrailList:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_xtraillist()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(10)) goto parse_xTrailList;
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void TrailEvents::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // repeated .NFFS.TrailEvents.Trail xTrailList = 1;
+  for (int i = 0; i < this->xtraillist_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->xtraillist(i), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* TrailEvents::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // repeated .NFFS.TrailEvents.Trail xTrailList = 1;
+  for (int i = 0; i < this->xtraillist_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->xtraillist(i), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int TrailEvents::ByteSize() const {
+  int total_size = 0;
+
+  // repeated .NFFS.TrailEvents.Trail xTrailList = 1;
+  total_size += 1 * this->xtraillist_size();
+  for (int i = 0; i < this->xtraillist_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->xtraillist(i));
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void TrailEvents::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const TrailEvents* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const TrailEvents*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void TrailEvents::MergeFrom(const TrailEvents& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  xtraillist_.MergeFrom(from.xtraillist_);
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void TrailEvents::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void TrailEvents::CopyFrom(const TrailEvents& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool TrailEvents::IsInitialized() const {
+
+  for (int i = 0; i < xtraillist_size(); i++) {
+    if (!this->xtraillist(i).IsInitialized()) return false;
+  }
+  return true;
+}
+
+void TrailEvents::Swap(TrailEvents* other) {
+  if (other != this) {
+    xtraillist_.Swap(&other->xtraillist_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata TrailEvents::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = TrailEvents_descriptor_;
+  metadata.reflection = TrailEvents_reflection_;
   return metadata;
 }
 
