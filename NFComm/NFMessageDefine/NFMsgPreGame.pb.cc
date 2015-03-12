@@ -235,7 +235,7 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
   static const int ReqConnectWorld_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqConnectWorld, world_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqConnectWorld, account_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqConnectWorld, sender_ip_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqConnectWorld, sender_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqConnectWorld, login_id_),
   };
   ReqConnectWorld_reflection_ =
@@ -252,7 +252,7 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
   AckConnectWorldResult_descriptor_ = file->message_type(9);
   static const int AckConnectWorldResult_offsets_[7] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckConnectWorldResult, world_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckConnectWorldResult, sender_ip_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckConnectWorldResult, sender_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckConnectWorldResult, login_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckConnectWorldResult, account_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckConnectWorldResult, world_ip_),
@@ -558,36 +558,36 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
     "7\n\rReqServerList\022&\n\004type\030\001 \002(\0162\030.NFMsg.R"
     "eqServerListType\"X\n\rAckServerList\022&\n\004typ"
     "e\030\001 \002(\0162\030.NFMsg.ReqServerListType\022\037\n\004inf"
-    "o\030\002 \003(\0132\021.NFMsg.ServerInfo\"Y\n\017ReqConnect"
+    "o\030\002 \003(\0132\021.NFMsg.ServerInfo\"d\n\017ReqConnect"
     "World\022\020\n\010world_id\030\001 \002(\005\022\017\n\007account\030\002 \001(\014"
-    "\022\021\n\tsender_ip\030\003 \001(\005\022\020\n\010login_id\030\004 \001(\005\"\230\001"
-    "\n\025AckConnectWorldResult\022\020\n\010world_id\030\001 \002("
-    "\005\022\021\n\tsender_ip\030\002 \002(\005\022\020\n\010login_id\030\003 \002(\005\022\017"
-    "\n\007account\030\004 \002(\014\022\020\n\010world_ip\030\005 \002(\014\022\022\n\nwor"
-    "ld_port\030\006 \002(\005\022\021\n\tworld_key\030\007 \002(\014\"#\n\017ReqS"
-    "electServer\022\020\n\010world_id\030\001 \002(\005\"5\n\020ReqKick"
-    "FromWorld\022\020\n\010world_id\030\001 \002(\005\022\017\n\007account\030\002"
-    " \002(\014\"/\n\013ReqRoleList\022\017\n\007game_id\030\001 \002(\005\022\017\n\007"
-    "account\030\002 \002(\014\"\373\001\n\014RoleLiteInfo\022\030\n\002id\030\001 \002"
-    "(\0132\014.NFMsg.Ident\022\016\n\006career\030\002 \002(\005\022\013\n\003sex\030"
-    "\003 \002(\005\022\014\n\004race\030\004 \002(\005\022\021\n\tnoob_name\030\005 \002(\014\022\017"
-    "\n\007game_id\030\006 \002(\005\022\022\n\nrole_level\030\007 \002(\005\022\023\n\013d"
-    "elete_time\030\010 \002(\005\022\020\n\010reg_time\030\t \002(\005\022\031\n\021la"
-    "st_offline_time\030\n \002(\005\022\027\n\017last_offline_ip"
-    "\030\013 \002(\005\022\023\n\013view_record\030\014 \002(\014\"=\n\023AckRoleLi"
-    "teInfoList\022&\n\tchar_data\030\001 \003(\0132\023.NFMsg.Ro"
-    "leLiteInfo\"o\n\rReqCreateRole\022\017\n\007account\030\001"
-    " \002(\014\022\016\n\006career\030\002 \002(\005\022\013\n\003sex\030\003 \002(\005\022\014\n\004rac"
-    "e\030\004 \002(\005\022\021\n\tnoob_name\030\005 \002(\014\022\017\n\007game_id\030\006 "
-    "\002(\005\"\?\n\rReqDeleteRole\022\017\n\007account\030\001 \002(\014\022\014\n"
-    "\004name\030\002 \002(\014\022\017\n\007game_id\030\003 \002(\005\"@\n\016ReqRecov"
-    "erRole\022\017\n\007account\030\001 \002(\014\022\014\n\004name\030\002 \002(\014\022\017\n"
-    "\007game_id\030\003 \002(\005\" \n\017ServerHeartBeat\022\r\n\005cou"
-    "nt\030\001 \001(\005*Z\n\014EServerState\022\r\n\tEST_CRASH\020\000\022"
-    "\016\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST_FIR"
-    "E\020\003\022\017\n\013EST_MAINTEN\020\004*@\n\021ReqServerListTyp"
-    "e\022\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GAMES_E"
-    "RVER\020\001", 2126);
+    "\022\034\n\006sender\030\003 \001(\0132\014.NFMsg.Ident\022\020\n\010login_"
+    "id\030\004 \001(\005\"\243\001\n\025AckConnectWorldResult\022\020\n\010wo"
+    "rld_id\030\001 \002(\005\022\034\n\006sender\030\002 \002(\0132\014.NFMsg.Ide"
+    "nt\022\020\n\010login_id\030\003 \002(\005\022\017\n\007account\030\004 \002(\014\022\020\n"
+    "\010world_ip\030\005 \002(\014\022\022\n\nworld_port\030\006 \002(\005\022\021\n\tw"
+    "orld_key\030\007 \002(\014\"#\n\017ReqSelectServer\022\020\n\010wor"
+    "ld_id\030\001 \002(\005\"5\n\020ReqKickFromWorld\022\020\n\010world"
+    "_id\030\001 \002(\005\022\017\n\007account\030\002 \002(\014\"/\n\013ReqRoleLis"
+    "t\022\017\n\007game_id\030\001 \002(\005\022\017\n\007account\030\002 \002(\014\"\373\001\n\014"
+    "RoleLiteInfo\022\030\n\002id\030\001 \002(\0132\014.NFMsg.Ident\022\016"
+    "\n\006career\030\002 \002(\005\022\013\n\003sex\030\003 \002(\005\022\014\n\004race\030\004 \002("
+    "\005\022\021\n\tnoob_name\030\005 \002(\014\022\017\n\007game_id\030\006 \002(\005\022\022\n"
+    "\nrole_level\030\007 \002(\005\022\023\n\013delete_time\030\010 \002(\005\022\020"
+    "\n\010reg_time\030\t \002(\005\022\031\n\021last_offline_time\030\n "
+    "\002(\005\022\027\n\017last_offline_ip\030\013 \002(\005\022\023\n\013view_rec"
+    "ord\030\014 \002(\014\"=\n\023AckRoleLiteInfoList\022&\n\tchar"
+    "_data\030\001 \003(\0132\023.NFMsg.RoleLiteInfo\"o\n\rReqC"
+    "reateRole\022\017\n\007account\030\001 \002(\014\022\016\n\006career\030\002 \002"
+    "(\005\022\013\n\003sex\030\003 \002(\005\022\014\n\004race\030\004 \002(\005\022\021\n\tnoob_na"
+    "me\030\005 \002(\014\022\017\n\007game_id\030\006 \002(\005\"\?\n\rReqDeleteRo"
+    "le\022\017\n\007account\030\001 \002(\014\022\014\n\004name\030\002 \002(\014\022\017\n\007gam"
+    "e_id\030\003 \002(\005\"@\n\016ReqRecoverRole\022\017\n\007account\030"
+    "\001 \002(\014\022\014\n\004name\030\002 \002(\014\022\017\n\007game_id\030\003 \002(\005\" \n\017"
+    "ServerHeartBeat\022\r\n\005count\030\001 \001(\005*Z\n\014EServe"
+    "rState\022\r\n\tEST_CRASH\020\000\022\016\n\nEST_NARMAL\020\001\022\014\n"
+    "\010EST_BUSY\020\002\022\014\n\010EST_FIRE\020\003\022\017\n\013EST_MAINTEN"
+    "\020\004*@\n\021ReqServerListType\022\025\n\021RSLT_WORLD_SE"
+    "RVER\020\000\022\024\n\020RSLT_GAMES_ERVER\020\001", 2148);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgPreGame.proto", &protobuf_RegisterTypes);
   ServerInfoReport::default_instance_ = new ServerInfoReport();
@@ -3358,7 +3358,7 @@ void AckServerList::Swap(AckServerList* other) {
 #ifndef _MSC_VER
 const int ReqConnectWorld::kWorldIdFieldNumber;
 const int ReqConnectWorld::kAccountFieldNumber;
-const int ReqConnectWorld::kSenderIpFieldNumber;
+const int ReqConnectWorld::kSenderFieldNumber;
 const int ReqConnectWorld::kLoginIdFieldNumber;
 #endif  // !_MSC_VER
 
@@ -3368,6 +3368,7 @@ ReqConnectWorld::ReqConnectWorld()
 }
 
 void ReqConnectWorld::InitAsDefaultInstance() {
+  sender_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 ReqConnectWorld::ReqConnectWorld(const ReqConnectWorld& from)
@@ -3380,7 +3381,7 @@ void ReqConnectWorld::SharedCtor() {
   _cached_size_ = 0;
   world_id_ = 0;
   account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  sender_ip_ = 0;
+  sender_ = NULL;
   login_id_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -3394,6 +3395,7 @@ void ReqConnectWorld::SharedDtor() {
     delete account_;
   }
   if (this != default_instance_) {
+    delete sender_;
   }
 }
 
@@ -3426,7 +3428,9 @@ void ReqConnectWorld::Clear() {
         account_->clear();
       }
     }
-    sender_ip_ = 0;
+    if (has_sender()) {
+      if (sender_ != NULL) sender_->::NFMsg::Ident::Clear();
+    }
     login_id_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -3464,19 +3468,17 @@ bool ReqConnectWorld::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_sender_ip;
+        if (input->ExpectTag(26)) goto parse_sender;
         break;
       }
 
-      // optional int32 sender_ip = 3;
+      // optional .NFMsg.Ident sender = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_sender_ip:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &sender_ip_)));
-          set_has_sender_ip();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_sender:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_sender()));
         } else {
           goto handle_uninterpreted;
         }
@@ -3529,9 +3531,10 @@ void ReqConnectWorld::SerializeWithCachedSizes(
       2, this->account(), output);
   }
 
-  // optional int32 sender_ip = 3;
-  if (has_sender_ip()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->sender_ip(), output);
+  // optional .NFMsg.Ident sender = 3;
+  if (has_sender()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->sender(), output);
   }
 
   // optional int32 login_id = 4;
@@ -3559,9 +3562,11 @@ void ReqConnectWorld::SerializeWithCachedSizes(
         2, this->account(), target);
   }
 
-  // optional int32 sender_ip = 3;
-  if (has_sender_ip()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->sender_ip(), target);
+  // optional .NFMsg.Ident sender = 3;
+  if (has_sender()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->sender(), target);
   }
 
   // optional int32 login_id = 4;
@@ -3594,11 +3599,11 @@ int ReqConnectWorld::ByteSize() const {
           this->account());
     }
 
-    // optional int32 sender_ip = 3;
-    if (has_sender_ip()) {
+    // optional .NFMsg.Ident sender = 3;
+    if (has_sender()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->sender_ip());
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->sender());
     }
 
     // optional int32 login_id = 4;
@@ -3641,8 +3646,8 @@ void ReqConnectWorld::MergeFrom(const ReqConnectWorld& from) {
     if (from.has_account()) {
       set_account(from.account());
     }
-    if (from.has_sender_ip()) {
-      set_sender_ip(from.sender_ip());
+    if (from.has_sender()) {
+      mutable_sender()->::NFMsg::Ident::MergeFrom(from.sender());
     }
     if (from.has_login_id()) {
       set_login_id(from.login_id());
@@ -3666,6 +3671,9 @@ void ReqConnectWorld::CopyFrom(const ReqConnectWorld& from) {
 bool ReqConnectWorld::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
+  if (has_sender()) {
+    if (!this->sender().IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -3673,7 +3681,7 @@ void ReqConnectWorld::Swap(ReqConnectWorld* other) {
   if (other != this) {
     std::swap(world_id_, other->world_id_);
     std::swap(account_, other->account_);
-    std::swap(sender_ip_, other->sender_ip_);
+    std::swap(sender_, other->sender_);
     std::swap(login_id_, other->login_id_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
@@ -3694,7 +3702,7 @@ void ReqConnectWorld::Swap(ReqConnectWorld* other) {
 
 #ifndef _MSC_VER
 const int AckConnectWorldResult::kWorldIdFieldNumber;
-const int AckConnectWorldResult::kSenderIpFieldNumber;
+const int AckConnectWorldResult::kSenderFieldNumber;
 const int AckConnectWorldResult::kLoginIdFieldNumber;
 const int AckConnectWorldResult::kAccountFieldNumber;
 const int AckConnectWorldResult::kWorldIpFieldNumber;
@@ -3708,6 +3716,7 @@ AckConnectWorldResult::AckConnectWorldResult()
 }
 
 void AckConnectWorldResult::InitAsDefaultInstance() {
+  sender_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 AckConnectWorldResult::AckConnectWorldResult(const AckConnectWorldResult& from)
@@ -3719,7 +3728,7 @@ AckConnectWorldResult::AckConnectWorldResult(const AckConnectWorldResult& from)
 void AckConnectWorldResult::SharedCtor() {
   _cached_size_ = 0;
   world_id_ = 0;
-  sender_ip_ = 0;
+  sender_ = NULL;
   login_id_ = 0;
   account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   world_ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
@@ -3743,6 +3752,7 @@ void AckConnectWorldResult::SharedDtor() {
     delete world_key_;
   }
   if (this != default_instance_) {
+    delete sender_;
   }
 }
 
@@ -3770,7 +3780,9 @@ AckConnectWorldResult* AckConnectWorldResult::New() const {
 void AckConnectWorldResult::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     world_id_ = 0;
-    sender_ip_ = 0;
+    if (has_sender()) {
+      if (sender_ != NULL) sender_->::NFMsg::Ident::Clear();
+    }
     login_id_ = 0;
     if (has_account()) {
       if (account_ != &::google::protobuf::internal::kEmptyString) {
@@ -3810,19 +3822,17 @@ bool AckConnectWorldResult::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_sender_ip;
+        if (input->ExpectTag(18)) goto parse_sender;
         break;
       }
 
-      // required int32 sender_ip = 2;
+      // required .NFMsg.Ident sender = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_sender_ip:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &sender_ip_)));
-          set_has_sender_ip();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_sender:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_sender()));
         } else {
           goto handle_uninterpreted;
         }
@@ -3927,9 +3937,10 @@ void AckConnectWorldResult::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->world_id(), output);
   }
 
-  // required int32 sender_ip = 2;
-  if (has_sender_ip()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->sender_ip(), output);
+  // required .NFMsg.Ident sender = 2;
+  if (has_sender()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->sender(), output);
   }
 
   // required int32 login_id = 3;
@@ -3973,9 +3984,11 @@ void AckConnectWorldResult::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->world_id(), target);
   }
 
-  // required int32 sender_ip = 2;
-  if (has_sender_ip()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->sender_ip(), target);
+  // required .NFMsg.Ident sender = 2;
+  if (has_sender()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->sender(), target);
   }
 
   // required int32 login_id = 3;
@@ -4027,11 +4040,11 @@ int AckConnectWorldResult::ByteSize() const {
           this->world_id());
     }
 
-    // required int32 sender_ip = 2;
-    if (has_sender_ip()) {
+    // required .NFMsg.Ident sender = 2;
+    if (has_sender()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->sender_ip());
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->sender());
     }
 
     // required int32 login_id = 3;
@@ -4099,8 +4112,8 @@ void AckConnectWorldResult::MergeFrom(const AckConnectWorldResult& from) {
     if (from.has_world_id()) {
       set_world_id(from.world_id());
     }
-    if (from.has_sender_ip()) {
-      set_sender_ip(from.sender_ip());
+    if (from.has_sender()) {
+      mutable_sender()->::NFMsg::Ident::MergeFrom(from.sender());
     }
     if (from.has_login_id()) {
       set_login_id(from.login_id());
@@ -4136,13 +4149,16 @@ void AckConnectWorldResult::CopyFrom(const AckConnectWorldResult& from) {
 bool AckConnectWorldResult::IsInitialized() const {
   if ((_has_bits_[0] & 0x0000007f) != 0x0000007f) return false;
 
+  if (has_sender()) {
+    if (!this->sender().IsInitialized()) return false;
+  }
   return true;
 }
 
 void AckConnectWorldResult::Swap(AckConnectWorldResult* other) {
   if (other != this) {
     std::swap(world_id_, other->world_id_);
-    std::swap(sender_ip_, other->sender_ip_);
+    std::swap(sender_, other->sender_);
     std::swap(login_id_, other->login_id_);
     std::swap(account_, other->account_);
     std::swap(world_ip_, other->world_ip_);

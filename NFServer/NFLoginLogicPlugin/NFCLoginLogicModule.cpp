@@ -25,13 +25,13 @@ bool NFCLoginLogicModule::Shut()
 int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
     if (3 != var.GetCount()
-        || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
+        || !var.TypeEx(TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
     {
         return -1;
     }
 
     //////////////////////////////////////////////////////////////////////////
-    int nAddress = var.Int(0);
+    const NFIDENTID xIdent = var.Object(0);
     const std::string& strAccount = var.String(1);
     const std::string& strPassword = var.String(2);
     //int nState = m_pDataBaseModule->ConfirmAccountInfo(strAccount, strPassword);
@@ -40,7 +40,7 @@ int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventI
     int nState = 0;//= m_pNoSqlModule->ConfirmAccountInfo(strAccount, strPassword);
  
     NFCDataList valEventInfo;
-    valEventInfo << nState << nAddress << strAccount;
+    valEventInfo << nState << xIdent << strAccount;
     m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_LOGIN_RESULTS, valEventInfo);
   
     return 0;

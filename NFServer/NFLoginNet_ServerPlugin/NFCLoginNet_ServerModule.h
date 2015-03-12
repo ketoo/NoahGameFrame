@@ -91,6 +91,8 @@ protected:
 protected:
 	void SynWorldToClient(const int nFD);
 
+	NFMapEx<NFIDENTID, int> mxClientIdent;
+
 private:
 
     NFILoginToMasterModule* m_pLoginToMasterModule;
