@@ -78,21 +78,21 @@ bool NFCLoginToMasterModule::BeforeShut()
 int NFCLoginToMasterModule::OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
 	if (4 != var.GetCount()
-		|| !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT,
+		|| !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_OBJECT,
 		TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
 	{
 		return -1;
 	}
 
-	int nServerID = var.Int(0);
-	int nSenderAddress = var.Int(1);
-	int nLoginID = var.Int(2);
+	const int nServerID = var.Int(0);
+	const NFIDENTID xClientIdent = var.Object(1);
+	const int nLoginID = var.Int(2);
 	const std::string& strAccount = var.String(3);
 
 	NFMsg::ReqConnectWorld xData;
 	xData.set_world_id(nServerID);
 	xData.set_login_id(nLoginID);
-	xData.set_sender_ip(nSenderAddress);
+	xData.mutable_sender()->CopyFrom(NFToPB(xClientIdent));
 	xData.set_account(strAccount);
 
 	SendMsgPB(NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xData);
@@ -184,7 +184,7 @@ int NFCLoginToMasterModule::OnSelectServerResultProcess(const NFIPacket& msg)
 
     NFCDataList var;
     var << xMsg.world_id()
-        << xMsg.sender_ip()
+        << PBToNF(xMsg.sender())
         << xMsg.login_id()
         << xMsg.account()
         << xMsg.world_ip()

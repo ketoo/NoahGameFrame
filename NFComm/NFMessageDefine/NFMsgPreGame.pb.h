@@ -1112,12 +1112,14 @@ class ReqConnectWorld : public ::google::protobuf::Message {
   inline ::std::string* release_account();
   inline void set_allocated_account(::std::string* account);
 
-  // optional int32 sender_ip = 3;
-  inline bool has_sender_ip() const;
-  inline void clear_sender_ip();
-  static const int kSenderIpFieldNumber = 3;
-  inline ::google::protobuf::int32 sender_ip() const;
-  inline void set_sender_ip(::google::protobuf::int32 value);
+  // optional .NFMsg.Ident sender = 3;
+  inline bool has_sender() const;
+  inline void clear_sender();
+  static const int kSenderFieldNumber = 3;
+  inline const ::NFMsg::Ident& sender() const;
+  inline ::NFMsg::Ident* mutable_sender();
+  inline ::NFMsg::Ident* release_sender();
+  inline void set_allocated_sender(::NFMsg::Ident* sender);
 
   // optional int32 login_id = 4;
   inline bool has_login_id() const;
@@ -1132,8 +1134,8 @@ class ReqConnectWorld : public ::google::protobuf::Message {
   inline void clear_has_world_id();
   inline void set_has_account();
   inline void clear_has_account();
-  inline void set_has_sender_ip();
-  inline void clear_has_sender_ip();
+  inline void set_has_sender();
+  inline void clear_has_sender();
   inline void set_has_login_id();
   inline void clear_has_login_id();
 
@@ -1141,8 +1143,8 @@ class ReqConnectWorld : public ::google::protobuf::Message {
 
   ::std::string* account_;
   ::google::protobuf::int32 world_id_;
-  ::google::protobuf::int32 sender_ip_;
   ::google::protobuf::int32 login_id_;
+  ::NFMsg::Ident* sender_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
@@ -1217,12 +1219,14 @@ class AckConnectWorldResult : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 world_id() const;
   inline void set_world_id(::google::protobuf::int32 value);
 
-  // required int32 sender_ip = 2;
-  inline bool has_sender_ip() const;
-  inline void clear_sender_ip();
-  static const int kSenderIpFieldNumber = 2;
-  inline ::google::protobuf::int32 sender_ip() const;
-  inline void set_sender_ip(::google::protobuf::int32 value);
+  // required .NFMsg.Ident sender = 2;
+  inline bool has_sender() const;
+  inline void clear_sender();
+  static const int kSenderFieldNumber = 2;
+  inline const ::NFMsg::Ident& sender() const;
+  inline ::NFMsg::Ident* mutable_sender();
+  inline ::NFMsg::Ident* release_sender();
+  inline void set_allocated_sender(::NFMsg::Ident* sender);
 
   // required int32 login_id = 3;
   inline bool has_login_id() const;
@@ -1278,8 +1282,8 @@ class AckConnectWorldResult : public ::google::protobuf::Message {
  private:
   inline void set_has_world_id();
   inline void clear_has_world_id();
-  inline void set_has_sender_ip();
-  inline void clear_has_sender_ip();
+  inline void set_has_sender();
+  inline void clear_has_sender();
   inline void set_has_login_id();
   inline void clear_has_login_id();
   inline void set_has_account();
@@ -1293,13 +1297,13 @@ class AckConnectWorldResult : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::NFMsg::Ident* sender_;
   ::google::protobuf::int32 world_id_;
-  ::google::protobuf::int32 sender_ip_;
-  ::std::string* account_;
   ::google::protobuf::int32 login_id_;
-  ::google::protobuf::int32 world_port_;
+  ::std::string* account_;
   ::std::string* world_ip_;
   ::std::string* world_key_;
+  ::google::protobuf::int32 world_port_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
@@ -3670,26 +3674,42 @@ inline void ReqConnectWorld::set_allocated_account(::std::string* account) {
   }
 }
 
-// optional int32 sender_ip = 3;
-inline bool ReqConnectWorld::has_sender_ip() const {
+// optional .NFMsg.Ident sender = 3;
+inline bool ReqConnectWorld::has_sender() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void ReqConnectWorld::set_has_sender_ip() {
+inline void ReqConnectWorld::set_has_sender() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void ReqConnectWorld::clear_has_sender_ip() {
+inline void ReqConnectWorld::clear_has_sender() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void ReqConnectWorld::clear_sender_ip() {
-  sender_ip_ = 0;
-  clear_has_sender_ip();
+inline void ReqConnectWorld::clear_sender() {
+  if (sender_ != NULL) sender_->::NFMsg::Ident::Clear();
+  clear_has_sender();
 }
-inline ::google::protobuf::int32 ReqConnectWorld::sender_ip() const {
-  return sender_ip_;
+inline const ::NFMsg::Ident& ReqConnectWorld::sender() const {
+  return sender_ != NULL ? *sender_ : *default_instance_->sender_;
 }
-inline void ReqConnectWorld::set_sender_ip(::google::protobuf::int32 value) {
-  set_has_sender_ip();
-  sender_ip_ = value;
+inline ::NFMsg::Ident* ReqConnectWorld::mutable_sender() {
+  set_has_sender();
+  if (sender_ == NULL) sender_ = new ::NFMsg::Ident;
+  return sender_;
+}
+inline ::NFMsg::Ident* ReqConnectWorld::release_sender() {
+  clear_has_sender();
+  ::NFMsg::Ident* temp = sender_;
+  sender_ = NULL;
+  return temp;
+}
+inline void ReqConnectWorld::set_allocated_sender(::NFMsg::Ident* sender) {
+  delete sender_;
+  sender_ = sender;
+  if (sender) {
+    set_has_sender();
+  } else {
+    clear_has_sender();
+  }
 }
 
 // optional int32 login_id = 4;
@@ -3740,26 +3760,42 @@ inline void AckConnectWorldResult::set_world_id(::google::protobuf::int32 value)
   world_id_ = value;
 }
 
-// required int32 sender_ip = 2;
-inline bool AckConnectWorldResult::has_sender_ip() const {
+// required .NFMsg.Ident sender = 2;
+inline bool AckConnectWorldResult::has_sender() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void AckConnectWorldResult::set_has_sender_ip() {
+inline void AckConnectWorldResult::set_has_sender() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void AckConnectWorldResult::clear_has_sender_ip() {
+inline void AckConnectWorldResult::clear_has_sender() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void AckConnectWorldResult::clear_sender_ip() {
-  sender_ip_ = 0;
-  clear_has_sender_ip();
+inline void AckConnectWorldResult::clear_sender() {
+  if (sender_ != NULL) sender_->::NFMsg::Ident::Clear();
+  clear_has_sender();
 }
-inline ::google::protobuf::int32 AckConnectWorldResult::sender_ip() const {
-  return sender_ip_;
+inline const ::NFMsg::Ident& AckConnectWorldResult::sender() const {
+  return sender_ != NULL ? *sender_ : *default_instance_->sender_;
 }
-inline void AckConnectWorldResult::set_sender_ip(::google::protobuf::int32 value) {
-  set_has_sender_ip();
-  sender_ip_ = value;
+inline ::NFMsg::Ident* AckConnectWorldResult::mutable_sender() {
+  set_has_sender();
+  if (sender_ == NULL) sender_ = new ::NFMsg::Ident;
+  return sender_;
+}
+inline ::NFMsg::Ident* AckConnectWorldResult::release_sender() {
+  clear_has_sender();
+  ::NFMsg::Ident* temp = sender_;
+  sender_ = NULL;
+  return temp;
+}
+inline void AckConnectWorldResult::set_allocated_sender(::NFMsg::Ident* sender) {
+  delete sender_;
+  sender_ = sender;
+  if (sender) {
+    set_has_sender();
+  } else {
+    clear_has_sender();
+  }
 }
 
 // required int32 login_id = 3;
