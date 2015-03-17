@@ -24,6 +24,7 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
     m_pProxyToWorldModule = dynamic_cast<NFIProxyServerToWorldModule*>(pPluginManager->FindModule("NFCProxyServerToWorldModule"));
 	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
 	m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
+	m_pUUIDModule = dynamic_cast<NFIUUIDModule*>(pPluginManager->FindModule("NFCUUIDModule"));
 	
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
@@ -31,6 +32,7 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
     assert(NULL != m_pProxyToWorldModule);
 	assert(NULL != m_pLogModule);
 	assert(NULL != m_pElementInfoModule);
+	assert(NULL != m_pUUIDModule);
 
 	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("ProxyServer");
 	if (xLogicClass.get())
@@ -45,6 +47,8 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
 			const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
 			const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
 			const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
+
+			m_pUUIDModule->SetIdentID(nServerID);
 
 			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyServerNet_ServerModule::OnRecivePack, &NFCProxyServerNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
 
@@ -225,6 +229,9 @@ void NFCProxyServerNet_ServerModule::OnClientDisconnect( const int nAddress )
 
             m_pProxyToWorldModule->Transpond(nUserData, msg);
         }
+
+		NFIDENTID xClientIdent = pNetObject->GetClientID();
+		mxClientIdent.RemoveElement(xClientIdent);
     }
 }
 
@@ -346,7 +353,8 @@ int NFCProxyServerNet_ServerModule::Transpond(const NFIPacket& msg )
 
 void NFCProxyServerNet_ServerModule::OnClientConnected( const int nAddress )
 {
-
+	NFIDENTID xClientIdent = m_pUUIDModule->CreateGUID();
+	mxClientIdent.AddElement(xClientIdent, NF_SHARE_PTR<int>(new int(nAddress)));
 }
 
 int NFCProxyServerNet_ServerModule::OnReqRoleListProcess( const NFIPacket& msg )
@@ -376,9 +384,7 @@ int NFCProxyServerNet_ServerModule::OnReqRoleListProcess( const NFIPacket& msg )
             }
 
             //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
-            NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
-            pPlayerID->set_svrid(0);
-            pPlayerID->set_index(msg.GetFd());
+            xMsg.mutable_player_id()->CopyFrom(NFToPB(pNetObject->GetClientID()));
 
             std::string strMsg;
             if(!xMsg.SerializeToString(&strMsg))
@@ -430,9 +436,7 @@ int NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess( const NFIPacket& msg
             }
 
             //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
-            NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
-            pPlayerID->set_svrid(0);
-            pPlayerID->set_index(msg.GetFd());
+            xMsg.mutable_player_id()->CopyFrom(NFToPB(pNetObject->GetClientID()));
 
             std::string strMsg;
             if(!xMsg.SerializeToString(&strMsg))
@@ -512,9 +516,7 @@ int NFCProxyServerNet_ServerModule::OnReqEnterGameServer( const NFIPacket& msg )
             }
 
             //playerid在进入游戏之前都是FD，其他时候是真实的ID
-            NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
-            pPlayerID->set_svrid(0);
-            pPlayerID->set_index(msg.GetFd());
+            xMsg.mutable_player_id()->CopyFrom(NFToPB(pNetObject->GetClientID()));
 
             std::string strMsg;
             if(!xMsg.SerializeToString(&strMsg))
