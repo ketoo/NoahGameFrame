@@ -37,9 +37,9 @@
 			<Camera EventTime="0.0" EventType="0" AmountParam="0.0,0.0,0.0" ShakeTime="0.0" MethodCall="" MethodParam=""/>
 		</CameraControlEvents>
 		<ParticleEvents>
-			<Particle EventTime="0.01" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_031_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="1" DestroyTime="0.5" MethodCall="" MethodParam=""/>
-			<Particle EventTime="0.01" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_031" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="1" DestroyTime="0.5" MethodCall="" MethodParam=""/>
-			<Particle EventTime="0.01" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_1001_2_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="1" DestroyTime="0.5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_031_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="1" DestroyTime="0.5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_031" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="1" DestroyTime="0.5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_1001_2_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="1" DestroyTime="0.5" MethodCall="" MethodParam=""/>
 		</ParticleEvents>
 		<EnableEvents>
 			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
@@ -50,6 +50,7 @@
 	</JUMP>
 	<NORMALATTACK1>
 		<SuwayyahEvents>
+			<Suwayyah EventTime="0.3"  EventType="0" EndTime="0.4" DamageRang="0.0" BackHeroDis="0.6" BackNpcDis="0.5" BeAttackParticle="SFXs/FT_BloodFX_vol01/_Prefab/Blood_Splash01" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
 		</SuwayyahEvents>
 		<BulletEvents>
 		</BulletEvents>
@@ -71,6 +72,7 @@
 	</NORMALATTACK1>
 	<NORMALATTACK2>
 		<SuwayyahEvents>
+			<Suwayyah EventTime="0.3"  EventType="0" EndTime="0.4" DamageRang="0.0" BackHeroDis="0.8" BackNpcDis="0.5" BeAttackParticle="SFXs/FT_BloodFX_vol01/_Prefab/Blood_Splash01" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
 		</SuwayyahEvents>
 		<BulletEvents>
 			<Bullet EventTime="0.0" EventType="0" Speed="0.0" MaxDis="0.0" BulletRang="0.0" BulletBackType="0" BackHeroDis="0.0" BackNpcDis="0.0" TacheDetroy="0" BeAttackParticle="" FireTacheName="" FireTacheOffest="0.0,0.0,0.0" BulletPrefabPath="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam="" >
@@ -98,6 +100,8 @@
 	</NORMALATTACK2>
 	<NORMALATTACK3>
 		<SuwayyahEvents>
+			<Suwayyah EventTime="0.4"  EventType="0" EndTime="0.5" DamageRang="0.0" BackHeroDis="0.8" BackNpcDis="0.5" BeAttackParticle="SFXs/FT_BloodFX_vol01/_Prefab/Blood_Splash01" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+		
 		</SuwayyahEvents>
 		<BulletEvents>
 			<Bullet EventTime="0.0" EventType="0" Speed="0.0" MaxDis="0.0" BulletRang="0.0" BulletBackType="0" BackHeroDis="0.0" BackNpcDis="0.0" TacheDetroy="0" BeAttackParticle="" FireTacheName="" FireTacheOffest="0.0,0.0,0.0" BulletPrefabPath="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam="" >
@@ -123,6 +127,8 @@
 	</NORMALATTACK3>
 	<NORMALTHUMP>
 		<SuwayyahEvents>
+			<Suwayyah EventTime="0.1"  EventType="0" EndTime="0.2" DamageRang="0.0" BackHeroDis="0.8" BackNpcDis="0.5" BeAttackParticle="SFXs/FT_BloodFX_vol01/_Prefab/Blood_Splash01" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+		
 		</SuwayyahEvents>
 		<BulletEvents>
 			<Bullet EventTime="0.0" EventType="0" Speed="0.0" MaxDis="0.0" BulletRang="0.0" BulletBackType="0" BackHeroDis="0.0" BackNpcDis="0.0" TacheDetroy="0" BeAttackParticle="" FireTacheName="" FireTacheOffest="0.0,0.0,0.0" BulletPrefabPath="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam="" >
