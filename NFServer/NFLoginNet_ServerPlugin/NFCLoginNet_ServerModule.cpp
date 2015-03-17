@@ -73,7 +73,7 @@ bool NFCLoginNet_ServerModule::AfterInit()
 int NFCLoginNet_ServerModule::OnLoginResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
 	if (3 != var.GetCount()
-		|| !var.TypeEx(TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
+		|| !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
 	{
 		return -1;
 	}
@@ -169,6 +169,7 @@ void NFCLoginNet_ServerModule::OnClientConnected(const int nAddress)
 	{
 		NFIDENTID xIdent;
 		pObject->SetUserID(xIdent);
+        mxClientIdent.AddElement(xIdent, NF_SHARE_PTR<int> (NF_NEW int(nAddress)) );
 	}
 }
 
