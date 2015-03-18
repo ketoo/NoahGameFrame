@@ -407,12 +407,14 @@ class AckEventResult : public ::google::protobuf::Message {
   inline ::NFMsg::Ident* release_event_object();
   inline void set_allocated_event_object(::NFMsg::Ident* event_object);
 
-  // optional int64 event_arg = 3;
-  inline bool has_event_arg() const;
-  inline void clear_event_arg();
-  static const int kEventArgFieldNumber = 3;
-  inline ::google::protobuf::int64 event_arg() const;
-  inline void set_event_arg(::google::protobuf::int64 value);
+  // optional .NFMsg.Ident event_client = 3;
+  inline bool has_event_client() const;
+  inline void clear_event_client();
+  static const int kEventClientFieldNumber = 3;
+  inline const ::NFMsg::Ident& event_client() const;
+  inline ::NFMsg::Ident* mutable_event_client();
+  inline ::NFMsg::Ident* release_event_client();
+  inline void set_allocated_event_client(::NFMsg::Ident* event_client);
 
   // @@protoc_insertion_point(class_scope:NFMsg.AckEventResult)
  private:
@@ -420,13 +422,13 @@ class AckEventResult : public ::google::protobuf::Message {
   inline void clear_has_event_code();
   inline void set_has_event_object();
   inline void clear_has_event_object();
-  inline void set_has_event_arg();
-  inline void clear_has_event_arg();
+  inline void set_has_event_client();
+  inline void clear_has_event_client();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::NFMsg::Ident* event_object_;
-  ::google::protobuf::int64 event_arg_;
+  ::NFMsg::Ident* event_client_;
   int event_code_;
 
   mutable int _cached_size_;
@@ -2680,26 +2682,42 @@ inline void AckEventResult::set_allocated_event_object(::NFMsg::Ident* event_obj
   }
 }
 
-// optional int64 event_arg = 3;
-inline bool AckEventResult::has_event_arg() const {
+// optional .NFMsg.Ident event_client = 3;
+inline bool AckEventResult::has_event_client() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void AckEventResult::set_has_event_arg() {
+inline void AckEventResult::set_has_event_client() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void AckEventResult::clear_has_event_arg() {
+inline void AckEventResult::clear_has_event_client() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void AckEventResult::clear_event_arg() {
-  event_arg_ = GOOGLE_LONGLONG(0);
-  clear_has_event_arg();
+inline void AckEventResult::clear_event_client() {
+  if (event_client_ != NULL) event_client_->::NFMsg::Ident::Clear();
+  clear_has_event_client();
 }
-inline ::google::protobuf::int64 AckEventResult::event_arg() const {
-  return event_arg_;
+inline const ::NFMsg::Ident& AckEventResult::event_client() const {
+  return event_client_ != NULL ? *event_client_ : *default_instance_->event_client_;
 }
-inline void AckEventResult::set_event_arg(::google::protobuf::int64 value) {
-  set_has_event_arg();
-  event_arg_ = value;
+inline ::NFMsg::Ident* AckEventResult::mutable_event_client() {
+  set_has_event_client();
+  if (event_client_ == NULL) event_client_ = new ::NFMsg::Ident;
+  return event_client_;
+}
+inline ::NFMsg::Ident* AckEventResult::release_event_client() {
+  clear_has_event_client();
+  ::NFMsg::Ident* temp = event_client_;
+  event_client_ = NULL;
+  return temp;
+}
+inline void AckEventResult::set_allocated_event_client(::NFMsg::Ident* event_client) {
+  delete event_client_;
+  event_client_ = event_client;
+  if (event_client) {
+    set_has_event_client();
+  } else {
+    clear_has_event_client();
+  }
 }
 
 // -------------------------------------------------------------------

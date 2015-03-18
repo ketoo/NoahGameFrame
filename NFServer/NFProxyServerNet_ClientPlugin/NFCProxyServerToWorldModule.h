@@ -98,10 +98,6 @@ protected:
 	//спа╛╫с
 	void OnClientConnected(const int nAddress);
 
-
-    int DoHeartBeatEvent(const NFIDENTID& self, const NFIDataList& var);
-protected:
-
     void Register();
     void UnRegister();
 
