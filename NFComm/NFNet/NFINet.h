@@ -179,7 +179,15 @@ public:
     {
         mnUserID = nUserID;
     }
+	const NFIDENTID& GetClientID()
+	{
+		return mnClientID;
+	}
 
+	void SetClientID(const NFIDENTID& xClientID)
+	{
+		mnClientID = xClientID;
+	}
     int IncreaseError(const int nError = 1)
     {
         return mnErrorCount += nError;
@@ -205,7 +213,8 @@ private:
     int32_t mnUserData;
     std::string mstrUserData;
 	bool mbRemoveState;
-    NFIDENTID mnUserID;
+	NFIDENTID mnUserID;
+	NFIDENTID mnClientID;
     NFINet* m_pNet;
 };
 
