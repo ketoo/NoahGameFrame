@@ -22,6 +22,7 @@
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFPluginModule/NFILoginToMasterModule.h"
+#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 
 #define NET_MSG_PROCESS(xNFMsg, msg) \
     NFIDENTID nPlayerID; \
@@ -102,6 +103,7 @@ private:
 	NFIKernelModule* m_pKernelModule;
 	NFILogModule* m_pLogModule;
 	NFILoginLogicModule* m_pLoginLogicModule;
+	NFIUUIDModule* m_pUUIDModule;
 };
 
 #endif
