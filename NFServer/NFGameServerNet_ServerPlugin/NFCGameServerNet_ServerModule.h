@@ -182,19 +182,18 @@ private:
         {
             nActorID = 0;
             nGateID = 0;
-            nFD = 0;
         }
 
-        BaseData(const int gateID, const int fd)
+        BaseData(const int gateID, const NFIDENTID xIdent)
         {
             nActorID = 0;
             nGateID = gateID;
-            nFD = fd;
+            xClientID = xIdent;
         }
 
         int nActorID;
         int nGateID;
-        int nFD;
+        NFIDENTID xClientID;
     };
 
 private:
