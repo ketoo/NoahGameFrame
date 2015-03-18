@@ -459,11 +459,13 @@ void NFCProxyConnectToGameServer::OnAckEnterGame(const NFIPacket& msg)
 
     if (xData.event_code() == NFMsg::EGEC_ENTER_GAME_SUCCESS)
     {
-        NFINT64 nFD = xData.event_arg();
-        NetObject* pNetObject = m_pProxyServerNet_ServerModule->GetNet()->GetNetObject(nFD);
-        if (pNetObject)
-        {
-            pNetObject->SetUserID(PBToNF(xData.event_object()));
-        }
+        const NFIDENTID& xClient = PBToNF(xData.event_client());
+        const NFIDENTID& xPlayer = PBToNF(xData.event_object());
+
+        NFCDataList var;
+        var << xClient ;
+        var << xPlayer ;
+
+        m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_ENTERGAME_SUCESS, var);
     }
 }
