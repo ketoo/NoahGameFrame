@@ -29,6 +29,9 @@ enum NFEventDefine
     //arg[0]:gsID,account,roleName,SceneID
 	NFED_ON_KICK_FROM_SERVER,
 
+    //arg[0]:xClient,xPlayer
+    NFED_ON_ENTERGAME_SUCESS,
+
     ////////////////Has Self---logic//////////////////////////////////////////////////////////
     //arg[0]:resultID[EGameErrorCode]
     NFED_ON_GENERAL_MESSAGE,
