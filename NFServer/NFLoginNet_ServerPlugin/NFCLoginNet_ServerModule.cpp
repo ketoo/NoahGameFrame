@@ -37,7 +37,7 @@ bool NFCLoginNet_ServerModule::AfterInit()
 	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
 	m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-	m_pLoginToMasterModule = dynamic_cast<NFILoginToMasterModule*>(pPluginManager->FindModule("NFCLoginToMasterModule"));
+    m_pLoginToMasterModule = dynamic_cast<NFILoginToMasterModule*>(pPluginManager->FindModule("NFCLoginToMasterModule"));
 	m_pUUIDModule = dynamic_cast<NFIUUIDModule*>(pPluginManager->FindModule("NFCUUIDModule"));
     
 
@@ -47,6 +47,7 @@ bool NFCLoginNet_ServerModule::AfterInit()
 	assert(NULL != m_pLogModule);
 	assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pElementInfoModule);
+
 	assert(NULL != m_pLoginToMasterModule);
 	assert(NULL != m_pUUIDModule);
 
@@ -79,7 +80,7 @@ bool NFCLoginNet_ServerModule::AfterInit()
 int NFCLoginNet_ServerModule::OnLoginResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
 	if (3 != var.GetCount()
-		|| !var.TypeEx(TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
+		|| !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
 	{
 		return -1;
 	}
@@ -175,6 +176,7 @@ void NFCLoginNet_ServerModule::OnClientConnected(const int nAddress)
 	{
 		NFIDENTID xIdent =m_pUUIDModule->CreateGUID();
 		pObject->SetClientID(xIdent);
+        mxClientIdent.AddElement(xIdent, NF_SHARE_PTR<int> (NF_NEW int(nAddress)) );
 	}
 }
 

@@ -231,7 +231,7 @@ public:
 		return m_pNet->Execute(fLasFrametime, fStartedTime);
 	}
 
-	bool SendMsgPB(const uint16_t nMsgID, google::protobuf::Message& xData, const uint32_t nSockIndex = 0, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<int>* pFdList = NULL, bool bBroadcast = false)
+	bool SendMsgPB(const uint16_t nMsgID, google::protobuf::Message& xData, const uint32_t nSockIndex = 0, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<NFIDENTID>* pClientIDList = NULL, bool bBroadcast = false)
 	{
 		if (!m_pNet)
 		{
@@ -255,14 +255,19 @@ public:
 		//playerid主要是网关转发消息的时候做识别使用，其他使用不使用
 		NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
 		*pPlayerID = NFToPB(nPlayer);
-		if (pFdList)
+		if (pClientIDList)
 		{
-			for (int i = 0; i < pFdList->size(); ++i)
+			for (int i = 0; i < pClientIDList->size(); ++i)
 			{
-				xMsg.add_player_fd_list((*pFdList)[i]);
+                const NFIDENTID& ClientID = (*pClientIDList)[i];
+                
+				NFMsg::Ident* pData = xMsg.add_player_client_list();
+                if (pData)
+                {
+                   *pData = NFToPB(ClientID);
+                }
 			}
 		}
-
 
 		std::string strMsg;
 		if(!xMsg.SerializeToString(&strMsg))
