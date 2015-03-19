@@ -48,6 +48,8 @@ class ParticleEvents;
 class ParticleEvents_Particle;
 class EnableEvents;
 class EnableEvents_Enable;
+class TrailEvents;
+class TrailEvents_Trail;
 
 enum SuwayyahEvents_ESEType {
   SuwayyahEvents_ESEType_ESET_SINGLE = 0,
@@ -199,6 +201,25 @@ inline bool EnableEvents_EEETYPE_Parse(
     const ::std::string& name, EnableEvents_EEETYPE* value) {
   return ::google::protobuf::internal::ParseNamedEnum<EnableEvents_EEETYPE>(
     EnableEvents_EEETYPE_descriptor(), name, value);
+}
+enum TrailEvents_TEETYPE {
+  TrailEvents_TEETYPE_INIT = 0,
+  TrailEvents_TEETYPE_FINAL = 1
+};
+bool TrailEvents_TEETYPE_IsValid(int value);
+const TrailEvents_TEETYPE TrailEvents_TEETYPE_TEETYPE_MIN = TrailEvents_TEETYPE_INIT;
+const TrailEvents_TEETYPE TrailEvents_TEETYPE_TEETYPE_MAX = TrailEvents_TEETYPE_FINAL;
+const int TrailEvents_TEETYPE_TEETYPE_ARRAYSIZE = TrailEvents_TEETYPE_TEETYPE_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* TrailEvents_TEETYPE_descriptor();
+inline const ::std::string& TrailEvents_TEETYPE_Name(TrailEvents_TEETYPE value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    TrailEvents_TEETYPE_descriptor(), value);
+}
+inline bool TrailEvents_TEETYPE_Parse(
+    const ::std::string& name, TrailEvents_TEETYPE* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<TrailEvents_TEETYPE>(
+    TrailEvents_TEETYPE_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -1886,10 +1907,17 @@ class ParticleEvents_Particle : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 bindtarget() const;
   inline void set_bindtarget(::google::protobuf::int32 value);
 
-  // required string MethodCall = 9;
+  // required float DestroyTime = 9;
+  inline bool has_destroytime() const;
+  inline void clear_destroytime();
+  static const int kDestroyTimeFieldNumber = 9;
+  inline float destroytime() const;
+  inline void set_destroytime(float value);
+
+  // required string MethodCall = 10;
   inline bool has_methodcall() const;
   inline void clear_methodcall();
-  static const int kMethodCallFieldNumber = 9;
+  static const int kMethodCallFieldNumber = 10;
   inline const ::std::string& methodcall() const;
   inline void set_methodcall(const ::std::string& value);
   inline void set_methodcall(const char* value);
@@ -1898,10 +1926,10 @@ class ParticleEvents_Particle : public ::google::protobuf::Message {
   inline ::std::string* release_methodcall();
   inline void set_allocated_methodcall(::std::string* methodcall);
 
-  // required string MethodParam = 10;
+  // required string MethodParam = 11;
   inline bool has_methodparam() const;
   inline void clear_methodparam();
-  static const int kMethodParamFieldNumber = 10;
+  static const int kMethodParamFieldNumber = 11;
   inline const ::std::string& methodparam() const;
   inline void set_methodparam(const ::std::string& value);
   inline void set_methodparam(const char* value);
@@ -1926,6 +1954,8 @@ class ParticleEvents_Particle : public ::google::protobuf::Message {
   inline void clear_has_casttosurface();
   inline void set_has_bindtarget();
   inline void clear_has_bindtarget();
+  inline void set_has_destroytime();
+  inline void clear_has_destroytime();
   inline void set_has_methodcall();
   inline void clear_has_methodcall();
   inline void set_has_methodparam();
@@ -1942,9 +1972,10 @@ class ParticleEvents_Particle : public ::google::protobuf::Message {
   ::google::protobuf::int32 bindtarget_;
   ::std::string* methodcall_;
   ::std::string* methodparam_;
+  float destroytime_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
@@ -2318,6 +2349,254 @@ class EnableEvents : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static EnableEvents* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class TrailEvents_Trail : public ::google::protobuf::Message {
+ public:
+  TrailEvents_Trail();
+  virtual ~TrailEvents_Trail();
+
+  TrailEvents_Trail(const TrailEvents_Trail& from);
+
+  inline TrailEvents_Trail& operator=(const TrailEvents_Trail& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const TrailEvents_Trail& default_instance();
+
+  void Swap(TrailEvents_Trail* other);
+
+  // implements Message ----------------------------------------------
+
+  TrailEvents_Trail* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const TrailEvents_Trail& from);
+  void MergeFrom(const TrailEvents_Trail& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required float EventTime = 1;
+  inline bool has_eventtime() const;
+  inline void clear_eventtime();
+  static const int kEventTimeFieldNumber = 1;
+  inline float eventtime() const;
+  inline void set_eventtime(float value);
+
+  // required .NFFS.TrailEvents.TEETYPE EventType = 2;
+  inline bool has_eventtype() const;
+  inline void clear_eventtype();
+  static const int kEventTypeFieldNumber = 2;
+  inline ::NFFS::TrailEvents_TEETYPE eventtype() const;
+  inline void set_eventtype(::NFFS::TrailEvents_TEETYPE value);
+
+  // required string TargetName = 3;
+  inline bool has_targetname() const;
+  inline void clear_targetname();
+  static const int kTargetNameFieldNumber = 3;
+  inline const ::std::string& targetname() const;
+  inline void set_targetname(const ::std::string& value);
+  inline void set_targetname(const char* value);
+  inline void set_targetname(const char* value, size_t size);
+  inline ::std::string* mutable_targetname();
+  inline ::std::string* release_targetname();
+  inline void set_allocated_targetname(::std::string* targetname);
+
+  // required string MethodCall = 4;
+  inline bool has_methodcall() const;
+  inline void clear_methodcall();
+  static const int kMethodCallFieldNumber = 4;
+  inline const ::std::string& methodcall() const;
+  inline void set_methodcall(const ::std::string& value);
+  inline void set_methodcall(const char* value);
+  inline void set_methodcall(const char* value, size_t size);
+  inline ::std::string* mutable_methodcall();
+  inline ::std::string* release_methodcall();
+  inline void set_allocated_methodcall(::std::string* methodcall);
+
+  // required string MethodParam = 5;
+  inline bool has_methodparam() const;
+  inline void clear_methodparam();
+  static const int kMethodParamFieldNumber = 5;
+  inline const ::std::string& methodparam() const;
+  inline void set_methodparam(const ::std::string& value);
+  inline void set_methodparam(const char* value);
+  inline void set_methodparam(const char* value, size_t size);
+  inline ::std::string* mutable_methodparam();
+  inline ::std::string* release_methodparam();
+  inline void set_allocated_methodparam(::std::string* methodparam);
+
+  // @@protoc_insertion_point(class_scope:NFFS.TrailEvents.Trail)
+ private:
+  inline void set_has_eventtime();
+  inline void clear_has_eventtime();
+  inline void set_has_eventtype();
+  inline void clear_has_eventtype();
+  inline void set_has_targetname();
+  inline void clear_has_targetname();
+  inline void set_has_methodcall();
+  inline void clear_has_methodcall();
+  inline void set_has_methodparam();
+  inline void clear_has_methodparam();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  float eventtime_;
+  int eventtype_;
+  ::std::string* targetname_;
+  ::std::string* methodcall_;
+  ::std::string* methodparam_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static TrailEvents_Trail* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class TrailEvents : public ::google::protobuf::Message {
+ public:
+  TrailEvents();
+  virtual ~TrailEvents();
+
+  TrailEvents(const TrailEvents& from);
+
+  inline TrailEvents& operator=(const TrailEvents& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const TrailEvents& default_instance();
+
+  void Swap(TrailEvents* other);
+
+  // implements Message ----------------------------------------------
+
+  TrailEvents* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const TrailEvents& from);
+  void MergeFrom(const TrailEvents& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef TrailEvents_Trail Trail;
+
+  typedef TrailEvents_TEETYPE TEETYPE;
+  static const TEETYPE INIT = TrailEvents_TEETYPE_INIT;
+  static const TEETYPE FINAL = TrailEvents_TEETYPE_FINAL;
+  static inline bool TEETYPE_IsValid(int value) {
+    return TrailEvents_TEETYPE_IsValid(value);
+  }
+  static const TEETYPE TEETYPE_MIN =
+    TrailEvents_TEETYPE_TEETYPE_MIN;
+  static const TEETYPE TEETYPE_MAX =
+    TrailEvents_TEETYPE_TEETYPE_MAX;
+  static const int TEETYPE_ARRAYSIZE =
+    TrailEvents_TEETYPE_TEETYPE_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  TEETYPE_descriptor() {
+    return TrailEvents_TEETYPE_descriptor();
+  }
+  static inline const ::std::string& TEETYPE_Name(TEETYPE value) {
+    return TrailEvents_TEETYPE_Name(value);
+  }
+  static inline bool TEETYPE_Parse(const ::std::string& name,
+      TEETYPE* value) {
+    return TrailEvents_TEETYPE_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFFS.TrailEvents.Trail xTrailList = 1;
+  inline int xtraillist_size() const;
+  inline void clear_xtraillist();
+  static const int kXTrailListFieldNumber = 1;
+  inline const ::NFFS::TrailEvents_Trail& xtraillist(int index) const;
+  inline ::NFFS::TrailEvents_Trail* mutable_xtraillist(int index);
+  inline ::NFFS::TrailEvents_Trail* add_xtraillist();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::TrailEvents_Trail >&
+      xtraillist() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFFS::TrailEvents_Trail >*
+      mutable_xtraillist();
+
+  // @@protoc_insertion_point(class_scope:NFFS.TrailEvents)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::NFFS::TrailEvents_Trail > xtraillist_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static TrailEvents* default_instance_;
 };
 // ===================================================================
 
@@ -5017,15 +5296,37 @@ inline void ParticleEvents_Particle::set_bindtarget(::google::protobuf::int32 va
   bindtarget_ = value;
 }
 
-// required string MethodCall = 9;
-inline bool ParticleEvents_Particle::has_methodcall() const {
+// required float DestroyTime = 9;
+inline bool ParticleEvents_Particle::has_destroytime() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void ParticleEvents_Particle::set_has_methodcall() {
+inline void ParticleEvents_Particle::set_has_destroytime() {
   _has_bits_[0] |= 0x00000080u;
 }
-inline void ParticleEvents_Particle::clear_has_methodcall() {
+inline void ParticleEvents_Particle::clear_has_destroytime() {
   _has_bits_[0] &= ~0x00000080u;
+}
+inline void ParticleEvents_Particle::clear_destroytime() {
+  destroytime_ = 0;
+  clear_has_destroytime();
+}
+inline float ParticleEvents_Particle::destroytime() const {
+  return destroytime_;
+}
+inline void ParticleEvents_Particle::set_destroytime(float value) {
+  set_has_destroytime();
+  destroytime_ = value;
+}
+
+// required string MethodCall = 10;
+inline bool ParticleEvents_Particle::has_methodcall() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void ParticleEvents_Particle::set_has_methodcall() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void ParticleEvents_Particle::clear_has_methodcall() {
+  _has_bits_[0] &= ~0x00000100u;
 }
 inline void ParticleEvents_Particle::clear_methodcall() {
   if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
@@ -5087,15 +5388,15 @@ inline void ParticleEvents_Particle::set_allocated_methodcall(::std::string* met
   }
 }
 
-// required string MethodParam = 10;
+// required string MethodParam = 11;
 inline bool ParticleEvents_Particle::has_methodparam() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
 inline void ParticleEvents_Particle::set_has_methodparam() {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000200u;
 }
 inline void ParticleEvents_Particle::clear_has_methodparam() {
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline void ParticleEvents_Particle::clear_methodparam() {
   if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
@@ -5474,6 +5775,294 @@ EnableEvents::mutable_xenablelist() {
   return &xenablelist_;
 }
 
+// -------------------------------------------------------------------
+
+// TrailEvents_Trail
+
+// required float EventTime = 1;
+inline bool TrailEvents_Trail::has_eventtime() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void TrailEvents_Trail::set_has_eventtime() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void TrailEvents_Trail::clear_has_eventtime() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void TrailEvents_Trail::clear_eventtime() {
+  eventtime_ = 0;
+  clear_has_eventtime();
+}
+inline float TrailEvents_Trail::eventtime() const {
+  return eventtime_;
+}
+inline void TrailEvents_Trail::set_eventtime(float value) {
+  set_has_eventtime();
+  eventtime_ = value;
+}
+
+// required .NFFS.TrailEvents.TEETYPE EventType = 2;
+inline bool TrailEvents_Trail::has_eventtype() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void TrailEvents_Trail::set_has_eventtype() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void TrailEvents_Trail::clear_has_eventtype() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void TrailEvents_Trail::clear_eventtype() {
+  eventtype_ = 0;
+  clear_has_eventtype();
+}
+inline ::NFFS::TrailEvents_TEETYPE TrailEvents_Trail::eventtype() const {
+  return static_cast< ::NFFS::TrailEvents_TEETYPE >(eventtype_);
+}
+inline void TrailEvents_Trail::set_eventtype(::NFFS::TrailEvents_TEETYPE value) {
+  assert(::NFFS::TrailEvents_TEETYPE_IsValid(value));
+  set_has_eventtype();
+  eventtype_ = value;
+}
+
+// required string TargetName = 3;
+inline bool TrailEvents_Trail::has_targetname() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void TrailEvents_Trail::set_has_targetname() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void TrailEvents_Trail::clear_has_targetname() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void TrailEvents_Trail::clear_targetname() {
+  if (targetname_ != &::google::protobuf::internal::kEmptyString) {
+    targetname_->clear();
+  }
+  clear_has_targetname();
+}
+inline const ::std::string& TrailEvents_Trail::targetname() const {
+  return *targetname_;
+}
+inline void TrailEvents_Trail::set_targetname(const ::std::string& value) {
+  set_has_targetname();
+  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
+    targetname_ = new ::std::string;
+  }
+  targetname_->assign(value);
+}
+inline void TrailEvents_Trail::set_targetname(const char* value) {
+  set_has_targetname();
+  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
+    targetname_ = new ::std::string;
+  }
+  targetname_->assign(value);
+}
+inline void TrailEvents_Trail::set_targetname(const char* value, size_t size) {
+  set_has_targetname();
+  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
+    targetname_ = new ::std::string;
+  }
+  targetname_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* TrailEvents_Trail::mutable_targetname() {
+  set_has_targetname();
+  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
+    targetname_ = new ::std::string;
+  }
+  return targetname_;
+}
+inline ::std::string* TrailEvents_Trail::release_targetname() {
+  clear_has_targetname();
+  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = targetname_;
+    targetname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void TrailEvents_Trail::set_allocated_targetname(::std::string* targetname) {
+  if (targetname_ != &::google::protobuf::internal::kEmptyString) {
+    delete targetname_;
+  }
+  if (targetname) {
+    set_has_targetname();
+    targetname_ = targetname;
+  } else {
+    clear_has_targetname();
+    targetname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string MethodCall = 4;
+inline bool TrailEvents_Trail::has_methodcall() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void TrailEvents_Trail::set_has_methodcall() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void TrailEvents_Trail::clear_has_methodcall() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void TrailEvents_Trail::clear_methodcall() {
+  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
+    methodcall_->clear();
+  }
+  clear_has_methodcall();
+}
+inline const ::std::string& TrailEvents_Trail::methodcall() const {
+  return *methodcall_;
+}
+inline void TrailEvents_Trail::set_methodcall(const ::std::string& value) {
+  set_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    methodcall_ = new ::std::string;
+  }
+  methodcall_->assign(value);
+}
+inline void TrailEvents_Trail::set_methodcall(const char* value) {
+  set_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    methodcall_ = new ::std::string;
+  }
+  methodcall_->assign(value);
+}
+inline void TrailEvents_Trail::set_methodcall(const char* value, size_t size) {
+  set_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    methodcall_ = new ::std::string;
+  }
+  methodcall_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* TrailEvents_Trail::mutable_methodcall() {
+  set_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    methodcall_ = new ::std::string;
+  }
+  return methodcall_;
+}
+inline ::std::string* TrailEvents_Trail::release_methodcall() {
+  clear_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = methodcall_;
+    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void TrailEvents_Trail::set_allocated_methodcall(::std::string* methodcall) {
+  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
+    delete methodcall_;
+  }
+  if (methodcall) {
+    set_has_methodcall();
+    methodcall_ = methodcall;
+  } else {
+    clear_has_methodcall();
+    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string MethodParam = 5;
+inline bool TrailEvents_Trail::has_methodparam() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void TrailEvents_Trail::set_has_methodparam() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void TrailEvents_Trail::clear_has_methodparam() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void TrailEvents_Trail::clear_methodparam() {
+  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
+    methodparam_->clear();
+  }
+  clear_has_methodparam();
+}
+inline const ::std::string& TrailEvents_Trail::methodparam() const {
+  return *methodparam_;
+}
+inline void TrailEvents_Trail::set_methodparam(const ::std::string& value) {
+  set_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    methodparam_ = new ::std::string;
+  }
+  methodparam_->assign(value);
+}
+inline void TrailEvents_Trail::set_methodparam(const char* value) {
+  set_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    methodparam_ = new ::std::string;
+  }
+  methodparam_->assign(value);
+}
+inline void TrailEvents_Trail::set_methodparam(const char* value, size_t size) {
+  set_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    methodparam_ = new ::std::string;
+  }
+  methodparam_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* TrailEvents_Trail::mutable_methodparam() {
+  set_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    methodparam_ = new ::std::string;
+  }
+  return methodparam_;
+}
+inline ::std::string* TrailEvents_Trail::release_methodparam() {
+  clear_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = methodparam_;
+    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void TrailEvents_Trail::set_allocated_methodparam(::std::string* methodparam) {
+  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
+    delete methodparam_;
+  }
+  if (methodparam) {
+    set_has_methodparam();
+    methodparam_ = methodparam;
+  } else {
+    clear_has_methodparam();
+    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// TrailEvents
+
+// repeated .NFFS.TrailEvents.Trail xTrailList = 1;
+inline int TrailEvents::xtraillist_size() const {
+  return xtraillist_.size();
+}
+inline void TrailEvents::clear_xtraillist() {
+  xtraillist_.Clear();
+}
+inline const ::NFFS::TrailEvents_Trail& TrailEvents::xtraillist(int index) const {
+  return xtraillist_.Get(index);
+}
+inline ::NFFS::TrailEvents_Trail* TrailEvents::mutable_xtraillist(int index) {
+  return xtraillist_.Mutable(index);
+}
+inline ::NFFS::TrailEvents_Trail* TrailEvents::add_xtraillist() {
+  return xtraillist_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFFS::TrailEvents_Trail >&
+TrailEvents::xtraillist() const {
+  return xtraillist_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFFS::TrailEvents_Trail >*
+TrailEvents::mutable_xtraillist() {
+  return &xtraillist_;
+}
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -5510,6 +6099,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::ParticleEvents_EPERTYPE>
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::EnableEvents_EEETYPE>() {
   return ::NFFS::EnableEvents_EEETYPE_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::TrailEvents_TEETYPE>() {
+  return ::NFFS::TrailEvents_TEETYPE_descriptor();
 }
 
 }  // namespace google
