@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--this is config xml-->
 <XML>
-    <Object ActorID="0" CanClone="0" FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/PioneerNoob/" ID="1" MaxGroup="10" MaxGroupPlayers="200" RelivePos="20,0,-137" SceneName="villageScene" SceneShowName="villageScene" SoundList="Sources/Music/Town" Width="500"/>
-    <Object ActorID="0" CanClone="0" FilePath="" ID="2" MaxGroup="10" MaxGroupPlayers="200" RelivePos="186,0,88" SceneName="Demo1" SceneShowName="Demo1" SoundList="Sources/Music/Town" Width="500"/>
-    <Object ActorID="0" CanClone="0" FilePath="" ID="3" MaxGroup="10" MaxGroupPlayers="200" RelivePos="28.34387,5.843068,130.1724;133.5562,5.843068,32.58513" SceneName="DemoSummer" SceneShowName="DemoSummer" SoundList="Sources/Music/Town" Width="500"/>
-    <Object ActorID="0" CanClone="0" FilePath="" ID="4" MaxGroup="10" MaxGroupPlayers="200" RelivePos="28.34387,5.843068,130.1724;133.5562,5.843068,32.58513" SceneName="DemoWinter" SceneShowName="DemoWinter" SoundList="Sources/Music/Town" Width="500"/>
-    <Object ActorID="0" CanClone="0" FilePath="" ID="5" MaxGroup="10" MaxGroupPlayers="200" RelivePos="34.10933,1.165174,11.49214" SceneName="Demo2_towers" SceneShowName="Demo2_towers" SoundList="Sources/Music/Town" Width="500"/>
-    <Object ActorID="0" CanClone="0" FilePath="" ID="6" MaxGroup="10" MaxGroupPlayers="200" RelivePos="34.10933,1.165174,11.49214" SceneName="SelectScene" SceneShowName="SelectScene" SoundList="Sources/Music/Town" Width="500"/>
+    <Object ActorID="0" CanClone="0" FilePath="../../NFDataCfg/Ini/NFZoneServer/Scene/PioneerNoob/" ID="1" LoadingUI="UI/ChronoBlade_Caster_wallpaper" MaxGroup="10" MaxGroupPlayers="200" RelivePos="20,0,-137" SceneName="villageScene" SceneShowName="villageScene" SoundList="Sources/Music/Town" Width="500"/>
+    <Object ActorID="0" CanClone="0" FilePath="" ID="2" LoadingUI="UI/ChronoBlade_Caster_wallpaper" MaxGroup="10" MaxGroupPlayers="200" RelivePos="186,0,88" SceneName="Demo1" SceneShowName="Demo1" SoundList="Sources/Music/Town" Width="500"/>
+    <Object ActorID="0" CanClone="0" FilePath="" ID="3" LoadingUI="UI/ChronoBlade_forest_wallpaper" MaxGroup="10" MaxGroupPlayers="200" RelivePos="28.34387,5.843068,130.1724;133.5562,5.843068,32.58513" SceneName="DemoSummer" SceneShowName="DemoSummer" SoundList="Sources/Music/Town" Width="500"/>
+    <Object ActorID="0" CanClone="0" FilePath="" ID="4" LoadingUI="UI/ChronoBlade_forest_wallpaper" MaxGroup="10" MaxGroupPlayers="200" RelivePos="28.34387,5.843068,130.1724;133.5562,5.843068,32.58513" SceneName="DemoWinter" SceneShowName="DemoWinter" SoundList="Sources/Music/Town" Width="500"/>
+    <Object ActorID="0" CanClone="0" FilePath="" ID="5" LoadingUI="UI/ChronoBlade_Caster_wallpaper" MaxGroup="10" MaxGroupPlayers="200" RelivePos="34.10933,1.165174,11.49214" SceneName="Demo2_towers" SceneShowName="Demo2_towers" SoundList="Sources/Music/Town" Width="500"/>
+    <Object ActorID="0" CanClone="0" FilePath="" ID="6" LoadingUI="UI/ChronoBlade_Caster_wallpaper" MaxGroup="10" MaxGroupPlayers="200" RelivePos="34.10933,1.165174,11.49214" SceneName="SelectScene" SceneShowName="SelectScene" SoundList="Sources/Music/Town" Width="500"/>
 </XML>
