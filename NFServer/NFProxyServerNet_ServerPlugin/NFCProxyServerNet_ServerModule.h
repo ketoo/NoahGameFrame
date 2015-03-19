@@ -69,6 +69,9 @@ protected:
     //保存的世界服务器发过来的信息对象
     int OnWantToConnectObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
+    //进入游戏成功
+    int OnEnterGameSuccessEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+
 protected:
 
 	NFMapEx<NFIDENTID, int> mxClientIdent;

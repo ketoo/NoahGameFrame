@@ -55,6 +55,8 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
 		}
 	}
 
+    m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_ENTERGAME_SUCESS, this, &NFCProxyServerNet_ServerModule::OnEnterGameSuccessEvent);
+
 
     return true;
 }
@@ -99,7 +101,7 @@ int NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const NFIPacket& msg)
             NFMsg::AckEventResult xSendMsg;
             xSendMsg.set_event_code(NFMsg::EGEC_VERIFY_KEY_SUCCESS);
             //*xSendMsg.mutable_event_object() = msg.GetFd();//让前端记得自己的fd，后面有一些验证
-            xSendMsg.set_event_arg(msg.GetFd());//让前端记得自己的fd，后面有一些验证
+            *xSendMsg.mutable_event_client() = NFToPB(pNetObject->GetClientID());//让前端记得自己的fd，后面有一些验证
 
             SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_KEY, xSendMsg, msg.GetFd());
         }
@@ -337,15 +339,24 @@ int NFCProxyServerNet_ServerModule::Transpond(const NFIPacket& msg )
         return false;
     }
 
-    for (int i = 0; i < xMsg.player_fd_list_size(); ++i)
+    for (int i = 0; i < xMsg.player_client_list_size(); ++i)
     {
-        GetNet()->SendMsg(msg, xMsg.player_fd_list(i));
+        NF_SHARE_PTR<int> pFD = mxClientIdent.GetElement(PBToNF(xMsg.player_client_list(i)));
+        if (pFD)
+        {
+            GetNet()->SendMsg(msg, *pFD);
+        }
     }
 
-    if(xMsg.player_fd_list_size() <= 0)
+    if(xMsg.player_client_list_size() <= 0)
     {
-        //playerid==fd
-        GetNet()->SendMsg(msg, xMsg.player_id().index());
+        //playerid==ClientID;
+
+        NF_SHARE_PTR<int> pFD = mxClientIdent.GetElement(PBToNF(xMsg.player_id()));
+        if (pFD)
+        {
+            GetNet()->SendMsg(msg, *pFD);
+        }
     }
 
     return true;
@@ -354,6 +365,12 @@ int NFCProxyServerNet_ServerModule::Transpond(const NFIPacket& msg )
 void NFCProxyServerNet_ServerModule::OnClientConnected( const int nAddress )
 {
 	NFIDENTID xClientIdent = m_pUUIDModule->CreateGUID();
+    NetObject* pNetObject = GetNet()->GetNetObject(nAddress);
+    if (pNetObject)
+    {
+        pNetObject->SetClientID(xClientIdent);
+    }
+
 	mxClientIdent.AddElement(xClientIdent, NF_SHARE_PTR<int>(new int(nAddress)));
 }
 
@@ -537,4 +554,25 @@ int NFCProxyServerNet_ServerModule::OnReqEnterGameServer( const NFIPacket& msg )
     }
 
     return 0;
+}
+
+int NFCProxyServerNet_ServerModule::OnEnterGameSuccessEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var )
+{
+    if (var.GetCount() != 2 || var.TypeEx(TDATA_OBJECT, TDATA_OBJECT, TDATA_UNKNOWN))
+    {
+        return -1;
+    }
+
+    const NFIDENTID& xClientID = var.Object(0);
+    const NFIDENTID& xPlayerID = var.Object(1);
+
+    NF_SHARE_PTR<int> pFD = mxClientIdent.GetElement(xClientID);
+    if (pFD)
+    {
+        NetObject* pNetObeject = GetNet()->GetNetObject(*pFD);
+        if (pNetObeject)
+        {
+            pNetObeject->SetUserID(xPlayerID);
+        }
+    }
 }
