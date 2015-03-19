@@ -6,4 +6,5 @@
     <Object ActorID="0" CanClone="0" FilePath="" ID="3" MaxGroup="10" MaxGroupPlayers="200" RelivePos="28.34387,5.843068,130.1724;133.5562,5.843068,32.58513" SceneName="DemoSummer" SceneShowName="DemoSummer" SoundList="Sources/Music/Town" Width="500"/>
     <Object ActorID="0" CanClone="0" FilePath="" ID="4" MaxGroup="10" MaxGroupPlayers="200" RelivePos="28.34387,5.843068,130.1724;133.5562,5.843068,32.58513" SceneName="DemoWinter" SceneShowName="DemoWinter" SoundList="Sources/Music/Town" Width="500"/>
     <Object ActorID="0" CanClone="0" FilePath="" ID="5" MaxGroup="10" MaxGroupPlayers="200" RelivePos="34.10933,1.165174,11.49214" SceneName="Demo2_towers" SceneShowName="Demo2_towers" SoundList="Sources/Music/Town" Width="500"/>
+    <Object ActorID="0" CanClone="0" FilePath="" ID="6" MaxGroup="10" MaxGroupPlayers="200" RelivePos="34.10933,1.165174,11.49214" SceneName="SelectScene" SceneShowName="SelectScene" SoundList="Sources/Music/Town" Width="500"/>
 </XML>
