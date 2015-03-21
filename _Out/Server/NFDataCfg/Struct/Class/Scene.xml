@@ -14,6 +14,8 @@
         <Property Desc="ÊÇ·ñ¸±±¾" Id="CanClone" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="acctorid" Id="ActorID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="acctorid" Id="LoadingUI" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="acctorid" Id="CamOffestPos" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="acctorid" Id="CamOffestRot" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
     </Propertys>
     <Components/>
     <Includes/>
