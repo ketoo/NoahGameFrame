@@ -56,12 +56,12 @@
 	</JUMP>
 	<NORMALATTACK1>
 		<SuwayyahEvents>
-			<Suwayyah EventTime="0.6"  EventType="0" EndTime="0.4" DamageRang="0.0" BackHeroDis="0.6" BackNpcDis="0.5" BeAttackParticle="SFXs/FT_BloodFX_vol01/_Prefab/Blood_Splash01" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+			<Suwayyah EventTime="0.3"  EventType="0" EndTime="0.4" DamageRang="0.0" BackHeroDis="0.6" BackNpcDis="0.5" BeAttackParticle="SFXs/FT_BloodFX_vol01/_Prefab/Blood_Splash01" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
 		</SuwayyahEvents>
 		<BulletEvents>
 		</BulletEvents>
 		<AnimatorMoves>
-			<Move EventTime="0.3" EventType="0" MoveDis="0.5" MoveTime="0.3" MethodCall="" MethodParam=""/>
+			<Move EventTime="0.3" EventType="0" MoveDis="0.3" MoveTime="0.3" MethodCall="" MethodParam=""/>
 		</AnimatorMoves>
 		<CameraControlEvents>
 			<Camera EventTime="0.5" EventType="3" AmountParam="0.2,0.0,0.2" ShakeTime="0.1" MethodCall="" MethodParam=""/>
@@ -83,7 +83,7 @@
 	</NORMALATTACK1>
 	<NORMALATTACK2>
 		<SuwayyahEvents>
-			<Suwayyah EventTime="0.6"  EventType="0" EndTime="0.4" DamageRang="0.0" BackHeroDis="0.8" BackNpcDis="0.5" BeAttackParticle="SFXs/FT_BloodFX_vol01/_Prefab/Blood_Splash01" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+			<Suwayyah EventTime="0.3"  EventType="0" EndTime="0.4" DamageRang="0.0" BackHeroDis="0.8" BackNpcDis="0.6" BeAttackParticle="SFXs/FT_BloodFX_vol01/_Prefab/Blood_Splash01" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
 		</SuwayyahEvents>
 		<BulletEvents>
 			<Bullet EventTime="0.0" EventType="0" Speed="0.0" MaxDis="0.0" BulletRang="0.0" BulletBackType="0" BackHeroDis="0.0" BackNpcDis="0.0" TacheDetroy="0" BeAttackParticle="" FireTacheName="" FireTacheOffest="0.0,0.0,0.0" BulletPrefabPath="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam="" >
@@ -91,7 +91,7 @@
 			</Bullet>
 		</BulletEvents>
 		<AnimatorMoves>
-			<Move EventTime="0.3" EventType="0" MoveDis="0.5" MoveTime="0.3" MethodCall="" MethodParam=""/>
+			<Move EventTime="0.3" EventType="0" MoveDis="0.3" MoveTime="0.3" MethodCall="" MethodParam=""/>
 		</AnimatorMoves>
 		<CameraControlEvents>
 			<Camera EventTime="0.5" EventType="3" AmountParam="0.3,0.0,0.3" ShakeTime="0.1" MethodCall="" MethodParam=""/>
@@ -115,7 +115,7 @@
 	</NORMALATTACK2>
 	<NORMALATTACK3>
 		<SuwayyahEvents>
-			<Suwayyah EventTime="0.6"  EventType="0" EndTime="0.5" DamageRang="0.0" BackHeroDis="0.8" BackNpcDis="0.5" BeAttackParticle="SFXs/FT_BloodFX_vol01/_Prefab/Blood_Splash01" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+			<Suwayyah EventTime="0.4"  EventType="0" EndTime="0.5" DamageRang="0.0" BackHeroDis="0.8" BackNpcDis="0.6" BeAttackParticle="SFXs/FT_BloodFX_vol01/_Prefab/Blood_Splash01" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
 		
 		</SuwayyahEvents>
 		<BulletEvents>
@@ -124,7 +124,7 @@
 			</Bullet>
 		</BulletEvents>
 		<AnimatorMoves>
-			<Move EventTime="0.4" EventType="0" MoveDis="0.5" MoveTime="0.3" MethodCall="" MethodParam=""/>
+			<Move EventTime="0.4" EventType="0" MoveDis="0.4" MoveTime="0.3" MethodCall="" MethodParam=""/>
 		</AnimatorMoves>
 		<CameraControlEvents>
 			<Camera EventTime="0.5" EventType="3" AmountParam="0.4,0.0,0.4" ShakeTime="0.0" MethodCall="" MethodParam=""/>
@@ -146,7 +146,7 @@
 	</NORMALATTACK3>
 	<NORMALTHUMP>
 		<SuwayyahEvents>
-			<Suwayyah EventTime="0.4"  EventType="0" EndTime="0.2" DamageRang="0.0" BackHeroDis="0.8" BackNpcDis="0.5" BeAttackParticle="SFXs/FT_BloodFX_vol01/_Prefab/Blood_Splash01" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+			<Suwayyah EventTime="0.1"  EventType="0" EndTime="0.2" DamageRang="0.0" BackHeroDis="0.8" BackNpcDis="0.6" BeAttackParticle="SFXs/FT_BloodFX_vol01/_Prefab/Blood_Splash01" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
 		
 		</SuwayyahEvents>
 		<BulletEvents>
@@ -155,7 +155,7 @@
 			</Bullet>
 		</BulletEvents>
 		<AnimatorMoves>
-			<Move EventTime="0.1" EventType="0" MoveDis="1" MoveTime="0.5" MethodCall="" MethodParam=""/>
+			<Move EventTime="0.1" EventType="0" MoveDis="1" MoveTime="0.4" MethodCall="" MethodParam=""/>
 		</AnimatorMoves>
 		<CameraControlEvents>
 			<Camera EventTime="0.3" EventType="3" AmountParam="0.5,0.0,0.5" ShakeTime="0.1" MethodCall="" MethodParam=""/>
