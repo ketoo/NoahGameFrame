@@ -71,9 +71,11 @@ protected:
 
     virtual bool LoadPluginLibrary(const std::string& strPluginDLLName);
     virtual bool UnLoadPluginLibrary(const std::string& strPluginDLLName);
+
 #ifdef NF_USE_ACTOR
     virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
 #endif
+
 private:
     bool mbOnReloadPlugin;
 
@@ -90,8 +92,6 @@ private:
     PluginLibMap mPluginLibMap;
     PluginInstanceMap mPluginInstanceMap;
     ModuleInstanceMap mModuleInstanceMap;
-
-    std::string strDataModule;
 };
 
 #endif
