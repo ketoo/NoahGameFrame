@@ -48,6 +48,14 @@ class ParticleEvents;
 class ParticleEvents_Particle;
 class EnableEvents;
 class EnableEvents_Enable;
+class TrailEvents;
+class TrailEvents_Trail;
+class AudioEvents;
+class AudioEvents_Audio;
+class GlobalSpeeds;
+class GlobalSpeeds_Speed;
+class AnimatorFlys;
+class AnimatorFlys_Fly;
 
 enum SuwayyahEvents_ESEType {
   SuwayyahEvents_ESEType_ESET_SINGLE = 0,
@@ -199,6 +207,85 @@ inline bool EnableEvents_EEETYPE_Parse(
     const ::std::string& name, EnableEvents_EEETYPE* value) {
   return ::google::protobuf::internal::ParseNamedEnum<EnableEvents_EEETYPE>(
     EnableEvents_EEETYPE_descriptor(), name, value);
+}
+enum TrailEvents_TEETYPE {
+  TrailEvents_TEETYPE_INIT = 0,
+  TrailEvents_TEETYPE_FINAL = 1
+};
+bool TrailEvents_TEETYPE_IsValid(int value);
+const TrailEvents_TEETYPE TrailEvents_TEETYPE_TEETYPE_MIN = TrailEvents_TEETYPE_INIT;
+const TrailEvents_TEETYPE TrailEvents_TEETYPE_TEETYPE_MAX = TrailEvents_TEETYPE_FINAL;
+const int TrailEvents_TEETYPE_TEETYPE_ARRAYSIZE = TrailEvents_TEETYPE_TEETYPE_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* TrailEvents_TEETYPE_descriptor();
+inline const ::std::string& TrailEvents_TEETYPE_Name(TrailEvents_TEETYPE value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    TrailEvents_TEETYPE_descriptor(), value);
+}
+inline bool TrailEvents_TEETYPE_Parse(
+    const ::std::string& name, TrailEvents_TEETYPE* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<TrailEvents_TEETYPE>(
+    TrailEvents_TEETYPE_descriptor(), name, value);
+}
+enum AudioEvents_AEETYPE {
+  AudioEvents_AEETYPE_INIT = 0,
+  AudioEvents_AEETYPE_FINAL = 1
+};
+bool AudioEvents_AEETYPE_IsValid(int value);
+const AudioEvents_AEETYPE AudioEvents_AEETYPE_AEETYPE_MIN = AudioEvents_AEETYPE_INIT;
+const AudioEvents_AEETYPE AudioEvents_AEETYPE_AEETYPE_MAX = AudioEvents_AEETYPE_FINAL;
+const int AudioEvents_AEETYPE_AEETYPE_ARRAYSIZE = AudioEvents_AEETYPE_AEETYPE_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* AudioEvents_AEETYPE_descriptor();
+inline const ::std::string& AudioEvents_AEETYPE_Name(AudioEvents_AEETYPE value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    AudioEvents_AEETYPE_descriptor(), value);
+}
+inline bool AudioEvents_AEETYPE_Parse(
+    const ::std::string& name, AudioEvents_AEETYPE* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<AudioEvents_AEETYPE>(
+    AudioEvents_AEETYPE_descriptor(), name, value);
+}
+enum GlobalSpeeds_EGSTYPE {
+  GlobalSpeeds_EGSTYPE_INIT = 0,
+  GlobalSpeeds_EGSTYPE_FINAL = 1
+};
+bool GlobalSpeeds_EGSTYPE_IsValid(int value);
+const GlobalSpeeds_EGSTYPE GlobalSpeeds_EGSTYPE_EGSTYPE_MIN = GlobalSpeeds_EGSTYPE_INIT;
+const GlobalSpeeds_EGSTYPE GlobalSpeeds_EGSTYPE_EGSTYPE_MAX = GlobalSpeeds_EGSTYPE_FINAL;
+const int GlobalSpeeds_EGSTYPE_EGSTYPE_ARRAYSIZE = GlobalSpeeds_EGSTYPE_EGSTYPE_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* GlobalSpeeds_EGSTYPE_descriptor();
+inline const ::std::string& GlobalSpeeds_EGSTYPE_Name(GlobalSpeeds_EGSTYPE value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    GlobalSpeeds_EGSTYPE_descriptor(), value);
+}
+inline bool GlobalSpeeds_EGSTYPE_Parse(
+    const ::std::string& name, GlobalSpeeds_EGSTYPE* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<GlobalSpeeds_EGSTYPE>(
+    GlobalSpeeds_EGSTYPE_descriptor(), name, value);
+}
+enum AnimatorFlys_EAFType {
+  AnimatorFlys_EAFType_EAFT_FORWARD = 0,
+  AnimatorFlys_EAFType_EAFT_BACK = 1,
+  AnimatorFlys_EAFType_EAFT_LEFT = 2,
+  AnimatorFlys_EAFType_EAFT_RIGHT = 3,
+  AnimatorFlys_EAFType_EAFT_TOP = 4
+};
+bool AnimatorFlys_EAFType_IsValid(int value);
+const AnimatorFlys_EAFType AnimatorFlys_EAFType_EAFType_MIN = AnimatorFlys_EAFType_EAFT_FORWARD;
+const AnimatorFlys_EAFType AnimatorFlys_EAFType_EAFType_MAX = AnimatorFlys_EAFType_EAFT_TOP;
+const int AnimatorFlys_EAFType_EAFType_ARRAYSIZE = AnimatorFlys_EAFType_EAFType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* AnimatorFlys_EAFType_descriptor();
+inline const ::std::string& AnimatorFlys_EAFType_Name(AnimatorFlys_EAFType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    AnimatorFlys_EAFType_descriptor(), value);
+}
+inline bool AnimatorFlys_EAFType_Parse(
+    const ::std::string& name, AnimatorFlys_EAFType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<AnimatorFlys_EAFType>(
+    AnimatorFlys_EAFType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -1886,10 +1973,17 @@ class ParticleEvents_Particle : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 bindtarget() const;
   inline void set_bindtarget(::google::protobuf::int32 value);
 
-  // required string MethodCall = 9;
+  // required float DestroyTime = 9;
+  inline bool has_destroytime() const;
+  inline void clear_destroytime();
+  static const int kDestroyTimeFieldNumber = 9;
+  inline float destroytime() const;
+  inline void set_destroytime(float value);
+
+  // required string MethodCall = 10;
   inline bool has_methodcall() const;
   inline void clear_methodcall();
-  static const int kMethodCallFieldNumber = 9;
+  static const int kMethodCallFieldNumber = 10;
   inline const ::std::string& methodcall() const;
   inline void set_methodcall(const ::std::string& value);
   inline void set_methodcall(const char* value);
@@ -1898,10 +1992,10 @@ class ParticleEvents_Particle : public ::google::protobuf::Message {
   inline ::std::string* release_methodcall();
   inline void set_allocated_methodcall(::std::string* methodcall);
 
-  // required string MethodParam = 10;
+  // required string MethodParam = 11;
   inline bool has_methodparam() const;
   inline void clear_methodparam();
-  static const int kMethodParamFieldNumber = 10;
+  static const int kMethodParamFieldNumber = 11;
   inline const ::std::string& methodparam() const;
   inline void set_methodparam(const ::std::string& value);
   inline void set_methodparam(const char* value);
@@ -1926,6 +2020,8 @@ class ParticleEvents_Particle : public ::google::protobuf::Message {
   inline void clear_has_casttosurface();
   inline void set_has_bindtarget();
   inline void clear_has_bindtarget();
+  inline void set_has_destroytime();
+  inline void clear_has_destroytime();
   inline void set_has_methodcall();
   inline void clear_has_methodcall();
   inline void set_has_methodparam();
@@ -1942,9 +2038,10 @@ class ParticleEvents_Particle : public ::google::protobuf::Message {
   ::google::protobuf::int32 bindtarget_;
   ::std::string* methodcall_;
   ::std::string* methodparam_;
+  float destroytime_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
@@ -2318,6 +2415,981 @@ class EnableEvents : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static EnableEvents* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class TrailEvents_Trail : public ::google::protobuf::Message {
+ public:
+  TrailEvents_Trail();
+  virtual ~TrailEvents_Trail();
+
+  TrailEvents_Trail(const TrailEvents_Trail& from);
+
+  inline TrailEvents_Trail& operator=(const TrailEvents_Trail& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const TrailEvents_Trail& default_instance();
+
+  void Swap(TrailEvents_Trail* other);
+
+  // implements Message ----------------------------------------------
+
+  TrailEvents_Trail* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const TrailEvents_Trail& from);
+  void MergeFrom(const TrailEvents_Trail& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required float EventTime = 1;
+  inline bool has_eventtime() const;
+  inline void clear_eventtime();
+  static const int kEventTimeFieldNumber = 1;
+  inline float eventtime() const;
+  inline void set_eventtime(float value);
+
+  // required .NFFS.TrailEvents.TEETYPE EventType = 2;
+  inline bool has_eventtype() const;
+  inline void clear_eventtype();
+  static const int kEventTypeFieldNumber = 2;
+  inline ::NFFS::TrailEvents_TEETYPE eventtype() const;
+  inline void set_eventtype(::NFFS::TrailEvents_TEETYPE value);
+
+  // required string TargetName = 3;
+  inline bool has_targetname() const;
+  inline void clear_targetname();
+  static const int kTargetNameFieldNumber = 3;
+  inline const ::std::string& targetname() const;
+  inline void set_targetname(const ::std::string& value);
+  inline void set_targetname(const char* value);
+  inline void set_targetname(const char* value, size_t size);
+  inline ::std::string* mutable_targetname();
+  inline ::std::string* release_targetname();
+  inline void set_allocated_targetname(::std::string* targetname);
+
+  // required string MethodCall = 4;
+  inline bool has_methodcall() const;
+  inline void clear_methodcall();
+  static const int kMethodCallFieldNumber = 4;
+  inline const ::std::string& methodcall() const;
+  inline void set_methodcall(const ::std::string& value);
+  inline void set_methodcall(const char* value);
+  inline void set_methodcall(const char* value, size_t size);
+  inline ::std::string* mutable_methodcall();
+  inline ::std::string* release_methodcall();
+  inline void set_allocated_methodcall(::std::string* methodcall);
+
+  // required string MethodParam = 5;
+  inline bool has_methodparam() const;
+  inline void clear_methodparam();
+  static const int kMethodParamFieldNumber = 5;
+  inline const ::std::string& methodparam() const;
+  inline void set_methodparam(const ::std::string& value);
+  inline void set_methodparam(const char* value);
+  inline void set_methodparam(const char* value, size_t size);
+  inline ::std::string* mutable_methodparam();
+  inline ::std::string* release_methodparam();
+  inline void set_allocated_methodparam(::std::string* methodparam);
+
+  // @@protoc_insertion_point(class_scope:NFFS.TrailEvents.Trail)
+ private:
+  inline void set_has_eventtime();
+  inline void clear_has_eventtime();
+  inline void set_has_eventtype();
+  inline void clear_has_eventtype();
+  inline void set_has_targetname();
+  inline void clear_has_targetname();
+  inline void set_has_methodcall();
+  inline void clear_has_methodcall();
+  inline void set_has_methodparam();
+  inline void clear_has_methodparam();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  float eventtime_;
+  int eventtype_;
+  ::std::string* targetname_;
+  ::std::string* methodcall_;
+  ::std::string* methodparam_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static TrailEvents_Trail* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class TrailEvents : public ::google::protobuf::Message {
+ public:
+  TrailEvents();
+  virtual ~TrailEvents();
+
+  TrailEvents(const TrailEvents& from);
+
+  inline TrailEvents& operator=(const TrailEvents& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const TrailEvents& default_instance();
+
+  void Swap(TrailEvents* other);
+
+  // implements Message ----------------------------------------------
+
+  TrailEvents* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const TrailEvents& from);
+  void MergeFrom(const TrailEvents& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef TrailEvents_Trail Trail;
+
+  typedef TrailEvents_TEETYPE TEETYPE;
+  static const TEETYPE INIT = TrailEvents_TEETYPE_INIT;
+  static const TEETYPE FINAL = TrailEvents_TEETYPE_FINAL;
+  static inline bool TEETYPE_IsValid(int value) {
+    return TrailEvents_TEETYPE_IsValid(value);
+  }
+  static const TEETYPE TEETYPE_MIN =
+    TrailEvents_TEETYPE_TEETYPE_MIN;
+  static const TEETYPE TEETYPE_MAX =
+    TrailEvents_TEETYPE_TEETYPE_MAX;
+  static const int TEETYPE_ARRAYSIZE =
+    TrailEvents_TEETYPE_TEETYPE_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  TEETYPE_descriptor() {
+    return TrailEvents_TEETYPE_descriptor();
+  }
+  static inline const ::std::string& TEETYPE_Name(TEETYPE value) {
+    return TrailEvents_TEETYPE_Name(value);
+  }
+  static inline bool TEETYPE_Parse(const ::std::string& name,
+      TEETYPE* value) {
+    return TrailEvents_TEETYPE_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFFS.TrailEvents.Trail xTrailList = 1;
+  inline int xtraillist_size() const;
+  inline void clear_xtraillist();
+  static const int kXTrailListFieldNumber = 1;
+  inline const ::NFFS::TrailEvents_Trail& xtraillist(int index) const;
+  inline ::NFFS::TrailEvents_Trail* mutable_xtraillist(int index);
+  inline ::NFFS::TrailEvents_Trail* add_xtraillist();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::TrailEvents_Trail >&
+      xtraillist() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFFS::TrailEvents_Trail >*
+      mutable_xtraillist();
+
+  // @@protoc_insertion_point(class_scope:NFFS.TrailEvents)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::NFFS::TrailEvents_Trail > xtraillist_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static TrailEvents* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AudioEvents_Audio : public ::google::protobuf::Message {
+ public:
+  AudioEvents_Audio();
+  virtual ~AudioEvents_Audio();
+
+  AudioEvents_Audio(const AudioEvents_Audio& from);
+
+  inline AudioEvents_Audio& operator=(const AudioEvents_Audio& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AudioEvents_Audio& default_instance();
+
+  void Swap(AudioEvents_Audio* other);
+
+  // implements Message ----------------------------------------------
+
+  AudioEvents_Audio* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AudioEvents_Audio& from);
+  void MergeFrom(const AudioEvents_Audio& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required float EventTime = 1;
+  inline bool has_eventtime() const;
+  inline void clear_eventtime();
+  static const int kEventTimeFieldNumber = 1;
+  inline float eventtime() const;
+  inline void set_eventtime(float value);
+
+  // required .NFFS.AudioEvents.AEETYPE EventType = 2;
+  inline bool has_eventtype() const;
+  inline void clear_eventtype();
+  static const int kEventTypeFieldNumber = 2;
+  inline ::NFFS::AudioEvents_AEETYPE eventtype() const;
+  inline void set_eventtype(::NFFS::AudioEvents_AEETYPE value);
+
+  // required string TargetName = 3;
+  inline bool has_targetname() const;
+  inline void clear_targetname();
+  static const int kTargetNameFieldNumber = 3;
+  inline const ::std::string& targetname() const;
+  inline void set_targetname(const ::std::string& value);
+  inline void set_targetname(const char* value);
+  inline void set_targetname(const char* value, size_t size);
+  inline ::std::string* mutable_targetname();
+  inline ::std::string* release_targetname();
+  inline void set_allocated_targetname(::std::string* targetname);
+
+  // required string MethodCall = 4;
+  inline bool has_methodcall() const;
+  inline void clear_methodcall();
+  static const int kMethodCallFieldNumber = 4;
+  inline const ::std::string& methodcall() const;
+  inline void set_methodcall(const ::std::string& value);
+  inline void set_methodcall(const char* value);
+  inline void set_methodcall(const char* value, size_t size);
+  inline ::std::string* mutable_methodcall();
+  inline ::std::string* release_methodcall();
+  inline void set_allocated_methodcall(::std::string* methodcall);
+
+  // required string MethodParam = 5;
+  inline bool has_methodparam() const;
+  inline void clear_methodparam();
+  static const int kMethodParamFieldNumber = 5;
+  inline const ::std::string& methodparam() const;
+  inline void set_methodparam(const ::std::string& value);
+  inline void set_methodparam(const char* value);
+  inline void set_methodparam(const char* value, size_t size);
+  inline ::std::string* mutable_methodparam();
+  inline ::std::string* release_methodparam();
+  inline void set_allocated_methodparam(::std::string* methodparam);
+
+  // @@protoc_insertion_point(class_scope:NFFS.AudioEvents.Audio)
+ private:
+  inline void set_has_eventtime();
+  inline void clear_has_eventtime();
+  inline void set_has_eventtype();
+  inline void clear_has_eventtype();
+  inline void set_has_targetname();
+  inline void clear_has_targetname();
+  inline void set_has_methodcall();
+  inline void clear_has_methodcall();
+  inline void set_has_methodparam();
+  inline void clear_has_methodparam();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  float eventtime_;
+  int eventtype_;
+  ::std::string* targetname_;
+  ::std::string* methodcall_;
+  ::std::string* methodparam_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static AudioEvents_Audio* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AudioEvents : public ::google::protobuf::Message {
+ public:
+  AudioEvents();
+  virtual ~AudioEvents();
+
+  AudioEvents(const AudioEvents& from);
+
+  inline AudioEvents& operator=(const AudioEvents& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AudioEvents& default_instance();
+
+  void Swap(AudioEvents* other);
+
+  // implements Message ----------------------------------------------
+
+  AudioEvents* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AudioEvents& from);
+  void MergeFrom(const AudioEvents& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef AudioEvents_Audio Audio;
+
+  typedef AudioEvents_AEETYPE AEETYPE;
+  static const AEETYPE INIT = AudioEvents_AEETYPE_INIT;
+  static const AEETYPE FINAL = AudioEvents_AEETYPE_FINAL;
+  static inline bool AEETYPE_IsValid(int value) {
+    return AudioEvents_AEETYPE_IsValid(value);
+  }
+  static const AEETYPE AEETYPE_MIN =
+    AudioEvents_AEETYPE_AEETYPE_MIN;
+  static const AEETYPE AEETYPE_MAX =
+    AudioEvents_AEETYPE_AEETYPE_MAX;
+  static const int AEETYPE_ARRAYSIZE =
+    AudioEvents_AEETYPE_AEETYPE_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  AEETYPE_descriptor() {
+    return AudioEvents_AEETYPE_descriptor();
+  }
+  static inline const ::std::string& AEETYPE_Name(AEETYPE value) {
+    return AudioEvents_AEETYPE_Name(value);
+  }
+  static inline bool AEETYPE_Parse(const ::std::string& name,
+      AEETYPE* value) {
+    return AudioEvents_AEETYPE_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFFS.AudioEvents.Audio xAudioList = 1;
+  inline int xaudiolist_size() const;
+  inline void clear_xaudiolist();
+  static const int kXAudioListFieldNumber = 1;
+  inline const ::NFFS::AudioEvents_Audio& xaudiolist(int index) const;
+  inline ::NFFS::AudioEvents_Audio* mutable_xaudiolist(int index);
+  inline ::NFFS::AudioEvents_Audio* add_xaudiolist();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::AudioEvents_Audio >&
+      xaudiolist() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFFS::AudioEvents_Audio >*
+      mutable_xaudiolist();
+
+  // @@protoc_insertion_point(class_scope:NFFS.AudioEvents)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::NFFS::AudioEvents_Audio > xaudiolist_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static AudioEvents* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GlobalSpeeds_Speed : public ::google::protobuf::Message {
+ public:
+  GlobalSpeeds_Speed();
+  virtual ~GlobalSpeeds_Speed();
+
+  GlobalSpeeds_Speed(const GlobalSpeeds_Speed& from);
+
+  inline GlobalSpeeds_Speed& operator=(const GlobalSpeeds_Speed& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GlobalSpeeds_Speed& default_instance();
+
+  void Swap(GlobalSpeeds_Speed* other);
+
+  // implements Message ----------------------------------------------
+
+  GlobalSpeeds_Speed* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GlobalSpeeds_Speed& from);
+  void MergeFrom(const GlobalSpeeds_Speed& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required float EventTime = 1;
+  inline bool has_eventtime() const;
+  inline void clear_eventtime();
+  static const int kEventTimeFieldNumber = 1;
+  inline float eventtime() const;
+  inline void set_eventtime(float value);
+
+  // required .NFFS.GlobalSpeeds.EGSTYPE EventType = 2;
+  inline bool has_eventtype() const;
+  inline void clear_eventtype();
+  static const int kEventTypeFieldNumber = 2;
+  inline ::NFFS::GlobalSpeeds_EGSTYPE eventtype() const;
+  inline void set_eventtype(::NFFS::GlobalSpeeds_EGSTYPE value);
+
+  // required float Speed = 3;
+  inline bool has_speed() const;
+  inline void clear_speed();
+  static const int kSpeedFieldNumber = 3;
+  inline float speed() const;
+  inline void set_speed(float value);
+
+  // @@protoc_insertion_point(class_scope:NFFS.GlobalSpeeds.Speed)
+ private:
+  inline void set_has_eventtime();
+  inline void clear_has_eventtime();
+  inline void set_has_eventtype();
+  inline void clear_has_eventtype();
+  inline void set_has_speed();
+  inline void clear_has_speed();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  float eventtime_;
+  int eventtype_;
+  float speed_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static GlobalSpeeds_Speed* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GlobalSpeeds : public ::google::protobuf::Message {
+ public:
+  GlobalSpeeds();
+  virtual ~GlobalSpeeds();
+
+  GlobalSpeeds(const GlobalSpeeds& from);
+
+  inline GlobalSpeeds& operator=(const GlobalSpeeds& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GlobalSpeeds& default_instance();
+
+  void Swap(GlobalSpeeds* other);
+
+  // implements Message ----------------------------------------------
+
+  GlobalSpeeds* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GlobalSpeeds& from);
+  void MergeFrom(const GlobalSpeeds& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef GlobalSpeeds_Speed Speed;
+
+  typedef GlobalSpeeds_EGSTYPE EGSTYPE;
+  static const EGSTYPE INIT = GlobalSpeeds_EGSTYPE_INIT;
+  static const EGSTYPE FINAL = GlobalSpeeds_EGSTYPE_FINAL;
+  static inline bool EGSTYPE_IsValid(int value) {
+    return GlobalSpeeds_EGSTYPE_IsValid(value);
+  }
+  static const EGSTYPE EGSTYPE_MIN =
+    GlobalSpeeds_EGSTYPE_EGSTYPE_MIN;
+  static const EGSTYPE EGSTYPE_MAX =
+    GlobalSpeeds_EGSTYPE_EGSTYPE_MAX;
+  static const int EGSTYPE_ARRAYSIZE =
+    GlobalSpeeds_EGSTYPE_EGSTYPE_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  EGSTYPE_descriptor() {
+    return GlobalSpeeds_EGSTYPE_descriptor();
+  }
+  static inline const ::std::string& EGSTYPE_Name(EGSTYPE value) {
+    return GlobalSpeeds_EGSTYPE_Name(value);
+  }
+  static inline bool EGSTYPE_Parse(const ::std::string& name,
+      EGSTYPE* value) {
+    return GlobalSpeeds_EGSTYPE_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFFS.GlobalSpeeds.Speed xSpeedList = 1;
+  inline int xspeedlist_size() const;
+  inline void clear_xspeedlist();
+  static const int kXSpeedListFieldNumber = 1;
+  inline const ::NFFS::GlobalSpeeds_Speed& xspeedlist(int index) const;
+  inline ::NFFS::GlobalSpeeds_Speed* mutable_xspeedlist(int index);
+  inline ::NFFS::GlobalSpeeds_Speed* add_xspeedlist();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::GlobalSpeeds_Speed >&
+      xspeedlist() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFFS::GlobalSpeeds_Speed >*
+      mutable_xspeedlist();
+
+  // @@protoc_insertion_point(class_scope:NFFS.GlobalSpeeds)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::NFFS::GlobalSpeeds_Speed > xspeedlist_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static GlobalSpeeds* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AnimatorFlys_Fly : public ::google::protobuf::Message {
+ public:
+  AnimatorFlys_Fly();
+  virtual ~AnimatorFlys_Fly();
+
+  AnimatorFlys_Fly(const AnimatorFlys_Fly& from);
+
+  inline AnimatorFlys_Fly& operator=(const AnimatorFlys_Fly& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AnimatorFlys_Fly& default_instance();
+
+  void Swap(AnimatorFlys_Fly* other);
+
+  // implements Message ----------------------------------------------
+
+  AnimatorFlys_Fly* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AnimatorFlys_Fly& from);
+  void MergeFrom(const AnimatorFlys_Fly& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required float EventTime = 1;
+  inline bool has_eventtime() const;
+  inline void clear_eventtime();
+  static const int kEventTimeFieldNumber = 1;
+  inline float eventtime() const;
+  inline void set_eventtime(float value);
+
+  // required .NFFS.AnimatorFlys.EAFType EventType = 2;
+  inline bool has_eventtype() const;
+  inline void clear_eventtype();
+  static const int kEventTypeFieldNumber = 2;
+  inline ::NFFS::AnimatorFlys_EAFType eventtype() const;
+  inline void set_eventtype(::NFFS::AnimatorFlys_EAFType value);
+
+  // required float MoveDis = 3;
+  inline bool has_movedis() const;
+  inline void clear_movedis();
+  static const int kMoveDisFieldNumber = 3;
+  inline float movedis() const;
+  inline void set_movedis(float value);
+
+  // required float MoveTime = 4;
+  inline bool has_movetime() const;
+  inline void clear_movetime();
+  static const int kMoveTimeFieldNumber = 4;
+  inline float movetime() const;
+  inline void set_movetime(float value);
+
+  // required float MoveTopDis = 5;
+  inline bool has_movetopdis() const;
+  inline void clear_movetopdis();
+  static const int kMoveTopDisFieldNumber = 5;
+  inline float movetopdis() const;
+  inline void set_movetopdis(float value);
+
+  // required string MethodCall = 6;
+  inline bool has_methodcall() const;
+  inline void clear_methodcall();
+  static const int kMethodCallFieldNumber = 6;
+  inline const ::std::string& methodcall() const;
+  inline void set_methodcall(const ::std::string& value);
+  inline void set_methodcall(const char* value);
+  inline void set_methodcall(const char* value, size_t size);
+  inline ::std::string* mutable_methodcall();
+  inline ::std::string* release_methodcall();
+  inline void set_allocated_methodcall(::std::string* methodcall);
+
+  // required string MethodParam = 7;
+  inline bool has_methodparam() const;
+  inline void clear_methodparam();
+  static const int kMethodParamFieldNumber = 7;
+  inline const ::std::string& methodparam() const;
+  inline void set_methodparam(const ::std::string& value);
+  inline void set_methodparam(const char* value);
+  inline void set_methodparam(const char* value, size_t size);
+  inline ::std::string* mutable_methodparam();
+  inline ::std::string* release_methodparam();
+  inline void set_allocated_methodparam(::std::string* methodparam);
+
+  // @@protoc_insertion_point(class_scope:NFFS.AnimatorFlys.Fly)
+ private:
+  inline void set_has_eventtime();
+  inline void clear_has_eventtime();
+  inline void set_has_eventtype();
+  inline void clear_has_eventtype();
+  inline void set_has_movedis();
+  inline void clear_has_movedis();
+  inline void set_has_movetime();
+  inline void clear_has_movetime();
+  inline void set_has_movetopdis();
+  inline void clear_has_movetopdis();
+  inline void set_has_methodcall();
+  inline void clear_has_methodcall();
+  inline void set_has_methodparam();
+  inline void clear_has_methodparam();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  float eventtime_;
+  int eventtype_;
+  float movedis_;
+  float movetime_;
+  ::std::string* methodcall_;
+  ::std::string* methodparam_;
+  float movetopdis_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static AnimatorFlys_Fly* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AnimatorFlys : public ::google::protobuf::Message {
+ public:
+  AnimatorFlys();
+  virtual ~AnimatorFlys();
+
+  AnimatorFlys(const AnimatorFlys& from);
+
+  inline AnimatorFlys& operator=(const AnimatorFlys& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AnimatorFlys& default_instance();
+
+  void Swap(AnimatorFlys* other);
+
+  // implements Message ----------------------------------------------
+
+  AnimatorFlys* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AnimatorFlys& from);
+  void MergeFrom(const AnimatorFlys& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef AnimatorFlys_Fly Fly;
+
+  typedef AnimatorFlys_EAFType EAFType;
+  static const EAFType EAFT_FORWARD = AnimatorFlys_EAFType_EAFT_FORWARD;
+  static const EAFType EAFT_BACK = AnimatorFlys_EAFType_EAFT_BACK;
+  static const EAFType EAFT_LEFT = AnimatorFlys_EAFType_EAFT_LEFT;
+  static const EAFType EAFT_RIGHT = AnimatorFlys_EAFType_EAFT_RIGHT;
+  static const EAFType EAFT_TOP = AnimatorFlys_EAFType_EAFT_TOP;
+  static inline bool EAFType_IsValid(int value) {
+    return AnimatorFlys_EAFType_IsValid(value);
+  }
+  static const EAFType EAFType_MIN =
+    AnimatorFlys_EAFType_EAFType_MIN;
+  static const EAFType EAFType_MAX =
+    AnimatorFlys_EAFType_EAFType_MAX;
+  static const int EAFType_ARRAYSIZE =
+    AnimatorFlys_EAFType_EAFType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  EAFType_descriptor() {
+    return AnimatorFlys_EAFType_descriptor();
+  }
+  static inline const ::std::string& EAFType_Name(EAFType value) {
+    return AnimatorFlys_EAFType_Name(value);
+  }
+  static inline bool EAFType_Parse(const ::std::string& name,
+      EAFType* value) {
+    return AnimatorFlys_EAFType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFFS.AnimatorFlys.Fly xFlyList = 1;
+  inline int xflylist_size() const;
+  inline void clear_xflylist();
+  static const int kXFlyListFieldNumber = 1;
+  inline const ::NFFS::AnimatorFlys_Fly& xflylist(int index) const;
+  inline ::NFFS::AnimatorFlys_Fly* mutable_xflylist(int index);
+  inline ::NFFS::AnimatorFlys_Fly* add_xflylist();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::AnimatorFlys_Fly >&
+      xflylist() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFFS::AnimatorFlys_Fly >*
+      mutable_xflylist();
+
+  // @@protoc_insertion_point(class_scope:NFFS.AnimatorFlys)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::NFFS::AnimatorFlys_Fly > xflylist_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static AnimatorFlys* default_instance_;
 };
 // ===================================================================
 
@@ -5017,15 +6089,37 @@ inline void ParticleEvents_Particle::set_bindtarget(::google::protobuf::int32 va
   bindtarget_ = value;
 }
 
-// required string MethodCall = 9;
-inline bool ParticleEvents_Particle::has_methodcall() const {
+// required float DestroyTime = 9;
+inline bool ParticleEvents_Particle::has_destroytime() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void ParticleEvents_Particle::set_has_methodcall() {
+inline void ParticleEvents_Particle::set_has_destroytime() {
   _has_bits_[0] |= 0x00000080u;
 }
-inline void ParticleEvents_Particle::clear_has_methodcall() {
+inline void ParticleEvents_Particle::clear_has_destroytime() {
   _has_bits_[0] &= ~0x00000080u;
+}
+inline void ParticleEvents_Particle::clear_destroytime() {
+  destroytime_ = 0;
+  clear_has_destroytime();
+}
+inline float ParticleEvents_Particle::destroytime() const {
+  return destroytime_;
+}
+inline void ParticleEvents_Particle::set_destroytime(float value) {
+  set_has_destroytime();
+  destroytime_ = value;
+}
+
+// required string MethodCall = 10;
+inline bool ParticleEvents_Particle::has_methodcall() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void ParticleEvents_Particle::set_has_methodcall() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void ParticleEvents_Particle::clear_has_methodcall() {
+  _has_bits_[0] &= ~0x00000100u;
 }
 inline void ParticleEvents_Particle::clear_methodcall() {
   if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
@@ -5087,15 +6181,15 @@ inline void ParticleEvents_Particle::set_allocated_methodcall(::std::string* met
   }
 }
 
-// required string MethodParam = 10;
+// required string MethodParam = 11;
 inline bool ParticleEvents_Particle::has_methodparam() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
 inline void ParticleEvents_Particle::set_has_methodparam() {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000200u;
 }
 inline void ParticleEvents_Particle::clear_has_methodparam() {
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline void ParticleEvents_Particle::clear_methodparam() {
   if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
@@ -5474,6 +6568,966 @@ EnableEvents::mutable_xenablelist() {
   return &xenablelist_;
 }
 
+// -------------------------------------------------------------------
+
+// TrailEvents_Trail
+
+// required float EventTime = 1;
+inline bool TrailEvents_Trail::has_eventtime() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void TrailEvents_Trail::set_has_eventtime() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void TrailEvents_Trail::clear_has_eventtime() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void TrailEvents_Trail::clear_eventtime() {
+  eventtime_ = 0;
+  clear_has_eventtime();
+}
+inline float TrailEvents_Trail::eventtime() const {
+  return eventtime_;
+}
+inline void TrailEvents_Trail::set_eventtime(float value) {
+  set_has_eventtime();
+  eventtime_ = value;
+}
+
+// required .NFFS.TrailEvents.TEETYPE EventType = 2;
+inline bool TrailEvents_Trail::has_eventtype() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void TrailEvents_Trail::set_has_eventtype() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void TrailEvents_Trail::clear_has_eventtype() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void TrailEvents_Trail::clear_eventtype() {
+  eventtype_ = 0;
+  clear_has_eventtype();
+}
+inline ::NFFS::TrailEvents_TEETYPE TrailEvents_Trail::eventtype() const {
+  return static_cast< ::NFFS::TrailEvents_TEETYPE >(eventtype_);
+}
+inline void TrailEvents_Trail::set_eventtype(::NFFS::TrailEvents_TEETYPE value) {
+  assert(::NFFS::TrailEvents_TEETYPE_IsValid(value));
+  set_has_eventtype();
+  eventtype_ = value;
+}
+
+// required string TargetName = 3;
+inline bool TrailEvents_Trail::has_targetname() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void TrailEvents_Trail::set_has_targetname() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void TrailEvents_Trail::clear_has_targetname() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void TrailEvents_Trail::clear_targetname() {
+  if (targetname_ != &::google::protobuf::internal::kEmptyString) {
+    targetname_->clear();
+  }
+  clear_has_targetname();
+}
+inline const ::std::string& TrailEvents_Trail::targetname() const {
+  return *targetname_;
+}
+inline void TrailEvents_Trail::set_targetname(const ::std::string& value) {
+  set_has_targetname();
+  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
+    targetname_ = new ::std::string;
+  }
+  targetname_->assign(value);
+}
+inline void TrailEvents_Trail::set_targetname(const char* value) {
+  set_has_targetname();
+  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
+    targetname_ = new ::std::string;
+  }
+  targetname_->assign(value);
+}
+inline void TrailEvents_Trail::set_targetname(const char* value, size_t size) {
+  set_has_targetname();
+  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
+    targetname_ = new ::std::string;
+  }
+  targetname_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* TrailEvents_Trail::mutable_targetname() {
+  set_has_targetname();
+  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
+    targetname_ = new ::std::string;
+  }
+  return targetname_;
+}
+inline ::std::string* TrailEvents_Trail::release_targetname() {
+  clear_has_targetname();
+  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = targetname_;
+    targetname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void TrailEvents_Trail::set_allocated_targetname(::std::string* targetname) {
+  if (targetname_ != &::google::protobuf::internal::kEmptyString) {
+    delete targetname_;
+  }
+  if (targetname) {
+    set_has_targetname();
+    targetname_ = targetname;
+  } else {
+    clear_has_targetname();
+    targetname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string MethodCall = 4;
+inline bool TrailEvents_Trail::has_methodcall() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void TrailEvents_Trail::set_has_methodcall() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void TrailEvents_Trail::clear_has_methodcall() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void TrailEvents_Trail::clear_methodcall() {
+  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
+    methodcall_->clear();
+  }
+  clear_has_methodcall();
+}
+inline const ::std::string& TrailEvents_Trail::methodcall() const {
+  return *methodcall_;
+}
+inline void TrailEvents_Trail::set_methodcall(const ::std::string& value) {
+  set_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    methodcall_ = new ::std::string;
+  }
+  methodcall_->assign(value);
+}
+inline void TrailEvents_Trail::set_methodcall(const char* value) {
+  set_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    methodcall_ = new ::std::string;
+  }
+  methodcall_->assign(value);
+}
+inline void TrailEvents_Trail::set_methodcall(const char* value, size_t size) {
+  set_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    methodcall_ = new ::std::string;
+  }
+  methodcall_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* TrailEvents_Trail::mutable_methodcall() {
+  set_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    methodcall_ = new ::std::string;
+  }
+  return methodcall_;
+}
+inline ::std::string* TrailEvents_Trail::release_methodcall() {
+  clear_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = methodcall_;
+    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void TrailEvents_Trail::set_allocated_methodcall(::std::string* methodcall) {
+  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
+    delete methodcall_;
+  }
+  if (methodcall) {
+    set_has_methodcall();
+    methodcall_ = methodcall;
+  } else {
+    clear_has_methodcall();
+    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string MethodParam = 5;
+inline bool TrailEvents_Trail::has_methodparam() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void TrailEvents_Trail::set_has_methodparam() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void TrailEvents_Trail::clear_has_methodparam() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void TrailEvents_Trail::clear_methodparam() {
+  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
+    methodparam_->clear();
+  }
+  clear_has_methodparam();
+}
+inline const ::std::string& TrailEvents_Trail::methodparam() const {
+  return *methodparam_;
+}
+inline void TrailEvents_Trail::set_methodparam(const ::std::string& value) {
+  set_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    methodparam_ = new ::std::string;
+  }
+  methodparam_->assign(value);
+}
+inline void TrailEvents_Trail::set_methodparam(const char* value) {
+  set_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    methodparam_ = new ::std::string;
+  }
+  methodparam_->assign(value);
+}
+inline void TrailEvents_Trail::set_methodparam(const char* value, size_t size) {
+  set_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    methodparam_ = new ::std::string;
+  }
+  methodparam_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* TrailEvents_Trail::mutable_methodparam() {
+  set_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    methodparam_ = new ::std::string;
+  }
+  return methodparam_;
+}
+inline ::std::string* TrailEvents_Trail::release_methodparam() {
+  clear_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = methodparam_;
+    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void TrailEvents_Trail::set_allocated_methodparam(::std::string* methodparam) {
+  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
+    delete methodparam_;
+  }
+  if (methodparam) {
+    set_has_methodparam();
+    methodparam_ = methodparam;
+  } else {
+    clear_has_methodparam();
+    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// TrailEvents
+
+// repeated .NFFS.TrailEvents.Trail xTrailList = 1;
+inline int TrailEvents::xtraillist_size() const {
+  return xtraillist_.size();
+}
+inline void TrailEvents::clear_xtraillist() {
+  xtraillist_.Clear();
+}
+inline const ::NFFS::TrailEvents_Trail& TrailEvents::xtraillist(int index) const {
+  return xtraillist_.Get(index);
+}
+inline ::NFFS::TrailEvents_Trail* TrailEvents::mutable_xtraillist(int index) {
+  return xtraillist_.Mutable(index);
+}
+inline ::NFFS::TrailEvents_Trail* TrailEvents::add_xtraillist() {
+  return xtraillist_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFFS::TrailEvents_Trail >&
+TrailEvents::xtraillist() const {
+  return xtraillist_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFFS::TrailEvents_Trail >*
+TrailEvents::mutable_xtraillist() {
+  return &xtraillist_;
+}
+
+// -------------------------------------------------------------------
+
+// AudioEvents_Audio
+
+// required float EventTime = 1;
+inline bool AudioEvents_Audio::has_eventtime() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AudioEvents_Audio::set_has_eventtime() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AudioEvents_Audio::clear_has_eventtime() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AudioEvents_Audio::clear_eventtime() {
+  eventtime_ = 0;
+  clear_has_eventtime();
+}
+inline float AudioEvents_Audio::eventtime() const {
+  return eventtime_;
+}
+inline void AudioEvents_Audio::set_eventtime(float value) {
+  set_has_eventtime();
+  eventtime_ = value;
+}
+
+// required .NFFS.AudioEvents.AEETYPE EventType = 2;
+inline bool AudioEvents_Audio::has_eventtype() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AudioEvents_Audio::set_has_eventtype() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AudioEvents_Audio::clear_has_eventtype() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AudioEvents_Audio::clear_eventtype() {
+  eventtype_ = 0;
+  clear_has_eventtype();
+}
+inline ::NFFS::AudioEvents_AEETYPE AudioEvents_Audio::eventtype() const {
+  return static_cast< ::NFFS::AudioEvents_AEETYPE >(eventtype_);
+}
+inline void AudioEvents_Audio::set_eventtype(::NFFS::AudioEvents_AEETYPE value) {
+  assert(::NFFS::AudioEvents_AEETYPE_IsValid(value));
+  set_has_eventtype();
+  eventtype_ = value;
+}
+
+// required string TargetName = 3;
+inline bool AudioEvents_Audio::has_targetname() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AudioEvents_Audio::set_has_targetname() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AudioEvents_Audio::clear_has_targetname() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AudioEvents_Audio::clear_targetname() {
+  if (targetname_ != &::google::protobuf::internal::kEmptyString) {
+    targetname_->clear();
+  }
+  clear_has_targetname();
+}
+inline const ::std::string& AudioEvents_Audio::targetname() const {
+  return *targetname_;
+}
+inline void AudioEvents_Audio::set_targetname(const ::std::string& value) {
+  set_has_targetname();
+  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
+    targetname_ = new ::std::string;
+  }
+  targetname_->assign(value);
+}
+inline void AudioEvents_Audio::set_targetname(const char* value) {
+  set_has_targetname();
+  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
+    targetname_ = new ::std::string;
+  }
+  targetname_->assign(value);
+}
+inline void AudioEvents_Audio::set_targetname(const char* value, size_t size) {
+  set_has_targetname();
+  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
+    targetname_ = new ::std::string;
+  }
+  targetname_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AudioEvents_Audio::mutable_targetname() {
+  set_has_targetname();
+  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
+    targetname_ = new ::std::string;
+  }
+  return targetname_;
+}
+inline ::std::string* AudioEvents_Audio::release_targetname() {
+  clear_has_targetname();
+  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = targetname_;
+    targetname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AudioEvents_Audio::set_allocated_targetname(::std::string* targetname) {
+  if (targetname_ != &::google::protobuf::internal::kEmptyString) {
+    delete targetname_;
+  }
+  if (targetname) {
+    set_has_targetname();
+    targetname_ = targetname;
+  } else {
+    clear_has_targetname();
+    targetname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string MethodCall = 4;
+inline bool AudioEvents_Audio::has_methodcall() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void AudioEvents_Audio::set_has_methodcall() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void AudioEvents_Audio::clear_has_methodcall() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void AudioEvents_Audio::clear_methodcall() {
+  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
+    methodcall_->clear();
+  }
+  clear_has_methodcall();
+}
+inline const ::std::string& AudioEvents_Audio::methodcall() const {
+  return *methodcall_;
+}
+inline void AudioEvents_Audio::set_methodcall(const ::std::string& value) {
+  set_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    methodcall_ = new ::std::string;
+  }
+  methodcall_->assign(value);
+}
+inline void AudioEvents_Audio::set_methodcall(const char* value) {
+  set_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    methodcall_ = new ::std::string;
+  }
+  methodcall_->assign(value);
+}
+inline void AudioEvents_Audio::set_methodcall(const char* value, size_t size) {
+  set_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    methodcall_ = new ::std::string;
+  }
+  methodcall_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AudioEvents_Audio::mutable_methodcall() {
+  set_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    methodcall_ = new ::std::string;
+  }
+  return methodcall_;
+}
+inline ::std::string* AudioEvents_Audio::release_methodcall() {
+  clear_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = methodcall_;
+    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AudioEvents_Audio::set_allocated_methodcall(::std::string* methodcall) {
+  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
+    delete methodcall_;
+  }
+  if (methodcall) {
+    set_has_methodcall();
+    methodcall_ = methodcall;
+  } else {
+    clear_has_methodcall();
+    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string MethodParam = 5;
+inline bool AudioEvents_Audio::has_methodparam() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void AudioEvents_Audio::set_has_methodparam() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void AudioEvents_Audio::clear_has_methodparam() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void AudioEvents_Audio::clear_methodparam() {
+  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
+    methodparam_->clear();
+  }
+  clear_has_methodparam();
+}
+inline const ::std::string& AudioEvents_Audio::methodparam() const {
+  return *methodparam_;
+}
+inline void AudioEvents_Audio::set_methodparam(const ::std::string& value) {
+  set_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    methodparam_ = new ::std::string;
+  }
+  methodparam_->assign(value);
+}
+inline void AudioEvents_Audio::set_methodparam(const char* value) {
+  set_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    methodparam_ = new ::std::string;
+  }
+  methodparam_->assign(value);
+}
+inline void AudioEvents_Audio::set_methodparam(const char* value, size_t size) {
+  set_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    methodparam_ = new ::std::string;
+  }
+  methodparam_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AudioEvents_Audio::mutable_methodparam() {
+  set_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    methodparam_ = new ::std::string;
+  }
+  return methodparam_;
+}
+inline ::std::string* AudioEvents_Audio::release_methodparam() {
+  clear_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = methodparam_;
+    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AudioEvents_Audio::set_allocated_methodparam(::std::string* methodparam) {
+  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
+    delete methodparam_;
+  }
+  if (methodparam) {
+    set_has_methodparam();
+    methodparam_ = methodparam;
+  } else {
+    clear_has_methodparam();
+    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// AudioEvents
+
+// repeated .NFFS.AudioEvents.Audio xAudioList = 1;
+inline int AudioEvents::xaudiolist_size() const {
+  return xaudiolist_.size();
+}
+inline void AudioEvents::clear_xaudiolist() {
+  xaudiolist_.Clear();
+}
+inline const ::NFFS::AudioEvents_Audio& AudioEvents::xaudiolist(int index) const {
+  return xaudiolist_.Get(index);
+}
+inline ::NFFS::AudioEvents_Audio* AudioEvents::mutable_xaudiolist(int index) {
+  return xaudiolist_.Mutable(index);
+}
+inline ::NFFS::AudioEvents_Audio* AudioEvents::add_xaudiolist() {
+  return xaudiolist_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFFS::AudioEvents_Audio >&
+AudioEvents::xaudiolist() const {
+  return xaudiolist_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFFS::AudioEvents_Audio >*
+AudioEvents::mutable_xaudiolist() {
+  return &xaudiolist_;
+}
+
+// -------------------------------------------------------------------
+
+// GlobalSpeeds_Speed
+
+// required float EventTime = 1;
+inline bool GlobalSpeeds_Speed::has_eventtime() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GlobalSpeeds_Speed::set_has_eventtime() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GlobalSpeeds_Speed::clear_has_eventtime() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GlobalSpeeds_Speed::clear_eventtime() {
+  eventtime_ = 0;
+  clear_has_eventtime();
+}
+inline float GlobalSpeeds_Speed::eventtime() const {
+  return eventtime_;
+}
+inline void GlobalSpeeds_Speed::set_eventtime(float value) {
+  set_has_eventtime();
+  eventtime_ = value;
+}
+
+// required .NFFS.GlobalSpeeds.EGSTYPE EventType = 2;
+inline bool GlobalSpeeds_Speed::has_eventtype() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void GlobalSpeeds_Speed::set_has_eventtype() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void GlobalSpeeds_Speed::clear_has_eventtype() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void GlobalSpeeds_Speed::clear_eventtype() {
+  eventtype_ = 0;
+  clear_has_eventtype();
+}
+inline ::NFFS::GlobalSpeeds_EGSTYPE GlobalSpeeds_Speed::eventtype() const {
+  return static_cast< ::NFFS::GlobalSpeeds_EGSTYPE >(eventtype_);
+}
+inline void GlobalSpeeds_Speed::set_eventtype(::NFFS::GlobalSpeeds_EGSTYPE value) {
+  assert(::NFFS::GlobalSpeeds_EGSTYPE_IsValid(value));
+  set_has_eventtype();
+  eventtype_ = value;
+}
+
+// required float Speed = 3;
+inline bool GlobalSpeeds_Speed::has_speed() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void GlobalSpeeds_Speed::set_has_speed() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void GlobalSpeeds_Speed::clear_has_speed() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void GlobalSpeeds_Speed::clear_speed() {
+  speed_ = 0;
+  clear_has_speed();
+}
+inline float GlobalSpeeds_Speed::speed() const {
+  return speed_;
+}
+inline void GlobalSpeeds_Speed::set_speed(float value) {
+  set_has_speed();
+  speed_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// GlobalSpeeds
+
+// repeated .NFFS.GlobalSpeeds.Speed xSpeedList = 1;
+inline int GlobalSpeeds::xspeedlist_size() const {
+  return xspeedlist_.size();
+}
+inline void GlobalSpeeds::clear_xspeedlist() {
+  xspeedlist_.Clear();
+}
+inline const ::NFFS::GlobalSpeeds_Speed& GlobalSpeeds::xspeedlist(int index) const {
+  return xspeedlist_.Get(index);
+}
+inline ::NFFS::GlobalSpeeds_Speed* GlobalSpeeds::mutable_xspeedlist(int index) {
+  return xspeedlist_.Mutable(index);
+}
+inline ::NFFS::GlobalSpeeds_Speed* GlobalSpeeds::add_xspeedlist() {
+  return xspeedlist_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFFS::GlobalSpeeds_Speed >&
+GlobalSpeeds::xspeedlist() const {
+  return xspeedlist_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFFS::GlobalSpeeds_Speed >*
+GlobalSpeeds::mutable_xspeedlist() {
+  return &xspeedlist_;
+}
+
+// -------------------------------------------------------------------
+
+// AnimatorFlys_Fly
+
+// required float EventTime = 1;
+inline bool AnimatorFlys_Fly::has_eventtime() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AnimatorFlys_Fly::set_has_eventtime() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AnimatorFlys_Fly::clear_has_eventtime() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AnimatorFlys_Fly::clear_eventtime() {
+  eventtime_ = 0;
+  clear_has_eventtime();
+}
+inline float AnimatorFlys_Fly::eventtime() const {
+  return eventtime_;
+}
+inline void AnimatorFlys_Fly::set_eventtime(float value) {
+  set_has_eventtime();
+  eventtime_ = value;
+}
+
+// required .NFFS.AnimatorFlys.EAFType EventType = 2;
+inline bool AnimatorFlys_Fly::has_eventtype() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AnimatorFlys_Fly::set_has_eventtype() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AnimatorFlys_Fly::clear_has_eventtype() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AnimatorFlys_Fly::clear_eventtype() {
+  eventtype_ = 0;
+  clear_has_eventtype();
+}
+inline ::NFFS::AnimatorFlys_EAFType AnimatorFlys_Fly::eventtype() const {
+  return static_cast< ::NFFS::AnimatorFlys_EAFType >(eventtype_);
+}
+inline void AnimatorFlys_Fly::set_eventtype(::NFFS::AnimatorFlys_EAFType value) {
+  assert(::NFFS::AnimatorFlys_EAFType_IsValid(value));
+  set_has_eventtype();
+  eventtype_ = value;
+}
+
+// required float MoveDis = 3;
+inline bool AnimatorFlys_Fly::has_movedis() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AnimatorFlys_Fly::set_has_movedis() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AnimatorFlys_Fly::clear_has_movedis() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AnimatorFlys_Fly::clear_movedis() {
+  movedis_ = 0;
+  clear_has_movedis();
+}
+inline float AnimatorFlys_Fly::movedis() const {
+  return movedis_;
+}
+inline void AnimatorFlys_Fly::set_movedis(float value) {
+  set_has_movedis();
+  movedis_ = value;
+}
+
+// required float MoveTime = 4;
+inline bool AnimatorFlys_Fly::has_movetime() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void AnimatorFlys_Fly::set_has_movetime() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void AnimatorFlys_Fly::clear_has_movetime() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void AnimatorFlys_Fly::clear_movetime() {
+  movetime_ = 0;
+  clear_has_movetime();
+}
+inline float AnimatorFlys_Fly::movetime() const {
+  return movetime_;
+}
+inline void AnimatorFlys_Fly::set_movetime(float value) {
+  set_has_movetime();
+  movetime_ = value;
+}
+
+// required float MoveTopDis = 5;
+inline bool AnimatorFlys_Fly::has_movetopdis() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void AnimatorFlys_Fly::set_has_movetopdis() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void AnimatorFlys_Fly::clear_has_movetopdis() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void AnimatorFlys_Fly::clear_movetopdis() {
+  movetopdis_ = 0;
+  clear_has_movetopdis();
+}
+inline float AnimatorFlys_Fly::movetopdis() const {
+  return movetopdis_;
+}
+inline void AnimatorFlys_Fly::set_movetopdis(float value) {
+  set_has_movetopdis();
+  movetopdis_ = value;
+}
+
+// required string MethodCall = 6;
+inline bool AnimatorFlys_Fly::has_methodcall() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void AnimatorFlys_Fly::set_has_methodcall() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void AnimatorFlys_Fly::clear_has_methodcall() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void AnimatorFlys_Fly::clear_methodcall() {
+  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
+    methodcall_->clear();
+  }
+  clear_has_methodcall();
+}
+inline const ::std::string& AnimatorFlys_Fly::methodcall() const {
+  return *methodcall_;
+}
+inline void AnimatorFlys_Fly::set_methodcall(const ::std::string& value) {
+  set_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    methodcall_ = new ::std::string;
+  }
+  methodcall_->assign(value);
+}
+inline void AnimatorFlys_Fly::set_methodcall(const char* value) {
+  set_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    methodcall_ = new ::std::string;
+  }
+  methodcall_->assign(value);
+}
+inline void AnimatorFlys_Fly::set_methodcall(const char* value, size_t size) {
+  set_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    methodcall_ = new ::std::string;
+  }
+  methodcall_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AnimatorFlys_Fly::mutable_methodcall() {
+  set_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    methodcall_ = new ::std::string;
+  }
+  return methodcall_;
+}
+inline ::std::string* AnimatorFlys_Fly::release_methodcall() {
+  clear_has_methodcall();
+  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = methodcall_;
+    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AnimatorFlys_Fly::set_allocated_methodcall(::std::string* methodcall) {
+  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
+    delete methodcall_;
+  }
+  if (methodcall) {
+    set_has_methodcall();
+    methodcall_ = methodcall;
+  } else {
+    clear_has_methodcall();
+    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string MethodParam = 7;
+inline bool AnimatorFlys_Fly::has_methodparam() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void AnimatorFlys_Fly::set_has_methodparam() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void AnimatorFlys_Fly::clear_has_methodparam() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void AnimatorFlys_Fly::clear_methodparam() {
+  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
+    methodparam_->clear();
+  }
+  clear_has_methodparam();
+}
+inline const ::std::string& AnimatorFlys_Fly::methodparam() const {
+  return *methodparam_;
+}
+inline void AnimatorFlys_Fly::set_methodparam(const ::std::string& value) {
+  set_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    methodparam_ = new ::std::string;
+  }
+  methodparam_->assign(value);
+}
+inline void AnimatorFlys_Fly::set_methodparam(const char* value) {
+  set_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    methodparam_ = new ::std::string;
+  }
+  methodparam_->assign(value);
+}
+inline void AnimatorFlys_Fly::set_methodparam(const char* value, size_t size) {
+  set_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    methodparam_ = new ::std::string;
+  }
+  methodparam_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AnimatorFlys_Fly::mutable_methodparam() {
+  set_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    methodparam_ = new ::std::string;
+  }
+  return methodparam_;
+}
+inline ::std::string* AnimatorFlys_Fly::release_methodparam() {
+  clear_has_methodparam();
+  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = methodparam_;
+    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AnimatorFlys_Fly::set_allocated_methodparam(::std::string* methodparam) {
+  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
+    delete methodparam_;
+  }
+  if (methodparam) {
+    set_has_methodparam();
+    methodparam_ = methodparam;
+  } else {
+    clear_has_methodparam();
+    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// AnimatorFlys
+
+// repeated .NFFS.AnimatorFlys.Fly xFlyList = 1;
+inline int AnimatorFlys::xflylist_size() const {
+  return xflylist_.size();
+}
+inline void AnimatorFlys::clear_xflylist() {
+  xflylist_.Clear();
+}
+inline const ::NFFS::AnimatorFlys_Fly& AnimatorFlys::xflylist(int index) const {
+  return xflylist_.Get(index);
+}
+inline ::NFFS::AnimatorFlys_Fly* AnimatorFlys::mutable_xflylist(int index) {
+  return xflylist_.Mutable(index);
+}
+inline ::NFFS::AnimatorFlys_Fly* AnimatorFlys::add_xflylist() {
+  return xflylist_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFFS::AnimatorFlys_Fly >&
+AnimatorFlys::xflylist() const {
+  return xflylist_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFFS::AnimatorFlys_Fly >*
+AnimatorFlys::mutable_xflylist() {
+  return &xflylist_;
+}
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -5510,6 +7564,22 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::ParticleEvents_EPERTYPE>
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::EnableEvents_EEETYPE>() {
   return ::NFFS::EnableEvents_EEETYPE_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::TrailEvents_TEETYPE>() {
+  return ::NFFS::TrailEvents_TEETYPE_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::AudioEvents_AEETYPE>() {
+  return ::NFFS::AudioEvents_AEETYPE_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::GlobalSpeeds_EGSTYPE>() {
+  return ::NFFS::GlobalSpeeds_EGSTYPE_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::AnimatorFlys_EAFType>() {
+  return ::NFFS::AnimatorFlys_EAFType_descriptor();
 }
 
 }  // namespace google
