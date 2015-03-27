@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--this is config xml-->
 <XML>
-    <Object ATK_FIRE="10" ATK_ICE="10" ATK_LIGHT="10" ATK_POISON="10" ATK_SPEED="10000" ATK_VALUE="50" DEF_FIRE="5" DEF_ICE="5" DEF_LIGHT="5" DEF_POISON="5" DEF_VALUE="40" Desc="20" HPREGEN="0" ID="AttackNpc1" ItemSubType="20" Level="0" MAXMP="200" MOVE_SPEED="55000" MPREGEN="0" Prefab="Prefabs/Object/Player" SalePrice="200" ShowName="0"/>
+    <Object ATK_FIRE="10" ATK_ICE="10" ATK_LIGHT="10" ATK_POISON="10" ATK_SPEED="10000" ATK_VALUE="50" DEF_FIRE="5" DEF_ICE="5" DEF_LIGHT="5" DEF_POISON="5" DEF_VALUE="40" Desc="20" HPREGEN="0" ID="AttackNpc1" ItemSubType="20" Level="0" MAXMP="200" MOVE_SPEED="55000" MPREGEN="0" Prefab="Prefabs/Object/Elves" SalePrice="200" ShowName="0"/>
     <Object ATK_FIRE="10" ATK_ICE="10" ATK_LIGHT="10" ATK_POISON="10" ATK_SPEED="10000" ATK_VALUE="100" DEF_FIRE="5" DEF_ICE="5" DEF_LIGHT="5" DEF_POISON="5" DEF_VALUE="60" Desc="40" HPREGEN="0" ID="AttackNpc2" ItemSubType="40" Level="0" MAXMP="400" MOVE_SPEED="55000" MPREGEN="0" Prefab="Prefabs/Object/Player" SalePrice="400" ShowName="0"/>
     <Object ATK_FIRE="10" ATK_ICE="10" ATK_LIGHT="10" ATK_POISON="10" ATK_SPEED="10000" ATK_VALUE="150" DEF_FIRE="5" DEF_ICE="5" DEF_LIGHT="5" DEF_POISON="5" DEF_VALUE="80" Desc="60" HPREGEN="0" ID="AttackNpc3" ItemSubType="60" Level="0" MAXMP="600" MOVE_SPEED="55000" MPREGEN="0" Prefab="Prefabs/Object/Player" SalePrice="600" ShowName="0"/>
     <Object ATK_FIRE="10" ATK_ICE="10" ATK_LIGHT="10" ATK_POISON="10" ATK_SPEED="10000" ATK_VALUE="150" DEF_FIRE="5" DEF_ICE="5" DEF_LIGHT="5" DEF_POISON="5" DEF_VALUE="80" Desc="60" HPREGEN="0" ID="Player" ItemSubType="60" Level="0" MAXMP="600" MOVE_SPEED="55000" MPREGEN="0" Prefab="Prefabs/Object/Male100" SalePrice="600" ShowName="0"/>
+    <Object ATK_FIRE="10" ATK_ICE="10" ATK_LIGHT="10" ATK_POISON="10" ATK_SPEED="10000" ATK_VALUE="150" DEF_FIRE="5" DEF_ICE="5" DEF_LIGHT="5" DEF_POISON="5" DEF_VALUE="80" Desc="60" HPREGEN="0" ID="Enemy" ItemSubType="60" Level="0" MAXMP="600" MOVE_SPEED="55000" MPREGEN="0" Prefab="Prefabs/Object/Male100" SalePrice="600" ShowName="0"/>
 </XML>

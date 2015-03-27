@@ -343,7 +343,7 @@ public:
             break;
             case TDATA_DOUBLE:
             {
-                float fValue = boost::get<double>(var.variantData);
+                double fValue = boost::get<double>(var.variantData);
                 if (fValue > 0.001f  || fValue < -0.001f)
                 {
                     bChanged = true;
