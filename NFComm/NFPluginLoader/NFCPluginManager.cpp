@@ -52,32 +52,27 @@ bool NFCPluginManager::LoadPlugin()
     {
         const char* strPluginName = pPluginNode->first_attribute( "Name" )->value();
         const char* strMain = pPluginNode->first_attribute( "Main" )->value();
+
 #ifdef NF_USE_ACTOR
-		int nMain = boost::lexical_cast<int>( strMain );
-		bool bMain = (nMain > 0 ? true : false);
-		if (bMain)
+		if (GetActorID() == NFIActorManager::EACTOR_MAIN)
 		{
-			//主模块只能运行在主actor上只
-			//非主模块则所有的actor都创建
-			if (GetActorID() == NFIActorManager::EACTOR_MAIN)
+			//所有的插件都加载
+			mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, bMain));
+		}
+		else
+		{
+			//只加载非主要的插件
+			int nMain = boost::lexical_cast<int>( strMain );
+			bool bMain = (nMain > 0 ? true : false);
+			if (!bMain)
 			{
 				mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, bMain));
 			}
 		}
-		else
-		{
-			mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, bMain));
-		}
 #else
-		mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, true));
+	mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, true));
 #endif
        
-    }
-
-    rapidxml::xml_node<>* pActorDataNode = pRoot->first_node("ActorDataModule");
-    if (pActorDataNode)
-    {
-        strDataModule = pActorDataNode->first_attribute( "Name" )->value();
     }
 
     return true;
@@ -361,7 +356,9 @@ bool NFCPluginManager::ReInitialize()
 
     return true;
 }
+
 #ifdef NF_USE_ACTOR
+
 void NFCPluginManager::HandlerEx( const NFIActorMessage& message, const Theron::Address from )
 {
     if (message.eType != NFIActorMessage::EACTOR_UNKNOW)
@@ -374,4 +371,5 @@ void NFCPluginManager::HandlerEx( const NFIActorMessage& message, const Theron::
         }
     }
 }
+
 #endif
