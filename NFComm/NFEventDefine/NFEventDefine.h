@@ -16,18 +16,21 @@ enum NFEventDefine
 {
     ////////////prepare//////////////////////////////////////////////////////////////
     // Client to LoginServer
-    //arg[0]:address,account, arg[1]:password
+    //arg[0]:clientIdent,account, arg[1]:password
     NFED_ON_CLIENT_LOGIN = 10,
 	//state,address,account
     NFED_ON_CLIENT_LOGIN_RESULTS,
 
-    //arg[0]:_nWorldID,ClientAddress, _nLoginID, _szAccount
+    //arg[0]:_nWorldID, clientIdent, _nLoginID, _szAccount
     NFED_ON_CLIENT_SELECT_SERVER,
-    //arg[0]:_nWorldID,_Ident, _nLoginID, _szWorldAddress, _nPort, _szWorldKey
+    //arg[0]:_nWorldID, clientIdent, _nLoginID, _szWorldAddress, _nPort, _szWorldKey
     NFED_ON_CLIENT_SELECT_SERVER_RESULTS,
 
     //arg[0]:gsID,account,roleName,SceneID
 	NFED_ON_KICK_FROM_SERVER,
+
+    //arg[0]:xClient,xPlayer
+    NFED_ON_ENTERGAME_SUCESS,
 
     ////////////////Has Self---logic//////////////////////////////////////////////////////////
     //arg[0]:resultID[EGameErrorCode]
