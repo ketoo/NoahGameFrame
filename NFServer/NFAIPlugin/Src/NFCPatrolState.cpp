@@ -41,9 +41,9 @@ bool NFCPatrolState::Execute(const NFIDENTID& self)
         if (pStateMachine)
         {
 			NFIDENTID ident = m_pHateModule->QueryMaxHateObject(self);
+			NFAI_MOVE_TYPE eMoveType = (NFAI_MOVE_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
 
 			//如果是定点的，则不走，继续idle
-			NFAI_MOVE_TYPE eMoveType = NFAI_MOVE_TYPE::MOVE_BY_RANDOM;
 			switch (eMoveType)
 			{
 			case NFAI_MOVE_TYPE::MOVE_BY_POINT_LIST:
