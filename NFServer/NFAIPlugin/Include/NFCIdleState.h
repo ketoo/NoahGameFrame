@@ -29,7 +29,7 @@ public:
     virtual bool DoRule(const NFIDENTID& self);
 
 protected:
-    bool RandomIdle(NFIStateMachine* pStateMachine);
+    bool RandomIdle(const NFIDENTID& self, NFIStateMachine* pStateMachine);
 private:
 };
 
