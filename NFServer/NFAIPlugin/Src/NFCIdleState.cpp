@@ -36,6 +36,7 @@ bool NFCIdleState::Enter(const NFIDENTID& self)
         NFIStateMachine* pStateMachine = m_pAIModule->GetStateMachine(self);
         if (pStateMachine)
         {
+			//看是否有战斗能力
             switch (pStateMachine->LastState())
             {
                 case NFAI_STATE::FightState:
@@ -92,13 +93,29 @@ bool NFCIdleState::DoRule(const NFIDENTID& self)
 
 bool NFCIdleState::RandomIdle(NFIStateMachine* pStateMachine)
 {
-    //随机进入休闲或者继续巡逻
-    float fRand = (float)(rand() / double(RAND_MAX));
-    if (fRand < 0.4f)
-    {
-        pStateMachine->ChangeState(PatrolState);
-        return true;
-    }
+	//如果是定点的，则不走，继续idle
+	NFAI_MOVE_TYPE eMoveType = NFAI_MOVE_TYPE::NO_MOVE_TYPE;
+	switch (eMoveType)
+	{
+	case NFAI_MOVE_TYPE::MOVE_BY_POINT_LIST:
+		{
+
+		}
+		break;
+
+	case NFAI_MOVE_TYPE::MOVE_BY_RANDOM:
+		{
+			//随机进入休闲或者继续巡逻
+			float fRand = (float)(rand() / double(RAND_MAX));
+			if (fRand < 0.4f)
+			{
+				pStateMachine->ChangeState(PatrolState);
+			}
+		}
+		break;
+	default:
+		break;
+	}
 
     return false;
 }
