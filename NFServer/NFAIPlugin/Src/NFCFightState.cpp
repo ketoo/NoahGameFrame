@@ -35,6 +35,7 @@ bool NFCFightState::Execute(const NFIDENTID& self)
                 {
                     float fSkillConsumeTime = m_pAIModule->UseAnySkill(self, ident);
                     m_pKernelModule->SetPropertyInt(self, "StateType", (int)NFObjectStateType::NOST_SKILLUSE);
+
                     //添加心跳，还原状态StateType
                     m_pKernelModule->AddHeartBeat(self, "OnSkillConsumeTime", this, &NFCFightState::OnSkillConsumeTime, NFCDataList(), fSkillConsumeTime, 1);
                 }
