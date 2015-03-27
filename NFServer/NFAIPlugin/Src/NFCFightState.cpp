@@ -23,6 +23,7 @@ bool NFCFightState::Execute(const NFIDENTID& self)
 {
     NFIStateMachine* pStateMachine = m_pAIModule->GetStateMachine(self);
 
+	NFAI_MOVE_TYPE eMoveType = (NFAI_MOVE_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
     NFIDENTID ident = m_pHateModule->QueryMaxHateObject(self);
     if (!ident.IsNull())
     {
@@ -41,11 +42,25 @@ bool NFCFightState::Execute(const NFIDENTID& self)
                 }
                 else if (NFSkillTestSkillResult::NFSTSR_DISTANCE == eResult)
                 {
-                    RunCloseTarget(self, ident);
+					if (NFAI_MOVE_TYPE::NO_MOVE_TYPE != eMoveType)
+					{
+						RunCloseTarget(self, ident);
+					}
+					else
+					{
+						pStateMachine->ChangeState(IdleState);
+					}
                 }
                 else if (NFSkillTestSkillResult::NFSTSR_CD == eResult)
                 {
-                    RunInFightArea(self);
+					if (NFAI_MOVE_TYPE::NO_MOVE_TYPE != eMoveType)
+					{
+						RunInFightArea(self);
+					}
+					else
+					{
+						pStateMachine->ChangeState(IdleState);
+					}
                 }
             }
             else
@@ -58,10 +73,11 @@ bool NFCFightState::Execute(const NFIDENTID& self)
             pStateMachine->ChangeState(DeadState);
         }
     }
-
-    //目标挂了什么的
-    pStateMachine->ChangeState(IdleState);
-
+	else
+	{
+		//目标挂了什么的,或者没目标
+		pStateMachine->ChangeState(IdleState);
+	}
 
     return true;
 }
