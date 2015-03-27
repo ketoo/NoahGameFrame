@@ -148,13 +148,13 @@ int NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess(const NFIPacket& ms
 int NFCWorldNet_ServerModule::OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
     if (4 != var.GetCount()
-        || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
+        || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
     {
         return 0;
     }
 
     const int nWorldID = var.Int(0);
-    const int nSenderAddress = var.Int(1);
+    const NFIDENTID xClientIdent = var.Object(1);
     const int nLoginID = var.Int(2);
     const std::string& strAccount = var.String(3);
 
@@ -170,7 +170,7 @@ int NFCWorldNet_ServerModule::OnSelectServerEvent(const NFIDENTID& object, const
         NFMsg::AckConnectWorldResult xData;
 
         xData.set_world_id(nWorldID);
-        xData.set_sender_ip(nSenderAddress);
+        xData.mutable_sender()->CopyFrom(NFToPB(xClientIdent));
         xData.set_login_id(nLoginID);
         xData.set_account(strAccount);
 
@@ -182,7 +182,7 @@ int NFCWorldNet_ServerModule::OnSelectServerEvent(const NFIDENTID& object, const
 
         //½á¹û
         NFCDataList varResult;
-        varResult << nWorldID << nSenderAddress << nLoginID << strAccount << pServerData->pData->server_ip() << pServerData->pData->server_port() << strAccount;
+        varResult << nWorldID << xClientIdent << nLoginID << strAccount << pServerData->pData->server_ip() << pServerData->pData->server_port() << strAccount;
         m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER_RESULTS, varResult);
     }
     

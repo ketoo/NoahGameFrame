@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{491DC435-4ACB-410A-B502-3CC9ED493F75}</ProjectGuid>
+    <ProjectGuid>{40285E86-2B3A-4BA2-99D8-8D3F07A4909A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NFMasterNet_ServerPlugin</RootNamespace>
     <ProjectName>Tutorial3Plugin</ProjectName>
