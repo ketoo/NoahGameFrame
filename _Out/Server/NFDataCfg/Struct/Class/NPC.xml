@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--this is a class xml-->
 <XML>
-    <Records/>
+    <Records>
+        <Record Col="4" Desc="" Id="PosList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="64" Save="1" SaveInterval="0" View="0">
+            <Col Tag="float" Type="X"/>
+            <Col Tag="float" Type="Y"/>
+            <Col Tag="float" Type="Z"/>
+            <Col Tag="float" Type="StayTime"/>
+        </Record>
+    </Records>
     <Propertys>
         <Property Desc="种子ID" Id="SeedID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
         <Property Desc="经验获得,如果是怪物，则是掉落经验" Id="EXP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
