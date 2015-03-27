@@ -70,7 +70,7 @@ bool NFCIdleState::Execute(const NFIDENTID& self)
             {
                 if (m_pKernelModule->GetPropertyInt(self, "MoveSpeed") > 0)
                 {
-                    RandomIdle(pStateMachine);
+                    RandomIdle(self, pStateMachine);
                 }
             }
         }
@@ -91,11 +91,11 @@ bool NFCIdleState::DoRule(const NFIDENTID& self)
     return true;
 }
 
-bool NFCIdleState::RandomIdle(NFIStateMachine* pStateMachine)
+bool NFCIdleState::RandomIdle(const NFIDENTID& self, NFIStateMachine* pStateMachine)
 {
-
 	//如果是定点的，则不走，继续idle
-	NFAI_MOVE_TYPE eMoveType = NFAI_MOVE_TYPE::MOVE_BY_RANDOM;
+	NFAI_MOVE_TYPE eMoveType = (NFAI_MOVE_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
+
 	switch (eMoveType)
 	{
 	case NFAI_MOVE_TYPE::MOVE_BY_POINT_LIST:
