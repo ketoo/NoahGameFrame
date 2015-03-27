@@ -17,8 +17,6 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIScriptKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
-#include "lua-5.3.0/src/lua.h"
-
 
 class NFIScriptModule
     : public NFILogicModule
