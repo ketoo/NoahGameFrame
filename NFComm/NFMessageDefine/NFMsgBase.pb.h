@@ -2895,17 +2895,17 @@ class MsgBase : public ::google::protobuf::Message {
   inline ::std::string* release_msg_data();
   inline void set_allocated_msg_data(::std::string* msg_data);
 
-  // repeated int32 player_fd_list = 3;
-  inline int player_fd_list_size() const;
-  inline void clear_player_fd_list();
-  static const int kPlayerFdListFieldNumber = 3;
-  inline ::google::protobuf::int32 player_fd_list(int index) const;
-  inline void set_player_fd_list(int index, ::google::protobuf::int32 value);
-  inline void add_player_fd_list(::google::protobuf::int32 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      player_fd_list() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_player_fd_list();
+  // repeated .NFMsg.Ident player_Client_list = 3;
+  inline int player_client_list_size() const;
+  inline void clear_player_client_list();
+  static const int kPlayerClientListFieldNumber = 3;
+  inline const ::NFMsg::Ident& player_client_list(int index) const;
+  inline ::NFMsg::Ident* mutable_player_client_list(int index);
+  inline ::NFMsg::Ident* add_player_client_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+      player_client_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+      mutable_player_client_list();
 
   // @@protoc_insertion_point(class_scope:NFMsg.MsgBase)
  private:
@@ -2918,7 +2918,7 @@ class MsgBase : public ::google::protobuf::Message {
 
   ::NFMsg::Ident* player_id_;
   ::std::string* msg_data_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > player_fd_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > player_client_list_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
@@ -5939,29 +5939,29 @@ inline void MsgBase::set_allocated_msg_data(::std::string* msg_data) {
   }
 }
 
-// repeated int32 player_fd_list = 3;
-inline int MsgBase::player_fd_list_size() const {
-  return player_fd_list_.size();
+// repeated .NFMsg.Ident player_Client_list = 3;
+inline int MsgBase::player_client_list_size() const {
+  return player_client_list_.size();
 }
-inline void MsgBase::clear_player_fd_list() {
-  player_fd_list_.Clear();
+inline void MsgBase::clear_player_client_list() {
+  player_client_list_.Clear();
 }
-inline ::google::protobuf::int32 MsgBase::player_fd_list(int index) const {
-  return player_fd_list_.Get(index);
+inline const ::NFMsg::Ident& MsgBase::player_client_list(int index) const {
+  return player_client_list_.Get(index);
 }
-inline void MsgBase::set_player_fd_list(int index, ::google::protobuf::int32 value) {
-  player_fd_list_.Set(index, value);
+inline ::NFMsg::Ident* MsgBase::mutable_player_client_list(int index) {
+  return player_client_list_.Mutable(index);
 }
-inline void MsgBase::add_player_fd_list(::google::protobuf::int32 value) {
-  player_fd_list_.Add(value);
+inline ::NFMsg::Ident* MsgBase::add_player_client_list() {
+  return player_client_list_.Add();
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-MsgBase::player_fd_list() const {
-  return player_fd_list_;
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+MsgBase::player_client_list() const {
+  return player_client_list_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-MsgBase::mutable_player_fd_list() {
-  return &player_fd_list_;
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+MsgBase::mutable_player_client_list() {
+  return &player_client_list_;
 }
 
 // -------------------------------------------------------------------

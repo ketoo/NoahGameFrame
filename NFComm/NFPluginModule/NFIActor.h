@@ -22,6 +22,8 @@
 #include "NFILogicModule.h"
 #include "NFIActorManager.h"
 
+#ifdef NF_USE_ACTOR
+
 class NFIActorMessage
 {
 public:
@@ -42,7 +44,8 @@ public:
 		EACTOR_SHUT,
 		EACTOR_NET_MSG,
         EACTOR_TRANS_MSG,
-        EACTOR_LOG_MSG,
+		EACTOR_LOG_MSG,
+		EACTOR_EVENT_MSG,
 	};
 
     EACTOR_MESSAGE_ID eType;
@@ -52,7 +55,6 @@ protected:
 private:
 };
 
-#ifdef NF_USE_ACTOR
 class NFIActor : public Theron::Actor, public NFILogicModule
 {
 public:
