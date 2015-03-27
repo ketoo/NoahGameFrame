@@ -94,12 +94,12 @@ bool NFCIdleState::DoRule(const NFIDENTID& self)
 bool NFCIdleState::RandomIdle(NFIStateMachine* pStateMachine)
 {
 	//如果是定点的，则不走，继续idle
-	NFAI_MOVE_TYPE eMoveType = NFAI_MOVE_TYPE::NO_MOVE_TYPE;
+	NFAI_MOVE_TYPE eMoveType = NFAI_MOVE_TYPE::MOVE_BY_RANDOM;
 	switch (eMoveType)
 	{
 	case NFAI_MOVE_TYPE::MOVE_BY_POINT_LIST:
 		{
-
+			
 		}
 		break;
 

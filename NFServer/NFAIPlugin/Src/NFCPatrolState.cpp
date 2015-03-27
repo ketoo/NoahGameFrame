@@ -40,16 +40,42 @@ bool NFCPatrolState::Execute(const NFIDENTID& self)
         NFIStateMachine* pStateMachine = m_pAIModule->GetStateMachine(self);
         if (pStateMachine)
         {
-            //查找是否有可以攻击的对象
-            NFIDENTID ident = m_pHateModule->QueryMaxHateObject(self);
-            if (!ident.IsNull())
-            {
-                pStateMachine->ChangeState(FightState);
-            }
-            else
-            {
-                RandomPatrol(self);
-            }
+			NFIDENTID ident = m_pHateModule->QueryMaxHateObject(self);
+
+			//如果是定点的，则不走，继续idle
+			NFAI_MOVE_TYPE eMoveType = NFAI_MOVE_TYPE::MOVE_BY_RANDOM;
+			switch (eMoveType)
+			{
+			case NFAI_MOVE_TYPE::MOVE_BY_POINT_LIST:
+				{
+					//查找是否有可以攻击的对象
+					if (!ident.IsNull())
+					{
+						pStateMachine->ChangeState(FightState);
+					}
+					else
+					{
+						//下一个节点
+					}
+				}
+				break;
+
+			case NFAI_MOVE_TYPE::MOVE_BY_RANDOM:
+				{
+					//查找是否有可以攻击的对象
+					if (!ident.IsNull())
+					{
+						pStateMachine->ChangeState(FightState);
+					}
+					else
+					{
+						RandomPatrol(self);
+					}
+				}
+				break;
+			default:
+				break;
+			}
         }
     }
 
