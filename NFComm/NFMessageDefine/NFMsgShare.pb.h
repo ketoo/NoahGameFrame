@@ -48,7 +48,7 @@ class ReqAckSwapScene;
 class ReqPickDropItem;
 class ReqAcceptTask;
 class ReqCompeleteTask;
-class ReqJoinActivity;
+class ReqAckJoinActivity;
 class PlayerEntryInfo;
 class AckPlayerEntryList;
 class AckPlayerLeaveList;
@@ -95,41 +95,41 @@ inline bool ReqAckSwapScene_EGameSwapType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ReqAckSwapScene_EGameSwapType>(
     ReqAckSwapScene_EGameSwapType_descriptor(), name, value);
 }
-enum ReqJoinActivity_EGameActivityType {
-  ReqJoinActivity_EGameActivityType_EGAT_PVP = 0
+enum ReqAckJoinActivity_EGameActivityType {
+  ReqAckJoinActivity_EGameActivityType_EGAT_PVP = 0
 };
-bool ReqJoinActivity_EGameActivityType_IsValid(int value);
-const ReqJoinActivity_EGameActivityType ReqJoinActivity_EGameActivityType_EGameActivityType_MIN = ReqJoinActivity_EGameActivityType_EGAT_PVP;
-const ReqJoinActivity_EGameActivityType ReqJoinActivity_EGameActivityType_EGameActivityType_MAX = ReqJoinActivity_EGameActivityType_EGAT_PVP;
-const int ReqJoinActivity_EGameActivityType_EGameActivityType_ARRAYSIZE = ReqJoinActivity_EGameActivityType_EGameActivityType_MAX + 1;
+bool ReqAckJoinActivity_EGameActivityType_IsValid(int value);
+const ReqAckJoinActivity_EGameActivityType ReqAckJoinActivity_EGameActivityType_EGameActivityType_MIN = ReqAckJoinActivity_EGameActivityType_EGAT_PVP;
+const ReqAckJoinActivity_EGameActivityType ReqAckJoinActivity_EGameActivityType_EGameActivityType_MAX = ReqAckJoinActivity_EGameActivityType_EGAT_PVP;
+const int ReqAckJoinActivity_EGameActivityType_EGameActivityType_ARRAYSIZE = ReqAckJoinActivity_EGameActivityType_EGameActivityType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ReqJoinActivity_EGameActivityType_descriptor();
-inline const ::std::string& ReqJoinActivity_EGameActivityType_Name(ReqJoinActivity_EGameActivityType value) {
+const ::google::protobuf::EnumDescriptor* ReqAckJoinActivity_EGameActivityType_descriptor();
+inline const ::std::string& ReqAckJoinActivity_EGameActivityType_Name(ReqAckJoinActivity_EGameActivityType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    ReqJoinActivity_EGameActivityType_descriptor(), value);
+    ReqAckJoinActivity_EGameActivityType_descriptor(), value);
 }
-inline bool ReqJoinActivity_EGameActivityType_Parse(
-    const ::std::string& name, ReqJoinActivity_EGameActivityType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ReqJoinActivity_EGameActivityType>(
-    ReqJoinActivity_EGameActivityType_descriptor(), name, value);
+inline bool ReqAckJoinActivity_EGameActivityType_Parse(
+    const ::std::string& name, ReqAckJoinActivity_EGameActivityType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ReqAckJoinActivity_EGameActivityType>(
+    ReqAckJoinActivity_EGameActivityType_descriptor(), name, value);
 }
-enum ReqJoinActivity_EGameActivitySubType {
-  ReqJoinActivity_EGameActivitySubType_EGAT_NORMAL = 0
+enum ReqAckJoinActivity_EGameActivitySubType {
+  ReqAckJoinActivity_EGameActivitySubType_EGAT_NORMAL = 0
 };
-bool ReqJoinActivity_EGameActivitySubType_IsValid(int value);
-const ReqJoinActivity_EGameActivitySubType ReqJoinActivity_EGameActivitySubType_EGameActivitySubType_MIN = ReqJoinActivity_EGameActivitySubType_EGAT_NORMAL;
-const ReqJoinActivity_EGameActivitySubType ReqJoinActivity_EGameActivitySubType_EGameActivitySubType_MAX = ReqJoinActivity_EGameActivitySubType_EGAT_NORMAL;
-const int ReqJoinActivity_EGameActivitySubType_EGameActivitySubType_ARRAYSIZE = ReqJoinActivity_EGameActivitySubType_EGameActivitySubType_MAX + 1;
+bool ReqAckJoinActivity_EGameActivitySubType_IsValid(int value);
+const ReqAckJoinActivity_EGameActivitySubType ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_MIN = ReqAckJoinActivity_EGameActivitySubType_EGAT_NORMAL;
+const ReqAckJoinActivity_EGameActivitySubType ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_MAX = ReqAckJoinActivity_EGameActivitySubType_EGAT_NORMAL;
+const int ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_ARRAYSIZE = ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ReqJoinActivity_EGameActivitySubType_descriptor();
-inline const ::std::string& ReqJoinActivity_EGameActivitySubType_Name(ReqJoinActivity_EGameActivitySubType value) {
+const ::google::protobuf::EnumDescriptor* ReqAckJoinActivity_EGameActivitySubType_descriptor();
+inline const ::std::string& ReqAckJoinActivity_EGameActivitySubType_Name(ReqAckJoinActivity_EGameActivitySubType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    ReqJoinActivity_EGameActivitySubType_descriptor(), value);
+    ReqAckJoinActivity_EGameActivitySubType_descriptor(), value);
 }
-inline bool ReqJoinActivity_EGameActivitySubType_Parse(
-    const ::std::string& name, ReqJoinActivity_EGameActivitySubType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ReqJoinActivity_EGameActivitySubType>(
-    ReqJoinActivity_EGameActivitySubType_descriptor(), name, value);
+inline bool ReqAckJoinActivity_EGameActivitySubType_Parse(
+    const ::std::string& name, ReqAckJoinActivity_EGameActivitySubType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ReqAckJoinActivity_EGameActivitySubType>(
+    ReqAckJoinActivity_EGameActivitySubType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -1384,14 +1384,14 @@ class ReqCompeleteTask : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqJoinActivity : public ::google::protobuf::Message {
+class ReqAckJoinActivity : public ::google::protobuf::Message {
  public:
-  ReqJoinActivity();
-  virtual ~ReqJoinActivity();
+  ReqAckJoinActivity();
+  virtual ~ReqAckJoinActivity();
 
-  ReqJoinActivity(const ReqJoinActivity& from);
+  ReqAckJoinActivity(const ReqAckJoinActivity& from);
 
-  inline ReqJoinActivity& operator=(const ReqJoinActivity& from) {
+  inline ReqAckJoinActivity& operator=(const ReqAckJoinActivity& from) {
     CopyFrom(from);
     return *this;
   }
@@ -1405,17 +1405,17 @@ class ReqJoinActivity : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqJoinActivity& default_instance();
+  static const ReqAckJoinActivity& default_instance();
 
-  void Swap(ReqJoinActivity* other);
+  void Swap(ReqAckJoinActivity* other);
 
   // implements Message ----------------------------------------------
 
-  ReqJoinActivity* New() const;
+  ReqAckJoinActivity* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ReqJoinActivity& from);
-  void MergeFrom(const ReqJoinActivity& from);
+  void CopyFrom(const ReqAckJoinActivity& from);
+  void MergeFrom(const ReqAckJoinActivity& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -1436,69 +1436,69 @@ class ReqJoinActivity : public ::google::protobuf::Message {
 
   // nested types ----------------------------------------------------
 
-  typedef ReqJoinActivity_EGameActivityType EGameActivityType;
-  static const EGameActivityType EGAT_PVP = ReqJoinActivity_EGameActivityType_EGAT_PVP;
+  typedef ReqAckJoinActivity_EGameActivityType EGameActivityType;
+  static const EGameActivityType EGAT_PVP = ReqAckJoinActivity_EGameActivityType_EGAT_PVP;
   static inline bool EGameActivityType_IsValid(int value) {
-    return ReqJoinActivity_EGameActivityType_IsValid(value);
+    return ReqAckJoinActivity_EGameActivityType_IsValid(value);
   }
   static const EGameActivityType EGameActivityType_MIN =
-    ReqJoinActivity_EGameActivityType_EGameActivityType_MIN;
+    ReqAckJoinActivity_EGameActivityType_EGameActivityType_MIN;
   static const EGameActivityType EGameActivityType_MAX =
-    ReqJoinActivity_EGameActivityType_EGameActivityType_MAX;
+    ReqAckJoinActivity_EGameActivityType_EGameActivityType_MAX;
   static const int EGameActivityType_ARRAYSIZE =
-    ReqJoinActivity_EGameActivityType_EGameActivityType_ARRAYSIZE;
+    ReqAckJoinActivity_EGameActivityType_EGameActivityType_ARRAYSIZE;
   static inline const ::google::protobuf::EnumDescriptor*
   EGameActivityType_descriptor() {
-    return ReqJoinActivity_EGameActivityType_descriptor();
+    return ReqAckJoinActivity_EGameActivityType_descriptor();
   }
   static inline const ::std::string& EGameActivityType_Name(EGameActivityType value) {
-    return ReqJoinActivity_EGameActivityType_Name(value);
+    return ReqAckJoinActivity_EGameActivityType_Name(value);
   }
   static inline bool EGameActivityType_Parse(const ::std::string& name,
       EGameActivityType* value) {
-    return ReqJoinActivity_EGameActivityType_Parse(name, value);
+    return ReqAckJoinActivity_EGameActivityType_Parse(name, value);
   }
 
-  typedef ReqJoinActivity_EGameActivitySubType EGameActivitySubType;
-  static const EGameActivitySubType EGAT_NORMAL = ReqJoinActivity_EGameActivitySubType_EGAT_NORMAL;
+  typedef ReqAckJoinActivity_EGameActivitySubType EGameActivitySubType;
+  static const EGameActivitySubType EGAT_NORMAL = ReqAckJoinActivity_EGameActivitySubType_EGAT_NORMAL;
   static inline bool EGameActivitySubType_IsValid(int value) {
-    return ReqJoinActivity_EGameActivitySubType_IsValid(value);
+    return ReqAckJoinActivity_EGameActivitySubType_IsValid(value);
   }
   static const EGameActivitySubType EGameActivitySubType_MIN =
-    ReqJoinActivity_EGameActivitySubType_EGameActivitySubType_MIN;
+    ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_MIN;
   static const EGameActivitySubType EGameActivitySubType_MAX =
-    ReqJoinActivity_EGameActivitySubType_EGameActivitySubType_MAX;
+    ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_MAX;
   static const int EGameActivitySubType_ARRAYSIZE =
-    ReqJoinActivity_EGameActivitySubType_EGameActivitySubType_ARRAYSIZE;
+    ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_ARRAYSIZE;
   static inline const ::google::protobuf::EnumDescriptor*
   EGameActivitySubType_descriptor() {
-    return ReqJoinActivity_EGameActivitySubType_descriptor();
+    return ReqAckJoinActivity_EGameActivitySubType_descriptor();
   }
   static inline const ::std::string& EGameActivitySubType_Name(EGameActivitySubType value) {
-    return ReqJoinActivity_EGameActivitySubType_Name(value);
+    return ReqAckJoinActivity_EGameActivitySubType_Name(value);
   }
   static inline bool EGameActivitySubType_Parse(const ::std::string& name,
       EGameActivitySubType* value) {
-    return ReqJoinActivity_EGameActivitySubType_Parse(name, value);
+    return ReqAckJoinActivity_EGameActivitySubType_Parse(name, value);
   }
 
   // accessors -------------------------------------------------------
 
-  // required .NFMsg.ReqJoinActivity.EGameActivityType activity_type = 1;
+  // required .NFMsg.ReqAckJoinActivity.EGameActivityType activity_type = 1;
   inline bool has_activity_type() const;
   inline void clear_activity_type();
   static const int kActivityTypeFieldNumber = 1;
-  inline ::NFMsg::ReqJoinActivity_EGameActivityType activity_type() const;
-  inline void set_activity_type(::NFMsg::ReqJoinActivity_EGameActivityType value);
+  inline ::NFMsg::ReqAckJoinActivity_EGameActivityType activity_type() const;
+  inline void set_activity_type(::NFMsg::ReqAckJoinActivity_EGameActivityType value);
 
-  // required .NFMsg.ReqJoinActivity.EGameActivitySubType sub_activity_type = 2;
+  // required .NFMsg.ReqAckJoinActivity.EGameActivitySubType sub_activity_type = 2;
   inline bool has_sub_activity_type() const;
   inline void clear_sub_activity_type();
   static const int kSubActivityTypeFieldNumber = 2;
-  inline ::NFMsg::ReqJoinActivity_EGameActivitySubType sub_activity_type() const;
-  inline void set_sub_activity_type(::NFMsg::ReqJoinActivity_EGameActivitySubType value);
+  inline ::NFMsg::ReqAckJoinActivity_EGameActivitySubType sub_activity_type() const;
+  inline void set_sub_activity_type(::NFMsg::ReqAckJoinActivity_EGameActivitySubType value);
 
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqJoinActivity)
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckJoinActivity)
  private:
   inline void set_has_activity_type();
   inline void clear_has_activity_type();
@@ -1518,7 +1518,7 @@ class ReqJoinActivity : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
   void InitAsDefaultInstance();
-  static ReqJoinActivity* default_instance_;
+  static ReqAckJoinActivity* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -3145,50 +3145,50 @@ inline void ReqCompeleteTask::set_allocated_task_id(::std::string* task_id) {
 
 // -------------------------------------------------------------------
 
-// ReqJoinActivity
+// ReqAckJoinActivity
 
-// required .NFMsg.ReqJoinActivity.EGameActivityType activity_type = 1;
-inline bool ReqJoinActivity::has_activity_type() const {
+// required .NFMsg.ReqAckJoinActivity.EGameActivityType activity_type = 1;
+inline bool ReqAckJoinActivity::has_activity_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqJoinActivity::set_has_activity_type() {
+inline void ReqAckJoinActivity::set_has_activity_type() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqJoinActivity::clear_has_activity_type() {
+inline void ReqAckJoinActivity::clear_has_activity_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqJoinActivity::clear_activity_type() {
+inline void ReqAckJoinActivity::clear_activity_type() {
   activity_type_ = 0;
   clear_has_activity_type();
 }
-inline ::NFMsg::ReqJoinActivity_EGameActivityType ReqJoinActivity::activity_type() const {
-  return static_cast< ::NFMsg::ReqJoinActivity_EGameActivityType >(activity_type_);
+inline ::NFMsg::ReqAckJoinActivity_EGameActivityType ReqAckJoinActivity::activity_type() const {
+  return static_cast< ::NFMsg::ReqAckJoinActivity_EGameActivityType >(activity_type_);
 }
-inline void ReqJoinActivity::set_activity_type(::NFMsg::ReqJoinActivity_EGameActivityType value) {
-  assert(::NFMsg::ReqJoinActivity_EGameActivityType_IsValid(value));
+inline void ReqAckJoinActivity::set_activity_type(::NFMsg::ReqAckJoinActivity_EGameActivityType value) {
+  assert(::NFMsg::ReqAckJoinActivity_EGameActivityType_IsValid(value));
   set_has_activity_type();
   activity_type_ = value;
 }
 
-// required .NFMsg.ReqJoinActivity.EGameActivitySubType sub_activity_type = 2;
-inline bool ReqJoinActivity::has_sub_activity_type() const {
+// required .NFMsg.ReqAckJoinActivity.EGameActivitySubType sub_activity_type = 2;
+inline bool ReqAckJoinActivity::has_sub_activity_type() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ReqJoinActivity::set_has_sub_activity_type() {
+inline void ReqAckJoinActivity::set_has_sub_activity_type() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void ReqJoinActivity::clear_has_sub_activity_type() {
+inline void ReqAckJoinActivity::clear_has_sub_activity_type() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void ReqJoinActivity::clear_sub_activity_type() {
+inline void ReqAckJoinActivity::clear_sub_activity_type() {
   sub_activity_type_ = 0;
   clear_has_sub_activity_type();
 }
-inline ::NFMsg::ReqJoinActivity_EGameActivitySubType ReqJoinActivity::sub_activity_type() const {
-  return static_cast< ::NFMsg::ReqJoinActivity_EGameActivitySubType >(sub_activity_type_);
+inline ::NFMsg::ReqAckJoinActivity_EGameActivitySubType ReqAckJoinActivity::sub_activity_type() const {
+  return static_cast< ::NFMsg::ReqAckJoinActivity_EGameActivitySubType >(sub_activity_type_);
 }
-inline void ReqJoinActivity::set_sub_activity_type(::NFMsg::ReqJoinActivity_EGameActivitySubType value) {
-  assert(::NFMsg::ReqJoinActivity_EGameActivitySubType_IsValid(value));
+inline void ReqAckJoinActivity::set_sub_activity_type(::NFMsg::ReqAckJoinActivity_EGameActivitySubType value) {
+  assert(::NFMsg::ReqAckJoinActivity_EGameActivitySubType_IsValid(value));
   set_has_sub_activity_type();
   sub_activity_type_ = value;
 }
@@ -3583,12 +3583,12 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckSwapScene_EGameSw
   return ::NFMsg::ReqAckSwapScene_EGameSwapType_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqJoinActivity_EGameActivityType>() {
-  return ::NFMsg::ReqJoinActivity_EGameActivityType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckJoinActivity_EGameActivityType>() {
+  return ::NFMsg::ReqAckJoinActivity_EGameActivityType_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqJoinActivity_EGameActivitySubType>() {
-  return ::NFMsg::ReqJoinActivity_EGameActivitySubType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckJoinActivity_EGameActivitySubType>() {
+  return ::NFMsg::ReqAckJoinActivity_EGameActivitySubType_descriptor();
 }
 
 }  // namespace google
