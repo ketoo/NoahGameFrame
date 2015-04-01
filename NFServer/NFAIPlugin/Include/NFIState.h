@@ -25,6 +25,7 @@ enum NFAI_MOVE_TYPE
 	NO_MOVE_TYPE,              // 不走的，塔等
 	MOVE_BY_POINT_LIST,        // 路径巡逻
 	MOVE_BY_RANDOM,            // 随机巡逻
+	MOVE_BY_PLAYER_AI,         // Player's ai
 };
 
 //所有的状态
