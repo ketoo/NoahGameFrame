@@ -56,6 +56,7 @@ bool NFCPatrolState::Execute(const NFIDENTID& self)
 					else
 					{
 						//下一个节点
+                        //object记录当前的路径ID和index，以记录寻路的位置
 					}
 				}
 				break;
