@@ -158,18 +158,18 @@ int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFIDENTID& 
     //buff group property
     int nBuffGroup = 0;
     //RUNTIME_BUFF_INFO
-    NFIObject* pObject = m_pKernelModule->GetObject( self );
-    NFIRecord* pBuffRecord = pObject->GetRecordManager()->GetElement( mstrRunTimeEffectTable );
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+    NF_SHARE_PTR<NFIRecord> pBuffRecord = pObject->GetRecordManager()->GetElement( mstrRunTimeEffectTable );
     if ( pBuffRecord )
     {
-        NFIRecord* pPropertyGroupRecord = pObject->GetRecordManager()->GetElement( mstrPropertyTable );
+        NF_SHARE_PTR<NFIRecord> pPropertyGroupRecord = pObject->GetRecordManager()->GetElement( mstrPropertyTable );
 
         std::string strPropertyList;
         std::string strPropertyName;
         int* pnEffectValue = pBuffConfig->First( strPropertyName );
         while ( pnEffectValue )
         {
-            NFIProperty* pProperty = pObject->GetPropertyManager()->GetElement( strPropertyName );
+            NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->GetElement( strPropertyName );
             if ( pProperty )
             {
                 char szEffectValue[MAX_PATH] = {0};
@@ -184,22 +184,22 @@ int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFIDENTID& 
                 //从属性系统得到属性应该在的col函数
                 int nPropertyGroupCol = 0;
                 int nPropertyBuffGroupRow = 0;
-                VARIANT_TYPE eColType = pPropertyGroupRecord->GetColType( nPropertyGroupCol );
+                TDATA_TYPE eColType = pPropertyGroupRecord->GetColType( nPropertyGroupCol );
 
                 if ( NFIBuffConfigModule::BuffReverseType::ERT_NEED_REVERSE == pBuffConfig->NeedReverseType )
                 {
                     //需要还原
                     switch ( eColType )
                     {
-                        case VTYPE_INT:
+                        case TDATA_INT:
                             pPropertyGroupRecord->SetInt( nPropertyBuffGroupRow, nPropertyGroupCol, *pnEffectValue );
                             break;
 
-                        case VTYPE_FLOAT:
+                        case TDATA_FLOAT:
                             pPropertyGroupRecord->SetFloat( nPropertyBuffGroupRow, nPropertyGroupCol, float( *pnEffectValue ) );
                             break;
 
-                        case VTYPE_DOUBLE:
+                        case TDATA_DOUBLE:
                             pPropertyGroupRecord->SetDouble( nPropertyBuffGroupRow, nPropertyGroupCol, double( *pnEffectValue ) );
                             break;
 
@@ -210,21 +210,21 @@ int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFIDENTID& 
                 else if ( NFIBuffConfigModule::BuffReverseType::ERT_NO_REVERSE == pBuffConfig->NeedReverseType )
                 {
                     //不需要还原
-                    NFIValueList::VarData valueEffectValue;
+                    NFIDataList::TData valueEffectValue;
                     switch ( eColType )
                     {
-                        case VTYPE_INT:
-                            valueEffectValue.nType = VTYPE_INT;
-                            valueEffectValue.variantData =  int( *pnEffectValue );
+                        case TDATA_INT:
+                            valueEffectValue.nType = TDATA_INT;
+                            valueEffectValue.variantData =  NFINT64( *pnEffectValue );
                             break;
 
-                        case VTYPE_FLOAT:
-                            valueEffectValue.nType = VTYPE_FLOAT;
+                        case TDATA_FLOAT:
+                            valueEffectValue.nType = TDATA_FLOAT;
                             valueEffectValue.variantData =  float( *pnEffectValue );
                             break;
 
-                        case VTYPE_DOUBLE:
-                            valueEffectValue.nType = VTYPE_DOUBLE;
+                        case TDATA_DOUBLE:
+                            valueEffectValue.nType = TDATA_DOUBLE;
                             valueEffectValue.variantData = double( *pnEffectValue );
                             break;
 
@@ -232,7 +232,7 @@ int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFIDENTID& 
                             break;
                     }
 
-                    //const NFIValueList& oldValue = pProperty->GetValue();
+                    //const NFIDataList& oldValue = pProperty->GetValue();
                     pObject->GetPropertyManager()->SetProperty( strPropertyName, valueEffectValue );
                 }
 
@@ -240,7 +240,7 @@ int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFIDENTID& 
             }
 
             //还原与否，都需要保存在runtimebuff表
-            NFCValueList valueBuffProperty;
+            NFCDataList valueBuffProperty;
             valueBuffProperty.AddString( strPropertyName.c_str() );
             valueBuffProperty.AddObject( releaserIdent );
             valueBuffProperty.AddFloat( pBuffConfig->EffectTimeInterval );
