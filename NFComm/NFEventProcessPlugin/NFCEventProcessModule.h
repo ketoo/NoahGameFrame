@@ -69,7 +69,7 @@ private:
     typedef NFMapEx<NFIDENTID, NFCObjectEventInfo> NFCObjectEventInfoMapEx;
     NFCObjectEventInfoMapEx mObjectEventInfoMapEx;
 
-	///////////////////sync event///////////////////////////////////////////////////////
+	///////////////////async event///////////////////////////////////////////////////////
 	typedef NFMapEx<NFIDENTID, NFCObjectAsyncEventInfo> NFCObjectSyncEventInfoMapEx;
 	NFCObjectSyncEventInfoMapEx mObjectSyncEventInfoMapEx;
 };
