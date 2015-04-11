@@ -14,6 +14,9 @@
     <Filter Include="NFPackModule">
       <UniqueIdentifier>{c6ede39e-606e-4c1c-af62-bd5348fb7990}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFNPCRefreshModule">
+      <UniqueIdentifier>{66b71f90-47f5-4f43-90e9-1f0b1af85713}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCGameLogicModule.h" />
@@ -51,6 +54,9 @@
       <Filter>NFItemModule</Filter>
     </ClInclude>
     <ClInclude Include="NFGameLogicPlugin.h" />
+    <ClInclude Include="NFCNPCRefreshModule.h">
+      <Filter>NFNPCRefreshModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -89,5 +95,8 @@
       <Filter>NFItemModule</Filter>
     </ClCompile>
     <ClCompile Include="NFGameLogicPlugin.cpp" />
+    <ClCompile Include="NFCNPCRefreshModule.cpp">
+      <Filter>NFNPCRefreshModule</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
