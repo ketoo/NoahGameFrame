@@ -110,6 +110,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClInclude Include="NFCCardItemConsumeProcessModule.h" />
     <ClInclude Include="NFCGameLogicModule.h" />
     <ClInclude Include="NFCItemConsumeManagerModule.h" />
+    <ClInclude Include="NFCNPCRefreshModule.h" />
     <ClInclude Include="NFCPotionItemConsumeProcessModule.h" />
     <ClInclude Include="NFCItemModule.h" />
     <ClInclude Include="NFCPackModule.h" />
@@ -133,6 +134,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClCompile Include="NFCCardItemConsumeProcessModule.cpp" />
     <ClCompile Include="NFCGameLogicModule.cpp" />
     <ClCompile Include="NFCItemConsumeManagerModule.cpp" />
+    <ClCompile Include="NFCNPCRefreshModule.cpp" />
     <ClCompile Include="NFCPotionItemConsumeProcessModule.cpp" />
     <ClCompile Include="NFCItemModule.cpp" />
     <ClCompile Include="NFCPackModule.cpp" />
