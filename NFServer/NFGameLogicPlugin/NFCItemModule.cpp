@@ -49,7 +49,7 @@ bool NFCItemModule::AfterInit()
     return true;
 }
 
-int NFCItemModule::OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var )
+int NFCItemModule::OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
     if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
     {
@@ -66,7 +66,7 @@ int NFCItemModule::OnClassObjectEvent( const NFIDENTID& self, const std::string&
 }
 
 
-int NFCItemModule::OnRequireUseItemEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
+int NFCItemModule::OnRequireUseItemEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
 {
     //EGameErrorCode errorCode = EGameErrorCode::EGEC_INVALID_ITEM;
     //int nItemRowID = var.IntVal(0);
@@ -79,7 +79,7 @@ int NFCItemModule::OnRequireUseItemEvent( const NFIDENTID& self, const int nEven
     //  if (pRecordPack)
     //  {
     //      const std::string& strConfigIndex = m_pPackModule->GetGridConfigID(self, nItemRowID);
-    //      NFIPropertyManager* pPropertyManager = m_pElementInfoModule->GetPropertyManager(strConfigIndex);
+    //      NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager(strConfigIndex);
     //      if (pPropertyManager)
     //      {
     //          NFIProperty* pItemTypeProperty = pPropertyManager->GetElement("ItemType");
@@ -90,7 +90,7 @@ int NFCItemModule::OnRequireUseItemEvent( const NFIDENTID& self, const int nEven
     //              NFIItemConsumeProcessModule* pConsumeProcessModule = m_pItemConsumeManagerModule->GetConsumeModule(nItemType);
     //              if (pConsumeProcessModule)
     //              {
-    //                  NFCValueList valueOther;
+    //                  NFCDataList valueOther;
     //                  valueOther.Append(var, 1, var.GetCount() - 1);
     //                  if (pConsumeProcessModule->ConsumeLegal(self, nItemRowID, valueOther) > 0)
     //                  {
@@ -102,7 +102,7 @@ int NFCItemModule::OnRequireUseItemEvent( const NFIDENTID& self, const int nEven
     //                          NFIDENTID nGUID = pGUIDProperty->QueryObject();
 
     //                          //结果事件--无论失败或者是成功，都会发下去--当然使用结果只对使用者下发--成果的结果，还得对被施放的人发
-    //                          NFCValueList valueResult;
+    //                          NFCDataList valueResult;
     //                          valueResult.AddObject(nGUID);
     //                          valueResult.AddInt(nResult);
     //                          valueResult.Append(valueOther, 0, valueOther.GetCount());
@@ -123,14 +123,14 @@ int NFCItemModule::OnRequireUseItemEvent( const NFIDENTID& self, const int nEven
     //  //封死你Y的号
     //}
 
-    //NFCValueList valueError;
+    //NFCDataList valueError;
     //valueError.AddInt((int)errorCode);
     //m_pEventProcessModule->DoEvent(self, NFED_ON_GENERAL_MESSAGE, valueError);
 
     return 0;
 }
 
-int NFCItemModule::OnRequireUseItemPosEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var )
+int NFCItemModule::OnRequireUseItemPosEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
 {
 
 
@@ -139,8 +139,8 @@ int NFCItemModule::OnRequireUseItemPosEvent( const NFIDENTID& self, const int nE
 
 bool NFCItemModule::CheckConfig()
 {
-	NFILogicClass* pLogicCLass = m_pLogicClassModule->GetElement("Item");
-	if (!pLogicCLass)
+	NF_SHARE_PTR<NFILogicClass> pLogicCLass = m_pLogicClassModule->GetElement("Item");
+	if (nullptr == pLogicCLass)
 	{
 		assert(0);
 	}
@@ -151,50 +151,50 @@ bool NFCItemModule::CheckConfig()
 
 	while (bRet)
 	{
-		NFIPropertyManager* pPropertyManager = m_pElementInfoModule->GetPropertyManager(strConfigID);
+		NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager(strConfigID);
 		if (!pPropertyManager)
 		{
 			assert(0);
 		}
-		int nType = m_pElementInfoModule->QueryPropertyInt(strConfigID, "ItemType");
+		int nType = m_pElementInfoModule->GetPropertyInt(strConfigID, "ItemType");
 
 		if (nType < 0)
 		{
 			assert(0);
 		}
-		int nSubType = m_pElementInfoModule->QueryPropertyInt(strConfigID, "ItemSubType");
+		int nSubType = m_pElementInfoModule->GetPropertyInt(strConfigID, "ItemSubType");
 		if (nSubType < 0)
 		{
 			assert(0);
 		}
 		
-		int nLevel = m_pElementInfoModule->QueryPropertyInt(strConfigID, "Level");
+		int nLevel = m_pElementInfoModule->GetPropertyInt(strConfigID, "Level");
 		if (nLevel < 0)
 		{
 			assert(0);
 		}
 
-		int nQuality = m_pElementInfoModule->QueryPropertyInt(strConfigID, "Quality");
+		int nQuality = m_pElementInfoModule->GetPropertyInt(strConfigID, "Quality");
 		if (nQuality < 0)
 		{
 			assert(0);
 		}
 
-// 		int nCoolDown = m_pElementInfoModule->QueryPropertyInt(strConfigID, "CoolDwnTime");
+// 		int nCoolDown = m_pElementInfoModule->GetPropertyInt(strConfigID, "CoolDwnTime");
 // 		if (nCoolDown <= 0)
 // 		{
 // 			assert(0);
 // 		}
 
-		int nOverlayCount = m_pElementInfoModule->QueryPropertyInt(strConfigID, "OverlayCount");
+		int nOverlayCount = m_pElementInfoModule->GetPropertyInt(strConfigID, "OverlayCount");
 		if (nOverlayCount <= 0)
 		{
 			assert(0);
 		}
 
 
-		int nBuyPrice = m_pElementInfoModule->QueryPropertyInt(strConfigID, "BuyPrice");
-		int nSalePrice = m_pElementInfoModule->QueryPropertyInt(strConfigID, "SalePrice");
+		int nBuyPrice = m_pElementInfoModule->GetPropertyInt(strConfigID, "BuyPrice");
+		int nSalePrice = m_pElementInfoModule->GetPropertyInt(strConfigID, "SalePrice");
 		
 		if (nSalePrice < 0 || nBuyPrice < 0)
 		{
