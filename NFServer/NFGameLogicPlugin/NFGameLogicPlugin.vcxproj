@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B47C9434-3A9C-4AFA-9212-71AF4DD04D81}</ProjectGuid>
+    <ProjectGuid>{73CE3203-1DAD-43E8-B49D-0151973765C9}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NFGameServerPlugin</RootNamespace>
   </PropertyGroup>
