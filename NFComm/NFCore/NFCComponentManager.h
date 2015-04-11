@@ -11,7 +11,7 @@
 
 #include "NFCComponent.h"
 #include "NFIComponentManager.h"
-#include "NFIdentID.h"
+#include "NFComm/NFPluginModule/NFIdentID.h"
 
 class NFCComponentManager : public NFIComponentManager
 {

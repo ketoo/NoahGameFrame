@@ -9,190 +9,130 @@
 #include "NFCActorManager.h"
 #include "NFCPluginManager.h"
 
+NFCActorManager::NFCActorManager()
+{
+	m_pPluginManager = NULL;
+
+#ifdef NF_USE_ACTOR
+	m_pFramework = NULL;
+	m_pFramework = new Theron::Framework(NF_ACTOR_THREAD_COUNT);
+#endif
+
+	m_pPluginManager = new NFCPluginManager(this);
+}
+
 bool NFCActorManager::Init()
 {
-#ifdef NF_USE_ACTOR
-    m_pFramework = new Theron::Framework(1);
 
-	for (int i = EACTOR::EACTOR_MAIN; i < EACTOR::EACTOR_END; ++i)
-	{
-
-		mActorVec.push_back(new NFCPluginManager(*m_pFramework, this, (EACTOR)i));
-	}
-#else
-	mActorVec.push_back(new NFCPluginManager(this));
-#endif
-
-	std::vector<NFIActor*>::iterator it = mActorVec.begin();
-	for (; it != mActorVec.end(); ++it)
-	{
-		NFIActor* pActor = *it;
 
 #ifdef NF_USE_ACTOR
-		Theron::Receiver receiver;
-		NFIActorMessage xMessage;
-		xMessage.eType = NFIActorMessage::EACTOR_INIT;
-		m_pFramework->Send(xMessage, receiver.GetAddress(), pActor->GetAddress());
+// 
+// 	std::vector<NFIActor*>::iterator it = mActorVec.begin();
+// 	for (; it != mActorVec.end(); ++it)
+// 	{
+// 		NFIActor* pActor = *it;
+// 
+// 		Theron::Receiver receiver;
+// 		NFIActorMessage xMessage;
+// 		xMessage.eType = NFIActorMessage::EACTOR_INIT;
+// 		m_pFramework->Send(xMessage, receiver.GetAddress(), pActor->GetAddress());
+// 
+// 		receiver.Wait();
+// 
+//	}
 
-		receiver.Wait();
-#else
-		pActor->Init();
 #endif
 
-	}
+	m_pPluginManager->Init();
 
 	return true;
 }
 
 bool NFCActorManager::AfterInit()
 {
-	std::vector<NFIActor*>::iterator it = mActorVec.begin();
-	for (; it != mActorVec.end(); ++it)
-	{
-		NFIActor* pActor = *it;
+	m_pPluginManager->AfterInit();
 
-#ifdef NF_USE_ACTOR
-
-		Theron::Receiver xReceiver;
-		NFIActorMessage xMessage;
-		xMessage.eType = NFIActorMessage::EACTOR_AFTER_INIT;
-		m_pFramework->Send(xMessage, xReceiver.GetAddress(), pActor->GetAddress());
-
-		xReceiver.Wait();
-#else
-		pActor->AfterInit();
-#endif
-	}
+// #ifdef NF_USE_ACTOR
+// 
+// 	std::vector<NFIActor*>::iterator it = mActorVec.begin();
+// 	for (; it != mActorVec.end(); ++it)
+// 	{
+// 		NFIActor* pActor = *it;
+// 
+// 		Theron::Receiver xReceiver;
+// 		NFIActorMessage xMessage;
+// 		xMessage.eType = NFIActorMessage::EACTOR_AFTER_INIT;
+// 		m_pFramework->Send(xMessage, xReceiver.GetAddress(), pActor->GetAddress());
+// 
+// 		xReceiver.Wait();
+// 
+//	}
+// #endif
 	return true;
 }
 
 bool NFCActorManager::CheckConfig()
 {
-    std::vector<NFIActor*>::iterator it = mActorVec.begin();
-    for (; it != mActorVec.end(); ++it)
-    {
-		NFIActor* pActor = *it;
+	m_pPluginManager->CheckConfig();
 
 #ifdef NF_USE_ACTOR
 
-        Theron::Receiver xReceiver;
-        NFIActorMessage xMessage;
-        xMessage.eType = NFIActorMessage::EACTOR_CHECKCONFIG;
-        m_pFramework->Send(xMessage, xReceiver.GetAddress(), (*it)->GetAddress());
-
-        xReceiver.Wait();
-#else
-		pActor->CheckConfig();
 #endif
-    }
+
     return true;
 }
 
 bool NFCActorManager::BeforeShut()
 {
-	std::vector<NFIActor*>::iterator it = mActorVec.begin();
-	for (; it != mActorVec.end(); ++it)
-	{
-		NFIActor* pActor = *it;
-
 #ifdef NF_USE_ACTOR
 
-		Theron::Receiver xReceiver;
-		NFIActorMessage xMessage;
-		xMessage.eType = NFIActorMessage::EACTOR_BEFORE_SHUT;
-		m_pFramework->Send(xMessage, xReceiver.GetAddress(), (*it)->GetAddress());
-
-		xReceiver.Wait();
-#else
-		pActor->BeforeShut();
 #endif
-	}
+
+	m_pPluginManager->BeforeShut();
+
 	return true;
 }
 
 bool NFCActorManager::Shut()
 {
-	std::vector<NFIActor*>::iterator it = mActorVec.begin();
-	for (; it != mActorVec.end(); ++it)
-	{
-		NFIActor* pActor = *it;
+
 
 #ifdef NF_USE_ACTOR
 
-		Theron::Receiver xReceiver;
-		NFIActorMessage xMessage;
-		xMessage.eType = NFIActorMessage::EACTOR_SHUT;
-		m_pFramework->Send(xMessage, xReceiver.GetAddress(), (*it)->GetAddress());
-
-		xReceiver.Wait();
-#else
-		pActor->Shut();
-#endif
-	}
-
-	it = mActorVec.begin();
-	for (; it != mActorVec.end(); ++it)
-	{
-		delete *it;
-	}
-
-	mActorVec.clear();
-
-	
-#ifdef NF_USE_ACTOR
     delete m_pFramework;
     m_pFramework = NULL;
 #endif
+
+	m_pPluginManager->Shut();
+
 	return true;
 }
 
 bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTime )
 {
-	std::vector<NFIActor*>::iterator it = mActorVec.begin();
-	for (; it != mActorVec.end(); ++it)
-	{
-        NFIActor* pActor = *it;
+	m_pPluginManager->Execute(fLasFrametime, fStartedTime);
 
 #ifdef NF_USE_ACTOR
 
-        const int nMsgCount = pActor->GetNumQueuedMessages();
-        if (nMsgCount <= 10)
-        {
-            NFIActorMessage xMessage;
-            xMessage.eType = NFIActorMessage::EACTOR_EXCUTE;
-
-			//if only one actor, then use synchronous mode, other use  asynchronous mode.
-			//at the same,it's use synchronous mode in the same actor.
-			if (NFIActorManager::EACTOR_END - NFIActorManager::EACTOR_MAIN == 1)
-			{
-// 				Theron::Receiver xReceiver;
-// 				m_pFramework->Send(xMessage, xReceiver.GetAddress(), pActor->GetAddress());
-// 				xReceiver.Wait();
-				m_pFramework->Send(xMessage, Theron::Address(), pActor->GetAddress());
-			}
-			else if (NFIActorManager::EACTOR_END - NFIActorManager::EACTOR_MAIN > 1)
-			{
-				m_pFramework->Send(xMessage, Theron::Address(), pActor->GetAddress());
-			}
-        }
-#else
-		pActor->Execute(fLasFrametime, fStartedTime);
 #endif
-	}
 
 	return true;
 }
 
 #ifdef NF_USE_ACTOR
-const Theron::Address NFCActorManager::GetAddress( NFIActorManager::EACTOR eActor )
+bool NFCActorManager::OnRequireActor( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, NF_SHARE_PTR<NFAsyncEventList> xEventList )
 {
-	if (eActor >= NFIActorManager::EACTOR_MAIN
-		&& eActor < NFIActorManager::EACTOR_END)
-	{
-		return mActorVec[eActor]->GetAddress();
-	}
+	NFIActor* pActor = new NFCActor(*m_pFramework, this);
 
-	return Theron::Address();
+	Theron::Receiver xReceiver;
+	NFIActorMessage xMessage;
+
+	xMessage.eType = NFIActorMessage::EACTOR_EVENT_MSG;
+	xMessage.data = strArg;
+	xMessage.nSubMsgID = nEventID;
+	xMessage.self = objectID;
+	xMessage.xEventList = xEventList;
+
+	return m_pFramework->Send(xMessage, xReceiver.GetAddress(), pActor->GetAddress());
 }
-#else
 #endif

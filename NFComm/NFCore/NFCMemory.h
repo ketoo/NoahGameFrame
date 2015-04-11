@@ -11,7 +11,7 @@
 
 //#pragma pack(push, 1)
 
-#include "NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFIMemory.h"
 #include <iostream>
 #include <stdio.h>

@@ -15,7 +15,7 @@
 #include <algorithm>
 #include <thread>
 #include <mutex>
-#include "NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 template<typename T>
 class NFQueue

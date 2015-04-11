@@ -73,9 +73,7 @@ public:
 		AfterInit();
     }
 
-#ifdef NF_USE_ACTOR
-	virtual void Handler(const NFIActorMessage& message, const Theron::Address from){};
-#endif
+
 
     std::string strName;
     bool  bCanReload;

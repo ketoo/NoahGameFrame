@@ -10,7 +10,7 @@
 #define _NFC_LOG_MODULE_H_
 
 #include "NFComm/NFPluginModule/NFICrashModule.h"
-#include "NFComm/NFCore/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 #if NF_PLATFORM == NF_PLATFORM_LINUX
 #include "google-breakpad/src/client/linux/handler/exception_handler.h"

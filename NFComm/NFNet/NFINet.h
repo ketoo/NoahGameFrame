@@ -35,7 +35,7 @@
 #include <event2/thread.h>
 #include <event2/event_compat.h>
 #include <vector>
-#include "NFComm/NFCore/NFIdentID.h"
+#include "NFComm/NFPluginModule/NFIdentID.h"
 
 #pragma pack(push, 1)
 

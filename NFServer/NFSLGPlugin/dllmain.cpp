@@ -1,4 +1,4 @@
-#include "NFComm/NFCore/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 #ifdef _DEBUG
 
