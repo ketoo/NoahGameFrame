@@ -12,7 +12,7 @@
 #include <iostream>
 #include "NFILogicModule.h"
 #include "NFComm/NFCore/NFMap.h"
-#include "NFComm/NFCore/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFIActor.h"
 #include "NFIPluginManager.h"
 
@@ -84,36 +84,9 @@ public:
 
     virtual bool Execute(const float fLastFrametime, const float fStartedTime)
     {
-#ifdef NF_USE_ACTOR
-#ifdef NF_DYNAMIC_PLUGIN
-		//主插件，时刻updata
-		//次要插件，100毫秒一次updata
-		if(pPluginManager->GetActorID() != NFIActorManager::EACTOR_MAIN)
-		{
 
-			if (fLastTotal < 0.1f)
-			{
-				fLastTotal += fLastFrametime;
-				return false;
-			}
-		}
-		else
-		{
-			fLastTotal = fLastFrametime;
-		}
-#else
+		//每帧必须Execute
 		fLastTotal = fLastFrametime;
-		//         if (fLastTotal < 0.1f)
-		//         {
-		//             fLastTotal += fLastFrametime;
-		//             return false;
-		//         }
-#endif
-#else
-	//每帧必须Execute
-	fLastTotal = fLastFrametime;
-#endif
-
 
         NFILogicModule* pModule = First();
         while (pModule)

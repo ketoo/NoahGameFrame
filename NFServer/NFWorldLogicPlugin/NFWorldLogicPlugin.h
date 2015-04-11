@@ -9,7 +9,7 @@
 #ifndef _NFC_WORLDLOGICPLUGIN_MODULE_H_
 #define _NFC_WORLDLOGICPLUGIN_MODULE_H_
 
-#include "NFComm/NFCore/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 

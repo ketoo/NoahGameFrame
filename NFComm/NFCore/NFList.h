@@ -13,7 +13,7 @@
 #include <map>
 #include <list>
 #include <algorithm>
-#include "NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 template < typename T >
 class NFList

@@ -7,6 +7,11 @@
 // -------------------------------------------------------------------------
 
 #include "NFCEventProcessModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
+
+#ifdef NF_USE_ACTOR
+#include "NFComm/NFPluginModule/NFIActorManager.h"
+#endif
 
 NFCEventProcessModule::NFCEventProcessModule(NFIPluginManager* p)
 {
@@ -128,21 +133,21 @@ bool NFCEventProcessModule::RemoveEventCallBack(const NFIDENTID& objectID, const
 
 bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventID, const NFIDataList& valueList, const bool bSync)
 {
-    NF_SHARE_PTR<NFCObjectEventInfo> pObjectEventInfo = mObjectEventInfoMapEx.GetElement(objectID);
-    if (!pObjectEventInfo.get())
-    {
-        return false;
-    }
-
-
-    NF_SHARE_PTR<NFEventList> pEventInfo = pObjectEventInfo->GetElement(nEventID);
-    if (!pEventInfo.get())
-    {
-        return false;
-    }
-
 	if (bSync)
 	{
+		NF_SHARE_PTR<NFCObjectEventInfo> pObjectEventInfo = mObjectEventInfoMapEx.GetElement(objectID);
+		if (!pObjectEventInfo.get())
+		{
+			return false;
+		}
+
+
+		NF_SHARE_PTR<NFEventList> pEventInfo = pObjectEventInfo->GetElement(nEventID);
+		if (!pEventInfo.get())
+		{
+			return false;
+		}
+
 		EVENT_PROCESS_FUNCTOR_PTR cb;// = NF_SHARE_PTR<EVENT_PROCESS_FUNCTOR>(NULL);
 		bool bRet = pEventInfo->First(cb);
 		while (bRet)
@@ -157,8 +162,27 @@ bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventI
 	{
 		
 #ifdef NF_USE_ACTOR
-		//发给哪个空闲的呢
-		//pPluginManager->Send(, pPluginManager->GetAddress(), pPluginManager->GetActorManager()->GetAddress(NFIActorManager::EACTOR_END-1));
+		//pPluginManager->GetActorID()
+		//处理之前，还得把所有的回调函数对象发给actor，以便他调用这些函数进行处理
+		//pEventInfo
+		NF_SHARE_PTR<NFCObjectAsyncEventInfo> pObjectEventInfo = mObjectSyncEventInfoMapEx.GetElement(objectID);
+		if (!pObjectEventInfo.get())
+		{
+			return false;
+		}
+
+
+		NF_SHARE_PTR<NFAsyncEventList> pEventInfo = pObjectEventInfo->GetElement(nEventID);
+		if (!pEventInfo.get())
+		{
+			return false;
+		}
+
+
+		NFIActorManager* pActorManager = pPluginManager->GetActorManager();
+		std::string strArg;
+		valueList.ToString(strArg, "|");
+		pActorManager->OnRequireActor(objectID, nEventID, strArg, pEventInfo);
 #endif
 	}
 
@@ -211,4 +235,34 @@ bool NFCEventProcessModule::AddClassCallBack(const std::string& strClassName, co
     pEventList->Add(cb);
 
     return true;
+}
+
+bool NFCEventProcessModule::AddAsyncEventCallBack( const NFIDENTID& objectID, const int nEventID, const EVENT_ASYNC_PROCESS_FUNCTOR_PTR& cb )
+{
+	NF_SHARE_PTR<NFCObjectAsyncEventInfo> pObjectSyncEventInfo = mObjectSyncEventInfoMapEx.GetElement(objectID);
+	if (!pObjectSyncEventInfo.get())
+	{
+		pObjectSyncEventInfo = NF_SHARE_PTR<NFCObjectAsyncEventInfo>(NF_NEW NFCObjectAsyncEventInfo());
+		mObjectSyncEventInfoMapEx.AddElement(objectID, pObjectSyncEventInfo);
+	}
+
+	assert(NULL != pObjectSyncEventInfo);
+
+	NF_SHARE_PTR<NFAsyncEventList> pSyncEventInfo = pObjectSyncEventInfo->GetElement(nEventID);
+	if (!pSyncEventInfo)
+	{
+		pSyncEventInfo = NF_SHARE_PTR<NFAsyncEventList>(NF_NEW NFAsyncEventList());
+		pObjectSyncEventInfo->AddElement(nEventID, pSyncEventInfo);
+	}
+
+	assert(NULL != pSyncEventInfo);
+
+	pSyncEventInfo->Add(cb);
+
+	return true;
+}
+
+bool NFCEventProcessModule::AddAsyncClassCallBack( const std::string& strClassName, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb )
+{
+	return true;
 }
