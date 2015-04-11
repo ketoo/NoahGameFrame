@@ -9,7 +9,7 @@
 //#include "stdafx.h"
 #include "NFCGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
-#include "NFComm/NFCore/NFCMemory .h"
+#include "NFComm/NFCore/NFCMemory.h"
 
 bool NFCGameServerNet_ServerModule::Init()
 {

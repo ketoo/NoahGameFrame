@@ -12,7 +12,7 @@
 #include <iostream>
 #include "NFILogicModule.h"
 #include "NFComm/NFCore/NFCDataList.h"
-#include "NFComm/NFCore/NFIdentID.h"
+#include "NFComm/NFPluginModule/NFIdentID.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIScriptKernelModule.h"
