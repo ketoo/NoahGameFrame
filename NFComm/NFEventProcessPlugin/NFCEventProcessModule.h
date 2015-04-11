@@ -11,24 +11,23 @@
 
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 
-struct NFEventList
-        : public NFList<EVENT_PROCESS_FUNCTOR_PTR>
-{
-
-};
-struct NFClassEventList
-        : public NFList<CLASS_EVENT_FUNCTOR_PTR>
-{
-
-};
-
 class NFCObjectEventInfo
     : public NFMapEx<int, NFEventList>
 {
 };
 
+class NFCObjectAsyncEventInfo
+	: public NFMapEx<int, NFAsyncEventList>
+{
+};
+
 class NFCClassEventInfo
     : public NFMapEx<std::string, NFClassEventList>
+{
+};
+
+class NFCClassSyncEventInfo
+	: public NFMapEx<std::string, NFClassAsyncEventList>
 {
 };
 
@@ -58,7 +57,9 @@ public:
     virtual bool AddEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb);
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb);
 
-
+	//////////sync////////////////////////////////////////////////////////////////
+	virtual bool AddAsyncEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_ASYNC_PROCESS_FUNCTOR_PTR& cb);
+	virtual bool AddAsyncClassCallBack(const std::string& strClassName, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb);
 private:
     NFList<NFIDENTID> mRemoveObjectListEx;
     NFMapEx<NFIDENTID, NFList<int> > mRemoveEventListEx;
@@ -67,6 +68,10 @@ private:
 
     typedef NFMapEx<NFIDENTID, NFCObjectEventInfo> NFCObjectEventInfoMapEx;
     NFCObjectEventInfoMapEx mObjectEventInfoMapEx;
+
+	///////////////////sync event///////////////////////////////////////////////////////
+	typedef NFMapEx<NFIDENTID, NFCObjectAsyncEventInfo> NFCObjectSyncEventInfoMapEx;
+	NFCObjectSyncEventInfoMapEx mObjectSyncEventInfoMapEx;
 };
 
 

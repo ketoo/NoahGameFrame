@@ -17,7 +17,7 @@
 #include <atomic>
 #include "NFCActorManager.h"
 #include "NFComm/Config/NFConfig.h"
-#include "NFComm/NFCore/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "boost/thread.hpp"
 
 #pragma comment( lib, "DbgHelp" )

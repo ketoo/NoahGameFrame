@@ -105,7 +105,7 @@ public:
     {
         for (int i  = 0; i < varRows.GetCount(); ++i)
         {
-            Remove(varRows.Int(i));
+            Remove((int)varRows.Int(i));
         }
 
         return true;
