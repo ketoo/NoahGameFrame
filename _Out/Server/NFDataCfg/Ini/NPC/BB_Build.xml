@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--this is config xml-->
 <XML>
-    <Object Desc="一级祭坛" ID="Build_Altar_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/Altar_1_1" SubType="0" Type="0" UpStateFunc="Func1"/>
-    <Object Desc="一级竞技场" ID="Build_Arena_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/Arena_1_1" SubType="0" Type="0" UpStateFunc="Func1"/>
-    <Object Desc="一级兵营" ID="Build_Camp_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/Camp_1_1" SubType="0" Type="0" UpStateFunc="Func1"/>
-    <Object Desc="一级金矿" ID="Build_Gold_Mine_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/GoldMine_1_1" SubType="0" Type="0" UpStateFunc="Func1"/>
-    <Object Desc="一级道具屋" ID="Build_Item_Hourse_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/Item_hourse_1_1" SubType="0" Type="0" UpStateFunc="Func1"/>
-    <Object Desc="一级公会" ID="Build_League_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/League_1_1" SubType="0" Type="0" UpStateFunc="Func1"/>
-    <Object Desc="一级魔法屋" ID="Build_Magic_Hourse_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/MagicHourse_1_1" SubType="0" Type="0" UpStateFunc="Func1"/>
-    <Object Desc="一级箭塔" ID="Build_Tower_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/Tower_1_1" SubType="0" Type="0" UpStateFunc="Func1"/>
-    <Object Desc="一级大厅" ID="Build_Town_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/Town_1_1" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object Desc="一级祭坛" ID="Build_Altar_1" Icon="Altar_1_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/Altar_1_1" ShowName="一级祭坛" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object Desc="一级竞技场" ID="Build_Arena_1" Icon="Arena_1_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/Arena_1_1" ShowName="一级竞技场" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object Desc="一级兵营" ID="Build_Camp_1" Icon="Camp_1_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/Camp_1_1" ShowName="一级兵营" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object Desc="一级金矿" ID="Build_Gold_Mine_1" Icon="GoldMine_1_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/GoldMine_1_1" ShowName="一级金矿" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object Desc="一级道具屋" ID="Build_Item_Hourse_1" Icon="Item_hourse_1_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/Item_hourse_1_1" ShowName="一级道具屋" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object Desc="一级公会" ID="Build_League_1" Icon="League_1_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/League_1_1" ShowName="一级公会" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object Desc="一级魔法屋" ID="Build_Magic_Hourse_1" Icon="MagicHourse_1_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/MagicHourse_1_1" ShowName="一级魔法屋" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object Desc="一级箭塔" ID="Build_Tower_1" Icon="Tower_1_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/Tower_1_1" ShowName="一级箭塔" SubType="0" Type="0" UpStateFunc="Func1"/>
+    <Object Desc="一级大厅" ID="Build_Town_1" Icon="Town_1_1" NormalStateFunc="Func1" Prefab="Prefabs/Object/Town_1_1" ShowName="一级大厅" SubType="0" Type="0" UpStateFunc="Func1"/>
 </XML>
