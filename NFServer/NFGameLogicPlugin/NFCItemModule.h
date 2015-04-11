@@ -35,10 +35,10 @@ public:
     virtual bool AfterInit();
 
 protected:
-    /**/int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var );
+    /**/int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    /**/int OnRequireUseItemEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
-    /**/int OnRequireUseItemPosEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
+    /**/int OnRequireUseItemEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
+    /**/int OnRequireUseItemPosEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
 
 	virtual bool CheckConfig();
 private:
