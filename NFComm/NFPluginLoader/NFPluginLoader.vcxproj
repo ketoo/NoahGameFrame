@@ -136,11 +136,13 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="NFCActor.h" />
     <ClInclude Include="NFCActorManager.h" />
     <ClInclude Include="NFCDynLib.h" />
     <ClInclude Include="NFCPluginManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="NFCActor.cpp" />
     <ClCompile Include="NFCActorManager.cpp" />
     <ClCompile Include="NFCDynLib.cpp" />
     <ClCompile Include="NFCPluginManager.cpp" />

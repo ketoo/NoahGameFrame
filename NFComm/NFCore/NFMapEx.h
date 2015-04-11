@@ -15,7 +15,7 @@
 #include <iostream>
 #include <typeinfo>
 #include <memory>
-#include "NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 template <typename T , typename TD>
 class NFMapEx
