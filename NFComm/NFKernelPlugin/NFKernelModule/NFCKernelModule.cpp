@@ -14,11 +14,11 @@
 #include "../NFKernelPlugin.h"
 
 #include "NFCKernelModule.h"
-#include "NFComm/NFCore/NFIdentID.h"
 #include "NFComm/NFCore/NFIObject.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
-#include "NFComm/NFCore/NFCMemory .h"
+#include "NFComm/NFCore/NFCMemory.h"
+#include "NFComm/NFPluginModule/NFIdentID.h"
 
 NFCKernelModule::NFCKernelModule(NFIPluginManager* p)
 {

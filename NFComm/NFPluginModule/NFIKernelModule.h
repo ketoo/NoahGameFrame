@@ -12,8 +12,8 @@
 #include <iostream>
 #include <string>
 #include "NFILogicModule.h"
-#include "NFComm/NFCore/NFIdentID.h"
 #include "NFComm/NFCore/NFIObject.h"
+#include "NFComm/NFPluginModule/NFIdentID.h"
 
 class NFIKernelModule
     : public NFILogicModule

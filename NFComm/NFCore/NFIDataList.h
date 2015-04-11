@@ -26,11 +26,12 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
-#include "NFIdentID.h"
-#include "NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
+#include "NFCMemory.h"
 #include <boost/lexical_cast.hpp>
 #include <boost/variant.hpp>
 #include <boost/algorithm/string.hpp>
+#include "NFComm/NFPluginModule/NFIdentID.h"
 
 //变量类型
 enum TDATA_TYPE
@@ -79,7 +80,8 @@ public:
     virtual ~NFIDataList() = 0;
 
     virtual std::string StringValEx(const int index, const bool bForce) const = 0;
-    virtual bool ToString(std::string& str, const char* strSplit) = 0;
+    virtual bool ToString(std::string& str, const char* strSplit) const = 0;
+	virtual bool FormString(std::string& str, const char* strSplit) = 0;
 
  protected:
     template<typename T>
