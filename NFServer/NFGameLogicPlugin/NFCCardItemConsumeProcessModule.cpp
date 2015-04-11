@@ -45,7 +45,7 @@ bool NFCCardItemConsumeProcessModule::Execute( const float fLasFrametime, const 
 }
 
 
-int NFCCardItemConsumeProcessModule::ConsumeLegal( const NFIDENTID& self, int nItemRowID, const NFIValueList& other )
+int NFCCardItemConsumeProcessModule::ConsumeLegal( const NFIDENTID& self, int nItemRowID, const NFIDataList& other )
 {
     return 1;
 }
@@ -77,19 +77,19 @@ int NFCCardItemConsumeProcessModule::ConsumeSelf( const NFIDENTID& self, int nIt
     return 0;
 }
 
-int NFCCardItemConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, const std::string& strItemName, const NFIValueList& other )
+int NFCCardItemConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, const std::string& strItemName, const NFIDataList& other )
 {
     //附加效果
 
-    NFIPropertyManager* pPropertyManager = m_pElementInfoModule->GetPropertyManager( strItemName );
+    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager( strItemName );
     if ( pPropertyManager )
     {
-        NFIProperty* pItemEffectProperty = pPropertyManager->GetElement( "EffectProperty" );
-        NFIProperty* pItemEffectValue = pPropertyManager->GetElement( "EffectValue" );
+        NF_SHARE_PTR<NFIProperty> pItemEffectProperty = pPropertyManager->GetElement( "EffectProperty" );
+        NF_SHARE_PTR<NFIProperty> pItemEffectValue = pPropertyManager->GetElement( "EffectValue" );
         if ( pItemEffectProperty && pItemEffectValue )
         {
-            NFCValueList valueEffectProperty( pItemEffectProperty->QueryString().c_str(), "," );
-            NFCValueList valueEffectValue( pItemEffectValue->QueryString().c_str(), "," );
+            NFCDataList valueEffectProperty( pItemEffectProperty->GetString().c_str(), "," );
+            NFCDataList valueEffectValue( pItemEffectValue->GetString().c_str(), "," );
             if ( valueEffectProperty.GetCount() == valueEffectValue.GetCount() )
             {
                 for ( int i = 0; i < valueEffectProperty.GetCount(); i++ )
@@ -97,16 +97,16 @@ int NFCCardItemConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, cons
                     //先测定目标是否有此属性(其实是担心配错了)
                     for ( int j = 0; j < other.GetCount(); j++ )
                     {
-                        NFIDENTID identOther = other.ObjectVal( j );
+                        NFIDENTID identOther = other.Object( j );
                         if ( !identOther.IsNull() )
                         {
-                            NFIObject* pObject = m_pKernelModule->GetObject( identOther );
+                            NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( identOther );
                             if ( pObject )
                             {
-                                std::string strCurProperty = valueEffectProperty.StringVal( i );
+                                std::string strCurProperty = valueEffectProperty.String( i );
                                 std::string strMaxProperty = "MAX" + strCurProperty;
-                                NFIProperty* pOtherCurProperty = pObject->GetPropertyManager()->GetElement( strCurProperty );
-                                NFIProperty* pOtherMaxProperty = pObject->GetPropertyManager()->GetElement( strMaxProperty );
+                                NF_SHARE_PTR<NFIProperty> pOtherCurProperty = pObject->GetPropertyManager()->GetElement( strCurProperty );
+                                NF_SHARE_PTR<NFIProperty> pOtherMaxProperty = pObject->GetPropertyManager()->GetElement( strMaxProperty );
                                 if ( pOtherCurProperty && pOtherMaxProperty )
                                 {
                                     //技能书之类的，学习新东西(并不是装备类的那个技能书，那个是用来强化的)

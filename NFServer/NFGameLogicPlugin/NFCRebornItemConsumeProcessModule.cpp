@@ -46,7 +46,7 @@ bool NFCRebornItemConsumeProcessModule::Execute( const float fLasFrametime, cons
 }
 
 
-int NFCRebornItemConsumeProcessModule::ConsumeLegal( const NFIDENTID& self, int nItemRowID, const NFIValueList& other )
+int NFCRebornItemConsumeProcessModule::ConsumeLegal( const NFIDENTID& self, int nItemRowID, const NFIDataList& other )
 {
     return 1;
 }
@@ -78,7 +78,7 @@ int NFCRebornItemConsumeProcessModule::ConsumeSelf( const NFIDENTID& self, int n
     return 0;
 }
 
-int NFCRebornItemConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, const std::string& strItemName, const NFIValueList& other )
+int NFCRebornItemConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, const std::string& strItemName, const NFIDataList& other )
 {
     //¸½¼ÓÐ§¹û
 
@@ -89,8 +89,8 @@ int NFCRebornItemConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, co
 //         NFIProperty* pItemEffectValue = pPropertyManager->GetElement( "EffectValue" );
 //         if ( pItemEffectProperty && pItemEffectValue )
 //         {
-//             NFCValueList valueEffectProperty( pItemEffectProperty->QueryString().c_str(), "," );
-//             NFCValueList valueEffectValue( pItemEffectValue->QueryString().c_str(), "," );
+//             NFCDataList valueEffectProperty( pItemEffectProperty->QueryString().c_str(), "," );
+//             NFCDataList valueEffectValue( pItemEffectValue->QueryString().c_str(), "," );
 //             if ( valueEffectProperty.GetCount() == valueEffectValue.GetCount() )
 //             {
 //                 for ( int i = 0; i < valueEffectProperty.GetCount(); i++ )
