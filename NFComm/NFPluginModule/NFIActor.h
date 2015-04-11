@@ -13,6 +13,7 @@
 #include <string>
 
 #ifdef NF_USE_ACTOR
+#include "Theron/Receiver.h"
 #include "Theron/Actor.h"
 #include "Theron/Address.h"
 #include "Theron/Framework.h"
@@ -21,6 +22,7 @@
 
 #include "NFILogicModule.h"
 #include "NFIActorManager.h"
+#include "NFComm/NFCore/NFCDataList.h"
 
 #ifdef NF_USE_ACTOR
 
@@ -51,6 +53,10 @@ public:
     EACTOR_MESSAGE_ID eType;
     int nSubMsgID;
 	std::string data;
+	////////////////////event/////////////////////////////////////////////////
+	NFIDENTID self;
+	NF_SHARE_PTR<NFAsyncEventList> xEventList;
+	//////////////////////////////////////////////////////////////////////////
 protected:
 private:
 };
@@ -60,10 +66,11 @@ class NFIActor : public Theron::Actor, public NFILogicModule
 public:
 
     // Constructor, passes the framework to the baseclass.
-    NFIActor(Theron::Framework &framework, NFIActorManager* pManager, NFIActorManager::EACTOR eActor) : Theron::Actor(framework)
+	//NFIActor(Theron::Framework &framework, NFIActorManager* pManager, NFIActorManager::EACTOR eActor) : Theron::Actor(framework)
+	NFIActor(Theron::Framework &framework, NFIActorManager* pManager) : Theron::Actor(framework)
     {
         m_pActorManager = pManager;
-        meMainActor = eActor;
+        //meMainActor = eActor;
         // Register the message handler.
         RegisterHandler(this, &NFIActor::Handler);
     }
@@ -73,88 +80,90 @@ public:
 private:
     virtual void Handler(const NFIActorMessage& message, const Theron::Address from)
     {
-        switch (message.eType)
-        {
-        case NFIActorMessage::EACTOR_INIT:
+		//收到消息要处理逻辑
+		if (message.eType == NFIActorMessage::EACTOR_EVENT_MSG)
+		{
+			EVENT_ASYNC_PROCESS_FUNCTOR_PTR cb;// = NF_SHARE_PTR<EVENT_PROCESS_FUNCTOR>(NULL);
+			bool bRet = message.xEventList->First(cb);
+			while (bRet)
 			{
-                unStartTickTime = ::GetTickCount();
-                unLastTickTime = unStartTickTime;
+				cb.get()->operator()(message.self, message.nSubMsgID, message.data);
 
-				Init();
-				Send(message, from);
+				bRet = message.xEventList->Next(cb);
 			}
-            break;
 
-        case NFIActorMessage::EACTOR_AFTER_INIT:
-			{
-				AfterInit();
-				Send(message, from);
-			}
-            break;
-        case NFIActorMessage::EACTOR_CHECKCONFIG:
-            {
-                CheckConfig();
-                Send(message, from);
-            }
-            break;
+		}
+		//处理完毕后发结果到主线程
 
-        case NFIActorMessage::EACTOR_EXCUTE:
-            {
-                unsigned long unNowTickTime = ::GetTickCount();
-                float fStartedTime = float(unNowTickTime - unStartTickTime) / 1000;
-                float fLastTime = float(unNowTickTime - unLastTickTime) / 1000;
-
-                Execute(fLastTime, fStartedTime);
-
-                unLastTickTime = unNowTickTime;
-
-				Send(message, from);
-            }
-            break;
-
-        case NFIActorMessage::EACTOR_BEFORE_SHUT:
-			{
-				BeforeShut();
-				Send(message, from);
-			}
-            break;
-
-        case NFIActorMessage::EACTOR_SHUT:
-			{
-				Shut();
-				Send(message, from);
-			}
-            break;
-
-        default:
-            HandlerEx(message, from);
-            break;
-        }
+		//回调到其他线程的EventManager?还是静态函数
+//         switch (message.eType)
+//         {
+//         case NFIActorMessage::EACTOR_INIT:
+// 			{
+//                 unStartTickTime = ::GetTickCount();
+//                 unLastTickTime = unStartTickTime;
+// 
+// 				Init();
+// 				Send(message, from);
+// 			}
+//             break;
+// 
+//         case NFIActorMessage::EACTOR_AFTER_INIT:
+// 			{
+// 				AfterInit();
+// 				Send(message, from);
+// 			}
+//             break;
+//         case NFIActorMessage::EACTOR_CHECKCONFIG:
+//             {
+//                 CheckConfig();
+//                 Send(message, from);
+//             }
+//             break;
+// 
+//         case NFIActorMessage::EACTOR_EXCUTE:
+//             {
+//                 unsigned long unNowTickTime = ::GetTickCount();
+//                 float fStartedTime = float(unNowTickTime - unStartTickTime) / 1000;
+//                 float fLastTime = float(unNowTickTime - unLastTickTime) / 1000;
+// 
+//                 Execute(fLastTime, fStartedTime);
+// 
+//                 unLastTickTime = unNowTickTime;
+// 
+// 				Send(message, from);
+//             }
+//             break;
+// 
+//         case NFIActorMessage::EACTOR_BEFORE_SHUT:
+// 			{
+// 				BeforeShut();
+// 				Send(message, from);
+// 			}
+//             break;
+// 
+//         case NFIActorMessage::EACTOR_SHUT:
+// 			{
+// 				Shut();
+// 				Send(message, from);
+// 			}
+//             break;
+// 
+//         default:
+//             HandlerEx(message, from);
+//             break;
+//         }
     }
 private:
 private:
 
     NFIActorManager* m_pActorManager;
-    NFIActorManager::EACTOR meMainActor;
+   // NFIActorManager::EACTOR meMainActor;
 public:
 
     NFIActorManager* GetActorManager(){return m_pActorManager;}
-    NFIActorManager::EACTOR GetActorID(){return meMainActor; }
-
-#else
-class NFIActor : public NFILogicModule
-{
-public:
-    NFIActor(NFIActorManager* pManager)
-    {
-    }
-#endif
-
-public:
-
-private:
-    unsigned long unStartTickTime;
-    unsigned long unLastTickTime;
 };
+
+#endif
 
 #endif

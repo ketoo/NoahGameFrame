@@ -25,7 +25,7 @@
 #include <memory>
 #include <list>
 #include <vector>
-#include "NFComm/NFCore/NFIdentID.h"
+#include "NFComm/NFPluginModule/NFIdentID.h"
 
 #pragma pack(push, 1)
 

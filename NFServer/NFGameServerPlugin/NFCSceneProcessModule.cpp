@@ -47,9 +47,9 @@ bool NFCSceneProcessModule::Execute( const float fLasFrametime, const float fSta
 bool NFCSceneProcessModule::AfterInit()
 {
     //³õÊ¼»¯³¡¾°ÈÝÆ÷
-#ifdef NF_USE_ACTOR
-	int nSelfActorID = pPluginManager->GetActorID();
-#endif
+// #ifdef NF_USE_ACTOR
+// 	int nSelfActorID = pPluginManager->GetActorID();
+// #endif
     NF_SHARE_PTR<NFILogicClass> pLogicClass =  m_pLogicClassModule->GetElement("Scene");
     if (pLogicClass.get())
     {
@@ -64,7 +64,7 @@ bool NFCSceneProcessModule::AfterInit()
             const std::string& strFilePath = m_pElementInfoModule->GetPropertyString( strData, "FilePath" );
             const int nActorID = m_pElementInfoModule->GetPropertyInt( strData, "ActorID" );
 #ifdef NF_USE_ACTOR
-			if ( nActorID == nSelfActorID && nSceneID > 0 )
+			//if ( nActorID == nSelfActorID && nSceneID > 0 )
 #else
 			if ( nSceneID > 0 )
 #endif
@@ -224,14 +224,14 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
 
     char szSceneID[MAX_PATH] = {0};
     sprintf(szSceneID, "%d", nTargetScene);
-#ifdef NF_USE_ACTOR
-	int nActorID = m_pElementInfoModule->GetPropertyInt(szSceneID, "ActorID");
-	int nSelfActorID = pPluginManager->GetActorID();
-	if (nSelfActorID != nActorID)
-	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, ident, "target scene not runing in this server", nTargetScene);
-		return 1;
-#endif
+// #ifdef NF_USE_ACTOR
+// 	int nActorID = m_pElementInfoModule->GetPropertyInt(szSceneID, "ActorID");
+// 	int nSelfActorID = pPluginManager->GetActorID();
+// 	if (nSelfActorID != nActorID)
+// 	{
+// 		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, ident, "target scene not runing in this server", nTargetScene);
+// 		return 1;
+// #endif
 
     if ( self != ident )
     {

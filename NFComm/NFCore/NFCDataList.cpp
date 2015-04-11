@@ -508,7 +508,7 @@ std::string NFCDataList::StringValEx(const int index, const bool bForce) const
     return NULL_STR;
 }
 
-bool NFCDataList::ToString(std::string& str, const char* strSplit)
+bool NFCDataList::ToString(std::string& str, const char* strSplit) const
 {
     for (int i = 0; i < GetCount(); ++i)
     {
@@ -525,4 +525,10 @@ bool NFCDataList::ToString(std::string& str, const char* strSplit)
     }
 
     return true;
+}
+
+bool NFCDataList::FormString(std::string& str, const char* strSplit)
+{
+
+	return true;
 }
