@@ -98,7 +98,7 @@
     <ClInclude Include="NFCConsistentHash.hpp" />
     <ClInclude Include="NFCDataList.h" />
     <ClInclude Include="NFCHeartBeatManager.h" />
-    <ClInclude Include="NFCMemory .h" />
+    <ClInclude Include="NFCMemory.h" />
     <ClInclude Include="NFCObject.h" />
     <ClInclude Include="NFCProperty.h" />
     <ClInclude Include="NFCPropertyManager.h" />
@@ -114,7 +114,6 @@
     <ClInclude Include="NFCore.h" />
     <ClInclude Include="NFCRecord.h" />
     <ClInclude Include="NFDefine.h" />
-    <ClInclude Include="NFIdentID.h" />
     <ClInclude Include="NFIObject.h" />
     <ClInclude Include="NFIProperty.h" />
     <ClInclude Include="NFIPropertyManager.h" />
@@ -122,7 +121,6 @@
     <ClInclude Include="NFIRecordManager.h" />
     <ClInclude Include="NFList.h" />
     <ClInclude Include="NFMap.h" />
-    <ClInclude Include="NFPlatform.h" />
     <ClInclude Include="NFTimer.h" />
   </ItemGroup>
   <ItemGroup>

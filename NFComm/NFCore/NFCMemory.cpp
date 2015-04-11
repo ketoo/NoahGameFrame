@@ -6,7 +6,7 @@
 //
 // -------------------------------------------------------------------------
 #include <stdlib.h>
-#include "NFCMemory .h"
+#include "NFCMemory.h"
 
 NFCMemory xMemory;
 typedef std::map<int64_t, MemoryInfo>::iterator iterator;

@@ -13,10 +13,10 @@
 #include <fstream>
 #include <string>
 #include <boost/random.hpp>
-#include "NFComm/NFCore/NFIdentID.h"
 #include "NFComm/NFCore/NFCObject.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
+#include "NFComm/NFPluginModule/NFIdentID.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
