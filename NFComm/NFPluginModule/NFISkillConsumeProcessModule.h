@@ -19,15 +19,15 @@ class NFISkillConsumeProcessModule
 
 public:
     //物品使用是否合法
-    virtual int ConsumeLegal(const NFIDENTID& self, const std::string& skillID,  const NFIValueList& other) = 0;
+    virtual int ConsumeLegal(const NFIDENTID& self, const std::string& skillID,  const NFIDataList& other) = 0;
 
     //使用物品的消耗
     virtual int ConsumeSelf(const NFIDENTID& self, const std::string& skillID) = 0;
 
     //返回的技能结果值(伤害)
-    virtual int ConsumeProcess(const NFIDENTID& self, const std::string& strSkillName, const NFIValueList& other, NFIValueList& damageListValue, NFIValueList& damageResultList) = 0;
+    virtual int ConsumeProcess(const NFIDENTID& self, const std::string& strSkillName, const NFIDataList& other, NFIDataList& damageListValue, NFIDataList& damageResultList) = 0;
 
-    virtual int ConsumeProcessEx(const NFIDENTID& self, const std::string& strSkillName, const NFIValueList& other, NFIValueList& damageListValue, NFIValueList& damageResultList) = 0;
+    virtual int ConsumeProcessEx(const NFIDENTID& self, const std::string& strSkillName, const NFIDataList& other, NFIDataList& damageListValue, NFIDataList& damageResultList) = 0;
 
 
 };
