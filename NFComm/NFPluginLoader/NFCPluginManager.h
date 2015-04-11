@@ -18,17 +18,13 @@ class NFCPluginManager
     : public NFIPluginManager
 {
 public:
-#ifdef NF_USE_ACTOR
-	NFCPluginManager(Theron::Framework &framework, NFIActorManager* pManager, NFIActorManager::EACTOR eActor) : NFIPluginManager(framework, pManager, eActor)
-	{
-		mbOnReloadPlugin = false;
-	}
-#else
+	//NFCPluginManager(Theron::Framework &framework, NFIActorManager* pManager, NFIActorManager::EACTOR eActor) : NFIPluginManager(framework, pManager, eActor)
 	NFCPluginManager(NFIActorManager* pManager) : NFIPluginManager(pManager)
 	{
 		mbOnReloadPlugin = false;
+		m_pActorManager = pManager;
 	}
-#endif
+
     virtual bool Init();
 
     virtual bool AfterInit();
@@ -74,10 +70,13 @@ protected:
 
 #ifdef NF_USE_ACTOR
     virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
+
+	virtual NFIActorManager* GetActorManager(){ return m_pActorManager;}
 #endif
 
 private:
     bool mbOnReloadPlugin;
+	NFIActorManager* m_pActorManager;
 
 	typedef std::map<std::string, bool> PluginNameMap;
 	typedef std::map<std::string, NFCDynLib*> PluginLibMap;

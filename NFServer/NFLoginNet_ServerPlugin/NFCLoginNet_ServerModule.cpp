@@ -71,7 +71,6 @@ bool NFCLoginNet_ServerModule::AfterInit()
 
 			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCLoginNet_ServerModule::OnRecivePack, &NFCLoginNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);		
 		}
-
 	}
 	
 	return true;
