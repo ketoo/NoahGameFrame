@@ -53,25 +53,7 @@ bool NFCPluginManager::LoadPlugin()
         const char* strPluginName = pPluginNode->first_attribute( "Name" )->value();
         const char* strMain = pPluginNode->first_attribute( "Main" )->value();
 
-#ifdef NF_USE_ACTOR
-		if (GetActorID() == NFIActorManager::EACTOR_MAIN)
-		{
-			//所有的插件都加载
-			mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, bMain));
-		}
-		else
-		{
-			//只加载非主要的插件
-			int nMain = boost::lexical_cast<int>( strMain );
-			bool bMain = (nMain > 0 ? true : false);
-			if (!bMain)
-			{
-				mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, bMain));
-			}
-		}
-#else
-	mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, true));
-#endif
+		mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, true));
        
     }
 
@@ -364,11 +346,11 @@ void NFCPluginManager::HandlerEx( const NFIActorMessage& message, const Theron::
     if (message.eType != NFIActorMessage::EACTOR_UNKNOW)
     {
         //给哪个模块接这个消息呢..难道广播...他也不知道，哪个模块要写是接受数据的啊，除非...配置写好
-        NFIActorDataModule* pModule = dynamic_cast<NFIActorDataModule*>(pPluginManager->FindModule(strDataModule));
-        if (pModule)
-        {
-            pModule->Handler(message, from);
-        }
+//         NFIActorDataModule* pModule = dynamic_cast<NFIActorDataModule*>(pPluginManager->FindModule(strDataModule));
+//         if (pModule)
+//         {
+//             pModule->Handler(message, from);
+//         }
     }
 }
 

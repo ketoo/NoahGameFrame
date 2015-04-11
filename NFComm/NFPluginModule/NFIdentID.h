@@ -9,7 +9,7 @@
 #ifndef _NF_IDENTID_H_
 #define _NF_IDENTID_H_
 
-#include "NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>

@@ -10,7 +10,7 @@
 #define _NFI_OBJECT_H_
 
 
-#include "NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFIDataList.h"
 #include "NFIRecord.h"
 #include "NFIRecordManager.h"

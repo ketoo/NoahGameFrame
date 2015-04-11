@@ -9,58 +9,23 @@
 #ifndef _NFI_PLUGIN_MANAGER_H_
 #define _NFI_PLUGIN_MANAGER_H_
 
+#ifdef NF_USE_ACTOR
 #include "NFIActor.h"
-//#include "NFIPlugin.h"
+#endif
+
+#include "NFILogicModule.h"
+#include "NFIActorManager.h"
 
 class NFIPlugin;
 
-#ifdef NF_USE_ACTOR
-class NFIPluginManager : public NFIActor
+class NFIPluginManager : public NFILogicModule
 {
 public:
-    NFIPluginManager(Theron::Framework &framework, NFIActorManager* pManager, NFIActorManager::EACTOR eActor): NFIActor(framework, pManager, eActor)
-    {
+    //NFIPluginManager(Theron::Framework &framework, NFIActorManager* pManager, NFIActorManager::EACTOR eActor): NFIActor(framework, pManager, eActor)
+	NFIPluginManager(NFIActorManager* pManager)
+	{
 
     }
-#else
-class NFIPluginManager : public NFIActor
-{
-public:
-    NFIPluginManager(NFIActorManager* pManager): NFIActor(pManager)
-    {
-    }
-
-    virtual bool Init()
-    {
-        return true;
-    }
-
-    virtual bool AfterInit()
-    {
-        return true;
-    }
-
-    virtual bool CheckConfig()
-    {
-        return true;
-    }
-
-    virtual bool BeforeShut()
-    {
-        return true;
-    }
-
-    virtual bool Shut()
-    {
-        return true;
-    }
-
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime)
-    {
-        return true;
-    }
-#endif
-
 
     virtual bool LoadPlugin() = 0;
 
@@ -83,6 +48,10 @@ public:
     virtual NFILogicModule* FindModule(const std::string& strModuleName) = 0;
 
     virtual bool ReInitialize() = 0;
+
+#ifdef NF_USE_ACTOR
+	virtual NFIActorManager* GetActorManager() = 0;
+#endif
 };
 
 #endif
