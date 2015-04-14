@@ -42,7 +42,7 @@ public:
 	}
 
 #ifdef NF_USE_ACTOR
-	virtual bool OnRequireActor(const NFIDENTID& objectID, const int nEventID,  const std::string& strArg, NF_SHARE_PTR<NFAsyncEventList> xEventList);
+	virtual bool OnRequireActor( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventList> xAsyncEventList, const NF_SHARE_PTR<NFAsyncEventList> xSyncEventList);
 #endif
 
 private:
