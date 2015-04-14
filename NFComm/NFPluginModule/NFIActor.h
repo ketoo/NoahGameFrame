@@ -55,7 +55,8 @@ public:
 	std::string data;
 	////////////////////event/////////////////////////////////////////////////
 	NFIDENTID self;
-	NF_SHARE_PTR<NFAsyncEventList> xEventList;
+	NF_SHARE_PTR<NFAsyncEventList> xAsyncEventList;//异步事件接口
+	NF_SHARE_PTR<NFAsyncEventList> xSyncEventList;//同步回调接口
 	//////////////////////////////////////////////////////////////////////////
 protected:
 private:
@@ -84,12 +85,12 @@ private:
 		if (message.eType == NFIActorMessage::EACTOR_EVENT_MSG)
 		{
 			EVENT_ASYNC_PROCESS_FUNCTOR_PTR cb;// = NF_SHARE_PTR<EVENT_PROCESS_FUNCTOR>(NULL);
-			bool bRet = message.xEventList->First(cb);
+			bool bRet = message.xAsyncEventList->First(cb);
 			while (bRet)
 			{
 				cb.get()->operator()(message.self, message.nSubMsgID, message.data);
 
-				bRet = message.xEventList->Next(cb);
+				bRet = message.xAsyncEventList->Next(cb);
 			}
 
 		}
