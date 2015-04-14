@@ -58,7 +58,7 @@ public:
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb);
 
 	//////////sync////////////////////////////////////////////////////////////////
-	virtual bool AddAsyncEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_ASYNC_PROCESS_FUNCTOR_PTR& cb);
+	virtual bool AddAsyncEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_ASYNC_PROCESS_FUNCTOR_PTR& cb_begin, const EVENT_ASYNC_PROCESS_FUNCTOR_PTR& cb_end);
 	virtual bool AddAsyncClassCallBack(const std::string& strClassName, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb);
 private:
     NFList<NFIDENTID> mRemoveObjectListEx;
