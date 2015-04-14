@@ -161,7 +161,7 @@ NFINT64 NFCObject::GetPropertyInt(const std::string& strPropertyName)
         return pProperty->GetInt();
     }
 
-    return -1;
+    return 0;
 }
 
 float NFCObject::GetPropertyFloat(const std::string& strPropertyName)
