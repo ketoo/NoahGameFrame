@@ -8,6 +8,7 @@
 	<Plugin Name="NFLogPlugin" Main="1"/>
 	<Plugin Name="NFSLGPlugin" Main="1"/>
 	<Plugin Name="NFAIPlugin" Main="1"/>
+    <Plugin Name="NFGameLogicPlugin" Main="1"/>
 	
 	<ActorDataModule Name="NFCDataProcessModule" />
 </XML>

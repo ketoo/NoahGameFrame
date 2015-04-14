@@ -50,7 +50,7 @@ bool NFCSkillModule::AfterInit()
     m_pEventProcessModule->AddEventCallBack( NFIDENTID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL_POS, this, &NFCSkillModule::OnRequireUseSkillPosEvent );
 
     m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCSkillModule::OnClassObjectEvent );
-    m_pEventProcessModule->AddClassCallBack( "AttackNPC", this, &NFCSkillModule::OnClassObjectEvent );
+    m_pEventProcessModule->AddClassCallBack( "NPC", this, &NFCSkillModule::OnClassObjectEvent );
     m_pEventProcessModule->AddClassCallBack( "Pet", this, &NFCSkillModule::OnClassObjectEvent );
 
 
