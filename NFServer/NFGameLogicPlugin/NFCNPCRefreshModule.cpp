@@ -34,18 +34,25 @@ bool NFCNPCRefreshModule::AfterInit()
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>( pPluginManager->FindModule( "NFCElementInfoModule" ) );
     m_pPackModule = dynamic_cast<NFIPackModule*>( pPluginManager->FindModule( "NFCPackModule" ) );
 
-    m_pEventProcessModule->AddClassCallBack( "AttackNPC", this, &NFCNPCRefreshModule::OnObjectClassEvent );
+    assert(NULL != m_pEventProcessModule);
+    assert(NULL != m_pKernelModule);
+    assert(NULL != m_pSceneProcessModule);
+    assert(NULL != m_pElementInfoModule);
+    assert(NULL != m_pPackModule);
+
+    m_pEventProcessModule->AddClassCallBack( "NPC", this, &NFCNPCRefreshModule::OnObjectClassEvent );
 
     return true;
 }
 
 int NFCNPCRefreshModule::OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
-    if ( strClassName == "AttackNPC" )
+    if ( strClassName == "NPC" )
     {
         if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )
         {
-            int nHPMax = m_pKernelModule->GetPropertyInt(self, "MAXHP");
+            const std::string& strConfigID = m_pKernelModule->GetPropertyString(self, "ConfigID");
+            int nHPMax = m_pElementInfoModule->GetPropertyInt(strConfigID, "MAXHP");
             m_pKernelModule->SetPropertyInt(self, "HP", nHPMax);
             m_pKernelModule->AddPropertyCallBack( self, "HP", this, &NFCNPCRefreshModule::OnObjectHPEvent );
         }

@@ -237,7 +237,7 @@ bool NFCEventProcessModule::AddClassCallBack(const std::string& strClassName, co
     return true;
 }
 
-bool NFCEventProcessModule::AddAsyncEventCallBack( const NFIDENTID& objectID, const int nEventID, const EVENT_ASYNC_PROCESS_FUNCTOR_PTR& cb )
+bool NFCEventProcessModule::AddAsyncEventCallBack( const NFIDENTID& objectID, const int nEventID, const EVENT_ASYNC_PROCESS_FUNCTOR_PTR& cb, const EVENT_ASYNC_PROCESS_FUNCTOR_PTR& cb_end )
 {
 	NF_SHARE_PTR<NFCObjectAsyncEventInfo> pObjectSyncEventInfo = mObjectSyncEventInfoMapEx.GetElement(objectID);
 	if (!pObjectSyncEventInfo.get())
