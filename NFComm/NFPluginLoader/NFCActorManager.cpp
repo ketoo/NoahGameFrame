@@ -120,7 +120,7 @@ bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTi
 }
 
 #ifdef NF_USE_ACTOR
-bool NFCActorManager::OnRequireActor( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, NF_SHARE_PTR<NFAsyncEventList> xEventList )
+bool NFCActorManager::OnRequireActor( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventList> xAsyncEventList, const NF_SHARE_PTR<NFAsyncEventList> xSyncEventList)
 {
 	NFIActor* pActor = new NFCActor(*m_pFramework, this);
 
@@ -131,7 +131,8 @@ bool NFCActorManager::OnRequireActor( const NFIDENTID& objectID, const int nEven
 	xMessage.data = strArg;
 	xMessage.nSubMsgID = nEventID;
 	xMessage.self = objectID;
-	xMessage.xEventList = xEventList;
+	xMessage.xAsyncEventList = xAsyncEventList;
+	xMessage.xSyncEventList = xSyncEventList;
 
 	return m_pFramework->Send(xMessage, xReceiver.GetAddress(), pActor->GetAddress());
 }
