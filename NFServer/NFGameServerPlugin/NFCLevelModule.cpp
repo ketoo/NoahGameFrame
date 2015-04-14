@@ -40,7 +40,7 @@ bool NFCLevelModule::AfterInit()
     assert( NULL != m_pPropertyConfigModule );
 
     m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCLevelModule::OnObjectClassEvent );
-    m_pEventProcessModule->AddClassCallBack( "AttackNPC", this, &NFCLevelModule::OnObjectClassEvent );
+    m_pEventProcessModule->AddClassCallBack( "NPC", this, &NFCLevelModule::OnObjectClassEvent );
 
     return true;
 }
