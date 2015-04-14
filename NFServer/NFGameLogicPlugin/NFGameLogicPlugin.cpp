@@ -68,11 +68,13 @@ void NFGameLogicPlugin::Install()
     REGISTER_MODULE( pPluginManager, NFCBulletSkillConsumeProcessModule )
     //Continue to add other skill types of consumption
 
+    REGISTER_MODULE( pPluginManager, NFCNPCRefreshModule )
 }
 
 void NFGameLogicPlugin::Uninstall()
 {
-	
+	UNREGISTER_MODULE( pPluginManager, NFCNPCRefreshModule )
+
     UNREGISTER_MODULE( pPluginManager, NFCBulletSkillConsumeProcessModule )
     UNREGISTER_MODULE( pPluginManager, NFCBriefSkillConsumeProcessModule )
     UNREGISTER_MODULE( pPluginManager, NFCSkillConsumeManagerModule )
