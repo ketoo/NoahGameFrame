@@ -772,7 +772,7 @@ int NFCPackModule::OnClassObjectEvent( const NFIDENTID& self, const std::string&
     else if ( CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent )
     {
         m_pEventProcessModule->AddEventCallBack( self, NFED_ON_CLIENT_SWAP_TABLE, this, &NFCPackModule::OnSwapTableRowEvent );
-
+        m_pEventProcessModule->AddEventCallBack(self, NFED_ON_OBJECT_ENTER_SCENE_RESULT, this, &NFCPackModule::OnAddDropListEvent);
 
         // TOADD 其他背包需要的再加回调
     }
@@ -1289,4 +1289,20 @@ bool NFCPackModule::DeleteItem( const NFIDENTID& self, const std::string& strIte
     }
 
     return false;
+}
+
+int NFCPackModule::OnAddDropListEvent(const NFIDENTID& self, const int nEventID, const NFIDataList& var)
+{
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
+    if ( NULL == pObject )
+    {
+        m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+        return false;
+    }
+
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
+    if (NULL == pRecord)
+    {
+        return false;
+    }
 }

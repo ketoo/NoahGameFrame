@@ -3,5 +3,6 @@
 	<Plugin Name="NFKernelPlugin" Main="1"/>
 	<Plugin Name="NFConfigPlugin" Main="1"/>
 	<Plugin Name="NFLuaScriptPlugin" Main="1"/>
+    <Plugin Name="NFLogPlugin" Main="1"/>
 	<Plugin Name="Tutorial6Plugin" Main="1"/>
 </XML>
