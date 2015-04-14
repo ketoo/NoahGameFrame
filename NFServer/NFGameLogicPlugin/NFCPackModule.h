@@ -109,22 +109,16 @@ protected:
     virtual int RemoveEquipProperty( const NFIDENTID& self, const std::string& strConfigID, const int nRow );
 
     virtual int CheckEquip();
-
-private:
-
-protected:
     int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
-
-
     int OnSwapTableRowEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
-protected:
+    int OnAddDropListEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
     int OnObjectPackRecordEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
     int OnObjectPackViewRecordEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nTargetRow, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
 
-protected:
     PackTableType GetPackType( const std::string& name );
     bool pack_item_type_greater( NFIDataList* elem1, NFIDataList* elem2 );
     bool can_normal_pack_item_swap( const NFIDENTID& self, NF_SHARE_PTR<NFIRecord> pOriginRecord, NF_SHARE_PTR<NFIRecord> pTargetRecord, const int origin, const int target ); // 判断是否可以交换普通背包物品(装备特殊判断)
+
 private:
     //char* mstrPackTableName;
     //char* mstrViewTableName;
