@@ -54,6 +54,13 @@
             <Col Tag="Date" Type="object"/>
             <Col Tag="BaseProperty" Type="string"/>
         </Record>
+        <Record Col="5" Desc="¹ÖÎïµôÂä±í" Id="DropItemList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="256" Save="1" SaveInterval="0" View="0">
+            <Col Tag="MonsterID" Type="string"/>
+            <Col Tag="ItemID" Type="string"/>
+            <Col Tag="ItemCount" Type="int"/>
+            <Col Tag="CanGetItem" Type="int"/>
+            <Col Tag="IsGetItem" Type="int"/>
+        </Record>
         <Record Col="4" Desc="" Id="SkillTable" Index="0" Private="1" Public="0" RelationValue="Friend" Row="32" Save="1" SaveInterval="0" View="0">
             <Col Tag="SkillID" Type="string"/>
             <Col Tag="SkillLevel" Type="int"/>
