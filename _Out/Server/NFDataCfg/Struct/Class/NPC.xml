@@ -50,6 +50,7 @@
         <Property Desc="客户端预设模型" Id="Prefab" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
         <Property Desc="AI类型" Id="AIType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="攻击距离" Id="AtkDis" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float" View="1"/>
+        <Property Desc="掉落列表" Id="DropPackList" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
     </Propertys>
     <Components/>
     <Includes/>
