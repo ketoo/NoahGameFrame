@@ -210,13 +210,13 @@ void NFCProxyServerNet_ServerModule::OnClientDisconnect( const int nAddress )
 
             NFCPacket msg(this->GetNet()->GetHeadLen());
             NFMsg::MsgBase xMsg;
+            //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
+            *xMsg.mutable_player_id() = NFToPB(pNetObject->GetUserID());
+
             if (!xData.SerializeToString(xMsg.mutable_msg_data()))
             {
                 return;
             }
-
-            //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
-            *xMsg.mutable_player_id() = NFToPB(pNetObject->GetUserID());
 
             std::string strMsg;
             if(!xMsg.SerializeToString(&strMsg))
@@ -558,9 +558,9 @@ int NFCProxyServerNet_ServerModule::OnReqEnterGameServer( const NFIPacket& msg )
 
 int NFCProxyServerNet_ServerModule::OnEnterGameSuccessEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var )
 {
-    if (var.GetCount() != 2 || var.TypeEx(TDATA_OBJECT, TDATA_OBJECT, TDATA_UNKNOWN))
+    if (var.GetCount() != 2 || !var.TypeEx(TDATA_OBJECT, TDATA_OBJECT, TDATA_UNKNOWN))
     {
-        return -1;
+        return 1;
     }
 
     const NFIDENTID& xClientID = var.Object(0);
@@ -575,4 +575,6 @@ int NFCProxyServerNet_ServerModule::OnEnterGameSuccessEvent( const NFIDENTID& ob
             pNetObeject->SetUserID(xPlayerID);
         }
     }
+
+    return 0;
 }
