@@ -30,7 +30,7 @@ class NFCProxyConnectToGameServer : public NFINetModule
 public:
     NFCProxyConnectToGameServer(int nGameServerID, const std::string& strIP, const int nPort, NFIPluginManager* p);
 
-    virtual bool Execute(float fFrameTime, float fTotalTime);
+    virtual bool Execute(const float fFrameTime, const float fTotalTime);
     virtual void LogRecive(const char* str){}
     virtual void LogSend(const char* str){}
 
