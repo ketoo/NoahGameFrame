@@ -1297,12 +1297,14 @@ int NFCPackModule::OnAddDropListEvent(const NFIDENTID& self, const int nEventID,
     if ( NULL == pObject )
     {
         m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-        return false;
+        return 1;
     }
 
     NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
     if (NULL == pRecord)
     {
-        return false;
+        return 1;
     }
+
+    return 0;
 }
