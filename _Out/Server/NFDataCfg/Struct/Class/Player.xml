@@ -54,6 +54,11 @@
             <Col Tag="Date" Type="object"/>
             <Col Tag="BaseProperty" Type="string"/>
         </Record>
+        <Record Col="3" Desc="副本列表" Id="EctypeList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="128" Save="1" SaveInterval="0" View="0">
+            <Col Tag="EctypeID" Type="int"/>
+            <Col Tag="IsPass" Type="int"/>
+            <Col Tag="Star" Type="int"/>
+        </Record>
         <Record Col="4" Desc="怪物掉落表" Id="DropItemList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="256" Save="1" SaveInterval="0" View="0">
             <Col Tag="MonsterID" Type="object"/>
             <Col Tag="ItemID" Type="string"/>
@@ -83,7 +88,7 @@
         </Record>
     </Records>
     <Propertys>
-        <Property Desc="角色名" Id="RoleName" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="角色名" Id="Name" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
         <Property Desc="性别" Id="Sex" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="种族" Id="Race" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="阵营" Id="Camp" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
