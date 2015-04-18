@@ -22,6 +22,7 @@
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
+#include "NFComm/NFPluginModule/NFIAwardPackModule.h"
 
 class NFCPackModule
     : public NFIPackModule
@@ -118,12 +119,14 @@ protected:
     PackTableType GetPackType( const std::string& name );
     bool pack_item_type_greater( NFIDataList* elem1, NFIDataList* elem2 );
     bool can_normal_pack_item_swap( const NFIDENTID& self, NF_SHARE_PTR<NFIRecord> pOriginRecord, NF_SHARE_PTR<NFIRecord> pTargetRecord, const int origin, const int target ); // 判断是否可以交换普通背包物品(装备特殊判断)
-
+    
+    // 计算掉落包
+    bool ComputerDropPack(NF_SHARE_PTR<NFIObject> pObject, const NFIDENTID identMonster,  const std::string& strDropPackConfig);
+    
+    // 添加掉落道具
+    void AddDropItem(const NFIDENTID& self, const NFIDataList& var);
+    int OnObjectBeKilled(const NFIDENTID& self, const int nEventID, const NFIDataList& var);
 private:
-    //char* mstrPackTableName;
-    //char* mstrViewTableName;
-    //   char* mstrBuyBackPackTableName;
-
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
@@ -131,6 +134,7 @@ private:
     NFISceneProcessModule* m_pSceneProcessModule;
     NFIPropertyModule* m_pPropertyModule;
     NFIUUIDModule* m_pUUIDModule;
+    NFIAwardPackModule* m_pAwardPackModule;
 };
 
 
