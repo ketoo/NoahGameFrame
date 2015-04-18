@@ -346,4 +346,24 @@ inline unsigned long NF_GetTickCount()
 #define NF_SHARE_PTR boost::shared_ptr
 #endif
 
+
+#include <string>
+#include <boost/lexical_cast.hpp>
+template<typename DTYPE>
+bool NF_StrTo(const std::string& strValue, DTYPE& nValue)
+{
+    try
+    {
+        nValue = boost::lexical_cast<DTYPE>(strValue);
+        return true;
+    }
+    catch (...)
+    {
+        return false;
+    }
+
+    return false;
+}
+
+
 #endif

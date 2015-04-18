@@ -32,6 +32,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* ReqCreateItem_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqCreateItem_reflection_ = NULL;
+const ::google::protobuf::Descriptor* ReqBuildOperate_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ReqBuildOperate_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* ESLGBuildingType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ESLGBuildingSubType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ESLGArmyType_descriptor_ = NULL;
@@ -118,6 +121,23 @@ void protobuf_AssignDesc_NFSLGDefine_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqCreateItem));
+  ReqBuildOperate_descriptor_ = file->message_type(4);
+  static const int ReqBuildOperate_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqBuildOperate, row_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqBuildOperate, object_guid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqBuildOperate, functype_),
+  };
+  ReqBuildOperate_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ReqBuildOperate_descriptor_,
+      ReqBuildOperate::default_instance_,
+      ReqBuildOperate_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqBuildOperate, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqBuildOperate, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ReqBuildOperate));
   ESLGBuildingType_descriptor_ = file->enum_type(0);
   ESLGBuildingSubType_descriptor_ = file->enum_type(1);
   ESLGArmyType_descriptor_ = file->enum_type(2);
@@ -143,6 +163,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
     ReqUpBuildLv_descriptor_, &ReqUpBuildLv::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqCreateItem_descriptor_, &ReqCreateItem::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ReqBuildOperate_descriptor_, &ReqBuildOperate::default_instance());
 }
 
 }  // namespace
@@ -156,6 +178,8 @@ void protobuf_ShutdownFile_NFSLGDefine_2eproto() {
   delete ReqUpBuildLv_reflection_;
   delete ReqCreateItem::default_instance_;
   delete ReqCreateItem_reflection_;
+  delete ReqBuildOperate::default_instance_;
+  delete ReqBuildOperate_reflection_;
 }
 
 void protobuf_AddDesc_NFSLGDefine_2eproto() {
@@ -175,61 +199,66 @@ void protobuf_AddDesc_NFSLGDefine_2eproto() {
     "ldLv\022\013\n\003row\030\001 \001(\005\022!\n\013object_guid\030\002 \002(\0132\014"
     ".NFMsg.Ident\"a\n\rReqCreateItem\022\013\n\003row\030\001 \001"
     "(\005\022!\n\013object_guid\030\002 \002(\0132\014.NFMsg.Ident\022\021\n"
-    "\tconfig_id\030\003 \002(\t\022\r\n\005count\030\004 \002(\005*\201\001\n\020ESLG"
-    "BuildingType\022\014\n\010EBT_BASE\020\000\022\017\n\013EBT_DEFENS"
-    "E\020\001\022\014\n\010EBT_ARMY\020\002\022\020\n\014EBT_RESOURCE\020\003\022\r\n\tE"
-    "BT_GUILD\020\004\022\016\n\nEBT_TEMPLE\020\005\022\017\n\013EBT_NUCLEA"
-    "R\020\006*\200\010\n\023ESLGBuildingSubType\022\r\n\tEBST_HALL"
-    "\020\000\022\021\n\rEBST_MASHROOM\020F\022\r\n\tEBST_BUSH\020G\022\021\n\r"
-    "EBST_BRANCH_1\020H\022\021\n\rEBST_BRANCH_2\020I\022\021\n\rEB"
-    "ST_BRANCH_3\020J\022\017\n\013EBST_TREE_1\020K\022\017\n\013EBST_T"
-    "REE_2\020L\022\017\n\013EBST_TREE_3\020M\022\020\n\014EBST_STONE_1"
-    "\020N\022\020\n\014EBST_STONE_2\020O\022\020\n\014EBST_STONE_3\020P\022\r"
-    "\n\tEBST_TOMB\020Q\022\022\n\016EBST_DARK_TOMB\020R\022\016\n\nEBS"
-    "T_PYXIS\020S\022\016\n\nEBST_TORCH\020T\022\024\n\020EBST__WHITE"
-    "_FLAG\020U\022\017\n\013EBST_CANNON\020e\022\017\n\013EBST_MORTAR\020"
-    "f\022\025\n\021EBST_ARCHER_TOWER\020g\022\025\n\021EBST_WIZARD_"
-    "TOWER\020h\022\022\n\016EBST_AIR_TOWER\020i\022\024\n\020EBST_TESL"
-    "A_TOWER\020j\022\r\n\tEBST_WALL\020k\022\016\n\nEBST_X_BOW\020l"
-    "\022\r\n\tEBST_BOMB\020m\022\021\n\rEBST_AIR_BOMB\020n\022\024\n\020EB"
-    "ST_SPRING_TRAP\020o\022\023\n\017EBST_HELL_TOWER\020p\022\016\n"
-    "\tEBST_CAMP\020\310\001\022\021\n\014EBST_BARRACK\020\311\001\022\025\n\020EBST"
-    "_TEC_FACTORY\020\312\001\022\026\n\021EBST_DARK_BARRACK\020\313\001\022"
-    "\026\n\021EBST_DRUG_FACTORY\020\314\001\022\024\n\017EBST_KING_ALT"
-    "AR\020\315\001\022\025\n\020EBST_QUEEN_ALTAR\020\316\001\022\030\n\023EBST_GOL"
-    "D_COLLECTOR\020\254\002\022\026\n\021EBST_GOLD_STORAGE\020\255\002\022\031"
-    "\n\024EBST_STONE_COLLECTOR\020\256\002\022\027\n\022EBST_STONE_"
-    "STORAGE\020\257\002\022\031\n\024EBST_STEEL_COLLECTOR\020\260\002\022\027\n"
-    "\022EBST_STEEL_STORAGE\020\261\002\022\033\n\026EBST_DIAMOND_C"
-    "OLLECTOR\020\262\002\022\031\n\024EBST_DIAMOND_STORAGE\020\263\002\022\r"
-    "\n\010EBST_HUT\020\264\002\022\026\n\021EBST_GUILD_CASTLE\020\220\003\022\025\n"
-    "\020EBST_GUILD_CRYPT\020\221\003\022\025\n\020EBST_ELEMENT_LAB"
-    "\020\364\003\022\031\n\024EBST_NUCLEAR_FACTORY\020\330\004*\370\001\n\014ESLGA"
-    "rmyType\022\017\n\013EAT_FOOTMAN\020\000\022\016\n\nEAT_ARCHER\020\001"
-    "\022\016\n\nEAT_GOBLIN\020\002\022\r\n\tEAT_GIANT\020\003\022\024\n\020EAT_W"
-    "ALL_BREAKER\020\004\022\017\n\013EAT_BALLOON\020\005\022\016\n\nEAT_HE"
-    "ALER\020\006\022\016\n\nEAT_WIZARD\020\007\022\016\n\nEAT_DRAGON\020\010\022\r"
-    "\n\tEAT_PEKKA\020\t\022\016\n\nEAT_MINION\020\024\022\021\n\rEAT_HOG"
-    "_RIDER\020\025\022\020\n\014EAT_VALKYRIE\020\026\022\r\n\tEAT_GOLEM\020"
-    "\027*\225\002\n\014ESLGFuncType\022\014\n\010EFT_INFO\020\000\022\016\n\nEFT_"
-    "BOOOST\020\001\022\r\n\tEFT_LVLUP\020\002\022\025\n\021EFT_CREATE_SO"
-    "LDER\020\003\022\024\n\020EFT_CREATE_SPEEL\020\004\022\020\n\014EFT_RESE"
-    "ARCH\020\005\022\024\n\020EFT_COLLECT_GOLD\020\006\022\025\n\021EFT_COLL"
-    "ECT_STONE\020\007\022\025\n\021EFT_COLLECT_STEEL\020\010\022\027\n\023EF"
-    "T_COLLECT_DIAMOND\020\t\022\014\n\010EFT_SELL\020\n\022\016\n\nEFT"
-    "_REPAIR\020\013\022\016\n\nEFT_CANCEL\020\014\022\016\n\nEFT_FINISH\020"
-    "\r*A\n\021ESLGBuildingState\022\014\n\010EBS_IDLE\020\000\022\r\n\t"
-    "EBS_BOOST\020\001\022\017\n\013EBS_UPGRADE\020\002", 2148);
+    "\tconfig_id\030\003 \002(\t\022\r\n\005count\030\004 \002(\005\"h\n\017ReqBu"
+    "ildOperate\022\013\n\003row\030\001 \001(\005\022!\n\013object_guid\030\002"
+    " \002(\0132\014.NFMsg.Ident\022%\n\010functype\030\003 \002(\0162\023.N"
+    "FMsg.ESLGFuncType*\201\001\n\020ESLGBuildingType\022\014"
+    "\n\010EBT_BASE\020\000\022\017\n\013EBT_DEFENSE\020\001\022\014\n\010EBT_ARM"
+    "Y\020\002\022\020\n\014EBT_RESOURCE\020\003\022\r\n\tEBT_GUILD\020\004\022\016\n\n"
+    "EBT_TEMPLE\020\005\022\017\n\013EBT_NUCLEAR\020\006*\200\010\n\023ESLGBu"
+    "ildingSubType\022\r\n\tEBST_HALL\020\000\022\021\n\rEBST_MAS"
+    "HROOM\020F\022\r\n\tEBST_BUSH\020G\022\021\n\rEBST_BRANCH_1\020"
+    "H\022\021\n\rEBST_BRANCH_2\020I\022\021\n\rEBST_BRANCH_3\020J\022"
+    "\017\n\013EBST_TREE_1\020K\022\017\n\013EBST_TREE_2\020L\022\017\n\013EBS"
+    "T_TREE_3\020M\022\020\n\014EBST_STONE_1\020N\022\020\n\014EBST_STO"
+    "NE_2\020O\022\020\n\014EBST_STONE_3\020P\022\r\n\tEBST_TOMB\020Q\022"
+    "\022\n\016EBST_DARK_TOMB\020R\022\016\n\nEBST_PYXIS\020S\022\016\n\nE"
+    "BST_TORCH\020T\022\024\n\020EBST__WHITE_FLAG\020U\022\017\n\013EBS"
+    "T_CANNON\020e\022\017\n\013EBST_MORTAR\020f\022\025\n\021EBST_ARCH"
+    "ER_TOWER\020g\022\025\n\021EBST_WIZARD_TOWER\020h\022\022\n\016EBS"
+    "T_AIR_TOWER\020i\022\024\n\020EBST_TESLA_TOWER\020j\022\r\n\tE"
+    "BST_WALL\020k\022\016\n\nEBST_X_BOW\020l\022\r\n\tEBST_BOMB\020"
+    "m\022\021\n\rEBST_AIR_BOMB\020n\022\024\n\020EBST_SPRING_TRAP"
+    "\020o\022\023\n\017EBST_HELL_TOWER\020p\022\016\n\tEBST_CAMP\020\310\001\022"
+    "\021\n\014EBST_BARRACK\020\311\001\022\025\n\020EBST_TEC_FACTORY\020\312"
+    "\001\022\026\n\021EBST_DARK_BARRACK\020\313\001\022\026\n\021EBST_DRUG_F"
+    "ACTORY\020\314\001\022\024\n\017EBST_KING_ALTAR\020\315\001\022\025\n\020EBST_"
+    "QUEEN_ALTAR\020\316\001\022\030\n\023EBST_GOLD_COLLECTOR\020\254\002"
+    "\022\026\n\021EBST_GOLD_STORAGE\020\255\002\022\031\n\024EBST_STONE_C"
+    "OLLECTOR\020\256\002\022\027\n\022EBST_STONE_STORAGE\020\257\002\022\031\n\024"
+    "EBST_STEEL_COLLECTOR\020\260\002\022\027\n\022EBST_STEEL_ST"
+    "ORAGE\020\261\002\022\033\n\026EBST_DIAMOND_COLLECTOR\020\262\002\022\031\n"
+    "\024EBST_DIAMOND_STORAGE\020\263\002\022\r\n\010EBST_HUT\020\264\002\022"
+    "\026\n\021EBST_GUILD_CASTLE\020\220\003\022\025\n\020EBST_GUILD_CR"
+    "YPT\020\221\003\022\025\n\020EBST_ELEMENT_LAB\020\364\003\022\031\n\024EBST_NU"
+    "CLEAR_FACTORY\020\330\004*\370\001\n\014ESLGArmyType\022\017\n\013EAT"
+    "_FOOTMAN\020\000\022\016\n\nEAT_ARCHER\020\001\022\016\n\nEAT_GOBLIN"
+    "\020\002\022\r\n\tEAT_GIANT\020\003\022\024\n\020EAT_WALL_BREAKER\020\004\022"
+    "\017\n\013EAT_BALLOON\020\005\022\016\n\nEAT_HEALER\020\006\022\016\n\nEAT_"
+    "WIZARD\020\007\022\016\n\nEAT_DRAGON\020\010\022\r\n\tEAT_PEKKA\020\t\022"
+    "\016\n\nEAT_MINION\020\024\022\021\n\rEAT_HOG_RIDER\020\025\022\020\n\014EA"
+    "T_VALKYRIE\020\026\022\r\n\tEAT_GOLEM\020\027*\225\002\n\014ESLGFunc"
+    "Type\022\014\n\010EFT_INFO\020\000\022\016\n\nEFT_BOOOST\020\001\022\r\n\tEF"
+    "T_LVLUP\020\002\022\025\n\021EFT_CREATE_SOLDER\020\003\022\024\n\020EFT_"
+    "CREATE_SPEEL\020\004\022\020\n\014EFT_RESEARCH\020\005\022\024\n\020EFT_"
+    "COLLECT_GOLD\020\006\022\025\n\021EFT_COLLECT_STONE\020\007\022\025\n"
+    "\021EFT_COLLECT_STEEL\020\010\022\027\n\023EFT_COLLECT_DIAM"
+    "OND\020\t\022\014\n\010EFT_SELL\020\n\022\016\n\nEFT_REPAIR\020\013\022\016\n\nE"
+    "FT_CANCEL\020\014\022\016\n\nEFT_FINISH\020\r*A\n\021ESLGBuild"
+    "ingState\022\014\n\010EBS_IDLE\020\000\022\r\n\tEBS_BOOST\020\001\022\017\n"
+    "\013EBS_UPGRADE\020\002", 2254);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFSLGDefine.proto", &protobuf_RegisterTypes);
   ReqAckBuyObjectFormShop::default_instance_ = new ReqAckBuyObjectFormShop();
   ReqAckMoveBuildObject::default_instance_ = new ReqAckMoveBuildObject();
   ReqUpBuildLv::default_instance_ = new ReqUpBuildLv();
   ReqCreateItem::default_instance_ = new ReqCreateItem();
+  ReqBuildOperate::default_instance_ = new ReqBuildOperate();
   ReqAckBuyObjectFormShop::default_instance_->InitAsDefaultInstance();
   ReqAckMoveBuildObject::default_instance_->InitAsDefaultInstance();
   ReqUpBuildLv::default_instance_->InitAsDefaultInstance();
   ReqCreateItem::default_instance_->InitAsDefaultInstance();
+  ReqBuildOperate::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFSLGDefine_2eproto);
 }
 
@@ -1705,6 +1734,309 @@ void ReqCreateItem::Swap(ReqCreateItem* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = ReqCreateItem_descriptor_;
   metadata.reflection = ReqCreateItem_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ReqBuildOperate::kRowFieldNumber;
+const int ReqBuildOperate::kObjectGuidFieldNumber;
+const int ReqBuildOperate::kFunctypeFieldNumber;
+#endif  // !_MSC_VER
+
+ReqBuildOperate::ReqBuildOperate()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void ReqBuildOperate::InitAsDefaultInstance() {
+  object_guid_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+}
+
+ReqBuildOperate::ReqBuildOperate(const ReqBuildOperate& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ReqBuildOperate::SharedCtor() {
+  _cached_size_ = 0;
+  row_ = 0;
+  object_guid_ = NULL;
+  functype_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ReqBuildOperate::~ReqBuildOperate() {
+  SharedDtor();
+}
+
+void ReqBuildOperate::SharedDtor() {
+  if (this != default_instance_) {
+    delete object_guid_;
+  }
+}
+
+void ReqBuildOperate::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ReqBuildOperate::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ReqBuildOperate_descriptor_;
+}
+
+const ReqBuildOperate& ReqBuildOperate::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFSLGDefine_2eproto();
+  return *default_instance_;
+}
+
+ReqBuildOperate* ReqBuildOperate::default_instance_ = NULL;
+
+ReqBuildOperate* ReqBuildOperate::New() const {
+  return new ReqBuildOperate;
+}
+
+void ReqBuildOperate::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    row_ = 0;
+    if (has_object_guid()) {
+      if (object_guid_ != NULL) object_guid_->::NFMsg::Ident::Clear();
+    }
+    functype_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ReqBuildOperate::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int32 row = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &row_)));
+          set_has_row();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_object_guid;
+        break;
+      }
+
+      // required .NFMsg.Ident object_guid = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_object_guid:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_object_guid()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(24)) goto parse_functype;
+        break;
+      }
+
+      // required .NFMsg.ESLGFuncType functype = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_functype:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::NFMsg::ESLGFuncType_IsValid(value)) {
+            set_functype(static_cast< ::NFMsg::ESLGFuncType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(3, value);
+          }
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void ReqBuildOperate::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // optional int32 row = 1;
+  if (has_row()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->row(), output);
+  }
+
+  // required .NFMsg.Ident object_guid = 2;
+  if (has_object_guid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->object_guid(), output);
+  }
+
+  // required .NFMsg.ESLGFuncType functype = 3;
+  if (has_functype()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      3, this->functype(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* ReqBuildOperate::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // optional int32 row = 1;
+  if (has_row()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->row(), target);
+  }
+
+  // required .NFMsg.Ident object_guid = 2;
+  if (has_object_guid()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->object_guid(), target);
+  }
+
+  // required .NFMsg.ESLGFuncType functype = 3;
+  if (has_functype()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      3, this->functype(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int ReqBuildOperate::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional int32 row = 1;
+    if (has_row()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->row());
+    }
+
+    // required .NFMsg.Ident object_guid = 2;
+    if (has_object_guid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->object_guid());
+    }
+
+    // required .NFMsg.ESLGFuncType functype = 3;
+    if (has_functype()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->functype());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ReqBuildOperate::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ReqBuildOperate* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ReqBuildOperate*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ReqBuildOperate::MergeFrom(const ReqBuildOperate& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_row()) {
+      set_row(from.row());
+    }
+    if (from.has_object_guid()) {
+      mutable_object_guid()->::NFMsg::Ident::MergeFrom(from.object_guid());
+    }
+    if (from.has_functype()) {
+      set_functype(from.functype());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ReqBuildOperate::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqBuildOperate::CopyFrom(const ReqBuildOperate& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqBuildOperate::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000006) != 0x00000006) return false;
+
+  if (has_object_guid()) {
+    if (!this->object_guid().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void ReqBuildOperate::Swap(ReqBuildOperate* other) {
+  if (other != this) {
+    std::swap(row_, other->row_);
+    std::swap(object_guid_, other->object_guid_);
+    std::swap(functype_, other->functype_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ReqBuildOperate::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ReqBuildOperate_descriptor_;
+  metadata.reflection = ReqBuildOperate_reflection_;
   return metadata;
 }
 
