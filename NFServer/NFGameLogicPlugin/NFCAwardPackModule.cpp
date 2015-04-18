@@ -15,7 +15,6 @@ bool NFCAwardPackModule::Init()
 
 bool NFCAwardPackModule::Shut()
 {
-
     return true;
 }
 
@@ -63,68 +62,52 @@ bool NFCAwardPackModule::LoadAwardPackConfig()
 
     for (rapidxml::xml_node<>* pPackNode = root->first_node(); pPackNode != NULL; pPackNode = pPackNode->next_sibling())
     {
-        const char* strPackName = pPackNode->first_attribute("ID")->value();
         NF_SHARE_PTR<AwardBag> pAwardBag = NF_SHARE_PTR<AwardBag>(NF_NEW AwardBag());
-
-        int nValue = 0;
-        if (!NF_StrTo(pPackNode->first_attribute("ID_Random")->value(), nValue))
-        {
-            NFASSERT(0,"NF_STRTO", __FILE__, __FUNCTION__);
-        }
-        pAwardBag->bRandom = nValue;
+        pAwardBag->strBagID = pPackNode->first_attribute("ID")->value();
 
         if(!NF_StrTo(pPackNode->first_attribute("ID_PackRate")->value(), pAwardBag->nPackRate))
         {
              NFASSERT(0,"NF_STRTO", __FILE__, __FUNCTION__);
         }
 
-        if (strcmp(strPackName, "") == 0)
+        if(!NF_StrTo(pPackNode->first_attribute("ID_PackRate")->value(), pAwardBag->nPackRate))
         {
-            m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), strPackName, "This is empty", __FUNCTION__, __LINE__);
+            NFASSERT(0,"NF_STRTO", __FILE__, __FUNCTION__);
+        }
+
+        if (!NF_StrTo(pPackNode->first_attribute("ID_Count")->value(), pAwardBag->nCount))
+        {
+            NFASSERT(0,"NF_STRTO", __FILE__, __FUNCTION__);
+        }
+
+        if (pAwardBag->strBagID.empty())
+        {
+            m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), pAwardBag->strBagID, "This is empty", __FUNCTION__, __LINE__);
            NFASSERT(0,"EMPTY PACK", __FILE__, __FUNCTION__); 
         }
 
-        mtAwardPack.AddElement(strPackName, pAwardBag);
+        mtAwardPack.AddElement(pAwardBag->strBagID, pAwardBag);
 
         NFUINT32 nTotalRate = 0;
         for (rapidxml::xml_node<>* pPropertyItem = pPackNode->first_node(); pPropertyItem != NULL; pPropertyItem = pPropertyItem->next_sibling())
         {
-            const char* strItemIDValue = pPropertyItem->first_attribute("ItemID")->value();
-            const char* strCountValue = pPropertyItem->first_attribute("Count")->value();
+            NF_SHARE_PTR<AwardItem> pAwardItem =  NF_SHARE_PTR<AwardItem>(NF_NEW(AwardItem));
+
+            pAwardItem->strConfigID = pPropertyItem->first_attribute("ItemID")->value();
+            pAwardItem->nCount = boost::lexical_cast<int>(pPropertyItem->first_attribute("Count")->value());
             rapidxml::xml_attribute<char>* pRateAttribute = pPropertyItem->first_attribute("Rate");
             rapidxml::xml_attribute<char>* pTypeAttribute = pPropertyItem->first_attribute("Type");
 
-            if (!m_pElementInfoModule->ExistElement(strItemIDValue))
+            if (!m_pElementInfoModule->ExistElement(pAwardItem->strConfigID))
             {
-				NFASSERT(0, strItemIDValue, __FILE__, __FUNCTION__);
+				NFASSERT(0, pAwardItem->strConfigID, __FILE__, __FUNCTION__);
                 return false;
             }
 
-            NF_SHARE_PTR<AwardItem> pAwardItem =  NF_SHARE_PTR<AwardItem>(NF_NEW(AwardItem));
-            pAwardItem->strConfigID = strItemIDValue;
-
-            NFCDataList Var;
-            Var.Split(strCountValue, ",");
-            if (Var.GetCount() == 0)
+            if (pAwardItem->nCount <= 0)
             {
+                NFASSERT(0, "item count invalid", __FILE__, __FUNCTION__);
                 return false;
-            }
-
-            if (!NF_StrTo(Var.String(0),  pAwardItem->nCount))
-			{
-				NFASSERT(0, strItemIDValue, __FILE__, __FUNCTION__);
-				return false;
-			}
-
-            if (Var.GetCount() == 2)
-            {
-                NF_StrTo(Var.String(1),  pAwardItem->nMaxCount);
-
-                pAwardItem->nMaxCount++;                        //保证值域为 [n,nMax + 1)
-                if (pAwardItem->nMaxCount > pAwardItem->nCount)
-                {
-                    pAwardItem->bRandomCount = true;
-                }
             }
 
             if (NULL != pRateAttribute)
@@ -134,7 +117,7 @@ bool NFCAwardPackModule::LoadAwardPackConfig()
                     NFASSERT(0, "rate error", __FILE__, __FUNCTION__);
                 }
 
-                nTotalRate += pAwardItem->nRate;
+                pAwardBag->nTotalRate += pAwardItem->nRate;
             }
 
             if (pTypeAttribute != NULL)
@@ -144,14 +127,11 @@ bool NFCAwardPackModule::LoadAwardPackConfig()
 
             pAwardBag->xAwardItemList.Add(pAwardItem);
         }
-
-        pAwardBag->nTotalRate = nTotalRate;
     }
 
     return true;
 }
 
-// TODO::::邮件类型就不能加个默认0吗？？？？ WTF
 bool NFCAwardPackModule::DoAward(const NFIDENTID self, const std::string& strPack, const int nMailType, NFIDataList& varItemList, NFIDataList& varCountList)
 {
     // 不发邮件的情况下才查找Object
@@ -165,7 +145,7 @@ bool NFCAwardPackModule::DoAward(const NFIDENTID self, const std::string& strPac
     NF_SHARE_PTR<AwardBag> pAwardBag = mtAwardPack.GetElement(strPack);
     if (NULL == pAwardBag)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strPack, "null awardpack", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strPack, "cannot find this award pack", __FUNCTION__, __LINE__);
         return false;
     }
 
@@ -220,41 +200,8 @@ bool NFCAwardPackModule::DoAward(const NFIDENTID self, const std::string& strPac
         {
         case NFMsg::AWARD_TYPE_NORMAL:
             {
-                if (pAwardItem->bRandomCount == true)
-                {
-                    NFCDataList xRandItemCount;
-                    m_pKernelModule->Random(pAwardItem->nCount, pAwardItem->nMaxCount, 1, xRandItemCount);
-
-                    int nCount = xRandItemCount.Int(0);
-                    if (IsEquipItem(self, pAwardItem->strConfigID))
-                    {
-                        nCount += nCount * fEquipItemRatio;
-                    }
-                    else
-                    {
-                        nCount += nCount * fNoneItemRatio;
-                    }
-
-                    m_pPackModule->CreateItem(self, pAwardItem->strConfigID, EGIET_NONE, nCount);
-                    nItemCount = nCount;
-
-                }
-                else
-                {
-                    int nCount = pAwardItem->nCount;
-                    if (IsEquipItem(self, pAwardItem->strConfigID))
-                    {
-                        nCount += nCount * fEquipItemRatio;
-                    }
-                    else
-                    {
-                        nCount += nCount * fNoneItemRatio;
-                    }
-
-                    m_pPackModule->CreateItem(self, pAwardItem->strConfigID, EGIET_NONE, nCount);
-                    nItemCount = nCount;
-                }
-
+                m_pPackModule->CreateItem(self, pAwardItem->strConfigID, EGIET_NONE, pAwardItem->nCount);
+                nItemCount = pAwardItem->nCount;
             }
             break;
 
@@ -277,11 +224,6 @@ bool NFCAwardPackModule::DoAward(const NFIDENTID self, const std::string& strPac
             break;
         }
     }
-
-    //if (nMailType != NFDefine::Mail_None)
-    //{
-    //    m_pMailModule->SendMail(self, nMailType, xMailVar);
-    //}
 
     return true;
 }

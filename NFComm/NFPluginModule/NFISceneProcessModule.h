@@ -25,7 +25,7 @@ class NFISceneProcessModule
 {
 
 public:
-
+    virtual bool IsCloneScene(const int nSceneID) = 0;
     virtual E_SCENE_TYPE GetCloneSceneType(const int nContainerID) = 0;
 };
 
