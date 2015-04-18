@@ -100,10 +100,10 @@ int NFCLevelModule::OnObjectClassEvent( const NFIDENTID& self, const std::string
     if ( strClassName == "Player"
          && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
     {
+
     }
 
-    if ( strClassName == "NPC"
-         && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
+    if ( strClassName == "NPC" && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
     {
         m_pEventProcessModule->AddEventCallBack( self, NFED_ON_OBJECT_BE_KILLED, this, &NFCLevelModule::OnObjectBeKilled );
     }
