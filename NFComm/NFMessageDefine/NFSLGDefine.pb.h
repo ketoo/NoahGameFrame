@@ -39,6 +39,7 @@ class ReqAckBuyObjectFormShop;
 class ReqAckMoveBuildObject;
 class ReqUpBuildLv;
 class ReqCreateItem;
+class ReqBuildOperate;
 
 enum ESLGBuildingType {
   EBT_BASE = 0,
@@ -666,6 +667,110 @@ class ReqCreateItem : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static ReqCreateItem* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class ReqBuildOperate : public ::google::protobuf::Message {
+ public:
+  ReqBuildOperate();
+  virtual ~ReqBuildOperate();
+
+  ReqBuildOperate(const ReqBuildOperate& from);
+
+  inline ReqBuildOperate& operator=(const ReqBuildOperate& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqBuildOperate& default_instance();
+
+  void Swap(ReqBuildOperate* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqBuildOperate* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqBuildOperate& from);
+  void MergeFrom(const ReqBuildOperate& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 row = 1;
+  inline bool has_row() const;
+  inline void clear_row();
+  static const int kRowFieldNumber = 1;
+  inline ::google::protobuf::int32 row() const;
+  inline void set_row(::google::protobuf::int32 value);
+
+  // required .NFMsg.Ident object_guid = 2;
+  inline bool has_object_guid() const;
+  inline void clear_object_guid();
+  static const int kObjectGuidFieldNumber = 2;
+  inline const ::NFMsg::Ident& object_guid() const;
+  inline ::NFMsg::Ident* mutable_object_guid();
+  inline ::NFMsg::Ident* release_object_guid();
+  inline void set_allocated_object_guid(::NFMsg::Ident* object_guid);
+
+  // required .NFMsg.ESLGFuncType functype = 3;
+  inline bool has_functype() const;
+  inline void clear_functype();
+  static const int kFunctypeFieldNumber = 3;
+  inline ::NFMsg::ESLGFuncType functype() const;
+  inline void set_functype(::NFMsg::ESLGFuncType value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqBuildOperate)
+ private:
+  inline void set_has_row();
+  inline void clear_has_row();
+  inline void set_has_object_guid();
+  inline void clear_has_object_guid();
+  inline void set_has_functype();
+  inline void clear_has_functype();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* object_guid_;
+  ::google::protobuf::int32 row_;
+  int functype_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFSLGDefine_2eproto();
+  friend void protobuf_AssignDesc_NFSLGDefine_2eproto();
+  friend void protobuf_ShutdownFile_NFSLGDefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqBuildOperate* default_instance_;
+};
 // ===================================================================
 
 
@@ -1157,6 +1262,93 @@ inline ::google::protobuf::int32 ReqCreateItem::count() const {
 inline void ReqCreateItem::set_count(::google::protobuf::int32 value) {
   set_has_count();
   count_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqBuildOperate
+
+// optional int32 row = 1;
+inline bool ReqBuildOperate::has_row() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqBuildOperate::set_has_row() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqBuildOperate::clear_has_row() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqBuildOperate::clear_row() {
+  row_ = 0;
+  clear_has_row();
+}
+inline ::google::protobuf::int32 ReqBuildOperate::row() const {
+  return row_;
+}
+inline void ReqBuildOperate::set_row(::google::protobuf::int32 value) {
+  set_has_row();
+  row_ = value;
+}
+
+// required .NFMsg.Ident object_guid = 2;
+inline bool ReqBuildOperate::has_object_guid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqBuildOperate::set_has_object_guid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqBuildOperate::clear_has_object_guid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqBuildOperate::clear_object_guid() {
+  if (object_guid_ != NULL) object_guid_->::NFMsg::Ident::Clear();
+  clear_has_object_guid();
+}
+inline const ::NFMsg::Ident& ReqBuildOperate::object_guid() const {
+  return object_guid_ != NULL ? *object_guid_ : *default_instance_->object_guid_;
+}
+inline ::NFMsg::Ident* ReqBuildOperate::mutable_object_guid() {
+  set_has_object_guid();
+  if (object_guid_ == NULL) object_guid_ = new ::NFMsg::Ident;
+  return object_guid_;
+}
+inline ::NFMsg::Ident* ReqBuildOperate::release_object_guid() {
+  clear_has_object_guid();
+  ::NFMsg::Ident* temp = object_guid_;
+  object_guid_ = NULL;
+  return temp;
+}
+inline void ReqBuildOperate::set_allocated_object_guid(::NFMsg::Ident* object_guid) {
+  delete object_guid_;
+  object_guid_ = object_guid;
+  if (object_guid) {
+    set_has_object_guid();
+  } else {
+    clear_has_object_guid();
+  }
+}
+
+// required .NFMsg.ESLGFuncType functype = 3;
+inline bool ReqBuildOperate::has_functype() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqBuildOperate::set_has_functype() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqBuildOperate::clear_has_functype() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqBuildOperate::clear_functype() {
+  functype_ = 0;
+  clear_has_functype();
+}
+inline ::NFMsg::ESLGFuncType ReqBuildOperate::functype() const {
+  return static_cast< ::NFMsg::ESLGFuncType >(functype_);
+}
+inline void ReqBuildOperate::set_functype(::NFMsg::ESLGFuncType value) {
+  assert(::NFMsg::ESLGFuncType_IsValid(value));
+  set_has_functype();
+  functype_ = value;
 }
 
 
