@@ -187,11 +187,12 @@ enum EGameMsgID {
   EGMI_REQ_MOVE_BUILD_OBJECT = 10002,
   EGMI_ACK_MOVE_BUILD_OBJECT = 10003,
   EGMI_REQ_UP_BUILD_LVL = 10101,
-  EGMI_REQ_CREATE_ITEM = 10102
+  EGMI_REQ_CREATE_ITEM = 10102,
+  EGMI_REQ_BUILD_OPERATE = 10103
 };
 bool EGameMsgID_IsValid(int value);
 const EGameMsgID EGameMsgID_MIN = EGMI_UNKNOW;
-const EGameMsgID EGameMsgID_MAX = EGMI_REQ_CREATE_ITEM;
+const EGameMsgID EGameMsgID_MAX = EGMI_REQ_BUILD_OPERATE;
 const int EGameMsgID_ARRAYSIZE = EGameMsgID_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EGameMsgID_descriptor();
@@ -203,6 +204,25 @@ inline bool EGameMsgID_Parse(
     const ::std::string& name, EGameMsgID* value) {
   return ::google::protobuf::internal::ParseNamedEnum<EGameMsgID>(
     EGameMsgID_descriptor(), name, value);
+}
+enum EAwardType {
+  AWARD_TYPE_NORMAL = 0,
+  AWARD_TYPE_HERO = 1
+};
+bool EAwardType_IsValid(int value);
+const EAwardType EAwardType_MIN = AWARD_TYPE_NORMAL;
+const EAwardType EAwardType_MAX = AWARD_TYPE_HERO;
+const int EAwardType_ARRAYSIZE = EAwardType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* EAwardType_descriptor();
+inline const ::std::string& EAwardType_Name(EAwardType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EAwardType_descriptor(), value);
+}
+inline bool EAwardType_Parse(
+    const ::std::string& name, EAwardType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EAwardType>(
+    EAwardType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -228,6 +248,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameEventCode>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameMsgID>() {
   return ::NFMsg::EGameMsgID_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EAwardType>() {
+  return ::NFMsg::EAwardType_descriptor();
 }
 
 }  // namespace google

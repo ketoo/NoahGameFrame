@@ -439,7 +439,7 @@ void protobuf_AssignDesc_NFFleetingDefine_2eproto() {
   static const int AudioEvents_Audio_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AudioEvents_Audio, eventtime_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AudioEvents_Audio, eventtype_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AudioEvents_Audio, targetname_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AudioEvents_Audio, audioname_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AudioEvents_Audio, methodcall_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AudioEvents_Audio, methodparam_),
   };
@@ -474,7 +474,7 @@ void protobuf_AssignDesc_NFFleetingDefine_2eproto() {
   static const int GlobalSpeeds_Speed_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GlobalSpeeds_Speed, eventtime_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GlobalSpeeds_Speed, eventtype_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GlobalSpeeds_Speed, speed_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GlobalSpeeds_Speed, speedvalue_),
   };
   GlobalSpeeds_Speed_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -715,25 +715,25 @@ void protobuf_AddDesc_NFFleetingDefine_2eproto() {
     "\n\tEventType\030\002 \002(\0162\031.NFFS.TrailEvents.TEE"
     "TYPE\022\022\n\nTargetName\030\003 \002(\t\022\022\n\nMethodCall\030\004"
     " \002(\t\022\023\n\013MethodParam\030\005 \002(\t\"\036\n\007TEETYPE\022\010\n\004"
-    "INIT\020\000\022\t\n\005FINAL\020\001\"\342\001\n\013AudioEvents\022+\n\nxAu"
-    "dioList\030\001 \003(\0132\027.NFFS.AudioEvents.Audio\032\205"
+    "INIT\020\000\022\t\n\005FINAL\020\001\"\341\001\n\013AudioEvents\022+\n\nxAu"
+    "dioList\030\001 \003(\0132\027.NFFS.AudioEvents.Audio\032\204"
     "\001\n\005Audio\022\021\n\tEventTime\030\001 \002(\002\022,\n\tEventType"
-    "\030\002 \002(\0162\031.NFFS.AudioEvents.AEETYPE\022\022\n\nTar"
-    "getName\030\003 \002(\t\022\022\n\nMethodCall\030\004 \002(\t\022\023\n\013Met"
-    "hodParam\030\005 \002(\t\"\036\n\007AEETYPE\022\010\n\004INIT\020\000\022\t\n\005F"
-    "INAL\020\001\"\266\001\n\014GlobalSpeeds\022,\n\nxSpeedList\030\001 "
-    "\003(\0132\030.NFFS.GlobalSpeeds.Speed\032X\n\005Speed\022\021"
-    "\n\tEventTime\030\001 \002(\002\022-\n\tEventType\030\002 \002(\0162\032.N"
-    "FFS.GlobalSpeeds.EGSTYPE\022\r\n\005Speed\030\003 \002(\002\""
-    "\036\n\007EGSTYPE\022\010\n\004INIT\020\000\022\t\n\005FINAL\020\001\"\273\002\n\014Anim"
-    "atorFlys\022(\n\010xFlyList\030\001 \003(\0132\026.NFFS.Animat"
-    "orFlys.Fly\032\247\001\n\003Fly\022\021\n\tEventTime\030\001 \002(\002\022-\n"
-    "\tEventType\030\002 \002(\0162\032.NFFS.AnimatorFlys.EAF"
-    "Type\022\017\n\007MoveDis\030\003 \002(\002\022\020\n\010MoveTime\030\004 \002(\002\022"
-    "\022\n\nMoveTopDis\030\005 \002(\002\022\022\n\nMethodCall\030\006 \002(\t\022"
-    "\023\n\013MethodParam\030\007 \002(\t\"W\n\007EAFType\022\020\n\014EAFT_"
-    "FORWARD\020\000\022\r\n\tEAFT_BACK\020\001\022\r\n\tEAFT_LEFT\020\002\022"
-    "\016\n\nEAFT_RIGHT\020\003\022\014\n\010EAFT_TOP\020\004", 3789);
+    "\030\002 \002(\0162\031.NFFS.AudioEvents.AEETYPE\022\021\n\tAud"
+    "ioName\030\003 \002(\t\022\022\n\nMethodCall\030\004 \002(\t\022\023\n\013Meth"
+    "odParam\030\005 \002(\t\"\036\n\007AEETYPE\022\010\n\004INIT\020\000\022\t\n\005FI"
+    "NAL\020\001\"\273\001\n\014GlobalSpeeds\022,\n\nxSpeedList\030\001 \003"
+    "(\0132\030.NFFS.GlobalSpeeds.Speed\032]\n\005Speed\022\021\n"
+    "\tEventTime\030\001 \002(\002\022-\n\tEventType\030\002 \002(\0162\032.NF"
+    "FS.GlobalSpeeds.EGSTYPE\022\022\n\nSpeedValue\030\003 "
+    "\002(\002\"\036\n\007EGSTYPE\022\010\n\004INIT\020\000\022\t\n\005FINAL\020\001\"\273\002\n\014"
+    "AnimatorFlys\022(\n\010xFlyList\030\001 \003(\0132\026.NFFS.An"
+    "imatorFlys.Fly\032\247\001\n\003Fly\022\021\n\tEventTime\030\001 \002("
+    "\002\022-\n\tEventType\030\002 \002(\0162\032.NFFS.AnimatorFlys"
+    ".EAFType\022\017\n\007MoveDis\030\003 \002(\002\022\020\n\010MoveTime\030\004 "
+    "\002(\002\022\022\n\nMoveTopDis\030\005 \002(\002\022\022\n\nMethodCall\030\006 "
+    "\002(\t\022\023\n\013MethodParam\030\007 \002(\t\"W\n\007EAFType\022\020\n\014E"
+    "AFT_FORWARD\020\000\022\r\n\tEAFT_BACK\020\001\022\r\n\tEAFT_LEF"
+    "T\020\002\022\016\n\nEAFT_RIGHT\020\003\022\014\n\010EAFT_TOP\020\004", 3793);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFFleetingDefine.proto", &protobuf_RegisterTypes);
   FSVector3::default_instance_ = new FSVector3();
@@ -7538,7 +7538,7 @@ const int AudioEvents::AEETYPE_ARRAYSIZE;
 #ifndef _MSC_VER
 const int AudioEvents_Audio::kEventTimeFieldNumber;
 const int AudioEvents_Audio::kEventTypeFieldNumber;
-const int AudioEvents_Audio::kTargetNameFieldNumber;
+const int AudioEvents_Audio::kAudioNameFieldNumber;
 const int AudioEvents_Audio::kMethodCallFieldNumber;
 const int AudioEvents_Audio::kMethodParamFieldNumber;
 #endif  // !_MSC_VER
@@ -7561,7 +7561,7 @@ void AudioEvents_Audio::SharedCtor() {
   _cached_size_ = 0;
   eventtime_ = 0;
   eventtype_ = 0;
-  targetname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  audioname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -7572,8 +7572,8 @@ AudioEvents_Audio::~AudioEvents_Audio() {
 }
 
 void AudioEvents_Audio::SharedDtor() {
-  if (targetname_ != &::google::protobuf::internal::kEmptyString) {
-    delete targetname_;
+  if (audioname_ != &::google::protobuf::internal::kEmptyString) {
+    delete audioname_;
   }
   if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
     delete methodcall_;
@@ -7610,9 +7610,9 @@ void AudioEvents_Audio::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     eventtime_ = 0;
     eventtype_ = 0;
-    if (has_targetname()) {
-      if (targetname_ != &::google::protobuf::internal::kEmptyString) {
-        targetname_->clear();
+    if (has_audioname()) {
+      if (audioname_ != &::google::protobuf::internal::kEmptyString) {
+        audioname_->clear();
       }
     }
     if (has_methodcall()) {
@@ -7668,19 +7668,19 @@ bool AudioEvents_Audio::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(26)) goto parse_TargetName;
+        if (input->ExpectTag(26)) goto parse_AudioName;
         break;
       }
 
-      // required string TargetName = 3;
+      // required string AudioName = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_TargetName:
+         parse_AudioName:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_targetname()));
+                input, this->mutable_audioname()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->targetname().data(), this->targetname().length(),
+            this->audioname().data(), this->audioname().length(),
             ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
@@ -7752,13 +7752,13 @@ void AudioEvents_Audio::SerializeWithCachedSizes(
       2, this->eventtype(), output);
   }
 
-  // required string TargetName = 3;
-  if (has_targetname()) {
+  // required string AudioName = 3;
+  if (has_audioname()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->targetname().data(), this->targetname().length(),
+      this->audioname().data(), this->audioname().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      3, this->targetname(), output);
+      3, this->audioname(), output);
   }
 
   // required string MethodCall = 4;
@@ -7798,14 +7798,14 @@ void AudioEvents_Audio::SerializeWithCachedSizes(
       2, this->eventtype(), target);
   }
 
-  // required string TargetName = 3;
-  if (has_targetname()) {
+  // required string AudioName = 3;
+  if (has_audioname()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->targetname().data(), this->targetname().length(),
+      this->audioname().data(), this->audioname().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->targetname(), target);
+        3, this->audioname(), target);
   }
 
   // required string MethodCall = 4;
@@ -7850,11 +7850,11 @@ int AudioEvents_Audio::ByteSize() const {
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->eventtype());
     }
 
-    // required string TargetName = 3;
-    if (has_targetname()) {
+    // required string AudioName = 3;
+    if (has_audioname()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->targetname());
+          this->audioname());
     }
 
     // required string MethodCall = 4;
@@ -7904,8 +7904,8 @@ void AudioEvents_Audio::MergeFrom(const AudioEvents_Audio& from) {
     if (from.has_eventtype()) {
       set_eventtype(from.eventtype());
     }
-    if (from.has_targetname()) {
-      set_targetname(from.targetname());
+    if (from.has_audioname()) {
+      set_audioname(from.audioname());
     }
     if (from.has_methodcall()) {
       set_methodcall(from.methodcall());
@@ -7939,7 +7939,7 @@ void AudioEvents_Audio::Swap(AudioEvents_Audio* other) {
   if (other != this) {
     std::swap(eventtime_, other->eventtime_);
     std::swap(eventtype_, other->eventtype_);
-    std::swap(targetname_, other->targetname_);
+    std::swap(audioname_, other->audioname_);
     std::swap(methodcall_, other->methodcall_);
     std::swap(methodparam_, other->methodparam_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -8189,7 +8189,7 @@ const int GlobalSpeeds::EGSTYPE_ARRAYSIZE;
 #ifndef _MSC_VER
 const int GlobalSpeeds_Speed::kEventTimeFieldNumber;
 const int GlobalSpeeds_Speed::kEventTypeFieldNumber;
-const int GlobalSpeeds_Speed::kSpeedFieldNumber;
+const int GlobalSpeeds_Speed::kSpeedValueFieldNumber;
 #endif  // !_MSC_VER
 
 GlobalSpeeds_Speed::GlobalSpeeds_Speed()
@@ -8210,7 +8210,7 @@ void GlobalSpeeds_Speed::SharedCtor() {
   _cached_size_ = 0;
   eventtime_ = 0;
   eventtype_ = 0;
-  speed_ = 0;
+  speedvalue_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -8248,7 +8248,7 @@ void GlobalSpeeds_Speed::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     eventtime_ = 0;
     eventtype_ = 0;
-    speed_ = 0;
+    speedvalue_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -8292,19 +8292,19 @@ bool GlobalSpeeds_Speed::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(29)) goto parse_Speed;
+        if (input->ExpectTag(29)) goto parse_SpeedValue;
         break;
       }
 
-      // required float Speed = 3;
+      // required float SpeedValue = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
-         parse_Speed:
+         parse_SpeedValue:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &speed_)));
-          set_has_speed();
+                 input, &speedvalue_)));
+          set_has_speedvalue();
         } else {
           goto handle_uninterpreted;
         }
@@ -8341,9 +8341,9 @@ void GlobalSpeeds_Speed::SerializeWithCachedSizes(
       2, this->eventtype(), output);
   }
 
-  // required float Speed = 3;
-  if (has_speed()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->speed(), output);
+  // required float SpeedValue = 3;
+  if (has_speedvalue()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->speedvalue(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -8365,9 +8365,9 @@ void GlobalSpeeds_Speed::SerializeWithCachedSizes(
       2, this->eventtype(), target);
   }
 
-  // required float Speed = 3;
-  if (has_speed()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->speed(), target);
+  // required float SpeedValue = 3;
+  if (has_speedvalue()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->speedvalue(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -8392,8 +8392,8 @@ int GlobalSpeeds_Speed::ByteSize() const {
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->eventtype());
     }
 
-    // required float Speed = 3;
-    if (has_speed()) {
+    // required float SpeedValue = 3;
+    if (has_speedvalue()) {
       total_size += 1 + 4;
     }
 
@@ -8430,8 +8430,8 @@ void GlobalSpeeds_Speed::MergeFrom(const GlobalSpeeds_Speed& from) {
     if (from.has_eventtype()) {
       set_eventtype(from.eventtype());
     }
-    if (from.has_speed()) {
-      set_speed(from.speed());
+    if (from.has_speedvalue()) {
+      set_speedvalue(from.speedvalue());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -8459,7 +8459,7 @@ void GlobalSpeeds_Speed::Swap(GlobalSpeeds_Speed* other) {
   if (other != this) {
     std::swap(eventtime_, other->eventtime_);
     std::swap(eventtype_, other->eventtype_);
-    std::swap(speed_, other->speed_);
+    std::swap(speedvalue_, other->speedvalue_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

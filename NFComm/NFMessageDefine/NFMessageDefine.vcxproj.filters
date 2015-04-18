@@ -8,6 +8,7 @@
     <ClInclude Include="NFMsgBase.pb.h" />
     <ClInclude Include="NFMsgBaseEx.pb.h" />
     <ClInclude Include="NFMsgPreGame.pb.h" />
+    <ClInclude Include="NFFleetingDefine.pb.h" />
     <ClInclude Include="NFSLGDefine.pb.h" />
   </ItemGroup>
   <ItemGroup>
@@ -17,6 +18,7 @@
     <ClCompile Include="NFMsgBaseEx.pb.cc" />
     <ClCompile Include="NFMsgPreGame.pb.cc" />
     <ClCompile Include="NFMsgDefine.cpp" />
+    <ClCompile Include="NFFleetingDefine.pb.cc" />
     <ClCompile Include="NFSLGDefine.pb.cc" />
   </ItemGroup>
 </Project>
