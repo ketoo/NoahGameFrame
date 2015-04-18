@@ -58,6 +58,7 @@ bool NFCPackModule::AfterInit()
     m_pPropertyModule = dynamic_cast<NFIPropertyModule*>( pPluginManager->FindModule( "NFCPropertyModule" ) );
     m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
     m_pUUIDModule = dynamic_cast<NFIUUIDModule*>(pPluginManager->FindModule("NFCUUIDModule"));
+    m_pAwardPackModule = dynamic_cast<NFIAwardPackModule*>(pPluginManager->FindModule("NFCAwardPackModule"));
 
     assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
@@ -66,8 +67,10 @@ bool NFCPackModule::AfterInit()
     assert( NULL != m_pPropertyModule );
     assert( NULL != m_pLogModule );
     assert( NULL != m_pUUIDModule );
+    assert( NULL != m_pAwardPackModule );
 
     m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCPackModule::OnClassObjectEvent );
+    m_pEventProcessModule->AddClassCallBack( "NPC", this, &NFCPackModule::OnClassObjectEvent );
 
     CheckEquip();
 
@@ -780,9 +783,12 @@ int NFCPackModule::OnClassObjectEvent( const NFIDENTID& self, const std::string&
         }
     }
 
-    if ( strClassNames == "NPC" && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
+    if ( strClassNames == "NPC")
     {
-        m_pEventProcessModule->AddEventCallBack(self, NFED_ON_OBJECT_BE_KILLED, this, &NFCPackModule::OnObjectBeKilled);
+        if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
+        {
+            m_pEventProcessModule->AddEventCallBack(self, NFED_ON_OBJECT_BE_KILLED, this, &NFCPackModule::OnObjectBeKilled);
+        }
     }
 
     return 0;
@@ -1301,7 +1307,7 @@ bool NFCPackModule::DeleteItem( const NFIDENTID& self, const std::string& strIte
 
 int NFCPackModule::OnAddDropListEvent(const NFIDENTID& self, const int nEventID, const NFIDataList& var)
 {
-    if (var.GetCount() != 8  ||
+    if (var.GetCount() != 7  ||
         !var.TypeEx(TDATA_OBJECT, TDATA_INT, TDATA_INT, TDATA_INT, TDATA_FLOAT, TDATA_FLOAT, TDATA_FLOAT, TDATA_UNKNOWN))
     {
         return 1;
@@ -1331,10 +1337,10 @@ int NFCPackModule::OnAddDropListEvent(const NFIDENTID& self, const int nEventID,
     float fZ = var.Float(6);
 
     // var 2 ³¡¾°ID 3 ²ãID
-    if (!m_pSceneProcessModule->IsCloneScene(nTargetScene))
-    {
-        return 1;
-    }
+    //if (!m_pSceneProcessModule->IsCloneScene(nTargetScene))
+    //{
+    //    return 1;
+    //}
 
     NFCDataList xGroupObjectList;
     m_pKernelModule->GetGroupObjectList(nTargetScene, nTargetGroupID, xGroupObjectList);
@@ -1434,15 +1440,15 @@ int NFCPackModule::OnObjectBeKilled(const NFIDENTID& self, const int nEventID, c
         return 1;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "DropItemList");
-    if (nullptr == pRecord)
+    NFIDENTID identKiller = var.Object( 0 );
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(identKiller);
+    if (nullptr == pObject)
     {
         return 1;
     }
 
-    NFIDENTID identKiller = var.Object( 0 );
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(identKiller);
-    if (nullptr == pObject)
+    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(identKiller, "DropItemList");
+    if (nullptr == pRecord)
     {
         return 1;
     }
