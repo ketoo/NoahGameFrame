@@ -27,11 +27,26 @@ enum PackTableType
 
 #define MAX_PACK_SIZE 200    //最大背包数量
 
-class NFIPackModule
-    : public NFILogicModule
+class NFIPackModule : public NFILogicModule
 {
-
 public:
+
+    enum EDrawDropItemState
+    {
+        E_DRAW_STATE_NONE   = 0, // 初始状态
+        E_DRAW_STATE_GAIN   = 1, // 获得
+        E_DRAW_STATE_RECV   = 2, // 已领取
+    };
+
+    enum DropItemListColType
+    {
+        DROP_MONSTER_ID     = 0,
+        DROP_ITEM_ID        = 1,
+        DROP_ITEM_COUNT     = 2,
+        DROP_DRAW_STATE     = 3,
+    };
+
+
     //添加装备:装备config,装备过期类型,孔数量，空里宝石列表，强化等级，附魔等级，元素卡片列表
     virtual NFIDENTID CreateEquip(const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount,
                                   const NFIDataList& inlayCardList, const int nIntensiveLevel, const int nEnchantLevel, const std::string& enchantCardList) = 0;
