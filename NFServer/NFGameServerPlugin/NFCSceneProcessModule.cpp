@@ -355,6 +355,11 @@ E_SCENE_TYPE NFCSceneProcessModule::GetCloneSceneType( const int nContainerID )
     return SCENE_TYPE_ERROR;
 }
 
+bool NFCSceneProcessModule::IsCloneScene(const int nSceneID)
+{
+    return GetCloneSceneType(nSceneID) == SCENE_TYPE_MAINLINE_CLONE;
+}
+
 bool NFCSceneProcessModule::LoadInitFileResource( const int& nContainerID )
 {
     char szSceneIDName[MAX_PATH] = { 0 };
