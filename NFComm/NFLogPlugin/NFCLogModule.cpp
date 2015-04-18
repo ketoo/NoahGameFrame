@@ -9,18 +9,41 @@
 #define GLOG_NO_ABBREVIATED_SEVERITIES
 #include "NFComm/NFPluginModule/NFIActorManager.h"
 #include "NFComm/NFPluginModule/NFIActor.h"
-#include "glog/logging.h"
-#include <time.h>
 //#include "NFStackWalker.h"
 #include "NFCLogModule.h"
 #include <boost/filesystem.hpp>
 #include <stdarg.h>
+#include "easylog/easylogging++.h"
+
+INITIALIZE_EASYLOGGINGPP
+
+unsigned int NFCLogModule::idx = 0;
+
+bool NFCLogModule::CheckLogFileExist(const char* filename)
+{
+    std::stringstream stream;
+    stream << filename << "." << ++idx;
+    if (boost::filesystem::exists(stream.str()))
+    {
+        return CheckLogFileExist(filename);
+    }
+
+    return false;
+}
+
+void NFCLogModule::rolloutHandler(const char* filename, std::size_t size)
+{
+    std::stringstream stream;
+    if (!CheckLogFileExist(filename))
+    {
+        stream << filename << "." << idx;
+        boost::filesystem::rename(filename, stream.str().c_str());
+    }
+}
 
 NFCLogModule::NFCLogModule(NFIPluginManager* p)
 {
     pPluginManager = p;
-
-    //m_pFd = NULL;
 }
 
 bool NFCLogModule::Init()
@@ -31,53 +54,30 @@ bool NFCLogModule::Init()
 //     if (pActor->GetActorID() == NFIActorManager::EACTOR_MAIN)
 // #endif
     {
-        char szName[MAX_PATH] = {0};
-        google::InitGoogleLogging(szName);
-
-        std::string strPath = std::string("./log/");
-        if (!boost::filesystem::exists(strPath))
-        {
-            boost::filesystem::create_directories(strPath);
-        }
-
-#ifdef NF_DEBUG_MODE
-        google::SetStderrLogging(google::GLOG_INFO); //设置级别高于 google::INFO 的日志同时输出到屏幕
+        el::Loggers::addFlag(el::LoggingFlag::StrictLogFileSizeCheck);
+        el::Loggers::addFlag(el::LoggingFlag::DisableApplicationAbortOnFatalLog);
+#if NF_PLATFORM == NF_PLATFORM_WIN
+        el::Configurations conf("log_win.conf");
 #else
-        google::SetStderrLogging(google::GLOG_ERROR);//设置级别高于 google::ERROR 的日志同时输出到屏幕
+        el::Configurations conf("log.conf");
 #endif
-
-        FLAGS_colorlogtostderr = true;    //设置输出到屏幕的日志显示相应颜色
-        //FLAGS_servitysinglelog = true;
-
-        google::SetLogDestination(google::GLOG_FATAL, std::string(strPath + "/log_fatal_").c_str());
-        google::SetLogDestination(google::GLOG_ERROR, std::string(strPath + "/log_error_").c_str());      //设置 google::error 级别的日志存储路径和文件名前缀
-        google::SetLogDestination(google::GLOG_WARNING, std::string(strPath + "/log_warning_").c_str());  //设置 google::WARNING 级别的日志存储路径和文件名前缀
-        google::SetLogDestination(google::GLOG_INFO, std::string(strPath + "/log_Info_").c_str());        //设置 google::INFO 级别的日志存储路径和文件名前缀
-
-        FLAGS_logbufsecs = 0;                       //缓冲日志输出，默认为30秒，此处改为立即输出
-        FLAGS_max_log_size = 100;                   //最大日志大小为 100MB
-        FLAGS_stop_logging_if_full_disk = true;     //当磁盘被写满时，停止日志输出
-
+        el::Loggers::reconfigureAllLoggers(conf);
+        el::Helpers::installPreRollOutCallback(rolloutHandler);
     }
-
-    //google::SetLogFilenameExtension("91_");   //设置文件名扩展，如平台？或其它需要区分的信息
-    //google::InstallFailureSignalHandler();    //捕捉 core dumped
-    //google::InstallFailureWriter(&Log);       //默认捕捉 SIGSEGV 信号信息输出会输出到 stderr，可以通过下面的方法自定义输出方式：
 
     return true;
 }
 
 bool NFCLogModule::Shut()
 {
-
 #ifdef NF_USE_ACTOR
     //NFIActor* pActor = (NFIActor*)(pPluginManager);
     //if (pActor->GetActorID() == NFIActorManager::EACTOR_MAIN)
     {
-        google::ShutdownGoogleLogging();
+        el::Helpers::uninstallPreRollOutCallback();
     }
 #else
-    google::ShutdownGoogleLogging();
+    el::Helpers::uninstallPreRollOutCallback();
 #endif
 
     return true;
@@ -133,21 +133,27 @@ bool NFCLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
 
     switch (nll)
     {
-        case NFILogModule::NLL_INFO_NORMAL:
-            LOG(INFO) << szBuffer;
-            break;
-        case NFILogModule::NLL_WARING_NORMAL:
-            LOG(WARNING) << szBuffer;
-            break;
-        case NFILogModule::NLL_ERROR_NORMAL:
+    case NFILogModule::NLL_DEBUG_NORMAL:
+        LOG(DEBUG) << szBuffer;
+        break;
+    case NFILogModule::NLL_INFO_NORMAL:
+        LOG(INFO) << szBuffer;
+        break;
+    case NFILogModule::NLL_WARING_NORMAL:
+        LOG(WARNING) << szBuffer;
+        break;
+    case NFILogModule::NLL_ERROR_NORMAL:
         {
             LOG(ERROR) << szBuffer;
             //LogStack();
         }
         break;
-        default:
-            LOG(INFO) << szBuffer;
-            break;
+    case NFILogModule::NLL_FATAL_NORMAL:
+        LOG(FATAL) << szBuffer;
+        break;
+    default:
+        LOG(INFO) << szBuffer;
+        break;
     }
 
     return true;
@@ -155,18 +161,28 @@ bool NFCLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
 
 bool NFCLogModule::LogElement(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strElement, const std::string& strDesc, const char* func, int line)
 {
-	std::ostringstream stream;
-	stream << " Element= " <<  strElement << " Desc=  " << strDesc;
-	LogNormal(nll, ident, stream, func, line);
+    if (line > 0)
+    {
+        Log(nll, "[ELEMENT] Indent[%s] Element[%s] %s %s %d", ident.ToString().c_str(), strElement.c_str(), strDesc.c_str(), func, line);
+    }
+    else
+    {
+        Log(nll, "[ELEMENT] Indent[%s] Element[%s] %s", ident.ToString().c_str(), strElement.c_str(), strDesc.c_str());
+    }
 
     return true;
 }
 
 bool NFCLogModule::LogProperty(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strProperty, const std::string& strDesc, const char* func, int line)
 {
-	std::ostringstream stream;
-	stream << " Property= " <<  strProperty << " Desc=  " << strDesc;
-	LogNormal(nll, ident, stream, func, line);
+    if (line > 0)
+    {
+        Log(nll, "[PROPERTY] Indent[%s] Property[%s] %s %s %d", ident.ToString().c_str(), strProperty.c_str(), strDesc.c_str(), func, line);
+    }
+    else
+    {
+        Log(nll, "[PROPERTY] Indent[%s] Property[%s] %s", ident.ToString().c_str(), strProperty.c_str(), strDesc.c_str());
+    }
 
     return true;
 
@@ -174,9 +190,14 @@ bool NFCLogModule::LogProperty(const NF_LOG_LEVEL nll, const NFIDENTID ident, co
 
 bool NFCLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strRecord, const std::string& strDesc, const int nRow, const int nCol, const char* func, int line)
 {
-	std::ostringstream stream;
-	stream << " Record= " <<  strRecord << " Desc=  " << strDesc << " Row= " << nRow << " Col=" << nCol;
-	LogNormal(nll, ident, stream, func, line);
+    if (line > 0)
+    {
+        Log(nll, "[RECORD] Indent[%s] Record[%s] Row[%d] Col[%d] %s %s %d", ident.ToString().c_str(), strRecord.c_str(), nRow, nCol, strDesc.c_str(), func, line);
+    }
+    else
+    {
+        Log(nll, "[RECORD] Indent[%s] Record[%s] Row[%d] Col[%d] %s", ident.ToString().c_str(), strRecord.c_str(), nRow, nCol, strDesc.c_str());
+    }
 
     return true;
 
@@ -184,18 +205,28 @@ bool NFCLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
 
 bool NFCLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strRecord, const std::string& strDesc, const char* func, int line)
 {
-	std::ostringstream stream;
-	stream << " Record= " <<  strRecord << " Desc=  " << strDesc;
-	LogNormal(nll, ident, stream, func, line);
+    if (line > 0)
+    {
+        Log(nll, "[RECORD] Indent[%s] Record[%s] %s %s %d", ident.ToString().c_str(), strRecord.c_str(), strDesc.c_str(), func, line);
+    }
+    else
+    {
+        Log(nll, "[RECORD] Indent[%s] Record[%s] %s", ident.ToString().c_str(), strRecord.c_str(), strDesc.c_str());
+    }
 
     return true;
 }
 
 bool NFCLogModule::LogObject(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strDesc, const char* func, int line)
 {
-	std::ostringstream stream;
-	stream << " Desc=  " << strDesc;
-	LogNormal(nll, ident, stream, func, line);
+    if (line > 0)
+    {
+        Log(nll, "[OBJECT] Indent[%s] %s %s %d", ident.ToString().c_str(), strDesc.c_str(), func, line);
+    }
+    else
+    {
+        Log(nll, "[OBJECT] Indent[%s] %s", ident.ToString().c_str(), strDesc.c_str());
+    }
 
     return true;
 
@@ -204,9 +235,9 @@ bool NFCLogModule::LogObject(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
 void NFCLogModule::LogStack()
 {
 
-//To Add
-/*
-#ifdef NF_DEBUG_MODE
+    //To Add
+    /*
+    #ifdef NF_DEBUG_MODE
     time_t t = time(0);
     char szDmupName[MAX_PATH];
     tm* ptm = localtime(&t);
@@ -226,24 +257,34 @@ void NFCLogModule::LogStack()
 
     CloseHandle(hDumpFile);
 
-#endif
-*/
+    #endif
+    */
 }
 
 bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strInfo, const std::string& strDesc, const char* func, int line)
 {
-	std::ostringstream stream;
-	stream << " Info= " <<  strInfo << " Desc=  " << strDesc;
-	LogNormal(nll, ident, stream, func, line);
+    if (line > 0)
+    {
+        Log(nll, "Indent[%s] %s %s %s %d", ident.ToString().c_str(), strInfo.c_str(), strDesc.c_str(), func, line);
+    }
+    else
+    {
+        Log(nll, "Indent[%s] %s %s", ident.ToString().c_str(), strInfo.c_str(), strDesc.c_str());
+    }
 
     return true;
 }
 
 bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strInfo, const int nDesc, const char* func, int line)
 {
-	std::ostringstream stream;
-	stream << " Info= " <<  strInfo << " Desc=  " << nDesc;
-	LogNormal(nll, ident, stream, func, line);
+    if (line > 0)
+    {
+        Log(nll, "Indent[%s] %s %d %s %d", ident.ToString().c_str(), strInfo.c_str(), nDesc, func, line);
+    }
+    else
+    {
+        Log(nll, "Indent[%s] %s %d", ident.ToString().c_str(), strInfo.c_str(), nDesc);
+    }
 
     return true;
 }
@@ -252,53 +293,132 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
 {
     switch (nll)
     {
-        case NFILogModule::NLL_INFO_NORMAL:
+    case NFILogModule::NLL_DEBUG_NORMAL:
         {
             if (0 == line)
             {
-                LOG(INFO) << "[NORMAL] Ident=" << ident.ToString() << " " << stream.str();
+                LOG(DEBUG) << "Indent[" << ident.ToString() << "] " << stream.str();
             }
             else
             {
-                LOG(INFO) << "[NORMAL] Ident=" << ident.ToString() << " " << stream.str() << " " << func << " " << line;
+                LOG(DEBUG) << "Indent[" << ident.ToString() << "] " << stream.str() << " " << func << " " << line;
             }
         }
         break;
-        case NFILogModule::NLL_WARING_NORMAL:
+    case NFILogModule::NLL_INFO_NORMAL:
         {
             if (0 == line)
             {
-                LOG(WARNING) << "[NORMAL] Ident=" << ident.ToString() << " " << stream.str();
+                LOG(INFO) << "Indent[" << ident.ToString() << "] " << stream.str();
             }
             else
             {
-                LOG(WARNING) << "[NORMAL] Ident=" << ident.ToString() << " " << stream.str() << " " << func << " " << line;
+                LOG(INFO) << "Indent[" << ident.ToString() << "] " << stream.str() << " " << func << " " << line;
             }
         }
         break;
-        case NFILogModule::NLL_ERROR_NORMAL:
+    case NFILogModule::NLL_WARING_NORMAL:
         {
             if (0 == line)
             {
-                LOG(ERROR) << "[NORMAL] Ident=" << ident.ToString() << " " << stream.str();
+                LOG(WARNING) << "Indent[" << ident.ToString() << "] " << stream.str();
             }
             else
             {
-                LOG(ERROR) << "[NORMAL] Ident=" << ident.ToString() << " " << stream.str() << " " << func << " " << line;
+                LOG(WARNING) << "Indent[" << ident.ToString() << "] " << stream.str() << " " << func << " " << line;
             }
         }
         break;
-        default:
-            break;
+    case NFILogModule::NLL_ERROR_NORMAL:
+        {
+            if (0 == line)
+            {
+                LOG(ERROR) << "Indent[" << ident.ToString() << "] " << stream.str();
+            }
+            else
+            {
+                LOG(ERROR) << "Indent[" << ident.ToString() << "] " << stream.str() << " " << func << " " << line;
+            }
+        }
+        break;
+    default:
+        break;
     }
+
     return true;
 }
 
 bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strInfo, const char* func /*= ""*/, int line /*= 0*/)
 {
-	std::ostringstream stream;
-	stream << " Info= " <<  strInfo;
-	LogNormal(nll, ident, stream, func, line);
+    if (line > 0)
+    {
+        Log(nll, "Indent[%s] %s %s %d", ident.ToString().c_str(), strInfo.c_str(), func, line);
+    }
+    else
+    {
+        Log(nll, "Indent[%s] %s", ident.ToString().c_str(), strInfo.c_str());
+    }
 
+    return true;
+}
+
+bool NFCLogModule::LogDebugFunctionDump(const NFIDENTID ident, const int nMsg, const std::string& strArg,  const char* func /*= ""*/, const int line /*= 0*/ )
+{
+    //#ifdef NF_DEBUG_MODE
+    LogNormal(NFILogModule::NLL_WARING_NORMAL, ident, strArg + "MsgID:", nMsg, func, line);
+    //#endif
+    return true;
+}
+
+bool NFCLogModule::ChangeLogLevel(const std::string& strLevel)
+{
+    el::Level logLevel = el::LevelHelper::convertFromString(strLevel.c_str());
+    el::Logger* pLogger = el::Loggers::getLogger("default");
+    if (NULL == pLogger)
+    {
+        return false;
+    }
+
+    el::Configurations* pConfigurations = pLogger->configurations();
+    el::base::TypedConfigurations* pTypeConfigurations = pLogger->typedConfigurations();
+    if (NULL == pConfigurations)
+    {
+        return false;
+    }
+
+    // log级别为debug, info, warning, error, fatal(级别逐渐提高)
+    // 当传入为info时，则高于(包含)info的级别会输出
+    // !!!!!! NOTICE:故意没有break，请千万注意 !!!!!!
+    switch (logLevel)
+    {
+    case el::Level::Fatal:
+        {
+            el::Configuration errorConfiguration(el::Level::Error, el::ConfigurationType::Enabled, "false");
+            pConfigurations->set(&errorConfiguration);
+        }
+    case el::Level::Error:
+        {
+            el::Configuration warnConfiguration(el::Level::Warning, el::ConfigurationType::Enabled, "false");
+            pConfigurations->set(&warnConfiguration);
+        }
+    case el::Level::Warning:
+        {
+            el::Configuration infoConfiguration(el::Level::Info, el::ConfigurationType::Enabled, "false");
+            pConfigurations->set(&infoConfiguration);
+        }
+    case el::Level::Info:
+        {
+            el::Configuration debugConfiguration(el::Level::Debug, el::ConfigurationType::Enabled, "false");
+            pConfigurations->set(&debugConfiguration);
+            
+        }
+    case el::Level::Debug:
+        break;
+    default:
+        break;
+    }
+
+    el::Loggers::reconfigureAllLoggers(*pConfigurations);
+    LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "[Log] Change log level", strLevel, __FUNCTION__, __LINE__);
     return true;
 }
