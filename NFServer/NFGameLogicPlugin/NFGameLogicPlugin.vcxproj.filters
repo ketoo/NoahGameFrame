@@ -57,6 +57,9 @@
     <ClInclude Include="NFCNPCRefreshModule.h">
       <Filter>NFNPCRefreshModule</Filter>
     </ClInclude>
+    <ClInclude Include="NFCAwardPackModule.h">
+      <Filter>NFPackModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -97,6 +100,9 @@
     <ClCompile Include="NFGameLogicPlugin.cpp" />
     <ClCompile Include="NFCNPCRefreshModule.cpp">
       <Filter>NFNPCRefreshModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCAwardPackModule.cpp">
+      <Filter>NFPackModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

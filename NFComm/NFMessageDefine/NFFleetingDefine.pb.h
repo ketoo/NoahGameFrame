@@ -2734,17 +2734,17 @@ class AudioEvents_Audio : public ::google::protobuf::Message {
   inline ::NFFS::AudioEvents_AEETYPE eventtype() const;
   inline void set_eventtype(::NFFS::AudioEvents_AEETYPE value);
 
-  // required string TargetName = 3;
-  inline bool has_targetname() const;
-  inline void clear_targetname();
-  static const int kTargetNameFieldNumber = 3;
-  inline const ::std::string& targetname() const;
-  inline void set_targetname(const ::std::string& value);
-  inline void set_targetname(const char* value);
-  inline void set_targetname(const char* value, size_t size);
-  inline ::std::string* mutable_targetname();
-  inline ::std::string* release_targetname();
-  inline void set_allocated_targetname(::std::string* targetname);
+  // required string AudioName = 3;
+  inline bool has_audioname() const;
+  inline void clear_audioname();
+  static const int kAudioNameFieldNumber = 3;
+  inline const ::std::string& audioname() const;
+  inline void set_audioname(const ::std::string& value);
+  inline void set_audioname(const char* value);
+  inline void set_audioname(const char* value, size_t size);
+  inline ::std::string* mutable_audioname();
+  inline ::std::string* release_audioname();
+  inline void set_allocated_audioname(::std::string* audioname);
 
   // required string MethodCall = 4;
   inline bool has_methodcall() const;
@@ -2776,8 +2776,8 @@ class AudioEvents_Audio : public ::google::protobuf::Message {
   inline void clear_has_eventtime();
   inline void set_has_eventtype();
   inline void clear_has_eventtype();
-  inline void set_has_targetname();
-  inline void clear_has_targetname();
+  inline void set_has_audioname();
+  inline void clear_has_audioname();
   inline void set_has_methodcall();
   inline void clear_has_methodcall();
   inline void set_has_methodparam();
@@ -2787,7 +2787,7 @@ class AudioEvents_Audio : public ::google::protobuf::Message {
 
   float eventtime_;
   int eventtype_;
-  ::std::string* targetname_;
+  ::std::string* audioname_;
   ::std::string* methodcall_;
   ::std::string* methodparam_;
 
@@ -2982,12 +2982,12 @@ class GlobalSpeeds_Speed : public ::google::protobuf::Message {
   inline ::NFFS::GlobalSpeeds_EGSTYPE eventtype() const;
   inline void set_eventtype(::NFFS::GlobalSpeeds_EGSTYPE value);
 
-  // required float Speed = 3;
-  inline bool has_speed() const;
-  inline void clear_speed();
-  static const int kSpeedFieldNumber = 3;
-  inline float speed() const;
-  inline void set_speed(float value);
+  // required float SpeedValue = 3;
+  inline bool has_speedvalue() const;
+  inline void clear_speedvalue();
+  static const int kSpeedValueFieldNumber = 3;
+  inline float speedvalue() const;
+  inline void set_speedvalue(float value);
 
   // @@protoc_insertion_point(class_scope:NFFS.GlobalSpeeds.Speed)
  private:
@@ -2995,14 +2995,14 @@ class GlobalSpeeds_Speed : public ::google::protobuf::Message {
   inline void clear_has_eventtime();
   inline void set_has_eventtype();
   inline void clear_has_eventtype();
-  inline void set_has_speed();
-  inline void clear_has_speed();
+  inline void set_has_speedvalue();
+  inline void clear_has_speedvalue();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   float eventtime_;
   int eventtype_;
-  float speed_;
+  float speedvalue_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
@@ -6905,73 +6905,73 @@ inline void AudioEvents_Audio::set_eventtype(::NFFS::AudioEvents_AEETYPE value) 
   eventtype_ = value;
 }
 
-// required string TargetName = 3;
-inline bool AudioEvents_Audio::has_targetname() const {
+// required string AudioName = 3;
+inline bool AudioEvents_Audio::has_audioname() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void AudioEvents_Audio::set_has_targetname() {
+inline void AudioEvents_Audio::set_has_audioname() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void AudioEvents_Audio::clear_has_targetname() {
+inline void AudioEvents_Audio::clear_has_audioname() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void AudioEvents_Audio::clear_targetname() {
-  if (targetname_ != &::google::protobuf::internal::kEmptyString) {
-    targetname_->clear();
+inline void AudioEvents_Audio::clear_audioname() {
+  if (audioname_ != &::google::protobuf::internal::kEmptyString) {
+    audioname_->clear();
   }
-  clear_has_targetname();
+  clear_has_audioname();
 }
-inline const ::std::string& AudioEvents_Audio::targetname() const {
-  return *targetname_;
+inline const ::std::string& AudioEvents_Audio::audioname() const {
+  return *audioname_;
 }
-inline void AudioEvents_Audio::set_targetname(const ::std::string& value) {
-  set_has_targetname();
-  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
-    targetname_ = new ::std::string;
+inline void AudioEvents_Audio::set_audioname(const ::std::string& value) {
+  set_has_audioname();
+  if (audioname_ == &::google::protobuf::internal::kEmptyString) {
+    audioname_ = new ::std::string;
   }
-  targetname_->assign(value);
+  audioname_->assign(value);
 }
-inline void AudioEvents_Audio::set_targetname(const char* value) {
-  set_has_targetname();
-  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
-    targetname_ = new ::std::string;
+inline void AudioEvents_Audio::set_audioname(const char* value) {
+  set_has_audioname();
+  if (audioname_ == &::google::protobuf::internal::kEmptyString) {
+    audioname_ = new ::std::string;
   }
-  targetname_->assign(value);
+  audioname_->assign(value);
 }
-inline void AudioEvents_Audio::set_targetname(const char* value, size_t size) {
-  set_has_targetname();
-  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
-    targetname_ = new ::std::string;
+inline void AudioEvents_Audio::set_audioname(const char* value, size_t size) {
+  set_has_audioname();
+  if (audioname_ == &::google::protobuf::internal::kEmptyString) {
+    audioname_ = new ::std::string;
   }
-  targetname_->assign(reinterpret_cast<const char*>(value), size);
+  audioname_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* AudioEvents_Audio::mutable_targetname() {
-  set_has_targetname();
-  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
-    targetname_ = new ::std::string;
+inline ::std::string* AudioEvents_Audio::mutable_audioname() {
+  set_has_audioname();
+  if (audioname_ == &::google::protobuf::internal::kEmptyString) {
+    audioname_ = new ::std::string;
   }
-  return targetname_;
+  return audioname_;
 }
-inline ::std::string* AudioEvents_Audio::release_targetname() {
-  clear_has_targetname();
-  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* AudioEvents_Audio::release_audioname() {
+  clear_has_audioname();
+  if (audioname_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = targetname_;
-    targetname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = audioname_;
+    audioname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void AudioEvents_Audio::set_allocated_targetname(::std::string* targetname) {
-  if (targetname_ != &::google::protobuf::internal::kEmptyString) {
-    delete targetname_;
+inline void AudioEvents_Audio::set_allocated_audioname(::std::string* audioname) {
+  if (audioname_ != &::google::protobuf::internal::kEmptyString) {
+    delete audioname_;
   }
-  if (targetname) {
-    set_has_targetname();
-    targetname_ = targetname;
+  if (audioname) {
+    set_has_audioname();
+    audioname_ = audioname;
   } else {
-    clear_has_targetname();
-    targetname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_audioname();
+    audioname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
@@ -7193,26 +7193,26 @@ inline void GlobalSpeeds_Speed::set_eventtype(::NFFS::GlobalSpeeds_EGSTYPE value
   eventtype_ = value;
 }
 
-// required float Speed = 3;
-inline bool GlobalSpeeds_Speed::has_speed() const {
+// required float SpeedValue = 3;
+inline bool GlobalSpeeds_Speed::has_speedvalue() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void GlobalSpeeds_Speed::set_has_speed() {
+inline void GlobalSpeeds_Speed::set_has_speedvalue() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void GlobalSpeeds_Speed::clear_has_speed() {
+inline void GlobalSpeeds_Speed::clear_has_speedvalue() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void GlobalSpeeds_Speed::clear_speed() {
-  speed_ = 0;
-  clear_has_speed();
+inline void GlobalSpeeds_Speed::clear_speedvalue() {
+  speedvalue_ = 0;
+  clear_has_speedvalue();
 }
-inline float GlobalSpeeds_Speed::speed() const {
-  return speed_;
+inline float GlobalSpeeds_Speed::speedvalue() const {
+  return speedvalue_;
 }
-inline void GlobalSpeeds_Speed::set_speed(float value) {
-  set_has_speed();
-  speed_ = value;
+inline void GlobalSpeeds_Speed::set_speedvalue(float value) {
+  set_has_speedvalue();
+  speedvalue_ = value;
 }
 
 // -------------------------------------------------------------------

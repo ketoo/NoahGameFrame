@@ -1,0 +1,5 @@
+<XML>
+    <Object ID="DropBag_1" ID_PackRate="10000" ID_Random="0">
+        <Object ItemID="Equip_Weapon_1" Count="1" Rate="220" Type="0" />
+    </Object>
+</XML>

@@ -8,4 +8,5 @@
     <Object BuyPrice="0" CoolDownTime="0" Desc="新手大礼包" ID="Item_ZS_SKILL10" Icon="1018" ItemSubType="5" ItemType="0" Level="0" OverlayCount="1" SalePrice="0" ShowName="新手大礼包"/>
     <Object BuyPrice="0" CoolDownTime="0" Desc="金币" ID="Gold_1" Icon="QDJL-JB" ItemSubType="16" ItemType="1" Level="0" OverlayCount="1" SalePrice="0" ShowName="金币"/>
     <Object BuyPrice="0" CoolDownTime="0" Desc="活动令牌" ID="Active_Token" Icon="1017" ItemSubType="21" ItemType="1" Level="0" OverlayCount="10000" SalePrice="0" ShowName="活动令牌"/>
+    <Object BuyPrice="100" CoolDownTime="0" Desc="开山斧武器" ID="Equip_Weapon_1" Icon="50004" ItemSubType="1" ItemType="1" Level="1" OverlayCount="10000" SalePrice="100" ShowName="开山斧"/>
 </XML>

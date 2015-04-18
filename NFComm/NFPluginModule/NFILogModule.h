@@ -19,9 +19,11 @@ public:
 
     enum NF_LOG_LEVEL
     {
+        NLL_DEBUG_NORMAL,
         NLL_INFO_NORMAL,//无意义，只为打印
         NLL_WARING_NORMAL,
         NLL_ERROR_NORMAL,
+        NLL_FATAL_NORMAL,
     };
 
     virtual bool LogElement(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strElement, const std::string& strDesc, const char* func = "", int line = 0) = 0;
