@@ -28,6 +28,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     m_pSLGBuildingModule = dynamic_cast<NFISLGBuildingModule*>(pPluginManager->FindModule("NFCSLGBuildingModule"));
     m_pUUIDModule = dynamic_cast<NFIUUIDModule*>(pPluginManager->FindModule("NFCUUIDModule"));
     m_pPVPModule = dynamic_cast<NFIPVPModule*>(pPluginManager->FindModule("NFCPVPModule"));
+    m_pSkillModule = dynamic_cast<NFISkillModule*>(pPluginManager->FindModule("NFCSkillModule"));
 
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
@@ -39,6 +40,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     assert(NULL != m_pSLGBuildingModule);
     assert(NULL != m_pUUIDModule);
     assert(NULL != m_pPVPModule);
+    assert(NULL != m_pSkillModule);
 
     m_pKernelModule->ResgisterCommonClassEvent( this, &NFCGameServerNet_ServerModule::OnClassCommonEvent );
     m_pKernelModule->ResgisterCommonPropertyEvent( this, &NFCGameServerNet_ServerModule::OnPropertyCommonEvent );
@@ -1874,18 +1876,24 @@ void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
     }
 
     //bc
-
+    const std::string& strSkillID =  xMsg.skill_id();
     int nContianerID = m_pKernelModule->GetPropertyInt(nPlayerID, "SceneID");
     int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, "GroupID");
-    NFCDataList xDataList;
-    m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
-    for (int i = 0; i < xDataList.GetCount(); ++i)
+
+    xMsg.clear_effect_value();
+
+    for (int i = 0; i < xMsg.effect_ident_size(); ++i)
     {
-        NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(xDataList.Object(i));
-        if (pData.get())
-        {
-            SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SKILL_OBJECTX, xMsg, msg.GetFd(), pData->xClientID);
-        }
+        const NFIDENTID nTarget = PBToNF(xMsg.effect_ident(i));
+        // 技能伤害
+        m_pSkillModule->OnUseSkill(nPlayerID, NFCDataList() << strSkillID << nTarget);
+        xMsg.add_effect_value(10); // 暂时代替
+    }
+
+    NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(nPlayerID);
+    if (pData.get())
+    {
+        SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SKILL_OBJECTX, xMsg, msg.GetFd(), pData->xClientID);
     }
 }
 

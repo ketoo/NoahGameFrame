@@ -29,6 +29,7 @@
 #include "NFComm/NFMessageDefine/NFSLGDefine.pb.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIPVPModule.h"
+#include "NFComm/NFPluginModule/NFISkillModule.h"
 
 ////////////////////////////////////////////////////////////////////////////
 // 客户端消息处理宏
@@ -37,7 +38,7 @@
     msg xMsg;                                           \
     if (!RecivePB(packet, xMsg, nPlayerID))              \
     {                                                   \
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), "ReqAckBuyObjectFormShop", "Parse msg error", __FUNCTION__, __LINE__); \
+        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
         return;                                         \
     }                                                   \
                                                         \
@@ -211,7 +212,7 @@ private:
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFIElementInfoModule* m_pElementInfoModule;
     NFIPVPModule* m_pPVPModule;
-
+    NFISkillModule* m_pSkillModule;
     //////////////////////////////////////////////////////////////////////////
     //SLG模块
 	NFISLGShopModule* m_pSLGShopModule;
