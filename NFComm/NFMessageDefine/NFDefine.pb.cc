@@ -22,6 +22,7 @@ namespace {
 
 const ::google::protobuf::EnumDescriptor* EGameEventCode_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EGameMsgID_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* EAwardType_descriptor_ = NULL;
 
 }  // namespace
 
@@ -34,6 +35,7 @@ void protobuf_AssignDesc_NFDefine_2eproto() {
   GOOGLE_CHECK(file != NULL);
   EGameEventCode_descriptor_ = file->enum_type(0);
   EGameMsgID_descriptor_ = file->enum_type(1);
+  EAwardType_descriptor_ = file->enum_type(2);
 }
 
 namespace {
@@ -91,7 +93,7 @@ void protobuf_AddDesc_NFDefine_2eproto() {
     "NGS\020\213\001\022\033\n\026EGEC_GANGS_TITLE_OUTOF\020\214\001\022\035\n\030E"
     "GEC_ENTER_GATEWAY_FAILD\020\215\001\022\030\n\023EGEC_NO_SE"
     "RVER4ZONE\020\216\001\022\027\n\022EGEC_INVALID_SKILL\020\217\001\022\034\n"
-    "\027EGEC_ENTER_GAME_SUCCESS\020\220\001*\245\023\n\nEGameMsg"
+    "\027EGEC_ENTER_GAME_SUCCESS\020\220\001*\302\023\n\nEGameMsg"
     "ID\022\017\n\013EGMI_UNKNOW\020\000\022\025\n\021EGMI_EVENT_RESULT"
     "\020\001\022\030\n\024EGMI_EVENT_TRANSPOND\020\002\022\025\n\021EGMI_CLO"
     "SE_SOCKET\020\003\022\035\n\031EGMI_MTL_WORLD_REGISTERED"
@@ -153,7 +155,9 @@ void protobuf_AddDesc_NFDefine_2eproto() {
     "K_BUY_FORM_SHOP\020\221N\022\037\n\032EGMI_REQ_MOVE_BUIL"
     "D_OBJECT\020\222N\022\037\n\032EGMI_ACK_MOVE_BUILD_OBJEC"
     "T\020\223N\022\032\n\025EGMI_REQ_UP_BUILD_LVL\020\365N\022\031\n\024EGMI"
-    "_REQ_CREATE_ITEM\020\366N", 3739);
+    "_REQ_CREATE_ITEM\020\366N\022\033\n\026EGMI_REQ_BUILD_OP"
+    "ERATE\020\367N*8\n\nEAwardType\022\025\n\021AWARD_TYPE_NOR"
+    "MAL\020\000\022\023\n\017AWARD_TYPE_HERO\020\001", 3826);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFDefine.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFDefine_2eproto);
@@ -320,6 +324,21 @@ bool EGameMsgID_IsValid(int value) {
     case 10003:
     case 10101:
     case 10102:
+    case 10103:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* EAwardType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return EAwardType_descriptor_;
+}
+bool EAwardType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
       return true;
     default:
       return false;
