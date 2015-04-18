@@ -45,6 +45,7 @@ public:
     virtual bool AfterInit();
 
     virtual E_SCENE_TYPE GetCloneSceneType(const int nContainerID);
+    virtual bool IsCloneScene(const int nSceneID);
 
 protected:
     int CreateCloneScene( const int& nContainerID, const int nGroupID, const std::string& strResourceID, const NFIDataList& arg );

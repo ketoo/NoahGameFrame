@@ -10,7 +10,6 @@
 
 bool NFCNPCRefreshModule::Init()
 {
-
     return true;
 }
 
@@ -22,7 +21,6 @@ bool NFCNPCRefreshModule::Shut()
 
 bool NFCNPCRefreshModule::Execute( const float fLasFrametime, const float fStartedTime )
 {
-    //Î»ÖÃÄØ
     return true;
 }
 
@@ -70,7 +68,7 @@ int NFCNPCRefreshModule::OnObjectHPEvent( const NFIDENTID& self, const std::stri
             m_pEventProcessModule->DoEvent( self, NFED_ON_OBJECT_BE_KILLED, NFCDataList() << identAttacker );
 
             m_pKernelModule->AddHeartBeat( self, "OnDeadDestroyHeart", this, &NFCNPCRefreshModule::OnDeadDestroyHeart, NFCDataList(), 5.0f, 1 );
-        }        
+        }
     }
 
     return 0;
