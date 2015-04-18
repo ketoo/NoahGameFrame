@@ -20,33 +20,52 @@ class NFIAwardPackModule
 public:
     struct AwardItem
     {
-        AwardItem() : strConfigID(""), nCount(0), nType(NFMsg::AWARD_TYPE_NORMAL), nRate(0), nMaxCount(0), bRandomCount(false)
+        AwardItem() : strConfigID(""), nCount(0), nType(NFMsg::AWARD_TYPE_NORMAL), nRate(0)
         {
 
         }
 
         std::string strConfigID;
         int nCount;
-        int nMaxCount;
         NFUINT16 nType;
         int nRate;
-        bool bRandomCount;
     };
 
     struct AwardBag
     {
-        AwardBag() : strBagID(""), bRandom(false)
+        AwardBag()
         {
+            strBagID = "";
+            bRandom = false;
             nTotalRate = 0;
             nPackRate = 0;
+            nCount = 0;
         }
 
         typedef NFList<NF_SHARE_PTR<AwardItem> > AwardItemList;
 
+        NF_SHARE_PTR<AwardItem> GetRandItem(const int nRate)
+        {
+            NF_SHARE_PTR<AwardItem> pAwardItem;
+            bool bRet = xAwardItemList.First(pAwardItem);
+            while (bRet && pAwardItem != nullptr)
+            {
+                if (pAwardItem->nRate >= nRate)
+                {
+                    return pAwardItem;
+                }
+
+                bRet = xAwardItemList.Next(pAwardItem);
+            }
+
+            return nullptr;
+        }
+
         std::string strBagID;
         bool bRandom;
-        NFUINT32 nTotalRate;
         NFINT64 nPackRate;
+        NFUINT32 nCount;
+        NFUINT32 nTotalRate;
         AwardItemList xAwardItemList;
     };
 
