@@ -564,7 +564,7 @@ bool NFCRecord::SetObject(const int nRow, const int nCol, const NFIDENTID& value
 
     NFIDataList::TData var;
     var.nType = TDATA_OBJECT;
-    var.variantData = (NFINT64)value.nData64;
+    var.variantData = value;
 	
     NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
 
@@ -592,7 +592,7 @@ bool NFCRecord::SetObject(const int nRow, const int nCol, const NFIDENTID& value
     oldValue.Append(*pVar);
     newValue.Add(value);
 
-    pVar->variantData = value.nData64;
+    pVar->variantData = value;
 
     OnEventHandler(mSelf, mstrRecordName, UpData, nRow, nCol, oldValue, newValue);
 
