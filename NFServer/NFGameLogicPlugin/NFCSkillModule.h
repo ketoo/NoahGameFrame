@@ -47,6 +47,7 @@ public:
     virtual int GetSkillGemLevel( const NFIDENTID& self, const std::string& strSkillName );
 
     virtual int AddNewerSkill( const NFIDENTID& self );
+    virtual int OnUseSkill(const NFIDENTID& self, const NFIDataList& var);
 protected:
 
     int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );

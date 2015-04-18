@@ -463,7 +463,7 @@ bool NFCProperty::SetObject(const NFIDENTID& value)
     }
 
     NFIDataList::TData TData;
-    TData.variantData = value.nData64;
+    TData.variantData = value;
     TData.nType = TDATA_OBJECT;
 
     if (!m_pTData.get())
@@ -490,7 +490,7 @@ bool NFCProperty::SetObject(const NFIDENTID& value)
         NFCDataList oldValue;
         oldValue.Append(*m_pTData);
 
-        m_pTData->variantData = value.nData64;
+        m_pTData->variantData = value;
 
         NFCDataList newValue;
         newValue.Append(*m_pTData);
