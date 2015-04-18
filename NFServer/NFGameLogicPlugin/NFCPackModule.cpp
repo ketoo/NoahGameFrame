@@ -757,24 +757,32 @@ bool NFCPackModule::GetGridBan( const NFIDENTID& self, const int nOrigin )
 
 int NFCPackModule::OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
-    if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
+    if (strClassNames == "Player")
     {
-        m_pKernelModule->AddRecordCallBack( self, GetPackName( PackTableType::NormalPack ), this, &NFCPackModule::OnObjectPackViewRecordEvent );
-    }
-    else if ( CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA == eClassEvent )
-    {
-        //RefreshInitViewItem(self);
-        //第一次不刷新，因为第一次装备后，会自动刷新
-        RefreshEquipProperty(self);
+        if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
+        {
+            m_pKernelModule->AddRecordCallBack( self, GetPackName( PackTableType::NormalPack ), this, &NFCPackModule::OnObjectPackViewRecordEvent );
+        }
+        else if ( CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA == eClassEvent )
+        {
+            //RefreshInitViewItem(self);
+            //第一次不刷新，因为第一次装备后，会自动刷新
+            RefreshEquipProperty(self);
 
-        m_pKernelModule->AddRecordCallBack( self, GetPackName( PackTableType::NormalPack ), this, &NFCPackModule::OnObjectPackRecordEvent );
-    }
-    else if ( CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent )
-    {
-        m_pEventProcessModule->AddEventCallBack( self, NFED_ON_CLIENT_SWAP_TABLE, this, &NFCPackModule::OnSwapTableRowEvent );
-        m_pEventProcessModule->AddEventCallBack(self, NFED_ON_OBJECT_ENTER_SCENE_RESULT, this, &NFCPackModule::OnAddDropListEvent);
+            m_pKernelModule->AddRecordCallBack( self, GetPackName( PackTableType::NormalPack ), this, &NFCPackModule::OnObjectPackRecordEvent );
+        }
+        else if ( CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent )
+        {
+            m_pEventProcessModule->AddEventCallBack( self, NFED_ON_CLIENT_SWAP_TABLE, this, &NFCPackModule::OnSwapTableRowEvent );
+            m_pEventProcessModule->AddEventCallBack(self, NFED_ON_OBJECT_ENTER_SCENE_RESULT, this, &NFCPackModule::OnAddDropListEvent);
 
-        // TOADD 其他背包需要的再加回调
+            // TOADD 其他背包需要的再加回调
+        }
+    }
+
+    if ( strClassNames == "NPC" && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
+    {
+        m_pEventProcessModule->AddEventCallBack(self, NFED_ON_OBJECT_BE_KILLED, this, &NFCPackModule::OnObjectBeKilled);
     }
 
     return 0;
@@ -1293,6 +1301,12 @@ bool NFCPackModule::DeleteItem( const NFIDENTID& self, const std::string& strIte
 
 int NFCPackModule::OnAddDropListEvent(const NFIDENTID& self, const int nEventID, const NFIDataList& var)
 {
+    if (var.GetCount() != 8  ||
+        !var.TypeEx(TDATA_OBJECT, TDATA_INT, TDATA_INT, TDATA_INT, TDATA_FLOAT, TDATA_FLOAT, TDATA_FLOAT, TDATA_UNKNOWN))
+    {
+        return 1;
+    }
+
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
     if ( NULL == pObject )
     {
@@ -1300,10 +1314,144 @@ int NFCPackModule::OnAddDropListEvent(const NFIDENTID& self, const int nEventID,
         return 1;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-    if (NULL == pRecord)
+    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "DropItemList");
+    if (NULL == pRecord.get())
     {
         return 1;
+    }
+
+    pRecord->Clear(); // 进副本之前，清空原来的掉落表数据
+
+    NFIDENTID ident = var.Object(0);
+    int nType = var.Int(1);
+    int nTargetScene = var.Int(2);   // 场景ID
+    int nTargetGroupID = var.Int(3);   // 层ID
+    float fX = var.Float(4);
+    float fY = var.Float(5);
+    float fZ = var.Float(6);
+
+    // var 2 场景ID 3 层ID
+    if (!m_pSceneProcessModule->IsCloneScene(nTargetScene))
+    {
+        return 1;
+    }
+
+    NFCDataList xGroupObjectList;
+    m_pKernelModule->GetGroupObjectList(nTargetScene, nTargetGroupID, xGroupObjectList);
+
+    for (int i = 0; i < xGroupObjectList.GetCount(); ++i)
+    {
+        NFIDENTID ident = xGroupObjectList.Object(i);
+        // 筛选掉自己
+        if (ident == self)
+        {
+            continue;
+        }
+
+        //普通掉落
+        const std::string& strDropPackList = m_pKernelModule->GetPropertyString(ident, "DropPackList");
+
+        // 从NFCAwardPackConfigModule中获取掉落数据
+        ComputerDropPack(pObject, ident, strDropPackList);
+    }
+
+    return 0;
+}
+
+bool NFCPackModule::ComputerDropPack(NF_SHARE_PTR<NFIObject> pObject, const NFIDENTID identMonster,  const std::string& strDropPackConfig)
+{
+    NFCDataList xDropBagList(strDropPackConfig.c_str(), ",");
+
+    for (int i = 0; i < xDropBagList.GetCount(); ++i)
+    {
+        // 获取掉落包
+        NF_SHARE_PTR<NFIAwardPackModule::AwardBag> pAwardBag = m_pAwardPackModule->GetAwardPack(xDropBagList.String(i));
+        if (pAwardBag == nullptr)
+        {
+            continue;
+        }
+
+        // 概率
+        NFCDataList xRandValueList;
+        m_pKernelModule->Random(0, 10000, 1, xRandValueList); // 一次获得多个概率
+        for (int j = 0; j < pAwardBag->nCount; ++j)
+        {
+            int nDropRate = pAwardBag->nPackRate;
+            if (xRandValueList.Int(j) > nDropRate)
+            {
+                continue;
+            }
+
+            NFCDataList xRandItemList;
+            m_pKernelModule->Random(0, pAwardBag->nTotalRate, 1, xRandItemList);
+            NF_SHARE_PTR<NFIAwardPackModule::AwardItem> pAwardItem = pAwardBag->GetRandItem(xRandItemList.Int(0));
+            if (nullptr == pAwardItem)
+            {
+                continue;
+            }
+
+            if (!m_pElementInfoModule->ExistElement(pAwardItem->strConfigID))
+            {
+                m_pLogModule->LogElement(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), pAwardItem->strConfigID, "There is no element", __FUNCTION__, __LINE__);
+                continue;
+            }
+
+            int nItemType = m_pElementInfoModule->GetPropertyInt(pAwardItem->strConfigID, "ItemType");
+
+            NFINT32 nDropCount = pAwardItem->nCount;
+            //如果是装备，则先把装备的随机属性随机到
+            std::string strRndProperty;
+            std::string strBaseProperty;
+            AddDropItem(pObject->Self(), NFCDataList() << identMonster << pAwardItem->strConfigID << nDropCount << (int32_t)E_DRAW_STATE_NONE);
+        }
+    }
+
+    return true;
+}
+
+void NFCPackModule::AddDropItem(const NFIDENTID& self, const NFIDataList& var)
+{
+    if (var.GetCount() != 4 || !var.TypeEx(TDATA_OBJECT, TDATA_STRING, TDATA_INT, TDATA_INT, TDATA_UNKNOWN))
+    {
+        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "args error", "", __FUNCTION__, __LINE__);
+        return;
+    }
+
+    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "DropItemList");
+    if (NULL == pRecord.get())
+    {
+        return;
+    }
+
+    pRecord->AddRow(-1, var);
+}
+
+int NFCPackModule::OnObjectBeKilled(const NFIDENTID& self, const int nEventID, const NFIDataList& var)
+{
+    if ( var.GetCount() != 1 || !var.TypeEx(TDATA_OBJECT, TDATA_UNKNOWN))
+    {
+        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "args error", "", __FUNCTION__, __LINE__);
+        return 1;
+    }
+
+    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "DropItemList");
+    if (nullptr == pRecord)
+    {
+        return 1;
+    }
+
+    NFIDENTID identKiller = var.Object( 0 );
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(identKiller);
+    if (nullptr == pObject)
+    {
+        return 1;
+    }
+
+    NFCDataList varResult;
+    int nRowCount = pRecord->FindObject(NFIPackModule::DROP_MONSTER_ID, self, varResult);
+    for (int i = 0; i < nRowCount; ++i)
+    {
+        pRecord->SetInt(varResult.Int(i), NFIPackModule::DROP_DRAW_STATE, NFIPackModule::E_DRAW_STATE_GAIN);
     }
 
     return 0;
