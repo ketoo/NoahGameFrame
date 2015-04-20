@@ -9,16 +9,15 @@
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-#ifdef NFDATABASEPLUGIN_EXPORTS
-#define NFDATABASEPLUGIN_API __declspec(dllexport)
-#else
-#define NFDATABASEPLUGIN_API __declspec(dllimport)
-#endif
-
 //////////////////////////////////////////////////////////////////////////
 class NFMysqlClusterPlugin : public NFIPlugin
 {
 public:
+	NFMysqlClusterPlugin(NFIPluginManager* p)
+	{
+		pPluginManager = p;
+		bCanReload = false;
+	}
 
     virtual const int GetPluginVersion();
 

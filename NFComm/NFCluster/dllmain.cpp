@@ -1,6 +1,6 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 //#include "stdafx.h"
-#include "NFComm/NFCore/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 #ifdef _DEBUG
 
