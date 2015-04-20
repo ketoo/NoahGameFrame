@@ -1,24 +1,22 @@
-// NFDataBasePlugin.cpp : Defines the exported functions for the DLL application.
-//
+#include "NFMysqlClusterPlugin.h"
+#include "NFCMysqlClusterModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-//#include "stdafx.h"
-#include "NFDataBasePlugin.h"
-#include "NFCDataBaseModule.h"
+#ifdef NF_DYNAMIC_PLUGIN
 
-NFIPlugin* pPlugin = NULL;
-NFIPluginManager* pPluginManager = NULL;
-
-extern "C"  __declspec(dllexport) void DllStartPlugin(NFIPluginManager* pm)
+NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
-    pPluginManager = pm;
+	CREATE_PLUGIN(pm, NFMysqlClusterPlugin)
 
-    CREATE_PLUGIN(pm, NFDataBasePlugin, pPlugin)
 };
 
-extern "C" __declspec(dllexport) void DllStopPlugin(NFIPluginManager* pm)
+NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
 {
-    DESTROY_PLUGIN(pm, pPlugin)
+	DESTROY_PLUGIN(pm, NFMysqlClusterPlugin)
 };
+
+#endif
+
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -34,12 +32,10 @@ const std::string NFMysqlClusterPlugin::GetPluginName()
 
 void NFMysqlClusterPlugin::Install()
 {
-    //因为有好几个进程都在用此插件，隐藏此插件不能设置Title
-    //SetConsoleTitle( "NFDataBaseServer" );
-    REGISTER_MODULE(pPluginManager, "NFCDataBaseModule", NFCDataBaseModule)
+    REGISTER_MODULE(pPluginManager, NFCMysqlClusterModule)
 }
 
 void NFMysqlClusterPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, "NFCDataBaseModule", NFCDataBaseModule)
+    UNREGISTER_MODULE(pPluginManager, NFCMysqlClusterModule)
 }
