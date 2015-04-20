@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <map>
 #include <list>
-#include "NFComm/NFCore/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 #define OTL_ODBC_MYSQL // Брвы OTL 4.0/ODBC
 #define OTL_BIGINT unsigned __int64
