@@ -16,18 +16,16 @@
 #ifndef _NFC_DATABASE_MODULE_H_
 #define _NFC_DATABASE_MODULE_H_
 
-#include "NFCDataBaseDriver.h"
-#include "NFComm/NFCore/NFPlatform.h"
+#include "NFCMysqlDriver.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFPluginModule/NFIDataBaseModule.h"
-#include "NFComm/NFPluginModule/NFIShareMemoryModule.h"
 
 class NFCMysqlClusterModule
-    : public NFIMysqlClusterModule
+    : public NFILogicModule
 {
 public:
 
-    NFCMysqlClusterModule();
+    NFCMysqlClusterModule(NFIPluginManager* p);
     virtual ~NFCMysqlClusterModule();
 
     virtual bool Init();
@@ -37,23 +35,14 @@ public:
 
 private:
 
-    NFCDataBaseDriver* m_pDataBaseDriver;
+    NFCMysqlDriver* m_pDataBaseDriver;
 
   
     otl_connect motlConnect;
 
-    //数据库表配置文件
-    NFConfig mConfig;
-    std::string mstrDataBaseConfigFile;
-
     std::string mstrMasterName;
     std::string mstrUID;
     std::string mstrPWD;
-    std::string mstrDSN;
-
-    std::string mstrAccountTableName;
-    std::string mstrPlayerTableName;
-    std::string mstrGlobalTableName;
 
 };
 

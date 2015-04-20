@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------
 
 //#include "stdafx.h"
-#include "NFCDataBaseDriver.h"
+#include "NFCMysqlDriver.h"
 
 int NFCMysqlDriver::OTLConnect(const std::string& strUID, const std::string& strPWD, const std::string& strDSN, otl_connect& otlDB)
 {
