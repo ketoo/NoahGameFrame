@@ -18,8 +18,8 @@ class NFIDataProcessModule
 {
 
 public:
-    virtual int LoadDataFormNoSql(const NFIDENTID& self) = 0;
-    virtual int SaveDataToNoSql( const NFIDENTID& self, bool bOffline = false ) = 0;
+    virtual const bool  LoadDataFormNoSql(const NFIDENTID& self) = 0;
+    virtual const bool  SaveDataToNoSql( const NFIDENTID& self, bool bOffline = false ) = 0;
 
 
 	virtual const NFIDENTID CreateRole(const std::string& strAccount, const std::string& strName, const int nJob, const int nSex) = 0;
