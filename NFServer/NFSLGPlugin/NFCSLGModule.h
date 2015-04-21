@@ -13,7 +13,6 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFISLGModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
-#include "NFComm/NFPluginModule/NFIDataNoSqlModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 
 class NFCSLGModule : public NFISLGModule
@@ -37,7 +36,6 @@ protected:
 
 
 protected:
-    NFIDataNoSqlModule* m_pNoSqlModule;
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
 private:

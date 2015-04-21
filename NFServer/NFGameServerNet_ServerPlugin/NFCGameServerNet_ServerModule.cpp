@@ -238,7 +238,10 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
 
     //////////////////////////////////////////////////////////////////////////
     //拉取数据
-	m_pDataProcessModule->LoadDataFormNoSql(nPlayerID);
+	if(!m_pDataProcessModule->LoadDataFormNoSql(nPlayerID))
+	{
+		return;
+	}
     //////////////////////////////////////////////////////////////////////////
 
 
