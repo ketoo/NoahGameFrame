@@ -20,9 +20,9 @@ class NFIDataProcessModule
 public:
     virtual int LoadDataFormNoSql(const NFIDENTID& self) = 0;
     virtual int SaveDataToNoSql( const NFIDENTID& self, bool bOffline = false ) = 0;
-#ifdef NF_USE_ACTOR
-	virtual Theron::Address GetActorID(const NFIDENTID& self) = 0;
-#endif
+
+
+	virtual const NFIDENTID CreateRole(const std::string& strAccount, const std::string& strName, const int nJob, const int nSex) = 0;
 };
 
 #endif
