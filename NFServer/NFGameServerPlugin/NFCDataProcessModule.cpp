@@ -209,12 +209,18 @@ const NFIDENTID NFCDataProcessModule::CreateRole( const std::string& strAccount,
 
 	vFieldVec.clear();
 	vValueVec.clear();
+
 	vFieldVec.push_back("Name");
 	vValueVec.push_back(strName);
+
 	vFieldVec.push_back("Job");
 	vValueVec.push_back(boost::lexical_cast<std::string>(nJob));
+
 	vFieldVec.push_back("Sex");
 	vValueVec.push_back(boost::lexical_cast<std::string>(nSex));
+
+	vFieldVec.push_back("Level");
+	vValueVec.push_back(boost::lexical_cast<std::string>(1));
 
 	if(!m_pClusterSQLModule->Updata(xID.ToString(), vFieldVec, vValueVec))
 	{
@@ -231,4 +237,64 @@ const NFIDENTID NFCDataProcessModule::CreateRole( const std::string& strAccount,
 	}
 
 	return xID;
+}
+
+const bool NFCDataProcessModule::DeleteRole( const std::string& strAccount, const NFIDENTID xID )
+{
+	bool bExit = false;
+	if (!m_pClusterSQLModule->Exists(strAccount, bExit)
+		|| !bExit)
+	{
+		return false;
+	}
+
+	bExit = false;
+	if (!m_pClusterSQLModule->Exists(xID.ToString(), bExit)
+		|| !bExit)
+	{
+		return false;
+	}
+
+	if (!m_pClusterSQLModule->Delete(xID.ToString()))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+const bool NFCDataProcessModule::GetChar( const std::string& strAccount, std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVeec )
+{
+	bool bExit = false;
+	if (!m_pClusterSQLModule->Exists(strAccount, bExit)
+		|| !bExit)
+	{
+		return false;
+	}
+
+	std::vector<std::string> vFieldVec;
+	std::vector<std::string> vValueVec;
+	vFieldVec.push_back("RoleID");
+
+	if(!m_pClusterSQLModule->Query(strAccount, vFieldVec, vValueVec)
+		|| vFieldVec.size() != vValueVec.size())
+	{
+		return false;
+	}
+
+	vFieldVec.clear();
+	vValueVec.clear();
+
+	const std::string& stRolerID = vValueVec[0];
+
+	if(!m_pClusterSQLModule->Query(stRolerID, vFieldVec, vValueVec)
+		|| vFieldVec.size() != vValueVec.size())
+	{
+		return false;
+	}
+
+	xFieldVec = vFieldVec;
+	xValueVeec = vValueVec;
+
+	return true;
 }

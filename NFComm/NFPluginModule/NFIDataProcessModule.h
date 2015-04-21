@@ -23,6 +23,9 @@ public:
 
 
 	virtual const NFIDENTID CreateRole(const std::string& strAccount, const std::string& strName, const int nJob, const int nSex) = 0;
+	virtual const bool DeleteRole(const std::string& strAccount, const NFIDENTID xID) = 0;
+	virtual const bool GetChar(const std::string& strAccount, std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVeec) = 0;
+
 };
 
 #endif
