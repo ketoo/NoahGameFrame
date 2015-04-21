@@ -18,8 +18,7 @@ NFCMysqlClusterModule::NFCMysqlClusterModule(NFIPluginManager* p)
 
 NFCMysqlClusterModule::~NFCMysqlClusterModule()
 {
-//     delete m_pDataBaseDriver;
-//     m_pDataBaseDriver = NULL;
+
 }
 
 bool NFCMysqlClusterModule::Init()
@@ -63,4 +62,24 @@ bool NFCMysqlClusterModule::Execute(const float fLasFrametime, const float fStar
 
 
     return true;
+}
+
+bool NFCMysqlClusterModule::Updata( const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec )
+{
+	return false;
+}
+
+bool NFCMysqlClusterModule::Query( const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec )
+{
+	return false;
+}
+
+bool NFCMysqlClusterModule::Delete( const std::string& strKey )
+{
+	return false;
+}
+
+bool NFCMysqlClusterModule::Exists( const std::string& strKey, bool& bExit )
+{
+return false;
 }
