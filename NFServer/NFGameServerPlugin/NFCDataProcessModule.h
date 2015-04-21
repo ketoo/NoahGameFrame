@@ -34,8 +34,8 @@ public:
     virtual bool Execute( const float fLasFrametime, const float fStartedTime );
     virtual bool AfterInit();
 
-    virtual int LoadDataFormNoSql( const NFIDENTID& self );
-    virtual int SaveDataToNoSql( const NFIDENTID& self, bool bOffline = false );
+    virtual const bool LoadDataFormNoSql( const NFIDENTID& self );
+    virtual const bool SaveDataToNoSql( const NFIDENTID& self, bool bOffline = false );
 
 	virtual const NFIDENTID CreateRole(const std::string& strAccount, const std::string& strName, const int nJob, const int nSex);
 	virtual const bool DeleteRole(const std::string& strAccount, const NFIDENTID xID);
@@ -43,12 +43,6 @@ public:
 
 protected:
     int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
-
-    virtual int LoadProperty( const NFIDENTID& self, NF_SHARE_PTR<NFIPropertyManager> pProManager );
-    virtual int LoadRecord( const NFIDENTID& self, NF_SHARE_PTR<NFIRecordManager> pRecord );
-
-    virtual int SaveProperty( const NFIDENTID& self, NF_SHARE_PTR<NFIPropertyManager> pProManager );
-    virtual int SaveRecord( const NFIDENTID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager );
 
 private:
 
