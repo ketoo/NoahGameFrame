@@ -70,107 +70,52 @@ int NFCDataProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std::
     return 0;
 }
 
-int NFCDataProcessModule::LoadDataFormNoSql( const NFIDENTID& self )
+const bool NFCDataProcessModule::LoadDataFormNoSql( const NFIDENTID& self )
 {
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-    if ( pObject.get() )
+    if ( pObject )
     {
         NF_SHARE_PTR<NFIPropertyManager> pProManager = pObject->GetPropertyManager();
-        if ( pProManager.get() )
-        {
-            LoadProperty( self, pProManager );
-        }
-
         NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
-        if ( pRecordManager.get() )
-        {
-            LoadRecord( self, pRecordManager );
-        }
+
+		std::vector<std::string> vFieldVec;
+		std::vector<std::string> vValueVec;
+		if(!m_pClusterSQLModule->Query(self.ToString(), vFieldVec, vValueVec)
+			|| vFieldVec.size() != vValueVec.size()
+			|| vFieldVec.size()  < 2)
+		{
+			return false;
+		}
+
+		for (int i = 0; i < vFieldVec.size(); ++i)
+		{
+			const std::string& strField = vFieldVec[i];
+			const std::string& strValue = vFieldVec[i];
+			if (strField == "Property")
+			{
+
+			}
+			else if (strField == "Record")
+			{
+			}
+		}
+		
     }
 
-    return 0;
+    return true;
 }
 
-int NFCDataProcessModule::SaveDataToNoSql(const NFIDENTID& self, bool bOffline/* = false*/)
+const bool NFCDataProcessModule::SaveDataToNoSql(const NFIDENTID& self, bool bOffline/* = false*/)
 {
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
     if ( pObject.get() )
     {
-        SaveProperty( self, pObject->GetPropertyManager() );
-        SaveRecord( self, pObject->GetRecordManager() );
+		
+
+
     }
 
-    return 0;
-}
-
-#ifdef NF_USE_ACTOR
-void NFCDataProcessModule::Handler( const NFIActorMessage& message, const Theron::Address from )
-{
-    //收到的消息协议
-    if (message.eType == NFIActorMessage::EACTOR_NET_MSG)
-    {
-        HandlerEx(message, from);
-        //消息来了
-    }
-    else if (message.eType == NFIActorMessage::EACTOR_TRANS_MSG)
-    {
-        //想转移actor,其实是切场景的时候，玩家当前actor无那个场景,所以才切换actor
-        HandlerTrans(message, from);
-    }
-    else if (message.eType == NFIActorMessage::EACTOR_LOG_MSG)
-    {
-        HandlerLog(message, from);
-    }
-}
-
-Theron::Address NFCDataProcessModule::GetActorID( const NFIDENTID& self )
-{
-    return Theron::Address();
-}
-
-void NFCDataProcessModule::HandlerEx( const NFIActorMessage& message, const Theron::Address from )
-{
-    NFMsg::EGameMsgID eMsgID = (NFMsg::EGameMsgID)message.nSubMsgID;
-    //真的具体的业务
-    //case eMsgID
-
-
-}
-
-void NFCDataProcessModule::HandlerTrans( const NFIActorMessage& message, const Theron::Address from )
-{
-    //别人想进入这个场景
-}
-
-void NFCDataProcessModule::HandlerLog( const NFIActorMessage& message, const Theron::Address from )
-{
-    //日志
-}
-#endif
-
-int NFCDataProcessModule::LoadProperty( const NFIDENTID& self, NF_SHARE_PTR<NFIPropertyManager> pProManager )
-{
-    //m_pNoSqlModule->QueryRoleProperty();
-
-    //RecordFormString( NFIRecordManager* pRecordManager, const NFMsg::ObjectRecordList& recordList )
-    //
-    return 0;
-}
-
-int NFCDataProcessModule::LoadRecord( const NFIDENTID& self, NF_SHARE_PTR<NFIRecordManager> pRecord )
-{
-
-    return 0;
-}
-
-int NFCDataProcessModule::SaveProperty( const NFIDENTID& self, NF_SHARE_PTR<NFIPropertyManager> pProManager )
-{
-    return 0;
-}
-
-int NFCDataProcessModule::SaveRecord( const NFIDENTID& self, NF_SHARE_PTR<NFIRecordManager> pRecord )
-{
-    return 0;
+    return false;
 }
 
 const NFIDENTID NFCDataProcessModule::CreateRole( const std::string& strAccount, const std::string& strName, const int nJob, const int nSex )
