@@ -13,8 +13,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILoginLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
-#include "NFComm/NFPluginModule/NFIDataNoSqlModule.h"
-#include "NFComm/NFPluginModule/NFIPlatformDataModule.h"
+#include "NFComm/NFPluginModule/NFIClusterModule.h"
 
 class NFCLoginLogicModule
     : public NFILoginLogicModule
@@ -42,8 +41,7 @@ protected:
 protected:
 
     NFIEventProcessModule* m_pEventProcessModule;
-    NFIPlatformDataModule* m_pNoSqlModule;
-    NFIKernelModule* m_pKernelModule;
+    NFIClusterModule* m_pClusterSqlModule;
 
 private:
 };
