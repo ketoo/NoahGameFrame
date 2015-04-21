@@ -15,7 +15,7 @@
 #include "NFMsgBaseEx.pb.h"
 #include "NFMsgPreGame.pb.h"
 #include "NFMsgShare.pb.h"
-#include "NFComm/NFPluginModule/NFPlatform.h"
+#include "NFComm/NFPluginModule//NFPlatform.h"
 #include "NFComm/NFCore/NFIRecordManager.h"
 #include "NFComm/NFCore/NFIPropertyManager.h"
 #include "NFComm/NFCore/NFList.h"

@@ -61,6 +61,9 @@ class ObjectRecordObject;
 class ObjectRecordSwap;
 class ObjectRecordAddRow;
 class ObjectRecordRemove;
+class PlayerPropertyBase;
+class PlayerRecordBase;
+class PlayerRecordList;
 class MsgBase;
 class Position;
 class ReqCommand;
@@ -2820,6 +2823,354 @@ class ObjectRecordRemove : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class PlayerPropertyBase : public ::google::protobuf::Message {
+ public:
+  PlayerPropertyBase();
+  virtual ~PlayerPropertyBase();
+
+  PlayerPropertyBase(const PlayerPropertyBase& from);
+
+  inline PlayerPropertyBase& operator=(const PlayerPropertyBase& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PlayerPropertyBase& default_instance();
+
+  void Swap(PlayerPropertyBase* other);
+
+  // implements Message ----------------------------------------------
+
+  PlayerPropertyBase* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PlayerPropertyBase& from);
+  void MergeFrom(const PlayerPropertyBase& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFMsg.PropertyInt property_int_list = 1;
+  inline int property_int_list_size() const;
+  inline void clear_property_int_list();
+  static const int kPropertyIntListFieldNumber = 1;
+  inline const ::NFMsg::PropertyInt& property_int_list(int index) const;
+  inline ::NFMsg::PropertyInt* mutable_property_int_list(int index);
+  inline ::NFMsg::PropertyInt* add_property_int_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyInt >&
+      property_int_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyInt >*
+      mutable_property_int_list();
+
+  // repeated .NFMsg.PropertyFloat property_float_list = 2;
+  inline int property_float_list_size() const;
+  inline void clear_property_float_list();
+  static const int kPropertyFloatListFieldNumber = 2;
+  inline const ::NFMsg::PropertyFloat& property_float_list(int index) const;
+  inline ::NFMsg::PropertyFloat* mutable_property_float_list(int index);
+  inline ::NFMsg::PropertyFloat* add_property_float_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyFloat >&
+      property_float_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyFloat >*
+      mutable_property_float_list();
+
+  // repeated .NFMsg.PropertyString property_string_list = 3;
+  inline int property_string_list_size() const;
+  inline void clear_property_string_list();
+  static const int kPropertyStringListFieldNumber = 3;
+  inline const ::NFMsg::PropertyString& property_string_list(int index) const;
+  inline ::NFMsg::PropertyString* mutable_property_string_list(int index);
+  inline ::NFMsg::PropertyString* add_property_string_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyString >&
+      property_string_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyString >*
+      mutable_property_string_list();
+
+  // repeated .NFMsg.PropertyObject property_object_list = 4;
+  inline int property_object_list_size() const;
+  inline void clear_property_object_list();
+  static const int kPropertyObjectListFieldNumber = 4;
+  inline const ::NFMsg::PropertyObject& property_object_list(int index) const;
+  inline ::NFMsg::PropertyObject* mutable_property_object_list(int index);
+  inline ::NFMsg::PropertyObject* add_property_object_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyObject >&
+      property_object_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyObject >*
+      mutable_property_object_list();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.PlayerPropertyBase)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyInt > property_int_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyFloat > property_float_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyString > property_string_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyObject > property_object_list_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void protobuf_AssignDesc_NFMsgBase_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
+
+  void InitAsDefaultInstance();
+  static PlayerPropertyBase* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class PlayerRecordBase : public ::google::protobuf::Message {
+ public:
+  PlayerRecordBase();
+  virtual ~PlayerRecordBase();
+
+  PlayerRecordBase(const PlayerRecordBase& from);
+
+  inline PlayerRecordBase& operator=(const PlayerRecordBase& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PlayerRecordBase& default_instance();
+
+  void Swap(PlayerRecordBase* other);
+
+  // implements Message ----------------------------------------------
+
+  PlayerRecordBase* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PlayerRecordBase& from);
+  void MergeFrom(const PlayerRecordBase& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string record_name = 1;
+  inline bool has_record_name() const;
+  inline void clear_record_name();
+  static const int kRecordNameFieldNumber = 1;
+  inline const ::std::string& record_name() const;
+  inline void set_record_name(const ::std::string& value);
+  inline void set_record_name(const char* value);
+  inline void set_record_name(const char* value, size_t size);
+  inline ::std::string* mutable_record_name();
+  inline ::std::string* release_record_name();
+  inline void set_allocated_record_name(::std::string* record_name);
+
+  // repeated .NFMsg.RecordInt record_int_list = 2;
+  inline int record_int_list_size() const;
+  inline void clear_record_int_list();
+  static const int kRecordIntListFieldNumber = 2;
+  inline const ::NFMsg::RecordInt& record_int_list(int index) const;
+  inline ::NFMsg::RecordInt* mutable_record_int_list(int index);
+  inline ::NFMsg::RecordInt* add_record_int_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt >&
+      record_int_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt >*
+      mutable_record_int_list();
+
+  // repeated .NFMsg.RecordFloat record_float_list = 3;
+  inline int record_float_list_size() const;
+  inline void clear_record_float_list();
+  static const int kRecordFloatListFieldNumber = 3;
+  inline const ::NFMsg::RecordFloat& record_float_list(int index) const;
+  inline ::NFMsg::RecordFloat* mutable_record_float_list(int index);
+  inline ::NFMsg::RecordFloat* add_record_float_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat >&
+      record_float_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat >*
+      mutable_record_float_list();
+
+  // repeated .NFMsg.RecordString record_string_list = 4;
+  inline int record_string_list_size() const;
+  inline void clear_record_string_list();
+  static const int kRecordStringListFieldNumber = 4;
+  inline const ::NFMsg::RecordString& record_string_list(int index) const;
+  inline ::NFMsg::RecordString* mutable_record_string_list(int index);
+  inline ::NFMsg::RecordString* add_record_string_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString >&
+      record_string_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString >*
+      mutable_record_string_list();
+
+  // repeated .NFMsg.RecordObject record_object_list = 5;
+  inline int record_object_list_size() const;
+  inline void clear_record_object_list();
+  static const int kRecordObjectListFieldNumber = 5;
+  inline const ::NFMsg::RecordObject& record_object_list(int index) const;
+  inline ::NFMsg::RecordObject* mutable_record_object_list(int index);
+  inline ::NFMsg::RecordObject* add_record_object_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject >&
+      record_object_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject >*
+      mutable_record_object_list();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.PlayerRecordBase)
+ private:
+  inline void set_has_record_name();
+  inline void clear_has_record_name();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* record_name_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt > record_int_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat > record_float_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString > record_string_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject > record_object_list_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void protobuf_AssignDesc_NFMsgBase_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
+
+  void InitAsDefaultInstance();
+  static PlayerRecordBase* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class PlayerRecordList : public ::google::protobuf::Message {
+ public:
+  PlayerRecordList();
+  virtual ~PlayerRecordList();
+
+  PlayerRecordList(const PlayerRecordList& from);
+
+  inline PlayerRecordList& operator=(const PlayerRecordList& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PlayerRecordList& default_instance();
+
+  void Swap(PlayerRecordList* other);
+
+  // implements Message ----------------------------------------------
+
+  PlayerRecordList* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PlayerRecordList& from);
+  void MergeFrom(const PlayerRecordList& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFMsg.PlayerRecordBase record_list = 1;
+  inline int record_list_size() const;
+  inline void clear_record_list();
+  static const int kRecordListFieldNumber = 1;
+  inline const ::NFMsg::PlayerRecordBase& record_list(int index) const;
+  inline ::NFMsg::PlayerRecordBase* mutable_record_list(int index);
+  inline ::NFMsg::PlayerRecordBase* add_record_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PlayerRecordBase >&
+      record_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PlayerRecordBase >*
+      mutable_record_list();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.PlayerRecordList)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PlayerRecordBase > record_list_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void protobuf_AssignDesc_NFMsgBase_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
+
+  void InitAsDefaultInstance();
+  static PlayerRecordList* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class MsgBase : public ::google::protobuf::Message {
  public:
   MsgBase();
@@ -3141,12 +3492,54 @@ class ReqCommand : public ::google::protobuf::Message {
   inline ::std::string* release_command_str_value();
   inline void set_allocated_command_str_value(::std::string* command_str_value);
 
-  // optional int64 command_value = 4;
-  inline bool has_command_value() const;
-  inline void clear_command_value();
-  static const int kCommandValueFieldNumber = 4;
-  inline ::google::protobuf::int64 command_value() const;
-  inline void set_command_value(::google::protobuf::int64 value);
+  // optional int64 command_value_int = 4;
+  inline bool has_command_value_int() const;
+  inline void clear_command_value_int();
+  static const int kCommandValueIntFieldNumber = 4;
+  inline ::google::protobuf::int64 command_value_int() const;
+  inline void set_command_value_int(::google::protobuf::int64 value);
+
+  // optional float command_value_float = 5;
+  inline bool has_command_value_float() const;
+  inline void clear_command_value_float();
+  static const int kCommandValueFloatFieldNumber = 5;
+  inline float command_value_float() const;
+  inline void set_command_value_float(float value);
+
+  // optional bytes command_value_str = 6;
+  inline bool has_command_value_str() const;
+  inline void clear_command_value_str();
+  static const int kCommandValueStrFieldNumber = 6;
+  inline const ::std::string& command_value_str() const;
+  inline void set_command_value_str(const ::std::string& value);
+  inline void set_command_value_str(const char* value);
+  inline void set_command_value_str(const void* value, size_t size);
+  inline ::std::string* mutable_command_value_str();
+  inline ::std::string* release_command_value_str();
+  inline void set_allocated_command_value_str(::std::string* command_value_str);
+
+  // optional .NFMsg.Ident command_value_object = 7;
+  inline bool has_command_value_object() const;
+  inline void clear_command_value_object();
+  static const int kCommandValueObjectFieldNumber = 7;
+  inline const ::NFMsg::Ident& command_value_object() const;
+  inline ::NFMsg::Ident* mutable_command_value_object();
+  inline ::NFMsg::Ident* release_command_value_object();
+  inline void set_allocated_command_value_object(::NFMsg::Ident* command_value_object);
+
+  // optional int32 row = 8;
+  inline bool has_row() const;
+  inline void clear_row();
+  static const int kRowFieldNumber = 8;
+  inline ::google::protobuf::int32 row() const;
+  inline void set_row(::google::protobuf::int32 value);
+
+  // optional int32 col = 9;
+  inline bool has_col() const;
+  inline void clear_col();
+  static const int kColFieldNumber = 9;
+  inline ::google::protobuf::int32 col() const;
+  inline void set_col(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqCommand)
  private:
@@ -3156,18 +3549,33 @@ class ReqCommand : public ::google::protobuf::Message {
   inline void clear_has_command_id();
   inline void set_has_command_str_value();
   inline void clear_has_command_str_value();
-  inline void set_has_command_value();
-  inline void clear_has_command_value();
+  inline void set_has_command_value_int();
+  inline void clear_has_command_value_int();
+  inline void set_has_command_value_float();
+  inline void clear_has_command_value_float();
+  inline void set_has_command_value_str();
+  inline void clear_has_command_value_str();
+  inline void set_has_command_value_object();
+  inline void clear_has_command_value_object();
+  inline void set_has_row();
+  inline void clear_has_row();
+  inline void set_has_col();
+  inline void clear_has_col();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::NFMsg::Ident* control_id_;
   ::std::string* command_str_value_;
-  ::google::protobuf::int64 command_value_;
   int command_id_;
+  float command_value_float_;
+  ::google::protobuf::int64 command_value_int_;
+  ::std::string* command_value_str_;
+  ::NFMsg::Ident* command_value_object_;
+  ::google::protobuf::int32 row_;
+  ::google::protobuf::int32 col_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
@@ -5829,6 +6237,313 @@ ObjectRecordRemove::mutable_remove_row() {
 
 // -------------------------------------------------------------------
 
+// PlayerPropertyBase
+
+// repeated .NFMsg.PropertyInt property_int_list = 1;
+inline int PlayerPropertyBase::property_int_list_size() const {
+  return property_int_list_.size();
+}
+inline void PlayerPropertyBase::clear_property_int_list() {
+  property_int_list_.Clear();
+}
+inline const ::NFMsg::PropertyInt& PlayerPropertyBase::property_int_list(int index) const {
+  return property_int_list_.Get(index);
+}
+inline ::NFMsg::PropertyInt* PlayerPropertyBase::mutable_property_int_list(int index) {
+  return property_int_list_.Mutable(index);
+}
+inline ::NFMsg::PropertyInt* PlayerPropertyBase::add_property_int_list() {
+  return property_int_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyInt >&
+PlayerPropertyBase::property_int_list() const {
+  return property_int_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyInt >*
+PlayerPropertyBase::mutable_property_int_list() {
+  return &property_int_list_;
+}
+
+// repeated .NFMsg.PropertyFloat property_float_list = 2;
+inline int PlayerPropertyBase::property_float_list_size() const {
+  return property_float_list_.size();
+}
+inline void PlayerPropertyBase::clear_property_float_list() {
+  property_float_list_.Clear();
+}
+inline const ::NFMsg::PropertyFloat& PlayerPropertyBase::property_float_list(int index) const {
+  return property_float_list_.Get(index);
+}
+inline ::NFMsg::PropertyFloat* PlayerPropertyBase::mutable_property_float_list(int index) {
+  return property_float_list_.Mutable(index);
+}
+inline ::NFMsg::PropertyFloat* PlayerPropertyBase::add_property_float_list() {
+  return property_float_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyFloat >&
+PlayerPropertyBase::property_float_list() const {
+  return property_float_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyFloat >*
+PlayerPropertyBase::mutable_property_float_list() {
+  return &property_float_list_;
+}
+
+// repeated .NFMsg.PropertyString property_string_list = 3;
+inline int PlayerPropertyBase::property_string_list_size() const {
+  return property_string_list_.size();
+}
+inline void PlayerPropertyBase::clear_property_string_list() {
+  property_string_list_.Clear();
+}
+inline const ::NFMsg::PropertyString& PlayerPropertyBase::property_string_list(int index) const {
+  return property_string_list_.Get(index);
+}
+inline ::NFMsg::PropertyString* PlayerPropertyBase::mutable_property_string_list(int index) {
+  return property_string_list_.Mutable(index);
+}
+inline ::NFMsg::PropertyString* PlayerPropertyBase::add_property_string_list() {
+  return property_string_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyString >&
+PlayerPropertyBase::property_string_list() const {
+  return property_string_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyString >*
+PlayerPropertyBase::mutable_property_string_list() {
+  return &property_string_list_;
+}
+
+// repeated .NFMsg.PropertyObject property_object_list = 4;
+inline int PlayerPropertyBase::property_object_list_size() const {
+  return property_object_list_.size();
+}
+inline void PlayerPropertyBase::clear_property_object_list() {
+  property_object_list_.Clear();
+}
+inline const ::NFMsg::PropertyObject& PlayerPropertyBase::property_object_list(int index) const {
+  return property_object_list_.Get(index);
+}
+inline ::NFMsg::PropertyObject* PlayerPropertyBase::mutable_property_object_list(int index) {
+  return property_object_list_.Mutable(index);
+}
+inline ::NFMsg::PropertyObject* PlayerPropertyBase::add_property_object_list() {
+  return property_object_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyObject >&
+PlayerPropertyBase::property_object_list() const {
+  return property_object_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyObject >*
+PlayerPropertyBase::mutable_property_object_list() {
+  return &property_object_list_;
+}
+
+// -------------------------------------------------------------------
+
+// PlayerRecordBase
+
+// required string record_name = 1;
+inline bool PlayerRecordBase::has_record_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void PlayerRecordBase::set_has_record_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void PlayerRecordBase::clear_has_record_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void PlayerRecordBase::clear_record_name() {
+  if (record_name_ != &::google::protobuf::internal::kEmptyString) {
+    record_name_->clear();
+  }
+  clear_has_record_name();
+}
+inline const ::std::string& PlayerRecordBase::record_name() const {
+  return *record_name_;
+}
+inline void PlayerRecordBase::set_record_name(const ::std::string& value) {
+  set_has_record_name();
+  if (record_name_ == &::google::protobuf::internal::kEmptyString) {
+    record_name_ = new ::std::string;
+  }
+  record_name_->assign(value);
+}
+inline void PlayerRecordBase::set_record_name(const char* value) {
+  set_has_record_name();
+  if (record_name_ == &::google::protobuf::internal::kEmptyString) {
+    record_name_ = new ::std::string;
+  }
+  record_name_->assign(value);
+}
+inline void PlayerRecordBase::set_record_name(const char* value, size_t size) {
+  set_has_record_name();
+  if (record_name_ == &::google::protobuf::internal::kEmptyString) {
+    record_name_ = new ::std::string;
+  }
+  record_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* PlayerRecordBase::mutable_record_name() {
+  set_has_record_name();
+  if (record_name_ == &::google::protobuf::internal::kEmptyString) {
+    record_name_ = new ::std::string;
+  }
+  return record_name_;
+}
+inline ::std::string* PlayerRecordBase::release_record_name() {
+  clear_has_record_name();
+  if (record_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = record_name_;
+    record_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void PlayerRecordBase::set_allocated_record_name(::std::string* record_name) {
+  if (record_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete record_name_;
+  }
+  if (record_name) {
+    set_has_record_name();
+    record_name_ = record_name;
+  } else {
+    clear_has_record_name();
+    record_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// repeated .NFMsg.RecordInt record_int_list = 2;
+inline int PlayerRecordBase::record_int_list_size() const {
+  return record_int_list_.size();
+}
+inline void PlayerRecordBase::clear_record_int_list() {
+  record_int_list_.Clear();
+}
+inline const ::NFMsg::RecordInt& PlayerRecordBase::record_int_list(int index) const {
+  return record_int_list_.Get(index);
+}
+inline ::NFMsg::RecordInt* PlayerRecordBase::mutable_record_int_list(int index) {
+  return record_int_list_.Mutable(index);
+}
+inline ::NFMsg::RecordInt* PlayerRecordBase::add_record_int_list() {
+  return record_int_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt >&
+PlayerRecordBase::record_int_list() const {
+  return record_int_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordInt >*
+PlayerRecordBase::mutable_record_int_list() {
+  return &record_int_list_;
+}
+
+// repeated .NFMsg.RecordFloat record_float_list = 3;
+inline int PlayerRecordBase::record_float_list_size() const {
+  return record_float_list_.size();
+}
+inline void PlayerRecordBase::clear_record_float_list() {
+  record_float_list_.Clear();
+}
+inline const ::NFMsg::RecordFloat& PlayerRecordBase::record_float_list(int index) const {
+  return record_float_list_.Get(index);
+}
+inline ::NFMsg::RecordFloat* PlayerRecordBase::mutable_record_float_list(int index) {
+  return record_float_list_.Mutable(index);
+}
+inline ::NFMsg::RecordFloat* PlayerRecordBase::add_record_float_list() {
+  return record_float_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat >&
+PlayerRecordBase::record_float_list() const {
+  return record_float_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordFloat >*
+PlayerRecordBase::mutable_record_float_list() {
+  return &record_float_list_;
+}
+
+// repeated .NFMsg.RecordString record_string_list = 4;
+inline int PlayerRecordBase::record_string_list_size() const {
+  return record_string_list_.size();
+}
+inline void PlayerRecordBase::clear_record_string_list() {
+  record_string_list_.Clear();
+}
+inline const ::NFMsg::RecordString& PlayerRecordBase::record_string_list(int index) const {
+  return record_string_list_.Get(index);
+}
+inline ::NFMsg::RecordString* PlayerRecordBase::mutable_record_string_list(int index) {
+  return record_string_list_.Mutable(index);
+}
+inline ::NFMsg::RecordString* PlayerRecordBase::add_record_string_list() {
+  return record_string_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString >&
+PlayerRecordBase::record_string_list() const {
+  return record_string_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordString >*
+PlayerRecordBase::mutable_record_string_list() {
+  return &record_string_list_;
+}
+
+// repeated .NFMsg.RecordObject record_object_list = 5;
+inline int PlayerRecordBase::record_object_list_size() const {
+  return record_object_list_.size();
+}
+inline void PlayerRecordBase::clear_record_object_list() {
+  record_object_list_.Clear();
+}
+inline const ::NFMsg::RecordObject& PlayerRecordBase::record_object_list(int index) const {
+  return record_object_list_.Get(index);
+}
+inline ::NFMsg::RecordObject* PlayerRecordBase::mutable_record_object_list(int index) {
+  return record_object_list_.Mutable(index);
+}
+inline ::NFMsg::RecordObject* PlayerRecordBase::add_record_object_list() {
+  return record_object_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject >&
+PlayerRecordBase::record_object_list() const {
+  return record_object_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RecordObject >*
+PlayerRecordBase::mutable_record_object_list() {
+  return &record_object_list_;
+}
+
+// -------------------------------------------------------------------
+
+// PlayerRecordList
+
+// repeated .NFMsg.PlayerRecordBase record_list = 1;
+inline int PlayerRecordList::record_list_size() const {
+  return record_list_.size();
+}
+inline void PlayerRecordList::clear_record_list() {
+  record_list_.Clear();
+}
+inline const ::NFMsg::PlayerRecordBase& PlayerRecordList::record_list(int index) const {
+  return record_list_.Get(index);
+}
+inline ::NFMsg::PlayerRecordBase* PlayerRecordList::mutable_record_list(int index) {
+  return record_list_.Mutable(index);
+}
+inline ::NFMsg::PlayerRecordBase* PlayerRecordList::add_record_list() {
+  return record_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PlayerRecordBase >&
+PlayerRecordList::record_list() const {
+  return record_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PlayerRecordBase >*
+PlayerRecordList::mutable_record_list() {
+  return &record_list_;
+}
+
+// -------------------------------------------------------------------
+
 // MsgBase
 
 // required .NFMsg.Ident player_id = 1;
@@ -6169,26 +6884,200 @@ inline void ReqCommand::set_allocated_command_str_value(::std::string* command_s
   }
 }
 
-// optional int64 command_value = 4;
-inline bool ReqCommand::has_command_value() const {
+// optional int64 command_value_int = 4;
+inline bool ReqCommand::has_command_value_int() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void ReqCommand::set_has_command_value() {
+inline void ReqCommand::set_has_command_value_int() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void ReqCommand::clear_has_command_value() {
+inline void ReqCommand::clear_has_command_value_int() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void ReqCommand::clear_command_value() {
-  command_value_ = GOOGLE_LONGLONG(0);
-  clear_has_command_value();
+inline void ReqCommand::clear_command_value_int() {
+  command_value_int_ = GOOGLE_LONGLONG(0);
+  clear_has_command_value_int();
 }
-inline ::google::protobuf::int64 ReqCommand::command_value() const {
-  return command_value_;
+inline ::google::protobuf::int64 ReqCommand::command_value_int() const {
+  return command_value_int_;
 }
-inline void ReqCommand::set_command_value(::google::protobuf::int64 value) {
-  set_has_command_value();
-  command_value_ = value;
+inline void ReqCommand::set_command_value_int(::google::protobuf::int64 value) {
+  set_has_command_value_int();
+  command_value_int_ = value;
+}
+
+// optional float command_value_float = 5;
+inline bool ReqCommand::has_command_value_float() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ReqCommand::set_has_command_value_float() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ReqCommand::clear_has_command_value_float() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ReqCommand::clear_command_value_float() {
+  command_value_float_ = 0;
+  clear_has_command_value_float();
+}
+inline float ReqCommand::command_value_float() const {
+  return command_value_float_;
+}
+inline void ReqCommand::set_command_value_float(float value) {
+  set_has_command_value_float();
+  command_value_float_ = value;
+}
+
+// optional bytes command_value_str = 6;
+inline bool ReqCommand::has_command_value_str() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void ReqCommand::set_has_command_value_str() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void ReqCommand::clear_has_command_value_str() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void ReqCommand::clear_command_value_str() {
+  if (command_value_str_ != &::google::protobuf::internal::kEmptyString) {
+    command_value_str_->clear();
+  }
+  clear_has_command_value_str();
+}
+inline const ::std::string& ReqCommand::command_value_str() const {
+  return *command_value_str_;
+}
+inline void ReqCommand::set_command_value_str(const ::std::string& value) {
+  set_has_command_value_str();
+  if (command_value_str_ == &::google::protobuf::internal::kEmptyString) {
+    command_value_str_ = new ::std::string;
+  }
+  command_value_str_->assign(value);
+}
+inline void ReqCommand::set_command_value_str(const char* value) {
+  set_has_command_value_str();
+  if (command_value_str_ == &::google::protobuf::internal::kEmptyString) {
+    command_value_str_ = new ::std::string;
+  }
+  command_value_str_->assign(value);
+}
+inline void ReqCommand::set_command_value_str(const void* value, size_t size) {
+  set_has_command_value_str();
+  if (command_value_str_ == &::google::protobuf::internal::kEmptyString) {
+    command_value_str_ = new ::std::string;
+  }
+  command_value_str_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqCommand::mutable_command_value_str() {
+  set_has_command_value_str();
+  if (command_value_str_ == &::google::protobuf::internal::kEmptyString) {
+    command_value_str_ = new ::std::string;
+  }
+  return command_value_str_;
+}
+inline ::std::string* ReqCommand::release_command_value_str() {
+  clear_has_command_value_str();
+  if (command_value_str_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = command_value_str_;
+    command_value_str_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqCommand::set_allocated_command_value_str(::std::string* command_value_str) {
+  if (command_value_str_ != &::google::protobuf::internal::kEmptyString) {
+    delete command_value_str_;
+  }
+  if (command_value_str) {
+    set_has_command_value_str();
+    command_value_str_ = command_value_str;
+  } else {
+    clear_has_command_value_str();
+    command_value_str_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional .NFMsg.Ident command_value_object = 7;
+inline bool ReqCommand::has_command_value_object() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void ReqCommand::set_has_command_value_object() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void ReqCommand::clear_has_command_value_object() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void ReqCommand::clear_command_value_object() {
+  if (command_value_object_ != NULL) command_value_object_->::NFMsg::Ident::Clear();
+  clear_has_command_value_object();
+}
+inline const ::NFMsg::Ident& ReqCommand::command_value_object() const {
+  return command_value_object_ != NULL ? *command_value_object_ : *default_instance_->command_value_object_;
+}
+inline ::NFMsg::Ident* ReqCommand::mutable_command_value_object() {
+  set_has_command_value_object();
+  if (command_value_object_ == NULL) command_value_object_ = new ::NFMsg::Ident;
+  return command_value_object_;
+}
+inline ::NFMsg::Ident* ReqCommand::release_command_value_object() {
+  clear_has_command_value_object();
+  ::NFMsg::Ident* temp = command_value_object_;
+  command_value_object_ = NULL;
+  return temp;
+}
+inline void ReqCommand::set_allocated_command_value_object(::NFMsg::Ident* command_value_object) {
+  delete command_value_object_;
+  command_value_object_ = command_value_object;
+  if (command_value_object) {
+    set_has_command_value_object();
+  } else {
+    clear_has_command_value_object();
+  }
+}
+
+// optional int32 row = 8;
+inline bool ReqCommand::has_row() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void ReqCommand::set_has_row() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void ReqCommand::clear_has_row() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void ReqCommand::clear_row() {
+  row_ = 0;
+  clear_has_row();
+}
+inline ::google::protobuf::int32 ReqCommand::row() const {
+  return row_;
+}
+inline void ReqCommand::set_row(::google::protobuf::int32 value) {
+  set_has_row();
+  row_ = value;
+}
+
+// optional int32 col = 9;
+inline bool ReqCommand::has_col() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void ReqCommand::set_has_col() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void ReqCommand::clear_has_col() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void ReqCommand::clear_col() {
+  col_ = 0;
+  clear_has_col();
+}
+inline ::google::protobuf::int32 ReqCommand::col() const {
+  return col_;
+}
+inline void ReqCommand::set_col(::google::protobuf::int32 value) {
+  set_has_col();
+  col_ = value;
 }
 
 
