@@ -28,7 +28,8 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     m_pSLGBuildingModule = dynamic_cast<NFISLGBuildingModule*>(pPluginManager->FindModule("NFCSLGBuildingModule"));
     m_pUUIDModule = dynamic_cast<NFIUUIDModule*>(pPluginManager->FindModule("NFCUUIDModule"));
     m_pPVPModule = dynamic_cast<NFIPVPModule*>(pPluginManager->FindModule("NFCPVPModule"));
-    m_pSkillModule = dynamic_cast<NFISkillModule*>(pPluginManager->FindModule("NFCSkillModule"));
+	m_pSkillModule = dynamic_cast<NFISkillModule*>(pPluginManager->FindModule("NFCSkillModule"));
+	m_pDataProcessModule = dynamic_cast<NFIDataProcessModule*>(pPluginManager->FindModule("NFCDataProcessModule"));
 
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
@@ -40,7 +41,8 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     assert(NULL != m_pSLGBuildingModule);
     assert(NULL != m_pUUIDModule);
     assert(NULL != m_pPVPModule);
-    assert(NULL != m_pSkillModule);
+	assert(NULL != m_pSkillModule);
+	assert(NULL != m_pDataProcessModule);
 
     m_pKernelModule->ResgisterCommonClassEvent( this, &NFCGameServerNet_ServerModule::OnClassCommonEvent );
     m_pKernelModule->ResgisterCommonPropertyEvent( this, &NFCGameServerNet_ServerModule::OnPropertyCommonEvent );
@@ -1830,9 +1832,17 @@ void NFCGameServerNet_ServerModule::OnCreateRoleGameProcess( const NFIPacket& ms
         return;
     }
 
+	NFIDENTID xRoleID = m_pDataProcessModule->CreateRole(xMsg.account(), xMsg.noob_name(), xMsg.career(), xMsg.sex());
+	if (xRoleID.IsNull())
+	{
+		return;
+	}
+
+	//m_pDataProcessModule->GetChar()
+
     NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
     NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
-    pData->mutable_id()->CopyFrom(NFToPB(m_pUUIDModule->CreateGUID()));
+    pData->mutable_id()->CopyFrom(NFToPB(xRoleID));
     pData->set_career(xMsg.career());
     pData->set_sex(xMsg.sex());
     pData->set_race(xMsg.race());
@@ -1856,6 +1866,8 @@ void NFCGameServerNet_ServerModule::OnDeleteRoleGameProcess( const NFIPacket& ms
     {
         return;
     }
+
+	m_pDataProcessModule->DeleteRole(xMsg.account(), nPlayerID);
 
     NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
     SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, msg.GetFd(), nPlayerID);

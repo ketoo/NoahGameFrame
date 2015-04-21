@@ -30,6 +30,7 @@
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIPVPModule.h"
 #include "NFComm/NFPluginModule/NFISkillModule.h"
+#include "NFComm/NFPluginModule/NFIDataProcessModule.h"
 
 ////////////////////////////////////////////////////////////////////////////
 // 客户端消息处理宏
@@ -212,7 +213,8 @@ private:
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFIElementInfoModule* m_pElementInfoModule;
     NFIPVPModule* m_pPVPModule;
-    NFISkillModule* m_pSkillModule;
+	NFISkillModule* m_pSkillModule;
+	NFIDataProcessModule* m_pDataProcessModule;
     //////////////////////////////////////////////////////////////////////////
     //SLG模块
 	NFISLGShopModule* m_pSLGShopModule;
