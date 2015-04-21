@@ -14,8 +14,16 @@ bool NFCDataProcessModule::Init()
 {
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>( pPluginManager->FindModule( "NFCEventProcessModule" ) );
     m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
-    m_pNoSqlModule = dynamic_cast<NFIDataNoSqlModule*>( pPluginManager->FindModule( "NFCDataNoSqlModule" ) );
-    m_pGameLogicModule = dynamic_cast<NFIGameLogicModule*>( pPluginManager->FindModule( "NFCGameLogicModule" ) );
+    m_pClusterSQLModule = dynamic_cast<NFIClusterModule*>( pPluginManager->FindModule( "NFCMysqlClusterModule" ) );
+	m_pGameLogicModule = dynamic_cast<NFIGameLogicModule*>( pPluginManager->FindModule( "NFCGameLogicModule" ) );
+	m_pUUIDModule = dynamic_cast<NFIUUIDModule*>( pPluginManager->FindModule( "NFCUUIDModule" ) );
+	
+
+	assert(NULL != m_pEventProcessModule);
+	assert(NULL != m_pKernelModule);
+	assert(NULL != m_pClusterSQLModule);
+	assert(NULL != m_pGameLogicModule);
+	assert(NULL != m_pUUIDModule);
 
 
     m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCDataProcessModule::OnObjectClassEvent );
@@ -163,4 +171,64 @@ int NFCDataProcessModule::SaveProperty( const NFIDENTID& self, NF_SHARE_PTR<NFIP
 int NFCDataProcessModule::SaveRecord( const NFIDENTID& self, NF_SHARE_PTR<NFIRecordManager> pRecord )
 {
     return 0;
+}
+
+const NFIDENTID NFCDataProcessModule::CreateRole( const std::string& strAccount, const std::string& strName, const int nJob, const int nSex )
+{
+	bool bExit = false;
+	if (!m_pClusterSQLModule->Exists(strAccount, bExit)
+		|| !bExit)
+	{
+		return NFIDENTID();
+	}
+
+	bExit = false;
+	if (!m_pClusterSQLModule->Exists(strName, bExit)
+		|| !bExit)
+	{
+		return NFIDENTID();
+	}
+
+	//不存在此角色名,看帐号下面是否有角色
+
+	std::vector<std::string> vFieldVec;
+	std::vector<std::string> vValueVec;
+	if(!m_pClusterSQLModule->Query(strAccount, vFieldVec, vValueVec)
+		|| vFieldVec.size() != vValueVec.size())
+	{
+		return NFIDENTID();
+	}
+
+	if (vValueVec[0].length() > 0)
+	{
+		//已经有角色了
+		return NFIDENTID();
+	}
+
+	NFIDENTID xID = m_pUUIDModule->CreateGUID();
+
+	vFieldVec.clear();
+	vValueVec.clear();
+	vFieldVec.push_back("Name");
+	vValueVec.push_back(strName);
+	vFieldVec.push_back("Job");
+	vValueVec.push_back(boost::lexical_cast<std::string>(nJob));
+	vFieldVec.push_back("Sex");
+	vValueVec.push_back(boost::lexical_cast<std::string>(nSex));
+
+	if(!m_pClusterSQLModule->Updata(xID.ToString(), vFieldVec, vValueVec))
+	{
+		return NFIDENTID();
+	}
+
+	vFieldVec.clear();
+	vValueVec.clear();
+	vFieldVec.push_back("RoleID");
+	vFieldVec.push_back(xID.ToString());
+	if(!m_pClusterSQLModule->Updata(strAccount, vFieldVec, vValueVec))
+	{
+		return NFIDENTID();
+	}
+
+	return xID;
 }

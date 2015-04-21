@@ -15,6 +15,8 @@
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIDataNoSqlModule.h"
 #include "NFComm/NFPluginModule/NFIDataProcessModule.h"
+#include "NFComm/NFPluginModule/NFIClusterModule.h"
+#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 
 class NFCDataProcessModule
     : public NFIDataProcessModule
@@ -34,6 +36,9 @@ public:
 
     virtual int LoadDataFormNoSql( const NFIDENTID& self );
     virtual int SaveDataToNoSql( const NFIDENTID& self, bool bOffline = false );
+
+	virtual const NFIDENTID CreateRole(const std::string& strAccount, const std::string& strName, const int nJob, const int nSex);
+
 #ifdef NF_USE_ACTOR
 	virtual Theron::Address GetActorID(const NFIDENTID& self);
 
@@ -57,8 +62,9 @@ private:
 
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
-    NFIDataNoSqlModule* m_pNoSqlModule;
-    NFIGameLogicModule* m_pGameLogicModule;
+    NFIClusterModule* m_pClusterSQLModule;
+	NFIGameLogicModule* m_pGameLogicModule;
+	NFIUUIDModule* m_pUUIDModule;
 };
 
 
