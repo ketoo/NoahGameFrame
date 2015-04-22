@@ -43,12 +43,6 @@ public:
 protected:
     int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-	virtual int LoadProperty( const NFIDENTID& self, NF_SHARE_PTR<NFIPropertyManager> pProManager );
-	virtual int LoadRecord( const NFIDENTID& self, NF_SHARE_PTR<NFIRecordManager> pRecord );
-
-	virtual int SaveProperty( const NFIDENTID& self, NF_SHARE_PTR<NFIPropertyManager> pProManager );
-	virtual int SaveRecord( const NFIDENTID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager );
-
 private:
 
     NFIEventProcessModule* m_pEventProcessModule;
