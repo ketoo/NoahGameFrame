@@ -69,7 +69,7 @@ bool NFCMysqlClusterModule::Updata( const std::string& strKey, const std::vector
 	return false;
 }
 
-bool NFCMysqlClusterModule::Updata( const std::string& strRecord, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec )
+bool NFCMysqlClusterModule::Updata( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec )
 {
 	return false;
 }
@@ -79,7 +79,7 @@ bool NFCMysqlClusterModule::Query( const std::string& strKey, const std::vector<
 	return false;
 }
 
-bool NFCMysqlClusterModule::Query( const std::string& strRecord, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec )
+bool NFCMysqlClusterModule::Query( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec )
 {
 	return false;
 }
@@ -89,7 +89,7 @@ bool NFCMysqlClusterModule::Delete( const std::string& strKey )
 	return false;
 }
 
-bool NFCMysqlClusterModule::Delete( const std::string& strRecord, const std::string& strKey )
+bool NFCMysqlClusterModule::Delete( const std::string& strRecordName, const std::string& strKey )
 {
 	return false;
 }
@@ -99,7 +99,7 @@ bool NFCMysqlClusterModule::Exists( const std::string& strKey, bool& bExit )
 	return false;
 }
 
-bool NFCMysqlClusterModule::Exists( const std::string& strRecord, const std::string& strKey, bool& bExit )
+bool NFCMysqlClusterModule::Exists( const std::string& strRecordName, const std::string& strKey, bool& bExit )
 {
 	return false;
 }
@@ -109,7 +109,7 @@ bool NFCMysqlClusterModule::Select( const std::string& strKey, const std::vector
 	return false;
 }
 
-bool NFCMysqlClusterModule::Select( const std::string& strRecord, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec )
+bool NFCMysqlClusterModule::Select( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec )
 {
 	return false;
 }
