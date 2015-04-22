@@ -6,6 +6,7 @@
 #pragma comment( lib, "ws2_32" )
 #pragma comment( lib, "NFCore_d.lib" )
 #pragma comment( lib, "NFMessageDefine_d.lib" )
+#pragma comment( lib, "libprotobuf_d.lib" )
 //#pragma comment( lib, "libglog_static_d.lib" )
 
 
