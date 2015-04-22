@@ -36,11 +36,18 @@ public:
 
 	virtual bool Updata(const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec);
 	virtual bool Query(const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec);
-	//virtual bool Select(const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec);
+	virtual bool Select(const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec);
 
 	virtual bool Delete(const std::string& strKey);
 	virtual bool Exists(const std::string& strKey, bool& bExit);
 
+	//////////////////////////////////////////////////////////////////////////
+	virtual bool Updata(const std::string& strRecord, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec);
+	virtual bool Query(const std::string& strRecord, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec);
+	virtual bool Select(const std::string& strRecord, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec);
+
+	virtual bool Delete(const std::string& strRecord, const std::string& strKey);
+	virtual bool Exists(const std::string& strRecord, const std::string& strKey, bool& bExit);
 private:
 
     NFCMysqlDriver* m_pDataBaseDriver;
