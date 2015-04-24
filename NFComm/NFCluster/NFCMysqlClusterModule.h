@@ -52,10 +52,12 @@ private:
 
     NFCMysqlDriver* m_pDataBaseDriver;
 
-    std::string mstrMasterName;
-    std::string mstrUID;
-    std::string mstrPWD;
+    static std::string strDefaultKey;
+    static std::string strDefaultTable;
 
+
+    // key默认为ID
+    // RoleInfo为角色的Property和Record数据，有三列数据 ID, Property, Record
 };
 
 #endif
