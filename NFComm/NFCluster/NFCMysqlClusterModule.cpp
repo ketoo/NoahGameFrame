@@ -67,18 +67,79 @@ bool NFCMysqlClusterModule::Execute(const float fLasFrametime, const float fStar
 
 bool NFCMysqlClusterModule::Updata( const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec )
 {
-	return false;
+	return Updata(strDefaultTable, strKey, fieldVec, valueVec);
 }
 
 bool NFCMysqlClusterModule::Updata( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec )
 {
-	return false;
+    mysqlpp::Connection* pConnection = m_pDataBaseDriver->GetConnection();
+    if (NULL == pConnection)
+    {
+        return false;
+    }
+
+    bool bExist = false;
+    if (!Exists(strRecordName, strKey, bExist))
+    {
+        return false;
+    }
+
+
+    if (fieldVec.size() != valueVec.size())
+    {
+        return false;
+    }
+
+    std::ostringstream strSQL;
+    if (bExist)
+    {
+        // update
+        strSQL << "UPDATE " << strRecordName << " ";
+        for (int i = 0; i < fieldVec.size(); ++i)
+        {
+            if (i == 0)
+            {
+                strSQL << fieldVec[i] << " = " << valueVec[i];
+            }
+            else
+            {
+                strSQL << "," << fieldVec[i] << " = " << valueVec[i];
+            }
+        }
+    }
+    else
+    {
+        // insert
+        strSQL << "INSERT INTO " << strRecordName << " VALUES";
+        for (int i = 0; i < fieldVec.size(); ++i)
+        {
+            if (i == 0)
+            {
+                strSQL << "(" << fieldVec[i] << "," << mysqlpp::quote << valueVec[i] << ")";
+            }
+            else
+            {
+                strSQL << ", (" << fieldVec[i] << "," << mysqlpp::quote << valueVec[i] << ")";
+            }
+        }
+    }
+
+    strSQL << ";";
+
+    NFMYSQLTRYBEGIN
+        std::ostringstream stream;
+        stream << "DELETE FROM " << strRecordName << " WHERE " << strDefaultKey << " = " << mysqlpp::quote << strKey << ";";
+
+        mysqlpp::Query query = pConnection->query(stream.str());
+        query.reset();
+    NFMYSQLTRYEND("update or insert error")
+
+	return true;
 }
 
 bool NFCMysqlClusterModule::Query( const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec )
 {
-    Query(strDefaultTable, strKey, fieldVec, valueVec);
-	return false;
+    return Query(strDefaultTable, strKey, fieldVec, valueVec);
 }
 
 bool NFCMysqlClusterModule::Query( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec )
@@ -103,7 +164,7 @@ bool NFCMysqlClusterModule::Query( const std::string& strRecordName, const std::
                 stream << "," << *iter;
             }            
         }
-        stream << " FROM " << strRecordName << " WHERE " << strDefaultKey << " = " << mysqlpp::quote << strKey;
+        stream << " FROM " << strRecordName << " WHERE " << strDefaultKey << " = " << mysqlpp::quote << strKey << ";";
         
         
         mysqlpp::Query query = pConnection->query(stream.str());
@@ -115,9 +176,15 @@ bool NFCMysqlClusterModule::Query( const std::string& strRecordName, const std::
             return false;
         }
 
+        // xResult应该只有一行的，为了以后可能出现的多条，所以用了循环
         for (int i = 0; i < xResult.size(); ++i)
         {
-            
+            for (int j = 0; j < fieldVec.size(); ++j)
+            {
+                const std::string& strFieldName = fieldVec[j];
+                std::string strValue(xResult[i][strFieldName.data()].data(), xResult[i][strFieldName.data()].length());
+                valueVec.push_back(strValue);
+            }
         }
     NFMYSQLTRYEND("query error")
 
@@ -126,22 +193,60 @@ bool NFCMysqlClusterModule::Query( const std::string& strRecordName, const std::
 
 bool NFCMysqlClusterModule::Delete( const std::string& strKey )
 {
-	return false;
+    return Delete(strDefaultTable, strKey);
 }
 
 bool NFCMysqlClusterModule::Delete( const std::string& strRecordName, const std::string& strKey )
 {
-	return false;
+    mysqlpp::Connection* pConnection = m_pDataBaseDriver->GetConnection();
+    if (NULL == pConnection)
+    {
+        return false;
+    }
+
+    NFMYSQLTRYBEGIN
+        std::ostringstream stream;
+        stream << "DELETE FROM " << strRecordName << " WHERE " << strDefaultKey << " = " << mysqlpp::quote << strKey << ";";
+
+        mysqlpp::Query query = pConnection->query(stream.str());
+        query.reset();
+    NFMYSQLTRYEND("delete error")
+
+	return true;
 }
 
 bool NFCMysqlClusterModule::Exists( const std::string& strKey, bool& bExit )
 {
-	return false;
+    //select 1 from table where col_name = col_value limit 1;
+	return Exists(strDefaultTable, strKey, bExit);
 }
 
 bool NFCMysqlClusterModule::Exists( const std::string& strRecordName, const std::string& strKey, bool& bExit )
 {
-	return false;
+    mysqlpp::Connection* pConnection = m_pDataBaseDriver->GetConnection();
+    if (NULL == pConnection)
+    {
+        return false;
+    }
+
+    NFMYSQLTRYBEGIN
+        std::ostringstream stream;
+        stream << "SELECT 1 FROM " << strRecordName << " WHERE " << strDefaultKey << " = " << mysqlpp::quote << strKey << " LIMIT 1;";
+
+        mysqlpp::Query query = pConnection->query(stream.str());
+        mysqlpp::StoreQueryResult result = query.store();
+        query.reset();
+
+        if (!result || result.empty())
+        {
+            bExit = false;
+            return false;
+        }
+
+    NFMYSQLTRYEND("exist error")
+
+    bExit = true;
+	return true;
 }
 
 bool NFCMysqlClusterModule::Select( const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec )
@@ -153,4 +258,3 @@ bool NFCMysqlClusterModule::Select( const std::string& strRecordName, const std:
 {
 	return false;
 }
-
