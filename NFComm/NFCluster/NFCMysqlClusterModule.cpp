@@ -72,7 +72,7 @@ bool NFCMysqlClusterModule::Updata( const std::string& strKey, const std::vector
 
 bool NFCMysqlClusterModule::Updata( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec )
 {
-    mysqlpp::Connection* pConnection = m_pDataBaseDriver->GetConnection();
+    mysqlpp::Connection* pConnection = m_pMysqlConnectMgrManager->GetMysqlDriver()->GetConnection();
     if (NULL == pConnection)
     {
         return false;
@@ -159,7 +159,7 @@ bool NFCMysqlClusterModule::Query( const std::string& strKey, const std::vector<
 
 bool NFCMysqlClusterModule::Query( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec )
 {
-    mysqlpp::Connection* pConnection = m_pDataBaseDriver->GetConnection();
+    mysqlpp::Connection* pConnection = m_pMysqlConnectMgrManager->GetMysqlDriver()->GetConnection();
     if (NULL == pConnection)
     {
         return false;
@@ -213,7 +213,7 @@ bool NFCMysqlClusterModule::Delete( const std::string& strKey )
 
 bool NFCMysqlClusterModule::Delete( const std::string& strRecordName, const std::string& strKey )
 {
-    mysqlpp::Connection* pConnection = m_pDataBaseDriver->GetConnection();
+    mysqlpp::Connection* pConnection = m_pMysqlConnectMgrManager->GetMysqlDriver()->GetConnection();
     if (NULL == pConnection)
     {
         return false;
@@ -238,7 +238,7 @@ bool NFCMysqlClusterModule::Exists( const std::string& strKey, bool& bExit )
 
 bool NFCMysqlClusterModule::Exists( const std::string& strRecordName, const std::string& strKey, bool& bExit )
 {
-    mysqlpp::Connection* pConnection = m_pDataBaseDriver->GetConnection();
+    mysqlpp::Connection* pConnection = m_pMysqlConnectMgrManager->GetMysqlDriver()->GetConnection();
     if (NULL == pConnection)
     {
         return false;
