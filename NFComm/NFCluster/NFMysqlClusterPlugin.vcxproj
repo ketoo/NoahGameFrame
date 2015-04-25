@@ -116,11 +116,13 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(Solutio
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="NFCMysqlClusterModule.cpp" />
+    <ClCompile Include="NFCMysqlConnectMgrModule.cpp" />
     <ClCompile Include="NFCMysqlDriver.cpp" />
     <ClCompile Include="NFMysqlClusterPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCMysqlClusterModule.h" />
+    <ClInclude Include="NFCMysqlConnectMgrModule.h" />
     <ClInclude Include="NFCMysqlDriver.h" />
     <ClInclude Include="NFMysqlClusterPlugin.h" />
   </ItemGroup>
