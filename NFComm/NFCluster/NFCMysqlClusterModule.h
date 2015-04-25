@@ -20,6 +20,7 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
+#include "NFComm/NFPluginModule/NFIMysqlConnectMgrModule.h"
 
 class NFCMysqlClusterModule
     : public NFIClusterModule
@@ -48,9 +49,9 @@ public:
 
 	virtual bool Delete(const std::string& strRecordName, const std::string& strKey);
 	virtual bool Exists(const std::string& strRecordName, const std::string& strKey, bool& bExit);
-private:
 
-    NFCMysqlDriver* m_pDataBaseDriver;
+private:
+    NFIMysqlConnectMgrModule* m_pMysqlConnectMgrManager;
 
     static std::string strDefaultKey;
     static std::string strDefaultTable;
