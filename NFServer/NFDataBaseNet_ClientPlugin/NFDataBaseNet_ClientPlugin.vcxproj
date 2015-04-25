@@ -13,12 +13,10 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFCDataBaseNet_ClientModule.cpp" />
-    <ClCompile Include="NFCMysqlConnectMgrModule.cpp" />
     <ClCompile Include="NFDataBaseNet_ClientPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCDataBaseNet_ClientModule.h" />
-    <ClInclude Include="NFCMysqlConnectMgrModule.h" />
     <ClInclude Include="NFDataBaseNet_ClientPlugin.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
