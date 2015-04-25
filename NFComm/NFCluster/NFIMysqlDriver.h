@@ -1,6 +1,6 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFIMysqlDriver.h
-//    @Author           :    eliteYang
+//    @Author           :    chuano.guo
 //    @Date             :    2014-07-28
 //    @Module           :    NFIMysqlDriver
 //    @Desc             :
@@ -42,7 +42,7 @@
 #include <string>
 #include <vector>
 #include <set>
-#include "mysqlpp/mysql++.h"
+#include "mysql++.h"
 
 class NFIMysqlDriver
 {

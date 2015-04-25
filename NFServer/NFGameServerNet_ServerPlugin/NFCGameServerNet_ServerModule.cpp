@@ -129,9 +129,9 @@ int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
     case NFMsg::EGameMsgID::EGMI_REQ_SWAP_SCENE:
         OnClienSwapSceneProcess(msg);
         break;
-    case NFMsg::EGameMsgID::EGMI_REQ_COMMAND:
-        OnClienGMProcess(msg);
-        break;
+    //case NFMsg::EGameMsgID::EGMI_REQ_COMMAND:
+    //    OnClienGMProcess(msg);
+    //    break;
 
     case NFMsg::EGameMsgID::EGMI_REQ_SKILL_OBJECTX:
         OnClienUseSkill(msg);
@@ -2152,8 +2152,8 @@ void NFCGameServerNet_ServerModule::OnClienGMProcess( const NFIPacket& msg )
     case NFMsg::ReqCommand_EGameCommandType_EGCT_MODIY_PROPERTY:
         {
             const std::string& strPropertyName = xMsg.command_str_value();
-            const int nValue = xMsg.command_value();
-            m_pKernelModule->SetPropertyInt(nPlayerID, strPropertyName, nValue);
+            //const int nValue = xMsg.command_value();
+            //m_pKernelModule->SetPropertyInt(nPlayerID, strPropertyName, nValue);
         }
         break;
     case NFMsg::ReqCommand_EGameCommandType_EGCT_CREATE_OBJECT:
@@ -2166,7 +2166,7 @@ void NFCGameServerNet_ServerModule::OnClienGMProcess( const NFIPacket& msg )
             float fZ = m_pKernelModule->GetPropertyFloat(nPlayerID, "Z");
 
             const std::string& strObjectIndex = xMsg.command_str_value();
-            const int nValue = xMsg.command_value();
+            //const int nValue = xMsg.command_value();
             if (m_pElementInfoModule->ExistElement(strObjectIndex))
             {
                 NFCDataList xDataList;
