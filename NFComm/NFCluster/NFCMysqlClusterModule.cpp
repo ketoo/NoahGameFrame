@@ -110,18 +110,33 @@ bool NFCMysqlClusterModule::Updata( const std::string& strRecordName, const std:
     else
     {
         // insert
-        strSQL << "INSERT INTO " << strRecordName << " VALUES";
+        strSQL << "INSERT INTO " << strRecordName << "(";
         for (int i = 0; i < fieldVec.size(); ++i)
         {
             if (i == 0)
             {
-                strSQL << "(" << fieldVec[i] << "," << mysqlpp::quote << valueVec[i] << ")";
+                strSQL << fieldVec[i];
             }
             else
             {
-                strSQL << ", (" << fieldVec[i] << "," << mysqlpp::quote << valueVec[i] << ")";
+                strSQL << ", " << fieldVec[i];
             }
         }
+        
+        strSQL << ") VALUES(";
+        for (int i = 0; i < valueVec.size(); ++i)
+        {
+            if (i == 0)
+            {
+                strSQL << mysqlpp::quote << valueVec[i];
+            }
+            else
+            {
+                strSQL << ", " << mysqlpp::quote << valueVec[i];
+            }
+        }
+
+        strSQL << ")";
     }
 
     strSQL << ";";
