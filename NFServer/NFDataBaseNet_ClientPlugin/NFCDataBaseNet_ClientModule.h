@@ -13,6 +13,8 @@
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIDataBaseNet_ClientModule.h"
+#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIMysqlConnectMgrModule.h"
 
 class NFCDataBaseNet_ClientModule : public NFIDataBaseNet_ClientModule
 {
@@ -32,6 +34,8 @@ public:
 private:
     NFILogicClassModule* m_pLogicClassModule;
     NFIKernelModule* m_pKernelModule;
+    NFIElementInfoModule* m_pElementInfoModule;
+    NFIMysqlConnectMgrModule* m_pMysqlConnectMgrModule;
 };
 
 #endif
