@@ -5,13 +5,13 @@
 
 extern "C"  __declspec( dllexport ) void DllStartPlugin( NFIPluginManager* pm )
 {
-    CREATE_PLUGIN( pm, NFGameLogicPlugin )
+    CREATE_PLUGIN( pm, NFDataBaseNet_ClientPlugin )
 
 };
 
 extern "C" __declspec( dllexport ) void DllStopPlugin( NFIPluginManager* pm )
 {
-    DESTROY_PLUGIN( pm, NFGameLogicPlugin )
+    DESTROY_PLUGIN( pm, NFDataBaseNet_ClientPlugin )
 };
 
 #endif
@@ -24,7 +24,7 @@ const int NFDataBaseNet_ClientPlugin::GetPluginVersion()
 
 const std::string NFDataBaseNet_ClientPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME( NFGameLogicPlugin )
+    GET_PLUGIN_NAME( NFDataBaseNet_ClientPlugin )
 }
 
 void NFDataBaseNet_ClientPlugin::Install()

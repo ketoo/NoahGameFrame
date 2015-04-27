@@ -88,7 +88,7 @@ void NFCMysqlConnectMgrModule::CheckMysql(float fLastFrameTime, const float fSta
 	std::vector<int> xIntVec;
 	for (NFIMysqlDriver* pMysqlDriver = mvMysql.First(nServerID); pMysqlDriver != NULL; pMysqlDriver = mvMysql.Next(nServerID))
 	{ 
-		//if (!pMysqlDriver->Enable())
+		if (!pMysqlDriver->Enable())
 		{
 			xIntVec.push_back(nServerID);
 			mvInvalidMsyql.AddElement(nServerID, pMysqlDriver);
