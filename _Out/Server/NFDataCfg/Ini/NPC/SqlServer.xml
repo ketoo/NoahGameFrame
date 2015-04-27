@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--this is config xml-->
 <XML>
-    <Object ID="SqlServer_1" IP="127.0.0.1" Port="7001" Pwd="123456" ServerID="000107001"/>
+    <Object ID="SqlServer_1" IP="127.0.0.1" Port="7001" ServerID="000107001" SqlIP="192.168.0.24" SqlName="app_test" SqlPort="3306" SqlPwd="123456" SqlUser="root"/>
 </XML>
