@@ -123,7 +123,7 @@ void NFCMysqlConnectMgrModule::CheckMysql(float fLastFrameTime, const float fSta
 
     mfLastCheckTime = 0.0f;
 }
-bool NFCMysqlConnectMgrModule::AddMysqlServer( const int nServerID, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd)
+bool NFCMysqlConnectMgrModule::AddMysqlServer( const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime/* = 10*/, const int nRconneCount/* = -1*/)
 {
 	std::string  strDnsIp;
 	if(!strDns.empty())
