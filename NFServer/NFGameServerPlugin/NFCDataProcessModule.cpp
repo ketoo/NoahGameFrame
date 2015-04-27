@@ -61,25 +61,154 @@ int NFCDataProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std::
 	{
 		if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
 		{
-			SaveDataToNoSql( self );
+			SaveDataToNoSql(self);
 		}
 		else if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
 		{
-			LoadDataFormNoSql( self );
+			AttachData(self);
 		}
 	}
 
 	return 0;
 }
 
+const bool NFCDataProcessModule::AttachData( const NFIDENTID& self )
+{
+    NF_SHARE_PTR<RoleData> pRoleData = mxRoleDataMap.GetElement(self);
+    if (nullptr == pRoleData)
+    {
+        return false;
+    }
+
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+    if (nullptr != pObject)
+    {
+        NF_SHARE_PTR<NFIPropertyManager> pProManager = pObject->GetPropertyManager();
+        NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
+
+        NFMsg::PlayerPropertyBase xPropertyList;
+        if(!xPropertyList.ParseFromString(pRoleData->strProperty))
+        {
+            return false;
+        }
+
+        NFMsg::PlayerRecordList xRecordList;
+        if(!xRecordList.ParseFromString(pRoleData->strRecord))
+        {
+            return false;
+        }
+
+        mxRoleDataMap.RemoveElement(self);
+
+        for (int i = 0; i < xPropertyList.property_int_list_size(); i++)
+        {
+            const NFMsg::PropertyInt& xPropertyInt = xPropertyList.property_int_list(i);
+            const std::string& strName = xPropertyInt.property_name();
+            int nData = xPropertyInt.data();
+
+            NFIDataList::TData varData;
+            varData.nType = TDATA_INT;
+            varData.variantData = (NFINT64)nData;
+            pProManager->SetProperty(strName, varData);
+        }
+
+        for (int i = 0; i < xPropertyList.property_float_list_size(); i++)
+        {
+            const NFMsg::PropertyFloat& xPropertyFloat = xPropertyList.property_float_list(i);
+            const std::string& strName = xPropertyFloat.property_name();
+            float fData = xPropertyFloat.data();
+
+            NFIDataList::TData varData;
+            varData.nType = TDATA_FLOAT;
+            varData.variantData = fData;
+            pProManager->SetProperty(strName, varData);
+        }
+
+        for (int i = 0; i < xPropertyList.property_string_list_size(); i++)
+        {
+            const NFMsg::PropertyString& xPropertyString = xPropertyList.property_string_list(i);
+            const std::string& strName = xPropertyString.property_name();
+            const std::string& strData = xPropertyString.data();
+
+            NFIDataList::TData varData;
+            varData.nType = TDATA_STRING;
+            varData.variantData = strData;
+            pProManager->SetProperty(strName, varData);
+        }
+
+        for (int i = 0; i < xPropertyList.property_object_list_size(); i++)
+        {
+            const NFMsg::PropertyObject& xPropertyObject = xPropertyList.property_object_list(i);
+            const std::string& strName = xPropertyObject.property_name();
+            NFIDENTID nData = NFINetModule::PBToNF(xPropertyObject.data());
+
+            NFIDataList::TData varData;
+            varData.nType = TDATA_OBJECT;
+            varData.variantData = nData;
+            pProManager->SetProperty(strName, varData);
+        }
+
+        ////////////////////////////
+        for (int i = 0; i < xRecordList.record_list_size(); ++i)
+        {
+            const NFMsg::PlayerRecordBase& xRecordData = xRecordList.record_list(i);
+            const std::string& strRecordName = xRecordData.record_name();
+            NF_SHARE_PTR<NFIRecord> xRecord = pRecordManager->GetElement(strRecordName);
+
+            for (int j = 0; j < xRecordData.record_int_list_size(); j++)
+            {
+                const NFMsg::RecordInt& xRecordInt = xRecordData.record_int_list(j);
+                const int nRow = xRecordInt.row();
+                const int nCol = xRecordInt.col();
+                const NFINT64 nData = xRecordInt.data();
+
+                xRecord->SetUsed(nRow, true);
+                xRecord->SetInt(nRow, nCol, nData);
+            }
+
+            for (int j = 0; j < xRecordData.record_float_list_size(); j++)
+            {
+                const NFMsg::RecordFloat& xRecordFloat = xRecordData.record_float_list(j);
+                const int nRow = xRecordFloat.row();
+                const int nCol = xRecordFloat.col();
+                const float fData = xRecordFloat.data();
+
+                xRecord->SetUsed(nRow, true);
+                xRecord->SetFloat(nRow, nCol, fData);
+            }
+
+            for (int j = 0; j < xRecordData.record_string_list_size(); j++)
+            {
+                const NFMsg::RecordString& xRecordString = xRecordData.record_string_list(j);
+                const int nRow = xRecordString.row();
+                const int nCol = xRecordString.col();
+                const std::string& strData = xRecordString.data();
+
+                xRecord->SetUsed(nRow, true);
+                xRecord->SetString(nRow, nCol, strData.c_str());
+            }
+
+            for (int j = 0; j < xRecordData.record_object_list_size(); j++)
+            {
+                const NFMsg::RecordObject& xRecordObject = xRecordData.record_object_list(j);
+                const int nRow = xRecordObject.row();
+                const int nCol = xRecordObject.col();
+                const NFIDENTID xObjectID = NFINetModule::PBToNF(xRecordObject.data());
+
+                xRecord->SetUsed(nRow, true);
+                xRecord->SetObject(nRow, nCol, xObjectID);
+            }
+        }		
+    }
+
+    return true;
+}
+
 const bool NFCDataProcessModule::LoadDataFormNoSql( const NFIDENTID& self )
 {
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-	if ( pObject )
+	if ( !pObject )
 	{
-		NF_SHARE_PTR<NFIPropertyManager> pProManager = pObject->GetPropertyManager();
-		NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
-
 		std::vector<std::string> vFieldVec;
 		std::vector<std::string> vValueVec;
 		vFieldVec.push_back("Property");
@@ -92,118 +221,10 @@ const bool NFCDataProcessModule::LoadDataFormNoSql( const NFIDENTID& self )
 			return false;
 		}
 
-		NFMsg::PlayerPropertyBase xPropertyList;
-		if(!xPropertyList.ParseFromString(vValueVec[0]))
-		{
-			return false;
-		}
-
-		NFMsg::PlayerRecordList xRecordList;
-		if(!xRecordList.ParseFromString(vValueVec[1]))
-		{
-			return false;
-		}
-
-
-		for (int i = 0; i < xPropertyList.property_int_list_size(); i++)
-		{
-			const NFMsg::PropertyInt& xPropertyInt = xPropertyList.property_int_list(i);
-			const std::string& strName = xPropertyInt.property_name();
-			int nData = xPropertyInt.data();
-
-			NFIDataList::TData varData;
-			varData.nType = TDATA_INT;
-			varData.variantData = (NFINT64)nData;
-			pProManager->SetProperty(strName, varData);
-		}
-
-		for (int i = 0; i < xPropertyList.property_float_list_size(); i++)
-		{
-			const NFMsg::PropertyFloat& xPropertyFloat = xPropertyList.property_float_list(i);
-			const std::string& strName = xPropertyFloat.property_name();
-			float fData = xPropertyFloat.data();
-
-			NFIDataList::TData varData;
-			varData.nType = TDATA_FLOAT;
-			varData.variantData = fData;
-			pProManager->SetProperty(strName, varData);
-		}
-
-		for (int i = 0; i < xPropertyList.property_string_list_size(); i++)
-		{
-			const NFMsg::PropertyString& xPropertyString = xPropertyList.property_string_list(i);
-			const std::string& strName = xPropertyString.property_name();
-			const std::string& strData = xPropertyString.data();
-
-			NFIDataList::TData varData;
-			varData.nType = TDATA_STRING;
-			varData.variantData = strData;
-			pProManager->SetProperty(strName, varData);
-		}
-
-		for (int i = 0; i < xPropertyList.property_object_list_size(); i++)
-		{
-			const NFMsg::PropertyObject& xPropertyObject = xPropertyList.property_object_list(i);
-			const std::string& strName = xPropertyObject.property_name();
-			NFIDENTID nData = NFINetModule::PBToNF(xPropertyObject.data());
-
-			NFIDataList::TData varData;
-			varData.nType = TDATA_OBJECT;
-			varData.variantData = nData;
-			pProManager->SetProperty(strName, varData);
-		}
-
-		////////////////////////////
-		for (int i = 0; i < xRecordList.record_list_size(); ++i)
-		{
-			const NFMsg::PlayerRecordBase& xRecordData = xRecordList.record_list(i);
-			const std::string& strRecordName = xRecordData.record_name();
-			NF_SHARE_PTR<NFIRecord> xRecord = pRecordManager->GetElement(strRecordName);
-
-			for (int j = 0; j < xRecordData.record_int_list_size(); j++)
-			{
-				const NFMsg::RecordInt& xRecordInt = xRecordData.record_int_list(j);
-				const int nRow = xRecordInt.row();
-				const int nCol = xRecordInt.col();
-				const NFINT64 nData = xRecordInt.data();
-
-				xRecord->SetUsed(nRow, true);
-				xRecord->SetInt(nRow, nCol, nData);
-			}
-
-			for (int j = 0; j < xRecordData.record_float_list_size(); j++)
-			{
-				const NFMsg::RecordFloat& xRecordFloat = xRecordData.record_float_list(j);
-				const int nRow = xRecordFloat.row();
-				const int nCol = xRecordFloat.col();
-				const float fData = xRecordFloat.data();
-
-				xRecord->SetUsed(nRow, true);
-				xRecord->SetFloat(nRow, nCol, fData);
-			}
-
-			for (int j = 0; j < xRecordData.record_string_list_size(); j++)
-			{
-				const NFMsg::RecordString& xRecordString = xRecordData.record_string_list(j);
-				const int nRow = xRecordString.row();
-				const int nCol = xRecordString.col();
-				const std::string& strData = xRecordString.data();
-
-				xRecord->SetUsed(nRow, true);
-				xRecord->SetString(nRow, nCol, strData.c_str());
-			}
-
-			for (int j = 0; j < xRecordData.record_object_list_size(); j++)
-			{
-				const NFMsg::RecordObject& xRecordObject = xRecordData.record_object_list(j);
-				const int nRow = xRecordObject.row();
-				const int nCol = xRecordObject.col();
-				const NFIDENTID xObjectID = NFINetModule::PBToNF(xRecordObject.data());
-
-				xRecord->SetUsed(nRow, true);
-				xRecord->SetObject(nRow, nCol, xObjectID);
-			}
-		}		
+        NF_SHARE_PTR<RoleData> pRoleData = NF_SHARE_PTR<RoleData>(NF_NEW RoleData());
+        pRoleData->strProperty = vValueVec[0];
+        pRoleData->strRecord = vValueVec[1];
+        mxRoleDataMap.AddElement(self, pRoleData);
 	}
 
 	return true;
@@ -360,29 +381,32 @@ const bool NFCDataProcessModule::SaveDataToNoSql(const NFIDENTID& self, bool bOf
 
 		return false;
 	}
+
+    return true;
 }
 
 const NFIDENTID NFCDataProcessModule::CreateRole( const std::string& strAccount, const std::string& strName, const int nJob, const int nSex )
 {
 	bool bExit = false;
-	if (!m_pClusterSQLModule->Exists(strAccount, bExit)
+	if (!m_pClusterSQLModule->Exists("AccountInfo", strAccount, bExit)
 		|| !bExit)
 	{
 		return NFIDENTID();
 	}
 
-	bExit = false;
-	if (!m_pClusterSQLModule->Exists(strName, bExit)
-		|| !bExit)
-	{
-		return NFIDENTID();
-	}
+	//bExit = false;
+	//if (!m_pClusterSQLModule->Exists(strName, bExit)
+	//	|| !bExit)
+	//{
+	//	return NFIDENTID();
+	//}
 
 	//不存在此角色名,看帐号下面是否有角色
-
 	std::vector<std::string> vFieldVec;
+    vFieldVec.push_back("RoleID");
+
 	std::vector<std::string> vValueVec;
-	if(!m_pClusterSQLModule->Query(strAccount, vFieldVec, vValueVec)
+	if(!m_pClusterSQLModule->Query("AccountInfo", strAccount, vFieldVec, vValueVec)
 		|| vFieldVec.size() != vValueVec.size())
 	{
 		return NFIDENTID();
@@ -430,9 +454,9 @@ const NFIDENTID NFCDataProcessModule::CreateRole( const std::string& strAccount,
 
 	vFieldVec.clear();
 	vValueVec.clear();
-	vFieldVec.push_back("Property");
-	vFieldVec.push_back(xID.ToString());
-	if(!m_pClusterSQLModule->Updata(strAccount, vFieldVec, vValueVec))
+	vFieldVec.push_back("RoleID");
+	vValueVec.push_back(xID.ToString());
+	if(!m_pClusterSQLModule->Updata("AccountInfo", strAccount, vFieldVec, vValueVec))
 	{
 		return NFIDENTID();
 	}
@@ -464,38 +488,41 @@ const bool NFCDataProcessModule::DeleteRole( const std::string& strAccount, cons
 	return true;
 }
 
-const bool NFCDataProcessModule::GetChar( const std::string& strAccount, std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVeec )
+const NFIDENTID NFCDataProcessModule::GetChar( const std::string& strAccount, std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVec )
 {
 	bool bExit = false;
-	if (!m_pClusterSQLModule->Exists(strAccount, bExit)
+	if (!m_pClusterSQLModule->Exists("AccountInfo", strAccount, bExit)
 		|| !bExit)
 	{
-		return false;
+		return NFIDENTID();
 	}
 
-	std::vector<std::string> vFieldVec;
-	std::vector<std::string> vValueVec;
-	vFieldVec.push_back("Property");
+	xFieldVec.push_back("RoleID");
 
-	if(!m_pClusterSQLModule->Query(strAccount, vFieldVec, vValueVec)
-		|| vFieldVec.size() != vValueVec.size())
+	if(!m_pClusterSQLModule->Query("AccountInfo", strAccount, xFieldVec, xValueVec)
+		|| xFieldVec.size() != xValueVec.size())
 	{
-		return false;
+		return NFIDENTID();
 	}
 
-	const std::string stRolerID = vValueVec[0];
+	const std::string stRolerID = xValueVec[0];
 
-	vFieldVec.clear();
-	vValueVec.clear();
-
-	if(!m_pClusterSQLModule->Query(stRolerID, vFieldVec, vValueVec)
-		|| vFieldVec.size() != vValueVec.size())
+	xFieldVec.clear();
+	xValueVec.clear();
+    //////////////////////////////////////////////////////////////////////////
+    xFieldVec.push_back("Property");
+    xFieldVec.push_back("Record");
+	if(!m_pClusterSQLModule->Query(stRolerID, xFieldVec, xValueVec)
+		|| xFieldVec.size() != xValueVec.size())
 	{
-		return false;
+		return NFIDENTID();
 	}
 
-	xFieldVec = vFieldVec;
-	xValueVeec = vValueVec;
+    NFIDENTID ident;
+    if (!ident.FormString(stRolerID))
+    {
+        return NFIDENTID();
+    }
 
-	return true;
+	return ident;
 }
