@@ -56,6 +56,9 @@ bool NFCMysqlClusterModule::Shut()
 
 bool NFCMysqlClusterModule::AfterInit()
 {
+    m_pMysqlConnectMgrManager = dynamic_cast<NFIMysqlConnectMgrModule*>(pPluginManager->FindModule("NFCMysqlConnectMgrModule"));
+
+    assert(NULL != m_pMysqlConnectMgrManager);
 
     return true;
 }
