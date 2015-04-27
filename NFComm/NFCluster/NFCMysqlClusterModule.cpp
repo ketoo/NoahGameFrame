@@ -182,7 +182,7 @@ bool NFCMysqlClusterModule::Query( const std::string& strRecordName, const std::
             }            
         }
         query << " FROM " << strRecordName << " WHERE " << strDefaultKey << " = " << mysqlpp::quote << strKey << ";";
-        query.execute();
+        //query.execute(); // 官网例子不需要execute
         mysqlpp::StoreQueryResult xResult = query.store();
         query.reset();
 
