@@ -2,7 +2,7 @@ NoahGameFrame NFDataCfg introduce:
 =============
 Copyright © http://www.yowoyo.com
 
-We put logic and data config in this dir, support to edit with excel(xls or xlsx), then use Tool/xls2xml.exe, translate xls to xml file, it is recommended not to use Chinese
+We put logic and data config in this dir, support to edit with excel(xls or xlsx), then use Tool/xls2xml.exe, translate xls to xml file, it is not recommended to use Chinese
 
 ### Dir introduce:
 <p>1.Excel_Struct, excel logic configuration</p>
