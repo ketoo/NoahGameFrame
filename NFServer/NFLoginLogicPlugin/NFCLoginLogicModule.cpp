@@ -40,7 +40,7 @@ int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventI
 	std::vector<std::string> xValueVec;
 	xFieldVec.push_back("Password");
 
-	if (m_pClusterSqlModule->Query("account_info", strAccount, xFieldVec, xValueVec)
+	if (m_pClusterSqlModule->Query("AccountInfo", strAccount, xFieldVec, xValueVec)
 		&& xFieldVec.size() == xValueVec.size()
 		&& strPassword == xValueVec[0])
 	{
