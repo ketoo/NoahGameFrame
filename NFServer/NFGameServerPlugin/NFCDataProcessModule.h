@@ -38,18 +38,31 @@ public:
 
 	virtual const NFIDENTID CreateRole(const std::string& strAccount, const std::string& strName, const int nJob, const int nSex);
 	virtual const bool DeleteRole(const std::string& strAccount, const NFIDENTID xID);
-	virtual const bool GetChar(const std::string& strAccount, std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVeec);
+	virtual const NFIDENTID GetChar(const std::string& strAccount, std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVec);
 
 protected:
     int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
-
+    const bool AttachData( const NFIDENTID& self );
 private:
+
+    struct RoleData 
+    {
+        RoleData()
+        {
+            strProperty = "";
+            strRecord = "";
+        }
+
+        std::string strProperty;
+        std::string strRecord;
+    };
 
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFIClusterModule* m_pClusterSQLModule;
 	NFIGameLogicModule* m_pGameLogicModule;
 	NFIUUIDModule* m_pUUIDModule;
+    NFMapEx<NFIDENTID, RoleData> mxRoleDataMap;
 };
 
 

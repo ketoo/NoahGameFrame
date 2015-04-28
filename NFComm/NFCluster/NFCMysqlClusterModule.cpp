@@ -11,8 +11,8 @@
 #include "NFCMysqlDriver.h"
 #include "NFCMysqlClusterModule.h"
 
-std::string NFCMysqlClusterModule::strDefaultKey = "id";
-std::string NFCMysqlClusterModule::strDefaultTable = "role_info";
+std::string NFCMysqlClusterModule::strDefaultKey = "ID";
+std::string NFCMysqlClusterModule::strDefaultTable = "RoleInfo";
 
 NFCMysqlClusterModule::NFCMysqlClusterModule(NFIPluginManager* p)
 {
@@ -87,36 +87,35 @@ bool NFCMysqlClusterModule::Updata( const std::string& strRecordName, const std:
         return false;
     }
 
-
     if (fieldVec.size() != valueVec.size())
     {
         return false;
     }
-
-
 
     NFMYSQLTRYBEGIN
         mysqlpp::Query query = pConnection->query();
         if (bExist)
         {
             // update
-            query << "UPDATE " << strRecordName << " ";
+            query << "UPDATE " << strRecordName << " SET ";
             for (int i = 0; i < fieldVec.size(); ++i)
             {
                 if (i == 0)
                 {
-                    query << fieldVec[i] << " = " << valueVec[i];
+                    query << fieldVec[i] << " = " << mysqlpp::quote << valueVec[i];
                 }
                 else
                 {
-                    query << "," << fieldVec[i] << " = " << valueVec[i];
+                    query << "," << fieldVec[i] << " = " << mysqlpp::quote << valueVec[i];
                 }
             }
+
+            query << " WHERE " << strDefaultKey << " = " << mysqlpp::quote << strKey << ";";
         }
         else
         {
             // insert
-            query << "INSERT INTO " << strRecordName << "(";
+            query << "INSERT INTO " << strRecordName << "(" << strDefaultKey << ",";
             for (int i = 0; i < fieldVec.size(); ++i)
             {
                 if (i == 0)
@@ -129,7 +128,7 @@ bool NFCMysqlClusterModule::Updata( const std::string& strRecordName, const std:
                 }
             }
 
-            query << ") VALUES(";
+            query << ") VALUES(" << mysqlpp::quote << strKey << ",";
             for (int i = 0; i < valueVec.size(); ++i)
             {
                 if (i == 0)
@@ -142,10 +141,8 @@ bool NFCMysqlClusterModule::Updata( const std::string& strRecordName, const std:
                 }
             }
 
-            query << ")";
+            query << ");";
         }
-
-        query << ";";
 
         query.execute();
         query.reset();
@@ -248,14 +245,14 @@ bool NFCMysqlClusterModule::Exists( const std::string& strRecordName, const std:
         mysqlpp::Query query = pConnection->query();
         query << "SELECT 1 FROM " << strRecordName << " WHERE " << strDefaultKey << " = " << mysqlpp::quote << strKey << " LIMIT 1;";
 
-        query.execute();
+        //query.execute();
         mysqlpp::StoreQueryResult result = query.store();
         query.reset();
 
         if (!result || result.empty())
         {
             bExit = false;
-            return false;
+            return true;
         }
 
     NFMYSQLTRYEND("exist error")
