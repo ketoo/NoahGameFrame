@@ -1,0 +1,6 @@
+language: c++
+c++:
+  - 11
+  - tip
+services:
+  - memcached
