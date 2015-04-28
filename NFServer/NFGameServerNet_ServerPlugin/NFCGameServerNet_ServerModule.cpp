@@ -229,16 +229,17 @@ void NFCGameServerNet_ServerModule::OnClientConnected( const int nAddress )
 void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& msg )
 {
     //在进入游戏之前nPlayerID为其在网关的FD
-    NFIDENTID nPlayerID;
+    NFIDENTID nClientID;
     NFMsg::ReqEnterGameServer xMsg;
-    if (!RecivePB(msg, xMsg, nPlayerID))
+    if (!RecivePB(msg, xMsg, nClientID))
     {
         return;
     }
 
+    NFIDENTID ident = PBToNF(xMsg.id());
     //////////////////////////////////////////////////////////////////////////
     //拉取数据
-	if(!m_pDataProcessModule->LoadDataFormNoSql(nPlayerID))
+	if(!m_pDataProcessModule->LoadDataFormNoSql(ident))
 	{
 		return;
 	}
@@ -265,10 +266,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
     }
 
     //id和fd,gateid绑定
-    //这里每次创建新的GUID，因为正式的时候可以从数据库拉出GUID赋值
-
-    NFIDENTID ident = PBToNF(xMsg.id());
-    mRoleBaseData.AddElement(ident, NF_SHARE_PTR<BaseData>(NF_NEW BaseData(nGateID, nPlayerID)));
+    mRoleBaseData.AddElement(ident, NF_SHARE_PTR<BaseData>(NF_NEW BaseData(nGateID, nClientID)));
 
     //默认1号场景
     int nSceneID = 1;
@@ -280,7 +278,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
     var.AddInt(nGateID);
 
     var.AddString("ClientID");
-    var.AddObject(nPlayerID);
+    var.AddObject(nClientID);
 
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(ident, nSceneID, 0, "Player", "",  var);
     if ( NULL == pObject.get() )
@@ -1802,36 +1800,97 @@ int NFCGameServerNet_ServerModule::OnChatResultEvent( const NFIDENTID& self, con
 void NFCGameServerNet_ServerModule::OnReqiureRoleListProcess( const NFIPacket& msg )
 {
     //fd
-    NFIDENTID nPlayerID;
+    NFIDENTID nClientID;
     NFMsg::ReqRoleList xMsg;
-    if (!RecivePB(msg, xMsg, nPlayerID))
+    if (!RecivePB(msg, xMsg, nClientID))
     {
         return;
     }
 
+    std::vector<std::string> vFieldVector;
+    std::vector<std::string> vValueVector;
+    const NFIDENTID ident = m_pDataProcessModule->GetChar(xMsg.account(), vFieldVector, vValueVector);
+    if (ident.IsNull())
+    {
+        return;
+    }
+
+    NFMsg::PlayerPropertyBase xPropertyList;
+    if(!xPropertyList.ParseFromString(vValueVector[0]))
+    {
+        return;
+    }
+
+    //NFMsg::PlayerRecordList xRecordList;
+    //if(!xRecordList.ParseFromString(vValueVector[1]))
+    //{
+    //    return;
+    //}
+
+    //const google::protobuf::Reflection* pReflection = xPropertyList.GetReflection();
+    //if (NULL == pReflection)
+    //{
+    //    return;
+    //}
+
+    ////const FieldDescriptor* xPropertyList.
+    //pReflection->GetString(xPropertyList, );
+    //::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyInt >* pRepeatIntList = xPropertyList.mutable_property_int_list();
+    //pRepeatIntList->Get()
+
     NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
-    //     NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
-    //     pData->set_career(0);
-    //     pData->set_sex(0);
-    //     pData->set_race(0);
-    //     pData->set_noob_name("test_role");
-    //     pData->set_game_id(xMsg.game_id());
-    //     pData->set_role_level(0);
-    //     pData->set_delete_time(0);
-    //     pData->set_reg_time(0);
-    //     pData->set_last_offline_time(0);
-    //     pData->set_last_offline_ip(0);
-    //     pData->set_view_record("");
+    NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
+    pData->mutable_id()->CopyFrom(NFToPB(ident));
+    pData->set_career(0);
+    pData->set_sex(0);
+    pData->set_race(0);
+    pData->set_noob_name("");
+    pData->set_game_id(xMsg.game_id());
+    pData->set_role_level(0);
+    pData->set_delete_time(0);
+    pData->set_reg_time(0);
+    pData->set_last_offline_time(0);
+    pData->set_last_offline_ip(0);
+    pData->set_view_record("");
 
+    for (int i = 0; i < xPropertyList.property_int_list_size(); ++i)
+    {
+        const NFMsg::PropertyInt& xPropertyInt = xPropertyList.property_int_list(i);
+        if (xPropertyInt.property_name() == "Level")
+        {
+            pData->set_role_level(xPropertyInt.data());
+        }
 
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, msg.GetFd(), nPlayerID);
+        if (xPropertyInt.property_name() == "Sex")
+        {
+            pData->set_sex(xPropertyInt.data());
+        }
+
+        if (xPropertyInt.property_name() == "Job")
+        {
+            pData->set_career(xPropertyInt.data());
+        }
+
+        // add
+    }
+
+    for (int i = 0; i < xPropertyList.property_string_list_size(); ++i)
+    {
+        const NFMsg::PropertyString& xPropertyString = xPropertyList.property_string_list(i);
+        if (xPropertyString.property_name() == "Name")
+        {
+            pData->set_noob_name(xPropertyString.data());
+        }
+    }
+
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, msg.GetFd(), nClientID);
 }
 
 void NFCGameServerNet_ServerModule::OnCreateRoleGameProcess( const NFIPacket& msg )
 {
-    NFIDENTID nPlayerID;
+    NFIDENTID nClientID;
     NFMsg::ReqCreateRole xMsg;
-    if (!RecivePB(msg, xMsg, nPlayerID))
+    if (!RecivePB(msg, xMsg, nClientID))
     {
         return;
     }
@@ -1859,7 +1918,7 @@ void NFCGameServerNet_ServerModule::OnCreateRoleGameProcess( const NFIPacket& ms
     pData->set_last_offline_ip(0);
     pData->set_view_record("");
 
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, msg.GetFd(), nPlayerID);
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, msg.GetFd(), nClientID);
 }
 
 void NFCGameServerNet_ServerModule::OnDeleteRoleGameProcess( const NFIPacket& msg )
