@@ -1,6 +1,10 @@
-language: c++
-c++:
-  - 11
-  - tip
-services:
-  - memcached
+language: cpp
+
+compiler:
+  - visual studio
+  - clang
+  - gcc
+
+os:
+  - windows
+  - linux
