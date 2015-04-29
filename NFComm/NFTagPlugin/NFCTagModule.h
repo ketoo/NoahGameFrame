@@ -27,13 +27,13 @@ public:
     virtual bool AfterInit();
     virtual bool BeforeShut();
 
-	virtual NFList<NFIDENTID>& GetTagList(const std::string& strTag);
-	virtual bool  AddToTagList(const std::string& strTag, const NFIDENTID object);
-	virtual bool  RemoveFrmTagList(const std::string& strTag, const NFIDENTID object);
+	virtual bool GetTagList(const std::string& strTag, NFList<NFIDENTID>& xList);
+	virtual bool AddToTagList(const std::string& strTag, const NFIDENTID object);
+	virtual bool RemoveFrmTagList(const std::string& strTag, const NFIDENTID object);
 
-	virtual NFList<NFIDENTID>& GetTagList(const TAG_DEFINE eTag, const std::string& strTag);
-	virtual bool  AddToTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFIDENTID object);
-	virtual bool  RemoveFrmTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFIDENTID object);
+	virtual bool GetTagList(const TAG_DEFINE eTag, const std::string& strTag, NFList<NFIDENTID>& xList);
+	virtual bool AddToTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFIDENTID object);
+	virtual bool RemoveFrmTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFIDENTID object);
 
 protected:
 
