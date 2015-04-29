@@ -202,34 +202,37 @@ void NFCProxyServerNet_ServerModule::OnClientDisconnect( const int nAddress )
     NetObject* pNetObject = this->GetNet()->GetNetObject(nAddress);
     if (pNetObject)
     {
-        int nUserData = pNetObject->GetGameID();
-        if (nUserData > 0)
+        int nGameID = pNetObject->GetGameID();
+        if (nGameID > 0)
         {
-            //掉线
-            NFMsg::ReqLeaveGameServer xData;
-
-            NFCPacket msg(this->GetNet()->GetHeadLen());
-            NFMsg::MsgBase xMsg;
-            //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
-            *xMsg.mutable_player_id() = NFToPB(pNetObject->GetUserID());
-
-            if (!xData.SerializeToString(xMsg.mutable_msg_data()))
+            if (!pNetObject->GetUserID().IsNull())
             {
-                return;
-            }
+                //掉线
+                NFMsg::ReqLeaveGameServer xData;
 
-            std::string strMsg;
-            if(!xMsg.SerializeToString(&strMsg))
-            {
-                return;
-            }
+                NFCPacket msg(this->GetNet()->GetHeadLen());
+                NFMsg::MsgBase xMsg;
+                //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
+                *xMsg.mutable_player_id() = NFToPB(pNetObject->GetUserID());
 
-            if(!msg.EnCode(NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GAME, strMsg.c_str(), strMsg.length()))
-            {
-                return;
-            }
+                if (!xData.SerializeToString(xMsg.mutable_msg_data()))
+                {
+                    return;
+                }
 
-            m_pProxyToWorldModule->Transpond(nUserData, msg);
+                std::string strMsg;
+                if(!xMsg.SerializeToString(&strMsg))
+                {
+                    return;
+                }
+
+                if(!msg.EnCode(NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GAME, strMsg.c_str(), strMsg.length()))
+                {
+                    return;
+                }
+
+                m_pProxyToWorldModule->Transpond(nGameID, msg);
+            }
         }
 
 		NFIDENTID xClientIdent = pNetObject->GetClientID();
