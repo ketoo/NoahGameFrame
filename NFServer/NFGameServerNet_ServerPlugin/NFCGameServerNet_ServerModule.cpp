@@ -1812,6 +1812,8 @@ void NFCGameServerNet_ServerModule::OnReqiureRoleListProcess( const NFIPacket& m
     const NFIDENTID ident = m_pDataProcessModule->GetChar(xMsg.account(), vFieldVector, vValueVector);
     if (ident.IsNull())
     {
+        NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
+        SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, msg.GetFd(), nClientID);
         return;
     }
 
