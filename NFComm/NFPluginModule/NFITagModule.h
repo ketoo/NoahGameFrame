@@ -26,15 +26,13 @@ public:
 		TAG_TEAM,
 	};
 
-	virtual NFList<NFIDENTID>& GetTagList(const std::string& strTag) = 0;
-	virtual bool  AddToTagList(const std::string& strTag, const NFIDENTID object) = 0;
-	virtual bool  RemoveFrmTagList(const std::string& strTag, const NFIDENTID object) = 0;
+	virtual bool GetTagList(const std::string& strTag, NFList<NFIDENTID>& xList) = 0;
+	virtual bool AddToTagList(const std::string& strTag, const NFIDENTID object) = 0;
+	virtual bool RemoveFrmTagList(const std::string& strTag, const NFIDENTID object) = 0;
 
-	virtual NFList<NFIDENTID>& GetTagList(const TAG_DEFINE eTag, const std::string& strTag) = 0;
-	virtual bool  AddToTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFIDENTID object) = 0;
-	virtual bool  RemoveFrmTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFIDENTID object) = 0;
-
-
+	virtual bool GetTagList(const TAG_DEFINE eTag, const std::string& strTag, NFList<NFIDENTID>& xList) = 0;
+	virtual bool AddToTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFIDENTID object) = 0;
+	virtual bool RemoveFrmTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFIDENTID object) = 0;
 
 };
 
