@@ -37,14 +37,14 @@ bool NFCTagModule::BeforeShut()
 
 }
 
-NFList<NFIDENTID>& NFCTagModule::GetTagList( const std::string& strTag )
+bool NFCTagModule::GetTagList( const std::string& strTag, NFList<NFIDENTID>& xList)
 {
-	return NFList<NFIDENTID>();
+	return true;
 }
 
-NFList<NFIDENTID>& NFCTagModule::GetTagList( const TAG_DEFINE eTag, const std::string& strTag )
+bool NFCTagModule::GetTagList( const TAG_DEFINE eTag, const std::string& strTag, NFList<NFIDENTID>& xList)
 {
-	return NFList<NFIDENTID>();
+	return true;
 }
 
 bool NFCTagModule::AddToTagList( const std::string& strTag, const NFIDENTID object )
