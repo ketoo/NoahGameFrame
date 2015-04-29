@@ -236,18 +236,24 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
         return;
     }
 
-    NFIDENTID ident = PBToNF(xMsg.id());
+    NFIDENTID nRoleID = PBToNF(xMsg.id());
     //////////////////////////////////////////////////////////////////////////
     //拉取数据
-	if(!m_pDataProcessModule->LoadDataFormNoSql(ident))
+	if(!m_pDataProcessModule->LoadDataFormNoSql(nRoleID))
 	{
 		return;
 	}
     //////////////////////////////////////////////////////////////////////////
 
+    NF_SHARE_PTR<NFCGameServerNet_ServerModule::BaseData> pBaseData = mRoleBaseData.GetElement(nRoleID);
+    if (nullptr != pBaseData)
+    {// 已经存在
+        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nClientID, "player is exist, cannot enter game", "", __FUNCTION__, __LINE__);
+        return;
+    }
 
     int nGateID = -1;
-    NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.First();
+    NF_SHARE_PTR<ServerData> pServerData = mProxyMap.First();
     while (pServerData.get())
     {
         if (msg.GetFd() == pServerData->nFD)
@@ -265,8 +271,20 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
         return;
     }
 
+    pServerData = mProxyMap.GetElement(nGateID);
+    if (nullptr == pServerData)
+    {
+        return;
+    }
+
+    // proxy绑定playerID和gateFD
+    if (!pServerData->xRoleInfo.insert(std::make_pair(nRoleID, msg.GetFd())).second)
+    {
+        return;
+    }
+
     //id和fd,gateid绑定
-    mRoleBaseData.AddElement(ident, NF_SHARE_PTR<BaseData>(NF_NEW BaseData(nGateID, nClientID)));
+    mRoleBaseData.AddElement(nRoleID, NF_SHARE_PTR<BaseData>(NF_NEW BaseData(nGateID, nClientID)));
 
     //默认1号场景
     int nSceneID = 1;
@@ -280,7 +298,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
     var.AddString("ClientID");
     var.AddObject(nClientID);
 
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(ident, nSceneID, 0, "Player", "",  var);
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, nSceneID, 0, "Player", "",  var);
     if ( NULL == pObject.get() )
     {
         //内存泄漏
@@ -316,7 +334,22 @@ void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess( const NFIPacket& ms
     }
 
     m_pKernelModule->DestroyObject(nPlayerID);
+    //////////////////////////////////////////////////////////////////////////
+    NF_SHARE_PTR<BaseData> pBaseData = mRoleBaseData.GetElement(nPlayerID);
+    if (nullptr == pBaseData)
+    {
+        return;
+    }
 
+    mRoleBaseData.RemoveElement(nPlayerID);
+    //////////////////////////////////////////////////////////////////////////
+    NF_SHARE_PTR<ServerData> pServerData = mProxyMap.GetElement(pBaseData->nGateID);
+    if (nullptr == pServerData)
+    {
+        return;
+    }
+
+    pServerData->xRoleInfo.erase(nPlayerID);
 }
 
 int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDENTID& self, const NFIDataList& argVar )
