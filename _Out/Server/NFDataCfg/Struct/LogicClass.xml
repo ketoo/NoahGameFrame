@@ -18,7 +18,6 @@
         <Class Desc="Scene" Id="Scene" InstancePath="../../NFDataCfg/Ini/NPC/Scene.xml" Path="../../NFDataCfg/Struct/Class/Scene.xml" Public="0" Type="TYPE_SCENE"/>
         <Class Desc="Shop" Id="Shop" InstancePath="../../NFDataCfg/Ini/NPC/Shop.xml" Path="../../NFDataCfg/Struct/Class/Shop.xml" Public="0" Type="TYPE_SHOP"/>
         <Class Desc="Skill" Id="Skill" InstancePath="../../NFDataCfg/Ini/NPC/Skill.xml" Path="../../NFDataCfg/Struct/Class/Skill.xml" Public="0" Type="TYPE_SKILL"/>
-        <Class Desc="SkillRef" Id="SkillRef" InstancePath="../../NFDataCfg/Ini/NPC/SkillRef.xml" Path="../../NFDataCfg/Struct/Class/SkillRef.xml" Public="0" Type="TYPE_SKILLREF"/>
         <Class Desc="SqlServer" Id="SqlServer" InstancePath="../../NFDataCfg/Ini/NPC/SqlServer.xml" Path="../../NFDataCfg/Struct/Class/SqlServer.xml" Public="0" Type="TYPE_SQLSERVER"/>
         <Class Desc="StateFuncResources" Id="StateFuncResources" InstancePath="../../NFDataCfg/Ini/NPC/StateFuncResources.xml" Path="../../NFDataCfg/Struct/Class/StateFuncResources.xml" Public="0" Type="TYPE_STATEFUNCRESOURCES"/>
         <Class Desc="StateFunction" Id="StateFunction" InstancePath="../../NFDataCfg/Ini/NPC/StateFunction.xml" Path="../../NFDataCfg/Struct/Class/StateFunction.xml" Public="0" Type="TYPE_STATEFUNCTION"/>
