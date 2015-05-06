@@ -85,6 +85,7 @@ bool NFCGameServerNet_ServerModule::Execute(const float fLasFrametime, const flo
 
 int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 {
+	m_pLogModule->LogNormal(NFILogModule::NLL_WARING_NORMAL, NFIDENTID(), "BeginMsg:", msg.GetMsgHead()->GetMsgID(), __FUNCTION__, __LINE__ );
     // TOCHECK
     //NFIActorMessage xActorMsg;
 
@@ -172,6 +173,8 @@ int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
     default:
         break;
     }
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_WARING_NORMAL, NFIDENTID(), "EndMsg:", msg.GetMsgHead()->GetMsgID(), __FUNCTION__, __LINE__ );
 
     return true;
 }
