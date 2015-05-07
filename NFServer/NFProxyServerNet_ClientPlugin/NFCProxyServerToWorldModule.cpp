@@ -35,6 +35,8 @@ bool NFCProxyServerToWorldModule::Execute(const float fLasFrametime, const float
         pProxy = Next();
     }
 
+
+
 	return NFINetModule::Execute(fLasFrametime, fStartedTime);
 }
 
@@ -302,6 +304,36 @@ bool NFCProxyServerToWorldModule::VerifyConnectData( const std::string& strAccou
     mWantToConnectMap.RemoveElement(strAccount);
 
     return true;
+}
+
+void NFCProxyServerToWorldModule::LogGameServer(const float fLastTime)
+{
+	if (mfLastLogTime < 10.0f)
+	{
+		mfLastLogTime += fLastTime;
+		return;
+	}
+
+	mfLastLogTime = 0.0f;
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "Begin Log GameServer Info", "");
+
+	GameData* pGameData = mGameDataMap.First();
+	while (pGameData)
+	{
+		NFINetModule* pNetObject = GetElement(pGameData->nGameID);
+		if (!pNetObject || pNetObject->GetNet() || pNetObject->GetNet()->GetNetObject(0))
+		{
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), "GameServer not exits", pGameData->nGameID);
+		}
+
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "GameServer:", pGameData->nGameID);
+
+		pGameData = mGameDataMap.Next();
+	}
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "End Log GameServer Info", "");
+
 }
 
 //////////////////////////////////////////////////////////////////////////
