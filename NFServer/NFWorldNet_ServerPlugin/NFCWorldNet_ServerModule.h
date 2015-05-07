@@ -30,7 +30,9 @@ public:
     NFCWorldNet_ServerModule(NFIPluginManager* p)
     {
         pPluginManager = p;
+		mfLastLogTime = 0;
     }
+
     virtual bool Init();
     virtual bool Shut();
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
@@ -71,6 +73,8 @@ protected:
 	void SynGameToProxy();
 	void SynGameToProxy( const int nFD );
 
+	//////////////////////////////////////////////////////////////////////////
+	void LogGameServer(const float fLastTime);
 private:
 
     struct ServerData
@@ -91,6 +95,9 @@ private:
     };
 
 private:
+
+	float mfLastLogTime;
+
     //serverid,data
     NFMapEx<int, ServerData> mGameMap;
     NFMapEx<int, ServerData> mProxyMap;
