@@ -334,6 +334,7 @@ protected:
 		xMsg.set_count(0);
 
 		SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT, xMsg, 0);
+
 	}
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
