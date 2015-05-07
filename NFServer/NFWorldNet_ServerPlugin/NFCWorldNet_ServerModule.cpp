@@ -63,6 +63,8 @@ bool NFCWorldNet_ServerModule::Shut()
 
 bool NFCWorldNet_ServerModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
+	LogGameServer(fLasFrametime);
+
 	return NFINetModule::Execute(fLasFrametime, fStartedTime);
 }
 
@@ -412,3 +414,41 @@ bool NFCWorldNet_ServerModule::InThisWorld( const std::string& strAccount )
     return false;
 }
 
+void NFCWorldNet_ServerModule::LogGameServer(const float fLastTime)
+{
+	if (mfLastLogTime < 10.0f)
+	{
+		mfLastLogTime += fLastTime;
+		return;
+	}
+
+	mfLastLogTime = 0.0f;
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "Begin Log GameServer Info", "");
+
+	NF_SHARE_PTR<ServerData> pGameData = mGameMap.First();
+	while (pGameData)
+	{
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "GameServer:", pGameData->nFD);
+
+		pGameData = mGameMap.Next();
+	}
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "End Log GameServer Info", "");
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "Begin Log ProxyServer Info", "");
+
+	pGameData = mProxyMap.First();
+	while (pGameData)
+	{
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "ProxyServer:", pGameData->nFD);
+
+		pGameData = mProxyMap.Next();
+	}
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "End Log ProxyServer Info", "");
+
+
+
+
+}
