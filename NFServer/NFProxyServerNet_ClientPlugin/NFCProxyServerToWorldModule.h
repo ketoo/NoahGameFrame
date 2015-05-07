@@ -70,6 +70,7 @@ public:
     NFCProxyServerToWorldModule(NFIPluginManager* p)
     {
         pPluginManager = p;
+		mfLastLogTime = 0.0f;
     }
 
     virtual bool Init();
@@ -103,6 +104,9 @@ protected:
 
     int OnSelectServerResultProcess(const NFIPacket& msg);
     int OnGameInfoProcess(const NFIPacket& msg);
+
+	void LogGameServer(const float fLastTime);
+
 private:
     struct ConnectData 
     {
@@ -120,6 +124,8 @@ private:
 private:
     NFMapEx<std::string, ConnectData> mWantToConnectMap;
     GameDataMap mGameDataMap;
+
+	float mfLastLogTime;
 private:
 
     NFILogModule* m_pLogModule;
