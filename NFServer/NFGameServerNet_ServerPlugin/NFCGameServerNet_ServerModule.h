@@ -80,9 +80,9 @@ protected:
 	void OnClientConnected(const int nSockIndex);
 
 protected:
-    int OnProxyServerRegisteredProcess(const NFIPacket& msg);
-    int OnProxyServerUnRegisteredProcess(const NFIPacket& msg);
-    int OnRefreshProxyServerInfoProcess(const NFIPacket& msg);
+    void OnProxyServerRegisteredProcess(const NFIPacket& msg);
+    void OnProxyServerUnRegisteredProcess(const NFIPacket& msg);
+    void OnRefreshProxyServerInfoProcess(const NFIPacket& msg);
 
 protected:
 
