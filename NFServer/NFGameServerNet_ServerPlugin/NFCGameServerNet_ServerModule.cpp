@@ -1976,17 +1976,12 @@ void NFCGameServerNet_ServerModule::OnDeleteRoleGameProcess( const NFIPacket& ms
 
 void NFCGameServerNet_ServerModule::OnClienSwapSceneProcess( const NFIPacket& msg )
 {
-
+	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckSwapScene)
 }
 
 void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
 {
-    NFIDENTID nPlayerID;
-    NFMsg::ReqAckUseSkill xMsg;
-    if (!RecivePB(msg, xMsg, nPlayerID))
-    {
-        return;
-    }
+	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckUseSkill)
 
     //bc
     const std::string& strSkillID =  xMsg.skill_id();
@@ -2012,12 +2007,7 @@ void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
 
 void NFCGameServerNet_ServerModule::OnClienMove( const NFIPacket& msg )
 {
-    NFIDENTID nPlayerID;
-    NFMsg::ReqAckPlayerMove xMsg;
-    if (!RecivePB(msg, xMsg, nPlayerID))
-    {
-        return;
-    }
+	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckPlayerMove)
 
     m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "X", xMsg.target_pos(0).x());
     m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Y", xMsg.target_pos(0).x());
@@ -2045,12 +2035,7 @@ void NFCGameServerNet_ServerModule::OnClienMove( const NFIPacket& msg )
 
 void NFCGameServerNet_ServerModule::OnClienMoveImmune( const NFIPacket& msg )
 {
-    NFIDENTID nPlayerID;
-    NFMsg::ReqAckPlayerMove xMsg;
-    if (!RecivePB(msg, xMsg, nPlayerID))
-    {
-        return;
-    }
+    CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckPlayerMove)
 
     m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "X", xMsg.target_pos(0).x());
     m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Y", xMsg.target_pos(0).x());
@@ -2083,32 +2068,27 @@ void NFCGameServerNet_ServerModule::OnClienCommand( const NFIPacket& msg )
 
 void NFCGameServerNet_ServerModule::OnClienAcceptTask( const NFIPacket& msg )
 {
-
+	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAcceptTask)
 }
 
 void NFCGameServerNet_ServerModule::OnClienPushTask( const NFIPacket& msg )
 {
-
+	CLIENT_MSG_PROCESS(msg, NFMsg::ReqCompeleteTask)
 }
 
 void NFCGameServerNet_ServerModule::OnClienPushCustom( const NFIPacket& msg )
 {
-
+	//CLIENT_MSG_PROCESS(msg, NFMsg::cu)
 }
 
 void NFCGameServerNet_ServerModule::OnClienPickItem( const NFIPacket& msg )
 {
-
+	CLIENT_MSG_PROCESS(msg, NFMsg::ReqPickDropItem)
 }
 
 void NFCGameServerNet_ServerModule::OnClienChatProcess( const NFIPacket& msg )
 {
-    NFIDENTID nPlayerID;
-    NFMsg::ReqAckPlayerChat xMsg;
-    if (!RecivePB(msg, xMsg, nPlayerID))
-    {
-        return;
-    }
+	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckPlayerChat)
 
     //bc
     int nContianerID = m_pKernelModule->GetPropertyInt(nPlayerID, "SceneID");
@@ -2127,12 +2107,7 @@ void NFCGameServerNet_ServerModule::OnClienChatProcess( const NFIPacket& msg )
 
 void NFCGameServerNet_ServerModule::OnClientJoinPVP(const NFIPacket& msg)
 {
-    NFIDENTID nPlayerID;
-    NFMsg::ReqAckJoinActivity xMsg;
-    if (!RecivePB(msg, xMsg, nPlayerID))
-    {
-        return;
-    }
+	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckJoinActivity)
 
     switch (xMsg.activity_type())
     {
@@ -2146,21 +2121,22 @@ void NFCGameServerNet_ServerModule::OnClientJoinPVP(const NFIPacket& msg)
 
 void NFCGameServerNet_ServerModule::OnClientExitPVP(const NFIPacket& msg)
 {
+	//CLIENT_MSG_PROCESS(msg, NFMsg::reqex)
 
 }
 
 void NFCGameServerNet_ServerModule::OnClienUseItem( const NFIPacket& msg )
 {
-
+	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckUseItem)
 }
 
-int NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess( const NFIPacket& msg )
 {
     NFIDENTID nPlayerID;
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
-        return 0;
+        return;
     }
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
@@ -2179,7 +2155,7 @@ int NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess( const NFIPack
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Proxy Registered");
     }
 
-    return 0;
+    return;
 }
 
 int NFCGameServerNet_ServerModule::OnProxyServerUnRegisteredProcess( const NFIPacket& msg )
@@ -2188,7 +2164,7 @@ int NFCGameServerNet_ServerModule::OnProxyServerUnRegisteredProcess( const NFIPa
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
-        return 0;
+        return;
     }
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
@@ -2199,16 +2175,17 @@ int NFCGameServerNet_ServerModule::OnProxyServerUnRegisteredProcess( const NFIPa
 
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Proxy UnRegistered");
     }
-    return 0;
+
+    return;
 }
 
-int NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess( const NFIPacket& msg )
 {
     NFIDENTID nPlayerID;
     NFMsg::ServerInfoReportList xMsg;
     if (!RecivePB(msg, xMsg, nPlayerID))
     {
-        return 0;
+        return;
     }
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
@@ -2227,7 +2204,7 @@ int NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess( const NFIPac
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Proxy Registered");
     }
 
-    return 0;
+    return;
 }
 
 void NFCGameServerNet_ServerModule::OnClienGMProcess( const NFIPacket& msg )
