@@ -209,6 +209,8 @@ int NFCMasterNet_ServerModule::OnSelectWorldProcess(const NFIPacket& msg)
 
 bool NFCMasterNet_ServerModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
+	LogGameServer(fLasFrametime);
+
 	NFINetModule::Execute(fLasFrametime, fStartedTime);
 	return true;
 }
@@ -413,4 +415,39 @@ void NFCMasterNet_ServerModule::SynWorldToLogin()
 
         pServerData = mLoginMap.Next();
     }
+}
+
+void NFCMasterNet_ServerModule::LogGameServer(const float fLastTime)
+{
+	if (mfLastLogTime < 10.0f)
+	{
+		mfLastLogTime += fLastTime;
+		return;
+	}
+
+	mfLastLogTime = 0.0f;
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "Begin Log GameServer Info", "");
+
+	NF_SHARE_PTR<ServerData> pGameData = mWorldMap.First();
+	while (pGameData)
+	{
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "WorldServer:", pGameData->nFD);
+
+		pGameData = mWorldMap.Next();
+	}
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "End Log GameServer Info", "");
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "Begin Log ProxyServer Info", "");
+
+	pGameData = mLoginMap.First();
+	while (pGameData)
+	{
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "LoginServer:", pGameData->nFD);
+
+		pGameData = mLoginMap.Next();
+	}
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "End Log ProxyServer Info", "");
 }
