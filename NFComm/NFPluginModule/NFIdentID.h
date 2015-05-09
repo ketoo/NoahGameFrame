@@ -30,10 +30,28 @@ struct NFIDENTID
         nData64 = 0;
     }
 
+	NFIDENTID(NFINT64 nData)
+	{
+		nHead64 = 0;
+		nData64 = nData;
+	}
+
 	NFIDENTID(NFINT64 nSvr, NFINT64 nData)
 	{
 		nHead64 = nSvr;
 		nData64 = nData;
+	}
+
+	NFIDENTID operator=(const NFINT64 src)
+	{
+		nHead64 = 0;
+		nData64 = src;
+	}
+
+	NFIDENTID operator=(const int src)
+	{
+		nHead64 = 0;
+		nData64 = src;
 	}
 
     bool IsNull() const
