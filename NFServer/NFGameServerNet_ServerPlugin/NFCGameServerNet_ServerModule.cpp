@@ -2158,7 +2158,7 @@ void NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess( const NFIPac
     return;
 }
 
-int NFCGameServerNet_ServerModule::OnProxyServerUnRegisteredProcess( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnProxyServerUnRegisteredProcess( const NFIPacket& msg )
 {
     NFIDENTID nPlayerID;
     NFMsg::ServerInfoReportList xMsg;
