@@ -26,12 +26,12 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
-#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFCMemory.h"
 #include <boost/lexical_cast.hpp>
 #include <boost/variant.hpp>
 #include <boost/algorithm/string.hpp>
 #include "NFComm/NFPluginModule/NFIdentID.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 //变量类型
 enum TDATA_TYPE
@@ -71,33 +71,32 @@ public:
 
     NFIDataList()
     {
-        mnCapacity = STACK_SIZE;
-        mnNextOrderCapacity = mnCapacity * 2;
-        mnSize = 0;
-        mnOrder = 0;
+		mnUseSize = 0;
+		for (int i = 0; i < STACK_SIZE; ++i)
+		{
+			mvList.push_back(NF_SHARE_PTR<TData>(NF_NEW TData()));
+		}
     }
 
     virtual ~NFIDataList() = 0;
 
     virtual std::string StringValEx(const int index, const bool bForce) const = 0;
     virtual bool ToString(std::string& str, const char* strSplit) const = 0;
-	virtual bool FormString(std::string& str, const char* strSplit) = 0;
 
  protected:
     template<typename T>
     T NumberVal(const int index) const
     {
-        T result = 0;
-        if (index < mnSize && index >= 0)
+        T result(0);
+        if (index < GetCount() && index >= 0)
         {
             TDATA_TYPE type =  Type(index);
             if (type == TDATA_DOUBLE
                 || type == TDATA_FLOAT
                 || type == TDATA_INT
-                /*|| type == TDATA_OBJECT*/
-                /*|| type == TDATA_POINTER*/)
+                || type == TDATA_OBJECT)
             {
-                const TData* var = GetStackConst(index);
+                const NF_SHARE_PTR<TData> var = GetStack(index);
                 result = boost::get<T>(var->variantData);
             }
         }
@@ -106,18 +105,18 @@ public:
     }
 
     template<typename T>
-    bool SetNumber(const int index, const T& value)
+    bool SetValue(const int index, const T& value)
     {
-        if (index < mnSize && index >= 0)
+        if (index < GetCount() && index >= 0)
         {
             TDATA_TYPE type =  Type(index);
             if (type == TDATA_DOUBLE
                 || type == TDATA_FLOAT
                 || type == TDATA_INT
                 || type == TDATA_OBJECT
-                /*|| type == TDATA_POINTER*/)
+				|| type == TDATA_STRING)
             {
-                TData* var = GetStack(index);
+                NF_SHARE_PTR<TData> var = GetStack(index);
                 var->variantData = value;
                 return true;
             }
@@ -127,101 +126,52 @@ public:
     }
 
     template<typename T>
-    bool AddNumber(const TDATA_TYPE type, const T& value)
+    bool AddValue(const TDATA_TYPE type, const T& value)
     {
+		if (GetCount() == mvList.size())
+		{
+			AddStatck();
+		}
+
         if (type == TDATA_DOUBLE
             || type == TDATA_FLOAT
             || type == TDATA_INT
             || type == TDATA_OBJECT
-            /*|| type == TDATA_POINTER*/)
+            || type == TDATA_STRING)
         {
-            TData* var = GetStack(mnSize);
+            NF_SHARE_PTR<TData> var = GetStack(GetCount());
             if (var)
             {
                 var->nType = type;
                 var->variantData = value;
-                mnSize++;
+				mnUseSize++;
 
                 return true;
             }
         }
+
         return false;
     }
 
-protected:
-    //根据序号得到阶,8->16->32
-    int GetOrder(const int index, int& nNewIndex) const
-    {
-        int nOrder = -1;
-        int nLastStackSize = STACK_SIZE;
-        nNewIndex = index;
-
-        while (nNewIndex - nLastStackSize >= 0)
-        {
-            nOrder++;
-
-            nNewIndex -= nLastStackSize;
-            nLastStackSize *= 2;
-        }
-
-        return nOrder;
-    }
-
-    TData* GetStack(const int index)
-    {
-        //mnNewSize是8的阶层
-        if (index < STACK_SIZE)
-        {
-            return &mvStack[index];
-        }
-        else if (index < mnCapacity)
-        {
-            int nOrderIndex = 0;
-            int nOrder = GetOrder(index, nOrderIndex);
-            if (nOrder >= 0)
-            {
-                TData* pData = mvList[nOrder];
-                return &pData[nOrderIndex];
-            }
-        }
-        else if (index == mnCapacity)
-        {
-            TData* pData = NF_NEW TData[mnNextOrderCapacity];
-            mvList.push_back(pData);
-            mvList[mnOrder] = pData;
-            mnOrder += 1;
-            mnCapacity += mnNextOrderCapacity;
-            mnNextOrderCapacity *= 2;
-
-            return GetStack(index);
-        }
-
-        return NULL;
-    }
+	void AddStatck()
+	{
+		for (int i = 0; i < STACK_SIZE; ++i )
+		{
+			NF_SHARE_PTR<TData> pData(NF_NEW TData());
+			mvList.push_back(pData);
+		}
+	}
 
 public:
-    const TData* GetStackConst(const int index) const
-    {
-        //mnNewSize是8的阶层
-        if (index < STACK_SIZE)
-        {
-            return &mvStack[index];
-        }
-        else if (index < mnCapacity)
-        {
-            int nOrderIndex = 0;
-            int nOrder = GetOrder(index, nOrderIndex);
-            if (nOrder >= 0)
-            {
-                TData* pData = mvList[nOrder];
-                return &pData[nOrderIndex];
-            }
-        }
+	const NF_SHARE_PTR<TData> GetStack(const int index) const
+	{
+		if (index < mvList.size())
+		{
+			return mvList[index];
+		}
 
-        return NULL;
-    }
-
-
+		return NF_SHARE_PTR<TData>();
+	}
     // 合并
     virtual bool Concat(const NFIDataList& src) = 0;
     // 部分添加
@@ -425,6 +375,14 @@ public:
         return false;
     }
 
+	NFIDataList& NFIDataList::operator=(const NFIDataList& src)
+	{
+		Clear();
+		Append(src, 0, src.GetCount());
+
+		return *this;
+	}
+
     inline bool operator==(const NFIDataList& src) const
     {
         if (src.GetCount() == GetCount())
@@ -538,12 +496,8 @@ public:
     }
     enum { STACK_SIZE = 8 };
 protected:
-    int mnCapacity; //容量
-    int mnSize;         //当前使用了的对象数量
-    int mnNextOrderCapacity;
-    NFINT16 mnOrder;            //扩充了几阶
-    boost::array<TData, STACK_SIZE> mvStack;
-    std::vector<TData*> mvList;
+	int mnUseSize;
+    std::vector<NF_SHARE_PTR<TData>> mvList;
 };
 
 inline NFIDataList::~NFIDataList() {}
