@@ -313,7 +313,7 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
         for (int i = 0; i < GetCols(); ++i)
         {
             NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nFindRow, i));//GetTData(nFindRow, i);
-            if (!ValidSet(GetColType(i), *var.GetStackConst(i), pVar))
+            if (!ValidSet(GetColType(i), *var.GetStack(i), pVar))
             {
                 //添加失败--不存在这样的情况，因为类型上面已经监测过，如果返回的话，那么添加的数据是0的话就会返回，导致结果错误
                 //                 mVecUsedState[nFindRow] = 0;
@@ -1320,8 +1320,8 @@ bool NFCRecord::SwapRowInfo(const int nOriginRow, const int nTargetRow)
 				{
 					if (IsUsed(nTargetRow))
 					{
-						int nOldValue = GetInt(nOriginRow, mnKeyCol);
-						int nNewValue = GetInt(nTargetRow, mnKeyCol);
+						NFINT64 nOldValue = GetInt(nOriginRow, mnKeyCol);
+						NFINT64 nNewValue = GetInt(nTargetRow, mnKeyCol);
 
 						std::map<NFINT64, int>::iterator itOldValue = mxIntKeyMap.find(nOldValue);
 						if (itOldValue != mxIntKeyMap.end())
@@ -1337,7 +1337,7 @@ bool NFCRecord::SwapRowInfo(const int nOriginRow, const int nTargetRow)
 					}
 					else
 					{
-						int nOldValue = GetInt(nOriginRow, mnKeyCol);
+						NFINT64 nOldValue = GetInt(nOriginRow, mnKeyCol);
 						std::map<NFINT64, int>::iterator itOldValue = mxIntKeyMap.find(nOldValue);
 						if (itOldValue != mxIntKeyMap.end())
 						{
