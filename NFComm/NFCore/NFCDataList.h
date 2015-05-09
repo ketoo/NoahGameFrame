@@ -91,7 +91,6 @@ public:
     virtual void* Pointer(const int index) const;
 
 	virtual bool ToString(std::string& str, const char* strSplit) const;
-	virtual bool FormString(std::string& str, const char* strSplit);
 
 protected:
     void InnerAppendEx(const NFIDataList& src, const int start, const int end);
