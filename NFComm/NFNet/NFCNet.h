@@ -127,7 +127,7 @@ private:
     EVENT_FUNCTOR mEventCB;
 
 	std::string mstrPwd;
-
+	char mstrMsgData[NFIMsgHead::NF_MSGBUFF_LENGTH];
 
 	//////////////////////////////////////////////////////////////////////////
 };
