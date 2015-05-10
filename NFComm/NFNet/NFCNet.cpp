@@ -170,31 +170,43 @@ void NFCNet::conn_readcb(struct bufferevent *bev, void *user_data)
     //  	evbuffer_add_buffer(output, input);
     //      SendMsg(1, strData,len, pObject->GetFd());
     //////////////////////////////////////////////////////////////////////////
+	if (len > NFIMsgHead::NF_MSGBUFF_LENGTH)
+	{
+		char* strMsg = new char[len];
 
-    char* strData = new char[len];
-    //char strData[NF_MAX_SERVER_PACKET_SIZE] = {0};
-    if(evbuffer_remove(input, strData, len) > 0)
-    {
-        pObject->AddBuff(strData, len);
+		if(evbuffer_remove(input, strMsg, len) > 0)
+		{
+			pObject->AddBuff(strMsg, len);
+		}
 
-        while (1)
-        {
-            int nDataLen = pObject->GetBuffLen();
-            if (nDataLen > pNet->mnHeadLength)
-            {
-                if (!pNet->Dismantle(pObject))
-				{
-					break;
-				}
-            }
-            else
-            {
-                break;
-            }
-        }
-    }
+		delete[] strMsg;
+	}
+	else
+	{
 
-    delete[] strData;
+		memset(pNet->mstrMsgData, 0, NFIMsgHead::NF_MSGBUFF_LENGTH);
+
+		if(evbuffer_remove(input, pNet->mstrMsgData, len) > 0)
+		{
+			pObject->AddBuff(pNet->mstrMsgData, len);
+		}
+	}
+
+	while (1)
+	{
+		int nDataLen = pObject->GetBuffLen();
+		if (nDataLen > pNet->mnHeadLength)
+		{
+			if (!pNet->Dismantle(pObject))
+			{
+				break;
+			}
+		}
+		else
+		{
+			break;
+		}
+	}    
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -352,6 +364,8 @@ bool NFCNet::Dismantle(NetObject* pObject )
         else if (0 == nUsedLen)
         {
             //长度不够(等待下次解包)
+
+			bRet = false;
         }
         else
         {
@@ -361,11 +375,11 @@ bool NFCNet::Dismantle(NetObject* pObject )
 			bRet = false;
 
         }
+
         if (pObject->GetErrorCount() > 5)
         {
-            CloseNetObject(pObject->GetFd());
-
-			bRet = false;
+            //CloseNetObject(pObject->GetFd());
+			//向上层汇报
         }
     }
 
