@@ -27,7 +27,7 @@ int NFCPacket::DeCode( const char* strData, const uint32_t unLen )
 	if (pHead->GetMsgLength() > unLen)
 	{
 		//总长度不够
-		return -1;
+		return 0;
 	}
 
 	//copy包头+包体
