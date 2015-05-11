@@ -25,7 +25,7 @@ https://github.com/ketoo/NoahGameFrame/blob/develop/NFrame_Introduction_CHS.pdf
 
 
 
-Examples:
+Architecture:
 -------------------
 Event Driver:
 
