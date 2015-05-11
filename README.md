@@ -19,6 +19,24 @@ The features:
 *  Cross-platform
 
 
+Manual
+---------------
+https://github.com/ketoo/NoahGameFrame/blob/develop/NFrame_Introduction_CHS.pdf
+
+
+
+Examples:
+-------------------
+Event Driver:
+
+![Event Driver](https://github.com/ketoo/NoahGameFrame/blob/develop/20150511205210.jpg)
+
+Architecture:
+
+![Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/20150511205235.jpg)
+![Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/20150511205320.jpg)
+
+
 Get the Sources:
 -------------------
 
@@ -59,15 +77,15 @@ How to build:
 
 Tutorial:
 -------------------
+### [01-Hello world, add a module](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial1)
 
-Hello world
 
 ```cpp
 
 // -------------------------------------------------------------------------
 //    @FileName      :    HelloWorld1.h
 //    @Author           :    ketoo
-//    @Date             :    2014-05-14 08:51
+//    @Date             :    2014-05-01 08:51
 //    @Module           :   HelloWorld1
 //
 // -------------------------------------------------------------------------
@@ -150,7 +168,11 @@ bool HelloWorld1::Shut()
 
 
 
+-------------------
+### [02-Hello world, test data driver](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial2)
 
+-------------------
+### [03-Hello world, test heartbeat and event system](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial3)
 
 
 
