@@ -27,14 +27,21 @@ https://github.com/ketoo/NoahGameFrame/blob/develop/NFrame_Introduction_CHS.pdf
 
 Architecture:
 -------------------
-Event Driver:
-
-![Event Driver](https://github.com/ketoo/NoahGameFrame/blob/develop/20150511205210.jpg)
 
 Architecture:
 
 ![Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/20150511205235.jpg)
 ![Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/20150511205320.jpg)
+
+Event Driver:
+
+![Event Driver](https://github.com/ketoo/NoahGameFrame/blob/develop/20150511205210.jpg)
+
+Logic Class:
+
+![Logic Class](https://github.com/ketoo/NoahGameFrame/blob/develop/20150511205321.png)
+
+
 
 
 Get the Sources:
