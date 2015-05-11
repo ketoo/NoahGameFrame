@@ -6,20 +6,20 @@ NoahGameFrame
 
 NF is a lightweight, fast, scalable, distributed plugin framework.
 
-##The features:
+The features:
 -------------------
 
-<p>1: it is easy to use interface oriented design minimise the effort;</p>
-<p>2: extensible plugin framework makes getting your application running is quick and simple;</p>
-<p>3: clean, uncluttered design, stable engine used in several commercial products;</p>
-<p>4: using the actor model has very high performance(by theron);</p>
-<p>5: based on the event-driven and attribute-driver can make business more clearly and easy to maintenance;</p>
-<p>6: based on the standard c + + development, cross-platform support;</p>
-<p>7: with existing c++, c# game client for rapid development;</p>
-<p>8: Cross-platform,;</p>
+*  it is easy to use interface oriented design minimise the effort
+*  extensible plugin framework makes getting your application running is quick and simple
+*  clean, uncluttered design, stable engine used in several commercial products
+*  using the actor model has very high performance(by theron);</p>
+*  based on the event-driven and attribute-driver can make business more clearly and easy to maintenance
+*  based on the standard c + + development, cross-platform support
+*  with existing c++, c# game client for rapid development
+*  Cross-platform
 
 
-##Get the Sources:
+Get the Sources:
 -------------------
 
 git clone https://github.com/ketoo/NoahGameFrame.git
@@ -29,7 +29,7 @@ or
 svn checkout https://github.com/ketoo/NoahGameFrame
 
 
-##Dependencies:
+Dependencies:
 -------------------
 
 Need build sub librares:
@@ -41,20 +41,26 @@ Need build sub librares:
 * Boost.Chrono
 * Boost.Thread
 
-##Supported Compilers
+* libevent-2.0.21-stable
+* protobuf-2.5.0
+* redis-cplusplus-client
+* Theron-6.00.01
+* easylog
+
+Supported Compilers
 -------------------
 
 * GCC >= 4.8
 * VC >= 9.0 (sp1)
 
-##How to build:
+How to build:
 -------------------
 
 
-##Tutorial:
+Tutorial:
 -------------------
+
 Hello world
------------
 
 ```cpp
 
@@ -97,10 +103,10 @@ protected:
 
 #include "HelloWorld1.h"
 
-
 bool HelloWorld1::Init()
 {
-    //初始化
+    // Use this for initialization
+	
     std::cout << "Hello, world1, Init" << std::endl;
 
     return true;
@@ -108,7 +114,8 @@ bool HelloWorld1::Init()
 
 bool HelloWorld1::AfterInit()
 {
-    //初始化完毕
+    // AfterInit is called after Init
+	
     std::cout << "Hello, world1, AfterInit" << std::endl;
 
     return true;
@@ -116,7 +123,8 @@ bool HelloWorld1::AfterInit()
 
 bool HelloWorld1::Execute( const float fLasFrametime, const float fStartedTime )
 {
-    //每帧执行
+    // Execute is called once per frame
+	
     //std::cout << "Hello, world1, Execute" << std::endl;
 
     return true;
@@ -124,11 +132,8 @@ bool HelloWorld1::Execute( const float fLasFrametime, const float fStartedTime )
 
 bool HelloWorld1::BeforeShut()
 {
-    std::cout << "Hello, world1, BeforeShut1111" << std::endl;
-
-    system("PAUSE");
-
-    //反初始化之前
+    //before final
+	
     std::cout << "Hello, world1, BeforeShut" << std::endl;
 
     return true;
@@ -136,7 +141,8 @@ bool HelloWorld1::BeforeShut()
 
 bool HelloWorld1::Shut()
 {
-    //反初始化
+    //final
+	
     std::cout << "Hello, world1, Shut" << std::endl;
 
     return true;
