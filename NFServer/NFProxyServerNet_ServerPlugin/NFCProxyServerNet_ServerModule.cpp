@@ -50,7 +50,7 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
 
 			m_pUUIDModule->SetIdentID(nServerID);
 
-			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyServerNet_ServerModule::OnRecivePack, &NFCProxyServerNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
+			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyServerNet_ServerModule::OnReciveClientPack, &NFCProxyServerNet_ServerModule::OnSocketClientEvent, nMaxConnect, nPort, nCpus);
 
 		}
 	}
@@ -114,7 +114,7 @@ int NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const NFIPacket& msg)
     return 0;
 }
 
-int NFCProxyServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
+int NFCProxyServerNet_ServerModule::OnReciveClientPack( const NFIPacket& msg )
 {
     //看他连接在哪个gs，然后转发
     switch (msg.GetMsgHead()->GetMsgID())
@@ -171,7 +171,7 @@ int NFCProxyServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 	return 0;
 }
 
-int NFCProxyServerNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
+int NFCProxyServerNet_ServerModule::OnSocketClientEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
