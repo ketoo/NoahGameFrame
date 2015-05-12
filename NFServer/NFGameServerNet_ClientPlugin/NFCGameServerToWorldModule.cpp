@@ -150,7 +150,7 @@ bool NFCGameServerToWorldModule::AfterInit()
 			const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
 			const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
 
-			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerToWorldModule::OnRecivePack, &NFCGameServerToWorldModule::OnSocketEvent, strIP.c_str(), nPort);
+			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerToWorldModule::OnReciveWSPack, &NFCGameServerToWorldModule::OnSocketWSEvent, strIP.c_str(), nPort);
 
 		}
 	}
@@ -371,12 +371,12 @@ int NFCGameServerToWorldModule::OnClassCommonEvent(const NFIDENTID& self, const 
     return 0;
 }
 
-int NFCGameServerToWorldModule::OnRecivePack( const NFIPacket& msg )
+int NFCGameServerToWorldModule::OnReciveWSPack( const NFIPacket& msg )
 {
     return 0;
 }
 
-int NFCGameServerToWorldModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
+int NFCGameServerToWorldModule::OnSocketWSEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent == NF_NET_EVENT_CONNECTED)
     {
