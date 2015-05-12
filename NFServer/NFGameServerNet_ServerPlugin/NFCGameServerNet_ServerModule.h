@@ -33,24 +33,24 @@
 #include "NFComm/NFPluginModule/NFIDataProcessModule.h"
 
 ////////////////////////////////////////////////////////////////////////////
+
 // 客户端消息处理宏
 #define CLIENT_MSG_PROCESS(packet, msg)                 \
-    NFIDENTID nPlayerID;                              \
-    msg xMsg;                                           \
-    if (!RecivePB(packet, xMsg, nPlayerID))              \
-    {                                                   \
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
-        return;                                         \
-    }                                                   \
-                                                        \
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(nPlayerID); \
-    if ( NULL == pObject.get() )                              \
-    {                                                   \
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "FromClient Object do not Exist", "", __FUNCTION__, __LINE__); \
-        return;                                         \
-    }
+	NFIDENTID nPlayerID;                              \
+	msg xMsg;                                           \
+	if (!RecivePB(packet, xMsg, nPlayerID))              \
+{                                                   \
+	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
+	return;                                         \
+}                                                   \
+	\
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(nPlayerID); \
+	if ( NULL == pObject.get() )                              \
+{                                                   \
+	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "FromClient Object do not Exist", "", __FUNCTION__, __LINE__); \
+	return;                                         \
+}
 //////////////////////////////////////////////////////////////////////////
-
 
 class NFCGameServerNet_ServerModule
     : public NFINetModule
