@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is a class xml-->
+<XML>
+    <Records/>
+    <Propertys>
+        <Property Desc="" Id="NORMALATTACK1" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="" Id="NORMALATTACK2" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="" Id="NORMALATTACK3" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="" Id="NORMALTHUMP" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="" Id="SKILL1" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="" Id="SKILL2" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="" Id="SKILL3" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="" Id="SKILL4" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="" Id="SKILL5" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="" Id="SKILL6" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="" Id="SKILL7" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="" Id="SKILL8" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="" Id="SKILL9" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="" Id="SKILL10" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
+    </Propertys>
+    <Components/>
+    <Includes/>
+</XML>
