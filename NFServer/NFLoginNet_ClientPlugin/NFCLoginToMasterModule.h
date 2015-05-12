@@ -44,8 +44,8 @@ public:
     virtual NFMapEx<int, NFMsg::ServerInfoReport>* GetWorldMap();
 
 protected:
-	int OnRecivePack(const NFIPacket& msg);
-    int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+	int OnReciveMSPack(const NFIPacket& msg);
+    int OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 protected:
 
