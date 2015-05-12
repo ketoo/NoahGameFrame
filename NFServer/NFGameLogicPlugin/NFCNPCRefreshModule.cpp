@@ -68,6 +68,7 @@ int NFCNPCRefreshModule::OnObjectHPEvent( const NFIDENTID& self, const std::stri
             m_pEventProcessModule->DoEvent( self, NFED_ON_OBJECT_BE_KILLED, NFCDataList() << identAttacker );
 
             m_pKernelModule->AddHeartBeat( self, "OnDeadDestroyHeart", this, &NFCNPCRefreshModule::OnDeadDestroyHeart, NFCDataList(), 5.0f, 1 );
+
         }
     }
 
@@ -78,13 +79,26 @@ int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFIDENTID& self, const std::s
 {
     //and create new object
     const std::string& strClassName = m_pKernelModule->GetPropertyString( self, "ClassName" );
-    const std::string& strSeendID = m_pKernelModule->GetPropertyString( self, "NPCConfigID" );
+    const std::string& strSeedID = m_pKernelModule->GetPropertyString( self, "NPCConfigID" );
     const std::string& strConfigID = m_pKernelModule->GetPropertyString( self, "ConfigID" );
     int nContainerID = m_pKernelModule->GetPropertyInt( self, "SceneID" );
     int nGroupID = m_pKernelModule->GetPropertyInt( self, "GroupID" );
 
     //m_pSceneProcessModule->ClearAll( nContainerID, nGroupID, strSeendID );
 
-    m_pKernelModule->DestroyObject( self );
+	m_pKernelModule->DestroyObject( self );
+
+	float fSeedX = m_pKernelModule->GetPropertyFloat( self, "X" );
+	float fSeedY = m_pKernelModule->GetPropertyFloat( self, "Y" );
+	float fSeedZ = m_pKernelModule->GetPropertyFloat( self, "Z" );
+
+	NFCDataList arg;
+	arg << "X" << fSeedX;
+	arg << "Y" << fSeedY;
+	arg << "Z" << fSeedZ;
+	arg << "SeedID" << strSeedID;
+
+	m_pKernelModule->CreateObject( NFIDENTID(), nContainerID, nGroupID, strClassName, strConfigID, arg );
+
     return 0;
 }
