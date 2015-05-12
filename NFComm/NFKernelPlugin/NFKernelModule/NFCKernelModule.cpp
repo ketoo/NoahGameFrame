@@ -192,6 +192,12 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFIDENTID& self, con
 		return pObject;
 	}
 
+// 	if (!m_pElementInfoModule->ExistElement(strConfigIndex))
+// 	{
+// 		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(0, nContainerID), "There is no group", nGroupID, __FUNCTION__, __LINE__);
+// 		return pObject;
+// 	}
+
 	//默认为1分组，0则是所有分组都看得见,-1则是容器
 	if (ident.IsNull())
 	{

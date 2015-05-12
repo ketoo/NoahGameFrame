@@ -65,7 +65,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 			const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
 			const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
 
-			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerNet_ServerModule::OnRecivePack, &NFCGameServerNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
+			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerNet_ServerModule::OnRecivePSPack, &NFCGameServerNet_ServerModule::OnSocketPSEvent, nMaxConnect, nPort, nCpus);
 		}
 	}
 
@@ -83,7 +83,7 @@ bool NFCGameServerNet_ServerModule::Execute(const float fLasFrametime, const flo
 	return NFINetModule::Execute(fLasFrametime, fStartedTime);
 }
 
-int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
+int NFCGameServerNet_ServerModule::OnRecivePSPack( const NFIPacket& msg )
 {
 	m_pLogModule->LogNormal(NFILogModule::NLL_WARING_NORMAL, NFIDENTID(), "BeginMsg:", msg.GetMsgHead()->GetMsgID(), __FUNCTION__, __LINE__ );
     // TOCHECK
@@ -179,7 +179,7 @@ int NFCGameServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
     return true;
 }
 
-int NFCGameServerNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
+int NFCGameServerNet_ServerModule::OnSocketPSEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent & NF_NET_EVENT_EOF)
     {
