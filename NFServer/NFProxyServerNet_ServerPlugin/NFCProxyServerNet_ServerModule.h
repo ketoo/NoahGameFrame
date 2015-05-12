@@ -43,8 +43,8 @@ public:
 
 protected:
 
-	int OnRecivePack(const NFIPacket& msg);
-	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+	int OnReciveClientPack(const NFIPacket& msg);
+	int OnSocketClientEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 	//连接丢失,删2层(连接对象，帐号对象)
 	void OnClientDisconnect(const int nAddress);

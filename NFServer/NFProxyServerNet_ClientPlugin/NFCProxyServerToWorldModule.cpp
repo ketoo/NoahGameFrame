@@ -40,7 +40,7 @@ bool NFCProxyServerToWorldModule::Execute(const float fLasFrametime, const float
 	return NFINetModule::Execute(fLasFrametime, fStartedTime);
 }
 
-int NFCProxyServerToWorldModule::OnRecivePack( const NFIPacket& msg )
+int NFCProxyServerToWorldModule::OnReciveWSPack( const NFIPacket& msg )
 {
     //这里是worldserver发来的消息
     switch (msg.GetMsgHead()->GetMsgID())
@@ -114,7 +114,7 @@ int NFCProxyServerToWorldModule::OnGameInfoProcess( const NFIPacket& msg )
     return 0;
 }
 
-int NFCProxyServerToWorldModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
+int NFCProxyServerToWorldModule::OnSocketWSEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -250,7 +250,7 @@ bool NFCProxyServerToWorldModule::AfterInit()
 			const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
 			const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
 
-			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyServerToWorldModule::OnRecivePack, &NFCProxyServerToWorldModule::OnSocketEvent, strIP.c_str(), nPort);
+			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyServerToWorldModule::OnReciveWSPack, &NFCProxyServerToWorldModule::OnSocketWSEvent, strIP.c_str(), nPort);
 
 		}
 	}
@@ -362,7 +362,7 @@ NFCProxyConnectToGameServer::NFCProxyConnectToGameServer(int nGameServerID, cons
         //
     }
 
-	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyConnectToGameServer::OnRecivePack, &NFCProxyConnectToGameServer::OnSocketEvent, strIP.c_str(), nPort);
+	Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyConnectToGameServer::OnReciveGSPack, &NFCProxyConnectToGameServer::OnSocketGSEvent, strIP.c_str(), nPort);
 
 }
 
@@ -375,7 +375,7 @@ void NFCProxyConnectToGameServer::OnClientConnected( const int nAddress )
 
 }
 
-int NFCProxyConnectToGameServer::OnRecivePack( const NFIPacket& msg )
+int NFCProxyConnectToGameServer::OnReciveGSPack( const NFIPacket& msg )
 {
     switch (msg.GetMsgHead()->GetMsgID())
     {
@@ -390,7 +390,7 @@ int NFCProxyConnectToGameServer::OnRecivePack( const NFIPacket& msg )
     return 0;
 }
 
-int NFCProxyConnectToGameServer::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
+int NFCProxyConnectToGameServer::OnSocketGSEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
