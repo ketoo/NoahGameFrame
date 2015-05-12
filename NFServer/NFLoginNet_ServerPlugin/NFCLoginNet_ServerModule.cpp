@@ -69,7 +69,7 @@ bool NFCLoginNet_ServerModule::AfterInit()
 
 			m_pUUIDModule->SetIdentID(nID);
 
-			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCLoginNet_ServerModule::OnRecivePack, &NFCLoginNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);		
+			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCLoginNet_ServerModule::OnReciveClientPack, &NFCLoginNet_ServerModule::OnSocketClientEvent, nMaxConnect, nPort, nCpus);		
 		}
 	}
 	
@@ -255,7 +255,7 @@ int NFCLoginNet_ServerModule::OnSelectWorldProcess( const NFIPacket& msg )
 	return 0;
 }
 
-int NFCLoginNet_ServerModule::OnRecivePack(const NFIPacket& msg )
+int NFCLoginNet_ServerModule::OnReciveClientPack(const NFIPacket& msg )
 {
 	//统一解包
 	int nMsgID = msg.GetMsgHead()->GetMsgID();
@@ -290,7 +290,7 @@ int NFCLoginNet_ServerModule::OnRecivePack(const NFIPacket& msg )
 	return 0;
 }
 
-int NFCLoginNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
+int NFCLoginNet_ServerModule::OnSocketClientEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
