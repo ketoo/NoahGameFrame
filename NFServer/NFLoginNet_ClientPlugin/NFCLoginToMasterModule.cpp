@@ -55,7 +55,7 @@ bool NFCLoginToMasterModule::AfterInit()
 			const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
 			const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
 
-			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCLoginToMasterModule::OnRecivePack, &NFCLoginToMasterModule::OnSocketEvent, strIP.c_str(), nPort);
+			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCLoginToMasterModule::OnReciveMSPack, &NFCLoginToMasterModule::OnSocketMSEvent, strIP.c_str(), nPort);
 		}
 	}
 
@@ -196,7 +196,7 @@ int NFCLoginToMasterModule::OnSelectServerResultProcess(const NFIPacket& msg)
 	return 0;
 }
 
-int NFCLoginToMasterModule::OnRecivePack(const NFIPacket& msg )
+int NFCLoginToMasterModule::OnReciveMSPack(const NFIPacket& msg )
 {
     //统一解包
     int nMsgID = msg.GetMsgHead()->GetMsgID();
@@ -216,7 +216,7 @@ int NFCLoginToMasterModule::OnRecivePack(const NFIPacket& msg )
     return 0;
 }
 
-int NFCLoginToMasterModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
+int NFCLoginToMasterModule::OnSocketMSEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
