@@ -54,7 +54,7 @@ bool NFCWorldToMasterModule::AfterInit()
 			const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
 			const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
 
-			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCWorldToMasterModule::OnRecivePack, &NFCWorldToMasterModule::OnSocketEvent, strIP.c_str(), nPort);
+			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCWorldToMasterModule::OnReciveMSPack, &NFCWorldToMasterModule::OnSocketMSEvent, strIP.c_str(), nPort);
 
 		}
 	}
@@ -208,7 +208,7 @@ int NFCWorldToMasterModule::OnKickClientProcess(const NFIPacket& msg)
     return 0;
 }
 
-int NFCWorldToMasterModule::OnRecivePack( const NFIPacket& msg )
+int NFCWorldToMasterModule::OnReciveMSPack( const NFIPacket& msg )
 {
 	int nMsgID = msg.GetMsgHead()->GetMsgID();
 	switch (nMsgID)
@@ -229,7 +229,7 @@ int NFCWorldToMasterModule::OnRecivePack( const NFIPacket& msg )
 	return 0;
 }
 
-int NFCWorldToMasterModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
+int NFCWorldToMasterModule::OnSocketMSEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
