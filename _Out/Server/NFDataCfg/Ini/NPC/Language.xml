@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is config xml-->
+<XML>
+    <Object Chinese="中文_1" English="Langage_1" ID="Langage_1"/>
+    <Object Chinese="中文_2" English="Langage_2" ID="Langage_2"/>
+    <Object Chinese="中文_3" English="Langage_3" ID="Langage_3"/>
+    <Object Chinese="中文_4" English="Langage_4" ID="Langage_4"/>
+    <Object Chinese="中文_5" English="Langage_5" ID="Langage_5"/>
+    <Object Chinese="中文_6" English="Langage_6" ID="Langage_6"/>
+</XML>
