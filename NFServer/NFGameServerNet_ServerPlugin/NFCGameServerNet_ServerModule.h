@@ -123,8 +123,8 @@ protected:
 	/////////SLG_END/////////////////////////////////////////////////////////////////
 protected:
     //将self的全部属性广播给argVar[应该是多对多]
-    int OnPropertyEnter( const NFIDENTID& self, const NFIDataList& argVar );
-    int OnRecordEnter( const NFIDENTID& self, const NFIDataList& argVar );
+    int OnPropertyEnter( const NFIDataList& argVar, const NFIDENTID& self );
+    int OnRecordEnter( const NFIDataList& argVar, const NFIDENTID& self );
 
     //把argVar这些人的出现或者离去广播给self这些人
     int OnObjectListEnter( const NFIDataList& self, const NFIDataList& argVar );
