@@ -60,9 +60,6 @@ Dependencies:
 Need build sub librares:
 
 * Boost.System
-* Boost.Regex
-* Boost.DateTime
-* Boost.Timer
 * Boost.Chrono
 * Boost.Thread
 
@@ -70,7 +67,7 @@ Need build sub librares:
 * protobuf-2.5.0
 * redis-cplusplus-client
 * Theron-6.00.01
-* easylog
+* easylogging++
 
 Supported Compilers
 -------------------
