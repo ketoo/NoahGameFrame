@@ -355,7 +355,7 @@ void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess( const NFIPacket& ms
     pServerData->xRoleInfo.erase(nPlayerID);
 }
 
-int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDENTID& self, const NFIDataList& argVar )
+int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDataList& argVar, const NFIDENTID& self )
 {
     if ( argVar.GetCount() <= 0 || self.IsNull())
     {
@@ -605,7 +605,7 @@ bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase*
     return true;
 }
 
-int NFCGameServerNet_ServerModule::OnRecordEnter( const NFIDENTID& self, const NFIDataList& argVar )
+int NFCGameServerNet_ServerModule::OnRecordEnter( const NFIDataList& argVar, const NFIDENTID& self )
 {
     if ( argVar.GetCount() <= 0 || self.IsNull() )
     {
@@ -815,7 +815,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
         return 0;
     }
 
-    if ( "Player" == m_pKernelModule->GetPropertyString( self, "ClassName" ) )
+    //if ( "Player" == m_pKernelModule->GetPropertyString( self, "ClassName" ) )
     {
         if ( "GroupID" == strPropertyName )
         {
@@ -829,9 +829,12 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
             OnContainerEvent( self, strPropertyName, oldVar, newVar, argVar );
         }
 
-        if ( m_pKernelModule->GetPropertyInt( self, "LoadPropertyFinish" ) <= 0 )
+        if ( "Player" == m_pKernelModule->GetPropertyString( self, "ClassName" ) )
         {
-            return 0;
+            if ( m_pKernelModule->GetPropertyInt( self, "LoadPropertyFinish" ) <= 0 )
+            {
+                return 0;
+            }
         }
     }
 
@@ -1002,6 +1005,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
         //容器
         return 0;
     }
+
     if ( "Player" == m_pKernelModule->GetPropertyString( self, "ClassName" ) )
     {
         if (m_pKernelModule->GetPropertyInt(self, "LoadPropertyFinish") <= 0)
@@ -1401,8 +1405,8 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent( const NFIDENTID& self, co
         {
             OnObjectListEnter( NFCDataList() << self, NFCDataList() << self );
 
-            OnPropertyEnter( self, NFCDataList() << self );
-            OnRecordEnter( self, NFCDataList() << self );
+            OnPropertyEnter(NFCDataList() << self, self);
+            OnRecordEnter(NFCDataList() << self, self);
         }
     }
     else if ( CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent )
@@ -1451,7 +1455,6 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const st
         }
 
         m_pEventProcessModule->DoEvent(self, NFED_ON_CLIENT_LEAVE_SCENE, NFCDataList() << nOldGroupID);
-
     }
 
     //再广播给别人自己出现(层升或者跃层)
@@ -1460,60 +1463,69 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const st
     {
         //这里需要把自己从广播中排除
         //////////////////////////////////////////////////////////////////////////
-        NFCDataList valueNewObjectList;
-        NFCDataList valueNewObjectListNoSelf;
-        NFCDataList valueBroadCaseList;
-        NFCDataList valueBroadCaseListNoSelf;
-        m_pKernelModule->GetGroupObjectList( nSceneID, nNewGroupID, valueNewObjectList );
-        for ( int i = 0; i < valueNewObjectList.GetCount(); i++ )
+        NFCDataList valueAllObjectList;
+        NFCDataList valueAllObjectListNoSelf;
+        NFCDataList valuePlayerList;
+        NFCDataList valuePlayerListNoSelf;
+        m_pKernelModule->GetGroupObjectList( nSceneID, nNewGroupID, valueAllObjectList );
+        for ( int i = 0; i < valueAllObjectList.GetCount(); i++ )
         {
-            NFIDENTID identBC = valueNewObjectList.Object( i );
+            NFIDENTID identBC = valueAllObjectList.Object( i );
             const std::string& strClassName = m_pKernelModule->GetPropertyString( identBC, "ClassName" );
             if ( "Player" == strClassName )
             {
-                valueBroadCaseList.Add( identBC );
+                valuePlayerList.Add( identBC );
                 if (identBC != self)
                 {
-                    valueBroadCaseListNoSelf.Add( identBC );
+                    valuePlayerListNoSelf.Add( identBC );
                 }
             }
 
             if (identBC != self)
             {
-                valueNewObjectListNoSelf.Add( identBC );
+                valueAllObjectListNoSelf.Add( identBC );
             }
         }
 
         //广播给别人,自己出现(这里本不应该广播给自己)
-        if ( valueBroadCaseListNoSelf.GetCount() > 0 )
+        if ( valuePlayerListNoSelf.GetCount() > 0 )
         {
-            OnObjectListEnter( valueBroadCaseListNoSelf, NFCDataList() << self );
+            OnObjectListEnter( valuePlayerListNoSelf, NFCDataList() << self );
         }
+
+        const std::string& strSelfClassName = m_pKernelModule->GetPropertyString( self, "ClassName" );
 
         //广播给自己,所有的别人出现
-        if ( valueNewObjectListNoSelf.GetCount() > 0 )
+        if ( valueAllObjectListNoSelf.GetCount() > 0 )
         {
-            OnObjectListEnter( NFCDataList() << self, valueNewObjectListNoSelf );
+            if (strSelfClassName == "Player")
+            {
+                OnObjectListEnter( NFCDataList() << self, valueAllObjectListNoSelf );
+            }
         }
 
-        for ( int i = 0; i < valueNewObjectListNoSelf.GetCount(); i++ )
+        if (strSelfClassName == "Player")
         {
-            //此时不用再广播自己的属性给自己
-            //把已经存在的人的属性广播给新来的人
-            NFIDENTID identOld = valueNewObjectListNoSelf.Object( i );
-            OnPropertyEnter( identOld, NFCDataList() << self );
-            //把已经存在的人的表广播给新来的人
-            OnRecordEnter( identOld, NFCDataList() << self );
+            for ( int i = 0; i < valueAllObjectListNoSelf.GetCount(); i++ )
+            {
+                //此时不用再广播自己的属性给自己
+                //把已经存在的人的属性广播给新来的人
+                NFIDENTID identOld = valueAllObjectListNoSelf.Object( i );
+
+                OnPropertyEnter(NFCDataList() << self, identOld);
+                //把已经存在的人的表广播给新来的人
+                OnRecordEnter(NFCDataList() << self, identOld);
+            }
         }
 
         //把新来的人的属性广播给周边的人
-        if ( valueBroadCaseListNoSelf.GetCount() > 0 )
+        if ( valuePlayerListNoSelf.GetCount() > 0 )
         {
-            OnPropertyEnter( self, valueBroadCaseListNoSelf );
-            OnRecordEnter( self, valueBroadCaseListNoSelf );
+            OnPropertyEnter(valuePlayerListNoSelf, self);
+            OnRecordEnter(valuePlayerListNoSelf, self);
         }
-
     }
+
     return 0;
 }
 
@@ -1530,8 +1542,8 @@ int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, cons
     NFCDataList valueOldAllObjectList;
     NFCDataList valueNewAllObjectList;
     NFCDataList valueAllObjectListNoSelf;
-    NFCDataList valueBroadCaseList;
-    NFCDataList valueBroadListNoSelf;
+    NFCDataList valuePlayerList;
+    NFCDataList valuePlayerNoSelf;
 
     m_pKernelModule->GetGroupObjectList( nOldSceneID, 0, valueOldAllObjectList );
     m_pKernelModule->GetGroupObjectList( nNowSceneID, 0, valueNewAllObjectList );
@@ -1551,10 +1563,10 @@ int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, cons
         const std::string& strClassName = m_pKernelModule->GetPropertyString( identBC, "ClassName" );
         if ( "Player" == strClassName )
         {
-            valueBroadCaseList.Add( identBC );
+            valuePlayerList.Add( identBC );
             if (identBC != self)
             {
-                valueBroadListNoSelf.Add( identBC );
+                valuePlayerNoSelf.Add( identBC );
             }
         }
 
@@ -1571,10 +1583,10 @@ int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, cons
 
     //广播给所有人出现对象(如果是玩家，则包括广播给自己)
     //这里广播的都是0层的
-    if ( valueBroadCaseList.GetCount() > 0 )
+    if ( valuePlayerList.GetCount() > 0 )
     {
         //把self广播给argVar这些人
-        OnObjectListEnter( valueBroadListNoSelf, NFCDataList() << self);
+        OnObjectListEnter( valuePlayerNoSelf, NFCDataList() << self);
     }
 
     //新层必然是0，把0层NPC广播给自己------------自己广播给自己不在这里广播，因为场景ID在跨场景时会经常变化
@@ -1586,16 +1598,16 @@ int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, cons
     for ( int i = 0; i < valueAllObjectListNoSelf.GetCount(); i++ )
     {
         NFIDENTID identOld = valueAllObjectListNoSelf.Object( i );
-        OnPropertyEnter( identOld, NFCDataList() << self );
+        OnPropertyEnter(NFCDataList() << self , identOld);
         ////////////////////把已经存在的人的表广播给新来的人//////////////////////////////////////////////////////
-        OnRecordEnter( identOld, NFCDataList() << self );
+        OnRecordEnter(NFCDataList() << self , identOld);
     }
 
     //把新来的人的属性广播给周边的人()
-    if ( valueBroadListNoSelf.GetCount() > 0 )
+    if ( valuePlayerNoSelf.GetCount() > 0 )
     {
-        OnPropertyEnter( self, valueBroadListNoSelf );
-        OnRecordEnter( self, valueBroadListNoSelf );
+        OnPropertyEnter(valuePlayerNoSelf, self);
+        OnRecordEnter(valuePlayerNoSelf, self);
     }
 
     return 0;

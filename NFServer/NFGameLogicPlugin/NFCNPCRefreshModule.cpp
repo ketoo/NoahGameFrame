@@ -86,13 +86,13 @@ int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFIDENTID& self, const std::s
 
     //m_pSceneProcessModule->ClearAll( nContainerID, nGroupID, strSeendID );
 
-	m_pKernelModule->DestroyObject( self );
-
 	float fSeedX = m_pKernelModule->GetPropertyFloat( self, "X" );
 	float fSeedY = m_pKernelModule->GetPropertyFloat( self, "Y" );
 	float fSeedZ = m_pKernelModule->GetPropertyFloat( self, "Z" );
+    
+    m_pKernelModule->DestroyObject( self );
 
-	NFCDataList arg;
+    NFCDataList arg;
 	arg << "X" << fSeedX;
 	arg << "Y" << fSeedY;
 	arg << "Z" << fSeedZ;
