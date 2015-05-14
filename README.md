@@ -75,7 +75,9 @@ Supported Compilers
 * GCC >= 4.8
 * VC >= 9.0 (sp1)
 
+
 How to build:
+-------------------
 
 * Windows[VS2012]
 
@@ -95,7 +97,7 @@ How to build:
 5:
 
 
--------------------
+
 
 
 Tutorial:
