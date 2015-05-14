@@ -377,6 +377,8 @@ void NFCProxyConnectToGameServer::OnClientConnected( const int nAddress )
 
 int NFCProxyConnectToGameServer::OnReciveGSPack( const NFIPacket& msg )
 {
+	m_pLogModule->LogNormal(NFILogModule::NLL_WARING_NORMAL, NFIDENTID(), "BeginMsg:", msg.GetMsgHead()->GetMsgID(), __FUNCTION__, __LINE__ );
+
     switch (msg.GetMsgHead()->GetMsgID())
     {
     case NFMsg::EGMI_ACK_ENTER_GAME:
@@ -386,6 +388,8 @@ int NFCProxyConnectToGameServer::OnReciveGSPack( const NFIPacket& msg )
         m_pProxyServerNet_ServerModule->Transpond(msg);
         break;
     }
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_WARING_NORMAL, NFIDENTID(), "EndMsg:", msg.GetMsgHead()->GetMsgID(), __FUNCTION__, __LINE__ );
 
     return 0;
 }
