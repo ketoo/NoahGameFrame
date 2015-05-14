@@ -52,47 +52,17 @@ public:
 
     virtual int OnEctypeSettleEvent(const NFIDENTID& self, int nResult, int nLevel);
 
-    virtual int OnWipeScene(const NFIDENTID& self, int nWipeCount, int nScene);
-
-    virtual int AfterOnWipeScene(const NFIDENTID& self, int nWipeCount, int nItemCount,const std::string& strSceneId);
-
-    virtual int OnBuyEliteTime(const NFIDENTID& self, int nScene );
-
-    virtual int AfterOnBuyEliteTime(const NFIDENTID& self, const std::string& strConfig);
-
-    virtual int ClearSceneTime(const NFIDENTID& self);
 protected:
 
     int OnObjectClassEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
-    int OnEntrySceneEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
-
     int OnObjectGroupIDEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar);
 
-    int OnGetBigWorldAwardtEvent(const NFIDENTID& self, const int nEventID, const NFIDataList& var);
-
 protected:
-
-    //是否激活了此副本
-    int ExistActiveCloneScene(const NFIDENTID& self, const int nSceneID);
 
     //给结算奖励
     int AddEctypeAward(const NFIDENTID& self, const int nSceneID, const bool bWipe);
  
-    // 检查反外挂
-    bool CheckAntiPlugin(const NFIDENTID& self, const int nSceneID);
-
-    int LoadConfig();
-
-    const std::string& GetBuyEliteConfig(int nNum);
-
-    bool GetSceneInfo(const std::string& strConfig, SceneInfo& xSceneInfo);
-
-    void ClearConfig();
-
-    std::map<int, std::string> m_mapBuyElite;
-
-    std::map<std::string, SceneInfo> m_mapSceneInfo;
 private:
     NFIElementInfoModule* m_pElementInfoModule;
     NFISceneProcessModule* m_pSceneProcessModule;
