@@ -81,20 +81,20 @@ How to build:
 
 * Windows[VS2012]
 
-1:download all source;
-2:extract nessasery lib: 	Dependencies\boost_1_53_0.zip to Dependencies\
-3:extract nessasery lib: 	Dependencies\lib.zip to Dependencies\
-4:open the solution:		trunk\NoahFrame.sln
-5:build the solution and run the binary file by trunk\_Out\Server\Debug\Run.bat
+###1:download all source;
+###2:extract nessasery lib: 	Dependencies\boost_1_53_0.zip to Dependencies\
+###3:extract nessasery lib: 	Dependencies\lib.zip to Dependencies\
+###4:open the solution:		trunk\NoahFrame.sln
+###5:build the solution and run the binary file by trunk\_Out\Server\Debug\Run.bat
 
 
 * Linux[CodeBlock 13.1]
 
-1:download all source;
-2:extract nessasery lib: 	Dependencies\boost_1_53_0.zip to Dependencies\
-3:extract nessasery lib: 	Dependencies\lib.zip to Dependencies\
-4:open the solution:		trunk\NF.workspace
-5:
+###1:download all source;
+###2:extract nessasery lib: 	Dependencies\boost_1_53_0.zip to Dependencies\
+###3:extract nessasery lib: 	Dependencies\lib.zip to Dependencies\
+###4:open the solution:		trunk\NF.workspace
+###5:
 
 
 
