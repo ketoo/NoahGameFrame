@@ -1,3 +1,0 @@
-<%@ Page Language="C#" %>
-
-[TargetPage]
