@@ -1,7 +1,0 @@
-prefix=${pcfiledir}/../..
-assemblies_dir=${prefix}/lib/mono-source-libs
-Sources=${assemblies_dir}/Options.cs
-
-Name: Mono.Options
-Description: Command Line Parsing Library
-Version: 0.2.3
