@@ -45,6 +45,7 @@ class ReqAckPlayerChat;
 class ReqAckUseSkill;
 class ReqAckUseItem;
 class ReqAckSwapScene;
+class ReqAckEndBattle;
 class ReqPickDropItem;
 class ReqAcceptTask;
 class ReqCompeleteTask;
@@ -1123,6 +1124,78 @@ class ReqAckSwapScene : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ReqAckSwapScene* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckEndBattle : public ::google::protobuf::Message {
+ public:
+  ReqAckEndBattle();
+  virtual ~ReqAckEndBattle();
+
+  ReqAckEndBattle(const ReqAckEndBattle& from);
+
+  inline ReqAckEndBattle& operator=(const ReqAckEndBattle& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckEndBattle& default_instance();
+
+  void Swap(ReqAckEndBattle* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckEndBattle* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckEndBattle& from);
+  void MergeFrom(const ReqAckEndBattle& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckEndBattle)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[1];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckEndBattle* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -2952,6 +3025,10 @@ inline void ReqAckSwapScene::set_z(float value) {
   set_has_z();
   z_ = value;
 }
+
+// -------------------------------------------------------------------
+
+// ReqAckEndBattle
 
 // -------------------------------------------------------------------
 
