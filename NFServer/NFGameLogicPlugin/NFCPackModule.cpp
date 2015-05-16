@@ -1462,3 +1462,42 @@ int NFCPackModule::OnObjectBeKilled(const NFIDENTID& self, const int nEventID, c
 
     return 0;
 }
+
+void NFCPackModule::DrawDropAward(const NFIDENTID& self, int& nMoney, int& nExp, NFIDataList& xItemList, NFIDataList& xCountList)
+{
+    NF_SHARE_PTR<NFIRecord> pDropRecord = m_pKernelModule->FindRecord(self, "DropItemList");
+    if (NULL == pDropRecord.get())
+    {
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "There is no record [DropItemList]", "", __FUNCTION__, __LINE__);
+        return;
+    }
+
+    for (int i = 0; i < pDropRecord->GetRows(); i++)
+    {
+        if (!pDropRecord->IsUsed(i))
+        {
+            continue;
+        }
+
+        const std::string& strItemID = pDropRecord->GetString(i, NFIPackModule::DROP_ITEM_ID);
+        if (strItemID.empty())
+        {
+            continue;
+        }
+
+        if (pDropRecord->GetInt(i, NFIPackModule::DROP_DRAW_STATE) != E_DRAW_STATE_GAIN)
+        {
+            continue;
+        }
+
+        int nCount = pDropRecord->GetInt(i, NFIPackModule::DROP_ITEM_COUNT);
+        
+        // 根据道具类型来判断是否给东西还是给数值，现在先统一给道具
+        CreateItem(self, strItemID, EGIET_NONE, nCount);
+        pDropRecord->SetInt(i , NFIPackModule::DROP_DRAW_STATE, NFIPackModule::E_DRAW_STATE_RECV);
+
+        // 记录
+        xItemList << strItemID;
+        xCountList << nCount;
+    }
+}
