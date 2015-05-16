@@ -26,6 +26,15 @@ public:
 		BUILDINNG_STATEENDTIME	,		
     };
 
+    enum EBuildingProduceListColType
+    {
+        BUILDINGPRODUCE_BUILDINGGUID    = 0 ,
+        BUILDINGPRODUCE_ITEMID             ,
+        BUILDINGPRODUCE_LEFTCOUNT          ,
+        BUILDINGPRODUCE_ONCETIME           ,
+        BUILDINGPRODUCE_ONCESTARTTIME      ,
+    };
+
     virtual int AddBuilding(const NFIDENTID& self, const std::string& strBuilding, const float fX, const float fY, const float fZ) = 0;
     virtual int Upgrade(const NFIDENTID& self, const NFIDENTID& xBuilID) = 0;
     virtual int Boost(const NFIDENTID& self, const NFIDENTID& xBuilID) = 0;
