@@ -31,25 +31,27 @@
 #include "NFComm/NFPluginModule/NFIPVPModule.h"
 #include "NFComm/NFPluginModule/NFISkillModule.h"
 #include "NFComm/NFPluginModule/NFIDataProcessModule.h"
+#include "NFComm/NFMessageDefine/NFDefine.pb.h"
+#include "NFComm/NFPluginModule/NFIEctypeModule.h"
 
 ////////////////////////////////////////////////////////////////////////////
 
 // 客户端消息处理宏
 #define CLIENT_MSG_PROCESS(packet, msg)                 \
-	NFIDENTID nPlayerID;                              \
+	NFIDENTID nPlayerID;                                \
 	msg xMsg;                                           \
-	if (!RecivePB(packet, xMsg, nPlayerID))              \
-{                                                   \
-	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
-	return;                                         \
-}                                                   \
+	if (!RecivePB(packet, xMsg, nPlayerID))             \
+    {                                                   \
+	    m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
+	    return;                                         \
+    }                                                   \
 	\
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(nPlayerID); \
-	if ( NULL == pObject.get() )                              \
-{                                                   \
-	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "FromClient Object do not Exist", "", __FUNCTION__, __LINE__); \
-	return;                                         \
-}
+	if ( NULL == pObject.get() )                        \
+    {                                                   \
+	    m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "FromClient Object do not Exist", "", __FUNCTION__, __LINE__); \
+	    return;                                         \
+    }
 //////////////////////////////////////////////////////////////////////////
 
 class NFCGameServerNet_ServerModule
@@ -114,6 +116,8 @@ protected:
     void OnClientJoinPVP(const NFIPacket& msg);
     void OnClientExitPVP(const NFIPacket& msg);
 
+
+    void OnClientEndBattle(const NFIPacket& msg);
 	/////////SLG_START/////////////////////////////////////////////////////////////////
 	void OnSLGClienBuyItem(const NFIPacket& msg);
 	void OnSLGClienMoveObject(const NFIPacket& msg);
@@ -154,6 +158,8 @@ protected:
     int OnSwapSceneResultEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
     // 发送聊天结果
     int OnChatResultEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
+    // 通知副本奖励结果
+    int OnNoticeEctypeAward(const NFIDENTID& self, const int nEventID, const NFIDataList& var);
 private:
 
     struct ServerData 
@@ -215,6 +221,7 @@ private:
     NFIPVPModule* m_pPVPModule;
 	NFISkillModule* m_pSkillModule;
 	NFIDataProcessModule* m_pDataProcessModule;
+    NFIEctypeModule* m_pEctypeModule;
     //////////////////////////////////////////////////////////////////////////
     //SLG模块
 	NFISLGShopModule* m_pSLGShopModule;
