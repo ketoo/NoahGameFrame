@@ -61,7 +61,7 @@ protected:
 protected:
 
     //¸ø½áËã½±Àø
-    int AddEctypeAward(const NFIDENTID& self, const int nSceneID, const bool bWipe);
+    int AddEctypeAward(const NFIDENTID& self, const int nSceneID);
  
 private:
     NFIElementInfoModule* m_pElementInfoModule;
