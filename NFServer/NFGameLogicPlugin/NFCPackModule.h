@@ -102,6 +102,9 @@ public:
 
     //消费N个某样物品
     virtual bool DeleteItem(const NFIDENTID& self, const std::string& strItemConfigID, const int nCount);
+
+    // 掉落奖励
+    virtual void DrawDropAward(const NFIDENTID& self, int& nMoney, int& nExp, NFIDataList& xItemList, NFIDataList& xCountList);
 protected:
     virtual int RefreshEquipProperty( const NFIDENTID& self );
     virtual int RefreshEquipProperty( const NFIDENTID& self, const int nRow );

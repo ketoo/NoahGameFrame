@@ -1181,14 +1181,64 @@ class ReqAckEndBattle : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
+  // optional int32 money = 1;
+  inline bool has_money() const;
+  inline void clear_money();
+  static const int kMoneyFieldNumber = 1;
+  inline ::google::protobuf::int32 money() const;
+  inline void set_money(::google::protobuf::int32 value);
+
+  // optional int32 exp = 2;
+  inline bool has_exp() const;
+  inline void clear_exp();
+  static const int kExpFieldNumber = 2;
+  inline ::google::protobuf::int32 exp() const;
+  inline void set_exp(::google::protobuf::int32 value);
+
+  // repeated string item_list = 3;
+  inline int item_list_size() const;
+  inline void clear_item_list();
+  static const int kItemListFieldNumber = 3;
+  inline const ::std::string& item_list(int index) const;
+  inline ::std::string* mutable_item_list(int index);
+  inline void set_item_list(int index, const ::std::string& value);
+  inline void set_item_list(int index, const char* value);
+  inline void set_item_list(int index, const char* value, size_t size);
+  inline ::std::string* add_item_list();
+  inline void add_item_list(const ::std::string& value);
+  inline void add_item_list(const char* value);
+  inline void add_item_list(const char* value, size_t size);
+  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& item_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_item_list();
+
+  // repeated int32 item_count_list = 4;
+  inline int item_count_list_size() const;
+  inline void clear_item_count_list();
+  static const int kItemCountListFieldNumber = 4;
+  inline ::google::protobuf::int32 item_count_list(int index) const;
+  inline void set_item_count_list(int index, ::google::protobuf::int32 value);
+  inline void add_item_count_list(::google::protobuf::int32 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      item_count_list() const;
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_item_count_list();
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckEndBattle)
  private:
+  inline void set_has_money();
+  inline void clear_has_money();
+  inline void set_has_exp();
+  inline void clear_has_exp();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::google::protobuf::int32 money_;
+  ::google::protobuf::int32 exp_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> item_list_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > item_count_list_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[1];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -3029,6 +3079,119 @@ inline void ReqAckSwapScene::set_z(float value) {
 // -------------------------------------------------------------------
 
 // ReqAckEndBattle
+
+// optional int32 money = 1;
+inline bool ReqAckEndBattle::has_money() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckEndBattle::set_has_money() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckEndBattle::clear_has_money() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckEndBattle::clear_money() {
+  money_ = 0;
+  clear_has_money();
+}
+inline ::google::protobuf::int32 ReqAckEndBattle::money() const {
+  return money_;
+}
+inline void ReqAckEndBattle::set_money(::google::protobuf::int32 value) {
+  set_has_money();
+  money_ = value;
+}
+
+// optional int32 exp = 2;
+inline bool ReqAckEndBattle::has_exp() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckEndBattle::set_has_exp() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckEndBattle::clear_has_exp() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckEndBattle::clear_exp() {
+  exp_ = 0;
+  clear_has_exp();
+}
+inline ::google::protobuf::int32 ReqAckEndBattle::exp() const {
+  return exp_;
+}
+inline void ReqAckEndBattle::set_exp(::google::protobuf::int32 value) {
+  set_has_exp();
+  exp_ = value;
+}
+
+// repeated string item_list = 3;
+inline int ReqAckEndBattle::item_list_size() const {
+  return item_list_.size();
+}
+inline void ReqAckEndBattle::clear_item_list() {
+  item_list_.Clear();
+}
+inline const ::std::string& ReqAckEndBattle::item_list(int index) const {
+  return item_list_.Get(index);
+}
+inline ::std::string* ReqAckEndBattle::mutable_item_list(int index) {
+  return item_list_.Mutable(index);
+}
+inline void ReqAckEndBattle::set_item_list(int index, const ::std::string& value) {
+  item_list_.Mutable(index)->assign(value);
+}
+inline void ReqAckEndBattle::set_item_list(int index, const char* value) {
+  item_list_.Mutable(index)->assign(value);
+}
+inline void ReqAckEndBattle::set_item_list(int index, const char* value, size_t size) {
+  item_list_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckEndBattle::add_item_list() {
+  return item_list_.Add();
+}
+inline void ReqAckEndBattle::add_item_list(const ::std::string& value) {
+  item_list_.Add()->assign(value);
+}
+inline void ReqAckEndBattle::add_item_list(const char* value) {
+  item_list_.Add()->assign(value);
+}
+inline void ReqAckEndBattle::add_item_list(const char* value, size_t size) {
+  item_list_.Add()->assign(reinterpret_cast<const char*>(value), size);
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+ReqAckEndBattle::item_list() const {
+  return item_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+ReqAckEndBattle::mutable_item_list() {
+  return &item_list_;
+}
+
+// repeated int32 item_count_list = 4;
+inline int ReqAckEndBattle::item_count_list_size() const {
+  return item_count_list_.size();
+}
+inline void ReqAckEndBattle::clear_item_count_list() {
+  item_count_list_.Clear();
+}
+inline ::google::protobuf::int32 ReqAckEndBattle::item_count_list(int index) const {
+  return item_count_list_.Get(index);
+}
+inline void ReqAckEndBattle::set_item_count_list(int index, ::google::protobuf::int32 value) {
+  item_count_list_.Set(index, value);
+}
+inline void ReqAckEndBattle::add_item_count_list(::google::protobuf::int32 value) {
+  item_count_list_.Add(value);
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+ReqAckEndBattle::item_count_list() const {
+  return item_count_list_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+ReqAckEndBattle::mutable_item_count_list() {
+  return &item_count_list_;
+}
 
 // -------------------------------------------------------------------
 
