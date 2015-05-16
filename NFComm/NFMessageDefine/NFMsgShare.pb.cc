@@ -46,6 +46,9 @@ const ::google::protobuf::Descriptor* ReqAckSwapScene_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqAckSwapScene_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* ReqAckSwapScene_EGameSwapType_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* ReqAckEndBattle_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ReqAckEndBattle_reflection_ = NULL;
 const ::google::protobuf::Descriptor* ReqPickDropItem_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqPickDropItem_reflection_ = NULL;
@@ -223,7 +226,21 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckSwapScene));
   ReqAckSwapScene_EGameSwapType_descriptor_ = ReqAckSwapScene_descriptor_->enum_type(0);
-  ReqPickDropItem_descriptor_ = file->message_type(8);
+  ReqAckEndBattle_descriptor_ = file->message_type(8);
+  static const int ReqAckEndBattle_offsets_[1] = {
+  };
+  ReqAckEndBattle_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ReqAckEndBattle_descriptor_,
+      ReqAckEndBattle::default_instance_,
+      ReqAckEndBattle_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckEndBattle, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckEndBattle, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ReqAckEndBattle));
+  ReqPickDropItem_descriptor_ = file->message_type(9);
   static const int ReqPickDropItem_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqPickDropItem, item_guid_),
   };
@@ -238,7 +255,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqPickDropItem));
-  ReqAcceptTask_descriptor_ = file->message_type(9);
+  ReqAcceptTask_descriptor_ = file->message_type(10);
   static const int ReqAcceptTask_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAcceptTask, task_id_),
   };
@@ -253,7 +270,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAcceptTask));
-  ReqCompeleteTask_descriptor_ = file->message_type(10);
+  ReqCompeleteTask_descriptor_ = file->message_type(11);
   static const int ReqCompeleteTask_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCompeleteTask, task_id_),
   };
@@ -268,7 +285,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqCompeleteTask));
-  ReqAckJoinActivity_descriptor_ = file->message_type(11);
+  ReqAckJoinActivity_descriptor_ = file->message_type(12);
   static const int ReqAckJoinActivity_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckJoinActivity, activity_type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckJoinActivity, sub_activity_type_),
@@ -286,7 +303,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       sizeof(ReqAckJoinActivity));
   ReqAckJoinActivity_EGameActivityType_descriptor_ = ReqAckJoinActivity_descriptor_->enum_type(0);
   ReqAckJoinActivity_EGameActivitySubType_descriptor_ = ReqAckJoinActivity_descriptor_->enum_type(1);
-  PlayerEntryInfo_descriptor_ = file->message_type(12);
+  PlayerEntryInfo_descriptor_ = file->message_type(13);
   static const int PlayerEntryInfo_offsets_[9] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerEntryInfo, object_guid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerEntryInfo, x_),
@@ -309,7 +326,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PlayerEntryInfo));
-  AckPlayerEntryList_descriptor_ = file->message_type(13);
+  AckPlayerEntryList_descriptor_ = file->message_type(14);
   static const int AckPlayerEntryList_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckPlayerEntryList, object_list_),
   };
@@ -324,7 +341,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckPlayerEntryList));
-  AckPlayerLeaveList_descriptor_ = file->message_type(14);
+  AckPlayerLeaveList_descriptor_ = file->message_type(15);
   static const int AckPlayerLeaveList_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckPlayerLeaveList, object_list_),
   };
@@ -368,6 +385,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqAckSwapScene_descriptor_, &ReqAckSwapScene::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ReqAckEndBattle_descriptor_, &ReqAckEndBattle::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqPickDropItem_descriptor_, &ReqPickDropItem::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqAcceptTask_descriptor_, &ReqAcceptTask::default_instance());
@@ -402,6 +421,8 @@ void protobuf_ShutdownFile_NFMsgShare_2eproto() {
   delete ReqAckUseItem_reflection_;
   delete ReqAckSwapScene::default_instance_;
   delete ReqAckSwapScene_reflection_;
+  delete ReqAckEndBattle::default_instance_;
+  delete ReqAckEndBattle_reflection_;
   delete ReqPickDropItem::default_instance_;
   delete ReqPickDropItem_reflection_;
   delete ReqAcceptTask::default_instance_;
@@ -457,24 +478,24 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "ne_id\030\002 \002(\005\022\017\n\007line_id\030\003 \002(\005\022\t\n\001x\030\004 \001(\002\022"
     "\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006 \001(\002\"Q\n\rEGameSwapType\022\017"
     "\n\013EGST_NARMAL\020\000\022\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_"
-    "ARENA\020\002\022\017\n\013EGST_MIRROR\020\003\"2\n\017ReqPickDropI"
-    "tem\022\037\n\titem_guid\030\002 \002(\0132\014.NFMsg.Ident\" \n\r"
-    "ReqAcceptTask\022\017\n\007task_id\030\001 \002(\014\"#\n\020ReqCom"
-    "peleteTask\022\017\n\007task_id\030\001 \002(\014\"\357\001\n\022ReqAckJo"
-    "inActivity\022B\n\ractivity_type\030\001 \002(\0162+.NFMs"
-    "g.ReqAckJoinActivity.EGameActivityType\022I"
-    "\n\021sub_activity_type\030\002 \002(\0162..NFMsg.ReqAck"
-    "JoinActivity.EGameActivitySubType\"!\n\021EGa"
-    "meActivityType\022\014\n\010EGAT_PVP\020\000\"\'\n\024EGameAct"
-    "ivitySubType\022\017\n\013EGAT_NORMAL\020\000\"\267\001\n\017Player"
-    "EntryInfo\022!\n\013object_guid\030\001 \002(\0132\014.NFMsg.I"
-    "dent\022\t\n\001x\030\002 \002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002(\002\022\023\n"
-    "\013career_type\030\005 \002(\005\022\024\n\014player_state\030\006 \002(\005"
-    "\022\021\n\tconfig_id\030\007 \002(\014\022\020\n\010scene_id\030\010 \002(\005\022\020\n"
-    "\010class_id\030\t \002(\014\"A\n\022AckPlayerEntryList\022+\n"
-    "\013object_list\030\001 \003(\0132\026.NFMsg.PlayerEntryIn"
-    "fo\"7\n\022AckPlayerLeaveList\022!\n\013object_list\030"
-    "\001 \003(\0132\014.NFMsg.Ident", 1859);
+    "ARENA\020\002\022\017\n\013EGST_MIRROR\020\003\"\021\n\017ReqAckEndBat"
+    "tle\"2\n\017ReqPickDropItem\022\037\n\titem_guid\030\002 \002("
+    "\0132\014.NFMsg.Ident\" \n\rReqAcceptTask\022\017\n\007task"
+    "_id\030\001 \002(\014\"#\n\020ReqCompeleteTask\022\017\n\007task_id"
+    "\030\001 \002(\014\"\357\001\n\022ReqAckJoinActivity\022B\n\ractivit"
+    "y_type\030\001 \002(\0162+.NFMsg.ReqAckJoinActivity."
+    "EGameActivityType\022I\n\021sub_activity_type\030\002"
+    " \002(\0162..NFMsg.ReqAckJoinActivity.EGameAct"
+    "ivitySubType\"!\n\021EGameActivityType\022\014\n\010EGA"
+    "T_PVP\020\000\"\'\n\024EGameActivitySubType\022\017\n\013EGAT_"
+    "NORMAL\020\000\"\267\001\n\017PlayerEntryInfo\022!\n\013object_g"
+    "uid\030\001 \002(\0132\014.NFMsg.Ident\022\t\n\001x\030\002 \002(\002\022\t\n\001y\030"
+    "\003 \002(\002\022\t\n\001z\030\004 \002(\002\022\023\n\013career_type\030\005 \002(\005\022\024\n"
+    "\014player_state\030\006 \002(\005\022\021\n\tconfig_id\030\007 \002(\014\022\020"
+    "\n\010scene_id\030\010 \002(\005\022\020\n\010class_id\030\t \002(\014\"A\n\022Ac"
+    "kPlayerEntryList\022+\n\013object_list\030\001 \003(\0132\026."
+    "NFMsg.PlayerEntryInfo\"7\n\022AckPlayerLeaveL"
+    "ist\022!\n\013object_list\030\001 \003(\0132\014.NFMsg.Ident", 1878);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -485,6 +506,7 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqAckUseSkill::default_instance_ = new ReqAckUseSkill();
   ReqAckUseItem::default_instance_ = new ReqAckUseItem();
   ReqAckSwapScene::default_instance_ = new ReqAckSwapScene();
+  ReqAckEndBattle::default_instance_ = new ReqAckEndBattle();
   ReqPickDropItem::default_instance_ = new ReqPickDropItem();
   ReqAcceptTask::default_instance_ = new ReqAcceptTask();
   ReqCompeleteTask::default_instance_ = new ReqCompeleteTask();
@@ -500,6 +522,7 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqAckUseSkill::default_instance_->InitAsDefaultInstance();
   ReqAckUseItem::default_instance_->InitAsDefaultInstance();
   ReqAckSwapScene::default_instance_->InitAsDefaultInstance();
+  ReqAckEndBattle::default_instance_->InitAsDefaultInstance();
   ReqPickDropItem::default_instance_->InitAsDefaultInstance();
   ReqAcceptTask::default_instance_->InitAsDefaultInstance();
   ReqCompeleteTask::default_instance_->InitAsDefaultInstance();
@@ -3243,6 +3266,162 @@ void ReqAckSwapScene::Swap(ReqAckSwapScene* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = ReqAckSwapScene_descriptor_;
   metadata.reflection = ReqAckSwapScene_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+#endif  // !_MSC_VER
+
+ReqAckEndBattle::ReqAckEndBattle()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void ReqAckEndBattle::InitAsDefaultInstance() {
+}
+
+ReqAckEndBattle::ReqAckEndBattle(const ReqAckEndBattle& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ReqAckEndBattle::SharedCtor() {
+  _cached_size_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ReqAckEndBattle::~ReqAckEndBattle() {
+  SharedDtor();
+}
+
+void ReqAckEndBattle::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void ReqAckEndBattle::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ReqAckEndBattle::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ReqAckEndBattle_descriptor_;
+}
+
+const ReqAckEndBattle& ReqAckEndBattle::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
+  return *default_instance_;
+}
+
+ReqAckEndBattle* ReqAckEndBattle::default_instance_ = NULL;
+
+ReqAckEndBattle* ReqAckEndBattle::New() const {
+  return new ReqAckEndBattle;
+}
+
+void ReqAckEndBattle::Clear() {
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ReqAckEndBattle::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+      return true;
+    }
+    DO_(::google::protobuf::internal::WireFormat::SkipField(
+          input, tag, mutable_unknown_fields()));
+  }
+  return true;
+#undef DO_
+}
+
+void ReqAckEndBattle::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* ReqAckEndBattle::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int ReqAckEndBattle::ByteSize() const {
+  int total_size = 0;
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ReqAckEndBattle::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ReqAckEndBattle* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ReqAckEndBattle*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ReqAckEndBattle::MergeFrom(const ReqAckEndBattle& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ReqAckEndBattle::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqAckEndBattle::CopyFrom(const ReqAckEndBattle& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqAckEndBattle::IsInitialized() const {
+
+  return true;
+}
+
+void ReqAckEndBattle::Swap(ReqAckEndBattle* other) {
+  if (other != this) {
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ReqAckEndBattle::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ReqAckEndBattle_descriptor_;
+  metadata.reflection = ReqAckEndBattle_reflection_;
   return metadata;
 }
 
