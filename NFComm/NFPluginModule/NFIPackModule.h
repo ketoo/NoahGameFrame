@@ -34,7 +34,7 @@ public:
     enum EDrawDropItemState
     {
         E_DRAW_STATE_NONE   = 0, // 初始状态
-        E_DRAW_STATE_GAIN   = 1, // 获得
+        E_DRAW_STATE_GAIN   = 1, // 可获得
         E_DRAW_STATE_RECV   = 2, // 已领取
     };
 
@@ -111,6 +111,8 @@ public:
     //消费N个某样物品
     virtual bool DeleteItem(const NFIDENTID& self, const std::string& strItemConfigID, const int nCount) = 0;
 
+    // 掉落奖励
+    virtual void DrawDropAward(const NFIDENTID& self, int& nMoney, int& nExp, NFIDataList& xItemList, NFIDataList& xCountList) = 0;
 };
 
 #endif

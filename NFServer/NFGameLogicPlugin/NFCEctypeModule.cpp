@@ -156,8 +156,8 @@ int NFCEctypeModule::OnEctypeSettleEvent(const NFIDENTID& self, int nResult, int
         return 1;
     }
 
-    int nContainerID = pObject->GetPropertyInt("SceneID");
-    if (nContainerID <= 0)
+    int nSceneID = pObject->GetPropertyInt("SceneID");
+    if (nSceneID <= 0)
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "scene id error", "", __FUNCTION__, __LINE__);
         return 1;
@@ -170,19 +170,22 @@ int NFCEctypeModule::OnEctypeSettleEvent(const NFIDENTID& self, int nResult, int
         const std::string& strAccout = m_pKernelModule->GetPropertyString(self, "Account");
 
         std::ostringstream stream;
-        stream << "[ExitEctype] Account[" << strAccout << "] Level[" << nLevel << "] Scene[" << nContainerID << "] [0]";
+        stream << "[ExitEctype] Account[" << strAccout << "] Level[" << nLevel << "] Scene[" << nSceneID << "] [0]";
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, stream, __FUNCTION__, __LINE__);
         return 1;
     }
 
-    if (!m_pSceneProcessModule->IsCloneScene(nContainerID))
+    if (!m_pSceneProcessModule->IsCloneScene(nSceneID))
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "player not int clone scene", "", __FUNCTION__, __LINE__);
         return 1;
     }
 
     // 通关记录
-    // 给奖励
+    // TODO
+
+    // 通关奖励
+    AddEctypeAward(self, nSceneID);
 
     return 0;
 }
@@ -206,18 +209,35 @@ int NFCEctypeModule::OnObjectGroupIDEvent(const NFIDENTID& self, const std::stri
     return 0;
 }
 
-int NFCEctypeModule::AddEctypeAward(const NFIDENTID& self, const int nSceneID, const bool bWipe)
+int NFCEctypeModule::AddEctypeAward(const NFIDENTID& self, const int nSceneID)
 {
     std::string strSceneID = boost::lexical_cast<std::string>(nSceneID);
     int nType = m_pElementInfoModule->GetPropertyInt(strSceneID, "SceneType");
 
-    NF_SHARE_PTR<NFIRecord> pDropRecord = m_pKernelModule->FindRecord(self, "DropItemList");
-    if (NULL == pDropRecord.get())
+    int nAddMoney = 0;
+    int nAddExp = 0;
+    NFCDataList xItemList;
+    NFCDataList xCountList;
+
+    // 掉落奖励
+    m_pPackModule->DrawDropAward(self, nAddMoney, nAddExp, xItemList, xCountList);
+
+    // 通关奖励
+
+    // 通知客户端
+    NFCDataList xAwardInfoList;
+    xAwardInfoList << nAddMoney;
+    xAwardInfoList << nAddExp;
+    if (xItemList.GetCount() == xCountList.GetCount())
     {
-        return 0;
+        for (int i = 0; i < xItemList.GetCount(); ++i)
+        {
+            xAwardInfoList << xItemList.String(i);
+            xAwardInfoList << xCountList.Int(i);
+        }
     }
 
-    // 给奖励
+    m_pEventProcessModule->DoEvent(self, NFED_ON_NOTICE_ECTYPE_AWARD, xAwardInfoList);
 
     return 0;
 }
