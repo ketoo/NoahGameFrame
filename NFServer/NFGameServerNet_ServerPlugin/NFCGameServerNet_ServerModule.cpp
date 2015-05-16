@@ -30,6 +30,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     m_pPVPModule = dynamic_cast<NFIPVPModule*>(pPluginManager->FindModule("NFCPVPModule"));
 	m_pSkillModule = dynamic_cast<NFISkillModule*>(pPluginManager->FindModule("NFCSkillModule"));
 	m_pDataProcessModule = dynamic_cast<NFIDataProcessModule*>(pPluginManager->FindModule("NFCDataProcessModule"));
+    m_pEctypeModule = dynamic_cast<NFIEctypeModule*>(pPluginManager->FindModule("NFCEctypeModule"));
 
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
@@ -43,6 +44,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     assert(NULL != m_pPVPModule);
 	assert(NULL != m_pSkillModule);
 	assert(NULL != m_pDataProcessModule);
+    assert(NULL != m_pEctypeModule);
 
     m_pKernelModule->ResgisterCommonClassEvent( this, &NFCGameServerNet_ServerModule::OnClassCommonEvent );
     m_pKernelModule->ResgisterCommonPropertyEvent( this, &NFCGameServerNet_ServerModule::OnPropertyCommonEvent );
@@ -152,8 +154,9 @@ int NFCGameServerNet_ServerModule::OnRecivePSPack( const NFIPacket& msg )
     case NFMsg::EGameMsgID::EGMI_REQ_EXIT_PVP:
         OnClientExitPVP(msg);
         break;
-    
-        
+    case NFMsg::EGameMsgID::EGMI_REQ_END_BATTLE:
+        OnClientEndBattle(msg);
+        break;
         
         
     //SLG////////////////////////////////////////////////////////////////////////
@@ -1729,7 +1732,8 @@ int NFCGameServerNet_ServerModule::OnObjectClassEvent( const NFIDENTID& self, co
     }
     else if ( CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent )
     {
-        m_pEventProcessModule->AddEventCallBack( self, NFED_ON_OBJECT_ENTER_SCENE_BEFORE, this, &NFCGameServerNet_ServerModule::OnSwapSceneResultEvent );
+        m_pEventProcessModule->AddEventCallBack(self, NFED_ON_OBJECT_ENTER_SCENE_BEFORE, this, &NFCGameServerNet_ServerModule::OnSwapSceneResultEvent);
+        m_pEventProcessModule->AddEventCallBack(self, NFED_ON_NOTICE_ECTYPE_AWARD, this, &NFCGameServerNet_ServerModule::OnNoticeEctypeAward);
     }
 
     return 0;
@@ -1834,6 +1838,47 @@ int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent( const NFIDENTID& self
         if (pProxyData.get())
         {
             SendMsgPB(NFMsg::EGMI_ACK_SWAP_SCENE, xSwapScene, pProxyData->nFD, pData->xClientID);
+        }
+    }
+
+    return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnNoticeEctypeAward(const NFIDENTID& self, const int nEventID, const NFIDataList& var)
+{
+    if (var.GetCount() < 4)
+    {
+        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "Args error", "", __FUNCTION__, __LINE__);
+        return 1;
+    }
+
+    int nAddmoney = var.Int(0);
+    int nAddExp = var.Int(1);
+
+    NFMsg::ReqAckEndBattle xMsg;
+    xMsg.set_money(nAddmoney);
+    xMsg.set_exp(nAddExp);
+
+    NFCDataList xItemInfoList;
+    xItemInfoList.Append(var, 2, var.GetCount());
+    if (xItemInfoList.GetCount() % 2 != 0)
+    {
+        return 1;
+    }
+
+    for (int i = 0; i < xItemInfoList.GetCount(); i += 2)
+    {
+        xMsg.add_item_list(xItemInfoList.String(i));
+        xMsg.add_item_count_list(xItemInfoList.Int(i + 1));
+    }
+
+    NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(self);
+    if (pData.get())
+    {
+        NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
+        if (pProxyData.get())
+        {
+            SendMsgPB(NFMsg::EGMI_ACK_END_BATTLE, xMsg, pProxyData->nFD, pData->xClientID);
         }
     }
 
@@ -2267,6 +2312,12 @@ void NFCGameServerNet_ServerModule::OnClienGMProcess( const NFIPacket& msg )
     default:
         break;
     }
+}
+
+void NFCGameServerNet_ServerModule::OnClientEndBattle(const NFIPacket& msg)
+{
+    CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckEndBattle);
+    m_pEctypeModule->OnEctypeSettleEvent(nPlayerID, 1, 3); // 暂时先给1通过和3星
 }
 
 //SLG////////////////////////////////////////////////////////////////////////
