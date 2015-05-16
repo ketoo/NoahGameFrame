@@ -21,6 +21,7 @@
 #include "NFCNPCRefreshModule.h"
 #include "NFCRebornItemConsumeProcessModule.h"
 #include "NFCAwardPackModule.h"
+#include "NFCEctypeModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -71,10 +72,12 @@ void NFGameLogicPlugin::Install()
 
     REGISTER_MODULE( pPluginManager, NFCNPCRefreshModule )
     REGISTER_MODULE(pPluginManager, NFCAwardPackModule)
+    REGISTER_MODULE(pPluginManager, NFCEctypeModule)
 }
 
 void NFGameLogicPlugin::Uninstall()
 {
+    UNREGISTER_MODULE(pPluginManager, NFCEctypeModule)
     UNREGISTER_MODULE(pPluginManager, NFCAwardPackModule)
 	UNREGISTER_MODULE( pPluginManager, NFCNPCRefreshModule )
 
