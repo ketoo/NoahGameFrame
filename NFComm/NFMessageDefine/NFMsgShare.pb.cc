@@ -299,9 +299,10 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ItemStruct));
   ReqAckEndBattle_descriptor_ = file->message_type(12);
-  static const int ReqAckEndBattle_offsets_[3] = {
+  static const int ReqAckEndBattle_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckEndBattle, money_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckEndBattle, exp_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckEndBattle, diamond_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckEndBattle, item_list_),
   };
   ReqAckEndBattle_reflection_ =
@@ -513,18 +514,19 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "\022\t\n\001z\030\006 \001(\002\"Q\n\rEGameSwapType\022\017\n\013EGST_NAR"
     "MAL\020\000\022\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n"
     "\013EGST_MIRROR\020\003\"1\n\nItemStruct\022\017\n\007item_id\030"
-    "\001 \003(\t\022\022\n\nitem_count\030\002 \003(\005\"S\n\017ReqAckEndBa"
-    "ttle\022\r\n\005money\030\001 \003(\005\022\013\n\003exp\030\002 \003(\005\022$\n\titem"
-    "_list\030\003 \003(\0132\021.NFMsg.ItemStruct\"2\n\017ReqPic"
-    "kDropItem\022\037\n\titem_guid\030\002 \002(\0132\014.NFMsg.Ide"
-    "nt\" \n\rReqAcceptTask\022\017\n\007task_id\030\001 \002(\014\"#\n\020"
-    "ReqCompeleteTask\022\017\n\007task_id\030\001 \002(\014\"\357\001\n\022Re"
-    "qAckJoinActivity\022B\n\ractivity_type\030\001 \002(\0162"
-    "+.NFMsg.ReqAckJoinActivity.EGameActivity"
-    "Type\022I\n\021sub_activity_type\030\002 \002(\0162..NFMsg."
-    "ReqAckJoinActivity.EGameActivitySubType\""
-    "!\n\021EGameActivityType\022\014\n\010EGAT_PVP\020\000\"\'\n\024EG"
-    "ameActivitySubType\022\017\n\013EGAT_NORMAL\020\000", 1995);
+    "\001 \003(\t\022\022\n\nitem_count\030\002 \003(\005\"d\n\017ReqAckEndBa"
+    "ttle\022\r\n\005money\030\001 \003(\005\022\013\n\003exp\030\002 \003(\005\022\017\n\007diam"
+    "ond\030\003 \003(\005\022$\n\titem_list\030\004 \003(\0132\021.NFMsg.Ite"
+    "mStruct\"2\n\017ReqPickDropItem\022\037\n\titem_guid\030"
+    "\002 \002(\0132\014.NFMsg.Ident\" \n\rReqAcceptTask\022\017\n\007"
+    "task_id\030\001 \002(\014\"#\n\020ReqCompeleteTask\022\017\n\007tas"
+    "k_id\030\001 \002(\014\"\357\001\n\022ReqAckJoinActivity\022B\n\ract"
+    "ivity_type\030\001 \002(\0162+.NFMsg.ReqAckJoinActiv"
+    "ity.EGameActivityType\022I\n\021sub_activity_ty"
+    "pe\030\002 \002(\0162..NFMsg.ReqAckJoinActivity.EGam"
+    "eActivitySubType\"!\n\021EGameActivityType\022\014\n"
+    "\010EGAT_PVP\020\000\"\'\n\024EGameActivitySubType\022\017\n\013E"
+    "GAT_NORMAL\020\000", 2012);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -4530,6 +4532,7 @@ void ItemStruct::Swap(ItemStruct* other) {
 #ifndef _MSC_VER
 const int ReqAckEndBattle::kMoneyFieldNumber;
 const int ReqAckEndBattle::kExpFieldNumber;
+const int ReqAckEndBattle::kDiamondFieldNumber;
 const int ReqAckEndBattle::kItemListFieldNumber;
 #endif  // !_MSC_VER
 
@@ -4585,6 +4588,7 @@ ReqAckEndBattle* ReqAckEndBattle::New() const {
 void ReqAckEndBattle::Clear() {
   money_.Clear();
   exp_.Clear();
+  diamond_.Clear();
   item_list_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -4636,12 +4640,34 @@ bool ReqAckEndBattle::MergePartialFromCodedStream(
           goto handle_uninterpreted;
         }
         if (input->ExpectTag(16)) goto parse_exp;
-        if (input->ExpectTag(26)) goto parse_item_list;
+        if (input->ExpectTag(24)) goto parse_diamond;
         break;
       }
 
-      // repeated .NFMsg.ItemStruct item_list = 3;
+      // repeated int32 diamond = 3;
       case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_diamond:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 1, 24, input, this->mutable_diamond())));
+        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
+                   == ::google::protobuf::internal::WireFormatLite::
+                      WIRETYPE_LENGTH_DELIMITED) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, this->mutable_diamond())));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(24)) goto parse_diamond;
+        if (input->ExpectTag(34)) goto parse_item_list;
+        break;
+      }
+
+      // repeated .NFMsg.ItemStruct item_list = 4;
+      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_item_list:
@@ -4650,7 +4676,7 @@ bool ReqAckEndBattle::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(26)) goto parse_item_list;
+        if (input->ExpectTag(34)) goto parse_item_list;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -4685,10 +4711,16 @@ void ReqAckEndBattle::SerializeWithCachedSizes(
       2, this->exp(i), output);
   }
 
-  // repeated .NFMsg.ItemStruct item_list = 3;
+  // repeated int32 diamond = 3;
+  for (int i = 0; i < this->diamond_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(
+      3, this->diamond(i), output);
+  }
+
+  // repeated .NFMsg.ItemStruct item_list = 4;
   for (int i = 0; i < this->item_list_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, this->item_list(i), output);
+      4, this->item_list(i), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -4711,11 +4743,17 @@ void ReqAckEndBattle::SerializeWithCachedSizes(
       WriteInt32ToArray(2, this->exp(i), target);
   }
 
-  // repeated .NFMsg.ItemStruct item_list = 3;
+  // repeated int32 diamond = 3;
+  for (int i = 0; i < this->diamond_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteInt32ToArray(3, this->diamond(i), target);
+  }
+
+  // repeated .NFMsg.ItemStruct item_list = 4;
   for (int i = 0; i < this->item_list_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        3, this->item_list(i), target);
+        4, this->item_list(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -4748,7 +4786,17 @@ int ReqAckEndBattle::ByteSize() const {
     total_size += 1 * this->exp_size() + data_size;
   }
 
-  // repeated .NFMsg.ItemStruct item_list = 3;
+  // repeated int32 diamond = 3;
+  {
+    int data_size = 0;
+    for (int i = 0; i < this->diamond_size(); i++) {
+      data_size += ::google::protobuf::internal::WireFormatLite::
+        Int32Size(this->diamond(i));
+    }
+    total_size += 1 * this->diamond_size() + data_size;
+  }
+
+  // repeated .NFMsg.ItemStruct item_list = 4;
   total_size += 1 * this->item_list_size();
   for (int i = 0; i < this->item_list_size(); i++) {
     total_size +=
@@ -4783,6 +4831,7 @@ void ReqAckEndBattle::MergeFrom(const ReqAckEndBattle& from) {
   GOOGLE_CHECK_NE(&from, this);
   money_.MergeFrom(from.money_);
   exp_.MergeFrom(from.exp_);
+  diamond_.MergeFrom(from.diamond_);
   item_list_.MergeFrom(from.item_list_);
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -4808,6 +4857,7 @@ void ReqAckEndBattle::Swap(ReqAckEndBattle* other) {
   if (other != this) {
     money_.Swap(&other->money_);
     exp_.Swap(&other->exp_);
+    diamond_.Swap(&other->diamond_);
     item_list_.Swap(&other->item_list_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
