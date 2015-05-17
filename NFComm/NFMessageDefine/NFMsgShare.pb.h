@@ -1652,10 +1652,22 @@ class ReqAckEndBattle : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_exp();
 
-  // repeated .NFMsg.ItemStruct item_list = 3;
+  // repeated int32 diamond = 3;
+  inline int diamond_size() const;
+  inline void clear_diamond();
+  static const int kDiamondFieldNumber = 3;
+  inline ::google::protobuf::int32 diamond(int index) const;
+  inline void set_diamond(int index, ::google::protobuf::int32 value);
+  inline void add_diamond(::google::protobuf::int32 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      diamond() const;
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_diamond();
+
+  // repeated .NFMsg.ItemStruct item_list = 4;
   inline int item_list_size() const;
   inline void clear_item_list();
-  static const int kItemListFieldNumber = 3;
+  static const int kItemListFieldNumber = 4;
   inline const ::NFMsg::ItemStruct& item_list(int index) const;
   inline ::NFMsg::ItemStruct* mutable_item_list(int index);
   inline ::NFMsg::ItemStruct* add_item_list();
@@ -1671,10 +1683,11 @@ class ReqAckEndBattle : public ::google::protobuf::Message {
 
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > money_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > exp_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > diamond_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct > item_list_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -3667,7 +3680,32 @@ ReqAckEndBattle::mutable_exp() {
   return &exp_;
 }
 
-// repeated .NFMsg.ItemStruct item_list = 3;
+// repeated int32 diamond = 3;
+inline int ReqAckEndBattle::diamond_size() const {
+  return diamond_.size();
+}
+inline void ReqAckEndBattle::clear_diamond() {
+  diamond_.Clear();
+}
+inline ::google::protobuf::int32 ReqAckEndBattle::diamond(int index) const {
+  return diamond_.Get(index);
+}
+inline void ReqAckEndBattle::set_diamond(int index, ::google::protobuf::int32 value) {
+  diamond_.Set(index, value);
+}
+inline void ReqAckEndBattle::add_diamond(::google::protobuf::int32 value) {
+  diamond_.Add(value);
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+ReqAckEndBattle::diamond() const {
+  return diamond_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+ReqAckEndBattle::mutable_diamond() {
+  return &diamond_;
+}
+
+// repeated .NFMsg.ItemStruct item_list = 4;
 inline int ReqAckEndBattle::item_list_size() const {
   return item_list_.size();
 }
