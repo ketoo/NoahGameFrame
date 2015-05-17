@@ -64,7 +64,7 @@ private:
     NFList<NFIDENTID> mRemoveObjectListEx;
     NFMapEx<NFIDENTID, NFList<int> > mRemoveEventListEx;
 
-    NFCClassEventInfo* m_pClassEventInfoEx;
+    NF_SHARE_PTR<NFCClassEventInfo> mxClassEventInfoEx;
 
     typedef NFMapEx<NFIDENTID, NFCObjectEventInfo> NFCObjectEventInfoMapEx;
     NFCObjectEventInfoMapEx mObjectEventInfoMapEx;
