@@ -1526,41 +1526,36 @@ class ItemStruct : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // repeated string item_id = 1;
-  inline int item_id_size() const;
+  // required string item_id = 1;
+  inline bool has_item_id() const;
   inline void clear_item_id();
   static const int kItemIdFieldNumber = 1;
-  inline const ::std::string& item_id(int index) const;
-  inline ::std::string* mutable_item_id(int index);
-  inline void set_item_id(int index, const ::std::string& value);
-  inline void set_item_id(int index, const char* value);
-  inline void set_item_id(int index, const char* value, size_t size);
-  inline ::std::string* add_item_id();
-  inline void add_item_id(const ::std::string& value);
-  inline void add_item_id(const char* value);
-  inline void add_item_id(const char* value, size_t size);
-  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& item_id() const;
-  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_item_id();
+  inline const ::std::string& item_id() const;
+  inline void set_item_id(const ::std::string& value);
+  inline void set_item_id(const char* value);
+  inline void set_item_id(const char* value, size_t size);
+  inline ::std::string* mutable_item_id();
+  inline ::std::string* release_item_id();
+  inline void set_allocated_item_id(::std::string* item_id);
 
-  // repeated int32 item_count = 2;
-  inline int item_count_size() const;
+  // required int32 item_count = 2;
+  inline bool has_item_count() const;
   inline void clear_item_count();
   static const int kItemCountFieldNumber = 2;
-  inline ::google::protobuf::int32 item_count(int index) const;
-  inline void set_item_count(int index, ::google::protobuf::int32 value);
-  inline void add_item_count(::google::protobuf::int32 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      item_count() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_item_count();
+  inline ::google::protobuf::int32 item_count() const;
+  inline void set_item_count(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:NFMsg.ItemStruct)
  private:
+  inline void set_has_item_id();
+  inline void clear_has_item_id();
+  inline void set_has_item_count();
+  inline void clear_has_item_count();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedPtrField< ::std::string> item_id_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > item_count_;
+  ::std::string* item_id_;
+  ::google::protobuf::int32 item_count_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
@@ -1628,41 +1623,26 @@ class ReqAckEndBattle : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // repeated int32 money = 1;
-  inline int money_size() const;
+  // required int32 money = 1;
+  inline bool has_money() const;
   inline void clear_money();
   static const int kMoneyFieldNumber = 1;
-  inline ::google::protobuf::int32 money(int index) const;
-  inline void set_money(int index, ::google::protobuf::int32 value);
-  inline void add_money(::google::protobuf::int32 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      money() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_money();
+  inline ::google::protobuf::int32 money() const;
+  inline void set_money(::google::protobuf::int32 value);
 
-  // repeated int32 exp = 2;
-  inline int exp_size() const;
+  // required int32 exp = 2;
+  inline bool has_exp() const;
   inline void clear_exp();
   static const int kExpFieldNumber = 2;
-  inline ::google::protobuf::int32 exp(int index) const;
-  inline void set_exp(int index, ::google::protobuf::int32 value);
-  inline void add_exp(::google::protobuf::int32 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      exp() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_exp();
+  inline ::google::protobuf::int32 exp() const;
+  inline void set_exp(::google::protobuf::int32 value);
 
-  // repeated int32 diamond = 3;
-  inline int diamond_size() const;
+  // required int32 diamond = 3;
+  inline bool has_diamond() const;
   inline void clear_diamond();
   static const int kDiamondFieldNumber = 3;
-  inline ::google::protobuf::int32 diamond(int index) const;
-  inline void set_diamond(int index, ::google::protobuf::int32 value);
-  inline void add_diamond(::google::protobuf::int32 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      diamond() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_diamond();
+  inline ::google::protobuf::int32 diamond() const;
+  inline void set_diamond(::google::protobuf::int32 value);
 
   // repeated .NFMsg.ItemStruct item_list = 4;
   inline int item_list_size() const;
@@ -1678,13 +1658,19 @@ class ReqAckEndBattle : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckEndBattle)
  private:
+  inline void set_has_money();
+  inline void clear_has_money();
+  inline void set_has_exp();
+  inline void clear_has_exp();
+  inline void set_has_diamond();
+  inline void clear_has_diamond();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > money_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > exp_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > diamond_;
+  ::google::protobuf::int32 money_;
+  ::google::protobuf::int32 exp_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct > item_list_;
+  ::google::protobuf::int32 diamond_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
@@ -3557,152 +3543,166 @@ inline void ReqAckSwapScene::set_z(float value) {
 
 // ItemStruct
 
-// repeated string item_id = 1;
-inline int ItemStruct::item_id_size() const {
-  return item_id_.size();
+// required string item_id = 1;
+inline bool ItemStruct::has_item_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ItemStruct::set_has_item_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ItemStruct::clear_has_item_id() {
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void ItemStruct::clear_item_id() {
-  item_id_.Clear();
+  if (item_id_ != &::google::protobuf::internal::kEmptyString) {
+    item_id_->clear();
+  }
+  clear_has_item_id();
 }
-inline const ::std::string& ItemStruct::item_id(int index) const {
-  return item_id_.Get(index);
+inline const ::std::string& ItemStruct::item_id() const {
+  return *item_id_;
 }
-inline ::std::string* ItemStruct::mutable_item_id(int index) {
-  return item_id_.Mutable(index);
+inline void ItemStruct::set_item_id(const ::std::string& value) {
+  set_has_item_id();
+  if (item_id_ == &::google::protobuf::internal::kEmptyString) {
+    item_id_ = new ::std::string;
+  }
+  item_id_->assign(value);
 }
-inline void ItemStruct::set_item_id(int index, const ::std::string& value) {
-  item_id_.Mutable(index)->assign(value);
+inline void ItemStruct::set_item_id(const char* value) {
+  set_has_item_id();
+  if (item_id_ == &::google::protobuf::internal::kEmptyString) {
+    item_id_ = new ::std::string;
+  }
+  item_id_->assign(value);
 }
-inline void ItemStruct::set_item_id(int index, const char* value) {
-  item_id_.Mutable(index)->assign(value);
+inline void ItemStruct::set_item_id(const char* value, size_t size) {
+  set_has_item_id();
+  if (item_id_ == &::google::protobuf::internal::kEmptyString) {
+    item_id_ = new ::std::string;
+  }
+  item_id_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline void ItemStruct::set_item_id(int index, const char* value, size_t size) {
-  item_id_.Mutable(index)->assign(
-    reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ItemStruct::add_item_id() {
-  return item_id_.Add();
-}
-inline void ItemStruct::add_item_id(const ::std::string& value) {
-  item_id_.Add()->assign(value);
-}
-inline void ItemStruct::add_item_id(const char* value) {
-  item_id_.Add()->assign(value);
-}
-inline void ItemStruct::add_item_id(const char* value, size_t size) {
-  item_id_.Add()->assign(reinterpret_cast<const char*>(value), size);
-}
-inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
-ItemStruct::item_id() const {
+inline ::std::string* ItemStruct::mutable_item_id() {
+  set_has_item_id();
+  if (item_id_ == &::google::protobuf::internal::kEmptyString) {
+    item_id_ = new ::std::string;
+  }
   return item_id_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::std::string>*
-ItemStruct::mutable_item_id() {
-  return &item_id_;
+inline ::std::string* ItemStruct::release_item_id() {
+  clear_has_item_id();
+  if (item_id_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = item_id_;
+    item_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ItemStruct::set_allocated_item_id(::std::string* item_id) {
+  if (item_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete item_id_;
+  }
+  if (item_id) {
+    set_has_item_id();
+    item_id_ = item_id;
+  } else {
+    clear_has_item_id();
+    item_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
-// repeated int32 item_count = 2;
-inline int ItemStruct::item_count_size() const {
-  return item_count_.size();
+// required int32 item_count = 2;
+inline bool ItemStruct::has_item_count() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ItemStruct::set_has_item_count() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ItemStruct::clear_has_item_count() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void ItemStruct::clear_item_count() {
-  item_count_.Clear();
+  item_count_ = 0;
+  clear_has_item_count();
 }
-inline ::google::protobuf::int32 ItemStruct::item_count(int index) const {
-  return item_count_.Get(index);
-}
-inline void ItemStruct::set_item_count(int index, ::google::protobuf::int32 value) {
-  item_count_.Set(index, value);
-}
-inline void ItemStruct::add_item_count(::google::protobuf::int32 value) {
-  item_count_.Add(value);
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-ItemStruct::item_count() const {
+inline ::google::protobuf::int32 ItemStruct::item_count() const {
   return item_count_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-ItemStruct::mutable_item_count() {
-  return &item_count_;
+inline void ItemStruct::set_item_count(::google::protobuf::int32 value) {
+  set_has_item_count();
+  item_count_ = value;
 }
 
 // -------------------------------------------------------------------
 
 // ReqAckEndBattle
 
-// repeated int32 money = 1;
-inline int ReqAckEndBattle::money_size() const {
-  return money_.size();
+// required int32 money = 1;
+inline bool ReqAckEndBattle::has_money() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckEndBattle::set_has_money() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckEndBattle::clear_has_money() {
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void ReqAckEndBattle::clear_money() {
-  money_.Clear();
+  money_ = 0;
+  clear_has_money();
 }
-inline ::google::protobuf::int32 ReqAckEndBattle::money(int index) const {
-  return money_.Get(index);
-}
-inline void ReqAckEndBattle::set_money(int index, ::google::protobuf::int32 value) {
-  money_.Set(index, value);
-}
-inline void ReqAckEndBattle::add_money(::google::protobuf::int32 value) {
-  money_.Add(value);
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-ReqAckEndBattle::money() const {
+inline ::google::protobuf::int32 ReqAckEndBattle::money() const {
   return money_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-ReqAckEndBattle::mutable_money() {
-  return &money_;
+inline void ReqAckEndBattle::set_money(::google::protobuf::int32 value) {
+  set_has_money();
+  money_ = value;
 }
 
-// repeated int32 exp = 2;
-inline int ReqAckEndBattle::exp_size() const {
-  return exp_.size();
+// required int32 exp = 2;
+inline bool ReqAckEndBattle::has_exp() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckEndBattle::set_has_exp() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckEndBattle::clear_has_exp() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqAckEndBattle::clear_exp() {
-  exp_.Clear();
+  exp_ = 0;
+  clear_has_exp();
 }
-inline ::google::protobuf::int32 ReqAckEndBattle::exp(int index) const {
-  return exp_.Get(index);
-}
-inline void ReqAckEndBattle::set_exp(int index, ::google::protobuf::int32 value) {
-  exp_.Set(index, value);
-}
-inline void ReqAckEndBattle::add_exp(::google::protobuf::int32 value) {
-  exp_.Add(value);
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-ReqAckEndBattle::exp() const {
+inline ::google::protobuf::int32 ReqAckEndBattle::exp() const {
   return exp_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-ReqAckEndBattle::mutable_exp() {
-  return &exp_;
+inline void ReqAckEndBattle::set_exp(::google::protobuf::int32 value) {
+  set_has_exp();
+  exp_ = value;
 }
 
-// repeated int32 diamond = 3;
-inline int ReqAckEndBattle::diamond_size() const {
-  return diamond_.size();
+// required int32 diamond = 3;
+inline bool ReqAckEndBattle::has_diamond() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckEndBattle::set_has_diamond() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckEndBattle::clear_has_diamond() {
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void ReqAckEndBattle::clear_diamond() {
-  diamond_.Clear();
+  diamond_ = 0;
+  clear_has_diamond();
 }
-inline ::google::protobuf::int32 ReqAckEndBattle::diamond(int index) const {
-  return diamond_.Get(index);
-}
-inline void ReqAckEndBattle::set_diamond(int index, ::google::protobuf::int32 value) {
-  diamond_.Set(index, value);
-}
-inline void ReqAckEndBattle::add_diamond(::google::protobuf::int32 value) {
-  diamond_.Add(value);
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-ReqAckEndBattle::diamond() const {
+inline ::google::protobuf::int32 ReqAckEndBattle::diamond() const {
   return diamond_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-ReqAckEndBattle::mutable_diamond() {
-  return &diamond_;
+inline void ReqAckEndBattle::set_diamond(::google::protobuf::int32 value) {
+  set_has_diamond();
+  diamond_ = value;
 }
 
 // repeated .NFMsg.ItemStruct item_list = 4;

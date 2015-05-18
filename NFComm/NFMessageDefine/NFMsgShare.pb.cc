@@ -514,9 +514,9 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "\022\t\n\001z\030\006 \001(\002\"Q\n\rEGameSwapType\022\017\n\013EGST_NAR"
     "MAL\020\000\022\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n"
     "\013EGST_MIRROR\020\003\"1\n\nItemStruct\022\017\n\007item_id\030"
-    "\001 \003(\t\022\022\n\nitem_count\030\002 \003(\005\"d\n\017ReqAckEndBa"
-    "ttle\022\r\n\005money\030\001 \003(\005\022\013\n\003exp\030\002 \003(\005\022\017\n\007diam"
-    "ond\030\003 \003(\005\022$\n\titem_list\030\004 \003(\0132\021.NFMsg.Ite"
+    "\001 \002(\t\022\022\n\nitem_count\030\002 \002(\005\"d\n\017ReqAckEndBa"
+    "ttle\022\r\n\005money\030\001 \002(\005\022\013\n\003exp\030\002 \002(\005\022\017\n\007diam"
+    "ond\030\003 \002(\005\022$\n\titem_list\030\004 \003(\0132\021.NFMsg.Ite"
     "mStruct\"2\n\017ReqPickDropItem\022\037\n\titem_guid\030"
     "\002 \002(\0132\014.NFMsg.Ident\" \n\rReqAcceptTask\022\017\n\007"
     "task_id\030\001 \002(\014\"#\n\020ReqCompeleteTask\022\017\n\007tas"
@@ -4291,6 +4291,8 @@ ItemStruct::ItemStruct(const ItemStruct& from)
 
 void ItemStruct::SharedCtor() {
   _cached_size_ = 0;
+  item_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  item_count_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -4299,6 +4301,9 @@ ItemStruct::~ItemStruct() {
 }
 
 void ItemStruct::SharedDtor() {
+  if (item_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete item_id_;
+  }
   if (this != default_instance_) {
   }
 }
@@ -4325,8 +4330,14 @@ ItemStruct* ItemStruct::New() const {
 }
 
 void ItemStruct::Clear() {
-  item_id_.Clear();
-  item_count_.Clear();
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_item_id()) {
+      if (item_id_ != &::google::protobuf::internal::kEmptyString) {
+        item_id_->clear();
+      }
+    }
+    item_count_ = 0;
+  }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -4337,43 +4348,34 @@ bool ItemStruct::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated string item_id = 1;
+      // required string item_id = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_item_id:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->add_item_id()));
+                input, this->mutable_item_id()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->item_id(this->item_id_size() - 1).data(),
-            this->item_id(this->item_id_size() - 1).length(),
+            this->item_id().data(), this->item_id().length(),
             ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(10)) goto parse_item_id;
         if (input->ExpectTag(16)) goto parse_item_count;
         break;
       }
 
-      // repeated int32 item_count = 2;
+      // required int32 item_count = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_item_count:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 1, 16, input, this->mutable_item_count())));
-        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
-                   == ::google::protobuf::internal::WireFormatLite::
-                      WIRETYPE_LENGTH_DELIMITED) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, this->mutable_item_count())));
+                 input, &item_count_)));
+          set_has_item_count();
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_item_count;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -4396,19 +4398,18 @@ bool ItemStruct::MergePartialFromCodedStream(
 
 void ItemStruct::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // repeated string item_id = 1;
-  for (int i = 0; i < this->item_id_size(); i++) {
-  ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-    this->item_id(i).data(), this->item_id(i).length(),
-    ::google::protobuf::internal::WireFormat::SERIALIZE);
+  // required string item_id = 1;
+  if (has_item_id()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->item_id().data(), this->item_id().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->item_id(i), output);
+      1, this->item_id(), output);
   }
 
-  // repeated int32 item_count = 2;
-  for (int i = 0; i < this->item_count_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(
-      2, this->item_count(i), output);
+  // required int32 item_count = 2;
+  if (has_item_count()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->item_count(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -4419,19 +4420,19 @@ void ItemStruct::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ItemStruct::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // repeated string item_id = 1;
-  for (int i = 0; i < this->item_id_size(); i++) {
+  // required string item_id = 1;
+  if (has_item_id()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->item_id(i).data(), this->item_id(i).length(),
+      this->item_id().data(), this->item_id().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(1, this->item_id(i), target);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->item_id(), target);
   }
 
-  // repeated int32 item_count = 2;
-  for (int i = 0; i < this->item_count_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt32ToArray(2, this->item_count(i), target);
+  // required int32 item_count = 2;
+  if (has_item_count()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->item_count(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -4444,23 +4445,22 @@ void ItemStruct::SerializeWithCachedSizes(
 int ItemStruct::ByteSize() const {
   int total_size = 0;
 
-  // repeated string item_id = 1;
-  total_size += 1 * this->item_id_size();
-  for (int i = 0; i < this->item_id_size(); i++) {
-    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
-      this->item_id(i));
-  }
-
-  // repeated int32 item_count = 2;
-  {
-    int data_size = 0;
-    for (int i = 0; i < this->item_count_size(); i++) {
-      data_size += ::google::protobuf::internal::WireFormatLite::
-        Int32Size(this->item_count(i));
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required string item_id = 1;
+    if (has_item_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->item_id());
     }
-    total_size += 1 * this->item_count_size() + data_size;
-  }
 
+    // required int32 item_count = 2;
+    if (has_item_count()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->item_count());
+    }
+
+  }
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -4486,8 +4486,14 @@ void ItemStruct::MergeFrom(const ::google::protobuf::Message& from) {
 
 void ItemStruct::MergeFrom(const ItemStruct& from) {
   GOOGLE_CHECK_NE(&from, this);
-  item_id_.MergeFrom(from.item_id_);
-  item_count_.MergeFrom(from.item_count_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_item_id()) {
+      set_item_id(from.item_id());
+    }
+    if (from.has_item_count()) {
+      set_item_count(from.item_count());
+    }
+  }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -4504,14 +4510,15 @@ void ItemStruct::CopyFrom(const ItemStruct& from) {
 }
 
 bool ItemStruct::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
 
 void ItemStruct::Swap(ItemStruct* other) {
   if (other != this) {
-    item_id_.Swap(&other->item_id_);
-    item_count_.Swap(&other->item_count_);
+    std::swap(item_id_, other->item_id_);
+    std::swap(item_count_, other->item_count_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -4552,6 +4559,9 @@ ReqAckEndBattle::ReqAckEndBattle(const ReqAckEndBattle& from)
 
 void ReqAckEndBattle::SharedCtor() {
   _cached_size_ = 0;
+  money_ = 0;
+  exp_ = 0;
+  diamond_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -4586,9 +4596,11 @@ ReqAckEndBattle* ReqAckEndBattle::New() const {
 }
 
 void ReqAckEndBattle::Clear() {
-  money_.Clear();
-  exp_.Clear();
-  diamond_.Clear();
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    money_ = 0;
+    exp_ = 0;
+    diamond_ = 0;
+  }
   item_list_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -4600,68 +4612,49 @@ bool ReqAckEndBattle::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated int32 money = 1;
+      // required int32 money = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_money:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 1, 8, input, this->mutable_money())));
-        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
-                   == ::google::protobuf::internal::WireFormatLite::
-                      WIRETYPE_LENGTH_DELIMITED) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, this->mutable_money())));
+                 input, &money_)));
+          set_has_money();
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(8)) goto parse_money;
         if (input->ExpectTag(16)) goto parse_exp;
         break;
       }
 
-      // repeated int32 exp = 2;
+      // required int32 exp = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_exp:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 1, 16, input, this->mutable_exp())));
-        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
-                   == ::google::protobuf::internal::WireFormatLite::
-                      WIRETYPE_LENGTH_DELIMITED) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, this->mutable_exp())));
+                 input, &exp_)));
+          set_has_exp();
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_exp;
         if (input->ExpectTag(24)) goto parse_diamond;
         break;
       }
 
-      // repeated int32 diamond = 3;
+      // required int32 diamond = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_diamond:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 1, 24, input, this->mutable_diamond())));
-        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
-                   == ::google::protobuf::internal::WireFormatLite::
-                      WIRETYPE_LENGTH_DELIMITED) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, this->mutable_diamond())));
+                 input, &diamond_)));
+          set_has_diamond();
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_diamond;
         if (input->ExpectTag(34)) goto parse_item_list;
         break;
       }
@@ -4699,22 +4692,19 @@ bool ReqAckEndBattle::MergePartialFromCodedStream(
 
 void ReqAckEndBattle::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // repeated int32 money = 1;
-  for (int i = 0; i < this->money_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(
-      1, this->money(i), output);
+  // required int32 money = 1;
+  if (has_money()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->money(), output);
   }
 
-  // repeated int32 exp = 2;
-  for (int i = 0; i < this->exp_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(
-      2, this->exp(i), output);
+  // required int32 exp = 2;
+  if (has_exp()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->exp(), output);
   }
 
-  // repeated int32 diamond = 3;
-  for (int i = 0; i < this->diamond_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(
-      3, this->diamond(i), output);
+  // required int32 diamond = 3;
+  if (has_diamond()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->diamond(), output);
   }
 
   // repeated .NFMsg.ItemStruct item_list = 4;
@@ -4731,22 +4721,19 @@ void ReqAckEndBattle::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqAckEndBattle::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // repeated int32 money = 1;
-  for (int i = 0; i < this->money_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt32ToArray(1, this->money(i), target);
+  // required int32 money = 1;
+  if (has_money()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->money(), target);
   }
 
-  // repeated int32 exp = 2;
-  for (int i = 0; i < this->exp_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt32ToArray(2, this->exp(i), target);
+  // required int32 exp = 2;
+  if (has_exp()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->exp(), target);
   }
 
-  // repeated int32 diamond = 3;
-  for (int i = 0; i < this->diamond_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt32ToArray(3, this->diamond(i), target);
+  // required int32 diamond = 3;
+  if (has_diamond()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->diamond(), target);
   }
 
   // repeated .NFMsg.ItemStruct item_list = 4;
@@ -4766,36 +4753,29 @@ void ReqAckEndBattle::SerializeWithCachedSizes(
 int ReqAckEndBattle::ByteSize() const {
   int total_size = 0;
 
-  // repeated int32 money = 1;
-  {
-    int data_size = 0;
-    for (int i = 0; i < this->money_size(); i++) {
-      data_size += ::google::protobuf::internal::WireFormatLite::
-        Int32Size(this->money(i));
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 money = 1;
+    if (has_money()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->money());
     }
-    total_size += 1 * this->money_size() + data_size;
-  }
 
-  // repeated int32 exp = 2;
-  {
-    int data_size = 0;
-    for (int i = 0; i < this->exp_size(); i++) {
-      data_size += ::google::protobuf::internal::WireFormatLite::
-        Int32Size(this->exp(i));
+    // required int32 exp = 2;
+    if (has_exp()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->exp());
     }
-    total_size += 1 * this->exp_size() + data_size;
-  }
 
-  // repeated int32 diamond = 3;
-  {
-    int data_size = 0;
-    for (int i = 0; i < this->diamond_size(); i++) {
-      data_size += ::google::protobuf::internal::WireFormatLite::
-        Int32Size(this->diamond(i));
+    // required int32 diamond = 3;
+    if (has_diamond()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->diamond());
     }
-    total_size += 1 * this->diamond_size() + data_size;
-  }
 
+  }
   // repeated .NFMsg.ItemStruct item_list = 4;
   total_size += 1 * this->item_list_size();
   for (int i = 0; i < this->item_list_size(); i++) {
@@ -4829,10 +4809,18 @@ void ReqAckEndBattle::MergeFrom(const ::google::protobuf::Message& from) {
 
 void ReqAckEndBattle::MergeFrom(const ReqAckEndBattle& from) {
   GOOGLE_CHECK_NE(&from, this);
-  money_.MergeFrom(from.money_);
-  exp_.MergeFrom(from.exp_);
-  diamond_.MergeFrom(from.diamond_);
   item_list_.MergeFrom(from.item_list_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_money()) {
+      set_money(from.money());
+    }
+    if (from.has_exp()) {
+      set_exp(from.exp());
+    }
+    if (from.has_diamond()) {
+      set_diamond(from.diamond());
+    }
+  }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -4849,15 +4837,19 @@ void ReqAckEndBattle::CopyFrom(const ReqAckEndBattle& from) {
 }
 
 bool ReqAckEndBattle::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
+  for (int i = 0; i < item_list_size(); i++) {
+    if (!this->item_list(i).IsInitialized()) return false;
+  }
   return true;
 }
 
 void ReqAckEndBattle::Swap(ReqAckEndBattle* other) {
   if (other != this) {
-    money_.Swap(&other->money_);
-    exp_.Swap(&other->exp_);
-    diamond_.Swap(&other->diamond_);
+    std::swap(money_, other->money_);
+    std::swap(exp_, other->exp_);
+    std::swap(diamond_, other->diamond_);
     item_list_.Swap(&other->item_list_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
