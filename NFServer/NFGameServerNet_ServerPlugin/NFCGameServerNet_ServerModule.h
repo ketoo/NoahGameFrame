@@ -164,7 +164,7 @@ protected:
 
 private:
 	void SendMsgPBToGate( const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFIDENTID self );
-
+	void PlayerLeaveGameServer( const NFIDENTID self );
 
 private:
 
