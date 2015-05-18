@@ -160,6 +160,12 @@ protected:
     int OnChatResultEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
     // 通知副本奖励结果
     int OnNoticeEctypeAward(const NFIDENTID& self, const int nEventID, const NFIDataList& var);
+
+
+private:
+	void SendMsgPBToGate( const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFIDENTID self );
+
+
 private:
 
     struct ServerData 
