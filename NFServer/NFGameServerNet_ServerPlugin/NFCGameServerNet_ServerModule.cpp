@@ -492,27 +492,11 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDataList& argVar, c
             if ( self == identOther )
             {
                 //找到他所在网关的FD
-                NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(identOther);
-                if (pData.get())
-                {
-                    NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-                    if (pProxyData.get())
-                    {
-                        SendMsgPB(NFMsg::EGMI_ACK_OBJECT_PROPERTY_ENTRY, xPrivateMsg, pProxyData->nFD, pData->xClientID);
-                    }
-                }
+				SendMsgPBToGate(NFMsg::EGMI_ACK_OBJECT_PROPERTY_ENTRY, xPrivateMsg, identOther);
             }
             else
             {
-                NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(identOther);
-                if (pData.get())
-                {
-                    NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-                    if (pProxyData.get())
-                    {
-                        SendMsgPB(NFMsg::EGMI_ACK_OBJECT_PROPERTY_ENTRY, xPublicMsg, pProxyData->nFD, pData->xClientID);
-                    }
-                }
+				SendMsgPBToGate(NFMsg::EGMI_ACK_OBJECT_PROPERTY_ENTRY, xPublicMsg, identOther);
             }
         }
     }
@@ -673,34 +657,14 @@ int NFCGameServerNet_ServerModule::OnRecordEnter( const NFIDataList& argVar, con
             {
                 if (xPrivateMsg.multi_player_record_size() > 0)
                 {
-                    //如果是自己，那么只广播私有的，但是如果私有的没数据呢
-                    //找到他所在网关的FD
-                    NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(identOther);
-                    if (pData.get())
-                    {
-                        NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-                        if (pProxyData.get())
-                        {
-                            SendMsgPB(NFMsg::EGMI_ACK_OBJECT_RECORD_ENTRY, xPrivateMsg, pProxyData->nFD, pData->xClientID);
-
-                        }
-                    }
+					SendMsgPBToGate(NFMsg::EGMI_ACK_OBJECT_RECORD_ENTRY, xPrivateMsg, identOther);
                 }
             }
             else
             {
                 if (xPublicMsg.multi_player_record_size() > 0)
                 {
-                    //如果不是自己，那么广播公有的，但是如果公有的没数据呢
-                    NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(identOther);
-                    if (pData.get())
-                    {
-                        NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-                        if (pProxyData.get())
-                        {
-                            SendMsgPB(NFMsg::EGMI_ACK_OBJECT_RECORD_ENTRY, xPublicMsg, pProxyData->nFD, pData->xClientID);
-                        }
-                    }
+					SendMsgPBToGate(NFMsg::EGMI_ACK_OBJECT_RECORD_ENTRY, xPublicMsg, identOther);
                 }
             }
         }
@@ -754,15 +718,7 @@ int NFCGameServerNet_ServerModule::OnObjectListEnter( const NFIDataList& self, c
         }
 
         //可能在不同的网关呢,得到后者所在的网关FD
-        NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(ident);
-        if (pData.get())
-        {
-            NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-            if (pProxyData.get())
-            {
-                SendMsgPB(NFMsg::EGMI_ACK_OBJECT_ENTRY, xPlayerEntryInfoList, pProxyData->nFD, pData->xClientID);
-            }
-        }
+		SendMsgPBToGate(NFMsg::EGMI_ACK_OBJECT_ENTRY, xPlayerEntryInfoList, ident);
     }
 
     return 1;
@@ -797,15 +753,7 @@ int NFCGameServerNet_ServerModule::OnObjectListLeave( const NFIDataList& self, c
             continue;
         }
         //可能在不同的网关呢,得到后者所在的网关FD
-        NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(ident);
-        if (pData.get())
-        {
-            NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-            if (pProxyData.get())
-            {
-                SendMsgPB(NFMsg::EGMI_ACK_OBJECT_LEAVE, xPlayerLeaveInfoList, pProxyData->nFD, pData->xClientID);
-            }
-        }
+		SendMsgPBToGate(NFMsg::EGMI_ACK_OBJECT_LEAVE, xPlayerLeaveInfoList, ident);
     }
 
     return 1;
@@ -873,15 +821,8 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
                 NFIDENTID identOld = valueBroadCaseList.Object( i );
-                NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(identOld);
-                if (pData.get())
-                {
-                    NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-                    if (pProxyData.get())
-                    {
-                        SendMsgPB(NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt, pProxyData->nFD, pData->xClientID);
-                    }
-                }
+
+				SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt, identOld);
             }
         }
         break;
@@ -899,15 +840,8 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
                 NFIDENTID identOld = valueBroadCaseList.Object( i );
-                NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(identOld);
-                if (pData.get())
-                {
-                    NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-                    if (pProxyData.get())
-                    {
-                        SendMsgPB(NFMsg::EGMI_ACK_PROPERTY_FLOAT, xPropertyFloat, pProxyData->nFD, pData->xClientID);
-                    }
-                }
+
+				SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_FLOAT, xPropertyFloat, identOld);
             }
         }
         break;
@@ -925,15 +859,8 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
                 NFIDENTID identOld = valueBroadCaseList.Object( i );
-                NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(identOld);
-                if (pData.get())
-                {
-                    NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-                    if (pProxyData.get())
-                    {
-                        SendMsgPB(NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyDouble, pProxyData->nFD, pData->xClientID);
-                    }
-                }
+
+				SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyDouble, identOld);
             }
         }
         break;
@@ -951,15 +878,8 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
                 NFIDENTID identOld = valueBroadCaseList.Object( i );
-                NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(identOld);
-                if (pData.get())
-                {
-                    NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-                    if (pProxyData.get())
-                    {
-                        SendMsgPB(NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString, pProxyData->nFD, pData->xClientID);
-                    }
-                }
+
+				SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString, identOld);
             }
         }
         break;
@@ -977,15 +897,8 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
                 NFIDENTID identOld = valueBroadCaseList.Object( i );
-                NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(identOld);
-                if (pData.get())
-                {
-                    NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-                    if (pProxyData.get())
-                    {
-                        SendMsgPB(NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject, pProxyData->nFD, pData->xClientID);
-                    }
-                }
+
+				SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject, identOld);
             }
         }
         break;
@@ -1109,15 +1022,8 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
                 NFIDENTID identOther = valueBroadCaseList.Object( i );
-                NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(identOther);
-                if (pData.get())
-                {
-                    NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-                    if (pProxyData.get())
-                    {
-                        SendMsgPB(NFMsg::EGMI_ACK_ADD_ROW, xAddRecordRow, pProxyData->nFD, pData->xClientID);
-                    }
-                }
+
+				SendMsgPBToGate(NFMsg::EGMI_ACK_ADD_ROW, xAddRecordRow, identOther);
             }
         }
         break;
@@ -1134,15 +1040,8 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
                 NFIDENTID identOther = valueBroadCaseList.Object( i );
-                NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(identOther);
-                if (pData.get())
-                {
-                    NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-                    if (pProxyData.get())
-                    {
-                        SendMsgPB(NFMsg::EGMI_ACK_REMOVE_ROW, xReoveRecordRow, pProxyData->nFD, pData->xClientID);
-                    }
-                }
+
+				SendMsgPBToGate(NFMsg::EGMI_ACK_REMOVE_ROW, xReoveRecordRow, identOther);
             }
         }
         break;
@@ -1160,15 +1059,8 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
                 NFIDENTID identOther = valueBroadCaseList.Object( i );
-                NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(identOther);
-                if (pData.get())
-                {
-                    NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-                    if (pProxyData.get())
-                    {
-                        SendMsgPB(NFMsg::EGMI_ACK_SWAP_ROW, xSwapRecord, pProxyData->nFD, pData->xClientID);
-                    }
-                }
+
+				SendMsgPBToGate(NFMsg::EGMI_ACK_SWAP_ROW, xSwapRecord, identOther);
             }
         }
         break;
@@ -1191,15 +1083,8 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                     for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
                     {
                         NFIDENTID identOther = valueBroadCaseList.Object( i );
-                        NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(identOther);
-                        if (pData.get())
-                        {
-                            NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-                            if (pProxyData.get())
-                            {
-                                SendMsgPB(NFMsg::EGMI_ACK_RECORD_INT, xRecordChanged, pProxyData->nFD, pData->xClientID);
-                            }
-                        }
+
+						SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_INT, xRecordChanged, identOther);
                     }
                 }
                 break;
@@ -1218,15 +1103,8 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                     for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
                     {
                         NFIDENTID identOther = valueBroadCaseList.Object( i );
-                        NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(identOther);
-                        if (pData.get())
-                        {
-                            NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-                            if (pProxyData.get())
-                            {
-                                SendMsgPB(NFMsg::EGMI_ACK_RECORD_FLOAT, xRecordChanged, pProxyData->nFD, pData->xClientID);
-                            }
-                        }
+
+						SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_FLOAT, xRecordChanged, identOther);
                     }
                 }
             case TDATA_DOUBLE:
@@ -1243,15 +1121,8 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                     for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
                     {
                         NFIDENTID identOther = valueBroadCaseList.Object( i );
-                        NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(identOther);
-                        if (pData.get())
-                        {
-                            NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-                            if (pProxyData.get())
-                            {
-                                SendMsgPB(NFMsg::EGMI_ACK_RECORD_DOUBLE, xRecordChanged, pProxyData->nFD, pData->xClientID);
-                            }
-                        }
+
+						SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_DOUBLE, xRecordChanged, identOther);
                     }
                 }
                 break;
@@ -1269,15 +1140,8 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                     for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
                     {
                         NFIDENTID identOther = valueBroadCaseList.Object( i );
-                        NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(identOther);
-                        if (pData.get())
-                        {
-                            NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-                            if (pProxyData.get())
-                            {
-                                SendMsgPB(NFMsg::EGMI_ACK_RECORD_STRING, xRecordChanged, pProxyData->nFD, pData->xClientID);
-                            }
-                        }
+
+						SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_STRING, xRecordChanged, identOther);
                     }
                 }
                 break;
@@ -1295,15 +1159,8 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
                     for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
                     {
                         NFIDENTID identOther = valueBroadCaseList.Object( i );
-                        NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(identOther);
-                        if (pData.get())
-                        {
-                            NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-                            if (pProxyData.get())
-                            {
-                                SendMsgPB(NFMsg::EGMI_ACK_RECORD_OBJECT, xRecordChanged, pProxyData->nFD, pData->xClientID);
-                            }
-                        }
+
+						SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_OBJECT, xRecordChanged, identOther);
                     }
                 }
                 break;
@@ -1384,18 +1241,14 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent( const NFIDENTID& self, co
         NF_SHARE_PTR<BaseData> pDataBase = mRoleBaseData.GetElement(self);
         if (pDataBase.get())
         {
-            NF_SHARE_PTR<ServerData> pGateData = mProxyMap.GetElement(pDataBase->nGateID);
-            if (pGateData.get())
-            {
-                //回复客户端角色进入游戏世界成功了
-                NFMsg::AckEventResult xMsg;
-                xMsg.set_event_code(NFMsg::EGEC_ENTER_GAME_SUCCESS);
-                
-                *xMsg.mutable_event_client() = NFToPB(pDataBase->xClientID);
-                *xMsg.mutable_event_object() = NFToPB(self);
+			//回复客户端角色进入游戏世界成功了
+			NFMsg::AckEventResult xMsg;
+			xMsg.set_event_code(NFMsg::EGEC_ENTER_GAME_SUCCESS);
 
-                SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ENTER_GAME, xMsg, pGateData->nFD, self);
-            }
+			*xMsg.mutable_event_client() = NFToPB(pDataBase->xClientID);
+			*xMsg.mutable_event_object() = NFToPB(self);
+
+            SendMsgPBToGate(NFMsg::EGameMsgID::EGMI_ACK_ENTER_GAME, xMsg, self);
         }
     }
     else if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
@@ -1780,20 +1633,9 @@ int NFCGameServerNet_ServerModule::OnMoveEvent( const NFIDENTID& self, const int
     m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
     for (int i = 0; i < xDataList.GetCount(); ++i)
     {
-        const NFIDENTID& xIdent = xDataList.Object(i);
-        NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(xIdent);
-        if (!pData.get())
-        {
-            continue;
-        }
+		const NFIDENTID& xIdent = xDataList.Object(i);
 
-        NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-        if (!pProxyData.get())
-        {
-            continue;
-        }
-
-        SendMsgPB(NFMsg::EGMI_ACK_MOVE, xMsg, pProxyData->nFD, pData->xClientID);
+		SendMsgPBToGate(NFMsg::EGMI_ACK_MOVE, xMsg, xIdent);
     }
 
     return 0;
@@ -1831,56 +1673,47 @@ int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent( const NFIDENTID& self
     xSwapScene.set_y(fY);
     xSwapScene.set_z(fZ);
 
-    NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(self);
-    if (pData.get())
-    {
-        NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-        if (pProxyData.get())
-        {
-            SendMsgPB(NFMsg::EGMI_ACK_SWAP_SCENE, xSwapScene, pProxyData->nFD, pData->xClientID);
-        }
-    }
+	SendMsgPBToGate(NFMsg::EGMI_ACK_SWAP_SCENE, xSwapScene, self);
 
     return 0;
 }
 
 int NFCGameServerNet_ServerModule::OnNoticeEctypeAward(const NFIDENTID& self, const int nEventID, const NFIDataList& var)
 {
-    if (var.GetCount() < 4)
+    if (var.GetCount() < 5)
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "Args error", "", __FUNCTION__, __LINE__);
         return 1;
     }
 
-    int nAddmoney = var.Int(0);
-    int nAddExp = var.Int(1);
-
-    NFMsg::ReqAckEndBattle xMsg;
-    xMsg.set_money(nAddmoney);
-    xMsg.set_exp(nAddExp);
-
-    NFCDataList xItemInfoList;
-    xItemInfoList.Append(var, 2, var.GetCount());
-    if (xItemInfoList.GetCount() % 2 != 0)
+    if ((var.GetCount() - 3) % 2 != 0)
     {
         return 1;
     }
 
-    for (int i = 0; i < xItemInfoList.GetCount(); i += 2)
+	int nStartIndex = 3;//3个
+
+	int nAddMoney = var.Int(0);
+	int nAddExp = var.Int(1);
+	int nAddDiamond = var.Int(2);
+
+	NFMsg::ReqAckEndBattle xMsg;
+
+	xMsg.set_money(nAddMoney);
+	xMsg.set_exp(nAddExp);
+	xMsg.set_diamond(nAddDiamond);
+
+    for (int i = nStartIndex; i < var.GetCount(); i += 2)
     {
-        xMsg.add_item_list(xItemInfoList.String(i));
-        xMsg.add_item_count_list(xItemInfoList.Int(i + 1));
+		NFMsg::ItemStruct* pItemStruct = xMsg.add_item_list();
+		if (pItemStruct)
+		{
+			pItemStruct->set_item_id(var.String(i));
+			pItemStruct->set_item_count(var.Int(i + 1));
+		}
     }
 
-    NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(self);
-    if (pData.get())
-    {
-        NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
-        if (pProxyData.get())
-        {
-            SendMsgPB(NFMsg::EGMI_ACK_END_BATTLE, xMsg, pProxyData->nFD, pData->xClientID);
-        }
-    }
+	SendMsgPBToGate(NFMsg::EGMI_ACK_END_BATTLE, xMsg, self);
 
     return 0;
 }
@@ -2055,11 +1888,7 @@ void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
         xMsg.add_effect_value(10); // 暂时代替
     }
 
-    NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(nPlayerID);
-    if (pData.get())
-    {
-        SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SKILL_OBJECTX, xMsg, msg.GetFd(), pData->xClientID);
-    }
+	SendMsgPBToGate(NFMsg::EGMI_ACK_SKILL_OBJECTX, xMsg, nPlayerID);
 }
 
 void NFCGameServerNet_ServerModule::OnClienMove( const NFIPacket& msg )
@@ -2078,15 +1907,7 @@ void NFCGameServerNet_ServerModule::OnClienMove( const NFIPacket& msg )
     m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
     for (int i = 0; i < xDataList.GetCount(); ++i)
     {
-        NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(xDataList.Object(i));
-        if (pData.get())
-        {
-            NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(xDataList.Object(i));
-            if (pData.get())
-            {
-                SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_MOVE, xMsg, msg.GetFd(), pData->xClientID);
-            }
-        }
+		SendMsgPBToGate(NFMsg::EGMI_ACK_MOVE, xMsg, xDataList.Object(i));
     }
 }
 
@@ -2106,15 +1927,7 @@ void NFCGameServerNet_ServerModule::OnClienMoveImmune( const NFIPacket& msg )
     m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
     for (int i = 0; i < xDataList.GetCount(); ++i)
     {
-        NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(xDataList.Object(i));
-        if (pData.get())
-        {
-            NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(xDataList.Object(i));
-            if (pData.get())
-            {
-                SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_MOVE_IMMUNE, xMsg, msg.GetFd(), pData->xClientID);
-            }
-        }
+		SendMsgPBToGate(NFMsg::EGMI_ACK_MOVE_IMMUNE, xMsg, xDataList.Object(i));
     }
 }
 
@@ -2154,11 +1967,7 @@ void NFCGameServerNet_ServerModule::OnClienChatProcess( const NFIPacket& msg )
     m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
     for (int i = 0; i < xDataList.GetCount(); ++i)
     {
-        NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(xDataList.Object(i));
-        if (pData.get())
-        {
-            SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CHAT, xMsg, msg.GetFd(), pData->xClientID);
-        }
+		SendMsgPBToGate(NFMsg::EGMI_ACK_CHAT, xMsg, xDataList.Object(i));
     }
 }
 
@@ -2361,4 +2170,17 @@ void NFCGameServerNet_ServerModule::OnSLGClienCreateItem(const NFIPacket& msg)
     const int nCount = xMsg.count();
 
     m_pSLGBuildingModule->Produce(nPlayerID, xBuilID, strItemID, nCount);
+}
+
+void NFCGameServerNet_ServerModule::SendMsgPBToGate( const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFIDENTID self )
+{
+	NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(self);
+	if (pData.get())
+	{
+		NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
+		if (pProxyData.get())
+		{
+			SendMsgPB(NFMsg::EGMI_ACK_END_BATTLE, xMsg, pProxyData->nFD, pData->xClientID);
+		}
+	}
 }
