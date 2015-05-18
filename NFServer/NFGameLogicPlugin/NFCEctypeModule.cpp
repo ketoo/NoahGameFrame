@@ -215,7 +215,8 @@ int NFCEctypeModule::AddEctypeAward(const NFIDENTID& self, const int nSceneID)
     int nType = m_pElementInfoModule->GetPropertyInt(strSceneID, "SceneType");
 
     int nAddMoney = 0;
-    int nAddExp = 0;
+	int nAddExp = 0;
+	int nAddDiamnod = 0;
     NFCDataList xItemList;
     NFCDataList xCountList;
 
@@ -227,7 +228,9 @@ int NFCEctypeModule::AddEctypeAward(const NFIDENTID& self, const int nSceneID)
     // 通知客户端
     NFCDataList xAwardInfoList;
     xAwardInfoList << nAddMoney;
-    xAwardInfoList << nAddExp;
+	xAwardInfoList << nAddExp;
+	xAwardInfoList << nAddDiamnod;
+
     if (xItemList.GetCount() == xCountList.GetCount())
     {
         for (int i = 0; i < xItemList.GetCount(); ++i)
