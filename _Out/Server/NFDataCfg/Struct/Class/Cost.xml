@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is a class xml-->
+<XML>
+    <Records/>
+    <Propertys>
+        <Property Desc="消耗钱" Id="CostMoney" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="消耗钻石" Id="CostDiamond" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="消耗体力" Id="CostVP" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="消耗荣誉值" Id="CostHonour" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
+    </Propertys>
+    <Components/>
+    <Includes/>
+</XML>
