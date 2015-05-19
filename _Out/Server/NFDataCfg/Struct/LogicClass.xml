@@ -9,6 +9,7 @@
         <Class Desc="EffectData" Id="EffectData" InstancePath="../../NFDataCfg/Ini/NPC/EffectData.xml" Path="../../NFDataCfg/Struct/Class/EffectData.xml" Public="0" Type="TYPE_EFFECTDATA"/>
         <Class Desc="Equip" Id="Equip" InstancePath="../../NFDataCfg/Ini/NPC/Equip.xml" Path="../../NFDataCfg/Struct/Class/Equip.xml" Public="0" Type="TYPE_EQUIP"/>
         <Class Desc="GameServer" Id="GameServer" InstancePath="../../NFDataCfg/Ini/NPC/GameServer.xml" Path="../../NFDataCfg/Struct/Class/GameServer.xml" Public="0" Type="TYPE_GAMESERVER"/>
+        <Class Desc="Guild" Id="Guild" InstancePath="../../NFDataCfg/Ini/NPC/Guild.xml" Path="../../NFDataCfg/Struct/Class/Guild.xml" Public="0" Type="TYPE_GUILD"/>
         <Class Desc="InitProperty" Id="InitProperty" InstancePath="../../NFDataCfg/Ini/NPC/InitProperty.xml" Path="../../NFDataCfg/Struct/Class/InitProperty.xml" Public="0" Type="TYPE_INITPROPERTY"/>
         <Class Desc="Item" Id="Item" InstancePath="../../NFDataCfg/Ini/NPC/Item.xml" Path="../../NFDataCfg/Struct/Class/Item.xml" Public="0" Type="TYPE_ITEM"/>
         <Class Desc="Language" Id="Language" InstancePath="../../NFDataCfg/Ini/NPC/Language.xml" Path="../../NFDataCfg/Struct/Class/Language.xml" Public="0" Type="TYPE_LANGUAGE"/>
