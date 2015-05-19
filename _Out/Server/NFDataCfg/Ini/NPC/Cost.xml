@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is config xml-->
+<XML>
+    <Object CostDiamond="0" CostHonour="0" CostMoney="100" CostVP="0" ID="Cost_1"/>
+    <Object CostDiamond="100" CostHonour="0" CostMoney="0" CostVP="0" ID="Cost_2"/>
+</XML>
