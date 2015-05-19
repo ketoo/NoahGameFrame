@@ -22,6 +22,7 @@
 #include "NFCRebornItemConsumeProcessModule.h"
 #include "NFCAwardPackModule.h"
 #include "NFCEctypeModule.h"
+#include "NFCCostModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -52,48 +53,50 @@ const std::string NFGameLogicPlugin::GetPluginName()
 void NFGameLogicPlugin::Install()
 {
 
-    REGISTER_MODULE( pPluginManager, NFCGameLogicModule )
+    REGISTER_MODULE(pPluginManager, NFCGameLogicModule)
 
-    REGISTER_MODULE( pPluginManager, NFCBuffModule )
-    REGISTER_MODULE( pPluginManager, NFCItemModule )
-    REGISTER_MODULE( pPluginManager, NFCPackModule )
-    REGISTER_MODULE( pPluginManager, NFCSkillModule )
+    REGISTER_MODULE(pPluginManager, NFCBuffModule)
+    REGISTER_MODULE(pPluginManager, NFCItemModule)
+    REGISTER_MODULE(pPluginManager, NFCPackModule)
+    REGISTER_MODULE(pPluginManager, NFCSkillModule)
 
-    REGISTER_MODULE( pPluginManager, NFCRebornItemConsumeProcessModule )
-    REGISTER_MODULE( pPluginManager, NFCItemConsumeManagerModule )
-    REGISTER_MODULE( pPluginManager, NFCPotionItemConsumeProcessModule )
-    REGISTER_MODULE( pPluginManager, NFCCardItemConsumeProcessModule )
-    //Continue to add other item types of consumption
+    REGISTER_MODULE(pPluginManager, NFCRebornItemConsumeProcessModule)
+    REGISTER_MODULE(pPluginManager, NFCItemConsumeManagerModule)
+    REGISTER_MODULE(pPluginManager, NFCPotionItemConsumeProcessModule)
+    REGISTER_MODULE(pPluginManager, NFCCardItemConsumeProcessModule)
+    //Continue to ad other item types of consumption
 
-    REGISTER_MODULE( pPluginManager, NFCSkillConsumeManagerModule )
-    REGISTER_MODULE( pPluginManager, NFCBriefSkillConsumeProcessModule )
-    REGISTER_MODULE( pPluginManager, NFCBulletSkillConsumeProcessModule )
+    REGISTER_MODULE(pPluginManager, NFCSkillConsumeManagerModule)
+    REGISTER_MODULE(pPluginManager, NFCBriefSkillConsumeProcessModule)
+    REGISTER_MODULE(pPluginManager, NFCBulletSkillConsumeProcessModule)
     //Continue to add other skill types of consumption
 
-    REGISTER_MODULE( pPluginManager, NFCNPCRefreshModule )
+    REGISTER_MODULE(pPluginManager, NFCNPCRefreshModule)
     REGISTER_MODULE(pPluginManager, NFCAwardPackModule)
     REGISTER_MODULE(pPluginManager, NFCEctypeModule)
+    REGISTER_MODULE(pPluginManager, NFCCostModule)
 }
 
 void NFGameLogicPlugin::Uninstall()
 {
+    UNREGISTER_MODULE(pPluginManager, NFCCostModule)
     UNREGISTER_MODULE(pPluginManager, NFCEctypeModule)
     UNREGISTER_MODULE(pPluginManager, NFCAwardPackModule)
-	UNREGISTER_MODULE( pPluginManager, NFCNPCRefreshModule )
+	UNREGISTER_MODULE(pPluginManager, NFCNPCRefreshModule)
 
-    UNREGISTER_MODULE( pPluginManager, NFCBulletSkillConsumeProcessModule )
-    UNREGISTER_MODULE( pPluginManager, NFCBriefSkillConsumeProcessModule )
-    UNREGISTER_MODULE( pPluginManager, NFCSkillConsumeManagerModule )
+    UNREGISTER_MODULE(pPluginManager, NFCBulletSkillConsumeProcessModule)
+    UNREGISTER_MODULE(pPluginManager, NFCBriefSkillConsumeProcessModule)
+    UNREGISTER_MODULE(pPluginManager, NFCSkillConsumeManagerModule)
 
-    UNREGISTER_MODULE( pPluginManager, NFCCardItemConsumeProcessModule )
-    UNREGISTER_MODULE( pPluginManager, NFCPotionItemConsumeProcessModule )
-    UNREGISTER_MODULE( pPluginManager, NFCItemConsumeManagerModule )
-    UNREGISTER_MODULE( pPluginManager, NFCRebornItemConsumeProcessModule )
+    UNREGISTER_MODULE(pPluginManager, NFCCardItemConsumeProcessModule)
+    UNREGISTER_MODULE(pPluginManager, NFCPotionItemConsumeProcessModule)
+    UNREGISTER_MODULE(pPluginManager, NFCItemConsumeManagerModule)
+    UNREGISTER_MODULE(pPluginManager, NFCRebornItemConsumeProcessModule)
 
-    UNREGISTER_MODULE( pPluginManager, NFCSkillModule )
-    UNREGISTER_MODULE( pPluginManager, NFCPackModule )
-    UNREGISTER_MODULE( pPluginManager, NFCItemModule )
-    UNREGISTER_MODULE( pPluginManager, NFCBuffModule )
+    UNREGISTER_MODULE(pPluginManager, NFCSkillModule)
+    UNREGISTER_MODULE(pPluginManager, NFCPackModule)
+    UNREGISTER_MODULE(pPluginManager, NFCItemModule)
+    UNREGISTER_MODULE(pPluginManager, NFCBuffModule)
 
-    UNREGISTER_MODULE( pPluginManager, NFCGameLogicModule )
+    UNREGISTER_MODULE(pPluginManager, NFCGameLogicModule)
 }
