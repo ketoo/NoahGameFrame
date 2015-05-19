@@ -5,6 +5,7 @@
         <Class Desc="BB_Build" Id="BB_Build" InstancePath="../../NFDataCfg/Ini/NPC/BB_Build.xml" Path="../../NFDataCfg/Struct/Class/BB_Build.xml" Public="0" Type="TYPE_BB_BUILD"/>
         <Class Desc="BB_Player" Id="BB_Player" InstancePath="../../NFDataCfg/Ini/NPC/BB_Player.xml" Path="../../NFDataCfg/Struct/Class/BB_Player.xml" Public="0" Type="TYPE_BB_PLAYER"/>
         <Class Desc="Buff" Id="Buff" InstancePath="../../NFDataCfg/Ini/NPC/Buff.xml" Path="../../NFDataCfg/Struct/Class/Buff.xml" Public="0" Type="TYPE_BUFF"/>
+        <Class Desc="Cost" Id="Cost" InstancePath="../../NFDataCfg/Ini/NPC/Cost.xml" Path="../../NFDataCfg/Struct/Class/Cost.xml" Public="0" Type="TYPE_COST"/>
         <Class Desc="EffectData" Id="EffectData" InstancePath="../../NFDataCfg/Ini/NPC/EffectData.xml" Path="../../NFDataCfg/Struct/Class/EffectData.xml" Public="0" Type="TYPE_EFFECTDATA"/>
         <Class Desc="Equip" Id="Equip" InstancePath="../../NFDataCfg/Ini/NPC/Equip.xml" Path="../../NFDataCfg/Struct/Class/Equip.xml" Public="0" Type="TYPE_EQUIP"/>
         <Class Desc="GameServer" Id="GameServer" InstancePath="../../NFDataCfg/Ini/NPC/GameServer.xml" Path="../../NFDataCfg/Struct/Class/GameServer.xml" Public="0" Type="TYPE_GAMESERVER"/>
