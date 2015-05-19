@@ -23,10 +23,10 @@ public:
     NFCDataList(const NFIDataList& src);
 
     virtual ~NFCDataList();
-
+/*
     NFCDataList& operator=(const NFCDataList& src);
     NFCDataList& operator=(const NFIDataList& src);
-
+*/
     // Ìí¼Ó
     virtual bool Append(const NFIDataList& src, int start, int count);
 
