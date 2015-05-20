@@ -84,16 +84,22 @@ const bool NFCDataProcessModule::AttachData( const NFIDENTID& self )
         NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
 
         NFMsg::PlayerPropertyBase xPropertyList;
-        if(!xPropertyList.ParseFromString(pRoleData->strProperty))
-        {
-            return false;
-        }
+		if (!pRoleData->strProperty.empty() && pRoleData->strProperty != "NULL")
+		{
+			if(!xPropertyList.ParseFromString(pRoleData->strProperty))
+			{
+				return false;
+			}
+		}
 
         NFMsg::PlayerRecordList xRecordList;
-        if(!xRecordList.ParseFromString(pRoleData->strRecord))
-        {
-            return false;
-        }
+		if (!pRoleData->strRecord.empty() && pRoleData->strRecord != "NULL")
+		{
+			if(!xRecordList.ParseFromString(pRoleData->strRecord))
+			{
+				return false;
+			}
+		}
 
         mxRoleDataMap.RemoveElement(self);
 
