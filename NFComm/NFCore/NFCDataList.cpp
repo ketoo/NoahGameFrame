@@ -111,6 +111,11 @@ bool NFCDataList::Append(const NFIDataList::TData& TData)
     return false;
 }
 
+bool NFCDataList::Append( const NFIDataList& src )
+{
+	return Append(src, 0, src.GetCount());
+}
+
 bool NFCDataList::Add(const NFINT64 value)
 {
     return NFIDataList::AddValue<NFINT64>(TDATA_INT, value);

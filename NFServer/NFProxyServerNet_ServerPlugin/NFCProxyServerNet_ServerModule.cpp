@@ -283,7 +283,7 @@ int NFCProxyServerNet_ServerModule::OnSelectServerProcess( const NFIPacket& msg 
     }
 
     NFMsg::AckEventResult xSendMsg;
-    xSendMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SELECTSERVER_SUCCESS);
+    xSendMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SELECTSERVER_FAIL);
     SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, msg.GetFd());
     
     return 0;
