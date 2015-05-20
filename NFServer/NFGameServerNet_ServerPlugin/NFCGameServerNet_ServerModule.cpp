@@ -1855,14 +1855,21 @@ void NFCGameServerNet_ServerModule::OnDeleteRoleGameProcess( const NFIPacket& ms
 void NFCGameServerNet_ServerModule::OnClienSwapSceneProcess( const NFIPacket& msg )
 {
 	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckSwapScene)
+
+	NFCDataList varEntry;
+	varEntry << pObject->Self();
+	varEntry << 0;
+	varEntry << xMsg.scene_id();
+	varEntry << -1;
+	m_pEventProcessModule->DoEvent( pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry );
 }
 
 void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
 {
 	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckUseSkill)
 
-		//bc
-		const std::string& strSkillID =  xMsg.skill_id();
+	//bc
+	const std::string& strSkillID =  xMsg.skill_id();
 	int nContianerID = m_pKernelModule->GetPropertyInt(nPlayerID, "SceneID");
 	int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, "GroupID");
 
@@ -1883,7 +1890,7 @@ void NFCGameServerNet_ServerModule::OnClienMove( const NFIPacket& msg )
 {
 	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckPlayerMove)
 
-		m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "X", xMsg.target_pos(0).x());
+	m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "X", xMsg.target_pos(0).x());
 	m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Y", xMsg.target_pos(0).x());
 	m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Z", xMsg.target_pos(0).z());
 
@@ -1903,7 +1910,7 @@ void NFCGameServerNet_ServerModule::OnClienMoveImmune( const NFIPacket& msg )
 {
 	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckPlayerMove)
 
-		m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "X", xMsg.target_pos(0).x());
+	m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "X", xMsg.target_pos(0).x());
 	m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Y", xMsg.target_pos(0).x());
 	m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Z", xMsg.target_pos(0).z());
 
@@ -1949,7 +1956,7 @@ void NFCGameServerNet_ServerModule::OnClienChatProcess( const NFIPacket& msg )
 	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckPlayerChat)
 
 		//bc
-		int nContianerID = m_pKernelModule->GetPropertyInt(nPlayerID, "SceneID");
+	int nContianerID = m_pKernelModule->GetPropertyInt(nPlayerID, "SceneID");
 	int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, "GroupID");
 	NFCDataList xDataList;
 	m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
@@ -1963,7 +1970,7 @@ void NFCGameServerNet_ServerModule::OnClientJoinPVP(const NFIPacket& msg)
 {
 	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckJoinActivity)
 
-		switch (xMsg.activity_type())
+	switch (xMsg.activity_type())
 	{
 		case NFMsg::ReqAckJoinActivity_EGameActivityType_EGAT_PVP:
 			m_pPVPModule->StartPVPWar(nPlayerID);
