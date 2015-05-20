@@ -154,14 +154,14 @@
         <Property Desc="物理免疫开关" Id="PHYSICAL_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="魔法免疫开关" Id="MAGIC_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
         <Property Desc="BUFF免疫开关" Id="BUFF_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="X" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View=""/>
-        <Property Desc="" Id="Y" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View=""/>
-        <Property Desc="" Id="Z" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View=""/>
-        <Property Desc="" Id="TargetX" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View=""/>
-        <Property Desc="" Id="TargetY" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View=""/>
-        <Property Desc="" Id="TargetZ" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View=""/>
-        <Property Desc="" Id="PathStep" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View=""/>
-        <Property Desc="" Id="LoadPropertyFinish" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View=""/>
+        <Property Desc="" Id="X" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View="0"/>
+        <Property Desc="" Id="Y" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View="0"/>
+        <Property Desc="" Id="Z" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View="0"/>
+        <Property Desc="" Id="TargetX" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View="0"/>
+        <Property Desc="" Id="TargetY" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View="0"/>
+        <Property Desc="" Id="TargetZ" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View="0"/>
+        <Property Desc="" Id="PathStep" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="0"/>
+        <Property Desc="" Id="LoadPropertyFinish" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="0"/>
     </Propertys>
     <Components>
         <Component Desc="测试组件" Enable="1" Language="lua" Name="Test"/>
