@@ -519,10 +519,10 @@ bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase*
 						int nValue = pRecord->GetInt( i, j );
 						//if ( 0 != nValue )
 						{
-							NFMsg::RecordInt* pRecordInt = pAddRowStruct->add_record_int_list();
-							pRecordInt->set_row( i );
-							pRecordInt->set_col( j );
-							pRecordInt->set_data( nValue );
+							NFMsg::RecordInt* pAddData = pAddRowStruct->add_record_int_list();
+							pAddData->set_row( i );
+							pAddData->set_col( j );
+							pAddData->set_data( nValue );
 						}
 					}
 					break;
@@ -532,6 +532,7 @@ bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase*
 						//if ( dwValue < -0.01f || dwValue > 0.01f )
 						{
 							NFMsg::RecordFloat* pAddData = pAddRowStruct->add_record_float_list();
+							pAddData->set_row( i );
 							pAddData->set_col( j );
 							pAddData->set_data( dwValue );
 						}
@@ -543,6 +544,7 @@ bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase*
 						//if ( fValue < -0.01f || fValue > 0.01f )
 						{
 							NFMsg::RecordFloat* pAddData = pAddRowStruct->add_record_float_list();
+							pAddData->set_row( i );
 							pAddData->set_col( j );
 							pAddData->set_data( fValue );
 						}
@@ -554,6 +556,7 @@ bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase*
 						//if ( !strData.empty() )
 						{
 							NFMsg::RecordString* pAddData = pAddRowStruct->add_record_string_list();
+							pAddData->set_row( i );
 							pAddData->set_col( j );
 							pAddData->set_data( strData );
 						}
@@ -565,6 +568,7 @@ bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase*
 						//if ( !ident.IsNull() )
 						{
 							NFMsg::RecordObject* pAddData = pAddRowStruct->add_record_object_list();
+							pAddData->set_row( i );
 							pAddData->set_col( j );
 							*(pAddData->mutable_data()) = NFINetModule::NFToPB(ident);
 						}
@@ -1668,7 +1672,7 @@ int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent( const NFIDENTID& self
 
 int NFCGameServerNet_ServerModule::OnNoticeEctypeAward(const NFIDENTID& self, const int nEventID, const NFIDataList& var)
 {
-	if (var.GetCount() < 5)
+	if (var.GetCount() < 3)
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "Args error", "", __FUNCTION__, __LINE__);
 		return 1;
