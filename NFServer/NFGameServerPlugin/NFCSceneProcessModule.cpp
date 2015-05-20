@@ -349,7 +349,7 @@ E_SCENE_TYPE NFCSceneProcessModule::GetCloneSceneType( const int nContainerID )
     sprintf( szSceneIDName, "%d", nContainerID );
     if (m_pElementInfoModule->ExistElement(szSceneIDName))
     {
-        return (E_SCENE_TYPE)m_pElementInfoModule->GetPropertyInt(szSceneIDName, "SceneType");
+        return (E_SCENE_TYPE)m_pElementInfoModule->GetPropertyInt(szSceneIDName, "CanClone");
     }
 
     return SCENE_TYPE_ERROR;
@@ -357,7 +357,7 @@ E_SCENE_TYPE NFCSceneProcessModule::GetCloneSceneType( const int nContainerID )
 
 bool NFCSceneProcessModule::IsCloneScene(const int nSceneID)
 {
-    return GetCloneSceneType(nSceneID) == SCENE_TYPE_MAINLINE_CLONE;
+    return GetCloneSceneType(nSceneID) == 1;
 }
 
 bool NFCSceneProcessModule::LoadInitFileResource( const int& nContainerID )
