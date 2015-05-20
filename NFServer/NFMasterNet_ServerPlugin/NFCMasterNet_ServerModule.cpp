@@ -432,7 +432,7 @@ void NFCMasterNet_ServerModule::LogGameServer(const float fLastTime)
 	NF_SHARE_PTR<ServerData> pGameData = mWorldMap.First();
 	while (pGameData)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "WorldServer:", pGameData->nFD);
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "WorldServer:", pGameData->pData->server_state());
 
 		pGameData = mWorldMap.Next();
 	}
@@ -444,7 +444,7 @@ void NFCMasterNet_ServerModule::LogGameServer(const float fLastTime)
 	pGameData = mLoginMap.First();
 	while (pGameData)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "LoginServer:", pGameData->nFD);
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "LoginServer:", pGameData->pData->server_state());
 
 		pGameData = mLoginMap.Next();
 	}
