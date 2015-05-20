@@ -248,45 +248,42 @@ const bool NFCDataProcessModule::SaveDataToNoSql(const NFIDENTID& self, bool bOf
 		NF_SHARE_PTR<NFIProperty> xProperty = pProManager->First(strName);
 		while (xProperty)
 		{
-			if (!xProperty->GetSave())
+			if (xProperty->GetSave())
 			{
-				continue;
+				switch (xProperty->GetType())
+				{
+				case TDATA_INT:
+					{
+						NFMsg::PropertyInt* xPropertyInt = xPropertyList.add_property_int_list();
+						xPropertyInt->set_property_name(strName);
+						xPropertyInt->set_data(xProperty->GetInt());
+					}
+					break;
+				case TDATA_FLOAT:
+					{
+						NFMsg::PropertyFloat* xPropertyFloat = xPropertyList.add_property_float_list();
+						xPropertyFloat->set_property_name(strName);
+						xPropertyFloat->set_data(xProperty->GetFloat());
+					}
+					break;
+				case TDATA_STRING:
+					{
+						NFMsg::PropertyString* xPropertyString = xPropertyList.add_property_string_list();
+						xPropertyString->set_property_name(strName);
+						xPropertyString->set_data(xProperty->GetString());
+					}
+					break;
+				case TDATA_OBJECT:
+					{
+						NFMsg::PropertyObject* xPropertyObject = xPropertyList.add_property_object_list();
+						xPropertyObject->set_property_name(strName);
+						*xPropertyObject->mutable_data() = NFINetModule::NFToPB(xProperty->GetObject());
+					}
+					break;
+				default:
+					break;
+				}
 			}
-
-			switch (xProperty->GetType())
-			{
-			case TDATA_INT:
-				{
-					NFMsg::PropertyInt* xPropertyInt = xPropertyList.add_property_int_list();
-					xPropertyInt->set_property_name(strName);
-					xPropertyInt->set_data(xProperty->GetInt());
-				}
-				break;
-			case TDATA_FLOAT:
-				{
-					NFMsg::PropertyFloat* xPropertyFloat = xPropertyList.add_property_float_list();
-					xPropertyFloat->set_property_name(strName);
-					xPropertyFloat->set_data(xProperty->GetFloat());
-				}
-				break;
-			case TDATA_STRING:
-				{
-					NFMsg::PropertyString* xPropertyString = xPropertyList.add_property_string_list();
-					xPropertyString->set_property_name(strName);
-					xPropertyString->set_data(xProperty->GetString());
-				}
-				break;
-			case TDATA_OBJECT:
-				{
-					NFMsg::PropertyObject* xPropertyObject = xPropertyList.add_property_object_list();
-					xPropertyObject->set_property_name(strName);
-					*xPropertyObject->mutable_data() = NFINetModule::NFToPB(xProperty->GetObject());
-				}
-				break;
-			default:
-				break;
-			}
-
 
 			strName.clear();
 			xProperty = pProManager->Next(strName);
@@ -296,62 +293,59 @@ const bool NFCDataProcessModule::SaveDataToNoSql(const NFIDENTID& self, bool bOf
 		NF_SHARE_PTR<NFIRecord> xRecord = pRecordManager->First(strName);
 		while (xRecord)
 		{
-			if (!xRecord->GetSave())
+			if (xRecord->GetSave())
 			{
-				continue;
-			}
+				NFMsg::PlayerRecordBase* xRecordData = xRecordList.add_record_list();
+				xRecordData->set_record_name(strName);
 
-			NFMsg::PlayerRecordBase* xRecordData = xRecordList.add_record_list();
-			xRecordData->set_record_name(strName);
-
-			for (int i = 0; i < xRecord->GetRows(); ++i)
-			{
-				if(xRecord->IsUsed(i))
+				for (int i = 0; i < xRecord->GetRows(); ++i)
 				{
-					for (int j = 0; j < xRecord->GetCols(); ++j)
+					if(xRecord->IsUsed(i))
 					{
-						switch (xRecord->GetColType(j))
+						for (int j = 0; j < xRecord->GetCols(); ++j)
 						{
-						case TDATA_INT:
+							switch (xRecord->GetColType(j))
 							{
-								NFMsg::RecordInt* pRecordInt = xRecordData->add_record_int_list();
-								pRecordInt->set_row(i);
-								pRecordInt->set_col(j);
-								pRecordInt->set_data(xRecord->GetInt(i, j));
+							case TDATA_INT:
+								{
+									NFMsg::RecordInt* pRecordInt = xRecordData->add_record_int_list();
+									pRecordInt->set_row(i);
+									pRecordInt->set_col(j);
+									pRecordInt->set_data(xRecord->GetInt(i, j));
+								}
+								break;
+							case TDATA_FLOAT:
+								{
+									NFMsg::RecordFloat* xRecordFloat = xRecordData->add_record_float_list();
+									xRecordFloat->set_row(i);
+									xRecordFloat->set_col(j);
+									xRecordFloat->set_data(xRecord->GetFloat(i, j));
+								}
+								break;
+							case TDATA_STRING:
+								{
+									NFMsg::RecordString* xRecordString = xRecordData->add_record_string_list();
+									xRecordString->set_row(i);
+									xRecordString->set_col(j);
+									xRecordString->set_data(xRecord->GetString(i, j));
+								}
+								break;
+							case TDATA_OBJECT:
+								{
+									NFMsg::RecordObject* xRecordObejct = xRecordData->add_record_object_list();
+									xRecordObejct->set_row(i);
+									xRecordObejct->set_col(j);
+									*xRecordObejct->mutable_data() = NFINetModule::NFToPB(xRecord->GetObject(i, j));
+								}
+								break;
+							default:
+								break;
 							}
-							break;
-						case TDATA_FLOAT:
-							{
-								NFMsg::RecordFloat* xRecordFloat = xRecordData->add_record_float_list();
-								xRecordFloat->set_row(i);
-								xRecordFloat->set_col(j);
-								xRecordFloat->set_data(xRecord->GetFloat(i, j));
-							}
-							break;
-						case TDATA_STRING:
-							{
-								NFMsg::RecordString* xRecordString = xRecordData->add_record_string_list();
-								xRecordString->set_row(i);
-								xRecordString->set_col(j);
-								xRecordString->set_data(xRecord->GetString(i, j));
-							}
-							break;
-						case TDATA_OBJECT:
-							{
-								NFMsg::RecordObject* xRecordObejct = xRecordData->add_record_object_list();
-								xRecordObejct->set_row(i);
-								xRecordObejct->set_col(j);
-								*xRecordObejct->mutable_data() = NFINetModule::NFToPB(xRecord->GetObject(i, j));
-							}
-							break;
-						default:
-							break;
 						}
 					}
+
 				}
-
 			}
-
 
 			strName.clear();
 			xRecord = pRecordManager->Next(strName);
