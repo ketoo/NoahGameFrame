@@ -54,9 +54,6 @@ bool NFCDataProcessModule::AfterInit()
 
 int NFCDataProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
-	//非完整NF架构目前不使用NOSQL
-	return 0;
-
 	if ( strClassName == "Player" )
 	{
 		if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
