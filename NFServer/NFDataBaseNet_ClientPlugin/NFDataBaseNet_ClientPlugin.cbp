@@ -6,32 +6,65 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="Debug Win32">
+			<Target title="Debug x64">
 				<Option output="NFDataBaseNet_ClientPlugin" prefix_auto="1" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
+					<Add option="-DWIN" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_USRDLL" />
-					<Add directory="$(NF_HOME)" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-DNFDBNET_CLIENTPLUGIN_EXPORTS" />
+					<Add option="-DELPP_NO_DEFAULT_LOG_FILE" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/WIN32-Code/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
+					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/mysql/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
-					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
+					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/Dependencies/lib/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
 			</Target>
-			<Target title="Release Win32">
+			<Target title="Release x64">
 				<Option output="NFDataBaseNet_ClientPlugin" prefix_auto="1" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
+					<Add option="-DWIN" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_USRDLL" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-DNFDBNET_CLIENTPLUGIN_EXPORTS" />
+					<Add option="-DELPP_NO_DEFAULT_LOG_FILE" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/WIN32-Code/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
+					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/mysql/" />
 				</Compiler>
+				<Linker>
+					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/Dependencies/lib/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
+				</Linker>
 			</Target>
 		</Build>
 		<Unit filename="NFCDataBaseNet_ClientModule.cpp" />
@@ -41,7 +74,6 @@
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
-			<envvars />
 			<debugger />
 		</Extensions>
 	</Project>
