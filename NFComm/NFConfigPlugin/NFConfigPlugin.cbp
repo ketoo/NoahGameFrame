@@ -2,56 +2,52 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="NFConfigPlugin" />
+		<Option title="NFKernelPlugin" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="../../../trunk/Dependencies/lib/Debug/NFConfigPlugin" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../../trunk/Dependencies/lib/Debug" />
+				<Option output="NFConfigPlugin" prefix_auto="1" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-std=c++11" />
-					<Add option="-fpic" />
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_USRDLL" />
-					<Add directory="../../../trunk" />
-					<Add directory="../../../trunk/Dependencies/" />
-					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
-					<Add directory="../../../trunk/Dependencies/glog-0.3.3/src/windows/" />
-					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
-					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/External/" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+					<Add directory="$(SolutionDir)/Dependencies/glog-0.3.3/src/windows/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/External/" />
 				</Compiler>
 				<Linker>
-					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
-					<Add directory="../../../trunk/lib/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/lib/$(Configuration)/" />
 				</Linker>
 			</Target>
 			<Target title="Release x64">
-				<Option output="../../../trunk/Dependencies/lib/Release/NFConfigPlugin" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../../trunk/Dependencies/lib/Release" />
+				<Option output="NFConfigPlugin" prefix_auto="1" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-std=c++11" />
-					<Add option="-fpic" />
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_USRDLL" />
-					<Add directory="../../../trunk" />
-					<Add directory="../../../trunk/Dependencies/" />
-					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
-					<Add directory="../../../trunk/Dependencies/glog-0.3.3/src/windows/" />
-					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
-					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/External/" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+					<Add directory="$(SolutionDir)/Dependencies/glog-0.3.3/src/windows/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/External/" />
 				</Compiler>
 				<Linker>
-					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
-					<Add directory="../../../trunk/lib/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/lib/$(Configuration)/" />
 				</Linker>
 			</Target>
 		</Build>
@@ -63,9 +59,7 @@
 		<Unit filename="NFConfigPlugin.h" />
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
-			<envvars />
 			<code_completion />
-			<lib_finder disable_auto="1" />
 			<debugger />
 		</Extensions>
 	</Project>

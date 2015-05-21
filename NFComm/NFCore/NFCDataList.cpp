@@ -41,6 +41,7 @@ NFCDataList::~NFCDataList()
     Clear();
 };
 
+/*
 NFCDataList& NFCDataList::operator=(const NFCDataList& src)
 {
     Clear();
@@ -57,6 +58,7 @@ NFCDataList& NFCDataList::operator=(const NFIDataList& src)
     return *this;
 }
 
+*/
 // Ìí¼Ó
 bool NFCDataList::Append(const NFIDataList& src, const int start, const int count)
 {
@@ -104,7 +106,7 @@ bool NFCDataList::Append(const NFIDataList::TData& TData)
 	default:
 		break;
 	}
-    
+
 
     return false;
 }
