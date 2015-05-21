@@ -20,6 +20,9 @@
     <Filter Include="NFEctypeModule">
       <UniqueIdentifier>{f022e1db-10d7-45e2-a65f-5b24b710abc7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFCostModule">
+      <UniqueIdentifier>{a8d85b35-2159-4979-87c0-10f8e1b94235}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCGameLogicModule.h" />
@@ -65,6 +68,9 @@
     </ClInclude>
     <ClInclude Include="NFCEctypeModule.h">
       <Filter>NFEctypeModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCCostModule.h">
+      <Filter>NFCostModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="NFCEctypeModule.cpp">
       <Filter>NFEctypeModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCCostModule.cpp">
+      <Filter>NFCostModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
