@@ -125,6 +125,29 @@ public:
 		return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
 	}
 
+	bool RecivePB(const NFIPacket& msg, NFMsg::MsgBase& xMsg, google::protobuf::Message& xData)
+	{
+		if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
+		{
+			char szData[MAX_PATH] = { 0 };
+			sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
+			LogRecive(szData);
+
+			return false;
+		}
+
+		if (!xData.ParseFromString(xMsg.msg_data()))
+		{
+			char szData[MAX_PATH] = { 0 };
+			sprintf(szData, "Parse Message Failed from MsgData to ProtocolData, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
+			LogRecive(szData);
+
+			return false;
+		}
+
+		return true;
+	}
+
 	bool RecivePB(const NFIPacket& msg, google::protobuf::Message& xData, NFIDENTID& nPlayer)
 	{
 		NFMsg::MsgBase xMsg;

@@ -374,15 +374,15 @@ public:
 
         return false;
     }
-
-	NFIDataList& NFIDataList::operator=(const NFIDataList& src)
+/*
+	NFIDataList& NFIDataList::operator = (const NFIDataList& src)
 	{
 		Clear();
 		Append(src, 0, src.GetCount());
 
 		return *this;
 	}
-
+*/
     inline bool operator==(const NFIDataList& src) const
     {
         if (src.GetCount() == GetCount())
@@ -497,7 +497,7 @@ public:
     enum { STACK_SIZE = 8 };
 protected:
 	int mnUseSize;
-    std::vector<NF_SHARE_PTR<TData>> mvList;
+    std::vector< NF_SHARE_PTR<TData> > mvList;
 };
 
 inline NFIDataList::~NFIDataList() {}

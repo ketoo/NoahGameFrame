@@ -7,6 +7,7 @@
 // -------------------------------------------------------------------------
 
 #include <exception>
+#include "NFIDataList.h"
 #include "NFCRecord.h"
 
 NFCRecord::NFCRecord()
@@ -99,12 +100,12 @@ NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, co
 
 NFCRecord::~NFCRecord()
 {
-    for (auto iter = mtRecordVec.begin(); iter != mtRecordVec.end(); ++iter)
+    for (TRECORDVEC::iterator iter = mtRecordVec.begin(); iter != mtRecordVec.end(); ++iter)
     {
         iter->reset();
     }
 
-    for (auto iter = mtRecordCallback.begin(); iter != mtRecordCallback.end(); ++iter)
+    for (TRECORDCALLBACKEX::iterator iter = mtRecordCallback.begin(); iter != mtRecordCallback.end(); ++iter)
     {
         iter->reset();
     }
@@ -271,7 +272,7 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
 		if (IsKey(i))
 		{
 			//为key,value->Row，而key不能重复
-			if (TDATA_TYPE::TDATA_INT == var.Type(i))
+			if (TDATA_INT == var.Type(i))
 			{
 				if (mxIntKeyMap.find(var.Int(i)) == mxIntKeyMap.end())
 				{
@@ -282,7 +283,7 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
 					return -1;
 				}
 			}
-			else if (TDATA_TYPE::TDATA_STRING == var.Type(i))
+			else if (TDATA_STRING == var.Type(i))
 			{
 				if (mxStringKeyMap.find(var.String(i)) == mxStringKeyMap.end())
 				{
@@ -293,7 +294,7 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
 					return -1;
 				}
 			}
-			else if (TDATA_TYPE::TDATA_OBJECT == var.Type(i))
+			else if (TDATA_OBJECT == var.Type(i))
 			{
 				if (mxObjectKeyMap.find(var.Object(i)) == mxObjectKeyMap.end())
 				{
@@ -335,7 +336,7 @@ bool NFCRecord::SetInt(const int nRow, const int nCol, const NFINT64 value)
         return false;
     }
 
-	if (TDATA_TYPE::TDATA_INT != GetColType(nCol))
+	if (TDATA_INT != GetColType(nCol))
 	{
 		return false;
 	}
@@ -396,7 +397,7 @@ bool NFCRecord::SetFloat(const int nRow, const int nCol, const float value)
         return false;
     }
 
-	if (TDATA_TYPE::TDATA_FLOAT != GetColType(nCol))
+	if (TDATA_FLOAT != GetColType(nCol))
 	{
 		return false;
 	}
@@ -443,7 +444,7 @@ bool NFCRecord::SetDouble(const int nRow, const int nCol, const double value)
         return false;
     }
 
-	if (TDATA_TYPE::TDATA_DOUBLE != GetColType(nCol))
+	if (TDATA_DOUBLE != GetColType(nCol))
 	{
 		return false;
 	}
@@ -490,7 +491,7 @@ bool NFCRecord::SetString(const int nRow, const int nCol, const char* value)
         return false;
     }
 
-	if (TDATA_TYPE::TDATA_STRING != GetColType(nCol))
+	if (TDATA_STRING != GetColType(nCol))
 	{
 		return false;
 	}
@@ -552,7 +553,7 @@ bool NFCRecord::SetObject(const int nRow, const int nCol, const NFIDENTID& value
         return false;
     }
 
-	if (TDATA_TYPE::TDATA_OBJECT != GetColType(nCol))
+	if (TDATA_OBJECT != GetColType(nCol))
 	{
 		return false;
 	}
@@ -565,7 +566,7 @@ bool NFCRecord::SetObject(const int nRow, const int nCol, const NFIDENTID& value
     NFIDataList::TData var;
     var.nType = TDATA_OBJECT;
     var.variantData = value;
-	
+
     NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
 
     if (!ValidAdd(TDATA_OBJECT, var, pVar))
@@ -1169,15 +1170,15 @@ bool NFCRecord::Remove(const int nRow)
 			if (mnKeyCol >= 0)
 			{
 				TDATA_TYPE xType = GetColType(mnKeyCol);
-				if (TDATA_TYPE::TDATA_INT == xType)
+				if (TDATA_INT == xType)
 				{
 					mxIntKeyMap.erase(GetInt(nRow, mnKeyCol));
 				}
-				else if (TDATA_TYPE::TDATA_STRING == xType)
+				else if (TDATA_STRING == xType)
 				{
 					mxStringKeyMap.erase(GetString(nRow, mnKeyCol));
 				}
-				else if (TDATA_TYPE::TDATA_OBJECT == xType)
+				else if (TDATA_OBJECT == xType)
 				{
 					mxObjectKeyMap.erase(GetObject(nRow, mnKeyCol));
 				}
@@ -1190,7 +1191,7 @@ bool NFCRecord::Remove(const int nRow)
             //                 NF_SHARE_PTR<NFIDataList::TData>& var = mtRecordVec.at(GetPos(nRow, i));
             //                 var.reset();
             //            }
-			
+
 
             return true;
         }
@@ -1314,7 +1315,7 @@ bool NFCRecord::SwapRowInfo(const int nOriginRow, const int nTargetRow)
 		if (mnKeyCol >= 0)
 		{
 			TDATA_TYPE xType = GetColType(mnKeyCol);
-			if (TDATA_TYPE::TDATA_INT == xType)
+			if (TDATA_INT == xType)
 			{
 				if (IsUsed(nOriginRow))
 				{
@@ -1346,7 +1347,7 @@ bool NFCRecord::SwapRowInfo(const int nOriginRow, const int nTargetRow)
 					}
 				}
 			}
-			else if (TDATA_TYPE::TDATA_STRING == xType)
+			else if (TDATA_STRING == xType)
 			{
 				if (IsUsed(nOriginRow))
 				{
@@ -1378,7 +1379,7 @@ bool NFCRecord::SwapRowInfo(const int nOriginRow, const int nTargetRow)
 					}
 				}
 			}
-			else if (TDATA_TYPE::TDATA_OBJECT == xType)
+			else if (TDATA_OBJECT == xType)
 			{
 				if (IsUsed(nOriginRow))
 				{
