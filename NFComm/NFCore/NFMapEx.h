@@ -49,7 +49,7 @@ public:
 
     virtual bool RemoveElement(const T& name)
     {
-        NF_SHARE_PTR<TD> pData(NULL);
+        NF_SHARE_PTR<TD> pData;
         typename NFMapOBJECT::iterator itr = mObjectList.find(name);
         if (itr != mObjectList.end())
         {
@@ -71,7 +71,7 @@ public:
         }
         else
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
     }
 
@@ -79,7 +79,7 @@ public:
     {
         if (mObjectList.size() <= 0)
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
 
         mObjectCurIter = mObjectList.begin();
@@ -89,7 +89,7 @@ public:
         }
         else
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
     }
 
@@ -97,12 +97,12 @@ public:
     {
         if (mObjectCurIter == mObjectList.end())
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
 
         if (mObjectCurIter == mObjectList.end())
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
 
         ++mObjectCurIter;
@@ -112,7 +112,7 @@ public:
         }
         else
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
     }
 
@@ -120,7 +120,7 @@ public:
     {
         if (mObjectList.size() <= 0)
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
 
         mObjectCurIter = mObjectList.begin();
@@ -131,7 +131,7 @@ public:
         }
         else
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
     }
 
@@ -139,12 +139,12 @@ public:
     {
         if (mObjectCurIter == mObjectList.end())
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
 
         if (mObjectCurIter == mObjectList.end())
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
 
         mObjectCurIter++;
@@ -155,7 +155,7 @@ public:
         }
         else
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
     }
 
