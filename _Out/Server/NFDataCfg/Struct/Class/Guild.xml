@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is a class xml-->
+<XML>
+    <Records>
+        <Record Col="8" Desc="guild" Id="GuildBoss" Index="0" Private="1" Public="0" RelationValue="Friend" Row="50" Save="1" SaveInterval="0" View="0">
+            <Col Tag="GUID" Type="object"/>
+            <Col Tag="Name" Type="string"/>
+            <Col Tag="Level" Type="int"/>
+            <Col Tag="Job" Type="int"/>
+            <Col Tag="Donation" Type="int"/>
+            <Col Tag="VIP" Type="int"/>
+            <Col Tag="Offline" Type="int"/>
+            <Col Tag="Power" Type="int"/>
+        </Record>
+        <Record Col="9" Desc="guild" Id="GuildMemberList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="50" Save="1" SaveInterval="0" View="0">
+            <Col Tag="GUID" Type="object"/>
+            <Col Tag="Name" Type="string"/>
+            <Col Tag="Level" Type="int"/>
+            <Col Tag="Job" Type="int"/>
+            <Col Tag="Donation" Type="int"/>
+            <Col Tag="VIP" Type="int"/>
+            <Col Tag="Offline" Type="int"/>
+            <Col Tag="Power" Type="int"/>
+            <Col Tag="Power" Type="int"/>
+        </Record>
+        <Record Col="8" Desc="guild" Id="GuildEvent" Index="0" Private="1" Public="0" RelationValue="Friend" Row="50" Save="1" SaveInterval="0" View="0">
+            <Col Tag="GUID" Type="object"/>
+            <Col Tag="Name" Type="string"/>
+            <Col Tag="Level" Type="int"/>
+            <Col Tag="Job" Type="int"/>
+            <Col Tag="Donation" Type="int"/>
+            <Col Tag="VIP" Type="int"/>
+            <Col Tag="Offline" Type="int"/>
+            <Col Tag="Power" Type="int"/>
+        </Record>
+        <Record Col="8" Desc="guild" Id="GuildHouse" Index="0" Private="1" Public="0" RelationValue="Friend" Row="50" Save="1" SaveInterval="0" View="0">
+            <Col Tag="GUID" Type="object"/>
+            <Col Tag="Name" Type="string"/>
+            <Col Tag="Level" Type="int"/>
+            <Col Tag="Job" Type="int"/>
+            <Col Tag="Donation" Type="int"/>
+            <Col Tag="VIP" Type="int"/>
+            <Col Tag="Offline" Type="int"/>
+            <Col Tag="Power" Type="int"/>
+        </Record>
+        <Record Col="8" Desc="guild" Id="GuildSkill" Index="0" Private="1" Public="0" RelationValue="Friend" Row="50" Save="1" SaveInterval="0" View="0">
+            <Col Tag="GUID" Type="object"/>
+            <Col Tag="Name" Type="string"/>
+            <Col Tag="Level" Type="int"/>
+            <Col Tag="Job" Type="int"/>
+            <Col Tag="Donation" Type="int"/>
+            <Col Tag="VIP" Type="int"/>
+            <Col Tag="Offline" Type="int"/>
+            <Col Tag="Power" Type="int"/>
+        </Record>
+    </Records>
+    <Propertys>
+        <Property Desc="工会名" Id="Name" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="会长ID" Id="PresidentID" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="object" View="1"/>
+        <Property Desc="会长名" Id="PresidentName" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="公会排名" Id="Rank" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="工会公告" Id="GuildAD" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="工会描述" Id="GuildDesc" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
+        <Property Desc="工会财富" Id="GuildMoney" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="工会等级" Id="GuildLevel" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+        <Property Desc="工会霸占排行榜天数" Id="GuildContinueDay" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
+    </Propertys>
+    <Components>
+        <Component Desc="测试组件" Enable="1" Language="lua" Name="Test"/>
+    </Components>
+    <Includes/>
+</XML>
