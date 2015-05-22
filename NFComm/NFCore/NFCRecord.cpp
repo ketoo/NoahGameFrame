@@ -24,11 +24,11 @@ NFCRecord::NFCRecord()
 
 NFCRecord::NFCRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& valueList, const NFIDataList& keyList, const NFIDataList& descList, const NFIDataList& tagList, const NFIDataList& relateRecordList, int nMaxRow, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex)
 {
-    mVarRecordType = valueList;
-    mVarRecordDesc = descList;
-    mVarRecordKey = keyList;
-    mVarRecordTag = tagList;
-    mVarRecordRelation = relateRecordList;
+    mVarRecordType.Append(valueList);
+    mVarRecordDesc.Append(descList);
+    mVarRecordKey.Append(keyList);
+    mVarRecordTag.Append(tagList);
+    mVarRecordRelation.Append(relateRecordList);
 
     mSelf = self;
     mbSave = bSave;
