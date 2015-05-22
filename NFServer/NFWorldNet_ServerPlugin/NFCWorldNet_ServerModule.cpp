@@ -429,7 +429,7 @@ void NFCWorldNet_ServerModule::LogGameServer(const float fLastTime)
 	NF_SHARE_PTR<ServerData> pGameData = mGameMap.First();
 	while (pGameData)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "GameServer:", pGameData->nFD);
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "GameServer:", pGameData->pData->server_state());
 
 		pGameData = mGameMap.Next();
 	}
@@ -441,7 +441,7 @@ void NFCWorldNet_ServerModule::LogGameServer(const float fLastTime)
 	pGameData = mProxyMap.First();
 	while (pGameData)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "ProxyServer:", pGameData->nFD);
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "ProxyServer:", pGameData->pData->server_state());
 
 		pGameData = mProxyMap.Next();
 	}
