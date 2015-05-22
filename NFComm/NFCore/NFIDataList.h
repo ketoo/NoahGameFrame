@@ -175,7 +175,8 @@ public:
     // 合并
     virtual bool Concat(const NFIDataList& src) = 0;
     // 部分添加
-    virtual bool Append(const NFIDataList& src, int start, int count) = 0;
+	virtual bool Append(const NFIDataList& src) = 0;
+    virtual bool Append(const NFIDataList& src, const int start, const int count) = 0;
     // 部分添加
     virtual bool Append(const NFIDataList::TData& sTData) = 0;
     // 清空
