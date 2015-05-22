@@ -28,7 +28,8 @@ public:
     NFCDataList& operator=(const NFIDataList& src);
 */
     // Ìí¼Ó
-    virtual bool Append(const NFIDataList& src, int start, int count);
+	virtual bool Append(const NFIDataList& src);
+	virtual bool Append(const NFIDataList& src, const int start, const int count);
 
     // Ìí¼Ó
     virtual bool Append(const NFIDataList::TData& TData);
