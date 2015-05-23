@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--this is a class xml-->
+ï»¿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <XML>
-    <Records/>
-    <Propertys>
-        <Property Desc="½¨ÖþÀàÐÍ" Id="Type" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="0"/>
-        <Property Desc="½¨Öþ×ÓÀàÐÍ" Id="SubType" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="0"/>
-        <Property Desc="Ô¤ÉèÂ·¾¶" Id="Prefab" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="0"/>
-        <Property Desc="ÆÕÍ¨×´Ì¬ÏÂº¯Êý" Id="NormalStateFunc" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="0"/>
-        <Property Desc="Éý¼¶×´Ì¬º¯Êý" Id="UpStateFunc" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="0"/>
-        <Property Desc="Í¼±ê" Id="Icon" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="0"/>
-        <Property Desc="Ãû×Ö" Id="ShowName" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="0"/>
-        <Property Desc="ÃèÊö" Id="Desc" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="0"/>
-    </Propertys>
-    <Components/>
-    <Includes/>
+  <Propertys>
+    <Property Id="Type" Type="int" Public="0" Private="0" Save="0" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å»ºç­‘ç±»åž‹" />
+    <Property Id="SubType" Type="int" Public="0" Private="0" Save="0" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å»ºç­‘å­ç±»åž‹" />
+    <Property Id="Prefab" Type="string" Public="0" Private="0" Save="0" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="é¢„è®¾è·¯å¾„" />
+    <Property Id="NormalStateFunc" Type="string" Public="0" Private="0" Save="0" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ™®é€šçŠ¶æ€ä¸‹å‡½æ•°" />
+    <Property Id="UpStateFunc" Type="string" Public="0" Private="0" Save="0" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å‡çº§çŠ¶æ€å‡½æ•°" />
+    <Property Id="Icon" Type="string" Public="0" Private="0" Save="0" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å›¾æ ‡" />
+    <Property Id="ShowName" Type="string" Public="0" Private="0" Save="0" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="åå­—" />
+    <Property Id="Desc" Type="string" Public="0" Private="0" Save="0" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æè¿°" />
+  </Propertys>
+  <Records />
+  <Components />
 </XML>
