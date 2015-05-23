@@ -1,31 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--this is config xml-->
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <XML>
-    <Object Diamond="100" Gold="1" ID="Shop1" ItemID="Build_Altar_1" Level="1" Steel="5" Stone="1" Type="1"/>
-    <Object Diamond="200" Gold="1" ID="Shop2" ItemID="Build_Arena_1" Level="1" Steel="5" Stone="2" Type="1"/>
-    <Object Diamond="300" Gold="1" ID="Shop3" ItemID="Build_Camp_1" Level="1" Steel="1" Stone="3" Type="2"/>
-    <Object Diamond="400" Gold="1" ID="Shop4" ItemID="Build_Gold_Mine_1" Level="1" Steel="1" Stone="4" Type="2"/>
-    <Object Diamond="500" Gold="1" ID="Shop5" ItemID="Build_Item_Hourse_1" Level="1" Steel="1" Stone="5" Type="2"/>
-    <Object Diamond="600" Gold="1" ID="Shop6" ItemID="Build_League_1" Level="1" Steel="1" Stone="6" Type="2"/>
-    <Object Diamond="700" Gold="1" ID="Shop7" ItemID="Build_Magic_Hourse_1" Level="1" Steel="1" Stone="7" Type="2"/>
-    <Object Diamond="800" Gold="1" ID="Shop8" ItemID="Build_Tower_1" Level="1" Steel="1" Stone="8" Type="2"/>
-    <Object Diamond="900" Gold="1" ID="Shop9" ItemID="Build_Town_1" Level="1" Steel="1" Stone="9" Type="2"/>
-    <Object Diamond="1000" Gold="1" ID="Shop10" ItemID="Build10" Level="1" Steel="1" Stone="10" Type="2"/>
-    <Object Diamond="1100" Gold="1" ID="Shop11" ItemID="Build11" Level="1" Steel="1" Stone="11" Type="2"/>
-    <Object Diamond="1200" Gold="1" ID="Shop12" ItemID="Build12" Level="1" Steel="1" Stone="12" Type="2"/>
-    <Object Diamond="1300" Gold="1" ID="Shop13" ItemID="Build13" Level="1" Steel="1" Stone="13" Type="2"/>
-    <Object Diamond="1400" Gold="1" ID="Shop14" ItemID="Build14" Level="1" Steel="1" Stone="14" Type="2"/>
-    <Object Diamond="1500" Gold="1" ID="Shop15" ItemID="Build15" Level="1" Steel="1" Stone="15" Type="2"/>
-    <Object Diamond="1600" Gold="1" ID="Shop16" ItemID="Build16" Level="1" Steel="1" Stone="16" Type="2"/>
-    <Object Diamond="1700" Gold="1" ID="Shop17" ItemID="Build17" Level="1" Steel="1" Stone="17" Type="2"/>
-    <Object Diamond="1800" Gold="1" ID="Shop18" ItemID="Build18" Level="1" Steel="1" Stone="18" Type="2"/>
-    <Object Diamond="1900" Gold="1" ID="Shop19" ItemID="Build19" Level="1" Steel="1" Stone="19" Type="3"/>
-    <Object Diamond="2000" Gold="1" ID="Shop20" ItemID="Build20" Level="1" Steel="1" Stone="20" Type="3"/>
-    <Object Diamond="2100" Gold="1" ID="Shop21" ItemID="Build21" Level="1" Steel="1" Stone="21" Type="3"/>
-    <Object Diamond="2200" Gold="1" ID="Shop22" ItemID="Build22" Level="1" Steel="1" Stone="22" Type="3"/>
-    <Object Diamond="2300" Gold="1" ID="Shop23" ItemID="Build23" Level="1" Steel="1" Stone="23" Type="4"/>
-    <Object Diamond="2400" Gold="1" ID="Shop24" ItemID="Build24" Level="1" Steel="1" Stone="24" Type="4"/>
-    <Object Diamond="2500" Gold="1" ID="Shop25" ItemID="Build25" Level="1" Steel="1" Stone="25" Type="4"/>
-    <Object Diamond="2600" Gold="1" ID="Shop26" ItemID="Build26" Level="1" Steel="1" Stone="26" Type="5"/>
-    <Object Diamond="2700" Gold="1" ID="Shop27" ItemID="Build27" Level="1" Steel="1" Stone="27" Type="5"/>
+  <Object ID="Shop1" Type="1" ItemID="Build_Altar_1" Gold="1" Steel="5" Stone="1" Diamond="100" Level="1" />
+  <Object ID="Shop2" Type="1" ItemID="Build_Arena_1" Gold="1" Steel="5" Stone="2" Diamond="200" Level="1" />
+  <Object ID="Shop3" Type="2" ItemID="Build_Camp_1" Gold="1" Steel="1" Stone="3" Diamond="300" Level="1" />
+  <Object ID="Shop4" Type="2" ItemID="Build_Gold_Mine_1" Gold="1" Steel="1" Stone="4" Diamond="400" Level="1" />
+  <Object ID="Shop5" Type="2" ItemID="Build_Item_Hourse_1" Gold="1" Steel="1" Stone="5" Diamond="500" Level="1" />
+  <Object ID="Shop6" Type="2" ItemID="Build_League_1" Gold="1" Steel="1" Stone="6" Diamond="600" Level="1" />
+  <Object ID="Shop7" Type="2" ItemID="Build_Magic_Hourse_1" Gold="1" Steel="1" Stone="7" Diamond="700" Level="1" />
+  <Object ID="Shop8" Type="2" ItemID="Build_Tower_1" Gold="1" Steel="1" Stone="8" Diamond="800" Level="1" />
+  <Object ID="Shop9" Type="2" ItemID="Build_Town_1" Gold="1" Steel="1" Stone="9" Diamond="900" Level="1" />
+  <Object ID="Shop10" Type="2" ItemID="Build10" Gold="1" Steel="1" Stone="10" Diamond="1000" Level="1" />
+  <Object ID="Shop11" Type="2" ItemID="Build11" Gold="1" Steel="1" Stone="11" Diamond="1100" Level="1" />
+  <Object ID="Shop12" Type="2" ItemID="Build12" Gold="1" Steel="1" Stone="12" Diamond="1200" Level="1" />
+  <Object ID="Shop13" Type="2" ItemID="Build13" Gold="1" Steel="1" Stone="13" Diamond="1300" Level="1" />
+  <Object ID="Shop14" Type="2" ItemID="Build14" Gold="1" Steel="1" Stone="14" Diamond="1400" Level="1" />
+  <Object ID="Shop15" Type="2" ItemID="Build15" Gold="1" Steel="1" Stone="15" Diamond="1500" Level="1" />
+  <Object ID="Shop16" Type="2" ItemID="Build16" Gold="1" Steel="1" Stone="16" Diamond="1600" Level="1" />
+  <Object ID="Shop17" Type="2" ItemID="Build17" Gold="1" Steel="1" Stone="17" Diamond="1700" Level="1" />
+  <Object ID="Shop18" Type="2" ItemID="Build18" Gold="1" Steel="1" Stone="18" Diamond="1800" Level="1" />
+  <Object ID="Shop19" Type="3" ItemID="Build19" Gold="1" Steel="1" Stone="19" Diamond="1900" Level="1" />
+  <Object ID="Shop20" Type="3" ItemID="Build20" Gold="1" Steel="1" Stone="20" Diamond="2000" Level="1" />
+  <Object ID="Shop21" Type="3" ItemID="Build21" Gold="1" Steel="1" Stone="21" Diamond="2100" Level="1" />
+  <Object ID="Shop22" Type="3" ItemID="Build22" Gold="1" Steel="1" Stone="22" Diamond="2200" Level="1" />
+  <Object ID="Shop23" Type="4" ItemID="Build23" Gold="1" Steel="1" Stone="23" Diamond="2300" Level="1" />
+  <Object ID="Shop24" Type="4" ItemID="Build24" Gold="1" Steel="1" Stone="24" Diamond="2400" Level="1" />
+  <Object ID="Shop25" Type="4" ItemID="Build25" Gold="1" Steel="1" Stone="25" Diamond="2500" Level="1" />
+  <Object ID="Shop26" Type="5" ItemID="Build26" Gold="1" Steel="1" Stone="26" Diamond="2600" Level="1" />
+  <Object ID="Shop27" Type="5" ItemID="Build27" Gold="1" Steel="1" Stone="27" Diamond="2700" Level="1" />
 </XML>
