@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--this is a class xml-->
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <XML>
-    <Records/>
-    <Propertys>
-        <Property Desc="" Id="ServerID" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="IP" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="" Id="Port" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="SqlIP" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="" Id="SqlPort" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="SqlUser" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="" Id="SqlPwd" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="" Id="SqlName" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
-    </Propertys>
-    <Components/>
-    <Includes/>
+  <Propertys>
+    <Property Id="ServerID" Type="int" Public="1" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="IP" Type="string" Public="1" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="Port" Type="int" Public="1" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="SqlIP" Type="string" Public="1" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="SqlPort" Type="int" Public="1" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="SqlUser" Type="string" Public="1" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="SqlPwd" Type="string" Public="1" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="SqlName" Type="string" Public="1" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+  </Propertys>
+  <Records />
+  <Components />
 </XML>
