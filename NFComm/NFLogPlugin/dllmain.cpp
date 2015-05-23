@@ -21,10 +21,8 @@
 #endif
 
 //#pragma comment( lib, "Theron_d.lib" )
-#pragma comment( lib, "libglog_static_d.lib" )
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 #pragma comment( lib, "NFCore_d.a" )
-#pragma comment( lib, "libglog_d.a" )
 #pragma comment( lib, "libtherond.a")
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 #endif
@@ -41,10 +39,8 @@
 #endif
 
 //#pragma comment( lib, "Theron.lib" )
-#pragma comment( lib, "libglog_static.lib" )
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 #pragma comment( lib, "NFCore.a" )
-#pragma comment( lib, "libglog.a" )
 #pragma comment( lib, "libtherond.a")
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 #endif
