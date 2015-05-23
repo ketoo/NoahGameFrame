@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--this is config xml-->
+ï»¿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <XML>
-    <Object Chinese="ÖÐÎÄ_1" English="Langage_1" ID="Langage_1"/>
-    <Object Chinese="ÖÐÎÄ_2" English="Langage_2" ID="Langage_2"/>
-    <Object Chinese="ÖÐÎÄ_3" English="Langage_3" ID="Langage_3"/>
-    <Object Chinese="ÖÐÎÄ_4" English="Langage_4" ID="Langage_4"/>
-    <Object Chinese="ÖÐÎÄ_5" English="Langage_5" ID="Langage_5"/>
-    <Object Chinese="ÖÐÎÄ_6" English="Langage_6" ID="Langage_6"/>
+  <Object ID="Langage_1" English="Langage_1" Chinese="ä¸­æ–‡_1" />
+  <Object ID="Langage_2" English="Langage_2" Chinese="ä¸­æ–‡_2" />
+  <Object ID="Langage_3" English="Langage_3" Chinese="ä¸­æ–‡_3" />
+  <Object ID="Langage_4" English="Langage_4" Chinese="ä¸­æ–‡_4" />
+  <Object ID="Langage_5" English="Langage_5" Chinese="ä¸­æ–‡_5" />
+  <Object ID="Langage_6" English="Langage_6" Chinese="ä¸­æ–‡_6" />
 </XML>
