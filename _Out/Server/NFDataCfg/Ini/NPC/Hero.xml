@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--this is config xml-->
+ï»¿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <XML>
-    <Object ID="Hero_1" Name="²Ü²Ù" SkillID1="Hero1_skill1" SkillID2="Hero1_skill2" SkillID3="Hero1_skill3" SkillID4="Hero1_skill4"/>
-    <Object ID="Hero_2" Name="Öî¸ðÁÁ" SkillID1="Hero2_skill1" SkillID2="Hero2_skill2" SkillID3="Hero2_skill3" SkillID4="Hero2_skill4"/>
-    <Object ID="Hero_3" Name="ËïÈ¨" SkillID1="Hero3_skill1" SkillID2="Hero3_skill2" SkillID3="Hero3_skill3" SkillID4="Hero3_skill4"/>
+  <Object ID="Hero_1" Name="æ›¹æ“" SkillID1="Hero1_skill1" SkillID2="Hero1_skill2" SkillID3="Hero1_skill3" SkillID4="Hero1_skill4" />
+  <Object ID="Hero_2" Name="è¯¸è‘›äº®" SkillID1="Hero2_skill1" SkillID2="Hero2_skill2" SkillID3="Hero2_skill3" SkillID4="Hero2_skill4" />
+  <Object ID="Hero_3" Name="å­™æƒ" SkillID1="Hero3_skill1" SkillID2="Hero3_skill2" SkillID3="Hero3_skill3" SkillID4="Hero3_skill4" />
+  <Object ID="" Name="" SkillID1="" SkillID2="" SkillID3="" SkillID4="" />
+  <Object ID="" Name="" SkillID1="" SkillID2="" SkillID3="" SkillID4="" />
+  <Object ID="" Name="" SkillID1="" SkillID2="" SkillID3="" SkillID4="" />
+  <Object ID="" Name="" SkillID1="" SkillID2="" SkillID3="" SkillID4="" />
+  <Object ID="" Name="" SkillID1="" SkillID2="" SkillID3="" SkillID4="" />
 </XML>

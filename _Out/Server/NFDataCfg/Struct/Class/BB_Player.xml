@@ -1,45 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--this is a class xml-->
+ï»¿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <XML>
-    <Records>
-        <Record Col="4" Desc="ÈÎÎñÉ±¹Ö±í" Id="TaskMonsterList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="8" Save="1" SaveInterval="0" View="1">
-            <Col Tag="MonsterID" Type="string"/>
-            <Col Tag="CurrentKillCount" Type="int"/>
-            <Col Tag="RequireKillCount" Type="int"/>
-            <Col Tag="TaskID" Type="string"/>
-        </Record>
-        <Record Col="8" Desc="" Id="BuildingList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="128" Save="1" SaveInterval="0" View="1">
-            <Col Tag="BuildingID" Type="string"/>
-            <Col Tag="BuildingGUID" Type="object"/>
-            <Col Tag="State" Type="int"/>
-            <Col Tag="PosX" Type="int"/>
-            <Col Tag="PosY" Type="int"/>
-            <Col Tag="PosZ" Type="int"/>
-            <Col Tag="StateStartTime" Type="int"/>
-            <Col Tag="StateEndTime" Type="int"/>
-        </Record>
-        <Record Col="5" Desc="" Id="BuildingProduce" Index="0" Private="1" Public="0" RelationValue="Friend" Row="128" Save="1" SaveInterval="0" View="1">
-            <Col Tag="BuildingGUID" Type="object"/>
-            <Col Tag="ItemID" Type="string"/>
-            <Col Tag="LeftCount" Type="int"/>
-            <Col Tag="OnceTime" Type="int"/>
-            <Col Tag="OnceStartTime" Type="int"/>
-        </Record>
-    </Records>
-    <Propertys>
-        <Property Desc="½ÇÉ«Ãû" Id="RoleName" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="ÐÔ±ð" Id="Sex" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÖÖ×å" Id="Race" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÕóÓª" Id="Camp" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="Íæ¼ÒÏÂÏßµÄÊ±ºòÐèÒª±£´æÉÏ´ÎÔÚÏßµÄ³¡¾°" Id="LastContainerID" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="µÈ¼¶,ÊôÐÔÃû²»ÄÜ³¬¹ý20×Ö·û,ÖØÒªµÄÊÇ£¬·Ö²ãµÄÊôÐÔ£¬²»ÄÜ±£´æ£¬ÒòÎª±í»á×Ô¶¯±£´æ" Id="Level" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÏÔÊ¾µÄÃû×Ö" Id="ShowName" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="ÓµÓÐµÄ½ðÇ®" Id="Gold" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÓµÓÐµÄÊ¯Í·" Id="Stone" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÓµÓÐµÄÌú" Id="Steel" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÓµÓÐµÄ×êÊ¯" Id="Diamond" Index="1" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="LoadPropertyFinish" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View=""/>
-    </Propertys>
-    <Components/>
-    <Includes/>
+  <Propertys>
+    <Property Id="RoleName" Type="string" Public="1" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="è§’è‰²å" />
+    <Property Id="Sex" Type="int" Public="1" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ€§åˆ«" />
+    <Property Id="Race" Type="int" Public="1" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ç§æ—" />
+    <Property Id="Camp" Type="int" Public="1" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="é˜µè¥" />
+    <Property Id="LastContainerID" Type="int" Public="0" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="çŽ©å®¶ä¸‹çº¿çš„æ—¶å€™éœ€è¦ä¿å­˜ä¸Šæ¬¡åœ¨çº¿çš„åœºæ™¯" />
+    <Property Id="Level" Type="int" Public="1" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ç­‰çº§,å±žæ€§åä¸èƒ½è¶…è¿‡20å­—ç¬¦,é‡è¦çš„æ˜¯ï¼Œåˆ†å±‚çš„å±žæ€§ï¼Œä¸èƒ½ä¿å­˜ï¼Œå› ä¸ºè¡¨ä¼šè‡ªåŠ¨ä¿å­˜" />
+    <Property Id="ShowName" Type="string" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ˜¾ç¤ºçš„åå­—" />
+    <Property Id="Gold" Type="int" Public="0" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ‹¥æœ‰çš„é‡‘é’±" />
+    <Property Id="Stone" Type="int" Public="0" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ‹¥æœ‰çš„çŸ³å¤´" />
+    <Property Id="Steel" Type="int" Public="0" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ‹¥æœ‰çš„é“" />
+    <Property Id="Diamond" Type="int" Public="0" Private="1" Save="1" View="1" Index="1" SaveInterval="0" RelationValue="Friend" Desc="æ‹¥æœ‰çš„é’»çŸ³" />
+    <Property Id="LoadPropertyFinish" Type="int" Public="1" Private="1" Save="1" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+  </Propertys>
+  <Records>
+    <Record Id="TaskMonsterList" Row="8" Col="4" Public="0" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä»»åŠ¡æ€æ€ªè¡¨">
+      <Col Type="string" Tag="MonsterID" />
+      <Col Type="int" Tag="CurrentKillCount" />
+      <Col Type="int" Tag="RequireKillCount" />
+      <Col Type="string" Tag="TaskID" />
+    </Record>
+    <Record Id="BuildingList" Row="128" Col="8" Public="0" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="">
+      <Col Type="string" Tag="BuildingID" />
+      <Col Type="object" Tag="BuildingGUID" />
+      <Col Type="int" Tag="State" />
+      <Col Type="int" Tag="PosX" />
+      <Col Type="int" Tag="PosY" />
+      <Col Type="int" Tag="PosZ" />
+      <Col Type="int" Tag="StateStartTime" />
+      <Col Type="int" Tag="StateEndTime" />
+    </Record>
+    <Record Id="BuildingProduce" Row="128" Col="5" Public="0" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="">
+      <Col Type="object" Tag="BuildingGUID" />
+      <Col Type="string" Tag="ItemID" />
+      <Col Type="int" Tag="LeftCount" />
+      <Col Type="int" Tag="OnceTime" />
+      <Col Type="int" Tag="OnceStartTime" />
+    </Record>
+  </Records>
+  <Components />
 </XML>
