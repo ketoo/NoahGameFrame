@@ -1,18 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--this is config xml-->
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <XML>
-    <Object Atlas_ResID="msg_icon" ID="EFT_INFO"/>
-    <Object Atlas_ResID="Ssetting" ID="EFT_BOOOST"/>
-    <Object Atlas_ResID="Ssetting" ID="EFT_LVLUP"/>
-    <Object Atlas_ResID="Ssetting" ID="EFT_CREATE_SOLDER"/>
-    <Object Atlas_ResID="Ssetting" ID="EFT_CREATE_SPEEL"/>
-    <Object Atlas_ResID="Ssetting" ID="EFT_RESEARCH"/>
-    <Object Atlas_ResID="Ssetting" ID="EFT_COLLECT_GOLD"/>
-    <Object Atlas_ResID="Ssetting" ID="EFT_COLLECT_STONE"/>
-    <Object Atlas_ResID="Ssetting" ID="EFT_COLLECT_STEEL"/>
-    <Object Atlas_ResID="Ssetting" ID="EFT_COLLECT_DIAMOND"/>
-    <Object Atlas_ResID="Ssetting" ID="EFT_SELL"/>
-    <Object Atlas_ResID="Ssetting" ID="EFT_REPAIR"/>
-    <Object Atlas_ResID="Ssetting" ID="EFT_CANCEL"/>
-    <Object Atlas_ResID="Ssetting" ID="EFT_FINISH"/>
+  <Object ID="EFT_INFO" Atlas_ResID="msg_icon" />
+  <Object ID="EFT_BOOOST" Atlas_ResID="Ssetting" />
+  <Object ID="EFT_LVLUP" Atlas_ResID="Ssetting" />
+  <Object ID="EFT_CREATE_SOLDER" Atlas_ResID="Ssetting" />
+  <Object ID="EFT_CREATE_SPEEL" Atlas_ResID="Ssetting" />
+  <Object ID="EFT_RESEARCH" Atlas_ResID="Ssetting" />
+  <Object ID="EFT_COLLECT_GOLD" Atlas_ResID="Ssetting" />
+  <Object ID="EFT_COLLECT_STONE" Atlas_ResID="Ssetting" />
+  <Object ID="EFT_COLLECT_STEEL" Atlas_ResID="Ssetting" />
+  <Object ID="EFT_COLLECT_DIAMOND" Atlas_ResID="Ssetting" />
+  <Object ID="EFT_SELL" Atlas_ResID="Ssetting" />
+  <Object ID="EFT_REPAIR" Atlas_ResID="Ssetting" />
+  <Object ID="EFT_CANCEL" Atlas_ResID="Ssetting" />
+  <Object ID="EFT_FINISH" Atlas_ResID="Ssetting" />
 </XML>

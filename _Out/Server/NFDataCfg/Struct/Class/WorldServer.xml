@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--this is a class xml-->
+ï»¿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <XML>
-    <Records/>
-    <Propertys>
-        <Property Desc="·þÎñÆ÷ID" Id="ServerID" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="·þÎñÆ÷Ãû×Ö" Id="Name" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="×÷Îª·þÎñÆ÷Ê±£º·þÎñÆ÷×î´óÁ¬½Ó" Id="MaxOnline" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="CPU¸öÊý£¨»úÆ÷£©" Id="CpuCount" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="IPµØÖ·" Id="IP" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="×÷Îª·þÎñÆ÷Ê±£ºÏà¶Ô¿Í»§¶ËµÄport" Id="Port" Index="0" Private="0" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-    </Propertys>
-    <Components/>
-    <Includes/>
+  <Propertys>
+    <Property Id="ServerID" Type="int" Public="1" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æœåŠ¡å™¨ID" />
+    <Property Id="Name" Type="string" Public="1" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æœåŠ¡å™¨åå­—" />
+    <Property Id="MaxOnline" Type="int" Public="1" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä½œä¸ºæœåŠ¡å™¨æ—¶ï¼šæœåŠ¡å™¨æœ€å¤§è¿žæŽ¥" />
+    <Property Id="CpuCount" Type="int" Public="1" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="CPUä¸ªæ•°ï¼ˆæœºå™¨ï¼‰" />
+    <Property Id="IP" Type="string" Public="1" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="IPåœ°å€" />
+    <Property Id="Port" Type="int" Public="1" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä½œä¸ºæœåŠ¡å™¨æ—¶ï¼šç›¸å¯¹å®¢æˆ·ç«¯çš„port" />
+  </Propertys>
+  <Records />
+  <Components />
 </XML>

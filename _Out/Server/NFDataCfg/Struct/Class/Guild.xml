@@ -1,72 +1,132 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--this is a class xml-->
+ï»¿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <XML>
-    <Records>
-        <Record Col="8" Desc="guild" Id="GuildBoss" Index="0" Private="1" Public="0" RelationValue="Friend" Row="50" Save="1" SaveInterval="0" View="0">
-            <Col Tag="GUID" Type="object"/>
-            <Col Tag="Name" Type="string"/>
-            <Col Tag="Level" Type="int"/>
-            <Col Tag="Job" Type="int"/>
-            <Col Tag="Donation" Type="int"/>
-            <Col Tag="VIP" Type="int"/>
-            <Col Tag="Offline" Type="int"/>
-            <Col Tag="Power" Type="int"/>
-        </Record>
-        <Record Col="9" Desc="guild" Id="GuildMemberList" Index="0" Private="1" Public="0" RelationValue="Friend" Row="50" Save="1" SaveInterval="0" View="0">
-            <Col Tag="GUID" Type="object"/>
-            <Col Tag="Name" Type="string"/>
-            <Col Tag="Level" Type="int"/>
-            <Col Tag="Job" Type="int"/>
-            <Col Tag="Donation" Type="int"/>
-            <Col Tag="VIP" Type="int"/>
-            <Col Tag="Offline" Type="int"/>
-            <Col Tag="Power" Type="int"/>
-            <Col Tag="Power" Type="int"/>
-        </Record>
-        <Record Col="8" Desc="guild" Id="GuildEvent" Index="0" Private="1" Public="0" RelationValue="Friend" Row="50" Save="1" SaveInterval="0" View="0">
-            <Col Tag="GUID" Type="object"/>
-            <Col Tag="Name" Type="string"/>
-            <Col Tag="Level" Type="int"/>
-            <Col Tag="Job" Type="int"/>
-            <Col Tag="Donation" Type="int"/>
-            <Col Tag="VIP" Type="int"/>
-            <Col Tag="Offline" Type="int"/>
-            <Col Tag="Power" Type="int"/>
-        </Record>
-        <Record Col="8" Desc="guild" Id="GuildHouse" Index="0" Private="1" Public="0" RelationValue="Friend" Row="50" Save="1" SaveInterval="0" View="0">
-            <Col Tag="GUID" Type="object"/>
-            <Col Tag="Name" Type="string"/>
-            <Col Tag="Level" Type="int"/>
-            <Col Tag="Job" Type="int"/>
-            <Col Tag="Donation" Type="int"/>
-            <Col Tag="VIP" Type="int"/>
-            <Col Tag="Offline" Type="int"/>
-            <Col Tag="Power" Type="int"/>
-        </Record>
-        <Record Col="8" Desc="guild" Id="GuildSkill" Index="0" Private="1" Public="0" RelationValue="Friend" Row="50" Save="1" SaveInterval="0" View="0">
-            <Col Tag="GUID" Type="object"/>
-            <Col Tag="Name" Type="string"/>
-            <Col Tag="Level" Type="int"/>
-            <Col Tag="Job" Type="int"/>
-            <Col Tag="Donation" Type="int"/>
-            <Col Tag="VIP" Type="int"/>
-            <Col Tag="Offline" Type="int"/>
-            <Col Tag="Power" Type="int"/>
-        </Record>
-    </Records>
-    <Propertys>
-        <Property Desc="¹¤»áÃû" Id="Name" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="»á³¤ID" Id="PresidentID" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="object" View="1"/>
-        <Property Desc="»á³¤Ãû" Id="PresidentName" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="¹«»áÅÅÃû" Id="Rank" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="¹¤»á¹«¸æ" Id="GuildAD" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="¹¤»áÃèÊö" Id="GuildDesc" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="¹¤»á²Æ¸»" Id="GuildMoney" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="¹¤»áµÈ¼¶" Id="GuildLevel" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="¹¤»á°ÔÕ¼ÅÅÐÐ°ñÌìÊý" Id="GuildContinueDay" Index="0" Private="1" Public="1" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-    </Propertys>
-    <Components>
-        <Component Desc="²âÊÔ×é¼þ" Enable="1" Language="lua" Name="Test"/>
-    </Components>
-    <Includes/>
+  <Propertys>
+    <Property Id="Name" Type="string" Public="1" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å·¥ä¼šå" />
+    <Property Id="PresidentID" Type="object" Public="1" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä¼šé•¿ID" />
+    <Property Id="PresidentName" Type="string" Public="1" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä¼šé•¿å" />
+    <Property Id="Rank" Type="int" Public="1" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å…¬ä¼šæŽ’å" />
+    <Property Id="GuildAD" Type="string" Public="1" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å·¥ä¼šå…¬å‘Š" />
+    <Property Id="GuildDesc" Type="string" Public="1" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å·¥ä¼šæè¿°" />
+    <Property Id="GuildMoney" Type="int" Public="1" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å·¥ä¼šè´¢å¯Œ" />
+    <Property Id="GuildLevel" Type="int" Public="1" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å·¥ä¼šç­‰çº§" />
+    <Property Id="GuildContinueDay" Type="int" Public="1" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å·¥ä¼šéœ¸å æŽ’è¡Œæ¦œå¤©æ•°" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+  </Propertys>
+  <Records>
+    <Record Id="GuildBoss" Row="50" Col="8" Public="0" Private="1" Save="1" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="guild">
+      <Col Type="object" Tag="GUID" />
+      <Col Type="string" Tag="Name" />
+      <Col Type="int" Tag="Level" />
+      <Col Type="int" Tag="Job" />
+      <Col Type="int" Tag="Donation" />
+      <Col Type="int" Tag="VIP" />
+      <Col Type="int" Tag="Offline" />
+      <Col Type="int" Tag="Power" />
+    </Record>
+    <Record Id="GuildMemberList" Row="50" Col="9" Public="0" Private="1" Save="1" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="guild">
+      <Col Type="object" Tag="GUID" />
+      <Col Type="string" Tag="Name" />
+      <Col Type="int" Tag="Level" />
+      <Col Type="int" Tag="Job" />
+      <Col Type="int" Tag="Donation" />
+      <Col Type="int" Tag="VIP" />
+      <Col Type="int" Tag="Offline" />
+      <Col Type="int" Tag="Power" />
+      <Col Type="int" Tag="Power" />
+    </Record>
+    <Record Id="GuildEvent" Row="50" Col="8" Public="0" Private="1" Save="1" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="guild">
+      <Col Type="object" Tag="GUID" />
+      <Col Type="string" Tag="Name" />
+      <Col Type="int" Tag="Level" />
+      <Col Type="int" Tag="Job" />
+      <Col Type="int" Tag="Donation" />
+      <Col Type="int" Tag="VIP" />
+      <Col Type="int" Tag="Offline" />
+      <Col Type="int" Tag="Power" />
+    </Record>
+    <Record Id="GuildHouse" Row="50" Col="8" Public="0" Private="1" Save="1" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="guild">
+      <Col Type="object" Tag="GUID" />
+      <Col Type="string" Tag="Name" />
+      <Col Type="int" Tag="Level" />
+      <Col Type="int" Tag="Job" />
+      <Col Type="int" Tag="Donation" />
+      <Col Type="int" Tag="VIP" />
+      <Col Type="int" Tag="Offline" />
+      <Col Type="int" Tag="Power" />
+    </Record>
+    <Record Id="GuildSkill" Row="50" Col="8" Public="0" Private="1" Save="1" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="guild">
+      <Col Type="object" Tag="GUID" />
+      <Col Type="string" Tag="Name" />
+      <Col Type="int" Tag="Level" />
+      <Col Type="int" Tag="Job" />
+      <Col Type="int" Tag="Donation" />
+      <Col Type="int" Tag="VIP" />
+      <Col Type="int" Tag="Offline" />
+      <Col Type="int" Tag="Power" />
+    </Record>
+  </Records>
+  <Components />
 </XML>
