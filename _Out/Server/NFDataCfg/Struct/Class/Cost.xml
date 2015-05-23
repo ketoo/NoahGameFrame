@@ -1,13 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--this is a class xml-->
+ï»¿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <XML>
-    <Records/>
-    <Propertys>
-        <Property Desc="ÏûºÄÇ®" Id="CostMoney" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÏûºÄ×êÊ¯" Id="CostDiamond" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÏûºÄÌåÁ¦" Id="CostVP" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÏûºÄÈÙÓþÖµ" Id="CostHonour" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-    </Propertys>
-    <Components/>
-    <Includes/>
+  <Propertys>
+    <Property Id="CostMoney" Type="int" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ¶ˆè€—é’±" />
+    <Property Id="CostDiamond" Type="int" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ¶ˆè€—é’»çŸ³" />
+    <Property Id="CostVP" Type="int" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ¶ˆè€—ä½“åŠ›" />
+    <Property Id="CostHonour" Type="int" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ¶ˆè€—è£èª‰å€¼" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
+  </Propertys>
+  <Records />
+  <Components />
 </XML>
