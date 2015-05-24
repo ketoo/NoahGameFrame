@@ -10,6 +10,8 @@
 #define _NFC_WORLDNET_SERVER_MODULE_H_
 
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
+#include <memory>
+#include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIWorldToMasterModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
@@ -19,9 +21,8 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
-#include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include <memory>
+#include "NFComm/NFPluginModule/NFIWorldGuildModule.h"
 
 class NFCWorldNet_ServerModule
     : public NFIWorldNet_ServerModule
@@ -75,6 +76,14 @@ protected:
 
 	//////////////////////////////////////////////////////////////////////////
 	void LogGameServer(const float fLastTime);
+
+protected:
+
+	int OnCrateGuildProcess(const NFIPacket& msg);
+	int OnJoinGuildProcess(const NFIPacket& msg);
+	int OnLeaveGuildProcess(const NFIPacket& msg);
+	int OnOprGuildMemberProcess(const NFIPacket& msg);
+
 private:
 
     struct ServerData
@@ -107,7 +116,8 @@ private:
     NFIWorldLogicModule* m_pWorldLogicModule;
 	NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-    NFIEventProcessModule* m_pEventProcessModule;
+	NFIEventProcessModule* m_pEventProcessModule;
+	NFIWorldGuildModule* m_pWorldGuildModule;
 };
 
 #endif
