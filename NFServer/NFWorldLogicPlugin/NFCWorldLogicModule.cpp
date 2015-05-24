@@ -13,7 +13,6 @@
 
 bool NFCWorldLogicModule::Init()
 {
-    mnWorldContranerID = - 3;
 //     NFConfig config;
 //     bool bLoad =  config.Load("NFWorldConfig.cfg");
 //     if (!bLoad)
