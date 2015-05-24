@@ -38,8 +38,6 @@ protected:
 //     std::string mstrWorldName;
 
 protected:
-    int mnWorldContranerID;
-
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
 private:
