@@ -1,26 +1,24 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFIWorldLogicMmodule.h
+//    @FileName      :    NFIWorldGuildModule.h
 //    @Author           :    LvSheng.Huang
-//    @Date             :    2012-12-15
-//    @Module           :    NFIWorldLogicMmodule
+//    @Date             :    2015-05-24 08:51
+//    @Module           :   NFIWorldGuildModule
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_WORLDLOGIC_MODULE_H_
-#define _NFI_WORLDLOGIC_MODULE_H_
+#ifndef _NFI_WORLD_GUILD_MODULE_H_
+#define _NFI_WORLD_GUILD_MODULE_H_
 
 #include "NFILogicModule.h"
 
-/*
-    A user's attributes and the length of the table is fixed in this module,
-    and all of the data of the user only attribute data and table data.
-*/
-class NFIWorldLogicModule
+class NFIWorldGuildModule
     : public NFILogicModule
 {
 public:
-//     virtual int GetWorldID() = 0;
-//     virtual const char* GetWorldName() = 0;
+
+	virtual NFIDENTID CreateGuild(const NFIDENTID& self, const std::string& strName) = 0;
+	virtual bool JoinGuild(const NFIDENTID& self, const NFIDENTID& xGuildID) = 0;
+	virtual bool LeaveGuild(const NFIDENTID& self, const NFIDENTID& xGuildID) = 0;
 
 protected:
 private:
