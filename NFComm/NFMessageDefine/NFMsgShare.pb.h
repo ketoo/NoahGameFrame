@@ -54,6 +54,10 @@ class ReqPickDropItem;
 class ReqAcceptTask;
 class ReqCompeleteTask;
 class ReqAckJoinActivity;
+class ReqCreateGuild;
+class ReqJoinGuild;
+class ReqAckLeaveGuild;
+class ReqAckOprGuildMember;
 
 enum ReqAckPlayerChat_EGameChatType {
   ReqAckPlayerChat_EGameChatType_EGCT_NARMAL = 0,
@@ -132,6 +136,26 @@ inline bool ReqAckJoinActivity_EGameActivitySubType_Parse(
     const ::std::string& name, ReqAckJoinActivity_EGameActivitySubType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<ReqAckJoinActivity_EGameActivitySubType>(
     ReqAckJoinActivity_EGameActivitySubType_descriptor(), name, value);
+}
+enum ReqAckOprGuildMember_EGGuildMemberOprType {
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DOWN = 0,
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_UP = 1,
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICK = 2
+};
+bool ReqAckOprGuildMember_EGGuildMemberOprType_IsValid(int value);
+const ReqAckOprGuildMember_EGGuildMemberOprType ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_MIN = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DOWN;
+const ReqAckOprGuildMember_EGGuildMemberOprType ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_MAX = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICK;
+const int ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_ARRAYSIZE = ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ReqAckOprGuildMember_EGGuildMemberOprType_descriptor();
+inline const ::std::string& ReqAckOprGuildMember_EGGuildMemberOprType_Name(ReqAckOprGuildMember_EGGuildMemberOprType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ReqAckOprGuildMember_EGGuildMemberOprType_descriptor(), value);
+}
+inline bool ReqAckOprGuildMember_EGGuildMemberOprType_Parse(
+    const ::std::string& name, ReqAckOprGuildMember_EGGuildMemberOprType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ReqAckOprGuildMember_EGGuildMemberOprType>(
+    ReqAckOprGuildMember_EGGuildMemberOprType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -2078,6 +2102,392 @@ class ReqAckJoinActivity : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static ReqAckJoinActivity* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class ReqCreateGuild : public ::google::protobuf::Message {
+ public:
+  ReqCreateGuild();
+  virtual ~ReqCreateGuild();
+
+  ReqCreateGuild(const ReqCreateGuild& from);
+
+  inline ReqCreateGuild& operator=(const ReqCreateGuild& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqCreateGuild& default_instance();
+
+  void Swap(ReqCreateGuild* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqCreateGuild* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqCreateGuild& from);
+  void MergeFrom(const ReqCreateGuild& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string guild_name = 1;
+  inline bool has_guild_name() const;
+  inline void clear_guild_name();
+  static const int kGuildNameFieldNumber = 1;
+  inline const ::std::string& guild_name() const;
+  inline void set_guild_name(const ::std::string& value);
+  inline void set_guild_name(const char* value);
+  inline void set_guild_name(const char* value, size_t size);
+  inline ::std::string* mutable_guild_name();
+  inline ::std::string* release_guild_name();
+  inline void set_allocated_guild_name(::std::string* guild_name);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqCreateGuild)
+ private:
+  inline void set_has_guild_name();
+  inline void clear_has_guild_name();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* guild_name_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqCreateGuild* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqJoinGuild : public ::google::protobuf::Message {
+ public:
+  ReqJoinGuild();
+  virtual ~ReqJoinGuild();
+
+  ReqJoinGuild(const ReqJoinGuild& from);
+
+  inline ReqJoinGuild& operator=(const ReqJoinGuild& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqJoinGuild& default_instance();
+
+  void Swap(ReqJoinGuild* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqJoinGuild* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqJoinGuild& from);
+  void MergeFrom(const ReqJoinGuild& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident guild_id = 1;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqJoinGuild)
+ private:
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqJoinGuild* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckLeaveGuild : public ::google::protobuf::Message {
+ public:
+  ReqAckLeaveGuild();
+  virtual ~ReqAckLeaveGuild();
+
+  ReqAckLeaveGuild(const ReqAckLeaveGuild& from);
+
+  inline ReqAckLeaveGuild& operator=(const ReqAckLeaveGuild& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckLeaveGuild& default_instance();
+
+  void Swap(ReqAckLeaveGuild* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckLeaveGuild* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckLeaveGuild& from);
+  void MergeFrom(const ReqAckLeaveGuild& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident guild_id = 1;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckLeaveGuild)
+ private:
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckLeaveGuild* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckOprGuildMember : public ::google::protobuf::Message {
+ public:
+  ReqAckOprGuildMember();
+  virtual ~ReqAckOprGuildMember();
+
+  ReqAckOprGuildMember(const ReqAckOprGuildMember& from);
+
+  inline ReqAckOprGuildMember& operator=(const ReqAckOprGuildMember& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckOprGuildMember& default_instance();
+
+  void Swap(ReqAckOprGuildMember* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckOprGuildMember* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckOprGuildMember& from);
+  void MergeFrom(const ReqAckOprGuildMember& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef ReqAckOprGuildMember_EGGuildMemberOprType EGGuildMemberOprType;
+  static const EGGuildMemberOprType EGAT_DOWN = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DOWN;
+  static const EGGuildMemberOprType EGAT_UP = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_UP;
+  static const EGGuildMemberOprType EGAT_KICK = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICK;
+  static inline bool EGGuildMemberOprType_IsValid(int value) {
+    return ReqAckOprGuildMember_EGGuildMemberOprType_IsValid(value);
+  }
+  static const EGGuildMemberOprType EGGuildMemberOprType_MIN =
+    ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_MIN;
+  static const EGGuildMemberOprType EGGuildMemberOprType_MAX =
+    ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_MAX;
+  static const int EGGuildMemberOprType_ARRAYSIZE =
+    ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  EGGuildMemberOprType_descriptor() {
+    return ReqAckOprGuildMember_EGGuildMemberOprType_descriptor();
+  }
+  static inline const ::std::string& EGGuildMemberOprType_Name(EGGuildMemberOprType value) {
+    return ReqAckOprGuildMember_EGGuildMemberOprType_Name(value);
+  }
+  static inline bool EGGuildMemberOprType_Parse(const ::std::string& name,
+      EGGuildMemberOprType* value) {
+    return ReqAckOprGuildMember_EGGuildMemberOprType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident guild_id = 1;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // required .NFMsg.Ident member_id = 2;
+  inline bool has_member_id() const;
+  inline void clear_member_id();
+  static const int kMemberIdFieldNumber = 2;
+  inline const ::NFMsg::Ident& member_id() const;
+  inline ::NFMsg::Ident* mutable_member_id();
+  inline ::NFMsg::Ident* release_member_id();
+  inline void set_allocated_member_id(::NFMsg::Ident* member_id);
+
+  // required .NFMsg.ReqAckOprGuildMember.EGGuildMemberOprType type = 3;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 3;
+  inline ::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType type() const;
+  inline void set_type(::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckOprGuildMember)
+ private:
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
+  inline void set_has_member_id();
+  inline void clear_has_member_id();
+  inline void set_has_type();
+  inline void clear_has_type();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_id_;
+  ::NFMsg::Ident* member_id_;
+  int type_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckOprGuildMember* default_instance_;
+};
 // ===================================================================
 
 
@@ -3970,6 +4380,267 @@ inline void ReqAckJoinActivity::set_sub_activity_type(::NFMsg::ReqAckJoinActivit
   sub_activity_type_ = value;
 }
 
+// -------------------------------------------------------------------
+
+// ReqCreateGuild
+
+// required string guild_name = 1;
+inline bool ReqCreateGuild::has_guild_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqCreateGuild::set_has_guild_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqCreateGuild::clear_has_guild_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqCreateGuild::clear_guild_name() {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    guild_name_->clear();
+  }
+  clear_has_guild_name();
+}
+inline const ::std::string& ReqCreateGuild::guild_name() const {
+  return *guild_name_;
+}
+inline void ReqCreateGuild::set_guild_name(const ::std::string& value) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void ReqCreateGuild::set_guild_name(const char* value) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void ReqCreateGuild::set_guild_name(const char* value, size_t size) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqCreateGuild::mutable_guild_name() {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  return guild_name_;
+}
+inline ::std::string* ReqCreateGuild::release_guild_name() {
+  clear_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = guild_name_;
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqCreateGuild::set_allocated_guild_name(::std::string* guild_name) {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete guild_name_;
+  }
+  if (guild_name) {
+    set_has_guild_name();
+    guild_name_ = guild_name;
+  } else {
+    clear_has_guild_name();
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqJoinGuild
+
+// required .NFMsg.Ident guild_id = 1;
+inline bool ReqJoinGuild::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqJoinGuild::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqJoinGuild::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqJoinGuild::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& ReqJoinGuild::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* ReqJoinGuild::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* ReqJoinGuild::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void ReqJoinGuild::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckLeaveGuild
+
+// required .NFMsg.Ident guild_id = 1;
+inline bool ReqAckLeaveGuild::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckLeaveGuild::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckLeaveGuild::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckLeaveGuild::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& ReqAckLeaveGuild::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckLeaveGuild::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckLeaveGuild::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void ReqAckLeaveGuild::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckOprGuildMember
+
+// required .NFMsg.Ident guild_id = 1;
+inline bool ReqAckOprGuildMember::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckOprGuildMember::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckOprGuildMember::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckOprGuildMember::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& ReqAckOprGuildMember::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprGuildMember::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprGuildMember::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void ReqAckOprGuildMember::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// required .NFMsg.Ident member_id = 2;
+inline bool ReqAckOprGuildMember::has_member_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckOprGuildMember::set_has_member_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckOprGuildMember::clear_has_member_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckOprGuildMember::clear_member_id() {
+  if (member_id_ != NULL) member_id_->::NFMsg::Ident::Clear();
+  clear_has_member_id();
+}
+inline const ::NFMsg::Ident& ReqAckOprGuildMember::member_id() const {
+  return member_id_ != NULL ? *member_id_ : *default_instance_->member_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprGuildMember::mutable_member_id() {
+  set_has_member_id();
+  if (member_id_ == NULL) member_id_ = new ::NFMsg::Ident;
+  return member_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprGuildMember::release_member_id() {
+  clear_has_member_id();
+  ::NFMsg::Ident* temp = member_id_;
+  member_id_ = NULL;
+  return temp;
+}
+inline void ReqAckOprGuildMember::set_allocated_member_id(::NFMsg::Ident* member_id) {
+  delete member_id_;
+  member_id_ = member_id;
+  if (member_id) {
+    set_has_member_id();
+  } else {
+    clear_has_member_id();
+  }
+}
+
+// required .NFMsg.ReqAckOprGuildMember.EGGuildMemberOprType type = 3;
+inline bool ReqAckOprGuildMember::has_type() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckOprGuildMember::set_has_type() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckOprGuildMember::clear_has_type() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckOprGuildMember::clear_type() {
+  type_ = 0;
+  clear_has_type();
+}
+inline ::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType ReqAckOprGuildMember::type() const {
+  return static_cast< ::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType >(type_);
+}
+inline void ReqAckOprGuildMember::set_type(::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType value) {
+  assert(::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType_IsValid(value));
+  set_has_type();
+  type_ = value;
+}
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -3994,6 +4665,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckJoinActivity_EGam
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckJoinActivity_EGameActivitySubType>() {
   return ::NFMsg::ReqAckJoinActivity_EGameActivitySubType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType>() {
+  return ::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType_descriptor();
 }
 
 }  // namespace google
