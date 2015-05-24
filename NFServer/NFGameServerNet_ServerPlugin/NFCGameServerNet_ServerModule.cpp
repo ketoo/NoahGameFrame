@@ -172,7 +172,14 @@ int NFCGameServerNet_ServerModule::OnRecivePSPack( const NFIPacket& msg )
 	case NFMsg::EGameMsgID::EGMI_REQ_CREATE_ITEM:
 		OnSLGClienCreateItem(msg);
 		break;
-
+		//////////////////////////////////////////////////////////////////////////
+	case NFMsg::EGameMsgID::EGMI_REQ_CREATE_GUILD:
+	case NFMsg::EGameMsgID::EGMI_REQ_JOIN_GUILD:
+	case NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GUILD:
+	case NFMsg::EGameMsgID::EGMI_REQ_OPR_GUILD:
+		OnTransWorld(msg);
+		break;
+		//////////////////////////////////////////////////////////////////////////
 	default:
 		break;
 	}
@@ -2210,4 +2217,9 @@ void NFCGameServerNet_ServerModule::PlayerLeaveGameServer( const NFIDENTID self 
 	}
 
 	pServerData->xRoleInfo.erase(self);
+}
+
+void NFCGameServerNet_ServerModule::OnTransWorld( const NFIPacket& msg )
+{
+
 }
