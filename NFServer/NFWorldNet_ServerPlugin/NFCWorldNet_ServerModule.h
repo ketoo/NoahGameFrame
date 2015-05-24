@@ -79,10 +79,10 @@ protected:
 
 protected:
 
-	int OnCrateGuildProcess(const NFIPacket& msg);
-	int OnJoinGuildProcess(const NFIPacket& msg);
-	int OnLeaveGuildProcess(const NFIPacket& msg);
-	int OnOprGuildMemberProcess(const NFIPacket& msg);
+	void OnCrateGuildProcess(const NFIPacket& msg);
+	void OnJoinGuildProcess(const NFIPacket& msg);
+	void OnLeaveGuildProcess(const NFIPacket& msg);
+	void OnOprGuildMemberProcess(const NFIPacket& msg);
 
 private:
 
