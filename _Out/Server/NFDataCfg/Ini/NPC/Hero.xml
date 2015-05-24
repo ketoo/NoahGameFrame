@@ -3,9 +3,4 @@
   <Object ID="Hero_1" Name="曹操" SkillID1="Hero1_skill1" SkillID2="Hero1_skill2" SkillID3="Hero1_skill3" SkillID4="Hero1_skill4" />
   <Object ID="Hero_2" Name="诸葛亮" SkillID1="Hero2_skill1" SkillID2="Hero2_skill2" SkillID3="Hero2_skill3" SkillID4="Hero2_skill4" />
   <Object ID="Hero_3" Name="孙权" SkillID1="Hero3_skill1" SkillID2="Hero3_skill2" SkillID3="Hero3_skill3" SkillID4="Hero3_skill4" />
-  <Object ID="" Name="" SkillID1="" SkillID2="" SkillID3="" SkillID4="" />
-  <Object ID="" Name="" SkillID1="" SkillID2="" SkillID3="" SkillID4="" />
-  <Object ID="" Name="" SkillID1="" SkillID2="" SkillID3="" SkillID4="" />
-  <Object ID="" Name="" SkillID1="" SkillID2="" SkillID3="" SkillID4="" />
-  <Object ID="" Name="" SkillID1="" SkillID2="" SkillID3="" SkillID4="" />
 </XML>
