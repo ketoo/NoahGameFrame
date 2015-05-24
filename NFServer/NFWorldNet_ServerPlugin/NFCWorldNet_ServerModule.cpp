@@ -469,40 +469,32 @@ void NFCWorldNet_ServerModule::LogGameServer(const float fLastTime)
 
 }
 
-int NFCWorldNet_ServerModule::OnCrateGuildProcess( const NFIPacket& msg )
+void NFCWorldNet_ServerModule::OnCrateGuildProcess( const NFIPacket& msg )
 {
-	NFMsg::ReqCreateGuild xMsg;
-	CLIENT_MSG_PROCESS(msg, xMsg)
+	CLIENT_MSG_PROCESS_NO_OBJECT(msg, NFMsg::ReqCreateGuild)
 
 	m_pWorldGuildModule->CreateGuild(nPlayerID, xMsg.guild_name());
-	
-	return 0;
 }
 
-int NFCWorldNet_ServerModule::OnJoinGuildProcess( const NFIPacket& msg )
+void NFCWorldNet_ServerModule::OnJoinGuildProcess( const NFIPacket& msg )
 {
-	NFMsg::ReqJoinGuild xMsg;
-	CLIENT_MSG_PROCESS(msg, xMsg)
+	CLIENT_MSG_PROCESS_NO_OBJECT(msg, NFMsg::ReqJoinGuild)
 
 	m_pWorldGuildModule->JoinGuild(nPlayerID, PBToNF(xMsg.guild_id()));
 
-	return 0;
 }
 
-int NFCWorldNet_ServerModule::OnLeaveGuildProcess( const NFIPacket& msg )
+void NFCWorldNet_ServerModule::OnLeaveGuildProcess( const NFIPacket& msg )
 {
-	NFMsg::ReqAckLeaveGuild xMsg;
-	CLIENT_MSG_PROCESS(msg, xMsg)
+	CLIENT_MSG_PROCESS_NO_OBJECT(msg, NFMsg::ReqAckLeaveGuild)
 
 	m_pWorldGuildModule->LeaveGuild(nPlayerID, PBToNF(xMsg.guild_id()));
 
-	return 0;
 }
 
-int NFCWorldNet_ServerModule::OnOprGuildMemberProcess( const NFIPacket& msg )
+void NFCWorldNet_ServerModule::OnOprGuildMemberProcess( const NFIPacket& msg )
 {
-	NFMsg::ReqAckOprGuildMember xMsg;
-	CLIENT_MSG_PROCESS(msg, xMsg)
+	CLIENT_MSG_PROCESS_NO_OBJECT(msg, NFMsg::ReqAckOprGuildMember)
 
 	NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType eOprType = xMsg.type();
 	switch (eOprType)
@@ -520,5 +512,4 @@ int NFCWorldNet_ServerModule::OnOprGuildMemberProcess( const NFIPacket& msg )
 		break;
 	}
 
-	return 0;
 }
