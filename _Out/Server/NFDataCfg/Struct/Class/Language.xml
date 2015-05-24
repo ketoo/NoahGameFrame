@@ -3,18 +3,6 @@
   <Propertys>
     <Property Id="English" Type="string" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
     <Property Id="Chinese" Type="string" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
-    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
-    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
-    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
-    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
-    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
-    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
-    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
-    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
-    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
-    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
-    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
-    <Property Id="" Type="" Public="" Private="" Save="" View="" Index="" SaveInterval="" RelationValue="" Desc="" />
   </Propertys>
   <Records />
   <Components />
