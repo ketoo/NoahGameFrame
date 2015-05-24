@@ -32,7 +32,18 @@ public:
 	virtual NFIDENTID CreateGuild(const NFIDENTID& self, const std::string& strName);
 	virtual bool JoinGuild(const NFIDENTID& self, const NFIDENTID& xGuildID);
 	virtual bool LeaveGuild(const NFIDENTID& self, const NFIDENTID& xGuildID);
+	virtual bool UpGuildMmember(const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember);
+	virtual bool DownGuildMmember(const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember);
+	virtual bool KickGuildMmember(const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember);
 
+
+	//////////////////////其次考虑参数////////////////////////////////////////////////////
+	virtual bool GetGuildBaseInfo(const NFIDENTID& self, const NFIDENTID& xGuildID);
+	virtual bool GetGuildMemberInfo(const NFIDENTID& self, const NFIDENTID& xGuildID);
+	virtual bool GetGuildMemberInfo(const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember);
+
+
+	//////////////////////////////////////////////////////////////////////////
 protected:
 
 protected:
