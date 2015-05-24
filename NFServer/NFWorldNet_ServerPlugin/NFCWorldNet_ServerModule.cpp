@@ -22,14 +22,16 @@ bool NFCWorldNet_ServerModule::AfterInit()
     m_pWorldLogicModule = dynamic_cast<NFIWorldLogicModule*>(pPluginManager->FindModule("NFCWorldLogicModule"));
     m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-    m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
-
+	m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
+	m_pWorldGuildModule = dynamic_cast<NFIWorldGuildModule*>(pPluginManager->FindModule("NFCWorldGuildModule"));
+	
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pWorldLogicModule);
     assert(NULL != m_pLogModule);
     assert(NULL != m_pElementInfoModule);
-    assert(NULL != m_pLogicClassModule);
+	assert(NULL != m_pLogicClassModule);
+	assert(NULL != m_pWorldGuildModule);
 
     m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, this, &NFCWorldNet_ServerModule::OnSelectServerEvent);
 
@@ -304,6 +306,20 @@ int NFCWorldNet_ServerModule::OnRecivePack( const NFIPacket& msg )
         case NFMsg::EGameMsgID::EGMI_GTW_GAME_REFRESH:
             OnRefreshGameServerInfoProcess(msg);
             break;
+			///////////GUILD///////////////////////////////////////////////////////////////
+		case NFMsg::EGameMsgID::EGMI_REQ_CREATE_GUILD:
+			OnCrateGuildProcess(msg);
+			break;
+		case NFMsg::EGameMsgID::EGMI_REQ_JOIN_GUILD:
+			OnJoinGuildProcess(msg);
+			break;
+		case NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GUILD:
+			OnLeaveGuildProcess(msg);
+			break;
+		case NFMsg::EGameMsgID::EGMI_REQ_OPR_GUILD:
+			OnOprGuildMemberProcess(msg);
+			break;
+			//////////////////////////////////////////////////////////////////////////
         default:
             break;
     }
@@ -451,4 +467,58 @@ void NFCWorldNet_ServerModule::LogGameServer(const float fLastTime)
 
 
 
+}
+
+int NFCWorldNet_ServerModule::OnCrateGuildProcess( const NFIPacket& msg )
+{
+	NFMsg::ReqCreateGuild xMsg;
+	CLIENT_MSG_PROCESS(msg, xMsg)
+
+	m_pWorldGuildModule->CreateGuild(nPlayerID, xMsg.guild_name());
+	
+	return 0;
+}
+
+int NFCWorldNet_ServerModule::OnJoinGuildProcess( const NFIPacket& msg )
+{
+	NFMsg::ReqJoinGuild xMsg;
+	CLIENT_MSG_PROCESS(msg, xMsg)
+
+	m_pWorldGuildModule->JoinGuild(nPlayerID, PBToNF(xMsg.guild_id()));
+
+	return 0;
+}
+
+int NFCWorldNet_ServerModule::OnLeaveGuildProcess( const NFIPacket& msg )
+{
+	NFMsg::ReqAckLeaveGuild xMsg;
+	CLIENT_MSG_PROCESS(msg, xMsg)
+
+	m_pWorldGuildModule->LeaveGuild(nPlayerID, PBToNF(xMsg.guild_id()));
+
+	return 0;
+}
+
+int NFCWorldNet_ServerModule::OnOprGuildMemberProcess( const NFIPacket& msg )
+{
+	NFMsg::ReqAckOprGuildMember xMsg;
+	CLIENT_MSG_PROCESS(msg, xMsg)
+
+	NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType eOprType = xMsg.type();
+	switch (eOprType)
+	{
+	case NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType::ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_UP:
+		m_pWorldGuildModule->UpGuildMmember(nPlayerID, PBToNF(xMsg.guild_id()), PBToNF(xMsg.member_id()));
+		break;
+	case NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType::ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DOWN:
+		m_pWorldGuildModule->DownGuildMmember(nPlayerID, PBToNF(xMsg.guild_id()), PBToNF(xMsg.member_id()));
+		break;
+	case NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType::ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICK:
+		m_pWorldGuildModule->KickGuildMmember(nPlayerID, PBToNF(xMsg.guild_id()), PBToNF(xMsg.member_id()));
+		break;
+	default:
+		break;
+	}
+
+	return 0;
 }
