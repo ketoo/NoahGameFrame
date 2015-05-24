@@ -71,6 +71,16 @@ public:
 	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "FromClient Object do not Exist", "", __FUNCTION__, __LINE__); \
 	return;                                         \
 }
+
+#define CLIENT_MSG_PROCESS_NO_OBJECT(packet, msg)                 \
+	NFIDENTID nPlayerID;                                \
+	msg xMsg;                                           \
+	if (!RecivePB(packet, xMsg, nPlayerID))             \
+{                                                   \
+	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
+	return;                                         \
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 class NFINetModule
