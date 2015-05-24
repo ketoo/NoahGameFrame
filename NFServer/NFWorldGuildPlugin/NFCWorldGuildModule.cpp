@@ -57,3 +57,39 @@ bool NFCWorldGuildModule::LeaveGuild( const NFIDENTID& self, const NFIDENTID& xG
 	return false;
 
 }
+
+bool NFCWorldGuildModule::UpGuildMmember( const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember )
+{
+	return false;
+
+}
+
+bool NFCWorldGuildModule::DownGuildMmember( const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember )
+{
+	return false;
+
+}
+
+bool NFCWorldGuildModule::KickGuildMmember( const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember )
+{
+	return false;
+
+}
+
+bool NFCWorldGuildModule::GetGuildBaseInfo( const NFIDENTID& self, const NFIDENTID& xGuildID )
+{
+	return false;
+
+}
+
+bool NFCWorldGuildModule::GetGuildMemberInfo( const NFIDENTID& self, const NFIDENTID& xGuildID )
+{
+	return false;
+
+}
+
+bool NFCWorldGuildModule::GetGuildMemberInfo( const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember )
+{
+	return false;
+
+}
