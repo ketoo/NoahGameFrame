@@ -2,6 +2,8 @@ NoahGameFrame
 =============
 ######Copyright © http://www.yowoyo.com
 
+#####交流QQ群：341159815
+
 ##What is it?
 
 NF is a lightweight, fast, scalable, distributed plugin framework.
