@@ -1,9 +1,4 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <XML>
   <Object ID="MasterServer_1" ServerID="000106001" Name="MasterServer_1" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="12001" />
-  <Object ID="" ServerID="" Name="" MaxOnline="" CpuCount="" IP="" Port="" />
-  <Object ID="" ServerID="" Name="" MaxOnline="" CpuCount="" IP="" Port="" />
-  <Object ID="" ServerID="" Name="" MaxOnline="" CpuCount="" IP="" Port="" />
-  <Object ID="" ServerID="" Name="" MaxOnline="" CpuCount="" IP="" Port="" />
-  <Object ID="" ServerID="" Name="" MaxOnline="" CpuCount="" IP="" Port="" />
 </XML>
