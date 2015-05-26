@@ -106,7 +106,7 @@ How to build:
 
 * 4:open the solution by code::block:		trunk\NF.workspace
 
-* 5:add c++11 optional for every project of this soluetion
+* 5:add c++11 optional for every project of this solution
 
 * 6:build library: NFNet, NFCore, NFEventTriggerPlugin, NFKernelPlugin, Theron, libprotocolbuf[libprotocolbuf-lite], NFLogPlugin, NFPluginLoader
 
