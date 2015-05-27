@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--this is a class xml-->
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <XML>
-    <Records/>
-    <Propertys>
-        <Property Desc="" Id="ID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="" Id="ClassName" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="" Id="SceneID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="0ȫ�ֹ㲥" Id="GroupID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="ConfigID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
-    </Propertys>
-    <Components/>
-    <Includes/>
+  <Propertys>
+    <Property Id="ID" Type="string" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="ClassName" Type="string" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="SceneID" Type="int" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="GroupID" Type="int" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="0全局广播" />
+    <Property Id="ConfigID" Type="string" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+  </Propertys>
+  <Records />
+  <Components />
 </XML>
