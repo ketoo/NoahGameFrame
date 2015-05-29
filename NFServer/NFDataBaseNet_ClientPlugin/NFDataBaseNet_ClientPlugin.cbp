@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="NFLoginNet_ClientPlugin" />
+		<Option title="NFDataBaseNet_ClientPlugin" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -13,10 +13,10 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-DWIN" />
+					<Add option="-std=c++11" />
+					<Add option="-g" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_USRDLL" />
-					<Add option="-D_WINDOWS" />
 					<Add option="-DNFDBNET_CLIENTPLUGIN_EXPORTS" />
 					<Add option="-DELPP_NO_DEFAULT_LOG_FILE" />
 					<Add directory="$(SolutionDir)" />
@@ -43,11 +43,9 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-DWIN" />
+					<Add option="-std=c++11" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_USRDLL" />
-					<Add option="-D_WINDOWS" />
-					<Add option="-DNFDBNET_CLIENTPLUGIN_EXPORTS" />
 					<Add option="-DELPP_NO_DEFAULT_LOG_FILE" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
@@ -74,6 +72,7 @@
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
+			<envvars />
 			<debugger />
 		</Extensions>
 	</Project>
