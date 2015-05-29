@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{40EB8091-2F23-43C7-A339-2CD64FBADEA8}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NFMasterNet_ServerPlugin</RootNamespace>
+    <RootNamespace>Tutorial6Plugin</RootNamespace>
     <ProjectName>Tutorial6Plugin</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
