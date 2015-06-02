@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3F68CD92-8AA1-48C4-84EF-CD63690C8DCB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NFDataBasePlugin</RootNamespace>
+    <RootNamespace>NFDataNoSqlPlugin</RootNamespace>
     <ProjectName>NFDataNoSqlPlugin</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
