@@ -22,7 +22,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7C6DC299-19E7-415C-A4B1-23DC6CE3FDCD}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NFLoginNet_ClientPlugin</RootNamespace>
+    <RootNamespace>NFDataBaseNet_ClientPlugin</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">

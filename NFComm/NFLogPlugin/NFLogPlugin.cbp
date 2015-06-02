@@ -13,7 +13,8 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-D_X64" />
+					<Add option="-std=c++11" />
+					<Add option="-g" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_USRDLL" />
 					<Add option="-DELPP_NO_DEFAULT_LOG_FILE" />
@@ -36,7 +37,7 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-D_X64" />
+					<Add option="-std=c++11" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_USRDLL" />
 					<Add option="-DELPP_NO_DEFAULT_LOG_FILE" />
@@ -60,6 +61,7 @@
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
+			<envvars />
 			<debugger />
 		</Extensions>
 	</Project>
