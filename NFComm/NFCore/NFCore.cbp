@@ -13,6 +13,8 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
 					<Add directory="$(SolutionDir)" />
@@ -29,6 +31,7 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
 					<Add directory="$(SolutionDir)" />
@@ -79,6 +82,7 @@
 		<Unit filename="NFTimer.h" />
 		<Extensions>
 			<code_completion />
+			<envvars />
 			<debugger />
 		</Extensions>
 	</Project>
