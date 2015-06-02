@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="NFKernelPlugin" />
+		<Option title="NFConfigPlugin" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -13,6 +13,8 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_USRDLL" />
@@ -35,6 +37,7 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_USRDLL" />
@@ -60,6 +63,7 @@
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
+			<envvars />
 			<debugger />
 		</Extensions>
 	</Project>
