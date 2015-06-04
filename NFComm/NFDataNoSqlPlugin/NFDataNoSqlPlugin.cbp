@@ -28,6 +28,9 @@
 					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
 					<Add directory="$(BOOST_LIB)" />
 				</Linker>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 			<Target title="Release x64">
 				<Option output="NFDataNoSqlPlugin" prefix_auto="1" extension_auto="1" />
@@ -51,6 +54,9 @@
 					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
 					<Add directory="$(BOOST_LIB)" />
 				</Linker>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 		</Build>
 		<Unit filename="NFCDataNoSqlDriver.cpp" />
