@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="../../../trunk/_Out/Comm/Debug/NFCrashPlugin_d" prefix_auto="1" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFCrashPlugin_d" prefix_auto="1" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -17,21 +17,23 @@
 					<Add option="-fpic" />
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
-					<Add option="-D_USRDLL" />
-					<Add directory="../../../trunk" />
-					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
-					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
-					<Add directory="../../../trunk/Dependencies/google-breakpad/src" />
-					<Add directory="../../../trunk/Dependencies" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+					<Add directory="$(SolutionDir)/trunk/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/trunk/Dependencies/google-breakpad/src" />
+					<Add directory="$(SolutionDir)/trunk/Dependencies" />
 				</Compiler>
 				<Linker>
-					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
-					<Add directory="../../../trunk/lib/$(Configuration)/" />
-					<Add directory="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
+					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/lib/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 			<Target title="Release x64">
-				<Option output="../../../trunk/_Out/Comm/Debug/NFCrashPlugin" prefix_auto="1" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFCrashPlugin" prefix_auto="1" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -42,17 +44,20 @@
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_USRDLL" />
-					<Add directory="../../../trunk" />
-					<Add directory="../../../trunk/Dependencies/boost_1_53_0/" />
-					<Add directory="../../../trunk/Dependencies/Theron-6.00.01/Include/" />
-					<Add directory="../../../trunk/Dependencies/google-breakpad/src" />
-					<Add directory="../../../trunk/Dependencies" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/google-breakpad/src" />
+					<Add directory="$(SolutionDir)/Dependencies" />
 				</Compiler>
 				<Linker>
-					<Add directory="../../../trunk/_Out/Comm/$(Configuration)/" />
-					<Add directory="../../../trunk/lib/$(Configuration)/" />
-					<Add directory="../../../trunk/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
+					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/lib/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 		</Build>
 		<Unit filename="NFCCrashModule.cpp" />
