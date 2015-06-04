@@ -999,6 +999,18 @@ class ReqAckPlayerChat : public ::google::protobuf::Message {
   inline ::std::string* release_chat_info();
   inline void set_allocated_chat_info(::std::string* chat_info);
 
+  // optional bytes chat_name = 4;
+  inline bool has_chat_name() const;
+  inline void clear_chat_name();
+  static const int kChatNameFieldNumber = 4;
+  inline const ::std::string& chat_name() const;
+  inline void set_chat_name(const ::std::string& value);
+  inline void set_chat_name(const char* value);
+  inline void set_chat_name(const void* value, size_t size);
+  inline ::std::string* mutable_chat_name();
+  inline ::std::string* release_chat_name();
+  inline void set_allocated_chat_name(::std::string* chat_name);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckPlayerChat)
  private:
   inline void set_has_chat_id();
@@ -1007,15 +1019,18 @@ class ReqAckPlayerChat : public ::google::protobuf::Message {
   inline void clear_has_chat_type();
   inline void set_has_chat_info();
   inline void clear_has_chat_info();
+  inline void set_has_chat_name();
+  inline void clear_has_chat_name();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::NFMsg::Ident* chat_id_;
   ::std::string* chat_info_;
+  ::std::string* chat_name_;
   int chat_type_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -3321,6 +3336,76 @@ inline void ReqAckPlayerChat::set_allocated_chat_info(::std::string* chat_info) 
   } else {
     clear_has_chat_info();
     chat_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional bytes chat_name = 4;
+inline bool ReqAckPlayerChat::has_chat_name() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqAckPlayerChat::set_has_chat_name() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqAckPlayerChat::clear_has_chat_name() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqAckPlayerChat::clear_chat_name() {
+  if (chat_name_ != &::google::protobuf::internal::kEmptyString) {
+    chat_name_->clear();
+  }
+  clear_has_chat_name();
+}
+inline const ::std::string& ReqAckPlayerChat::chat_name() const {
+  return *chat_name_;
+}
+inline void ReqAckPlayerChat::set_chat_name(const ::std::string& value) {
+  set_has_chat_name();
+  if (chat_name_ == &::google::protobuf::internal::kEmptyString) {
+    chat_name_ = new ::std::string;
+  }
+  chat_name_->assign(value);
+}
+inline void ReqAckPlayerChat::set_chat_name(const char* value) {
+  set_has_chat_name();
+  if (chat_name_ == &::google::protobuf::internal::kEmptyString) {
+    chat_name_ = new ::std::string;
+  }
+  chat_name_->assign(value);
+}
+inline void ReqAckPlayerChat::set_chat_name(const void* value, size_t size) {
+  set_has_chat_name();
+  if (chat_name_ == &::google::protobuf::internal::kEmptyString) {
+    chat_name_ = new ::std::string;
+  }
+  chat_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckPlayerChat::mutable_chat_name() {
+  set_has_chat_name();
+  if (chat_name_ == &::google::protobuf::internal::kEmptyString) {
+    chat_name_ = new ::std::string;
+  }
+  return chat_name_;
+}
+inline ::std::string* ReqAckPlayerChat::release_chat_name() {
+  clear_has_chat_name();
+  if (chat_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = chat_name_;
+    chat_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckPlayerChat::set_allocated_chat_name(::std::string* chat_name) {
+  if (chat_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete chat_name_;
+  }
+  if (chat_name) {
+    set_has_chat_name();
+    chat_name_ = chat_name;
+  } else {
+    clear_has_chat_name();
+    chat_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
