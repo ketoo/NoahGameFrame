@@ -32,6 +32,9 @@
 					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
 					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
 				</Linker>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 			<Target title="Release x64">
 				<Option output="NFGameServerScriptPlugin" prefix_auto="1" extension_auto="1" />
@@ -58,6 +61,9 @@
 					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
 					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
 				</Linker>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 		</Build>
 		<Unit filename="NFCGameServerScriptModule.cpp" />
