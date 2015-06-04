@@ -23,6 +23,9 @@
 				<Linker>
 					<Add directory="$(BOOST_LIB)" />
 				</Linker>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 			<Target title="Release x64">
 				<Option output="NFCore" prefix_auto="1" extension_auto="1" />
@@ -37,6 +40,9 @@
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
 				</Compiler>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 		</Build>
 		<Unit filename="NFCComponent.cpp" />
