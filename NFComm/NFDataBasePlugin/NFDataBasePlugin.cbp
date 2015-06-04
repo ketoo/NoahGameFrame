@@ -6,7 +6,7 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="Debug Win32">
+			<Target title="Debug x64">
 				<Option output="NFDataBasePlugin" prefix_auto="1" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -14,15 +14,16 @@
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-D_DEBUG" />
-					<Add option="-D_USRDLL" />
-					<Add directory="$(NF_HOME)" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
 					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
 				</Linker>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
-			<Target title="Release Win32">
+			<Target title="Release x64">
 				<Option output="NFDataBasePlugin" prefix_auto="1" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -30,8 +31,10 @@
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-DNDEBUG" />
-					<Add option="-D_USRDLL" />
 				</Compiler>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 		</Build>
 		<Unit filename="NFCDataBaseDriver.cpp" />

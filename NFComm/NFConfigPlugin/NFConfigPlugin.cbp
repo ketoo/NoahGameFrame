@@ -21,7 +21,6 @@
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/glog-0.3.3/src/windows/" />
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/External/" />
 				</Compiler>
@@ -29,6 +28,9 @@
 					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
 					<Add directory="$(SolutionDir)/lib/$(Configuration)/" />
 				</Linker>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 			<Target title="Release x64">
 				<Option output="NFConfigPlugin" prefix_auto="1" extension_auto="1" />
@@ -52,6 +54,9 @@
 					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
 					<Add directory="$(SolutionDir)/lib/$(Configuration)/" />
 				</Linker>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 		</Build>
 		<Unit filename="NFCElementInfoModule.cpp" />

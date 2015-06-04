@@ -35,6 +35,9 @@
 					<Add directory="$(SolutionDir)/Dependencies/lib/$(Configuration)/" />
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 			<Target title="Release x64">
 				<Option output="NFDataBaseNet_ClientPlugin" prefix_auto="1" extension_auto="1" />
@@ -63,6 +66,9 @@
 					<Add directory="$(SolutionDir)/Dependencies/lib/$(Configuration)/" />
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 		</Build>
 		<Unit filename="NFCDataBaseNet_ClientModule.cpp" />
