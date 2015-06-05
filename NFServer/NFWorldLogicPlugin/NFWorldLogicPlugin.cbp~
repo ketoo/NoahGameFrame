@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="NFGameServerNet_ServerPlugin" />
+		<Option title="NFWorldLogicPlugin" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFGameServerNet_ServerPlugin_d" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFWorldLogicPlugin_d" prefix_auto="0" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -17,7 +17,6 @@
 					<Add option="-g" />
 					<Add option="-fPIC" />
 					<Add option="-D_DEBUG" />
-					<Add option="-D_USRDLL" />
 					<Add option="-DELPP_NO_DEFAULT_LOG_FILE" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
@@ -31,14 +30,14 @@
 				<Linker>
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48" />
 				</Linker>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
 			</Target>
 			<Target title="Release x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Release/NFGameServerNet_ServerPlugin" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Comm/Release/NFWorldLogicPlugin" prefix_auto="0" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -58,19 +57,19 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
-					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
+					<Add directory="$(SolutionDir)/_Out/Comm/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/Dependencies/lib/$(Configuration)/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/vs11_0/" />
 				</Linker>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCGameServerNet_ServerModule.cpp" />
-		<Unit filename="NFCGameServerNet_ServerModule.h" />
-		<Unit filename="NFGameServerNet_ServerPlugin.cpp" />
-		<Unit filename="NFGameServerNet_ServerPlugin.h" />
+		<Unit filename="NFCWorldLogicModule.cpp" />
+		<Unit filename="NFCWorldLogicModule.h" />
+		<Unit filename="NFWorldLogicPlugin.cpp" />
+		<Unit filename="NFWorldLogicPlugin.h" />
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
