@@ -200,8 +200,7 @@
 */
 //----------------------------------------------------------------------------
 // Linux/Apple/iOs/Android/Symbian/Tegra2/NaCl Settings
-#if NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS || \
-    NF_PLATFORM == NF_PLATFORM_ANDROID || NF_PLATFORM == NF_PLATFORM_TEGRA2 || NF_PLATFORM == NF_PLATFORM_NACL
+#if NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS || NF_PLATFORM == NF_PLATFORM_ANDROID || NF_PLATFORM == NF_PLATFORM_TEGRA2 || NF_PLATFORM == NF_PLATFORM_NACL
 
 //#include <syswait.h>
 
@@ -340,7 +339,7 @@ inline unsigned long NF_GetTickCount()
 //use actor mode--end
 
 
-#if NF_PLATFORM == NF_PLATFORM_WIN || __cplusplus >= 201103L
+#if __cplusplus >= 201103L
 #define NF_SHARE_PTR std::shared_ptr
 #else
 #define NF_SHARE_PTR boost::shared_ptr
