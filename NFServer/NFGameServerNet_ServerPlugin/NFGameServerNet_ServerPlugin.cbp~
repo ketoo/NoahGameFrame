@@ -45,6 +45,7 @@
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-std=c++11" />
+					<Add option="-g" />
 					<Add option="-fPIC" />
 					<Add option="-D_USRDLL" />
 					<Add option="-DELPP_NO_DEFAULT_LOG_FILE" />
