@@ -2,28 +2,25 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="NFPythonScriptPlugin" />
+		<Option title="NFKernelPlugin" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFPythonScriptPlugin_d" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFKernelPlugin_d" prefix_auto="0" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-std=c++11" />
-					<Add option="-fpic" />
+					<Add option="-g" />
+					<Add option="-fPIC" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_USRDLL" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
-					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
@@ -36,22 +33,19 @@
 				</Environment>
 			</Target>
 			<Target title="Release x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Release/NFPythonScriptPlugin" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFKernelPlugin" prefix_auto="0" extension_auto="1" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-std=c++11" />
-					<Add option="-fpic" />
+					<Add option="-fPIC" />
+					<Add option="-DNDEBUG" />
 					<Add option="-D_USRDLL" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
-					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
@@ -64,15 +58,24 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCPythonScriptModule.cpp" />
-		<Unit filename="NFCPythonScriptModule.h" />
-		<Unit filename="NFPythonScriptPlugin.cpp" />
-		<Unit filename="NFPythonScriptPlugin.h" />
+		<Unit filename="NFContainerModule/NFCContainerModule.cpp" />
+		<Unit filename="NFContainerModule/NFCContainerModule.h" />
+		<Unit filename="NFContainerModule/NFIContainerModule.h" />
+		<Unit filename="NFGridModule/NFCGridModule.cpp" />
+		<Unit filename="NFGridModule/NFCGridModule.h" />
+		<Unit filename="NFGridModule/NFIGridModule.h" />
+		<Unit filename="NFKernelModule/NFCConcurrentModule.cpp" />
+		<Unit filename="NFKernelModule/NFCConcurrentModule.h" />
+		<Unit filename="NFKernelModule/NFCKernelModule.cpp" />
+		<Unit filename="NFKernelModule/NFCKernelModule.h" />
+		<Unit filename="NFKernelModule/NFCUUIDModule.cpp" />
+		<Unit filename="NFKernelModule/NFCUUIDModule.h" />
+		<Unit filename="NFKernelPlugin.cpp" />
+		<Unit filename="NFKernelPlugin.h" />
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
-			<envvars />
 			<code_completion />
-			<lib_finder disable_auto="1" />
+			<envvars />
 			<debugger />
 		</Extensions>
 	</Project>
