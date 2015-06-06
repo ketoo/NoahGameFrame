@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="NFMessageDefine" prefix_auto="1" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFMessageDefine_d" prefix_auto="0" extension_auto="1" />
 				<Option working_dir="" />
 				<Option type="2" />
 				<Option compiler="gcc" />
@@ -23,7 +23,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release x64">
-				<Option output="NFMessageDefine" prefix_auto="1" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Comm/Release/NFMessageDefine" prefix_auto="0" extension_auto="1" />
 				<Option working_dir="" />
 				<Option type="2" />
 				<Option compiler="gcc" />

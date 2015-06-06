@@ -135,7 +135,7 @@ public:
 
 		m_pNet = new NFCNet(nHeadLength, this, &NFINetModule::OnRecivePack, &NFINetModule::OnSocketEvent);
 #else
-		m_pNet = new NFCNet(nHeadLength, this, handleRecieve, handleEvent);
+		m_pNet = new NFCNet(nHeadLength, pBaseType, handleRecieve, handleEvent);
 #endif
 		m_pNet->Initialization(strIP, nPort);
 	}
@@ -149,7 +149,7 @@ public:
 
 		m_pNet = new NFCNet(nHeadLength, this, &NFINetModule::OnRecivePack, &NFINetModule::OnSocketEvent);
 #else
-		m_pNet = new NFCNet(nHeadLength, this, handleRecieve, handleEvent);
+		m_pNet = new NFCNet(nHeadLength, pBaseType, handleRecieve, handleEvent);
 #endif
 
 		return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
@@ -313,7 +313,7 @@ public:
 			for (int i = 0; i < pClientIDList->size(); ++i)
 			{
                 const NFIDENTID& ClientID = (*pClientIDList)[i];
-                
+
 				NFMsg::Ident* pData = xMsg.add_player_client_list();
                 if (pData)
                 {
