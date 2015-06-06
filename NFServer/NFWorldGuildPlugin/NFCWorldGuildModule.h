@@ -13,6 +13,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIWorldGuildModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
+#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 
 class NFCWorldGuildModule
     : public NFIWorldGuildModule
@@ -46,10 +47,16 @@ public:
 	//////////////////////////////////////////////////////////////////////////
 protected:
 
+    bool CheckPower(const NFIDENTID& self, const NFIDENTID& xGuildID, int nPowerType);
+    bool SetPresidentInfo(const NFIDENTID& self, const NFIDENTID& xGuildID);
+
 protected:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
+    NFIUUIDModule* m_pUUIDModule;
 private:
+
+    NFMapEx<std::string, NFIDENTID> mmGuidMap; // GuidName<----> GuidID;
 };
 
 #endif
