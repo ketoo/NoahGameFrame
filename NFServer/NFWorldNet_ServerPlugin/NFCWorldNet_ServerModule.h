@@ -56,6 +56,8 @@ protected:
 protected:
 
     int OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnShowStringEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+
 protected:
 
 	bool InThisWorld(const std::string& strAccount);
@@ -76,6 +78,8 @@ protected:
 
 	//////////////////////////////////////////////////////////////////////////
 	void LogGameServer(const float fLastTime);
+
+    void ShowStringByFD(const NFIDENTID& object, const int nClientFD, const int nResultID);
 
 protected:
 
