@@ -34,6 +34,7 @@ bool NFCWorldNet_ServerModule::AfterInit()
 	assert(NULL != m_pWorldGuildModule);
 
     m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, this, &NFCWorldNet_ServerModule::OnSelectServerEvent);
+    m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_SHOW_STRING_TO_FD, this, &NFCWorldNet_ServerModule::OnShowStringEvent);
 
 	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("WorldServer");
 	if (xLogicClass.get())
@@ -473,23 +474,36 @@ void NFCWorldNet_ServerModule::OnCrateGuildProcess( const NFIPacket& msg )
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(msg, NFMsg::ReqCreateGuild)
 
-	m_pWorldGuildModule->CreateGuild(nPlayerID, xMsg.guild_name());
+	NFIDENTID xGuild = m_pWorldGuildModule->CreateGuild(nPlayerID, xMsg.guild_name());
+
+    if (!xGuild.IsNull())
+    {
+        NFMsg::AckCreateGuild xAck;
+        *xAck.mutable_guild_id() = NFToPB(xGuild);
+        xAck.set_guild_name(xMsg.guild_name());
+
+        SendMsgPB(NFMsg::EGMI_REQ_CREATE_GUILD, xAck, msg.GetFd());
+    }
 }
 
 void NFCWorldNet_ServerModule::OnJoinGuildProcess( const NFIPacket& msg )
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(msg, NFMsg::ReqJoinGuild)
 
-	m_pWorldGuildModule->JoinGuild(nPlayerID, PBToNF(xMsg.guild_id()));
-
+	if (m_pWorldGuildModule->JoinGuild(nPlayerID, PBToNF(xMsg.guild_id())))
+	{
+        ShowStringByFD(nPlayerID, msg.GetFd(), NFMsg::EGEC_JOIN_GUILD_SUCCESS);
+	}
 }
 
 void NFCWorldNet_ServerModule::OnLeaveGuildProcess( const NFIPacket& msg )
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(msg, NFMsg::ReqAckLeaveGuild)
 
-	m_pWorldGuildModule->LeaveGuild(nPlayerID, PBToNF(xMsg.guild_id()));
-
+	if (m_pWorldGuildModule->LeaveGuild(nPlayerID, PBToNF(xMsg.guild_id())))
+	{
+        ShowStringByFD(nPlayerID, msg.GetFd(), NFMsg::EGEC_LEAVE_GUILD_SUCCESS);
+	}
 }
 
 void NFCWorldNet_ServerModule::OnOprGuildMemberProcess( const NFIPacket& msg )
@@ -512,4 +526,30 @@ void NFCWorldNet_ServerModule::OnOprGuildMemberProcess( const NFIPacket& msg )
 		break;
 	}
 
+}
+
+int NFCWorldNet_ServerModule::OnShowStringEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var )
+{
+    if (var.GetCount() <= 2 || var.TypeEx(TDATA_INT, TDATA_INT))
+    {
+        return 1;
+    }
+
+    const NFINT64 nFD = var.Int(0);
+    const NFINT64 nStringResult = var.Int(1);
+
+    NFMsg::AckEventResult xAck;
+    xAck.set_event_code((NFMsg::EGameEventCode)nStringResult);
+
+    SendMsgPB(NFMsg::EGMI_EVENT_RESULT, xAck, nFD);
+
+    return 0;
+}
+
+void NFCWorldNet_ServerModule::ShowStringByFD( const NFIDENTID& object, const int nClientFD, const int nResultID)
+{
+    NFMsg::AckEventResult xAck;
+    xAck.set_event_code((NFMsg::EGameEventCode)nResultID);
+
+    SendMsgPB(NFMsg::EGMI_EVENT_RESULT, xAck, nClientFD);
 }
