@@ -97,6 +97,8 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\NFComm\NFPluginModule\NFIWorldGuildDataModule.h" />
+    <ClInclude Include="NFCWorldGuildDataModule.h" />
     <ClInclude Include="NFCWorldGuildModule.h" />
     <ClInclude Include="NFWorldGuildPlugin.h" />
   </ItemGroup>
@@ -109,6 +111,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFCWorldGuildDataModule.cpp" />
     <ClCompile Include="NFCWorldGuildModule.cpp" />
     <ClCompile Include="NFWorldGuildPlugin.cpp" />
   </ItemGroup>
