@@ -34,11 +34,8 @@
 		<Project filename="NFServer/NFAIPlugin/NFAIPlugin.cbp" />
 		<Project filename="Tutorial/Tutorial4ActorPlugin/Tutorial4ActorPlugin.cbp" />
 		<Project filename="Tutorial/Tutorial3/Tutorial3.cbp" />
-		<Project filename="NFServer/NFGameLogicPlugin/NFGameLogicPlugin.cbp" />
-		<Project filename="NFComm/NFCluster/NFMysqlClusterPlugin.cbp" />
 		<Project filename="NFServer/NFDataBaseNet_ClientPlugin/NFDataBaseNet_ClientPlugin.cbp" />
 		<Project filename="NFComm/NFTagPlugin/NFTagPlugin.cbp" />
-		<Project filename="NFServer/NFWorldGuildPlugin/NFWorldGuildPlugin.cbp" />
-		<Project filename="NFServer/NFWorldChatPlugin/NFWorldChatPlugin.cbp" />
+		<Project filename="NFServer/NFGameLogicPlugin/NFGameLogicPlugin.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
