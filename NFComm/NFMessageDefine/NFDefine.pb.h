@@ -79,11 +79,14 @@ enum EGameEventCode {
   EGEC_ENTER_GATEWAY_FAILD = 141,
   EGEC_NO_SERVER4ZONE = 142,
   EGEC_INVALID_SKILL = 143,
-  EGEC_ENTER_GAME_SUCCESS = 144
+  EGEC_ENTER_GAME_SUCCESS = 144,
+  EGEC_CREATE_GUILD_SUCCESS = 200,
+  EGEC_JOIN_GUILD_SUCCESS = 201,
+  EGEC_LEAVE_GUILD_SUCCESS = 202
 };
 bool EGameEventCode_IsValid(int value);
 const EGameEventCode EGameEventCode_MIN = EGEC_UNKOWN_ERROR;
-const EGameEventCode EGameEventCode_MAX = EGEC_ENTER_GAME_SUCCESS;
+const EGameEventCode EGameEventCode_MAX = EGEC_LEAVE_GUILD_SUCCESS;
 const int EGameEventCode_ARRAYSIZE = EGameEventCode_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EGameEventCode_descriptor();
@@ -187,6 +190,7 @@ enum EGameMsgID {
   EGMI_REQ_JOIN_GUILD = 271,
   EGMI_REQ_LEAVE_GUILD = 272,
   EGMI_REQ_OPR_GUILD = 273,
+  EGMI_ACK_CREATE_GUILD = 280,
   EGMI_REQ_CMD_PROPERTY_INT = 1000,
   EGMI_REQ_CMD_PROPERTY_STR = 1001,
   EGMI_REQ_CMD_PROPERTY_OBJECT = 1002,
@@ -237,6 +241,26 @@ inline bool EAwardType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EAwardType>(
     EAwardType_descriptor(), name, value);
 }
+enum EGuildPowerType {
+  GUILD_POWER_TYPE_NORMAL = 0,
+  GUILD_POWER_TYPE_VICE_PRESIDENT = 1,
+  GUILD_POWER_TYPE_PRESIDENT = 2
+};
+bool EGuildPowerType_IsValid(int value);
+const EGuildPowerType EGuildPowerType_MIN = GUILD_POWER_TYPE_NORMAL;
+const EGuildPowerType EGuildPowerType_MAX = GUILD_POWER_TYPE_PRESIDENT;
+const int EGuildPowerType_ARRAYSIZE = EGuildPowerType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* EGuildPowerType_descriptor();
+inline const ::std::string& EGuildPowerType_Name(EGuildPowerType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EGuildPowerType_descriptor(), value);
+}
+inline bool EGuildPowerType_Parse(
+    const ::std::string& name, EGuildPowerType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EGuildPowerType>(
+    EGuildPowerType_descriptor(), name, value);
+}
 // ===================================================================
 
 
@@ -265,6 +289,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameMsgID>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EAwardType>() {
   return ::NFMsg::EAwardType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGuildPowerType>() {
+  return ::NFMsg::EGuildPowerType_descriptor();
 }
 
 }  // namespace google

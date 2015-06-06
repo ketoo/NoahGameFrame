@@ -71,6 +71,9 @@ enum NFEventDefine
 
     // 通知副本奖励
     NFED_ON_NOTICE_ECTYPE_AWARD,
+
+    //给客户端发送消息arg[0] fd, stringresult, arg
+    NFED_ON_SHOW_STRING_TO_FD,
 };
 
 #endif
