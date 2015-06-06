@@ -78,6 +78,9 @@ const ::google::protobuf::EnumDescriptor* ReqAckJoinActivity_EGameActivitySubTyp
 const ::google::protobuf::Descriptor* ReqCreateGuild_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqCreateGuild_reflection_ = NULL;
+const ::google::protobuf::Descriptor* AckCreateGuild_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  AckCreateGuild_reflection_ = NULL;
 const ::google::protobuf::Descriptor* ReqJoinGuild_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqJoinGuild_reflection_ = NULL;
@@ -408,7 +411,23 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqCreateGuild));
-  ReqJoinGuild_descriptor_ = file->message_type(18);
+  AckCreateGuild_descriptor_ = file->message_type(18);
+  static const int AckCreateGuild_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckCreateGuild, guild_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckCreateGuild, guild_name_),
+  };
+  AckCreateGuild_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      AckCreateGuild_descriptor_,
+      AckCreateGuild::default_instance_,
+      AckCreateGuild_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckCreateGuild, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckCreateGuild, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(AckCreateGuild));
+  ReqJoinGuild_descriptor_ = file->message_type(19);
   static const int ReqJoinGuild_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqJoinGuild, guild_id_),
   };
@@ -423,7 +442,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqJoinGuild));
-  ReqAckLeaveGuild_descriptor_ = file->message_type(19);
+  ReqAckLeaveGuild_descriptor_ = file->message_type(20);
   static const int ReqAckLeaveGuild_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckLeaveGuild, guild_id_),
   };
@@ -438,7 +457,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckLeaveGuild));
-  ReqAckOprGuildMember_descriptor_ = file->message_type(20);
+  ReqAckOprGuildMember_descriptor_ = file->message_type(21);
   static const int ReqAckOprGuildMember_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckOprGuildMember, guild_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckOprGuildMember, member_id_),
@@ -505,6 +524,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqCreateGuild_descriptor_, &ReqCreateGuild::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    AckCreateGuild_descriptor_, &AckCreateGuild::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqJoinGuild_descriptor_, &ReqJoinGuild::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqAckLeaveGuild_descriptor_, &ReqAckLeaveGuild::default_instance());
@@ -551,6 +572,8 @@ void protobuf_ShutdownFile_NFMsgShare_2eproto() {
   delete ReqAckJoinActivity_reflection_;
   delete ReqCreateGuild::default_instance_;
   delete ReqCreateGuild_reflection_;
+  delete AckCreateGuild::default_instance_;
+  delete AckCreateGuild_reflection_;
   delete ReqJoinGuild::default_instance_;
   delete ReqJoinGuild_reflection_;
   delete ReqAckLeaveGuild::default_instance_;
@@ -589,7 +612,7 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "Chat\022\035\n\007chat_id\030\001 \002(\0132\014.NFMsg.Ident\0228\n\tc"
     "hat_type\030\002 \002(\0162%.NFMsg.ReqAckPlayerChat."
     "EGameChatType\022\021\n\tchat_info\030\003 \002(\014\022\021\n\tchat"
-    "_name\030\004 \001(\014\"Q\n\rEGameChatType\022\017\n\013EGCT_NAR"
+    "_name\030\004 \002(\014\"Q\n\rEGameChatType\022\017\n\013EGCT_NAR"
     "MAL\020\000\022\020\n\014EGCT_PRIVATE\020\001\022\r\n\tEGCT_TEAM\020\002\022\016"
     "\n\nEGCT_WORLD\020\003\"\320\001\n\016ReqAckUseSkill\022\032\n\004use"
     "r\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010skill_id\030\002 \002(\014\022"
@@ -620,15 +643,17 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "ckJoinActivity.EGameActivitySubType\"!\n\021E"
     "GameActivityType\022\014\n\010EGAT_PVP\020\000\"\'\n\024EGameA"
     "ctivitySubType\022\017\n\013EGAT_NORMAL\020\000\"$\n\016ReqCr"
-    "eateGuild\022\022\n\nguild_name\030\001 \002(\t\".\n\014ReqJoin"
-    "Guild\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\"2\n"
-    "\020ReqAckLeaveGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NF"
-    "Msg.Ident\"\332\001\n\024ReqAckOprGuildMember\022\036\n\010gu"
-    "ild_id\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\tmember_id\030"
-    "\002 \002(\0132\014.NFMsg.Ident\022>\n\004type\030\003 \002(\01620.NFMs"
-    "g.ReqAckOprGuildMember.EGGuildMemberOprT"
-    "ype\"A\n\024EGGuildMemberOprType\022\r\n\tEGAT_DOWN"
-    "\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tEGAT_KICK\020\002", 2390);
+    "eateGuild\022\022\n\nguild_name\030\001 \002(\t\"D\n\016AckCrea"
+    "teGuild\022\036\n\010guild_ID\030\001 \002(\0132\014.NFMsg.Ident\022"
+    "\022\n\nguild_name\030\002 \002(\t\".\n\014ReqJoinGuild\022\036\n\010g"
+    "uild_id\030\001 \002(\0132\014.NFMsg.Ident\"2\n\020ReqAckLea"
+    "veGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\""
+    "\332\001\n\024ReqAckOprGuildMember\022\036\n\010guild_id\030\001 \002"
+    "(\0132\014.NFMsg.Ident\022\037\n\tmember_id\030\002 \002(\0132\014.NF"
+    "Msg.Ident\022>\n\004type\030\003 \002(\01620.NFMsg.ReqAckOp"
+    "rGuildMember.EGGuildMemberOprType\"A\n\024EGG"
+    "uildMemberOprType\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT"
+    "_UP\020\001\022\r\n\tEGAT_KICK\020\002", 2460);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -649,6 +674,7 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqCompeleteTask::default_instance_ = new ReqCompeleteTask();
   ReqAckJoinActivity::default_instance_ = new ReqAckJoinActivity();
   ReqCreateGuild::default_instance_ = new ReqCreateGuild();
+  AckCreateGuild::default_instance_ = new AckCreateGuild();
   ReqJoinGuild::default_instance_ = new ReqJoinGuild();
   ReqAckLeaveGuild::default_instance_ = new ReqAckLeaveGuild();
   ReqAckOprGuildMember::default_instance_ = new ReqAckOprGuildMember();
@@ -670,6 +696,7 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqCompeleteTask::default_instance_->InitAsDefaultInstance();
   ReqAckJoinActivity::default_instance_->InitAsDefaultInstance();
   ReqCreateGuild::default_instance_->InitAsDefaultInstance();
+  AckCreateGuild::default_instance_->InitAsDefaultInstance();
   ReqJoinGuild::default_instance_->InitAsDefaultInstance();
   ReqAckLeaveGuild::default_instance_->InitAsDefaultInstance();
   ReqAckOprGuildMember::default_instance_->InitAsDefaultInstance();
@@ -2826,7 +2853,7 @@ bool ReqAckPlayerChat::MergePartialFromCodedStream(
         break;
       }
 
-      // optional bytes chat_name = 4;
+      // required bytes chat_name = 4;
       case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -2876,7 +2903,7 @@ void ReqAckPlayerChat::SerializeWithCachedSizes(
       3, this->chat_info(), output);
   }
 
-  // optional bytes chat_name = 4;
+  // required bytes chat_name = 4;
   if (has_chat_name()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
       4, this->chat_name(), output);
@@ -2910,7 +2937,7 @@ void ReqAckPlayerChat::SerializeWithCachedSizes(
         3, this->chat_info(), target);
   }
 
-  // optional bytes chat_name = 4;
+  // required bytes chat_name = 4;
   if (has_chat_name()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
@@ -2948,7 +2975,7 @@ int ReqAckPlayerChat::ByteSize() const {
           this->chat_info());
     }
 
-    // optional bytes chat_name = 4;
+    // required bytes chat_name = 4;
     if (has_chat_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
@@ -3011,7 +3038,7 @@ void ReqAckPlayerChat::CopyFrom(const ReqAckPlayerChat& from) {
 }
 
 bool ReqAckPlayerChat::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
 
   if (has_chat_id()) {
     if (!this->chat_id().IsInitialized()) return false;
@@ -6196,6 +6223,280 @@ void ReqCreateGuild::Swap(ReqCreateGuild* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = ReqCreateGuild_descriptor_;
   metadata.reflection = ReqCreateGuild_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int AckCreateGuild::kGuildIDFieldNumber;
+const int AckCreateGuild::kGuildNameFieldNumber;
+#endif  // !_MSC_VER
+
+AckCreateGuild::AckCreateGuild()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void AckCreateGuild::InitAsDefaultInstance() {
+  guild_id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+}
+
+AckCreateGuild::AckCreateGuild(const AckCreateGuild& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void AckCreateGuild::SharedCtor() {
+  _cached_size_ = 0;
+  guild_id_ = NULL;
+  guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+AckCreateGuild::~AckCreateGuild() {
+  SharedDtor();
+}
+
+void AckCreateGuild::SharedDtor() {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete guild_name_;
+  }
+  if (this != default_instance_) {
+    delete guild_id_;
+  }
+}
+
+void AckCreateGuild::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* AckCreateGuild::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return AckCreateGuild_descriptor_;
+}
+
+const AckCreateGuild& AckCreateGuild::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
+  return *default_instance_;
+}
+
+AckCreateGuild* AckCreateGuild::default_instance_ = NULL;
+
+AckCreateGuild* AckCreateGuild::New() const {
+  return new AckCreateGuild;
+}
+
+void AckCreateGuild::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_guild_id()) {
+      if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+    }
+    if (has_guild_name()) {
+      if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+        guild_name_->clear();
+      }
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool AckCreateGuild::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .NFMsg.Ident guild_ID = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_guild_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_guild_name;
+        break;
+      }
+
+      // required string guild_name = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_guild_name:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_guild_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->guild_name().data(), this->guild_name().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void AckCreateGuild::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .NFMsg.Ident guild_ID = 1;
+  if (has_guild_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->guild_id(), output);
+  }
+
+  // required string guild_name = 2;
+  if (has_guild_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->guild_name().data(), this->guild_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      2, this->guild_name(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* AckCreateGuild::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required .NFMsg.Ident guild_ID = 1;
+  if (has_guild_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->guild_id(), target);
+  }
+
+  // required string guild_name = 2;
+  if (has_guild_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->guild_name().data(), this->guild_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->guild_name(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int AckCreateGuild::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .NFMsg.Ident guild_ID = 1;
+    if (has_guild_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->guild_id());
+    }
+
+    // required string guild_name = 2;
+    if (has_guild_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->guild_name());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void AckCreateGuild::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const AckCreateGuild* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const AckCreateGuild*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void AckCreateGuild::MergeFrom(const AckCreateGuild& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_guild_id()) {
+      mutable_guild_id()->::NFMsg::Ident::MergeFrom(from.guild_id());
+    }
+    if (from.has_guild_name()) {
+      set_guild_name(from.guild_name());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void AckCreateGuild::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void AckCreateGuild::CopyFrom(const AckCreateGuild& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AckCreateGuild::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  if (has_guild_id()) {
+    if (!this->guild_id().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void AckCreateGuild::Swap(AckCreateGuild* other) {
+  if (other != this) {
+    std::swap(guild_id_, other->guild_id_);
+    std::swap(guild_name_, other->guild_name_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata AckCreateGuild::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = AckCreateGuild_descriptor_;
+  metadata.reflection = AckCreateGuild_reflection_;
   return metadata;
 }
 
