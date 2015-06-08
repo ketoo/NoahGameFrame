@@ -21,6 +21,9 @@
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0" />
 					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src" />
 				</Compiler>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 			<Target title="Release x64">
 				<Option output="$(SolutionDir)/_Out/Comm/Release/NFMessageDefine" prefix_auto="0" extension_auto="1" />
@@ -36,6 +39,9 @@
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0" />
 					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src" />
 				</Compiler>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 		</Build>
 		<Unit filename="NFDefine.pb.cc" />
