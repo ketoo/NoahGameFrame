@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFComm/NFConfigPlugin/dllmain.cpp
+1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFComm/NFTagPlugin/dllmain.cpp
 	"NFComm/NFPluginModule/NFPlatform.h"
 
 1433407314 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFPlatform.h
@@ -3214,24 +3214,15 @@
 	<iosfwd>
 	<string>
 
-1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFComm/NFConfigPlugin/NFCElementInfoModule.cpp
-	<algorithm>
-	<ctype.h>
-	"NFConfigPlugin.h"
-	"NFCElementInfoModule.h"
-	"NFCLogicClassModule.h"
+1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFComm/NFTagPlugin/NFCTagModule.cpp
+	"NFCTagModule.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame/NFComm/NFConfigPlugin/NFConfigPlugin.h
-	"NFComm/NFPluginModule/NFIPlugin.h"
-	"NFComm/NFPluginModule/NFIPluginManager.h"
+1433150608 /home/eliteyang/dev/NoahGameFrame/NFComm/NFTagPlugin/NFCTagModule.h
+	"NFComm/NFPluginModule/NFITagModule.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIPlugin.h
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFITagModule.h
 	<iostream>
 	"NFILogicModule.h"
-	"NFComm/NFCore/NFMap.h"
-	"NFComm/NFPluginModule/NFPlatform.h"
-	"NFIActor.h"
-	"NFIPluginManager.h"
 
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILogicModule.h
 	<string>
@@ -5747,6 +5738,22 @@
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFEventDefine/NFEventDefine.h
 	<iostream>
 
+1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFComm/NFTagPlugin/NFTagPlugin.cpp
+	"NFCTagModule.h"
+	"NFTagPlugin.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame/NFComm/NFTagPlugin/NFTagPlugin.h
+	"NFComm/NFPluginModule/NFIPlugin.h"
+	"NFComm/NFPluginModule/NFIPluginManager.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIPlugin.h
+	<iostream>
+	"NFILogicModule.h"
+	"NFComm/NFCore/NFMap.h"
+	"NFComm/NFPluginModule/NFPlatform.h"
+	"NFIActor.h"
+	"NFIPluginManager.h"
+
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIActor.h
 	<map>
 	<string>
@@ -5797,13 +5804,6 @@
 	<inttypes.h>
 
 1433150607 /home/eliteyang/dev/NoahGameFrame//Dependencies/Theron-6.00.01/Include//Theron/Defines.h
-
-1433150607 /home/eliteyang/dev/NoahGameFrame//Dependencies/Theron-6.00.01/Include/External//Standard/stdint.h
-	<limits.h>
-	<wchar.h>
-
-1433150607 /home/eliteyang/dev/NoahGameFrame//Dependencies/Theron-6.00.01/Include/External//Standard/inttypes.h
-	"stdint.h"
 
 1433150607 /home/eliteyang/dev/NoahGameFrame//Dependencies/Theron-6.00.01/Include//Theron/Detail/Network/Index.h
 	<Theron/Assert.h>
@@ -6615,81 +6615,6 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1433150607 /home/eliteyang/dev/NoahGameFrame//Dependencies/Theron-6.00.01/Include/External//boost/atomic/platform.hpp
-	<boost/config.hpp>
-	<boost/atomic/detail/gcc-x86.hpp>
-	<boost/atomic/detail/gcc-alpha.hpp>
-	<boost/atomic/detail/gcc-ppc.hpp>
-	<boost/atomic/detail/gcc-armv6+.hpp>
-	<boost/atomic/detail/linux-arm.hpp>
-	<boost/atomic/detail/interlocked.hpp>
-	<boost/atomic/detail/gcc-cas.hpp>
-
-1356063250 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/atomic/detail/gcc-x86.hpp
-	<cstddef>
-	<boost/cstdint.hpp>
-	<boost/atomic/detail/config.hpp>
-	<boost/atomic/detail/base.hpp>
-	<boost/atomic/detail/cas64strong.hpp>
-
-1355538506 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/atomic/detail/cas64strong.hpp
-	<cstddef>
-	<boost/cstdint.hpp>
-	<boost/memory_order.hpp>
-	<boost/atomic/detail/config.hpp>
-	<boost/atomic/detail/base.hpp>
-
-1355538506 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/atomic/detail/gcc-alpha.hpp
-	<boost/atomic/detail/config.hpp>
-	<boost/atomic/detail/base.hpp>
-	<boost/atomic/detail/builder.hpp>
-
-1355776092 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/atomic/detail/gcc-ppc.hpp
-	<cstddef>
-	<boost/cstdint.hpp>
-	<boost/atomic/detail/config.hpp>
-	<boost/atomic/detail/base.hpp>
-
-1433150607 /home/eliteyang/dev/NoahGameFrame//Dependencies/Theron-6.00.01/Include/External//boost/atomic/detail/gcc-armv6+.hpp
-	<boost/atomic/detail/cas32weak.hpp>
-
-1355538506 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/atomic/detail/cas32weak.hpp
-	<cstddef>
-	<boost/cstdint.hpp>
-	<boost/memory_order.hpp>
-	<boost/atomic/detail/config.hpp>
-	<boost/atomic/detail/base.hpp>
-
-1355776092 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/atomic/detail/linux-arm.hpp
-	<cstddef>
-	<boost/cstdint.hpp>
-	<boost/memory_order.hpp>
-	<boost/atomic/detail/config.hpp>
-	<boost/atomic/detail/base.hpp>
-	<boost/atomic/detail/cas32weak.hpp>
-
-1356067840 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/atomic/detail/interlocked.hpp
-	<boost/atomic/detail/config.hpp>
-	<boost/detail/interlocked.hpp>
-	<intrin.h>
-	<windows.h>
-
-1355538506 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/atomic/detail/gcc-cas.hpp
-	<cstddef>
-	<boost/cstdint.hpp>
-	<boost/atomic/detail/config.hpp>
-	<boost/atomic/detail/base.hpp>
-	<boost/atomic/detail/cas32strong.hpp>
-
-1355538506 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/atomic/detail/cas32strong.hpp
-	<cstddef>
-	<boost/cstdint.hpp>
-	<boost/memory_order.hpp>
-	<boost/atomic/detail/config.hpp>
-	<boost/atomic/detail/base.hpp>
-
-1433150607 /home/eliteyang/dev/NoahGameFrame//Dependencies/Theron-6.00.01/Include/External//boost/atomic/detail/type-classifier.hpp
-
 1433150607 /home/eliteyang/dev/NoahGameFrame//Dependencies/Theron-6.00.01/Include//Theron/Detail/Threading/Utils.h
 	<Theron/Assert.h>
 	<Theron/BasicTypes.h>
@@ -7493,141 +7418,4 @@
 	"NFIActor.h"
 	"NFILogicModule.h"
 	"NFIActorManager.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame/NFComm/NFConfigPlugin/NFCElementInfoModule.h
-	<string>
-	<map>
-	<iostream>
-	<iostream>
-	"NFComm/NFCore/NFMap.h"
-	"NFComm/NFCore/NFList.h"
-	"NFComm/RapidXML/rapidxml.hpp"
-	"NFComm/RapidXML/rapidxml_iterators.hpp"
-	"NFComm/RapidXML/rapidxml_print.hpp"
-	"NFComm/RapidXML/rapidxml_utils.hpp"
-	"NFComm/NFCore/NFCDataList.h"
-	"NFComm/NFCore/NFCRecord.h"
-	"NFComm/NFCore/NFList.h"
-	"NFComm/NFCore/NFCPropertyManager.h"
-	"NFComm/NFCore/NFCRecordManager.h"
-	"NFComm/NFCore/NFCComponentManager.h"
-	"NFComm/NFPluginModule/NFIElementInfoModule.h"
-	"NFComm/NFPluginModule/NFILogicClassModule.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/RapidXML/rapidxml.hpp
-	<cstdlib>
-	<cassert>
-	<new>
-	<exception>
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/RapidXML/rapidxml_iterators.hpp
-	"rapidxml.hpp"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/RapidXML/rapidxml_print.hpp
-	"rapidxml.hpp"
-	<ostream>
-	<iterator>
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/RapidXML/rapidxml_utils.hpp
-	"rapidxml.hpp"
-	<vector>
-	<string>
-	<fstream>
-	<stdexcept>
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFCRecord.h
-	<vector>
-	"NFIRecord.h"
-	"NFCDataList.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFCPropertyManager.h
-	"NFDefine.h"
-	"NFMap.h"
-	"NFIDataList.h"
-	"NFIPropertyManager.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIPropertyManager.h
-	"NFMap.h"
-	"NFIProperty.h"
-	<map>
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIProperty.h
-	"NFDefine.h"
-	"NFIDataList.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFCRecordManager.h
-	<map>
-	<list>
-	<string>
-	<vector>
-	"NFCRecord.h"
-	"NFIRecordManager.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIRecordManager.h
-	"NFIRecord.h"
-	"NFMap.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFCComponentManager.h
-	"NFCComponent.h"
-	"NFIComponentManager.h"
-	"NFComm/NFPluginModule/NFIdentID.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFCComponent.h
-	"NFIComponent.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIComponent.h
-	"NFComm/NFPluginModule/NFIdentID.h"
-	"NFComm/NFPluginModule/NFILogicModule.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIComponentManager.h
-	"NFMap.h"
-	"NFIComponent.h"
-	"NFComm/NFPluginModule/NFILogicModule.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIElementInfoModule.h
-	<iostream>
-	"NFILogicModule.h"
-	"NFComm/NFCore/NFIDataList.h"
-	"NFComm/NFCore/NFIPropertyManager.h"
-	"NFComm/NFCore/NFIRecordManager.h"
-	"NFComm/NFCore/NFIComponentManager.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILogicClassModule.h
-	<iostream>
-	"NFILogicModule.h"
-	"NFComm/NFCore/NFIPropertyManager.h"
-	"NFComm/NFCore/NFIRecordManager.h"
-	"NFComm/NFCore/NFIComponentManager.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame/NFComm/NFConfigPlugin/NFCLogicClassModule.h
-	<string>
-	<map>
-	<iostream>
-	"NFCElementInfoModule.h"
-	"NFComm/NFCore/NFMap.h"
-	"NFComm/NFCore/NFList.h"
-	"NFComm/RapidXML/rapidxml.hpp"
-	"NFComm/RapidXML/rapidxml_iterators.hpp"
-	"NFComm/RapidXML/rapidxml_print.hpp"
-	"NFComm/RapidXML/rapidxml_utils.hpp"
-	"NFComm/NFCore/NFCDataList.h"
-	"NFComm/NFCore/NFCRecord.h"
-	"NFComm/NFCore/NFList.h"
-	"NFComm/NFCore/NFCPropertyManager.h"
-	"NFComm/NFCore/NFCRecordManager.h"
-	"NFComm/NFPluginModule/NFILogicClassModule.h"
-	"NFComm/NFPluginModule/NFIElementInfoModule.h"
-	"NFComm/NFPluginModule/NFIPluginManager.h"
-
-1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFComm/NFConfigPlugin/NFCLogicClassModule.cpp
-	<time.h>
-	<algorithm>
-	"NFConfigPlugin.h"
-	"NFCElementInfoModule.h"
-	"NFCLogicClassModule.h"
-
-1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFComm/NFConfigPlugin/NFConfigPlugin.cpp
-	"NFConfigPlugin.h"
-	"NFCLogicClassModule.h"
-	"NFCElementInfoModule.h"
 
