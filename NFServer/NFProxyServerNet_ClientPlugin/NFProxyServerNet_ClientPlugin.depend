@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFLoginNet_ServerPlugin/dllmain.cpp
+1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFProxyServerNet_ClientPlugin/dllmain.cpp
 	"NFComm/NFPluginModule/NFPlatform.h"
 
 1433407314 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFPlatform.h
@@ -3214,41 +3214,26 @@
 	<iosfwd>
 	<string>
 
-1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFLoginNet_ServerPlugin/NFCLoginNet_ServerModule.cpp
-	"NFCLoginNet_ServerModule.h"
-	"NFLoginNet_ServerPlugin.h"
+1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFProxyServerNet_ClientPlugin/NFCProxyServerToWorldModule.cpp
+	"NFCProxyServerToWorldModule.h"
+	"NFProxyServerNet_ClientPlugin.h"
+	"NFComm/NFCore/NFIHeartBeatManager.h"
+	"NFComm/NFCore/NFCHeartBeatManager.h"
+	"NFComm/NFPluginModule/NFILogicClassModule.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame/NFServer/NFLoginNet_ServerPlugin/NFCLoginNet_ServerModule.h
-	"NFComm/NFCore/NFMap.h"
+1433150608 /home/eliteyang/dev/NoahGameFrame/NFServer/NFProxyServerNet_ClientPlugin/NFCProxyServerToWorldModule.h
+	<string>
 	"NFComm/NFMessageDefine/NFMsgDefine.h"
-	"NFComm/NFPluginModule/NFIKernelModule.h"
-	"NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
+	"NFComm/NFCore/NFCHeartBeatManager.h"
+	"NFComm/NFPluginModule/NFIProxyServerToWorldModule.h"
+	"NFComm/NFPluginModule/NFIProxyServerNet_ServerModule.h"
 	"NFComm/NFPluginModule/NFIEventProcessModule.h"
-	"NFComm/NFPluginModule/NFILoginLogicModule.h"
-	"NFComm/NFPluginModule/NFILogModule.h"
+	"NFComm/NFPluginModule/NFIKernelModule.h"
+	"NFComm/NFPluginModule/NFIProxyLogicModule.h"
 	"NFComm/NFPluginModule/NFINetModule.h"
 	"NFComm/NFPluginModule/NFIElementInfoModule.h"
+	"NFComm/NFPluginModule/NFILogModule.h"
 	"NFComm/NFPluginModule/NFILogicClassModule.h"
-	"NFComm/NFPluginModule/NFIActor.h"
-	"NFComm/NFPluginModule/NFILoginToMasterModule.h"
-	"NFComm/NFPluginModule/NFIUUIDModule.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFMap.h
-	<map>
-	<list>
-	<string>
-	<iostream>
-	<typeinfo>
-	"NFMapEx.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFMapEx.h
-	<map>
-	<list>
-	<string>
-	<iostream>
-	<typeinfo>
-	<memory>
-	"NFComm/NFPluginModule/NFPlatform.h"
 
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFMessageDefine/NFMsgDefine.h
 	"NFLimit.h"
@@ -5853,6 +5838,23 @@
 
 1222560316 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/bind/bind_mf2_cc.hpp
 
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFMap.h
+	<map>
+	<list>
+	<string>
+	<iostream>
+	<typeinfo>
+	"NFMapEx.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFMapEx.h
+	<map>
+	<list>
+	<string>
+	<iostream>
+	<typeinfo>
+	<memory>
+	"NFComm/NFPluginModule/NFPlatform.h"
+
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIPropertyManager.h
 	"NFMap.h"
 	"NFIProperty.h"
@@ -5869,12 +5871,28 @@
 	<algorithm>
 	"NFComm/NFPluginModule/NFPlatform.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIKernelModule.h
-	<iostream>
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFCHeartBeatManager.h
+	"NFMap.h"
+	"NFList.h"
+	"NFDefine.h"
+	"NFIDataList.h"
+	"NFIHeartBeatManager.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIHeartBeatManager.h
 	<string>
-	"NFILogicModule.h"
-	"NFComm/NFCore/NFIObject.h"
+	"NFMap.h"
+	"NFList.h"
+	"NFDefine.h"
+	"NFCDataList.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFCDataList.h
+	"NFIDataList.h"
 	"NFComm/NFPluginModule/NFIdentID.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIProxyServerToWorldModule.h
+	<iostream>
+	"NFILogicModule.h"
+	"NFINetModule.h"
 
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILogicModule.h
 	<string>
@@ -5897,40 +5915,6 @@
 
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFEventDefine/NFEventDefine.h
 	<iostream>
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIObject.h
-	"NFComm/NFPluginModule/NFPlatform.h"
-	"NFIDataList.h"
-	"NFIRecord.h"
-	"NFIRecordManager.h"
-	"NFIHeartBeatManager.h"
-	"NFIPropertyManager.h"
-	"NFIComponentManager.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIHeartBeatManager.h
-	<string>
-	"NFMap.h"
-	"NFList.h"
-	"NFDefine.h"
-	"NFCDataList.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFCDataList.h
-	"NFIDataList.h"
-	"NFComm/NFPluginModule/NFIdentID.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIComponentManager.h
-	"NFMap.h"
-	"NFIComponent.h"
-	"NFComm/NFPluginModule/NFILogicModule.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIComponent.h
-	"NFComm/NFPluginModule/NFIdentID.h"
-	"NFComm/NFPluginModule/NFILogicModule.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILoginNet_ServerModule.h
-	<iostream>
-	"NFILogicModule.h"
-	"NFINetModule.h"
 
 1433413897 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFINetModule.h
 	<iostream>
@@ -6047,17 +6031,43 @@
 	<mutex>
 	"NFComm/NFPluginModule/NFPlatform.h"
 
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIProxyServerNet_ServerModule.h
+	<iostream>
+	"NFILogicModule.h"
+	"NFINetModule.h"
+
 1433398885 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIEventProcessModule.h
 	<iostream>
 	"NFILogicModule.h"
 	"NFComm/NFCore/NFIDataList.h"
 	"NFComm/NFEventDefine/NFEventDefine.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILoginLogicModule.h
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIKernelModule.h
 	<iostream>
+	<string>
 	"NFILogicModule.h"
+	"NFComm/NFCore/NFIObject.h"
+	"NFComm/NFPluginModule/NFIdentID.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILogModule.h
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIObject.h
+	"NFComm/NFPluginModule/NFPlatform.h"
+	"NFIDataList.h"
+	"NFIRecord.h"
+	"NFIRecordManager.h"
+	"NFIHeartBeatManager.h"
+	"NFIPropertyManager.h"
+	"NFIComponentManager.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIComponentManager.h
+	"NFMap.h"
+	"NFIComponent.h"
+	"NFComm/NFPluginModule/NFILogicModule.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIComponent.h
+	"NFComm/NFPluginModule/NFIdentID.h"
+	"NFComm/NFPluginModule/NFILogicModule.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIProxyLogicModule.h
 	"NFILogicModule.h"
 
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIElementInfoModule.h
@@ -6068,12 +6078,27 @@
 	"NFComm/NFCore/NFIRecordManager.h"
 	"NFComm/NFCore/NFIComponentManager.h"
 
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILogModule.h
+	"NFILogicModule.h"
+
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILogicClassModule.h
 	<iostream>
 	"NFILogicModule.h"
 	"NFComm/NFCore/NFIPropertyManager.h"
 	"NFComm/NFCore/NFIRecordManager.h"
 	"NFComm/NFCore/NFIComponentManager.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame/NFServer/NFProxyServerNet_ClientPlugin/NFProxyServerNet_ClientPlugin.h
+	"NFComm/NFPluginModule/NFIPlugin.h"
+	"NFComm/NFPluginModule/NFIPluginManager.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIPlugin.h
+	<iostream>
+	"NFILogicModule.h"
+	"NFComm/NFCore/NFMap.h"
+	"NFComm/NFPluginModule/NFPlatform.h"
+	"NFIActor.h"
+	"NFIPluginManager.h"
 
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIActor.h
 	<map>
@@ -7725,32 +7750,12 @@
 	"NFILogicModule.h"
 	"NFIEventProcessModule.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILoginToMasterModule.h
-	<iostream>
-	"NFILogicModule.h"
-	"NFComm/NFMessageDefine/NFMsgPreGame.pb.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIUUIDModule.h
-	"NFILogicModule.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame/NFServer/NFLoginNet_ServerPlugin/NFLoginNet_ServerPlugin.h
-	"NFComm/NFPluginModule/NFIPlugin.h"
-	"NFComm/NFPluginModule/NFIPluginManager.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIPlugin.h
-	<iostream>
-	"NFILogicModule.h"
-	"NFComm/NFCore/NFMap.h"
-	"NFComm/NFPluginModule/NFPlatform.h"
-	"NFIActor.h"
-	"NFIPluginManager.h"
-
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIPluginManager.h
 	"NFIActor.h"
 	"NFILogicModule.h"
 	"NFIActorManager.h"
 
-1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFLoginNet_ServerPlugin/NFLoginNet_ServerPlugin.cpp
-	"NFLoginNet_ServerPlugin.h"
-	"NFCLoginNet_ServerModule.h"
+1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFProxyServerNet_ClientPlugin/NFProxyServerNet_ClientPlugin.cpp
+	"NFCProxyServerToWorldModule.h"
+	"NFProxyServerNet_ClientPlugin.h"
 
