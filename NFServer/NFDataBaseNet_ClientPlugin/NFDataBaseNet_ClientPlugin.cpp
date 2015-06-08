@@ -3,13 +3,13 @@
 
 #ifdef NF_DYNAMIC_PLUGIN
 
-extern "C"  __declspec( dllexport ) void DllStartPlugin( NFIPluginManager* pm )
+NF_EXPORT void DllStartPlugin( NFIPluginManager* pm )
 {
     CREATE_PLUGIN( pm, NFDataBaseNet_ClientPlugin )
 
 };
 
-extern "C" __declspec( dllexport ) void DllStopPlugin( NFIPluginManager* pm )
+NF_EXPORT void DllStopPlugin( NFIPluginManager* pm )
 {
     DESTROY_PLUGIN( pm, NFDataBaseNet_ClientPlugin )
 };

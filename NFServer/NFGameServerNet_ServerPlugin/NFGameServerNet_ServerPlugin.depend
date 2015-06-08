@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFLoginNet_ServerPlugin/dllmain.cpp
+1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFGameServerNet_ServerPlugin/dllmain.cpp
 	"NFComm/NFPluginModule/NFPlatform.h"
 
 1433407314 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFPlatform.h
@@ -3214,41 +3214,33 @@
 	<iosfwd>
 	<string>
 
-1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFLoginNet_ServerPlugin/NFCLoginNet_ServerModule.cpp
-	"NFCLoginNet_ServerModule.h"
-	"NFLoginNet_ServerPlugin.h"
+1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFGameServerNet_ServerPlugin/NFCGameServerNet_ServerModule.cpp
+	"NFCGameServerNet_ServerModule.h"
+	"NFComm/NFPluginModule/NFILogicModule.h"
+	"NFComm/NFCore/NFCMemory.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame/NFServer/NFLoginNet_ServerPlugin/NFCLoginNet_ServerModule.h
-	"NFComm/NFCore/NFMap.h"
+1433150608 /home/eliteyang/dev/NoahGameFrame/NFServer/NFGameServerNet_ServerPlugin/NFCGameServerNet_ServerModule.h
+	<memory>
 	"NFComm/NFMessageDefine/NFMsgDefine.h"
-	"NFComm/NFPluginModule/NFIKernelModule.h"
-	"NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
+	"NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 	"NFComm/NFPluginModule/NFIEventProcessModule.h"
-	"NFComm/NFPluginModule/NFILoginLogicModule.h"
-	"NFComm/NFPluginModule/NFILogModule.h"
+	"NFComm/NFPluginModule/NFIKernelModule.h"
+	"NFComm/NFPluginModule/NFILogicClassModule.h"
+	"NFComm/NFPluginModule/NFISceneProcessModule.h"
+	"NFComm/NFPluginModule/NFIGameLogicModule.h"
 	"NFComm/NFPluginModule/NFINetModule.h"
 	"NFComm/NFPluginModule/NFIElementInfoModule.h"
-	"NFComm/NFPluginModule/NFILogicClassModule.h"
-	"NFComm/NFPluginModule/NFIActor.h"
-	"NFComm/NFPluginModule/NFILoginToMasterModule.h"
+	"NFComm/NFPluginModule/NFIPluginManager.h"
+	"NFComm/NFPluginModule/NFILogModule.h"
+	"NFComm/NFPluginModule/NFISLGShopModule.h"
+	"NFComm/NFPluginModule/NFISLGBuildingModule.h"
+	"NFComm/NFMessageDefine/NFSLGDefine.pb.h"
 	"NFComm/NFPluginModule/NFIUUIDModule.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFMap.h
-	<map>
-	<list>
-	<string>
-	<iostream>
-	<typeinfo>
-	"NFMapEx.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFMapEx.h
-	<map>
-	<list>
-	<string>
-	<iostream>
-	<typeinfo>
-	<memory>
-	"NFComm/NFPluginModule/NFPlatform.h"
+	"NFComm/NFPluginModule/NFIPVPModule.h"
+	"NFComm/NFPluginModule/NFISkillModule.h"
+	"NFComm/NFPluginModule/NFIDataProcessModule.h"
+	"NFComm/NFMessageDefine/NFDefine.pb.h"
+	"NFComm/NFPluginModule/NFIEctypeModule.h"
 
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFMessageDefine/NFMsgDefine.h
 	"NFLimit.h"
@@ -4757,235 +4749,6 @@
 	<stdlib.h>
 	<boost/lexical_cast.hpp>
 
-1355274548 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/cpp_int.hpp
-	<iostream>
-	<iomanip>
-	<boost/cstdint.hpp>
-	<boost/multiprecision/number.hpp>
-	<boost/multiprecision/detail/integer_ops.hpp>
-	<boost/array.hpp>
-	<boost/type_traits/is_integral.hpp>
-	<boost/type_traits/is_floating_point.hpp>
-	<boost/multiprecision/cpp_int/cpp_int_config.hpp>
-	<boost/multiprecision/rational_adapter.hpp>
-	<boost/detail/endian.hpp>
-	<boost/integer/static_min_max.hpp>
-	<boost/type_traits/common_type.hpp>
-	<boost/multiprecision/cpp_int/checked.hpp>
-	<boost/multiprecision/cpp_int/comparison.hpp>
-	<boost/multiprecision/cpp_int/add.hpp>
-	<boost/multiprecision/cpp_int/multiply.hpp>
-	<boost/multiprecision/cpp_int/divide.hpp>
-	<boost/multiprecision/cpp_int/bitwise.hpp>
-	<boost/multiprecision/cpp_int/misc.hpp>
-	<boost/multiprecision/cpp_int/limits.hpp>
-
-1355967734 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/number.hpp
-	<boost/cstdint.hpp>
-	<boost/mpl/max.hpp>
-	<boost/mpl/plus.hpp>
-	<boost/mpl/or.hpp>
-	<boost/mpl/find_if.hpp>
-	<boost/assert.hpp>
-	<boost/type_traits/remove_pointer.hpp>
-	<boost/type_traits/is_signed.hpp>
-	<boost/type_traits/is_unsigned.hpp>
-	<boost/type_traits/is_floating_point.hpp>
-	<boost/type_traits/is_integral.hpp>
-	<boost/type_traits/make_unsigned.hpp>
-	<boost/throw_exception.hpp>
-	<boost/multiprecision/detail/generic_interconvert.hpp>
-	<boost/multiprecision/detail/number_compare.hpp>
-	<boost/multiprecision/traits/is_restricted_conversion.hpp>
-	<istream>
-	<cstdio>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/max.hpp
-	<boost/mpl/min_max.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/plus.hpp
-	<boost/mpl/aux_/arithmetic_op.hpp>
-
-1355967734 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/detail/generic_interconvert.hpp
-	<boost/multiprecision/detail/default_ops.hpp>
-
-1355967734 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/detail/default_ops.hpp
-	<boost/math/policies/error_handling.hpp>
-	<boost/multiprecision/detail/number_base.hpp>
-	<boost/math/special_functions/fpclassify.hpp>
-	<boost/utility/enable_if.hpp>
-	<boost/mpl/front.hpp>
-	<boost/cstdint.hpp>
-	<boost/type_traits/make_unsigned.hpp>
-	<boost/multiprecision/detail/functions/constants.hpp>
-	<boost/multiprecision/detail/functions/pow.hpp>
-	<boost/multiprecision/detail/functions/trig.hpp>
-	<boost/multiprecision/detail/no_et_ops.hpp>
-	<boost/multiprecision/detail/et_ops.hpp>
-
-1358707198 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/math/policies/error_handling.hpp
-	<stdexcept>
-	<iomanip>
-	<string>
-	<cerrno>
-	<boost/config/no_tr1/complex.hpp>
-	<boost/config/no_tr1/cmath.hpp>
-	<stdexcept>
-	<boost/math/tools/config.hpp>
-	<boost/math/policies/policy.hpp>
-	<boost/math/tools/precision.hpp>
-	<boost/cstdint.hpp>
-	<boost/format.hpp>
-
-1336960892 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/math/tools/precision.hpp
-	<boost/limits.hpp>
-	<boost/assert.hpp>
-	<boost/static_assert.hpp>
-	<boost/mpl/int.hpp>
-	<boost/mpl/bool.hpp>
-	<boost/mpl/if.hpp>
-	<boost/math/policies/policy.hpp>
-	<iostream>
-	<iomanip>
-	<limits.h>
-	<math.h>
-
-1074947006 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format.hpp
-	<vector>
-	<string>
-	<boost/detail/workaround.hpp>
-	<boost/config.hpp>
-	<locale>
-	<boost/format/detail/compat_workarounds.hpp>
-	<cctype>
-	<boost/format/format_fwd.hpp>
-	<boost/format/internals_fwd.hpp>
-	<boost/format/internals.hpp>
-	<boost/format/format_class.hpp>
-	<boost/format/exceptions.hpp>
-	<boost/format/format_implementation.hpp>
-	<boost/format/group.hpp>
-	<boost/format/feed_args.hpp>
-	<boost/format/parsing.hpp>
-	<boost/format/free_funcs.hpp>
-	<boost/format/detail/unset_macros.hpp>
-
-1075868732 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/detail/compat_workarounds.hpp
-	<boost/format/detail/config_macros.hpp>
-	<streambuf>
-	<ostream>
-
-1109106636 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/detail/config_macros.hpp
-	<boost/config.hpp>
-	<boost/detail/workaround.hpp>
-	<boost/format/detail/workarounds_gcc-2_95.hpp>
-	<boost/format/detail/workarounds_stlport.hpp>
-
-1090071956 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/detail/workarounds_gcc-2_95.hpp
-	<iostream>
-	<streambuf.h>
-
-1076453962 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/detail/workarounds_stlport.hpp
-
-1075868732 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/format_fwd.hpp
-	<string>
-	<iosfwd>
-	<boost/format/detail/compat_workarounds.hpp>
-
-1075453974 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/internals_fwd.hpp
-	<boost/format/format_fwd.hpp>
-	<boost/config.hpp>
-
-1278653238 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/internals.hpp
-	<string>
-	<boost/assert.hpp>
-	<boost/optional.hpp>
-	<boost/limits.hpp>
-	<boost/format/detail/compat_workarounds.hpp>
-	<boost/format/alt_sstream.hpp>
-
-1195956438 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/optional.hpp
-	"boost/optional/optional.hpp"
-
-1350766896 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/optional/optional.hpp
-	<new>
-	<algorithm>
-	<boost/config.hpp>
-	<boost/assert.hpp>
-	<boost/type.hpp>
-	<boost/type_traits/alignment_of.hpp>
-	<boost/type_traits/has_nothrow_constructor.hpp>
-	<boost/type_traits/type_with_alignment.hpp>
-	<boost/type_traits/remove_reference.hpp>
-	<boost/type_traits/is_reference.hpp>
-	<boost/mpl/if.hpp>
-	<boost/mpl/bool.hpp>
-	<boost/mpl/not.hpp>
-	<boost/detail/reference_content.hpp>
-	<boost/none.hpp>
-	<boost/utility/swap.hpp>
-	<boost/utility/addressof.hpp>
-	<boost/utility/compare_pointees.hpp>
-	<boost/utility/in_place_factory.hpp>
-	<boost/optional/optional_fwd.hpp>
-
-1301536068 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/none.hpp
-	"boost/none_t.hpp"
-
-1195956438 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/none_t.hpp
-
-1279174754 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/utility/compare_pointees.hpp
-	<functional>
-
-1279174754 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/utility/in_place_factory.hpp
-	<boost/utility/detail/in_place_factory_prefix.hpp>
-	<boost/utility/detail/in_place_factory_suffix.hpp>
-
-1279174754 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/utility/detail/in_place_factory_prefix.hpp
-	<new>
-	<cstddef>
-	<boost/config.hpp>
-	<boost/preprocessor/cat.hpp>
-	<boost/preprocessor/punctuation/paren.hpp>
-	<boost/preprocessor/iteration/iterate.hpp>
-	<boost/preprocessor/repetition/repeat.hpp>
-	<boost/preprocessor/repetition/enum.hpp>
-	<boost/preprocessor/repetition/enum_params.hpp>
-	<boost/preprocessor/repetition/enum_binary_params.hpp>
-	<boost/preprocessor/repetition/enum_trailing_params.hpp>
-
-1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/punctuation/paren.hpp
-
-1279174754 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/utility/detail/in_place_factory_suffix.hpp
-
-1301546862 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/optional/optional_fwd.hpp
-
-1109412416 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/alt_sstream.hpp
-	<string>
-	<boost/format/detail/compat_workarounds.hpp>
-	<boost/utility/base_from_member.hpp>
-	<boost/shared_ptr.hpp>
-	<boost/assert.hpp>
-	<boost/format/alt_sstream_impl.hpp>
-
-1101554844 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/utility/base_from_member.hpp
-	<boost/preprocessor/arithmetic/inc.hpp>
-	<boost/preprocessor/repetition/enum_binary_params.hpp>
-	<boost/preprocessor/repetition/enum_params.hpp>
-	<boost/preprocessor/repetition/repeat_from_to.hpp>
-
-1095036688 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/repetition/repeat_from_to.hpp
-	<boost/preprocessor/arithmetic/add.hpp>
-	<boost/preprocessor/arithmetic/sub.hpp>
-	<boost/preprocessor/cat.hpp>
-	<boost/preprocessor/config/config.hpp>
-	<boost/preprocessor/control/while.hpp>
-	<boost/preprocessor/debug/error.hpp>
-	<boost/preprocessor/detail/auto_rec.hpp>
-	<boost/preprocessor/repetition/repeat.hpp>
-	<boost/preprocessor/tuple/elem.hpp>
-	<boost/preprocessor/tuple/rem.hpp>
-
 1235953336 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/shared_ptr.hpp
 	<boost/smart_ptr/shared_ptr.hpp>
 
@@ -5226,578 +4989,6 @@
 
 1355193320 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/smart_ptr/detail/operator_bool.hpp
 
-1278653238 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/alt_sstream_impl.hpp
-
-1278653238 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/format_class.hpp
-	<vector>
-	<string>
-	<boost/optional.hpp>
-	<boost/format/format_fwd.hpp>
-	<boost/format/internals_fwd.hpp>
-	<boost/format/internals.hpp>
-	<boost/format/alt_sstream.hpp>
-
-1153348576 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/exceptions.hpp
-	<stdexcept>
-
-1278653238 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/format_implementation.hpp
-	<boost/config.hpp>
-	<boost/throw_exception.hpp>
-	<boost/assert.hpp>
-	<boost/format/format_class.hpp>
-	<algorithm>
-
-1197683070 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/group.hpp
-	<boost/config.hpp>
-
-1197687080 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/feed_args.hpp
-	<boost/config.hpp>
-	<boost/assert.hpp>
-	<boost/throw_exception.hpp>
-	<boost/format/format_class.hpp>
-	<boost/format/group.hpp>
-	<boost/format/detail/msvc_disambiguater.hpp>
-
-1118352566 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/detail/msvc_disambiguater.hpp
-	<boost/format/group.hpp>
-	<ostream>
-
-1242794480 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/parsing.hpp
-	<boost/format/format_class.hpp>
-	<boost/format/exceptions.hpp>
-	<boost/throw_exception.hpp>
-	<boost/assert.hpp>
-
-1075836338 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/free_funcs.hpp
-	<boost/format/format_class.hpp>
-	<boost/throw_exception.hpp>
-
-1109106636 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/format/detail/unset_macros.hpp
-
-1355274548 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/detail/number_base.hpp
-	<limits>
-	<boost/utility/enable_if.hpp>
-	<boost/type_traits/is_convertible.hpp>
-	<boost/type_traits/decay.hpp>
-	<boost/lexical_cast.hpp>
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/type_traits/decay.hpp
-	<boost/type_traits/config.hpp>
-	<boost/type_traits/is_array.hpp>
-	<boost/type_traits/is_function.hpp>
-	<boost/type_traits/remove_bounds.hpp>
-	<boost/type_traits/add_pointer.hpp>
-	<boost/type_traits/remove_reference.hpp>
-	<boost/mpl/eval_if.hpp>
-	<boost/mpl/identity.hpp>
-
-1348103042 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/detail/functions/constants.hpp
-
-1355967734 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/detail/functions/pow.hpp
-
-1355967734 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/detail/functions/trig.hpp
-
-1354321162 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/detail/no_et_ops.hpp
-
-1351306112 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/detail/et_ops.hpp
-
-1348111266 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/detail/number_compare.hpp
-
-1345510052 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/traits/is_restricted_conversion.hpp
-	<boost/multiprecision/traits/explicit_conversion.hpp>
-	<boost/mpl/if.hpp>
-	<boost/multiprecision/detail/number_base.hpp>
-
-1353207418 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/traits/explicit_conversion.hpp
-	<boost/type_traits/is_convertible.hpp>
-	<boost/utility/declval.hpp>
-
-1355274548 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/detail/integer_ops.hpp
-	<boost/multiprecision/number.hpp>
-
-1355967734 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/cpp_int/cpp_int_config.hpp
-	<boost/integer.hpp>
-	<boost/integer_traits.hpp>
-	<boost/mpl/if.hpp>
-	<boost/mpl/int.hpp>
-	<boost/static_assert.hpp>
-	<boost/assert.hpp>
-
-1355274548 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/rational_adapter.hpp
-	<iostream>
-	<iomanip>
-	<sstream>
-	<boost/cstdint.hpp>
-	<boost/multiprecision/number.hpp>
-	<boost/rational.hpp>
-
-1229889444 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/rational.hpp
-	<iostream>
-	<ios>
-	<stdexcept>
-	<string>
-	<boost/operators.hpp>
-	<cstdlib>
-	<boost/call_traits.hpp>
-	<boost/config.hpp>
-	<boost/detail/workaround.hpp>
-	<boost/assert.hpp>
-	<boost/math/common_factor_rt.hpp>
-	<limits>
-	<boost/static_assert.hpp>
-
-1300946496 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/operators.hpp
-	<boost/config.hpp>
-	<boost/iterator.hpp>
-	<boost/detail/workaround.hpp>
-
-1299374374 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/math/common_factor_rt.hpp
-	<boost/math_fwd.hpp>
-	<boost/config.hpp>
-	<boost/limits.hpp>
-	<climits>
-	<boost/detail/workaround.hpp>
-
-1260756888 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/integer/static_min_max.hpp
-	<boost/integer_fwd.hpp>
-
-1355105498 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/type_traits/common_type.hpp
-	<boost/config.hpp>
-	<boost/typeof/typeof.hpp>
-	<boost/mpl/assert.hpp>
-	<boost/mpl/bool.hpp>
-	<boost/static_assert.hpp>
-	<boost/type_traits/detail/common_type_imp.hpp>
-	<boost/type_traits/remove_cv.hpp>
-	<boost/mpl/if.hpp>
-	<boost/utility/declval.hpp>
-	<boost/type_traits/add_rvalue_reference.hpp>
-
-1355179346 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/typeof.hpp
-	<boost/typeof/dmc/typeof_impl.hpp>
-	<boost/typeof/msvc/typeof_impl.hpp>
-	<boost/typeof/msvc/typeof_impl.hpp>
-	<boost/typeof/unsupported.hpp>
-	<boost/typeof/message.hpp>
-	<boost/typeof/typeof_impl.hpp>
-	<boost/typeof/type_encoding.hpp>
-	<boost/typeof/template_encoding.hpp>
-	<boost/typeof/modifiers.hpp>
-	<boost/typeof/pointers_data_members.hpp>
-	<boost/typeof/register_functions.hpp>
-	<boost/typeof/register_fundamental.hpp>
-	<boost/typeof/message.hpp>
-	<boost/typeof/native.hpp>
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/dmc/typeof_impl.hpp
-	<boost/config.hpp>
-	<boost/detail/workaround.hpp>
-	<boost/mpl/int.hpp>
-
-1290318172 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/msvc/typeof_impl.hpp
-	<boost/config.hpp>
-	<boost/detail/workaround.hpp>
-	<boost/mpl/int.hpp>
-	<boost/type_traits/is_function.hpp>
-	<boost/utility/enable_if.hpp>
-	<typeinfo>
-
-1355179346 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/unsupported.hpp
-
-1355179346 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/message.hpp
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/typeof_impl.hpp
-	<boost/mpl/size_t.hpp>
-	<boost/preprocessor/repetition/enum.hpp>
-	<boost/typeof/encode_decode.hpp>
-	<boost/typeof/vector.hpp>
-	<boost/type_traits/is_function.hpp>
-	<boost/utility/enable_if.hpp>
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/encode_decode.hpp
-	<boost/mpl/deref.hpp>
-	<boost/mpl/next.hpp>
-	<boost/typeof/message.hpp>
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/vector.hpp
-	<boost/mpl/int.hpp>
-	<boost/preprocessor/iteration/self.hpp>
-	<boost/typeof/vector50.hpp>
-	<boost/typeof/vector100.hpp>
-	<boost/typeof/vector150.hpp>
-	<boost/typeof/vector200.hpp>
-	<boost/preprocessor/enum_params.hpp>
-	<boost/preprocessor/repeat.hpp>
-	<boost/preprocessor/repeat_from_to.hpp>
-	<boost/preprocessor/cat.hpp>
-	<boost/preprocessor/inc.hpp>
-	<boost/preprocessor/dec.hpp>
-	<boost/preprocessor/comma_if.hpp>
-	<boost/preprocessor/iteration/local.hpp>
-	<boost/preprocessor/control/expr_iif.hpp>
-	<boost/preprocessor/logical/not.hpp>
-
-1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/iteration/self.hpp
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/vector50.hpp
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/vector100.hpp
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/vector150.hpp
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/vector200.hpp
-
-1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/repeat_from_to.hpp
-	<boost/preprocessor/repetition/repeat_from_to.hpp>
-
-1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/iteration/local.hpp
-	<boost/preprocessor/config/config.hpp>
-	<boost/preprocessor/slot/slot.hpp>
-	<boost/preprocessor/tuple/elem.hpp>
-
-1095036688 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/logical/not.hpp
-	<boost/preprocessor/config/config.hpp>
-	<boost/preprocessor/logical/bool.hpp>
-	<boost/preprocessor/logical/compl.hpp>
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/type_encoding.hpp
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/template_encoding.hpp
-	<boost/preprocessor/cat.hpp>
-	<boost/preprocessor/repetition/enum_trailing.hpp>
-	<boost/preprocessor/control/iif.hpp>
-	<boost/preprocessor/detail/is_unary.hpp>
-	<boost/preprocessor/repetition/repeat.hpp>
-	<boost/preprocessor/tuple/eat.hpp>
-	<boost/preprocessor/seq/transform.hpp>
-	<boost/preprocessor/seq/for_each_i.hpp>
-	<boost/preprocessor/seq/cat.hpp>
-	<boost/typeof/encode_decode.hpp>
-	<boost/typeof/int_encoding.hpp>
-	<boost/typeof/type_template_param.hpp>
-	<boost/typeof/integral_template_param.hpp>
-	<boost/typeof/template_template_param.hpp>
-
-1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/repetition/enum_trailing.hpp
-	<boost/preprocessor/cat.hpp>
-	<boost/preprocessor/config/config.hpp>
-	<boost/preprocessor/debug/error.hpp>
-	<boost/preprocessor/detail/auto_rec.hpp>
-	<boost/preprocessor/repetition/repeat.hpp>
-	<boost/preprocessor/tuple/elem.hpp>
-	<boost/preprocessor/tuple/rem.hpp>
-
-1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/detail/is_unary.hpp
-	<boost/preprocessor/config/config.hpp>
-	<boost/preprocessor/detail/check.hpp>
-
-1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/seq/transform.hpp
-	<boost/preprocessor/config/config.hpp>
-	<boost/preprocessor/seq/fold_left.hpp>
-	<boost/preprocessor/seq/seq.hpp>
-	<boost/preprocessor/tuple/elem.hpp>
-	<boost/preprocessor/tuple/rem.hpp>
-
-1302056562 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/seq/cat.hpp
-	<boost/preprocessor/arithmetic/dec.hpp>
-	<boost/preprocessor/config/config.hpp>
-	<boost/preprocessor/control/if.hpp>
-	<boost/preprocessor/seq/fold_left.hpp>
-	<boost/preprocessor/seq/seq.hpp>
-	<boost/preprocessor/seq/size.hpp>
-	<boost/preprocessor/tuple/eat.hpp>
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/int_encoding.hpp
-	<boost/mpl/if.hpp>
-	<boost/mpl/size_t.hpp>
-	<boost/config.hpp>
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/type_template_param.hpp
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/integral_template_param.hpp
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/template_template_param.hpp
-	<boost/preprocessor/logical/or.hpp>
-	<boost/preprocessor/seq/fold_left.hpp>
-	<boost/preprocessor/seq/enum.hpp>
-
-1095036688 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/logical/or.hpp
-	<boost/preprocessor/config/config.hpp>
-	<boost/preprocessor/logical/bool.hpp>
-	<boost/preprocessor/logical/bitor.hpp>
-
-1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/logical/bitor.hpp
-	<boost/preprocessor/config/config.hpp>
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/modifiers.hpp
-	<boost/typeof/encode_decode.hpp>
-	<boost/preprocessor/facilities/identity.hpp>
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/pointers_data_members.hpp
-	<boost/typeof/encode_decode_params.hpp>
-	<boost/typeof/encode_decode.hpp>
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/encode_decode_params.hpp
-	<boost/preprocessor/cat.hpp>
-	<boost/preprocessor/repetition/repeat.hpp>
-
-1355179346 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/register_functions.hpp
-	<boost/preprocessor/repetition/enum.hpp>
-	<boost/preprocessor/repetition/enum_params.hpp>
-	<boost/preprocessor/repetition/enum_trailing_params.hpp>
-	<boost/preprocessor/cat.hpp>
-	<boost/preprocessor/inc.hpp>
-	<boost/preprocessor/dec.hpp>
-	<boost/preprocessor/if.hpp>
-	<boost/preprocessor/arithmetic/add.hpp>
-	<boost/preprocessor/iteration/iterate.hpp>
-
-1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/if.hpp
-	<boost/preprocessor/control/if.hpp>
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/register_fundamental.hpp
-	<boost/typeof/typeof.hpp>
-
-1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/native.hpp
-	<boost/type_traits/is_function.hpp>
-	<boost/utility/enable_if.hpp>
-
-1356662362 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/type_traits/detail/common_type_imp.hpp
-	<cstddef>
-	<boost/mpl/assert.hpp>
-	<boost/mpl/at.hpp>
-	<boost/mpl/begin_end.hpp>
-	<boost/mpl/contains.hpp>
-	<boost/mpl/copy.hpp>
-	<boost/mpl/deref.hpp>
-	<boost/mpl/eval_if.hpp>
-	<boost/mpl/if.hpp>
-	<boost/mpl/inserter.hpp>
-	<boost/mpl/next.hpp>
-	<boost/mpl/or.hpp>
-	<boost/mpl/placeholders.hpp>
-	<boost/mpl/push_back.hpp>
-	<boost/mpl/size.hpp>
-	<boost/mpl/vector/vector0.hpp>
-	<boost/mpl/vector/vector10.hpp>
-	<boost/type_traits/integral_constant.hpp>
-	<boost/type_traits/is_enum.hpp>
-	<boost/type_traits/is_integral.hpp>
-	<boost/type_traits/make_signed.hpp>
-	<boost/type_traits/make_unsigned.hpp>
-	<boost/type_traits/remove_cv.hpp>
-	<boost/type_traits/remove_reference.hpp>
-	<boost/utility/declval.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/copy.hpp
-	<boost/mpl/fold.hpp>
-	<boost/mpl/reverse_fold.hpp>
-	<boost/mpl/aux_/inserter_algorithm.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/vector0.hpp
-	<boost/mpl/vector/aux_/at.hpp>
-	<boost/mpl/vector/aux_/front.hpp>
-	<boost/mpl/vector/aux_/push_front.hpp>
-	<boost/mpl/vector/aux_/pop_front.hpp>
-	<boost/mpl/vector/aux_/push_back.hpp>
-	<boost/mpl/vector/aux_/pop_back.hpp>
-	<boost/mpl/vector/aux_/back.hpp>
-	<boost/mpl/vector/aux_/clear.hpp>
-	<boost/mpl/vector/aux_/O1_size.hpp>
-	<boost/mpl/vector/aux_/size.hpp>
-	<boost/mpl/vector/aux_/empty.hpp>
-	<boost/mpl/vector/aux_/item.hpp>
-	<boost/mpl/vector/aux_/iterator.hpp>
-	<boost/mpl/vector/aux_/vector0.hpp>
-	<boost/mpl/vector/aux_/begin_end.hpp>
-	<boost/mpl/vector/aux_/tag.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/at.hpp
-	<boost/mpl/at_fwd.hpp>
-	<boost/mpl/vector/aux_/tag.hpp>
-	<boost/mpl/long.hpp>
-	<boost/mpl/void.hpp>
-	<boost/mpl/aux_/nttp_decl.hpp>
-	<boost/mpl/aux_/type_wrapper.hpp>
-	<boost/mpl/aux_/value_wknd.hpp>
-	<boost/mpl/aux_/config/typeof.hpp>
-	<boost/mpl/aux_/config/ctps.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/tag.hpp
-	<boost/mpl/aux_/config/typeof.hpp>
-	<boost/mpl/aux_/nttp_decl.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/aux_/config/typeof.hpp
-	<boost/mpl/aux_/config/gcc.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/front.hpp
-	<boost/mpl/front_fwd.hpp>
-	<boost/mpl/vector/aux_/at.hpp>
-	<boost/mpl/vector/aux_/tag.hpp>
-	<boost/mpl/aux_/nttp_decl.hpp>
-	<boost/mpl/aux_/config/typeof.hpp>
-	<boost/mpl/aux_/config/ctps.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/push_front.hpp
-	<boost/mpl/push_front_fwd.hpp>
-	<boost/mpl/aux_/config/typeof.hpp>
-	<boost/mpl/vector/aux_/item.hpp>
-	<boost/mpl/vector/aux_/tag.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/item.hpp
-	<boost/mpl/long.hpp>
-	<boost/mpl/void.hpp>
-	<boost/mpl/next_prior.hpp>
-	<boost/mpl/aux_/type_wrapper.hpp>
-	<boost/mpl/aux_/config/typeof.hpp>
-	<boost/mpl/aux_/config/ctps.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/pop_front.hpp
-	<boost/mpl/pop_front_fwd.hpp>
-	<boost/mpl/aux_/config/typeof.hpp>
-	<boost/mpl/vector/aux_/item.hpp>
-	<boost/mpl/vector/aux_/tag.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/pop_front_fwd.hpp
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/push_back.hpp
-	<boost/mpl/push_back_fwd.hpp>
-	<boost/mpl/aux_/config/typeof.hpp>
-	<boost/mpl/vector/aux_/item.hpp>
-	<boost/mpl/vector/aux_/tag.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/pop_back.hpp
-	<boost/mpl/pop_back_fwd.hpp>
-	<boost/mpl/aux_/config/typeof.hpp>
-	<boost/mpl/vector/aux_/item.hpp>
-	<boost/mpl/vector/aux_/tag.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/pop_back_fwd.hpp
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/back.hpp
-	<boost/mpl/back_fwd.hpp>
-	<boost/mpl/next_prior.hpp>
-	<boost/mpl/vector/aux_/at.hpp>
-	<boost/mpl/vector/aux_/tag.hpp>
-	<boost/mpl/aux_/config/typeof.hpp>
-	<boost/mpl/aux_/config/ctps.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/back_fwd.hpp
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/clear.hpp
-	<boost/mpl/clear_fwd.hpp>
-	<boost/mpl/vector/aux_/vector0.hpp>
-	<boost/mpl/vector/aux_/tag.hpp>
-	<boost/mpl/aux_/config/typeof.hpp>
-	<boost/mpl/aux_/config/ctps.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/vector0.hpp
-	<boost/mpl/long.hpp>
-	<boost/mpl/void.hpp>
-	<boost/mpl/aux_/na.hpp>
-	<boost/mpl/aux_/type_wrapper.hpp>
-	<boost/mpl/vector/aux_/iterator.hpp>
-	<boost/mpl/vector/aux_/tag.hpp>
-	<boost/mpl/aux_/config/typeof.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/iterator.hpp
-	<boost/mpl/vector/aux_/at.hpp>
-	<boost/mpl/iterator_tags.hpp>
-	<boost/mpl/plus.hpp>
-	<boost/mpl/minus.hpp>
-	<boost/mpl/advance_fwd.hpp>
-	<boost/mpl/distance_fwd.hpp>
-	<boost/mpl/next.hpp>
-	<boost/mpl/prior.hpp>
-	<boost/mpl/aux_/nttp_decl.hpp>
-	<boost/mpl/aux_/value_wknd.hpp>
-	<boost/mpl/aux_/config/ctps.hpp>
-	<boost/mpl/aux_/config/workaround.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/minus.hpp
-	<boost/mpl/aux_/arithmetic_op.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/O1_size.hpp
-	<boost/mpl/O1_size_fwd.hpp>
-	<boost/mpl/minus.hpp>
-	<boost/mpl/long.hpp>
-	<boost/mpl/vector/aux_/tag.hpp>
-	<boost/mpl/aux_/config/typeof.hpp>
-	<boost/mpl/aux_/config/ctps.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/size.hpp
-	<boost/mpl/size_fwd.hpp>
-	<boost/mpl/vector/aux_/O1_size.hpp>
-	<boost/mpl/vector/aux_/tag.hpp>
-	<boost/mpl/aux_/config/typeof.hpp>
-	<boost/mpl/aux_/config/ctps.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/empty.hpp
-	<boost/mpl/empty_fwd.hpp>
-	<boost/mpl/bool.hpp>
-	<boost/mpl/vector/aux_/tag.hpp>
-	<boost/mpl/aux_/config/typeof.hpp>
-	<boost/mpl/aux_/config/ctps.hpp>
-	<boost/type_traits/is_same.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/begin_end.hpp
-	<boost/mpl/aux_/config/typeof.hpp>
-	<boost/mpl/begin_end_fwd.hpp>
-	<boost/mpl/vector/aux_/iterator.hpp>
-	<boost/mpl/vector/aux_/tag.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/vector10.hpp
-	<boost/mpl/vector/vector0.hpp>
-	<boost/mpl/aux_/config/use_preprocessed.hpp>
-	<boost/mpl/vector/aux_/include_preprocessed.hpp>
-	<boost/mpl/aux_/config/typeof.hpp>
-	<boost/mpl/aux_/config/ctps.hpp>
-	<boost/preprocessor/iterate.hpp>
-
-1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/include_preprocessed.hpp
-	<boost/mpl/aux_/config/typeof.hpp>
-	<boost/mpl/aux_/config/ctps.hpp>
-	<boost/mpl/aux_/config/preprocessor.hpp>
-	<boost/mpl/aux_/config/workaround.hpp>
-	<boost/preprocessor/cat.hpp>
-	<boost/preprocessor/stringize.hpp>
-
-1355105498 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/type_traits/make_signed.hpp
-	<boost/mpl/if.hpp>
-	<boost/type_traits/is_integral.hpp>
-	<boost/type_traits/is_signed.hpp>
-	<boost/type_traits/is_unsigned.hpp>
-	<boost/type_traits/is_enum.hpp>
-	<boost/type_traits/is_same.hpp>
-	<boost/type_traits/remove_cv.hpp>
-	<boost/type_traits/is_const.hpp>
-	<boost/type_traits/is_volatile.hpp>
-	<boost/type_traits/add_const.hpp>
-	<boost/type_traits/add_volatile.hpp>
-	<boost/type_traits/detail/ice_or.hpp>
-	<boost/type_traits/detail/ice_and.hpp>
-	<boost/type_traits/detail/ice_not.hpp>
-	<boost/static_assert.hpp>
-	<boost/type_traits/detail/type_trait_def.hpp>
-	<boost/type_traits/detail/type_trait_undef.hpp>
-
-1355967734 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/cpp_int/checked.hpp
-
-1354321162 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/cpp_int/comparison.hpp
-	<boost/type_traits/make_unsigned.hpp>
-
-1355967734 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/cpp_int/add.hpp
-
-1354321162 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/cpp_int/multiply.hpp
-
-1358133236 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/cpp_int/divide.hpp
-
-1355967734 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/cpp_int/bitwise.hpp
-
-1355967734 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/cpp_int/misc.hpp
-
-1355274548 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/multiprecision/cpp_int/limits.hpp
-
 1278743184 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/bind/placeholders.hpp
 	<boost/bind/arg.hpp>
 	<boost/config.hpp>
@@ -5853,6 +5044,23 @@
 
 1222560316 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/bind/bind_mf2_cc.hpp
 
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFMap.h
+	<map>
+	<list>
+	<string>
+	<iostream>
+	<typeinfo>
+	"NFMapEx.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFMapEx.h
+	<map>
+	<list>
+	<string>
+	<iostream>
+	<typeinfo>
+	<memory>
+	"NFComm/NFPluginModule/NFPlatform.h"
+
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIPropertyManager.h
 	"NFMap.h"
 	"NFIProperty.h"
@@ -5869,12 +5077,9 @@
 	<algorithm>
 	"NFComm/NFPluginModule/NFPlatform.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIKernelModule.h
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h
 	<iostream>
-	<string>
 	"NFILogicModule.h"
-	"NFComm/NFCore/NFIObject.h"
-	"NFComm/NFPluginModule/NFIdentID.h"
 
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILogicModule.h
 	<string>
@@ -5897,6 +5102,19 @@
 
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFEventDefine/NFEventDefine.h
 	<iostream>
+
+1433398885 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIEventProcessModule.h
+	<iostream>
+	"NFILogicModule.h"
+	"NFComm/NFCore/NFIDataList.h"
+	"NFComm/NFEventDefine/NFEventDefine.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIKernelModule.h
+	<iostream>
+	<string>
+	"NFILogicModule.h"
+	"NFComm/NFCore/NFIObject.h"
+	"NFComm/NFPluginModule/NFIdentID.h"
 
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIObject.h
 	"NFComm/NFPluginModule/NFPlatform.h"
@@ -5927,10 +5145,20 @@
 	"NFComm/NFPluginModule/NFIdentID.h"
 	"NFComm/NFPluginModule/NFILogicModule.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILoginNet_ServerModule.h
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILogicClassModule.h
 	<iostream>
 	"NFILogicModule.h"
-	"NFINetModule.h"
+	"NFComm/NFCore/NFIPropertyManager.h"
+	"NFComm/NFCore/NFIRecordManager.h"
+	"NFComm/NFCore/NFIComponentManager.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFISceneProcessModule.h
+	<iostream>
+	"NFILogicModule.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIGameLogicModule.h
+	<iostream>
+	"NFILogicModule.h"
 
 1433413897 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFINetModule.h
 	<iostream>
@@ -6047,19 +5275,6 @@
 	<mutex>
 	"NFComm/NFPluginModule/NFPlatform.h"
 
-1433398885 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIEventProcessModule.h
-	<iostream>
-	"NFILogicModule.h"
-	"NFComm/NFCore/NFIDataList.h"
-	"NFComm/NFEventDefine/NFEventDefine.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILoginLogicModule.h
-	<iostream>
-	"NFILogicModule.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILogModule.h
-	"NFILogicModule.h"
-
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIElementInfoModule.h
 	<iostream>
 	"NFILogicModule.h"
@@ -6068,12 +5283,10 @@
 	"NFComm/NFCore/NFIRecordManager.h"
 	"NFComm/NFCore/NFIComponentManager.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILogicClassModule.h
-	<iostream>
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIPluginManager.h
+	"NFIActor.h"
 	"NFILogicModule.h"
-	"NFComm/NFCore/NFIPropertyManager.h"
-	"NFComm/NFCore/NFIRecordManager.h"
-	"NFComm/NFCore/NFIComponentManager.h"
+	"NFIActorManager.h"
 
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIActor.h
 	<map>
@@ -6321,6 +5534,11 @@
 	<boost/config/auto_link.hpp>
 
 1278359250 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/system/api_config.hpp
+
+1300946496 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/operators.hpp
+	<boost/config.hpp>
+	<boost/iterator.hpp>
+	<boost/detail/workaround.hpp>
 
 1092968226 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/noncopyable.hpp
 
@@ -6764,8 +5982,465 @@
 	<boost/utility/enable_if.hpp>
 	<boost/integer_traits.hpp>
 
+1229889444 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/rational.hpp
+	<iostream>
+	<ios>
+	<stdexcept>
+	<string>
+	<boost/operators.hpp>
+	<cstdlib>
+	<boost/call_traits.hpp>
+	<boost/config.hpp>
+	<boost/detail/workaround.hpp>
+	<boost/assert.hpp>
+	<boost/math/common_factor_rt.hpp>
+	<limits>
+	<boost/static_assert.hpp>
+
+1299374374 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/math/common_factor_rt.hpp
+	<boost/math_fwd.hpp>
+	<boost/config.hpp>
+	<boost/limits.hpp>
+	<climits>
+	<boost/detail/workaround.hpp>
+
 1300673662 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/ratio/mpl/rational_c_tag.hpp
 	<boost/mpl/int.hpp>
+
+1355105498 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/type_traits/common_type.hpp
+	<boost/config.hpp>
+	<boost/typeof/typeof.hpp>
+	<boost/mpl/assert.hpp>
+	<boost/mpl/bool.hpp>
+	<boost/static_assert.hpp>
+	<boost/type_traits/detail/common_type_imp.hpp>
+	<boost/type_traits/remove_cv.hpp>
+	<boost/mpl/if.hpp>
+	<boost/utility/declval.hpp>
+	<boost/type_traits/add_rvalue_reference.hpp>
+
+1355179346 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/typeof.hpp
+	<boost/typeof/dmc/typeof_impl.hpp>
+	<boost/typeof/msvc/typeof_impl.hpp>
+	<boost/typeof/msvc/typeof_impl.hpp>
+	<boost/typeof/unsupported.hpp>
+	<boost/typeof/message.hpp>
+	<boost/typeof/typeof_impl.hpp>
+	<boost/typeof/type_encoding.hpp>
+	<boost/typeof/template_encoding.hpp>
+	<boost/typeof/modifiers.hpp>
+	<boost/typeof/pointers_data_members.hpp>
+	<boost/typeof/register_functions.hpp>
+	<boost/typeof/register_fundamental.hpp>
+	<boost/typeof/message.hpp>
+	<boost/typeof/native.hpp>
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/dmc/typeof_impl.hpp
+	<boost/config.hpp>
+	<boost/detail/workaround.hpp>
+	<boost/mpl/int.hpp>
+
+1290318172 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/msvc/typeof_impl.hpp
+	<boost/config.hpp>
+	<boost/detail/workaround.hpp>
+	<boost/mpl/int.hpp>
+	<boost/type_traits/is_function.hpp>
+	<boost/utility/enable_if.hpp>
+	<typeinfo>
+
+1355179346 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/unsupported.hpp
+
+1355179346 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/message.hpp
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/typeof_impl.hpp
+	<boost/mpl/size_t.hpp>
+	<boost/preprocessor/repetition/enum.hpp>
+	<boost/typeof/encode_decode.hpp>
+	<boost/typeof/vector.hpp>
+	<boost/type_traits/is_function.hpp>
+	<boost/utility/enable_if.hpp>
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/encode_decode.hpp
+	<boost/mpl/deref.hpp>
+	<boost/mpl/next.hpp>
+	<boost/typeof/message.hpp>
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/vector.hpp
+	<boost/mpl/int.hpp>
+	<boost/preprocessor/iteration/self.hpp>
+	<boost/typeof/vector50.hpp>
+	<boost/typeof/vector100.hpp>
+	<boost/typeof/vector150.hpp>
+	<boost/typeof/vector200.hpp>
+	<boost/preprocessor/enum_params.hpp>
+	<boost/preprocessor/repeat.hpp>
+	<boost/preprocessor/repeat_from_to.hpp>
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/inc.hpp>
+	<boost/preprocessor/dec.hpp>
+	<boost/preprocessor/comma_if.hpp>
+	<boost/preprocessor/iteration/local.hpp>
+	<boost/preprocessor/control/expr_iif.hpp>
+	<boost/preprocessor/logical/not.hpp>
+
+1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/iteration/self.hpp
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/vector50.hpp
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/vector100.hpp
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/vector150.hpp
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/vector200.hpp
+
+1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/repeat_from_to.hpp
+	<boost/preprocessor/repetition/repeat_from_to.hpp>
+
+1095036688 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/repetition/repeat_from_to.hpp
+	<boost/preprocessor/arithmetic/add.hpp>
+	<boost/preprocessor/arithmetic/sub.hpp>
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/config/config.hpp>
+	<boost/preprocessor/control/while.hpp>
+	<boost/preprocessor/debug/error.hpp>
+	<boost/preprocessor/detail/auto_rec.hpp>
+	<boost/preprocessor/repetition/repeat.hpp>
+	<boost/preprocessor/tuple/elem.hpp>
+	<boost/preprocessor/tuple/rem.hpp>
+
+1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/iteration/local.hpp
+	<boost/preprocessor/config/config.hpp>
+	<boost/preprocessor/slot/slot.hpp>
+	<boost/preprocessor/tuple/elem.hpp>
+
+1095036688 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/logical/not.hpp
+	<boost/preprocessor/config/config.hpp>
+	<boost/preprocessor/logical/bool.hpp>
+	<boost/preprocessor/logical/compl.hpp>
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/type_encoding.hpp
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/template_encoding.hpp
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/repetition/enum_trailing.hpp>
+	<boost/preprocessor/control/iif.hpp>
+	<boost/preprocessor/detail/is_unary.hpp>
+	<boost/preprocessor/repetition/repeat.hpp>
+	<boost/preprocessor/tuple/eat.hpp>
+	<boost/preprocessor/seq/transform.hpp>
+	<boost/preprocessor/seq/for_each_i.hpp>
+	<boost/preprocessor/seq/cat.hpp>
+	<boost/typeof/encode_decode.hpp>
+	<boost/typeof/int_encoding.hpp>
+	<boost/typeof/type_template_param.hpp>
+	<boost/typeof/integral_template_param.hpp>
+	<boost/typeof/template_template_param.hpp>
+
+1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/repetition/enum_trailing.hpp
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/config/config.hpp>
+	<boost/preprocessor/debug/error.hpp>
+	<boost/preprocessor/detail/auto_rec.hpp>
+	<boost/preprocessor/repetition/repeat.hpp>
+	<boost/preprocessor/tuple/elem.hpp>
+	<boost/preprocessor/tuple/rem.hpp>
+
+1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/detail/is_unary.hpp
+	<boost/preprocessor/config/config.hpp>
+	<boost/preprocessor/detail/check.hpp>
+
+1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/seq/transform.hpp
+	<boost/preprocessor/config/config.hpp>
+	<boost/preprocessor/seq/fold_left.hpp>
+	<boost/preprocessor/seq/seq.hpp>
+	<boost/preprocessor/tuple/elem.hpp>
+	<boost/preprocessor/tuple/rem.hpp>
+
+1302056562 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/seq/cat.hpp
+	<boost/preprocessor/arithmetic/dec.hpp>
+	<boost/preprocessor/config/config.hpp>
+	<boost/preprocessor/control/if.hpp>
+	<boost/preprocessor/seq/fold_left.hpp>
+	<boost/preprocessor/seq/seq.hpp>
+	<boost/preprocessor/seq/size.hpp>
+	<boost/preprocessor/tuple/eat.hpp>
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/int_encoding.hpp
+	<boost/mpl/if.hpp>
+	<boost/mpl/size_t.hpp>
+	<boost/config.hpp>
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/type_template_param.hpp
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/integral_template_param.hpp
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/template_template_param.hpp
+	<boost/preprocessor/logical/or.hpp>
+	<boost/preprocessor/seq/fold_left.hpp>
+	<boost/preprocessor/seq/enum.hpp>
+
+1095036688 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/logical/or.hpp
+	<boost/preprocessor/config/config.hpp>
+	<boost/preprocessor/logical/bool.hpp>
+	<boost/preprocessor/logical/bitor.hpp>
+
+1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/logical/bitor.hpp
+	<boost/preprocessor/config/config.hpp>
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/modifiers.hpp
+	<boost/typeof/encode_decode.hpp>
+	<boost/preprocessor/facilities/identity.hpp>
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/pointers_data_members.hpp
+	<boost/typeof/encode_decode_params.hpp>
+	<boost/typeof/encode_decode.hpp>
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/encode_decode_params.hpp
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/repetition/repeat.hpp>
+
+1355179346 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/register_functions.hpp
+	<boost/preprocessor/repetition/enum.hpp>
+	<boost/preprocessor/repetition/enum_params.hpp>
+	<boost/preprocessor/repetition/enum_trailing_params.hpp>
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/inc.hpp>
+	<boost/preprocessor/dec.hpp>
+	<boost/preprocessor/if.hpp>
+	<boost/preprocessor/arithmetic/add.hpp>
+	<boost/preprocessor/iteration/iterate.hpp>
+
+1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/if.hpp
+	<boost/preprocessor/control/if.hpp>
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/register_fundamental.hpp
+	<boost/typeof/typeof.hpp>
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/typeof/native.hpp
+	<boost/type_traits/is_function.hpp>
+	<boost/utility/enable_if.hpp>
+
+1356662362 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/type_traits/detail/common_type_imp.hpp
+	<cstddef>
+	<boost/mpl/assert.hpp>
+	<boost/mpl/at.hpp>
+	<boost/mpl/begin_end.hpp>
+	<boost/mpl/contains.hpp>
+	<boost/mpl/copy.hpp>
+	<boost/mpl/deref.hpp>
+	<boost/mpl/eval_if.hpp>
+	<boost/mpl/if.hpp>
+	<boost/mpl/inserter.hpp>
+	<boost/mpl/next.hpp>
+	<boost/mpl/or.hpp>
+	<boost/mpl/placeholders.hpp>
+	<boost/mpl/push_back.hpp>
+	<boost/mpl/size.hpp>
+	<boost/mpl/vector/vector0.hpp>
+	<boost/mpl/vector/vector10.hpp>
+	<boost/type_traits/integral_constant.hpp>
+	<boost/type_traits/is_enum.hpp>
+	<boost/type_traits/is_integral.hpp>
+	<boost/type_traits/make_signed.hpp>
+	<boost/type_traits/make_unsigned.hpp>
+	<boost/type_traits/remove_cv.hpp>
+	<boost/type_traits/remove_reference.hpp>
+	<boost/utility/declval.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/copy.hpp
+	<boost/mpl/fold.hpp>
+	<boost/mpl/reverse_fold.hpp>
+	<boost/mpl/aux_/inserter_algorithm.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/vector0.hpp
+	<boost/mpl/vector/aux_/at.hpp>
+	<boost/mpl/vector/aux_/front.hpp>
+	<boost/mpl/vector/aux_/push_front.hpp>
+	<boost/mpl/vector/aux_/pop_front.hpp>
+	<boost/mpl/vector/aux_/push_back.hpp>
+	<boost/mpl/vector/aux_/pop_back.hpp>
+	<boost/mpl/vector/aux_/back.hpp>
+	<boost/mpl/vector/aux_/clear.hpp>
+	<boost/mpl/vector/aux_/O1_size.hpp>
+	<boost/mpl/vector/aux_/size.hpp>
+	<boost/mpl/vector/aux_/empty.hpp>
+	<boost/mpl/vector/aux_/item.hpp>
+	<boost/mpl/vector/aux_/iterator.hpp>
+	<boost/mpl/vector/aux_/vector0.hpp>
+	<boost/mpl/vector/aux_/begin_end.hpp>
+	<boost/mpl/vector/aux_/tag.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/at.hpp
+	<boost/mpl/at_fwd.hpp>
+	<boost/mpl/vector/aux_/tag.hpp>
+	<boost/mpl/long.hpp>
+	<boost/mpl/void.hpp>
+	<boost/mpl/aux_/nttp_decl.hpp>
+	<boost/mpl/aux_/type_wrapper.hpp>
+	<boost/mpl/aux_/value_wknd.hpp>
+	<boost/mpl/aux_/config/typeof.hpp>
+	<boost/mpl/aux_/config/ctps.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/tag.hpp
+	<boost/mpl/aux_/config/typeof.hpp>
+	<boost/mpl/aux_/nttp_decl.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/aux_/config/typeof.hpp
+	<boost/mpl/aux_/config/gcc.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/front.hpp
+	<boost/mpl/front_fwd.hpp>
+	<boost/mpl/vector/aux_/at.hpp>
+	<boost/mpl/vector/aux_/tag.hpp>
+	<boost/mpl/aux_/nttp_decl.hpp>
+	<boost/mpl/aux_/config/typeof.hpp>
+	<boost/mpl/aux_/config/ctps.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/push_front.hpp
+	<boost/mpl/push_front_fwd.hpp>
+	<boost/mpl/aux_/config/typeof.hpp>
+	<boost/mpl/vector/aux_/item.hpp>
+	<boost/mpl/vector/aux_/tag.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/item.hpp
+	<boost/mpl/long.hpp>
+	<boost/mpl/void.hpp>
+	<boost/mpl/next_prior.hpp>
+	<boost/mpl/aux_/type_wrapper.hpp>
+	<boost/mpl/aux_/config/typeof.hpp>
+	<boost/mpl/aux_/config/ctps.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/pop_front.hpp
+	<boost/mpl/pop_front_fwd.hpp>
+	<boost/mpl/aux_/config/typeof.hpp>
+	<boost/mpl/vector/aux_/item.hpp>
+	<boost/mpl/vector/aux_/tag.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/pop_front_fwd.hpp
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/push_back.hpp
+	<boost/mpl/push_back_fwd.hpp>
+	<boost/mpl/aux_/config/typeof.hpp>
+	<boost/mpl/vector/aux_/item.hpp>
+	<boost/mpl/vector/aux_/tag.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/pop_back.hpp
+	<boost/mpl/pop_back_fwd.hpp>
+	<boost/mpl/aux_/config/typeof.hpp>
+	<boost/mpl/vector/aux_/item.hpp>
+	<boost/mpl/vector/aux_/tag.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/pop_back_fwd.hpp
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/back.hpp
+	<boost/mpl/back_fwd.hpp>
+	<boost/mpl/next_prior.hpp>
+	<boost/mpl/vector/aux_/at.hpp>
+	<boost/mpl/vector/aux_/tag.hpp>
+	<boost/mpl/aux_/config/typeof.hpp>
+	<boost/mpl/aux_/config/ctps.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/back_fwd.hpp
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/clear.hpp
+	<boost/mpl/clear_fwd.hpp>
+	<boost/mpl/vector/aux_/vector0.hpp>
+	<boost/mpl/vector/aux_/tag.hpp>
+	<boost/mpl/aux_/config/typeof.hpp>
+	<boost/mpl/aux_/config/ctps.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/vector0.hpp
+	<boost/mpl/long.hpp>
+	<boost/mpl/void.hpp>
+	<boost/mpl/aux_/na.hpp>
+	<boost/mpl/aux_/type_wrapper.hpp>
+	<boost/mpl/vector/aux_/iterator.hpp>
+	<boost/mpl/vector/aux_/tag.hpp>
+	<boost/mpl/aux_/config/typeof.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/iterator.hpp
+	<boost/mpl/vector/aux_/at.hpp>
+	<boost/mpl/iterator_tags.hpp>
+	<boost/mpl/plus.hpp>
+	<boost/mpl/minus.hpp>
+	<boost/mpl/advance_fwd.hpp>
+	<boost/mpl/distance_fwd.hpp>
+	<boost/mpl/next.hpp>
+	<boost/mpl/prior.hpp>
+	<boost/mpl/aux_/nttp_decl.hpp>
+	<boost/mpl/aux_/value_wknd.hpp>
+	<boost/mpl/aux_/config/ctps.hpp>
+	<boost/mpl/aux_/config/workaround.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/plus.hpp
+	<boost/mpl/aux_/arithmetic_op.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/minus.hpp
+	<boost/mpl/aux_/arithmetic_op.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/O1_size.hpp
+	<boost/mpl/O1_size_fwd.hpp>
+	<boost/mpl/minus.hpp>
+	<boost/mpl/long.hpp>
+	<boost/mpl/vector/aux_/tag.hpp>
+	<boost/mpl/aux_/config/typeof.hpp>
+	<boost/mpl/aux_/config/ctps.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/size.hpp
+	<boost/mpl/size_fwd.hpp>
+	<boost/mpl/vector/aux_/O1_size.hpp>
+	<boost/mpl/vector/aux_/tag.hpp>
+	<boost/mpl/aux_/config/typeof.hpp>
+	<boost/mpl/aux_/config/ctps.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/empty.hpp
+	<boost/mpl/empty_fwd.hpp>
+	<boost/mpl/bool.hpp>
+	<boost/mpl/vector/aux_/tag.hpp>
+	<boost/mpl/aux_/config/typeof.hpp>
+	<boost/mpl/aux_/config/ctps.hpp>
+	<boost/type_traits/is_same.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/begin_end.hpp
+	<boost/mpl/aux_/config/typeof.hpp>
+	<boost/mpl/begin_end_fwd.hpp>
+	<boost/mpl/vector/aux_/iterator.hpp>
+	<boost/mpl/vector/aux_/tag.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/vector10.hpp
+	<boost/mpl/vector/vector0.hpp>
+	<boost/mpl/aux_/config/use_preprocessed.hpp>
+	<boost/mpl/vector/aux_/include_preprocessed.hpp>
+	<boost/mpl/aux_/config/typeof.hpp>
+	<boost/mpl/aux_/config/ctps.hpp>
+	<boost/preprocessor/iterate.hpp>
+
+1223651942 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/mpl/vector/aux_/include_preprocessed.hpp
+	<boost/mpl/aux_/config/typeof.hpp>
+	<boost/mpl/aux_/config/ctps.hpp>
+	<boost/mpl/aux_/config/preprocessor.hpp>
+	<boost/mpl/aux_/config/workaround.hpp>
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/stringize.hpp>
+
+1355105498 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/type_traits/make_signed.hpp
+	<boost/mpl/if.hpp>
+	<boost/type_traits/is_integral.hpp>
+	<boost/type_traits/is_signed.hpp>
+	<boost/type_traits/is_unsigned.hpp>
+	<boost/type_traits/is_enum.hpp>
+	<boost/type_traits/is_same.hpp>
+	<boost/type_traits/remove_cv.hpp>
+	<boost/type_traits/is_const.hpp>
+	<boost/type_traits/is_volatile.hpp>
+	<boost/type_traits/add_const.hpp>
+	<boost/type_traits/add_volatile.hpp>
+	<boost/type_traits/detail/ice_or.hpp>
+	<boost/type_traits/detail/ice_and.hpp>
+	<boost/type_traits/detail/ice_not.hpp>
+	<boost/static_assert.hpp>
+	<boost/type_traits/detail/type_trait_def.hpp>
+	<boost/type_traits/detail/type_trait_undef.hpp>
 
 1322210952 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/chrono/detail/is_evenly_divisible_by.hpp
 	<boost/chrono/config.hpp>
@@ -6857,6 +6532,16 @@
 	<boost/move/utility.hpp>
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
+
+1206168354 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/type_traits/decay.hpp
+	<boost/type_traits/config.hpp>
+	<boost/type_traits/is_array.hpp>
+	<boost/type_traits/is_function.hpp>
+	<boost/type_traits/remove_bounds.hpp>
+	<boost/type_traits/add_pointer.hpp>
+	<boost/type_traits/remove_reference.hpp>
+	<boost/mpl/eval_if.hpp>
+	<boost/mpl/identity.hpp>
 
 1347062366 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/thread/detail/delete.hpp
 	<boost/config.hpp>
@@ -7072,6 +6757,62 @@
 	<memory>
 	<boost/smart_ptr/detail/shared_count.hpp>
 	<boost/smart_ptr/shared_ptr.hpp>
+
+1195956438 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/optional.hpp
+	"boost/optional/optional.hpp"
+
+1350766896 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/optional/optional.hpp
+	<new>
+	<algorithm>
+	<boost/config.hpp>
+	<boost/assert.hpp>
+	<boost/type.hpp>
+	<boost/type_traits/alignment_of.hpp>
+	<boost/type_traits/has_nothrow_constructor.hpp>
+	<boost/type_traits/type_with_alignment.hpp>
+	<boost/type_traits/remove_reference.hpp>
+	<boost/type_traits/is_reference.hpp>
+	<boost/mpl/if.hpp>
+	<boost/mpl/bool.hpp>
+	<boost/mpl/not.hpp>
+	<boost/detail/reference_content.hpp>
+	<boost/none.hpp>
+	<boost/utility/swap.hpp>
+	<boost/utility/addressof.hpp>
+	<boost/utility/compare_pointees.hpp>
+	<boost/utility/in_place_factory.hpp>
+	<boost/optional/optional_fwd.hpp>
+
+1301536068 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/none.hpp
+	"boost/none_t.hpp"
+
+1195956438 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/none_t.hpp
+
+1279174754 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/utility/compare_pointees.hpp
+	<functional>
+
+1279174754 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/utility/in_place_factory.hpp
+	<boost/utility/detail/in_place_factory_prefix.hpp>
+	<boost/utility/detail/in_place_factory_suffix.hpp>
+
+1279174754 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/utility/detail/in_place_factory_prefix.hpp
+	<new>
+	<cstddef>
+	<boost/config.hpp>
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/punctuation/paren.hpp>
+	<boost/preprocessor/iteration/iterate.hpp>
+	<boost/preprocessor/repetition/repeat.hpp>
+	<boost/preprocessor/repetition/enum.hpp>
+	<boost/preprocessor/repetition/enum_params.hpp>
+	<boost/preprocessor/repetition/enum_binary_params.hpp>
+	<boost/preprocessor/repetition/enum_trailing_params.hpp>
+
+1090845814 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/preprocessor/punctuation/paren.hpp
+
+1279174754 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/utility/detail/in_place_factory_suffix.hpp
+
+1301546862 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/optional/optional_fwd.hpp
 
 1359236022 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/thread/detail/thread.hpp
 	<boost/thread/detail/config.hpp>
@@ -7725,15 +7466,56 @@
 	"NFILogicModule.h"
 	"NFIEventProcessModule.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILoginToMasterModule.h
-	<iostream>
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILogModule.h
 	"NFILogicModule.h"
-	"NFComm/NFMessageDefine/NFMsgPreGame.pb.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFISLGShopModule.h
+	"NFILogicModule.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFISLGBuildingModule.h
+	"NFComm/NFPluginModule/NFILogicModule.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFMessageDefine/NFSLGDefine.pb.h
+	<string>
+	<google/protobuf/stubs/common.h>
+	<google/protobuf/generated_message_util.h>
+	<google/protobuf/message.h>
+	<google/protobuf/repeated_field.h>
+	<google/protobuf/extension_set.h>
+	<google/protobuf/generated_enum_reflection.h>
+	<google/protobuf/unknown_field_set.h>
+	"NFMsgBase.pb.h"
 
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIUUIDModule.h
 	"NFILogicModule.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame/NFServer/NFLoginNet_ServerPlugin/NFLoginNet_ServerPlugin.h
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIPVPModule.h
+	<iostream>
+	"NFILogicModule.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFISkillModule.h
+	<iostream>
+	"NFILogicModule.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIDataProcessModule.h
+	<iostream>
+	"NFILogicModule.h"
+	"NFIActorDataModule.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIActorDataModule.h
+	<iostream>
+	"NFILogicModule.h"
+	"NFIActor.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIEctypeModule.h
+	<iostream>
+	"NFILogicModule.h"
+
+1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFGameServerNet_ServerPlugin/NFGameServerNet_ServerPlugin.cpp
+	"NFCGameServerNet_ServerModule.h"
+	"NFGameServerNet_ServerPlugin.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame/NFServer/NFGameServerNet_ServerPlugin/NFGameServerNet_ServerPlugin.h
 	"NFComm/NFPluginModule/NFIPlugin.h"
 	"NFComm/NFPluginModule/NFIPluginManager.h"
 
@@ -7744,13 +7526,4 @@
 	"NFComm/NFPluginModule/NFPlatform.h"
 	"NFIActor.h"
 	"NFIPluginManager.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIPluginManager.h
-	"NFIActor.h"
-	"NFILogicModule.h"
-	"NFIActorManager.h"
-
-1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFLoginNet_ServerPlugin/NFLoginNet_ServerPlugin.cpp
-	"NFLoginNet_ServerPlugin.h"
-	"NFCLoginNet_ServerModule.h"
 
