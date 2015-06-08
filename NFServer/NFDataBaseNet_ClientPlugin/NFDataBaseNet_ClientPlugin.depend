@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFLoginNet_ServerPlugin/dllmain.cpp
+1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFDataBaseNet_ClientPlugin/dllmain.cpp
 	"NFComm/NFPluginModule/NFPlatform.h"
 
 1433407314 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFPlatform.h
@@ -3214,41 +3214,17 @@
 	<iosfwd>
 	<string>
 
-1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFLoginNet_ServerPlugin/NFCLoginNet_ServerModule.cpp
-	"NFCLoginNet_ServerModule.h"
-	"NFLoginNet_ServerPlugin.h"
+1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFDataBaseNet_ClientPlugin/NFCDataBaseNet_ClientModule.cpp
+	"NFCDataBaseNet_ClientModule.h"
+	"NFDataBaseNet_ClientPlugin.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame/NFServer/NFLoginNet_ServerPlugin/NFCLoginNet_ServerModule.h
-	"NFComm/NFCore/NFMap.h"
+1433150608 /home/eliteyang/dev/NoahGameFrame/NFServer/NFDataBaseNet_ClientPlugin/NFCDataBaseNet_ClientModule.h
 	"NFComm/NFMessageDefine/NFMsgDefine.h"
-	"NFComm/NFPluginModule/NFIKernelModule.h"
-	"NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
-	"NFComm/NFPluginModule/NFIEventProcessModule.h"
-	"NFComm/NFPluginModule/NFILoginLogicModule.h"
-	"NFComm/NFPluginModule/NFILogModule.h"
-	"NFComm/NFPluginModule/NFINetModule.h"
-	"NFComm/NFPluginModule/NFIElementInfoModule.h"
 	"NFComm/NFPluginModule/NFILogicClassModule.h"
-	"NFComm/NFPluginModule/NFIActor.h"
-	"NFComm/NFPluginModule/NFILoginToMasterModule.h"
-	"NFComm/NFPluginModule/NFIUUIDModule.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFMap.h
-	<map>
-	<list>
-	<string>
-	<iostream>
-	<typeinfo>
-	"NFMapEx.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFMapEx.h
-	<map>
-	<list>
-	<string>
-	<iostream>
-	<typeinfo>
-	<memory>
-	"NFComm/NFPluginModule/NFPlatform.h"
+	"NFComm/NFPluginModule/NFIKernelModule.h"
+	"NFComm/NFPluginModule/NFIDataBaseNet_ClientModule.h"
+	"NFComm/NFPluginModule/NFIElementInfoModule.h"
+	"NFComm/NFPluginModule/NFIMysqlConnectMgrModule.h"
 
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFMessageDefine/NFMsgDefine.h
 	"NFLimit.h"
@@ -5853,6 +5829,23 @@
 
 1222560316 /home/eliteyang/dev/NoahGameFrame//Dependencies/boost_1_53_0//boost/bind/bind_mf2_cc.hpp
 
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFMap.h
+	<map>
+	<list>
+	<string>
+	<iostream>
+	<typeinfo>
+	"NFMapEx.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFMapEx.h
+	<map>
+	<list>
+	<string>
+	<iostream>
+	<typeinfo>
+	<memory>
+	"NFComm/NFPluginModule/NFPlatform.h"
+
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIPropertyManager.h
 	"NFMap.h"
 	"NFIProperty.h"
@@ -5869,12 +5862,12 @@
 	<algorithm>
 	"NFComm/NFPluginModule/NFPlatform.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIKernelModule.h
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILogicClassModule.h
 	<iostream>
-	<string>
 	"NFILogicModule.h"
-	"NFComm/NFCore/NFIObject.h"
-	"NFComm/NFPluginModule/NFIdentID.h"
+	"NFComm/NFCore/NFIPropertyManager.h"
+	"NFComm/NFCore/NFIRecordManager.h"
+	"NFComm/NFCore/NFIComponentManager.h"
 
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILogicModule.h
 	<string>
@@ -5898,6 +5891,22 @@
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFEventDefine/NFEventDefine.h
 	<iostream>
 
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIComponentManager.h
+	"NFMap.h"
+	"NFIComponent.h"
+	"NFComm/NFPluginModule/NFILogicModule.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIComponent.h
+	"NFComm/NFPluginModule/NFIdentID.h"
+	"NFComm/NFPluginModule/NFILogicModule.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIKernelModule.h
+	<iostream>
+	<string>
+	"NFILogicModule.h"
+	"NFComm/NFCore/NFIObject.h"
+	"NFComm/NFPluginModule/NFIdentID.h"
+
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIObject.h
 	"NFComm/NFPluginModule/NFPlatform.h"
 	"NFIDataList.h"
@@ -5918,147 +5927,8 @@
 	"NFIDataList.h"
 	"NFComm/NFPluginModule/NFIdentID.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIComponentManager.h
-	"NFMap.h"
-	"NFIComponent.h"
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIDataBaseNet_ClientModule.h
 	"NFComm/NFPluginModule/NFILogicModule.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIComponent.h
-	"NFComm/NFPluginModule/NFIdentID.h"
-	"NFComm/NFPluginModule/NFILogicModule.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILoginNet_ServerModule.h
-	<iostream>
-	"NFILogicModule.h"
-	"NFINetModule.h"
-
-1433413897 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFINetModule.h
-	<iostream>
-	"NFILogicModule.h"
-	"NFComm/NFNet/NFCNet.h"
-	"NFComm/NFNet/NFCPacket.h"
-	"NFComm/NFMessageDefine/NFMsgDefine.h"
-	"NFComm/NFMessageDefine/NFDefine.pb.h"
-	"NFComm/NFCore/NFQueue.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFNet/NFCNet.h
-	"NFINet.h"
-	"NFIPacket.h"
-	<chrono>
-	<thread>
-	<windows.h>
-	<unistd.h>
-	"NFCPacket.h"
-	<functional>
-	<memory>
-	<list>
-	<vector>
-	"NFComm/NFPluginModule/NFIdentID.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFNet/NFINet.h
-	<cstring>
-	<errno.h>
-	<stdio.h>
-	<signal.h>
-	<stdint.h>
-	<iostream>
-	<map>
-	<netinet/in.h>
-	<arpa/inet.h>
-	<sys/socket.h>
-	"NFIPacket.h"
-	<event2/bufferevent.h>
-	<event2/buffer.h>
-	<event2/listener.h>
-	<event2/util.h>
-	<event2/thread.h>
-	<event2/event_compat.h>
-	<vector>
-	"NFComm/NFPluginModule/NFIdentID.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFNet/NFIPacket.h
-	<cstring>
-	<errno.h>
-	<stdio.h>
-	<signal.h>
-	<stdint.h>
-	<assert.h>
-	<WinSock2.h>
-	<arpa/inet.h>
-	<netinet/in.h>
-	<string>
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/libevent-2.0.21-stable/include//event2/bufferevent.h
-	<event2/event-config.h>
-	<sys/types.h>
-	<sys/time.h>
-	<event2/util.h>
-
-1433386764 /home/eliteyang/dev/NoahGameFrame//Dependencies/libevent-2.0.21-stable/include//event2/event-config.h
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/libevent-2.0.21-stable/include//event2/util.h
-	<event2/event-config.h>
-	<sys/time.h>
-	<stdint.h>
-	<inttypes.h>
-	<sys/types.h>
-	<stddef.h>
-	<BaseTsd.h>
-	<stdarg.h>
-	<netdb.h>
-	<winsock2.h>
-	<sys/socket.h>
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/libevent-2.0.21-stable/include//event2/buffer.h
-	<event2/event-config.h>
-	<stdarg.h>
-	<sys/types.h>
-	<sys/uio.h>
-	<event2/util.h>
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/libevent-2.0.21-stable/include//event2/listener.h
-	<event2/event.h>
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/libevent-2.0.21-stable/include//event2/event.h
-	<event2/event-config.h>
-	<sys/types.h>
-	<sys/time.h>
-	<stdio.h>
-	<event2/util.h>
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/libevent-2.0.21-stable/include//event2/thread.h
-	<event2/event-config.h>
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/libevent-2.0.21-stable/include//event2/event_compat.h
-	<event2/event-config.h>
-	<sys/types.h>
-	<sys/time.h>
-	<event2/util.h>
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFNet/NFCPacket.h
-	"NFIPacket.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFQueue.h
-	<iostream>
-	<map>
-	<list>
-	<algorithm>
-	<thread>
-	<mutex>
-	"NFComm/NFPluginModule/NFPlatform.h"
-
-1433398885 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIEventProcessModule.h
-	<iostream>
-	"NFILogicModule.h"
-	"NFComm/NFCore/NFIDataList.h"
-	"NFComm/NFEventDefine/NFEventDefine.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILoginLogicModule.h
-	<iostream>
-	"NFILogicModule.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILogModule.h
-	"NFILogicModule.h"
 
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIElementInfoModule.h
 	<iostream>
@@ -6068,12 +5938,335 @@
 	"NFComm/NFCore/NFIRecordManager.h"
 	"NFComm/NFCore/NFIComponentManager.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILogicClassModule.h
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIMysqlConnectMgrModule.h
+	"NFILogicModule.h"
+	"NFIMysqlDriver.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIMysqlDriver.h
+	<windows.h>
+	<winsock2.h>
+	<WS2tcpip.h>
+	<stdint.h>
+	<sys/file.h>
+	<sys/ioctl.h>
+	<sys/param.h>
+	<sys/stat.h>
+	<sys/time.h>
+	<sys/types.h>
+	<assert.h>
+	<ctype.h>
+	<dirent.h>
+	<dlfcn.h>
+	<errno.h>
+	<fcntl.h>
+	<signal.h>
+	<stdarg.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<unistd.h>
+	<string>
+	<vector>
+	<set>
+	"mysqlpp/mysql++.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/mysql++.h
+	"connection.h"
+	"cpool.h"
+	"query.h"
+	"scopedconnection.h"
+	"sql_types.h"
+	"transaction.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/connection.h
+	"common.h"
+	"noexceptions.h"
+	"options.h"
+	<string>
+	"tcp_connection.h"
+	"uds_connection.h"
+	"wnp_connection.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/common.h
+	<winsock.h>
+	"config.h"
+	<mysql/mysql_version.h>
+	<mysql_version.h>
+	<mysql/mysql.h>
+	<mysql.h>
+
+1433386748 /home/eliteyang/dev/NoahGameFrame//Dependencies/libevent-2.0.21-stable//config.h
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysql/mysql_version.h
+	<custom_conf.h>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/mysql//mysql_version.h
+	<custom_conf.h>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysql/mysql.h
+	<sys/types.h>
+	<windows.h>
+	<winsock2.h>
+	"mysql_version.h"
+	"mysql_com.h"
+	"mysql_time.h"
+	"my_list.h"
+	"mysql/client_plugin.h"
+	"typelib.h"
+	"my_alloc.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysql/mysql_com.h
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysql/mysql_time.h
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysql/my_list.h
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysql/mysql/client_plugin.h
+	<stdarg.h>
+	<stdlib.h>
+	<mysql/plugin_auth_common.h>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/mysql//mysql/plugin_auth_common.h
+	<windows.h>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysql/typelib.h
+	"my_alloc.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysql/my_alloc.h
+	<mysql/psi/psi_memory.h>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/mysql//mysql/psi/psi_memory.h
+	"psi_base.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/mysql//mysql/psi/psi_base.h
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/mysql//mysql.h
+	<sys/types.h>
+	<windows.h>
+	<winsock2.h>
+	"mysql_version.h"
+	"mysql_com.h"
+	"mysql_time.h"
+	"my_list.h"
+	"mysql/client_plugin.h"
+	"typelib.h"
+	"my_alloc.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/mysql//mysql_com.h
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/mysql//mysql_time.h
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/mysql//my_list.h
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/mysql//mysql/client_plugin.h
+	<stdarg.h>
+	<stdlib.h>
+	<mysql/plugin_auth_common.h>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/mysql//typelib.h
+	"my_alloc.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies/mysql//my_alloc.h
+	<mysql/psi/psi_memory.h>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/noexceptions.h
+	"common.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/options.h
+	"common.h"
+	<deque>
+	<string>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/tcp_connection.h
+	"connection.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/uds_connection.h
+	"connection.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/wnp_connection.h
+	"connection.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/cpool.h
+	"beemutex.h"
+	<list>
+	<assert.h>
+	<time.h>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/beemutex.h
+	"exceptions.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/exceptions.h
+	"options.h"
+	<exception>
+	<string>
+	<sstream>
+	<typeinfo>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/query.h
+	"common.h"
+	"exceptions.h"
+	"noexceptions.h"
+	"qparms.h"
+	"querydef.h"
+	"result.h"
+	"row.h"
+	"sqlstream.h"
+	"stadapter.h"
+	"transaction.h"
+	<deque>
+	<iomanip>
+	<list>
+	<map>
+	<set>
+	<vector>
+	<ext/slist>
+	<slist>
+	"insertpolicy.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/qparms.h
+	"stadapter.h"
+	<vector>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/stadapter.h
+	"common.h"
+	"datetime.h"
+	"null.h"
+	"sql_buffer.h"
+	"tiny_int.h"
+	<stdexcept>
+	<string>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/datetime.h
+	"common.h"
+	"comparable.h"
+	<string>
+	<iostream>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/comparable.h
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/null.h
+	"exceptions.h"
+	<iostream>
+	<string>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/sql_buffer.h
+	"refcounted.h"
+	"type_info.h"
+	<string>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/refcounted.h
+	<memory>
+	<stddef.h>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/type_info.h
+	"common.h"
+	"exceptions.h"
+	<map>
+	<sstream>
+	<typeinfo>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/tiny_int.h
+	"common.h"
+	<ostream>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/querydef.h
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/result.h
+	"common.h"
+	"exceptions.h"
+	"field.h"
+	"field_names.h"
+	"field_types.h"
+	"noexceptions.h"
+	"refcounted.h"
+	"row.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/field.h
+	"common.h"
+	"type_info.h"
+	<vector>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/field_names.h
+	<string>
+	<vector>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/field_types.h
+	"type_info.h"
+	<vector>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/row.h
+	"common.h"
+	"mystring.h"
+	"noexceptions.h"
+	"refcounted.h"
+	"vallist.h"
+	<vector>
+	<string>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/mystring.h
+	"common.h"
+	"datetime.h"
+	"exceptions.h"
+	"null.h"
+	"sql_buffer.h"
+	<string>
+	<sstream>
+	<limits>
+	<stdlib.h>
+	<string.h>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/vallist.h
+	"manip.h"
+	<string>
+	<vector>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/manip.h
+	"common.h"
+	"myset.h"
+	"stadapter.h"
+	<iostream>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/myset.h
+	"common.h"
+	"mystring.h"
+	"stream2string.h"
+	<iostream>
+	<set>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/stream2string.h
+	<sstream>
+	<string>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/sqlstream.h
+	"common.h"
+	<sstream>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/transaction.h
+	"common.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/insertpolicy.h
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/scopedconnection.h
+	"common.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//Dependencies//mysqlpp/sql_types.h
+	"common.h"
+	"tiny_int.h"
+	<string>
+	<stdint.h>
+
+1433150608 /home/eliteyang/dev/NoahGameFrame/NFServer/NFDataBaseNet_ClientPlugin/NFDataBaseNet_ClientPlugin.h
+	"NFComm/NFPluginModule/NFIPlugin.h"
+	"NFComm/NFPluginModule/NFIPluginManager.h"
+
+1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIPlugin.h
 	<iostream>
 	"NFILogicModule.h"
-	"NFComm/NFCore/NFIPropertyManager.h"
-	"NFComm/NFCore/NFIRecordManager.h"
-	"NFComm/NFCore/NFIComponentManager.h"
+	"NFComm/NFCore/NFMap.h"
+	"NFComm/NFPluginModule/NFPlatform.h"
+	"NFIActor.h"
+	"NFIPluginManager.h"
 
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIActor.h
 	<map>
@@ -7725,32 +7918,18 @@
 	"NFILogicModule.h"
 	"NFIEventProcessModule.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFILoginToMasterModule.h
+1433398885 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIEventProcessModule.h
 	<iostream>
 	"NFILogicModule.h"
-	"NFComm/NFMessageDefine/NFMsgPreGame.pb.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIUUIDModule.h
-	"NFILogicModule.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame/NFServer/NFLoginNet_ServerPlugin/NFLoginNet_ServerPlugin.h
-	"NFComm/NFPluginModule/NFIPlugin.h"
-	"NFComm/NFPluginModule/NFIPluginManager.h"
-
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIPlugin.h
-	<iostream>
-	"NFILogicModule.h"
-	"NFComm/NFCore/NFMap.h"
-	"NFComm/NFPluginModule/NFPlatform.h"
-	"NFIActor.h"
-	"NFIPluginManager.h"
+	"NFComm/NFCore/NFIDataList.h"
+	"NFComm/NFEventDefine/NFEventDefine.h"
 
 1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIPluginManager.h
 	"NFIActor.h"
 	"NFILogicModule.h"
 	"NFIActorManager.h"
 
-1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFLoginNet_ServerPlugin/NFLoginNet_ServerPlugin.cpp
-	"NFLoginNet_ServerPlugin.h"
-	"NFCLoginNet_ServerModule.h"
+1433475247 source:/home/eliteyang/dev/NoahGameFrame/NFServer/NFDataBaseNet_ClientPlugin/NFDataBaseNet_ClientPlugin.cpp
+	"NFDataBaseNet_ClientPlugin.h"
+	"NFCDataBaseNet_ClientModule.h"
 
