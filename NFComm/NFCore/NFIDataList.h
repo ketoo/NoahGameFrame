@@ -87,7 +87,7 @@ public:
     template<typename T>
     T NumberVal(const int index) const
     {
-        T result(0);
+        T result = 0;
         if (index < GetCount() && index >= 0)
         {
             TDATA_TYPE type =  Type(index);
@@ -468,16 +468,16 @@ public:
         return *this;
     }
 
-    //inline NFIDataList& operator<<(const NFINT64& value)
-    //{
-    //    Add(NFIDENTID(value));
-    //    return *this;
-    //}
-    inline NFIDataList& operator<<(const int64_t& value)
+    inline NFIDataList& operator<<(const NFINT64& value)
     {
-        Add(NFINT64(value));
+        Add(value);
         return *this;
     }
+//    inline NFIDataList& operator<<(const int64_t& value)
+//    {
+//        Add(NFINT64(value));
+//        return *this;
+//    }
 
     inline NFIDataList& operator<<(const NFIDENTID& value)
     {

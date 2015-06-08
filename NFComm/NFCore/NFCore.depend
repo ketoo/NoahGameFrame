@@ -9,13 +9,12 @@
 	"NFComm/NFPluginModule/NFIdentID.h"
 	"NFComm/NFPluginModule/NFILogicModule.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIdentID.h
-	"NFComm/NFPluginModule/NFPlatform.h"
+1433490506 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFIdentID.h
+	"NFPlatform.h"
 	<iostream>
 	<stdio.h>
 	<stdlib.h>
 	<boost/lexical_cast.hpp>
-	<boost/multiprecision/cpp_int.hpp>
 
 1433407314 /home/eliteyang/dev/NoahGameFrame//NFComm/NFPluginModule/NFPlatform.h
 	<Windows.h>
@@ -4499,7 +4498,7 @@
 	<boost/bind.hpp>
 	"NFComm/NFPluginModule/NFIdentID.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIDataList.h
+1433496612 /home/eliteyang/dev/NoahGameFrame//NFComm/NFCore/NFIDataList.h
 	<string>
 	<cstring>
 	<iostream>
@@ -5766,7 +5765,7 @@
 	<memory>
 	"NFComm/NFPluginModule/NFPlatform.h"
 
-1433150608 source:/home/eliteyang/dev/NoahGameFrame/NFComm/NFCore/NFCDataList.cpp
+1433489794 source:/home/eliteyang/dev/NoahGameFrame/NFComm/NFCore/NFCDataList.cpp
 	<cstdarg>
 	"NFCDataList.h"
 	"NFIDataList.h"
@@ -5775,7 +5774,7 @@
 	"NFIDataList.h"
 	"NFComm/NFPluginModule/NFIdentID.h"
 
-1433150608 /home/eliteyang/dev/NoahGameFrame/NFComm/NFCore/NFIDataList.h
+1433496612 /home/eliteyang/dev/NoahGameFrame/NFComm/NFCore/NFIDataList.h
 	<string>
 	<cstring>
 	<iostream>
