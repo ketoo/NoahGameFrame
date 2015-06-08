@@ -201,7 +201,7 @@ const bool NFCDataProcessModule::AttachData( const NFIDENTID& self )
                 xRecord->SetUsed(nRow, true);
                 xRecord->SetObject(nRow, nCol, xObjectID);
             }
-        }		
+        }
     }
 
     return true;
@@ -516,7 +516,7 @@ const NFIDENTID NFCDataProcessModule::GetChar( const std::string& strAccount, st
 	}
 
     NFIDENTID ident;
-    if (!ident.FormString(stRolerID))
+    if (!ident.FromString(stRolerID))
     {
         return NFIDENTID();
     }

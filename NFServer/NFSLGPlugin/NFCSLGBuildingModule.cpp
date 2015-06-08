@@ -81,8 +81,8 @@ int NFCSLGBuildingModule::AddBuilding(const NFIDENTID& self, const std::string& 
     xDataList << int(fY); // y
     xDataList << int(fZ); // z
 
-    xDataList << NFTimeEx::GetNowTime(); // z
-    xDataList << int(0); // z
+    xDataList << NFTimeEx::GetNowTime();
+    xDataList << int(0);
 
     if (0 > pRecord->AddRow(-1, xDataList))
     {
@@ -162,7 +162,7 @@ int NFCSLGBuildingModule::OnUpgradeHeartBeat(const NFIDENTID& self, const std::s
     pRecord->SetInt(nRow, "State", NFMsg::EBS_IDLE);
     pRecord->SetInt(nRow, "StateStartTime", NFTimeEx::GetNowTime());
     pRecord->SetInt(nRow, "StateEndTime", 0);
-    
+
     return 0;
 }
 
@@ -213,7 +213,7 @@ int NFCSLGBuildingModule::OnProduceHeartBeat( const NFIDENTID& self, const std::
 
     //Cost Left Count
     const NFIDENTID& xBuildID = var.Object(0);
-    const std::string& strItem = var.String(1);    
+    const std::string& strItem = var.String(1);
     CostProduceData(self, xBuildID, strItem, 1);
 
     if (nCount == 0)
@@ -225,7 +225,7 @@ int NFCSLGBuildingModule::OnProduceHeartBeat( const NFIDENTID& self, const std::
         {
             const std::string strHeartname = GetProduceHeartName(self, xBuildID, strItem);
             const int nTime = 50;//To ADD
-  
+
             NFCDataList varHeart;
             varHeart << xBuildID;
             varHeart << strItem;
@@ -285,10 +285,10 @@ int NFCSLGBuildingModule::Produce(const NFIDENTID& self, const NFIDENTID& xBuilI
         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "there are no the building", xBuilID.ToString(), __FUNCTION__, __LINE__);
         return 1;
     }
-    
+
     //增加
     AddProduceData(self, xBuilID, strItemID, nCount);
-    
+
     const std::string strHeartname = GetProduceHeartName(self, xBuilID, strItemID);
     const int nTime = 50;//To ADD
     if (!m_pKernelModule->FindHeartBeat(self, strHeartname))
@@ -409,7 +409,7 @@ int NFCSLGBuildingModule::AddProduceData(const NFIDENTID& self, const NFIDENTID&
         {
             nFindRow = i;
             break;
-        } 
+        }
     }
 
     if (nFindRow < 0)
@@ -526,16 +526,16 @@ int NFCSLGBuildingModule::CheckProduceData( const NFIDENTID& self )
         const int nCount = nPassTime/nOnceTime;
         if (nCount >= nLeftCount)
         {
-            //add Item 
+            //add Item
             //TO ADD
 
             pProduce->Remove(i);
         }
         else
-        {            
-            //add Item 
+        {
+            //add Item
             //TO ADD
-         
+
             pProduce->SetInt(i, "", nLeftCount - nCount);
 
             //增加定时任务
@@ -545,7 +545,7 @@ int NFCSLGBuildingModule::CheckProduceData( const NFIDENTID& self )
 
             const std::string strHeartname = GetProduceHeartName(self, xBuildID, strItemID);
             const int nTime = (nCount + 1) * nOnceTime - nPassTime;
-            m_pKernelModule->AddHeartBeat(self, strHeartname, this, &NFCSLGBuildingModule::OnProduceHeartBeat, varHeart, nTime, 1);            
+            m_pKernelModule->AddHeartBeat(self, strHeartname, this, &NFCSLGBuildingModule::OnProduceHeartBeat, varHeart, nTime, 1);
         }
     }
 
