@@ -34,7 +34,7 @@ int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventI
     const NFIDENTID xIdent = var.Object(0);
     const std::string& strAccount = var.String(1);
     const std::string& strPassword = var.String(2);
-	int nState = -1;
+	int64_t nState = -1;
 
 	std::vector<std::string> xFieldVec;
 	std::vector<std::string> xValueVec;
@@ -47,11 +47,11 @@ int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventI
 		//µÇÂ¼³É¹¦
 		nState = 0;
 	}
- 
+
     NFCDataList valEventInfo;
     valEventInfo << nState << xIdent << strAccount;
     m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_LOGIN_RESULTS, valEventInfo);
-  
+
     return 0;
 }
 
