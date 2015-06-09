@@ -926,7 +926,7 @@ int NFCRecord::FindInt(const int nCol, const NFINT64 value, NFIDataList& varResu
 	}
 	else
 	{
-		for (int i = 0; i < mnMaxRow; ++i)
+		for (int64_t i = 0; i < mnMaxRow; ++i)
 		{
 			if (!IsUsed(i))
 			{
@@ -935,7 +935,7 @@ int NFCRecord::FindInt(const int nCol, const NFINT64 value, NFIDataList& varResu
 
 			if (GetInt(i, nCol) == value)
 			{
-				varResult << NFINT32(i);
+				varResult << i;
 			}
 		}
 
@@ -968,7 +968,7 @@ int NFCRecord::FindFloat(const int nCol, const float value, NFIDataList& varResu
         return -1;
     }
 
-    for (int i = 0; i < mnMaxRow; ++i)
+    for (int64_t i = 0; i < mnMaxRow; ++i)
     {
         if (!IsUsed(i))
         {
@@ -977,7 +977,7 @@ int NFCRecord::FindFloat(const int nCol, const float value, NFIDataList& varResu
 
         if (GetFloat(i, nCol) == value)
         {
-            varResult << NFINT32(i);
+            varResult << i;
         }
     }
 
@@ -1007,7 +1007,7 @@ int NFCRecord::FindDouble(const int nCol, const double value, NFIDataList& varRe
         return -1;
     }
 
-    for (int i = 0; i < mnMaxRow; ++i)
+    for (int64_t i = 0; i < mnMaxRow; ++i)
     {
         if (!IsUsed(i))
         {
@@ -1016,7 +1016,7 @@ int NFCRecord::FindDouble(const int nCol, const double value, NFIDataList& varRe
 
         if (GetDouble(i, nCol) == value)
         {
-            varResult << NFINT32(i);
+            varResult << i;
         }
     }
 
@@ -1058,7 +1058,7 @@ int NFCRecord::FindString(const int nCol, const char* value, NFIDataList& varRes
 	}
 	else
 	{
-		for (int i = 0; i < mnMaxRow; ++i)
+		for (int64_t i = 0; i < mnMaxRow; ++i)
 		{
 			if (!IsUsed(i))
 			{
@@ -1068,7 +1068,7 @@ int NFCRecord::FindString(const int nCol, const char* value, NFIDataList& varRes
 			const std::string& strData = GetString(i, nCol);
 			if (0 == strcmp(strData.c_str(), value))
 			{
-				varResult << NFINT32(i);
+				varResult << i;
 			}
 		}
 
@@ -1113,7 +1113,7 @@ int NFCRecord::FindObject(const int nCol, const NFIDENTID& value, NFIDataList& v
 	}
 	else
 	{
-		for (int i = 0; i < mnMaxRow; ++i)
+		for (int64_t i = 0; i < mnMaxRow; ++i)
 		{
 			if (!IsUsed(i))
 			{
@@ -1122,7 +1122,7 @@ int NFCRecord::FindObject(const int nCol, const NFIDENTID& value, NFIDataList& v
 
 			if (GetObject(i, nCol) == value)
 			{
-				varResult << NFINT32(i);
+				varResult << i;
 			}
 		}
 
