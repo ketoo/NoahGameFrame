@@ -339,11 +339,11 @@ inline unsigned long NF_GetTickCount()
 //use actor mode--end
 
 
-#if __cplusplus >= 201103L
+//#if __cplusplus >= 201103L
 #define NF_SHARE_PTR std::shared_ptr
-#else
-#define NF_SHARE_PTR boost::shared_ptr
-#endif
+// #else
+// #define NF_SHARE_PTR boost::shared_ptr
+// #endif
 
 
 #include <string>
