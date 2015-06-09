@@ -436,7 +436,11 @@ public:
 //        Add(NFINT64(value));
 //        return *this;
 //    }
-
+	inline NFIDataList& operator<<(const int value)
+	{
+		Add((NFINT64)value);
+		return *this;
+	}
     inline NFIDataList& operator<<(const NFIDENTID& value)
     {
         Add(value);
