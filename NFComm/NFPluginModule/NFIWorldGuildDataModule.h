@@ -21,6 +21,7 @@ public:
 
     virtual const NFIDENTID CreateGuild(const NFIDENTID& xPlayeID, const std::string& strName) = 0;
     virtual const bool DeleteGuild(const NFIDENTID& xGuild) = 0;
+    virtual NF_SHARE_PTR<NFIObject> GetGuild(const NFIDENTID& xGuild) = 0;
 
 protected:
 private:
