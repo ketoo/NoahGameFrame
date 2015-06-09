@@ -29,7 +29,6 @@
 #include "NFCMemory.h"
 #include <boost/lexical_cast.hpp>
 #include <boost/variant.hpp>
-#include <boost/algorithm/string.hpp>
 #include "NFComm/NFPluginModule/NFIdentID.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
