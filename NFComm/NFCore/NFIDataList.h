@@ -406,47 +406,6 @@ public:
     {
         return !(*this == src);
     }
-
-    inline NFIDataList& operator<<(const char value)
-    {
-        Add((NFINT64)value);
-        return *this;
-    }
-    inline NFIDataList& operator<<(const unsigned char value)
-    {
-        Add((NFINT64)value);
-        return *this;
-    }
-    inline NFIDataList& operator<<(const short value)
-    {
-        Add((NFINT64)value);
-        return *this;
-    }
-    inline NFIDataList& operator<<(const unsigned short value)
-    {
-        Add((NFINT64)value);
-        return *this;
-    }
-    inline NFIDataList& operator<<(const int value)
-    {
-        Add((NFINT64)value);
-        return *this;
-    }
-    inline NFIDataList& operator<<(const unsigned int value)
-    {
-        Add((NFINT64)value);
-        return *this;
-    }
-    inline NFIDataList& operator<<(const long value)
-    {
-        Add((NFINT64)value);
-        return *this;
-    }
-    inline NFIDataList& operator<<(const unsigned long value)
-    {
-        Add((NFINT64)value);
-        return *this;
-    }
     inline NFIDataList& operator<<(const float value)
     {
         Add(value);
