@@ -26,13 +26,13 @@
 
 #ifdef NF_DYNAMIC_PLUGIN
 
-extern "C"  __declspec( dllexport ) void DllStartPlugin( NFIPluginManager* pm )
+NF_EXPORT void DllStartPlugin( NFIPluginManager* pm )
 {
     CREATE_PLUGIN( pm, NFGameLogicPlugin )
 
 };
 
-extern "C" __declspec( dllexport ) void DllStopPlugin( NFIPluginManager* pm )
+NF_EXPORT void DllStopPlugin( NFIPluginManager* pm )
 {
     DESTROY_PLUGIN( pm, NFGameLogicPlugin )
 };
