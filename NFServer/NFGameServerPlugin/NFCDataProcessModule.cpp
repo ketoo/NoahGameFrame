@@ -64,6 +64,10 @@ int NFCDataProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std::
 		{
 			AttachData(self);
 		}
+        else if ( CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent )
+        {
+            OnOnline(self);
+        }
 	}
 
 	return 0;
@@ -522,4 +526,20 @@ const NFIDENTID NFCDataProcessModule::GetChar( const std::string& strAccount, st
     }
 
 	return ident;
+}
+
+void NFCDataProcessModule::OnOnline( const NFIDENTID& self )
+{
+    const int nGateID = m_pKernelModule->GetPropertyInt(self, "GateID");
+    const int nGameID = m_pKernelModule->GetPropertyInt(self, "GameID");
+
+    std::vector<std::string> xFieldVec;
+    std::vector<std::string> vValueVec;
+
+    xFieldVec.push_back("GateID");
+    xFieldVec.push_back("GameID");
+
+    xFieldVec.push_back(boost::lexical_cast<std::string> (nGateID));
+    xFieldVec.push_back(boost::lexical_cast<std::string> (nGameID));
+    m_pClusterSQLModule->Updata(self.ToString(), xFieldVec, vValueVec);
 }
