@@ -24,7 +24,8 @@ bool NFCWorldNet_ServerModule::AfterInit()
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
 	m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
 	m_pWorldGuildModule = dynamic_cast<NFIWorldGuildModule*>(pPluginManager->FindModule("NFCWorldGuildModule"));
-	
+	m_pClusterSQLModule = dynamic_cast<NFIClusterModule*>(pPluginManager->FindModule("NFCClusterModule"));
+
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pWorldLogicModule);
@@ -32,9 +33,10 @@ bool NFCWorldNet_ServerModule::AfterInit()
     assert(NULL != m_pElementInfoModule);
 	assert(NULL != m_pLogicClassModule);
 	assert(NULL != m_pWorldGuildModule);
+    assert(NULL != m_pClusterSQLModule);
 
     m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, this, &NFCWorldNet_ServerModule::OnSelectServerEvent);
-    m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_SHOW_STRING_TO_FD, this, &NFCWorldNet_ServerModule::OnShowStringEvent);
+    m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_SHOW_STRING, this, &NFCWorldNet_ServerModule::OnShowStringEvent);
 
 	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("WorldServer");
 	if (xLogicClass.get())
@@ -535,14 +537,19 @@ int NFCWorldNet_ServerModule::OnShowStringEvent( const NFIDENTID& object, const 
         return 1;
     }
 
-    const NFINT64 nFD = var.Int(0);
+    const NFIDENTID nPlayer = var.Object(0);
     const NFINT64 nStringResult = var.Int(1);
+
+    int nGateID = 0;
+    if (!GetGateID(nPlayer, nGateID))
+    {
+        return 1;
+    }
 
     NFMsg::AckEventResult xAck;
     xAck.set_event_code((NFMsg::EGameEventCode)nStringResult);
 
-    SendMsgPB(NFMsg::EGMI_EVENT_RESULT, xAck, nFD);
-
+    SendMsgToProxy(nGateID, NFMsg::EGMI_EVENT_RESULT, xAck, nPlayer);
     return 0;
 }
 
@@ -552,4 +559,68 @@ void NFCWorldNet_ServerModule::ShowStringByFD( const NFIDENTID& object, const in
     xAck.set_event_code((NFMsg::EGameEventCode)nResultID);
 
     SendMsgPB(NFMsg::EGMI_EVENT_RESULT, xAck, nClientFD);
+}
+
+bool NFCWorldNet_ServerModule::SendMsgToGame( const int nGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer)
+{
+    NF_SHARE_PTR<ServerData> pData = mGameMap.GetElement(nGameID);
+    if (pData.get())
+    {
+        const int nFD = pData->nFD;
+        SendMsgPB(eMsgID, xData, nFD, nPlayer);
+    }
+
+    return true;
+}
+
+bool NFCWorldNet_ServerModule::SendMsgToProxy( const int nGateID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer)
+{
+    NF_SHARE_PTR<ServerData> pData = mProxyMap.GetElement(nGateID);
+    if (pData.get())
+    {
+        const int nFD = pData->nFD;
+        SendMsgPB(eMsgID, xData, nFD, nPlayer);
+    }
+
+    return true;
+}
+
+bool NFCWorldNet_ServerModule::GetGameID( const NFIDENTID& self, int& nGameID )
+{
+    std::vector<std::string> xVecFeild;
+    std::vector<std::string> xVecValue;
+
+    xVecFeild.push_back("GameID");
+    if (!m_pClusterSQLModule->Query(self.ToString(), xVecFeild, xVecValue))
+    {
+        return false;
+    }
+
+    const std::string& strGameID = xVecValue[0];
+    if (!NF_StrTo(strGameID, nGameID))
+    {
+        return false;
+    }
+    
+    return true;
+}
+
+bool NFCWorldNet_ServerModule::GetGateID( const NFIDENTID& self, int& nGateID )
+{
+    std::vector<std::string> xVecFeild;
+    std::vector<std::string> xVecValue;
+
+    xVecFeild.push_back("GateID");
+    if (!m_pClusterSQLModule->Query(self.ToString(), xVecFeild, xVecValue))
+    {
+        return false;
+    }
+
+    const std::string& strGateID = xVecValue[0];
+    if (!NF_StrTo(strGateID, nGateID))
+    {
+        return false;
+    }
+
+    return true;
 }
