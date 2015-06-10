@@ -57,7 +57,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	if (xLogicClass.get())
 	{
 		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
-		std::string strConfigName; 
+		std::string strConfigName;
 		if (xNameList.Get(0, strConfigName))
 		{
 			const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
@@ -329,7 +329,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
 
 	NFCDataList varEntry;
 	varEntry << pObject->Self();
-	varEntry << 0;
+	varEntry << NFINT64(0);
 	varEntry << nSceneID;
 	varEntry << -1;
 	m_pEventProcessModule->DoEvent( pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry );
