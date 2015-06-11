@@ -14,6 +14,7 @@
 #include "NFComm/NFPluginModule/NFIWorldGuildModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
+#include "NFComm/NFPluginModule/NFIWorldGuildDataModule.h"
 
 class NFCWorldGuildModule
     : public NFIWorldGuildModule
@@ -54,9 +55,7 @@ protected:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFIUUIDModule* m_pUUIDModule;
-private:
-
-    NFMapEx<std::string, NFIDENTID> mmGuidMap; // GuidName<----> GuidID;
+    NFIWorldGuildDataModule* m_pWorldGuildDataModule;
 };
 
 #endif
