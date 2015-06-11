@@ -420,6 +420,10 @@ const NFIDENTID NFCWorldGuildDataModule::CreateGuild(const NFIDENTID& xPlayeID, 
     {
         return NFIDENTID();
     }
+
+    pGuildObejct->SetPropertyString("Name", strName);
+    pGuildObejct->SetPropertyInt("GuildLevel", 1);
+
     std::vector<std::string> vFieldVec;
     std::vector<std::string> vValueVec;
 
@@ -466,4 +470,11 @@ const bool NFCWorldGuildDataModule::DeleteGuild(const NFIDENTID& xGuild )
     }
 
     return true;
+}
+
+NF_SHARE_PTR<NFIObject> NFCWorldGuildDataModule::GetGuild( const NFIDENTID& xGuild )
+{
+    CheckLoadGuild(NFIDENTID(), xGuild);
+
+    return m_pKernelModule->GetObject(xGuild);
 }
