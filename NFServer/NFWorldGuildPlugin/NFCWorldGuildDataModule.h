@@ -37,6 +37,7 @@ public:
 
     virtual bool ExitGuild(const NFIDENTID& self, const std::string& strName, bool& bExit);
     virtual void  CheckLoadGuild(const NFIDENTID& self, const NFIDENTID& xGuild);
+    virtual NF_SHARE_PTR<NFIObject> GetGuild(const NFIDENTID& xGuild);
 
     virtual const NFIDENTID CreateGuild(const NFIDENTID& xPlayeID, const std::string& strName);
     virtual const bool DeleteGuild(const NFIDENTID& xGuild);
@@ -69,7 +70,6 @@ private:
         std::string strRecord;
     };
 
-    NFMapEx<std::string, NFIDENTID> mmGuidMap; // GuidName<----> GuidID;
     NFMapEx<NFIDENTID, RoleData> mxRoleDataMap;
 
     std::string mstrGuildTalble;
