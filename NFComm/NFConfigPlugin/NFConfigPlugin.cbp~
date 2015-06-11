@@ -2,22 +2,22 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="NFPluginLoader" />
+		<Option title="NFConfigPlugin" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d" prefix_auto="0" extension_auto="1" />
-				<Option type="0" />
+				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFConfigPlugin_d" prefix_auto="0" extension_auto="1" />
+				<Option type="3" />
 				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
-					<Add option="-D_X64" />
+					<Add option="-fPIC" />
 					<Add option="-D_DEBUG" />
-					<Add option="-D_CONSOLE" />
-					<Add option="-DNF_DYNAMIC_PLUGIN" />
-					<Add option="-DGOOGLE_GLOG_DLL_DECL=" />
+					<Add option="-D_USRDLL" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
@@ -25,13 +25,8 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/External/" />
 				</Compiler>
 				<Linker>
-					<Add option="-ldl" />
-					<Add option="-lpthread" />
-					<Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_system-gcc48-mt-s-1_53.a" />
-					<Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_thread-gcc48-mt-s-1_53.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
-					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
+					<Add directory="$(SolutionDir)/lib/Debug/" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d $(SolutionDir)/_Out/Server/Debug/NFLoginServer/" />
@@ -41,9 +36,6 @@
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d $(SolutionDir)/_Out/Server/Debug/NFGameServer1/" />
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d $(SolutionDir)/_Out/Server/Debug/Tutorial1/" />
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d $(SolutionDir)/_Out/Server/Debug/Tutorial2/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d $(SolutionDir)/_Out/Server/Debug/Tutorial3/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d $(SolutionDir)/_Out/Server/Debug/Tutorial4/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d $(SolutionDir)/_Out/Server/Debug/Tutorial6/" />
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
@@ -51,15 +43,16 @@
 				</Environment>
 			</Target>
 			<Target title="Release x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Release/NFPluginLoader" prefix_auto="0" extension_auto="1" />
-				<Option type="0" />
+				<Option output="$(SolutionDir)/_Out/Comm/Release/NFConfigPlugin" prefix_auto="0" extension_auto="1" />
+				<Option type="3" />
 				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-std=c++11" />
-					<Add option="-D_X64" />
+					<Add option="-fPIC" />
 					<Add option="-DNDEBUG" />
-					<Add option="-D_CONSOLE" />
-					<Add option="-DNF_DYNAMIC_PLUGIN" />
+					<Add option="-D_USRDLL" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
@@ -67,13 +60,8 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/External/" />
 				</Compiler>
 				<Linker>
-					<Add option="-ldl" />
-					<Add option="-lpthread" />
-					<Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_system-gcc48-mt-s-1_53.a" />
-					<Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_thread-gcc48-mt-s-1_53.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
-					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
+					<Add directory="$(SolutionDir)/lib/Release/" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/NFLoginServer/" />
@@ -83,9 +71,6 @@
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/NFGameServer1/" />
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/Tutorial1/" />
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/Tutorial2/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/Tutorial3/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/Tutorial4/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/Tutorial6/" />
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
@@ -93,20 +78,17 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCActor.cpp" />
-		<Unit filename="NFCActor.h" />
-		<Unit filename="NFCActorManager.cpp" />
-		<Unit filename="NFCActorManager.h" />
-		<Unit filename="NFCDynLib.cpp" />
-		<Unit filename="NFCDynLib.h" />
-		<Unit filename="NFCPluginManager.cpp" />
-		<Unit filename="NFCPluginManager.h" />
-		<Unit filename="NFPluginLoader.cpp" />
+		<Unit filename="NFCElementInfoModule.cpp" />
+		<Unit filename="NFCElementInfoModule.h" />
+		<Unit filename="NFCLogicClassModule.cpp" />
+		<Unit filename="NFCLogicClassModule.h" />
+		<Unit filename="NFConfigPlugin.cpp" />
+		<Unit filename="NFConfigPlugin.h" />
+		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
 			<debugger />
-			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
