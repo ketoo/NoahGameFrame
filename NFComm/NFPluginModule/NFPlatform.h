@@ -229,7 +229,7 @@
 #define NF_UNICODE_SUPPORT 1
 #define MAX_PATH 255
 
-#define NF_EXPORT __attribute ((visibility("default")))
+#define NF_EXPORT extern "C" __attribute ((visibility("default")))
 
 #endif
 
