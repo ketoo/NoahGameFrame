@@ -54,7 +54,7 @@ bool NFCPluginManager::LoadPlugin()
         const char* strMain = pPluginNode->first_attribute( "Main" )->value();
 
 		mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, true));
-       
+
     }
 
     return true;
@@ -247,7 +247,7 @@ bool NFCPluginManager::Shut()
 
 #endif
 	mPluginInstanceMap.clear();
-    mPluginNameMap.clear();    
+    mPluginNameMap.clear();
 	return true;
 }
 
@@ -266,12 +266,17 @@ bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
             DLL_START_PLUGIN_FUNC pFunc = (DLL_START_PLUGIN_FUNC)pLib->GetSymbol("DllStartPlugin");
             if (!pFunc)
             {
+                std::cout << "Find function DllStartPlugin Failed in " << strPluginDLLName << std::endl;
                 return false;
             }
 
             pFunc(this);
 
             return true;
+        }
+        else
+        {
+            std::cout << "Load " << strPluginDLLName << "Failed" << std::endl;
         }
     }
 
@@ -291,7 +296,7 @@ bool NFCPluginManager::UnLoadPluginLibrary(const std::string& strPluginDLLName)
         {
             pFunc(this);
         }
-        
+
         pLib->UnLoad();
 
         delete pLib;
