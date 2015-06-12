@@ -224,14 +224,6 @@
 #       define NF_DEBUG_MODE 1
 #   endif
 
-#if NF_PLATFORM == NF_PLATFORM_APPLE
-#define NF_PLATFORM_LIB "NFPlatform.bundle"
-#elif NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-#define NF_PLATFORM_LIB "NFPlatform.a"
-#else //NF_PLATFORM_LINUX
-#define NF_PLATFORM_LIB "libNFPlatform.so"
-#endif
-
 // Always enable unicode support for the moment
 // Perhaps disable in old versions of gcc if necessary
 #define NF_UNICODE_SUPPORT 1
