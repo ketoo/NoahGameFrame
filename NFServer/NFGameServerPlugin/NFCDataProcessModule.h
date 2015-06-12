@@ -43,6 +43,8 @@ public:
 protected:
     int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
     const bool AttachData( const NFIDENTID& self );
+
+    void OnOnline(const NFIDENTID& self);
 private:
 
     struct RoleData 
