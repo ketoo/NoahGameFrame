@@ -23,6 +23,7 @@
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIWorldGuildModule.h"
+#include "NFComm/NFPluginModule/NFIClusterModule.h"
 
 class NFCWorldNet_ServerModule
     : public NFIWorldNet_ServerModule
@@ -42,6 +43,11 @@ public:
 
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
+
+    virtual bool SendMsgToGame(const int nGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer = NFIDENTID());
+    virtual bool SendMsgToProxy(const int nGateID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer = NFIDENTID());
+    virtual bool GetGameID(const NFIDENTID& self, int& nGameID);
+    virtual bool GetGateID(const NFIDENTID& self, int& nGateID);
 
 protected:
 
@@ -122,6 +128,7 @@ private:
     NFILogModule* m_pLogModule;
 	NFIEventProcessModule* m_pEventProcessModule;
 	NFIWorldGuildModule* m_pWorldGuildModule;
+    NFIClusterModule* m_pClusterSQLModule;
 };
 
 #endif
