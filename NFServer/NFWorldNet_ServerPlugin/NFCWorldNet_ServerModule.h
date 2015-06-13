@@ -63,6 +63,8 @@ protected:
 
     int OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
     int OnShowStringEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnShowRecordEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnShowPropertyEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
 
 protected:
 
@@ -86,6 +88,9 @@ protected:
 	void LogGameServer(const float fLastTime);
 
     void ShowStringByFD(const NFIDENTID& object, const int nClientFD, const int nResultID);
+
+    void SendPropertyToPlayer(const NFIDENTID& self, const NFIDENTID& xPlayer);
+    void SendRecordToPlayer(const NFIDENTID& self, const NFIDENTID& xPlayer, const std::string& strRecordName, const int nRow = -1);
 
 protected:
 
