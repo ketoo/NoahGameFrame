@@ -181,7 +181,7 @@ bool NFCDataList::Set(const int index, const double value)
 }
 bool NFCDataList::Set(const int index, const char* value)
 {
-    if (index < GetCount() && index > 0)
+    if (index < GetCount() && index >= 0)
     {
 		return SetString(index, value);
     }
