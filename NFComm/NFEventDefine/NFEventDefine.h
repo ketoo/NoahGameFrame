@@ -72,11 +72,17 @@ enum NFEventDefine
     // 通知副本奖励
     NFED_ON_NOTICE_ECTYPE_AWARD,
 
-    //给客户端发送消息arg[0] PlayerID, stringresult, arg
+    //show msg to player, arg[0] PlayerID, stringresult, arg
     NFED_ON_SHOW_STRING,
 
-    //进入游戏 arg[0] GateID, GameID, arg
+    //player enter game success,  arg[0] GateID, GameID, arg
     NFED_ON_ONLINE_SUCCESS,
+
+    //send record info to other, arg[0] selfID, palyerID, recordname, nRow
+    NFED_ON_SHOW_RECORD,
+
+    // send property to other, arg[0] selfID, palyerID,
+    NFED_ON_SHOW_PROPERTY, 
 };
 
 #endif
