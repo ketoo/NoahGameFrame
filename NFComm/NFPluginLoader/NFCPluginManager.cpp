@@ -267,6 +267,7 @@ bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
             if (!pFunc)
             {
                 std::cout << "Find function DllStartPlugin Failed in " << strPluginDLLName << std::endl;
+                assert(0);
                 return false;
             }
 
@@ -276,6 +277,7 @@ bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
         }
         else
         {
+            assert(0);
             std::cout << "Load " << strPluginDLLName << "Failed" << std::endl;
         }
     }
