@@ -56,6 +56,7 @@ NFIDENTID NFCWorldGuildModule::CreateGuild( const NFIDENTID& self, const std::st
     bool bExit = false;
     if (!m_pWorldGuildDataModule->ExitGuild(self, strName, bExit))
     {
+        m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_SHOW_STRING, NFCDataList() << self << (int)NFMsg::EGEC_INVALID_GANGS_NAME);
         return NFIDENTID();
     }
 
@@ -182,6 +183,8 @@ bool NFCWorldGuildModule::UpGuildMmember( const NFIDENTID& self, const NFIDENTID
 
     pMemberRecord->SetInt(nRow, "Power", (nPower + 1)) ;
 
+    m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_SHOW_RECORD, NFCDataList() << xGuildID << self << "GuildMemberList" << nRow);
+
 	return true;
 }
 
@@ -217,6 +220,8 @@ bool NFCWorldGuildModule::DownGuildMmember( const NFIDENTID& self, const NFIDENT
     }
 
     pMemberRecord->SetInt(nRow, "Power", (nPower - 1));
+
+    m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_SHOW_RECORD, NFCDataList() << xGuildID << self << "GuildMemberList" << nRow);
 
     return true;
 }
