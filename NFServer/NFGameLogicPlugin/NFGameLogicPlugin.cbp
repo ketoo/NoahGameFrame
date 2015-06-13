@@ -28,6 +28,10 @@
 					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
+				<ExtraCommands>
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFGameLogicPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFGameServer1/" />
+					<Mode after="always" />
+				</ExtraCommands>
 				<Linker>
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
@@ -62,6 +66,10 @@
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
 				</Linker>
+				<ExtraCommands>
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFGameLogicPlugin.so $(SolutionDir)/_Out/Server/Release/NFGameServer1/" />
+					<Mode after="always" />
+				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
