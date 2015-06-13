@@ -84,6 +84,7 @@ ALTER TABLE `Guild` ADD `GuildDesc` varchar(128) DEFAULT '' COMMENT '工会描�
 ALTER TABLE `Guild` ADD `GuildMoney` bigint(11) DEFAULT '0' COMMENT '工会财富';
 ALTER TABLE `Guild` ADD `GuildLevel` bigint(11) DEFAULT '0' COMMENT '工会等级';
 ALTER TABLE `Guild` ADD `GuildContinueDay` bigint(11) DEFAULT '0' COMMENT '工会霸占排行榜天数';
+ALTER TABLE `Guild` ADD `GuilID` varchar(128) DEFAULT '' COMMENT '工会ID';
 ALTER TABLE `Guild` ADD `GuildBoss` BLOB COMMENT 'guild';
 ALTER TABLE `Guild` ADD `GuildMemberList` BLOB COMMENT 'guild';
 ALTER TABLE `Guild` ADD `GuildEvent` BLOB COMMENT 'guild';
@@ -220,6 +221,8 @@ ALTER TABLE `Player` ADD `TargetY` float(11,3) DEFAULT '0' COMMENT '';
 ALTER TABLE `Player` ADD `TargetZ` float(11,3) DEFAULT '0' COMMENT '';
 ALTER TABLE `Player` ADD `PathStep` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `Player` ADD `LoadPropertyFinish` bigint(11) DEFAULT '0' COMMENT '';
+ALTER TABLE `Player` ADD `GameID` bigint(11) DEFAULT '0' COMMENT '登陆的服ID';
+ALTER TABLE `Player` ADD `GateID` bigint(11) DEFAULT '0' COMMENT '登陆的网关ID';
 ALTER TABLE `Player` ADD `PlayerViewItem` BLOB COMMENT '';
 ALTER TABLE `Player` ADD `BagItemList` BLOB COMMENT '普通背包';
 ALTER TABLE `Player` ADD `EctypeList` BLOB COMMENT '副本列表';
