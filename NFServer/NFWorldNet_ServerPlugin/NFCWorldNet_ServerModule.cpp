@@ -37,6 +37,8 @@ bool NFCWorldNet_ServerModule::AfterInit()
 
     m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, this, &NFCWorldNet_ServerModule::OnSelectServerEvent);
     m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_SHOW_STRING, this, &NFCWorldNet_ServerModule::OnShowStringEvent);
+    m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_SHOW_RECORD, this, &NFCWorldNet_ServerModule::OnShowRecordEvent);
+    m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_SHOW_PROPERTY, this, &NFCWorldNet_ServerModule::OnShowPropertyEvent);
 
 	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("WorldServer");
 	if (xLogicClass.get())
@@ -484,7 +486,7 @@ void NFCWorldNet_ServerModule::OnCrateGuildProcess( const NFIPacket& msg )
         *xAck.mutable_guild_id() = NFToPB(xGuild);
         xAck.set_guild_name(xMsg.guild_name());
 
-        SendMsgPB(NFMsg::EGMI_REQ_CREATE_GUILD, xAck, msg.GetFd());
+        SendMsgPB(NFMsg::EGMI_REQ_CREATE_GUILD, xAck, msg.GetFd(), nPlayerID);
     }
 }
 
@@ -495,6 +497,7 @@ void NFCWorldNet_ServerModule::OnJoinGuildProcess( const NFIPacket& msg )
 	if (m_pWorldGuildModule->JoinGuild(nPlayerID, PBToNF(xMsg.guild_id())))
 	{
         ShowStringByFD(nPlayerID, msg.GetFd(), NFMsg::EGEC_JOIN_GUILD_SUCCESS);
+        SendPropertyToPlayer(PBToNF(xMsg.guild_id()), nPlayerID);
 	}
 }
 
@@ -623,4 +626,277 @@ bool NFCWorldNet_ServerModule::GetGateID( const NFIDENTID& self, int& nGateID )
     }
 
     return true;
+}
+
+void NFCWorldNet_ServerModule::SendPropertyToPlayer( const NFIDENTID& self, const NFIDENTID& xPlayer )
+{
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
+    if (!pObject.get())
+    {
+        return;
+    }
+
+    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
+    if (!pPropertyManager.get())
+    {
+        return;
+    }
+
+    std::string strPropertyName;
+    
+    NFMsg::ObjectPropertyInt xPropertyInt;
+    NFMsg::Ident* pIdent = xPropertyInt.mutable_player_id();
+    *pIdent = NFToPB(self);
+
+    NFMsg::ObjectPropertyFloat xPropertyFloat;
+    pIdent = xPropertyFloat.mutable_player_id();
+    *pIdent = NFToPB(self);
+
+    NFMsg::ObjectPropertyFloat xPropertyDouble;
+    pIdent = xPropertyDouble.mutable_player_id();
+    *pIdent = NFToPB(self);
+
+    NFMsg::ObjectPropertyString xPropertyString;
+    pIdent = xPropertyString.mutable_player_id();
+    *pIdent = NFToPB(self);
+
+    NFMsg::ObjectPropertyObject xPropertyObject;
+    pIdent = xPropertyObject.mutable_player_id();
+    *pIdent = NFToPB(self);
+
+    for (NF_SHARE_PTR<NFIProperty> pProperty = pPropertyManager->First(strPropertyName); pProperty.get() != NULL; pProperty = pPropertyManager->Next(strPropertyName))
+    {
+        const int nDataType = pProperty->GetType();
+
+        switch (nDataType)
+        {
+        case TDATA_INT:
+            {
+                NFMsg::PropertyInt* pDataInt = xPropertyInt.add_property_list();
+                pDataInt->set_property_name( strPropertyName );
+                pDataInt->set_data( pProperty->GetInt() );
+            }
+            break;
+
+        case TDATA_FLOAT:
+            {
+                NFMsg::PropertyFloat* pDataFloat = xPropertyFloat.add_property_list();
+                pDataFloat->set_property_name( strPropertyName );
+                pDataFloat->set_data( pProperty->GetFloat() );
+            }
+            break;
+        case TDATA_DOUBLE:
+            {
+                NFMsg::PropertyFloat* pDataFloat = xPropertyDouble.add_property_list();
+                pDataFloat->set_property_name( strPropertyName );
+                pDataFloat->set_data( pProperty->GetDouble( ) );
+            }
+            break;
+        case TDATA_STRING:
+            {
+                NFMsg::PropertyString* pDataString = xPropertyString.add_property_list();
+                pDataString->set_property_name( strPropertyName );
+                pDataString->set_data( pProperty->GetString( ) );
+            }
+            break;
+        case TDATA_OBJECT:
+            {
+                NFMsg::PropertyObject* pDataObject = xPropertyObject.add_property_list();
+                pDataObject->set_property_name( strPropertyName );
+                *pDataObject->mutable_data() = NFToPB(pProperty->GetObject( ));
+            }
+            break;    
+        default:
+            break;
+        }
+    }
+
+    int nGateID = 0;
+    GetGateID(xPlayer, nGateID);
+    if (xPropertyInt.property_list_size() > 0 )
+    {
+        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt, xPlayer);
+    }
+
+    if (xPropertyFloat.property_list_size() > 0 )
+    {
+        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_PROPERTY_FLOAT, xPropertyFloat, xPlayer);
+    }
+
+    if (xPropertyDouble.property_list_size() > 0 )
+    {
+        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyDouble, xPlayer);
+    }
+
+    if (xPropertyString.property_list_size() > 0 )
+    {
+        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString, xPlayer);
+    }
+
+    if (xPropertyObject.property_list_size() > 0 )
+    {
+        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject, xPlayer);
+    }
+}
+
+void NFCWorldNet_ServerModule::SendRecordToPlayer( const NFIDENTID& self, const NFIDENTID& xPlayer, const std::string& strRecordName, const int nRow /*= -1*/)
+{
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
+    if (!pObject.get())
+    {
+        return;
+    }
+
+    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, strRecordName);
+    if (!pRecord.get())
+    {
+        return;
+    }
+
+    NFMsg::ObjectRecordInt xRecordChangedInt;
+    *xRecordChangedInt.mutable_player_id() = NFToPB(self);
+    xRecordChangedInt.set_record_name( strRecordName );
+
+    NFMsg::ObjectRecordFloat xRecordChangedFloat;
+    *xRecordChangedFloat.mutable_player_id() = NFToPB(self);
+    xRecordChangedFloat.set_record_name( strRecordName );
+
+    NFMsg::ObjectRecordFloat xRecordChangedDouble;
+    *xRecordChangedDouble.mutable_player_id() = NFToPB(self);
+    xRecordChangedDouble.set_record_name( strRecordName );
+
+    NFMsg::ObjectRecordString xRecordChangedString;
+    *xRecordChangedString.mutable_player_id() = NFToPB(self);
+    xRecordChangedString.set_record_name( strRecordName );
+
+    NFMsg::ObjectRecordObject xRecorChangedObject;
+    *xRecorChangedObject.mutable_player_id() = NFToPB(self);
+    xRecorChangedObject.set_record_name( strRecordName );
+
+    for (int iRow = 0; iRow < pRecord->GetRows(); iRow++)
+    {
+        if (!pRecord->IsUsed(iRow))
+        {
+            continue;
+        }
+
+        if ( nRow > 0 && iRow != nRow)
+        {
+            continue;
+        }
+
+        NFCDataList varDataType = pRecord->GetInitData();
+        for (int jCol = 0; jCol < pRecord->GetCols(); jCol ++)
+        {
+            switch (varDataType.Type(jCol))
+            {
+            case TDATA_INT:
+                {
+                    NFMsg::RecordInt* recordProperty = xRecordChangedInt.add_property_list();
+                    recordProperty->set_row( iRow );
+                    recordProperty->set_col( jCol );
+                    const int nData = pRecord->GetInt( iRow, jCol);
+                    recordProperty->set_data( nData );
+                }
+                break;
+            case TDATA_FLOAT:
+                {
+                    NFMsg::RecordFloat* recordProperty = xRecordChangedFloat.add_property_list();
+                    recordProperty->set_row( iRow );
+                    recordProperty->set_col( jCol );
+                    const float fData = pRecord->GetFloat( iRow, jCol);
+                    recordProperty->set_data( fData );
+                }
+                break;
+            case TDATA_DOUBLE:
+                {
+                    NFMsg::RecordFloat* recordProperty = xRecordChangedDouble.add_property_list();
+                    recordProperty->set_row( iRow );
+                    recordProperty->set_col( jCol );
+                    const float fData = pRecord->GetDouble( iRow, jCol);
+                    recordProperty->set_data( fData );
+                }
+                break;
+            case TDATA_STRING:
+                {
+                    NFMsg::RecordString* recordProperty = xRecordChangedString.add_property_list();
+                    recordProperty->set_row( iRow );
+                    recordProperty->set_col( jCol );
+                    const std::string& strData = pRecord->GetString( iRow, jCol);
+                    recordProperty->set_data( strData );
+                }
+                break;
+            case TDATA_OBJECT:
+                {
+                    NFMsg::RecordObject* recordProperty = xRecorChangedObject.add_property_list();
+                    recordProperty->set_row( iRow );
+                    recordProperty->set_col( jCol );
+                    const NFIDENTID& xData = pRecord->GetObject( iRow, jCol);
+                    *recordProperty->mutable_data() = NFToPB(xData);
+                }
+                break; 
+            default:
+                break;
+            }
+        }
+    }
+
+    int nGateID = 0;
+    GetGateID(xPlayer, nGateID);
+    if (xRecordChangedInt.property_list_size() > 0 )
+    {
+        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_RECORD_INT, xRecordChangedInt, xPlayer);
+    }
+
+    if (xRecordChangedFloat.property_list_size() > 0 )
+    {
+        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_RECORD_FLOAT, xRecordChangedFloat, xPlayer);
+    }
+
+    if (xRecordChangedDouble.property_list_size() > 0 )
+    {
+        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_RECORD_DOUBLE, xRecordChangedDouble, xPlayer);
+    }
+
+    if (xRecordChangedString.property_list_size() > 0 )
+    {
+        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_RECORD_STRING, xRecordChangedString, xPlayer);
+    }
+
+    if (xRecorChangedObject.property_list_size() > 0 )
+    {
+        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_RECORD_OBJECT, xRecorChangedObject, xPlayer);
+    }
+}
+
+int NFCWorldNet_ServerModule::OnShowRecordEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var )
+{
+    if (var.GetCount() != 4 || !var.TypeEx(TDATA_OBJECT, TDATA_OBJECT, TDATA_STRING, TDATA_INT, TDATA_UNKNOWN))
+    {
+        return 1;
+    }
+
+    const NFIDENTID& self = var.Object(0);
+    const NFIDENTID& xPlayer = var.Object(1);
+    const std::string& strRecordName = var.String(2);
+    const int nRow = var.Int(3);
+
+    SendRecordToPlayer(self, xPlayer, strRecordName, nRow);
+
+    return 0;
+}
+
+int NFCWorldNet_ServerModule::OnShowPropertyEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var )
+{
+    if (var.GetCount() != 2 || !var.TypeEx(TDATA_OBJECT, TDATA_OBJECT, TDATA_UNKNOWN))
+    {
+        return 1;
+    }
+
+    const NFIDENTID& self = var.Object(0);
+    const NFIDENTID& xPlayer = var.Object(1);
+
+    SendPropertyToPlayer(self, xPlayer);
+
+    return 0;
 }
