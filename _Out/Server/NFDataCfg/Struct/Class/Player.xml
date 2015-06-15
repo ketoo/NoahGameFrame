@@ -164,5 +164,7 @@
       <Col Type="int" Tag="Level" />
     </Record>
   </Records>
-  <Components />
+  <Components>
+    <Component Name="Test" Language="lua" Enable="1" />
+  </Components>
 </XML>
