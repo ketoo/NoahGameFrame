@@ -24,7 +24,6 @@ const ::google::protobuf::EnumDescriptor* EGameEventCode_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EGameMsgID_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EAwardType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EGuildPowerType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* EBagItemList_descriptor_ = NULL;
 
 }  // namespace
 
@@ -39,7 +38,6 @@ void protobuf_AssignDesc_NFDefine_2eproto() {
   EGameMsgID_descriptor_ = file->enum_type(1);
   EAwardType_descriptor_ = file->enum_type(2);
   EGuildPowerType_descriptor_ = file->enum_type(3);
-  EBagItemList_descriptor_ = file->enum_type(4);
 }
 
 namespace {
@@ -177,16 +175,7 @@ void protobuf_AddDesc_NFDefine_2eproto() {
     "\023\n\017AWARD_TYPE_HERO\020\001*s\n\017EGuildPowerType\022"
     "\033\n\027GUILD_POWER_TYPE_NORMAL\020\000\022#\n\037GUILD_PO"
     "WER_TYPE_VICE_PRESIDENT\020\001\022\036\n\032GUILD_POWER"
-    "_TYPE_PRESIDENT\020\002*\362\002\n\014EBagItemList\022\r\n\tEB"
-    "ag_GUID\020\000\022\021\n\rEBag_ConfigID\020\001\022\022\n\016EBag_Ite"
-    "mCount\020\002\022\016\n\nEBag_Bound\020\003\022\024\n\020EBag_Expired"
-    "Type\020\004\022\022\n\016EBag_SlotCount\020\005\022\024\n\020EBag_Inlay"
-    "Stone1\020\006\022\024\n\020EBag_InlayStone2\020\007\022\024\n\020EBag_I"
-    "nlayStone3\020\010\022\024\n\020EBag_InlayStone4\020\t\022\024\n\020EB"
-    "ag_InlayStone5\020\n\022\024\n\020EBag_InlayStone6\020\013\022\026"
-    "\n\022EBag_EnhancedLevel\020\014\022\027\n\023EBag_Sagecraft"
-    "Level\020\r\022\027\n\023EBag_SagecraftStone\020\016\022\025\n\021EBag"
-    "_RandProperty\020\017\022\r\n\tEBag_Date\020\020", 4830);
+    "_TYPE_PRESIDENT\020\002", 4457);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFDefine.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFDefine_2eproto);
@@ -400,35 +389,6 @@ bool EGuildPowerType_IsValid(int value) {
     case 0:
     case 1:
     case 2:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const ::google::protobuf::EnumDescriptor* EBagItemList_descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return EBagItemList_descriptor_;
-}
-bool EBagItemList_IsValid(int value) {
-  switch(value) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
-    case 11:
-    case 12:
-    case 13:
-    case 14:
-    case 15:
-    case 16:
       return true;
     default:
       return false;
