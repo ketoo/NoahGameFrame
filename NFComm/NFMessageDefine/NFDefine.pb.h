@@ -261,40 +261,6 @@ inline bool EGuildPowerType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EGuildPowerType>(
     EGuildPowerType_descriptor(), name, value);
 }
-enum EBagItemList {
-  EBag_GUID = 0,
-  EBag_ConfigID = 1,
-  EBag_ItemCount = 2,
-  EBag_Bound = 3,
-  EBag_ExpiredType = 4,
-  EBag_SlotCount = 5,
-  EBag_InlayStone1 = 6,
-  EBag_InlayStone2 = 7,
-  EBag_InlayStone3 = 8,
-  EBag_InlayStone4 = 9,
-  EBag_InlayStone5 = 10,
-  EBag_InlayStone6 = 11,
-  EBag_EnhancedLevel = 12,
-  EBag_SagecraftLevel = 13,
-  EBag_SagecraftStone = 14,
-  EBag_RandProperty = 15,
-  EBag_Date = 16
-};
-bool EBagItemList_IsValid(int value);
-const EBagItemList EBagItemList_MIN = EBag_GUID;
-const EBagItemList EBagItemList_MAX = EBag_Date;
-const int EBagItemList_ARRAYSIZE = EBagItemList_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* EBagItemList_descriptor();
-inline const ::std::string& EBagItemList_Name(EBagItemList value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    EBagItemList_descriptor(), value);
-}
-inline bool EBagItemList_Parse(
-    const ::std::string& name, EBagItemList* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<EBagItemList>(
-    EBagItemList_descriptor(), name, value);
-}
 // ===================================================================
 
 
@@ -327,10 +293,6 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EAwardType>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGuildPowerType>() {
   return ::NFMsg::EGuildPowerType_descriptor();
-}
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EBagItemList>() {
-  return ::NFMsg::EBagItemList_descriptor();
 }
 
 }  // namespace google
