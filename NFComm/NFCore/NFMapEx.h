@@ -74,6 +74,77 @@ public:
             return NF_SHARE_PTR<TD>();
         }
     }
+	virtual TD* FirstNude(T& name)
+	{
+		if (mObjectList.size() <= 0)
+		{
+			return NULL;
+		}
+
+		mObjectCurIter = mObjectList.begin();
+		if (mObjectCurIter != mObjectList.end())
+		{
+			name = mObjectCurIter->first;
+			return mObjectCurIter->second.get();
+		}
+		else
+		{
+			return NULL;
+		}
+	}
+
+	virtual TD* NextNude(T& name)
+	{
+		if (mObjectCurIter == mObjectList.end())
+		{
+			return NULL;
+		}
+
+		mObjectCurIter++;
+		if (mObjectCurIter != mObjectList.end())
+		{
+			name = mObjectCurIter->first;
+			return mObjectCurIter->second.get();
+		}
+		else
+		{
+			return NULL;
+		}
+	}
+	virtual TD* FirstNude()
+	{
+		if (mObjectList.size() <= 0)
+		{
+			return NULL;
+		}
+
+		mObjectCurIter = mObjectList.begin();
+		if (mObjectCurIter != mObjectList.end())
+		{
+			return mObjectCurIter->second.get();
+		}
+		else
+		{
+			return NULL;
+		}
+	}
+	virtual TD* NextNude()
+	{
+		if (mObjectCurIter == mObjectList.end())
+		{
+			return NULL;
+		}
+
+		mObjectCurIter++;
+		if (mObjectCurIter != mObjectList.end())
+		{
+			return mObjectCurIter->second.get();
+		}
+		else
+		{
+			return NULL;
+		}
+	}
 
     virtual NF_SHARE_PTR<TD> First()
     {
