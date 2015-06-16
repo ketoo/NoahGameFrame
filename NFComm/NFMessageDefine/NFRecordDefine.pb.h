@@ -111,10 +111,11 @@ enum GuildMemberList_RecordColType {
   GuildMemberList_Level = 2,
   GuildMemberList_Job = 3,
   GuildMemberList_Donation = 4,
-  GuildMemberList_VIP = 5,
-  GuildMemberList_Offline = 6,
-  GuildMemberList_Power = 7,
-  GuildMemberList_Title = 8
+  GuildMemberList_Receive = 5,
+  GuildMemberList_VIP = 6,
+  GuildMemberList_Offline = 7,
+  GuildMemberList_Power = 8,
+  GuildMemberList_Title = 9
 };
 bool GuildMemberList_RecordColType_IsValid(int value);
 const GuildMemberList_RecordColType GuildMemberList_RecordColType_MIN = GuildMemberList_GUID;
