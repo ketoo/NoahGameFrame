@@ -45,6 +45,7 @@ class AckPlayerEntryList;
 class AckPlayerLeaveList;
 class ReqAckPlayerMove;
 class ReqAckPlayerChat;
+class EffectData;
 class ReqAckUseSkill;
 class ReqAckUseItem;
 class ReqAckSwapScene;
@@ -1042,6 +1043,110 @@ class ReqAckPlayerChat : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class EffectData : public ::google::protobuf::Message {
+ public:
+  EffectData();
+  virtual ~EffectData();
+
+  EffectData(const EffectData& from);
+
+  inline EffectData& operator=(const EffectData& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const EffectData& default_instance();
+
+  void Swap(EffectData* other);
+
+  // implements Message ----------------------------------------------
+
+  EffectData* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const EffectData& from);
+  void MergeFrom(const EffectData& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident effect_ident = 1;
+  inline bool has_effect_ident() const;
+  inline void clear_effect_ident();
+  static const int kEffectIdentFieldNumber = 1;
+  inline const ::NFMsg::Ident& effect_ident() const;
+  inline ::NFMsg::Ident* mutable_effect_ident();
+  inline ::NFMsg::Ident* release_effect_ident();
+  inline void set_allocated_effect_ident(::NFMsg::Ident* effect_ident);
+
+  // required int32 effect_value = 2;
+  inline bool has_effect_value() const;
+  inline void clear_effect_value();
+  static const int kEffectValueFieldNumber = 2;
+  inline ::google::protobuf::int32 effect_value() const;
+  inline void set_effect_value(::google::protobuf::int32 value);
+
+  // required int32 effect_rlt = 3;
+  inline bool has_effect_rlt() const;
+  inline void clear_effect_rlt();
+  static const int kEffectRltFieldNumber = 3;
+  inline ::google::protobuf::int32 effect_rlt() const;
+  inline void set_effect_rlt(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.EffectData)
+ private:
+  inline void set_has_effect_ident();
+  inline void clear_has_effect_ident();
+  inline void set_has_effect_value();
+  inline void clear_has_effect_value();
+  inline void set_has_effect_rlt();
+  inline void clear_has_effect_rlt();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* effect_ident_;
+  ::google::protobuf::int32 effect_value_;
+  ::google::protobuf::int32 effect_rlt_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static EffectData* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class ReqAckUseSkill : public ::google::protobuf::Message {
  public:
   ReqAckUseSkill();
@@ -1135,41 +1240,24 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
   inline ::NFMsg::Position* release_tar_pos();
   inline void set_allocated_tar_pos(::NFMsg::Position* tar_pos);
 
-  // repeated .NFMsg.Ident effect_ident = 5;
-  inline int effect_ident_size() const;
-  inline void clear_effect_ident();
-  static const int kEffectIdentFieldNumber = 5;
-  inline const ::NFMsg::Ident& effect_ident(int index) const;
-  inline ::NFMsg::Ident* mutable_effect_ident(int index);
-  inline ::NFMsg::Ident* add_effect_ident();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
-      effect_ident() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
-      mutable_effect_ident();
+  // required int32 use_index = 5;
+  inline bool has_use_index() const;
+  inline void clear_use_index();
+  static const int kUseIndexFieldNumber = 5;
+  inline ::google::protobuf::int32 use_index() const;
+  inline void set_use_index(::google::protobuf::int32 value);
 
-  // repeated int32 effect_value = 6;
-  inline int effect_value_size() const;
-  inline void clear_effect_value();
-  static const int kEffectValueFieldNumber = 6;
-  inline ::google::protobuf::int32 effect_value(int index) const;
-  inline void set_effect_value(int index, ::google::protobuf::int32 value);
-  inline void add_effect_value(::google::protobuf::int32 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      effect_value() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_effect_value();
-
-  // repeated int32 effect_rlt = 7;
-  inline int effect_rlt_size() const;
-  inline void clear_effect_rlt();
-  static const int kEffectRltFieldNumber = 7;
-  inline ::google::protobuf::int32 effect_rlt(int index) const;
-  inline void set_effect_rlt(int index, ::google::protobuf::int32 value);
-  inline void add_effect_rlt(::google::protobuf::int32 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      effect_rlt() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_effect_rlt();
+  // repeated .NFMsg.EffectData effect_data = 6;
+  inline int effect_data_size() const;
+  inline void clear_effect_data();
+  static const int kEffectDataFieldNumber = 6;
+  inline const ::NFMsg::EffectData& effect_data(int index) const;
+  inline ::NFMsg::EffectData* mutable_effect_data(int index);
+  inline ::NFMsg::EffectData* add_effect_data();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >&
+      effect_data() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >*
+      mutable_effect_data();
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckUseSkill)
  private:
@@ -1181,6 +1269,8 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
   inline void clear_has_now_pos();
   inline void set_has_tar_pos();
   inline void clear_has_tar_pos();
+  inline void set_has_use_index();
+  inline void clear_has_use_index();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -1188,12 +1278,11 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
   ::std::string* skill_id_;
   ::NFMsg::Position* now_pos_;
   ::NFMsg::Position* tar_pos_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > effect_ident_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > effect_value_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > effect_rlt_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData > effect_data_;
+  ::google::protobuf::int32 use_index_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -1276,53 +1365,17 @@ class ReqAckUseItem : public ::google::protobuf::Message {
   inline ::NFMsg::Ident* release_item_guid();
   inline void set_allocated_item_guid(::NFMsg::Ident* item_guid);
 
-  // repeated .NFMsg.Ident effect_ident = 3;
-  inline int effect_ident_size() const;
-  inline void clear_effect_ident();
-  static const int kEffectIdentFieldNumber = 3;
-  inline const ::NFMsg::Ident& effect_ident(int index) const;
-  inline ::NFMsg::Ident* mutable_effect_ident(int index);
-  inline ::NFMsg::Ident* add_effect_ident();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
-      effect_ident() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
-      mutable_effect_ident();
-
-  // repeated int32 effect_value = 4;
-  inline int effect_value_size() const;
-  inline void clear_effect_value();
-  static const int kEffectValueFieldNumber = 4;
-  inline ::google::protobuf::int32 effect_value(int index) const;
-  inline void set_effect_value(int index, ::google::protobuf::int32 value);
-  inline void add_effect_value(::google::protobuf::int32 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      effect_value() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_effect_value();
-
-  // repeated int32 effect_rlt = 5;
-  inline int effect_rlt_size() const;
-  inline void clear_effect_rlt();
-  static const int kEffectRltFieldNumber = 5;
-  inline ::google::protobuf::int32 effect_rlt(int index) const;
-  inline void set_effect_rlt(int index, ::google::protobuf::int32 value);
-  inline void add_effect_rlt(::google::protobuf::int32 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      effect_rlt() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_effect_rlt();
-
-  // optional bytes key_value = 6;
-  inline bool has_key_value() const;
-  inline void clear_key_value();
-  static const int kKeyValueFieldNumber = 6;
-  inline const ::std::string& key_value() const;
-  inline void set_key_value(const ::std::string& value);
-  inline void set_key_value(const char* value);
-  inline void set_key_value(const void* value, size_t size);
-  inline ::std::string* mutable_key_value();
-  inline ::std::string* release_key_value();
-  inline void set_allocated_key_value(::std::string* key_value);
+  // repeated .NFMsg.EffectData effect_data = 3;
+  inline int effect_data_size() const;
+  inline void clear_effect_data();
+  static const int kEffectDataFieldNumber = 3;
+  inline const ::NFMsg::EffectData& effect_data(int index) const;
+  inline ::NFMsg::EffectData* mutable_effect_data(int index);
+  inline ::NFMsg::EffectData* add_effect_data();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >&
+      effect_data() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >*
+      mutable_effect_data();
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckUseItem)
  private:
@@ -1330,20 +1383,15 @@ class ReqAckUseItem : public ::google::protobuf::Message {
   inline void clear_has_user();
   inline void set_has_item_guid();
   inline void clear_has_item_guid();
-  inline void set_has_key_value();
-  inline void clear_has_key_value();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::NFMsg::Ident* user_;
   ::NFMsg::Ident* item_guid_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > effect_ident_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > effect_value_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > effect_rlt_;
-  ::std::string* key_value_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData > effect_data_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -3511,6 +3559,92 @@ inline void ReqAckPlayerChat::set_allocated_chat_name(::std::string* chat_name) 
 
 // -------------------------------------------------------------------
 
+// EffectData
+
+// required .NFMsg.Ident effect_ident = 1;
+inline bool EffectData::has_effect_ident() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void EffectData::set_has_effect_ident() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void EffectData::clear_has_effect_ident() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void EffectData::clear_effect_ident() {
+  if (effect_ident_ != NULL) effect_ident_->::NFMsg::Ident::Clear();
+  clear_has_effect_ident();
+}
+inline const ::NFMsg::Ident& EffectData::effect_ident() const {
+  return effect_ident_ != NULL ? *effect_ident_ : *default_instance_->effect_ident_;
+}
+inline ::NFMsg::Ident* EffectData::mutable_effect_ident() {
+  set_has_effect_ident();
+  if (effect_ident_ == NULL) effect_ident_ = new ::NFMsg::Ident;
+  return effect_ident_;
+}
+inline ::NFMsg::Ident* EffectData::release_effect_ident() {
+  clear_has_effect_ident();
+  ::NFMsg::Ident* temp = effect_ident_;
+  effect_ident_ = NULL;
+  return temp;
+}
+inline void EffectData::set_allocated_effect_ident(::NFMsg::Ident* effect_ident) {
+  delete effect_ident_;
+  effect_ident_ = effect_ident;
+  if (effect_ident) {
+    set_has_effect_ident();
+  } else {
+    clear_has_effect_ident();
+  }
+}
+
+// required int32 effect_value = 2;
+inline bool EffectData::has_effect_value() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void EffectData::set_has_effect_value() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void EffectData::clear_has_effect_value() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void EffectData::clear_effect_value() {
+  effect_value_ = 0;
+  clear_has_effect_value();
+}
+inline ::google::protobuf::int32 EffectData::effect_value() const {
+  return effect_value_;
+}
+inline void EffectData::set_effect_value(::google::protobuf::int32 value) {
+  set_has_effect_value();
+  effect_value_ = value;
+}
+
+// required int32 effect_rlt = 3;
+inline bool EffectData::has_effect_rlt() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void EffectData::set_has_effect_rlt() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void EffectData::clear_has_effect_rlt() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void EffectData::clear_effect_rlt() {
+  effect_rlt_ = 0;
+  clear_has_effect_rlt();
+}
+inline ::google::protobuf::int32 EffectData::effect_rlt() const {
+  return effect_rlt_;
+}
+inline void EffectData::set_effect_rlt(::google::protobuf::int32 value) {
+  set_has_effect_rlt();
+  effect_rlt_ = value;
+}
+
+// -------------------------------------------------------------------
+
 // ReqAckUseSkill
 
 // required .NFMsg.Ident user = 1;
@@ -3697,79 +3831,51 @@ inline void ReqAckUseSkill::set_allocated_tar_pos(::NFMsg::Position* tar_pos) {
   }
 }
 
-// repeated .NFMsg.Ident effect_ident = 5;
-inline int ReqAckUseSkill::effect_ident_size() const {
-  return effect_ident_.size();
+// required int32 use_index = 5;
+inline bool ReqAckUseSkill::has_use_index() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void ReqAckUseSkill::clear_effect_ident() {
-  effect_ident_.Clear();
+inline void ReqAckUseSkill::set_has_use_index() {
+  _has_bits_[0] |= 0x00000010u;
 }
-inline const ::NFMsg::Ident& ReqAckUseSkill::effect_ident(int index) const {
-  return effect_ident_.Get(index);
+inline void ReqAckUseSkill::clear_has_use_index() {
+  _has_bits_[0] &= ~0x00000010u;
 }
-inline ::NFMsg::Ident* ReqAckUseSkill::mutable_effect_ident(int index) {
-  return effect_ident_.Mutable(index);
+inline void ReqAckUseSkill::clear_use_index() {
+  use_index_ = 0;
+  clear_has_use_index();
 }
-inline ::NFMsg::Ident* ReqAckUseSkill::add_effect_ident() {
-  return effect_ident_.Add();
+inline ::google::protobuf::int32 ReqAckUseSkill::use_index() const {
+  return use_index_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
-ReqAckUseSkill::effect_ident() const {
-  return effect_ident_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
-ReqAckUseSkill::mutable_effect_ident() {
-  return &effect_ident_;
+inline void ReqAckUseSkill::set_use_index(::google::protobuf::int32 value) {
+  set_has_use_index();
+  use_index_ = value;
 }
 
-// repeated int32 effect_value = 6;
-inline int ReqAckUseSkill::effect_value_size() const {
-  return effect_value_.size();
+// repeated .NFMsg.EffectData effect_data = 6;
+inline int ReqAckUseSkill::effect_data_size() const {
+  return effect_data_.size();
 }
-inline void ReqAckUseSkill::clear_effect_value() {
-  effect_value_.Clear();
+inline void ReqAckUseSkill::clear_effect_data() {
+  effect_data_.Clear();
 }
-inline ::google::protobuf::int32 ReqAckUseSkill::effect_value(int index) const {
-  return effect_value_.Get(index);
+inline const ::NFMsg::EffectData& ReqAckUseSkill::effect_data(int index) const {
+  return effect_data_.Get(index);
 }
-inline void ReqAckUseSkill::set_effect_value(int index, ::google::protobuf::int32 value) {
-  effect_value_.Set(index, value);
+inline ::NFMsg::EffectData* ReqAckUseSkill::mutable_effect_data(int index) {
+  return effect_data_.Mutable(index);
 }
-inline void ReqAckUseSkill::add_effect_value(::google::protobuf::int32 value) {
-  effect_value_.Add(value);
+inline ::NFMsg::EffectData* ReqAckUseSkill::add_effect_data() {
+  return effect_data_.Add();
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-ReqAckUseSkill::effect_value() const {
-  return effect_value_;
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >&
+ReqAckUseSkill::effect_data() const {
+  return effect_data_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-ReqAckUseSkill::mutable_effect_value() {
-  return &effect_value_;
-}
-
-// repeated int32 effect_rlt = 7;
-inline int ReqAckUseSkill::effect_rlt_size() const {
-  return effect_rlt_.size();
-}
-inline void ReqAckUseSkill::clear_effect_rlt() {
-  effect_rlt_.Clear();
-}
-inline ::google::protobuf::int32 ReqAckUseSkill::effect_rlt(int index) const {
-  return effect_rlt_.Get(index);
-}
-inline void ReqAckUseSkill::set_effect_rlt(int index, ::google::protobuf::int32 value) {
-  effect_rlt_.Set(index, value);
-}
-inline void ReqAckUseSkill::add_effect_rlt(::google::protobuf::int32 value) {
-  effect_rlt_.Add(value);
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-ReqAckUseSkill::effect_rlt() const {
-  return effect_rlt_;
-}
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-ReqAckUseSkill::mutable_effect_rlt() {
-  return &effect_rlt_;
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >*
+ReqAckUseSkill::mutable_effect_data() {
+  return &effect_data_;
 }
 
 // -------------------------------------------------------------------
@@ -3852,149 +3958,29 @@ inline void ReqAckUseItem::set_allocated_item_guid(::NFMsg::Ident* item_guid) {
   }
 }
 
-// repeated .NFMsg.Ident effect_ident = 3;
-inline int ReqAckUseItem::effect_ident_size() const {
-  return effect_ident_.size();
+// repeated .NFMsg.EffectData effect_data = 3;
+inline int ReqAckUseItem::effect_data_size() const {
+  return effect_data_.size();
 }
-inline void ReqAckUseItem::clear_effect_ident() {
-  effect_ident_.Clear();
+inline void ReqAckUseItem::clear_effect_data() {
+  effect_data_.Clear();
 }
-inline const ::NFMsg::Ident& ReqAckUseItem::effect_ident(int index) const {
-  return effect_ident_.Get(index);
+inline const ::NFMsg::EffectData& ReqAckUseItem::effect_data(int index) const {
+  return effect_data_.Get(index);
 }
-inline ::NFMsg::Ident* ReqAckUseItem::mutable_effect_ident(int index) {
-  return effect_ident_.Mutable(index);
+inline ::NFMsg::EffectData* ReqAckUseItem::mutable_effect_data(int index) {
+  return effect_data_.Mutable(index);
 }
-inline ::NFMsg::Ident* ReqAckUseItem::add_effect_ident() {
-  return effect_ident_.Add();
+inline ::NFMsg::EffectData* ReqAckUseItem::add_effect_data() {
+  return effect_data_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
-ReqAckUseItem::effect_ident() const {
-  return effect_ident_;
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >&
+ReqAckUseItem::effect_data() const {
+  return effect_data_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
-ReqAckUseItem::mutable_effect_ident() {
-  return &effect_ident_;
-}
-
-// repeated int32 effect_value = 4;
-inline int ReqAckUseItem::effect_value_size() const {
-  return effect_value_.size();
-}
-inline void ReqAckUseItem::clear_effect_value() {
-  effect_value_.Clear();
-}
-inline ::google::protobuf::int32 ReqAckUseItem::effect_value(int index) const {
-  return effect_value_.Get(index);
-}
-inline void ReqAckUseItem::set_effect_value(int index, ::google::protobuf::int32 value) {
-  effect_value_.Set(index, value);
-}
-inline void ReqAckUseItem::add_effect_value(::google::protobuf::int32 value) {
-  effect_value_.Add(value);
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-ReqAckUseItem::effect_value() const {
-  return effect_value_;
-}
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-ReqAckUseItem::mutable_effect_value() {
-  return &effect_value_;
-}
-
-// repeated int32 effect_rlt = 5;
-inline int ReqAckUseItem::effect_rlt_size() const {
-  return effect_rlt_.size();
-}
-inline void ReqAckUseItem::clear_effect_rlt() {
-  effect_rlt_.Clear();
-}
-inline ::google::protobuf::int32 ReqAckUseItem::effect_rlt(int index) const {
-  return effect_rlt_.Get(index);
-}
-inline void ReqAckUseItem::set_effect_rlt(int index, ::google::protobuf::int32 value) {
-  effect_rlt_.Set(index, value);
-}
-inline void ReqAckUseItem::add_effect_rlt(::google::protobuf::int32 value) {
-  effect_rlt_.Add(value);
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-ReqAckUseItem::effect_rlt() const {
-  return effect_rlt_;
-}
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-ReqAckUseItem::mutable_effect_rlt() {
-  return &effect_rlt_;
-}
-
-// optional bytes key_value = 6;
-inline bool ReqAckUseItem::has_key_value() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void ReqAckUseItem::set_has_key_value() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void ReqAckUseItem::clear_has_key_value() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void ReqAckUseItem::clear_key_value() {
-  if (key_value_ != &::google::protobuf::internal::kEmptyString) {
-    key_value_->clear();
-  }
-  clear_has_key_value();
-}
-inline const ::std::string& ReqAckUseItem::key_value() const {
-  return *key_value_;
-}
-inline void ReqAckUseItem::set_key_value(const ::std::string& value) {
-  set_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    key_value_ = new ::std::string;
-  }
-  key_value_->assign(value);
-}
-inline void ReqAckUseItem::set_key_value(const char* value) {
-  set_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    key_value_ = new ::std::string;
-  }
-  key_value_->assign(value);
-}
-inline void ReqAckUseItem::set_key_value(const void* value, size_t size) {
-  set_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    key_value_ = new ::std::string;
-  }
-  key_value_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqAckUseItem::mutable_key_value() {
-  set_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    key_value_ = new ::std::string;
-  }
-  return key_value_;
-}
-inline ::std::string* ReqAckUseItem::release_key_value() {
-  clear_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = key_value_;
-    key_value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void ReqAckUseItem::set_allocated_key_value(::std::string* key_value) {
-  if (key_value_ != &::google::protobuf::internal::kEmptyString) {
-    delete key_value_;
-  }
-  if (key_value) {
-    set_has_key_value();
-    key_value_ = key_value;
-  } else {
-    clear_has_key_value();
-    key_value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >*
+ReqAckUseItem::mutable_effect_data() {
+  return &effect_data_;
 }
 
 // -------------------------------------------------------------------
