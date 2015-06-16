@@ -1896,14 +1896,17 @@ void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
 	int nContianerID = m_pKernelModule->GetPropertyInt(nPlayerID, "SceneID");
 	int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, "GroupID");
 
-	xMsg.clear_effect_value();
+	//xMsg.clear_effect_data();
 
-	for (int i = 0; i < xMsg.effect_ident_size(); ++i)
+	for (int i = 0; i < xMsg.effect_data_size(); ++i)
 	{
-		const NFIDENTID nTarget = PBToNF(xMsg.effect_ident(i));
+		NFMsg.EffectData& xEffectData = xMsg.effect_data(i);
+		const NFIDENTID nTarget = PBToNF(xEffectData.effect_ident());
 		// 技能伤害
 		m_pSkillModule->OnUseSkill(nPlayerID, NFCDataList() << strSkillID << nTarget);
-		xMsg.add_effect_value(10); // 暂时代替
+
+		xEffectData.set_effect_value(10);// 暂时代替
+		xEffectData.set_effect_rlt(0);
 	}
 
 	SendMsgPBToGate(NFMsg::EGMI_ACK_SKILL_OBJECTX, xMsg, nPlayerID);
