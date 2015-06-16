@@ -23,16 +23,17 @@
       <Col Type="int" Tag="Offline" />
       <Col Type="int" Tag="Power" />
     </Record>
-    <Record Id="GuildMemberList" Row="50" Col="9" Public="0" Private="1" Save="1" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="guild">
+    <Record Id="GuildMemberList" Row="50" Col="10" Public="0" Private="1" Save="1" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="guild">
       <Col Type="object" Tag="GUID" />
       <Col Type="string" Tag="Name" />
       <Col Type="int" Tag="Level" />
       <Col Type="int" Tag="Job" />
       <Col Type="int" Tag="Donation" />
+      <Col Type="int" Tag="Receive" />
       <Col Type="int" Tag="VIP" />
       <Col Type="int" Tag="Offline" />
       <Col Type="int" Tag="Power" />
-      <Col Type="int" Tag="Power" />
+      <Col Type="int" Tag="Title" />
     </Record>
     <Record Id="GuildEvent" Row="50" Col="8" Public="0" Private="1" Save="1" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="guild">
       <Col Type="object" Tag="GUID" />
