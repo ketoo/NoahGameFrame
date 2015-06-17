@@ -11,26 +11,6 @@
 
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 
-class NFCObjectEventInfo
-    : public NFMapEx<int, NFEventList>
-{
-};
-
-class NFCObjectAsyncEventInfo
-	: public NFMapEx<int, NFAsyncEventList>
-{
-};
-
-class NFCClassEventInfo
-    : public NFMapEx<std::string, NFClassEventList>
-{
-};
-
-class NFCClassSyncEventInfo
-	: public NFMapEx<std::string, NFClassAsyncEventList>
-{
-};
-
 class NFCEventProcessModule
     : public NFIEventProcessModule
 {
@@ -58,20 +38,21 @@ public:
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb);
 
 	//////////sync////////////////////////////////////////////////////////////////
-	virtual bool AddAsyncEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_ASYNC_PROCESS_FUNCTOR_PTR& cb_begin/*, const EVENT_ASYNC_PROCESS_FUNCTOR_PTR& cb_end*/);
-	virtual bool AddAsyncClassCallBack(const std::string& strClassName, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb);
+	virtual bool AddAsyncEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb_begin, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end);
+	virtual bool AddAsyncClassCallBack(const std::string& strClassName, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb_begin, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb_end);
 private:
+
     NFList<NFIDENTID> mRemoveObjectListEx;
     NFMapEx<NFIDENTID, NFList<int> > mRemoveEventListEx;
 
-    NF_SHARE_PTR<NFCClassEventInfo> mxClassEventInfoEx;
-
-    typedef NFMapEx<NFIDENTID, NFCObjectEventInfo> NFCObjectEventInfoMapEx;
-    NFCObjectEventInfoMapEx mObjectEventInfoMapEx;
+	NFMapEx<std::string, NFCClassEventList> mxClassEventInfoEx;
+    NFMapEx<NFIDENTID, NFCObjectEventInfo> mObjectEventInfoMapEx;
 
 	///////////////////async event///////////////////////////////////////////////////////
-	typedef NFMapEx<NFIDENTID, NFCObjectAsyncEventInfo> NFCObjectSyncEventInfoMapEx;
-	NFCObjectSyncEventInfoMapEx mObjectSyncEventInfoMapEx;
+	NFMapEx<NFIDENTID, NFCObjectAsyncEventInfo> mObjectSyncEventInfoMapEx;
+	NFMapEx<std::string, NFClassAsyncEventList> mClassSyncEventInfoMapEx;
+
+
 };
 
 

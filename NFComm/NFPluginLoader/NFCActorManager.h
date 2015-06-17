@@ -42,7 +42,9 @@ public:
 	}
 
 #ifdef NF_USE_ACTOR
-	virtual bool OnRequireActor( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventList> xAsyncEventList, const NF_SHARE_PTR<NFAsyncEventList> xSyncEventList);
+	//virtual void OnReceiveActorData( const void *const data, const uint32_t size, const Theron::Address from );
+	virtual void Handler(const NFIActorMessage& message, const Theron::Address from);
+	virtual bool OnRequireActor( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventList> xActorEventList);
 #endif
 
 private:
