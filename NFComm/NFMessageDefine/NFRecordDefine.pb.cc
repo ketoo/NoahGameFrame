@@ -183,10 +183,11 @@ void protobuf_AddDesc_NFRecordDefine_2eproto() {
     "MonsterList_MonsterID\020\000\022$\n TaskMonsterLi"
     "st_CurrentKillCount\020\001\022$\n TaskMonsterList"
     "_RequireKillCount\020\002\022\032\n\026TaskMonsterList_T"
-    "askID\020\003*F\n\026TaskList_RecordColType\022\023\n\017Tas"
-    "kList_TaskID\020\000\022\027\n\023TaskList_TaskStatus\020\001*"
-    "L\n\025PVPList_RecordColType\022\016\n\nPVPList_ID\020\000"
-    "\022\020\n\014PVPList_Name\020\001\022\021\n\rPVPList_Level\020\002", 3877);
+    "askID\020\003*\\\n\026TaskList_RecordColType\022\023\n\017Tas"
+    "kList_TaskID\020\000\022\027\n\023TaskList_TaskStatus\020\001\022"
+    "\024\n\020TaskList_Process\020\002*L\n\025PVPList_RecordC"
+    "olType\022\016\n\nPVPList_ID\020\000\022\020\n\014PVPList_Name\020\001"
+    "\022\021\n\rPVPList_Level\020\002", 3899);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFRecordDefine.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFRecordDefine_2eproto);
@@ -506,6 +507,7 @@ bool TaskList_RecordColType_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
+    case 2:
       return true;
     default:
       return false;
