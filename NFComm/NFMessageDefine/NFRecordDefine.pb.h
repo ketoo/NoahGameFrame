@@ -410,11 +410,12 @@ inline bool TaskMonsterList_RecordColType_Parse(
 }
 enum TaskList_RecordColType {
   TaskList_TaskID = 0,
-  TaskList_TaskStatus = 1
+  TaskList_TaskStatus = 1,
+  TaskList_Process = 2
 };
 bool TaskList_RecordColType_IsValid(int value);
 const TaskList_RecordColType TaskList_RecordColType_MIN = TaskList_TaskID;
-const TaskList_RecordColType TaskList_RecordColType_MAX = TaskList_TaskStatus;
+const TaskList_RecordColType TaskList_RecordColType_MAX = TaskList_Process;
 const int TaskList_RecordColType_ARRAYSIZE = TaskList_RecordColType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* TaskList_RecordColType_descriptor();
