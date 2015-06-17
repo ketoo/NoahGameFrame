@@ -261,6 +261,54 @@ inline bool EGuildPowerType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EGuildPowerType>(
     EGuildPowerType_descriptor(), name, value);
 }
+enum ETaskState {
+  TASK_IN_PROCESS = 0,
+  TASK_DONE = 1,
+  TASK_DRAW_AWARD = 2,
+  TASK_FINISH = 3
+};
+bool ETaskState_IsValid(int value);
+const ETaskState ETaskState_MIN = TASK_IN_PROCESS;
+const ETaskState ETaskState_MAX = TASK_FINISH;
+const int ETaskState_ARRAYSIZE = ETaskState_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ETaskState_descriptor();
+inline const ::std::string& ETaskState_Name(ETaskState value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ETaskState_descriptor(), value);
+}
+inline bool ETaskState_Parse(
+    const ::std::string& name, ETaskState* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ETaskState>(
+    ETaskState_descriptor(), name, value);
+}
+enum ETaskType {
+  TASK_LEVEL_UPDATE_SOME_LEVEL = 0,
+  TASK_PASS_ECTYPE = 1,
+  TASK_PASS_ECTYPE_COUNT = 2,
+  TASK_PASS_SOME_TYPE_ECTYPE_COUNT = 3,
+  TASK_UPDATE_SKILL_COUNT = 4,
+  TASK_CONSUME_MONEY = 5,
+  TASK_CONSUME_DIAMOND = 6,
+  TASK_ARENA_COUNT = 7,
+  TASK_KILL_MONSTER_COUNT = 8,
+  TASK_KILL_SOME_MONSTER_COUNT = 9
+};
+bool ETaskType_IsValid(int value);
+const ETaskType ETaskType_MIN = TASK_LEVEL_UPDATE_SOME_LEVEL;
+const ETaskType ETaskType_MAX = TASK_KILL_SOME_MONSTER_COUNT;
+const int ETaskType_ARRAYSIZE = ETaskType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ETaskType_descriptor();
+inline const ::std::string& ETaskType_Name(ETaskType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ETaskType_descriptor(), value);
+}
+inline bool ETaskType_Parse(
+    const ::std::string& name, ETaskType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ETaskType>(
+    ETaskType_descriptor(), name, value);
+}
 // ===================================================================
 
 
@@ -293,6 +341,14 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EAwardType>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGuildPowerType>() {
   return ::NFMsg::EGuildPowerType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ETaskState>() {
+  return ::NFMsg::ETaskState_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ETaskType>() {
+  return ::NFMsg::ETaskType_descriptor();
 }
 
 }  // namespace google
