@@ -1896,20 +1896,24 @@ void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
 	int nContianerID = m_pKernelModule->GetPropertyInt(nPlayerID, "SceneID");
 	int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, "GroupID");
 
-	//xMsg.clear_effect_data();
+	NFMsg::ReqAckUseSkill xReqAckUseSkill;
+	xReqAckUseSkill.set_skill_id(strSkillID);
 
 	for (int i = 0; i < xMsg.effect_data_size(); ++i)
 	{
-		NFMsg.EffectData& xEffectData = xMsg.effect_data(i);
+		const NFMsg::EffectData& xEffectData = xMsg.effect_data(i);
 		const NFIDENTID nTarget = PBToNF(xEffectData.effect_ident());
 		// 技能伤害
 		m_pSkillModule->OnUseSkill(nPlayerID, NFCDataList() << strSkillID << nTarget);
 
-		xEffectData.set_effect_value(10);// 暂时代替
-		xEffectData.set_effect_rlt(0);
+		NFMsg::EffectData* pNewEffectData = xReqAckUseSkill.add_effect_data();
+
+		*pNewEffectData->mutable_effect_ident() = NFToPB(nTarget);
+		pNewEffectData->set_effect_value(20);// 暂时代替
+		pNewEffectData->set_effect_rlt(0);
 	}
 
-	SendMsgPBToGate(NFMsg::EGMI_ACK_SKILL_OBJECTX, xMsg, nPlayerID);
+	SendMsgPBToGate(NFMsg::EGMI_ACK_SKILL_OBJECTX, xReqAckUseSkill, nPlayerID);
 }
 
 void NFCGameServerNet_ServerModule::OnClienMove( const NFIPacket& msg )
