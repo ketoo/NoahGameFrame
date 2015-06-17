@@ -26,14 +26,13 @@ NFCEventProcessModule::~NFCEventProcessModule()
 
 bool NFCEventProcessModule::Init()
 {
-    mxClassEventInfoEx = NF_SHARE_PTR<NFCClassEventInfo>(NF_NEW NFCClassEventInfo());
 
     return true;
 }
 
 bool NFCEventProcessModule::Shut()
 {
-    mxClassEventInfoEx->ClearAll();
+    mxClassEventInfoEx.ClearAll();
 
     mRemoveEventListEx.ClearAll();
 
@@ -188,10 +187,12 @@ bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventI
 			return false;
 		}
 
-		NFIActorManager* pActorManager = pPluginManager->GetActorManager();
-		std::string strArg;
-		valueList.ToString(strArg, "|");
-		pActorManager->OnRequireActor(objectID, nEventID, strArg, pEventInfo);
+		pPluginManager->GetActorManager()->OnRequireActor(objectID, nEventID, "", pEventInfo);
+
+// 		NFIActorManager* pActorManager = pPluginManager->
+// 		std::string strArg;
+// 		valueList.ToString(strArg, "|");
+// 		pActorManager->OnRequireActor(objectID, nEventID, strArg, pEventInfo);
 #endif
 	}
 
@@ -200,7 +201,7 @@ bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventI
 
 bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList, const bool bSync)
 {
-    NF_SHARE_PTR<NFClassEventList> pEventList = mxClassEventInfoEx->GetElement(strClassName);
+    NF_SHARE_PTR<NFCClassEventList> pEventList = mxClassEventInfoEx.GetElement(strClassName);
     if (nullptr != pEventList)
     {
         CLASS_EVENT_FUNCTOR_PTR cb;
@@ -233,11 +234,11 @@ bool NFCEventProcessModule::HasEventCallBack(const NFIDENTID& objectID, const in
 
 bool NFCEventProcessModule::AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb)
 {
-    NF_SHARE_PTR<NFClassEventList> pEventList = mxClassEventInfoEx->GetElement(strClassName);
+    NF_SHARE_PTR<NFCClassEventList> pEventList = mxClassEventInfoEx.GetElement(strClassName);
     if (nullptr == pEventList)
     {
-        pEventList = NF_SHARE_PTR<NFClassEventList>(NF_NEW NFClassEventList());
-        mxClassEventInfoEx->AddElement(strClassName, pEventList);
+        pEventList = NF_SHARE_PTR<NFCClassEventList>(NF_NEW NFCClassEventList());
+        mxClassEventInfoEx.AddElement(strClassName, pEventList);
     }
 
     assert(NULL != pEventList);
@@ -247,7 +248,7 @@ bool NFCEventProcessModule::AddClassCallBack(const std::string& strClassName, co
     return true;
 }
 
-bool NFCEventProcessModule::AddAsyncEventCallBack( const NFIDENTID& objectID, const int nEventID, const EVENT_ASYNC_PROCESS_FUNCTOR_PTR& cb/*, const EVENT_ASYNC_PROCESS_FUNCTOR_PTR& cb_end*/ )
+bool NFCEventProcessModule::AddAsyncEventCallBack( const NFIDENTID& objectID, const int nEventID, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end )
 {
 	NF_SHARE_PTR<NFCObjectAsyncEventInfo> pObjectSyncEventInfo = mObjectSyncEventInfoMapEx.GetElement(objectID);
 	if (nullptr == pObjectSyncEventInfo)
@@ -267,12 +268,30 @@ bool NFCEventProcessModule::AddAsyncEventCallBack( const NFIDENTID& objectID, co
 
 	assert(NULL != pSyncEventInfo);
 
-	pSyncEventInfo->Add(cb);
+	NFAsyncEventFunc xAsyncEventFunc;
+	xAsyncEventFunc.xBeginFuncptr = cb;
+	xAsyncEventFunc.xEndFuncptr = cb_end;
+
+	pSyncEventInfo->Add(xAsyncEventFunc);
 
 	return true;
 }
 
-bool NFCEventProcessModule::AddAsyncClassCallBack( const std::string& strClassName, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb )
+bool NFCEventProcessModule::AddAsyncClassCallBack( const std::string& strClassName, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb_begin, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb_end )
 {
+
+	NF_SHARE_PTR<NFClassAsyncEventList> pEventList = mClassSyncEventInfoMapEx.GetElement(strClassName);
+	if (nullptr == pEventList)
+	{
+		pEventList = NF_SHARE_PTR<NFClassAsyncEventList>(NF_NEW NFClassAsyncEventList());
+		mClassSyncEventInfoMapEx.AddElement(strClassName, pEventList);
+	}
+
+	NFClassAsyncEventFunc xAsyncEventFunc;
+	xAsyncEventFunc.xBeginFuncptr = cb_begin;
+	xAsyncEventFunc.xEndFuncptr = cb_end;
+
+	pEventList->Add(xAsyncEventFunc);
+
 	return true;
 }
