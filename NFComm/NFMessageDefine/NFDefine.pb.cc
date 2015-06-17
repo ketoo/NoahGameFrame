@@ -24,6 +24,8 @@ const ::google::protobuf::EnumDescriptor* EGameEventCode_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EGameMsgID_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EAwardType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EGuildPowerType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* ETaskState_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* ETaskType_descriptor_ = NULL;
 
 }  // namespace
 
@@ -38,6 +40,8 @@ void protobuf_AssignDesc_NFDefine_2eproto() {
   EGameMsgID_descriptor_ = file->enum_type(1);
   EAwardType_descriptor_ = file->enum_type(2);
   EGuildPowerType_descriptor_ = file->enum_type(3);
+  ETaskState_descriptor_ = file->enum_type(4);
+  ETaskType_descriptor_ = file->enum_type(5);
 }
 
 namespace {
@@ -175,7 +179,17 @@ void protobuf_AddDesc_NFDefine_2eproto() {
     "\023\n\017AWARD_TYPE_HERO\020\001*s\n\017EGuildPowerType\022"
     "\033\n\027GUILD_POWER_TYPE_NORMAL\020\000\022#\n\037GUILD_PO"
     "WER_TYPE_VICE_PRESIDENT\020\001\022\036\n\032GUILD_POWER"
-    "_TYPE_PRESIDENT\020\002", 4457);
+    "_TYPE_PRESIDENT\020\002*V\n\nETaskState\022\023\n\017TASK_"
+    "IN_PROCESS\020\000\022\r\n\tTASK_DONE\020\001\022\023\n\017TASK_DRAW"
+    "_AWARD\020\002\022\017\n\013TASK_FINISH\020\003*\251\002\n\tETaskType\022"
+    " \n\034TASK_LEVEL_UPDATE_SOME_LEVEL\020\000\022\024\n\020TAS"
+    "K_PASS_ECTYPE\020\001\022\032\n\026TASK_PASS_ECTYPE_COUN"
+    "T\020\002\022$\n TASK_PASS_SOME_TYPE_ECTYPE_COUNT\020"
+    "\003\022\033\n\027TASK_UPDATE_SKILL_COUNT\020\004\022\026\n\022TASK_C"
+    "ONSUME_MONEY\020\005\022\030\n\024TASK_CONSUME_DIAMOND\020\006"
+    "\022\024\n\020TASK_ARENA_COUNT\020\007\022\033\n\027TASK_KILL_MONS"
+    "TER_COUNT\020\010\022 \n\034TASK_KILL_SOME_MONSTER_CO"
+    "UNT\020\t", 4845);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFDefine.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFDefine_2eproto);
@@ -389,6 +403,44 @@ bool EGuildPowerType_IsValid(int value) {
     case 0:
     case 1:
     case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* ETaskState_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ETaskState_descriptor_;
+}
+bool ETaskState_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* ETaskType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ETaskType_descriptor_;
+}
+bool ETaskType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
       return true;
     default:
       return false;
