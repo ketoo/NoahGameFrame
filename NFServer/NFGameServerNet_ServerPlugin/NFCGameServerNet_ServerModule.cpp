@@ -1900,7 +1900,7 @@ void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
 
 	for (int i = 0; i < xMsg.effect_data_size(); ++i)
 	{
-		NFMsg.EffectData& xEffectData = xMsg.effect_data(i);
+		NFMsg::EffectData xEffectData = xMsg.effect_data(i);
 		const NFIDENTID nTarget = PBToNF(xEffectData.effect_ident());
 		// ¼¼ÄÜÉËº¦
 		m_pSkillModule->OnUseSkill(nPlayerID, NFCDataList() << strSkillID << nTarget);

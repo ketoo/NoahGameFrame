@@ -122,6 +122,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClInclude Include="NFCSkillConsumeManagerModule.h" />
     <ClInclude Include="NFCBriefSkillConsumeProcessModule.h" />
     <ClInclude Include="NFCSkillModule.h" />
+    <ClInclude Include="NFCTaskModule.h" />
     <ClInclude Include="NFGameLogicPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +150,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClCompile Include="NFCSkillConsumeManagerModule.cpp" />
     <ClCompile Include="NFCBriefSkillConsumeProcessModule.cpp" />
     <ClCompile Include="NFCSkillModule.cpp" />
+    <ClCompile Include="NFCTaskModule.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
