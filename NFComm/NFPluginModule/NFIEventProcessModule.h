@@ -13,6 +13,7 @@
 #include "NFILogicModule.h"
 #include "NFComm/NFCore/NFIDataList.h"
 #include "NFComm/NFEventDefine/NFEventDefine.h"
+#include "NFComm/NFPluginModule/NFIActorManager.h"
 
 struct NFEventList
 	: public NFList<EVENT_PROCESS_FUNCTOR_PTR>
@@ -20,20 +21,13 @@ struct NFEventList
 
 };
 
-struct NFAsyncEventList
-	: public NFList<EVENT_ASYNC_PROCESS_FUNCTOR_PTR>
+class NFCObjectEventInfo
+	: public NFMapEx<int, NFEventList>
 {
-
 };
 
-struct NFClassEventList
+struct NFCClassEventList
 	: public NFList<CLASS_EVENT_FUNCTOR_PTR>
-{
-
-};
-
-struct NFClassAsyncEventList
-	: public NFList<CLASS_ASYNC_EVENT_FUNCTOR_PTR>
 {
 
 };
@@ -62,19 +56,27 @@ public:
     }
 
 	template<typename BaseType>
-	bool AddAsyncEventCallBack(const NFIDENTID& objectID, const int nEventID, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const int, const std::string&))
+	bool AddAsyncEventCallBack(const NFIDENTID& objectID, const int nEventID, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const int, std::string&), int (BaseType::*handler_end)(const NFIDENTID&, const int, const std::string&))
 	{
-		EVENT_ASYNC_PROCESS_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3);
-		EVENT_ASYNC_PROCESS_FUNCTOR_PTR functorPtr(new EVENT_ASYNC_PROCESS_FUNCTOR(functor));
-		return AddAsyncEventCallBack(objectID, nEventID, functorPtr);
+		EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR functor_begin = boost::bind(handler, pBase, _1, _2, _3);
+		EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR functorPtr_begin(new EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR(functor_begin));
+
+		EVENT_ASYNC_PROCESS_END_FUNCTOR functor_end = boost::bind(handler_end, pBase, _1, _2, _3);
+		EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end(new EVENT_ASYNC_PROCESS_END_FUNCTOR(functor_end));
+
+		return AddAsyncEventCallBack(objectID, nEventID, functorPtr_begin, functorPtr_end);
 	}
 
 	template<typename BaseType>
-	bool AddAsyncClassCallBack(const std::string& strClassName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const std::string&))
+	bool AddAsyncClassCallBack(const std::string& strClassName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const std::string&), int (BaseType::*handler_end)(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const std::string&))
 	{
-		CLASS_ASYNC_EVENT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4);
-		CLASS_ASYNC_EVENT_FUNCTOR_PTR functorPtr(new CLASS_ASYNC_EVENT_FUNCTOR(functor));
-		return AddAsyncClassCallBack(strClassName, functorPtr);
+		CLASS_ASYNC_EVENT_FUNCTOR functor_begin = boost::bind(handler, pBase, _1, _2, _3, _4);
+		CLASS_ASYNC_EVENT_FUNCTOR_PTR functorPtr_begin(new CLASS_ASYNC_EVENT_FUNCTOR(functor_begin));
+
+		CLASS_ASYNC_EVENT_FUNCTOR functor_end = boost::bind(handler_end, pBase, _1, _2, _3, _4);
+		CLASS_ASYNC_EVENT_FUNCTOR_PTR functorPtr_end(new CLASS_ASYNC_EVENT_FUNCTOR(functor_end));
+
+		return AddAsyncClassCallBack(strClassName, functorPtr_begin, functorPtr_end);
 	}
 
     virtual bool HasEventCallBack(const NFIDENTID& objectID, const int nEventID) = 0;
@@ -88,8 +90,8 @@ public:
     virtual bool AddEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb) = 0;
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb) = 0;
 
-	virtual bool AddAsyncEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_ASYNC_PROCESS_FUNCTOR_PTR& cb_begin/*, const EVENT_ASYNC_PROCESS_FUNCTOR_PTR& cb_end*/) = 0;
-	virtual bool AddAsyncClassCallBack(const std::string& strClassName, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddAsyncEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb_begin, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end) = 0;
+	virtual bool AddAsyncClassCallBack(const std::string& strClassName, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb_begin, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb_end) = 0;
 };
 
 #endif
