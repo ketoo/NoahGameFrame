@@ -9,27 +9,40 @@ bool HelloWorld4ActorModule::Init()
     return true;
 }
 
-int HelloWorld4ActorModule::OnEvent(const NFIDENTID& self, const int event, const NFIDataList& arg)
+int HelloWorld4ActorModule::OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg)
 {
     //事件回调函数
-    std::cout << "OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg.Int(0) << " " << " " << arg.String(1) << std::endl;
+    std::cout << "OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg << " ThreadID: " << GetCurrentThreadId() << std::endl;
+
+	arg = "event test ok";
 
     return 0;
 }
 
+int HelloWorld4ActorModule::OnSyncEvent(const NFIDENTID& self, const int event, const std::string& arg)
+{
+	//事件回调函数
+	std::cout << "OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg << " ThreadID: " << GetCurrentThreadId() << std::endl;
+
+	return 0;
+}
 
 bool HelloWorld4ActorModule::AfterInit()
 {
+
     //初始化完毕
-    std::cout << "Hello, world4, AfterInit" << std::endl;
+    std::cout << "Hello, world4, AfterInit, ThreadID: " << GetCurrentThreadId() << std::endl;
 
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
 
-	m_pEventProcessModule->AddEventCallBack(NFIDENTID(), 2222, this, &HelloWorld4ActorModule::OnEvent);
+	//////////////////////////////////////同步/////////////////////////////////////////////////////////////////////
+	m_pEventProcessModule->AddAsyncEventCallBack(NFIDENTID(), 2222, this, &HelloWorld4ActorModule::OnASyncEvent, &HelloWorld4ActorModule::OnSyncEvent);
 
-    m_pEventProcessModule->DoEvent(NFIDENTID(), 2222, NFCDataList() << 100 << "200", true);
+    m_pEventProcessModule->DoEvent(NFIDENTID(), 2222, NFCDataList() << 100 << "200", false);
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return true;
 }
