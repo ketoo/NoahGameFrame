@@ -318,7 +318,7 @@ inline unsigned long NF_GetTickCount()
 #define NF_ACTOR_THREAD_COUNT 16
 
 #ifndef NF_USE_ACTOR
-//#define NF_USE_ACTOR
+#define NF_USE_ACTOR
 #endif
 
 #ifdef NF_USE_ACTOR
@@ -331,12 +331,7 @@ inline unsigned long NF_GetTickCount()
 //use actor mode--end
 
 
-//#if __cplusplus >= 201103L
 #define NF_SHARE_PTR std::shared_ptr
-// #else
-// #define NF_SHARE_PTR boost::shared_ptr
-// #endif
-
 
 #include <string>
 #include <boost/lexical_cast.hpp>
