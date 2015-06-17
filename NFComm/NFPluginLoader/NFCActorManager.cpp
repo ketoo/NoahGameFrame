@@ -11,13 +11,11 @@
 
 NFCActorManager::NFCActorManager()
 {
-	m_pPluginManager = NULL;
-
 #ifdef NF_USE_ACTOR
-	m_pFramework = NULL;
 	m_pFramework = new Theron::Framework(NF_ACTOR_THREAD_COUNT);
+	//m_pFramework->SetFallbackHandler<NFCActorManager>(this, &NFCActorManager::OnReceiveActorData);
+	m_pFramework->RegisterDefaultHandler(this, &NFCActorManager::Handler);
 #endif
-
 	m_pPluginManager = new NFCPluginManager(this);
 }
 
@@ -26,20 +24,8 @@ bool NFCActorManager::Init()
 
 
 #ifdef NF_USE_ACTOR
-// 
-// 	std::vector<NFIActor*>::iterator it = mActorVec.begin();
-// 	for (; it != mActorVec.end(); ++it)
-// 	{
-// 		NFIActor* pActor = *it;
-// 
-// 		Theron::Receiver receiver;
-// 		NFIActorMessage xMessage;
-// 		xMessage.eType = NFIActorMessage::EACTOR_INIT;
-// 		m_pFramework->Send(xMessage, receiver.GetAddress(), pActor->GetAddress());
-// 
-// 		receiver.Wait();
-// 
-//	}
+
+
 
 #endif
 
@@ -95,10 +81,7 @@ bool NFCActorManager::BeforeShut()
 
 bool NFCActorManager::Shut()
 {
-
-
 #ifdef NF_USE_ACTOR
-
     delete m_pFramework;
     m_pFramework = NULL;
 #endif
@@ -113,27 +96,39 @@ bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTi
 	m_pPluginManager->Execute(fLasFrametime, fStartedTime);
 
 #ifdef NF_USE_ACTOR
-
+	m_pFramework->Execute();
 #endif
 
 	return true;
 }
 
 #ifdef NF_USE_ACTOR
-bool NFCActorManager::OnRequireActor( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventList> xAsyncEventList, const NF_SHARE_PTR<NFAsyncEventList> xSyncEventList)
+// void NFCActorManager::OnReceiveActorData( const void *const data, const uint32_t size, const Theron::Address from)
+// {
+// 	std::cout << "OnReceiveActorData: " << from.AsString() << std::endl;
+// }
+
+
+bool NFCActorManager::OnRequireActor( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventList> xActorEventList)
 {
 	NFIActor* pActor = new NFCActor(*m_pFramework, this);
 
-	Theron::Receiver xReceiver;
 	NFIActorMessage xMessage;
 
 	xMessage.eType = NFIActorMessage::EACTOR_EVENT_MSG;
 	xMessage.data = strArg;
 	xMessage.nSubMsgID = nEventID;
 	xMessage.self = objectID;
-	xMessage.xAsyncEventList = xAsyncEventList;
-	xMessage.xSyncEventList = xSyncEventList;
+	xMessage.xActorEventList = xActorEventList;
 
-	return m_pFramework->Send(xMessage, xReceiver.GetAddress(), pActor->GetAddress());
+	Theron::Address xAddress("Actor");;
+
+	return m_pFramework->Send(xMessage, xAddress, pActor->GetAddress());
 }
+
+void NFCActorManager::Handler( const NFIActorMessage& message, const Theron::Address from )
+{
+
+}
+
 #endif
