@@ -23,6 +23,9 @@
     <Filter Include="NFCostModule">
       <UniqueIdentifier>{a8d85b35-2159-4979-87c0-10f8e1b94235}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFTaskModule">
+      <UniqueIdentifier>{9a5b2e11-fb8b-4048-a12a-431b88a46cda}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCGameLogicModule.h" />
@@ -71,6 +74,9 @@
     </ClInclude>
     <ClInclude Include="NFCCostModule.h">
       <Filter>NFCostModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCTaskModule.h">
+      <Filter>NFTaskModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="NFCCostModule.cpp">
       <Filter>NFCostModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCTaskModule.cpp">
+      <Filter>NFTaskModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

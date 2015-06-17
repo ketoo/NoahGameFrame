@@ -184,6 +184,7 @@ enum TaskList_RecordColType
 {
 	TaskList_TaskID		=0; // TaskID
 	TaskList_TaskStatus		=1; // TaskStatus
+	TaskList_Process		=2; // Process
 }
 
 enum PVPList_RecordColType
