@@ -49,6 +49,7 @@ public:
     virtual bool GetGameID(const NFIDENTID& self, int& nGameID);
     virtual bool GetGateID(const NFIDENTID& self, int& nGateID);
 
+    virtual bool SendMsgToPlayer( const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer);
 protected:
 
 	int OnRecivePack(const NFIPacket& msg);
@@ -58,6 +59,9 @@ protected:
 	void OnClientDisconnect(const int nAddress);
 	//спа╛╫с
 	void OnClientConnected(const int nAddress);
+
+    int OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
+    int OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
 
 protected:
 
@@ -98,7 +102,9 @@ protected:
 	void OnJoinGuildProcess(const NFIPacket& msg);
 	void OnLeaveGuildProcess(const NFIPacket& msg);
 	void OnOprGuildMemberProcess(const NFIPacket& msg);
-
+    void OnOnline(const NFIPacket& msg);
+    void OnOffline(const NFIPacket& msg);
+    
 private:
 
     struct ServerData
