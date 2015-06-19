@@ -14,7 +14,6 @@ NFCActorManager::NFCActorManager()
 #ifdef NF_USE_ACTOR
 	m_pFramework = new Theron::Framework(NF_ACTOR_THREAD_COUNT);
 	//m_pFramework->SetFallbackHandler<NFCActorManager>(this, &NFCActorManager::OnReceiveActorData);
-	m_pFramework->RegisterDefaultHandler(this, &NFCActorManager::Handler);
 #endif
 	m_pPluginManager = new NFCPluginManager(this);
 }
@@ -96,7 +95,7 @@ bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTi
 	m_pPluginManager->Execute(fLasFrametime, fStartedTime);
 
 #ifdef NF_USE_ACTOR
-	m_pFramework->Execute();
+	//m_pFramework->Execute();
 #endif
 
 	return true;
@@ -121,7 +120,7 @@ bool NFCActorManager::OnRequireActor( const NFIDENTID& objectID, const int nEven
 	xMessage.self = objectID;
 	xMessage.xActorEventList = xActorEventList;
 
-	Theron::Address xAddress("Actor");;
+	Theron::Address xAddress("MainActor");;
 
 	return m_pFramework->Send(xMessage, xAddress, pActor->GetAddress());
 }
