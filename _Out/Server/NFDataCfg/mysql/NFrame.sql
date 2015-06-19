@@ -21,7 +21,6 @@ ALTER TABLE `BB_Player` ADD `Stone` bigint(11) DEFAULT '0' COMMENT '拥有的石
 ALTER TABLE `BB_Player` ADD `Steel` bigint(11) DEFAULT '0' COMMENT '拥有的铁';
 ALTER TABLE `BB_Player` ADD `Diamond` bigint(11) DEFAULT '0' COMMENT '拥有的钻石';
 ALTER TABLE `BB_Player` ADD `LoadPropertyFinish` bigint(11) DEFAULT '0' COMMENT '';
-ALTER TABLE `BB_Player` ADD `TaskMonsterList` BLOB COMMENT '任务杀怪表';
 ALTER TABLE `BB_Player` ADD `BuildingList` BLOB COMMENT '';
 ALTER TABLE `BB_Player` ADD `BuildingProduce` BLOB COMMENT '';
 
@@ -223,6 +222,7 @@ ALTER TABLE `Player` ADD `PathStep` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `Player` ADD `LoadPropertyFinish` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `Player` ADD `GameID` bigint(11) DEFAULT '0' COMMENT '登陆的服ID';
 ALTER TABLE `Player` ADD `GateID` bigint(11) DEFAULT '0' COMMENT '登陆的网关ID';
+ALTER TABLE `Player` ADD `GUILD_ID` varchar(128) DEFAULT '' COMMENT '公会ID';
 ALTER TABLE `Player` ADD `PlayerViewItem` BLOB COMMENT '';
 ALTER TABLE `Player` ADD `BagItemList` BLOB COMMENT '普通背包';
 ALTER TABLE `Player` ADD `EctypeList` BLOB COMMENT '副本列表';

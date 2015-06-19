@@ -24,7 +24,7 @@ bool NFCWorldNet_ServerModule::AfterInit()
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
 	m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
 	m_pWorldGuildModule = dynamic_cast<NFIWorldGuildModule*>(pPluginManager->FindModule("NFCWorldGuildModule"));
-	m_pClusterSQLModule = dynamic_cast<NFIClusterModule*>(pPluginManager->FindModule("NFCClusterModule"));
+	m_pClusterSQLModule = dynamic_cast<NFIClusterModule*>(pPluginManager->FindModule("NFCMysqlClusterModule"));
 
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
@@ -34,6 +34,9 @@ bool NFCWorldNet_ServerModule::AfterInit()
 	assert(NULL != m_pLogicClassModule);
 	assert(NULL != m_pWorldGuildModule);
     assert(NULL != m_pClusterSQLModule);
+
+    m_pKernelModule->ResgisterCommonPropertyEvent( this, &NFCWorldNet_ServerModule::OnPropertyCommonEvent );
+    m_pKernelModule->ResgisterCommonRecordEvent( this, &NFCWorldNet_ServerModule::OnRecordCommonEvent );
 
     m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, this, &NFCWorldNet_ServerModule::OnSelectServerEvent);
     m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_SHOW_STRING, this, &NFCWorldNet_ServerModule::OnShowStringEvent);
@@ -469,9 +472,6 @@ void NFCWorldNet_ServerModule::LogGameServer(const float fLastTime)
 
 	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "End Log ProxyServer Info", "");
 
-
-
-
 }
 
 void NFCWorldNet_ServerModule::OnCrateGuildProcess( const NFIPacket& msg )
@@ -531,6 +531,36 @@ void NFCWorldNet_ServerModule::OnOprGuildMemberProcess( const NFIPacket& msg )
 		break;
 	}
 
+}
+
+
+void NFCWorldNet_ServerModule::OnOnline( const NFIPacket& msg )
+{
+	CLIENT_MSG_PROCESS_NO_OBJECT(msg, NFMsg::RoleOnlineNotify);
+
+    NFIDENTID xGuild;
+    if (!m_pWorldGuildModule->GetGuildID(nPlayerID, xGuild))
+    {
+        return ;
+    }
+
+    m_pWorldGuildModule->GetGuildBaseInfo(nPlayerID, xGuild);
+    m_pWorldGuildModule->GetGuildMemberInfo(nPlayerID, xGuild);
+
+    m_pWorldGuildModule->MemberOnline(nPlayerID, xGuild);
+}
+
+void NFCWorldNet_ServerModule::OnOffline( const NFIPacket& msg )
+{
+    CLIENT_MSG_PROCESS_NO_OBJECT(msg, NFMsg::RoleOfflineNotify);
+
+    NFIDENTID xGuild;
+    if (!m_pWorldGuildModule->GetGuildID(nPlayerID, xGuild))
+    {
+        return ;
+    }
+
+    m_pWorldGuildModule->MemberOffeline(nPlayerID, xGuild);
 }
 
 int NFCWorldNet_ServerModule::OnShowStringEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var )
@@ -899,4 +929,423 @@ int NFCWorldNet_ServerModule::OnShowPropertyEvent( const NFIDENTID& object, cons
     SendPropertyToPlayer(self, xPlayer);
 
     return 0;
+}
+
+int NFCWorldNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
+{
+    if ( oldVar.GetCount() <= 0 )
+    {
+        return 0;
+    }
+
+    NFCDataList valueBroadCaseList;
+    int nCount = argVar.GetCount() ;
+    if ( nCount <= 0 )
+    {
+        if ( "Guild" == m_pKernelModule->GetPropertyString( self, "ClassName" ))
+        {
+            m_pWorldGuildModule->GetOnlineMember(NFIDENTID(), self, valueBroadCaseList);
+        }
+    }
+    else
+    {
+        //传入的参数是要广播的对象列表
+        valueBroadCaseList = argVar;
+    }
+
+    if ( valueBroadCaseList.GetCount() <= 0 )
+    {
+        return 0;
+    }
+
+    switch ( oldVar.Type( 0 ) )
+    {
+    case TDATA_INT:
+        {
+            NFMsg::ObjectPropertyInt xPropertyInt;
+            NFMsg::Ident* pIdent = xPropertyInt.mutable_player_id();
+            *pIdent = NFToPB(self);
+
+            NFMsg::PropertyInt* pDataInt = xPropertyInt.add_property_list();
+            pDataInt->set_property_name( strPropertyName );
+            pDataInt->set_data( newVar.Int( 0 ) );
+
+            for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
+            {
+                NFIDENTID identOld = valueBroadCaseList.Object( i );
+
+                SendMsgToPlayer(NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt, identOld);
+            }
+        }
+        break;
+
+    case TDATA_FLOAT:
+        {
+            NFMsg::ObjectPropertyFloat xPropertyFloat;
+            NFMsg::Ident* pIdent = xPropertyFloat.mutable_player_id();
+            *pIdent = NFToPB(self);
+
+            NFMsg::PropertyFloat* pDataFloat = xPropertyFloat.add_property_list();
+            pDataFloat->set_property_name( strPropertyName );
+            pDataFloat->set_data( newVar.Float( 0 ) );
+
+            for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
+            {
+                NFIDENTID identOld = valueBroadCaseList.Object( i );
+
+                SendMsgToPlayer(NFMsg::EGMI_ACK_PROPERTY_FLOAT, xPropertyFloat, identOld);
+            }
+        }
+        break;
+
+    case TDATA_DOUBLE:
+        {
+            NFMsg::ObjectPropertyFloat xPropertyDouble;
+            NFMsg::Ident* pIdent = xPropertyDouble.mutable_player_id();
+            *pIdent = NFToPB(self);
+
+            NFMsg::PropertyFloat* pDataFloat = xPropertyDouble.add_property_list();
+            pDataFloat->set_property_name( strPropertyName );
+            pDataFloat->set_data( newVar.Double( 0 ) );
+
+            for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
+            {
+                NFIDENTID identOld = valueBroadCaseList.Object( i );
+
+                SendMsgToPlayer(NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyDouble, identOld);
+            }
+        }
+        break;
+
+    case TDATA_STRING:
+        {
+            NFMsg::ObjectPropertyString xPropertyString;
+            NFMsg::Ident* pIdent = xPropertyString.mutable_player_id();
+            *pIdent = NFToPB(self);
+
+            NFMsg::PropertyString* pDataString = xPropertyString.add_property_list();
+            pDataString->set_property_name( strPropertyName );
+            pDataString->set_data( newVar.String( 0 ) );
+
+            for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
+            {
+                NFIDENTID identOld = valueBroadCaseList.Object( i );
+
+                SendMsgToPlayer(NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString, identOld);
+            }
+        }
+        break;
+
+    case TDATA_OBJECT:
+        {
+            NFMsg::ObjectPropertyObject xPropertyObject;
+            NFMsg::Ident* pIdent = xPropertyObject.mutable_player_id();
+            *pIdent = NFToPB(self);
+
+            NFMsg::PropertyObject* pDataObject = xPropertyObject.add_property_list();
+            pDataObject->set_property_name( strPropertyName );
+            *pDataObject->mutable_data() = NFToPB(newVar.Object( 0 ));
+
+            for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
+            {
+                NFIDENTID identOld = valueBroadCaseList.Object( i );
+
+                SendMsgToPlayer(NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject, identOld);
+            }
+        }
+        break;
+
+    default:
+        break;
+    }
+
+
+    return 0;
+}
+
+int NFCWorldNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
+{
+    int nObjectContainerID = m_pKernelModule->GetPropertyInt( self, "SceneID" );
+    int nObjectGroupID = m_pKernelModule->GetPropertyInt( self, "GroupID" );
+
+    if ( nObjectGroupID < 0 )
+    {
+        //容器
+        return 0;
+    }
+
+    if ( "Player" == m_pKernelModule->GetPropertyString( self, "ClassName" ) )
+    {
+        if (m_pKernelModule->GetPropertyInt(self, "LoadPropertyFinish") <= 0)
+        {
+            return 0;
+        }
+    }
+
+    NFCDataList valueBroadCaseList;
+    if ( "Guild" == m_pKernelModule->GetPropertyString( self, "ClassName" ))
+    {
+        m_pWorldGuildModule->GetOnlineMember(NFIDENTID(), self, valueBroadCaseList);
+    }
+
+    switch ( nOpType )
+    {
+    case NFIRecord::RecordOptype::Add:
+        {
+            NFMsg::ObjectRecordAddRow xAddRecordRow;
+            NFMsg::Ident* pIdent = xAddRecordRow.mutable_player_id();
+            *pIdent = NFToPB(self);
+
+            xAddRecordRow.set_record_name( strRecordName );
+
+            NFMsg::RecordAddRowStruct* pAddRowData = xAddRecordRow.add_row_data();
+            pAddRowData->set_row(nRow);
+
+            //add row 需要完整的row
+            for ( int i = 0; i < newVar.GetCount(); i++ )
+            {
+                switch ( newVar.Type( i ) )
+                {
+                case TDATA_INT:
+                    {
+                        //添加的时候数据要全s
+                        int nValue = newVar.Int( i );
+                        //if ( 0 != nValue )
+                        {
+                            NFMsg::RecordInt* pAddData = pAddRowData->add_record_int_list();
+                            pAddData->set_col( i );
+                            pAddData->set_row( nRow );
+                            pAddData->set_data( nValue );
+                        }
+                    }
+                    break;
+                case TDATA_FLOAT:
+                    {
+                        float fValue = newVar.Float( i );
+                        //if ( fValue > 0.001f  || fValue < -0.001f )
+                        {
+                            NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
+                            pAddData->set_col( i );
+                            pAddData->set_row( nRow );
+                            pAddData->set_data( fValue );
+                        }
+                    }
+                    break;
+                case TDATA_DOUBLE:
+                    {
+                        float fValue = newVar.Double( i );
+                        //if ( fValue > 0.001f  || fValue < -0.001f )
+                        {
+                            NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
+                            pAddData->set_col( i );
+                            pAddData->set_row( nRow );
+                            pAddData->set_data( fValue );
+                        }
+                    }
+                    break;
+                case TDATA_STRING:
+                    {
+                        const std::string& str = newVar.String( i );
+                        //if (!str.empty())
+                        {
+                            NFMsg::RecordString* pAddData = pAddRowData->add_record_string_list();
+                            pAddData->set_col( i );
+                            pAddData->set_row( nRow );
+                            pAddData->set_data( str );
+                        }
+                    }
+                    break;
+                case TDATA_OBJECT:
+                    {
+                        NFIDENTID identValue = newVar.Object( i );
+                        //if (!identValue.IsNull())
+                        {
+                            NFMsg::RecordObject* pAddData = pAddRowData->add_record_object_list();
+                            pAddData->set_col( i );
+                            pAddData->set_row( nRow );
+
+                            *pAddData->mutable_data() = NFToPB(identValue);
+                        }
+                    }
+                    break;
+                default:
+                    break;
+                }
+            }
+
+
+            for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
+            {
+                NFIDENTID identOther = valueBroadCaseList.Object( i );
+
+                SendMsgToPlayer(NFMsg::EGMI_ACK_ADD_ROW, xAddRecordRow, identOther);
+            }
+        }
+        break;
+    case NFIRecord::RecordOptype::Del:
+        {
+            NFMsg::ObjectRecordRemove xReoveRecordRow;
+
+            NFMsg::Ident* pIdent = xReoveRecordRow.mutable_player_id();
+            *pIdent = NFToPB(self);
+
+            xReoveRecordRow.set_record_name( strRecordName );
+            xReoveRecordRow.add_remove_row( nRow );
+
+            for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
+            {
+                NFIDENTID identOther = valueBroadCaseList.Object( i );
+
+                SendMsgToPlayer(NFMsg::EGMI_ACK_REMOVE_ROW, xReoveRecordRow, identOther);
+            }
+        }
+        break;
+    case NFIRecord::RecordOptype::Swap:
+        {
+            //其实是2个row交换
+            NFMsg::ObjectRecordSwap xSwapRecord;
+            *xSwapRecord.mutable_player_id() = NFToPB(self);
+
+            xSwapRecord.set_origin_record_name( strRecordName );
+            xSwapRecord.set_target_record_name( strRecordName ); // 暂时没用
+            xSwapRecord.set_row_origin( nRow );
+            xSwapRecord.set_row_target( nCol );
+
+            for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
+            {
+                NFIDENTID identOther = valueBroadCaseList.Object( i );
+
+                SendMsgToPlayer(NFMsg::EGMI_ACK_SWAP_ROW, xSwapRecord, identOther);
+            }
+        }
+        break;
+    case NFIRecord::RecordOptype::UpData:
+        {
+            switch ( oldVar.Type( 0 ) )
+            {
+            case TDATA_INT:
+                {
+                    NFMsg::ObjectRecordInt xRecordChanged;
+                    *xRecordChanged.mutable_player_id() = NFToPB(self);
+
+                    xRecordChanged.set_record_name( strRecordName );
+                    NFMsg::RecordInt* recordProperty = xRecordChanged.add_property_list();
+                    recordProperty->set_row( nRow );
+                    recordProperty->set_col( nCol );
+                    int nData = newVar.Int( 0 );
+                    recordProperty->set_data( nData );
+
+                    for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
+                    {
+                        NFIDENTID identOther = valueBroadCaseList.Object( i );
+
+                        SendMsgToPlayer(NFMsg::EGMI_ACK_RECORD_INT, xRecordChanged, identOther);
+                    }
+                }
+                break;
+
+            case TDATA_FLOAT:
+                {
+                    NFMsg::ObjectRecordFloat xRecordChanged;
+                    *xRecordChanged.mutable_player_id() = NFToPB(self);
+
+                    xRecordChanged.set_record_name( strRecordName );
+                    NFMsg::RecordFloat* recordProperty = xRecordChanged.add_property_list();
+                    recordProperty->set_row( nRow );
+                    recordProperty->set_col( nCol );
+                    recordProperty->set_data( newVar.Float( 0 ) );
+
+                    for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
+                    {
+                        NFIDENTID identOther = valueBroadCaseList.Object( i );
+
+                        SendMsgToPlayer(NFMsg::EGMI_ACK_RECORD_FLOAT, xRecordChanged, identOther);
+                    }
+                }
+            case TDATA_DOUBLE:
+                {
+                    NFMsg::ObjectRecordFloat xRecordChanged;
+                    *xRecordChanged.mutable_player_id() = NFToPB(self);
+
+                    xRecordChanged.set_record_name( strRecordName );
+                    NFMsg::RecordFloat* recordProperty = xRecordChanged.add_property_list();
+                    recordProperty->set_row( nRow );
+                    recordProperty->set_col( nCol );
+                    recordProperty->set_data( newVar.Double( 0 ) );
+
+                    for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
+                    {
+                        NFIDENTID identOther = valueBroadCaseList.Object( i );
+
+                        SendMsgToPlayer(NFMsg::EGMI_ACK_RECORD_DOUBLE, xRecordChanged, identOther);
+                    }
+                }
+                break;
+            case TDATA_STRING:
+                {
+                    NFMsg::ObjectRecordString xRecordChanged;
+                    *xRecordChanged.mutable_player_id() = NFToPB(self);
+
+                    xRecordChanged.set_record_name( strRecordName );
+                    NFMsg::RecordString* recordProperty = xRecordChanged.add_property_list();
+                    recordProperty->set_row( nRow );
+                    recordProperty->set_col( nCol );
+                    recordProperty->set_data( newVar.String( 0 ) );
+
+                    for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
+                    {
+                        NFIDENTID identOther = valueBroadCaseList.Object( i );
+
+                        SendMsgToPlayer(NFMsg::EGMI_ACK_RECORD_STRING, xRecordChanged, identOther);
+                    }
+                }
+                break;
+            case TDATA_OBJECT:
+                {
+                    NFMsg::ObjectRecordObject xRecordChanged;
+                    *xRecordChanged.mutable_player_id() = NFToPB(self);
+
+                    xRecordChanged.set_record_name( strRecordName );
+                    NFMsg::RecordObject* recordProperty = xRecordChanged.add_property_list();
+                    recordProperty->set_row( nRow );
+                    recordProperty->set_col( nCol );
+                    *recordProperty->mutable_data() = NFToPB(newVar.Object( 0 ));
+
+                    for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
+                    {
+                        NFIDENTID identOther = valueBroadCaseList.Object( i );
+
+                        SendMsgToPlayer(NFMsg::EGMI_ACK_RECORD_OBJECT, xRecordChanged, identOther);
+                    }
+                }
+                break;
+
+            default:
+                return 0;
+                break;
+            }
+        }
+        break;
+    case NFIRecord::RecordOptype::Create:
+        return 0;
+        break;
+    case NFIRecord::RecordOptype::Cleared:
+        {
+        }
+        break;
+    default:
+        break;
+    }
+
+    return 0;
+}
+
+bool NFCWorldNet_ServerModule::SendMsgToPlayer( const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer)
+{
+    int nGateID = 0;
+    GetGateID(nPlayer, nGateID);
+
+    SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_RECORD_INT, xData, nPlayer);
+
+    return true;
 }
