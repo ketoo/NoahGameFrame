@@ -56,6 +56,8 @@ class ReqCreateRole;
 class ReqDeleteRole;
 class ReqRecoverRole;
 class ServerHeartBeat;
+class RoleOnlineNotify;
+class RoleOfflineNotify;
 
 enum EServerState {
   EST_CRASH = 0,
@@ -2329,6 +2331,174 @@ class ServerHeartBeat : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ServerHeartBeat* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class RoleOnlineNotify : public ::google::protobuf::Message {
+ public:
+  RoleOnlineNotify();
+  virtual ~RoleOnlineNotify();
+
+  RoleOnlineNotify(const RoleOnlineNotify& from);
+
+  inline RoleOnlineNotify& operator=(const RoleOnlineNotify& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RoleOnlineNotify& default_instance();
+
+  void Swap(RoleOnlineNotify* other);
+
+  // implements Message ----------------------------------------------
+
+  RoleOnlineNotify* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RoleOnlineNotify& from);
+  void MergeFrom(const RoleOnlineNotify& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .NFMsg.Ident guild = 1;
+  inline bool has_guild() const;
+  inline void clear_guild();
+  static const int kGuildFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild() const;
+  inline ::NFMsg::Ident* mutable_guild();
+  inline ::NFMsg::Ident* release_guild();
+  inline void set_allocated_guild(::NFMsg::Ident* guild);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.RoleOnlineNotify)
+ private:
+  inline void set_has_guild();
+  inline void clear_has_guild();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+
+  void InitAsDefaultInstance();
+  static RoleOnlineNotify* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class RoleOfflineNotify : public ::google::protobuf::Message {
+ public:
+  RoleOfflineNotify();
+  virtual ~RoleOfflineNotify();
+
+  RoleOfflineNotify(const RoleOfflineNotify& from);
+
+  inline RoleOfflineNotify& operator=(const RoleOfflineNotify& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RoleOfflineNotify& default_instance();
+
+  void Swap(RoleOfflineNotify* other);
+
+  // implements Message ----------------------------------------------
+
+  RoleOfflineNotify* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RoleOfflineNotify& from);
+  void MergeFrom(const RoleOfflineNotify& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .NFMsg.Ident guild = 1;
+  inline bool has_guild() const;
+  inline void clear_guild();
+  static const int kGuildFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild() const;
+  inline ::NFMsg::Ident* mutable_guild();
+  inline ::NFMsg::Ident* release_guild();
+  inline void set_allocated_guild(::NFMsg::Ident* guild);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.RoleOfflineNotify)
+ private:
+  inline void set_has_guild();
+  inline void clear_has_guild();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+
+  void InitAsDefaultInstance();
+  static RoleOfflineNotify* default_instance_;
 };
 // ===================================================================
 
@@ -5285,6 +5455,90 @@ inline ::google::protobuf::int32 ServerHeartBeat::count() const {
 inline void ServerHeartBeat::set_count(::google::protobuf::int32 value) {
   set_has_count();
   count_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// RoleOnlineNotify
+
+// optional .NFMsg.Ident guild = 1;
+inline bool RoleOnlineNotify::has_guild() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void RoleOnlineNotify::set_has_guild() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void RoleOnlineNotify::clear_has_guild() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void RoleOnlineNotify::clear_guild() {
+  if (guild_ != NULL) guild_->::NFMsg::Ident::Clear();
+  clear_has_guild();
+}
+inline const ::NFMsg::Ident& RoleOnlineNotify::guild() const {
+  return guild_ != NULL ? *guild_ : *default_instance_->guild_;
+}
+inline ::NFMsg::Ident* RoleOnlineNotify::mutable_guild() {
+  set_has_guild();
+  if (guild_ == NULL) guild_ = new ::NFMsg::Ident;
+  return guild_;
+}
+inline ::NFMsg::Ident* RoleOnlineNotify::release_guild() {
+  clear_has_guild();
+  ::NFMsg::Ident* temp = guild_;
+  guild_ = NULL;
+  return temp;
+}
+inline void RoleOnlineNotify::set_allocated_guild(::NFMsg::Ident* guild) {
+  delete guild_;
+  guild_ = guild;
+  if (guild) {
+    set_has_guild();
+  } else {
+    clear_has_guild();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// RoleOfflineNotify
+
+// optional .NFMsg.Ident guild = 1;
+inline bool RoleOfflineNotify::has_guild() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void RoleOfflineNotify::set_has_guild() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void RoleOfflineNotify::clear_has_guild() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void RoleOfflineNotify::clear_guild() {
+  if (guild_ != NULL) guild_->::NFMsg::Ident::Clear();
+  clear_has_guild();
+}
+inline const ::NFMsg::Ident& RoleOfflineNotify::guild() const {
+  return guild_ != NULL ? *guild_ : *default_instance_->guild_;
+}
+inline ::NFMsg::Ident* RoleOfflineNotify::mutable_guild() {
+  set_has_guild();
+  if (guild_ == NULL) guild_ = new ::NFMsg::Ident;
+  return guild_;
+}
+inline ::NFMsg::Ident* RoleOfflineNotify::release_guild() {
+  clear_has_guild();
+  ::NFMsg::Ident* temp = guild_;
+  guild_ = NULL;
+  return temp;
+}
+inline void RoleOfflineNotify::set_allocated_guild(::NFMsg::Ident* guild) {
+  delete guild_;
+  guild_ = guild;
+  if (guild) {
+    set_has_guild();
+  } else {
+    clear_has_guild();
+  }
 }
 
 
