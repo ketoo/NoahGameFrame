@@ -41,6 +41,8 @@ public:
 
     virtual const NFIDENTID CreateGuild(const NFIDENTID& xPlayeID, const std::string& strName);
     virtual const bool DeleteGuild(const NFIDENTID& xGuild);
+    virtual bool GetGuild(const NFIDENTID& self, NFIDENTID& xGuild);
+    virtual bool SetGuild( const NFIDENTID& self, const NFIDENTID& xGuild );
 
 protected:
     int OnGuildClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
@@ -54,8 +56,7 @@ protected:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFIUUIDModule* m_pUUIDModule;
-    NFIClusterModule* m_pClusterSQLModule;
-    NFIGameLogicModule* m_pGameLogicModule;
+    NFIClusterModule* m_pClusterSQLModule;    
     
 private:
     struct RoleData 

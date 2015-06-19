@@ -38,6 +38,10 @@ public:
 	virtual bool DownGuildMmember(const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember);
 	virtual bool KickGuildMmember(const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember);
 
+    virtual bool GetOnlineMember(const NFIDENTID& self, const NFIDENTID& xGuild, NFCDataList& varMemberList);
+    virtual bool MemberOnline(const NFIDENTID& self, const NFIDENTID& xGuild);
+    virtual bool MemberOffeline(const NFIDENTID& self, const NFIDENTID& xGuild);
+    virtual bool GetGuildID(const NFIDENTID& self, NFIDENTID& xGuild);
 
 	//////////////////////其次考虑参数////////////////////////////////////////////////////
 	virtual bool GetGuildBaseInfo(const NFIDENTID& self, const NFIDENTID& xGuildID);
