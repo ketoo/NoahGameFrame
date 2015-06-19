@@ -77,6 +77,12 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* ServerHeartBeat_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ServerHeartBeat_reflection_ = NULL;
+const ::google::protobuf::Descriptor* RoleOnlineNotify_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  RoleOnlineNotify_reflection_ = NULL;
+const ::google::protobuf::Descriptor* RoleOfflineNotify_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  RoleOfflineNotify_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* EServerState_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ReqServerListType_descriptor_ = NULL;
 
@@ -427,6 +433,36 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ServerHeartBeat));
+  RoleOnlineNotify_descriptor_ = file->message_type(19);
+  static const int RoleOnlineNotify_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RoleOnlineNotify, guild_),
+  };
+  RoleOnlineNotify_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      RoleOnlineNotify_descriptor_,
+      RoleOnlineNotify::default_instance_,
+      RoleOnlineNotify_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RoleOnlineNotify, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RoleOnlineNotify, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(RoleOnlineNotify));
+  RoleOfflineNotify_descriptor_ = file->message_type(20);
+  static const int RoleOfflineNotify_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RoleOfflineNotify, guild_),
+  };
+  RoleOfflineNotify_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      RoleOfflineNotify_descriptor_,
+      RoleOfflineNotify::default_instance_,
+      RoleOfflineNotify_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RoleOfflineNotify, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RoleOfflineNotify, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(RoleOfflineNotify));
   EServerState_descriptor_ = file->enum_type(0);
   ReqServerListType_descriptor_ = file->enum_type(1);
 }
@@ -479,6 +515,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
     ReqRecoverRole_descriptor_, &ReqRecoverRole::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ServerHeartBeat_descriptor_, &ServerHeartBeat::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    RoleOnlineNotify_descriptor_, &RoleOnlineNotify::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    RoleOfflineNotify_descriptor_, &RoleOfflineNotify::default_instance());
 }
 
 }  // namespace
@@ -522,6 +562,10 @@ void protobuf_ShutdownFile_NFMsgPreGame_2eproto() {
   delete ReqRecoverRole_reflection_;
   delete ServerHeartBeat::default_instance_;
   delete ServerHeartBeat_reflection_;
+  delete RoleOnlineNotify::default_instance_;
+  delete RoleOnlineNotify_reflection_;
+  delete RoleOfflineNotify::default_instance_;
+  delete RoleOfflineNotify_reflection_;
 }
 
 void protobuf_AddDesc_NFMsgPreGame_2eproto() {
@@ -584,11 +628,13 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
     "\004name\030\002 \002(\014\022\017\n\007game_id\030\003 \002(\005\"@\n\016ReqRecov"
     "erRole\022\017\n\007account\030\001 \002(\014\022\014\n\004name\030\002 \002(\014\022\017\n"
     "\007game_id\030\003 \002(\005\" \n\017ServerHeartBeat\022\r\n\005cou"
-    "nt\030\001 \001(\005*Z\n\014EServerState\022\r\n\tEST_CRASH\020\000\022"
-    "\016\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST_FIR"
-    "E\020\003\022\017\n\013EST_MAINTEN\020\004*@\n\021ReqServerListTyp"
-    "e\022\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GAMES_E"
-    "RVER\020\001", 2166);
+    "nt\030\001 \001(\005\"/\n\020RoleOnlineNotify\022\033\n\005guild\030\001 "
+    "\001(\0132\014.NFMsg.Ident\"0\n\021RoleOfflineNotify\022\033"
+    "\n\005guild\030\001 \001(\0132\014.NFMsg.Ident*Z\n\014EServerSt"
+    "ate\022\r\n\tEST_CRASH\020\000\022\016\n\nEST_NARMAL\020\001\022\014\n\010ES"
+    "T_BUSY\020\002\022\014\n\010EST_FIRE\020\003\022\017\n\013EST_MAINTEN\020\004*"
+    "@\n\021ReqServerListType\022\025\n\021RSLT_WORLD_SERVE"
+    "R\020\000\022\024\n\020RSLT_GAMES_ERVER\020\001", 2265);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgPreGame.proto", &protobuf_RegisterTypes);
   ServerInfoReport::default_instance_ = new ServerInfoReport();
@@ -610,6 +656,8 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
   ReqDeleteRole::default_instance_ = new ReqDeleteRole();
   ReqRecoverRole::default_instance_ = new ReqRecoverRole();
   ServerHeartBeat::default_instance_ = new ServerHeartBeat();
+  RoleOnlineNotify::default_instance_ = new RoleOnlineNotify();
+  RoleOfflineNotify::default_instance_ = new RoleOfflineNotify();
   ServerInfoReport::default_instance_->InitAsDefaultInstance();
   ServerInfoReportList::default_instance_->InitAsDefaultInstance();
   AckEventResult::default_instance_->InitAsDefaultInstance();
@@ -629,6 +677,8 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
   ReqDeleteRole::default_instance_->InitAsDefaultInstance();
   ReqRecoverRole::default_instance_->InitAsDefaultInstance();
   ServerHeartBeat::default_instance_->InitAsDefaultInstance();
+  RoleOnlineNotify::default_instance_->InitAsDefaultInstance();
+  RoleOfflineNotify::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFMsgPreGame_2eproto);
 }
 
@@ -7035,6 +7085,438 @@ void ServerHeartBeat::Swap(ServerHeartBeat* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = ServerHeartBeat_descriptor_;
   metadata.reflection = ServerHeartBeat_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int RoleOnlineNotify::kGuildFieldNumber;
+#endif  // !_MSC_VER
+
+RoleOnlineNotify::RoleOnlineNotify()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void RoleOnlineNotify::InitAsDefaultInstance() {
+  guild_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+}
+
+RoleOnlineNotify::RoleOnlineNotify(const RoleOnlineNotify& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void RoleOnlineNotify::SharedCtor() {
+  _cached_size_ = 0;
+  guild_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+RoleOnlineNotify::~RoleOnlineNotify() {
+  SharedDtor();
+}
+
+void RoleOnlineNotify::SharedDtor() {
+  if (this != default_instance_) {
+    delete guild_;
+  }
+}
+
+void RoleOnlineNotify::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* RoleOnlineNotify::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return RoleOnlineNotify_descriptor_;
+}
+
+const RoleOnlineNotify& RoleOnlineNotify::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgPreGame_2eproto();
+  return *default_instance_;
+}
+
+RoleOnlineNotify* RoleOnlineNotify::default_instance_ = NULL;
+
+RoleOnlineNotify* RoleOnlineNotify::New() const {
+  return new RoleOnlineNotify;
+}
+
+void RoleOnlineNotify::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_guild()) {
+      if (guild_ != NULL) guild_->::NFMsg::Ident::Clear();
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool RoleOnlineNotify::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .NFMsg.Ident guild = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_guild()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void RoleOnlineNotify::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // optional .NFMsg.Ident guild = 1;
+  if (has_guild()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->guild(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* RoleOnlineNotify::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // optional .NFMsg.Ident guild = 1;
+  if (has_guild()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->guild(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int RoleOnlineNotify::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional .NFMsg.Ident guild = 1;
+    if (has_guild()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->guild());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void RoleOnlineNotify::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const RoleOnlineNotify* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const RoleOnlineNotify*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void RoleOnlineNotify::MergeFrom(const RoleOnlineNotify& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_guild()) {
+      mutable_guild()->::NFMsg::Ident::MergeFrom(from.guild());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void RoleOnlineNotify::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void RoleOnlineNotify::CopyFrom(const RoleOnlineNotify& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool RoleOnlineNotify::IsInitialized() const {
+
+  if (has_guild()) {
+    if (!this->guild().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void RoleOnlineNotify::Swap(RoleOnlineNotify* other) {
+  if (other != this) {
+    std::swap(guild_, other->guild_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata RoleOnlineNotify::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = RoleOnlineNotify_descriptor_;
+  metadata.reflection = RoleOnlineNotify_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int RoleOfflineNotify::kGuildFieldNumber;
+#endif  // !_MSC_VER
+
+RoleOfflineNotify::RoleOfflineNotify()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void RoleOfflineNotify::InitAsDefaultInstance() {
+  guild_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+}
+
+RoleOfflineNotify::RoleOfflineNotify(const RoleOfflineNotify& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void RoleOfflineNotify::SharedCtor() {
+  _cached_size_ = 0;
+  guild_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+RoleOfflineNotify::~RoleOfflineNotify() {
+  SharedDtor();
+}
+
+void RoleOfflineNotify::SharedDtor() {
+  if (this != default_instance_) {
+    delete guild_;
+  }
+}
+
+void RoleOfflineNotify::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* RoleOfflineNotify::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return RoleOfflineNotify_descriptor_;
+}
+
+const RoleOfflineNotify& RoleOfflineNotify::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgPreGame_2eproto();
+  return *default_instance_;
+}
+
+RoleOfflineNotify* RoleOfflineNotify::default_instance_ = NULL;
+
+RoleOfflineNotify* RoleOfflineNotify::New() const {
+  return new RoleOfflineNotify;
+}
+
+void RoleOfflineNotify::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_guild()) {
+      if (guild_ != NULL) guild_->::NFMsg::Ident::Clear();
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool RoleOfflineNotify::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .NFMsg.Ident guild = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_guild()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void RoleOfflineNotify::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // optional .NFMsg.Ident guild = 1;
+  if (has_guild()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->guild(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* RoleOfflineNotify::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // optional .NFMsg.Ident guild = 1;
+  if (has_guild()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->guild(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int RoleOfflineNotify::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional .NFMsg.Ident guild = 1;
+    if (has_guild()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->guild());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void RoleOfflineNotify::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const RoleOfflineNotify* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const RoleOfflineNotify*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void RoleOfflineNotify::MergeFrom(const RoleOfflineNotify& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_guild()) {
+      mutable_guild()->::NFMsg::Ident::MergeFrom(from.guild());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void RoleOfflineNotify::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void RoleOfflineNotify::CopyFrom(const RoleOfflineNotify& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool RoleOfflineNotify::IsInitialized() const {
+
+  if (has_guild()) {
+    if (!this->guild().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void RoleOfflineNotify::Swap(RoleOfflineNotify* other) {
+  if (other != this) {
+    std::swap(guild_, other->guild_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata RoleOfflineNotify::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = RoleOfflineNotify_descriptor_;
+  metadata.reflection = RoleOfflineNotify_reflection_;
   return metadata;
 }
 
