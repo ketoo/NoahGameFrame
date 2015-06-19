@@ -62,6 +62,19 @@ public:
         return false;
     }
 
+	virtual TD* GetElementNude(const T& name)
+	{
+		typename NFMapOBJECT::iterator itr = mObjectList.find(name);
+		if (itr != mObjectList.end())
+		{
+			return itr->second.get();
+		}
+		else
+		{
+			return NULL;
+		}
+	}
+
     virtual NF_SHARE_PTR<TD> GetElement(const T& name)
     {
         typename NFMapOBJECT::iterator itr = mObjectList.find(name);
