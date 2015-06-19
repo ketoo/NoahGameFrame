@@ -33,14 +33,12 @@ bool NFCWorldGuildDataModule::AfterInit()
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
     m_pUUIDModule = dynamic_cast<NFIUUIDModule*>(pPluginManager->FindModule("NFCUUIDModule"));
-    m_pClusterSQLModule = dynamic_cast<NFIClusterModule*>(pPluginManager->FindModule("NFCClusterModule"));
-    m_pGameLogicModule = dynamic_cast<NFIGameLogicModule*>(pPluginManager->FindModule("NFCGameLogicModule"));
+    m_pClusterSQLModule = dynamic_cast<NFIClusterModule*>(pPluginManager->FindModule("NFCMysqlClusterModule"));
 
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pUUIDModule);
     assert(NULL != m_pClusterSQLModule);
-    assert(NULL != m_pGameLogicModule);
 
     m_pEventProcessModule->AddClassCallBack("Guild", this, &NFCWorldGuildDataModule::OnGuildClassEvent);
 
@@ -477,4 +475,34 @@ NF_SHARE_PTR<NFIObject> NFCWorldGuildDataModule::GetGuild( const NFIDENTID& xGui
     CheckLoadGuild(NFIDENTID(), xGuild);
 
     return m_pKernelModule->GetObject(xGuild);
+}
+
+bool NFCWorldGuildDataModule::GetGuild( const NFIDENTID& self, NFIDENTID& xGuild )
+{
+    std::vector<std::string> vFieldVec;
+    std::vector<std::string> vValueVec;
+    vFieldVec.push_back("GUILD_ID");
+
+    if (!m_pClusterSQLModule->Query(self.ToString(), vFieldVec, vValueVec))
+    {
+        return false;
+    }
+
+    const std::string& strGuildID = vValueVec[0];
+    return xGuild.FromString(strGuildID);
+}
+
+bool NFCWorldGuildDataModule::SetGuild( const NFIDENTID& self, const NFIDENTID& xGuild )
+{
+    std::vector<std::string> vFieldVec;
+    std::vector<std::string> vValueVec;
+    vFieldVec.push_back("GUILD_ID");
+    vValueVec.push_back(xGuild.ToString());
+
+    if (!m_pClusterSQLModule->Updata(self.ToString(), vFieldVec, vValueVec))
+    {
+        return false;
+    }
+
+    return true;
 }
