@@ -10,6 +10,7 @@
 //#include "stdafx.h"
 #include "NFCWorldGuildModule.h"
 #include "NFWorldGuildPlugin.h"
+#include "NFCWorldGuildDataModule.h"
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
@@ -39,11 +40,13 @@ void NFWorldGuildPlugin::Install()
 {
 
     REGISTER_MODULE(pPluginManager, NFCWorldGuildModule)
+    REGISTER_MODULE(pPluginManager, NFCWorldGuildDataModule)
 
 
 }
 
 void NFWorldGuildPlugin::Uninstall()
 {
+    UNREGISTER_MODULE(pPluginManager, NFCWorldGuildDataModule)
     UNREGISTER_MODULE(pPluginManager, NFCWorldGuildModule)
 }

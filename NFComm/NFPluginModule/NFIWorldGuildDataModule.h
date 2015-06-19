@@ -23,6 +23,9 @@ public:
     virtual const bool DeleteGuild(const NFIDENTID& xGuild) = 0;
     virtual NF_SHARE_PTR<NFIObject> GetGuild(const NFIDENTID& xGuild) = 0;
 
+    virtual bool GetGuild(const NFIDENTID& self, NFIDENTID& xGuild) = 0;
+    virtual bool SetGuild( const NFIDENTID& self, const NFIDENTID& xGuild ) = 0;
+
 protected:
 private:
 };
