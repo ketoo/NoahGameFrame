@@ -22,6 +22,7 @@ class NFCActorManager
 {
 public:
 	NFCActorManager();
+
 	virtual bool Init();
 
 	virtual bool AfterInit();
@@ -52,6 +53,8 @@ private:
 
 #ifdef NF_USE_ACTOR
     Theron::Framework* m_pFramework;
+// 	NFIActor* m_pMainActor;
+// 	std::vector<NFIActor*> mvActorList;
 #endif
 };
 
