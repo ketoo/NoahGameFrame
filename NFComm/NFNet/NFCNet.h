@@ -20,20 +20,8 @@
 #include <unistd.h>
 #endif
 
-#include "NFCPacket.h"
-#include <functional>
-#include <memory>
-#include <list>
-#include <vector>
-#include "NFComm/NFPluginModule/NFIdentID.h"
-
 #pragma pack(push, 1)
 
-typedef std::function<int(const NFIPacket& msg)> RECIEVE_FUNCTOR;
-typedef NF_SHARE_PTR<RECIEVE_FUNCTOR> RECIEVE_FUNCTOR_PTR;
-
-typedef std::function<int(const int nSockIndex, const NF_NET_EVENT nEvent, NFINet* pNet)> EVENT_FUNCTOR;
-typedef NF_SHARE_PTR<EVENT_FUNCTOR> EVENT_FUNCTOR_PTR;
 
 class NFCNet : public NFINet
 {
@@ -79,6 +67,7 @@ public:
 	virtual bool RemoveBan(const int nSockIndex){return true;};
     virtual NFIMsgHead::NF_Head GetHeadLen(){return mnHeadLength;};
 	virtual bool IsServer(){return mbServer;};
+	virtual bool Log(int severity, const char *msg);
 
 private:
 	virtual void ExecuteClose();
@@ -97,6 +86,7 @@ private:
 	static void conn_writecb(struct bufferevent *bev, void *user_data);
 	static void conn_eventcb(struct bufferevent *bev, short events, void *user_data);
 	static void time_cb(evutil_socket_t fd, short _event, void *argc);
+	static void log_cb(int severity, const char *msg);
 private:
 	//<fd,object>
 	std::map<int, NetObject*> mmObject;
@@ -121,10 +111,8 @@ private:
 	struct event* ev;
 	//////////////////////////////////////////////////////////////////////////
 
-
-    // 暂时还未使用
-    RECIEVE_FUNCTOR mRecvCB;
-    EVENT_FUNCTOR mEventCB;
+    NET_RECIEVE_FUNCTOR mRecvCB;
+    NET_EVENT_FUNCTOR mEventCB;
 
 	std::string mstrPwd;
 	char mstrMsgData[NFIMsgHead::NF_MSGBUFF_LENGTH];
