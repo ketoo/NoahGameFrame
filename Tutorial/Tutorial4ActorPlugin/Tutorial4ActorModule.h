@@ -9,10 +9,10 @@
 #ifndef _NFC_HELLO_WORLD4_H_
 #define _NFC_HELLO_WORLD4_H_
 
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class HelloWorld4ActorModule
     : public NFILogicModule
