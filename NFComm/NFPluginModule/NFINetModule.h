@@ -423,8 +423,8 @@ private:
 	float mfLastHBTime;
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-	RECIEVE_FUNCTOR mRecvCB;
-	EVENT_FUNCTOR mEventCB;
+	NET_RECIEVE_FUNCTOR mRecvCB;
+	NET_EVENT_FUNCTOR mEventCB;
 
 	NFQueue<QueueEventPack> mxQueue;
 #endif
