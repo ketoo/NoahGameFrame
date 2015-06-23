@@ -27,6 +27,15 @@ public:
 
 	}
 
+	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
+	virtual void RegisterActorModule(const std::string& strModuleName, NFILogicModule* pModule);
+
+
+protected:
+	//NFIActorModule*
+	NFList<NFILogicModule*> mxActorModule;
+
+
 };
 #endif
 
