@@ -9,13 +9,13 @@
 #ifndef _NFC_DATAPROCESS_MODULE_H_
 #define _NFC_DATAPROCESS_MODULE_H_
 
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIDataProcessModule.h"
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCDataProcessModule
     : public NFIDataProcessModule

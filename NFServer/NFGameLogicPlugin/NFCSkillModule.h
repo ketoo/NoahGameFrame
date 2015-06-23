@@ -9,7 +9,6 @@
 #ifndef _NFC_SKILL_MODULE_H_
 #define _NFC_SKILL_MODULE_H_
 
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
@@ -19,6 +18,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCSkillModule
     : public NFISkillModule

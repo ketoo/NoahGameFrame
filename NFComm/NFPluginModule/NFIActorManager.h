@@ -19,14 +19,8 @@ struct NFAsyncEventFunc
 	EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR xEndFuncptr;
 };
 
-struct NFAsyncEventList
-	: public NFList<NFAsyncEventFunc>
-{
-
-};
-
 class NFCObjectAsyncEventInfo
-	: public NFMapEx<int, NFAsyncEventList>
+	: public NFMapEx<int, NFAsyncEventFunc>
 {
 };
 
@@ -49,10 +43,10 @@ class NFIActorManager : public NFILogicModule
 public:
 #ifdef NF_USE_ACTOR
 
-	virtual bool OnRequireActor( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventList> xActorEventList) = 0;
-	
+	virtual bool OnRequireActor( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventList) = 0;
 #endif
 
+	virtual NFIPluginManager* GetPluginManager() = 0;
 
 };
 
