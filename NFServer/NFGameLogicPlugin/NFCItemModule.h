@@ -9,14 +9,14 @@
 #ifndef _NFC_ITEM_MODULE_H_
 #define _NFC_ITEM_MODULE_H_
 
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFCPackModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIItemModule.h"
 #include "NFComm/NFPluginModule/NFIItemConsumeManagerModule.h"
-#include "NFCPackModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCItemModule
     : public NFIItemModule

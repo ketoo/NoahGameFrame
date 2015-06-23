@@ -4,7 +4,7 @@
 bool HelloWorld4ActorModule::Init()
 {
     //初始化
-    std::cout << "Hello, world4, Init" << std::endl;
+    std::cout << "Hello, world4, Init ThreadID: " << GetCurrentThreadId() << std::endl;
 
     return true;
 }
@@ -12,7 +12,7 @@ bool HelloWorld4ActorModule::Init()
 int HelloWorld4ActorModule::OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg)
 {
     //事件回调函数
-    std::cout << "OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg << " ThreadID: " << GetCurrentThreadId() << std::endl;
+    std::cout << "Begin OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg << " ThreadID: " << GetCurrentThreadId() << std::endl;
 
 	arg = "event test ok";
 
@@ -22,7 +22,7 @@ int HelloWorld4ActorModule::OnASyncEvent(const NFIDENTID& self, const int event,
 int HelloWorld4ActorModule::OnSyncEvent(const NFIDENTID& self, const int event, const std::string& arg)
 {
 	//事件回调函数
-	std::cout << "OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg << " ThreadID: " << GetCurrentThreadId() << std::endl;
+	std::cout << "End OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg << " ThreadID: " << GetCurrentThreadId() << std::endl;
 
 	return 0;
 }
@@ -40,7 +40,10 @@ bool HelloWorld4ActorModule::AfterInit()
 	//////////////////////////////////////同步/////////////////////////////////////////////////////////////////////
 	m_pEventProcessModule->AddAsyncEventCallBack(NFIDENTID(), 2222, this, &HelloWorld4ActorModule::OnASyncEvent, &HelloWorld4ActorModule::OnSyncEvent);
 
-    m_pEventProcessModule->DoEvent(NFIDENTID(), 2222, NFCDataList() << 100 << "200", false);
+    m_pEventProcessModule->DoEvent(NFIDENTID(), 2222, NFCDataList() << "200", false);
+
+	std::cout << "End Test Actor, ThreadID: " << GetCurrentThreadId() << std::endl;
+
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 

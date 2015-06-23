@@ -13,12 +13,12 @@
 #include <string>
 #include "NFCDynLib.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFCore/NFQueue.h"
 
 class NFCPluginManager
     : public NFIPluginManager
 {
 public:
-	//NFCPluginManager(Theron::Framework &framework, NFIActorManager* pManager, NFIActorManager::EACTOR eActor) : NFIPluginManager(framework, pManager, eActor)
 	NFCPluginManager(NFIActorManager* pManager) : NFIPluginManager(pManager)
 	{
 		mbOnReloadPlugin = false;
@@ -61,22 +61,26 @@ public:
     //  virtual void OnReloadModule( const std::string& strModuleName, NFILogicModule* pModule );
     //
     //  virtual void ReloadPlugin( const std::string& pluginName );
+#ifdef NF_USE_ACTOR
+	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
 
+	virtual NFIActorManager* GetActorManager(){ return m_pActorManager;}
+#endif
 
 protected:
 
     virtual bool LoadPluginLibrary(const std::string& strPluginDLLName);
     virtual bool UnLoadPluginLibrary(const std::string& strPluginDLLName);
 
-#ifdef NF_USE_ACTOR
-    virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
+protected:
 
-	virtual NFIActorManager* GetActorManager(){ return m_pActorManager;}
-#endif
+	virtual bool ExecuteEvent();
 
 private:
     bool mbOnReloadPlugin;
 	NFIActorManager* m_pActorManager;
+
+	NFQueue<NFIActorMessage> mxQueue;
 
 	typedef std::map<std::string, bool> PluginNameMap;
 	typedef std::map<std::string, NFCDynLib*> PluginLibMap;
