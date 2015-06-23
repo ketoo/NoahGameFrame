@@ -119,6 +119,8 @@ bool NFCPluginManager::Execute(const float fLasFrametime, const float fStartedTi
         bRet = bRet && tembRet;
     }
 
+	ExecuteEvent();
+
     return bRet;
 }
 
@@ -350,15 +352,28 @@ bool NFCPluginManager::ReInitialize()
 
 void NFCPluginManager::HandlerEx( const NFIActorMessage& message, const Theron::Address from )
 {
-    if (message.eType != NFIActorMessage::EACTOR_UNKNOW)
-    {
-        //给哪个模块接这个消息呢..难道广播...他也不知道，哪个模块要写是接受数据的啊，除非...配置写好
-//         NFIActorDataModule* pModule = dynamic_cast<NFIActorDataModule*>(pPluginManager->FindModule(strDataModule));
-//         if (pModule)
-//         {
-//             pModule->Handler(message, from);
-//         }
-    }
+	//添加到队列，每帧执行
+	mxQueue.Push(message);
+}
+
+bool NFCPluginManager::ExecuteEvent()
+{
+	NFIActorMessage xMsg;
+	bool bRet = false;
+	bRet = mxQueue.Pop(xMsg);
+	while (bRet)
+	{
+		if (xMsg.eType == NFIActorMessage::EACTOR_RETURN_EVENT_MSG)
+		{
+			xMsg.xActorEventFunc->xEndFuncptr->operator()(xMsg.self, xMsg.nSubMsgID, xMsg.data);
+		}
+
+		bRet = mxQueue.Pop(xMsg);
+	}
+
+
+
+	return true;
 }
 
 #endif

@@ -9,7 +9,6 @@
 #ifndef _NFC_SLG_SHOP_MODULE_H_
 #define _NFC_SLG_SHOP_MODULE_H_
 
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
@@ -17,6 +16,7 @@
 #include "NFComm/NFPluginModule/NFISLGBuildingModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCSLGShopModule
     : public NFISLGShopModule
