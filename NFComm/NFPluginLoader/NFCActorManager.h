@@ -42,10 +42,12 @@ public:
 		AfterInit();
 	}
 
+	virtual NFIPluginManager* GetPluginManager();
+
 #ifdef NF_USE_ACTOR
 	//virtual void OnReceiveActorData( const void *const data, const uint32_t size, const Theron::Address from );
 	virtual void Handler(const NFIActorMessage& message, const Theron::Address from);
-	virtual bool OnRequireActor( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventList> xActorEventList);
+	virtual bool OnRequireActor( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc);
 #endif
 
 private:
@@ -53,7 +55,7 @@ private:
 
 #ifdef NF_USE_ACTOR
     Theron::Framework* m_pFramework;
-// 	NFIActor* m_pMainActor;
+	NFIActor* m_pMainActor;
 // 	std::vector<NFIActor*> mvActorList;
 #endif
 };
