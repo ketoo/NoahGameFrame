@@ -456,6 +456,7 @@ int NFCNet::InitClientNet()
 
     evtimer_add(ev, &tv);
 
+	event_set_log_callback(&NFCNet::log_cb);
     //event_base_loop(base, EVLOOP_ONCE|EVLOOP_NONBLOCK);
 
     return sockfd;
@@ -557,6 +558,8 @@ int NFCNet::InitServerNet()
     //     }
 
     mbServer = true;
+
+	event_set_log_callback(&NFCNet::log_cb);
 
     return mnMaxConnect;
 }
@@ -672,4 +675,21 @@ bool NFCNet::ReqReset()
 	}
 
 	return false;
+}
+
+void NFCNet::log_cb( int severity, const char *msg )
+{
+	if (mLogEventCB.size() > 0)
+	{
+// 		for (int i = 0; i < mLogEventCB.size(); ++i)
+// 		{
+// 			mLogEventCB[i](severity, msg);
+// 		}
+	}
+}
+
+bool NFCNet::Log( int severity, const char *msg )
+{
+	log_cb(severity, msg);
+	return true;
 }
