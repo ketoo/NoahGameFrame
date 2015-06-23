@@ -26,15 +26,19 @@
 #include <sys/socket.h>
 #endif
 
+#include <vector>
+#include <functional>
+#include <memory>
+#include <list>
+#include <vector>
 #include "NFIPacket.h"
-
 #include <event2/bufferevent.h>
 #include <event2/buffer.h>
 #include <event2/listener.h>
 #include <event2/util.h>
 #include <event2/thread.h>
 #include <event2/event_compat.h>
-#include <vector>
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIdentID.h"
 
 #pragma pack(push, 1)
@@ -48,6 +52,17 @@ enum NF_NET_EVENT
 };
 
 class NFINet;
+
+typedef std::function<int(const NFIPacket& msg)> NET_RECIEVE_FUNCTOR;
+typedef NF_SHARE_PTR<NET_RECIEVE_FUNCTOR> NET_RECIEVE_FUNCTOR_PTR;
+
+typedef std::function<int(const int nSockIndex, const NF_NET_EVENT nEvent, NFINet* pNet)> NET_EVENT_FUNCTOR;
+typedef NF_SHARE_PTR<NET_EVENT_FUNCTOR> NET_EVENT_FUNCTOR_PTR;
+
+typedef std::function<void(int severity, const char *msg)> NET_EVENT_LOG_FUNCTOR;
+typedef NF_SHARE_PTR<NET_EVENT_LOG_FUNCTOR> NET_EVENT_LOG_FUNCTOR_PTR;
+
+
 
 class NetObject
 {
@@ -244,8 +259,18 @@ public:
 	virtual NFIMsgHead::NF_Head GetHeadLen() = 0;
 	virtual bool IsServer() = 0;
 
+	virtual bool Log(int severity, const char *msg) = 0;
+
+	template<typename BaseType>
+	void SetNetLogCB(BaseType* pBaseType, void (BaseType::*handleRecieve)(int severity, const char *msg))
+	{
+		//static??
+		mLogEventCB.push_back(std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2));
+	}
+
 protected:
-private:
+	static std::vector<NET_EVENT_LOG_FUNCTOR> mLogEventCB;
+
 };
 
 #pragma pack(pop)
