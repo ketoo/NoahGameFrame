@@ -679,13 +679,13 @@ bool NFCNet::ReqReset()
 
 void NFCNet::log_cb( int severity, const char *msg )
 {
-	if (mLogEventCB.size() > 0)
-	{
+// 	if (mLogEventCB.size() > 0)
+// 	{
 // 		for (int i = 0; i < mLogEventCB.size(); ++i)
 // 		{
 // 			mLogEventCB[i](severity, msg);
 // 		}
-	}
+//	}
 }
 
 bool NFCNet::Log( int severity, const char *msg )
