@@ -9,7 +9,6 @@
 #ifndef _NFC_PROPERTY_MODULE_H_
 #define _NFC_PROPERTY_MODULE_H_
 
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
@@ -17,6 +16,7 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCPropertyModule
     : public NFIPropertyModule
