@@ -10,8 +10,8 @@
 #define _NFC_ITEMCONSUME_MANAGER_MODULE_H_
 
 #include <iostream>
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIItemConsumeManagerModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCItemConsumeManagerModule
     : public NFIItemConsumeManagerModule,

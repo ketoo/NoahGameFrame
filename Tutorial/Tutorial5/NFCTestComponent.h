@@ -9,11 +9,11 @@
 #ifndef _NFC_TEST_COMPONENT_H_
 #define _NFC_TEST_COMPONENT_H_
 
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCTestComponent
     : public NFIComponent

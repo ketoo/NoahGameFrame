@@ -11,9 +11,9 @@
 #include "NFComm/NFPluginModule/NFISLGBuildingModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCSLGBuildingModule : public NFISLGBuildingModule
 {

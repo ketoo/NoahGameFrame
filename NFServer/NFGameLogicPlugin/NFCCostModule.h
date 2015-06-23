@@ -9,12 +9,12 @@
 #ifndef __NFC_COST_MODULE_H__
 #define __NFC_COST_MODULE_H__
 
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFICostModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCCostModule : public NFICostModule
 {

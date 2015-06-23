@@ -21,19 +21,12 @@ class NFIPlugin;
 class NFIPluginManager : public NFILogicModule
 {
 public:
-    //NFIPluginManager(Theron::Framework &framework, NFIActorManager* pManager, NFIActorManager::EACTOR eActor): NFIActor(framework, pManager, eActor)
 	NFIPluginManager(NFIActorManager* pManager)
 	{
 
     }
 
     virtual bool LoadPlugin() = 0;
-
-    //virtual bool UnLoadPlugin() = 0;
-
-    //virtual bool LoadPlugin( const std::string& strPluginName ) = 0;
-
-    //virtual bool UnLoadPlugin( const std::string& strPluginName ) = 0;
 
     virtual void Registered(NFIPlugin* plugin) = 0;
 
@@ -51,6 +44,7 @@ public:
 
 #ifdef NF_USE_ACTOR
 	virtual NFIActorManager* GetActorManager() = 0;
+	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from) = 0;
 #endif
 };
 
