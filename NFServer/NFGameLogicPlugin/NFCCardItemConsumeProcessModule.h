@@ -11,13 +11,13 @@
 #define _NFC_CARDITEMCONSUME_PROCESS_MODULE_H_
 
 #include <iostream>
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIPackModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIItemConsumeProcessModule.h"
 #include "NFComm/NFPluginModule/NFIItemConsumeManagerModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCCardItemConsumeProcessModule
     : public NFIItemConsumeProcessModule
