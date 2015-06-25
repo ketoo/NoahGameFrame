@@ -60,6 +60,9 @@ protected:
     int OnEnquireSceneInfoProcess(const NFIPacket& msg);
 
     int OnSwapGSProcess(const NFIPacket& msg);
+    int OnAckCreateGuildProcess(const NFIPacket& msg);
+    int OnAckJoinGuildProcess(const NFIPacket& msg);
+    int OnAckLeaveGuildProcess(const NFIPacket& msg);
 
     int OnDataLoadBeginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
 
