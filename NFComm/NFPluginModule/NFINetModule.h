@@ -125,6 +125,15 @@ public:
 		return xIdent;
 	}
 
+   virtual bool SendMsg(const std::string& strMsg, const int nSockIndex = 0, bool bBroadcast = false)
+   {
+       return false;
+   }
+
+   const NFINet* GetNFINet()
+   {
+       return m_pNet;
+   }
 
 	template<typename BaseType>
 	void Initialization(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const char* strIP, const unsigned short nPort)
