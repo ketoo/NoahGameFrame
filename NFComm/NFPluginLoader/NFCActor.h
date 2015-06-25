@@ -17,6 +17,7 @@
 #ifdef NF_USE_ACTOR
 
 #include "NFComm/NFPluginModule/NFIActor.h"
+#include "NFComm/NFCore/NFIComponent.h"
 
 class NFCActor
 	: public NFIActor
@@ -28,12 +29,12 @@ public:
 	}
 
 	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
-	virtual void RegisterActorModule(const std::string& strModuleName, NFILogicModule* pModule);
+	virtual void RegisterActorComponent(const std::string& strModuleName, NFIComponent* pComponent);
 
 
 protected:
 	//NFIActorModule*
-	NFList<NFILogicModule*> mxActorModule;
+	NFList<NFIComponent*> mxActorComponent;
 
 
 };
