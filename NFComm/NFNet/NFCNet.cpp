@@ -283,7 +283,7 @@ bool NFCNet::SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex,
         for (; it != mmObject.end(); ++it)
         {
             NetObject* pNetObject = (NetObject*)it->second;
-            if (pNetObject)
+            if (pNetObject && !pNetObject->GetRemoveState())
             {
                 bufferevent* bev = pNetObject->GetBuffEvent();
                 if (NULL != bev)
