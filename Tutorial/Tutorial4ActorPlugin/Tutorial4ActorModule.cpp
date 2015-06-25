@@ -14,7 +14,7 @@ int HelloWorld4ActorModule::OnASyncEvent(const NFIDENTID& self, const int event,
     //事件回调函数
     std::cout << "Begin OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg << " ThreadID: " << GetCurrentThreadId() << std::endl;
 
-	arg = "event test ok";
+	arg += "  event test ok";
 
     return 0;
 }
@@ -40,7 +40,11 @@ bool HelloWorld4ActorModule::AfterInit()
 	//////////////////////////////////////同步/////////////////////////////////////////////////////////////////////
 	m_pEventProcessModule->AddAsyncEventCallBack(NFIDENTID(), 2222, this, &HelloWorld4ActorModule::OnASyncEvent, &HelloWorld4ActorModule::OnSyncEvent);
 
-    m_pEventProcessModule->DoEvent(NFIDENTID(), 2222, NFCDataList() << "200", false);
+	for (int i = 0; i < 20; ++i)
+	{
+		m_pEventProcessModule->DoEvent(NFIDENTID(), 2222, NFCDataList() << boost::lexical_cast<std::string>(i), false);
+
+	}
 
 	std::cout << "End Test Actor, ThreadID: " << GetCurrentThreadId() << std::endl;
 
