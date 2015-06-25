@@ -54,6 +54,7 @@ int NFCProxyServerToWorldModule::OnReciveWSPack( const NFIPacket& msg )
         break;
 
     default:
+        m_pProxyServerNet_ServerModule->Transpond(msg);
         break;
     }
 
