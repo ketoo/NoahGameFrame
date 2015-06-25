@@ -11,6 +11,7 @@
 
 NFCActorManager::NFCActorManager()
 {
+	srand((unsigned)time(NULL));
 #ifdef NF_USE_ACTOR
 	m_pFramework = new Theron::Framework(NF_ACTOR_THREAD_COUNT);
 #endif
@@ -22,6 +23,10 @@ bool NFCActorManager::Init()
 #ifdef NF_USE_ACTOR
 
 	m_pMainActor = new NFCActor(*m_pFramework, this);
+	for (int i= 0; i < NF_ACTOR_THREAD_COUNT*2; ++i)
+	{
+		mvActorList.push_back(new NFCActor(*m_pFramework, this));
+	}
 #endif
 
 	m_pPluginManager->Init();
@@ -33,22 +38,6 @@ bool NFCActorManager::AfterInit()
 {
 	m_pPluginManager->AfterInit();
 
-// #ifdef NF_USE_ACTOR
-// 
-// 	std::vector<NFIActor*>::iterator it = mActorVec.begin();
-// 	for (; it != mActorVec.end(); ++it)
-// 	{
-// 		NFIActor* pActor = *it;
-// 
-// 		Theron::Receiver xReceiver;
-// 		NFIActorMessage xMessage;
-// 		xMessage.eType = NFIActorMessage::EACTOR_AFTER_INIT;
-// 		m_pFramework->Send(xMessage, xReceiver.GetAddress(), pActor->GetAddress());
-// 
-// 		xReceiver.Wait();
-// 
-//	}
-// #endif
 	return true;
 }
 
@@ -66,7 +55,16 @@ bool NFCActorManager::CheckConfig()
 bool NFCActorManager::BeforeShut()
 {
 #ifdef NF_USE_ACTOR
-	m_pMainActor = new NFCActor(*m_pFramework, this);
+	delete m_pMainActor;
+	m_pMainActor = NULL;
+
+	for (int i= 0; i < NF_ACTOR_THREAD_COUNT*2; ++i)
+	{
+		NFIActor* pActor = mvActorList[i];
+		delete pActor;
+	}
+
+	mvActorList.clear();
 #endif
 
 	m_pPluginManager->BeforeShut();
@@ -98,16 +96,16 @@ bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTi
 }
 
 #ifdef NF_USE_ACTOR
-// void NFCActorManager::OnReceiveActorData( const void *const data, const uint32_t size, const Theron::Address from)
-// {
-// 	std::cout << "OnReceiveActorData: " << from.AsString() << std::endl;
-// }
-
-
 bool NFCActorManager::OnRequireActor( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc)
 {
 	//¶Ñactor»¹ÊÇÕ»actor
-	NFIActor* pActor = new NFCActor(*m_pFramework, this);
+	int nIndex = rand() % (NF_ACTOR_THREAD_COUNT*2);
+	if (nIndex > mvActorList.size() || nIndex < 0)
+	{
+		return false;
+	}
+
+	NFIActor* pActor = mvActorList[nIndex];
 
 	NFIActorMessage xMessage;
 
@@ -120,14 +118,9 @@ bool NFCActorManager::OnRequireActor( const NFIDENTID& objectID, const int nEven
 	return m_pFramework->Send(xMessage, m_pMainActor->GetAddress(), pActor->GetAddress());
 }
 
-void NFCActorManager::Handler( const NFIActorMessage& message, const Theron::Address from )
-{
-
-}
+#endif
 
 NFIPluginManager* NFCActorManager::GetPluginManager()
 {
 	return m_pPluginManager;
 }
-
-#endif
