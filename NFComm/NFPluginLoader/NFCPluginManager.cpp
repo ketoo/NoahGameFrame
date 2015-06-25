@@ -119,7 +119,9 @@ bool NFCPluginManager::Execute(const float fLasFrametime, const float fStartedTi
         bRet = bRet && tembRet;
     }
 
+#ifdef NF_USE_ACTOR
 	ExecuteEvent();
+#endif
 
     return bRet;
 }
