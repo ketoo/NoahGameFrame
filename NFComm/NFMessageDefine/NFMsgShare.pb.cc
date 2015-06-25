@@ -87,13 +87,23 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* ReqJoinGuild_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqJoinGuild_reflection_ = NULL;
+const ::google::protobuf::Descriptor* AckJoinGuild_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  AckJoinGuild_reflection_ = NULL;
 const ::google::protobuf::Descriptor* ReqAckLeaveGuild_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqAckLeaveGuild_reflection_ = NULL;
+const ::google::protobuf::Descriptor* AckLeaveGuild_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  AckLeaveGuild_reflection_ = NULL;
 const ::google::protobuf::Descriptor* ReqAckOprGuildMember_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqAckOprGuildMember_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* ReqAckOprGuildMember_EGGuildMemberOprType_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* ChatInfo_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ChatInfo_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* ChatInfo_EChatType_descriptor_ = NULL;
 
 }  // namespace
 
@@ -458,7 +468,22 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqJoinGuild));
-  ReqAckLeaveGuild_descriptor_ = file->message_type(21);
+  AckJoinGuild_descriptor_ = file->message_type(21);
+  static const int AckJoinGuild_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckJoinGuild, guild_id_),
+  };
+  AckJoinGuild_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      AckJoinGuild_descriptor_,
+      AckJoinGuild::default_instance_,
+      AckJoinGuild_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckJoinGuild, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckJoinGuild, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(AckJoinGuild));
+  ReqAckLeaveGuild_descriptor_ = file->message_type(22);
   static const int ReqAckLeaveGuild_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckLeaveGuild, guild_id_),
   };
@@ -473,7 +498,22 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckLeaveGuild));
-  ReqAckOprGuildMember_descriptor_ = file->message_type(22);
+  AckLeaveGuild_descriptor_ = file->message_type(23);
+  static const int AckLeaveGuild_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckLeaveGuild, guild_id_),
+  };
+  AckLeaveGuild_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      AckLeaveGuild_descriptor_,
+      AckLeaveGuild::default_instance_,
+      AckLeaveGuild_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckLeaveGuild, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckLeaveGuild, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(AckLeaveGuild));
+  ReqAckOprGuildMember_descriptor_ = file->message_type(24);
   static const int ReqAckOprGuildMember_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckOprGuildMember, guild_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckOprGuildMember, member_id_),
@@ -491,6 +531,30 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckOprGuildMember));
   ReqAckOprGuildMember_EGGuildMemberOprType_descriptor_ = ReqAckOprGuildMember_descriptor_->enum_type(0);
+  ChatInfo_descriptor_ = file->message_type(25);
+  static const int ChatInfo_offsets_[9] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatInfo, chat_type_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatInfo, chat_info_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatInfo, chat_time_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatInfo, addtional_info_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatInfo, send_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatInfo, send_name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatInfo, send_level_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatInfo, recvier_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatInfo, guid_name_),
+  };
+  ChatInfo_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ChatInfo_descriptor_,
+      ChatInfo::default_instance_,
+      ChatInfo_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatInfo, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatInfo, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ChatInfo));
+  ChatInfo_EChatType_descriptor_ = ChatInfo_descriptor_->enum_type(0);
 }
 
 namespace {
@@ -546,9 +610,15 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqJoinGuild_descriptor_, &ReqJoinGuild::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    AckJoinGuild_descriptor_, &AckJoinGuild::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqAckLeaveGuild_descriptor_, &ReqAckLeaveGuild::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    AckLeaveGuild_descriptor_, &AckLeaveGuild::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqAckOprGuildMember_descriptor_, &ReqAckOprGuildMember::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ChatInfo_descriptor_, &ChatInfo::default_instance());
 }
 
 }  // namespace
@@ -596,10 +666,16 @@ void protobuf_ShutdownFile_NFMsgShare_2eproto() {
   delete AckCreateGuild_reflection_;
   delete ReqJoinGuild::default_instance_;
   delete ReqJoinGuild_reflection_;
+  delete AckJoinGuild::default_instance_;
+  delete AckJoinGuild_reflection_;
   delete ReqAckLeaveGuild::default_instance_;
   delete ReqAckLeaveGuild_reflection_;
+  delete AckLeaveGuild::default_instance_;
+  delete AckLeaveGuild_reflection_;
   delete ReqAckOprGuildMember::default_instance_;
   delete ReqAckOprGuildMember_reflection_;
+  delete ChatInfo::default_instance_;
+  delete ChatInfo_reflection_;
 }
 
 void protobuf_AddDesc_NFMsgShare_2eproto() {
@@ -628,52 +704,63 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "t\"\213\001\n\020ReqAckPlayerMove\022\033\n\005mover\030\001 \002(\0132\014."
     "NFMsg.Ident\022\020\n\010moveType\030\002 \002(\005\022#\n\ntarget_"
     "pos\030\003 \003(\0132\017.NFMsg.Position\022#\n\nsource_pos"
-    "\030\004 \003(\0132\017.NFMsg.Position\"\344\001\n\020ReqAckPlayer"
+    "\030\004 \003(\0132\017.NFMsg.Position\"\343\001\n\020ReqAckPlayer"
     "Chat\022\035\n\007chat_id\030\001 \002(\0132\014.NFMsg.Ident\0228\n\tc"
     "hat_type\030\002 \002(\0162%.NFMsg.ReqAckPlayerChat."
     "EGameChatType\022\021\n\tchat_info\030\003 \002(\014\022\021\n\tchat"
-    "_name\030\004 \002(\014\"Q\n\rEGameChatType\022\017\n\013EGCT_NAR"
-    "MAL\020\000\022\020\n\014EGCT_PRIVATE\020\001\022\r\n\tEGCT_TEAM\020\002\022\016"
-    "\n\nEGCT_WORLD\020\003\"Z\n\nEffectData\022\"\n\014effect_i"
-    "dent\030\001 \002(\0132\014.NFMsg.Ident\022\024\n\014effect_value"
-    "\030\002 \002(\005\022\022\n\neffect_rlt\030\003 \002(\005\"\275\001\n\016ReqAckUse"
-    "Skill\022\032\n\004user\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010ski"
-    "ll_id\030\002 \002(\014\022 \n\007now_pos\030\003 \002(\0132\017.NFMsg.Pos"
-    "ition\022 \n\007tar_pos\030\004 \002(\0132\017.NFMsg.Position\022"
-    "\021\n\tuse_index\030\005 \002(\005\022&\n\013effect_data\030\006 \003(\0132"
-    "\021.NFMsg.EffectData\"t\n\rReqAckUseItem\022\032\n\004u"
-    "ser\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\titem_guid\030\002 \002"
-    "(\0132\014.NFMsg.Ident\022&\n\013effect_data\030\003 \003(\0132\021."
-    "NFMsg.EffectData\"\345\001\n\017ReqAckSwapScene\022;\n\r"
-    "transfer_type\030\001 \002(\0162$.NFMsg.ReqAckSwapSc"
-    "ene.EGameSwapType\022\020\n\010scene_id\030\002 \002(\005\022\017\n\007l"
-    "ine_id\030\003 \002(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z\030"
-    "\006 \001(\002\"Q\n\rEGameSwapType\022\017\n\013EGST_NARMAL\020\000\022"
-    "\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n\013EGST_"
-    "MIRROR\020\003\"1\n\nItemStruct\022\017\n\007item_id\030\001 \002(\t\022"
-    "\022\n\nitem_count\030\002 \002(\005\"d\n\017ReqAckEndBattle\022\r"
-    "\n\005money\030\001 \002(\005\022\013\n\003exp\030\002 \002(\005\022\017\n\007diamond\030\003 "
-    "\002(\005\022$\n\titem_list\030\004 \003(\0132\021.NFMsg.ItemStruc"
-    "t\"2\n\017ReqPickDropItem\022\037\n\titem_guid\030\002 \002(\0132"
-    "\014.NFMsg.Ident\" \n\rReqAcceptTask\022\017\n\007task_i"
-    "d\030\001 \002(\014\"#\n\020ReqCompeleteTask\022\017\n\007task_id\030\001"
-    " \002(\014\"\357\001\n\022ReqAckJoinActivity\022B\n\ractivity_"
-    "type\030\001 \002(\0162+.NFMsg.ReqAckJoinActivity.EG"
-    "ameActivityType\022I\n\021sub_activity_type\030\002 \002"
-    "(\0162..NFMsg.ReqAckJoinActivity.EGameActiv"
-    "itySubType\"!\n\021EGameActivityType\022\014\n\010EGAT_"
-    "PVP\020\000\"\'\n\024EGameActivitySubType\022\017\n\013EGAT_NO"
-    "RMAL\020\000\"$\n\016ReqCreateGuild\022\022\n\nguild_name\030\001"
-    " \002(\t\"D\n\016AckCreateGuild\022\036\n\010guild_ID\030\001 \002(\013"
-    "2\014.NFMsg.Ident\022\022\n\nguild_name\030\002 \002(\t\".\n\014Re"
-    "qJoinGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ide"
-    "nt\"2\n\020ReqAckLeaveGuild\022\036\n\010guild_id\030\001 \002(\013"
-    "2\014.NFMsg.Ident\"\332\001\n\024ReqAckOprGuildMember\022"
-    "\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\tmembe"
-    "r_id\030\002 \002(\0132\014.NFMsg.Ident\022>\n\004type\030\003 \002(\01620"
-    ".NFMsg.ReqAckOprGuildMember.EGGuildMembe"
-    "rOprType\"A\n\024EGGuildMemberOprType\022\r\n\tEGAT"
-    "_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tEGAT_KICK\020\002", 2475);
+    "_name\030\004 \002(\014\"P\n\rEGameChatType\022\016\n\nEGCT_GUI"
+    "LD\020\000\022\020\n\014EGCT_PRIVATE\020\001\022\r\n\tEGCT_TEAM\020\002\022\016\n"
+    "\nEGCT_WORLD\020\003\"Z\n\nEffectData\022\"\n\014effect_id"
+    "ent\030\001 \002(\0132\014.NFMsg.Ident\022\024\n\014effect_value\030"
+    "\002 \002(\005\022\022\n\neffect_rlt\030\003 \002(\005\"\275\001\n\016ReqAckUseS"
+    "kill\022\032\n\004user\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010skil"
+    "l_id\030\002 \002(\014\022 \n\007now_pos\030\003 \002(\0132\017.NFMsg.Posi"
+    "tion\022 \n\007tar_pos\030\004 \002(\0132\017.NFMsg.Position\022\021"
+    "\n\tuse_index\030\005 \002(\005\022&\n\013effect_data\030\006 \003(\0132\021"
+    ".NFMsg.EffectData\"t\n\rReqAckUseItem\022\032\n\004us"
+    "er\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\titem_guid\030\002 \002("
+    "\0132\014.NFMsg.Ident\022&\n\013effect_data\030\003 \003(\0132\021.N"
+    "FMsg.EffectData\"\345\001\n\017ReqAckSwapScene\022;\n\rt"
+    "ransfer_type\030\001 \002(\0162$.NFMsg.ReqAckSwapSce"
+    "ne.EGameSwapType\022\020\n\010scene_id\030\002 \002(\005\022\017\n\007li"
+    "ne_id\030\003 \002(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006"
+    " \001(\002\"Q\n\rEGameSwapType\022\017\n\013EGST_NARMAL\020\000\022\016"
+    "\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n\013EGST_M"
+    "IRROR\020\003\"1\n\nItemStruct\022\017\n\007item_id\030\001 \002(\t\022\022"
+    "\n\nitem_count\030\002 \002(\005\"d\n\017ReqAckEndBattle\022\r\n"
+    "\005money\030\001 \002(\005\022\013\n\003exp\030\002 \002(\005\022\017\n\007diamond\030\003 \002"
+    "(\005\022$\n\titem_list\030\004 \003(\0132\021.NFMsg.ItemStruct"
+    "\"2\n\017ReqPickDropItem\022\037\n\titem_guid\030\002 \002(\0132\014"
+    ".NFMsg.Ident\" \n\rReqAcceptTask\022\017\n\007task_id"
+    "\030\001 \002(\014\"#\n\020ReqCompeleteTask\022\017\n\007task_id\030\001 "
+    "\002(\014\"\357\001\n\022ReqAckJoinActivity\022B\n\ractivity_t"
+    "ype\030\001 \002(\0162+.NFMsg.ReqAckJoinActivity.EGa"
+    "meActivityType\022I\n\021sub_activity_type\030\002 \002("
+    "\0162..NFMsg.ReqAckJoinActivity.EGameActivi"
+    "tySubType\"!\n\021EGameActivityType\022\014\n\010EGAT_P"
+    "VP\020\000\"\'\n\024EGameActivitySubType\022\017\n\013EGAT_NOR"
+    "MAL\020\000\"$\n\016ReqCreateGuild\022\022\n\nguild_name\030\001 "
+    "\002(\t\"D\n\016AckCreateGuild\022\036\n\010guild_ID\030\001 \002(\0132"
+    "\014.NFMsg.Ident\022\022\n\nguild_name\030\002 \002(\t\".\n\014Req"
+    "JoinGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Iden"
+    "t\".\n\014AckJoinGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NF"
+    "Msg.Ident\"2\n\020ReqAckLeaveGuild\022\036\n\010guild_i"
+    "d\030\001 \002(\0132\014.NFMsg.Ident\"/\n\rAckLeaveGuild\022\036"
+    "\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\"\332\001\n\024ReqAc"
+    "kOprGuildMember\022\036\n\010guild_id\030\001 \002(\0132\014.NFMs"
+    "g.Ident\022\037\n\tmember_id\030\002 \002(\0132\014.NFMsg.Ident"
+    "\022>\n\004type\030\003 \002(\01620.NFMsg.ReqAckOprGuildMem"
+    "ber.EGGuildMemberOprType\"A\n\024EGGuildMembe"
+    "rOprType\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\t"
+    "EGAT_KICK\020\002\"\325\002\n\010ChatInfo\022,\n\tchat_type\030\001 "
+    "\002(\0162\031.NFMsg.ChatInfo.EChatType\022\021\n\tchat_i"
+    "nfo\030\002 \002(\014\022\021\n\tchat_time\030\003 \002(\003\022\026\n\016addtiona"
+    "l_info\030\004 \001(\014\022\035\n\007send_id\030\005 \002(\0132\014.NFMsg.Id"
+    "ent\022\021\n\tsend_name\030\006 \002(\014\022\022\n\nsend_level\030\007 \001"
+    "(\005\022 \n\nrecvier_id\030\010 \003(\0132\014.NFMsg.Ident\022\021\n\t"
+    "guid_name\030\t \001(\014\"b\n\tEChatType\022\024\n\020ECHATTYP"
+    "E_NORMAL\020\000\022\025\n\021ECHATTYPE_PRIVATE\020\001\022\023\n\017ECH"
+    "ATTYPE_GUILD\020\002\022\023\n\017ECHATTYPE_WORLD\020\003", 2915);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -697,8 +784,11 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqCreateGuild::default_instance_ = new ReqCreateGuild();
   AckCreateGuild::default_instance_ = new AckCreateGuild();
   ReqJoinGuild::default_instance_ = new ReqJoinGuild();
+  AckJoinGuild::default_instance_ = new AckJoinGuild();
   ReqAckLeaveGuild::default_instance_ = new ReqAckLeaveGuild();
+  AckLeaveGuild::default_instance_ = new AckLeaveGuild();
   ReqAckOprGuildMember::default_instance_ = new ReqAckOprGuildMember();
+  ChatInfo::default_instance_ = new ChatInfo();
   ReqEnterGameServer::default_instance_->InitAsDefaultInstance();
   ReqHeartBeat::default_instance_->InitAsDefaultInstance();
   ReqLeaveGameServer::default_instance_->InitAsDefaultInstance();
@@ -720,8 +810,11 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqCreateGuild::default_instance_->InitAsDefaultInstance();
   AckCreateGuild::default_instance_->InitAsDefaultInstance();
   ReqJoinGuild::default_instance_->InitAsDefaultInstance();
+  AckJoinGuild::default_instance_->InitAsDefaultInstance();
   ReqAckLeaveGuild::default_instance_->InitAsDefaultInstance();
+  AckLeaveGuild::default_instance_->InitAsDefaultInstance();
   ReqAckOprGuildMember::default_instance_->InitAsDefaultInstance();
+  ChatInfo::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFMsgShare_2eproto);
 }
 
@@ -2724,7 +2817,7 @@ bool ReqAckPlayerChat_EGameChatType_IsValid(int value) {
 }
 
 #ifndef _MSC_VER
-const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_NARMAL;
+const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_GUILD;
 const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_PRIVATE;
 const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_TEAM;
 const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_WORLD;
@@ -6840,6 +6933,223 @@ void ReqJoinGuild::Swap(ReqJoinGuild* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int AckJoinGuild::kGuildIdFieldNumber;
+#endif  // !_MSC_VER
+
+AckJoinGuild::AckJoinGuild()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void AckJoinGuild::InitAsDefaultInstance() {
+  guild_id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+}
+
+AckJoinGuild::AckJoinGuild(const AckJoinGuild& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void AckJoinGuild::SharedCtor() {
+  _cached_size_ = 0;
+  guild_id_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+AckJoinGuild::~AckJoinGuild() {
+  SharedDtor();
+}
+
+void AckJoinGuild::SharedDtor() {
+  if (this != default_instance_) {
+    delete guild_id_;
+  }
+}
+
+void AckJoinGuild::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* AckJoinGuild::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return AckJoinGuild_descriptor_;
+}
+
+const AckJoinGuild& AckJoinGuild::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
+  return *default_instance_;
+}
+
+AckJoinGuild* AckJoinGuild::default_instance_ = NULL;
+
+AckJoinGuild* AckJoinGuild::New() const {
+  return new AckJoinGuild;
+}
+
+void AckJoinGuild::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_guild_id()) {
+      if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool AckJoinGuild::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .NFMsg.Ident guild_id = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_guild_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void AckJoinGuild::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .NFMsg.Ident guild_id = 1;
+  if (has_guild_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->guild_id(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* AckJoinGuild::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required .NFMsg.Ident guild_id = 1;
+  if (has_guild_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->guild_id(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int AckJoinGuild::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .NFMsg.Ident guild_id = 1;
+    if (has_guild_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->guild_id());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void AckJoinGuild::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const AckJoinGuild* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const AckJoinGuild*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void AckJoinGuild::MergeFrom(const AckJoinGuild& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_guild_id()) {
+      mutable_guild_id()->::NFMsg::Ident::MergeFrom(from.guild_id());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void AckJoinGuild::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void AckJoinGuild::CopyFrom(const AckJoinGuild& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AckJoinGuild::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  if (has_guild_id()) {
+    if (!this->guild_id().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void AckJoinGuild::Swap(AckJoinGuild* other) {
+  if (other != this) {
+    std::swap(guild_id_, other->guild_id_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata AckJoinGuild::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = AckJoinGuild_descriptor_;
+  metadata.reflection = AckJoinGuild_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
 const int ReqAckLeaveGuild::kGuildIdFieldNumber;
 #endif  // !_MSC_VER
 
@@ -7050,6 +7360,223 @@ void ReqAckLeaveGuild::Swap(ReqAckLeaveGuild* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = ReqAckLeaveGuild_descriptor_;
   metadata.reflection = ReqAckLeaveGuild_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int AckLeaveGuild::kGuildIdFieldNumber;
+#endif  // !_MSC_VER
+
+AckLeaveGuild::AckLeaveGuild()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void AckLeaveGuild::InitAsDefaultInstance() {
+  guild_id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+}
+
+AckLeaveGuild::AckLeaveGuild(const AckLeaveGuild& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void AckLeaveGuild::SharedCtor() {
+  _cached_size_ = 0;
+  guild_id_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+AckLeaveGuild::~AckLeaveGuild() {
+  SharedDtor();
+}
+
+void AckLeaveGuild::SharedDtor() {
+  if (this != default_instance_) {
+    delete guild_id_;
+  }
+}
+
+void AckLeaveGuild::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* AckLeaveGuild::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return AckLeaveGuild_descriptor_;
+}
+
+const AckLeaveGuild& AckLeaveGuild::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
+  return *default_instance_;
+}
+
+AckLeaveGuild* AckLeaveGuild::default_instance_ = NULL;
+
+AckLeaveGuild* AckLeaveGuild::New() const {
+  return new AckLeaveGuild;
+}
+
+void AckLeaveGuild::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_guild_id()) {
+      if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool AckLeaveGuild::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .NFMsg.Ident guild_id = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_guild_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void AckLeaveGuild::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .NFMsg.Ident guild_id = 1;
+  if (has_guild_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->guild_id(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* AckLeaveGuild::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required .NFMsg.Ident guild_id = 1;
+  if (has_guild_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->guild_id(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int AckLeaveGuild::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .NFMsg.Ident guild_id = 1;
+    if (has_guild_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->guild_id());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void AckLeaveGuild::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const AckLeaveGuild* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const AckLeaveGuild*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void AckLeaveGuild::MergeFrom(const AckLeaveGuild& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_guild_id()) {
+      mutable_guild_id()->::NFMsg::Ident::MergeFrom(from.guild_id());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void AckLeaveGuild::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void AckLeaveGuild::CopyFrom(const AckLeaveGuild& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AckLeaveGuild::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  if (has_guild_id()) {
+    if (!this->guild_id().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void AckLeaveGuild::Swap(AckLeaveGuild* other) {
+  if (other != this) {
+    std::swap(guild_id_, other->guild_id_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata AckLeaveGuild::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = AckLeaveGuild_descriptor_;
+  metadata.reflection = AckLeaveGuild_reflection_;
   return metadata;
 }
 
@@ -7384,6 +7911,615 @@ void ReqAckOprGuildMember::Swap(ReqAckOprGuildMember* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = ReqAckOprGuildMember_descriptor_;
   metadata.reflection = ReqAckOprGuildMember_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* ChatInfo_EChatType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ChatInfo_EChatType_descriptor_;
+}
+bool ChatInfo_EChatType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const ChatInfo_EChatType ChatInfo::ECHATTYPE_NORMAL;
+const ChatInfo_EChatType ChatInfo::ECHATTYPE_PRIVATE;
+const ChatInfo_EChatType ChatInfo::ECHATTYPE_GUILD;
+const ChatInfo_EChatType ChatInfo::ECHATTYPE_WORLD;
+const ChatInfo_EChatType ChatInfo::EChatType_MIN;
+const ChatInfo_EChatType ChatInfo::EChatType_MAX;
+const int ChatInfo::EChatType_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int ChatInfo::kChatTypeFieldNumber;
+const int ChatInfo::kChatInfoFieldNumber;
+const int ChatInfo::kChatTimeFieldNumber;
+const int ChatInfo::kAddtionalInfoFieldNumber;
+const int ChatInfo::kSendIdFieldNumber;
+const int ChatInfo::kSendNameFieldNumber;
+const int ChatInfo::kSendLevelFieldNumber;
+const int ChatInfo::kRecvierIdFieldNumber;
+const int ChatInfo::kGuidNameFieldNumber;
+#endif  // !_MSC_VER
+
+ChatInfo::ChatInfo()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void ChatInfo::InitAsDefaultInstance() {
+  send_id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+}
+
+ChatInfo::ChatInfo(const ChatInfo& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ChatInfo::SharedCtor() {
+  _cached_size_ = 0;
+  chat_type_ = 0;
+  chat_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  chat_time_ = GOOGLE_LONGLONG(0);
+  addtional_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  send_id_ = NULL;
+  send_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  send_level_ = 0;
+  guid_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ChatInfo::~ChatInfo() {
+  SharedDtor();
+}
+
+void ChatInfo::SharedDtor() {
+  if (chat_info_ != &::google::protobuf::internal::kEmptyString) {
+    delete chat_info_;
+  }
+  if (addtional_info_ != &::google::protobuf::internal::kEmptyString) {
+    delete addtional_info_;
+  }
+  if (send_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete send_name_;
+  }
+  if (guid_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete guid_name_;
+  }
+  if (this != default_instance_) {
+    delete send_id_;
+  }
+}
+
+void ChatInfo::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ChatInfo::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ChatInfo_descriptor_;
+}
+
+const ChatInfo& ChatInfo::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
+  return *default_instance_;
+}
+
+ChatInfo* ChatInfo::default_instance_ = NULL;
+
+ChatInfo* ChatInfo::New() const {
+  return new ChatInfo;
+}
+
+void ChatInfo::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    chat_type_ = 0;
+    if (has_chat_info()) {
+      if (chat_info_ != &::google::protobuf::internal::kEmptyString) {
+        chat_info_->clear();
+      }
+    }
+    chat_time_ = GOOGLE_LONGLONG(0);
+    if (has_addtional_info()) {
+      if (addtional_info_ != &::google::protobuf::internal::kEmptyString) {
+        addtional_info_->clear();
+      }
+    }
+    if (has_send_id()) {
+      if (send_id_ != NULL) send_id_->::NFMsg::Ident::Clear();
+    }
+    if (has_send_name()) {
+      if (send_name_ != &::google::protobuf::internal::kEmptyString) {
+        send_name_->clear();
+      }
+    }
+    send_level_ = 0;
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (has_guid_name()) {
+      if (guid_name_ != &::google::protobuf::internal::kEmptyString) {
+        guid_name_->clear();
+      }
+    }
+  }
+  recvier_id_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ChatInfo::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .NFMsg.ChatInfo.EChatType chat_type = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::NFMsg::ChatInfo_EChatType_IsValid(value)) {
+            set_chat_type(static_cast< ::NFMsg::ChatInfo_EChatType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_chat_info;
+        break;
+      }
+
+      // required bytes chat_info = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_chat_info:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_chat_info()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(24)) goto parse_chat_time;
+        break;
+      }
+
+      // required int64 chat_time = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_chat_time:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &chat_time_)));
+          set_has_chat_time();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(34)) goto parse_addtional_info;
+        break;
+      }
+
+      // optional bytes addtional_info = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_addtional_info:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_addtional_info()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(42)) goto parse_send_id;
+        break;
+      }
+
+      // required .NFMsg.Ident send_id = 5;
+      case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_send_id:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_send_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(50)) goto parse_send_name;
+        break;
+      }
+
+      // required bytes send_name = 6;
+      case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_send_name:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_send_name()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(56)) goto parse_send_level;
+        break;
+      }
+
+      // optional int32 send_level = 7;
+      case 7: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_send_level:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &send_level_)));
+          set_has_send_level();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(66)) goto parse_recvier_id;
+        break;
+      }
+
+      // repeated .NFMsg.Ident recvier_id = 8;
+      case 8: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_recvier_id:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_recvier_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(66)) goto parse_recvier_id;
+        if (input->ExpectTag(74)) goto parse_guid_name;
+        break;
+      }
+
+      // optional bytes guid_name = 9;
+      case 9: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_guid_name:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_guid_name()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void ChatInfo::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .NFMsg.ChatInfo.EChatType chat_type = 1;
+  if (has_chat_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->chat_type(), output);
+  }
+
+  // required bytes chat_info = 2;
+  if (has_chat_info()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      2, this->chat_info(), output);
+  }
+
+  // required int64 chat_time = 3;
+  if (has_chat_time()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(3, this->chat_time(), output);
+  }
+
+  // optional bytes addtional_info = 4;
+  if (has_addtional_info()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      4, this->addtional_info(), output);
+  }
+
+  // required .NFMsg.Ident send_id = 5;
+  if (has_send_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      5, this->send_id(), output);
+  }
+
+  // required bytes send_name = 6;
+  if (has_send_name()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      6, this->send_name(), output);
+  }
+
+  // optional int32 send_level = 7;
+  if (has_send_level()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->send_level(), output);
+  }
+
+  // repeated .NFMsg.Ident recvier_id = 8;
+  for (int i = 0; i < this->recvier_id_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      8, this->recvier_id(i), output);
+  }
+
+  // optional bytes guid_name = 9;
+  if (has_guid_name()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      9, this->guid_name(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* ChatInfo::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required .NFMsg.ChatInfo.EChatType chat_type = 1;
+  if (has_chat_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->chat_type(), target);
+  }
+
+  // required bytes chat_info = 2;
+  if (has_chat_info()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        2, this->chat_info(), target);
+  }
+
+  // required int64 chat_time = 3;
+  if (has_chat_time()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(3, this->chat_time(), target);
+  }
+
+  // optional bytes addtional_info = 4;
+  if (has_addtional_info()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        4, this->addtional_info(), target);
+  }
+
+  // required .NFMsg.Ident send_id = 5;
+  if (has_send_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        5, this->send_id(), target);
+  }
+
+  // required bytes send_name = 6;
+  if (has_send_name()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        6, this->send_name(), target);
+  }
+
+  // optional int32 send_level = 7;
+  if (has_send_level()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->send_level(), target);
+  }
+
+  // repeated .NFMsg.Ident recvier_id = 8;
+  for (int i = 0; i < this->recvier_id_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        8, this->recvier_id(i), target);
+  }
+
+  // optional bytes guid_name = 9;
+  if (has_guid_name()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        9, this->guid_name(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int ChatInfo::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .NFMsg.ChatInfo.EChatType chat_type = 1;
+    if (has_chat_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->chat_type());
+    }
+
+    // required bytes chat_info = 2;
+    if (has_chat_info()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->chat_info());
+    }
+
+    // required int64 chat_time = 3;
+    if (has_chat_time()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->chat_time());
+    }
+
+    // optional bytes addtional_info = 4;
+    if (has_addtional_info()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->addtional_info());
+    }
+
+    // required .NFMsg.Ident send_id = 5;
+    if (has_send_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->send_id());
+    }
+
+    // required bytes send_name = 6;
+    if (has_send_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->send_name());
+    }
+
+    // optional int32 send_level = 7;
+    if (has_send_level()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->send_level());
+    }
+
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    // optional bytes guid_name = 9;
+    if (has_guid_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->guid_name());
+    }
+
+  }
+  // repeated .NFMsg.Ident recvier_id = 8;
+  total_size += 1 * this->recvier_id_size();
+  for (int i = 0; i < this->recvier_id_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->recvier_id(i));
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ChatInfo::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ChatInfo* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ChatInfo*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ChatInfo::MergeFrom(const ChatInfo& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  recvier_id_.MergeFrom(from.recvier_id_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_chat_type()) {
+      set_chat_type(from.chat_type());
+    }
+    if (from.has_chat_info()) {
+      set_chat_info(from.chat_info());
+    }
+    if (from.has_chat_time()) {
+      set_chat_time(from.chat_time());
+    }
+    if (from.has_addtional_info()) {
+      set_addtional_info(from.addtional_info());
+    }
+    if (from.has_send_id()) {
+      mutable_send_id()->::NFMsg::Ident::MergeFrom(from.send_id());
+    }
+    if (from.has_send_name()) {
+      set_send_name(from.send_name());
+    }
+    if (from.has_send_level()) {
+      set_send_level(from.send_level());
+    }
+  }
+  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (from.has_guid_name()) {
+      set_guid_name(from.guid_name());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ChatInfo::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ChatInfo::CopyFrom(const ChatInfo& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ChatInfo::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000037) != 0x00000037) return false;
+
+  if (has_send_id()) {
+    if (!this->send_id().IsInitialized()) return false;
+  }
+  for (int i = 0; i < recvier_id_size(); i++) {
+    if (!this->recvier_id(i).IsInitialized()) return false;
+  }
+  return true;
+}
+
+void ChatInfo::Swap(ChatInfo* other) {
+  if (other != this) {
+    std::swap(chat_type_, other->chat_type_);
+    std::swap(chat_info_, other->chat_info_);
+    std::swap(chat_time_, other->chat_time_);
+    std::swap(addtional_info_, other->addtional_info_);
+    std::swap(send_id_, other->send_id_);
+    std::swap(send_name_, other->send_name_);
+    std::swap(send_level_, other->send_level_);
+    recvier_id_.Swap(&other->recvier_id_);
+    std::swap(guid_name_, other->guid_name_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ChatInfo::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ChatInfo_descriptor_;
+  metadata.reflection = ChatInfo_reflection_;
   return metadata;
 }
 

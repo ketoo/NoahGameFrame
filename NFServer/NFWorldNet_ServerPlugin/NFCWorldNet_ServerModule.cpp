@@ -486,7 +486,7 @@ void NFCWorldNet_ServerModule::OnCrateGuildProcess( const NFIPacket& msg )
         *xAck.mutable_guild_id() = NFToPB(xGuild);
         xAck.set_guild_name(xMsg.guild_name());
 
-        SendMsgPB(NFMsg::EGMI_REQ_CREATE_GUILD, xAck, msg.GetFd(), nPlayerID);
+        SendMsgPB(NFMsg::EGMI_ACK_CREATE_GUILD, xAck, msg.GetFd(), nPlayerID);
     }
 }
 
@@ -497,6 +497,12 @@ void NFCWorldNet_ServerModule::OnJoinGuildProcess( const NFIPacket& msg )
 	if (m_pWorldGuildModule->JoinGuild(nPlayerID, PBToNF(xMsg.guild_id())))
 	{
         ShowStringByFD(nPlayerID, msg.GetFd(), NFMsg::EGEC_JOIN_GUILD_SUCCESS);
+
+        NFMsg::AckJoinGuild xAck;
+        *xAck.mutable_guild_id() = xMsg.guild_id();
+
+        SendMsgPB(NFMsg::EGMI_ACK_JOIN_GUILD, xAck, msg.GetFd(), nPlayerID);
+
         SendPropertyToPlayer(PBToNF(xMsg.guild_id()), nPlayerID);
 	}
 }
@@ -507,7 +513,11 @@ void NFCWorldNet_ServerModule::OnLeaveGuildProcess( const NFIPacket& msg )
 
 	if (m_pWorldGuildModule->LeaveGuild(nPlayerID, PBToNF(xMsg.guild_id())))
 	{
-        ShowStringByFD(nPlayerID, msg.GetFd(), NFMsg::EGEC_LEAVE_GUILD_SUCCESS);
+
+        NFMsg::AckLeaveGuild xAck;
+        *xAck.mutable_guild_id() = xMsg.guild_id();
+
+        SendMsgPB(NFMsg::EGMI_ACK_LEAVE_GUILD, xAck, msg.GetFd(), nPlayerID);
 	}
 }
 
