@@ -213,11 +213,20 @@ bool HelloWorld1::Shut()
 -------------------
 ### [02-Hello world, test data driver](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial2)
 
+* how to use the world's most advanced data engine 
+
 -------------------
 ### [03-Hello world, test heartbeat and event system](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial3)
 
+* how to use the synchronous events
 
+-------------------
+### [04-Hello actor, test actor model(async event system)](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial4ActorPlugin)
 
+* how to use the asynchronous events
+* use multiple cpus to get high performance
+
+-------------------
 
 
 
