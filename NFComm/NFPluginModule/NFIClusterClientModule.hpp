@@ -42,24 +42,29 @@ public:
 
 	virtual bool Execute(const float fLastFrametime, const float fStartedTime)
 	{
-		ServerData* pServerData = mxServerMap.First();
+		ServerData* pServerData = mxServerMap.FirstNude();
 		while (pServerData)
 		{
 			pServerData->mxNetModule->Execute(fLastFrametime, fStartedTime);
 
-			pServerData = mxServerMap.Next();
+			pServerData = mxServerMap.NextNude();
 		}
 
+		//ProcessAddNetConnect();
 		return true;
 	}
 
 
 	void AddServer(const ServerData& xInfo)
 	{
-		NF_SHARE_PTR<ServerData> xServerData = mxServerMap.find(xInfo.nGameID);
+		NF_SHARE_PTR<ServerData> xServerData = mxServerMap.GetElement(xInfo.nGameID);
 		if (xServerData)
 		{
 			//新的信息
+			if (xInfo.strIP != xServerData->strIP || xInfo.nPort != xServerData->nPort)
+			{
+				//断旧，连新
+			}
 		}
 		else
 		{
@@ -75,8 +80,10 @@ public:
 				xServerData->strName = xInfo.strName;
 				xServerData->eState = xInfo.eState;
 				xServerData->mxNetModule = NF_SHARE_PTR<NFINetModule>(NF_NEW NFINetModule());
-				OnNetCreated(xServerData);
+
 				//xServerData->m_pNetModule->Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerNet_ServerModule::OnRecivePack, &NFCGameServerNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
+				
+				OnNetCreated(xServerData);
 
 				mxServerMap.AddElement(xInfo.nGameID, xServerData);
 			}
