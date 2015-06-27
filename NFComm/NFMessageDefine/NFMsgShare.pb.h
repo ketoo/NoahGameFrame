@@ -2441,14 +2441,17 @@ class ReqJoinGuild : public ::google::protobuf::Message {
   inline ::NFMsg::Ident* release_guild_id();
   inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
 
-  // required .NFMsg.Ident guild_name = 2;
+  // required string guild_name = 2;
   inline bool has_guild_name() const;
   inline void clear_guild_name();
   static const int kGuildNameFieldNumber = 2;
-  inline const ::NFMsg::Ident& guild_name() const;
-  inline ::NFMsg::Ident* mutable_guild_name();
-  inline ::NFMsg::Ident* release_guild_name();
-  inline void set_allocated_guild_name(::NFMsg::Ident* guild_name);
+  inline const ::std::string& guild_name() const;
+  inline void set_guild_name(const ::std::string& value);
+  inline void set_guild_name(const char* value);
+  inline void set_guild_name(const char* value, size_t size);
+  inline ::std::string* mutable_guild_name();
+  inline ::std::string* release_guild_name();
+  inline void set_allocated_guild_name(::std::string* guild_name);
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqJoinGuild)
  private:
@@ -2460,7 +2463,7 @@ class ReqJoinGuild : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::NFMsg::Ident* guild_id_;
-  ::NFMsg::Ident* guild_name_;
+  ::std::string* guild_name_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
@@ -5196,7 +5199,7 @@ inline void ReqJoinGuild::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
   }
 }
 
-// required .NFMsg.Ident guild_name = 2;
+// required string guild_name = 2;
 inline bool ReqJoinGuild::has_guild_name() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -5207,30 +5210,62 @@ inline void ReqJoinGuild::clear_has_guild_name() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqJoinGuild::clear_guild_name() {
-  if (guild_name_ != NULL) guild_name_->::NFMsg::Ident::Clear();
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    guild_name_->clear();
+  }
   clear_has_guild_name();
 }
-inline const ::NFMsg::Ident& ReqJoinGuild::guild_name() const {
-  return guild_name_ != NULL ? *guild_name_ : *default_instance_->guild_name_;
+inline const ::std::string& ReqJoinGuild::guild_name() const {
+  return *guild_name_;
 }
-inline ::NFMsg::Ident* ReqJoinGuild::mutable_guild_name() {
+inline void ReqJoinGuild::set_guild_name(const ::std::string& value) {
   set_has_guild_name();
-  if (guild_name_ == NULL) guild_name_ = new ::NFMsg::Ident;
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void ReqJoinGuild::set_guild_name(const char* value) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void ReqJoinGuild::set_guild_name(const char* value, size_t size) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqJoinGuild::mutable_guild_name() {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
   return guild_name_;
 }
-inline ::NFMsg::Ident* ReqJoinGuild::release_guild_name() {
+inline ::std::string* ReqJoinGuild::release_guild_name() {
   clear_has_guild_name();
-  ::NFMsg::Ident* temp = guild_name_;
-  guild_name_ = NULL;
-  return temp;
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = guild_name_;
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
 }
-inline void ReqJoinGuild::set_allocated_guild_name(::NFMsg::Ident* guild_name) {
-  delete guild_name_;
-  guild_name_ = guild_name;
+inline void ReqJoinGuild::set_allocated_guild_name(::std::string* guild_name) {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete guild_name_;
+  }
   if (guild_name) {
     set_has_guild_name();
+    guild_name_ = guild_name;
   } else {
     clear_has_guild_name();
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 

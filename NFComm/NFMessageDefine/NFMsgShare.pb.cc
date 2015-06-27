@@ -742,27 +742,27 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "VP\020\000\"\'\n\024EGameActivitySubType\022\017\n\013EGAT_NOR"
     "MAL\020\000\"$\n\016ReqCreateGuild\022\022\n\nguild_name\030\001 "
     "\002(\t\"D\n\016AckCreateGuild\022\036\n\010guild_ID\030\001 \002(\0132"
-    "\014.NFMsg.Ident\022\022\n\nguild_name\030\002 \002(\t\"P\n\014Req"
+    "\014.NFMsg.Ident\022\022\n\nguild_name\030\002 \002(\t\"B\n\014Req"
     "JoinGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Iden"
-    "t\022 \n\nguild_name\030\002 \002(\0132\014.NFMsg.Ident\".\n\014A"
-    "ckJoinGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Id"
-    "ent\"2\n\020ReqAckLeaveGuild\022\036\n\010guild_id\030\001 \002("
-    "\0132\014.NFMsg.Ident\"/\n\rAckLeaveGuild\022\036\n\010guil"
-    "d_id\030\001 \002(\0132\014.NFMsg.Ident\"\332\001\n\024ReqAckOprGu"
-    "ildMember\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Iden"
-    "t\022\037\n\tmember_id\030\002 \002(\0132\014.NFMsg.Ident\022>\n\004ty"
-    "pe\030\003 \002(\01620.NFMsg.ReqAckOprGuildMember.EG"
-    "GuildMemberOprType\"A\n\024EGGuildMemberOprTy"
-    "pe\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tEGAT_K"
-    "ICK\020\002\"\325\002\n\010ChatInfo\022,\n\tchat_type\030\001 \002(\0162\031."
-    "NFMsg.ChatInfo.EChatType\022\021\n\tchat_info\030\002 "
-    "\002(\014\022\021\n\tchat_time\030\003 \002(\003\022\026\n\016addtional_info"
-    "\030\004 \001(\014\022\035\n\007send_id\030\005 \002(\0132\014.NFMsg.Ident\022\021\n"
-    "\tsend_name\030\006 \002(\014\022\022\n\nsend_level\030\007 \001(\005\022 \n\n"
-    "recvier_id\030\010 \003(\0132\014.NFMsg.Ident\022\021\n\tguid_n"
-    "ame\030\t \001(\014\"b\n\tEChatType\022\024\n\020ECHATTYPE_NORM"
-    "AL\020\000\022\025\n\021ECHATTYPE_PRIVATE\020\001\022\023\n\017ECHATTYPE"
-    "_GUILD\020\002\022\023\n\017ECHATTYPE_WORLD\020\003", 2949);
+    "t\022\022\n\nguild_name\030\002 \002(\t\".\n\014AckJoinGuild\022\036\n"
+    "\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\"2\n\020ReqAckL"
+    "eaveGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Iden"
+    "t\"/\n\rAckLeaveGuild\022\036\n\010guild_id\030\001 \002(\0132\014.N"
+    "FMsg.Ident\"\332\001\n\024ReqAckOprGuildMember\022\036\n\010g"
+    "uild_id\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\tmember_id"
+    "\030\002 \002(\0132\014.NFMsg.Ident\022>\n\004type\030\003 \002(\01620.NFM"
+    "sg.ReqAckOprGuildMember.EGGuildMemberOpr"
+    "Type\"A\n\024EGGuildMemberOprType\022\r\n\tEGAT_DOW"
+    "N\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tEGAT_KICK\020\002\"\325\002\n\010Chat"
+    "Info\022,\n\tchat_type\030\001 \002(\0162\031.NFMsg.ChatInfo"
+    ".EChatType\022\021\n\tchat_info\030\002 \002(\014\022\021\n\tchat_ti"
+    "me\030\003 \002(\003\022\026\n\016addtional_info\030\004 \001(\014\022\035\n\007send"
+    "_id\030\005 \002(\0132\014.NFMsg.Ident\022\021\n\tsend_name\030\006 \002"
+    "(\014\022\022\n\nsend_level\030\007 \001(\005\022 \n\nrecvier_id\030\010 \003"
+    "(\0132\014.NFMsg.Ident\022\021\n\tguid_name\030\t \001(\014\"b\n\tE"
+    "ChatType\022\024\n\020ECHATTYPE_NORMAL\020\000\022\025\n\021ECHATT"
+    "YPE_PRIVATE\020\001\022\023\n\017ECHATTYPE_GUILD\020\002\022\023\n\017EC"
+    "HATTYPE_WORLD\020\003", 2935);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -6729,7 +6729,6 @@ ReqJoinGuild::ReqJoinGuild()
 
 void ReqJoinGuild::InitAsDefaultInstance() {
   guild_id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
-  guild_name_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 ReqJoinGuild::ReqJoinGuild(const ReqJoinGuild& from)
@@ -6741,7 +6740,7 @@ ReqJoinGuild::ReqJoinGuild(const ReqJoinGuild& from)
 void ReqJoinGuild::SharedCtor() {
   _cached_size_ = 0;
   guild_id_ = NULL;
-  guild_name_ = NULL;
+  guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -6750,9 +6749,11 @@ ReqJoinGuild::~ReqJoinGuild() {
 }
 
 void ReqJoinGuild::SharedDtor() {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete guild_name_;
+  }
   if (this != default_instance_) {
     delete guild_id_;
-    delete guild_name_;
   }
 }
 
@@ -6783,7 +6784,9 @@ void ReqJoinGuild::Clear() {
       if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
     }
     if (has_guild_name()) {
-      if (guild_name_ != NULL) guild_name_->::NFMsg::Ident::Clear();
+      if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+        guild_name_->clear();
+      }
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -6809,13 +6812,16 @@ bool ReqJoinGuild::MergePartialFromCodedStream(
         break;
       }
 
-      // required .NFMsg.Ident guild_name = 2;
+      // required string guild_name = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_guild_name:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_guild_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_guild_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->guild_name().data(), this->guild_name().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -6847,9 +6853,12 @@ void ReqJoinGuild::SerializeWithCachedSizes(
       1, this->guild_id(), output);
   }
 
-  // required .NFMsg.Ident guild_name = 2;
+  // required string guild_name = 2;
   if (has_guild_name()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->guild_name().data(), this->guild_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
       2, this->guild_name(), output);
   }
 
@@ -6868,10 +6877,13 @@ void ReqJoinGuild::SerializeWithCachedSizes(
         1, this->guild_id(), target);
   }
 
-  // required .NFMsg.Ident guild_name = 2;
+  // required string guild_name = 2;
   if (has_guild_name()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->guild_name().data(), this->guild_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         2, this->guild_name(), target);
   }
 
@@ -6893,10 +6905,10 @@ int ReqJoinGuild::ByteSize() const {
           this->guild_id());
     }
 
-    // required .NFMsg.Ident guild_name = 2;
+    // required string guild_name = 2;
     if (has_guild_name()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        ::google::protobuf::internal::WireFormatLite::StringSize(
           this->guild_name());
     }
 
@@ -6931,7 +6943,7 @@ void ReqJoinGuild::MergeFrom(const ReqJoinGuild& from) {
       mutable_guild_id()->::NFMsg::Ident::MergeFrom(from.guild_id());
     }
     if (from.has_guild_name()) {
-      mutable_guild_name()->::NFMsg::Ident::MergeFrom(from.guild_name());
+      set_guild_name(from.guild_name());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -6954,9 +6966,6 @@ bool ReqJoinGuild::IsInitialized() const {
 
   if (has_guild_id()) {
     if (!this->guild_id().IsInitialized()) return false;
-  }
-  if (has_guild_name()) {
-    if (!this->guild_name().IsInitialized()) return false;
   }
   return true;
 }
