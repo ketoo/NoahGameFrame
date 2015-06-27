@@ -40,10 +40,11 @@ enum GuildMemberList_RecordColType
 	GuildMemberList_Level		=2; // Level
 	GuildMemberList_Job		=3; // Job
 	GuildMemberList_Donation		=4; // Donation
-	GuildMemberList_VIP		=5; // VIP
-	GuildMemberList_Offline		=6; // Offline
-	GuildMemberList_Power		=7; // Power
-	GuildMemberList_Title		=8; // Title
+	GuildMemberList_Receive		=5; // Receive
+	GuildMemberList_VIP		=6; // VIP
+	GuildMemberList_Offline		=7; // Offline
+	GuildMemberList_Power		=8; // Power
+	GuildMemberList_Title		=9; // Title
 }
 
 enum GuildEvent_RecordColType
@@ -183,6 +184,7 @@ enum TaskList_RecordColType
 {
 	TaskList_TaskID		=0; // TaskID
 	TaskList_TaskStatus		=1; // TaskStatus
+	TaskList_Process		=2; // Process
 }
 
 enum PVPList_RecordColType
