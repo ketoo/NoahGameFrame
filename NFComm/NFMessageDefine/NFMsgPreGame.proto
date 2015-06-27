@@ -175,3 +175,13 @@ message ServerHeartBeat // 心跳
 {
 	optional int32 count = 1; // 数量，暂时没用到，以后可以用来做角色数量报告等
 }
+
+message RoleOnlineNotify // 玩家上线通知
+{
+	optional Ident guild = 1; // 公会ID
+}
+
+message RoleOfflineNotify // 玩家下线通知
+{
+	optional Ident guild = 1; // 公会ID
+}

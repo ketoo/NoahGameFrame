@@ -2441,17 +2441,29 @@ class ReqJoinGuild : public ::google::protobuf::Message {
   inline ::NFMsg::Ident* release_guild_id();
   inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
 
+  // required .NFMsg.Ident guild_name = 2;
+  inline bool has_guild_name() const;
+  inline void clear_guild_name();
+  static const int kGuildNameFieldNumber = 2;
+  inline const ::NFMsg::Ident& guild_name() const;
+  inline ::NFMsg::Ident* mutable_guild_name();
+  inline ::NFMsg::Ident* release_guild_name();
+  inline void set_allocated_guild_name(::NFMsg::Ident* guild_name);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqJoinGuild)
  private:
   inline void set_has_guild_id();
   inline void clear_has_guild_id();
+  inline void set_has_guild_name();
+  inline void clear_has_guild_name();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::NFMsg::Ident* guild_id_;
+  ::NFMsg::Ident* guild_name_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -5181,6 +5193,44 @@ inline void ReqJoinGuild::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
     set_has_guild_id();
   } else {
     clear_has_guild_id();
+  }
+}
+
+// required .NFMsg.Ident guild_name = 2;
+inline bool ReqJoinGuild::has_guild_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqJoinGuild::set_has_guild_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqJoinGuild::clear_has_guild_name() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqJoinGuild::clear_guild_name() {
+  if (guild_name_ != NULL) guild_name_->::NFMsg::Ident::Clear();
+  clear_has_guild_name();
+}
+inline const ::NFMsg::Ident& ReqJoinGuild::guild_name() const {
+  return guild_name_ != NULL ? *guild_name_ : *default_instance_->guild_name_;
+}
+inline ::NFMsg::Ident* ReqJoinGuild::mutable_guild_name() {
+  set_has_guild_name();
+  if (guild_name_ == NULL) guild_name_ = new ::NFMsg::Ident;
+  return guild_name_;
+}
+inline ::NFMsg::Ident* ReqJoinGuild::release_guild_name() {
+  clear_has_guild_name();
+  ::NFMsg::Ident* temp = guild_name_;
+  guild_name_ = NULL;
+  return temp;
+}
+inline void ReqJoinGuild::set_allocated_guild_name(::NFMsg::Ident* guild_name) {
+  delete guild_name_;
+  guild_name_ = guild_name;
+  if (guild_name) {
+    set_has_guild_name();
+  } else {
+    clear_has_guild_name();
   }
 }
 
