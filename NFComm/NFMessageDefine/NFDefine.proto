@@ -171,6 +171,12 @@ enum EGameMsgID
 	EGMI_REQ_OPR_GUILD                        	= 273; // 申请成员操作
 	
 	EGMI_ACK_CREATE_GUILD						= 280; // 创建公会成功
+	EGMI_ACK_JOIN_GUILD							= 281; // 加入公会成功
+	EGMI_ACK_LEAVE_GUILD						= 282; // 离开公会成功
+	
+	EGMI_ACK_ONLINE_NOTIFY						= 290; // 玩家上线通知
+	EGMI_ACK_OFFLINE_NOTIFY						= 291; // 玩家下线通知
+	
 	
 	/////////////////////GM MSG/////////////////////////////////////
 	EGMI_REQ_CMD_PROPERTY_INT					= 1000;			// GM命令修改整形
@@ -205,4 +211,29 @@ enum EGuildPowerType
 	GUILD_POWER_TYPE_VICE_PRESIDENT		= 1; // 副会长
 	GUILD_POWER_TYPE_PRESIDENT			= 2; // 会长
 	// TODO
+}
+
+// 任务状态
+enum ETaskState
+{
+    TASK_IN_PROCESS             = 0; // 任务进行中
+    TASK_DONE                   = 1; // 任务完成
+    TASK_DRAW_AWARD             = 2; // 领取过任务奖励了
+    TASK_FINISH                 = 3; // 任务结束
+}
+
+// 任务类型
+enum ETaskType
+{
+    TASK_LEVEL_UPDATE_SOME_LEVEL        = 0; // 主角升级到某个等级
+    TASK_PASS_ECTYPE                    = 1; // 通过某个副本
+    TASK_PASS_ECTYPE_COUNT              = 2; // 通过任意副本多少次
+    TASK_PASS_SOME_TYPE_ECTYPE_COUNT    = 3; // 通过某类副本多少次
+    TASK_UPDATE_SKILL_COUNT             = 4; // 升级技能多少次
+    TASK_CONSUME_MONEY                  = 5; // 消费多少金币
+    TASK_CONSUME_DIAMOND                = 6; // 消费多少钻石
+    TASK_ARENA_COUNT                    = 7; // 参加竞技场多少次
+    TASK_KILL_MONSTER_COUNT             = 8; // 累计杀怪多少只
+    TASK_KILL_SOME_MONSTER_COUNT        = 9; // 杀死某个特定怪度多少只
+    // TODO
 }
