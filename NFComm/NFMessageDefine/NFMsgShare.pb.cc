@@ -423,7 +423,8 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
   ReqAckJoinActivity_EGameActivityType_descriptor_ = ReqAckJoinActivity_descriptor_->enum_type(0);
   ReqAckJoinActivity_EGameActivitySubType_descriptor_ = ReqAckJoinActivity_descriptor_->enum_type(1);
   ReqAckCreateGuild_descriptor_ = file->message_type(18);
-  static const int ReqAckCreateGuild_offsets_[1] = {
+  static const int ReqAckCreateGuild_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckCreateGuild, guild_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckCreateGuild, guild_name_),
   };
   ReqAckCreateGuild_reflection_ =
@@ -746,33 +747,34 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "\0162..NFMsg.ReqAckJoinActivity.EGameActivi"
     "tySubType\"!\n\021EGameActivityType\022\014\n\010EGAT_P"
     "VP\020\000\"\'\n\024EGameActivitySubType\022\017\n\013EGAT_NOR"
-    "MAL\020\000\"\'\n\021ReqAckCreateGuild\022\022\n\nguild_name"
-    "\030\001 \002(\t\"$\n\016ReqSearchGuild\022\022\n\nguild_name\030\001"
-    " \002(\t\"\220\002\n\016AckSearchGuild\022;\n\nguild_list\030\001 "
-    "\003(\0132\'.NFMsg.AckSearchGuild.SearchGuildOb"
-    "ject\032\300\001\n\021SearchGuildObject\022\036\n\010guild_ID\030\001"
-    " \002(\0132\014.NFMsg.Ident\022\022\n\nguild_name\030\002 \002(\t\022\022"
-    "\n\nguild_icon\030\003 \002(\t\022\032\n\022guild_member_count"
-    "\030\004 \002(\005\022\036\n\026guild_member_max_count\030\005 \002(\005\022\023"
-    "\n\013guild_honor\030\006 \002(\005\022\022\n\nguild_rank\030\007 \002(\005\""
-    "E\n\017ReqAckJoinGuild\022\036\n\010guild_id\030\001 \002(\0132\014.N"
-    "FMsg.Ident\022\022\n\nguild_name\030\002 \002(\t\"F\n\020ReqAck"
-    "LeaveGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ide"
-    "nt\022\022\n\nguild_name\030\002 \002(\t\"\332\001\n\024ReqAckOprGuil"
-    "dMember\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\022"
-    "\037\n\tmember_id\030\002 \002(\0132\014.NFMsg.Ident\022>\n\004type"
-    "\030\003 \002(\01620.NFMsg.ReqAckOprGuildMember.EGGu"
-    "ildMemberOprType\"A\n\024EGGuildMemberOprType"
-    "\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tEGAT_KIC"
-    "K\020\002\"\325\002\n\010ChatInfo\022,\n\tchat_type\030\001 \002(\0162\031.NF"
-    "Msg.ChatInfo.EChatType\022\021\n\tchat_info\030\002 \002("
-    "\014\022\021\n\tchat_time\030\003 \002(\003\022\026\n\016addtional_info\030\004"
-    " \001(\014\022\035\n\007send_id\030\005 \002(\0132\014.NFMsg.Ident\022\021\n\ts"
-    "end_name\030\006 \002(\014\022\022\n\nsend_level\030\007 \001(\005\022 \n\nre"
-    "cvier_id\030\010 \003(\0132\014.NFMsg.Ident\022\021\n\tguid_nam"
-    "e\030\t \001(\014\"b\n\tEChatType\022\024\n\020ECHATTYPE_NORMAL"
-    "\020\000\022\025\n\021ECHATTYPE_PRIVATE\020\001\022\023\n\017ECHATTYPE_G"
-    "UILD\020\002\022\023\n\017ECHATTYPE_WORLD\020\003", 3107);
+    "MAL\020\000\"G\n\021ReqAckCreateGuild\022\036\n\010guild_id\030\001"
+    " \002(\0132\014.NFMsg.Ident\022\022\n\nguild_name\030\002 \002(\t\"$"
+    "\n\016ReqSearchGuild\022\022\n\nguild_name\030\001 \002(\t\"\220\002\n"
+    "\016AckSearchGuild\022;\n\nguild_list\030\001 \003(\0132\'.NF"
+    "Msg.AckSearchGuild.SearchGuildObject\032\300\001\n"
+    "\021SearchGuildObject\022\036\n\010guild_ID\030\001 \002(\0132\014.N"
+    "FMsg.Ident\022\022\n\nguild_name\030\002 \002(\t\022\022\n\nguild_"
+    "icon\030\003 \002(\t\022\032\n\022guild_member_count\030\004 \002(\005\022\036"
+    "\n\026guild_member_max_count\030\005 \002(\005\022\023\n\013guild_"
+    "honor\030\006 \002(\005\022\022\n\nguild_rank\030\007 \002(\005\"E\n\017ReqAc"
+    "kJoinGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ide"
+    "nt\022\022\n\nguild_name\030\002 \002(\t\"F\n\020ReqAckLeaveGui"
+    "ld\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\ngu"
+    "ild_name\030\002 \002(\t\"\332\001\n\024ReqAckOprGuildMember\022"
+    "\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\tmembe"
+    "r_id\030\002 \002(\0132\014.NFMsg.Ident\022>\n\004type\030\003 \002(\01620"
+    ".NFMsg.ReqAckOprGuildMember.EGGuildMembe"
+    "rOprType\"A\n\024EGGuildMemberOprType\022\r\n\tEGAT"
+    "_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tEGAT_KICK\020\002\"\325\002\n\010"
+    "ChatInfo\022,\n\tchat_type\030\001 \002(\0162\031.NFMsg.Chat"
+    "Info.EChatType\022\021\n\tchat_info\030\002 \002(\014\022\021\n\tcha"
+    "t_time\030\003 \002(\003\022\026\n\016addtional_info\030\004 \001(\014\022\035\n\007"
+    "send_id\030\005 \002(\0132\014.NFMsg.Ident\022\021\n\tsend_name"
+    "\030\006 \002(\014\022\022\n\nsend_level\030\007 \001(\005\022 \n\nrecvier_id"
+    "\030\010 \003(\0132\014.NFMsg.Ident\022\021\n\tguid_name\030\t \001(\014\""
+    "b\n\tEChatType\022\024\n\020ECHATTYPE_NORMAL\020\000\022\025\n\021EC"
+    "HATTYPE_PRIVATE\020\001\022\023\n\017ECHATTYPE_GUILD\020\002\022\023"
+    "\n\017ECHATTYPE_WORLD\020\003", 3139);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -6228,6 +6230,7 @@ void ReqAckJoinActivity::Swap(ReqAckJoinActivity* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int ReqAckCreateGuild::kGuildIdFieldNumber;
 const int ReqAckCreateGuild::kGuildNameFieldNumber;
 #endif  // !_MSC_VER
 
@@ -6237,6 +6240,7 @@ ReqAckCreateGuild::ReqAckCreateGuild()
 }
 
 void ReqAckCreateGuild::InitAsDefaultInstance() {
+  guild_id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 ReqAckCreateGuild::ReqAckCreateGuild(const ReqAckCreateGuild& from)
@@ -6247,6 +6251,7 @@ ReqAckCreateGuild::ReqAckCreateGuild(const ReqAckCreateGuild& from)
 
 void ReqAckCreateGuild::SharedCtor() {
   _cached_size_ = 0;
+  guild_id_ = NULL;
   guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -6260,6 +6265,7 @@ void ReqAckCreateGuild::SharedDtor() {
     delete guild_name_;
   }
   if (this != default_instance_) {
+    delete guild_id_;
   }
 }
 
@@ -6286,6 +6292,9 @@ ReqAckCreateGuild* ReqAckCreateGuild::New() const {
 
 void ReqAckCreateGuild::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_guild_id()) {
+      if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+    }
     if (has_guild_name()) {
       if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
         guild_name_->clear();
@@ -6302,10 +6311,24 @@ bool ReqAckCreateGuild::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string guild_name = 1;
+      // required .NFMsg.Ident guild_id = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_guild_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_guild_name;
+        break;
+      }
+
+      // required string guild_name = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_guild_name:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_guild_name()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
@@ -6336,13 +6359,19 @@ bool ReqAckCreateGuild::MergePartialFromCodedStream(
 
 void ReqAckCreateGuild::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required string guild_name = 1;
+  // required .NFMsg.Ident guild_id = 1;
+  if (has_guild_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->guild_id(), output);
+  }
+
+  // required string guild_name = 2;
   if (has_guild_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->guild_name().data(), this->guild_name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->guild_name(), output);
+      2, this->guild_name(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -6353,14 +6382,21 @@ void ReqAckCreateGuild::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqAckCreateGuild::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required string guild_name = 1;
+  // required .NFMsg.Ident guild_id = 1;
+  if (has_guild_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->guild_id(), target);
+  }
+
+  // required string guild_name = 2;
   if (has_guild_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->guild_name().data(), this->guild_name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->guild_name(), target);
+        2, this->guild_name(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -6374,7 +6410,14 @@ int ReqAckCreateGuild::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string guild_name = 1;
+    // required .NFMsg.Ident guild_id = 1;
+    if (has_guild_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->guild_id());
+    }
+
+    // required string guild_name = 2;
     if (has_guild_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -6408,6 +6451,9 @@ void ReqAckCreateGuild::MergeFrom(const ::google::protobuf::Message& from) {
 void ReqAckCreateGuild::MergeFrom(const ReqAckCreateGuild& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_guild_id()) {
+      mutable_guild_id()->::NFMsg::Ident::MergeFrom(from.guild_id());
+    }
     if (from.has_guild_name()) {
       set_guild_name(from.guild_name());
     }
@@ -6428,13 +6474,17 @@ void ReqAckCreateGuild::CopyFrom(const ReqAckCreateGuild& from) {
 }
 
 bool ReqAckCreateGuild::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
+  if (has_guild_id()) {
+    if (!this->guild_id().IsInitialized()) return false;
+  }
   return true;
 }
 
 void ReqAckCreateGuild::Swap(ReqAckCreateGuild* other) {
   if (other != this) {
+    std::swap(guild_id_, other->guild_id_);
     std::swap(guild_name_, other->guild_name_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
