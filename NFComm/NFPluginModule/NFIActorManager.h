@@ -10,13 +10,23 @@
 #define _NFI_ACTOR_MANAGER_H_
 
 #include "NFILogicModule.h"
+#include "NFComm/NFCore/NFIComponent.h"
 
 ///////////////////////////////////////////////////
+class NFIActor;
 
 struct NFAsyncEventFunc
 {
+	NFAsyncEventFunc()
+	{
+		bActor = false;
+		nActorID = 0;
+	}
+
 	EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR xBeginFuncptr;
 	EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR xEndFuncptr;
+	bool bActor;
+	int nActorID;
 };
 
 class NFCObjectAsyncEventInfo
@@ -42,8 +52,10 @@ class NFIActorManager : public NFILogicModule
 {
 public:
 #ifdef NF_USE_ACTOR
+	virtual int OnRequireActor(const NF_SHARE_PTR<NFIComponent> pComponent) = 0;
+	virtual bool OnRequireCPUCycle( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventList) = 0;
+	virtual bool OnRequireCPUCycle( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventList) = 0;
 
-	virtual bool OnRequireActor( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventList) = 0;
 #endif
 
 	virtual NFIPluginManager* GetPluginManager() = 0;
