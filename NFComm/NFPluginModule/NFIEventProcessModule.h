@@ -15,6 +15,8 @@
 #include "NFComm/NFEventDefine/NFEventDefine.h"
 #include "NFComm/NFPluginModule/NFIActorManager.h"
 
+class NFIComponent;
+
 struct NFEventList
 	: public NFList<EVENT_PROCESS_FUNCTOR_PTR>
 {
@@ -67,6 +69,18 @@ public:
 		return AddAsyncEventCallBack(objectID, nEventID, functorPtr_begin, functorPtr_end);
 	}
 
+	template<typename BaseTypeComponent, typename BaseType>
+	bool AddActorEventCallBack(const NFIDENTID& objectID, const int nEventID, BaseTypeComponent* pBaseComponent, int (BaseTypeComponent::*handler)(const NFIDENTID&, const int, std::string&), BaseType* pBase, int (BaseType::*handler_end)(const NFIDENTID&, const int, const std::string&))
+	{
+		EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR functor_begin = boost::bind(handler, pBaseComponent, _1, _2, _3);
+		EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR functorPtr_begin(new EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR(functor_begin));
+
+		EVENT_ASYNC_PROCESS_END_FUNCTOR functor_end = boost::bind(handler_end, pBase, _1, _2, _3);
+		EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end(new EVENT_ASYNC_PROCESS_END_FUNCTOR(functor_end));
+
+		return AddActorEventCallBack(objectID, nEventID, NF_SHARE_PTR<NFIComponent>((NFIComponent*)pBaseComponent), functorPtr_begin, functorPtr_end);
+	}
+
 	template<typename BaseType>
 	bool AddAsyncClassCallBack(const std::string& strClassName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const std::string&), int (BaseType::*handler_end)(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const std::string&))
 	{
@@ -91,6 +105,7 @@ public:
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb) = 0;
 
 	virtual bool AddAsyncEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb_begin, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end) = 0;
+	virtual bool AddActorEventCallBack(const NFIDENTID& objectID, const int nEventID, NF_SHARE_PTR<NFIComponent> pComponent, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb_begin, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end) = 0;
 	virtual bool AddAsyncClassCallBack(const std::string& strClassName, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb_begin, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb_end) = 0;
 };
 
