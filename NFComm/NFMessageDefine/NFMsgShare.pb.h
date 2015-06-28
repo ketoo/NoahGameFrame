@@ -2246,10 +2246,19 @@ class ReqAckCreateGuild : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string guild_name = 1;
+  // required .NFMsg.Ident guild_id = 1;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // required string guild_name = 2;
   inline bool has_guild_name() const;
   inline void clear_guild_name();
-  static const int kGuildNameFieldNumber = 1;
+  static const int kGuildNameFieldNumber = 2;
   inline const ::std::string& guild_name() const;
   inline void set_guild_name(const ::std::string& value);
   inline void set_guild_name(const char* value);
@@ -2260,15 +2269,18 @@ class ReqAckCreateGuild : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckCreateGuild)
  private:
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
   inline void set_has_guild_name();
   inline void clear_has_guild_name();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::NFMsg::Ident* guild_id_;
   ::std::string* guild_name_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -5051,15 +5063,53 @@ inline void ReqAckJoinActivity::set_sub_activity_type(::NFMsg::ReqAckJoinActivit
 
 // ReqAckCreateGuild
 
-// required string guild_name = 1;
-inline bool ReqAckCreateGuild::has_guild_name() const {
+// required .NFMsg.Ident guild_id = 1;
+inline bool ReqAckCreateGuild::has_guild_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqAckCreateGuild::set_has_guild_name() {
+inline void ReqAckCreateGuild::set_has_guild_id() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqAckCreateGuild::clear_has_guild_name() {
+inline void ReqAckCreateGuild::clear_has_guild_id() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckCreateGuild::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& ReqAckCreateGuild::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckCreateGuild::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckCreateGuild::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void ReqAckCreateGuild::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// required string guild_name = 2;
+inline bool ReqAckCreateGuild::has_guild_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckCreateGuild::set_has_guild_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckCreateGuild::clear_has_guild_name() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqAckCreateGuild::clear_guild_name() {
   if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
