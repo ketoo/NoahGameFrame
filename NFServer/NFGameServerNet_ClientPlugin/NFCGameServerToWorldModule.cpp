@@ -420,14 +420,14 @@ void NFCGameServerToWorldModule::OnClientConnected( const int nAddress )
 int NFCGameServerToWorldModule::OnAckCreateGuildProcess( const NFIPacket& msg )
 {
     NFIDENTID nPlayerID;
-    NFMsg::AckCreateGuild xData;
+    NFMsg::ReqAckCreateGuild xData;
     if (!RecivePB(msg, xData, nPlayerID))
     {
         return 0;
     }
 
     NFIDENTID xGuild = PBToNF(xData.guild_id());
-    m_pKernelModule->SetPropertyObject(nPlayerID, "GUILD_ID", xGuild);
+    m_pKernelModule->SetPropertyObject(nPlayerID, "GuildID", xGuild);
 
     return 0;
 }
@@ -435,14 +435,14 @@ int NFCGameServerToWorldModule::OnAckCreateGuildProcess( const NFIPacket& msg )
 int NFCGameServerToWorldModule::OnAckJoinGuildProcess( const NFIPacket& msg )
 {
     NFIDENTID nPlayerID;
-    NFMsg::AckJoinGuild xData;
+    NFMsg::ReqAckJoinGuild xData;
     if (!RecivePB(msg, xData, nPlayerID))
     {
         return 0;
     }
 
     NFIDENTID xGuild = PBToNF(xData.guild_id());
-    m_pKernelModule->SetPropertyObject(nPlayerID, "GUILD_ID", xGuild);
+    m_pKernelModule->SetPropertyObject(nPlayerID, "GuildID", xGuild);
 
     return 0;
 }
@@ -450,13 +450,13 @@ int NFCGameServerToWorldModule::OnAckJoinGuildProcess( const NFIPacket& msg )
 int NFCGameServerToWorldModule::OnAckLeaveGuildProcess( const NFIPacket& msg )
 {
     NFIDENTID nPlayerID;
-    NFMsg::AckLeaveGuild xData;
+    NFMsg::ReqAckLeaveGuild xData;
     if (!RecivePB(msg, xData, nPlayerID))
     {
         return 0;
     }
 
-    m_pKernelModule->SetPropertyObject(nPlayerID, "GUILD_ID", NFIDENTID());
+    m_pKernelModule->SetPropertyObject(nPlayerID, "GuildID", NFIDENTID());
 
     return 0;
 }

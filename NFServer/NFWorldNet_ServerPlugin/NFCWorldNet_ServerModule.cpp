@@ -476,13 +476,13 @@ void NFCWorldNet_ServerModule::LogGameServer(const float fLastTime)
 
 void NFCWorldNet_ServerModule::OnCrateGuildProcess( const NFIPacket& msg )
 {
-	CLIENT_MSG_PROCESS_NO_OBJECT(msg, NFMsg::ReqCreateGuild)
+	CLIENT_MSG_PROCESS_NO_OBJECT(msg, NFMsg::ReqAckCreateGuild)
 
 	NFIDENTID xGuild = m_pWorldGuildModule->CreateGuild(nPlayerID, xMsg.guild_name());
 
     if (!xGuild.IsNull())
     {
-        NFMsg::AckCreateGuild xAck;
+        NFMsg::ReqAckCreateGuild xAck;
         *xAck.mutable_guild_id() = NFToPB(xGuild);
         xAck.set_guild_name(xMsg.guild_name());
 
@@ -492,13 +492,13 @@ void NFCWorldNet_ServerModule::OnCrateGuildProcess( const NFIPacket& msg )
 
 void NFCWorldNet_ServerModule::OnJoinGuildProcess( const NFIPacket& msg )
 {
-	CLIENT_MSG_PROCESS_NO_OBJECT(msg, NFMsg::ReqJoinGuild)
+	CLIENT_MSG_PROCESS_NO_OBJECT(msg, NFMsg::ReqAckJoinGuild)
 
 	if (m_pWorldGuildModule->JoinGuild(nPlayerID, PBToNF(xMsg.guild_id())))
 	{
         ShowStringByFD(nPlayerID, msg.GetFd(), NFMsg::EGEC_JOIN_GUILD_SUCCESS);
 
-        NFMsg::AckJoinGuild xAck;
+        NFMsg::ReqAckJoinGuild xAck;
         *xAck.mutable_guild_id() = xMsg.guild_id();
 
         SendMsgPB(NFMsg::EGMI_ACK_JOIN_GUILD, xAck, msg.GetFd(), nPlayerID);
@@ -514,7 +514,7 @@ void NFCWorldNet_ServerModule::OnLeaveGuildProcess( const NFIPacket& msg )
 	if (m_pWorldGuildModule->LeaveGuild(nPlayerID, PBToNF(xMsg.guild_id())))
 	{
 
-        NFMsg::AckLeaveGuild xAck;
+        NFMsg::ReqAckLeaveGuild xAck;
         *xAck.mutable_guild_id() = xMsg.guild_id();
 
         SendMsgPB(NFMsg::EGMI_ACK_LEAVE_GUILD, xAck, msg.GetFd(), nPlayerID);
