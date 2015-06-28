@@ -45,7 +45,9 @@ public:
 	virtual NFIPluginManager* GetPluginManager();
 
 #ifdef NF_USE_ACTOR
-	virtual bool OnRequireActor( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc);
+	virtual int OnRequireActor(const NF_SHARE_PTR<NFIComponent> pComponent);
+	virtual bool OnRequireCPUCycle( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc);
+	virtual bool OnRequireCPUCycle( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc);
 #endif
 
 private:
@@ -55,6 +57,7 @@ private:
     Theron::Framework* m_pFramework;
 	NFIActor* m_pMainActor;
 	std::vector<NFIActor*> mvActorList;
+	std::map<int, NF_SHARE_PTR<NFIActor>> mxActorMap;
 #endif
 };
 

@@ -8,6 +8,7 @@
 
 #include "NFCActorManager.h"
 #include "NFCPluginManager.h"
+#include "NFComm/NFCore/NFCMemory.h"
 
 NFCActorManager::NFCActorManager()
 {
@@ -96,9 +97,8 @@ bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTi
 }
 
 #ifdef NF_USE_ACTOR
-bool NFCActorManager::OnRequireActor( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc)
+bool NFCActorManager::OnRequireCPUCycle( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc)
 {
-	//¶Ñactor»¹ÊÇÕ»actor
 	int nIndex = rand() % (NF_ACTOR_THREAD_COUNT*2);
 	if (nIndex > mvActorList.size() || nIndex < 0)
 	{
@@ -116,6 +116,37 @@ bool NFCActorManager::OnRequireActor( const NFIDENTID& objectID, const int nEven
 	xMessage.xActorEventFunc = xActorEventFunc;
 
 	return m_pFramework->Send(xMessage, m_pMainActor->GetAddress(), pActor->GetAddress());
+}
+
+int NFCActorManager::OnRequireActor(const NF_SHARE_PTR<NFIComponent> pComponent)
+{
+	//¶Ñactor
+	NF_SHARE_PTR<NFIActor> pActor(NF_NEW NFCActor(*m_pFramework, this));
+	
+	pActor->RegisterActorComponent(pComponent);
+
+	mxActorMap.insert(std::make_pair(pActor->GetAddress().AsInteger(), pActor));
+
+	return pActor->GetAddress().AsInteger();
+}
+
+bool NFCActorManager::OnRequireCPUCycle( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventList)
+{
+	std::map<int, NF_SHARE_PTR<NFIActor>>::iterator it = mxActorMap.find(nActorIndex);
+	if (it != mxActorMap.end())
+	{
+		NFIActorMessage xMessage;
+
+		xMessage.eType = NFIActorMessage::EACTOR_EVENT_MSG;
+		xMessage.data = strArg;
+		xMessage.nSubMsgID = nEventID;
+		xMessage.self = objectID;
+		xMessage.xActorEventFunc = xActorEventList;
+
+		return m_pFramework->Send(xMessage, m_pMainActor->GetAddress(), it->second->GetAddress());
+	}
+
+	return false;
 }
 
 #endif
