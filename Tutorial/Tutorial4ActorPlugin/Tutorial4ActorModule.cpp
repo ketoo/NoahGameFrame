@@ -1,10 +1,11 @@
 #include "Tutorial4ActorModule.h"
 #include "NFComm/NFCore/NFTimer.h"
+#include <thread>
 
 bool HelloWorld4ActorModule::Init()
 {
     //初始化
-    std::cout << "Hello, world4, Init ThreadID: " << GetCurrentThreadId() << std::endl;
+    std::cout << "Hello, world4, Init ThreadID: " << std::this_thread::get_id() << std::endl;
 
     return true;
 }
@@ -12,7 +13,7 @@ bool HelloWorld4ActorModule::Init()
 int HelloWorld4ActorModule::OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg)
 {
     //事件回调函数
-    std::cout << "Begin OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg << " ThreadID: " << GetCurrentThreadId() << std::endl;
+    std::cout << "Begin OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg << " ThreadID: " << std::this_thread::get_id() << std::endl;
 
 	arg += "  event test ok";
 
@@ -22,7 +23,7 @@ int HelloWorld4ActorModule::OnASyncEvent(const NFIDENTID& self, const int event,
 int HelloWorld4ActorModule::OnSyncEvent(const NFIDENTID& self, const int event, const std::string& arg)
 {
 	//事件回调函数
-	std::cout << "End OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg << " ThreadID: " << GetCurrentThreadId() << std::endl;
+	std::cout << "End OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg << " ThreadID: " << std::this_thread::get_id() << std::endl;
 
 	return 0;
 }
@@ -31,7 +32,7 @@ bool HelloWorld4ActorModule::AfterInit()
 {
 
     //初始化完毕
-    std::cout << "Hello, world4, AfterInit, ThreadID: " << GetCurrentThreadId() << std::endl;
+    std::cout << "Hello, world4, AfterInit, ThreadID: " << std::this_thread::get_id() << std::endl;
 
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
@@ -46,7 +47,7 @@ bool HelloWorld4ActorModule::AfterInit()
 
 	}
 
-	std::cout << "End Test Actor, ThreadID: " << GetCurrentThreadId() << std::endl;
+	std::cout << "End Test Actor, ThreadID: " << std::this_thread::get_id() << std::endl;
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
