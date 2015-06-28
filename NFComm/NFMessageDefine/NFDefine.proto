@@ -165,17 +165,20 @@ enum EGameMsgID
 	EGMI_REQ_EXIT_PVP                           = 261; // 申请/通知某角色离开PVP队列
 	EGMT_ACK_START_PVP                          = 262; // 通知开始PVP
 	
-	EGMI_REQ_CREATE_GUILD                       = 270; // 申请创建公会
-	EGMI_REQ_JOIN_GUILD                         = 271; // 申请加入公会
-	EGMI_REQ_LEAVE_GUILD                        = 272; // 申请离开公会
-	EGMI_REQ_OPR_GUILD                        	= 273; // 申请成员操作
-	
-	EGMI_ACK_CREATE_GUILD						= 280; // 创建公会成功
-	EGMI_ACK_JOIN_GUILD							= 281; // 加入公会成功
-	EGMI_ACK_LEAVE_GUILD						= 282; // 离开公会成功
-	
 	EGMI_ACK_ONLINE_NOTIFY						= 290; // 玩家上线通知
 	EGMI_ACK_OFFLINE_NOTIFY						= 291; // 玩家下线通知
+	
+	EGMI_REQ_CREATE_GUILD                       = 300; // 申请创建公会
+	EGMI_ACK_CREATE_GUILD						= 301; // 创建公会结果
+	EGMI_REQ_JOIN_GUILD                         = 302; // 申请加入公会
+	EGMI_ACK_JOIN_GUILD							= 303; // 加入公会结果
+	EGMI_REQ_LEAVE_GUILD                        = 304; // 申请离开公会
+	EGMI_ACK_LEAVE_GUILD						= 305; // 离开公会结果 
+	EGMI_REQ_OPR_GUILD                        	= 306; // 申请成员操作 
+	EGMI_ACK_OPR_GUILD                        	= 307; // 成员操作结果
+	EGMI_REQ_SEARCH_GUILD                       = 308; // 申请搜索公会
+	EGMI_ACK_SEARCH_GUILD                       = 309; // 返回搜索公会	
+	
 	
 	
 	/////////////////////GM MSG/////////////////////////////////////
