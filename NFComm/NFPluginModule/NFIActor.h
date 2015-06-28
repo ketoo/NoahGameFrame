@@ -73,7 +73,7 @@ public:
     virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from){};
 	NFIActorManager* GetActorManager(){return m_pActorManager;}
 
-	virtual void RegisterActorComponent(const std::string& strModuleName, NFIComponent* pComponent) = 0;
+	virtual void RegisterActorComponent(NF_SHARE_PTR<NFIComponent> pComponent) = 0;
 
 private:
     virtual void Handler(const NFIActorMessage& message, const Theron::Address from)
