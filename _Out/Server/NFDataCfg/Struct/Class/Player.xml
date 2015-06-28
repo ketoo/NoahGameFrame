@@ -77,7 +77,7 @@
     <Property Id="LoadPropertyFinish" Type="int" Public="1" Private="1" Save="1" View="" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
     <Property Id="GameID" Type="int" Public="0" Private="1" Save="1" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="登陆的服ID" />
     <Property Id="GateID" Type="int" Public="0" Private="1" Save="1" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="登陆的网关ID" />
-    <Property Id="GUILD_ID" Type="object" Public="1" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="公会ID" />
+    <Property Id="GuildID" Type="object" Public="1" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="公会ID" />
   </Propertys>
   <Records>
     <Record Id="PlayerViewItem" Row="11" Col="4" Public="0" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="">
