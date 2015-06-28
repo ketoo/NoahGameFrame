@@ -57,6 +57,9 @@ class ReqCompeleteTask;
 class ReqAckJoinActivity;
 class ReqCreateGuild;
 class AckCreateGuild;
+class ReqSearchGuild;
+class AckSearchGuild;
+class AckSearchGuild_SearchGuildObject;
 class ReqJoinGuild;
 class AckJoinGuild;
 class ReqAckLeaveGuild;
@@ -2375,6 +2378,334 @@ class AckCreateGuild : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static AckCreateGuild* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqSearchGuild : public ::google::protobuf::Message {
+ public:
+  ReqSearchGuild();
+  virtual ~ReqSearchGuild();
+
+  ReqSearchGuild(const ReqSearchGuild& from);
+
+  inline ReqSearchGuild& operator=(const ReqSearchGuild& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqSearchGuild& default_instance();
+
+  void Swap(ReqSearchGuild* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqSearchGuild* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqSearchGuild& from);
+  void MergeFrom(const ReqSearchGuild& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string guild_name = 1;
+  inline bool has_guild_name() const;
+  inline void clear_guild_name();
+  static const int kGuildNameFieldNumber = 1;
+  inline const ::std::string& guild_name() const;
+  inline void set_guild_name(const ::std::string& value);
+  inline void set_guild_name(const char* value);
+  inline void set_guild_name(const char* value, size_t size);
+  inline ::std::string* mutable_guild_name();
+  inline ::std::string* release_guild_name();
+  inline void set_allocated_guild_name(::std::string* guild_name);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqSearchGuild)
+ private:
+  inline void set_has_guild_name();
+  inline void clear_has_guild_name();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* guild_name_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqSearchGuild* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AckSearchGuild_SearchGuildObject : public ::google::protobuf::Message {
+ public:
+  AckSearchGuild_SearchGuildObject();
+  virtual ~AckSearchGuild_SearchGuildObject();
+
+  AckSearchGuild_SearchGuildObject(const AckSearchGuild_SearchGuildObject& from);
+
+  inline AckSearchGuild_SearchGuildObject& operator=(const AckSearchGuild_SearchGuildObject& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckSearchGuild_SearchGuildObject& default_instance();
+
+  void Swap(AckSearchGuild_SearchGuildObject* other);
+
+  // implements Message ----------------------------------------------
+
+  AckSearchGuild_SearchGuildObject* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckSearchGuild_SearchGuildObject& from);
+  void MergeFrom(const AckSearchGuild_SearchGuildObject& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident guild_ID = 1;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIDFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // required string guild_name = 2;
+  inline bool has_guild_name() const;
+  inline void clear_guild_name();
+  static const int kGuildNameFieldNumber = 2;
+  inline const ::std::string& guild_name() const;
+  inline void set_guild_name(const ::std::string& value);
+  inline void set_guild_name(const char* value);
+  inline void set_guild_name(const char* value, size_t size);
+  inline ::std::string* mutable_guild_name();
+  inline ::std::string* release_guild_name();
+  inline void set_allocated_guild_name(::std::string* guild_name);
+
+  // required string guild_icon = 3;
+  inline bool has_guild_icon() const;
+  inline void clear_guild_icon();
+  static const int kGuildIconFieldNumber = 3;
+  inline const ::std::string& guild_icon() const;
+  inline void set_guild_icon(const ::std::string& value);
+  inline void set_guild_icon(const char* value);
+  inline void set_guild_icon(const char* value, size_t size);
+  inline ::std::string* mutable_guild_icon();
+  inline ::std::string* release_guild_icon();
+  inline void set_allocated_guild_icon(::std::string* guild_icon);
+
+  // required int32 guild_member_count = 4;
+  inline bool has_guild_member_count() const;
+  inline void clear_guild_member_count();
+  static const int kGuildMemberCountFieldNumber = 4;
+  inline ::google::protobuf::int32 guild_member_count() const;
+  inline void set_guild_member_count(::google::protobuf::int32 value);
+
+  // required int32 guild_member_max_count = 5;
+  inline bool has_guild_member_max_count() const;
+  inline void clear_guild_member_max_count();
+  static const int kGuildMemberMaxCountFieldNumber = 5;
+  inline ::google::protobuf::int32 guild_member_max_count() const;
+  inline void set_guild_member_max_count(::google::protobuf::int32 value);
+
+  // required int32 guild_honor = 6;
+  inline bool has_guild_honor() const;
+  inline void clear_guild_honor();
+  static const int kGuildHonorFieldNumber = 6;
+  inline ::google::protobuf::int32 guild_honor() const;
+  inline void set_guild_honor(::google::protobuf::int32 value);
+
+  // required int32 guild_rank = 7;
+  inline bool has_guild_rank() const;
+  inline void clear_guild_rank();
+  static const int kGuildRankFieldNumber = 7;
+  inline ::google::protobuf::int32 guild_rank() const;
+  inline void set_guild_rank(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckSearchGuild.SearchGuildObject)
+ private:
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
+  inline void set_has_guild_name();
+  inline void clear_has_guild_name();
+  inline void set_has_guild_icon();
+  inline void clear_has_guild_icon();
+  inline void set_has_guild_member_count();
+  inline void clear_has_guild_member_count();
+  inline void set_has_guild_member_max_count();
+  inline void clear_has_guild_member_max_count();
+  inline void set_has_guild_honor();
+  inline void clear_has_guild_honor();
+  inline void set_has_guild_rank();
+  inline void clear_has_guild_rank();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_id_;
+  ::std::string* guild_name_;
+  ::std::string* guild_icon_;
+  ::google::protobuf::int32 guild_member_count_;
+  ::google::protobuf::int32 guild_member_max_count_;
+  ::google::protobuf::int32 guild_honor_;
+  ::google::protobuf::int32 guild_rank_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckSearchGuild_SearchGuildObject* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AckSearchGuild : public ::google::protobuf::Message {
+ public:
+  AckSearchGuild();
+  virtual ~AckSearchGuild();
+
+  AckSearchGuild(const AckSearchGuild& from);
+
+  inline AckSearchGuild& operator=(const AckSearchGuild& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckSearchGuild& default_instance();
+
+  void Swap(AckSearchGuild* other);
+
+  // implements Message ----------------------------------------------
+
+  AckSearchGuild* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckSearchGuild& from);
+  void MergeFrom(const AckSearchGuild& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef AckSearchGuild_SearchGuildObject SearchGuildObject;
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFMsg.AckSearchGuild.SearchGuildObject guild_list = 1;
+  inline int guild_list_size() const;
+  inline void clear_guild_list();
+  static const int kGuildListFieldNumber = 1;
+  inline const ::NFMsg::AckSearchGuild_SearchGuildObject& guild_list(int index) const;
+  inline ::NFMsg::AckSearchGuild_SearchGuildObject* mutable_guild_list(int index);
+  inline ::NFMsg::AckSearchGuild_SearchGuildObject* add_guild_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::AckSearchGuild_SearchGuildObject >&
+      guild_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::AckSearchGuild_SearchGuildObject >*
+      mutable_guild_list();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckSearchGuild)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::AckSearchGuild_SearchGuildObject > guild_list_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckSearchGuild* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -5155,6 +5486,379 @@ inline void AckCreateGuild::set_allocated_guild_name(::std::string* guild_name) 
     clear_has_guild_name();
     guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
+}
+
+// -------------------------------------------------------------------
+
+// ReqSearchGuild
+
+// required string guild_name = 1;
+inline bool ReqSearchGuild::has_guild_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqSearchGuild::set_has_guild_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqSearchGuild::clear_has_guild_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqSearchGuild::clear_guild_name() {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    guild_name_->clear();
+  }
+  clear_has_guild_name();
+}
+inline const ::std::string& ReqSearchGuild::guild_name() const {
+  return *guild_name_;
+}
+inline void ReqSearchGuild::set_guild_name(const ::std::string& value) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void ReqSearchGuild::set_guild_name(const char* value) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void ReqSearchGuild::set_guild_name(const char* value, size_t size) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqSearchGuild::mutable_guild_name() {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  return guild_name_;
+}
+inline ::std::string* ReqSearchGuild::release_guild_name() {
+  clear_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = guild_name_;
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqSearchGuild::set_allocated_guild_name(::std::string* guild_name) {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete guild_name_;
+  }
+  if (guild_name) {
+    set_has_guild_name();
+    guild_name_ = guild_name;
+  } else {
+    clear_has_guild_name();
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// AckSearchGuild_SearchGuildObject
+
+// required .NFMsg.Ident guild_ID = 1;
+inline bool AckSearchGuild_SearchGuildObject::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AckSearchGuild_SearchGuildObject::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& AckSearchGuild_SearchGuildObject::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* AckSearchGuild_SearchGuildObject::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* AckSearchGuild_SearchGuildObject::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void AckSearchGuild_SearchGuildObject::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// required string guild_name = 2;
+inline bool AckSearchGuild_SearchGuildObject::has_guild_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckSearchGuild_SearchGuildObject::set_has_guild_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_has_guild_name() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_guild_name() {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    guild_name_->clear();
+  }
+  clear_has_guild_name();
+}
+inline const ::std::string& AckSearchGuild_SearchGuildObject::guild_name() const {
+  return *guild_name_;
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_name(const ::std::string& value) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_name(const char* value) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_name(const char* value, size_t size) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AckSearchGuild_SearchGuildObject::mutable_guild_name() {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  return guild_name_;
+}
+inline ::std::string* AckSearchGuild_SearchGuildObject::release_guild_name() {
+  clear_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = guild_name_;
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AckSearchGuild_SearchGuildObject::set_allocated_guild_name(::std::string* guild_name) {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete guild_name_;
+  }
+  if (guild_name) {
+    set_has_guild_name();
+    guild_name_ = guild_name;
+  } else {
+    clear_has_guild_name();
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string guild_icon = 3;
+inline bool AckSearchGuild_SearchGuildObject::has_guild_icon() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AckSearchGuild_SearchGuildObject::set_has_guild_icon() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_has_guild_icon() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_guild_icon() {
+  if (guild_icon_ != &::google::protobuf::internal::kEmptyString) {
+    guild_icon_->clear();
+  }
+  clear_has_guild_icon();
+}
+inline const ::std::string& AckSearchGuild_SearchGuildObject::guild_icon() const {
+  return *guild_icon_;
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_icon(const ::std::string& value) {
+  set_has_guild_icon();
+  if (guild_icon_ == &::google::protobuf::internal::kEmptyString) {
+    guild_icon_ = new ::std::string;
+  }
+  guild_icon_->assign(value);
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_icon(const char* value) {
+  set_has_guild_icon();
+  if (guild_icon_ == &::google::protobuf::internal::kEmptyString) {
+    guild_icon_ = new ::std::string;
+  }
+  guild_icon_->assign(value);
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_icon(const char* value, size_t size) {
+  set_has_guild_icon();
+  if (guild_icon_ == &::google::protobuf::internal::kEmptyString) {
+    guild_icon_ = new ::std::string;
+  }
+  guild_icon_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AckSearchGuild_SearchGuildObject::mutable_guild_icon() {
+  set_has_guild_icon();
+  if (guild_icon_ == &::google::protobuf::internal::kEmptyString) {
+    guild_icon_ = new ::std::string;
+  }
+  return guild_icon_;
+}
+inline ::std::string* AckSearchGuild_SearchGuildObject::release_guild_icon() {
+  clear_has_guild_icon();
+  if (guild_icon_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = guild_icon_;
+    guild_icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AckSearchGuild_SearchGuildObject::set_allocated_guild_icon(::std::string* guild_icon) {
+  if (guild_icon_ != &::google::protobuf::internal::kEmptyString) {
+    delete guild_icon_;
+  }
+  if (guild_icon) {
+    set_has_guild_icon();
+    guild_icon_ = guild_icon;
+  } else {
+    clear_has_guild_icon();
+    guild_icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required int32 guild_member_count = 4;
+inline bool AckSearchGuild_SearchGuildObject::has_guild_member_count() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void AckSearchGuild_SearchGuildObject::set_has_guild_member_count() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_has_guild_member_count() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_guild_member_count() {
+  guild_member_count_ = 0;
+  clear_has_guild_member_count();
+}
+inline ::google::protobuf::int32 AckSearchGuild_SearchGuildObject::guild_member_count() const {
+  return guild_member_count_;
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_member_count(::google::protobuf::int32 value) {
+  set_has_guild_member_count();
+  guild_member_count_ = value;
+}
+
+// required int32 guild_member_max_count = 5;
+inline bool AckSearchGuild_SearchGuildObject::has_guild_member_max_count() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void AckSearchGuild_SearchGuildObject::set_has_guild_member_max_count() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_has_guild_member_max_count() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_guild_member_max_count() {
+  guild_member_max_count_ = 0;
+  clear_has_guild_member_max_count();
+}
+inline ::google::protobuf::int32 AckSearchGuild_SearchGuildObject::guild_member_max_count() const {
+  return guild_member_max_count_;
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_member_max_count(::google::protobuf::int32 value) {
+  set_has_guild_member_max_count();
+  guild_member_max_count_ = value;
+}
+
+// required int32 guild_honor = 6;
+inline bool AckSearchGuild_SearchGuildObject::has_guild_honor() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void AckSearchGuild_SearchGuildObject::set_has_guild_honor() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_has_guild_honor() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_guild_honor() {
+  guild_honor_ = 0;
+  clear_has_guild_honor();
+}
+inline ::google::protobuf::int32 AckSearchGuild_SearchGuildObject::guild_honor() const {
+  return guild_honor_;
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_honor(::google::protobuf::int32 value) {
+  set_has_guild_honor();
+  guild_honor_ = value;
+}
+
+// required int32 guild_rank = 7;
+inline bool AckSearchGuild_SearchGuildObject::has_guild_rank() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void AckSearchGuild_SearchGuildObject::set_has_guild_rank() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_has_guild_rank() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_guild_rank() {
+  guild_rank_ = 0;
+  clear_has_guild_rank();
+}
+inline ::google::protobuf::int32 AckSearchGuild_SearchGuildObject::guild_rank() const {
+  return guild_rank_;
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_rank(::google::protobuf::int32 value) {
+  set_has_guild_rank();
+  guild_rank_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// AckSearchGuild
+
+// repeated .NFMsg.AckSearchGuild.SearchGuildObject guild_list = 1;
+inline int AckSearchGuild::guild_list_size() const {
+  return guild_list_.size();
+}
+inline void AckSearchGuild::clear_guild_list() {
+  guild_list_.Clear();
+}
+inline const ::NFMsg::AckSearchGuild_SearchGuildObject& AckSearchGuild::guild_list(int index) const {
+  return guild_list_.Get(index);
+}
+inline ::NFMsg::AckSearchGuild_SearchGuildObject* AckSearchGuild::mutable_guild_list(int index) {
+  return guild_list_.Mutable(index);
+}
+inline ::NFMsg::AckSearchGuild_SearchGuildObject* AckSearchGuild::add_guild_list() {
+  return guild_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::AckSearchGuild_SearchGuildObject >&
+AckSearchGuild::guild_list() const {
+  return guild_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::AckSearchGuild_SearchGuildObject >*
+AckSearchGuild::mutable_guild_list() {
+  return &guild_list_;
 }
 
 // -------------------------------------------------------------------
