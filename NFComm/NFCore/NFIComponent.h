@@ -18,9 +18,9 @@ public:
     virtual ~NFIComponent() {}
     virtual bool SetEnable(const bool bEnable) = 0;
 
-    virtual bool Enable() = 0;
+	virtual bool Enable() = 0;
 
-    virtual NFIDENTID Self() = 0;
+	virtual NFIDENTID Self() = 0;
 
     virtual const std::string& ComponentName() = 0;
     virtual const std::string& LanguageName() = 0;
