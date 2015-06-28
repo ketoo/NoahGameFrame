@@ -28,15 +28,19 @@ public:
 
 	}
 
+	~NFCActor()
+	{
+
+		m_pComponent->BeforeShut();
+		m_pComponent->Shut();
+	}
+
 	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
-	virtual void RegisterActorComponent(const std::string& strModuleName, NFIComponent* pComponent);
+	virtual void RegisterActorComponent(NF_SHARE_PTR<NFIComponent> pComponent);
 
 
 protected:
-	//NFIActorModule*
-	NFList<NFIComponent*> mxActorComponent;
-
-
+	NF_SHARE_PTR<NFIComponent> m_pComponent;
 };
 #endif
 
