@@ -481,7 +481,7 @@ bool NFCWorldGuildDataModule::GetGuild( const NFIDENTID& self, NFIDENTID& xGuild
 {
     std::vector<std::string> vFieldVec;
     std::vector<std::string> vValueVec;
-    vFieldVec.push_back("GUILD_ID");
+    vFieldVec.push_back("GuildID");
 
     if (!m_pClusterSQLModule->Query(self.ToString(), vFieldVec, vValueVec))
     {
@@ -496,7 +496,7 @@ bool NFCWorldGuildDataModule::SetGuild( const NFIDENTID& self, const NFIDENTID& 
 {
     std::vector<std::string> vFieldVec;
     std::vector<std::string> vValueVec;
-    vFieldVec.push_back("GUILD_ID");
+    vFieldVec.push_back("GuildID");
     vValueVec.push_back(xGuild.ToString());
 
     if (!m_pClusterSQLModule->Updata(self.ToString(), vFieldVec, vValueVec))
