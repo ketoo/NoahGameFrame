@@ -69,6 +69,25 @@ public:
 		return AddAsyncEventCallBack(objectID, nEventID, functorPtr_begin, functorPtr_end);
 	}
 
+    template<typename DerivedType , typename BaseType> class TIsDerived
+    {
+    public:
+        static int AnyFunction(BaseType* base)
+        {
+            return 1;
+        }
+
+        static  char AnyFunction(void* t2)
+        {
+            return 0;
+        }
+
+        enum 
+        {
+            Result = ( sizeof(int) == sizeof(AnyFunction( (DerivedType*)NULL) ) ), 
+        };
+    };
+
 	template<typename BaseTypeComponent, typename BaseType>
 	bool AddActorEventCallBack(const NFIDENTID& objectID, const int nEventID, BaseTypeComponent* pBaseComponent, int (BaseTypeComponent::*handler)(const NFIDENTID&, const int, std::string&), BaseType* pBase, int (BaseType::*handler_end)(const NFIDENTID&, const int, const std::string&))
 	{
@@ -77,6 +96,19 @@ public:
 
 		EVENT_ASYNC_PROCESS_END_FUNCTOR functor_end = boost::bind(handler_end, pBase, _1, _2, _3);
 		EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end(new EVENT_ASYNC_PROCESS_END_FUNCTOR(functor_end));
+
+        if (!objectID.IsNull())
+        {
+            //only null object have actor event
+            return false;
+        }
+
+        
+        if (!TIsDerived<BaseTypeComponent, NFIComponent>::Result)
+        {
+            //BaseTypeComponent must inherit from NFIComponent;
+            return false;
+        }
 
 		return AddActorEventCallBack(objectID, nEventID, NF_SHARE_PTR<NFIComponent>((NFIComponent*)pBaseComponent), functorPtr_begin, functorPtr_end);
 	}

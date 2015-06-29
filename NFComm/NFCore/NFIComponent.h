@@ -16,14 +16,29 @@ class NFIComponent : public NFILogicModule
 {
 public:
     virtual ~NFIComponent() {}
-    virtual bool SetEnable(const bool bEnable) = 0;
+    virtual bool SetEnable(const bool bEnable)
+    {
+        return false;
+    }
 
-	virtual bool Enable() = 0;
+	virtual bool Enable()
+    {
+        return false;
+    }
 
-	virtual NFIDENTID Self() = 0;
+	virtual NFIDENTID Self()
+    {
+        return NFIDENTID();
+    }
 
-    virtual const std::string& ComponentName() = 0;
-    virtual const std::string& LanguageName() = 0;
+    virtual const std::string& ComponentName()
+    {
+        return NULL_STR;
+    }
+    virtual const std::string& LanguageName()
+    {
+        return NULL_STR;
+    }
 private:
 };
 
