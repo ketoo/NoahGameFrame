@@ -13,22 +13,18 @@
 NFCActorManager::NFCActorManager()
 {
 	srand((unsigned)time(NULL));
-#ifdef NF_USE_ACTOR
-	m_pFramework = new Theron::Framework(NF_ACTOR_THREAD_COUNT);
-#endif
+
+    m_pFramework = new Theron::Framework(NF_ACTOR_THREAD_COUNT);
 	m_pPluginManager = new NFCPluginManager(this);
 }
 
 bool NFCActorManager::Init()
 {
-#ifdef NF_USE_ACTOR
-
 	m_pMainActor = new NFCActor(*m_pFramework, this);
 	for (int i= 0; i < NF_ACTOR_THREAD_COUNT*2; ++i)
 	{
 		mvActorList.push_back(new NFCActor(*m_pFramework, this));
 	}
-#endif
 
 	m_pPluginManager->Init();
 
@@ -46,16 +42,11 @@ bool NFCActorManager::CheckConfig()
 {
 	m_pPluginManager->CheckConfig();
 
-#ifdef NF_USE_ACTOR
-
-#endif
-
     return true;
 }
 
 bool NFCActorManager::BeforeShut()
 {
-#ifdef NF_USE_ACTOR
 	delete m_pMainActor;
 	m_pMainActor = NULL;
 
@@ -66,7 +57,6 @@ bool NFCActorManager::BeforeShut()
 	}
 
 	mvActorList.clear();
-#endif
 
 	m_pPluginManager->BeforeShut();
 
@@ -75,10 +65,8 @@ bool NFCActorManager::BeforeShut()
 
 bool NFCActorManager::Shut()
 {
-#ifdef NF_USE_ACTOR
     delete m_pFramework;
     m_pFramework = NULL;
-#endif
 
 	m_pPluginManager->Shut();
 
@@ -88,15 +76,12 @@ bool NFCActorManager::Shut()
 bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTime )
 {
 	m_pPluginManager->Execute(fLasFrametime, fStartedTime);
-
-#ifdef NF_USE_ACTOR
+    
 	//m_pFramework->Execute();
-#endif
 
 	return true;
 }
 
-#ifdef NF_USE_ACTOR
 int NFCActorManager::OnRequireActor(const NF_SHARE_PTR<NFIComponent> pComponent)
 {
 	//¶Ñactor
@@ -145,8 +130,6 @@ bool NFCActorManager::OnRequireCPUCycle( const int nActorIndex, const NFIDENTID&
 
 	return false;
 }
-
-#endif
 
 NFIPluginManager* NFCActorManager::GetPluginManager()
 {

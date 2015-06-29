@@ -14,8 +14,6 @@
 #include "NFComm/NFCore/NFSingleton.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
-#ifdef NF_USE_ACTOR
-
 #include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFCore/NFIComponent.h"
 
@@ -42,6 +40,4 @@ public:
 protected:
 	NF_SHARE_PTR<NFIComponent> m_pComponent;
 };
-#endif
-
 #endif
