@@ -54,22 +54,25 @@ bool NFCLoginNet_ServerModule::AfterInit()
 	m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_CLIENT_LOGIN_RESULTS, this, &NFCLoginNet_ServerModule::OnLoginResultsEvent);
 	m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER_RESULTS, this, &NFCLoginNet_ServerModule::OnSelectWorldResultsEvent);
 
-	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("LoginServer");
+	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
 	if (xLogicClass.get())
 	{
-
 		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
 		std::string strConfigName; 
-		if (xNameList.Get(0, strConfigName))
+		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
 		{
-			const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
-			const int nID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
-			const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
-			const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
+			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
+			if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN)
+			{
+				const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
+				const int nID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+				const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
+				const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
 
-			m_pUUIDModule->SetIdentID(nID);
+				m_pUUIDModule->SetIdentID(nID);
 
-			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCLoginNet_ServerModule::OnReciveClientPack, &NFCLoginNet_ServerModule::OnSocketClientEvent, nMaxConnect, nPort, nCpus);		
+				Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCLoginNet_ServerModule::OnReciveClientPack, &NFCLoginNet_ServerModule::OnSocketClientEvent, nMaxConnect, nPort, nCpus);		
+			}
 		}
 	}
 	
@@ -235,18 +238,22 @@ int NFCLoginNet_ServerModule::OnSelectWorldProcess( const NFIPacket& msg )
 	}
 
 	//需要额外自己做ID管理
-	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("LoginServer");
+	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
 	if (xLogicClass.get())
 	{
 		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
 		std::string strConfigName;
-		if (xNameList.Get(0, strConfigName))
+		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
 		{
-			const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
+			if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN)
+			{
+				const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
 
-			NFCDataList val;
-			val << xMsg.world_id() << pNetObject->GetClientID() << nServerID << pNetObject->GetAccount();
-			m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, val);
+				NFCDataList val;
+				val << xMsg.world_id() << pNetObject->GetClientID() << nServerID << pNetObject->GetAccount();
+				m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, val);
+			}
 		}
 	}
 
