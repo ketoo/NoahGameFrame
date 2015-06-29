@@ -1,4 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<XML>
-  <Object ID="GameServer_1" ServerID="000104001" Name="GameServer_1" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="14001" />
-</XML>
