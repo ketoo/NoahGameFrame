@@ -14,8 +14,8 @@
 #include <list>
 #include <algorithm>
 #include <thread>
-#include <mutex>
 #include "NFComm/NFPluginModule/NFPlatform.h"
+#include "Theron/Detail/Threading/SpinLock.h"
 
 template<typename T>
 class NFQueue
@@ -31,11 +31,11 @@ public:
 
     bool Push(const T& object)
 	{
-		mxQueueMutex.lock();
+		mxQueueMutex.Lock();
 
 		mList.push_back(object);
 
-		mxQueueMutex.unlock();
+		mxQueueMutex.Unlock();
 
 
 		return true;
@@ -43,10 +43,10 @@ public:
 
     bool Pop(T& object)
 	{
-		mxQueueMutex.lock();
+		mxQueueMutex.Lock();
 		if (mList.empty())
 		{
-			mxQueueMutex.unlock();
+			mxQueueMutex.Unlock();
 
 			return false;
 		}
@@ -54,14 +54,14 @@ public:
 		object = mList.front();
 		mList.pop_front();
 
-		mxQueueMutex.unlock();
+		mxQueueMutex.Unlock();
 
 		return true;
 	}
 
 private:
     std::list<T> mList;
-    std::mutex mxQueueMutex;
+    mutable Theron::Detail::SpinLock mxQueueMutex;                 ///< Thread synchronization object protecting the mailbox.
 };
 
 #endif
