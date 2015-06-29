@@ -70,15 +70,7 @@ bool NFCLogModule::Init()
 
 bool NFCLogModule::Shut()
 {
-#ifdef NF_USE_ACTOR
-    //NFIActor* pActor = (NFIActor*)(pPluginManager);
-    //if (pActor->GetActorID() == NFIActorManager::EACTOR_MAIN)
-    {
-        el::Helpers::uninstallPreRollOutCallback();
-    }
-#else
     el::Helpers::uninstallPreRollOutCallback();
-#endif
 
     return true;
 }
@@ -109,27 +101,6 @@ bool NFCLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
     va_start(args, format);
     vsnprintf(szBuffer, sizeof(szBuffer) - 1, format, args);
     va_end(args);
-
-#ifdef NF_USE_ACTOR
-// #ifdef NF_DYNAMIC_PLUGIN
-// 	NFIActor* pActor = (NFIActor*)(pPluginManager);
-// 	if (!pActor->GetActorID() == NFIActorManager::EACTOR_MAIN)
-// 	{
-// 		NFIActorMessage message;
-// 		message.eType = NFIActorMessage::EACTOR_LOG_MSG;
-// 		message.data = szBuffer;
-// 
-// 		const Theron::Address address = pActor->GetActorManager()->GetAddress(NFIActorManager::EACTOR_MAIN);
-// 		if (address != Theron::Address::Null())
-// 		{
-// 			pActor->GetFramework().Send(message, pActor->GetAddress(), address);
-// 		}
-// 
-// 		return true;
-// 	}
-// #endif
-#endif
-
 
     switch (nll)
     {
