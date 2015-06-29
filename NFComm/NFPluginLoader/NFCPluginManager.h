@@ -61,11 +61,9 @@ public:
     //  virtual void OnReloadModule( const std::string& strModuleName, NFILogicModule* pModule );
     //
     //  virtual void ReloadPlugin( const std::string& pluginName );
-#ifdef NF_USE_ACTOR
-	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
 
+	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
 	virtual NFIActorManager* GetActorManager(){ return m_pActorManager;}
-#endif
 
 protected:
 
@@ -74,17 +72,13 @@ protected:
 
 protected:
 
-#ifdef NF_USE_ACTOR
+
 	virtual bool ExecuteEvent();
-#endif
 
 private:
     bool mbOnReloadPlugin;
 	NFIActorManager* m_pActorManager;
-
-#ifdef NF_USE_ACTOR
 	NFQueue<NFIActorMessage> mxQueue;
-#endif
 
 	typedef std::map<std::string, bool> PluginNameMap;
 	typedef std::map<std::string, NFCDynLib*> PluginLibMap;
