@@ -32,6 +32,7 @@ public:
     virtual bool BeforeShut();
     virtual bool Shut();
 
+    virtual int OnSyncEvent(const NFIDENTID& self, const int event, const std::string& arg);
 protected:
     unsigned long mLastTime;
 protected:
