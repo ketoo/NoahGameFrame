@@ -32,7 +32,7 @@ bool HelloWorld4ActorModule::AfterInit()
 {
 
     //³õÊ¼»¯Íê±Ï
-    std::cout << "Hello, world4, AfterInit, ThreadID: " << GetCurrentThreadId() << std::endl;
+    std::cout << "Hello, world4, AfterInit, ThreadID: " << std::this_thread::get_id() << std::endl;
 
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
