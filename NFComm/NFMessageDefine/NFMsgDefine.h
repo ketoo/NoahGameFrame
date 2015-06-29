@@ -19,6 +19,7 @@
 #include "NFComm/NFCore/NFIRecordManager.h"
 #include "NFComm/NFCore/NFIPropertyManager.h"
 #include "NFComm/NFCore/NFList.h"
+#include "NFComm/Define/NFServer_def.h"
 
 // -------------------------------------------------------------------------
 #pragma pack(push,1)
