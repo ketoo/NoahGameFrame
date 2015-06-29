@@ -1,5 +1,10 @@
 #include "HelloWorld5Module.h"
 #include "NFComm/NFCore/NFTimer.h"
+#include <thread>
+#include "NFComm/NFCore/NFIComponent.h"
+#include "NFCTestComponent.h"
+
+
 
 bool HelloWorld5Module::Init()
 {
@@ -12,25 +17,36 @@ bool HelloWorld5Module::Init()
 bool HelloWorld5Module::AfterInit()
 {
     //初始化完毕
-    std::cout << "Hello, world5, AfterInit" << std::endl;
+    std::cout << "Hello, world5, AfterInit, ThreadID: " << std::this_thread::get_id() << std::endl;
 
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-    m_pLuaScriptModule = dynamic_cast<NFILuaScriptModule*>(pPluginManager->FindModule("NFCLuaScriptModule"));
 
-    assert( NULL != m_pLuaScriptModule);
+    //////////////////////////////////////同步/////////////////////////////////////////////////////////////////////
+    NFCTestComponent* pComponent = NF_NEW NFCTestComponent();
+    pComponent->SetInitData("IniData");
 
-    m_pKernelModule->CreateContainer(1, "");
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(NFIDENTID(), 1, 0, "Player", "", NFCDataList());
-    if ( !pObject.get() )
-    {
-        return false;
-    }
+    m_pEventProcessModule->AddActorEventCallBack(NFIDENTID(), 555, pComponent, &NFCTestComponent::OnASyncEvent, this, &HelloWorld5Module::OnSyncEvent);
 
+    m_pEventProcessModule->DoEvent(NFIDENTID(), 555, NFCDataList() << "Event Param", false);
+
+
+    std::cout << "End Test Actor, ThreadID: " << std::this_thread::get_id() << std::endl;
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
    
 
     return true;
+}
+
+int HelloWorld5Module::OnSyncEvent(const NFIDENTID& self, const int event, const std::string& arg)
+{
+    //事件回调函数
+    std::cout << "End OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg << " ThreadID: " << std::this_thread::get_id() << std::endl;
+
+    return 0;
 }
 
 bool HelloWorld5Module::Execute( const float fLasFrametime, const float fStartedTime )
