@@ -15,29 +15,24 @@
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-class NFCTestComponent
-    : public NFIComponent
+class NFCTestComponent : public NFIComponent
 {
 public:
-    NFCTestComponent(NFIPluginManager* p)
+    NFCTestComponent()
     {
-        pPluginManager = p;
+
     }
+    virtual ~NFCTestComponent() {}
+
 
     virtual bool Init();
     virtual bool AfterInit();
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual int OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg);
+    virtual void SetInitData(const std::string& strInitData);
 
-    virtual bool BeforeShut();
-    virtual bool Shut();
-
-protected:
-	unsigned long mLastTime;
-protected:
-	NFIKernelModule* m_pKernelModule;
-	NFIEventProcessModule* m_pEventProcessModule;
-	NFIElementInfoModule* m_pElementInfoModule;
+private:
+    std::string mstrInitData;
 };
 
 #endif
