@@ -63,11 +63,8 @@ bool NFCSceneProcessModule::AfterInit()
 
             const std::string& strFilePath = m_pElementInfoModule->GetPropertyString( strData, "FilePath" );
             const int nActorID = m_pElementInfoModule->GetPropertyInt( strData, "ActorID" );
-#ifdef NF_USE_ACTOR
+
 			//if ( nActorID == nSelfActorID && nSceneID > 0 )
-#else
-			if ( nSceneID > 0 )
-#endif
             {
                 LoadInitFileResource( nSceneID );
 

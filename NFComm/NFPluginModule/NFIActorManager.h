@@ -49,11 +49,8 @@ struct NFClassAsyncEventList
 class NFIActorManager : public NFILogicModule
 {
 public:
-#ifdef NF_USE_ACTOR
 	virtual int OnRequireActor(const NF_SHARE_PTR<NFIComponent> pComponent) = 0;
 	virtual bool OnRequireCPUCycle( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventList) = 0;
-
-#endif
 
 	virtual NFIPluginManager* GetPluginManager() = 0;
 

@@ -119,9 +119,7 @@ bool NFCPluginManager::Execute(const float fLasFrametime, const float fStartedTi
         bRet = bRet && tembRet;
     }
 
-#ifdef NF_USE_ACTOR
 	ExecuteEvent();
-#endif
 
     return bRet;
 }
@@ -350,7 +348,6 @@ bool NFCPluginManager::ReInitialize()
     return true;
 }
 
-#ifdef NF_USE_ACTOR
 
 void NFCPluginManager::HandlerEx( const NFIActorMessage& message, const Theron::Address from )
 {
@@ -377,5 +374,3 @@ bool NFCPluginManager::ExecuteEvent()
 
 	return true;
 }
-
-#endif
