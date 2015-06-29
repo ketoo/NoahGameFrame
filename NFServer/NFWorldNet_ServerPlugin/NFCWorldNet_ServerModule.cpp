@@ -43,22 +43,25 @@ bool NFCWorldNet_ServerModule::AfterInit()
     m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_SHOW_RECORD, this, &NFCWorldNet_ServerModule::OnShowRecordEvent);
     m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_SHOW_PROPERTY, this, &NFCWorldNet_ServerModule::OnShowPropertyEvent);
 
-	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("WorldServer");
+	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
 	if (xLogicClass.get())
 	{
 		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
 		std::string strConfigName; 
-		if (xNameList.Get(0, strConfigName))
+		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
 		{
-			const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
-			const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
-			const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
-			const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
-			const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
-			const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
+			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
+			if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD)
+			{
+				const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+				const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
+				const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
+				const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
+				const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
+				const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
 
-			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCWorldNet_ServerModule::OnRecivePack, &NFCWorldNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
-
+				Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCWorldNet_ServerModule::OnRecivePack, &NFCWorldNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
+			}
 		}
 	}
 
