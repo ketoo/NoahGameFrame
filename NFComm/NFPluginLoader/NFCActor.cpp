@@ -9,7 +9,6 @@
 #include "NFCActor.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-#ifdef NF_USE_ACTOR
 
 void NFCActor::HandlerEx( const NFIActorMessage& message, const Theron::Address from )
 {
@@ -24,5 +23,3 @@ void NFCActor::RegisterActorComponent( NF_SHARE_PTR<NFIComponent> pComponent )
 	m_pComponent->Init();
 	m_pComponent->AfterInit();
 }
-
-#endif
