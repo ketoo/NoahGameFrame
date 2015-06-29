@@ -8,10 +8,7 @@
 
 #include "NFCEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-
-#ifdef NF_USE_ACTOR
 #include "NFComm/NFPluginModule/NFIActorManager.h"
-#endif
 
 NFCEventProcessModule::NFCEventProcessModule(NFIPluginManager* p)
 {
@@ -170,8 +167,6 @@ bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventI
 	}
 	else
 	{
-		
-#ifdef NF_USE_ACTOR
 		//pPluginManager->GetActorID()
 		//处理之前，还得把所有的回调函数对象发给actor，以便他调用这些函数进行处理
 		//pEventInfo
@@ -187,8 +182,7 @@ bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventI
 			return false;
 		}
             
-        pPluginManager->GetActorManager()->OnRequireCPUCycle(pEventInfo->nActorID, objectID, nEventID, valueList.String(0), pEventInfo);		
-#endif
+        pPluginManager->GetActorManager()->OnRequireCPUCycle(pEventInfo->nActorID, objectID, nEventID, valueList.String(0), pEventInfo);	
 	}
 
     return true;
