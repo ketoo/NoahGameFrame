@@ -19,13 +19,11 @@ struct NFAsyncEventFunc
 {
 	NFAsyncEventFunc()
 	{
-		bActor = false;
-		nActorID = 0;
+		nActorID = -1;
 	}
 
 	EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR xBeginFuncptr;
 	EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR xEndFuncptr;
-	bool bActor;
 	int nActorID;
 };
 
@@ -53,7 +51,6 @@ class NFIActorManager : public NFILogicModule
 public:
 #ifdef NF_USE_ACTOR
 	virtual int OnRequireActor(const NF_SHARE_PTR<NFIComponent> pComponent) = 0;
-	virtual bool OnRequireCPUCycle( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventList) = 0;
 	virtual bool OnRequireCPUCycle( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventList) = 0;
 
 #endif

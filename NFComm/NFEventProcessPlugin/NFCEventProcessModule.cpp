@@ -186,16 +186,8 @@ bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventI
 		{
 			return false;
 		}
-
-		if (pEventInfo->bActor)
-		{
-			pPluginManager->GetActorManager()->OnRequireCPUCycle(pEventInfo->nActorID, objectID, nEventID, valueList.String(0), pEventInfo);
-		}
-		else
-		{
-			pPluginManager->GetActorManager()->OnRequireCPUCycle(objectID, nEventID, valueList.String(0), pEventInfo);
-		}
-		
+            
+        pPluginManager->GetActorManager()->OnRequireCPUCycle(pEventInfo->nActorID, objectID, nEventID, valueList.String(0), pEventInfo);		
 #endif
 	}
 
@@ -299,7 +291,6 @@ bool NFCEventProcessModule::AddActorEventCallBack( const NFIDENTID& objectID, co
 
 	pSyncEventInfo->xBeginFuncptr = cb;
 	pSyncEventInfo->xEndFuncptr = cb_end;
-	pSyncEventInfo->bActor = true;
 	pSyncEventInfo->nActorID = pPluginManager->GetActorManager()->OnRequireActor(pComponent);
 
 	return true;
