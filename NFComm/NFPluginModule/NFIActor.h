@@ -12,7 +12,6 @@
 #include <map>
 #include <string>
 
-#ifdef NF_USE_ACTOR
 #include "Theron/Receiver.h"
 #include "Theron/Actor.h"
 #include "Theron/Address.h"
@@ -107,7 +106,5 @@ protected:
     NFIActorManager* m_pActorManager;
 
 };
-
-#endif
 
 #endif
