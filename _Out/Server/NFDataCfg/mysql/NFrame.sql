@@ -62,13 +62,6 @@ CREATE TABLE `Equip` (
 
 
 
-CREATE TABLE `GameServer` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
 CREATE TABLE `Guild` (
 	`ID` varchar(128) NOT NULL,
 	PRIMARY KEY (`ID`)
@@ -106,20 +99,6 @@ CREATE TABLE `Item` (
 
 
 CREATE TABLE `Language` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `LoginServer` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `MasterServer` (
 	`ID` varchar(128) NOT NULL,
 	PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -232,14 +211,14 @@ ALTER TABLE `Player` ADD `TaskMonsterList` BLOB COMMENT '任务杀怪表';
 ALTER TABLE `Player` ADD `TaskList` BLOB COMMENT '任务表';
 
 
-CREATE TABLE `ProxyServer` (
+CREATE TABLE `Scene` (
 	`ID` varchar(128) NOT NULL,
 	PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
-CREATE TABLE `Scene` (
+CREATE TABLE `Server` (
 	`ID` varchar(128) NOT NULL,
 	PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -311,13 +290,6 @@ ALTER TABLE `StateFunction` ADD `EFT_FINISH` bigint(11) DEFAULT '0' COMMENT '';
 
 
 CREATE TABLE `Task` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `WorldServer` (
 	`ID` varchar(128) NOT NULL,
 	PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

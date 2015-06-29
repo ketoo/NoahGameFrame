@@ -1,4 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<XML>
-  <Object ID="LoginServer_1" ServerID="000106001" Name="LoginServer_1" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="16001" />
-</XML>
