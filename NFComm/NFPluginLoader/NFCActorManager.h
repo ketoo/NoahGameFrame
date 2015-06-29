@@ -46,8 +46,8 @@ public:
 
 #ifdef NF_USE_ACTOR
 	virtual int OnRequireActor(const NF_SHARE_PTR<NFIComponent> pComponent);
-	virtual bool OnRequireCPUCycle( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc);
 	virtual bool OnRequireCPUCycle( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc);
+    virtual NFIActor* GetActor(const int nActorIndex);
 #endif
 
 private:

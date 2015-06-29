@@ -97,27 +97,6 @@ bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTi
 }
 
 #ifdef NF_USE_ACTOR
-bool NFCActorManager::OnRequireCPUCycle( const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc)
-{
-	int nIndex = rand() % (NF_ACTOR_THREAD_COUNT*2);
-	if (nIndex > mvActorList.size() || nIndex < 0)
-	{
-		return false;
-	}
-
-	NFIActor* pActor = mvActorList[nIndex];
-
-	NFIActorMessage xMessage;
-
-	xMessage.eType = NFIActorMessage::EACTOR_EVENT_MSG;
-	xMessage.data = strArg;
-	xMessage.nSubMsgID = nEventID;
-	xMessage.self = objectID;
-	xMessage.xActorEventFunc = xActorEventFunc;
-
-	return m_pFramework->Send(xMessage, m_pMainActor->GetAddress(), pActor->GetAddress());
-}
-
 int NFCActorManager::OnRequireActor(const NF_SHARE_PTR<NFIComponent> pComponent)
 {
 	//¶Ñactor
@@ -130,21 +109,39 @@ int NFCActorManager::OnRequireActor(const NF_SHARE_PTR<NFIComponent> pComponent)
 	return pActor->GetAddress().AsInteger();
 }
 
+NFIActor* NFCActorManager::GetActor(const int nActorIndex)
+{
+    std::map<int, NF_SHARE_PTR<NFIActor>>::iterator it = mxActorMap.find(nActorIndex);
+    if (it != mxActorMap.end())
+    {
+        return it->second.get();
+    }
+
+    int nIndex = rand() % (NF_ACTOR_THREAD_COUNT*2);
+    if (nIndex > mvActorList.size() || nIndex < 0)
+    {
+        return NULL;
+    }
+
+    return  mvActorList[nIndex];
+}
+
 bool NFCActorManager::OnRequireCPUCycle( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventList)
 {
-	std::map<int, NF_SHARE_PTR<NFIActor>>::iterator it = mxActorMap.find(nActorIndex);
-	if (it != mxActorMap.end())
-	{
-		NFIActorMessage xMessage;
+	NFIActor* pActor = GetActor(nActorIndex);
 
-		xMessage.eType = NFIActorMessage::EACTOR_EVENT_MSG;
-		xMessage.data = strArg;
-		xMessage.nSubMsgID = nEventID;
-		xMessage.self = objectID;
-		xMessage.xActorEventFunc = xActorEventList;
+    if (pActor)
+    {
+        NFIActorMessage xMessage;
 
-		return m_pFramework->Send(xMessage, m_pMainActor->GetAddress(), it->second->GetAddress());
-	}
+        xMessage.eType = NFIActorMessage::EACTOR_EVENT_MSG;
+        xMessage.data = strArg;
+        xMessage.nSubMsgID = nEventID;
+        xMessage.self = objectID;
+        xMessage.xActorEventFunc = xActorEventList;
+
+        return m_pFramework->Send(xMessage, m_pMainActor->GetAddress(), pActor->GetAddress());
+    }
 
 	return false;
 }
