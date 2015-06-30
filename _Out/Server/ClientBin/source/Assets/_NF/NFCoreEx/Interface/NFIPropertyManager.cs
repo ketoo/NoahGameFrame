@@ -7,13 +7,13 @@ namespace NFCoreEx
 {
     public abstract class NFIPropertyManager
     {
-        public abstract NFIProperty AddProperty(string strPropertyName, NFIValueList varData);
+        public abstract NFIProperty AddProperty(string strPropertyName, NFIDataList varData);
 
-        public abstract bool SetProperty(string strPropertyName, NFIValueList varData);
+        public abstract bool SetProperty(string strPropertyName, NFIDataList varData);
 
         public abstract NFIProperty GetProperty(string strPropertyName);
 		
-		public abstract NFIValueList GetPropertyList();
+		public abstract NFIDataList GetPropertyList();
 		
 		public abstract void RegisterCallback(string strPropertyName, NFIProperty.PropertyEventHandler handler);
     }

@@ -9,13 +9,12 @@ namespace NFCoreEx
     public class NFCRecord : NFIRecord
     {
 
-		public NFCRecord(NFIDENTID self, string strRecordName, int nRow, NFIValueList varData)
+		public NFCRecord(NFIDENTID self, string strRecordName, int nRow, NFIDataList varData)
 		{
 			mSelf = self;
 			mnRow = nRow;
 			mstrRecordName = strRecordName;
-			mVarRecordType = varData;
-
+            mVarRecordType = new NFCDataList(varData);
 		}
 
         //==============================================
@@ -39,10 +38,16 @@ namespace NFCoreEx
 			return mVarRecordType.Count();
         }
 
-        public override NFIValueList.VARIANT_TYPE GetColType(int nCol)
+        public override NFIDataList.VARIANT_TYPE GetColType(int nCol)
         {
 			return mVarRecordType.GetType(nCol);
         }
+
+        public override NFIDataList GetColsData()
+        {
+            return mVarRecordType;
+        }
+
 
         // add data
         public override int AddRow(int nRow)
@@ -55,13 +60,18 @@ namespace NFCoreEx
 			return -1;
         }
 
-        public override int AddRow(int nRow, NFIValueList var)
+        public override int AddRow(int nRow, NFIDataList var)
         {
 			if(nRow >= 0 && nRow < mnRow)
 			{
 				if (!mhtRecordVec.ContainsKey(nRow))
 				{
-					mhtRecordVec[nRow] = new NFCValueList(var);
+					mhtRecordVec[nRow] = new NFCDataList(var);
+
+                    if (null != doHandleDel)
+                    {
+                        doHandleDel(mSelf, mstrRecordName, eRecordOptype.Add, nRow, 0, var, var);
+                    }
 					return nRow;
 				}
 			}
@@ -71,7 +81,7 @@ namespace NFCoreEx
         }
 
         // set data
-        public override int SetValue(int nRow, NFIValueList var)
+        public override int SetValue(int nRow, NFIDataList var)
         {
 			if(nRow >= 0 && nRow < mnRow)
 			{
@@ -94,17 +104,17 @@ namespace NFCoreEx
 				{
 					AddRow(nRow);
 				}
-				NFIValueList valueList = (NFIValueList)mhtRecordVec[nRow];
-				if (valueList.GetType(nCol) == NFIValueList.VARIANT_TYPE.VTYPE_INT)
+				NFIDataList valueList = (NFIDataList)mhtRecordVec[nRow];
+				if (valueList.GetType(nCol) == NFIDataList.VARIANT_TYPE.VTYPE_INT)
 				{
 					if (valueList.IntVal(nCol) != value)
 					{
-						NFCValueList oldValue = new NFCValueList();
+						NFCDataList oldValue = new NFCDataList();
 						oldValue.AddInt(valueList.IntVal(nCol));
 	
 						valueList.SetInt(nCol, value);
 	
-						NFCValueList newValue = new NFCValueList();
+						NFCDataList newValue = new NFCDataList();
 						newValue.AddInt(valueList.IntVal(nCol));
 	                   
 	                    if (null != doHandleDel)
@@ -127,18 +137,18 @@ namespace NFCoreEx
 				{
 					AddRow(nRow);
 				}
-				NFIValueList valueList = (NFIValueList)mhtRecordVec[nRow];
-				if (valueList.GetType(nCol) == NFIValueList.VARIANT_TYPE.VTYPE_FLOAT)
+				NFIDataList valueList = (NFIDataList)mhtRecordVec[nRow];
+				if (valueList.GetType(nCol) == NFIDataList.VARIANT_TYPE.VTYPE_FLOAT)
 				{
 					if (valueList.FloatVal(nCol) - value > 0.01f
 						|| valueList.FloatVal(nCol) - value < -0.01f)
 					{
-						NFCValueList oldValue = new NFCValueList();
+						NFCDataList oldValue = new NFCDataList();
 						oldValue.AddFloat(valueList.FloatVal(nCol));
 	
 						valueList.SetFloat(nCol, value);
 	
-						NFCValueList newValue = new NFCValueList();
+						NFCDataList newValue = new NFCDataList();
 						newValue.AddFloat(valueList.FloatVal(nCol));
 	
 	                    if (null != doHandleDel)
@@ -163,18 +173,18 @@ namespace NFCoreEx
 					AddRow(nRow);
 				}
 				
-				NFIValueList valueList = (NFIValueList)mhtRecordVec[nRow];
-				if (valueList.GetType(nCol) == NFIValueList.VARIANT_TYPE.VTYPE_DOUBLE)
+				NFIDataList valueList = (NFIDataList)mhtRecordVec[nRow];
+				if (valueList.GetType(nCol) == NFIDataList.VARIANT_TYPE.VTYPE_DOUBLE)
 				{
 					if (valueList.DoubleVal(nCol) - value > 0.01f
 						|| valueList.DoubleVal(nCol) - value < -0.01f)
 					{
-						NFCValueList oldValue = new NFCValueList();
+						NFCDataList oldValue = new NFCDataList();
 						oldValue.AddDouble(valueList.DoubleVal(nCol));
 	
 						valueList.SetDouble(nCol, value);
 	
-						NFCValueList newValue = new NFCValueList();
+						NFCDataList newValue = new NFCDataList();
 						newValue.AddDouble(valueList.DoubleVal(nCol));
 	
 	                    if (null != doHandleDel)
@@ -197,17 +207,17 @@ namespace NFCoreEx
 				{
 					AddRow(nRow);
 				}
-				NFIValueList valueList = (NFIValueList)mhtRecordVec[nRow];
-				if (valueList.GetType(nCol) == NFIValueList.VARIANT_TYPE.VTYPE_STRING)
+				NFIDataList valueList = (NFIDataList)mhtRecordVec[nRow];
+				if (valueList.GetType(nCol) == NFIDataList.VARIANT_TYPE.VTYPE_STRING)
 				{
 					if (valueList.StringVal(nCol) != value)
 					{
-						NFCValueList oldValue = new NFCValueList();
+						NFCDataList oldValue = new NFCDataList();
 						oldValue.AddString(valueList.StringVal(nCol));
 	
 						valueList.SetString(nCol, value);
 	
-						NFCValueList newValue = new NFCValueList();
+						NFCDataList newValue = new NFCDataList();
 						newValue.AddString(valueList.StringVal(nCol));
 	
 	                    if (null != doHandleDel)
@@ -231,17 +241,17 @@ namespace NFCoreEx
 				{
 					AddRow(nRow);
 				}
-				NFIValueList valueList = (NFIValueList)mhtRecordVec[nRow];
-				if (valueList.GetType(nCol) == NFIValueList.VARIANT_TYPE.VTYPE_OBJECT)
+				NFIDataList valueList = (NFIDataList)mhtRecordVec[nRow];
+				if (valueList.GetType(nCol) == NFIDataList.VARIANT_TYPE.VTYPE_OBJECT)
 				{
 					if (valueList.ObjectVal(nCol) != value)
 					{
-						NFCValueList oldValue = new NFCValueList();
+						NFCDataList oldValue = new NFCDataList();
 						oldValue.AddObject(valueList.ObjectVal(nCol));
 
 						valueList.SetObject(nCol, value);
 
-						NFCValueList newValue = new NFCValueList();
+						NFCDataList newValue = new NFCDataList();
 						newValue.AddObject(valueList.ObjectVal(nCol));
 
                         if (null != doHandleDel)
@@ -258,11 +268,11 @@ namespace NFCoreEx
         }
 
         // query data
-        public override NFIValueList QueryRow(int nRow)
+        public override NFIDataList QueryRow(int nRow)
         {
 			if (mhtRecordVec.ContainsKey(nRow))
 			{
-				return  (NFIValueList)mhtRecordVec[nRow];
+				return  (NFIDataList)mhtRecordVec[nRow];
 			}
 
             return null;
@@ -272,16 +282,16 @@ namespace NFCoreEx
         {
 			if(nOriginRow >= 0 && nOriginRow < mnRow && nTargetRow >= 0 && nTargetRow < mnRow)
 			{
-	            NFIValueList valueOriginList = null;
-	            NFIValueList valueTargetList = null;
+	            NFIDataList valueOriginList = null;
+	            NFIDataList valueTargetList = null;
 	           
 	            if (mhtRecordVec.ContainsKey(nOriginRow))
 	            {
-	                valueOriginList = (NFIValueList)mhtRecordVec[nOriginRow];
+	                valueOriginList = (NFIDataList)mhtRecordVec[nOriginRow];
 	            }
 	            if (mhtRecordVec.ContainsKey(nTargetRow))
 	            {
-	                valueTargetList = (NFIValueList)mhtRecordVec[nOriginRow];
+	                valueTargetList = (NFIDataList)mhtRecordVec[nOriginRow];
 	            }
 	
 	            if (null == valueTargetList)
@@ -310,7 +320,7 @@ namespace NFCoreEx
 	           
 	            if (null != doHandleDel)
 	             {
-	                 doHandleDel(mSelf, mstrRecordName, eRecordOptype.Changed, nOriginRow, nTargetRow, new NFCValueList(), new NFCValueList());
+	                 doHandleDel(mSelf, mstrRecordName, eRecordOptype.Swap, nOriginRow, nTargetRow, new NFCDataList(), new NFCDataList());
 	             }
 	            return true;
 			}
@@ -319,7 +329,7 @@ namespace NFCoreEx
 
         public override Int64 QueryInt(int nRow, int nCol)
         {
-			NFIValueList valueList = QueryRow(nRow);
+			NFIDataList valueList = QueryRow(nRow);
 			if (null != valueList)
 			{
 				return valueList.IntVal(nCol);
@@ -330,7 +340,7 @@ namespace NFCoreEx
 
         public override float QueryFloat(int nRow, int nCol)
         {
-			NFIValueList valueList = QueryRow(nRow);
+			NFIDataList valueList = QueryRow(nRow);
 			if (null != valueList)
 			{
 				return valueList.FloatVal(nCol);
@@ -341,7 +351,7 @@ namespace NFCoreEx
 
         public override double QueryDouble(int nRow, int nCol)
         {
-			NFIValueList valueList = QueryRow(nRow);
+			NFIDataList valueList = QueryRow(nRow);
 			if (null != valueList)
 			{
 				return valueList.DoubleVal(nCol);
@@ -352,7 +362,7 @@ namespace NFCoreEx
 
         public override string QueryString(int nRow, int nCol)
         {
-			NFIValueList valueList = QueryRow(nRow);
+			NFIDataList valueList = QueryRow(nRow);
 			if (null != valueList)
 			{
 				return valueList.StringVal(nCol);
@@ -363,7 +373,7 @@ namespace NFCoreEx
 
         public override NFIDENTID QueryObject(int nRow, int nCol)
         {
-			NFIValueList valueList = QueryRow(nRow);
+			NFIDataList valueList = QueryRow(nRow);
 			if (null != valueList)
 			{
 				return valueList.ObjectVal(nCol);
@@ -373,26 +383,26 @@ namespace NFCoreEx
         }
 
         //public override int FindRow( int nRow );
-        public override int FindColValue(int nCol, NFIValueList var)
+        public override int FindColValue(int nCol, NFIDataList var)
         {
 			for (int i = 0; i < mhtRecordVec.Count; i++ )
 			{
-				NFIValueList valueList = (NFIValueList)mhtRecordVec[i];
+				NFIDataList valueList = (NFIDataList)mhtRecordVec[i];
 				switch (valueList.GetType(0))
 				{
-					case NFIValueList.VARIANT_TYPE.VTYPE_INT:
+					case NFIDataList.VARIANT_TYPE.VTYPE_INT:
 						return FindInt(nCol, var.IntVal(0));
 
-					case NFIValueList.VARIANT_TYPE.VTYPE_FLOAT:
+					case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
 						return FindInt(nCol, var.IntVal(0));
 
-					case NFIValueList.VARIANT_TYPE.VTYPE_DOUBLE:
+					case NFIDataList.VARIANT_TYPE.VTYPE_DOUBLE:
 						return FindInt(nCol, var.IntVal(0));
 
-					case NFIValueList.VARIANT_TYPE.VTYPE_STRING:
+					case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
 						return FindInt(nCol, var.IntVal(0));
 
-					case NFIValueList.VARIANT_TYPE.VTYPE_OBJECT:
+					case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
 						return FindObject(nCol, var.ObjectVal(0));
 
 					default:
@@ -408,7 +418,7 @@ namespace NFCoreEx
         {
 			foreach (int i in mhtRecordVec.Keys)
 			{
-				NFIValueList valueList = (NFIValueList)mhtRecordVec[i];
+				NFIDataList valueList = (NFIDataList)mhtRecordVec[i];
 				if (valueList.IntVal(nCol) == value)
 				{
 					return i;
@@ -421,7 +431,7 @@ namespace NFCoreEx
         {
 			foreach (int i in mhtRecordVec.Keys)
 			{
-				NFIValueList valueList = (NFIValueList)mhtRecordVec[i];
+				NFIDataList valueList = (NFIDataList)mhtRecordVec[i];
 				if (valueList.FloatVal(nCol) == value)
 				{
 					return i;
@@ -434,7 +444,7 @@ namespace NFCoreEx
         {
 			foreach (int i in mhtRecordVec.Keys)
 			{
-				NFIValueList valueList = (NFIValueList)mhtRecordVec[i];
+				NFIDataList valueList = (NFIDataList)mhtRecordVec[i];
 				if (valueList.DoubleVal(nCol) == value)
 				{
 					return i;
@@ -447,7 +457,7 @@ namespace NFCoreEx
         {
 			foreach (int i in mhtRecordVec.Keys)
 			{
-				NFIValueList valueList = (NFIValueList)mhtRecordVec[i];
+				NFIDataList valueList = (NFIDataList)mhtRecordVec[i];
 				if (valueList.StringVal(nCol) == value)
 				{
 					return i;
@@ -461,7 +471,7 @@ namespace NFCoreEx
         {
 			foreach (int i in mhtRecordVec.Keys)
 			{
-				NFIValueList valueList = (NFIValueList)mhtRecordVec[i];
+				NFIDataList valueList = (NFIDataList)mhtRecordVec[i];
 				if (valueList.ObjectVal(nCol) == value)
 				{
 					return i;
@@ -477,7 +487,7 @@ namespace NFCoreEx
             {
 				if (null != doHandleDel)
                 {
-                    doHandleDel(mSelf, mstrRecordName, eRecordOptype.Del, nRow, 0, (NFIValueList)mhtRecordVec[nRow], (NFIValueList)mhtRecordVec[nRow]);
+                    doHandleDel(mSelf, mstrRecordName, eRecordOptype.Del, nRow, 0, (NFIDataList)mhtRecordVec[nRow], (NFIDataList)mhtRecordVec[nRow]);
                 }
 				mhtRecordVec.Remove(nRow);
 				return true;
@@ -509,8 +519,9 @@ namespace NFCoreEx
 
 		RecordEventHandler doHandleDel;
 
-		NFIValueList mVarRecordType;
-		Hashtable mhtRecordVec = new Hashtable();
+		NFIDataList mVarRecordType;
+        Hashtable mhtRecordVec = new Hashtable();
+        Dictionary<int, int> mhtUseState = new Dictionary<int, int>();
 
 		NFIDENTID mSelf;
 		string mstrRecordName;
