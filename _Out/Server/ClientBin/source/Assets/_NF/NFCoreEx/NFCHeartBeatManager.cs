@@ -14,46 +14,42 @@ namespace NFCoreEx
 			mhtHeartBeat = new Hashtable();
 		}
 
-        public override void AddHeartBeat(string strHeartBeatName, float fTime, NFIValueList valueList)
+        public override void AddHeartBeat(string strHeartBeatName, float fTime, NFIHeartBeat.HeartBeatEventHandler handler, NFIDataList valueList)
 		{
 			if (!mhtHeartBeat.ContainsKey(strHeartBeatName))
 			{
                 NFIHeartBeat xHeartBeat = new NFCHeartBeat(mSelf, strHeartBeatName, fTime, valueList);
                 mhtHeartBeat.Add(strHeartBeatName, xHeartBeat);
-			}
-		}
-
-		public override void RegisterCallback(string strHeartBeatName, NFIHeartBeat.HeartBeatEventHandler handler)
-		{
-			if (mhtHeartBeat.ContainsKey(strHeartBeatName))
-			{
-				NFIHeartBeat xHeartBeat = (NFIHeartBeat)mhtHeartBeat[strHeartBeatName];
-				xHeartBeat.RegisterCallback(handler);
+                xHeartBeat.RegisterCallback(handler);
 			}
 		}
 
 		public override void Update(float fPassTime)
 		{
 
-            NFCValueList keyList = new NFCValueList();
+            NFCDataList keyList = null;
 
             foreach (System.Collections.DictionaryEntry heartObject in mhtHeartBeat)
             {
                 NFIHeartBeat heartBeat = (NFIHeartBeat)heartObject.Value;
                 if (heartBeat.Update(fPassTime))
                 {
+                    if (null == keyList)
+                    {
+                        keyList = new NFCDataList();
+                    }
+
                     keyList.AddString((string)heartObject.Key);
                 }
-
-//                 Console.WriteLine(heartObject.Key.ToString());
-//                 Console.WriteLine(heartObject.Value.ToString());
             }
 
-            for (int i = 0; i < keyList.Count(); i++ )
+            if (null != keyList)
             {
-                mhtHeartBeat.Remove(keyList.StringVal(i));
+                for (int i = 0; i < keyList.Count(); i++)
+                {
+                    mhtHeartBeat.Remove(keyList.StringVal(i));
+                }
             }
-
 		}
 
 		NFIDENTID mSelf;

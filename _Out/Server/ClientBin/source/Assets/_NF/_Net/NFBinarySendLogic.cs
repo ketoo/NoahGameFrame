@@ -633,8 +633,6 @@ public class NFBinarySendLogic
     //有可能是他副本的NPC移动,因此增加64对象ID
     public void RequireUseSkill(NFCoreEx.NFIDENTID objectID, string strKillID, NFCoreEx.NFIDENTID nTargetID, float fNowX, float fNowZ, float fTarX, float fTarZ)
     {
-        //Debug.Log("RequireUseSkill:" + strKillID);
-
         NFMsg.Position xNowPos = new NFMsg.Position();
         NFMsg.Position xTarPos = new NFMsg.Position();
 
@@ -647,35 +645,39 @@ public class NFBinarySendLogic
 
         NFMsg.ReqAckUseSkill xData = new NFMsg.ReqAckUseSkill();
         xData.user = NFToPB(objectID);
-        xData.skill_id = UnicodeEncoding.Default.GetBytes(strKillID);
+        xData.skill_id = System.Text.Encoding.Default.GetBytes(strKillID);
         xData.tar_pos = xTarPos;
         xData.now_pos = xNowPos;
 
-        if (!nTargetID.IsNull())
-        {
-            xData.effect_ident.Add(NFToPB(nTargetID));
-            xData.effect_value.Add(0);
-            xData.effect_rlt.Add(0);
-        }
+        NFMsg.EffectData xEffData = new NFMsg.EffectData();
+        xEffData.effect_ident = (NFToPB(nTargetID));
+        xEffData.effect_value = 0;
+        xEffData.effect_rlt = 0;
+
+        xData.effect_data.Add(xEffData);
+
 
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqAckUseSkill>(stream, xData);
 
         SendMsg(objectID, NFMsg.EGameMsgID.EGMI_REQ_SKILL_OBJECTX, stream);
-    }
 
-    public void RequireUseItem(NFCoreEx.NFIDENTID objectID, NFCoreEx.NFIDENTID nGuid, NFCoreEx.NFIDENTID nTargetID)
-    {
-        NFMsg.ReqAckUseItem xData = new NFMsg.ReqAckUseItem();
-        xData.item_guid = NFToPB(nGuid);
-        xData.effect_ident.Add(NFToPB(nTargetID));
-        xData.effect_value.Add(0);
-        xData.effect_rlt.Add(0);
+        /////////////////////////////////////////////
+        if (NFStart.Instance.bDebugMode)
+        {
+            NFMsg.MsgBase xAckData = new NFMsg.MsgBase();
+            xAckData.player_id = NFToPB(objectID);
+            xAckData.msg_data = stream.ToArray();
 
-        MemoryStream stream = new MemoryStream();
-        Serializer.Serialize<NFMsg.ReqAckUseItem>(stream, xData);
+            MemoryStream xAckBody = new MemoryStream();
+            Serializer.Serialize<NFMsg.MsgBase>(xAckBody, xAckData);
 
-        SendMsg(objectID, NFMsg.EGameMsgID.EGMI_REQ_ITEM_OBJECT, stream);
+            MsgHead head = new MsgHead();
+            head.unMsgID = (UInt16)NFMsg.EGameMsgID.EGMI_ACK_SKILL_OBJECTX;
+            head.unDataLen = (UInt32)xAckBody.Length + (UInt32)ConstDefine.NF_PACKET_HEAD_SIZE;
+
+            xNet.mxBinMsgEvent.OnMessageEvent(head, xAckBody.ToArray());
+        }
     }
 
     public void RequireChat(NFCoreEx.NFIDENTID objectID, NFCoreEx.NFIDENTID targetID, int nType, string strData)
@@ -705,33 +707,6 @@ public class NFBinarySendLogic
         SendMsg(objectID, NFMsg.EGameMsgID.EGMI_REQ_SWAP_SCENE, stream);
     }
 
-    public void RequireProperty(NFCoreEx.NFIDENTID objectID, string strPropertyName, int nValue)
-    {
-        NFMsg.ReqCommand xData = new NFMsg.ReqCommand();
-        xData.control_id = NFToPB(objectID);
-        xData.command_id = ReqCommand.EGameCommandType.EGCT_MODIY_PROPERTY;
-        xData.command_str_value = UnicodeEncoding.Default.GetBytes(strPropertyName);
-        xData.command_value = nValue;
-
-        MemoryStream stream = new MemoryStream();
-        Serializer.Serialize<NFMsg.ReqCommand>(stream, xData);
-
-        SendMsg(objectID, NFMsg.EGameMsgID.EGMI_REQ_COMMAND, stream);
-    }
-
-    public void RequireItem(NFCoreEx.NFIDENTID objectID, string strItemName, int nCount)
-    {
-        NFMsg.ReqCommand xData = new NFMsg.ReqCommand();
-        xData.control_id = NFToPB(objectID);
-        xData.command_id = ReqCommand.EGameCommandType.EGCT_MODIY_ITEM;
-        xData.command_str_value = UnicodeEncoding.Default.GetBytes(strItemName);
-        xData.command_value = nCount;
-
-        MemoryStream stream = new MemoryStream();
-        Serializer.Serialize<NFMsg.ReqCommand>(stream, xData);
-
-        SendMsg(objectID, NFMsg.EGameMsgID.EGMI_REQ_COMMAND, stream);
-    }
 
     public void RequireAcceptTask(NFCoreEx.NFIDENTID objectID, string strTaskID)
     {
