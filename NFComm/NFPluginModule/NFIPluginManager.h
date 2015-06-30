@@ -42,10 +42,11 @@ public:
 
     virtual bool ReInitialize() = 0;
 
-#ifdef NF_USE_ACTOR
 	virtual NFIActorManager* GetActorManager() = 0;
 	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from) = 0;
-#endif
+
+    virtual int AppID() = 0;
+
 };
 
 #endif
