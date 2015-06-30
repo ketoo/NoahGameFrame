@@ -159,6 +159,38 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqBuildOperate")]
+  public partial class ReqBuildOperate : global::ProtoBuf.IExtensible
+  {
+    public ReqBuildOperate() {}
+    
+    private int _row = default(int);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"row", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int row
+    {
+      get { return _row; }
+      set { _row = value; }
+    }
+    private NFMsg.Ident _object_guid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"object_guid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident object_guid
+    {
+      get { return _object_guid; }
+      set { _object_guid = value; }
+    }
+    private NFMsg.ESLGFuncType _functype;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"functype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public NFMsg.ESLGFuncType functype
+    {
+      get { return _functype; }
+      set { _functype = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"ESLGBuildingType")]
     public enum ESLGBuildingType
     {

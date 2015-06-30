@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace NFCoreEx
 {
-    public class NFCValueList : NFIValueList
+    public class NFCDataList : NFIDataList
     {
         
 
@@ -14,7 +14,7 @@ namespace NFCoreEx
 
         //==============================================
 
-        public NFCValueList(string str, char c)
+        public NFCDataList(string str, char c)
         {
             string[] strSub = str.Split(c);
             foreach (string strDest in strSub)
@@ -23,7 +23,7 @@ namespace NFCoreEx
             }
         }
 
-        public NFCValueList(NFIValueList src)
+        public NFCDataList(NFIDataList src)
         {
 			for (int i = 0; i < src.Count(); i++ )
 			{
@@ -51,7 +51,7 @@ namespace NFCoreEx
 
         }
 
-        public NFCValueList()
+        public NFCDataList()
         {
         }
 

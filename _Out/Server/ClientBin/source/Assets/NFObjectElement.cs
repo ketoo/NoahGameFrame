@@ -41,7 +41,7 @@ public class NFObjectElement
         GUI.color = Color.white;
 
 
-        NFIValueList objectList = kernel.GetObjectList();
+        NFIDataList objectList = kernel.GetObjectList();
 
         scrollPositionFirst = GUI.BeginScrollView(new Rect(0, nElementHeight, nElementWidth / 2 + 20, nHeight), scrollPositionFirst, new Rect(0, 0, nElementWidth, objectList.Count() * (nElementHeight)));
 
@@ -67,8 +67,8 @@ public class NFObjectElement
 			NFIObject go = kernel.GetObject(xTargetIdent);
 			
 			
-			NFIValueList recordLlist = go.GetRecordManager().GetRecordList();
-			NFIValueList propertyList = go.GetPropertyManager().GetPropertyList();
+			NFIDataList recordLlist = go.GetRecordManager().GetRecordList();
+			NFIDataList propertyList = go.GetPropertyManager().GetPropertyList();
 			
 			int nAllElement = 1;
 			for(int j = 0; j < recordLlist.Count(); j++)
@@ -119,22 +119,22 @@ public class NFObjectElement
                 string strPropertyValue = null;
                 string strPropertyName = propertyList.StringVal(k);
                 NFIProperty property = go.GetPropertyManager().GetProperty(strPropertyName);
-                NFIValueList.VARIANT_TYPE eType = property.GetType();
+                NFIDataList.VARIANT_TYPE eType = property.GetType();
                 switch (eType)
                 {
-                    case NFIValueList.VARIANT_TYPE.VTYPE_DOUBLE:
+                    case NFIDataList.VARIANT_TYPE.VTYPE_DOUBLE:
                         strPropertyValue = property.QueryDouble().ToString();
                         break;
-                    case NFIValueList.VARIANT_TYPE.VTYPE_FLOAT:
+                    case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
                         strPropertyValue = property.QueryFloat().ToString();
                         break;
-                    case NFIValueList.VARIANT_TYPE.VTYPE_INT:
+                    case NFIDataList.VARIANT_TYPE.VTYPE_INT:
                         strPropertyValue = property.QueryInt().ToString();
                         break;
-                    case NFIValueList.VARIANT_TYPE.VTYPE_OBJECT:
+                    case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
                         strPropertyValue = property.QueryObject().nData64.ToString();
                         break;
-                    case NFIValueList.VARIANT_TYPE.VTYPE_STRING:
+                    case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
                         strPropertyValue = property.QueryString();
                         break;
                     default:
@@ -186,26 +186,26 @@ public class NFObjectElement
 							
 							if(record.IsUsed(row))
 							{
-								NFIValueList.VARIANT_TYPE eType = record.GetColType(col);
+								NFIDataList.VARIANT_TYPE eType = record.GetColType(col);
 								switch(eType)
 								{								
-								case NFIValueList.VARIANT_TYPE.VTYPE_INT:
+								case NFIDataList.VARIANT_TYPE.VTYPE_INT:
 									selString = record.QueryInt(row, col).ToString();
 									break;
 									
-								case NFIValueList.VARIANT_TYPE.VTYPE_FLOAT:
+								case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
 									selString = record.QueryFloat(row, col).ToString();
 									break;
 									
-								case NFIValueList.VARIANT_TYPE.VTYPE_DOUBLE:
+								case NFIDataList.VARIANT_TYPE.VTYPE_DOUBLE:
 									selString = record.QueryDouble(row, col).ToString();
 									break;
 									
-								case NFIValueList.VARIANT_TYPE.VTYPE_STRING:
+								case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
 									selString = record.QueryString(row, col).ToString();
 									break;
 									
-								case NFIValueList.VARIANT_TYPE.VTYPE_OBJECT:
+								case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
 									selString = record.QueryObject(row, col).nData64.ToString();
 									break;
 									

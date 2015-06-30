@@ -8,8 +8,7 @@ namespace NFCoreEx
 {
     public abstract class NFIHeartBeatManager
     {
-        public abstract void AddHeartBeat(string strHeartBeatName, float fTime, NFIValueList valueList);
-		public abstract void RegisterCallback(string strHeartBeatName, NFIHeartBeat.HeartBeatEventHandler handler);
+        public abstract void AddHeartBeat(string strHeartBeatName, float fTime, NFIHeartBeat.HeartBeatEventHandler handler, NFIDataList valueList);
 		public abstract void Update(float fPassTime);
     }
 }
