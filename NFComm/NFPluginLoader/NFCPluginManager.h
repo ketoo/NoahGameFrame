@@ -23,6 +23,7 @@ public:
 	{
 		mbOnReloadPlugin = false;
 		m_pActorManager = pManager;
+        mAppID = 0;
 	}
 
     virtual bool Init();
@@ -65,20 +66,22 @@ public:
 	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
 	virtual NFIActorManager* GetActorManager(){ return m_pActorManager;}
 
+    virtual int AppID(){ return mAppID; }
+
 protected:
 
     virtual bool LoadPluginLibrary(const std::string& strPluginDLLName);
     virtual bool UnLoadPluginLibrary(const std::string& strPluginDLLName);
 
 protected:
-
-
 	virtual bool ExecuteEvent();
 
 private:
     bool mbOnReloadPlugin;
 	NFIActorManager* m_pActorManager;
 	NFQueue<NFIActorMessage> mxQueue;
+
+    int mAppID;
 
 	typedef std::map<std::string, bool> PluginNameMap;
 	typedef std::map<std::string, NFCDynLib*> PluginLibMap;

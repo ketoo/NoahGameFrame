@@ -48,9 +48,9 @@ bool NFCWorldToMasterModule::AfterInit()
 		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
 		{
 			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
+            const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
 			if (nServerType == NF_SERVER_TYPES::NF_ST_MASTER)
 			{
-				const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
 				const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
 				const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
 				const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
@@ -81,9 +81,9 @@ void NFCWorldToMasterModule::Register()
 		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
 		{
 			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
-			if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD)
+            const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+			if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD && pPluginManager->AppID() == nServerID)
 			{
-				const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
 				const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
 				const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
 				const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
@@ -119,9 +119,9 @@ void NFCWorldToMasterModule::UnRegister()
 		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
 		{
 			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
-			if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD)
+            const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+			if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD && pPluginManager->AppID() == nServerID)
 			{
-				const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
 				const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
 				const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
 				const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");

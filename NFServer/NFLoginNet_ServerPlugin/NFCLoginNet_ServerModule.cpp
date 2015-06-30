@@ -62,14 +62,14 @@ bool NFCLoginNet_ServerModule::AfterInit()
 		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
 		{
 			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
-			if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN)
+            const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+			if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN && pPluginManager->AppID() == nServerID)
 			{
-				const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
-				const int nID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+				const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");				
 				const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
 				const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
 
-				m_pUUIDModule->SetIdentID(nID);
+				m_pUUIDModule->SetIdentID(nServerID);
 
 				Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCLoginNet_ServerModule::OnReciveClientPack, &NFCLoginNet_ServerModule::OnSocketClientEvent, nMaxConnect, nPort, nCpus);		
 			}
@@ -246,10 +246,9 @@ int NFCLoginNet_ServerModule::OnSelectWorldProcess( const NFIPacket& msg )
 		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
 		{
 			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
-			if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN)
-			{
-				const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
-
+            const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+            if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN && pPluginManager->AppID() == nServerID)//to do Check ServerID ??
+            {
 				NFCDataList val;
 				val << xMsg.world_id() << pNetObject->GetClientID() << nServerID << pNetObject->GetAccount();
 				m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, val);
