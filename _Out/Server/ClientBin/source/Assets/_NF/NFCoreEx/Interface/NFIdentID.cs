@@ -31,6 +31,11 @@ namespace NFCoreEx
 
 		public static bool operator == (NFIDENTID ident, NFIDENTID other)
 		{
+            if (((object)ident == null) && ((object)other == null))
+            {
+                return true;
+            }
+
             if (((object)ident == null) || ((object)other == null))
             {
                 return false;
@@ -57,6 +62,35 @@ namespace NFCoreEx
         public override string ToString()
         {
             return nHead64.ToString() + "-" + nData64.ToString();
+        }
+
+        public bool Parse(string strData, out NFIDENTID id)
+        {
+            NFIDENTID xId = new NFIDENTID();
+            id = xId;
+
+            string[] strList = strData.Split('-');
+            if (strList.Count() != 2)
+            {
+                return false;
+            }
+
+            Int64 nHead = 0;
+            if (!Int64.TryParse(strList[0], out nHead))
+            {
+                return false;
+            }
+
+            Int64 nData = 0;
+            if (!Int64.TryParse(strList[1], out nData))
+            {
+                return false;
+            }
+
+            id.nHead64 = nHead;
+            id.nData64 = nData;
+
+            return true;
         }
 
         public override int GetHashCode()
