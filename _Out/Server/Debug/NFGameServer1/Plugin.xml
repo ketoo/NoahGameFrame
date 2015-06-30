@@ -13,4 +13,5 @@
     <Plugin Name="NFMysqlClusterPlugin" Main="1"/>
 	
 	<ActorDataModule Name="NFCDataProcessModule" />
+	<APPID Name="6" />
 </XML>

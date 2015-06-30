@@ -14,6 +14,7 @@
 #include "NFComm/RapidXML/rapidxml_utils.hpp"
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIActorDataModule.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 #pragma comment( lib, "ws2_32.lib" )
 
@@ -55,6 +56,26 @@ bool NFCPluginManager::LoadPlugin()
 
 		mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, true));
 
+    }
+
+    rapidxml::xml_node<>* pPluginAppNode = pRoot->first_node("APPID");
+    if (!pPluginAppNode)
+    {
+        NFASSERT(0, "There are no App ID", __FILE__, __FUNCTION__);
+        return false;
+    }
+
+    const char* strAppID = pPluginAppNode->first_attribute( "Name" )->value();    
+    if (!strAppID)
+    {
+        NFASSERT(0, "There are no App ID", __FILE__, __FUNCTION__);
+        return false;
+    }
+
+    if (!NF_StrTo(strAppID, mAppID))
+    {
+        NFASSERT(0, "App ID Convert Error", __FILE__, __FUNCTION__);
+        return false;
     }
 
     return true;
