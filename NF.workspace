@@ -37,5 +37,7 @@
 		<Project filename="NFComm/NFTagPlugin/NFTagPlugin.cbp" />
 		<Project filename="NFServer/NFGameLogicPlugin/NFGameLogicPlugin.cbp" />
 		<Project filename="NFServer/NFSLGPlugin/NFSLGPlugin.cbp" />
+		<Project filename="NFServer/NFWorldChatPlugin/NFWorldChatPlugin.cbp" />
+		<Project filename="NFServer/NFWorldGuildPlugin/NFWorldGuildPlugin.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
