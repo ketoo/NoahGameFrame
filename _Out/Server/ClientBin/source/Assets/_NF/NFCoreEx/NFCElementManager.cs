@@ -33,6 +33,7 @@ namespace NFCoreEx
         public override bool Load()
         {
             mstrRootPath = "";
+            ClearInstanceElement();
 
             Hashtable xTable = NFCLogicClassManager.Instance.GetElementList();
             foreach (DictionaryEntry de in xTable)
@@ -125,6 +126,11 @@ namespace NFCoreEx
             return null;
         }
 
+        private void ClearInstanceElement()
+        {
+            mhtObject.Clear();
+        }
+
         private void LoadInstanceElement(NFILogicClass xLogicClass)
         {
             string strLogicPath = mstrRootPath;
@@ -138,13 +144,19 @@ namespace NFCoreEx
             XmlNodeList xNodeList = xRoot.SelectNodes("Object");
             for (int i = 0; i < xNodeList.Count; ++i)
             {
+                //NFCLog.Instance.Log("Class:" + xLogicClass.GetName());
+
                 XmlNode xNodeClass = xNodeList.Item(i);
                 XmlAttribute strID = xNodeClass.Attributes["ID"];
+
+                //NFCLog.Instance.Log("ClassID:" + strID.Value);
+
                 NFIElement xElement = GetElement(strID.Value);
                 if (null == xElement)
                 {
                     xElement = new NFCElement();
                     AddElement(strID.Value, xElement);
+                    xLogicClass.AddConfigName(strID.Value);
 
                     XmlAttributeCollection xCollection = xNodeClass.Attributes;
                     for (int j = 0; j < xCollection.Count; ++j)
@@ -153,40 +165,40 @@ namespace NFCoreEx
                         NFIProperty xProperty = xLogicClass.GetPropertyManager().GetProperty(xAttribute.Name);
                         if (null != xProperty)
                         {
-                            NFIValueList.VARIANT_TYPE eType = xProperty.GetType();
+                            NFIDataList.VARIANT_TYPE eType = xProperty.GetType();
                             switch (eType)
                             {
-                                case NFIValueList.VARIANT_TYPE.VTYPE_INT:
+                                case NFIDataList.VARIANT_TYPE.VTYPE_INT:
                                     {
-                                        NFIValueList xValue = new NFCValueList();
+                                        NFIDataList xValue = new NFCDataList();
                                         xValue.AddInt(int.Parse(xAttribute.Value));
                                         xElement.GetPropertyManager().AddProperty(xAttribute.Name, xValue);
                                     }
                                     break;
-                                case NFIValueList.VARIANT_TYPE.VTYPE_FLOAT:
+                                case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
                                     {
-                                        NFIValueList xValue = new NFCValueList();
+                                        NFIDataList xValue = new NFCDataList();
                                         xValue.AddFloat(float.Parse(xAttribute.Value));
                                         xElement.GetPropertyManager().AddProperty(xAttribute.Name, xValue);
                                     }
                                     break;
-                                case NFIValueList.VARIANT_TYPE.VTYPE_DOUBLE:
+                                case NFIDataList.VARIANT_TYPE.VTYPE_DOUBLE:
                                     {
-                                        NFIValueList xValue = new NFCValueList();
+                                        NFIDataList xValue = new NFCDataList();
                                         xValue.AddDouble(double.Parse(xAttribute.Value));
                                         xElement.GetPropertyManager().AddProperty(xAttribute.Name, xValue);
                                     }
                                     break;
-                                case NFIValueList.VARIANT_TYPE.VTYPE_STRING:
+                                case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
                                     {
-                                        NFIValueList xValue = new NFCValueList();
+                                        NFIDataList xValue = new NFCDataList();
                                         xValue.AddString(xAttribute.Value);
                                         NFIProperty xTestProperty = xElement.GetPropertyManager().AddProperty(xAttribute.Name, xValue);
                                     }
                                     break;
-                                case NFIValueList.VARIANT_TYPE.VTYPE_OBJECT:
+                                case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
                                     {
-                                        NFIValueList xValue = new NFCValueList();
+                                        NFIDataList xValue = new NFCDataList();
                                         xValue.AddObject(new NFIDENTID(0, int.Parse(xAttribute.Value)));
                                         xElement.GetPropertyManager().AddProperty(xAttribute.Name, xValue);
                                     }
