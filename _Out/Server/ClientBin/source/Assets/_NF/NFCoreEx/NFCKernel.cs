@@ -10,15 +10,21 @@ namespace NFCoreEx
 	{
 		#region Instance
 		private static NFIKernel _Instance = null;
+        private static readonly object _syncLock = new object();
 		public static NFIKernel Instance
 		{
 			get
 			{
-				if (_Instance == null)
-				{
-					_Instance = new NFCKernel();
-				}
-				return _Instance;
+                lock (_syncLock)
+                {
+                    if (_Instance == null)
+                    {
+                        _Instance = new NFCKernel();
+                    }
+                    return _Instance;
+                }
+
+
 			}
 		}
 		#endregion
@@ -39,13 +45,12 @@ namespace NFCoreEx
             mxLogicClassManager = null;
 		}
 
-		public override bool AddHeartBeat(NFIDENTID self, string strHeartBeatName, NFIHeartBeat.HeartBeatEventHandler handler, float fTime, NFIValueList valueList)
+		public override bool AddHeartBeat(NFIDENTID self, string strHeartBeatName, NFIHeartBeat.HeartBeatEventHandler handler, float fTime, NFIDataList valueList)
 		{
             NFIObject xGameObject = GetObject(self);
             if (null != xGameObject)
             {
-                xGameObject.GetHeartBeatManager().AddHeartBeat(strHeartBeatName, fTime, valueList);
-                xGameObject.GetHeartBeatManager().RegisterCallback(strHeartBeatName, handler);
+                xGameObject.GetHeartBeatManager().AddHeartBeat(strHeartBeatName, fTime, handler, valueList);
             }
 			return true;
 		}
@@ -84,16 +89,7 @@ namespace NFCoreEx
 			}
 		}
 
-		public override void RegisterHeartBeatCallBack(NFIDENTID self, string strHeartBeatName, NFIHeartBeat.HeartBeatEventHandler handler)
-		{
-			NFIObject xGameObject = GetObject(self);
-			if (null != xGameObject)
-			{
-				xGameObject.GetHeartBeatManager().RegisterCallback(strHeartBeatName, handler);
-			}
-		}
-
-		public override void RegisterEventCallBack(NFIDENTID self, int nEventID, NFIEvent.EventHandler handler, NFIValueList valueList)
+		public override void RegisterEventCallBack(NFIDENTID self, int nEventID, NFIEvent.EventHandler handler, NFIDataList valueList)
 		{
 			NFIObject xGameObject = GetObject(self);
 			if (null != xGameObject)
@@ -120,11 +116,12 @@ namespace NFCoreEx
 
         public override bool UpDate(float fTime)
         {
-            foreach (KeyValuePair<NFIDENTID, NFIObject> kv in mhtObject)
+            foreach (NFIDENTID id in mhtObject.Keys)
             {
-                NFIObject xGameObject = (NFIObject)kv.Value;
+                NFIObject xGameObject = (NFIObject)mhtObject[id];
                 xGameObject.GetHeartBeatManager().Update(fTime);
             }
+
             return true;
         }
 		/////////////////////////////////////////////////////////////
@@ -141,7 +138,7 @@ namespace NFCoreEx
 
 		public override NFIObject GetObject(NFIDENTID ident)
 		{
-		    if (mhtObject.ContainsKey(ident))
+            if (null != ident && mhtObject.ContainsKey(ident))
 			{
 				return (NFIObject)mhtObject[ident];
 			}
@@ -149,18 +146,18 @@ namespace NFCoreEx
 			return null;
 		}
 
-		public override NFIObject CreateObject(NFIDENTID self, int nContainerID, int nGroupID, string strClassName, string strConfigIndex, NFIValueList arg)
+		public override NFIObject CreateObject(NFIDENTID self, int nContainerID, int nGroupID, string strClassName, string strConfigIndex, NFIDataList arg)
 		{
 			if (!mhtObject.ContainsKey(self))
 			{
 				NFIObject xNewObject = new NFCObject(self, nContainerID, nGroupID, strClassName, strConfigIndex);
 				mhtObject.Add(self, xNewObject);
 
-                NFCValueList varConfigID = new NFCValueList();
+                NFCDataList varConfigID = new NFCDataList();
                 varConfigID.AddString(strConfigIndex);
                 xNewObject.GetPropertyManager().AddProperty("ConfigID", varConfigID);
 
-                NFCValueList varConfigClass = new NFCValueList();
+                NFCDataList varConfigClass = new NFCDataList();
                 varConfigClass.AddString(strClassName);
                 xNewObject.GetPropertyManager().AddProperty("ClassName", varConfigClass);
 
@@ -169,40 +166,40 @@ namespace NFCoreEx
                     for (int i = 0; i < arg.Count() - 1; i += 2)
                     {
                         string strPropertyName = arg.StringVal(i);
-                        NFIValueList.VARIANT_TYPE eType = arg.GetType(i + 1);
+                        NFIDataList.VARIANT_TYPE eType = arg.GetType(i + 1);
                         switch (eType)
                         {
-                            case NFIValueList.VARIANT_TYPE.VTYPE_INT:
+                            case NFIDataList.VARIANT_TYPE.VTYPE_INT:
                                 {
-                                    NFIValueList xDataList = new NFCValueList();
+                                    NFIDataList xDataList = new NFCDataList();
                                     xDataList.AddInt(arg.IntVal(i+1));
                                     xNewObject.GetPropertyManager().AddProperty(strPropertyName, xDataList);
                                 }
                                 break;
-                            case NFIValueList.VARIANT_TYPE.VTYPE_FLOAT:
+                            case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
                                 {
-                                    NFIValueList xDataList = new NFCValueList();
+                                    NFIDataList xDataList = new NFCDataList();
                                     xDataList.AddFloat(arg.FloatVal(i + 1));
                                     xNewObject.GetPropertyManager().AddProperty(strPropertyName, xDataList);
                                 }
                                 break;
-                            case NFIValueList.VARIANT_TYPE.VTYPE_DOUBLE:
+                            case NFIDataList.VARIANT_TYPE.VTYPE_DOUBLE:
                                 {
-                                    NFIValueList xDataList = new NFCValueList();
+                                    NFIDataList xDataList = new NFCDataList();
                                     xDataList.AddDouble(arg.DoubleVal(i + 1));
                                     xNewObject.GetPropertyManager().AddProperty(strPropertyName, xDataList);
                                 }
                                 break;
-                            case NFIValueList.VARIANT_TYPE.VTYPE_STRING:
+                            case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
                                 {
-                                    NFIValueList xDataList = new NFCValueList();
+                                    NFIDataList xDataList = new NFCDataList();
                                     xDataList.AddString(arg.StringVal(i + 1));
                                     xNewObject.GetPropertyManager().AddProperty(strPropertyName, xDataList);
                                 }
                                 break;
-                            case NFIValueList.VARIANT_TYPE.VTYPE_OBJECT:
+                            case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
                                 {
-                                    NFIValueList xDataList = new NFCValueList();
+                                    NFIDataList xDataList = new NFCDataList();
                                     xDataList.AddObject(arg.ObjectVal(i + 1));
                                     xNewObject.GetPropertyManager().AddProperty(strPropertyName, xDataList);
                                 }
@@ -212,6 +209,9 @@ namespace NFCoreEx
                         }
                     }
                 }
+
+                InitProperty(self, strClassName);
+                InitRecord(self, strClassName);
 
 				ClassHandleDel xHandleDel = (ClassHandleDel)mhtClassHandleDel[strClassName];
                 if (null != xHandleDel && null != xHandleDel.GetHandler())
@@ -494,9 +494,9 @@ namespace NFCoreEx
 			return new NFIDENTID();
 		}
 		
-		public override NFIValueList GetObjectList()
+		public override NFIDataList GetObjectList()
 		{
-			NFIValueList varData = new NFCValueList();
+			NFIDataList varData = new NFCDataList();
             foreach (KeyValuePair<NFIDENTID, NFIObject> kv in mhtObject)
             {
                 varData.AddObject(kv.Key);				
@@ -579,9 +579,38 @@ namespace NFCoreEx
             return -1;
         }
 
-        /// <summary>
-        /// /
-        /// </summary>
+        void InitProperty(NFIDENTID self, string strClassName)
+        {
+            NFILogicClass xLogicClass = NFCLogicClassManager.Instance.GetElement(strClassName);
+            NFIDataList xDataList = xLogicClass.GetPropertyManager().GetPropertyList();
+            for (int i = 0; i < xDataList.Count(); ++i )
+            {
+                string strPropertyName = xDataList.StringVal(i);
+                NFIProperty xProperty = xLogicClass.GetPropertyManager().GetProperty(strPropertyName);
+  
+                NFIObject xObject = GetObject(self);
+                NFIPropertyManager xPropertyManager = xObject.GetPropertyManager();
+
+                xPropertyManager.AddProperty(strPropertyName, xProperty.GetValue());
+            }
+        }
+
+        void InitRecord(NFIDENTID self, string strClassName)
+        {
+            NFILogicClass xLogicClass = NFCLogicClassManager.Instance.GetElement(strClassName);
+            NFIDataList xDataList = xLogicClass.GetRecordManager().GetRecordList();
+            for (int i = 0; i < xDataList.Count(); ++i)
+            {
+                string strRecordyName = xDataList.StringVal(i);
+                NFIRecord xRecord = xLogicClass.GetRecordManager().GetRecord(strRecordyName);
+
+                NFIObject xObject = GetObject(self);
+                NFIRecordManager xRecordManager = xObject.GetRecordManager();
+
+                xRecordManager.AddRecord(strRecordyName, xRecord.GetRows(), xRecord.GetColsData());
+            }
+        }
+
         Dictionary<NFIDENTID, NFIObject> mhtObject;
 		Hashtable mhtClassHandleDel;
         NFIElementManager mxElementManager;
