@@ -42,9 +42,9 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
 		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
 		{
 			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
-			if (nServerType == NF_SERVER_TYPES::NF_ST_PROXY)
+            const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+            if (nServerType == NF_SERVER_TYPES::NF_ST_PROXY && pPluginManager->AppID() == nServerID)
 			{
-				const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
 				const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
 				const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
 				const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
