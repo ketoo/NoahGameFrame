@@ -131,14 +131,14 @@ public class NFNet
 
             ////////////////////////////////////////////////////////////////////////////////////////////////
 
-            if (GUI.Button(new Rect(0, 0, 100, 50), "切换场景"))
+            if (GUI.Button(new Rect(0, 0, 100, 50), "SwapScene"))
             {
                 mxSendLogic.RequireSwapScene(nMainRoleID, 0, int.Parse(strReqSwapSceneID), -1);
             }
             strReqSwapSceneID = GUI.TextField(new Rect(100, 0, 100, 50), strReqSwapSceneID);
         
             ////////////////////////////////////////////////////////////////////////////////////////////////
-            if (GUI.Button(new Rect(0, 50, 100, 50), "移动"))
+            if (GUI.Button(new Rect(0, 50, 100, 50), "Move"))
             {
                 mxSendLogic.RequireMove(nMainRoleID, float.Parse(strReqMoveX), float.Parse(strReqMoveZ));
             }
@@ -188,12 +188,12 @@ public class NFNet
                         ////////////////////////////////////////////////////////////////////////////////////////////////
                         */
         
-            if (GUI.Button(new Rect(0, 350, 100, 50), "设置属性"))
-            {
-                mxSendLogic.RequireProperty(nMainRoleID, strReqSetProperty, int.Parse(strReqPropertyValue));
-            }
-            strReqSetProperty = GUI.TextField(new Rect(100, 350, 100, 50), strReqSetProperty);
-            strReqPropertyValue = GUI.TextField(new Rect(200, 350, 100, 50), strReqPropertyValue);
+//             if (GUI.Button(new Rect(0, 350, 100, 50), "Set Property"))
+//             {
+//                 //mxSendLogic.RequireProperty(nMainRoleID, strReqSetProperty, int.Parse(strReqPropertyValue));
+//             }
+//             strReqSetProperty = GUI.TextField(new Rect(100, 350, 100, 50), strReqSetProperty);
+//             strReqPropertyValue = GUI.TextField(new Rect(200, 350, 100, 50), strReqPropertyValue);
             ////////////////////////////////////////////////////////////////////////////////////////////////
             /*
             if (GUI.Button(new Rect(0, 400, 100, 50), "添加道具"))
@@ -206,14 +206,14 @@ public class NFNet
 
             ////////////////////////////////////////////////////////////////////////////////////////////////
 
-            if (GUI.Button(new Rect(0, 450, 100, 50), "聊天"))
+            if (GUI.Button(new Rect(0, 450, 100, 50), "Chat"))
             {
-                mxSendLogic.RequireChat(nMainRoleID, nTarget, int.Parse(strType), strChatData);
+                mxSendLogic.RequireChat(nMainRoleID, new NFCoreEx.NFIDENTID(), 3, strChatData);
             }
             strChatTargetID = nTarget.ToString();
-            strChatTargetID = GUI.TextField(new Rect(100, 450, 100, 50), strChatTargetID);
-            strType = GUI.TextField(new Rect(200, 450, 100, 50), strType);
-            strChatData = GUI.TextField(new Rect(300, 450, 100, 50), strChatData);
+//             strChatTargetID = GUI.TextField(new Rect(100, 450, 100, 50), strChatTargetID);
+//             strType = GUI.TextField(new Rect(200, 450, 100, 50), strType);
+            strChatData = GUI.TextField(new Rect(100, 450, 100, 50), strChatData);
             GUI.EndScrollView();
         }
     }
@@ -265,7 +265,7 @@ public class NFNet
     public int nWorldPort = 0;
     public string strKey = "";
 
-    public string strAccount = "server1";
+    public string strAccount = "test1";
     public string strPassword = "123456";
     public string strRoleName = "";
 

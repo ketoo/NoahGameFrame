@@ -281,7 +281,7 @@ namespace NFTCPClient
             {
                 NFMsg.PlayerEntryInfo xInfo = xData.object_list[i];
 
-                NFIValueList var = new NFCValueList();
+                NFIDataList var = new NFCDataList();
                 var.AddString("X");
                 var.AddFloat(xInfo.x);
                 var.AddString("Y");
@@ -362,7 +362,7 @@ namespace NFTCPClient
                 NFIProperty property = propertyManager.GetProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name));
                 if(null == property)
                 {
-                    NFIValueList varList = new NFCValueList();
+                    NFIDataList varList = new NFCDataList();
                     varList.AddInt(0);
 
                     property = propertyManager.AddProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name), varList);
@@ -388,7 +388,7 @@ namespace NFTCPClient
                 NFIProperty property = propertyManager.GetProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name));
                 if (null == property)
                 {
-                    NFIValueList varList = new NFCValueList();
+                    NFIDataList varList = new NFCDataList();
                     varList.AddFloat(0.0f);
 
                     property = propertyManager.AddProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name), varList);
@@ -414,7 +414,7 @@ namespace NFTCPClient
                 NFIProperty property = propertyManager.GetProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name));
                 if (null == property)
                 {
-                    NFIValueList varList = new NFCValueList();
+                    NFIDataList varList = new NFCDataList();
                     varList.AddString("");
 
                     property = propertyManager.AddProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name), varList);
@@ -440,7 +440,7 @@ namespace NFTCPClient
                 NFIProperty property = propertyManager.GetProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name));
                 if (null == property)
                 {
-                    NFIValueList varList = new NFCValueList();
+                    NFIDataList varList = new NFCDataList();
                     varList.AddObject(new NFIDENTID());
 
                     property = propertyManager.AddProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name), varList);
@@ -556,7 +556,7 @@ namespace NFTCPClient
 
                 if (addIntStruct.col >= 0)
                 {
-                    recordVecDesc[addIntStruct.col] = NFIValueList.VARIANT_TYPE.VTYPE_INT;
+                    recordVecDesc[addIntStruct.col] = NFIDataList.VARIANT_TYPE.VTYPE_INT;
                     recordVecData[addIntStruct.col] = addIntStruct.data;
                 }
             }
@@ -567,7 +567,7 @@ namespace NFTCPClient
 
                 if (addFloatStruct.col >= 0)
                 {
-                    recordVecDesc[addFloatStruct.col] = NFIValueList.VARIANT_TYPE.VTYPE_FLOAT;
+                    recordVecDesc[addFloatStruct.col] = NFIDataList.VARIANT_TYPE.VTYPE_FLOAT;
                     recordVecData[addFloatStruct.col] = addFloatStruct.data;
 
                 }
@@ -579,7 +579,7 @@ namespace NFTCPClient
 
                 if (addStringStruct.col >= 0)
                 {
-                    recordVecDesc[addStringStruct.col] = NFIValueList.VARIANT_TYPE.VTYPE_STRING;
+                    recordVecDesc[addStringStruct.col] = NFIDataList.VARIANT_TYPE.VTYPE_STRING;
                     recordVecData[addStringStruct.col] = System.Text.Encoding.Default.GetString(addStringStruct.data);
 
                 }
@@ -591,41 +591,41 @@ namespace NFTCPClient
 
                 if (addObjectStruct.col >= 0)
                 {
-                    recordVecDesc[addObjectStruct.col] = NFIValueList.VARIANT_TYPE.VTYPE_OBJECT;
-                    recordVecData[addObjectStruct.col] = addObjectStruct.data;
+                    recordVecDesc[addObjectStruct.col] = NFIDataList.VARIANT_TYPE.VTYPE_OBJECT;
+                    recordVecData[addObjectStruct.col] = PBToNF(addObjectStruct.data);
 
                 }
             }
 
-            NFIValueList varListDesc = new NFCValueList();
-            NFIValueList varListData = new NFCValueList();
+            NFIDataList varListDesc = new NFCDataList();
+            NFIDataList varListData = new NFCDataList();
             for (int m = 0; m < recordVecDesc.Count; m++)
             {
                 if (recordVecDesc.ContainsKey(m) && recordVecData.ContainsKey(m))
                 {
-                    NFIValueList.VARIANT_TYPE nType = (NFIValueList.VARIANT_TYPE)recordVecDesc[m];
+                    NFIDataList.VARIANT_TYPE nType = (NFIDataList.VARIANT_TYPE)recordVecDesc[m];
                     switch (nType)
                     {
-                        case NFIValueList.VARIANT_TYPE.VTYPE_INT:
+                        case NFIDataList.VARIANT_TYPE.VTYPE_INT:
                             {
                                 varListDesc.AddInt(0);
                                 varListData.AddInt((Int64)recordVecData[m]);
                             }
 
                             break;
-                        case NFIValueList.VARIANT_TYPE.VTYPE_FLOAT:
+                        case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
                             {
                                 varListDesc.AddFloat(0.0f);
                                 varListData.AddFloat((float)recordVecData[m]);
                             }
                             break;
-                        case NFIValueList.VARIANT_TYPE.VTYPE_STRING:
+                        case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
                             {
                                 varListDesc.AddString("");
                                 varListData.AddString((string)recordVecData[m]);
                             }
                             break;
-                        case NFIValueList.VARIANT_TYPE.VTYPE_OBJECT:
+                        case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
                             {
                                 varListDesc.AddObject(new NFIDENTID());
                                 varListData.AddObject((NFIDENTID)recordVecData[m]);
@@ -731,7 +731,7 @@ namespace NFTCPClient
                     NFIProperty xProperty = xPropertyManager.GetProperty(strPropertyName);
                     if (null == xProperty)
                     {
-                        NFIValueList varList = new NFCValueList();
+                        NFIDataList varList = new NFCDataList();
                         varList.AddInt(0);
 
                         xProperty = xPropertyManager.AddProperty(strPropertyName, varList);
@@ -746,7 +746,7 @@ namespace NFTCPClient
                     NFIProperty xProperty = xPropertyManager.GetProperty(strPropertyName);
                     if (null == xProperty)
                     {
-                        NFIValueList varList = new NFCValueList();
+                        NFIDataList varList = new NFCDataList();
                         varList.AddFloat(0);
 
                         xProperty = xPropertyManager.AddProperty(strPropertyName, varList);
@@ -761,7 +761,7 @@ namespace NFTCPClient
                     NFIProperty xProperty = xPropertyManager.GetProperty(strPropertyName);
                     if (null == xProperty)
                     {
-                        NFIValueList varList = new NFCValueList();
+                        NFIDataList varList = new NFCDataList();
                         varList.AddString("");
 
                         xProperty = xPropertyManager.AddProperty(strPropertyName, varList);
@@ -776,7 +776,7 @@ namespace NFTCPClient
                     NFIProperty xProperty = xPropertyManager.GetProperty(strPropertyName);
                     if (null == xProperty)
                     {
-                        NFIValueList varList = new NFCValueList();
+                        NFIDataList varList = new NFCDataList();
                         varList.AddObject(new NFIDENTID());
 
                         xProperty = xPropertyManager.AddProperty(strPropertyName, varList);
@@ -790,36 +790,7 @@ namespace NFTCPClient
         //////////////////////////////////
         private void EGMI_ACK_SKILL_OBJECTX(MsgHead head, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
-
-            NFMsg.ReqAckUseSkill xReqAckUseSkill = new NFMsg.ReqAckUseSkill();
-            xReqAckUseSkill = Serializer.Deserialize<NFMsg.ReqAckUseSkill>(new MemoryStream(xMsg.msg_data));
-            NFMsg.Position xNowPos = xReqAckUseSkill.now_pos;
-            NFMsg.Position xTarPos = xReqAckUseSkill.tar_pos;
-
-            NFIValueList xObjectList = new NFCValueList();
-            NFIValueList xRtlList = new NFCValueList();
-            NFIValueList xValueList = new NFCValueList();
-
-            if (xReqAckUseSkill.effect_ident.Count != xReqAckUseSkill.effect_rlt.Count
-                ||xReqAckUseSkill.effect_ident.Count != xReqAckUseSkill.effect_value.Count)
-            {
-                return;
-            }
-
-            for (int i = 0; i < xReqAckUseSkill.effect_ident.Count; ++i )
-            {
-                xObjectList.AddObject(PBToNF(xReqAckUseSkill.effect_ident[i]));
-                xRtlList.AddInt(xReqAckUseSkill.effect_rlt[i]);
-                xValueList.AddInt(xReqAckUseSkill.effect_value[i]);
-            }
-            
-
-            string strSkillName = System.Text.Encoding.Default.GetString(xReqAckUseSkill.skill_id);
-            //Debug.Log("AckUseSkill:" + strSkillName);
-
-            //NFCRenderInterface.Instance.UseSkill(PBToNF(xReqAckUseSkill.user), strSkillName, xNowPos.x, xNowPos.z, xTarPos.x, xTarPos.z, xObjectList, xRtlList, xValueList);
+           
         }
 
         private void EGMI_ACK_CHAT(MsgHead head, MemoryStream stream)

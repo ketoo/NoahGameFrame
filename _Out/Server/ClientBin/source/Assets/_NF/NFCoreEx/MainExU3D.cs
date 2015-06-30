@@ -28,7 +28,7 @@ namespace NFCoreEx
             xKernel.UpDate(Time.deltaTime);
 		}
 		
-        static void HeartBeatEventHandler(NFIDENTID self, string strHeartBeat, float fTime, NFIValueList valueList)
+        static void HeartBeatEventHandler(NFIDENTID self, string strHeartBeat, float fTime, NFIDataList valueList)
         {
             Debug.Log(self);
             Debug.Log(" ");
@@ -38,7 +38,7 @@ namespace NFCoreEx
             Debug.Log(" ");
         }
 
-		static void OnRecordEventHandler(NFIDENTID self, string strRecordName, NFIRecord.eRecordOptype eType, int nRow, int nCol, NFIValueList oldVar, NFIValueList newVar)
+		static void OnRecordEventHandler(NFIDENTID self, string strRecordName, NFIRecord.eRecordOptype eType, int nRow, int nCol, NFIDataList oldVar, NFIDataList newVar)
 		{
             Debug.Log(self);
             Debug.Log(" ");
@@ -56,7 +56,7 @@ namespace NFCoreEx
             Debug.Log(" ");
 		}
 
-		static void OnPropertydHandler(NFIDENTID self, string strProperty, NFIValueList oldVar, NFIValueList newVar)
+		static void OnPropertydHandler(NFIDENTID self, string strProperty, NFIDataList oldVar, NFIDataList newVar)
 		{
             Debug.Log(self);
             Debug.Log(" ");
@@ -82,9 +82,9 @@ namespace NFCoreEx
 
         public void MainU3D()
         {
-			Debug.Log("****************NFIValueList******************");
+			Debug.Log("****************NFIDataList******************");
 
-            NFIValueList var = new NFCValueList();
+            NFIDataList var = new NFCDataList();
 
 			for (int i = 0; i < 9; i +=3)
 			{
@@ -107,16 +107,16 @@ namespace NFCoreEx
 			Debug.Log("***************NFProperty*******************");
 
             NFIDENTID ident = new NFIDENTID(0, 1);
-            NFIObject gameObject = xKernel.CreateObject(ident, 0, 0, "", "", new NFCValueList());
+            NFIObject gameObject = xKernel.CreateObject(ident, 0, 0, "", "", new NFCDataList());
 
-			NFIValueList valueProperty = new NFCValueList();
+			NFIDataList valueProperty = new NFCDataList();
 			valueProperty.AddInt(112221);
 			gameObject.GetPropertyManager().AddProperty("111", valueProperty);
 			Debug.Log(gameObject.QueryPropertyInt("111"));
 
 			Debug.Log("***************NFRecord*******************");
 
-			NFIValueList valueRecord = new NFCValueList();
+			NFIDataList valueRecord = new NFCDataList();
 			valueRecord.AddInt(0);
 			valueRecord.AddFloat(0);
 			valueRecord.AddString("");
@@ -151,13 +151,13 @@ namespace NFCoreEx
             Debug.Log("***************ClassNFEvent*******************");
 
             xKernel.RegisterClassCallBack("CLASSAAAAA", OnClassHandler);
-            xKernel.CreateObject(new NFIDENTID(0, 2), 0, 0, "CLASSAAAAA", "CONFIGINDEX", new NFCValueList());
+            xKernel.CreateObject(new NFIDENTID(0, 2), 0, 0, "CLASSAAAAA", "CONFIGINDEX", new NFCDataList());
             xKernel.DestroyObject(new NFIDENTID(0, 2));
 
 
             Debug.Log(" ");
 			Debug.Log("***************NFHeartBeat*******************");
-            xKernel.AddHeartBeat(new NFIDENTID(0, 1), "TestHeartBeat", HeartBeatEventHandler, 5.0f, new NFCValueList());
+            xKernel.AddHeartBeat(new NFIDENTID(0, 1), "TestHeartBeat", HeartBeatEventHandler, 5.0f, new NFCDataList());
 
         }
     }
