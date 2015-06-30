@@ -14,11 +14,17 @@ namespace NFCoreEx
         public NFCLogicClass()
         {
             mxPropertyManager = new NFCPropertyManager(new NFIDENTID());
+            mxRecordManager = new NFCRecordManager(new NFIDENTID());
         }
 
         public override NFIPropertyManager GetPropertyManager()
         {
             return mxPropertyManager;
+        }
+
+        public override NFIRecordManager GetRecordManager()
+        {
+            return mxRecordManager;
         }
 
         public override ArrayList GetConfigNameList()
@@ -67,6 +73,7 @@ namespace NFCoreEx
 
         /////////////////////////////////////
         private NFIPropertyManager mxPropertyManager;
+        private NFIRecordManager mxRecordManager;
         private ArrayList mxIntansList = new ArrayList();
         private string mstrName;
         private string mstrPath;

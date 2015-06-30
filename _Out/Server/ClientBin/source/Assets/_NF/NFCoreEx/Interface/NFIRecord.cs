@@ -12,24 +12,25 @@ namespace NFCoreEx
         {
             Add = 0,
             Del,
-            Changed,
+            Swap,
             Updata,
             Create,
         };
 
-		public delegate void RecordEventHandler(NFIDENTID self, string strRecordName, NFIRecord.eRecordOptype eType, int nRow, int nCol, NFIValueList oldVar, NFIValueList newVar);
+		public delegate void RecordEventHandler(NFIDENTID self, string strRecordName, NFIRecord.eRecordOptype eType, int nRow, int nCol, NFIDataList oldVar, NFIDataList newVar);
 		
 		public abstract bool IsUsed(int nRow);
 		public abstract int GetRows();
         public abstract int GetCols();
-        public abstract NFIValueList.VARIANT_TYPE GetColType( int nCol);
+        public abstract NFIDataList.VARIANT_TYPE GetColType( int nCol);
+        public abstract NFIDataList GetColsData();
 
         // add data
         public abstract int AddRow(int nRow);
-        public abstract int AddRow(int nRow, NFIValueList var);
+        public abstract int AddRow(int nRow, NFIDataList var);
 
         // set data
-        public abstract int SetValue(int nRow, NFIValueList var);
+        public abstract int SetValue(int nRow, NFIDataList var);
 
         public abstract bool SetInt(int nRow, int nCol, Int64 value);
         public abstract bool SetFloat(int nRow, int nCol, float value);
@@ -38,7 +39,7 @@ namespace NFCoreEx
         public abstract bool SetObject(int nRow, int nCol, NFIDENTID value);
 
         // query data
-        public abstract NFIValueList QueryRow(int nRow);
+        public abstract NFIDataList QueryRow(int nRow);
         public abstract bool SwapRow(int nOriginRow, int nTargetRow);
 
         public abstract Int64 QueryInt(int nRow, int nCol);
@@ -48,7 +49,7 @@ namespace NFCoreEx
         public abstract NFIDENTID QueryObject(int nRow, int nCol);
 
         //public abstract int FindRow( int nRow );
-        public abstract int FindColValue(int nCol, NFIValueList var);
+        public abstract int FindColValue(int nCol, NFIDataList var);
 
         public abstract int FindInt(int nCol, Int64 value);
         public abstract int FindFloat(int nCol, float value);
