@@ -9,13 +9,27 @@
 #ifndef _NF_QUEUE_H_
 #define _NF_QUEUE_H_
 
-#include <iostream>
-#include <map>
 #include <list>
-#include <algorithm>
 #include <thread>
+#include <boost/smart_ptr/detail/spinlock.hpp>
 #include "NFComm/NFPluginModule/NFPlatform.h"
-#include "Theron/Detail/Threading/SpinLock.h"
+
+class spinlock_mutex
+{
+public:
+    spinlock_mutex()
+    {
+        _spinlock.lock();
+    }
+    
+    ~spinlock_mutex()
+    {
+        _spinlock.unlock();
+    }
+
+private:
+    boost::detail::spinlock _spinlock;
+};
 
 template<typename T>
 class NFQueue
@@ -24,44 +38,37 @@ public:
     NFQueue()
 	{
 	}
+
     virtual ~NFQueue()
 	{
-		mList.clear();
 	}
 
     bool Push(const T& object)
 	{
-		mxQueueMutex.Lock();
+		spinlock_mutex();
 
 		mList.push_back(object);
-
-		mxQueueMutex.Unlock();
-
 
 		return true;
 	}
 
     bool Pop(T& object)
 	{
-		mxQueueMutex.Lock();
+		spinlock_mutex();
+
 		if (mList.empty())
 		{
-			mxQueueMutex.Unlock();
-
 			return false;
 		}
 
 		object = mList.front();
 		mList.pop_front();
 
-		mxQueueMutex.Unlock();
-
 		return true;
 	}
 
 private:
     std::list<T> mList;
-    mutable Theron::Detail::SpinLock mxQueueMutex;                 ///< Thread synchronization object protecting the mailbox.
 };
 
 #endif

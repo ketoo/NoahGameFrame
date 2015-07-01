@@ -204,7 +204,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_S
                 if (recordColNode->first_attribute("Key") != NULL)
                 {
                     const char* pstrKey = recordColNode->first_attribute("Key")->value();
-                    bool bKey = boost::lexical_cast<int>(pstrKey);
+                    bool bKey = boost::lexical_cast<bool>(pstrKey);
                     if (bKey)
                     {
                         recordKey.Add(NFINT64(1));
@@ -265,7 +265,7 @@ bool NFCLogicClassModule::AddComponents(rapidxml::xml_node<>* pComponentRootNode
             const char* strComponentName = pComponentNode->first_attribute("Name")->value();
             const char* strLanguage = pComponentNode->first_attribute("Language")->value();
             const char* strEnable = pComponentNode->first_attribute("Enable")->value();
-            bool bEnable = boost::lexical_cast<int>(strEnable);
+            bool bEnable = boost::lexical_cast<bool>(strEnable);
             if (bEnable)
             {
                 if (pClass->GetComponentManager()->GetElement(strComponentName))
