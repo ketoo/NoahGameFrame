@@ -150,7 +150,7 @@ int main(int argc, char* argv[])
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
     SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
-#else if NF_PLATFORM == NF_PLATFORM_LINUX
+#elif NF_PLATFORM == NF_PLATFORM_LINUX
 	bool bDaemon = false;
 
 	if (argc > 1)
