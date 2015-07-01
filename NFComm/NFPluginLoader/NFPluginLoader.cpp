@@ -102,6 +102,21 @@ void CreateBackThread()
     //std::cout << "CreateBackThread, thread ID = " << gThread.get_id() << std::endl;
 }
 
+void InitDaemon()
+{
+#if NF_PLATFORM == NF_PLATFORM_LINUX
+	daemon(nochdir, noclose);
+
+	// ignore signals
+	signal(SIGINT,  SIG_IGN);
+	signal(SIGHUP,  SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGPIPE, SIG_IGN);
+	signal(SIGTTOU, SIG_IGN);
+	signal(SIGTTIN, SIG_IGN);
+	signal(SIGTERM, SIG_IGN);
+#endif
+}
 
 void PrintfLogo()
 {
@@ -136,26 +151,21 @@ int main(int argc, char* argv[])
 #if NF_PLATFORM == NF_PLATFORM_WIN
     SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
 #else if NF_PLATFORM == NF_PLATFORM_LINUX
-	bool is_daemon = false;
+	bool bDaemon = false;
 
 	if (argc > 1)
 	{
 		if (0 == NFSTRICMP((const char*)argv[1], "-d"))
 		{
-			is_daemon = true;
+			bDaemon = true;
 		}
 	}
 
-	daemon(nochdir, noclose);
+	if (bDaemon)
+	{
+		InitDaemon();
+	}
 
-	// ignore signals
-	signal(SIGINT,  SIG_IGN);
-	signal(SIGHUP,  SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGPIPE, SIG_IGN);
-	signal(SIGTTOU, SIG_IGN);
-	signal(SIGTTIN, SIG_IGN);
-	signal(SIGTERM, SIG_IGN);
 
 #endif
 	NFCActorManager::GetSingletonPtr()->Init();
