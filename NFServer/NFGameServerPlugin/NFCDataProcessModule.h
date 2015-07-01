@@ -45,6 +45,7 @@ protected:
     const bool AttachData( const NFIDENTID& self );
 
     void OnOnline(const NFIDENTID& self);
+    void OnOffline(const NFIDENTID& self);
 private:
 
     struct RoleData 
