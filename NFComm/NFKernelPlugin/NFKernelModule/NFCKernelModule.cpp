@@ -1699,7 +1699,7 @@ bool NFCKernelModule::AddPropertyCallBack(const NFIDENTID& self, const std::stri
 	return false;
 }
 
-bool NFCKernelModule::AddHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIDataList& var, const float fTime, const int nCount)
+bool NFCKernelModule::AddHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount)
 {
 	NF_SHARE_PTR<NFIObject> pObject = GetObject(self);
 	if (pObject.get())
@@ -1707,7 +1707,7 @@ bool NFCKernelModule::AddHeartBeat(const NFIDENTID& self, const std::string& str
 		//共有回调添加后，删除时也要删除
 		//ResgisterCommonHeartBeat(cb);
 
-		pObject->AddHeartBeat(strHeartBeatName, cb, var, fTime, nCount);
+		pObject->AddHeartBeat(strHeartBeatName, cb, fTime, nCount);
 	}
 
 	return false;
