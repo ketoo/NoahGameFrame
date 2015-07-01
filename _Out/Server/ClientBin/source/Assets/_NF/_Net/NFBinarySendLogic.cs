@@ -684,6 +684,7 @@ public class NFBinarySendLogic
     {
         NFMsg.ReqAckPlayerChat xData = new NFMsg.ReqAckPlayerChat();
         xData.chat_id = NFToPB(targetID);
+        xData.chat_name = UnicodeEncoding.Default.GetBytes(xNet.strRoleName);
         xData.chat_type = (NFMsg.ReqAckPlayerChat.EGameChatType)nType;
         xData.chat_info = UnicodeEncoding.Default.GetBytes(strData);
 
