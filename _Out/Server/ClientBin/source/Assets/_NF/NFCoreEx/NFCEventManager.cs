@@ -14,7 +14,7 @@ namespace NFCoreEx
 			mhtEvent = new Hashtable();
 		}
 
-		public override void RegisterCallback(int nEventID, NFIEvent.EventHandler handler, NFIValueList valueList)
+		public override void RegisterCallback(int nEventID, NFIEvent.EventHandler handler, NFIDataList valueList)
 		{
 			if (!mhtEvent.ContainsKey(nEventID))
 			{
@@ -26,7 +26,7 @@ namespace NFCoreEx
 
 		}
 
-		public override void DoEvent(int nEventID, NFIValueList valueList)
+		public override void DoEvent(int nEventID, NFIDataList valueList)
 		{
 			if (mhtEvent.ContainsKey(nEventID))
 			{

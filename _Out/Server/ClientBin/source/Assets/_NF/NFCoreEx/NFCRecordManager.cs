@@ -23,7 +23,7 @@ namespace NFCoreEx
 			}
 		}
 
-		public override NFIRecord AddRecord(string strRecordName, int nRow, NFIValueList varData)
+		public override NFIRecord AddRecord(string strRecordName, int nRow, NFIDataList varData)
 		{
 			NFIRecord record = new NFCRecord(mSelf, strRecordName, nRow, varData);
 			mhtRecord.Add(strRecordName, record);
@@ -43,9 +43,9 @@ namespace NFCoreEx
 			return record;
 		}
 		
-		public override NFIValueList GetRecordList()
+		public override NFIDataList GetRecordList()
 		{
-			NFIValueList varData = new NFCValueList();
+			NFIDataList varData = new NFCDataList();
 			foreach( DictionaryEntry de in mhtRecord) 
 			{
 				varData.AddString(de.Key.ToString());				

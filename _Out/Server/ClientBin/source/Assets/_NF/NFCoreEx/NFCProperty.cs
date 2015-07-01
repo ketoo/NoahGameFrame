@@ -8,19 +8,19 @@ namespace NFCoreEx
 {
     public class NFCProperty : NFIProperty
     {
-        public NFCProperty( NFIDENTID self, string strPropertyName, NFIValueList varData)
+        public NFCProperty( NFIDENTID self, string strPropertyName, NFIDataList varData)
         {
             mSelf = self;
             msPropertyName = strPropertyName;
-            mVarProperty = new NFCValueList(varData);
+            mVarProperty = new NFCDataList(varData);
         }
 
-        public override void SetValue(NFIValueList varData)
+        public override void SetValue(NFIDataList varData)
         {
             mVarProperty = varData;
         }
 
-        public override NFIValueList GetValue()
+        public override NFIDataList GetValue()
         {
             return mVarProperty;
         }
@@ -30,7 +30,7 @@ namespace NFCoreEx
             return msPropertyName;
         }
 		
-		public override NFIValueList.VARIANT_TYPE GetType()
+		public override NFIDataList.VARIANT_TYPE GetType()
 		{
 			return mVarProperty.GetType(0);
 		}
@@ -64,11 +64,11 @@ namespace NFCoreEx
 		{
 			if (mVarProperty.IntVal(0) != value)
 			{
-				NFCValueList oldValue = new NFCValueList(mVarProperty);
+				NFCDataList oldValue = new NFCDataList(mVarProperty);
 				
 				mVarProperty.SetInt(0, value);
 
-				NFCValueList newValue = new NFCValueList(mVarProperty);
+				NFCDataList newValue = new NFCDataList(mVarProperty);
 
                 if (null != doHandleDel)
                 {
@@ -85,11 +85,11 @@ namespace NFCoreEx
 			if (mVarProperty.FloatVal(0) - value > 0.01f
 				|| mVarProperty.FloatVal(0) - value < -0.01f)
 			{
-				NFCValueList oldValue = new NFCValueList(mVarProperty);
+				NFCDataList oldValue = new NFCDataList(mVarProperty);
 
 				mVarProperty.SetFloat(0, value);
 
-				NFCValueList newValue = new NFCValueList(mVarProperty);
+				NFCDataList newValue = new NFCDataList(mVarProperty);
 
                 if (null != doHandleDel)
                 {
@@ -105,11 +105,11 @@ namespace NFCoreEx
             if (mVarProperty.DoubleVal(0) - value > 0.01f
                 || mVarProperty.DoubleVal(0) - value < -0.01f)
             {
-                NFCValueList oldValue = new NFCValueList(mVarProperty);
+                NFCDataList oldValue = new NFCDataList(mVarProperty);
 
                 mVarProperty.SetDouble(0, value);
 
-                NFCValueList newValue = new NFCValueList(mVarProperty);
+                NFCDataList newValue = new NFCDataList(mVarProperty);
 
                 if (null != doHandleDel)
                 {
@@ -124,11 +124,11 @@ namespace NFCoreEx
 		{
             if (mVarProperty.StringVal(0) != value)
             {
-                NFCValueList oldValue = new NFCValueList(mVarProperty);
+                NFCDataList oldValue = new NFCDataList(mVarProperty);
 
                 mVarProperty.SetString(0, value);
 
-                NFCValueList newValue = new NFCValueList(mVarProperty);
+                NFCDataList newValue = new NFCDataList(mVarProperty);
 
                 if (null != doHandleDel)
                 {
@@ -144,11 +144,11 @@ namespace NFCoreEx
 
             if (mVarProperty.ObjectVal(0) != value)
             {
-                NFCValueList oldValue = new NFCValueList(mVarProperty);
+                NFCDataList oldValue = new NFCDataList(mVarProperty);
 
                 mVarProperty.SetObject(0, value);
 
-                NFCValueList newValue = new NFCValueList(mVarProperty);
+                NFCDataList newValue = new NFCDataList(mVarProperty);
 
                 if (null != doHandleDel)
                 {
@@ -168,6 +168,6 @@ namespace NFCoreEx
 
 		NFIDENTID mSelf;
 		string msPropertyName;
-		NFIValueList mVarProperty;
+		NFIDataList mVarProperty;
     }
 }
