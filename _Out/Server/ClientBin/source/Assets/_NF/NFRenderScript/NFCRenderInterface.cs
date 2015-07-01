@@ -100,7 +100,7 @@ public class NFCRenderInterface
     }
 
     /////////////////////////////////////////////////////////////////
-    private void OnBuildRecordEventHandler(NFIDENTID self, string strRecordName, NFIRecord.eRecordOptype eType, int nRow, int nCol, NFIValueList oldVar, NFIValueList newVar)
+    private void OnBuildRecordEventHandler(NFIDENTID self, string strRecordName, NFIRecord.eRecordOptype eType, int nRow, int nCol, NFIDataList oldVar, NFIDataList newVar)
     {
  
     }

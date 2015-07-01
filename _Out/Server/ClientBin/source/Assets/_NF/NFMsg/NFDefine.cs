@@ -147,7 +147,19 @@ namespace NFMsg
       EGEC_NO_SERVER4ZONE = 142,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_INVALID_SKILL", Value=143)]
-      EGEC_INVALID_SKILL = 143
+      EGEC_INVALID_SKILL = 143,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ENTER_GAME_SUCCESS", Value=144)]
+      EGEC_ENTER_GAME_SUCCESS = 144,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_CREATE_GUILD_SUCCESS", Value=200)]
+      EGEC_CREATE_GUILD_SUCCESS = 200,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_JOIN_GUILD_SUCCESS", Value=201)]
+      EGEC_JOIN_GUILD_SUCCESS = 201,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_LEAVE_GUILD_SUCCESS", Value=202)]
+      EGEC_LEAVE_GUILD_SUCCESS = 202
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGameMsgID")]
@@ -259,9 +271,6 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_RECOVER_ROLE", Value=136)]
       EGMI_REQ_RECOVER_ROLE = 136,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_COMMAND", Value=140)]
-      EGMI_REQ_COMMAND = 140,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ENTER_GAME", Value=150)]
       EGMI_REQ_ENTER_GAME = 150,
             
@@ -282,6 +291,12 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SWAP_SCENE", Value=156)]
       EGMI_ACK_SWAP_SCENE = 156,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_END_BATTLE", Value=157)]
+      EGMI_REQ_END_BATTLE = 157,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_END_BATTLE", Value=158)]
+      EGMI_ACK_END_BATTLE = 158,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OBJECT_ENTRY", Value=200)]
       EGMI_ACK_OBJECT_ENTRY = 200,
@@ -400,6 +415,75 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_COMPELETE_TASK", Value=257)]
       EGMI_REQ_COMPELETE_TASK = 257,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_JOIN_PVP", Value=260)]
+      EGMI_REQ_JOIN_PVP = 260,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_EXIT_PVP", Value=261)]
+      EGMI_REQ_EXIT_PVP = 261,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMT_ACK_START_PVP", Value=262)]
+      EGMT_ACK_START_PVP = 262,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ONLINE_NOTIFY", Value=290)]
+      EGMI_ACK_ONLINE_NOTIFY = 290,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OFFLINE_NOTIFY", Value=291)]
+      EGMI_ACK_OFFLINE_NOTIFY = 291,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CREATE_GUILD", Value=300)]
+      EGMI_REQ_CREATE_GUILD = 300,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CREATE_GUILD", Value=301)]
+      EGMI_ACK_CREATE_GUILD = 301,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_JOIN_GUILD", Value=302)]
+      EGMI_REQ_JOIN_GUILD = 302,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_JOIN_GUILD", Value=303)]
+      EGMI_ACK_JOIN_GUILD = 303,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_LEAVE_GUILD", Value=304)]
+      EGMI_REQ_LEAVE_GUILD = 304,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_LEAVE_GUILD", Value=305)]
+      EGMI_ACK_LEAVE_GUILD = 305,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_OPR_GUILD", Value=306)]
+      EGMI_REQ_OPR_GUILD = 306,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OPR_GUILD", Value=307)]
+      EGMI_ACK_OPR_GUILD = 307,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SEARCH_GUILD", Value=308)]
+      EGMI_REQ_SEARCH_GUILD = 308,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SEARCH_GUILD", Value=309)]
+      EGMI_ACK_SEARCH_GUILD = 309,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_INT", Value=1000)]
+      EGMI_REQ_CMD_PROPERTY_INT = 1000,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_STR", Value=1001)]
+      EGMI_REQ_CMD_PROPERTY_STR = 1001,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_OBJECT", Value=1002)]
+      EGMI_REQ_CMD_PROPERTY_OBJECT = 1002,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_FLOAT", Value=1003)]
+      EGMI_REQ_CMD_PROPERTY_FLOAT = 1003,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_RECORD_INT", Value=1004)]
+      EGMI_REQ_CMD_RECORD_INT = 1004,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_RECORD_STR", Value=1005)]
+      EGMI_REQ_CMD_RECORD_STR = 1005,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_RECORD_OBJECT", Value=1006)]
+      EGMI_REQ_CMD_RECORD_OBJECT = 1006,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_RECORD_FLOAT", Value=1007)]
+      EGMI_REQ_CMD_RECORD_FLOAT = 1007,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BUY_FORM_SHOP", Value=10000)]
       EGMI_REQ_BUY_FORM_SHOP = 10000,
             
@@ -416,7 +500,87 @@ namespace NFMsg
       EGMI_REQ_UP_BUILD_LVL = 10101,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CREATE_ITEM", Value=10102)]
-      EGMI_REQ_CREATE_ITEM = 10102
+      EGMI_REQ_CREATE_ITEM = 10102,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BUILD_OPERATE", Value=10103)]
+      EGMI_REQ_BUILD_OPERATE = 10103
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EAwardType")]
+    public enum EAwardType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"AWARD_TYPE_NORMAL", Value=0)]
+      AWARD_TYPE_NORMAL = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"AWARD_TYPE_HERO", Value=1)]
+      AWARD_TYPE_HERO = 1
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EGuildPowerType")]
+    public enum EGuildPowerType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GUILD_POWER_TYPE_NORMAL", Value=0)]
+      GUILD_POWER_TYPE_NORMAL = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GUILD_POWER_TYPE_VICE_PRESIDENT", Value=1)]
+      GUILD_POWER_TYPE_VICE_PRESIDENT = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GUILD_POWER_TYPE_PRESIDENT", Value=2)]
+      GUILD_POWER_TYPE_PRESIDENT = 2
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ETaskState")]
+    public enum ETaskState
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TASK_IN_PROCESS", Value=0)]
+      TASK_IN_PROCESS = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TASK_DONE", Value=1)]
+      TASK_DONE = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TASK_DRAW_AWARD", Value=2)]
+      TASK_DRAW_AWARD = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TASK_FINISH", Value=3)]
+      TASK_FINISH = 3
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ETaskType")]
+    public enum ETaskType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TASK_LEVEL_UPDATE_SOME_LEVEL", Value=0)]
+      TASK_LEVEL_UPDATE_SOME_LEVEL = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TASK_PASS_ECTYPE", Value=1)]
+      TASK_PASS_ECTYPE = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TASK_PASS_ECTYPE_COUNT", Value=2)]
+      TASK_PASS_ECTYPE_COUNT = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TASK_PASS_SOME_TYPE_ECTYPE_COUNT", Value=3)]
+      TASK_PASS_SOME_TYPE_ECTYPE_COUNT = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TASK_UPDATE_SKILL_COUNT", Value=4)]
+      TASK_UPDATE_SKILL_COUNT = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TASK_CONSUME_MONEY", Value=5)]
+      TASK_CONSUME_MONEY = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TASK_CONSUME_DIAMOND", Value=6)]
+      TASK_CONSUME_DIAMOND = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TASK_ARENA_COUNT", Value=7)]
+      TASK_ARENA_COUNT = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TASK_KILL_MONSTER_COUNT", Value=8)]
+      TASK_KILL_MONSTER_COUNT = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TASK_KILL_SOME_MONSTER_COUNT", Value=9)]
+      TASK_KILL_SOME_MONSTER_COUNT = 9
     }
   
 }
