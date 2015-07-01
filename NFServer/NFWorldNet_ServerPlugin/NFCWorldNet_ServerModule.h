@@ -24,6 +24,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIWorldGuildModule.h"
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
+#include "NFComm/NFPluginModule/NFIWorldGuildDataModule.h"
 
 class NFCWorldNet_ServerModule
     : public NFIWorldNet_ServerModule
@@ -91,7 +92,7 @@ protected:
 	//////////////////////////////////////////////////////////////////////////
 	void LogGameServer(const float fLastTime);
 
-    void ShowStringByFD(const NFIDENTID& object, const int nClientFD, const int nResultID);
+    void ShowString(const NFIDENTID& self, const int nResultID);
 
     void SendPropertyToPlayer(const NFIDENTID& self, const NFIDENTID& xPlayer);
     void SendRecordToPlayer(const NFIDENTID& self, const NFIDENTID& xPlayer, const std::string& strRecordName, const int nRow = -1);
@@ -102,6 +103,7 @@ protected:
 	void OnJoinGuildProcess(const NFIPacket& msg);
 	void OnLeaveGuildProcess(const NFIPacket& msg);
 	void OnOprGuildMemberProcess(const NFIPacket& msg);
+    void OnSearchGuildProcess(const NFIPacket& msg);
     void OnOnline(const NFIPacket& msg);
     void OnOffline(const NFIPacket& msg);
     
@@ -140,6 +142,7 @@ private:
 	NFIEventProcessModule* m_pEventProcessModule;
 	NFIWorldGuildModule* m_pWorldGuildModule;
     NFIClusterModule* m_pClusterSQLModule;
+    NFIWorldGuildDataModule* m_pWorldGuildDataModule;
 };
 
 #endif
