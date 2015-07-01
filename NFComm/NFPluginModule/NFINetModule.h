@@ -29,6 +29,7 @@ enum NF_SERVER_TYPE
 	NFST_NOSQL_SERVER = 7,
 };
 
+
 #if NF_PLATFORM == NF_PLATFORM_WIN
 class QueueEventPack
 {
@@ -104,41 +105,11 @@ public:
 		}
 	}
 
-	virtual void LogRecive(const char* str){};
-	virtual void LogSend(const char* str){};
-
-	static NFIDENTID PBToNF(NFMsg::Ident xID)
-	{
-		NFIDENTID  xIdent;
-		xIdent.nHead64 = xID.svrid();
-		xIdent.nData64 = xID.index();
-
-		return xIdent;
-	}
-
-	static NFMsg::Ident NFToPB(NFIDENTID xID)
-	{
-		NFMsg::Ident  xIdent;
-		xIdent.set_svrid(xID.nHead64);
-		xIdent.set_index(xID.nData64);
-
-		return xIdent;
-	}
-
-   virtual bool SendMsg(const std::string& strMsg, const int nSockIndex = 0, bool bBroadcast = false)
-   {
-       return false;
-   }
-
-   const NFINet* GetNFINet()
-   {
-       return m_pNet;
-   }
-
 	template<typename BaseType>
 	void Initialization(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const char* strIP, const unsigned short nPort)
 	{
 #if NF_PLATFORM == NF_PLATFORM_WIN
+   //windows use queue
 		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
 		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
@@ -153,6 +124,7 @@ public:
 	int Initialization(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4)
 	{
 #if NF_PLATFORM == NF_PLATFORM_WIN
+	 //windows use queue
 		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
 		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
@@ -163,56 +135,7 @@ public:
 
 		return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
 	}
-
-	bool RecivePB(const NFIPacket& msg, NFMsg::MsgBase& xMsg, google::protobuf::Message& xData)
-	{
-		if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
-		{
-			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
-			LogRecive(szData);
-
-			return false;
-		}
-
-		if (!xData.ParseFromString(xMsg.msg_data()))
-		{
-			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Parse Message Failed from MsgData to ProtocolData, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
-			LogRecive(szData);
-
-			return false;
-		}
-
-		return true;
-	}
-
-	bool RecivePB(const NFIPacket& msg, google::protobuf::Message& xData, NFIDENTID& nPlayer)
-	{
-		NFMsg::MsgBase xMsg;
-		if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
-		{
-			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
-			LogRecive(szData);
-
-			return false;
-		}
-
-		if (!xData.ParseFromString(xMsg.msg_data()))
-		{
-			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Parse Message Failed from MsgData to ProtocolData, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
-			LogRecive(szData);
-
-			return false;
-		}
-
-		nPlayer = PBToNF(xMsg.player_id());
-
-		return true;
-	}
-
+	
 	virtual bool Execute(const float fLasFrametime, const float fStartedTime)
 	{
 		if (!m_pNet)
@@ -268,13 +191,84 @@ public:
 		return m_pNet->Execute(fLasFrametime, fStartedTime);
 	}
 
+	static NFIDENTID PBToNF(NFMsg::Ident xID)
+	{
+		NFIDENTID  xIdent;
+		xIdent.nHead64 = xID.svrid();
+		xIdent.nData64 = xID.index();
+
+		return xIdent;
+	}
+
+	static NFMsg::Ident NFToPB(NFIDENTID xID)
+	{
+		NFMsg::Ident  xIdent;
+		xIdent.set_svrid(xID.nHead64);
+		xIdent.set_index(xID.nData64);
+
+		return xIdent;
+	}
+
+	static bool RecivePB(const NFIPacket& msg, NFMsg::MsgBase& xMsg, google::protobuf::Message& xData)
+	{
+		if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
+		{
+			char szData[MAX_PATH] = { 0 };
+			sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
+			//LogRecive(szData);
+
+			return false;
+		}
+
+		if (!xData.ParseFromString(xMsg.msg_data()))
+		{
+			char szData[MAX_PATH] = { 0 };
+			sprintf(szData, "Parse Message Failed from MsgData to ProtocolData, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
+			//LogRecive(szData);
+
+			return false;
+		}
+
+		return true;
+	}
+
+	static bool RecivePB(const NFIPacket& msg, google::protobuf::Message& xData, NFIDENTID& nPlayer)
+	{
+		NFMsg::MsgBase xMsg;
+		if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
+		{
+			char szData[MAX_PATH] = { 0 };
+			sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
+			//LogRecive(szData);
+
+			return false;
+		}
+
+		if (!xData.ParseFromString(xMsg.msg_data()))
+		{
+			char szData[MAX_PATH] = { 0 };
+			sprintf(szData, "Parse Message Failed from MsgData to ProtocolData, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
+			//LogRecive(szData);
+
+			return false;
+		}
+
+		nPlayer = PBToNF(xMsg.player_id());
+
+		return true;
+	}
+
+	bool SendMsg(const std::string& msg, const int nSockIndex = 0, bool bBroadcast = false)
+	{
+		return m_pNet->SendMsg(msg.c_str(), msg.length(), nSockIndex, bBroadcast);
+	}
+
 	bool SendMsgPB(const uint16_t nMsgID, google::protobuf::Message& xData, const uint32_t nSockIndex = 0, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<NFIDENTID>* pClientIDList = NULL, bool bBroadcast = false)
 	{
 		if (!m_pNet)
 		{
 			char szData[MAX_PATH] = { 0 };
 			sprintf(szData, "Send Message to %d Failed For NULL Of Net, MessageID: %d\n", nSockIndex, nMsgID);
-			LogSend(szData);
 
 			return false;
 		}
@@ -284,7 +278,6 @@ public:
 		{
 			char szData[MAX_PATH] = { 0 };
 			sprintf(szData, "Send Message to %d Failed For Serialize of MsgData, MessageID: %d\n", nSockIndex, nMsgID);
-			LogSend(szData);
 
 			return false;
 		}
@@ -311,7 +304,6 @@ public:
 		{
 			char szData[MAX_PATH] = { 0 };
 			sprintf(szData, "Send Message to %d Failed For Serialize of MsgBase, MessageID: %d\n", nSockIndex, nMsgID);
-			LogSend(szData);
 
 			return false;
 		}
