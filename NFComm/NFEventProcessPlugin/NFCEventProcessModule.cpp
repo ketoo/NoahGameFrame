@@ -155,7 +155,7 @@ bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventI
 			return false;
 		}
 
-		EVENT_PROCESS_FUNCTOR_PTR cb;// = NF_SHARE_PTR<EVENT_PROCESS_FUNCTOR>(NULL);
+		EVENT_PROCESS_FUNCTOR_PTR cb;
 		bool bRet = pEventInfo->First(cb);
 		while (bRet)
 		{

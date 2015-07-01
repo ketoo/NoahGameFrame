@@ -9,6 +9,7 @@
 #ifndef _NF_DEFINE_H_
 #define _NF_DEFINE_H_
 
+#include <functional>
 #include "NFIDataList.h"
 #include <boost/function.hpp>
 #include <boost/shared_ptr.hpp>
@@ -48,12 +49,12 @@ typedef boost::function<int(const NFIDENTID&, const std::string&, const float, c
 typedef boost::function<int(const NFIDENTID&, const std::string&, const NFIDataList&, const NFIDataList&, const NFIDataList&)> PROPERTY_EVENT_FUNCTOR;
 typedef boost::function<int(const NFIDENTID&, const std::string&, const int, const int, const int, const NFIDataList&, const NFIDataList&, const NFIDataList&)> RECORD_EVENT_FUNCTOR;
 
-typedef boost::function<int(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIDataList&)> CLASS_EVENT_FUNCTOR;
-typedef boost::function<int(const NFIDENTID&, const int, const NFIDataList&)> EVENT_PROCESS_FUNCTOR;
+typedef std::function<int(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIDataList&)> CLASS_EVENT_FUNCTOR;
+typedef std::function<int(const NFIDENTID&, const int, const NFIDataList&)> EVENT_PROCESS_FUNCTOR;
 
-typedef boost::function<int(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const std::string&)> CLASS_ASYNC_EVENT_FUNCTOR;
-typedef boost::function<int(const NFIDENTID&, const int, const std::string&)> EVENT_ASYNC_PROCESS_END_FUNCTOR;
-typedef boost::function<int(const NFIDENTID&, const int, std::string&)> EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR;
+typedef std::function<int(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const std::string&)> CLASS_ASYNC_EVENT_FUNCTOR;
+typedef std::function<int(const NFIDENTID&, const int, const std::string&)> EVENT_ASYNC_PROCESS_END_FUNCTOR;
+typedef std::function<int(const NFIDENTID&, const int, std::string&)> EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR;
 
 typedef NF_SHARE_PTR<HEART_BEAT_FUNCTOR> HEART_BEAT_FUNCTOR_PTR;
 typedef NF_SHARE_PTR<PROPERTY_EVENT_FUNCTOR> PROPERTY_EVENT_FUNCTOR_PTR;
