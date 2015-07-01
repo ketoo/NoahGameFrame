@@ -39,7 +39,6 @@ public:
 
     virtual ~NFCHeartBeatElement()
     {
-        var.Clear();
     }
 
     void DoHeartBeatEvent();
@@ -50,7 +49,6 @@ public:
     int nCount;
     std::string strBeatName;
     NFIDENTID self;
-    NFCDataList var;
 };
 
 class NFIHeartBeatManager
@@ -63,15 +61,15 @@ public:
     virtual bool Execute(const float fLastTime, const float fAllTime) = 0;
     virtual bool Exist(const std::string& strHeartBeatName) = 0;
 
-    virtual bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIDataList& var, const float fTime, const int nCount) = 0;
+    virtual bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
     virtual bool RemoveHeartBeat(const std::string& strHeartBeatName) = 0;
 
     template<typename BaseType>
-    bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const float, const int, const NFIDataList&), const NFIDataList& var, const float fTime, const int nCount)
+    bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const float, const int), const float fTime, const int nCount)
     {
-        HEART_BEAT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4, _5);
+        HEART_BEAT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         HEART_BEAT_FUNCTOR_PTR functorPtr(NF_NEW HEART_BEAT_FUNCTOR(functor));
-        return AddHeartBeat(self, strHeartBeatName, functorPtr, var, fTime, nCount);
+        return AddHeartBeat(self, strHeartBeatName, functorPtr, fTime, nCount);
     }
 };
 
