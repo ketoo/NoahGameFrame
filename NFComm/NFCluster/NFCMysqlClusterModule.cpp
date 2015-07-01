@@ -270,3 +270,42 @@ bool NFCMysqlClusterModule::Select( const std::string& strRecordName, const std:
 {
 	return false;
 }
+
+bool NFCMysqlClusterModule::Keys( const std::string& strKeyName, std::vector<std::string>& valueVec )
+{
+    return Keys(strDefaultTable, strKeyName, valueVec);
+}
+
+bool NFCMysqlClusterModule::Keys( const std::string& strRecordName, const std::string& strKeyName, std::vector<std::string>& valueVec )
+{
+    mysqlpp::Connection* pConnection = m_pMysqlConnectMgrManager->GetMysqlDriver()->GetConnection();
+    if (NULL == pConnection)
+    {
+        return false;
+    }
+    
+    const std::string strLikeKey = "%" + strKeyName + "%";
+
+    NFMYSQLTRYBEGIN
+        mysqlpp::Query query = pConnection->query();
+    query << "SELECT " << strDefaultKey << " FROM " << strRecordName << " WHERE " << strDefaultKey << " LIKE " << mysqlpp::quote << strLikeKey << " LIMIT 100;";
+
+    mysqlpp::StoreQueryResult xResult = query.store();
+    query.reset();
+
+    if (xResult.empty() || !xResult)
+    {
+        return false;
+    }
+
+    // xResult应该只有一行的，为了以后可能出现的多条，所以用了循环
+    for (int i = 0; i < xResult.size(); ++i)
+    {
+        std::string strValue(xResult[i][strDefaultKey.data()].data(), xResult[i][strDefaultKey.data()].length());
+        valueVec.push_back(strValue);
+    }
+
+    NFMYSQLTRYEND("exist error")
+
+   return true;
+}

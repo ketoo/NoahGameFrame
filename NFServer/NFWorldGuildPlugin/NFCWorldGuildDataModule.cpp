@@ -260,6 +260,9 @@ const bool NFCWorldGuildDataModule::SaveDataToNoSql(const NFIDENTID& self)
         NFMsg::PlayerPropertyBase xPropertyList;
         NFMsg::PlayerRecordList xRecordList;
 
+        std::vector<std::string> vFieldPropertyVec;
+        std::vector<std::string> vValuePropertyVec;
+
         std::string strName;
         NF_SHARE_PTR<NFIProperty> xProperty = pProManager->First(strName);
         while (xProperty)
@@ -273,6 +276,9 @@ const bool NFCWorldGuildDataModule::SaveDataToNoSql(const NFIDENTID& self)
                         NFMsg::PropertyInt* xPropertyInt = xPropertyList.add_property_int_list();
                         xPropertyInt->set_property_name(strName);
                         xPropertyInt->set_data(xProperty->GetInt());
+
+                        vFieldPropertyVec.push_back(strName);
+                        vValuePropertyVec.push_back(boost::lexical_cast<std::string>(xProperty->GetInt()));
                     }
                     break;
                 case TDATA_FLOAT:
@@ -280,6 +286,9 @@ const bool NFCWorldGuildDataModule::SaveDataToNoSql(const NFIDENTID& self)
                         NFMsg::PropertyFloat* xPropertyFloat = xPropertyList.add_property_float_list();
                         xPropertyFloat->set_property_name(strName);
                         xPropertyFloat->set_data(xProperty->GetFloat());
+
+                        vFieldPropertyVec.push_back(strName);
+                        vValuePropertyVec.push_back(boost::lexical_cast<std::string>(xProperty->GetFloat()));
                     }
                     break;
                 case TDATA_STRING:
@@ -287,6 +296,9 @@ const bool NFCWorldGuildDataModule::SaveDataToNoSql(const NFIDENTID& self)
                         NFMsg::PropertyString* xPropertyString = xPropertyList.add_property_string_list();
                         xPropertyString->set_property_name(strName);
                         xPropertyString->set_data(xProperty->GetString());
+
+                        vFieldPropertyVec.push_back(strName);
+                        vValuePropertyVec.push_back(xProperty->GetString());
                     }
                     break;
                 case TDATA_OBJECT:
@@ -294,6 +306,9 @@ const bool NFCWorldGuildDataModule::SaveDataToNoSql(const NFIDENTID& self)
                         NFMsg::PropertyObject* xPropertyObject = xPropertyList.add_property_object_list();
                         xPropertyObject->set_property_name(strName);
                         *xPropertyObject->mutable_data() = NFINetModule::NFToPB(xProperty->GetObject());
+
+                        vFieldPropertyVec.push_back(strName);
+                        vValuePropertyVec.push_back(xProperty->GetObject().ToString());
                     }
                     break;
                 default:
@@ -386,8 +401,12 @@ const bool NFCWorldGuildDataModule::SaveDataToNoSql(const NFIDENTID& self)
         vValueVec.push_back(strPropertyList);
         vValueVec.push_back(strRecordList);
 
-
         if(!m_pClusterSQLModule->Updata(mstrGuildTalble, self.ToString(), vFieldVec, vValueVec))
+        {
+            return false;
+        }
+
+        if(!m_pClusterSQLModule->Updata(mstrGuildTalble, self.ToString(), vFieldPropertyVec, vValuePropertyVec))
         {
             return false;
         }
@@ -425,7 +444,11 @@ const NFIDENTID NFCWorldGuildDataModule::CreateGuild(const NFIDENTID& xPlayeID, 
     std::vector<std::string> vFieldVec;
     std::vector<std::string> vValueVec;
 
+    vFieldVec.push_back("GuildID");
+    vValueVec.push_back(xGuidID.ToString());
+
     m_pClusterSQLModule->Updata(mstrGuildNameTalble, strName, vFieldVec, vValueVec);
+    SaveDataToNoSql(xGuidID);
     return xGuidID;
 }
 
@@ -503,6 +526,82 @@ bool NFCWorldGuildDataModule::SetGuild( const NFIDENTID& self, const NFIDENTID& 
     {
         return false;
     }
+
+    return true;
+}
+
+bool NFCWorldGuildDataModule::SearchGuild( const NFIDENTID& self, const std::string& strName, std::vector<SearchGuildObject>& xList )
+{   
+    std::vector<std::string> vValueName;
+    if (!m_pClusterSQLModule->Keys(mstrGuildNameTalble, strName, vValueName))
+    {
+        return false;
+    }
+
+    for (int i = 0; i < vValueName.size(); ++i)
+    {
+        const std::string& strGuildName = vValueName[1];
+        std::vector<std::string> vFieldVec;
+        std::vector<std::string> vValueVec;
+
+        vFieldVec.push_back("GuildID");
+
+        if (!m_pClusterSQLModule->Query(mstrGuildNameTalble, strGuildName, vFieldVec, vValueVec))
+        {
+            continue;
+        }
+
+        NFIDENTID xGuild ;
+        xGuild.FromString(vValueVec[0]);
+
+        SearchGuildObject xGuildInfo;
+        if (GetGuildInfo(self, xGuild, xGuildInfo))
+        {
+            xList.push_back(xGuildInfo);
+        }
+    }
+
+    return true;
+}
+
+bool NFCWorldGuildDataModule::GetGuildInfo( const NFIDENTID& self, const NFIDENTID& xGuild, SearchGuildObject& xGuildInfo )
+{
+    std::vector<std::string> vFieldVec;
+    std::vector<std::string> vValueVec;
+
+    vFieldVec.push_back("Name");
+    vFieldVec.push_back("GuilIDIcon");
+    vFieldVec.push_back("GuildMemeberCount");
+    vFieldVec.push_back("GuildMemeberMaxCount");
+    vFieldVec.push_back("GuildHonor");
+    vFieldVec.push_back("Rank");
+
+    if (!m_pClusterSQLModule->Query(mstrGuildTalble, xGuild.ToString(), vFieldVec, vValueVec))
+    {
+        return false;
+    }
+
+    const std::string& strGuildName = vValueVec[0];
+
+    int nGuildIconn = 0;
+    int nGuildMemeberCount = 0;
+    int nGuildMemeberMaxCount = 0;
+    int nGuildHonor = 0;
+    int nGuildRank = 0;
+
+    NF_StrTo(vValueVec[1], nGuildIconn);
+    NF_StrTo(vValueVec[2], nGuildMemeberCount);
+    NF_StrTo(vValueVec[3], nGuildMemeberMaxCount);
+    NF_StrTo(vValueVec[4], nGuildHonor);
+    NF_StrTo(vValueVec[5], nGuildRank);
+
+    xGuildInfo.mxGuildID = xGuild    ;
+    xGuildInfo.mstrGuildName = strGuildName  ;
+    xGuildInfo.mnGuildIcon = nGuildIconn  ;
+    xGuildInfo.mnGuildMemberCount = nGuildMemeberCount  ;
+    xGuildInfo.mnGuildMemberMaxCount = nGuildMemeberMaxCount  ;
+    xGuildInfo.mnGuildHonor = nGuildHonor ;
+    xGuildInfo.mnGuildRank = nGuildRank  ;  
 
     return true;
 }
