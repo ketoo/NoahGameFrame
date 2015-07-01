@@ -15,7 +15,6 @@ class NFIWorldGuildModule
     : public NFILogicModule
 {
 public:
-
 	virtual NFIDENTID CreateGuild(const NFIDENTID& self, const std::string& strName) = 0;
 	virtual bool JoinGuild(const NFIDENTID& self, const NFIDENTID& xGuildID) = 0;
 	virtual bool LeaveGuild(const NFIDENTID& self, const NFIDENTID& xGuildID) = 0;

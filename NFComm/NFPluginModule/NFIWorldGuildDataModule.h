@@ -14,7 +14,25 @@
 class NFIWorldGuildDataModule
     : public NFILogicModule
 {
-public:
+public:   
+    struct SearchGuildObject
+    {
+        SearchGuildObject()
+        {
+            mnGuildMemberCount  = 0;
+            mnGuildMemberMaxCount  = 0;
+            mnGuildHonor = 0;
+            mnGuildRank  = 0;
+        }
+
+        NFIDENTID		mxGuildID    ;
+        std::string		mstrGuildName  ;
+        std::string		mnGuildIcon  ;
+        NFINT32		    mnGuildMemberCount  ;
+        NFINT32		    mnGuildMemberMaxCount  ;
+        NFINT32		    mnGuildHonor ;
+        NFINT32		    mnGuildRank  ;
+    };
 
 	virtual bool ExitGuild(const NFIDENTID& self, const std::string& strName, bool& bExit) = 0;
     virtual void CheckLoadGuild(const NFIDENTID& self, const NFIDENTID& xGuild) = 0;
@@ -25,6 +43,7 @@ public:
 
     virtual bool GetGuild(const NFIDENTID& self, NFIDENTID& xGuild) = 0;
     virtual bool SetGuild( const NFIDENTID& self, const NFIDENTID& xGuild ) = 0;
+    virtual bool SearchGuild(const NFIDENTID& self, const std::string& strName, std::vector<SearchGuildObject>& xList) = 0;
 
 protected:
 private:
