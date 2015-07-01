@@ -430,27 +430,31 @@ void NFCMasterNet_ServerModule::LogGameServer(const float fLastTime)
 
 	mfLastLogTime = 0.0f;
 
-	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "Begin Log GameServer Info", "");
+	//////////////////////////////////////////////////////////////////////////
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "Begin Log WorldServer Info", "");
 
 	NF_SHARE_PTR<ServerData> pGameData = mWorldMap.First();
 	while (pGameData)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "WorldServer:", pGameData->pData->server_state());
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "WorldServer ID = ", pGameData->pData->server_state());
 
 		pGameData = mWorldMap.Next();
 	}
 
 	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "End Log GameServer Info", "");
 
-	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "Begin Log ProxyServer Info", "");
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "Begin Log LoginServer Info", "");
 
+	//////////////////////////////////////////////////////////////////////////
 	pGameData = mLoginMap.First();
 	while (pGameData)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "LoginServer:", pGameData->pData->server_state());
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "LoginServer ID = ", pGameData->pData->server_state());
 
 		pGameData = mLoginMap.Next();
 	}
 
-	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "End Log ProxyServer Info", "");
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "End Log LoginServer Info", "");
+
 }
