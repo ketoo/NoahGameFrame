@@ -237,26 +237,9 @@ int NFCLoginNet_ServerModule::OnSelectWorldProcess( const NFIPacket& msg )
 		return 0;
 	}
 
-	//需要额外自己做ID管理
-	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
-	if (xLogicClass.get())
-	{
-		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
-		std::string strConfigName;
-		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
-		{
-			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
-            const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
-            if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN && pPluginManager->AppID() == nServerID)//to do Check ServerID ??
-            {
-				NFCDataList val;
-				val << xMsg.world_id() << pNetObject->GetClientID() << nServerID << pNetObject->GetAccount();
-				m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, val);
-			}
-		}
-	}
-
-	
+	NFCDataList val;
+	val << xMsg.world_id() << pNetObject->GetClientID() << pPluginManager->AppID() << pNetObject->GetAccount();
+	m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, val);
 
 	return 0;
 }
