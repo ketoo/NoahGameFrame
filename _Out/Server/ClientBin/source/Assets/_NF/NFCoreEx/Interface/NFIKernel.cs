@@ -7,7 +7,7 @@ namespace NFCoreEx
 {
     public abstract class NFIKernel
     {
-		public abstract bool AddHeartBeat(NFIDENTID self, string strHeartBeatName, NFIHeartBeat.HeartBeatEventHandler handler, float fTime, NFIValueList valueList);
+		public abstract bool AddHeartBeat(NFIDENTID self, string strHeartBeatName, NFIHeartBeat.HeartBeatEventHandler handler, float fTime, NFIDataList valueList);
 
         public abstract bool FindHeartBeat(NFIDENTID self, string strHeartBeatName);
 
@@ -15,7 +15,7 @@ namespace NFCoreEx
 
         public abstract bool UpDate(float fTime);
 		
-		public abstract NFIValueList GetObjectList();
+		public abstract NFIDataList GetObjectList();
 			
         /////////////////////////////////////////////////////////////
 		public abstract void RegisterPropertyCallback(NFIDENTID self, string strPropertyName, NFIProperty.PropertyEventHandler handler);
@@ -24,14 +24,12 @@ namespace NFCoreEx
 
         public abstract void RegisterClassCallBack(string strClassName, NFIObject.ClassEventHandler handler);
 
-		public abstract void RegisterHeartBeatCallBack(NFIDENTID self, string strHeartBeatName, NFIHeartBeat.HeartBeatEventHandler handler);
-
-		public abstract void RegisterEventCallBack(NFIDENTID self, int nEventID, NFIEvent.EventHandler handler, NFIValueList valueList);
+		public abstract void RegisterEventCallBack(NFIDENTID self, int nEventID, NFIEvent.EventHandler handler, NFIDataList valueList);
         /////////////////////////////////////////////////////////////////
 
         public abstract NFIObject GetObject(NFIDENTID ident);
 
-        public abstract NFIObject CreateObject(NFIDENTID self, int nContainerID, int nGroupID, string strClassName, string strConfigIndex, NFIValueList arg);
+        public abstract NFIObject CreateObject(NFIDENTID self, int nContainerID, int nGroupID, string strClassName, string strConfigIndex, NFIDataList arg);
 
         public abstract bool DestroyObject(NFIDENTID self);
 
@@ -65,8 +63,10 @@ namespace NFCoreEx
 
         public abstract int FindRecordRow(NFIDENTID self, string strRecordName, int nCol, int nValue);
         public abstract int FindRecordRow(NFIDENTID self, string strRecordName, int nCol, float fValue);
-        public abstract int FindRecordRow(NFIDENTID self, string strRecordName, int nCol, double fnValue);
+        public abstract int FindRecordRow(NFIDENTID self, string strRecordName, int nCol, double fValue);
         public abstract int FindRecordRow(NFIDENTID self, string strRecordName, int nCol, string strValue);
         public abstract int FindRecordRow(NFIDENTID self, string strRecordName, int nCol, NFIDENTID nValue);
+
+
     }
 }

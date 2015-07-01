@@ -7,15 +7,15 @@ namespace NFCoreEx
 {
     public abstract class NFIProperty
     {
-	public delegate void PropertyEventHandler(NFIDENTID self, string strProperty, NFIValueList oldVar, NFIValueList newVar);
+	public delegate void PropertyEventHandler(NFIDENTID self, string strProperty, NFIDataList oldVar, NFIDataList newVar);
 
-    public abstract void SetValue(NFIValueList varData);
+    public abstract void SetValue(NFIDataList varData);
 
-    public abstract NFIValueList GetValue();
+    public abstract NFIDataList GetValue();
 
     public abstract string GetKey();
 		
-	public abstract NFIValueList.VARIANT_TYPE GetType();
+	public abstract NFIDataList.VARIANT_TYPE GetType();
 
     public abstract Int64 QueryInt();
 

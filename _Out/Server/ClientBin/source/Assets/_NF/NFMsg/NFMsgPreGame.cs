@@ -109,13 +109,13 @@ namespace NFMsg
       get { return _event_object; }
       set { _event_object = value; }
     }
-    private long _event_arg = default(long);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"event_arg", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(long))]
-    public long event_arg
+    private NFMsg.Ident _event_client = null;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"event_client", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public NFMsg.Ident event_client
     {
-      get { return _event_arg; }
-      set { _event_arg = value; }
+      get { return _event_client; }
+      set { _event_client = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -325,13 +325,13 @@ namespace NFMsg
       get { return _account; }
       set { _account = value; }
     }
-    private int _sender_ip = default(int);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"sender_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
-    public int sender_ip
+    private NFMsg.Ident _sender = null;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"sender", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public NFMsg.Ident sender
     {
-      get { return _sender_ip; }
-      set { _sender_ip = value; }
+      get { return _sender; }
+      set { _sender = value; }
     }
     private int _login_id = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"login_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -358,12 +358,12 @@ namespace NFMsg
       get { return _world_id; }
       set { _world_id = value; }
     }
-    private int _sender_ip;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"sender_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int sender_ip
+    private NFMsg.Ident _sender;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"sender", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident sender
     {
-      get { return _sender_ip; }
-      set { _sender_ip = value; }
+      get { return _sender; }
+      set { _sender = value; }
     }
     private int _login_id;
     [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"login_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -707,6 +707,42 @@ namespace NFMsg
     {
       get { return _count; }
       set { _count = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RoleOnlineNotify")]
+  public partial class RoleOnlineNotify : global::ProtoBuf.IExtensible
+  {
+    public RoleOnlineNotify() {}
+    
+    private NFMsg.Ident _guild = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"guild", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public NFMsg.Ident guild
+    {
+      get { return _guild; }
+      set { _guild = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RoleOfflineNotify")]
+  public partial class RoleOfflineNotify : global::ProtoBuf.IExtensible
+  {
+    public RoleOfflineNotify() {}
+    
+    private NFMsg.Ident _guild = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"guild", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public NFMsg.Ident guild
+    {
+      get { return _guild; }
+      set { _guild = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
