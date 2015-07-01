@@ -59,6 +59,7 @@ int NFCDataProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std::
 		if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
 		{
 			SaveDataToNoSql(self);
+            OnOffline(self);
 		}
 		else if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
 		{
@@ -539,7 +540,25 @@ void NFCDataProcessModule::OnOnline( const NFIDENTID& self )
     xFieldVec.push_back("GateID");
     xFieldVec.push_back("GameID");
 
-    xFieldVec.push_back(boost::lexical_cast<std::string> (nGateID));
-    xFieldVec.push_back(boost::lexical_cast<std::string> (nGameID));
+    vValueVec.push_back(boost::lexical_cast<std::string> (nGateID));
+    vValueVec.push_back(boost::lexical_cast<std::string> (nGameID));
+
+    m_pClusterSQLModule->Updata(self.ToString(), xFieldVec, vValueVec);
+}
+
+void NFCDataProcessModule::OnOffline( const NFIDENTID& self )
+{
+    const int nGateID = 0;
+    const int nGameID = 0;
+
+    std::vector<std::string> xFieldVec;
+    std::vector<std::string> vValueVec;
+
+    xFieldVec.push_back("GateID");
+    xFieldVec.push_back("GameID");
+
+    vValueVec.push_back(boost::lexical_cast<std::string> (nGateID));
+    vValueVec.push_back(boost::lexical_cast<std::string> (nGameID));
+
     m_pClusterSQLModule->Updata(self.ToString(), xFieldVec, vValueVec);
 }

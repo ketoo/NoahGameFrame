@@ -41,6 +41,7 @@ public:
 
 	virtual bool Delete(const std::string& strKey);
 	virtual bool Exists(const std::string& strKey, bool& bExit);
+    virtual bool Keys(const std::string& strKeyName, std::vector<std::string>& valueVec);
 
 	//////////////////////////////////////////////////////////////////////////
 	virtual bool Updata(const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec);
@@ -49,6 +50,7 @@ public:
 
 	virtual bool Delete(const std::string& strRecordName, const std::string& strKey);
 	virtual bool Exists(const std::string& strRecordName, const std::string& strKey, bool& bExit);
+    virtual bool Keys(const std::string& strRecordName, const std::string& strKeyName, std::vector<std::string>& valueVec);
 
 private:
     NFIMysqlConnectMgrModule* m_pMysqlConnectMgrManager;
