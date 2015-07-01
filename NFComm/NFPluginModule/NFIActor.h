@@ -12,11 +12,7 @@
 #include <map>
 #include <string>
 
-#include "Theron/Receiver.h"
-#include "Theron/Actor.h"
-#include "Theron/Address.h"
-#include "Theron/Framework.h"
-#include "Theron/Detail/Handlers/ReceiverHandler.h"
+#include <Theron/Theron.h>
 
 #include "NFILogicModule.h"
 #include "NFIActorManager.h"
