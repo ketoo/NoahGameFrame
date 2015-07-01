@@ -9,10 +9,7 @@
 #ifndef _NFI_PLUGIN_MANAGER_H_
 #define _NFI_PLUGIN_MANAGER_H_
 
-#ifdef NF_USE_ACTOR
 #include "NFIActor.h"
-#endif
-
 #include "NFILogicModule.h"
 #include "NFIActorManager.h"
 
