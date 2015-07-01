@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <string>
+#include <functional>
 #include "NFILogicModule.h"
 #include "NFComm/NFCore/NFIObject.h"
 #include "NFComm/NFPluginModule/NFIdentID.h"
@@ -53,7 +54,7 @@ public:
     template<typename BaseType>
     bool AddEventCallBack(const NFIDENTID& self, const int nEventID, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const int, const NFIDataList&))
     {
-        EVENT_PROCESS_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3);
+        EVENT_PROCESS_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
         EVENT_PROCESS_FUNCTOR_PTR functorPtr(new EVENT_PROCESS_FUNCTOR(functor));
         return AddEventCallBack(self, nEventID, functorPtr);
     }
@@ -61,7 +62,7 @@ public:
     template<typename BaseType>
     bool AddClassCallBack(const std::string& strClassName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIDataList&))
     {
-        CLASS_EVENT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4);
+        CLASS_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         CLASS_EVENT_FUNCTOR_PTR functorPtr(new CLASS_EVENT_FUNCTOR(functor));
         return AddClassCallBack(strClassName, functorPtr);
     }
@@ -70,7 +71,7 @@ public:
     template<typename BaseType>
     bool ResgisterCommonClassEvent(BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIDataList&))
     {
-        CLASS_EVENT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4);
+        CLASS_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         CLASS_EVENT_FUNCTOR_PTR functorPtr(new CLASS_EVENT_FUNCTOR(functor));
         return ResgisterCommonClassEvent(functorPtr);
     }
@@ -91,24 +92,6 @@ public:
         RECORD_EVENT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4, _5, _6, _7, _8);
         RECORD_EVENT_FUNCTOR_PTR functorPtr(new RECORD_EVENT_FUNCTOR(functor));
         return ResgisterCommonRecordEvent(functorPtr);
-    }
-
-    template<typename BaseType>
-    bool ResgisterCommonHeartBeatEvent(BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const float, const int, const NFIDataList&))
-    {
-        HEART_BEAT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4, _5);
-        HEART_BEAT_FUNCTOR_PTR functorPtr(new HEART_BEAT_FUNCTOR(functor));
-        //return ResgisterCommonHeartBeat(functorPtr);
-        return false;
-    }
-
-    template<typename BaseType>
-    bool ResgisterCommonEvent(BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const int, const NFIDataList&))
-    {
-        EVENT_PROCESS_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3);
-        EVENT_PROCESS_FUNCTOR_PTR functorPtr(new EVENT_PROCESS_FUNCTOR(functor));
-        //return ResgisterCommonEvent(functorPtr);
-        return false;
     }
    
     /////////////////////////////////////////////////////////////////
@@ -199,10 +182,6 @@ public:
 
     virtual NFIDENTID GetGridID(const float fX, const float fY, const float fZ) = 0;
 
-    //virtual bool GetAroundGrid(const int nContainerID, const int nGroupID, const NFIDENTID nGridID, NFIDataList& list) = 0;
-
-    //virtual bool GetGridObjectList(const int nContainerID, const int nGroupID, const NFIDENTID nGridID, NFIDataList& list) = 0;
-
     virtual bool GetRangObjectList(const NFIDENTID& self, const int nContainerID, const int nGroupID, const float fRang, NFIDataList& list) = 0;
 
     virtual bool GetRangObjectList(const float fX, const float fY, const float fZ, const int nContainerID, const int nGroupID, const float fRang, NFIDataList& list) = 0;
@@ -230,13 +209,6 @@ protected:
 
     //只能网络模块注册，回调用来同步对象类表事件,所有的类表都会回调
     virtual bool ResgisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
-
-//     //只能网络[脚本]模块注册，回调心跳,所有的心跳都会回调
-//     virtual bool ResgisterCommonHeartBeat(const HEART_BEAT_FUNCTOR_PTR& cb) = 0;
-// 
-//     //只能网络[脚本]模块注册，回调事件,所有的事件都会回调
-//     virtual bool ResgisterCommonEvent(const EVENT_PROCESS_FUNCTOR_PTR& cb) = 0;
-
 };
 
 #endif
