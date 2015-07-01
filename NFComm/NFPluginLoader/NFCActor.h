@@ -28,9 +28,11 @@ public:
 
 	~NFCActor()
 	{
-
-		m_pComponent->BeforeShut();
-		m_pComponent->Shut();
+		if (m_pComponent)
+		{
+			m_pComponent->BeforeShut();
+			m_pComponent->Shut();
+		}
 	}
 
 	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);

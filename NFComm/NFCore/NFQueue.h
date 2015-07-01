@@ -13,6 +13,7 @@
 #include <thread>
 #include <boost/smart_ptr/detail/spinlock.hpp>
 #include "NFComm/NFPluginModule/NFPlatform.h"
+#include <mutex>
 
 class spinlock_mutex
 {
@@ -20,6 +21,7 @@ public:
     spinlock_mutex()
     {
         _spinlock.lock();
+		//std::lock_guard<boost::detail::spinlock> guard(_spinlock);
     }
     
     ~spinlock_mutex()
@@ -45,7 +47,7 @@ public:
 
     bool Push(const T& object)
 	{
-		spinlock_mutex();
+		//spinlock_mutex();
 
 		mList.push_back(object);
 
@@ -54,7 +56,7 @@ public:
 
     bool Pop(T& object)
 	{
-		spinlock_mutex();
+		//spinlock_mutex();
 
 		if (mList.empty())
 		{

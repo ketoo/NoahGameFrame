@@ -99,6 +99,7 @@ void ThreadFunc()
 void CreateBackThread()
 {
     gThread = boost::thread(boost::bind(&ThreadFunc));
+	//auto f = std::async (std::launch::async, std::bind(ThreadFunc));
     //std::cout << "CreateBackThread, thread ID = " << gThread.get_id() << std::endl;
 }
 
