@@ -40,6 +40,8 @@ public:
 
 protected:
 
+protected:
+
 	int OnReciveMSPack(const NFIPacket& msg);
 	int OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
