@@ -28,7 +28,7 @@ namespace NFCoreEx
 		public abstract int GroupID();
         public abstract string ClassName();
         public abstract string ConfigIndex();
-        // public abstract bool AddHeartBeat(  string strHeartBeatName, HEART_BEAT_FUNC cb,  NFIValueList& var,  float fTime,  int nCount );
+        // public abstract bool AddHeartBeat(  string strHeartBeatName, HEART_BEAT_FUNC cb,  NFIDataList& var,  float fTime,  int nCount );
 
         public abstract bool FindHeartBeat(string strHeartBeatName);
 

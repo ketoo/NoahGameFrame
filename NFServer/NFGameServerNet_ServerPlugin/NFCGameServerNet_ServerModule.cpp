@@ -329,21 +329,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
 
 	pObject->SetPropertyInt("LoadPropertyFinish", 1);
     pObject->SetPropertyInt("GateID", nGateID);
-    NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
-    if (xLogicClass.get())
-    {
-        NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
-        std::string strConfigName; 
-        for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
-        {
-			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
-            const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
-            if (nServerType == NF_SERVER_TYPES::NF_ST_GAME && pPluginManager->AppID() == nServerID)
-			{
-				pObject->SetPropertyInt("GameID", nServerID);
-			}
-        }
-    }
+	pObject->SetPropertyInt("GameID", pPluginManager->AppID());
 
  	m_pEventProcessModule->DoEvent(pObject->Self(), "Player", CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCDataList() );
 
