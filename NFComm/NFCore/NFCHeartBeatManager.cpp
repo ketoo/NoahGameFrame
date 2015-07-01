@@ -111,16 +111,6 @@ NFIDENTID NFCHeartBeatManager::Self()
 //////////////////////////////////////////////////////////////////////////
 bool NFCHeartBeatManager::AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIDataList& var, const float fTime, const int nCount)
 {
-    //NFCHeartBeatElement* pHeartBeat = NF_NEW NFCHeartBeatElement();
-    //pHeartBeat->fTime = fTime;
-    //pHeartBeat->fBeatTime = fTime;
-    //pHeartBeat->nCount = nCount;
-    //pHeartBeat->var = var;
-    //pHeartBeat->self = self;
-    //pHeartBeat->strBeatName = strHeartBeatName;
-    //pHeartBeat->Add(cb);
-    //mAddListEx.Add(pHeartBeat);
-
     NFCHeartBeatElement xHeartBeat;
     xHeartBeat.fTime = fTime;
     xHeartBeat.fBeatTime = fTime;

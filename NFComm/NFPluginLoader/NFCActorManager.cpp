@@ -85,13 +85,18 @@ bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTi
 int NFCActorManager::OnRequireActor(const NF_SHARE_PTR<NFIComponent> pComponent)
 {
 	//¶Ñactor
-	NF_SHARE_PTR<NFIActor> pActor(NF_NEW NFCActor(*m_pFramework, this));
+	if (pComponent)
+	{
+		NF_SHARE_PTR<NFIActor> pActor(NF_NEW NFCActor(*m_pFramework, this));
+
+		pActor->RegisterActorComponent(pComponent);
+
+		mxActorMap.insert(std::make_pair(pActor->GetAddress().AsInteger(), pActor));
+
+		return pActor->GetAddress().AsInteger();
+	}
 	
-	pActor->RegisterActorComponent(pComponent);
-
-	mxActorMap.insert(std::make_pair(pActor->GetAddress().AsInteger(), pActor));
-
-	return pActor->GetAddress().AsInteger();
+	return 0;
 }
 
 NFIActor* NFCActorManager::GetActor(const int nActorIndex)
