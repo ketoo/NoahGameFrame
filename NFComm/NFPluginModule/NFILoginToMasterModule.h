@@ -11,10 +11,11 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
+#include "NFIClusterClientModule.hpp"
 #include "NFComm/NFMessageDefine/NFMsgPreGame.pb.h"
 
 class NFILoginToMasterModule
-    : public NFINetModule
+    : public NFIClusterClientModule
 {
 
 public:

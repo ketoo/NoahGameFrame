@@ -254,22 +254,8 @@ typedef int16_t NFINT16;
 typedef int8_t NFINT8;
 typedef uint64_t NFUINT64;
 typedef int64_t NFINT64;
-// define uint64 type
-//#if NF_COMPILER == NF_COMPILER_MSVC
-//typedef unsigned __int64 NFUINT64;
-//typedef __int64 NFINT64;
-//#else
-//typedef unsigned long int NFUINT64;
-//typedef long int NFINT64;
-//#endif
 
-#ifdef _USRDLL
-#    define NF_DYNAMIC_PLUGIN
-#endif
 
-// #ifdef NF_DEBUG_MODE
-// #define new   new(_NORMAL_BLOCK, __FILE__, __LINE__)
-// #endif
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <crtdbg.h>
 #include <assert.h>
@@ -316,6 +302,7 @@ inline unsigned long NF_GetTickCount()
 
 //use actor mode--begin
 #define NF_ACTOR_THREAD_COUNT 16
+#define NF_DYNAMIC_PLUGIN
 
 #ifndef NF_USE_ACTOR
 #define NF_USE_ACTOR
