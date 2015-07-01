@@ -181,6 +181,7 @@ int NFCGameServerNet_ServerModule::OnRecivePSPack( const NFIPacket& msg )
 	case NFMsg::EGameMsgID::EGMI_REQ_JOIN_GUILD:
 	case NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GUILD:
 	case NFMsg::EGameMsgID::EGMI_REQ_OPR_GUILD:
+    case NFMsg::EGameMsgID::EGMI_REQ_SEARCH_GUILD:
 		OnTransWorld(msg);
 		break;
 		//////////////////////////////////////////////////////////////////////////

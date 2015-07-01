@@ -77,11 +77,23 @@ ALTER TABLE `Guild` ADD `GuildMoney` bigint(11) DEFAULT '0' COMMENT '工会财�
 ALTER TABLE `Guild` ADD `GuildLevel` bigint(11) DEFAULT '0' COMMENT '工会等级';
 ALTER TABLE `Guild` ADD `GuildContinueDay` bigint(11) DEFAULT '0' COMMENT '工会霸占排行榜天数';
 ALTER TABLE `Guild` ADD `GuilID` varchar(128) DEFAULT '' COMMENT '工会ID';
+ALTER TABLE `Guild` ADD `GuilIDIcon` bigint(11) DEFAULT '0' COMMENT '公会头像';
+ALTER TABLE `Guild` ADD `GuildMemeberCount` bigint(11) DEFAULT '0' COMMENT '成员数量(增加个字段，不然遍历Record太麻烦)';
+ALTER TABLE `Guild` ADD `GuildMemeberMaxCount` bigint(11) DEFAULT '0' COMMENT '成员最大数量';
+ALTER TABLE `Guild` ADD `GuildHonor` bigint(11) DEFAULT '0' COMMENT '公会荣誉';
 ALTER TABLE `Guild` ADD `GuildBoss` BLOB COMMENT 'guild';
 ALTER TABLE `Guild` ADD `GuildMemberList` BLOB COMMENT 'guild';
 ALTER TABLE `Guild` ADD `GuildEvent` BLOB COMMENT 'guild';
 ALTER TABLE `Guild` ADD `GuildHouse` BLOB COMMENT 'guild';
 ALTER TABLE `Guild` ADD `GuildSkill` BLOB COMMENT 'guild';
+
+
+CREATE TABLE `GuildName` (
+	`ID` varchar(128) NOT NULL,
+	PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `GuildName` ADD `GuilID` varchar(128) DEFAULT '' COMMENT '工会ID';
 
 
 CREATE TABLE `InitProperty` (
