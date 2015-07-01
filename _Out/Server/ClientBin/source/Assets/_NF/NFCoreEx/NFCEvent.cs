@@ -7,7 +7,7 @@ namespace NFCoreEx
 {
 	class NFCEvent : NFIEvent
 	{
-		public NFCEvent(NFIDENTID self, int nEventID, NFIValueList valueList)
+		public NFCEvent(NFIDENTID self, int nEventID, NFIDataList valueList)
 		{
 			mSelf = self;
 			mnEventID = nEventID;
@@ -19,7 +19,7 @@ namespace NFCoreEx
 			mHandlerDel += handler;
 		}
 
-		public override void DoEvent(NFIValueList valueList)
+		public override void DoEvent(NFIDataList valueList)
 		{
 			if (null != mHandlerDel)
 			{
@@ -30,7 +30,7 @@ namespace NFCoreEx
 
 		NFIDENTID mSelf;
 		int mnEventID;
-		NFIValueList mArgValueList;
+		NFIDataList mArgValueList;
 
 		NFIEvent.EventHandler mHandlerDel;
 	}

@@ -215,6 +215,7 @@ public class NFStart : MonoBehaviour
                                 NFMsg.RoleLiteInfo xLiteInfo = (NFMsg.RoleLiteInfo)mxNetFocus.mxListener.aCharList[i];
                                 if (GUI.Button(new Rect(200, i * 50, 150, 50), System.Text.Encoding.Default.GetString(xLiteInfo.noob_name)))
                                 {
+                                    mxNetFocus.strRoleName = System.Text.Encoding.Default.GetString(xLiteInfo.noob_name);
                                     NFStart.Instance.GetFocusNet().nMainRoleID = NFTCPClient.NFCoreExListener.PBToNF(xLiteInfo.id);
                                     mxNetFocus.mxSendLogic.RequireEnterGameServer(NFStart.Instance.GetFocusNet().nMainRoleID, mxNetFocus.strAccount, mxNetFocus.strRoleName, mxNetFocus.nServerID);
                                 }

@@ -29,6 +29,8 @@ namespace NFCoreEx
 
         private bool Load()
         {
+            ClearLogicClass();
+
             XmlDocument xmldoc = new XmlDocument();
 
             string strLogicPath = "../../NFDataCfg/Struct/LogicClass.xml";
@@ -38,6 +40,7 @@ namespace NFCoreEx
 
             LoadLogicClass(root);
             LoadLogicClassProperty();
+            LoadLogicClassRecord();
 
             return false;
         }
@@ -56,7 +59,7 @@ namespace NFCoreEx
 
             return false;
         }
-        
+
         public override bool AddElement(string strName)
         {
             if (!mhtObject.ContainsKey(strName))
@@ -105,6 +108,11 @@ namespace NFCoreEx
                 }
             }
         }
+        
+        private void ClearLogicClass()
+        {
+            mhtObject.Clear();
+        }
 
         private void LoadLogicClassProperty()
         {
@@ -121,6 +129,15 @@ namespace NFCoreEx
                 {
                     AddBasePropertyFormOther((string)de.Key, "IObject");
                 }
+            }
+        }
+
+        private void LoadLogicClassRecord()
+        {
+            Hashtable xTable = NFCLogicClassManager.Instance.GetElementList();
+            foreach (DictionaryEntry de in xTable)
+            {
+                LoadLogicClassRecord((string)de.Key);
             }
         }
 
@@ -147,35 +164,35 @@ namespace NFCoreEx
                     {
                         case "int":
                             {
-                                NFIValueList xValue = new NFCValueList();
+                                NFIDataList xValue = new NFCDataList();
                                 xValue.AddInt(0);
                                 xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
                             }
                             break;
                         case "float":
                             {
-                                NFIValueList xValue = new NFCValueList();
+                                NFIDataList xValue = new NFCDataList();
                                 xValue.AddFloat(0.0f);
                                 xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
                             }
                             break;
                         case "double":
                             {
-                                NFIValueList xValue = new NFCValueList();
+                                NFIDataList xValue = new NFCDataList();
                                 xValue.AddDouble(0.0f);
                                 xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
                             }
                             break;
                         case "string":
                             {
-                                NFIValueList xValue = new NFCValueList();
+                                NFIDataList xValue = new NFCDataList();
                                 xValue.AddString("");
                                 xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
                             }
                             break;
                         case "object":
                             {
-                                NFIValueList xValue = new NFCValueList();
+                                NFIDataList xValue = new NFCDataList();
                                 xValue.AddObject(new NFIDENTID(0, 0));
                                 xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
                             }
@@ -188,14 +205,88 @@ namespace NFCoreEx
             }
         }
 
+        private void LoadLogicClassRecord(string strName)
+        {
+            NFILogicClass xLogicClass = GetElement(strName);
+            if (null != xLogicClass)
+            {
+                string strLogicPath = xLogicClass.GetPath();
+
+                XmlDocument xmldoc = new XmlDocument();
+
+                xmldoc.Load(strLogicPath);
+                XmlNode xRoot = xmldoc.SelectSingleNode("XML");
+                XmlNode xNodePropertys = xRoot.SelectSingleNode("Records");
+                if (null != xNodePropertys)
+                {
+                    XmlNodeList xNodeList = xNodePropertys.SelectNodes("Record");
+                    if (null != xNodeList)
+                    {
+                        for (int i = 0; i < xNodeList.Count; ++i)
+                        {
+                            XmlNode xRecordNode = xNodeList.Item(i);
+
+                            string strID = xRecordNode.Attributes["Id"].Value;
+                            string strRow = xRecordNode.Attributes["Row"].Value;
+                            NFIDataList xValue = new NFCDataList();
+
+                            XmlNodeList xTagNodeList = xRecordNode.SelectNodes("Col");
+                            for (int j = 0; j < xTagNodeList.Count; ++j)
+                            {
+                                XmlNode xColTagNode = xTagNodeList.Item(j);
+
+                                XmlAttribute strTagID = xColTagNode.Attributes["Tag"];
+                                XmlAttribute strTagType = xColTagNode.Attributes["Type"];
+
+
+                                switch (strTagType.Value)
+                                {
+                                    case "int":
+                                        {
+                                            xValue.AddInt(0);
+                                        }
+                                        break;
+                                    case "float":
+                                        {
+                                            xValue.AddFloat(0.0f);
+                                        }
+                                        break;
+                                    case "double":
+                                        {
+                                            xValue.AddDouble(0.0f);
+                                        }
+                                        break;
+                                    case "string":
+                                        {
+                                            xValue.AddString("");
+                                        }
+                                        break;
+                                    case "object":
+                                        {
+                                            xValue.AddObject(new NFIDENTID(0, 0));
+                                        }
+                                        break;
+                                    default:
+                                        break;
+
+                                }
+                            }
+
+                            xLogicClass.GetRecordManager().AddRecord(strID, int.Parse(strRow), xValue);
+                        }
+                    }
+                }
+            }
+        }
+
         void AddBasePropertyFormOther(string strName, string strOther)
         {
             NFILogicClass xOtherClass = GetElement(strOther);
             NFILogicClass xLogicClass = GetElement(strName);
             if (null != xLogicClass && null != xOtherClass)
             {
-                NFIValueList xValue = xOtherClass.GetPropertyManager().GetPropertyList();
-                for (int i = 0; i < xValue.Count(); ++i )
+                NFIDataList xValue = xOtherClass.GetPropertyManager().GetPropertyList();
+                for (int i = 0; i < xValue.Count(); ++i)
                 {
                     NFIProperty xProperty = xOtherClass.GetPropertyManager().GetProperty(xValue.StringVal(i));
                     xLogicClass.GetPropertyManager().AddProperty(xValue.StringVal(i), xProperty.GetValue());
