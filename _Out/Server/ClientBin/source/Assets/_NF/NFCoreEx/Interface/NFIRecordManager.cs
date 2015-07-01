@@ -8,9 +8,9 @@ namespace NFCoreEx
 {
     public abstract class NFIRecordManager
     {
-        public abstract NFIRecord AddRecord(string strRecordName,  int nRow, NFIValueList varData);
+        public abstract NFIRecord AddRecord(string strRecordName,  int nRow, NFIDataList varData);
 		public abstract NFIRecord GetRecord(string strRecordName);
-		public abstract NFIValueList GetRecordList();
+		public abstract NFIDataList GetRecordList();
 		
 		public abstract void RegisterCallback(string strRecordName, NFIRecord.RecordEventHandler handler);
     }

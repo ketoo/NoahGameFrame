@@ -72,7 +72,7 @@ namespace NFCoreEx
             return mstrConfigIndex;
         }
 
-        // public override bool AddHeartBeat(  string strHeartBeatName, HEART_BEAT_FUNC cb,  NFIValueList& var,  float fTime,  int nCount );
+        // public override bool AddHeartBeat(  string strHeartBeatName, HEART_BEAT_FUNC cb,  NFIDataList& var,  float fTime,  int nCount );
 
         public override bool FindHeartBeat(string strHeartBeatName)
         {
@@ -107,7 +107,7 @@ namespace NFCoreEx
 			NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
 			if (null == property)
 			{
-                NFIValueList valueList = new NFCValueList();
+                NFIDataList valueList = new NFCDataList();
                 valueList.AddInt(0);
                 property = mPropertyManager.AddProperty(strPropertyName, valueList);
             }
@@ -121,7 +121,7 @@ namespace NFCoreEx
 			NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
 			if (null == property)
 			{
-                NFIValueList valueList = new NFCValueList();
+                NFIDataList valueList = new NFCDataList();
                 valueList.AddFloat(0.0f);
                 property = mPropertyManager.AddProperty(strPropertyName, valueList);
             }
@@ -135,7 +135,7 @@ namespace NFCoreEx
 			NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
 			if (null == property)
 			{
-                NFIValueList valueList = new NFCValueList();
+                NFIDataList valueList = new NFCDataList();
                 valueList.AddDouble(0);
                 property = mPropertyManager.AddProperty(strPropertyName, valueList);
             }
@@ -149,7 +149,7 @@ namespace NFCoreEx
 			NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
 			if (null == property)
 			{
-                NFIValueList valueList = new NFCValueList();
+                NFIDataList valueList = new NFCDataList();
                 valueList.AddString("");
                 property = mPropertyManager.AddProperty(strPropertyName, valueList);
             }
@@ -163,7 +163,7 @@ namespace NFCoreEx
 			NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
 			if (null == property)
 			{
-                NFIValueList valueList = new NFCValueList();
+                NFIDataList valueList = new NFCDataList();
                 valueList.AddObject(new NFIDENTID());
                 property = mPropertyManager.AddProperty(strPropertyName, valueList);
             }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NFCoreEx
 {
-    public abstract class NFIValueList
+    public abstract class NFIDataList
     {
         public enum VARIANT_TYPE
         {
