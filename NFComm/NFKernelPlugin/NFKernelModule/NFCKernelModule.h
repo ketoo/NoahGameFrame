@@ -171,12 +171,6 @@ protected:
     //只能网络[脚本]模块注册，回调用来同步对象类表事件,所有的类表都会回调
     virtual bool ResgisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& cb);
 
-    //     //只能网络[脚本]模块注册，回调心跳,所有的心跳都会回调
-    //     virtual bool ResgisterCommonHeartBeat(const HEART_BEAT_FUNCTOR_PTR& cb);
-    //
-    //     //只能网络[脚本]模块注册，回调事件,所有的事件都会回调
-    //     virtual bool ResgisterCommonEvent(const EVENT_PROCESS_FUNCTOR_PTR& cb);
-
 protected:
 
     virtual bool AddEventCallBack(const NFIDENTID& self, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb);
@@ -209,10 +203,7 @@ protected:
     std::list<PROPERTY_EVENT_FUNCTOR_PTR> mtCommonPropertyCallBackList;
     //通用表变动回调,以便同步
     std::list<RECORD_EVENT_FUNCTOR_PTR> mtCommonRecordCallBackList;
-    //     //通用心跳回调
-    //     std::list<HEART_BEAT_FUNCTOR_PTR> mtCommonHeartBeatCallBackList;
-    //     //通用事件回调
-    //     std::list<EVENT_PROCESS_FUNCTOR_PTR> mtCommonEventCallBackList;
+
 private:
     //属性的KEY，比如HP=1，会以这个建立KEY，那么可以快速查询所有HP=1的对象而不用遍历
     //     std::map<std::string,std::map<TData, NFList<NFIDENTID>>>
