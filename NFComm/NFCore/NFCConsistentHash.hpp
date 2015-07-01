@@ -4,8 +4,8 @@
 #include <functional> 
 #include <algorithm>
 #include "boost/crc.hpp"
-#include "boost/format/free_funcs.hpp"
 #include "boost/lexical_cast.hpp"
+#include "boost/format.hpp"
 
 #ifndef __CONSISTENT_HASH_H__
 #define __CONSISTENT_HASH_H__
