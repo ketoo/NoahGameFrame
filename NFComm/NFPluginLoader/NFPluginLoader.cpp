@@ -105,7 +105,7 @@ void CreateBackThread()
 void InitDaemon()
 {
 #if NF_PLATFORM == NF_PLATFORM_LINUX
-	daemon(nochdir, noclose);
+	daemon(1, 0);
 
 	// ignore signals
 	signal(SIGINT,  SIG_IGN);
