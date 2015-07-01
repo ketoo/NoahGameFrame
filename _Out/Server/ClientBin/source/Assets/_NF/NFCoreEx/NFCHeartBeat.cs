@@ -9,7 +9,7 @@ namespace NFCoreEx
 	public class NFCHeartBeat : NFIHeartBeat
 	{
 
-		public NFCHeartBeat(NFIDENTID self, string strHeartBeatName, float fTime, NFIValueList valueList)
+		public NFCHeartBeat(NFIDENTID self, string strHeartBeatName, float fTime, NFIDataList valueList)
 		{
 			mSelf = self;
 			mstrHeartBeatName = strHeartBeatName;
@@ -42,7 +42,7 @@ namespace NFCoreEx
 		string mstrHeartBeatName;
 		float mfTime;
 		float mfOldTime;
-		NFIValueList mArgValueList;
+		NFIDataList mArgValueList;
 
 		HeartBeatEventHandler doHandlerDel;
     }
