@@ -25,7 +25,7 @@ public:
     {
         pPluginManager = p;
 
-        mstrGuildTalble = "GuildInfo";
+        mstrGuildTalble = "Guild";
         mstrGuildNameTalble = "GuildName";
     }
 
@@ -43,6 +43,8 @@ public:
     virtual const bool DeleteGuild(const NFIDENTID& xGuild);
     virtual bool GetGuild(const NFIDENTID& self, NFIDENTID& xGuild);
     virtual bool SetGuild( const NFIDENTID& self, const NFIDENTID& xGuild );
+    virtual bool SearchGuild(const NFIDENTID& self, const std::string& strName, std::vector<SearchGuildObject>& xList);
+    virtual bool GetGuildInfo( const NFIDENTID& self, const NFIDENTID& xGuild, SearchGuildObject& xGuildInfo );
 
 protected:
     int OnGuildClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );

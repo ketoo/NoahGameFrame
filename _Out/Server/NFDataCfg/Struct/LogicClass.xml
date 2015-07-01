@@ -8,6 +8,7 @@
     <Class Id="EffectData" Type="TYPE_EFFECTDATA" Path="../../NFDataCfg/Struct/Class/EffectData.xml" InstancePath="../../NFDataCfg/Ini/NPC/EffectData.xml" Public="0" Desc="EffectData" />
     <Class Id="Equip" Type="TYPE_EQUIP" Path="../../NFDataCfg/Struct/Class/Equip.xml" InstancePath="../../NFDataCfg/Ini/NPC/Equip.xml" Public="0" Desc="Equip" />
     <Class Id="Guild" Type="TYPE_GUILD" Path="../../NFDataCfg/Struct/Class/Guild.xml" InstancePath="../../NFDataCfg/Ini/NPC/Guild.xml" Public="0" Desc="Guild" />
+    <Class Id="GuildName" Type="TYPE_GUILDNAME" Path="../../NFDataCfg/Struct/Class/GuildName.xml" InstancePath="../../NFDataCfg/Ini/NPC/GuildName.xml" Public="0" Desc="GuildName" />
     <Class Id="InitProperty" Type="TYPE_INITPROPERTY" Path="../../NFDataCfg/Struct/Class/InitProperty.xml" InstancePath="../../NFDataCfg/Ini/NPC/InitProperty.xml" Public="0" Desc="InitProperty" />
     <Class Id="Item" Type="TYPE_ITEM" Path="../../NFDataCfg/Struct/Class/Item.xml" InstancePath="../../NFDataCfg/Ini/NPC/Item.xml" Public="0" Desc="Item" />
     <Class Id="Language" Type="TYPE_LANGUAGE" Path="../../NFDataCfg/Struct/Class/Language.xml" InstancePath="../../NFDataCfg/Ini/NPC/Language.xml" Public="0" Desc="Language" />
