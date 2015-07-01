@@ -20,7 +20,14 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "boost/thread.hpp"
 
+#if NF_PLATFORM == NF_PLATFORM_LINUX
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <signal.h>
+#endif
+
 #pragma comment( lib, "DbgHelp" )
+
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
 // 创建Dump文件
@@ -95,6 +102,21 @@ void CreateBackThread()
     //std::cout << "CreateBackThread, thread ID = " << gThread.get_id() << std::endl;
 }
 
+void InitDaemon()
+{
+#if NF_PLATFORM == NF_PLATFORM_LINUX
+	daemon(nochdir, noclose);
+
+	// ignore signals
+	signal(SIGINT,  SIG_IGN);
+	signal(SIGHUP,  SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGPIPE, SIG_IGN);
+	signal(SIGTTOU, SIG_IGN);
+	signal(SIGTTIN, SIG_IGN);
+	signal(SIGTERM, SIG_IGN);
+#endif
+}
 
 void PrintfLogo()
 {
@@ -121,13 +143,30 @@ unsigned long unStartTickTime = 0;
 unsigned long unLastTickTime = 0;
 
 #if NF_PLATFORM == NF_PLATFORM_WIN || NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_APPLE
-int main()
+int main(int argc, char* argv[])
 #elif  NF_PLATFORM == NF_PLATFORM_ANDROID || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 
 #endif
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
     SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
+#else if NF_PLATFORM == NF_PLATFORM_LINUX
+	bool bDaemon = false;
+
+	if (argc > 1)
+	{
+		if (0 == NFSTRICMP((const char*)argv[1], "-d"))
+		{
+			bDaemon = true;
+		}
+	}
+
+	if (bDaemon)
+	{
+		InitDaemon();
+	}
+
+
 #endif
 	NFCActorManager::GetSingletonPtr()->Init();
 	NFCActorManager::GetSingletonPtr()->AfterInit();

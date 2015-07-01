@@ -7,9 +7,9 @@ namespace NFCoreEx
 {
 	public abstract class NFIEvent
 	{
-		public delegate void EventHandler(NFIDENTID self, int nEventID, NFIValueList initValueList, NFIValueList valueList);
+		public delegate void EventHandler(NFIDENTID self, int nEventID, NFIDataList initValueList, NFIDataList valueList);
 
 		public abstract void RegisterCallback(NFIEvent.EventHandler handler);
-		public abstract void DoEvent(NFIValueList valueList);
+		public abstract void DoEvent(NFIDataList valueList);
 	}
 }

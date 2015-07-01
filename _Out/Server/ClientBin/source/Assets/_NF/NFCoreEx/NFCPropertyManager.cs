@@ -11,7 +11,7 @@ namespace NFCoreEx
 			mhtProperty = new Hashtable();
 		}
 		
-		public override NFIProperty AddProperty(string strPropertyName, NFIValueList varData)
+		public override NFIProperty AddProperty(string strPropertyName, NFIDataList varData)
 		{
 			NFIProperty xProperty = null;
 			if (!mhtProperty.ContainsKey(strPropertyName))
@@ -23,7 +23,7 @@ namespace NFCoreEx
 			return xProperty;
 		}
 
-		public override bool SetProperty(string strPropertyName, NFIValueList varData)
+		public override bool SetProperty(string strPropertyName, NFIDataList varData)
 		{
 			if (mhtProperty.ContainsKey(strPropertyName))
 			{
@@ -57,9 +57,9 @@ namespace NFCoreEx
 			}
 		}
 		
-		public override NFIValueList GetPropertyList()
+		public override NFIDataList GetPropertyList()
 		{
-			NFIValueList varData = new NFCValueList();
+			NFIDataList varData = new NFCDataList();
 			foreach( DictionaryEntry de in mhtProperty) 
 			{
 				varData.AddString(de.Key.ToString());				
