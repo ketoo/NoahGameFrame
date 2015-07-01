@@ -40,6 +40,8 @@ bool NFCWorldToMasterModule::AfterInit()
 
 	m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER_RESULTS, this, &NFCWorldToMasterModule::OnSelectServerResultsEvent);
 
+	NFIClusterClientModule::Bind(this, &NFCWorldToMasterModule::OnReciveMSPack, &NFCWorldToMasterModule::OnSocketMSEvent);
+
 	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
 	if (xLogicClass.get())
 	{
@@ -57,7 +59,16 @@ bool NFCWorldToMasterModule::AfterInit()
 				const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
 				const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
 
-				Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCWorldToMasterModule::OnReciveMSPack, &NFCWorldToMasterModule::OnSocketMSEvent, strIP.c_str(), nPort);
+				ServerData xServerData;
+
+				xServerData.nGameID = nServerID;
+				xServerData.eServerType = (NF_SERVER_TYPE)nServerType;
+				xServerData.strIP = strIP;
+				xServerData.nPort = nPort;
+				xServerData.strName = strName;
+				xServerData.eState = NFMsg::EServerState::EST_NARMAL;
+
+				NFIClusterClientModule::AddServer(xServerData);
 			}
 		}
 	}
@@ -68,7 +79,7 @@ bool NFCWorldToMasterModule::AfterInit()
 
 bool NFCWorldToMasterModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
-	return NFINetModule::Execute(fLasFrametime, fStartedTime);
+	return NFIClusterClientModule::Execute(fLasFrametime, fStartedTime);
 }
 
 void NFCWorldToMasterModule::Register()
@@ -101,7 +112,8 @@ void NFCWorldToMasterModule::Register()
 				pData->set_server_max_online(nMaxConnect);
 				pData->set_server_state(NFMsg::EST_NARMAL);
 
-				SendMsgPB(NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED, xMsg);
+				//send to all server
+				SendToAllServerByPB(NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED, xMsg);
 
 				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 			}
@@ -139,7 +151,7 @@ void NFCWorldToMasterModule::UnRegister()
 				pData->set_server_max_online(nMaxConnect);
 				pData->set_server_state(NFMsg::EST_NARMAL);
 
-				SendMsgPB(NFMsg::EGameMsgID::EGMI_MTL_WORLD_UNREGISTERED, xMsg);
+				SendToAllServerByPB(NFMsg::EGameMsgID::EGMI_MTL_WORLD_UNREGISTERED, xMsg);
 
 				Execute(0.0f, 0.0f);
 
@@ -158,13 +170,13 @@ int NFCWorldToMasterModule::OnSelectServerProcess(const NFIPacket& msg)
 {
 	NFIDENTID nPlayerID;
 	NFMsg::ReqConnectWorld xMsg;
-	if (!RecivePB(msg, xMsg, nPlayerID))
+	if (!NFINetModule::RecivePB(msg, xMsg, nPlayerID))
 	{
 		return 0;
 	}
 
     NFCDataList var;
-    var << xMsg.world_id() << PBToNF(xMsg.sender())  << xMsg.login_id() << xMsg.account();
+    var << xMsg.world_id() << NFINetModule::PBToNF(xMsg.sender())  << xMsg.login_id() << xMsg.account();
     m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, var);
 
     return 0;
@@ -193,12 +205,12 @@ int NFCWorldToMasterModule::OnSelectServerResultsEvent(const NFIDENTID& object, 
     xMsg.set_world_id(nWorldID);
     xMsg.set_login_id(nLoginID);
     xMsg.set_world_port(nPort);
-    xMsg.mutable_sender()->CopyFrom(NFToPB(xClientIdent));
+    xMsg.mutable_sender()->CopyFrom(NFINetModule::NFToPB(xClientIdent));
     xMsg.set_account(strAccount);
     xMsg.set_world_ip(strWorldAddress);
     xMsg.set_world_key(strKey);
 
-	SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xMsg);
+	SendSuitByPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xMsg);
 
     return 0;
 }
@@ -207,7 +219,7 @@ int NFCWorldToMasterModule::OnKickClientProcess(const NFIPacket& msg)
 {
 	NFIDENTID nPlayerID;
 	NFMsg::ReqKickFromWorld xMsg;
-	if (!RecivePB(msg, xMsg, nPlayerID))
+	if (!NFINetModule::RecivePB(msg, xMsg, nPlayerID))
 	{
 		return 0;
 	}
