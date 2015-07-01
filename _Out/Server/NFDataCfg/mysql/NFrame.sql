@@ -198,7 +198,6 @@ ALTER TABLE `Player` ADD `TargetX` float(11,3) DEFAULT '0' COMMENT '';
 ALTER TABLE `Player` ADD `TargetY` float(11,3) DEFAULT '0' COMMENT '';
 ALTER TABLE `Player` ADD `TargetZ` float(11,3) DEFAULT '0' COMMENT '';
 ALTER TABLE `Player` ADD `PathStep` bigint(11) DEFAULT '0' COMMENT '';
-ALTER TABLE `Player` ADD `LoadPropertyFinish` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `Player` ADD `GameID` bigint(11) DEFAULT '0' COMMENT '登陆的服ID';
 ALTER TABLE `Player` ADD `GateID` bigint(11) DEFAULT '0' COMMENT '登陆的网关ID';
 ALTER TABLE `Player` ADD `GuildID` varchar(128) DEFAULT '' COMMENT '公会ID';
