@@ -65,7 +65,7 @@ bool NFCPluginManager::LoadPlugin()
         return false;
     }
 
-    const char* strAppID = pPluginAppNode->first_attribute( "Name" )->value();    
+    const char* strAppID = pPluginAppNode->first_attribute( "Name" )->value();
     if (!strAppID)
     {
         NFASSERT(0, "There are no App ID", __FILE__, __FUNCTION__);
@@ -300,8 +300,8 @@ bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
         }
         else
         {
-            assert(0);
             std::cout << "Load " << strPluginDLLName << "Failed" << std::endl;
+            assert(0);
         }
     }
 
