@@ -20,7 +20,7 @@ int HelloWorld3Module::OnEvent(const NFIDENTID& self, const int event, const NFI
 	return 0;
 }
 
-int HelloWorld3Module::OnHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& arg)
+int HelloWorld3Module::OnHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
 
 	unsigned long unNowTime = NF_GetTickCount();
@@ -41,7 +41,7 @@ int HelloWorld3Module::OnClassCallBackEvent(const NFIDENTID& self, const std::st
 	{
 		m_pEventProcessModule->AddEventCallBack(self, 11111111, this, &HelloWorld3Module::OnEvent);
 
-		m_pKernelModule->AddHeartBeat(self, "OnHeartBeat", this, &HelloWorld3Module::OnHeartBeat, NFCDataList(), 5.0f, 9999 );
+		m_pKernelModule->AddHeartBeat(self, "OnHeartBeat", this, &HelloWorld3Module::OnHeartBeat, 5.0f, 9999 );
 
 		mLastTime = NF_GetTickCount();
 	}
@@ -49,7 +49,7 @@ int HelloWorld3Module::OnClassCallBackEvent(const NFIDENTID& self, const std::st
 	return 0;
 }
 
-int HelloWorld3Module::OnPropertyCallBackEvent( const NFIDENTID& self, const std::string& strProperty, const NFIDataList& oldVarList, const NFIDataList& newVarList, const NFIDataList& argVarList )
+int HelloWorld3Module::OnPropertyCallBackEvent( const NFIDENTID& self, const std::string& strProperty, const NFIDataList& oldVarList, const NFIDataList& newVarList)
 {
 	//属性回调事件，只要属性值内容有变化，就会被回调
 	std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVarList.Int(0) << " NewValue: " << newVarList.Int(0) << std::endl;
@@ -57,7 +57,7 @@ int HelloWorld3Module::OnPropertyCallBackEvent( const NFIDENTID& self, const std
 	return 0;
 }
 
-int HelloWorld3Module::OnPropertyStrCallBackEvent( const NFIDENTID& self, const std::string& strProperty, const NFIDataList& oldVarList, const NFIDataList& newVarList, const NFIDataList& argVarList )
+int HelloWorld3Module::OnPropertyStrCallBackEvent( const NFIDENTID& self, const std::string& strProperty, const NFIDataList& oldVarList, const NFIDataList& newVarList)
 {
 	//属性回调事件，只要属性值内容有变化，就会被回调
 	std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVarList.String(0) << " NewValue: " << newVarList.String(0) << std::endl;
