@@ -241,7 +241,7 @@ void* NFCProperty::GetPointer() const
     return NULL;
 }
 
-void NFCProperty::RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIDataList& argVar)
+void NFCProperty::RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb)
 {
     mtPropertyCallback.push_back(cb);
 }
@@ -260,7 +260,7 @@ int NFCProperty::OnEventHandler(const NFIDataList& oldVar, const NFIDataList& ne
         //NFIDataList参数:属性名，OLD属性值，NEW属性值, ARG参数(pKernel,self)
         PROPERTY_EVENT_FUNCTOR_PTR pFunPtr = *it;
         PROPERTY_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-        int nTemRet = pFunc->operator()(mSelf, msPropertyName, oldVar, newVar, NFCDataList());
+        int nTemRet = pFunc->operator()(mSelf, msPropertyName, oldVar, newVar);
     }
 
     return 0;
