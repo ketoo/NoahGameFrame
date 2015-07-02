@@ -67,8 +67,7 @@ int NFCNPCRefreshModule::OnObjectHPEvent( const NFIDENTID& self, const std::stri
 		{
             m_pEventProcessModule->DoEvent( self, NFED_ON_OBJECT_BE_KILLED, NFCDataList() << identAttacker );
 
-            m_pKernelModule->AddHeartBeat( self, "OnDeadDestroyHeart", this, &NFCNPCRefreshModule::OnDeadDestroyHeart, NFCDataList(), 5.0f, 1 );
-
+            m_pKernelModule->AddHeartBeat( self, "OnDeadDestroyHeart", this, &NFCNPCRefreshModule::OnDeadDestroyHeart, 5.0f, 1 );
         }
     }
 

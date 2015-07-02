@@ -114,9 +114,9 @@ int NFCSLGBuildingModule::Upgrade(const NFIDENTID& self, const NFIDENTID& xBuilI
     const int nNeedTime = 20;//升级所需要的时间 //TO ADD
     const std::string strBuildID = pRecord->GetString(nRow, "BuildingID");
 
-    NFCDataList varHeart;
-    varHeart << xBuilID;
-    m_pKernelModule->AddHeartBeat(self, "OnUpgradeHeartBeat", this, &NFCSLGBuildingModule::OnUpgradeHeartBeat, varHeart, nNeedTime, 1);
+    //NFCDataList varHeart;
+    //varHeart << xBuilID;
+    m_pKernelModule->AddHeartBeat(self, "OnUpgradeHeartBeat", this, &NFCSLGBuildingModule::OnUpgradeHeartBeat, /*varHeart,*/ nNeedTime, 1);
 
     //修改建筑的状态
     pRecord->SetInt(nRow, "State", NFMsg::EBS_UPGRADE);
@@ -257,9 +257,9 @@ int NFCSLGBuildingModule::Boost(const NFIDENTID& self, const NFIDENTID& xBuilID)
     const int nBoostTime = 20;//加速时间 // TO ADD
     const std::string strBuildID = pRecord->GetString(nRow, "BuildingID");
 
-    NFCDataList varHeart;
-    varHeart << xBuilID;
-    m_pKernelModule->AddHeartBeat(self, "OnBoostHeartBeat", this, &NFCSLGBuildingModule::OnBoostHeartBeat, varHeart, nBoostTime, 1);
+    //NFCDataList varHeart;
+    //varHeart << xBuilID;
+    m_pKernelModule->AddHeartBeat(self, "OnBoostHeartBeat", this, &NFCSLGBuildingModule::OnBoostHeartBeat, /*varHeart,*/ nBoostTime, 1);
 
     //修改建筑的状态
     pRecord->SetInt(nRow, "State", NFMsg::EBS_BOOST);
@@ -293,10 +293,10 @@ int NFCSLGBuildingModule::Produce(const NFIDENTID& self, const NFIDENTID& xBuilI
     const int nTime = 50;//To ADD
     if (!m_pKernelModule->FindHeartBeat(self, strHeartname))
     {
-        NFCDataList varHeart;
-        varHeart << xBuilID;
-        varHeart << strItemID;
-        m_pKernelModule->AddHeartBeat(self, strHeartname, this, &NFCSLGBuildingModule::OnProduceHeartBeat, varHeart, nTime, nCount);
+        //NFCDataList varHeart;
+        //varHeart << xBuilID;
+        //varHeart << strItemID;
+        m_pKernelModule->AddHeartBeat(self, strHeartname, this, &NFCSLGBuildingModule::OnProduceHeartBeat, /*varHeart, */nTime, nCount);
     }
 
     return 0;
@@ -361,17 +361,17 @@ int NFCSLGBuildingModule::CheckBuildingStatusEnd( const NFIDENTID& self )
         }
         else if(nStatus == NFMsg::EBS_UPGRADE)
         {
-            NFCDataList varHeart;
-            varHeart << xBuildID;
+            //NFCDataList varHeart;
+            //varHeart << xBuildID;
 
-            m_pKernelModule->AddHeartBeat(self, "OnUpgradeHeartBeat", this, &NFCSLGBuildingModule::OnUpgradeHeartBeat, varHeart, fTime, 1);
+            m_pKernelModule->AddHeartBeat(self, "OnUpgradeHeartBeat", this, &NFCSLGBuildingModule::OnUpgradeHeartBeat, /*varHeart, */fTime, 1);
         }
         else if(nStatus == NFMsg::EBS_BOOST)
         {
-            NFCDataList varHeart;
-            varHeart << xBuildID;
+            //NFCDataList varHeart;
+            //varHeart << xBuildID;
 
-            m_pKernelModule->AddHeartBeat(self, "OnUpgradeHeartBeat", this, &NFCSLGBuildingModule::OnUpgradeHeartBeat, varHeart, fTime, 1);
+            m_pKernelModule->AddHeartBeat(self, "OnUpgradeHeartBeat", this, &NFCSLGBuildingModule::OnUpgradeHeartBeat, /*varHeart, */fTime, 1);
         }
     }
 
@@ -539,13 +539,13 @@ int NFCSLGBuildingModule::CheckProduceData( const NFIDENTID& self )
             pProduce->SetInt(i, "", nLeftCount - nCount);
 
             //增加定时任务
-            NFCDataList varHeart;
-            varHeart << xBuildID;
-            varHeart << strItemID;
+            //NFCDataList varHeart;
+            //varHeart << xBuildID;
+            //varHeart << strItemID;
 
             const std::string strHeartname = GetProduceHeartName(self, xBuildID, strItemID);
             const int nTime = (nCount + 1) * nOnceTime - nPassTime;
-            m_pKernelModule->AddHeartBeat(self, strHeartname, this, &NFCSLGBuildingModule::OnProduceHeartBeat, varHeart, nTime, 1);
+            m_pKernelModule->AddHeartBeat(self, strHeartname, this, &NFCSLGBuildingModule::OnProduceHeartBeat, /*varHeart, */nTime, 1);
         }
     }
 
