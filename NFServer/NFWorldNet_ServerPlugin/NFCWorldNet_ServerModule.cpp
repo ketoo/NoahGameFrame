@@ -956,7 +956,7 @@ int NFCWorldNet_ServerModule::OnShowPropertyEvent( const NFIDENTID& object, cons
     return 0;
 }
 
-int NFCWorldNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
+int NFCWorldNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
 {
     if ( oldVar.GetCount() <= 0 )
     {
@@ -964,7 +964,7 @@ int NFCWorldNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, cons
     }
 
     NFCDataList valueBroadCaseList;
-    int nCount = argVar.GetCount() ;
+    int nCount = 0;//argVar.GetCount() ;
     if ( nCount <= 0 )
     {
         if ( "Guild" == m_pKernelModule->GetPropertyString( self, "ClassName" ))
@@ -975,7 +975,7 @@ int NFCWorldNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, cons
     else
     {
         //传入的参数是要广播的对象列表
-        valueBroadCaseList = argVar;
+        //valueBroadCaseList = argVar;
     }
 
     if ( valueBroadCaseList.GetCount() <= 0 )
