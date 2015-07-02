@@ -765,7 +765,7 @@ int NFCGameServerNet_ServerModule::OnObjectListLeave( const NFIDataList& self, c
 	return 1;
 }
 
-int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
+int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
 {
 	if ( oldVar.GetCount() <= 0 )
 	{
@@ -777,13 +777,13 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 		if ( "GroupID" == strPropertyName )
 		{
 			//自己还是要知道自己的这个属性变化的,但是别人就不需要知道了
-			OnGroupEvent( self, strPropertyName, oldVar, newVar, argVar );
+			OnGroupEvent( self, strPropertyName, oldVar, newVar);
 		}
 
 		if ( "SceneID" == strPropertyName )
 		{
 			//自己还是要知道自己的这个属性变化的,但是别人就不需要知道了
-			OnContainerEvent( self, strPropertyName, oldVar, newVar, argVar );
+			OnContainerEvent( self, strPropertyName, oldVar, newVar);
 		}
 
 		if ( "Player" == m_pKernelModule->GetPropertyString( self, "ClassName" ) )
@@ -796,7 +796,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 	}
 
 	NFCDataList valueBroadCaseList;
-	int nCount = argVar.GetCount() ;
+	int nCount = 0;//argVar.GetCount() ;
 	if ( nCount <= 0 )
 	{
 		nCount = GetBroadCastObject( self, strPropertyName, false, valueBroadCaseList );
@@ -804,7 +804,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 	else
 	{
 		//传入的参数是要广播的对象列表
-		valueBroadCaseList = argVar;
+		//valueBroadCaseList = argVar;
 	}
 
 	if ( valueBroadCaseList.GetCount() <= 0 )
@@ -1278,7 +1278,7 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent( const NFIDENTID& self, co
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
+int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
 {
 	//容器发生变化，只可能从A容器的0层切换到B容器的0层
 	//需要注意的是------------任何层改变的时候，此玩家其实还未进入层，因此，层改变的时候获取的玩家列表，目标层是不包含自己的
@@ -1391,7 +1391,7 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const st
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
+int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
 {
 	//容器发生变化，只可能从A容器的0层切换到B容器的0层
 	//需要注意的是------------任何容器改变的时候，玩家必须是0层

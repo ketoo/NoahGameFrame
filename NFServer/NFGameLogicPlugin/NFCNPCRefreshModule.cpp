@@ -74,7 +74,7 @@ int NFCNPCRefreshModule::OnObjectHPEvent( const NFIDENTID& self, const std::stri
     return 0;
 }
 
-int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var )
+int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
     //and create new object
     const std::string& strClassName = m_pKernelModule->GetPropertyString( self, "ClassName" );
