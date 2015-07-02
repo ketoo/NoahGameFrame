@@ -129,74 +129,74 @@ int NFCSLGBuildingModule::Upgrade(const NFIDENTID& self, const NFIDENTID& xBuilI
 
 int NFCSLGBuildingModule::OnUpgradeHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
-    if (var.GetCount() != 1 ||  var.TypeEx(TDATA_OBJECT, TDATA_UNKNOWN))
-    {
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "Param is wrong", "", __FUNCTION__, __LINE__);
-        return 1;
-    }
-
-    const NFIDENTID& xBuildID = var.Object(0);
-
-    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "BuildingList");
-    if (NULL == pRecord.get())
-    {
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "this is no [BuildingList] Record!", "", __FUNCTION__, __LINE__);
-        return 1;
-    }
-
-    NFCDataList varBuild;
-    pRecord->FindObject("BuildingGUID", xBuildID, varBuild);
-    if (varBuild.GetCount() <= 0)
-    {
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "there are no the building", xBuildID.ToString(), __FUNCTION__, __LINE__);
-        return 1;
-    }
-
-    const int nRow = var.Int(0);
-    const std::string strBuildID = pRecord->GetString(nRow, "BuildingID");
-
-    //升级
-    //TO ADD
-
-    //修改建筑的状态
-    pRecord->SetInt(nRow, "State", NFMsg::EBS_IDLE);
-    pRecord->SetInt(nRow, "StateStartTime", NFTimeEx::GetNowTime());
-    pRecord->SetInt(nRow, "StateEndTime", 0);
+//     if (var.GetCount() != 1 ||  var.TypeEx(TDATA_OBJECT, TDATA_UNKNOWN))
+//     {
+//         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "Param is wrong", "", __FUNCTION__, __LINE__);
+//         return 1;
+//     }
+// 
+//     const NFIDENTID& xBuildID = var.Object(0);
+// 
+//     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "BuildingList");
+//     if (NULL == pRecord.get())
+//     {
+//         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "this is no [BuildingList] Record!", "", __FUNCTION__, __LINE__);
+//         return 1;
+//     }
+// 
+//     NFCDataList varBuild;
+//     pRecord->FindObject("BuildingGUID", xBuildID, varBuild);
+//     if (varBuild.GetCount() <= 0)
+//     {
+//         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "there are no the building", xBuildID.ToString(), __FUNCTION__, __LINE__);
+//         return 1;
+//     }
+// 
+//     const int nRow = var.Int(0);
+//     const std::string strBuildID = pRecord->GetString(nRow, "BuildingID");
+// 
+//     //升级
+//     //TO ADD
+// 
+//     //修改建筑的状态
+//     pRecord->SetInt(nRow, "State", NFMsg::EBS_IDLE);
+//     pRecord->SetInt(nRow, "StateStartTime", NFTimeEx::GetNowTime());
+//     pRecord->SetInt(nRow, "StateEndTime", 0);
 
     return 0;
 }
 
 int NFCSLGBuildingModule::OnBoostHeartBeat( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
-    if (var.GetCount() != 1 ||  var.TypeEx(TDATA_OBJECT, TDATA_UNKNOWN))
-    {
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "Param is wrong", "", __FUNCTION__, __LINE__);
-        return 1;
-    }
-
-    const NFIDENTID& xBuidID = var.Object(0);
-
-    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "BuildingList");
-    if (NULL == pRecord.get())
-    {
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "this is no [BuildingList] Record!", "", __FUNCTION__, __LINE__);
-        return 1;
-    }
-
-    NFCDataList varBuild;
-    pRecord->FindObject("BuildingGUID", xBuidID, varBuild);
-    if (varBuild.GetCount() <= 0)
-    {
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "there are no the building", xBuidID.ToString(), __FUNCTION__, __LINE__);
-        return 1;
-    }
-
-    const int nRow = var.Int(0);
-
-    //修改建筑的状态
-    pRecord->SetInt(nRow, "State", NFMsg::EBS_IDLE);
-    pRecord->SetInt(nRow, "StateStartTime", NFTimeEx::GetNowTime());
-    pRecord->SetInt(nRow, "StateEndTime", 0);
+// 	if (var.GetCount() != 1 ||  var.TypeEx(TDATA_OBJECT, TDATA_UNKNOWN))
+// 	{
+// 		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "Param is wrong", "", __FUNCTION__, __LINE__);
+// 		return 1;
+// 	}
+// 
+//     const NFIDENTID& xBuidID = var.Object(0);
+// 
+//     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "BuildingList");
+//     if (NULL == pRecord.get())
+//     {
+//         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "this is no [BuildingList] Record!", "", __FUNCTION__, __LINE__);
+//         return 1;
+//     }
+// 
+//     NFCDataList varBuild;
+//     pRecord->FindObject("BuildingGUID", xBuidID, varBuild);
+//     if (varBuild.GetCount() <= 0)
+//     {
+//         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "there are no the building", xBuidID.ToString(), __FUNCTION__, __LINE__);
+//         return 1;
+//     }
+// 
+//     const int nRow = var.Int(0);
+// 
+//     //修改建筑的状态
+//     pRecord->SetInt(nRow, "State", NFMsg::EBS_IDLE);
+//     pRecord->SetInt(nRow, "StateStartTime", NFTimeEx::GetNowTime());
+//     pRecord->SetInt(nRow, "StateEndTime", 0);
 
     return 0;
 }
@@ -212,26 +212,26 @@ int NFCSLGBuildingModule::OnProduceHeartBeat( const NFIDENTID& self, const std::
     //To ADD
 
     //Cost Left Count
-    const NFIDENTID& xBuildID = var.Object(0);
-    const std::string& strItem = var.String(1);
-    CostProduceData(self, xBuildID, strItem, 1);
-
-    if (nCount == 0)
-    {
-        int nLeftCount = 0;
-        GetProduceDataCount(self, xBuildID, strItem, nLeftCount);
-
-        if (nLeftCount > 0)
-        {
-            const std::string strHeartname = GetProduceHeartName(self, xBuildID, strItem);
-            const int nTime = 50;//To ADD
-
-            NFCDataList varHeart;
-            varHeart << xBuildID;
-            varHeart << strItem;
-            m_pKernelModule->AddHeartBeat(self, strHeartname, this, &NFCSLGBuildingModule::OnProduceHeartBeat, nTime, nLeftCount);
-        }
-    }
+//     const NFIDENTID& xBuildID = var.Object(0);
+//     const std::string& strItem = var.String(1);
+//     CostProduceData(self, xBuildID, strItem, 1);
+// 
+//     if (nCount == 0)
+//     {
+//         int nLeftCount = 0;
+//         GetProduceDataCount(self, xBuildID, strItem, nLeftCount);
+// 
+//         if (nLeftCount > 0)
+//         {
+//             const std::string strHeartname = GetProduceHeartName(self, xBuildID, strItem);
+//             const int nTime = 50;//To ADD
+// 
+//             NFCDataList varHeart;
+//             varHeart << xBuildID;
+//             varHeart << strItem;
+//             m_pKernelModule->AddHeartBeat(self, strHeartname, this, &NFCSLGBuildingModule::OnProduceHeartBeat, nTime, nLeftCount);
+//         }
+//     }
 
 
     return 0;
