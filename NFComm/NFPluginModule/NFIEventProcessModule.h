@@ -91,10 +91,10 @@ public:
 	template<typename BaseTypeComponent, typename BaseType>
 	bool AddActorEventCallBack(const NFIDENTID& objectID, const int nEventID, BaseTypeComponent* pBaseComponent, int (BaseTypeComponent::*handler)(const NFIDENTID&, const int, std::string&), BaseType* pBase, int (BaseType::*handler_end)(const NFIDENTID&, const int, const std::string&))
 	{
-		EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR functor_begin = std::bind(handler, pBaseComponent, std::is_placeholder::_1, std::is_placeholder::_2, std::is_placeholder::_3);
+		EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR functor_begin = std::bind(handler, pBaseComponent, std::placeholder::_1, std::placeholder::_2, std::placeholder::_3);
 		EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR functorPtr_begin(new EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR(functor_begin));
 
-		EVENT_ASYNC_PROCESS_END_FUNCTOR functor_end = std::bind(handler_end, pBase, std::is_placeholder::_1, std::is_placeholder::_2, std::is_placeholder::_3);
+		EVENT_ASYNC_PROCESS_END_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholder::_1, std::placeholder::_2, std::placeholder::_3);
 		EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end(new EVENT_ASYNC_PROCESS_END_FUNCTOR(functor_end));
 
         if (!objectID.IsNull())
@@ -116,10 +116,10 @@ public:
 	template<typename BaseType>
 	bool AddAsyncClassCallBack(const std::string& strClassName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const std::string&), int (BaseType::*handler_end)(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const std::string&))
 	{
-		CLASS_ASYNC_EVENT_FUNCTOR functor_begin = std::bind(handler, pBase, std::is_placeholder::_1, std::is_placeholder::_2, std::is_placeholder::_3, std::is_placeholder::_4);
+		CLASS_ASYNC_EVENT_FUNCTOR functor_begin = std::bind(handler, pBase, std::placeholder::_1, std::placeholder::_2, std::placeholder::_3, std::placeholder::_4);
 		CLASS_ASYNC_EVENT_FUNCTOR_PTR functorPtr_begin(new CLASS_ASYNC_EVENT_FUNCTOR(functor_begin));
 
-		CLASS_ASYNC_EVENT_FUNCTOR functor_end = std::bind(handler_end, pBase, std::is_placeholder::_1, std::is_placeholder::_2, std::is_placeholder::_3, std::is_placeholder::_4);
+		CLASS_ASYNC_EVENT_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholder::_1, std::placeholder::_2, std::placeholder::_3, std::placeholder::_4);
 		CLASS_ASYNC_EVENT_FUNCTOR_PTR functorPtr_end(new CLASS_ASYNC_EVENT_FUNCTOR(functor_end));
 
 		return AddAsyncClassCallBack(strClassName, functorPtr_begin, functorPtr_end);
