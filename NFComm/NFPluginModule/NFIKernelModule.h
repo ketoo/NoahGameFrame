@@ -25,7 +25,7 @@ public:
     template<typename BaseType>
     bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const float, const int), const float fTime, const int nCount)
     {
-        HEART_BEAT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4);
+        HEART_BEAT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         HEART_BEAT_FUNCTOR_PTR functorPtr(new HEART_BEAT_FUNCTOR(functor));
         return AddHeartBeat(self, strHeartBeatName, functorPtr, fTime, nCount);
     }
