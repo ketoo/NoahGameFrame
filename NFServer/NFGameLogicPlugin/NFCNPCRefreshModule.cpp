@@ -58,7 +58,7 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFIDENTID& self, const std::s
     return 0;
 }
 
-int NFCNPCRefreshModule::OnObjectHPEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
+int NFCNPCRefreshModule::OnObjectHPEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
 {
     if ( newVar.Int( 0 ) <= 0 )
     {
