@@ -46,7 +46,7 @@ struct RECORD_EVENT_DATA
 
 // functor
 typedef std::function<int(const NFIDENTID&, const std::string&, const float, const int)> HEART_BEAT_FUNCTOR;
-typedef boost::function<int(const NFIDENTID&, const std::string&, const NFIDataList&, const NFIDataList&, const NFIDataList&)> PROPERTY_EVENT_FUNCTOR;
+typedef std::function<int(const NFIDENTID&, const std::string&, const NFIDataList&, const NFIDataList&)> PROPERTY_EVENT_FUNCTOR;
 typedef boost::function<int(const NFIDENTID&, const std::string&, const int, const int, const int, const NFIDataList&, const NFIDataList&, const NFIDataList&)> RECORD_EVENT_FUNCTOR;
 
 typedef std::function<int(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIDataList&)> CLASS_EVENT_FUNCTOR;
