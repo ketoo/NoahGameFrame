@@ -104,7 +104,7 @@ bool NFCFightState::RunCloseTarget(const NFIDENTID& self, const NFIDENTID& targe
     return true;
 }
 
-int NFCFightState::OnSkillConsumeTime( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& arg )
+int NFCFightState::OnSkillConsumeTime( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
 	m_pKernelModule->SetPropertyInt(self, "StateType", (int)NFObjectStateType::NOST_IDLE);
 	
