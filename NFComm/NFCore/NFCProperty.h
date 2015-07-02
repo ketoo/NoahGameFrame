@@ -58,7 +58,7 @@ public:
 
     virtual bool Changed() const;
 
-    virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIDataList& argVar);
+    virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb);
 
     virtual NFIDataList::TData GetValue() const;
 

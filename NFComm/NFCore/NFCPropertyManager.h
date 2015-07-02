@@ -24,7 +24,7 @@ public:
 
     virtual ~NFCPropertyManager();
 
-    virtual bool RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIDataList& argVar);
+    virtual bool RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb);
 
     virtual NF_SHARE_PTR<NFIProperty> AddProperty(const NFIDENTID& self, NF_SHARE_PTR<NFIProperty> pProperty);
 
