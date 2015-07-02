@@ -240,7 +240,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFIDENTID& self, con
 				pStaticConfigPropertyInfo->GetRelationValue());
 
 			//通用回调，方便NET同步
-			PROPERTY_EVENT_FUNCTOR functor = boost::bind(&NFCKernelModule::OnPropertyCommonEvent, this, _1, _2, _3, _4, _5);
+			PROPERTY_EVENT_FUNCTOR functor = std::bind(&NFCKernelModule::OnPropertyCommonEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 			PROPERTY_EVENT_FUNCTOR_PTR functorPtr(NF_NEW PROPERTY_EVENT_FUNCTOR(functor));
 			pObject->AddPropertyCallBack(pStaticConfigPropertyInfo->GetKey(), functorPtr);
 
@@ -1322,7 +1322,7 @@ bool NFCKernelModule::LogInfo(const NFIDENTID ident)
 	return true;
 }
 
-int NFCKernelModule::OnPropertyCommonEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar)
+int NFCKernelModule::OnPropertyCommonEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
 {
 	if (IsContainer(self))
 	{
@@ -1334,7 +1334,7 @@ int NFCKernelModule::OnPropertyCommonEvent(const NFIDENTID& self, const std::str
 	{
 		PROPERTY_EVENT_FUNCTOR_PTR pFunPtr = *it;
 		PROPERTY_EVENT_FUNCTOR* pFun = pFunPtr.get();
-		pFun->operator()(self, strPropertyName, oldVar, newVar, argVar);
+		pFun->operator()(self, strPropertyName, oldVar, newVar);
 	}
 
 	return 0;
@@ -1532,7 +1532,7 @@ bool NFCKernelModule::AddProperty(const NFIDENTID& self, const std::string& strP
 		pObject->GetPropertyManager()->AddProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, bView, nIndex, strScriptFunction);
 
 		//通用回调，方便NET同步
-		PROPERTY_EVENT_FUNCTOR functor = boost::bind(&NFCKernelModule::OnPropertyCommonEvent, this, _1, _2, _3, _4, _5);
+		PROPERTY_EVENT_FUNCTOR functor = std::bind(&NFCKernelModule::OnPropertyCommonEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		PROPERTY_EVENT_FUNCTOR_PTR functorPtr(NF_NEW PROPERTY_EVENT_FUNCTOR(functor));
 		return pObject->AddPropertyCallBack(strPropertyName, functorPtr);
 	}
