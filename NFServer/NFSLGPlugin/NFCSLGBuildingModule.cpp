@@ -127,7 +127,7 @@ int NFCSLGBuildingModule::Upgrade(const NFIDENTID& self, const NFIDENTID& xBuilI
 }
 
 
-int NFCSLGBuildingModule::OnUpgradeHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var)
+int NFCSLGBuildingModule::OnUpgradeHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
     if (var.GetCount() != 1 ||  var.TypeEx(TDATA_OBJECT, TDATA_UNKNOWN))
     {
@@ -166,7 +166,7 @@ int NFCSLGBuildingModule::OnUpgradeHeartBeat(const NFIDENTID& self, const std::s
     return 0;
 }
 
-int NFCSLGBuildingModule::OnBoostHeartBeat( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var )
+int NFCSLGBuildingModule::OnBoostHeartBeat( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
     if (var.GetCount() != 1 ||  var.TypeEx(TDATA_OBJECT, TDATA_UNKNOWN))
     {
@@ -201,13 +201,13 @@ int NFCSLGBuildingModule::OnBoostHeartBeat( const NFIDENTID& self, const std::st
     return 0;
 }
 
-int NFCSLGBuildingModule::OnProduceHeartBeat( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var )
+int NFCSLGBuildingModule::OnProduceHeartBeat( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
-    if (var.GetCount() != 2 || var.TypeEx(TDATA_OBJECT, TDATA_STRING, TDATA_UNKNOWN))
-    {
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "var Param is wrong", "", __FUNCTION__, __LINE__);
-        return 1;
-    }
+//     if (var.GetCount() != 2 || var.TypeEx(TDATA_OBJECT, TDATA_STRING, TDATA_UNKNOWN))
+//     {
+//         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "var Param is wrong", "", __FUNCTION__, __LINE__);
+//         return 1;
+//     }
     //AddItem
     //To ADD
 
@@ -229,7 +229,7 @@ int NFCSLGBuildingModule::OnProduceHeartBeat( const NFIDENTID& self, const std::
             NFCDataList varHeart;
             varHeart << xBuildID;
             varHeart << strItem;
-            m_pKernelModule->AddHeartBeat(self, strHeartname, this, &NFCSLGBuildingModule::OnProduceHeartBeat, varHeart, nTime, nLeftCount);
+            m_pKernelModule->AddHeartBeat(self, strHeartname, this, &NFCSLGBuildingModule::OnProduceHeartBeat, nTime, nLeftCount);
         }
     }
 
