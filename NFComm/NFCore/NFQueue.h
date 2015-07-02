@@ -48,6 +48,7 @@ public:
     bool Push(const T& object)
 	{
 		//spinlock_mutex();
+        std::lock_guard<boost::detail::spinlock> guard(_spinlock);
 
 		mList.push_back(object);
 
@@ -57,6 +58,7 @@ public:
     bool Pop(T& object)
 	{
 		//spinlock_mutex();
+        std::lock_guard<boost::detail::spinlock> guard(_spinlock);
 
 		if (mList.empty())
 		{
@@ -71,6 +73,7 @@ public:
 
 private:
     std::list<T> mList;
+    boost::detail::spinlock _spinlock;
 };
 
 #endif
