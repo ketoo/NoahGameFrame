@@ -19,7 +19,7 @@ class NFIPropertyManager
 public:
     virtual ~NFIPropertyManager() {}
 
-    virtual bool RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIDataList& argVar) = 0;
+    virtual bool RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
 
     virtual NF_SHARE_PTR<NFIProperty> AddProperty(const NFIDENTID& self, NF_SHARE_PTR<NFIProperty> pProperty) = 0;
     virtual NF_SHARE_PTR<NFIProperty> AddProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex, const std::string& strScriptFunction) = 0;
