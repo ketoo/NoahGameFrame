@@ -23,7 +23,7 @@ class NFIScriptModule
 {
 
 public:
-    virtual int DoHeartBeatCommonCB(NFIScriptKernelModule* pScriptKernelModule, const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var)
+    virtual int DoHeartBeatCommonCB(NFIScriptKernelModule* pScriptKernelModule, const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
     {
         NFCSriptData* pScriptData = pScriptKernelModule->GetElement(self);
         if (pScriptData)
@@ -35,7 +35,7 @@ public:
                 bool bRet = pList->First(xScriptName);
                 while (bRet)
                 {
-                    DoHeartBeatScript(self, strHeartBeat, fTime, nCount, xScriptName.strComponentName, xScriptName.strFunctionName, NFCScriptVarList(var));
+                    DoHeartBeatScript(self, strHeartBeat, fTime, nCount, xScriptName.strComponentName, xScriptName.strFunctionName);
 
                     bRet = pList->Next(xScriptName);
                 }
@@ -67,7 +67,7 @@ public:
         return 0;
     }
 
-    virtual int DoPropertyCommEvent(NFIScriptKernelModule* pScriptKernelModule, const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& arg)
+    virtual int DoPropertyCommEvent(NFIScriptKernelModule* pScriptKernelModule, const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
     {
         NFCSriptData* pScriptData = pScriptKernelModule->GetElement(self);
         if (pScriptData)
@@ -79,7 +79,7 @@ public:
                 bool bRet = pList->First(xScriptName);
                 while (bRet)
                 {
-                    DoScriptPropertyCallBack(self, strPropertyName, xScriptName.strComponentName, xScriptName.strFunctionName, NFCScriptVarList(oldVar), NFCScriptVarList(newVar), NFCScriptVarList(arg));
+                    DoScriptPropertyCallBack(self, strPropertyName, xScriptName.strComponentName, xScriptName.strFunctionName, NFCScriptVarList(oldVar), NFCScriptVarList(newVar));
 
                     bRet = pList->Next(xScriptName);
                 }
@@ -158,10 +158,10 @@ public:
     //call script
     virtual int DoScript(const NFIDENTID& self, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg) = 0;
     virtual int DoEventScript(const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg) = 0;
-    virtual int DoHeartBeatScript(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg) = 0;
+    virtual int DoHeartBeatScript(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction) = 0;
 
 
-    virtual int DoScriptPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& oldVar, const NFCScriptVarList& newVar, const NFCScriptVarList& arg) = 0;
+    virtual int DoScriptPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& oldVar, const NFCScriptVarList& newVar) = 0;
     virtual int DoScriptRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCScriptVarList& oldVar, const NFCScriptVarList& newVar, const NFCScriptVarList& arg) = 0;
 };
 
@@ -358,14 +358,14 @@ public:
         NFCScriptName xScriptName(strComponentName, strFunction);
         pScriptNameList->Add(xScriptName);
 
-        m_pKernelModule->AddHeartBeat(self, strHeartBeatName, this, &NFCScriptKernelModule::OnHeartBeatCommonCB, NFCDataList(), fTime, nCount);
+        m_pKernelModule->AddHeartBeat(self, strHeartBeatName, this, &NFCScriptKernelModule::OnHeartBeatCommonCB, fTime, nCount);
 
         return true;
     }
 
-    int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var)
+    int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
     {
-        m_pScriptModule->DoHeartBeatCommonCB(this, self, strHeartBeat, fTime, nCount, var);
+        m_pScriptModule->DoHeartBeatCommonCB(this, self, strHeartBeat, fTime, nCount);
         return 0;
     }
 
