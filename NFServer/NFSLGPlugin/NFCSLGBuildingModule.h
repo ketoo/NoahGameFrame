@@ -38,9 +38,9 @@ public:
     virtual int Move(const NFIDENTID& self, const NFIDENTID nGUID, const float fX, const float fY, const float fZ);
 
 protected:    
-    int OnUpgradeHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var); 
-    int OnBoostHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var);   
-    int OnProduceHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var);   
+    int OnUpgradeHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount); 
+    int OnBoostHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount);   
+    int OnProduceHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount);   
 
     int CheckBuildingStatusEnd(const NFIDENTID& self);
     int OnClassObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
