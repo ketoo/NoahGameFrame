@@ -80,7 +80,7 @@ bool NFCObject::AddPropertyCallBack(const std::string& strCriticalName, const PR
     NF_SHARE_PTR<NFIProperty> pProperty = GetPropertyManager()->GetElement(strCriticalName);
     if (pProperty.get())
     {
-        pProperty->RegisterCallback(cb, NFCDataList());
+        pProperty->RegisterCallback(cb);
 
         return true;
     }
