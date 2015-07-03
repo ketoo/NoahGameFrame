@@ -94,6 +94,19 @@ public:
 		}
 	}
 
+    void SendByServerID(const int nServerID,const NFIPacket& msg, const int nSockIndex = 0, bool bBroadcast = false)
+    {
+        NF_SHARE_PTR<ServerData> pServer = mxServerMap.GetElement(nServerID);
+        if (pServer)
+        {
+            NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
+            if (pNetModule.get())
+            {
+                pNetModule->GetNet()->SendMsg(msg, nSockIndex, bBroadcast);
+            }
+        }
+    }
+
 	void SendToAllServerByPB(const uint16_t nMsgID, google::protobuf::Message& xData, const int nSockIndex = 0, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<NFIDENTID>* pClientIDList = NULL, bool bBroadcast = false)
 	{
 		NF_SHARE_PTR<ServerData> pServer = mxServerMap.First();
@@ -124,6 +137,22 @@ public:
         }
 
         SendByServerID(xNode.nMachineID, strData);
+    }
+
+    void SendBySuit(const int& nHashKey, const NFIPacket& msg, const int nSockIndex = 0, bool bBroadcast = false)
+    {
+        if (mxConsistentHash.Size() <= 0)
+        {
+            return;
+        }
+
+        NFCMachineNode xNode;
+        if (!GetServerMachineData(boost::lexical_cast<std::string> (nHashKey), xNode))
+        {
+            return ;
+        }
+
+        SendByServerID(xNode.nMachineID, msg, nSockIndex, bBroadcast);
     }
 
 	void SendSuitByPB(const int& nHashKey, const uint16_t nMsgID, google::protobuf::Message& xData, const int nSockIndex = 0, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<NFIDENTID>* pClientIDList = NULL, bool bBroadcast = false)

@@ -63,6 +63,9 @@ public:
     virtual NFIDataList::TData GetValue() const;
 
     int OnEventHandler(const NFIDataList& oldVar, const NFIDataList& newVar);
+
+    virtual std::string ToString();
+    virtual bool FromString(const std::string& strData);
 private:
     typedef std::vector<PROPERTY_EVENT_FUNCTOR_PTR> TPROPERTYCALLBACKEX;
     TPROPERTYCALLBACKEX mtPropertyCallback;

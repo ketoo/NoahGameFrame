@@ -33,13 +33,14 @@
 #include "NFComm/NFPluginModule/NFIDataProcessModule.h"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 #include "NFComm/NFPluginModule/NFIEctypeModule.h"
-
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
 ////////////////////////////////////////////////////////////////////////////
 
 
 
 class NFCGameServerNet_ServerModule
-    : public NFINetModule
+    : public NFIGameServerNet_ServerModule
 {
 public:
     NFCGameServerNet_ServerModule(NFIPluginManager* p)
@@ -54,6 +55,8 @@ public:
 
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
+    virtual void SendMsgPBToGate( const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFIDENTID self );
+    virtual void SendMsgPBToGate( const uint16_t nMsgID, const std::string& strMsg, const NFIDENTID self );
 
 protected:
 
@@ -105,6 +108,7 @@ protected:
 
 	///////////WORLD_START///////////////////////////////////////////////////////////////
 	void OnTransWorld(const NFIPacket& msg);
+    void OnTransWorld(const NFIPacket& msg, const int nWorldKey);
 
 	///////////WORLD_END///////////////////////////////////////////////////////////////
 
@@ -151,9 +155,9 @@ protected:
     // 通知副本奖励结果
     int OnNoticeEctypeAward(const NFIDENTID& self, const int nEventID, const NFIDataList& var);
 
-
+    template<class PBClass>    
+    NFIDENTID GetGuildID(const NFIPacket& msg);
 private:
-	void SendMsgPBToGate( const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFIDENTID self );
 	void PlayerLeaveGameServer( const NFIDENTID self );
 
 private:
@@ -222,6 +226,20 @@ private:
     //SLG模块
 	NFISLGShopModule* m_pSLGShopModule;
     NFISLGBuildingModule* m_pSLGBuildingModule;
+    NFIGameServerToWorldModule* m_pGameServerToWorldModule;
 };
+
+template<class PBClass>
+NFIDENTID NFCGameServerNet_ServerModule::GetGuildID( const NFIPacket& msg )
+{
+    NFIDENTID nPlayerID;
+    PBClass xMsg;                                         
+    if (!NFINetModule::RecivePB(msg, xMsg, nPlayerID))
+    {
+        return NFIDENTID();
+    }
+
+    return PBToNF(xMsg.guild_id());
+}
 
 #endif
