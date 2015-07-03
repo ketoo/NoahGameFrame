@@ -300,6 +300,15 @@ bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
         }
         else
         {
+#if NF_PLATFORM == NF_PLATFORM_LINUX
+            char* error = dlerror();
+            if (error)
+            {
+                fprintf(stderr, "Open shared lib %s failed, %s.\n", strPluginDLLName.c_str(), error);
+                assert(0);
+                return false;
+            }
+#endif // NF_PLATFORM
             std::cout << "Load [" << strPluginDLLName << "] Failed" << std::endl;
             assert(0);
         }
