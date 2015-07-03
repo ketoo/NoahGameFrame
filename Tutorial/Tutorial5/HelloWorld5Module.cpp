@@ -23,11 +23,9 @@ bool HelloWorld5Module::AfterInit()
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
 
-    //////////////////////////////////////Í¬²½/////////////////////////////////////////////////////////////////////
-    NFCTestComponent* pComponent = NF_NEW NFCTestComponent();
-    pComponent->SetInitData("IniData");
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    m_pEventProcessModule->AddActorEventCallBack(NFIDENTID(), 555, pComponent, &NFCTestComponent::OnASyncEvent, this, &HelloWorld5Module::OnSyncEvent);
+    m_pEventProcessModule->AddActorEventCallBack<NFCTestComponent>(NFIDENTID(), 555, this, &HelloWorld5Module::OnSyncEvent);
 
     m_pEventProcessModule->DoEvent(NFIDENTID(), 555, NFCDataList() << "Event Param", false);
 
