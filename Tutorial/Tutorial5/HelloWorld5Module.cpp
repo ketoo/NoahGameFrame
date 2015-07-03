@@ -25,9 +25,10 @@ bool HelloWorld5Module::AfterInit()
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    m_pEventProcessModule->AddActorEventCallBack<NFCTestComponent>(NFIDENTID(), 555, this, &HelloWorld5Module::OnSyncEvent);
+	//int nActorID = m_pEventProcessModule->AddActorEventCallBack<NFCTestComponent, HelloWorld5Module>(this, &HelloWorld5Module::OnSyncEvent);
+	int nActorID = m_pEventProcessModule->AddActorEventCallBack<NFCTestComponent>(this, &HelloWorld5Module::OnSyncEvent);
 
-    m_pEventProcessModule->DoEvent(NFIDENTID(), 555, NFCDataList() << "Event Param", false);
+    m_pEventProcessModule->SendActorMsg(nActorID, 555, NFIDENTID(), "Event Param");
 
 
     std::cout << "End Test Actor, ThreadID: " << std::this_thread::get_id() << std::endl;
