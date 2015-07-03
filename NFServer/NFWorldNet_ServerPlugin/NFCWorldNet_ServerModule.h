@@ -46,9 +46,7 @@ public:
 	virtual void LogSend(const char* str){}
 
     virtual bool SendMsgToGame(const int nGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer = NFIDENTID());
-    virtual bool SendMsgToProxy(const int nGateID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer = NFIDENTID());
     virtual bool GetGameID(const NFIDENTID& self, int& nGameID);
-    virtual bool GetGateID(const NFIDENTID& self, int& nGateID);
 
     virtual bool SendMsgToPlayer( const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer);
 protected:
