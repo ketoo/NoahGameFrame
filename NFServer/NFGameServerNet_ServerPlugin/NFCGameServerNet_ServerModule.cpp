@@ -31,6 +31,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pSkillModule = dynamic_cast<NFISkillModule*>(pPluginManager->FindModule("NFCSkillModule"));
 	m_pDataProcessModule = dynamic_cast<NFIDataProcessModule*>(pPluginManager->FindModule("NFCDataProcessModule"));
 	m_pEctypeModule = dynamic_cast<NFIEctypeModule*>(pPluginManager->FindModule("NFCEctypeModule"));
+    m_pGameServerToWorldModule = dynamic_cast<NFIGameServerToWorldModule*>(pPluginManager->FindModule("NFCGameServerToWorldModule"));
 
 	assert(NULL != m_pEventProcessModule);
 	assert(NULL != m_pKernelModule);
@@ -45,6 +46,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	assert(NULL != m_pSkillModule);
 	assert(NULL != m_pDataProcessModule);
 	assert(NULL != m_pEctypeModule);
+    assert(NULL != m_pGameServerToWorldModule);
 
 	m_pKernelModule->ResgisterCommonClassEvent( this, &NFCGameServerNet_ServerModule::OnClassCommonEvent );
 	m_pKernelModule->ResgisterCommonPropertyEvent( this, &NFCGameServerNet_ServerModule::OnPropertyCommonEvent );
@@ -178,9 +180,29 @@ int NFCGameServerNet_ServerModule::OnRecivePSPack( const NFIPacket& msg )
 		break;
 		//////////////////////////////////////////////////////////////////////////
 	case NFMsg::EGameMsgID::EGMI_REQ_CREATE_GUILD:
+        {
+            NFIDENTID xGuildID = GetGuildID<NFMsg::ReqAckCreateGuild>(msg);
+            OnTransWorld(msg, xGuildID.nData64);
+        }
+        break;
 	case NFMsg::EGameMsgID::EGMI_REQ_JOIN_GUILD:
+        {
+            NFIDENTID xGuildID = GetGuildID<NFMsg::ReqAckJoinGuild>(msg);
+            OnTransWorld(msg, xGuildID.nData64);
+        }
+        break;
 	case NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GUILD:
+        {
+            NFIDENTID xGuildID = GetGuildID<NFMsg::ReqAckLeaveGuild>(msg);
+            OnTransWorld(msg, xGuildID.nData64);
+        }
+        break;
 	case NFMsg::EGameMsgID::EGMI_REQ_OPR_GUILD:
+        {
+            NFIDENTID xGuildID = GetGuildID<NFMsg::ReqAckOprGuildMember>(msg);
+            OnTransWorld(msg, xGuildID.nData64);
+        }
+        break;
     case NFMsg::EGameMsgID::EGMI_REQ_SEARCH_GUILD:
 		OnTransWorld(msg);
 		break;
@@ -2205,6 +2227,19 @@ void NFCGameServerNet_ServerModule::SendMsgPBToGate( const uint16_t nMsgID, goog
 	}
 }
 
+void NFCGameServerNet_ServerModule::SendMsgPBToGate( const uint16_t nMsgID, const std::string& strMsg, const NFIDENTID self )
+{
+    NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(self);
+    if (pData.get())
+    {
+        NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
+        if (pProxyData.get())
+        {
+            SendMsgPB(nMsgID, strMsg, pProxyData->nFD, pData->xClientID);
+        }
+    }
+}
+
 void NFCGameServerNet_ServerModule::PlayerLeaveGameServer( const NFIDENTID self )
 {
 	if(!m_pKernelModule->GetObject(self))
@@ -2235,5 +2270,18 @@ void NFCGameServerNet_ServerModule::PlayerLeaveGameServer( const NFIDENTID self 
 
 void NFCGameServerNet_ServerModule::OnTransWorld( const NFIPacket& msg )
 {
+    std::string strMsg;
+    NFIDENTID nPlayer;
+    int nHasKey = 0;
+    if (NFINetModule::RecivePB(msg, strMsg, nPlayer))
+    {
+        nHasKey = nPlayer.nData64;
+    }
+    
+    m_pGameServerToWorldModule->SendBySuit(nHasKey, msg);
+}
 
+void NFCGameServerNet_ServerModule::OnTransWorld( const NFIPacket& msg, const int nWorldKey )
+{
+    m_pGameServerToWorldModule->SendBySuit(nWorldKey, msg);
 }
