@@ -28,7 +28,7 @@ public:
     virtual bool Init();
     virtual bool AfterInit();
 
-    virtual int OnASyncEvent(& const NFIDENTID self, const int event, std::string& arg);
+    virtual int OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg);
 
 private:
 };
