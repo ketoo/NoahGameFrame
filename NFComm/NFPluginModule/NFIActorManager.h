@@ -32,27 +32,16 @@ class NFCObjectAsyncEventInfo
 {
 };
 
-struct NFClassAsyncEventFunc
-{
-	CLASS_ASYNC_EVENT_FUNCTOR_PTR xBeginFuncptr;
-	CLASS_ASYNC_EVENT_FUNCTOR_PTR xEndFuncptr;
-};
-
-struct NFClassAsyncEventList
-	: public NFList<NFClassAsyncEventFunc>
-{
-
-};
-
 ///////////////////////////////////////////////////
 
 class NFIActorManager : public NFILogicModule
 {
 public:
 	virtual int OnRequireActor(NFIComponent* pComponent) = 0;
-	virtual bool OnRequireCPUCycle( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventList) = 0;
+	virtual bool SendMsgToActor( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventList) = 0;
 
 	virtual NFIPluginManager* GetPluginManager() = 0;
+	virtual NFIActor* GetActor(const int nActorIndex) = 0;
 
 };
 
