@@ -46,7 +46,8 @@ public:
 	virtual NFIPluginManager* GetPluginManager();
 
 	virtual int OnRequireActor(NFIComponent* pComponent);
-	virtual bool OnRequireCPUCycle( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc);
+	virtual bool SendMsgToActor( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc);
+
     virtual NFIActor* GetActor(const int nActorIndex);
 
 private:
