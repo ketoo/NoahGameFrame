@@ -21,65 +21,79 @@
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
 
-class NFCGameServerToWorldModule : public NFIClusterClientModule
+class NFCGameServerToWorldModule : public NFIGameServerToWorldModule
 {
 public:
-	NFCGameServerToWorldModule(NFIPluginManager* p)
-	{
-		pPluginManager = p;
-	}
-	virtual bool Init();
-	virtual bool Shut();
-	virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    NFCGameServerToWorldModule(NFIPluginManager* p)
+    {
+        pPluginManager = p;
+    }
+    virtual bool Init();
+    virtual bool Shut();
+    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
 
-	virtual bool AfterInit();
+    virtual bool AfterInit();
 
 
-	virtual void LogRecive(const char* str){}
-	virtual void LogSend(const char* str){}
-
-protected:
-
-	int OnReciveWSPack(const NFIPacket& msg);
-	int OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
-
-	//连接丢失,删2层(连接对象，帐号对象)
-	void OnClientDisconnect(const int nAddress);
-	//有连接
-	void OnClientConnected(const int nAddress);
+    virtual void LogRecive(const char* str){}
+    virtual void LogSend(const char* str){}
 
 protected:
-	void Register();
-	void UnRegister();
-	void RefreshWorldInfo();
 
-	int OnLoadRoleDataBeginProcess(const NFIPacket& msg);
+    int OnReciveWSPack(const NFIPacket& msg);
+    int OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
-	int OnLoadRoleDataFinalProcess(const NFIPacket& msg);
+    //连接丢失,删2层(连接对象，帐号对象)
+    void OnClientDisconnect(const int nAddress);
+    //有连接
+    void OnClientConnected(const int nAddress);
 
-	int OnEnquireSceneInfoProcess(const NFIPacket& msg);
+protected:
+    void Register();
+    void UnRegister();
+    void RefreshWorldInfo();
 
-	int OnSwapGSProcess(const NFIPacket& msg);
-	int OnAckCreateGuildProcess(const NFIPacket& msg);
-	int OnAckJoinGuildProcess(const NFIPacket& msg);
-	int OnAckLeaveGuildProcess(const NFIPacket& msg);
+    int OnLoadRoleDataBeginProcess(const NFIPacket& msg);
 
-	int OnDataLoadBeginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnLoadRoleDataFinalProcess(const NFIPacket& msg);
 
-	//int OnToWorldEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
+    int OnEnquireSceneInfoProcess(const NFIPacket& msg);
 
-	int OnSwapGSEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnSwapGSProcess(const NFIPacket& msg);
+    int OnAckCreateGuildProcess(const NFIPacket& msg);
+    int OnAckJoinGuildProcess(const NFIPacket& msg);
+    int OnAckLeaveGuildProcess(const NFIPacket& msg);
 
-	int OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+    int OnDataLoadBeginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+
+    //int OnToWorldEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
+
+    int OnSwapGSEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+
+    int OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+
+
+    int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+    
+//     template<class PBClass>    
+//     int TransPBToProxy(const NFIPacket& msg);
+    int TransPBToProxy(const NFIPacket& msg);
+
+private:
+    void SendOnline(const NFIDENTID& self);
+    void SendOffline(const NFIDENTID& self);
+
 
 private:
 
-	NFILogModule* m_pLogModule;
-	NFIKernelModule* m_pKernelModule;
-	NFIEventProcessModule* m_pEventProcessModule;
-	NFILogicClassModule* m_pLogicClassModule;
-	NFIElementInfoModule* m_pElementInfoModule;
+    NFILogModule* m_pLogModule;
+    NFIKernelModule* m_pKernelModule;
+    NFIEventProcessModule* m_pEventProcessModule;
+    NFILogicClassModule* m_pLogicClassModule;
+    NFIElementInfoModule* m_pElementInfoModule;
+    NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 
 #endif
