@@ -32,14 +32,17 @@ public:
 		{
 			m_pComponent->BeforeShut();
 			m_pComponent->Shut();
+
+			delete m_pComponent;
+			m_pComponent = NULL;
 		}
 	}
 
 	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
-	virtual void RegisterActorComponent(NF_SHARE_PTR<NFIComponent> pComponent);
+	virtual void RegisterActorComponent(NFIComponent* pComponent);
 
 
 protected:
-	NF_SHARE_PTR<NFIComponent> m_pComponent;
+	NFIComponent* m_pComponent;
 };
 #endif
