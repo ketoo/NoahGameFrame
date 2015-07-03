@@ -12,6 +12,7 @@
 #include <map>
 #include <string>
 #include "NFCActor.h"
+#include "NFComm/NFCore/NFIComponent.h"
 #include "NFComm/NFCore/NFSingleton.h"
 #include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFPluginModule/NFIActorManager.h"
@@ -44,7 +45,7 @@ public:
 
 	virtual NFIPluginManager* GetPluginManager();
 
-	virtual int OnRequireActor(const NF_SHARE_PTR<NFIComponent> pComponent);
+	virtual int OnRequireActor(NFIComponent* pComponent);
 	virtual bool OnRequireCPUCycle( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc);
     virtual NFIActor* GetActor(const int nActorIndex);
 

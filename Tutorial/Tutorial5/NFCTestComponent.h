@@ -18,9 +18,9 @@
 class NFCTestComponent : public NFIComponent
 {
 public:
-    NFCTestComponent()
+    NFCTestComponent(NFIPluginManager* p)
     {
-
+		pPluginManager = p;
     }
     virtual ~NFCTestComponent() {}
 
