@@ -263,7 +263,7 @@ bool NFCEventProcessModule::AddAsyncEventCallBack( const NFIDENTID& objectID, co
 	return true;
 }
 
-bool NFCEventProcessModule::AddActorEventCallBack( const NFIDENTID& objectID, const int nEventID, NF_SHARE_PTR<NFIComponent> pComponent, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end )
+bool NFCEventProcessModule::AddActorEventCallBack( const NFIDENTID& objectID, const int nEventID, NFIComponent* pComponent, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end )
 {
 	NF_SHARE_PTR<NFCObjectAsyncEventInfo> pObjectSyncEventInfo = mObjectSyncEventInfoMapEx.GetElement(objectID);
 	if (nullptr == pObjectSyncEventInfo)

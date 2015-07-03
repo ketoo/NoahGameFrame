@@ -9,6 +9,7 @@
 #include "NFCActorManager.h"
 #include "NFCPluginManager.h"
 #include "NFComm/NFCore/NFCMemory.h"
+#include "NFComm/NFCore/NFIComponent.h"
 
 NFCActorManager::NFCActorManager()
 {
@@ -82,7 +83,7 @@ bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTi
 	return true;
 }
 
-int NFCActorManager::OnRequireActor(const NF_SHARE_PTR<NFIComponent> pComponent)
+int NFCActorManager::OnRequireActor(NFIComponent* pComponent)
 {
 	//¶Ñactor
 	if (pComponent)
