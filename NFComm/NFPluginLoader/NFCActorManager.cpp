@@ -117,10 +117,9 @@ NFIActor* NFCActorManager::GetActor(const int nActorIndex)
     return  mvActorList[nIndex];
 }
 
-bool NFCActorManager::OnRequireCPUCycle( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventList)
+bool NFCActorManager::SendMsgToActor( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventList)
 {
 	NFIActor* pActor = GetActor(nActorIndex);
-
     if (pActor)
     {
         NFIActorMessage xMessage;

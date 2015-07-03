@@ -167,9 +167,6 @@ bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventI
 	}
 	else
 	{
-		//pPluginManager->GetActorID()
-		//处理之前，还得把所有的回调函数对象发给actor，以便他调用这些函数进行处理
-		//pEventInfo
 		NF_SHARE_PTR<NFCObjectAsyncEventInfo> pObjectEventInfo = mObjectSyncEventInfoMapEx.GetElement(objectID);
 		if (nullptr == pObjectEventInfo)
 		{
@@ -182,7 +179,7 @@ bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventI
 			return false;
 		}
             
-        pPluginManager->GetActorManager()->OnRequireCPUCycle(pEventInfo->nActorID, objectID, nEventID, valueList.String(0), pEventInfo);	
+        pPluginManager->GetActorManager()->SendMsgToActor(pEventInfo->nActorID, objectID, nEventID, valueList.String(0), pEventInfo);
 	}
 
     return true;
@@ -263,48 +260,41 @@ bool NFCEventProcessModule::AddAsyncEventCallBack( const NFIDENTID& objectID, co
 	return true;
 }
 
-bool NFCEventProcessModule::AddActorEventCallBack( const NFIDENTID& objectID, const int nEventID, NFIComponent* pComponent, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end )
+int NFCEventProcessModule::AddActorEventCallBack(NFIComponent* pComponent, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end )
 {
-	NF_SHARE_PTR<NFCObjectAsyncEventInfo> pObjectSyncEventInfo = mObjectSyncEventInfoMapEx.GetElement(objectID);
-	if (nullptr == pObjectSyncEventInfo)
+	if (!pComponent)
 	{
-		pObjectSyncEventInfo = NF_SHARE_PTR<NFCObjectAsyncEventInfo>(NF_NEW NFCObjectAsyncEventInfo());
-		mObjectSyncEventInfoMapEx.AddElement(objectID, pObjectSyncEventInfo);
+		return 0;
 	}
 
-	assert(NULL != pObjectSyncEventInfo);
+	int nActorID = pPluginManager->GetActorManager()->OnRequireActor(pComponent);
+	if (nActorID <= 0)
+	{
+		return 0;
+	}
 
-	NF_SHARE_PTR<NFAsyncEventFunc> pSyncEventInfo = pObjectSyncEventInfo->GetElement(nEventID);
+	NF_SHARE_PTR<NFAsyncEventFunc> pSyncEventInfo = mActorSyncEventInfoMapEx.GetElement(nActorID);
 	if (nullptr == pSyncEventInfo)
 	{
 		pSyncEventInfo = NF_SHARE_PTR<NFAsyncEventFunc>(NF_NEW NFAsyncEventFunc());
-		pObjectSyncEventInfo->AddElement(nEventID, pSyncEventInfo);
+		mActorSyncEventInfoMapEx.AddElement(nActorID, pSyncEventInfo);
 	}
-
 	assert(NULL != pSyncEventInfo);
 
 	pSyncEventInfo->xBeginFuncptr = cb;
 	pSyncEventInfo->xEndFuncptr = cb_end;
-	pSyncEventInfo->nActorID = pPluginManager->GetActorManager()->OnRequireActor(pComponent);
+	pSyncEventInfo->nActorID = nActorID;
 
-	return true;
+	return nActorID;
 }
 
-bool NFCEventProcessModule::AddAsyncClassCallBack( const std::string& strClassName, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb_begin, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb_end )
+bool NFCEventProcessModule::SendActorMsg( const int nActorID, const int nEventID, const NFIDENTID self, const std::string& strData )
 {
-
-	NF_SHARE_PTR<NFClassAsyncEventList> pEventList = mClassSyncEventInfoMapEx.GetElement(strClassName);
-	if (nullptr == pEventList)
+	NF_SHARE_PTR<NFAsyncEventFunc> pSyncEventInfo = mActorSyncEventInfoMapEx.GetElement(nActorID);
+	if (nullptr == pSyncEventInfo)
 	{
-		pEventList = NF_SHARE_PTR<NFClassAsyncEventList>(NF_NEW NFClassAsyncEventList());
-		mClassSyncEventInfoMapEx.AddElement(strClassName, pEventList);
+		return false;
 	}
 
-	NFClassAsyncEventFunc xAsyncEventFunc;
-	xAsyncEventFunc.xBeginFuncptr = cb_begin;
-	xAsyncEventFunc.xEndFuncptr = cb_end;
-
-	pEventList->Add(xAsyncEventFunc);
-
-	return true;
+	return pPluginManager->GetActorManager()->SendMsgToActor(nActorID, self, nEventID, strData, pSyncEventInfo);
 }
