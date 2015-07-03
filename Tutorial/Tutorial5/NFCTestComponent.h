@@ -28,11 +28,9 @@ public:
     virtual bool Init();
     virtual bool AfterInit();
 
-    virtual int OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg);
-    virtual void SetInitData(const std::string& strInitData);
+    virtual int OnASyncEvent(& const NFIDENTID self, const int event, std::string& arg);
 
 private:
-    std::string mstrInitData;
 };
 
 #endif

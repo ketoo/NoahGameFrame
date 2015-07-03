@@ -33,14 +33,14 @@ public:
 
     virtual bool DoEvent(const NFIDENTID& objectID, const int nEventID, const NFIDataList& valueList, const bool bSync = true);
     virtual bool DoEvent(const NFIDENTID& objectID,  const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList, const bool bSync = true);
+	virtual bool SendActorMsg(const int nActorID, const int nEventID, const NFIDENTID self, const std::string& strData);
 
     virtual bool AddEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb);
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb);
 
 	//////////sync////////////////////////////////////////////////////////////////
 	virtual bool AddAsyncEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb_begin, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end);
-	virtual bool AddActorEventCallBack( const NFIDENTID& objectID, const int nEventID, NFIComponent* pComponent, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end );
-	virtual bool AddAsyncClassCallBack(const std::string& strClassName, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb_begin, const CLASS_ASYNC_EVENT_FUNCTOR_PTR& cb_end);
+	virtual int AddActorEventCallBack(NFIComponent* pComponent, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end );
 private:
 
     NFList<NFIDENTID> mRemoveObjectListEx;
@@ -51,9 +51,9 @@ private:
 
 	///////////////////async event///////////////////////////////////////////////////////
 	NFMapEx<NFIDENTID, NFCObjectAsyncEventInfo> mObjectSyncEventInfoMapEx;
-	NFMapEx<std::string, NFClassAsyncEventList> mClassSyncEventInfoMapEx;
 
-
+	///////////////////actor event///////////////////////////////////////////////////////
+	NFMapEx<int, NFAsyncEventFunc> mActorSyncEventInfoMapEx;
 };
 
 
