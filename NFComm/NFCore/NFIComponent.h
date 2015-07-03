@@ -39,6 +39,8 @@ public:
     {
         return NULL_STR;
     }
+
+	virtual int OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg){ return 0;}
 private:
 };
 
