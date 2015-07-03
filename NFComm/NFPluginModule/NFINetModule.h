@@ -60,7 +60,7 @@ public:
 #define CLIENT_MSG_PROCESS(packet, msg)                 \
 	NFIDENTID nPlayerID;                                \
 	msg xMsg;                                           \
-	if (!RecivePB(packet, xMsg, nPlayerID))             \
+	if (!NFINetModule::RecivePB(packet, xMsg, nPlayerID))             \
 {                                                   \
 	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
 	return;                                         \
@@ -232,6 +232,25 @@ public:
 		return true;
 	}
 
+    static bool RecivePB(const NFIPacket& msg, std::string& strMsg, NFIDENTID& nPlayer)
+    {
+        NFMsg::MsgBase xMsg;
+        if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
+        {
+            char szData[MAX_PATH] = { 0 };
+            sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
+            //LogRecive(szData);
+
+            return false;
+        }
+
+        strMsg.assign(xMsg.msg_data().data(), xMsg.msg_data().length());
+
+        nPlayer = PBToNF(xMsg.player_id());
+
+        return true;
+    }
+
 	static bool RecivePB(const NFIPacket& msg, google::protobuf::Message& xData, NFIDENTID& nPlayer)
 	{
 		NFMsg::MsgBase xMsg;
@@ -322,7 +341,7 @@ public:
 		{
 			char szData[MAX_PATH] = { 0 };
 			sprintf(szData, "Send Message to %d Failed For Encode of MsgData, MessageID: %d, MessageLen: %d\n", nSockIndex, nMsgID, strMsg.length());
-			LogSend(szData);
+			//LogSend(szData);
 
 			return false;
 		}
@@ -331,6 +350,71 @@ public:
 #endif
 
 	}
+
+    bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const uint32_t nSockIndex = 0, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<NFIDENTID>* pClientIDList = NULL, bool bBroadcast = false)
+    {
+        if (!m_pNet)
+        {
+            char szData[MAX_PATH] = { 0 };
+            sprintf(szData, "Send Message to %d Failed For NULL Of Net, MessageID: %d\n", nSockIndex, nMsgID);
+            //LogSend(szData);
+
+            return false;
+        }
+
+        NFMsg::MsgBase xMsg;
+        xMsg.set_msg_data(strData.data(), strData.length());
+
+        //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
+        NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
+        *pPlayerID = NFToPB(nPlayer);
+        if (pClientIDList)
+        {
+            for (int i = 0; i < pClientIDList->size(); ++i)
+            {
+                const NFIDENTID& ClientID = (*pClientIDList)[i];
+
+                NFMsg::Ident* pData = xMsg.add_player_client_list();
+                if (pData)
+                {
+                    *pData = NFToPB(ClientID);
+                }
+            }
+        }
+
+        std::string strMsg;
+        if(!xMsg.SerializeToString(&strMsg))
+        {
+            char szData[MAX_PATH] = { 0 };
+            sprintf(szData, "Send Message to %d Failed For Serialize of MsgBase, MessageID: %d\n", nSockIndex, nMsgID);
+            //LogSend(szData);
+
+            return false;
+        }
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
+        QueueEventPack xNetEventPack;
+        xNetEventPack.eMsgType = QueueEventPack::ON_NET_SEND;
+        xNetEventPack.nMsgID = nMsgID;
+        xNetEventPack.nFD = nSockIndex;
+        xNetEventPack.strData = strMsg;//可以待优化,SerializeToString直接进来
+
+        return mxQueue.Push(xNetEventPack);
+#else
+        NFCPacket xPacket(m_pNet->GetHeadLen());
+        if(!xPacket.EnCode(nMsgID, strMsg.c_str(), strMsg.length()))
+        {
+            char szData[MAX_PATH] = { 0 };
+            sprintf(szData, "Send Message to %d Failed For Encode of MsgData, MessageID: %d, MessageLen: %d\n", nSockIndex, nMsgID, strMsg.length());
+            //LogSend(szData);
+
+            return false;
+        }
+
+        return m_pNet->SendMsg(xPacket, nSockIndex, bBroadcast);
+#endif
+
+    }
 
 	NFINet* GetNet()
 	{
