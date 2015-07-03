@@ -11,26 +11,36 @@
 
 #include <list>
 #include <thread>
-#include <boost/smart_ptr/detail/spinlock.hpp>
-#include "NFComm/NFPluginModule/NFPlatform.h"
 #include <mutex>
+#include <atomic>
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 class spinlock_mutex
 {
 public:
     spinlock_mutex()
     {
-        _spinlock.lock();
-		//std::lock_guard<boost::detail::spinlock> guard(_spinlock);
+        lock();
     }
-    
+
     ~spinlock_mutex()
     {
-        _spinlock.unlock();
+        unlock();
+    }
+
+protected:
+    void lock()
+    {
+        while (flag.test_and_set(std::memory_order_acquire));
+    }
+
+    void unlock()
+    {
+        flag.clear(std::memory_order_release);
     }
 
 private:
-    boost::detail::spinlock _spinlock;
+    std::atomic_flag flag;
 };
 
 template<typename T>
@@ -38,42 +48,39 @@ class NFQueue
 {
 public:
     NFQueue()
-	{
-	}
+    {
+    }
 
     virtual ~NFQueue()
-	{
-	}
+    {
+    }
 
     bool Push(const T& object)
-	{
-		//spinlock_mutex();
-        std::lock_guard<boost::detail::spinlock> guard(_spinlock);
+    {
+        spinlock_mutex();
 
-		mList.push_back(object);
+        mList.push_back(object);
 
-		return true;
-	}
+        return true;
+    }
 
     bool Pop(T& object)
-	{
-		//spinlock_mutex();
-        std::lock_guard<boost::detail::spinlock> guard(_spinlock);
+    {
+        spinlock_mutex();
 
-		if (mList.empty())
-		{
-			return false;
-		}
+        if (mList.empty())
+        {
+            return false;
+        }
 
-		object = mList.front();
-		mList.pop_front();
+        object = mList.front();
+        mList.pop_front();
 
-		return true;
-	}
+        return true;
+    }
 
 private:
     std::list<T> mList;
-    boost::detail::spinlock _spinlock;
 };
 
 #endif
