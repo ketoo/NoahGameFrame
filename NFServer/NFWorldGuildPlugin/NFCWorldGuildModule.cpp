@@ -46,7 +46,7 @@ bool NFCWorldGuildModule::AfterInit()
     return true;
 }
 
-NFIDENTID NFCWorldGuildModule::CreateGuild( const NFIDENTID& self, const std::string& strName )
+NFIDENTID NFCWorldGuildModule::CreateGuild( const NFIDENTID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP)
 {
     if (strName.empty())
     {
@@ -56,7 +56,6 @@ NFIDENTID NFCWorldGuildModule::CreateGuild( const NFIDENTID& self, const std::st
     bool bExit = false;
     if (!m_pWorldGuildDataModule->ExitGuild(self, strName, bExit))
     {
-        m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_SHOW_STRING, NFCDataList() << self << (int)NFMsg::EGEC_INVALID_GANGS_NAME);
         return NFIDENTID();
     }
 
@@ -65,26 +64,7 @@ NFIDENTID NFCWorldGuildModule::CreateGuild( const NFIDENTID& self, const std::st
         return NFIDENTID();
     }
 
-    NFIDENTID xGuidID  = m_pWorldGuildDataModule->CreateGuild(self, strName);
-    if (xGuidID.IsNull())
-    {
-        return xGuidID;
-    }
-
-    if (!JoinGuild(self, xGuidID))
-    {
-        m_pWorldGuildDataModule->DeleteGuild(xGuidID);
-        return NFIDENTID();
-    }
-
-    if (!SetPresidentInfo(self, xGuidID))
-    {
-        m_pWorldGuildDataModule->DeleteGuild(xGuidID);
-        return NFIDENTID();
-    }
-    
-    m_pWorldGuildDataModule->SetGuild(self, xGuidID);
-	return xGuidID;
+    return m_pWorldGuildDataModule->CreateGuild(self, strName, strRoleName, nLevel, nJob, nDonation, nVIP);
 }
 
 bool NFCWorldGuildModule::JoinGuild( const NFIDENTID& self, const NFIDENTID& xGuildID )

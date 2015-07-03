@@ -569,3 +569,85 @@ const bool NFCProperty::GeUsed() const
 
     return false;
 }
+
+std::string NFCProperty::ToString()
+{
+    std::string strData;
+    const TDATA_TYPE eType = GetType();
+    switch (eType)
+    {
+    case TDATA_INT:
+        strData = boost::lexical_cast<std::string> (GetInt());
+        break;
+
+    case TDATA_FLOAT:
+        strData = boost::lexical_cast<std::string> (GetFloat());
+        break;
+
+    case TDATA_DOUBLE:
+        strData = boost::lexical_cast<std::string> (GetDouble());
+        break;
+
+    case TDATA_STRING:
+        strData = boost::lexical_cast<std::string> (GetString());
+        break; 
+    case TDATA_OBJECT:
+        strData = GetObject().ToString();
+        break;
+    default:
+
+        strData = NULL_STR;
+        break;
+    }
+
+    return strData;
+}
+
+bool NFCProperty::FromString( const std::string& strData )
+{
+    const TDATA_TYPE eType = GetType();
+    bool bRet = false;
+    switch (eType)
+    {
+    case TDATA_INT:
+        {
+            NFINT64  nValue = 0;
+            bRet = NF_StrTo(strData, nValue);
+            SetInt(nValue);
+        }
+        break;
+
+    case TDATA_FLOAT:
+        {
+            float  fValue = 0;
+            bRet = NF_StrTo(strData, fValue);
+            SetFloat(fValue);
+        }
+        break;
+
+    case TDATA_DOUBLE:
+        {
+            double  dValue = 0;
+            bRet = NF_StrTo(strData, dValue);
+            SetDouble(dValue);
+        }
+        break;
+
+    case TDATA_STRING:
+        {
+            SetString(strData);
+            bRet = true;
+        }
+        break; 
+    case TDATA_OBJECT:
+        {
+            NFIDENTID xID;
+            bRet = xID.FromString(strData);           
+        }
+        break;
+    default:
+        break;
+    }
+
+    return bRet;
+}

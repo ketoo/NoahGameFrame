@@ -334,7 +334,16 @@ int NFCWorldNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 			break;
         case NFMsg::EGameMsgID::EGMI_REQ_SEARCH_GUILD:
             OnSearchGuildProcess(msg);
+            break;
 			//////////////////////////////////////////////////////////////////////////
+
+        case NFMsg::EGameMsgID::EGMI_ACK_ONLINE_NOTIFY:
+            OnOnline(msg);
+            break;
+        case NFMsg::EGameMsgID::EGMI_ACK_OFFLINE_NOTIFY:
+            OnOffline(msg);
+            break;
+            //////////////////////////////////////////////////////////////////////////
         default:
             break;
     }
@@ -483,9 +492,16 @@ void NFCWorldNet_ServerModule::LogGameServer(const float fLastTime)
 
 void NFCWorldNet_ServerModule::OnCrateGuildProcess( const NFIPacket& msg )
 {
-	CLIENT_MSG_PROCESS_NO_OBJECT(msg, NFMsg::ReqAckCreateGuild)
+	CLIENT_MSG_PROCESS_NO_OBJECT(msg, NFMsg::ReqAckCreateGuild);
 
-	NFIDENTID xGuild = m_pWorldGuildModule->CreateGuild(nPlayerID, xMsg.guild_name());
+    std::string strRoleName ;
+    int nLevel = 0;
+    int nJob = 0;
+    int nDonation= 0;
+    int nVIP= 0;
+
+    m_pWorldGuildDataModule->GetPlayerInfo(nPlayerID, strRoleName, nLevel, nJob, nDonation, nVIP);
+	NFIDENTID xGuild = m_pWorldGuildModule->CreateGuild(nPlayerID, xMsg.guild_name(), strRoleName, nLevel, nJob, nDonation, nVIP);
 
     if (!xGuild.IsNull())
     {
@@ -571,11 +587,8 @@ void NFCWorldNet_ServerModule::OnOnline( const NFIPacket& msg )
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(msg, NFMsg::RoleOnlineNotify);
 
-    NFIDENTID xGuild;
-    if (!m_pWorldGuildModule->GetGuildID(nPlayerID, xGuild))
-    {
-        return ;
-    }
+     NFIDENTID xGuild;
+    xGuild = PBToNF(xMsg.guild());
 
     m_pWorldGuildModule->GetGuildBaseInfo(nPlayerID, xGuild);
     m_pWorldGuildModule->GetGuildMemberInfo(nPlayerID, xGuild);
@@ -588,10 +601,7 @@ void NFCWorldNet_ServerModule::OnOffline( const NFIPacket& msg )
     CLIENT_MSG_PROCESS_NO_OBJECT(msg, NFMsg::RoleOfflineNotify);
 
     NFIDENTID xGuild;
-    if (!m_pWorldGuildModule->GetGuildID(nPlayerID, xGuild))
-    {
-        return ;
-    }
+    xGuild = PBToNF(xMsg.guild());
 
     m_pWorldGuildModule->MemberOffeline(nPlayerID, xGuild);
 }
@@ -606,8 +616,8 @@ int NFCWorldNet_ServerModule::OnShowStringEvent( const NFIDENTID& object, const 
     const NFIDENTID nPlayer = var.Object(0);
     const NFINT64 nStringResult = var.Int(1);
 
-    int nGateID = 0;
-    if (!GetGateID(nPlayer, nGateID))
+    int nGameID = 0;
+    if (!GetGameID(nPlayer, nGameID))
     {
         return 1;
     }
@@ -615,25 +625,13 @@ int NFCWorldNet_ServerModule::OnShowStringEvent( const NFIDENTID& object, const 
     NFMsg::AckEventResult xAck;
     xAck.set_event_code((NFMsg::EGameEventCode)nStringResult);
 
-    SendMsgToProxy(nGateID, NFMsg::EGMI_EVENT_RESULT, xAck, nPlayer);
+    SendMsgToGame(nGameID, NFMsg::EGMI_EVENT_RESULT, xAck, nPlayer);
     return 0;
 }
 
 bool NFCWorldNet_ServerModule::SendMsgToGame( const int nGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer)
 {
     NF_SHARE_PTR<ServerData> pData = mGameMap.GetElement(nGameID);
-    if (pData.get())
-    {
-        const int nFD = pData->nFD;
-        SendMsgPB(eMsgID, xData, nFD, nPlayer);
-    }
-
-    return true;
-}
-
-bool NFCWorldNet_ServerModule::SendMsgToProxy( const int nGateID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer)
-{
-    NF_SHARE_PTR<ServerData> pData = mProxyMap.GetElement(nGateID);
     if (pData.get())
     {
         const int nFD = pData->nFD;
@@ -660,26 +658,6 @@ bool NFCWorldNet_ServerModule::GetGameID( const NFIDENTID& self, int& nGameID )
         return false;
     }
     
-    return true;
-}
-
-bool NFCWorldNet_ServerModule::GetGateID( const NFIDENTID& self, int& nGateID )
-{
-    std::vector<std::string> xVecFeild;
-    std::vector<std::string> xVecValue;
-
-    xVecFeild.push_back("GateID");
-    if (!m_pClusterSQLModule->Query(self.ToString(), xVecFeild, xVecValue))
-    {
-        return false;
-    }
-
-    const std::string& strGateID = xVecValue[0];
-    if (!NF_StrTo(strGateID, nGateID))
-    {
-        return false;
-    }
-
     return true;
 }
 
@@ -766,31 +744,31 @@ void NFCWorldNet_ServerModule::SendPropertyToPlayer( const NFIDENTID& self, cons
         }
     }
 
-    int nGateID = 0;
-    GetGateID(xPlayer, nGateID);
+    int nGameID = 0;
+    GetGameID(xPlayer, nGameID);
     if (xPropertyInt.property_list_size() > 0 )
     {
-        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt, xPlayer);
+        SendMsgToGame(nGameID, NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt, xPlayer);
     }
 
     if (xPropertyFloat.property_list_size() > 0 )
     {
-        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_PROPERTY_FLOAT, xPropertyFloat, xPlayer);
+        SendMsgToGame(nGameID, NFMsg::EGMI_ACK_PROPERTY_FLOAT, xPropertyFloat, xPlayer);
     }
 
     if (xPropertyDouble.property_list_size() > 0 )
     {
-        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyDouble, xPlayer);
+        SendMsgToGame(nGameID, NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyDouble, xPlayer);
     }
 
     if (xPropertyString.property_list_size() > 0 )
     {
-        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString, xPlayer);
+        SendMsgToGame(nGameID, NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString, xPlayer);
     }
 
     if (xPropertyObject.property_list_size() > 0 )
     {
-        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject, xPlayer);
+        SendMsgToGame(nGameID, NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject, xPlayer);
     }
 }
 
@@ -896,31 +874,31 @@ void NFCWorldNet_ServerModule::SendRecordToPlayer( const NFIDENTID& self, const 
         }
     }
 
-    int nGateID = 0;
-    GetGateID(xPlayer, nGateID);
+    int nGameID = 0;
+    GetGameID(xPlayer, nGameID);
     if (xRecordChangedInt.property_list_size() > 0 )
     {
-        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_RECORD_INT, xRecordChangedInt, xPlayer);
+        SendMsgToGame(nGameID, NFMsg::EGMI_ACK_RECORD_INT, xRecordChangedInt, xPlayer);
     }
 
     if (xRecordChangedFloat.property_list_size() > 0 )
     {
-        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_RECORD_FLOAT, xRecordChangedFloat, xPlayer);
+        SendMsgToGame(nGameID, NFMsg::EGMI_ACK_RECORD_FLOAT, xRecordChangedFloat, xPlayer);
     }
 
     if (xRecordChangedDouble.property_list_size() > 0 )
     {
-        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_RECORD_DOUBLE, xRecordChangedDouble, xPlayer);
+        SendMsgToGame(nGameID, NFMsg::EGMI_ACK_RECORD_DOUBLE, xRecordChangedDouble, xPlayer);
     }
 
     if (xRecordChangedString.property_list_size() > 0 )
     {
-        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_RECORD_STRING, xRecordChangedString, xPlayer);
+        SendMsgToGame(nGameID, NFMsg::EGMI_ACK_RECORD_STRING, xRecordChangedString, xPlayer);
     }
 
     if (xRecorChangedObject.property_list_size() > 0 )
     {
-        SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_RECORD_OBJECT, xRecorChangedObject, xPlayer);
+        SendMsgToGame(nGameID, NFMsg::EGMI_ACK_RECORD_OBJECT, xRecorChangedObject, xPlayer);
     }
 }
 
@@ -1367,10 +1345,10 @@ int NFCWorldNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const 
 
 bool NFCWorldNet_ServerModule::SendMsgToPlayer( const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer)
 {
-    int nGateID = 0;
-    GetGateID(nPlayer, nGateID);
+    int nGameID = 0;
+    GetGameID(nPlayer, nGameID);
 
-    SendMsgToProxy(nGateID, NFMsg::EGMI_ACK_RECORD_INT, xData, nPlayer);
+    SendMsgToGame(nGameID, eMsgID, xData, nPlayer);
 
     return true;
 }
@@ -1408,8 +1386,8 @@ void NFCWorldNet_ServerModule::ShowString( const NFIDENTID& self, const int nRes
     NFMsg::AckEventResult xAck;
     xAck.set_event_code((NFMsg::EGameEventCode)nResultID);
 
-    int nGateID = 0;
-    GetGateID(self, nGateID);
+    int nGameID = 0;
+    GetGameID(self, nGameID);
 
-    SendMsgToProxy(nGateID, NFMsg::EGMI_EVENT_RESULT, xAck, self);
+    SendMsgToGame(nGameID, NFMsg::EGMI_EVENT_RESULT, xAck, self);
 }
