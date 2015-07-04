@@ -528,15 +528,20 @@ void NFCWorldNet_ServerModule::OnJoinGuildProcess( const NFIPacket& msg )
         NFMsg::ReqAckJoinGuild xAck;
         *xAck.mutable_guild_id() = xMsg.guild_id();
 
+        const std::string& strName = m_pKernelModule->GetPropertyString(PBToNF(xMsg.guild_id()), "Name");
+        xAck.set_guild_name(strName);
+
         SendMsgPB(NFMsg::EGMI_ACK_JOIN_GUILD, xAck, msg.GetFd(), nPlayerID);
 
         SendPropertyToPlayer(PBToNF(xMsg.guild_id()), nPlayerID);
-
-        ShowString(nPlayerID, NFMsg::EGEC_JOIN_GUILD_SUCCESS);
 	}
     else
     {
-        ShowString(nPlayerID, NFMsg::EGEC_UNKOWN_ERROR);
+        NFMsg::ReqAckJoinGuild xAck;
+        *xAck.mutable_guild_id() = NFToPB(NFIDENTID());
+        xAck.set_guild_name("");
+
+        SendMsgPB(NFMsg::EGMI_ACK_JOIN_GUILD, xAck, msg.GetFd(), nPlayerID);
     }
 }
 
@@ -589,6 +594,17 @@ void NFCWorldNet_ServerModule::OnOnline( const NFIPacket& msg )
 
      NFIDENTID xGuild;
     xGuild = PBToNF(xMsg.guild());
+
+    NF_SHARE_PTR<NFIObject> pSelfObejct = m_pWorldGuildDataModule->GetGuild(xGuild);
+    if (pSelfObejct)
+    {
+        NFCDataList varSelf;
+        varSelf << nPlayerID;
+
+        NFCDataList varObject;
+        varObject << xGuild;
+        OnObjectListEnter(varSelf, varObject);
+    }
 
     m_pWorldGuildModule->GetGuildBaseInfo(nPlayerID, xGuild);
     m_pWorldGuildModule->GetGuildMemberInfo(nPlayerID, xGuild);
@@ -1410,11 +1426,98 @@ void NFCWorldNet_ServerModule::OnSearchGuildProcess( const NFIPacket& msg )
 
 void NFCWorldNet_ServerModule::ShowString( const NFIDENTID& self, const int nResultID )
 {
-    NFMsg::AckEventResult xAck;
-    xAck.set_event_code((NFMsg::EGameEventCode)nResultID);
+//     NFMsg::AckEventResult xAck;
+//     xAck.set_event_code((NFMsg::EGameEventCode)nResultID);
+// 
+//     int nGameID = 0;
+//     GetGameID(self, nGameID);
+// 
+//     SendMsgToGame(nGameID, NFMsg::EGMI_EVENT_RESULT, xAck, self);
+}
 
-    int nGameID = 0;
-    GetGameID(self, nGameID);
+int NFCWorldNet_ServerModule::OnObjectListEnter( const NFIDataList& self, const NFIDataList& argVar )
+{
+    if ( self.GetCount() <= 0 || argVar.GetCount() <= 0)
+    {
+        return 0;
+    }
 
-    SendMsgToGame(nGameID, NFMsg::EGMI_EVENT_RESULT, xAck, self);
+    NFMsg::AckPlayerEntryList xPlayerEntryInfoList;
+    for ( int i = 0; i < argVar.GetCount(); i++ )
+    {
+        NFIDENTID identOld = argVar.Object( i );
+        //排除空对象
+        if (identOld.IsNull())
+        {
+            continue;
+        }
+
+        NFMsg::PlayerEntryInfo* pEntryInfo = xPlayerEntryInfoList.add_object_list();
+        *(pEntryInfo->mutable_object_guid()) = NFToPB(identOld);
+
+        pEntryInfo->set_x( m_pKernelModule->GetPropertyFloat( identOld, "X" ) );
+        pEntryInfo->set_y( m_pKernelModule->GetPropertyFloat( identOld, "Y" ) );
+        pEntryInfo->set_z( m_pKernelModule->GetPropertyFloat( identOld, "Z" ) );
+        pEntryInfo->set_career_type( m_pKernelModule->GetPropertyInt( identOld, "Job" ) );
+        pEntryInfo->set_player_state( m_pKernelModule->GetPropertyInt( identOld, "State" ) );
+        pEntryInfo->set_config_id( m_pKernelModule->GetPropertyString( identOld, "ConfigID" ) );
+        pEntryInfo->set_scene_id( m_pKernelModule->GetPropertyInt( identOld, "SceneID" ) );
+        pEntryInfo->set_class_id( m_pKernelModule->GetPropertyString( identOld, "ClassName" ) );
+
+    }
+
+    if (xPlayerEntryInfoList.object_list_size() <= 0)
+    {
+        return 0;
+    }
+
+    for (int i = 0; i < self.GetCount(); i++)
+    {
+        NFIDENTID ident = self.Object(i);
+        if (ident.IsNull())
+        {
+            continue;
+        }
+
+        //可能在不同的网关呢,得到后者所在的网关FD
+        SendMsgToPlayer(NFMsg::EGMI_ACK_OBJECT_ENTRY, xPlayerEntryInfoList, ident);
+    }
+
+    return 1;
+}
+
+
+int NFCWorldNet_ServerModule::OnObjectListLeave( const NFIDataList& self, const NFIDataList& argVar )
+{
+    if ( self.GetCount() <= 0 || argVar.GetCount() <= 0)
+    {
+        return 0;
+    }
+
+    NFMsg::AckPlayerLeaveList xPlayerLeaveInfoList;
+    for ( int i = 0; i < argVar.GetCount(); i++ )
+    {
+        NFIDENTID identOld = argVar.Object( i );
+        //排除空对象
+        if (identOld.IsNull())
+        {
+            continue;
+        }
+
+        NFMsg::Ident* pIdent = xPlayerLeaveInfoList.add_object_list();
+        *pIdent = NFToPB(argVar.Object(i));
+    }
+
+    for (int i = 0; i < self.GetCount(); i++)
+    {
+        NFIDENTID ident = self.Object(i);
+        if (ident.IsNull())
+        {
+            continue;
+        }
+        //可能在不同的网关呢,得到后者所在的网关FD
+        SendMsgToPlayer(NFMsg::EGMI_ACK_OBJECT_ENTRY, xPlayerLeaveInfoList, ident);
+    }
+
+    return 1;
 }
