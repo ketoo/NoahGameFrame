@@ -345,17 +345,14 @@ const bool NFCWorldGuildDataModule::SaveDataToNoSql(const NFIDENTID& self)
                                 break;
                             }
                         }
-
-                        std::string strRecordValue;
-                        if(!xRecordData.SerializeToString(&strRecordValue))
-                        {
-                            //一个record失败了，让不让保存呢？？ to do
-                            continue;
-                        }
-
-                        vFieldVec.push_back(strName);
-                        vValueVec.push_back(strRecordValue);
                     }
+                }
+
+                std::string strRecordValue;
+                if(!xRecordData.SerializeToString(&strRecordValue))
+                {
+                    vFieldVec.push_back(strName);
+                    vValueVec.push_back(strRecordValue);
                 }
             }
 
@@ -368,7 +365,7 @@ const bool NFCWorldGuildDataModule::SaveDataToNoSql(const NFIDENTID& self)
             return false;
         }
 
-        return false;
+        return true;
     }
 
     return true;
