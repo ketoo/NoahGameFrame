@@ -90,15 +90,20 @@ bool NFCWorldGuildModule::JoinGuild( const NFIDENTID& self, const NFIDENTID& xGu
 
     NFCDataList varData;
 
-    const std::string& strName = m_pKernelModule->GetPropertyString(self, "Name");
-    const int nLevel = m_pKernelModule->GetPropertyInt(self, "Level");
-    const int nJob = m_pKernelModule->GetPropertyInt(self, "Job");
-    const int nDonation = 0;
-    const int nVIP = m_pKernelModule->GetPropertyInt(self, "VIP");
-    const int nOffLine = m_pKernelModule->GetPropertyInt(self, "OffLine");
-    const int nPower = NFMsg::GUILD_POWER_TYPE_NORMAL;
+    std::string strName ;
+    int nLevel = 0;
+    int nJob = 0;
+    int nDonation = 0;
+    int nVIP = 0;
+    int nOffLine = 1;
+    int nPower = NFMsg::GUILD_POWER_TYPE_NORMAL;
+    int nTitle = 0;
+    int nOnlineGameID = 0;
 
-    varData << self << strName << (NFINT64)nLevel << (NFINT64)nJob << (NFINT64)nDonation << (NFINT64)nVIP << (NFINT64)nOffLine << (NFINT64)nPower;
+    m_pWorldGuildDataModule->GetGameID(self, nOnlineGameID);
+    m_pWorldGuildDataModule->GetPlayerInfo(self, strName, nLevel, nJob, nDonation, nVIP);
+
+    varData << self << strName << (NFINT64)nLevel << (NFINT64)nJob << (NFINT64)nDonation << (NFINT64)nVIP << (NFINT64)nOffLine << (NFINT64)nPower << nTitle << nOnlineGameID ;
 
     pMemberRecord->AddRow(-1, varData);
 
@@ -349,7 +354,7 @@ bool NFCWorldGuildModule::SetPresidentInfo( const NFIDENTID& self, const NFIDENT
     return true;
 }
 
-bool NFCWorldGuildModule::GetOnlineMember( const NFIDENTID& self, const NFIDENTID& xGuild, NFCDataList& varMemberList )
+bool NFCWorldGuildModule::GetOnlineMember( const NFIDENTID& self, const NFIDENTID& xGuild, NFCDataList& varMemberList, NFCDataList& varGameList)
 {
     NF_SHARE_PTR<NFIObject> pGuildObject = m_pWorldGuildDataModule->GetGuild(xGuild);
     if (!pGuildObject.get())
@@ -371,18 +376,20 @@ bool NFCWorldGuildModule::GetOnlineMember( const NFIDENTID& self, const NFIDENTI
         }
 
         const NFINT64 nOnline = pMemberRecord->GetInt(i, "Offline");
+        const NFINT64 nGameID = pMemberRecord->GetInt(i, "GameID");
         if (nOnline >=0)
         {
             const NFIDENTID& xID = pMemberRecord->GetObject(i, "GUID");
 
             varMemberList.Add(xID);
+            varGameList.Add(nGameID);
         }
     }
 
     return true;
 }
 
-bool NFCWorldGuildModule::MemberOnline( const NFIDENTID& self, const NFIDENTID& xGuild )
+bool NFCWorldGuildModule::MemberOnline( const NFIDENTID& self, const NFIDENTID& xGuild , const int& nGameID)
 {
     NF_SHARE_PTR<NFIObject> pGuildObject = m_pWorldGuildDataModule->GetGuild(xGuild);
     if (!pGuildObject.get())
@@ -405,6 +412,8 @@ bool NFCWorldGuildModule::MemberOnline( const NFIDENTID& self, const NFIDENTID& 
 
     const int nRow = varList.Int(0);
     pMemberRecord->SetInt(nRow, "Offline", 1);
+
+    pMemberRecord->SetInt(nRow, "GameID", nGameID);
     return true;
 }
 
@@ -432,6 +441,7 @@ bool NFCWorldGuildModule::MemberOffeline( const NFIDENTID& self, const NFIDENTID
 
     const int nRow = varList.Int(0);
     pMemberRecord->SetInt(nRow, "Offline", 0);
+    pMemberRecord->SetInt(nRow, "GameID", 0);
     return true;
 }
 
