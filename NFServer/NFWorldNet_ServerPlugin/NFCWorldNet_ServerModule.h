@@ -59,7 +59,7 @@ protected:
 	//спа╛╫с
 	void OnClientConnected(const int nAddress);
 
-    int OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar );
+    int OnRecordCommonEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar );
     int OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar);
 
 protected:
