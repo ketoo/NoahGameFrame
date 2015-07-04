@@ -663,3 +663,23 @@ bool NFCWorldGuildDataModule::GetPlayerInfo( const NFIDENTID& self, std::string&
 
     return true;
 }
+
+bool NFCWorldGuildDataModule::GetGameID( const NFIDENTID& self, int& nGameID )
+{
+    std::vector<std::string> xVecFeild;
+    std::vector<std::string> xVecValue;
+
+    xVecFeild.push_back("GameID");
+    if (!m_pClusterSQLModule->Query(self.ToString(), xVecFeild, xVecValue))
+    {
+        return false;
+    }
+
+    const std::string& strGameID = xVecValue[0];
+    if (!NF_StrTo(strGameID, nGameID))
+    {
+        return false;
+    }
+
+    return true;
+}
