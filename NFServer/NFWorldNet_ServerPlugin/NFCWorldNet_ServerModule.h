@@ -104,7 +104,8 @@ protected:
     void OnSearchGuildProcess(const NFIPacket& msg);
     void OnOnline(const NFIPacket& msg);
     void OnOffline(const NFIPacket& msg);
-    
+    int OnObjectListEnter( const NFIDataList& self, const NFIDataList& argVar );
+    int OnObjectListLeave( const NFIDataList& self, const NFIDataList& argVar );
 private:
 
     struct ServerData
