@@ -1472,7 +1472,8 @@ bool NFCRecord::SwapRowInfo(const int nOriginRow, const int nTargetRow)
 		xEventData.nCol = nTargetRow;
 		xEventData.strRecordName = mstrRecordName;
 
-        OnEventHandler(mSelf, xEventData, NFCDataList(), NFCDataList());
+		NFCDataList xDataList;
+        OnEventHandler(mSelf, xEventData, xDataList, xDataList);
 
         return true;
     }
