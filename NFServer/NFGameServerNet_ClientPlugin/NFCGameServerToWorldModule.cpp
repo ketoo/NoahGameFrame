@@ -60,7 +60,7 @@ void NFCGameServerToWorldModule::Register()
 				pData->set_server_max_online(nMaxConnect);
 				pData->set_server_state(NFMsg::EST_NARMAL);
 
-				SendToAllServerByPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_REGISTERED, xMsg, 0);
+				SendToAllServerByPB(NFMsg::EGameMsgID::EGMI_GTW_GAME_REGISTERED, xMsg);
 
 				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
 			}
