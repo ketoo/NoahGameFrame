@@ -133,9 +133,13 @@ int NFCPropertyModule::OnObjectLevelEvent( const NFIDENTID& self, const std::str
     return 0;
 }
 
-int NFCPropertyModule::OnRecordPropertyEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
+int NFCPropertyModule::OnRecordPropertyEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar )
 {
     //¼ÆËã×ÜÖµ
+    const std::string& strRecordName = xEventData.strRecordName;
+    const int nOpType = xEventData.nOpType;
+    const int nRow = xEventData.nRow;
+    const int nCol = xEventData.nCol;
 
     int nAllValue = 0;
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, mstrCommPropertyName);
