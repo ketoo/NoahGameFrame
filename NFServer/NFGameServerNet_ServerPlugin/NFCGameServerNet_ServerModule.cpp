@@ -939,8 +939,13 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
+int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar)
 {
+    const std::string& strRecordName = xEventData.strRecordName;
+    const int nOpType = xEventData.nOpType;
+    const int nRow = xEventData.nRow;
+    const int nCol = xEventData.nCol;
+
 	int nObjectContainerID = m_pKernelModule->GetPropertyInt( self, "SceneID" );
 	int nObjectGroupID = m_pKernelModule->GetPropertyInt( self, "GroupID" );
 
