@@ -38,8 +38,8 @@ public:
 	virtual bool DownGuildMmember(const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember);
 	virtual bool KickGuildMmember(const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember);
 
-    virtual bool GetOnlineMember(const NFIDENTID& self, const NFIDENTID& xGuild, NFCDataList& varMemberList);
-    virtual bool MemberOnline(const NFIDENTID& self, const NFIDENTID& xGuild);
+    virtual bool GetOnlineMember(const NFIDENTID& self, const NFIDENTID& xGuild, NFCDataList& varMemberList, NFCDataList& varGameList);
+    virtual bool MemberOnline(const NFIDENTID& self, const NFIDENTID& xGuild, const int& nGameID);
     virtual bool MemberOffeline(const NFIDENTID& self, const NFIDENTID& xGuild);
     virtual bool GetGuildID(const NFIDENTID& self, NFIDENTID& xGuild);
 
