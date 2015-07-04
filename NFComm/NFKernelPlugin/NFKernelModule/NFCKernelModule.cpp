@@ -10,10 +10,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <cstdlib>
-#include <boost/bind.hpp>
+#include <functional>
 #include "../NFKernelPlugin.h"
-
 #include "NFCKernelModule.h"
+#include "NFComm/NFCore/NFDefine.h"
 #include "NFComm/NFCore/NFIObject.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
@@ -265,7 +265,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFIDENTID& self, con
 				pConfigRecordInfo->GetIndex());
 
 			//通用回调，方便NET同步
-			RECORD_EVENT_FUNCTOR functor = boost::bind(&NFCKernelModule::OnRecordCommonEvent, this, _1, _2, _3, _4, _5, _6, _7, _8);
+			RECORD_EVENT_FUNCTOR functor = std::bind(&NFCKernelModule::OnRecordCommonEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 			RECORD_EVENT_FUNCTOR_PTR functorPtr(NF_NEW RECORD_EVENT_FUNCTOR(functor));
 			pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), functorPtr);
 
@@ -1464,7 +1464,7 @@ bool NFCKernelModule::DestroySelf(const NFIDENTID& self)
 	return true;
 }
 
-int NFCKernelModule::OnRecordCommonEvent(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& arg)
+int NFCKernelModule::OnRecordCommonEvent(const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar)
 {
 	if (IsContainer(self))
 	{
@@ -1476,7 +1476,7 @@ int NFCKernelModule::OnRecordCommonEvent(const NFIDENTID& self, const std::strin
 	{
 		RECORD_EVENT_FUNCTOR_PTR pFunPtr = *it;
 		RECORD_EVENT_FUNCTOR* pFun = pFunPtr.get();
-		pFun->operator()(self, strRecordName, nOpType, nRow, nCol, oldVar, newVar, arg);
+		pFun->operator()(self, xEventData, oldVar, newVar);
 	}
 
 	return 0;
@@ -1548,7 +1548,7 @@ bool NFCKernelModule::AddRecord(const NFIDENTID& self, const std::string& strRec
 		pObject->GetRecordManager()->AddRecord(self, strRecordName, TData, varKey, varDesc, varTag, varRelatedRecord, nRows, bPublic, bPrivate, bSave, bView, nIndex);
 
 		//通用回调，方便NET同步
-		RECORD_EVENT_FUNCTOR functor = boost::bind(&NFCKernelModule::OnRecordCommonEvent, this, _1, _2, _3, _4, _5, _6, _7, _8);
+		RECORD_EVENT_FUNCTOR functor = std::bind(&NFCKernelModule::OnRecordCommonEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		RECORD_EVENT_FUNCTOR_PTR functorPtr(NF_NEW RECORD_EVENT_FUNCTOR(functor));
 		return pObject->AddRecordCallBack(strRecordName, functorPtr);
 	}
