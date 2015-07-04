@@ -593,7 +593,9 @@ void NFCWorldNet_ServerModule::OnOnline( const NFIPacket& msg )
     m_pWorldGuildModule->GetGuildBaseInfo(nPlayerID, xGuild);
     m_pWorldGuildModule->GetGuildMemberInfo(nPlayerID, xGuild);
 
-    m_pWorldGuildModule->MemberOnline(nPlayerID, xGuild);
+    int nGameID = 0;
+    GetGameID(nPlayerID, nGameID);
+    m_pWorldGuildModule->MemberOnline(nPlayerID, xGuild, nGameID);
 }
 
 void NFCWorldNet_ServerModule::OnOffline( const NFIPacket& msg )
@@ -942,12 +944,13 @@ int NFCWorldNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, cons
     }
 
     NFCDataList valueBroadCaseList;
+    NFCDataList valueBroadCaseGameList;
     int nCount = 0;//argVar.GetCount() ;
     if ( nCount <= 0 )
     {
         if ( "Guild" == m_pKernelModule->GetPropertyString( self, "ClassName" ))
         {
-            m_pWorldGuildModule->GetOnlineMember(NFIDENTID(), self, valueBroadCaseList);
+            m_pWorldGuildModule->GetOnlineMember(NFIDENTID(), self, valueBroadCaseList, valueBroadCaseGameList);
         }
     }
     else
@@ -956,7 +959,7 @@ int NFCWorldNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, cons
         //valueBroadCaseList = argVar;
     }
 
-    if ( valueBroadCaseList.GetCount() <= 0 )
+    if ( valueBroadCaseList.GetCount() <= 0 || valueBroadCaseList.GetCount() != valueBroadCaseGameList.GetCount())
     {
         return 0;
     }
@@ -975,9 +978,10 @@ int NFCWorldNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, cons
 
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
-                NFIDENTID identOld = valueBroadCaseList.Object( i );
+                const NFIDENTID& identOld = valueBroadCaseList.Object( i );
+                const NFINT64  nGameID = valueBroadCaseGameList.Int( i );
 
-                SendMsgToPlayer(NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt, identOld);
+                SendMsgToGame(nGameID, NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt, identOld);
             }
         }
         break;
@@ -995,8 +999,9 @@ int NFCWorldNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, cons
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
                 NFIDENTID identOld = valueBroadCaseList.Object( i );
+                const NFINT64  nGameID = valueBroadCaseGameList.Int( i );
 
-                SendMsgToPlayer(NFMsg::EGMI_ACK_PROPERTY_FLOAT, xPropertyFloat, identOld);
+                SendMsgToGame(nGameID, NFMsg::EGMI_ACK_PROPERTY_FLOAT, xPropertyFloat, identOld);
             }
         }
         break;
@@ -1014,8 +1019,9 @@ int NFCWorldNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, cons
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
                 NFIDENTID identOld = valueBroadCaseList.Object( i );
+                const NFINT64  nGameID = valueBroadCaseGameList.Int( i );
 
-                SendMsgToPlayer(NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyDouble, identOld);
+                SendMsgToGame(nGameID, NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyDouble, identOld);
             }
         }
         break;
@@ -1033,8 +1039,9 @@ int NFCWorldNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, cons
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
                 NFIDENTID identOld = valueBroadCaseList.Object( i );
+                const NFINT64  nGameID = valueBroadCaseGameList.Int( i );
 
-                SendMsgToPlayer(NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString, identOld);
+                SendMsgToGame(nGameID, NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString, identOld);
             }
         }
         break;
@@ -1052,8 +1059,9 @@ int NFCWorldNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, cons
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
                 NFIDENTID identOld = valueBroadCaseList.Object( i );
+                const NFINT64  nGameID = valueBroadCaseGameList.Int( i );
 
-                SendMsgToPlayer(NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject, identOld);
+                SendMsgToGame(nGameID, NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject, identOld);
             }
         }
         break;
@@ -1086,9 +1094,15 @@ int NFCWorldNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const 
     }
 
     NFCDataList valueBroadCaseList;
+    NFCDataList valueBroadCaseGameList;
     if ( "Guild" == m_pKernelModule->GetPropertyString( self, "ClassName" ))
     {
-        m_pWorldGuildModule->GetOnlineMember(NFIDENTID(), self, valueBroadCaseList);
+        m_pWorldGuildModule->GetOnlineMember(NFIDENTID(), self, valueBroadCaseList, valueBroadCaseGameList);
+    }
+
+    if (valueBroadCaseList.GetCount() <= 0 || valueBroadCaseList.GetCount() != valueBroadCaseGameList.GetCount())
+    {
+        return 0;
     }
 
     switch ( nOpType )
@@ -1180,8 +1194,9 @@ int NFCWorldNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const 
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
                 NFIDENTID identOther = valueBroadCaseList.Object( i );
+                const NFINT64  nGameID = valueBroadCaseGameList.Int( i );
 
-                SendMsgToPlayer(NFMsg::EGMI_ACK_ADD_ROW, xAddRecordRow, identOther);
+                SendMsgToGame(nGameID, NFMsg::EGMI_ACK_ADD_ROW, xAddRecordRow, identOther);
             }
         }
         break;
@@ -1198,8 +1213,9 @@ int NFCWorldNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const 
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
                 NFIDENTID identOther = valueBroadCaseList.Object( i );
+                const NFINT64  nGameID = valueBroadCaseGameList.Int( i );
 
-                SendMsgToPlayer(NFMsg::EGMI_ACK_REMOVE_ROW, xReoveRecordRow, identOther);
+                SendMsgToGame(nGameID, NFMsg::EGMI_ACK_REMOVE_ROW, xReoveRecordRow, identOther);
             }
         }
         break;
@@ -1217,8 +1233,9 @@ int NFCWorldNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const 
             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
             {
                 NFIDENTID identOther = valueBroadCaseList.Object( i );
+                const NFINT64  nGameID = valueBroadCaseGameList.Int( i );
 
-                SendMsgToPlayer(NFMsg::EGMI_ACK_SWAP_ROW, xSwapRecord, identOther);
+                SendMsgToGame(nGameID, NFMsg::EGMI_ACK_SWAP_ROW, xSwapRecord, identOther);
             }
         }
         break;
@@ -1241,8 +1258,9 @@ int NFCWorldNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const 
                     for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
                     {
                         NFIDENTID identOther = valueBroadCaseList.Object( i );
+                        const NFINT64  nGameID = valueBroadCaseGameList.Int( i );
 
-                        SendMsgToPlayer(NFMsg::EGMI_ACK_RECORD_INT, xRecordChanged, identOther);
+                        SendMsgToGame(nGameID, NFMsg::EGMI_ACK_RECORD_INT, xRecordChanged, identOther);
                     }
                 }
                 break;
@@ -1261,8 +1279,9 @@ int NFCWorldNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const 
                     for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
                     {
                         NFIDENTID identOther = valueBroadCaseList.Object( i );
+                        const NFINT64  nGameID = valueBroadCaseGameList.Int( i );
 
-                        SendMsgToPlayer(NFMsg::EGMI_ACK_RECORD_FLOAT, xRecordChanged, identOther);
+                        SendMsgToGame(nGameID, NFMsg::EGMI_ACK_RECORD_FLOAT, xRecordChanged, identOther);
                     }
                 }
             case TDATA_DOUBLE:
@@ -1279,8 +1298,9 @@ int NFCWorldNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const 
                     for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
                     {
                         NFIDENTID identOther = valueBroadCaseList.Object( i );
+                        const NFINT64  nGameID = valueBroadCaseGameList.Int( i );
 
-                        SendMsgToPlayer(NFMsg::EGMI_ACK_RECORD_DOUBLE, xRecordChanged, identOther);
+                        SendMsgToGame(nGameID, NFMsg::EGMI_ACK_RECORD_DOUBLE, xRecordChanged, identOther);
                     }
                 }
                 break;
@@ -1298,8 +1318,9 @@ int NFCWorldNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const 
                     for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
                     {
                         NFIDENTID identOther = valueBroadCaseList.Object( i );
+                        const NFINT64  nGameID = valueBroadCaseGameList.Int( i );
 
-                        SendMsgToPlayer(NFMsg::EGMI_ACK_RECORD_STRING, xRecordChanged, identOther);
+                        SendMsgToGame(nGameID, NFMsg::EGMI_ACK_RECORD_STRING, xRecordChanged, identOther);
                     }
                 }
                 break;
@@ -1317,8 +1338,9 @@ int NFCWorldNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const 
                     for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
                     {
                         NFIDENTID identOther = valueBroadCaseList.Object( i );
+                        const NFINT64  nGameID = valueBroadCaseGameList.Int( i );
 
-                        SendMsgToPlayer(NFMsg::EGMI_ACK_RECORD_OBJECT, xRecordChanged, identOther);
+                        SendMsgToGame(nGameID, NFMsg::EGMI_ACK_RECORD_OBJECT, xRecordChanged, identOther);
                     }
                 }
                 break;
