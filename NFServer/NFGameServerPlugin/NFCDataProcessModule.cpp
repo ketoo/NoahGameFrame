@@ -59,6 +59,7 @@ int NFCDataProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std::
 		if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
 		{
 			SaveDataToNoSql(self);
+            SaveDataToMysql(self);
             OnOffline(self);
 		}
 		else if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
@@ -561,4 +562,110 @@ void NFCDataProcessModule::OnOffline( const NFIDENTID& self )
     vValueVec.push_back(boost::lexical_cast<std::string> (nGameID));
 
     m_pClusterSQLModule->Updata(self.ToString(), xFieldVec, vValueVec);
+}
+
+bool NFCDataProcessModule::SaveDataToMysql(const NFIDENTID& self)
+{
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+    if ( pObject.get() )
+    {
+        NF_SHARE_PTR<NFIPropertyManager> pProManager = pObject->GetPropertyManager();
+        NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
+
+        std::vector<std::string> vFieldVec;
+        std::vector<std::string> vValueVec;
+
+        //witch property to save
+        std::string strName;
+        NF_SHARE_PTR<NFIProperty> xProperty = pProManager->First(strName);
+        while (xProperty)
+        {
+            if (xProperty->GetSave())
+            {
+                vFieldVec.push_back(strName);
+                vValueVec.push_back(xProperty->ToString());
+            }
+
+            strName.clear();
+            xProperty = pProManager->Next(strName);
+        }
+
+        //witch Record to save
+        NF_SHARE_PTR<NFIRecord> xRecord = pRecordManager->First(strName);
+        while (xRecord)
+        {
+            if (xRecord->GetSave())
+            {
+                NFMsg::PlayerRecordBase xRecordData;
+                xRecordData.set_record_name(strName);
+
+                for (int i = 0; i < xRecord->GetRows(); ++i)
+                {
+                    if(xRecord->IsUsed(i))
+                    {
+                        for (int j = 0; j < xRecord->GetCols(); ++j)
+                        {
+                            switch (xRecord->GetColType(j))
+                            {
+                            case TDATA_INT:
+                                {
+                                    NFMsg::RecordInt* pRecordInt = xRecordData.add_record_int_list();
+                                    pRecordInt->set_row(i);
+                                    pRecordInt->set_col(j);
+                                    pRecordInt->set_data(xRecord->GetInt(i, j));
+                                }
+                                break;
+                            case TDATA_FLOAT:
+                                {
+                                    NFMsg::RecordFloat* xRecordFloat = xRecordData.add_record_float_list();
+                                    xRecordFloat->set_row(i);
+                                    xRecordFloat->set_col(j);
+                                    xRecordFloat->set_data(xRecord->GetFloat(i, j));
+                                }
+                                break;
+                            case TDATA_STRING:
+                                {
+                                    NFMsg::RecordString* xRecordString = xRecordData.add_record_string_list();
+                                    xRecordString->set_row(i);
+                                    xRecordString->set_col(j);
+                                    xRecordString->set_data(xRecord->GetString(i, j));
+                                }
+                                break;
+                            case TDATA_OBJECT:
+                                {
+                                    NFMsg::RecordObject* xRecordObejct = xRecordData.add_record_object_list();
+                                    xRecordObejct->set_row(i);
+                                    xRecordObejct->set_col(j);
+                                    *xRecordObejct->mutable_data() = NFINetModule::NFToPB(xRecord->GetObject(i, j));
+                                }
+                                break;
+                            default:
+                                break;
+                            }
+                        }   
+                    }
+                }
+
+                std::string strRecordValue;
+                if(xRecordData.SerializeToString(&strRecordValue))
+                {
+                    vFieldVec.push_back(strName);
+                    vValueVec.push_back(strRecordValue);
+                }
+            }
+
+            strName.clear();
+            xRecord = pRecordManager->Next(strName);
+        }
+
+        const std::string& strClass = m_pKernelModule->GetPropertyString(self, "ClassName");
+        if(!m_pClusterSQLModule->Updata(strClass, self.ToString(), vFieldVec, vValueVec))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    return false;
 }

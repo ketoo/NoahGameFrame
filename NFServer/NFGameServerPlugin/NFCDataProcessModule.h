@@ -46,6 +46,7 @@ protected:
 
     void OnOnline(const NFIDENTID& self);
     void OnOffline(const NFIDENTID& self);
+    bool SaveDataToMysql(const NFIDENTID& self);
 private:
 
     struct RoleData 
