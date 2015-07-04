@@ -50,6 +50,7 @@ public:
     virtual bool SearchGuild(const NFIDENTID& self, const std::string& strName, std::vector<SearchGuildObject>& xList);
     virtual bool GetGuildInfo( const NFIDENTID& self, const NFIDENTID& xGuild, SearchGuildObject& xGuildInfo );
     virtual bool CanLoadMysqlData( const NFIDENTID& self );
+    virtual bool GetGameID( const NFIDENTID& self, int& nGameID );
 
 protected:
     int OnGuildClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
@@ -58,7 +59,7 @@ protected:
    const bool LoadDataFormNoSql( const NFIDENTID& self );
    const bool SaveDataToNoSql( const NFIDENTID& self);
    const bool ConvertPBToRecord(const NFMsg::PlayerRecordBase& xRecordData, NF_SHARE_PTR<NFIRecord> xRecord);   
-
+   
 protected:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
