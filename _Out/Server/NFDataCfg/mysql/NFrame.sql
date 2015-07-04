@@ -93,7 +93,7 @@ CREATE TABLE `GuildName` (
 	PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE `GuildName` ADD `GuilID` varchar(128) DEFAULT '' COMMENT '工会ID';
+ALTER TABLE `GuildName` ADD `GuildID` varchar(128) DEFAULT '' COMMENT '工会ID';
 
 
 CREATE TABLE `InitProperty` (
