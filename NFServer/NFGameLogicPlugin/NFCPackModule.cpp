@@ -828,8 +828,13 @@ int NFCPackModule::OnSwapTableRowEvent( const NFIDENTID& object, const int nEven
     return 0;
 }
 
-int NFCPackModule::OnObjectPackRecordEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
+int NFCPackModule::OnObjectPackRecordEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar )
 {
+	const std::string& strRecordName = xEventData.strRecordName;
+	const int nOpType = xEventData.nOpType;
+	const int nRow = xEventData.nRow;
+	const int nCol = xEventData.nCol; 
+
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
     if ( pObject )
     {
@@ -895,8 +900,13 @@ int NFCPackModule::OnObjectPackRecordEvent( const NFIDENTID& self, const std::st
     return 0;
 }
 
-int NFCPackModule::OnObjectPackViewRecordEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nTargetRow, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
+int NFCPackModule::OnObjectPackViewRecordEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar)
 {
+	const std::string& strRecordName = xEventData.strRecordName;
+	const int nOpType = xEventData.nOpType;
+	const int nRow = xEventData.nRow;
+	const int nTargetRow = xEventData.nCol; 
+
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
     if ( pObject )
     {
