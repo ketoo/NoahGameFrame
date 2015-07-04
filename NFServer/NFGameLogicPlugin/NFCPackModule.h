@@ -116,8 +116,8 @@ protected:
     int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
     int OnSwapTableRowEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
     int OnAddDropListEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
-    int OnObjectPackRecordEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
-    int OnObjectPackViewRecordEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nTargetRow, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
+    int OnObjectPackRecordEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar );
+    int OnObjectPackViewRecordEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar);
 
     PackTableType GetPackType( const std::string& name );
     bool pack_item_type_greater( NFIDataList* elem1, NFIDataList* elem2 );
