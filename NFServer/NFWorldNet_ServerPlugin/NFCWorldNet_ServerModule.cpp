@@ -1066,8 +1066,12 @@ int NFCWorldNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, cons
     return 0;
 }
 
-int NFCWorldNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
+int NFCWorldNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar )
 {
+	int nOpType = xEventData.nOpType;
+	int nRow = xEventData.nRow;
+	int nCol = xEventData.nCol;
+
     int nObjectContainerID = m_pKernelModule->GetPropertyInt( self, "SceneID" );
     int nObjectGroupID = m_pKernelModule->GetPropertyInt( self, "GroupID" );
 

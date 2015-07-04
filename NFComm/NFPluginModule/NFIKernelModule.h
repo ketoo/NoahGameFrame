@@ -35,9 +35,9 @@ public:
     virtual bool RemoveHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName) = 0;
 
     template<typename BaseType>
-    bool AddRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const int, const int, const int, const NFIDataList&, const NFIDataList&, const NFIDataList&))
+    bool AddRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID, const RECORD_EVENT_DATA&, const NFIDataList&, const NFIDataList&))
     {
-        RECORD_EVENT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4, _5, _6, _7, _8);
+        RECORD_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         RECORD_EVENT_FUNCTOR_PTR functorPtr(new RECORD_EVENT_FUNCTOR(functor));
         return AddRecordCallBack(self, strRecordName, functorPtr);
     }
@@ -87,9 +87,9 @@ public:
 
     //只能网络模块注册，回调用来同步对象类表事件,所有的类表都会回调
     template<typename BaseType>
-    bool ResgisterCommonRecordEvent(BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const int, const int, const int, const NFIDataList&, const NFIDataList&, const NFIDataList&))
+    bool ResgisterCommonRecordEvent(BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const RECORD_EVENT_DATA&, const NFIDataList&, const NFIDataList&))
     {
-        RECORD_EVENT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4, _5, _6, _7, _8);
+        RECORD_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         RECORD_EVENT_FUNCTOR_PTR functorPtr(new RECORD_EVENT_FUNCTOR(functor));
         return ResgisterCommonRecordEvent(functorPtr);
     }
