@@ -11,10 +11,6 @@
 
 #include <functional>
 #include "NFIDataList.h"
-#include <boost/function.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/bind/placeholders.hpp>
-#include <boost/bind.hpp>
 #include "NFComm/NFPluginModule/NFIdentID.h"
 
 enum CLASS_OBJECT_EVENT
@@ -42,12 +38,13 @@ struct RECORD_EVENT_DATA
 	int nOpType;
 	int nRow;
 	int nCol;
+	std::string strRecordName;
 };
 
 // functor
 typedef std::function<int(const NFIDENTID&, const std::string&, const float, const int)> HEART_BEAT_FUNCTOR;
 typedef std::function<int(const NFIDENTID&, const std::string&, const NFIDataList&, const NFIDataList&)> PROPERTY_EVENT_FUNCTOR;
-typedef boost::function<int(const NFIDENTID&, const std::string&, const int, const int, const int, const NFIDataList&, const NFIDataList&, const NFIDataList&)> RECORD_EVENT_FUNCTOR;
+typedef std::function<int(const NFIDENTID&, const RECORD_EVENT_DATA&, const NFIDataList&, const NFIDataList&)> RECORD_EVENT_FUNCTOR;
 
 typedef std::function<int(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIDataList&)> CLASS_EVENT_FUNCTOR;
 typedef std::function<int(const NFIDENTID&, const int, const NFIDataList&)> EVENT_PROCESS_FUNCTOR;
