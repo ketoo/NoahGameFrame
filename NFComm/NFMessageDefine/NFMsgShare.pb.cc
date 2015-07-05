@@ -48,6 +48,7 @@ const ::google::protobuf::EnumDescriptor* ReqAckPlayerChat_EGameChatType_descrip
 const ::google::protobuf::Descriptor* EffectData_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   EffectData_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* EffectData_EResultType_descriptor_ = NULL;
 const ::google::protobuf::Descriptor* ReqAckUseSkill_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqAckUseSkill_reflection_ = NULL;
@@ -267,6 +268,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(EffectData));
+  EffectData_EResultType_descriptor_ = EffectData_descriptor_->enum_type(0);
   ReqAckUseSkill_descriptor_ = file->message_type(9);
   static const int ReqAckUseSkill_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseSkill, user_),
@@ -718,63 +720,65 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "EGameChatType\022\021\n\tchat_info\030\003 \002(\014\022\021\n\tchat"
     "_name\030\004 \002(\014\"P\n\rEGameChatType\022\016\n\nEGCT_GUI"
     "LD\020\000\022\020\n\014EGCT_PRIVATE\020\001\022\r\n\tEGCT_TEAM\020\002\022\016\n"
-    "\nEGCT_WORLD\020\003\"Z\n\nEffectData\022\"\n\014effect_id"
-    "ent\030\001 \002(\0132\014.NFMsg.Ident\022\024\n\014effect_value\030"
-    "\002 \002(\005\022\022\n\neffect_rlt\030\003 \002(\005\"\275\001\n\016ReqAckUseS"
-    "kill\022\032\n\004user\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010skil"
-    "l_id\030\002 \002(\014\022 \n\007now_pos\030\003 \002(\0132\017.NFMsg.Posi"
-    "tion\022 \n\007tar_pos\030\004 \002(\0132\017.NFMsg.Position\022\021"
-    "\n\tuse_index\030\005 \002(\005\022&\n\013effect_data\030\006 \003(\0132\021"
-    ".NFMsg.EffectData\"t\n\rReqAckUseItem\022\032\n\004us"
-    "er\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\titem_guid\030\002 \002("
-    "\0132\014.NFMsg.Ident\022&\n\013effect_data\030\003 \003(\0132\021.N"
-    "FMsg.EffectData\"\345\001\n\017ReqAckSwapScene\022;\n\rt"
-    "ransfer_type\030\001 \002(\0162$.NFMsg.ReqAckSwapSce"
-    "ne.EGameSwapType\022\020\n\010scene_id\030\002 \002(\005\022\017\n\007li"
-    "ne_id\030\003 \002(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006"
-    " \001(\002\"Q\n\rEGameSwapType\022\017\n\013EGST_NARMAL\020\000\022\016"
-    "\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n\013EGST_M"
-    "IRROR\020\003\"1\n\nItemStruct\022\017\n\007item_id\030\001 \002(\t\022\022"
-    "\n\nitem_count\030\002 \002(\005\"d\n\017ReqAckEndBattle\022\r\n"
-    "\005money\030\001 \002(\005\022\013\n\003exp\030\002 \002(\005\022\017\n\007diamond\030\003 \002"
-    "(\005\022$\n\titem_list\030\004 \003(\0132\021.NFMsg.ItemStruct"
-    "\"2\n\017ReqPickDropItem\022\037\n\titem_guid\030\002 \002(\0132\014"
-    ".NFMsg.Ident\" \n\rReqAcceptTask\022\017\n\007task_id"
-    "\030\001 \002(\014\"#\n\020ReqCompeleteTask\022\017\n\007task_id\030\001 "
-    "\002(\014\"\357\001\n\022ReqAckJoinActivity\022B\n\ractivity_t"
-    "ype\030\001 \002(\0162+.NFMsg.ReqAckJoinActivity.EGa"
-    "meActivityType\022I\n\021sub_activity_type\030\002 \002("
-    "\0162..NFMsg.ReqAckJoinActivity.EGameActivi"
-    "tySubType\"!\n\021EGameActivityType\022\014\n\010EGAT_P"
-    "VP\020\000\"\'\n\024EGameActivitySubType\022\017\n\013EGAT_NOR"
-    "MAL\020\000\"G\n\021ReqAckCreateGuild\022\036\n\010guild_id\030\001"
-    " \002(\0132\014.NFMsg.Ident\022\022\n\nguild_name\030\002 \002(\t\"$"
-    "\n\016ReqSearchGuild\022\022\n\nguild_name\030\001 \002(\t\"\220\002\n"
-    "\016AckSearchGuild\022;\n\nguild_list\030\001 \003(\0132\'.NF"
-    "Msg.AckSearchGuild.SearchGuildObject\032\300\001\n"
-    "\021SearchGuildObject\022\036\n\010guild_ID\030\001 \002(\0132\014.N"
-    "FMsg.Ident\022\022\n\nguild_name\030\002 \002(\t\022\022\n\nguild_"
-    "icon\030\003 \002(\t\022\032\n\022guild_member_count\030\004 \002(\005\022\036"
-    "\n\026guild_member_max_count\030\005 \002(\005\022\023\n\013guild_"
-    "honor\030\006 \002(\005\022\022\n\nguild_rank\030\007 \002(\005\"E\n\017ReqAc"
-    "kJoinGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ide"
-    "nt\022\022\n\nguild_name\030\002 \002(\t\"F\n\020ReqAckLeaveGui"
-    "ld\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\ngu"
-    "ild_name\030\002 \002(\t\"\332\001\n\024ReqAckOprGuildMember\022"
-    "\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\tmembe"
-    "r_id\030\002 \002(\0132\014.NFMsg.Ident\022>\n\004type\030\003 \002(\01620"
-    ".NFMsg.ReqAckOprGuildMember.EGGuildMembe"
-    "rOprType\"A\n\024EGGuildMemberOprType\022\r\n\tEGAT"
-    "_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tEGAT_KICK\020\002\"\325\002\n\010"
-    "ChatInfo\022,\n\tchat_type\030\001 \002(\0162\031.NFMsg.Chat"
-    "Info.EChatType\022\021\n\tchat_info\030\002 \002(\014\022\021\n\tcha"
-    "t_time\030\003 \002(\003\022\026\n\016addtional_info\030\004 \001(\014\022\035\n\007"
-    "send_id\030\005 \002(\0132\014.NFMsg.Ident\022\021\n\tsend_name"
-    "\030\006 \002(\014\022\022\n\nsend_level\030\007 \001(\005\022 \n\nrecvier_id"
-    "\030\010 \003(\0132\014.NFMsg.Ident\022\021\n\tguid_name\030\t \001(\014\""
-    "b\n\tEChatType\022\024\n\020ECHATTYPE_NORMAL\020\000\022\025\n\021EC"
-    "HATTYPE_PRIVATE\020\001\022\023\n\017ECHATTYPE_GUILD\020\002\022\023"
-    "\n\017ECHATTYPE_WORLD\020\003", 3139);
+    "\nEGCT_WORLD\020\003\"\267\001\n\nEffectData\022\"\n\014effect_i"
+    "dent\030\001 \002(\0132\014.NFMsg.Ident\022\024\n\014effect_value"
+    "\030\002 \002(\005\0221\n\neffect_rlt\030\003 \002(\0162\035.NFMsg.Effec"
+    "tData.EResultType\"<\n\013EResultType\022\017\n\013EET_"
+    "SUCCESS\020\000\022\014\n\010EET_FAIL\020\001\022\016\n\nEET_REFUSE\020\002\""
+    "\275\001\n\016ReqAckUseSkill\022\032\n\004user\030\001 \002(\0132\014.NFMsg"
+    ".Ident\022\020\n\010skill_id\030\002 \002(\014\022 \n\007now_pos\030\003 \002("
+    "\0132\017.NFMsg.Position\022 \n\007tar_pos\030\004 \002(\0132\017.NF"
+    "Msg.Position\022\021\n\tuse_index\030\005 \002(\005\022&\n\013effec"
+    "t_data\030\006 \003(\0132\021.NFMsg.EffectData\"t\n\rReqAc"
+    "kUseItem\022\032\n\004user\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\t"
+    "item_guid\030\002 \002(\0132\014.NFMsg.Ident\022&\n\013effect_"
+    "data\030\003 \003(\0132\021.NFMsg.EffectData\"\345\001\n\017ReqAck"
+    "SwapScene\022;\n\rtransfer_type\030\001 \002(\0162$.NFMsg"
+    ".ReqAckSwapScene.EGameSwapType\022\020\n\010scene_"
+    "id\030\002 \002(\005\022\017\n\007line_id\030\003 \002(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001"
+    "y\030\005 \001(\002\022\t\n\001z\030\006 \001(\002\"Q\n\rEGameSwapType\022\017\n\013E"
+    "GST_NARMAL\020\000\022\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARE"
+    "NA\020\002\022\017\n\013EGST_MIRROR\020\003\"1\n\nItemStruct\022\017\n\007i"
+    "tem_id\030\001 \002(\t\022\022\n\nitem_count\030\002 \002(\005\"d\n\017ReqA"
+    "ckEndBattle\022\r\n\005money\030\001 \002(\005\022\013\n\003exp\030\002 \002(\005\022"
+    "\017\n\007diamond\030\003 \002(\005\022$\n\titem_list\030\004 \003(\0132\021.NF"
+    "Msg.ItemStruct\"2\n\017ReqPickDropItem\022\037\n\tite"
+    "m_guid\030\002 \002(\0132\014.NFMsg.Ident\" \n\rReqAcceptT"
+    "ask\022\017\n\007task_id\030\001 \002(\014\"#\n\020ReqCompeleteTask"
+    "\022\017\n\007task_id\030\001 \002(\014\"\357\001\n\022ReqAckJoinActivity"
+    "\022B\n\ractivity_type\030\001 \002(\0162+.NFMsg.ReqAckJo"
+    "inActivity.EGameActivityType\022I\n\021sub_acti"
+    "vity_type\030\002 \002(\0162..NFMsg.ReqAckJoinActivi"
+    "ty.EGameActivitySubType\"!\n\021EGameActivity"
+    "Type\022\014\n\010EGAT_PVP\020\000\"\'\n\024EGameActivitySubTy"
+    "pe\022\017\n\013EGAT_NORMAL\020\000\"G\n\021ReqAckCreateGuild"
+    "\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\nguil"
+    "d_name\030\002 \002(\t\"$\n\016ReqSearchGuild\022\022\n\nguild_"
+    "name\030\001 \002(\t\"\220\002\n\016AckSearchGuild\022;\n\nguild_l"
+    "ist\030\001 \003(\0132\'.NFMsg.AckSearchGuild.SearchG"
+    "uildObject\032\300\001\n\021SearchGuildObject\022\036\n\010guil"
+    "d_ID\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\nguild_name\030\002"
+    " \002(\t\022\022\n\nguild_icon\030\003 \002(\t\022\032\n\022guild_member"
+    "_count\030\004 \002(\005\022\036\n\026guild_member_max_count\030\005"
+    " \002(\005\022\023\n\013guild_honor\030\006 \002(\005\022\022\n\nguild_rank\030"
+    "\007 \002(\005\"E\n\017ReqAckJoinGuild\022\036\n\010guild_id\030\001 \002"
+    "(\0132\014.NFMsg.Ident\022\022\n\nguild_name\030\002 \002(\t\"F\n\020"
+    "ReqAckLeaveGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NFM"
+    "sg.Ident\022\022\n\nguild_name\030\002 \002(\t\"\332\001\n\024ReqAckO"
+    "prGuildMember\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg."
+    "Ident\022\037\n\tmember_id\030\002 \002(\0132\014.NFMsg.Ident\022>"
+    "\n\004type\030\003 \002(\01620.NFMsg.ReqAckOprGuildMembe"
+    "r.EGGuildMemberOprType\"A\n\024EGGuildMemberO"
+    "prType\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tEG"
+    "AT_KICK\020\002\"\325\002\n\010ChatInfo\022,\n\tchat_type\030\001 \002("
+    "\0162\031.NFMsg.ChatInfo.EChatType\022\021\n\tchat_inf"
+    "o\030\002 \002(\014\022\021\n\tchat_time\030\003 \002(\003\022\026\n\016addtional_"
+    "info\030\004 \001(\014\022\035\n\007send_id\030\005 \002(\0132\014.NFMsg.Iden"
+    "t\022\021\n\tsend_name\030\006 \002(\014\022\022\n\nsend_level\030\007 \001(\005"
+    "\022 \n\nrecvier_id\030\010 \003(\0132\014.NFMsg.Ident\022\021\n\tgu"
+    "id_name\030\t \001(\014\"b\n\tEChatType\022\024\n\020ECHATTYPE_"
+    "NORMAL\020\000\022\025\n\021ECHATTYPE_PRIVATE\020\001\022\023\n\017ECHAT"
+    "TYPE_GUILD\020\002\022\023\n\017ECHATTYPE_WORLD\020\003", 3233);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -3198,6 +3202,29 @@ void ReqAckPlayerChat::Swap(ReqAckPlayerChat* other) {
 
 // ===================================================================
 
+const ::google::protobuf::EnumDescriptor* EffectData_EResultType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return EffectData_EResultType_descriptor_;
+}
+bool EffectData_EResultType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const EffectData_EResultType EffectData::EET_SUCCESS;
+const EffectData_EResultType EffectData::EET_FAIL;
+const EffectData_EResultType EffectData::EET_REFUSE;
+const EffectData_EResultType EffectData::EResultType_MIN;
+const EffectData_EResultType EffectData::EResultType_MAX;
+const int EffectData::EResultType_ARRAYSIZE;
+#endif  // _MSC_VER
 #ifndef _MSC_VER
 const int EffectData::kEffectIdentFieldNumber;
 const int EffectData::kEffectValueFieldNumber;
@@ -3305,15 +3332,20 @@ bool EffectData::MergePartialFromCodedStream(
         break;
       }
 
-      // required int32 effect_rlt = 3;
+      // required .NFMsg.EffectData.EResultType effect_rlt = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_effect_rlt:
+          int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &effect_rlt_)));
-          set_has_effect_rlt();
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::NFMsg::EffectData_EResultType_IsValid(value)) {
+            set_effect_rlt(static_cast< ::NFMsg::EffectData_EResultType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(3, value);
+          }
         } else {
           goto handle_uninterpreted;
         }
@@ -3350,9 +3382,10 @@ void EffectData::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->effect_value(), output);
   }
 
-  // required int32 effect_rlt = 3;
+  // required .NFMsg.EffectData.EResultType effect_rlt = 3;
   if (has_effect_rlt()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->effect_rlt(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      3, this->effect_rlt(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -3375,9 +3408,10 @@ void EffectData::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->effect_value(), target);
   }
 
-  // required int32 effect_rlt = 3;
+  // required .NFMsg.EffectData.EResultType effect_rlt = 3;
   if (has_effect_rlt()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->effect_rlt(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      3, this->effect_rlt(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -3405,11 +3439,10 @@ int EffectData::ByteSize() const {
           this->effect_value());
     }
 
-    // required int32 effect_rlt = 3;
+    // required .NFMsg.EffectData.EResultType effect_rlt = 3;
     if (has_effect_rlt()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->effect_rlt());
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->effect_rlt());
     }
 
   }
