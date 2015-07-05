@@ -11,6 +11,7 @@
 
 #include <map>
 #include <string>
+#include <time.inl>
 #include "NFCDynLib.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFCore/NFQueue.h"
@@ -23,7 +24,8 @@ public:
 	{
 		mbOnReloadPlugin = false;
 		m_pActorManager = pManager;
-        mAppID = 0;
+        mnAppID = 0;
+		mnStartRunTime = time(NULL);
 	}
 
     virtual bool Init();
@@ -66,7 +68,9 @@ public:
 	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
 	virtual NFIActorManager* GetActorManager(){ return m_pActorManager;}
 
-    virtual int AppID(){ return mAppID; }
+	virtual int AppID(){ return mnAppID; }
+	virtual int StartRunTime(){ return mnAppID; }
+
 
 protected:
 
@@ -81,7 +85,8 @@ private:
 	NFIActorManager* m_pActorManager;
 	NFQueue<NFIActorMessage> mxQueue;
 
-    int mAppID;
+	int mnAppID;
+	int mnStartRunTime;
 
 	typedef std::map<std::string, bool> PluginNameMap;
 	typedef std::map<std::string, NFCDynLib*> PluginLibMap;
