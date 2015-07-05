@@ -85,6 +85,26 @@ inline bool ReqAckPlayerChat_EGameChatType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ReqAckPlayerChat_EGameChatType>(
     ReqAckPlayerChat_EGameChatType_descriptor(), name, value);
 }
+enum EffectData_EResultType {
+  EffectData_EResultType_EET_SUCCESS = 0,
+  EffectData_EResultType_EET_FAIL = 1,
+  EffectData_EResultType_EET_REFUSE = 2
+};
+bool EffectData_EResultType_IsValid(int value);
+const EffectData_EResultType EffectData_EResultType_EResultType_MIN = EffectData_EResultType_EET_SUCCESS;
+const EffectData_EResultType EffectData_EResultType_EResultType_MAX = EffectData_EResultType_EET_REFUSE;
+const int EffectData_EResultType_EResultType_ARRAYSIZE = EffectData_EResultType_EResultType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* EffectData_EResultType_descriptor();
+inline const ::std::string& EffectData_EResultType_Name(EffectData_EResultType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EffectData_EResultType_descriptor(), value);
+}
+inline bool EffectData_EResultType_Parse(
+    const ::std::string& name, EffectData_EResultType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EffectData_EResultType>(
+    EffectData_EResultType_descriptor(), name, value);
+}
 enum ReqAckSwapScene_EGameSwapType {
   ReqAckSwapScene_EGameSwapType_EGST_NARMAL = 0,
   ReqAckSwapScene_EGameSwapType_EGST_CLONE = 1,
@@ -1119,6 +1139,31 @@ class EffectData : public ::google::protobuf::Message {
 
   // nested types ----------------------------------------------------
 
+  typedef EffectData_EResultType EResultType;
+  static const EResultType EET_SUCCESS = EffectData_EResultType_EET_SUCCESS;
+  static const EResultType EET_FAIL = EffectData_EResultType_EET_FAIL;
+  static const EResultType EET_REFUSE = EffectData_EResultType_EET_REFUSE;
+  static inline bool EResultType_IsValid(int value) {
+    return EffectData_EResultType_IsValid(value);
+  }
+  static const EResultType EResultType_MIN =
+    EffectData_EResultType_EResultType_MIN;
+  static const EResultType EResultType_MAX =
+    EffectData_EResultType_EResultType_MAX;
+  static const int EResultType_ARRAYSIZE =
+    EffectData_EResultType_EResultType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  EResultType_descriptor() {
+    return EffectData_EResultType_descriptor();
+  }
+  static inline const ::std::string& EResultType_Name(EResultType value) {
+    return EffectData_EResultType_Name(value);
+  }
+  static inline bool EResultType_Parse(const ::std::string& name,
+      EResultType* value) {
+    return EffectData_EResultType_Parse(name, value);
+  }
+
   // accessors -------------------------------------------------------
 
   // required .NFMsg.Ident effect_ident = 1;
@@ -1137,12 +1182,12 @@ class EffectData : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 effect_value() const;
   inline void set_effect_value(::google::protobuf::int32 value);
 
-  // required int32 effect_rlt = 3;
+  // required .NFMsg.EffectData.EResultType effect_rlt = 3;
   inline bool has_effect_rlt() const;
   inline void clear_effect_rlt();
   static const int kEffectRltFieldNumber = 3;
-  inline ::google::protobuf::int32 effect_rlt() const;
-  inline void set_effect_rlt(::google::protobuf::int32 value);
+  inline ::NFMsg::EffectData_EResultType effect_rlt() const;
+  inline void set_effect_rlt(::NFMsg::EffectData_EResultType value);
 
   // @@protoc_insertion_point(class_scope:NFMsg.EffectData)
  private:
@@ -1157,7 +1202,7 @@ class EffectData : public ::google::protobuf::Message {
 
   ::NFMsg::Ident* effect_ident_;
   ::google::protobuf::int32 effect_value_;
-  ::google::protobuf::int32 effect_rlt_;
+  int effect_rlt_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
@@ -4129,7 +4174,7 @@ inline void EffectData::set_effect_value(::google::protobuf::int32 value) {
   effect_value_ = value;
 }
 
-// required int32 effect_rlt = 3;
+// required .NFMsg.EffectData.EResultType effect_rlt = 3;
 inline bool EffectData::has_effect_rlt() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -4143,10 +4188,11 @@ inline void EffectData::clear_effect_rlt() {
   effect_rlt_ = 0;
   clear_has_effect_rlt();
 }
-inline ::google::protobuf::int32 EffectData::effect_rlt() const {
-  return effect_rlt_;
+inline ::NFMsg::EffectData_EResultType EffectData::effect_rlt() const {
+  return static_cast< ::NFMsg::EffectData_EResultType >(effect_rlt_);
 }
-inline void EffectData::set_effect_rlt(::google::protobuf::int32 value) {
+inline void EffectData::set_effect_rlt(::NFMsg::EffectData_EResultType value) {
+  assert(::NFMsg::EffectData_EResultType_IsValid(value));
   set_has_effect_rlt();
   effect_rlt_ = value;
 }
@@ -6297,6 +6343,10 @@ namespace protobuf {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckPlayerChat_EGameChatType>() {
   return ::NFMsg::ReqAckPlayerChat_EGameChatType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EffectData_EResultType>() {
+  return ::NFMsg::EffectData_EResultType_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckSwapScene_EGameSwapType>() {
