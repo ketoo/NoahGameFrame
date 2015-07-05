@@ -72,7 +72,7 @@ bool NFCPluginManager::LoadPlugin()
         return false;
     }
 
-    if (!NF_StrTo(strAppID, mAppID))
+    if (!NF_StrTo(strAppID, mnAppID))
     {
         NFASSERT(0, "App ID Convert Error", __FILE__, __FUNCTION__);
         return false;
