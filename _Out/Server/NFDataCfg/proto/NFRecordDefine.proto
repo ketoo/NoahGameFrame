@@ -45,6 +45,7 @@ enum GuildMemberList_RecordColType
 	GuildMemberList_Offline		=7; // Offline
 	GuildMemberList_Power		=8; // Power
 	GuildMemberList_Title		=9; // Title
+	GuildMemberList_GameID		=10; // GameID
 }
 
 enum GuildEvent_RecordColType
