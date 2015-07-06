@@ -11,7 +11,7 @@
 
 #include <map>
 #include <string>
-#include <time.inl>
+#include <time.h>
 #include "NFCDynLib.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFCore/NFQueue.h"
@@ -69,7 +69,7 @@ public:
 	virtual NFIActorManager* GetActorManager(){ return m_pActorManager;}
 
 	virtual int AppID(){ return mnAppID; }
-	virtual int StartRunTime(){ return mnAppID; }
+	virtual NFINT64 StartRunTime(){ return mnStartRunTime; }
 
 
 protected:
@@ -86,7 +86,7 @@ private:
 	NFQueue<NFIActorMessage> mxQueue;
 
 	int mnAppID;
-	int mnStartRunTime;
+	NFINT64 mnStartRunTime;
 
 	typedef std::map<std::string, bool> PluginNameMap;
 	typedef std::map<std::string, NFCDynLib*> PluginLibMap;
