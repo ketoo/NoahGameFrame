@@ -15,6 +15,7 @@
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
+					<Add option="-fPIC" />
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
 					<Add directory="$(SolutionDir)" />
@@ -35,6 +36,7 @@
 				<Option createDefFile="1" />
 				<Compiler>
 					<Add option="-std=c++11" />
+					<Add option="-fPIC" />
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
 					<Add directory="$(SolutionDir)" />
