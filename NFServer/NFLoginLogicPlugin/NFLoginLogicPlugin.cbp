@@ -29,9 +29,14 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
+					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFMessageDefine_d.a" />
+					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFNet_d.a" />
+					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libevent.a" />
+					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libevent_core.a" />
+					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libprotobuf.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc/" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFLoginLogicPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFLoginServer/" />
@@ -62,9 +67,14 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
+					<Add library="$(SolutionDir)/_Out/Comm/Release/NFMessageDefine.a" />
+					<Add library="$(SolutionDir)/_Out/Comm/Release/NFNet.a" />
+					<Add library="$(SolutionDir)/Dependencies/lib/Release/libevent.a" />
+					<Add library="$(SolutionDir)/Dependencies/lib/Release/libevent_core.a" />
+					<Add library="$(SolutionDir)/Dependencies/lib/Release/libprotobuf.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc/" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFLoginLogicPlugin.so $(SolutionDir)/_Out/Server/Release/NFLoginServer/" />
