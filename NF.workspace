@@ -39,5 +39,6 @@
 		<Project filename="NFServer/NFSLGPlugin/NFSLGPlugin.cbp" />
 		<Project filename="NFServer/NFWorldChatPlugin/NFWorldChatPlugin.cbp" />
 		<Project filename="NFServer/NFWorldGuildPlugin/NFWorldGuildPlugin.cbp" />
+		<Project filename="NFComm/NFCluster/NFMysqlClusterPlugin.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
