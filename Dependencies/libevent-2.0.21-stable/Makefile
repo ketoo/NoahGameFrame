@@ -314,9 +314,9 @@ AUTOMAKE = ${SHELL} /home/eliteyang/dev/NoahGameFrame/Dependencies/libevent-2.0.
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2 -Wall -fno-strict-aliasing -pthread
+CFLAGS = -g -O2 -Wall -fno-strict-aliasing -pthread -fPIC
 CPP = gcc -E
-CPPFLAGS = 
+CPPFLAGS = -fPIC
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
