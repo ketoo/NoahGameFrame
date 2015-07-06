@@ -135,7 +135,7 @@ public:
 
 		return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
 	}
-	
+
 	virtual bool Execute(const float fLasFrametime, const float fStartedTime)
 	{
 		if (!m_pNet)
@@ -340,7 +340,7 @@ public:
 		if(!xPacket.EnCode(nMsgID, strMsg.c_str(), strMsg.length()))
 		{
 			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Send Message to %d Failed For Encode of MsgData, MessageID: %d, MessageLen: %d\n", nSockIndex, nMsgID, strMsg.length());
+			sprintf(szData, "Send Message to %d Failed For Encode of MsgData, MessageID: %d, MessageLen: %lu\n", nSockIndex, nMsgID, strMsg.length());
 			//LogSend(szData);
 
 			return false;
@@ -405,7 +405,7 @@ public:
         if(!xPacket.EnCode(nMsgID, strMsg.c_str(), strMsg.length()))
         {
             char szData[MAX_PATH] = { 0 };
-            sprintf(szData, "Send Message to %d Failed For Encode of MsgData, MessageID: %d, MessageLen: %d\n", nSockIndex, nMsgID, strMsg.length());
+            sprintf(szData, "Send Message to %d Failed For Encode of MsgData, MessageID: %d, MessageLen: %lu\n", nSockIndex, nMsgID, strMsg.length());
             //LogSend(szData);
 
             return false;

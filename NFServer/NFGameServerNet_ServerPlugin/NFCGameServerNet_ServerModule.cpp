@@ -1932,7 +1932,7 @@ void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
 
 		*pNewEffectData->mutable_effect_ident() = NFToPB(nTarget);
 		pNewEffectData->set_effect_value(20);// ÔÝÊ±´úÌæ
-		pNewEffectData->set_effect_rlt(0);
+		pNewEffectData->set_effect_rlt(NFMsg::EffectData_EResultType(0));
 	}
 
 	SendMsgPBToGate(NFMsg::EGMI_ACK_SKILL_OBJECTX, xReqAckUseSkill, nPlayerID);
@@ -2282,7 +2282,7 @@ void NFCGameServerNet_ServerModule::OnTransWorld( const NFIPacket& msg )
     {
         nHasKey = nPlayer.nData64;
     }
-    
+
     m_pGameServerToWorldModule->SendBySuit(nHasKey, msg);
 }
 
