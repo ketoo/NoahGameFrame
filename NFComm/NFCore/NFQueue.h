@@ -15,10 +15,31 @@
 #include <atomic>
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
+class spinlock_mutex;
+class NFLock
+{
+public:
+    explicit NFLock()
+    {
+        flag.clear();
+    }
+
+    ~NFLock()
+    {
+    }
+protected:
+    std::atomic_flag flag;
+
+    friend spinlock_mutex;
+
+private:
+    NFLock& operator=(const NFLock& src);
+};
+
 class spinlock_mutex
 {
 public:
-    spinlock_mutex()
+    explicit spinlock_mutex(NFLock& xGuard):mGuard(xGuard)
     {
         lock();
     }
@@ -31,20 +52,23 @@ public:
 protected:
     void lock()
     {
-        while (flag.test_and_set(std::memory_order_acquire));
+        while (mGuard.flag.test_and_set(std::memory_order_acquire));
     }
 
     void unlock()
     {
-        flag.clear(std::memory_order_release);
+        mGuard.flag.clear(std::memory_order_release);
     }
 
 private:
-    std::atomic_flag flag;
+    spinlock_mutex& operator=(const spinlock_mutex& src);
+
+private:
+    NFLock& mGuard;
 };
 
 template<typename T>
-class NFQueue
+class NFQueue :public NFLock
 {
 public:
     NFQueue()
@@ -57,8 +81,7 @@ public:
 
     bool Push(const T& object)
     {
-        spinlock_mutex();
-
+        spinlock_mutex(*this);
         mList.push_back(object);
 
         return true;
@@ -66,8 +89,7 @@ public:
 
     bool Pop(T& object)
     {
-        spinlock_mutex();
-
+        spinlock_mutex(*this);
         if (mList.empty())
         {
             return false;
@@ -75,7 +97,7 @@ public:
 
         object = mList.front();
         mList.pop_front();
-
+        
         return true;
     }
 
