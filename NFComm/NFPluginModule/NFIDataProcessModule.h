@@ -19,12 +19,10 @@ class NFIDataProcessModule
 
 public:
     virtual const bool  LoadDataFormNoSql(const NFIDENTID& self) = 0;
-    virtual const bool  SaveDataToNoSql( const NFIDENTID& self, bool bOffline = false ) = 0;
-
 
 	virtual const NFIDENTID CreateRole(const std::string& strAccount, const std::string& strName, const int nJob, const int nSex) = 0;
 	virtual const bool DeleteRole(const std::string& strAccount, const NFIDENTID xID) = 0;
-	virtual const NFIDENTID GetChar(const std::string& strAccount, std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVeec) = 0;
+	virtual const NFIDENTID GetChar(const std::string& strAccount, const std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVeec) = 0;
 
 };
 
