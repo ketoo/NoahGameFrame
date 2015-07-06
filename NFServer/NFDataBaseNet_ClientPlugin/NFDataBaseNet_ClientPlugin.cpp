@@ -1,5 +1,6 @@
 #include "NFDataBaseNet_ClientPlugin.h"
 #include "NFCDataBaseNet_ClientModule.h"
+#include "NFCObjectSaveModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -30,9 +31,11 @@ const std::string NFDataBaseNet_ClientPlugin::GetPluginName()
 void NFDataBaseNet_ClientPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFCDataBaseNet_ClientModule)
+    REGISTER_MODULE(pPluginManager, NFCObjectSaveModule)
 }
 
 void NFDataBaseNet_ClientPlugin::Uninstall()
 {
+    UNREGISTER_MODULE(pPluginManager, NFCObjectSaveModule)
     UNREGISTER_MODULE(pPluginManager, NFCDataBaseNet_ClientModule)
 }

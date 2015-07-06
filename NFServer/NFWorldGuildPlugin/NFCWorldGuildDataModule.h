@@ -17,6 +17,7 @@
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFMessageDefine/NFMsgBase.pb.h"
+#include "NFComm/NFPluginModule/NFIObjectSaveModule.h"
 
 class NFCWorldGuildDataModule
     : public NFIWorldGuildDataModule
@@ -42,29 +43,25 @@ public:
     virtual NF_SHARE_PTR<NFIObject> GetGuild(const NFIDENTID& xGuild);
 
     virtual bool GetPlayerInfo(const NFIDENTID& self, std::string& strRoleName, int& nLevel, int& nJob , int& nDonation , int& nVIP);
+    virtual bool GetPlayerGuild(const NFIDENTID& self, NFIDENTID& xGuild);
+    virtual bool GetPlayerGameID( const NFIDENTID& self, int& nGameID );
 
     virtual const NFIDENTID CreateGuild(const NFIDENTID& xPlayeID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP, const int nOffLine = 1, const int nPower = NFMsg::GUILD_POWER_TYPE_PRESIDENT);
     virtual const bool DeleteGuild(const NFIDENTID& xGuild);
-    virtual bool GetGuild(const NFIDENTID& self, NFIDENTID& xGuild);
-    virtual bool SetGuild( const NFIDENTID& self, const NFIDENTID& xGuild );
+
     virtual bool SearchGuild(const NFIDENTID& self, const std::string& strName, std::vector<SearchGuildObject>& xList);
     virtual bool GetGuildInfo( const NFIDENTID& self, const NFIDENTID& xGuild, SearchGuildObject& xGuildInfo );
-    virtual bool CanLoadMysqlData( const NFIDENTID& self );
-    virtual bool GetGameID( const NFIDENTID& self, int& nGameID );
 
 protected:
     int OnGuildClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
-
-protected:
-   const bool LoadDataFormNoSql( const NFIDENTID& self );
-   const bool SaveDataToNoSql( const NFIDENTID& self);
-   const bool ConvertPBToRecord(const NFMsg::PlayerRecordBase& xRecordData, NF_SHARE_PTR<NFIRecord> xRecord);   
+    int OnSaveGuildheartEvent(const NFIDENTID& self , const std::string& strHeartName, const float fTime, const int nCount);
    
 protected:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFIUUIDModule* m_pUUIDModule;
     NFIClusterModule* m_pClusterSQLModule;    
+    NFIObjectSaveModule* m_pObjectSaveModule;
     
 private:
     std::string mstrGuildTalble;
