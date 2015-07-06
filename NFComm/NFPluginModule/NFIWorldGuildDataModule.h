@@ -45,10 +45,9 @@ public:
     virtual const bool DeleteGuild(const NFIDENTID& xGuild) = 0;
     virtual NF_SHARE_PTR<NFIObject> GetGuild(const NFIDENTID& xGuild) = 0;
 
-    virtual bool GetGuild(const NFIDENTID& self, NFIDENTID& xGuild) = 0;
-    virtual bool SetGuild( const NFIDENTID& self, const NFIDENTID& xGuild ) = 0;
+    virtual bool GetPlayerGuild(const NFIDENTID& self, NFIDENTID& xGuild) = 0;
     virtual bool SearchGuild(const NFIDENTID& self, const std::string& strName, std::vector<SearchGuildObject>& xList) = 0;
-    virtual bool GetGameID( const NFIDENTID& self, int& nGameID ) = 0;
+    virtual bool GetPlayerGameID( const NFIDENTID& self, int& nGameID ) = 0;
 
 protected:
 private:
