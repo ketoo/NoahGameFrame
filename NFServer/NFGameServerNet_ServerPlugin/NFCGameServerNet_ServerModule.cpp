@@ -1920,6 +1920,10 @@ void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
 
 	NFMsg::ReqAckUseSkill xReqAckUseSkill;
 	xReqAckUseSkill.set_skill_id(strSkillID);
+    *xReqAckUseSkill.mutable_user() = NFINetModule::NFToPB(nPlayerID);
+    *xReqAckUseSkill.mutable_now_pos() = xMsg.now_pos();
+    *xReqAckUseSkill.mutable_tar_pos() = xMsg.tar_pos();
+    xReqAckUseSkill.set_use_index( xMsg.use_index());
 
 	for (int i = 0; i < xMsg.effect_data_size(); ++i)
 	{
@@ -1932,7 +1936,7 @@ void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
 
 		*pNewEffectData->mutable_effect_ident() = NFToPB(nTarget);
 		pNewEffectData->set_effect_value(20);// ÔÝÊ±´úÌæ
-		pNewEffectData->set_effect_rlt(0);
+		pNewEffectData->set_effect_rlt(xEffectData.effect_rlt());
 	}
 
 	SendMsgPBToGate(NFMsg::EGMI_ACK_SKILL_OBJECTX, xReqAckUseSkill, nPlayerID);
