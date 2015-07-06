@@ -41,19 +41,15 @@ public:
     virtual bool GetOnlineMember(const NFIDENTID& self, const NFIDENTID& xGuild, NFCDataList& varMemberList, NFCDataList& varGameList);
     virtual bool MemberOnline(const NFIDENTID& self, const NFIDENTID& xGuild, const int& nGameID);
     virtual bool MemberOffeline(const NFIDENTID& self, const NFIDENTID& xGuild);
-    virtual bool GetGuildID(const NFIDENTID& self, NFIDENTID& xGuild);
 
 	//////////////////////其次考虑参数////////////////////////////////////////////////////
 	virtual bool GetGuildBaseInfo(const NFIDENTID& self, const NFIDENTID& xGuildID);
 	virtual bool GetGuildMemberInfo(const NFIDENTID& self, const NFIDENTID& xGuildID);
 	virtual bool GetGuildMemberInfo(const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember);
 
-
-	//////////////////////////////////////////////////////////////////////////
 protected:
 
     bool CheckPower(const NFIDENTID& self, const NFIDENTID& xGuildID, int nPowerType);
-    bool SetPresidentInfo(const NFIDENTID& self, const NFIDENTID& xGuildID);
 
 protected:
     NFIEventProcessModule* m_pEventProcessModule;
