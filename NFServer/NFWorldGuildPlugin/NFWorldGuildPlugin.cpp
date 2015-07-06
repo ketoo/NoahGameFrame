@@ -11,6 +11,7 @@
 #include "NFCWorldGuildModule.h"
 #include "NFWorldGuildPlugin.h"
 #include "NFCWorldGuildDataModule.h"
+#include "NFCWorldGuildBroadcastModule.h"
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
@@ -41,12 +42,14 @@ void NFWorldGuildPlugin::Install()
 
     REGISTER_MODULE(pPluginManager, NFCWorldGuildModule)
     REGISTER_MODULE(pPluginManager, NFCWorldGuildDataModule)
+    REGISTER_MODULE(pPluginManager, NFCWorldGuildBroadcastModule)
 
 
 }
 
 void NFWorldGuildPlugin::Uninstall()
 {
+    UNREGISTER_MODULE(pPluginManager, NFCWorldGuildBroadcastModule)
     UNREGISTER_MODULE(pPluginManager, NFCWorldGuildDataModule)
     UNREGISTER_MODULE(pPluginManager, NFCWorldGuildModule)
 }
