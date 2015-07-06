@@ -48,7 +48,6 @@ public:
 	virtual bool GetGuildMemberInfo(const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember);
 
 protected:
-
     bool CheckPower(const NFIDENTID& self, const NFIDENTID& xGuildID, int nPowerType);
 
 protected:
