@@ -499,6 +499,13 @@ int NFCGameServerToWorldModule::OnAckCreateGuildProcess( const NFIPacket& msg )
 
     m_pGameServerNet_ServerModule->SendMsgPBToGate(msg.GetMsgHead()->GetMsgID(), xData, nPlayerID);
 
+    //
+    NFMsg::ReqAckJoinGuild xJoinMsg;
+    *xJoinMsg.mutable_guild_id() = NFINetModule::NFToPB(xGuild);
+    xJoinMsg.set_guild_name(xData.guild_name());
+
+    SendSuitByPB(xGuild.nData64, NFMsg::EGameMsgID::EGMI_REQ_JOIN_GUILD, xJoinMsg, 0, nPlayerID);
+
     return 0;
 }
 
@@ -580,6 +587,8 @@ int NFCGameServerToWorldModule::TransPBToProxy( const NFIPacket& msg )
     }
 
     m_pGameServerNet_ServerModule->SendMsgPBToGate(msg.GetMsgHead()->GetMsgID(), strData, nPlayerID);
+
+    return 0;
 }
 
 // template<class TPBClass> 

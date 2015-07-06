@@ -29,10 +29,7 @@ public:
     virtual bool GetOnlineMember(const NFIDENTID& self, const NFIDENTID& xGuild, NFCDataList& varMemberList, NFCDataList& varGameList) = 0;
     virtual bool MemberOnline(const NFIDENTID& self, const NFIDENTID& xGuild, const int& nGameID) = 0;
     virtual bool MemberOffeline(const NFIDENTID& self, const NFIDENTID& xGuild) = 0;
-    
-    virtual bool GetGuildID(const NFIDENTID& self, NFIDENTID& xGuild) = 0;
 
-protected:
 private:
 };
 

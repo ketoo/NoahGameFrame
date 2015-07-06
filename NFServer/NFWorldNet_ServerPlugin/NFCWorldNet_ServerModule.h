@@ -46,9 +46,14 @@ public:
 	virtual void LogSend(const char* str){}
 
     virtual bool SendMsgToGame(const int nGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer = NFIDENTID());
-    virtual bool GetGameID(const NFIDENTID& self, int& nGameID);
-
+    virtual bool SendMsgToGame( const NFIDataList& argObjectVar, const NFIDataList& argGameID,  const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData);
     virtual bool SendMsgToPlayer( const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer);
+
+    virtual int OnObjectListEnter( const NFIDataList& self, const NFIDataList& argVar );
+    virtual int OnObjectListLeave( const NFIDataList& self, const NFIDataList& argVar );
+    virtual int OnPropertyEnter( const NFIDataList& argVar, const NFIDataList& argGameID, const NFIDENTID& self );
+    virtual int OnRecordEnter( const NFIDataList& argVar,const NFIDataList& argGameID, const NFIDENTID& self );
+
 protected:
 
 	int OnRecivePack(const NFIPacket& msg);
@@ -59,15 +64,11 @@ protected:
 	//спа╛╫с
 	void OnClientConnected(const int nAddress);
 
-    int OnRecordCommonEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar );
-    int OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar);
+    bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase* pObjectRecordBase);
+
 
 protected:
-
     int OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
-    int OnShowStringEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
-    int OnShowRecordEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
-    int OnShowPropertyEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
 
 protected:
 
@@ -90,22 +91,15 @@ protected:
 	//////////////////////////////////////////////////////////////////////////
 	void LogGameServer(const float fLastTime);
 
-    void ShowString(const NFIDENTID& self, const int nResultID);
-
-    void SendPropertyToPlayer(const NFIDENTID& self, const NFIDENTID& xPlayer);
-    void SendRecordToPlayer(const NFIDENTID& self, const NFIDENTID& xPlayer, const std::string& strRecordName, const int nRow = -1);
-
 protected:
-
-	void OnCrateGuildProcess(const NFIPacket& msg);
+	void OnCreateGuildProcess(const NFIPacket& msg);
 	void OnJoinGuildProcess(const NFIPacket& msg);
 	void OnLeaveGuildProcess(const NFIPacket& msg);
 	void OnOprGuildMemberProcess(const NFIPacket& msg);
     void OnSearchGuildProcess(const NFIPacket& msg);
-    void OnOnline(const NFIPacket& msg);
-    void OnOffline(const NFIPacket& msg);
-    int OnObjectListEnter( const NFIDataList& self, const NFIDataList& argVar );
-    int OnObjectListLeave( const NFIDataList& self, const NFIDataList& argVar );
+    void OnOnlineProcess(const NFIPacket& msg);
+    void OnOfflineProcess(const NFIPacket& msg);
+    
 private:
 
     struct ServerData
