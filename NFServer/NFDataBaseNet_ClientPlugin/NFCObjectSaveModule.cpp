@@ -31,10 +31,12 @@ bool NFCObjectSaveModule::AfterInit()
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pClusterSQLModule = dynamic_cast<NFIClusterModule*>( pPluginManager->FindModule( "NFCMysqlClusterModule" ) );
     m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>( pPluginManager->FindModule( "NFCLogicClassModule" ) );
+    m_pLogModule = dynamic_cast<NFILogModule*>( pPluginManager->FindModule( "NFCLogModule" ) );
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pClusterSQLModule);
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pLogicClassModule);
+    assert(NULL != m_pLogModule);
 
     // Log
 
@@ -258,7 +260,14 @@ const bool NFCObjectSaveModule::AttachData( const NFIDENTID& self )
             if (pValue)
             {
                 const std::string& strData = *pValue;
-                xProperty->FromString(strData);
+                if (!xProperty->FromString(strData))
+                {
+                    m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "Load Property fail " + strName , ": " + strData, __FUNCTION__, __LINE__);
+                }
+                else
+                {
+                    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "Load Property success " + strName, ": " + strData, __FUNCTION__, __LINE__);
+                }
             }
         }
 
