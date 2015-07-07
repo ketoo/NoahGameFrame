@@ -193,7 +193,7 @@ bool NFCWorldGuildDataModule::GetPlayerGuild( const NFIDENTID& self, NFIDENTID& 
     std::vector<std::string> vValueVec;
     vFieldVec.push_back("GuildID");
 
-    if (!m_pClusterSQLModule->Query(self.ToString(), vFieldVec, vValueVec))
+    if (!m_pClusterSQLModule->Query("Player", self.ToString(), vFieldVec, vValueVec))
     {
         return false;
     }
@@ -290,7 +290,7 @@ bool NFCWorldGuildDataModule::GetPlayerInfo( const NFIDENTID& self, std::string&
     vFieldVec.push_back("Level");
     vFieldVec.push_back("Job");
 
-    if (!m_pClusterSQLModule->Query( self.ToString(), vFieldVec, vValueVec))
+    if (!m_pClusterSQLModule->Query( "Player", self.ToString(), vFieldVec, vValueVec))
     {
         return false;
     }
