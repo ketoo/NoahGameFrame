@@ -113,13 +113,14 @@ enum GuildMemberList_RecordColType {
   GuildMemberList_Donation = 4,
   GuildMemberList_Receive = 5,
   GuildMemberList_VIP = 6,
-  GuildMemberList_Offline = 7,
+  GuildMemberList_Online = 7,
   GuildMemberList_Power = 8,
-  GuildMemberList_Title = 9
+  GuildMemberList_Title = 9,
+  GuildMemberList_GameID = 10
 };
 bool GuildMemberList_RecordColType_IsValid(int value);
 const GuildMemberList_RecordColType GuildMemberList_RecordColType_MIN = GuildMemberList_GUID;
-const GuildMemberList_RecordColType GuildMemberList_RecordColType_MAX = GuildMemberList_Title;
+const GuildMemberList_RecordColType GuildMemberList_RecordColType_MAX = GuildMemberList_GameID;
 const int GuildMemberList_RecordColType_ARRAYSIZE = GuildMemberList_RecordColType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* GuildMemberList_RecordColType_descriptor();

@@ -163,13 +163,13 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, co
     int nRow = xEventData.nRow;
     int nCol = xEventData.nCol;
 
-    NFCDataList valueBroadCaseList;
-    NFCDataList valueBroadCaseGameList;
     if ( "Guild" != m_pKernelModule->GetPropertyString( self, "ClassName" ))
     {
         return 0;
     }
 
+    NFCDataList valueBroadCaseList;
+    NFCDataList valueBroadCaseGameList;
     if (!m_pWorldGuildModule->GetOnlineMember(NFIDENTID(), self, valueBroadCaseList, valueBroadCaseGameList))
     {
         return 0;
@@ -270,6 +270,25 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, co
         break;
     case NFIRecord::RecordOptype::Del:
         {
+            const int nCol = xEventData.nCol;
+            NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, strRecordName);
+            if (pRecord && strRecordName == "GuildMemberList")
+            {
+                //add
+                const NFIDENTID& nPlayer = pRecord->GetObject(nRow, NFMsg::GuildMemberList_GUID);
+                NFINT64 nGameID = pRecord->GetInt(nRow, NFMsg::GuildMemberList_GameID);
+
+                NFCDataList varSelf;
+                NFCDataList varGameID;
+
+                varSelf << nPlayer;
+                varGameID << nGameID;
+
+                NFCDataList varObject;
+                varObject << self;
+                m_pWorldNet_ServerModule->OnObjectListLeave(varSelf, varObject);
+            }
+
             NFMsg::ObjectRecordRemove xReoveRecordRow;
 
             NFMsg::Ident* pIdent = xReoveRecordRow.mutable_player_id();
@@ -303,11 +322,11 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, co
             NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, strRecordName);
             if (pRecord && strRecordName == "GuildMemberList")
             {
-                if (nCol == NFMsg::GuildMemberList_Offline && newVar.Int( 0 ) > 0)
+                if (nCol == NFMsg::GuildMemberList_Online && newVar.Int( 0 ) > 0)
                 {
                     //add
-                    NFIDENTID& nPlayer = pRecord->GetObject(nRow, "GUID");
-                    NFINT64 nGameID = pRecord->GetInt(nRow, "GameID");
+                    const NFIDENTID& nPlayer = pRecord->GetObject(nRow, NFMsg::GuildMemberList_GUID);
+                    NFINT64 nGameID = pRecord->GetInt(nRow, NFMsg::GuildMemberList_GameID);
 
                     NFCDataList varSelf;
                     NFCDataList varGameID;
