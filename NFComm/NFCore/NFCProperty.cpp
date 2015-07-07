@@ -642,7 +642,9 @@ bool NFCProperty::FromString( const std::string& strData )
     case TDATA_OBJECT:
         {
             NFIDENTID xID;
+            
             bRet = xID.FromString(strData);           
+            SetObject(xID);
         }
         break;
     default:

@@ -97,8 +97,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\NFComm\NFPluginModule\NFIWorldGuildBroadcastModule.h" />
-    <ClInclude Include="..\..\NFComm\NFPluginModule\NFIWorldGuildDataModule.h" />
     <ClInclude Include="NFCWorldGuildBroadcastModule.h" />
     <ClInclude Include="NFCWorldGuildDataModule.h" />
     <ClInclude Include="NFCWorldGuildModule.h" />
