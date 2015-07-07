@@ -16,6 +16,7 @@
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFCObjectSaveModule : public NFIObjectSaveModule
 {
@@ -46,7 +47,7 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIClusterModule* m_pClusterSQLModule;
     NFILogicClassModule* m_pLogicClassModule;
-
+    NFILogModule* m_pLogModule;
     NFMapEx<NFIDENTID, NFMapEx<std::string, std::string> > mtObjectCache;
 };
 

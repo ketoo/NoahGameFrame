@@ -519,7 +519,10 @@ int NFCGameServerToWorldModule::OnAckJoinGuildProcess( const NFIPacket& msg )
     }
 
 	NFIDENTID xGuild = NFINetModule::PBToNF(xData.guild_id());
-    m_pKernelModule->SetPropertyObject(nPlayerID, "GuildID", xGuild);
+    if (!xGuild.IsNull())
+    {
+        m_pKernelModule->SetPropertyObject(nPlayerID, "GuildID", xGuild);
+    }
 
     m_pGameServerNet_ServerModule->SendMsgPBToGate(msg.GetMsgHead()->GetMsgID(), xData, nPlayerID);
     return 0;
