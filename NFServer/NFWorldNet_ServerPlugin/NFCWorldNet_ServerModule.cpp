@@ -766,7 +766,7 @@ int NFCWorldNet_ServerModule::OnObjectListLeave( const NFIDataList& self, const 
             continue;
         }
         //可能在不同的网关呢,得到后者所在的网关FD
-        SendMsgToPlayer(NFMsg::EGMI_ACK_OBJECT_ENTRY, xPlayerLeaveInfoList, ident);
+        SendMsgToPlayer(NFMsg::EGMI_ACK_OBJECT_LEAVE, xPlayerLeaveInfoList, ident);
     }
 
     return 1;
