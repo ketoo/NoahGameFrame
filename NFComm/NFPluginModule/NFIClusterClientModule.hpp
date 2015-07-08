@@ -53,7 +53,8 @@ public:
         mxTempNetList.push_back(xInfo);
     }
 
-    void SendByServerID(const int nServerID, const std::string& strData)
+	//裸数据,发时组包
+    void SendByServerID(const int nServerID, const int nMsgID, const std::string& strData)
     {
         NF_SHARE_PTR<ServerData> pServer = mxServerMap.GetElement(nServerID);
         if (pServer)
@@ -61,12 +62,13 @@ public:
             NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
             if (pNetModule.get())
             {
-                pNetModule->SendMsg(strData, 0, false);
+                pNetModule->SendMsg(nMsgID, strData, 0);
             }
         }
     }
 
-	void SendToAllServer(const std::string& strData)
+	//裸数据,发时组包
+	void SendToAllServer(const int nMsgID, const std::string& strData)
 	{
 		NF_SHARE_PTR<ServerData> pServer = mxServerMap.First();
 		while (pServer)
@@ -74,7 +76,7 @@ public:
 			NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
 			if (pNetModule.get())
 			{
-				pNetModule->SendMsg(strData, 0, false);
+				pNetModule->SendMsg(nMsgID, strData, 0);
 			}
 
 			pServer = mxServerMap.Next();
@@ -89,12 +91,12 @@ public:
 			NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
 			if (pNetModule.get())
 			{
-				pNetModule->SendMsgPB(nMsgID, xData, nSockIndex, nPlayer, pClientIDList, bBroadcast);
+				pNetModule->SendMsgPB(nMsgID, xData, nSockIndex, nPlayer, pClientIDList);
 			}
 		}
 	}
 
-    void SendByServerID(const int nServerID,const NFIPacket& msg, const int nSockIndex = 0, bool bBroadcast = false)
+    void SendByServerID(const int nServerID,const NFIPacket& msg)
     {
         NF_SHARE_PTR<ServerData> pServer = mxServerMap.GetElement(nServerID);
         if (pServer)
@@ -102,12 +104,12 @@ public:
             NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
             if (pNetModule.get())
             {
-                pNetModule->GetNet()->SendMsg(msg, nSockIndex, bBroadcast);
+                pNetModule->GetNet()->SendMsg(msg, 0);
             }
         }
     }
 
-	void SendToAllServerByPB(const uint16_t nMsgID, google::protobuf::Message& xData, const int nSockIndex = 0, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<NFIDENTID>* pClientIDList = NULL, bool bBroadcast = false)
+	void SendToAllServerByPB(const uint16_t nMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<NFIDENTID>* pClientIDList = NULL)
 	{
 		NF_SHARE_PTR<ServerData> pServer = mxServerMap.First();
 		while (pServer)
@@ -115,7 +117,7 @@ public:
 			NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
 			if (pNetModule.get())
 			{
-				pNetModule->SendMsgPB(nMsgID, xData, nSockIndex, nPlayer, pClientIDList, bBroadcast);
+				pNetModule->SendMsgPB(nMsgID, xData, 0, nPlayer, pClientIDList);
 			}
 
 			pServer = mxServerMap.Next();
@@ -123,7 +125,7 @@ public:
 
 	}
 
-    void SendBySuit(const int& nHashKey, const std::string& strData)
+    void SendBySuit(const int& nHashKey, const int nMsgID, const std::string& strData)
     {
         if (mxConsistentHash.Size() <= 0)
         {
@@ -136,10 +138,10 @@ public:
             return ;
         }
 
-        SendByServerID(xNode.nMachineID, strData);
+        SendByServerID(nMsgID, xNode.nMachineID, strData);
     }
 
-    void SendBySuit(const int& nHashKey, const NFIPacket& msg, const int nSockIndex = 0, bool bBroadcast = false)
+    void SendBySuit(const int& nHashKey, const NFIPacket& msg)
     {
         if (mxConsistentHash.Size() <= 0)
         {
@@ -147,15 +149,15 @@ public:
         }
 
         NFCMachineNode xNode;
-        if (!GetServerMachineData(boost::lexical_cast<std::string> (nHashKey), xNode))
+        if (!GetServerMachineData(boost::lexical_cast<std::string>(nHashKey), xNode))
         {
             return ;
         }
 
-        SendByServerID(xNode.nMachineID, msg, nSockIndex, bBroadcast);
+        SendByServerID(xNode.nMachineID, msg);
     }
 
-	void SendSuitByPB(const int& nHashKey, const uint16_t nMsgID, google::protobuf::Message& xData, const int nSockIndex = 0, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<NFIDENTID>* pClientIDList = NULL, bool bBroadcast = false)
+	void SendSuitByPB(const int& nHashKey, const uint16_t nMsgID, google::protobuf::Message& xData, const int nSockIndex = 0, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<NFIDENTID>* pClientIDList = NULL)
 	{
 		if (mxConsistentHash.Size() <= 0)
 		{
@@ -168,10 +170,10 @@ public:
 			return ;
 		}
 
-		SendToServerByPB(xNode.nMachineID, nMsgID, xData, nSockIndex, nPlayer, pClientIDList, bBroadcast);
+		SendToServerByPB(xNode.nMachineID, nMsgID, xData, nSockIndex, nPlayer, pClientIDList);
 	}
 
-	void SendSuitByPB(const uint16_t nMsgID, google::protobuf::Message& xData, const int nSockIndex = 0, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<NFIDENTID>* pClientIDList = NULL, bool bBroadcast = false)
+	void SendSuitByPB(const uint16_t nMsgID, google::protobuf::Message& xData, const int nSockIndex = 0, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<NFIDENTID>* pClientIDList = NULL)
 	{
 		if (mxConsistentHash.Size() <= 0)
 		{
@@ -180,7 +182,17 @@ public:
 
 		const int nHashKey = 0;
 
-		SendSuitByPB(nHashKey, nMsgID, xData, nSockIndex, nPlayer, pClientIDList, bBroadcast);
+		SendSuitByPB(nHashKey, nMsgID, xData, nSockIndex, nPlayer, pClientIDList);
+	}
+
+	NF_SHARE_PTR<ServerData> GetServerNetInfo(const int nServerID)
+	{
+		return mxServerMap.GetElement(nServerID);
+	}
+
+	NFMapEx<int, ServerData>& GetServerList()
+	{
+		return mxServerMap;
 	}
 
 protected:  
@@ -207,10 +219,38 @@ protected:
         ProcessAddNetConnect();
         return true;
     }
-		
+
+	NF_SHARE_PTR<ServerData> GetServerNetInfo(const NFINet* pNet)
+	{
+		int nServerID = 0;
+		for (NF_SHARE_PTR<ServerData> pData = mxServerMap.First(nServerID); pData != NULL; pData = mxServerMap.Next(nServerID))
+		{
+			if (pData->mxNetModule.get() && pNet == pData->mxNetModule->GetNet())
+			{
+				return pData;
+			}
+		}
+
+		return NF_SHARE_PTR<ServerData> (NULL);
+	}
+
 	virtual void KeepReport(ServerData* pServerData){};
+	virtual void LogServerInfo(const std::string& strServerInfo){};
 
 private:
+	virtual void LogServerInfo()
+	{
+		ServerData* pServerData = mxServerMap.FirstNude();
+		while (pServerData)
+		{
+			std::ostringstream stream;
+			stream << "Type: " << pServerData->eServerType << " ProxyServer ID: " << pServerData->nGameID << " State: " <<  NFMsg::EServerState_Name(pServerData->eState) << " IP: " << pServerData->strIP << " Port: " << pServerData->nPort;
+
+			LogServerInfo(stream.str());
+
+			pServerData = mxServerMap.NextNude();
+		}
+	};
 
 	void KeepState(ServerData* pServerData, const float fLastFrametime, const float fStartedTime)
 	{
@@ -223,6 +263,7 @@ private:
 		pServerData->mfLastReportTime = 0.0f;
 
 		KeepReport(pServerData);
+		LogServerInfo();
 	}
 
 	int OnSocketEvent(const int fd, const NF_NET_EVENT eEvent, NFINet* pNet)
@@ -370,20 +411,6 @@ private:
             vNode.nWeight = EConstDefine_DefaultWeith;
             mxConsistentHash.Erase(vNode);
         }
-    }
-
-    NF_SHARE_PTR<ServerData> GetServerNetInfo(const NFINet* pNet)
-    {
-        int nServerID = 0;
-        for (NF_SHARE_PTR<ServerData> pData = mxServerMap.First(nServerID); pData != NULL; pData = mxServerMap.Next(nServerID))
-        {
-            if (pData->mxNetModule.get() && pNet == pData->mxNetModule->GetNet())
-            {
-                return pData;
-            }
-        }
-
-        return NF_SHARE_PTR<ServerData> (NULL);
     }
 
 private:
