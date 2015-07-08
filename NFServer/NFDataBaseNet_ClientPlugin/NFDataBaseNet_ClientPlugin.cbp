@@ -31,6 +31,9 @@
 					<Add directory="$(SolutionDir)/Dependencies/mysql/" />
 				</Compiler>
 				<Linker>
+					<Add library="../../_Out/Comm/Debug/NFCore_d.a" />
+					<Add library="../../_Out/Comm/Debug/NFMessageDefine_d.a" />
+					<Add library="../../Dependencies/lib/Debug/libprotobuf.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
@@ -93,6 +96,8 @@
 		</Build>
 		<Unit filename="NFCDataBaseNet_ClientModule.cpp" />
 		<Unit filename="NFCDataBaseNet_ClientModule.h" />
+		<Unit filename="NFCObjectSaveModule.cpp" />
+		<Unit filename="NFCObjectSaveModule.h" />
 		<Unit filename="NFDataBaseNet_ClientPlugin.cpp" />
 		<Unit filename="NFDataBaseNet_ClientPlugin.h" />
 		<Unit filename="dllmain.cpp" />
