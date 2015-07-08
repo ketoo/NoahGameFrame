@@ -9,6 +9,7 @@
 //#include "stdafx.h"
 #include "NFCWorldNet_ServerModule.h"
 #include "NFWorldNet_ServerPlugin.h"
+#include "NFComm\NFMessageDefine\NFMsgPreGame.pb.h"
 
 bool NFCWorldNet_ServerModule::Init()
 {
@@ -463,7 +464,10 @@ void NFCWorldNet_ServerModule::LogGameServer(const float fLastTime)
 	NF_SHARE_PTR<ServerData> pGameData = mGameMap.First();
 	while (pGameData)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "GameServer:", pGameData->pData->server_state());
+		std::ostringstream stream;
+		stream << "Type: " << pGameData->pData->server_type() << " ID: " << pGameData->pData->server_id() << " State: " <<  NFMsg::EServerState_Name(pGameData->pData->server_state()) << " IP: " << pGameData->pData->server_ip() << " FD: " << pGameData->nFD;
+
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), stream);
 
 		pGameData = mGameMap.Next();
 	}
@@ -475,7 +479,10 @@ void NFCWorldNet_ServerModule::LogGameServer(const float fLastTime)
 	pGameData = mProxyMap.First();
 	while (pGameData)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "ProxyServer:", pGameData->pData->server_state());
+		std::ostringstream stream;
+		stream << "Type: " << pGameData->pData->server_type() << " ID: " << pGameData->pData->server_id() << " State: " <<  NFMsg::EServerState_Name(pGameData->pData->server_state()) << " IP: " << pGameData->pData->server_ip() << " FD: " << pGameData->nFD;
+		
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), stream);
 
 		pGameData = mProxyMap.Next();
 	}

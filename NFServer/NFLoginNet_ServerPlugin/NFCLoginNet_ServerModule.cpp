@@ -310,19 +310,20 @@ void NFCLoginNet_ServerModule::SynWorldToClient( const int nFD )
     NFMsg::AckServerList xData;
     xData.set_type(NFMsg::RSLT_WORLD_SERVER);
 
-    NFMapEx<int, NFMsg::ServerInfoReport>* pWorldMap = m_pLoginToMasterModule->GetWorldMap();
-    NF_SHARE_PTR<NFMsg::ServerInfoReport> pWorldData =  pWorldMap->First();
-    while (pWorldData.get())
-    {
-        NFMsg::ServerInfo* pServerInfo = xData.add_info();
+    NFMapEx<int, NFMsg::ServerInfoReport>& xWorldMap = m_pLoginToMasterModule->GetWorldMap();
+	NFMsg::ServerInfoReport* pWorldData =  xWorldMap.FirstNude();
+	while (pWorldData)
+	{
+		NFMsg::ServerInfo* pServerInfo = xData.add_info();
 
-        pServerInfo->set_name(pWorldData->server_name());
-        pServerInfo->set_status(pWorldData->server_state());
-        pServerInfo->set_server_id(pWorldData->server_id());
-        pServerInfo->set_wait_count(0);
+		pServerInfo->set_name(pWorldData->server_name());
+		pServerInfo->set_status(pWorldData->server_state());
+		pServerInfo->set_server_id(pWorldData->server_id());
+		pServerInfo->set_wait_count(0);
 
-        pWorldData = pWorldMap->Next();
-    }
+		pWorldData = xWorldMap.NextNude();
+	}
+    
 
     SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_WORLD_LIST, xData, nFD);
 }
