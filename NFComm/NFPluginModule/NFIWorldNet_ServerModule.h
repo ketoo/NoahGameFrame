@@ -14,6 +14,7 @@
 #include "NFComm/NFNet/NFIPacket.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
+
 class NFIWorldNet_ServerModule
     : public NFINetModule
 {
