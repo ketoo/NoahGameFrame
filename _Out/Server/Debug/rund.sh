@@ -5,7 +5,6 @@ cp -a ../../Comm/Debug/NFPluginLoader_d ./NFGameServer1/NFGameServer_d
 cp -a ../../Comm/Debug/NFPluginLoader_d ./NFProxyServer1/NFProxyServer_d
 
 export LC_ALL="C"
-export LD_LIBRARY_PATH="../../Comm/Debug/"
 
 cd ./NFMasterServer
 chmod -R 777  NFMasterServer_d
