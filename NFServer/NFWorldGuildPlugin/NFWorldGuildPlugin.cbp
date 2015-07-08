@@ -38,7 +38,7 @@
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc/" />
 				</Linker>
 				<ExtraCommands>
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFWorldLogicPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFWorldServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFWorldGuildPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFWorldServer/" />
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
@@ -76,7 +76,7 @@
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc/" />
 				</Linker>
 				<ExtraCommands>
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFWorldLogicPlugin.so $(SolutionDir)/_Out/Server/Release/NFWorldServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFWorldGuildPlugin.so $(SolutionDir)/_Out/Server/Release/NFWorldServer/" />
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
@@ -85,6 +85,8 @@
 			</Target>
 		</Build>
 		<Unit filename="../../NFComm/NFPluginModule/NFIWorldGuildDataModule.h" />
+		<Unit filename="NFCWorldGuildBroadcastModule.cpp" />
+		<Unit filename="NFCWorldGuildBroadcastModule.h" />
 		<Unit filename="NFCWorldGuildDataModule.cpp" />
 		<Unit filename="NFCWorldGuildDataModule.h" />
 		<Unit filename="NFCWorldGuildModule.cpp" />
