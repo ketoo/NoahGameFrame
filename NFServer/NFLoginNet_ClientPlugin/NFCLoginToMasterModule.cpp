@@ -81,11 +81,6 @@ bool NFCLoginToMasterModule::AfterInit()
 
 bool NFCLoginToMasterModule::BeforeShut()
 {
-    UnRegister();
-
-// 	m_pNet->Final();
-//     delete m_pNet;
-// 	m_pNet = NULL;
 
     return false;
 }
@@ -120,7 +115,7 @@ bool NFCLoginToMasterModule::Execute(const float fLasFrametime, const float fSta
 	return NFIClusterClientModule::Execute(fLasFrametime, fStartedTime);
 }
 
-void NFCLoginToMasterModule::Register()
+void NFCLoginToMasterModule::Register(NFINet* pNet)
 {
 	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
 	if (xLogicClass.get())
@@ -149,48 +144,16 @@ void NFCLoginToMasterModule::Register()
 				pData->set_server_port(nPort);
 				pData->set_server_max_online(nMaxConnect);
 				pData->set_server_state(NFMsg::EST_NARMAL);
+				pData->set_server_type(nServerType);
 
-				SendToAllServerByPB(NFMsg::EGameMsgID::EGMI_LTM_LOGIN_REGISTERED, xMsg);
+				NF_SHARE_PTR<ServerData> pServerData = GetServerNetInfo(pNet);
+				if (pServerData)
+				{
+					int nTargetID = pServerData->nGameID;
+					SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_LTM_LOGIN_REGISTERED, xMsg);
 
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
-			}
-		}
-	}
-}
-
-void NFCLoginToMasterModule::UnRegister()
-{
-	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
-	if (xLogicClass.get())
-	{
-		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
-		std::string strConfigName; 
-		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
-		{
-			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
-            const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
-			if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN && pPluginManager->AppID() == nServerID)
-			{				
-				const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
-				const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
-				const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
-				const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
-				const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
-
-				NFMsg::ServerInfoReportList xMsg;
-				NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
-
-				pData->set_server_id(nServerID);
-				pData->set_server_name(strName);
-				pData->set_server_cur_count(0);
-				pData->set_server_ip(strIP);
-				pData->set_server_port(nPort);
-				pData->set_server_max_online(nMaxConnect);
-				pData->set_server_state(NFMsg::EST_MAINTEN);
-
-				SendToAllServerByPB(NFMsg::EGameMsgID::EGMI_LTM_LOGIN_UNREGISTERED, xMsg);
-
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "UnRegister");
+					m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
+				}
 			}
 		}
 	}
@@ -256,7 +219,7 @@ int NFCLoginToMasterModule::OnSocketMSEvent( const int nSockIndex, const NF_NET_
     else  if (eEvent == NF_NET_EVENT_CONNECTED)
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
-        Register();
+        Register(pNet);
     }
 
 	return 0;
@@ -292,7 +255,7 @@ int NFCLoginToMasterModule::OnWorldInfoProcess( const NFIPacket& msg )
 	return 0;
 }
 
-NFMapEx<int, NFMsg::ServerInfoReport>* NFCLoginToMasterModule::GetWorldMap()
+NFMapEx<int, NFMsg::ServerInfoReport>& NFCLoginToMasterModule::GetWorldMap()
 {
-    return &mWorldMap;
+    return mWorldMap;
 }
