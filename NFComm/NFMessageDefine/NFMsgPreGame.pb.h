@@ -215,6 +215,13 @@ class ServerInfoReport : public ::google::protobuf::Message {
   inline ::NFMsg::EServerState server_state() const;
   inline void set_server_state(::NFMsg::EServerState value);
 
+  // required int32 server_type = 8;
+  inline bool has_server_type() const;
+  inline void clear_server_type();
+  static const int kServerTypeFieldNumber = 8;
+  inline ::google::protobuf::int32 server_type() const;
+  inline void set_server_type(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ServerInfoReport)
  private:
   inline void set_has_server_id();
@@ -231,6 +238,8 @@ class ServerInfoReport : public ::google::protobuf::Message {
   inline void clear_has_server_cur_count();
   inline void set_has_server_state();
   inline void clear_has_server_state();
+  inline void set_has_server_type();
+  inline void clear_has_server_type();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -241,9 +250,10 @@ class ServerInfoReport : public ::google::protobuf::Message {
   ::google::protobuf::int32 server_max_online_;
   ::google::protobuf::int32 server_cur_count_;
   int server_state_;
+  ::google::protobuf::int32 server_type_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
@@ -2756,6 +2766,28 @@ inline void ServerInfoReport::set_server_state(::NFMsg::EServerState value) {
   assert(::NFMsg::EServerState_IsValid(value));
   set_has_server_state();
   server_state_ = value;
+}
+
+// required int32 server_type = 8;
+inline bool ServerInfoReport::has_server_type() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void ServerInfoReport::set_has_server_type() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void ServerInfoReport::clear_has_server_type() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void ServerInfoReport::clear_server_type() {
+  server_type_ = 0;
+  clear_has_server_type();
+}
+inline ::google::protobuf::int32 ServerInfoReport::server_type() const {
+  return server_type_;
+}
+inline void ServerInfoReport::set_server_type(::google::protobuf::int32 value) {
+  set_has_server_type();
+  server_type_ = value;
 }
 
 // -------------------------------------------------------------------
