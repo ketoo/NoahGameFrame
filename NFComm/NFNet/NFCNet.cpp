@@ -265,54 +265,78 @@ bool NFCNet::Final()
     return true;
 }
 
-bool NFCNet::SendMsg( const NFIPacket& msg, const int nSockIndex, bool bBroadcast )
+bool NFCNet::SendMsg( const NFIPacket& msg, const int nSockIndex)
 {
-    return SendMsg(msg.GetPacketData(), msg.GetPacketLen(), nSockIndex, bBroadcast );
+    return SendMsg(msg.GetPacketData(), msg.GetPacketLen(), nSockIndex);
 }
 
-bool NFCNet::SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex, bool bBroadcast /*= false*/ )
+
+bool NFCNet::SendMsgToAllClient( const NFIPacket& msg )
+{
+	std::map<int, NetObject*>::iterator it = mmObject.begin();
+	for (; it != mmObject.end(); ++it)
+	{
+		NetObject* pNetObject = (NetObject*)it->second;
+		if (pNetObject && !pNetObject->GetRemoveState())
+		{
+			bufferevent* bev = pNetObject->GetBuffEvent();
+			if (NULL != bev)
+			{
+				bufferevent_write(bev, msg.GetPacketData(), msg.GetPacketLen());
+			}
+		}
+	}
+
+	return true;
+}
+
+bool NFCNet::SendMsgToAllClient( const char* msg, const uint32_t nLen )
+{
+	if (nLen <= 0)
+	{
+		return false;
+	}
+
+	std::map<int, NetObject*>::iterator it = mmObject.begin();
+	for (; it != mmObject.end(); ++it)
+	{
+		NetObject* pNetObject = (NetObject*)it->second;
+		if (pNetObject && !pNetObject->GetRemoveState())
+		{
+			bufferevent* bev = pNetObject->GetBuffEvent();
+			if (NULL != bev)
+			{
+				bufferevent_write(bev, msg, nLen);
+			}
+		}
+	}
+
+	return true;
+}
+
+
+bool NFCNet::SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex)
 {
     if (nLen <= 0)
     {
         return false;
     }
 
-    if (bBroadcast)
-    {
-        std::map<int, NetObject*>::iterator it = mmObject.begin();
-        for (; it != mmObject.end(); ++it)
-        {
-            NetObject* pNetObject = (NetObject*)it->second;
-            if (pNetObject && !pNetObject->GetRemoveState())
-            {
-                bufferevent* bev = pNetObject->GetBuffEvent();
-                if (NULL != bev)
-                {
-                    bufferevent_write(bev, msg, nLen);
-                }
-            }
-        }
+	std::map<int, NetObject*>::iterator it = mmObject.find(nSockIndex);
+	if (it != mmObject.end())
+	{
+		NetObject* pNetObject = (NetObject*)it->second;
+		if (pNetObject)
+		{
+			bufferevent* bev = pNetObject->GetBuffEvent();
+			if (NULL != bev)
+			{
+				bufferevent_write(bev, msg, nLen);
 
-        return true;
-    }
-    else
-    {
-        std::map<int, NetObject*>::iterator it = mmObject.find(nSockIndex);
-        if (it != mmObject.end())
-        {
-            NetObject* pNetObject = (NetObject*)it->second;
-            if (pNetObject)
-            {
-                bufferevent* bev = pNetObject->GetBuffEvent();
-                if (NULL != bev)
-                {
-                    bufferevent_write(bev, msg, nLen);
-
-                    return true;
-                }
-            }
-        }
-    }
+				return true;
+			}
+		}
+	}
 
     return false;
 }

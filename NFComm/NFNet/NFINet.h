@@ -244,8 +244,13 @@ public:
 	virtual  bool Final() = 0;
     virtual  bool Reset() = 0;
 
-	virtual bool SendMsg(const NFIPacket& msg, const int nSockIndex = 0, bool bBroadcast = false) = 0;
-	virtual bool SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex = 0, bool bBroadcast = false) = 0;
+	//带合法包头
+	virtual bool SendMsg(const NFIPacket& msg, const int nSockIndex = 0) = 0;
+	virtual bool SendMsgToAllClient(const NFIPacket& msg) = 0;
+
+	//数据裸发
+	virtual bool SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex = 0) = 0;
+	virtual bool SendMsgToAllClient(const char* msg, const uint32_t nLen) = 0;
 
 	virtual int OnRecivePacket(const int nSockIndex, const char* msg, const uint32_t nLen){return 1;};
 
