@@ -277,13 +277,9 @@ bool NFCMasterNet_ServerModule::AfterInit()
 
 int NFCMasterNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 {
-	//std::cout << "OnRecivePack::thread id=" << GetCurrentThreadId() << std::endl;
-
 	int nMsgID = msg.GetMsgHead()->GetMsgID();
 	switch (nMsgID)
 	{
-	case NFMsg::EGameMsgID::EGMI_UNKNOW:
-		break;
     case NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT:
         break;
 	case NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED:
@@ -437,7 +433,9 @@ void NFCMasterNet_ServerModule::LogGameServer(const float fLastTime)
 	NF_SHARE_PTR<ServerData> pGameData = mWorldMap.First();
 	while (pGameData)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "WorldServer ID = ", pGameData->pData->server_state());
+		std::ostringstream stream;
+		stream << "Type: " << pGameData->pData->server_type() << " ID: " << pGameData->pData->server_id() << " State: " <<  NFMsg::EServerState_Name(pGameData->pData->server_state()) << " IP: " << pGameData->pData->server_ip() << " FD: " << pGameData->nFD;
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), stream);
 
 		pGameData = mWorldMap.Next();
 	}
@@ -450,7 +448,9 @@ void NFCMasterNet_ServerModule::LogGameServer(const float fLastTime)
 	pGameData = mLoginMap.First();
 	while (pGameData)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "LoginServer ID = ", pGameData->pData->server_state());
+		std::ostringstream stream;
+		stream << "Type: " << pGameData->pData->server_type() << " ID: " << pGameData->pData->server_id() << " State: " <<  NFMsg::EServerState_Name(pGameData->pData->server_state()) << " IP: " << pGameData->pData->server_ip() << " FD: " << pGameData->nFD;
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), stream);
 
 		pGameData = mLoginMap.Next();
 	}
