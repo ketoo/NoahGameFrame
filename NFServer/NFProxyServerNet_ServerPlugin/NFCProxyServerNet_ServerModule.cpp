@@ -153,10 +153,6 @@ int NFCProxyServerNet_ServerModule::OnReciveClientPack( const NFIPacket& msg )
 
 				return 0;
 			}
-//             if (!VerifyProtocol(msg, msg.GetFd()))
-//             {
-//                 break;
-//             }
 
             NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
             if (!pNetObject || pNetObject->GetConnectKeyState() <= 0 || pNetObject->GetGameID() <= 0)
