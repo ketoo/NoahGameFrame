@@ -102,7 +102,6 @@ int NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const NFIPacket& msg)
 
             NFMsg::AckEventResult xSendMsg;
             xSendMsg.set_event_code(NFMsg::EGEC_VERIFY_KEY_SUCCESS);
-            //*xSendMsg.mutable_event_object() = msg.GetFd();//让前端记得自己的fd，后面有一些验证
             *xSendMsg.mutable_event_client() = NFToPB(pNetObject->GetClientID());//让前端记得自己的fd，后面有一些验证
 
             SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_KEY, xSendMsg, msg.GetFd());
@@ -370,7 +369,7 @@ int NFCProxyServerNet_ServerModule::OnReqRoleListProcess( const NFIPacket& msg )
         return 0;
     }
 
-	NF_SHARE_PTR<ServerData> pServerData = m_pProxyToWorldModule->GetServerNetInfo(xData.game_id());
+	NF_SHARE_PTR<ServerData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xData.game_id());
     if (NULL != pServerData
 		&& pServerData->eState != NFMsg::EST_CRASH
 		&& pServerData->eState != NFMsg::EST_MAINTEN)
@@ -424,7 +423,7 @@ int NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess( const NFIPacket& msg
         return 0;
     }
 
-	NF_SHARE_PTR<ServerData> pServerData = m_pProxyToWorldModule->GetServerNetInfo(xData.game_id());
+	NF_SHARE_PTR<ServerData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xData.game_id());
 	if (NULL != pServerData
 		&& pServerData->eState != NFMsg::EST_CRASH
 		&& pServerData->eState != NFMsg::EST_MAINTEN)
@@ -476,7 +475,7 @@ int NFCProxyServerNet_ServerModule::OnReqDelRoleProcess( const NFIPacket& msg )
         return 0;
     }
 
-	NF_SHARE_PTR<ServerData> pServerData = m_pProxyToWorldModule->GetServerNetInfo(xData.game_id());
+	NF_SHARE_PTR<ServerData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xData.game_id());
 	if (NULL != pServerData
 		&& pServerData->eState != NFMsg::EST_CRASH
 		&& pServerData->eState != NFMsg::EST_MAINTEN)
@@ -505,7 +504,7 @@ int NFCProxyServerNet_ServerModule::OnReqEnterGameServer( const NFIPacket& msg )
         return 0;
     }
 
-	NF_SHARE_PTR<ServerData> pServerData = m_pProxyToWorldModule->GetServerNetInfo(xData.game_id());
+	NF_SHARE_PTR<ServerData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xData.game_id());
 	if (NULL != pServerData
 		&& pServerData->eState != NFMsg::EST_CRASH
 		&& pServerData->eState != NFMsg::EST_MAINTEN)
