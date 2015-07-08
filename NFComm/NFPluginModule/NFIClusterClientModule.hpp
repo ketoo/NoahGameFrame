@@ -240,6 +240,8 @@ protected:
 private:
 	virtual void LogServerInfo()
 	{
+		LogServerInfo("This is a client, begin to Printf Server Info----------------------------------");
+
 		ServerData* pServerData = mxServerMap.FirstNude();
 		while (pServerData)
 		{
@@ -250,6 +252,8 @@ private:
 
 			pServerData = mxServerMap.NextNude();
 		}
+
+		LogServerInfo("This is a client, end to Printf Server Info----------------------------------");
 	};
 
 	void KeepState(ServerData* pServerData, const float fLastFrametime, const float fStartedTime)
