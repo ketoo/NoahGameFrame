@@ -49,10 +49,11 @@ protected:
 	void OnClientDisconnect(const int nAddress);
 	//спа╛╫с
 	void OnClientConnected(const int nAddress);
-protected:
 
-    void Register();
-    void UnRegister();
+	virtual void LogServerInfo( const std::string& strServerInfo );
+
+
+    void Register(NFINet* pNet);
     void RefreshWorldInfo();
 
     int OnSelectServerProcess(const NFIPacket& msg);
