@@ -20,7 +20,7 @@ class NFILoginToMasterModule
 
 public:
 
-    virtual NFMapEx<int, NFMsg::ServerInfoReport>* GetWorldMap() = 0;
+    virtual NFMapEx<int, NFMsg::ServerInfoReport>& GetWorldMap() = 0;
 };
 
 #endif
