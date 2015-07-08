@@ -1057,6 +1057,15 @@ class ReqAckPlayerChat : public ::google::protobuf::Message {
   inline ::std::string* release_chat_name();
   inline void set_allocated_chat_name(::std::string* chat_name);
 
+  // optional .NFMsg.Ident target_id = 5;
+  inline bool has_target_id() const;
+  inline void clear_target_id();
+  static const int kTargetIdFieldNumber = 5;
+  inline const ::NFMsg::Ident& target_id() const;
+  inline ::NFMsg::Ident* mutable_target_id();
+  inline ::NFMsg::Ident* release_target_id();
+  inline void set_allocated_target_id(::NFMsg::Ident* target_id);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckPlayerChat)
  private:
   inline void set_has_chat_id();
@@ -1067,16 +1076,19 @@ class ReqAckPlayerChat : public ::google::protobuf::Message {
   inline void clear_has_chat_info();
   inline void set_has_chat_name();
   inline void clear_has_chat_name();
+  inline void set_has_target_id();
+  inline void clear_has_target_id();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::NFMsg::Ident* chat_id_;
   ::std::string* chat_info_;
   ::std::string* chat_name_;
+  ::NFMsg::Ident* target_id_;
   int chat_type_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -4107,6 +4119,44 @@ inline void ReqAckPlayerChat::set_allocated_chat_name(::std::string* chat_name) 
   } else {
     clear_has_chat_name();
     chat_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional .NFMsg.Ident target_id = 5;
+inline bool ReqAckPlayerChat::has_target_id() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ReqAckPlayerChat::set_has_target_id() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ReqAckPlayerChat::clear_has_target_id() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ReqAckPlayerChat::clear_target_id() {
+  if (target_id_ != NULL) target_id_->::NFMsg::Ident::Clear();
+  clear_has_target_id();
+}
+inline const ::NFMsg::Ident& ReqAckPlayerChat::target_id() const {
+  return target_id_ != NULL ? *target_id_ : *default_instance_->target_id_;
+}
+inline ::NFMsg::Ident* ReqAckPlayerChat::mutable_target_id() {
+  set_has_target_id();
+  if (target_id_ == NULL) target_id_ = new ::NFMsg::Ident;
+  return target_id_;
+}
+inline ::NFMsg::Ident* ReqAckPlayerChat::release_target_id() {
+  clear_has_target_id();
+  ::NFMsg::Ident* temp = target_id_;
+  target_id_ = NULL;
+  return temp;
+}
+inline void ReqAckPlayerChat::set_allocated_target_id(::NFMsg::Ident* target_id) {
+  delete target_id_;
+  target_id_ = target_id;
+  if (target_id) {
+    set_has_target_id();
+  } else {
+    clear_has_target_id();
   }
 }
 
