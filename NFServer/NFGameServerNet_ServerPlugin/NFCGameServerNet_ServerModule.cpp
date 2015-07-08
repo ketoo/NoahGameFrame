@@ -1997,15 +1997,40 @@ void NFCGameServerNet_ServerModule::OnClienChatProcess( const NFIPacket& msg )
 {
 	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckPlayerChat)
 
-		//bc
-	int nContianerID = m_pKernelModule->GetPropertyInt(nPlayerID, "SceneID");
-	int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, "GroupID");
-	NFCDataList xDataList;
-	m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
-	for (int i = 0; i < xDataList.GetCount(); ++i)
+	switch (xMsg.chat_type())
 	{
-		SendMsgPBToGate(NFMsg::EGMI_ACK_CHAT, xMsg, xDataList.Object(i));
+	case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_WORLD:
+		{
+			SendMsgPBToAllClient(NFMsg::EGMI_ACK_CHAT, xMsg);
+		}
+		break;
+	case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_GUILD:
+		{
+			NFIDENTID xGuildID = m_pKernelModule->GetPropertyObject(nPlayerID, "GuildID");
+			if (!xGuildID.IsNull())
+			{
+				OnTransWorld(msg, xGuildID.nData64);
+			}
+		}
+		break;
+	case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_PRIVATE:
+	case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_TEAM:
+		{
+			if (xMsg.has_target_id())
+			{
+				NFIDENTID xTargetID = PBToNF(xMsg.target_id());
+				if (!xTargetID.IsNull())
+				{
+					OnTransWorld(msg, nPlayerID.nData64);
+				}
+			}
+		}
+		break;
+	default:
+		break;;
 	}
+	
+
 }
 
 void NFCGameServerNet_ServerModule::OnClientJoinPVP(const NFIPacket& msg)
