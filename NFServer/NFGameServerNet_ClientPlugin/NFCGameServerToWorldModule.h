@@ -51,8 +51,7 @@ protected:
     void OnClientConnected(const int nAddress);
 
 protected:
-    void Register();
-    void UnRegister();
+    void Register(NFINet* pNet);
     void RefreshWorldInfo();
 
     int OnLoadRoleDataBeginProcess(const NFIPacket& msg);
@@ -80,6 +79,9 @@ protected:
 //     template<class PBClass>    
 //     int TransPBToProxy(const NFIPacket& msg);
     int TransPBToProxy(const NFIPacket& msg);
+
+
+	virtual void LogServerInfo( const std::string& strServerInfo );
 
 private:
     void SendOnline(const NFIDENTID& self);

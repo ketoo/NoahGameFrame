@@ -21,6 +21,7 @@
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
+#include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
 
 class NFCProxyServerNet_ServerModule : public NFIProxyServerNet_ServerModule
 {
@@ -41,6 +42,9 @@ public:
 
     virtual int Transpond(const NFIPacket& msg);
 
+	//进入游戏成功
+	virtual int EnterGameSuccessEvent(const NFIDENTID xClientID, const NFIDENTID xPlayerID);
+
 protected:
 
 	int OnReciveClientPack(const NFIPacket& msg);
@@ -60,24 +64,16 @@ protected:
     int OnReqEnterGameServer(const NFIPacket& msg);
 
 
-    int OnTranspondProcess(const NFIPacket& msg);
-
     //客户端的连接60秒删掉
     int HB_OnConnectCheckTime( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var );
     //////////////////////////////////////////////////////////////////////////
-
-    //保存的世界服务器发过来的信息对象
-    int OnWantToConnectObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
-
-    //进入游戏成功
-    int OnEnterGameSuccessEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
-
 protected:
 
 	NFMapEx<NFIDENTID, int> mxClientIdent;
 
 protected:
-    NFIProxyServerToWorldModule* m_pProxyToWorldModule;
+	NFIProxyServerToWorldModule* m_pProxyToWorldModule;
+	NFIProxyServerToGameModule* m_pProxyServerToGameModule;
 	NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFIElementInfoModule* m_pElementInfoModule;
