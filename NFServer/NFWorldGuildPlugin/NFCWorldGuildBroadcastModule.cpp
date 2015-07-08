@@ -270,6 +270,17 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, co
         break;
     case NFIRecord::RecordOptype::Del:
         {
+            NFMsg::ObjectRecordRemove xReoveRecordRow;
+
+            NFMsg::Ident* pIdent = xReoveRecordRow.mutable_player_id();
+            *pIdent = NFINetModule::NFToPB(self);
+
+            xReoveRecordRow.set_record_name( strRecordName );
+            xReoveRecordRow.add_remove_row( nRow );
+
+            m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_REMOVE_ROW, xReoveRecordRow);
+
+
             const int nCol = xEventData.nCol;
             NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, strRecordName);
             if (pRecord && strRecordName == "GuildMemberList")
@@ -288,17 +299,6 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, co
                 varObject << self;
                 m_pWorldNet_ServerModule->OnObjectListLeave(varSelf, varObject);
             }
-
-            NFMsg::ObjectRecordRemove xReoveRecordRow;
-
-            NFMsg::Ident* pIdent = xReoveRecordRow.mutable_player_id();
-            *pIdent = NFINetModule::NFToPB(self);
-
-            xReoveRecordRow.set_record_name( strRecordName );
-            xReoveRecordRow.add_remove_row( nRow );
-
-            m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_REMOVE_ROW, xReoveRecordRow);
-
         }
         break;
     case NFIRecord::RecordOptype::Swap:
