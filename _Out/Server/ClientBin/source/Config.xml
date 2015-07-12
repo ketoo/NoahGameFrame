@@ -2,6 +2,6 @@
 
 <XML>
 	<Servers>
-		<Server ID="1" IP = "192.168.1.99" Port="16001"/>
+		<Server ID="1" IP = "127.0.0.1" Port="14001"/>
 	</Servers>
 </XML>
