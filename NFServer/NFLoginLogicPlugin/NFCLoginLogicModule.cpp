@@ -25,24 +25,33 @@ bool NFCLoginLogicModule::Shut()
 int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
 {
     if (3 != var.GetCount()
-        || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
+        || !var.TypeEx(TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
     {
         return -1;
     }
 
     //////////////////////////////////////////////////////////////////////////
-    int nAddress = var.Int(0);
+    const NFIDENTID xIdent = var.Object(0);
     const std::string& strAccount = var.String(1);
     const std::string& strPassword = var.String(2);
-    //int nState = m_pDataBaseModule->ConfirmAccountInfo(strAccount, strPassword);
-    //m_pNoSqlModule->AddAccountInfo(strAccount, strPassword);
+	int64_t nState = -1;
 
-    int nState = 0;//= m_pNoSqlModule->ConfirmAccountInfo(strAccount, strPassword);
- 
+	std::vector<std::string> xFieldVec;
+	std::vector<std::string> xValueVec;
+	xFieldVec.push_back("Password");
+
+	if (m_pClusterSqlModule->Query("AccountInfo", strAccount, xFieldVec, xValueVec)
+		&& xFieldVec.size() == xValueVec.size()
+		&& strPassword == xValueVec[0])
+	{
+		//µÇÂ¼³É¹¦
+		nState = 0;
+	}
+
     NFCDataList valEventInfo;
-    valEventInfo << nState << nAddress << strAccount;
+    valEventInfo << nState << xIdent << strAccount;
     m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_LOGIN_RESULTS, valEventInfo);
-  
+
     return 0;
 }
 
@@ -114,13 +123,11 @@ bool NFCLoginLogicModule::AfterInit()
 
     //////////////////////////////////////////////////////////////////////////
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-    //m_pNoSqlModule = dynamic_cast<NFIPlatformDataModule*>(pPluginManager->FindModule("NFCPlatformDataModule"));
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
+    m_pClusterSqlModule = dynamic_cast<NFIClusterModule*>(pPluginManager->FindModule("NFCMysqlClusterModule"));
 
 
     assert(NULL != m_pEventProcessModule);
-    //assert(NULL != m_pNoSqlModule);
-    assert(NULL != m_pKernelModule);
+    assert(NULL != m_pClusterSqlModule);
 
     //////////////////////////////////////////////////////////////////////////
     // register event calback

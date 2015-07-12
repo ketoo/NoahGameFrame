@@ -8,4 +8,5 @@
 	<Plugin Name="NFLogPlugin" Main="1"/>
 	
 	<ActorDataModule Name="NFCDataProcessModule" />
+	<APPID Name="5" />
 </XML>

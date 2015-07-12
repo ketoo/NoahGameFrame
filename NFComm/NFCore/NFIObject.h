@@ -10,7 +10,7 @@
 #define _NFI_OBJECT_H_
 
 
-#include "NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFIDataList.h"
 #include "NFIRecord.h"
 #include "NFIRecordManager.h"
@@ -30,34 +30,34 @@ public:
     virtual NFIDENTID Self() = 0;
 
     template<typename BaseType>
-    bool AddPropertyCallBack(const std::string& strPropertyName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const NFIDataList&, const NFIDataList&, const NFIDataList&))
+    bool AddPropertyCallBack(const std::string& strPropertyName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const NFIDataList&, const NFIDataList&))
     {
-        PROPERTY_EVENT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4, _5);
+        PROPERTY_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         PROPERTY_EVENT_FUNCTOR_PTR functorPtr(NF_NEW PROPERTY_EVENT_FUNCTOR(functor));
         return AddPropertyCallBack(strPropertyName, functorPtr);
     }
 
     template<typename BaseType>
-    bool AddRecordCallBack(const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const int, const int, const int, const NFIDataList&, const NFIDataList&, const NFIDataList&))
+    bool AddRecordCallBack(const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const RECORD_EVENT_DATA&, const NFIDataList&, const NFIDataList&))
     {
-        RECORD_EVENT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4, _5, _6, _7, _8);
+        RECORD_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         RECORD_EVENT_FUNCTOR_PTR functorPtr(NF_NEW RECORD_EVENT_FUNCTOR(functor));
         return AddRecordCallBack(strRecordName, functorPtr);
     }
 
     template<typename BaseType>
-    bool AddHeartBeat(const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const float, const int, const NFIDataList&), const NFIDataList& var, const float fTime, const int nCount)
+    bool AddHeartBeat(const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const float, const int), const float fTime, const int nCount)
     {
-        HEART_BEAT_FUNCTOR functor = boost::bind(handler, pBase, _1, _2, _3, _4, _5);
+        HEART_BEAT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         HEART_BEAT_FUNCTOR_PTR functorPtr(NF_NEW HEART_BEAT_FUNCTOR(functor));
-        return AddHeartBeat(strHeartBeatName, functorPtr, var, fTime, nCount);
+        return AddHeartBeat(strHeartBeatName, functorPtr, fTime, nCount);
     }
 
     virtual bool AddRecordCallBack(const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
 
     virtual bool AddPropertyCallBack(const std::string& strPropertyName, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
 
-    virtual bool AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIDataList& var, const float fTime, const int nCount) = 0;
+    virtual bool AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
 
     virtual bool FindHeartBeat(const std::string& strHeartBeatName) = 0;
 

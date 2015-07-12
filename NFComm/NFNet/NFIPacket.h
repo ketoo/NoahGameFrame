@@ -27,7 +27,6 @@
 #endif
 
 #include <string>
-#include "boost/math/special_functions/hypot.hpp"
 
 #pragma pack(push, 1)
 
@@ -37,7 +36,8 @@ struct  NFIMsgHead
 {
     enum NF_Head
     {
-        NF_HEAD_LENGTH = 6,
+		NF_HEAD_LENGTH = 6,
+		NF_MSGBUFF_LENGTH = 1024 * 1024, //10M,引擎累计消息最大
     };
 
     virtual int EnCode(char* strData) = 0;

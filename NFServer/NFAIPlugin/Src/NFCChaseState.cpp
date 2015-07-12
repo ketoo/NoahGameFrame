@@ -18,6 +18,7 @@ bool NFCChaseState::Execute(const NFIDENTID& self)
         if (pStateMachine)
         {
             //查找是否有可以攻击的对象
+			NFAI_MOVE_TYPE eMoveType = (NFAI_MOVE_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
             NFIDENTID ident = m_pHateModule->QueryMaxHateObject(self);
             if (!ident.IsNull())
             {
@@ -29,14 +30,24 @@ bool NFCChaseState::Execute(const NFIDENTID& self)
                 else
                 {
                     // 走向目标
-                    m_pKernelModule->SetPropertyFloat(self, "X", m_pKernelModule->GetPropertyFloat(ident, "X"));
-                    m_pKernelModule->SetPropertyFloat(self, "Y", m_pKernelModule->GetPropertyFloat(ident, "Y"));
-                    m_pKernelModule->SetPropertyFloat(self, "Z", m_pKernelModule->GetPropertyFloat(ident, "Z"));
+					if (NFAI_MOVE_TYPE::NO_MOVE_TYPE == eMoveType)
+					{
+						m_pKernelModule->SetPropertyFloat(self, "X", m_pKernelModule->GetPropertyFloat(ident, "X"));
+						m_pKernelModule->SetPropertyFloat(self, "Y", m_pKernelModule->GetPropertyFloat(ident, "Y"));
+						m_pKernelModule->SetPropertyFloat(self, "Z", m_pKernelModule->GetPropertyFloat(ident, "Z"));
+					}
                 }
             }
             else
             {
-                pStateMachine->ChangeState(PatrolState);
+				if (NFAI_MOVE_TYPE::NO_MOVE_TYPE == eMoveType)
+				{
+					pStateMachine->ChangeState(IdleState);
+				}
+				else
+				{
+					pStateMachine->ChangeState(PatrolState);
+				}
             }
         }
     }

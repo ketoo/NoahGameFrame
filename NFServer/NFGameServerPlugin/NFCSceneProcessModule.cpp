@@ -47,9 +47,9 @@ bool NFCSceneProcessModule::Execute( const float fLasFrametime, const float fSta
 bool NFCSceneProcessModule::AfterInit()
 {
     //初始化场景容器
-#ifdef NF_USE_ACTOR
-	int nSelfActorID = pPluginManager->GetActorID();
-#endif
+// #ifdef NF_USE_ACTOR
+// 	int nSelfActorID = pPluginManager->GetActorID();
+// #endif
     NF_SHARE_PTR<NFILogicClass> pLogicClass =  m_pLogicClassModule->GetElement("Scene");
     if (pLogicClass.get())
     {
@@ -63,11 +63,8 @@ bool NFCSceneProcessModule::AfterInit()
 
             const std::string& strFilePath = m_pElementInfoModule->GetPropertyString( strData, "FilePath" );
             const int nActorID = m_pElementInfoModule->GetPropertyInt( strData, "ActorID" );
-#ifdef NF_USE_ACTOR
-			if ( nActorID == nSelfActorID && nSceneID > 0 )
-#else
-			if ( nSceneID > 0 )
-#endif
+
+			//if ( nActorID == nSelfActorID && nSceneID > 0 )
             {
                 LoadInitFileResource( nSceneID );
 
@@ -202,19 +199,6 @@ int NFCSceneProcessModule::CreateCloneScene( const int& nContainerID, const int 
 
 bool NFCSceneProcessModule::DestroyCloneScene( const int& nContainerID, const int& nGroupID, const NFIDataList& arg )
 {
-    //无条件删除    
-    NFCDataList valueAllObjectList;
-    m_pKernelModule->GetGroupObjectList( nContainerID, nGroupID, valueAllObjectList );
-    for (int i = 0; i < valueAllObjectList.GetCount(); ++i)
-    {
-        NFIDENTID ident = valueAllObjectList.Object( i );
-        std::string strObjClassName = m_pKernelModule->GetPropertyString( ident, "ClassName" );
-        if ( "Player" != strObjClassName )
-        {
-            m_pKernelModule->DestroyObject(ident);
-        }
-    }
-
     m_pKernelModule->ReleaseGroupScene(nContainerID, nGroupID);
 
     return false;
@@ -237,14 +221,14 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
 
     char szSceneID[MAX_PATH] = {0};
     sprintf(szSceneID, "%d", nTargetScene);
-#ifdef NF_USE_ACTOR
-	int nActorID = m_pElementInfoModule->GetPropertyInt(szSceneID, "ActorID");
-	int nSelfActorID = pPluginManager->GetActorID();
-	if (nSelfActorID != nActorID)
-	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, ident, "target scene not runing in this server", nTargetScene);
-		return 1;
-#endif
+// #ifdef NF_USE_ACTOR
+// 	int nActorID = m_pElementInfoModule->GetPropertyInt(szSceneID, "ActorID");
+// 	int nSelfActorID = pPluginManager->GetActorID();
+// 	if (nSelfActorID != nActorID)
+// 	{
+// 		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, ident, "target scene not runing in this server", nTargetScene);
+// 		return 1;
+// #endif
 
     if ( self != ident )
     {
@@ -317,11 +301,9 @@ int NFCSceneProcessModule::OnLeaveSceneEvent( const NFIDENTID& object, const int
     }
 
     NFINT32 nOldGroupID = var.Int(0);
-
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(object);
-    if (pObject.get() && nOldGroupID > 0)
+    if (nOldGroupID > 0)
     {
-        int nContainerID = pObject->GetPropertyInt("SceneID");
+        int nContainerID = m_pKernelModule->GetPropertyInt(object, "SceneID");
         if (GetCloneSceneType(nContainerID) == SCENE_TYPE_MAINLINE_CLONE)
         {
             m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, object, "DestroyCloneSceneGroup", nOldGroupID);
@@ -364,10 +346,15 @@ E_SCENE_TYPE NFCSceneProcessModule::GetCloneSceneType( const int nContainerID )
     sprintf( szSceneIDName, "%d", nContainerID );
     if (m_pElementInfoModule->ExistElement(szSceneIDName))
     {
-        return (E_SCENE_TYPE)m_pElementInfoModule->GetPropertyInt(szSceneIDName, "SceneType");
+        return (E_SCENE_TYPE)m_pElementInfoModule->GetPropertyInt(szSceneIDName, "CanClone");
     }
 
     return SCENE_TYPE_ERROR;
+}
+
+bool NFCSceneProcessModule::IsCloneScene(const int nSceneID)
+{
+    return GetCloneSceneType(nSceneID) == 1;
 }
 
 bool NFCSceneProcessModule::LoadInitFileResource( const int& nContainerID )

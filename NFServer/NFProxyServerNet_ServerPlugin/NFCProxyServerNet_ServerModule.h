@@ -20,6 +20,8 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIUUIDModule.h"
+#include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
 
 class NFCProxyServerNet_ServerModule : public NFIProxyServerNet_ServerModule
 {
@@ -40,10 +42,13 @@ public:
 
     virtual int Transpond(const NFIPacket& msg);
 
+	//进入游戏成功
+	virtual int EnterGameSuccessEvent(const NFIDENTID xClientID, const NFIDENTID xPlayerID);
+
 protected:
 
-	int OnRecivePack(const NFIPacket& msg);
-	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
+	int OnReciveClientPack(const NFIPacket& msg);
+	int OnSocketClientEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 	//连接丢失,删2层(连接对象，帐号对象)
 	void OnClientDisconnect(const int nAddress);
@@ -59,43 +64,23 @@ protected:
     int OnReqEnterGameServer(const NFIPacket& msg);
 
 
-    int OnTranspondProcess(const NFIPacket& msg);
-
     //客户端的连接60秒删掉
     int HB_OnConnectCheckTime( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var );
-
-    //保存的世界服务器发过来的KEY,60秒删掉
-    int HB_OnPlayerWantToConnect(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var );
     //////////////////////////////////////////////////////////////////////////
+protected:
 
-    //保存的世界服务器发过来的信息对象
-    int OnWantToConnectObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+	NFMapEx<NFIDENTID, int> mxClientIdent;
 
 protected:
-    //新建立的连接对象，等待他们自己发验证KEY，KEY验证后删掉
-    //-1
-    //int mnConnectContainer;
-
-    //世界服务器发过来，谁想登录此服务器的那个对象，包含帐号和KEY信息，KEY验证后删掉？
-    //-2
-    //int mnWantToConnectContainer;
-
-    //-3
-    //int mnGameContainerID;
-
-    //// 世界服务器发过来，谁想登录此服务器的那个对象，包含帐号和KEY信息，KEY验证后删掉
-    //NFMapEx<std::string, ConnectData> mWantConnectionMap;
-
-    //// Game容器
-    //NFMapEx<int, ServerData> mnGameDataMap;
-
-protected:
-    NFIProxyServerToWorldModule* m_pProxyToWorldModule;
+	NFIProxyServerToWorldModule* m_pProxyToWorldModule;
+	NFIProxyServerToGameModule* m_pProxyServerToGameModule;
 	NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFIElementInfoModule* m_pElementInfoModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIEventProcessModule* m_pEventProcessModule;
+	NFIUUIDModule* m_pUUIDModule;
+
 };
 
 #endif

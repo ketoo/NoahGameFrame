@@ -26,16 +26,20 @@
 #include <sys/socket.h>
 #endif
 
+#include <vector>
+#include <functional>
+#include <memory>
+#include <list>
+#include <vector>
 #include "NFIPacket.h"
-
 #include <event2/bufferevent.h>
 #include <event2/buffer.h>
 #include <event2/listener.h>
 #include <event2/util.h>
 #include <event2/thread.h>
 #include <event2/event_compat.h>
-#include <vector>
-#include "NFComm/NFCore/NFIdentID.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFIdentID.h"
 
 #pragma pack(push, 1)
 
@@ -48,6 +52,17 @@ enum NF_NET_EVENT
 };
 
 class NFINet;
+
+typedef std::function<int(const NFIPacket& msg)> NET_RECIEVE_FUNCTOR;
+typedef NF_SHARE_PTR<NET_RECIEVE_FUNCTOR> NET_RECIEVE_FUNCTOR_PTR;
+
+typedef std::function<int(const int nSockIndex, const NF_NET_EVENT nEvent, NFINet* pNet)> NET_EVENT_FUNCTOR;
+typedef NF_SHARE_PTR<NET_EVENT_FUNCTOR> NET_EVENT_FUNCTOR_PTR;
+
+typedef std::function<void(int severity, const char *msg)> NET_EVENT_LOG_FUNCTOR;
+typedef NF_SHARE_PTR<NET_EVENT_LOG_FUNCTOR> NET_EVENT_LOG_FUNCTOR_PTR;
+
+
 
 class NetObject
 {
@@ -179,7 +194,15 @@ public:
     {
         mnUserID = nUserID;
     }
+	const NFIDENTID& GetClientID()
+	{
+		return mnClientID;
+	}
 
+	void SetClientID(const NFIDENTID& xClientID)
+	{
+		mnClientID = xClientID;
+	}
     int IncreaseError(const int nError = 1)
     {
         return mnErrorCount += nError;
@@ -205,7 +228,8 @@ private:
     int32_t mnUserData;
     std::string mstrUserData;
 	bool mbRemoveState;
-    NFIDENTID mnUserID;
+	NFIDENTID mnUserID;
+	NFIDENTID mnClientID;
     NFINet* m_pNet;
 };
 
@@ -214,14 +238,19 @@ class NFINet
 public:
 	virtual  bool Execute(const float fLasFrametime, const float fStartedTime) = 0;
 
-	virtual  int Initialization(const char* strIP, const unsigned short nPort) = 0;
+	virtual  void Initialization(const char* strIP, const unsigned short nPort) = 0;
 	virtual  int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4) = 0;
 
 	virtual  bool Final() = 0;
     virtual  bool Reset() = 0;
 
-	virtual bool SendMsg(const NFIPacket& msg, const int nSockIndex = 0, bool bBroadcast = false) = 0;
-	virtual bool SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex = 0, bool bBroadcast = false) = 0;
+	//带合法包头
+	virtual bool SendMsg(const NFIPacket& msg, const int nSockIndex = 0) = 0;
+	virtual bool SendMsgToAllClient(const NFIPacket& msg) = 0;
+
+	//数据裸发
+	virtual bool SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex = 0) = 0;
+	virtual bool SendMsgToAllClient(const char* msg, const uint32_t nLen) = 0;
 
 	virtual int OnRecivePacket(const int nSockIndex, const char* msg, const uint32_t nLen){return 1;};
 
@@ -234,10 +263,19 @@ public:
 
 	virtual NFIMsgHead::NF_Head GetHeadLen() = 0;
 	virtual bool IsServer() = 0;
-	virtual int FD() = 0;
+
+	virtual bool Log(int severity, const char *msg) = 0;
+
+	template<typename BaseType>
+	void SetNetLogCB(BaseType* pBaseType, void (BaseType::*handleRecieve)(int severity, const char *msg))
+	{
+		//static??
+		mLogEventCB.push_back(std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2));
+	}
 
 protected:
-private:
+	static std::vector<NET_EVENT_LOG_FUNCTOR> mLogEventCB;
+
 };
 
 #pragma pack(pop)

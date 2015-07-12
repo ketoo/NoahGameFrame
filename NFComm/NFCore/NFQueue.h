@@ -9,59 +9,100 @@
 #ifndef _NF_QUEUE_H_
 #define _NF_QUEUE_H_
 
-#include <iostream>
-#include <map>
 #include <list>
-#include <algorithm>
 #include <thread>
 #include <mutex>
-#include "NFPlatform.h"
+#include <atomic>
+#include "NFComm/NFPluginModule/NFPlatform.h"
+
+class spinlock_mutex;
+class NFLock
+{
+public:
+    explicit NFLock()
+    {
+        flag.clear();
+    }
+
+    ~NFLock()
+    {
+    }
+protected:
+    std::atomic_flag flag;
+
+    friend spinlock_mutex;
+
+private:
+    NFLock& operator=(const NFLock& src);
+};
+
+class spinlock_mutex
+{
+public:
+    explicit spinlock_mutex(NFLock& xGuard):mGuard(xGuard)
+    {
+        lock();
+    }
+
+    ~spinlock_mutex()
+    {
+        unlock();
+    }
+
+protected:
+    void lock()
+    {
+        while (mGuard.flag.test_and_set(std::memory_order_acquire));
+    }
+
+    void unlock()
+    {
+        mGuard.flag.clear(std::memory_order_release);
+    }
+
+private:
+    spinlock_mutex& operator=(const spinlock_mutex& src);
+
+private:
+    NFLock& mGuard;
+};
 
 template<typename T>
-class NFQueue
+class NFQueue :public NFLock
 {
 public:
     NFQueue()
-	{
-	}
+    {
+    }
+
     virtual ~NFQueue()
-	{
-		mList.clear();
-	}
+    {
+    }
 
     bool Push(const T& object)
-	{
-		mxQueueMutex.lock();
+    {
+        spinlock_mutex(*this);
+        mList.push_back(object);
 
-		mList.push_back(object);
-
-		mxQueueMutex.unlock();
-
-
-		return true;
-	}
+        return true;
+    }
 
     bool Pop(T& object)
-	{
-		mxQueueMutex.lock();
-		if (mList.empty())
-		{
-			mxQueueMutex.unlock();
+    {
+        spinlock_mutex(*this);
+        if (mList.empty())
+        {
+            return false;
+        }
 
-			return false;
-		}
-
-		object = mList.front();
-		mList.pop_front();
-
-		mxQueueMutex.unlock();
-
-		return true;
-	}
+        object = mList.front();
+        mList.pop_front();
+        
+        return true;
+    }
 
 private:
     std::list<T> mList;
-    std::mutex mxQueueMutex;
 };
 
 #endif

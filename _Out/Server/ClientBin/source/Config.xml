@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<XML>
+	<Servers>
+		<Server ID="1" IP = "127.0.0.1" Port="14001"/>
+	</Servers>
+</XML>

@@ -11,10 +11,10 @@
 
 #include <iostream>
 #include "NFIContainerModule.h"
-#include "NFComm/NFCore/NFIdentID.h"
 #include "NFComm/NFCore/NFIObject.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
+#include "NFComm/NFPluginModule/NFIdentID.h"
 
 class NFCContainerModule
     : public NFIContainerModule

@@ -11,24 +11,23 @@
 
 #include <map>
 #include <string>
+#include <time.h>
 #include "NFCDynLib.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFCore/NFQueue.h"
 
 class NFCPluginManager
     : public NFIPluginManager
 {
 public:
-#ifdef NF_USE_ACTOR
-	NFCPluginManager(Theron::Framework &framework, NFIActorManager* pManager, NFIActorManager::EACTOR eActor) : NFIPluginManager(framework, pManager, eActor)
-	{
-		mbOnReloadPlugin = false;
-	}
-#else
 	NFCPluginManager(NFIActorManager* pManager) : NFIPluginManager(pManager)
 	{
 		mbOnReloadPlugin = false;
+		m_pActorManager = pManager;
+        mnAppID = 0;
+		mnStartRunTime = time(NULL);
 	}
-#endif
+
     virtual bool Init();
 
     virtual bool AfterInit();
@@ -66,16 +65,28 @@ public:
     //
     //  virtual void ReloadPlugin( const std::string& pluginName );
 
+	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
+	virtual NFIActorManager* GetActorManager(){ return m_pActorManager;}
+
+	virtual int AppID(){ return mnAppID; }
+	virtual NFINT64 StartRunTime(){ return mnStartRunTime; }
+
 
 protected:
 
     virtual bool LoadPluginLibrary(const std::string& strPluginDLLName);
     virtual bool UnLoadPluginLibrary(const std::string& strPluginDLLName);
-#ifdef NF_USE_ACTOR
-    virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
-#endif
+
+protected:
+	virtual bool ExecuteEvent();
+
 private:
     bool mbOnReloadPlugin;
+	NFIActorManager* m_pActorManager;
+	NFQueue<NFIActorMessage> mxQueue;
+
+	int mnAppID;
+	NFINT64 mnStartRunTime;
 
 	typedef std::map<std::string, bool> PluginNameMap;
 	typedef std::map<std::string, NFCDynLib*> PluginLibMap;
@@ -90,8 +101,6 @@ private:
     PluginLibMap mPluginLibMap;
     PluginInstanceMap mPluginInstanceMap;
     ModuleInstanceMap mModuleInstanceMap;
-
-    std::string strDataModule;
 };
 
 #endif
