@@ -64,10 +64,10 @@
 		
 		</ParticleEvents>
 		<EnableEvents>
-			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
 		</EnableEvents>
 		<TrailEvents>
-
+			<Trail EventTime="0.35" EventType="0" TargetName="tag_zfishpoleend" MethodCall="" MethodParam=""/>
+			<Trail EventTime="0.62" EventType="1" TargetName="tag_zfishpoleend" MethodCall="" MethodParam=""/>
 		</TrailEvents>
 	</NORMALATTACK1>
 	<NORMALATTACK2>
@@ -94,7 +94,8 @@
 			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
 		</EnableEvents>
 		<TrailEvents>
-			<Trail EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+			<Trail EventTime="0.35" EventType="0" TargetName="tag_zfishpoleend" MethodCall="" MethodParam=""/>
+			<Trail EventTime="0.62" EventType="1" TargetName="tag_zfishpoleend" MethodCall="" MethodParam=""/>
 		</TrailEvents>
 	</NORMALATTACK2>
 	<NORMALATTACK3>
@@ -119,7 +120,8 @@
 			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
 		</EnableEvents>
 		<TrailEvents>
-			<Trail EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+			<Trail EventTime="0.35" EventType="0" TargetName="tag_zfishpoleend" MethodCall="" MethodParam=""/>
+			<Trail EventTime="0.62" EventType="1" TargetName="tag_zfishpoleend" MethodCall="" MethodParam=""/>
 		</TrailEvents>
 	</NORMALATTACK3>
 	<NORMALTHUMP>
