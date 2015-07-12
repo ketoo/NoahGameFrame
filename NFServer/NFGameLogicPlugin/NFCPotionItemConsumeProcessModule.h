@@ -10,7 +10,6 @@
 #define _NFC_POTIONITEMCONSUME_PROCESS_MODULE_H_
 
 #include <iostream>
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIPackModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
@@ -19,6 +18,7 @@
 #include "NFComm/NFPluginModule/NFILevelModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCPotionItemConsumeProcessModule
     : public NFIItemConsumeProcessModule
@@ -35,13 +35,13 @@ public:
     virtual bool AfterInit();
 
     //物品使用是否合法
-    virtual int ConsumeLegal( const NFIDENTID& self, int nItemRowID,  const NFIValueList& other );
+    virtual int ConsumeLegal( const NFIDENTID& self, int nItemRowID,  const NFIDataList& other );
 
     //使用物品的消耗
     virtual int ConsumeSelf( const NFIDENTID& self, int nItemRowID );
 
     //合法,消耗,那么处理过程[消耗后,nItemRowID已经找不到了，因为可能被清空了]
-    virtual int ConsumeProcess( const NFIDENTID& self, const std::string& strItemName, const NFIValueList& other );
+    virtual int ConsumeProcess( const NFIDENTID& self, const std::string& strItemName, const NFIDataList& other );
 
 private:
     NFIKernelModule* m_pKernelModule;

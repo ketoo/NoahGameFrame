@@ -87,6 +87,8 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(Solutio
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName)_d.pdb
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName)_d.exe
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName)_d.pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial5\$(ProjectName)_d.exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial5\$(ProjectName)_d.pdb
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName)_d.exe
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName)_d.pdb</Command>
     </PostBuildEvent>
@@ -131,16 +133,20 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionD
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName).pdb
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName).exe
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName).pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial5\$(ProjectName).exe
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial5\$(ProjectName).pdb
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName).exe
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName).pdb</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="NFCActor.h" />
     <ClInclude Include="NFCActorManager.h" />
     <ClInclude Include="NFCDynLib.h" />
     <ClInclude Include="NFCPluginManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="NFCActor.cpp" />
     <ClCompile Include="NFCActorManager.cpp" />
     <ClCompile Include="NFCDynLib.cpp" />
     <ClCompile Include="NFCPluginManager.cpp" />
