@@ -9,11 +9,10 @@
 #include "NFWorldLogicPlugin.h"
 #include "NFCWorldLogicModule.h"
 #include "NFComm/Config/NFConfig.h"
-#include "NFComm/NFCore/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 bool NFCWorldLogicModule::Init()
 {
-    mnWorldContranerID = - 3;
 //     NFConfig config;
 //     bool bLoad =  config.Load("NFWorldConfig.cfg");
 //     if (!bLoad)

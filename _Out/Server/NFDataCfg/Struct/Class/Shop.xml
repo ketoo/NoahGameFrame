@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--this is a class xml-->
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <XML>
-    <Records/>
-    <Propertys>
-        <Property Desc="" Id="Type" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="ItemID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="" Id="Gold" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="Steel" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="Stone" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="Diamond" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="Level" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-    </Propertys>
-    <Includes/>
+  <Propertys>
+    <Property Id="Type" Type="int" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="ItemID" Type="string" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="Gold" Type="int" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="Steel" Type="int" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="Stone" Type="int" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="Diamond" Type="int" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="Level" Type="int" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+  </Propertys>
+  <Records />
+  <Components />
 </XML>

@@ -9,6 +9,7 @@
 #ifndef _NFC_HELLO_WORLD1_H_
 #define _NFC_HELLO_WORLD1_H_
 
+#include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class HelloWorld1

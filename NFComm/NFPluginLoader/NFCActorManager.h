@@ -11,6 +11,8 @@
 
 #include <map>
 #include <string>
+#include "NFCActor.h"
+#include "NFComm/NFCore/NFIComponent.h"
 #include "NFComm/NFCore/NFSingleton.h"
 #include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFPluginModule/NFIActorManager.h"
@@ -20,6 +22,7 @@ class NFCActorManager
   public NFSingleton<NFCActorManager>
 {
 public:
+	NFCActorManager();
 
 	virtual bool Init();
 
@@ -40,18 +43,21 @@ public:
 		AfterInit();
 	}
 
-#ifdef NF_USE_ACTOR
-	virtual const Theron::Address GetAddress( NFIActorManager::EACTOR eActor);
-#else
-#endif
+	virtual NFIPluginManager* GetPluginManager();
+
+	virtual int OnRequireActor(NFIComponent* pComponent);
+	virtual bool SendMsgToActor( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc);
+
+    virtual NFIActor* GetActor(const int nActorIndex);
 
 private:
-	std::vector<NFIActor*> mActorVec;
+	NFIPluginManager* m_pPluginManager;
 
-#ifdef NF_USE_ACTOR
     Theron::Framework* m_pFramework;
-#endif
-	//Theron::Framework framework; // ªª÷∏’Î
+	NFIActor* m_pMainActor;
+	std::vector<NFIActor*> mvActorList;
+	std::map<int, NF_SHARE_PTR<NFIActor>> mxActorMap;
+
 };
 
 #endif

@@ -47,9 +47,9 @@ bool NFCObject::Execute(const float fLastTime, const float fAllTime)
     return true;
 }
 
-bool NFCObject::AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIDataList& var, const float fTime, const int nCount)
+bool NFCObject::AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount)
 {
-    return GetHeartBeatManager()->AddHeartBeat(mSelf , strHeartBeatName, cb, var, fTime, nCount);
+    return GetHeartBeatManager()->AddHeartBeat(mSelf , strHeartBeatName, cb, fTime, nCount);
 }
 
 bool NFCObject::FindHeartBeat(const std::string& strHeartBeatName)
@@ -80,7 +80,7 @@ bool NFCObject::AddPropertyCallBack(const std::string& strCriticalName, const PR
     NF_SHARE_PTR<NFIProperty> pProperty = GetPropertyManager()->GetElement(strCriticalName);
     if (pProperty.get())
     {
-        pProperty->RegisterCallback(cb, NFCDataList());
+        pProperty->RegisterCallback(cb);
 
         return true;
     }
@@ -161,7 +161,7 @@ NFINT64 NFCObject::GetPropertyInt(const std::string& strPropertyName)
         return pProperty->GetInt();
     }
 
-    return -1;
+    return 0;
 }
 
 float NFCObject::GetPropertyFloat(const std::string& strPropertyName)

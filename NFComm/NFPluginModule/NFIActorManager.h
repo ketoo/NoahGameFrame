@@ -1,42 +1,47 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFIPluginManager.h
+//    @FileName      :    NFIActorManager.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
-//    @Module           :    NFIPluginManager
+//    @Module           :    NFIActorManager
 //
 // -------------------------------------------------------------------------
 
 #ifndef _NFI_ACTOR_MANAGER_H_
 #define _NFI_ACTOR_MANAGER_H_
 
-#ifdef NF_USE_ACTOR
-#include "Theron/Receiver.h"
-#include "Theron/Actor.h"
-#include "Theron/Framework.h"
-#include "Theron/Detail/Handlers/ReceiverHandler.h"
-#endif
+#include "NFILogicModule.h"
+#include "NFComm/NFCore/NFIComponent.h"
 
-#include "NFComm/NFPluginModule/NFILogicModule.h"
+///////////////////////////////////////////////////
+class NFIActor;
+
+struct NFAsyncEventFunc
+{
+	NFAsyncEventFunc()
+	{
+		nActorID = -1;
+	}
+
+	EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR xBeginFuncptr;
+	EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR xEndFuncptr;
+	int nActorID;
+};
+
+class NFCObjectAsyncEventInfo
+	: public NFMapEx<int, NFAsyncEventFunc>
+{
+};
+
+///////////////////////////////////////////////////
 
 class NFIActorManager : public NFILogicModule
 {
 public:
-	enum EACTOR
-	{
-		//模块列表,kernel列表--共用配置后，可以开很多，目前没共用配置，因此需要控制数量，否则配置会占用很多内存
-        EACTOR_MAIN,
-//         EACTOR_LOGIC1,
-// 		EACTOR_LOGIC2,
-// 		EACTOR_LOGIC3,
-// 		EACTOR_LOGIC4,
-		EACTOR_END,
-	};
+	virtual int OnRequireActor(NFIComponent* pComponent) = 0;
+	virtual bool SendMsgToActor( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventList) = 0;
 
-#ifdef NF_USE_ACTOR
-	virtual const Theron::Address GetAddress( EACTOR eActor) = 0;
-#else
-#endif
-
+	virtual NFIPluginManager* GetPluginManager() = 0;
+	virtual NFIActor* GetActor(const int nActorIndex) = 0;
 
 };
 

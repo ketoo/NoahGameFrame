@@ -1,5 +1,0 @@
-grammar {
-  start = root
-  root = element root { empty }
-}
-

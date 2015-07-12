@@ -84,18 +84,27 @@ public:
     virtual bool LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strInfo, const int nDesc, const char* func = "", int line = 0);
     virtual bool LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strInfo, const std::string& strDesc, const char* func = "", int line = 0);
     virtual bool LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::ostringstream& stream, const char* func = "", int line = 0);
+
+	virtual bool LogDebugFunctionDump(const NFIDENTID ident, const int nMsg, const std::string& strArg, const char* func = "", const int line = 0);
+    virtual bool ChangeLogLevel(const std::string& strLevel);
 protected:
     friend class NFCKernelModule;
 
     virtual bool Log(const NF_LOG_LEVEL nll, const char* format, ...);
 
+    static bool CheckLogFileExist(const char* filename);
+    static void rolloutHandler(const char* filename, std::size_t size);
+
     //NFIConcurrentModule* m_pConcurrentModule;
     //NFIActor* m_pActor;
-    //  NFIActor<std::string>* m_pActor;
-    //  NFIActor<std::string>* m_pActor1;
-    //  NFIActor<std::string>* m_pActor2;
-    //     NFIActor<std::string>* m_pActor3;
-    //     NFIReceiver<std::string>* m_pReceiver;
+    //NFIActor<std::string>* m_pActor;
+    //NFIActor<std::string>* m_pActor1;
+    //NFIActor<std::string>* m_pActor2;
+    //NFIActor<std::string>* m_pActor3;
+    //NFIReceiver<std::string>* m_pReceiver;
+
+private:
+    static unsigned int idx;
 };
 
 #endif

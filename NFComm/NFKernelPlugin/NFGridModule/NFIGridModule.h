@@ -12,8 +12,8 @@
 #include <list>
 #include <iostream>
 #include <algorithm>
-#include "NFComm/NFCore/NFIdentID.h"
 #include "NFComm/NFCore/NFIDataList.h"
+#include "NFComm/NFPluginModule/NFIdentID.h"
 
 class NFCSceneGridInfo;
 
