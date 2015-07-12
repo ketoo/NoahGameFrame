@@ -9,7 +9,7 @@
 #ifndef _NFI_MEMORY_H_
 #define _NFI_MEMORY_H_
 
-#include "NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>

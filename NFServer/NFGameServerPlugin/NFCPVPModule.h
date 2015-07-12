@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCPVPModule.h
+//    @FileName         :    NFCPVPModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2015-01-02
 //    @Module           :    NFCPVPModule
@@ -9,13 +9,13 @@
 #ifndef _NFC_PVP_MODULE_H_
 #define _NFC_PVP_MODULE_H_
 
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIPVPModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCPVPModule
     : public NFIPVPModule
@@ -25,6 +25,7 @@ public:
     {
         pPluginManager = p;
     }
+
     virtual ~NFCPVPModule() {};
 
     virtual bool Init();
@@ -43,6 +44,8 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 
+private:
+    NFList<NFIDENTID> mxPVPList; // 报名的队列
 };
 
 

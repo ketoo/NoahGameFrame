@@ -123,7 +123,7 @@ int NFCPropertyModule::SubPropertyValue( const NFIDENTID& self, const std::strin
     return 0;
 }
 
-int NFCPropertyModule::OnObjectLevelEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
+int NFCPropertyModule::OnObjectLevelEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar )
 {
     RefreshBaseProperty( self );
 
@@ -133,10 +133,14 @@ int NFCPropertyModule::OnObjectLevelEvent( const NFIDENTID& self, const std::str
     return 0;
 }
 
-int NFCPropertyModule::OnRecordPropertyEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
+int NFCPropertyModule::OnRecordPropertyEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar )
 {
     //计算总值
- 
+    const std::string& strRecordName = xEventData.strRecordName;
+    const int nOpType = xEventData.nOpType;
+    const int nRow = xEventData.nRow;
+    const int nCol = xEventData.nCol;
+
     int nAllValue = 0;
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, mstrCommPropertyName);
     for ( int i = 0; i < ( int )( NFPropertyGroup::NPG_ALL ); i++ )
@@ -159,10 +163,21 @@ int NFCPropertyModule::OnObjectClassEvent( const NFIDENTID& self, const std::str
     {
         if ( CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
         {
+            NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, mstrCommPropertyName);
+            if (pRecord.get())
+            {
+                for(int i =0; i< NPG_ALL; i++)
+                {
+                    pRecord->AddRow(-1);
+                }
+            }
+
             m_pKernelModule->AddPropertyCallBack( self, "Level", this, &NFCPropertyModule::OnObjectLevelEvent );
-            
+
             // TODO:一级属性回调
             m_pKernelModule->AddRecordCallBack( self, mstrCommPropertyName, this, &NFCPropertyModule::OnRecordPropertyEvent );
+
+
         }
         else if ( CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA == eClassEvent )
         {
@@ -193,7 +208,7 @@ int NFCPropertyModule::RefreshBaseProperty( const NFIDENTID& self )
     //初始属性+等级属性(职业决定)
     NFJobType eJobType = ( NFJobType )m_pKernelModule->GetPropertyInt( self, "Job" );
     int nLevel = m_pKernelModule->GetPropertyInt( self, "Level" );
-    
+
     for ( int i = 0; i < pRecord->GetCols(); ++i )
     {
         const std::string& strColTag = pRecord->GetColTag(i);
@@ -204,27 +219,32 @@ int NFCPropertyModule::RefreshBaseProperty( const NFIDENTID& self )
     return 1;
 }
 
-bool NFCPropertyModule::FullHPMP( const NFIDENTID& self )
+bool NFCPropertyModule::FullHPMP(const NFIDENTID& self)
 {
-    int nMaxHP = m_pKernelModule->GetPropertyInt( self, "MAXHP" );
-    if ( nMaxHP > 0 )
+    NFINT64 nMaxHP = m_pKernelModule->GetPropertyInt(self, "MAXHP");
+    if (nMaxHP > 0)
     {
-        m_pKernelModule->SetPropertyInt( self, "HP", nMaxHP );
+        m_pKernelModule->SetPropertyInt(self, "HP", nMaxHP);
     }
 
-    int nMaxMP = m_pKernelModule->GetPropertyInt( self, "MAXMP" );
-    if ( nMaxMP > 0 )
+    NFINT64 nMaxMP = m_pKernelModule->GetPropertyInt(self, "MAXMP");
+    if (nMaxMP > 0)
     {
-        m_pKernelModule->SetPropertyInt( self, "MP", nMaxMP );
+        m_pKernelModule->SetPropertyInt(self, "MP", nMaxMP);
     }
 
     return true;
 }
 
-bool NFCPropertyModule::AddHP( const NFIDENTID& self, int nValue )
+bool NFCPropertyModule::AddHP(const NFIDENTID& self, const NFINT64& nValue)
 {
-    int nCurValue = m_pKernelModule->GetPropertyInt( self, "HP" );
-    int nMaxValue = m_pKernelModule->GetPropertyInt( self, "MAXHP" );
+    if (nValue <= 0)
+    {
+        return false;
+    }
+
+    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(self, "HP");
+    NFINT64 nMaxValue = m_pKernelModule->GetPropertyInt(self, "MAXHP");
 
     if ( nCurValue > 0 )
     {
@@ -233,16 +253,47 @@ bool NFCPropertyModule::AddHP( const NFIDENTID& self, int nValue )
         {
             nCurValue = nMaxValue;
         }
+
         m_pKernelModule->SetPropertyInt( self, "HP", nCurValue );
     }
 
     return true;
 }
 
-bool NFCPropertyModule::AddMP( const NFIDENTID& self, int nValue )
+bool NFCPropertyModule::EnoughHP(const NFIDENTID& self, const NFINT64& nValue)
 {
-    int nCurValue = m_pKernelModule->GetPropertyInt( self, "MP" );
-    int nMaxValue = m_pKernelModule->GetPropertyInt( self, "MAXMP" );
+    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(self, "HP");
+    if ((nCurValue > 0) && (nCurValue - nValue >= 0))
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool NFCPropertyModule::ConsumeHP( const NFIDENTID& self, const NFINT64& nValue )
+{
+    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt( self, "HP" );
+    if ( ( nCurValue > 0 ) && ( nCurValue - nValue >= 0 ) )
+    {
+        nCurValue -= nValue;
+        m_pKernelModule->SetPropertyInt( self, "HP", nCurValue );
+
+        return true;
+    }
+
+    return false;
+}
+
+bool NFCPropertyModule::AddMP(const NFIDENTID& self, const NFINT64& nValue)
+{
+    if (nValue <= 0)
+    {
+        return false;
+    }
+
+    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt( self, "MP" );
+    NFINT64 nMaxValue = m_pKernelModule->GetPropertyInt( self, "MAXMP" );
 
     nCurValue += nValue;
     if ( nCurValue > nMaxValue )
@@ -255,23 +306,9 @@ bool NFCPropertyModule::AddMP( const NFIDENTID& self, int nValue )
     return true;
 }
 
-bool NFCPropertyModule::ConsumeHP( const NFIDENTID& self, int nValue )
+bool NFCPropertyModule::ConsumeMP( const NFIDENTID& self, const NFINT64& nValue )
 {
-    int nCurValue = m_pKernelModule->GetPropertyInt( self, "HP" );
-    if ( ( nCurValue > 0 ) && ( nCurValue - nValue >= 0 ) )
-    {
-        nCurValue -= nValue;
-        m_pKernelModule->SetPropertyInt( self, "HP", nCurValue );
-
-        return true;
-    }
-
-    return false;
-}
-
-bool NFCPropertyModule::ConsumeMP( const NFIDENTID& self, int nValue )
-{
-    int nCurValue = m_pKernelModule->GetPropertyInt( self, "MP" );
+    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt( self, "MP" );
     if ( ( nCurValue > 0 ) && ( nCurValue - nValue >= 0 ) )
     {
         nCurValue -= nValue;
@@ -283,14 +320,11 @@ bool NFCPropertyModule::ConsumeMP( const NFIDENTID& self, int nValue )
     return false;
 }
 
-bool NFCPropertyModule::ConsumeSP( const NFIDENTID& self, int nValue )
+bool NFCPropertyModule::EnoughMP(const NFIDENTID& self, const NFINT64& nValue)
 {
-    int nCSP = m_pKernelModule->GetPropertyInt( self, "SP" );
-    if ( ( nCSP > 0 ) && ( nCSP - nValue >= 0 ) )
+    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(self, "MP");
+    if ((nCurValue > 0) && (nCurValue - nValue >= 0))
     {
-        nCSP -= nValue;
-        m_pKernelModule->SetPropertyInt( self, "SP", nCSP );
-
         return true;
     }
 
@@ -299,7 +333,7 @@ bool NFCPropertyModule::ConsumeSP( const NFIDENTID& self, int nValue )
 
 bool NFCPropertyModule::FullSP( const NFIDENTID& self )
 {
-    int nMAXCSP = m_pKernelModule->GetPropertyInt( self, "MAXSP" );
+    NFINT64 nMAXCSP = m_pKernelModule->GetPropertyInt( self, "MAXSP" );
     if ( nMAXCSP > 0 )
     {
         m_pKernelModule->SetPropertyInt( self, "SP", nMAXCSP );
@@ -310,10 +344,15 @@ bool NFCPropertyModule::FullSP( const NFIDENTID& self )
     return false;
 }
 
-bool NFCPropertyModule::AddSP( const NFIDENTID& self, int nValue )
+bool NFCPropertyModule::AddSP( const NFIDENTID& self, const NFINT64& nValue )
 {
-    int nCurValue = m_pKernelModule->GetPropertyInt( self, "SP" );
-    int nMaxValue = m_pKernelModule->GetPropertyInt( self, "MAXSP" );
+    if (nValue <= 0)
+    {
+        return false;
+    }
+
+    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt( self, "SP" );
+    NFINT64 nMaxValue = m_pKernelModule->GetPropertyInt( self, "MAXSP" );
 
     nCurValue += nValue;
     if ( nCurValue > nMaxValue )
@@ -326,9 +365,53 @@ bool NFCPropertyModule::AddSP( const NFIDENTID& self, int nValue )
     return true;
 }
 
-bool NFCPropertyModule::ConsumeMoney( const NFIDENTID& self, int nValue )
+bool NFCPropertyModule::ConsumeSP( const NFIDENTID& self, const NFINT64& nValue )
 {
-    int nCurValue = m_pKernelModule->GetPropertyInt( self, "Money" );
+    NFINT64 nCSP = m_pKernelModule->GetPropertyInt( self, "SP" );
+    if ( ( nCSP > 0 ) && ( nCSP - nValue >= 0 ) )
+    {
+        nCSP -= nValue;
+        m_pKernelModule->SetPropertyInt( self, "SP", nCSP );
+
+        return true;
+    }
+
+    return false;
+}
+
+bool NFCPropertyModule::EnoughSP(const NFIDENTID& self, const NFINT64& nValue)
+{
+    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(self, "SP");
+    if ((nCurValue > 0) && (nCurValue - nValue >= 0))
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool NFCPropertyModule::AddMoney( const NFIDENTID& self, const NFINT64& nValue )
+{
+    if (nValue <= 0)
+    {
+        return false;
+    }
+
+    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt( self, "Money" );
+    nCurValue += nValue;
+    m_pKernelModule->SetPropertyInt( self, "Money", nCurValue);
+
+    return false;
+}
+
+bool NFCPropertyModule::ConsumeMoney( const NFIDENTID& self, const NFINT64& nValue )
+{
+    if (nValue <= 0)
+    {
+        return false;
+    }
+
+    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt( self, "Money" );
     nCurValue -= nValue;
     if (nCurValue >= 0)
     {
@@ -340,11 +423,57 @@ bool NFCPropertyModule::ConsumeMoney( const NFIDENTID& self, int nValue )
     return false;
 }
 
-bool NFCPropertyModule::AddMoney( const NFIDENTID& self, int nValue )
+bool NFCPropertyModule::EnoughMoney(const NFIDENTID& self, const NFINT64& nValue)
 {
-    int nCurValue = m_pKernelModule->GetPropertyInt( self, "Money" );
+    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(self, "Money");
+    if ((nCurValue > 0) && (nCurValue - nValue >= 0))
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool NFCPropertyModule::AddDiamond(const NFIDENTID& self, const NFINT64& nValue)
+{
+    if (nValue <= 0)
+    {
+        return false;
+    }
+
+    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(self, "Diamond");
     nCurValue += nValue;
-    m_pKernelModule->SetPropertyInt( self, "Money", nCurValue);
+    m_pKernelModule->SetPropertyInt(self, "Money", nCurValue);
+
+    return false;
+}
+
+bool NFCPropertyModule::ConsumeDiamond(const NFIDENTID& self, const NFINT64& nValue)
+{
+    if (nValue <= 0)
+    {
+        return false;
+    }
+
+    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(self, "Diamond");
+    nCurValue -= nValue;
+    if (nCurValue >= 0)
+    {
+        m_pKernelModule->SetPropertyInt(self, "Diamond", nCurValue);
+
+        return true;
+    }    
+
+    return false;
+}
+
+bool NFCPropertyModule::EnoughDiamond(const NFIDENTID& self, const NFINT64& nValue)
+{
+    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(self, "Diamond");
+    if ((nCurValue > 0) && (nCurValue - nValue >= 0))
+    {
+        return true;
+    }
 
     return false;
 }

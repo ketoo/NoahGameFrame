@@ -13,7 +13,7 @@
 #include <map>
 #include <list>
 #include <algorithm>
-#include "NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 template < typename T >
 class NFList
@@ -30,19 +30,6 @@ public:
     bool                    Get(const int32_t index, T& id);
     int                       Count();
 
-    //  idType& operator [] (const int32_t index)
-    //  {
-    //      if (it >= this->mtObjConfigList.size())
-    //      {
-    //          return normal;
-    //      }
-    //
-    //      std::list<idType>::iterator it = this->mtObjConfigList.begin();
-    //      std::advance(it + index);
-    //
-    //      return *it;
-    //  }
-
 protected:
     //idType normal;
     typedef     std::list<T>   TLISTOBJCONFIGLIST;
@@ -55,7 +42,7 @@ private:
 template < typename T >
 bool NFList<T>::Add(const T& id)
 {
-    if (!Find(id))
+    //if (!Find(id))
     {
         mtObjConfigList.push_back(id);
         return true;

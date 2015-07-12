@@ -18,7 +18,6 @@
 #include "NFComm/RapidXML/rapidxml_iterators.hpp"
 #include "NFComm/RapidXML/rapidxml_print.hpp"
 #include "NFComm/RapidXML/rapidxml_utils.hpp"
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
@@ -28,6 +27,7 @@
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCSceneProcessModule
     : public NFISceneProcessModule
@@ -45,6 +45,7 @@ public:
     virtual bool AfterInit();
 
     virtual E_SCENE_TYPE GetCloneSceneType(const int nContainerID);
+    virtual bool IsCloneScene(const int nSceneID);
 
 protected:
     int CreateCloneScene( const int& nContainerID, const int nGroupID, const std::string& strResourceID, const NFIDataList& arg );

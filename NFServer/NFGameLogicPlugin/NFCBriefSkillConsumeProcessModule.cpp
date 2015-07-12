@@ -47,7 +47,7 @@ bool NFCBriefSkillConsumeProcessModule::Execute( const float fLasFrametime, cons
 }
 
 
-int NFCBriefSkillConsumeProcessModule::ConsumeLegal( const NFIDENTID& self, const std::string& skillID,  const NFIValueList& other )
+int NFCBriefSkillConsumeProcessModule::ConsumeLegal( const NFIDENTID& self, const std::string& skillID,  const NFIDataList& other )
 {
     //是否被沉默,CD,距离等
 
@@ -82,8 +82,8 @@ int NFCBriefSkillConsumeProcessModule::ConsumeSelf( const NFIDENTID& self, const
 //     }
 // 
 //     int nConsumeType = pSkillConsumeType->QueryInt();
-//     NFCValueList valueConsumeProperty( pSkillConsumeProperty->QueryString().c_str(), "," );
-//     NFCValueList valueConsumeValue( pSkillConsumeValue->QueryString().c_str(), "," );
+//     NFCDataList valueConsumeProperty( pSkillConsumeProperty->QueryString().c_str(), "," );
+//     NFCDataList valueConsumeValue( pSkillConsumeValue->QueryString().c_str(), "," );
 // 
 //     if ( valueConsumeProperty.GetCount() != valueConsumeValue.GetCount() )
 //     {
@@ -130,9 +130,9 @@ int NFCBriefSkillConsumeProcessModule::ConsumeSelf( const NFIDENTID& self, const
     return 0;
 }
 
-int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, const std::string& strSkillName, const NFIValueList& other, NFIValueList& damageListValue, NFIValueList& damageResultList )
+int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, const std::string& strSkillName, const NFIDataList& other, NFIDataList& damageListValue, NFIDataList& damageResultList )
 {
-    NFIPropertyManager* pPropertyManager = m_pElementInfoModule->GetPropertyManager( strSkillName );
+    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager( strSkillName );
     if ( pPropertyManager == NULL )
     {
         return 1;
@@ -149,8 +149,8 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, co
 // 
 //     int nDamageType = pSkillDamageType->QueryInt();
 //     int nDamageSubType = pSkillDamageSubType->QueryInt();
-//     NFCValueList valueEffectProperty( pSkillDamageProperty->QueryString().c_str(), "," );
-//     NFCValueList valueEffectValue( pSkillDamageValue->QueryString().c_str(), "," );
+//     NFCDataList valueEffectProperty( pSkillDamageProperty->QueryString().c_str(), "," );
+//     NFCDataList valueEffectValue( pSkillDamageValue->QueryString().c_str(), "," );
 // 
 //     if ( valueEffectProperty.GetCount() != valueEffectValue.GetCount() )
 //     {
@@ -162,13 +162,13 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, co
         //先测定目标是否有此属性(其实是担心配错了)
         for ( int j = 0; j < other.GetCount(); j++ )
         {
-            NFIDENTID identOther = other.ObjectVal( j );
+            NFIDENTID identOther = other.Object( j );
             if ( identOther.IsNull() )
             {
                 continue;
             }
 
-            NFIObject* pObject = m_pKernelModule->GetObject( identOther );
+            NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( identOther );
             if ( pObject == NULL )
             {
                 continue;
@@ -184,7 +184,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, co
 //                 continue;
 //             }
 
-            NFIProperty* pLastProperty = pObject->GetPropertyManager()->GetElement( "LastAttacker" );
+            NF_SHARE_PTR<NFIProperty> pLastProperty = pObject->GetPropertyManager()->GetElement( "LastAttacker" );
             if ( pLastProperty )
             {
                 pLastProperty->SetObject( self );
@@ -196,7 +196,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, co
     return 0;
 }
 
-int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFIDENTID& self, const std::string& strSkillName, const NFIValueList& other, NFIValueList& damageListValue, NFIValueList& damageResultList )
+int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFIDENTID& self, const std::string& strSkillName, const NFIDataList& other, NFIDataList& damageListValue, NFIDataList& damageResultList )
 {
     //附加效果
     //1伤害属性(类别)
@@ -218,8 +218,8 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFIDENTID& self, 
 // 
 //     int nDamageType = pSkillDamageType->QueryInt();
 //     int nDamageSubType = pSkillDamageSubType->QueryInt();
-//     NFCValueList valueEffectProperty( pSkillDamageProperty->QueryString().c_str(), "," );
-//     NFCValueList valueEffectValue( pSkillDamageValue->QueryString().c_str(), "," );
+//     NFCDataList valueEffectProperty( pSkillDamageProperty->QueryString().c_str(), "," );
+//     NFCDataList valueEffectValue( pSkillDamageValue->QueryString().c_str(), "," );
 // 
 //     if ( valueEffectProperty.GetCount() != valueEffectValue.GetCount() )
 //     {

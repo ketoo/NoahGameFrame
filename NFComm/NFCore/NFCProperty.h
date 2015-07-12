@@ -58,11 +58,14 @@ public:
 
     virtual bool Changed() const;
 
-    virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIDataList& argVar);
+    virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb);
 
     virtual NFIDataList::TData GetValue() const;
 
     int OnEventHandler(const NFIDataList& oldVar, const NFIDataList& newVar);
+
+    virtual std::string ToString();
+    virtual bool FromString(const std::string& strData);
 private:
     typedef std::vector<PROPERTY_EVENT_FUNCTOR_PTR> TPROPERTYCALLBACKEX;
     TPROPERTYCALLBACKEX mtPropertyCallback;
@@ -72,7 +75,7 @@ private:
     TDATA_TYPE eType;//只有在不存在指针的时候才用这个判断类型--为节约内存
     //NFCDataList    mVarProperty;
     //NFIDataList::TData* m_pTData;
-    std::shared_ptr<NFIDataList::TData> m_pTData;
+    NF_SHARE_PTR<NFIDataList::TData> m_pTData;
 
     bool mbPublic;
     bool mbPrivate;

@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--this is a class xml-->
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <XML>
-    <Records/>
-    <Propertys>
-        <Property Desc="" Id="Atlas_ResID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="string" View="1"/>
-    </Propertys>
-    <Includes/>
+  <Propertys>
+    <Property Id="Atlas_ResID" Type="string" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+  </Propertys>
+  <Records />
+  <Components />
 </XML>

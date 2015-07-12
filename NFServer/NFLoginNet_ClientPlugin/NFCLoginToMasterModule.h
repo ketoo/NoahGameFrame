@@ -41,11 +41,11 @@ public:
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
 
-    virtual NFMapEx<int, NFMsg::ServerInfoReport>* GetWorldMap();
+    virtual NFMapEx<int, NFMsg::ServerInfoReport>& GetWorldMap();
 
 protected:
-	int OnRecivePack(const NFIPacket& msg);
-    int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
+	int OnReciveMSPack(const NFIPacket& msg);
+    int OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 protected:
 
@@ -60,8 +60,7 @@ protected:
 	int OnWorldInfoProcess(const NFIPacket& msg);
 
     //////////////////////////////////////////////////////////////////////////
-    void Register();
-    void UnRegister();
+    void Register(NFINet* pNet);
 
 private:
     NFMapEx<int, NFMsg::ServerInfoReport> mWorldMap;

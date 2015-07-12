@@ -9,6 +9,7 @@
 #ifndef _NFC_HELLO_WORLD2_H_
 #define _NFC_HELLO_WORLD2_H_
 
+#include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class HelloWorld2
@@ -29,7 +30,7 @@ public:
     virtual bool Shut();
 
 protected:
-    int OnPropertyCallBackEvent(const NFIDENTID& self, const std::string& strProperty, const NFIDataList& oldVarList, const NFIDataList& newVarList, const NFIDataList& argVarList);
+    int OnPropertyCallBackEvent(const NFIDENTID& self, const std::string& strProperty, const NFIDataList& oldVarList, const NFIDataList& newVarList);
 
 
 

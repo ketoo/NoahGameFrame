@@ -15,10 +15,11 @@
 #include "NFMsgBaseEx.pb.h"
 #include "NFMsgPreGame.pb.h"
 #include "NFMsgShare.pb.h"
-#include "NFComm/NFCore/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFCore/NFIRecordManager.h"
 #include "NFComm/NFCore/NFIPropertyManager.h"
 #include "NFComm/NFCore/NFList.h"
+#include "NFComm/Define/NFServer_def.h"
 
 // -------------------------------------------------------------------------
 #pragma pack(push,1)
