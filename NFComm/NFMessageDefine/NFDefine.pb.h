@@ -79,11 +79,14 @@ enum EGameEventCode {
   EGEC_ENTER_GATEWAY_FAILD = 141,
   EGEC_NO_SERVER4ZONE = 142,
   EGEC_INVALID_SKILL = 143,
-  EGEC_ENTER_GAME_SUCCESS = 144
+  EGEC_ENTER_GAME_SUCCESS = 144,
+  EGEC_CREATE_GUILD_SUCCESS = 200,
+  EGEC_JOIN_GUILD_SUCCESS = 201,
+  EGEC_LEAVE_GUILD_SUCCESS = 202
 };
 bool EGameEventCode_IsValid(int value);
 const EGameEventCode EGameEventCode_MIN = EGEC_UNKOWN_ERROR;
-const EGameEventCode EGameEventCode_MAX = EGEC_ENTER_GAME_SUCCESS;
+const EGameEventCode EGameEventCode_MAX = EGEC_LEAVE_GUILD_SUCCESS;
 const int EGameEventCode_ARRAYSIZE = EGameEventCode_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EGameEventCode_descriptor();
@@ -132,7 +135,6 @@ enum EGameMsgID {
   EGMI_REQ_CREATE_ROLE = 134,
   EGMI_REQ_DELETE_ROLE = 135,
   EGMI_REQ_RECOVER_ROLE = 136,
-  EGMI_REQ_COMMAND = 140,
   EGMI_REQ_ENTER_GAME = 150,
   EGMI_ACK_ENTER_GAME = 151,
   EGMI_REQ_LEAVE_GAME = 152,
@@ -140,6 +142,8 @@ enum EGameMsgID {
   EGMI_REQ_SWAP_GAME = 154,
   EGMI_REQ_SWAP_SCENE = 155,
   EGMI_ACK_SWAP_SCENE = 156,
+  EGMI_REQ_END_BATTLE = 157,
+  EGMI_ACK_END_BATTLE = 158,
   EGMI_ACK_OBJECT_ENTRY = 200,
   EGMI_ACK_OBJECT_LEAVE = 201,
   EGMI_ACK_OBJECT_PROPERTY_ENTRY = 202,
@@ -179,16 +183,40 @@ enum EGameMsgID {
   EGMI_REQ_PICK_ITEM = 255,
   EGMI_REQ_ACCEPT_TASK = 256,
   EGMI_REQ_COMPELETE_TASK = 257,
+  EGMI_REQ_JOIN_PVP = 260,
+  EGMI_REQ_EXIT_PVP = 261,
+  EGMT_ACK_START_PVP = 262,
+  EGMI_ACK_ONLINE_NOTIFY = 290,
+  EGMI_ACK_OFFLINE_NOTIFY = 291,
+  EGMI_REQ_CREATE_GUILD = 300,
+  EGMI_ACK_CREATE_GUILD = 301,
+  EGMI_REQ_JOIN_GUILD = 302,
+  EGMI_ACK_JOIN_GUILD = 303,
+  EGMI_REQ_LEAVE_GUILD = 304,
+  EGMI_ACK_LEAVE_GUILD = 305,
+  EGMI_REQ_OPR_GUILD = 306,
+  EGMI_ACK_OPR_GUILD = 307,
+  EGMI_REQ_SEARCH_GUILD = 308,
+  EGMI_ACK_SEARCH_GUILD = 309,
+  EGMI_REQ_CMD_PROPERTY_INT = 1000,
+  EGMI_REQ_CMD_PROPERTY_STR = 1001,
+  EGMI_REQ_CMD_PROPERTY_OBJECT = 1002,
+  EGMI_REQ_CMD_PROPERTY_FLOAT = 1003,
+  EGMI_REQ_CMD_RECORD_INT = 1004,
+  EGMI_REQ_CMD_RECORD_STR = 1005,
+  EGMI_REQ_CMD_RECORD_OBJECT = 1006,
+  EGMI_REQ_CMD_RECORD_FLOAT = 1007,
   EGMI_REQ_BUY_FORM_SHOP = 10000,
   EGMI_ACK_BUY_FORM_SHOP = 10001,
   EGMI_REQ_MOVE_BUILD_OBJECT = 10002,
   EGMI_ACK_MOVE_BUILD_OBJECT = 10003,
   EGMI_REQ_UP_BUILD_LVL = 10101,
-  EGMI_REQ_CREATE_ITEM = 10102
+  EGMI_REQ_CREATE_ITEM = 10102,
+  EGMI_REQ_BUILD_OPERATE = 10103
 };
 bool EGameMsgID_IsValid(int value);
 const EGameMsgID EGameMsgID_MIN = EGMI_UNKNOW;
-const EGameMsgID EGameMsgID_MAX = EGMI_REQ_CREATE_ITEM;
+const EGameMsgID EGameMsgID_MAX = EGMI_REQ_BUILD_OPERATE;
 const int EGameMsgID_ARRAYSIZE = EGameMsgID_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EGameMsgID_descriptor();
@@ -200,6 +228,93 @@ inline bool EGameMsgID_Parse(
     const ::std::string& name, EGameMsgID* value) {
   return ::google::protobuf::internal::ParseNamedEnum<EGameMsgID>(
     EGameMsgID_descriptor(), name, value);
+}
+enum EAwardType {
+  AWARD_TYPE_NORMAL = 0,
+  AWARD_TYPE_HERO = 1
+};
+bool EAwardType_IsValid(int value);
+const EAwardType EAwardType_MIN = AWARD_TYPE_NORMAL;
+const EAwardType EAwardType_MAX = AWARD_TYPE_HERO;
+const int EAwardType_ARRAYSIZE = EAwardType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* EAwardType_descriptor();
+inline const ::std::string& EAwardType_Name(EAwardType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EAwardType_descriptor(), value);
+}
+inline bool EAwardType_Parse(
+    const ::std::string& name, EAwardType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EAwardType>(
+    EAwardType_descriptor(), name, value);
+}
+enum EGuildPowerType {
+  GUILD_POWER_TYPE_NORMAL = 0,
+  GUILD_POWER_TYPE_VICE_PRESIDENT = 1,
+  GUILD_POWER_TYPE_PRESIDENT = 2
+};
+bool EGuildPowerType_IsValid(int value);
+const EGuildPowerType EGuildPowerType_MIN = GUILD_POWER_TYPE_NORMAL;
+const EGuildPowerType EGuildPowerType_MAX = GUILD_POWER_TYPE_PRESIDENT;
+const int EGuildPowerType_ARRAYSIZE = EGuildPowerType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* EGuildPowerType_descriptor();
+inline const ::std::string& EGuildPowerType_Name(EGuildPowerType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EGuildPowerType_descriptor(), value);
+}
+inline bool EGuildPowerType_Parse(
+    const ::std::string& name, EGuildPowerType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EGuildPowerType>(
+    EGuildPowerType_descriptor(), name, value);
+}
+enum ETaskState {
+  TASK_IN_PROCESS = 0,
+  TASK_DONE = 1,
+  TASK_DRAW_AWARD = 2,
+  TASK_FINISH = 3
+};
+bool ETaskState_IsValid(int value);
+const ETaskState ETaskState_MIN = TASK_IN_PROCESS;
+const ETaskState ETaskState_MAX = TASK_FINISH;
+const int ETaskState_ARRAYSIZE = ETaskState_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ETaskState_descriptor();
+inline const ::std::string& ETaskState_Name(ETaskState value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ETaskState_descriptor(), value);
+}
+inline bool ETaskState_Parse(
+    const ::std::string& name, ETaskState* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ETaskState>(
+    ETaskState_descriptor(), name, value);
+}
+enum ETaskType {
+  TASK_LEVEL_UPDATE_SOME_LEVEL = 0,
+  TASK_PASS_ECTYPE = 1,
+  TASK_PASS_ECTYPE_COUNT = 2,
+  TASK_PASS_SOME_TYPE_ECTYPE_COUNT = 3,
+  TASK_UPDATE_SKILL_COUNT = 4,
+  TASK_CONSUME_MONEY = 5,
+  TASK_CONSUME_DIAMOND = 6,
+  TASK_ARENA_COUNT = 7,
+  TASK_KILL_MONSTER_COUNT = 8,
+  TASK_KILL_SOME_MONSTER_COUNT = 9
+};
+bool ETaskType_IsValid(int value);
+const ETaskType ETaskType_MIN = TASK_LEVEL_UPDATE_SOME_LEVEL;
+const ETaskType ETaskType_MAX = TASK_KILL_SOME_MONSTER_COUNT;
+const int ETaskType_ARRAYSIZE = ETaskType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ETaskType_descriptor();
+inline const ::std::string& ETaskType_Name(ETaskType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ETaskType_descriptor(), value);
+}
+inline bool ETaskType_Parse(
+    const ::std::string& name, ETaskType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ETaskType>(
+    ETaskType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -225,6 +340,22 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameEventCode>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameMsgID>() {
   return ::NFMsg::EGameMsgID_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EAwardType>() {
+  return ::NFMsg::EAwardType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGuildPowerType>() {
+  return ::NFMsg::EGuildPowerType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ETaskState>() {
+  return ::NFMsg::ETaskState_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ETaskType>() {
+  return ::NFMsg::ETaskType_descriptor();
 }
 
 }  // namespace google

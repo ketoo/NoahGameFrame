@@ -14,12 +14,12 @@ NFCPropertyManager::~NFCPropertyManager()
     ClearAll();
 }
 
-bool NFCPropertyManager::RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb, const NFIDataList& argVar)
+bool NFCPropertyManager::RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb)
 {
     NF_SHARE_PTR<NFIProperty> pProperty = this->GetElement(strProperty);
     if (pProperty.get())
     {
-        pProperty->RegisterCallback(cb, argVar);
+        pProperty->RegisterCallback(cb);
         return true;
     }
 

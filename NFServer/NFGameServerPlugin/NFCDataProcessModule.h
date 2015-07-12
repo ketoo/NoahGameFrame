@@ -9,12 +9,14 @@
 #ifndef _NFC_DATAPROCESS_MODULE_H_
 #define _NFC_DATAPROCESS_MODULE_H_
 
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
-#include "NFComm/NFPluginModule/NFIDataNoSqlModule.h"
 #include "NFComm/NFPluginModule/NFIDataProcessModule.h"
+#include "NFComm/NFPluginModule/NFIClusterModule.h"
+#include "NFComm/NFPluginModule/NFIUUIDModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFIObjectSaveModule.h"
 
 class NFCDataProcessModule
     : public NFIDataProcessModule
@@ -24,6 +26,9 @@ public:
     NFCDataProcessModule( NFIPluginManager* p )
     {
         pPluginManager = p;
+
+        mstrRoleTable = "Player";
+        mstrAccountTable = "AccountInfo";
     }
     virtual ~NFCDataProcessModule() {};
 
@@ -32,33 +37,30 @@ public:
     virtual bool Execute( const float fLasFrametime, const float fStartedTime );
     virtual bool AfterInit();
 
-    virtual int LoadDataFormNoSql( const NFIDENTID& self );
-    virtual int SaveDataToNoSql( const NFIDENTID& self, bool bOffline = false );
-#ifdef NF_USE_ACTOR
-	virtual Theron::Address GetActorID(const NFIDENTID& self);
+    virtual const bool LoadDataFormNoSql( const NFIDENTID& self );
+    //virtual const bool SaveDataToNoSql( const NFIDENTID& self, bool bOffline = false );
 
+	virtual const NFIDENTID CreateRole(const std::string& strAccount, const std::string& strName, const int nJob, const int nSex);
+	virtual const bool DeleteRole(const std::string& strAccount, const NFIDENTID xID);
+	virtual const NFIDENTID GetChar(const std::string& strAccount, const std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVec);
 
-protected:
-    virtual void Handler(const NFIActorMessage& message, const Theron::Address from);
-    virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
-    virtual void HandlerTrans(const NFIActorMessage& message, const Theron::Address from);
-    virtual void HandlerLog(const NFIActorMessage& message, const Theron::Address from);
-#endif
 protected:
     int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    virtual int LoadProperty( const NFIDENTID& self, NF_SHARE_PTR<NFIPropertyManager> pProManager );
-    virtual int LoadRecord( const NFIDENTID& self, NF_SHARE_PTR<NFIRecordManager> pRecord );
-
-    virtual int SaveProperty( const NFIDENTID& self, NF_SHARE_PTR<NFIPropertyManager> pProManager );
-    virtual int SaveRecord( const NFIDENTID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager );
+    void OnOnline(const NFIDENTID& self);
+    void OnOffline(const NFIDENTID& self);
 
 private:
-
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
-    NFIDataNoSqlModule* m_pNoSqlModule;
-    NFIGameLogicModule* m_pGameLogicModule;
+    NFIClusterModule* m_pClusterSQLModule;
+	NFIGameLogicModule* m_pGameLogicModule;
+	NFIUUIDModule* m_pUUIDModule;
+    NFIObjectSaveModule* m_pObjectSaveModule;
+
+private:
+    std::string mstrRoleTable;
+    std::string mstrAccountTable;
 };
 
 

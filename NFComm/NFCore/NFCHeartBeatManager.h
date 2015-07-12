@@ -36,7 +36,7 @@ public:
 
     virtual bool Execute(const float fLastTime, const float fAllTime);
     virtual bool Exist(const std::string& strHeartBeatName);
-    virtual bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIDataList& var, const float fTime, const int nCount);
+    virtual bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount);
     virtual bool RemoveHeartBeat(const std::string& strHeartBeatName);
 
 protected:

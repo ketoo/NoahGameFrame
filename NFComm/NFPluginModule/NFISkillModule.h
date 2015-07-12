@@ -46,7 +46,7 @@ public:
     //添加新手技能
     virtual int AddNewerSkill(const NFIDENTID& self) = 0;
 
-
+    virtual int OnUseSkill(const NFIDENTID& self, const NFIDataList& var) = 0;
 };
 
 #endif

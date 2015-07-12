@@ -27,6 +27,7 @@ public:
 	NFCMasterNet_ServerModule(NFIPluginManager* p)
 	{
 		pPluginManager = p;
+		mfLastLogTime = 0.0f;
 	}
 
 	virtual bool Init();
@@ -41,7 +42,7 @@ public:
 protected:
 
 	int OnRecivePack(const NFIPacket& msg);
-	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
+	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 	//连接丢失,删2层(连接对象，帐号对象)
 	void OnClientDisconnect(const int nAddress);
@@ -67,7 +68,7 @@ protected:
 	//////////////////////////////////////////////////////////////////////////
 
 	void SynWorldToLogin();
-
+	void LogGameServer(const float fLastTime);
 private:
 
     struct ServerData 
@@ -89,6 +90,9 @@ private:
     };
 
 private:
+
+	float mfLastLogTime;
+
     //serverid,data
     NFMapEx<int, ServerData> mWorldMap;
     NFMapEx<int, ServerData> mLoginMap;

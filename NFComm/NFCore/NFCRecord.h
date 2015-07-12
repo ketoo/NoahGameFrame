@@ -22,10 +22,10 @@ public:
     virtual ~NFCRecord();
 
     virtual bool IsUsed(const int nRow) const;
-    virtual bool IsKey(const int nRow) const;
+    virtual bool IsKey(const int nCol) const;
 
     virtual bool SetUsed(const int nRow, const int bUse);
-    virtual bool SetKey(const int nRow, const int bKey);
+    virtual bool SetKey(const int nCol, const int bKey);
 
     virtual int GetCols() const;
 
@@ -131,7 +131,7 @@ protected:
     bool ValidRow(int nRow) const;
     bool ValidCol(int nCol) const;
 
-    void OnEventHandler(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar);
+    void OnEventHandler(const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar);
 
 protected:
     //记录这个表的Key类型，那样在读取和设置的时候才能保持正确
@@ -143,7 +143,7 @@ protected:
     TRECORDVEC mtRecordVec;//真的数据
     std::vector<int> mVecUsedState;
 
-    std::map<std::string, int> mmTag;
+    std::map<std::string, int> mmTag;//tag->col转换
 
     typedef std::pair<int, std::string> RelationRecordColType;
     typedef std::map<RelationRecordColType, std::string> RelationRecordMap;
@@ -156,9 +156,16 @@ protected:
     bool mbView;
     bool mbPublic;
     bool mbPrivate;
-    bool mbHasKey;
+    int mnKeyCol;
     int mnIndex;
     std::string mstrRecordName;
+
+	//col-><int_key, row_value>//整形key,暂时只支持一个key
+	std::map<NFINT64, int> mxIntKeyMap;
+	//col-><string_key, row_value>//字符串key,暂时只支持一个key
+	std::map<std::string, int> mxStringKeyMap;
+	//col-><object_key, row_value>//对象key,暂时只支持一个key
+	std::map<NFIDENTID, int> mxObjectKeyMap;
 
     typedef std::vector<RECORD_EVENT_FUNCTOR_PTR> TRECORDCALLBACKEX;
     TRECORDCALLBACKEX mtRecordCallback;

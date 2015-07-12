@@ -9,14 +9,14 @@
 #ifndef _NFC_ITEM_MODULE_H_
 #define _NFC_ITEM_MODULE_H_
 
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFCPackModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIItemModule.h"
 #include "NFComm/NFPluginModule/NFIItemConsumeManagerModule.h"
-#include "NFCPackModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCItemModule
     : public NFIItemModule
@@ -35,10 +35,10 @@ public:
     virtual bool AfterInit();
 
 protected:
-    /**/int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var );
+    /**/int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    /**/int OnRequireUseItemEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
-    /**/int OnRequireUseItemPosEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
+    /**/int OnRequireUseItemEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
+    /**/int OnRequireUseItemPosEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
 
 	virtual bool CheckConfig();
 private:

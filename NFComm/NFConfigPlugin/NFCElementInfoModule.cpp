@@ -202,9 +202,10 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFI
         pElementPropertyManager->SetProperty(pstrConfigName, var);
     }
 
-    NFCDataList varClassName;
-    varClassName << pLogicClass->GetClassName().c_str();
-    pElementPropertyManager->SetProperty("ClassName", *varClassName.GetStackConst(0));
+	NFIDataList::TData xData;
+	xData.nType = TDATA_STRING;
+	xData.variantData = pLogicClass->GetClassName();
+    pElementPropertyManager->SetProperty("ClassName", xData);
 
     return true;
 }
