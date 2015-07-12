@@ -1,4 +1,0 @@
-default namespace = "urn:foo"
-
-include "include-default-namespace-included.rnc"
-

@@ -4,8 +4,8 @@
 #include <functional> 
 #include <algorithm>
 #include "boost/crc.hpp"
-#include "boost/format/free_funcs.hpp"
 #include "boost/lexical_cast.hpp"
+#include "boost/format.hpp"
 
 #ifndef __CONSISTENT_HASH_H__
 #define __CONSISTENT_HASH_H__
@@ -32,8 +32,8 @@ public:
 		nVirtualIndex = 0;
 	}
 
-	virtual std::string GetDataStr() = 0;
-	virtual int GetDataID() = 0;
+	virtual std::string GetDataStr() const = 0;
+	virtual int GetDataID() const = 0;
 
     std::string ToStr() const 
     {
@@ -41,13 +41,12 @@ public:
     }
 
 private:
-
-
     int nVirtualIndex;//ÐéÄâ½ÚµãÐòºÅ
 };
 
 class NFCMachineNode : public NFIVirtualNode
 {
+public:
 	NFCMachineNode(const int nVirID) : NFIVirtualNode(nVirID)
 	{
 		strIP = "";
@@ -64,12 +63,14 @@ class NFCMachineNode : public NFIVirtualNode
 		nMachineID = 0;
 	}
 
-	virtual std::string GetDataStr()
+public:
+
+	virtual std::string GetDataStr() const 
 	{
 		return strIP;
 	}
 
-	virtual int GetDataID()
+	virtual int GetDataID() const
 	{
 		return nMachineID;
 	}
@@ -127,7 +128,7 @@ public:
         return mxNodes.empty();
     }
 
-    void Insert(const NFIVirtualNode& xNode) 
+    void Insert(const NFCMachineNode& xNode) 
     {
         uint32_t hash = m_pHasher->GetHashValue(xNode);
         auto it = mxNodes.find(hash);
@@ -137,7 +138,7 @@ public:
         }
     }
 
-	bool Exist(const NFIVirtualNode& xInNode)
+	bool Exist(const NFCMachineNode& xInNode)
 	{
 		uint32_t hash = m_pHasher->GetHashValue(xInNode);
 		TMAP_TYPE::iterator it = mxNodes.find(hash);
@@ -149,19 +150,19 @@ public:
 		return false;
 	}
 
-    std::size_t Erase(const NFIVirtualNode& xNode) 
+    std::size_t Erase(const NFCMachineNode& xNode) 
     {
         uint32_t hash = m_pHasher->GetHashValue(xNode);
         return mxNodes.erase(hash);
     }
 
-	bool GetSuitNode(NFIVirtualNode& node)
+	bool GetSuitNode(NFCMachineNode& node)
 	{
 		int nID = 0;
 		return GetSuitNode(nID, node);
 	}
 
-	bool GetSuitNode(const int nID, NFIVirtualNode& node)
+	bool GetSuitNode(const int nID, NFCMachineNode& node)
 	{
 		std::string strData = boost::lexical_cast<std::string>(nID);
 		if (GetSuitNode(strData, node))
@@ -172,7 +173,7 @@ public:
 		return false;
 	}
 
-	bool GetSuitNode(const std::string& str, NFIVirtualNode& node)
+	bool GetSuitNode(const std::string& str, NFCMachineNode& node)
 	{
 		boost::crc_32_type ret;
 		ret.process_bytes(str.c_str(), str.length());
@@ -186,7 +187,7 @@ public:
 		return false;
 	}
 
-	bool GetSuitNode(uint32_t hashValue, NFIVirtualNode& node)
+	bool GetSuitNode(uint32_t hashValue, NFCMachineNode& node)
 	{
 		if(mxNodes.empty())
 		{
@@ -205,7 +206,7 @@ public:
 		return true;
 	}
 
-	bool GetMasterNodeReverse(NFIVirtualNode& node)
+	bool GetMasterNodeReverse(NFCMachineNode& node)
 	{
 		if(mxNodes.empty())
 		{
@@ -226,7 +227,7 @@ public:
 		return true;
 	}
 
-	bool GetMasterNodeSequence(NFIVirtualNode& node)
+	bool GetMasterNodeSequence(NFCMachineNode& node)
 	{
 		if(mxNodes.empty())
 		{
@@ -248,7 +249,7 @@ public:
 	}
 
 private:
-	typedef std::map<uint32_t, NFIVirtualNode> TMAP_TYPE;
+	typedef std::map<uint32_t, NFCMachineNode> TMAP_TYPE;
 	typedef TMAP_TYPE::iterator iterator;
 
     NFIHasher* m_pHasher;

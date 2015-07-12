@@ -18,16 +18,10 @@
     <ClInclude Include="NFDefine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFIdentID.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NFIObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NFIRecord.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NFPlatform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NFList.h">
@@ -84,9 +78,6 @@
     <ClInclude Include="NFCObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFCMemory .h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NFIMemory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -100,6 +91,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NFCConsistentHash.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCMemory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

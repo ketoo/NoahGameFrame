@@ -13,7 +13,6 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
-#include "NFComm/NFPluginModule/NFIDataNoSqlModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 
@@ -41,7 +40,6 @@ protected:
 protected:
     NFIUUIDModule* m_pUUIDModule;
     NFILogicClassModule* m_pLogicClassModule;
-    NFIDataNoSqlModule* m_pNoSqlModule;
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
 private:

@@ -14,6 +14,7 @@
 #include "NFComm/RapidXML/rapidxml_utils.hpp"
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIActorDataModule.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 #pragma comment( lib, "ws2_32.lib" )
 
@@ -52,32 +53,29 @@ bool NFCPluginManager::LoadPlugin()
     {
         const char* strPluginName = pPluginNode->first_attribute( "Name" )->value();
         const char* strMain = pPluginNode->first_attribute( "Main" )->value();
-#ifdef NF_USE_ACTOR
-		int nMain = boost::lexical_cast<int>( strMain );
-		bool bMain = (nMain > 0 ? true : false);
-		if (bMain)
-		{
-			//主模块只能运行在主actor上只
-			//非主模块则所有的actor都创建
-			if (GetActorID() == NFIActorManager::EACTOR_MAIN)
-			{
-				mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, bMain));
-			}
-		}
-		else
-		{
-			mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, bMain));
-		}
-#else
+
 		mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, true));
-#endif
-       
+
     }
 
-    rapidxml::xml_node<>* pActorDataNode = pRoot->first_node("ActorDataModule");
-    if (pActorDataNode)
+    rapidxml::xml_node<>* pPluginAppNode = pRoot->first_node("APPID");
+    if (!pPluginAppNode)
     {
-        strDataModule = pActorDataNode->first_attribute( "Name" )->value();
+        NFASSERT(0, "There are no App ID", __FILE__, __FUNCTION__);
+        return false;
+    }
+
+    const char* strAppID = pPluginAppNode->first_attribute( "Name" )->value();
+    if (!strAppID)
+    {
+        NFASSERT(0, "There are no App ID", __FILE__, __FUNCTION__);
+        return false;
+    }
+
+    if (!NF_StrTo(strAppID, mnAppID))
+    {
+        NFASSERT(0, "App ID Convert Error", __FILE__, __FUNCTION__);
+        return false;
     }
 
     return true;
@@ -141,6 +139,8 @@ bool NFCPluginManager::Execute(const float fLasFrametime, const float fStartedTi
         bool tembRet = it->second->Execute(fLasFrametime, fStartedTime);
         bRet = bRet && tembRet;
     }
+
+	ExecuteEvent();
 
     return bRet;
 }
@@ -270,7 +270,7 @@ bool NFCPluginManager::Shut()
 
 #endif
 	mPluginInstanceMap.clear();
-    mPluginNameMap.clear();    
+    mPluginNameMap.clear();
 	return true;
 }
 
@@ -289,12 +289,28 @@ bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
             DLL_START_PLUGIN_FUNC pFunc = (DLL_START_PLUGIN_FUNC)pLib->GetSymbol("DllStartPlugin");
             if (!pFunc)
             {
+                std::cout << "Find function DllStartPlugin Failed in [" << strPluginDLLName << "]" << std::endl;
+                assert(0);
                 return false;
             }
 
             pFunc(this);
 
             return true;
+        }
+        else
+        {
+#if NF_PLATFORM == NF_PLATFORM_LINUX
+            char* error = dlerror();
+            if (error)
+            {
+                fprintf(stderr, "Open shared lib %s failed, %s.\n", strPluginDLLName.c_str(), error);
+                assert(0);
+                return false;
+            }
+#endif // NF_PLATFORM
+            std::cout << "Load [" << strPluginDLLName << "] Failed" << std::endl;
+            assert(0);
         }
     }
 
@@ -314,7 +330,7 @@ bool NFCPluginManager::UnLoadPluginLibrary(const std::string& strPluginDLLName)
         {
             pFunc(this);
         }
-        
+
         pLib->UnLoad();
 
         delete pLib;
@@ -361,17 +377,30 @@ bool NFCPluginManager::ReInitialize()
 
     return true;
 }
-#ifdef NF_USE_ACTOR
+
+
 void NFCPluginManager::HandlerEx( const NFIActorMessage& message, const Theron::Address from )
 {
-    if (message.eType != NFIActorMessage::EACTOR_UNKNOW)
-    {
-        //给哪个模块接这个消息呢..难道广播...他也不知道，哪个模块要写是接受数据的啊，除非...配置写好
-        NFIActorDataModule* pModule = dynamic_cast<NFIActorDataModule*>(pPluginManager->FindModule(strDataModule));
-        if (pModule)
-        {
-            pModule->Handler(message, from);
-        }
-    }
+	//添加到队列，每帧执行
+	mxQueue.Push(message);
 }
-#endif
+
+bool NFCPluginManager::ExecuteEvent()
+{
+	NFIActorMessage xMsg;
+	bool bRet = false;
+	bRet = mxQueue.Pop(xMsg);
+	while (bRet)
+	{
+		if (xMsg.eType == NFIActorMessage::EACTOR_RETURN_EVENT_MSG)
+		{
+			xMsg.xActorEventFunc->xEndFuncptr->operator()(xMsg.self, xMsg.nSubMsgID, xMsg.data);
+		}
+
+		bRet = mxQueue.Pop(xMsg);
+	}
+
+
+
+	return true;
+}

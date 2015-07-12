@@ -12,15 +12,12 @@
 #include <map>
 #include <string>
 
-#ifdef NF_USE_ACTOR
-#include "Theron/Actor.h"
-#include "Theron/Address.h"
-#include "Theron/Framework.h"
-#include "Theron/Detail/Handlers/ReceiverHandler.h"
-#endif
+#include <Theron/Theron.h>
 
 #include "NFILogicModule.h"
 #include "NFIActorManager.h"
+#include "NFComm/NFCore/NFCDataList.h"
+#include "NFComm/NFCore/NFIComponent.h"
 
 class NFIActorMessage
 {
@@ -42,117 +39,68 @@ public:
 		EACTOR_SHUT,
 		EACTOR_NET_MSG,
         EACTOR_TRANS_MSG,
-        EACTOR_LOG_MSG,
+		EACTOR_LOG_MSG,
+		EACTOR_EVENT_MSG,
+		EACTOR_RETURN_EVENT_MSG,
 	};
 
     EACTOR_MESSAGE_ID eType;
     int nSubMsgID;
 	std::string data;
+	////////////////////event/////////////////////////////////////////////////
+	NFIDENTID self;
+	NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc;//包含同步异步等回调接口
+	//////////////////////////////////////////////////////////////////////////
 protected:
 private:
 };
 
-#ifdef NF_USE_ACTOR
 class NFIActor : public Theron::Actor, public NFILogicModule
 {
 public:
-
-    // Constructor, passes the framework to the baseclass.
-    NFIActor(Theron::Framework &framework, NFIActorManager* pManager, NFIActorManager::EACTOR eActor) : Theron::Actor(framework)
+	NFIActor(Theron::Framework &framework, NFIActorManager* pManager) : Theron::Actor(framework)
     {
         m_pActorManager = pManager;
-        meMainActor = eActor;
-        // Register the message handler.
+
         RegisterHandler(this, &NFIActor::Handler);
     }
 
     virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from){};
+	NFIActorManager* GetActorManager(){return m_pActorManager;}
+
+	virtual void RegisterActorComponent(NFIComponent* pComponent) = 0;
 
 private:
     virtual void Handler(const NFIActorMessage& message, const Theron::Address from)
     {
-        switch (message.eType)
-        {
-        case NFIActorMessage::EACTOR_INIT:
-			{
-                unStartTickTime = ::GetTickCount();
-                unLastTickTime = unStartTickTime;
+		//收到消息要处理逻辑
+		if (message.eType == NFIActorMessage::EACTOR_EVENT_MSG)
+		{
+			std::string strData = message.data;
+			message.xActorEventFunc->xBeginFuncptr->operator()(message.self, message.nSubMsgID, strData);
+			
+			////////////////////////////////////////////////////////
 
-				Init();
-				Send(message, from);
-			}
-            break;
+			NFIActorMessage xReturnMessage;
 
-        case NFIActorMessage::EACTOR_AFTER_INIT:
-			{
-				AfterInit();
-				Send(message, from);
-			}
-            break;
-        case NFIActorMessage::EACTOR_CHECKCONFIG:
-            {
-                CheckConfig();
-                Send(message, from);
-            }
-            break;
+			xReturnMessage.eType = NFIActorMessage::EACTOR_RETURN_EVENT_MSG;
+			xReturnMessage.nSubMsgID = message.nSubMsgID;
+			xReturnMessage.data = strData;
+			////////////////////event/////////////////////////////////////////////////
+			xReturnMessage.self = message.self;
+			xReturnMessage.xActorEventFunc = message.xActorEventFunc;
 
-        case NFIActorMessage::EACTOR_EXCUTE:
-            {
-                unsigned long unNowTickTime = ::GetTickCount();
-                float fStartedTime = float(unNowTickTime - unStartTickTime) / 1000;
-                float fLastTime = float(unNowTickTime - unLastTickTime) / 1000;
+			Send(xReturnMessage, from);
+		}
+		else
+		{
+			HandlerEx(message, from);
+		}
+	}
 
-                Execute(fLastTime, fStartedTime);
-
-                unLastTickTime = unNowTickTime;
-
-				Send(message, from);
-            }
-            break;
-
-        case NFIActorMessage::EACTOR_BEFORE_SHUT:
-			{
-				BeforeShut();
-				Send(message, from);
-			}
-            break;
-
-        case NFIActorMessage::EACTOR_SHUT:
-			{
-				Shut();
-				Send(message, from);
-			}
-            break;
-
-        default:
-            HandlerEx(message, from);
-            break;
-        }
-    }
-private:
-private:
-
+protected:
     NFIActorManager* m_pActorManager;
-    NFIActorManager::EACTOR meMainActor;
-public:
 
-    NFIActorManager* GetActorManager(){return m_pActorManager;}
-    NFIActorManager::EACTOR GetActorID(){return meMainActor; }
-
-#else
-class NFIActor : public NFILogicModule
-{
-public:
-    NFIActor(NFIActorManager* pManager)
-    {
-    }
-#endif
-
-public:
-
-private:
-    unsigned long unStartTickTime;
-    unsigned long unLastTickTime;
 };
 
 #endif

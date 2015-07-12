@@ -27,7 +27,7 @@ public:
 
         NPG_RUNTIME_BUFF    ,//¶¯Ì¬BUFF
 
-        NPG_ALL = 100       ,
+        NPG_ALL ,
     };
 
 
@@ -38,19 +38,26 @@ public:
     virtual int SubPropertyValue(const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue) = 0;
 
     virtual bool FullHPMP(const NFIDENTID& self) = 0;
-    virtual bool AddHP(const NFIDENTID& self, int nValue)  = 0;
-    virtual bool ConsumeHP(const NFIDENTID& self, int nValue) = 0;
+    virtual bool AddHP(const NFIDENTID& self, const NFINT64& nValue) = 0;
+    virtual bool ConsumeHP(const NFIDENTID& self, const NFINT64& nValue) = 0;
+    virtual bool EnoughHP(const NFIDENTID& self, const NFINT64& nValue) = 0;
 
-    virtual bool AddMP(const NFIDENTID& self, int nValue) = 0;
-    virtual bool ConsumeMP(const NFIDENTID& self, int nValue) = 0;
+    virtual bool AddMP(const NFIDENTID& self, const NFINT64& nValue) = 0;
+    virtual bool ConsumeMP(const NFIDENTID& self, const NFINT64& nValue) = 0;    
+    virtual bool EnoughMP(const NFIDENTID& self, const NFINT64& nValue) = 0;
 
-    virtual bool ConsumeSP(const NFIDENTID& self, int nValue) = 0;
     virtual bool FullSP(const NFIDENTID& self) = 0;
-    virtual bool AddSP(const NFIDENTID& self, int nValue) = 0;
+    virtual bool AddSP(const NFIDENTID& self, const NFINT64& nValue) = 0;
+    virtual bool ConsumeSP(const NFIDENTID& self, const NFINT64& nValue) = 0;
+    virtual bool EnoughSP(const NFIDENTID& self, const NFINT64& nValue) = 0;
 
-    virtual bool ConsumeMoney(const NFIDENTID& self, int nValue) = 0;
-    virtual bool AddMoney(const NFIDENTID& self, int nValue) = 0;
+    virtual bool AddMoney( const NFIDENTID& self, const NFINT64& nValue ) = 0;
+    virtual bool ConsumeMoney(const NFIDENTID& self, const NFINT64& nValue) = 0;
+    virtual bool EnoughMoney(const NFIDENTID& self, const NFINT64& nValue) = 0;
 
+    virtual bool AddDiamond(const NFIDENTID& self, const NFINT64& nValue) = 0;
+    virtual bool ConsumeDiamond(const NFIDENTID& self, const NFINT64& nValue) = 0;
+    virtual bool EnoughDiamond(const NFIDENTID& self, const NFINT64& nValue) = 0;
 };
 
 #endif

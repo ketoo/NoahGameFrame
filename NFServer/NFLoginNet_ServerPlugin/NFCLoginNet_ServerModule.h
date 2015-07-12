@@ -22,6 +22,7 @@
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFPluginModule/NFILoginToMasterModule.h"
+#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 
 #define NET_MSG_PROCESS(xNFMsg, msg) \
     NFIDENTID nPlayerID; \
@@ -59,8 +60,8 @@ public:
 	virtual void LogSend(const char* str){}
 
 protected:
-	int OnRecivePack(const NFIPacket& msg);
-	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
+	int OnReciveClientPack(const NFIPacket& msg);
+	int OnSocketClientEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 protected:
 	//连接丢失,删2层(连接对象，帐号对象)
@@ -91,6 +92,8 @@ protected:
 protected:
 	void SynWorldToClient(const int nFD);
 
+	NFMapEx<NFIDENTID, int> mxClientIdent;
+
 private:
 
     NFILoginToMasterModule* m_pLoginToMasterModule;
@@ -100,6 +103,7 @@ private:
 	NFIKernelModule* m_pKernelModule;
 	NFILogModule* m_pLogModule;
 	NFILoginLogicModule* m_pLoginLogicModule;
+	NFIUUIDModule* m_pUUIDModule;
 };
 
 #endif

@@ -41,7 +41,7 @@ bool NFCBulletSkillConsumeProcessModule::Execute( const float fLasFrametime, con
 }
 
 
-int NFCBulletSkillConsumeProcessModule::ConsumeLegal( const NFIDENTID& self, const std::string& skillID,  const NFIValueList& other )
+int NFCBulletSkillConsumeProcessModule::ConsumeLegal( const NFIDENTID& self, const std::string& skillID,  const NFIDataList& other )
 {
     // «∑Ò±ª≥¡ƒ¨,CD,æ‡¿Îµ»
     return 1;
@@ -56,12 +56,12 @@ int NFCBulletSkillConsumeProcessModule::ConsumeSelf( const NFIDENTID& self, cons
     return 0;
 }
 
-int NFCBulletSkillConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, const std::string& strItemName, const NFIValueList& other, NFIValueList& damageListValue , NFIValueList& damageResultList )
+int NFCBulletSkillConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, const std::string& strItemName, const NFIDataList& other, NFIDataList& damageListValue , NFIDataList& damageResultList )
 {
     return 0;
 }
 
-int NFCBulletSkillConsumeProcessModule::ConsumeProcessEx( const NFIDENTID& self, const std::string& strSkillName, const NFIValueList& other, NFIValueList& damageListValue, NFIValueList& damageResultList )
+int NFCBulletSkillConsumeProcessModule::ConsumeProcessEx( const NFIDENTID& self, const std::string& strSkillName, const NFIDataList& other, NFIDataList& damageListValue, NFIDataList& damageResultList )
 {
     return 0;
 }

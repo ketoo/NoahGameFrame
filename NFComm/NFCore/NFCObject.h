@@ -77,28 +77,28 @@ public:
     virtual const std::string& GetRecordString(const std::string& strRecordName, const int nRow, const std::string& strColTag);
     virtual NFIDENTID GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag);
 
-    virtual std::shared_ptr<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName);
-    virtual std::shared_ptr<NFIComponent> FindComponent(const std::string& strComponentName);
+    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName);
+    virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName);
 
-    virtual std::shared_ptr<NFIRecordManager> GetRecordManager();
-    virtual std::shared_ptr<NFIHeartBeatManager> GetHeartBeatManager();
-    virtual std::shared_ptr<NFIPropertyManager> GetPropertyManager();
-    virtual std::shared_ptr<NFIComponentManager> GetComponentManager();
+    virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager();
+    virtual NF_SHARE_PTR<NFIHeartBeatManager> GetHeartBeatManager();
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager();
+    virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager();
 
 protected:
     virtual bool AddRecordCallBack(const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb);
 
     virtual bool AddPropertyCallBack(const std::string& strCriticalName, const PROPERTY_EVENT_FUNCTOR_PTR& cb);
 
-    virtual bool AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIDataList& var, const float fTime, const int nCount);
+    virtual bool AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount);
 
 private:
     NFIDENTID mSelf;
 
-    std::shared_ptr<NFIRecordManager> m_pRecordManager;
-    std::shared_ptr<NFIHeartBeatManager> m_pHeartBeatManager;
-    std::shared_ptr<NFIPropertyManager> m_pPropertyManager;
-    std::shared_ptr<NFIComponentManager> m_pComponentManager;
+    NF_SHARE_PTR<NFIRecordManager> m_pRecordManager;
+    NF_SHARE_PTR<NFIHeartBeatManager> m_pHeartBeatManager;
+    NF_SHARE_PTR<NFIPropertyManager> m_pPropertyManager;
+    NF_SHARE_PTR<NFIComponentManager> m_pComponentManager;
 
     NFIPluginManager* m_pPluginManager;
 };
