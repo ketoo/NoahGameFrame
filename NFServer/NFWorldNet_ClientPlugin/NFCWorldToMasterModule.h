@@ -40,17 +40,20 @@ public:
 
 protected:
 
-	int OnRecivePack(const NFIPacket& msg);
-	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
+protected:
+
+	int OnReciveMSPack(const NFIPacket& msg);
+	int OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 	//连接丢失,删2层(连接对象，帐号对象)
 	void OnClientDisconnect(const int nAddress);
 	//有连接
 	void OnClientConnected(const int nAddress);
-protected:
 
-    void Register();
-    void UnRegister();
+	virtual void LogServerInfo( const std::string& strServerInfo );
+
+
+    void Register(NFINet* pNet);
     void RefreshWorldInfo();
 
     int OnSelectServerProcess(const NFIPacket& msg);

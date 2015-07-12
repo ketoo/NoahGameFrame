@@ -10,6 +10,7 @@
 //#include "stdafx.h"
 #include "NFCProxyServerToWorldModule.h"
 #include "NFProxyServerNet_ClientPlugin.h"
+#include "NFCProxyServerToGameModule.h"
 
 //
 //
@@ -36,16 +37,17 @@ const int NFProxyServerNet_ClientPlugin::GetPluginVersion()
 
 const std::string NFProxyServerNet_ClientPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFProxyServerNet_ClientPlugin)
+	GET_PLUGIN_NAME(NFProxyServerNet_ClientPlugin)
 }
 
 void NFProxyServerNet_ClientPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFCProxyServerToWorldModule)
-
+	REGISTER_MODULE(pPluginManager, NFCProxyServerToWorldModule)
+	REGISTER_MODULE(pPluginManager, NFCProxyServerToGameModule)
 }
 
 void NFProxyServerNet_ClientPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCProxyServerToWorldModule)
+	UNREGISTER_MODULE(pPluginManager, NFCProxyServerToGameModule)
+	UNREGISTER_MODULE(pPluginManager, NFCProxyServerToWorldModule)
 }

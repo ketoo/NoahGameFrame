@@ -19,22 +19,22 @@ public:
     {
         Add = 0,
         Del,
-        Changed,//swap
+        Swap,
         Create,
         UpData,
         Cleared,
         Sort,
     };
 
-    typedef std::vector<NF_SHARE_PTR<NFIDataList::TData>> TRECORDVEC;
+    typedef std::vector< NF_SHARE_PTR<NFIDataList::TData> > TRECORDVEC;
     typedef TRECORDVEC::const_iterator TRECORDVECCONSTITER;
 
     virtual ~NFIRecord() {}
 
     virtual bool IsUsed(const int nRow) const  = 0;
-    virtual bool IsKey(const int nRow) const  = 0;
+    virtual bool IsKey(const int nCol) const  = 0;
     virtual bool SetUsed(const int nRow, const int bUse)  = 0;
-    virtual bool SetKey(const int nRow, const int bKey) = 0;
+    virtual bool SetKey(const int nCol, const int bKey) = 0;
 
     virtual int GetCols() const  = 0;
     virtual int GetRows() const  = 0;
@@ -105,7 +105,7 @@ public:
     {
         for (int i  = 0; i < varRows.GetCount(); ++i)
         {
-            Remove(varRows.Int(i));
+            Remove((int)varRows.Int(i));
         }
 
         return true;

@@ -13,6 +13,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIJavaScriptModule.h"
+#include "v8/include/v8.h"
 
 class NFCJavaScriptModule
     : public NFIJavaScriptModule
@@ -44,6 +45,10 @@ protected:
     virtual int OnRecordCommonEvent(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& arg);
     virtual int OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);    
 
+    bool InstallJS(const std::string& strComponentName);
+    bool CheckCompomentStatus(const std::string& strComponentName, const std::string& strFuncName);
+    bool CheckCompomentStatus(const std::string& strComponentName);
+    bool Regisger();
 protected:
 
     NFIScriptKernelModule* m_pScriptKernelModule;
@@ -51,6 +56,11 @@ protected:
     NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIEventProcessModule* m_pEventProcessModule;
+
+private:
+    v8::Isolate* m_pIsolate;
+    v8::Handle<v8::Context> mxContext;
+    NFMap<std::string, int> mmCompomentStatus;//Ω≈±æ «∑Òº”‘ÿ
 };
 
 #endif

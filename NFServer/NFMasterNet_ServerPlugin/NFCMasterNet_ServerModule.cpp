@@ -209,6 +209,8 @@ int NFCMasterNet_ServerModule::OnSelectWorldProcess(const NFIPacket& msg)
 
 bool NFCMasterNet_ServerModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
+	LogGameServer(fLasFrametime);
+
 	NFINetModule::Execute(fLasFrametime, fStartedTime);
 	return true;
 }
@@ -248,22 +250,25 @@ bool NFCMasterNet_ServerModule::AfterInit()
 	assert(NULL != m_pLogicClassModule);
 	assert(NULL != m_pElementInfoModule);
 
-	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("MasterServer");
+	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
 	if (xLogicClass.get())
 	{
 		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
 		std::string strConfigName; 
-		if (xNameList.Get(0, strConfigName))
+		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
 		{
-			const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
-			const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
-			const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
-			const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
-			const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
-			const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
+			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
+            const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+            if (nServerType == NF_SERVER_TYPES::NF_ST_MASTER && pPluginManager->AppID() == nServerID)
+			{
+				const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
+				const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
+				const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
+				const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
+				const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
 
-			Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCMasterNet_ServerModule::OnRecivePack, &NFCMasterNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
-
+				Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCMasterNet_ServerModule::OnRecivePack, &NFCMasterNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
+			}
 		}
 	}
 
@@ -272,13 +277,9 @@ bool NFCMasterNet_ServerModule::AfterInit()
 
 int NFCMasterNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 {
-	//std::cout << "OnRecivePack::thread id=" << GetCurrentThreadId() << std::endl;
-
 	int nMsgID = msg.GetMsgHead()->GetMsgID();
 	switch (nMsgID)
 	{
-	case NFMsg::EGameMsgID::EGMI_UNKNOW:
-		break;
     case NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT:
         break;
 	case NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED:
@@ -322,7 +323,7 @@ int NFCMasterNet_ServerModule::OnRecivePack( const NFIPacket& msg )
 
 }
 
-int NFCMasterNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
+int NFCMasterNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
 	//std::cout << "OnSocketEvent::thread id=" << GetCurrentThreadId() << std::endl;
 
@@ -413,4 +414,47 @@ void NFCMasterNet_ServerModule::SynWorldToLogin()
 
         pServerData = mLoginMap.Next();
     }
+}
+
+void NFCMasterNet_ServerModule::LogGameServer(const float fLastTime)
+{
+	if (mfLastLogTime < 10.0f)
+	{
+		mfLastLogTime += fLastTime;
+		return;
+	}
+
+	mfLastLogTime = 0.0f;
+
+	//////////////////////////////////////////////////////////////////////////
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "Begin Log WorldServer Info", "");
+
+	NF_SHARE_PTR<ServerData> pGameData = mWorldMap.First();
+	while (pGameData)
+	{
+		std::ostringstream stream;
+		stream << "Type: " << pGameData->pData->server_type() << " ID: " << pGameData->pData->server_id() << " State: " <<  NFMsg::EServerState_Name(pGameData->pData->server_state()) << " IP: " << pGameData->pData->server_ip() << " FD: " << pGameData->nFD;
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), stream);
+
+		pGameData = mWorldMap.Next();
+	}
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "End Log GameServer Info", "");
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "Begin Log LoginServer Info", "");
+
+	//////////////////////////////////////////////////////////////////////////
+	pGameData = mLoginMap.First();
+	while (pGameData)
+	{
+		std::ostringstream stream;
+		stream << "Type: " << pGameData->pData->server_type() << " ID: " << pGameData->pData->server_id() << " State: " <<  NFMsg::EServerState_Name(pGameData->pData->server_state()) << " IP: " << pGameData->pData->server_ip() << " FD: " << pGameData->nFD;
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), stream);
+
+		pGameData = mLoginMap.Next();
+	}
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "End Log LoginServer Info", "");
+
 }

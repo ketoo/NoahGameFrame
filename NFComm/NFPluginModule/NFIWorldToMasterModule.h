@@ -12,9 +12,10 @@
 #include <iostream>
 #include "NFILogicModule.h"
 #include "NFINetModule.h"
+#include "NFIClusterClientModule.hpp"
 
 class NFIWorldToMasterModule
-    : public NFINetModule
+    : public NFIClusterClientModule
 {
 
 public:
