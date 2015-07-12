@@ -56,6 +56,8 @@ class ReqCreateRole;
 class ReqDeleteRole;
 class ReqRecoverRole;
 class ServerHeartBeat;
+class RoleOnlineNotify;
+class RoleOfflineNotify;
 
 enum EServerState {
   EST_CRASH = 0,
@@ -213,6 +215,13 @@ class ServerInfoReport : public ::google::protobuf::Message {
   inline ::NFMsg::EServerState server_state() const;
   inline void set_server_state(::NFMsg::EServerState value);
 
+  // required int32 server_type = 8;
+  inline bool has_server_type() const;
+  inline void clear_server_type();
+  static const int kServerTypeFieldNumber = 8;
+  inline ::google::protobuf::int32 server_type() const;
+  inline void set_server_type(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ServerInfoReport)
  private:
   inline void set_has_server_id();
@@ -229,6 +238,8 @@ class ServerInfoReport : public ::google::protobuf::Message {
   inline void clear_has_server_cur_count();
   inline void set_has_server_state();
   inline void clear_has_server_state();
+  inline void set_has_server_type();
+  inline void clear_has_server_type();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -239,9 +250,10 @@ class ServerInfoReport : public ::google::protobuf::Message {
   ::google::protobuf::int32 server_max_online_;
   ::google::protobuf::int32 server_cur_count_;
   int server_state_;
+  ::google::protobuf::int32 server_type_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
@@ -407,12 +419,14 @@ class AckEventResult : public ::google::protobuf::Message {
   inline ::NFMsg::Ident* release_event_object();
   inline void set_allocated_event_object(::NFMsg::Ident* event_object);
 
-  // optional int64 event_arg = 3;
-  inline bool has_event_arg() const;
-  inline void clear_event_arg();
-  static const int kEventArgFieldNumber = 3;
-  inline ::google::protobuf::int64 event_arg() const;
-  inline void set_event_arg(::google::protobuf::int64 value);
+  // optional .NFMsg.Ident event_client = 3;
+  inline bool has_event_client() const;
+  inline void clear_event_client();
+  static const int kEventClientFieldNumber = 3;
+  inline const ::NFMsg::Ident& event_client() const;
+  inline ::NFMsg::Ident* mutable_event_client();
+  inline ::NFMsg::Ident* release_event_client();
+  inline void set_allocated_event_client(::NFMsg::Ident* event_client);
 
   // @@protoc_insertion_point(class_scope:NFMsg.AckEventResult)
  private:
@@ -420,13 +434,13 @@ class AckEventResult : public ::google::protobuf::Message {
   inline void clear_has_event_code();
   inline void set_has_event_object();
   inline void clear_has_event_object();
-  inline void set_has_event_arg();
-  inline void clear_has_event_arg();
+  inline void set_has_event_client();
+  inline void clear_has_event_client();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::NFMsg::Ident* event_object_;
-  ::google::protobuf::int64 event_arg_;
+  ::NFMsg::Ident* event_client_;
   int event_code_;
 
   mutable int _cached_size_;
@@ -1112,12 +1126,14 @@ class ReqConnectWorld : public ::google::protobuf::Message {
   inline ::std::string* release_account();
   inline void set_allocated_account(::std::string* account);
 
-  // optional int32 sender_ip = 3;
-  inline bool has_sender_ip() const;
-  inline void clear_sender_ip();
-  static const int kSenderIpFieldNumber = 3;
-  inline ::google::protobuf::int32 sender_ip() const;
-  inline void set_sender_ip(::google::protobuf::int32 value);
+  // optional .NFMsg.Ident sender = 3;
+  inline bool has_sender() const;
+  inline void clear_sender();
+  static const int kSenderFieldNumber = 3;
+  inline const ::NFMsg::Ident& sender() const;
+  inline ::NFMsg::Ident* mutable_sender();
+  inline ::NFMsg::Ident* release_sender();
+  inline void set_allocated_sender(::NFMsg::Ident* sender);
 
   // optional int32 login_id = 4;
   inline bool has_login_id() const;
@@ -1132,8 +1148,8 @@ class ReqConnectWorld : public ::google::protobuf::Message {
   inline void clear_has_world_id();
   inline void set_has_account();
   inline void clear_has_account();
-  inline void set_has_sender_ip();
-  inline void clear_has_sender_ip();
+  inline void set_has_sender();
+  inline void clear_has_sender();
   inline void set_has_login_id();
   inline void clear_has_login_id();
 
@@ -1141,8 +1157,8 @@ class ReqConnectWorld : public ::google::protobuf::Message {
 
   ::std::string* account_;
   ::google::protobuf::int32 world_id_;
-  ::google::protobuf::int32 sender_ip_;
   ::google::protobuf::int32 login_id_;
+  ::NFMsg::Ident* sender_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
@@ -1217,12 +1233,14 @@ class AckConnectWorldResult : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 world_id() const;
   inline void set_world_id(::google::protobuf::int32 value);
 
-  // required int32 sender_ip = 2;
-  inline bool has_sender_ip() const;
-  inline void clear_sender_ip();
-  static const int kSenderIpFieldNumber = 2;
-  inline ::google::protobuf::int32 sender_ip() const;
-  inline void set_sender_ip(::google::protobuf::int32 value);
+  // required .NFMsg.Ident sender = 2;
+  inline bool has_sender() const;
+  inline void clear_sender();
+  static const int kSenderFieldNumber = 2;
+  inline const ::NFMsg::Ident& sender() const;
+  inline ::NFMsg::Ident* mutable_sender();
+  inline ::NFMsg::Ident* release_sender();
+  inline void set_allocated_sender(::NFMsg::Ident* sender);
 
   // required int32 login_id = 3;
   inline bool has_login_id() const;
@@ -1278,8 +1296,8 @@ class AckConnectWorldResult : public ::google::protobuf::Message {
  private:
   inline void set_has_world_id();
   inline void clear_has_world_id();
-  inline void set_has_sender_ip();
-  inline void clear_has_sender_ip();
+  inline void set_has_sender();
+  inline void clear_has_sender();
   inline void set_has_login_id();
   inline void clear_has_login_id();
   inline void set_has_account();
@@ -1293,13 +1311,13 @@ class AckConnectWorldResult : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::NFMsg::Ident* sender_;
   ::google::protobuf::int32 world_id_;
-  ::google::protobuf::int32 sender_ip_;
-  ::std::string* account_;
   ::google::protobuf::int32 login_id_;
-  ::google::protobuf::int32 world_port_;
+  ::std::string* account_;
   ::std::string* world_ip_;
   ::std::string* world_key_;
+  ::google::protobuf::int32 world_port_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
@@ -2324,6 +2342,174 @@ class ServerHeartBeat : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static ServerHeartBeat* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class RoleOnlineNotify : public ::google::protobuf::Message {
+ public:
+  RoleOnlineNotify();
+  virtual ~RoleOnlineNotify();
+
+  RoleOnlineNotify(const RoleOnlineNotify& from);
+
+  inline RoleOnlineNotify& operator=(const RoleOnlineNotify& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RoleOnlineNotify& default_instance();
+
+  void Swap(RoleOnlineNotify* other);
+
+  // implements Message ----------------------------------------------
+
+  RoleOnlineNotify* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RoleOnlineNotify& from);
+  void MergeFrom(const RoleOnlineNotify& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .NFMsg.Ident guild = 1;
+  inline bool has_guild() const;
+  inline void clear_guild();
+  static const int kGuildFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild() const;
+  inline ::NFMsg::Ident* mutable_guild();
+  inline ::NFMsg::Ident* release_guild();
+  inline void set_allocated_guild(::NFMsg::Ident* guild);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.RoleOnlineNotify)
+ private:
+  inline void set_has_guild();
+  inline void clear_has_guild();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+
+  void InitAsDefaultInstance();
+  static RoleOnlineNotify* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class RoleOfflineNotify : public ::google::protobuf::Message {
+ public:
+  RoleOfflineNotify();
+  virtual ~RoleOfflineNotify();
+
+  RoleOfflineNotify(const RoleOfflineNotify& from);
+
+  inline RoleOfflineNotify& operator=(const RoleOfflineNotify& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RoleOfflineNotify& default_instance();
+
+  void Swap(RoleOfflineNotify* other);
+
+  // implements Message ----------------------------------------------
+
+  RoleOfflineNotify* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RoleOfflineNotify& from);
+  void MergeFrom(const RoleOfflineNotify& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .NFMsg.Ident guild = 1;
+  inline bool has_guild() const;
+  inline void clear_guild();
+  static const int kGuildFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild() const;
+  inline ::NFMsg::Ident* mutable_guild();
+  inline ::NFMsg::Ident* release_guild();
+  inline void set_allocated_guild(::NFMsg::Ident* guild);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.RoleOfflineNotify)
+ private:
+  inline void set_has_guild();
+  inline void clear_has_guild();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+
+  void InitAsDefaultInstance();
+  static RoleOfflineNotify* default_instance_;
+};
 // ===================================================================
 
 
@@ -2582,6 +2768,28 @@ inline void ServerInfoReport::set_server_state(::NFMsg::EServerState value) {
   server_state_ = value;
 }
 
+// required int32 server_type = 8;
+inline bool ServerInfoReport::has_server_type() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void ServerInfoReport::set_has_server_type() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void ServerInfoReport::clear_has_server_type() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void ServerInfoReport::clear_server_type() {
+  server_type_ = 0;
+  clear_has_server_type();
+}
+inline ::google::protobuf::int32 ServerInfoReport::server_type() const {
+  return server_type_;
+}
+inline void ServerInfoReport::set_server_type(::google::protobuf::int32 value) {
+  set_has_server_type();
+  server_type_ = value;
+}
+
 // -------------------------------------------------------------------
 
 // ServerInfoReportList
@@ -2676,26 +2884,42 @@ inline void AckEventResult::set_allocated_event_object(::NFMsg::Ident* event_obj
   }
 }
 
-// optional int64 event_arg = 3;
-inline bool AckEventResult::has_event_arg() const {
+// optional .NFMsg.Ident event_client = 3;
+inline bool AckEventResult::has_event_client() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void AckEventResult::set_has_event_arg() {
+inline void AckEventResult::set_has_event_client() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void AckEventResult::clear_has_event_arg() {
+inline void AckEventResult::clear_has_event_client() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void AckEventResult::clear_event_arg() {
-  event_arg_ = GOOGLE_LONGLONG(0);
-  clear_has_event_arg();
+inline void AckEventResult::clear_event_client() {
+  if (event_client_ != NULL) event_client_->::NFMsg::Ident::Clear();
+  clear_has_event_client();
 }
-inline ::google::protobuf::int64 AckEventResult::event_arg() const {
-  return event_arg_;
+inline const ::NFMsg::Ident& AckEventResult::event_client() const {
+  return event_client_ != NULL ? *event_client_ : *default_instance_->event_client_;
 }
-inline void AckEventResult::set_event_arg(::google::protobuf::int64 value) {
-  set_has_event_arg();
-  event_arg_ = value;
+inline ::NFMsg::Ident* AckEventResult::mutable_event_client() {
+  set_has_event_client();
+  if (event_client_ == NULL) event_client_ = new ::NFMsg::Ident;
+  return event_client_;
+}
+inline ::NFMsg::Ident* AckEventResult::release_event_client() {
+  clear_has_event_client();
+  ::NFMsg::Ident* temp = event_client_;
+  event_client_ = NULL;
+  return temp;
+}
+inline void AckEventResult::set_allocated_event_client(::NFMsg::Ident* event_client) {
+  delete event_client_;
+  event_client_ = event_client;
+  if (event_client) {
+    set_has_event_client();
+  } else {
+    clear_has_event_client();
+  }
 }
 
 // -------------------------------------------------------------------
@@ -3670,26 +3894,42 @@ inline void ReqConnectWorld::set_allocated_account(::std::string* account) {
   }
 }
 
-// optional int32 sender_ip = 3;
-inline bool ReqConnectWorld::has_sender_ip() const {
+// optional .NFMsg.Ident sender = 3;
+inline bool ReqConnectWorld::has_sender() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void ReqConnectWorld::set_has_sender_ip() {
+inline void ReqConnectWorld::set_has_sender() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void ReqConnectWorld::clear_has_sender_ip() {
+inline void ReqConnectWorld::clear_has_sender() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void ReqConnectWorld::clear_sender_ip() {
-  sender_ip_ = 0;
-  clear_has_sender_ip();
+inline void ReqConnectWorld::clear_sender() {
+  if (sender_ != NULL) sender_->::NFMsg::Ident::Clear();
+  clear_has_sender();
 }
-inline ::google::protobuf::int32 ReqConnectWorld::sender_ip() const {
-  return sender_ip_;
+inline const ::NFMsg::Ident& ReqConnectWorld::sender() const {
+  return sender_ != NULL ? *sender_ : *default_instance_->sender_;
 }
-inline void ReqConnectWorld::set_sender_ip(::google::protobuf::int32 value) {
-  set_has_sender_ip();
-  sender_ip_ = value;
+inline ::NFMsg::Ident* ReqConnectWorld::mutable_sender() {
+  set_has_sender();
+  if (sender_ == NULL) sender_ = new ::NFMsg::Ident;
+  return sender_;
+}
+inline ::NFMsg::Ident* ReqConnectWorld::release_sender() {
+  clear_has_sender();
+  ::NFMsg::Ident* temp = sender_;
+  sender_ = NULL;
+  return temp;
+}
+inline void ReqConnectWorld::set_allocated_sender(::NFMsg::Ident* sender) {
+  delete sender_;
+  sender_ = sender;
+  if (sender) {
+    set_has_sender();
+  } else {
+    clear_has_sender();
+  }
 }
 
 // optional int32 login_id = 4;
@@ -3740,26 +3980,42 @@ inline void AckConnectWorldResult::set_world_id(::google::protobuf::int32 value)
   world_id_ = value;
 }
 
-// required int32 sender_ip = 2;
-inline bool AckConnectWorldResult::has_sender_ip() const {
+// required .NFMsg.Ident sender = 2;
+inline bool AckConnectWorldResult::has_sender() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void AckConnectWorldResult::set_has_sender_ip() {
+inline void AckConnectWorldResult::set_has_sender() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void AckConnectWorldResult::clear_has_sender_ip() {
+inline void AckConnectWorldResult::clear_has_sender() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void AckConnectWorldResult::clear_sender_ip() {
-  sender_ip_ = 0;
-  clear_has_sender_ip();
+inline void AckConnectWorldResult::clear_sender() {
+  if (sender_ != NULL) sender_->::NFMsg::Ident::Clear();
+  clear_has_sender();
 }
-inline ::google::protobuf::int32 AckConnectWorldResult::sender_ip() const {
-  return sender_ip_;
+inline const ::NFMsg::Ident& AckConnectWorldResult::sender() const {
+  return sender_ != NULL ? *sender_ : *default_instance_->sender_;
 }
-inline void AckConnectWorldResult::set_sender_ip(::google::protobuf::int32 value) {
-  set_has_sender_ip();
-  sender_ip_ = value;
+inline ::NFMsg::Ident* AckConnectWorldResult::mutable_sender() {
+  set_has_sender();
+  if (sender_ == NULL) sender_ = new ::NFMsg::Ident;
+  return sender_;
+}
+inline ::NFMsg::Ident* AckConnectWorldResult::release_sender() {
+  clear_has_sender();
+  ::NFMsg::Ident* temp = sender_;
+  sender_ = NULL;
+  return temp;
+}
+inline void AckConnectWorldResult::set_allocated_sender(::NFMsg::Ident* sender) {
+  delete sender_;
+  sender_ = sender;
+  if (sender) {
+    set_has_sender();
+  } else {
+    clear_has_sender();
+  }
 }
 
 // required int32 login_id = 3;
@@ -5231,6 +5487,90 @@ inline ::google::protobuf::int32 ServerHeartBeat::count() const {
 inline void ServerHeartBeat::set_count(::google::protobuf::int32 value) {
   set_has_count();
   count_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// RoleOnlineNotify
+
+// optional .NFMsg.Ident guild = 1;
+inline bool RoleOnlineNotify::has_guild() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void RoleOnlineNotify::set_has_guild() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void RoleOnlineNotify::clear_has_guild() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void RoleOnlineNotify::clear_guild() {
+  if (guild_ != NULL) guild_->::NFMsg::Ident::Clear();
+  clear_has_guild();
+}
+inline const ::NFMsg::Ident& RoleOnlineNotify::guild() const {
+  return guild_ != NULL ? *guild_ : *default_instance_->guild_;
+}
+inline ::NFMsg::Ident* RoleOnlineNotify::mutable_guild() {
+  set_has_guild();
+  if (guild_ == NULL) guild_ = new ::NFMsg::Ident;
+  return guild_;
+}
+inline ::NFMsg::Ident* RoleOnlineNotify::release_guild() {
+  clear_has_guild();
+  ::NFMsg::Ident* temp = guild_;
+  guild_ = NULL;
+  return temp;
+}
+inline void RoleOnlineNotify::set_allocated_guild(::NFMsg::Ident* guild) {
+  delete guild_;
+  guild_ = guild;
+  if (guild) {
+    set_has_guild();
+  } else {
+    clear_has_guild();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// RoleOfflineNotify
+
+// optional .NFMsg.Ident guild = 1;
+inline bool RoleOfflineNotify::has_guild() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void RoleOfflineNotify::set_has_guild() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void RoleOfflineNotify::clear_has_guild() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void RoleOfflineNotify::clear_guild() {
+  if (guild_ != NULL) guild_->::NFMsg::Ident::Clear();
+  clear_has_guild();
+}
+inline const ::NFMsg::Ident& RoleOfflineNotify::guild() const {
+  return guild_ != NULL ? *guild_ : *default_instance_->guild_;
+}
+inline ::NFMsg::Ident* RoleOfflineNotify::mutable_guild() {
+  set_has_guild();
+  if (guild_ == NULL) guild_ = new ::NFMsg::Ident;
+  return guild_;
+}
+inline ::NFMsg::Ident* RoleOfflineNotify::release_guild() {
+  clear_has_guild();
+  ::NFMsg::Ident* temp = guild_;
+  guild_ = NULL;
+  return temp;
+}
+inline void RoleOfflineNotify::set_allocated_guild(::NFMsg::Ident* guild) {
+  delete guild_;
+  guild_ = guild;
+  if (guild) {
+    set_has_guild();
+  } else {
+    clear_has_guild();
+  }
 }
 
 

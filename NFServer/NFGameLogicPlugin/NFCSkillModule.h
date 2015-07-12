@@ -9,7 +9,6 @@
 #ifndef _NFC_SKILL_MODULE_H_
 #define _NFC_SKILL_MODULE_H_
 
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
@@ -19,6 +18,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCSkillModule
     : public NFISkillModule
@@ -47,12 +47,13 @@ public:
     virtual int GetSkillGemLevel( const NFIDENTID& self, const std::string& strSkillName );
 
     virtual int AddNewerSkill( const NFIDENTID& self );
+    virtual int OnUseSkill(const NFIDENTID& self, const NFIDataList& var);
 protected:
 
-    int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var );
+    int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-	int OnRequireUseSkillEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
-	int OnRequireUseSkillPosEvent( const NFIDENTID& self, const int nEventID, const NFIValueList& var );
+	int OnRequireUseSkillEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
+	int OnRequireUseSkillPosEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
 private:
     char* mstrSkillTableName;
 

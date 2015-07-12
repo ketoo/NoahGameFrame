@@ -9,7 +9,6 @@
 #ifndef _NFC_PROPERTY_MODULE_H_
 #define _NFC_PROPERTY_MODULE_H_
 
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
@@ -17,6 +16,7 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCPropertyModule
     : public NFIPropertyModule
@@ -41,29 +41,34 @@ public:
     virtual int AddPropertyValue( const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue );
     virtual int SubPropertyValue( const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue );
 
-    virtual bool FullHPMP( const NFIDENTID& self );
-    virtual bool AddHP( const NFIDENTID& self, int nValue );
-    virtual bool ConsumeHP( const NFIDENTID& self, int nValue );
+    virtual bool FullHPMP(const NFIDENTID& self);
+    virtual bool AddHP(const NFIDENTID& self, const NFINT64& nValue);
+    virtual bool ConsumeHP(const NFIDENTID& self, const NFINT64& nValue);
+    virtual bool EnoughHP(const NFIDENTID& self, const NFINT64& nValue);
 
-    virtual bool AddMP( const NFIDENTID& self, int nValue );
-    virtual bool ConsumeMP( const NFIDENTID& self, int nValue );    
+    virtual bool AddMP(const NFIDENTID& self, const NFINT64& nValue);
+    virtual bool ConsumeMP(const NFIDENTID& self, const NFINT64& nValue);    
+    virtual bool EnoughMP(const NFIDENTID& self, const NFINT64& nValue);
 
-    virtual bool ConsumeSP( const NFIDENTID& self, int nValue );
-    virtual bool FullSP( const NFIDENTID& self );
-    virtual bool AddSP( const NFIDENTID& self, int nValue );
+    virtual bool FullSP(const NFIDENTID& self);
+    virtual bool AddSP(const NFIDENTID& self, const NFINT64& nValue);
+    virtual bool ConsumeSP(const NFIDENTID& self, const NFINT64& nValue);
+    virtual bool EnoughSP(const NFIDENTID& self, const NFINT64& nValue);
 
-    virtual bool ConsumeMoney( const NFIDENTID& self, int nValue );
-    virtual bool AddMoney( const NFIDENTID& self, int nValue );
+    virtual bool AddMoney(const NFIDENTID& self, const NFINT64& nValue);
+    virtual bool ConsumeMoney(const NFIDENTID& self, const NFINT64& nValue);
+    virtual bool EnoughMoney(const NFIDENTID& self, const NFINT64& nValue);
 
-protected:
-
+    virtual bool AddDiamond(const NFIDENTID& self, const NFINT64& nValue);
+    virtual bool ConsumeDiamond(const NFIDENTID& self, const NFINT64& nValue);
+    virtual bool EnoughDiamond(const NFIDENTID& self, const NFINT64& nValue);
 
 protected:
     int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    int OnObjectLevelEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
+    int OnObjectLevelEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar );
 
-    int OnRecordPropertyEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
+    int OnRecordPropertyEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar);
 private:
     //NFConfig mConfig;
 private:

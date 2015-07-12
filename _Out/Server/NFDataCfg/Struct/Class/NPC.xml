@@ -1,46 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--this is a class xml-->
+ï»¿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <XML>
-    <Records/>
-    <Propertys>
-        <Property Desc="ÖÖ×ÓID" Id="SeedID" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
-        <Property Desc="¾­Ñé»ñµÃ,Èç¹ûÊÇ¹ÖÎï£¬ÔòÊÇµôÂä¾­Ñé" Id="EXP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÉúÃüÖµ" Id="HP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÌåÁ¦" Id="SP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="·¨Á¦Öµ" Id="MP" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="Ç®" Id="Money" Index="0" Private="1" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="LastAttacker" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="object" View="1"/>
-        <Property Desc="" Id="X" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View="1"/>
-        <Property Desc="" Id="Y" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View="1"/>
-        <Property Desc="" Id="Z" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="float" View="1"/>
-        <Property Desc="" Id="TargetX" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float" View="1"/>
-        <Property Desc="" Id="TargetY" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float" View="1"/>
-        <Property Desc="" Id="TargetZ" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="float" View="1"/>
-        <Property Desc="ÉúÃüÖµ" Id="MAXHP" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="·¨Á¦Öµ" Id="MAXMP" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÌåÁ¦" Id="MAXSP" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÉúÃüÖµ»Ø¸´" Id="HPREGEN" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÌåÁ¦»Ø¸´" Id="SPREGEN" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="MP»Ø¸´" Id="MPREGEN" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÎïÀí¹¥»÷Á¦" Id="ATK_VALUE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÎïÀí·ÀÓùÁ¦" Id="DEF_VALUE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÒÆ¶¯ËÙ¶È,Ä¬ÈÏµ¥Î»ÊÇ10000=1Ã×" Id="MOVE_SPEED" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="¹¥»÷ËÙ¶ÈÄ¬ÈÏ10000" Id="ATK_SPEED" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="»ð" Id="ATK_FIRE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="À×µç" Id="ATK_LIGHT" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="±ù" Id="ATK_ICE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="¶¾" Id="ATK_POISON" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="»ð¿¹" Id="DEF_FIRE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="À×µç¿¹" Id="DEF_LIGHT" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="±ù¿¹" Id="DEF_ICE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="¶¾¿¹" Id="DEF_POISON" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="Ñ£ÔÎ¿ª¹Ø" Id="DIZZY_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÒÆ¶¯¿ª¹Ø" Id="MOVE_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="¼¼ÄÜ¿ª¹Ø" Id="SKILL_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="ÎïÀíÃâÒß¿ª¹Ø" Id="PHYSICAL_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="Ä§·¨ÃâÒß¿ª¹Ø" Id="MAGIC_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="BUFFÃâÒß¿ª¹Ø" Id="BUFF_GATE" Index="0" Private="1" Public="1" RelationValue="Friend" Save="0" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="¿Í»§¶ËÔ¤ÉèÄ£ÐÍ" Id="Prefab" Index="0" Private="0" Public="0" RelationValue="Friend" Save="0" SaveInterval="0" Type="string" View="1"/>
-    </Propertys>
-    <Includes/>
+  <Propertys>
+    <Property Id="SeedID" Type="string" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ç§å­ID" />
+    <Property Id="EXP" Type="int" Public="0" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ç»éªŒèŽ·å¾—,å¦‚æžœæ˜¯æ€ªç‰©ï¼Œåˆ™æ˜¯æŽ‰è½ç»éªŒ" />
+    <Property Id="HP" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ç”Ÿå‘½å€¼" />
+    <Property Id="SP" Type="int" Public="0" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä½“åŠ›" />
+    <Property Id="MP" Type="int" Public="0" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ³•åŠ›å€¼" />
+    <Property Id="Money" Type="int" Public="0" Private="1" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="é’±" />
+    <Property Id="LastAttacker" Type="object" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="X" Type="float" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="Y" Type="float" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="Z" Type="float" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="TargetX" Type="float" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="TargetY" Type="float" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="TargetZ" Type="float" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="MAXHP" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ç”Ÿå‘½å€¼" />
+    <Property Id="MAXMP" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ³•åŠ›å€¼" />
+    <Property Id="MAXSP" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä½“åŠ›" />
+    <Property Id="HPREGEN" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ç”Ÿå‘½å€¼å›žå¤" />
+    <Property Id="SPREGEN" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ä½“åŠ›å›žå¤" />
+    <Property Id="MPREGEN" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="MPå›žå¤" />
+    <Property Id="ATK_VALUE" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ç‰©ç†æ”»å‡»åŠ›" />
+    <Property Id="DEF_VALUE" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ç‰©ç†é˜²å¾¡åŠ›" />
+    <Property Id="MOVE_SPEED" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ç§»åŠ¨é€Ÿåº¦,é»˜è®¤å•ä½æ˜¯10000=1ç±³" />
+    <Property Id="ATK_SPEED" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ”»å‡»é€Ÿåº¦é»˜è®¤10000" />
+    <Property Id="ATK_FIRE" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ç«" />
+    <Property Id="ATK_LIGHT" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="é›·ç”µ" />
+    <Property Id="ATK_ICE" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å†°" />
+    <Property Id="ATK_POISON" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ¯’" />
+    <Property Id="DEF_FIRE" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ç«æŠ—" />
+    <Property Id="DEF_LIGHT" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="é›·ç”µæŠ—" />
+    <Property Id="DEF_ICE" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å†°æŠ—" />
+    <Property Id="DEF_POISON" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ¯’æŠ—" />
+    <Property Id="DIZZY_GATE" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="çœ©æ™•å¼€å…³" />
+    <Property Id="MOVE_GATE" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ç§»åŠ¨å¼€å…³" />
+    <Property Id="SKILL_GATE" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æŠ€èƒ½å¼€å…³" />
+    <Property Id="PHYSICAL_GATE" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="ç‰©ç†å…ç–«å¼€å…³" />
+    <Property Id="MAGIC_GATE" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="é­”æ³•å…ç–«å¼€å…³" />
+    <Property Id="BUFF_GATE" Type="int" Public="1" Private="1" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="BUFFå…ç–«å¼€å…³" />
+    <Property Id="Prefab" Type="string" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="å®¢æˆ·ç«¯é¢„è®¾æ¨¡åž‹" />
+    <Property Id="MoveType" Type="int" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="Moveç±»åž‹" />
+    <Property Id="AtkDis" Type="float" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æ”»å‡»è·ç¦»" />
+    <Property Id="DropPackList" Type="string" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æŽ‰è½åˆ—è¡¨" />
+    <Property Id="SkillIDRef" Type="string" Public="0" Private="0" Save="0" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="æŠ€èƒ½åˆ—è¡¨ç´¢å¼•" />
+  </Propertys>
+  <Records>
+    <Record Id="PosList" Row="64" Col="4" Public="0" Private="1" Save="1" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="">
+      <Col Type="float" Tag="X" />
+      <Col Type="float" Tag="Y" />
+      <Col Type="float" Tag="Z" />
+      <Col Type="float" Tag="StayTime" />
+    </Record>
+  </Records>
+  <Components />
 </XML>
