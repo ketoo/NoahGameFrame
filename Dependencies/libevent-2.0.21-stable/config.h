@@ -117,7 +117,7 @@
 /* #undef HAVE_KQUEUE */
 
 /* Define if the system has zlib */
-/* #undef HAVE_LIBZ */
+#define HAVE_LIBZ 1
 
 /* Define to 1 if you have the <memory.h> header file. */
 #define HAVE_MEMORY_H 1
@@ -135,10 +135,10 @@
 #define HAVE_NETINET_IN_H 1
 
 /* Define if the system has openssl */
-/* #undef HAVE_OPENSSL */
+#define HAVE_OPENSSL 1
 
 /* Define to 1 if you have the <openssl/bio.h> header file. */
-/* #undef HAVE_OPENSSL_BIO_H */
+#define HAVE_OPENSSL_BIO_H 1
 
 /* Define to 1 if you have the `pipe' function. */
 #define HAVE_PIPE 1
@@ -348,7 +348,7 @@
 /* #undef HAVE_WORKING_KQUEUE */
 
 /* Define to 1 if you have the <zlib.h> header file. */
-/* #undef HAVE_ZLIB_H */
+#define HAVE_ZLIB_H 1
 
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */

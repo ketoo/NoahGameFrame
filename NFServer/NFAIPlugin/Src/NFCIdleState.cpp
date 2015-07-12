@@ -36,6 +36,7 @@ bool NFCIdleState::Enter(const NFIDENTID& self)
         NFIStateMachine* pStateMachine = m_pAIModule->GetStateMachine(self);
         if (pStateMachine)
         {
+			//看是否有战斗能力
             switch (pStateMachine->LastState())
             {
                 case NFAI_STATE::FightState:
@@ -69,7 +70,7 @@ bool NFCIdleState::Execute(const NFIDENTID& self)
             {
                 if (m_pKernelModule->GetPropertyInt(self, "MoveSpeed") > 0)
                 {
-                    RandomIdle(pStateMachine);
+                    RandomIdle(self, pStateMachine);
                 }
             }
         }
@@ -90,15 +91,27 @@ bool NFCIdleState::DoRule(const NFIDENTID& self)
     return true;
 }
 
-bool NFCIdleState::RandomIdle(NFIStateMachine* pStateMachine)
+bool NFCIdleState::RandomIdle(const NFIDENTID& self, NFIStateMachine* pStateMachine)
 {
-    //随机进入休闲或者继续巡逻
-    float fRand = (float)(rand() / double(RAND_MAX));
-    if (fRand < 0.4f)
-    {
-        pStateMachine->ChangeState(PatrolState);
-        return true;
-    }
+	//如果是定点的，则不走，继续idle
+	NFAI_MOVE_TYPE eMoveType = (NFAI_MOVE_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
+
+	switch (eMoveType)
+	{
+	case NFAI_MOVE_TYPE::MOVE_BY_POINT_LIST:
+	case NFAI_MOVE_TYPE::MOVE_BY_RANDOM:
+		{
+			float fRand = (float)(rand() / double(RAND_MAX));
+			if (fRand < 0.4f)
+			{
+				pStateMachine->ChangeState(PatrolState);
+			}
+		}
+		break;
+
+	default:
+		break;
+	}
 
     return false;
 }

@@ -13,10 +13,10 @@
 #include <fstream>
 #include <string>
 #include <boost/random.hpp>
-#include "NFComm/NFCore/NFIdentID.h"
 #include "NFComm/NFCore/NFCObject.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
+#include "NFComm/NFPluginModule/NFIdentID.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -52,8 +52,6 @@ public:
     virtual bool IsContainer(const NFIDENTID& self);
 
     virtual bool ExistContainer(const int nContainerIndex);
-
-    virtual int Type(const NFIDENTID& self);
 
     virtual NF_SHARE_PTR<NFIObject> GetObject(const NFIDENTID& ident);
 
@@ -118,7 +116,7 @@ public:
     virtual bool AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& varKey, const NFIDataList& varDesc, const NFIDataList& varTag, const NFIDataList& varRelatedRecord, const int nRows, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex);
     ////////////////////////////////////////////////////////////////
 
-    virtual NFIDENTID CreateContainer(const int nContainerIndex, const std::string& strSceneConfigID);
+    virtual bool CreateContainer(const int nContainerIndex, const std::string& strSceneConfigID);
 
     virtual bool DestroyContainer(const int nContainerIndex);
 
@@ -143,9 +141,9 @@ public:
 
     virtual NFIDENTID GetGridID(const float fX, const float fY, const float fZ);
 
-    virtual bool GetAroundGrid(const int nContainerID, const int nGroupID, const NFIDENTID nGridID, NFIDataList& list);
+    //virtual bool GetAroundGrid(const int nContainerID, const int nGroupID, const NFIDENTID nGridID, NFIDataList& list);
 
-    virtual bool GetGridObjectList(const int nContainerID, const int nGroupID, const NFIDENTID nGridID, NFIDataList& list);
+    //virtual bool GetGridObjectList(const int nContainerID, const int nGroupID, const NFIDENTID nGridID, NFIDataList& list);
 
     virtual bool GetRangObjectList(const NFIDENTID& self, const int nContainerID, const int nGroupID, const float fRang, NFIDataList& list);
 
@@ -173,12 +171,6 @@ protected:
     //只能网络[脚本]模块注册，回调用来同步对象类表事件,所有的类表都会回调
     virtual bool ResgisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& cb);
 
-    //     //只能网络[脚本]模块注册，回调心跳,所有的心跳都会回调
-    //     virtual bool ResgisterCommonHeartBeat(const HEART_BEAT_FUNCTOR_PTR& cb);
-    //
-    //     //只能网络[脚本]模块注册，回调事件,所有的事件都会回调
-    //     virtual bool ResgisterCommonEvent(const EVENT_PROCESS_FUNCTOR_PTR& cb);
-
 protected:
 
     virtual bool AddEventCallBack(const NFIDENTID& self, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb);
@@ -186,7 +178,7 @@ protected:
 
     virtual bool AddRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb);
     virtual bool AddPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const PROPERTY_EVENT_FUNCTOR_PTR& cb);
-    virtual bool AddHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIDataList& var, const float fTime, const int nCount);
+    virtual bool AddHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount);
 
 protected:
     void InitRandom();
@@ -194,8 +186,8 @@ protected:
 protected:
 
     int OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
-    int OnPropertyCommonEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar);
-    int OnRecordCommonEvent(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& arg);
+    int OnPropertyCommonEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar);
+    int OnRecordCommonEvent(const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar);
 
     //     int OnHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var);
     //     int OnEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIDataList& var);
@@ -211,10 +203,7 @@ protected:
     std::list<PROPERTY_EVENT_FUNCTOR_PTR> mtCommonPropertyCallBackList;
     //通用表变动回调,以便同步
     std::list<RECORD_EVENT_FUNCTOR_PTR> mtCommonRecordCallBackList;
-    //     //通用心跳回调
-    //     std::list<HEART_BEAT_FUNCTOR_PTR> mtCommonHeartBeatCallBackList;
-    //     //通用事件回调
-    //     std::list<EVENT_PROCESS_FUNCTOR_PTR> mtCommonEventCallBackList;
+
 private:
     //属性的KEY，比如HP=1，会以这个建立KEY，那么可以快速查询所有HP=1的对象而不用遍历
     //     std::map<std::string,std::map<TData, NFList<NFIDENTID>>>

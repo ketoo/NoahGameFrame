@@ -1,22 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--this is a class xml-->
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <XML>
-    <Records/>
-    <Propertys>
-        <Property Desc="" Id="EFT_INFO" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="EFT_BOOOST" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="EFT_LVLUP" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="EFT_CREATE_SOLDER" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="EFT_CREATE_SPEEL" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="EFT_RESEARCH" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="EFT_COLLECT_GOLD" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="EFT_COLLECT_STONE" Index="0" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="0" Type="int" View="1"/>
-        <Property Desc="" Id="EFT_COLLECT_STEEL" Index="1" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="1" Type="int" View="1"/>
-        <Property Desc="" Id="EFT_COLLECT_DIAMOND" Index="2" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="2" Type="int" View="1"/>
-        <Property Desc="" Id="EFT_SELL" Index="3" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="3" Type="int" View="1"/>
-        <Property Desc="" Id="EFT_REPAIR" Index="4" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="4" Type="int" View="1"/>
-        <Property Desc="" Id="EFT_CANCEL" Index="5" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="5" Type="int" View="1"/>
-        <Property Desc="" Id="EFT_FINISH" Index="6" Private="0" Public="0" RelationValue="Friend" Save="1" SaveInterval="6" Type="int" View="1"/>
-    </Propertys>
-    <Includes/>
+  <Propertys>
+    <Property Id="EFT_INFO" Type="int" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="EFT_BOOOST" Type="int" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="EFT_LVLUP" Type="int" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="EFT_CREATE_SOLDER" Type="int" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="EFT_CREATE_SPEEL" Type="int" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="EFT_RESEARCH" Type="int" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="EFT_COLLECT_GOLD" Type="int" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="EFT_COLLECT_STONE" Type="int" Public="0" Private="0" Save="1" View="1" Index="0" SaveInterval="0" RelationValue="Friend" Desc="" />
+    <Property Id="EFT_COLLECT_STEEL" Type="int" Public="0" Private="0" Save="1" View="1" Index="1" SaveInterval="1" RelationValue="Friend" Desc="" />
+    <Property Id="EFT_COLLECT_DIAMOND" Type="int" Public="0" Private="0" Save="1" View="1" Index="2" SaveInterval="2" RelationValue="Friend" Desc="" />
+    <Property Id="EFT_SELL" Type="int" Public="0" Private="0" Save="1" View="1" Index="3" SaveInterval="3" RelationValue="Friend" Desc="" />
+    <Property Id="EFT_REPAIR" Type="int" Public="0" Private="0" Save="1" View="1" Index="4" SaveInterval="4" RelationValue="Friend" Desc="" />
+    <Property Id="EFT_CANCEL" Type="int" Public="0" Private="0" Save="1" View="1" Index="5" SaveInterval="5" RelationValue="Friend" Desc="" />
+    <Property Id="EFT_FINISH" Type="int" Public="0" Private="0" Save="1" View="1" Index="6" SaveInterval="6" RelationValue="Friend" Desc="" />
+  </Propertys>
+  <Records />
+  <Components />
 </XML>

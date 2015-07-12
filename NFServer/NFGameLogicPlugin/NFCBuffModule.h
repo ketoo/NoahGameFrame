@@ -9,11 +9,11 @@
 #ifndef _NFC_BUFF_MODULE_H_
 #define _NFC_BUFF_MODULE_H_
 
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIBuffModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCBuffModule
     : public NFIBuffModule

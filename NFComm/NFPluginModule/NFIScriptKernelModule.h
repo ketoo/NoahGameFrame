@@ -11,11 +11,11 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
+#include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFCore/NFCDataList.h"
-#include "NFComm/NFCore/NFIdentID.h"
+#include "NFComm/NFPluginModule/NFIdentID.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFCore/NFMap.h"
 
 class NFCScriptName
 {
@@ -68,23 +68,43 @@ protected:
 private:
 };
 
-class NFScriptInt64
+class NFScriptIdent
 {
 public:
-    NFScriptInt64(){};
-    NFScriptInt64(const NFIDENTID& ID)
+    NFScriptIdent(){};
+    NFScriptIdent(const NFIDENTID& ID)
     {
         mID = ID;
     }
 
-    NFIDENTID ObjectVal() const
+    NFIDENTID GetIdent() const
     {
         return mID;
     }
 
-    NFINT64 Int64Val() const
+    int GetData() const
     {
         return mID.nData64;
+    }
+
+    void SetData(int nID)
+    {
+        mID.nData64 = nID;
+    }
+
+    int GetHead() const
+    {
+        return mID.nHead64;
+    }
+
+    void SetHead(int nID)
+    {
+        mID.nHead64 = nID;
+    }
+
+    std::string ToString() const
+    {
+        return mID.ToString();
     }
 
 private:
@@ -125,9 +145,9 @@ public:
         return mVar.Type(index);
     }
 
-    bool AddInt(const NFINT64 value)
+    bool AddInt(const int value)
     {
-        return mVar.Add(value);
+        return mVar.Add((NFINT64)value);
     }
 
     bool AddFloat(const float value)
@@ -140,14 +160,14 @@ public:
         return mVar.Add(value);
     }
 
-    bool AddObject(const NFScriptInt64& value)
+    bool AddObject(const NFScriptIdent& value)
     {
-        return mVar.Add(value.ObjectVal());
+        return mVar.Add(value.GetIdent());
     }
 
-    bool SetInt(const int index, const NFINT64 value)
+    bool SetInt(const int index, const int value)
     {
-        return mVar.Set(index, value);
+        return mVar.Set(index, (NFINT64)value);
     }
 
     bool SetFloat(const int index, const float value)
@@ -160,12 +180,12 @@ public:
         return mVar.Set(index, value);
     }
 
-    bool SetObject(const int index, const NFScriptInt64& value)
+    bool SetObject(const int index, const NFScriptIdent& value)
     {
-        return mVar.Set(index, value.ObjectVal());
+        return mVar.Set(index, value.GetIdent());
     }
 
-    NFINT64 Int(const int index) const
+    int Int(const int index) const
     {
         return mVar.Int(index);
     }
@@ -180,7 +200,7 @@ public:
         return mVar.String(index);
     }
 
-    NFScriptInt64 Object(const int index) const
+    NFScriptIdent Object(const int index) const
     {
         return mVar.Object(index);
     }
@@ -209,7 +229,7 @@ class NFIScriptKernelModule : public NFMap<NFIDENTID, NFCSriptData>
 
     virtual bool ExistElement(const std::string& strConfigName) = 0;
 
-    virtual NFINT64 GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName) = 0;
+    virtual int GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName) = 0;
 
     virtual float GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName) = 0;
 
@@ -236,7 +256,7 @@ class NFIScriptKernelModule : public NFMap<NFIDENTID, NFCSriptData>
 
     virtual bool QueryComponentEnable(const NFIDENTID& self, const std::string& strComponentName) = 0;
 
-    virtual NFIDENTID CreateContainer(const int nContainerIndex, const std::string& strSceneConfigID) = 0;
+    virtual bool CreateContainer(const int nContainerIndex, const std::string& strSceneConfigID) = 0;
 
     virtual bool ExistContainer(const int nContainerIndex) = 0;
 
@@ -246,7 +266,7 @@ class NFIScriptKernelModule : public NFMap<NFIDENTID, NFCSriptData>
 
     virtual bool FindProperty(const NFIDENTID& self, const std::string& strPropertyName) = 0;
 
-    virtual bool SetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName, const NFINT64 nValue) = 0;
+    virtual bool SetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName, const int nValue) = 0;
 
     virtual bool SetPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName,  const float fValue) = 0;
 
@@ -254,7 +274,7 @@ class NFIScriptKernelModule : public NFMap<NFIDENTID, NFCSriptData>
 
     virtual bool SetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName, const NFIDENTID& objectValue) = 0;
 
-    virtual NFINT64 GetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName) = 0;
+    virtual int GetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName) = 0;
 
     virtual float GetPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName) = 0;
 
@@ -262,7 +282,7 @@ class NFIScriptKernelModule : public NFMap<NFIDENTID, NFCSriptData>
 
     virtual NFIDENTID GetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName) = 0;
 
-    virtual bool SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue) = 0;
+    virtual bool SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const int nValue) = 0;
 
     virtual bool SetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol,  const float fValue) = 0;
 
@@ -270,7 +290,7 @@ class NFIScriptKernelModule : public NFMap<NFIDENTID, NFCSriptData>
 
     virtual bool SetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFIDENTID& objectValue) = 0;
 
-    virtual NFINT64 GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
+    virtual int GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
 
     virtual float GetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
 

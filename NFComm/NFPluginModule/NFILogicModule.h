@@ -71,7 +71,9 @@ public:
 
 		Init();
 		AfterInit();
-    }    
+    }
+
+
 
     std::string strName;
     bool  bCanReload;

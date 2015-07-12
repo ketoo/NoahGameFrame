@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6701B508-4CC5-4FDA-80EA-AB5285DEDA2F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NFClientLogicPlugin</RootNamespace>
+    <RootNamespace>NFDataUIMonitorPlugin</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

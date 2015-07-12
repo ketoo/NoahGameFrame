@@ -12,7 +12,6 @@
 #include <boost/static_assert.hpp>
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
@@ -21,6 +20,9 @@
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIUUIDModule.h"
+#include "NFComm/NFPluginModule/NFIAwardPackModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCPackModule
     : public NFIPackModule
@@ -40,7 +42,7 @@ public:
 
     //添加装备:装备config,装备过期类型,孔数量，空里宝石列表，强化等级，附魔等级，元素卡片列表
     virtual NFIDENTID CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount,
-                           const NFIValueList& inlayCardList, const int nIntensiveLevel, const int nEnchantLevel, const std::string& enchantCardList );
+                           const NFIDataList& inlayCardList, const int nIntensiveLevel, const int nEnchantLevel, const std::string& enchantCardList );
 
     //添加装备:装备config,装备过期类型,孔数量
     virtual NFIDENTID CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount );
@@ -91,7 +93,7 @@ public:
     virtual bool SetEquipCreatTime( const NFIDENTID& self, const int nOrigin, const std::string& strTime );
     virtual const std::string& GetEquipCreatTime( const NFIDENTID& self, const int nOrigin );
 
-    virtual bool SetGridData( const NFIDENTID& self, const int nRow, const int nCol, const NFIValueList& var, const PackTableType name = PackTableType::NormalPack );
+    virtual bool SetGridData( const NFIDENTID& self, const int nRow, const int nCol, const NFIDataList& var, const PackTableType name = PackTableType::NormalPack );
 
 	virtual int GetCanUsedCount(const NFIDENTID& self, const PackTableType name = PackTableType::NormalPack) const;
 
@@ -100,6 +102,9 @@ public:
 
     //消费N个某样物品
     virtual bool DeleteItem(const NFIDENTID& self, const std::string& strItemConfigID, const int nCount);
+
+    // 掉落奖励
+    virtual void DrawDropAward(const NFIDENTID& self, int& nMoney, int& nExp, NFIDataList& xItemList, NFIDataList& xCountList);
 protected:
     virtual int RefreshEquipProperty( const NFIDENTID& self );
     virtual int RefreshEquipProperty( const NFIDENTID& self, const int nRow );
@@ -108,37 +113,31 @@ protected:
     virtual int RemoveEquipProperty( const NFIDENTID& self, const std::string& strConfigID, const int nRow );
 
     virtual int CheckEquip();
+    int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+    int OnSwapTableRowEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
+    int OnAddDropListEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnObjectPackRecordEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar );
+    int OnObjectPackViewRecordEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar);
 
-private:
-
-protected:
-    int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIValueList& var );
-
-
-    int OnSwapTableRowEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var );
-protected:
-    int OnObjectPackRecordEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar );
-    int OnObjectPackViewRecordEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nTargetRow, const NFIValueList& oldVar, const NFIValueList& newVar, const NFIValueList& argVar );
-
-protected:
     PackTableType GetPackType( const std::string& name );
-    bool pack_item_type_greater( NFIValueList* elem1, NFIValueList* elem2 );
-    bool can_normal_pack_item_swap( const NFIDENTID& self, NFIRecord* pOriginRecord, NFIRecord* pTargetRecord, const int origin, const int target ); // 判断是否可以交换普通背包物品(装备特殊判断)
+    bool pack_item_type_greater( NFIDataList* elem1, NFIDataList* elem2 );
+    bool can_normal_pack_item_swap( const NFIDENTID& self, NF_SHARE_PTR<NFIRecord> pOriginRecord, NF_SHARE_PTR<NFIRecord> pTargetRecord, const int origin, const int target ); // 判断是否可以交换普通背包物品(装备特殊判断)
+    
+    // 计算掉落包
+    bool ComputerDropPack(NF_SHARE_PTR<NFIObject> pObject, const NFIDENTID identMonster,  const std::string& strDropPackConfig);
+    
+    // 添加掉落道具
+    void AddDropItem(const NFIDENTID& self, const NFIDataList& var);
+    int OnObjectBeKilled(const NFIDENTID& self, const int nEventID, const NFIDataList& var);
 private:
-    //char* mstrPackTableName;
-    //char* mstrViewTableName;
-    //   char* mstrBuyBackPackTableName;
-
-
-
-
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
     NFIElementInfoModule* m_pElementInfoModule;
     NFISceneProcessModule* m_pSceneProcessModule;
     NFIPropertyModule* m_pPropertyModule;
-
+    NFIUUIDModule* m_pUUIDModule;
+    NFIAwardPackModule* m_pAwardPackModule;
 };
 
 

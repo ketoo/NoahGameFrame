@@ -26,16 +26,19 @@
 		<Project filename="NFServer/NFProxyServerNet_ClientPlugin/NFProxyServerNet_ClientPlugin.cbp" />
 		<Project filename="Tutorial/Tutorial2/Tutorial2.cbp" />
 		<Project filename="Tutorial/Tutorial1/Tutorial1.cbp" />
-		<Project filename="Tutorial/Tutorial3/Tutorial3.cbp" />
-		<Project filename="NFComm/NFMonoScriptPlugin/NFMonoScriptPlugin.cbp" />
-		<Project filename="NFComm/NFPythonScriptPlugin/NFPythonScriptPlugin.cbp" />
 		<Project filename="Tutorial/Tutorial6/Tutorial6.cbp" />
-		<Project filename="NFComm/NFJavaScriptPlugin/NFJavaScriptPlugin.cbp" />
 		<Project filename="NFComm/NFMessageDefine/NFMessageDefine.cbp" />
 		<Project filename="NFComm/NFNet/NFNet.cbp" />
-		<Project filename="NFServer/NFSLGPlugin/NFSLGPlugin.cbp" />
 		<Project filename="NFComm/NFLogPlugin/NFLogPlugin.cbp" />
-		<Project filename="NFComm/NFCrashPlugin/NFCrashPlugin.cbp" />
 		<Project filename="NFServer/NFAIPlugin/NFAIPlugin.cbp" />
+		<Project filename="Tutorial/Tutorial4ActorPlugin/Tutorial4ActorPlugin.cbp" />
+		<Project filename="Tutorial/Tutorial3/Tutorial3.cbp" />
+		<Project filename="NFServer/NFDataBaseNet_ClientPlugin/NFDataBaseNet_ClientPlugin.cbp" />
+		<Project filename="NFComm/NFTagPlugin/NFTagPlugin.cbp" />
+		<Project filename="NFServer/NFGameLogicPlugin/NFGameLogicPlugin.cbp" />
+		<Project filename="NFServer/NFSLGPlugin/NFSLGPlugin.cbp" />
+		<Project filename="NFServer/NFWorldChatPlugin/NFWorldChatPlugin.cbp" />
+		<Project filename="NFServer/NFWorldGuildPlugin/NFWorldGuildPlugin.cbp" />
+		<Project filename="NFComm/NFCluster/NFMysqlClusterPlugin.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

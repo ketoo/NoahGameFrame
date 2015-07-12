@@ -11,6 +11,7 @@
 
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
+#include "NFComm/NFPluginModule/NFIClusterClientModule.hpp"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ClientModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
@@ -20,8 +21,9 @@
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
 
-class NFCGameServerToWorldModule : public NFINetModule
+class NFCGameServerToWorldModule : public NFIGameServerToWorldModule
 {
 public:
     NFCGameServerToWorldModule(NFIPluginManager* p)
@@ -40,8 +42,8 @@ public:
 
 protected:
 
-    int OnRecivePack(const NFIPacket& msg);
-    int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
+    int OnReciveWSPack(const NFIPacket& msg);
+    int OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     //连接丢失,删2层(连接对象，帐号对象)
     void OnClientDisconnect(const int nAddress);
@@ -49,8 +51,7 @@ protected:
     void OnClientConnected(const int nAddress);
 
 protected:
-    void Register();
-    void UnRegister();
+    void Register(NFINet* pNet);
     void RefreshWorldInfo();
 
     int OnLoadRoleDataBeginProcess(const NFIPacket& msg);
@@ -60,6 +61,9 @@ protected:
     int OnEnquireSceneInfoProcess(const NFIPacket& msg);
 
     int OnSwapGSProcess(const NFIPacket& msg);
+    int OnAckCreateGuildProcess(const NFIPacket& msg);
+    int OnAckJoinGuildProcess(const NFIPacket& msg);
+    int OnAckLeaveGuildProcess(const NFIPacket& msg);
 
     int OnDataLoadBeginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
 
@@ -69,6 +73,21 @@ protected:
 
     int OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
+
+    int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+    
+//     template<class PBClass>    
+//     int TransPBToProxy(const NFIPacket& msg);
+    int TransPBToProxy(const NFIPacket& msg);
+
+
+	virtual void LogServerInfo( const std::string& strServerInfo );
+
+private:
+    void SendOnline(const NFIDENTID& self);
+    void SendOffline(const NFIDENTID& self);
+
+
 private:
 
     NFILogModule* m_pLogModule;
@@ -76,6 +95,7 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIElementInfoModule* m_pElementInfoModule;
+    NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 
 #endif

@@ -28,29 +28,19 @@
 #include "NFComm/NFPluginModule/NFISLGBuildingModule.h"
 #include "NFComm/NFMessageDefine/NFSLGDefine.pb.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
-
+#include "NFComm/NFPluginModule/NFIPVPModule.h"
+#include "NFComm/NFPluginModule/NFISkillModule.h"
+#include "NFComm/NFPluginModule/NFIDataProcessModule.h"
+#include "NFComm/NFMessageDefine/NFDefine.pb.h"
+#include "NFComm/NFPluginModule/NFIEctypeModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
 ////////////////////////////////////////////////////////////////////////////
-// 客户端消息处理宏
-#define CLIENT_MSG_PROCESS(packet, msg)                 \
-    NFIDENTID nPlayerID;                              \
-    msg xMsg;                                           \
-    if (!RecivePB(packet, xMsg, nPlayerID))              \
-    {                                                   \
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), "ReqAckBuyObjectFormShop", "Parse msg error", __FUNCTION__, __LINE__); \
-        return;                                         \
-    }                                                   \
-                                                        \
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(nPlayerID); \
-    if ( NULL == pObject.get() )                              \
-    {                                                   \
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "FromClient Object do not Exist", "", __FUNCTION__, __LINE__); \
-        return;                                         \
-    }
-//////////////////////////////////////////////////////////////////////////
+
 
 
 class NFCGameServerNet_ServerModule
-    : public NFINetModule
+    : public NFIGameServerNet_ServerModule
 {
 public:
     NFCGameServerNet_ServerModule(NFIPluginManager* p)
@@ -65,11 +55,13 @@ public:
 
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
+    virtual void SendMsgPBToGate( const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFIDENTID self );
+	virtual void SendMsgPBToGate( const uint16_t nMsgID, const std::string& strMsg, const NFIDENTID self );
 
 protected:
 
-	int OnRecivePack(const NFIPacket& msg);
-	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
+	int OnRecivePSPack(const NFIPacket& msg);
+	int OnSocketPSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 	//连接丢失,删2层(连接对象，帐号对象)
 	void OnClientDisconnect(const int nSockIndex);
@@ -77,9 +69,9 @@ protected:
 	void OnClientConnected(const int nSockIndex);
 
 protected:
-    int OnProxyServerRegisteredProcess(const NFIPacket& msg);
-    int OnProxyServerUnRegisteredProcess(const NFIPacket& msg);
-    int OnRefreshProxyServerInfoProcess(const NFIPacket& msg);
+    void OnProxyServerRegisteredProcess(const NFIPacket& msg);
+    void OnProxyServerUnRegisteredProcess(const NFIPacket& msg);
+    void OnRefreshProxyServerInfoProcess(const NFIPacket& msg);
 
 protected:
 
@@ -106,6 +98,20 @@ protected:
     void OnClienPushCustom(const NFIPacket& msg);
     void OnClienChatProcess(const NFIPacket& msg);
 
+    //////////////////////////////////////////////////////////////////////////
+
+    void OnClientJoinPVP(const NFIPacket& msg);
+    void OnClientExitPVP(const NFIPacket& msg);
+
+
+    void OnClientEndBattle(const NFIPacket& msg);
+
+	///////////WORLD_START///////////////////////////////////////////////////////////////
+	void OnTransWorld(const NFIPacket& msg);
+    void OnTransWorld(const NFIPacket& msg, const int nWorldKey);
+
+	///////////WORLD_END///////////////////////////////////////////////////////////////
+
 	/////////SLG_START/////////////////////////////////////////////////////////////////
 	void OnSLGClienBuyItem(const NFIPacket& msg);
 	void OnSLGClienMoveObject(const NFIPacket& msg);
@@ -115,20 +121,20 @@ protected:
 	/////////SLG_END/////////////////////////////////////////////////////////////////
 protected:
     //将self的全部属性广播给argVar[应该是多对多]
-    int OnPropertyEnter( const NFIDENTID& self, const NFIDataList& argVar );
-    int OnRecordEnter( const NFIDENTID& self, const NFIDataList& argVar );
+    int OnPropertyEnter( const NFIDataList& argVar, const NFIDENTID& self );
+    int OnRecordEnter( const NFIDataList& argVar, const NFIDENTID& self );
 
     //把argVar这些人的出现或者离去广播给self这些人
     int OnObjectListEnter( const NFIDataList& self, const NFIDataList& argVar );
     int OnObjectListLeave( const NFIDataList& self, const NFIDataList& argVar );
 
     //网络同步
-    int OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
-    int OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
+    int OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar );
+    int OnRecordCommonEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar);
     int OnClassCommonEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    int OnGroupEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
-    int OnContainerEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
+    int OnGroupEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar);
+    int OnContainerEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar);
 
     int GetBroadCastObject( const NFIDENTID& self, const std::string& strPropertyName, const bool bTable, NFIDataList& valueObject );
     int GetBroadCastObject( const int nObjectContainerID, const int nGroupID, NFIDataList& valueObject );
@@ -146,6 +152,14 @@ protected:
     int OnSwapSceneResultEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
     // 发送聊天结果
     int OnChatResultEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
+    // 通知副本奖励结果
+    int OnNoticeEctypeAward(const NFIDENTID& self, const int nEventID, const NFIDataList& var);
+
+    template<class PBClass>    
+    NFIDENTID GetGuildID(const NFIPacket& msg);
+private:
+	void PlayerLeaveGameServer( const NFIDENTID self );
+
 private:
 
     struct ServerData 
@@ -176,19 +190,18 @@ private:
         {
             nActorID = 0;
             nGateID = 0;
-            nFD = 0;
         }
 
-        BaseData(const int gateID, const int fd)
+        BaseData(const int gateID, const NFIDENTID xIdent)
         {
             nActorID = 0;
             nGateID = gateID;
-            nFD = fd;
+            xClientID = xIdent;
         }
 
         int nActorID;
         int nGateID;
-        int nFD;
+        NFIDENTID xClientID;
     };
 
 private:
@@ -205,10 +218,28 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFIElementInfoModule* m_pElementInfoModule;
+    NFIPVPModule* m_pPVPModule;
+	NFISkillModule* m_pSkillModule;
+	NFIDataProcessModule* m_pDataProcessModule;
+    NFIEctypeModule* m_pEctypeModule;
     //////////////////////////////////////////////////////////////////////////
     //SLG模块
 	NFISLGShopModule* m_pSLGShopModule;
     NFISLGBuildingModule* m_pSLGBuildingModule;
+    NFIGameServerToWorldModule* m_pGameServerToWorldModule;
 };
+
+template<class PBClass>
+NFIDENTID NFCGameServerNet_ServerModule::GetGuildID( const NFIPacket& msg )
+{
+    NFIDENTID nPlayerID;
+    PBClass xMsg;                                         
+    if (!NFINetModule::RecivePB(msg, xMsg, nPlayerID))
+    {
+        return NFIDENTID();
+    }
+
+    return PBToNF(xMsg.guild_id());
+}
 
 #endif
