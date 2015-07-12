@@ -50,84 +50,84 @@ bool NFCAwardPackModule::LoadAwardPackConfig()
 {
     mtAwardPack.ClearAll();
 
-    rapidxml::file<> fdoc("../../NFDataCfg/Ini/NFZoneServer/AwardPack.xml");
-    rapidxml::xml_document<>  doc;
-    doc.parse<0>(fdoc.data());
-
-    rapidxml::xml_node<>* root = doc.first_node();
-    if (NULL == root)
-    {
-        NFASSERT(0, "root error", __FILE__, __FUNCTION__);
-    }
-
-    for (rapidxml::xml_node<>* pPackNode = root->first_node(); pPackNode != NULL; pPackNode = pPackNode->next_sibling())
-    {
-        NF_SHARE_PTR<AwardBag> pAwardBag = NF_SHARE_PTR<AwardBag>(NF_NEW AwardBag());
-        pAwardBag->strBagID = pPackNode->first_attribute("ID")->value();
-
-        if(!NF_StrTo(pPackNode->first_attribute("ID_PackRate")->value(), pAwardBag->nPackRate))
-        {
-             NFASSERT(0,"NF_STRTO", __FILE__, __FUNCTION__);
-        }
-
-        if(!NF_StrTo(pPackNode->first_attribute("ID_PackRate")->value(), pAwardBag->nPackRate))
-        {
-            NFASSERT(0,"NF_STRTO", __FILE__, __FUNCTION__);
-        }
-
-        if (!NF_StrTo(pPackNode->first_attribute("ID_Count")->value(), pAwardBag->nCount))
-        {
-            NFASSERT(0,"NF_STRTO", __FILE__, __FUNCTION__);
-        }
-
-        if (pAwardBag->strBagID.empty())
-        {
-            m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), pAwardBag->strBagID, "This is empty", __FUNCTION__, __LINE__);
-           NFASSERT(0,"EMPTY PACK", __FILE__, __FUNCTION__); 
-        }
-
-        mtAwardPack.AddElement(pAwardBag->strBagID, pAwardBag);
-
-        NFUINT32 nTotalRate = 0;
-        for (rapidxml::xml_node<>* pPropertyItem = pPackNode->first_node(); pPropertyItem != NULL; pPropertyItem = pPropertyItem->next_sibling())
-        {
-            NF_SHARE_PTR<AwardItem> pAwardItem =  NF_SHARE_PTR<AwardItem>(NF_NEW(AwardItem));
-
-            pAwardItem->strConfigID = pPropertyItem->first_attribute("ItemID")->value();
-            pAwardItem->nCount = boost::lexical_cast<int>(pPropertyItem->first_attribute("Count")->value());
-            rapidxml::xml_attribute<char>* pRateAttribute = pPropertyItem->first_attribute("Rate");
-            rapidxml::xml_attribute<char>* pTypeAttribute = pPropertyItem->first_attribute("Type");
-
-            if (!m_pElementInfoModule->ExistElement(pAwardItem->strConfigID))
-            {
-				NFASSERT(0, pAwardItem->strConfigID, __FILE__, __FUNCTION__);
-                return false;
-            }
-
-            if (pAwardItem->nCount <= 0)
-            {
-                NFASSERT(0, "item count invalid", __FILE__, __FUNCTION__);
-                return false;
-            }
-
-            if (NULL != pRateAttribute)
-            {
-                if (!NF_StrTo(pRateAttribute->value(), pAwardItem->nRate))
-                {
-                    NFASSERT(0, "rate error", __FILE__, __FUNCTION__);
-                }
-
-                pAwardBag->nTotalRate += pAwardItem->nRate;
-            }
-
-            if (pTypeAttribute != NULL)
-            {
-                pAwardItem->nType = boost::lexical_cast<NFUINT16>(pTypeAttribute->value());
-            }
-
-            pAwardBag->xAwardItemList.Add(pAwardItem);
-        }
-    }
+//     rapidxml::file<> fdoc("../../NFDataCfg/Ini/NFZoneServer/ItemPack.xml");
+//     rapidxml::xml_document<>  doc;
+//     doc.parse<0>(fdoc.data());
+// 
+//     rapidxml::xml_node<>* root = doc.first_node();
+//     if (NULL == root)
+//     {
+//         NFASSERT(0, "root error", __FILE__, __FUNCTION__);
+//     }
+// 
+//     for (rapidxml::xml_node<>* pPackNode = root->first_node(); pPackNode != NULL; pPackNode = pPackNode->next_sibling())
+//     {
+//         NF_SHARE_PTR<AwardBag> pAwardBag = NF_SHARE_PTR<AwardBag>(NF_NEW AwardBag());
+//         pAwardBag->strBagID = pPackNode->first_attribute("ID")->value();
+// 
+//         if(!NF_StrTo(pPackNode->first_attribute("ID_PackRate")->value(), pAwardBag->nPackRate))
+//         {
+//              NFASSERT(0,"NF_STRTO", __FILE__, __FUNCTION__);
+//         }
+// 
+//         if(!NF_StrTo(pPackNode->first_attribute("ID_PackRate")->value(), pAwardBag->nPackRate))
+//         {
+//             NFASSERT(0,"NF_STRTO", __FILE__, __FUNCTION__);
+//         }
+// 
+//         if (!NF_StrTo(pPackNode->first_attribute("ID_Count")->value(), pAwardBag->nCount))
+//         {
+//             NFASSERT(0,"NF_STRTO", __FILE__, __FUNCTION__);
+//         }
+// 
+//         if (pAwardBag->strBagID.empty())
+//         {
+//             m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), pAwardBag->strBagID, "This is empty", __FUNCTION__, __LINE__);
+//            NFASSERT(0,"EMPTY PACK", __FILE__, __FUNCTION__); 
+//         }
+// 
+//         mtAwardPack.AddElement(pAwardBag->strBagID, pAwardBag);
+// 
+//         NFUINT32 nTotalRate = 0;
+//         for (rapidxml::xml_node<>* pPropertyItem = pPackNode->first_node(); pPropertyItem != NULL; pPropertyItem = pPropertyItem->next_sibling())
+//         {
+//             NF_SHARE_PTR<AwardItem> pAwardItem =  NF_SHARE_PTR<AwardItem>(NF_NEW(AwardItem));
+// 
+//             pAwardItem->strConfigID = pPropertyItem->first_attribute("ItemID")->value();
+//             pAwardItem->nCount = boost::lexical_cast<int>(pPropertyItem->first_attribute("Count")->value());
+//             rapidxml::xml_attribute<char>* pRateAttribute = pPropertyItem->first_attribute("Rate");
+//             rapidxml::xml_attribute<char>* pTypeAttribute = pPropertyItem->first_attribute("Type");
+// 
+//             if (!m_pElementInfoModule->ExistElement(pAwardItem->strConfigID))
+//             {
+// 				NFASSERT(0, pAwardItem->strConfigID, __FILE__, __FUNCTION__);
+//                 return false;
+//             }
+// 
+//             if (pAwardItem->nCount <= 0)
+//             {
+//                 NFASSERT(0, "item count invalid", __FILE__, __FUNCTION__);
+//                 return false;
+//             }
+// 
+//             if (NULL != pRateAttribute)
+//             {
+//                 if (!NF_StrTo(pRateAttribute->value(), pAwardItem->nRate))
+//                 {
+//                     NFASSERT(0, "rate error", __FILE__, __FUNCTION__);
+//                 }
+// 
+//                 pAwardBag->nTotalRate += pAwardItem->nRate;
+//             }
+// 
+//             if (pTypeAttribute != NULL)
+//             {
+//                 pAwardItem->nType = boost::lexical_cast<NFUINT16>(pTypeAttribute->value());
+//             }
+// 
+//             pAwardBag->xAwardItemList.Add(pAwardItem);
+//         }
+//     }
 
     return true;
 }
