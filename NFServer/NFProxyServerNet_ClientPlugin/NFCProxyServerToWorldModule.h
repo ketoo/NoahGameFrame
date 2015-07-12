@@ -23,47 +23,6 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 
-
-//这个连接是连的gameserver
-class NFCProxyConnectToGameServer : public NFINetModule
-{
-public:
-    NFCProxyConnectToGameServer(int nGameServerID, const std::string& strIP, const int nPort, NFIPluginManager* p);
-
-    virtual bool Execute(float fFrameTime, float fTotalTime);
-    virtual void LogRecive(const char* str){}
-    virtual void LogSend(const char* str){}
-    virtual int GetFD(){return GetNet()->FD();}
-
-protected:
-
-    int OnRecivePack(const NFIPacket& msg);
-    int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
-
-    //连接丢失,删2层(连接对象，帐号对象)
-    void OnClientDisconnect(const int nAddress);
-    //有连接
-    void OnClientConnected(const int nAddress);
-
-    void Register();
-    void UnRegister();
-
-    void OnAckEnterGame(const NFIPacket& msg);
-private:
-
-    int mnGameServerID;
-
-    NFIElementInfoModule* m_pElementInfoModule;
-    NFILogModule* m_pLogModule;
-    NFIProxyServerNet_ServerModule* m_pProxyServerNet_ServerModule;
-    NFIEventProcessModule* m_pEventProcessModule;
-    NFIKernelModule* m_pKernelModule;
-    NFIProxyLogicModule* m_pProxyLogicModule;
-	NFILogicClassModule* m_pLogicClassModule;
-
-};
-
-//策略是，开始先连到world，然后拿到gameserverlist，再连gameserver，因此这个连接是连到worldserver
 class NFCProxyServerToWorldModule : public NFIProxyServerToWorldModule
 {
 public:
@@ -82,33 +41,19 @@ public:
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
 
-    virtual int Transpond(int nGameServerID, const NFIPacket& msg);
-
     virtual bool VerifyConnectData(const std::string& strAccount, const std::string& strKey);
 
-    virtual GameData* GetGameData(int nGameID);
-    virtual GameDataMap& GetGameDataMap() { return mGameDataMap; }
-    virtual int GetFD(){return GetNet()->FD();}
-
 protected:
 
-	int OnRecivePack(const NFIPacket& msg);
-	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
+	int OnReciveWSPack(const NFIPacket& msg);
+	int OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
-	//连接丢失,删2层(连接对象，帐号对象)
-	void OnClientDisconnect(const int nAddress);
-	//有连接
-	void OnClientConnected(const int nAddress);
-
-
-    int DoHeartBeatEvent(const NFIDENTID& self, const NFIDataList& var);
-protected:
-
-    void Register();
-    void UnRegister();
+    void Register(NFINet* pNet);
 
     int OnSelectServerResultProcess(const NFIPacket& msg);
-    int OnGameInfoProcess(const NFIPacket& msg);
+    int OnServerInfoProcess(const NFIPacket& msg);
+
+	virtual void LogServerInfo(const std::string& strServerInfo);
 private:
     struct ConnectData 
     {
@@ -123,9 +68,8 @@ private:
     };
 
 
-private:
     NFMapEx<std::string, ConnectData> mWantToConnectMap;
-    GameDataMap mGameDataMap;
+
 private:
 
     NFILogModule* m_pLogModule;
@@ -135,6 +79,7 @@ private:
     NFIProxyServerNet_ServerModule* m_pProxyServerNet_ServerModule;
 	NFIElementInfoModule* m_pElementInfoModule;
 	NFILogicClassModule* m_pLogicClassModule;
+	NFIClusterClientModule* m_pToGameServerClusterClient;
 
 };
 

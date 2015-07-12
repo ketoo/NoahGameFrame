@@ -15,7 +15,7 @@
 #include <iostream>
 #include <typeinfo>
 #include <memory>
-#include "NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 template <typename T , typename TD>
 class NFMapEx
@@ -49,7 +49,7 @@ public:
 
     virtual bool RemoveElement(const T& name)
     {
-        NF_SHARE_PTR<TD> pData(NULL);
+        NF_SHARE_PTR<TD> pData;
         typename NFMapOBJECT::iterator itr = mObjectList.find(name);
         if (itr != mObjectList.end())
         {
@@ -62,6 +62,19 @@ public:
         return false;
     }
 
+	virtual TD* GetElementNude(const T& name)
+	{
+		typename NFMapOBJECT::iterator itr = mObjectList.find(name);
+		if (itr != mObjectList.end())
+		{
+			return itr->second.get();
+		}
+		else
+		{
+			return NULL;
+		}
+	}
+
     virtual NF_SHARE_PTR<TD> GetElement(const T& name)
     {
         typename NFMapOBJECT::iterator itr = mObjectList.find(name);
@@ -71,15 +84,86 @@ public:
         }
         else
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
     }
+	virtual TD* FirstNude(T& name)
+	{
+		if (mObjectList.size() <= 0)
+		{
+			return NULL;
+		}
+
+		mObjectCurIter = mObjectList.begin();
+		if (mObjectCurIter != mObjectList.end())
+		{
+			name = mObjectCurIter->first;
+			return mObjectCurIter->second.get();
+		}
+		else
+		{
+			return NULL;
+		}
+	}
+
+	virtual TD* NextNude(T& name)
+	{
+		if (mObjectCurIter == mObjectList.end())
+		{
+			return NULL;
+		}
+
+		mObjectCurIter++;
+		if (mObjectCurIter != mObjectList.end())
+		{
+			name = mObjectCurIter->first;
+			return mObjectCurIter->second.get();
+		}
+		else
+		{
+			return NULL;
+		}
+	}
+	virtual TD* FirstNude()
+	{
+		if (mObjectList.size() <= 0)
+		{
+			return NULL;
+		}
+
+		mObjectCurIter = mObjectList.begin();
+		if (mObjectCurIter != mObjectList.end())
+		{
+			return mObjectCurIter->second.get();
+		}
+		else
+		{
+			return NULL;
+		}
+	}
+	virtual TD* NextNude()
+	{
+		if (mObjectCurIter == mObjectList.end())
+		{
+			return NULL;
+		}
+
+		mObjectCurIter++;
+		if (mObjectCurIter != mObjectList.end())
+		{
+			return mObjectCurIter->second.get();
+		}
+		else
+		{
+			return NULL;
+		}
+	}
 
     virtual NF_SHARE_PTR<TD> First()
     {
         if (mObjectList.size() <= 0)
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
 
         mObjectCurIter = mObjectList.begin();
@@ -89,7 +173,7 @@ public:
         }
         else
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
     }
 
@@ -97,12 +181,12 @@ public:
     {
         if (mObjectCurIter == mObjectList.end())
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
 
         if (mObjectCurIter == mObjectList.end())
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
 
         ++mObjectCurIter;
@@ -112,7 +196,7 @@ public:
         }
         else
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
     }
 
@@ -120,7 +204,7 @@ public:
     {
         if (mObjectList.size() <= 0)
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
 
         mObjectCurIter = mObjectList.begin();
@@ -131,7 +215,7 @@ public:
         }
         else
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
     }
 
@@ -139,12 +223,12 @@ public:
     {
         if (mObjectCurIter == mObjectList.end())
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
 
         if (mObjectCurIter == mObjectList.end())
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
 
         mObjectCurIter++;
@@ -155,7 +239,7 @@ public:
         }
         else
         {
-            return NF_SHARE_PTR<TD>(NULL);
+            return NF_SHARE_PTR<TD>();
         }
     }
 

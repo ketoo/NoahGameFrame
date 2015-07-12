@@ -9,13 +9,13 @@
 #ifndef _NFC_LEVEL_MODULE_H_
 #define _NFC_LEVEL_MODULE_H_
 
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFILevelModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCLevelModule
     : public NFILevelModule

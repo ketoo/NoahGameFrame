@@ -40,7 +40,7 @@ bool NFCLevelModule::AfterInit()
     assert( NULL != m_pPropertyConfigModule );
 
     m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCLevelModule::OnObjectClassEvent );
-    m_pEventProcessModule->AddClassCallBack( "AttackNPC", this, &NFCLevelModule::OnObjectClassEvent );
+    m_pEventProcessModule->AddClassCallBack( "NPC", this, &NFCLevelModule::OnObjectClassEvent );
 
     return true;
 }
@@ -100,10 +100,10 @@ int NFCLevelModule::OnObjectClassEvent( const NFIDENTID& self, const std::string
     if ( strClassName == "Player"
          && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
     {
+
     }
 
-    if ( strClassName == "NPC"
-         && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
+    if ( strClassName == "NPC" && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
     {
         m_pEventProcessModule->AddEventCallBack( self, NFED_ON_OBJECT_BE_KILLED, this, &NFCLevelModule::OnObjectBeKilled );
     }

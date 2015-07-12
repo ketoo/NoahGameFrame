@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B47C9434-3A9C-4AFA-9212-71AF4DD04D81}</ProjectGuid>
+    <ProjectGuid>{73CE3203-1DAD-43E8-B49D-0151973765C9}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NFGameServerPlugin</RootNamespace>
+    <RootNamespace>NFGameLogicPlugin</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -58,7 +58,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN;_DEBUG;_WINDOWS;_USRDLL;THERON_CPP11</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN;_DEBUG;_WINDOWS;_USRDLL;THERON_CPP11;ELPP_NO_DEFAULT_LOG_FILE</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\boost_1_53_0\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\include\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\WIN32-Code\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\compat\;$(SolutionDir)\Dependencies\protobuf-2.5.0\src\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
@@ -86,7 +86,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(Solutio
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN;_WINDOWS;_USRDLL;THERON_CPP11</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN;_WINDOWS;_USRDLL;THERON_CPP11;ELPP_NO_DEFAULT_LOG_FILE</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\boost_1_53_0\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\include\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\WIN32-Code\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\compat\;$(SolutionDir)\Dependencies\protobuf-2.5.0\src\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -98,18 +98,23 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(Solutio
     </Link>
     <PostBuildEvent>
       <Command>copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\NFGameServer1\$(ProjectName).dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFGameServer1\$(ProjectName).pdb</Command>
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFGameServer1\$(ProjectName).pdb
+</Command>
     </PostBuildEvent>
     <Lib>
       <TargetMachine>MachineX64</TargetMachine>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="NFCAwardPackModule.h" />
     <ClInclude Include="NFCBuffModule.h" />
     <ClInclude Include="NFCBulletSkillConsumeProcessModule.h" />
     <ClInclude Include="NFCCardItemConsumeProcessModule.h" />
+    <ClInclude Include="NFCCostModule.h" />
+    <ClInclude Include="NFCEctypeModule.h" />
     <ClInclude Include="NFCGameLogicModule.h" />
     <ClInclude Include="NFCItemConsumeManagerModule.h" />
+    <ClInclude Include="NFCNPCRefreshModule.h" />
     <ClInclude Include="NFCPotionItemConsumeProcessModule.h" />
     <ClInclude Include="NFCItemModule.h" />
     <ClInclude Include="NFCPackModule.h" />
@@ -117,6 +122,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClInclude Include="NFCSkillConsumeManagerModule.h" />
     <ClInclude Include="NFCBriefSkillConsumeProcessModule.h" />
     <ClInclude Include="NFCSkillModule.h" />
+    <ClInclude Include="NFCTaskModule.h" />
     <ClInclude Include="NFGameLogicPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -128,11 +134,15 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFCAwardPackModule.cpp" />
     <ClCompile Include="NFCBuffModule.cpp" />
     <ClCompile Include="NFCBulletSkillConsumeProcessModule.cpp" />
     <ClCompile Include="NFCCardItemConsumeProcessModule.cpp" />
+    <ClCompile Include="NFCCostModule.cpp" />
+    <ClCompile Include="NFCEctypeModule.cpp" />
     <ClCompile Include="NFCGameLogicModule.cpp" />
     <ClCompile Include="NFCItemConsumeManagerModule.cpp" />
+    <ClCompile Include="NFCNPCRefreshModule.cpp" />
     <ClCompile Include="NFCPotionItemConsumeProcessModule.cpp" />
     <ClCompile Include="NFCItemModule.cpp" />
     <ClCompile Include="NFCPackModule.cpp" />
@@ -140,6 +150,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClCompile Include="NFCSkillConsumeManagerModule.cpp" />
     <ClCompile Include="NFCBriefSkillConsumeProcessModule.cpp" />
     <ClCompile Include="NFCSkillModule.cpp" />
+    <ClCompile Include="NFCTaskModule.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -18,7 +18,7 @@ NF_SHARE_PTR<NFIComponent> NFCComponentManager::AddComponent(const std::string& 
     NF_SHARE_PTR<NFIComponent> pComponent = GetElement(strComponentName);
     if (pComponent.get())
     {
-        return NULL;
+        return pComponent;
     }
 
     pComponent = NF_SHARE_PTR<NFIComponent>(NF_NEW NFCComponent(mSelf, strComponentName, strLanguageName));

@@ -9,8 +9,8 @@
 #ifndef _NFC_DATALIST_H_
 #define _NFC_DATALIST_H_
 
-#include "NFIdentID.h"
 #include "NFIDataList.h"
+#include "NFComm/NFPluginModule/NFIdentID.h"
 
 class NFCDataList: public NFIDataList
 {
@@ -23,12 +23,13 @@ public:
     NFCDataList(const NFIDataList& src);
 
     virtual ~NFCDataList();
-
+/*
     NFCDataList& operator=(const NFCDataList& src);
     NFCDataList& operator=(const NFIDataList& src);
-
+*/
     // Ìí¼Ó
-    virtual bool Append(const NFIDataList& src, int start, int count);
+	virtual bool Append(const NFIDataList& src);
+	virtual bool Append(const NFIDataList& src, const int start, const int count);
 
     // Ìí¼Ó
     virtual bool Append(const NFIDataList::TData& TData);
@@ -86,10 +87,11 @@ public:
     virtual float Float(const int index) const;
     virtual double Double(const int index) const;
     virtual std::string StringValEx(const int index, const bool bForce) const;
-    virtual bool ToString(std::string& str, const char* strSplit);
     virtual const std::string& String(const int index) const;
     virtual NFIDENTID Object(const int index) const;
     virtual void* Pointer(const int index) const;
+
+	virtual bool ToString(std::string& str, const char* strSplit) const;
 
 protected:
     void InnerAppendEx(const NFIDataList& src, const int start, const int end);
