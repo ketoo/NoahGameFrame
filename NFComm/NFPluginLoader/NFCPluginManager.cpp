@@ -289,7 +289,7 @@ bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
             DLL_START_PLUGIN_FUNC pFunc = (DLL_START_PLUGIN_FUNC)pLib->GetSymbol("DllStartPlugin");
             if (!pFunc)
             {
-                std::cout << "Find function DllStartPlugin Failed in [" << strPluginDLLName << "]" << std::endl;
+                std::cout << "Find function DllStartPlugin Failed in [" << pLib->GetName() << "]" << std::endl;
                 assert(0);
                 return false;
             }
@@ -304,12 +304,12 @@ bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
             char* error = dlerror();
             if (error)
             {
-                fprintf(stderr, "Open shared lib %s failed, %s.\n", strPluginDLLName.c_str(), error);
+                fprintf(stderr, "Open shared lib %s failed, %s.\n", pLib->GetName(), error);
                 assert(0);
                 return false;
             }
 #endif // NF_PLATFORM
-            std::cout << "Load [" << strPluginDLLName << "] Failed" << std::endl;
+            std::cout << "Load [" << pLib->GetName() << "] Failed" << std::endl;
             assert(0);
         }
     }
