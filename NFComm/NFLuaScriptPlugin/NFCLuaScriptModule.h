@@ -16,7 +16,7 @@ extern "C"
 #include "lauxlib.h"
 }
 
-#include <luabind/luabind.hpp>
+#include "LuaBridge/LuaBridge.h"
 
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -59,6 +59,8 @@ protected:
     bool Regisger(); 
     bool CheckCompomentStatus(const std::string& strComponentName, const std::string& strFuncName);
     bool CheckCompomentStatus(const std::string& strComponentName);
+
+    void LuaInit(NFIKernelModule* pKernel, const NFIDENTID& self,const NFCScriptVarList& arg);
 
 protected:
 
