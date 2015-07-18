@@ -179,7 +179,7 @@ void NFCProxyServerToGameModule::OnAckEnterGame(const NFIPacket& msg)
         const NFIDENTID& xClient = NFINetModule::PBToNF(xData.event_client());
         const NFIDENTID& xPlayer = NFINetModule::PBToNF(xData.event_object());
 
-        m_pProxyServerNet_ServerModule->EnterGameSuccessEvent(xClient, nPlayerID);
+        m_pProxyServerNet_ServerModule->EnterGameSuccessEvent(xClient, xPlayer);
     }
 }
 
