@@ -10,6 +10,7 @@
 #include "NFLuaScriptPlugin.h"
 #include <assert.h>
 
+
 bool NFCLuaScriptModule::Init()
 {
     return true;
@@ -26,8 +27,6 @@ bool NFCLuaScriptModule::AfterInit()
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pElementInfoModule);
-
-    m_pScriptKernelModule = new NFCScriptKernelModule(m_pKernelModule, this, m_pElementInfoModule, m_pEventProcessModule);
 
     bool ret = InstallLua("script_init.lua");
     assert( ret );
@@ -47,7 +46,7 @@ bool NFCLuaScriptModule::AfterInit()
         }
 
         pClass = m_pLogicClassModule->Next();
-    } 
+    }
 
     //add all callback
     m_pKernelModule->ResgisterCommonPropertyEvent(this, &NFCLuaScriptModule::OnPropertyCommEvent);
@@ -70,30 +69,27 @@ bool NFCLuaScriptModule::Execute(const float fLasFrametime, const float fStarted
 
 bool NFCLuaScriptModule::BeforeShut()
 {
-    delete m_pScriptKernelModule;
-    m_pScriptKernelModule = NULL;
-
     lua_close(mpLuaState);
     mpLuaState = NULL;
 
     return true;
 }
 
-int NFCLuaScriptModule::OnPropertyCommEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& arg )
+int NFCLuaScriptModule::OnPropertyCommEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
 {
-    DoPropertyCommEvent(m_pScriptKernelModule, self,strPropertyName, oldVar, newVar, arg);
+    DoPropertyCommEvent(self, strPropertyName, oldVar, newVar);
 
     return 0;
 }
 
-int NFCLuaScriptModule::OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& arg )
+int NFCLuaScriptModule::OnRecordCommonEvent(const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar)
 {
-    DoRecordCommonEvent(m_pScriptKernelModule, self,strRecordName, nOpType, nRow, nCol, oldVar, newVar, arg);
+    DoRecordCommonEvent(self, xEventData, oldVar, newVar);
 
     return 0;
 }
 
-int NFCLuaScriptModule::OnClassCommonEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCLuaScriptModule::OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
 {
     DoClassCommonEvent(m_pLogicClassModule, self, strClassName, eClassEvent, var);
 
@@ -167,7 +163,7 @@ bool NFCLuaScriptModule::CheckCompomentStatus( const std::string& strComponentNa
     return true;
 }
 
-int NFCLuaScriptModule::DoScript( const NFIDENTID& self, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg )
+int NFCLuaScriptModule::DoScript( const NFIDENTID& self, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg )
 {
     if (!CheckCompomentStatus(strComponentName, strFunction))
     {
@@ -176,12 +172,12 @@ int NFCLuaScriptModule::DoScript( const NFIDENTID& self, const std::string& strC
 
     luabridge::LuaRef objCompoment = luabridge::getGlobal(mpLuaState, strComponentName.c_str());
     luabridge::LuaRef objFun = objCompoment[strFunction.c_str()];
-    objFun(NFScriptIdent(NFIDENTID(0, (NFINT64)m_pScriptKernelModule)), NFScriptIdent(self), arg);
+    objFun((NFINT64)m_pKernelModule, self, arg);
 
     return 1;
 }
 
-int NFCLuaScriptModule::DoEventScript( const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg )
+int NFCLuaScriptModule::DoEventScript( const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg )
 {
     if (!CheckCompomentStatus(strComponentName, strFunction))
     {
@@ -190,12 +186,12 @@ int NFCLuaScriptModule::DoEventScript( const NFIDENTID& self, const int nEventID
 
     luabridge::LuaRef objCompoment = luabridge::getGlobal(mpLuaState, strComponentName.c_str());
     luabridge::LuaRef objFun = objCompoment.getGlobal(mpLuaState, strFunction.c_str());
-    objFun(NFScriptIdent(NFIDENTID(0, (NFINT64)m_pScriptKernelModule)), NFScriptIdent(self), nEventID, arg);
+    objFun((NFINT64)m_pKernelModule, self, nEventID, arg);
 
     return 1;
 }
 
-int NFCLuaScriptModule::DoHeartBeatScript( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg )
+int NFCLuaScriptModule::DoHeartBeatScript(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction)
 {
     if (!CheckCompomentStatus(strComponentName, strFunction))
     {
@@ -204,12 +200,12 @@ int NFCLuaScriptModule::DoHeartBeatScript( const NFIDENTID& self, const std::str
 
     luabridge::LuaRef objCompoment = luabridge::getGlobal(mpLuaState, strComponentName.c_str());
     luabridge::LuaRef objFun = objCompoment.getGlobal(mpLuaState, strFunction.c_str());
-    objFun(NFScriptIdent(NFIDENTID(0, (NFINT64)m_pScriptKernelModule)), NFScriptIdent(self), strHeartBeat.c_str(), fTime, nCount, arg);
+    objFun((NFINT64)m_pKernelModule, self, strHeartBeat.c_str(), fTime, nCount);
 
     return 1;
 }
 
-int NFCLuaScriptModule::DoScriptPropertyCallBack( const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& oldVar, const NFCScriptVarList& newVar, const NFCScriptVarList& arg )
+int NFCLuaScriptModule::DoScriptPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& oldVar, const NFCDataList& newVar)
 {
     if (!CheckCompomentStatus(strComponentName, strFunction))
     {
@@ -218,12 +214,12 @@ int NFCLuaScriptModule::DoScriptPropertyCallBack( const NFIDENTID& self, const s
 
     luabridge::LuaRef objCompoment = luabridge::getGlobal(mpLuaState, strComponentName.c_str());
     luabridge::LuaRef objFun = objCompoment.getGlobal(mpLuaState, strFunction.c_str());
-    objFun(NFScriptIdent(NFIDENTID(0, (NFINT64)m_pScriptKernelModule)), NFScriptIdent(self), strPropertyName.c_str(), oldVar, newVar, arg);
+    objFun((NFINT64)m_pKernelModule, self, strPropertyName.c_str(), oldVar, newVar);
 
     return 1;
 }
 
-int NFCLuaScriptModule::DoScriptRecordCallBack( const NFIDENTID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCScriptVarList& oldVar, const NFCScriptVarList& newVar, const NFCScriptVarList& arg )
+int NFCLuaScriptModule::DoScriptRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCDataList& oldVar, const NFCDataList& newVar)
 {
     if (!CheckCompomentStatus(strComponentName, strFunction))
     {
@@ -232,84 +228,85 @@ int NFCLuaScriptModule::DoScriptRecordCallBack( const NFIDENTID& self, const std
 
     luabridge::LuaRef objCompoment = luabridge::getGlobal(mpLuaState, strComponentName.c_str());
     luabridge::LuaRef objFun = objCompoment.getGlobal(mpLuaState, strFunction.c_str());
-    // TODO
-    //objFun(NFScriptIdent(NFIDENTID(0, (NFINT64)m_pScriptKernelModule)), NFScriptIdent(self), strRecordName.c_str(), nOpType, nRow, nCol, oldVar, newVar, arg);
+    objFun((NFINT64)m_pKernelModule, self, strRecordName.c_str(), nOpType, nRow, nCol, oldVar, newVar);
 
     return 1;
 }
 
+//bool NFCLuaScriptModule::AddPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction)
+//{
+//
+//}
 
 bool NFCLuaScriptModule::Regisger()
 {
-    luabridge::getGlobalNamespace(mpLuaState).addFunction("HasEventCallBack", KernelModule_HasEventCallBack);
-    luabridge::getGlobalNamespace(mpLuaState).addFunction("RemoveEvent", &KernelModule_RemoveEvent);
-    luabridge::getGlobalNamespace(mpLuaState).addFunction("RemoveEventCallBack", &KernelModule_RemoveEventCallBack);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("DoEvent", &KernelModule_DoEvent);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("ExistElement", &KernelModule_ExistElement);
-    luabridge::getGlobalNamespace(mpLuaState).addFunction("GetPropertyInt", (int (*)(const NFScriptIdent&, const std::string&, const std::string&))&KernelModule_GetPropertyInt);
-    luabridge::getGlobalNamespace(mpLuaState).addFunction("GetPropertyFloat", (float (*)(const NFScriptIdent&, const std::string&, const std::string&))&KernelModule_GetPropertyFloat);
-    luabridge::getGlobalNamespace(mpLuaState).addFunction("GetPropertyString", (const std::string& (*)(const NFScriptIdent&, const std::string&, const std::string&))&KernelModule_GetPropertyString);
+    luabridge::getGlobalNamespace(mpLuaState).addFunction("GetElementPropertyInt", &KernelModule_GetElementPropertyInt);
+    luabridge::getGlobalNamespace(mpLuaState).addFunction("GetElementPropertyFloat", &KernelModule_GetElementPropertyFloat);
+    luabridge::getGlobalNamespace(mpLuaState).addFunction("GetElementPropertyDouble", &KernelModule_GetElementPropertyDouble);
+    luabridge::getGlobalNamespace(mpLuaState).addFunction("GetElementPropertyString", &KernelModule_GetElementPropertyString);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("AddPropertyCallBack", &KernelModule_AddPropertyCallBack);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("AddRecordCallBack", &KernelModule_AddRecordCallBack);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("AddEventCallBack", &KernelModule_AddEventCallBack);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("AddHeartBeat", &KernelModule_AddHeartBeat);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("FindHeartBeat", &KernelModule_FindHeartBeat);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("RemoveHeartBeat", &KernelModule_RemoveHeartBeat);
-    luabridge::getGlobalNamespace(mpLuaState).addFunction("SetComponentEnable", &KernelModule_SetComponentEnable);
-    luabridge::getGlobalNamespace(mpLuaState).addFunction("QueryComponentEnable", &KernelModule_QueryComponentEnable);
-    luabridge::getGlobalNamespace(mpLuaState).addFunction("CreateContainer", &KernelModule_CreateContainer);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("ExistContainer", &KernelModule_ExistContainer);
-    luabridge::getGlobalNamespace(mpLuaState).addFunction("CreateObject", &KernelModule_CreateObject);
-    luabridge::getGlobalNamespace(mpLuaState).addFunction("DestroyObject", &KernelModule_DestroyObject);
-    luabridge::getGlobalNamespace(mpLuaState).addFunction("FindProperty", &KernelModule_FindProperty);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("SetPropertyInt", &KernelModule_SetPropertyInt);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("SetPropertyFloat", &KernelModule_SetPropertyFloat);
+    luabridge::getGlobalNamespace(mpLuaState).addFunction("SetPropertyDouble", &KernelModule_SetPropertyDouble);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("SetPropertyString", &KernelModule_SetPropertyString);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("SetPropertyObject", &KernelModule_SetPropertyObject);
-    luabridge::getGlobalNamespace(mpLuaState).addFunction("GetPropertyInt", (int (*)(const NFScriptIdent&, const NFScriptIdent&, const std::string&))&KernelModule_GetPropertyInt);
-    luabridge::getGlobalNamespace(mpLuaState).addFunction("GetPropertyFloat", (float (*)(const NFScriptIdent&, const NFScriptIdent&, const std::string&))&KernelModule_GetPropertyFloat);
-    luabridge::getGlobalNamespace(mpLuaState).addFunction("GetPropertyString", (const std::string& (*)(const NFScriptIdent&, const NFScriptIdent&, const std::string&))&KernelModule_GetPropertyString);
+    luabridge::getGlobalNamespace(mpLuaState).addFunction("GetPropertyInt", &KernelModule_GetPropertyInt);
+    luabridge::getGlobalNamespace(mpLuaState).addFunction("GetPropertyFloat", &KernelModule_GetPropertyFloat);
+    luabridge::getGlobalNamespace(mpLuaState).addFunction("GetPropertyDouble", &KernelModule_GetPropertyDouble);
+    luabridge::getGlobalNamespace(mpLuaState).addFunction("GetPropertyString", &KernelModule_GetPropertyString);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("GetPropertyObject", &KernelModule_GetPropertyObject);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("SetRecordInt", &KernelModule_SetRecordInt);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("SetRecordFloat", &KernelModule_SetRecordFloat);
+    luabridge::getGlobalNamespace(mpLuaState).addFunction("SetRecordDouble", &KernelModule_SetRecordDouble);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("SetRecordString", &KernelModule_SetRecordString);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("SetRecordObject", &KernelModule_SetRecordObject);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("GetRecordInt", &KernelModule_GetRecordInt);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("GetRecordFloat", &KernelModule_GetRecordFloat);
+    luabridge::getGlobalNamespace(mpLuaState).addFunction("GetRecordDouble", &KernelModule_GetRecordDouble);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("GetRecordString", &KernelModule_GetRecordString);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("GetRecordObject", &KernelModule_GetRecordObject);
     luabridge::getGlobalNamespace(mpLuaState).addFunction("AddRow", &KernelModule_AddRow);
     //luabridge::getGlobalNamespace(mpLuaState).addFunction("AddProperty", &KernelModule_AddProperty);
 
     luabridge::getGlobalNamespace(mpLuaState)
-        .beginClass<NFCScriptVarList>("NFCVarList")
+        .beginClass<NFCDataList>("NFCDataList")
             .addConstructor<void (*)(void)>()
-            .addFunction("IsEmpty", &NFCScriptVarList::IsEmpty)
-            .addFunction("GetCount", &NFCScriptVarList::GetCount)
-            .addFunction("Type", &NFCScriptVarList::Type)
-            .addFunction("AddInt", &NFCScriptVarList::AddInt)
-            .addFunction("AddFloat", &NFCScriptVarList::AddFloat)
-            .addFunction("AddString", &NFCScriptVarList::AddString)
-            .addFunction("AddObject", &NFCScriptVarList::AddObject)
-            .addFunction("SetInt", &NFCScriptVarList::SetInt)
-            .addFunction("SetFloat", &NFCScriptVarList::SetFloat)
-            .addFunction("SetString", &NFCScriptVarList::SetString)
-            .addFunction("SetObject", &NFCScriptVarList::SetObject)
-            .addFunction("Int", &NFCScriptVarList::Int)
-            .addFunction("Float", &NFCScriptVarList::Float)
-            .addFunction("String", &NFCScriptVarList::String)
-            .addFunction("Object", &NFCScriptVarList::Object)
+            .addFunction("IsEmpty", &NFCDataList::IsEmpty)
+            .addFunction("GetCount", &NFCDataList::GetCount)
+            .addFunction("Type", &NFCDataList::Type)
+            .addFunction("AddInt", &NFCDataList::AddInt)
+            .addFunction("AddFloat", &NFCDataList::AddFloat)
+            .addFunction("AddDouble", &NFCDataList::AddDouble)
+            .addFunction("AddString", &NFCDataList::AddString)
+            .addFunction("AddObject", &NFCDataList::AddObject)
+            .addFunction("SetInt", &NFCDataList::SetInt)
+            .addFunction("SetFloat", &NFCDataList::SetFloat)
+            .addFunction("SetDouble", &NFCDataList::SetDouble)
+            .addFunction("SetString", &NFCDataList::SetString)
+            .addFunction("SetObject", &NFCDataList::SetObject)
+            .addFunction("Int", &NFCDataList::Int)
+            .addFunction("Float", &NFCDataList::Float)
+            .addFunction("Double", &NFCDataList::Double)
+            .addFunction("String", &NFCDataList::String)
+            .addFunction("Object", &NFCDataList::Object)
         .endClass();
 
     luabridge::getGlobalNamespace(mpLuaState)
-        .beginClass<NFScriptIdent>("NFIDENTID")
+        .beginClass<NFIDENTID>("NFIDENTID")
             .addConstructor<void (*)(void)>()
-            .addConstructor<void (*)(const NFScriptIdent&)>()
-            .addFunction("GetIdent", &NFScriptIdent::GetIdent)
-            .addFunction("GetData", &NFScriptIdent::GetData)
-            .addFunction("SetData", &NFScriptIdent::SetData)
-            .addFunction("GetHead", &NFScriptIdent::GetHead)
-            .addFunction("SetHead", &NFScriptIdent::SetHead)
+            .addConstructor<void (*)(const NFIDENTID&)>()
+            .addFunction("GetData", &NFIDENTID::GetData)
+            .addFunction("SetData", &NFIDENTID::SetData)
+            .addFunction("GetHead", &NFIDENTID::GetHead)
+            .addFunction("SetHead", &NFIDENTID::SetHead)
         .endClass();
 
     return true;
