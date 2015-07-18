@@ -6,14 +6,14 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_HELLO_WORLD3_H_
-#define _NFC_HELLO_WORLD3_H_
+#ifndef _NFC_HELLO_WORLD6_H_
+#define _NFC_HELLO_WORLD6_H_
 
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class HelloWorld6Module
     : public NFILogicModule
