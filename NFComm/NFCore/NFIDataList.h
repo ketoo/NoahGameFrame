@@ -228,10 +228,10 @@ public:
     {
         return Add(value);
     }
-    bool AddString(const char* value)
-    {
-        return Add(value);
-    }
+    //bool AddString(const char* value)
+    //{
+    //    return Add(value);
+    //}
     bool AddString(const std::string& value)
     {
         return Add(value);
