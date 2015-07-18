@@ -46,6 +46,26 @@ struct NFIDENTID
         return *this;
     }
 
+    NFINT64 GetData()
+    {
+        return nData64;
+    }
+
+    NFINT64 GetHead()
+    {
+        return nHead64;
+    }
+
+    void SetData(const NFINT64 nData)
+    {
+        nData64 = nData;
+    }
+
+    void SetHead(const NFINT64 nData)
+    {
+        nHead64 = nData;
+    }
+
     bool IsNull() const
     {
         return 0 == nData64 && 0 == nHead64;
