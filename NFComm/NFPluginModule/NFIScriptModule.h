@@ -15,7 +15,6 @@
 #include "NFComm/NFPluginModule/NFIdentID.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIScriptKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
