@@ -73,6 +73,10 @@ public:
 		AfterInit();
     }
 
+    virtual NFIPluginManager* GetPluginManager() const
+    {
+        return pPluginManager;
+    }
 
 
     std::string strName;
