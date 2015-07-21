@@ -304,7 +304,7 @@ bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
             char* error = dlerror();
             if (error)
             {
-                printf(stderr, "Open shared lib %s failed, %s.\n", pLib->GetName(), error);
+				std::cout << stderr << " Open shared lib failed " << pLib->GetName() << " " << error << std::endl;
                 assert(0);
                 return false;
             }
