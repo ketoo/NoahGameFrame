@@ -57,7 +57,7 @@ public:
 
     virtual void RemoveModule(const std::string& strModuleName);
 
-    virtual NFILogicModule* FindModule(const std::string& strModuleName);
+	virtual NFILogicModule* FindModule(const std::string& strModuleName);
 
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
 
