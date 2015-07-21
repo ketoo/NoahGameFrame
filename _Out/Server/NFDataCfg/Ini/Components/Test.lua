@@ -16,6 +16,7 @@ function Test:AfterInit(kernel, self, arg)
 		io.write("self is nil");
 	end
 
+	io.write("Start use C++ functions");
 	local nMaxhp = GetPropertyInt(kernel, self, "MAXHP");
 	io.write("Hello Lua MAXHP:" ..nMaxhp .. "\n");
 
@@ -30,7 +31,7 @@ function Test:AfterInit(kernel, self, arg)
 	--record callback
 	AddRecordCallBack(kernel, self, "TaskList","Test", "TaskListCallBack");
 
-	local varTask =  NFCVarList();
+	local varTask =  NFCDataList();
 	varTask:AddString("Task_From_Lua");
 	varTask:AddInt(1);
 
@@ -40,7 +41,7 @@ function Test:AfterInit(kernel, self, arg)
 	--event callback
 	AddEventCallBack(kernel, self, 1, "Test", "EventCallBack");
 
-	local obj = NFCVarList();
+	local obj = NFCDataList();
 	obj:AddInt(21);
 	obj:AddFloat(22.5);
 	obj:AddString("str23");
@@ -71,7 +72,7 @@ function Test:MaxPropertyCallBack(kernel, self, propertyName, oldVar, newVar, ar
 	local nOldVar = oldVar:Int(0);
 	local nNewVar = newVar:Int(0);
 
-	local obj = NFCVarList();
+	local obj = NFCDataList();
 	io.write("Hello Lua MaxPropertyCallBack oldVar:".. nOldVar .." newVar:" .. nNewVar .. "\n");
 end
 
@@ -108,6 +109,6 @@ end
 
 function Test:HearCallBack(kernel, self, strHeartBeat, fTime, nCount, arg)
 
-	local obj = NFCVarList();
+	local obj = NFCDataList();
 	io.write("Hello Lua HearCallBack :".. strHeartBeat .. "\n");
 end
