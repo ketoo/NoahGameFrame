@@ -149,7 +149,7 @@ bool NFCKernelModule::QueryComponentEnable(const NFIDENTID& self, const std::str
 	return false;
 }
 
-bool NFCKernelModule::FindHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName) const
+bool NFCKernelModule::FindHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName)
 {
 	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
 	if (pObject.get())
@@ -1345,7 +1345,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::GetObject(const NFIDENTID& ident)
 	return GetElement(ident);
 }
 
-bool NFCKernelModule::IsContainer(const NFIDENTID& self) const
+bool NFCKernelModule::IsContainer(const NFIDENTID& self)
 {
 	NF_SHARE_PTR<NFIObject> pObject = GetObject(self);
 	if (pObject.get())
@@ -1447,7 +1447,7 @@ int NFCKernelModule::GetObjectByProperty(const int nContainerID, const std::stri
 	return list.GetCount();
 }
 
-bool NFCKernelModule::ExistContainer(const int nContainerIndex) const
+bool NFCKernelModule::ExistContainer(const int nContainerIndex)
 {
 	NF_SHARE_PTR<NFCContainerInfo> pSceneInfo = m_pContainerModule->GetElement(nContainerIndex);
 	if (pSceneInfo.get())
