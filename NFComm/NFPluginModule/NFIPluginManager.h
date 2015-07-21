@@ -44,6 +44,12 @@ public:
 
     virtual int AppID() = 0;
 
+	template<typename T>
+	T* FindModule()
+	{
+		return dynamic_cast<T*>(pPluginManager->FindModule(typeid(T).name()));
+	}
+
 };
 
 #endif
