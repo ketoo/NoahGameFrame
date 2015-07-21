@@ -30,7 +30,7 @@ public:
         return AddHeartBeat(self, strHeartBeatName, functorPtr, fTime, nCount);
     }
 
-    virtual bool FindHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName) const = 0;
+    virtual bool FindHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName) = 0;
 
     virtual bool RemoveHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName) = 0;
 
@@ -98,9 +98,9 @@ public:
 
     virtual int Command(const NFIDataList& var) = 0;
 
-    virtual bool IsContainer(const NFIDENTID& self) const = 0;
+    virtual bool IsContainer(const NFIDENTID& self) = 0;
 
-    virtual bool ExistContainer(const int nContainerIndex) const = 0;
+    virtual bool ExistContainer(const int nContainerIndex) = 0;
 
     virtual NF_SHARE_PTR<NFIObject> GetObject(const NFIDENTID& ident) = 0;
 
