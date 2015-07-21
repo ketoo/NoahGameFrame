@@ -43,15 +43,15 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
 
-    virtual bool FindHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName) const;
+    virtual bool FindHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName);
 
     virtual bool RemoveHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName);
 
     virtual int Command(const NFIDataList& var);
 
-    virtual bool IsContainer(const NFIDENTID& self) const;
+    virtual bool IsContainer(const NFIDENTID& self);
 
-    virtual bool ExistContainer(const int nContainerIndex) const;
+    virtual bool ExistContainer(const int nContainerIndex);
 
     virtual NF_SHARE_PTR<NFIObject> GetObject(const NFIDENTID& ident);
 
