@@ -162,6 +162,7 @@ void NFCPluginManager::RemoveModule(const std::string& strModuleName)
     }
 }
 
+
 NFILogicModule* NFCPluginManager::FindModule(const std::string& strModuleName)
 {
     ModuleInstanceMap::iterator it = mModuleInstanceMap.find(strModuleName);
