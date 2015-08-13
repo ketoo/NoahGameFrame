@@ -58,8 +58,6 @@ protected:
     void LuaInit(NFIKernelModule* pKernel, const NFIDENTID& self,const NFIDataList& arg);
 
 protected:
-
-    //NFIScriptKernelModule* m_pScriptKernelModule;
     NFIElementInfoModule* m_pElementInfoModule;
     NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
