@@ -90,6 +90,8 @@ public:
   {
     int code = lua_pcall (L, nargs, nresults, msgh);
 
+    printf("%s \n", lua_tostring(L, -1));
+
     if (code != LUABRIDGE_LUA_OK)
       Throw (LuaException (L, code));
   }
