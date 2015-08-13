@@ -233,11 +233,6 @@ int NFCLuaScriptModule::DoScriptRecordCallBack(const NFIDENTID& self, const std:
     return 1;
 }
 
-//bool NFCLuaScriptModule::AddPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction)
-//{
-//
-//}
-
 bool NFCLuaScriptModule::Regisger()
 {
     luabridge::getGlobalNamespace(mpLuaState).addFunction("DoEvent", &KernelModule_DoEvent);
@@ -303,6 +298,7 @@ bool NFCLuaScriptModule::Regisger()
         .beginClass<NFIDENTID>("NFIDENTID")
             .addConstructor<void (*)(void)>()
             .addConstructor<void (*)(const NFIDENTID&)>()
+            .addConstructor<void (*)(NFINT64, NFINT64)>()
             .addFunction("GetData", &NFIDENTID::GetData)
             .addFunction("SetData", &NFIDENTID::SetData)
             .addFunction("GetHead", &NFIDENTID::GetHead)
