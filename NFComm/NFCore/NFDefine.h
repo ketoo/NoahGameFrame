@@ -50,7 +50,7 @@ typedef std::function<int(const NFIDENTID&, const std::string&, const CLASS_OBJE
 typedef std::function<int(const NFIDENTID&, const int, const NFIDataList&)> EVENT_PROCESS_FUNCTOR;
 
 typedef std::function<int(const NFIDENTID&, const int, std::string&)> EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR;
-typedef std::function<int(const NFIDENTID&, const int, const std::string&)> EVENT_ASYNC_PROCESS_END_FUNCTOR;
+typedef std::function<int(const NFIDENTID&, const int, const int, const std::string&)> EVENT_ASYNC_PROCESS_END_FUNCTOR;
 
 typedef NF_SHARE_PTR<HEART_BEAT_FUNCTOR> HEART_BEAT_FUNCTOR_PTR;
 typedef NF_SHARE_PTR<PROPERTY_EVENT_FUNCTOR> PROPERTY_EVENT_FUNCTOR_PTR;
