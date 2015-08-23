@@ -127,6 +127,7 @@ bool NFCActorManager::SendMsgToActor( const int nActorIndex, const NFIDENTID& ob
         xMessage.eType = NFIActorMessage::EACTOR_EVENT_MSG;
         xMessage.data = strArg;
         xMessage.nSubMsgID = nEventID;
+		xMessage.nFormActor = m_pMainActor->GetAddress().AsInteger();
         xMessage.self = objectID;
         xMessage.xActorEventFunc = xActorEventList;
 
