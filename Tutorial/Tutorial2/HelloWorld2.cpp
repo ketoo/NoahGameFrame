@@ -24,23 +24,30 @@ bool HelloWorld2::AfterInit()
 //     if(pPluginManager->GetActorID() == NFIActorManager::EACTOR_MAIN)
 // #endif
     {
-        //初始化完毕
         std::cout << "Hello, world2, AfterInit" << std::endl;
 
+		//created a object for this test
         NFIObject* pObject = new NFCObject(NFIDENTID(0, 1), pPluginManager);
+
+		//add a property name is "Hello" of this object
         pObject->GetPropertyManager()->AddProperty(pObject->Self(), "Hello", TDATA_STRING, true, true, true, true, 0, "");
+		//add a property name is "World" of this object
         pObject->GetPropertyManager()->AddProperty(pObject->Self(), "World", TDATA_INT, true, true, true, true, 0, "");
 
+		//set the "world" property value as 1111
         pObject->SetPropertyInt("World", 1111);
 
+		//get the "world" property value and printf it
         const int nProperty1 = pObject->GetPropertyInt("World");
         std::cout << "Property World:" << nProperty1 << std::endl;
 
-        //添加属性事件
+        //add a call back functin for "world" property
         pObject->AddPropertyCallBack("World", this, &HelloWorld2::OnPropertyCallBackEvent);
 
+		////set the "world" property value as 2222[than the function "HelloWorld2::OnPropertyCallBackEvent" will be called]
         pObject->SetPropertyInt("World", 2222);
 
+		//get the "world" property value and printf it
         const int nProperty2 = pObject->GetPropertyInt("World");
         std::cout << "Property World:" << nProperty2 << std::endl;
     }
