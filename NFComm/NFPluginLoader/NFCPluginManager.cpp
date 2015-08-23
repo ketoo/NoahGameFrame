@@ -397,7 +397,7 @@ bool NFCPluginManager::ExecuteEvent()
 	{
 		if (xMsg.eType == NFIActorMessage::EACTOR_RETURN_EVENT_MSG)
 		{
-			xMsg.xActorEventFunc->xEndFuncptr->operator()(xMsg.self, xMsg.nSubMsgID, xMsg.data);
+			xMsg.xActorEventFunc->xEndFuncptr->operator()(xMsg.self, xMsg.nFormActor, xMsg.nSubMsgID, xMsg.data);
 		}
 
 		bRet = mxQueue.Pop(xMsg);
