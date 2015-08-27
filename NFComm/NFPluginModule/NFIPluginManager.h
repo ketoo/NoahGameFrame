@@ -47,7 +47,9 @@ public:
 	template<typename T>
 	T* FindModule()
 	{
-		return dynamic_cast<T*>(pPluginManager->FindModule(typeid(T).name()));
+// 		std::string strClassName = typeid(T).name();
+// 		return dynamic_cast<T*>(pPluginManager->FindModule(strClassName));
+		return NULL;
 	}
 
 };

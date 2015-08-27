@@ -20,7 +20,7 @@ int HelloWorld4ActorModule::OnASyncEvent(const NFIDENTID& self, const int event,
     return 0;
 }
 
-int HelloWorld4ActorModule::OnSyncEvent(const NFIDENTID& self, const int event, const std::string& arg)
+int HelloWorld4ActorModule::OnSyncEvent(const NFIDENTID& self, const int nActorID, const int event, const std::string& arg)
 {
 	//事件回调函数
 	std::cout << "End OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg << " ThreadID: " << std::this_thread::get_id() << std::endl;
