@@ -26,6 +26,7 @@ public:
     {
         eType = EACTOR_UNKNOW;
         nSubMsgID = 0;
+		nFormActor = 0;
     }
 
 	enum EACTOR_MESSAGE_ID
@@ -45,7 +46,8 @@ public:
 	};
 
     EACTOR_MESSAGE_ID eType;
-    int nSubMsgID;
+	int nSubMsgID;
+	int nFormActor;
 	std::string data;
 	////////////////////event/////////////////////////////////////////////////
 	NFIDENTID self;
@@ -88,6 +90,7 @@ private:
 			xReturnMessage.data = strData;
 			////////////////////event/////////////////////////////////////////////////
 			xReturnMessage.self = message.self;
+			xReturnMessage.nFormActor = this->GetAddress().AsInteger();
 			xReturnMessage.xActorEventFunc = message.xActorEventFunc;
 
 			Send(xReturnMessage, from);
