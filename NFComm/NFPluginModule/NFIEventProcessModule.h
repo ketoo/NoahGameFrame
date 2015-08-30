@@ -70,25 +70,6 @@ public:
 		return AddAsyncEventCallBack(objectID, nEventID, functorPtr_begin, functorPtr_end);
 	}
 
-    template<typename DerivedType , typename BaseType> class TIsDerived
-    {
-    public:
-        static int AnyFunction(BaseType* base)
-        {
-            return 1;
-        }
-
-        static  char AnyFunction(void* t2)
-        {
-            return 0;
-        }
-
-        enum 
-        {
-            Result = ( sizeof(int) == sizeof(AnyFunction( (DerivedType*)NULL) ) ), 
-        };
-    };
-
 	template<typename BaseTypeComponent, typename BaseType>
 	int AddActorEventCallBack(BaseType* pBase, int (BaseType::*handler_end)(const NFIDENTID&, const int, const int, const std::string&))
 	{
