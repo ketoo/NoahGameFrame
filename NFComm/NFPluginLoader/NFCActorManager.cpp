@@ -90,7 +90,7 @@ NF_SHARE_PTR<NFIActor> NFCActorManager::GetActor(const int nActorIndex)
 	return NF_SHARE_PTR<NFIActor>();
 }
 
-bool NFCActorManager::SendMsgToActor( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventList)
+bool NFCActorManager::SendMsgToActor( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg)
 {
 	NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
     if (nullptr != pActor)
@@ -102,7 +102,6 @@ bool NFCActorManager::SendMsgToActor( const int nActorIndex, const NFIDENTID& ob
         xMessage.nSubMsgID = nEventID;
 		xMessage.nFormActor = m_pMainActor->GetAddress().AsInteger();
         xMessage.self = objectID;
-        xMessage.xActorEventFunc = xActorEventList;
 
         return m_pFramework->Send(xMessage, m_pMainActor->GetAddress(), pActor->GetAddress());
     }
@@ -129,6 +128,19 @@ bool NFCActorManager::ReleaseActor( const int nActorIndex )
 	if (it != mxActorMap.end())
 	{
 		mxActorMap.erase(it);
+
+		return true;
+	}
+
+	return false;
+}
+
+bool NFCActorManager::AddEndFunc( const int nActorIndex, EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end )
+{
+	NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
+	if (nullptr != pActor)
+	{
+		pActor->AddEndFunc(functorPtr_end);
 
 		return true;
 	}
