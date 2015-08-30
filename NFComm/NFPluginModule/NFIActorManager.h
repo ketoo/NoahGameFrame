@@ -37,11 +37,13 @@ class NFCObjectAsyncEventInfo
 class NFIActorManager : public NFILogicModule
 {
 public:
-	virtual int OnRequireActor(NFIComponent* pComponent) = 0;
+	virtual int RequireActor() = 0;
+	virtual bool ReleaseActor(const int nActorIndex) = 0;
+
+	virtual bool AddComponent(const int nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent) = 0;
 	virtual bool SendMsgToActor( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventList) = 0;
 
-	virtual NFIPluginManager* GetPluginManager() = 0;
-	virtual NFIActor* GetActor(const int nActorIndex) = 0;
+	virtual NF_SHARE_PTR<NFIActor> GetActor(const int nActorIndex) = 0;
 
 };
 
