@@ -33,10 +33,48 @@ class NFCObjectAsyncEventInfo
 };
 
 ///////////////////////////////////////////////////
+template<typename DerivedType , typename BaseType> class TIsDerived
+{
+public:
+	static int AnyFunction(BaseType* base)
+	{
+		return 1;
+	}
+
+	static  char AnyFunction(void* t2)
+	{
+		return 0;
+	}
+
+	enum 
+	{
+		Result = ( sizeof(int) == sizeof(AnyFunction( (DerivedType*)NULL) ) ), 
+	};
+};
 
 class NFIActorManager : public NFILogicModule
 {
 public:
+// 	template<typename BaseTypeComponent, typename BaseType>
+// 	bool SendMsgToActor(BaseType* pBase, int (BaseType::*handler_end)(const NFIDENTID&, const int, const int, const std::string&), const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg)
+// 	{
+// 		if (!TIsDerived<BaseTypeComponent, NFIComponent>::Result)
+// 		{
+// 			//BaseTypeComponent must inherit from NFIComponent;
+// 			return 0;
+// 		}
+// 
+// 		EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR functor_begin = std::bind(&BaseTypeComponent::OnASyncEvent, pComponent, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+// 		EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR functorPtr_begin(new EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR(functor_begin));
+// 
+// 		EVENT_ASYNC_PROCESS_END_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+// 		EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end(new EVENT_ASYNC_PROCESS_END_FUNCTOR(functor_end));        
+// 
+// 		NF_SHARE_PTR<NFAsyncEventFunc> pSyncEventInfo = NF_SHARE_PTR<NFAsyncEventFunc>(NF_NEW NFAsyncEventFunc());
+// 
+// 		return SendMsgToActor(nActorIndex, objectID, nEventID, strArg, functorPtr_begin, functorPtr_end);
+// 	}
+
 	virtual int RequireActor() = 0;
 	virtual bool ReleaseActor(const int nActorIndex) = 0;
 
