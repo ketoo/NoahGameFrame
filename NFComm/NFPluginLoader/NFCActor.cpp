@@ -26,3 +26,31 @@ void NFCActor::AddComponent( NF_SHARE_PTR<NFIComponent> pComponent )
 		m_pComponent->AfterInit();
 	}
 }
+
+void NFCActor::HandlerSelf( const NFIActorMessage& message, const Theron::Address from )
+{
+	std::string strData = message.data;
+	m_pComponent->OnASyncEvent(message.self, message.nSubMsgID, strData);
+
+	//message.xActorEventFunc->xBeginFuncptr->operator()(message.self, message.nSubMsgID, strData);
+
+	////////////////////////////////////////////////////////
+
+	NFIActorMessage xReturnMessage;
+
+	xReturnMessage.eType = NFIActorMessage::EACTOR_RETURN_EVENT_MSG;
+	xReturnMessage.nSubMsgID = message.nSubMsgID;
+	xReturnMessage.data = strData;
+	////////////////////event/////////////////////////////////////////////////
+	xReturnMessage.self = message.self;
+	xReturnMessage.nFormActor = this->GetAddress().AsInteger();
+	xReturnMessage.xEndFuncptr = mxFunctorEndPtr;
+
+	Send(xReturnMessage, from);
+}
+
+bool NFCActor::AddEndFunc( EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end )
+{
+	mxFunctorEndPtr = functorPtr_end;
+	return true;
+}
