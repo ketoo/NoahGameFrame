@@ -51,8 +51,8 @@ public:
 	std::string data;
 	////////////////////event/////////////////////////////////////////////////
 	NFIDENTID self;
-	NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc;//包含同步异步等回调接口
 	//////////////////////////////////////////////////////////////////////////
+	EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR xEndFuncptr;
 protected:
 private:
 };
@@ -67,33 +67,23 @@ public:
         RegisterHandler(this, &NFIActor::Handler);
     }
 
-    virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from){};
 	NFIActorManager* GetActorManager(){return m_pActorManager;}
 
 	virtual void AddComponent(NF_SHARE_PTR<NFIComponent> pComponent) = 0;
+	virtual bool AddEndFunc(EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end) = 0;
+protected:
+	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from){};
+	virtual void HandlerSelf(const NFIActorMessage& message, const Theron::Address from){};
 
 private:
-    virtual void Handler(const NFIActorMessage& message, const Theron::Address from)
+    void Handler(const NFIActorMessage& message, const Theron::Address from)
     {
+		
 		//收到消息要处理逻辑
 		if (message.eType == NFIActorMessage::EACTOR_EVENT_MSG)
 		{
-			std::string strData = message.data;
-			message.xActorEventFunc->xBeginFuncptr->operator()(message.self, message.nSubMsgID, strData);
-			
-			////////////////////////////////////////////////////////
+			HandlerSelf(message, from);
 
-			NFIActorMessage xReturnMessage;
-
-			xReturnMessage.eType = NFIActorMessage::EACTOR_RETURN_EVENT_MSG;
-			xReturnMessage.nSubMsgID = message.nSubMsgID;
-			xReturnMessage.data = strData;
-			////////////////////event/////////////////////////////////////////////////
-			xReturnMessage.self = message.self;
-			xReturnMessage.nFormActor = this->GetAddress().AsInteger();
-			xReturnMessage.xActorEventFunc = message.xActorEventFunc;
-
-			Send(xReturnMessage, from);
 		}
 		else
 		{
