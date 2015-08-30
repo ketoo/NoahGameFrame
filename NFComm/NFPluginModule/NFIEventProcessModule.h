@@ -98,7 +98,7 @@ public:
             return 0;
         }
 
-		BaseTypeComponent* pComponent = new BaseTypeComponent(pPluginManager);
+		NF_SHARE_PTR<BaseTypeComponent> pComponent = NF_SHARE_PTR<BaseTypeComponent>(NF_NEW BaseTypeComponent(pPluginManager));
 
 		EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR functor_begin = std::bind(&BaseTypeComponent::OnASyncEvent, pComponent, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR functorPtr_begin(new EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR(functor_begin));
@@ -109,23 +109,23 @@ public:
 		return AddActorEventCallBack(pComponent, functorPtr_begin, functorPtr_end);
 	}
 
-    virtual bool HasEventCallBack(const NFIDENTID& objectID, const int nEventID) = 0;
-
     virtual bool RemoveEvent(const NFIDENTID& objectID) = 0;
     virtual bool RemoveEventCallBack(const NFIDENTID& objectID, const int nEventID) = 0;
 
     virtual bool DoEvent(const NFIDENTID& objectID, const int nEventID, const NFIDataList& valueList, const bool bSync = true) = 0;
     virtual bool DoEvent(const NFIDENTID& objectID,  const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList, const bool bSync = true) = 0;
-	virtual bool SendActorMsg(const int nActorID, const int nEventID, const NFIDENTID self, const std::string& strData) = 0;
-
 
     virtual bool AddEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb) = 0;
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb) = 0;
+	
+	//////////////////////////////////////////////////////////////////////////
+	virtual bool SendActorMsg(const int nActorID, const int nEventID, const NFIDENTID self, const std::string& strData) = 0;
 
 protected:
+	virtual bool HasEventCallBack(const NFIDENTID& objectID, const int nEventID) = 0;
 
 	virtual bool AddAsyncEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb_begin, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end) = 0;
-	virtual int AddActorEventCallBack(NFIComponent* pComponent, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb_begin, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end) = 0;
+	virtual int AddActorEventCallBack(NF_SHARE_PTR<NFIComponent> pComponent, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb_begin, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end) = 0;
 
 };
 
