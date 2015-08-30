@@ -1,6 +1,6 @@
+#include <thread>
 #include "HelloWorld5Module.h"
 #include "NFComm/NFCore/NFTimer.h"
-#include <thread>
 #include "NFComm/NFCore/NFIComponent.h"
 #include "NFCTestComponent.h"
 
@@ -24,7 +24,7 @@ bool HelloWorld5Module::AfterInit()
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	for (int i = 0; i < 50000; ++i)
+	for (int i = 0; i < 500; ++i)
 	{
 		int nActorID = m_pEventProcessModule->AddActorEventCallBack<NFCTestComponent>(this, &HelloWorld5Module::OnSyncEvent);
 		m_pEventProcessModule->SendActorMsg(nActorID, 555, NFIDENTID(), boost::lexical_cast<std::string>(i));
