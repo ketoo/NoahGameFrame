@@ -43,21 +43,19 @@ public:
 		AfterInit();
 	}
 
-	virtual NFIPluginManager* GetPluginManager();
+	virtual int RequireActor();
+	virtual bool ReleaseActor(const int nActorIndex);
 
-	virtual int OnRequireActor(NFIComponent* pComponent);
 	virtual bool SendMsgToActor( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc);
+	virtual bool AddComponent(const int nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent);
 
-    virtual NFIActor* GetActor(const int nActorIndex);
+    virtual NF_SHARE_PTR<NFIActor> GetActor(const int nActorIndex);
 
 private:
-	NFIPluginManager* m_pPluginManager;
 
     Theron::Framework* m_pFramework;
-	NFIActor* m_pMainActor;
-	std::vector<NFIActor*> mvActorList;
-	std::map<int, NF_SHARE_PTR<NFIActor>> mxActorMap;
-
+	NF_SHARE_PTR<NFIActor> m_pMainActor;
+	std::map<int, NF_SHARE_PTR<NFIActor> > mxActorMap;
 };
 
 #endif
