@@ -43,14 +43,16 @@ public:
 		AfterInit();
 	}
 
+	virtual bool SendMsgToActor( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg);
+
+    virtual NF_SHARE_PTR<NFIActor> GetActor(const int nActorIndex);
+	
+protected:
 	virtual int RequireActor();
 	virtual bool ReleaseActor(const int nActorIndex);
 
-	virtual bool SendMsgToActor( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc);
 	virtual bool AddComponent(const int nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent);
-
-    virtual NF_SHARE_PTR<NFIActor> GetActor(const int nActorIndex);
-
+	virtual bool AddEndFunc(const int nActorIndex, EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end);
 private:
 
     Theron::Framework* m_pFramework;
