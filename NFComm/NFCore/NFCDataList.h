@@ -86,7 +86,7 @@ public:
     virtual NFINT64 Int(const int index) const;
     virtual float Float(const int index) const;
     virtual double Double(const int index) const;
-    virtual std::string StringValEx(const int index, const bool bForce) const;
+    virtual std::string StringValEx(const int index) const;
     virtual const std::string& String(const int index) const;
     virtual NFIDENTID Object(const int index) const;
     virtual void* Pointer(const int index) const;
