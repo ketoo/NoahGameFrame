@@ -13,26 +13,31 @@
 NFCEventProcessModule::NFCEventProcessModule(NFIPluginManager* p)
 {
     pPluginManager = p;
-
 }
 
 NFCEventProcessModule::~NFCEventProcessModule()
 {
+	mRemoveObjectListEx.ClearAll();
+	mRemoveEventListEx.ClearAll();
 
+	mxClassEventInfoEx.ClearAll();
+	mObjectEventInfoMapEx.ClearAll();
+
+	mObjectSyncEventInfoMapEx.ClearAll();
+
+	///////////////////actor event///////////////////////////////////////////////////////
+	mActorSyncEventInfoMapEx.ClearAll();
 }
 
 bool NFCEventProcessModule::Init()
 {
-
     return true;
 }
 
 bool NFCEventProcessModule::Shut()
 {
     mxClassEventInfoEx.ClearAll();
-
     mRemoveEventListEx.ClearAll();
-
     mObjectEventInfoMapEx.ClearAll();
 
     return true;
@@ -40,13 +45,12 @@ bool NFCEventProcessModule::Shut()
 
 void NFCEventProcessModule::OnReload(const char* strModuleName, NFILogicModule* pModule)
 {
-
 }
 
 bool NFCEventProcessModule::AddEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb)
 {
     NF_SHARE_PTR<NFCObjectEventInfo> pObjectEventInfo = mObjectEventInfoMapEx.GetElement(objectID);
-    if (!pObjectEventInfo.get())
+    if (nullptr != pObjectEventInfo)
     {
         pObjectEventInfo = NF_SHARE_PTR<NFCObjectEventInfo>(NF_NEW NFCObjectEventInfo());
         mObjectEventInfoMapEx.AddElement(objectID, pObjectEventInfo);
@@ -55,7 +59,7 @@ bool NFCEventProcessModule::AddEventCallBack(const NFIDENTID& objectID, const in
     assert(nullptr != pObjectEventInfo);
 
     NF_SHARE_PTR<NFEventList> pEventInfo = pObjectEventInfo->GetElement(nEventID);
-    if (!pEventInfo)
+    if (nullptr != pEventInfo)
     {
         pEventInfo = NF_SHARE_PTR<NFEventList>(NF_NEW NFEventList());
         pObjectEventInfo->AddElement(nEventID, pEventInfo);
@@ -75,7 +79,6 @@ bool NFCEventProcessModule::Execute(const float fLasFrametime, const float fStar
     NF_SHARE_PTR<NFList<int>> pList = mRemoveEventListEx.First(ident);
     while (nullptr != pList)
     {
-        //删除对象的某个事�?
         NF_SHARE_PTR<NFCObjectEventInfo> pObjectEventInfo = mObjectEventInfoMapEx.GetElement(ident);
         if (pObjectEventInfo)
         {
@@ -121,10 +124,10 @@ bool NFCEventProcessModule::RemoveEventCallBack(const NFIDENTID& objectID, const
     if (nullptr != pObjectEventInfo)
     {
         NF_SHARE_PTR<NFEventList> pEventInfo = pObjectEventInfo->GetElement(nEventID);
-        if (pEventInfo.get())
+        if (nullptr != pEventInfo)
         {
             NF_SHARE_PTR<NFList<int>> pList = mRemoveEventListEx.GetElement(objectID);
-            if (!pList.get())
+            if (nullptr != pList)
             {
                 pList = NF_SHARE_PTR<NFList<int>>(NF_NEW NFList<int>());
                 mRemoveEventListEx.AddElement(objectID, pList);
@@ -159,7 +162,7 @@ bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const int nEventI
 		bool bRet = pEventInfo->First(cb);
 		while (bRet)
 		{
-			cb.get()->operator()(objectID, nEventID,  valueList);
+			cb->operator()(objectID, nEventID,  valueList);
 
 			bRet = pEventInfo->Next(cb);
 		}
@@ -194,7 +197,7 @@ bool NFCEventProcessModule::DoEvent(const NFIDENTID& objectID, const std::string
         bool bRet = pEventList->First(cb);
         while (bRet)
         {
-            cb.get()->operator()(objectID, strClassName, eClassEvent,  valueList);
+            cb->operator()(objectID, strClassName, eClassEvent,  valueList);
 
             bRet = pEventList->Next(cb);
         }
@@ -256,22 +259,25 @@ bool NFCEventProcessModule::AddAsyncEventCallBack( const NFIDENTID& objectID, co
 
 	pSyncEventInfo->xBeginFuncptr = cb;
 	pSyncEventInfo->xEndFuncptr = cb_end;
+	pSyncEventInfo->nActorID = pPluginManager->GetActorManager()->RequireActor();
 
 	return true;
 }
 
-int NFCEventProcessModule::AddActorEventCallBack(NFIComponent* pComponent, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end )
+int NFCEventProcessModule::AddActorEventCallBack(NF_SHARE_PTR<NFIComponent> pComponent, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end )
 {
-	if (!pComponent)
+	if (nullptr == pComponent)
 	{
 		return 0;
 	}
 
-	int nActorID = pPluginManager->GetActorManager()->OnRequireActor(pComponent);
+	int nActorID = pPluginManager->GetActorManager()->RequireActor();
 	if (nActorID <= 0)
 	{
 		return 0;
 	}
+
+	pPluginManager->GetActorManager()->AddComponent(nActorID, pComponent);
 
 	NF_SHARE_PTR<NFAsyncEventFunc> pSyncEventInfo = mActorSyncEventInfoMapEx.GetElement(nActorID);
 	if (nullptr == pSyncEventInfo)
@@ -279,6 +285,7 @@ int NFCEventProcessModule::AddActorEventCallBack(NFIComponent* pComponent, const
 		pSyncEventInfo = NF_SHARE_PTR<NFAsyncEventFunc>(NF_NEW NFAsyncEventFunc());
 		mActorSyncEventInfoMapEx.AddElement(nActorID, pSyncEventInfo);
 	}
+
 	assert(NULL != pSyncEventInfo);
 
 	pSyncEventInfo->xBeginFuncptr = cb;
