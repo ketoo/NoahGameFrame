@@ -16,10 +16,13 @@ void NFCActor::HandlerEx( const NFIActorMessage& message, const Theron::Address 
 	m_pActorManager->GetPluginManager()->HandlerEx(message, from);
 }
 
-void NFCActor::RegisterActorComponent( NFIComponent* pComponent )
+void NFCActor::AddComponent( NF_SHARE_PTR<NFIComponent> pComponent )
 {
-	m_pComponent = pComponent;
+	if (nullptr != pComponent)
+	{
+		m_pComponent = pComponent;
 
-	m_pComponent->Init();
-	m_pComponent->AfterInit();
+		m_pComponent->Init();
+		m_pComponent->AfterInit();
+	}
 }
