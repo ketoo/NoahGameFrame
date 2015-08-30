@@ -24,21 +24,13 @@ bool HelloWorld5Module::AfterInit()
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	//int nActorID = m_pEventProcessModule->AddActorEventCallBack<NFCTestComponent, HelloWorld5Module>(this, &HelloWorld5Module::OnSyncEvent);
-	int nActorID = m_pEventProcessModule->AddActorEventCallBack<NFCTestComponent>(this, &HelloWorld5Module::OnSyncEvent);
-
-	for (int i = 0; i < 20; ++i)
+	for (int i = 0; i < 50000; ++i)
 	{
+		int nActorID = m_pEventProcessModule->AddActorEventCallBack<NFCTestComponent>(this, &HelloWorld5Module::OnSyncEvent);
 		m_pEventProcessModule->SendActorMsg(nActorID, 555, NFIDENTID(), boost::lexical_cast<std::string>(i));
 	}
 
-
     std::cout << "End Test Actor, ThreadID: " << std::this_thread::get_id() << std::endl;
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-   
 
     return true;
 }
