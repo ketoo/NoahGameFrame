@@ -45,7 +45,7 @@ void NFCEventProcessModule::OnReload(const char* strModuleName, NFILogicModule* 
 bool NFCEventProcessModule::AddEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb)
 {
     NF_SHARE_PTR<NFCObjectEventInfo> pObjectEventInfo = mObjectEventInfoMapEx.GetElement(objectID);
-    if (nullptr != pObjectEventInfo)
+    if (nullptr == pObjectEventInfo)
     {
         pObjectEventInfo = NF_SHARE_PTR<NFCObjectEventInfo>(NF_NEW NFCObjectEventInfo());
         mObjectEventInfoMapEx.AddElement(objectID, pObjectEventInfo);
@@ -54,7 +54,7 @@ bool NFCEventProcessModule::AddEventCallBack(const NFIDENTID& objectID, const in
     assert(nullptr != pObjectEventInfo);
 
     NF_SHARE_PTR<NFEventList> pEventInfo = pObjectEventInfo->GetElement(nEventID);
-    if (nullptr != pEventInfo)
+    if (nullptr == pEventInfo)
     {
         pEventInfo = NF_SHARE_PTR<NFEventList>(NF_NEW NFEventList());
         pObjectEventInfo->AddElement(nEventID, pEventInfo);
