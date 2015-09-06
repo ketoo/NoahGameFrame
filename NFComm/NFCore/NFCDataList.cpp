@@ -441,21 +441,38 @@ void NFCDataList::InnerAppendEx(const NFIDataList& src, const int start, const i
     }
 }
 
-std::string NFCDataList::StringValEx(const int index, const bool bForce) const
+std::string NFCDataList::StringValEx(const int index) const
 {
     if (index < GetCount() && index >= 0)
     {
-        TDATA_TYPE type =  Type(index);
-        if (type == TDATA_STRING)
-        {
-            return String(index);
-        }
+		std::string strData;
 
-//         const NF_SHARE_PTR<NFIDataList::TData> var = GetStack(index);
-//         if (var)
-//         {
-//             //return boost::lexical_cast<std::string>(var->variantData);
-//         }
+		const TDATA_TYPE eType =  Type(index);
+		switch (eType)
+		{
+		case TDATA_INT:
+			strData = boost::lexical_cast<std::string> (Int(index));
+			break;
+
+		case TDATA_FLOAT:
+			strData = boost::lexical_cast<std::string> (Float(index));
+			break;
+
+		case TDATA_DOUBLE:
+			strData = boost::lexical_cast<std::string> (Double(index));
+			break;
+
+		case TDATA_STRING:
+			strData = boost::lexical_cast<std::string> (String(index));
+			break; 
+		case TDATA_OBJECT:
+			strData = Object(index).ToString();
+			break;
+		default:
+
+			strData = NULL_STR;
+			break;
+		}
     }
 
     return NULL_STR;
@@ -465,7 +482,7 @@ bool NFCDataList::ToString(std::string& str, const char* strSplit) const
 {
     for (int i = 0; i < GetCount(); ++i)
     {
-        std::string strVal = StringValEx(i, true);
+        std::string strVal = StringValEx(i);
         str += strVal;
         str += strSplit;
     }
