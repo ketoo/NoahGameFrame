@@ -12,7 +12,7 @@
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 
 class NFCEventProcessModule
-    : public NFIEventProcessModule
+	: public NFIEventProcessModule
 {
 public:
     NFCEventProcessModule(NFIPluginManager* p);
@@ -23,24 +23,20 @@ public:
 
     virtual void OnReload(const char* strModuleName, NFILogicModule* pModule);
 
-
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
 
-
-    virtual bool HasEventCallBack(const NFIDENTID& objectID, const int nEventID);
     virtual bool RemoveEvent(const NFIDENTID& objectID);
-    virtual bool RemoveEventCallBack(const NFIDENTID& objectID, const int nEventID/*, const EVENT_PROCESS_FUNCTOR_PTR& cb*/);
+    virtual bool RemoveEventCallBack(const NFIDENTID& objectID, const int nEventID);
 
-    virtual bool DoEvent(const NFIDENTID& objectID, const int nEventID, const NFIDataList& valueList, const bool bSync = true);
-    virtual bool DoEvent(const NFIDENTID& objectID,  const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList, const bool bSync = true);
-	virtual bool SendActorMsg(const int nActorID, const int nEventID, const NFIDENTID self, const std::string& strData);
+    virtual bool DoEvent(const NFIDENTID& objectID, const int nEventID, const NFIDataList& valueList);
+    virtual bool DoEvent(const NFIDENTID& objectID,  const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList);
 
     virtual bool AddEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb);
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb);
 
-	//////////sync////////////////////////////////////////////////////////////////
-	virtual bool AddAsyncEventCallBack(const NFIDENTID& objectID, const int nEventID, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb_begin, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end);
-	virtual int AddActorEventCallBack(NFIComponent* pComponent, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR& cb, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR& cb_end );
+protected:
+	virtual bool HasEventCallBack(const NFIDENTID& objectID, const int nEventID);
+
 private:
 
     NFList<NFIDENTID> mRemoveObjectListEx;
@@ -48,12 +44,6 @@ private:
 
 	NFMapEx<std::string, NFCClassEventList> mxClassEventInfoEx;
     NFMapEx<NFIDENTID, NFCObjectEventInfo> mObjectEventInfoMapEx;
-
-	///////////////////async event///////////////////////////////////////////////////////
-	NFMapEx<NFIDENTID, NFCObjectAsyncEventInfo> mObjectSyncEventInfoMapEx;
-
-	///////////////////actor event///////////////////////////////////////////////////////
-	NFMapEx<int, NFAsyncEventFunc> mActorSyncEventInfoMapEx;
 };
 
 
