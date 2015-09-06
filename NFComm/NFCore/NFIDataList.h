@@ -79,7 +79,7 @@ public:
 
     virtual ~NFIDataList() = 0;
 
-    virtual std::string StringValEx(const int index, const bool bForce) const = 0;
+    virtual std::string StringValEx(const int index) const = 0;
     virtual bool ToString(std::string& str, const char* strSplit) const = 0;
 
  protected:
