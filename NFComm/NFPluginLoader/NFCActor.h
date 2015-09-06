@@ -13,7 +13,6 @@
 #include <string>
 #include "NFComm/NFCore/NFSingleton.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
-
 #include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFCore/NFIComponent.h"
 
@@ -33,16 +32,17 @@ public:
 			m_pComponent->BeforeShut();
 			m_pComponent->Shut();
 
-			delete m_pComponent;
-			m_pComponent = NULL;
+			m_pComponent.reset();
 		}
 	}
 
 	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
-	virtual void RegisterActorComponent(NFIComponent* pComponent);
-
+	virtual void HandlerSelf(const NFIActorMessage& message, const Theron::Address from);
+	virtual void AddComponent(NF_SHARE_PTR<NFIComponent> pComponent);
+	virtual bool AddEndFunc(EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end);
 
 protected:
-	NFIComponent* m_pComponent;
+	NF_SHARE_PTR<NFIComponent> m_pComponent;
+	EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR mxFunctorEndPtr;
 };
 #endif

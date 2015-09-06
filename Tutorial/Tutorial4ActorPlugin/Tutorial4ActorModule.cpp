@@ -39,13 +39,6 @@ bool HelloWorld4ActorModule::AfterInit()
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
 
 	//////////////////////////////////////Í¬²½/////////////////////////////////////////////////////////////////////
-	m_pEventProcessModule->AddAsyncEventCallBack(NFIDENTID(), 2222, this, &HelloWorld4ActorModule::OnASyncEvent, &HelloWorld4ActorModule::OnSyncEvent);
-
-	for (int i = 0; i < 20; ++i)
-	{
-		m_pEventProcessModule->DoEvent(NFIDENTID(), 2222, NFCDataList() << boost::lexical_cast<std::string>(i), false);
-
-	}
 
 	std::cout << "End Test Actor, ThreadID: " << std::this_thread::get_id() << std::endl;
 
