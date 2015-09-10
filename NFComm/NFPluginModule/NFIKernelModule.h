@@ -25,9 +25,13 @@ public:
     template<typename BaseType>
     bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const float, const int), const float fTime, const int nCount)
     {
-        HEART_BEAT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-        HEART_BEAT_FUNCTOR_PTR functorPtr(new HEART_BEAT_FUNCTOR(functor));
-        return AddHeartBeat(self, strHeartBeatName, functorPtr, fTime, nCount);
+		NF_SHARE_PTR<NFIObject> pObject = GetObject(self);
+		if (pObject.get())
+		{
+			return pObject->AddHeartBeat(strHeartBeatName, pBase, handler, fTime, nCount);
+		}
+
+		return false;
     }
 
     virtual bool FindHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName) = 0;
@@ -37,26 +41,34 @@ public:
     template<typename BaseType>
     bool AddRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const RECORD_EVENT_DATA&, const NFIDataList&, const NFIDataList&))
     {
-        RECORD_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-        RECORD_EVENT_FUNCTOR_PTR functorPtr(new RECORD_EVENT_FUNCTOR(functor));
-        return AddRecordCallBack(self, strRecordName, functorPtr);
+		NF_SHARE_PTR<NFIObject> pObject = GetObject(self);
+		if (pObject.get())
+		{
+			return pObject->AddRecordCallBack(strRecordName, pBase, handler);
+		}
+
+		return false;
     }
 
     template<typename BaseType>
     bool AddPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const NFIDataList&, const NFIDataList&))
     {
-        PROPERTY_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-        PROPERTY_EVENT_FUNCTOR_PTR functorPtr(new PROPERTY_EVENT_FUNCTOR(functor));
-        return AddPropertyCallBack(self, strPropertyName, functorPtr);
+		NF_SHARE_PTR<NFIObject> pObject = GetObject(self);
+		if (pObject.get())
+		{
+			return pObject->AddPropertyCallBack(strPropertyName, pBase, handler);
+		}
+
+		return false;
     }
 
     ////////////////event//////////////////////////////////////////////////////////
     template<typename BaseType>
     bool AddEventCallBack(const NFIDENTID& self, const int nEventID, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const int, const NFIDataList&))
     {
-        EVENT_PROCESS_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
-        EVENT_PROCESS_FUNCTOR_PTR functorPtr(new EVENT_PROCESS_FUNCTOR(functor));
-        return AddEventCallBack(self, nEventID, functorPtr);
+		EVENT_PROCESS_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+		EVENT_PROCESS_FUNCTOR_PTR functorPtr(new EVENT_PROCESS_FUNCTOR(functor));
+		return AddEventCallBack(self, nEventID, functorPtr);
     }
 
     template<typename BaseType>
@@ -195,10 +207,6 @@ public:
 protected:
     virtual bool AddEventCallBack(const NFIDENTID& self, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb) = 0;
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb) = 0;
-
-    virtual bool AddRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
-    virtual bool AddPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
-    virtual bool AddHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
 protected:
 
     //只能网络模块注册，回调用来同步对象类事件,所有的类对象都会回调
