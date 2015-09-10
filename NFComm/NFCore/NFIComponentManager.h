@@ -13,12 +13,31 @@
 #include "NFIComponent.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
 
+///////////////////////////////////////////////////
+
+
+
 class NFIComponentManager : public NFILogicModule, public NFMapEx<std::string, NFIComponent>
 {
 public:
     virtual ~NFIComponentManager() {}
-    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
-    virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
+
+	template <typename T>
+	NF_SHARE_PTR<T> AddComponent()
+	{
+		NF_SHARE_PTR<T> pComponent = NF_SHARE_PTR<T>(NF_NEW T());
+		std::string strComponentName = GET_CLASS_NAME(T)
+
+		return AddComponent(strComponentName, pComponent);
+	}
+
+	template <typename T>
+	NF_SHARE_PTR<T> FindComponent()
+	{
+		return NF_SHARE_PTR<T>();
+	}
+
+    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent) = 0;
 
     virtual bool SetEnable(const std::string& strComponentName, const bool bEnable) = 0;
 
@@ -26,8 +45,9 @@ public:
 
     virtual NFIDENTID Self() = 0;
 
-    //     template<typename BaseType>
-    //     virtual bool SenbdMessage(const std::string& strComponentName, const bool bEnable);
+protected:
+
+	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
 
 private:
 };
