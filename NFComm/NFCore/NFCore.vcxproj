@@ -93,7 +93,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCComponent.h" />
     <ClInclude Include="NFCComponentManager.h" />
     <ClInclude Include="NFCConsistentHash.hpp" />
     <ClInclude Include="NFCDataList.h" />
@@ -124,7 +123,6 @@
     <ClInclude Include="NFTimer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NFCComponent.cpp" />
     <ClCompile Include="NFCComponentManager.cpp" />
     <ClCompile Include="NFCDataList.cpp" />
     <ClCompile Include="NFCHeartBeatManager.cpp" />
