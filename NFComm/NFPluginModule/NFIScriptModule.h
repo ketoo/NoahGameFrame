@@ -197,7 +197,7 @@ public:
                 NF_SHARE_PTR<NFIComponent> pComponent = pComponentManager->First();
                 while (pComponent.get() && pComponent->Enable())
                 {
-                    DoScript(self, pComponent->ComponentName(), strSerializationName, var);
+                    DoScript(self, pComponent->GetComponentName(), strSerializationName, var);
 
                     pComponent = pComponentManager->Next();
                 }
