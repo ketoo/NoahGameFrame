@@ -78,9 +78,6 @@ $(OBJDIR_DEBUG_X64)/NFCHeartBeatManager.o: NFCHeartBeatManager.cpp
 $(OBJDIR_DEBUG_X64)/NFCMemory.o: NFCMemory.cpp
 	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCMemory.cpp -o $(OBJDIR_DEBUG_X64)/NFCMemory.o
 
-$(OBJDIR_DEBUG_X64)/NFCComponent.o: NFCComponent.cpp
-	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCComponent.cpp -o $(OBJDIR_DEBUG_X64)/NFCComponent.o
-
 $(OBJDIR_DEBUG_X64)/NFCObject.o: NFCObject.cpp
 	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCObject.cpp -o $(OBJDIR_DEBUG_X64)/NFCObject.o
 
@@ -129,9 +126,6 @@ $(OBJDIR_RELEASE_X64)/NFCHeartBeatManager.o: NFCHeartBeatManager.cpp
 
 $(OBJDIR_RELEASE_X64)/NFCMemory.o: NFCMemory.cpp
 	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCMemory.cpp -o $(OBJDIR_RELEASE_X64)/NFCMemory.o
-
-$(OBJDIR_RELEASE_X64)/NFCComponent.o: NFCComponent.cpp
-	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCComponent.cpp -o $(OBJDIR_RELEASE_X64)/NFCComponent.o
 
 $(OBJDIR_RELEASE_X64)/NFCObject.o: NFCObject.cpp
 	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCObject.cpp -o $(OBJDIR_RELEASE_X64)/NFCObject.o
