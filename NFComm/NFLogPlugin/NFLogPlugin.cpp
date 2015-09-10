@@ -29,7 +29,7 @@ const int NFLogPlugin::GetPluginVersion()
 
 const std::string NFLogPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFLogPlugin)
+    GET_CLASS_NAME(NFLogPlugin)
 }
 
 void NFLogPlugin::Install()
