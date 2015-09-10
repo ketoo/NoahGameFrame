@@ -57,9 +57,6 @@
     <ClInclude Include="NFIHeartBeatManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFCComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NFCComponentManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -112,9 +109,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NFCHeartBeatManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NFCComponentManager.cpp">
