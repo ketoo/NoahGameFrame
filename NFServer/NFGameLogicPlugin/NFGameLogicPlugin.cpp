@@ -47,7 +47,7 @@ const int NFGameLogicPlugin::GetPluginVersion()
 
 const std::string NFGameLogicPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME( NFGameLogicPlugin )
+    GET_CLASS_NAME( NFGameLogicPlugin )
 }
 
 void NFGameLogicPlugin::Install()
