@@ -36,7 +36,7 @@ const int NFWorldLogicPlugin::GetPluginVersion()
 
 const std::string NFWorldLogicPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFWorldLogicPlugin)
+    GET_CLASS_NAME(NFWorldLogicPlugin)
 }
 
 void NFWorldLogicPlugin::Install()
