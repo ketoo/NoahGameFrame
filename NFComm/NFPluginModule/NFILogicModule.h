@@ -20,6 +20,26 @@
 #include "NFComm/NFCore/NFIRecord.h"
 #include "NFComm/NFEventDefine/NFEventDefine.h"
 
+template<typename DerivedType, typename BaseType> 
+class TIsDerived
+{
+public:
+	static int AnyFunction(BaseType* base)
+	{
+		return 1;
+	}
+
+	static  char AnyFunction(void* t2)
+	{
+		return 0;
+	}
+
+	enum 
+	{
+		Result = ( sizeof(int) == sizeof(AnyFunction( (DerivedType*)NULL) ) ), 
+	};
+
+};
 class NFIPluginManager;
 
 class NFILogicModule

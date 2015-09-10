@@ -37,7 +37,7 @@ bool NFCLuaScriptModule::AfterInit()
         std::shared_ptr<NFIComponent> pComponent = pClass->GetComponentManager()->First();
         while (pComponent.get())
         {
-            if (!CheckCompomentStatus(pComponent->ComponentName()))
+            if (!CheckCompomentStatus(pComponent->GetComponentName()))
             {
                 assert(0);
             }
