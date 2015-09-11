@@ -32,16 +32,16 @@ Architecture:
 
 Architecture:
 
-![Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/20150511205235.jpg)
-![Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/20150511205320.jpg)
+![Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NF_app_arch.png)
+![Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NF_server_arch.png)
 
 Event Driver:
 
-![Event Driver](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/20150511205210.jpg)
+![Event Driver](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NF_Event_driver.png)
 
 Logic Class:
 
-![Logic Class](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/20150511205321.png)
+![Logic Class](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NF_logic_class.png)
 
 
 
