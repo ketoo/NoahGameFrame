@@ -30,14 +30,16 @@ https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NFrame_Introductio
 Architecture:
 -------------------
 
-Architecture:
+###App Architecture:
 
-![Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/20150511205235.jpg)
-![Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/20150511205320.jpg)
+![App Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NF_app_arch.png)
 
-Event Driver:
+###Server Architecture
+![Server Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NF_server_arch.png)
 
-![Event Driver](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/20150511205210.jpg)
+###Event Driver:
+
+![Event Driver](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NF_Event_driver.png)
 
 Get the Sources:
 -------------------
