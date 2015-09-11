@@ -77,9 +77,6 @@ public:
     virtual const std::string& GetRecordString(const std::string& strRecordName, const int nRow, const std::string& strColTag);
     virtual NFIDENTID GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag);
 
-    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName);
-    virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName);
-
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager();
     virtual NF_SHARE_PTR<NFIHeartBeatManager> GetHeartBeatManager();
     virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager();
