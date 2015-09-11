@@ -41,10 +41,6 @@ Architecture:
 
 ![Event Driver](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NF_Event_driver.png)
 
-###Logic Class:
-
-![Logic Class](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NF_logic_class.png)
-
 Get the Sources:
 -------------------
 
