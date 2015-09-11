@@ -18,7 +18,7 @@
 class NFCTestComponent : public NFIComponent
 {
 public:
-    NFCTestComponent(NFIPluginManager* p)
+    NFCTestComponent(NFIPluginManager* p) : NFIComponent(NFIDENTID())
     {
 		pPluginManager = p;
     }
