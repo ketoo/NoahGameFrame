@@ -25,7 +25,7 @@ const int NFDataBaseNet_ClientPlugin::GetPluginVersion()
 
 const std::string NFDataBaseNet_ClientPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME( NFDataBaseNet_ClientPlugin )
+    GET_CLASS_NAME( NFDataBaseNet_ClientPlugin )
 }
 
 void NFDataBaseNet_ClientPlugin::Install()

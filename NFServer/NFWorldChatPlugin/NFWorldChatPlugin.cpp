@@ -32,7 +32,7 @@ const int NFWorldChatPlugin::GetPluginVersion()
 
 const std::string NFWorldChatPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFWorldChatPlugin)
+    GET_CLASS_NAME(NFWorldChatPlugin)
 }
 
 void NFWorldChatPlugin::Install()
