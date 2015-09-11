@@ -51,30 +51,7 @@ void NFCPropertyTrailModule::StartTrail( const NFIDENTID self )
 {
 	LogObjectData(self);
 
-	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pLogicClassModule->GetClassPropertyManager("Player");
-	if (nullptr != xPropertyManager)
-	{
-		NF_SHARE_PTR<NFIProperty> xProperty = xPropertyManager->First();
-		while (nullptr != xProperty)
-		{
-			m_pKernelModule->AddPropertyCallBack(self, xProperty->GetKey(), this, &NFCPropertyTrailModule::OnObjectPropertyEvent);
-
-			xProperty = xPropertyManager->Next();
-		}
-	}
-
-	NF_SHARE_PTR<NFIRecordManager> xRecordManager = m_pLogicClassModule->GetClassRecordManager("Player");
-	if (nullptr != xRecordManager)
-	{
-		NF_SHARE_PTR<NFIRecord> xRecord = xRecordManager->First();
-		while (nullptr != xRecord)
-		{
-			m_pKernelModule->AddRecordCallBack(self, xRecord->GetName(), this, &NFCPropertyTrailModule::OnObjectRecordEvent);
-
-
-			xRecord = xRecordManager->Next();
-		}
-	}
+	
 }
 
 void NFCPropertyTrailModule::EndTrail( const NFIDENTID self )
@@ -84,7 +61,13 @@ void NFCPropertyTrailModule::EndTrail( const NFIDENTID self )
 
 int NFCPropertyTrailModule::LogObjectData( const NFIDENTID& self )
 {
-	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pLogicClassModule->GetClassPropertyManager("Player");
+	NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
+	if (nullptr == xObject)
+	{
+		return -1;
+	}
+
+	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = xObject->GetPropertyManager();
 	if (nullptr != xPropertyManager)
 	{
 		NF_SHARE_PTR<NFIProperty> xProperty = xPropertyManager->First();
@@ -101,7 +84,7 @@ int NFCPropertyTrailModule::LogObjectData( const NFIDENTID& self )
 		}
 	}
 
-	NF_SHARE_PTR<NFIRecordManager> xRecordManager = m_pLogicClassModule->GetClassRecordManager("Player");
+	NF_SHARE_PTR<NFIRecordManager> xRecordManager = xObject->GetRecordManager();
 	if (nullptr != xRecordManager)
 	{
 		NF_SHARE_PTR<NFIRecord> xRecord = xRecordManager->First();
@@ -203,6 +186,42 @@ int NFCPropertyTrailModule::OnObjectRecordEvent( const NFIDENTID& self, const RE
 		break;
 	default:
 		break;
+	}
+
+	return 0;
+}
+
+int NFCPropertyTrailModule::TrailObjectData( const NFIDENTID& self )
+{
+	NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
+	if (nullptr == xObject)
+	{
+		return -1;
+	}
+
+	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = xObject->GetPropertyManager();
+	if (nullptr != xPropertyManager)
+	{
+		NF_SHARE_PTR<NFIProperty> xProperty = xPropertyManager->First();
+		while (nullptr != xProperty)
+		{
+			m_pKernelModule->AddPropertyCallBack(self, xProperty->GetKey(), this, &NFCPropertyTrailModule::OnObjectPropertyEvent);
+
+			xProperty = xPropertyManager->Next();
+		}
+	}
+
+	NF_SHARE_PTR<NFIRecordManager> xRecordManager = xObject->GetRecordManager();
+	if (nullptr != xRecordManager)
+	{
+		NF_SHARE_PTR<NFIRecord> xRecord = xRecordManager->First();
+		while (nullptr != xRecord)
+		{
+			m_pKernelModule->AddRecordCallBack(self, xRecord->GetName(), this, &NFCPropertyTrailModule::OnObjectRecordEvent);
+
+
+			xRecord = xRecordManager->Next();
+		}
 	}
 
 	return 0;
