@@ -258,27 +258,27 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_S
 
 bool NFCLogicClassModule::AddComponents(rapidxml::xml_node<>* pComponentRootNode, NF_SHARE_PTR<NFILogicClass> pClass)
 {
-    for (rapidxml::xml_node<>* pComponentNode = pComponentRootNode->first_node(); pComponentNode; pComponentNode = pComponentNode->next_sibling())
-    {
-        if (pComponentNode)
-        {
-            const char* strComponentName = pComponentNode->first_attribute("Name")->value();
-            const char* strLanguage = pComponentNode->first_attribute("Language")->value();
-            const char* strEnable = pComponentNode->first_attribute("Enable")->value();
-            bool bEnable = boost::lexical_cast<bool>(strEnable);
-            if (bEnable)
-            {
-                if (pClass->GetComponentManager()->GetElement(strComponentName))
-                {
-                    //error
-                    NFASSERT(0, strComponentName, __FILE__, __FUNCTION__);
-                    continue;
-                }
-
-                pClass->GetComponentManager()->AddComponent(strComponentName, strLanguage);
-            }
-        }
-    }
+//     for (rapidxml::xml_node<>* pComponentNode = pComponentRootNode->first_node(); pComponentNode; pComponentNode = pComponentNode->next_sibling())
+//     {
+//         if (pComponentNode)
+//         {
+//             const char* strComponentName = pComponentNode->first_attribute("Name")->value();
+//             const char* strLanguage = pComponentNode->first_attribute("Language")->value();
+//             const char* strEnable = pComponentNode->first_attribute("Enable")->value();
+//             bool bEnable = boost::lexical_cast<bool>(strEnable);
+//             if (bEnable)
+//             {
+//                 if (pClass->GetComponentManager()->GetElement(strComponentName))
+//                 {
+//                     //error
+//                     NFASSERT(0, strComponentName, __FILE__, __FUNCTION__);
+//                     continue;
+//                 }
+// 
+//                 pClass->GetComponentManager()->AddComponent(strComponentName, strLanguage);
+//             }
+//         }
+//     }
 
     return true;
 }

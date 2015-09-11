@@ -39,6 +39,7 @@ Event Driver:
 
 ![Event Driver](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NF_Event_driver.png)
 
+<<<<<<< HEAD
 Logic Class:
 
 ![Logic Class](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NF_logic_class.png)
@@ -46,6 +47,8 @@ Logic Class:
 
 
 
+=======
+>>>>>>> a7cc06f0c0710b8db498fa346bbc00248289be63
 Get the Sources:
 -------------------
 

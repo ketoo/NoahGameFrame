@@ -10,7 +10,6 @@
 #include "NFCRecordManager.h"
 #include "NFCHeartBeatManager.h"
 #include "NFCPropertyManager.h"
-#include "NFCComponentManager.h"
 
 NFCObject::NFCObject(NFIDENTID self, NFIPluginManager* pLuginManager)
 {
@@ -465,14 +464,4 @@ NFIDENTID NFCObject::Self()
 NF_SHARE_PTR<NFIComponentManager> NFCObject::GetComponentManager()
 {
     return m_pComponentManager;
-}
-
-NF_SHARE_PTR<NFIComponent> NFCObject::AddComponent(const std::string& strComponentName, const std::string& strLanguageName)
-{
-    return m_pComponentManager->AddComponent(strComponentName, strLanguageName);
-}
-
-NF_SHARE_PTR<NFIComponent> NFCObject::FindComponent(const std::string& strComponentName)
-{
-    return m_pComponentManager->FindComponent(strComponentName);
 }
