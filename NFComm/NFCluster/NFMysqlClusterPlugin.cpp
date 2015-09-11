@@ -28,7 +28,7 @@ const int NFMysqlClusterPlugin::GetPluginVersion()
 
 const std::string NFMysqlClusterPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFMysqlClusterPlugin)
+    GET_CLASS_NAME(NFMysqlClusterPlugin)
 }
 
 void NFMysqlClusterPlugin::Install()

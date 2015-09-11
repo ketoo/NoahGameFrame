@@ -9,7 +9,6 @@
 #ifndef _NFC_COMPONENT_MANAGER_H_
 #define _NFC_COMPONENT_MANAGER_H_
 
-#include "NFCComponent.h"
 #include "NFIComponentManager.h"
 #include "NFComm/NFPluginModule/NFIdentID.h"
 
@@ -37,7 +36,7 @@ public:
 
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
 
-    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName);
+    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent);
     virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName);
 
     virtual bool SetEnable(const std::string& strComponentName, const bool bEnable);
