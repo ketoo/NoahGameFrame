@@ -41,6 +41,7 @@ public:
 protected:
 
 	int LogObjectData( const NFIDENTID& self);
+	int TrailObjectData( const NFIDENTID& self);
 
 	int OnObjectPropertyEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar );
 

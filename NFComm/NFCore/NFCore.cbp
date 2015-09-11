@@ -47,8 +47,6 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCComponent.cpp" />
-		<Unit filename="NFCComponent.h" />
 		<Unit filename="NFCComponentManager.cpp" />
 		<Unit filename="NFCComponentManager.h" />
 		<Unit filename="NFCConsistentHash.hpp" />
