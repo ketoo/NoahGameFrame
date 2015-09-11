@@ -14,16 +14,27 @@
 
 class NFIComponent : public NFILogicModule
 {
+private:
+	NFIComponent()
+	{
+	}
+
 public:
+	NFIComponent(NFIDENTID self)
+	{
+		mbEnable = true;
+		mSelf = self;
+	}
+
     virtual ~NFIComponent() {}
     virtual bool SetEnable(const bool bEnable)
     {
-        return false;
+        return mbEnable;
     }
 
 	virtual bool Enable()
     {
-        return false;
+        return mbEnable;
     }
 
 	virtual NFIDENTID Self()
@@ -31,17 +42,21 @@ public:
         return NFIDENTID();
     }
 
-    virtual const std::string& ComponentName()
+    virtual const std::string& GetComponentName() const
     {
-        return NULL_STR;
+        return mstrName;
     }
-    virtual const std::string& LanguageName()
-    {
-        return NULL_STR;
-    }
+	virtual void SetComponentName(const std::string& strName)
+	{
+		mstrName = strName;
+	}
 
-	virtual int OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg){ return 0;}
+	virtual int OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg) = 0;
+
 private:
+	bool mbEnable;
+	NFIDENTID mSelf;
+	std::string mstrName;
 };
 
 #endif

@@ -17,11 +17,13 @@
 #include "NFIHeartBeatManager.h"
 #include "NFIPropertyManager.h"
 #include "NFIComponentManager.h"
+#include "NFCComponentManager.h"
 
 class NFIObject
 {
 public:
     virtual ~NFIObject() {}
+
     virtual bool Init() = 0;
     virtual bool Shut() = 0;
 
@@ -52,12 +54,6 @@ public:
         HEART_BEAT_FUNCTOR_PTR functorPtr(NF_NEW HEART_BEAT_FUNCTOR(functor));
         return AddHeartBeat(strHeartBeatName, functorPtr, fTime, nCount);
     }
-
-    virtual bool AddRecordCallBack(const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
-
-    virtual bool AddPropertyCallBack(const std::string& strPropertyName, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
-
-    virtual bool AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
 
     virtual bool FindHeartBeat(const std::string& strHeartBeatName) = 0;
 
@@ -103,10 +99,10 @@ public:
     virtual float GetRecordFloat(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
     virtual double GetRecordDouble(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
     virtual const std::string& GetRecordString(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
-    virtual NFIDENTID GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
+	virtual NFIDENTID GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
 
-    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
-    virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
+// 	virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
+// 	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
 
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager() = 0;
     virtual NF_SHARE_PTR<NFIHeartBeatManager> GetHeartBeatManager() = 0;
@@ -114,6 +110,12 @@ public:
     virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager() = 0;
 
 
+protected:
+	virtual bool AddRecordCallBack(const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
+
+	virtual bool AddPropertyCallBack(const std::string& strPropertyName, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
+
+	virtual bool AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
 
 private:
 };
