@@ -32,6 +32,22 @@ public:
     virtual const std::map<std::string, int>& GetPropertyIndex() = 0;
     virtual const int GetPropertyIndex(const std::string& strProperty) = 0;
 
+	//////////////////////////////////////////////////////////////////////////
+
+	virtual bool SetPropertyInt(const std::string& strPropertyName, const NFINT64 nValue) = 0;
+	virtual bool SetPropertyFloat(const std::string& strPropertyName,  const float fValue) = 0;
+	virtual bool SetPropertyDouble(const std::string& strPropertyName, const double dwValue) = 0;
+	virtual bool SetPropertyString(const std::string& strPropertyName, const std::string& strValue) = 0;
+	virtual bool SetPropertyObject(const std::string& strPropertyName, const NFIDENTID& obj) = 0;
+
+	virtual NFINT64 GetPropertyInt(const std::string& strPropertyName) = 0;
+	virtual float GetPropertyFloat(const std::string& strPropertyName) = 0;
+	virtual double GetPropertyDouble(const std::string& strPropertyName) = 0;
+	virtual const std::string& GetPropertyString(const std::string& strPropertyName) = 0;
+	virtual NFIDENTID GetPropertyObject(const std::string& strPropertyName) = 0;
+
+	//////////////////////////////////////////////////////////////////////////
+
 private:
 };
 
