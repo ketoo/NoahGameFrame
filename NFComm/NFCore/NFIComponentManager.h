@@ -34,18 +34,15 @@ public:
 	template <typename T>
 	NF_SHARE_PTR<T> FindComponent()
 	{
-		return NF_SHARE_PTR<T>();
+		std::string strComponentName = GET_CLASS_NAME(T)
+		return FindComponent(strComponentName);
 	}
-
-    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent) = 0;
-
-    virtual bool SetEnable(const std::string& strComponentName, const bool bEnable) = 0;
-
-    virtual bool Enable(const std::string& strComponentName) = 0;
 
     virtual NFIDENTID Self() = 0;
 
 protected:
+
+	virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent) = 0;
 
 	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
 

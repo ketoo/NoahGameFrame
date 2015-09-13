@@ -21,11 +21,17 @@
 
 class NFIObject
 {
-public:
-    virtual ~NFIObject() {}
+private:
+	NFIObject()
+	{
+	}
 
-    virtual bool Init() = 0;
-    virtual bool Shut() = 0;
+public:
+	NFIObject(NFIDENTID self)
+	{
+
+	}
+    virtual ~NFIObject() {}
 
     virtual bool Execute(const float fLastTime, const float fAllTime) = 0;
 
@@ -54,6 +60,28 @@ public:
         HEART_BEAT_FUNCTOR_PTR functorPtr(NF_NEW HEART_BEAT_FUNCTOR(functor));
         return AddHeartBeat(strHeartBeatName, functorPtr, fTime, nCount);
     }
+
+	template <typename T>
+	NF_SHARE_PTR<T> AddComponent()
+	{
+		if (!TIsDerived<T, NFIComponent>::Result)
+		{
+			//BaseTypeComponent must inherit from NFIComponent;
+			return NF_SHARE_PTR<T>();
+		}
+
+		NF_SHARE_PTR<T> pComponent = NF_SHARE_PTR<T>(NF_NEW T());
+		std::string strComponentName = GET_CLASS_NAME(T)
+
+		return GetComponentManager()->AddComponent(strComponentName, pComponent);
+	}
+
+	template <typename T>
+	NF_SHARE_PTR<T> FindComponent()
+	{
+		std::string strComponentName = GET_CLASS_NAME(T)
+		return GetComponentManager()->FindComponent(strComponentName);
+	}
 
     virtual bool FindHeartBeat(const std::string& strHeartBeatName) = 0;
 
