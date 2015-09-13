@@ -31,39 +31,10 @@ NF_SHARE_PTR<NFIComponent> NFCComponentManager::FindComponent(const std::string&
     return GetElement(strComponentName);
 }
 
-bool NFCComponentManager::SetEnable(const std::string& strComponentName, const bool bEnable)
-{
-    NF_SHARE_PTR<NFIComponent> pComponent = GetElement(strComponentName);
-    if (pComponent.get())
-    {
-        return pComponent->SetEnable(bEnable);
-    }
-
-    return false;
-}
-
-bool NFCComponentManager::Enable(const std::string& strComponentName)
-{
-    NF_SHARE_PTR<NFIComponent> pComponent = GetElement(strComponentName);
-    if (pComponent.get())
-    {
-        return pComponent->Enable();
-    }
-
-    return false;
-}
-
-bool NFCComponentManager::DestroyAllComponent()
-{
-    ClearAll();
-
-    return true;
-}
-
 bool NFCComponentManager::Init()
 {
     NF_SHARE_PTR<NFIComponent> pComponent = First();
-    while (pComponent.get())
+    while (nullptr != pComponent)
     {
         pComponent->Init();
 
