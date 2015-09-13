@@ -14,6 +14,12 @@
 
 class NFCComponentManager : public NFIComponentManager
 {
+private:
+	NFCComponentManager()
+	{
+
+	}
+
 public:
     NFCComponentManager(const NFIDENTID& self)
     {
@@ -22,7 +28,6 @@ public:
 
     virtual ~NFCComponentManager()
     {
-        DestroyAllComponent();
         ClearAll();
     }
 
@@ -36,17 +41,12 @@ public:
 
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
 
-    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent);
-    virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName);
-
-    virtual bool SetEnable(const std::string& strComponentName, const bool bEnable);
-
-    virtual bool Enable(const std::string& strComponentName);
-
-    virtual NFIDENTID Self();
+	virtual NFIDENTID Self();
 
 protected:
-    virtual bool DestroyAllComponent();
+
+    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent);
+    virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName);
 
 private:
     NFIDENTID mSelf;
