@@ -9,6 +9,7 @@
 #ifndef _NFI_COMPONENT_H_
 #define _NFI_COMPONENT_H_
 
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIdentID.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
 
@@ -27,6 +28,34 @@ public:
 	}
 
     virtual ~NFIComponent() {}
+
+	template <typename T>
+	NF_SHARE_PTR<T> CreateNewInstance()
+	{
+		NFIComponent* pComponent = CreateNewInstance();
+		if (pComponent)
+		{
+			if (TIsDerived<T, NFIComponent>::Result)
+			{
+				T* pT = dynamic_cast<T*>(pComponent);
+				if (pT)
+				{
+					return NF_SHARE_PTR<pT>();
+				}				
+			}
+
+			delete pComponent;
+			pComponent = NULL;
+		}
+
+		return NF_SHARE_PTR<T>();
+	}
+
+	virtual NFIComponent* CreateNewInstance()
+	{
+		return NULL;
+	}
+
     virtual bool SetEnable(const bool bEnable)
     {
         return mbEnable;
@@ -46,6 +75,7 @@ public:
     {
         return mstrName;
     }
+
 	virtual void SetComponentName(const std::string& strName)
 	{
 		mstrName = strName;
