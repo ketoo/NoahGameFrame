@@ -45,8 +45,8 @@ public:
 
 protected:
 
-    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent);
-    virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName);
+	virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent);
+	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName);
 
 private:
     NFIDENTID mSelf;

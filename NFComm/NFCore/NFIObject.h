@@ -77,10 +77,29 @@ public:
 	}
 
 	template <typename T>
+	NF_SHARE_PTR<T> AddComponent(const std::string& strComponentName)
+	{
+		if (!TIsDerived<T, NFIComponent>::Result)
+		{
+			//BaseTypeComponent must inherit from NFIComponent;
+			return NF_SHARE_PTR<T>();
+		}
+
+		NF_SHARE_PTR<T> pComponent = CREATE_COMPONENT(strComponentName)
+		return GetComponentManager()->AddComponent(strComponentName, pComponent);
+	}
+
+	template <typename T>
 	NF_SHARE_PTR<T> FindComponent()
 	{
 		std::string strComponentName = GET_CLASS_NAME(T)
 		return GetComponentManager()->FindComponent(strComponentName);
+	}
+
+	template <typename T>
+	NF_SHARE_PTR<T> FindComponent(const std::string& strComponentName)
+	{
+		return GetComponentManager()->FindComponent<T>(strComponentName);
 	}
 
     virtual bool FindHeartBeat(const std::string& strHeartBeatName) = 0;
