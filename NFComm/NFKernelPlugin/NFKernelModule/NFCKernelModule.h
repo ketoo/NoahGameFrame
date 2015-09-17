@@ -64,9 +64,6 @@ public:
     virtual bool DestroySelf(const NFIDENTID& self);
 
     //////////////////////////////////////////////////////////////////////////
-    virtual bool SetComponentEnable(const NFIDENTID& self, const std::string& strComponentName, const bool bEnable);
-    virtual bool QueryComponentEnable(const NFIDENTID& self, const std::string& strComponentName);
-
     virtual bool FindProperty(const NFIDENTID& self, const std::string& strPropertyName);
 
     virtual bool SetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName, const NFINT64 nValue);
