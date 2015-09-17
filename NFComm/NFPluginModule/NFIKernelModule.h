@@ -122,9 +122,6 @@ public:
 
     virtual bool DestroyAll() = 0;
 
-    virtual bool SetComponentEnable(const NFIDENTID& self, const std::string& strComponentName, const bool bEnable) = 0;
-    virtual bool QueryComponentEnable(const NFIDENTID& self, const std::string& strComponentName) = 0;
-
     virtual bool FindProperty(const NFIDENTID& self, const std::string& strPropertyName) = 0;
 
     virtual bool SetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName, const NFINT64 nValue) = 0;
