@@ -23,6 +23,24 @@ public:
 
     }
 
+	template <typename T>
+	T* FindModule(const std::string& strModuleName)
+	{
+		NFILogicModule* pLogicModule = FindModule(strModuleName);
+		if (pLogicModule)
+		{
+			if (!TIsDerived<T, NFILogicModule>::Result)
+			{
+				//BaseTypeComponent must inherit from NFIComponent;
+				return NULL;
+			}
+
+			return dynamic_cast<T*>(pLogicModule);
+		}
+
+		return NULL;
+	}
+
     virtual bool LoadPlugin() = 0;
 
     virtual void Registered(NFIPlugin* plugin) = 0;
@@ -37,20 +55,21 @@ public:
 
     virtual NFILogicModule* FindModule(const std::string& strModuleName) = 0;
 
+	//////////////////////////////////////////////////////////////////////////
+
+	virtual void AddComponent(const std::string& strComponentName, NFIComponent* pComponent) = 0;
+
+	virtual void RemoveComponent(const std::string& strComponentName) = 0;
+
+	virtual NFIComponent* FindComponent(const std::string& strComponentName) = 0;
+
+	//////////////////////////////////////////////////////////////////////////
     virtual bool ReInitialize() = 0;
 
 	virtual NFIActorManager* GetActorManager() = 0;
 	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from) = 0;
 
     virtual int AppID() = 0;
-
-	template<typename T>
-	T* FindModule()
-	{
-// 		std::string strClassName = typeid(T).name();
-// 		return dynamic_cast<T*>(pPluginManager->FindModule(strClassName));
-		return NULL;
-	}
 
 };
 
