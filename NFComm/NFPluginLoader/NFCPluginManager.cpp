@@ -408,3 +408,18 @@ bool NFCPluginManager::ExecuteEvent()
 
 	return true;
 }
+
+void NFCPluginManager::AddComponent( const std::string& strComponentName, NFIComponent* pComponent )
+{
+
+}
+
+void NFCPluginManager::RemoveComponent( const std::string& strComponentName )
+{
+
+}
+
+NFIComponent* NFCPluginManager::FindComponent( const std::string& strComponentName )
+{
+	return NULL;
+}
