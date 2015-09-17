@@ -23,6 +23,24 @@ public:
 
     }
 
+	template <typename T>
+	T* FindModule(const std::string& strModuleName)
+	{
+		NFILogicModule* pLogicModule = FindModule(strModuleName);
+		if (pLogicModule)
+		{
+			if (!TIsDerived<T, NFILogicModule>::Result)
+			{
+				//BaseTypeComponent must inherit from NFIComponent;
+				return NULL;
+			}
+
+			return dynamic_cast<T*>(pLogicModule);
+		}
+
+		return NULL;
+	}
+
     virtual bool LoadPlugin() = 0;
 
     virtual void Registered(NFIPlugin* plugin) = 0;
