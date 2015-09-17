@@ -21,13 +21,22 @@
     pManager->AddModule( (#className), pRegisterModule##className );AddElement( (#className), pRegisterModule##className );
 
 #define UNREGISTER_MODULE(pManager, className) NFILogicModule* pUnRegisterModule##className =  \
-    dynamic_cast<NFILogicModule*>( pManager->FindModule( (#className) ) ); pManager->RemoveModule( (#className) ); delete pUnRegisterModule##className;
+    dynamic_cast<NFILogicModule*>( pManager->FindModule( (#className) ) ); pManager->RemoveModule( (#className) ); RemoveElement( (#className) ); delete pUnRegisterModule##className;
 
 #define CREATE_PLUGIN(pManager, className)  NFIPlugin* pCreatePlugin##className = new className(pManager); pManager->Registered( pCreatePlugin##className );
 
 #define DESTROY_PLUGIN(pManager, className) pManager->UnsRegistered( pManager->FindPlugin((#className)) );
 
 #define GET_CLASS_NAME(className) return (#className);
+
+
+#define REGISTER_COMPONENT(pManager, className)  NFIComponent* pRegisterComponent##className= new className(pManager); \
+	pRegisterComponent##className->strName = (#className); \
+	pManager->AddComponent( (#className), pRegisterModule##className );
+
+#define UNREGISTER_COMPONENT(pManager, className) NFIComponent* pRegisterComponent##className =  \
+	dynamic_cast<NFIComponent*>( pManager->FindComponent( (#className) ) ); pManager->RemoveComponent( (#className) ); delete pRegisterComponent##className;
+
 
 class NFIPluginManager;
 

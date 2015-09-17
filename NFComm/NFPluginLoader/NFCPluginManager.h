@@ -59,6 +59,12 @@ public:
 
 	virtual NFILogicModule* FindModule(const std::string& strModuleName);
 
+	virtual void AddComponent(const std::string& strComponentName, NFIComponent* pComponent);
+
+	virtual void RemoveComponent(const std::string& strComponentName);
+
+	virtual NFIComponent* FindComponent(const std::string& strComponentName);
+
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
 
     //  virtual void OnReloadModule( const std::string& strModuleName, NFILogicModule* pModule );
