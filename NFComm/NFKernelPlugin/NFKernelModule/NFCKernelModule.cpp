@@ -127,28 +127,6 @@ bool NFCKernelModule::Execute(const float fLasFrametime, const float fStartedTim
 	return true;
 }
 
-bool NFCKernelModule::SetComponentEnable(const NFIDENTID& self, const std::string& strComponentName, const bool bEnable)
-{
-	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
-	if (pObject.get())
-	{
-		return pObject->GetComponentManager()->SetEnable(strComponentName, bEnable);
-	}
-
-	return false;
-}
-
-bool NFCKernelModule::QueryComponentEnable(const NFIDENTID& self, const std::string& strComponentName)
-{
-	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
-	if (pObject.get())
-	{
-		return pObject->GetComponentManager()->Enable(strComponentName);
-	}
-
-	return false;
-}
-
 bool NFCKernelModule::FindHeartBeat(const NFIDENTID& self, const std::string& strHeartBeatName)
 {
 	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
