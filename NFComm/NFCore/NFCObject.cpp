@@ -12,6 +12,7 @@
 #include "NFCPropertyManager.h"
 
 NFCObject::NFCObject(NFIDENTID self, NFIPluginManager* pLuginManager)
+	: NFIObject(self)
 {
     mSelf = self;
     m_pPluginManager = pLuginManager;
