@@ -28,7 +28,7 @@ const int NFAIPlugin::GetPluginVersion()
 
 const std::string NFAIPlugin::GetPluginName()
 {
-    GET_CLASS_NAME(NFAIPlugin)
+    return GET_CLASS_NAME(NFAIPlugin)
 }
 
 void NFAIPlugin::Install()
