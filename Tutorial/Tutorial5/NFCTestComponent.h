@@ -14,6 +14,7 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFIPlugin.h"
 
 class NFCTestComponent : public NFIComponent
 {
@@ -27,6 +28,9 @@ public:
 
     virtual bool Init();
     virtual bool AfterInit();
+
+
+	virtual const std::string GetComponentName() const;
 
     virtual int OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg);
 
