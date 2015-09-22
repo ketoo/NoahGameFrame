@@ -27,7 +27,7 @@
 
 #define DESTROY_PLUGIN(pManager, className) pManager->UnsRegistered( pManager->FindPlugin((#className)) );
 
-#define GET_CLASS_NAME(className) return (#className);
+#define GET_CLASS_NAME(className) (#className);
 
 
 #define REGISTER_COMPONENT(pManager, className)  NFIComponent* pRegisterComponent##className= new className(pManager); \

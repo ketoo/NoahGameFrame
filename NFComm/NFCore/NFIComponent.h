@@ -71,22 +71,14 @@ public:
         return NFIDENTID();
     }
 
-    virtual const std::string& GetComponentName() const
-    {
-        return mstrName;
-    }
+    virtual const std::string GetComponentName() const = 0;
 
-	virtual void SetComponentName(const std::string& strName)
-	{
-		mstrName = strName;
-	}
-
-	virtual int OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg) = 0;
+	//for actor
+	virtual int OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg){return 0;}
 
 private:
 	bool mbEnable;
 	NFIDENTID mSelf;
-	std::string mstrName;
 };
 
 #endif
