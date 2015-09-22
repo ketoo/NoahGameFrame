@@ -20,17 +20,26 @@ void NFCActor::AddComponent( NF_SHARE_PTR<NFIComponent> pComponent )
 {
 	if (nullptr != pComponent)
 	{
-		m_pComponent = pComponent;
+		mxComponentList.Add(pComponent);
 
-		m_pComponent->Init();
-		m_pComponent->AfterInit();
+		pComponent->Init();
+		pComponent->AfterInit();
 	}
 }
 
 void NFCActor::HandlerSelf( const NFIActorMessage& message, const Theron::Address from )
 {
 	std::string strData = message.data;
-	m_pComponent->OnASyncEvent(message.self, message.nSubMsgID, strData);
+
+	NF_SHARE_PTR<NFIComponent> pComponent;
+	bool bRet = mxComponentList.First(pComponent);
+	while (bRet)
+	{
+		pComponent->OnASyncEvent(message.self, message.nSubMsgID, strData);
+
+		bRet = mxComponentList.Next(pComponent);
+	}
+	//m_pComponent->OnASyncEvent(message.self, message.nSubMsgID, strData);
 
 	//message.xActorEventFunc->xBeginFuncptr->operator()(message.self, message.nSubMsgID, strData);
 

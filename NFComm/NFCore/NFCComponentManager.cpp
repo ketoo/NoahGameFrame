@@ -13,22 +13,9 @@ NFIDENTID NFCComponentManager::Self()
     return mSelf;
 }
 
-NF_SHARE_PTR<NFIComponent> NFCComponentManager::AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent)
+bool NFCComponentManager::AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent)
 {
-    NF_SHARE_PTR<NFIComponent> pComponent = GetElement(strComponentName);
-    if (pComponent.get())
-    {
-        return pComponent;
-    }
-
-    AddElement(strComponentName, pNewComponent);
-
-    return pNewComponent;
-}
-
-NF_SHARE_PTR<NFIComponent> NFCComponentManager::FindComponent(const std::string& strComponentName)
-{
-    return GetElement(strComponentName);
+    return AddElement(strComponentName, pNewComponent);
 }
 
 bool NFCComponentManager::Init()
