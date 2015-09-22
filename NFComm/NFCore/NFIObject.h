@@ -62,39 +62,26 @@ public:
     }
 
 	template <typename T>
-	NF_SHARE_PTR<T> AddComponent()
+	bool AddComponent()
 	{
-		if (!TIsDerived<T, NFIComponent>::Result)
-		{
-			//BaseTypeComponent must inherit from NFIComponent;
-			return NF_SHARE_PTR<T>();
-		}
+// 		if (!TIsDerived<T, NFIComponent>::Result)
+// 		{
+// 			//BaseTypeComponent must inherit from NFIComponent;
+// 			return NF_SHARE_PTR<T>();
+// 		}
+// 
+// 		NF_SHARE_PTR<T> pComponent = NF_SHARE_PTR<T>(NF_NEW T());
+// 		std::string strComponentName = GET_CLASS_NAME(T)
 
-		NF_SHARE_PTR<T> pComponent = NF_SHARE_PTR<T>(NF_NEW T());
-		std::string strComponentName = GET_CLASS_NAME(T)
-
-		return GetComponentManager()->AddComponent(strComponentName, pComponent);
+		return GetComponentManager()->AddComponent<T>();
 	}
 
 	template <typename T>
 	NF_SHARE_PTR<T> AddComponent(const std::string& strComponentName)
 	{
-		if (!TIsDerived<T, NFIComponent>::Result)
-		{
-			//BaseTypeComponent must inherit from NFIComponent;
-			return NF_SHARE_PTR<T>();
-		}
-
-		NF_SHARE_PTR<T> pComponent = CREATE_COMPONENT(strComponentName)
-		return GetComponentManager()->AddComponent(strComponentName, pComponent);
+		return GetComponentManager()->AddComponent<T>(strComponentName);
 	}
 
-	template <typename T>
-	NF_SHARE_PTR<T> FindComponent()
-	{
-		std::string strComponentName = GET_CLASS_NAME(T)
-		return GetComponentManager()->FindComponent(strComponentName);
-	}
 
 	template <typename T>
 	NF_SHARE_PTR<T> FindComponent(const std::string& strComponentName)
