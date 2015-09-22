@@ -1,9 +1,9 @@
 #include <thread>
 #include "HelloWorld5Module.h"
+#include "NFCTestComponent.h"
 #include "NFComm/NFCore/NFTimer.h"
 #include "NFComm/NFCore/NFIComponent.h"
-#include "NFCTestComponent.h"
-
+#include "NFComm/NFCore/NFCObject.h"
 
 
 bool HelloWorld5Module::Init()
@@ -14,6 +14,49 @@ bool HelloWorld5Module::Init()
     return true;
 }
 
+class IComponentTest : public NFIComponent
+{
+public:
+	IComponentTest(): NFIComponent(NFIDENTID())
+	{
+
+	}
+
+
+	virtual void Test() = 0;
+
+protected:
+private:
+};
+
+class ComponentTest : public IComponentTest
+{
+public:
+	ComponentTest()
+	{
+
+	}
+
+	virtual NFIComponent* CreateNewInstance()
+	{
+		return new ComponentTest();
+	}
+
+	virtual const std::string GetComponentName() const
+	{
+		return GET_CLASS_NAME(ComponentTest)
+	}
+
+	virtual void Test()
+	{
+		int i = 0; 
+		++i;
+	}
+
+protected:
+private:
+};
+
 bool HelloWorld5Module::AfterInit()
 {
     //³õÊ¼»¯Íê±Ï
@@ -22,6 +65,15 @@ bool HelloWorld5Module::AfterInit()
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
+
+	//////////////////////////////////////////////////////////////////////////
+
+	NFIObject* pObject = new NFCObject(NFIDENTID(0, 1), pPluginManager);
+
+	pObject->AddComponent<ComponentTest>();
+
+	NF_SHARE_PTR<IComponentTest> pT = pObject->FindComponent<IComponentTest>("ComponentTest");
+	pT->Test();
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	for (int i = 0; i < 50000; ++i)

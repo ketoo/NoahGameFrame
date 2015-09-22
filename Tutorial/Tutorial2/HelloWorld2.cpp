@@ -1,5 +1,6 @@
 #include "HelloWorld2.h"
 #include "NFComm/NFCore/NFCObject.h"
+#include "NFComm/NFCore/NFIComponent.h"
 
 bool HelloWorld2::Init()
 {
@@ -50,6 +51,7 @@ bool HelloWorld2::AfterInit()
 		//get the "world" property value and printf it
         const int nProperty2 = pObject->GetPropertyInt("World");
         std::cout << "Property World:" << nProperty2 << std::endl;
+
     }
 
     return true;
