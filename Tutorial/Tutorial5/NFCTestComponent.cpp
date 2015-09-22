@@ -22,3 +22,8 @@ int NFCTestComponent::OnASyncEvent( const NFIDENTID& self, const int event, std:
 
     return 0;
 }
+
+const std::string NFCTestComponent::GetComponentName() const
+{
+	return GET_CLASS_NAME(NFCTestComponent)
+}
