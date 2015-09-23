@@ -86,6 +86,7 @@ NFrame使用了此种模型来定义应用中的所有数据，避免了以往�
 ![NF Property Sample](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_Event_driver.png)
 
 **NFrame事件驱动示例代码**
+
 Property驱动示例：
 ```cpp
 m_pKernelModule->AddPropertyCallBack(self, "Level", this, &NFCPropertyModule::OnObjectLevelEvent);
