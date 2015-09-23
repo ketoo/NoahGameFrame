@@ -54,11 +54,11 @@ NFrame采用成熟的敏捷开发思想——分层设计，分层的程序设�
 - 通用的设置/获取信息接口
 
 ### 数据驱动
-相对于传统的服务器开发，NFrame使用了一种全新的数据定义和使用的方法，我们称之为属性(Property)和表(Record)。
+相对于传统的服务器开发，NFrame使用了一种全新的数据定义和使用的方法，我们称之为**属性(Property)**和**表(Record)**。
 
-属性(Property)主要用来存储用户的基本数据，例如：姓名、性别、年龄、等级 等数据，主要表现为一个名称对应一个数据。
+**属性(Property)**主要用来存储用户的基本数据，例如：姓名、性别、年龄、等级 等数据，主要表现为一个名称对应一个数据。
 
-表(Record)主要用来存储一些记录，例如：道具列表、任务列表 等数据，主要表现为一个记录里包含多条数据。
+**表(Record)**主要用来存储一些记录，例如：道具列表、任务列表 等数据，主要表现为一个记录里包含多条数据。
 
 NFrame使用了此种模型来定义应用中的所有数据，避免了以往传统服务器中数据结构定义混乱，接口不统一、别人无法接手等问题。
 
@@ -73,11 +73,14 @@ NFrame使用了此种模型来定义应用中的所有数据，避免了以往�
 事件驱动灵感来源与处理器的处理流程，旨为只提供流水线式的处理逻辑模块，而本身不保存和涉留对象的数据。
 
 事件驱动包含：**Property驱动**，**Record驱动**，**Event驱动**，**Heartbeat驱动**
-通过Property Driver，所有只要注册过属性观测者的Processer Function均会得到所关注Property的变化通知，以便做出对应的逻辑处理。
 
-通过Record Driver，所有只要注册过Record的观测者的Processer Function均会得到所关注Record的变化通知，以便做出对应的逻辑处理。
-通过Event System，所有只要注册过Event的观测者的Processer Function均会得到所关注的事件通知Processer可以产生新的事件或属性驱动，以便驱动其他逻辑模块处理逻辑。
-通过Heartbeat System，所有只要注册过同名心跳的观测者的Processer Function均会定时处理逻辑，以便延时/定时处理逻辑。
+通过**Property Driver**，所有只要注册过属性观测者的Processer Function均会得到所关注Property的变化通知，以便做出对应的逻辑处理。
+
+通过**Record Driver**，所有只要注册过Record的观测者的Processer Function均会得到所关注Record的变化通知，以便做出对应的逻辑处理。
+
+通过**Event System**，所有只要注册过Event的观测者的Processer Function均会得到所关注的事件通知Processer可以产生新的事件或属性驱动，以便驱动其他逻辑模块处理逻辑。
+
+通过**Heartbeat System**，所有只要注册过同名心跳的观测者的Processer Function均会定时处理逻辑，以便延时/定时处理逻辑。
 
 **NFrame事件驱动设计图**
 ![NF Property Sample](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_Event_driver.png)
@@ -171,9 +174,9 @@ public:
 ```
 
 ### 高性能，高并发
-NFrame由于设计上的分层独立从而使得架构上本身就性能较高。同时在网络通信上使用了久经考验的LibEvent作为网络底层，使用google ProtoBuf作为协议序列化库，LibEvent的高性能加上Protobuf的高压缩率，真实测试过单服承载8000以上用户高频率协议通讯。
+NFrame由于设计上的分层独立从而使得架构上本身就性能较高。同时在网络通信上使用了久经考验的**LibEvent**作为网络底层，使用**google ProtoBuf**作为协议序列化库，LibEvent的高性能加上Protobuf的高压缩率，真实测试过单服承载8000以上用户高频率协议通讯。
 
-NFrame在逻辑处理上使用了Actor模式，采用了Theron作为Actor基础类库，支持并发编程，充分利用CPU性能。 Theron作为知名工业级并发库，应用在许多工业级软件上，例如Matlab使用了Theron后，让其性能直接提高了4.5x倍([原文链接](http://www.theron-library.com/index.php?t=story&p=43))。
+NFrame在逻辑处理上使用了**Actor模**式，采用了**Theron**作为Actor基础类库，支持并发编程，充分利用CPU性能。 Theron作为知名工业级并发库，应用在许多工业级软件上，例如Matlab使用了Theron后，让其性能直接提高了**4.5x倍**([原文链接](http://www.theron-library.com/index.php?t=story&p=43))。
 
 NFrame使用C++作为基础开发语言，相对于其他编程语言，在性能和效率上更是快人一步，良好的设计模式的应用让逻辑更加简单。
 
