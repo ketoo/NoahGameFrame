@@ -8,7 +8,7 @@ NoahGameFrame
 
 NF is a lightweight, fast, scalable, distributed plugin framework.
 
-The features:
+Features
 -------------------
 
 *  it is easy to use interface oriented design minimise the effort
@@ -21,25 +21,26 @@ The features:
 *  Cross-platform
 
 
-Manual
+Introduction
 ---------------
-https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NFrame_Introduction_CHS.pdf
+[English PDF](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NFrame_Introduction_EN_US.pdf) / [English PPT](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NFrame_Introduction_EN_US.ppt)
+
+[中文简体 PDF](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NFrame_Introduction_ZH_CN.pdf) / [中文简体 PPT](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NFrame_Introduction_ZH_CN.ppt)
 
 
-
-Architecture:
+Architecture
 -------------------
 
 ###App Architecture:
 
-![App Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NF_app_arch.png)
+![App Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_app_arch.png)
 
 ###Server Architecture
-![Server Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NF_server_arch.png)
+![Server Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_server_arch.png)
 
 ###Event Driver:
 
-![Event Driver](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NF_Event_driver.png)
+![Event Driver](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_Event_driver.png)
 
 Get the Sources:
 -------------------
@@ -51,7 +52,7 @@ or
 svn checkout https://github.com/ketoo/NoahGameFrame
 
 
-Dependencies:
+Dependencies
 -------------------
 
 Need build sub librares:
@@ -73,158 +74,53 @@ Supported Compilers
 * VC >= 9.0 (sp1)
 
 
-How to build:
+Build and Install
 -------------------
 
 ## Windows[VS2012]
 
-* 1:download all source;
+* 1.Download all source;
 
-* 2:extract nessasery lib: 	Dependencies\boost_1_53_0.zip to Dependencies\
+* 2.Extract nessasery lib: 	Dependencies/boost_1_53_0.zip to Dependencies/
 
-* 3:extract nessasery lib: 	Dependencies\lib.zip to Dependencies\
+* 3.Extract nessasery lib: 	Dependencies/lib.zip to Dependencies/
 
-* 4:open the solution:		trunk\NoahFrame.sln
+* 4.Open the solution: NoahFrame.sln
 
-* 5:build the solution 
+* 5.Build the solution
 
-* 6: run the binary file by trunk\_Out\Server\Debug\Run.bat
+* 6.Run the binary file by _Out/Server/Debug/Run.bat
 
 
 ## Linux[CodeBlock 13.1]
 
-* 1:download all source;
+* 1.Download all source;
 
-* 2:extract nessasery lib: 	Dependencies\boost_1_53_0.zip to Dependencies\
+* 2.Extract nessasery lib: Dependencies/boost_1_53_0.zip to Dependencies/
 
-* 3:extract nessasery lib: 	Dependencies\lib.zip to Dependencies\
+* 3.Extract nessasery lib: Dependencies/lib.zip to Dependencies/
 
-* 4:open the solution by code::block:		trunk\NF.workspace
+* 4.Open the solution with Code::Blocks: NF.workspace
 
-* 5:add c++11 optional for every project of this solution
+* 5.Add c++11 optional for every project of this solution
 
-* 6:build library: NFNet, NFCore, NFEventTriggerPlugin, NFKernelPlugin, Theron, libprotocolbuf[libprotocolbuf-lite], NFLogPlugin, NFPluginLoader
+* 6.Build library: NFNet, NFCore, NFEventTriggerPlugin, NFKernelPlugin, Theron, libprotocolbuf[libprotocolbuf-lite], NFLogPlugin, NFPluginLoader
 
-* 7:build all other plugin
+* 7.Build all other plugin
 
-* 8: run the binary file by trunk\_Out\Server\Debug\Run.sh
+* 8.Run the binary file by _Out/Server/Debug/Run.sh
 
 
-
-Tutorial:
+Documents & Tutorial
 -------------------
-### [01-Hello world, add a module](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial1)
+[English](https://github.com/ketoo/NoahGameFrame/blob/develop/doc_EN_US.md)
+
+[中文简体](https://github.com/ketoo/NoahGameFrame/blob/develop/doc_ZH_CN.md)
 
 
-```cpp
-
-// -------------------------------------------------------------------------
-//    @FileName      :    HelloWorld1.h
-//    @Author           :    ketoo
-//    @Date             :    2014-05-01 08:51
-//    @Module           :   HelloWorld1
-//
-// -------------------------------------------------------------------------
-
-#ifndef _NFC_HELLO_WORLD1_H_
-#define _NFC_HELLO_WORLD1_H_
-
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
-
-class HelloWorld1
-    : public NFILogicModule
-{
-public:
-    HelloWorld1(NFIPluginManager* p)
-    {
-        pPluginManager = p;
-    }
-
-    virtual bool Init();
-    virtual bool AfterInit();
-
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
-
-    virtual bool BeforeShut();
-    virtual bool Shut();
-
-protected:
-
-};
-
-#endif
-
-
-#include "HelloWorld1.h"
-
-bool HelloWorld1::Init()
-{
-    // Use this for initialization
-	
-    std::cout << "Hello, world1, Init" << std::endl;
-
-    return true;
-}
-
-bool HelloWorld1::AfterInit()
-{
-    // AfterInit is called after Init
-	
-    std::cout << "Hello, world1, AfterInit" << std::endl;
-
-    return true;
-}
-
-bool HelloWorld1::Execute( const float fLasFrametime, const float fStartedTime )
-{
-    // Execute is called once per frame
-	
-    //std::cout << "Hello, world1, Execute" << std::endl;
-
-    return true;
-}
-
-bool HelloWorld1::BeforeShut()
-{
-    //before final
-	
-    std::cout << "Hello, world1, BeforeShut" << std::endl;
-
-    return true;
-}
-
-bool HelloWorld1::Shut()
-{
-    //final
-	
-    std::cout << "Hello, world1, Shut" << std::endl;
-
-    return true;
-}
-
-```
-
-
+License
 -------------------
-### [02-Hello world, test data driver](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial2)
-
-* how to use the world's most advanced data engine 
-
--------------------
-### [03-Hello world, test heartbeat and event system](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial3)
-
-* how to use the synchronous events
-
--------------------
-### [04-Hello actor, test actor model(async event system)](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial4ActorPlugin)
-
-* how to use the asynchronous events
-* use multiple cpus to get high performance
-
--------------------
-
-
-
+The NFrame project is currently available under the [Apache License](https://github.com/ketoo/NoahGameFrame/blob/develop/LICENSE).
 
 
 
