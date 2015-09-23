@@ -18,12 +18,6 @@
 * 配套客户端(Unity3D客户端(已完成)、Cocos2D客户端(暂未开始))
 * 企业定制化服务(存储方案、逻辑模块、新架构)
 
-
-**文档目录**
-
-[TOCM]
-
-[TOC]
 ## 简述
 NFrame采用成熟的敏捷开发思想——分层设计，分层的程序设计带来的好处是显而易见的，由于层间松散的耦合关系，使得我们可以专注于本层的设计，而不必关心其他层的设计，也不必担心自己的设计会影响其它层，对提高软件质量大有裨益。而且分层设计使得程序结构清晰，升级和维护都变得十分容易，更改层的具体实现代码，只要层接口保持稳定，其他层可以不必修改。即使层的接口发生变化，也只影响上层和下层，修改工作量小而且错误可以控制，不会带来意外的风险。NFrame同时使用了将应用程序设计成三层架构，最顶层是App，中间层是各种插件，插件下是各种对应的具化的模块功能。这种设计的优点是对应模块只处理自己的事务，降低耦合，通过接口与其他模块交互，将模块的风险降到最低。
 
@@ -180,9 +174,78 @@ public:
 服务器架构图：
 ![NF Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_server_arch.png)
 
-## 简单教程
+## 使用教程
 ### 教程1:添加一个模块
+```cpp
+#include "NFComm/NFPluginModule/NFIPlugin.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
+
+class HelloWorld1
+    : public NFILogicModule
+{
+public:
+    HelloWorld1(NFIPluginManager* p)
+    {
+        pPluginManager = p;
+    }
+
+    virtual bool Init();
+    virtual bool AfterInit();
+
+    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+
+    virtual bool BeforeShut();
+    virtual bool Shut();
+
+protected:
+
+};
+
+#endif
+```
+```cpp
+#include "HelloWorld1.h"
+
+bool HelloWorld1::Init()
+{
+    //初始化
+    std::cout << "Hello, world1, Init" << std::endl;
+    return true;
+}
+
+bool HelloWorld1::AfterInit()
+{
+    //初始化完毕
+    std::cout << "Hello, world1, AfterInit" << std::endl;
+    return true;
+}
+
+bool HelloWorld1::Execute( const float fLasFrametime, const float fStartedTime )
+{
+    //每帧执行
+    //std::cout << "Hello, world1, Execute" << std::endl;
+    return true;
+}
+
+bool HelloWorld1::BeforeShut()
+{
+    std::cout << "Hello, world1, BeforeShut1111" << std::endl;
+	
+    //反初始化之前
+    std::cout << "Hello, world1, BeforeShut" << std::endl;
+    return true;
+}
+
+bool HelloWorld1::Shut()
+{
+    //反初始化
+    std::cout << "Hello, world1, Shut" << std::endl;
+    return true;
+}
+
+```
+
 ### 教程2:数据驱动
 ### 教程3:事件系统
 ### 教程4:异步事件系统，actor
-## 结束
+# 结束
