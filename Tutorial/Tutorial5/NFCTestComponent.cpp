@@ -27,3 +27,8 @@ const std::string NFCTestComponent::GetComponentName() const
 {
 	return GET_CLASS_NAME(NFCTestComponent)
 }
+
+NF_SHARE_PTR<NFIComponent> NFCTestComponent::CreateNewInstance()
+{
+	return NF_SHARE_PTR<NFIComponent>(NF_NEW NFCTestComponent(pPluginManager));
+}
