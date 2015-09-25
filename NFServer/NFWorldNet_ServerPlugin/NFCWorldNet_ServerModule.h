@@ -25,6 +25,7 @@
 #include "NFComm/NFPluginModule/NFIWorldGuildModule.h"
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
 #include "NFComm/NFPluginModule/NFIWorldGuildDataModule.h"
+#include "NFComm/NFPluginModule/NFIWorldChatGroupModule.h"
 
 class NFCWorldNet_ServerModule
     : public NFIWorldNet_ServerModule
@@ -99,7 +100,14 @@ protected:
     void OnSearchGuildProcess(const NFIPacket& msg);
     void OnOnlineProcess(const NFIPacket& msg);
     void OnOfflineProcess(const NFIPacket& msg);
+    void OnChatProcess(const NFIPacket& msg);
     
+    void OnReqCreateChatGroupProcess(const NFIPacket& msg);
+    void OnReqJoineChatGroupProcess(const NFIPacket& msg);
+    void OnReqLeaveChatGroupProcess(const NFIPacket& msg);
+    void OnReqSubscriptionChatGroupProcess(const NFIPacket& msg);
+    void OnReqCancelSubscriptionChatGroupProcess(const NFIPacket& msg);
+
 private:
 
     struct ServerData
@@ -136,6 +144,7 @@ private:
 	NFIWorldGuildModule* m_pWorldGuildModule;
     NFIClusterModule* m_pClusterSQLModule;
     NFIWorldGuildDataModule* m_pWorldGuildDataModule;
+    NFIWorldChatGroupModule* m_pWordChatGroupModule;
 };
 
 #endif
