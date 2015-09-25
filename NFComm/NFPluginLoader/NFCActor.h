@@ -45,6 +45,7 @@ public:
 	virtual void HandlerSelf(const NFIActorMessage& message, const Theron::Address from);
 	virtual void AddComponent(NF_SHARE_PTR<NFIComponent> pComponent);
 	virtual bool AddEndFunc(EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end);
+	virtual bool SendMsg(const Theron::Address address, const NFIActorMessage& message);
 
 	//////////////////////////////////////////////////////////////////////////
 	virtual NFIDENTID Self();
