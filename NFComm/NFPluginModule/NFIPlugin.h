@@ -32,7 +32,7 @@
 
 #define REGISTER_COMPONENT(pManager, className)  NFIComponent* pRegisterComponent##className= new className(pManager); \
 	pRegisterComponent##className->strName = (#className); \
-	pManager->AddComponent( (#className), pRegisterModule##className );
+	pManager->AddComponent( (#className), pRegisterComponent##className );
 
 #define UNREGISTER_COMPONENT(pManager, className) NFIComponent* pRegisterComponent##className =  \
 	dynamic_cast<NFIComponent*>( pManager->FindComponent( (#className) ) ); pManager->RemoveComponent( (#className) ); delete pRegisterComponent##className;
