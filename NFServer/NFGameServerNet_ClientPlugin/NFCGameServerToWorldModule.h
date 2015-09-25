@@ -65,6 +65,11 @@ protected:
     int OnAckJoinGuildProcess(const NFIPacket& msg);
     int OnAckLeaveGuildProcess(const NFIPacket& msg);
 
+    int OnAckCreateChatGroupProcess(const NFIPacket& msg);
+    int OnAckJoinChatGroupProcess(const NFIPacket& msg);
+    int OnAckQuitChatGroupProcess(const NFIPacket& msg);
+
+
     int OnDataLoadBeginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
 
     //int OnToWorldEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
@@ -86,6 +91,12 @@ protected:
 private:
     void SendOnline(const NFIDENTID& self);
     void SendOffline(const NFIDENTID& self);
+
+    void CreateChatGroup(const NFIDENTID& self, const int nChatType, const std::string& strName);
+    void JoinChatGroup(const NFIDENTID& self, const NFIDENTID& xGroup, const int nChatType);
+    void QuitChatGroup(const NFIDENTID& self, const NFIDENTID& xGroup);
+    void SubscriptionChatGroup(const NFIDENTID& self, const NFIDENTID& xGroup);
+    void CancelSubscriptionChatGroup(const NFIDENTID& self, const NFIDENTID& xGroup);
 
 
 private:

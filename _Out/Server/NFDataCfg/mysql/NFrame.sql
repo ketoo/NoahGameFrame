@@ -41,6 +41,17 @@ ALTER TABLE `Buff` ADD `EffectClearOnDead` bigint(11) DEFAULT '0' COMMENT '死�
 ALTER TABLE `Buff` ADD `DownSaveType` bigint(11) DEFAULT '0' COMMENT '下线是否保存';
 
 
+CREATE TABLE `ChatGroup` (
+	`ID` varchar(128) NOT NULL,
+	PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `ChatGroup` ADD `Name` varchar(128) DEFAULT '' COMMENT '组名字';
+ALTER TABLE `ChatGroup` ADD `CreateObject` varchar(128) DEFAULT '' COMMENT '创建者';
+ALTER TABLE `ChatGroup` ADD `GroupMemberList` BLOB COMMENT '';
+ALTER TABLE `ChatGroup` ADD `ChatList` BLOB COMMENT '';
+
+
 CREATE TABLE `Cost` (
 	`ID` varchar(128) NOT NULL,
 	PRIMARY KEY (`ID`)
