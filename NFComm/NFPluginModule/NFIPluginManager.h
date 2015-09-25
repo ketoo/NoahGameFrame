@@ -41,6 +41,17 @@ public:
 		return NULL;
 	}
 
+	template <typename T>
+	T* GetModule(const std::string& strModuleName)
+	{
+		return FindModule<T>(strModuleName);
+	}
+	
+	NFILogicModule* GetModule(const std::string& strModuleName)
+	{
+		return FindModule(strModuleName);
+	}
+
     virtual bool LoadPlugin() = 0;
 
     virtual void Registered(NFIPlugin* plugin) = 0;
@@ -53,7 +64,7 @@ public:
 
     virtual void RemoveModule(const std::string& strModuleName) = 0;
 
-    virtual NFILogicModule* FindModule(const std::string& strModuleName) = 0;
+	virtual NFILogicModule* FindModule(const std::string& strModuleName) = 0;
 
 	//////////////////////////////////////////////////////////////////////////
 
