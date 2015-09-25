@@ -206,6 +206,15 @@ int NFCGameServerNet_ServerModule::OnRecivePSPack( const NFIPacket& msg )
     case NFMsg::EGameMsgID::EGMI_REQ_SEARCH_GUILD:
 		OnTransWorld(msg);
 		break;
+
+    case NFMsg::EGameMsgID::EGEC_REQ_CREATE_CHATGROUP:
+    case NFMsg::EGameMsgID::EGEC_REQ_JOIN_CHATGROUP:
+    case NFMsg::EGameMsgID::EGEC_REQ_LEAVE_CHATGROUP:
+    case NFMsg::EGameMsgID::EGEC_REQ_SUBSCRIPTION_CHATGROUP:
+        {
+            OnTransWorld(msg);
+        }
+        break;
 		//////////////////////////////////////////////////////////////////////////
 	default:
 		break;

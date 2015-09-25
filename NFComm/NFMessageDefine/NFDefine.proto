@@ -54,6 +54,8 @@ enum EGameEventCode
 	EGEC_CREATE_GUILD_SUCCESS					= 200;		 // 创建公会成功
 	EGEC_JOIN_GUILD_SUCCESS						= 201;		 // 加入公会成功
 	EGEC_LEAVE_GUILD_SUCCESS					= 202;		 // 离开公会成功
+	
+
 }
 
 enum EGameMsgID
@@ -178,6 +180,14 @@ enum EGameMsgID
 	EGMI_ACK_OPR_GUILD                        	= 307; // 成员操作结果
 	EGMI_REQ_SEARCH_GUILD                       = 308; // 申请搜索公会
 	EGMI_ACK_SEARCH_GUILD                       = 309; // 返回搜索公会	
+	
+	EGEC_REQ_CREATE_CHATGROUP					= 400;		 // 创建聊天
+	EGEC_ACK_CREATE_CHATGROUP					= 401;		 // 创建聊天
+	EGEC_REQ_JOIN_CHATGROUP						= 402;		 // 加入聊天
+	EGEC_ACK_JOIN_CHATGROUP						= 403;		 // 加入聊天
+	EGEC_REQ_LEAVE_CHATGROUP					= 404;		 // 离开聊天
+	EGEC_ACK_LEAVE_CHATGROUP					= 405;		 // 离开聊天
+	EGEC_REQ_SUBSCRIPTION_CHATGROUP				= 406;		 // 订阅聊天
 	
 	
 	
