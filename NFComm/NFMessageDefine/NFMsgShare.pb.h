@@ -44,6 +44,7 @@ class PlayerEntryInfo;
 class AckPlayerEntryList;
 class AckPlayerLeaveList;
 class ReqAckPlayerMove;
+class ChatContainer;
 class ReqAckPlayerChat;
 class EffectData;
 class ReqAckUseSkill;
@@ -62,8 +63,32 @@ class AckSearchGuild_SearchGuildObject;
 class ReqAckJoinGuild;
 class ReqAckLeaveGuild;
 class ReqAckOprGuildMember;
+class ReqAckDonateGuildItem;
 class ChatInfo;
+class ReqAckCreateChatGroup;
+class ReqAckjoinChatGroup;
+class ReqAckQuitChatGroup;
+class ReqSubscriptionChatGroup;
+class ReqCancelSubscriptionChatGroup;
 
+enum ChatContainer_ContainerType {
+  ChatContainer_ContainerType_EGCT_ITEM = 1
+};
+bool ChatContainer_ContainerType_IsValid(int value);
+const ChatContainer_ContainerType ChatContainer_ContainerType_ContainerType_MIN = ChatContainer_ContainerType_EGCT_ITEM;
+const ChatContainer_ContainerType ChatContainer_ContainerType_ContainerType_MAX = ChatContainer_ContainerType_EGCT_ITEM;
+const int ChatContainer_ContainerType_ContainerType_ARRAYSIZE = ChatContainer_ContainerType_ContainerType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ChatContainer_ContainerType_descriptor();
+inline const ::std::string& ChatContainer_ContainerType_Name(ChatContainer_ContainerType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ChatContainer_ContainerType_descriptor(), value);
+}
+inline bool ChatContainer_ContainerType_Parse(
+    const ::std::string& name, ChatContainer_ContainerType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ChatContainer_ContainerType>(
+    ChatContainer_ContainerType_descriptor(), name, value);
+}
 enum ReqAckPlayerChat_EGameChatType {
   ReqAckPlayerChat_EGameChatType_EGCT_GUILD = 0,
   ReqAckPlayerChat_EGameChatType_EGCT_PRIVATE = 1,
@@ -937,6 +962,126 @@ class ReqAckPlayerMove : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class ChatContainer : public ::google::protobuf::Message {
+ public:
+  ChatContainer();
+  virtual ~ChatContainer();
+
+  ChatContainer(const ChatContainer& from);
+
+  inline ChatContainer& operator=(const ChatContainer& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ChatContainer& default_instance();
+
+  void Swap(ChatContainer* other);
+
+  // implements Message ----------------------------------------------
+
+  ChatContainer* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ChatContainer& from);
+  void MergeFrom(const ChatContainer& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef ChatContainer_ContainerType ContainerType;
+  static const ContainerType EGCT_ITEM = ChatContainer_ContainerType_EGCT_ITEM;
+  static inline bool ContainerType_IsValid(int value) {
+    return ChatContainer_ContainerType_IsValid(value);
+  }
+  static const ContainerType ContainerType_MIN =
+    ChatContainer_ContainerType_ContainerType_MIN;
+  static const ContainerType ContainerType_MAX =
+    ChatContainer_ContainerType_ContainerType_MAX;
+  static const int ContainerType_ARRAYSIZE =
+    ChatContainer_ContainerType_ContainerType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  ContainerType_descriptor() {
+    return ChatContainer_ContainerType_descriptor();
+  }
+  static inline const ::std::string& ContainerType_Name(ContainerType value) {
+    return ChatContainer_ContainerType_Name(value);
+  }
+  static inline bool ContainerType_Parse(const ::std::string& name,
+      ContainerType* value) {
+    return ChatContainer_ContainerType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required int32 ConTainerType = 2;
+  inline bool has_containertype() const;
+  inline void clear_containertype();
+  static const int kConTainerTypeFieldNumber = 2;
+  inline ::google::protobuf::int32 containertype() const;
+  inline void set_containertype(::google::protobuf::int32 value);
+
+  // required bytes data_info = 3;
+  inline bool has_data_info() const;
+  inline void clear_data_info();
+  static const int kDataInfoFieldNumber = 3;
+  inline const ::std::string& data_info() const;
+  inline void set_data_info(const ::std::string& value);
+  inline void set_data_info(const char* value);
+  inline void set_data_info(const void* value, size_t size);
+  inline ::std::string* mutable_data_info();
+  inline ::std::string* release_data_info();
+  inline void set_allocated_data_info(::std::string* data_info);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ChatContainer)
+ private:
+  inline void set_has_containertype();
+  inline void clear_has_containertype();
+  inline void set_has_data_info();
+  inline void clear_has_data_info();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* data_info_;
+  ::google::protobuf::int32 containertype_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ChatContainer* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class ReqAckPlayerChat : public ::google::protobuf::Message {
  public:
   ReqAckPlayerChat();
@@ -1066,6 +1211,18 @@ class ReqAckPlayerChat : public ::google::protobuf::Message {
   inline ::NFMsg::Ident* release_target_id();
   inline void set_allocated_target_id(::NFMsg::Ident* target_id);
 
+  // repeated .NFMsg.ChatContainer Container_data = 6;
+  inline int container_data_size() const;
+  inline void clear_container_data();
+  static const int kContainerDataFieldNumber = 6;
+  inline const ::NFMsg::ChatContainer& container_data(int index) const;
+  inline ::NFMsg::ChatContainer* mutable_container_data(int index);
+  inline ::NFMsg::ChatContainer* add_container_data();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ChatContainer >&
+      container_data() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ChatContainer >*
+      mutable_container_data();
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckPlayerChat)
  private:
   inline void set_has_chat_id();
@@ -1085,10 +1242,11 @@ class ReqAckPlayerChat : public ::google::protobuf::Message {
   ::std::string* chat_info_;
   ::std::string* chat_name_;
   ::NFMsg::Ident* target_id_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::ChatContainer > container_data_;
   int chat_type_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -3005,6 +3163,115 @@ class ReqAckOprGuildMember : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class ReqAckDonateGuildItem : public ::google::protobuf::Message {
+ public:
+  ReqAckDonateGuildItem();
+  virtual ~ReqAckDonateGuildItem();
+
+  ReqAckDonateGuildItem(const ReqAckDonateGuildItem& from);
+
+  inline ReqAckDonateGuildItem& operator=(const ReqAckDonateGuildItem& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckDonateGuildItem& default_instance();
+
+  void Swap(ReqAckDonateGuildItem* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckDonateGuildItem* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckDonateGuildItem& from);
+  void MergeFrom(const ReqAckDonateGuildItem& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident guild_id = 1;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // required .NFMsg.Ident target_id = 2;
+  inline bool has_target_id() const;
+  inline void clear_target_id();
+  static const int kTargetIdFieldNumber = 2;
+  inline const ::NFMsg::Ident& target_id() const;
+  inline ::NFMsg::Ident* mutable_target_id();
+  inline ::NFMsg::Ident* release_target_id();
+  inline void set_allocated_target_id(::NFMsg::Ident* target_id);
+
+  // repeated .NFMsg.ItemStruct item_list = 3;
+  inline int item_list_size() const;
+  inline void clear_item_list();
+  static const int kItemListFieldNumber = 3;
+  inline const ::NFMsg::ItemStruct& item_list(int index) const;
+  inline ::NFMsg::ItemStruct* mutable_item_list(int index);
+  inline ::NFMsg::ItemStruct* add_item_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >&
+      item_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >*
+      mutable_item_list();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckDonateGuildItem)
+ private:
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
+  inline void set_has_target_id();
+  inline void clear_has_target_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_id_;
+  ::NFMsg::Ident* target_id_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct > item_list_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckDonateGuildItem* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class ChatInfo : public ::google::protobuf::Message {
  public:
   ChatInfo();
@@ -3215,6 +3482,543 @@ class ChatInfo : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ChatInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckCreateChatGroup : public ::google::protobuf::Message {
+ public:
+  ReqAckCreateChatGroup();
+  virtual ~ReqAckCreateChatGroup();
+
+  ReqAckCreateChatGroup(const ReqAckCreateChatGroup& from);
+
+  inline ReqAckCreateChatGroup& operator=(const ReqAckCreateChatGroup& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckCreateChatGroup& default_instance();
+
+  void Swap(ReqAckCreateChatGroup* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckCreateChatGroup* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckCreateChatGroup& from);
+  void MergeFrom(const ReqAckCreateChatGroup& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required bytes name = 1;
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 1;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const void* value, size_t size);
+  inline ::std::string* mutable_name();
+  inline ::std::string* release_name();
+  inline void set_allocated_name(::std::string* name);
+
+  // required .NFMsg.Ident selfid = 2;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 2;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // optional .NFMsg.Ident xChatGroupid = 3;
+  inline bool has_xchatgroupid() const;
+  inline void clear_xchatgroupid();
+  static const int kXChatGroupidFieldNumber = 3;
+  inline const ::NFMsg::Ident& xchatgroupid() const;
+  inline ::NFMsg::Ident* mutable_xchatgroupid();
+  inline ::NFMsg::Ident* release_xchatgroupid();
+  inline void set_allocated_xchatgroupid(::NFMsg::Ident* xchatgroupid);
+
+  // optional int32 chatType = 4;
+  inline bool has_chattype() const;
+  inline void clear_chattype();
+  static const int kChatTypeFieldNumber = 4;
+  inline ::google::protobuf::int32 chattype() const;
+  inline void set_chattype(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckCreateChatGroup)
+ private:
+  inline void set_has_name();
+  inline void clear_has_name();
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_xchatgroupid();
+  inline void clear_has_xchatgroupid();
+  inline void set_has_chattype();
+  inline void clear_has_chattype();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* name_;
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* xchatgroupid_;
+  ::google::protobuf::int32 chattype_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckCreateChatGroup* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckjoinChatGroup : public ::google::protobuf::Message {
+ public:
+  ReqAckjoinChatGroup();
+  virtual ~ReqAckjoinChatGroup();
+
+  ReqAckjoinChatGroup(const ReqAckjoinChatGroup& from);
+
+  inline ReqAckjoinChatGroup& operator=(const ReqAckjoinChatGroup& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckjoinChatGroup& default_instance();
+
+  void Swap(ReqAckjoinChatGroup* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckjoinChatGroup* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckjoinChatGroup& from);
+  void MergeFrom(const ReqAckjoinChatGroup& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // optional .NFMsg.Ident xChatGroupid = 2;
+  inline bool has_xchatgroupid() const;
+  inline void clear_xchatgroupid();
+  static const int kXChatGroupidFieldNumber = 2;
+  inline const ::NFMsg::Ident& xchatgroupid() const;
+  inline ::NFMsg::Ident* mutable_xchatgroupid();
+  inline ::NFMsg::Ident* release_xchatgroupid();
+  inline void set_allocated_xchatgroupid(::NFMsg::Ident* xchatgroupid);
+
+  // optional int64 result = 3;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 3;
+  inline ::google::protobuf::int64 result() const;
+  inline void set_result(::google::protobuf::int64 value);
+
+  // optional int32 chatType = 4;
+  inline bool has_chattype() const;
+  inline void clear_chattype();
+  static const int kChatTypeFieldNumber = 4;
+  inline ::google::protobuf::int32 chattype() const;
+  inline void set_chattype(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckjoinChatGroup)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_xchatgroupid();
+  inline void clear_has_xchatgroupid();
+  inline void set_has_result();
+  inline void clear_has_result();
+  inline void set_has_chattype();
+  inline void clear_has_chattype();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* xchatgroupid_;
+  ::google::protobuf::int64 result_;
+  ::google::protobuf::int32 chattype_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckjoinChatGroup* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckQuitChatGroup : public ::google::protobuf::Message {
+ public:
+  ReqAckQuitChatGroup();
+  virtual ~ReqAckQuitChatGroup();
+
+  ReqAckQuitChatGroup(const ReqAckQuitChatGroup& from);
+
+  inline ReqAckQuitChatGroup& operator=(const ReqAckQuitChatGroup& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckQuitChatGroup& default_instance();
+
+  void Swap(ReqAckQuitChatGroup* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckQuitChatGroup* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckQuitChatGroup& from);
+  void MergeFrom(const ReqAckQuitChatGroup& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // optional .NFMsg.Ident xChatGroupid = 2;
+  inline bool has_xchatgroupid() const;
+  inline void clear_xchatgroupid();
+  static const int kXChatGroupidFieldNumber = 2;
+  inline const ::NFMsg::Ident& xchatgroupid() const;
+  inline ::NFMsg::Ident* mutable_xchatgroupid();
+  inline ::NFMsg::Ident* release_xchatgroupid();
+  inline void set_allocated_xchatgroupid(::NFMsg::Ident* xchatgroupid);
+
+  // optional int64 result = 3;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 3;
+  inline ::google::protobuf::int64 result() const;
+  inline void set_result(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckQuitChatGroup)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_xchatgroupid();
+  inline void clear_has_xchatgroupid();
+  inline void set_has_result();
+  inline void clear_has_result();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* xchatgroupid_;
+  ::google::protobuf::int64 result_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckQuitChatGroup* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqSubscriptionChatGroup : public ::google::protobuf::Message {
+ public:
+  ReqSubscriptionChatGroup();
+  virtual ~ReqSubscriptionChatGroup();
+
+  ReqSubscriptionChatGroup(const ReqSubscriptionChatGroup& from);
+
+  inline ReqSubscriptionChatGroup& operator=(const ReqSubscriptionChatGroup& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqSubscriptionChatGroup& default_instance();
+
+  void Swap(ReqSubscriptionChatGroup* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqSubscriptionChatGroup* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqSubscriptionChatGroup& from);
+  void MergeFrom(const ReqSubscriptionChatGroup& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // repeated .NFMsg.Ident xChatGroupid = 2;
+  inline int xchatgroupid_size() const;
+  inline void clear_xchatgroupid();
+  static const int kXChatGroupidFieldNumber = 2;
+  inline const ::NFMsg::Ident& xchatgroupid(int index) const;
+  inline ::NFMsg::Ident* mutable_xchatgroupid(int index);
+  inline ::NFMsg::Ident* add_xchatgroupid();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+      xchatgroupid() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+      mutable_xchatgroupid();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqSubscriptionChatGroup)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > xchatgroupid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqSubscriptionChatGroup* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqCancelSubscriptionChatGroup : public ::google::protobuf::Message {
+ public:
+  ReqCancelSubscriptionChatGroup();
+  virtual ~ReqCancelSubscriptionChatGroup();
+
+  ReqCancelSubscriptionChatGroup(const ReqCancelSubscriptionChatGroup& from);
+
+  inline ReqCancelSubscriptionChatGroup& operator=(const ReqCancelSubscriptionChatGroup& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqCancelSubscriptionChatGroup& default_instance();
+
+  void Swap(ReqCancelSubscriptionChatGroup* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqCancelSubscriptionChatGroup* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqCancelSubscriptionChatGroup& from);
+  void MergeFrom(const ReqCancelSubscriptionChatGroup& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // repeated .NFMsg.Ident xChatGroupid = 2;
+  inline int xchatgroupid_size() const;
+  inline void clear_xchatgroupid();
+  static const int kXChatGroupidFieldNumber = 2;
+  inline const ::NFMsg::Ident& xchatgroupid(int index) const;
+  inline ::NFMsg::Ident* mutable_xchatgroupid(int index);
+  inline ::NFMsg::Ident* add_xchatgroupid();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+      xchatgroupid() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+      mutable_xchatgroupid();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqCancelSubscriptionChatGroup)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > xchatgroupid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqCancelSubscriptionChatGroup* default_instance_;
 };
 // ===================================================================
 
@@ -3919,6 +4723,102 @@ ReqAckPlayerMove::mutable_source_pos() {
 
 // -------------------------------------------------------------------
 
+// ChatContainer
+
+// required int32 ConTainerType = 2;
+inline bool ChatContainer::has_containertype() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ChatContainer::set_has_containertype() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ChatContainer::clear_has_containertype() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ChatContainer::clear_containertype() {
+  containertype_ = 0;
+  clear_has_containertype();
+}
+inline ::google::protobuf::int32 ChatContainer::containertype() const {
+  return containertype_;
+}
+inline void ChatContainer::set_containertype(::google::protobuf::int32 value) {
+  set_has_containertype();
+  containertype_ = value;
+}
+
+// required bytes data_info = 3;
+inline bool ChatContainer::has_data_info() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ChatContainer::set_has_data_info() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ChatContainer::clear_has_data_info() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ChatContainer::clear_data_info() {
+  if (data_info_ != &::google::protobuf::internal::kEmptyString) {
+    data_info_->clear();
+  }
+  clear_has_data_info();
+}
+inline const ::std::string& ChatContainer::data_info() const {
+  return *data_info_;
+}
+inline void ChatContainer::set_data_info(const ::std::string& value) {
+  set_has_data_info();
+  if (data_info_ == &::google::protobuf::internal::kEmptyString) {
+    data_info_ = new ::std::string;
+  }
+  data_info_->assign(value);
+}
+inline void ChatContainer::set_data_info(const char* value) {
+  set_has_data_info();
+  if (data_info_ == &::google::protobuf::internal::kEmptyString) {
+    data_info_ = new ::std::string;
+  }
+  data_info_->assign(value);
+}
+inline void ChatContainer::set_data_info(const void* value, size_t size) {
+  set_has_data_info();
+  if (data_info_ == &::google::protobuf::internal::kEmptyString) {
+    data_info_ = new ::std::string;
+  }
+  data_info_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ChatContainer::mutable_data_info() {
+  set_has_data_info();
+  if (data_info_ == &::google::protobuf::internal::kEmptyString) {
+    data_info_ = new ::std::string;
+  }
+  return data_info_;
+}
+inline ::std::string* ChatContainer::release_data_info() {
+  clear_has_data_info();
+  if (data_info_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = data_info_;
+    data_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ChatContainer::set_allocated_data_info(::std::string* data_info) {
+  if (data_info_ != &::google::protobuf::internal::kEmptyString) {
+    delete data_info_;
+  }
+  if (data_info) {
+    set_has_data_info();
+    data_info_ = data_info;
+  } else {
+    clear_has_data_info();
+    data_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
 // ReqAckPlayerChat
 
 // required .NFMsg.Ident chat_id = 1;
@@ -4158,6 +5058,31 @@ inline void ReqAckPlayerChat::set_allocated_target_id(::NFMsg::Ident* target_id)
   } else {
     clear_has_target_id();
   }
+}
+
+// repeated .NFMsg.ChatContainer Container_data = 6;
+inline int ReqAckPlayerChat::container_data_size() const {
+  return container_data_.size();
+}
+inline void ReqAckPlayerChat::clear_container_data() {
+  container_data_.Clear();
+}
+inline const ::NFMsg::ChatContainer& ReqAckPlayerChat::container_data(int index) const {
+  return container_data_.Get(index);
+}
+inline ::NFMsg::ChatContainer* ReqAckPlayerChat::mutable_container_data(int index) {
+  return container_data_.Mutable(index);
+}
+inline ::NFMsg::ChatContainer* ReqAckPlayerChat::add_container_data() {
+  return container_data_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ChatContainer >&
+ReqAckPlayerChat::container_data() const {
+  return container_data_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ChatContainer >*
+ReqAckPlayerChat::mutable_container_data() {
+  return &container_data_;
 }
 
 // -------------------------------------------------------------------
@@ -5969,6 +6894,111 @@ inline void ReqAckOprGuildMember::set_type(::NFMsg::ReqAckOprGuildMember_EGGuild
 
 // -------------------------------------------------------------------
 
+// ReqAckDonateGuildItem
+
+// required .NFMsg.Ident guild_id = 1;
+inline bool ReqAckDonateGuildItem::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckDonateGuildItem::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckDonateGuildItem::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckDonateGuildItem::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& ReqAckDonateGuildItem::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckDonateGuildItem::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckDonateGuildItem::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void ReqAckDonateGuildItem::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// required .NFMsg.Ident target_id = 2;
+inline bool ReqAckDonateGuildItem::has_target_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckDonateGuildItem::set_has_target_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckDonateGuildItem::clear_has_target_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckDonateGuildItem::clear_target_id() {
+  if (target_id_ != NULL) target_id_->::NFMsg::Ident::Clear();
+  clear_has_target_id();
+}
+inline const ::NFMsg::Ident& ReqAckDonateGuildItem::target_id() const {
+  return target_id_ != NULL ? *target_id_ : *default_instance_->target_id_;
+}
+inline ::NFMsg::Ident* ReqAckDonateGuildItem::mutable_target_id() {
+  set_has_target_id();
+  if (target_id_ == NULL) target_id_ = new ::NFMsg::Ident;
+  return target_id_;
+}
+inline ::NFMsg::Ident* ReqAckDonateGuildItem::release_target_id() {
+  clear_has_target_id();
+  ::NFMsg::Ident* temp = target_id_;
+  target_id_ = NULL;
+  return temp;
+}
+inline void ReqAckDonateGuildItem::set_allocated_target_id(::NFMsg::Ident* target_id) {
+  delete target_id_;
+  target_id_ = target_id;
+  if (target_id) {
+    set_has_target_id();
+  } else {
+    clear_has_target_id();
+  }
+}
+
+// repeated .NFMsg.ItemStruct item_list = 3;
+inline int ReqAckDonateGuildItem::item_list_size() const {
+  return item_list_.size();
+}
+inline void ReqAckDonateGuildItem::clear_item_list() {
+  item_list_.Clear();
+}
+inline const ::NFMsg::ItemStruct& ReqAckDonateGuildItem::item_list(int index) const {
+  return item_list_.Get(index);
+}
+inline ::NFMsg::ItemStruct* ReqAckDonateGuildItem::mutable_item_list(int index) {
+  return item_list_.Mutable(index);
+}
+inline ::NFMsg::ItemStruct* ReqAckDonateGuildItem::add_item_list() {
+  return item_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >&
+ReqAckDonateGuildItem::item_list() const {
+  return item_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >*
+ReqAckDonateGuildItem::mutable_item_list() {
+  return &item_list_;
+}
+
+// -------------------------------------------------------------------
+
 // ChatInfo
 
 // required .NFMsg.ChatInfo.EChatType chat_type = 1;
@@ -6381,6 +7411,538 @@ inline void ChatInfo::set_allocated_guid_name(::std::string* guid_name) {
   }
 }
 
+// -------------------------------------------------------------------
+
+// ReqAckCreateChatGroup
+
+// required bytes name = 1;
+inline bool ReqAckCreateChatGroup::has_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckCreateChatGroup::set_has_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckCreateChatGroup::clear_has_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckCreateChatGroup::clear_name() {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    name_->clear();
+  }
+  clear_has_name();
+}
+inline const ::std::string& ReqAckCreateChatGroup::name() const {
+  return *name_;
+}
+inline void ReqAckCreateChatGroup::set_name(const ::std::string& value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void ReqAckCreateChatGroup::set_name(const char* value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void ReqAckCreateChatGroup::set_name(const void* value, size_t size) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckCreateChatGroup::mutable_name() {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  return name_;
+}
+inline ::std::string* ReqAckCreateChatGroup::release_name() {
+  clear_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = name_;
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckCreateChatGroup::set_allocated_name(::std::string* name) {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_;
+  }
+  if (name) {
+    set_has_name();
+    name_ = name;
+  } else {
+    clear_has_name();
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required .NFMsg.Ident selfid = 2;
+inline bool ReqAckCreateChatGroup::has_selfid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckCreateChatGroup::set_has_selfid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckCreateChatGroup::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckCreateChatGroup::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqAckCreateChatGroup::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqAckCreateChatGroup::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqAckCreateChatGroup::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqAckCreateChatGroup::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// optional .NFMsg.Ident xChatGroupid = 3;
+inline bool ReqAckCreateChatGroup::has_xchatgroupid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckCreateChatGroup::set_has_xchatgroupid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckCreateChatGroup::clear_has_xchatgroupid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckCreateChatGroup::clear_xchatgroupid() {
+  if (xchatgroupid_ != NULL) xchatgroupid_->::NFMsg::Ident::Clear();
+  clear_has_xchatgroupid();
+}
+inline const ::NFMsg::Ident& ReqAckCreateChatGroup::xchatgroupid() const {
+  return xchatgroupid_ != NULL ? *xchatgroupid_ : *default_instance_->xchatgroupid_;
+}
+inline ::NFMsg::Ident* ReqAckCreateChatGroup::mutable_xchatgroupid() {
+  set_has_xchatgroupid();
+  if (xchatgroupid_ == NULL) xchatgroupid_ = new ::NFMsg::Ident;
+  return xchatgroupid_;
+}
+inline ::NFMsg::Ident* ReqAckCreateChatGroup::release_xchatgroupid() {
+  clear_has_xchatgroupid();
+  ::NFMsg::Ident* temp = xchatgroupid_;
+  xchatgroupid_ = NULL;
+  return temp;
+}
+inline void ReqAckCreateChatGroup::set_allocated_xchatgroupid(::NFMsg::Ident* xchatgroupid) {
+  delete xchatgroupid_;
+  xchatgroupid_ = xchatgroupid;
+  if (xchatgroupid) {
+    set_has_xchatgroupid();
+  } else {
+    clear_has_xchatgroupid();
+  }
+}
+
+// optional int32 chatType = 4;
+inline bool ReqAckCreateChatGroup::has_chattype() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqAckCreateChatGroup::set_has_chattype() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqAckCreateChatGroup::clear_has_chattype() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqAckCreateChatGroup::clear_chattype() {
+  chattype_ = 0;
+  clear_has_chattype();
+}
+inline ::google::protobuf::int32 ReqAckCreateChatGroup::chattype() const {
+  return chattype_;
+}
+inline void ReqAckCreateChatGroup::set_chattype(::google::protobuf::int32 value) {
+  set_has_chattype();
+  chattype_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckjoinChatGroup
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqAckjoinChatGroup::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckjoinChatGroup::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckjoinChatGroup::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckjoinChatGroup::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqAckjoinChatGroup::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqAckjoinChatGroup::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqAckjoinChatGroup::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqAckjoinChatGroup::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// optional .NFMsg.Ident xChatGroupid = 2;
+inline bool ReqAckjoinChatGroup::has_xchatgroupid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckjoinChatGroup::set_has_xchatgroupid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckjoinChatGroup::clear_has_xchatgroupid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckjoinChatGroup::clear_xchatgroupid() {
+  if (xchatgroupid_ != NULL) xchatgroupid_->::NFMsg::Ident::Clear();
+  clear_has_xchatgroupid();
+}
+inline const ::NFMsg::Ident& ReqAckjoinChatGroup::xchatgroupid() const {
+  return xchatgroupid_ != NULL ? *xchatgroupid_ : *default_instance_->xchatgroupid_;
+}
+inline ::NFMsg::Ident* ReqAckjoinChatGroup::mutable_xchatgroupid() {
+  set_has_xchatgroupid();
+  if (xchatgroupid_ == NULL) xchatgroupid_ = new ::NFMsg::Ident;
+  return xchatgroupid_;
+}
+inline ::NFMsg::Ident* ReqAckjoinChatGroup::release_xchatgroupid() {
+  clear_has_xchatgroupid();
+  ::NFMsg::Ident* temp = xchatgroupid_;
+  xchatgroupid_ = NULL;
+  return temp;
+}
+inline void ReqAckjoinChatGroup::set_allocated_xchatgroupid(::NFMsg::Ident* xchatgroupid) {
+  delete xchatgroupid_;
+  xchatgroupid_ = xchatgroupid;
+  if (xchatgroupid) {
+    set_has_xchatgroupid();
+  } else {
+    clear_has_xchatgroupid();
+  }
+}
+
+// optional int64 result = 3;
+inline bool ReqAckjoinChatGroup::has_result() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckjoinChatGroup::set_has_result() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckjoinChatGroup::clear_has_result() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckjoinChatGroup::clear_result() {
+  result_ = GOOGLE_LONGLONG(0);
+  clear_has_result();
+}
+inline ::google::protobuf::int64 ReqAckjoinChatGroup::result() const {
+  return result_;
+}
+inline void ReqAckjoinChatGroup::set_result(::google::protobuf::int64 value) {
+  set_has_result();
+  result_ = value;
+}
+
+// optional int32 chatType = 4;
+inline bool ReqAckjoinChatGroup::has_chattype() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqAckjoinChatGroup::set_has_chattype() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqAckjoinChatGroup::clear_has_chattype() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqAckjoinChatGroup::clear_chattype() {
+  chattype_ = 0;
+  clear_has_chattype();
+}
+inline ::google::protobuf::int32 ReqAckjoinChatGroup::chattype() const {
+  return chattype_;
+}
+inline void ReqAckjoinChatGroup::set_chattype(::google::protobuf::int32 value) {
+  set_has_chattype();
+  chattype_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckQuitChatGroup
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqAckQuitChatGroup::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckQuitChatGroup::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckQuitChatGroup::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckQuitChatGroup::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqAckQuitChatGroup::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqAckQuitChatGroup::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqAckQuitChatGroup::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqAckQuitChatGroup::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// optional .NFMsg.Ident xChatGroupid = 2;
+inline bool ReqAckQuitChatGroup::has_xchatgroupid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckQuitChatGroup::set_has_xchatgroupid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckQuitChatGroup::clear_has_xchatgroupid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckQuitChatGroup::clear_xchatgroupid() {
+  if (xchatgroupid_ != NULL) xchatgroupid_->::NFMsg::Ident::Clear();
+  clear_has_xchatgroupid();
+}
+inline const ::NFMsg::Ident& ReqAckQuitChatGroup::xchatgroupid() const {
+  return xchatgroupid_ != NULL ? *xchatgroupid_ : *default_instance_->xchatgroupid_;
+}
+inline ::NFMsg::Ident* ReqAckQuitChatGroup::mutable_xchatgroupid() {
+  set_has_xchatgroupid();
+  if (xchatgroupid_ == NULL) xchatgroupid_ = new ::NFMsg::Ident;
+  return xchatgroupid_;
+}
+inline ::NFMsg::Ident* ReqAckQuitChatGroup::release_xchatgroupid() {
+  clear_has_xchatgroupid();
+  ::NFMsg::Ident* temp = xchatgroupid_;
+  xchatgroupid_ = NULL;
+  return temp;
+}
+inline void ReqAckQuitChatGroup::set_allocated_xchatgroupid(::NFMsg::Ident* xchatgroupid) {
+  delete xchatgroupid_;
+  xchatgroupid_ = xchatgroupid;
+  if (xchatgroupid) {
+    set_has_xchatgroupid();
+  } else {
+    clear_has_xchatgroupid();
+  }
+}
+
+// optional int64 result = 3;
+inline bool ReqAckQuitChatGroup::has_result() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckQuitChatGroup::set_has_result() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckQuitChatGroup::clear_has_result() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckQuitChatGroup::clear_result() {
+  result_ = GOOGLE_LONGLONG(0);
+  clear_has_result();
+}
+inline ::google::protobuf::int64 ReqAckQuitChatGroup::result() const {
+  return result_;
+}
+inline void ReqAckQuitChatGroup::set_result(::google::protobuf::int64 value) {
+  set_has_result();
+  result_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqSubscriptionChatGroup
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqSubscriptionChatGroup::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqSubscriptionChatGroup::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqSubscriptionChatGroup::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqSubscriptionChatGroup::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqSubscriptionChatGroup::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqSubscriptionChatGroup::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqSubscriptionChatGroup::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqSubscriptionChatGroup::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// repeated .NFMsg.Ident xChatGroupid = 2;
+inline int ReqSubscriptionChatGroup::xchatgroupid_size() const {
+  return xchatgroupid_.size();
+}
+inline void ReqSubscriptionChatGroup::clear_xchatgroupid() {
+  xchatgroupid_.Clear();
+}
+inline const ::NFMsg::Ident& ReqSubscriptionChatGroup::xchatgroupid(int index) const {
+  return xchatgroupid_.Get(index);
+}
+inline ::NFMsg::Ident* ReqSubscriptionChatGroup::mutable_xchatgroupid(int index) {
+  return xchatgroupid_.Mutable(index);
+}
+inline ::NFMsg::Ident* ReqSubscriptionChatGroup::add_xchatgroupid() {
+  return xchatgroupid_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+ReqSubscriptionChatGroup::xchatgroupid() const {
+  return xchatgroupid_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+ReqSubscriptionChatGroup::mutable_xchatgroupid() {
+  return &xchatgroupid_;
+}
+
+// -------------------------------------------------------------------
+
+// ReqCancelSubscriptionChatGroup
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqCancelSubscriptionChatGroup::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqCancelSubscriptionChatGroup::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqCancelSubscriptionChatGroup::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqCancelSubscriptionChatGroup::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqCancelSubscriptionChatGroup::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqCancelSubscriptionChatGroup::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqCancelSubscriptionChatGroup::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqCancelSubscriptionChatGroup::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// repeated .NFMsg.Ident xChatGroupid = 2;
+inline int ReqCancelSubscriptionChatGroup::xchatgroupid_size() const {
+  return xchatgroupid_.size();
+}
+inline void ReqCancelSubscriptionChatGroup::clear_xchatgroupid() {
+  xchatgroupid_.Clear();
+}
+inline const ::NFMsg::Ident& ReqCancelSubscriptionChatGroup::xchatgroupid(int index) const {
+  return xchatgroupid_.Get(index);
+}
+inline ::NFMsg::Ident* ReqCancelSubscriptionChatGroup::mutable_xchatgroupid(int index) {
+  return xchatgroupid_.Mutable(index);
+}
+inline ::NFMsg::Ident* ReqCancelSubscriptionChatGroup::add_xchatgroupid() {
+  return xchatgroupid_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+ReqCancelSubscriptionChatGroup::xchatgroupid() const {
+  return xchatgroupid_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+ReqCancelSubscriptionChatGroup::mutable_xchatgroupid() {
+  return &xchatgroupid_;
+}
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -6390,6 +7952,10 @@ inline void ChatInfo::set_allocated_guid_name(::std::string* guid_name) {
 namespace google {
 namespace protobuf {
 
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ChatContainer_ContainerType>() {
+  return ::NFMsg::ChatContainer_ContainerType_descriptor();
+}
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckPlayerChat_EGameChatType>() {
   return ::NFMsg::ReqAckPlayerChat_EGameChatType_descriptor();
