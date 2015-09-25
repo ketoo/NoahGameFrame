@@ -1772,8 +1772,9 @@ void NFCGameServerNet_ServerModule::OnReqiureRoleListProcess( const NFIPacket& m
     vFieldVector.push_back("ID");
     vFieldVector.push_back("Level");
     vFieldVector.push_back("Sex");
-    vFieldVector.push_back("Job");
+	vFieldVector.push_back("Job");
     vFieldVector.push_back("Name");  
+	vFieldVector.push_back("Race");
 
     const NFIDENTID ident = m_pDataProcessModule->GetChar(xMsg.account(), vFieldVector, vValueVector);
 	if (ident.IsNull())
@@ -1801,7 +1802,8 @@ void NFCGameServerNet_ServerModule::OnReqiureRoleListProcess( const NFIPacket& m
     NFIDENTID xID;
     int nLevel = 0;
     int nSex = 0;
-    int nJob = 0;
+	int nJob = 0;
+	int nRace = 0;
     std::string strName;
 
     if (!xID.FromString(vValueVector[0]))
@@ -1823,12 +1825,18 @@ void NFCGameServerNet_ServerModule::OnReqiureRoleListProcess( const NFIPacket& m
     {
         return ;
     }
+
     strName = vValueVector[4];
 
+	if (!NF_StrTo(vValueVector[5], nRace))
+	{
+		return ;
+	}
     pData->set_role_level(nLevel);
     pData->set_sex(nSex);
     pData->set_career(nJob);
-    pData->set_noob_name(strName);
+	pData->set_noob_name(strName);
+	pData->set_race(nRace);
 
 	SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, msg.GetFd(), nClientID);
 }
@@ -1842,7 +1850,7 @@ void NFCGameServerNet_ServerModule::OnCreateRoleGameProcess( const NFIPacket& ms
 		return;
 	}
 
-	NFIDENTID xRoleID = m_pDataProcessModule->CreateRole(xMsg.account(), xMsg.noob_name(), xMsg.career(), xMsg.sex());
+	NFIDENTID xRoleID = m_pDataProcessModule->CreateRole(xMsg.account(), xMsg.noob_name(), xMsg.race(), xMsg.career(), xMsg.sex());
 	if (xRoleID.IsNull())
 	{
 		return;
