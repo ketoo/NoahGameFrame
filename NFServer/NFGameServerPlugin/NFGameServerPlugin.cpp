@@ -51,7 +51,6 @@ void NFGameServerPlugin::Install()
 
     REGISTER_MODULE( pPluginManager, NFCGameServerModule )
     REGISTER_MODULE( pPluginManager, NFCSceneProcessModule )
-    REGISTER_MODULE( pPluginManager, NFCDataProcessModule )
 
     REGISTER_MODULE( pPluginManager, NFCPropertyModule )
     REGISTER_MODULE( pPluginManager, NFCLevelModule )
@@ -68,7 +67,6 @@ void NFGameServerPlugin::Uninstall()
     UNREGISTER_MODULE( pPluginManager, NFCLevelModule )
     UNREGISTER_MODULE( pPluginManager, NFCPropertyModule )
 
-    UNREGISTER_MODULE( pPluginManager, NFCDataProcessModule )
     UNREGISTER_MODULE( pPluginManager, NFCSceneProcessModule )
     UNREGISTER_MODULE( pPluginManager, NFCGameServerModule )
 }
