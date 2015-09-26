@@ -4,7 +4,6 @@
     <Class Id="BB_Build" Type="TYPE_BB_BUILD" Path="../../NFDataCfg/Struct/Class/BB_Build.xml" InstancePath="../../NFDataCfg/Ini/NPC/BB_Build.xml" Public="0" Desc="BB_Build" />
     <Class Id="BB_Player" Type="TYPE_BB_PLAYER" Path="../../NFDataCfg/Struct/Class/BB_Player.xml" InstancePath="../../NFDataCfg/Ini/NPC/BB_Player.xml" Public="0" Desc="BB_Player" />
     <Class Id="Buff" Type="TYPE_BUFF" Path="../../NFDataCfg/Struct/Class/Buff.xml" InstancePath="../../NFDataCfg/Ini/NPC/Buff.xml" Public="0" Desc="Buff" />
-    <Class Id="ChatGroup" Type="TYPE_CHATGROUP" Path="../../NFDataCfg/Struct/Class/ChatGroup.xml" InstancePath="../../NFDataCfg/Ini/NPC/ChatGroup.xml" Public="0" Desc="ChatGroup" />
     <Class Id="Cost" Type="TYPE_COST" Path="../../NFDataCfg/Struct/Class/Cost.xml" InstancePath="../../NFDataCfg/Ini/NPC/Cost.xml" Public="0" Desc="Cost" />
     <Class Id="EffectData" Type="TYPE_EFFECTDATA" Path="../../NFDataCfg/Struct/Class/EffectData.xml" InstancePath="../../NFDataCfg/Ini/NPC/EffectData.xml" Public="0" Desc="EffectData" />
     <Class Id="Equip" Type="TYPE_EQUIP" Path="../../NFDataCfg/Struct/Class/Equip.xml" InstancePath="../../NFDataCfg/Ini/NPC/Equip.xml" Public="0" Desc="Equip" />
