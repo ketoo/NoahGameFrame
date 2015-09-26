@@ -291,7 +291,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
 
 	//////////////////////////////////////////////////////////////////////////
 	//拉取数据
-	if(!m_pDataProcessModule->LoadDataFormNoSql(nRoleID))
+	if(!m_pDataProcessModule->LoadDataFormNoSql(nRoleID, "Player"))
 	{
 		return;
 	}
