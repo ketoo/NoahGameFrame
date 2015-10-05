@@ -165,6 +165,8 @@ message ReqCompeleteTask//完成任务后申请领奖
 	required bytes task_id = 1;
 }
 
+///////////////战斗/////////////////////////////////////////////////////////////////////////////////////
+
 message ReqAckJoinActivity
 {
 	enum EGameActivityType
@@ -179,6 +181,29 @@ message ReqAckJoinActivity
     required EGameActivityType		activity_type = 1;
     required EGameActivitySubType	sub_activity_type = 2;
 }
+
+message ReqAckSearchOppnent
+{
+    required EBattleType		search_type = 1;
+    //optional EGameActivitySubType	sub_activity_type = 2;//回来要带对手数据
+}
+
+message ReqAckBattleOppnent
+{
+    required EBattleType		battle_type = 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 ///////////////工会/////////////////////////////////////////////////////////////////////////////////////
 message ReqAckCreateGuild

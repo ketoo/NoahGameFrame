@@ -59,34 +59,6 @@ namespace NFMsg
       BuildingProduce_OnceStartTime = 4
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"GroupMemberList_RecordColType")]
-    public enum GroupMemberList_RecordColType
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"GroupMemberList_GUID", Value=0)]
-      GroupMemberList_GUID = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"GroupMemberList_Online", Value=1)]
-      GroupMemberList_Online = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"GroupMemberList_GameID", Value=2)]
-      GroupMemberList_GameID = 2
-    }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"ChatList_RecordColType")]
-    public enum ChatList_RecordColType
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"ChatList_GUID", Value=0)]
-      ChatList_GUID = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"ChatList_msg", Value=1)]
-      ChatList_msg = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"ChatList_time", Value=2)]
-      ChatList_time = 2
-    }
-  
     [global::ProtoBuf.ProtoContract(Name=@"GuildBoss_RecordColType")]
     public enum GuildBoss_RecordColType
     {
