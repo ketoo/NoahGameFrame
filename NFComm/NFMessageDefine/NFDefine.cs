@@ -424,8 +424,17 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMT_ACK_START_PVP", Value=262)]
       EGMT_ACK_START_PVP = 262,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMT_REQ_OTHER_JOIN_PVP", Value=263)]
-      EGMT_REQ_OTHER_JOIN_PVP = 263,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SEARCH_OPPNENT", Value=280)]
+      EGMI_REQ_SEARCH_OPPNENT = 280,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SEARCH_OPPNENT", Value=281)]
+      EGMI_ACK_SEARCH_OPPNENT = 281,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMT_REQ_START_OPPNENT", Value=282)]
+      EGMT_REQ_START_OPPNENT = 282,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMT_ACK_START_OPPNENT", Value=283)]
+      EGMT_ACK_START_OPPNENT = 283,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ONLINE_NOTIFY", Value=290)]
       EGMI_ACK_ONLINE_NOTIFY = 290,
@@ -626,6 +635,17 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"TASK_KILL_SOME_MONSTER_COUNT", Value=9)]
       TASK_KILL_SOME_MONSTER_COUNT = 9
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EBattleType")]
+    public enum EBattleType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BATTLE_SINGLE", Value=0)]
+      BATTLE_SINGLE = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BATTLE_PVE_TEAM", Value=1)]
+      BATTLE_PVE_TEAM = 1
     }
   
 }
