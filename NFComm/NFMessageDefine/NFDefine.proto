@@ -163,10 +163,15 @@ enum EGameMsgID
 	EGMI_REQ_ACCEPT_TASK						= 256;
 	EGMI_REQ_COMPELETE_TASK						= 257;
 	
-	EGMI_REQ_JOIN_PVP                           = 260; // 申请加入PVP队伍
-	EGMI_REQ_EXIT_PVP                           = 261; // 申请离开PVP队伍
+	EGMI_REQ_JOIN_PVP                           = 260; // 申请加入PVP
+	EGMI_REQ_EXIT_PVP                           = 261; // 申请离开PVP
 	EGMT_ACK_START_PVP                          = 262; // 通知开始PVP
-	EGMT_REQ_OTHER_JOIN_PVP                     = 263; // 邀请XX加入PVP团队
+	
+	EGMI_REQ_SEARCH_OPPNENT                     = 280; // 查找对手(EBattleType)
+	EGMI_ACK_SEARCH_OPPNENT                     = 281; // 返回查找对手的信息(EBattleType)
+	EGMT_REQ_START_OPPNENT                      = 282; // 开始战斗(EBattleType)
+	EGMT_ACK_START_OPPNENT                      = 283; // 开始战斗(EBattleType)
+	
 	
 	EGMI_ACK_ONLINE_NOTIFY						= 290; // 玩家上线通知
 	EGMI_ACK_OFFLINE_NOTIFY						= 291; // 玩家下线通知
@@ -259,3 +264,19 @@ enum ETaskType
     TASK_KILL_SOME_MONSTER_COUNT        = 9; // 杀死某个特定怪度多少只
     // TODO
 }
+
+// 战斗类型
+enum EBattleType
+{
+	BATTLE_SINGLE        = 0; // 主角单人打副本
+	BATTLE_PVE_TEAM      = 1; // 多人打副本
+}
+
+
+
+
+
+
+
+
+
