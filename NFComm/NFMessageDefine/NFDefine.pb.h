@@ -186,7 +186,10 @@ enum EGameMsgID {
   EGMI_REQ_JOIN_PVP = 260,
   EGMI_REQ_EXIT_PVP = 261,
   EGMT_ACK_START_PVP = 262,
-  EGMT_REQ_OTHER_JOIN_PVP = 263,
+  EGMI_REQ_SEARCH_OPPNENT = 280,
+  EGMI_ACK_SEARCH_OPPNENT = 281,
+  EGMT_REQ_START_OPPNENT = 282,
+  EGMT_ACK_START_OPPNENT = 283,
   EGMI_ACK_ONLINE_NOTIFY = 290,
   EGMI_ACK_OFFLINE_NOTIFY = 291,
   EGMI_REQ_CREATE_GUILD = 300,
@@ -331,6 +334,25 @@ inline bool ETaskType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ETaskType>(
     ETaskType_descriptor(), name, value);
 }
+enum EBattleType {
+  BATTLE_SINGLE = 0,
+  BATTLE_PVE_TEAM = 1
+};
+bool EBattleType_IsValid(int value);
+const EBattleType EBattleType_MIN = BATTLE_SINGLE;
+const EBattleType EBattleType_MAX = BATTLE_PVE_TEAM;
+const int EBattleType_ARRAYSIZE = EBattleType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* EBattleType_descriptor();
+inline const ::std::string& EBattleType_Name(EBattleType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EBattleType_descriptor(), value);
+}
+inline bool EBattleType_Parse(
+    const ::std::string& name, EBattleType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EBattleType>(
+    EBattleType_descriptor(), name, value);
+}
 // ===================================================================
 
 
@@ -371,6 +393,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ETaskState>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ETaskType>() {
   return ::NFMsg::ETaskType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EBattleType>() {
+  return ::NFMsg::EBattleType_descriptor();
 }
 
 }  // namespace google
