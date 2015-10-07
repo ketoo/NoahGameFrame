@@ -56,6 +56,8 @@ class ReqPickDropItem;
 class ReqAcceptTask;
 class ReqCompeleteTask;
 class ReqAckJoinActivity;
+class ReqAckSearchOppnent;
+class ReqAckBattleOppnent;
 class ReqAckCreateGuild;
 class ReqSearchGuild;
 class AckSearchGuild;
@@ -2404,6 +2406,170 @@ class ReqAckJoinActivity : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ReqAckJoinActivity* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckSearchOppnent : public ::google::protobuf::Message {
+ public:
+  ReqAckSearchOppnent();
+  virtual ~ReqAckSearchOppnent();
+
+  ReqAckSearchOppnent(const ReqAckSearchOppnent& from);
+
+  inline ReqAckSearchOppnent& operator=(const ReqAckSearchOppnent& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckSearchOppnent& default_instance();
+
+  void Swap(ReqAckSearchOppnent* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckSearchOppnent* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckSearchOppnent& from);
+  void MergeFrom(const ReqAckSearchOppnent& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.EBattleType search_type = 1;
+  inline bool has_search_type() const;
+  inline void clear_search_type();
+  static const int kSearchTypeFieldNumber = 1;
+  inline ::NFMsg::EBattleType search_type() const;
+  inline void set_search_type(::NFMsg::EBattleType value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckSearchOppnent)
+ private:
+  inline void set_has_search_type();
+  inline void clear_has_search_type();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  int search_type_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckSearchOppnent* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckBattleOppnent : public ::google::protobuf::Message {
+ public:
+  ReqAckBattleOppnent();
+  virtual ~ReqAckBattleOppnent();
+
+  ReqAckBattleOppnent(const ReqAckBattleOppnent& from);
+
+  inline ReqAckBattleOppnent& operator=(const ReqAckBattleOppnent& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckBattleOppnent& default_instance();
+
+  void Swap(ReqAckBattleOppnent* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckBattleOppnent* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckBattleOppnent& from);
+  void MergeFrom(const ReqAckBattleOppnent& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.EBattleType battle_type = 1;
+  inline bool has_battle_type() const;
+  inline void clear_battle_type();
+  static const int kBattleTypeFieldNumber = 1;
+  inline ::NFMsg::EBattleType battle_type() const;
+  inline void set_battle_type(::NFMsg::EBattleType value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckBattleOppnent)
+ private:
+  inline void set_has_battle_type();
+  inline void clear_has_battle_type();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  int battle_type_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckBattleOppnent* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -6078,6 +6244,60 @@ inline void ReqAckJoinActivity::set_sub_activity_type(::NFMsg::ReqAckJoinActivit
   assert(::NFMsg::ReqAckJoinActivity_EGameActivitySubType_IsValid(value));
   set_has_sub_activity_type();
   sub_activity_type_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckSearchOppnent
+
+// required .NFMsg.EBattleType search_type = 1;
+inline bool ReqAckSearchOppnent::has_search_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckSearchOppnent::set_has_search_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckSearchOppnent::clear_has_search_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckSearchOppnent::clear_search_type() {
+  search_type_ = 0;
+  clear_has_search_type();
+}
+inline ::NFMsg::EBattleType ReqAckSearchOppnent::search_type() const {
+  return static_cast< ::NFMsg::EBattleType >(search_type_);
+}
+inline void ReqAckSearchOppnent::set_search_type(::NFMsg::EBattleType value) {
+  assert(::NFMsg::EBattleType_IsValid(value));
+  set_has_search_type();
+  search_type_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckBattleOppnent
+
+// required .NFMsg.EBattleType battle_type = 1;
+inline bool ReqAckBattleOppnent::has_battle_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckBattleOppnent::set_has_battle_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckBattleOppnent::clear_has_battle_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckBattleOppnent::clear_battle_type() {
+  battle_type_ = 0;
+  clear_has_battle_type();
+}
+inline ::NFMsg::EBattleType ReqAckBattleOppnent::battle_type() const {
+  return static_cast< ::NFMsg::EBattleType >(battle_type_);
+}
+inline void ReqAckBattleOppnent::set_battle_type(::NFMsg::EBattleType value) {
+  assert(::NFMsg::EBattleType_IsValid(value));
+  set_has_battle_type();
+  battle_type_ = value;
 }
 
 // -------------------------------------------------------------------

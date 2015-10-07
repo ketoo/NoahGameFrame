@@ -152,6 +152,36 @@ bool NFCDataList::Add(const void* value)
     return true;
 }
 
+bool NFCDataList::Add( const std::string& str, const NFINT64 value )
+{
+	return false;
+}
+
+bool NFCDataList::Add( const std::string& str, const float value )
+{
+	return false;
+}
+
+bool NFCDataList::Add( const std::string& str, const double value )
+{
+	return false;
+}
+
+bool NFCDataList::Add( const std::string& str, const char* value )
+{
+	return false;
+}
+
+bool NFCDataList::Add( const std::string& str, const std::string& value )
+{
+	return false;
+}
+
+bool NFCDataList::Add( const std::string& str, const NFIDENTID& value )
+{
+	return false;
+}
+
 bool NFCDataList::Set(const int index, const NFINT64 value)
 {
     if (index < GetCount() && index >= 0)
@@ -209,6 +239,36 @@ bool NFCDataList::Set(const int index, const void* value)
     return false;
 }
 
+bool NFCDataList::Set( const std::string& str, const NFINT64 value )
+{
+	return false;
+}
+
+bool NFCDataList::Set( const std::string& str, const float value )
+{
+	return false;
+}
+
+bool NFCDataList::Set( const std::string& str, const double value )
+{
+	return false;
+}
+
+bool NFCDataList::Set( const std::string& str, const char* value )
+{
+	return false;
+}
+
+bool NFCDataList::Set( const std::string& str, const std::string& value )
+{
+	return false;
+}
+
+bool NFCDataList::Set( const std::string& str, const NFIDENTID& value )
+{
+	return false;
+}
+
 NFINT64 NFCDataList::Int(const int index) const
 {
     if (index < GetCount() && index >= 0)
@@ -217,6 +277,11 @@ NFINT64 NFCDataList::Int(const int index) const
     }
 
     return 0;
+}
+
+NFINT64 NFCDataList::Int( const std::string& str ) const
+{
+	return 0;
 }
 
 float NFCDataList::Float(const int index) const
@@ -229,6 +294,11 @@ float NFCDataList::Float(const int index) const
     return 0.0f;
 }
 
+float NFCDataList::Float( const std::string& str ) const
+{
+	return 0.0f;
+}
+
 
 double NFCDataList::Double(const int index) const
 {
@@ -238,6 +308,11 @@ double NFCDataList::Double(const int index) const
     }
 
     return 0.0f;
+}
+
+double NFCDataList::Double( const std::string& str ) const
+{
+	return 0.0;
 }
 
 const std::string& NFCDataList::String(const int index) const
@@ -252,6 +327,11 @@ const std::string& NFCDataList::String(const int index) const
     }
 
     return NULL_STR;
+}
+
+const std::string& NFCDataList::String( const std::string& str ) const
+{
+	return NULL_STR;
 }
 
 NFIDENTID NFCDataList::Object(const int index) const
@@ -278,6 +358,11 @@ NFIDENTID NFCDataList::Object(const int index) const
     }
 
     return NFIDENTID();
+}
+
+NFIDENTID NFCDataList::Object( const std::string& str ) const
+{
+	return NFIDENTID();
 }
 
 void* NFCDataList::Pointer(const int index) const

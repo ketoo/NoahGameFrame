@@ -37,9 +37,9 @@ public:
 
 	}
 
-	virtual NFIComponent* CreateNewInstance()
+	virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance()
 	{
-		return new ComponentTest();
+		return NF_SHARE_PTR<NFIComponent>(NF_NEW ComponentTest());
 	}
 
 	virtual const std::string GetComponentName() const
@@ -66,7 +66,7 @@ bool HelloWorld5Module::AfterInit()
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
 
-	//////////////////////////////////////////////////////////////////////////
+	////////////////////////test1//////////////////////////////////////////////////
 
 	NFIObject* pObject = new NFCObject(NFIDENTID(0, 1), pPluginManager);
 
@@ -75,7 +75,11 @@ bool HelloWorld5Module::AfterInit()
 	NF_SHARE_PTR<IComponentTest> pT = pObject->FindComponent<IComponentTest>("ComponentTest");
 	pT->Test();
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////test2////////////////////////////////////////////////////////////////////////////////
+
+	NF_SHARE_PTR<NFIComponent> pNewAddCOmponent = pObject->AddComponent<NFIComponent>("NFCTestComponent");
+
+	////////////////////////////test3///////////////////////////////////////////////////////////////////////////////
 	for (int i = 0; i < 50000; ++i)
 	{
 		int nActorID = pPluginManager->GetActorManager()->RequireActor<NFCTestComponent>(this, &HelloWorld5Module::OnSyncEvent);

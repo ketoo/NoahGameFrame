@@ -21,20 +21,6 @@ enum BuildingProduce_RecordColType
 	BuildingProduce_OnceStartTime		=4; // OnceStartTime
 }
 
-enum GroupMemberList_RecordColType
-{
-	GroupMemberList_GUID		=0; // GUID
-	GroupMemberList_Online		=1; // Online
-	GroupMemberList_GameID		=2; // GameID
-}
-
-enum ChatList_RecordColType
-{
-	ChatList_GUID		=0; // GUID
-	ChatList_msg		=1; // msg
-	ChatList_time		=2; // time
-}
-
 enum GuildBoss_RecordColType
 {
 	GuildBoss_GUID		=0; // GUID
