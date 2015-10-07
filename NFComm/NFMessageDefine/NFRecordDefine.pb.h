@@ -80,46 +80,6 @@ inline bool BuildingProduce_RecordColType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<BuildingProduce_RecordColType>(
     BuildingProduce_RecordColType_descriptor(), name, value);
 }
-enum GroupMemberList_RecordColType {
-  GroupMemberList_GUID = 0,
-  GroupMemberList_Online = 1,
-  GroupMemberList_GameID = 2
-};
-bool GroupMemberList_RecordColType_IsValid(int value);
-const GroupMemberList_RecordColType GroupMemberList_RecordColType_MIN = GroupMemberList_GUID;
-const GroupMemberList_RecordColType GroupMemberList_RecordColType_MAX = GroupMemberList_GameID;
-const int GroupMemberList_RecordColType_ARRAYSIZE = GroupMemberList_RecordColType_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* GroupMemberList_RecordColType_descriptor();
-inline const ::std::string& GroupMemberList_RecordColType_Name(GroupMemberList_RecordColType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    GroupMemberList_RecordColType_descriptor(), value);
-}
-inline bool GroupMemberList_RecordColType_Parse(
-    const ::std::string& name, GroupMemberList_RecordColType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<GroupMemberList_RecordColType>(
-    GroupMemberList_RecordColType_descriptor(), name, value);
-}
-enum ChatList_RecordColType {
-  ChatList_GUID = 0,
-  ChatList_msg = 1,
-  ChatList_time = 2
-};
-bool ChatList_RecordColType_IsValid(int value);
-const ChatList_RecordColType ChatList_RecordColType_MIN = ChatList_GUID;
-const ChatList_RecordColType ChatList_RecordColType_MAX = ChatList_time;
-const int ChatList_RecordColType_ARRAYSIZE = ChatList_RecordColType_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* ChatList_RecordColType_descriptor();
-inline const ::std::string& ChatList_RecordColType_Name(ChatList_RecordColType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ChatList_RecordColType_descriptor(), value);
-}
-inline bool ChatList_RecordColType_Parse(
-    const ::std::string& name, ChatList_RecordColType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ChatList_RecordColType>(
-    ChatList_RecordColType_descriptor(), name, value);
-}
 enum GuildBoss_RecordColType {
   GuildBoss_GUID = 0,
   GuildBoss_Name = 1,
@@ -532,14 +492,6 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::BuildingList_RecordColT
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::BuildingProduce_RecordColType>() {
   return ::NFMsg::BuildingProduce_RecordColType_descriptor();
-}
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::GroupMemberList_RecordColType>() {
-  return ::NFMsg::GroupMemberList_RecordColType_descriptor();
-}
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ChatList_RecordColType>() {
-  return ::NFMsg::ChatList_RecordColType_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::GuildBoss_RecordColType>() {
