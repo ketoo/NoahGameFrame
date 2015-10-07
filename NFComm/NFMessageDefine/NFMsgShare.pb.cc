@@ -83,6 +83,12 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqAckJoinActivity_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* ReqAckJoinActivity_EGameActivityType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ReqAckJoinActivity_EGameActivitySubType_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* ReqAckSearchOppnent_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ReqAckSearchOppnent_reflection_ = NULL;
+const ::google::protobuf::Descriptor* ReqAckBattleOppnent_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ReqAckBattleOppnent_reflection_ = NULL;
 const ::google::protobuf::Descriptor* ReqAckCreateGuild_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqAckCreateGuild_reflection_ = NULL;
@@ -465,7 +471,37 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       sizeof(ReqAckJoinActivity));
   ReqAckJoinActivity_EGameActivityType_descriptor_ = ReqAckJoinActivity_descriptor_->enum_type(0);
   ReqAckJoinActivity_EGameActivitySubType_descriptor_ = ReqAckJoinActivity_descriptor_->enum_type(1);
-  ReqAckCreateGuild_descriptor_ = file->message_type(19);
+  ReqAckSearchOppnent_descriptor_ = file->message_type(19);
+  static const int ReqAckSearchOppnent_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckSearchOppnent, search_type_),
+  };
+  ReqAckSearchOppnent_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ReqAckSearchOppnent_descriptor_,
+      ReqAckSearchOppnent::default_instance_,
+      ReqAckSearchOppnent_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckSearchOppnent, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckSearchOppnent, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ReqAckSearchOppnent));
+  ReqAckBattleOppnent_descriptor_ = file->message_type(20);
+  static const int ReqAckBattleOppnent_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckBattleOppnent, battle_type_),
+  };
+  ReqAckBattleOppnent_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ReqAckBattleOppnent_descriptor_,
+      ReqAckBattleOppnent::default_instance_,
+      ReqAckBattleOppnent_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckBattleOppnent, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckBattleOppnent, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ReqAckBattleOppnent));
+  ReqAckCreateGuild_descriptor_ = file->message_type(21);
   static const int ReqAckCreateGuild_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckCreateGuild, guild_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckCreateGuild, guild_name_),
@@ -481,7 +517,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckCreateGuild));
-  ReqSearchGuild_descriptor_ = file->message_type(20);
+  ReqSearchGuild_descriptor_ = file->message_type(22);
   static const int ReqSearchGuild_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSearchGuild, guild_name_),
   };
@@ -496,7 +532,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqSearchGuild));
-  AckSearchGuild_descriptor_ = file->message_type(21);
+  AckSearchGuild_descriptor_ = file->message_type(23);
   static const int AckSearchGuild_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckSearchGuild, guild_list_),
   };
@@ -532,7 +568,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckSearchGuild_SearchGuildObject));
-  ReqAckJoinGuild_descriptor_ = file->message_type(22);
+  ReqAckJoinGuild_descriptor_ = file->message_type(24);
   static const int ReqAckJoinGuild_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckJoinGuild, guild_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckJoinGuild, guild_name_),
@@ -548,7 +584,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckJoinGuild));
-  ReqAckLeaveGuild_descriptor_ = file->message_type(23);
+  ReqAckLeaveGuild_descriptor_ = file->message_type(25);
   static const int ReqAckLeaveGuild_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckLeaveGuild, guild_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckLeaveGuild, guild_name_),
@@ -564,7 +600,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckLeaveGuild));
-  ReqAckOprGuildMember_descriptor_ = file->message_type(24);
+  ReqAckOprGuildMember_descriptor_ = file->message_type(26);
   static const int ReqAckOprGuildMember_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckOprGuildMember, guild_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckOprGuildMember, member_id_),
@@ -582,7 +618,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckOprGuildMember));
   ReqAckOprGuildMember_EGGuildMemberOprType_descriptor_ = ReqAckOprGuildMember_descriptor_->enum_type(0);
-  ReqAckDonateGuildItem_descriptor_ = file->message_type(25);
+  ReqAckDonateGuildItem_descriptor_ = file->message_type(27);
   static const int ReqAckDonateGuildItem_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckDonateGuildItem, guild_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckDonateGuildItem, target_id_),
@@ -599,7 +635,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckDonateGuildItem));
-  ChatInfo_descriptor_ = file->message_type(26);
+  ChatInfo_descriptor_ = file->message_type(28);
   static const int ChatInfo_offsets_[9] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatInfo, chat_type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatInfo, chat_info_),
@@ -623,7 +659,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ChatInfo));
   ChatInfo_EChatType_descriptor_ = ChatInfo_descriptor_->enum_type(0);
-  ReqAckCreateChatGroup_descriptor_ = file->message_type(27);
+  ReqAckCreateChatGroup_descriptor_ = file->message_type(29);
   static const int ReqAckCreateChatGroup_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckCreateChatGroup, name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckCreateChatGroup, selfid_),
@@ -641,7 +677,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckCreateChatGroup));
-  ReqAckjoinChatGroup_descriptor_ = file->message_type(28);
+  ReqAckjoinChatGroup_descriptor_ = file->message_type(30);
   static const int ReqAckjoinChatGroup_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckjoinChatGroup, selfid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckjoinChatGroup, xchatgroupid_),
@@ -659,7 +695,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckjoinChatGroup));
-  ReqAckQuitChatGroup_descriptor_ = file->message_type(29);
+  ReqAckQuitChatGroup_descriptor_ = file->message_type(31);
   static const int ReqAckQuitChatGroup_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckQuitChatGroup, selfid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckQuitChatGroup, xchatgroupid_),
@@ -676,7 +712,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckQuitChatGroup));
-  ReqSubscriptionChatGroup_descriptor_ = file->message_type(30);
+  ReqSubscriptionChatGroup_descriptor_ = file->message_type(32);
   static const int ReqSubscriptionChatGroup_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSubscriptionChatGroup, selfid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSubscriptionChatGroup, xchatgroupid_),
@@ -692,7 +728,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqSubscriptionChatGroup));
-  ReqCancelSubscriptionChatGroup_descriptor_ = file->message_type(31);
+  ReqCancelSubscriptionChatGroup_descriptor_ = file->message_type(33);
   static const int ReqCancelSubscriptionChatGroup_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCancelSubscriptionChatGroup, selfid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCancelSubscriptionChatGroup, xchatgroupid_),
@@ -758,6 +794,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
     ReqCompeleteTask_descriptor_, &ReqCompeleteTask::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqAckJoinActivity_descriptor_, &ReqAckJoinActivity::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ReqAckSearchOppnent_descriptor_, &ReqAckSearchOppnent::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ReqAckBattleOppnent_descriptor_, &ReqAckBattleOppnent::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqAckCreateGuild_descriptor_, &ReqAckCreateGuild::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -829,6 +869,10 @@ void protobuf_ShutdownFile_NFMsgShare_2eproto() {
   delete ReqCompeleteTask_reflection_;
   delete ReqAckJoinActivity::default_instance_;
   delete ReqAckJoinActivity_reflection_;
+  delete ReqAckSearchOppnent::default_instance_;
+  delete ReqAckSearchOppnent_reflection_;
+  delete ReqAckBattleOppnent::default_instance_;
+  delete ReqAckBattleOppnent_reflection_;
   delete ReqAckCreateGuild::default_instance_;
   delete ReqAckCreateGuild_reflection_;
   delete ReqSearchGuild::default_instance_;
@@ -926,51 +970,55 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "\n\021sub_activity_type\030\002 \002(\0162..NFMsg.ReqAck"
     "JoinActivity.EGameActivitySubType\"!\n\021EGa"
     "meActivityType\022\014\n\010EGAT_PVP\020\000\"\'\n\024EGameAct"
-    "ivitySubType\022\017\n\013EGAT_NORMAL\020\000\"G\n\021ReqAckC"
-    "reateGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ide"
-    "nt\022\022\n\nguild_name\030\002 \002(\t\"$\n\016ReqSearchGuild"
-    "\022\022\n\nguild_name\030\001 \002(\t\"\220\002\n\016AckSearchGuild\022"
-    ";\n\nguild_list\030\001 \003(\0132\'.NFMsg.AckSearchGui"
-    "ld.SearchGuildObject\032\300\001\n\021SearchGuildObje"
-    "ct\022\036\n\010guild_ID\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\ngu"
-    "ild_name\030\002 \002(\t\022\022\n\nguild_icon\030\003 \002(\t\022\032\n\022gu"
-    "ild_member_count\030\004 \002(\005\022\036\n\026guild_member_m"
-    "ax_count\030\005 \002(\005\022\023\n\013guild_honor\030\006 \002(\005\022\022\n\ng"
-    "uild_rank\030\007 \002(\005\"E\n\017ReqAckJoinGuild\022\036\n\010gu"
+    "ivitySubType\022\017\n\013EGAT_NORMAL\020\000\">\n\023ReqAckS"
+    "earchOppnent\022\'\n\013search_type\030\001 \002(\0162\022.NFMs"
+    "g.EBattleType\">\n\023ReqAckBattleOppnent\022\'\n\013"
+    "battle_type\030\001 \002(\0162\022.NFMsg.EBattleType\"G\n"
+    "\021ReqAckCreateGuild\022\036\n\010guild_id\030\001 \002(\0132\014.N"
+    "FMsg.Ident\022\022\n\nguild_name\030\002 \002(\t\"$\n\016ReqSea"
+    "rchGuild\022\022\n\nguild_name\030\001 \002(\t\"\220\002\n\016AckSear"
+    "chGuild\022;\n\nguild_list\030\001 \003(\0132\'.NFMsg.AckS"
+    "earchGuild.SearchGuildObject\032\300\001\n\021SearchG"
+    "uildObject\022\036\n\010guild_ID\030\001 \002(\0132\014.NFMsg.Ide"
+    "nt\022\022\n\nguild_name\030\002 \002(\t\022\022\n\nguild_icon\030\003 \002"
+    "(\t\022\032\n\022guild_member_count\030\004 \002(\005\022\036\n\026guild_"
+    "member_max_count\030\005 \002(\005\022\023\n\013guild_honor\030\006 "
+    "\002(\005\022\022\n\nguild_rank\030\007 \002(\005\"E\n\017ReqAckJoinGui"
+    "ld\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\ngu"
+    "ild_name\030\002 \002(\t\"F\n\020ReqAckLeaveGuild\022\036\n\010gu"
     "ild_id\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\nguild_name"
-    "\030\002 \002(\t\"F\n\020ReqAckLeaveGuild\022\036\n\010guild_id\030\001"
-    " \002(\0132\014.NFMsg.Ident\022\022\n\nguild_name\030\002 \002(\t\"\332"
-    "\001\n\024ReqAckOprGuildMember\022\036\n\010guild_id\030\001 \002("
-    "\0132\014.NFMsg.Ident\022\037\n\tmember_id\030\002 \002(\0132\014.NFM"
-    "sg.Ident\022>\n\004type\030\003 \002(\01620.NFMsg.ReqAckOpr"
-    "GuildMember.EGGuildMemberOprType\"A\n\024EGGu"
-    "ildMemberOprType\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_"
-    "UP\020\001\022\r\n\tEGAT_KICK\020\002\"~\n\025ReqAckDonateGuild"
-    "Item\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\t"
-    "target_id\030\002 \002(\0132\014.NFMsg.Ident\022$\n\titem_li"
-    "st\030\003 \003(\0132\021.NFMsg.ItemStruct\"\325\002\n\010ChatInfo"
-    "\022,\n\tchat_type\030\001 \002(\0162\031.NFMsg.ChatInfo.ECh"
-    "atType\022\021\n\tchat_info\030\002 \002(\014\022\021\n\tchat_time\030\003"
-    " \002(\003\022\026\n\016addtional_info\030\004 \001(\014\022\035\n\007send_id\030"
-    "\005 \002(\0132\014.NFMsg.Ident\022\021\n\tsend_name\030\006 \002(\014\022\022"
-    "\n\nsend_level\030\007 \001(\005\022 \n\nrecvier_id\030\010 \003(\0132\014"
-    ".NFMsg.Ident\022\021\n\tguid_name\030\t \001(\014\"b\n\tEChat"
-    "Type\022\024\n\020ECHATTYPE_NORMAL\020\000\022\025\n\021ECHATTYPE_"
-    "PRIVATE\020\001\022\023\n\017ECHATTYPE_GUILD\020\002\022\023\n\017ECHATT"
-    "YPE_WORLD\020\003\"y\n\025ReqAckCreateChatGroup\022\014\n\004"
-    "name\030\001 \002(\014\022\034\n\006selfid\030\002 \002(\0132\014.NFMsg.Ident"
-    "\022\"\n\014xChatGroupid\030\003 \001(\0132\014.NFMsg.Ident\022\020\n\010"
-    "chatType\030\004 \001(\005\"y\n\023ReqAckjoinChatGroup\022\034\n"
-    "\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\"\n\014xChatGrou"
-    "pid\030\002 \001(\0132\014.NFMsg.Ident\022\016\n\006result\030\003 \001(\003\022"
-    "\020\n\010chatType\030\004 \001(\005\"g\n\023ReqAckQuitChatGroup"
-    "\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\"\n\014xChatG"
-    "roupid\030\002 \001(\0132\014.NFMsg.Ident\022\016\n\006result\030\003 \001"
-    "(\003\"\\\n\030ReqSubscriptionChatGroup\022\034\n\006selfid"
-    "\030\001 \002(\0132\014.NFMsg.Ident\022\"\n\014xChatGroupid\030\002 \003"
-    "(\0132\014.NFMsg.Ident\"b\n\036ReqCancelSubscriptio"
-    "nChatGroup\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident"
-    "\022\"\n\014xChatGroupid\030\002 \003(\0132\014.NFMsg.Ident", 4076);
+    "\030\002 \002(\t\"\332\001\n\024ReqAckOprGuildMember\022\036\n\010guild"
+    "_id\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\tmember_id\030\002 \002"
+    "(\0132\014.NFMsg.Ident\022>\n\004type\030\003 \002(\01620.NFMsg.R"
+    "eqAckOprGuildMember.EGGuildMemberOprType"
+    "\"A\n\024EGGuildMemberOprType\022\r\n\tEGAT_DOWN\020\000\022"
+    "\013\n\007EGAT_UP\020\001\022\r\n\tEGAT_KICK\020\002\"~\n\025ReqAckDon"
+    "ateGuildItem\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.I"
+    "dent\022\037\n\ttarget_id\030\002 \002(\0132\014.NFMsg.Ident\022$\n"
+    "\titem_list\030\003 \003(\0132\021.NFMsg.ItemStruct\"\325\002\n\010"
+    "ChatInfo\022,\n\tchat_type\030\001 \002(\0162\031.NFMsg.Chat"
+    "Info.EChatType\022\021\n\tchat_info\030\002 \002(\014\022\021\n\tcha"
+    "t_time\030\003 \002(\003\022\026\n\016addtional_info\030\004 \001(\014\022\035\n\007"
+    "send_id\030\005 \002(\0132\014.NFMsg.Ident\022\021\n\tsend_name"
+    "\030\006 \002(\014\022\022\n\nsend_level\030\007 \001(\005\022 \n\nrecvier_id"
+    "\030\010 \003(\0132\014.NFMsg.Ident\022\021\n\tguid_name\030\t \001(\014\""
+    "b\n\tEChatType\022\024\n\020ECHATTYPE_NORMAL\020\000\022\025\n\021EC"
+    "HATTYPE_PRIVATE\020\001\022\023\n\017ECHATTYPE_GUILD\020\002\022\023"
+    "\n\017ECHATTYPE_WORLD\020\003\"y\n\025ReqAckCreateChatG"
+    "roup\022\014\n\004name\030\001 \002(\014\022\034\n\006selfid\030\002 \002(\0132\014.NFM"
+    "sg.Ident\022\"\n\014xChatGroupid\030\003 \001(\0132\014.NFMsg.I"
+    "dent\022\020\n\010chatType\030\004 \001(\005\"y\n\023ReqAckjoinChat"
+    "Group\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\"\n\014x"
+    "ChatGroupid\030\002 \001(\0132\014.NFMsg.Ident\022\016\n\006resul"
+    "t\030\003 \001(\003\022\020\n\010chatType\030\004 \001(\005\"g\n\023ReqAckQuitC"
+    "hatGroup\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\""
+    "\n\014xChatGroupid\030\002 \001(\0132\014.NFMsg.Ident\022\016\n\006re"
+    "sult\030\003 \001(\003\"\\\n\030ReqSubscriptionChatGroup\022\034"
+    "\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\"\n\014xChatGro"
+    "upid\030\002 \003(\0132\014.NFMsg.Ident\"b\n\036ReqCancelSub"
+    "scriptionChatGroup\022\034\n\006selfid\030\001 \002(\0132\014.NFM"
+    "sg.Ident\022\"\n\014xChatGroupid\030\002 \003(\0132\014.NFMsg.I"
+    "dent", 4204);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -992,6 +1040,8 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqAcceptTask::default_instance_ = new ReqAcceptTask();
   ReqCompeleteTask::default_instance_ = new ReqCompeleteTask();
   ReqAckJoinActivity::default_instance_ = new ReqAckJoinActivity();
+  ReqAckSearchOppnent::default_instance_ = new ReqAckSearchOppnent();
+  ReqAckBattleOppnent::default_instance_ = new ReqAckBattleOppnent();
   ReqAckCreateGuild::default_instance_ = new ReqAckCreateGuild();
   ReqSearchGuild::default_instance_ = new ReqSearchGuild();
   AckSearchGuild::default_instance_ = new AckSearchGuild();
@@ -1025,6 +1075,8 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqAcceptTask::default_instance_->InitAsDefaultInstance();
   ReqCompeleteTask::default_instance_->InitAsDefaultInstance();
   ReqAckJoinActivity::default_instance_->InitAsDefaultInstance();
+  ReqAckSearchOppnent::default_instance_->InitAsDefaultInstance();
+  ReqAckBattleOppnent::default_instance_->InitAsDefaultInstance();
   ReqAckCreateGuild::default_instance_->InitAsDefaultInstance();
   ReqSearchGuild::default_instance_->InitAsDefaultInstance();
   AckSearchGuild::default_instance_->InitAsDefaultInstance();
@@ -6829,6 +6881,436 @@ void ReqAckJoinActivity::Swap(ReqAckJoinActivity* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = ReqAckJoinActivity_descriptor_;
   metadata.reflection = ReqAckJoinActivity_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ReqAckSearchOppnent::kSearchTypeFieldNumber;
+#endif  // !_MSC_VER
+
+ReqAckSearchOppnent::ReqAckSearchOppnent()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void ReqAckSearchOppnent::InitAsDefaultInstance() {
+}
+
+ReqAckSearchOppnent::ReqAckSearchOppnent(const ReqAckSearchOppnent& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ReqAckSearchOppnent::SharedCtor() {
+  _cached_size_ = 0;
+  search_type_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ReqAckSearchOppnent::~ReqAckSearchOppnent() {
+  SharedDtor();
+}
+
+void ReqAckSearchOppnent::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void ReqAckSearchOppnent::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ReqAckSearchOppnent::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ReqAckSearchOppnent_descriptor_;
+}
+
+const ReqAckSearchOppnent& ReqAckSearchOppnent::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
+  return *default_instance_;
+}
+
+ReqAckSearchOppnent* ReqAckSearchOppnent::default_instance_ = NULL;
+
+ReqAckSearchOppnent* ReqAckSearchOppnent::New() const {
+  return new ReqAckSearchOppnent;
+}
+
+void ReqAckSearchOppnent::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    search_type_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ReqAckSearchOppnent::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .NFMsg.EBattleType search_type = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::NFMsg::EBattleType_IsValid(value)) {
+            set_search_type(static_cast< ::NFMsg::EBattleType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void ReqAckSearchOppnent::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .NFMsg.EBattleType search_type = 1;
+  if (has_search_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->search_type(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* ReqAckSearchOppnent::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required .NFMsg.EBattleType search_type = 1;
+  if (has_search_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->search_type(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int ReqAckSearchOppnent::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .NFMsg.EBattleType search_type = 1;
+    if (has_search_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->search_type());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ReqAckSearchOppnent::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ReqAckSearchOppnent* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ReqAckSearchOppnent*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ReqAckSearchOppnent::MergeFrom(const ReqAckSearchOppnent& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_search_type()) {
+      set_search_type(from.search_type());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ReqAckSearchOppnent::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqAckSearchOppnent::CopyFrom(const ReqAckSearchOppnent& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqAckSearchOppnent::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void ReqAckSearchOppnent::Swap(ReqAckSearchOppnent* other) {
+  if (other != this) {
+    std::swap(search_type_, other->search_type_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ReqAckSearchOppnent::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ReqAckSearchOppnent_descriptor_;
+  metadata.reflection = ReqAckSearchOppnent_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ReqAckBattleOppnent::kBattleTypeFieldNumber;
+#endif  // !_MSC_VER
+
+ReqAckBattleOppnent::ReqAckBattleOppnent()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void ReqAckBattleOppnent::InitAsDefaultInstance() {
+}
+
+ReqAckBattleOppnent::ReqAckBattleOppnent(const ReqAckBattleOppnent& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ReqAckBattleOppnent::SharedCtor() {
+  _cached_size_ = 0;
+  battle_type_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ReqAckBattleOppnent::~ReqAckBattleOppnent() {
+  SharedDtor();
+}
+
+void ReqAckBattleOppnent::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void ReqAckBattleOppnent::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ReqAckBattleOppnent::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ReqAckBattleOppnent_descriptor_;
+}
+
+const ReqAckBattleOppnent& ReqAckBattleOppnent::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
+  return *default_instance_;
+}
+
+ReqAckBattleOppnent* ReqAckBattleOppnent::default_instance_ = NULL;
+
+ReqAckBattleOppnent* ReqAckBattleOppnent::New() const {
+  return new ReqAckBattleOppnent;
+}
+
+void ReqAckBattleOppnent::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    battle_type_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ReqAckBattleOppnent::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .NFMsg.EBattleType battle_type = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::NFMsg::EBattleType_IsValid(value)) {
+            set_battle_type(static_cast< ::NFMsg::EBattleType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void ReqAckBattleOppnent::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .NFMsg.EBattleType battle_type = 1;
+  if (has_battle_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->battle_type(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* ReqAckBattleOppnent::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required .NFMsg.EBattleType battle_type = 1;
+  if (has_battle_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->battle_type(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int ReqAckBattleOppnent::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .NFMsg.EBattleType battle_type = 1;
+    if (has_battle_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->battle_type());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ReqAckBattleOppnent::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ReqAckBattleOppnent* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ReqAckBattleOppnent*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ReqAckBattleOppnent::MergeFrom(const ReqAckBattleOppnent& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_battle_type()) {
+      set_battle_type(from.battle_type());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ReqAckBattleOppnent::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqAckBattleOppnent::CopyFrom(const ReqAckBattleOppnent& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqAckBattleOppnent::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void ReqAckBattleOppnent::Swap(ReqAckBattleOppnent* other) {
+  if (other != this) {
+    std::swap(battle_type_, other->battle_type_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ReqAckBattleOppnent::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ReqAckBattleOppnent_descriptor_;
+  metadata.reflection = ReqAckBattleOppnent_reflection_;
   return metadata;
 }
 
