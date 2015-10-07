@@ -411,15 +411,28 @@ bool NFCPluginManager::ExecuteEvent()
 
 void NFCPluginManager::AddComponent( const std::string& strComponentName, NFIComponent* pComponent )
 {
-
+	if (!FindComponent(strComponentName))
+	{
+		mComponentInstanceMap.insert(ComponentInstanceMap::value_type(strComponentName, pComponent));
+	}
+	
 }
 
 void NFCPluginManager::RemoveComponent( const std::string& strComponentName )
 {
-
+	ComponentInstanceMap::iterator it = mComponentInstanceMap.find(strComponentName);
+	if (it != mComponentInstanceMap.end())
+	{
+		mComponentInstanceMap.erase(it);
+	}
 }
 
 NFIComponent* NFCPluginManager::FindComponent( const std::string& strComponentName )
 {
+	ComponentInstanceMap::iterator it = mComponentInstanceMap.find(strComponentName);
+	if (it != mComponentInstanceMap.end())
+	{
+		return it->second;
+	}
 	return NULL;
 }

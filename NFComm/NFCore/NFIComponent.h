@@ -32,29 +32,22 @@ public:
 	template <typename T>
 	NF_SHARE_PTR<T> CreateNewInstance()
 	{
-		NFIComponent* pComponent = CreateNewInstance();
-		if (pComponent)
+		NF_SHARE_PTR<NFIComponent> pComponent = CreateNewInstance();
+		if (nullptr != pComponent)
 		{
 			if (TIsDerived<T, NFIComponent>::Result)
 			{
-				T* pT = dynamic_cast<T*>(pComponent);
-				if (pT)
+				NF_SHARE_PTR<T> pT = std::dynamic_pointer_cast<T>(pComponent);
+				if (nullptr != pT)
 				{
-					return NF_SHARE_PTR<pT>();
+					return pT;
 				}				
 			}
-
-			delete pComponent;
-			pComponent = NULL;
 		}
 
 		return NF_SHARE_PTR<T>();
 	}
 
-	virtual NFIComponent* CreateNewInstance()
-	{
-		return NULL;
-	}
 
     virtual bool SetEnable(const bool bEnable)
     {
@@ -71,10 +64,14 @@ public:
         return NFIDENTID();
     }
 
+
     virtual const std::string GetComponentName() const = 0;
 
 	//for actor
 	virtual int OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg){return 0;}
+
+protected:
+	virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance() = 0;
 
 private:
 	bool mbEnable;
