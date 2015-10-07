@@ -186,6 +186,10 @@ enum EGameMsgID {
   EGMI_REQ_JOIN_PVP = 260,
   EGMI_REQ_EXIT_PVP = 261,
   EGMT_ACK_START_PVP = 262,
+  EGMI_REQ_SEARCH_OPPNENT = 280,
+  EGMI_ACK_SEARCH_OPPNENT = 281,
+  EGMT_REQ_START_OPPNENT = 282,
+  EGMT_ACK_START_OPPNENT = 283,
   EGMI_ACK_ONLINE_NOTIFY = 290,
   EGMI_ACK_OFFLINE_NOTIFY = 291,
   EGMI_REQ_CREATE_GUILD = 300,
@@ -206,6 +210,12 @@ enum EGameMsgID {
   EGEC_ACK_LEAVE_CHATGROUP = 405,
   EGEC_REQ_SUBSCRIPTION_CHATGROUP = 406,
   EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP = 407,
+  EGEC_REQ_INVITE_CHATGROUP = 408,
+  EGEC_ACK_INVITE_CHATGROUP = 409,
+  EGEC_REQ_KICK_CHATGROUP = 410,
+  EGEC_ACK_KICK_CHATGROUP = 411,
+  EGEC_REQ_CHATGROUP_TO_TEAM = 450,
+  EGEC_ACK_CHATGROUP_TO_TEAM = 451,
   EGMI_REQ_CMD_PROPERTY_INT = 1000,
   EGMI_REQ_CMD_PROPERTY_STR = 1001,
   EGMI_REQ_CMD_PROPERTY_OBJECT = 1002,
@@ -324,6 +334,25 @@ inline bool ETaskType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ETaskType>(
     ETaskType_descriptor(), name, value);
 }
+enum EBattleType {
+  BATTLE_SINGLE = 0,
+  BATTLE_PVE_TEAM = 1
+};
+bool EBattleType_IsValid(int value);
+const EBattleType EBattleType_MIN = BATTLE_SINGLE;
+const EBattleType EBattleType_MAX = BATTLE_PVE_TEAM;
+const int EBattleType_ARRAYSIZE = EBattleType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* EBattleType_descriptor();
+inline const ::std::string& EBattleType_Name(EBattleType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EBattleType_descriptor(), value);
+}
+inline bool EBattleType_Parse(
+    const ::std::string& name, EBattleType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EBattleType>(
+    EBattleType_descriptor(), name, value);
+}
 // ===================================================================
 
 
@@ -364,6 +393,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ETaskState>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ETaskType>() {
   return ::NFMsg::ETaskType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EBattleType>() {
+  return ::NFMsg::EBattleType_descriptor();
 }
 
 }  // namespace google
