@@ -374,6 +374,27 @@ public:
 
         return false;
     }
+
+	virtual bool Add(const std::string& str, const NFINT64 value) = 0;
+	virtual bool Add(const std::string& str, const float value) = 0;
+	virtual bool Add(const std::string& str, const double value) = 0;
+	virtual bool Add(const std::string& str, const char* value) = 0;
+	virtual bool Add(const std::string& str, const std::string& value) = 0;
+	virtual bool Add(const std::string& str, const NFIDENTID& value) = 0;
+
+	virtual bool Set(const std::string& str, const NFINT64 value) = 0;
+	virtual bool Set(const std::string& str, const float value) = 0;
+	virtual bool Set(const std::string& str, const double value) = 0;
+	virtual bool Set(const std::string& str, const char* value) = 0;
+	virtual bool Set(const std::string& str, const std::string& value) = 0;
+	virtual bool Set(const std::string& str, const NFIDENTID& value) = 0;
+
+	// 获得数据
+	virtual NFINT64 Int(const std::string& str) const = 0;
+	virtual float Float(const std::string& str) const = 0;
+	virtual double Double(const std::string& str) const = 0;
+	virtual const std::string& String(const std::string& str) const = 0;
+	virtual NFIDENTID Object(const std::string& str) const = 0;
 /*
 	NFIDataList& NFIDataList::operator = (const NFIDataList& src)
 	{
@@ -461,6 +482,7 @@ public:
 protected:
 	int mnUseSize;
     std::vector< NF_SHARE_PTR<TData> > mvList;
+	std::map<std::string, NF_SHARE_PTR<TData> > mxMap;
 };
 
 inline NFIDataList::~NFIDataList() {}
