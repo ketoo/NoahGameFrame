@@ -1,5 +1,6 @@
 #include "Tutorial5Plugin.h"
 #include "HelloWorld5Module.h"
+#include "NFCTestComponent.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -33,11 +34,14 @@ const std::string Tutorial5Plugin::GetPluginName()
 void Tutorial5Plugin::Install()
 {
 
-    REGISTER_MODULE(pPluginManager, HelloWorld5Module)
+	REGISTER_MODULE(pPluginManager, HelloWorld5Module)
 
+	REGISTER_COMPONENT(pPluginManager, NFCTestComponent)
 }
 
 void Tutorial5Plugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, HelloWorld5Module)
+	UNREGISTER_COMPONENT(pPluginManager, NFCTestComponent)
+
+	UNREGISTER_MODULE(pPluginManager, HelloWorld5Module)
 }
