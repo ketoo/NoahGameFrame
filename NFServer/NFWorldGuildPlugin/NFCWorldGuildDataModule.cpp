@@ -35,15 +35,15 @@ bool NFCWorldGuildDataModule::AfterInit()
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
     m_pUUIDModule = dynamic_cast<NFIUUIDModule*>(pPluginManager->FindModule("NFCUUIDModule"));
     m_pClusterSQLModule = dynamic_cast<NFIClusterModule*>(pPluginManager->FindModule("NFCMysqlClusterModule"));
-    m_pObjectSaveModule = dynamic_cast<NFIObjectSaveModule*>(pPluginManager->FindModule("NFCObjectSaveModule"));
+    m_pDataProcessModule = dynamic_cast<NFIDataProcessModule*>(pPluginManager->FindModule("NFCDataProcessModule"));
 
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pUUIDModule);
     assert(NULL != m_pClusterSQLModule);
-    assert(NULL != m_pObjectSaveModule);
+    assert(NULL != m_pDataProcessModule);
 
-    m_pObjectSaveModule->RegisterAutoSave("Guild");
+    m_pDataProcessModule->RegisterAutoSave("Guild");
     m_pKernelModule->AddClassCallBack("Guild", this, &NFCWorldGuildDataModule::OnGuildClassEvent);
 
     m_pKernelModule->CreateContainer(mContainerID, "");
@@ -67,7 +67,7 @@ void NFCWorldGuildDataModule::CheckLoadGuild( const NFIDENTID& self, const NFIDE
     NF_SHARE_PTR<NFIObject> pObejct = m_pKernelModule->GetObject(xGuild);
     if (!pObejct.get())
     {
-        if (m_pObjectSaveModule->LoadDataFormNoSql(xGuild, "Guild"))
+        if (m_pDataProcessModule->LoadDataFormNoSql(xGuild, "Guild"))
         {
             m_pKernelModule->CreateObject(xGuild, 1, 0, "Guild", "", NFCDataList());
         }
@@ -335,7 +335,7 @@ bool NFCWorldGuildDataModule::GetPlayerGameID( const NFIDENTID& self, int& nGame
 
 int NFCWorldGuildDataModule::OnSaveGuildheartEvent( const NFIDENTID& self , const std::string& strHeartName, const float fTime, const int nCount )
 {
-    m_pObjectSaveModule->SaveDataToNoSql(self);
+    m_pDataProcessModule->SaveDataToNoSql(self);
 
     return 0;
 }
