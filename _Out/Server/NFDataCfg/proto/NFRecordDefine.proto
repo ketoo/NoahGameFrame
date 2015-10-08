@@ -195,3 +195,9 @@ enum PVPList_RecordColType
 	PVPList_Level		=2; // Level
 }
 
+enum ChatGroup_RecordColType
+{
+	ChatGroup_ChatType		=0; // ChatType
+	ChatGroup_GroupGUID		=1; // GroupGUID
+}
+
