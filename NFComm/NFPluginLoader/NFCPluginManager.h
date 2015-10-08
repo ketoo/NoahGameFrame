@@ -98,6 +98,7 @@ private:
 	typedef std::map<std::string, NFCDynLib*> PluginLibMap;
 	typedef std::map<std::string, NFIPlugin*> PluginInstanceMap;
 	typedef std::map<std::string, NFILogicModule*> ModuleInstanceMap;
+	typedef std::map<std::string, NFIComponent*> ComponentInstanceMap;
 
 	typedef void(* DLL_START_PLUGIN_FUNC)(NFIPluginManager* pm);
 	typedef void(* DLL_STOP_PLUGIN_FUNC)(NFIPluginManager* pm);
@@ -106,7 +107,8 @@ private:
     PluginNameMap mPluginNameMap;
     PluginLibMap mPluginLibMap;
     PluginInstanceMap mPluginInstanceMap;
-    ModuleInstanceMap mModuleInstanceMap;
+	ModuleInstanceMap mModuleInstanceMap;
+	ComponentInstanceMap mComponentInstanceMap;
 };
 
 #endif
