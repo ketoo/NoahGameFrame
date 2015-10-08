@@ -62,7 +62,6 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFIClusterModule* m_pClusterSQLModule;
-	NFIGameLogicModule* m_pGameLogicModule;
 	NFIUUIDModule* m_pUUIDModule;
 	NFILogicClassModule* m_pLogicClassModule;
 	NFILogModule* m_pLogModule;
