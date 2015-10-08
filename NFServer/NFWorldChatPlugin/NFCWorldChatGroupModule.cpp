@@ -34,12 +34,15 @@ bool NFCWorldChatGroupModule::AfterInit()
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
     m_pUUIDModule = dynamic_cast<NFIUUIDModule*>(pPluginManager->FindModule("NFCUUIDModule"));
     m_pClusterSQLModule = dynamic_cast<NFIClusterModule*>(pPluginManager->FindModule("NFCMysqlClusterModule"));
-    m_pObjectSaveModule = dynamic_cast<NFIObjectSaveModule*>(pPluginManager->FindModule("NFCObjectSaveModule"));
+    m_pDataProcessModule = dynamic_cast<NFIDataProcessModule*>(pPluginManager->FindModule("NFCDataProcessModule"));
 
     assert(NULL != m_pEventProcessModule);
-    assert(NULL != m_pKernelModule);
+	assert(NULL != m_pKernelModule);
+	assert(NULL != m_pUUIDModule);
+	assert(NULL != m_pClusterSQLModule);
+	assert(NULL != m_pDataProcessModule);
 
-    m_pObjectSaveModule->RegisterAutoSave(mstrGroupTalble);
+    m_pDataProcessModule->RegisterAutoSave(mstrGroupTalble);
     m_pKernelModule->AddClassCallBack(mstrGroupTalble, this, &NFCWorldChatGroupModule::OnGuildClassEvent);
 
     m_pKernelModule->CreateContainer(mContainerID, "");
@@ -145,7 +148,7 @@ NF_SHARE_PTR<NFIObject> NFCWorldChatGroupModule::GetGroup( const NFIDENTID& self
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
     if (pObject == NULL )
     {
-        if (m_pObjectSaveModule->LoadDataFormNoSql(self, mstrGroupTalble))
+        if (m_pDataProcessModule->LoadDataFormNoSql(self, mstrGroupTalble))
         {
             m_pKernelModule->CreateObject(self, mContainerID, 0, mstrGroupTalble, "", NFCDataList());
         }
@@ -208,7 +211,7 @@ int NFCWorldChatGroupModule::OnGuildClassEvent( const NFIDENTID& self, const std
 
 int NFCWorldChatGroupModule::OnSaveGroupheartEvent( const NFIDENTID& self , const std::string& strHeartName, const float fTime, const int nCount )
 {
-    m_pObjectSaveModule->SaveDataToNoSql(self);
+    m_pDataProcessModule->SaveDataToNoSql(self);
 
     return 0;
 }
