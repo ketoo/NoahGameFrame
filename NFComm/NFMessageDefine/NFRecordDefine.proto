@@ -42,9 +42,10 @@ enum GuildMemberList_RecordColType
 	GuildMemberList_Donation		=4; // Donation
 	GuildMemberList_Receive		=5; // Receive
 	GuildMemberList_VIP		=6; // VIP
-	GuildMemberList_Offline		=7; // Offline
+	GuildMemberList_Online		=7; // Online
 	GuildMemberList_Power		=8; // Power
 	GuildMemberList_Title		=9; // Title
+	GuildMemberList_GameID		=10; // GameID
 }
 
 enum GuildEvent_RecordColType
@@ -192,5 +193,11 @@ enum PVPList_RecordColType
 	PVPList_ID		=0; // ID
 	PVPList_Name		=1; // Name
 	PVPList_Level		=2; // Level
+}
+
+enum ChatGroup_RecordColType
+{
+	ChatGroup_ChatType		=0; // ChatType
+	ChatGroup_GroupGUID		=1; // GroupGUID
 }
 
