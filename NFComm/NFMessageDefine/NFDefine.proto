@@ -54,6 +54,8 @@ enum EGameEventCode
 	EGEC_CREATE_GUILD_SUCCESS					= 200;		 // 创建公会成功
 	EGEC_JOIN_GUILD_SUCCESS						= 201;		 // 加入公会成功
 	EGEC_LEAVE_GUILD_SUCCESS					= 202;		 // 离开公会成功
+	
+
 }
 
 enum EGameMsgID
@@ -161,9 +163,15 @@ enum EGameMsgID
 	EGMI_REQ_ACCEPT_TASK						= 256;
 	EGMI_REQ_COMPELETE_TASK						= 257;
 	
-	EGMI_REQ_JOIN_PVP                           = 260; // 申请加入PVP队列
-	EGMI_REQ_EXIT_PVP                           = 261; // 申请/通知某角色离开PVP队列
+	EGMI_REQ_JOIN_PVP                           = 260; // 申请加入PVP
+	EGMI_REQ_EXIT_PVP                           = 261; // 申请离开PVP
 	EGMT_ACK_START_PVP                          = 262; // 通知开始PVP
+	
+	EGMI_REQ_SEARCH_OPPNENT                     = 280; // 查找对手(EBattleType)
+	EGMI_ACK_SEARCH_OPPNENT                     = 281; // 返回查找对手的信息(EBattleType)
+	EGMT_REQ_START_OPPNENT                      = 282; // 开始战斗(EBattleType)
+	EGMT_ACK_START_OPPNENT                      = 283; // 开始战斗(EBattleType)
+	
 	
 	EGMI_ACK_ONLINE_NOTIFY						= 290; // 玩家上线通知
 	EGMI_ACK_OFFLINE_NOTIFY						= 291; // 玩家下线通知
@@ -179,9 +187,25 @@ enum EGameMsgID
 	EGMI_REQ_SEARCH_GUILD                       = 308; // 申请搜索公会
 	EGMI_ACK_SEARCH_GUILD                       = 309; // 返回搜索公会	
 	
+	EGEC_REQ_CREATE_CHATGROUP					= 400;		 // 创建聊天ReqAckCreateChatGroup
+	EGEC_ACK_CREATE_CHATGROUP					= 401;		 // 创建聊天ReqAckCreateChatGroup
+	EGEC_REQ_JOIN_CHATGROUP						= 402;		 // 加入聊天ReqAckjoinChatGroup
+	EGEC_ACK_JOIN_CHATGROUP						= 403;		 // 加入聊天ReqAckjoinChatGroup
+	EGEC_REQ_LEAVE_CHATGROUP					= 404;		 // 离开聊天ReqAckQuitChatGroup
+	EGEC_ACK_LEAVE_CHATGROUP					= 405;		 // 离开聊天ReqAckQuitChatGroup
+	EGEC_REQ_SUBSCRIPTION_CHATGROUP				= 406;		 // 订阅聊天室ReqSubscriptionChatGroup
+	EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP		= 407;		 // 取消订阅聊天室ReqSubscriptionChatGroup
+	EGEC_REQ_INVITE_CHATGROUP					= 408;		 // 邀请进入聊天室
+	EGEC_ACK_INVITE_CHATGROUP					= 409;		 // 邀请进入聊天室
+	EGEC_REQ_KICK_CHATGROUP						= 410;		 // 踢出聊天室
+	EGEC_ACK_KICK_CHATGROUP						= 411;		 // 踢出聊天室
+	
+	EGEC_REQ_CHATGROUP_TO_TEAM					= 450;		 // 聊天室快速组队
+	EGEC_ACK_CHATGROUP_TO_TEAM					= 451;		 // 聊天室快速组队
 	
 	
-	/////////////////////GM MSG/////////////////////////////////////
+	
+	/////////////////////GM MSG/////////////////////////////////////订阅
 	EGMI_REQ_CMD_PROPERTY_INT					= 1000;			// GM命令修改整形
 	EGMI_REQ_CMD_PROPERTY_STR					= 1001;			// GM命令修改修改字符串
 	EGMI_REQ_CMD_PROPERTY_OBJECT				= 1002;			// GM命令
@@ -240,3 +264,19 @@ enum ETaskType
     TASK_KILL_SOME_MONSTER_COUNT        = 9; // 杀死某个特定怪度多少只
     // TODO
 }
+
+// 战斗类型
+enum EBattleType
+{
+	BATTLE_SINGLE        = 0; // 主角单人打副本
+	BATTLE_PVE_TEAM      = 1; // 多人打副本
+}
+
+
+
+
+
+
+
+
+

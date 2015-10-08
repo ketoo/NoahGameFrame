@@ -449,6 +449,25 @@ inline bool PVPList_RecordColType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<PVPList_RecordColType>(
     PVPList_RecordColType_descriptor(), name, value);
 }
+enum ChatGroup_RecordColType {
+  ChatGroup_ChatType = 0,
+  ChatGroup_GroupGUID = 1
+};
+bool ChatGroup_RecordColType_IsValid(int value);
+const ChatGroup_RecordColType ChatGroup_RecordColType_MIN = ChatGroup_ChatType;
+const ChatGroup_RecordColType ChatGroup_RecordColType_MAX = ChatGroup_GroupGUID;
+const int ChatGroup_RecordColType_ARRAYSIZE = ChatGroup_RecordColType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ChatGroup_RecordColType_descriptor();
+inline const ::std::string& ChatGroup_RecordColType_Name(ChatGroup_RecordColType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ChatGroup_RecordColType_descriptor(), value);
+}
+inline bool ChatGroup_RecordColType_Parse(
+    const ::std::string& name, ChatGroup_RecordColType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ChatGroup_RecordColType>(
+    ChatGroup_RecordColType_descriptor(), name, value);
+}
 // ===================================================================
 
 
@@ -533,6 +552,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::TaskList_RecordColType>
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::PVPList_RecordColType>() {
   return ::NFMsg::PVPList_RecordColType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ChatGroup_RecordColType>() {
+  return ::NFMsg::ChatGroup_RecordColType_descriptor();
 }
 
 }  // namespace google
