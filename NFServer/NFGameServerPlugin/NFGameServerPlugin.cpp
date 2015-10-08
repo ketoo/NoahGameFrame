@@ -14,7 +14,6 @@
 #include "NFCPropertyModule.h"
 #include "NFCLevelModule.h"
 #include "NFCPropertyConfigModule.h"
-#include "NFCDataProcessModule.h"
 #include "NFCPVPModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
