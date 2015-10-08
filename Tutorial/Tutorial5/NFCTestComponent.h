@@ -29,6 +29,7 @@ public:
     virtual bool Init();
     virtual bool AfterInit();
 
+	virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance();
 
 	virtual const std::string GetComponentName() const;
 
