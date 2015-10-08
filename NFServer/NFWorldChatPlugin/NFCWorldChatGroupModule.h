@@ -15,7 +15,7 @@
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
-#include "NFComm/NFPluginModule/NFIObjectSaveModule.h"
+#include "NFComm/NFPluginModule/NFIDataProcessModule.h"
 
 class NFCWorldChatGroupModule
     : public NFIWorldChatGroupModule
@@ -54,7 +54,7 @@ protected:
     NFIKernelModule* m_pKernelModule;
     NFIUUIDModule* m_pUUIDModule;
     NFIClusterModule* m_pClusterSQLModule;    
-    NFIObjectSaveModule* m_pObjectSaveModule;
+    NFIDataProcessModule* m_pDataProcessModule;
 
 private:
     std::string mstrGroupTalble;
