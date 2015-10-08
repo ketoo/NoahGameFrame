@@ -37,6 +37,7 @@ const ::google::protobuf::EnumDescriptor* SkillTable_RecordColType_descriptor_ =
 const ::google::protobuf::EnumDescriptor* TaskMonsterList_RecordColType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* TaskList_RecordColType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* PVPList_RecordColType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* ChatGroup_RecordColType_descriptor_ = NULL;
 
 }  // namespace
 
@@ -64,6 +65,7 @@ void protobuf_AssignDesc_NFRecordDefine_2eproto() {
   TaskMonsterList_RecordColType_descriptor_ = file->enum_type(14);
   TaskList_RecordColType_descriptor_ = file->enum_type(15);
   PVPList_RecordColType_descriptor_ = file->enum_type(16);
+  ChatGroup_RecordColType_descriptor_ = file->enum_type(17);
 }
 
 namespace {
@@ -188,7 +190,9 @@ void protobuf_AddDesc_NFRecordDefine_2eproto() {
     "\000\022\027\n\023TaskList_TaskStatus\020\001\022\024\n\020TaskList_P"
     "rocess\020\002*L\n\025PVPList_RecordColType\022\016\n\nPVP"
     "List_ID\020\000\022\020\n\014PVPList_Name\020\001\022\021\n\rPVPList_L"
-    "evel\020\002", 3926);
+    "evel\020\002*J\n\027ChatGroup_RecordColType\022\026\n\022Cha"
+    "tGroup_ChatType\020\000\022\027\n\023ChatGroup_GroupGUID"
+    "\020\001", 4002);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFRecordDefine.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFRecordDefine_2eproto);
@@ -525,6 +529,20 @@ bool PVPList_RecordColType_IsValid(int value) {
     case 0:
     case 1:
     case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* ChatGroup_RecordColType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ChatGroup_RecordColType_descriptor_;
+}
+bool ChatGroup_RecordColType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
       return true;
     default:
       return false;
