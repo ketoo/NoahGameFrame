@@ -50,7 +50,7 @@
 	</JUMP>
 	<NORMALATTACK1>
 		<SuwayyahEvents>
-			<Suwayyah EventTime="0.5"  EventType="0" EndTime="0.6" DamageRang="0.0" BackHeroDis="0.5" BackNpcDis="0.5" BeAttackParticle="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+			<Suwayyah EventTime="0.3"  EventType="0" EndTime="0.4" DamageRang="0.0" BackHeroDis="0.5" BackNpcDis="0.5" BeAttackParticle="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
 		</SuwayyahEvents>
 		<BulletEvents>
 		</BulletEvents>
