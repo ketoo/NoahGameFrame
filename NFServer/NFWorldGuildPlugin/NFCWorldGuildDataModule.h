@@ -17,7 +17,7 @@
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFMessageDefine/NFMsgBase.pb.h"
-#include "NFComm/NFPluginModule/NFIObjectSaveModule.h"
+#include "NFComm/NFPluginModule/NFIDataProcessModule.h"
 
 class NFCWorldGuildDataModule
     : public NFIWorldGuildDataModule
@@ -61,7 +61,7 @@ protected:
     NFIKernelModule* m_pKernelModule;
     NFIUUIDModule* m_pUUIDModule;
     NFIClusterModule* m_pClusterSQLModule;    
-    NFIObjectSaveModule* m_pObjectSaveModule;
+    NFIDataProcessModule* m_pDataProcessModule;
     
 private:
     std::string mstrGuildTalble;
