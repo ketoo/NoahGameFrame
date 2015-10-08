@@ -95,7 +95,7 @@ public:
 
 	virtual void AddComponent(NF_SHARE_PTR<NFIComponent> pComponent) = 0;
 	virtual bool AddEndFunc(EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end) = 0;
-
+	virtual bool SendMsg(const Theron::Address address, const NFIActorMessage& message) = 0;
 
 public:
 	virtual NFIDENTID Self() = 0;

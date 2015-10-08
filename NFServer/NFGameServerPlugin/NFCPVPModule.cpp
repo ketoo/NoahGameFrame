@@ -48,6 +48,8 @@ bool NFCPVPModule::MatchPVPObject( const NFIDENTID& self )
 		return false;
 	}
 
+	//随机选择战斗对象，并把对象数据下发
+
 	return true;
 }
 

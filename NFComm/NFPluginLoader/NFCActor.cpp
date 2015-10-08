@@ -64,6 +64,11 @@ bool NFCActor::AddEndFunc( EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end )
 	return true;
 }
 
+bool NFCActor::SendMsg( const Theron::Address address, const NFIActorMessage& message )
+{
+	return Send(message, address);
+}
+
 bool NFCActor::SetPropertyInt( const NFIDENTID& self, const std::string& strPropertyName, const NFINT64 nValue )
 {
 	if (Self() == self)
@@ -512,10 +517,6 @@ NF_SHARE_PTR<NFIActor> NFCActor::GetActor( const NFIDENTID& self )
 	{
 		return NF_SHARE_PTR<NFIActor>(this);
 	}
-	else
-	{
-		return NF_SHARE_PTR<NFIActor>(this);
-	}
-
+	
 	return NF_SHARE_PTR<NFIActor>(nullptr);
 }
