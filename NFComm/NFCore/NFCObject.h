@@ -19,6 +19,12 @@
 class NFCObject
     : public NFIObject
 {
+private:
+	NFCObject() : NFIObject(NFIDENTID())
+	{
+
+	}
+
 public:
     NFCObject(NFIDENTID self, NFIPluginManager* pLuginManager);
     virtual ~NFCObject();
@@ -97,7 +103,6 @@ private:
     NF_SHARE_PTR<NFIPropertyManager> m_pPropertyManager;
     NF_SHARE_PTR<NFIComponentManager> m_pComponentManager;
 
-    NFIPluginManager* m_pPluginManager;
 };
 
 #endif
