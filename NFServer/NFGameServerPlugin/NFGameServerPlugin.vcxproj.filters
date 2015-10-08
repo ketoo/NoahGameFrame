@@ -10,9 +10,6 @@
     <Filter Include="NFPropertyModule">
       <UniqueIdentifier>{8e42431a-1328-4cf4-8d08-38101ed10817}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFDataProcessModule">
-      <UniqueIdentifier>{ab24bac9-1d0d-4fdc-b5de-72433c4b2753}</UniqueIdentifier>
-    </Filter>
     <Filter Include="NFPVPModule">
       <UniqueIdentifier>{abbc1079-9f03-4c6c-b599-04d4c879cc18}</UniqueIdentifier>
     </Filter>
@@ -30,9 +27,6 @@
     </ClInclude>
     <ClInclude Include="NFCPropertyConfigModule.h">
       <Filter>NFPropertyModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCDataProcessModule.h">
-      <Filter>NFDataProcessModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCGameServerModule.h" />
     <ClInclude Include="NFCPVPModule.h">
@@ -56,9 +50,6 @@
     </ClCompile>
     <ClCompile Include="NFCPropertyConfigModule.cpp">
       <Filter>NFPropertyModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCDataProcessModule.cpp">
-      <Filter>NFDataProcessModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCGameServerModule.cpp" />
     <ClCompile Include="NFCPVPModule.cpp">

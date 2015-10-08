@@ -21,11 +21,6 @@
 
 class NFIObject
 {
-private:
-	NFIObject()
-	{
-	}
-
 public:
 	NFIObject(NFIDENTID self)
 	{
@@ -64,24 +59,24 @@ public:
 	template <typename T>
 	bool AddComponent()
 	{
-// 		if (!TIsDerived<T, NFIComponent>::Result)
-// 		{
-// 			//BaseTypeComponent must inherit from NFIComponent;
-// 			return NF_SHARE_PTR<T>();
-// 		}
-// 
-// 		NF_SHARE_PTR<T> pComponent = NF_SHARE_PTR<T>(NF_NEW T());
-// 		std::string strComponentName = GET_CLASS_NAME(T)
-
 		return GetComponentManager()->AddComponent<T>();
 	}
 
 	template <typename T>
 	NF_SHARE_PTR<T> AddComponent(const std::string& strComponentName)
 	{
-		return GetComponentManager()->AddComponent<T>(strComponentName);
-	}
+		NFIComponent* pComponent = m_pPluginManager->FindComponent(strComponentName);
+		if (pComponent)
+		{
+			NF_SHARE_PTR<T> pNewCOmponent = pComponent->CreateNewInstance<T>();
+			if (nullptr != pNewCOmponent && GetComponentManager()->AddComponent(strComponentName, pNewCOmponent))
+			{
+				return pNewCOmponent;
+			}
+		}
 
+		return NF_SHARE_PTR<T>();
+	}
 
 	template <typename T>
 	NF_SHARE_PTR<T> FindComponent(const std::string& strComponentName)
@@ -150,6 +145,9 @@ protected:
 	virtual bool AddPropertyCallBack(const std::string& strPropertyName, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
 
 	virtual bool AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
+
+protected:
+	NFIPluginManager* m_pPluginManager;
 
 private:
 };
