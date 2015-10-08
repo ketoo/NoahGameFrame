@@ -165,6 +165,10 @@
       <Col Type="string" Tag="Name" />
       <Col Type="int" Tag="Level" />
     </Record>
+    <Record Id="ChatGroup" Row="12" Col="2" Public="0" Private="1" Save="0" View="0" Index="0" SaveInterval="0" RelationValue="Friend" Desc="聊天组">
+      <Col Type="int" Tag="ChatType" />
+      <Col Type="object" Tag="GroupGUID" />
+    </Record>
   </Records>
   <Components>
     <Component Name="Test" Language="lua" Enable="1" />
