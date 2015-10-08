@@ -206,6 +206,15 @@ int NFCGameServerNet_ServerModule::OnRecivePSPack( const NFIPacket& msg )
     case NFMsg::EGameMsgID::EGMI_REQ_SEARCH_GUILD:
 		OnTransWorld(msg);
 		break;
+
+    case NFMsg::EGameMsgID::EGEC_REQ_CREATE_CHATGROUP:
+    case NFMsg::EGameMsgID::EGEC_REQ_JOIN_CHATGROUP:
+    case NFMsg::EGameMsgID::EGEC_REQ_LEAVE_CHATGROUP:
+    case NFMsg::EGameMsgID::EGEC_REQ_SUBSCRIPTION_CHATGROUP:
+        {
+            OnTransWorld(msg);
+        }
+        break;
 		//////////////////////////////////////////////////////////////////////////
 	default:
 		break;
@@ -282,7 +291,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
 
 	//////////////////////////////////////////////////////////////////////////
 	//拉取数据
-	if(!m_pDataProcessModule->LoadDataFormNoSql(nRoleID))
+	if(!m_pDataProcessModule->LoadDataFormNoSql(nRoleID, "Player"))
 	{
 		return;
 	}
