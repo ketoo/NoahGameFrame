@@ -140,7 +140,6 @@ public:
     virtual NF_SHARE_PTR<NFIRecordManager> GetClassRecordManager(const std::string& strClassName);
     virtual NF_SHARE_PTR<NFIComponentManager> GetClassComponentManager(const std::string& strClassName);
 
-
     virtual bool AddClass(const std::string& strClassName, const std::string& strParentName);
 protected:
 
@@ -153,6 +152,13 @@ protected:
 
     //加载此节点的类
     virtual bool Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFILogicClass> pParentClass);
+
+public:
+    static bool ReadFileToString(const std::string& strFile, std::string& strOutData);
+    static bool IsEncoded(unsigned char c);
+    static std::string Encode(unsigned char const* bytes_to_encode, unsigned int in_len);
+    static std::string Decode(const std::string& encoded_string);
+    static std::string cepher;
 
 protected:
     NFIElementInfoModule* m_pElementInfoModule;
