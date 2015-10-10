@@ -310,7 +310,7 @@ bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
                 return false;
             }
 #elif NF_PLATFORM == NF_PLATFORM_WIN
-            std::cout << stderr << " Open DLL " << pLib->GetName() << " failed, ErrorNo = "<< GetLastError();
+            std::cout << stderr << " Open DLL " << pLib->GetName() << " failed, ErrorNo = "<< GetLastError() << std::endl;
 #endif // NF_PLATFORM
             std::cout << "Load [" << pLib->GetName() << "] Failed" << std::endl;
             assert(0);
