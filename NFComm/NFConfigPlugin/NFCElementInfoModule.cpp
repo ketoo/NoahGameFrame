@@ -61,10 +61,17 @@ bool NFCElementInfoModule::Load()
             continue;
         }
 
-        rapidxml::file<> fdoc(strInstancePath.c_str());
-        //std::cout << fdoc.data() << std::endl;
-        rapidxml::xml_document<>  doc;
-        doc.parse<0>(fdoc.data());
+        std::string strFileData;
+        NFCLogicClassModule::ReadFileToString(strInstancePath, strFileData);
+        std::string strDecode = NFCLogicClassModule::Decode(strFileData);
+
+        const int nDataSize = strDecode.length();
+        char* data = new char[nDataSize + 1];
+        strncpy(data, strDecode.data(), strDecode.length());
+        data[nDataSize] = 0;
+
+        rapidxml::xml_document<> doc;
+        doc.parse<0>(data);
 
         //support for unlimited layer class inherits
         rapidxml::xml_node<>* root = doc.first_node();
