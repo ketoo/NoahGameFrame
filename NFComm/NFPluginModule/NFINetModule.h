@@ -104,9 +104,10 @@ public:
 		if (m_pNet)
 		{
 			m_pNet->Final();
-			delete m_pNet;
-			m_pNet = NULL;
 		}
+
+        delete m_pNet;
+        m_pNet = NULL;
 	}
 
 	template<typename BaseType>
