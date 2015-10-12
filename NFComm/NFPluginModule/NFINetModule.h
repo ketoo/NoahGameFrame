@@ -353,7 +353,7 @@ public:
 			return false;
 		}
 
-		SendMsgToAllClient(nMsgID, strMsg);
+		return SendMsgToAllClient(nMsgID, strMsg);
 	}
 
 	bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const uint32_t nSockIndex, const NFIDENTID nPlayer, const std::vector<NFIDENTID>* pClientIDList = NULL)
@@ -445,7 +445,7 @@ public:
             return false;
         }
 
-		SendMsg(nMsgID, strMsg, nSockIndex);
+		return SendMsg(nMsgID, strMsg, nSockIndex);
     }
 
 	NFINet* GetNet()
