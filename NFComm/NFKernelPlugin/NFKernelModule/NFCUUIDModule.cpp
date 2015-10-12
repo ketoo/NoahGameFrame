@@ -106,11 +106,9 @@ bool NFCUUIDModule::Shut()
 
 bool NFCUUIDModule::BeforeShut()
 {
-    if (NULL != m_pUUID)
-    {
-        delete m_pUUID;
-        m_pUUID = NULL;
-    }
+    delete m_pUUID;
+    m_pUUID = NULL;
+
     return true;
 }
 
