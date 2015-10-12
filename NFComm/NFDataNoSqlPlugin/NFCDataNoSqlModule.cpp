@@ -22,27 +22,19 @@ NFCDataNoSqlModule::~NFCDataNoSqlModule()
 
 bool NFCDataNoSqlModule::Init()
 {
-
-
     return true;
 }
 
 bool NFCDataNoSqlModule::Shut()
 {
-    if (m_pPlayerDataDriver)
-    {
-        delete m_pPlayerDataDriver;
-        m_pPlayerDataDriver = NULL;
-    }
+    delete m_pPlayerDataDriver;
+    m_pPlayerDataDriver = NULL;
 
     return true;
 }
 
-
 bool NFCDataNoSqlModule::AfterInit()
 {
-
-
     return true;
 }
 
@@ -58,4 +50,3 @@ bool NFCDataNoSqlModule::ConnectSql( const std::string& strIP )
 
     return true;
 }
-
