@@ -32,11 +32,8 @@ public:
 
     virtual ~NFCPacket()
     {
-        if (pHead)
-        {
-            delete pHead;
-            pHead = NULL;
-        }
+        delete pHead;
+        pHead = NULL;
     }
 
 	void operator = (const NFIPacket& id)
