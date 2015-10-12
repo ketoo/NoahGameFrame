@@ -607,7 +607,7 @@ int NFCGameServerToWorldModule::OnAckCreateChatGroupProcess( const NFIPacket& ms
     NFMsg::ReqAckCreateChatGroup xData;
     if (!NFINetModule::RecivePB(msg, xData, nPlayerID))
     {
-        return 0;
+        return 1;
     }
 
     if (xData.has_xchatgroupid())
@@ -624,6 +624,8 @@ int NFCGameServerToWorldModule::OnAckCreateChatGroupProcess( const NFIPacket& ms
             JoinChatGroup(nPlayerID, xChatGroup, nType);
         }
     }
+
+    return 0;
 }
 
 int NFCGameServerToWorldModule::OnAckJoinChatGroupProcess( const NFIPacket& msg )
@@ -632,7 +634,7 @@ int NFCGameServerToWorldModule::OnAckJoinChatGroupProcess( const NFIPacket& msg 
     NFMsg::ReqAckjoinChatGroup xData;
     if (!NFINetModule::RecivePB(msg, xData, nPlayerID))
     {
-        return 0;
+        return 1;
     }
 
     if (xData.result() && xData.has_xchatgroupid())
@@ -657,6 +659,8 @@ int NFCGameServerToWorldModule::OnAckJoinChatGroupProcess( const NFIPacket& msg 
             }
         }
     }
+
+    return 0;
 }
 
 int NFCGameServerToWorldModule::OnAckQuitChatGroupProcess( const NFIPacket& msg )
@@ -665,7 +669,7 @@ int NFCGameServerToWorldModule::OnAckQuitChatGroupProcess( const NFIPacket& msg 
     NFMsg::ReqAckQuitChatGroup xData;
     if (!NFINetModule::RecivePB(msg, xData, nPlayerID))
     {
-        return 0;
+        return 1;
     }
 
     if (xData.result() && xData.has_xchatgroupid())
@@ -684,6 +688,8 @@ int NFCGameServerToWorldModule::OnAckQuitChatGroupProcess( const NFIPacket& msg 
             }
         }
     }
+
+    return 0;
 }
 
 void NFCGameServerToWorldModule::CreateChatGroup( const NFIDENTID& self, const int nChatType, const std::string& strName)
