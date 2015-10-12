@@ -153,11 +153,8 @@ public:
 
     virtual void CloseConnection()
     {
-        if (m_pMysqlConnect)
-        {
-            delete m_pMysqlConnect;
-            m_pMysqlConnect = NULL;
-        }
+        delete m_pMysqlConnect;
+        m_pMysqlConnect = NULL;
     }
 
     virtual bool Enable()
