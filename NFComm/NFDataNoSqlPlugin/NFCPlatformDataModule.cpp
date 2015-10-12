@@ -29,12 +29,8 @@ bool NFCPlatformDataModule::Init()
 
 bool NFCPlatformDataModule::Shut()
 {
-    if (m_pPlayerDataDriver)
-    {
-        delete m_pPlayerDataDriver;
-        m_pPlayerDataDriver = NULL;
-    }
-
+    delete m_pPlayerDataDriver;
+    m_pPlayerDataDriver = NULL;
     return true;
 }
 
