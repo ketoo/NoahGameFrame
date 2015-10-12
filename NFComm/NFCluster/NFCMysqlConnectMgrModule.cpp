@@ -32,21 +32,15 @@ bool NFCMysqlConnectMgrModule::Init()
 bool NFCMysqlConnectMgrModule::Shut()
 {
 	for (NFIMysqlDriver* pMysqlDriver = mvMysql.First(); pMysqlDriver != NULL; pMysqlDriver = mvMysql.Next())
-	{
-		if (pMysqlDriver)
-		{
-			delete pMysqlDriver;
-			pMysqlDriver = NULL;
-		}
+    {
+        delete pMysqlDriver;
+        pMysqlDriver = NULL;
 	}
 
 	for (NFIMysqlDriver* pMysqlDriver = mvInvalidMsyql.First(); pMysqlDriver != NULL; pMysqlDriver = mvInvalidMsyql.Next())
 	{
-		if (pMysqlDriver)
-		{
-			delete pMysqlDriver;
-			pMysqlDriver = NULL;
-		}
+        delete pMysqlDriver;
+        pMysqlDriver = NULL;
 	}
 
     return true;
