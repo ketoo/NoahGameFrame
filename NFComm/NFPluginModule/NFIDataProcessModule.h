@@ -24,8 +24,8 @@ public:
 	virtual const NFIDENTID GetChar(const std::string& strAccount, const std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVeec) = 0;
 
 	virtual bool RegisterAutoSave(const std::string& strClassName) = 0;
-	virtual const bool LoadDataFormNoSql( const NFIDENTID& self , const std::string& strClassName) = 0;
-	virtual const bool SaveDataToNoSql( const NFIDENTID& self) = 0;
+	virtual const bool LoadDataFormSql( const NFIDENTID& self , const std::string& strClassName) = 0;
+	virtual const bool SaveDataToSql( const NFIDENTID& self) = 0;
 
 };
 
