@@ -30,11 +30,11 @@
     <ClInclude Include="NFContainerModule\NFIContainerModule.h">
       <Filter>NFContainerModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFKernelModule\NFCConcurrentModule.h">
-      <Filter>NFKernelModule</Filter>
-    </ClInclude>
     <ClInclude Include="NFKernelModule\NFCUUIDModule.h">
       <Filter>NFKernelModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFKernelModule\NFCConcurrentModule.h">
+      <Filter>NFContainerModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -49,11 +49,11 @@
     <ClCompile Include="NFContainerModule\NFCContainerModule.cpp">
       <Filter>NFContainerModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFKernelModule\NFCConcurrentModule.cpp">
-      <Filter>NFKernelModule</Filter>
-    </ClCompile>
     <ClCompile Include="NFKernelModule\NFCUUIDModule.cpp">
       <Filter>NFKernelModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFKernelModule\NFCConcurrentModule.cpp">
+      <Filter>NFContainerModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
