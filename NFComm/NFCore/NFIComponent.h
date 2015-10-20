@@ -23,6 +23,7 @@ private:
 public:
 	NFIComponent(NFIDENTID self)
 	{
+		mbHasInit = false;
 		mbEnable = true;
 		mSelf = self;
 	}
@@ -59,6 +60,17 @@ public:
         return mbEnable;
     }
 
+	virtual bool SetHasInit(const bool bEnable)
+	{
+		mbHasInit = bEnable;
+		return mbHasInit;
+	}
+
+	virtual bool HasInit()
+	{
+		return mbHasInit;
+	}
+
 	virtual NFIDENTID Self()
     {
         return NFIDENTID();
@@ -75,6 +87,7 @@ protected:
 
 private:
 	bool mbEnable;
+	bool mbHasInit;
 	NFIDENTID mSelf;
 };
 

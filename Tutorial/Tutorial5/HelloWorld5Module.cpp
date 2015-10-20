@@ -9,7 +9,7 @@
 bool HelloWorld5Module::Init()
 {
     //≥ı ºªØ
-    std::cout << "Hello, world5, Init" << std::endl;
+    std::cout << "Hello, world5, Init, ThreadID: " << std::this_thread::get_id() << std::endl;
 
     return true;
 }
@@ -80,7 +80,7 @@ bool HelloWorld5Module::AfterInit()
 	NF_SHARE_PTR<NFIComponent> pNewAddCOmponent = pObject->AddComponent<NFIComponent>("NFCTestComponent");
 
 	////////////////////////////test3///////////////////////////////////////////////////////////////////////////////
-	for (int i = 0; i < 50000; ++i)
+	for (int i = 0; i < 1; ++i)
 	{
 		int nActorID = pPluginManager->GetActorManager()->RequireActor<NFCTestComponent>(this, &HelloWorld5Module::OnSyncEvent);
 
