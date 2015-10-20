@@ -21,9 +21,6 @@ void NFCActor::AddComponent( NF_SHARE_PTR<NFIComponent> pComponent )
 	if (nullptr != pComponent)
 	{
 		mxComponentList.Add(pComponent);
-
-		pComponent->Init();
-		pComponent->AfterInit();
 	}
 }
 
@@ -35,6 +32,14 @@ void NFCActor::HandlerSelf( const NFIActorMessage& message, const Theron::Addres
 	bool bRet = mxComponentList.First(pComponent);
 	while (bRet)
 	{
+		if (!pComponent->HasInit())
+		{
+			pComponent->SetHasInit(true);
+
+			pComponent->Init();
+			pComponent->AfterInit();
+		}
+
 		pComponent->OnASyncEvent(message.self, message.nSubMsgID, strData);
 
 		bRet = mxComponentList.Next(pComponent);
@@ -77,7 +82,11 @@ bool NFCActor::SetPropertyInt( const NFIDENTID& self, const std::string& strProp
 	}
 	else
 	{
+		Theron::Receiver xReceiver;
 
+		//do some thing
+
+		xReceiver.Wait();
 	}
 
 	return false;
