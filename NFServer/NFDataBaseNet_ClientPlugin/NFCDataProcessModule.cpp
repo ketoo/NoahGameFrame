@@ -55,7 +55,7 @@ int NFCDataProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std::
 	if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
 	{
 		OnOffline(self);
-		SaveDataToNoSql(self);
+		SaveDataToSql(self);
 	}
 	else if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
 	{
@@ -226,7 +226,7 @@ void NFCDataProcessModule::OnOffline( const NFIDENTID& self )
 }
 
 
-const bool NFCDataProcessModule::LoadDataFormNoSql( const NFIDENTID& self , const std::string& strClassName)
+const bool NFCDataProcessModule::LoadDataFormSql( const NFIDENTID& self , const std::string& strClassName)
 {
 	NF_SHARE_PTR<NFIPropertyManager> pProManager = m_pLogicClassModule->GetClassPropertyManager(strClassName);
 	NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pLogicClassModule->GetClassRecordManager(strClassName);
@@ -305,7 +305,7 @@ const bool NFCDataProcessModule::LoadDataFormNoSql( const NFIDENTID& self , cons
 	return true;
 }
 
-const bool NFCDataProcessModule::SaveDataToNoSql( const NFIDENTID& self )
+const bool NFCDataProcessModule::SaveDataToSql( const NFIDENTID& self )
 {
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
 	if ( pObject.get() )
