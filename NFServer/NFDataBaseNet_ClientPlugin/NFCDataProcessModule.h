@@ -46,8 +46,8 @@ public:
 	//////////////////////////////////////////////////////////////////////////
 
 	virtual bool RegisterAutoSave(const std::string& strClassName);
-	virtual const bool LoadDataFormNoSql( const NFIDENTID& self , const std::string& strClassName);
-	virtual const bool SaveDataToNoSql( const NFIDENTID& self);
+	virtual const bool LoadDataFormSql( const NFIDENTID& self , const std::string& strClassName);
+	virtual const bool SaveDataToSql( const NFIDENTID& self);
 
 private:
 	const bool AttachData( const NFIDENTID& self );
