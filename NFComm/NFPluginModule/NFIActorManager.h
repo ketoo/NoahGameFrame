@@ -50,10 +50,10 @@ public:
 			AddComponent<BaseTypeComponent>(nActorID);
 			AddEndFunc<BaseType>(nActorID, pBase, handler_end);
 
-			return true;
+			return nActorID;
 		}
 
-		return false;
+		return -1;
 	}
 
 	virtual NF_SHARE_PTR<NFIActor> GetActor(const int nActorIndex) = 0;
