@@ -67,7 +67,7 @@ void NFCWorldGuildDataModule::CheckLoadGuild( const NFIDENTID& self, const NFIDE
     NF_SHARE_PTR<NFIObject> pObejct = m_pKernelModule->GetObject(xGuild);
     if (!pObejct.get())
     {
-        if (m_pDataProcessModule->LoadDataFormNoSql(xGuild, "Guild"))
+        if (m_pDataProcessModule->LoadDataFormSql(xGuild, "Guild"))
         {
             m_pKernelModule->CreateObject(xGuild, 1, 0, "Guild", "", NFCDataList());
         }
@@ -335,7 +335,7 @@ bool NFCWorldGuildDataModule::GetPlayerGameID( const NFIDENTID& self, int& nGame
 
 int NFCWorldGuildDataModule::OnSaveGuildheartEvent( const NFIDENTID& self , const std::string& strHeartName, const float fTime, const int nCount )
 {
-    m_pDataProcessModule->SaveDataToNoSql(self);
+    m_pDataProcessModule->SaveDataToSql(self);
 
     return 0;
 }
