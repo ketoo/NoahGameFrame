@@ -59,7 +59,7 @@ void NFCGameServerToWorldModule::Register(NFINet* pNet)
 				pData->set_server_ip(strIP);
 				pData->set_server_port(nPort);
 				pData->set_server_max_online(nMaxConnect);
-				pData->set_server_state(NFMsg::EST_NARMAL);
+				pData->set_server_state(NFMsg::EST_NORMAL);
 				pData->set_server_type(nServerType);
 
 				NF_SHARE_PTR<ServerData> pServerData = GetServerNetInfo(pNet);
@@ -142,7 +142,7 @@ bool NFCGameServerToWorldModule::AfterInit()
 				xServerData.strIP = strIP;
 				xServerData.nPort = nPort;
 				xServerData.strName = strName;
-				xServerData.eState = NFMsg::EServerState::EST_NARMAL;
+				xServerData.eState = NFMsg::EServerState::EST_NORMAL;
 
 				NFIClusterClientModule::AddServer(xServerData);
 			}
