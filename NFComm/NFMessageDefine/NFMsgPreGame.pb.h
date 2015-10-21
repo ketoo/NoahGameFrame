@@ -61,7 +61,7 @@ class RoleOfflineNotify;
 
 enum EServerState {
   EST_CRASH = 0,
-  EST_NORMAL = 1,
+  EST_NARMAL = 1,
   EST_BUSY = 2,
   EST_FIRE = 3,
   EST_MAINTEN = 4
