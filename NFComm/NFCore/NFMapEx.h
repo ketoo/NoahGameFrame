@@ -184,11 +184,6 @@ public:
             return NF_SHARE_PTR<TD>();
         }
 
-        if (mObjectCurIter == mObjectList.end())
-        {
-            return NF_SHARE_PTR<TD>();
-        }
-
         ++mObjectCurIter;
         if (mObjectCurIter != mObjectList.end())
         {
@@ -221,11 +216,6 @@ public:
 
     virtual NF_SHARE_PTR<TD> Next(T& name)
     {
-        if (mObjectCurIter == mObjectList.end())
-        {
-            return NF_SHARE_PTR<TD>();
-        }
-
         if (mObjectCurIter == mObjectList.end())
         {
             return NF_SHARE_PTR<TD>();
