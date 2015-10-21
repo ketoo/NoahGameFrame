@@ -148,7 +148,7 @@ NF_SHARE_PTR<NFIObject> NFCWorldChatGroupModule::GetGroup( const NFIDENTID& self
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
     if (pObject == NULL )
     {
-        if (m_pDataProcessModule->LoadDataFormNoSql(self, mstrGroupTalble))
+        if (m_pDataProcessModule->LoadDataFormSql(self, mstrGroupTalble))
         {
             m_pKernelModule->CreateObject(self, mContainerID, 0, mstrGroupTalble, "", NFCDataList());
         }
@@ -211,7 +211,7 @@ int NFCWorldChatGroupModule::OnGuildClassEvent( const NFIDENTID& self, const std
 
 int NFCWorldChatGroupModule::OnSaveGroupheartEvent( const NFIDENTID& self , const std::string& strHeartName, const float fTime, const int nCount )
 {
-    m_pDataProcessModule->SaveDataToNoSql(self);
+    m_pDataProcessModule->SaveDataToSql(self);
 
     return 0;
 }
