@@ -19,13 +19,13 @@ class NFIClusterModule
 public:
 
 
-	virtual bool Updata(const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec) = 0;
-	virtual bool Query(const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec) = 0;
-	virtual bool Select(const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec) = 0;
-
-	virtual bool Delete(const std::string& strKey) = 0;
-	virtual bool Exists(const std::string& strKey, bool& bExit) = 0;
-    virtual bool Keys(const std::string& strKeyName, std::vector<std::string>& valueVec) = 0;
+// 	virtual bool Updata(const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec) = 0;
+// 	virtual bool Query(const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec) = 0;
+// 	virtual bool Select(const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec) = 0;
+// 
+// 	virtual bool Delete(const std::string& strKey) = 0;
+// 	virtual bool Exists(const std::string& strKey, bool& bExit) = 0;
+//     virtual bool Keys(const std::string& strKeyName, std::vector<std::string>& valueVec) = 0;
 
 	virtual bool Updata(const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec) = 0;
 	virtual bool Query(const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec) = 0;
