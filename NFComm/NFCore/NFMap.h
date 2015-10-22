@@ -94,11 +94,6 @@ public:
             return NULL;
         }
 
-        if (mObjectCurIter == mObjectList.end())
-        {
-            return NULL;
-        }
-
         ++mObjectCurIter;
         if (mObjectCurIter != mObjectList.end())
         {
