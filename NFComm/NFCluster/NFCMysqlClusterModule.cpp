@@ -68,11 +68,6 @@ bool NFCMysqlClusterModule::Execute(const float fLasFrametime, const float fStar
     return true;
 }
 
-bool NFCMysqlClusterModule::Updata( const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec )
-{
-	return Updata(strDefaultTable, strKey, fieldVec, valueVec);
-}
-
 bool NFCMysqlClusterModule::Updata( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec )
 {
     NFIMysqlDriver* pDriver = m_pMysqlConnectMgrManager->GetMysqlDriver();
@@ -157,11 +152,6 @@ bool NFCMysqlClusterModule::Updata( const std::string& strRecordName, const std:
 	return true;
 }
 
-bool NFCMysqlClusterModule::Query( const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec )
-{
-    return Query(strDefaultTable, strKey, fieldVec, valueVec);
-}
-
 bool NFCMysqlClusterModule::Query( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec )
 {
     NFIMysqlDriver* pDriver = m_pMysqlConnectMgrManager->GetMysqlDriver();
@@ -215,11 +205,6 @@ bool NFCMysqlClusterModule::Query( const std::string& strRecordName, const std::
 	return true;
 }
 
-bool NFCMysqlClusterModule::Delete( const std::string& strKey )
-{
-    return Delete(strDefaultTable, strKey);
-}
-
 bool NFCMysqlClusterModule::Delete( const std::string& strRecordName, const std::string& strKey )
 {
     NFIMysqlDriver* pDriver = m_pMysqlConnectMgrManager->GetMysqlDriver();
@@ -243,12 +228,6 @@ bool NFCMysqlClusterModule::Delete( const std::string& strRecordName, const std:
     NFMYSQLTRYEND("delete error")
 
 	return true;
-}
-
-bool NFCMysqlClusterModule::Exists( const std::string& strKey, bool& bExit )
-{
-    //select 1 from table where col_name = col_value limit 1;
-	return Exists(strDefaultTable, strKey, bExit);
 }
 
 bool NFCMysqlClusterModule::Exists( const std::string& strRecordName, const std::string& strKey, bool& bExit )
@@ -285,19 +264,9 @@ bool NFCMysqlClusterModule::Exists( const std::string& strRecordName, const std:
 	return true;
 }
 
-bool NFCMysqlClusterModule::Select( const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec )
-{
-	return false;
-}
-
 bool NFCMysqlClusterModule::Select( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec )
 {
 	return false;
-}
-
-bool NFCMysqlClusterModule::Keys( const std::string& strKeyName, std::vector<std::string>& valueVec )
-{
-    return Keys(strDefaultTable, strKeyName, valueVec);
 }
 
 bool NFCMysqlClusterModule::Keys( const std::string& strRecordName, const std::string& strKeyName, std::vector<std::string>& valueVec )
