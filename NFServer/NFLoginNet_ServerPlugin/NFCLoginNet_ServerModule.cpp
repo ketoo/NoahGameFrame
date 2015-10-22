@@ -250,6 +250,8 @@ int NFCLoginNet_ServerModule::OnReciveClientPack(const NFIPacket& msg )
 	int nMsgID = msg.GetMsgHead()->GetMsgID();
 	switch (nMsgID)
 	{
+	case NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT:
+		break;
 
 	case NFMsg::EGameMsgID::EGMI_REQ_LOGIN:
 		OnLoginProcess(msg);
