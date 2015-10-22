@@ -133,7 +133,7 @@ const NFIDENTID NFCDataProcessModule::CreateRole( const std::string& strAccount,
 const bool NFCDataProcessModule::DeleteRole( const std::string& strAccount, const NFIDENTID xID )
 {
 	bool bExit = false;
-	if (!m_pClusterSQLModule->Exists(strAccount, bExit)
+	if (!m_pClusterSQLModule->Exists(mstrAccountTable, strAccount, bExit)
 		|| !bExit)
 	{
 		return false;
