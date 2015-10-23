@@ -167,6 +167,8 @@ int main(int argc, char* argv[])
 		InitDaemon();
 	}
 
+	signal(SIGPIPE, SIG_IGN);
+	signal(SIGCHLD, SIG_IGN);
 
 #endif
 	NFCActorManager::GetSingletonPtr()->Init();
