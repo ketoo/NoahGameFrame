@@ -640,7 +640,7 @@ void NFCNet::CloseObject( const int nSockIndex )
 		//bev->cbarg = NULL;
 
 		bufferevent_free(bev);
-		evutil_closesocket(nSockIndex);
+		//evutil_closesocket(nSockIndex);
 
 		mmObject.erase(it);
 
