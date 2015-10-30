@@ -255,12 +255,14 @@ bool NFCNet::Final()
         listener = NULL;
     }
 
-    // bufferevent_socket_new用参数控制关闭socket自己释放
-    //if (base)
-    //{
-    //    event_base_free(base);
-    //    base = NULL;
-    //}
+	if (!mbServer)
+	{
+		if (base)
+		{
+			event_base_free(base);
+			base = NULL;
+		}
+	}
 
     return true;
 }
