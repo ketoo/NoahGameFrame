@@ -255,14 +255,17 @@ bool NFCNet::Final()
         listener = NULL;
     }
 
-    // bufferevent_socket_new用参数控制关闭socket自己释放
-    //if (base)
-    //{
-    //    event_base_free(base);
-    //    base = NULL;
-    //}
+	if (!mbServer)
+	{
+		//作为客户端的时候，要释放一次，服务器的时候	evconnlistener_free(listener);这里会释放
+		if (base)
+		{
+			event_base_free(base);
+			base = NULL;
+		}
+	}
 
-    return true;
+	return true;
 }
 
 bool NFCNet::SendMsg( const NFIPacket& msg, const int nSockIndex)
