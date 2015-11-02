@@ -44,7 +44,7 @@ int NFCPacket::EnCode( const uint16_t unMsgID, const char* strData, const uint32
     pHead->SetMsgID(unMsgID);
     pHead->SetMsgLength(unLen + pHead->GetHeadLength());
 
-    char szHead[255] = { 0 };
+    char szHead[16] = { 0 };
     pHead->EnCode(szHead);
 
     mstrPackData.clear();
