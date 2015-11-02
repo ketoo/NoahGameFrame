@@ -16,7 +16,6 @@
 #include <stdint.h>
 #include <iostream>
 #include <map>
-//#include <xtree>
 
 #if NF_PLATFORM != NF_PLATFORM_WIN
 #include <netinet/in.h>
@@ -45,10 +44,10 @@
 
 enum NF_NET_EVENT
 {
-    NF_NET_EVENT_EOF = 0x10,	//掉线
-    NF_NET_EVENT_ERROR = 0x20,//位置错误
-    NF_NET_EVENT_TIMEOUT = 0x40,//连接超时
-    NF_NET_EVENT_CONNECTED = 0x80,//连接成功(作为客户端)
+    NF_NET_EVENT_EOF = 0x10,        //掉线
+    NF_NET_EVENT_ERROR = 0x20,      //未知错误
+    NF_NET_EVENT_TIMEOUT = 0x40,    //连接超时
+    NF_NET_EVENT_CONNECTED = 0x80,  //连接成功(作为客户端)
 };
 
 class NFINet;
@@ -67,9 +66,9 @@ typedef NF_SHARE_PTR<NET_EVENT_LOG_FUNCTOR> NET_EVENT_LOG_FUNCTOR_PTR;
 class NetObject
 {
 public:
-    NetObject(NFINet* pThis, int32_t nFd, sockaddr_in& addr, bufferevent* pBev)
+    NetObject(NFINet* pNet, int32_t nFd, sockaddr_in& addr, bufferevent* pBev)
     {
-        m_pNet = pThis;
+        m_pNet = pNet;
 
         nIndex = nFd;
         bev = pBev;
@@ -194,7 +193,8 @@ public:
     {
         mnUserID = nUserID;
     }
-	const NFIDENTID& GetClientID()
+
+    const NFIDENTID& GetClientID()
 	{
 		return mnClientID;
 	}
@@ -203,6 +203,7 @@ public:
 	{
 		mnClientID = xClientID;
 	}
+
     int IncreaseError(const int nError = 1)
     {
         return mnErrorCount += nError;
