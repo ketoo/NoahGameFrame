@@ -257,7 +257,6 @@ bool NFCNet::Final()
 
 	if (!mbServer)
 	{
-		//作为客户端的时候，要释放一次，服务器的时候	evconnlistener_free(listener);这里会释放
 		if (base)
 		{
 			event_base_free(base);
@@ -265,7 +264,7 @@ bool NFCNet::Final()
 		}
 	}
 
-	return true;
+    return true;
 }
 
 bool NFCNet::SendMsg( const NFIPacket& msg, const int nSockIndex)
