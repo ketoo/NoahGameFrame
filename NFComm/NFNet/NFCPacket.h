@@ -105,7 +105,6 @@ public:
 protected:
 private:
 	NFIMsgHead* pHead;
-	//char strPackData[NF_MAX_SERVER_PACKET_SIZE];//include head
     std::string mstrPackData;//include head
 	int munFD;
 };
