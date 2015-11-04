@@ -37,7 +37,7 @@ struct  NFIMsgHead
     enum NF_Head
     {
 		NF_HEAD_LENGTH = 6,
-		NF_MSGBUFF_LENGTH = 1024 * 1024, //10M,引擎累计消息最大
+		NF_MSGBUFF_LENGTH = 1024 * 1024, //1M,引擎累计消息最大
     };
 
     virtual int EnCode(char* strData) = 0;
@@ -118,6 +118,7 @@ public:
 
     virtual uint32_t GetHeadLength() const { return NF_HEAD_LENGTH; }
 
+	// 内存结构[ MsgID(2) | MsgSize(4) ]
     virtual int EnCode(char* strData)
     {
         uint32_t nOffset = 0;
