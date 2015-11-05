@@ -16,7 +16,7 @@ namespace NFCoreEx
 
         public abstract NFILogicClass GetElement(string strClassName);
 
-        public abstract Hashtable GetElementList();
+        public abstract Dictionary<string, NFILogicClass> GetElementList();
 
     }
 }

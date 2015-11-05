@@ -6,6 +6,7 @@ using System.Xml;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 namespace NFCoreEx
 {
@@ -13,7 +14,7 @@ namespace NFCoreEx
     {
         public NFCElementManager()
         {
-            mhtObject = new Hashtable();
+            mhtObject = new Dictionary<string, NFIElement>();
         }
 
         #region Instance
@@ -35,11 +36,10 @@ namespace NFCoreEx
             mstrRootPath = "";
             ClearInstanceElement();
 
-            Hashtable xTable = NFCLogicClassManager.Instance.GetElementList();
-            foreach (DictionaryEntry de in xTable)
+            Dictionary<string, NFILogicClass> xTable = NFCLogicClassManager.Instance.GetElementList();
+            foreach (KeyValuePair<string, NFILogicClass> kv in xTable)
             {
-                NFILogicClass xLogicClass = (NFILogicClass)de.Value;
-                LoadInstanceElement(xLogicClass);
+                LoadInstanceElement(kv.Value);
             }
 
             return false;
@@ -137,7 +137,21 @@ namespace NFCoreEx
             strLogicPath += xLogicClass.GetInstance();
 
             XmlDocument xmldoc = new XmlDocument();
-            xmldoc.Load(strLogicPath);
+            //xmldoc.Load(strLogicPath);
+            ///////////////////////////////////////////////////////////////////////////////////////
+            StreamReader cepherReader = new StreamReader(strLogicPath); ;
+            string strContent = cepherReader.ReadToEnd();
+            cepherReader.Close();
+
+            byte[] data = Convert.FromBase64String(strContent);
+
+            MemoryStream stream = new MemoryStream(data);
+            XmlReader x = XmlReader.Create(stream);
+            x.MoveToContent();
+            string res = x.ReadOuterXml();
+
+            xmldoc.LoadXml(res);
+            /////////////////////////////////////////////////////////////////
 
             XmlNode xRoot = xmldoc.SelectSingleNode("XML");
 
@@ -213,7 +227,7 @@ namespace NFCoreEx
         }
 
         /////////////////////////////////////////
-        private Hashtable mhtObject;
+        private Dictionary<string, NFIElement> mhtObject;
         private string mstrRootPath;
     }
 }
