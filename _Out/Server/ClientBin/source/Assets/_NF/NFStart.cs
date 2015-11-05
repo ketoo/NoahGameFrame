@@ -183,7 +183,6 @@ public class NFStart : MonoBehaviour
                         NFStart.Instance.SetFocusNet(xNet);
                     }
                     break;
-                case NFNet.PLAYER_STATE.E_HAS_PLAYER_SELECT_WORLD:
                 case NFNet.PLAYER_STATE.E_HAS_PLAYER_GATE:
                     {
                         NFStart.Instance.GetFocusNet().mxSendLogic.RequireVerifyWorldKey(NFStart.Instance.GetFocusNet().strAccount, NFStart.Instance.GetFocusNet().strKey);
