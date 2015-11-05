@@ -26,16 +26,13 @@ public class NFNet
     {
         E_NONE,//等待选择服务器登录
         E_WAITING_PLAYER_LOGIN,//等待登录(已经连接成功)
-        E_PLAYER_LOGINING,//登录中
         E_HAS_PLAYER_LOGIN,//登录成功
-        E_HAS_PLAYER_SELECT_WORLD,//已选择服务器
         E_WAITING_PLAYER_TO_GATE,//等待连接网关
         E_START_CONNECT_TO_GATE,//已开始连接网关
         E_HAS_PLAYER_GATE,//已连接gate,没验证KEY
         E_WATING_VERIFY,//已连接gate(等待验证KEY)
         E_HAS_VERIFY,//验证成功
         E_HAS_PLAYER_ROLELIST,//有了角色列表
-        E_PLAYER_WAITING_TO_GAME,//申请了进游戏，等待进入
         E_PLAYER_GAMEING,//游戏中
         E_DISCOUNT,//掉线
 
@@ -244,7 +241,7 @@ public class NFNet
 
             if (mxClient.IsConnected())
             {
-                if (fTime > 10.0f)
+                if (fTime > 100.0f)
                 {
                     fTime = 0.0f;
                     mxSendLogic.RequireHeartBeat(nMainRoleID);

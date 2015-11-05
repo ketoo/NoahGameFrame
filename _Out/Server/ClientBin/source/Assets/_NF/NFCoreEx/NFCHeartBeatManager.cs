@@ -11,7 +11,7 @@ namespace NFCoreEx
 		public NFCHeartBeatManager(NFIDENTID self)
 		{
 			mSelf = self;
-			mhtHeartBeat = new Hashtable();
+            mhtHeartBeat = new Dictionary<string, NFIHeartBeat>();
 		}
 
         public override void AddHeartBeat(string strHeartBeatName, float fTime, NFIHeartBeat.HeartBeatEventHandler handler, NFIDataList valueList)
@@ -27,11 +27,11 @@ namespace NFCoreEx
 		public override void Update(float fPassTime)
 		{
 
-            NFCDataList keyList = null;
+            NFIDataList keyList = null;
 
-            foreach (System.Collections.DictionaryEntry heartObject in mhtHeartBeat)
+            foreach (KeyValuePair<string, NFIHeartBeat> kv in mhtHeartBeat)
             {
-                NFIHeartBeat heartBeat = (NFIHeartBeat)heartObject.Value;
+                NFIHeartBeat heartBeat = (NFIHeartBeat)kv.Value;
                 if (heartBeat.Update(fPassTime))
                 {
                     if (null == keyList)
@@ -39,7 +39,7 @@ namespace NFCoreEx
                         keyList = new NFCDataList();
                     }
 
-                    keyList.AddString((string)heartObject.Key);
+                    keyList.AddString((string)kv.Key);
                 }
             }
 
@@ -53,6 +53,6 @@ namespace NFCoreEx
 		}
 
 		NFIDENTID mSelf;
-		Hashtable mhtHeartBeat;
+        Dictionary<string, NFIHeartBeat> mhtHeartBeat;
     }
 }
