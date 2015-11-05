@@ -23,8 +23,6 @@ namespace NFCoreEx
                     }
                     return _Instance;
                 }
-
-
 			}
 		}
 		#endregion
@@ -32,7 +30,7 @@ namespace NFCoreEx
 		public NFCKernel()
 		{
             mhtObject = new Dictionary<NFIDENTID, NFIObject>();
-			mhtClassHandleDel = new Hashtable();
+            mhtClassHandleDel = new Dictionary<string, ClassHandleDel>();
 
             mxLogicClassManager = new NFCLogicClassManager();
             mxElementManager = new NFCElementManager();
@@ -213,14 +211,19 @@ namespace NFCoreEx
                 InitProperty(self, strClassName);
                 InitRecord(self, strClassName);
 
-				ClassHandleDel xHandleDel = (ClassHandleDel)mhtClassHandleDel[strClassName];
-                if (null != xHandleDel && null != xHandleDel.GetHandler())
+                if (mhtClassHandleDel.ContainsKey(strClassName))
                 {
-					NFIObject.ClassEventHandler xHandlerList = xHandleDel.GetHandler();
-                    xHandlerList(self, nContainerID, nGroupID, NFIObject.CLASS_EVENT_TYPE.OBJECT_CREATE, strClassName, strConfigIndex);
-					xHandlerList(self, nContainerID, nGroupID, NFIObject.CLASS_EVENT_TYPE.OBJECT_LOADDATA, strClassName, strConfigIndex);
-					xHandlerList(self, nContainerID, nGroupID, NFIObject.CLASS_EVENT_TYPE.OBJECT_CREATE_FINISH, strClassName, strConfigIndex);
-				}
+                    ClassHandleDel xHandleDel = (ClassHandleDel)mhtClassHandleDel[strClassName];
+                    if (null != xHandleDel && null != xHandleDel.GetHandler())
+                    {
+                        NFIObject.ClassEventHandler xHandlerList = xHandleDel.GetHandler();
+                        xHandlerList(self, nContainerID, nGroupID, NFIObject.CLASS_EVENT_TYPE.OBJECT_CREATE, strClassName, strConfigIndex);
+                        xHandlerList(self, nContainerID, nGroupID, NFIObject.CLASS_EVENT_TYPE.OBJECT_LOADDATA, strClassName, strConfigIndex);
+                        xHandlerList(self, nContainerID, nGroupID, NFIObject.CLASS_EVENT_TYPE.OBJECT_CREATE_FINISH, strClassName, strConfigIndex);
+                    }
+                }
+
+                //NFCLog.Instance.Log(NFCLog.LOG_LEVEL.DEBUG, "Create object: " + self.ToString() + " ClassName: " + strClassName + " SceneID: " + nContainerID + " GroupID: " + nGroupID);
 				return xNewObject;
 			}
 
@@ -233,7 +236,9 @@ namespace NFCoreEx
 			if (mhtObject.ContainsKey(self))
 			{
 				NFIObject xGameObject = (NFIObject)mhtObject[self];
+
 				string strClassName = xGameObject.ClassName();
+
 				ClassHandleDel xHandleDel = (ClassHandleDel)mhtClassHandleDel[strClassName];
                 if (null != xHandleDel && null != xHandleDel.GetHandler())
                 {
@@ -241,7 +246,9 @@ namespace NFCoreEx
                     xHandlerList(self, xGameObject.ContainerID(), xGameObject.GroupID(), NFIObject.CLASS_EVENT_TYPE.OBJECT_DESTROY, xGameObject.ClassName(), xGameObject.ConfigIndex());
                 }
 				mhtObject.Remove(self);
-				
+
+                //NFCLog.Instance.Log(NFCLog.LOG_LEVEL.DEBUG, "Destroy object: " + self.ToString() + " ClassName: " + strClassName + " SceneID: " + xGameObject.ContainerID() + " GroupID: " + xGameObject.GroupID());
+
 				return true;
 			}
 
@@ -612,7 +619,7 @@ namespace NFCoreEx
         }
 
         Dictionary<NFIDENTID, NFIObject> mhtObject;
-		Hashtable mhtClassHandleDel;
+        Dictionary<string, ClassHandleDel> mhtClassHandleDel;
         NFIElementManager mxElementManager;
         NFILogicClassManager mxLogicClassManager;
 
@@ -620,7 +627,7 @@ namespace NFCoreEx
 		{
 			public ClassHandleDel()
 			{
-				mhtHandleDelList = new Hashtable();
+                mhtHandleDelList = new Dictionary<NFIObject.ClassEventHandler, string>();
 			}
 			
 			public void AddDel(NFIObject.ClassEventHandler handler)
@@ -638,7 +645,7 @@ namespace NFCoreEx
 			}
 			
 			private NFIObject.ClassEventHandler mHandleDel;
-			Hashtable mhtHandleDelList;
+            private Dictionary<NFIObject.ClassEventHandler, string> mhtHandleDelList;
 		}
         
 	}
