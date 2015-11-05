@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
@@ -33,14 +34,28 @@ namespace NFCoreEx
 
             XmlDocument xmldoc = new XmlDocument();
 
-            string strLogicPath = "../../NFDataCfg/Struct/LogicClass.xml";
-            xmldoc.Load(strLogicPath);
+            string strLogicPath = "../../NFDataCfg/Struct/LogicClass.NF";
+            ///////////////////////////////////////////////////////////////////////////////////////
+            StreamReader cepherReader = new StreamReader(strLogicPath); ;
+            string strContent = cepherReader.ReadToEnd();
+            cepherReader.Close();
+
+            byte[] data = Convert.FromBase64String(strContent);
+
+            MemoryStream stream = new MemoryStream(data);
+            XmlReader x = XmlReader.Create(stream);
+            x.MoveToContent();
+            string res = x.ReadOuterXml();
+
+            xmldoc.LoadXml(res);
+            /////////////////////////////////////////////////////////////////
 
             XmlNode root = xmldoc.SelectSingleNode("XML");
 
             LoadLogicClass(root);
             LoadLogicClassProperty();
             LoadLogicClassRecord();
+            
 
             return false;
         }
@@ -116,28 +131,28 @@ namespace NFCoreEx
 
         private void LoadLogicClassProperty()
         {
-            Hashtable xTable = NFCLogicClassManager.Instance.GetElementList();
-            foreach (DictionaryEntry de in xTable)
+            Dictionary<string, NFILogicClass> xTable = NFCLogicClassManager.Instance.GetElementList();
+            foreach (KeyValuePair<string, NFILogicClass> kv in xTable)
             {
-                LoadLogicClassProperty((string)de.Key);
+                LoadLogicClassProperty((string)kv.Key);
             }
 
             //再为每个类加载iobject的属性
-            foreach (DictionaryEntry de in xTable)
+            foreach (KeyValuePair<string, NFILogicClass> kv in xTable)
             {
-                if ((string)de.Key != "IObject")
+                if (kv.Key != "IObject")
                 {
-                    AddBasePropertyFormOther((string)de.Key, "IObject");
+                    AddBasePropertyFormOther(kv.Key, "IObject");
                 }
             }
         }
 
         private void LoadLogicClassRecord()
         {
-            Hashtable xTable = NFCLogicClassManager.Instance.GetElementList();
-            foreach (DictionaryEntry de in xTable)
+            Dictionary<string, NFILogicClass> xTable = NFCLogicClassManager.Instance.GetElementList();
+            foreach (KeyValuePair<string, NFILogicClass> kv in xTable)
             {
-                LoadLogicClassRecord((string)de.Key);
+                LoadLogicClassRecord(kv.Key);
             }
         }
 
@@ -150,7 +165,22 @@ namespace NFCoreEx
 
                 XmlDocument xmldoc = new XmlDocument();
 
-                xmldoc.Load(strLogicPath);
+                //xmldoc.Load(strLogicPath);
+                ///////////////////////////////////////////////////////////////////////////////////////
+                StreamReader cepherReader = new StreamReader(strLogicPath); ;
+                string strContent = cepherReader.ReadToEnd();
+                cepherReader.Close();
+
+                byte[] data = Convert.FromBase64String(strContent);
+
+                MemoryStream stream = new MemoryStream(data);
+                XmlReader x = XmlReader.Create(stream);
+                x.MoveToContent();
+                string res = x.ReadOuterXml();
+
+                xmldoc.LoadXml(res);
+                /////////////////////////////////////////////////////////////////
+
                 XmlNode xRoot = xmldoc.SelectSingleNode("XML");
                 XmlNode xNodePropertys = xRoot.SelectSingleNode("Propertys");
                 XmlNodeList xNodeList = xNodePropertys.SelectNodes("Property");
@@ -214,7 +244,21 @@ namespace NFCoreEx
 
                 XmlDocument xmldoc = new XmlDocument();
 
-                xmldoc.Load(strLogicPath);
+                //xmldoc.Load(strLogicPath);
+///////////////////////////////////////////////////////////////////////////////////////
+                StreamReader cepherReader = new StreamReader(strLogicPath); ;
+                string strContent = cepherReader.ReadToEnd();
+                cepherReader.Close();
+
+                byte[] data = Convert.FromBase64String(strContent);
+
+                MemoryStream stream = new MemoryStream(data);
+                XmlReader x = XmlReader.Create(stream);
+                x.MoveToContent();
+                string res = x.ReadOuterXml();
+
+                xmldoc.LoadXml(res);
+/////////////////////////////////////////////////////////////////
                 XmlNode xRoot = xmldoc.SelectSingleNode("XML");
                 XmlNode xNodePropertys = xRoot.SelectSingleNode("Records");
                 if (null != xNodePropertys)
@@ -294,11 +338,11 @@ namespace NFCoreEx
             }
         }
 
-        public override Hashtable GetElementList()
+        public override Dictionary<string, NFILogicClass> GetElementList()
         {
             return mhtObject;
         }
         /////////////////////////////////////////
-        private Hashtable mhtObject = new Hashtable();
+        private Dictionary<string, NFILogicClass> mhtObject = new Dictionary<string, NFILogicClass>();
     }
 }
