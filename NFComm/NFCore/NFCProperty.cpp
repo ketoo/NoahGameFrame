@@ -166,7 +166,7 @@ NFINT64 NFCProperty::GetInt() const
     return 0;
 }
 
-float NFCProperty::GetFloat() const
+double NFCProperty::GetFloat() const
 {
     if (!m_pTData.get())
     {
@@ -174,21 +174,6 @@ float NFCProperty::GetFloat() const
     }
 
     if (TDATA_FLOAT == m_pTData->nType)
-    {
-        return boost::get<float>(m_pTData->variantData);
-    }
-
-    return 0.0f;
-}
-
-double NFCProperty::GetDouble() const
-{
-    if (!m_pTData.get())
-    {
-        return 0.0f;
-    }
-
-    if (TDATA_DOUBLE == m_pTData->nType)
     {
         return boost::get<double>(m_pTData->variantData);
     }
@@ -313,7 +298,7 @@ bool NFCProperty::SetInt(const NFINT64 value)
     return false;
 }
 
-bool NFCProperty::SetFloat(const float value)
+bool NFCProperty::SetFloat(const double value)
 {
     if (eType != TDATA_FLOAT)
     {
@@ -334,53 +319,6 @@ bool NFCProperty::SetFloat(const float value)
 
         m_pTData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
         m_pTData->nType = TDATA_FLOAT;
-        m_pTData->variantData = (float)0.0f;
-    }
-
-    if (TData.variantData == m_pTData->variantData)
-    {
-        return false;
-    }
-
-    if (TDATA_FLOAT == m_pTData->nType)
-    {
-        NFCDataList oldValue;
-        oldValue.Append(*m_pTData);
-
-        m_pTData->variantData = value;
-
-        NFCDataList newValue;
-        newValue.Append(*m_pTData);
-
-        OnEventHandler(oldValue , newValue);
-
-        return true;
-    }
-
-    return false;
-}
-
-bool NFCProperty::SetDouble(const double value)
-{
-    if (eType != TDATA_DOUBLE)
-    {
-        return false;
-    }
-
-    NFIDataList::TData TData;
-    TData.variantData = value;
-    TData.nType = TDATA_DOUBLE;
-
-    if (!m_pTData.get())
-    {
-        //本身是空就是因为没数据，还来个没数据的就不存了
-        if (!NFIDataList::Valid(TData))
-        {
-            return false;
-        }
-
-        m_pTData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
-        m_pTData->nType = TDATA_DOUBLE;
         m_pTData->variantData = (double)0.0f;
 
     }
@@ -390,7 +328,7 @@ bool NFCProperty::SetDouble(const double value)
         return false;
     }
 
-    if (TDATA_DOUBLE == m_pTData->nType)
+    if (TDATA_FLOAT == m_pTData->nType)
     {
         NFCDataList oldValue;
         oldValue.Append(*m_pTData);
@@ -584,10 +522,6 @@ std::string NFCProperty::ToString()
         strData = boost::lexical_cast<std::string> (GetFloat());
         break;
 
-    case TDATA_DOUBLE:
-        strData = boost::lexical_cast<std::string> (GetDouble());
-        break;
-
     case TDATA_STRING:
         strData = boost::lexical_cast<std::string> (GetString());
         break; 
@@ -619,17 +553,9 @@ bool NFCProperty::FromString( const std::string& strData )
 
     case TDATA_FLOAT:
         {
-            float  fValue = 0;
-            bRet = NF_StrTo(strData, fValue);
-            SetFloat(fValue);
-        }
-        break;
-
-    case TDATA_DOUBLE:
-        {
             double  dValue = 0;
             bRet = NF_StrTo(strData, dValue);
-            SetDouble(dValue);
+            SetFloat(dValue);
         }
         break;
 
