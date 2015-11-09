@@ -255,9 +255,9 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
     }
 
     //µÃµ½×ø±ê
-    float fX = 0.0f;
-    float fY = 0.0f;
-    float fZ = 0.0f;
+    double fX = 0.0f;
+    double fY = 0.0f;
+    double fZ = 0.0f;
 
     const std::string& strRelivePosList = m_pElementInfoModule->GetPropertyString(szSceneID, "RelivePos");
     NFCDataList valueRelivePosList( strRelivePosList.c_str(), ";" );
@@ -266,9 +266,9 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
         NFCDataList valueRelivePos( valueRelivePosList.String( 0 ).c_str(), "," );
         if ( valueRelivePos.GetCount() == 3 )
         {
-            fX = boost::lexical_cast<float>( valueRelivePos.String( 0 ) );
-            fY = boost::lexical_cast<float>( valueRelivePos.String( 1 ) );
-            fZ = boost::lexical_cast<float>( valueRelivePos.String( 2 ) );
+            fX = boost::lexical_cast<double>( valueRelivePos.String( 0 ) );
+            fY = boost::lexical_cast<double>( valueRelivePos.String( 1 ) );
+            fZ = boost::lexical_cast<double>( valueRelivePos.String( 2 ) );
         }
     }
 

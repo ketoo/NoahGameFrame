@@ -37,8 +37,7 @@ enum TDATA_TYPE
 {
     TDATA_UNKNOWN,  // 未知
     TDATA_INT,              // 32位整数
-    TDATA_FLOAT,            // 单精度浮点数
-    TDATA_DOUBLE,       // 双精度浮点数
+    TDATA_FLOAT,       // 浮点数(双精度，用double类型实现)
     TDATA_STRING,       // 字符串
     TDATA_OBJECT,       // 对象ID
     //TDATA_POINTER,      // 指针
@@ -65,7 +64,7 @@ public:
         }
 
         TDATA_TYPE nType;
-        boost::variant<NFINT64, float, double, std::string, NFIDENTID, void*> variantData;
+        boost::variant<NFINT64, double, std::string, NFIDENTID, void*> variantData;
     };
 
     NFIDataList()
@@ -90,8 +89,7 @@ public:
         if (index < GetCount() && index >= 0)
         {
             TDATA_TYPE type =  Type(index);
-            if (type == TDATA_DOUBLE
-                || type == TDATA_FLOAT
+            if (type == TDATA_FLOAT
                 || type == TDATA_INT
                 || type == TDATA_OBJECT)
             {
@@ -109,8 +107,7 @@ public:
         if (index < GetCount() && index >= 0)
         {
             TDATA_TYPE type =  Type(index);
-            if (type == TDATA_DOUBLE
-                || type == TDATA_FLOAT
+            if (type == TDATA_FLOAT
                 || type == TDATA_INT
                 || type == TDATA_OBJECT
 				|| type == TDATA_STRING)
@@ -132,8 +129,7 @@ public:
 			AddStatck();
 		}
 
-        if (type == TDATA_DOUBLE
-            || type == TDATA_FLOAT
+        if (type == TDATA_FLOAT
             || type == TDATA_INT
             || type == TDATA_OBJECT
             || type == TDATA_STRING)
@@ -193,7 +189,6 @@ public:
 
     // 添加数据
     virtual bool Add(const NFINT64 value) = 0;
-    virtual bool Add(const float value) = 0;
     virtual bool Add(const double value) = 0;
     virtual bool Add(const char* value) = 0;
 
@@ -202,7 +197,6 @@ public:
     virtual bool Add(const void* value) = 0;
 
     virtual bool Set(const int index, const NFINT64 value) = 0;
-    virtual bool Set(const int index, const float value) = 0;
     virtual bool Set(const int index, const double value) = 0;
     virtual bool Set(const int index, const char* value) = 0;
     virtual bool Set(const int index, const NFIDENTID& value) = 0;
@@ -210,8 +204,7 @@ public:
 
     // 获得数据
     virtual NFINT64 Int(const int index) const = 0;
-    virtual float Float(const int index) const = 0;
-    virtual double Double(const int index) const = 0;
+    virtual double Float(const int index) const = 0;
     virtual const std::string& String(const int index) const = 0;
     virtual NFIDENTID Object(const int index) const = 0;
     virtual void* Pointer(const int index) const = 0;
@@ -220,18 +213,10 @@ public:
     {
         return Add(value);
     }
-    bool AddFloat(const float value)
+    bool AddFloat(const double value)
     {
         return Add(value);
     }
-    bool AddDouble(const double value)
-    {
-        return Add(value);
-    }
-    //bool AddString(const char* value)
-    //{
-    //    return Add(value);
-    //}
     bool AddString(const std::string& value)
     {
         return Add(value);
@@ -249,11 +234,7 @@ public:
     {
         return Set(index, value);
     }
-    bool SetFloat(const int index, const float value)
-    {
-        return Set(index, value);
-    }
-    bool SetDouble(const int index, const double value)
+    bool SetFloat(const int index, const double value)
     {
         return Set(index, value);
     }
@@ -285,15 +266,6 @@ public:
             }
             break;
             case TDATA_FLOAT:
-            {
-                float fValue = boost::get<float>(var.variantData);
-                if (fValue > 0.001f  || fValue < -0.001f)
-                {
-                    bChanged = true;
-                }
-            }
-            break;
-            case TDATA_DOUBLE:
             {
                 double fValue = boost::get<double>(var.variantData);
                 if (fValue > 0.001f  || fValue < -0.001f)
@@ -350,10 +322,6 @@ public:
                     return fabs(Float(nPos) - src.Float(nPos)) < 0.001f;
                     break;
 
-                case TDATA_DOUBLE:
-                    return fabs(Double(nPos) - src.Double(nPos)) < 0.001f;
-                    break;
-
                 case TDATA_STRING:
                     return String(nPos) == src.String(nPos);
                     break;
@@ -376,14 +344,12 @@ public:
     }
 
 	virtual bool Add(const std::string& str, const NFINT64 value) = 0;
-	virtual bool Add(const std::string& str, const float value) = 0;
 	virtual bool Add(const std::string& str, const double value) = 0;
 	virtual bool Add(const std::string& str, const char* value) = 0;
 	virtual bool Add(const std::string& str, const std::string& value) = 0;
 	virtual bool Add(const std::string& str, const NFIDENTID& value) = 0;
 
 	virtual bool Set(const std::string& str, const NFINT64 value) = 0;
-	virtual bool Set(const std::string& str, const float value) = 0;
 	virtual bool Set(const std::string& str, const double value) = 0;
 	virtual bool Set(const std::string& str, const char* value) = 0;
 	virtual bool Set(const std::string& str, const std::string& value) = 0;
@@ -391,8 +357,7 @@ public:
 
 	// 获得数据
 	virtual NFINT64 Int(const std::string& str) const = 0;
-	virtual float Float(const std::string& str) const = 0;
-	virtual double Double(const std::string& str) const = 0;
+	virtual double Float(const std::string& str) const = 0;
 	virtual const std::string& String(const std::string& str) const = 0;
 	virtual NFIDENTID Object(const std::string& str) const = 0;
 /*
@@ -426,11 +391,6 @@ public:
     {
         return !(*this == src);
     }
-    inline NFIDataList& operator<<(const float value)
-    {
-        Add(value);
-        return *this;
-    }
     inline NFIDataList& operator<<(const double value)
     {
         Add(value);
@@ -452,11 +412,6 @@ public:
         Add(value);
         return *this;
     }
-//    inline NFIDataList& operator<<(const int64_t& value)
-//    {
-//        Add(NFINT64(value));
-//        return *this;
-//    }
 	inline NFIDataList& operator<<(const int value)
 	{
 		Add((NFINT64)value);
