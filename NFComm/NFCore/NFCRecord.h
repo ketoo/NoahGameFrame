@@ -13,6 +13,248 @@
 #include "NFIRecord.h"
 #include "NFCDataList.h"
 
+class LinqData
+{
+public:
+	void Init(NF_SHARE_PTR<NFIRecord> xRecord, const int nColSingleKey, TDATA_TYPE eColSingleType, const int nColMultiKey, TDATA_TYPE eColMultiType)
+	{
+		mxColData.xRecord = xRecord;
+
+		mxColData.nColSingleKey = nColSingleKey;
+		mxColData.eColSingleType = eColSingleType;
+		mxColData.nColMultiKey = nColMultiKey;
+		mxColData.eColMultiType = eColMultiType;
+	}
+
+	void OnEventHandler(const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar)
+	{
+		if (nCol == mxColData.nColSingleKey)
+		{
+			OnSinglekeyEventHandler(nOpType, nRow, nCol, oldVar, newVar);
+		}
+
+		if(nCol == mxColData.nColMultiKey)
+		{
+			OnMultiKeyEventHandler(nOpType, nRow, nCol, oldVar, newVar);
+		}
+	}
+
+protected:
+	void OnSinglekeyEventHandler(const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar)
+	{
+		TDATA_TYPE eColType = mxColData.xRecord->GetColType(nCol);
+
+		switch (nOpType)
+		{
+		case NFIRecord::RecordOptype::Add:
+			{
+				switch (eColType)
+				{
+				case TDATA_TYPE::TDATA_STRING:
+					{
+						//新数据
+						const std::string& strData = mxColData.xRecord->GetString(nRow, nCol);
+						mxSingleKeyStr.AddElement(strData, NF_SHARE_PTR<int>(new int(nRow)));
+					}
+					break;
+				case TDATA_TYPE::TDATA_INT:
+					{
+						const int nData = mxColData.xRecord->GetInt(nRow, nCol);
+						mxSingleKeyInt.AddElement(nData, NF_SHARE_PTR<int>(new int(nRow)));
+					}
+					break;
+				case TDATA_TYPE::TDATA_OBJECT:
+					{
+						const NFIDENTID xID = mxColData.xRecord->GetObject(nRow, nCol);
+						mxSingleKeyObject.AddElement(xID, NF_SHARE_PTR<int>(new int(nRow)));
+					}
+					break;
+				default:
+					break;
+				}
+			}
+			break;
+		case NFIRecord::RecordOptype::Del:
+			{
+				switch (eColType)
+				{
+				case TDATA_TYPE::TDATA_STRING:
+					{
+						//新数据
+						const std::string& strData = mxColData.xRecord->GetString(nRow, nCol);
+						mxSingleKeyStr.RemoveElement(strData);
+					}
+					break;
+				case TDATA_TYPE::TDATA_INT:
+					{
+						const int nData = mxColData.xRecord->GetInt(nRow, nCol);
+						mxSingleKeyInt.RemoveElement(nData);
+					}
+					break;
+				case TDATA_TYPE::TDATA_OBJECT:
+					{
+						const NFIDENTID xID = mxColData.xRecord->GetObject(nRow, nCol);
+						mxSingleKeyObject.RemoveElement(xID);
+					}
+					break;
+				default:
+					break;
+				}
+			}
+			break;
+		case NFIRecord::RecordOptype::Changed:
+		case NFIRecord::RecordOptype::UpData:
+			{
+				//既然是key，那么就只能单独添加和删除,不存在更新，否是是使用错误
+				switch (eColType)
+				{
+				case TDATA_TYPE::TDATA_STRING:
+					{
+
+					}
+					break;
+				case TDATA_TYPE::TDATA_INT:
+					{
+
+					}
+					break;
+				case TDATA_TYPE::TDATA_OBJECT:
+					{
+
+					}
+					break;
+				default:
+					break;
+				}
+			}
+			break;
+		case NFIRecord::RecordOptype::Create:
+			break;
+			{
+				switch (eColType)
+				{
+				case TDATA_TYPE::TDATA_STRING:
+					{
+
+					}
+					break;
+				case TDATA_TYPE::TDATA_INT:
+					{
+
+					}
+					break;
+				case TDATA_TYPE::TDATA_OBJECT:
+					{
+
+					}
+					break;
+				default:
+					break;
+				}
+			}
+			break;
+		case NFIRecord::RecordOptype::Cleared:
+			break;
+		case NFIRecord::RecordOptype::Sort:
+			break;
+		default:
+			break;
+		}
+	}
+
+	void OnMultiKeyEventHandler(const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar)
+	{
+		TDATA_TYPE eColType = mxColData.xRecord->GetColType(nCol);
+
+		switch (nOpType)
+		{
+		case NFIRecord::RecordOptype::Add:
+			{
+				switch (eColType)
+				{
+				case TDATA_TYPE::TDATA_STRING:
+					{
+						//新数据
+						const std::string& strData = mxColData.xRecord->GetString(nRow, nCol);
+						mxSingleKeyStr.AddElement(strData, NF_SHARE_PTR<int>(new int(nRow)));
+					}
+					break;
+				case TDATA_TYPE::TDATA_INT:
+					{
+						const int nData = mxColData.xRecord->GetInt(nRow, nCol);
+						mxSingleKeyInt.AddElement(nData, NF_SHARE_PTR<int>(new int(nRow)));
+					}
+					break;
+				case TDATA_TYPE::TDATA_OBJECT:
+					{
+						const NFIDENTID xID = mxColData.xRecord->GetObject(nRow, nCol);
+						mxSingleKeyObject.AddElement(xID, NF_SHARE_PTR<int>(new int(nRow)));
+					}
+					break;
+				default:
+					break;
+				}
+			}
+			break;
+		case NFIRecord::RecordOptype::Del:
+			{
+			}
+			break;
+		case NFIRecord::RecordOptype::UpData:
+			{
+			}
+			break;
+		case NFIRecord::RecordOptype::Swap:
+			{
+			}
+			break;
+		case NFIRecord::RecordOptype::Create:
+			break;
+		case NFIRecord::RecordOptype::Cleared:
+			break;
+		case NFIRecord::RecordOptype::Sort:
+			break;
+		default:
+			break;
+		}
+	}
+protected:
+
+	struct LinqColData
+	{
+		LinqColData()
+		{
+			nColSingleKey = 0;
+			eColSingleType = TDATA_UNKNOWN;
+			nColMultiKey = 0;
+			eColMultiType = TDATA_UNKNOWN;
+		};
+
+		NF_SHARE_PTR<NFIRecord> xRecord;
+
+		int nColSingleKey;
+		TDATA_TYPE eColSingleType;
+		int nColMultiKey;
+		TDATA_TYPE eColMultiType;
+	};
+
+protected:
+
+	LinqColData mxColData;
+
+	//单key:col->row
+	NFMapEx<std::string, int> mxSingleKeyStr;
+	NFMapEx<int, int> mxSingleKeyInt;
+	NFMapEx<NFIDENTID, int> mxSingleKeyObject;
+
+	//多key:col->row_list<row, used_state>
+	NFMapEx<std::string, NFMapEx<int, int> > mxMultiKeyStr;
+	NFMapEx<int, NFMapEx<int, int> > mxultiKeyInt;
+	NFMapEx<NFIDENTID, NFMapEx<int, int> > mxultiKeyObject;
+
+private:
+};
+
 class NFCRecord : public NFIRecord
 {
 public:
