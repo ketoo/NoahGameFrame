@@ -56,7 +56,6 @@ public:
     virtual bool Split(const char* strData, const char* strSplit);
 
     virtual bool Add(const NFINT64 value);
-    virtual bool Add(const float value);
     virtual bool Add(const double value);
     virtual bool Add(const char* value);
     virtual bool Add(const std::string& value);
@@ -64,7 +63,6 @@ public:
     virtual bool Add(const void* value);
 
     virtual bool Set(const int index, const NFINT64 value);
-    virtual bool Set(const int index, const float value);
     virtual bool Set(const int index, const double value);
     virtual bool Set(const int index, const char* value);
     virtual bool Set(const int index, const NFIDENTID& value);
@@ -72,8 +70,7 @@ public:
 
     // 获得数据
     virtual NFINT64 Int(const int index) const;
-    virtual float Float(const int index) const;
-    virtual double Double(const int index) const;
+    virtual double Float(const int index) const;
     virtual std::string StringValEx(const int index) const;
     virtual const std::string& String(const int index) const;
     virtual NFIDENTID Object(const int index) const;
@@ -83,14 +80,12 @@ public:
 
 	//////////////////////////////////////////////////////////////////////////
 	virtual bool Add(const std::string& str, const NFINT64 value);
-	virtual bool Add(const std::string& str, const float value);
 	virtual bool Add(const std::string& str, const double value);
 	virtual bool Add(const std::string& str, const char* value);
 	virtual bool Add(const std::string& str, const std::string& value);
 	virtual bool Add(const std::string& str, const NFIDENTID& value);
 
 	virtual bool Set(const std::string& str, const NFINT64 value);
-	virtual bool Set(const std::string& str, const float value);
 	virtual bool Set(const std::string& str, const double value);
 	virtual bool Set(const std::string& str, const char* value);
 	virtual bool Set(const std::string& str, const std::string& value);
@@ -98,8 +93,7 @@ public:
 
 	// 获得数据
 	virtual NFINT64 Int(const std::string& str) const;
-	virtual float Float(const std::string& str) const;
-	virtual double Double(const std::string& str) const;
+	virtual double Float(const std::string& str) const;
 	virtual const std::string& String(const std::string& str) const;
 	virtual NFIDENTID Object(const std::string& str) const;
 
