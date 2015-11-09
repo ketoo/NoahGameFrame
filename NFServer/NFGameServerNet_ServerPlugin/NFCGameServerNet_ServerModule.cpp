@@ -445,7 +445,7 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDataList& argVar, c
 						{
 							NFMsg::PropertyFloat* pDataFloat = pPublicData->add_property_float_list();
 							pDataFloat->set_property_name( pPropertyInfo->GetKey() );
-							pDataFloat->set_data( pPropertyInfo->GetInt() );
+							pDataFloat->set_data( pPropertyInfo->GetFloat() );
 						}
 
 						if ( pPropertyInfo->GetPrivate() )
@@ -453,24 +453,6 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDataList& argVar, c
 							NFMsg::PropertyFloat* pDataFloat = pPrivateData->add_property_float_list();
 							pDataFloat->set_property_name( pPropertyInfo->GetKey() );
 							pDataFloat->set_data( pPropertyInfo->GetFloat() );
-						}
-					}
-					break;
-
-				case TDATA_DOUBLE:
-					{
-						if ( pPropertyInfo->GetPublic() )
-						{
-							NFMsg::PropertyFloat* pDataFloat = pPublicData->add_property_float_list();
-							pDataFloat->set_property_name( pPropertyInfo->GetKey() );
-							pDataFloat->set_data( pPropertyInfo->GetDouble() );
-						}
-
-						if ( pPropertyInfo->GetPrivate() )
-						{
-							NFMsg::PropertyFloat* pDataFloat = pPrivateData->add_property_float_list();
-							pDataFloat->set_property_name( pPropertyInfo->GetKey() );
-							pDataFloat->set_data( pPropertyInfo->GetDouble() );
 						}
 					}
 					break;
@@ -571,27 +553,15 @@ bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase*
 						}
 					}
 					break;
-				case TDATA_TYPE::TDATA_DOUBLE:
+				case TDATA_TYPE::TDATA_FLOAT:
 					{
-						double dwValue = pRecord->GetDouble( i, j );
+						double dwValue = pRecord->GetFloat( i, j );
 						//if ( dwValue < -0.01f || dwValue > 0.01f )
 						{
 							NFMsg::RecordFloat* pAddData = pAddRowStruct->add_record_float_list();
 							pAddData->set_row( i );
 							pAddData->set_col( j );
 							pAddData->set_data( dwValue );
-						}
-					}
-					break;
-				case TDATA_TYPE::TDATA_FLOAT:
-					{
-						float fValue = pRecord->GetFloat( i, j );
-						//if ( fValue < -0.01f || fValue > 0.01f )
-						{
-							NFMsg::RecordFloat* pAddData = pAddRowStruct->add_record_float_list();
-							pAddData->set_row( i );
-							pAddData->set_col( j );
-							pAddData->set_data( fValue );
 						}
 					}
 					break;
@@ -878,26 +848,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 			{
 				NFIDENTID identOld = valueBroadCaseList.Object( i );
 
-				SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_FLOAT, xPropertyFloat, identOld);
-			}
-		}
-		break;
-
-	case TDATA_DOUBLE:
-		{
-			NFMsg::ObjectPropertyFloat xPropertyDouble;
-			NFMsg::Ident* pIdent = xPropertyDouble.mutable_player_id();
-			*pIdent = NFToPB(self);
-
-			NFMsg::PropertyFloat* pDataFloat = xPropertyDouble.add_property_list();
-			pDataFloat->set_property_name( strPropertyName );
-			pDataFloat->set_data( newVar.Double( 0 ) );
-
-			for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
-			{
-				NFIDENTID identOld = valueBroadCaseList.Object( i );
-
-				SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyDouble, identOld);
+				SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyFloat, identOld);
 			}
 		}
 		break;
@@ -1018,18 +969,6 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
 						}
 					}
 					break;
-				case TDATA_DOUBLE:
-					{
-						float fValue = newVar.Double( i );
-						//if ( fValue > 0.001f  || fValue < -0.001f )
-						{
-							NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
-							pAddData->set_col( i );
-							pAddData->set_row( nRow );
-							pAddData->set_data( fValue );
-						}
-					}
-					break;
 				case TDATA_STRING:
 					{
 						const std::string& str = newVar.String( i );
@@ -1141,24 +1080,6 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
 					recordProperty->set_row( nRow );
 					recordProperty->set_col( nCol );
 					recordProperty->set_data( newVar.Float( 0 ) );
-
-					for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
-					{
-						NFIDENTID identOther = valueBroadCaseList.Object( i );
-
-						SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_FLOAT, xRecordChanged, identOther);
-					}
-				}
-			case TDATA_DOUBLE:
-				{
-					NFMsg::ObjectRecordFloat xRecordChanged;
-					*xRecordChanged.mutable_player_id() = NFToPB(self);
-
-					xRecordChanged.set_record_name( strRecordName );
-					NFMsg::RecordFloat* recordProperty = xRecordChanged.add_property_list();
-					recordProperty->set_row( nRow );
-					recordProperty->set_col( nCol );
-					recordProperty->set_data( newVar.Double( 0 ) );
 
 					for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 					{
@@ -2180,9 +2101,9 @@ void NFCGameServerNet_ServerModule::OnClienGMProcess( const NFIPacket& msg )
 			const int nContianerID = m_pKernelModule->GetPropertyInt(nPlayerID, "SceneID");
 			const int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, "GroupID");
 
-			float fX = m_pKernelModule->GetPropertyFloat(nPlayerID, "X");
-			float fY = m_pKernelModule->GetPropertyFloat(nPlayerID, "Y");
-			float fZ = m_pKernelModule->GetPropertyFloat(nPlayerID, "Z");
+			double fX = m_pKernelModule->GetPropertyFloat(nPlayerID, "X");
+			double fY = m_pKernelModule->GetPropertyFloat(nPlayerID, "Y");
+			double fZ = m_pKernelModule->GetPropertyFloat(nPlayerID, "Z");
 
 			const std::string& strObjectIndex = xMsg.command_str_value();
 			//const int nValue = xMsg.command_value();
