@@ -99,21 +99,7 @@ int NFCChatGroupBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, c
             pDataFloat->set_property_name( strPropertyName );
             pDataFloat->set_data( newVar.Float( 0 ) );
 
-            m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_FLOAT, xPropertyFloat);
-        }
-        break;
-
-    case TDATA_DOUBLE:
-        {
-            NFMsg::ObjectPropertyFloat xPropertyDouble;
-            NFMsg::Ident* pIdent = xPropertyDouble.mutable_player_id();
-            *pIdent = NFINetModule::NFToPB(self);
-
-            NFMsg::PropertyFloat* pDataFloat = xPropertyDouble.add_property_list();
-            pDataFloat->set_property_name( strPropertyName );
-            pDataFloat->set_data( newVar.Double( 0 ) );
-
-            m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyDouble);
+            m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyFloat);
         }
         break;
 
@@ -213,18 +199,6 @@ int NFCChatGroupBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, con
                 case TDATA_FLOAT:
                     {
                         float fValue = newVar.Float( i );
-                        //if ( fValue > 0.001f  || fValue < -0.001f )
-                        {
-                            NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
-                            pAddData->set_col( i );
-                            pAddData->set_row( nRow );
-                            pAddData->set_data( fValue );
-                        }
-                    }
-                    break;
-                case TDATA_DOUBLE:
-                    {
-                        float fValue = newVar.Double( i );
                         //if ( fValue > 0.001f  || fValue < -0.001f )
                         {
                             NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
@@ -372,21 +346,6 @@ int NFCChatGroupBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, con
                     recordProperty->set_row( nRow );
                     recordProperty->set_col( nCol );
                     recordProperty->set_data( newVar.Float( 0 ) );
-
-                    m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_RECORD_FLOAT, xRecordChanged);
-
-                }
-                break;
-            case TDATA_DOUBLE:
-                {
-                    NFMsg::ObjectRecordFloat xRecordChanged;
-                    *xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
-
-                    xRecordChanged.set_record_name( strRecordName );
-                    NFMsg::RecordFloat* recordProperty = xRecordChanged.add_property_list();
-                    recordProperty->set_row( nRow );
-                    recordProperty->set_col( nCol );
-                    recordProperty->set_data( newVar.Double( 0 ) );
 
                     m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_RECORD_DOUBLE, xRecordChanged);
 
