@@ -41,14 +41,12 @@ public:
     virtual const int GetPropertyIndex(const std::string& strProperty);
 
 	virtual bool SetPropertyInt(const std::string& strPropertyName, const NFINT64 nValue);
-	virtual bool SetPropertyFloat(const std::string& strPropertyName,  const float fValue);
-	virtual bool SetPropertyDouble(const std::string& strPropertyName, const double dwValue);
+	virtual bool SetPropertyFloat(const std::string& strPropertyName, const double dwValue);
 	virtual bool SetPropertyString(const std::string& strPropertyName, const std::string& strValue);
 	virtual bool SetPropertyObject(const std::string& strPropertyName, const NFIDENTID& obj);
 
 	virtual NFINT64 GetPropertyInt(const std::string& strPropertyName);
-	virtual float GetPropertyFloat(const std::string& strPropertyName);
-	virtual double GetPropertyDouble(const std::string& strPropertyName);
+	virtual double GetPropertyFloat(const std::string& strPropertyName);
 	virtual const std::string& GetPropertyString(const std::string& strPropertyName);
 	virtual NFIDENTID GetPropertyObject(const std::string& strPropertyName);
 
