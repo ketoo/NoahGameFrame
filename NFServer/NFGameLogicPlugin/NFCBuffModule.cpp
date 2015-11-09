@@ -196,11 +196,7 @@ int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFIDENTID& 
                             break;
 
                         case TDATA_FLOAT:
-                            pPropertyGroupRecord->SetFloat( nPropertyBuffGroupRow, nPropertyGroupCol, float( *pnEffectValue ) );
-                            break;
-
-                        case TDATA_DOUBLE:
-                            pPropertyGroupRecord->SetDouble( nPropertyBuffGroupRow, nPropertyGroupCol, double( *pnEffectValue ) );
+                            pPropertyGroupRecord->SetFloat( nPropertyBuffGroupRow, nPropertyGroupCol, double( *pnEffectValue ) );
                             break;
 
                         default:
@@ -220,11 +216,6 @@ int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFIDENTID& 
 
                         case TDATA_FLOAT:
                             valueEffectValue.nType = TDATA_FLOAT;
-                            valueEffectValue.variantData =  float( *pnEffectValue );
-                            break;
-
-                        case TDATA_DOUBLE:
-                            valueEffectValue.nType = TDATA_DOUBLE;
                             valueEffectValue.variantData = double( *pnEffectValue );
                             break;
 
