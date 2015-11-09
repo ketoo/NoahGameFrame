@@ -253,9 +253,9 @@ int NFCSkillModule::OnRequireUseSkillPosEvent( const NFIDENTID& self, const int 
     }
 
     int nSkillID = var.Int( 0 );
-    float fX = var.Float( 1 );
-    float fY = var.Float( 2 );
-    float fZ = var.Float( 3 );
+    double fX = var.Float( 1 );
+    double fY = var.Float( 2 );
+    double fZ = var.Float( 3 );
     //群伤，就只计算第一个人的闪避
 
     //结果事件

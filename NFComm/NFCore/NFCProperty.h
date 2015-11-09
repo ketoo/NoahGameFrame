@@ -27,8 +27,7 @@ public:
     virtual void SetValue(const NFIProperty* pProperty);
 
     virtual bool SetInt(const NFINT64 value);
-    virtual bool SetFloat(const float value);
-    virtual bool SetDouble(const double value);
+    virtual bool SetFloat(const double value);
     virtual bool SetString(const std::string& value);
     virtual bool SetObject(const NFIDENTID& value);
     virtual bool SetPointer(const void* value);
@@ -50,8 +49,7 @@ public:
     virtual void SetScriptFunction(const std::string& strScriptFunction);
 
     virtual NFINT64 GetInt() const;
-    virtual float GetFloat() const;
-    virtual double GetDouble() const;
+    virtual double GetFloat() const;
     virtual const std::string& GetString() const;
     virtual NFIDENTID GetObject() const;
     virtual void* GetPointer() const;
