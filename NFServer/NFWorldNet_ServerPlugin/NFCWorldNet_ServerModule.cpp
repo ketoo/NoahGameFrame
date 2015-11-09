@@ -921,27 +921,15 @@ bool NFCWorldNet_ServerModule::OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord
                         }
                     }
                     break;
-                case TDATA_TYPE::TDATA_DOUBLE:
+                case TDATA_TYPE::TDATA_FLOAT:
                     {
-                        double dwValue = pRecord->GetDouble( i, j );
+                        double dwValue = pRecord->GetFloat( i, j );
                         //if ( dwValue < -0.01f || dwValue > 0.01f )
                         {
                             NFMsg::RecordFloat* pAddData = pAddRowStruct->add_record_float_list();
                             pAddData->set_row( i );
                             pAddData->set_col( j );
                             pAddData->set_data( dwValue );
-                        }
-                    }
-                    break;
-                case TDATA_TYPE::TDATA_FLOAT:
-                    {
-                        float fValue = pRecord->GetFloat( i, j );
-                        //if ( fValue < -0.01f || fValue > 0.01f )
-                        {
-                            NFMsg::RecordFloat* pAddData = pAddRowStruct->add_record_float_list();
-                            pAddData->set_row( i );
-                            pAddData->set_col( j );
-                            pAddData->set_data( fValue );
                         }
                     }
                     break;
@@ -1038,7 +1026,7 @@ int NFCWorldNet_ServerModule::OnPropertyEnter( const NFIDataList& argVar, const 
                         {
                             NFMsg::PropertyFloat* pDataFloat = pPublicData->add_property_float_list();
                             pDataFloat->set_property_name( pPropertyInfo->GetKey() );
-                            pDataFloat->set_data( pPropertyInfo->GetInt() );
+                            pDataFloat->set_data( pPropertyInfo->GetFloat() );
                         }
 
                         if ( pPropertyInfo->GetPrivate() )
@@ -1046,24 +1034,6 @@ int NFCWorldNet_ServerModule::OnPropertyEnter( const NFIDataList& argVar, const 
                             NFMsg::PropertyFloat* pDataFloat = pPrivateData->add_property_float_list();
                             pDataFloat->set_property_name( pPropertyInfo->GetKey() );
                             pDataFloat->set_data( pPropertyInfo->GetFloat() );
-                        }
-                    }
-                    break;
-
-                case TDATA_DOUBLE:
-                    {
-                        if ( pPropertyInfo->GetPublic() )
-                        {
-                            NFMsg::PropertyFloat* pDataFloat = pPublicData->add_property_float_list();
-                            pDataFloat->set_property_name( pPropertyInfo->GetKey() );
-                            pDataFloat->set_data( pPropertyInfo->GetDouble() );
-                        }
-
-                        if ( pPropertyInfo->GetPrivate() )
-                        {
-                            NFMsg::PropertyFloat* pDataFloat = pPrivateData->add_property_float_list();
-                            pDataFloat->set_property_name( pPropertyInfo->GetKey() );
-                            pDataFloat->set_data( pPropertyInfo->GetDouble() );
                         }
                     }
                     break;
