@@ -53,23 +53,17 @@ TDATA_TYPE NFCLogicClassModule::ComputerType(const char* pstrTypeName, NFIDataLi
         var.variantData = (NFINT64)0;
         return TDATA_INT;
     }
-    else if (0 == strcmp(pstrTypeName, "float"))
-    {
-        var.nType = TDATA_FLOAT;
-        var.variantData = (float)0.0f;
-        return TDATA_FLOAT;
-    }
     else if (0 == strcmp(pstrTypeName, "string"))
     {
         var.nType = TDATA_STRING;
         var.variantData = NULL_STR;
         return TDATA_STRING;
     }
-    else if (0 == strcmp(pstrTypeName, "double"))
+    else if (0 == strcmp(pstrTypeName, "float"))
     {
-        var.nType = TDATA_DOUBLE;
+        var.nType = TDATA_FLOAT;
         var.variantData = (double)0.0f;
-        return TDATA_DOUBLE;
+        return TDATA_FLOAT;
     }
     else if (0 == strcmp(pstrTypeName, "object"))
     {
