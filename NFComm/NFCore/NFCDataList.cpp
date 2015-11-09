@@ -91,7 +91,6 @@ bool NFCDataList::Append(const NFIDataList::TData& TData)
 	{
 	case TDATA_INT:
 	case TDATA_FLOAT:
-	case TDATA_DOUBLE:
 	case TDATA_OBJECT:
 		{
 			AddValue(TData.nType, TData.variantData);
@@ -121,14 +120,9 @@ bool NFCDataList::Add(const NFINT64 value)
     return NFIDataList::AddValue<NFINT64>(TDATA_INT, value);
 }
 
-bool NFCDataList::Add(const float value)
-{
-    return AddValue<float>(TDATA_FLOAT, value);
-}
-
 bool NFCDataList::Add(const double value)
 {
-    return AddValue<double>(TDATA_DOUBLE, value);
+    return AddValue<double>(TDATA_FLOAT, value);
 }
 
 bool NFCDataList::Add(const char* value)
@@ -157,11 +151,6 @@ bool NFCDataList::Add( const std::string& str, const NFINT64 value )
 	return false;
 }
 
-bool NFCDataList::Add( const std::string& str, const float value )
-{
-	return false;
-}
-
 bool NFCDataList::Add( const std::string& str, const double value )
 {
 	return false;
@@ -183,15 +172,6 @@ bool NFCDataList::Add( const std::string& str, const NFIDENTID& value )
 }
 
 bool NFCDataList::Set(const int index, const NFINT64 value)
-{
-    if (index < GetCount() && index >= 0)
-    {
-        return SetValue(index, value);
-    }
-
-    return false;
-}
-bool NFCDataList::Set(const int index, const float value)
 {
     if (index < GetCount() && index >= 0)
     {
@@ -244,11 +224,6 @@ bool NFCDataList::Set( const std::string& str, const NFINT64 value )
 	return false;
 }
 
-bool NFCDataList::Set( const std::string& str, const float value )
-{
-	return false;
-}
-
 bool NFCDataList::Set( const std::string& str, const double value )
 {
 	return false;
@@ -284,23 +259,7 @@ NFINT64 NFCDataList::Int( const std::string& str ) const
 	return 0;
 }
 
-float NFCDataList::Float(const int index) const
-{
-    if (index < GetCount() && index >= 0)
-    {
-        return NumberVal<float>(index);
-    }
-
-    return 0.0f;
-}
-
-float NFCDataList::Float( const std::string& str ) const
-{
-	return 0.0f;
-}
-
-
-double NFCDataList::Double(const int index) const
+double NFCDataList::Float(const int index) const
 {
     if (index < GetCount() && index >= 0)
     {
@@ -310,7 +269,7 @@ double NFCDataList::Double(const int index) const
     return 0.0f;
 }
 
-double NFCDataList::Double( const std::string& str ) const
+double NFCDataList::Float( const std::string& str ) const
 {
 	return 0.0;
 }
@@ -505,10 +464,7 @@ void NFCDataList::InnerAppendEx(const NFIDataList& src, const int start, const i
                 AddValue<NFINT64>(vType, src.Int(i));
                 break;
             case TDATA_FLOAT:
-                AddValue<float>(vType, src.Float(i));
-                break;
-            case TDATA_DOUBLE:
-                AddValue<double>(vType, src.Double(i));
+                AddValue<double>(vType, src.Float(i));
                 break;
             case TDATA_STRING:
                 AddString(src.String(i).c_str());
@@ -541,10 +497,6 @@ std::string NFCDataList::StringValEx(const int index) const
 
 		case TDATA_FLOAT:
 			strData = boost::lexical_cast<std::string> (Float(index));
-			break;
-
-		case TDATA_DOUBLE:
-			strData = boost::lexical_cast<std::string> (Double(index));
 			break;
 
 		case TDATA_STRING:

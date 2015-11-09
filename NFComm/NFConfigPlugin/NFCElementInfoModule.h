@@ -96,8 +96,7 @@ public:
     virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager(const std::string& strConfigName);
 
     virtual NFINT64 GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName);
-    virtual float GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName);
-    virtual double GetPropertyDouble(const std::string& strConfigName, const std::string& strPropertyName);
+    virtual double GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName);
     virtual const std::string& GetPropertyString(const std::string& strConfigName, const std::string& strPropertyName);
 
 protected:

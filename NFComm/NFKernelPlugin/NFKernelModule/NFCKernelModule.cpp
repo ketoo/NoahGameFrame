@@ -292,9 +292,6 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFIDENTID& self, con
 					case TDATA_FLOAT:
 						pObject->SetPropertyFloat(strPropertyName, arg.Float(i + 1));
 						break;
-					case TDATA_DOUBLE:
-						pObject->SetPropertyDouble(strPropertyName, arg.Double(i + 1));
-						break;
 					case TDATA_STRING:
 						pObject->SetPropertyString(strPropertyName, arg.String(i + 1));
 						break;
@@ -387,25 +384,12 @@ bool NFCKernelModule::SetPropertyInt(const NFIDENTID& self, const std::string& s
 	return false;
 }
 
-bool NFCKernelModule::SetPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName,  const float fValue)
+bool NFCKernelModule::SetPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName, const double dValue)
 {
 	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
 	if (pObject.get())
 	{
-		return pObject->SetPropertyFloat(strPropertyName, fValue);
-	}
-
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
-
-	return false;
-}
-
-bool NFCKernelModule::SetPropertyDouble(const NFIDENTID& self, const std::string& strPropertyName, const double dValue)
-{
-	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
-	if (pObject.get())
-	{
-		return pObject->SetPropertyDouble(strPropertyName, dValue);
+		return pObject->SetPropertyFloat(strPropertyName, dValue);
 	}
 
 	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
@@ -452,25 +436,12 @@ NFINT64 NFCKernelModule::GetPropertyInt(const NFIDENTID& self, const std::string
 	return 0;
 }
 
-float NFCKernelModule::GetPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName)
+double NFCKernelModule::GetPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName)
 {
 	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
 	if (pObject.get())
 	{
 		return pObject->GetPropertyFloat(strPropertyName);
-	}
-
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
-
-	return 0.0f;
-}
-
-double NFCKernelModule::GetPropertyDouble(const NFIDENTID& self, const std::string& strPropertyName)
-{
-	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
-	if (pObject.get())
-	{
-		return pObject->GetPropertyDouble(strPropertyName);
 	}
 
 	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
@@ -570,54 +541,14 @@ bool NFCKernelModule::SetRecordInt(const NFIDENTID& self, const std::string& str
 	return false;
 }
 
-bool NFCKernelModule::SetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol,  const float fValue)
+bool NFCKernelModule::SetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const double dwValue)
 {
 	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
 	if (pObject.get())
 	{
-		if (!pObject->SetRecordFloat(strRecordName, nRow, nCol, fValue))
+		if (!pObject->SetRecordFloat(strRecordName, nRow, nCol, dwValue))
 		{
 			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordFloat for row  or col", __FUNCTION__, __LINE__);
-		}
-		else
-		{
-			return true;
-		}
-	}
-
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName + "| There is no object", __FUNCTION__, __LINE__);
-
-	return false;
-}
-
-bool NFCKernelModule::SetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const float value)
-{
-	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
-	if (pObject.get())
-	{
-		if (!pObject->SetRecordFloat(strRecordName, nRow, strColTag, value))
-		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordFloat for row  or col", __FUNCTION__, __LINE__);
-		}
-		else
-		{
-			return true;
-		}
-	}
-
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName + "| There is no object", __FUNCTION__, __LINE__);
-
-	return false;
-}
-
-bool NFCKernelModule::SetRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const double dwValue)
-{
-	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
-	if (pObject.get())
-	{
-		if (!pObject->SetRecordDouble(strRecordName, nRow, nCol, dwValue))
-		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordDouble for row  or col", __FUNCTION__, __LINE__);
 		}
 		else
 		{
@@ -630,14 +561,14 @@ bool NFCKernelModule::SetRecordDouble(const NFIDENTID& self, const std::string& 
 	return false;
 }
 
-bool NFCKernelModule::SetRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const double value)
+bool NFCKernelModule::SetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const double value)
 {
 	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
 	if (pObject.get())
 	{
-		if (!pObject->SetRecordDouble(strRecordName, nRow, strColTag, value))
+		if (!pObject->SetRecordFloat(strRecordName, nRow, strColTag, value))
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordDouble for row  or col", __FUNCTION__, __LINE__);
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordFloat for row  or col", __FUNCTION__, __LINE__);
 		}
 		else
 		{
@@ -756,7 +687,7 @@ NFINT64 NFCKernelModule::GetRecordInt(const NFIDENTID& self, const std::string& 
 	return 0;
 }
 
-float NFCKernelModule::GetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+double NFCKernelModule::GetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
 {
 	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
 	if (pObject.get())
@@ -766,41 +697,15 @@ float NFCKernelModule::GetRecordFloat(const NFIDENTID& self, const std::string& 
 
 	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
 
-	return 0.0f;
+	return 0.0;
 }
 
-float NFCKernelModule::GetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag)
+double NFCKernelModule::GetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag)
 {
 	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
 	if (pObject.get())
 	{
 		return pObject->GetRecordFloat(strRecordName, nRow, strColTag);
-	}
-
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-	return 0.0f;
-}
-
-double NFCKernelModule::GetRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
-{
-	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
-	if (pObject.get())
-	{
-		return pObject->GetRecordDouble(strRecordName, nRow, nCol);
-	}
-
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-	return 0.0;
-}
-
-double NFCKernelModule::GetRecordDouble(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag)
-{
-	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
-	if (pObject.get())
-	{
-		return pObject->GetRecordDouble(strRecordName, nRow, strColTag);
 	}
 
 	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
