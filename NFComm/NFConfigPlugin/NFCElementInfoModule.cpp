@@ -173,15 +173,6 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFI
                 {
                     NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 }
-                var.variantData = (float)atof(pstrConfigValue);
-            }
-            break;
-            case TDATA_DOUBLE:
-            {
-                if (strlen(pstrConfigValue) <= 0)
-                {
-                    NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
-                }
                 var.variantData = (double)atof(pstrConfigValue);
             }
             break;
@@ -233,23 +224,12 @@ NFINT64 NFCElementInfoModule::GetPropertyInt(const std::string& strConfigName, c
     return 0;
 }
 
-float NFCElementInfoModule::GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName)
+double NFCElementInfoModule::GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName)
 {
     NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
     if (pProperty.get())
     {
         return pProperty->GetFloat();
-    }
-
-    return 0.0f;
-}
-
-double NFCElementInfoModule::GetPropertyDouble(const std::string& strConfigName, const std::string& strPropertyName)
-{
-    NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
-    if (pProperty.get())
-    {
-        return pProperty->GetDouble();
     }
 
     return 0.0;

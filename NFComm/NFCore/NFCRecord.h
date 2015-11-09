@@ -282,15 +282,13 @@ public:
     virtual int AddRow(const int nRow, const NFIDataList& var);
 
     virtual bool SetInt(const int nRow, const int nCol, const NFINT64 value);
-    virtual bool SetFloat(const int nRow, const int nCol, const float value);
-    virtual bool SetDouble(const int nRow, const int nCol, const double value);
+    virtual bool SetFloat(const int nRow, const int nCol, const double value);
     virtual bool SetString(const int nRow, const int nCol, const char* value);
     virtual bool SetObject(const int nRow, const int nCol, const NFIDENTID& value);
     virtual bool SetPointer(const int nRow, const int nCol, const void* value);
 
     virtual bool SetInt(const int nRow, const std::string& strColTag, const NFINT64 value);
-    virtual bool SetFloat(const int nRow, const std::string& strColTag, const float value);
-    virtual bool SetDouble(const int nRow, const std::string& strColTag, const double value);
+    virtual bool SetFloat(const int nRow, const std::string& strColTag, const double value);
     virtual bool SetString(const int nRow, const std::string& strColTag, const char* value);
     virtual bool SetObject(const int nRow, const std::string& strColTag, const NFIDENTID& value);
     virtual bool SetPointer(const int nRow, const std::string& strColTag, const void* value);
@@ -300,31 +298,27 @@ public:
     virtual bool SwapRowInfo(const int nOriginRow, const int nTargetRow);
 
     virtual NFINT64 GetInt(const int nRow, const int nCol) const;
-    virtual float GetFloat(const int nRow, const int nCol) const;
-    virtual double GetDouble(const int nRow, const int nCol) const;
+    virtual double GetFloat(const int nRow, const int nCol) const;
     virtual const std::string& GetString(const int nRow, const int nCol) const;
     virtual NFIDENTID GetObject(const int nRow, const int nCol) const;
     virtual void* GetPointer(const int nRow, const int nCol) const;
 
     virtual NFINT64 GetInt(const int nRow, const std::string& strColTag) const;
-    virtual float GetFloat(const int nRow, const std::string& strColTag) const;
-    virtual double GetDouble(const int nRow, const std::string& strColTag) const;
+    virtual double GetFloat(const int nRow, const std::string& strColTag) const;
     virtual const std::string& GetString(const int nRow, const std::string& strColTag) const;
     virtual NFIDENTID GetObject(const int nRow, const std::string& strColTag) const;
     virtual void* GetPointer(const int nRow, const std::string& strColTag) const;
 
     virtual int FindRowByColValue(const int nCol, const NFIDataList& var, NFIDataList& varResult);
     virtual int FindInt(const int nCol, const NFINT64 value, NFIDataList& varResult);
-    virtual int FindFloat(const int nCol, const float value, NFIDataList& varResult);
-    virtual int FindDouble(const int nCol, const double value, NFIDataList& varResult);
+    virtual int FindFloat(const int nCol, const double value, NFIDataList& varResult);
     virtual int FindString(const int nCol, const char* value, NFIDataList& varResult);
     virtual int FindObject(const int nCol, const NFIDENTID& value, NFIDataList& varResult);
     virtual int FindPointer(const int nCol, const void* value, NFIDataList& varResult);
 
     virtual int FindRowByColValue(const std::string& strColTag, const NFIDataList& var, NFIDataList& varResult);
     virtual int FindInt(const std::string& strColTag, const NFINT64 value, NFIDataList& varResult);
-    virtual int FindFloat(const std::string& strColTag, const float value, NFIDataList& varResult);
-    virtual int FindDouble(const std::string& strColTag, const double value, NFIDataList& varResult);
+    virtual int FindFloat(const std::string& strColTag, const double value, NFIDataList& varResult);
     virtual int FindString(const std::string& strColTag, const char* value, NFIDataList& varResult);
     virtual int FindObject(const std::string& strColTag, const NFIDENTID& value, NFIDataList& varResult);
     virtual int FindPointer(const std::string& strColTag, const void* value, NFIDataList& varResult);
