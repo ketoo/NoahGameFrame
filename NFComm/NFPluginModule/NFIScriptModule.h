@@ -369,18 +369,11 @@ static NFINT64 KernelModule_GetElementPropertyInt(NFINT64 kernelAddress, const s
     return pElementInfoModule->GetPropertyInt(strConfigName, strPropertyName);
 }
 
-static float KernelModule_GetElementPropertyFloat(NFINT64 kernelAddress, const std::string& strConfigName, const std::string& strPropertyName)
+static double KernelModule_GetElementPropertyFloat(NFINT64 kernelAddress, const std::string& strConfigName, const std::string& strPropertyName)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     NFIElementInfoModule* pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pKernelModule->GetPluginManager()->FindModule("NFCElementInfoModule"));
     return pElementInfoModule->GetPropertyFloat(strConfigName, strPropertyName);
-}
-
-static double KernelModule_GetElementPropertyDouble(NFINT64 kernelAddress, const std::string& strConfigName, const std::string& strPropertyName)
-{
-    NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
-    NFIElementInfoModule* pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pKernelModule->GetPluginManager()->FindModule("NFCElementInfoModule"));
-    return pElementInfoModule->GetPropertyDouble(strConfigName, strPropertyName);
 }
 
 static const std::string& KernelModule_GetElementPropertyString(NFIKernelModule* pKernelModule, const std::string& strConfigName, const std::string& strPropertyName)
@@ -400,16 +393,10 @@ static bool KernelModule_SetPropertyInt(NFINT64 kernelAddress, const NFIDENTID& 
     return pKernelModule->SetPropertyInt(self, strPropertyName, nValue);
 }
 
-static bool KernelModule_SetPropertyFloat(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strPropertyName,  const float fValue)
+static bool KernelModule_SetPropertyFloat(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strPropertyName,  const double dValue)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
-    return pKernelModule->SetPropertyFloat(self, strPropertyName, fValue);
-}
-
-static bool KernelModule_SetPropertyDouble(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strPropertyName,  const double dValue)
-{
-    NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
-    return pKernelModule->SetPropertyDouble(self, strPropertyName, dValue);
+    return pKernelModule->SetPropertyFloat(self, strPropertyName, dValue);
 }
 
 static bool KernelModule_SetPropertyString(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strPropertyName, const std::string& strValue)
@@ -430,16 +417,10 @@ static NFINT64 KernelModule_GetPropertyInt(NFINT64 kernelAddress, const NFIDENTI
     return pKernelModule->GetPropertyInt(self, strPropertyName);
 }
 
-static float KernelModule_GetPropertyFloat(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strPropertyName)
+static double KernelModule_GetPropertyFloat(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strPropertyName)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->GetPropertyFloat(self, strPropertyName);
-}
-
-static double KernelModule_GetPropertyDouble(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strPropertyName)
-{
-    NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
-    return pKernelModule->GetPropertyDouble(self, strPropertyName);
 }
 
 static const std::string& KernelModule_GetPropertyString(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strPropertyName)
@@ -460,16 +441,10 @@ static bool KernelModule_SetRecordInt(NFINT64 kernelAddress, const NFIDENTID& se
     return pKernelModule->SetRecordInt(self, strRecordName, nRow, nCol, nValue);
 }
 
-static bool KernelModule_SetRecordFloat(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol,  const float fValue)
+static bool KernelModule_SetRecordFloat(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol,  const double dValue)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
-    return pKernelModule->SetRecordFloat(self, strRecordName, nRow, nCol, fValue);
-}
-
-static bool KernelModule_SetRecordDouble(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol,  const double dValue)
-{
-    NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
-    return pKernelModule->SetRecordDouble(self, strRecordName, nRow, nCol, dValue);
+    return pKernelModule->SetRecordFloat(self, strRecordName, nRow, nCol, dValue);
 }
 
 static bool KernelModule_SetRecordString(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue)
@@ -490,16 +465,10 @@ static NFINT64 KernelModule_GetRecordInt(NFINT64 kernelAddress, const NFIDENTID&
     return pKernelModule->GetRecordInt(self, strRecordName, nRow, nCol);
 }
 
-static float KernelModule_GetRecordFloat(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+static double KernelModule_GetRecordFloat(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->GetRecordFloat(self, strRecordName, nRow, nCol);
-}
-
-static double KernelModule_GetRecordDouble(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
-{
-    NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
-    return pKernelModule->GetRecordDouble(self, strRecordName, nRow, nCol);
 }
 
 static const std::string& KernelModule_GetRecordString(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
