@@ -63,6 +63,40 @@ public:
             nType = TDATA_UNKNOWN;
         }
 
+        template<typename T>
+        T Value() const
+        {
+            T result = 0;
+            if (nType == TDATA_FLOAT
+                || nType == TDATA_INT)
+            {
+                result = boost::get<T>(variantData);
+            }
+
+            return result;
+        }
+
+        const std::string& String() const
+        {
+            if (TDATA_STRING == nType)
+            {
+                return boost::get<const std::string&>(variantData);
+            }
+
+            return NULL_STR;
+        }
+
+        const NFIDENTID& Object() const
+        {
+            NFIDENTID result;
+            if (TDATA_STRING == nType)
+            {
+                return boost::get<const NFIDENTID&>(variantData);
+            }
+
+            return result;
+        }
+
         TDATA_TYPE nType;
         boost::variant<NFINT64, double, std::string, NFIDENTID, void*> variantData;
     };
