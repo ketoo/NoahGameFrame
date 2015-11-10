@@ -58,9 +58,9 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFIDENTID& self, const std::s
     return 0;
 }
 
-int NFCNPCRefreshModule::OnObjectHPEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
+int NFCNPCRefreshModule::OnObjectHPEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-    if ( newVar.Int( 0 ) <= 0 )
+    if ( newVar.Value<NFINT64>() <= 0 )
     {
         NFIDENTID identAttacker = m_pKernelModule->GetPropertyObject( self, "LastAttacker" );
         if (!identAttacker.IsNull())
