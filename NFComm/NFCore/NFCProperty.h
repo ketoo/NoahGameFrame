@@ -60,7 +60,7 @@ public:
 
     virtual NFIDataList::TData GetValue() const;
 
-    int OnEventHandler(const NFIDataList& oldVar, const NFIDataList& newVar);
+    int OnEventHandler(const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
     virtual std::string ToString();
     virtual bool FromString(const std::string& strData);

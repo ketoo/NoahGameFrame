@@ -63,13 +63,13 @@ void NFCProperty::SetValue(const NFIDataList::TData& TData)
         m_pTData->variantData = TData.variantData;
     }
 
-    NFCDataList oldValue;
-    oldValue.Append(*m_pTData);
+    NFCDataList::TData oldValue;
+    oldValue = *m_pTData;
 
     m_pTData->variantData = TData.variantData;
 
-    NFCDataList newValue;
-    newValue.Append(*m_pTData);
+    NFCDataList::TData newValue;
+    newValue = *m_pTData;
 
     OnEventHandler(oldValue , newValue);
 }
@@ -231,7 +231,7 @@ void NFCProperty::RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb)
     mtPropertyCallback.push_back(cb);
 }
 
-int NFCProperty::OnEventHandler(const NFIDataList& oldVar, const NFIDataList& newVar)
+int NFCProperty::OnEventHandler(const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
     if (mtPropertyCallback.size() <= 0)
     {
@@ -282,13 +282,13 @@ bool NFCProperty::SetInt(const NFINT64 value)
 
     if (TDATA_INT == m_pTData->nType)
     {
-        NFCDataList oldValue;
-        oldValue.Append(*m_pTData);
+        NFCDataList::TData oldValue;
+        oldValue = *m_pTData;
 
         m_pTData->variantData = value;
 
-        NFCDataList newValue;
-        newValue.Append(*m_pTData);
+        NFCDataList::TData newValue;
+        newValue = *m_pTData;
 
         OnEventHandler(oldValue , newValue);
 
@@ -330,13 +330,13 @@ bool NFCProperty::SetFloat(const double value)
 
     if (TDATA_FLOAT == m_pTData->nType)
     {
-        NFCDataList oldValue;
-        oldValue.Append(*m_pTData);
+        NFCDataList::TData oldValue;
+        oldValue = *m_pTData;
 
         m_pTData->variantData = value;
 
-        NFCDataList newValue;
-        newValue.Append(*m_pTData);
+        NFCDataList::TData newValue;
+        newValue = *m_pTData;
 
         OnEventHandler(oldValue , newValue);
 
@@ -377,13 +377,13 @@ bool NFCProperty::SetString(const std::string& value)
 
     if (TDATA_STRING == m_pTData->nType)
     {
-        NFCDataList oldValue;
-        oldValue.Append(*m_pTData);
+        NFCDataList::TData oldValue;
+        oldValue = *m_pTData;
 
         m_pTData->variantData = value;
 
-        NFCDataList newValue;
-        newValue.Append(*m_pTData);
+        NFCDataList::TData newValue;
+        newValue = *m_pTData;
 
         OnEventHandler(oldValue , newValue);
 
@@ -425,13 +425,13 @@ bool NFCProperty::SetObject(const NFIDENTID& value)
 
     if (TDATA_OBJECT == m_pTData->nType)
     {
-        NFCDataList oldValue;
-        oldValue.Append(*m_pTData);
+        NFCDataList::TData oldValue;
+        oldValue = *m_pTData;
 
         m_pTData->variantData = value;
 
-        NFCDataList newValue;
-        newValue.Append(*m_pTData);
+        NFCDataList::TData newValue;
+        newValue = *m_pTData;
 
         OnEventHandler(oldValue , newValue);
 

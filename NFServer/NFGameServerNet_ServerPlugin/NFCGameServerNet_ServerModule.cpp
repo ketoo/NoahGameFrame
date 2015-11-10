@@ -766,13 +766,8 @@ int NFCGameServerNet_ServerModule::OnObjectListLeave( const NFIDataList& self, c
 	return 1;
 }
 
-int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
+int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-	if ( oldVar.GetCount() <= 0 )
-	{
-		return 0;
-	}
-
 	//if ( "Player" == m_pKernelModule->GetPropertyString( self, "ClassName" ) )
 	{
 		if ( "GroupID" == strPropertyName )
@@ -813,7 +808,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 		return 0;
 	}
 
-	switch ( oldVar.Type( 0 ) )
+	switch ( oldVar.nType)
 	{
 	case TDATA_INT:
 		{
@@ -823,7 +818,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 
 			NFMsg::PropertyInt* pDataInt = xPropertyInt.add_property_list();
 			pDataInt->set_property_name( strPropertyName );
-			pDataInt->set_data( newVar.Int( 0 ) );
+			pDataInt->set_data( newVar.Value<NFINT64>() );
 
 			for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 			{
@@ -842,7 +837,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 
 			NFMsg::PropertyFloat* pDataFloat = xPropertyFloat.add_property_list();
 			pDataFloat->set_property_name( strPropertyName );
-			pDataFloat->set_data( newVar.Float( 0 ) );
+			pDataFloat->set_data( newVar.Value<double>() );
 
 			for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 			{
@@ -861,7 +856,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 
 			NFMsg::PropertyString* pDataString = xPropertyString.add_property_list();
 			pDataString->set_property_name( strPropertyName );
-			pDataString->set_data( newVar.String( 0 ) );
+			pDataString->set_data( newVar.String() );
 
 			for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 			{
@@ -880,7 +875,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 
 			NFMsg::PropertyObject* pDataObject = xPropertyObject.add_property_list();
 			pDataObject->set_property_name( strPropertyName );
-			*pDataObject->mutable_data() = NFToPB(newVar.Object( 0 ));
+			*pDataObject->mutable_data() = NFToPB(newVar.Object());
 
 			for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 			{
@@ -1235,14 +1230,14 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent( const NFIDENTID& self, co
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
+int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
 	//容器发生变化，只可能从A容器的0层切换到B容器的0层
 	//需要注意的是------------任何层改变的时候，此玩家其实还未进入层，因此，层改变的时候获取的玩家列表，目标层是不包含自己的
 	int nSceneID = m_pKernelModule->GetPropertyInt( self, "SceneID" );
 
 	//广播给别人自己离去(层降或者跃层)
-	int nOldGroupID = oldVar.Int( 0 );
+	int nOldGroupID = oldVar.Value<NFINT64>();
 	if ( nOldGroupID > 0 )
 	{
 		NFCDataList valueAllOldObjectList;
@@ -1277,7 +1272,7 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const st
 	}
 
 	//再广播给别人自己出现(层升或者跃层)
-	int nNewGroupID = newVar.Int( 0 );
+	int nNewGroupID = newVar.Value<NFINT64>();
 	if ( nNewGroupID > 0 )
 	{
 		//这里需要把自己从广播中排除
@@ -1348,12 +1343,12 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const st
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
+int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
 	//容器发生变化，只可能从A容器的0层切换到B容器的0层
 	//需要注意的是------------任何容器改变的时候，玩家必须是0层
-	int nOldSceneID = oldVar.Int( 0 );
-	int nNowSceneID = newVar.Int( 0 );
+	int nOldSceneID = oldVar.Value<NFINT64>();
+	int nNowSceneID = newVar.Value<NFINT64>();
 
 	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "Enter Scene:", nNowSceneID);
 
