@@ -51,7 +51,7 @@ public:
     }
 
     template<typename BaseType>
-    bool AddPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const NFIDataList&, const NFIDataList&))
+    bool AddPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&))
     {
 		NF_SHARE_PTR<NFIObject> pObject = GetObject(self);
 		if (pObject.get())
@@ -90,7 +90,7 @@ public:
 
     //只能网络模块注册，回调用来同步对象属性事件,所有的类属性都会回调
     template<typename BaseType>
-    bool ResgisterCommonPropertyEvent(BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const NFIDataList&, const NFIDataList&))
+    bool ResgisterCommonPropertyEvent(BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&))
     {
         PROPERTY_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         PROPERTY_EVENT_FUNCTOR_PTR functorPtr(new PROPERTY_EVENT_FUNCTOR(functor));

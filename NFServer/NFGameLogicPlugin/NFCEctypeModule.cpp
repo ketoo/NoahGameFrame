@@ -203,7 +203,7 @@ bool NFCEctypeModule::CompleteEctypeMode(const NFIDENTID self, const int nContai
     return true;
 }
 
-int NFCEctypeModule::OnObjectGroupIDEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
+int NFCEctypeModule::OnObjectGroupIDEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
 
     return 0;
