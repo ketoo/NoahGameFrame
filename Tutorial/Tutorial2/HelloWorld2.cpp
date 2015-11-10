@@ -11,10 +11,10 @@ bool HelloWorld2::Init()
     return true;
 }
 
-int HelloWorld2::OnPropertyCallBackEvent( const NFIDENTID& self, const std::string& strProperty, const NFIDataList& oldVarList, const NFIDataList& newVarList )
+int HelloWorld2::OnPropertyCallBackEvent( const NFIDENTID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
 {
     //属性回调事件，只要属性值内容有变化，就会被回调
-    std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVarList.Int(0) << " NewValue: " << newVarList.Int(0) << std::endl;
+    std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVar.Value<NFINT64>() << " NewValue: " << newVar.Value<NFINT64>() << std::endl;
 
     return 0;
 }

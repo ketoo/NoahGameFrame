@@ -1201,7 +1201,7 @@ bool NFCKernelModule::LogInfo(const NFIDENTID ident)
 	return true;
 }
 
-int NFCKernelModule::OnPropertyCommonEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
+int NFCKernelModule::OnPropertyCommonEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
 	if (IsContainer(self))
 	{
