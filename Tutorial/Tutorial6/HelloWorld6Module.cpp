@@ -19,7 +19,7 @@ bool HelloWorld6Module::AfterInit()
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
     m_pLuaScriptModule = dynamic_cast<NFILuaScriptModule*>(pPluginManager->FindModule("NFCLuaScriptModule"));
 
-    assert( NULL != m_pLuaScriptModule);
+    //assert( NULL != m_pLuaScriptModule);
 
     m_pKernelModule->CreateContainer(1, "");
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(NFIDENTID(), 1, 0, "Player", "", NFCDataList());
