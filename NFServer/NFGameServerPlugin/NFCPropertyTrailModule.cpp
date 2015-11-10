@@ -115,15 +115,15 @@ int NFCPropertyTrailModule::LogObjectData( const NFIDENTID& self )
 	return 0;
 }
 
-int NFCPropertyTrailModule::OnObjectPropertyEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar )
+int NFCPropertyTrailModule::OnObjectPropertyEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
 {
 	std::ostringstream stream;
 
 	stream << " Trailing ";
 	stream << " [Old] ";
-	stream << oldVar.StringValEx(0);
+	stream << oldVar.String();
 	stream << " [New] ";
-	stream << newVar.StringValEx(0);
+	stream << newVar.String();
 
 	m_pLogModule->LogProperty(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, strPropertyName, stream.str(),  __FUNCTION__, __LINE__);
 

@@ -48,13 +48,8 @@ bool NFCWorldGuildBroadcastModule::AfterInit()
     return true;
 }
 
-int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
+int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-    if ( oldVar.GetCount() <= 0 )
-    {
-        return 0;
-    }
-
     if ( "Guild" != m_pKernelModule->GetPropertyString( self, "ClassName" ))
     {
         return 0;
@@ -73,7 +68,7 @@ int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, 
         return 0;
     }
 
-    switch ( oldVar.Type( 0 ) )
+    switch ( oldVar.nType )
     {
     case TDATA_INT:
         {
@@ -83,7 +78,7 @@ int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, 
 
             NFMsg::PropertyInt* pDataInt = xPropertyInt.add_property_list();
             pDataInt->set_property_name( strPropertyName );
-            pDataInt->set_data( newVar.Int( 0 ) );
+            pDataInt->set_data( newVar.Value<NFINT64>() );
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt);
 
@@ -98,7 +93,7 @@ int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, 
 
             NFMsg::PropertyFloat* pDataFloat = xPropertyFloat.add_property_list();
             pDataFloat->set_property_name( strPropertyName );
-            pDataFloat->set_data( newVar.Float( 0 ) );
+            pDataFloat->set_data( newVar.Value<double>() );
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyFloat);
         }
@@ -112,7 +107,7 @@ int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, 
 
             NFMsg::PropertyString* pDataString = xPropertyString.add_property_list();
             pDataString->set_property_name( strPropertyName );
-            pDataString->set_data( newVar.String( 0 ) );
+            pDataString->set_data( newVar.String() );
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString);
         }
@@ -126,7 +121,7 @@ int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, 
 
             NFMsg::PropertyObject* pDataObject = xPropertyObject.add_property_list();
             pDataObject->set_property_name( strPropertyName );
-            *pDataObject->mutable_data() = NFINetModule::NFToPB(newVar.Object( 0 ));
+            *pDataObject->mutable_data() = NFINetModule::NFToPB(newVar.Object());
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject);
 
