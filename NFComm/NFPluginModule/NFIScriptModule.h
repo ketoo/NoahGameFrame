@@ -119,7 +119,7 @@ public:
         return 0;
     }
 
-    virtual int DoPropertyCommEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
+    virtual int DoPropertyCommEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
     {
         NFCSriptData* pScriptData = GetElement(self);
         if (pScriptData)
@@ -212,7 +212,7 @@ public:
     virtual int DoEventScript(const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg) = 0;
     virtual int DoHeartBeatScript(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction) = 0;
 
-    virtual int DoScriptPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& oldVar, const NFCDataList& newVar) = 0;
+    virtual int DoScriptPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFCDataList::TData& oldVar, const NFCDataList::TData& newVar) = 0;
     virtual int DoScriptRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCDataList& oldVar, const NFCDataList& newVar) = 0;
 
     // operating function
@@ -241,7 +241,7 @@ public:
         return true;
     }
 
-    int OnPropertyCB(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
+    int OnPropertyCB(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
     {
         return DoPropertyCommEvent(self, strPropertyName, oldVar, newVar);
     }

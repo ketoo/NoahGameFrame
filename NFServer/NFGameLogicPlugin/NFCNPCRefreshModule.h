@@ -36,7 +36,7 @@ public:
 protected:
     int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    int OnObjectHPEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar);
+    int OnObjectHPEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
     int OnDeadDestroyHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
 private:
