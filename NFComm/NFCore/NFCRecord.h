@@ -12,6 +12,7 @@
 #include <vector>
 #include "NFIRecord.h"
 #include "NFCDataList.h"
+#include "NFMapEx.h"
 
 class LinqData
 {
@@ -102,7 +103,7 @@ protected:
 				}
 			}
 			break;
-		case NFIRecord::RecordOptype::Changed:
+		case NFIRecord::RecordOptype::Swap:
 		case NFIRecord::RecordOptype::UpData:
 			{
 				//既然是key，那么就只能单独添加和删除,不存在更新，否是是使用错误
