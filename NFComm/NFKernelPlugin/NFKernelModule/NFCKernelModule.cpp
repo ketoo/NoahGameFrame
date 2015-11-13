@@ -462,7 +462,7 @@ const std::string& NFCKernelModule::GetPropertyString(const NFIDENTID& self, con
 	return NULL_STR;
 }
 
-NFIDENTID NFCKernelModule::GetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName)
+const NFIDENTID& NFCKernelModule::GetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName)
 {
 	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
 	if (pObject.get())
@@ -472,7 +472,7 @@ NFIDENTID NFCKernelModule::GetPropertyObject(const NFIDENTID& self, const std::s
 
 	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
 
-	return NFIDENTID();
+	return NULL_OBJECT;
 }
 
 NF_SHARE_PTR<NFIRecord> NFCKernelModule::FindRecord(const NFIDENTID& self, const std::string& strRecordName)
@@ -739,7 +739,7 @@ const std::string& NFCKernelModule::GetRecordString(const NFIDENTID& self, const
 	return NULL_STR;
 }
 
-NFIDENTID NFCKernelModule::GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+const NFIDENTID& NFCKernelModule::GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
 {
 	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
 	if (pObject.get())
@@ -749,10 +749,10 @@ NFIDENTID NFCKernelModule::GetRecordObject(const NFIDENTID& self, const std::str
 
 	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object",  __FUNCTION__, __LINE__);
 
-	return NFIDENTID();
+	return NULL_OBJECT;
 }
 
-NFIDENTID NFCKernelModule::GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag)
+const NFIDENTID& NFCKernelModule::GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag)
 {
 	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
 	if (pObject.get())
@@ -762,7 +762,7 @@ NFIDENTID NFCKernelModule::GetRecordObject(const NFIDENTID& self, const std::str
 
 	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object",  __FUNCTION__, __LINE__);
 
-	return NFIDENTID();
+	return NULL_OBJECT;
 }
 
 bool NFCKernelModule::SwitchScene(const NFIDENTID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIDataList& arg)
@@ -1431,7 +1431,7 @@ bool NFCKernelModule::AddRecord(const NFIDENTID& self, const std::string& strRec
 	return false;
 }
 
-NFIDENTID NFCKernelModule::GetGridID(const float fX, const float fY, const float fZ)
+const NFIDENTID& NFCKernelModule::GetGridID(const float fX, const float fY, const float fZ)
 {
 	return NFCGridModule::ComputerGridID((int)fX, (int)fY, (int)fZ);
 }
