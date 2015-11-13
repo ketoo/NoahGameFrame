@@ -78,6 +78,21 @@ bool NFCPluginManager::LoadPlugin()
         return false;
     }
 
+    rapidxml::xml_node<>* pPluginConfigPathNode = pRoot->first_node("ConfigPath");
+    if (!pPluginConfigPathNode)
+    {
+        NFASSERT(0, "There are no ConfigPath", __FILE__, __FUNCTION__);
+        return false;
+    }
+
+    if (NULL == pPluginConfigPathNode->first_attribute( "Name" ))
+    {
+        NFASSERT(0, "There are no ConfigPath.Name", __FILE__, __FUNCTION__);
+        return false;
+    }
+
+    mstrConfigPath = pPluginConfigPathNode->first_attribute( "Name" )->value();
+
     return true;
 }
 

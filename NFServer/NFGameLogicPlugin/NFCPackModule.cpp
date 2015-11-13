@@ -100,37 +100,37 @@ PackTableType NFCPackModule::GetPackType( const std::string& name )
     return PackTableType::None_Pack;
 }
 
-NFIDENTID NFCPackModule::CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount, const NFIDataList& inlayCardList, const int nIntensiveLevel, const int nEnchantLevel, const std::string& strEnchantCard )
+const NFIDENTID& NFCPackModule::CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount, const NFIDataList& inlayCardList, const int nIntensiveLevel, const int nEnchantLevel, const std::string& strEnchantCard )
 {
     if (nSoltCount > mnMaxSlotCount || inlayCardList.GetCount() > mnMaxSlotCount)
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
     if ( NULL == pObject )
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
     //还得确定有这个装备
     NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager( strConfigName );
     if ( NULL == pPropertyManager )
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
     NF_SHARE_PTR<NFIProperty> pPropertyType = pPropertyManager->GetElement( "ItemType" );
     if (NULL == pPropertyType)
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
     // 判断物品是否为装备
     int nItemType = pPropertyType->GetInt();
     if ( EGameItemType::EGIT_Equip != nItemType )
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
     NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
@@ -190,17 +190,17 @@ NFIDENTID NFCPackModule::CreateEquip( const NFIDENTID& self, const std::string& 
         return ident;
     }
 
-    return NFIDENTID();
+    return NULL_OBJECT;
 }
 
-NFIDENTID NFCPackModule::CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount )
+const NFIDENTID& NFCPackModule::CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount )
 {
     if ( nSoltCount <= mnMaxSlotCount )
     {
         return CreateEquip( self, strConfigName, eExpiredType, nSoltCount, NFCDataList(), 0, 0, "" );
     }
 
-    return NFIDENTID();
+    return NULL_OBJECT;
 }
 
 bool NFCPackModule::can_normal_pack_item_swap( const NFIDENTID& self, NF_SHARE_PTR<NFIRecord> pOriginRecord, NF_SHARE_PTR<NFIRecord> pTargetRecord, const int origin, const int target )
@@ -393,7 +393,7 @@ bool NFCPackModule::SetGridCount( const NFIDENTID& self, const int nOrigin, cons
     return false;
 }
 
-int NFCPackModule::GetGridCount( const NFIDENTID& self, const int nOrigin, const PackTableType name/* = PackTableType::NormalPack*/ )
+NFINT64 NFCPackModule::GetGridCount( const NFIDENTID& self, const int nOrigin, const PackTableType name/* = PackTableType::NormalPack*/ )
 {
     //判断nOrigin合法性
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
@@ -673,7 +673,7 @@ bool NFCPackModule::CreateItem( const NFIDENTID& self, const std::string& strCon
                 return false;
             }
 
-            const int nPackCount = pObject->GetPropertyInt("PackCount");
+            const NFINT64 nPackCount = pObject->GetPropertyInt("PackCount");
             NFCDataList matchItemList;
             int nMatchCount = pRecord->FindString(EGIT_TYPE_CONFIGID, strConfigName.c_str(), matchItemList);
 
@@ -1246,7 +1246,7 @@ int NFCPackModule::QueryCount( const NFIDENTID& self, const std::string& strItem
         return 0;
     }
 
-    int nCount = 0;
+    NFINT64 nCount = 0;
     for (int i = mnPackStart; i < pRecord->GetRows(); ++i)
     {
         if (pRecord->IsUsed(i) && pRecord->GetString(i, EGameItemStoreType::EGIT_TYPE_CONFIGID) == strItemConfigID)
@@ -1390,7 +1390,7 @@ bool NFCPackModule::ComputerDropPack(NF_SHARE_PTR<NFIObject> pObject, const NFID
         // 概率
         NFCDataList xRandValueList;
         m_pKernelModule->Random(0, 10000, 1, xRandValueList); // 一次获得多个概率
-        for (int j = 0; j < pAwardBag->nCount; ++j)
+        for (NFINT32 j = 0; j < pAwardBag->nCount; ++j)
         {
             int nDropRate = pAwardBag->nPackRate;
             if (xRandValueList.Int(j) > nDropRate)

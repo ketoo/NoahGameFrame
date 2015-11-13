@@ -5,4 +5,5 @@
 	<Plugin Name="NFProxyPlugin" Main="1"/>
 	<Plugin Name="NFProxyServerNet_ClientPlugin" Main="1"/>
 	<Plugin Name="NFProxyServerNet_ServerPlugin" Main="1"/>
+    <ConfigPath Name="../../" />
 </XML>
