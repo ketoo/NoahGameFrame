@@ -15,7 +15,7 @@ class NFIWorldGuildModule
     : public NFILogicModule
 {
 public:
-	virtual NFIDENTID CreateGuild( const NFIDENTID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP) = 0;
+	virtual const NFIDENTID& CreateGuild( const NFIDENTID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP) = 0;
 	virtual bool JoinGuild(const NFIDENTID& self, const NFIDENTID& xGuildID) = 0;
 	virtual bool LeaveGuild(const NFIDENTID& self, const NFIDENTID& xGuildID) = 0;
 	virtual bool UpGuildMmember(const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember) = 0;
