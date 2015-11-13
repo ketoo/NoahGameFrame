@@ -33,7 +33,7 @@ const NFIDENTID NFCGridModule::OnObjectMove(const NFIDENTID& self, const int& sc
 {
     if (sceneID != mSceneID)
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
     const NFIDENTID& currGrid = ComputerGridID(nX, nY, nZ);
     if (currGrid == lastGrid)
@@ -64,7 +64,7 @@ const NFIDENTID NFCGridModule::OnObjectLeave(const NFIDENTID& self, const int& s
 
     OnMoveOut(self, lastGrid, lastGrid);
 
-    return NFIDENTID();
+    return NULL_OBJECT;
 }
 
 const NFIDENTID NFCGridModule::ComputerGridID(const int nX, const int nY, const int nZ)
