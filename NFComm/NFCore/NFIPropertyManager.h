@@ -27,7 +27,7 @@ public:
     virtual bool SetProperty(const std::string& strPropertyName, const NFIDataList::TData& TData) = 0;
     //virtual bool SetProperty(const NFIProperty* pProperty) = 0;
 
-    virtual NFIDENTID Self() = 0;
+    virtual const NFIDENTID& Self() = 0;
 
     virtual const std::map<std::string, int>& GetPropertyIndex() = 0;
     virtual const int GetPropertyIndex(const std::string& strProperty) = 0;
@@ -42,7 +42,7 @@ public:
 	virtual NFINT64 GetPropertyInt(const std::string& strPropertyName) = 0;
 	virtual double GetPropertyFloat(const std::string& strPropertyName) = 0;
 	virtual const std::string& GetPropertyString(const std::string& strPropertyName) = 0;
-	virtual NFIDENTID GetPropertyObject(const std::string& strPropertyName) = 0;
+	virtual const NFIDENTID& GetPropertyObject(const std::string& strPropertyName) = 0;
 
 	//////////////////////////////////////////////////////////////////////////
 

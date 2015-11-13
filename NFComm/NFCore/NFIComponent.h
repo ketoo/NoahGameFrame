@@ -73,9 +73,8 @@ public:
 
 	virtual NFIDENTID Self()
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
-
 
     virtual const std::string GetComponentName() const = 0;
 
