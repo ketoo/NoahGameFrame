@@ -46,7 +46,7 @@ public:
     virtual bool GetPlayerGuild(const NFIDENTID& self, NFIDENTID& xGuild);
     virtual bool GetPlayerGameID( const NFIDENTID& self, int& nGameID );
 
-    virtual const NFIDENTID CreateGuild(const NFIDENTID& xPlayeID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP, const int nOffLine = 1, const int nPower = NFMsg::GUILD_POWER_TYPE_PRESIDENT);
+    virtual const NFIDENTID& CreateGuild(const NFIDENTID& xPlayeID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP, const int nOffLine = 1, const int nPower = NFMsg::GUILD_POWER_TYPE_PRESIDENT);
     virtual const bool DeleteGuild(const NFIDENTID& xGuild);
 
     virtual bool SearchGuild(const NFIDENTID& self, const std::string& strName, std::vector<SearchGuildObject>& xList);

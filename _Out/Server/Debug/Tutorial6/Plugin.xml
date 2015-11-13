@@ -6,4 +6,5 @@
     <Plugin Name="NFLogPlugin" Main="1"/>
 	<Plugin Name="Tutorial6Plugin" Main="1"/>
 	<APPID Name="666" />
+    <ConfigPath Name="../../" />
 </XML>

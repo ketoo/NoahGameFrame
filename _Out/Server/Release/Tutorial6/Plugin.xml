@@ -4,4 +4,5 @@
 	<Plugin Name="NFConfigPlugin" Main="1"/>
 	<Plugin Name="NFLuaScriptPlugin" Main="1"/>
 	<Plugin Name="Tutorial6Plugin" Main="1"/>
+    <ConfigPath Name="../../" />
 </XML>

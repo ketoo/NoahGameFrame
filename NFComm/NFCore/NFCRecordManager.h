@@ -28,7 +28,7 @@ public:
 
     virtual NF_SHARE_PTR<NFIRecord> AddRecord(const NFIDENTID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& keyList, const NFIDataList& descData, const NFIDataList& tagData, const NFIDataList& relateRecordData, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex);
 
-    virtual NFIDENTID Self();
+    virtual const NFIDENTID& Self();
 
     virtual void GetRelationRows(const std::string& strScrRecord, const std::string& strSrcTag, const NFIDataList& var, const std::string& strRelatedRecord, NFIDataList& outRowList);
 
@@ -50,12 +50,12 @@ public:
 	virtual NFINT64 GetRecordInt(const std::string& strRecordName, const int nRow, const int nCol);
 	virtual double GetRecordFloat(const std::string& strRecordName, const int nRow, const int nCol);
 	virtual const std::string& GetRecordString(const std::string& strRecordName, const int nRow, const int nCol);
-	virtual NFIDENTID GetRecordObject(const std::string& strRecordName, const int nRow, const int nCol);
+	virtual const NFIDENTID& GetRecordObject(const std::string& strRecordName, const int nRow, const int nCol);
 
 	virtual NFINT64 GetRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag);
 	virtual double GetRecordFloat(const std::string& strRecordName, const int nRow, const std::string& strColTag);
 	virtual const std::string& GetRecordString(const std::string& strRecordName, const int nRow, const std::string& strColTag);
-	virtual NFIDENTID GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag);
+	virtual const NFIDENTID& GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag);
 	//////////////////////////////////////////////////////////////////////////
 private:
     NFIDENTID mSelf;

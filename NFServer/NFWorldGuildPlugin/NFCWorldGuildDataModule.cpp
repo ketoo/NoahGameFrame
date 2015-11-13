@@ -88,17 +88,17 @@ int NFCWorldGuildDataModule::OnGuildClassEvent( const NFIDENTID& self, const std
 }
 
 
-const NFIDENTID NFCWorldGuildDataModule::CreateGuild(const NFIDENTID& xPlayeID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP, const int nOffLine /*= 1*/, const int nPower/* = NFMsg::GUILD_POWER_TYPE_PRESIDENT*/)
+const NFIDENTID& NFCWorldGuildDataModule::CreateGuild(const NFIDENTID& xPlayeID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP, const int nOffLine /*= 1*/, const int nPower/* = NFMsg::GUILD_POWER_TYPE_PRESIDENT*/)
 {
     bool bExit = false;
     if (!m_pClusterSQLModule->Exists(mstrGuildNameTalble, strName, bExit))
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
     if (bExit)
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
     const NFIDENTID xGuidID = m_pUUIDModule->CreateGUID();
@@ -124,7 +124,7 @@ const NFIDENTID NFCWorldGuildDataModule::CreateGuild(const NFIDENTID& xPlayeID, 
 
     if (!m_pClusterSQLModule->Updata(mstrGuildTalble, xGuidID.ToString(), vGuildFieldVec, vGuildValueVec))
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
     //Name
