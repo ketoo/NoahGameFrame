@@ -26,6 +26,7 @@ public:
 		m_pActorManager = pManager;
         mnAppID = 0;
 		mnStartRunTime = time(NULL);
+        mstrConfigPath = "";
 	}
 
     virtual bool Init();
@@ -76,7 +77,7 @@ public:
 
 	virtual int AppID(){ return mnAppID; }
 	virtual NFINT64 StartRunTime(){ return mnStartRunTime; }
-
+    virtual const std::string& GetConfigPath() { return mstrConfigPath; }
 
 protected:
 
@@ -93,6 +94,7 @@ private:
 
 	int mnAppID;
 	NFINT64 mnStartRunTime;
+    std::string mstrConfigPath;
 
 	typedef std::map<std::string, bool> PluginNameMap;
 	typedef std::map<std::string, NFCDynLib*> PluginLibMap;

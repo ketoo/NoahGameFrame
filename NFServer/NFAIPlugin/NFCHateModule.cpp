@@ -81,9 +81,9 @@ bool NFCHateModule::QueryMaxHateObject(const NFIDENTID& self, std::list<std::str
     return true;
 }
 
-NFIDENTID NFCHateModule::QueryMaxHateObject(const NFIDENTID& self)
+const NFIDENTID& NFCHateModule::QueryMaxHateObject(const NFIDENTID& self)
 {
-    return NFIDENTID();
+    return NULL_OBJECT;
 }
 
 int NFCHateModule::QueryHateValue(const NFIDENTID& self, const NFIDENTID& other)

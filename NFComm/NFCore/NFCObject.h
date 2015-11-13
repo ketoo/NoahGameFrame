@@ -53,7 +53,7 @@ public:
     virtual NFINT64 GetPropertyInt(const std::string& strPropertyName);
     virtual double GetPropertyFloat(const std::string& strPropertyName);
     virtual const std::string& GetPropertyString(const std::string& strPropertyName);
-    virtual NFIDENTID GetPropertyObject(const std::string& strPropertyName);
+    virtual const NFIDENTID& GetPropertyObject(const std::string& strPropertyName);
 
     virtual bool FindRecord(const std::string& strRecordName);
 
@@ -70,12 +70,12 @@ public:
     virtual NFINT64 GetRecordInt(const std::string& strRecordName, const int nRow, const int nCol);
     virtual double GetRecordFloat(const std::string& strRecordName, const int nRow, const int nCol);
     virtual const std::string& GetRecordString(const std::string& strRecordName, const int nRow, const int nCol);
-    virtual NFIDENTID GetRecordObject(const std::string& strRecordName, const int nRow, const int nCol);
+    virtual const NFIDENTID& GetRecordObject(const std::string& strRecordName, const int nRow, const int nCol);
 
     virtual NFINT64 GetRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag);
     virtual double GetRecordFloat(const std::string& strRecordName, const int nRow, const std::string& strColTag);
     virtual const std::string& GetRecordString(const std::string& strRecordName, const int nRow, const std::string& strColTag);
-    virtual NFIDENTID GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag);
+    virtual const NFIDENTID& GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag);
 
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager();
     virtual NF_SHARE_PTR<NFIHeartBeatManager> GetHeartBeatManager();
