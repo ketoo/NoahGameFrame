@@ -132,7 +132,7 @@ public:
     virtual NFINT64 GetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName) = 0;
     virtual double GetPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName) = 0;
     virtual const std::string& GetPropertyString(const NFIDENTID& self, const std::string& strPropertyName) = 0;
-    virtual NFIDENTID GetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName) = 0;
+    virtual const NFIDENTID& GetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName) = 0;
 
     virtual NF_SHARE_PTR<NFIRecord> FindRecord(const NFIDENTID& self, const std::string& strRecordName) = 0;
 
@@ -151,12 +151,12 @@ public:
     virtual NFINT64 GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
     virtual double GetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
     virtual const std::string& GetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
-    virtual NFIDENTID GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
+    virtual const NFIDENTID& GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
 
     virtual NFINT64 GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
     virtual double GetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
     virtual const std::string& GetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
-    virtual NFIDENTID GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
+    virtual const NFIDENTID& GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
 
     virtual bool SwitchScene(const NFIDENTID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIDataList& arg) = 0;
 
@@ -183,7 +183,7 @@ public:
 
     virtual bool GetGroupObjectList(const int nContainerID, const int nGroupID, NFIDataList& list) = 0;
 
-    virtual NFIDENTID GetGridID(const float fX, const float fY, const float fZ) = 0;
+    virtual const NFIDENTID& GetGridID(const float fX, const float fY, const float fZ) = 0;
 
     virtual bool GetRangObjectList(const NFIDENTID& self, const int nContainerID, const int nGroupID, const float fRang, NFIDataList& list) = 0;
 

@@ -81,7 +81,7 @@ public:
 	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from) = 0;
 
     virtual int AppID() = 0;
-
+    virtual const std::string& GetConfigPath() = 0;
 };
 
 #endif
