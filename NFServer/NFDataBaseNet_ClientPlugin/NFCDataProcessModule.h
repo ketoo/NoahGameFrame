@@ -39,9 +39,9 @@ public:
     virtual bool Execute( const float fLasFrametime, const float fStartedTime );
     virtual bool AfterInit();
 
-	virtual const NFIDENTID CreateRole(const std::string& strAccount, const std::string& strName, const int nRace, const int nJob, const int nSex);
+	virtual const NFIDENTID& CreateRole(const std::string& strAccount, const std::string& strName, const int nRace, const int nJob, const int nSex);
 	virtual const bool DeleteRole(const std::string& strAccount, const NFIDENTID xID);
-	virtual const NFIDENTID GetChar(const std::string& strAccount, const std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVec);
+	virtual const NFIDENTID& GetChar(const std::string& strAccount, const std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVec);
 
 	//////////////////////////////////////////////////////////////////////////
 
