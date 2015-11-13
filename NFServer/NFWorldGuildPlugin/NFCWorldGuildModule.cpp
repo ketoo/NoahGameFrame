@@ -46,22 +46,22 @@ bool NFCWorldGuildModule::AfterInit()
     return true;
 }
 
-NFIDENTID NFCWorldGuildModule::CreateGuild( const NFIDENTID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP)
+const NFIDENTID& NFCWorldGuildModule::CreateGuild( const NFIDENTID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP)
 {
     if (strName.empty())
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
     bool bExit = false;
     if (!m_pWorldGuildDataModule->ExitGuild(self, strName, bExit))
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
     if (bExit)
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
     return m_pWorldGuildDataModule->CreateGuild(self, strName, strRoleName, nLevel, nJob, nDonation, nVIP);

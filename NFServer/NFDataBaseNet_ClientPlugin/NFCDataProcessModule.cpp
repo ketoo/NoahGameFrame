@@ -67,13 +67,13 @@ int NFCDataProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std::
 	return 0;
 }
 
-const NFIDENTID NFCDataProcessModule::CreateRole( const std::string& strAccount, const std::string& strName, const int nRace, const int nJob, const int nSex )
+const NFIDENTID& NFCDataProcessModule::CreateRole( const std::string& strAccount, const std::string& strName, const int nRace, const int nJob, const int nSex )
 {
 	bool bExit = false;
 	if (!m_pClusterSQLModule->Exists(mstrAccountTable, strAccount, bExit)
 		|| !bExit)
 	{
-		return NFIDENTID();
+		return NULL_OBJECT;
 	}    
 
 	//不存在此角色名,看帐号下面是否有角色
@@ -84,13 +84,13 @@ const NFIDENTID NFCDataProcessModule::CreateRole( const std::string& strAccount,
 	if(!m_pClusterSQLModule->Query(mstrAccountTable, strAccount, vFieldVec, vValueVec)
 		|| vFieldVec.size() != vValueVec.size())
 	{
-		return NFIDENTID();
+		return NULL_OBJECT;
 	}
 
 	if (vValueVec[0].length() > 0)
 	{
 		//已经有角色了
-		return NFIDENTID();
+		return NULL_OBJECT;
 	}
 
 	NFIDENTID xID = m_pUUIDModule->CreateGUID();
@@ -115,7 +115,7 @@ const NFIDENTID NFCDataProcessModule::CreateRole( const std::string& strAccount,
 
 	if(!m_pClusterSQLModule->Updata(mstrRoleTable, xID.ToString(), vFieldVec, vValueVec))
 	{
-		return NFIDENTID();
+		return NULL_OBJECT;
 	}
 
 	vFieldVec.clear();
@@ -124,7 +124,7 @@ const NFIDENTID NFCDataProcessModule::CreateRole( const std::string& strAccount,
 	vValueVec.push_back(xID.ToString());
 	if(!m_pClusterSQLModule->Updata(mstrAccountTable, strAccount, vFieldVec, vValueVec))
 	{
-		return NFIDENTID();
+		return NULL_OBJECT;
 	}
 
 	return xID;
@@ -154,13 +154,13 @@ const bool NFCDataProcessModule::DeleteRole( const std::string& strAccount, cons
 	return true;
 }
 
-const NFIDENTID NFCDataProcessModule::GetChar( const std::string& strAccount, const std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVec )
+const NFIDENTID& NFCDataProcessModule::GetChar( const std::string& strAccount, const std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVec )
 {
 	bool bExit = false;
 	if (!m_pClusterSQLModule->Exists(mstrAccountTable, strAccount, bExit)
 		|| !bExit)
 	{
-		return NFIDENTID();
+		return NULL_OBJECT;
 	}
     std::vector<std::string> vFieldAccountVector;
     std::vector<std::string> vValueAccountVector;
@@ -170,7 +170,7 @@ const NFIDENTID NFCDataProcessModule::GetChar( const std::string& strAccount, co
 	if(!m_pClusterSQLModule->Query(mstrAccountTable, strAccount, vFieldAccountVector, vValueAccountVector)
 		|| vFieldAccountVector.size() != vValueAccountVector.size())
 	{
-		return NFIDENTID();
+		return NULL_OBJECT;
 	}
 
 	const std::string& stRolerID = vValueAccountVector[0];
@@ -179,13 +179,13 @@ const NFIDENTID NFCDataProcessModule::GetChar( const std::string& strAccount, co
 	if(!m_pClusterSQLModule->Query(mstrRoleTable, stRolerID, xFieldVec, xValueVec)
 		|| xFieldVec.size() != xValueVec.size())
 	{
-		return NFIDENTID();
+		return NULL_OBJECT;
 	}
 
     NFIDENTID ident;
     if (!ident.FromString(stRolerID))
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
 	return ident;

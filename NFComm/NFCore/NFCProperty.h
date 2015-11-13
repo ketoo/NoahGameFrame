@@ -51,7 +51,7 @@ public:
     virtual NFINT64 GetInt() const;
     virtual double GetFloat() const;
     virtual const std::string& GetString() const;
-    virtual NFIDENTID GetObject() const;
+    virtual const NFIDENTID& GetObject() const;
     virtual void* GetPointer() const;
 
     virtual bool Changed() const;

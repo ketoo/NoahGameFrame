@@ -87,7 +87,7 @@ bool NFCPropertyManager::SetProperty(const std::string& strPropertyName, const N
 //     return false;
 // }
 
-NFIDENTID NFCPropertyManager::Self()
+const NFIDENTID& NFCPropertyManager::Self()
 {
     return mSelf;
 }
@@ -185,7 +185,7 @@ const std::string& NFCPropertyManager::GetPropertyString( const std::string& str
 	return NULL_STR;
 }
 
-NFIDENTID NFCPropertyManager::GetPropertyObject( const std::string& strPropertyName )
+const NFIDENTID& NFCPropertyManager::GetPropertyObject( const std::string& strPropertyName )
 {
 	NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
 	if (pProperty.get())
@@ -193,6 +193,6 @@ NFIDENTID NFCPropertyManager::GetPropertyObject( const std::string& strPropertyN
 		return pProperty->GetObject();
 	}
 
-	return NFIDENTID();
+	return NULL_OBJECT;
 }
 
