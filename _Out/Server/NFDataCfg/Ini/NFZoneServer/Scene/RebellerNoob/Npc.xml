@@ -1,6 +1,0 @@
-<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
-<XML>   
-	<Object ID="Atta1" NPCConfigID="AttackNpc3" SeedX="-20" SeedY="0" SeedZ="-60" /> 
-	<Object ID="Atta2" NPCConfigID="AttackNpc3" SeedX="-20" SeedY="0" SeedZ="-60" /> 
-	<Object ID="Atta3" NPCConfigID="AttackNpc3" SeedX="-20" SeedY="0" SeedZ="-60" /> 
-</XML>
