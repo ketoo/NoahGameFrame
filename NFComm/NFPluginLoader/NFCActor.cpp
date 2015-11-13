@@ -187,7 +187,7 @@ NFIDENTID NFCActor::GetPropertyObject( const NFIDENTID& self, const std::string&
 
 	}
 
-	return NFIDENTID();
+	return NULL_OBJECT;
 }
 
 bool NFCActor::SetRecordInt( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue )
@@ -397,7 +397,7 @@ NFIDENTID NFCActor::GetRecordObject( const NFIDENTID& self, const std::string& s
 
 	}
 
-	return NFIDENTID();
+	return NULL_OBJECT;
 }
 
 NFIDENTID NFCActor::GetRecordObject( const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag )
@@ -428,12 +428,12 @@ NFIDENTID NFCActor::GetRecordObject( const NFIDENTID& self, const std::string& s
 
 	}
 
-	return NFIDENTID();
+	return NULL_OBJECT;
 }
 
 NFIDENTID NFCActor::Self()
 {
-	return NFIDENTID();
+	return NULL_OBJECT;
 }
 
 NF_SHARE_PTR<NFIActor> NFCActor::GetActor( const NFIDENTID& self )

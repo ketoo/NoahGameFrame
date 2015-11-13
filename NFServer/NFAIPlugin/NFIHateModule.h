@@ -28,7 +28,7 @@ public:
 
     virtual void CompSortList(const NFIDENTID& self) = 0;
 
-    virtual NFIDENTID QueryMaxHateObject(const NFIDENTID& self) = 0;
+    virtual const NFIDENTID& QueryMaxHateObject(const NFIDENTID& self) = 0;
 
     virtual bool QueryMaxHateObject(const NFIDENTID& self, std::list<std::string>& HateList, const int nCount = 1) = 0;
 

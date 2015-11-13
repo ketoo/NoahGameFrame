@@ -45,6 +45,7 @@ enum TDATA_TYPE
 };
 
 const static std::string NULL_STR = "";
+const static NFIDENTID NULL_OBJECT = NFIDENTID();
 
 //类型接口
 class NFIDataList
@@ -88,13 +89,12 @@ public:
 
         const NFIDENTID& Object() const
         {
-            NFIDENTID result;
             if (TDATA_STRING == nType)
             {
                 return boost::get<const NFIDENTID&>(variantData);
             }
 
-            return result;
+            return NULL_OBJECT;
         }
 
         TDATA_TYPE nType;
@@ -240,7 +240,7 @@ public:
     virtual NFINT64 Int(const int index) const = 0;
     virtual double Float(const int index) const = 0;
     virtual const std::string& String(const int index) const = 0;
-    virtual NFIDENTID Object(const int index) const = 0;
+    virtual const NFIDENTID& Object(const int index) const = 0;
     virtual void* Pointer(const int index) const = 0;
 
     bool AddInt(const NFINT64 value)
@@ -393,7 +393,7 @@ public:
 	virtual NFINT64 Int(const std::string& str) const = 0;
 	virtual double Float(const std::string& str) const = 0;
 	virtual const std::string& String(const std::string& str) const = 0;
-	virtual NFIDENTID Object(const std::string& str) const = 0;
+	virtual const NFIDENTID& Object(const std::string& str) const = 0;
 /*
 	NFIDataList& NFIDataList::operator = (const NFIDataList& src)
 	{
