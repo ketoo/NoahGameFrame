@@ -440,7 +440,7 @@ void NFCMasterNet_ServerModule::LogGameServer(const float fLastTime)
 		pGameData = mWorldMap.Next();
 	}
 
-	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "End Log GameServer Info", "");
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "End Log WorldServer Info", "");
 
 	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "Begin Log LoginServer Info", "");
 
