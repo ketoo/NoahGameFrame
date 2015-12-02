@@ -37,7 +37,7 @@ NFCLogicClassModule::NFCLogicClassModule(NFIPluginManager* p)
     mnPropertyIndex = NF_GetTickCount() % 10 + 1;
 
     pPluginManager = p;
-    msConfigFileName = "../../NFDataCfg/Struct/LogicClass.NF";
+    msConfigFileName = "NFDataCfg/Struct/LogicClass.NF";
 }
 
 NFCLogicClassModule::~NFCLogicClassModule()
@@ -285,7 +285,7 @@ bool NFCLogicClassModule::AddClassInclude(const char* pstrClassFilePath, NF_SHAR
     }
 
     std::string strFileData;
-    ReadFileToString(pstrClassFilePath, strFileData);
+    ReadFileToString(pPluginManager->GetConfigPath() + pstrClassFilePath, strFileData);
     std::string strDecode = Decode(strFileData);
 
     const int nDataSize = strDecode.length();
@@ -435,7 +435,7 @@ bool NFCLogicClassModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIL
 bool NFCLogicClassModule::Load()
 {
     std::string strFileData;
-    ReadFileToString(msConfigFileName, strFileData);
+    ReadFileToString(pPluginManager->GetConfigPath() + msConfigFileName, strFileData);
     std::string strDecode = Decode(strFileData);
 
     const int nDataSize = strDecode.length();
