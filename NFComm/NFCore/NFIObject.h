@@ -100,7 +100,7 @@ public:
     virtual NFINT64 GetPropertyInt(const std::string& strPropertyName) = 0;
     virtual double GetPropertyFloat(const std::string& strPropertyName) = 0;
     virtual const std::string& GetPropertyString(const std::string& strPropertyName) = 0;
-    virtual NFIDENTID GetPropertyObject(const std::string& strPropertyName) = 0;
+    virtual const NFIDENTID& GetPropertyObject(const std::string& strPropertyName) = 0;
 
     virtual bool FindRecord(const std::string& strRecordName) = 0;
 
@@ -117,12 +117,12 @@ public:
     virtual NFINT64 GetRecordInt(const std::string& strRecordName, const int nRow, const int nCol) = 0;
     virtual double GetRecordFloat(const std::string& strRecordName, const int nRow, const int nCol) = 0;
     virtual const std::string& GetRecordString(const std::string& strRecordName, const int nRow, const int nCol) = 0;
-    virtual NFIDENTID GetRecordObject(const std::string& strRecordName, const int nRow, const int nCol) = 0;
+    virtual const NFIDENTID& GetRecordObject(const std::string& strRecordName, const int nRow, const int nCol) = 0;
 
     virtual NFINT64 GetRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
     virtual double GetRecordFloat(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
     virtual const std::string& GetRecordString(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
-	virtual NFIDENTID GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
+	virtual const NFIDENTID& GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
 
 // 	virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
 // 	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;

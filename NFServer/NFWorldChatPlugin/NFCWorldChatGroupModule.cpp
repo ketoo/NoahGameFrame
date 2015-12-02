@@ -91,7 +91,7 @@ const NFIDENTID& NFCWorldChatGroupModule::CreateGroup( const NFIDENTID& self )
 
     if (!m_pClusterSQLModule->Updata(mstrGroupTalble, xGuidID.ToString(), vGroupFieldVec, vGroupValueVec))
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
     return xGuidID;

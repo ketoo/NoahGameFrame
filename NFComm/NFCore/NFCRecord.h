@@ -60,13 +60,13 @@ protected:
 					break;
 				case TDATA_TYPE::TDATA_INT:
 					{
-						const int nData = mxColData.xRecord->GetInt(nRow, nCol);
+						const NFINT64 nData = mxColData.xRecord->GetInt(nRow, nCol);
 						mxSingleKeyInt.AddElement(nData, NF_SHARE_PTR<int>(new int(nRow)));
 					}
 					break;
 				case TDATA_TYPE::TDATA_OBJECT:
 					{
-						const NFIDENTID xID = mxColData.xRecord->GetObject(nRow, nCol);
+						const NFIDENTID& xID = mxColData.xRecord->GetObject(nRow, nCol);
 						mxSingleKeyObject.AddElement(xID, NF_SHARE_PTR<int>(new int(nRow)));
 					}
 					break;
@@ -88,13 +88,13 @@ protected:
 					break;
 				case TDATA_TYPE::TDATA_INT:
 					{
-						const int nData = mxColData.xRecord->GetInt(nRow, nCol);
+						const NFINT64 nData = mxColData.xRecord->GetInt(nRow, nCol);
 						mxSingleKeyInt.RemoveElement(nData);
 					}
 					break;
 				case TDATA_TYPE::TDATA_OBJECT:
 					{
-						const NFIDENTID xID = mxColData.xRecord->GetObject(nRow, nCol);
+						const NFIDENTID& xID = mxColData.xRecord->GetObject(nRow, nCol);
 						mxSingleKeyObject.RemoveElement(xID);
 					}
 					break;
@@ -182,13 +182,13 @@ protected:
 					break;
 				case TDATA_TYPE::TDATA_INT:
 					{
-						const int nData = mxColData.xRecord->GetInt(nRow, nCol);
+						const NFINT64 nData = mxColData.xRecord->GetInt(nRow, nCol);
 						mxSingleKeyInt.AddElement(nData, NF_SHARE_PTR<int>(new int(nRow)));
 					}
 					break;
 				case TDATA_TYPE::TDATA_OBJECT:
 					{
-						const NFIDENTID xID = mxColData.xRecord->GetObject(nRow, nCol);
+						const NFIDENTID& xID = mxColData.xRecord->GetObject(nRow, nCol);
 						mxSingleKeyObject.AddElement(xID, NF_SHARE_PTR<int>(new int(nRow)));
 					}
 					break;
@@ -245,12 +245,12 @@ protected:
 
 	//µ¥key:col->row
 	NFMapEx<std::string, int> mxSingleKeyStr;
-	NFMapEx<int, int> mxSingleKeyInt;
+	NFMapEx<NFINT64, int> mxSingleKeyInt;
 	NFMapEx<NFIDENTID, int> mxSingleKeyObject;
 
 	//¶àkey:col->row_list<row, used_state>
 	NFMapEx<std::string, NFMapEx<int, int> > mxMultiKeyStr;
-	NFMapEx<int, NFMapEx<int, int> > mxultiKeyInt;
+	NFMapEx<NFINT64, NFMapEx<int, int> > mxultiKeyInt;
 	NFMapEx<NFIDENTID, NFMapEx<int, int> > mxultiKeyObject;
 
 private:
@@ -301,13 +301,13 @@ public:
     virtual NFINT64 GetInt(const int nRow, const int nCol) const;
     virtual double GetFloat(const int nRow, const int nCol) const;
     virtual const std::string& GetString(const int nRow, const int nCol) const;
-    virtual NFIDENTID GetObject(const int nRow, const int nCol) const;
+    virtual const NFIDENTID& GetObject(const int nRow, const int nCol) const;
     virtual void* GetPointer(const int nRow, const int nCol) const;
 
     virtual NFINT64 GetInt(const int nRow, const std::string& strColTag) const;
     virtual double GetFloat(const int nRow, const std::string& strColTag) const;
     virtual const std::string& GetString(const int nRow, const std::string& strColTag) const;
-    virtual NFIDENTID GetObject(const int nRow, const std::string& strColTag) const;
+    virtual const NFIDENTID& GetObject(const int nRow, const std::string& strColTag) const;
     virtual void* GetPointer(const int nRow, const std::string& strColTag) const;
 
     virtual int FindRowByColValue(const int nCol, const NFIDataList& var, NFIDataList& varResult);

@@ -5,4 +5,5 @@
 	<Plugin Name="NFWorldLogicPlugin" Main="1"/>
 	<Plugin Name="NFWorldNet_ClientPlugin" Main="1"/>
 	<Plugin Name="NFWorldNet_ServerPlugin" Main="1"/>
+    <ConfigPath Name="../../" />
 </XML>
