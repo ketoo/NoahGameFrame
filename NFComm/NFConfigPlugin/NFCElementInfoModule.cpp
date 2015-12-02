@@ -62,7 +62,7 @@ bool NFCElementInfoModule::Load()
         }
 
         std::string strFileData;
-        NFCLogicClassModule::ReadFileToString(strInstancePath, strFileData);
+        NFCLogicClassModule::ReadFileToString(pPluginManager->GetConfigPath() + strInstancePath, strFileData);
         std::string strDecode = NFCLogicClassModule::Decode(strFileData);
 
         const int nDataSize = strDecode.length();

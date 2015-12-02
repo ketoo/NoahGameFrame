@@ -236,7 +236,7 @@ NFIDENTID NFCGameServerNet_ServerModule::GetGuildID( const NFIPacket& msg )
     PBClass xMsg;                                         
     if (!NFINetModule::RecivePB(msg, xMsg, nPlayerID))
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
     return PBToNF(xMsg.guild_id());

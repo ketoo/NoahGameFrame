@@ -5,4 +5,6 @@
 	<Plugin Name="NFGameServerPlugin" Main="1"/>
 	<Plugin Name="NFGameServerNet_ServerPlugin" Main="1"/>
 	<Plugin Name="NFGameServerNet_ClientPlugin" Main="1"/>
+    
+    <ConfigPath Name="../../" />
 </XML>

@@ -41,11 +41,11 @@ public:
     virtual bool AfterInit();
 
     //添加装备:装备config,装备过期类型,孔数量，空里宝石列表，强化等级，附魔等级，元素卡片列表
-    virtual NFIDENTID CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount,
+    virtual const NFIDENTID& CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount,
                            const NFIDataList& inlayCardList, const int nIntensiveLevel, const int nEnchantLevel, const std::string& enchantCardList );
 
     //添加装备:装备config,装备过期类型,孔数量
-    virtual NFIDENTID CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount );
+    virtual const NFIDENTID& CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount );
 
     //添加普通道具
     virtual bool CreateItem( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nCount );
@@ -63,7 +63,7 @@ public:
 
     //设置道具数量
     virtual bool SetGridCount( const NFIDENTID& self, const int nOrigin, const int nCount, const PackTableType name = PackTableType::NormalPack );
-    virtual int GetGridCount( const NFIDENTID& self, const int nOrigin, const PackTableType name = PackTableType::NormalPack );
+    virtual NFINT64 GetGridCount( const NFIDENTID& self, const int nOrigin, const PackTableType name = PackTableType::NormalPack );
 
     //是否绑定
     virtual bool SetGridBan( const NFIDENTID& self, const int nOrigin, const bool bBan );
