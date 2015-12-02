@@ -55,8 +55,8 @@ public:
 
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
-    virtual void SendMsgPBToGate( const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFIDENTID self );
-	virtual void SendMsgPBToGate( const uint16_t nMsgID, const std::string& strMsg, const NFIDENTID self );
+    virtual void SendMsgPBToGate( const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFIDENTID& self );
+	virtual void SendMsgPBToGate( const uint16_t nMsgID, const std::string& strMsg, const NFIDENTID& self );
 
 protected:
 
