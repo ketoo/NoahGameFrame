@@ -64,13 +64,13 @@ public:
     virtual NFINT64 GetInt(const int nRow, const int nCol) const = 0;
     virtual double GetFloat(const int nRow, const int nCol) const = 0;
     virtual const std::string& GetString(const int nRow, const int nCol) const = 0;
-    virtual NFIDENTID GetObject(const int nRow, const int nCol) const = 0;
+    virtual const NFIDENTID& GetObject(const int nRow, const int nCol) const = 0;
     virtual void* GetPointer(const int nRow, const int nCol) const = 0;
 
     virtual NFINT64 GetInt(const int nRow, const std::string& strColTag) const = 0;
     virtual double GetFloat(const int nRow, const std::string& strColTag) const = 0;
     virtual const std::string& GetString(const int nRow, const std::string& strColTag) const = 0;
-    virtual NFIDENTID GetObject(const int nRow, const std::string& strColTag) const = 0;
+    virtual const NFIDENTID& GetObject(const int nRow, const std::string& strColTag) const = 0;
     virtual void* GetPointer(const int nRow, const std::string& strColTag) const = 0;
 
     virtual int FindRowByColValue(const int nCol, const NFIDataList& var, NFIDataList& varResult) = 0;

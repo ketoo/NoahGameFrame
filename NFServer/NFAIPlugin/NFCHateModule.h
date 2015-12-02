@@ -42,7 +42,7 @@ public:
     virtual void CompSortList(const NFIDENTID& self);
 
     //得到最高仇恨的一个对象
-    virtual NFIDENTID QueryMaxHateObject(const NFIDENTID& self);
+    virtual const NFIDENTID& QueryMaxHateObject(const NFIDENTID& self);
 
     //得到最高仇恨的数个对象
     virtual bool QueryMaxHateObject(const NFIDENTID& self, std::list<std::string>& HateList, const int nCount = 1);

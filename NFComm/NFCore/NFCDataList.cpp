@@ -293,35 +293,27 @@ const std::string& NFCDataList::String( const std::string& str ) const
 	return NULL_STR;
 }
 
-NFIDENTID NFCDataList::Object(const int index) const
+const NFIDENTID& NFCDataList::Object(const int index) const
 {
-//    if (index < GetCount() && index >= 0)
-//    {
-//        return NumberVal<NFIDENTID>(index);
-//    }
-
     if (index < GetCount() && index >= 0)
     {
-        NFIDENTID result;
         if (index < GetCount() && index >= 0)
         {
             TDATA_TYPE type = Type(index);
             if (type == TDATA_OBJECT)
             {
                 NF_SHARE_PTR<TData> var = GetStack(index);
-                result = boost::get<NFIDENTID>(var->variantData);
+                return boost::get<NFIDENTID>(var->variantData);
             }
         }
-
-        return result;
     }
 
-    return NFIDENTID();
+    return NULL_OBJECT;
 }
 
-NFIDENTID NFCDataList::Object( const std::string& str ) const
+const NFIDENTID& NFCDataList::Object( const std::string& str ) const
 {
-	return NFIDENTID();
+	return NULL_OBJECT;
 }
 
 void* NFCDataList::Pointer(const int index) const
