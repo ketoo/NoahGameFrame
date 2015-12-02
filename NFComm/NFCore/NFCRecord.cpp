@@ -749,22 +749,22 @@ const std::string& NFCRecord::GetString(const int nRow, const std::string& strCo
     return GetString(nRow, nCol);
 }
 
-NFIDENTID NFCRecord::GetObject(const int nRow, const int nCol) const
+const NFIDENTID& NFCRecord::GetObject(const int nRow, const int nCol) const
 {
     if (!ValidPos(nRow, nCol))
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
 	if (!IsUsed(nRow))
 	{
-		return NFIDENTID();
+		return NULL_OBJECT;
 	}
 
     const  NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
     if (!pVar.get())
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
     if (TDATA_OBJECT == pVar->nType)
@@ -772,10 +772,10 @@ NFIDENTID NFCRecord::GetObject(const int nRow, const int nCol) const
         return boost::get<NFIDENTID>(pVar->variantData);
     }
 
-    return NFIDENTID();
+    return NULL_OBJECT;
 }
 
-NFIDENTID NFCRecord::GetObject(const int nRow, const std::string& strColTag) const
+const NFIDENTID& NFCRecord::GetObject(const int nRow, const std::string& strColTag) const
 {
     int nCol = GetCol(strColTag);
     return GetObject(nRow, nCol);
@@ -1092,14 +1092,6 @@ bool NFCRecord::Remove(const int nRow)
 			}
 
             mVecUsedState[nRow] = 0;
-
-            //             for (int i = 0; i < GetCols(); ++i)
-            //             {
-            //                 NF_SHARE_PTR<NFIDataList::TData>& var = mtRecordVec.at(GetPos(nRow, i));
-            //                 var.reset();
-            //            }
-
-
             return true;
         }
     }
