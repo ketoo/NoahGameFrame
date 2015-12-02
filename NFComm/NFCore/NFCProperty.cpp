@@ -196,11 +196,11 @@ const std::string& NFCProperty::GetString() const
     return NULL_STR;
 }
 
-NFIDENTID NFCProperty::GetObject() const
+const NFIDENTID& NFCProperty::GetObject() const
 {
     if (!m_pTData.get())
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
     if (TDATA_OBJECT == m_pTData->nType)
@@ -208,7 +208,7 @@ NFIDENTID NFCProperty::GetObject() const
         return boost::get<NFIDENTID>(m_pTData->variantData);
     }
 
-    return NFIDENTID();
+    return NULL_OBJECT;
 }
 
 void* NFCProperty::GetPointer() const
