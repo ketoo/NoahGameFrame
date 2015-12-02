@@ -31,7 +31,7 @@ public:
 
     virtual bool AfterInit();
 
-	virtual NFIDENTID CreateGuild( const NFIDENTID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP);
+	virtual const NFIDENTID& CreateGuild( const NFIDENTID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP);
 	virtual bool JoinGuild(const NFIDENTID& self, const NFIDENTID& xGuildID);
 	virtual bool LeaveGuild(const NFIDENTID& self, const NFIDENTID& xGuildID);
 	virtual bool UpGuildMmember(const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember);
