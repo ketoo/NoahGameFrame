@@ -5,4 +5,5 @@
 	<Plugin Name="NFLoginLogicPlugin" Main="1"/>
 	<Plugin Name="NFLoginNet_ServerPlugin" Main="1"/>
 	<Plugin Name="NFLoginNet_ClientPlugin" Main="1"/>
+    <ConfigPath Name="../../" />
 </XML>

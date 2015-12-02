@@ -73,7 +73,7 @@ public:
     virtual double Float(const int index) const;
     virtual std::string StringValEx(const int index) const;
     virtual const std::string& String(const int index) const;
-    virtual NFIDENTID Object(const int index) const;
+    virtual const NFIDENTID& Object(const int index) const;
     virtual void* Pointer(const int index) const;
 
 	virtual bool ToString(std::string& str, const char* strSplit) const;
@@ -95,7 +95,7 @@ public:
 	virtual NFINT64 Int(const std::string& str) const;
 	virtual double Float(const std::string& str) const;
 	virtual const std::string& String(const std::string& str) const;
-	virtual NFIDENTID Object(const std::string& str) const;
+	virtual const NFIDENTID& Object(const std::string& str) const;
 
 protected:
     void InnerAppendEx(const NFIDataList& src, const int start, const int end);
