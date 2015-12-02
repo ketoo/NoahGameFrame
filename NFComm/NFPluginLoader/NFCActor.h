@@ -47,41 +47,6 @@ public:
 	virtual bool AddEndFunc(EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end);
 	virtual bool SendMsg(const Theron::Address address, const NFIActorMessage& message);
 
-	//////////////////////////////////////////////////////////////////////////
-	virtual NFIDENTID Self();
-	virtual NF_SHARE_PTR<NFIActor> GetActor(const NFIDENTID& self);
-
-	virtual bool SetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName, const NFINT64 nValue);
-	virtual bool SetPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName, const double dwValue);
-	virtual bool SetPropertyString(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strValue);
-	virtual bool SetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName, const NFIDENTID& obj);
-
-	virtual NFINT64 GetPropertyInt(const NFIDENTID& self, const std::string& strPropertyName);
-	virtual double GetPropertyFloat(const NFIDENTID& self, const std::string& strPropertyName);
-	virtual const std::string& GetPropertyString(const NFIDENTID& self, const std::string& strPropertyName);
-	virtual NFIDENTID GetPropertyObject(const NFIDENTID& self, const std::string& strPropertyName);
-
-	virtual bool SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue);
-	virtual bool SetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const double dwValue);
-	virtual bool SetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue);
-	virtual bool SetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFIDENTID& obj);
-
-	virtual bool SetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFINT64 value);
-	virtual bool SetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const double value);
-	virtual bool SetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const std::string& value);
-	virtual bool SetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFIDENTID& value);
-
-	virtual NFINT64 GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
-	virtual double GetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
-	virtual const std::string& GetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
-	virtual NFIDENTID GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol);
-
-	virtual NFINT64 GetRecordInt(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-	virtual double GetRecordFloat(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-	virtual const std::string& GetRecordString(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-	virtual NFIDENTID GetRecordObject(const NFIDENTID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-	//////////////////////////////////////////////////////////////////////////
-
 
 protected:
 	NFList< NF_SHARE_PTR<NFIComponent> > mxComponentList;
