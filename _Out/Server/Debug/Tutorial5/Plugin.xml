@@ -5,5 +5,5 @@
 	<Plugin Name="Tutorial5Plugin" Main="1"/>
 	<Plugin Name="NFLogPlugin" Main="1"/>
 	<APPID Name="555" />
-	
+	<ConfigPath Name="../../" />
 </XML>

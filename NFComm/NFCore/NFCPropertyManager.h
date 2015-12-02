@@ -34,7 +34,7 @@ public:
 
     //virtual bool SetProperty(const NFIProperty* pProperty);
 
-    virtual NFIDENTID Self();
+    virtual const NFIDENTID& Self();
 
     virtual const std::map<std::string, int>& GetPropertyIndex();
 
@@ -48,7 +48,7 @@ public:
 	virtual NFINT64 GetPropertyInt(const std::string& strPropertyName);
 	virtual double GetPropertyFloat(const std::string& strPropertyName);
 	virtual const std::string& GetPropertyString(const std::string& strPropertyName);
-	virtual NFIDENTID GetPropertyObject(const std::string& strPropertyName);
+	virtual const NFIDENTID& GetPropertyObject(const std::string& strPropertyName);
 
 
 private:
