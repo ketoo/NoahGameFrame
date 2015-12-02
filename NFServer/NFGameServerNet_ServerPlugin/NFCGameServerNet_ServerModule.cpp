@@ -2167,7 +2167,7 @@ void NFCGameServerNet_ServerModule::OnSLGClienCreateItem(const NFIPacket& msg)
 	m_pSLGBuildingModule->Produce(nPlayerID, xBuilID, strItemID, nCount);
 }
 
-void NFCGameServerNet_ServerModule::SendMsgPBToGate( const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFIDENTID self )
+void NFCGameServerNet_ServerModule::SendMsgPBToGate( const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFIDENTID& self )
 {
 	NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(self);
 	if (pData.get())
@@ -2180,7 +2180,7 @@ void NFCGameServerNet_ServerModule::SendMsgPBToGate( const uint16_t nMsgID, goog
 	}
 }
 
-void NFCGameServerNet_ServerModule::SendMsgPBToGate( const uint16_t nMsgID, const std::string& strMsg, const NFIDENTID self )
+void NFCGameServerNet_ServerModule::SendMsgPBToGate( const uint16_t nMsgID, const std::string& strMsg, const NFIDENTID& self )
 {
     NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(self);
     if (pData.get())
