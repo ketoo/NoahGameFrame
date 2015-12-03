@@ -13,10 +13,10 @@
 #include <iosfwd>
 #include "NFILogicModule.h"
 #include "NFComm/NFNet/NFCNet.h"
-#include "NFComm/NFNet/NFCPacket.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 #include "NFComm/NFCore/NFQueue.h"
+#include "NFIdentID.h"
 
 enum NF_SERVER_TYPE
 {
@@ -61,10 +61,10 @@ public:
 ////////////////////////////////////////////////////////////////////////////
 
 // 客户端消息处理宏
-#define CLIENT_MSG_PROCESS(packet, msg)                 \
+#define CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msgData, nLen, msg)                 \
 	NFIDENTID nPlayerID;                                \
 	msg xMsg;                                           \
-	if (!NFINetModule::RecivePB(packet, xMsg, nPlayerID))             \
+	if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msgData, nLen, xMsg, nPlayerID))             \
 {                                                   \
 	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
 	return;                                         \
@@ -77,10 +77,10 @@ public:
 	return;                                         \
 }
 
-#define CLIENT_MSG_PROCESS_NO_OBJECT(packet, msg)                 \
+#define CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msgData, nLen, msg)                 \
 	NFIDENTID nPlayerID;                                \
 	msg xMsg;                                           \
-	if (!RecivePB(packet, xMsg, nPlayerID))             \
+	if (!RecivePB(nSockIndex, nMsgID, msgData, nLen, xMsg, nPlayerID))             \
 {                                                   \
 	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
 	return;                                         \
@@ -111,31 +111,31 @@ public:
 	}
 
 	template<typename BaseType>
-	void Initialization(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const char* strIP, const unsigned short nPort)
+	void Initialization(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const char* strIP, const unsigned short nPort)
 	{
 #if NF_PLATFORM == NF_PLATFORM_WIN
    //windows use queue
-		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
+		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
-		m_pNet = new NFCNet(nHeadLength, this, &NFINetModule::OnRecivePack, &NFINetModule::OnSocketEvent);
+		m_pNet = new NFCNet(this, &NFINetModule::OnRecivePack, &NFINetModule::OnSocketEvent);
 #else
-		m_pNet = new NFCNet(nHeadLength, pBaseType, handleRecieve, handleEvent);
+		m_pNet = new NFCNet(pBaseType, handleRecieve, handleEvent);
 #endif
 		m_pNet->Initialization(strIP, nPort);
 	}
 
 	template<typename BaseType>
-	int Initialization(NFIMsgHead::NF_Head nHeadLength, BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4)
+	int Initialization(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4)
 	{
 #if NF_PLATFORM == NF_PLATFORM_WIN
 	 //windows use queue
-		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
+		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
-		m_pNet = new NFCNet(nHeadLength, this, &NFINetModule::OnRecivePack, &NFINetModule::OnSocketEvent);
+		m_pNet = new NFCNet(this, &NFINetModule::OnRecivePack, &NFINetModule::OnSocketEvent);
 #else
-		m_pNet = new NFCNet(nHeadLength, pBaseType, handleRecieve, handleEvent);
+		m_pNet = new NFCNet(pBaseType, handleRecieve, handleEvent);
 #endif
 
 		return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
@@ -162,13 +162,7 @@ public:
 				{
 					if(mRecvCB)
 					{
-
-						NFCPacket xPacket(m_pNet->GetHeadLen());
-						xPacket.SetFd(xEventPack.nFD);
-						//xPacket.DeCode(xEventPack.strData.c_str(), xEventPack.strData.length());
-						xPacket.EnCode(xEventPack.nMsgID, xEventPack.strData.c_str(), xEventPack.strData.length());
-
-						mRecvCB(xPacket);
+						mRecvCB(xEventPack.nFD, xEventPack.nMsgID, xEventPack.strData.c_str(), xEventPack.strData.length());
 					}
 				}
 				break;
@@ -177,19 +171,11 @@ public:
 				{
 					if (xEventPack.bBC)
 					{
-						NFCPacket xPacket(m_pNet->GetHeadLen());
-						if(xPacket.EnCode(xEventPack.nMsgID, xEventPack.strData.c_str(), xEventPack.strData.length()))
-						{
-							m_pNet->SendMsgToAllClient(xPacket);
-						}
+						m_pNet->SendMsgToAllClientWithOutHead(xEventPack.nMsgID, xEventPack.strData.c_str(), xEventPack.strData.length());
 					}
 					else
 					{
-						NFCPacket xPacket(m_pNet->GetHeadLen());
-						if(xPacket.EnCode(xEventPack.nMsgID, xEventPack.strData.c_str(), xEventPack.strData.length()))
-						{
-							m_pNet->SendMsg(xPacket, xEventPack.nFD);
-						}
+						m_pNet->SendMsgWithOutHead(xEventPack.nMsgID, xEventPack.strData.c_str(), xEventPack.strData.length(), xEventPack.nFD);
 					}
 				}
 				break;
@@ -205,7 +191,7 @@ public:
 		}
 #endif
 		//////////////////////////////////////////////////////////////////////////
-		return m_pNet->Execute(fLasFrametime, fStartedTime);
+		return m_pNet->Execute();
 	}
 
 	static NFIDENTID PBToNF(NFMsg::Ident xID)
@@ -226,13 +212,13 @@ public:
 		return xIdent;
 	}
 
-    static bool RecivePB(const NFIPacket& msg, std::string& strMsg, NFIDENTID& nPlayer)
+    static bool RecivePB(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, std::string& strMsg, NFIDENTID& nPlayer)
     {
         NFMsg::MsgBase xMsg;
-        if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
+        if(!xMsg.ParseFromArray(msg, nLen))
         {
             char szData[MAX_PATH] = { 0 };
-            sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
+            sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", nMsgID);
             //LogRecive(szData);
 
             return false;
@@ -245,13 +231,13 @@ public:
         return true;
     }
 
-	static bool RecivePB(const NFIPacket& msg, google::protobuf::Message& xData, NFIDENTID& nPlayer)
+	static bool RecivePB(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, google::protobuf::Message& xData, NFIDENTID& nPlayer)
 	{
 		NFMsg::MsgBase xMsg;
-		if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
+		if(!xMsg.ParseFromArray(msg, nLen))
 		{
 			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
+			sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", nMsgID);
 			//LogRecive(szData);
 
 			return false;
@@ -260,7 +246,7 @@ public:
 		if (!xData.ParseFromString(xMsg.msg_data()))
 		{
 			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Parse Message Failed from MsgData to ProtocolData, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
+			sprintf(szData, "Parse Message Failed from MsgData to ProtocolData, MessageID: %d\n", nMsgID);
 			//LogRecive(szData);
 
 			return false;
@@ -484,20 +470,18 @@ protected:
 	}
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-	int OnRecivePack(const NFIPacket& msg)
+	void OnRecivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 	{
 		QueueEventPack xNetEventPack;
 		xNetEventPack.eMsgType = QueueEventPack::ON_NET_RECIVE;
-		xNetEventPack.nMsgID = msg.GetMsgHead()->GetMsgID();
-		xNetEventPack.nFD = msg.GetFd();
-		xNetEventPack.strData.assign(msg.GetData(), msg.GetDataLen());
+		xNetEventPack.nMsgID = nMsgID;
+		xNetEventPack.nFD = nSockIndex;
+		xNetEventPack.strData.assign(msg, nLen);
 
 		mxQueue.Push(xNetEventPack);
-
-		return 0;
 	}
 
-	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
+	void OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 	{
 		QueueEventPack xNetEventPack;
 		xNetEventPack.eMsgType = QueueEventPack::ON_NET_FD_EVT;
@@ -505,8 +489,6 @@ protected:
 		xNetEventPack.nFD = nSockIndex;
 
 		mxQueue.Push(xNetEventPack);
-
-		return 0;
 	}
 #endif
 

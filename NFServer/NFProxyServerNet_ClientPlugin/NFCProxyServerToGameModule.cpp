@@ -86,22 +86,20 @@ bool NFCProxyServerToGameModule::AfterInit()
     return true;
 }
 
-int NFCProxyServerToGameModule::OnReciveGSPack( const NFIPacket& msg )
+void NFCProxyServerToGameModule::OnReciveGSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	switch (msg.GetMsgHead()->GetMsgID())
+	switch (nMsgID)
 	{
 	case NFMsg::EGMI_ACK_ENTER_GAME:
-	    OnAckEnterGame(msg);
+	    OnAckEnterGame(nSockIndex, nMsgID, msg, nLen);
 	    break;
 	default:
-	    m_pProxyServerNet_ServerModule->Transpond(msg);
+	    m_pProxyServerNet_ServerModule->Transpond(nSockIndex, nMsgID, msg, nLen);
 	    break;
 	}
-
-	return 0;
 }
 
-int NFCProxyServerToGameModule::OnSocketGSEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
+void NFCProxyServerToGameModule::OnSocketGSEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
 	if (eEvent & NF_NET_EVENT_EOF) 
 	{
@@ -116,9 +114,7 @@ int NFCProxyServerToGameModule::OnSocketGSEvent( const int nSockIndex, const NF_
 	{
 	    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
 	    Register(pNet);
-
 	}
-	return 0;
 }
 
 void NFCProxyServerToGameModule::Register(NFINet* pNet)
@@ -165,11 +161,11 @@ void NFCProxyServerToGameModule::Register(NFINet* pNet)
 	}
 }
 
-void NFCProxyServerToGameModule::OnAckEnterGame(const NFIPacket& msg)
+void NFCProxyServerToGameModule::OnAckEnterGame(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     NFIDENTID nPlayerID;
     NFMsg::AckEventResult xData;
-    if (!NFINetModule::RecivePB(msg, xData, nPlayerID))
+    if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
     {
         return;
     }

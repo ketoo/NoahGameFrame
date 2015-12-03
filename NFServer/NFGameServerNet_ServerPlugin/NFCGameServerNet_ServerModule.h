@@ -60,8 +60,8 @@ public:
 
 protected:
 
-	int OnRecivePSPack(const NFIPacket& msg);
-	int OnSocketPSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+	void OnRecivePSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSocketPSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 	//连接丢失,删2层(连接对象，帐号对象)
 	void OnClientDisconnect(const int nSockIndex);
@@ -69,54 +69,54 @@ protected:
 	void OnClientConnected(const int nSockIndex);
 
 protected:
-    void OnProxyServerRegisteredProcess(const NFIPacket& msg);
-    void OnProxyServerUnRegisteredProcess(const NFIPacket& msg);
-    void OnRefreshProxyServerInfoProcess(const NFIPacket& msg);
+    void OnProxyServerRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnProxyServerUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnRefreshProxyServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
 
-    void OnReqiureRoleListProcess(const NFIPacket& msg);
-    void OnCreateRoleGameProcess(const NFIPacket& msg);
-    void OnDeleteRoleGameProcess(const NFIPacket& msg);
-    void OnClienCommand(const NFIPacket& msg);
+    void OnReqiureRoleListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnCreateRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnDeleteRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienCommand(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     //////////////////////////////////////////////////////////////////////////
 
-    void OnClienEnterGameProcess(const NFIPacket& msg);
-    void OnClienLeaveGameProcess(const NFIPacket& msg);
-    void OnClienGMProcess(const NFIPacket& msg);
+    void OnClienEnterGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienGMProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     //////////////////////////////////////////////////////////////////////////
     
-    void OnClienSwapSceneProcess(const NFIPacket& msg);
-    void OnClienUseSkill(const NFIPacket& msg);
-    void OnClienUseItem(const NFIPacket& msg);
-    void OnClienPickItem(const NFIPacket& msg);
-    void OnClienMove(const NFIPacket& msg);
-    void OnClienMoveImmune(const NFIPacket& msg);
-    void OnClienAcceptTask(const NFIPacket& msg);
-    void OnClienPushTask(const NFIPacket& msg);
-    void OnClienPushCustom(const NFIPacket& msg);
-    void OnClienChatProcess(const NFIPacket& msg);
+    void OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienUseSkill(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienUseItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienPickItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienMove(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienMoveImmune(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienAcceptTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienPushTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienPushCustom(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     //////////////////////////////////////////////////////////////////////////
 
-    void OnClientJoinPVP(const NFIPacket& msg);
-    void OnClientExitPVP(const NFIPacket& msg);
+    void OnClientJoinPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClientExitPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 
-    void OnClientEndBattle(const NFIPacket& msg);
+    void OnClientEndBattle(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	///////////WORLD_START///////////////////////////////////////////////////////////////
-	void OnTransWorld(const NFIPacket& msg);
-    void OnTransWorld(const NFIPacket& msg, const int nWorldKey);
+	void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey);
 
 	///////////WORLD_END///////////////////////////////////////////////////////////////
 
 	/////////SLG_START/////////////////////////////////////////////////////////////////
-	void OnSLGClienBuyItem(const NFIPacket& msg);
-	void OnSLGClienMoveObject(const NFIPacket& msg);
-	void OnSLGClienUpgradeBuilding(const NFIPacket& msg);
-	void OnSLGClienCreateItem(const NFIPacket& msg);
+	void OnSLGClienBuyItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSLGClienMoveObject(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSLGClienUpgradeBuilding(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSLGClienCreateItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	/////////SLG_END/////////////////////////////////////////////////////////////////
 protected:
@@ -156,7 +156,7 @@ protected:
     int OnNoticeEctypeAward(const NFIDENTID& self, const int nEventID, const NFIDataList& var);
 
     template<class PBClass>    
-    NFIDENTID GetGuildID(const NFIPacket& msg);
+    NFIDENTID GetGuildID(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 private:
 	void PlayerLeaveGameServer( const NFIDENTID self );
 
@@ -230,11 +230,11 @@ private:
 };
 
 template<class PBClass>
-NFIDENTID NFCGameServerNet_ServerModule::GetGuildID( const NFIPacket& msg )
+NFIDENTID NFCGameServerNet_ServerModule::GetGuildID(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     NFIDENTID nPlayerID;
     PBClass xMsg;                                         
-    if (!NFINetModule::RecivePB(msg, xMsg, nPlayerID))
+    if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return NULL_OBJECT;
     }

@@ -27,14 +27,14 @@
 #define NET_MSG_PROCESS(xNFMsg, msg) \
     NFIDENTID nPlayerID; \
     xNFMsg xMsg; \
-    if (!RecivePB(msg, xMsg, nPlayerID)) \
+    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID)) \
     { \
     return 0; \
     } \
     \
     NFIActorMessage xActorMsg; \
     xActorMsg.eType = NFIActorMessage::EACTOR_NET_MSG; \
-    xActorMsg.nSubMsgID = msg.GetMsgHead()->GetMsgID(); \
+    xActorMsg.nSubMsgID = nMsgID; \
     xMsg.SerializeToString(&xActorMsg.data); \
     pPluginManager->GetFramework().Send(xActorMsg, pPluginManager->GetAddress(), pPluginManager->GetAddress());
 
@@ -60,8 +60,8 @@ public:
 	virtual void LogSend(const char* str){}
 
 protected:
-	int OnReciveClientPack(const NFIPacket& msg);
-	int OnSocketClientEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+	void OnReciveClientPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSocketClientEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 protected:
 	//连接丢失,删2层(连接对象，帐号对象)
@@ -70,13 +70,13 @@ protected:
 	void OnClientConnected(const int nAddress);
 
 	//登入 
-	int OnLoginProcess(const NFIPacket& msg);
+	int OnLoginProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     
 	//选择大世界
-	int OnSelectWorldProcess(const NFIPacket& msg);
+	int OnSelectWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     
 	//申请查看世界列表
-	int OnViewWorldProcess(const NFIPacket& msg);
+	int OnViewWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     //////////////////////////////////////////////////////////////////////////
 

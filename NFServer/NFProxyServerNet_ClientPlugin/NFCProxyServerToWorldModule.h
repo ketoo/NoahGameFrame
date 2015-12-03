@@ -45,13 +45,13 @@ public:
 
 protected:
 
-	int OnReciveWSPack(const NFIPacket& msg);
-	int OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+	void OnReciveWSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     void Register(NFINet* pNet);
 
-    int OnSelectServerResultProcess(const NFIPacket& msg);
-    int OnServerInfoProcess(const NFIPacket& msg);
+    void OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	virtual void LogServerInfo(const std::string& strServerInfo);
 private:
