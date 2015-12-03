@@ -42,8 +42,8 @@ public:
 
 protected:
 
-    int OnReciveWSPack(const NFIPacket& msg);
-    int OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+    void OnReciveWSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     //连接丢失,删2层(连接对象，帐号对象)
     void OnClientDisconnect(const int nAddress);
@@ -54,20 +54,20 @@ protected:
     void Register(NFINet* pNet);
     void RefreshWorldInfo();
 
-    int OnLoadRoleDataBeginProcess(const NFIPacket& msg);
+    void OnLoadRoleDataBeginProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    int OnLoadRoleDataFinalProcess(const NFIPacket& msg);
+    void OnLoadRoleDataFinalProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    int OnEnquireSceneInfoProcess(const NFIPacket& msg);
+    void OnEnquireSceneInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    int OnSwapGSProcess(const NFIPacket& msg);
-    int OnAckCreateGuildProcess(const NFIPacket& msg);
-    int OnAckJoinGuildProcess(const NFIPacket& msg);
-    int OnAckLeaveGuildProcess(const NFIPacket& msg);
+    void OnSwapGSProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnAckCreateGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnAckJoinGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnAckLeaveGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    int OnAckCreateChatGroupProcess(const NFIPacket& msg);
-    int OnAckJoinChatGroupProcess(const NFIPacket& msg);
-    int OnAckQuitChatGroupProcess(const NFIPacket& msg);
+    void OnAckCreateChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnAckJoinChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnAckQuitChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 
     int OnDataLoadBeginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
@@ -82,8 +82,8 @@ protected:
     int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
     
 //     template<class PBClass>    
-//     int TransPBToProxy(const NFIPacket& msg);
-    int TransPBToProxy(const NFIPacket& msg);
+//     int TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 
 	virtual void LogServerInfo( const std::string& strServerInfo );
