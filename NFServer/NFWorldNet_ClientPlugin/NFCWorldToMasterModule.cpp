@@ -131,11 +131,11 @@ void NFCWorldToMasterModule::RefreshWorldInfo()
 
 }
 
-int NFCWorldToMasterModule::OnSelectServerProcess(const NFIPacket& msg)
+int NFCWorldToMasterModule::OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFIDENTID nPlayerID;
 	NFMsg::ReqConnectWorld xMsg;
-	if (!NFINetModule::RecivePB(msg, xMsg, nPlayerID))
+	if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return 0;
 	}
@@ -180,11 +180,11 @@ int NFCWorldToMasterModule::OnSelectServerResultsEvent(const NFIDENTID& object, 
     return 0;
 }
 
-int NFCWorldToMasterModule::OnKickClientProcess(const NFIPacket& msg)
+int NFCWorldToMasterModule::OnKickClientProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFIDENTID nPlayerID;
 	NFMsg::ReqKickFromWorld xMsg;
-	if (!NFINetModule::RecivePB(msg, xMsg, nPlayerID))
+	if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return 0;
 	}
@@ -196,28 +196,25 @@ int NFCWorldToMasterModule::OnKickClientProcess(const NFIPacket& msg)
     return 0;
 }
 
-int NFCWorldToMasterModule::OnReciveMSPack( const NFIPacket& msg )
+void NFCWorldToMasterModule::OnReciveMSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	int nMsgID = msg.GetMsgHead()->GetMsgID();
 	switch (nMsgID)
 	{
 	case NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD:
-		OnSelectServerProcess(msg);
+		OnSelectServerProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 
 	case NFMsg::EGameMsgID::EGMI_REQ_KICK_CLIENT_INWORLD:
-		OnKickClientProcess(msg);
+		OnKickClientProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 
 	default:
-		printf("NFNet || 非法消息:unMsgID=%d\n", msg.GetMsgHead()->GetMsgID());
+		printf("NFNet || 非法消息:unMsgID=%d\n", nMsgID);
 		break;
 	}
-
-	return 0;
 }
 
-int NFCWorldToMasterModule::OnSocketMSEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
+void NFCWorldToMasterModule::OnSocketMSEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -236,8 +233,6 @@ int NFCWorldToMasterModule::OnSocketMSEvent( const int nSockIndex, const NF_NET_
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
         Register(pNet);
     }
-
-	return 0;
 }
 
 void NFCWorldToMasterModule::OnClientDisconnect( const int nAddress )
