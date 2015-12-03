@@ -96,7 +96,7 @@ public:
 		}
 	}
 
-    void SendByServerID(const int nServerID,const NFIPacket& msg)
+    void SendByServerID(const int nServerID, const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
     {
         NF_SHARE_PTR<ServerData> pServer = mxServerMap.GetElement(nServerID);
         if (pServer)
@@ -104,7 +104,7 @@ public:
             NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
             if (pNetModule.get())
             {
-                pNetModule->GetNet()->SendMsg(msg, 0);
+                pNetModule->GetNet()->SendMsgWithOutHead(nMsgID, msg, nLen, 0);
             }
         }
     }
@@ -141,7 +141,7 @@ public:
         SendByServerID(nMsgID, xNode.nMachineID, strData);
     }
 
-    void SendBySuit(const int& nHashKey, const NFIPacket& msg)
+    void SendBySuit(const int& nHashKey, const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
     {
         if (mxConsistentHash.Size() <= 0)
         {
@@ -154,7 +154,7 @@ public:
             return ;
         }
 
-        SendByServerID(xNode.nMachineID, msg);
+        SendByServerID(xNode.nMachineID, nSockIndex, nMsgID, msg, nLen);
     }
 
 	void SendSuitByPB(const int& nHashKey, const uint16_t nMsgID, google::protobuf::Message& xData, const int nSockIndex = 0, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<NFIDENTID>* pClientIDList = NULL)
@@ -197,9 +197,9 @@ public:
 
 protected:  
 	template<typename BaseType>
-	void Bind(BaseType* pBaseType, int (BaseType::*handleRecieve)(const NFIPacket&), int (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*))
+	void Bind(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*))
 	{
-		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
+		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 	}
 
@@ -215,8 +215,8 @@ protected:
             pServerData = mxServerMap.NextNude();
         }
 
-
         ProcessAddNetConnect();
+
         return true;
     }
 
@@ -270,7 +270,7 @@ private:
 		LogServerInfo();
 	}
 
-	int OnSocketEvent(const int fd, const NF_NET_EVENT eEvent, NFINet* pNet)
+	void OnSocketEvent(const int fd, const NF_NET_EVENT eEvent, NFINet* pNet)
 	{
 		if (eEvent & BEV_EVENT_CONNECTED)
 		{
@@ -285,18 +285,15 @@ private:
 		{
 			mEventCB(fd, eEvent, pNet);
 		}
-
-		return 0;
 	}
 
-	int OnRecivePack(const NFIPacket& msg)
+	void OnRecivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 	{
 		if (mRecvCB)
 		{
-			mRecvCB(msg);
+			mRecvCB(nSockIndex, nMsgID, msg, nLen);
 		}
 
-		return 0;
 	}
 
     int OnConnected(const int fd, NFINet* pNet)
@@ -347,7 +344,7 @@ private:
 
                     //智能指针自己释放
                     xServerData->mxNetModule = NF_SHARE_PTR<NFINetModule>(NF_NEW NFINetModule());
-					xServerData->mxNetModule->Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFIClusterClientModule::OnRecivePack, &NFIClusterClientModule::OnSocketEvent, xServerData->strIP.c_str(), xServerData->nPort);
+					xServerData->mxNetModule->Initialization(this, &NFIClusterClientModule::OnRecivePack, &NFIClusterClientModule::OnSocketEvent, xServerData->strIP.c_str(), xServerData->nPort);
 
                 }
             }
@@ -364,7 +361,7 @@ private:
 				xServerData->nPort = xInfo.nPort;
 
 				xServerData->mxNetModule = NF_SHARE_PTR<NFINetModule>(NF_NEW NFINetModule());
-				xServerData->mxNetModule->Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFIClusterClientModule::OnRecivePack, &NFIClusterClientModule::OnSocketEvent, xServerData->strIP.c_str(), xServerData->nPort);
+				xServerData->mxNetModule->Initialization(this, &NFIClusterClientModule::OnRecivePack, &NFIClusterClientModule::OnSocketEvent, xServerData->strIP.c_str(), xServerData->nPort);
 
 
 				mxServerMap.AddElement(xInfo.nGameID, xServerData);

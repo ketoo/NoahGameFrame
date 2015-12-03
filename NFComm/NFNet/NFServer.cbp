@@ -2,16 +2,16 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="NFNet" />
+		<Option title="NFClient" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFNet_d" prefix_auto="0" extension_auto="1" />
-				<Option working_dir="" />
-				<Option type="2" />
+				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFNet_Client" prefix_auto="0" extension_auto="1" />
+				<Option working_dir="$(SolutionDir)/_Out/Comm/Debug" />
+				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
+				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
@@ -21,6 +21,15 @@
 					<Add directory="../libevent-2.0.21-stable/include/" />
 					<Add directory="../libevent-2.0.21-stable/compat/" />
 				</Compiler>
+				<Linker>
+					<Add option="-lrt" />
+					<Add library="../../_Out/Comm/Debug/NFNet_d.a" />
+					<Add library="../../_Out/Comm/Debug/libevent.a" />
+					<Add library="../../_Out/Comm/Debug/libevent_core.lib" />
+					<Add library="../../_Out/Comm/Debug/libevent_extra.a" />
+					<Add library="../../_Out/Comm/Debug/libevent_pthreads.a" />
+					<Add library="pthread" />
+				</Linker>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
@@ -44,9 +53,7 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCNet.cpp" />
-		<Unit filename="NFCNet.h" />
-		<Unit filename="NFINet.h" />
+		<Unit filename="TestClient.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
