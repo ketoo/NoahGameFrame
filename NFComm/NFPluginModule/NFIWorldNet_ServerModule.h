@@ -11,7 +11,6 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
-#include "NFComm/NFNet/NFIPacket.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 
