@@ -159,11 +159,11 @@ void NFCLoginToMasterModule::Register(NFINet* pNet)
 	}
 }
 
-int NFCLoginToMasterModule::OnSelectServerResultProcess(const NFIPacket& msg)
+int NFCLoginToMasterModule::OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     NFIDENTID nPlayerID;	
     NFMsg::AckConnectWorldResult xMsg;
-    if (!NFINetModule::RecivePB(msg, xMsg, nPlayerID))
+    if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -182,27 +182,24 @@ int NFCLoginToMasterModule::OnSelectServerResultProcess(const NFIPacket& msg)
 	return 0;
 }
 
-int NFCLoginToMasterModule::OnReciveMSPack(const NFIPacket& msg )
+void NFCLoginToMasterModule::OnReciveMSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
 {
     //统一解包
-    int nMsgID = msg.GetMsgHead()->GetMsgID();
     switch (nMsgID)
     {
     case NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD:
-        OnSelectServerResultProcess(msg);
+        OnSelectServerResultProcess(nSockIndex, nMsgID, msg, nLen);
         break;
     case NFMsg::EGameMsgID::EGMI_STS_NET_INFO:
-        OnWorldInfoProcess(msg);
+        OnWorldInfoProcess(nSockIndex, nMsgID, msg, nLen);
         break;
     default:
         printf("NFNet || 非法消息:unMsgID=%d\n", nMsgID);
         break;
     }
-
-    return 0;
 }
 
-int NFCLoginToMasterModule::OnSocketMSEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
+void NFCLoginToMasterModule::OnSocketMSEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -221,15 +218,13 @@ int NFCLoginToMasterModule::OnSocketMSEvent( const int nSockIndex, const NF_NET_
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
         Register(pNet);
     }
-
-	return 0;
 }
 
-int NFCLoginToMasterModule::OnWorldInfoProcess( const NFIPacket& msg )
+int NFCLoginToMasterModule::OnWorldInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFIDENTID nPlayerID ;	
 	NFMsg::ServerInfoReportList xMsg;
-	if (!NFINetModule::RecivePB(msg, xMsg, nPlayerID))
+	if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return 0;
 	}

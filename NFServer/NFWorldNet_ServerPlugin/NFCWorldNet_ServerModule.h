@@ -57,8 +57,8 @@ public:
 
 protected:
 
-	int OnRecivePack(const NFIPacket& msg);
-	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+	void OnRecivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 	//连接丢失,删2层(连接对象，帐号对象)
 	void OnClientDisconnect(const int nAddress);
@@ -75,15 +75,15 @@ protected:
 
 	bool InThisWorld(const std::string& strAccount);
 
-    int OnGameServerRegisteredProcess(const NFIPacket& msg);
-    int OnGameServerUnRegisteredProcess(const NFIPacket& msg);
-    int OnRefreshGameServerInfoProcess(const NFIPacket& msg);
+    int OnGameServerRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnGameServerUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnRefreshGameServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    int OnProxyServerRegisteredProcess(const NFIPacket& msg);
-    int OnProxyServerUnRegisteredProcess(const NFIPacket& msg);
-    int OnRefreshProxyServerInfoProcess(const NFIPacket& msg);
+    int OnProxyServerRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnProxyServerUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnRefreshProxyServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    int OnLeaveGameProcess(const NFIPacket& msg);
+    int OnLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     //////////////////////////////////////////////////////////////////////////
 
 	void SynGameToProxy();
@@ -93,20 +93,20 @@ protected:
 	void LogGameServer(const float fLastTime);
 
 protected:
-	void OnCreateGuildProcess(const NFIPacket& msg);
-	void OnJoinGuildProcess(const NFIPacket& msg);
-	void OnLeaveGuildProcess(const NFIPacket& msg);
-	void OnOprGuildMemberProcess(const NFIPacket& msg);
-    void OnSearchGuildProcess(const NFIPacket& msg);
-    void OnOnlineProcess(const NFIPacket& msg);
-    void OnOfflineProcess(const NFIPacket& msg);
-    void OnChatProcess(const NFIPacket& msg);
+	void OnCreateGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnJoinGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnLeaveGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnOprGuildMemberProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnSearchGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnOnlineProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnOfflineProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     
-    void OnReqCreateChatGroupProcess(const NFIPacket& msg);
-    void OnReqJoineChatGroupProcess(const NFIPacket& msg);
-    void OnReqLeaveChatGroupProcess(const NFIPacket& msg);
-    void OnReqSubscriptionChatGroupProcess(const NFIPacket& msg);
-    void OnReqCancelSubscriptionChatGroupProcess(const NFIPacket& msg);
+    void OnReqCreateChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnReqJoineChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnReqLeaveChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnReqSubscriptionChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnReqCancelSubscriptionChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
 
