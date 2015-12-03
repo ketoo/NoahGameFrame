@@ -71,7 +71,7 @@ bool NFCLoginNet_ServerModule::AfterInit()
 
 				m_pUUIDModule->SetIdentID(nServerID);
 
-				Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCLoginNet_ServerModule::OnReciveClientPack, &NFCLoginNet_ServerModule::OnSocketClientEvent, nMaxConnect, nPort, nCpus);		
+				Initialization(this, &NFCLoginNet_ServerModule::OnReciveClientPack, &NFCLoginNet_ServerModule::OnSocketClientEvent, nMaxConnect, nPort, nCpus);		
 			}
 		}
 	}
@@ -192,16 +192,16 @@ void NFCLoginNet_ServerModule::OnClientDisconnect(const int nAddress)
 	}
 }
 
-int NFCLoginNet_ServerModule::OnLoginProcess( const NFIPacket& msg )
+int NFCLoginNet_ServerModule::OnLoginProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFIDENTID nPlayerID;
 	NFMsg::ReqAccountLogin xMsg;
-	if (!RecivePB(msg, xMsg, nPlayerID))
+	if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return 0;
 	}
     
-    NetObject* pNetObject = GetNet()->GetNetObject(msg.GetFd());
+    NetObject* pNetObject = GetNet()->GetNetObject(nSockIndex);
     if (pNetObject)
     {
         //还没有登录过
@@ -216,16 +216,16 @@ int NFCLoginNet_ServerModule::OnLoginProcess( const NFIPacket& msg )
 	return 0;
 }
 
-int NFCLoginNet_ServerModule::OnSelectWorldProcess( const NFIPacket& msg )
+int NFCLoginNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFIDENTID nPlayerID;
 	NFMsg::ReqConnectWorld xMsg;
-	if (!RecivePB(msg, xMsg, nPlayerID))
+	if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return 0;
 	}
 
-	NetObject* pNetObject = GetNet()->GetNetObject(msg.GetFd());
+	NetObject* pNetObject = GetNet()->GetNetObject(nSockIndex);
 	if (!pNetObject)
 	{
 		return 0;
@@ -244,32 +244,31 @@ int NFCLoginNet_ServerModule::OnSelectWorldProcess( const NFIPacket& msg )
 	return 0;
 }
 
-int NFCLoginNet_ServerModule::OnReciveClientPack(const NFIPacket& msg )
+void NFCLoginNet_ServerModule::OnReciveClientPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
 {
 	//统一解包
-	int nMsgID = msg.GetMsgHead()->GetMsgID();
 	switch (nMsgID)
 	{
 	case NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT:
 		break;
 
 	case NFMsg::EGameMsgID::EGMI_REQ_LOGIN:
-		OnLoginProcess(msg);
+		OnLoginProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 
 	case NFMsg::EGameMsgID::EGMI_REQ_LOGOUT:
 		break;
 
 	case NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD:
-		OnSelectWorldProcess(msg);
+		OnSelectWorldProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 		
 	case NFMsg::EGameMsgID::EGMI_REQ_WORLD_LIST:
-		OnViewWorldProcess(msg);
+		OnViewWorldProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 
 		// 	case NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD:
-		// 		OnObjectPropertyIntProcess(msg);
+		// 		OnObjectPropertyIntProcess(nSockIndex, nMsgID, msg, nLen);
 		// 		break;
 
 
@@ -278,10 +277,9 @@ int NFCLoginNet_ServerModule::OnReciveClientPack(const NFIPacket& msg )
 		printf("NFNet || 非法消息:unMsgID=%d\n", nMsgID);
 		break;
 	}
-	return 0;
 }
 
-int NFCLoginNet_ServerModule::OnSocketClientEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
+void NFCLoginNet_ServerModule::OnSocketClientEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
@@ -303,8 +301,6 @@ int NFCLoginNet_ServerModule::OnSocketClientEvent( const int nSockIndex, const N
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
         OnClientConnected(nSockIndex);
     }
-
-	return 0;	
 }
 
 void NFCLoginNet_ServerModule::SynWorldToClient( const int nFD )
@@ -330,18 +326,18 @@ void NFCLoginNet_ServerModule::SynWorldToClient( const int nFD )
     SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_WORLD_LIST, xData, nFD);
 }
 
-int NFCLoginNet_ServerModule::OnViewWorldProcess( const NFIPacket& msg )
+int NFCLoginNet_ServerModule::OnViewWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFIDENTID nPlayerID;
 	NFMsg::ReqServerList xMsg;
-	if (!RecivePB(msg, xMsg, nPlayerID))
+	if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return 0;
 	}
 
 	if (xMsg.type() == NFMsg::RSLT_WORLD_SERVER)
 	{
-		SynWorldToClient(msg.GetFd());
+		SynWorldToClient(nSockIndex);
 	}
 
 	return 0;

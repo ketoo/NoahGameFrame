@@ -11,7 +11,6 @@
 #define _NFC_PROXYSERVER_TO_GAME_MODULE_H_
 
 #include <string>
-#include "NFComm/NFNet/NFIPacket.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFCore/NFCHeartBeatManager.h"
 #include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
@@ -46,12 +45,12 @@ public:
 
 protected:
 
-	int OnReciveGSPack(const NFIPacket& msg);
-	int OnSocketGSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+	void OnReciveGSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSocketGSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 	void Register(NFINet* pNet);
 
-	void OnAckEnterGame(const NFIPacket& msg);
+	void OnAckEnterGame(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	virtual void LogServerInfo( const std::string& strServerInfo );
 
 private:
