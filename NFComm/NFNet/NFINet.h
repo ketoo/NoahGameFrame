@@ -187,8 +187,6 @@ public:
 
 	virtual uint32_t GetBodyLength() const { return munSize; }
 	virtual void SetBodyLength(uint32_t nLength){ munSize = nLength; }
-
-	virtual uint32_t GetPackLength() const { return munSize + NF_HEAD_LENGTH; }
 protected:
 	uint32_t munSize;
 	uint16_t munMsgID;
@@ -369,7 +367,7 @@ public:
 	virtual bool Final() = 0;
 
 	//已带上包头
-	virtual bool SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex = 0) = 0;
+	//virtual bool SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex = 0) = 0;
 
 	//无包头，内部组装
 	virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const int nSockIndex = 0) = 0;
