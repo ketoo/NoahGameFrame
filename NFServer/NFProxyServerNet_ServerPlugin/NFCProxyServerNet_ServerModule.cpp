@@ -319,7 +319,7 @@ int NFCProxyServerNet_ServerModule::Transpond(const int nSockIndex, const int nM
         NF_SHARE_PTR<int> pFD = mxClientIdent.GetElement(PBToNF(xMsg.player_client_list(i)));
         if (pFD)
         {
-            GetNet()->SendMsg(msg, *pFD);
+            GetNet()->SendMsgWithOutHead(nMsgID, msg, *pFD);
         }
     }
 
@@ -330,7 +330,7 @@ int NFCProxyServerNet_ServerModule::Transpond(const int nSockIndex, const int nM
         NF_SHARE_PTR<int> pFD = mxClientIdent.GetElement(PBToNF(xMsg.player_id()));
         if (pFD)
         {
-            GetNet()->SendMsg(msg, *pFD);
+            GetNet()->SendMsgWithOutHead(nMsgID, msg, *pFD);
         }
     }
 
