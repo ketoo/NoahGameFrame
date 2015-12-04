@@ -147,7 +147,8 @@ public:
 		memcpy(strData + nOffset, (void*)(&nMsgID), sizeof(munMsgID));
 		nOffset += sizeof(munMsgID);
 
-		uint32_t nSize = NF_HTONL(munSize);
+		uint32_t nPackSize = munSize + NF_HEAD_LENGTH;
+		uint32_t nSize = NF_HTONL(nPackSize);
 		memcpy(strData + nOffset, (void*)(&nSize), sizeof(munSize));
 		nOffset += sizeof(munSize);
 
@@ -168,9 +169,9 @@ public:
 		munMsgID = NF_NTOHS(nMsgID);
 		nOffset += sizeof(munMsgID);
 
-		uint32_t nSize = 0;
-		memcpy(&nSize, strData + nOffset, sizeof(munSize));
-		munSize = NF_NTOHL(nSize);
+		uint32_t nPackSize = 0;
+		memcpy(&nPackSize, strData + nOffset, sizeof(munSize));
+		munSize = NF_NTOHL(nPackSize) - NF_HEAD_LENGTH;
 		nOffset += sizeof(munSize);
 
 		if (nOffset != NF_HEAD_LENGTH)
@@ -187,6 +188,7 @@ public:
 	virtual uint32_t GetBodyLength() const { return munSize; }
 	virtual void SetBodyLength(uint32_t nLength){ munSize = nLength; }
 
+	virtual uint32_t GetPackLength() const { return munSize + NF_HEAD_LENGTH; }
 protected:
 	uint32_t munSize;
 	uint16_t munMsgID;
