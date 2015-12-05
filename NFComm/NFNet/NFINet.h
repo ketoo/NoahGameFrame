@@ -44,7 +44,7 @@
 #include <unistd.h>
 #endif
 
-#include "../NFPluginModule/NFIdentID.h"
+#include "../NFPluginModule/NFGUID.h"
 
 #pragma pack(push, 1)
 
@@ -316,22 +316,22 @@ public:
     {
         mnGameID = nData;
     }    
-    const NFIDENTID& GetUserID()
+    const NFGUID& GetUserID()
     {
         return mnUserID;
     }
 
-    void SetUserID(const NFIDENTID& nUserID)
+    void SetUserID(const NFGUID& nUserID)
     {
         mnUserID = nUserID;
     }
 
-	const NFIDENTID& GetClientID()
+	const NFGUID& GetClientID()
 	{
 		return mnClientID;
 	}
 
-	void SetClientID(const NFIDENTID& xClientID)
+	void SetClientID(const NFGUID& xClientID)
 	{
 		mnClientID = xClientID;
 	}
@@ -349,7 +349,7 @@ private:
 
     int32_t mnLogicState;
 	int32_t mnGameID;
-	NFIDENTID mnUserID;	NFIDENTID mnClientID;
+	NFGUID mnUserID;	NFGUID mnClientID;
     NFINet* m_pNet;
 	//
 	int nFD;

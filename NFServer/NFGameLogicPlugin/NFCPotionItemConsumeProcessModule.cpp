@@ -50,12 +50,12 @@ bool NFCPotionItemConsumeProcessModule::Execute( const float fLasFrametime, cons
 }
 
 
-int NFCPotionItemConsumeProcessModule::ConsumeLegal( const NFIDENTID& self, int nItemRowID, const NFIDataList& other )
+int NFCPotionItemConsumeProcessModule::ConsumeLegal( const NFGUID& self, int nItemRowID, const NFIDataList& other )
 {
     return 1;
 }
 
-int NFCPotionItemConsumeProcessModule::ConsumeSelf( const NFIDENTID& self, int nItemRowID )
+int NFCPotionItemConsumeProcessModule::ConsumeSelf( const NFGUID& self, int nItemRowID )
 {
     //得到数量-1
     int nCount = m_pPackModule->GetGridCount( self, nItemRowID );
@@ -82,7 +82,7 @@ int NFCPotionItemConsumeProcessModule::ConsumeSelf( const NFIDENTID& self, int n
     return 0;
 }
 
-int NFCPotionItemConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, const std::string& strItemName, const NFIDataList& other )
+int NFCPotionItemConsumeProcessModule::ConsumeProcess( const NFGUID& self, const std::string& strItemName, const NFIDataList& other )
 {
     //附加效果
 
@@ -102,7 +102,7 @@ int NFCPotionItemConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, co
                     //先测定目标是否有此属性(其实是担心配错了)
                     for ( int j = 0; j < other.GetCount(); j++ )
                     {
-                        NFIDENTID identOther = other.Object( j );
+                        NFGUID identOther = other.Object( j );
                         if ( !identOther.IsNull() )
                         {
                             NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( identOther );

@@ -29,7 +29,7 @@ NFCIdleState::~NFCIdleState()
 
 }
 
-bool NFCIdleState::Enter(const NFIDENTID& self)
+bool NFCIdleState::Enter(const NFGUID& self)
 {
     if (!NFIState::Enter(self))
     {
@@ -53,7 +53,7 @@ bool NFCIdleState::Enter(const NFIDENTID& self)
     return true;
 }
 
-bool NFCIdleState::Execute(const NFIDENTID& self)
+bool NFCIdleState::Execute(const NFGUID& self)
 {
     if (!NFIState::Execute(self))
     {
@@ -61,7 +61,7 @@ bool NFCIdleState::Execute(const NFIDENTID& self)
         if (pStateMachine)
         {
             //查找是否有可以攻击的对象
-            NFIDENTID ident = m_pHateModule->QueryMaxHateObject(self);
+            NFGUID ident = m_pHateModule->QueryMaxHateObject(self);
             if (!ident.IsNull())
             {
                 pStateMachine->ChangeState(FightState);
@@ -79,19 +79,19 @@ bool NFCIdleState::Execute(const NFIDENTID& self)
     return true;
 }
 
-bool NFCIdleState::Exit(const NFIDENTID& self)
+bool NFCIdleState::Exit(const NFGUID& self)
 {
 
 
     return true;
 }
 
-bool NFCIdleState::DoRule(const NFIDENTID& self)
+bool NFCIdleState::DoRule(const NFGUID& self)
 {
     return true;
 }
 
-bool NFCIdleState::RandomIdle(const NFIDENTID& self, NFIStateMachine* pStateMachine)
+bool NFCIdleState::RandomIdle(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
 	//如果是定点的，则不走，继续idle
 	NFAI_MOVE_TYPE eMoveType = (NFAI_MOVE_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));

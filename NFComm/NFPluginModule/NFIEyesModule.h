@@ -25,9 +25,9 @@ class NFIEyesModule
 {
 
 public:
-	virtual bool ClearEyesWish(const NFIDENTID& self) = 0;
-    virtual bool AddNewerEyes(const NFIDENTID& self, const int nLevel) = 0;
-	virtual bool AddEyes(const NFIDENTID& self, const std::string& strEyesConfig) = 0;
+	virtual bool ClearEyesWish(const NFGUID& self) = 0;
+    virtual bool AddNewerEyes(const NFGUID& self, const int nLevel) = 0;
+	virtual bool AddEyes(const NFGUID& self, const std::string& strEyesConfig) = 0;
 };
 
 #endif

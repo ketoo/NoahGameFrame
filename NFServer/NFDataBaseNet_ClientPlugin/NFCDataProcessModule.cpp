@@ -50,7 +50,7 @@ bool NFCDataProcessModule::AfterInit()
 	return true;
 }
 
-int NFCDataProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCDataProcessModule::OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
 	if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
 	{
@@ -67,7 +67,7 @@ int NFCDataProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std::
 	return 0;
 }
 
-const NFIDENTID& NFCDataProcessModule::CreateRole( const std::string& strAccount, const std::string& strName, const int nRace, const int nJob, const int nSex )
+const NFGUID& NFCDataProcessModule::CreateRole( const std::string& strAccount, const std::string& strName, const int nRace, const int nJob, const int nSex )
 {
 	bool bExit = false;
 	if (!m_pClusterSQLModule->Exists(mstrAccountTable, strAccount, bExit)
@@ -93,7 +93,7 @@ const NFIDENTID& NFCDataProcessModule::CreateRole( const std::string& strAccount
 		return NULL_OBJECT;
 	}
 
-	NFIDENTID xID = m_pUUIDModule->CreateGUID();
+	NFGUID xID = m_pUUIDModule->CreateGUID();
 
 	vFieldVec.clear();
 	vValueVec.clear();
@@ -130,7 +130,7 @@ const NFIDENTID& NFCDataProcessModule::CreateRole( const std::string& strAccount
 	return xID;
 }
 
-const bool NFCDataProcessModule::DeleteRole( const std::string& strAccount, const NFIDENTID xID )
+const bool NFCDataProcessModule::DeleteRole( const std::string& strAccount, const NFGUID xID )
 {
 	bool bExit = false;
 	if (!m_pClusterSQLModule->Exists(mstrAccountTable, strAccount, bExit)
@@ -154,7 +154,7 @@ const bool NFCDataProcessModule::DeleteRole( const std::string& strAccount, cons
 	return true;
 }
 
-const NFIDENTID& NFCDataProcessModule::GetChar( const std::string& strAccount, const std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVec )
+const NFGUID& NFCDataProcessModule::GetChar( const std::string& strAccount, const std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVec )
 {
 	bool bExit = false;
 	if (!m_pClusterSQLModule->Exists(mstrAccountTable, strAccount, bExit)
@@ -182,7 +182,7 @@ const NFIDENTID& NFCDataProcessModule::GetChar( const std::string& strAccount, c
 		return NULL_OBJECT;
 	}
 
-    NFIDENTID ident;
+    NFGUID ident;
     if (!ident.FromString(stRolerID))
     {
         return NULL_OBJECT;
@@ -191,7 +191,7 @@ const NFIDENTID& NFCDataProcessModule::GetChar( const std::string& strAccount, c
 	return ident;
 }
 
-void NFCDataProcessModule::OnOnline( const NFIDENTID& self )
+void NFCDataProcessModule::OnOnline( const NFGUID& self )
 {
     const int nGateID = m_pKernelModule->GetPropertyInt(self, "GateID");
     const int nGameID = m_pKernelModule->GetPropertyInt(self, "GameID");
@@ -208,7 +208,7 @@ void NFCDataProcessModule::OnOnline( const NFIDENTID& self )
     m_pClusterSQLModule->Updata(mstrRoleTable, self.ToString(), xFieldVec, vValueVec);
 }
 
-void NFCDataProcessModule::OnOffline( const NFIDENTID& self )
+void NFCDataProcessModule::OnOffline( const NFGUID& self )
 {
     const int nGateID = 0;
     const int nGameID = 0;
@@ -226,7 +226,7 @@ void NFCDataProcessModule::OnOffline( const NFIDENTID& self )
 }
 
 
-const bool NFCDataProcessModule::LoadDataFormSql( const NFIDENTID& self , const std::string& strClassName)
+const bool NFCDataProcessModule::LoadDataFormSql( const NFGUID& self , const std::string& strClassName)
 {
 	NF_SHARE_PTR<NFIPropertyManager> pProManager = m_pLogicClassModule->GetClassPropertyManager(strClassName);
 	NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pLogicClassModule->GetClassRecordManager(strClassName);
@@ -305,7 +305,7 @@ const bool NFCDataProcessModule::LoadDataFormSql( const NFIDENTID& self , const 
 	return true;
 }
 
-const bool NFCDataProcessModule::SaveDataToSql( const NFIDENTID& self )
+const bool NFCDataProcessModule::SaveDataToSql( const NFGUID& self )
 {
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
 	if ( pObject.get() )
@@ -411,7 +411,7 @@ const bool NFCDataProcessModule::SaveDataToSql( const NFIDENTID& self )
 	return false;
 }
 
-const bool NFCDataProcessModule::AttachData( const NFIDENTID& self )
+const bool NFCDataProcessModule::AttachData( const NFGUID& self )
 {
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
 	if (!pObject)
@@ -525,7 +525,7 @@ const bool NFCDataProcessModule::ConvertPBToRecord(const NFMsg::PlayerRecordBase
 		const NFMsg::RecordObject& xRecordObject = xRecordData.record_object_list(j);
 		const int nRow = xRecordObject.row();
 		const int nCol = xRecordObject.col();
-		const NFIDENTID xObjectID = NFINetModule::PBToNF(xRecordObject.data());
+		const NFGUID xObjectID = NFINetModule::PBToNF(xRecordObject.data());
 
 		xRecord->SetUsed(nRow, true);
 		xRecord->SetObject(nRow, nCol, xObjectID);

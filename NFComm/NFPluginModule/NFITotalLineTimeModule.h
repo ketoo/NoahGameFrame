@@ -17,10 +17,10 @@ class NFITotalLineTimeModule
 {
 public:
 
-    virtual int64_t GetTodayTotalOnlineTime(const NFIDENTID& self) = 0;
-    virtual int64_t GetTodayTotalInCloneSceneTime(const NFIDENTID& self) = 0;
-	virtual int64_t GetTodayMainLineCloneSceneTime(const NFIDENTID& self) = 0;
-	virtual bool ClearCountTime(const NFIDENTID& self) = 0;
+    virtual int64_t GetTodayTotalOnlineTime(const NFGUID& self) = 0;
+    virtual int64_t GetTodayTotalInCloneSceneTime(const NFGUID& self) = 0;
+	virtual int64_t GetTodayMainLineCloneSceneTime(const NFGUID& self) = 0;
+	virtual bool ClearCountTime(const NFGUID& self) = 0;
 
 };
 

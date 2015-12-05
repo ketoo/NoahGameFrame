@@ -33,11 +33,11 @@ public:
     virtual bool Execute( const float fLasFrametime, const float fStartedTime );
     virtual bool AfterInit();
 
-	virtual bool MatchPVPObject(const NFIDENTID& self);
+	virtual bool MatchPVPObject(const NFGUID& self);
 
-	virtual bool StartPVPWar(const NFIDENTID& self);
+	virtual bool StartPVPWar(const NFGUID& self);
 
-	virtual bool ExitPVPWar(const NFIDENTID& self);
+	virtual bool ExitPVPWar(const NFGUID& self);
 
 private:
     NFIEventProcessModule* m_pEventProcessModule;
@@ -45,7 +45,7 @@ private:
     NFILogModule* m_pLogModule;
 
 private:
-    NFList<NFIDENTID> mxPVPList; // 报名的队列
+    NFList<NFGUID> mxPVPList; // 报名的队列
 };
 
 
