@@ -160,7 +160,8 @@ public:
 
 			return NULL_STR;
 		}
-		const NFGUID GetObject() const
+
+		const NFGUID& GetObject() const
 		{
 			if (TDATA_OBJECT == nType)
 			{
