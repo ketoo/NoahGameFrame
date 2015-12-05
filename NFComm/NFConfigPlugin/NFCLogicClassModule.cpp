@@ -49,27 +49,23 @@ TDATA_TYPE NFCLogicClassModule::ComputerType(const char* pstrTypeName, NFIDataLi
 {
     if (0 == strcmp(pstrTypeName, "int"))
     {
-        var.nType = TDATA_INT;
-        var.variantData = (NFINT64)0;
-        return TDATA_INT;
+		var.SetInt(NULL_INT);
+        return var.GetType();
     }
     else if (0 == strcmp(pstrTypeName, "string"))
     {
-        var.nType = TDATA_STRING;
-        var.variantData = NULL_STR;
-        return TDATA_STRING;
+		var.SetString(NULL_STR);
+		return var.GetType();
     }
     else if (0 == strcmp(pstrTypeName, "float"))
     {
-        var.nType = TDATA_FLOAT;
-        var.variantData = (double)0.0f;
-        return TDATA_FLOAT;
+		var.SetFloat(NULL_FLOAT);
+		return var.GetType();
     }
     else if (0 == strcmp(pstrTypeName, "object"))
     {
-        var.nType = TDATA_OBJECT;
-        var.variantData = NFIDENTID();
-        return TDATA_OBJECT;
+		var.SetObject(NULL_OBJECT);
+		return var.GetType();
     }
 
     return TDATA_UNKNOWN;
@@ -132,7 +128,7 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
 
             //printf( " Property:%s[%s]\n", pstrPropertyName, pstrType );
 
-            pClass->GetPropertyManager()->AddProperty(NFIDENTID(), strPropertyName, varProperty.nType, bPublic,  bPrivate, bSave, bView, nIndex, pstrRelationValue);
+            pClass->GetPropertyManager()->AddProperty(NFGUID(), strPropertyName, varProperty.GetType(), bPublic,  bPrivate, bSave, bView, nIndex, pstrRelationValue);
         }
     }
 
@@ -243,7 +239,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_S
                 //////////////////////////////////////////////////////////////////////////
             }
 
-            pClass->GetRecordManager()->AddRecord(NFIDENTID(), pstrRecordName, recordVar, recordKey, recordDesc, recordTag, recordRelation, atoi(pstrRow), bPublic, bPrivate, bSave, bView, nIndex);
+            pClass->GetRecordManager()->AddRecord(NFGUID(), pstrRecordName, recordVar, recordKey, recordDesc, recordTag, recordRelation, atoi(pstrRow), bPublic, bPrivate, bSave, bView, nIndex);
         }
     }
 

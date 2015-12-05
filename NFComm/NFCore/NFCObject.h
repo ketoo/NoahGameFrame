@@ -20,13 +20,13 @@ class NFCObject
     : public NFIObject
 {
 private:
-	NFCObject() : NFIObject(NFIDENTID())
+	NFCObject() : NFIObject(NFGUID())
 	{
 
 	}
 
 public:
-    NFCObject(NFIDENTID self, NFIPluginManager* pLuginManager);
+    NFCObject(NFGUID self, NFIPluginManager* pLuginManager);
     virtual ~NFCObject();
 
     virtual bool Init();
@@ -35,7 +35,7 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
 
-    virtual NFIDENTID Self();
+    virtual NFGUID Self();
 
     virtual bool FindHeartBeat(const std::string& strHeartBeatName);
 
@@ -48,34 +48,34 @@ public:
     virtual bool SetPropertyInt(const std::string& strPropertyName, const NFINT64 nValue);
     virtual bool SetPropertyFloat(const std::string& strPropertyName, const double dwValue);
     virtual bool SetPropertyString(const std::string& strPropertyName, const std::string& strValue);
-    virtual bool SetPropertyObject(const std::string& strPropertyName, const NFIDENTID& obj);
+    virtual bool SetPropertyObject(const std::string& strPropertyName, const NFGUID& obj);
 
     virtual NFINT64 GetPropertyInt(const std::string& strPropertyName);
     virtual double GetPropertyFloat(const std::string& strPropertyName);
     virtual const std::string& GetPropertyString(const std::string& strPropertyName);
-    virtual const NFIDENTID& GetPropertyObject(const std::string& strPropertyName);
+    virtual const NFGUID& GetPropertyObject(const std::string& strPropertyName);
 
     virtual bool FindRecord(const std::string& strRecordName);
 
     virtual bool SetRecordInt(const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue);
     virtual bool SetRecordFloat(const std::string& strRecordName, const int nRow, const int nCol, const double dwValue);
     virtual bool SetRecordString(const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue);
-    virtual bool SetRecordObject(const std::string& strRecordName, const int nRow, const int nCol, const NFIDENTID& obj);
+    virtual bool SetRecordObject(const std::string& strRecordName, const int nRow, const int nCol, const NFGUID& obj);
 
     virtual bool SetRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFINT64 value);
     virtual bool SetRecordFloat(const std::string& strRecordName, const int nRow, const std::string& strColTag, const double value);
     virtual bool SetRecordString(const std::string& strRecordName, const int nRow, const std::string& strColTag, const std::string& value);
-    virtual bool SetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFIDENTID& value);
+    virtual bool SetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFGUID& value);
 
     virtual NFINT64 GetRecordInt(const std::string& strRecordName, const int nRow, const int nCol);
     virtual double GetRecordFloat(const std::string& strRecordName, const int nRow, const int nCol);
     virtual const std::string& GetRecordString(const std::string& strRecordName, const int nRow, const int nCol);
-    virtual const NFIDENTID& GetRecordObject(const std::string& strRecordName, const int nRow, const int nCol);
+    virtual const NFGUID& GetRecordObject(const std::string& strRecordName, const int nRow, const int nCol);
 
     virtual NFINT64 GetRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag);
     virtual double GetRecordFloat(const std::string& strRecordName, const int nRow, const std::string& strColTag);
     virtual const std::string& GetRecordString(const std::string& strRecordName, const int nRow, const std::string& strColTag);
-    virtual const NFIDENTID& GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag);
+    virtual const NFGUID& GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag);
 
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager();
     virtual NF_SHARE_PTR<NFIHeartBeatManager> GetHeartBeatManager();
@@ -90,7 +90,7 @@ protected:
     virtual bool AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount);
 
 private:
-    NFIDENTID mSelf;
+    NFGUID mSelf;
 
     NF_SHARE_PTR<NFIRecordManager> m_pRecordManager;
     NF_SHARE_PTR<NFIHeartBeatManager> m_pHeartBeatManager;
