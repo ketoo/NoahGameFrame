@@ -39,29 +39,29 @@ public:
     virtual bool AfterInit();
 
     //创建角色激活副本状态
-    virtual bool AddNewEctype(const NFIDENTID self);
+    virtual bool AddNewEctype(const NFGUID self);
 
     //设置通关副本状态
-    virtual bool AddEctypeActiveState(const NFIDENTID self, const int nContainerID);
+    virtual bool AddEctypeActiveState(const NFGUID self, const int nContainerID);
 
     //完成某难度副本
-    virtual bool CompleteEctypeMode(const NFIDENTID self, const int nContainerID, const int nStar);
+    virtual bool CompleteEctypeMode(const NFGUID self, const int nContainerID, const int nStar);
 
     //能否进副本
-    virtual bool CanEntryCloneScene(const NFIDENTID self, const int nContainerID);
+    virtual bool CanEntryCloneScene(const NFGUID self, const int nContainerID);
 
-    virtual int OnEctypeSettleEvent(const NFIDENTID& self, int nResult, int nLevel);
+    virtual int OnEctypeSettleEvent(const NFGUID& self, int nResult, int nLevel);
 
 protected:
 
-    int OnObjectClassEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
-    int OnObjectGroupIDEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+    int OnObjectGroupIDEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
 protected:
 
     //给结算奖励
-    int AddEctypeAward(const NFIDENTID& self, const int nSceneID);
+    int AddEctypeAward(const NFGUID& self, const int nSceneID);
  
 private:
     NFIElementInfoModule* m_pElementInfoModule;

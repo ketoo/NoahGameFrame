@@ -41,20 +41,20 @@ public:
     virtual bool BeforeShut();
 
     //@param: nMailType 是 MailType 枚举
-    virtual bool DoAward(const NFIDENTID self, const std::string& strPack, const int nMailType, NFIDataList& varItemList, NFIDataList& varCountList);
+    virtual bool DoAward(const NFGUID self, const std::string& strPack, const int nMailType, NFIDataList& varItemList, NFIDataList& varCountList);
 
-    virtual bool DoAward(const NFIDENTID self, const std::string& strPack);
+    virtual bool DoAward(const NFGUID self, const std::string& strPack);
     virtual NF_SHARE_PTR<NFIAwardPackModule::AwardBag> GetAwardPack(const std::string& strPackName);
    
     virtual bool LoadAwardPackConfig();
 
     //装备加成
-    virtual float GetEquipItemExtenRatio(const NFIDENTID& self, const std::string& strAwardPackID);
+    virtual float GetEquipItemExtenRatio(const NFGUID& self, const std::string& strAwardPackID);
 
     //货币的加成
-    virtual float GetNoneItemExtenRatio(const NFIDENTID& self, const std::string& strAwardPackID);
+    virtual float GetNoneItemExtenRatio(const NFGUID& self, const std::string& strAwardPackID);
 
-    virtual bool IsEquipItem(const NFIDENTID& self, const std::string& strID);
+    virtual bool IsEquipItem(const NFGUID& self, const std::string& strID);
 
     virtual bool ExistAawardPack(const std::string& strAawardPack);
 protected:
@@ -62,7 +62,7 @@ protected:
     bool UnLoadProductionConfig();
 
     void CalcAward(const std::string& strAwardPack, NFIDataList& varItemList, NFIDataList& varCountList, NFIDataList& varTypeList);
-    void GivingAward(const NFIDENTID& self, NFIDataList& varItemList, NFIDataList& varCountList, NFIDataList& varTypeList, bool bMail = false, int nMailType = 0);
+    void GivingAward(const NFGUID& self, NFIDataList& varItemList, NFIDataList& varCountList, NFIDataList& varTypeList, bool bMail = false, int nMailType = 0);
 private: 
     NFMapEx<std::string, AwardBag> mtAwardPack;
 private:

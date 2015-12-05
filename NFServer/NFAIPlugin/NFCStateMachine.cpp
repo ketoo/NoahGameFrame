@@ -10,7 +10,7 @@
 #include "NFCStateMachine.h"
 #include "NFCAIModule.h"
 
-NFCStateMachine::NFCStateMachine(const NFIDENTID& self, NFIAIModule* pControl)
+NFCStateMachine::NFCStateMachine(const NFGUID& self, NFIAIModule* pControl)
     : mOwnerID(self),
       meCurrentState(PatrolState), // 默认一开始就巡逻
       meLastState(IdleState),

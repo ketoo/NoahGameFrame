@@ -49,7 +49,7 @@ bool NFCItemModule::AfterInit()
     return true;
 }
 
-int NFCItemModule::OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCItemModule::OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
     if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
     {
@@ -66,7 +66,7 @@ int NFCItemModule::OnClassObjectEvent( const NFIDENTID& self, const std::string&
 }
 
 
-int NFCItemModule::OnRequireUseItemEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
+int NFCItemModule::OnRequireUseItemEvent( const NFGUID& self, const int nEventID, const NFIDataList& var )
 {
     //EGameErrorCode errorCode = EGameErrorCode::EGEC_INVALID_ITEM;
     //int nItemRowID = var.IntVal(0);
@@ -99,7 +99,7 @@ int NFCItemModule::OnRequireUseItemEvent( const NFIDENTID& self, const int nEven
     //                          int nResult = pConsumeProcessModule->ConsumeProcess(self, strConfigIndex, valueOther);
 
     //                          NFIProperty* pGUIDProperty = pPropertyManager->GetElement("GUID"); // xxx
-    //                          NFIDENTID nGUID = pGUIDProperty->QueryObject();
+    //                          NFGUID nGUID = pGUIDProperty->QueryObject();
 
     //                          //结果事件--无论失败或者是成功，都会发下去--当然使用结果只对使用者下发--成果的结果，还得对被施放的人发
     //                          NFCDataList valueResult;
@@ -130,7 +130,7 @@ int NFCItemModule::OnRequireUseItemEvent( const NFIDENTID& self, const int nEven
     return 0;
 }
 
-int NFCItemModule::OnRequireUseItemPosEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
+int NFCItemModule::OnRequireUseItemPosEvent( const NFGUID& self, const int nEventID, const NFIDataList& var )
 {
 
 
