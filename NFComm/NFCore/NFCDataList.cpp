@@ -93,7 +93,7 @@ bool NFCDataList::Append(const NFIDataList::TData& xData)
 		AddInt(xData.GetInt());
 		break;
 	case TDATA_FLOAT:
-		AddInt(xData.GetFloat());
+		AddFloat(xData.GetFloat());
 		break;
 	case TDATA_OBJECT:
 		AddObject(xData.GetObject());
