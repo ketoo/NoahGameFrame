@@ -22,7 +22,7 @@
 class NFIObject
 {
 public:
-	NFIObject(NFIDENTID self)
+	NFIObject(NFGUID self)
 	{
 
 	}
@@ -30,10 +30,10 @@ public:
 
     virtual bool Execute(const float fLastTime, const float fAllTime) = 0;
 
-    virtual NFIDENTID Self() = 0;
+    virtual NFGUID Self() = 0;
 
     template<typename BaseType>
-    bool AddPropertyCallBack(const std::string& strPropertyName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&))
+    bool AddPropertyCallBack(const std::string& strPropertyName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&))
     {
         PROPERTY_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         PROPERTY_EVENT_FUNCTOR_PTR functorPtr(NF_NEW PROPERTY_EVENT_FUNCTOR(functor));
@@ -41,7 +41,7 @@ public:
     }
 
     template<typename BaseType>
-    bool AddRecordCallBack(const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const RECORD_EVENT_DATA&, const NFIDataList&, const NFIDataList&))
+    bool AddRecordCallBack(const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFIDataList&, const NFIDataList&))
     {
         RECORD_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         RECORD_EVENT_FUNCTOR_PTR functorPtr(NF_NEW RECORD_EVENT_FUNCTOR(functor));
@@ -49,7 +49,7 @@ public:
     }
 
     template<typename BaseType>
-    bool AddHeartBeat(const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const float, const int), const float fTime, const int nCount)
+    bool AddHeartBeat(const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const float, const int), const float fTime, const int nCount)
     {
         HEART_BEAT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         HEART_BEAT_FUNCTOR_PTR functorPtr(NF_NEW HEART_BEAT_FUNCTOR(functor));
@@ -95,34 +95,34 @@ public:
     virtual bool SetPropertyInt(const std::string& strPropertyName, const NFINT64 nValue) = 0;
     virtual bool SetPropertyFloat(const std::string& strPropertyName, const double dwValue) = 0;
     virtual bool SetPropertyString(const std::string& strPropertyName, const std::string& strValue) = 0;
-    virtual bool SetPropertyObject(const std::string& strPropertyName, const NFIDENTID& obj) = 0;
+    virtual bool SetPropertyObject(const std::string& strPropertyName, const NFGUID& obj) = 0;
 
     virtual NFINT64 GetPropertyInt(const std::string& strPropertyName) = 0;
     virtual double GetPropertyFloat(const std::string& strPropertyName) = 0;
     virtual const std::string& GetPropertyString(const std::string& strPropertyName) = 0;
-    virtual const NFIDENTID& GetPropertyObject(const std::string& strPropertyName) = 0;
+    virtual const NFGUID& GetPropertyObject(const std::string& strPropertyName) = 0;
 
     virtual bool FindRecord(const std::string& strRecordName) = 0;
 
     virtual bool SetRecordInt(const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue) = 0;
     virtual bool SetRecordFloat(const std::string& strRecordName, const int nRow, const int nCol, const double dwValue) = 0;
     virtual bool SetRecordString(const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue) = 0;
-    virtual bool SetRecordObject(const std::string& strRecordName, const int nRow, const int nCol, const NFIDENTID& obj) = 0;
+    virtual bool SetRecordObject(const std::string& strRecordName, const int nRow, const int nCol, const NFGUID& obj) = 0;
 
     virtual bool SetRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFINT64 value) = 0;
     virtual bool SetRecordFloat(const std::string& strRecordName, const int nRow, const std::string& strColTag, const double value) = 0;
     virtual bool SetRecordString(const std::string& strRecordName, const int nRow, const std::string& strColTag, const std::string& value) = 0;
-    virtual bool SetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFIDENTID& value) = 0;
+    virtual bool SetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFGUID& value) = 0;
 
     virtual NFINT64 GetRecordInt(const std::string& strRecordName, const int nRow, const int nCol) = 0;
     virtual double GetRecordFloat(const std::string& strRecordName, const int nRow, const int nCol) = 0;
     virtual const std::string& GetRecordString(const std::string& strRecordName, const int nRow, const int nCol) = 0;
-    virtual const NFIDENTID& GetRecordObject(const std::string& strRecordName, const int nRow, const int nCol) = 0;
+    virtual const NFGUID& GetRecordObject(const std::string& strRecordName, const int nRow, const int nCol) = 0;
 
     virtual NFINT64 GetRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
     virtual double GetRecordFloat(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
     virtual const std::string& GetRecordString(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
-	virtual const NFIDENTID& GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
+	virtual const NFGUID& GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
 
 // 	virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
 // 	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;

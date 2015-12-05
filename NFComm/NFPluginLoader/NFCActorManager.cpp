@@ -8,7 +8,6 @@
 
 #include "NFCActorManager.h"
 #include "NFCPluginManager.h"
-#include "NFComm/NFCore/NFCMemory.h"
 #include "NFComm/NFCore/NFIComponent.h"
 
 NFCActorManager::NFCActorManager()
@@ -90,7 +89,7 @@ NF_SHARE_PTR<NFIActor> NFCActorManager::GetActor(const int nActorIndex)
 	return NF_SHARE_PTR<NFIActor>();
 }
 
-bool NFCActorManager::SendMsgToActor( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg)
+bool NFCActorManager::SendMsgToActor( const int nActorIndex, const NFGUID& objectID, const int nEventID, const std::string& strArg)
 {
 	NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
     if (nullptr != pActor)

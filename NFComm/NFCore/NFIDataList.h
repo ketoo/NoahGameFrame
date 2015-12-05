@@ -26,10 +26,9 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
-#include "NFCMemory.h"
 #include <boost/lexical_cast.hpp>
 #include <boost/variant.hpp>
-#include "NFComm/NFPluginModule/NFIdentID.h"
+#include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
 //变量类型
@@ -40,12 +39,13 @@ enum TDATA_TYPE
     TDATA_FLOAT,       // 浮点数(双精度，用double类型实现)
     TDATA_STRING,       // 字符串
     TDATA_OBJECT,       // 对象ID
-    //TDATA_POINTER,      // 指针
     TDATA_MAX,
 };
 
 const static std::string NULL_STR = "";
-const static NFIDENTID NULL_OBJECT = NFIDENTID();
+const static NFGUID NULL_OBJECT = NFGUID();
+const static double NULL_FLOAT = 0.0;
+const static INT64 NULL_INT = 0;
 
 //类型接口
 class NFIDataList
@@ -58,12 +58,102 @@ public:
         {
             nType = TDATA_UNKNOWN;
         }
+		TData(TDATA_TYPE eType)
+		{
+			nType = eType;
+		}
+
+		TData(const TData& value)
+		{
+			if (nType == TDATA_UNKNOWN)
+			{
+				nType = value.nType;
+				variantData = value.variantData;
+			}
+		}
 
         ~TData()
         {
             nType = TDATA_UNKNOWN;
         }
 
+		inline bool operator==(const TData& src) const
+		{
+			if (src.GetType() == GetType()
+				&& src.variantData == variantData)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		void Reset()
+		{
+			nType = TDATA_UNKNOWN;
+		}
+
+		TDATA_TYPE GetType() const
+		{
+			return nType;
+		}
+
+		/** 设置值，类型必须和之前一致*/
+		void SetInt(const NFINT64 var)
+		{
+			if (nType == TDATA_INT || TDATA_UNKNOWN == nType)
+			{
+				nType = TDATA_INT;
+				variantData = (NFINT64)var;
+			}
+		}
+
+		void SetFloat(const double var)
+		{
+			if (nType == TDATA_FLOAT || TDATA_UNKNOWN == nType)
+			{
+				nType = TDATA_FLOAT;
+				variantData = (double)var;
+			}
+		}
+
+		void SetString(const std::string& var)
+		{
+			if (nType == TDATA_STRING || TDATA_UNKNOWN == nType)
+			{
+				nType = TDATA_STRING;
+				variantData = (std::string)var;
+			}
+		}
+
+		void SetObject(const NFGUID var)
+		{
+			if (nType == TDATA_OBJECT || TDATA_UNKNOWN == nType)
+			{
+				nType = TDATA_OBJECT;
+				variantData = (NFGUID)var;
+			}
+		}
+
+		const NFINT64 GetInt() const
+		{
+			return Value<NFINT64>();
+		}
+		const double GetFloat() const
+		{
+			return Value<double>();
+		}
+		const std::string& GetString() const
+		{
+			return String();
+		}
+		const NFGUID GetObject() const
+		{
+			return Object();
+		}
+
+
+	private:
         template<typename T>
         T Value() const
         {
@@ -87,18 +177,20 @@ public:
             return NULL_STR;
         }
 
-        const NFIDENTID& Object() const
+        const NFGUID& Object() const
         {
             if (TDATA_STRING == nType)
             {
-                return boost::get<const NFIDENTID&>(variantData);
+                return boost::get<const NFGUID&>(variantData);
             }
 
             return NULL_OBJECT;
         }
 
         TDATA_TYPE nType;
-        boost::variant<NFINT64, double, std::string, NFIDENTID, void*> variantData;
+
+		public:
+        boost::variant<NFINT64, double, std::string, NFGUID> variantData;
     };
 
     NFIDataList()
@@ -115,92 +207,10 @@ public:
     virtual std::string StringValEx(const int index) const = 0;
     virtual bool ToString(std::string& str, const char* strSplit) const = 0;
 
- protected:
-    template<typename T>
-    T NumberVal(const int index) const
-    {
-        T result = 0;
-        if (index < GetCount() && index >= 0)
-        {
-            TDATA_TYPE type =  Type(index);
-            if (type == TDATA_FLOAT
-                || type == TDATA_INT
-                || type == TDATA_OBJECT)
-            {
-                const NF_SHARE_PTR<TData> var = GetStack(index);
-                result = boost::get<T>(var->variantData);
-            }
-        }
-
-        return result;
-    }
-
-    template<typename T>
-    bool SetValue(const int index, const T& value)
-    {
-        if (index < GetCount() && index >= 0)
-        {
-            TDATA_TYPE type =  Type(index);
-            if (type == TDATA_FLOAT
-                || type == TDATA_INT
-                || type == TDATA_OBJECT
-				|| type == TDATA_STRING)
-            {
-                NF_SHARE_PTR<TData> var = GetStack(index);
-                var->variantData = value;
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    template<typename T>
-    bool AddValue(const TDATA_TYPE type, const T& value)
-    {
-		if (GetCount() == mvList.size())
-		{
-			AddStatck();
-		}
-
-        if (type == TDATA_FLOAT
-            || type == TDATA_INT
-            || type == TDATA_OBJECT
-            || type == TDATA_STRING)
-        {
-            NF_SHARE_PTR<TData> var = GetStack(GetCount());
-            if (var)
-            {
-                var->nType = type;
-                var->variantData = value;
-				mnUseSize++;
-
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-	void AddStatck()
-	{
-		for (int i = 0; i < STACK_SIZE; ++i )
-		{
-			NF_SHARE_PTR<TData> pData(NF_NEW TData());
-			mvList.push_back(pData);
-		}
-	}
-
 public:
-	const NF_SHARE_PTR<TData> GetStack(const int index) const
-	{
-		if (index < mvList.size())
-		{
-			return mvList[index];
-		}
 
-		return NF_SHARE_PTR<TData>();
-	}
+	virtual const NF_SHARE_PTR<TData> GetStack(const int index) const = 0;
+
     // 合并
     virtual bool Concat(const NFIDataList& src) = 0;
     // 部分添加
@@ -225,23 +235,19 @@ public:
     virtual bool Add(const NFINT64 value) = 0;
     virtual bool Add(const double value) = 0;
     virtual bool Add(const char* value) = 0;
-
     virtual bool Add(const std::string& value) = 0;
-    virtual bool Add(const NFIDENTID& value) = 0;
-    virtual bool Add(const void* value) = 0;
+    virtual bool Add(const NFGUID& value) = 0;
 
     virtual bool Set(const int index, const NFINT64 value) = 0;
     virtual bool Set(const int index, const double value) = 0;
     virtual bool Set(const int index, const char* value) = 0;
-    virtual bool Set(const int index, const NFIDENTID& value) = 0;
-    virtual bool Set(const int index, const void* value) = 0;
+    virtual bool Set(const int index, const NFGUID& value) = 0;
 
     // 获得数据
     virtual NFINT64 Int(const int index) const = 0;
     virtual double Float(const int index) const = 0;
     virtual const std::string& String(const int index) const = 0;
-    virtual const NFIDENTID& Object(const int index) const = 0;
-    virtual void* Pointer(const int index) const = 0;
+    virtual const NFGUID& Object(const int index) const = 0;
 
     bool AddInt(const NFINT64 value)
     {
@@ -255,11 +261,7 @@ public:
     {
         return Add(value);
     }
-    bool AddObject(const NFIDENTID& value)
-    {
-        return Add(value);
-    }
-    bool AddPoint(const void* value)
+    bool AddObject(const NFGUID& value)
     {
         return Add(value);
     }
@@ -276,11 +278,7 @@ public:
     {
         return Set(index, value);
     }
-    bool SetObject(const int index, const NFIDENTID& value)
-    {
-        return Set(index, value);
-    }
-    bool SetPoint(const int index, const void* value)
+    bool SetObject(const int index, const NFGUID& value)
     {
         return Set(index, value);
     }
@@ -289,11 +287,11 @@ public:
     {
         bool bChanged = false;
 
-        switch (var.nType)
+        switch (var.GetType())
         {
             case TDATA_INT:
             {
-                if (0 != boost::get<NFINT64>(var.variantData))
+                if (0 != var.GetInt())
                 {
                     bChanged = true;
                 }
@@ -301,7 +299,7 @@ public:
             break;
             case TDATA_FLOAT:
             {
-                double fValue = boost::get<double>(var.variantData);
+                double fValue = var.GetFloat();
                 if (fValue > 0.001f  || fValue < -0.001f)
                 {
                     bChanged = true;
@@ -310,7 +308,7 @@ public:
             break;
             case TDATA_STRING:
             {
-                const std::string& strData = boost::get<const std::string&>(var.variantData);
+                const std::string& strData = var.GetString();
                 if (!strData.empty())
                 {
                     bChanged = true;
@@ -319,20 +317,12 @@ public:
             break;
             case TDATA_OBJECT:
             {
-                if (NFIDENTID() != boost::get<NFIDENTID>(var.variantData))
+                if (NFGUID() != var.GetObject())
                 {
                     bChanged = true;
                 }
             }
             break;
-            //case TDATA_POINTER:
-            //    {
-            //        if (0 != boost::get<void*>(var.variantData))
-            //        {
-            //            bChanged = true;
-            //        }
-            //    }
-            //    break;
             default:
                 break;
         }
@@ -364,10 +354,6 @@ public:
                     return Object(nPos) == src.Object(nPos);
                     break;
 
-                    //case TDATA_POINTER:
-                    //    return Pointer(nPos) == src.Pointer(nPos);
-                    //    break;
-
                 default:
                     return false;
                     break;
@@ -377,32 +363,7 @@ public:
         return false;
     }
 
-	virtual bool Add(const std::string& str, const NFINT64 value) = 0;
-	virtual bool Add(const std::string& str, const double value) = 0;
-	virtual bool Add(const std::string& str, const char* value) = 0;
-	virtual bool Add(const std::string& str, const std::string& value) = 0;
-	virtual bool Add(const std::string& str, const NFIDENTID& value) = 0;
 
-	virtual bool Set(const std::string& str, const NFINT64 value) = 0;
-	virtual bool Set(const std::string& str, const double value) = 0;
-	virtual bool Set(const std::string& str, const char* value) = 0;
-	virtual bool Set(const std::string& str, const std::string& value) = 0;
-	virtual bool Set(const std::string& str, const NFIDENTID& value) = 0;
-
-	// 获得数据
-	virtual NFINT64 Int(const std::string& str) const = 0;
-	virtual double Float(const std::string& str) const = 0;
-	virtual const std::string& String(const std::string& str) const = 0;
-	virtual const NFIDENTID& Object(const std::string& str) const = 0;
-/*
-	NFIDataList& NFIDataList::operator = (const NFIDataList& src)
-	{
-		Clear();
-		Append(src, 0, src.GetCount());
-
-		return *this;
-	}
-*/
     inline bool operator==(const NFIDataList& src) const
     {
         if (src.GetCount() == GetCount())
@@ -451,17 +412,11 @@ public:
 		Add((NFINT64)value);
 		return *this;
 	}
-    inline NFIDataList& operator<<(const NFIDENTID& value)
+    inline NFIDataList& operator<<(const NFGUID& value)
     {
         Add(value);
         return *this;
     }
-    inline NFIDataList& operator<<(const void* value)
-    {
-        Add(value);
-        return *this;
-    }
-
     inline NFIDataList& operator<<(const NFIDataList& value)
     {
         Concat(value);

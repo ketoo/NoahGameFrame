@@ -34,9 +34,9 @@ public:
 protected:
 
     // client event
-    int OnLoginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnLoginEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
-    int OnDisconnectEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnDisconnectEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
 protected:
 

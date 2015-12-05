@@ -161,7 +161,7 @@
 //		int nCol = recordObject.col();
 //		int64_t nData = recordObject.data();
 //		pRecord->SetUsed( nRow, 1 );
-//		pRecord->SetObject( nRow, nCol, ( NFIDENTID )nData );
+//		pRecord->SetObject( nRow, nCol, ( NFGUID )nData );
 //	}
 //	return true;
 //
@@ -326,7 +326,7 @@
 //	bool bProRet = pProManagerList.First(pProManager);
 //	while (bProRet && pProManager)
 //	{
-//		NFIDENTID ident = pProManager->Self();
+//		NFGUID ident = pProManager->Self();
 //
 //		NFMsg::ObjectPropertyList* pPropertyList = xPropertyDB.add_multi_player_property();
 //		pPropertyList->set_player_id(ident.nData64);

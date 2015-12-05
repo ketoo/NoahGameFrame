@@ -35,7 +35,7 @@ bool NFCBuffModule::Execute( const float fLasFrametime, const float fStartedTime
     return true;
 }
 
-bool NFCBuffModule::Execute( const NFIDENTID& self, float fPassTime )
+bool NFCBuffModule::Execute( const NFGUID& self, float fPassTime )
 {
     return true;
 }
@@ -45,7 +45,7 @@ bool NFCBuffModule::AfterInit()
     return true;
 }
 
-bool NFCBuffModule::AddBuff( const NFIDENTID& self, const std::string& strConfig, const NFIDENTID& releaserIdent )
+bool NFCBuffModule::AddBuff( const NFGUID& self, const std::string& strConfig, const NFGUID& releaserIdent )
 {
     //1 死亡判断
     //2 最大MAX判断
@@ -88,42 +88,42 @@ bool NFCBuffModule::AddBuff( const NFIDENTID& self, const std::string& strConfig
     return true;
 }
 
-bool NFCBuffModule::RemoveBuff( const NFIDENTID& self, const std::string& strConfig )
+bool NFCBuffModule::RemoveBuff( const NFGUID& self, const std::string& strConfig )
 {
     return true;
 }
 
-bool NFCBuffModule::RemoveBuff( const NFIDENTID& self, NFIBuffConfigModule::BuffType eType )
+bool NFCBuffModule::RemoveBuff( const NFGUID& self, NFIBuffConfigModule::BuffType eType )
 {
     return true;
 }
 
-bool NFCBuffModule::SelfFree( const NFIDENTID& self )
+bool NFCBuffModule::SelfFree( const NFGUID& self )
 {
     return true;
 }
 
-bool NFCBuffModule::HasBuff( const NFIDENTID& self, const std::string& strConfig )
+bool NFCBuffModule::HasBuff( const NFGUID& self, const std::string& strConfig )
 {
     return true;
 }
 
-int NFCBuffModule::Attack( const NFIDENTID& self, const NFIDENTID& other )
+int NFCBuffModule::Attack( const NFGUID& self, const NFGUID& other )
 {
     return 0;
 }
 
-int NFCBuffModule::OnDead( const NFIDENTID& self )
+int NFCBuffModule::OnDead( const NFGUID& self )
 {
     return 0;
 }
 
-bool NFCBuffModule::ApplyRoleEffectValue( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFIDENTID& releaserIdent )
+bool NFCBuffModule::ApplyRoleEffectValue( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFGUID& releaserIdent )
 {
     return true;
 }
 
-int NFCBuffModule::ProcessBuffValue( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFIDENTID& releaserIdent )
+int NFCBuffModule::ProcessBuffValue( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFGUID& releaserIdent )
 {
     if ( NFIBuffConfigModule::BuffSubType::BST_FIX_VALUE_PROPERTY == pBuffConfig->BuffSubTypeValue )
     {
@@ -138,7 +138,7 @@ int NFCBuffModule::ProcessBuffValue( const NFIDENTID& self, NFIBuffConfigModule:
     return 0;
 }
 
-int NFCBuffModule::ProcessBuffValueProperty( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFIDENTID& releaserIdent )
+int NFCBuffModule::ProcessBuffValueProperty( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFGUID& releaserIdent )
 {
     if ( NFIBuffConfigModule::BuffEffectValueType::EVT_RATIO == pBuffConfig->EffectValueTypeValue )
     {
@@ -153,7 +153,7 @@ int NFCBuffModule::ProcessBuffValueProperty( const NFIDENTID& self, NFIBuffConfi
     return 0;
 }
 
-int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFIDENTID& releaserIdent )
+int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFGUID& releaserIdent )
 {
     //buff group property
     int nBuffGroup = 0;
@@ -210,13 +210,11 @@ int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFIDENTID& 
                     switch ( eColType )
                     {
                         case TDATA_INT:
-                            valueEffectValue.nType = TDATA_INT;
-                            valueEffectValue.variantData =  NFINT64( *pnEffectValue );
+							valueEffectValue.SetInt(*pnEffectValue);
                             break;
 
                         case TDATA_FLOAT:
-                            valueEffectValue.nType = TDATA_FLOAT;
-                            valueEffectValue.variantData = double( *pnEffectValue );
+							valueEffectValue.SetFloat(double(*pnEffectValue));
                             break;
 
                         default:
@@ -245,12 +243,12 @@ int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFIDENTID& 
     return 0;
 }
 
-int NFCBuffModule::ProcessBuffValuePropertyReferRatioValue( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFIDENTID& releaserIdent )
+int NFCBuffModule::ProcessBuffValuePropertyReferRatioValue( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFGUID& releaserIdent )
 {
     return 0;
 }
 
-int NFCBuffModule::ProcessBuffControlProperty( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFIDENTID& releaserIdent )
+int NFCBuffModule::ProcessBuffControlProperty( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFGUID& releaserIdent )
 {
     if ( NFIBuffConfigModule::BuffEffectValueType::EVT_ABSOLUTEVALUE == pBuffConfig->EffectValueTypeValue )
     {
@@ -260,12 +258,12 @@ int NFCBuffModule::ProcessBuffControlProperty( const NFIDENTID& self, NFIBuffCon
     return 0;
 }
 
-int NFCBuffModule::ProcessBuffControlPropertyReferAbsoluteValue( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFIDENTID& releaserIdent )
+int NFCBuffModule::ProcessBuffControlPropertyReferAbsoluteValue( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFGUID& releaserIdent )
 {
     return 0;
 }
 
-int NFCBuffModule::ReverseBuffValue( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig )
+int NFCBuffModule::ReverseBuffValue( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig )
 {
     //属性和控制门
     if ( NFIBuffConfigModule::BuffSubType::BST_FIX_VALUE_PROPERTY == pBuffConfig->BuffSubTypeValue )
@@ -282,12 +280,12 @@ int NFCBuffModule::ReverseBuffValue( const NFIDENTID& self, NFIBuffConfigModule:
     return 0;
 }
 
-int NFCBuffModule::ReverseBuffValueProperty( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig )
+int NFCBuffModule::ReverseBuffValueProperty( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig )
 {
     return 0;
 }
 
-int NFCBuffModule::ProcessDeBuffValue( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFIDENTID& releaserIdent )
+int NFCBuffModule::ProcessDeBuffValue( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFGUID& releaserIdent )
 {
     if ( NFIBuffConfigModule::BuffSubType::BST_FIX_VALUE_PROPERTY == pBuffConfig->BuffSubTypeValue )
     {
@@ -302,7 +300,7 @@ int NFCBuffModule::ProcessDeBuffValue( const NFIDENTID& self, NFIBuffConfigModul
     return 0;
 }
 
-int NFCBuffModule::ProcessDeBuffValueProperty( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFIDENTID& releaserIdent )
+int NFCBuffModule::ProcessDeBuffValueProperty( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFGUID& releaserIdent )
 {
     if ( NFIBuffConfigModule::BuffEffectValueType::EVT_RATIO == pBuffConfig->EffectValueTypeValue )
     {
@@ -318,17 +316,17 @@ int NFCBuffModule::ProcessDeBuffValueProperty( const NFIDENTID& self, NFIBuffCon
     return 0;
 }
 
-int NFCBuffModule::ProcessDeBuffValuePropertyReferAbsoluteValue( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFIDENTID& releaserIdent )
+int NFCBuffModule::ProcessDeBuffValuePropertyReferAbsoluteValue( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFGUID& releaserIdent )
 {
     return 0;
 }
 
-int NFCBuffModule::ProcessDeBuffValuePropertyReferRatioValue( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFIDENTID& releaserIdent )
+int NFCBuffModule::ProcessDeBuffValuePropertyReferRatioValue( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFGUID& releaserIdent )
 {
     return 0;
 }
 
-int NFCBuffModule::ProcessDeBuffControlProperty( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFIDENTID& releaserIdent )
+int NFCBuffModule::ProcessDeBuffControlProperty( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFGUID& releaserIdent )
 {
     if ( NFIBuffConfigModule::BuffEffectValueType::EVT_ABSOLUTEVALUE == pBuffConfig->EffectValueTypeValue )
     {
@@ -339,12 +337,12 @@ int NFCBuffModule::ProcessDeBuffControlProperty( const NFIDENTID& self, NFIBuffC
     return 0;
 }
 
-int NFCBuffModule::ProcessDeBuffControlPropertyReferAbsoluteValue( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFIDENTID& releaserIdent )
+int NFCBuffModule::ProcessDeBuffControlPropertyReferAbsoluteValue( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFGUID& releaserIdent )
 {
     return 0;
 }
 
-int NFCBuffModule::ReverseDeBuffValue( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig )
+int NFCBuffModule::ReverseDeBuffValue( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig )
 {
     //属性和控制门
     if ( NFIBuffConfigModule::BuffSubType::BST_FIX_VALUE_PROPERTY == pBuffConfig->BuffSubTypeValue )
@@ -361,12 +359,12 @@ int NFCBuffModule::ReverseDeBuffValue( const NFIDENTID& self, NFIBuffConfigModul
     return 0;
 }
 
-int NFCBuffModule::ReverseDeBuffValueProperty( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig )
+int NFCBuffModule::ReverseDeBuffValueProperty( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig )
 {
     return 0;
 }
 
-int NFCBuffModule::ReverseControlProperty( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig )
+int NFCBuffModule::ReverseControlProperty( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig )
 {
     if ( NFIBuffConfigModule::BuffEffectValueType::EVT_ABSOLUTEVALUE == pBuffConfig->EffectValueTypeValue )
     {
@@ -376,17 +374,17 @@ int NFCBuffModule::ReverseControlProperty( const NFIDENTID& self, NFIBuffConfigM
     return 0;
 }
 
-int NFCBuffModule::ReverseControlPropertyReferAbsoluteValue( const NFIDENTID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig )
+int NFCBuffModule::ReverseControlPropertyReferAbsoluteValue( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig )
 {
     return 0;
 }
 
-std::string NFCBuffModule::GetGroupBuffIndex( const NFIDENTID& self, int nGroupID )
+std::string NFCBuffModule::GetGroupBuffIndex( const NFGUID& self, int nGroupID )
 {
     return "";
 }
 
-void NFCBuffModule::SetBuffTime( const NFIDENTID& self, const std::string& strConfig, int nRemainTime, float fIntervalTime )
+void NFCBuffModule::SetBuffTime( const NFGUID& self, const std::string& strConfig, int nRemainTime, float fIntervalTime )
 {
 
 }

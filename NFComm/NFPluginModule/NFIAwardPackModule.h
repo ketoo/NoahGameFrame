@@ -75,8 +75,8 @@ public:
 
 	virtual NF_SHARE_PTR<NFIAwardPackModule::AwardBag> GetAwardPack(const std::string& strPackName) = 0;
 
-    virtual bool DoAward(const NFIDENTID self, const std::string& strPack, const int nMailType, NFIDataList& varItemList, NFIDataList& varCountList) = 0;
-    virtual bool DoAward(const NFIDENTID self, const std::string& strPack) = 0; 
+    virtual bool DoAward(const NFGUID self, const std::string& strPack, const int nMailType, NFIDataList& varItemList, NFIDataList& varCountList) = 0;
+    virtual bool DoAward(const NFGUID self, const std::string& strPack) = 0; 
 
 };
 
