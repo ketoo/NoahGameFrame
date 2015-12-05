@@ -441,17 +441,17 @@ int NFCNet::InitServerNet()
 
     //event_config_avoid_method(cfg, "iocp");
     //event_config_require_features(cfg, event_method_feature.EV_FEATURE_ET);//触发方式
-    evthread_use_windows_threads();
-    if(event_config_set_flag(cfg, EVENT_BASE_FLAG_STARTUP_IOCP) < 0)
-    {
-        //使用IOCP
-        return -1;
-    }
+    //evthread_use_windows_threads();
+    //if(event_config_set_flag(cfg, EVENT_BASE_FLAG_STARTUP_IOCP) < 0)
+    //{
+    //    //使用IOCP
+    //    return -1;
+    //}
 
-    if(event_config_set_num_cpus_hint(cfg, nCpuCount) < 0)
-    {
-        return -1;
-    }
+    //if(event_config_set_num_cpus_hint(cfg, nCpuCount) < 0)
+    //{
+    //    return -1;
+    //}
 
     base = event_base_new_with_config(cfg);
 
