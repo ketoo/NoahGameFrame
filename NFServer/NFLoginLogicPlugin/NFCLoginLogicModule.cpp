@@ -22,7 +22,7 @@ bool NFCLoginLogicModule::Shut()
     return true;
 }
 
-int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
+int NFCLoginLogicModule::OnLoginEvent(const NFGUID& object, const int nEventID, const NFIDataList& var)
 {
     if (3 != var.GetCount()
         || !var.TypeEx(TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
@@ -31,7 +31,7 @@ int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventI
     }
 
     //////////////////////////////////////////////////////////////////////////
-    const NFIDENTID xIdent = var.Object(0);
+    const NFGUID xIdent = var.Object(0);
     const std::string& strAccount = var.String(1);
     const std::string& strPassword = var.String(2);
 	int64_t nState = -1;
@@ -50,12 +50,12 @@ int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventI
 
     NFCDataList valEventInfo;
     valEventInfo << nState << xIdent << strAccount;
-    m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_LOGIN_RESULTS, valEventInfo);
+    m_pEventProcessModule->DoEvent(NFGUID(), NFED_ON_CLIENT_LOGIN_RESULTS, valEventInfo);
 
     return 0;
 }
 
-int NFCLoginLogicModule::OnDisconnectEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
+int NFCLoginLogicModule::OnDisconnectEvent(const NFGUID& object, const int nEventID, const NFIDataList& var)
 {
     if (2 != var.GetCount()
         || !var.TypeEx(TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
@@ -87,7 +87,7 @@ bool NFCLoginLogicModule::Execute(const float fLasFrametime, const float fStarte
     //                 int nCount = m_pKernelModule->GetContainerOnLineList(-2, valOobjectList);
     //                 for (int i = 0; i < nCount; i++)
     //                 {
-    //                     NFIDENTID ident = valOobjectList.Object(i);
+    //                     NFGUID ident = valOobjectList.Object(i);
     //
     //                     char szInfo[MAX_PATH] = { 0 };
     //                     sprintf_s(szInfo, "WorldID:%d, WorldName:%s, WorldMaxOnline:%d, WorldOnlineCount:%d",
@@ -131,7 +131,7 @@ bool NFCLoginLogicModule::AfterInit()
 
     //////////////////////////////////////////////////////////////////////////
     // register event calback
-    m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_CLIENT_LOGIN, this, &NFCLoginLogicModule::OnLoginEvent);
+    m_pEventProcessModule->AddEventCallBack(NFGUID(), NFED_ON_CLIENT_LOGIN, this, &NFCLoginLogicModule::OnLoginEvent);
 
     return true;
 }

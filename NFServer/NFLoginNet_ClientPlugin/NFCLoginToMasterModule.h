@@ -50,7 +50,7 @@ protected:
 protected:
 
     //////////////////////////////////////////////////////////////////////////
-    int OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnSelectServerEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
     int OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 

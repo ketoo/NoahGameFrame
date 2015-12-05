@@ -8,7 +8,7 @@
 
 #include "NFCComponentManager.h"
 
-NFIDENTID NFCComponentManager::Self()
+NFGUID NFCComponentManager::Self()
 {
     return mSelf;
 }

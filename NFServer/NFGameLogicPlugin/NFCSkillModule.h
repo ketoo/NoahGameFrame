@@ -36,24 +36,24 @@ public:
     virtual bool Execute( const float fLasFrametime, const float fStartedTime );
     virtual bool AfterInit();
 
-    virtual int AddSkill( const NFIDENTID& self, const std::string& strSkillName );
-    virtual int ExistSkill( const NFIDENTID& self, const std::string& strSkillName );
-    virtual int SetSkillLevel( const NFIDENTID& self, const std::string& strSkillName, const int nLevel );
-    virtual int SetSkillGem( const NFIDENTID& self, const std::string& strSkillName, const std::string& strGemName );
-    virtual int SetSkillGemLevel( const NFIDENTID& self, const std::string& strSkillName, const int nLevel );
+    virtual int AddSkill( const NFGUID& self, const std::string& strSkillName );
+    virtual int ExistSkill( const NFGUID& self, const std::string& strSkillName );
+    virtual int SetSkillLevel( const NFGUID& self, const std::string& strSkillName, const int nLevel );
+    virtual int SetSkillGem( const NFGUID& self, const std::string& strSkillName, const std::string& strGemName );
+    virtual int SetSkillGemLevel( const NFGUID& self, const std::string& strSkillName, const int nLevel );
 
-    virtual int GetSkillLevel( const NFIDENTID& self, const std::string& strSkillName );
-    virtual std::string GetSkillGem( const NFIDENTID& self, const std::string& strSkillName );
-    virtual int GetSkillGemLevel( const NFIDENTID& self, const std::string& strSkillName );
+    virtual int GetSkillLevel( const NFGUID& self, const std::string& strSkillName );
+    virtual std::string GetSkillGem( const NFGUID& self, const std::string& strSkillName );
+    virtual int GetSkillGemLevel( const NFGUID& self, const std::string& strSkillName );
 
-    virtual int AddNewerSkill( const NFIDENTID& self );
-    virtual int OnUseSkill(const NFIDENTID& self, const NFIDataList& var);
+    virtual int AddNewerSkill( const NFGUID& self );
+    virtual int OnUseSkill(const NFGUID& self, const NFIDataList& var);
 protected:
 
-    int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+    int OnClassObjectEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-	int OnRequireUseSkillEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
-	int OnRequireUseSkillPosEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
+	int OnRequireUseSkillEvent( const NFGUID& self, const int nEventID, const NFIDataList& var );
+	int OnRequireUseSkillPosEvent( const NFGUID& self, const int nEventID, const NFIDataList& var );
 private:
     char* mstrSkillTableName;
 

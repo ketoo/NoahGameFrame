@@ -26,11 +26,11 @@ public:
 		BUILDINNG_STATEENDTIME	,		
     };
 
-    virtual int AddBuilding(const NFIDENTID& self, const std::string& strBuilding, const float fX, const float fY, const float fZ) = 0;
-    virtual int Upgrade(const NFIDENTID& self, const NFIDENTID& xBuilID) = 0;
-    virtual int Boost(const NFIDENTID& self, const NFIDENTID& xBuilID) = 0;
-    virtual int Produce(const NFIDENTID& self, const NFIDENTID& xBuilID, const std::string& strItemID, const int nCount) = 0;
-    virtual int Move(const NFIDENTID& self, const NFIDENTID nGUID, const float fX, const float fY, const float fZ) = 0;
+    virtual int AddBuilding(const NFGUID& self, const std::string& strBuilding, const float fX, const float fY, const float fZ) = 0;
+    virtual int Upgrade(const NFGUID& self, const NFGUID& xBuilID) = 0;
+    virtual int Boost(const NFGUID& self, const NFGUID& xBuilID) = 0;
+    virtual int Produce(const NFGUID& self, const NFGUID& xBuilID, const std::string& strItemID, const int nCount) = 0;
+    virtual int Move(const NFGUID& self, const NFGUID nGUID, const float fX, const float fY, const float fZ) = 0;
 };
 
 #endif // !__NFI_SLG_BUILDING_MODULE_H__
