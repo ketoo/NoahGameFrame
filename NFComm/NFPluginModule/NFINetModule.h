@@ -16,7 +16,7 @@
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 #include "NFComm/NFCore/NFQueue.h"
-#include "NFIdentID.h"
+#include "NFGUID.h"
 
 enum NF_SERVER_TYPE
 {
@@ -62,11 +62,11 @@ public:
 
 // 客户端消息处理宏
 #define CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msgData, nLen, msg)                 \
-	NFIDENTID nPlayerID;                                \
+	NFGUID nPlayerID;                                \
 	msg xMsg;                                           \
 	if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msgData, nLen, xMsg, nPlayerID))             \
 {                                                   \
-	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
+	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
 	return;                                         \
 }                                                   \
 	\
@@ -78,11 +78,11 @@ public:
 }
 
 #define CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msgData, nLen, msg)                 \
-	NFIDENTID nPlayerID;                                \
+	NFGUID nPlayerID;                                \
 	msg xMsg;                                           \
 	if (!RecivePB(nSockIndex, nMsgID, msgData, nLen, xMsg, nPlayerID))             \
 {                                                   \
-	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
+	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
 	return;                                         \
 }
 
@@ -194,16 +194,16 @@ public:
 		return m_pNet->Execute();
 	}
 
-	static NFIDENTID PBToNF(NFMsg::Ident xID)
+	static NFGUID PBToNF(NFMsg::Ident xID)
 	{
-		NFIDENTID  xIdent;
+		NFGUID  xIdent;
 		xIdent.nHead64 = xID.svrid();
 		xIdent.nData64 = xID.index();
 
 		return xIdent;
 	}
 
-	static NFMsg::Ident NFToPB(NFIDENTID xID)
+	static NFMsg::Ident NFToPB(NFGUID xID)
 	{
 		NFMsg::Ident  xIdent;
 		xIdent.set_svrid(xID.nHead64);
@@ -212,7 +212,7 @@ public:
 		return xIdent;
 	}
 
-    static bool RecivePB(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, std::string& strMsg, NFIDENTID& nPlayer)
+    static bool RecivePB(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, std::string& strMsg, NFGUID& nPlayer)
     {
         NFMsg::MsgBase xMsg;
         if(!xMsg.ParseFromArray(msg, nLen))
@@ -231,7 +231,7 @@ public:
         return true;
     }
 
-	static bool RecivePB(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, google::protobuf::Message& xData, NFIDENTID& nPlayer)
+	static bool RecivePB(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, google::protobuf::Message& xData, NFGUID& nPlayer)
 	{
 		NFMsg::MsgBase xMsg;
 		if(!xMsg.ParseFromArray(msg, nLen))
@@ -301,7 +301,7 @@ public:
 		}
 
 		NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
-		*pPlayerID = NFToPB(NFIDENTID());
+		*pPlayerID = NFToPB(NFGUID());
 
 		std::string strMsg;
 		if(!xMsg.SerializeToString(&strMsg))
@@ -329,7 +329,7 @@ public:
 		}
 
 		NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
-		*pPlayerID = NFToPB(NFIDENTID());
+		*pPlayerID = NFToPB(NFGUID());
 
 		std::string strMsg;
 		if(!xMsg.SerializeToString(&strMsg))
@@ -343,7 +343,7 @@ public:
 		return SendMsgToAllClient(nMsgID, strMsg);
 	}
 
-	bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const uint32_t nSockIndex, const NFIDENTID nPlayer, const std::vector<NFIDENTID>* pClientIDList = NULL)
+	bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const uint32_t nSockIndex, const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList = NULL)
 	{
 		if (!m_pNet)
 		{
@@ -369,7 +369,7 @@ public:
 		{
 			for (int i = 0; i < pClientIDList->size(); ++i)
 			{
-                const NFIDENTID& ClientID = (*pClientIDList)[i];
+                const NFGUID& ClientID = (*pClientIDList)[i];
 
 				NFMsg::Ident* pData = xMsg.add_player_client_list();
                 if (pData)
@@ -391,7 +391,7 @@ public:
 		return SendMsg(nMsgID, strMsg, nSockIndex);
 	}
 
-    bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const uint32_t nSockIndex, const NFIDENTID nPlayer, const std::vector<NFIDENTID>* pClientIDList = NULL)
+    bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const uint32_t nSockIndex, const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList = NULL)
     {
         if (!m_pNet)
         {
@@ -412,7 +412,7 @@ public:
         {
             for (int i = 0; i < pClientIDList->size(); ++i)
             {
-                const NFIDENTID& ClientID = (*pClientIDList)[i];
+                const NFGUID& ClientID = (*pClientIDList)[i];
 
                 NFMsg::Ident* pData = xMsg.add_player_client_list();
                 if (pData)

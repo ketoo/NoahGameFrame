@@ -10,7 +10,7 @@
 #define _NFI_COMPONENT_H_
 
 #include "NFComm/NFPluginModule/NFPlatform.h"
-#include "NFComm/NFPluginModule/NFIdentID.h"
+#include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
 
 class NFIComponent : public NFILogicModule
@@ -21,7 +21,7 @@ private:
 	}
 
 public:
-	NFIComponent(NFIDENTID self)
+	NFIComponent(NFGUID self)
 	{
 		mbHasInit = false;
 		mbEnable = true;
@@ -71,7 +71,7 @@ public:
 		return mbHasInit;
 	}
 
-	virtual NFIDENTID Self()
+	virtual NFGUID Self()
     {
         return NULL_OBJECT;
     }
@@ -79,7 +79,7 @@ public:
     virtual const std::string GetComponentName() const = 0;
 
 	//for actor
-	virtual int OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg){return 0;}
+	virtual int OnASyncEvent(const NFGUID& self, const int event, std::string& arg){return 0;}
 
 protected:
 	virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance() = 0;
@@ -87,7 +87,7 @@ protected:
 private:
 	bool mbEnable;
 	bool mbHasInit;
-	NFIDENTID mSelf;
+	NFGUID mSelf;
 };
 
 #endif

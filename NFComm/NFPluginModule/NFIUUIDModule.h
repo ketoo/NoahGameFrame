@@ -15,7 +15,7 @@ class NFIUUIDModule
     : public NFILogicModule
 {
 public:
-    virtual NFIDENTID CreateGUID() = 0;
+    virtual NFGUID CreateGUID() = 0;
     virtual NFINT64 GetIdentID() = 0;
     virtual void SetIdentID(NFINT64 nID) = 0;
 };

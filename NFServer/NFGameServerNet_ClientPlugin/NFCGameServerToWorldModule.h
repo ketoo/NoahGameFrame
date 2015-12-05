@@ -70,16 +70,16 @@ protected:
     void OnAckQuitChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 
-    int OnDataLoadBeginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnDataLoadBeginEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
-    //int OnToWorldEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
+    //int OnToWorldEvent( const NFGUID& object, const int nEventID, const NFIDataList& var );
 
-    int OnSwapGSEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnSwapGSEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
-    int OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+    int OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
 
-    int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+    int OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
     
 //     template<class PBClass>    
 //     int TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -89,14 +89,14 @@ protected:
 	virtual void LogServerInfo( const std::string& strServerInfo );
 
 private:
-    void SendOnline(const NFIDENTID& self);
-    void SendOffline(const NFIDENTID& self);
+    void SendOnline(const NFGUID& self);
+    void SendOffline(const NFGUID& self);
 
-    void CreateChatGroup(const NFIDENTID& self, const int nChatType, const std::string& strName);
-    void JoinChatGroup(const NFIDENTID& self, const NFIDENTID& xGroup, const int nChatType);
-    void QuitChatGroup(const NFIDENTID& self, const NFIDENTID& xGroup);
-    void SubscriptionChatGroup(const NFIDENTID& self, const NFIDENTID& xGroup);
-    void CancelSubscriptionChatGroup(const NFIDENTID& self, const NFIDENTID& xGroup);
+    void CreateChatGroup(const NFGUID& self, const int nChatType, const std::string& strName);
+    void JoinChatGroup(const NFGUID& self, const NFGUID& xGroup, const int nChatType);
+    void QuitChatGroup(const NFGUID& self, const NFGUID& xGroup);
+    void SubscriptionChatGroup(const NFGUID& self, const NFGUID& xGroup);
+    void CancelSubscriptionChatGroup(const NFGUID& self, const NFGUID& xGroup);
 
 
 private:

@@ -12,19 +12,18 @@
 #include <list>
 #include <iostream>
 #include <algorithm>
-#include "NFComm/NFKernelPlugin/NFGridModule/NFCGridModule.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFList.h"
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFCore/NFIObject.h"
-#include "NFComm/NFPluginModule/NFIdentID.h"
+#include "NFComm/NFPluginModule/NFGUID.h"
 
 // all object in this group
 /*
 if a object in the group of '0', them it can be see by all object in this scene.
 */
 class NFCContainerGroupInfo
-    //: public NFList<NFIDENTID>
+    //: public NFList<NFGUID>
 {
 public:
     NFCContainerGroupInfo(int nSceneID, int nGroupID, int nWidth)
@@ -47,8 +46,8 @@ public:
         return true;
     }
 
-    NFMapEx<NFIDENTID, int> mxPlayerList;
-    NFMapEx<NFIDENTID, int> mxOtherList;
+    NFMapEx<NFGUID, int> mxPlayerList;
+    NFMapEx<NFGUID, int> mxOtherList;
     int mnGroupID;
 //private:
 //    NF_SHARE_PTR<NFIGridModule> m_pGridModule;
@@ -81,17 +80,17 @@ public:
         return mnWidth;
     }
 
-    //void SetObjectSelf(const NFIDENTID& ident)
+    //void SetObjectSelf(const NFGUID& ident)
     //{
     //    mIdent = ident;
     //}
 
-    //NFIDENTID GetObjectSelf()
+    //NFGUID GetObjectSelf()
     //{
     //    return mIdent;
     //}
 
-    bool AddObjectToGroup(const int nGroupID, const NFIDENTID& ident, bool bPlayer)
+    bool AddObjectToGroup(const int nGroupID, const NFGUID& ident, bool bPlayer)
     {
         NF_SHARE_PTR<NFCContainerGroupInfo> pInfo = GetElement(nGroupID);
         if (pInfo.get())
@@ -109,7 +108,7 @@ public:
         return false;
     }
 
-    bool RemoveObjectFromGroup(const int nGroupID, const NFIDENTID& ident, bool bPlayer)
+    bool RemoveObjectFromGroup(const int nGroupID, const NFGUID& ident, bool bPlayer)
     {
         NF_SHARE_PTR<NFCContainerGroupInfo> pInfo = GetElement(nGroupID);
         if (pInfo.get())
@@ -140,7 +139,7 @@ public:
     }
 protected:
 private:
-    //NFIDENTID mIdent;
+    //NFGUID mIdent;
     int mnGroupIndex;
     int mnSceneID;
     int mnWidth;

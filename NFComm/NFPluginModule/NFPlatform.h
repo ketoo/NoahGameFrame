@@ -328,6 +328,7 @@ inline unsigned long NF_GetTickCount()
 
 
 #define NF_SHARE_PTR std::shared_ptr
+#define NF_NEW new
 
 #include <string>
 #include <boost/lexical_cast.hpp>

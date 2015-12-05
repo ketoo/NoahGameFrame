@@ -10,7 +10,7 @@
 #define _NFC_DATALIST_H_
 
 #include "NFIDataList.h"
-#include "NFComm/NFPluginModule/NFIdentID.h"
+#include "NFComm/NFPluginModule/NFGUID.h"
 
 class NFCDataList: public NFIDataList
 {
@@ -23,10 +23,7 @@ public:
     NFCDataList(const NFIDataList& src);
 
     virtual ~NFCDataList();
-/*
-    NFCDataList& operator=(const NFCDataList& src);
-    NFCDataList& operator=(const NFIDataList& src);
-*/
+
     // 添加
 	virtual bool Append(const NFIDataList& src);
 	virtual bool Append(const NFIDataList& src, const int start, const int count);
@@ -47,6 +44,7 @@ public:
     virtual bool Concat(const NFIDataList& src);
 
     //////////////////////////////////////////////////////////////////////////
+	const NF_SHARE_PTR<NFIDataList::TData> GetStack(const int index) const;
 
     // 数据类型
     virtual TDATA_TYPE Type(const int index) const;
@@ -59,46 +57,26 @@ public:
     virtual bool Add(const double value);
     virtual bool Add(const char* value);
     virtual bool Add(const std::string& value);
-    virtual bool Add(const NFIDENTID& value);
-    virtual bool Add(const void* value);
+    virtual bool Add(const NFGUID& value);
 
     virtual bool Set(const int index, const NFINT64 value);
     virtual bool Set(const int index, const double value);
     virtual bool Set(const int index, const char* value);
-    virtual bool Set(const int index, const NFIDENTID& value);
-    virtual bool Set(const int index, const void* value);
+    virtual bool Set(const int index, const NFGUID& value);
 
     // 获得数据
     virtual NFINT64 Int(const int index) const;
     virtual double Float(const int index) const;
     virtual std::string StringValEx(const int index) const;
     virtual const std::string& String(const int index) const;
-    virtual const NFIDENTID& Object(const int index) const;
-    virtual void* Pointer(const int index) const;
+    virtual const NFGUID& Object(const int index) const;
 
 	virtual bool ToString(std::string& str, const char* strSplit) const;
 
-	//////////////////////////////////////////////////////////////////////////
-	virtual bool Add(const std::string& str, const NFINT64 value);
-	virtual bool Add(const std::string& str, const double value);
-	virtual bool Add(const std::string& str, const char* value);
-	virtual bool Add(const std::string& str, const std::string& value);
-	virtual bool Add(const std::string& str, const NFIDENTID& value);
-
-	virtual bool Set(const std::string& str, const NFINT64 value);
-	virtual bool Set(const std::string& str, const double value);
-	virtual bool Set(const std::string& str, const char* value);
-	virtual bool Set(const std::string& str, const std::string& value);
-	virtual bool Set(const std::string& str, const NFIDENTID& value);
-
-	// 获得数据
-	virtual NFINT64 Int(const std::string& str) const;
-	virtual double Float(const std::string& str) const;
-	virtual const std::string& String(const std::string& str) const;
-	virtual const NFIDENTID& Object(const std::string& str) const;
 
 protected:
+	void AddStatck();
     void InnerAppendEx(const NFIDataList& src, const int start, const int end);
 };
 
-#endif
+#endif	
