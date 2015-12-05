@@ -25,8 +25,8 @@ public:
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
     virtual bool AfterInit();
 
-    virtual int AddTask(const NFIDENTID& self, const std::string& strTask);
-    virtual int RemoveTask(const NFIDENTID& self, const std::string& strTask);
+    virtual int AddTask(const NFGUID& self, const std::string& strTask);
+    virtual int RemoveTask(const NFGUID& self, const std::string& strTask);
 
 protected:
 private:

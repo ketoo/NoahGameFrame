@@ -47,7 +47,7 @@ bool NFCChatGroupBroadcastModule::AfterInit()
     return true;
 }
 
-int NFCChatGroupBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int NFCChatGroupBroadcastModule::OnPropertyCommonEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
     if ( mstrGroupTalble != m_pKernelModule->GetPropertyString( self, "ClassName" ))
     {
@@ -57,7 +57,7 @@ int NFCChatGroupBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, c
     NFCDataList valueBroadCaseList;
     NFCDataList valueBroadCaseGameList;
 
-    if (!m_pWorldChatGroupModule->GetOnlineMember(NFIDENTID(), self, valueBroadCaseList, valueBroadCaseGameList))
+    if (!m_pWorldChatGroupModule->GetOnlineMember(NFGUID(), self, valueBroadCaseList, valueBroadCaseGameList))
     {
         return 0;
     }
@@ -67,7 +67,7 @@ int NFCChatGroupBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, c
         return 0;
     }
 
-    switch ( oldVar.nType )
+    switch ( oldVar.GetType() )
     {
     case TDATA_INT:
         {
@@ -77,7 +77,7 @@ int NFCChatGroupBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, c
 
             NFMsg::PropertyInt* pDataInt = xPropertyInt.add_property_list();
             pDataInt->set_property_name( strPropertyName );
-            pDataInt->set_data( newVar.Value<NFINT64>() );
+            pDataInt->set_data( newVar.GetInt() );
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt);
 
@@ -92,7 +92,7 @@ int NFCChatGroupBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, c
 
             NFMsg::PropertyFloat* pDataFloat = xPropertyFloat.add_property_list();
             pDataFloat->set_property_name( strPropertyName );
-            pDataFloat->set_data( newVar.Value<double>() );
+            pDataFloat->set_data( newVar.GetFloat() );
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyFloat);
         }
@@ -106,7 +106,7 @@ int NFCChatGroupBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, c
 
             NFMsg::PropertyString* pDataString = xPropertyString.add_property_list();
             pDataString->set_property_name( strPropertyName );
-            pDataString->set_data( newVar.String() );
+            pDataString->set_data( newVar.GetString() );
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString);
         }
@@ -120,7 +120,7 @@ int NFCChatGroupBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, c
 
             NFMsg::PropertyObject* pDataObject = xPropertyObject.add_property_list();
             pDataObject->set_property_name( strPropertyName );
-            *pDataObject->mutable_data() = NFINetModule::NFToPB(newVar.Object());
+            *pDataObject->mutable_data() = NFINetModule::NFToPB(newVar.GetObject());
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject);
 
@@ -136,7 +136,7 @@ int NFCChatGroupBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, c
 }
 
 
-int NFCChatGroupBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar )
+int NFCChatGroupBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar )
 {
     const std::string& strRecordName = xEventData.strRecordName; 
     int nOpType = xEventData.nOpType;
@@ -150,7 +150,7 @@ int NFCChatGroupBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, con
 
     NFCDataList valueBroadCaseList;
     NFCDataList valueBroadCaseGameList;
-    if (!m_pWorldChatGroupModule->GetOnlineMember(NFIDENTID(), self, valueBroadCaseList, valueBroadCaseGameList))
+    if (!m_pWorldChatGroupModule->GetOnlineMember(NFGUID(), self, valueBroadCaseList, valueBroadCaseGameList))
     {
         return 0;
     }
@@ -217,7 +217,7 @@ int NFCChatGroupBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, con
                     break;
                 case TDATA_OBJECT:
                     {
-                        NFIDENTID identValue = newVar.Object( i );
+                        NFGUID identValue = newVar.Object( i );
                         //if (!identValue.IsNull())
                         {
                             NFMsg::RecordObject* pAddData = pAddRowData->add_record_object_list();
@@ -254,7 +254,7 @@ int NFCChatGroupBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, con
             if (pRecord && strRecordName == "GroupMemberList")
             {
                 //add
-                const NFIDENTID& nPlayer = pRecord->GetObject(nRow, NFMsg::GroupMemberList_GUID);
+                const NFGUID& nPlayer = pRecord->GetObject(nRow, NFMsg::GroupMemberList_GUID);
                 NFINT64 nGameID = pRecord->GetInt(nRow, NFMsg::GroupMemberList_GameID);
 
                 NFCDataList varSelf;
@@ -293,7 +293,7 @@ int NFCChatGroupBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, con
                 if (nCol == NFMsg::GroupMemberList_Online && newVar.Int( 0 ) > 0)
                 {
                     //add
-                    const NFIDENTID& nPlayer = pRecord->GetObject(nRow, NFMsg::GroupMemberList_GUID);
+                    const NFGUID& nPlayer = pRecord->GetObject(nRow, NFMsg::GroupMemberList_GUID);
                     NFINT64 nGameID = pRecord->GetInt(nRow, NFMsg::GroupMemberList_GameID);
 
                     NFCDataList varSelf;

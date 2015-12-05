@@ -22,19 +22,19 @@ public:
 
     virtual ~NFCFightState() {}
 
-    virtual bool Enter(const NFIDENTID& self);
+    virtual bool Enter(const NFGUID& self);
 
-    virtual bool Execute(const NFIDENTID& self);
+    virtual bool Execute(const NFGUID& self);
 
-    virtual bool Exit(const NFIDENTID& self);
+    virtual bool Exit(const NFGUID& self);
 
-    virtual bool DoRule(const NFIDENTID& self);
+    virtual bool DoRule(const NFGUID& self);
 
 protected:
-    bool RunInFightArea(const NFIDENTID& self);
-    bool RunCloseTarget(const NFIDENTID& self, const NFIDENTID& target);
+    bool RunInFightArea(const NFGUID& self);
+    bool RunCloseTarget(const NFGUID& self, const NFGUID& target);
 
-	int OnSkillConsumeTime(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
+	int OnSkillConsumeTime(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
 
 private:
 };

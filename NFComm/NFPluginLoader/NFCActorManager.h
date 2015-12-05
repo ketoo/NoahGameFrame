@@ -43,7 +43,7 @@ public:
 		AfterInit();
 	}
 
-	virtual bool SendMsgToActor( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg);
+	virtual bool SendMsgToActor( const int nActorIndex, const NFGUID& objectID, const int nEventID, const std::string& strArg);
 
     virtual NF_SHARE_PTR<NFIActor> GetActor(const int nActorIndex);
 	

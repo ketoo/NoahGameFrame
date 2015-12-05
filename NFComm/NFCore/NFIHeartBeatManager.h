@@ -48,7 +48,7 @@ public:
     float fTime;
     int nCount;
     std::string strBeatName;
-    NFIDENTID self;
+    NFGUID self;
 };
 
 class NFIHeartBeatManager
@@ -56,16 +56,16 @@ class NFIHeartBeatManager
 public:
     virtual ~NFIHeartBeatManager() {}
 
-    virtual NFIDENTID Self() = 0;
+    virtual NFGUID Self() = 0;
 
     virtual bool Execute(const float fLastTime, const float fAllTime) = 0;
     virtual bool Exist(const std::string& strHeartBeatName) = 0;
 
-    virtual bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
+    virtual bool AddHeartBeat(const NFGUID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
     virtual bool RemoveHeartBeat(const std::string& strHeartBeatName) = 0;
 
     template<typename BaseType>
-    bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFIDENTID&, const std::string&, const float, const int), const float fTime, const int nCount)
+    bool AddHeartBeat(const NFGUID self, const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const float, const int), const float fTime, const int nCount)
     {
         HEART_BEAT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         HEART_BEAT_FUNCTOR_PTR functorPtr(NF_NEW HEART_BEAT_FUNCTOR(functor));

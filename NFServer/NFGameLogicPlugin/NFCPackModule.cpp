@@ -100,7 +100,7 @@ PackTableType NFCPackModule::GetPackType( const std::string& name )
     return PackTableType::None_Pack;
 }
 
-const NFIDENTID& NFCPackModule::CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount, const NFIDataList& inlayCardList, const int nIntensiveLevel, const int nEnchantLevel, const std::string& strEnchantCard )
+const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount, const NFIDataList& inlayCardList, const int nIntensiveLevel, const int nEnchantLevel, const std::string& strEnchantCard )
 {
     if (nSoltCount > mnMaxSlotCount || inlayCardList.GetCount() > mnMaxSlotCount)
     {
@@ -152,7 +152,7 @@ const NFIDENTID& NFCPackModule::CreateEquip( const NFIDENTID& self, const std::s
             continue;
         }
 
-        NFIDENTID ident = m_pUUIDModule->CreateGUID();
+        NFGUID ident = m_pUUIDModule->CreateGUID();
         NFCDataList var;
         var << ident;
         var << strConfigName.c_str() ;
@@ -193,7 +193,7 @@ const NFIDENTID& NFCPackModule::CreateEquip( const NFIDENTID& self, const std::s
     return NULL_OBJECT;
 }
 
-const NFIDENTID& NFCPackModule::CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount )
+const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount )
 {
     if ( nSoltCount <= mnMaxSlotCount )
     {
@@ -203,7 +203,7 @@ const NFIDENTID& NFCPackModule::CreateEquip( const NFIDENTID& self, const std::s
     return NULL_OBJECT;
 }
 
-bool NFCPackModule::can_normal_pack_item_swap( const NFIDENTID& self, NF_SHARE_PTR<NFIRecord> pOriginRecord, NF_SHARE_PTR<NFIRecord> pTargetRecord, const int origin, const int target )
+bool NFCPackModule::can_normal_pack_item_swap( const NFGUID& self, NF_SHARE_PTR<NFIRecord> pOriginRecord, NF_SHARE_PTR<NFIRecord> pTargetRecord, const int origin, const int target )
 {
     if ( pOriginRecord == NULL || pTargetRecord == NULL )
     {
@@ -257,7 +257,7 @@ bool NFCPackModule::can_normal_pack_item_swap( const NFIDENTID& self, NF_SHARE_P
     return true;
 }
 
-bool NFCPackModule::SwapGrid( const NFIDENTID& self, const int nOrigin, const int nTarget, const PackTableType origin_name/* = PackTableType::NormalPack*/, const PackTableType target_name/* = PackTableType::NormalPack*/ )
+bool NFCPackModule::SwapGrid( const NFGUID& self, const int nOrigin, const int nTarget, const PackTableType origin_name/* = PackTableType::NormalPack*/, const PackTableType target_name/* = PackTableType::NormalPack*/ )
 {
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
     if ( NULL == pObject )
@@ -358,7 +358,7 @@ bool NFCPackModule::SwapGrid( const NFIDENTID& self, const int nOrigin, const in
     return false;
 }
 
-bool NFCPackModule::DeleteGrid( const NFIDENTID& self, const int nOrigin, const PackTableType name/* = PackTableType::NormalPack*/ )
+bool NFCPackModule::DeleteGrid( const NFGUID& self, const int nOrigin, const PackTableType name/* = PackTableType::NormalPack*/ )
 {
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
     if ( pObject )
@@ -375,7 +375,7 @@ bool NFCPackModule::DeleteGrid( const NFIDENTID& self, const int nOrigin, const 
     return false;
 }
 
-bool NFCPackModule::SetGridCount( const NFIDENTID& self, const int nOrigin, const int nCount, const PackTableType name/* = PackTableType::NormalPack*/ )
+bool NFCPackModule::SetGridCount( const NFGUID& self, const int nOrigin, const int nCount, const PackTableType name/* = PackTableType::NormalPack*/ )
 {
     //判断nOrigin合法性，以及nCount合法性(物品堆叠数量)
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
@@ -393,7 +393,7 @@ bool NFCPackModule::SetGridCount( const NFIDENTID& self, const int nOrigin, cons
     return false;
 }
 
-NFINT64 NFCPackModule::GetGridCount( const NFIDENTID& self, const int nOrigin, const PackTableType name/* = PackTableType::NormalPack*/ )
+NFINT64 NFCPackModule::GetGridCount( const NFGUID& self, const int nOrigin, const PackTableType name/* = PackTableType::NormalPack*/ )
 {
     //判断nOrigin合法性
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
@@ -409,7 +409,7 @@ NFINT64 NFCPackModule::GetGridCount( const NFIDENTID& self, const int nOrigin, c
     return 0;
 }
 
-bool NFCPackModule::SetEquipIntensiveLevel( const NFIDENTID& self, const int nOrigin, const int nLevel )
+bool NFCPackModule::SetEquipIntensiveLevel( const NFGUID& self, const int nOrigin, const int nLevel )
 {
     //判断nOrigin合法性(越界以及是否是装备),还有最大强化等级
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
@@ -425,7 +425,7 @@ bool NFCPackModule::SetEquipIntensiveLevel( const NFIDENTID& self, const int nOr
     return false;
 }
 
-int NFCPackModule::GetEquipIntensiveLevel( const NFIDENTID& self, const int nOrigin )
+int NFCPackModule::GetEquipIntensiveLevel( const NFGUID& self, const int nOrigin )
 {
     //判断nOrigin合法性(越界以及是否是装备)
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
@@ -441,7 +441,7 @@ int NFCPackModule::GetEquipIntensiveLevel( const NFIDENTID& self, const int nOri
     return 0;
 }
 
-bool NFCPackModule::SetEquipSlotCount( const NFIDENTID& self, const int nOrigin, const int nCount )
+bool NFCPackModule::SetEquipSlotCount( const NFGUID& self, const int nOrigin, const int nCount )
 {
     //判断nOrigin合法性(越界以及是否是装备),还有最大槽数量
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
@@ -457,7 +457,7 @@ bool NFCPackModule::SetEquipSlotCount( const NFIDENTID& self, const int nOrigin,
     return false;
 }
 
-int NFCPackModule::GetEquipSlotCount( const NFIDENTID& self, const int nOrigin )
+int NFCPackModule::GetEquipSlotCount( const NFGUID& self, const int nOrigin )
 {
     //判断nOrigin合法性(越界以及是否是装备)
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
@@ -473,7 +473,7 @@ int NFCPackModule::GetEquipSlotCount( const NFIDENTID& self, const int nOrigin )
     return 0;
 }
 
-bool NFCPackModule::SetEquipInlayCard( const NFIDENTID& self, const int nOrigin, const EGameItemStoreType eSlotIndex, const std::string& strCardIndex )
+bool NFCPackModule::SetEquipInlayCard( const NFGUID& self, const int nOrigin, const EGameItemStoreType eSlotIndex, const std::string& strCardIndex )
 {
     //判断nOrigin合法性(越界以及是否是装备),eSlotIndex是否合法，越界，已经已经有宝石；strCardIndex是否真的存在，以及宝石是否可以镶嵌
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
@@ -489,7 +489,7 @@ bool NFCPackModule::SetEquipInlayCard( const NFIDENTID& self, const int nOrigin,
     return false;
 }
 
-const std::string& NFCPackModule::GetEquipInlayCard( const NFIDENTID& self, const int nOrigin, const EGameItemStoreType eSlotIndex )
+const std::string& NFCPackModule::GetEquipInlayCard( const NFGUID& self, const int nOrigin, const EGameItemStoreType eSlotIndex )
 {
     //判断nOrigin合法性(越界以及是否是装备),eSlotIndex是否合法，越界
 
@@ -506,7 +506,7 @@ const std::string& NFCPackModule::GetEquipInlayCard( const NFIDENTID& self, cons
     return NULL_STR;
 }
 
-bool NFCPackModule::SetEquipEnchantmentLevel( const NFIDENTID& self, const int nOrigin, const int nLevel )
+bool NFCPackModule::SetEquipEnchantmentLevel( const NFGUID& self, const int nOrigin, const int nLevel )
 {
     //判断nOrigin合法性(越界以及是否是装备),nLevel是否合法，越界
 
@@ -523,7 +523,7 @@ bool NFCPackModule::SetEquipEnchantmentLevel( const NFIDENTID& self, const int n
     return false;
 }
 
-int NFCPackModule::GetEquipEnchantmentLevel( const NFIDENTID& self, const int nOrigin )
+int NFCPackModule::GetEquipEnchantmentLevel( const NFGUID& self, const int nOrigin )
 {
     //判断nOrigin合法性(越界以及是否是装备)
 
@@ -540,7 +540,7 @@ int NFCPackModule::GetEquipEnchantmentLevel( const NFIDENTID& self, const int nO
     return 0;
 }
 
-bool NFCPackModule::SetEquipEnchantmentCard( const NFIDENTID& self, const int nOrigin, const std::string& strCardIndex )
+bool NFCPackModule::SetEquipEnchantmentCard( const NFGUID& self, const int nOrigin, const std::string& strCardIndex )
 {
     //判断nOrigin合法性(越界以及是否是装备),strCardIndex是否有效
 
@@ -557,7 +557,7 @@ bool NFCPackModule::SetEquipEnchantmentCard( const NFIDENTID& self, const int nO
     return false;
 }
 
-const std::string& NFCPackModule::GetEquipEnchantmentCard( const NFIDENTID& self, const int nOrigin )
+const std::string& NFCPackModule::GetEquipEnchantmentCard( const NFGUID& self, const int nOrigin )
 {
     //判断nOrigin合法性(越界以及是否是装备)
 
@@ -574,7 +574,7 @@ const std::string& NFCPackModule::GetEquipEnchantmentCard( const NFIDENTID& self
     return NULL_STR;
 }
 
-bool NFCPackModule::SetEquipCreatTime( const NFIDENTID& self, const int nOrigin, const std::string& strTime )
+bool NFCPackModule::SetEquipCreatTime( const NFGUID& self, const int nOrigin, const std::string& strTime )
 {
     //判断nOrigin合法性(越界以及是否是装备)
 
@@ -591,7 +591,7 @@ bool NFCPackModule::SetEquipCreatTime( const NFIDENTID& self, const int nOrigin,
     return false;
 }
 
-const std::string& NFCPackModule::GetEquipCreatTime( const NFIDENTID& self, const int nOrigin )
+const std::string& NFCPackModule::GetEquipCreatTime( const NFGUID& self, const int nOrigin )
 {
     //判断nOrigin合法性(越界以及是否是装备)
 
@@ -608,7 +608,7 @@ const std::string& NFCPackModule::GetEquipCreatTime( const NFIDENTID& self, cons
     return NULL_STR;
 }
 
-bool NFCPackModule::CreateItem( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nCount )
+bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nCount )
 {
     if (strConfigName.empty())
     {
@@ -748,17 +748,17 @@ bool NFCPackModule::CreateItem( const NFIDENTID& self, const std::string& strCon
     return false;
 }
 
-bool NFCPackModule::SetGridBan( const NFIDENTID& self, const int nOrigin, const bool bBan )
+bool NFCPackModule::SetGridBan( const NFGUID& self, const int nOrigin, const bool bBan )
 {
     return false;
 }
 
-bool NFCPackModule::GetGridBan( const NFIDENTID& self, const int nOrigin )
+bool NFCPackModule::GetGridBan( const NFGUID& self, const int nOrigin )
 {
     return false;
 }
 
-int NFCPackModule::OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCPackModule::OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
     if (strClassNames == "Player")
     {
@@ -794,7 +794,7 @@ int NFCPackModule::OnClassObjectEvent( const NFIDENTID& self, const std::string&
     return 0;
 }
 
-int NFCPackModule::OnSwapTableRowEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var )
+int NFCPackModule::OnSwapTableRowEvent( const NFGUID& object, const int nEventID, const NFIDataList& var )
 {
     if ( 4 == var.GetCount() )
     {
@@ -828,7 +828,7 @@ int NFCPackModule::OnSwapTableRowEvent( const NFIDENTID& object, const int nEven
     return 0;
 }
 
-int NFCPackModule::OnObjectPackRecordEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar )
+int NFCPackModule::OnObjectPackRecordEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar )
 {
 	const std::string& strRecordName = xEventData.strRecordName;
 	const int nOpType = xEventData.nOpType;
@@ -900,7 +900,7 @@ int NFCPackModule::OnObjectPackRecordEvent( const NFIDENTID& self, const RECORD_
     return 0;
 }
 
-int NFCPackModule::OnObjectPackViewRecordEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar)
+int NFCPackModule::OnObjectPackViewRecordEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar)
 {
 	const std::string& strRecordName = xEventData.strRecordName;
 	const int nOpType = xEventData.nOpType;
@@ -992,7 +992,7 @@ int NFCPackModule::OnObjectPackViewRecordEvent( const NFIDENTID& self, const REC
     return 0;
 }
 
-const std::string& NFCPackModule::GetGridConfigID( const NFIDENTID& self, const int nRow, const PackTableType name/* = PackTableType::NormalPack*/ )
+const std::string& NFCPackModule::GetGridConfigID( const NFGUID& self, const int nRow, const PackTableType name/* = PackTableType::NormalPack*/ )
 {
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
     if ( pObject )
@@ -1025,7 +1025,7 @@ bool NFCPackModule::pack_item_type_greater( NFIDataList* elem1, NFIDataList* ele
     return item_subtype1 < item_subtype2;
 }
 
-int NFCPackModule::GetCanUsedCount(const NFIDENTID& self, const PackTableType name/* = PackTableType::NormalPack*/) const
+int NFCPackModule::GetCanUsedCount(const NFGUID& self, const PackTableType name/* = PackTableType::NormalPack*/) const
 {
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
     if ( NULL == pObject )
@@ -1051,7 +1051,7 @@ int NFCPackModule::GetCanUsedCount(const NFIDENTID& self, const PackTableType na
     return nCount;
 }
 
-bool NFCPackModule::SetGridData( const NFIDENTID& self, const int nRow, const int nCol, const NFIDataList& var, const PackTableType name /*= PackTableType::NormalPack*/ )
+bool NFCPackModule::SetGridData( const NFGUID& self, const int nRow, const int nCol, const NFIDataList& var, const PackTableType name /*= PackTableType::NormalPack*/ )
 {
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
     if ( NULL == pObject )
@@ -1073,7 +1073,7 @@ bool NFCPackModule::SetGridData( const NFIDENTID& self, const int nRow, const in
     return false;
 }
 
-int NFCPackModule::RefreshEquipProperty( const NFIDENTID& self )
+int NFCPackModule::RefreshEquipProperty( const NFGUID& self )
 {
     // 装备属性计算
     for (int i = 0; i < mnPackStart; ++i)
@@ -1084,7 +1084,7 @@ int NFCPackModule::RefreshEquipProperty( const NFIDENTID& self )
     return 0;
 }
 
-int NFCPackModule::RefreshEquipProperty( const NFIDENTID& self, const int nRow )
+int NFCPackModule::RefreshEquipProperty( const NFGUID& self, const int nRow )
 {
     // 单件装备属性计算
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
@@ -1116,7 +1116,7 @@ int NFCPackModule::RefreshEquipProperty( const NFIDENTID& self, const int nRow )
     return 0;
 }
 
-int NFCPackModule::AddEquipProperty( const NFIDENTID& self, const std::string& strConfigID, const int nRow )
+int NFCPackModule::AddEquipProperty( const NFGUID& self, const std::string& strConfigID, const int nRow )
 {
     if (strConfigID.empty())
     {
@@ -1171,7 +1171,7 @@ int NFCPackModule::AddEquipProperty( const NFIDENTID& self, const std::string& s
    return 0;
 }
 
-int NFCPackModule::RemoveEquipProperty( const NFIDENTID& self, const std::string& strConfigID, const int nRow )
+int NFCPackModule::RemoveEquipProperty( const NFGUID& self, const std::string& strConfigID, const int nRow )
 {
     if (strConfigID.empty())
     {
@@ -1231,7 +1231,7 @@ int NFCPackModule::CheckEquip()
     return 0;
 }
 
-int NFCPackModule::QueryCount( const NFIDENTID& self, const std::string& strItemConfigID ) const
+int NFCPackModule::QueryCount( const NFGUID& self, const std::string& strItemConfigID ) const
 {
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
     if ( NULL == pObject )
@@ -1258,7 +1258,7 @@ int NFCPackModule::QueryCount( const NFIDENTID& self, const std::string& strItem
     return nCount;
 }
 
-bool NFCPackModule::DeleteItem( const NFIDENTID& self, const std::string& strItemConfigID, const int nCount )
+bool NFCPackModule::DeleteItem( const NFGUID& self, const std::string& strItemConfigID, const int nCount )
 {
     if (QueryCount(self, strItemConfigID) < nCount)
     {
@@ -1315,7 +1315,7 @@ bool NFCPackModule::DeleteItem( const NFIDENTID& self, const std::string& strIte
     return false;
 }
 
-int NFCPackModule::OnAddDropListEvent(const NFIDENTID& self, const int nEventID, const NFIDataList& var)
+int NFCPackModule::OnAddDropListEvent(const NFGUID& self, const int nEventID, const NFIDataList& var)
 {
     if (var.GetCount() != 7  ||
         !var.TypeEx(TDATA_OBJECT, TDATA_INT, TDATA_INT, TDATA_INT, TDATA_FLOAT, TDATA_FLOAT, TDATA_FLOAT, TDATA_UNKNOWN))
@@ -1338,7 +1338,7 @@ int NFCPackModule::OnAddDropListEvent(const NFIDENTID& self, const int nEventID,
 
     pRecord->Clear(); // 进副本之前，清空原来的掉落表数据
 
-    NFIDENTID ident = var.Object(0);
+    NFGUID ident = var.Object(0);
     int nType = var.Int(1);
     int nTargetScene = var.Int(2);   // 场景ID
     int nTargetGroupID = var.Int(3);   // 层ID
@@ -1357,7 +1357,7 @@ int NFCPackModule::OnAddDropListEvent(const NFIDENTID& self, const int nEventID,
 
     for (int i = 0; i < xGroupObjectList.GetCount(); ++i)
     {
-        NFIDENTID ident = xGroupObjectList.Object(i);
+        NFGUID ident = xGroupObjectList.Object(i);
         // 筛选掉自己
         if (ident == self)
         {
@@ -1374,7 +1374,7 @@ int NFCPackModule::OnAddDropListEvent(const NFIDENTID& self, const int nEventID,
     return 0;
 }
 
-bool NFCPackModule::ComputerDropPack(NF_SHARE_PTR<NFIObject> pObject, const NFIDENTID identMonster,  const std::string& strDropPackConfig)
+bool NFCPackModule::ComputerDropPack(NF_SHARE_PTR<NFIObject> pObject, const NFGUID identMonster,  const std::string& strDropPackConfig)
 {
     NFCDataList xDropBagList(strDropPackConfig.c_str(), ",");
 
@@ -1408,7 +1408,7 @@ bool NFCPackModule::ComputerDropPack(NF_SHARE_PTR<NFIObject> pObject, const NFID
 
             if (!m_pElementInfoModule->ExistElement(pAwardItem->strConfigID))
             {
-                m_pLogModule->LogElement(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), pAwardItem->strConfigID, "There is no element", __FUNCTION__, __LINE__);
+                m_pLogModule->LogElement(NFILogModule::NLL_ERROR_NORMAL, NFGUID(), pAwardItem->strConfigID, "There is no element", __FUNCTION__, __LINE__);
                 continue;
             }
 
@@ -1425,7 +1425,7 @@ bool NFCPackModule::ComputerDropPack(NF_SHARE_PTR<NFIObject> pObject, const NFID
     return true;
 }
 
-void NFCPackModule::AddDropItem(const NFIDENTID& self, const NFIDataList& var)
+void NFCPackModule::AddDropItem(const NFGUID& self, const NFIDataList& var)
 {
     if (var.GetCount() != 4 || !var.TypeEx(TDATA_OBJECT, TDATA_STRING, TDATA_INT, TDATA_INT, TDATA_UNKNOWN))
     {
@@ -1442,7 +1442,7 @@ void NFCPackModule::AddDropItem(const NFIDENTID& self, const NFIDataList& var)
     pRecord->AddRow(-1, var);
 }
 
-int NFCPackModule::OnObjectBeKilled(const NFIDENTID& self, const int nEventID, const NFIDataList& var)
+int NFCPackModule::OnObjectBeKilled(const NFGUID& self, const int nEventID, const NFIDataList& var)
 {
     if ( var.GetCount() != 1 || !var.TypeEx(TDATA_OBJECT, TDATA_UNKNOWN))
     {
@@ -1450,7 +1450,7 @@ int NFCPackModule::OnObjectBeKilled(const NFIDENTID& self, const int nEventID, c
         return 1;
     }
 
-    NFIDENTID identKiller = var.Object( 0 );
+    NFGUID identKiller = var.Object( 0 );
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(identKiller);
     if (nullptr == pObject)
     {
@@ -1473,7 +1473,7 @@ int NFCPackModule::OnObjectBeKilled(const NFIDENTID& self, const int nEventID, c
     return 0;
 }
 
-void NFCPackModule::DrawDropAward(const NFIDENTID& self, int& nMoney, int& nExp, NFIDataList& xItemList, NFIDataList& xCountList)
+void NFCPackModule::DrawDropAward(const NFGUID& self, int& nMoney, int& nExp, NFIDataList& xItemList, NFIDataList& xCountList)
 {
     NF_SHARE_PTR<NFIRecord> pDropRecord = m_pKernelModule->FindRecord(self, "DropItemList");
     if (NULL == pDropRecord.get())
