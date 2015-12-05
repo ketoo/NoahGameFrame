@@ -54,7 +54,7 @@ bool NFCEctypeModule::AfterInit()
     return true;
 }
 
-bool NFCEctypeModule::CanEntryCloneScene(const NFIDENTID self, const int nContainerID)
+bool NFCEctypeModule::CanEntryCloneScene(const NFGUID self, const int nContainerID)
 {
     std::string strSceneID = boost::lexical_cast<std::string>(nContainerID);
     //如果没找到，就判断是否是第一个场景IsFirstCloneScene
@@ -83,7 +83,7 @@ bool NFCEctypeModule::CanEntryCloneScene(const NFIDENTID self, const int nContai
     return true;
 }
 
-int NFCEctypeModule::OnObjectClassEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+int NFCEctypeModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
 {
     if (strClassName == "Player")
     {
@@ -125,7 +125,7 @@ int NFCEctypeModule::OnObjectClassEvent(const NFIDENTID& self, const std::string
     return 0;
 }
 
-bool NFCEctypeModule::AddEctypeActiveState(const NFIDENTID self, const int nContainerID)
+bool NFCEctypeModule::AddEctypeActiveState(const NFGUID self, const int nContainerID)
 {
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "EctypeList");
     if (pRecord.get() && nContainerID > 0)
@@ -147,7 +147,7 @@ bool NFCEctypeModule::AddEctypeActiveState(const NFIDENTID self, const int nCont
     return true;
 }
 
-int NFCEctypeModule::OnEctypeSettleEvent(const NFIDENTID& self, int nResult, int nStar)
+int NFCEctypeModule::OnEctypeSettleEvent(const NFGUID& self, int nResult, int nStar)
 {
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
     if (!pObject.get())
@@ -190,7 +190,7 @@ int NFCEctypeModule::OnEctypeSettleEvent(const NFIDENTID& self, int nResult, int
     return 0;
 }
 
-bool NFCEctypeModule::CompleteEctypeMode(const NFIDENTID self, const int nContainerID, const int nStar)
+bool NFCEctypeModule::CompleteEctypeMode(const NFGUID self, const int nContainerID, const int nStar)
 {
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "EctypeList");
     if (NULL == pRecord.get())
@@ -203,13 +203,13 @@ bool NFCEctypeModule::CompleteEctypeMode(const NFIDENTID self, const int nContai
     return true;
 }
 
-int NFCEctypeModule::OnObjectGroupIDEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int NFCEctypeModule::OnObjectGroupIDEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
 
     return 0;
 }
 
-int NFCEctypeModule::AddEctypeAward(const NFIDENTID& self, const int nSceneID)
+int NFCEctypeModule::AddEctypeAward(const NFGUID& self, const int nSceneID)
 {
     std::string strSceneID = boost::lexical_cast<std::string>(nSceneID);
     int nType = m_pElementInfoModule->GetPropertyInt(strSceneID, "SceneType");
@@ -245,7 +245,7 @@ int NFCEctypeModule::AddEctypeAward(const NFIDENTID& self, const int nSceneID)
     return 0;
 }
 
-bool NFCEctypeModule::AddNewEctype(const NFIDENTID self)
+bool NFCEctypeModule::AddNewEctype(const NFGUID self)
 {
     int nLevel = m_pKernelModule->GetPropertyInt(self, "Level");
 

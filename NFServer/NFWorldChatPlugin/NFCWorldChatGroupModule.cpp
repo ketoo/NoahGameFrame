@@ -49,7 +49,7 @@ bool NFCWorldChatGroupModule::AfterInit()
     return true;
 }
 
-bool NFCWorldChatGroupModule::JoinGroup( const NFIDENTID& self, const NFIDENTID& xGroupID )
+bool NFCWorldChatGroupModule::JoinGroup( const NFGUID& self, const NFGUID& xGroupID )
 {
     NF_SHARE_PTR<NFIObject> pGroup = GetGroup(xGroupID);
     if (NULL == pGroup)
@@ -75,9 +75,9 @@ bool NFCWorldChatGroupModule::JoinGroup( const NFIDENTID& self, const NFIDENTID&
     return pRecord->AddRow(-1, varRow);
 }
 
-const NFIDENTID& NFCWorldChatGroupModule::CreateGroup( const NFIDENTID& self )
+const NFGUID& NFCWorldChatGroupModule::CreateGroup( const NFGUID& self )
 {
-    const NFIDENTID xGuidID = m_pUUIDModule->CreateGUID();
+    const NFGUID xGuidID = m_pUUIDModule->CreateGUID();
 
     //Guild
     std::vector<std::string> vGroupFieldVec;
@@ -97,7 +97,7 @@ const NFIDENTID& NFCWorldChatGroupModule::CreateGroup( const NFIDENTID& self )
     return xGuidID;
 }
 
-bool NFCWorldChatGroupModule::QuitGroup( const NFIDENTID& self, const NFIDENTID& xGroupID )
+bool NFCWorldChatGroupModule::QuitGroup( const NFGUID& self, const NFGUID& xGroupID )
 {
     NF_SHARE_PTR<NFIObject> pChatGroup = GetGroup(xGroupID);
     if (pChatGroup == NULL)
@@ -120,7 +120,7 @@ bool NFCWorldChatGroupModule::QuitGroup( const NFIDENTID& self, const NFIDENTID&
     return true;
 }
 
-bool NFCWorldChatGroupModule::DeleteGroup( const NFIDENTID& self, const NFIDENTID& xGroupID )
+bool NFCWorldChatGroupModule::DeleteGroup( const NFGUID& self, const NFGUID& xGroupID )
 {
     NF_SHARE_PTR<NFIObject> pGuilD = m_pKernelModule->GetObject(xGroupID);
     if (pGuilD.get())
@@ -143,7 +143,7 @@ bool NFCWorldChatGroupModule::DeleteGroup( const NFIDENTID& self, const NFIDENTI
     return true;
 }
 
-NF_SHARE_PTR<NFIObject> NFCWorldChatGroupModule::GetGroup( const NFIDENTID& self )
+NF_SHARE_PTR<NFIObject> NFCWorldChatGroupModule::GetGroup( const NFGUID& self )
 {
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
     if (pObject == NULL )
@@ -160,7 +160,7 @@ NF_SHARE_PTR<NFIObject> NFCWorldChatGroupModule::GetGroup( const NFIDENTID& self
 }
 
 
-bool NFCWorldChatGroupModule::GetOnlineMember( const NFIDENTID& self, const NFIDENTID& xGroupID, NFCDataList& varMemberList, NFCDataList& varGameList)
+bool NFCWorldChatGroupModule::GetOnlineMember( const NFGUID& self, const NFGUID& xGroupID, NFCDataList& varMemberList, NFCDataList& varGameList)
 {
     NF_SHARE_PTR<NFIObject> pGuildObject = GetGroup(xGroupID);
     if (!pGuildObject.get())
@@ -183,7 +183,7 @@ bool NFCWorldChatGroupModule::GetOnlineMember( const NFIDENTID& self, const NFID
 
         const NFINT64 nOnline = pMemberRecord->GetInt(i, NFMsg::GroupMemberList_Online);
         const NFINT64 nGameID = pMemberRecord->GetInt(i, NFMsg::GroupMemberList_GameID);
-        const NFIDENTID& xID = pMemberRecord->GetObject(i, NFMsg::GroupMemberList_GUID);
+        const NFGUID& xID = pMemberRecord->GetObject(i, NFMsg::GroupMemberList_GUID);
         if (nOnline > 0 && !xID.IsNull())
         {
 
@@ -195,7 +195,7 @@ bool NFCWorldChatGroupModule::GetOnlineMember( const NFIDENTID& self, const NFID
     return true;
 }
 
-int NFCWorldChatGroupModule::OnGuildClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCWorldChatGroupModule::OnGuildClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
     if ( strClassName == mstrGroupTalble )
     {
@@ -209,14 +209,14 @@ int NFCWorldChatGroupModule::OnGuildClassEvent( const NFIDENTID& self, const std
 }
 
 
-int NFCWorldChatGroupModule::OnSaveGroupheartEvent( const NFIDENTID& self , const std::string& strHeartName, const float fTime, const int nCount )
+int NFCWorldChatGroupModule::OnSaveGroupheartEvent( const NFGUID& self , const std::string& strHeartName, const float fTime, const int nCount )
 {
     m_pDataProcessModule->SaveDataToSql(self);
 
     return 0;
 }
 
-bool NFCWorldChatGroupModule::Online( const NFIDENTID& self, const NFIDENTID& xGroupID, const int& nGameID )
+bool NFCWorldChatGroupModule::Online( const NFGUID& self, const NFGUID& xGroupID, const int& nGameID )
 {
     NF_SHARE_PTR<NFIObject> pGroup = GetGroup(xGroupID);
     if (NULL == pGroup)
@@ -244,7 +244,7 @@ bool NFCWorldChatGroupModule::Online( const NFIDENTID& self, const NFIDENTID& xG
     return true;
 }
 
-bool NFCWorldChatGroupModule::Offeline( const NFIDENTID& self, const NFIDENTID& xGroupID )
+bool NFCWorldChatGroupModule::Offeline( const NFGUID& self, const NFGUID& xGroupID )
 {
     NF_SHARE_PTR<NFIObject> pGroup = GetGroup(xGroupID);
     if (NULL == pGroup)

@@ -17,7 +17,7 @@ class NFCStateMachine
 {
 public:
 
-    NFCStateMachine(const NFIDENTID& self, NFIAIModule* pControl);
+    NFCStateMachine(const NFGUID& self, NFIAIModule* pControl);
 
     virtual ~NFCStateMachine();
 
@@ -42,7 +42,7 @@ public:
 private:
     NFIAIModule*    m_pAIControlInterface;
 
-    NFIDENTID mOwnerID;
+    NFGUID mOwnerID;
     float mfHeartBeatTime;
     NFAI_STATE meCurrentState;
     NFAI_STATE meLastState;

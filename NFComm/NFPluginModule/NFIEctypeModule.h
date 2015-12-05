@@ -32,10 +32,10 @@ public:
     };
 
 public:
-    virtual bool CompleteEctypeMode(const NFIDENTID self, const int nContainerID, const int nStar) = 0;
-    virtual int OnEctypeSettleEvent(const NFIDENTID& self, int nResult, int nLevel) = 0;
+    virtual bool CompleteEctypeMode(const NFGUID self, const int nContainerID, const int nStar) = 0;
+    virtual int OnEctypeSettleEvent(const NFGUID& self, int nResult, int nLevel) = 0;
     //能否进副本
-    virtual bool CanEntryCloneScene(const NFIDENTID self, const int nContainerID) = 0;
+    virtual bool CanEntryCloneScene(const NFGUID self, const int nContainerID) = 0;
 };
 
 #endif

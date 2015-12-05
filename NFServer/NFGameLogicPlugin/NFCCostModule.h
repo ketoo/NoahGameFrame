@@ -31,8 +31,8 @@ public:
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
     virtual bool AfterInit();
 
-    virtual bool Cost(const NFIDENTID& self, const std::string& strCostID);
-    virtual bool Cost(const NFIDENTID& self, const std::list<std::string>& xCostList);
+    virtual bool Cost(const NFGUID& self, const std::string& strCostID);
+    virtual bool Cost(const NFGUID& self, const std::list<std::string>& xCostList);
 
 private:
     NFIKernelModule* m_pKernelModule;

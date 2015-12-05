@@ -11,10 +11,10 @@ bool HelloWorld2::Init()
     return true;
 }
 
-int HelloWorld2::OnPropertyCallBackEvent( const NFIDENTID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
+int HelloWorld2::OnPropertyCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
 {
     //属性回调事件，只要属性值内容有变化，就会被回调
-    std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVar.Value<NFINT64>() << " NewValue: " << newVar.Value<NFINT64>() << std::endl;
+    std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVar.GetInt() << " NewValue: " << newVar.GetInt() << std::endl;
 
     return 0;
 }
@@ -28,7 +28,7 @@ bool HelloWorld2::AfterInit()
         std::cout << "Hello, world2, AfterInit" << std::endl;
 
 		//created a object for this test
-        NFIObject* pObject = new NFCObject(NFIDENTID(0, 1), pPluginManager);
+        NFIObject* pObject = new NFCObject(NFGUID(0, 1), pPluginManager);
 
 		//add a property name is "Hello" of this object
         pObject->GetPropertyManager()->AddProperty(pObject->Self(), "Hello", TDATA_STRING, true, true, true, true, 0, "");

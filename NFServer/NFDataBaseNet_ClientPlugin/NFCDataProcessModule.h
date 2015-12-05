@@ -39,24 +39,24 @@ public:
     virtual bool Execute( const float fLasFrametime, const float fStartedTime );
     virtual bool AfterInit();
 
-	virtual const NFIDENTID& CreateRole(const std::string& strAccount, const std::string& strName, const int nRace, const int nJob, const int nSex);
-	virtual const bool DeleteRole(const std::string& strAccount, const NFIDENTID xID);
-	virtual const NFIDENTID& GetChar(const std::string& strAccount, const std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVec);
+	virtual const NFGUID& CreateRole(const std::string& strAccount, const std::string& strName, const int nRace, const int nJob, const int nSex);
+	virtual const bool DeleteRole(const std::string& strAccount, const NFGUID xID);
+	virtual const NFGUID& GetChar(const std::string& strAccount, const std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVec);
 
 	//////////////////////////////////////////////////////////////////////////
 
 	virtual bool RegisterAutoSave(const std::string& strClassName);
-	virtual const bool LoadDataFormSql( const NFIDENTID& self , const std::string& strClassName);
-	virtual const bool SaveDataToSql( const NFIDENTID& self);
+	virtual const bool LoadDataFormSql( const NFGUID& self , const std::string& strClassName);
+	virtual const bool SaveDataToSql( const NFGUID& self);
 
 private:
-	const bool AttachData( const NFIDENTID& self );
+	const bool AttachData( const NFGUID& self );
 	const bool ConvertPBToRecord(const NFMsg::PlayerRecordBase& xRecordData, NF_SHARE_PTR<NFIRecord> xRecord);
 
-    int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+    int OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    void OnOnline(const NFIDENTID& self);
-    void OnOffline(const NFIDENTID& self);
+    void OnOnline(const NFGUID& self);
+    void OnOffline(const NFGUID& self);
 
 private:
     NFIEventProcessModule* m_pEventProcessModule;
@@ -67,7 +67,7 @@ private:
 	NFILogModule* m_pLogModule;
 
 private:
-	NFMapEx<NFIDENTID, NFMapEx<std::string, std::string> > mtObjectCache;
+	NFMapEx<NFGUID, NFMapEx<std::string, std::string> > mtObjectCache;
 
     std::string mstrRoleTable;
     std::string mstrAccountTable;
