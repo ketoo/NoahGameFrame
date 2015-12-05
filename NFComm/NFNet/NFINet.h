@@ -208,6 +208,7 @@ class NetObject
 public:
     NetObject(NFINet* pNet, int32_t fd, sockaddr_in& addr, bufferevent* pBev)
     {
+		mnLogicState = 0;
 		mnGameID = 0;
 		nFD = fd;
 		bNeedRemove = false;
