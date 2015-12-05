@@ -65,11 +65,8 @@ public:
 
 		TData(const TData& value)
 		{
-			if (nType == TDATA_UNKNOWN)
-			{
-				nType = value.nType;
-				variantData = value.variantData;
-			}
+			nType = value.nType;
+			variantData = value.variantData;
 		}
 
         ~TData()
@@ -137,59 +134,47 @@ public:
 
 		const NFINT64 GetInt() const
 		{
-			return Value<NFINT64>();
+			if (TDATA_INT == nType)
+			{
+				return boost::get<NFINT64>(variantData);
+			}
+
+			return NULL_INT;
 		}
+
 		const double GetFloat() const
 		{
-			return Value<double>();
+			if (TDATA_FLOAT == nType)
+			{
+				return boost::get<double>(variantData);
+			}
+
+			return NULL_FLOAT;
 		}
 		const std::string& GetString() const
 		{
-			return String();
+			if (TDATA_STRING == nType)
+			{
+				return boost::get<const std::string&>(variantData);
+			}
+
+			return NULL_STR;
 		}
 		const NFGUID GetObject() const
 		{
-			return Object();
+			if (TDATA_STRING == nType)
+			{
+				return boost::get<const NFGUID&>(variantData);
+			}
+
+			return NULL_OBJECT;
 		}
 
-
 	private:
-        template<typename T>
-        T Value() const
-        {
-            T result = 0;
-            if (nType == TDATA_FLOAT
-                || nType == TDATA_INT)
-            {
-                result = boost::get<T>(variantData);
-            }
-
-            return result;
-        }
-
-        const std::string& String() const
-        {
-            if (TDATA_STRING == nType)
-            {
-                return boost::get<const std::string&>(variantData);
-            }
-
-            return NULL_STR;
-        }
-
-        const NFGUID& Object() const
-        {
-            if (TDATA_STRING == nType)
-            {
-                return boost::get<const NFGUID&>(variantData);
-            }
-
-            return NULL_OBJECT;
-        }
 
         TDATA_TYPE nType;
 
-		public:
+	public:
         boost::variant<NFINT64, double, std::string, NFGUID> variantData;
     };
 
@@ -300,7 +285,7 @@ public:
             case TDATA_FLOAT:
             {
                 double fValue = var.GetFloat();
-                if (fValue > 0.001f  || fValue < -0.001f)
+                if (fValue > 0.001  || fValue < -0.001)
                 {
                     bChanged = true;
                 }
