@@ -160,9 +160,10 @@ public:
 
 			return NULL_STR;
 		}
-		const NFGUID GetObject() const
+
+		const NFGUID& GetObject() const
 		{
-			if (TDATA_STRING == nType)
+			if (TDATA_OBJECT == nType)
 			{
 				return boost::get<const NFGUID&>(variantData);
 			}
