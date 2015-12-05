@@ -3,7 +3,7 @@
 #include <thread>
 #include <string>
 #pragma comment(lib,"ws2_32.lib")
-#pragma  comment(lib,"NFNet_d.a")
+#pragma comment(lib,"NFNet_d.lib")
 
 class TestClientClass
 {
@@ -19,7 +19,7 @@ public:
 		std::string str;
 		str.assign(msg, nLen);
 
-		std::cout << " fd: " << nSockIndex << " msg_id: " << nMsgID <<  " data: " << str << " thread_id: " << std::this_thread::get_id() << std::endl;
+		std::cout << " fd: " << nSockIndex << " msg_id: " << nMsgID /*<<  " data: " << str */<< " thread_id: " << std::this_thread::get_id() << std::endl;
 	};
 
 	void EventHandler(const int nSockIndex, const NF_NET_EVENT e, NFINet* p)
@@ -44,7 +44,7 @@ int main(int argc, char** argv)
 {
 	std::list<TestClientClass*> list;
 
-	for (int i = 0; i < 10000; ++i)
+	for (int i = 0; i < 1000; ++i)
 	{
 		TestClientClass* x = new TestClientClass();;
 		list.push_back(x);
@@ -53,7 +53,7 @@ int main(int argc, char** argv)
 	while (1)	{		std::list<TestClientClass*>::iterator it = list.begin();
 		for (it; it != list.end(); ++it)
 		{
-			//Sleep(1);
+			Sleep(1);
 
 			(*it)->Execute();
 		}
