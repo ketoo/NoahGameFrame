@@ -20,7 +20,7 @@ public:
 		std::string str;
 		str.assign(msg, nLen);
 
-		//pNet->SendMsgWithOutHead(nMsgID, msg, nLen, nSockIndex);
+		pNet->SendMsgWithOutHead(nMsgID, msg, nLen, nSockIndex);
 		std::cout << " fd: " << nSockIndex << " msg_id: " << nMsgID /*<<  " data: " << str*/ << " thread_id: " << GetCurrentThreadId() << std::endl;
 	}
 
