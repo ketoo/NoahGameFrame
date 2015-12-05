@@ -9,7 +9,7 @@ bool HelloWorld3Module::Init()
 	return true;
 }
 
-int HelloWorld3Module::OnEvent(const NFIDENTID& self, const int event, const NFIDataList& arg)
+int HelloWorld3Module::OnEvent(const NFGUID& self, const int event, const NFIDataList& arg)
 {
 	//事件回调函数
 	std::cout << "OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg.Int(0) << " " << " " << arg.String(1) << std::endl;
@@ -20,7 +20,7 @@ int HelloWorld3Module::OnEvent(const NFIDENTID& self, const int event, const NFI
 	return 0;
 }
 
-int HelloWorld3Module::OnHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
+int HelloWorld3Module::OnHeartBeat(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
 
 	unsigned long unNowTime = NF_GetTickCount();
@@ -32,7 +32,7 @@ int HelloWorld3Module::OnHeartBeat(const NFIDENTID& self, const std::string& str
 	return 0;
 }
 
-int HelloWorld3Module::OnClassCallBackEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT event, const NFIDataList& arg)
+int HelloWorld3Module::OnClassCallBackEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT event, const NFIDataList& arg)
 {
 	//虚拟类事件，只要有此虚拟类创建或者销毁即会回调
 	std::cout << "OnClassCallBackEvent ClassName: " << strClassName << " ID: " << self.nData64 << " Event: " << event << std::endl;
@@ -49,18 +49,18 @@ int HelloWorld3Module::OnClassCallBackEvent(const NFIDENTID& self, const std::st
 	return 0;
 }
 
-int HelloWorld3Module::OnPropertyCallBackEvent( const NFIDENTID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int HelloWorld3Module::OnPropertyCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
 	//属性回调事件，只要属性值内容有变化，就会被回调
-	std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVar.Value<NFINT64>() << " NewValue: " << newVar.Value<NFINT64>() << std::endl;
+	std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVar.GetInt() << " NewValue: " << newVar.GetInt() << std::endl;
 
 	return 0;
 }
 
-int HelloWorld3Module::OnPropertyStrCallBackEvent( const NFIDENTID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int HelloWorld3Module::OnPropertyStrCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
 	//属性回调事件，只要属性值内容有变化，就会被回调
-	std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVar.String() << " NewValue: " << newVar.String() << std::endl;
+	std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVar.GetString() << " NewValue: " << newVar.GetString() << std::endl;
 
 	return 0;
 }
@@ -80,7 +80,7 @@ bool HelloWorld3Module::AfterInit()
 	m_pEventProcessModule->AddClassCallBack("Player", this, &HelloWorld3Module::OnClassCallBackEvent);
 
 	//创建对象，挂类回调和属性回调,然后事件处理对象
-	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(NFIDENTID(0, 10), 1, 0, "Player", "", NFCDataList());
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(NFGUID(0, 10), 1, 0, "Player", "", NFCDataList());
 	if (!pObject.get())
 	{
 		return false;

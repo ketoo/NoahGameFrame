@@ -19,7 +19,7 @@ class NFIProxyServerNet_ServerModule
 
 public:
 	virtual int Transpond(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
-	virtual int EnterGameSuccessEvent(const NFIDENTID xClientID, const NFIDENTID xPlayerID) = 0;
+	virtual int EnterGameSuccessEvent(const NFGUID xClientID, const NFGUID xPlayerID) = 0;
 };
 
 #endif

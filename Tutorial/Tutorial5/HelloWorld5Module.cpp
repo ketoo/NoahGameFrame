@@ -17,7 +17,7 @@ bool HelloWorld5Module::Init()
 class IComponentTest : public NFIComponent
 {
 public:
-	IComponentTest(): NFIComponent(NFIDENTID())
+	IComponentTest(): NFIComponent(NFGUID())
 	{
 
 	}
@@ -68,7 +68,7 @@ bool HelloWorld5Module::AfterInit()
 
 	////////////////////////test1//////////////////////////////////////////////////
 
-	NFIObject* pObject = new NFCObject(NFIDENTID(0, 1), pPluginManager);
+	NFIObject* pObject = new NFCObject(NFGUID(0, 1), pPluginManager);
 
 	pObject->AddComponent<ComponentTest>();
 
@@ -84,7 +84,7 @@ bool HelloWorld5Module::AfterInit()
 	{
 		int nActorID = pPluginManager->GetActorManager()->RequireActor<NFCTestComponent>(this, &HelloWorld5Module::OnSyncEvent);
 
-		pPluginManager->GetActorManager()->SendMsgToActor(nActorID, NFIDENTID(), 555, boost::lexical_cast<std::string>(i));
+		pPluginManager->GetActorManager()->SendMsgToActor(nActorID, NFGUID(), 555, boost::lexical_cast<std::string>(i));
 	}
 
     std::cout << "End Test Actor, ThreadID: " << std::this_thread::get_id() << std::endl;
@@ -92,7 +92,7 @@ bool HelloWorld5Module::AfterInit()
     return true;
 }
 
-int HelloWorld5Module::OnSyncEvent(const NFIDENTID& self, const int nActorID, const int event, const std::string& arg)
+int HelloWorld5Module::OnSyncEvent(const NFGUID& self, const int nActorID, const int event, const std::string& arg)
 {
     //事件回调函数
     std::cout << "End OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg << " ThreadID: " << std::this_thread::get_id() << std::endl;

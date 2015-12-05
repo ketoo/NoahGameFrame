@@ -46,7 +46,7 @@ bool NFCSLGShopModule::AfterInit()
     return true;
 }
 
-bool NFCSLGShopModule::ReqBuyItem(const NFIDENTID& self, const std::string& strID, float fX, float fY, float fZ)
+bool NFCSLGShopModule::ReqBuyItem(const NFGUID& self, const std::string& strID, float fX, float fY, float fZ)
 {
     if (!m_pElementInfoModule->ExistElement(strID))
     {

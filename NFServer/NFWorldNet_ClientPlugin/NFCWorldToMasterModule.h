@@ -59,7 +59,7 @@ protected:
     int OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     int OnKickClientProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    int OnSelectServerResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnSelectServerResultsEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
 private:
 

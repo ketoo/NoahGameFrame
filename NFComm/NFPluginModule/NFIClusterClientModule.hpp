@@ -83,7 +83,7 @@ public:
 		}
 	}
 
-	void SendToServerByPB(const int nServerID, const uint16_t nMsgID, google::protobuf::Message& xData, const int nSockIndex = 0, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<NFIDENTID>* pClientIDList = NULL, bool bBroadcast = false)
+	void SendToServerByPB(const int nServerID, const uint16_t nMsgID, google::protobuf::Message& xData, const int nSockIndex = 0, const NFGUID nPlayer = NFGUID(), const std::vector<NFGUID>* pClientIDList = NULL, bool bBroadcast = false)
 	{
 		NF_SHARE_PTR<ServerData> pServer = mxServerMap.GetElement(nServerID);
 		if (pServer)
@@ -109,7 +109,7 @@ public:
         }
     }
 
-	void SendToAllServerByPB(const uint16_t nMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<NFIDENTID>* pClientIDList = NULL)
+	void SendToAllServerByPB(const uint16_t nMsgID, google::protobuf::Message& xData, const NFGUID nPlayer = NFGUID(), const std::vector<NFGUID>* pClientIDList = NULL)
 	{
 		NF_SHARE_PTR<ServerData> pServer = mxServerMap.First();
 		while (pServer)
@@ -157,7 +157,7 @@ public:
         SendByServerID(xNode.nMachineID, nSockIndex, nMsgID, msg, nLen);
     }
 
-	void SendSuitByPB(const int& nHashKey, const uint16_t nMsgID, google::protobuf::Message& xData, const int nSockIndex = 0, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<NFIDENTID>* pClientIDList = NULL)
+	void SendSuitByPB(const int& nHashKey, const uint16_t nMsgID, google::protobuf::Message& xData, const int nSockIndex = 0, const NFGUID nPlayer = NFGUID(), const std::vector<NFGUID>* pClientIDList = NULL)
 	{
 		if (mxConsistentHash.Size() <= 0)
 		{
@@ -173,7 +173,7 @@ public:
 		SendToServerByPB(xNode.nMachineID, nMsgID, xData, nSockIndex, nPlayer, pClientIDList);
 	}
 
-	void SendSuitByPB(const uint16_t nMsgID, google::protobuf::Message& xData, const int nSockIndex = 0, const NFIDENTID nPlayer = NFIDENTID(), const std::vector<NFIDENTID>* pClientIDList = NULL)
+	void SendSuitByPB(const uint16_t nMsgID, google::protobuf::Message& xData, const int nSockIndex = 0, const NFGUID nPlayer = NFGUID(), const std::vector<NFGUID>* pClientIDList = NULL)
 	{
 		if (mxConsistentHash.Size() <= 0)
 		{

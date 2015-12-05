@@ -14,7 +14,7 @@ bool NFCTestComponent::AfterInit()
     return true;
 }
 
-int NFCTestComponent::OnASyncEvent( const NFIDENTID& self, const int event, std::string& arg)
+int NFCTestComponent::OnASyncEvent( const NFGUID& self, const int event, std::string& arg)
 {
     std::cout << "Begin OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg << " ThreadID: " << std::this_thread::get_id() << std::endl;
 

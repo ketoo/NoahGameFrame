@@ -43,7 +43,7 @@ public:
     virtual int Transpond(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	//进入游戏成功
-	virtual int EnterGameSuccessEvent(const NFIDENTID xClientID, const NFIDENTID xPlayerID);
+	virtual int EnterGameSuccessEvent(const NFGUID xClientID, const NFGUID xPlayerID);
 
 protected:
 
@@ -65,11 +65,11 @@ protected:
 
 
     //客户端的连接60秒删掉
-    int HB_OnConnectCheckTime( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var );
+    int HB_OnConnectCheckTime( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var );
     //////////////////////////////////////////////////////////////////////////
 protected:
 
-	NFMapEx<NFIDENTID, int> mxClientIdent;
+	NFMapEx<NFGUID, int> mxClientIdent;
 
 protected:
 	NFIProxyServerToWorldModule* m_pProxyToWorldModule;

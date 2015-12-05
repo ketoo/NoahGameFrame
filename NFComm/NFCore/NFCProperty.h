@@ -19,7 +19,7 @@ class NFCProperty : public NFIProperty
 public:
     NFCProperty();
 
-    NFCProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex, const std::string& strScriptFunction);
+    NFCProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex, const std::string& strScriptFunction);
 
     virtual ~NFCProperty();
 
@@ -29,8 +29,7 @@ public:
     virtual bool SetInt(const NFINT64 value);
     virtual bool SetFloat(const double value);
     virtual bool SetString(const std::string& value);
-    virtual bool SetObject(const NFIDENTID& value);
-    virtual bool SetPointer(const void* value);
+    virtual bool SetObject(const NFGUID& value);
 
     virtual const TDATA_TYPE GetType() const;
     virtual const bool GeUsed() const;
@@ -51,8 +50,7 @@ public:
     virtual NFINT64 GetInt() const;
     virtual double GetFloat() const;
     virtual const std::string& GetString() const;
-    virtual const NFIDENTID& GetObject() const;
-    virtual void* GetPointer() const;
+    virtual const NFGUID& GetObject() const;
 
     virtual bool Changed() const;
 
@@ -68,12 +66,12 @@ private:
     typedef std::vector<PROPERTY_EVENT_FUNCTOR_PTR> TPROPERTYCALLBACKEX;
     TPROPERTYCALLBACKEX mtPropertyCallback;
 
-    NFIDENTID mSelf;
+    NFGUID mSelf;
     std::string msPropertyName;//可以想办法与基本类型共用
     TDATA_TYPE eType;//只有在不存在指针的时候才用这个判断类型--为节约内存
     //NFCDataList    mVarProperty;
     //NFIDataList::TData* m_pTData;
-    NF_SHARE_PTR<NFIDataList::TData> m_pTData;
+    NF_SHARE_PTR<NFIDataList::TData> mxData;
 
     bool mbPublic;
     bool mbPrivate;

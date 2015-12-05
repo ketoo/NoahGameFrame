@@ -46,14 +46,14 @@ public:
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
 
-    virtual bool SendMsgToGame(const int nGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer = NFIDENTID());
+    virtual bool SendMsgToGame(const int nGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer = NFGUID());
     virtual bool SendMsgToGame( const NFIDataList& argObjectVar, const NFIDataList& argGameID,  const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData);
-    virtual bool SendMsgToPlayer( const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFIDENTID nPlayer);
+    virtual bool SendMsgToPlayer( const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer);
 
     virtual int OnObjectListEnter( const NFIDataList& self, const NFIDataList& argVar );
     virtual int OnObjectListLeave( const NFIDataList& self, const NFIDataList& argVar );
-    virtual int OnPropertyEnter( const NFIDataList& argVar, const NFIDataList& argGameID, const NFIDENTID& self );
-    virtual int OnRecordEnter( const NFIDataList& argVar,const NFIDataList& argGameID, const NFIDENTID& self );
+    virtual int OnPropertyEnter( const NFIDataList& argVar, const NFIDataList& argGameID, const NFGUID& self );
+    virtual int OnRecordEnter( const NFIDataList& argVar,const NFIDataList& argGameID, const NFGUID& self );
 
 protected:
 
@@ -69,7 +69,7 @@ protected:
 
 
 protected:
-    int OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnSelectServerEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
 protected:
 
