@@ -46,7 +46,7 @@ NFCProperty::~NFCProperty()
 
 void NFCProperty::SetValue(const NFIDataList::TData& TData)
 {
-    if (eType != TData.GetInt())
+    if (eType != TData.GetType())
     {
         return;
     }
@@ -156,7 +156,7 @@ NFINT64 NFCProperty::GetInt() const
         return 0;
     }
 
-    return mxData->GetInt();;
+    return mxData->GetInt();
 }
 
 double NFCProperty::GetFloat() const
