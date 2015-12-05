@@ -46,8 +46,8 @@ bool NFCSkillModule::AfterInit()
     assert( NULL != m_pPropertyModule );
     assert( NULL != m_pSceneProcessModule );
 
-    m_pEventProcessModule->AddEventCallBack( NFIDENTID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL, this, &NFCSkillModule::OnRequireUseSkillEvent );
-    m_pEventProcessModule->AddEventCallBack( NFIDENTID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL_POS, this, &NFCSkillModule::OnRequireUseSkillPosEvent );
+    m_pEventProcessModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL, this, &NFCSkillModule::OnRequireUseSkillEvent );
+    m_pEventProcessModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL_POS, this, &NFCSkillModule::OnRequireUseSkillPosEvent );
 
     m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCSkillModule::OnClassObjectEvent );
     m_pEventProcessModule->AddClassCallBack( "NPC", this, &NFCSkillModule::OnClassObjectEvent );
@@ -57,7 +57,7 @@ bool NFCSkillModule::AfterInit()
     return true;
 }
 
-int NFCSkillModule::OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCSkillModule::OnClassObjectEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
     if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
     {
@@ -78,7 +78,7 @@ int NFCSkillModule::OnClassObjectEvent( const NFIDENTID& self, const std::string
     return 0;
 }
 
-int NFCSkillModule::OnUseSkill(const NFIDENTID& self, const NFIDataList& var)
+int NFCSkillModule::OnUseSkill(const NFGUID& self, const NFIDataList& var)
 {
     if ( var.GetCount() != 2)
     {
@@ -86,7 +86,7 @@ int NFCSkillModule::OnUseSkill(const NFIDENTID& self, const NFIDataList& var)
     }
 
     const std::string& strSkillID = var.String( 0 );
-    const NFIDENTID& nTargetID = var.Object(1);
+    const NFGUID& nTargetID = var.Object(1);
 
     NF_SHARE_PTR<NFIObject> pObejct = m_pKernelModule->GetObject(self);
     if ( pObejct == NULL )
@@ -164,7 +164,7 @@ int NFCSkillModule::OnUseSkill(const NFIDENTID& self, const NFIDataList& var)
     return 0;
 }
 
-int NFCSkillModule::OnRequireUseSkillEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
+int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const int nEventID, const NFIDataList& var )
 {
     if ( var.GetCount() < 3)
     {
@@ -244,7 +244,7 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFIDENTID& self, const int nEv
     return 0;
 }
 
-int NFCSkillModule::OnRequireUseSkillPosEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
+int NFCSkillModule::OnRequireUseSkillPosEvent( const NFGUID& self, const int nEventID, const NFIDataList& var )
 {
     if ( var.GetCount() < 4 ||
         !var.TypeEx(TDATA_OBJECT, TDATA_FLOAT, TDATA_FLOAT, TDATA_FLOAT, TDATA_OBJECT))
@@ -269,7 +269,7 @@ int NFCSkillModule::OnRequireUseSkillPosEvent( const NFIDENTID& self, const int 
     return 0;
 }
 
-int NFCSkillModule::AddSkill( const NFIDENTID& self, const std::string& strSkillName )
+int NFCSkillModule::AddSkill( const NFGUID& self, const std::string& strSkillName )
 {
     if(m_pElementInfoModule->ExistElement(strSkillName))
     {
@@ -287,12 +287,12 @@ int NFCSkillModule::AddSkill( const NFIDENTID& self, const std::string& strSkill
         }
     }
 
-    m_pLogModule->LogElement(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), strSkillName, "There is no element", __FUNCTION__, __LINE__);
+    m_pLogModule->LogElement(NFILogModule::NLL_ERROR_NORMAL, NFGUID(), strSkillName, "There is no element", __FUNCTION__, __LINE__);
 
     return 0;
 }
 
-int NFCSkillModule::ExistSkill( const NFIDENTID& self, const std::string& strSkillName )
+int NFCSkillModule::ExistSkill( const NFGUID& self, const std::string& strSkillName )
 {
     NF_SHARE_PTR<NFIRecord> pRecord =  m_pKernelModule->FindRecord( self, mstrSkillTableName );
     if ( pRecord )
@@ -308,7 +308,7 @@ int NFCSkillModule::ExistSkill( const NFIDENTID& self, const std::string& strSki
     return -1;
 }
 
-int NFCSkillModule::SetSkillLevel( const NFIDENTID& self, const std::string& strSkillName, const int nLevel )
+int NFCSkillModule::SetSkillLevel( const NFGUID& self, const std::string& strSkillName, const int nLevel )
 {
     //     int nFindRow = ExistSkill( self, strSkillName );
     //     if ( nFindRow >= 0 )
@@ -319,7 +319,7 @@ int NFCSkillModule::SetSkillLevel( const NFIDENTID& self, const std::string& str
     return 0;
 }
 
-int NFCSkillModule::SetSkillGem( const NFIDENTID& self, const std::string& strSkillName, const std::string& strGemName )
+int NFCSkillModule::SetSkillGem( const NFGUID& self, const std::string& strSkillName, const std::string& strGemName )
 {
     int nFindRow = ExistSkill( self, strSkillName );
     if ( nFindRow >= 0 )
@@ -330,7 +330,7 @@ int NFCSkillModule::SetSkillGem( const NFIDENTID& self, const std::string& strSk
     return 0;
 }
 
-int NFCSkillModule::SetSkillGemLevel( const NFIDENTID& self, const std::string& strSkillName, const int nLevel )
+int NFCSkillModule::SetSkillGemLevel( const NFGUID& self, const std::string& strSkillName, const int nLevel )
 {
     int nFindRow = ExistSkill( self, strSkillName );
     if ( nFindRow >= 0 )
@@ -341,7 +341,7 @@ int NFCSkillModule::SetSkillGemLevel( const NFIDENTID& self, const std::string& 
     return 0;
 }
 
-int NFCSkillModule::GetSkillLevel( const NFIDENTID& self, const std::string& strSkillName )
+int NFCSkillModule::GetSkillLevel( const NFGUID& self, const std::string& strSkillName )
 {
     //     int nFindRow = ExistSkill( self, strSkillName );
     //     if ( nFindRow >= 0 )
@@ -352,7 +352,7 @@ int NFCSkillModule::GetSkillLevel( const NFIDENTID& self, const std::string& str
     return 0;
 }
 
-std::string NFCSkillModule::GetSkillGem( const NFIDENTID& self, const std::string& strSkillName )
+std::string NFCSkillModule::GetSkillGem( const NFGUID& self, const std::string& strSkillName )
 {
     int nFindRow = ExistSkill( self, strSkillName );
     if ( nFindRow >= 0 )
@@ -363,7 +363,7 @@ std::string NFCSkillModule::GetSkillGem( const NFIDENTID& self, const std::strin
     return NULL_STR;
 }
 
-int NFCSkillModule::GetSkillGemLevel( const NFIDENTID& self, const std::string& strSkillName )
+int NFCSkillModule::GetSkillGemLevel( const NFGUID& self, const std::string& strSkillName )
 {
     int nFindRow = ExistSkill( self, strSkillName );
     if ( nFindRow >= 0 )
@@ -374,7 +374,7 @@ int NFCSkillModule::GetSkillGemLevel( const NFIDENTID& self, const std::string& 
     return 0;
 }
 
-int NFCSkillModule::AddNewerSkill( const NFIDENTID& self )
+int NFCSkillModule::AddNewerSkill( const NFGUID& self )
 {
     //全部技能扫一遍
     //角色第一次上线的话，添加技能

@@ -150,8 +150,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
   <ItemGroup>
     <ClInclude Include="NFContainerModule\NFCContainerModule.h" />
     <ClInclude Include="NFContainerModule\NFIContainerModule.h" />
-    <ClInclude Include="NFGridModule\NFCGridModule.h" />
-    <ClInclude Include="NFGridModule\NFIGridModule.h" />
     <ClInclude Include="NFKernelModule\NFCConcurrentModule.h" />
     <ClInclude Include="NFKernelModule\NFCKernelModule.h" />
     <ClInclude Include="NFKernelModule\NFCUUIDModule.h" />
@@ -167,7 +165,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="NFContainerModule\NFCContainerModule.cpp" />
-    <ClCompile Include="NFGridModule\NFCGridModule.cpp" />
     <ClCompile Include="NFKernelModule\NFCConcurrentModule.cpp" />
     <ClCompile Include="NFKernelModule\NFCKernelModule.cpp" />
     <ClCompile Include="NFKernelModule\NFCUUIDModule.cpp" />

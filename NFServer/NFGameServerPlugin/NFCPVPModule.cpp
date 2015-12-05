@@ -39,7 +39,7 @@ bool NFCPVPModule::AfterInit()
     return true;
 }
 
-bool NFCPVPModule::MatchPVPObject( const NFIDENTID& self )
+bool NFCPVPModule::MatchPVPObject( const NFGUID& self )
 {
 	//应记录玩家处于PVP筹备状态
 	const NFLogicStateType eLogicState = (NFLogicStateType)m_pKernelModule->GetPropertyInt(self, "LogicState");
@@ -53,7 +53,7 @@ bool NFCPVPModule::MatchPVPObject( const NFIDENTID& self )
 	return true;
 }
 
-bool NFCPVPModule::StartPVPWar( const NFIDENTID& self )
+bool NFCPVPModule::StartPVPWar( const NFGUID& self )
 {
 	//应记录玩家处于PVP状态，或者说模块独占状态
 	const NFLogicStateType eLogicState = (NFLogicStateType)m_pKernelModule->GetPropertyInt(self, "LogicState");
@@ -80,7 +80,7 @@ bool NFCPVPModule::StartPVPWar( const NFIDENTID& self )
 	return true;
 }
 
-bool NFCPVPModule::ExitPVPWar( const NFIDENTID& self )
+bool NFCPVPModule::ExitPVPWar( const NFGUID& self )
 {
 	//还原玩家为自由状态
 	const NFLogicStateType eLogicState = (NFLogicStateType)m_pKernelModule->GetPropertyInt(self, "LogicState");

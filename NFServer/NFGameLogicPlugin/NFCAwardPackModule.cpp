@@ -82,7 +82,7 @@ bool NFCAwardPackModule::LoadAwardPackConfig()
 // 
 //         if (pAwardBag->strBagID.empty())
 //         {
-//             m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), pAwardBag->strBagID, "This is empty", __FUNCTION__, __LINE__);
+//             m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(), pAwardBag->strBagID, "This is empty", __FUNCTION__, __LINE__);
 //            NFASSERT(0,"EMPTY PACK", __FILE__, __FUNCTION__); 
 //         }
 // 
@@ -132,7 +132,7 @@ bool NFCAwardPackModule::LoadAwardPackConfig()
     return true;
 }
 
-bool NFCAwardPackModule::DoAward(const NFIDENTID self, const std::string& strPack, const int nMailType, NFIDataList& varItemList, NFIDataList& varCountList)
+bool NFCAwardPackModule::DoAward(const NFGUID self, const std::string& strPack, const int nMailType, NFIDataList& varItemList, NFIDataList& varCountList)
 {
     // 不发邮件的情况下才查找Object
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
@@ -186,7 +186,7 @@ bool NFCAwardPackModule::DoAward(const NFIDENTID self, const std::string& strPac
 
         if (!m_pElementInfoModule->ExistElement(pAwardItem->strConfigID))
         {
-            m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFIDENTID(), pAwardItem->strConfigID, "Config error", __FUNCTION__, __LINE__);
+            m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(), pAwardItem->strConfigID, "Config error", __FUNCTION__, __LINE__);
             return false;
         }
 
@@ -228,7 +228,7 @@ bool NFCAwardPackModule::DoAward(const NFIDENTID self, const std::string& strPac
     return true;
 }
 
-bool NFCAwardPackModule::DoAward( const NFIDENTID self, const std::string& strPack )
+bool NFCAwardPackModule::DoAward( const NFGUID self, const std::string& strPack )
 {
     NFCDataList xItemList;
     NFCDataList xCountList;
@@ -247,7 +247,7 @@ bool NFCAwardPackModule::BeforeShut()
     return true;
 }
 
-float NFCAwardPackModule::GetNoneItemExtenRatio( const NFIDENTID& self, const std::string& strAwardPackID )
+float NFCAwardPackModule::GetNoneItemExtenRatio( const NFGUID& self, const std::string& strAwardPackID )
 {
     float fRatio = 0.0f;
 
@@ -264,12 +264,12 @@ float NFCAwardPackModule::GetNoneItemExtenRatio( const NFIDENTID& self, const st
     return fRatio;
 }
 
-float NFCAwardPackModule::GetEquipItemExtenRatio( const NFIDENTID& self, const std::string& strAwardPackID )
+float NFCAwardPackModule::GetEquipItemExtenRatio( const NFGUID& self, const std::string& strAwardPackID )
 {
     return 0.0f;
 }
 
-bool NFCAwardPackModule::IsEquipItem( const NFIDENTID& self, const std::string& strID )
+bool NFCAwardPackModule::IsEquipItem( const NFGUID& self, const std::string& strID )
 {
     //const int nType = m_pElementInfoModule->GetPropertyInt(strID, "ItemType");
     //if (nType == NFDefine::ItemType_CONS_DATA)

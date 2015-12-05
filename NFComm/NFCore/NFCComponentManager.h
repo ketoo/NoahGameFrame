@@ -10,7 +10,7 @@
 #define _NFC_COMPONENT_MANAGER_H_
 
 #include "NFIComponentManager.h"
-#include "NFComm/NFPluginModule/NFIdentID.h"
+#include "NFComm/NFPluginModule/NFGUID.h"
 
 class NFCComponentManager : public NFIComponentManager
 {
@@ -21,7 +21,7 @@ private:
 	}
 
 public:
-    NFCComponentManager(const NFIDENTID& self)
+    NFCComponentManager(const NFGUID& self)
     {
         mSelf = self;
     }
@@ -41,14 +41,14 @@ public:
 
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
 
-	virtual NFIDENTID Self();
+	virtual NFGUID Self();
 
 protected:
 
 	virtual bool AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent);
 
 private:
-    NFIDENTID mSelf;
+    NFGUID mSelf;
 };
 
 #endif

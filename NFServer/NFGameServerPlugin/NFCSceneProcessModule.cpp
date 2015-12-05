@@ -139,7 +139,7 @@ bool NFCSceneProcessModule::CreateContinerObject( const int nContainerID, const 
                     arg << "Z" << pResourceObject->fSeedZ;
                     arg << "SeedID" << strSeedID;
 
-                    m_pKernelModule->CreateObject( NFIDENTID(), nContainerID, nGroupID, strClassName, pResourceObject->strConfigID, arg );
+                    m_pKernelModule->CreateObject( NFGUID(), nContainerID, nGroupID, strClassName, pResourceObject->strConfigID, arg );
                 }
             }
         }
@@ -204,7 +204,7 @@ bool NFCSceneProcessModule::DestroyCloneScene( const int& nContainerID, const in
     return false;
 }
 
-int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
+int NFCSceneProcessModule::OnEnterSceneEvent( const NFGUID& self, const int nEventID, const NFIDataList& var )
 {
     if ( var.GetCount() != 4 
         || !var.TypeEx(TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_INT, 
@@ -213,7 +213,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
         return 0;
     }
 
-    NFIDENTID ident = var.Object( 0 );
+    NFGUID ident = var.Object( 0 );
     int nType = var.Int( 1 );
     int nTargetScene = var.Int( 2 );
     int nTargetGroupID = var.Int( 3 );
@@ -292,7 +292,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFIDENTID& self, const int n
     return 0;
 }
 
-int NFCSceneProcessModule::OnLeaveSceneEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var )
+int NFCSceneProcessModule::OnLeaveSceneEvent( const NFGUID& object, const int nEventID, const NFIDataList& var )
 {
     if (1 != var.GetCount()
         || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_UNKNOWN))
@@ -314,7 +314,7 @@ int NFCSceneProcessModule::OnLeaveSceneEvent( const NFIDENTID& object, const int
     return 0;
 }
 
-int NFCSceneProcessModule::OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCSceneProcessModule::OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
     if ( strClassName == "Player" )
     {

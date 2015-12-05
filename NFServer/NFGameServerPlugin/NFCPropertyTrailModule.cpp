@@ -47,19 +47,19 @@ bool NFCPropertyTrailModule::AfterInit()
     return true;
 }
 
-void NFCPropertyTrailModule::StartTrail( const NFIDENTID self )
+void NFCPropertyTrailModule::StartTrail( const NFGUID self )
 {
 	LogObjectData(self);
 
 	
 }
 
-void NFCPropertyTrailModule::EndTrail( const NFIDENTID self )
+void NFCPropertyTrailModule::EndTrail( const NFGUID self )
 {
 
 }
 
-int NFCPropertyTrailModule::LogObjectData( const NFIDENTID& self )
+int NFCPropertyTrailModule::LogObjectData( const NFGUID& self )
 {
 	NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
 	if (nullptr == xObject)
@@ -115,22 +115,22 @@ int NFCPropertyTrailModule::LogObjectData( const NFIDENTID& self )
 	return 0;
 }
 
-int NFCPropertyTrailModule::OnObjectPropertyEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
+int NFCPropertyTrailModule::OnObjectPropertyEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
 {
 	std::ostringstream stream;
 
 	stream << " Trailing ";
 	stream << " [Old] ";
-	stream << oldVar.String();
+	stream << oldVar.GetString();
 	stream << " [New] ";
-	stream << newVar.String();
+	stream << newVar.GetString();
 
 	m_pLogModule->LogProperty(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, strPropertyName, stream.str(),  __FUNCTION__, __LINE__);
 
 	return 0;
 }
 
-int NFCPropertyTrailModule::OnObjectRecordEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar )
+int NFCPropertyTrailModule::OnObjectRecordEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar )
 {
 	std::ostringstream stream;
 	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, xEventData.strRecordName);
@@ -191,7 +191,7 @@ int NFCPropertyTrailModule::OnObjectRecordEvent( const NFIDENTID& self, const RE
 	return 0;
 }
 
-int NFCPropertyTrailModule::TrailObjectData( const NFIDENTID& self )
+int NFCPropertyTrailModule::TrailObjectData( const NFGUID& self )
 {
 	NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
 	if (nullptr == xObject)
