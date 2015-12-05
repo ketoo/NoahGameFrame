@@ -22,8 +22,7 @@ public:
     virtual bool SetInt(const NFINT64 value) = 0;
     virtual bool SetFloat(const double value) = 0;
     virtual bool SetString(const std::string& value) = 0;
-    virtual bool SetObject(const NFIDENTID& value) = 0;
-    virtual bool SetPointer(const void* value) = 0;
+    virtual bool SetObject(const NFGUID& value) = 0;
 
     virtual const TDATA_TYPE GetType() const = 0;
     virtual const bool GeUsed() const = 0;
@@ -44,8 +43,7 @@ public:
     virtual NFINT64 GetInt() const = 0;
     virtual double GetFloat() const = 0;
     virtual const std::string& GetString() const = 0;
-    virtual const NFIDENTID& GetObject() const = 0;
-    virtual void* GetPointer() const = 0;
+    virtual const NFGUID& GetObject() const = 0;
 
     virtual bool Changed() const = 0;
 

@@ -74,7 +74,7 @@ bool NFCProxyServerNet_ServerModule::Execute(const float fLasFrametime, const fl
 	return NFINetModule::Execute(fLasFrametime, fStartedTime);
 }
 
-int NFCProxyServerNet_ServerModule::HB_OnConnectCheckTime( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var )
+int NFCProxyServerNet_ServerModule::HB_OnConnectCheckTime( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var )
 {
     m_pKernelModule->DestroyObject(self);
 
@@ -83,7 +83,7 @@ int NFCProxyServerNet_ServerModule::HB_OnConnectCheckTime( const NFIDENTID& self
 
 int NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    NFIDENTID nPlayerID;
+    NFGUID nPlayerID;
     NFMsg::ReqAccountLogin xMsg;
     if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
@@ -170,22 +170,22 @@ void NFCProxyServerNet_ServerModule::OnSocketClientEvent( const int nSockIndex, 
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     } 
     else if (eEvent & NF_NET_EVENT_ERROR) 
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     }
     else if (eEvent & NF_NET_EVENT_TIMEOUT)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     }
     else  if (eEvent == NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
         OnClientConnected(nSockIndex);
     }
 }
@@ -222,14 +222,14 @@ void NFCProxyServerNet_ServerModule::OnClientDisconnect( const int nAddress )
             }
         }
 
-		NFIDENTID xClientIdent = pNetObject->GetClientID();
+		NFGUID xClientIdent = pNetObject->GetClientID();
 		mxClientIdent.RemoveElement(xClientIdent);
     }
 }
 
 int NFCProxyServerNet_ServerModule::OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    NFIDENTID nPlayerID;
+    NFGUID nPlayerID;
     NFMsg::ReqSelectServer xMsg;
     if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
@@ -263,7 +263,7 @@ int NFCProxyServerNet_ServerModule::OnSelectServerProcess(const int nSockIndex, 
 
 int NFCProxyServerNet_ServerModule::OnReqServerListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    NFIDENTID nPlayerID;
+    NFGUID nPlayerID;
     NFMsg::ReqServerList xMsg;
     if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
@@ -339,7 +339,7 @@ int NFCProxyServerNet_ServerModule::Transpond(const int nSockIndex, const int nM
 
 void NFCProxyServerNet_ServerModule::OnClientConnected( const int nAddress )
 {
-	NFIDENTID xClientIdent = m_pUUIDModule->CreateGUID();
+	NFGUID xClientIdent = m_pUUIDModule->CreateGUID();
     NetObject* pNetObject = GetNet()->GetNetObject(nAddress);
     if (pNetObject)
     {
@@ -352,7 +352,7 @@ void NFCProxyServerNet_ServerModule::OnClientConnected( const int nAddress )
 int NFCProxyServerNet_ServerModule::OnReqRoleListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     //在没有正式进入游戏之前，nPlayerID都是FD
-    NFIDENTID nPlayerID;
+    NFGUID nPlayerID;
     NFMsg::ReqRoleList xData;
     if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
     {
@@ -398,7 +398,7 @@ int NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess(const int nSockIndex,
     //在没有正式进入游戏之前，nPlayerID都是FD
 
 
-    NFIDENTID nPlayerID;
+    NFGUID nPlayerID;
     NFMsg::ReqCreateRole xData;
     if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
     {
@@ -442,7 +442,7 @@ int NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess(const int nSockIndex,
 int NFCProxyServerNet_ServerModule::OnReqDelRoleProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     //在没有正式进入游戏之前，nPlayerID都是FD
-    NFIDENTID nPlayerID;
+    NFGUID nPlayerID;
     NFMsg::ReqDeleteRole xData;
     if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
     {
@@ -471,7 +471,7 @@ int NFCProxyServerNet_ServerModule::OnReqDelRoleProcess(const int nSockIndex, co
 int NFCProxyServerNet_ServerModule::OnReqEnterGameServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     //在没有正式进入游戏之前，nPlayerID都是FD
-    NFIDENTID nPlayerID;
+    NFGUID nPlayerID;
     NFMsg::ReqEnterGameServer xData;
     if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
     {
@@ -514,7 +514,7 @@ int NFCProxyServerNet_ServerModule::OnReqEnterGameServer(const int nSockIndex, c
     return 0;
 }
 
-int NFCProxyServerNet_ServerModule::EnterGameSuccessEvent(const NFIDENTID xClientID, const NFIDENTID xPlayerID)
+int NFCProxyServerNet_ServerModule::EnterGameSuccessEvent(const NFGUID xClientID, const NFGUID xPlayerID)
 {
 	NF_SHARE_PTR<int> pFD = mxClientIdent.GetElement(xClientID);
 	if (pFD)

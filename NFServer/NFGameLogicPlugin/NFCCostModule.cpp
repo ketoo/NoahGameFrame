@@ -31,7 +31,7 @@ bool NFCCostModule::AfterInit()
     return true;
 }
 
-bool NFCCostModule::Cost(const NFIDENTID& self, const std::string& strCostID)
+bool NFCCostModule::Cost(const NFGUID& self, const std::string& strCostID)
 {
     NF_SHARE_PTR<NFIObject> pOjbect = m_pKernelModule->GetObject(self);
     if (nullptr == pOjbect)
@@ -67,7 +67,7 @@ bool NFCCostModule::Cost(const NFIDENTID& self, const std::string& strCostID)
     return true;
 }
 
-bool NFCCostModule::Cost(const NFIDENTID& self, const std::list<std::string>& xCostList)
+bool NFCCostModule::Cost(const NFGUID& self, const std::list<std::string>& xCostList)
 {
     NF_SHARE_PTR<NFIObject> pOjbect = m_pKernelModule->GetObject(self);
     if (nullptr == pOjbect)

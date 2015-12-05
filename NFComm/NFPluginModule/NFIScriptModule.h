@@ -12,7 +12,7 @@
 #include <iostream>
 #include "NFILogicModule.h"
 #include "NFComm/NFCore/NFCDataList.h"
-#include "NFComm/NFPluginModule/NFIdentID.h"
+#include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
@@ -72,11 +72,11 @@ private:
 };
 
 class NFIScriptModule
-    : public NFILogicModule, public NFMap<NFIDENTID, NFCSriptData>
+    : public NFILogicModule, public NFMap<NFGUID, NFCSriptData>
 {
 
 public:
-    virtual int DoHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
+    virtual int DoHeartBeatCommonCB(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
     {
         NFCSriptData* pScriptData = GetElement(self);
         if (pScriptData)
@@ -97,7 +97,7 @@ public:
         return 0;
     }
 
-    virtual int DoEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIDataList& var)
+    virtual int DoEventCommonCB(const NFGUID& self, const int nEventID, const NFIDataList& var)
     {
         NFCSriptData* pScriptData = GetElement(self);
         if (pScriptData)
@@ -119,7 +119,7 @@ public:
         return 0;
     }
 
-    virtual int DoPropertyCommEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+    virtual int DoPropertyCommEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
     {
         NFCSriptData* pScriptData = GetElement(self);
         if (pScriptData)
@@ -141,7 +141,7 @@ public:
         return 0;
     }
 
-    virtual int DoRecordCommonEvent(const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar)
+    virtual int DoRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar)
     {
         NFCSriptData* pScriptData = GetElement(self);
         if (pScriptData)
@@ -163,7 +163,7 @@ public:
         return 0;
     }
 
-    virtual int DoClassCommonEvent(NFILogicClassModule* pLogicClassModule, const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+    virtual int DoClassCommonEvent(NFILogicClassModule* pLogicClassModule, const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
     {
         std::string strSerializationName;
 
@@ -208,15 +208,15 @@ public:
     }
 
     //call script
-    virtual int DoScript(const NFIDENTID& self, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg) = 0;
-    virtual int DoEventScript(const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg) = 0;
-    virtual int DoHeartBeatScript(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction) = 0;
+    virtual int DoScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg) = 0;
+    virtual int DoEventScript(const NFGUID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg) = 0;
+    virtual int DoHeartBeatScript(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction) = 0;
 
-    virtual int DoScriptPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFCDataList::TData& oldVar, const NFCDataList::TData& newVar) = 0;
-    virtual int DoScriptRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCDataList& oldVar, const NFCDataList& newVar) = 0;
+    virtual int DoScriptPropertyCallBack(const NFGUID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFCDataList::TData& oldVar, const NFCDataList::TData& newVar) = 0;
+    virtual int DoScriptRecordCallBack(const NFGUID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCDataList& oldVar, const NFCDataList& newVar) = 0;
 
     // operating function
-    virtual bool AddPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction)
+    virtual bool AddPropertyCallBack(const NFGUID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction)
     {
         NFCSriptData* pScriptData = GetElement(self);
         if (!pScriptData)
@@ -241,12 +241,12 @@ public:
         return true;
     }
 
-    int OnPropertyCB(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+    int OnPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
     {
         return DoPropertyCommEvent(self, strPropertyName, oldVar, newVar);
     }
 
-    virtual bool AddRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction)
+    virtual bool AddRecordCallBack(const NFGUID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction)
     {
         NFCSriptData* pScriptData = GetElement(self);
         if (!pScriptData)
@@ -271,12 +271,12 @@ public:
         return true;
     }
 
-    int OnRecordCB(const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar)
+    int OnRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar)
     {
         return DoRecordCommonEvent(self, xEventData, oldVar, newVar);
     }
 
-    virtual bool AddHeartBeatCallBack(const NFIDENTID& self, const std::string& strHeartBeatName, const std::string& strComponentName, const std::string& strFunction, const float fTime, const int nCount)
+    virtual bool AddHeartBeatCallBack(const NFGUID& self, const std::string& strHeartBeatName, const std::string& strComponentName, const std::string& strFunction, const float fTime, const int nCount)
     {
         NFCSriptData* pScriptData = GetElement(self);
         if (!pScriptData)
@@ -302,12 +302,12 @@ public:
         return true;
     }
 
-    int OnHeartBeatCB(const NFIDENTID& self, const std::string& strHeartBeatName, const float fTime, const int nCount)
+    int OnHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float fTime, const int nCount)
     {
         return DoHeartBeatCommonCB(self, strHeartBeatName, fTime, nCount);
     }
 
-    virtual bool AddEventCallBack(const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction)
+    virtual bool AddEventCallBack(const NFGUID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction)
     {
         NFCSriptData* pScriptData = GetElement(self);
         if (!pScriptData)
@@ -332,25 +332,25 @@ public:
         return true;
     }
 
-    int OnEventCB(const NFIDENTID& self, const int nEventID, const NFIDataList& argVar)
+    int OnEventCB(const NFGUID& self, const int nEventID, const NFIDataList& argVar)
     {
         return DoEventCommonCB(self, nEventID, argVar);
     }
 };
 
-static bool KernelModule_DoEvent(NFINT64 kernelAddress, const NFIDENTID& self, const int nEventID, const NFCDataList& valueList)
+static bool KernelModule_DoEvent(NFINT64 kernelAddress, const NFGUID& self, const int nEventID, const NFCDataList& valueList)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     NFIEventProcessModule* pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pKernelModule->GetPluginManager()->FindModule("NFCEventProcessModule"));
     return pEventProcessModule->DoEvent(self, nEventID, valueList);
 }
 
-static bool KernelModule_FindHeartBeat(NFIKernelModule* pKernelModule, const NFIDENTID& self, const std::string& strHeartBeatName)
+static bool KernelModule_FindHeartBeat(NFIKernelModule* pKernelModule, const NFGUID& self, const std::string& strHeartBeatName)
 {
     return pKernelModule->FindHeartBeat(self, strHeartBeatName);
 }
 
-static bool KernelModule_RemoveHeartBeat(NFIKernelModule* pKernelModule, const NFIDENTID& self, const std::string& strHeartBeatName)
+static bool KernelModule_RemoveHeartBeat(NFIKernelModule* pKernelModule, const NFGUID& self, const std::string& strHeartBeatName)
 {
     return pKernelModule->RemoveHeartBeat(self, strHeartBeatName);
 }
@@ -387,103 +387,103 @@ static bool KernelModule_ExistContainer(NFIKernelModule* pKernelModule, const in
     return pKernelModule->ExistContainer(nContainerIndex);
 }
 
-static bool KernelModule_SetPropertyInt(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strPropertyName, const int nValue)
+static bool KernelModule_SetPropertyInt(NFINT64 kernelAddress, const NFGUID& self, const std::string& strPropertyName, const int nValue)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->SetPropertyInt(self, strPropertyName, nValue);
 }
 
-static bool KernelModule_SetPropertyFloat(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strPropertyName,  const double dValue)
+static bool KernelModule_SetPropertyFloat(NFINT64 kernelAddress, const NFGUID& self, const std::string& strPropertyName,  const double dValue)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->SetPropertyFloat(self, strPropertyName, dValue);
 }
 
-static bool KernelModule_SetPropertyString(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strPropertyName, const std::string& strValue)
+static bool KernelModule_SetPropertyString(NFINT64 kernelAddress, const NFGUID& self, const std::string& strPropertyName, const std::string& strValue)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->SetPropertyString(self, strPropertyName, strValue);
 }
 
-static bool KernelModule_SetPropertyObject(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strPropertyName, const NFIDENTID& objectValue)
+static bool KernelModule_SetPropertyObject(NFINT64 kernelAddress, const NFGUID& self, const std::string& strPropertyName, const NFGUID& objectValue)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->SetPropertyObject(self, strPropertyName, objectValue);
 }
 
-static NFINT64 KernelModule_GetPropertyInt(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strPropertyName)
+static NFINT64 KernelModule_GetPropertyInt(NFINT64 kernelAddress, const NFGUID& self, const std::string& strPropertyName)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->GetPropertyInt(self, strPropertyName);
 }
 
-static double KernelModule_GetPropertyFloat(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strPropertyName)
+static double KernelModule_GetPropertyFloat(NFINT64 kernelAddress, const NFGUID& self, const std::string& strPropertyName)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->GetPropertyFloat(self, strPropertyName);
 }
 
-static const std::string& KernelModule_GetPropertyString(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strPropertyName)
+static const std::string& KernelModule_GetPropertyString(NFINT64 kernelAddress, const NFGUID& self, const std::string& strPropertyName)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->GetPropertyString(self, strPropertyName);
 }
 
-static NFIDENTID KernelModule_GetPropertyObject(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strPropertyName)
+static NFGUID KernelModule_GetPropertyObject(NFINT64 kernelAddress, const NFGUID& self, const std::string& strPropertyName)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->GetPropertyObject(self, strPropertyName);
 }
 
-static bool KernelModule_SetRecordInt(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const int nValue)
+static bool KernelModule_SetRecordInt(NFINT64 kernelAddress, const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol, const int nValue)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->SetRecordInt(self, strRecordName, nRow, nCol, nValue);
 }
 
-static bool KernelModule_SetRecordFloat(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol,  const double dValue)
+static bool KernelModule_SetRecordFloat(NFINT64 kernelAddress, const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol,  const double dValue)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->SetRecordFloat(self, strRecordName, nRow, nCol, dValue);
 }
 
-static bool KernelModule_SetRecordString(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue)
+static bool KernelModule_SetRecordString(NFINT64 kernelAddress, const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->SetRecordString(self, strRecordName, nRow, nCol, strValue);
 }
 
-static bool KernelModule_SetRecordObject(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFIDENTID& objectValue)
+static bool KernelModule_SetRecordObject(NFINT64 kernelAddress, const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFGUID& objectValue)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->SetRecordObject(self, strRecordName, nRow, nCol, objectValue);
 }
 
-static NFINT64 KernelModule_GetRecordInt(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+static NFINT64 KernelModule_GetRecordInt(NFINT64 kernelAddress, const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->GetRecordInt(self, strRecordName, nRow, nCol);
 }
 
-static double KernelModule_GetRecordFloat(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+static double KernelModule_GetRecordFloat(NFINT64 kernelAddress, const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->GetRecordFloat(self, strRecordName, nRow, nCol);
 }
 
-static const std::string& KernelModule_GetRecordString(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+static const std::string& KernelModule_GetRecordString(NFINT64 kernelAddress, const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->GetRecordString(self, strRecordName, nRow, nCol);
 }
 
-static NFIDENTID KernelModule_GetRecordObject(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strRecordName, const int nRow, const int nCol)
+static NFGUID KernelModule_GetRecordObject(NFINT64 kernelAddress, const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     return pKernelModule->GetRecordObject(self, strRecordName, nRow, nCol);
 }
 
-static int KernelModule_AddRow(NFINT64 kernelAddress, const NFIDENTID& self, const std::string& strRecordName, const NFCDataList& var)
+static int KernelModule_AddRow(NFINT64 kernelAddress, const NFGUID& self, const std::string& strRecordName, const NFCDataList& var)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     NF_SHARE_PTR<NFIRecord> pRecord = pKernelModule->FindRecord(self, strRecordName);

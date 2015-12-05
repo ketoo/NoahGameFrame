@@ -45,7 +45,7 @@ bool NFCLevelModule::AfterInit()
     return true;
 }
 
-int NFCLevelModule::AddExp( const NFIDENTID& self, const int nExp)
+int NFCLevelModule::AddExp( const NFGUID& self, const int nExp)
 {
     NFJobType eJobType = ( NFJobType )m_pKernelModule->GetPropertyInt( self, "Job" );
     int nCurExp = m_pKernelModule->GetPropertyInt( self, "EXP" );
@@ -78,24 +78,24 @@ int NFCLevelModule::AddExp( const NFIDENTID& self, const int nExp)
     return 0;
 }
 
-int NFCLevelModule::OnKillObject( const NFIDENTID& self, const NFIDENTID& other )
+int NFCLevelModule::OnKillObject( const NFGUID& self, const NFGUID& other )
 {
     return 0;
 }
 
-int NFCLevelModule::OnDead( const NFIDENTID& self, const NFIDENTID& other )
+int NFCLevelModule::OnDead( const NFGUID& self, const NFGUID& other )
 {
     //½µ¼¶µô¾­Ñé£¿
     return 0;
 }
 
-int NFCLevelModule::OnObjectExpEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
+int NFCLevelModule::OnObjectExpEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar )
 {
 
     return 0;
 }
 
-int NFCLevelModule::OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCLevelModule::OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
     if ( strClassName == "Player"
          && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
@@ -111,11 +111,11 @@ int NFCLevelModule::OnObjectClassEvent( const NFIDENTID& self, const std::string
     return 0;
 }
 
-int NFCLevelModule::OnObjectBeKilled( const NFIDENTID& object, const int nEventID, const NFIDataList& var )
+int NFCLevelModule::OnObjectBeKilled( const NFGUID& object, const int nEventID, const NFIDataList& var )
 {
     if ( var.GetCount() == 1 && var.Type( 0 ) == TDATA_OBJECT )
     {
-        NFIDENTID identKiller = var.Object( 0 );
+        NFGUID identKiller = var.Object( 0 );
         if ( m_pKernelModule->GetObject( identKiller ) )
         {
             int nExp = m_pKernelModule->GetPropertyInt( object, "EXP" );

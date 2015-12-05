@@ -36,7 +36,7 @@ public:
 
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
 
-    virtual NFIDENTID CreateGUID();
+    virtual NFGUID CreateGUID();
 
     virtual NFINT64 GetIdentID();
     virtual void SetIdentID(NFINT64 nID);

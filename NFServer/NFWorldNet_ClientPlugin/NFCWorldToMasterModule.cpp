@@ -38,7 +38,7 @@ bool NFCWorldToMasterModule::AfterInit()
     assert(NULL != m_pElementInfoModule);
     assert(NULL != m_pLogModule);
 
-	m_pEventProcessModule->AddEventCallBack(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER_RESULTS, this, &NFCWorldToMasterModule::OnSelectServerResultsEvent);
+	m_pEventProcessModule->AddEventCallBack(NFGUID(), NFED_ON_CLIENT_SELECT_SERVER_RESULTS, this, &NFCWorldToMasterModule::OnSelectServerResultsEvent);
 
 	NFIClusterClientModule::Bind(this, &NFCWorldToMasterModule::OnReciveMSPack, &NFCWorldToMasterModule::OnSocketMSEvent);
 
@@ -119,7 +119,7 @@ void NFCWorldToMasterModule::Register(NFINet* pNet)
 					int nTargetID = pServerData->nGameID;
 					SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED, xMsg);
 
-					m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Register");
+					m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Register");
 				}
 			}
 		}
@@ -133,7 +133,7 @@ void NFCWorldToMasterModule::RefreshWorldInfo()
 
 int NFCWorldToMasterModule::OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	NFIDENTID nPlayerID;
+	NFGUID nPlayerID;
 	NFMsg::ReqConnectWorld xMsg;
 	if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
@@ -142,12 +142,12 @@ int NFCWorldToMasterModule::OnSelectServerProcess(const int nSockIndex, const in
 
     NFCDataList var;
     var << xMsg.world_id() << NFINetModule::PBToNF(xMsg.sender())  << xMsg.login_id() << xMsg.account();
-    m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_CLIENT_SELECT_SERVER, var);
+    m_pEventProcessModule->DoEvent(NFGUID(), NFED_ON_CLIENT_SELECT_SERVER, var);
 
     return 0;
 }
 
-int NFCWorldToMasterModule::OnSelectServerResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
+int NFCWorldToMasterModule::OnSelectServerResultsEvent(const NFGUID& object, const int nEventID, const NFIDataList& var)
 {
     if (var.GetCount() != 7
         || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_OBJECT,
@@ -158,7 +158,7 @@ int NFCWorldToMasterModule::OnSelectServerResultsEvent(const NFIDENTID& object, 
     }
 
     const int nWorldID = var.Int(0);
-    const NFIDENTID xClientIdent = var.Object(1);
+    const NFGUID xClientIdent = var.Object(1);
     const int nLoginID = var.Int(2);
     const std::string& strAccount = var.String(3);
     const std::string& strWorldAddress = var.String(4);
@@ -182,7 +182,7 @@ int NFCWorldToMasterModule::OnSelectServerResultsEvent(const NFIDENTID& object, 
 
 int NFCWorldToMasterModule::OnKickClientProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	NFIDENTID nPlayerID;
+	NFGUID nPlayerID;
 	NFMsg::ReqKickFromWorld xMsg;
 	if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
@@ -192,7 +192,7 @@ int NFCWorldToMasterModule::OnKickClientProcess(const int nSockIndex, const int 
     //T»À,œ¬œﬂ
     NFCDataList var;
     var << xMsg.world_id() << xMsg.account();
-    m_pEventProcessModule->DoEvent(NFIDENTID(), NFED_ON_KICK_FROM_SERVER, var);
+    m_pEventProcessModule->DoEvent(NFGUID(), NFED_ON_KICK_FROM_SERVER, var);
     return 0;
 }
 
@@ -218,19 +218,19 @@ void NFCWorldToMasterModule::OnSocketMSEvent( const int nSockIndex, const NF_NET
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
     } 
     else if (eEvent & NF_NET_EVENT_ERROR) 
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
     }
     else if (eEvent & NF_NET_EVENT_TIMEOUT)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
     }
     else  if (eEvent == NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
         Register(pNet);
     }
 }
@@ -252,5 +252,5 @@ bool NFCWorldToMasterModule::BeforeShut()
 
 void NFCWorldToMasterModule::LogServerInfo( const std::string& strServerInfo )
 {
-	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), strServerInfo, "");
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), strServerInfo, "");
 }

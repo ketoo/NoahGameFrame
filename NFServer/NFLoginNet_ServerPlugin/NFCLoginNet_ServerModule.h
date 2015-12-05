@@ -25,7 +25,7 @@
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 
 #define NET_MSG_PROCESS(xNFMsg, msg) \
-    NFIDENTID nPlayerID; \
+    NFGUID nPlayerID; \
     xNFMsg xMsg; \
     if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID)) \
     { \
@@ -81,10 +81,10 @@ protected:
     //////////////////////////////////////////////////////////////////////////
 
     //选择大世界结果(发下key等给客户端)
-    int OnSelectWorldResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnSelectWorldResultsEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
     //登入结果
-    int OnLoginResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnLoginResultsEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
 
 protected:
@@ -92,7 +92,7 @@ protected:
 protected:
 	void SynWorldToClient(const int nFD);
 
-	NFMapEx<NFIDENTID, int> mxClientIdent;
+	NFMapEx<NFGUID, int> mxClientIdent;
 
 private:
 
