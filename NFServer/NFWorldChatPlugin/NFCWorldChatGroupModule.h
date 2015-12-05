@@ -35,19 +35,19 @@ public:
     virtual bool AfterInit();
 
 public:
-    virtual bool JoinGroup(const NFIDENTID& self, const NFIDENTID& xGroupID);
-    virtual const NFIDENTID& CreateGroup(const NFIDENTID& self);
-    virtual bool QuitGroup(const NFIDENTID& self, const NFIDENTID& xGroupID);
-    virtual bool DeleteGroup(const NFIDENTID& self, const NFIDENTID& xGroupID);
-    virtual NF_SHARE_PTR<NFIObject> GetGroup(const NFIDENTID& self);
-    virtual bool GetOnlineMember( const NFIDENTID& self, const NFIDENTID& xGroupID, NFCDataList& varMemberList, NFCDataList& varGameList);
-    virtual bool Online(const NFIDENTID& self, const NFIDENTID& xGroupID, const int& nGameID);
-    virtual bool Offeline(const NFIDENTID& self, const NFIDENTID& xGroupID);
+    virtual bool JoinGroup(const NFGUID& self, const NFGUID& xGroupID);
+    virtual const NFGUID& CreateGroup(const NFGUID& self);
+    virtual bool QuitGroup(const NFGUID& self, const NFGUID& xGroupID);
+    virtual bool DeleteGroup(const NFGUID& self, const NFGUID& xGroupID);
+    virtual NF_SHARE_PTR<NFIObject> GetGroup(const NFGUID& self);
+    virtual bool GetOnlineMember( const NFGUID& self, const NFGUID& xGroupID, NFCDataList& varMemberList, NFCDataList& varGameList);
+    virtual bool Online(const NFGUID& self, const NFGUID& xGroupID, const int& nGameID);
+    virtual bool Offeline(const NFGUID& self, const NFGUID& xGroupID);
 
 protected:
-    void CheckLoadGuild( const NFIDENTID& self, const NFIDENTID& xGuild );
-    int OnGuildClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
-    int OnSaveGroupheartEvent( const NFIDENTID& self , const std::string& strHeartName, const float fTime, const int nCount );
+    void CheckLoadGuild( const NFGUID& self, const NFGUID& xGuild );
+    int OnGuildClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+    int OnSaveGroupheartEvent( const NFGUID& self , const std::string& strHeartName, const float fTime, const int nCount );
 
 protected:
     NFIEventProcessModule* m_pEventProcessModule;

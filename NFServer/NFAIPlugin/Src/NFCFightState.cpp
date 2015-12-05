@@ -9,7 +9,7 @@
 ////#include "stdafx.h"
 #include "../NFCAIModule.h"
 
-bool NFCFightState::Enter(const NFIDENTID& self)
+bool NFCFightState::Enter(const NFGUID& self)
 {
     if (!NFIState::Enter(self))
     {
@@ -19,12 +19,12 @@ bool NFCFightState::Enter(const NFIDENTID& self)
     return true;
 }
 
-bool NFCFightState::Execute(const NFIDENTID& self)
+bool NFCFightState::Execute(const NFGUID& self)
 {
     NFIStateMachine* pStateMachine = m_pAIModule->GetStateMachine(self);
 
 	NFAI_MOVE_TYPE eMoveType = (NFAI_MOVE_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
-    NFIDENTID ident = m_pHateModule->QueryMaxHateObject(self);
+    NFGUID ident = m_pHateModule->QueryMaxHateObject(self);
     if (!ident.IsNull())
     {
         if (m_pKernelModule->GetPropertyInt(self, "HP") > 0)
@@ -82,29 +82,29 @@ bool NFCFightState::Execute(const NFIDENTID& self)
     return true;
 }
 
-bool NFCFightState::Exit(const NFIDENTID& self)
+bool NFCFightState::Exit(const NFGUID& self)
 {
 
     return true;
 }
 
-bool NFCFightState::DoRule(const NFIDENTID& self)
+bool NFCFightState::DoRule(const NFGUID& self)
 {
     return true;
 }
 
-bool NFCFightState::RunInFightArea(const NFIDENTID& self)
+bool NFCFightState::RunInFightArea(const NFGUID& self)
 {
     //需要回调知道已经走到了,moving事件
     return true;
 }
 
-bool NFCFightState::RunCloseTarget(const NFIDENTID& self, const NFIDENTID& target)
+bool NFCFightState::RunCloseTarget(const NFGUID& self, const NFGUID& target)
 {
     return true;
 }
 
-int NFCFightState::OnSkillConsumeTime( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
+int NFCFightState::OnSkillConsumeTime( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
 	m_pKernelModule->SetPropertyInt(self, "StateType", (int)NFObjectStateType::NOST_IDLE);
 	

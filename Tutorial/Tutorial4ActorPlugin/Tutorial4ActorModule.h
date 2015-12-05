@@ -32,8 +32,8 @@ public:
     virtual bool Shut();
 
 protected:
-	int OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg);
-	int OnSyncEvent(const NFIDENTID& self, const int nActorID, const int event, const std::string& arg);
+	int OnASyncEvent(const NFGUID& self, const int event, std::string& arg);
+	int OnSyncEvent(const NFGUID& self, const int nActorID, const int event, const std::string& arg);
 
 protected:
     unsigned long mLastTime;

@@ -21,17 +21,17 @@ public:
 
     virtual ~NFCChaseState() {}
 
-    virtual bool Enter(const NFIDENTID& self);
+    virtual bool Enter(const NFGUID& self);
 
-    virtual bool Execute(const NFIDENTID& self);
+    virtual bool Execute(const NFGUID& self);
 
-    virtual bool Exit(const NFIDENTID& self);
+    virtual bool Exit(const NFGUID& self);
 
-    virtual bool DoRule(const NFIDENTID& self);
+    virtual bool DoRule(const NFGUID& self);
 
 protected:
 
-    //bool RandomPatrol(const NFIDENTID& self);
+    //bool RandomPatrol(const NFGUID& self);
 
 private:
 };

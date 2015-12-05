@@ -21,7 +21,7 @@ NFCPatrolState::NFCPatrolState(float fHeartBeatTime, NFIPluginManager* p)
     m_pHateModule = m_pAIModule->GetHateModule();
 }
 
-bool NFCPatrolState::Enter(const NFIDENTID& self)
+bool NFCPatrolState::Enter(const NFGUID& self)
 {
     if (!NFIState::Enter(self))
     {
@@ -33,14 +33,14 @@ bool NFCPatrolState::Enter(const NFIDENTID& self)
     return true;
 }
 
-bool NFCPatrolState::Execute(const NFIDENTID& self)
+bool NFCPatrolState::Execute(const NFGUID& self)
 {
     if (!NFIState::Execute(self))
     {
         NFIStateMachine* pStateMachine = m_pAIModule->GetStateMachine(self);
         if (pStateMachine)
         {
-			NFIDENTID ident = m_pHateModule->QueryMaxHateObject(self);
+			NFGUID ident = m_pHateModule->QueryMaxHateObject(self);
 			NFAI_MOVE_TYPE eMoveType = (NFAI_MOVE_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
 
 			//如果是定点的，则不走，继续idle
@@ -83,19 +83,19 @@ bool NFCPatrolState::Execute(const NFIDENTID& self)
     return true;
 }
 
-bool NFCPatrolState::Exit(const NFIDENTID& self)
+bool NFCPatrolState::Exit(const NFGUID& self)
 {
 
     return true;
 }
 
-bool NFCPatrolState::DoRule(const NFIDENTID& self)
+bool NFCPatrolState::DoRule(const NFGUID& self)
 {
 
     return true;
 }
 
-bool NFCPatrolState::RandomPatrol(const NFIDENTID& self)
+bool NFCPatrolState::RandomPatrol(const NFGUID& self)
 {
     //首先，得看有没路径
 

@@ -64,7 +64,7 @@ public:
 		return NF_SHARE_PTR<T>();
 	}
 
-    virtual NFIDENTID Self() = 0;
+    virtual NFGUID Self() = 0;
 
 	virtual bool AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent) = 0;
 

@@ -130,9 +130,9 @@ bool NFCUUIDModule::Execute(const float fLasFrametime, const float fStartedTime)
     return true;
 }
 
-NFIDENTID NFCUUIDModule::CreateGUID()
+NFGUID NFCUUIDModule::CreateGUID()
 {
-	NFIDENTID xID;
+	NFGUID xID;
 	xID.nHead64 = GetIdentID();
 	xID.nData64 = m_pUUID->generate();
 	

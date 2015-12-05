@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFIDENTID.h
+//    @FileName         :    NFGUID.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-07-11
-//    @Module           :    NFIDENTID
+//    @Module           :    NFGUID
 //
 // -------------------------------------------------------------------------
 
@@ -15,30 +15,30 @@
 #include <stdlib.h>
 #include <boost/lexical_cast.hpp>
 
-struct NFIDENTID
+struct NFGUID
 {
     NFINT64 nData64;
     NFINT64 nHead64;
 
-    NFIDENTID()
+    NFGUID()
     {
         nData64 = 0;
         nHead64 = 0;
     }
 
-    NFIDENTID(NFINT64 nHeadData, NFINT64 nData)
+    NFGUID(NFINT64 nHeadData, NFINT64 nData)
     {
         nHead64 = nHeadData;
         nData64 = nData;
     }
 
-    NFIDENTID(const NFIDENTID& xData)
+    NFGUID(const NFGUID& xData)
     {
         nHead64 = xData.nHead64;
         nData64 = xData.nData64;
     }
 
-    NFIDENTID& operator=(const NFIDENTID& xData)
+    NFGUID& operator=(const NFGUID& xData)
     {
         nHead64 = xData.nHead64;
         nData64 = xData.nData64;
@@ -71,17 +71,17 @@ struct NFIDENTID
         return 0 == nData64 && 0 == nHead64;
     }
 
-    bool operator == (const NFIDENTID& id) const
+    bool operator == (const NFGUID& id) const
     {
         return this->nData64 == id.nData64 && this->nHead64 == id.nHead64;
     }
 
-    bool operator != (const NFIDENTID& id) const
+    bool operator != (const NFGUID& id) const
     {
         return this->nData64 != id.nData64 || this->nHead64 != id.nHead64;
     }
 
-    bool operator < (const NFIDENTID& id) const
+    bool operator < (const NFGUID& id) const
     {
         if (this->nHead64 == id.nHead64)
         {

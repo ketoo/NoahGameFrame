@@ -43,7 +43,7 @@ bool NFCNPCRefreshModule::AfterInit()
     return true;
 }
 
-int NFCNPCRefreshModule::OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
     if ( strClassName == "NPC" )
     {
@@ -58,11 +58,11 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFIDENTID& self, const std::s
     return 0;
 }
 
-int NFCNPCRefreshModule::OnObjectHPEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int NFCNPCRefreshModule::OnObjectHPEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-    if ( newVar.Value<NFINT64>() <= 0 )
+    if ( newVar.GetInt() <= 0 )
     {
-        NFIDENTID identAttacker = m_pKernelModule->GetPropertyObject( self, "LastAttacker" );
+        NFGUID identAttacker = m_pKernelModule->GetPropertyObject( self, "LastAttacker" );
         if (!identAttacker.IsNull())
 		{
             m_pEventProcessModule->DoEvent( self, NFED_ON_OBJECT_BE_KILLED, NFCDataList() << identAttacker );
@@ -74,7 +74,7 @@ int NFCNPCRefreshModule::OnObjectHPEvent( const NFIDENTID& self, const std::stri
     return 0;
 }
 
-int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
+int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
     //and create new object
     const std::string& strClassName = m_pKernelModule->GetPropertyString( self, "ClassName" );
@@ -97,7 +97,7 @@ int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFIDENTID& self, const std::s
 	arg << "Z" << fSeedZ;
 	arg << "SeedID" << strSeedID;
 
-	m_pKernelModule->CreateObject( NFIDENTID(), nContainerID, nGroupID, strClassName, strConfigID, arg );
+	m_pKernelModule->CreateObject( NFGUID(), nContainerID, nGroupID, strClassName, strConfigID, arg );
 
     return 0;
 }

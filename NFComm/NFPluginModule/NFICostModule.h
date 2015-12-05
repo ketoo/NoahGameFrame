@@ -17,8 +17,8 @@ class NFICostModule : public NFILogicModule
 {
 
 public:
-    virtual bool Cost(const NFIDENTID& self, const std::string& strCostID) = 0;
-    virtual bool Cost(const NFIDENTID& self, const std::list<std::string>& xCostList) = 0;
+    virtual bool Cost(const NFGUID& self, const std::string& strCostID) = 0;
+    virtual bool Cost(const NFGUID& self, const std::list<std::string>& xCostList) = 0;
 };
 
 #endif // !__NFI_COST_MODULE_H__

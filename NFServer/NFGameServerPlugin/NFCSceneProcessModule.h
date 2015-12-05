@@ -60,10 +60,10 @@ protected:
 
 protected:
 
-    int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+    int OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    int OnEnterSceneEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
-    int OnLeaveSceneEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
+    int OnEnterSceneEvent( const NFGUID& object, const int nEventID, const NFIDataList& var );
+    int OnLeaveSceneEvent( const NFGUID& object, const int nEventID, const NFIDataList& var );
 
 private:
     int mnContainerLine;
