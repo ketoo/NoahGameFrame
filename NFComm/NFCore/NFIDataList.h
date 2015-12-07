@@ -46,6 +46,7 @@ const static std::string NULL_STR = "";
 const static NFGUID NULL_OBJECT = NFGUID();
 const static double NULL_FLOAT = 0.0;
 const static INT64 NULL_INT = 0;
+//const static NFIDataList::TData NULL_TDATA;
 
 //类型接口
 class NFIDataList
@@ -88,6 +89,53 @@ public:
 		void Reset()
 		{
 			nType = TDATA_UNKNOWN;
+		}
+
+		bool IsNullValue() const
+		{
+			bool bChanged = false;
+
+			switch (GetType())
+			{
+			case TDATA_INT:
+				{
+					if (0 != GetInt())
+					{
+						bChanged = true;
+					}
+				}
+				break;
+			case TDATA_FLOAT:
+				{
+					double fValue = GetFloat();
+					if (fValue > 0.001  || fValue < -0.001)
+					{
+						bChanged = true;
+					}
+				}
+				break;
+			case TDATA_STRING:
+				{
+					const std::string& strData = GetString();
+					if (!strData.empty())
+					{
+						bChanged = true;
+					}
+				}
+				break;
+			case TDATA_OBJECT:
+				{
+					if (!GetObject().IsNull())
+					{
+						bChanged = true;
+					}
+				}
+				break;
+			default:
+				break;
+			}
+
+			return bChanged;
 		}
 
 		TDATA_TYPE GetType() const
@@ -269,52 +317,7 @@ public:
         return Set(index, value);
     }
 
-    static bool Valid(const NFIDataList::TData& var)
-    {
-        bool bChanged = false;
 
-        switch (var.GetType())
-        {
-            case TDATA_INT:
-            {
-                if (0 != var.GetInt())
-                {
-                    bChanged = true;
-                }
-            }
-            break;
-            case TDATA_FLOAT:
-            {
-                double fValue = var.GetFloat();
-                if (fValue > 0.001  || fValue < -0.001)
-                {
-                    bChanged = true;
-                }
-            }
-            break;
-            case TDATA_STRING:
-            {
-                const std::string& strData = var.GetString();
-                if (!strData.empty())
-                {
-                    bChanged = true;
-                }
-            }
-            break;
-            case TDATA_OBJECT:
-            {
-                if (NFGUID() != var.GetObject())
-                {
-                    bChanged = true;
-                }
-            }
-            break;
-            default:
-                break;
-        }
-
-        return bChanged;
-    }
 
     inline bool Compare(const int nPos, const NFIDataList& src) const
     {
