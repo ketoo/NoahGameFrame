@@ -7,6 +7,7 @@
 // -------------------------------------------------------------------------
 
 #include "NFCProperty.h"
+#include <complex>
 
 NFCProperty::NFCProperty()
 {
@@ -221,24 +222,19 @@ bool NFCProperty::SetInt(const NFINT64 value)
         return false;
     }
 
-    NFIDataList::TData xData(TDATA_INT);
-    xData.SetInt(value);
+	if (!mxData.get())
+	{
+		//本身是空就是因为没数据，还来个没数据的就不存了
+		if (0 == value)
+		{
+			return false;
+		}
 
-    if (!mxData.get())
-    {
-        //本身是空就是因为没数据，还来个没数据的就不存了
-        if (!xData.IsNullValue())
-        {
-            return false;
-        }
+		mxData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(TDATA_INT));
+		mxData->SetInt(0);
+	}
 
-        mxData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(TDATA_INT));
-        mxData->SetInt(0);
-
-		return true;
-    }
-
-	if (xData.GetInt() == mxData->GetInt())
+	if (value == mxData->GetInt())
 	{
 		return false;
 	}
@@ -260,22 +256,19 @@ bool NFCProperty::SetFloat(const double value)
         return false;
     }
 
-	NFIDataList::TData xData(TDATA_FLOAT);
-	xData.SetFloat(value);
-
     if (!mxData.get())
     {
         //本身是空就是因为没数据，还来个没数据的就不存了
-        if (!xData.IsNullValue())
-        {
+		if (std::abs(value) < 0.001)
+		{
             return false;
         }
 
         mxData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(TDATA_FLOAT));
-        mxData->SetFloat(0.0f);
+        mxData->SetFloat(0.0);
     }
 
-    if (xData.GetFloat() - mxData->GetFloat() < 0.001)
+    if (value - mxData->GetFloat() < 0.001)
     {
         return false;
     }
@@ -299,13 +292,10 @@ bool NFCProperty::SetString(const std::string& value)
         return false;
     }
 
-	NFIDataList::TData xData(TDATA_STRING);
-	xData.SetString(value);
-
     if (!mxData.get())
     {
         //本身是空就是因为没数据，还来个没数据的就不存了
-        if (!xData.IsNullValue())
+        if (value.empty())
         {
             return false;
         }
@@ -314,7 +304,7 @@ bool NFCProperty::SetString(const std::string& value)
         mxData->SetString(NULL_STR);
     }
 
-    if (xData.GetString() == mxData->GetString())
+    if (value == mxData->GetString())
     {
         return false;
     }
@@ -336,13 +326,10 @@ bool NFCProperty::SetObject(const NFGUID& value)
         return false;
     }
 
-	NFIDataList::TData xData(TDATA_OBJECT);
-	xData.SetObject(value);
-
     if (!mxData.get())
     {
         //本身是空就是因为没数据，还来个没数据的就不存了
-        if (!xData.IsNullValue())
+        if (value.IsNull())
         {
             return false;
         }
@@ -352,7 +339,7 @@ bool NFCProperty::SetObject(const NFGUID& value)
 
     }
 
-    if (xData.GetObject() == mxData->GetObject())
+    if (value == mxData->GetObject())
     {
         return false;
     }
