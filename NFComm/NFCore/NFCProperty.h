@@ -56,7 +56,7 @@ public:
 
     virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb);
 
-    virtual NFIDataList::TData GetValue() const;
+    virtual const NFIDataList::TData& GetValue() const;
 
     int OnEventHandler(const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
