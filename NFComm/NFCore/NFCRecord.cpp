@@ -156,31 +156,28 @@ bool ValidAdd(TDATA_TYPE eType, const NFIDataList::TData& var, NF_SHARE_PTR<NFID
             return false;
         }
 
+		pVar = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
         switch (eType)
         {
         case TDATA_UNKNOWN:
             break;
         case TDATA_INT:
 			{
-				NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(TDATA_INT));
 				pVar->SetInt(0);
 			}
             break;
         case TDATA_FLOAT:
 			{
-				NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(TDATA_FLOAT));
 				pVar->SetFloat(0);
 			}
             break;
         case TDATA_STRING:
 			{
-				NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(TDATA_STRING));
 				pVar->SetString("");
 			}
             break;
         case TDATA_OBJECT:
 			{
-				NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(TDATA_OBJECT));
 				pVar->SetObject(NFGUID());
 			}
             break;
