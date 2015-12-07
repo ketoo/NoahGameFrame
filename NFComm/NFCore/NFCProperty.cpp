@@ -53,7 +53,7 @@ void NFCProperty::SetValue(const NFIDataList::TData& TData)
 
     if (!mxData.get())
     {
-        if (!NFIDataList::Valid(TData))
+        if (!TData.IsNullValue())
         {
             return;
         }
@@ -79,7 +79,7 @@ void NFCProperty::SetValue(const NFIProperty* pProperty)
     //SetValue(pProperty->GetValue());
 }
 
-NFIDataList::TData NFCProperty::GetValue() const
+const NFIDataList::TData& NFCProperty::GetValue() const
 {
     if (mxData.get())
     {
@@ -227,7 +227,7 @@ bool NFCProperty::SetInt(const NFINT64 value)
     if (!mxData.get())
     {
         //本身是空就是因为没数据，还来个没数据的就不存了
-        if (!NFIDataList::Valid(xData))
+        if (!xData.IsNullValue())
         {
             return false;
         }
@@ -266,7 +266,7 @@ bool NFCProperty::SetFloat(const double value)
     if (!mxData.get())
     {
         //本身是空就是因为没数据，还来个没数据的就不存了
-        if (!NFIDataList::Valid(xData))
+        if (!xData.IsNullValue())
         {
             return false;
         }
@@ -305,7 +305,7 @@ bool NFCProperty::SetString(const std::string& value)
     if (!mxData.get())
     {
         //本身是空就是因为没数据，还来个没数据的就不存了
-        if (!NFIDataList::Valid(xData))
+        if (!xData.IsNullValue())
         {
             return false;
         }
@@ -342,7 +342,7 @@ bool NFCProperty::SetObject(const NFGUID& value)
     if (!mxData.get())
     {
         //本身是空就是因为没数据，还来个没数据的就不存了
-        if (!NFIDataList::Valid(xData))
+        if (!xData.IsNullValue())
         {
             return false;
         }
@@ -369,7 +369,7 @@ bool NFCProperty::SetObject(const NFGUID& value)
 
 bool NFCProperty::Changed() const
 {
-    return NFIDataList::Valid(GetValue());
+    return GetValue().IsNullValue();
 }
 
 const TDATA_TYPE NFCProperty::GetType() const
