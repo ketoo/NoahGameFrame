@@ -151,7 +151,7 @@ bool ValidAdd(TDATA_TYPE eType, const NFIDataList::TData& var, NF_SHARE_PTR<NFID
 
     if (!pVar.get())
     {
-        if (!NFIDataList::Valid(var))
+        if (!var.IsNullValue())
         {
             return false;
         }
@@ -187,12 +187,51 @@ bool ValidAdd(TDATA_TYPE eType, const NFIDataList::TData& var, NF_SHARE_PTR<NFID
             break;
         }
     }
-
-
-    if (pVar->variantData == var.variantData)
-    {
-        return false;
-    }
+	else
+	{
+		switch (eType)
+		{
+		case TDATA_UNKNOWN:
+			break;
+		case TDATA_INT:
+			{
+				if(pVar->GetInt() == var.GetInt())
+				{
+					return false;
+				}
+			}
+			break;
+		case TDATA_FLOAT:
+			{
+				double fValue = pVar->GetFloat() - var.GetFloat();
+				if (fValue < 0.001  && fValue > -0.001)
+				{
+					return false;
+				}
+			}
+			break;
+		case TDATA_STRING:
+			{
+				if(pVar->GetString() == var.GetString())
+				{
+					return false;
+				}
+			}
+			break;
+		case TDATA_OBJECT:
+			{
+				if(pVar->GetObject() == var.GetObject())
+				{
+					return false;
+				}
+			}
+			break;
+		case TDATA_MAX:
+			break;
+		default:
+			break;
+		}
+	}
 
     return true;
 }
@@ -206,7 +245,7 @@ bool ValidSet(TDATA_TYPE eType, const NFIDataList::TData& var, NF_SHARE_PTR<NFID
 
     if (!pVar.get())
     {
-        if (!NFIDataList::Valid(var))
+        if (!var.IsNullValue())
         {
             return false;
         }
