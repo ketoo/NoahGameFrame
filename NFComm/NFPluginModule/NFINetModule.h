@@ -30,34 +30,6 @@ enum NF_SERVER_TYPE
 	NFST_NOSQL_SERVER = 7,
 };
 
-
-#if NF_PLATFORM == NF_PLATFORM_WIN
-class QueueEventPack
-{
-public:
-	QueueEventPack()
-	{
-		eMsgType = ON_NET_NONE;
-		bBC = false;
-	}
-
-	enum NetEventType
-	{
-		ON_NET_NONE = 0,
-		ON_NET_RECIVE = 1,
-		ON_NET_SEND = 2,
-		ON_NET_FD_EVT = 3,
-		ON_NET_TRANFORM = 4,
-	};
-
-	int nFD;//FD
-	NetEventType eMsgType;//消息类型
-	int nMsgID;//消息ID，如果是网络事件，则为事件ID
-	std::string strData;//数据
-	bool bBC;
-};
-#endif
-
 ////////////////////////////////////////////////////////////////////////////
 
 // 客户端消息处理宏
@@ -113,30 +85,15 @@ public:
 	template<typename BaseType>
 	void Initialization(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const char* strIP, const unsigned short nPort)
 	{
-#if NF_PLATFORM == NF_PLATFORM_WIN
-   //windows use queue
-		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
-
-		m_pNet = new NFCNet(this, &NFINetModule::OnRecivePack, &NFINetModule::OnSocketEvent);
-#else
 		m_pNet = new NFCNet(pBaseType, handleRecieve, handleEvent);
-#endif
+		
 		m_pNet->Initialization(strIP, nPort);
 	}
 
 	template<typename BaseType>
 	int Initialization(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4)
 	{
-#if NF_PLATFORM == NF_PLATFORM_WIN
-	 //windows use queue
-		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
-
-		m_pNet = new NFCNet(this, &NFINetModule::OnRecivePack, &NFINetModule::OnSocketEvent);
-#else
 		m_pNet = new NFCNet(pBaseType, handleRecieve, handleEvent);
-#endif
 
 		return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
 	}
@@ -151,46 +108,6 @@ public:
 		//把上次的数据处理了
 		KeepAlive(fLasFrametime);
 
-		//////////////////////////////////////////////////////////////////////////
-#if NF_PLATFORM == NF_PLATFORM_WIN
-		QueueEventPack xEventPack;
-		while (mxQueue.Pop(xEventPack))
-		{
-			switch (xEventPack.eMsgType)
-			{
-			case QueueEventPack::ON_NET_RECIVE:
-				{
-					if(mRecvCB)
-					{
-						mRecvCB(xEventPack.nFD, xEventPack.nMsgID, xEventPack.strData.c_str(), xEventPack.strData.length());
-					}
-				}
-				break;
-			//case QueueEventPack::ON_NET_SEND:
-			case QueueEventPack::ON_NET_TRANFORM:
-				{
-					if (xEventPack.bBC)
-					{
-						m_pNet->SendMsgToAllClientWithOutHead(xEventPack.nMsgID, xEventPack.strData.c_str(), xEventPack.strData.length());
-					}
-					else
-					{
-						m_pNet->SendMsgWithOutHead(xEventPack.nMsgID, xEventPack.strData.c_str(), xEventPack.strData.length(), xEventPack.nFD);
-					}
-				}
-				break;
-			case QueueEventPack::ON_NET_FD_EVT:
-				{
-					if(mEventCB)
-					{
-						mEventCB(xEventPack.nFD, (NF_NET_EVENT)xEventPack.nMsgID, m_pNet);
-					}
-				}
-				break;
-			}
-		}
-#endif
-		//////////////////////////////////////////////////////////////////////////
 		return m_pNet->Execute();
 	}
 
@@ -211,25 +128,24 @@ public:
 
 		return xIdent;
 	}
+	static bool RecivePB(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, std::string& strMsg, NFGUID& nPlayer)
+	{
+		NFMsg::MsgBase xMsg;
+		if(!xMsg.ParseFromArray(msg, nLen))
+		{
+			char szData[MAX_PATH] = { 0 };
+			sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", nMsgID);
+			//LogRecive(szData);
 
-    static bool RecivePB(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, std::string& strMsg, NFGUID& nPlayer)
-    {
-        NFMsg::MsgBase xMsg;
-        if(!xMsg.ParseFromArray(msg, nLen))
-        {
-            char szData[MAX_PATH] = { 0 };
-            sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", nMsgID);
-            //LogRecive(szData);
+			return false;
+		}
 
-            return false;
-        }
+		strMsg.assign(xMsg.msg_data().data(), xMsg.msg_data().length());
 
-        strMsg.assign(xMsg.msg_data().data(), xMsg.msg_data().length());
+		nPlayer = PBToNF(xMsg.player_id());
 
-        nPlayer = PBToNF(xMsg.player_id());
-
-        return true;
-    }
+		return true;
+	}
 
 	static bool RecivePB(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, google::protobuf::Message& xData, NFGUID& nPlayer)
 	{
@@ -257,36 +173,14 @@ public:
 		return true;
 	}
 
-	bool SendMsg(const int nMsgID, const std::string& msg, const int nSockIndex)
+	bool SendMsgWithOutHead(const int nMsgID, const std::string& msg, const int nSockIndex)
 	{
-#if NF_PLATFORM == NF_PLATFORM_WIN
-		QueueEventPack xNetEventPack;
-		xNetEventPack.eMsgType = QueueEventPack::ON_NET_TRANFORM;
-		xNetEventPack.nMsgID = nMsgID;
-		xNetEventPack.nFD = nSockIndex;
-		xNetEventPack.strData = msg;//可以待优化,SerializeToString直接进来
-		xNetEventPack.bBC = false;
-
-		return mxQueue.Push(xNetEventPack);
-#else
-		return m_pNet->SendMsg(msg.c_str(), msg.length(), nSockIndex);
-#endif
+		return m_pNet->SendMsgWithOutHead(nMsgID, msg.c_str(), msg.length(), nSockIndex);
 	}
 
-	bool SendMsgToAllClient(const int nMsgID, const std::string& msg)
+	bool SendMsgToAllClientWithOutHead(const int nMsgID, const std::string& msg)
 	{
-#if NF_PLATFORM == NF_PLATFORM_WIN
-		QueueEventPack xNetEventPack;
-		xNetEventPack.eMsgType = QueueEventPack::ON_NET_TRANFORM;
-		xNetEventPack.nMsgID = nMsgID;
-		xNetEventPack.nFD = 0;
-		xNetEventPack.strData = msg;//可以待优化,SerializeToString直接进来
-		xNetEventPack.bBC = true;
-
-		return mxQueue.Push(xNetEventPack);
-#else
 		return m_pNet->SendMsgToAllClient(msg.c_str(), msg.length());
-#endif
 	}
 
 	bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const uint32_t nSockIndex)
@@ -312,7 +206,7 @@ public:
 			return false;
 		}
 
-		SendMsg(nMsgID, strMsg, nSockIndex);
+		SendMsgWithOutHead(nMsgID, strMsg, nSockIndex);
 
 		return true;
 	}
@@ -340,7 +234,7 @@ public:
 			return false;
 		}
 
-		return SendMsgToAllClient(nMsgID, strMsg);
+		return SendMsgToAllClientWithOutHead(nMsgID, strMsg);
 	}
 
 	bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const uint32_t nSockIndex, const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList = NULL)
@@ -388,7 +282,7 @@ public:
 			return false;
 		}
 
-		return SendMsg(nMsgID, strMsg, nSockIndex);
+		return SendMsgWithOutHead(nMsgID, strMsg, nSockIndex);
 	}
 
     bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const uint32_t nSockIndex, const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList = NULL)
@@ -432,7 +326,7 @@ public:
             return false;
         }
 
-		return SendMsg(nMsgID, strMsg, nSockIndex);
+		return SendMsgWithOutHead(nMsgID, strMsg, nSockIndex);
     }
 
 	NFINet* GetNet()
@@ -469,41 +363,10 @@ protected:
 
 	}
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
-	void OnRecivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-	{
-		QueueEventPack xNetEventPack;
-		xNetEventPack.eMsgType = QueueEventPack::ON_NET_RECIVE;
-		xNetEventPack.nMsgID = nMsgID;
-		xNetEventPack.nFD = nSockIndex;
-		xNetEventPack.strData.assign(msg, nLen);
-
-		mxQueue.Push(xNetEventPack);
-	}
-
-	void OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
-	{
-		QueueEventPack xNetEventPack;
-		xNetEventPack.eMsgType = QueueEventPack::ON_NET_FD_EVT;
-		xNetEventPack.nMsgID = eEvent;
-		xNetEventPack.nFD = nSockIndex;
-
-		mxQueue.Push(xNetEventPack);
-	}
-#endif
-
 private:
 
 	NFINet* m_pNet;
 	float mfLastHBTime;
-
-#if NF_PLATFORM == NF_PLATFORM_WIN
-	NET_RECIEVE_FUNCTOR mRecvCB;
-	NET_EVENT_FUNCTOR mEventCB;
-
-	NFQueue<QueueEventPack> mxQueue;
-#endif
-
 };
 
 #endif
