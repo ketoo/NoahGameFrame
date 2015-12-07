@@ -62,7 +62,7 @@ public:
             NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
             if (pNetModule.get())
             {
-                pNetModule->SendMsg(nMsgID, strData, 0);
+                pNetModule->SendMsgWithOutHead(nMsgID, strData, 0);
             }
         }
     }
@@ -76,7 +76,7 @@ public:
 			NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
 			if (pNetModule.get())
 			{
-				pNetModule->SendMsg(nMsgID, strData, 0);
+				pNetModule->SendMsgWithOutHead(nMsgID, strData, 0);
 			}
 
 			pServer = mxServerMap.Next();
