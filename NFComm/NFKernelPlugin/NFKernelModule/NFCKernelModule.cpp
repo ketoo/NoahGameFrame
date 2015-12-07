@@ -217,7 +217,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
 				pStaticConfigPropertyInfo->GetRelationValue());
 
             //通用回调，方便NET同步
-            if (pStaticConfigPropertyInfo->GetPublic() || pStaticConfigPropertyInfo->GetPrivate())
+            //if (pStaticConfigPropertyInfo->GetPublic() || pStaticConfigPropertyInfo->GetPrivate())
             {
                 pObject->AddPropertyCallBack(pStaticConfigPropertyInfo->GetKey(), this, &NFCKernelModule::OnPropertyCommonEvent);
             }
@@ -243,7 +243,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
 				pConfigRecordInfo->GetIndex());
 
 			//通用回调，方便NET同步
-            if (pConfigRecordInfo->GetPublic() || pConfigRecordInfo->GetPrivate())
+            //if (pConfigRecordInfo->GetPublic() || pConfigRecordInfo->GetPrivate())
             {
                 pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), this, &NFCKernelModule::OnRecordCommonEvent);
             }
