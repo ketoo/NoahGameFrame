@@ -134,7 +134,7 @@ public:
 		if(!xMsg.ParseFromArray(msg, nLen))
 		{
 			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", nMsgID);
+			NFSPRINTF(szData, MAX_PATH, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", nMsgID);
 			//LogRecive(szData);
 
 			return false;
@@ -153,7 +153,7 @@ public:
 		if(!xMsg.ParseFromArray(msg, nLen))
 		{
 			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", nMsgID);
+			NFSPRINTF(szData, MAX_PATH, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", nMsgID);
 			//LogRecive(szData);
 
 			return false;
@@ -162,7 +162,7 @@ public:
 		if (!xData.ParseFromString(xMsg.msg_data()))
 		{
 			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Parse Message Failed from MsgData to ProtocolData, MessageID: %d\n", nMsgID);
+			NFSPRINTF(szData, MAX_PATH, "Parse Message Failed from MsgData to ProtocolData, MessageID: %d\n", nMsgID);
 			//LogRecive(szData);
 
 			return false;
@@ -189,7 +189,7 @@ public:
 		if (!xData.SerializeToString(xMsg.mutable_msg_data()))
 		{
 			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Send Message to %d Failed For Serialize of MsgData, MessageID: %d\n", nSockIndex, nMsgID);
+			NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For Serialize of MsgData, MessageID: %d\n", nSockIndex, nMsgID);
 
 			return false;
 		}
@@ -201,7 +201,7 @@ public:
 		if(!xMsg.SerializeToString(&strMsg))
 		{
 			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Send Message to %d Failed For Serialize of MsgBase, MessageID: %d\n", nSockIndex, nMsgID);
+			NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For Serialize of MsgBase, MessageID: %d\n", nSockIndex, nMsgID);
 
 			return false;
 		}
@@ -217,7 +217,7 @@ public:
 		if (!xData.SerializeToString(xMsg.mutable_msg_data()))
 		{
 			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Send Message to %d Failed For Serialize of MsgData, MessageID: %d\n", nMsgID);
+			NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For Serialize of MsgData, MessageID: %d\n", nMsgID);
 
 			return false;
 		}
@@ -229,7 +229,7 @@ public:
 		if(!xMsg.SerializeToString(&strMsg))
 		{
 			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Send Message to %d Failed For Serialize of MsgBase, MessageID: %d\n", nMsgID);
+			NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For Serialize of MsgBase, MessageID: %d\n", nMsgID);
 
 			return false;
 		}
@@ -242,7 +242,7 @@ public:
 		if (!m_pNet)
 		{
 			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Send Message to %d Failed For NULL Of Net, MessageID: %d\n", nSockIndex, nMsgID);
+			NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For NULL Of Net, MessageID: %d\n", nSockIndex, nMsgID);
 
 			return false;
 		}
@@ -251,7 +251,7 @@ public:
 		if (!xData.SerializeToString(xMsg.mutable_msg_data()))
 		{
 			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Send Message to %d Failed For Serialize of MsgData, MessageID: %d\n", nSockIndex, nMsgID);
+			NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For Serialize of MsgData, MessageID: %d\n", nSockIndex, nMsgID);
 
 			return false;
 		}
@@ -277,7 +277,7 @@ public:
 		if(!xMsg.SerializeToString(&strMsg))
 		{
 			char szData[MAX_PATH] = { 0 };
-			sprintf(szData, "Send Message to %d Failed For Serialize of MsgBase, MessageID: %d\n", nSockIndex, nMsgID);
+			NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For Serialize of MsgBase, MessageID: %d\n", nSockIndex, nMsgID);
 
 			return false;
 		}
@@ -290,7 +290,7 @@ public:
         if (!m_pNet)
         {
             char szData[MAX_PATH] = { 0 };
-            sprintf(szData, "Send Message to %d Failed For NULL Of Net, MessageID: %d\n", nSockIndex, nMsgID);
+            NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For NULL Of Net, MessageID: %d\n", nSockIndex, nMsgID);
             //LogSend(szData);
 
             return false;
@@ -320,7 +320,7 @@ public:
         if(!xMsg.SerializeToString(&strMsg))
         {
             char szData[MAX_PATH] = { 0 };
-            sprintf(szData, "Send Message to %d Failed For Serialize of MsgBase, MessageID: %d\n", nSockIndex, nMsgID);
+            NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For Serialize of MsgBase, MessageID: %d\n", nSockIndex, nMsgID);
             //LogSend(szData);
 
             return false;
