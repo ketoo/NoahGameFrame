@@ -50,7 +50,7 @@ int NFCPropertyModule::GetPropertyValue( const NFGUID& self, const std::string& 
 {
     if ( NFPropertyGroup::NPG_ALL != eGroupType )
     {
-        return m_pKernelModule->GetRecordInt( self, mstrCommPropertyName, eGroupType, "strPropertyName" );
+        return m_pKernelModule->GetRecordInt( self, mstrCommPropertyName, eGroupType, strPropertyName );
     }
 
     return m_pKernelModule->GetPropertyInt( self, mstrCommPropertyName );
