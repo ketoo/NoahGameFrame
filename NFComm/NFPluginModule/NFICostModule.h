@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef __NFI_COST_MODULE_H__
-#define __NFI_COST_MODULE_H__
+#ifndef __NFI_COST_MODULE_H_
+#define __NFI_COST_MODULE_H_
 
 #include <iostream>
 #include "NFILogicModule.h"
@@ -21,4 +21,4 @@ public:
     virtual bool Cost(const NFGUID& self, const std::list<std::string>& xCostList) = 0;
 };
 
-#endif // !__NFI_COST_MODULE_H__
+#endif // !__NFI_COST_MODULE_H_

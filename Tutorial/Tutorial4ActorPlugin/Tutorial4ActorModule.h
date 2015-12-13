@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_HELLO_WORLD4_H_
-#define _NFC_HELLO_WORLD4_H_
+#ifndef NFC_HELLO_WORLD4_H
+#define NFC_HELLO_WORLD4_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"

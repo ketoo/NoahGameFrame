@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_RECORDMANAGER_H_
-#define _NFI_RECORDMANAGER_H_
+#ifndef _NFI_RECORDMANAGER_H
+#define _NFI_RECORDMANAGER_H
 
 #include "NFIRecord.h"
 #include "NFMap.h"

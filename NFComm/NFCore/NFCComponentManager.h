@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_COMPONENT_MANAGER_H_
-#define _NFC_COMPONENT_MANAGER_H_
+#ifndef NFC_COMPONENT_MANAGER_H
+#define NFC_COMPONENT_MANAGER_H
 
 #include "NFIComponentManager.h"
 #include "NFComm/NFPluginModule/NFGUID.h"

@@ -5,8 +5,8 @@
 //    @Module           £º    NFCSLGBuildingModule
 //
 // -------------------------------------------------------------------------
-#ifndef __NFC_SLG_BUILDING_MODULE_H__
-#define __NFC_SLG_BUILDING_MODULE_H__
+#ifndef __NFC_SLG_BUILDING_MODULE_H_
+#define __NFC_SLG_BUILDING_MODULE_H_
 
 #include "NFComm/NFPluginModule/NFISLGBuildingModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -59,4 +59,4 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
 };
 
-#endif // !__NFC_SLG_BUILDING_MODULE_H__
+#endif // !__NFC_SLG_BUILDING_MODULE_H_

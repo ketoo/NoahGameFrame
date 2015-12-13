@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_UUID_MODULE_H_
-#define _NFC_UUID_MODULE_H_
+#ifndef NFC_UUID_MODULE_H
+#define NFC_UUID_MODULE_H
 
 #include <boost/crc.hpp>
 #include <boost/format.hpp>
@@ -47,4 +47,4 @@ private:
 	NFIKernelModule* m_pKernelModule;
 };
 
-#endif // !_NFC_UUID_MODULE_H_
+#endif // !_NFC_UUID_MODULE_H
