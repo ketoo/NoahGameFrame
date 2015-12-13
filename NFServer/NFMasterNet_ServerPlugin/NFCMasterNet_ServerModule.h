@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_MASTERNET_SERVER_MODULE_H_
-#define _NFC_MASTERNET_SERVER_MODULE_H_
+#ifndef NFC_MASTERNET_SERVER_MODULE_H
+#define NFC_MASTERNET_SERVER_MODULE_H
 
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 

@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_LOGINNET_CLIENTMODULE_H_
-#define _NFI_LOGINNET_CLIENTMODULE_H_
+#ifndef _NFI_LOGINNET_CLIENTMODULE_H
+#define _NFI_LOGINNET_CLIENTMODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
