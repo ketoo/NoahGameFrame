@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_MAP_H_
-#define _NF_MAP_H_
+#ifndef NF_MAP_H
+#define NF_MAP_H
 
 #include <map>
 #include <list>

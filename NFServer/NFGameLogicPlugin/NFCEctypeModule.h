@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_ECTYPE_MODULE_H_
-#define _NFC_ECTYPE_MODULE_H_
+#ifndef NFC_ECTYPE_MODULE_H
+#define NFC_ECTYPE_MODULE_H
 
 #include <iostream>
 #include "NFComm/NFPluginModule/NFIEctypeModule.h"
