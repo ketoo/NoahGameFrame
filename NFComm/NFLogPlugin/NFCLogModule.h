@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_LOG_MODULE_H_
-#define _NFC_LOG_MODULE_H_
+#ifndef NFC_LOG_MODULE_H
+#define NFC_LOG_MODULE_H
 
 //#include <strsafe.h>
 #include "NFComm/NFPluginModule/NFILogModule.h"
