@@ -1,5 +1,5 @@
-#ifndef __NF_COMMON_TIMER_H__
-#define __NF_COMMON_TIMER_H__
+#ifndef _NF_COMMON_TIMER_H_
+#define _NF_COMMON_TIMER_H_
 
 /**
 filename:common_timer.h
@@ -442,4 +442,4 @@ typedef NFTimerEx< RealType > RealTimerEx;    // 现实时间定时器
 //};
 
 
-#endif // __COMMON_TIMER_H__
+#endif // __COMMON_TIMER_H_

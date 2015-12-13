@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_ITEM_MODULE_H_
-#define _NFC_ITEM_MODULE_H_
+#ifndef NFC_ITEM_MODULE_H
+#define NFC_ITEM_MODULE_H
 
 #include "NFCPackModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"

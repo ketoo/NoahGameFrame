@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_STATE_MACHINE_H_
-#define _NFI_STATE_MACHINE_H_
+#ifndef _NFI_STATE_MACHINE_H
+#define _NFI_STATE_MACHINE_H
 
 #include "Include/NFCDeadState.h"
 #include "Include/NFCFightState.h"
