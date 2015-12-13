@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_COMPONENT_MANAGER_H_
-#define _NFI_COMPONENT_MANAGER_H_
+#ifndef _NFI_COMPONENT_MANAGER_H
+#define _NFI_COMPONENT_MANAGER_H
 
 #include <memory>
 #include "NFMap.h"

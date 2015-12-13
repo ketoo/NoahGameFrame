@@ -1,5 +1,5 @@
-#ifndef _NF_PLATFORM_H_
-#define _NF_PLATFORM_H_
+#ifndef NF_PLATFORM_H
+#define NF_PLATFORM_H
 
 #define NF_PLATFORM_WIN 1
 #define NF_PLATFORM_LINUX 2
