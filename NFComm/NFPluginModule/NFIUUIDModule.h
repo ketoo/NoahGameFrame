@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_UUID_MODULE_H_
-#define _NFI_UUID_MODULE_H_
+#ifndef _NFI_UUID_MODULE_H
+#define _NFI_UUID_MODULE_H
 
 #include "NFILogicModule.h"
 
@@ -20,4 +20,4 @@ public:
     virtual void SetIdentID(NFINT64 nID) = 0;
 };
 
-#endif // !_NFI_UUID_MODULE_H_
+#endif // !_NFI_UUID_MODULE_H

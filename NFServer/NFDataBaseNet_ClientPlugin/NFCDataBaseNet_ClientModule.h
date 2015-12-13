@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_DATABASENET_CLIENT_MODULE_H_
-#define _NFC_DATABASENET_CLIENT_MODULE_H_
+#ifndef NFC_DATABASENET_CLIENT_MODULE_H
+#define NFC_DATABASENET_CLIENT_MODULE_H
 
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"

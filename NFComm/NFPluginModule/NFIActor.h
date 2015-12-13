@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_ACTOR_H_
-#define _NFI_ACTOR_H_
+#ifndef _NFI_ACTOR_H
+#define _NFI_ACTOR_H
 
 #include <map>
 #include <string>

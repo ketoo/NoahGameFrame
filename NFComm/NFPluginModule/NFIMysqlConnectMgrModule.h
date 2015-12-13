@@ -5,8 +5,8 @@
 //    @Module           :    NFIMysqlConnectMgrModule
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_MYSQL_CONNECT_MANAGER_MODULE_H_
-#define _NFI_MYSQL_CONNECT_MANAGER_MODULE_H_
+#ifndef _NFI_MYSQL_CONNECT_MANAGER_MODULE_H
+#define _NFI_MYSQL_CONNECT_MANAGER_MODULE_H
 
 #include "NFILogicModule.h"
 #include "NFIMysqlDriver.h"
@@ -22,4 +22,4 @@ public:
 	virtual NFIMysqlDriver* GetMysqlDriver() = 0;
 };
 
-#endif // !_NFI_MYSQL_CONNECT_MANAGER_MODULE_H_
+#endif // !_NFI_MYSQL_CONNECT_MANAGER_MODULE_H

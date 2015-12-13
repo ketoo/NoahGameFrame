@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFTAG_LUGIN_H_
-#define _NFTAG_LUGIN_H_
+#ifndef _NFTAG_LUGIN_H
+#define _NFTAG_LUGIN_H
 
 ///
 #include "NFComm/NFPluginModule/NFIPlugin.h"
