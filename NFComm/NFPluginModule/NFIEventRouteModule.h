@@ -6,8 +6,8 @@
 //    @Desc			:	事件路由，主要用来代替分布式中有些对象不在本服务器然后需要转发的事件（邮件）
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_EVENTROUTE_MODULE_H_
-#define _NFI_EVENTROUTE_MODULE_H_
+#ifndef _NFI_EVENTROUTE_MODULE_H
+#define _NFI_EVENTROUTE_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"

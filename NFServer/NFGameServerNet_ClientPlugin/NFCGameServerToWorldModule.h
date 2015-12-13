@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_GAMESERVER_NETCLIENT_MODULE_H_
-#define _NFC_GAMESERVER_NETCLIENT_MODULE_H_
+#ifndef NFC_GAMESERVER_NETCLIENT_MODULE_H
+#define NFC_GAMESERVER_NETCLIENT_MODULE_H
 
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"

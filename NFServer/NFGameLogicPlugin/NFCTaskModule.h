@@ -5,8 +5,8 @@
 //    @Module           :    NFCTaskModule
 //
 // -------------------------------------------------------------------------
-#ifndef __NFC_TASK_MODULE_H__
-#define __NFC_TASK_MODULE_H__
+#ifndef __NFC_TASK_MODULE_H_
+#define __NFC_TASK_MODULE_H_
 
 #include "NFComm/NFPluginModule/NFITaskModule.h"
 
@@ -32,4 +32,4 @@ protected:
 private:
 };
 
-#endif // !__NFC_TASK_MODULE_H__
+#endif // !__NFC_TASK_MODULE_H_

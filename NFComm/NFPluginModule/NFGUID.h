@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_IDENTID_H_
-#define _NF_IDENTID_H_
+#ifndef NF_IDENTID_H
+#define NF_IDENTID_H
 
 #include "NFPlatform.h"
 #include <iostream>
