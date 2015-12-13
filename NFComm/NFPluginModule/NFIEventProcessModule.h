@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_EVENTPROCESS_MODULE_H_
-#define _NFI_EVENTPROCESS_MODULE_H_
+#ifndef _NFI_EVENTPROCESS_MODULE_H
+#define _NFI_EVENTPROCESS_MODULE_H
 
 #include <iostream>
 #include <functional>

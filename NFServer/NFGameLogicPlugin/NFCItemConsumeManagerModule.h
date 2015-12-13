@@ -6,8 +6,8 @@
 //    @Desc             :   道具消费机制管理类,所有类型的道具消费类型均需注册才能消费
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_ITEMCONSUME_MANAGER_MODULE_H_
-#define _NFC_ITEMCONSUME_MANAGER_MODULE_H_
+#ifndef NFC_ITEMCONSUME_MANAGER_MODULE_H
+#define NFC_ITEMCONSUME_MANAGER_MODULE_H
 
 #include <iostream>
 #include "NFComm/NFPluginModule/NFIItemConsumeManagerModule.h"
