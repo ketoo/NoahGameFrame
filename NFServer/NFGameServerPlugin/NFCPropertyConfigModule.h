@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_PROPERTY_CONFIG_MODULE_H_
-#define _NFC_PROPERTY_CONFIG_MODULE_H_
+#ifndef NFC_PROPERTY_CONFIG_MODULE_H
+#define NFC_PROPERTY_CONFIG_MODULE_H
 
 #include "NFComm/Config/NFConfig.h"
 #include "NFComm/RapidXML/rapidxml.hpp"
