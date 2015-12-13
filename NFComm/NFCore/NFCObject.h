@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_OBJECT_H_
-#define _NFC_OBJECT_H_
+#ifndef NFC_OBJECT_H
+#define NFC_OBJECT_H
 
 #include <iostream>
 #include <string>

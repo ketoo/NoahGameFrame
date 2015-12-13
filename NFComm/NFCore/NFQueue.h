@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_QUEUE_H_
-#define _NF_QUEUE_H_
+#ifndef NF_QUEUE_H
+#define NF_QUEUE_H
 
 #include <list>
 #include <thread>

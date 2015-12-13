@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_PROPERTY_H_
-#define _NFC_PROPERTY_H_
+#ifndef NFC_PROPERTY_H
+#define NFC_PROPERTY_H
 
 #include "NFDefine.h"
 #include "NFMap.h"

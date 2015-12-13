@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_LIMIT_H_
-#define _NF_LIMIT_H_
+#ifndef NF_LIMIT_H
+#define NF_LIMIT_H
 
 #pragma pack(push,1)
 
