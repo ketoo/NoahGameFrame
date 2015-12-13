@@ -6,8 +6,8 @@
 //    @Desc             :   技能消费机制类,短刃类，当场扣除当场生效
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_BRIEFSKILLCONSUME_PROCESS_MODULE_H_
-#define _NFC_BRIEFSKILLCONSUME_PROCESS_MODULE_H_
+#ifndef NFC_BRIEFSKILLCONSUME_PROCESS_MODULE_H
+#define NFC_BRIEFSKILLCONSUME_PROCESS_MODULE_H
 
 #include <iostream>
 #include "NFComm/NFPluginModule/NFISkillConsumeProcessModule.h"

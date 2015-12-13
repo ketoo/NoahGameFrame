@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_MSGDEFINE_H_
-#define _NF_MSGDEFINE_H_
+#ifndef NF_MSGDEFINE_H
+#define NF_MSGDEFINE_H
 
 #include "NFLimit.h"
 #include "NFDefine.pb.h"

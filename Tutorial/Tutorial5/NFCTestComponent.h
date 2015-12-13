@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_TEST_COMPONENT_H_
-#define _NFC_TEST_COMPONENT_H_
+#ifndef NFC_TEST_COMPONENT_H
+#define NFC_TEST_COMPONENT_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"

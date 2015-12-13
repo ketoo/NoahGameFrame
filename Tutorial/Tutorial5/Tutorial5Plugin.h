@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_TUTORIAL5_H_
-#define _NF_TUTORIAL5_H_
+#ifndef NF_TUTORIAL5_H
+#define NF_TUTORIAL5_H
 
 ///
 #include "NFComm/NFPluginModule/NFIPlugin.h"

@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_PROXYSERVERNET_SERVERPLUGIN_H_
-#define _NF_PROXYSERVERNET_SERVERPLUGIN_H_
+#ifndef NF_PROXYSERVERNET_SERVERPLUGIN_H
+#define NF_PROXYSERVERNET_SERVERPLUGIN_H
 
 ///
 #include "NFComm/NFPluginModule/NFIPlugin.h"

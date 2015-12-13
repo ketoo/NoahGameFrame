@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_MAPEX_H_
-#define _NF_MAPEX_H_
+#ifndef NF_MAPEX_H
+#define NF_MAPEX_H
 
 #include <map>
 #include <list>
