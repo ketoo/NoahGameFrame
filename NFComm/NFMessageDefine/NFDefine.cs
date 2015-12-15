@@ -14,11 +14,11 @@ namespace NFMsg
     public enum EGameEventCode
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_UNKOWN_ERROR", Value=0)]
-      EGEC_UNKOWN_ERROR = 0,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_SUCCESS", Value=0)]
+      EGEC_SUCCESS = 0,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_SUCCESS", Value=1)]
-      EGEC_SUCCESS = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_UNKOWN_ERROR", Value=1)]
+      EGEC_UNKOWN_ERROR = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACCOUNT_EXIST", Value=2)]
       EGEC_ACCOUNT_EXIST = 2,
