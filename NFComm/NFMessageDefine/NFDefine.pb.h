@@ -34,8 +34,8 @@ void protobuf_ShutdownFile_NFDefine_2eproto();
 
 
 enum EGameEventCode {
-  EGEC_UNKOWN_ERROR = 0,
-  EGEC_SUCCESS = 1,
+  EGEC_SUCCESS = 0,
+  EGEC_UNKOWN_ERROR = 1,
   EGEC_ACCOUNT_EXIST = 2,
   EGEC_ACCOUNTPWD_INVALID = 3,
   EGEC_ACCOUNT_USING = 4,
@@ -85,7 +85,7 @@ enum EGameEventCode {
   EGEC_LEAVE_GUILD_SUCCESS = 202
 };
 bool EGameEventCode_IsValid(int value);
-const EGameEventCode EGameEventCode_MIN = EGEC_UNKOWN_ERROR;
+const EGameEventCode EGameEventCode_MIN = EGEC_SUCCESS;
 const EGameEventCode EGameEventCode_MAX = EGEC_LEAVE_GUILD_SUCCESS;
 const int EGameEventCode_ARRAYSIZE = EGameEventCode_MAX + 1;
 
