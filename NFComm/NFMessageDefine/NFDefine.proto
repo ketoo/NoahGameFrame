@@ -3,8 +3,8 @@ package NFMsg;
 //所有的网络逻辑事件枚举都在这里 
 enum EGameEventCode
 {
-	EGEC_UNKOWN_ERROR							= 0;		// 未知错误
-	EGEC_SUCCESS								= 1;        // 操作成功
+	EGEC_SUCCESS								= 0;        // 操作成功
+	EGEC_UNKOWN_ERROR							= 1;		// 未知错误
 	EGEC_ACCOUNT_EXIST							= 2;        // 注册时账号在数据库中已存在
 	EGEC_ACCOUNTPWD_INVALID						= 3;        // 账号不存在或者密码错误
 	EGEC_ACCOUNT_USING							= 4;        // 账号正在使用
