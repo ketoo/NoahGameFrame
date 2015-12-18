@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_PLATFORM_DATA_MODULE_H_
-#define _NFI_PLATFORM_DATA_MODULE_H_
+#ifndef _NFI_PLATFORM_DATA_MODULE_H
+#define _NFI_PLATFORM_DATA_MODULE_H
 
 #include "NFComm/Config/NFConfig.h"
 #include "NFComm/NFCore/NFCDataList.h"

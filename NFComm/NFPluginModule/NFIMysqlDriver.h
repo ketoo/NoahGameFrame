@@ -5,8 +5,8 @@
 //    @Module           :    NFIMysqlDriver
 //    @Desc             :
 // -------------------------------------------------------------------------
-#ifndef __NFI_MYSQL_DRIVER_MODULE_H__
-#define __NFI_MYSQL_DRIVER_MODULE_H__
+#ifndef NFI_MYSQL_DRIVER_H
+#define NFI_MYSQL_DRIVER_H
 //#define MS_HIREDIS
 #ifdef _MSC_VER 
 #include <windows.h>

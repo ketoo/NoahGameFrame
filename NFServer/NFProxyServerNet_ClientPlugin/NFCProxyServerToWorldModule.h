@@ -7,8 +7,8 @@
 //     @Changed         : NFCProxyConnectObject Add HeartBeat by hahaya 2013-11-1
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_PROXYSERVER_NETCLIENT_MODULE_H_
-#define _NFC_PROXYSERVER_NETCLIENT_MODULE_H_
+#ifndef NFC_PROXYSERVER_NETCLIENT_MODULE_H
+#define NFC_PROXYSERVER_NETCLIENT_MODULE_H
 
 #include <string>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"

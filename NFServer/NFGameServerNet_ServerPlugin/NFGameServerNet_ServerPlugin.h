@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_GAMESERVERNET_SERVERPLUGIN_H_
-#define _NF_GAMESERVERNET_SERVERPLUGIN_H_
+#ifndef NF_GAMESERVERNET_SERVERPLUGIN_H
+#define NF_GAMESERVERNET_SERVERPLUGIN_H
 
 ///
 #include "NFComm/NFPluginModule/NFIPlugin.h"

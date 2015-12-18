@@ -7,8 +7,8 @@
 #include "boost/lexical_cast.hpp"
 #include "boost/format.hpp"
 
-#ifndef __CONSISTENT_HASH_H__
-#define __CONSISTENT_HASH_H__
+#ifndef __CONSISTENT_HASH_H_
+#define __CONSISTENT_HASH_H_
 
 //ÐéÄâ½Úµã
 class NFIVirtualNode 
