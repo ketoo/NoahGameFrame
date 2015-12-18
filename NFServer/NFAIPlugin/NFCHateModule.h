@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_HATE_MODULE_H_
-#define _NFC_HATE_MODULE_H_
+#ifndef NFC_HATE_MODULE_H
+#define NFC_HATE_MODULE_H
 
 #include <string>
 #include <iostream>
