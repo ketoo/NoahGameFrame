@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_ACTOR_MANAGER_H_
-#define _NFI_ACTOR_MANAGER_H_
+#ifndef _NFI_ACTOR_MANAGER_H
+#define _NFI_ACTOR_MANAGER_H
 
 #include "NFILogicModule.h"
 #include "NFComm/NFCore/NFIComponent.h"

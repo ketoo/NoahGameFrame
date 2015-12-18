@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_ACTOR_H_
-#define _NFC_ACTOR_H_
+#ifndef NFC_ACTOR_H
+#define NFC_ACTOR_H
 
 #include <map>
 #include <string>

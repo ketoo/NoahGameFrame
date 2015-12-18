@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_PROPERTY_H_
-#define _NFI_PROPERTY_H_
+#ifndef _NFI_PROPERTY_H
+#define _NFI_PROPERTY_H
 
 #include "NFDefine.h"
 #include "NFIDataList.h"
