@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef __NFC_CHASE_STATE_H__
-#define __NFC_CHASE_STATE_H__
+#ifndef __NFC_CHASE_STATE_H_
+#define __NFC_CHASE_STATE_H_
 
 #include "NFIState.h"
 
@@ -36,4 +36,4 @@ protected:
 private:
 };
 
-#endif // !__NFC_CHASE_STATE_H__
+#endif // !__NFC_CHASE_STATE_H_

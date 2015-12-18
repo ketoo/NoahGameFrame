@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_AI_MODULE_H_
-#define _NFC_AI_MODULE_H_
+#ifndef NFC_AI_MODULE_H
+#define NFC_AI_MODULE_H
 
 #include "NFIHateModule.h"
 #include "NFIStateMachine.h"

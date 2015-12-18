@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_SLG_SHOP_MODULE_H_
-#define _NFC_SLG_SHOP_MODULE_H_
+#ifndef NFC_SLG_SHOP_MODULE_H
+#define NFC_SLG_SHOP_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"

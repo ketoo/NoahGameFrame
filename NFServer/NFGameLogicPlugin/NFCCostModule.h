@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef __NFC_COST_MODULE_H__
-#define __NFC_COST_MODULE_H__
+#ifndef __NFC_COST_MODULE_H_
+#define __NFC_COST_MODULE_H_
 
 #include "NFComm/NFPluginModule/NFICostModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
@@ -41,4 +41,4 @@ private:
     NFIPropertyModule* m_pPropertyModule;
 };
 
-#endif // !__NFC_COST_MODULE_H__
+#endif // !__NFC_COST_MODULE_H_
