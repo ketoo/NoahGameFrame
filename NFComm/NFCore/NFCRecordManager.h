@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_RECORDMANAGER_H_
-#define _NFC_RECORDMANAGER_H_
+#ifndef NFC_RECORDMANAGER_H
+#define NFC_RECORDMANAGER_H
 
 #include <map>
 #include <list>

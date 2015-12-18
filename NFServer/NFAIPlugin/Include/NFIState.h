@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_STATE_H_
-#define _NFI_STATE_H_
+#ifndef _NFI_STATE_H
+#define _NFI_STATE_H
 
 #include "NFComm/NFCore/NFIDataList.h"
 

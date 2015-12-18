@@ -6,8 +6,8 @@
 //    @Desc                 :    NPCËÀÍöË¢ÐÂ
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_NPC_REFRESH_MODULE_H_
-#define _NFC_NPC_REFRESH_MODULE_H_
+#ifndef NFC_NPC_REFRESH_MODULE_H
+#define NFC_NPC_REFRESH_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFINPCRefreshModule.h"
