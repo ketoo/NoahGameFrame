@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_GAMESERVERTOWORLDMODULE_H_
-#define _NFI_GAMESERVERTOWORLDMODULE_H_
+#ifndef _NFI_GAMESERVERTOWORLDMODULE_H
+#define _NFI_GAMESERVERTOWORLDMODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"

@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_DATALIST_H_
-#define _NFI_DATALIST_H_
+#ifndef _NFI_DATALIST_H
+#define _NFI_DATALIST_H
 
 #include <string>
 #include <cstring>
