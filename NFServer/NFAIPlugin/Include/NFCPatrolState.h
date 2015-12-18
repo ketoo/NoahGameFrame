@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_PATROL_H_
-#define _NFC_PATROL_H_
+#ifndef NFC_PATROL_H
+#define NFC_PATROL_H
 
 #include "NFIState.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"

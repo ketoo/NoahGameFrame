@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef __NFI_TASK_MODULE_H__
-#define __NFI_TASK_MODULE_H__
+#ifndef __NFI_TASK_MODULE_H_
+#define __NFI_TASK_MODULE_H_
 
 #include <iostream>
 #include "NFILogicModule.h"
@@ -19,4 +19,4 @@ public:
 
 };
 
-#endif // !__NFI_TASK_MODULE_H__
+#endif // !__NFI_TASK_MODULE_H_

@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _GT_RECORD_H_
-#define _GT_RECORD_H_
+#ifndef _GT_RECORD_H
+#define _GT_RECORD_H
 
 #include <vector>
 #include "NFIRecord.h"
