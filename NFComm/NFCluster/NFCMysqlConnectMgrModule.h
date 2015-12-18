@@ -7,11 +7,10 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_MYSQL_CONNECT_MANAGER_MODULE_H_
-#define _NFC_MYSQL_CONNECT_MANAGER_MODULE_H_
+#ifndef NFC_MYSQL_CONNECT_MANAGER_MODULE_H
+#define NFC_MYSQL_CONNECT_MANAGER_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIMysqlConnectMgrModule.h"
-#include "NFComm/NFPluginModule/NFIMysqlDriver.h"
 
 class NFCMysqlConnectMgrModule : public NFIMysqlConnectMgrModule
 {
@@ -41,4 +40,4 @@ protected:
 	float mfLastCheckTime;
 };
 
-#endif // !_NFC_MYSQL_CONNECT_MANAGER_MODULE_H_
+#endif // !_NFC_MYSQL_CONNECT_MANAGER_MODULE_H

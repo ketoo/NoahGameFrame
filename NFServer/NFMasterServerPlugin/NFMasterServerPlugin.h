@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_MASTERSERVERPLUGIN_H_
-#define _NF_MASTERSERVERPLUGIN_H_
+#ifndef NF_MASTERSERVERPLUGIN_H
+#define NF_MASTERSERVERPLUGIN_H
 ///
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"

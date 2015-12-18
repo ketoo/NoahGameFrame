@@ -7,8 +7,8 @@
 //                                  --技能书学习技能,礼包类获得物品,BUFF类得到BUFF,技能类使用技能
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_CARDITEMCONSUME_PROCESS_MODULE_H_
-#define _NFC_CARDITEMCONSUME_PROCESS_MODULE_H_
+#ifndef NFC_CARDITEMCONSUME_PROCESS_MODULE_H
+#define NFC_CARDITEMCONSUME_PROCESS_MODULE_H
 
 #include <iostream>
 #include "NFComm/NFPluginModule/NFIKernelModule.h"

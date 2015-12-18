@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_DEADSTATE_H_
-#define _NFC_DEADSTATE_H_
+#ifndef NFC_DEADSTATE_H
+#define NFC_DEADSTATE_H
 
 #include "NFIState.h"
 

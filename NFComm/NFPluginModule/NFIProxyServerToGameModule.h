@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_PROXYNET_TO_GAME_H_
-#define _NFI_PROXYNET_TO_GAME_H_
+#ifndef _NFI_PROXYNET_TO_GAME_H
+#define _NFI_PROXYNET_TO_GAME_H
 
 #include <iostream>
 #include "NFILogicModule.h"

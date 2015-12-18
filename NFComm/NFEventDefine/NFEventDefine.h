@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_EVENTDEFINE_H_
-#define _NF_EVENTDEFINE_H_
+#ifndef NF_EVENTDEFINE_H
+#define NF_EVENTDEFINE_H
 
 #include <iostream>
 ///
