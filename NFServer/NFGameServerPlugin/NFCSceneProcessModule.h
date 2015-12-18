@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_SCENEPROCESS_MODULE_H_
-#define _NFC_SCENEPROCESS_MODULE_H_
+#ifndef NFC_SCENEPROCESS_MODULE_H
+#define NFC_SCENEPROCESS_MODULE_H
 
 #include <string>
 #include <map>

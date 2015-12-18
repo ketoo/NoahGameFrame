@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_PLUGIN_H_
-#define _NFI_PLUGIN_H_
+#ifndef _NFI_PLUGIN_H
+#define _NFI_PLUGIN_H
 
 #include <iostream>
 #include "NFILogicModule.h"

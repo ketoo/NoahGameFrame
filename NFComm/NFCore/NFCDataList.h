@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_DATALIST_H_
-#define _NFC_DATALIST_H_
+#ifndef NFC_DATALIST_H
+#define NFC_DATALIST_H
 
 #include "NFIDataList.h"
 #include "NFComm/NFPluginModule/NFGUID.h"

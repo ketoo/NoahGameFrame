@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_GAMESERVER_MODULE_H_
-#define _NFC_GAMESERVER_MODULE_H_
+#ifndef NFC_GAMESERVER_MODULE_H
+#define NFC_GAMESERVER_MODULE_H
 
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
