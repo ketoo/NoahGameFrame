@@ -6,8 +6,8 @@
 //    @Desc             :   道具消费机制类,详细的具体某类道具消费流程以及扣除机制--药剂消费
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_POTIONITEMCONSUME_PROCESS_MODULE_H_
-#define _NFC_POTIONITEMCONSUME_PROCESS_MODULE_H_
+#ifndef NFC_POTIONITEMCONSUME_PROCESS_MODULE_H
+#define NFC_POTIONITEMCONSUME_PROCESS_MODULE_H
 
 #include <iostream>
 #include "NFComm/NFPluginModule/NFIKernelModule.h"

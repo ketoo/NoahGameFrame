@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_SKILL_DEF_H_
-#define _NFC_SKILL_DEF_H_
+#ifndef NFC_SKILL_DEF_H
+#define NFC_SKILL_DEF_H
 
 #pragma pack(push,1)
 

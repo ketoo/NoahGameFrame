@@ -13,8 +13,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_DATABASE_MODULE_H_
-#define _NFC_DATABASE_MODULE_H_
+#ifndef NFC_DATABASE_MODULE_H
+#define NFC_DATABASE_MODULE_H
 
 #include "NFCMysqlDriver.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"

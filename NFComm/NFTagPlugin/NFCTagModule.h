@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_TAG_MODULE_H_
-#define _NFC_TAG_MODULE_H_
+#ifndef NFC_TAG_MODULE_H
+#define NFC_TAG_MODULE_H
 
 #include "NFComm/NFPluginModule/NFITagModule.h"
 

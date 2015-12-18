@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_CONCURRENT_MODULE_H_
-#define _NFC_CONCURRENT_MODULE_H_
+#ifndef NFC_CONCURRENT_MODULE_H
+#define NFC_CONCURRENT_MODULE_H
 
 //#include "NFComm/NFPluginModule/NFIConcurrentModule.h"
 

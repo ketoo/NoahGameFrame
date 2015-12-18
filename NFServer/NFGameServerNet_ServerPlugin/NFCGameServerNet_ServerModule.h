@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_GAMESERVER_SERVER_MODULE_H_
-#define _NFC_GAMESERVER_SERVER_MODULE_H_
+#ifndef NFC_GAMESERVER_SERVER_MODULE_H
+#define NFC_GAMESERVER_SERVER_MODULE_H
 
 //#include "GameServerPCH.h"
 //#include "NW_Helper.h"
