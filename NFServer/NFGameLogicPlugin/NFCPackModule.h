@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_PACK_MODULE_H_
-#define _NFC_PACK_MODULE_H_
+#ifndef NFC_PACK_MODULE_H
+#define NFC_PACK_MODULE_H
 
 #include <boost/static_assert.hpp>
 #include <boost/date_time/gregorian/gregorian.hpp>

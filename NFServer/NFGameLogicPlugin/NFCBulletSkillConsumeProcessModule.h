@@ -6,8 +6,8 @@
 //    @Desc             :   技能消费机制类,子弹类，当场扣除，但是到达才生效
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_BULLETSKILLCONSUME_PROCESS_MODULE_H_
-#define _NFC_BULLETSKILLCONSUME_PROCESS_MODULE_H_
+#ifndef NFC_BULLETSKILLCONSUME_PROCESS_MODULE_H
+#define NFC_BULLETSKILLCONSUME_PROCESS_MODULE_H
 
 #include <iostream>
 #include "NFComm/NFPluginModule/NFIKernelModule.h"

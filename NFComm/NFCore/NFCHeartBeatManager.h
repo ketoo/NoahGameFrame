@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _GT_HEARTBEATMANAGER_H_
-#define _GT_HEARTBEATMANAGER_H_
+#ifndef _GT_HEARTBEATMANAGER_H
+#define _GT_HEARTBEATMANAGER_H
 
 #include "NFMap.h"
 #include "NFList.h"

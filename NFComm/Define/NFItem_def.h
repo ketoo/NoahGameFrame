@@ -5,8 +5,8 @@
 //    功能描述    :    物品的结构体
 //
 // -------------------------------------------------------------------------
-#ifndef _NFC_ITEM_DEF_H_
-#define _NFC_ITEM_DEF_H_
+#ifndef NFC_ITEM_DEF_H
+#define NFC_ITEM_DEF_H
 
 #pragma pack(push,1)
 

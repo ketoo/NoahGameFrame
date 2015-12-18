@@ -6,8 +6,8 @@
 //    @Mail             :   elite_yang@163.com
 //
 // -------------------------------------------------------------------------
-#ifndef _NFI_MOUNT_MODULE_H_
-#define _NFI_MOUNT_MODULE_H_
+#ifndef _NFI_MOUNT_MODULE_H
+#define _NFI_MOUNT_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
@@ -21,4 +21,4 @@ public:
     virtual void AddNewerMount( const NFGUID self, const int nLevel ) = 0;
 };
 
-#endif // !_NFI_MOUNT_MODULE_H_
+#endif // !_NFI_MOUNT_MODULE_H

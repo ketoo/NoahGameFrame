@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_DYNLIB_H_
-#define _NFC_DYNLIB_H_
+#ifndef NFC_DYNLIB_H
+#define NFC_DYNLIB_H
 
 #include <stdio.h>
 #include <iostream>

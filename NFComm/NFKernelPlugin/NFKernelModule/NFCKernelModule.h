@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_KERNEL_MODULE_H_
-#define _NFC_KERNEL_MODULE_H_
+#ifndef NFC_KERNEL_MODULE_H
+#define NFC_KERNEL_MODULE_H
 
 #include <iostream>
 #include <fstream>

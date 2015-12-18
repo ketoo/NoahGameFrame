@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_LEVEL_MODULE_H_
-#define _NFC_LEVEL_MODULE_H_
+#ifndef NFC_LEVEL_MODULE_H
+#define NFC_LEVEL_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
