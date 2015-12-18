@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_DEFINE_H_
-#define _NF_DEFINE_H_
+#ifndef NF_DEFINE_H
+#define NF_DEFINE_H
 
 #include <functional>
 #include "NFIDataList.h"

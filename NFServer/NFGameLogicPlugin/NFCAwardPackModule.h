@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_AWAED_MODULE_H_
-#define _NFC_AWAED_MODULE_H_
+#ifndef NFC_AWAED_MODULE_H
+#define NFC_AWAED_MODULE_H
 
 #include <iostream>
 #include "NFComm/Config/NFConfig.h"

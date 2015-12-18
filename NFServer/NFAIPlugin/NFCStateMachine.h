@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_STATE_MACHINE_H_
-#define _NFC_STATE_MACHINE_H_
+#ifndef NFC_STATE_MACHINE_H
+#define NFC_STATE_MACHINE_H
 
 #include "NFIStateMachine.h"
 #include "NFCAIModule.h"
