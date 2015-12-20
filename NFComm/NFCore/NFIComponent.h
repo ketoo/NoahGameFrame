@@ -49,7 +49,6 @@ public:
 		return NF_SHARE_PTR<T>();
 	}
 
-
     virtual bool SetEnable(const bool bEnable)
     {
         return mbEnable;
@@ -82,7 +81,7 @@ public:
 	virtual int OnASyncEvent(const NFGUID& self, const int event, std::string& arg){return 0;}
 
 protected:
-	virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance() = 0;
+    virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance() = 0;
 
 private:
 	bool mbEnable;
