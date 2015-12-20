@@ -14,6 +14,10 @@ bool HelloWorld7::AfterInit()
     //³õÊ¼»¯Íê±Ï
     std::cout << "Hello, world1, AfterInit" << std::endl;
 
+    m_pUulClientModule = pPluginManager->FindModule<NFIUrlClientModule>("NFCUrlClientModule");
+
+    assert(NULL != m_pUulClientModule);
+
     return true;
 }
 
