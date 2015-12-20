@@ -20,11 +20,15 @@ public:
     {
     }
 
+    NFCURLComponent(NFIPluginManager* pPluginManager):NFIComponent(NFGUID(0,0))
+    {
+    }
+
     virtual ~NFCURLComponent()
     {
 
     }
-
+    
     virtual const std::string GetComponentName() const ;
     virtual int OnASyncEvent(const NFGUID& self, const int event, std::string& arg);
 
