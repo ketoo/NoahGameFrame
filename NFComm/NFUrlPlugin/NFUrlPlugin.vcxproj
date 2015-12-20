@@ -129,11 +129,11 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCUrlModule.cpp" />
+    <ClCompile Include="NFCUrlClientModule.cpp" />
     <ClCompile Include="NFUrlPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCUrlModule.h" />
+    <ClInclude Include="NFCUrlClientModule.h" />
     <ClInclude Include="NFCWebCharacter.hpp" />
     <ClInclude Include="NFUrlPlugin.h" />
   </ItemGroup>
