@@ -41,9 +41,9 @@ OBJDIR_RELEASE_X64 = .objs
 DEP_RELEASE_X64 = 
 OUT_RELEASE_X64 = $(SolutionDir)/_Out/Comm/Release/NFUrlPlugin.so
 
-OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFCUrlModule.o $(OBJDIR_DEBUG_X64)/NFUrlPlugin.o $(OBJDIR_DEBUG_X64)/dllmain.o
+OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFCUrlClientModule.o $(OBJDIR_DEBUG_X64)/NFUrlPlugin.o $(OBJDIR_DEBUG_X64)/dllmain.o
 
-OBJ_RELEASE_X64 = $(OBJDIR_RELEASE_X64)/NFCUrlModule.o $(OBJDIR_RELEASE_X64)/NFUrlPlugin.o $(OBJDIR_RELEASE_X64)/dllmain.o
+OBJ_RELEASE_X64 = $(OBJDIR_RELEASE_X64)/NFCUrlClientModule.o $(OBJDIR_RELEASE_X64)/NFUrlPlugin.o $(OBJDIR_RELEASE_X64)/dllmain.o
 
 all: debug_x64 release_x64
 
@@ -68,8 +68,8 @@ debug_x64: before_debug_x64 out_debug_x64 after_debug_x64
 out_debug_x64: before_debug_x64 $(OBJ_DEBUG_X64) $(DEP_DEBUG_X64)
 	$(LD) -shared $(LIBDIR_DEBUG_X64) $(OBJ_DEBUG_X64)  -o $(OUT_DEBUG_X64) $(LDFLAGS_DEBUG_X64) $(LIB_DEBUG_X64)
 
-$(OBJDIR_DEBUG_X64)/NFCUrlModule.o: NFCUrlModule.cpp
-	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCUrlModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCUrlModule.o
+$(OBJDIR_DEBUG_X64)/NFCUrlClientModule.o: NFCUrlClientModule.cpp
+	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCUrlClientModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCUrlClientModule.o
 
 $(OBJDIR_DEBUG_X64)/NFUrlPlugin.o: NFUrlPlugin.cpp
 	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFUrlPlugin.cpp -o $(OBJDIR_DEBUG_X64)/NFUrlPlugin.o
@@ -101,8 +101,8 @@ release_x64: before_release_x64 out_release_x64 after_release_x64
 out_release_x64: before_release_x64 $(OBJ_RELEASE_X64) $(DEP_RELEASE_X64)
 	$(LD) -shared $(LIBDIR_RELEASE_X64) $(OBJ_RELEASE_X64)  -o $(OUT_RELEASE_X64) $(LDFLAGS_RELEASE_X64) $(LIB_RELEASE_X64)
 
-$(OBJDIR_RELEASE_X64)/NFCUrlModule.o: NFCUrlModule.cpp
-	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCUrlModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCUrlModule.o
+$(OBJDIR_RELEASE_X64)/NFCUrlClientModule.o: NFCUrlClientModule.cpp
+	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCUrlClientModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCUrlClientModule.o
 
 $(OBJDIR_RELEASE_X64)/NFUrlPlugin.o: NFUrlPlugin.cpp
 	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFUrlPlugin.cpp -o $(OBJDIR_RELEASE_X64)/NFUrlPlugin.o
