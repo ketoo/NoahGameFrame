@@ -11,6 +11,7 @@
 
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFIUrlClientModule.h"
 
 class HelloWorld7
     : public NFILogicModule
@@ -30,6 +31,9 @@ public:
     virtual bool Shut();
 
 protected:
+
+private:
+    NFIUrlClientModule* m_pUulClientModule;
 
 };
 
