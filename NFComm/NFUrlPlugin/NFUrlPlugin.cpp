@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------
 
 
-#include "NFCUrlModule.h"
+#include "NFCUrlClientModule.h"
 #include "NFUrlPlugin.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
@@ -38,11 +38,11 @@ const std::string NFUrlPlugin::GetPluginName()
 
 void NFUrlPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFCUrlModule)
+    REGISTER_MODULE(pPluginManager, NFCUrlClientModule)
 
 }
 
 void NFUrlPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCUrlModule)
+    UNREGISTER_MODULE(pPluginManager, NFCUrlClientModule)
 }
