@@ -10,8 +10,28 @@
 #define _NFC_URL_MODULE_H_
 
 #include "curl/curl.h"
-#include "NFComm/NFPluginModule/NFIUrlModule.h"
+#include "NFComm/NFPluginModule/NFIUrlClientModule.h"
 #include "NFComm/NFCore/NFIComponent.h"
+
+struct SURLParam
+{
+    SURLParam()
+    {
+        fTimeOutSec = 0.0f;
+        nRet = 0;
+        nReqID = 0;
+    }
+
+    std::string strUrl;
+    std::string strGetParams;
+    std::string strBodyData;
+    std::string xCookies;
+    float fTimeOutSec;
+    std::string strRsp;
+    int  nRet;
+    int  nReqID;
+    HTTP_RSP_FUNCTOR mFunRsp;
+};
 
 class NFCURLComponent : public NFIComponent
 {
@@ -34,22 +54,15 @@ public:
 
 protected:
     virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance();
-
-private:
-    std::string mstrUrl;
-    std::string mstrGetParams;
-    std::string mstrBodyData;
-    std::string mxCookies;
-    float mfTimeOutSec;
-    std::string mstrRsp;
 };
 
 class NFCUrlClientModule
-    : public NFIUrlModule
+    : public NFIUrlClientModule
 {
 public:
     NFCUrlClientModule(NFIPluginManager* p)
     {
+        nCurReqID = 0;
         pPluginManager = p;
     }
 
@@ -94,26 +107,31 @@ public:
     virtual bool AfterInit();
     virtual bool BeforeShut();
 
-    virtual int HttpRequest(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp);    
+    virtual int HttpPostRequest(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp);    
     virtual int HttpRequest(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp);    
+    virtual int HttpRequestAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn);
+    virtual int HttpRequestPostAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn);
 
-    virtual int HttpRequestAs(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp);    
-
-    //“Ï≤Ω
     virtual bool StartActorPool(const int nCount);
     virtual bool CloseActorPool();
 
-    int HttpRequestAsyEnd(const NFGUID& self, const int nFormActor, const int nSubMsgID, const std::string& strData);
-
+public:
     static int HttpReq(const std::string& strUrl, const std::string& strGetParams, const std::string& strBodyData,const std::string& mxCookies, const float fTimeOutSec, std::string& strRsp);    
+    static bool PackParam(const SURLParam& xParam, std::string& strData);
+    static bool UnPackParam(const std::string& strData, SURLParam& xParam);
 
 protected:
+    int GetActor();
+    int HttpRequestAsyEnd(const NFGUID& self, const int nFormActor, const int nSubMsgID, const std::string& strData);
+
     static size_t RecvHttpData(void* buffer, size_t size, size_t nmemb, std::string* strRecveData);
     std::string CompositeParam( const std::map<std::string,std::string>& params );
     std::string CompositeCookies( const std::map<std::string,std::string>& params );
 
 protected:
     NFMapEx<int, int> mActorList; //actorid <-->Used
+    NFMapEx<int, SURLParam> mReqList;// reqID <-->Param
+    int nCurReqID;
 };
 
 #endif
