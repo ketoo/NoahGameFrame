@@ -1,12 +1,12 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCUrlModule.cpp
+//    @FileName      :    NFCUrlClientModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-07-08
-//    @Module           :    NFCUrlModule
+//    @Module           :    NFCUrlClientModule
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#include "NFCUrlModule.h"
+#include "NFCUrlClientModule.h"
 #include "curl/curl.h"
 #include "NFCWebCharacter.hpp"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -18,7 +18,7 @@ const std::string NFCURLComponent::GetComponentName() const
 
 int NFCURLComponent::OnASyncEvent( const NFGUID& self, const int event, std::string& arg )
 {
-    return NFCUrlModule::HttpReq(mstrUrl, mstrGetParams, mstrBodyData, mxCookies, mfTimeOutSec, mstrRsp);
+    return NFCUrlClientModule::HttpReq(mstrUrl, mstrGetParams, mstrBodyData, mxCookies, mfTimeOutSec, mstrRsp);
 }
 
 NF_SHARE_PTR<NFIComponent> NFCURLComponent::CreateNewInstance()
@@ -28,32 +28,32 @@ NF_SHARE_PTR<NFIComponent> NFCURLComponent::CreateNewInstance()
     return NF_SHARE_PTR<NFIComponent>(NULL);
 }
 
-bool NFCUrlModule::Init()
+bool NFCUrlClientModule::Init()
 {
 	return true;
 }
 
-bool NFCUrlModule::Shut()
+bool NFCUrlClientModule::Shut()
 {
 	return true;
 }
 
-bool NFCUrlModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCUrlClientModule::Execute( const float fLasFrametime, const float fStartedTime )
 {
 	return true;
 }
 
-bool NFCUrlModule::AfterInit()
+bool NFCUrlClientModule::AfterInit()
 {
 	return true;
 }
 
-bool NFCUrlModule::BeforeShut()
+bool NFCUrlClientModule::BeforeShut()
 {
 	return true;
 }
 
-int NFCUrlModule::HttpRequest(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp)
+int NFCUrlClientModule::HttpRequest(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp)
 {
     std::string strGetParam = CompositeParam(mxGetParams);
     std::string strCookies = CompositeCookies(mxCookies);
@@ -61,7 +61,7 @@ int NFCUrlModule::HttpRequest(const std::string& strUrl, const std::map<std::str
     return HttpReq(strUrl, strGetParam, strPostParam, strCookies, fTimeOutSec, strRsp);
 }
 
-int NFCUrlModule::HttpRequest(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp)
+int NFCUrlClientModule::HttpRequest(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp)
 {
     std::string strGetParam = CompositeParam(mxGetParams);
     std::string strCookies = CompositeCookies(mxCookies);
@@ -69,7 +69,7 @@ int NFCUrlModule::HttpRequest(const std::string& strUrl, const std::map<std::str
 }
 
 
-size_t NFCUrlModule::RecvHttpData(void* buffer, size_t size, size_t nmemb, std::string* pStrRecveData)
+size_t NFCUrlClientModule::RecvHttpData(void* buffer, size_t size, size_t nmemb, std::string* pStrRecveData)
 {
     unsigned long sizes = size * nmemb;
     if (NULL != pStrRecveData)
@@ -87,7 +87,7 @@ size_t NFCUrlModule::RecvHttpData(void* buffer, size_t size, size_t nmemb, std::
     return sizes;
 }
 
-std::string NFCUrlModule::CompositeParam( const std::map<std::string,std::string>& params )
+std::string NFCUrlClientModule::CompositeParam( const std::map<std::string,std::string>& params )
 {
     std::stringstream ss;
     std::multimap<std::string,std::string>::const_iterator iter = params.begin();
@@ -109,7 +109,7 @@ std::string NFCUrlModule::CompositeParam( const std::map<std::string,std::string
     return line;
 }
 
-std::string NFCUrlModule::CompositeCookies( const std::map<std::string,std::string>& params )
+std::string NFCUrlClientModule::CompositeCookies( const std::map<std::string,std::string>& params )
 {
     std::stringstream ss;
     std::multimap<std::string,std::string>::const_iterator iter = params.begin();
@@ -132,7 +132,7 @@ std::string NFCUrlModule::CompositeCookies( const std::map<std::string,std::stri
 }
 
 
-int NFCUrlModule::HttpReq( const std::string& strUrl, const std::string& strGetParam, const std::string& strBodyData,const std::string& strCookies, const float fTimeOutSec, std::string& strRsp )
+int NFCUrlClientModule::HttpReq( const std::string& strUrl, const std::string& strGetParam, const std::string& strBodyData,const std::string& strCookies, const float fTimeOutSec, std::string& strRsp )
 {
     try
     {
@@ -213,7 +213,7 @@ int NFCUrlModule::HttpReq( const std::string& strUrl, const std::string& strGetP
     }
 }
 
-bool NFCUrlModule::StartActorPool( const int nCount )
+bool NFCUrlClientModule::StartActorPool( const int nCount )
 {
     NFIActorManager* pActorManager = pPluginManager->GetActorManager();
     if (NULL == pActorManager)
@@ -223,7 +223,7 @@ bool NFCUrlModule::StartActorPool( const int nCount )
 
     for (int i = 0; i < nCount; i++)
     {
-        int nActorID = pActorManager->RequireActor<NFCURLComponent>(this, &NFCUrlModule::HttpRequestAsyEnd);
+        int nActorID = pActorManager->RequireActor<NFCURLComponent>(this, &NFCUrlClientModule::HttpRequestAsyEnd);
         if (nActorID > 0)
         {
             mActorList.AddElement(i, NF_SHARE_PTR<int> (NF_NEW int(nActorID)));
@@ -233,7 +233,7 @@ bool NFCUrlModule::StartActorPool( const int nCount )
     return false;
 }
 
-bool NFCUrlModule::CloseActorPool()
+bool NFCUrlClientModule::CloseActorPool()
 {
     int nActor =0;
     NFIActorManager* pActorManager = pPluginManager->GetActorManager();
@@ -251,7 +251,12 @@ bool NFCUrlModule::CloseActorPool()
     return false;
 }
 
-int NFCUrlModule::HttpRequestAsyEnd(const NFGUID& self, const int nFormActor, const int nSubMsgID, const std::string& strData)
+int NFCUrlClientModule::HttpRequestAsyEnd(const NFGUID& self, const int nFormActor, const int nSubMsgID, const std::string& strData)
+{
+    return 0;
+}
+
+int NFCUrlClientModule::HttpRequestAs( const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp )
 {
     return 0;
 }
