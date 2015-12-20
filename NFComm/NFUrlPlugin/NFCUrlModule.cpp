@@ -13,7 +13,7 @@
 
 const std::string NFCURLComponent::GetComponentName() const
 {
-    
+    return "NFCURLComponent";
 }
 
 int NFCURLComponent::OnASyncEvent( const NFGUID& self, const int event, std::string& arg )
