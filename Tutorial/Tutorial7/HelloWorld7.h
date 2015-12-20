@@ -30,10 +30,11 @@ public:
     virtual bool BeforeShut();
     virtual bool Shut();
 
+    void handleRsp(const NFGUID& self , const int nRet, const std::string& strData);
 protected:
 
 private:
-    NFIUrlClientModule* m_pUulClientModule;
+    NFIUrlClientModule* m_pUrlClientModule;
 
 };
 

@@ -12,7 +12,7 @@
 #include <iostream>
 #include "NFILogicModule.h"
 
-typedef std::function<void(const NFGUID self, const int nRet, const std::string& strRsp)> HTTP_RSP_FUNCTOR;
+typedef std::function<void(const NFGUID& self, const int nRet, const std::string& strRsp)> HTTP_RSP_FUNCTOR;
 typedef std::shared_ptr<HTTP_RSP_FUNCTOR> HTTP_RSP_FUNCTOR_PTR;
 
 class NFIUrlClientModule
@@ -25,29 +25,29 @@ public:
 
     template<typename BaseType>
     int HttpRequestAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData, 
-        const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, BaseType* pBaseType, void (BaseType::*handleRsp)(const NFGUID, const int, const std::string))
+        const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, BaseType* pBaseType, void (BaseType::*handleRsp)(const NFGUID&, const int, const std::string&))
     {
         HTTP_RSP_FUNCTOR RspCB = std::bind(handleRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
         return HttpRequestAs(self, strUrl, mxGetParams, strBodyData, mxCookies, fTimeOutSec, RspCB);
     }
 
-    virtual int HttpRequestAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn) = 0;
-
-
     template<typename BaseType>
     int HttpRequestPostAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams,  const std::map<std::string, std::string>& mxPostParams, 
-        const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, BaseType* pBaseType, void (BaseType::*handleRsp)(const NFGUID, const int, const std::string))
+        const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, BaseType* pBaseType, void (BaseType::*handleRsp)(const NFGUID&, const int, const std::string&))
     {
         HTTP_RSP_FUNCTOR RspCB = std::bind(handleRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
         return HttpRequestPostAs(self, strUrl, mxGetParams, mxPostParams, mxCookies, fTimeOutSec, RspCB);
     }
 
-    virtual int HttpRequestPostAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams, const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn) = 0;
-
     virtual bool StartActorPool(const int nCount) = 0;
     virtual bool CloseActorPool() = 0;
+
+private:
+    virtual int HttpRequestAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn) = 0;
+    virtual int HttpRequestPostAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams, const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn) = 0;
+
 };
 
 #endif

@@ -14,10 +14,51 @@ bool HelloWorld7::AfterInit()
     //³õÊ¼»¯Íê±Ï
     std::cout << "Hello, world1, AfterInit" << std::endl;
 
-    m_pUulClientModule = pPluginManager->FindModule<NFIUrlClientModule>("NFCUrlClientModule");
+    m_pUrlClientModule = pPluginManager->FindModule<NFIUrlClientModule>("NFCUrlClientModule");
 
-    assert(NULL != m_pUulClientModule);
+    assert(NULL != m_pUrlClientModule);
 
+    if (!m_pUrlClientModule->StartActorPool(50))
+    {
+        return false;
+    }
+
+    std::string strUrl;
+    std::map<std::string, std::string> mxGetParams;
+    std::map<std::string, std::string> mxPostParams;
+    std::map<std::string, std::string> mxCookies;
+    float fTimeOutSec = 30;
+    std::string strRsp;
+
+
+    strUrl = "http://www.baidu.com";
+    mxGetParams["accounttype"]="common";
+    mxGetParams["appid"]="598844";
+
+    mxCookies["session_id"]="openid";
+
+    std::ostringstream osstreamParams;
+    osstreamParams<< strUrl <<" http Get Params: ";
+
+    for (std::map<std::string, std::string>::iterator iter = mxGetParams.begin(); iter != mxGetParams.end(); ++iter)
+    {
+        osstreamParams << iter->first << ":"<< iter->second<<" ";
+
+    }
+
+    osstreamParams <<"Post Params: ";
+    for (std::map<std::string, std::string>::iterator iter = mxPostParams.begin(); iter != mxPostParams.end(); ++iter)
+    {
+        osstreamParams << iter->first << ":"<< iter->second<<" ";
+    }
+
+    osstreamParams <<"Cookies Params: ";
+    for (std::map<std::string, std::string>::iterator iter = mxCookies.begin(); iter != mxCookies.end(); iter ++ )
+    {
+        osstreamParams << iter->first << ":"<< iter->second<<" ";
+    }
+
+    m_pUrlClientModule->HttpRequestPostAs(NFGUID(2,3), strUrl, mxGetParams, mxPostParams, mxCookies, fTimeOutSec, this, &HelloWorld7::handleRsp);
     return true;
 }
 
@@ -27,6 +68,11 @@ bool HelloWorld7::Execute( const float fLasFrametime, const float fStartedTime )
     //std::cout << "Hello, world1, Execute" << std::endl;
 
     return true;
+}
+
+void HelloWorld7::handleRsp(const NFGUID& self , const int nRet, const std::string& strData)
+{
+
 }
 
 bool HelloWorld7::BeforeShut()
