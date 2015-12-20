@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCUrlModule.h
+//    @FileName      :    NFCUrlClientModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-07-08
-//    @Module           :    NFCUrlModule
+//    @Module           :    NFCUrlClientModule
 //    @Desc             :
 // -------------------------------------------------------------------------
 
@@ -44,11 +44,11 @@ private:
     std::string mstrRsp;
 };
 
-class NFCUrlModule
+class NFCUrlClientModule
     : public NFIUrlModule
 {
 public:
-    NFCUrlModule(NFIPluginManager* p)
+    NFCUrlClientModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
