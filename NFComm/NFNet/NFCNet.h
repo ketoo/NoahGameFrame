@@ -6,8 +6,8 @@
 //    @Desc             :     CNet
 // -------------------------------------------------------------------------
 
-#ifndef __NFC_NET_H_
-#define __NFC_NET_H_
+#ifndef NFC_NET_H
+#define NFC_NET_H
 
 #include "NFINet.h"
 
