@@ -5,8 +5,8 @@
 //    @Module           :    NFCTaskModule
 //
 // -------------------------------------------------------------------------
-#ifndef __NFC_TASK_MODULE_H_
-#define __NFC_TASK_MODULE_H_
+#ifndef NFC_TASK_MODULE_H
+#define NFC_TASK_MODULE_H
 
 #include "NFComm/NFPluginModule/NFITaskModule.h"
 
