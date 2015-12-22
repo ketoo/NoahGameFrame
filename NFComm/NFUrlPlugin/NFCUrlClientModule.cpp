@@ -7,11 +7,10 @@
 // -------------------------------------------------------------------------
 
 #include "NFCUrlClientModule.h"
-#include "curl/curl.h"
 #include "NFCWebCharacter.hpp"
+#include "Dependencies/curl-7.37.1/include/curl/curl.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-#include <msgpack.hpp>
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -355,12 +354,12 @@ bool NFCUrlClientModule::PackParam( const SURLParam& xParam, std::string& strDat
 {
     try
     {
-        msgpack::type::tuple<std::string, std::string, std::string, std::string, std::string, float, int, int> xPackMode(xParam.strUrl, xParam.strGetParams, xParam.strBodyData, xParam.xCookies, xParam.strRsp, xParam.fTimeOutSec, xParam.nRet, xParam.nReqID);
-
-        std::stringstream buffer;
-        msgpack::pack(buffer, xPackMode);
-        buffer.seekg(0);
-        strData.assign(buffer.str());
+//         msgpack::type::tuple<std::string, std::string, std::string, std::string, std::string, float, int, int> xPackMode(xParam.strUrl, xParam.strGetParams, xParam.strBodyData, xParam.xCookies, xParam.strRsp, xParam.fTimeOutSec, xParam.nRet, xParam.nReqID);
+// 
+//         std::stringstream buffer;
+//         msgpack::pack(buffer, xPackMode);
+//         buffer.seekg(0);
+//         strData.assign(buffer.str());
     }
     catch (...)
     {
@@ -374,22 +373,22 @@ bool NFCUrlClientModule::UnPackParam( const std::string& strData, SURLParam& xPa
 {
     try
     {
-        msgpack::unpacked result;
-
-        msgpack::unpack(result, strData.data(), strData.size());
-        msgpack::object deserialized = result.get();
-
-        msgpack::type::tuple<std::string, std::string, std::string, std::string, std::string, float, int, int> dst;
-        deserialized.convert(&dst);
-
-        xParam.strUrl = dst.a0;
-        xParam.strGetParams = dst.a1;
-        xParam.strBodyData = dst.a2;
-        xParam.xCookies = dst.a3;
-        xParam.strRsp = dst.a4;
-        xParam.fTimeOutSec = dst.a5;
-        xParam.nRet = dst.a6;
-        xParam.nReqID = dst.a7;
+//         msgpack::unpacked result;
+// 
+//         msgpack::unpack(result, strData.data(), strData.size());
+//         msgpack::object deserialized = result.get();
+// 
+//         msgpack::type::tuple<std::string, std::string, std::string, std::string, std::string, float, int, int> dst;
+//         deserialized.convert(&dst);
+// 
+//         xParam.strUrl = dst.a0;
+//         xParam.strGetParams = dst.a1;
+//         xParam.strBodyData = dst.a2;
+//         xParam.xCookies = dst.a3;
+//         xParam.strRsp = dst.a4;
+//         xParam.fTimeOutSec = dst.a5;
+//         xParam.nRet = dst.a6;
+//         xParam.nReqID = dst.a7;
 
     }
     catch(...)
