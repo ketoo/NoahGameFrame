@@ -1,5 +1,5 @@
 # NoahGameFrame
-##### Copyright © http://www.yowoyo.com
+##### Copyright © http://www.noahframe.com
 
 #####交流QQ群：341159815
 
