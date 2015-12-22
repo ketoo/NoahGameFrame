@@ -1,5 +1,5 @@
-#ifndef _NF_STRING_INFO_H_
-#define _NF_STRING_INFO_H_
+#ifndef NF_STRING_INFO_H
+#define NF_STRING_INFO_H
 
 // desc:所有NFED_ON_SHOW_STRING事件使用的字串
 // 字串格式中自带格式 格式全部使用%s
