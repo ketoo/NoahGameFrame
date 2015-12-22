@@ -5,8 +5,8 @@
 //    @Module           £º    NFCSLGBuildingModule
 //
 // -------------------------------------------------------------------------
-#ifndef __NFC_SLG_BUILDING_MODULE_H_
-#define __NFC_SLG_BUILDING_MODULE_H_
+#ifndef NFC_SLG_BUILDING_MODULE_H
+#define NFC_SLG_BUILDING_MODULE_H
 
 #include "NFComm/NFPluginModule/NFISLGBuildingModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"

@@ -9,9 +9,8 @@
  */
 
 
-#ifndef _NFC_WebCharacter_H__
-#define _NFC_WebCharacter_H__
-
+#ifndef NFC_WebCharacter_H
+#define NFC_WebCharacter_H
 
 #include <string>
 

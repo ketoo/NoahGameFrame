@@ -1,5 +1,5 @@
-#ifndef _NF_COMMON_TIMER_H_
-#define _NF_COMMON_TIMER_H_
+#ifndef NF_COMMON_TIMER_H
+#define NF_COMMON_TIMER_H
 
 /**
 filename:common_timer.h
