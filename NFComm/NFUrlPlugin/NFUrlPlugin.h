@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFUrl_LUGIN_H_
-#define _NFUrl_LUGIN_H_
+#ifndef NF_URL_LUGIN_H
+#define NF_URL_LUGIN_H
 
 ///
 #include "NFComm/NFPluginModule/NFIPlugin.h"

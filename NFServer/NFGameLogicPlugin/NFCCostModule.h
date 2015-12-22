@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef __NFC_COST_MODULE_H_
-#define __NFC_COST_MODULE_H_
+#ifndef NFC_COST_MODULE_H
+#define NFC_COST_MODULE_H
 
 #include "NFComm/NFPluginModule/NFICostModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
