@@ -6,8 +6,8 @@
 //    @Desc             :     INet
 // -------------------------------------------------------------------------
 
-#ifndef __NFI_NET_H_
-#define __NFI_NET_H_
+#ifndef NFI_NET_H
+#define NFI_NET_H
 
 #include <cstring>
 #include <errno.h>

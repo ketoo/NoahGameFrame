@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_URL_MODULE_H_
-#define _NFC_URL_MODULE_H_
+#ifndef NFC_URL_MODULE_H
+#define NFC_URL_MODULE_H
 
 #include "curl/curl.h"
 #include "NFComm/NFPluginModule/NFIUrlClientModule.h"
