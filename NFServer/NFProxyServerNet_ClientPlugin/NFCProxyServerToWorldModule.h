@@ -55,9 +55,9 @@ protected:
 
 	virtual void LogServerInfo(const std::string& strServerInfo);
 private:
-    struct ConnectData 
+    struct ClientConnectData 
     {
-        ConnectData()
+        ClientConnectData()
         {
             strAccount = "";
             strConnectKey = "";
@@ -68,7 +68,7 @@ private:
     };
 
 
-    NFMapEx<std::string, ConnectData> mWantToConnectMap;
+    NFMapEx<std::string, ClientConnectData> mWantToConnectMap;
 
 private:
 
