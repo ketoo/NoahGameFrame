@@ -299,6 +299,8 @@ int NFCUrlClientModule::HttpRequestAsyEnd(const NFGUID& self, const int nFormAct
 
     pReqData->mFunRsp(self, xResultparam.nRet, xResultparam.strRsp, pReqData->mstrUseData);
 
+    mReqList.RemoveElement(xResultparam.nReqID);
+
     return 0;
 }
 
