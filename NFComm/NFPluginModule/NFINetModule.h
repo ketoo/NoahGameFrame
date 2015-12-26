@@ -59,6 +59,22 @@ enum NF_SERVER_TYPE
 }
 
 //////////////////////////////////////////////////////////////////////////
+struct ServerData
+{
+	ServerData()
+	{
+		pData = NF_SHARE_PTR<NFMsg::ServerInfoReport>(NF_NEW NFMsg::ServerInfoReport());
+		nFD = 0;
+	}
+	~ServerData()
+	{
+		nFD = 0;
+		pData = NULL;
+	}
+
+	int nFD;
+	NF_SHARE_PTR<NFMsg::ServerInfoReport> pData;
+};
 
 class NFINetModule
 	: public NFILogicModule
