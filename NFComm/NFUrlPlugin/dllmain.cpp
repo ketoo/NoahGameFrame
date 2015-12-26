@@ -16,9 +16,11 @@
 
 #ifdef NF_DYNAMIC_PLUGIN
 #pragma  comment(lib, "libcurld.lib")
+#pragma comment( lib, "libprotobuf_d.lib" )
 
 #else
 #pragma  comment(lib, "libcurl.lib")
+#pragma comment( lib, "libprotobuf.lib" )
 #endif
 
 //#pragma comment( lib, "Theron_d.lib" )
