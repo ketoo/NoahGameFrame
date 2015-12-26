@@ -12,6 +12,7 @@
 #include "curl/curl.h"
 #include "NFComm/NFPluginModule/NFIUrlClientModule.h"
 #include "NFComm/NFCore/NFIComponent.h"
+#include "NFComm/NFPluginModule/NFIUrlCodeModule.h"
 
 struct SURLParam
 {
@@ -20,17 +21,20 @@ struct SURLParam
         fTimeOutSec = 0.0f;
         nRet = 0;
         nReqID = 0;
+        mnUseData = 0;
     }
 
     std::string strUrl;
     std::string strGetParams;
     std::string strBodyData;
-    std::string xCookies;
+    std::string strCookies;
     float fTimeOutSec;
     std::string strRsp;
     int  nRet;
     int  nReqID;
     HTTP_RSP_FUNCTOR mFunRsp;
+    int mnUseData;
+    std::string mstrUseData;
 };
 
 class NFCURLComponent : public NFIComponent
@@ -64,40 +68,42 @@ public:
     {
         nCurReqID = 0;
         pPluginManager = p;
+        mnSuitIndex = 0;
+        mbInitCurl = false;
     }
 
 public:
-    struct StConnFree
+    struct SConnAutoFree
     {
-        StConnFree(CURL* conn)
+        SConnAutoFree(CURL* pConn)
         {
-            m_conn = conn;
+            m_pConnect = pConn;
         }
-        ~StConnFree()
+        ~SConnAutoFree()
         {
-            if (m_conn)
+            if (m_pConnect)
             {
-                curl_easy_cleanup(m_conn);
-                m_conn = NULL;
+                curl_easy_cleanup(m_pConnect);
+                m_pConnect = NULL;
             }
         }
-        CURL* m_conn;
+        CURL* m_pConnect;
     };
 
-    struct StSlistFree
+    struct SSlistAutoFree
     {
-        StSlistFree(struct curl_slist *list)
+        SSlistAutoFree(struct curl_slist *plist)
         {
-            m_list = list;
+            m_plist = plist;
         }
-        ~StSlistFree()
+        ~SSlistAutoFree()
         {
-            if (m_list)
+            if (m_plist)
             {
-                curl_slist_free_all (m_list);
+                curl_slist_free_all (m_plist);
             }
         }
-        struct curl_slist *m_list;
+        struct curl_slist *m_plist;
     };
 
     virtual bool Init();
@@ -109,8 +115,8 @@ public:
 
     virtual int HttpPostRequest(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp);    
     virtual int HttpRequest(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp);    
-    virtual int HttpRequestAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn);
-    virtual int HttpRequestPostAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn);
+    virtual int HttpRequestAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn,  const std::string&strUseData);
+    virtual int HttpRequestPostAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn, const std::string&strUseData);
 
     virtual bool StartActorPool(const int nCount);
     virtual bool CloseActorPool();
@@ -128,10 +134,15 @@ protected:
     std::string CompositeParam( const std::map<std::string,std::string>& params );
     std::string CompositeCookies( const std::map<std::string,std::string>& params );
 
+public:
+    NFIUrlCodeModule* m_pUrlCodeModule;
 protected:
     NFMapEx<int, int> mActorList; //actorid <-->Used
     NFMapEx<int, SURLParam> mReqList;// reqID <-->Param
     int nCurReqID;
+
+    int mnSuitIndex;
+    bool mbInitCurl;
 };
 
 #endif
