@@ -312,7 +312,7 @@ int NFCUrlClientModule::HttpRequestAs(const NFGUID& self, const std::string& str
     NF_SHARE_PTR<SURLParam> pUrlParam(NF_NEW SURLParam());
     if (NULL == pUrlParam)
     {
-        return false;
+        return -6;
     }
 
     pUrlParam->strUrl = strUrl;
