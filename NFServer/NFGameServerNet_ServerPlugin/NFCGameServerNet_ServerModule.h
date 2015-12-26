@@ -162,23 +162,9 @@ private:
 
 private:
 
-    struct ServerData 
+    struct GateData 
     {
-        ServerData()
-        {
-            pData = NF_SHARE_PTR<NFMsg::ServerInfoReport>(NF_NEW NFMsg::ServerInfoReport());
-            nFD = 0;
-        }
-
-        ~ServerData()
-        {
-            nFD = 0;
-            pData = NULL;
-        }
-
-        int nFD;
-        NF_SHARE_PTR<NFMsg::ServerInfoReport> pData;
-
+		ServerData xServerData;
         //此网关上所有的对象<角色ID,gate_FD>
         std::map<NFGUID, int> xRoleInfo;
     };
@@ -208,7 +194,7 @@ private:
     //<角色id,角色网关基础信息>//其实可以在object系统中被代替
     NFMapEx<NFGUID, BaseData> mRoleBaseData;
     //gateid,data
-    NFMapEx<int, ServerData> mProxyMap;
+    NFMapEx<int, GateData> mProxyMap;
 
     //////////////////////////////////////////////////////////////////////////
 	NFIUUIDModule* m_pUUIDModule;

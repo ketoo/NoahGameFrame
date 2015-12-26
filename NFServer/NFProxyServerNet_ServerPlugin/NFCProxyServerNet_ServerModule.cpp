@@ -236,10 +236,8 @@ int NFCProxyServerNet_ServerModule::OnSelectServerProcess(const int nSockIndex, 
         return 0;
     }
 
-	NF_SHARE_PTR<ServerData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xMsg.world_id());
-	if (pServerData
-		&& pServerData->eState != NFMsg::EServerState::EST_MAINTEN
-		&& pServerData->eState != NFMsg::EServerState::EST_CRASH)
+	NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xMsg.world_id());
+	if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
 	{
 		//选择成功
 		NetObject* pNetObject = this->GetNet()->GetNetObject(nSockIndex);
@@ -282,16 +280,19 @@ int NFCProxyServerNet_ServerModule::OnReqServerListProcess(const int nSockIndex,
         NFMsg::AckServerList xData;
         xData.set_type(NFMsg::RSLT_GAMES_ERVER);
 
-		NFMapEx<int, ServerData>& xServerList = m_pProxyServerToGameModule->GetServerList();
-        ServerData* pGameData = xServerList.FirstNude();
-        while (NULL != pGameData)
+		NFMapEx<int, ConnectData>& xServerList = m_pProxyServerToGameModule->GetServerList();
+        ConnectData* pGameData = xServerList.FirstNude();
+        while (NULL != pGameData )
         {
-            NFMsg::ServerInfo* pServerInfo = xData.add_info();
+			if (ConnectDataState::NORMAL == pGameData->eState)
+			{
+				NFMsg::ServerInfo* pServerInfo = xData.add_info();
 
-            pServerInfo->set_name(pGameData->strName);
-            pServerInfo->set_status(pGameData->eState);
-            pServerInfo->set_server_id(pGameData->nGameID);
-            pServerInfo->set_wait_count(0);
+				pServerInfo->set_name(pGameData->strName);
+				pServerInfo->set_status(NFMsg::EServerState::EST_NARMAL);
+				pServerInfo->set_server_id(pGameData->nGameID);
+				pServerInfo->set_wait_count(0);
+			}
 
             pGameData = xServerList.NextNude();
         }
@@ -359,10 +360,8 @@ int NFCProxyServerNet_ServerModule::OnReqRoleListProcess(const int nSockIndex, c
         return 0;
     }
 
-	NF_SHARE_PTR<ServerData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xData.game_id());
-    if (NULL != pServerData
-		&& pServerData->eState != NFMsg::EST_CRASH
-		&& pServerData->eState != NFMsg::EST_MAINTEN)
+	NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xData.game_id());
+    if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
         //数据匹配
         NetObject* pNetObject = this->GetNet()->GetNetObject(nSockIndex);
@@ -405,10 +404,8 @@ int NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess(const int nSockIndex,
         return 0;
     }
 
-	NF_SHARE_PTR<ServerData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xData.game_id());
-	if (NULL != pServerData
-		&& pServerData->eState != NFMsg::EST_CRASH
-		&& pServerData->eState != NFMsg::EST_MAINTEN)
+	NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xData.game_id());
+	if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
 	{
         //数据匹配
         NetObject* pNetObject = this->GetNet()->GetNetObject(nSockIndex);
@@ -449,7 +446,7 @@ int NFCProxyServerNet_ServerModule::OnReqDelRoleProcess(const int nSockIndex, co
         return 0;
     }
 
-	NF_SHARE_PTR<ServerData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xData.game_id());
+	NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xData.game_id());
 	if (NULL != pServerData
 		&& pServerData->eState != NFMsg::EST_CRASH
 		&& pServerData->eState != NFMsg::EST_MAINTEN)
@@ -478,10 +475,8 @@ int NFCProxyServerNet_ServerModule::OnReqEnterGameServer(const int nSockIndex, c
         return 0;
     }
 
-	NF_SHARE_PTR<ServerData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xData.game_id());
-	if (NULL != pServerData
-		&& pServerData->eState != NFMsg::EST_CRASH
-		&& pServerData->eState != NFMsg::EST_MAINTEN)
+	NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xData.game_id());
+	if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
 	{
         //数据匹配
         NetObject* pNetObject = this->GetNet()->GetNetObject(nSockIndex);
