@@ -64,13 +64,13 @@ void NFCProxyServerToWorldModule::OnServerInfoProcess(const int nSockIndex, cons
         const NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
 		
 		//type
-		ServerData xServerData;
+		ConnectData xServerData;
 
 		xServerData.nGameID = pData->server_id();
 		xServerData.strIP = pData->server_ip();
 		xServerData.nPort = pData->server_port();
 		xServerData.strName = pData->server_name();
-		xServerData.eState = pData->server_state();
+		//xServerData.eState = pData->server_state();
 		xServerData.eServerType = (NF_SERVER_TYPE)pData->server_type();
 
 		switch (xServerData.eServerType)
@@ -144,7 +144,7 @@ void NFCProxyServerToWorldModule::Register(NFINet* pNet)
 				pData->set_server_state(NFMsg::EST_NARMAL);
 				pData->set_server_type(nServerType);
 
-				NF_SHARE_PTR<ServerData> pServerData = GetServerNetInfo(pNet);
+				NF_SHARE_PTR<ConnectData> pServerData = GetServerNetInfo(pNet);
 				if (pServerData)
 				{
 					int nTargetID = pServerData->nGameID;
@@ -196,14 +196,13 @@ bool NFCProxyServerToWorldModule::AfterInit()
 				const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
 				const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
 
-				ServerData xServerData;
+				ConnectData xServerData;
 
 				xServerData.nGameID = nServerID;
 				xServerData.eServerType = (NF_SERVER_TYPE)nServerType;
 				xServerData.strIP = strIP;
 				xServerData.nPort = nPort;
 				xServerData.strName = strName;
-				xServerData.eState = NFMsg::EServerState::EST_MAINTEN;
 
 				NFIClusterClientModule::AddServer(xServerData);
 			}
@@ -224,14 +223,14 @@ void NFCProxyServerToWorldModule::OnSelectServerResultProcess(const int nSockInd
         return;
     }
 
-    NF_SHARE_PTR<ConnectData> pConnectData = mWantToConnectMap.GetElement(xMsg.account());
+    NF_SHARE_PTR<ClientConnectData> pConnectData = mWantToConnectMap.GetElement(xMsg.account());
     if (NULL != pConnectData.get())
     {
         pConnectData->strConnectKey = xMsg.world_key();
         return;
     }
 
-    pConnectData = NF_SHARE_PTR<ConnectData>(NF_NEW ConnectData());
+    pConnectData = NF_SHARE_PTR<ClientConnectData>(NF_NEW ClientConnectData());
     pConnectData->strAccount = xMsg.account();
     pConnectData->strConnectKey = xMsg.world_key();
     mWantToConnectMap.AddElement(pConnectData->strAccount, pConnectData);
@@ -239,7 +238,7 @@ void NFCProxyServerToWorldModule::OnSelectServerResultProcess(const int nSockInd
 
 bool NFCProxyServerToWorldModule::VerifyConnectData( const std::string& strAccount, const std::string& strKey )
 {
-	NF_SHARE_PTR<ConnectData> pConnectData = mWantToConnectMap.GetElement(strAccount);
+	NF_SHARE_PTR<ClientConnectData> pConnectData = mWantToConnectMap.GetElement(strAccount);
 	if (pConnectData && strKey == pConnectData->strConnectKey)
 	{
 		mWantToConnectMap.RemoveElement(strAccount);
