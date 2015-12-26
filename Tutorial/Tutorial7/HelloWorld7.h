@@ -30,7 +30,7 @@ public:
     virtual bool BeforeShut();
     virtual bool Shut();
 
-    void handleRsp(const NFGUID& self , const int nRet, const std::string& strData);
+    void handleRsp(const NFGUID& self , const int nRet, const std::string& strData, const std::string&strUseData);
 protected:
 
 private:
