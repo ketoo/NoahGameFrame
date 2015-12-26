@@ -60,6 +60,20 @@ enum GuildMemberList_RecordColType
 	GuildMemberList_Power		=8; // Power
 	GuildMemberList_Title		=9; // Title
 	GuildMemberList_GameID		=10; // GameID
+	GuildMemberList_JoinTime		=11; // JoinTime
+	GuildMemberList_Contribution		=12; // Contribution
+	GuildMemberList_AllContribution		=13; // AllContribution
+}
+
+enum GuildAppyList_RecordColType
+{
+	GuildAppyList_GUID		=0; // GUID
+	GuildAppyList_Name		=1; // Name
+	GuildAppyList_Level		=2; // Level
+	GuildAppyList_Job		=3; // Job
+	GuildAppyList_Donation		=4; // Donation
+	GuildAppyList_VIP		=5; // VIP
+	GuildAppyList_Power		=6; // Power
 }
 
 enum GuildEvent_RecordColType
@@ -72,6 +86,9 @@ enum GuildEvent_RecordColType
 	GuildEvent_VIP		=5; // VIP
 	GuildEvent_Offline		=6; // Offline
 	GuildEvent_Power		=7; // Power
+	GuildEvent_EventID		=8; // EventID
+	GuildEvent_EventTime		=9; // EventTime
+	GuildEvent_Context		=10; // Context
 }
 
 enum GuildHouse_RecordColType

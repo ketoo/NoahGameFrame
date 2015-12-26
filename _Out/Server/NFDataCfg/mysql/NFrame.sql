@@ -92,11 +92,34 @@ ALTER TABLE `Guild` ADD `GuilIDIcon` bigint(11) DEFAULT '0' COMMENT '公会头�
 ALTER TABLE `Guild` ADD `GuildMemeberCount` bigint(11) DEFAULT '0' COMMENT '成员数量(增加个字段，不然遍历Record太麻烦)';
 ALTER TABLE `Guild` ADD `GuildMemeberMaxCount` bigint(11) DEFAULT '0' COMMENT '成员最大数量';
 ALTER TABLE `Guild` ADD `GuildHonor` bigint(11) DEFAULT '0' COMMENT '公会荣誉';
+ALTER TABLE `Guild` ADD `GuildCreateTime` bigint(11) DEFAULT '0' COMMENT '公会创建时间';
+ALTER TABLE `Guild` ADD `GuildCreateter` bigint(11) DEFAULT '0' COMMENT '公会创始人';
+ALTER TABLE `Guild` ADD `GuildExp` bigint(11) DEFAULT '0' COMMENT '公会经验';
+ALTER TABLE `Guild` ADD `GuildStatus` bigint(11) DEFAULT '0' COMMENT '公会状态，正常状态，申请解散状态';
+ALTER TABLE `Guild` ADD `DismissTime` bigint(11) DEFAULT '0' COMMENT '申请解散时间';
+ALTER TABLE `Guild` ADD `RecruitAD` varchar(128) DEFAULT '' COMMENT '招募公告';
+ALTER TABLE `Guild` ADD `RecruitLevel` bigint(11) DEFAULT '0' COMMENT '招募等级限制';
+ALTER TABLE `Guild` ADD `AutoRecruit` varchar(128) DEFAULT '' COMMENT '自动招募';
 ALTER TABLE `Guild` ADD `GuildBoss` BLOB COMMENT 'guild';
 ALTER TABLE `Guild` ADD `GuildMemberList` BLOB COMMENT 'guild';
+ALTER TABLE `Guild` ADD `GuildAppyList` BLOB COMMENT 'guild';
 ALTER TABLE `Guild` ADD `GuildEvent` BLOB COMMENT 'guild';
 ALTER TABLE `Guild` ADD `GuildHouse` BLOB COMMENT 'guild';
 ALTER TABLE `Guild` ADD `GuildSkill` BLOB COMMENT 'guild';
+
+
+CREATE TABLE `GuildConfig` (
+	`ID` varchar(128) NOT NULL,
+	PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `GuildJob` (
+	`ID` varchar(128) NOT NULL,
+	PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 CREATE TABLE `GuildName` (
