@@ -58,7 +58,9 @@ bool HelloWorld7::AfterInit()
         osstreamParams << iter->first << ":"<< iter->second<<" ";
     }
 
-    m_pUrlClientModule->HttpRequestPostAs(NFGUID(2,3), strUrl, mxGetParams, mxPostParams, mxCookies, fTimeOutSec, this, &HelloWorld7::handleRsp);
+    std::string strUseData ="test data";
+
+    m_pUrlClientModule->HttpRequestPostAs(NFGUID(2,3), strUrl, mxGetParams, mxPostParams, mxCookies, fTimeOutSec, this, &HelloWorld7::handleRsp, strUseData);
     return true;
 }
 
@@ -70,9 +72,9 @@ bool HelloWorld7::Execute( const float fLasFrametime, const float fStartedTime )
     return true;
 }
 
-void HelloWorld7::handleRsp(const NFGUID& self , const int nRet, const std::string& strData)
+void HelloWorld7::handleRsp(const NFGUID& self , const int nRet, const std::string& strData, const std::string&strUseData)
 {
-
+    std::cout << "Ret " << nRet << " Result Data:" << strData << " Use Data:" << strUseData;
 }
 
 bool HelloWorld7::BeforeShut()
