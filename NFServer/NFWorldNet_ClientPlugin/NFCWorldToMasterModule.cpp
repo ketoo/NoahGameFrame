@@ -59,14 +59,13 @@ bool NFCWorldToMasterModule::AfterInit()
 				const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
 				const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
 
-				ServerData xServerData;
+				ConnectData xServerData;
 
 				xServerData.nGameID = nServerID;
 				xServerData.eServerType = (NF_SERVER_TYPE)nServerType;
 				xServerData.strIP = strIP;
 				xServerData.nPort = nPort;
 				xServerData.strName = strName;
-				xServerData.eState = NFMsg::EServerState::EST_NARMAL;
 
 				NFIClusterClientModule::AddServer(xServerData);
 			}
@@ -113,7 +112,7 @@ void NFCWorldToMasterModule::Register(NFINet* pNet)
 				pData->set_server_state(NFMsg::EST_NARMAL);
 				pData->set_server_type(nServerType);
 
-				NF_SHARE_PTR<ServerData> pServerData = GetServerNetInfo(pNet);
+				NF_SHARE_PTR<ConnectData> pServerData = GetServerNetInfo(pNet);
 				if (pServerData)
 				{
 					int nTargetID = pServerData->nGameID;
