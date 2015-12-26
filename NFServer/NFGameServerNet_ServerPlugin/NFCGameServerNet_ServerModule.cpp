@@ -251,12 +251,12 @@ void NFCGameServerNet_ServerModule::OnClientDisconnect( const int nAddress )
 {
 	//只可能是网关丢了
 	int nServerID = 0;
-	NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.First();
+	NF_SHARE_PTR<GateData> pServerData =  mProxyMap.First();
 	while (pServerData.get())
 	{
-		if (nAddress == pServerData->nFD)
+		if (nAddress == pServerData->xServerData.nFD)
 		{
-			nServerID = pServerData->pData->server_id();
+			nServerID = pServerData->xServerData.pData->server_id();
 			break;
 		}
 
@@ -301,12 +301,12 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 	}
 
 	int nGateID = -1;
-	NF_SHARE_PTR<ServerData> pServerData = mProxyMap.First();
+	NF_SHARE_PTR<GateData> pServerData = mProxyMap.First();
 	while (pServerData.get())
 	{
-		if (nSockIndex == pServerData->nFD)
+		if (nSockIndex == pServerData->xServerData.nFD)
 		{
-			nGateID = pServerData->pData->server_id();
+			nGateID = pServerData->xServerData.pData->server_id();
 			break;
 		}
 
@@ -1999,15 +1999,15 @@ void NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess(const int nSo
 	for (int i = 0; i < xMsg.server_list_size(); ++i)
 	{
 		NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-		NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.GetElement(pData->server_id());
+		NF_SHARE_PTR<GateData> pServerData =  mProxyMap.GetElement(pData->server_id());
 		if (!pServerData.get())
 		{
-			pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
+			pServerData = NF_SHARE_PTR<GateData>(NF_NEW GateData());
 			mProxyMap.AddElement(pData->server_id(), pServerData);
 		}
 
-		pServerData->nFD = nSockIndex;
-		*(pServerData->pData) = *pData;
+		pServerData->xServerData.nFD = nSockIndex;
+		*(pServerData->xServerData.pData) = *pData;
 
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Proxy Registered");
 	}
@@ -2048,15 +2048,15 @@ void NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess(const int nS
 	for (int i = 0; i < xMsg.server_list_size(); ++i)
 	{
 		NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-		NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.GetElement(pData->server_id());
+		NF_SHARE_PTR<GateData> pServerData =  mProxyMap.GetElement(pData->server_id());
 		if (!pServerData.get())
 		{
-			pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
+			pServerData = NF_SHARE_PTR<GateData>(NF_NEW GateData());
 			mProxyMap.AddElement(pData->server_id(), pServerData);
 		}
 
-		pServerData->nFD = nSockIndex;
-		*(pServerData->pData) = *pData;
+		pServerData->xServerData.nFD = nSockIndex;
+		*(pServerData->xServerData.pData) = *pData;
 
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Proxy Registered");
 	}
@@ -2168,10 +2168,10 @@ void NFCGameServerNet_ServerModule::SendMsgPBToGate( const uint16_t nMsgID, goog
 	NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(self);
 	if (pData.get())
 	{
-		NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
+		NF_SHARE_PTR<GateData> pProxyData = mProxyMap.GetElement(pData->nGateID);
 		if (pProxyData.get())
 		{
-			SendMsgPB(nMsgID, xMsg, pProxyData->nFD, pData->xClientID);
+			SendMsgPB(nMsgID, xMsg, pProxyData->xServerData.nFD, pData->xClientID);
 		}
 	}
 }
@@ -2181,10 +2181,10 @@ void NFCGameServerNet_ServerModule::SendMsgPBToGate( const uint16_t nMsgID, cons
     NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(self);
     if (pData.get())
     {
-        NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
+        NF_SHARE_PTR<GateData> pProxyData = mProxyMap.GetElement(pData->nGateID);
         if (pProxyData.get())
         {
-            SendMsgPB(nMsgID, strMsg, pProxyData->nFD, pData->xClientID);
+            SendMsgPB(nMsgID, strMsg, pProxyData->xServerData.nFD, pData->xClientID);
         }
     }
 }
@@ -2208,7 +2208,7 @@ void NFCGameServerNet_ServerModule::PlayerLeaveGameServer( const NFGUID self )
 	mRoleBaseData.RemoveElement(self);
 
 
-	NF_SHARE_PTR<ServerData> pServerData = mProxyMap.GetElement(pBaseData->nGateID);
+	NF_SHARE_PTR<GateData> pServerData = mProxyMap.GetElement(pBaseData->nGateID);
 	if (nullptr == pServerData)
 	{
 		return;
