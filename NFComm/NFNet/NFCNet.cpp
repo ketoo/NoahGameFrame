@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------
 #pragma  comment(lib,"libevent.lib")
 #pragma  comment(lib,"libevent_core.lib")
-#pragma  comment(lib,"libevent_extras.lib")
+//#pragma  comment(lib,"libevent_extras.lib")
 
 #include "NFCNet.h"
 #include <string.h>
