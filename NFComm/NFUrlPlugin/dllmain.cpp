@@ -17,10 +17,12 @@
 #ifdef NF_DYNAMIC_PLUGIN
 #pragma  comment(lib, "libcurld.lib")
 #pragma comment( lib, "libprotobuf_d.lib" )
+#pragma comment( lib, "NFMessageDefine_d.lib" )
 
 #else
 #pragma  comment(lib, "libcurl.lib")
 #pragma comment( lib, "libprotobuf.lib" )
+#pragma comment( lib, "NFMessageDefine.lib" )
 #endif
 
 //#pragma comment( lib, "Theron_d.lib" )
@@ -33,9 +35,13 @@
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #ifdef NF_DYNAMIC_PLUGIN
-#pragma comment( lib, "libcurl.lib" )
+#pragma  comment(lib, "libcurld.lib")
+#pragma comment( lib, "libprotobuf_d.lib" )
+#pragma comment( lib, "NFMessageDefine_d.lib" )
 #else
-#pragma comment( lib, "libcurl.lib" )
+#pragma  comment(lib, "libcurl.lib")
+#pragma comment( lib, "libprotobuf.lib" )
+#pragma comment( lib, "NFMessageDefine.lib" )
 #endif
 
 //#pragma comment( lib, "Theron.lib" )
