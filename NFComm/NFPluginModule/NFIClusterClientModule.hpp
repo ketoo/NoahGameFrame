@@ -246,9 +246,14 @@ protected:
 						break;
 					}
 
+                    if (nullptr != pServerData->mxNetModule)
+                    {
+                        pServerData->mxNetModule = nullptr;
+                    }
+
 					pServerData->mfLastActionTime = 0.0f;
 					pServerData->eState = ConnectDataState::NORMAL;
-
+                    pServerData->mxNetModule = NF_SHARE_PTR<NFINetModule> (NF_NEW NFINetModule());
 					pServerData->mxNetModule->Initialization(this, &NFIClusterClientModule::OnRecivePack, &NFIClusterClientModule::OnSocketEvent, pServerData->strIP.c_str(), pServerData->nPort);
 				}
 				break;
