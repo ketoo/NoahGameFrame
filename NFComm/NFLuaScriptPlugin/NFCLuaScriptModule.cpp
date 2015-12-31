@@ -75,7 +75,7 @@ bool NFCLuaScriptModule::BeforeShut()
     return true;
 }
 
-int NFCLuaScriptModule::OnPropertyCommEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
+int NFCLuaScriptModule::OnPropertyCommEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
     DoPropertyCommEvent(self, strPropertyName, oldVar, newVar);
 
@@ -205,7 +205,7 @@ int NFCLuaScriptModule::DoHeartBeatScript(const NFGUID& self, const std::string&
     return 1;
 }
 
-int NFCLuaScriptModule::DoScriptPropertyCallBack(const NFGUID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& oldVar, const NFCDataList& newVar)
+int NFCLuaScriptModule::DoScriptPropertyCallBack(const NFGUID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
     if (!CheckCompomentStatus(strComponentName, strFunction))
     {
@@ -274,17 +274,14 @@ bool NFCLuaScriptModule::Regisger()
             .addFunction("Type", &NFCDataList::Type)
             .addFunction("AddInt", &NFCDataList::AddInt)
             .addFunction("AddFloat", &NFCDataList::AddFloat)
-            .addFunction("AddDouble", &NFCDataList::AddDouble)
             .addFunction("AddString", &NFCDataList::AddString)
             .addFunction("AddObject", &NFCDataList::AddObject)
             .addFunction("SetInt", &NFCDataList::SetInt)
             .addFunction("SetFloat", &NFCDataList::SetFloat)
-            .addFunction("SetDouble", &NFCDataList::SetDouble)
             .addFunction("SetString", &NFCDataList::SetString)
             .addFunction("SetObject", &NFCDataList::SetObject)
             .addFunction("Int", &NFCDataList::Int)
             .addFunction("Float", &NFCDataList::Float)
-            .addFunction("Double", &NFCDataList::Double)
             .addFunction("String", &NFCDataList::String)
             .addFunction("Object", &NFCDataList::Object)
         .endClass();
