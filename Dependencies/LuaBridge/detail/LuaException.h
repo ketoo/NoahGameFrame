@@ -79,7 +79,6 @@ public:
   template <class Exception>
   static void Throw (Exception e)
   {
-	  printf("%s\n", e.what());
     throw e;
   }
 
@@ -90,8 +89,6 @@ public:
   static void pcall (lua_State* L, int nargs = 0, int nresults = 0, int msgh = 0)
   {
     int code = lua_pcall (L, nargs, nresults, msgh);
-
-    printf("%s \n", lua_tostring(L, -1));
 
     if (code != LUABRIDGE_LUA_OK)
       Throw (LuaException (L, code));
