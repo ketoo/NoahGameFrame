@@ -228,7 +228,7 @@ public:
     {
         mstrBuff.append(str, nLen);
 
-        return mstrBuff.length();
+        return (int)mstrBuff.length();
     }
 
     int CopyBuffTo(char* str, uint32_t nStart, uint32_t nLen)
