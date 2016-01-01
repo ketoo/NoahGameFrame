@@ -235,7 +235,7 @@ public:
 
     int Count()
     {
-        return mObjectList.size();
+        return (int)mObjectList.size();
     }
 
     bool ClearAll()

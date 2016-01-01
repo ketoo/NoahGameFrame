@@ -854,7 +854,7 @@ int NFCRecord::FindInt(const int nCol, const NFINT64 value, NFIDataList& varResu
 	}
 	else
 	{
-		for (int64_t i = 0; i < mnMaxRow; ++i)
+		for (int i = 0; i < mnMaxRow; ++i)
 		{
 			if (!IsUsed(i))
 			{
