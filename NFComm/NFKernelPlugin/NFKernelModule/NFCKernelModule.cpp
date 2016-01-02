@@ -251,13 +251,15 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
 			pConfigRecordInfo = pStaticClassRecordManager->Next();
 		}
 
-// 		NF_SHARE_PTR<NFIComponent> pConfigComponentInfo = pStaticClasComponentManager->First();
-// 		while (pConfigComponentInfo.get())
-// 		{
-// 			pComponentManager->AddComponent(pConfigComponentInfo->ComponentName(), pConfigComponentInfo->LanguageName());
-// 
-// 			pConfigComponentInfo = pStaticClasComponentManager->Next();
-// 		}
+		std::string strSrciptComponentName;
+		pStaticClasComponentManager->First(strSrciptComponentName);
+		while (!strSrciptComponentName.empty())
+		{
+			pComponentManager->AddComponent(strSrciptComponentName, nullptr);
+
+			strSrciptComponentName.clear();
+			pStaticClasComponentManager->Next(strSrciptComponentName);
+		}
 		//////////////////////////////////////////////////////////////////////////
 		//配置属性
 		NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementInfoModule->GetPropertyManager(strConfigIndex);
