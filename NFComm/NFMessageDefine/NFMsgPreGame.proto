@@ -2,7 +2,6 @@ package NFMsg;
 
 import "NFDefine.proto";
 import "NFMsgBase.proto";
-import "NFMsgBaseEx.proto";
 
 //这里主要是与游戏内容关系不是很大的协议，比如登录，创建角色，平台扣费等
 

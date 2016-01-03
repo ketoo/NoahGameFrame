@@ -54,9 +54,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFEventDefine", "NFEventDefine", "{46C821C7-D562-417B-8791-94A435B435E7}"
 	ProjectSection(SolutionItems) = preProject
 		NFComm\NFEventDefine\NFEventDefine.h = NFComm\NFEventDefine\NFEventDefine.h
-		NFComm\Define\NFItem_def.h = NFComm\Define\NFItem_def.h
-		NFComm\Define\NFObject_def.h = NFComm\Define\NFObject_def.h
-		NFComm\Define\NFSkill_def.h = NFComm\Define\NFSkill_def.h
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProxyServer", "ProxyServer", "{43D31A0F-6014-43EE-9F28-4E865AAA588F}"
