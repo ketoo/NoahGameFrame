@@ -61,7 +61,7 @@ bool NFCUrlClientModule::Execute( const float fLasFrametime, const float fStarte
 
 bool NFCUrlClientModule::AfterInit()
 {
-    m_pUrlCodeModule = dynamic_cast<NFIUrlCodeModule*>(pPluginManager->FindModule("NFCUrlCodeModule"));
+    m_pUrlCodeModule = pPluginManager->FindModule<NFIUrlCodeModule>("NFCUrlCodeModule");
 
     assert(NULL != m_pUrlCodeModule);
 
