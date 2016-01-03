@@ -114,7 +114,7 @@ bool NFCUUIDModule::BeforeShut()
 
 bool NFCUUIDModule::AfterInit()
 {
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     assert(NULL != m_pKernelModule);
 
     // 初始化uuid

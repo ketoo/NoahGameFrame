@@ -10,7 +10,6 @@
 // Generated from: NFMsgPreGame.proto
 // Note: requires additional types generated from: NFDefine.proto
 // Note: requires additional types generated from: NFMsgBase.proto
-// Note: requires additional types generated from: NFMsgBaseEx.proto
 namespace NFMsg
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ServerInfoReport")]

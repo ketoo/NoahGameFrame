@@ -12,6 +12,7 @@
 #include <iostream>
 #include "NFILogicModule.h"
 #include "NFComm/Define/NFItem_def.h"
+#include "NFComm\NFMessageDefine\NFDefine.pb.h"
 
 class NFIItemConsumeProcessModule
     : public NFILogicModule
@@ -19,13 +20,10 @@ class NFIItemConsumeProcessModule
 public:
 
     //物品使用是否合法
-    virtual int ConsumeLegal(const NFGUID& self, int nItemRowID,  const NFIDataList& other) = 0;
-
-    //使用物品的消耗
-    virtual int ConsumeSelf(const NFGUID& self, int nItemRowID) = 0;
+    virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemName, const NFGUID& targetID) = 0;
 
     //合法,消耗,那么处理过程[消耗后,nItemRowID已经找不到了，因为可能被清空了]
-    virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemName, const NFIDataList& other) = 0;
+    virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemName, const NFGUID& targetID) = 0;
 
 };
 
