@@ -15,11 +15,11 @@ NFCIdleState::NFCIdleState(float fHeartBeatTime, NFIPluginManager* p)
 {
     //任何对象出生后先进入Idle状态，这里初始化静态变量指针
 
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pAIModule = dynamic_cast<NFIAIModule*>(pPluginManager->FindModule("NFCAIModule"));
     m_pMoveModule = dynamic_cast<NFIMoveModule*>(pPluginManager->FindModule("NFCMoveModule"));
-    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
+    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 
     m_pHateModule = m_pAIModule->GetHateModule();
 }
