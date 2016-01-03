@@ -16,9 +16,9 @@ bool NFCBulletSkillConsumeProcessModule::Init()
 
 bool NFCBulletSkillConsumeProcessModule::AfterInit()
 {
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
-    m_pSkillConsumeManagerModule = dynamic_cast<NFISkillConsumeManagerModule*>( pPluginManager->FindModule( "NFCSkillConsumeManagerModule" ) );
-    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>( pPluginManager->FindModule( "NFCElementInfoModule" ) );
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
+    m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>( "NFCSkillConsumeManagerModule" );
+    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
 
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pSkillConsumeManagerModule );

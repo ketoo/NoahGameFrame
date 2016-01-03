@@ -10,7 +10,6 @@
 // Generated from: NFMsgShare.proto
 // Note: requires additional types generated from: NFDefine.proto
 // Note: requires additional types generated from: NFMsgBase.proto
-// Note: requires additional types generated from: NFMsgBaseEx.proto
 namespace NFMsg
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqEnterGameServer")]
@@ -171,6 +170,68 @@ namespace NFMsg
     public global::System.Collections.Generic.List<NFMsg.Ident> object_list
     {
       get { return _object_list; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckSynData")]
+  public partial class ReqAckSynData : global::ProtoBuf.IExtensible
+  {
+    public ReqAckSynData() {}
+    
+    private NFMsg.Ident _syser;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"syser", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident syser
+    {
+      get { return _syser; }
+      set { _syser = value; }
+    }
+    private readonly global::System.Collections.Generic.List<NFMsg.Ident> _object_list = new global::System.Collections.Generic.List<NFMsg.Ident>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"object_list", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFMsg.Ident> object_list
+    {
+      get { return _object_list; }
+    }
+  
+    private byte[] _data;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] data
+    {
+      get { return _data; }
+      set { _data = value; }
+    }
+    private NFMsg.ReqAckSynData.SynType _syn_type;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"syn_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public NFMsg.ReqAckSynData.SynType syn_type
+    {
+      get { return _syn_type; }
+      set { _syn_type = value; }
+    }
+    private NFMsg.EGameMsgID _msg_id;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"msg_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public NFMsg.EGameMsgID msg_id
+    {
+      get { return _msg_id; }
+      set { _msg_id = value; }
+    }
+    [global::ProtoBuf.ProtoContract(Name=@"SynType")]
+    public enum SynType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_SCENE", Value=1)]
+      EST_SCENE = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_GROUP", Value=2)]
+      EST_GROUP = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_GUILD", Value=3)]
+      EST_GUILD = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_FRIEND", Value=4)]
+      EST_FRIEND = 4
     }
   
     private global::ProtoBuf.IExtension extensionObject;

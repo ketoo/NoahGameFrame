@@ -27,7 +27,6 @@
 #include <google/protobuf/unknown_field_set.h>
 #include "NFDefine.pb.h"
 #include "NFMsgBase.pb.h"
-#include "NFMsgBaseEx.pb.h"
 // @@protoc_insertion_point(includes)
 
 namespace NFMsg {
