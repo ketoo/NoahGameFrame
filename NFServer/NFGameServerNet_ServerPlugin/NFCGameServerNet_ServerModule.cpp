@@ -17,20 +17,19 @@ bool NFCGameServerNet_ServerModule::Init()
 
 bool NFCGameServerNet_ServerModule::AfterInit()
 {
-	m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-	m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
-	m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
-	m_pSceneProcessModule = dynamic_cast<NFISceneProcessModule*>(pPluginManager->FindModule("NFCSceneProcessModule"));
-	m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
-	m_pSLGShopModule = dynamic_cast<NFISLGShopModule*>(pPluginManager->FindModule("NFCSLGShopModule"));
-	m_pSLGBuildingModule = dynamic_cast<NFISLGBuildingModule*>(pPluginManager->FindModule("NFCSLGBuildingModule"));
-	m_pUUIDModule = dynamic_cast<NFIUUIDModule*>(pPluginManager->FindModule("NFCUUIDModule"));
-	m_pPVPModule = dynamic_cast<NFIPVPModule*>(pPluginManager->FindModule("NFCPVPModule"));
-	m_pSkillModule = dynamic_cast<NFISkillModule*>(pPluginManager->FindModule("NFCSkillModule"));
-	m_pDataProcessModule = dynamic_cast<NFIDataProcessModule*>(pPluginManager->FindModule("NFCDataProcessModule"));
-	m_pEctypeModule = dynamic_cast<NFIEctypeModule*>(pPluginManager->FindModule("NFCEctypeModule"));
-    m_pGameServerToWorldModule = dynamic_cast<NFIGameServerToWorldModule*>(pPluginManager->FindModule("NFCGameServerToWorldModule"));
+	m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
+	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
+	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>("NFCSceneProcessModule");
+	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
+	m_pSLGShopModule = pPluginManager->FindModule<NFISLGShopModule>("NFCSLGShopModule");
+	m_pSLGBuildingModule = pPluginManager->FindModule<NFISLGBuildingModule>("NFCSLGBuildingModule");
+	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
+	m_pPVPModule = pPluginManager->FindModule<NFIPVPModule>("NFCPVPModule");
+	m_pSkillModule = pPluginManager->FindModule<NFISkillModule>("NFCSkillModule");
+	m_pDataProcessModule = pPluginManager->FindModule<NFIDataProcessModule>("NFCDataProcessModule");
+    m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>("NFCGameServerToWorldModule");
 
 	assert(NULL != m_pEventProcessModule);
 	assert(NULL != m_pKernelModule);
@@ -44,7 +43,6 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	assert(NULL != m_pPVPModule);
 	assert(NULL != m_pSkillModule);
 	assert(NULL != m_pDataProcessModule);
-	assert(NULL != m_pEctypeModule);
     assert(NULL != m_pGameServerToWorldModule);
 
 	m_pKernelModule->ResgisterCommonClassEvent( this, &NFCGameServerNet_ServerModule::OnClassCommonEvent );
@@ -2116,8 +2114,6 @@ void NFCGameServerNet_ServerModule::OnClienGMProcess(const int nSockIndex, const
 
 void NFCGameServerNet_ServerModule::OnClientEndBattle(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckEndBattle);
-	m_pEctypeModule->OnEctypeSettleEvent(nPlayerID, 1, 3); // 暂时先给1通过和3星
 }
 
 //SLG////////////////////////////////////////////////////////////////////////

@@ -31,8 +31,8 @@ bool NFCChatGroupBroadcastModule::Execute(const float fLasFrametime, const float
 
 bool NFCChatGroupBroadcastModule::AfterInit()
 {
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pWorldNet_ServerModule = dynamic_cast<NFIWorldNet_ServerModule*>(pPluginManager->FindModule("NFCWorldNet_ServerModule"));
     m_pWorldChatGroupModule = dynamic_cast<NFIWorldChatGroupModule*>(pPluginManager->FindModule("NFCWorldChatGroupModule"));
 

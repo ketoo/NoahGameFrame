@@ -27,7 +27,6 @@
 #include <google/protobuf/unknown_field_set.h>
 #include "NFDefine.pb.h"
 #include "NFMsgBase.pb.h"
-#include "NFMsgBaseEx.pb.h"
 // @@protoc_insertion_point(includes)
 
 namespace NFMsg {
@@ -43,6 +42,7 @@ class ReqLeaveGameServer;
 class PlayerEntryInfo;
 class AckPlayerEntryList;
 class AckPlayerLeaveList;
+class ReqAckSynData;
 class ReqAckPlayerMove;
 class ChatContainer;
 class ReqAckPlayerChat;
@@ -73,6 +73,27 @@ class ReqAckQuitChatGroup;
 class ReqSubscriptionChatGroup;
 class ReqCancelSubscriptionChatGroup;
 
+enum ReqAckSynData_SynType {
+  ReqAckSynData_SynType_EST_SCENE = 1,
+  ReqAckSynData_SynType_EST_GROUP = 2,
+  ReqAckSynData_SynType_EST_GUILD = 3,
+  ReqAckSynData_SynType_EST_FRIEND = 4
+};
+bool ReqAckSynData_SynType_IsValid(int value);
+const ReqAckSynData_SynType ReqAckSynData_SynType_SynType_MIN = ReqAckSynData_SynType_EST_SCENE;
+const ReqAckSynData_SynType ReqAckSynData_SynType_SynType_MAX = ReqAckSynData_SynType_EST_FRIEND;
+const int ReqAckSynData_SynType_SynType_ARRAYSIZE = ReqAckSynData_SynType_SynType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ReqAckSynData_SynType_descriptor();
+inline const ::std::string& ReqAckSynData_SynType_Name(ReqAckSynData_SynType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ReqAckSynData_SynType_descriptor(), value);
+}
+inline bool ReqAckSynData_SynType_Parse(
+    const ::std::string& name, ReqAckSynData_SynType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ReqAckSynData_SynType>(
+    ReqAckSynData_SynType_descriptor(), name, value);
+}
 enum ChatContainer_ContainerType {
   ChatContainer_ContainerType_EGCT_ITEM = 1
 };
@@ -841,6 +862,164 @@ class AckPlayerLeaveList : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static AckPlayerLeaveList* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckSynData : public ::google::protobuf::Message {
+ public:
+  ReqAckSynData();
+  virtual ~ReqAckSynData();
+
+  ReqAckSynData(const ReqAckSynData& from);
+
+  inline ReqAckSynData& operator=(const ReqAckSynData& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckSynData& default_instance();
+
+  void Swap(ReqAckSynData* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckSynData* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckSynData& from);
+  void MergeFrom(const ReqAckSynData& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef ReqAckSynData_SynType SynType;
+  static const SynType EST_SCENE = ReqAckSynData_SynType_EST_SCENE;
+  static const SynType EST_GROUP = ReqAckSynData_SynType_EST_GROUP;
+  static const SynType EST_GUILD = ReqAckSynData_SynType_EST_GUILD;
+  static const SynType EST_FRIEND = ReqAckSynData_SynType_EST_FRIEND;
+  static inline bool SynType_IsValid(int value) {
+    return ReqAckSynData_SynType_IsValid(value);
+  }
+  static const SynType SynType_MIN =
+    ReqAckSynData_SynType_SynType_MIN;
+  static const SynType SynType_MAX =
+    ReqAckSynData_SynType_SynType_MAX;
+  static const int SynType_ARRAYSIZE =
+    ReqAckSynData_SynType_SynType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  SynType_descriptor() {
+    return ReqAckSynData_SynType_descriptor();
+  }
+  static inline const ::std::string& SynType_Name(SynType value) {
+    return ReqAckSynData_SynType_Name(value);
+  }
+  static inline bool SynType_Parse(const ::std::string& name,
+      SynType* value) {
+    return ReqAckSynData_SynType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident syser = 1;
+  inline bool has_syser() const;
+  inline void clear_syser();
+  static const int kSyserFieldNumber = 1;
+  inline const ::NFMsg::Ident& syser() const;
+  inline ::NFMsg::Ident* mutable_syser();
+  inline ::NFMsg::Ident* release_syser();
+  inline void set_allocated_syser(::NFMsg::Ident* syser);
+
+  // repeated .NFMsg.Ident object_list = 2;
+  inline int object_list_size() const;
+  inline void clear_object_list();
+  static const int kObjectListFieldNumber = 2;
+  inline const ::NFMsg::Ident& object_list(int index) const;
+  inline ::NFMsg::Ident* mutable_object_list(int index);
+  inline ::NFMsg::Ident* add_object_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+      object_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+      mutable_object_list();
+
+  // required bytes data = 3;
+  inline bool has_data() const;
+  inline void clear_data();
+  static const int kDataFieldNumber = 3;
+  inline const ::std::string& data() const;
+  inline void set_data(const ::std::string& value);
+  inline void set_data(const char* value);
+  inline void set_data(const void* value, size_t size);
+  inline ::std::string* mutable_data();
+  inline ::std::string* release_data();
+  inline void set_allocated_data(::std::string* data);
+
+  // required .NFMsg.ReqAckSynData.SynType syn_type = 4;
+  inline bool has_syn_type() const;
+  inline void clear_syn_type();
+  static const int kSynTypeFieldNumber = 4;
+  inline ::NFMsg::ReqAckSynData_SynType syn_type() const;
+  inline void set_syn_type(::NFMsg::ReqAckSynData_SynType value);
+
+  // required .NFMsg.EGameMsgID msg_id = 5;
+  inline bool has_msg_id() const;
+  inline void clear_msg_id();
+  static const int kMsgIdFieldNumber = 5;
+  inline ::NFMsg::EGameMsgID msg_id() const;
+  inline void set_msg_id(::NFMsg::EGameMsgID value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckSynData)
+ private:
+  inline void set_has_syser();
+  inline void clear_has_syser();
+  inline void set_has_data();
+  inline void clear_has_data();
+  inline void set_has_syn_type();
+  inline void clear_has_syn_type();
+  inline void set_has_msg_id();
+  inline void clear_has_msg_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* syser_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > object_list_;
+  ::std::string* data_;
+  int syn_type_;
+  int msg_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckSynData* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -4775,6 +4954,189 @@ AckPlayerLeaveList::mutable_object_list() {
 
 // -------------------------------------------------------------------
 
+// ReqAckSynData
+
+// required .NFMsg.Ident syser = 1;
+inline bool ReqAckSynData::has_syser() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckSynData::set_has_syser() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckSynData::clear_has_syser() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckSynData::clear_syser() {
+  if (syser_ != NULL) syser_->::NFMsg::Ident::Clear();
+  clear_has_syser();
+}
+inline const ::NFMsg::Ident& ReqAckSynData::syser() const {
+  return syser_ != NULL ? *syser_ : *default_instance_->syser_;
+}
+inline ::NFMsg::Ident* ReqAckSynData::mutable_syser() {
+  set_has_syser();
+  if (syser_ == NULL) syser_ = new ::NFMsg::Ident;
+  return syser_;
+}
+inline ::NFMsg::Ident* ReqAckSynData::release_syser() {
+  clear_has_syser();
+  ::NFMsg::Ident* temp = syser_;
+  syser_ = NULL;
+  return temp;
+}
+inline void ReqAckSynData::set_allocated_syser(::NFMsg::Ident* syser) {
+  delete syser_;
+  syser_ = syser;
+  if (syser) {
+    set_has_syser();
+  } else {
+    clear_has_syser();
+  }
+}
+
+// repeated .NFMsg.Ident object_list = 2;
+inline int ReqAckSynData::object_list_size() const {
+  return object_list_.size();
+}
+inline void ReqAckSynData::clear_object_list() {
+  object_list_.Clear();
+}
+inline const ::NFMsg::Ident& ReqAckSynData::object_list(int index) const {
+  return object_list_.Get(index);
+}
+inline ::NFMsg::Ident* ReqAckSynData::mutable_object_list(int index) {
+  return object_list_.Mutable(index);
+}
+inline ::NFMsg::Ident* ReqAckSynData::add_object_list() {
+  return object_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+ReqAckSynData::object_list() const {
+  return object_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+ReqAckSynData::mutable_object_list() {
+  return &object_list_;
+}
+
+// required bytes data = 3;
+inline bool ReqAckSynData::has_data() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckSynData::set_has_data() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckSynData::clear_has_data() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckSynData::clear_data() {
+  if (data_ != &::google::protobuf::internal::kEmptyString) {
+    data_->clear();
+  }
+  clear_has_data();
+}
+inline const ::std::string& ReqAckSynData::data() const {
+  return *data_;
+}
+inline void ReqAckSynData::set_data(const ::std::string& value) {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  data_->assign(value);
+}
+inline void ReqAckSynData::set_data(const char* value) {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  data_->assign(value);
+}
+inline void ReqAckSynData::set_data(const void* value, size_t size) {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  data_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckSynData::mutable_data() {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  return data_;
+}
+inline ::std::string* ReqAckSynData::release_data() {
+  clear_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = data_;
+    data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckSynData::set_allocated_data(::std::string* data) {
+  if (data_ != &::google::protobuf::internal::kEmptyString) {
+    delete data_;
+  }
+  if (data) {
+    set_has_data();
+    data_ = data;
+  } else {
+    clear_has_data();
+    data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required .NFMsg.ReqAckSynData.SynType syn_type = 4;
+inline bool ReqAckSynData::has_syn_type() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqAckSynData::set_has_syn_type() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqAckSynData::clear_has_syn_type() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqAckSynData::clear_syn_type() {
+  syn_type_ = 1;
+  clear_has_syn_type();
+}
+inline ::NFMsg::ReqAckSynData_SynType ReqAckSynData::syn_type() const {
+  return static_cast< ::NFMsg::ReqAckSynData_SynType >(syn_type_);
+}
+inline void ReqAckSynData::set_syn_type(::NFMsg::ReqAckSynData_SynType value) {
+  assert(::NFMsg::ReqAckSynData_SynType_IsValid(value));
+  set_has_syn_type();
+  syn_type_ = value;
+}
+
+// required .NFMsg.EGameMsgID msg_id = 5;
+inline bool ReqAckSynData::has_msg_id() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ReqAckSynData::set_has_msg_id() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ReqAckSynData::clear_has_msg_id() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ReqAckSynData::clear_msg_id() {
+  msg_id_ = 0;
+  clear_has_msg_id();
+}
+inline ::NFMsg::EGameMsgID ReqAckSynData::msg_id() const {
+  return static_cast< ::NFMsg::EGameMsgID >(msg_id_);
+}
+inline void ReqAckSynData::set_msg_id(::NFMsg::EGameMsgID value) {
+  assert(::NFMsg::EGameMsgID_IsValid(value));
+  set_has_msg_id();
+  msg_id_ = value;
+}
+
+// -------------------------------------------------------------------
+
 // ReqAckPlayerMove
 
 // required .NFMsg.Ident mover = 1;
@@ -8172,6 +8534,10 @@ ReqCancelSubscriptionChatGroup::mutable_xchatgroupid() {
 namespace google {
 namespace protobuf {
 
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckSynData_SynType>() {
+  return ::NFMsg::ReqAckSynData_SynType_descriptor();
+}
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ChatContainer_ContainerType>() {
   return ::NFMsg::ChatContainer_ContainerType_descriptor();

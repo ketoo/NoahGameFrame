@@ -15,10 +15,10 @@ bool NFCSLGBuildingModule::Init()
 
 bool NFCSLGBuildingModule::AfterInit()
 {
-	m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
-	m_pLogModule = dynamic_cast<NFILogModule*>( pPluginManager->FindModule( "NFCLogModule" ) );
-	m_pUUIDModule = dynamic_cast<NFIUUIDModule*>( pPluginManager->FindModule( "NFCUUIDModule" ) );
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>( pPluginManager->FindModule( "NFCEventProcessModule" ) );
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
+	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>( "NFCUUIDModule" );
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
 
 	assert( NULL != m_pKernelModule );
 	assert( NULL != m_pLogModule );

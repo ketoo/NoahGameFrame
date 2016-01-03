@@ -26,37 +26,20 @@ NFCMysqlClusterModule::~NFCMysqlClusterModule()
 
 bool NFCMysqlClusterModule::Init()
 {
-//     m_pShareMemoryModule = dynamic_cast<NFIShareMemoryModule*>(pPluginManager->FindModule("NFCShareMemoryModule"));
-// 
-//     otl_connect::otl_initialize();
-// 
-//     bool bLoad = mConfig.Load(mstrDataBaseConfigFile);
-// 
-//     mstrUID = mConfig["UID"].str();
-//     mstrPWD = mConfig["PWD"].str();
-//     mstrDSN = mConfig["DSN"].str();
-//     mstrMasterName = mConfig["MST"].str();
-// 
-//     mstrAccountTableName = mConfig["AccountTBL"].str();
-//     mstrPlayerTableName = mConfig["RoleTBL"].str();
-//     mstrGlobalTableName = mConfig["GlobalTBL"].str();
-// 
-// 
-//     m_pDataBaseDriver->OTLConnect(mstrUID, mstrPWD, mstrDSN, motlConnect);
+
 
     return true;
 }
 
 bool NFCMysqlClusterModule::Shut()
 {
-    //m_pDataBaseDriver->OTLDisconnect(motlConnect);
 
     return true;
 }
 
 bool NFCMysqlClusterModule::AfterInit()
 {
-    m_pMysqlConnectMgrManager = dynamic_cast<NFIMysqlConnectMgrModule*>(pPluginManager->FindModule("NFCMysqlConnectMgrModule"));
+    m_pMysqlConnectMgrManager = pPluginManager->FindModule<NFIMysqlConnectMgrModule>("NFCMysqlConnectMgrModule");
 
     assert(NULL != m_pMysqlConnectMgrManager);
 
