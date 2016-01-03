@@ -17,6 +17,7 @@
 #include "NFComm/NFPluginModule/NFILogicModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFILogicClassModule.h"
 
 class NFCHeroModule
     : public NFIHeroModule
