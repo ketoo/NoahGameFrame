@@ -86,6 +86,8 @@
 
 package.path = '../../NFDataCfg/Ini/Components/?.lua;'
 
+io.write("Hello Lua\n");
+
 function load_script_file(name)
 	local object = require(name);
 	if nil == object then

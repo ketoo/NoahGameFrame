@@ -29,10 +29,10 @@ bool NFCLevelModule::Execute( const float fLasFrametime, const float fStartedTim
 
 bool NFCLevelModule::AfterInit()
 {
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>( pPluginManager->FindModule( "NFCEventProcessModule" ) );
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
-    m_pLogModule = dynamic_cast<NFILogModule*>( pPluginManager->FindModule( "NFCLogModule" ) );
-    m_pPropertyConfigModule = dynamic_cast<NFIPropertyConfigModule*>( pPluginManager->FindModule( "NFCPropertyConfigModule" ) );
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
+    m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>( "NFCPropertyConfigModule" );
 
     assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
