@@ -22,7 +22,11 @@ namespace {
 
 const ::google::protobuf::EnumDescriptor* EGameEventCode_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EGameMsgID_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* EAwardType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* EItemType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* EGameEquipSubType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* EGameItemSubType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* EGameItemExpiredType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* EDrawDropItemState_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EGuildPowerType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ETaskState_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ETaskType_descriptor_ = NULL;
@@ -39,11 +43,15 @@ void protobuf_AssignDesc_NFDefine_2eproto() {
   GOOGLE_CHECK(file != NULL);
   EGameEventCode_descriptor_ = file->enum_type(0);
   EGameMsgID_descriptor_ = file->enum_type(1);
-  EAwardType_descriptor_ = file->enum_type(2);
-  EGuildPowerType_descriptor_ = file->enum_type(3);
-  ETaskState_descriptor_ = file->enum_type(4);
-  ETaskType_descriptor_ = file->enum_type(5);
-  EBattleType_descriptor_ = file->enum_type(6);
+  EItemType_descriptor_ = file->enum_type(2);
+  EGameEquipSubType_descriptor_ = file->enum_type(3);
+  EGameItemSubType_descriptor_ = file->enum_type(4);
+  EGameItemExpiredType_descriptor_ = file->enum_type(5);
+  EDrawDropItemState_descriptor_ = file->enum_type(6);
+  EGuildPowerType_descriptor_ = file->enum_type(7);
+  ETaskState_descriptor_ = file->enum_type(8);
+  ETaskType_descriptor_ = file->enum_type(9);
+  EBattleType_descriptor_ = file->enum_type(10);
 }
 
 namespace {
@@ -196,22 +204,47 @@ void protobuf_AddDesc_NFDefine_2eproto() {
     "UILD_OBJECT\020\222N\022\037\n\032EGMI_ACK_MOVE_BUILD_OB"
     "JECT\020\223N\022\032\n\025EGMI_REQ_UP_BUILD_LVL\020\365N\022\031\n\024E"
     "GMI_REQ_CREATE_ITEM\020\366N\022\033\n\026EGMI_REQ_BUILD"
-    "_OPERATE\020\367N*8\n\nEAwardType\022\025\n\021AWARD_TYPE_"
-    "NORMAL\020\000\022\023\n\017AWARD_TYPE_HERO\020\001*s\n\017EGuildP"
-    "owerType\022\033\n\027GUILD_POWER_TYPE_NORMAL\020\000\022#\n"
-    "\037GUILD_POWER_TYPE_VICE_PRESIDENT\020\001\022\036\n\032GU"
-    "ILD_POWER_TYPE_PRESIDENT\020\002*V\n\nETaskState"
-    "\022\023\n\017TASK_IN_PROCESS\020\000\022\r\n\tTASK_DONE\020\001\022\023\n\017"
-    "TASK_DRAW_AWARD\020\002\022\017\n\013TASK_FINISH\020\003*\251\002\n\tE"
-    "TaskType\022 \n\034TASK_LEVEL_UPDATE_SOME_LEVEL"
-    "\020\000\022\024\n\020TASK_PASS_ECTYPE\020\001\022\032\n\026TASK_PASS_EC"
-    "TYPE_COUNT\020\002\022$\n TASK_PASS_SOME_TYPE_ECTY"
-    "PE_COUNT\020\003\022\033\n\027TASK_UPDATE_SKILL_COUNT\020\004\022"
-    "\026\n\022TASK_CONSUME_MONEY\020\005\022\030\n\024TASK_CONSUME_"
-    "DIAMOND\020\006\022\024\n\020TASK_ARENA_COUNT\020\007\022\033\n\027TASK_"
-    "KILL_MONSTER_COUNT\020\010\022 \n\034TASK_KILL_SOME_M"
-    "ONSTER_COUNT\020\t*5\n\013EBattleType\022\021\n\rBATTLE_"
-    "SINGLE\020\000\022\023\n\017BATTLE_PVE_TEAM\020\001", 5669);
+    "_OPERATE\020\367N*\264\001\n\tEItemType\022\016\n\nEIT_NORMAL\020"
+    "\000\022\r\n\tEIT_EQUIP\020\001\022\016\n\nEIT_BOUNTY\020\002\022\021\n\rEIT_"
+    "HERO_CARD\020\003\022\022\n\016EIT_HERO_STONE\020\004\022\030\n\024EIT_S"
+    "TRENGTHEN_STONE\020\005\022\032\n\026EIT_DEMONIZATION_ST"
+    "ONE\020\006\022\014\n\010EIT_WOOD\020d\022\r\n\tEIT_STONE\020e*\350\002\n\021E"
+    "GameEquipSubType\022\024\n\020EQUIPTYPE_WEAPON\020\000\022\023"
+    "\n\017EQUIPTYPE_ARMOR\020\001\022\026\n\022EQUIPTYPE_NECKLAC"
+    "E\020\002\022\022\n\016EQUIPTYPE_RING\020\003\022\026\n\022EQUIPTYPE_EAR"
+    "RINGS\020\004\022\023\n\017EQUIPTYPE_BADGE\020\005\022\024\n\020EQUIPTYP"
+    "E_HELMET\020\006\022\023\n\017EQUIPTYPE_SHAWL\020\007\022\023\n\017EQUIP"
+    "TYPE_GLOVE\020\010\022\023\n\017EQUIPTYPE_WRIST\020\t\022\022\n\016EQU"
+    "IPTYPE_BELT\020\n\022\022\n\016EQUIPTYPE_PANT\020\013\022\022\n\016EQU"
+    "IPTYPE_BOOT\020\014\022\022\n\016EQUIPTYPE_WING\020\r\022\023\n\017EQU"
+    "IPTYPE_CLOAK\020\016\022\025\n\021EQUIPTYPE_FASHION\020\017*\241\002"
+    "\n\020EGameItemSubType\022\022\n\016EGIT_ITEM_NONE\020\000\022\033"
+    "\n\027EGIT_ITEM_PROPERTY_CARD\020\001\022\035\n\031EGIT_ITEM"
+    "_PVP_ATTACK_CARD\020\002\022\036\n\032EGIT_ITEM_PVP_DEFE"
+    "NSE_CARD\020\003\022\030\n\024EGIT_ITEM_SKILL_CARD\020\004\022\036\n\032"
+    "EGIT_ITEM_GUILD_SKILL_CARD\020\005\022\033\n\027EGIT_ITE"
+    "M_GUILD_DIAMOND\020\006\022\026\n\022EGIT_ITEM_POSITION\020"
+    "\007\022\030\n\024EGIT_ITEM_WORLD_HORN\020\010\022\024\n\020EGIT_ITEM"
+    "_REBORN\020\t*e\n\024EGameItemExpiredType\022\016\n\nEGI"
+    "ET_NONE\020\000\022\023\n\017EGIET_USE_TIMES\020\001\022\023\n\017EGIET_"
+    "REAL_TIME\020\002\022\023\n\017EGIET_END_INDEX\020\003*Y\n\022EDra"
+    "wDropItemState\022\025\n\021E_DRAW_STATE_NONE\020\000\022\025\n"
+    "\021E_DRAW_STATE_GAIN\020\001\022\025\n\021E_DRAW_STATE_REC"
+    "V\020\002*s\n\017EGuildPowerType\022\033\n\027GUILD_POWER_TY"
+    "PE_NORMAL\020\000\022#\n\037GUILD_POWER_TYPE_VICE_PRE"
+    "SIDENT\020\001\022\036\n\032GUILD_POWER_TYPE_PRESIDENT\020\002"
+    "*V\n\nETaskState\022\023\n\017TASK_IN_PROCESS\020\000\022\r\n\tT"
+    "ASK_DONE\020\001\022\023\n\017TASK_DRAW_AWARD\020\002\022\017\n\013TASK_"
+    "FINISH\020\003*\251\002\n\tETaskType\022 \n\034TASK_LEVEL_UPD"
+    "ATE_SOME_LEVEL\020\000\022\024\n\020TASK_PASS_ECTYPE\020\001\022\032"
+    "\n\026TASK_PASS_ECTYPE_COUNT\020\002\022$\n TASK_PASS_"
+    "SOME_TYPE_ECTYPE_COUNT\020\003\022\033\n\027TASK_UPDATE_"
+    "SKILL_COUNT\020\004\022\026\n\022TASK_CONSUME_MONEY\020\005\022\030\n"
+    "\024TASK_CONSUME_DIAMOND\020\006\022\024\n\020TASK_ARENA_CO"
+    "UNT\020\007\022\033\n\027TASK_KILL_MONSTER_COUNT\020\010\022 \n\034TA"
+    "SK_KILL_SOME_MONSTER_COUNT\020\t*5\n\013EBattleT"
+    "ype\022\021\n\rBATTLE_SINGLE\020\000\022\023\n\017BATTLE_PVE_TEA"
+    "M\020\001", 6643);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFDefine.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFDefine_2eproto);
@@ -427,14 +460,102 @@ bool EGameMsgID_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* EAwardType_descriptor() {
+const ::google::protobuf::EnumDescriptor* EItemType_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return EAwardType_descriptor_;
+  return EItemType_descriptor_;
 }
-bool EAwardType_IsValid(int value) {
+bool EItemType_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 100:
+    case 101:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* EGameEquipSubType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return EGameEquipSubType_descriptor_;
+}
+bool EGameEquipSubType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+    case 15:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* EGameItemSubType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return EGameItemSubType_descriptor_;
+}
+bool EGameItemSubType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* EGameItemExpiredType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return EGameItemExpiredType_descriptor_;
+}
+bool EGameItemExpiredType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* EDrawDropItemState_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return EDrawDropItemState_descriptor_;
+}
+bool EDrawDropItemState_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
       return true;
     default:
       return false;

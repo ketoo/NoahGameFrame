@@ -2,7 +2,6 @@ package NFMsg;
 
 import "NFDefine.proto";
 import "NFMsgBase.proto";
-import "NFMsgBaseEx.proto";
 
 
 //除 去基础对象身上的属性外，这里全部游戏中的逻辑协议
@@ -48,6 +47,24 @@ message AckPlayerLeaveList//对象离去列表
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+message ReqAckSynData//对象离去列表
+{
+	enum SynType
+	{
+		EST_SCENE = 1;	//场景
+		EST_GROUP = 2;	//层
+		EST_GUILD = 3;	//公会
+		EST_FRIEND = 4;	//好友
+	}
+	required Ident 		syser = 1;
+	repeated Ident 		object_list = 2;
+	required bytes  	data = 3;
+	required SynType  	syn_type = 4;
+	required EGameMsgID msg_id = 5;//有消息ID限制
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 message ReqAckPlayerMove
 {
 	required Ident 	mover = 1;

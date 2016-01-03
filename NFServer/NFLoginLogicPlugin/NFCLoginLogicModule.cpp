@@ -122,8 +122,8 @@ bool NFCLoginLogicModule::AfterInit()
 
 
     //////////////////////////////////////////////////////////////////////////
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-    m_pClusterSqlModule = dynamic_cast<NFIClusterModule*>(pPluginManager->FindModule("NFCMysqlClusterModule"));
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
+    m_pClusterSqlModule = pPluginManager->FindModule<NFIClusterModule>("NFCMysqlClusterModule");
 
 
     assert(NULL != m_pEventProcessModule);

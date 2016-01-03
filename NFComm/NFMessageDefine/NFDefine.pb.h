@@ -247,24 +247,132 @@ inline bool EGameMsgID_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EGameMsgID>(
     EGameMsgID_descriptor(), name, value);
 }
-enum EAwardType {
-  AWARD_TYPE_NORMAL = 0,
-  AWARD_TYPE_HERO = 1
+enum EItemType {
+  EIT_NORMAL = 0,
+  EIT_EQUIP = 1,
+  EIT_BOUNTY = 2,
+  EIT_HERO_CARD = 3,
+  EIT_HERO_STONE = 4,
+  EIT_STRENGTHEN_STONE = 5,
+  EIT_DEMONIZATION_STONE = 6,
+  EIT_WOOD = 100,
+  EIT_STONE = 101
 };
-bool EAwardType_IsValid(int value);
-const EAwardType EAwardType_MIN = AWARD_TYPE_NORMAL;
-const EAwardType EAwardType_MAX = AWARD_TYPE_HERO;
-const int EAwardType_ARRAYSIZE = EAwardType_MAX + 1;
+bool EItemType_IsValid(int value);
+const EItemType EItemType_MIN = EIT_NORMAL;
+const EItemType EItemType_MAX = EIT_STONE;
+const int EItemType_ARRAYSIZE = EItemType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* EAwardType_descriptor();
-inline const ::std::string& EAwardType_Name(EAwardType value) {
+const ::google::protobuf::EnumDescriptor* EItemType_descriptor();
+inline const ::std::string& EItemType_Name(EItemType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    EAwardType_descriptor(), value);
+    EItemType_descriptor(), value);
 }
-inline bool EAwardType_Parse(
-    const ::std::string& name, EAwardType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<EAwardType>(
-    EAwardType_descriptor(), name, value);
+inline bool EItemType_Parse(
+    const ::std::string& name, EItemType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EItemType>(
+    EItemType_descriptor(), name, value);
+}
+enum EGameEquipSubType {
+  EQUIPTYPE_WEAPON = 0,
+  EQUIPTYPE_ARMOR = 1,
+  EQUIPTYPE_NECKLACE = 2,
+  EQUIPTYPE_RING = 3,
+  EQUIPTYPE_EARRINGS = 4,
+  EQUIPTYPE_BADGE = 5,
+  EQUIPTYPE_HELMET = 6,
+  EQUIPTYPE_SHAWL = 7,
+  EQUIPTYPE_GLOVE = 8,
+  EQUIPTYPE_WRIST = 9,
+  EQUIPTYPE_BELT = 10,
+  EQUIPTYPE_PANT = 11,
+  EQUIPTYPE_BOOT = 12,
+  EQUIPTYPE_WING = 13,
+  EQUIPTYPE_CLOAK = 14,
+  EQUIPTYPE_FASHION = 15
+};
+bool EGameEquipSubType_IsValid(int value);
+const EGameEquipSubType EGameEquipSubType_MIN = EQUIPTYPE_WEAPON;
+const EGameEquipSubType EGameEquipSubType_MAX = EQUIPTYPE_FASHION;
+const int EGameEquipSubType_ARRAYSIZE = EGameEquipSubType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* EGameEquipSubType_descriptor();
+inline const ::std::string& EGameEquipSubType_Name(EGameEquipSubType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EGameEquipSubType_descriptor(), value);
+}
+inline bool EGameEquipSubType_Parse(
+    const ::std::string& name, EGameEquipSubType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EGameEquipSubType>(
+    EGameEquipSubType_descriptor(), name, value);
+}
+enum EGameItemSubType {
+  EGIT_ITEM_NONE = 0,
+  EGIT_ITEM_PROPERTY_CARD = 1,
+  EGIT_ITEM_PVP_ATTACK_CARD = 2,
+  EGIT_ITEM_PVP_DEFENSE_CARD = 3,
+  EGIT_ITEM_SKILL_CARD = 4,
+  EGIT_ITEM_GUILD_SKILL_CARD = 5,
+  EGIT_ITEM_GUILD_DIAMOND = 6,
+  EGIT_ITEM_POSITION = 7,
+  EGIT_ITEM_WORLD_HORN = 8,
+  EGIT_ITEM_REBORN = 9
+};
+bool EGameItemSubType_IsValid(int value);
+const EGameItemSubType EGameItemSubType_MIN = EGIT_ITEM_NONE;
+const EGameItemSubType EGameItemSubType_MAX = EGIT_ITEM_REBORN;
+const int EGameItemSubType_ARRAYSIZE = EGameItemSubType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* EGameItemSubType_descriptor();
+inline const ::std::string& EGameItemSubType_Name(EGameItemSubType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EGameItemSubType_descriptor(), value);
+}
+inline bool EGameItemSubType_Parse(
+    const ::std::string& name, EGameItemSubType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EGameItemSubType>(
+    EGameItemSubType_descriptor(), name, value);
+}
+enum EGameItemExpiredType {
+  EGIET_NONE = 0,
+  EGIET_USE_TIMES = 1,
+  EGIET_REAL_TIME = 2,
+  EGIET_END_INDEX = 3
+};
+bool EGameItemExpiredType_IsValid(int value);
+const EGameItemExpiredType EGameItemExpiredType_MIN = EGIET_NONE;
+const EGameItemExpiredType EGameItemExpiredType_MAX = EGIET_END_INDEX;
+const int EGameItemExpiredType_ARRAYSIZE = EGameItemExpiredType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* EGameItemExpiredType_descriptor();
+inline const ::std::string& EGameItemExpiredType_Name(EGameItemExpiredType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EGameItemExpiredType_descriptor(), value);
+}
+inline bool EGameItemExpiredType_Parse(
+    const ::std::string& name, EGameItemExpiredType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EGameItemExpiredType>(
+    EGameItemExpiredType_descriptor(), name, value);
+}
+enum EDrawDropItemState {
+  E_DRAW_STATE_NONE = 0,
+  E_DRAW_STATE_GAIN = 1,
+  E_DRAW_STATE_RECV = 2
+};
+bool EDrawDropItemState_IsValid(int value);
+const EDrawDropItemState EDrawDropItemState_MIN = E_DRAW_STATE_NONE;
+const EDrawDropItemState EDrawDropItemState_MAX = E_DRAW_STATE_RECV;
+const int EDrawDropItemState_ARRAYSIZE = EDrawDropItemState_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* EDrawDropItemState_descriptor();
+inline const ::std::string& EDrawDropItemState_Name(EDrawDropItemState value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EDrawDropItemState_descriptor(), value);
+}
+inline bool EDrawDropItemState_Parse(
+    const ::std::string& name, EDrawDropItemState* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EDrawDropItemState>(
+    EDrawDropItemState_descriptor(), name, value);
 }
 enum EGuildPowerType {
   GUILD_POWER_TYPE_NORMAL = 0,
@@ -379,8 +487,24 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameMsgID>() {
   return ::NFMsg::EGameMsgID_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EAwardType>() {
-  return ::NFMsg::EAwardType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EItemType>() {
+  return ::NFMsg::EItemType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameEquipSubType>() {
+  return ::NFMsg::EGameEquipSubType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameItemSubType>() {
+  return ::NFMsg::EGameItemSubType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameItemExpiredType>() {
+  return ::NFMsg::EGameItemExpiredType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EDrawDropItemState>() {
+  return ::NFMsg::EDrawDropItemState_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGuildPowerType>() {
