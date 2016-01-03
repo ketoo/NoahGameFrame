@@ -52,7 +52,28 @@ ALTER TABLE `ChatGroup` ADD `GroupMemberList` BLOB COMMENT '';
 ALTER TABLE `ChatGroup` ADD `ChatList` BLOB COMMENT '';
 
 
+CREATE TABLE `ConsumeData` (
+	`ID` varchar(128) NOT NULL,
+	PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `ConsumeData` ADD `VIPEXP` bigint(11) DEFAULT '0' COMMENT 'VIP经验';
+ALTER TABLE `ConsumeData` ADD `EXP` bigint(11) DEFAULT '0' COMMENT '经验获得,如果是怪物，则是掉落经验';
+ALTER TABLE `ConsumeData` ADD `HP` bigint(11) DEFAULT '0' COMMENT '生命值';
+ALTER TABLE `ConsumeData` ADD `SP` bigint(11) DEFAULT '0' COMMENT '体力';
+ALTER TABLE `ConsumeData` ADD `MP` bigint(11) DEFAULT '0' COMMENT '法力值';
+ALTER TABLE `ConsumeData` ADD `Gold` bigint(11) DEFAULT '0' COMMENT '玩家游戏金币';
+ALTER TABLE `ConsumeData` ADD `Money` bigint(11) DEFAULT '0' COMMENT '钻石';
+
+
 CREATE TABLE `Cost` (
+	`ID` varchar(128) NOT NULL,
+	PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `DescData` (
 	`ID` varchar(128) NOT NULL,
 	PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -184,14 +205,16 @@ ALTER TABLE `Player` ADD `State` bigint(11) DEFAULT '0' COMMENT '0呆着1跑2走
 ALTER TABLE `Player` ADD `LogicState` bigint(11) DEFAULT '0' COMMENT '逻辑状态，或者说模块独占状态';
 ALTER TABLE `Player` ADD `CharType` bigint(11) DEFAULT '0' COMMENT '角色类型';
 ALTER TABLE `Player` ADD `Job` bigint(11) DEFAULT '0' COMMENT '职业';
+ALTER TABLE `Player` ADD `VIPLevel` bigint(11) DEFAULT '0' COMMENT '经验获得,如果是怪物，则是掉落经验';
+ALTER TABLE `Player` ADD `VIPEXP` bigint(11) DEFAULT '0' COMMENT 'VIP经验';
 ALTER TABLE `Player` ADD `EXP` bigint(11) DEFAULT '0' COMMENT '经验获得,如果是怪物，则是掉落经验';
 ALTER TABLE `Player` ADD `HP` bigint(11) DEFAULT '0' COMMENT '生命值';
 ALTER TABLE `Player` ADD `SP` bigint(11) DEFAULT '0' COMMENT '体力';
 ALTER TABLE `Player` ADD `MP` bigint(11) DEFAULT '0' COMMENT '法力值';
-ALTER TABLE `Player` ADD `Money` bigint(11) DEFAULT '0' COMMENT '钱';
+ALTER TABLE `Player` ADD `Gold` bigint(11) DEFAULT '0' COMMENT '玩家游戏金币';
+ALTER TABLE `Player` ADD `Money` bigint(11) DEFAULT '0' COMMENT '钻石';
 ALTER TABLE `Player` ADD `Account` varchar(128) DEFAULT '' COMMENT '玩家的帐号';
 ALTER TABLE `Player` ADD `ConnectKey` varchar(128) DEFAULT '' COMMENT '玩家连接服务器的KEY';
-ALTER TABLE `Player` ADD `Gold` bigint(11) DEFAULT '0' COMMENT '玩家金钱';
 ALTER TABLE `Player` ADD `MAXEXP` bigint(11) DEFAULT '0' COMMENT '升级需要的经验';
 ALTER TABLE `Player` ADD `DEAD_COUNT` bigint(11) DEFAULT '0' COMMENT '死亡次数--需要保存的都是因为不分层的属性，分层属性不需要保存，保存各层的值即可';
 ALTER TABLE `Player` ADD `RELIVE_SOUL` bigint(11) DEFAULT '0' COMMENT '转生次数';
