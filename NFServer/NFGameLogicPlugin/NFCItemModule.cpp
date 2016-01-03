@@ -10,12 +10,12 @@
 
 bool NFCItemModule::Init()
 {
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>( pPluginManager->FindModule( "NFCEventProcessModule" ) );
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
     m_pItemConsumeManagerModule = dynamic_cast<NFIItemConsumeManagerModule*>( pPluginManager->FindModule( "NFCItemConsumeManagerModule" ) );
     m_pPackModule = dynamic_cast<NFIPackModule*>( pPluginManager->FindModule( "NFCPackModule" ) );
-    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>( pPluginManager->FindModule( "NFCElementInfoModule" ) );
-	m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>( pPluginManager->FindModule( "NFCLogicClassModule" ) );
+    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
+	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
 
     assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
@@ -68,64 +68,52 @@ int NFCItemModule::OnClassObjectEvent( const NFGUID& self, const std::string& st
 
 int NFCItemModule::OnRequireUseItemEvent( const NFGUID& self, const int nEventID, const NFIDataList& var )
 {
+	if (var.GetCount() != 2
+		|| !var.TypeEx(TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
+	{
+		return 0;
+	}
     //EGameErrorCode errorCode = EGameErrorCode::EGEC_INVALID_ITEM;
-    //int nItemRowID = var.IntVal(0);
+	const std::string& strItemID = var.String(0);
+	const NFGUID xTargetID = var.Object(0);
 
-    //NFIObject* pObejct = m_pKernelModule->GetObject(self);
-    //if (pObejct)
-    //{
-    //  //还有CD表 string float
-    //  NFIRecord* pRecordPack = pObejct->GetRecordManager()->GetElement(mstrPackTableName);
-    //  if (pRecordPack)
-    //  {
-    //      const std::string& strConfigIndex = m_pPackModule->GetGridConfigID(self, nItemRowID);
-    //      NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager(strConfigIndex);
-    //      if (pPropertyManager)
-    //      {
-    //          NFIProperty* pItemTypeProperty = pPropertyManager->GetElement("ItemType");
-    //          if (pItemTypeProperty)
-    //          {
-    //              //配置表中真的有这么个道具
-    //              EGameItemType nItemType = (EGameItemType)pItemTypeProperty->QueryInt();
-    //              NFIItemConsumeProcessModule* pConsumeProcessModule = m_pItemConsumeManagerModule->GetConsumeModule(nItemType);
-    //              if (pConsumeProcessModule)
-    //              {
-    //                  NFCDataList valueOther;
-    //                  valueOther.Append(var, 1, var.GetCount() - 1);
-    //                  if (pConsumeProcessModule->ConsumeLegal(self, nItemRowID, valueOther) > 0)
-    //                  {
-    //                      if(pConsumeProcessModule->ConsumeSelf(self, nItemRowID) > 0)
-    //                      {
-    //                          int nResult = pConsumeProcessModule->ConsumeProcess(self, strConfigIndex, valueOther);
+	if(!m_pElementInfoModule->ExistElement(strItemID)
+		|| !m_pKernelModule->GetObject(xTargetID))
+	{
+		return 0;
+	}
 
-    //                          NFIProperty* pGUIDProperty = pPropertyManager->GetElement("GUID"); // xxx
-    //                          NFGUID nGUID = pGUIDProperty->QueryObject();
+    NF_SHARE_PTR<NFIRecord> pRecordPack = m_pKernelModule->FindRecord(self, mstrPackTableName);
+    if (pRecordPack)
+    {
+		const bool bRet = m_pPackModule->DeleteItem(self, strItemID, 1);
+		if (bRet)
+		{
+			int nItemType = m_pElementInfoModule->GetPropertyInt(strItemID, "ItemType");
+			NFIItemConsumeProcessModule* pConsumeProcessModule = m_pItemConsumeManagerModule->GetConsumeModule(nItemType);
+			if (pConsumeProcessModule)
+			{
+				if (pConsumeProcessModule->ConsumeLegal(self, strItemID, xTargetID) > 0)
+				{
+					int nResult = pConsumeProcessModule->ConsumeProcess(self, strItemID, xTargetID);
 
-    //                          //结果事件--无论失败或者是成功，都会发下去--当然使用结果只对使用者下发--成果的结果，还得对被施放的人发
-    //                          NFCDataList valueResult;
-    //                          valueResult.AddObject(nGUID);
-    //                          valueResult.AddInt(nResult);
-    //                          valueResult.Append(valueOther, 0, valueOther.GetCount());
+					//结果事件--无论失败或者是成功，都会发下去--当然使用结果只对使用者下发--成果的结果，还得对被施放的人发
+					// 					NFCDataList valueResult;
+					// 					valueResult.AddObject(NFGUID());
+					// 					valueResult.AddInt(nResult);
+					// 					valueResult.Append(valueOther, 0, valueOther.GetCount());
+					// 
+					// 					m_pEventProcessModule->DoEvent(self, NFED_ON_CLIENT_USE_ITEM_RESULT, valueResult);
 
-    //                          m_pEventProcessModule->DoEvent(self, NFED_ON_CLIENT_USE_ITEM_RESULT, valueResult);
+					return 0;
+				}
+			}
+		}
+	}
 
-    //                          return 0;
-    //                      }
-    //                  }
-    //              }
-    //          }
-    //
-    //      }
-    //  }
-    //}
-    //else
-    //{
-    //  //封死你Y的号
-    //}
-
-    //NFCDataList valueError;
-    //valueError.AddInt((int)errorCode);
-    //m_pEventProcessModule->DoEvent(self, NFED_ON_GENERAL_MESSAGE, valueError);
+//     NFCDataList valueError;
+//     valueError.AddInt((int)errorCode);
+//     m_pEventProcessModule->DoEvent(self, NFED_ON_GENERAL_MESSAGE, valueError);
 
     return 0;
 }
