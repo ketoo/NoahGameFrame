@@ -32,7 +32,6 @@
 #include "NFComm/NFPluginModule/NFISkillModule.h"
 #include "NFComm/NFPluginModule/NFIDataProcessModule.h"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
-#include "NFComm/NFPluginModule/NFIEctypeModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
 ////////////////////////////////////////////////////////////////////////////
@@ -207,7 +206,6 @@ private:
     NFIPVPModule* m_pPVPModule;
 	NFISkillModule* m_pSkillModule;
 	NFIDataProcessModule* m_pDataProcessModule;
-    NFIEctypeModule* m_pEctypeModule;
     //////////////////////////////////////////////////////////////////////////
     //SLGÄ£¿é
 	NFISLGShopModule* m_pSLGShopModule;

@@ -235,7 +235,7 @@ public:
         NFCScriptName xScriptName(strComponentName, strFunction);
         pScriptNameList->Add(xScriptName);
 
-        NFIKernelModule* pKernelModule = dynamic_cast<NFIKernelModule*>(GetPluginManager()->FindModule("NFCKernelModule"));
+        NFIKernelModule* pKernelModule = GetPluginManager()->FindModule<NFIKernelModule>("NFCKernelModule"));
         pKernelModule->AddPropertyCallBack(self, strPropertyName, this, &NFIScriptModule::OnPropertyCB);
 
         return true;
@@ -265,7 +265,7 @@ public:
         NFCScriptName xScriptName(strComponentName, strFunction);
         pScriptNameList->Add(xScriptName);
 
-        NFIKernelModule* pKernelModule = dynamic_cast<NFIKernelModule*>(GetPluginManager()->FindModule("NFCKernelModule"));
+        NFIKernelModule* pKernelModule = GetPluginManager()->FindModule<NFIKernelModule>("NFCKernelModule"));
         pKernelModule->AddRecordCallBack(self, strRecordName, this, &NFIScriptModule::OnRecordCB);
 
         return true;
@@ -296,7 +296,7 @@ public:
         NFCScriptName xScriptName(strComponentName, strFunction);
         pScriptNameList->Add(xScriptName);
 
-        NFIKernelModule* pKernelModule = dynamic_cast<NFIKernelModule*>(GetPluginManager()->FindModule("NFCKernelModule"));
+        NFIKernelModule* pKernelModule = GetPluginManager()->FindModule<NFIKernelModule>("NFCKernelModule"));
         pKernelModule->AddHeartBeat(self, strHeartBeatName, this, &NFIScriptModule::OnHeartBeatCB, fTime, nCount);
 
         return true;
@@ -326,7 +326,7 @@ public:
         NFCScriptName xScriptName(strComponentName, strFunction);
         pScriptNameList->Add(xScriptName);
 
-        NFIKernelModule* pKernelModule = dynamic_cast<NFIKernelModule*>(GetPluginManager()->FindModule("NFCKernelModule"));
+        NFIKernelModule* pKernelModule = GetPluginManager()->FindModule<NFIKernelModule>("NFCKernelModule"));
         pKernelModule->AddEventCallBack(self, nEventID, this, &NFIScriptModule::OnEventCB);
 
         return true;
@@ -341,7 +341,7 @@ public:
 static bool KernelModule_DoEvent(NFINT64 kernelAddress, const NFGUID& self, const int nEventID, const NFCDataList& valueList)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
-    NFIEventProcessModule* pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pKernelModule->GetPluginManager()->FindModule("NFCEventProcessModule"));
+    NFIEventProcessModule* pEventProcessModule = pKernelModule->GetPluginManager()->FindModule<NFIEventProcessModule>("NFCEventProcessModule"));
     return pEventProcessModule->DoEvent(self, nEventID, valueList);
 }
 
@@ -358,27 +358,27 @@ static bool KernelModule_RemoveHeartBeat(NFIKernelModule* pKernelModule, const N
 ///////////////////////////////////////////////////
 static bool KernelModule_ExistElement(NFIKernelModule* pKernelModule, const std::string& strConfigName)
 {
-    NFIElementInfoModule* pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pKernelModule->GetPluginManager()->FindModule("NFCElementInfoModule"));
+    NFIElementInfoModule* pElementInfoModule = pKernelModule->GetPluginManager()->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
     return pElementInfoModule->ExistElement(strConfigName);
 }
 
 static NFINT64 KernelModule_GetElementPropertyInt(NFINT64 kernelAddress, const std::string& strConfigName, const std::string& strPropertyName)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
-    NFIElementInfoModule* pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pKernelModule->GetPluginManager()->FindModule("NFCElementInfoModule"));
+    NFIElementInfoModule* pElementInfoModule = pKernelModule->GetPluginManager()->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
     return pElementInfoModule->GetPropertyInt(strConfigName, strPropertyName);
 }
 
 static double KernelModule_GetElementPropertyFloat(NFINT64 kernelAddress, const std::string& strConfigName, const std::string& strPropertyName)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
-    NFIElementInfoModule* pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pKernelModule->GetPluginManager()->FindModule("NFCElementInfoModule"));
+    NFIElementInfoModule* pElementInfoModule = pKernelModule->GetPluginManager()->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
     return pElementInfoModule->GetPropertyFloat(strConfigName, strPropertyName);
 }
 
 static const std::string& KernelModule_GetElementPropertyString(NFIKernelModule* pKernelModule, const std::string& strConfigName, const std::string& strPropertyName)
 {
-    NFIElementInfoModule* pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pKernelModule->GetPluginManager()->FindModule("NFCElementInfoModule"));
+    NFIElementInfoModule* pElementInfoModule = pKernelModule->GetPluginManager()->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
     return pElementInfoModule->GetPropertyString(strConfigName, strPropertyName);
 }
 

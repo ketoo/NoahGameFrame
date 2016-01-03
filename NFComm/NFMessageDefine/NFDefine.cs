@@ -560,15 +560,155 @@ namespace NFMsg
       EGMI_REQ_BUILD_OPERATE = 10103
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EAwardType")]
-    public enum EAwardType
+    [global::ProtoBuf.ProtoContract(Name=@"EItemType")]
+    public enum EItemType
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"AWARD_TYPE_NORMAL", Value=0)]
-      AWARD_TYPE_NORMAL = 0,
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_NORMAL", Value=0)]
+      EIT_NORMAL = 0,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"AWARD_TYPE_HERO", Value=1)]
-      AWARD_TYPE_HERO = 1
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_EQUIP", Value=1)]
+      EIT_EQUIP = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_BOUNTY", Value=2)]
+      EIT_BOUNTY = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_HERO_CARD", Value=3)]
+      EIT_HERO_CARD = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_HERO_STONE", Value=4)]
+      EIT_HERO_STONE = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_STRENGTHEN_STONE", Value=5)]
+      EIT_STRENGTHEN_STONE = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_DEMONIZATION_STONE", Value=6)]
+      EIT_DEMONIZATION_STONE = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_WOOD", Value=100)]
+      EIT_WOOD = 100,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_STONE", Value=101)]
+      EIT_STONE = 101
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EGameEquipSubType")]
+    public enum EGameEquipSubType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_WEAPON", Value=0)]
+      EQUIPTYPE_WEAPON = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_ARMOR", Value=1)]
+      EQUIPTYPE_ARMOR = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_NECKLACE", Value=2)]
+      EQUIPTYPE_NECKLACE = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_RING", Value=3)]
+      EQUIPTYPE_RING = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_EARRINGS", Value=4)]
+      EQUIPTYPE_EARRINGS = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_BADGE", Value=5)]
+      EQUIPTYPE_BADGE = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_HELMET", Value=6)]
+      EQUIPTYPE_HELMET = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_SHAWL", Value=7)]
+      EQUIPTYPE_SHAWL = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_GLOVE", Value=8)]
+      EQUIPTYPE_GLOVE = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_WRIST", Value=9)]
+      EQUIPTYPE_WRIST = 9,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_BELT", Value=10)]
+      EQUIPTYPE_BELT = 10,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_PANT", Value=11)]
+      EQUIPTYPE_PANT = 11,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_BOOT", Value=12)]
+      EQUIPTYPE_BOOT = 12,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_WING", Value=13)]
+      EQUIPTYPE_WING = 13,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_CLOAK", Value=14)]
+      EQUIPTYPE_CLOAK = 14,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_FASHION", Value=15)]
+      EQUIPTYPE_FASHION = 15
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EGameItemSubType")]
+    public enum EGameItemSubType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_NONE", Value=0)]
+      EGIT_ITEM_NONE = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_PROPERTY_CARD", Value=1)]
+      EGIT_ITEM_PROPERTY_CARD = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_PVP_ATTACK_CARD", Value=2)]
+      EGIT_ITEM_PVP_ATTACK_CARD = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_PVP_DEFENSE_CARD", Value=3)]
+      EGIT_ITEM_PVP_DEFENSE_CARD = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_SKILL_CARD", Value=4)]
+      EGIT_ITEM_SKILL_CARD = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_GUILD_SKILL_CARD", Value=5)]
+      EGIT_ITEM_GUILD_SKILL_CARD = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_GUILD_DIAMOND", Value=6)]
+      EGIT_ITEM_GUILD_DIAMOND = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_POSITION", Value=7)]
+      EGIT_ITEM_POSITION = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_WORLD_HORN", Value=8)]
+      EGIT_ITEM_WORLD_HORN = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_REBORN", Value=9)]
+      EGIT_ITEM_REBORN = 9
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EGameItemExpiredType")]
+    public enum EGameItemExpiredType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIET_NONE", Value=0)]
+      EGIET_NONE = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIET_USE_TIMES", Value=1)]
+      EGIET_USE_TIMES = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIET_REAL_TIME", Value=2)]
+      EGIET_REAL_TIME = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIET_END_INDEX", Value=3)]
+      EGIET_END_INDEX = 3
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EDrawDropItemState")]
+    public enum EDrawDropItemState
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"E_DRAW_STATE_NONE", Value=0)]
+      E_DRAW_STATE_NONE = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"E_DRAW_STATE_GAIN", Value=1)]
+      E_DRAW_STATE_GAIN = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"E_DRAW_STATE_RECV", Value=2)]
+      E_DRAW_STATE_RECV = 2
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGuildPowerType")]
