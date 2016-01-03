@@ -235,7 +235,7 @@ public:
         NFCScriptName xScriptName(strComponentName, strFunction);
         pScriptNameList->Add(xScriptName);
 
-        NFIKernelModule* pKernelModule = GetPluginManager()->FindModule<NFIKernelModule>("NFCKernelModule"));
+        NFIKernelModule* pKernelModule = GetPluginManager()->FindModule<NFIKernelModule>("NFCKernelModule");
         pKernelModule->AddPropertyCallBack(self, strPropertyName, this, &NFIScriptModule::OnPropertyCB);
 
         return true;
@@ -265,7 +265,7 @@ public:
         NFCScriptName xScriptName(strComponentName, strFunction);
         pScriptNameList->Add(xScriptName);
 
-        NFIKernelModule* pKernelModule = GetPluginManager()->FindModule<NFIKernelModule>("NFCKernelModule"));
+        NFIKernelModule* pKernelModule = GetPluginManager()->FindModule<NFIKernelModule>("NFCKernelModule");
         pKernelModule->AddRecordCallBack(self, strRecordName, this, &NFIScriptModule::OnRecordCB);
 
         return true;
@@ -296,7 +296,7 @@ public:
         NFCScriptName xScriptName(strComponentName, strFunction);
         pScriptNameList->Add(xScriptName);
 
-        NFIKernelModule* pKernelModule = GetPluginManager()->FindModule<NFIKernelModule>("NFCKernelModule"));
+        NFIKernelModule* pKernelModule = GetPluginManager()->FindModule<NFIKernelModule>("NFCKernelModule");
         pKernelModule->AddHeartBeat(self, strHeartBeatName, this, &NFIScriptModule::OnHeartBeatCB, fTime, nCount);
 
         return true;
@@ -326,7 +326,7 @@ public:
         NFCScriptName xScriptName(strComponentName, strFunction);
         pScriptNameList->Add(xScriptName);
 
-        NFIKernelModule* pKernelModule = GetPluginManager()->FindModule<NFIKernelModule>("NFCKernelModule"));
+        NFIKernelModule* pKernelModule = GetPluginManager()->FindModule<NFIKernelModule>("NFCKernelModule");
         pKernelModule->AddEventCallBack(self, nEventID, this, &NFIScriptModule::OnEventCB);
 
         return true;
@@ -341,7 +341,7 @@ public:
 static bool KernelModule_DoEvent(NFINT64 kernelAddress, const NFGUID& self, const int nEventID, const NFCDataList& valueList)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
-    NFIEventProcessModule* pEventProcessModule = pKernelModule->GetPluginManager()->FindModule<NFIEventProcessModule>("NFCEventProcessModule"));
+    NFIEventProcessModule* pEventProcessModule = pKernelModule->GetPluginManager()->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
     return pEventProcessModule->DoEvent(self, nEventID, valueList);
 }
 
