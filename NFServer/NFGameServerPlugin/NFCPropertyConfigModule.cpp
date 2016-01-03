@@ -28,8 +28,8 @@ bool NFCPropertyConfigModule::Execute( const float fLasFrametime, const float fS
 
 bool NFCPropertyConfigModule::AfterInit()
 {
-    m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
-    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
+    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pElementInfoModule);

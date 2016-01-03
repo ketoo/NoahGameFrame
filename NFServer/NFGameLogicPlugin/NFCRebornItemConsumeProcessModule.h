@@ -33,14 +33,11 @@ public:
     virtual bool Execute( const float fLasFrametime, const float fStartedTime );
     virtual bool AfterInit();
 
-    //物品使用是否合法
-    virtual int ConsumeLegal( const NFGUID& self, int nItemRowID,  const NFIDataList& other );
+	//物品使用是否合法
+	virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemName, const NFGUID& targetID);
 
-    //使用物品的消耗
-    virtual int ConsumeSelf( const NFGUID& self, int nItemRowID );
-
-    //合法,消耗,那么处理过程[消耗后,nItemRowID已经找不到了，因为可能被清空了]
-    virtual int ConsumeProcess( const NFGUID& self, const std::string& strItemName, const NFIDataList& other );
+	//合法,消耗,那么处理过程[消耗后,nItemRowID已经找不到了，因为可能被清空了]
+	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemName, const NFGUID& targetID);
 
 private:
     NFIKernelModule* m_pKernelModule;
