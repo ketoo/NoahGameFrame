@@ -151,7 +151,42 @@ namespace NFMsg
       GuildMemberList_Title = 9,
             
       [global::ProtoBuf.ProtoEnum(Name=@"GuildMemberList_GameID", Value=10)]
-      GuildMemberList_GameID = 10
+      GuildMemberList_GameID = 10,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GuildMemberList_JoinTime", Value=11)]
+      GuildMemberList_JoinTime = 11,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GuildMemberList_Contribution", Value=12)]
+      GuildMemberList_Contribution = 12,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GuildMemberList_AllContribution", Value=13)]
+      GuildMemberList_AllContribution = 13
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"GuildAppyList_RecordColType")]
+    public enum GuildAppyList_RecordColType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GuildAppyList_GUID", Value=0)]
+      GuildAppyList_GUID = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GuildAppyList_Name", Value=1)]
+      GuildAppyList_Name = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GuildAppyList_Level", Value=2)]
+      GuildAppyList_Level = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GuildAppyList_Job", Value=3)]
+      GuildAppyList_Job = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GuildAppyList_Donation", Value=4)]
+      GuildAppyList_Donation = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GuildAppyList_VIP", Value=5)]
+      GuildAppyList_VIP = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GuildAppyList_Power", Value=6)]
+      GuildAppyList_Power = 6
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"GuildEvent_RecordColType")]
@@ -180,7 +215,16 @@ namespace NFMsg
       GuildEvent_Offline = 6,
             
       [global::ProtoBuf.ProtoEnum(Name=@"GuildEvent_Power", Value=7)]
-      GuildEvent_Power = 7
+      GuildEvent_Power = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GuildEvent_EventID", Value=8)]
+      GuildEvent_EventID = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GuildEvent_EventTime", Value=9)]
+      GuildEvent_EventTime = 9,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GuildEvent_Context", Value=10)]
+      GuildEvent_Context = 10
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"GuildHouse_RecordColType")]
@@ -275,6 +319,146 @@ namespace NFMsg
       PlayerViewItem_SagecraftLevel = 3
     }
   
+    [global::ProtoBuf.ProtoContract(Name=@"Record_PlayerHero_RecordColType")]
+    public enum Record_PlayerHero_RecordColType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Record_PlayerHero_GUID", Value=0)]
+      Record_PlayerHero_GUID = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Record_PlayerHero_ConfigID", Value=1)]
+      Record_PlayerHero_ConfigID = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Record_PlayerHero_Level", Value=2)]
+      Record_PlayerHero_Level = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Record_PlayerHero_Exp", Value=3)]
+      Record_PlayerHero_Exp = 3
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"HeroEquipList_RecordColType")]
+    public enum HeroEquipList_RecordColType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"HeroEquipList_GUID", Value=0)]
+      HeroEquipList_GUID = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"HeroEquipList_HeroID", Value=1)]
+      HeroEquipList_HeroID = 1
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"BagEquipList_RecordColType")]
+    public enum BagEquipList_RecordColType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_GUID", Value=0)]
+      BagEquipList_GUID = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_WearGUID", Value=1)]
+      BagEquipList_WearGUID = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_ConfigID", Value=2)]
+      BagEquipList_ConfigID = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_Bound", Value=3)]
+      BagEquipList_Bound = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_ExpiredType", Value=4)]
+      BagEquipList_ExpiredType = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_RandPropertyID", Value=5)]
+      BagEquipList_RandPropertyID = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_Date", Value=6)]
+      BagEquipList_Date = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_SlotCount", Value=7)]
+      BagEquipList_SlotCount = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_InlayStone1", Value=8)]
+      BagEquipList_InlayStone1 = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_InlayStone2", Value=9)]
+      BagEquipList_InlayStone2 = 9,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_InlayStone3", Value=10)]
+      BagEquipList_InlayStone3 = 10,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_InlayStone4", Value=11)]
+      BagEquipList_InlayStone4 = 11,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_InlayStone5", Value=12)]
+      BagEquipList_InlayStone5 = 12,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_InlayStone6", Value=13)]
+      BagEquipList_InlayStone6 = 13,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_InlayStone7", Value=14)]
+      BagEquipList_InlayStone7 = 14,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_InlayStone8", Value=15)]
+      BagEquipList_InlayStone8 = 15,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_InlayStone9", Value=16)]
+      BagEquipList_InlayStone9 = 16,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_InlayStone10", Value=17)]
+      BagEquipList_InlayStone10 = 17,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_IntensifyLevel", Value=18)]
+      BagEquipList_IntensifyLevel = 18,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_ElementLevel1", Value=19)]
+      BagEquipList_ElementLevel1 = 19,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_ElementLevel2", Value=20)]
+      BagEquipList_ElementLevel2 = 20,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_ElementLevel3", Value=21)]
+      BagEquipList_ElementLevel3 = 21,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_ElementLevel4", Value=22)]
+      BagEquipList_ElementLevel4 = 22,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_ElementLevel5", Value=23)]
+      BagEquipList_ElementLevel5 = 23,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_ElementLevel6", Value=24)]
+      BagEquipList_ElementLevel6 = 24,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_ElementLevel7", Value=25)]
+      BagEquipList_ElementLevel7 = 25,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_ElementLevel8", Value=26)]
+      BagEquipList_ElementLevel8 = 26,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_ElementLevel9", Value=27)]
+      BagEquipList_ElementLevel9 = 27,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagEquipList_ElementLevel10", Value=28)]
+      BagEquipList_ElementLevel10 = 28
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"BagItemList_RecordColType")]
+    public enum BagItemList_RecordColType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_ConfigID", Value=0)]
+      BagItemList_ConfigID = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_ItemCount", Value=1)]
+      BagItemList_ItemCount = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_Bound", Value=2)]
+      BagItemList_Bound = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_ExpiredType", Value=3)]
+      BagItemList_ExpiredType = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_Date", Value=4)]
+      BagItemList_Date = 4
+    }
+  
     [global::ProtoBuf.ProtoContract(Name=@"CommPropertyValue_RecordColType")]
     public enum CommPropertyValue_RecordColType
     {
@@ -350,65 +534,6 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"CommPropertyValue_BUFF_GATE", Value=23)]
       CommPropertyValue_BUFF_GATE = 23
-    }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"BagItemList_RecordColType")]
-    public enum BagItemList_RecordColType
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_GUID", Value=0)]
-      BagItemList_GUID = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_ConfigID", Value=1)]
-      BagItemList_ConfigID = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_ItemCount", Value=2)]
-      BagItemList_ItemCount = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_Bound", Value=3)]
-      BagItemList_Bound = 3,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_ExpiredType", Value=4)]
-      BagItemList_ExpiredType = 4,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_SlotCount", Value=5)]
-      BagItemList_SlotCount = 5,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_InlayStone1", Value=6)]
-      BagItemList_InlayStone1 = 6,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_InlayStone2", Value=7)]
-      BagItemList_InlayStone2 = 7,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_InlayStone3", Value=8)]
-      BagItemList_InlayStone3 = 8,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_InlayStone4", Value=9)]
-      BagItemList_InlayStone4 = 9,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_InlayStone5", Value=10)]
-      BagItemList_InlayStone5 = 10,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_InlayStone6", Value=11)]
-      BagItemList_InlayStone6 = 11,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_EnhancedLevel", Value=12)]
-      BagItemList_EnhancedLevel = 12,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_SagecraftLevel", Value=13)]
-      BagItemList_SagecraftLevel = 13,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_SagecraftStone", Value=14)]
-      BagItemList_SagecraftStone = 14,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_RandProperty", Value=15)]
-      BagItemList_RandProperty = 15,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_Date", Value=16)]
-      BagItemList_Date = 16,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"BagItemList_BaseProperty", Value=17)]
-      BagItemList_BaseProperty = 17
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EctypeList_RecordColType")]

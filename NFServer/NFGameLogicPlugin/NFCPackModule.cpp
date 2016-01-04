@@ -10,16 +10,12 @@
 #include "NFComm/Define/NFStringInfo.h"
 #include "NFComm/NFCore/NFTimer.h"
 
-//最大洞数量
-const int mnMaxSlotCount = 6;
-//格子最大容纳数量
-const int mnMaxOverlayCount = 99;
-
 const std::string mstrPackTableName[] =
 {
     std::string( "BagItemList" ),
-    std::string( "PlayerViewItem" ),
-    std::string( "DropItemList" ),
+	std::string( "BagEquipList" ),
+	std::string( "PlayerHero" ),
+	std::string( "DropItemList" ),
 };
 
 bool NFCPackModule::Init()
@@ -67,7 +63,7 @@ bool NFCPackModule::AfterInit()
 
 const std::string& GetPackName( const PackTableType name )
 {
-    if ( name > PackTableType::MaxPack || name < PackTableType::NormalPack )
+    if ( name > PackTableType::MaxPack || name < PackTableType::NONE_PACK )
     {
         return NULL_STR;
     }
@@ -75,303 +71,87 @@ const std::string& GetPackName( const PackTableType name )
     return mstrPackTableName[name];
 }
 
-const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string& strConfigName )
-{
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-    if ( NULL == pObject )
-    {
-        return NULL_OBJECT;
-    }
-
-    //还得确定有这个装备
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager( strConfigName );
-    if ( NULL == pPropertyManager )
-    {
-        return NULL_OBJECT;
-    }
-
-    NF_SHARE_PTR<NFIProperty> pPropertyType = pPropertyManager->GetElement( "ItemType" );
-    if (NULL == pPropertyType)
-    {
-        return NULL_OBJECT;
-    }
-
-    // 判断物品是否为装备
-    int nItemType = pPropertyType->GetInt();
-    if ( NFMsg::EIT_EQUIP != nItemType )
-    {
-        return NULL_OBJECT;
-    }
-
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-    const int nPackCount = pObject->GetPropertyInt("PackCount"); // 背包格子数量
-
-    int nHasUsedCount = 0;
-    for ( int i = 0; i < pRecord->GetRows(); i++ )
-    {
-        nHasUsedCount++;
-        if ( pRecord->IsUsed( i ) )
-        {
-            continue;
-        }
-
-        if (nHasUsedCount > nPackCount)
-        {
-            m_pLogModule->LogElement(NFILogModule::NLL_WARING_NORMAL, self, strConfigName, "NormalPack is full, cannot add equip", __FUNCTION__, __LINE__);
-            continue;
-        }
-
-        NFGUID ident = m_pUUIDModule->CreateGUID();
-        NFCDataList var;
-        var << ident;
-        var << strConfigName.c_str() ;
-        var << 1;
-
-        // 绑定属性
-        NF_SHARE_PTR<NFIProperty> pBoundProperty = pPropertyManager->GetElement( "Bound" );
-        var << (NULL != pBoundProperty ? pBoundProperty->GetInt() : 0);
-        var << 0;
-        var << 0;
-
-        for ( int j = 0; j < 6; j++ )
-        {
-            var <<  NULL_STR;
-        }
-
-        var << 0;
-        var << 0;
-        var << NULL_STR;
-
-        std::string strRndProperty;
-        var << strRndProperty.c_str();
-
-        var << NFTimeEx::GetNowTime();
-
-        std::string strBaseProperty;
-        var << strBaseProperty.c_str(); // 固定
-
-        pRecord->AddRow( i, var );
-        return ident;
-    }
-
-    return NULL_OBJECT;
-}
-
-bool NFCPackModule::DeleteGrid( const NFGUID& self, const int nOrigin)
-{
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-    if ( pObject )
-    {
-        NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-        if ( pRecord )
-        {
-            pRecord->Remove( nOrigin );
-
-            return true;
-        }
-    }
-
-    return false;
-}
-
-bool NFCPackModule::SetGridCount( const NFGUID& self, const int nOrigin, const int nCount)
-{
-    //判断nOrigin合法性，以及nCount合法性(物品堆叠数量)
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-    if ( pObject )
-    {
-        NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-        if ( pRecord )
-        {
-            pRecord->SetInt( nOrigin, NFMsg::BagItemList_RecordColType::BagItemList_ItemCount, nCount );
-
-            return true;
-        }
-    }
-
-    return false;
-}
-
-NFINT64 NFCPackModule::GetGridCount( const NFGUID& self, const int nOrigin)
-{
-    //判断nOrigin合法性
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-    if ( pObject )
-    {
-        NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-        if ( pRecord )
-        {
-            return pRecord->GetInt( nOrigin, NFMsg::BagItemList_RecordColType::BagItemList_ItemCount );
-        }
-    }
-
-    return 0;
-}
-
-bool NFCPackModule::SetEquipCreatTime( const NFGUID& self, const int nOrigin, const NFINT64 nTime )
-{
-    //判断nOrigin合法性(越界以及是否是装备)
-
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-    if ( pObject )
-    {
-        NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-        if ( pRecord )
-        {
-            return pRecord->SetInt( nOrigin,  NFMsg::BagItemList_Date, nTime );
-        }
-    }
-
-    return false;
-}
-
-const NFINT64 NFCPackModule::GetEquipCreatTime( const NFGUID& self, const int nOrigin )
-{
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-    if ( pObject )
-    {
-        NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-        if ( pRecord )
-        {
-            return pRecord->GetInt( nOrigin, NFMsg::BagItemList_Date );
-        }
-    }
-
-    return 0;
-}
-
-bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfigName, const int nCount )
-{
-    if (strConfigName.empty())
-    {
-        return false;
-    }
-
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-    if ( NULL == pObject )
-    {
-        return false;
-    }
-
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager( strConfigName );
-    if ( NULL == pPropertyManager )
-    {
-        return false;
-    }
-
-    NF_SHARE_PTR<NFIProperty> pPropertyType =  pPropertyManager->GetElement("ItemType");
-    if (NULL == pPropertyType)
-    {
-        return false;
-    }
-
-//     int nItemType = pPropertyType->GetInt();
-//     switch (nItemType)
+// const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string& strConfigName )
+// {
+//     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+//     if ( NULL == pObject )
 //     {
-//     case EGameItemType::EGIT_Item:
-//     case EGameItemType::EGIT_Material:
-//     case EGameItemType::EGIT_Task:
-//         {
-//             //NF_SHARE_PTR<NFIProperty> pPropertySubType =  pPropertyManager->GetElement("ItemSubType");
-// 
-// 
-//             int nOverlayCount = pPropertyManager->GetElement("OverlayCount")->GetInt();
-//             int nNewCount = nCount;
-//             if (nCount > nOverlayCount)
-//             {
-//                 nNewCount = nOverlayCount; // 重新设置值
-//             }
-// 
-//             NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-//             if (NULL == pRecord)
-//             {
-//                 return false;
-//             }
-// 
-//             const NFINT64 nPackCount = pObject->GetPropertyInt("PackCount");
-//             NFCDataList matchItemList;
-//             int nMatchCount = pRecord->FindString(EGIT_TYPE_CONFIGID, strConfigName.c_str(), matchItemList);
-// 
-//             // 给已有的增加至堆叠上限
-//             for (int i = 0; i < nMatchCount; ++i)
-//             {
-//                 int nRow = matchItemList.Int(i);
-//                 if (nRow < mnPackStart)
-//                 {// 前11个是已装备物品
-//                     continue;
-//                 }
-// 
-//                 int nCurrRowItemCount = pRecord->GetInt(nRow, EGIT_TYPE_ITEMCOUNT);
-//                 if (nCurrRowItemCount == nOverlayCount)
-//                 {// 本行数量已满
-//                     continue;
-//                 }
-// 
-//                 int nMissingValue = nOverlayCount - nCurrRowItemCount; // 本行数量还差的值
-//                 if (nMissingValue >= nNewCount)
-//                 {
-//                     pRecord->SetInt(nRow, EGIT_TYPE_ITEMCOUNT, nCurrRowItemCount + nNewCount);
-//                     return true;
-//                 }
-//                 else
-//                 {
-//                     nNewCount -= nMissingValue;
-//                 }
-//             }
-// 
-//             // 如果还有剩余
-//             if (nNewCount > 0)
-//             {
-//                 for (int i = mnPackStart; i < pRecord->GetRows(); ++i)
-//                 {
-//                     if (!pRecord->IsUsed(i))
-//                     {
-//                         NFCDataList var;
-//                         var << m_pUUIDModule->CreateGUID();
-//                         var << strConfigName.c_str() ;
-//                         var << nNewCount;
-// 
-//                         NF_SHARE_PTR<NFIProperty> pBoundProperty = pPropertyManager->GetElement( "Bound" );
-//                         var << (pBoundProperty != NULL ? pBoundProperty->GetInt() : 0);
-//                         var << (NFINT32)eExpiredType;
-//                         var << 0;
-// 
-//                         for ( int j = 0; j < 6; j++ )
-//                         {
-//                             var << "";
-//                         }
-// 
-//                         var << 0;
-//                         var << 0;
-//                         var << "";
-//                         var << "";  // 随机属性
-//                         var << NFTimeEx::GetNowTime();;   // TODO:物品时间,后面补上
-// 						var << "";
-//                         int rowss = pRecord->AddRow( i, var );
-//                         return true;
-//                     }
-//                 }
-//             }
-// 
-//             return true;
-//         }
-//         break;
-//     default:
-//         return false;
+//         return NULL_OBJECT;
 //     }
-
-    return false;
-}
-
-bool NFCPackModule::SetGridBan( const NFGUID& self, const int nOrigin, const bool bBan )
-{
-    return false;
-}
-
-bool NFCPackModule::GetGridBan( const NFGUID& self, const int nOrigin )
-{
-    return false;
-}
+// 
+//     //还得确定有这个装备
+//     NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager( strConfigName );
+//     if ( NULL == pPropertyManager )
+//     {
+//         return NULL_OBJECT;
+//     }
+// 
+//     NF_SHARE_PTR<NFIProperty> pPropertyType = pPropertyManager->GetElement( "ItemType" );
+//     if (NULL == pPropertyType)
+//     {
+//         return NULL_OBJECT;
+//     }
+// 
+//     // 判断物品是否为装备
+//     int nItemType = pPropertyType->GetInt();
+//     if ( NFMsg::EIT_EQUIP != nItemType )
+//     {
+//         return NULL_OBJECT;
+//     }
+// 
+//     NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
+//     const int nPackCount = pObject->GetPropertyInt("PackCount"); // 背包格子数量
+// 
+//     int nHasUsedCount = 0;
+//     for ( int i = 0; i < pRecord->GetRows(); i++ )
+//     {
+//         nHasUsedCount++;
+//         if ( pRecord->IsUsed( i ) )
+//         {
+//             continue;
+//         }
+// 
+//         if (nHasUsedCount > nPackCount)
+//         {
+//             m_pLogModule->LogElement(NFILogModule::NLL_WARING_NORMAL, self, strConfigName, "NormalPack is full, cannot add equip", __FUNCTION__, __LINE__);
+//             continue;
+//         }
+// 
+//         NFGUID ident = m_pUUIDModule->CreateGUID();
+//         NFCDataList var;
+//         var << ident;
+//         var << strConfigName.c_str() ;
+//         var << 1;
+// 
+//         // 绑定属性
+//         NF_SHARE_PTR<NFIProperty> pBoundProperty = pPropertyManager->GetElement( "Bound" );
+//         var << (NULL != pBoundProperty ? pBoundProperty->GetInt() : 0);
+//         var << 0;
+//         var << 0;
+// 
+//         for ( int j = 0; j < 6; j++ )
+//         {
+//             var <<  NULL_STR;
+//         }
+// 
+//         var << 0;
+//         var << 0;
+//         var << NULL_STR;
+// 
+//         std::string strRndProperty;
+//         var << strRndProperty.c_str();
+// 
+//         var << NFTimeEx::GetNowTime();
+// 
+//         std::string strBaseProperty;
+//         var << strBaseProperty.c_str(); // 固定
+// 
+//         pRecord->AddRow( i, var );
+//         return ident;
+//     }
+// 
+//     return NULL_OBJECT;
+// }
 
 int NFCPackModule::OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
@@ -379,17 +159,17 @@ int NFCPackModule::OnClassObjectEvent( const NFGUID& self, const std::string& st
     {
         if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
         {
-            m_pKernelModule->AddRecordCallBack( self, GetPackName( PackTableType::NormalPack ), this, &NFCPackModule::OnObjectPackViewRecordEvent );
+            //m_pKernelModule->AddRecordCallBack( self, GetPackName( PackTableType::BagItemPack ), this, &NFCPackModule::OnObjectPackViewRecordEvent );
         }
         else if ( CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA == eClassEvent )
         {
             //RefreshInitViewItem(self);
             //第一次不刷新，因为第一次装备后，会自动刷新
-            RefreshEquipProperty(self);
+            //RefreshEquipProperty(self);
         }
         else if ( CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent )
         {
-            m_pEventProcessModule->AddEventCallBack( self, NFED_ON_CLIENT_SWAP_TABLE, this, &NFCPackModule::OnSwapTableRowEvent );
+            //m_pEventProcessModule->AddEventCallBack( self, NFED_ON_CLIENT_SWAP_TABLE, this, &NFCPackModule::OnSwapTableRowEvent );
 
             // TOADD 其他背包需要的再加回调
         }
@@ -406,359 +186,252 @@ int NFCPackModule::OnClassObjectEvent( const NFGUID& self, const std::string& st
     return 0;
 }
 
-int NFCPackModule::OnSwapTableRowEvent( const NFGUID& object, const int nEventID, const NFIDataList& var )
-{
-    if ( 4 == var.GetCount() )
-    {
-        const std::string& strOriginTableName = var.String( 0 );
-        const std::string& strTargetTableName = var.String( 1 );
-        int nOrigin = var.Int( 2 );
-        int nTarget = var.Int( 3 );
+// int NFCPackModule::RefreshEquipProperty( const NFGUID& self )
+// {
+// 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+// 	if ( NULL == pObject )
+// 	{
+// 		return 1;
+// 	}
+// 
+// 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::ViewPack ) );
+// 	if ( NULL == pRecord )
+// 	{
+// 		return 1;
+// 	}
+// 
+//     // 装备属性计算
+// 	for (int i = 0; i < pRecord->GetRows(); ++i)
+// 	{
+//         RefreshEquipProperty(self, i);
+//     }
+// 
+//     return 0;
+// }
 
-        NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(object);
-        if (pObject)
-        {
-            NF_SHARE_PTR<NFIRecord> pOriginRecord = pObject->GetRecordManager()->GetElement(strOriginTableName);
-            NF_SHARE_PTR<NFIRecord> pTargetRecord = pObject->GetRecordManager()->GetElement(strTargetTableName);
-            if (pOriginRecord && pTargetRecord)
-            {
-                if ( nOrigin >= 0 && nOrigin < pOriginRecord->GetRows()
-                    && nTarget >= 0 && nTarget < pTargetRecord->GetRows() )
-                {
-                    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( object );
-                    if ( pObject )
-                    {
-                        //SwapGrid( object, nOrigin, nTarget, GetPackType( strOriginTableName ), GetPackType( strTargetTableName ) );
-                    }
-                }
-            }
-        }
+// int NFCPackModule::RefreshEquipProperty( const NFGUID& self, const int nRow )
+// {
+//     // 单件装备属性计算
+//     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+//     if ( NULL == pObject )
+//     {
+//         return 1;
+//     }
+// 
+//     NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::ViewPack ) );
+//     if ( NULL == pRecord )
+//     {
+//         return 1;
+//     }
+// 
+//     if(!pRecord->IsUsed(nRow))
+//     {
+//         return 1;
+//     }
+// 
+//     const std::string& strConfigID = pRecord->GetString( nRow, ( int )NFMsg::PlayerViewItem_ConfigID );
+//     if (strConfigID.empty())
+//     {
+//         return 1;
+//     }
+// 
+// 	AddEquipProperty(self, strConfigID, nRow);
+// 
+//     return 0;
+// }
 
+// int NFCPackModule::AddEquipProperty( const NFGUID& self, const std::string& strConfigID, const int nRow )
+// {
+//     if (strConfigID.empty())
+//     {
+//         return 1;
+//     }
+// 
+//     //////////////////////////////////////////////////////////////////////////
+//     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+//     if ( NULL == pObject )
+//     {
+//         m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+//         return 1;
+//     }
+// 
+//     NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
+//     if ( NULL == pRecord || !pRecord->IsUsed(nRow) )
+//     {
+//         return 1;
+//     }
+// 
+//     //////////////////////////////////////////////////////////////////////////
+// 
+//     NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager(strConfigID);
+//     if (!pPropertyManager)
+//     {
+//         return 1;
+//     }
+// 
+//     NF_SHARE_PTR<NFIProperty> pEffectDataProperty = pPropertyManager->GetElement("EffectData");
+//     if (!pEffectDataProperty)
+//     {
+//         return 1;
+//     }
+// 
+//     NF_SHARE_PTR<NFIPropertyManager> pEffectDataPropertyManager = m_pElementInfoModule->GetPropertyManager(pEffectDataProperty->GetString());
+//     if (!pEffectDataPropertyManager)
+//     {
+//         return 1;
+//     }
+// 
+//    NF_SHARE_PTR<NFIProperty> pProperty = pEffectDataPropertyManager->First();
+//    while (pProperty)
+//    {
+//        if (pProperty->GetInt() != 0)
+//        {
+//            m_pPropertyModule->AddPropertyValue( self, pProperty->GetKey(), NFIPropertyModule::NPG_EQUIP, pProperty->GetInt() );
+//        }
+// 
+//        pProperty = pEffectDataPropertyManager->Next();
+//    }
+// 
+//    return 0;
+// }
 
-    }
+// int NFCPackModule::RemoveEquipProperty( const NFGUID& self, const std::string& strConfigID, const int nRow )
+// {
+//     if (strConfigID.empty())
+//     {
+//         return 1;
+//     }
+// 
+//     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+//     if ( NULL == pObject )
+//     {
+//         m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+//         return 1;
+//     }
+// 
+//     NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
+//     if ( NULL == pRecord || !pRecord->IsUsed(nRow) )
+//     {
+//         return 1;
+//     }
+// 
+//     //////////////////////////////////////////////////////////////////////////
+//     NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager(strConfigID);
+//     if (!pPropertyManager)
+//     {
+//         return 1;
+//     }
+// 
+//     NF_SHARE_PTR<NFIProperty> pEffectDataProperty = pPropertyManager->GetElement("EffectData");
+//     if (!pEffectDataProperty)
+//     {
+//         return 1;
+//     }
+// 
+//     NF_SHARE_PTR<NFIPropertyManager> pEffectDataPropertyManager = m_pElementInfoModule->GetPropertyManager(pEffectDataProperty->GetString());
+//     if (!pEffectDataPropertyManager)
+//     {
+//         return 1;
+//     }
+// 
+//     NF_SHARE_PTR<NFIProperty> pProperty = pEffectDataPropertyManager->First();
+//     while (pProperty)
+//     {
+//         if (pProperty->GetInt() != 0)
+//         {
+//             m_pPropertyModule->SubPropertyValue( self, pProperty->GetKey(), NFIPropertyModule::NPG_EQUIP, pProperty->GetInt() );
+//         }
+// 
+//         pProperty = pEffectDataPropertyManager->Next();
+//     }
+// 
+//     
+//     return 0;
+// }
 
-    return 0;
-}
+// int NFCPackModule::QueryCount( const NFGUID& self, const std::string& strItemConfigID ) const
+// {
+//     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+//     if ( NULL == pObject )
+//     {
+//         m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+//         return 0;
+//     }
+// 
+//     NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
+//     if (NULL == pRecord)
+//     {
+//         return 0;
+//     }
+// 
+//     NFINT64 nCount = 0;
+//     for (int i = 0; i < pRecord->GetRows(); ++i)
+//     {
+//         if (pRecord->IsUsed(i) && pRecord->GetString(i, NFMsg::BagItemList_ItemCount) == strItemConfigID)
+//         {
+//             nCount += pRecord->GetInt(i, NFMsg::BagItemList_ItemCount);
+//         }
+//     }
+// 
+//     return nCount;
+// }
 
-int NFCPackModule::OnObjectPackViewRecordEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar )
-{
-	const std::string& strRecordName = xEventData.strRecordName;
-	const int nOpType = xEventData.nOpType;
-	const int nRow = xEventData.nRow;
-	const int nCol = xEventData.nCol; 
-
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-    if ( pObject )
-    {
-        NF_SHARE_PTR<NFIRecord> pPackRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-        if ( pPackRecord )
-        {
-            switch ( nOpType )
-            {
-            case NFIRecord::RecordOptype::Add:
-                {
-                    const std::string& strConfigID = pPackRecord->GetString( nRow, ( int )NFMsg::BagItemList_ConfigID );
-                    AddEquipProperty(self, strConfigID, nRow);
-                }
-                break;
-
-            case NFIRecord::RecordOptype::Del:
-                {
-					const std::string& strOldConfigID = pPackRecord->GetString( nRow, ( int )NFMsg::BagItemList_ConfigID );
-					RemoveEquipProperty(self, strOldConfigID, nRow);
-                }
-                break;
-            default:
-                break;
-            }
-        }
-    }
-    return 0;
-}
-
-const std::string& NFCPackModule::GetGridConfigID( const NFGUID& self, const int nRow)
-{
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-    if ( pObject )
-    {
-        NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-        if ( pRecord )
-        {
-            return pRecord->GetString( nRow, NFMsg::BagItemList_ConfigID );
-        }
-    }
-
-    return NULL_STR;
-}
-
-bool NFCPackModule::SetGridData( const NFGUID& self, const int nRow, const int nCol, const NFIDataList& var)
-{
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-    if ( NULL == pObject )
-    {
-        return false;
-    }
-
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-    if ( pRecord == NULL )
-    {
-        return false;
-    }
-
-    if ( !pRecord->SetInt( nRow, nCol, var.Int( 0 ) ) )
-    {
-        // log
-    }
-
-    return false;
-}
-
-int NFCPackModule::RefreshEquipProperty( const NFGUID& self )
-{
-	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-	if ( NULL == pObject )
-	{
-		return 1;
-	}
-
-	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::ViewPack ) );
-	if ( NULL == pRecord )
-	{
-		return 1;
-	}
-
-    // 装备属性计算
-	for (int i = 0; i < pRecord->GetRows(); ++i)
-	{
-        RefreshEquipProperty(self, i);
-    }
-
-    return 0;
-}
-
-int NFCPackModule::RefreshEquipProperty( const NFGUID& self, const int nRow )
-{
-    // 单件装备属性计算
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-    if ( NULL == pObject )
-    {
-        return 1;
-    }
-
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::ViewPack ) );
-    if ( NULL == pRecord )
-    {
-        return 1;
-    }
-
-    if(!pRecord->IsUsed(nRow))
-    {
-        return 1;
-    }
-
-    const std::string& strConfigID = pRecord->GetString( nRow, ( int )NFMsg::PlayerViewItem_ConfigID );
-    if (strConfigID.empty())
-    {
-        return 1;
-    }
-
-	AddEquipProperty(self, strConfigID, nRow);
-
-    return 0;
-}
-
-int NFCPackModule::AddEquipProperty( const NFGUID& self, const std::string& strConfigID, const int nRow )
-{
-    if (strConfigID.empty())
-    {
-        return 1;
-    }
-
-    //////////////////////////////////////////////////////////////////////////
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-    if ( NULL == pObject )
-    {
-        m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-        return 1;
-    }
-
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-    if ( NULL == pRecord || !pRecord->IsUsed(nRow) )
-    {
-        return 1;
-    }
-
-    //////////////////////////////////////////////////////////////////////////
-
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager(strConfigID);
-    if (!pPropertyManager)
-    {
-        return 1;
-    }
-
-    NF_SHARE_PTR<NFIProperty> pEffectDataProperty = pPropertyManager->GetElement("EffectData");
-    if (!pEffectDataProperty)
-    {
-        return 1;
-    }
-
-    NF_SHARE_PTR<NFIPropertyManager> pEffectDataPropertyManager = m_pElementInfoModule->GetPropertyManager(pEffectDataProperty->GetString());
-    if (!pEffectDataPropertyManager)
-    {
-        return 1;
-    }
-
-   NF_SHARE_PTR<NFIProperty> pProperty = pEffectDataPropertyManager->First();
-   while (pProperty)
-   {
-       if (pProperty->GetInt() != 0)
-       {
-           m_pPropertyModule->AddPropertyValue( self, pProperty->GetKey(), NFIPropertyModule::NPG_EQUIP, pProperty->GetInt() );
-       }
-
-       pProperty = pEffectDataPropertyManager->Next();
-   }
-
-   return 0;
-}
-
-int NFCPackModule::RemoveEquipProperty( const NFGUID& self, const std::string& strConfigID, const int nRow )
-{
-    if (strConfigID.empty())
-    {
-        return 1;
-    }
-
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-    if ( NULL == pObject )
-    {
-        m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-        return 1;
-    }
-
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-    if ( NULL == pRecord || !pRecord->IsUsed(nRow) )
-    {
-        return 1;
-    }
-
-    //////////////////////////////////////////////////////////////////////////
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager(strConfigID);
-    if (!pPropertyManager)
-    {
-        return 1;
-    }
-
-    NF_SHARE_PTR<NFIProperty> pEffectDataProperty = pPropertyManager->GetElement("EffectData");
-    if (!pEffectDataProperty)
-    {
-        return 1;
-    }
-
-    NF_SHARE_PTR<NFIPropertyManager> pEffectDataPropertyManager = m_pElementInfoModule->GetPropertyManager(pEffectDataProperty->GetString());
-    if (!pEffectDataPropertyManager)
-    {
-        return 1;
-    }
-
-    NF_SHARE_PTR<NFIProperty> pProperty = pEffectDataPropertyManager->First();
-    while (pProperty)
-    {
-        if (pProperty->GetInt() != 0)
-        {
-            m_pPropertyModule->SubPropertyValue( self, pProperty->GetKey(), NFIPropertyModule::NPG_EQUIP, pProperty->GetInt() );
-        }
-
-        pProperty = pEffectDataPropertyManager->Next();
-    }
-
-    
-    return 0;
-}
-
-int NFCPackModule::QueryCount( const NFGUID& self, const std::string& strItemConfigID ) const
-{
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-    if ( NULL == pObject )
-    {
-        m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-        return 0;
-    }
-
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-    if (NULL == pRecord)
-    {
-        return 0;
-    }
-
-    NFINT64 nCount = 0;
-    for (int i = 0; i < pRecord->GetRows(); ++i)
-    {
-        if (pRecord->IsUsed(i) && pRecord->GetString(i, NFMsg::BagItemList_ItemCount) == strItemConfigID)
-        {
-            nCount += pRecord->GetInt(i, NFMsg::BagItemList_ItemCount);
-        }
-    }
-
-    return nCount;
-}
-
-bool NFCPackModule::DeleteItem( const NFGUID& self, const std::string& strItemConfigID, const int nCount )
-{
-     if (QueryCount(self, strItemConfigID) < nCount)
-     {
-         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "There is not enough item count", strItemConfigID, __FUNCTION__, __LINE__);
- 
-         return false;
-     }
- 
-     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-     if ( NULL == pObject )
-     {
-         m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-         return false;
-     }
- 
-     NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-     if (NULL == pRecord)
-     {
-         return false;
-     }
- 
-     int nRemainDelCount = nCount;
-     for (int i = 0; i < pRecord->GetRows(); ++i)
-     {
-         if (nRemainDelCount <= 0)
-         {
-             break;
-         }
- 
-         if (pRecord->IsUsed(i) && pRecord->GetString(i, NFMsg::BagItemList_ConfigID) == strItemConfigID)
-         {
-             const int nGridCount = pRecord->GetInt(i, NFMsg::BagItemList_ItemCount);
-             if (nGridCount < nRemainDelCount)
-             {
-                 //此格子数量不够
-                 nRemainDelCount -= nGridCount;
-                 pRecord->Remove(i);
-             }
-             else if (nGridCount == nRemainDelCount)
-             {
-                 //此格子数刚好合适
-                 pRecord->Remove(i);
-                 return true;
-             }
-             else if (nGridCount > nRemainDelCount)
-             {
-                 //格子数删掉后还有剩余
-                 pRecord->SetInt(i, NFMsg::BagItemList_ItemCount, nGridCount - nRemainDelCount);
-                 return true;
-             }
-         }
-     }
-
-    return false;
-}
+// bool NFCPackModule::DeleteItem( const NFGUID& self, const std::string& strItemConfigID, const int nCount )
+// {
+//      if (QueryCount(self, strItemConfigID) < nCount)
+//      {
+//          m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "There is not enough item count", strItemConfigID, __FUNCTION__, __LINE__);
+//  
+//          return false;
+//      }
+//  
+//      NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+//      if ( NULL == pObject )
+//      {
+//          m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+//          return false;
+//      }
+//  
+//      NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
+//      if (NULL == pRecord)
+//      {
+//          return false;
+//      }
+//  
+//      int nRemainDelCount = nCount;
+//      for (int i = 0; i < pRecord->GetRows(); ++i)
+//      {
+//          if (nRemainDelCount <= 0)
+//          {
+//              break;
+//          }
+//  
+//          if (pRecord->IsUsed(i) && pRecord->GetString(i, NFMsg::BagItemList_ConfigID) == strItemConfigID)
+//          {
+//              const int nGridCount = pRecord->GetInt(i, NFMsg::BagItemList_ItemCount);
+//              if (nGridCount < nRemainDelCount)
+//              {
+//                  //此格子数量不够
+//                  nRemainDelCount -= nGridCount;
+//                  pRecord->Remove(i);
+//              }
+//              else if (nGridCount == nRemainDelCount)
+//              {
+//                  //此格子数刚好合适
+//                  pRecord->Remove(i);
+//                  return true;
+//              }
+//              else if (nGridCount > nRemainDelCount)
+//              {
+//                  //格子数删掉后还有剩余
+//                  pRecord->SetInt(i, NFMsg::BagItemList_ItemCount, nGridCount - nRemainDelCount);
+//                  return true;
+//              }
+//          }
+//      }
+// 
+//     return false;
+// }
 
 void NFCPackModule::AddDropItem(const NFGUID& self, const NFIDataList& var)
 {
@@ -799,11 +472,819 @@ int NFCPackModule::OnObjectBeKilled(const NFGUID& self, const int nEventID, cons
     }
 
     NFCDataList varResult;
-    int nRowCount = pRecord->FindObject(NFMsg::DropItemList_MonsterID, self, varResult);
+    int nRowCount = pRecord->FindObject(NFMsg::DropItemList_RecordColType::DropItemList_MonsterID, self, varResult);
     for (int i = 0; i < nRowCount; ++i)
     {
-        pRecord->SetInt(varResult.Int(i), NFMsg::DropItemList_DrawState, NFMsg::E_DRAW_STATE_GAIN);
+        pRecord->SetInt(varResult.Int(i), NFMsg::DropItemList_RecordColType::DropItemList_DrawState, NFMsg::E_DRAW_STATE_GAIN);
     }
 
     return 0;
+}
+
+const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string& strConfigName )
+{
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return NULL_OBJECT;
+	}
+
+	//还得确定有这个装备
+	bool bExist = m_pElementInfoModule->ExistElement( strConfigName );
+	if ( !bExist )
+	{
+		return NULL_OBJECT;
+	}
+
+	int nItemType = m_pElementInfoModule->GetPropertyInt(strConfigName, "ItemType" );
+	if ( NFMsg::EItemType::EIT_EQUIP != nItemType )
+	{
+		return NULL_OBJECT;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagEquipPack ) );
+	if (!pRecord)
+	{
+		return NULL_OBJECT;
+	}
+
+	NFGUID ident = m_pUUIDModule->CreateGUID();
+
+	NFCDataList var;
+	var << ident;
+	var << NULL_OBJECT;
+	var << strConfigName;
+	var << 0;
+	var << 0;
+	var << NULL_STR;
+	var << NFTimeEx::GetNowTime();
+	var << 0;
+	var << NULL_STR;
+	var << NULL_STR;
+	var << NULL_STR;
+	var << NULL_STR;
+	var << NULL_STR;
+	var << NULL_STR;
+	var << NULL_STR;
+	var << NULL_STR;
+	var << NULL_STR;
+	var << NULL_STR;
+	var << NULL_STR;
+	var << 0;
+	var << 0;
+	var << 0;
+	var << 0;
+	var << 0;
+	var << 0;
+	var << 0;
+	var << 0;
+	var << 0;
+	var << 0;
+	var << 0;
+
+	bool bAddRet = pRecord->AddRow(-1, var);
+	if (bAddRet)
+	{
+		return ident;
+	}
+
+	return NULL_OBJECT;
+}
+
+bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfigName, const int nCount )
+{
+	if (nCount <= 0)
+	{
+		return 0;
+	}
+
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return 0;
+	}
+
+	//还得确定有这个装备
+	bool bExist = m_pElementInfoModule->ExistElement( strConfigName );
+	if ( !bExist )
+	{
+		return 0;
+	}
+
+	int nItemType = m_pElementInfoModule->GetPropertyInt(strConfigName, "ItemType" );
+	if ( NFMsg::EItemType::EIT_NORMAL != nItemType )
+	{
+		return 0;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagItemPack ) );
+	if (!pRecord)
+	{
+		return 0;
+	}
+
+	int nRow = FindItemRowByConfig(self, strConfigName);
+	if (nRow < 0)
+	{
+		NFGUID ident = m_pUUIDModule->CreateGUID();
+
+		NFCDataList var;
+		var << ident;
+		var << nCount;
+		var << strConfigName;
+		var << 0;
+		var << NFTimeEx::GetNowTime();
+
+		bool bAddRet = pRecord->AddRow(-1, var);
+		if (bAddRet)
+		{
+			return nCount;
+		}
+	}
+	else
+	{
+		int nOldCount = pRecord->GetInt(nRow, NFMsg::BagItemList_RecordColType::BagItemList_ItemCount);
+		int nNewCount = nOldCount + nCount;
+		pRecord->SetInt(nRow, NFMsg::BagItemList_RecordColType::BagItemList_ItemCount, nNewCount);
+	}
+
+	return 0;
+}
+
+int NFCPackModule::FindItemRowByConfig( const NFGUID& self, const std::string& strItemConfigID )
+{
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return 0;
+	}
+
+	//还得确定有这个装备
+	bool bExist = m_pElementInfoModule->ExistElement( strItemConfigID );
+	if ( !bExist )
+	{
+		return 0;
+	}
+
+	int nItemType = m_pElementInfoModule->GetPropertyInt(strItemConfigID, "ItemType" );
+	if ( NFMsg::EItemType::EIT_NORMAL != nItemType )
+	{
+		return 0;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagItemPack ) );
+	if (!pRecord)
+	{
+		return 0;
+	}
+
+	for (int i = 0; i < pRecord->GetRows(); ++i)
+	{
+		if (pRecord->IsUsed(i))
+		{
+			const std::string& strCfgID = pRecord->GetString(i, NFMsg::BagItemList_RecordColType::BagItemList_ConfigID);
+			if (strCfgID == strItemConfigID)
+			{
+				return i;
+			}
+		}
+	}
+
+	return -1;
+}
+
+bool NFCPackModule::DeleteEquip( const NFGUID& self, const NFGUID& id )
+{
+	if (id.IsNull())
+	{
+		return false;
+	}
+
+	//删除3个地方，背包，英雄穿戴，玩家穿戴
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return 0;
+	}
+
+
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagEquipPack ) );
+	if (!pRecord)
+	{
+		return 0;
+	}
+
+	for (int i = 0; i < pRecord->GetRows(); ++i)
+	{
+		if (pRecord->IsUsed(i))
+		{
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			if (xID == id)
+			{
+				const NFGUID& xWearID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_WearGUID);
+				if (!xWearID.IsNull())
+				{
+					//看是玩家装备，还是英雄装备
+					const std::string& strCfgID = pRecord->GetString(i, NFMsg::BagEquipList_RecordColType::BagEquipList_ConfigID);
+
+				}
+
+				pRecord->Remove(i);
+			}
+		}
+	}
+
+	return false;
+}
+
+bool NFCPackModule::DeleteItem( const NFGUID& self, const std::string& strItemConfigID, const int nCount )
+{
+	if(nCount <= 0)
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return false;
+	}
+
+	//还得确定有这个装备
+	bool bExist = m_pElementInfoModule->ExistElement( strItemConfigID );
+	if ( !bExist )
+	{
+		return false;
+	}
+
+	int nItemType = m_pElementInfoModule->GetPropertyInt(strItemConfigID, "ItemType" );
+	if ( NFMsg::EItemType::EIT_NORMAL != nItemType )
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagItemPack ) );
+	if (!pRecord)
+	{
+		return false;
+	}
+
+	int nRow = FindItemRowByConfig(self, strItemConfigID);
+	if (nRow >= 0)
+	{
+		int nOldCount = pRecord->GetInt(nRow, NFMsg::BagItemList_RecordColType::BagItemList_ItemCount);
+		int nNewCount = nOldCount - nCount;
+		if (nNewCount >= 0)
+		{
+			if (nNewCount > 0)
+			{
+				pRecord->SetInt(nRow, NFMsg::BagItemList_RecordColType::BagItemList_ItemCount, nNewCount);
+			}
+			else
+			{
+				pRecord->Remove(nRow);
+			}
+
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	return false;
+}
+
+bool NFCPackModule::DressEquipForHero( const NFGUID& self, const NFGUID& hero, const NFGUID& id )
+{
+	if(id.IsNull())
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pEquipRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagEquipPack ) );
+	if (!pEquipRecord)
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagHeroPack ) );
+	if (!pHeroRecord)
+	{
+		return false;
+	}
+
+	int nEquipRow = -1;
+	int nHeroRow = -1;
+	int nHeroEquipCol = -1;
+
+	for (int i = 0; i < pEquipRecord->GetRows(); ++i)
+	{
+		if (pEquipRecord->IsUsed(i))
+		{
+			const NFGUID& xID = pEquipRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			if (xID == id)
+			{
+				nEquipRow = i;
+				break;
+			}
+		}
+	}
+
+	for (int i = 0; i < pHeroRecord->GetRows(); ++i)
+	{
+		if (pHeroRecord->IsUsed(i))
+		{
+			const NFGUID& xHeroID = pHeroRecord->GetObject(i, NFMsg::Record_PlayerHero_RecordColType::Record_PlayerHero_GUID);
+			if (xHeroID == hero)
+			{
+				for (int j = NFMsg::Record_PlayerHero_RecordColType::Record_PlayerHero_Equip1; i <= NFMsg::Record_PlayerHero_RecordColType::Record_PlayerHero_Equip6; ++j)
+				{
+					const NFGUID& xHeroEquip = pHeroRecord->GetObject(i, j);
+					if (xHeroEquip.IsNull())
+					{
+						nHeroRow = i;
+						nHeroEquipCol = j;
+
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	if (nEquipRow >= 0 && nHeroRow >= 0)
+	{
+		//找到了装备,也找到了英雄--还要查看装备是什么类型，然后放什么位置
+		pHeroRecord->SetObject(nHeroRow, nHeroEquipCol, id);
+		pEquipRecord->SetObject(nEquipRow, NFMsg::BagEquipList_RecordColType::BagEquipList_WearGUID, hero);
+	}
+
+	return false;
+}
+
+bool NFCPackModule::TakeOffEquipForm( const NFGUID& self, const NFGUID& hero, const NFGUID& id )
+{
+	if(id.IsNull())
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pEquipRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagEquipPack ) );
+	if (!pEquipRecord)
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagHeroPack ) );
+	if (!pHeroRecord)
+	{
+		return false;
+	}
+
+	int nEquipRow = -1;
+	int nHeroRow = -1;
+	int nHeroEquipCol = -1;
+
+	for (int i = 0; i < pEquipRecord->GetRows(); ++i)
+	{
+		if (pEquipRecord->IsUsed(i))
+		{
+			const NFGUID& xID = pEquipRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			if (xID == id)
+			{
+				nEquipRow = i;
+				break;
+			}
+		}
+	}
+
+	for (int i = 0; i < pHeroRecord->GetRows(); ++i)
+	{
+		if (pHeroRecord->IsUsed(i))
+		{
+			const NFGUID& xHeroID = pHeroRecord->GetObject(i, NFMsg::Record_PlayerHero_RecordColType::Record_PlayerHero_GUID);
+			if (xHeroID == hero)
+			{
+				for (int j = NFMsg::Record_PlayerHero_RecordColType::Record_PlayerHero_Equip1; i <= NFMsg::Record_PlayerHero_RecordColType::Record_PlayerHero_Equip6; ++j)
+				{
+					const NFGUID& xHeroEquip = pHeroRecord->GetObject(i, j);
+					if (xHeroEquip == id)
+					{
+						nHeroRow = i;
+						nHeroEquipCol = j;
+
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	if (nEquipRow >= 0 && nHeroRow >= 0)
+	{
+		//找到了装备,也找到了英雄--还要查看装备是什么类型，然后放什么位置
+		pHeroRecord->SetObject(nHeroRow, nHeroEquipCol, NULL_OBJECT);
+		pEquipRecord->SetObject(nEquipRow, NFMsg::BagEquipList_RecordColType::BagEquipList_WearGUID, NULL_OBJECT);
+	}
+
+	return false;
+}
+
+int NFCPackModule::SetEquipRandPropertyID( const NFGUID& self, const NFGUID& id, const std::string& strPropertyID )
+{
+	if (id.IsNull())
+	{
+		return 0;
+	}
+
+	//删除3个地方，背包，英雄穿戴，玩家穿戴
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return 0;
+	}
+
+	if (!m_pElementInfoModule->ExistElement(strPropertyID))
+	{
+		return 0;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagEquipPack ) );
+	if (!pRecord)
+	{
+		return 0;
+	}
+
+	for (int i = 0; i < pRecord->GetRows(); ++i)
+	{
+		if (pRecord->IsUsed(i))
+		{
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			if (xID == id)
+			{
+				//看是玩家装备，还是英雄装备
+				pRecord->SetString(i, NFMsg::BagEquipList_RecordColType::BagEquipList_RandPropertyID, strPropertyID.c_str());
+			}
+		}
+	}
+}
+
+const std::string& NFCPackModule::GetEquipRandPropertyID( const NFGUID& self, const NFGUID& id )
+{
+	if (id.IsNull())
+	{
+		return NULL_STR;
+	}
+
+	//删除3个地方，背包，英雄穿戴，玩家穿戴
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return NULL_STR;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagEquipPack ) );
+	if (!pRecord)
+	{
+		return NULL_STR;
+	}
+
+	for (int i = 0; i < pRecord->GetRows(); ++i)
+	{
+		if (pRecord->IsUsed(i))
+		{
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			if (xID == id)
+			{
+				//看是玩家装备，还是英雄装备
+				return pRecord->GetString(i, NFMsg::BagEquipList_RecordColType::BagEquipList_RandPropertyID);
+			}
+		}
+	}
+
+	return NULL_STR;
+}
+
+bool NFCPackModule::SetEquipHoleCount( const NFGUID& self, const NFGUID& id, const int nCount )
+{
+	if (nCount <= 0
+		|| nCount > (NFMsg::BagEquipList_RecordColType::BagEquipList_InlayStone10 - NFMsg::BagEquipList_RecordColType::BagEquipList_InlayStone1))
+	{
+		return false;
+	}
+
+	if (id.IsNull())
+	{
+		return false;
+	}
+
+	//删除3个地方，背包，英雄穿戴，玩家穿戴
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagEquipPack ) );
+	if (!pRecord)
+	{
+		return false;
+	}
+
+	for (int i = 0; i < pRecord->GetRows(); ++i)
+	{
+		if (pRecord->IsUsed(i))
+		{
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			if (xID == id)
+			{
+				//看是玩家装备，还是英雄装备
+				pRecord->SetInt(i, NFMsg::BagEquipList_RecordColType::BagEquipList_SlotCount, nCount);
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+int NFCPackModule::GetEquipHoleCount( const NFGUID& self, const NFGUID& id )
+{
+	if (id.IsNull())
+	{
+		return 0;
+	}
+
+	//删除3个地方，背包，英雄穿戴，玩家穿戴
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return 0;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagEquipPack ) );
+	if (!pRecord)
+	{
+		return 0;
+	}
+
+	for (int i = 0; i < pRecord->GetRows(); ++i)
+	{
+		if (pRecord->IsUsed(i))
+		{
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			if (xID == id)
+			{
+				//看是玩家装备，还是英雄装备
+				return pRecord->GetInt(i, NFMsg::BagEquipList_RecordColType::BagEquipList_SlotCount);
+			}
+		}
+	}
+
+	return 0;
+}
+
+bool NFCPackModule::SetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFMsg::BagEquipList_RecordColType eIndex, const std::string& strPropertyID )
+{
+	if (id.IsNull())
+	{
+		return false;
+	}
+
+	if (!m_pElementInfoModule->ExistElement(strPropertyID))
+	{
+		return false;
+	}
+
+	//删除3个地方，背包，英雄穿戴，玩家穿戴
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagEquipPack ) );
+	if (!pRecord)
+	{
+		return false;
+	}
+
+	for (int i = 0; i < pRecord->GetRows(); ++i)
+	{
+		if (pRecord->IsUsed(i))
+		{
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			if (xID == id)
+			{
+				//看是玩家装备，还是英雄装备
+				return pRecord->SetString(i, eIndex, strPropertyID.c_str());
+			}
+		}
+	}
+
+	return false;
+}
+
+const std::string& NFCPackModule::GetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFMsg::BagEquipList_RecordColType eIndex )
+{
+	if (id.IsNull())
+	{
+		return NULL_STR;
+	}
+
+	//删除3个地方，背包，英雄穿戴，玩家穿戴
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return NULL_STR;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagEquipPack ) );
+	if (!pRecord)
+	{
+		return NULL_STR;
+	}
+
+	for (int i = 0; i < pRecord->GetRows(); ++i)
+	{
+		if (pRecord->IsUsed(i))
+		{
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			if (xID == id)
+			{
+				//看是玩家装备，还是英雄装备
+				return pRecord->GetString(i, eIndex);
+			}
+		}
+	}
+
+	return NULL_STR;
+}
+
+bool NFCPackModule::SetEquipIntensifyLevel( const NFGUID& self, const NFGUID& id, const int nLevel )
+{
+	if (id.IsNull())
+	{
+		return false;
+	}
+
+	if (nLevel <= 0)
+	{
+		return false;
+	}
+
+	//删除3个地方，背包，英雄穿戴，玩家穿戴
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagEquipPack ) );
+	if (!pRecord)
+	{
+		return false;
+	}
+
+	for (int i = 0; i < pRecord->GetRows(); ++i)
+	{
+		if (pRecord->IsUsed(i))
+		{
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			if (xID == id)
+			{
+				//看是玩家装备，还是英雄装备
+				return pRecord->SetInt(i, NFMsg::BagEquipList_RecordColType::BagEquipList_IntensifyLevel, nLevel);
+			}
+		}
+	}
+
+	return false;
+}
+
+int NFCPackModule::GetEquipIntensifyLevel( const NFGUID& self, const NFGUID& id )
+{
+	if (id.IsNull())
+	{
+		return 0;
+	}
+
+	//删除3个地方，背包，英雄穿戴，玩家穿戴
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return 0;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagEquipPack ) );
+	if (!pRecord)
+	{
+		return 0;
+	}
+
+	for (int i = 0; i < pRecord->GetRows(); ++i)
+	{
+		if (pRecord->IsUsed(i))
+		{
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			if (xID == id)
+			{
+				//看是玩家装备，还是英雄装备
+				return pRecord->GetInt(i, NFMsg::BagEquipList_RecordColType::BagEquipList_IntensifyLevel);
+			}
+		}
+	}
+
+	return 0;
+}
+
+bool NFCPackModule::SetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFMsg::BagEquipList_RecordColType eIndex, const int nLevel )
+{
+	if (id.IsNull())
+	{
+		return false;
+	}
+
+	if (nLevel <= 0)
+	{
+		return false;
+	}
+
+	//删除3个地方，背包，英雄穿戴，玩家穿戴
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagEquipPack ) );
+	if (!pRecord)
+	{
+		return false;
+	}
+
+	for (int i = 0; i < pRecord->GetRows(); ++i)
+	{
+		if (pRecord->IsUsed(i))
+		{
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			if (xID == id)
+			{
+				//看是玩家装备，还是英雄装备
+				return pRecord->SetInt(i, eIndex, nLevel);
+			}
+		}
+	}
+
+	return false;
+}
+
+int NFCPackModule::GetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFMsg::BagEquipList_RecordColType eIndex )
+{
+	if (id.IsNull())
+	{
+		return 0;
+	}
+
+	//删除3个地方，背包，英雄穿戴，玩家穿戴
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return 0;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagEquipPack ) );
+	if (!pRecord)
+	{
+		return 0;
+	}
+
+	for (int i = 0; i < pRecord->GetRows(); ++i)
+	{
+		if (pRecord->IsUsed(i))
+		{
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			if (xID == id)
+			{
+				//看是玩家装备，还是英雄装备
+				return pRecord->GetInt(i, eIndex);
+			}
+		}
+	}
+
+	return 0;
 }
