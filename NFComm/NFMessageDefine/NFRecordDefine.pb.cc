@@ -20,29 +20,29 @@ namespace NFMsg {
 
 namespace {
 
-const ::google::protobuf::EnumDescriptor* BuildingList_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* BuildingProduce_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* GroupMemberList_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* ChatList_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* GuildBoss_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* GuildMemberList_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* GuildAppyList_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* GuildEvent_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* GuildHouse_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* GuildSkill_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* PosList_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* PlayerViewItem_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* Record_PlayerHero_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* BagEquipList_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* BagItemList_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* CommPropertyValue_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* EctypeList_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* DropItemList_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* SkillTable_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* TaskMonsterList_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* TaskList_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* PVPList_RecordColType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* ChatGroup_RecordColType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_BuildingList_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_BuildingProduce_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_GroupMemberList_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_ChatList_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_GuildBoss_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_GuildMemberList_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_GuildAppyList_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_GuildEvent_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_GuildHouse_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_GuildSkill_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_PosList_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_PlayerViewItem_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_PlayerHero_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_BagEquipList_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_BagItemList_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_CommPropertyValue_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_EctypeList_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_DropItemList_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_SkillTable_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_TaskMonsterList_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_TaskList_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_PVPList_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* RCT_ChatGroup_descriptor_ = NULL;
 
 }  // namespace
 
@@ -53,29 +53,29 @@ void protobuf_AssignDesc_NFRecordDefine_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "NFRecordDefine.proto");
   GOOGLE_CHECK(file != NULL);
-  BuildingList_RecordColType_descriptor_ = file->enum_type(0);
-  BuildingProduce_RecordColType_descriptor_ = file->enum_type(1);
-  GroupMemberList_RecordColType_descriptor_ = file->enum_type(2);
-  ChatList_RecordColType_descriptor_ = file->enum_type(3);
-  GuildBoss_RecordColType_descriptor_ = file->enum_type(4);
-  GuildMemberList_RecordColType_descriptor_ = file->enum_type(5);
-  GuildAppyList_RecordColType_descriptor_ = file->enum_type(6);
-  GuildEvent_RecordColType_descriptor_ = file->enum_type(7);
-  GuildHouse_RecordColType_descriptor_ = file->enum_type(8);
-  GuildSkill_RecordColType_descriptor_ = file->enum_type(9);
-  PosList_RecordColType_descriptor_ = file->enum_type(10);
-  PlayerViewItem_RecordColType_descriptor_ = file->enum_type(11);
-  Record_PlayerHero_RecordColType_descriptor_ = file->enum_type(12);
-  BagEquipList_RecordColType_descriptor_ = file->enum_type(13);
-  BagItemList_RecordColType_descriptor_ = file->enum_type(14);
-  CommPropertyValue_RecordColType_descriptor_ = file->enum_type(15);
-  EctypeList_RecordColType_descriptor_ = file->enum_type(16);
-  DropItemList_RecordColType_descriptor_ = file->enum_type(17);
-  SkillTable_RecordColType_descriptor_ = file->enum_type(18);
-  TaskMonsterList_RecordColType_descriptor_ = file->enum_type(19);
-  TaskList_RecordColType_descriptor_ = file->enum_type(20);
-  PVPList_RecordColType_descriptor_ = file->enum_type(21);
-  ChatGroup_RecordColType_descriptor_ = file->enum_type(22);
+  RCT_BuildingList_descriptor_ = file->enum_type(0);
+  RCT_BuildingProduce_descriptor_ = file->enum_type(1);
+  RCT_GroupMemberList_descriptor_ = file->enum_type(2);
+  RCT_ChatList_descriptor_ = file->enum_type(3);
+  RCT_GuildBoss_descriptor_ = file->enum_type(4);
+  RCT_GuildMemberList_descriptor_ = file->enum_type(5);
+  RCT_GuildAppyList_descriptor_ = file->enum_type(6);
+  RCT_GuildEvent_descriptor_ = file->enum_type(7);
+  RCT_GuildHouse_descriptor_ = file->enum_type(8);
+  RCT_GuildSkill_descriptor_ = file->enum_type(9);
+  RCT_PosList_descriptor_ = file->enum_type(10);
+  RCT_PlayerViewItem_descriptor_ = file->enum_type(11);
+  RCT_PlayerHero_descriptor_ = file->enum_type(12);
+  RCT_BagEquipList_descriptor_ = file->enum_type(13);
+  RCT_BagItemList_descriptor_ = file->enum_type(14);
+  RCT_CommPropertyValue_descriptor_ = file->enum_type(15);
+  RCT_EctypeList_descriptor_ = file->enum_type(16);
+  RCT_DropItemList_descriptor_ = file->enum_type(17);
+  RCT_SkillTable_descriptor_ = file->enum_type(18);
+  RCT_TaskMonsterList_descriptor_ = file->enum_type(19);
+  RCT_TaskList_descriptor_ = file->enum_type(20);
+  RCT_PVPList_descriptor_ = file->enum_type(21);
+  RCT_ChatGroup_descriptor_ = file->enum_type(22);
 }
 
 namespace {
@@ -102,142 +102,135 @@ void protobuf_AddDesc_NFRecordDefine_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\024NFRecordDefine.proto\022\005NFMsg*\365\001\n\032Buildi"
-    "ngList_RecordColType\022\033\n\027BuildingList_Bui"
-    "ldingID\020\000\022\035\n\031BuildingList_BuildingGUID\020\001"
-    "\022\026\n\022BuildingList_State\020\002\022\025\n\021BuildingList"
-    "_PosX\020\003\022\025\n\021BuildingList_PosY\020\004\022\025\n\021Buildi"
-    "ngList_PosZ\020\005\022\037\n\033BuildingList_StateStart"
-    "Time\020\006\022\035\n\031BuildingList_StateEndTime\020\007*\275\001"
-    "\n\035BuildingProduce_RecordColType\022 \n\034Build"
-    "ingProduce_BuildingGUID\020\000\022\032\n\026BuildingPro"
-    "duce_ItemID\020\001\022\035\n\031BuildingProduce_LeftCou"
-    "nt\020\002\022\034\n\030BuildingProduce_OnceTime\020\003\022!\n\035Bu"
-    "ildingProduce_OnceStartTime\020\004*q\n\035GroupMe"
-    "mberList_RecordColType\022\030\n\024GroupMemberLis"
-    "t_GUID\020\000\022\032\n\026GroupMemberList_Online\020\001\022\032\n\026"
-    "GroupMemberList_GameID\020\002*P\n\026ChatList_Rec"
-    "ordColType\022\021\n\rChatList_GUID\020\000\022\020\n\014ChatLis"
-    "t_msg\020\001\022\021\n\rChatList_time\020\002*\300\001\n\027GuildBoss"
-    "_RecordColType\022\022\n\016GuildBoss_GUID\020\000\022\022\n\016Gu"
-    "ildBoss_Name\020\001\022\023\n\017GuildBoss_Level\020\002\022\021\n\rG"
-    "uildBoss_Job\020\003\022\026\n\022GuildBoss_Donation\020\004\022\021"
-    "\n\rGuildBoss_VIP\020\005\022\025\n\021GuildBoss_Offline\020\006"
-    "\022\023\n\017GuildBoss_Power\020\007*\256\003\n\035GuildMemberLis"
-    "t_RecordColType\022\030\n\024GuildMemberList_GUID\020"
-    "\000\022\030\n\024GuildMemberList_Name\020\001\022\031\n\025GuildMemb"
-    "erList_Level\020\002\022\027\n\023GuildMemberList_Job\020\003\022"
-    "\034\n\030GuildMemberList_Donation\020\004\022\033\n\027GuildMe"
-    "mberList_Receive\020\005\022\027\n\023GuildMemberList_VI"
-    "P\020\006\022\032\n\026GuildMemberList_Online\020\007\022\031\n\025Guild"
-    "MemberList_Power\020\010\022\031\n\025GuildMemberList_Ti"
-    "tle\020\t\022\032\n\026GuildMemberList_GameID\020\n\022\034\n\030Gui"
-    "ldMemberList_JoinTime\020\013\022 \n\034GuildMemberLi"
-    "st_Contribution\020\014\022#\n\037GuildMemberList_All"
-    "Contribution\020\r*\311\001\n\033GuildAppyList_RecordC"
-    "olType\022\026\n\022GuildAppyList_GUID\020\000\022\026\n\022GuildA"
-    "ppyList_Name\020\001\022\027\n\023GuildAppyList_Level\020\002\022"
-    "\025\n\021GuildAppyList_Job\020\003\022\032\n\026GuildAppyList_"
-    "Donation\020\004\022\025\n\021GuildAppyList_VIP\020\005\022\027\n\023Gui"
-    "ldAppyList_Power\020\006*\223\002\n\030GuildEvent_Record"
-    "ColType\022\023\n\017GuildEvent_GUID\020\000\022\023\n\017GuildEve"
+    "\n\024NFRecordDefine.proto\022\005NFMsg*\353\001\n\020RCT_Bu"
+    "ildingList\022\033\n\027BuildingList_BuildingID\020\000\022"
+    "\035\n\031BuildingList_BuildingGUID\020\001\022\026\n\022Buildi"
+    "ngList_State\020\002\022\025\n\021BuildingList_PosX\020\003\022\025\n"
+    "\021BuildingList_PosY\020\004\022\025\n\021BuildingList_Pos"
+    "Z\020\005\022\037\n\033BuildingList_StateStartTime\020\006\022\035\n\031"
+    "BuildingList_StateEndTime\020\007*\263\001\n\023RCT_Buil"
+    "dingProduce\022 \n\034BuildingProduce_BuildingG"
+    "UID\020\000\022\032\n\026BuildingProduce_ItemID\020\001\022\035\n\031Bui"
+    "ldingProduce_LeftCount\020\002\022\034\n\030BuildingProd"
+    "uce_OnceTime\020\003\022!\n\035BuildingProduce_OnceSt"
+    "artTime\020\004*g\n\023RCT_GroupMemberList\022\030\n\024Grou"
+    "pMemberList_GUID\020\000\022\032\n\026GroupMemberList_On"
+    "line\020\001\022\032\n\026GroupMemberList_GameID\020\002*F\n\014RC"
+    "T_ChatList\022\021\n\rChatList_GUID\020\000\022\020\n\014ChatLis"
+    "t_msg\020\001\022\021\n\rChatList_time\020\002*\266\001\n\rRCT_Guild"
+    "Boss\022\022\n\016GuildBoss_GUID\020\000\022\022\n\016GuildBoss_Na"
+    "me\020\001\022\023\n\017GuildBoss_Level\020\002\022\021\n\rGuildBoss_J"
+    "ob\020\003\022\026\n\022GuildBoss_Donation\020\004\022\021\n\rGuildBos"
+    "s_VIP\020\005\022\025\n\021GuildBoss_Offline\020\006\022\023\n\017GuildB"
+    "oss_Power\020\007*\244\003\n\023RCT_GuildMemberList\022\030\n\024G"
+    "uildMemberList_GUID\020\000\022\030\n\024GuildMemberList"
+    "_Name\020\001\022\031\n\025GuildMemberList_Level\020\002\022\027\n\023Gu"
+    "ildMemberList_Job\020\003\022\034\n\030GuildMemberList_D"
+    "onation\020\004\022\033\n\027GuildMemberList_Receive\020\005\022\027"
+    "\n\023GuildMemberList_VIP\020\006\022\032\n\026GuildMemberLi"
+    "st_Online\020\007\022\031\n\025GuildMemberList_Power\020\010\022\031"
+    "\n\025GuildMemberList_Title\020\t\022\032\n\026GuildMember"
+    "List_GameID\020\n\022\034\n\030GuildMemberList_JoinTim"
+    "e\020\013\022 \n\034GuildMemberList_Contribution\020\014\022#\n"
+    "\037GuildMemberList_AllContribution\020\r*\277\001\n\021R"
+    "CT_GuildAppyList\022\026\n\022GuildAppyList_GUID\020\000"
+    "\022\026\n\022GuildAppyList_Name\020\001\022\027\n\023GuildAppyLis"
+    "t_Level\020\002\022\025\n\021GuildAppyList_Job\020\003\022\032\n\026Guil"
+    "dAppyList_Donation\020\004\022\025\n\021GuildAppyList_VI"
+    "P\020\005\022\027\n\023GuildAppyList_Power\020\006*\211\002\n\016RCT_Gui"
+    "ldEvent\022\023\n\017GuildEvent_GUID\020\000\022\023\n\017GuildEve"
     "nt_Name\020\001\022\024\n\020GuildEvent_Level\020\002\022\022\n\016Guild"
     "Event_Job\020\003\022\027\n\023GuildEvent_Donation\020\004\022\022\n\016"
     "GuildEvent_VIP\020\005\022\026\n\022GuildEvent_Offline\020\006"
     "\022\024\n\020GuildEvent_Power\020\007\022\026\n\022GuildEvent_Eve"
     "ntID\020\010\022\030\n\024GuildEvent_EventTime\020\t\022\026\n\022Guil"
-    "dEvent_Context\020\n*\311\001\n\030GuildHouse_RecordCo"
-    "lType\022\023\n\017GuildHouse_GUID\020\000\022\023\n\017GuildHouse"
-    "_Name\020\001\022\024\n\020GuildHouse_Level\020\002\022\022\n\016GuildHo"
-    "use_Job\020\003\022\027\n\023GuildHouse_Donation\020\004\022\022\n\016Gu"
-    "ildHouse_VIP\020\005\022\026\n\022GuildHouse_Offline\020\006\022\024"
-    "\n\020GuildHouse_Power\020\007*\311\001\n\030GuildSkill_Reco"
-    "rdColType\022\023\n\017GuildSkill_GUID\020\000\022\023\n\017GuildS"
-    "kill_Name\020\001\022\024\n\020GuildSkill_Level\020\002\022\022\n\016Gui"
-    "ldSkill_Job\020\003\022\027\n\023GuildSkill_Donation\020\004\022\022"
-    "\n\016GuildSkill_VIP\020\005\022\026\n\022GuildSkill_Offline"
-    "\020\006\022\024\n\020GuildSkill_Power\020\007*Z\n\025PosList_Reco"
-    "rdColType\022\r\n\tPosList_X\020\000\022\r\n\tPosList_Y\020\001\022"
-    "\r\n\tPosList_Z\020\002\022\024\n\020PosList_StayTime\020\003*\236\001\n"
-    "\034PlayerViewItem_RecordColType\022\033\n\027PlayerV"
+    "dEvent_Context\020\n*\277\001\n\016RCT_GuildHouse\022\023\n\017G"
+    "uildHouse_GUID\020\000\022\023\n\017GuildHouse_Name\020\001\022\024\n"
+    "\020GuildHouse_Level\020\002\022\022\n\016GuildHouse_Job\020\003\022"
+    "\027\n\023GuildHouse_Donation\020\004\022\022\n\016GuildHouse_V"
+    "IP\020\005\022\026\n\022GuildHouse_Offline\020\006\022\024\n\020GuildHou"
+    "se_Power\020\007*\277\001\n\016RCT_GuildSkill\022\023\n\017GuildSk"
+    "ill_GUID\020\000\022\023\n\017GuildSkill_Name\020\001\022\024\n\020Guild"
+    "Skill_Level\020\002\022\022\n\016GuildSkill_Job\020\003\022\027\n\023Gui"
+    "ldSkill_Donation\020\004\022\022\n\016GuildSkill_VIP\020\005\022\026"
+    "\n\022GuildSkill_Offline\020\006\022\024\n\020GuildSkill_Pow"
+    "er\020\007*P\n\013RCT_PosList\022\r\n\tPosList_X\020\000\022\r\n\tPo"
+    "sList_Y\020\001\022\r\n\tPosList_Z\020\002\022\024\n\020PosList_Stay"
+    "Time\020\003*\224\001\n\022RCT_PlayerViewItem\022\033\n\027PlayerV"
     "iewItem_ConfigID\020\000\022\037\n\033PlayerViewItem_Enh"
     "anceLevel\020\001\022\035\n\031PlayerViewItem_InlayStone"
-    "\020\002\022!\n\035PlayerViewItem_SagecraftLevel\020\003*\311\002"
-    "\n\037Record_PlayerHero_RecordColType\022\032\n\026Rec"
-    "ord_PlayerHero_GUID\020\000\022\036\n\032Record_PlayerHe"
-    "ro_ConfigID\020\001\022\033\n\027Record_PlayerHero_Level"
-    "\020\002\022\031\n\025Record_PlayerHero_Exp\020\003\022\034\n\030Record_"
-    "PlayerHero_Equip1\020\004\022\034\n\030Record_PlayerHero"
-    "_Equip2\020\005\022\034\n\030Record_PlayerHero_Equip3\020\006\022"
-    "\034\n\030Record_PlayerHero_Equip4\020\007\022\034\n\030Record_"
-    "PlayerHero_Equip5\020\010\022\034\n\030Record_PlayerHero"
-    "_Equip6\020\t*\202\007\n\032BagEquipList_RecordColType"
-    "\022\025\n\021BagEquipList_GUID\020\000\022\031\n\025BagEquipList_"
-    "WearGUID\020\001\022\031\n\025BagEquipList_ConfigID\020\002\022\026\n"
-    "\022BagEquipList_Bound\020\003\022\034\n\030BagEquipList_Ex"
-    "piredType\020\004\022\037\n\033BagEquipList_RandProperty"
-    "ID\020\005\022\025\n\021BagEquipList_Date\020\006\022\032\n\026BagEquipL"
-    "ist_SlotCount\020\007\022\034\n\030BagEquipList_InlaySto"
-    "ne1\020\010\022\034\n\030BagEquipList_InlayStone2\020\t\022\034\n\030B"
-    "agEquipList_InlayStone3\020\n\022\034\n\030BagEquipLis"
-    "t_InlayStone4\020\013\022\034\n\030BagEquipList_InlaySto"
-    "ne5\020\014\022\034\n\030BagEquipList_InlayStone6\020\r\022\034\n\030B"
-    "agEquipList_InlayStone7\020\016\022\034\n\030BagEquipLis"
-    "t_InlayStone8\020\017\022\034\n\030BagEquipList_InlaySto"
-    "ne9\020\020\022\035\n\031BagEquipList_InlayStone10\020\021\022\037\n\033"
-    "BagEquipList_IntensifyLevel\020\022\022\036\n\032BagEqui"
-    "pList_ElementLevel1\020\023\022\036\n\032BagEquipList_El"
-    "ementLevel2\020\024\022\036\n\032BagEquipList_ElementLev"
-    "el3\020\025\022\036\n\032BagEquipList_ElementLevel4\020\026\022\036\n"
-    "\032BagEquipList_ElementLevel5\020\027\022\036\n\032BagEqui"
-    "pList_ElementLevel6\020\030\022\036\n\032BagEquipList_El"
-    "ementLevel7\020\031\022\036\n\032BagEquipList_ElementLev"
-    "el8\020\032\022\036\n\032BagEquipList_ElementLevel9\020\033\022\037\n"
-    "\033BagEquipList_ElementLevel10\020\034*\232\001\n\031BagIt"
-    "emList_RecordColType\022\030\n\024BagItemList_Conf"
-    "igID\020\000\022\031\n\025BagItemList_ItemCount\020\001\022\025\n\021Bag"
-    "ItemList_Bound\020\002\022\033\n\027BagItemList_ExpiredT"
-    "ype\020\003\022\024\n\020BagItemList_Date\020\004*\253\006\n\037CommProp"
-    "ertyValue_RecordColType\022\033\n\027CommPropertyV"
-    "alue_MAXHP\020\000\022\033\n\027CommPropertyValue_MAXMP\020"
-    "\001\022\033\n\027CommPropertyValue_MAXSP\020\002\022\035\n\031CommPr"
-    "opertyValue_HPREGEN\020\003\022\035\n\031CommPropertyVal"
-    "ue_SPREGEN\020\004\022\035\n\031CommPropertyValue_MPREGE"
-    "N\020\005\022\037\n\033CommPropertyValue_ATK_VALUE\020\006\022\037\n\033"
-    "CommPropertyValue_DEF_VALUE\020\007\022 \n\034CommPro"
-    "pertyValue_MOVE_SPEED\020\010\022\037\n\033CommPropertyV"
-    "alue_ATK_SPEED\020\t\022\036\n\032CommPropertyValue_AT"
-    "K_FIRE\020\n\022\037\n\033CommPropertyValue_ATK_LIGHT\020"
-    "\013\022\035\n\031CommPropertyValue_ATK_ICE\020\014\022 \n\034Comm"
-    "PropertyValue_ATK_POISON\020\r\022\036\n\032CommProper"
-    "tyValue_DEF_FIRE\020\016\022\037\n\033CommPropertyValue_"
-    "DEF_LIGHT\020\017\022\035\n\031CommPropertyValue_DEF_ICE"
-    "\020\020\022 \n\034CommPropertyValue_DEF_POISON\020\021\022 \n\034"
-    "CommPropertyValue_DIZZY_GATE\020\022\022\037\n\033CommPr"
-    "opertyValue_MOVE_GATE\020\023\022 \n\034CommPropertyV"
-    "alue_SKILL_GATE\020\024\022#\n\037CommPropertyValue_P"
-    "HYSICAL_GATE\020\025\022 \n\034CommPropertyValue_MAGI"
-    "C_GATE\020\026\022\037\n\033CommPropertyValue_BUFF_GATE\020"
-    "\027*_\n\030EctypeList_RecordColType\022\027\n\023EctypeL"
-    "ist_EctypeID\020\000\022\025\n\021EctypeList_IsPass\020\001\022\023\n"
-    "\017EctypeList_Star\020\002*\211\001\n\032DropItemList_Reco"
-    "rdColType\022\032\n\026DropItemList_MonsterID\020\000\022\027\n"
-    "\023DropItemList_ItemID\020\001\022\032\n\026DropItemList_I"
-    "temCount\020\002\022\032\n\026DropItemList_DrawState\020\003*\207"
-    "\001\n\030SkillTable_RecordColType\022\026\n\022SkillTabl"
-    "e_SkillID\020\000\022\031\n\025SkillTable_SkillLevel\020\001\022\031"
-    "\n\025SkillTable_SkillStone\020\002\022\035\n\031SkillTable_"
-    "SkillSoulLevel\020\003*\246\001\n\035TaskMonsterList_Rec"
-    "ordColType\022\035\n\031TaskMonsterList_MonsterID\020"
-    "\000\022$\n TaskMonsterList_CurrentKillCount\020\001\022"
-    "$\n TaskMonsterList_RequireKillCount\020\002\022\032\n"
-    "\026TaskMonsterList_TaskID\020\003*\\\n\026TaskList_Re"
-    "cordColType\022\023\n\017TaskList_TaskID\020\000\022\027\n\023Task"
-    "List_TaskStatus\020\001\022\024\n\020TaskList_Process\020\002*"
-    "L\n\025PVPList_RecordColType\022\016\n\nPVPList_ID\020\000"
-    "\022\020\n\014PVPList_Name\020\001\022\021\n\rPVPList_Level\020\002*J\n"
-    "\027ChatGroup_RecordColType\022\026\n\022ChatGroup_Ch"
-    "atType\020\000\022\027\n\023ChatGroup_GroupGUID\020\001", 5433);
+    "\020\002\022!\n\035PlayerViewItem_SagecraftLevel\020\003*\362\001"
+    "\n\016RCT_PlayerHero\022\023\n\017PlayerHero_GUID\020\000\022\027\n"
+    "\023PlayerHero_ConfigID\020\001\022\024\n\020PlayerHero_Lev"
+    "el\020\002\022\022\n\016PlayerHero_Exp\020\003\022\025\n\021PlayerHero_E"
+    "quip1\020\004\022\025\n\021PlayerHero_Equip2\020\005\022\025\n\021Player"
+    "Hero_Equip3\020\006\022\025\n\021PlayerHero_Equip4\020\007\022\025\n\021"
+    "PlayerHero_Equip5\020\010\022\025\n\021PlayerHero_Equip6"
+    "\020\t*\370\006\n\020RCT_BagEquipList\022\025\n\021BagEquipList_"
+    "GUID\020\000\022\031\n\025BagEquipList_WearGUID\020\001\022\031\n\025Bag"
+    "EquipList_ConfigID\020\002\022\026\n\022BagEquipList_Bou"
+    "nd\020\003\022\034\n\030BagEquipList_ExpiredType\020\004\022\037\n\033Ba"
+    "gEquipList_RandPropertyID\020\005\022\025\n\021BagEquipL"
+    "ist_Date\020\006\022\032\n\026BagEquipList_SlotCount\020\007\022\034"
+    "\n\030BagEquipList_InlayStone1\020\010\022\034\n\030BagEquip"
+    "List_InlayStone2\020\t\022\034\n\030BagEquipList_Inlay"
+    "Stone3\020\n\022\034\n\030BagEquipList_InlayStone4\020\013\022\034"
+    "\n\030BagEquipList_InlayStone5\020\014\022\034\n\030BagEquip"
+    "List_InlayStone6\020\r\022\034\n\030BagEquipList_Inlay"
+    "Stone7\020\016\022\034\n\030BagEquipList_InlayStone8\020\017\022\034"
+    "\n\030BagEquipList_InlayStone9\020\020\022\035\n\031BagEquip"
+    "List_InlayStone10\020\021\022\037\n\033BagEquipList_Inte"
+    "nsifyLevel\020\022\022\036\n\032BagEquipList_ElementLeve"
+    "l1\020\023\022\036\n\032BagEquipList_ElementLevel2\020\024\022\036\n\032"
+    "BagEquipList_ElementLevel3\020\025\022\036\n\032BagEquip"
+    "List_ElementLevel4\020\026\022\036\n\032BagEquipList_Ele"
+    "mentLevel5\020\027\022\036\n\032BagEquipList_ElementLeve"
+    "l6\020\030\022\036\n\032BagEquipList_ElementLevel7\020\031\022\036\n\032"
+    "BagEquipList_ElementLevel8\020\032\022\036\n\032BagEquip"
+    "List_ElementLevel9\020\033\022\037\n\033BagEquipList_Ele"
+    "mentLevel10\020\034*\220\001\n\017RCT_BagItemList\022\030\n\024Bag"
+    "ItemList_ConfigID\020\000\022\031\n\025BagItemList_ItemC"
+    "ount\020\001\022\025\n\021BagItemList_Bound\020\002\022\033\n\027BagItem"
+    "List_ExpiredType\020\003\022\024\n\020BagItemList_Date\020\004"
+    "*\241\006\n\025RCT_CommPropertyValue\022\033\n\027CommProper"
+    "tyValue_MAXHP\020\000\022\033\n\027CommPropertyValue_MAX"
+    "MP\020\001\022\033\n\027CommPropertyValue_MAXSP\020\002\022\035\n\031Com"
+    "mPropertyValue_HPREGEN\020\003\022\035\n\031CommProperty"
+    "Value_SPREGEN\020\004\022\035\n\031CommPropertyValue_MPR"
+    "EGEN\020\005\022\037\n\033CommPropertyValue_ATK_VALUE\020\006\022"
+    "\037\n\033CommPropertyValue_DEF_VALUE\020\007\022 \n\034Comm"
+    "PropertyValue_MOVE_SPEED\020\010\022\037\n\033CommProper"
+    "tyValue_ATK_SPEED\020\t\022\036\n\032CommPropertyValue"
+    "_ATK_FIRE\020\n\022\037\n\033CommPropertyValue_ATK_LIG"
+    "HT\020\013\022\035\n\031CommPropertyValue_ATK_ICE\020\014\022 \n\034C"
+    "ommPropertyValue_ATK_POISON\020\r\022\036\n\032CommPro"
+    "pertyValue_DEF_FIRE\020\016\022\037\n\033CommPropertyVal"
+    "ue_DEF_LIGHT\020\017\022\035\n\031CommPropertyValue_DEF_"
+    "ICE\020\020\022 \n\034CommPropertyValue_DEF_POISON\020\021\022"
+    " \n\034CommPropertyValue_DIZZY_GATE\020\022\022\037\n\033Com"
+    "mPropertyValue_MOVE_GATE\020\023\022 \n\034CommProper"
+    "tyValue_SKILL_GATE\020\024\022#\n\037CommPropertyValu"
+    "e_PHYSICAL_GATE\020\025\022 \n\034CommPropertyValue_M"
+    "AGIC_GATE\020\026\022\037\n\033CommPropertyValue_BUFF_GA"
+    "TE\020\027*U\n\016RCT_EctypeList\022\027\n\023EctypeList_Ect"
+    "ypeID\020\000\022\025\n\021EctypeList_IsPass\020\001\022\023\n\017Ectype"
+    "List_Star\020\002*\177\n\020RCT_DropItemList\022\032\n\026DropI"
+    "temList_MonsterID\020\000\022\027\n\023DropItemList_Item"
+    "ID\020\001\022\032\n\026DropItemList_ItemCount\020\002\022\032\n\026Drop"
+    "ItemList_DrawState\020\003*}\n\016RCT_SkillTable\022\026"
+    "\n\022SkillTable_SkillID\020\000\022\031\n\025SkillTable_Ski"
+    "llLevel\020\001\022\031\n\025SkillTable_SkillStone\020\002\022\035\n\031"
+    "SkillTable_SkillSoulLevel\020\003*\234\001\n\023RCT_Task"
+    "MonsterList\022\035\n\031TaskMonsterList_MonsterID"
+    "\020\000\022$\n TaskMonsterList_CurrentKillCount\020\001"
+    "\022$\n TaskMonsterList_RequireKillCount\020\002\022\032"
+    "\n\026TaskMonsterList_TaskID\020\003*R\n\014RCT_TaskLi"
+    "st\022\023\n\017TaskList_TaskID\020\000\022\027\n\023TaskList_Task"
+    "Status\020\001\022\024\n\020TaskList_Process\020\002*B\n\013RCT_PV"
+    "PList\022\016\n\nPVPList_ID\020\000\022\020\n\014PVPList_Name\020\001\022"
+    "\021\n\rPVPList_Level\020\002*@\n\rRCT_ChatGroup\022\026\n\022C"
+    "hatGroup_ChatType\020\000\022\027\n\023ChatGroup_GroupGU"
+    "ID\020\001", 5124);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFRecordDefine.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFRecordDefine_2eproto);
@@ -249,11 +242,11 @@ struct StaticDescriptorInitializer_NFRecordDefine_2eproto {
     protobuf_AddDesc_NFRecordDefine_2eproto();
   }
 } static_descriptor_initializer_NFRecordDefine_2eproto_;
-const ::google::protobuf::EnumDescriptor* BuildingList_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_BuildingList_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return BuildingList_RecordColType_descriptor_;
+  return RCT_BuildingList_descriptor_;
 }
-bool BuildingList_RecordColType_IsValid(int value) {
+bool RCT_BuildingList_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -269,11 +262,11 @@ bool BuildingList_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* BuildingProduce_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_BuildingProduce_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return BuildingProduce_RecordColType_descriptor_;
+  return RCT_BuildingProduce_descriptor_;
 }
-bool BuildingProduce_RecordColType_IsValid(int value) {
+bool RCT_BuildingProduce_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -286,11 +279,11 @@ bool BuildingProduce_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* GroupMemberList_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_GroupMemberList_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return GroupMemberList_RecordColType_descriptor_;
+  return RCT_GroupMemberList_descriptor_;
 }
-bool GroupMemberList_RecordColType_IsValid(int value) {
+bool RCT_GroupMemberList_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -301,11 +294,11 @@ bool GroupMemberList_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* ChatList_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_ChatList_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return ChatList_RecordColType_descriptor_;
+  return RCT_ChatList_descriptor_;
 }
-bool ChatList_RecordColType_IsValid(int value) {
+bool RCT_ChatList_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -316,11 +309,11 @@ bool ChatList_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* GuildBoss_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_GuildBoss_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return GuildBoss_RecordColType_descriptor_;
+  return RCT_GuildBoss_descriptor_;
 }
-bool GuildBoss_RecordColType_IsValid(int value) {
+bool RCT_GuildBoss_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -336,11 +329,11 @@ bool GuildBoss_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* GuildMemberList_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_GuildMemberList_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return GuildMemberList_RecordColType_descriptor_;
+  return RCT_GuildMemberList_descriptor_;
 }
-bool GuildMemberList_RecordColType_IsValid(int value) {
+bool RCT_GuildMemberList_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -362,11 +355,11 @@ bool GuildMemberList_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* GuildAppyList_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_GuildAppyList_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return GuildAppyList_RecordColType_descriptor_;
+  return RCT_GuildAppyList_descriptor_;
 }
-bool GuildAppyList_RecordColType_IsValid(int value) {
+bool RCT_GuildAppyList_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -381,11 +374,11 @@ bool GuildAppyList_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* GuildEvent_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_GuildEvent_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return GuildEvent_RecordColType_descriptor_;
+  return RCT_GuildEvent_descriptor_;
 }
-bool GuildEvent_RecordColType_IsValid(int value) {
+bool RCT_GuildEvent_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -404,11 +397,11 @@ bool GuildEvent_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* GuildHouse_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_GuildHouse_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return GuildHouse_RecordColType_descriptor_;
+  return RCT_GuildHouse_descriptor_;
 }
-bool GuildHouse_RecordColType_IsValid(int value) {
+bool RCT_GuildHouse_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -424,11 +417,11 @@ bool GuildHouse_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* GuildSkill_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_GuildSkill_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return GuildSkill_RecordColType_descriptor_;
+  return RCT_GuildSkill_descriptor_;
 }
-bool GuildSkill_RecordColType_IsValid(int value) {
+bool RCT_GuildSkill_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -444,11 +437,11 @@ bool GuildSkill_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* PosList_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_PosList_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return PosList_RecordColType_descriptor_;
+  return RCT_PosList_descriptor_;
 }
-bool PosList_RecordColType_IsValid(int value) {
+bool RCT_PosList_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -460,11 +453,11 @@ bool PosList_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* PlayerViewItem_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_PlayerViewItem_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return PlayerViewItem_RecordColType_descriptor_;
+  return RCT_PlayerViewItem_descriptor_;
 }
-bool PlayerViewItem_RecordColType_IsValid(int value) {
+bool RCT_PlayerViewItem_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -476,11 +469,11 @@ bool PlayerViewItem_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* Record_PlayerHero_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_PlayerHero_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Record_PlayerHero_RecordColType_descriptor_;
+  return RCT_PlayerHero_descriptor_;
 }
-bool Record_PlayerHero_RecordColType_IsValid(int value) {
+bool RCT_PlayerHero_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -498,11 +491,11 @@ bool Record_PlayerHero_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* BagEquipList_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_BagEquipList_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return BagEquipList_RecordColType_descriptor_;
+  return RCT_BagEquipList_descriptor_;
 }
-bool BagEquipList_RecordColType_IsValid(int value) {
+bool RCT_BagEquipList_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -539,11 +532,11 @@ bool BagEquipList_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* BagItemList_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_BagItemList_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return BagItemList_RecordColType_descriptor_;
+  return RCT_BagItemList_descriptor_;
 }
-bool BagItemList_RecordColType_IsValid(int value) {
+bool RCT_BagItemList_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -556,11 +549,11 @@ bool BagItemList_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* CommPropertyValue_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_CommPropertyValue_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return CommPropertyValue_RecordColType_descriptor_;
+  return RCT_CommPropertyValue_descriptor_;
 }
-bool CommPropertyValue_RecordColType_IsValid(int value) {
+bool RCT_CommPropertyValue_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -592,11 +585,11 @@ bool CommPropertyValue_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* EctypeList_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_EctypeList_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return EctypeList_RecordColType_descriptor_;
+  return RCT_EctypeList_descriptor_;
 }
-bool EctypeList_RecordColType_IsValid(int value) {
+bool RCT_EctypeList_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -607,27 +600,11 @@ bool EctypeList_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* DropItemList_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_DropItemList_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return DropItemList_RecordColType_descriptor_;
+  return RCT_DropItemList_descriptor_;
 }
-bool DropItemList_RecordColType_IsValid(int value) {
-  switch(value) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const ::google::protobuf::EnumDescriptor* SkillTable_RecordColType_descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return SkillTable_RecordColType_descriptor_;
-}
-bool SkillTable_RecordColType_IsValid(int value) {
+bool RCT_DropItemList_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -639,11 +616,11 @@ bool SkillTable_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* TaskMonsterList_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_SkillTable_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return TaskMonsterList_RecordColType_descriptor_;
+  return RCT_SkillTable_descriptor_;
 }
-bool TaskMonsterList_RecordColType_IsValid(int value) {
+bool RCT_SkillTable_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -655,11 +632,27 @@ bool TaskMonsterList_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* TaskList_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_TaskMonsterList_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return TaskList_RecordColType_descriptor_;
+  return RCT_TaskMonsterList_descriptor_;
 }
-bool TaskList_RecordColType_IsValid(int value) {
+bool RCT_TaskMonsterList_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* RCT_TaskList_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return RCT_TaskList_descriptor_;
+}
+bool RCT_TaskList_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -670,11 +663,11 @@ bool TaskList_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* PVPList_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_PVPList_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return PVPList_RecordColType_descriptor_;
+  return RCT_PVPList_descriptor_;
 }
-bool PVPList_RecordColType_IsValid(int value) {
+bool RCT_PVPList_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -685,11 +678,11 @@ bool PVPList_RecordColType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* ChatGroup_RecordColType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RCT_ChatGroup_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return ChatGroup_RecordColType_descriptor_;
+  return RCT_ChatGroup_descriptor_;
 }
-bool ChatGroup_RecordColType_IsValid(int value) {
+bool RCT_ChatGroup_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
