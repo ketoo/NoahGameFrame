@@ -39,54 +39,59 @@ public:
     virtual bool Execute( const float fLasFrametime, const float fStartedTime );
     virtual bool AfterInit();
 
-    //添加装备:装备config
-    virtual const NFGUID& CreateEquip( const NFGUID& self, const std::string& strConfigName);
+	/////////////基础/////////////////////////////////////////////////////////////
 
-    //添加普通道具
-    virtual bool CreateItem( const NFGUID& self, const std::string& strConfigName, const int nCount );
+	virtual const NFGUID& CreateEquip( const NFGUID& self, const std::string& strConfigName);
+	virtual bool CreateItem( const NFGUID& self, const std::string& strConfigName, const int nCount );
 
-    //删除某格子内物品
-    virtual bool DeleteGrid( const NFGUID& self, const int nOrigin);
+	virtual bool DeleteEquip( const NFGUID& self, const NFGUID& id);
+	virtual bool DeleteItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount);
 
-    //////////////////////////////////////////////////////////////////////////
-    //得到configID
-    virtual const std::string& GetGridConfigID( const NFGUID& self, const int nRow);
+	/////////////英雄装备和背包互换/////////////////////////////////////////////////////////////
 
-    //设置道具数量
-    virtual bool SetGridCount( const NFGUID& self, const int nOrigin, const int nCount);
-    virtual NFINT64 GetGridCount( const NFGUID& self, const int nOrigin);
+	virtual bool DressEquipForHero( const NFGUID& self, const NFGUID& hero, const NFGUID& id);
+	virtual bool TakeOffEquipForm( const NFGUID& self, const NFGUID& hero, const NFGUID& id);
 
-    //是否绑定
-    virtual bool SetGridBan( const NFGUID& self, const int nOrigin, const bool bBan );
-    virtual bool GetGridBan( const NFGUID& self, const int nOrigin );
+	/////////////装备的随机属性/////////////////////////////////////////////////////////////
 
-    //设置创建时间(如果是非永久道具)
-    virtual bool SetEquipCreatTime( const NFGUID& self, const int nOrigin, const const NFINT64 nTime  );
-    virtual const NFINT64 GetEquipCreatTime( const NFGUID& self, const int nOrigin );
+	virtual int SetEquipRandPropertyID( const NFGUID& self, const NFGUID& id, const std::string& strPropertyID); 
+	virtual const std::string& GetEquipRandPropertyID( const NFGUID& self, const NFGUID& id);
 
-    //得到某样物品有多少个
-    virtual int QueryCount(const NFGUID& self, const std::string& strItemConfigID) const;
+	/////////////装备的打洞/////////////////////////////////////////////////////////////
 
-    //消费N个某样物品
-    virtual bool DeleteItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount);
+	virtual bool SetEquipHoleCount( const NFGUID& self, const NFGUID& id, const int nCount);
+	virtual int GetEquipHoleCount( const NFGUID& self, const NFGUID& id);
+
+	/////////////装备镶嵌的石头/////////////////////////////////////////////////////////////
+
+	virtual bool SetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFMsg::BagEquipList_RecordColType eIndex, const std::string& strPropertyID);
+	virtual const std::string& GetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFMsg::BagEquipList_RecordColType eIndex);
+
+	/////////////装备强化的等级/////////////////////////////////////////////////////////////
+
+	virtual bool SetEquipIntensifyLevel( const NFGUID& self, const NFGUID& id, const int nLevel);
+	virtual int GetEquipIntensifyLevel( const NFGUID& self, const NFGUID& id);
+
+	/////////////装备元素的等级/////////////////////////////////////////////////////////////
+
+	virtual bool SetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFMsg::BagEquipList_RecordColType eIndex, const int nLevel);
+	virtual int GetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFMsg::BagEquipList_RecordColType eIndex);
 
 protected:
-    int RefreshEquipProperty( const NFGUID& self );
-    int RefreshEquipProperty( const NFGUID& self, const int nRow );
+
+	int FindItemRowByConfig(const NFGUID& self, const std::string& strItemConfigID);
+
+//     int RefreshEquipProperty( const NFGUID& self );
+//     int RefreshEquipProperty( const NFGUID& self, const int nRow );
     
-    int AddEquipProperty( const NFGUID& self, const std::string& strConfigID, const int nRow );
-    int RemoveEquipProperty( const NFGUID& self, const std::string& strConfigID, const int nRow );
+//     int AddEquipProperty( const NFGUID& self, const std::string& strConfigID, const int nRow );
+//     int RemoveEquipProperty( const NFGUID& self, const std::string& strConfigID, const int nRow );
 
     int OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
-    int OnSwapTableRowEvent( const NFGUID& object, const int nEventID, const NFIDataList& var );
-    int OnObjectPackViewRecordEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar );
 
     // 添加掉落道具
     void AddDropItem(const NFGUID& self, const NFIDataList& var);
     int OnObjectBeKilled(const NFGUID& self, const int nEventID, const NFIDataList& var);
-
-
-	bool SetGridData( const NFGUID& self, const int nRow, const int nCol, const NFIDataList& var);
 
 private:
     NFIEventProcessModule* m_pEventProcessModule;
