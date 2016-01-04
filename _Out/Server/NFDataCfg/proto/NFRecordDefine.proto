@@ -131,6 +131,62 @@ enum PlayerViewItem_RecordColType
 	PlayerViewItem_SagecraftLevel		=3; // SagecraftLevel
 }
 
+enum PlayerHero_RecordColType
+{
+	PlayerHero_GUID		=0; // GUID
+	PlayerHero_ConfigID		=1; // ConfigID
+	PlayerHero_Level		=2; // Level
+	PlayerHero_Exp		=3; // Exp
+	PlayerHero_Equip1		=4; // Equip1
+	PlayerHero_Equip2		=5; // Equip2
+	PlayerHero_Equip3		=6; // Equip3
+	PlayerHero_Equip4		=7; // Equip4
+	PlayerHero_Equip5		=8; // Equip5
+	PlayerHero_Equip6		=9; // Equip6
+}
+
+enum BagEquipList_RecordColType
+{
+	BagEquipList_GUID		=0; // GUID
+	BagEquipList_WearGUID		=1; // WearGUID
+	BagEquipList_ConfigID		=2; // ConfigID
+	BagEquipList_Bound		=3; // Bound
+	BagEquipList_ExpiredType		=4; // ExpiredType
+	BagEquipList_RandPropertyID		=5; // RandPropertyID
+	BagEquipList_Date		=6; // Date
+	BagEquipList_SlotCount		=7; // SlotCount
+	BagEquipList_InlayStone1		=8; // InlayStone1
+	BagEquipList_InlayStone2		=9; // InlayStone2
+	BagEquipList_InlayStone3		=10; // InlayStone3
+	BagEquipList_InlayStone4		=11; // InlayStone4
+	BagEquipList_InlayStone5		=12; // InlayStone5
+	BagEquipList_InlayStone6		=13; // InlayStone6
+	BagEquipList_InlayStone7		=14; // InlayStone7
+	BagEquipList_InlayStone8		=15; // InlayStone8
+	BagEquipList_InlayStone9		=16; // InlayStone9
+	BagEquipList_InlayStone10		=17; // InlayStone10
+	BagEquipList_IntensifyLevel		=18; // IntensifyLevel
+	BagEquipList_ElementLevel1		=19; // ElementLevel1
+	BagEquipList_ElementLevel2		=20; // ElementLevel2
+	BagEquipList_ElementLevel3		=21; // ElementLevel3
+	BagEquipList_ElementLevel4		=22; // ElementLevel4
+	BagEquipList_ElementLevel5		=23; // ElementLevel5
+	BagEquipList_ElementLevel6		=24; // ElementLevel6
+	BagEquipList_ElementLevel7		=25; // ElementLevel7
+	BagEquipList_ElementLevel8		=26; // ElementLevel8
+	BagEquipList_ElementLevel9		=27; // ElementLevel9
+	BagEquipList_ElementLevel10		=28; // ElementLevel10
+}
+
+enum BagItemList_RecordColType
+{
+	BagItemList_ConfigID		=0; // ConfigID
+	BagItemList_ItemCount		=1; // ItemCount
+	BagItemList_Bound		=2; // Bound
+	BagItemList_ExpiredType		=3; // ExpiredType
+	BagItemList_Date		=4; // Date
+}
+
 enum CommPropertyValue_RecordColType
 {
 	CommPropertyValue_MAXHP		=0; // MAXHP
@@ -157,28 +213,6 @@ enum CommPropertyValue_RecordColType
 	CommPropertyValue_PHYSICAL_GATE		=21; // PHYSICAL_GATE
 	CommPropertyValue_MAGIC_GATE		=22; // MAGIC_GATE
 	CommPropertyValue_BUFF_GATE		=23; // BUFF_GATE
-}
-
-enum BagItemList_RecordColType
-{
-	BagItemList_GUID		=0; // GUID
-	BagItemList_ConfigID		=1; // ConfigID
-	BagItemList_ItemCount		=2; // ItemCount
-	BagItemList_Bound		=3; // Bound
-	BagItemList_ExpiredType		=4; // ExpiredType
-	BagItemList_SlotCount		=5; // SlotCount
-	BagItemList_InlayStone1		=6; // InlayStone1
-	BagItemList_InlayStone2		=7; // InlayStone2
-	BagItemList_InlayStone3		=8; // InlayStone3
-	BagItemList_InlayStone4		=9; // InlayStone4
-	BagItemList_InlayStone5		=10; // InlayStone5
-	BagItemList_InlayStone6		=11; // InlayStone6
-	BagItemList_EnhancedLevel		=12; // EnhancedLevel
-	BagItemList_SagecraftLevel		=13; // SagecraftLevel
-	BagItemList_SagecraftStone		=14; // SagecraftStone
-	BagItemList_RandProperty		=15; // RandProperty
-	BagItemList_Date		=16; // Date
-	BagItemList_BaseProperty		=17; // BaseProperty
 }
 
 enum EctypeList_RecordColType
