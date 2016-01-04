@@ -1,234 +1,234 @@
 package NFMsg;
 
-enum BuildingList_RecordColType
+enum RCT_BuildingList
 {
-	BuildingList_BuildingID		=0; // BuildingID
-	BuildingList_BuildingGUID		=1; // BuildingGUID
-	BuildingList_State		=2; // State
-	BuildingList_PosX		=3; // PosX
-	BuildingList_PosY		=4; // PosY
-	BuildingList_PosZ		=5; // PosZ
-	BuildingList_StateStartTime		=6; // StateStartTime
-	BuildingList_StateEndTime		=7; // StateEndTime
+	BuildingList_BuildingID		= 0; // BuildingID -- string
+	BuildingList_BuildingGUID		= 1; // BuildingGUID -- object
+	BuildingList_State		= 2; // State -- int
+	BuildingList_PosX		= 3; // PosX -- int
+	BuildingList_PosY		= 4; // PosY -- int
+	BuildingList_PosZ		= 5; // PosZ -- int
+	BuildingList_StateStartTime		= 6; // StateStartTime -- int
+	BuildingList_StateEndTime		= 7; // StateEndTime -- int
 }
 
-enum BuildingProduce_RecordColType
+enum RCT_BuildingProduce
 {
-	BuildingProduce_BuildingGUID		=0; // BuildingGUID
-	BuildingProduce_ItemID		=1; // ItemID
-	BuildingProduce_LeftCount		=2; // LeftCount
-	BuildingProduce_OnceTime		=3; // OnceTime
-	BuildingProduce_OnceStartTime		=4; // OnceStartTime
+	BuildingProduce_BuildingGUID		= 0; // BuildingGUID -- object
+	BuildingProduce_ItemID		= 1; // ItemID -- string
+	BuildingProduce_LeftCount		= 2; // LeftCount -- int
+	BuildingProduce_OnceTime		= 3; // OnceTime -- int
+	BuildingProduce_OnceStartTime		= 4; // OnceStartTime -- int
 }
 
-enum GroupMemberList_RecordColType
+enum RCT_GroupMemberList
 {
-	GroupMemberList_GUID		=0; // GUID
-	GroupMemberList_Online		=1; // Online
-	GroupMemberList_GameID		=2; // GameID
+	GroupMemberList_GUID		= 0; // GUID -- object
+	GroupMemberList_Online		= 1; // Online -- int
+	GroupMemberList_GameID		= 2; // GameID -- int
 }
 
-enum ChatList_RecordColType
+enum RCT_ChatList
 {
-	ChatList_GUID		=0; // GUID
-	ChatList_msg		=1; // msg
-	ChatList_time		=2; // time
+	ChatList_GUID		= 0; // GUID -- object
+	ChatList_msg		= 1; // msg -- string
+	ChatList_time		= 2; // time -- int
 }
 
-enum GuildBoss_RecordColType
+enum RCT_GuildBoss
 {
-	GuildBoss_GUID		=0; // GUID
-	GuildBoss_Name		=1; // Name
-	GuildBoss_Level		=2; // Level
-	GuildBoss_Job		=3; // Job
-	GuildBoss_Donation		=4; // Donation
-	GuildBoss_VIP		=5; // VIP
-	GuildBoss_Offline		=6; // Offline
-	GuildBoss_Power		=7; // Power
+	GuildBoss_GUID		= 0; // GUID -- object
+	GuildBoss_Name		= 1; // Name -- string
+	GuildBoss_Level		= 2; // Level -- int
+	GuildBoss_Job		= 3; // Job -- int
+	GuildBoss_Donation		= 4; // Donation -- int
+	GuildBoss_VIP		= 5; // VIP -- int
+	GuildBoss_Offline		= 6; // Offline -- int
+	GuildBoss_Power		= 7; // Power -- int
 }
 
-enum GuildMemberList_RecordColType
+enum RCT_GuildMemberList
 {
-	GuildMemberList_GUID		=0; // GUID
-	GuildMemberList_Name		=1; // Name
-	GuildMemberList_Level		=2; // Level
-	GuildMemberList_Job		=3; // Job
-	GuildMemberList_Donation		=4; // Donation
-	GuildMemberList_Receive		=5; // Receive
-	GuildMemberList_VIP		=6; // VIP
-	GuildMemberList_Online		=7; // Online
-	GuildMemberList_Power		=8; // Power
-	GuildMemberList_Title		=9; // Title
-	GuildMemberList_GameID		=10; // GameID
-	GuildMemberList_JoinTime		=11; // JoinTime
-	GuildMemberList_Contribution		=12; // Contribution
-	GuildMemberList_AllContribution		=13; // AllContribution
+	GuildMemberList_GUID		= 0; // GUID -- object
+	GuildMemberList_Name		= 1; // Name -- string
+	GuildMemberList_Level		= 2; // Level -- int
+	GuildMemberList_Job		= 3; // Job -- int
+	GuildMemberList_Donation		= 4; // Donation -- int
+	GuildMemberList_Receive		= 5; // Receive -- int
+	GuildMemberList_VIP		= 6; // VIP -- int
+	GuildMemberList_Online		= 7; // Online -- int
+	GuildMemberList_Power		= 8; // Power -- int
+	GuildMemberList_Title		= 9; // Title -- int
+	GuildMemberList_GameID		= 10; // GameID -- int
+	GuildMemberList_JoinTime		= 11; // JoinTime -- int
+	GuildMemberList_Contribution		= 12; // Contribution -- int
+	GuildMemberList_AllContribution		= 13; // AllContribution -- int
 }
 
-enum GuildAppyList_RecordColType
+enum RCT_GuildAppyList
 {
-	GuildAppyList_GUID		=0; // GUID
-	GuildAppyList_Name		=1; // Name
-	GuildAppyList_Level		=2; // Level
-	GuildAppyList_Job		=3; // Job
-	GuildAppyList_Donation		=4; // Donation
-	GuildAppyList_VIP		=5; // VIP
-	GuildAppyList_Power		=6; // Power
+	GuildAppyList_GUID		= 0; // GUID -- object
+	GuildAppyList_Name		= 1; // Name -- string
+	GuildAppyList_Level		= 2; // Level -- int
+	GuildAppyList_Job		= 3; // Job -- int
+	GuildAppyList_Donation		= 4; // Donation -- int
+	GuildAppyList_VIP		= 5; // VIP -- int
+	GuildAppyList_Power		= 6; // Power -- int
 }
 
-enum GuildEvent_RecordColType
+enum RCT_GuildEvent
 {
-	GuildEvent_GUID		=0; // GUID
-	GuildEvent_Name		=1; // Name
-	GuildEvent_Level		=2; // Level
-	GuildEvent_Job		=3; // Job
-	GuildEvent_Donation		=4; // Donation
-	GuildEvent_VIP		=5; // VIP
-	GuildEvent_Offline		=6; // Offline
-	GuildEvent_Power		=7; // Power
-	GuildEvent_EventID		=8; // EventID
-	GuildEvent_EventTime		=9; // EventTime
-	GuildEvent_Context		=10; // Context
+	GuildEvent_GUID		= 0; // GUID -- object
+	GuildEvent_Name		= 1; // Name -- string
+	GuildEvent_Level		= 2; // Level -- int
+	GuildEvent_Job		= 3; // Job -- int
+	GuildEvent_Donation		= 4; // Donation -- int
+	GuildEvent_VIP		= 5; // VIP -- int
+	GuildEvent_Offline		= 6; // Offline -- int
+	GuildEvent_Power		= 7; // Power -- int
+	GuildEvent_EventID		= 8; // EventID -- int
+	GuildEvent_EventTime		= 9; // EventTime -- int
+	GuildEvent_Context		= 10; // Context -- string
 }
 
-enum GuildHouse_RecordColType
+enum RCT_GuildHouse
 {
-	GuildHouse_GUID		=0; // GUID
-	GuildHouse_Name		=1; // Name
-	GuildHouse_Level		=2; // Level
-	GuildHouse_Job		=3; // Job
-	GuildHouse_Donation		=4; // Donation
-	GuildHouse_VIP		=5; // VIP
-	GuildHouse_Offline		=6; // Offline
-	GuildHouse_Power		=7; // Power
+	GuildHouse_GUID		= 0; // GUID -- object
+	GuildHouse_Name		= 1; // Name -- string
+	GuildHouse_Level		= 2; // Level -- int
+	GuildHouse_Job		= 3; // Job -- int
+	GuildHouse_Donation		= 4; // Donation -- int
+	GuildHouse_VIP		= 5; // VIP -- int
+	GuildHouse_Offline		= 6; // Offline -- int
+	GuildHouse_Power		= 7; // Power -- int
 }
 
-enum GuildSkill_RecordColType
+enum RCT_GuildSkill
 {
-	GuildSkill_GUID		=0; // GUID
-	GuildSkill_Name		=1; // Name
-	GuildSkill_Level		=2; // Level
-	GuildSkill_Job		=3; // Job
-	GuildSkill_Donation		=4; // Donation
-	GuildSkill_VIP		=5; // VIP
-	GuildSkill_Offline		=6; // Offline
-	GuildSkill_Power		=7; // Power
+	GuildSkill_GUID		= 0; // GUID -- object
+	GuildSkill_Name		= 1; // Name -- string
+	GuildSkill_Level		= 2; // Level -- int
+	GuildSkill_Job		= 3; // Job -- int
+	GuildSkill_Donation		= 4; // Donation -- int
+	GuildSkill_VIP		= 5; // VIP -- int
+	GuildSkill_Offline		= 6; // Offline -- int
+	GuildSkill_Power		= 7; // Power -- int
 }
 
-enum PosList_RecordColType
+enum RCT_PosList
 {
-	PosList_X		=0; // X
-	PosList_Y		=1; // Y
-	PosList_Z		=2; // Z
-	PosList_StayTime		=3; // StayTime
+	PosList_X		= 0; // X -- float
+	PosList_Y		= 1; // Y -- float
+	PosList_Z		= 2; // Z -- float
+	PosList_StayTime		= 3; // StayTime -- float
 }
 
-enum PlayerViewItem_RecordColType
+enum RCT_PlayerViewItem
 {
-	PlayerViewItem_ConfigID		=0; // ConfigID
-	PlayerViewItem_EnhanceLevel		=1; // EnhanceLevel
-	PlayerViewItem_InlayStone		=2; // InlayStone
-	PlayerViewItem_SagecraftLevel		=3; // SagecraftLevel
+	PlayerViewItem_ConfigID		= 0; // ConfigID -- string
+	PlayerViewItem_EnhanceLevel		= 1; // EnhanceLevel -- int
+	PlayerViewItem_InlayStone		= 2; // InlayStone -- string
+	PlayerViewItem_SagecraftLevel		= 3; // SagecraftLevel -- string
 }
 
-enum CommPropertyValue_RecordColType
+enum RCT_CommPropertyValue
 {
-	CommPropertyValue_MAXHP		=0; // MAXHP
-	CommPropertyValue_MAXMP		=1; // MAXMP
-	CommPropertyValue_MAXSP		=2; // MAXSP
-	CommPropertyValue_HPREGEN		=3; // HPREGEN
-	CommPropertyValue_SPREGEN		=4; // SPREGEN
-	CommPropertyValue_MPREGEN		=5; // MPREGEN
-	CommPropertyValue_ATK_VALUE		=6; // ATK_VALUE
-	CommPropertyValue_DEF_VALUE		=7; // DEF_VALUE
-	CommPropertyValue_MOVE_SPEED		=8; // MOVE_SPEED
-	CommPropertyValue_ATK_SPEED		=9; // ATK_SPEED
-	CommPropertyValue_ATK_FIRE		=10; // ATK_FIRE
-	CommPropertyValue_ATK_LIGHT		=11; // ATK_LIGHT
-	CommPropertyValue_ATK_ICE		=12; // ATK_ICE
-	CommPropertyValue_ATK_POISON		=13; // ATK_POISON
-	CommPropertyValue_DEF_FIRE		=14; // DEF_FIRE
-	CommPropertyValue_DEF_LIGHT		=15; // DEF_LIGHT
-	CommPropertyValue_DEF_ICE		=16; // DEF_ICE
-	CommPropertyValue_DEF_POISON		=17; // DEF_POISON
-	CommPropertyValue_DIZZY_GATE		=18; // DIZZY_GATE
-	CommPropertyValue_MOVE_GATE		=19; // MOVE_GATE
-	CommPropertyValue_SKILL_GATE		=20; // SKILL_GATE
-	CommPropertyValue_PHYSICAL_GATE		=21; // PHYSICAL_GATE
-	CommPropertyValue_MAGIC_GATE		=22; // MAGIC_GATE
-	CommPropertyValue_BUFF_GATE		=23; // BUFF_GATE
+	CommPropertyValue_MAXHP		= 0; // MAXHP -- int
+	CommPropertyValue_MAXMP		= 1; // MAXMP -- int
+	CommPropertyValue_MAXSP		= 2; // MAXSP -- int
+	CommPropertyValue_HPREGEN		= 3; // HPREGEN -- int
+	CommPropertyValue_SPREGEN		= 4; // SPREGEN -- int
+	CommPropertyValue_MPREGEN		= 5; // MPREGEN -- int
+	CommPropertyValue_ATK_VALUE		= 6; // ATK_VALUE -- int
+	CommPropertyValue_DEF_VALUE		= 7; // DEF_VALUE -- int
+	CommPropertyValue_MOVE_SPEED		= 8; // MOVE_SPEED -- int
+	CommPropertyValue_ATK_SPEED		= 9; // ATK_SPEED -- int
+	CommPropertyValue_ATK_FIRE		= 10; // ATK_FIRE -- int
+	CommPropertyValue_ATK_LIGHT		= 11; // ATK_LIGHT -- int
+	CommPropertyValue_ATK_ICE		= 12; // ATK_ICE -- int
+	CommPropertyValue_ATK_POISON		= 13; // ATK_POISON -- int
+	CommPropertyValue_DEF_FIRE		= 14; // DEF_FIRE -- int
+	CommPropertyValue_DEF_LIGHT		= 15; // DEF_LIGHT -- int
+	CommPropertyValue_DEF_ICE		= 16; // DEF_ICE -- int
+	CommPropertyValue_DEF_POISON		= 17; // DEF_POISON -- int
+	CommPropertyValue_DIZZY_GATE		= 18; // DIZZY_GATE -- int
+	CommPropertyValue_MOVE_GATE		= 19; // MOVE_GATE -- int
+	CommPropertyValue_SKILL_GATE		= 20; // SKILL_GATE -- int
+	CommPropertyValue_PHYSICAL_GATE		= 21; // PHYSICAL_GATE -- int
+	CommPropertyValue_MAGIC_GATE		= 22; // MAGIC_GATE -- int
+	CommPropertyValue_BUFF_GATE		= 23; // BUFF_GATE -- int
 }
 
-enum BagItemList_RecordColType
+enum RCT_BagItemList
 {
-	BagItemList_GUID		=0; // GUID
-	BagItemList_ConfigID		=1; // ConfigID
-	BagItemList_ItemCount		=2; // ItemCount
-	BagItemList_Bound		=3; // Bound
-	BagItemList_ExpiredType		=4; // ExpiredType
-	BagItemList_SlotCount		=5; // SlotCount
-	BagItemList_InlayStone1		=6; // InlayStone1
-	BagItemList_InlayStone2		=7; // InlayStone2
-	BagItemList_InlayStone3		=8; // InlayStone3
-	BagItemList_InlayStone4		=9; // InlayStone4
-	BagItemList_InlayStone5		=10; // InlayStone5
-	BagItemList_InlayStone6		=11; // InlayStone6
-	BagItemList_EnhancedLevel		=12; // EnhancedLevel
-	BagItemList_SagecraftLevel		=13; // SagecraftLevel
-	BagItemList_SagecraftStone		=14; // SagecraftStone
-	BagItemList_RandProperty		=15; // RandProperty
-	BagItemList_Date		=16; // Date
-	BagItemList_BaseProperty		=17; // BaseProperty
+	BagItemList_GUID		= 0; // GUID -- object
+	BagItemList_ConfigID		= 1; // ConfigID -- string
+	BagItemList_ItemCount		= 2; // ItemCount -- int
+	BagItemList_Bound		= 3; // Bound -- int
+	BagItemList_ExpiredType		= 4; // ExpiredType -- int
+	BagItemList_SlotCount		= 5; // SlotCount -- int
+	BagItemList_InlayStone1		= 6; // InlayStone1 -- string
+	BagItemList_InlayStone2		= 7; // InlayStone2 -- string
+	BagItemList_InlayStone3		= 8; // InlayStone3 -- string
+	BagItemList_InlayStone4		= 9; // InlayStone4 -- string
+	BagItemList_InlayStone5		= 10; // InlayStone5 -- string
+	BagItemList_InlayStone6		= 11; // InlayStone6 -- string
+	BagItemList_EnhancedLevel		= 12; // EnhancedLevel -- string
+	BagItemList_SagecraftLevel		= 13; // SagecraftLevel -- int
+	BagItemList_SagecraftStone		= 14; // SagecraftStone -- string
+	BagItemList_RandProperty		= 15; // RandProperty -- int
+	BagItemList_Date		= 16; // Date -- object
+	BagItemList_BaseProperty		= 17; // BaseProperty -- string
 }
 
-enum EctypeList_RecordColType
+enum RCT_EctypeList
 {
-	EctypeList_EctypeID		=0; // EctypeID
-	EctypeList_IsPass		=1; // IsPass
-	EctypeList_Star		=2; // Star
+	EctypeList_EctypeID		= 0; // EctypeID -- int
+	EctypeList_IsPass		= 1; // IsPass -- int
+	EctypeList_Star		= 2; // Star -- int
 }
 
-enum DropItemList_RecordColType
+enum RCT_DropItemList
 {
-	DropItemList_MonsterID		=0; // MonsterID
-	DropItemList_ItemID		=1; // ItemID
-	DropItemList_ItemCount		=2; // ItemCount
-	DropItemList_DrawState		=3; // DrawState
+	DropItemList_MonsterID		= 0; // MonsterID -- object
+	DropItemList_ItemID		= 1; // ItemID -- string
+	DropItemList_ItemCount		= 2; // ItemCount -- int
+	DropItemList_DrawState		= 3; // DrawState -- int
 }
 
-enum SkillTable_RecordColType
+enum RCT_SkillTable
 {
-	SkillTable_SkillID		=0; // SkillID
-	SkillTable_SkillLevel		=1; // SkillLevel
-	SkillTable_SkillStone		=2; // SkillStone
-	SkillTable_SkillSoulLevel		=3; // SkillSoulLevel
+	SkillTable_SkillID		= 0; // SkillID -- string
+	SkillTable_SkillLevel		= 1; // SkillLevel -- int
+	SkillTable_SkillStone		= 2; // SkillStone -- string
+	SkillTable_SkillSoulLevel		= 3; // SkillSoulLevel -- int
 }
 
-enum TaskMonsterList_RecordColType
+enum RCT_TaskMonsterList
 {
-	TaskMonsterList_MonsterID		=0; // MonsterID
-	TaskMonsterList_CurrentKillCount		=1; // CurrentKillCount
-	TaskMonsterList_RequireKillCount		=2; // RequireKillCount
-	TaskMonsterList_TaskID		=3; // TaskID
+	TaskMonsterList_MonsterID		= 0; // MonsterID -- string
+	TaskMonsterList_CurrentKillCount		= 1; // CurrentKillCount -- int
+	TaskMonsterList_RequireKillCount		= 2; // RequireKillCount -- int
+	TaskMonsterList_TaskID		= 3; // TaskID -- string
 }
 
-enum TaskList_RecordColType
+enum RCT_TaskList
 {
-	TaskList_TaskID		=0; // TaskID
-	TaskList_TaskStatus		=1; // TaskStatus
-	TaskList_Process		=2; // Process
+	TaskList_TaskID		= 0; // TaskID -- string
+	TaskList_TaskStatus		= 1; // TaskStatus -- int
+	TaskList_Process		= 2; // Process -- int
 }
 
-enum PVPList_RecordColType
+enum RCT_PVPList
 {
-	PVPList_ID		=0; // ID
-	PVPList_Name		=1; // Name
-	PVPList_Level		=2; // Level
+	PVPList_ID		= 0; // ID -- object
+	PVPList_Name		= 1; // Name -- string
+	PVPList_Level		= 2; // Level -- int
 }
 
-enum ChatGroup_RecordColType
+enum RCT_ChatGroup
 {
-	ChatGroup_ChatType		=0; // ChatType
-	ChatGroup_GroupGUID		=1; // GroupGUID
+	ChatGroup_ChatType		= 0; // ChatType -- int
+	ChatGroup_GroupGUID		= 1; // GroupGUID -- object
 }
 
