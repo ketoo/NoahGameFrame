@@ -86,34 +86,22 @@ int NFCItemModule::OnRequireUseItemEvent( const NFGUID& self, const int nEventID
     NF_SHARE_PTR<NFIRecord> pRecordPack = m_pKernelModule->FindRecord(self, mstrPackTableName);
     if (pRecordPack)
     {
-		const bool bRet = m_pPackModule->DeleteItem(self, strItemID, 1);
-		if (bRet)
-		{
-			int nItemType = m_pElementInfoModule->GetPropertyInt(strItemID, "ItemType");
-			NFIItemConsumeProcessModule* pConsumeProcessModule = m_pItemConsumeManagerModule->GetConsumeModule(nItemType);
-			if (pConsumeProcessModule)
-			{
-				if (pConsumeProcessModule->ConsumeLegal(self, strItemID, xTargetID) > 0)
-				{
-					int nResult = pConsumeProcessModule->ConsumeProcess(self, strItemID, xTargetID);
-
-					//结果事件--无论失败或者是成功，都会发下去--当然使用结果只对使用者下发--成果的结果，还得对被施放的人发
-					// 					NFCDataList valueResult;
-					// 					valueResult.AddObject(NFGUID());
-					// 					valueResult.AddInt(nResult);
-					// 					valueResult.Append(valueOther, 0, valueOther.GetCount());
-					// 
-					// 					m_pEventProcessModule->DoEvent(self, NFED_ON_CLIENT_USE_ITEM_RESULT, valueResult);
-
-					return 0;
-				}
-			}
-		}
+// 		const bool bRet = m_pPackModule->DeleteItem(self, strItemID, 1);
+// 		if (bRet)
+// 		{
+// 			int nItemType = m_pElementInfoModule->GetPropertyInt(strItemID, "ItemType");
+// 			NFIItemConsumeProcessModule* pConsumeProcessModule = m_pItemConsumeManagerModule->GetConsumeModule(nItemType);
+// 			if (pConsumeProcessModule)
+// 			{
+// 				if (pConsumeProcessModule->ConsumeLegal(self, strItemID, xTargetID) > 0)
+// 				{
+// 					pConsumeProcessModule->ConsumeProcess(self, strItemID, xTargetID);
+// 
+// 					return 0;
+// 				}
+// 			}
+// 		}
 	}
-
-//     NFCDataList valueError;
-//     valueError.AddInt((int)errorCode);
-//     m_pEventProcessModule->DoEvent(self, NFED_ON_GENERAL_MESSAGE, valueError);
 
     return 0;
 }
