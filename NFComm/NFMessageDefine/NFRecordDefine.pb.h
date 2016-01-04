@@ -156,11 +156,14 @@ enum GuildMemberList_RecordColType {
   GuildMemberList_Online = 7,
   GuildMemberList_Power = 8,
   GuildMemberList_Title = 9,
-  GuildMemberList_GameID = 10
+  GuildMemberList_GameID = 10,
+  GuildMemberList_JoinTime = 11,
+  GuildMemberList_Contribution = 12,
+  GuildMemberList_AllContribution = 13
 };
 bool GuildMemberList_RecordColType_IsValid(int value);
 const GuildMemberList_RecordColType GuildMemberList_RecordColType_MIN = GuildMemberList_GUID;
-const GuildMemberList_RecordColType GuildMemberList_RecordColType_MAX = GuildMemberList_GameID;
+const GuildMemberList_RecordColType GuildMemberList_RecordColType_MAX = GuildMemberList_AllContribution;
 const int GuildMemberList_RecordColType_ARRAYSIZE = GuildMemberList_RecordColType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* GuildMemberList_RecordColType_descriptor();
@@ -173,6 +176,30 @@ inline bool GuildMemberList_RecordColType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<GuildMemberList_RecordColType>(
     GuildMemberList_RecordColType_descriptor(), name, value);
 }
+enum GuildAppyList_RecordColType {
+  GuildAppyList_GUID = 0,
+  GuildAppyList_Name = 1,
+  GuildAppyList_Level = 2,
+  GuildAppyList_Job = 3,
+  GuildAppyList_Donation = 4,
+  GuildAppyList_VIP = 5,
+  GuildAppyList_Power = 6
+};
+bool GuildAppyList_RecordColType_IsValid(int value);
+const GuildAppyList_RecordColType GuildAppyList_RecordColType_MIN = GuildAppyList_GUID;
+const GuildAppyList_RecordColType GuildAppyList_RecordColType_MAX = GuildAppyList_Power;
+const int GuildAppyList_RecordColType_ARRAYSIZE = GuildAppyList_RecordColType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* GuildAppyList_RecordColType_descriptor();
+inline const ::std::string& GuildAppyList_RecordColType_Name(GuildAppyList_RecordColType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    GuildAppyList_RecordColType_descriptor(), value);
+}
+inline bool GuildAppyList_RecordColType_Parse(
+    const ::std::string& name, GuildAppyList_RecordColType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<GuildAppyList_RecordColType>(
+    GuildAppyList_RecordColType_descriptor(), name, value);
+}
 enum GuildEvent_RecordColType {
   GuildEvent_GUID = 0,
   GuildEvent_Name = 1,
@@ -181,11 +208,14 @@ enum GuildEvent_RecordColType {
   GuildEvent_Donation = 4,
   GuildEvent_VIP = 5,
   GuildEvent_Offline = 6,
-  GuildEvent_Power = 7
+  GuildEvent_Power = 7,
+  GuildEvent_EventID = 8,
+  GuildEvent_EventTime = 9,
+  GuildEvent_Context = 10
 };
 bool GuildEvent_RecordColType_IsValid(int value);
 const GuildEvent_RecordColType GuildEvent_RecordColType_MIN = GuildEvent_GUID;
-const GuildEvent_RecordColType GuildEvent_RecordColType_MAX = GuildEvent_Power;
+const GuildEvent_RecordColType GuildEvent_RecordColType_MAX = GuildEvent_Context;
 const int GuildEvent_RecordColType_ARRAYSIZE = GuildEvent_RecordColType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* GuildEvent_RecordColType_descriptor();
@@ -290,6 +320,101 @@ inline bool PlayerViewItem_RecordColType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<PlayerViewItem_RecordColType>(
     PlayerViewItem_RecordColType_descriptor(), name, value);
 }
+enum Record_PlayerHero_RecordColType {
+  Record_PlayerHero_GUID = 0,
+  Record_PlayerHero_ConfigID = 1,
+  Record_PlayerHero_Level = 2,
+  Record_PlayerHero_Exp = 3,
+  Record_PlayerHero_Equip1 = 4,
+  Record_PlayerHero_Equip2 = 5,
+  Record_PlayerHero_Equip3 = 6,
+  Record_PlayerHero_Equip4 = 7,
+  Record_PlayerHero_Equip5 = 8,
+  Record_PlayerHero_Equip6 = 9
+};
+bool Record_PlayerHero_RecordColType_IsValid(int value);
+const Record_PlayerHero_RecordColType Record_PlayerHero_RecordColType_MIN = Record_PlayerHero_GUID;
+const Record_PlayerHero_RecordColType Record_PlayerHero_RecordColType_MAX = Record_PlayerHero_Equip6;
+const int Record_PlayerHero_RecordColType_ARRAYSIZE = Record_PlayerHero_RecordColType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* Record_PlayerHero_RecordColType_descriptor();
+inline const ::std::string& Record_PlayerHero_RecordColType_Name(Record_PlayerHero_RecordColType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    Record_PlayerHero_RecordColType_descriptor(), value);
+}
+inline bool Record_PlayerHero_RecordColType_Parse(
+    const ::std::string& name, Record_PlayerHero_RecordColType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<Record_PlayerHero_RecordColType>(
+    Record_PlayerHero_RecordColType_descriptor(), name, value);
+}
+enum BagEquipList_RecordColType {
+  BagEquipList_GUID = 0,
+  BagEquipList_WearGUID = 1,
+  BagEquipList_ConfigID = 2,
+  BagEquipList_Bound = 3,
+  BagEquipList_ExpiredType = 4,
+  BagEquipList_RandPropertyID = 5,
+  BagEquipList_Date = 6,
+  BagEquipList_SlotCount = 7,
+  BagEquipList_InlayStone1 = 8,
+  BagEquipList_InlayStone2 = 9,
+  BagEquipList_InlayStone3 = 10,
+  BagEquipList_InlayStone4 = 11,
+  BagEquipList_InlayStone5 = 12,
+  BagEquipList_InlayStone6 = 13,
+  BagEquipList_InlayStone7 = 14,
+  BagEquipList_InlayStone8 = 15,
+  BagEquipList_InlayStone9 = 16,
+  BagEquipList_InlayStone10 = 17,
+  BagEquipList_IntensifyLevel = 18,
+  BagEquipList_ElementLevel1 = 19,
+  BagEquipList_ElementLevel2 = 20,
+  BagEquipList_ElementLevel3 = 21,
+  BagEquipList_ElementLevel4 = 22,
+  BagEquipList_ElementLevel5 = 23,
+  BagEquipList_ElementLevel6 = 24,
+  BagEquipList_ElementLevel7 = 25,
+  BagEquipList_ElementLevel8 = 26,
+  BagEquipList_ElementLevel9 = 27,
+  BagEquipList_ElementLevel10 = 28
+};
+bool BagEquipList_RecordColType_IsValid(int value);
+const BagEquipList_RecordColType BagEquipList_RecordColType_MIN = BagEquipList_GUID;
+const BagEquipList_RecordColType BagEquipList_RecordColType_MAX = BagEquipList_ElementLevel10;
+const int BagEquipList_RecordColType_ARRAYSIZE = BagEquipList_RecordColType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* BagEquipList_RecordColType_descriptor();
+inline const ::std::string& BagEquipList_RecordColType_Name(BagEquipList_RecordColType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    BagEquipList_RecordColType_descriptor(), value);
+}
+inline bool BagEquipList_RecordColType_Parse(
+    const ::std::string& name, BagEquipList_RecordColType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<BagEquipList_RecordColType>(
+    BagEquipList_RecordColType_descriptor(), name, value);
+}
+enum BagItemList_RecordColType {
+  BagItemList_ConfigID = 0,
+  BagItemList_ItemCount = 1,
+  BagItemList_Bound = 2,
+  BagItemList_ExpiredType = 3,
+  BagItemList_Date = 4
+};
+bool BagItemList_RecordColType_IsValid(int value);
+const BagItemList_RecordColType BagItemList_RecordColType_MIN = BagItemList_ConfigID;
+const BagItemList_RecordColType BagItemList_RecordColType_MAX = BagItemList_Date;
+const int BagItemList_RecordColType_ARRAYSIZE = BagItemList_RecordColType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* BagItemList_RecordColType_descriptor();
+inline const ::std::string& BagItemList_RecordColType_Name(BagItemList_RecordColType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    BagItemList_RecordColType_descriptor(), value);
+}
+inline bool BagItemList_RecordColType_Parse(
+    const ::std::string& name, BagItemList_RecordColType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<BagItemList_RecordColType>(
+    BagItemList_RecordColType_descriptor(), name, value);
+}
 enum CommPropertyValue_RecordColType {
   CommPropertyValue_MAXHP = 0,
   CommPropertyValue_MAXMP = 1,
@@ -330,41 +455,6 @@ inline bool CommPropertyValue_RecordColType_Parse(
     const ::std::string& name, CommPropertyValue_RecordColType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<CommPropertyValue_RecordColType>(
     CommPropertyValue_RecordColType_descriptor(), name, value);
-}
-enum BagItemList_RecordColType {
-  BagItemList_GUID = 0,
-  BagItemList_ConfigID = 1,
-  BagItemList_ItemCount = 2,
-  BagItemList_Bound = 3,
-  BagItemList_ExpiredType = 4,
-  BagItemList_SlotCount = 5,
-  BagItemList_InlayStone1 = 6,
-  BagItemList_InlayStone2 = 7,
-  BagItemList_InlayStone3 = 8,
-  BagItemList_InlayStone4 = 9,
-  BagItemList_InlayStone5 = 10,
-  BagItemList_InlayStone6 = 11,
-  BagItemList_EnhancedLevel = 12,
-  BagItemList_SagecraftLevel = 13,
-  BagItemList_SagecraftStone = 14,
-  BagItemList_RandProperty = 15,
-  BagItemList_Date = 16,
-  BagItemList_BaseProperty = 17
-};
-bool BagItemList_RecordColType_IsValid(int value);
-const BagItemList_RecordColType BagItemList_RecordColType_MIN = BagItemList_GUID;
-const BagItemList_RecordColType BagItemList_RecordColType_MAX = BagItemList_BaseProperty;
-const int BagItemList_RecordColType_ARRAYSIZE = BagItemList_RecordColType_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* BagItemList_RecordColType_descriptor();
-inline const ::std::string& BagItemList_RecordColType_Name(BagItemList_RecordColType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    BagItemList_RecordColType_descriptor(), value);
-}
-inline bool BagItemList_RecordColType_Parse(
-    const ::std::string& name, BagItemList_RecordColType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<BagItemList_RecordColType>(
-    BagItemList_RecordColType_descriptor(), name, value);
 }
 enum EctypeList_RecordColType {
   EctypeList_EctypeID = 0,
@@ -550,6 +640,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::GuildMemberList_RecordC
   return ::NFMsg::GuildMemberList_RecordColType_descriptor();
 }
 template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::GuildAppyList_RecordColType>() {
+  return ::NFMsg::GuildAppyList_RecordColType_descriptor();
+}
+template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::GuildEvent_RecordColType>() {
   return ::NFMsg::GuildEvent_RecordColType_descriptor();
 }
@@ -570,12 +664,20 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::PlayerViewItem_RecordCo
   return ::NFMsg::PlayerViewItem_RecordColType_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::CommPropertyValue_RecordColType>() {
-  return ::NFMsg::CommPropertyValue_RecordColType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::Record_PlayerHero_RecordColType>() {
+  return ::NFMsg::Record_PlayerHero_RecordColType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::BagEquipList_RecordColType>() {
+  return ::NFMsg::BagEquipList_RecordColType_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::BagItemList_RecordColType>() {
   return ::NFMsg::BagItemList_RecordColType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::CommPropertyValue_RecordColType>() {
+  return ::NFMsg::CommPropertyValue_RecordColType_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EctypeList_RecordColType>() {
