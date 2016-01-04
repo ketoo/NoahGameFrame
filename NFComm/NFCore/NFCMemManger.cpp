@@ -21,7 +21,7 @@
 #endif
 
 #include "NFCMemManger.h"
-#include "gperftools/malloc_extension.h"
+#include "Dependencies/gperftools-2.1/src/gperftools/malloc_extension.h"
 
 NFCMemManger::NFCMemManger()
 {
