@@ -173,6 +173,8 @@ protected:
     int OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
     int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar);
 
+    void ProcessMemFree(const float fLasFrametime, const float fStartedTime);
+
 protected:
 
     std::list<NFGUID> mtDeleteSelfList;
@@ -204,6 +206,8 @@ private:
     NFIElementInfoModule* m_pElementInfoModule;
 	NFIEventProcessModule* m_pEventProcessModule;
 	NFIUUIDModule* m_pUUIDModule;
+
+    float mfLastCheckMemFree;
 };
 
 #endif
