@@ -1,8 +1,3 @@
-#include "NFCMem.h"
-
-#include "NFComm/NFPluginModule/NFPlatform.h"
-#include "gperftools/malloc_extension.h"
-
 #ifdef NF_DEBUG_MODE
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
@@ -25,8 +20,20 @@
 
 #endif
 
-//__tcmalloc
-void NFCMem::FreeMem()
+#include "NFCMemManger.h"
+#include "gperftools/malloc_extension.h"
+
+NFCMemManger::NFCMemManger()
+{
+
+}
+
+NFCMemManger::~NFCMemManger()
+{
+
+}
+
+void NFCMemManger::FreeMem()
 {
     // »ØÊÕÄÚ´æ
     MallocExtension::instance()->ReleaseFreeMemory();
