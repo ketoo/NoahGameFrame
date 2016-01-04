@@ -541,7 +541,7 @@ void NFCGameServerToWorldModule::SendOnline( const NFGUID& self )
         {
             if (pChatGroup->IsUsed(i))
             {
-                const NFGUID& xChatGroup = pChatGroup->GetObject(i , NFMsg::ChatGroup_RecordColType::ChatGroup_GroupGUID); 
+                const NFGUID& xChatGroup = pChatGroup->GetObject(i , NFMsg::RCT_ChatGroup::ChatGroup_GroupGUID); 
                 SubscriptionChatGroup(self, xChatGroup);
             }
         }
@@ -564,7 +564,7 @@ void NFCGameServerToWorldModule::SendOffline( const NFGUID& self )
         {
             if (pChatGroup->IsUsed(i))
             {
-                const NFGUID& xChatGroup = pChatGroup->GetObject(i , NFMsg::ChatGroup_RecordColType::ChatGroup_GroupGUID); 
+                const NFGUID& xChatGroup = pChatGroup->GetObject(i , NFMsg::RCT_ChatGroup::ChatGroup_GroupGUID); 
                 CancelSubscriptionChatGroup(self, xChatGroup);
             }
         }
@@ -666,7 +666,7 @@ void NFCGameServerToWorldModule::OnAckQuitChatGroupProcess(const int nSockIndex,
             if (NULL != pChatGroup)
             {
                 NFCDataList varList;
-                pChatGroup->FindObject(NFMsg::ChatGroup_RecordColType::ChatGroup_GroupGUID, xChatGroup, varList);
+                pChatGroup->FindObject(NFMsg::RCT_ChatGroup::ChatGroup_GroupGUID, xChatGroup, varList);
                 pChatGroup->Remove(varList);
 
                 CancelSubscriptionChatGroup(nPlayerID, xChatGroup);
