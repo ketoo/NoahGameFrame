@@ -472,10 +472,10 @@ int NFCPackModule::OnObjectBeKilled(const NFGUID& self, const int nEventID, cons
     }
 
     NFCDataList varResult;
-    int nRowCount = pRecord->FindObject(NFMsg::DropItemList_RecordColType::DropItemList_MonsterID, self, varResult);
+    int nRowCount = pRecord->FindObject(NFMsg::RCT_DropItemList::DropItemList_MonsterID, self, varResult);
     for (int i = 0; i < nRowCount; ++i)
     {
-        pRecord->SetInt(varResult.Int(i), NFMsg::DropItemList_RecordColType::DropItemList_DrawState, NFMsg::E_DRAW_STATE_GAIN);
+        pRecord->SetInt(varResult.Int(i), NFMsg::RCT_DropItemList::DropItemList_DrawState, NFMsg::E_DRAW_STATE_GAIN);
     }
 
     return 0;
@@ -603,9 +603,9 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 	}
 	else
 	{
-		int nOldCount = pRecord->GetInt(nRow, NFMsg::BagItemList_RecordColType::BagItemList_ItemCount);
+		int nOldCount = pRecord->GetInt(nRow, NFMsg::RCT_BagItemList::BagItemList_ItemCount);
 		int nNewCount = nOldCount + nCount;
-		pRecord->SetInt(nRow, NFMsg::BagItemList_RecordColType::BagItemList_ItemCount, nNewCount);
+		pRecord->SetInt(nRow, NFMsg::RCT_BagItemList::BagItemList_ItemCount, nNewCount);
 	}
 
 	return 0;
@@ -642,7 +642,7 @@ int NFCPackModule::FindItemRowByConfig( const NFGUID& self, const std::string& s
 	{
 		if (pRecord->IsUsed(i))
 		{
-			const std::string& strCfgID = pRecord->GetString(i, NFMsg::BagItemList_RecordColType::BagItemList_ConfigID);
+			const std::string& strCfgID = pRecord->GetString(i, NFMsg::RCT_BagItemList::BagItemList_ConfigID);
 			if (strCfgID == strItemConfigID)
 			{
 				return i;
@@ -678,14 +678,14 @@ bool NFCPackModule::DeleteEquip( const NFGUID& self, const NFGUID& id )
 	{
 		if (pRecord->IsUsed(i))
 		{
-			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::RCT_BagEquipList::BagEquipList_GUID);
 			if (xID == id)
 			{
-				const NFGUID& xWearID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_WearGUID);
+				const NFGUID& xWearID = pRecord->GetObject(i, NFMsg::RCT_BagEquipList::BagEquipList_WearGUID);
 				if (!xWearID.IsNull())
 				{
 					//看是玩家装备，还是英雄装备
-					const std::string& strCfgID = pRecord->GetString(i, NFMsg::BagEquipList_RecordColType::BagEquipList_ConfigID);
+					const std::string& strCfgID = pRecord->GetString(i, NFMsg::RCT_BagEquipList::BagEquipList_ConfigID);
 
 				}
 
@@ -732,13 +732,13 @@ bool NFCPackModule::DeleteItem( const NFGUID& self, const std::string& strItemCo
 	int nRow = FindItemRowByConfig(self, strItemConfigID);
 	if (nRow >= 0)
 	{
-		int nOldCount = pRecord->GetInt(nRow, NFMsg::BagItemList_RecordColType::BagItemList_ItemCount);
+		int nOldCount = pRecord->GetInt(nRow, NFMsg::RCT_BagItemList::BagItemList_ItemCount);
 		int nNewCount = nOldCount - nCount;
 		if (nNewCount >= 0)
 		{
 			if (nNewCount > 0)
 			{
-				pRecord->SetInt(nRow, NFMsg::BagItemList_RecordColType::BagItemList_ItemCount, nNewCount);
+				pRecord->SetInt(nRow, NFMsg::RCT_BagItemList::BagItemList_ItemCount, nNewCount);
 			}
 			else
 			{
@@ -789,7 +789,7 @@ bool NFCPackModule::DressEquipForHero( const NFGUID& self, const NFGUID& hero, c
 	{
 		if (pEquipRecord->IsUsed(i))
 		{
-			const NFGUID& xID = pEquipRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			const NFGUID& xID = pEquipRecord->GetObject(i, NFMsg::RCT_BagEquipList::BagEquipList_GUID);
 			if (xID == id)
 			{
 				nEquipRow = i;
@@ -802,10 +802,10 @@ bool NFCPackModule::DressEquipForHero( const NFGUID& self, const NFGUID& hero, c
 	{
 		if (pHeroRecord->IsUsed(i))
 		{
-			const NFGUID& xHeroID = pHeroRecord->GetObject(i, NFMsg::Record_PlayerHero_RecordColType::Record_PlayerHero_GUID);
+			const NFGUID& xHeroID = pHeroRecord->GetObject(i, NFMsg::RCT_PlayerHero::PlayerHero_GUID);
 			if (xHeroID == hero)
 			{
-				for (int j = NFMsg::Record_PlayerHero_RecordColType::Record_PlayerHero_Equip1; i <= NFMsg::Record_PlayerHero_RecordColType::Record_PlayerHero_Equip6; ++j)
+				for (int j = NFMsg::RCT_PlayerHero::PlayerHero_Equip1; i <= NFMsg::RCT_PlayerHero::PlayerHero_Equip6; ++j)
 				{
 					const NFGUID& xHeroEquip = pHeroRecord->GetObject(i, j);
 					if (xHeroEquip.IsNull())
@@ -824,7 +824,7 @@ bool NFCPackModule::DressEquipForHero( const NFGUID& self, const NFGUID& hero, c
 	{
 		//找到了装备,也找到了英雄--还要查看装备是什么类型，然后放什么位置
 		pHeroRecord->SetObject(nHeroRow, nHeroEquipCol, id);
-		pEquipRecord->SetObject(nEquipRow, NFMsg::BagEquipList_RecordColType::BagEquipList_WearGUID, hero);
+		pEquipRecord->SetObject(nEquipRow, NFMsg::RCT_BagEquipList::BagEquipList_WearGUID, hero);
 	}
 
 	return false;
@@ -863,7 +863,7 @@ bool NFCPackModule::TakeOffEquipForm( const NFGUID& self, const NFGUID& hero, co
 	{
 		if (pEquipRecord->IsUsed(i))
 		{
-			const NFGUID& xID = pEquipRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			const NFGUID& xID = pEquipRecord->GetObject(i, NFMsg::RCT_BagEquipList::BagEquipList_GUID);
 			if (xID == id)
 			{
 				nEquipRow = i;
@@ -876,10 +876,10 @@ bool NFCPackModule::TakeOffEquipForm( const NFGUID& self, const NFGUID& hero, co
 	{
 		if (pHeroRecord->IsUsed(i))
 		{
-			const NFGUID& xHeroID = pHeroRecord->GetObject(i, NFMsg::Record_PlayerHero_RecordColType::Record_PlayerHero_GUID);
+			const NFGUID& xHeroID = pHeroRecord->GetObject(i, NFMsg::RCT_PlayerHero::PlayerHero_GUID);
 			if (xHeroID == hero)
 			{
-				for (int j = NFMsg::Record_PlayerHero_RecordColType::Record_PlayerHero_Equip1; i <= NFMsg::Record_PlayerHero_RecordColType::Record_PlayerHero_Equip6; ++j)
+				for (int j = NFMsg::RCT_PlayerHero::PlayerHero_Equip1; i <= NFMsg::RCT_PlayerHero::PlayerHero_Equip6; ++j)
 				{
 					const NFGUID& xHeroEquip = pHeroRecord->GetObject(i, j);
 					if (xHeroEquip == id)
@@ -898,7 +898,7 @@ bool NFCPackModule::TakeOffEquipForm( const NFGUID& self, const NFGUID& hero, co
 	{
 		//找到了装备,也找到了英雄--还要查看装备是什么类型，然后放什么位置
 		pHeroRecord->SetObject(nHeroRow, nHeroEquipCol, NULL_OBJECT);
-		pEquipRecord->SetObject(nEquipRow, NFMsg::BagEquipList_RecordColType::BagEquipList_WearGUID, NULL_OBJECT);
+		pEquipRecord->SetObject(nEquipRow, NFMsg::RCT_BagEquipList::BagEquipList_WearGUID, NULL_OBJECT);
 	}
 
 	return false;
@@ -933,11 +933,11 @@ int NFCPackModule::SetEquipRandPropertyID( const NFGUID& self, const NFGUID& id,
 	{
 		if (pRecord->IsUsed(i))
 		{
-			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::RCT_BagEquipList::BagEquipList_GUID);
 			if (xID == id)
 			{
 				//看是玩家装备，还是英雄装备
-				pRecord->SetString(i, NFMsg::BagEquipList_RecordColType::BagEquipList_RandPropertyID, strPropertyID.c_str());
+				pRecord->SetString(i, NFMsg::RCT_BagEquipList::BagEquipList_RandPropertyID, strPropertyID.c_str());
 			}
 		}
 	}
@@ -967,11 +967,11 @@ const std::string& NFCPackModule::GetEquipRandPropertyID( const NFGUID& self, co
 	{
 		if (pRecord->IsUsed(i))
 		{
-			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::RCT_BagEquipList::BagEquipList_GUID);
 			if (xID == id)
 			{
 				//看是玩家装备，还是英雄装备
-				return pRecord->GetString(i, NFMsg::BagEquipList_RecordColType::BagEquipList_RandPropertyID);
+				return pRecord->GetString(i, NFMsg::RCT_BagEquipList::BagEquipList_RandPropertyID);
 			}
 		}
 	}
@@ -982,7 +982,7 @@ const std::string& NFCPackModule::GetEquipRandPropertyID( const NFGUID& self, co
 bool NFCPackModule::SetEquipHoleCount( const NFGUID& self, const NFGUID& id, const int nCount )
 {
 	if (nCount <= 0
-		|| nCount > (NFMsg::BagEquipList_RecordColType::BagEquipList_InlayStone10 - NFMsg::BagEquipList_RecordColType::BagEquipList_InlayStone1))
+		|| nCount > (NFMsg::RCT_BagEquipList::BagEquipList_InlayStone10 - NFMsg::RCT_BagEquipList::BagEquipList_InlayStone1))
 	{
 		return false;
 	}
@@ -1009,11 +1009,11 @@ bool NFCPackModule::SetEquipHoleCount( const NFGUID& self, const NFGUID& id, con
 	{
 		if (pRecord->IsUsed(i))
 		{
-			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::RCT_BagEquipList::BagEquipList_GUID);
 			if (xID == id)
 			{
 				//看是玩家装备，还是英雄装备
-				pRecord->SetInt(i, NFMsg::BagEquipList_RecordColType::BagEquipList_SlotCount, nCount);
+				pRecord->SetInt(i, NFMsg::RCT_BagEquipList::BagEquipList_SlotCount, nCount);
 				return true;
 			}
 		}
@@ -1046,11 +1046,11 @@ int NFCPackModule::GetEquipHoleCount( const NFGUID& self, const NFGUID& id )
 	{
 		if (pRecord->IsUsed(i))
 		{
-			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::RCT_BagEquipList::BagEquipList_GUID);
 			if (xID == id)
 			{
 				//看是玩家装备，还是英雄装备
-				return pRecord->GetInt(i, NFMsg::BagEquipList_RecordColType::BagEquipList_SlotCount);
+				return pRecord->GetInt(i, NFMsg::RCT_BagEquipList::BagEquipList_SlotCount);
 			}
 		}
 	}
@@ -1058,7 +1058,7 @@ int NFCPackModule::GetEquipHoleCount( const NFGUID& self, const NFGUID& id )
 	return 0;
 }
 
-bool NFCPackModule::SetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFMsg::BagEquipList_RecordColType eIndex, const std::string& strPropertyID )
+bool NFCPackModule::SetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFMsg::RCT_BagEquipList eIndex, const std::string& strPropertyID )
 {
 	if (id.IsNull())
 	{
@@ -1087,7 +1087,7 @@ bool NFCPackModule::SetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, 
 	{
 		if (pRecord->IsUsed(i))
 		{
-			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::RCT_BagEquipList::BagEquipList_GUID);
 			if (xID == id)
 			{
 				//看是玩家装备，还是英雄装备
@@ -1099,7 +1099,7 @@ bool NFCPackModule::SetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, 
 	return false;
 }
 
-const std::string& NFCPackModule::GetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFMsg::BagEquipList_RecordColType eIndex )
+const std::string& NFCPackModule::GetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFMsg::RCT_BagEquipList eIndex )
 {
 	if (id.IsNull())
 	{
@@ -1123,7 +1123,7 @@ const std::string& NFCPackModule::GetEquipInlayStoneID( const NFGUID& self, cons
 	{
 		if (pRecord->IsUsed(i))
 		{
-			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::RCT_BagEquipList::BagEquipList_GUID);
 			if (xID == id)
 			{
 				//看是玩家装备，还是英雄装备
@@ -1164,11 +1164,11 @@ bool NFCPackModule::SetEquipIntensifyLevel( const NFGUID& self, const NFGUID& id
 	{
 		if (pRecord->IsUsed(i))
 		{
-			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::RCT_BagEquipList::BagEquipList_GUID);
 			if (xID == id)
 			{
 				//看是玩家装备，还是英雄装备
-				return pRecord->SetInt(i, NFMsg::BagEquipList_RecordColType::BagEquipList_IntensifyLevel, nLevel);
+				return pRecord->SetInt(i, NFMsg::RCT_BagEquipList::BagEquipList_IntensifyLevel, nLevel);
 			}
 		}
 	}
@@ -1200,11 +1200,11 @@ int NFCPackModule::GetEquipIntensifyLevel( const NFGUID& self, const NFGUID& id 
 	{
 		if (pRecord->IsUsed(i))
 		{
-			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::RCT_BagEquipList::BagEquipList_GUID);
 			if (xID == id)
 			{
 				//看是玩家装备，还是英雄装备
-				return pRecord->GetInt(i, NFMsg::BagEquipList_RecordColType::BagEquipList_IntensifyLevel);
+				return pRecord->GetInt(i, NFMsg::RCT_BagEquipList::BagEquipList_IntensifyLevel);
 			}
 		}
 	}
@@ -1212,7 +1212,7 @@ int NFCPackModule::GetEquipIntensifyLevel( const NFGUID& self, const NFGUID& id 
 	return 0;
 }
 
-bool NFCPackModule::SetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFMsg::BagEquipList_RecordColType eIndex, const int nLevel )
+bool NFCPackModule::SetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFMsg::RCT_BagEquipList eIndex, const int nLevel )
 {
 	if (id.IsNull())
 	{
@@ -1241,7 +1241,7 @@ bool NFCPackModule::SetEquipElementLevel( const NFGUID& self, const NFGUID& id, 
 	{
 		if (pRecord->IsUsed(i))
 		{
-			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::RCT_BagEquipList::BagEquipList_GUID);
 			if (xID == id)
 			{
 				//看是玩家装备，还是英雄装备
@@ -1253,7 +1253,7 @@ bool NFCPackModule::SetEquipElementLevel( const NFGUID& self, const NFGUID& id, 
 	return false;
 }
 
-int NFCPackModule::GetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFMsg::BagEquipList_RecordColType eIndex )
+int NFCPackModule::GetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFMsg::RCT_BagEquipList eIndex )
 {
 	if (id.IsNull())
 	{
@@ -1277,7 +1277,7 @@ int NFCPackModule::GetEquipElementLevel( const NFGUID& self, const NFGUID& id, N
 	{
 		if (pRecord->IsUsed(i))
 		{
-			const NFGUID& xID = pRecord->GetObject(i, NFMsg::BagEquipList_RecordColType::BagEquipList_GUID);
+			const NFGUID& xID = pRecord->GetObject(i, NFMsg::RCT_BagEquipList::BagEquipList_GUID);
 			if (xID == id)
 			{
 				//看是玩家装备，还是英雄装备
