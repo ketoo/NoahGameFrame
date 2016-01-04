@@ -941,6 +941,8 @@ int NFCPackModule::SetEquipRandPropertyID( const NFGUID& self, const NFGUID& id,
 			}
 		}
 	}
+
+	return 0;
 }
 
 const std::string& NFCPackModule::GetEquipRandPropertyID( const NFGUID& self, const NFGUID& id )
