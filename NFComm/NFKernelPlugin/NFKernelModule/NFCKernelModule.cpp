@@ -18,12 +18,13 @@
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
+#include "NFComm/NFCore/NFCMemManger.h"
 
 NFCKernelModule::NFCKernelModule(NFIPluginManager* p)
 {
 	fLastTotal = 0.0f;
 	pPluginManager = p;
-
+    mfLastCheckMemFree = 0.0f;
 	InitRandom();
 }
 
@@ -83,6 +84,7 @@ bool NFCKernelModule::Shut()
 
 bool NFCKernelModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
+    ProcessMemFree(fLasFrametime, fStartedTime);
 	mnCurExeObject = NFGUID();
 
 	if (mtDeleteSelfList.size() > 0)
@@ -122,7 +124,6 @@ bool NFCKernelModule::Execute(const float fLasFrametime, const float fStartedTim
 	}
 
 	fLastTotal = 0.0f;
-
 	return true;
 }
 
@@ -1557,4 +1558,18 @@ bool NFCKernelModule::AddEventCallBack(const NFGUID& self, const int nEventID, c
 bool NFCKernelModule::AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb)
 {
 	return m_pEventProcessModule->AddClassCallBack(strClassName, cb);
+}
+
+void NFCKernelModule::ProcessMemFree( const float fLasFrametime, const float fStartedTime )
+{
+    if (mfLastCheckMemFree < 30.0f)
+    {
+        mfLastCheckMemFree += fLasFrametime;
+
+        return ;
+    }
+
+    mfLastCheckMemFree = 0;
+
+    NFCMemManger::GetSingletonPtr()->FreeMem();
 }
