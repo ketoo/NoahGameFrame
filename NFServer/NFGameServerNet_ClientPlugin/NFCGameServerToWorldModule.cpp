@@ -575,7 +575,7 @@ int NFCGameServerToWorldModule::TransPBToProxy(const int nSockIndex, const int n
 {
     NFGUID nPlayerID;
     std::string strData;
-    if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen,strData, nPlayerID))
+    if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, strData, nPlayerID))
     {
         return 0;
     }
