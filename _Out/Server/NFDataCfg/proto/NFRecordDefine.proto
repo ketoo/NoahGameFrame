@@ -1,6 +1,6 @@
-package NFMsg;
+package NFrame;
 
-enum RCT_BuildingList
+enum BuildingList
 {
 	BuildingID		= 0; // BuildingID -- string
 	BuildingGUID		= 1; // BuildingGUID -- object
@@ -12,7 +12,7 @@ enum RCT_BuildingList
 	StateEndTime		= 7; // StateEndTime -- int
 }
 
-enum RCT_BuildingProduce
+enum BuildingProduce
 {
 	BuildingGUID		= 0; // BuildingGUID -- object
 	ItemID		= 1; // ItemID -- string
@@ -21,21 +21,21 @@ enum RCT_BuildingProduce
 	OnceStartTime		= 4; // OnceStartTime -- int
 }
 
-enum RCT_GroupMemberList
+enum GroupMemberList
 {
 	GUID		= 0; // GUID -- object
 	Online		= 1; // Online -- int
 	GameID		= 2; // GameID -- int
 }
 
-enum RCT_ChatList
+enum ChatList
 {
 	GUID		= 0; // GUID -- object
 	msg		= 1; // msg -- string
 	time		= 2; // time -- int
 }
 
-enum RCT_GuildBoss
+enum GuildBoss
 {
 	GUID		= 0; // GUID -- object
 	Name		= 1; // Name -- string
@@ -47,7 +47,7 @@ enum RCT_GuildBoss
 	Power		= 7; // Power -- int
 }
 
-enum RCT_GuildMemberList
+enum GuildMemberList
 {
 	GUID		= 0; // GUID -- object
 	Name		= 1; // Name -- string
@@ -65,7 +65,7 @@ enum RCT_GuildMemberList
 	AllContribution		= 13; // AllContribution -- int
 }
 
-enum RCT_GuildAppyList
+enum GuildAppyList
 {
 	GUID		= 0; // GUID -- object
 	Name		= 1; // Name -- string
@@ -76,7 +76,7 @@ enum RCT_GuildAppyList
 	Power		= 6; // Power -- int
 }
 
-enum RCT_GuildEvent
+enum GuildEvent
 {
 	GUID		= 0; // GUID -- object
 	Name		= 1; // Name -- string
@@ -91,7 +91,7 @@ enum RCT_GuildEvent
 	Context		= 10; // Context -- string
 }
 
-enum RCT_GuildHouse
+enum GuildHouse
 {
 	GUID		= 0; // GUID -- object
 	Name		= 1; // Name -- string
@@ -103,7 +103,7 @@ enum RCT_GuildHouse
 	Power		= 7; // Power -- int
 }
 
-enum RCT_GuildSkill
+enum GuildSkill
 {
 	GUID		= 0; // GUID -- object
 	Name		= 1; // Name -- string
@@ -115,7 +115,7 @@ enum RCT_GuildSkill
 	Power		= 7; // Power -- int
 }
 
-enum RCT_PosList
+enum PosList
 {
 	X		= 0; // X -- float
 	Y		= 1; // Y -- float
@@ -123,7 +123,7 @@ enum RCT_PosList
 	StayTime		= 3; // StayTime -- float
 }
 
-enum RCT_PlayerViewItem
+enum PlayerViewItem
 {
 	ConfigID		= 0; // ConfigID -- string
 	EnhanceLevel		= 1; // EnhanceLevel -- int
@@ -131,7 +131,7 @@ enum RCT_PlayerViewItem
 	SagecraftLevel		= 3; // SagecraftLevel -- string
 }
 
-enum RCT_PlayerHero
+enum PlayerHero
 {
 	GUID		= 0; // GUID -- object
 	ConfigID		= 1; // ConfigID -- string
@@ -145,7 +145,7 @@ enum RCT_PlayerHero
 	Equip6		= 9; // Equip6 -- object
 }
 
-enum RCT_BagEquipList
+enum BagEquipList
 {
 	GUID		= 0; // GUID -- object
 	WearGUID		= 1; // WearGUID -- object
@@ -178,7 +178,7 @@ enum RCT_BagEquipList
 	ElementLevel10		= 28; // ElementLevel10 -- int
 }
 
-enum RCT_BagItemList
+enum BagItemList
 {
 	ConfigID		= 0; // ConfigID -- string
 	ItemCount		= 1; // ItemCount -- int
@@ -187,7 +187,7 @@ enum RCT_BagItemList
 	Date		= 4; // Date -- object
 }
 
-enum RCT_CommPropertyValue
+enum CommPropertyValue
 {
 	MAXHP		= 0; // MAXHP -- int
 	MAXMP		= 1; // MAXMP -- int
@@ -215,14 +215,14 @@ enum RCT_CommPropertyValue
 	BUFF_GATE		= 23; // BUFF_GATE -- int
 }
 
-enum RCT_EctypeList
+enum EctypeList
 {
 	EctypeID		= 0; // EctypeID -- int
 	IsPass		= 1; // IsPass -- int
 	Star		= 2; // Star -- int
 }
 
-enum RCT_DropItemList
+enum DropItemList
 {
 	MonsterID		= 0; // MonsterID -- object
 	ItemID		= 1; // ItemID -- string
@@ -230,7 +230,7 @@ enum RCT_DropItemList
 	DrawState		= 3; // DrawState -- int
 }
 
-enum RCT_SkillTable
+enum SkillTable
 {
 	SkillID		= 0; // SkillID -- string
 	SkillLevel		= 1; // SkillLevel -- int
@@ -238,7 +238,7 @@ enum RCT_SkillTable
 	SkillSoulLevel		= 3; // SkillSoulLevel -- int
 }
 
-enum RCT_TaskMonsterList
+enum TaskMonsterList
 {
 	MonsterID		= 0; // MonsterID -- string
 	CurrentKillCount		= 1; // CurrentKillCount -- int
@@ -246,21 +246,21 @@ enum RCT_TaskMonsterList
 	TaskID		= 3; // TaskID -- string
 }
 
-enum RCT_TaskList
+enum TaskList
 {
 	TaskID		= 0; // TaskID -- string
 	TaskStatus		= 1; // TaskStatus -- int
 	Process		= 2; // Process -- int
 }
 
-enum RCT_PVPList
+enum PVPList
 {
 	ID		= 0; // ID -- object
 	Name		= 1; // Name -- string
 	Level		= 2; // Level -- int
 }
 
-enum RCT_ChatGroup
+enum ChatGroup
 {
 	ChatType		= 0; // ChatType -- int
 	GroupGUID		= 1; // GroupGUID -- object
