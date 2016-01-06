@@ -1,13 +1,13 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFPRNameDefine.java
+//    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/05
-//    @Module           :    NFPRNameDefine
+//    @Date             :    2016/01/06
+//    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
 package nframe;
 
-public class P_BB_Build {
+public class BB_Build {
 	public static final String Type = "Type";
 	public static final String SubType = "SubType";
 	public static final String Prefab = "Prefab";
@@ -19,11 +19,11 @@ public class P_BB_Build {
 
 }
 
-public class R_BB_Build {
+public class BB_Build {
 
 }
 
-public class P_BB_Player {
+public class BB_Player {
 	public static final String RoleName = "RoleName";
 	public static final String Sex = "Sex";
 	public static final String Race = "Race";
@@ -39,13 +39,13 @@ public class P_BB_Player {
 
 }
 
-public class R_BB_Player {
+public class BB_Player {
 	public static final String BuildingList = "BuildingList";
 	public static final String BuildingProduce = "BuildingProduce";
 
 }
 
-public class P_Buff {
+public class Buff {
 	public static final String EffectType = "EffectType";
 	public static final String EffectValueType = "EffectValueType";
 	public static final String EffectValueReferType = "EffectValueReferType";
@@ -58,23 +58,23 @@ public class P_Buff {
 
 }
 
-public class R_Buff {
+public class Buff {
 
 }
 
-public class P_ChatGroup {
+public class ChatGroup {
 	public static final String Name = "Name";
 	public static final String CreateObject = "CreateObject";
 
 }
 
-public class R_ChatGroup {
+public class ChatGroup {
 	public static final String GroupMemberList = "GroupMemberList";
 	public static final String ChatList = "ChatList";
 
 }
 
-public class P_ConsumeData {
+public class ConsumeData {
 	public static final String VIPEXP = "VIPEXP";
 	public static final String EXP = "EXP";
 	public static final String HP = "HP";
@@ -85,11 +85,11 @@ public class P_ConsumeData {
 
 }
 
-public class R_ConsumeData {
+public class ConsumeData {
 
 }
 
-public class P_Cost {
+public class Cost {
 	public static final String CostMoney = "CostMoney";
 	public static final String CostDiamond = "CostDiamond";
 	public static final String CostVP = "CostVP";
@@ -97,11 +97,11 @@ public class P_Cost {
 
 }
 
-public class R_Cost {
+public class Cost {
 
 }
 
-public class P_DescData {
+public class DescData {
 	public static final String ShowName = "ShowName";
 	public static final String Icon = "Icon";
 	public static final String Atlas = "Atlas";
@@ -112,11 +112,11 @@ public class P_DescData {
 
 }
 
-public class R_DescData {
+public class DescData {
 
 }
 
-public class P_EffectData {
+public class EffectData {
 	public static final String MAXHP = "MAXHP";
 	public static final String MAXMP = "MAXMP";
 	public static final String MAXSP = "MAXSP";
@@ -144,11 +144,11 @@ public class P_EffectData {
 
 }
 
-public class R_EffectData {
+public class EffectData {
 
 }
 
-public class P_Equip {
+public class Equip {
 	public static final String Sex = "Sex";
 	public static final String IntensiveBuffList = "IntensiveBuffList";
 	public static final String EnchantmentBuffList = "EnchantmentBuffList";
@@ -157,11 +157,11 @@ public class P_Equip {
 
 }
 
-public class R_Equip {
+public class Equip {
 
 }
 
-public class P_Guild {
+public class Guild {
 	public static final String Name = "Name";
 	public static final String PresidentID = "PresidentID";
 	public static final String PresidentName = "PresidentName";
@@ -187,7 +187,7 @@ public class P_Guild {
 
 }
 
-public class R_Guild {
+public class Guild {
 	public static final String GuildBoss = "GuildBoss";
 	public static final String GuildMemberList = "GuildMemberList";
 	public static final String GuildAppyList = "GuildAppyList";
@@ -197,7 +197,7 @@ public class R_Guild {
 
 }
 
-public class P_GuildConfig {
+public class GuildConfig {
 	public static final String ConditionPlayerLevel = "ConditionPlayerLevel";
 	public static final String ConditionPlayerVIP = "ConditionPlayerVIP";
 	public static final String CostMoney = "CostMoney";
@@ -207,11 +207,11 @@ public class P_GuildConfig {
 
 }
 
-public class R_GuildConfig {
+public class GuildConfig {
 
 }
 
-public class P_GuildJob {
+public class GuildJob {
 	public static final String GuildJob = "GuildJob";
 	public static final String JobCount = "JobCount";
 	public static final String Appoint = "Appoint";
@@ -230,20 +230,20 @@ public class P_GuildJob {
 
 }
 
-public class R_GuildJob {
+public class GuildJob {
 
 }
 
-public class P_GuildName {
+public class GuildName {
 	public static final String GuildID = "GuildID";
 
 }
 
-public class R_GuildName {
+public class GuildName {
 
 }
 
-public class P_InitProperty {
+public class InitProperty {
 	public static final String Job = "Job";
 	public static final String Level = "Level";
 	public static final String EffectData = "EffectData";
@@ -252,11 +252,11 @@ public class P_InitProperty {
 
 }
 
-public class R_InitProperty {
+public class InitProperty {
 
 }
 
-public class P_IObject {
+public class IObject {
 	public static final String ID = "ID";
 	public static final String ClassName = "ClassName";
 	public static final String SceneID = "SceneID";
@@ -265,11 +265,11 @@ public class P_IObject {
 
 }
 
-public class R_IObject {
+public class IObject {
 
 }
 
-public class P_Item {
+public class Item {
 	public static final String ItemType = "ItemType";
 	public static final String ItemSubType = "ItemSubType";
 	public static final String Level = "Level";
@@ -289,21 +289,21 @@ public class P_Item {
 
 }
 
-public class R_Item {
+public class Item {
 
 }
 
-public class P_Language {
+public class Language {
 	public static final String English = "English";
 	public static final String Chinese = "Chinese";
 
 }
 
-public class R_Language {
+public class Language {
 
 }
 
-public class P_NPC {
+public class NPC {
 	public static final String SeedID = "SeedID";
 	public static final String EXP = "EXP";
 	public static final String HP = "HP";
@@ -350,12 +350,12 @@ public class P_NPC {
 
 }
 
-public class R_NPC {
+public class NPC {
 	public static final String PosList = "PosList";
 
 }
 
-public class P_Player {
+public class Player {
 	public static final String Name = "Name";
 	public static final String Sex = "Sex";
 	public static final String Race = "Race";
@@ -438,7 +438,7 @@ public class P_Player {
 
 }
 
-public class R_Player {
+public class Player {
 	public static final String PlayerViewItem = "PlayerViewItem";
 	public static final String PlayerHero = "PlayerHero";
 	public static final String BagEquipList = "BagEquipList";
@@ -454,7 +454,7 @@ public class R_Player {
 
 }
 
-public class P_Scene {
+public class Scene {
 	public static final String SceneName = "SceneName";
 	public static final String SceneShowName = "SceneShowName";
 	public static final String MaxGroup = "MaxGroup";
@@ -472,11 +472,11 @@ public class P_Scene {
 
 }
 
-public class R_Scene {
+public class Scene {
 
 }
 
-public class P_Server {
+public class Server {
 	public static final String ServerID = "ServerID";
 	public static final String Name = "Name";
 	public static final String MaxOnline = "MaxOnline";
@@ -487,11 +487,11 @@ public class P_Server {
 
 }
 
-public class R_Server {
+public class Server {
 
 }
 
-public class P_Shop {
+public class Shop {
 	public static final String Type = "Type";
 	public static final String ItemID = "ItemID";
 	public static final String Gold = "Gold";
@@ -502,11 +502,11 @@ public class P_Shop {
 
 }
 
-public class R_Shop {
+public class Shop {
 
 }
 
-public class P_Skill {
+public class Skill {
 	public static final String SkillType = "SkillType";
 	public static final String AnimaState = "AnimaState";
 	public static final String ShowName = "ShowName";
@@ -535,11 +535,11 @@ public class P_Skill {
 
 }
 
-public class R_Skill {
+public class Skill {
 
 }
 
-public class P_SkillRef {
+public class SkillRef {
 	public static final String NORMALATTACK1 = "NORMALATTACK1";
 	public static final String NORMALATTACK2 = "NORMALATTACK2";
 	public static final String NORMALATTACK3 = "NORMALATTACK3";
@@ -557,11 +557,11 @@ public class P_SkillRef {
 
 }
 
-public class R_SkillRef {
+public class SkillRef {
 
 }
 
-public class P_SqlServer {
+public class SqlServer {
 	public static final String ServerID = "ServerID";
 	public static final String IP = "IP";
 	public static final String Port = "Port";
@@ -573,20 +573,20 @@ public class P_SqlServer {
 
 }
 
-public class R_SqlServer {
+public class SqlServer {
 
 }
 
-public class P_StateFuncResources {
+public class StateFuncResources {
 	public static final String Atlas_ResID = "Atlas_ResID";
 
 }
 
-public class R_StateFuncResources {
+public class StateFuncResources {
 
 }
 
-public class P_StateFunction {
+public class StateFunction {
 	public static final String EFT_INFO = "EFT_INFO";
 	public static final String EFT_BOOOST = "EFT_BOOOST";
 	public static final String EFT_LVLUP = "EFT_LVLUP";
@@ -604,11 +604,11 @@ public class P_StateFunction {
 
 }
 
-public class R_StateFunction {
+public class StateFunction {
 
 }
 
-public class P_Task {
+public class Task {
 	public static final String Type = "Type";
 	public static final String NextTaskID = "NextTaskID";
 	public static final String KillMonsterName = "KillMonsterName";
@@ -621,7 +621,7 @@ public class P_Task {
 
 }
 
-public class R_Task {
+public class Task {
 
 }
 
