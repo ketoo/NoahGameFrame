@@ -5,7 +5,7 @@
 
 ## What is it?
 
-NF is a lightweight, fast, scalable, distributed plugin framework.
+NF is a lightweight, fast, scalable, distributed plugin framework.Greatly inspired by OGRE and Bigworld.
 
 ## Features
 *  it is easy to use interface oriented design minimise the effort
