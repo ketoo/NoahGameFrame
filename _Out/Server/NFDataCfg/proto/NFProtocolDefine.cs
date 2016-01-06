@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFPRNameDefine.cs
+//    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/05
-//    @Module           :    NFPRNameDefine
+//    @Date             :    2016/01/06
+//    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
 using System;
@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace NFrame
 {
 
-public class P_BB_Build
+public class BB_Build
 {
 	public static readonly String Type = "Type";
 	public static readonly String SubType = "SubType";
@@ -29,12 +29,12 @@ public class P_BB_Build
 
 }
 
-public class R_BB_Build
+public class BB_Build
 {
 
 }
 
-public class P_BB_Player
+public class BB_Player
 {
 	public static readonly String RoleName = "RoleName";
 	public static readonly String Sex = "Sex";
@@ -51,14 +51,14 @@ public class P_BB_Player
 
 }
 
-public class R_BB_Player
+public class BB_Player
 {
 	public static readonly String BuildingList = "BuildingList";
 	public static readonly String BuildingProduce = "BuildingProduce";
 
 }
 
-public class P_Buff
+public class Buff
 {
 	public static readonly String EffectType = "EffectType";
 	public static readonly String EffectValueType = "EffectValueType";
@@ -72,26 +72,26 @@ public class P_Buff
 
 }
 
-public class R_Buff
+public class Buff
 {
 
 }
 
-public class P_ChatGroup
+public class ChatGroup
 {
 	public static readonly String Name = "Name";
 	public static readonly String CreateObject = "CreateObject";
 
 }
 
-public class R_ChatGroup
+public class ChatGroup
 {
 	public static readonly String GroupMemberList = "GroupMemberList";
 	public static readonly String ChatList = "ChatList";
 
 }
 
-public class P_ConsumeData
+public class ConsumeData
 {
 	public static readonly String VIPEXP = "VIPEXP";
 	public static readonly String EXP = "EXP";
@@ -103,12 +103,12 @@ public class P_ConsumeData
 
 }
 
-public class R_ConsumeData
+public class ConsumeData
 {
 
 }
 
-public class P_Cost
+public class Cost
 {
 	public static readonly String CostMoney = "CostMoney";
 	public static readonly String CostDiamond = "CostDiamond";
@@ -117,12 +117,12 @@ public class P_Cost
 
 }
 
-public class R_Cost
+public class Cost
 {
 
 }
 
-public class P_DescData
+public class DescData
 {
 	public static readonly String ShowName = "ShowName";
 	public static readonly String Icon = "Icon";
@@ -134,12 +134,12 @@ public class P_DescData
 
 }
 
-public class R_DescData
+public class DescData
 {
 
 }
 
-public class P_EffectData
+public class EffectData
 {
 	public static readonly String MAXHP = "MAXHP";
 	public static readonly String MAXMP = "MAXMP";
@@ -168,12 +168,12 @@ public class P_EffectData
 
 }
 
-public class R_EffectData
+public class EffectData
 {
 
 }
 
-public class P_Equip
+public class Equip
 {
 	public static readonly String Sex = "Sex";
 	public static readonly String IntensiveBuffList = "IntensiveBuffList";
@@ -183,12 +183,12 @@ public class P_Equip
 
 }
 
-public class R_Equip
+public class Equip
 {
 
 }
 
-public class P_Guild
+public class Guild
 {
 	public static readonly String Name = "Name";
 	public static readonly String PresidentID = "PresidentID";
@@ -215,7 +215,7 @@ public class P_Guild
 
 }
 
-public class R_Guild
+public class Guild
 {
 	public static readonly String GuildBoss = "GuildBoss";
 	public static readonly String GuildMemberList = "GuildMemberList";
@@ -226,7 +226,7 @@ public class R_Guild
 
 }
 
-public class P_GuildConfig
+public class GuildConfig
 {
 	public static readonly String ConditionPlayerLevel = "ConditionPlayerLevel";
 	public static readonly String ConditionPlayerVIP = "ConditionPlayerVIP";
@@ -237,12 +237,12 @@ public class P_GuildConfig
 
 }
 
-public class R_GuildConfig
+public class GuildConfig
 {
 
 }
 
-public class P_GuildJob
+public class GuildJob
 {
 	public static readonly String GuildJob = "GuildJob";
 	public static readonly String JobCount = "JobCount";
@@ -262,23 +262,23 @@ public class P_GuildJob
 
 }
 
-public class R_GuildJob
+public class GuildJob
 {
 
 }
 
-public class P_GuildName
+public class GuildName
 {
 	public static readonly String GuildID = "GuildID";
 
 }
 
-public class R_GuildName
+public class GuildName
 {
 
 }
 
-public class P_InitProperty
+public class InitProperty
 {
 	public static readonly String Job = "Job";
 	public static readonly String Level = "Level";
@@ -288,12 +288,12 @@ public class P_InitProperty
 
 }
 
-public class R_InitProperty
+public class InitProperty
 {
 
 }
 
-public class P_IObject
+public class IObject
 {
 	public static readonly String ID = "ID";
 	public static readonly String ClassName = "ClassName";
@@ -303,12 +303,12 @@ public class P_IObject
 
 }
 
-public class R_IObject
+public class IObject
 {
 
 }
 
-public class P_Item
+public class Item
 {
 	public static readonly String ItemType = "ItemType";
 	public static readonly String ItemSubType = "ItemSubType";
@@ -329,24 +329,24 @@ public class P_Item
 
 }
 
-public class R_Item
+public class Item
 {
 
 }
 
-public class P_Language
+public class Language
 {
 	public static readonly String English = "English";
 	public static readonly String Chinese = "Chinese";
 
 }
 
-public class R_Language
+public class Language
 {
 
 }
 
-public class P_NPC
+public class NPC
 {
 	public static readonly String SeedID = "SeedID";
 	public static readonly String EXP = "EXP";
@@ -394,13 +394,13 @@ public class P_NPC
 
 }
 
-public class R_NPC
+public class NPC
 {
 	public static readonly String PosList = "PosList";
 
 }
 
-public class P_Player
+public class Player
 {
 	public static readonly String Name = "Name";
 	public static readonly String Sex = "Sex";
@@ -484,7 +484,7 @@ public class P_Player
 
 }
 
-public class R_Player
+public class Player
 {
 	public static readonly String PlayerViewItem = "PlayerViewItem";
 	public static readonly String PlayerHero = "PlayerHero";
@@ -501,7 +501,7 @@ public class R_Player
 
 }
 
-public class P_Scene
+public class Scene
 {
 	public static readonly String SceneName = "SceneName";
 	public static readonly String SceneShowName = "SceneShowName";
@@ -520,12 +520,12 @@ public class P_Scene
 
 }
 
-public class R_Scene
+public class Scene
 {
 
 }
 
-public class P_Server
+public class Server
 {
 	public static readonly String ServerID = "ServerID";
 	public static readonly String Name = "Name";
@@ -537,12 +537,12 @@ public class P_Server
 
 }
 
-public class R_Server
+public class Server
 {
 
 }
 
-public class P_Shop
+public class Shop
 {
 	public static readonly String Type = "Type";
 	public static readonly String ItemID = "ItemID";
@@ -554,12 +554,12 @@ public class P_Shop
 
 }
 
-public class R_Shop
+public class Shop
 {
 
 }
 
-public class P_Skill
+public class Skill
 {
 	public static readonly String SkillType = "SkillType";
 	public static readonly String AnimaState = "AnimaState";
@@ -589,12 +589,12 @@ public class P_Skill
 
 }
 
-public class R_Skill
+public class Skill
 {
 
 }
 
-public class P_SkillRef
+public class SkillRef
 {
 	public static readonly String NORMALATTACK1 = "NORMALATTACK1";
 	public static readonly String NORMALATTACK2 = "NORMALATTACK2";
@@ -613,12 +613,12 @@ public class P_SkillRef
 
 }
 
-public class R_SkillRef
+public class SkillRef
 {
 
 }
 
-public class P_SqlServer
+public class SqlServer
 {
 	public static readonly String ServerID = "ServerID";
 	public static readonly String IP = "IP";
@@ -631,23 +631,23 @@ public class P_SqlServer
 
 }
 
-public class R_SqlServer
+public class SqlServer
 {
 
 }
 
-public class P_StateFuncResources
+public class StateFuncResources
 {
 	public static readonly String Atlas_ResID = "Atlas_ResID";
 
 }
 
-public class R_StateFuncResources
+public class StateFuncResources
 {
 
 }
 
-public class P_StateFunction
+public class StateFunction
 {
 	public static readonly String EFT_INFO = "EFT_INFO";
 	public static readonly String EFT_BOOOST = "EFT_BOOOST";
@@ -666,12 +666,12 @@ public class P_StateFunction
 
 }
 
-public class R_StateFunction
+public class StateFunction
 {
 
 }
 
-public class P_Task
+public class Task
 {
 	public static readonly String Type = "Type";
 	public static readonly String NextTaskID = "NextTaskID";
@@ -685,7 +685,7 @@ public class P_Task
 
 }
 
-public class R_Task
+public class Task
 {
 
 }
