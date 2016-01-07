@@ -39,7 +39,7 @@
 //
 // }
 //
-// bool NFCConcurrentModule::Execute(const float fLasFrametime, const float fStartedTime)
+// bool NFCConcurrentModule::Execute()
 // {
 //     return true;
 //

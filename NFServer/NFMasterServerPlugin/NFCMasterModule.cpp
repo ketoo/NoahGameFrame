@@ -32,7 +32,7 @@ bool NFCMasterModule::Shut()
     return true;
 }
 
-bool NFCMasterModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCMasterModule::Execute()
 {
     //////////////////////////////////////////////////////////////////////////
 //     char szContent[MAX_PATH] = { 0 };

@@ -45,7 +45,7 @@ bool HelloWorld6Module::AfterInit()
     return true;
 }
 
-bool HelloWorld6Module::Execute( const float fLasFrametime, const float fStartedTime )
+bool HelloWorld6Module::Execute()
 {
     //Ã¿Ö¡Ö´ÐÐ
     //std::cout << "Hello, world6, Execute" << std::endl;

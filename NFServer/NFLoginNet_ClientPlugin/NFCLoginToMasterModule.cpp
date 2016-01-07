@@ -109,9 +109,9 @@ int NFCLoginToMasterModule::OnSelectServerEvent(const NFGUID& object, const int 
 	return 0;
 }
 
-bool NFCLoginToMasterModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCLoginToMasterModule::Execute()
 {
-	return NFIClusterClientModule::Execute(fLasFrametime, fStartedTime);
+	return NFIClusterClientModule::Execute();
 }
 
 void NFCLoginToMasterModule::Register(NFINet* pNet)

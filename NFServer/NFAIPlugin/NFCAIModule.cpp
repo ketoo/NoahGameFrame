@@ -95,12 +95,12 @@ bool NFCAIModule::DelAIObject(const NFGUID& self)
     return false;
 }
 
-bool NFCAIModule::Execute(float fFrameTime, float fAllTime)
+bool NFCAIModule::Execute()
 {
     TOBJECTSTATEMACHINE::iterator it = mtObjectStateMachine.begin();
     for (it; it != mtObjectStateMachine.end(); it++)
     {
-        it->second->UpData(fFrameTime, fAllTime);
+        it->second->Execute();
     }
 
     return true;

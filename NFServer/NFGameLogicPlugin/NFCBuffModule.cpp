@@ -30,7 +30,7 @@ bool NFCBuffModule::Shut()
     return true;
 }
 
-bool NFCBuffModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCBuffModule::Execute()
 {
     return true;
 }

@@ -141,9 +141,6 @@ void PrintfLogo()
 #endif // NF_PLATFORM
 }
 
-unsigned long unStartTickTime = 0;
-unsigned long unLastTickTime = 0;
-
 #if NF_PLATFORM == NF_PLATFORM_WIN || NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_APPLE
 int main(int argc, char* argv[])
 #elif  NF_PLATFORM == NF_PLATFORM_ANDROID || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
@@ -181,9 +178,6 @@ int main(int argc, char* argv[])
     CloseXButton();
     CreateBackThread();
 
-    unStartTickTime = ::NF_GetTickCount();
-    unLastTickTime = unStartTickTime;
-
     while (!bExitApp)    //DEBUG∞Ê±æ±¿¿££¨RELEASE≤ª±¿
     {
         while (true)
@@ -195,21 +189,11 @@ int main(int argc, char* argv[])
                 break;
             }
 
-			unsigned long unNowTickTime = ::NF_GetTickCount();
-			float fStartedTime = float(unNowTickTime - unStartTickTime) / 1000;
-			float fLastTime = float(unNowTickTime - unLastTickTime) / 1000;
-
-			if (fStartedTime < 0.001f)
-			{
-				fStartedTime = 0.0f;
-			}
-
 #if NF_PLATFORM == NF_PLATFORM_WIN
             __try
             {
 #endif
-                NFCActorManager::GetSingletonPtr()->Execute(fLastTime, fStartedTime);
-				unLastTickTime = unNowTickTime;
+                NFCActorManager::GetSingletonPtr()->Execute();
 #if NF_PLATFORM == NF_PLATFORM_WIN
             }
             __except (ApplicationCrashHandler(GetExceptionInformation()))

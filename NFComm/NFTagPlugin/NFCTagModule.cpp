@@ -19,7 +19,7 @@ bool NFCTagModule::Shut()
 
 }
 
-bool NFCTagModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCTagModule::Execute()
 {
 	return true;
 

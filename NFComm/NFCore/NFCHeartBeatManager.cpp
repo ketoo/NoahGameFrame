@@ -7,6 +7,7 @@
 // -------------------------------------------------------------------------
 
 #include "NFCHeartBeatManager.h"
+#include "NFTimer.h"
 
 NFCHeartBeatManager::~NFCHeartBeatManager()
 {
@@ -25,46 +26,30 @@ void NFCHeartBeatElement::DoHeartBeatEvent()
     }
 }
 //////////////////////////////////////////////////////////////////////////
-bool NFCHeartBeatManager::Execute(const float fLastTime, const float fAllTime)
+bool NFCHeartBeatManager::Execute()
 {
     NF_SHARE_PTR<NFCHeartBeatElement> pElement = mHeartBeatElementMapEx.First();
     while (pElement.get())
     {
-        int nCount = pElement->nCount;
-        float fTime = pElement->fTime;
+		NFINT64 nTime = NFTimeEx::GetNowTime();
 
-        if (fTime > 0.000000f)
-        {
-            fTime -= fLastTime;
-        }
+		if (nTime > pElement->nTime && pElement->nCount > 0)
+		{
+			pElement->nCount--;
 
-        if (fTime <= 0.001f)
-        {
-            nCount--;
-        }
-        else
-        {
-            pElement->fTime = fTime;
-        }
+			pElement->DoHeartBeatEvent();
 
-        if (nCount <= 0)
-        {
-            //Do Event
-            pElement->DoHeartBeatEvent();
-
-            //µÈ´ýÉ¾³ý
-            mRemoveListEx.Add(pElement->strBeatName);
-        }
-        else
-        {
-            if (pElement->nCount != nCount)
-            {
-                pElement->nCount = nCount;
-                //Do Event
-                pElement->DoHeartBeatEvent();
-                pElement->fTime = pElement->fBeatTime;
-            }
-        }
+			if (pElement->nCount <= 0)
+			{
+				//µÈ´ýÉ¾³ý
+				mRemoveListEx.Add(pElement->strBeatName);
+			}
+			else
+			{
+				//Do Event
+				pElement->nTime = nTime + pElement->fBeatTime;
+			}
+		}
 
         pElement = mHeartBeatElementMapEx.Next();
     }
@@ -112,7 +97,7 @@ NFGUID NFCHeartBeatManager::Self()
 bool NFCHeartBeatManager::AddHeartBeat(const NFGUID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount)
 {
     NFCHeartBeatElement xHeartBeat;
-    xHeartBeat.fTime = fTime;
+	xHeartBeat.nTime = NFTimeEx::GetNowTime() + fTime;
     xHeartBeat.fBeatTime = fTime;
     xHeartBeat.nCount = nCount;
     xHeartBeat.self = self;
