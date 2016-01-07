@@ -41,7 +41,7 @@ public:
     //    return m_pGridModule;
     //}
 
-    bool Execute(const float fLasFrametime, const float fStartedTime)
+    bool Execute()
     {
         return true;
     }
@@ -126,12 +126,12 @@ public:
         return false;
     }
 
-    bool Execute(const float fLasFrametime, const float fStartedTime)
+    bool Execute()
     {
         NF_SHARE_PTR<NFCContainerGroupInfo> pGroupInfo = First();
         while (pGroupInfo.get())
         {
-            pGroupInfo->Execute(fLasFrametime, fStartedTime);
+            pGroupInfo->Execute();
 
             pGroupInfo = Next();
         }

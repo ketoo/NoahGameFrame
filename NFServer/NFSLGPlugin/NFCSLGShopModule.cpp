@@ -21,7 +21,7 @@ bool NFCSLGShopModule::Shut()
     return true;
 }
 
-bool NFCSLGShopModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCSLGShopModule::Execute()
 {
     //Œª÷√ƒÿ
     return true;

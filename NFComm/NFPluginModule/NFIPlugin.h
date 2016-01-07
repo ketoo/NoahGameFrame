@@ -54,8 +54,6 @@ public:
 
     virtual bool Init()
     {
-        fLastTotal = 0.0f;
-
         NFILogicModule* pModule = First();
         while (pModule)
         {
@@ -91,21 +89,15 @@ public:
         return true;
     }
 
-    virtual bool Execute(const float fLastFrametime, const float fStartedTime)
+    virtual bool Execute()
     {
-
-		//Ã¿Ö¡±ØÐëExecute
-		fLastTotal = fLastFrametime;
-
         NFILogicModule* pModule = First();
         while (pModule)
         {
-            pModule->Execute(fLastTotal, fStartedTime);
+            pModule->Execute();
 
             pModule = Next();
         }
-
-        fLastTotal = 0.0f;
 
         return true;
     }
@@ -139,7 +131,6 @@ public:
 
 protected:
     NFIPluginManager* pPluginManager;
-    float fLastTotal;
 };
 
 #endif

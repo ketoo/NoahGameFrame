@@ -73,11 +73,11 @@ bool NFCWorldNet_ServerModule::Shut()
     return true;
 }
 
-bool NFCWorldNet_ServerModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCWorldNet_ServerModule::Execute()
 {
-	LogGameServer(fLasFrametime);
+	LogGameServer();
 
-	return NFINetModule::Execute(fLasFrametime, fStartedTime);
+	return NFINetModule::Execute();
 }
 
 int NFCWorldNet_ServerModule::OnGameServerRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -463,15 +463,15 @@ bool NFCWorldNet_ServerModule::InThisWorld( const std::string& strAccount )
     return false;
 }
 
-void NFCWorldNet_ServerModule::LogGameServer(const float fLastTime)
+void NFCWorldNet_ServerModule::LogGameServer()
 {
-	if (mfLastLogTime < 10.0f)
+	if (mnLastCheckTime + 10 < GetPluginManager()->GetNowTime())
 	{
-		mfLastLogTime += fLastTime;
 		return;
 	}
 
-	mfLastLogTime = 0.0f;
+
+	mnLastCheckTime = GetPluginManager()->GetNowTime();
 
 	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "Begin Log GameServer Info", "");
 

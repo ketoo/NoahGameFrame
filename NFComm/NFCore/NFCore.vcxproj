@@ -93,6 +93,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="NFCAddConsistentHash.hpp" />
     <ClInclude Include="NFCComponentManager.h" />
     <ClInclude Include="NFCConsistentHash.hpp" />
     <ClInclude Include="NFCDataList.h" />
