@@ -11,7 +11,7 @@
 #include "NFComm/Config/NFConfig.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
-#include "NFComm/NFMessageDefine/NFRecordDefine.pb.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCWorldChatGroupModule::Init()
 {
@@ -23,7 +23,7 @@ bool NFCWorldChatGroupModule::Shut()
     return true;
 }
 
-bool NFCWorldChatGroupModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCWorldChatGroupModule::Execute()
 {
     return true;
 }
@@ -72,7 +72,14 @@ bool NFCWorldChatGroupModule::JoinGroup( const NFGUID& self, const NFGUID& xGrou
     NFCDataList varRow;
     
     varRow << self << 0 << 0;
-    return pRecord->AddRow(-1, varRow);
+    int nRet = pRecord->AddRow(-1, varRow);
+
+	if (nRet >= 0)
+	{
+		return true;
+	}
+
+	return false;
 }
 
 const NFGUID& NFCWorldChatGroupModule::CreateGroup( const NFGUID& self )
@@ -112,7 +119,7 @@ bool NFCWorldChatGroupModule::QuitGroup( const NFGUID& self, const NFGUID& xGrou
     }
 
     NFCDataList varFind;
-    if (pRecord->FindObject(NFMsg::GroupMemberList_GUID, self, varFind) > 0)
+    if (pRecord->FindObject(NFrame::ChatGroup::GroupMemberList_GUID, self, varFind) > 0)
     {
         pRecord->Remove(varFind);
     }
@@ -181,9 +188,9 @@ bool NFCWorldChatGroupModule::GetOnlineMember( const NFGUID& self, const NFGUID&
             continue;
         }
 
-        const NFINT64 nOnline = pMemberRecord->GetInt(i, NFMsg::GroupMemberList_Online);
-        const NFINT64 nGameID = pMemberRecord->GetInt(i, NFMsg::GroupMemberList_GameID);
-        const NFGUID& xID = pMemberRecord->GetObject(i, NFMsg::GroupMemberList_GUID);
+        const NFINT64 nOnline = pMemberRecord->GetInt(i, NFrame::ChatGroup::GroupMemberList_Online);
+        const NFINT64 nGameID = pMemberRecord->GetInt(i, NFrame::ChatGroup::GroupMemberList_GameID);
+        const NFGUID& xID = pMemberRecord->GetObject(i, NFrame::ChatGroup::GroupMemberList_GUID);
         if (nOnline > 0 && !xID.IsNull())
         {
 
@@ -231,15 +238,15 @@ bool NFCWorldChatGroupModule::Online( const NFGUID& self, const NFGUID& xGroupID
     }
 
     NFCDataList varList;
-    if (pRecord->FindObject(NFMsg::GroupMemberList_GUID, self, varList) <= 0)
+    if (pRecord->FindObject(NFrame::ChatGroup::GroupMemberList_GUID, self, varList) <= 0)
     {
         return false;
     }
 
     const int nRow = varList.Int(0);
-    pRecord->SetInt(nRow, NFMsg::GroupMemberList_GameID, nGameID);
+    pRecord->SetInt(nRow, NFrame::ChatGroup::GroupMemberList_GameID, nGameID);
 
-    pRecord->SetInt(nRow, NFMsg::GroupMemberList_Online, 1);
+    pRecord->SetInt(nRow, NFrame::ChatGroup::GroupMemberList_Online, 1);
     
     return true;
 }
@@ -259,13 +266,13 @@ bool NFCWorldChatGroupModule::Offeline( const NFGUID& self, const NFGUID& xGroup
     }
 
     NFCDataList varList;
-    if (pRecord->FindObject(NFMsg::GroupMemberList_GUID, self, varList) <= 0)
+    if (pRecord->FindObject(NFrame::ChatGroup::GroupMemberList_GUID, self, varList) <= 0)
     {
         return false;
     }
 
     const int nRow = varList.Int(0);
-    pRecord->SetInt(nRow, NFMsg::GroupMemberList_Online, 0);
-    pRecord->SetInt(nRow, NFMsg::GroupMemberList_GameID, 0);
+    pRecord->SetInt(nRow, NFrame::ChatGroup::GroupMemberList_Online, 0);
+    pRecord->SetInt(nRow, NFrame::ChatGroup::GroupMemberList_GameID, 0);
     return true;
 }

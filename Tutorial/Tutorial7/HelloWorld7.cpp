@@ -64,7 +64,7 @@ bool HelloWorld7::AfterInit()
     return true;
 }
 
-bool HelloWorld7::Execute( const float fLasFrametime, const float fStartedTime )
+bool HelloWorld7::Execute()
 {
     //Ã¿Ö¡Ö´ÐÐ
     //std::cout << "Hello, world1, Execute" << std::endl;

@@ -10,7 +10,7 @@
 #define _NFI_WORLD_GUILD_DATA_MODULE_H
 
 #include "NFILogicModule.h"
-#include "NFComm/NFMessageDefine/NFRecordDefine.pb.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
 class NFIWorldGuildDataModule

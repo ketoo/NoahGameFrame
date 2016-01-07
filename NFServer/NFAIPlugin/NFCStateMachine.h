@@ -21,7 +21,7 @@ public:
 
     virtual ~NFCStateMachine();
 
-    virtual void UpData(float fFrameTime, float fAllTime);
+    virtual void Execute();
 
     //change to a new state
     virtual void ChangeState(const NFAI_STATE eState);

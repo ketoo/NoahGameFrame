@@ -36,7 +36,7 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute( const float fLasFrametime, const float fStartedTime );
+    virtual bool Execute();
     virtual bool AfterInit();
 
 	virtual const NFGUID& CreateRole(const std::string& strAccount, const std::string& strName, const int nRace, const int nJob, const int nSex);

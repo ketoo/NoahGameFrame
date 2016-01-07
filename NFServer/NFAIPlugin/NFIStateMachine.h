@@ -23,7 +23,7 @@ public:
     virtual const NFAI_STATE  LastState() const = 0;
 
     //call this to update the FSM
-    virtual void UpData(float fFrameTime, float fAllTime) = 0;
+    virtual void Execute() = 0;
 
     //change to a new state
     virtual void ChangeState(const NFAI_STATE eState) = 0;
