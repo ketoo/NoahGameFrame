@@ -22,6 +22,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 class NFCPackModule
     : public NFIPackModule
@@ -36,7 +37,7 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute( const float fLasFrametime, const float fStartedTime );
+    virtual bool Execute();
     virtual bool AfterInit();
 
 	/////////////基础/////////////////////////////////////////////////////////////
@@ -64,8 +65,8 @@ public:
 
 	/////////////装备镶嵌的石头/////////////////////////////////////////////////////////////
 
-	virtual bool SetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFMsg::RCT_BagEquipList eIndex, const std::string& strPropertyID);
-	virtual const std::string& GetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFMsg::RCT_BagEquipList eIndex);
+	virtual bool SetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex, const std::string& strPropertyID);
+	virtual const std::string& GetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex);
 
 	/////////////装备强化的等级/////////////////////////////////////////////////////////////
 
@@ -74,8 +75,8 @@ public:
 
 	/////////////装备元素的等级/////////////////////////////////////////////////////////////
 
-	virtual bool SetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFMsg::RCT_BagEquipList eIndex, const int nLevel);
-	virtual int GetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFMsg::RCT_BagEquipList eIndex);
+	virtual bool SetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex, const int nLevel);
+	virtual int GetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex);
 
 protected:
 

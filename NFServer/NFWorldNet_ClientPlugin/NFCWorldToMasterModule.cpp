@@ -76,9 +76,9 @@ bool NFCWorldToMasterModule::AfterInit()
 }
 
 
-bool NFCWorldToMasterModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCWorldToMasterModule::Execute()
 {
-	return NFIClusterClientModule::Execute(fLasFrametime, fStartedTime);
+	return NFIClusterClientModule::Execute();
 }
 
 void NFCWorldToMasterModule::Register(NFINet* pNet)

@@ -87,7 +87,7 @@ bool NFCLogModule::AfterInit()
 
 }
 
-bool NFCLogModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCLogModule::Execute()
 {
     return true;
 

@@ -20,7 +20,7 @@ bool NFCDataBaseNet_ClientModule::Shut()
     return true;
 }
 
-bool NFCDataBaseNet_ClientModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCDataBaseNet_ClientModule::Execute()
 {
     return true;
 }

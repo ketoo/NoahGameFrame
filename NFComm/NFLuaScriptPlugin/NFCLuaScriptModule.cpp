@@ -62,7 +62,7 @@ bool NFCLuaScriptModule::Shut()
     return true;
 }
 
-bool NFCLuaScriptModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCLuaScriptModule::Execute()
 {
     return true;
 }
@@ -298,4 +298,18 @@ bool NFCLuaScriptModule::Regisger()
         .endClass();
 
     return true;
+}
+
+int NFCLuaScriptModule::DoClassCommonScript( const NFGUID& self, const std::string& strComponentName, const std::string& strFunction )
+{
+	if (!CheckCompomentStatus(strComponentName, strFunction))
+	{
+		return 0;
+	}
+
+	luabridge::LuaRef objCompoment = luabridge::getGlobal(mpLuaState, strComponentName.c_str());
+	luabridge::LuaRef objFun = objCompoment[strFunction.c_str()];
+	objFun((NFINT64)m_pKernelModule, self);
+
+	return 0;
 }
