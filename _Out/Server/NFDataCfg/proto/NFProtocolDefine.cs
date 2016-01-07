@@ -244,7 +244,7 @@ public class GuildConfig
 
 public class GuildJob
 {
-	public static readonly String GuildJob = "GuildJob";
+	public static readonly String Job = "Job";
 	public static readonly String JobCount = "JobCount";
 	public static readonly String Appoint = "Appoint";
 	public static readonly String Fire = "Fire";
