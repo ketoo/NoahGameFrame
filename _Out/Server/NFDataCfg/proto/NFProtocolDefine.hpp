@@ -1,19 +1,21 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/06
+//    @Date             :    2016/01/07
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
 #ifndef NF_PR_NAME_HPP
 #define NF_PR_NAME_HPP
 
+#include <string>
 namespace NFrame
 {
 
 class BB_Build
 {
 public:
+	// Property
 	static const std::string& Type(){ static std::string xType = "Type"; return xType;}
 	static const std::string& SubType(){ static std::string xSubType = "SubType"; return xSubType;}
 	static const std::string& Prefab(){ static std::string xPrefab = "Prefab"; return xPrefab;}
@@ -22,18 +24,14 @@ public:
 	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon;}
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName;}
 	static const std::string& Desc(){ static std::string xDesc = "Desc"; return xDesc;}
-
-};
-
-class BB_Build
-{
-public:
+	// Record
 
 };
 
 class BB_Player
 {
 public:
+	// Property
 	static const std::string& RoleName(){ static std::string xRoleName = "RoleName"; return xRoleName;}
 	static const std::string& Sex(){ static std::string xSex = "Sex"; return xSex;}
 	static const std::string& Race(){ static std::string xRace = "Race"; return xRace;}
@@ -46,20 +44,16 @@ public:
 	static const std::string& Steel(){ static std::string xSteel = "Steel"; return xSteel;}
 	static const std::string& Diamond(){ static std::string xDiamond = "Diamond"; return xDiamond;}
 	static const std::string& LoadPropertyFinish(){ static std::string xLoadPropertyFinish = "LoadPropertyFinish"; return xLoadPropertyFinish;}
-
-};
-
-class BB_Player
-{
-public:
-	const static std::string BuildingList = "BuildingList";
-	const static std::string BuildingProduce = "BuildingProduce";
+	// Record
+	static const std::string& BuildingList(){ static std::string xBuildingList = "BuildingList"; return xBuildingList;}
+	static const std::string& BuildingProduce(){ static std::string xBuildingProduce = "BuildingProduce"; return xBuildingProduce;}
 
 };
 
 class Buff
 {
 public:
+	// Property
 	static const std::string& EffectType(){ static std::string xEffectType = "EffectType"; return xEffectType;}
 	static const std::string& EffectValueType(){ static std::string xEffectValueType = "EffectValueType"; return xEffectValueType;}
 	static const std::string& EffectValueReferType(){ static std::string xEffectValueReferType = "EffectValueReferType"; return xEffectValueReferType;}
@@ -69,34 +63,26 @@ public:
 	static const std::string& ReverseReferType(){ static std::string xReverseReferType = "ReverseReferType"; return xReverseReferType;}
 	static const std::string& EffectClearOnDead(){ static std::string xEffectClearOnDead = "EffectClearOnDead"; return xEffectClearOnDead;}
 	static const std::string& DownSaveType(){ static std::string xDownSaveType = "DownSaveType"; return xDownSaveType;}
-
-};
-
-class Buff
-{
-public:
+	// Record
 
 };
 
 class ChatGroup
 {
 public:
+	// Property
 	static const std::string& Name(){ static std::string xName = "Name"; return xName;}
 	static const std::string& CreateObject(){ static std::string xCreateObject = "CreateObject"; return xCreateObject;}
-
-};
-
-class ChatGroup
-{
-public:
-	const static std::string GroupMemberList = "GroupMemberList";
-	const static std::string ChatList = "ChatList";
+	// Record
+	static const std::string& GroupMemberList(){ static std::string xGroupMemberList = "GroupMemberList"; return xGroupMemberList;}
+	static const std::string& ChatList(){ static std::string xChatList = "ChatList"; return xChatList;}
 
 };
 
 class ConsumeData
 {
 public:
+	// Property
 	static const std::string& VIPEXP(){ static std::string xVIPEXP = "VIPEXP"; return xVIPEXP;}
 	static const std::string& EXP(){ static std::string xEXP = "EXP"; return xEXP;}
 	static const std::string& HP(){ static std::string xHP = "HP"; return xHP;}
@@ -104,34 +90,26 @@ public:
 	static const std::string& MP(){ static std::string xMP = "MP"; return xMP;}
 	static const std::string& Gold(){ static std::string xGold = "Gold"; return xGold;}
 	static const std::string& Money(){ static std::string xMoney = "Money"; return xMoney;}
-
-};
-
-class ConsumeData
-{
-public:
+	// Record
 
 };
 
 class Cost
 {
 public:
+	// Property
 	static const std::string& CostMoney(){ static std::string xCostMoney = "CostMoney"; return xCostMoney;}
 	static const std::string& CostDiamond(){ static std::string xCostDiamond = "CostDiamond"; return xCostDiamond;}
 	static const std::string& CostVP(){ static std::string xCostVP = "CostVP"; return xCostVP;}
 	static const std::string& CostHonour(){ static std::string xCostHonour = "CostHonour"; return xCostHonour;}
-
-};
-
-class Cost
-{
-public:
+	// Record
 
 };
 
 class DescData
 {
 public:
+	// Property
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName;}
 	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon;}
 	static const std::string& Atlas(){ static std::string xAtlas = "Atlas"; return xAtlas;}
@@ -139,18 +117,14 @@ public:
 	static const std::string& PerformanceEffect(){ static std::string xPerformanceEffect = "PerformanceEffect"; return xPerformanceEffect;}
 	static const std::string& PerformanceSound(){ static std::string xPerformanceSound = "PerformanceSound"; return xPerformanceSound;}
 	static const std::string& DescText(){ static std::string xDescText = "DescText"; return xDescText;}
-
-};
-
-class DescData
-{
-public:
+	// Record
 
 };
 
 class EffectData
 {
 public:
+	// Property
 	static const std::string& MAXHP(){ static std::string xMAXHP = "MAXHP"; return xMAXHP;}
 	static const std::string& MAXMP(){ static std::string xMAXMP = "MAXMP"; return xMAXMP;}
 	static const std::string& MAXSP(){ static std::string xMAXSP = "MAXSP"; return xMAXSP;}
@@ -175,35 +149,27 @@ public:
 	static const std::string& PHYSICAL_GATE(){ static std::string xPHYSICAL_GATE = "PHYSICAL_GATE"; return xPHYSICAL_GATE;}
 	static const std::string& MAGIC_GATE(){ static std::string xMAGIC_GATE = "MAGIC_GATE"; return xMAGIC_GATE;}
 	static const std::string& BUFF_GATE(){ static std::string xBUFF_GATE = "BUFF_GATE"; return xBUFF_GATE;}
-
-};
-
-class EffectData
-{
-public:
+	// Record
 
 };
 
 class Equip
 {
 public:
+	// Property
 	static const std::string& Sex(){ static std::string xSex = "Sex"; return xSex;}
 	static const std::string& IntensiveBuffList(){ static std::string xIntensiveBuffList = "IntensiveBuffList"; return xIntensiveBuffList;}
 	static const std::string& EnchantmentBuffList(){ static std::string xEnchantmentBuffList = "EnchantmentBuffList"; return xEnchantmentBuffList;}
 	static const std::string& SuitID(){ static std::string xSuitID = "SuitID"; return xSuitID;}
 	static const std::string& SuitBuffID(){ static std::string xSuitBuffID = "SuitBuffID"; return xSuitBuffID;}
-
-};
-
-class Equip
-{
-public:
+	// Record
 
 };
 
 class Guild
 {
 public:
+	// Property
 	static const std::string& Name(){ static std::string xName = "Name"; return xName;}
 	static const std::string& PresidentID(){ static std::string xPresidentID = "PresidentID"; return xPresidentID;}
 	static const std::string& PresidentName(){ static std::string xPresidentName = "PresidentName"; return xPresidentName;}
@@ -226,42 +192,34 @@ public:
 	static const std::string& RecruitAD(){ static std::string xRecruitAD = "RecruitAD"; return xRecruitAD;}
 	static const std::string& RecruitLevel(){ static std::string xRecruitLevel = "RecruitLevel"; return xRecruitLevel;}
 	static const std::string& AutoRecruit(){ static std::string xAutoRecruit = "AutoRecruit"; return xAutoRecruit;}
-
-};
-
-class Guild
-{
-public:
-	const static std::string GuildBoss = "GuildBoss";
-	const static std::string GuildMemberList = "GuildMemberList";
-	const static std::string GuildAppyList = "GuildAppyList";
-	const static std::string GuildEvent = "GuildEvent";
-	const static std::string GuildHouse = "GuildHouse";
-	const static std::string GuildSkill = "GuildSkill";
+	// Record
+	static const std::string& GuildBoss(){ static std::string xGuildBoss = "GuildBoss"; return xGuildBoss;}
+	static const std::string& GuildMemberList(){ static std::string xGuildMemberList = "GuildMemberList"; return xGuildMemberList;}
+	static const std::string& GuildAppyList(){ static std::string xGuildAppyList = "GuildAppyList"; return xGuildAppyList;}
+	static const std::string& GuildEvent(){ static std::string xGuildEvent = "GuildEvent"; return xGuildEvent;}
+	static const std::string& GuildHouse(){ static std::string xGuildHouse = "GuildHouse"; return xGuildHouse;}
+	static const std::string& GuildSkill(){ static std::string xGuildSkill = "GuildSkill"; return xGuildSkill;}
 
 };
 
 class GuildConfig
 {
 public:
+	// Property
 	static const std::string& ConditionPlayerLevel(){ static std::string xConditionPlayerLevel = "ConditionPlayerLevel"; return xConditionPlayerLevel;}
 	static const std::string& ConditionPlayerVIP(){ static std::string xConditionPlayerVIP = "ConditionPlayerVIP"; return xConditionPlayerVIP;}
 	static const std::string& CostMoney(){ static std::string xCostMoney = "CostMoney"; return xCostMoney;}
 	static const std::string& DismissTime(){ static std::string xDismissTime = "DismissTime"; return xDismissTime;}
 	static const std::string& GuildLevel(){ static std::string xGuildLevel = "GuildLevel"; return xGuildLevel;}
 	static const std::string& MaxMember(){ static std::string xMaxMember = "MaxMember"; return xMaxMember;}
-
-};
-
-class GuildConfig
-{
-public:
+	// Record
 
 };
 
 class GuildJob
 {
 public:
+	// Property
 	static const std::string& GuildJob(){ static std::string xGuildJob = "GuildJob"; return xGuildJob;}
 	static const std::string& JobCount(){ static std::string xJobCount = "JobCount"; return xJobCount;}
 	static const std::string& Appoint(){ static std::string xAppoint = "Appoint"; return xAppoint;}
@@ -277,65 +235,49 @@ public:
 	static const std::string& EditAD(){ static std::string xEditAD = "EditAD"; return xEditAD;}
 	static const std::string& Leave(){ static std::string xLeave = "Leave"; return xLeave;}
 	static const std::string& LevelUp(){ static std::string xLevelUp = "LevelUp"; return xLevelUp;}
-
-};
-
-class GuildJob
-{
-public:
+	// Record
 
 };
 
 class GuildName
 {
 public:
+	// Property
 	static const std::string& GuildID(){ static std::string xGuildID = "GuildID"; return xGuildID;}
-
-};
-
-class GuildName
-{
-public:
+	// Record
 
 };
 
 class InitProperty
 {
 public:
+	// Property
 	static const std::string& Job(){ static std::string xJob = "Job"; return xJob;}
 	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel;}
 	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData;}
 	static const std::string& SkillIDRef(){ static std::string xSkillIDRef = "SkillIDRef"; return xSkillIDRef;}
 	static const std::string& ModelPtah(){ static std::string xModelPtah = "ModelPtah"; return xModelPtah;}
-
-};
-
-class InitProperty
-{
-public:
+	// Record
 
 };
 
 class IObject
 {
 public:
+	// Property
 	static const std::string& ID(){ static std::string xID = "ID"; return xID;}
 	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName;}
 	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID;}
 	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID;}
 	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID;}
-
-};
-
-class IObject
-{
-public:
+	// Record
 
 };
 
 class Item
 {
 public:
+	// Property
 	static const std::string& ItemType(){ static std::string xItemType = "ItemType"; return xItemType;}
 	static const std::string& ItemSubType(){ static std::string xItemSubType = "ItemSubType"; return xItemSubType;}
 	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel;}
@@ -352,32 +294,24 @@ public:
 	static const std::string& SalePrice(){ static std::string xSalePrice = "SalePrice"; return xSalePrice;}
 	static const std::string& Script(){ static std::string xScript = "Script"; return xScript;}
 	static const std::string& Extend(){ static std::string xExtend = "Extend"; return xExtend;}
-
-};
-
-class Item
-{
-public:
+	// Record
 
 };
 
 class Language
 {
 public:
+	// Property
 	static const std::string& English(){ static std::string xEnglish = "English"; return xEnglish;}
 	static const std::string& Chinese(){ static std::string xChinese = "Chinese"; return xChinese;}
-
-};
-
-class Language
-{
-public:
+	// Record
 
 };
 
 class NPC
 {
 public:
+	// Property
 	static const std::string& SeedID(){ static std::string xSeedID = "SeedID"; return xSeedID;}
 	static const std::string& EXP(){ static std::string xEXP = "EXP"; return xEXP;}
 	static const std::string& HP(){ static std::string xHP = "HP"; return xHP;}
@@ -421,19 +355,15 @@ public:
 	static const std::string& DropPackList(){ static std::string xDropPackList = "DropPackList"; return xDropPackList;}
 	static const std::string& SkillIDRef(){ static std::string xSkillIDRef = "SkillIDRef"; return xSkillIDRef;}
 	static const std::string& Height(){ static std::string xHeight = "Height"; return xHeight;}
-
-};
-
-class NPC
-{
-public:
-	const static std::string PosList = "PosList";
+	// Record
+	static const std::string& PosList(){ static std::string xPosList = "PosList"; return xPosList;}
 
 };
 
 class Player
 {
 public:
+	// Property
 	static const std::string& Name(){ static std::string xName = "Name"; return xName;}
 	static const std::string& Sex(){ static std::string xSex = "Sex"; return xSex;}
 	static const std::string& Race(){ static std::string xRace = "Race"; return xRace;}
@@ -513,30 +443,26 @@ public:
 	static const std::string& GameID(){ static std::string xGameID = "GameID"; return xGameID;}
 	static const std::string& GateID(){ static std::string xGateID = "GateID"; return xGateID;}
 	static const std::string& GuildID(){ static std::string xGuildID = "GuildID"; return xGuildID;}
-
-};
-
-class Player
-{
-public:
-	const static std::string PlayerViewItem = "PlayerViewItem";
-	const static std::string PlayerHero = "PlayerHero";
-	const static std::string BagEquipList = "BagEquipList";
-	const static std::string BagItemList = "BagItemList";
-	const static std::string CommPropertyValue = "CommPropertyValue";
-	const static std::string EctypeList = "EctypeList";
-	const static std::string DropItemList = "DropItemList";
-	const static std::string SkillTable = "SkillTable";
-	const static std::string TaskMonsterList = "TaskMonsterList";
-	const static std::string TaskList = "TaskList";
-	const static std::string PVPList = "PVPList";
-	const static std::string ChatGroup = "ChatGroup";
+	// Record
+	static const std::string& PlayerViewItem(){ static std::string xPlayerViewItem = "PlayerViewItem"; return xPlayerViewItem;}
+	static const std::string& PlayerHero(){ static std::string xPlayerHero = "PlayerHero"; return xPlayerHero;}
+	static const std::string& BagEquipList(){ static std::string xBagEquipList = "BagEquipList"; return xBagEquipList;}
+	static const std::string& BagItemList(){ static std::string xBagItemList = "BagItemList"; return xBagItemList;}
+	static const std::string& CommPropertyValue(){ static std::string xCommPropertyValue = "CommPropertyValue"; return xCommPropertyValue;}
+	static const std::string& EctypeList(){ static std::string xEctypeList = "EctypeList"; return xEctypeList;}
+	static const std::string& DropItemList(){ static std::string xDropItemList = "DropItemList"; return xDropItemList;}
+	static const std::string& SkillTable(){ static std::string xSkillTable = "SkillTable"; return xSkillTable;}
+	static const std::string& TaskMonsterList(){ static std::string xTaskMonsterList = "TaskMonsterList"; return xTaskMonsterList;}
+	static const std::string& TaskList(){ static std::string xTaskList = "TaskList"; return xTaskList;}
+	static const std::string& PVPList(){ static std::string xPVPList = "PVPList"; return xPVPList;}
+	static const std::string& ChatGroup(){ static std::string xChatGroup = "ChatGroup"; return xChatGroup;}
 
 };
 
 class Scene
 {
 public:
+	// Property
 	static const std::string& SceneName(){ static std::string xSceneName = "SceneName"; return xSceneName;}
 	static const std::string& SceneShowName(){ static std::string xSceneShowName = "SceneShowName"; return xSceneShowName;}
 	static const std::string& MaxGroup(){ static std::string xMaxGroup = "MaxGroup"; return xMaxGroup;}
@@ -551,18 +477,14 @@ public:
 	static const std::string& LoadingUI(){ static std::string xLoadingUI = "LoadingUI"; return xLoadingUI;}
 	static const std::string& CamOffestPos(){ static std::string xCamOffestPos = "CamOffestPos"; return xCamOffestPos;}
 	static const std::string& CamOffestRot(){ static std::string xCamOffestRot = "CamOffestRot"; return xCamOffestRot;}
-
-};
-
-class Scene
-{
-public:
+	// Record
 
 };
 
 class Server
 {
 public:
+	// Property
 	static const std::string& ServerID(){ static std::string xServerID = "ServerID"; return xServerID;}
 	static const std::string& Name(){ static std::string xName = "Name"; return xName;}
 	static const std::string& MaxOnline(){ static std::string xMaxOnline = "MaxOnline"; return xMaxOnline;}
@@ -570,18 +492,14 @@ public:
 	static const std::string& IP(){ static std::string xIP = "IP"; return xIP;}
 	static const std::string& Port(){ static std::string xPort = "Port"; return xPort;}
 	static const std::string& Type(){ static std::string xType = "Type"; return xType;}
-
-};
-
-class Server
-{
-public:
+	// Record
 
 };
 
 class Shop
 {
 public:
+	// Property
 	static const std::string& Type(){ static std::string xType = "Type"; return xType;}
 	static const std::string& ItemID(){ static std::string xItemID = "ItemID"; return xItemID;}
 	static const std::string& Gold(){ static std::string xGold = "Gold"; return xGold;}
@@ -589,18 +507,14 @@ public:
 	static const std::string& Stone(){ static std::string xStone = "Stone"; return xStone;}
 	static const std::string& Diamond(){ static std::string xDiamond = "Diamond"; return xDiamond;}
 	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel;}
-
-};
-
-class Shop
-{
-public:
+	// Record
 
 };
 
 class Skill
 {
 public:
+	// Property
 	static const std::string& SkillType(){ static std::string xSkillType = "SkillType"; return xSkillType;}
 	static const std::string& AnimaState(){ static std::string xAnimaState = "AnimaState"; return xAnimaState;}
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName;}
@@ -626,18 +540,14 @@ public:
 	static const std::string& AtkDis(){ static std::string xAtkDis = "AtkDis"; return xAtkDis;}
 	static const std::string& NeedTar(){ static std::string xNeedTar = "NeedTar"; return xNeedTar;}
 	static const std::string& DefaultHitTime(){ static std::string xDefaultHitTime = "DefaultHitTime"; return xDefaultHitTime;}
-
-};
-
-class Skill
-{
-public:
+	// Record
 
 };
 
 class SkillRef
 {
 public:
+	// Property
 	static const std::string& NORMALATTACK1(){ static std::string xNORMALATTACK1 = "NORMALATTACK1"; return xNORMALATTACK1;}
 	static const std::string& NORMALATTACK2(){ static std::string xNORMALATTACK2 = "NORMALATTACK2"; return xNORMALATTACK2;}
 	static const std::string& NORMALATTACK3(){ static std::string xNORMALATTACK3 = "NORMALATTACK3"; return xNORMALATTACK3;}
@@ -652,18 +562,14 @@ public:
 	static const std::string& SKILL8(){ static std::string xSKILL8 = "SKILL8"; return xSKILL8;}
 	static const std::string& SKILL9(){ static std::string xSKILL9 = "SKILL9"; return xSKILL9;}
 	static const std::string& SKILL10(){ static std::string xSKILL10 = "SKILL10"; return xSKILL10;}
-
-};
-
-class SkillRef
-{
-public:
+	// Record
 
 };
 
 class SqlServer
 {
 public:
+	// Property
 	static const std::string& ServerID(){ static std::string xServerID = "ServerID"; return xServerID;}
 	static const std::string& IP(){ static std::string xIP = "IP"; return xIP;}
 	static const std::string& Port(){ static std::string xPort = "Port"; return xPort;}
@@ -672,31 +578,23 @@ public:
 	static const std::string& SqlUser(){ static std::string xSqlUser = "SqlUser"; return xSqlUser;}
 	static const std::string& SqlPwd(){ static std::string xSqlPwd = "SqlPwd"; return xSqlPwd;}
 	static const std::string& SqlName(){ static std::string xSqlName = "SqlName"; return xSqlName;}
-
-};
-
-class SqlServer
-{
-public:
+	// Record
 
 };
 
 class StateFuncResources
 {
 public:
+	// Property
 	static const std::string& Atlas_ResID(){ static std::string xAtlas_ResID = "Atlas_ResID"; return xAtlas_ResID;}
-
-};
-
-class StateFuncResources
-{
-public:
+	// Record
 
 };
 
 class StateFunction
 {
 public:
+	// Property
 	static const std::string& EFT_INFO(){ static std::string xEFT_INFO = "EFT_INFO"; return xEFT_INFO;}
 	static const std::string& EFT_BOOOST(){ static std::string xEFT_BOOOST = "EFT_BOOOST"; return xEFT_BOOOST;}
 	static const std::string& EFT_LVLUP(){ static std::string xEFT_LVLUP = "EFT_LVLUP"; return xEFT_LVLUP;}
@@ -711,18 +609,14 @@ public:
 	static const std::string& EFT_REPAIR(){ static std::string xEFT_REPAIR = "EFT_REPAIR"; return xEFT_REPAIR;}
 	static const std::string& EFT_CANCEL(){ static std::string xEFT_CANCEL = "EFT_CANCEL"; return xEFT_CANCEL;}
 	static const std::string& EFT_FINISH(){ static std::string xEFT_FINISH = "EFT_FINISH"; return xEFT_FINISH;}
-
-};
-
-class StateFunction
-{
-public:
+	// Record
 
 };
 
 class Task
 {
 public:
+	// Property
 	static const std::string& Type(){ static std::string xType = "Type"; return xType;}
 	static const std::string& NextTaskID(){ static std::string xNextTaskID = "NextTaskID"; return xNextTaskID;}
 	static const std::string& KillMonsterName(){ static std::string xKillMonsterName = "KillMonsterName"; return xKillMonsterName;}
@@ -732,12 +626,7 @@ public:
 	static const std::string& AwardGold(){ static std::string xAwardGold = "AwardGold"; return xAwardGold;}
 	static const std::string& AwardPack(){ static std::string xAwardPack = "AwardPack"; return xAwardPack;}
 	static const std::string& Desc(){ static std::string xDesc = "Desc"; return xDesc;}
-
-};
-
-class Task
-{
-public:
+	// Record
 
 };
 
