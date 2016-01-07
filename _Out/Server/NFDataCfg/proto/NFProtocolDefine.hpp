@@ -47,6 +47,29 @@ public:
 	// Record
 	static const std::string& BuildingList(){ static std::string xBuildingList = "BuildingList"; return xBuildingList;}
 	static const std::string& BuildingProduce(){ static std::string xBuildingProduce = "BuildingProduce"; return xBuildingProduce;}
+	enum BuildingList
+	{
+		BuildingID		= 0; // BuildingID -- string
+		BuildingGUID		= 1; // BuildingGUID -- object
+		State		= 2; // State -- int
+		PosX		= 3; // PosX -- int
+		PosY		= 4; // PosY -- int
+		PosZ		= 5; // PosZ -- int
+		StateStartTime		= 6; // StateStartTime -- int
+		StateEndTime		= 7; // StateEndTime -- int
+
+	}
+
+	enum BuildingProduce
+	{
+		BuildingGUID		= 0; // BuildingGUID -- object
+		ItemID		= 1; // ItemID -- string
+		LeftCount		= 2; // LeftCount -- int
+		OnceTime		= 3; // OnceTime -- int
+		OnceStartTime		= 4; // OnceStartTime -- int
+
+	}
+
 
 };
 
@@ -76,6 +99,22 @@ public:
 	// Record
 	static const std::string& GroupMemberList(){ static std::string xGroupMemberList = "GroupMemberList"; return xGroupMemberList;}
 	static const std::string& ChatList(){ static std::string xChatList = "ChatList"; return xChatList;}
+	enum GroupMemberList
+	{
+		GUID		= 0; // GUID -- object
+		Online		= 1; // Online -- int
+		GameID		= 2; // GameID -- int
+
+	}
+
+	enum ChatList
+	{
+		GUID		= 0; // GUID -- object
+		msg		= 1; // msg -- string
+		time		= 2; // time -- int
+
+	}
+
 
 };
 
@@ -199,6 +238,92 @@ public:
 	static const std::string& GuildEvent(){ static std::string xGuildEvent = "GuildEvent"; return xGuildEvent;}
 	static const std::string& GuildHouse(){ static std::string xGuildHouse = "GuildHouse"; return xGuildHouse;}
 	static const std::string& GuildSkill(){ static std::string xGuildSkill = "GuildSkill"; return xGuildSkill;}
+	enum GuildBoss
+	{
+		GUID		= 0; // GUID -- object
+		Name		= 1; // Name -- string
+		Level		= 2; // Level -- int
+		Job		= 3; // Job -- int
+		Donation		= 4; // Donation -- int
+		VIP		= 5; // VIP -- int
+		Offline		= 6; // Offline -- int
+		Power		= 7; // Power -- int
+
+	}
+
+	enum GuildMemberList
+	{
+		GUID		= 0; // GUID -- object
+		Name		= 1; // Name -- string
+		Level		= 2; // Level -- int
+		Job		= 3; // Job -- int
+		Donation		= 4; // Donation -- int
+		Receive		= 5; // Receive -- int
+		VIP		= 6; // VIP -- int
+		Online		= 7; // Online -- int
+		Power		= 8; // Power -- int
+		Title		= 9; // Title -- int
+		GameID		= 10; // GameID -- int
+		JoinTime		= 11; // JoinTime -- int
+		Contribution		= 12; // Contribution -- int
+		AllContribution		= 13; // AllContribution -- int
+
+	}
+
+	enum GuildAppyList
+	{
+		GUID		= 0; // GUID -- object
+		Name		= 1; // Name -- string
+		Level		= 2; // Level -- int
+		Job		= 3; // Job -- int
+		Donation		= 4; // Donation -- int
+		VIP		= 5; // VIP -- int
+		Power		= 6; // Power -- int
+
+	}
+
+	enum GuildEvent
+	{
+		GUID		= 0; // GUID -- object
+		Name		= 1; // Name -- string
+		Level		= 2; // Level -- int
+		Job		= 3; // Job -- int
+		Donation		= 4; // Donation -- int
+		VIP		= 5; // VIP -- int
+		Offline		= 6; // Offline -- int
+		Power		= 7; // Power -- int
+		EventID		= 8; // EventID -- int
+		EventTime		= 9; // EventTime -- int
+		Context		= 10; // Context -- string
+
+	}
+
+	enum GuildHouse
+	{
+		GUID		= 0; // GUID -- object
+		Name		= 1; // Name -- string
+		Level		= 2; // Level -- int
+		Job		= 3; // Job -- int
+		Donation		= 4; // Donation -- int
+		VIP		= 5; // VIP -- int
+		Offline		= 6; // Offline -- int
+		Power		= 7; // Power -- int
+
+	}
+
+	enum GuildSkill
+	{
+		GUID		= 0; // GUID -- object
+		Name		= 1; // Name -- string
+		Level		= 2; // Level -- int
+		Job		= 3; // Job -- int
+		Donation		= 4; // Donation -- int
+		VIP		= 5; // VIP -- int
+		Offline		= 6; // Offline -- int
+		Power		= 7; // Power -- int
+
+	}
+
 
 };
 
@@ -357,6 +482,15 @@ public:
 	static const std::string& Height(){ static std::string xHeight = "Height"; return xHeight;}
 	// Record
 	static const std::string& PosList(){ static std::string xPosList = "PosList"; return xPosList;}
+	enum PosList
+	{
+		X		= 0; // X -- float
+		Y		= 1; // Y -- float
+		Z		= 2; // Z -- float
+		StayTime		= 3; // StayTime -- float
+
+	}
+
 
 };
 
@@ -456,6 +590,161 @@ public:
 	static const std::string& TaskList(){ static std::string xTaskList = "TaskList"; return xTaskList;}
 	static const std::string& PVPList(){ static std::string xPVPList = "PVPList"; return xPVPList;}
 	static const std::string& ChatGroup(){ static std::string xChatGroup = "ChatGroup"; return xChatGroup;}
+	enum PlayerViewItem
+	{
+		ConfigID		= 0; // ConfigID -- string
+		EnhanceLevel		= 1; // EnhanceLevel -- int
+		InlayStone		= 2; // InlayStone -- string
+		SagecraftLevel		= 3; // SagecraftLevel -- string
+
+	}
+
+	enum PlayerHero
+	{
+		GUID		= 0; // GUID -- object
+		ConfigID		= 1; // ConfigID -- string
+		Level		= 2; // Level -- int
+		Exp		= 3; // Exp -- string
+		Equip1		= 4; // Equip1 -- object
+		Equip2		= 5; // Equip2 -- object
+		Equip3		= 6; // Equip3 -- object
+		Equip4		= 7; // Equip4 -- object
+		Equip5		= 8; // Equip5 -- object
+		Equip6		= 9; // Equip6 -- object
+
+	}
+
+	enum BagEquipList
+	{
+		GUID		= 0; // GUID -- object
+		WearGUID		= 1; // WearGUID -- object
+		ConfigID		= 2; // ConfigID -- string
+		Bound		= 3; // Bound -- int
+		ExpiredType		= 4; // ExpiredType -- int
+		RandPropertyID		= 5; // RandPropertyID -- string
+		Date		= 6; // Date -- object
+		SlotCount		= 7; // SlotCount -- int
+		InlayStone1		= 8; // InlayStone1 -- string
+		InlayStone2		= 9; // InlayStone2 -- string
+		InlayStone3		= 10; // InlayStone3 -- string
+		InlayStone4		= 11; // InlayStone4 -- string
+		InlayStone5		= 12; // InlayStone5 -- string
+		InlayStone6		= 13; // InlayStone6 -- string
+		InlayStone7		= 14; // InlayStone7 -- string
+		InlayStone8		= 15; // InlayStone8 -- string
+		InlayStone9		= 16; // InlayStone9 -- string
+		InlayStone10		= 17; // InlayStone10 -- string
+		IntensifyLevel		= 18; // IntensifyLevel -- string
+		ElementLevel1		= 19; // ElementLevel1 -- int
+		ElementLevel2		= 20; // ElementLevel2 -- int
+		ElementLevel3		= 21; // ElementLevel3 -- int
+		ElementLevel4		= 22; // ElementLevel4 -- int
+		ElementLevel5		= 23; // ElementLevel5 -- int
+		ElementLevel6		= 24; // ElementLevel6 -- int
+		ElementLevel7		= 25; // ElementLevel7 -- int
+		ElementLevel8		= 26; // ElementLevel8 -- int
+		ElementLevel9		= 27; // ElementLevel9 -- int
+		ElementLevel10		= 28; // ElementLevel10 -- int
+
+	}
+
+	enum BagItemList
+	{
+		ConfigID		= 0; // ConfigID -- string
+		ItemCount		= 1; // ItemCount -- int
+		Bound		= 2; // Bound -- int
+		ExpiredType		= 3; // ExpiredType -- int
+		Date		= 4; // Date -- object
+
+	}
+
+	enum CommPropertyValue
+	{
+		MAXHP		= 0; // MAXHP -- int
+		MAXMP		= 1; // MAXMP -- int
+		MAXSP		= 2; // MAXSP -- int
+		HPREGEN		= 3; // HPREGEN -- int
+		SPREGEN		= 4; // SPREGEN -- int
+		MPREGEN		= 5; // MPREGEN -- int
+		ATK_VALUE		= 6; // ATK_VALUE -- int
+		DEF_VALUE		= 7; // DEF_VALUE -- int
+		MOVE_SPEED		= 8; // MOVE_SPEED -- int
+		ATK_SPEED		= 9; // ATK_SPEED -- int
+		ATK_FIRE		= 10; // ATK_FIRE -- int
+		ATK_LIGHT		= 11; // ATK_LIGHT -- int
+		ATK_ICE		= 12; // ATK_ICE -- int
+		ATK_POISON		= 13; // ATK_POISON -- int
+		DEF_FIRE		= 14; // DEF_FIRE -- int
+		DEF_LIGHT		= 15; // DEF_LIGHT -- int
+		DEF_ICE		= 16; // DEF_ICE -- int
+		DEF_POISON		= 17; // DEF_POISON -- int
+		DIZZY_GATE		= 18; // DIZZY_GATE -- int
+		MOVE_GATE		= 19; // MOVE_GATE -- int
+		SKILL_GATE		= 20; // SKILL_GATE -- int
+		PHYSICAL_GATE		= 21; // PHYSICAL_GATE -- int
+		MAGIC_GATE		= 22; // MAGIC_GATE -- int
+		BUFF_GATE		= 23; // BUFF_GATE -- int
+
+	}
+
+	enum EctypeList
+	{
+		EctypeID		= 0; // EctypeID -- int
+		IsPass		= 1; // IsPass -- int
+		Star		= 2; // Star -- int
+
+	}
+
+	enum DropItemList
+	{
+		MonsterID		= 0; // MonsterID -- object
+		ItemID		= 1; // ItemID -- string
+		ItemCount		= 2; // ItemCount -- int
+		DrawState		= 3; // DrawState -- int
+
+	}
+
+	enum SkillTable
+	{
+		SkillID		= 0; // SkillID -- string
+		SkillLevel		= 1; // SkillLevel -- int
+		SkillStone		= 2; // SkillStone -- string
+		SkillSoulLevel		= 3; // SkillSoulLevel -- int
+
+	}
+
+	enum TaskMonsterList
+	{
+		MonsterID		= 0; // MonsterID -- string
+		CurrentKillCount		= 1; // CurrentKillCount -- int
+		RequireKillCount		= 2; // RequireKillCount -- int
+		TaskID		= 3; // TaskID -- string
+
+	}
+
+	enum TaskList
+	{
+		TaskID		= 0; // TaskID -- string
+		TaskStatus		= 1; // TaskStatus -- int
+		Process		= 2; // Process -- int
+
+	}
+
+	enum PVPList
+	{
+		ID		= 0; // ID -- object
+		Name		= 1; // Name -- string
+		Level		= 2; // Level -- int
+
+	}
+
+	enum ChatGroup
+	{
+		ChatType		= 0; // ChatType -- int
+		GroupGUID		= 1; // GroupGUID -- object
+
+	}
+
 
 };
 
