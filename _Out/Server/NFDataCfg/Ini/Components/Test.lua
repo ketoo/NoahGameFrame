@@ -5,7 +5,7 @@ function Test:Init(kernel, self)
 	io.write("Hello Lua Init!\n");
 end
 
-function Test:AfterInit(kernel, self, arg)
+function Test:AfterInit(kernel, self)
 	io.write("Hello Lua AfterInit!\n");
 
 	if kernel == nil then
@@ -59,11 +59,11 @@ function Test:AfterInit(kernel, self, arg)
 	AddHeartBeat(kernel, self, "strHeartBeatName","Test", "HearCallBack", 5, 5);
 end
 
-function Test:BeforeShut(kernel, self, arg)
+function Test:BeforeShut(kernel, self)
 	io.write("Hello Lua BeforeShut\n");
 end
 
-function Test:Shut(kernel, self, arg)
+function Test:Shut(kernel, self)
 	io.write("Hello Lua Shut\n");
 end
 
