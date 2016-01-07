@@ -11,7 +11,7 @@
 #include "NFGameServerNet_ClientPlugin.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIClusterClientModule.hpp"
-#include "NFComm/NFMessageDefine/NFRecordDefine.pb.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCGameServerToWorldModule::Init()
 {
@@ -25,9 +25,9 @@ bool NFCGameServerToWorldModule::Shut()
 }
 
 
-bool NFCGameServerToWorldModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCGameServerToWorldModule::Execute()
 {
-	return NFIClusterClientModule::Execute(fLasFrametime, fStartedTime);
+	return NFIClusterClientModule::Execute();
 }
 
 void NFCGameServerToWorldModule::Register(NFINet* pNet)
@@ -541,7 +541,7 @@ void NFCGameServerToWorldModule::SendOnline( const NFGUID& self )
         {
             if (pChatGroup->IsUsed(i))
             {
-                const NFGUID& xChatGroup = pChatGroup->GetObject(i , NFMsg::RCT_ChatGroup::ChatGroup_GroupGUID); 
+                const NFGUID& xChatGroup = pChatGroup->GetObject(i , NFrame::Player::ChatGroup_GroupGUID); 
                 SubscriptionChatGroup(self, xChatGroup);
             }
         }
@@ -564,7 +564,7 @@ void NFCGameServerToWorldModule::SendOffline( const NFGUID& self )
         {
             if (pChatGroup->IsUsed(i))
             {
-                const NFGUID& xChatGroup = pChatGroup->GetObject(i , NFMsg::RCT_ChatGroup::ChatGroup_GroupGUID); 
+                const NFGUID& xChatGroup = pChatGroup->GetObject(i , NFrame::Player::ChatGroup_GroupGUID); 
                 CancelSubscriptionChatGroup(self, xChatGroup);
             }
         }
@@ -666,7 +666,7 @@ void NFCGameServerToWorldModule::OnAckQuitChatGroupProcess(const int nSockIndex,
             if (NULL != pChatGroup)
             {
                 NFCDataList varList;
-                pChatGroup->FindObject(NFMsg::RCT_ChatGroup::ChatGroup_GroupGUID, xChatGroup, varList);
+                pChatGroup->FindObject(NFrame::Player::ChatGroup_GroupGUID, xChatGroup, varList);
                 pChatGroup->Remove(varList);
 
                 CancelSubscriptionChatGroup(nPlayerID, xChatGroup);

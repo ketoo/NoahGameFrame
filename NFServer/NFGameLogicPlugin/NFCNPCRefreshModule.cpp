@@ -19,7 +19,7 @@ bool NFCNPCRefreshModule::Shut()
     return true;
 }
 
-bool NFCNPCRefreshModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCNPCRefreshModule::Execute()
 {
     return true;
 }

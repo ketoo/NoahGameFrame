@@ -207,11 +207,11 @@ int NFCMasterNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const 
 	return 0;
 }
 
-bool NFCMasterNet_ServerModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCMasterNet_ServerModule::Execute()
 {
-	LogGameServer(fLasFrametime);
+	LogGameServer();
 
-	NFINetModule::Execute(fLasFrametime, fStartedTime);
+	NFINetModule::Execute();
 	return true;
 }
 
@@ -410,15 +410,14 @@ void NFCMasterNet_ServerModule::SynWorldToLogin()
     }
 }
 
-void NFCMasterNet_ServerModule::LogGameServer(const float fLastTime)
+void NFCMasterNet_ServerModule::LogGameServer()
 {
-	if (mfLastLogTime < 10.0f)
+	if (mnLastLogTime + 10 < GetPluginManager()->GetNowTime())
 	{
-		mfLastLogTime += fLastTime;
 		return;
 	}
 
-	mfLastLogTime = 0.0f;
+	mnLastLogTime = GetPluginManager()->GetNowTime();
 
 	//////////////////////////////////////////////////////////////////////////
 

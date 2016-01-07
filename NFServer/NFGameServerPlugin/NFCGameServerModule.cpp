@@ -35,7 +35,7 @@ bool NFCGameServerModule::Shut()
     return true;
 }
 
-bool NFCGameServerModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCGameServerModule::Execute()
 {
 #ifdef _DEBUG
     /*
