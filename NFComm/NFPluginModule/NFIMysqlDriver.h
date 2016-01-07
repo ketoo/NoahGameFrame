@@ -48,14 +48,14 @@ class NFIMysqlDriver
 {
 public:
    virtual bool Connect(const std::string& strDBName, const std::string& strDBHost, const int nDBPort, const std::string& strDBUser, const std::string& strDBPwd) = 0;
-   virtual  bool Execute(const float fLasFrametime, const float fStartedTime) = 0;
+   virtual  bool Execute() = 0;
    virtual mysqlpp::Connection* GetConnection() = 0;
    virtual bool Query(const std::string& qstr, mysqlpp::StoreQueryResult& queryResult) = 0;
    virtual bool Query(const std::string& qstr) = 0;
 
    virtual bool Enable() = 0;
    virtual bool Reconnect() = 0;
-   virtual bool CanReconnect(const float fLasFrametime) = 0;
+   virtual bool CanReconnect() = 0;
 };
 
 #endif // !__NFI_REDIS_DRIVER_MODULE_H__

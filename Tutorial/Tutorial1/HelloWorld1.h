@@ -24,7 +24,7 @@ public:
     virtual bool Init();
     virtual bool AfterInit();
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool BeforeShut();
     virtual bool Shut();

@@ -349,7 +349,7 @@ bool NFCElementInfoModule::BeforeShut()
 
 }
 
-bool NFCElementInfoModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCElementInfoModule::Execute()
 {
     return true;
 

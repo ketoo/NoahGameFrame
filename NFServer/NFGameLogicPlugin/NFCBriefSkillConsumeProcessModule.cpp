@@ -41,7 +41,7 @@ bool NFCBriefSkillConsumeProcessModule::Shut()
     return true;
 }
 
-bool NFCBriefSkillConsumeProcessModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCBriefSkillConsumeProcessModule::Execute()
 {
     return true;
 }

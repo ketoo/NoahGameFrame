@@ -12,7 +12,7 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
-#include "NFComm/NFMessageDefine/NFRecordDefine.pb.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCChatGroupBroadcastModule::Init()
 {
@@ -24,7 +24,7 @@ bool NFCChatGroupBroadcastModule::Shut()
     return true;
 }
 
-bool NFCChatGroupBroadcastModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCChatGroupBroadcastModule::Execute()
 {
     return true;
 }
@@ -254,8 +254,8 @@ int NFCChatGroupBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const 
             if (pRecord && strRecordName == "GroupMemberList")
             {
                 //add
-                const NFGUID& nPlayer = pRecord->GetObject(nRow, NFMsg::GroupMemberList_GUID);
-                NFINT64 nGameID = pRecord->GetInt(nRow, NFMsg::GroupMemberList_GameID);
+                const NFGUID& nPlayer = pRecord->GetObject(nRow, NFrame::ChatGroup::GroupMemberList_GUID);
+                NFINT64 nGameID = pRecord->GetInt(nRow, NFrame::ChatGroup::GroupMemberList_GameID);
 
                 NFCDataList varSelf;
                 NFCDataList varGameID;
@@ -290,11 +290,11 @@ int NFCChatGroupBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const 
             NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, strRecordName);
             if (pRecord && strRecordName == "GroupMemberList")
             {
-                if (nCol == NFMsg::GroupMemberList_Online && newVar.Int( 0 ) > 0)
+                if (nCol == NFrame::ChatGroup::GroupMemberList_Online && newVar.Int( 0 ) > 0)
                 {
                     //add
-                    const NFGUID& nPlayer = pRecord->GetObject(nRow, NFMsg::GroupMemberList_GUID);
-                    NFINT64 nGameID = pRecord->GetInt(nRow, NFMsg::GroupMemberList_GameID);
+                    const NFGUID& nPlayer = pRecord->GetObject(nRow, NFrame::ChatGroup::GroupMemberList_GUID);
+                    NFINT64 nGameID = pRecord->GetInt(nRow, NFrame::ChatGroup::GroupMemberList_GameID);
 
                     NFCDataList varSelf;
                     NFCDataList varGameID;

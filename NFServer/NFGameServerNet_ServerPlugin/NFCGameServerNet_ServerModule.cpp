@@ -83,9 +83,9 @@ bool NFCGameServerNet_ServerModule::Shut()
 	return true;
 }
 
-bool NFCGameServerNet_ServerModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCGameServerNet_ServerModule::Execute()
 {
-	return NFINetModule::Execute(fLasFrametime, fStartedTime);
+	return NFINetModule::Execute();
 }
 
 void NFCGameServerNet_ServerModule::OnRecivePSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)

@@ -44,7 +44,7 @@ bool NFCPotionItemConsumeProcessModule::Shut()
     return true;
 }
 
-bool NFCPotionItemConsumeProcessModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCPotionItemConsumeProcessModule::Execute()
 {
     return true;
 }
