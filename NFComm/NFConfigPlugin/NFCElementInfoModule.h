@@ -81,7 +81,7 @@ public:
 
     virtual bool AfterInit();
     virtual bool BeforeShut();
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool Load();
     virtual bool Save();

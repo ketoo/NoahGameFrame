@@ -62,9 +62,9 @@ bool NFCActorManager::Shut()
 	return true;
 }
 
-bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCActorManager::Execute()
 {
-	pPluginManager->Execute(fLasFrametime, fStartedTime);
+	pPluginManager->Execute();
 
 	return true;
 }

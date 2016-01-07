@@ -26,7 +26,7 @@ public:
     virtual bool CheckConfig();
     virtual bool BeforeShut();
     virtual bool Shut();
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
 public:
     virtual int AddBuilding(const NFGUID& self, const std::string& strBuilding, const float fX, const float fY, const float fZ);

@@ -32,7 +32,8 @@ public:
     NFCHeartBeatElement()
     {
         fBeatTime = 0.0f;
-        fTime = 0.0f;
+        //fTime = 0.0f;
+		nTime = 0;
         nCount = 0;
         strBeatName = "";
     };
@@ -44,8 +45,7 @@ public:
     void DoHeartBeatEvent();
 
     float fBeatTime;
-
-    float fTime;
+	NFINT64 nTime;
     int nCount;
     std::string strBeatName;
     NFGUID self;
@@ -58,7 +58,7 @@ public:
 
     virtual NFGUID Self() = 0;
 
-    virtual bool Execute(const float fLastTime, const float fAllTime) = 0;
+    virtual bool Execute() = 0;
     virtual bool Exist(const std::string& strHeartBeatName) = 0;
 
     virtual bool AddHeartBeat(const NFGUID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;

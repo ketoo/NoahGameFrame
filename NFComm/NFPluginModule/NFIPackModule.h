@@ -12,7 +12,7 @@
 #include <iostream>
 #include "NFILogicModule.h"
 #include "NFComm/Define/NFItem_def.h"
-#include "NFComm/NFMessageDefine/NFRecordDefine.pb.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
 enum PackTableType
@@ -53,8 +53,8 @@ public:
 
 	/////////////装备镶嵌的石头/////////////////////////////////////////////////////////////
 
-	virtual bool SetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFMsg::RCT_BagEquipList eIndex, const std::string& strPropertyID) = 0;
-	virtual const std::string& GetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFMsg::RCT_BagEquipList eIndex) = 0;
+	virtual bool SetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex, const std::string& strPropertyID) = 0;
+	virtual const std::string& GetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex) = 0;
 
 	/////////////装备强化的等级/////////////////////////////////////////////////////////////
 
@@ -63,8 +63,8 @@ public:
 
 	/////////////装备元素的等级/////////////////////////////////////////////////////////////
 
-	virtual bool SetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFMsg::RCT_BagEquipList eIndex, const int nLevel) = 0;
-	virtual int GetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFMsg::RCT_BagEquipList eIndex) = 0;
+	virtual bool SetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex, const int nLevel) = 0;
+	virtual int GetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex) = 0;
 
 
 };

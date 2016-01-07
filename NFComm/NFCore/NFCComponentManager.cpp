@@ -70,13 +70,13 @@ bool NFCComponentManager::Shut()
     return true;
 }
 
-bool NFCComponentManager::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCComponentManager::Execute()
 {
 
     NF_SHARE_PTR<NFIComponent> pComponent = First();
     while (pComponent.get() && pComponent->Enable())
     {
-        pComponent->Execute(fLasFrametime, fStartedTime);
+        pComponent->Execute();
 
         pComponent = Next();
     }

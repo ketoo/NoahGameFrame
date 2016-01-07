@@ -40,11 +40,11 @@ struct SURLParam
 class NFCURLComponent : public NFIComponent
 {
 public:
-    NFCURLComponent(NFGUID self):NFIComponent(self)
+	NFCURLComponent(NFGUID self, const std::string& strName):NFIComponent(self, strName)
     {
     }
 
-    NFCURLComponent(NFIPluginManager* pPluginManager):NFIComponent(NFGUID(0,0))
+    NFCURLComponent(NFIPluginManager* pPluginManager):NFIComponent(NFGUID(), "")
     {
     }
 
@@ -53,7 +53,6 @@ public:
 
     }
     
-    virtual const std::string GetComponentName() const ;
     virtual int OnASyncEvent(const NFGUID& self, const int event, std::string& arg);
 
 protected:
@@ -108,7 +107,7 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool AfterInit();
     virtual bool BeforeShut();
