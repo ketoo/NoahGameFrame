@@ -25,7 +25,7 @@ bool NFCHeroModule::Shut()
     return true;
 }
 
-bool NFCHeroModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCHeroModule::Execute()
 {
 
     return true;

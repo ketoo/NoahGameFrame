@@ -12,7 +12,7 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
-#include "NFComm/NFMessageDefine/NFRecordDefine.pb.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCWorldGuildDataModule::Init()
 {
@@ -24,7 +24,7 @@ bool NFCWorldGuildDataModule::Shut()
     return true;
 }
 
-bool NFCWorldGuildDataModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCWorldGuildDataModule::Execute()
 {
     return true;
 }

@@ -264,8 +264,8 @@ bool NFCLogicClassModule::AddComponents(rapidxml::xml_node<>* pComponentRootNode
                     NFASSERT(0, strComponentName, __FILE__, __FUNCTION__);
                     continue;
                 }
-
-                pClass->GetComponentManager()->AddComponent(strComponentName, nullptr);
+				NF_SHARE_PTR<NFIComponent> xComponent(NF_NEW NFIComponent(NFGUID(), strComponentName));
+                pClass->GetComponentManager()->AddComponent(strComponentName, xComponent);
             }
         }
     }

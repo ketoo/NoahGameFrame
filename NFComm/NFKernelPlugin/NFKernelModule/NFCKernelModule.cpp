@@ -22,9 +22,9 @@
 
 NFCKernelModule::NFCKernelModule(NFIPluginManager* p)
 {
-	fLastTotal = 0.0f;
 	pPluginManager = p;
-    mfLastCheckMemFree = 0.0f;
+
+	nLastTime = pPluginManager->GetNowTime();
 	InitRandom();
 }
 
@@ -82,9 +82,10 @@ bool NFCKernelModule::Shut()
 	return true;
 }
 
-bool NFCKernelModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCKernelModule::Execute()
 {
-    ProcessMemFree(fLasFrametime, fStartedTime);
+    ProcessMemFree();
+
 	mnCurExeObject = NFGUID();
 
 	if (mtDeleteSelfList.size() > 0)
@@ -97,18 +98,11 @@ bool NFCKernelModule::Execute(const float fLasFrametime, const float fStartedTim
 		mtDeleteSelfList.clear();
 	}
 
-
-	if (fLastTotal < 0.1f)
-	{
-		fLastTotal += fLasFrametime;
-		return false;
-	}
-
 	//所有场景
 	NF_SHARE_PTR<NFCContainerInfo> pContainerInfo = m_pContainerModule->First();
 	while (pContainerInfo.get())
 	{
-		pContainerInfo->Execute(fLastTotal, fStartedTime);
+		pContainerInfo->Execute();
 
 		pContainerInfo = m_pContainerModule->Next();
 	}
@@ -117,13 +111,12 @@ bool NFCKernelModule::Execute(const float fLasFrametime, const float fStartedTim
 	while (pObject.get())
 	{
 		mnCurExeObject = pObject->Self();
-		pObject->Execute(fLastTotal, fStartedTime);
+		pObject->Execute();
 		mnCurExeObject = NFGUID();
 
 		pObject = Next();
 	}
 
-	fLastTotal = 0.0f;
 	return true;
 }
 
@@ -218,10 +211,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
 				pStaticConfigPropertyInfo->GetRelationValue());
 
             //通用回调，方便NET同步
-            //if (pStaticConfigPropertyInfo->GetPublic() || pStaticConfigPropertyInfo->GetPrivate())
-            {
-                pObject->AddPropertyCallBack(pStaticConfigPropertyInfo->GetKey(), this, &NFCKernelModule::OnPropertyCommonEvent);
-            }
+            pObject->AddPropertyCallBack(pStaticConfigPropertyInfo->GetKey(), this, &NFCKernelModule::OnPropertyCommonEvent);
 
 			pStaticConfigPropertyInfo = pStaticClassPropertyManager->Next();
 		}
@@ -244,22 +234,19 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
 				pConfigRecordInfo->GetIndex());
 
 			//通用回调，方便NET同步
-            //if (pConfigRecordInfo->GetPublic() || pConfigRecordInfo->GetPrivate())
-            {
-                pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), this, &NFCKernelModule::OnRecordCommonEvent);
-            }
+			pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), this, &NFCKernelModule::OnRecordCommonEvent);
 
 			pConfigRecordInfo = pStaticClassRecordManager->Next();
 		}
 
 		std::string strSrciptComponentName;
-		pStaticClasComponentManager->First(strSrciptComponentName);
+		NF_SHARE_PTR<NFIComponent> xComponent = pStaticClasComponentManager->First(strSrciptComponentName);
 		while (!strSrciptComponentName.empty())
 		{
-			pComponentManager->AddComponent(strSrciptComponentName, nullptr);
+			pComponentManager->AddComponent(strSrciptComponentName, xComponent);
 
 			strSrciptComponentName.clear();
-			pStaticClasComponentManager->Next(strSrciptComponentName);
+			NF_SHARE_PTR<NFIComponent> xComponent = pStaticClasComponentManager->Next(strSrciptComponentName);
 		}
 		//////////////////////////////////////////////////////////////////////////
 		//配置属性
@@ -1468,7 +1455,7 @@ bool NFCKernelModule::DestroyAll()
 	}
 
 	// 为了释放object
-	Execute(0.1f, 0.1f);
+	Execute();
 
 	//NF_SHARE_PTR<NFCContainerInfo> pContainerInfo = m_pContainerModule->First();
 	//while (pContainerInfo.get())
@@ -1560,16 +1547,14 @@ bool NFCKernelModule::AddClassCallBack(const std::string& strClassName, const CL
 	return m_pEventProcessModule->AddClassCallBack(strClassName, cb);
 }
 
-void NFCKernelModule::ProcessMemFree( const float fLasFrametime, const float fStartedTime )
+void NFCKernelModule::ProcessMemFree()
 {
-    if (mfLastCheckMemFree < 30.0f)
-    {
-        mfLastCheckMemFree += fLasFrametime;
+	if (nLastTime + 30 < pPluginManager->GetNowTime())
+	{
+		return;
+	}
 
-        return ;
-    }
-
-    mfLastCheckMemFree = 0;
+	nLastTime = pPluginManager->GetNowTime();
 
     NFCMemManger::GetSingletonPtr()->FreeMem();
 }

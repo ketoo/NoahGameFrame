@@ -17,6 +17,7 @@
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 #include "NFComm/NFCore/NFQueue.h"
 #include "NFGUID.h"
+#include "NFIPluginManager.h"
 
 enum NF_SERVER_TYPE
 {
@@ -83,7 +84,7 @@ class NFINetModule
 public:
 	NFINetModule()
 	{
-		mfLastHBTime = 0.0f;
+		nLastTime = 0;
 		m_pNet = NULL;
 	}
 
@@ -114,7 +115,7 @@ public:
 		return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
 	}
 
-	virtual bool Execute(const float fLasFrametime, const float fStartedTime)
+	virtual bool Execute()
 	{
 		if (!m_pNet)
 		{
@@ -122,7 +123,7 @@ public:
 		}
 
 		//把上次的数据处理了
-		KeepAlive(fLasFrametime);
+		KeepAlive();
 
 		return m_pNet->Execute();
 	}
@@ -352,7 +353,7 @@ public:
 
 protected:
 
-	void KeepAlive(float fLasFrametime)
+	void KeepAlive()
 	{
 		if (!m_pNet)
 		{
@@ -364,13 +365,12 @@ protected:
 			return;
 		}
 
-		if (mfLastHBTime < 10.0f)
+		if (nLastTime + 10 < GetPluginManager()->GetNowTime())
 		{
-			mfLastHBTime += fLasFrametime;
 			return;
 		}
 
-		mfLastHBTime = 0.0f;
+		nLastTime = GetPluginManager()->GetNowTime();
 
 		NFMsg::ServerHeartBeat xMsg;
 		xMsg.set_count(0);
@@ -382,7 +382,7 @@ protected:
 private:
 
 	NFINet* m_pNet;
-	float mfLastHBTime;
+	NFINT64 nLastTime;
 };
 
 #endif

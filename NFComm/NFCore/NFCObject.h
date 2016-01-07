@@ -31,7 +31,7 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute(const float fLastTime, const float fAllTime);
+    virtual bool Execute();
 
     ///////////////////////////////////////////////////////////////////////
 

@@ -30,7 +30,7 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute( const float fLasFrametime, const float fStartedTime );
+    virtual bool Execute();
     virtual bool AfterInit();
 
     virtual int CalculateBaseValue( const NFJobType nJob, const int nLevel, const std::string& strProperty );
