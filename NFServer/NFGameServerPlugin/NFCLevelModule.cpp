@@ -21,7 +21,7 @@ bool NFCLevelModule::Shut()
     return true;
 }
 
-bool NFCLevelModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCLevelModule::Execute()
 {
     //Œª÷√ƒÿ
     return true;

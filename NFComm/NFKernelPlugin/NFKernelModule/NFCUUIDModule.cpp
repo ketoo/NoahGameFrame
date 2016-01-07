@@ -125,7 +125,7 @@ bool NFCUUIDModule::AfterInit()
     return true;
 }
 
-bool NFCUUIDModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCUUIDModule::Execute()
 {
     return true;
 }

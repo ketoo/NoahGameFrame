@@ -20,7 +20,7 @@ bool NFCSkillModule::Shut()
     return true;
 }
 
-bool NFCSkillModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCSkillModule::Execute()
 {
     //Œª÷√ƒÿ
     return true;

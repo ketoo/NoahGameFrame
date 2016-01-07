@@ -28,7 +28,7 @@ public:
 	}
     virtual ~NFIObject() {}
 
-    virtual bool Execute(const float fLastTime, const float fAllTime) = 0;
+    virtual bool Execute() = 0;
 
     virtual NFGUID Self() = 0;
 

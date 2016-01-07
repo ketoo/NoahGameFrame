@@ -27,14 +27,14 @@ public:
 	NFCMasterNet_ServerModule(NFIPluginManager* p)
 	{
 		pPluginManager = p;
-		mfLastLogTime = 0.0f;
+		mnLastLogTime = p->GetNowTime();
 	}
 
 	virtual bool Init();
 	virtual bool Shut();
 
 	virtual bool AfterInit();
-	virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+	virtual bool Execute();
 
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
@@ -68,11 +68,11 @@ protected:
 	//////////////////////////////////////////////////////////////////////////
 
 	void SynWorldToLogin();
-	void LogGameServer(const float fLastTime);
+	void LogGameServer();
 
 private:
 
-	float mfLastLogTime;
+	NFINT64 mnLastLogTime;
 
     //serverid,data
     NFMapEx<int, ServerData> mWorldMap;

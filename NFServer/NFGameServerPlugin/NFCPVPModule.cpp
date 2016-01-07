@@ -19,7 +19,7 @@ bool NFCPVPModule::Shut()
     return true;
 }
 
-bool NFCPVPModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCPVPModule::Execute()
 {
     //Œª÷√ƒÿ
     return true;

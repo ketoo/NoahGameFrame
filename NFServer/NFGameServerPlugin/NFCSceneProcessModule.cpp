@@ -39,7 +39,7 @@ bool NFCSceneProcessModule::Shut()
     return true;
 }
 
-bool NFCSceneProcessModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCSceneProcessModule::Execute()
 {
     return true;
 }

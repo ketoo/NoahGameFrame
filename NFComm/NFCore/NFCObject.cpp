@@ -38,11 +38,11 @@ bool NFCObject::Shut()
     return true;
 }
 
-bool NFCObject::Execute(const float fLastTime, const float fAllTime)
+bool NFCObject::Execute()
 {
     //循环的心跳中，可能删除自己
-    GetHeartBeatManager()->Execute(fLastTime, fAllTime);
-    GetComponentManager()->Execute(fLastTime, fAllTime);
+    GetHeartBeatManager()->Execute();
+    GetComponentManager()->Execute();
 
     return true;
 }
