@@ -68,7 +68,7 @@ int NFCLoginLogicModule::OnDisconnectEvent(const NFGUID& object, const int nEven
     return 0;
 }
 
-bool NFCLoginLogicModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCLoginLogicModule::Execute()
 {
 
     //////////////////////////////////////////////////////////////////////////

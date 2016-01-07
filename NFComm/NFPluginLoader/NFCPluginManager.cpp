@@ -144,14 +144,16 @@ NFIPlugin* NFCPluginManager::FindPlugin(const std::string& strPluginName)
     return NULL;
 }
 
-bool NFCPluginManager::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCPluginManager::Execute()
 {
+	mnNowTime = time(NULL);
+
     bool bRet = true;
 
     PluginInstanceMap::iterator it = mPluginInstanceMap.begin();
     for (; it != mPluginInstanceMap.end(); ++it)
     {
-        bool tembRet = it->second->Execute(fLasFrametime, fStartedTime);
+        bool tembRet = it->second->Execute();
         bRet = bRet && tembRet;
     }
 

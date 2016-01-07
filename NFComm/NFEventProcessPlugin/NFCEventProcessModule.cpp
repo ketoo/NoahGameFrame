@@ -67,7 +67,7 @@ bool NFCEventProcessModule::AddEventCallBack(const NFGUID& objectID, const int n
     return true;
 }
 
-bool NFCEventProcessModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCEventProcessModule::Execute()
 {
     NFGUID ident;
 

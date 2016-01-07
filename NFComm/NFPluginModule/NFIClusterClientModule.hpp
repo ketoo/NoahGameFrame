@@ -31,7 +31,7 @@ struct ConnectData
 		strIP = "";
 		eServerType = NFST_NONE;
 		eState = ConnectDataState::DISCONNECT;
-		mfLastActionTime = 0;
+		mnLastActionTime = 0;
 	}
 
 	int nGameID;
@@ -40,7 +40,7 @@ struct ConnectData
 	int nPort;
 	std::string strName;
 	ConnectDataState eState;
-	float mfLastActionTime;
+	NFINT64 mnLastActionTime;
 
 	NF_SHARE_PTR<NFINetModule> mxNetModule;
 };
@@ -210,7 +210,7 @@ protected:
 		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 	}
 
-    bool Execute(const float fLastFrametime, const float fStartedTime)
+    bool Execute()
     {
         ConnectData* pServerData = mxServerMap.FirstNude();
         while (pServerData)
@@ -223,7 +223,7 @@ protected:
 					{
 						pServerData->mxNetModule = nullptr;
 						pServerData->eState = ConnectDataState::RECONNECT;
-						pServerData->mfLastActionTime = 0.0f;
+						pServerData->mnLastActionTime = GetPluginManager()->GetNowTime();
 					}
 				}
 				break;
@@ -231,18 +231,17 @@ protected:
 				{
 					if (pServerData->mxNetModule)
 					{
-						pServerData->mxNetModule->Execute(fLastFrametime, fStartedTime);
+						pServerData->mxNetModule->Execute();
 
-						KeepState(pServerData, fLastFrametime, fStartedTime);
+						KeepState(pServerData);
 					}
 				}
 				break;
 			case ConnectDataState::RECONNECT:
 				{
 					//¼ÆËãÊ±¼ä
-					if (pServerData->mfLastActionTime < 30.0f)
+					if (pServerData->mnLastActionTime + 30.0f < GetPluginManager()->GetNowTime())
 					{
-						pServerData->mfLastActionTime += fLastFrametime;
 						break;
 					}
 
@@ -251,7 +250,8 @@ protected:
                         pServerData->mxNetModule = nullptr;
                     }
 
-					pServerData->mfLastActionTime = 0.0f;
+					pServerData->mnLastActionTime = GetPluginManager()->GetNowTime();
+
 					pServerData->eState = ConnectDataState::NORMAL;
                     pServerData->mxNetModule = NF_SHARE_PTR<NFINetModule> (NF_NEW NFINetModule());
 					pServerData->mxNetModule->Initialization(this, &NFIClusterClientModule::OnRecivePack, &NFIClusterClientModule::OnSocketEvent, pServerData->strIP.c_str(), pServerData->nPort);
@@ -305,15 +305,15 @@ private:
 		LogServerInfo("This is a client, end to Printf Server Info----------------------------------");
 	};
 
-	void KeepState(ConnectData* pServerData, const float fLastFrametime, const float fStartedTime)
+	void KeepState(ConnectData* pServerData)
 	{
-		if (pServerData->mfLastActionTime < 10.0f)
+
+		if (pServerData->mnLastActionTime + 10 < GetPluginManager()->GetNowTime())
 		{
-			pServerData->mfLastActionTime += fLastFrametime;
 			return;
 		}
 
-		pServerData->mfLastActionTime = 0.0f;
+		pServerData->mnLastActionTime = GetPluginManager()->GetNowTime();
 
 		KeepReport(pServerData);
 		LogServerInfo();

@@ -39,7 +39,7 @@ public:
     virtual bool BeforeShut();
     virtual bool AfterInit();
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     ///////////////////////////////////////////////////////////////////////
 
@@ -173,7 +173,7 @@ protected:
     int OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
     int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar);
 
-    void ProcessMemFree(const float fLasFrametime, const float fStartedTime);
+    void ProcessMemFree();
 
 protected:
 
@@ -197,7 +197,7 @@ private:
     int mnRandomPos;
 
     NFGUID mnCurExeObject;
-    float fLastTotal;
+    NFINT64 nLastTime;
 
     NF_SHARE_PTR<NFIContainerModule> m_pContainerModule;
     
@@ -206,8 +206,6 @@ private:
     NFIElementInfoModule* m_pElementInfoModule;
 	NFIEventProcessModule* m_pEventProcessModule;
 	NFIUUIDModule* m_pUUIDModule;
-
-    float mfLastCheckMemFree;
 };
 
 #endif

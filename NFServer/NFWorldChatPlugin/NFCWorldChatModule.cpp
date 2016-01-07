@@ -23,7 +23,7 @@ bool NFCWorldChatModule::Shut()
     return true;
 }
 
-bool NFCWorldChatModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCWorldChatModule::Execute()
 {
 
 

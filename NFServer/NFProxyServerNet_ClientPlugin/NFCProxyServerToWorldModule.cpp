@@ -25,9 +25,9 @@ bool NFCProxyServerToWorldModule::Shut()
     return true;
 }
 
-bool NFCProxyServerToWorldModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCProxyServerToWorldModule::Execute()
 {
-	return NFIClusterClientModule::Execute(fLasFrametime, fStartedTime);
+	return NFIClusterClientModule::Execute();
 }
 
 void NFCProxyServerToWorldModule::OnReciveWSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
