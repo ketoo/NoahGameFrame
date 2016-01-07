@@ -212,7 +212,7 @@ public class GuildConfig {
 }
 
 public class GuildJob {
-	public static final String GuildJob = "GuildJob";
+	public static final String Job = "Job";
 	public static final String JobCount = "JobCount";
 	public static final String Appoint = "Appoint";
 	public static final String Fire = "Fire";
