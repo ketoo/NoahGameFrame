@@ -40,7 +40,7 @@ bool NFCRebornItemConsumeProcessModule::Shut()
     return true;
 }
 
-bool NFCRebornItemConsumeProcessModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCRebornItemConsumeProcessModule::Execute()
 {
     return true;
 }

@@ -16,11 +16,6 @@
 #include <iostream>
 #include <sstream>
 
-const std::string NFCURLComponent::GetComponentName() const
-{
-    return "NFCURLComponent";
-}
-
 int NFCURLComponent::OnASyncEvent( const NFGUID& self, const int event, std::string& arg )
 {
     SURLParam xparam;
@@ -41,7 +36,7 @@ int NFCURLComponent::OnASyncEvent( const NFGUID& self, const int event, std::str
 
 NF_SHARE_PTR<NFIComponent> NFCURLComponent::CreateNewInstance()
 {
-  return  NF_SHARE_PTR<NFIComponent> (NF_NEW  NFCURLComponent(NFGUID(1, 2)));
+  return  NF_SHARE_PTR<NFIComponent> (NF_NEW  NFCURLComponent(NFGUID(1, 2), ""));
 }
 
 bool NFCUrlClientModule::Init()
@@ -54,7 +49,7 @@ bool NFCUrlClientModule::Shut()
 	return true;
 }
 
-bool NFCUrlClientModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCUrlClientModule::Execute()
 {
 	return true;
 }

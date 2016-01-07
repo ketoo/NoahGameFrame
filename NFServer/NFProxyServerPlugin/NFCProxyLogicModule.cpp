@@ -24,7 +24,7 @@ bool NFCProxyLogicModule::Shut()
     return true;
 }
 
-bool NFCProxyLogicModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCProxyLogicModule::Execute()
 {
     // #ifdef NF_DEBUG_MODE
     //     char szContent[MAX_PATH] = { 0 };

@@ -17,7 +17,7 @@ bool HelloWorld5Module::Init()
 class IComponentTest : public NFIComponent
 {
 public:
-	IComponentTest(): NFIComponent(NFGUID())
+	IComponentTest(): NFIComponent(NFGUID(), "ComponentTest")
 	{
 
 	}
@@ -40,11 +40,6 @@ public:
 	virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance()
 	{
 		return NF_SHARE_PTR<NFIComponent>(NF_NEW ComponentTest());
-	}
-
-	virtual const std::string GetComponentName() const
-	{
-		return GET_CLASS_NAME(ComponentTest)
 	}
 
 	virtual void Test()
@@ -100,7 +95,7 @@ int HelloWorld5Module::OnSyncEvent(const NFGUID& self, const int nActorID, const
     return 0;
 }
 
-bool HelloWorld5Module::Execute( const float fLasFrametime, const float fStartedTime )
+bool HelloWorld5Module::Execute()
 {
     //Ã¿Ö¡Ö´ÐÐ
     //std::cout << "Hello, world5, Execute" << std::endl;

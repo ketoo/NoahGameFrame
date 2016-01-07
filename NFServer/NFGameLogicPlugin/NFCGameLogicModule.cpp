@@ -25,7 +25,7 @@ bool NFCGameLogicModule::Shut()
     return true;
 }
 
-bool NFCGameLogicModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCGameLogicModule::Execute()
 {
 
     return true;

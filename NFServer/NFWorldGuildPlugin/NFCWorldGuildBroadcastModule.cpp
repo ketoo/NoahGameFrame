@@ -23,7 +23,7 @@ bool NFCWorldGuildBroadcastModule::Shut()
     return true;
 }
 
-bool NFCWorldGuildBroadcastModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCWorldGuildBroadcastModule::Execute()
 {
     return true;
 }
@@ -255,8 +255,8 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const
             if (pRecord && strRecordName == "GuildMemberList")
             {
                 //add
-                const NFGUID& nPlayer = pRecord->GetObject(nRow, NFMsg::GuildMemberList_GUID);
-                NFINT64 nGameID = pRecord->GetInt(nRow, NFMsg::GuildMemberList_GameID);
+                const NFGUID& nPlayer = pRecord->GetObject(nRow, NFrame::Guild::GuildMemberList_GUID);
+                NFINT64 nGameID = pRecord->GetInt(nRow, NFrame::Guild::GuildMemberList_GameID);
 
                 NFCDataList varSelf;
                 NFCDataList varGameID;
@@ -291,11 +291,11 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const
             NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, strRecordName);
             if (pRecord && strRecordName == "GuildMemberList")
             {
-                if (nCol == NFMsg::GuildMemberList_Online && newVar.Int( 0 ) > 0)
+                if (nCol == NFrame::Guild::GuildMemberList_Online && newVar.Int( 0 ) > 0)
                 {
                     //add
-                    const NFGUID& nPlayer = pRecord->GetObject(nRow, NFMsg::GuildMemberList_GUID);
-                    NFINT64 nGameID = pRecord->GetInt(nRow, NFMsg::GuildMemberList_GameID);
+                    const NFGUID& nPlayer = pRecord->GetObject(nRow, NFrame::Guild::GuildMemberList_GUID);
+                    NFINT64 nGameID = pRecord->GetInt(nRow, NFrame::Guild::GuildMemberList_GameID);
 
                     NFCDataList varSelf;
                     NFCDataList varGameID;

@@ -197,7 +197,7 @@ public:
                 NF_SHARE_PTR<NFIComponent> pComponent = pComponentManager->First();
                 while (pComponent.get() && pComponent->Enable())
                 {
-                    DoScript(self, pComponent->GetComponentName(), strSerializationName, var);
+                    DoClassCommonScript(self, pComponent->GetComponentName(), strSerializationName);
 
                     pComponent = pComponentManager->Next();
                 }
@@ -208,7 +208,8 @@ public:
     }
 
     //call script
-    virtual int DoScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg) = 0;
+	virtual int DoScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg) = 0;
+	virtual int DoClassCommonScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction) = 0;
     virtual int DoEventScript(const NFGUID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg) = 0;
     virtual int DoHeartBeatScript(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction) = 0;
 

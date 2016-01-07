@@ -21,11 +21,12 @@ private:
 	}
 
 public:
-	NFIComponent(NFGUID self)
+	NFIComponent(NFGUID self, const std::string& strName)
 	{
 		mbHasInit = false;
 		mbEnable = true;
 		mSelf = self;
+		mstrName = strName;
 	}
 
     virtual ~NFIComponent() {}
@@ -75,18 +76,22 @@ public:
         return NULL_OBJECT;
     }
 
-    virtual const std::string GetComponentName() const = 0;
+    virtual const std::string& GetComponentName() const
+	{
+		return mstrName;
+	};
 
 	//for actor
 	virtual int OnASyncEvent(const NFGUID& self, const int event, std::string& arg){return 0;}
 
 protected:
-    virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance() = 0;
+	virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance(){ return nullptr;};
 
 private:
 	bool mbEnable;
 	bool mbHasInit;
 	NFGUID mSelf;
+	std::string mstrName;
 };
 
 #endif

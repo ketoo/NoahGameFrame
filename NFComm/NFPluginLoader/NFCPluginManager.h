@@ -25,7 +25,9 @@ public:
 		mbOnReloadPlugin = false;
 		m_pActorManager = pManager;
         mnAppID = 0;
-		mnStartRunTime = time(NULL);
+		mnInitTime = time(NULL);
+		mnNowTime = mnInitTime;
+		
         mstrConfigPath = "";
 	}
 
@@ -66,7 +68,7 @@ public:
 
 	virtual NFIComponent* FindComponent(const std::string& strComponentName);
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     //  virtual void OnReloadModule( const std::string& strModuleName, NFILogicModule* pModule );
     //
@@ -76,8 +78,10 @@ public:
 	virtual NFIActorManager* GetActorManager(){ return m_pActorManager;}
 
 	virtual int AppID(){ return mnAppID; }
-	virtual NFINT64 StartRunTime(){ return mnStartRunTime; }
-    virtual const std::string& GetConfigPath() { return mstrConfigPath; }
+	virtual NFINT64 GetInitTime() const { return mnInitTime; }
+	virtual NFINT64 GetNowTime() const { return mnNowTime; }
+
+    virtual const std::string& GetConfigPath() const { return mstrConfigPath; }
 
 protected:
 
@@ -93,7 +97,8 @@ private:
 	NFQueue<NFIActorMessage> mxQueue;
 
 	int mnAppID;
-	NFINT64 mnStartRunTime;
+	NFINT64 mnInitTime;
+	NFINT64 mnNowTime;
     std::string mstrConfigPath;
 
 	typedef std::map<std::string, bool> PluginNameMap;

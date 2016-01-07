@@ -22,7 +22,7 @@ bool NFCPropertyTrailModule::Shut()
     return true;
 }
 
-bool NFCPropertyTrailModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCPropertyTrailModule::Execute()
 {
     return true;
 }

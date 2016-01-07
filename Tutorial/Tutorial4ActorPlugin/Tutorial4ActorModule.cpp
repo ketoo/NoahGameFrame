@@ -52,7 +52,7 @@ bool HelloWorld4ActorModule::AfterInit()
     return true;
 }
 
-bool HelloWorld4ActorModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool HelloWorld4ActorModule::Execute()
 {
     //Ã¿Ö¡Ö´ÐÐ
     //std::cout << "Hello, world3, Execute" << std::endl;

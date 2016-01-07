@@ -23,7 +23,7 @@ public:
 
     virtual void OnReload(const char* strModuleName, NFILogicModule* pModule);
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool RemoveEvent(const NFGUID& objectID);
     virtual bool RemoveEventCallBack(const NFGUID& objectID, const int nEventID);

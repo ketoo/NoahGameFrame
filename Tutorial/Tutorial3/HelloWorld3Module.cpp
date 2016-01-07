@@ -101,7 +101,7 @@ bool HelloWorld3Module::AfterInit()
 	return true;
 }
 
-bool HelloWorld3Module::Execute( const float fLasFrametime, const float fStartedTime )
+bool HelloWorld3Module::Execute()
 {
 	//Ã¿Ö¡Ö´ÐÐ
 	//std::cout << "Hello, world3, Execute" << std::endl;

@@ -19,7 +19,7 @@
 class NFCTestComponent : public NFIComponent
 {
 public:
-    NFCTestComponent(NFIPluginManager* p) : NFIComponent(NFGUID())
+    NFCTestComponent(NFIPluginManager* p) : NFIComponent(NFGUID(), "")
     {
 		pPluginManager = p;
     }
@@ -30,9 +30,6 @@ public:
     virtual bool AfterInit();
 
 	virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance();
-
-	virtual const std::string GetComponentName() const;
-
     virtual int OnASyncEvent(const NFGUID& self, const int event, std::string& arg);
 
 private:

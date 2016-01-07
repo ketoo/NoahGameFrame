@@ -33,7 +33,7 @@ bool NFCWorldLogicModule::Shut()
     return true;
 }
 
-bool NFCWorldLogicModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCWorldLogicModule::Execute()
 {
 
     //////////////////////////////////////////////////////////////////////////

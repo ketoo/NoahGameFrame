@@ -45,7 +45,7 @@ bool NFCSLGBuildingModule::Shut()
     return true;
 }
 
-bool NFCSLGBuildingModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCSLGBuildingModule::Execute()
 {
     return true;
 }
