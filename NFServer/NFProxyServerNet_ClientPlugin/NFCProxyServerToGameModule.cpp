@@ -25,9 +25,9 @@ bool NFCProxyServerToGameModule::Shut()
     return true;
 }
 
-bool NFCProxyServerToGameModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCProxyServerToGameModule::Execute()
 {
-	return NFIClusterClientModule::Execute(fLasFrametime, fStartedTime);
+	return NFIClusterClientModule::Execute();
 }
 
 

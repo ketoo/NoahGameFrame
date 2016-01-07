@@ -46,7 +46,7 @@ bool NFCMysqlClusterModule::AfterInit()
     return true;
 }
 
-bool NFCMysqlClusterModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCMysqlClusterModule::Execute()
 {
     return true;
 }

@@ -36,7 +36,7 @@ bool NFCPropertyModule::Shut()
     return true;
 }
 
-bool NFCPropertyModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCPropertyModule::Execute()
 {
     return true;
 }

@@ -34,7 +34,7 @@ public:
 
     virtual bool BeforeShut();
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual void OnReload(const char* pstrModuleName, NFILogicModule* pModule);
 

@@ -34,12 +34,12 @@ public:
     NFCWorldNet_ServerModule(NFIPluginManager* p)
     {
         pPluginManager = p;
-		mfLastLogTime = 0;
+		mnLastCheckTime = p->GetNowTime();
     }
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool AfterInit();
 
@@ -90,7 +90,7 @@ protected:
 	void SynGameToProxy( const int nFD );
 
 	//////////////////////////////////////////////////////////////////////////
-	void LogGameServer(const float fLastTime);
+	void LogGameServer();
 
 protected:
 	void OnCreateGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -110,7 +110,7 @@ protected:
 
 private:
 
-	float mfLastLogTime;
+	NFINT64 mnLastCheckTime;
 
     //serverid,data
     NFMapEx<int, ServerData> mGameMap;

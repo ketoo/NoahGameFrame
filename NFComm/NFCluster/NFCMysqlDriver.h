@@ -99,9 +99,9 @@ public:
         return Connect();
     }
 
-    virtual  bool Execute(const float fLasFrametime, const float fStartedTime)
+    virtual  bool Execute()
     {
-        if (IsNeedReconnect() && CanReconnect(fLasFrametime))
+        if (IsNeedReconnect() && CanReconnect())
         {
             Connect(mstrDBName, mstrDBHost, mnDBPort, mstrDBUser, mstrDBPwd);
         }
@@ -162,9 +162,10 @@ public:
         return !IsNeedReconnect();
     }
 
-    virtual bool CanReconnect(const float fLasFrametime)
+    virtual bool CanReconnect()
     {
-        mfCheckReconnect += fLasFrametime;
+
+		mfCheckReconnect += 0.1f;
 
         //30分钟检查断线重连
         if (mfCheckReconnect < mnReconnectTime)
