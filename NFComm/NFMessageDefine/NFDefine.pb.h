@@ -216,6 +216,14 @@ enum EGameMsgID {
   EGEC_ACK_KICK_CHATGROUP = 411,
   EGEC_REQ_CHATGROUP_TO_TEAM = 450,
   EGEC_ACK_CHATGROUP_TO_TEAM = 451,
+  EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP = 500,
+  EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP = 501,
+  EGEC_REQ_HOLE_TO_EQUIP = 502,
+  EGEC_ACK_HOLE_TO_EQUIP = 503,
+  EGEC_REQ_INLAYSTONE_TO_EQUIP = 504,
+  EGEC_ACK_INLAYSTONE_TO_EQUIP = 505,
+  EGEC_REQ_ELEMENTLEVEL_TO_EQUIP = 506,
+  EGEC_ACK_ELEMENTLEVEL_TO_EQUIP = 507,
   EGMI_REQ_CMD_PROPERTY_INT = 1000,
   EGMI_REQ_CMD_PROPERTY_STR = 1001,
   EGMI_REQ_CMD_PROPERTY_OBJECT = 1002,
@@ -305,6 +313,28 @@ inline bool EGameEquipSubType_Parse(
     const ::std::string& name, EGameEquipSubType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<EGameEquipSubType>(
     EGameEquipSubType_descriptor(), name, value);
+}
+enum EGameElementType {
+  EELEMENTTYPE_FLY = 0,
+  EELEMENTTYPE_FIRE = 1,
+  EELEMENTTYPE_THUNDER = 2,
+  EELEMENTTYPE_SOIL = 3,
+  EELEMENTTYPE_WATER = 4
+};
+bool EGameElementType_IsValid(int value);
+const EGameElementType EGameElementType_MIN = EELEMENTTYPE_FLY;
+const EGameElementType EGameElementType_MAX = EELEMENTTYPE_WATER;
+const int EGameElementType_ARRAYSIZE = EGameElementType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* EGameElementType_descriptor();
+inline const ::std::string& EGameElementType_Name(EGameElementType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EGameElementType_descriptor(), value);
+}
+inline bool EGameElementType_Parse(
+    const ::std::string& name, EGameElementType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EGameElementType>(
+    EGameElementType_descriptor(), name, value);
 }
 enum EGameItemSubType {
   EGIT_ITEM_NONE = 0,
@@ -493,6 +523,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EItemType>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameEquipSubType>() {
   return ::NFMsg::EGameEquipSubType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameElementType>() {
+  return ::NFMsg::EGameElementType_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameItemSubType>() {
