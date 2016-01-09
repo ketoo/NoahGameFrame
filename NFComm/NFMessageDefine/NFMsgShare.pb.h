@@ -72,6 +72,14 @@ class ReqAckjoinChatGroup;
 class ReqAckQuitChatGroup;
 class ReqSubscriptionChatGroup;
 class ReqCancelSubscriptionChatGroup;
+class ReqIntensifylevelToEquip;
+class AckIntensifylevelToEquip;
+class ReqHoleToEquip;
+class AckHoleToEquip;
+class ReqInlaystoneToEquip;
+class AckInlaystoneToEquip;
+class ReqElementlevelToEquip;
+class AckElementlevelToEquip;
 
 enum ReqAckSynData_SynType {
   ReqAckSynData_SynType_EST_SCENE = 1,
@@ -4365,6 +4373,846 @@ class ReqCancelSubscriptionChatGroup : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static ReqCancelSubscriptionChatGroup* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class ReqIntensifylevelToEquip : public ::google::protobuf::Message {
+ public:
+  ReqIntensifylevelToEquip();
+  virtual ~ReqIntensifylevelToEquip();
+
+  ReqIntensifylevelToEquip(const ReqIntensifylevelToEquip& from);
+
+  inline ReqIntensifylevelToEquip& operator=(const ReqIntensifylevelToEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqIntensifylevelToEquip& default_instance();
+
+  void Swap(ReqIntensifylevelToEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqIntensifylevelToEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqIntensifylevelToEquip& from);
+  void MergeFrom(const ReqIntensifylevelToEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqIntensifylevelToEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqIntensifylevelToEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AckIntensifylevelToEquip : public ::google::protobuf::Message {
+ public:
+  AckIntensifylevelToEquip();
+  virtual ~AckIntensifylevelToEquip();
+
+  AckIntensifylevelToEquip(const AckIntensifylevelToEquip& from);
+
+  inline AckIntensifylevelToEquip& operator=(const AckIntensifylevelToEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckIntensifylevelToEquip& default_instance();
+
+  void Swap(AckIntensifylevelToEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  AckIntensifylevelToEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckIntensifylevelToEquip& from);
+  void MergeFrom(const AckIntensifylevelToEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // required int32 result = 3;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 3;
+  inline ::google::protobuf::int32 result() const;
+  inline void set_result(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckIntensifylevelToEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+  inline void set_has_result();
+  inline void clear_has_result();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+  ::google::protobuf::int32 result_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckIntensifylevelToEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqHoleToEquip : public ::google::protobuf::Message {
+ public:
+  ReqHoleToEquip();
+  virtual ~ReqHoleToEquip();
+
+  ReqHoleToEquip(const ReqHoleToEquip& from);
+
+  inline ReqHoleToEquip& operator=(const ReqHoleToEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqHoleToEquip& default_instance();
+
+  void Swap(ReqHoleToEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqHoleToEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqHoleToEquip& from);
+  void MergeFrom(const ReqHoleToEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqHoleToEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqHoleToEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AckHoleToEquip : public ::google::protobuf::Message {
+ public:
+  AckHoleToEquip();
+  virtual ~AckHoleToEquip();
+
+  AckHoleToEquip(const AckHoleToEquip& from);
+
+  inline AckHoleToEquip& operator=(const AckHoleToEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckHoleToEquip& default_instance();
+
+  void Swap(AckHoleToEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  AckHoleToEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckHoleToEquip& from);
+  void MergeFrom(const AckHoleToEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // required int32 result = 3;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 3;
+  inline ::google::protobuf::int32 result() const;
+  inline void set_result(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckHoleToEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+  inline void set_has_result();
+  inline void clear_has_result();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+  ::google::protobuf::int32 result_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckHoleToEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqInlaystoneToEquip : public ::google::protobuf::Message {
+ public:
+  ReqInlaystoneToEquip();
+  virtual ~ReqInlaystoneToEquip();
+
+  ReqInlaystoneToEquip(const ReqInlaystoneToEquip& from);
+
+  inline ReqInlaystoneToEquip& operator=(const ReqInlaystoneToEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqInlaystoneToEquip& default_instance();
+
+  void Swap(ReqInlaystoneToEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqInlaystoneToEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqInlaystoneToEquip& from);
+  void MergeFrom(const ReqInlaystoneToEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // required .NFMsg.Ident stoneid = 3;
+  inline bool has_stoneid() const;
+  inline void clear_stoneid();
+  static const int kStoneidFieldNumber = 3;
+  inline const ::NFMsg::Ident& stoneid() const;
+  inline ::NFMsg::Ident* mutable_stoneid();
+  inline ::NFMsg::Ident* release_stoneid();
+  inline void set_allocated_stoneid(::NFMsg::Ident* stoneid);
+
+  // required int32 hole_index = 4;
+  inline bool has_hole_index() const;
+  inline void clear_hole_index();
+  static const int kHoleIndexFieldNumber = 4;
+  inline ::google::protobuf::int32 hole_index() const;
+  inline void set_hole_index(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqInlaystoneToEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+  inline void set_has_stoneid();
+  inline void clear_has_stoneid();
+  inline void set_has_hole_index();
+  inline void clear_has_hole_index();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+  ::NFMsg::Ident* stoneid_;
+  ::google::protobuf::int32 hole_index_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqInlaystoneToEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AckInlaystoneToEquip : public ::google::protobuf::Message {
+ public:
+  AckInlaystoneToEquip();
+  virtual ~AckInlaystoneToEquip();
+
+  AckInlaystoneToEquip(const AckInlaystoneToEquip& from);
+
+  inline AckInlaystoneToEquip& operator=(const AckInlaystoneToEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckInlaystoneToEquip& default_instance();
+
+  void Swap(AckInlaystoneToEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  AckInlaystoneToEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckInlaystoneToEquip& from);
+  void MergeFrom(const AckInlaystoneToEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // required int32 result = 3;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 3;
+  inline ::google::protobuf::int32 result() const;
+  inline void set_result(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckInlaystoneToEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+  inline void set_has_result();
+  inline void clear_has_result();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+  ::google::protobuf::int32 result_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckInlaystoneToEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqElementlevelToEquip : public ::google::protobuf::Message {
+ public:
+  ReqElementlevelToEquip();
+  virtual ~ReqElementlevelToEquip();
+
+  ReqElementlevelToEquip(const ReqElementlevelToEquip& from);
+
+  inline ReqElementlevelToEquip& operator=(const ReqElementlevelToEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqElementlevelToEquip& default_instance();
+
+  void Swap(ReqElementlevelToEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqElementlevelToEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqElementlevelToEquip& from);
+  void MergeFrom(const ReqElementlevelToEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // required .NFMsg.EGameElementType eElementType = 3;
+  inline bool has_eelementtype() const;
+  inline void clear_eelementtype();
+  static const int kEElementTypeFieldNumber = 3;
+  inline ::NFMsg::EGameElementType eelementtype() const;
+  inline void set_eelementtype(::NFMsg::EGameElementType value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqElementlevelToEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+  inline void set_has_eelementtype();
+  inline void clear_has_eelementtype();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+  int eelementtype_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqElementlevelToEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AckElementlevelToEquip : public ::google::protobuf::Message {
+ public:
+  AckElementlevelToEquip();
+  virtual ~AckElementlevelToEquip();
+
+  AckElementlevelToEquip(const AckElementlevelToEquip& from);
+
+  inline AckElementlevelToEquip& operator=(const AckElementlevelToEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckElementlevelToEquip& default_instance();
+
+  void Swap(AckElementlevelToEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  AckElementlevelToEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckElementlevelToEquip& from);
+  void MergeFrom(const AckElementlevelToEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // required int32 result = 3;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 3;
+  inline ::google::protobuf::int32 result() const;
+  inline void set_result(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckElementlevelToEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+  inline void set_has_result();
+  inline void clear_has_result();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+  ::google::protobuf::int32 result_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckElementlevelToEquip* default_instance_;
+};
 // ===================================================================
 
 
@@ -8523,6 +9371,817 @@ ReqCancelSubscriptionChatGroup::xchatgroupid() const {
 inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
 ReqCancelSubscriptionChatGroup::mutable_xchatgroupid() {
   return &xchatgroupid_;
+}
+
+// -------------------------------------------------------------------
+
+// ReqIntensifylevelToEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqIntensifylevelToEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqIntensifylevelToEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqIntensifylevelToEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqIntensifylevelToEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqIntensifylevelToEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqIntensifylevelToEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqIntensifylevelToEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqIntensifylevelToEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool ReqIntensifylevelToEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqIntensifylevelToEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqIntensifylevelToEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqIntensifylevelToEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& ReqIntensifylevelToEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* ReqIntensifylevelToEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* ReqIntensifylevelToEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void ReqIntensifylevelToEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// AckIntensifylevelToEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool AckIntensifylevelToEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AckIntensifylevelToEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AckIntensifylevelToEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AckIntensifylevelToEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& AckIntensifylevelToEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* AckIntensifylevelToEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* AckIntensifylevelToEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void AckIntensifylevelToEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool AckIntensifylevelToEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckIntensifylevelToEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckIntensifylevelToEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckIntensifylevelToEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& AckIntensifylevelToEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* AckIntensifylevelToEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* AckIntensifylevelToEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void AckIntensifylevelToEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// required int32 result = 3;
+inline bool AckIntensifylevelToEquip::has_result() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AckIntensifylevelToEquip::set_has_result() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AckIntensifylevelToEquip::clear_has_result() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AckIntensifylevelToEquip::clear_result() {
+  result_ = 0;
+  clear_has_result();
+}
+inline ::google::protobuf::int32 AckIntensifylevelToEquip::result() const {
+  return result_;
+}
+inline void AckIntensifylevelToEquip::set_result(::google::protobuf::int32 value) {
+  set_has_result();
+  result_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqHoleToEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqHoleToEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqHoleToEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqHoleToEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqHoleToEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqHoleToEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqHoleToEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqHoleToEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqHoleToEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool ReqHoleToEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqHoleToEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqHoleToEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqHoleToEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& ReqHoleToEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* ReqHoleToEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* ReqHoleToEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void ReqHoleToEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// AckHoleToEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool AckHoleToEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AckHoleToEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AckHoleToEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AckHoleToEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& AckHoleToEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* AckHoleToEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* AckHoleToEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void AckHoleToEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool AckHoleToEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckHoleToEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckHoleToEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckHoleToEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& AckHoleToEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* AckHoleToEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* AckHoleToEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void AckHoleToEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// required int32 result = 3;
+inline bool AckHoleToEquip::has_result() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AckHoleToEquip::set_has_result() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AckHoleToEquip::clear_has_result() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AckHoleToEquip::clear_result() {
+  result_ = 0;
+  clear_has_result();
+}
+inline ::google::protobuf::int32 AckHoleToEquip::result() const {
+  return result_;
+}
+inline void AckHoleToEquip::set_result(::google::protobuf::int32 value) {
+  set_has_result();
+  result_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqInlaystoneToEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqInlaystoneToEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqInlaystoneToEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqInlaystoneToEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqInlaystoneToEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqInlaystoneToEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqInlaystoneToEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqInlaystoneToEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqInlaystoneToEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool ReqInlaystoneToEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqInlaystoneToEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqInlaystoneToEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqInlaystoneToEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& ReqInlaystoneToEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* ReqInlaystoneToEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* ReqInlaystoneToEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void ReqInlaystoneToEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// required .NFMsg.Ident stoneid = 3;
+inline bool ReqInlaystoneToEquip::has_stoneid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqInlaystoneToEquip::set_has_stoneid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqInlaystoneToEquip::clear_has_stoneid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqInlaystoneToEquip::clear_stoneid() {
+  if (stoneid_ != NULL) stoneid_->::NFMsg::Ident::Clear();
+  clear_has_stoneid();
+}
+inline const ::NFMsg::Ident& ReqInlaystoneToEquip::stoneid() const {
+  return stoneid_ != NULL ? *stoneid_ : *default_instance_->stoneid_;
+}
+inline ::NFMsg::Ident* ReqInlaystoneToEquip::mutable_stoneid() {
+  set_has_stoneid();
+  if (stoneid_ == NULL) stoneid_ = new ::NFMsg::Ident;
+  return stoneid_;
+}
+inline ::NFMsg::Ident* ReqInlaystoneToEquip::release_stoneid() {
+  clear_has_stoneid();
+  ::NFMsg::Ident* temp = stoneid_;
+  stoneid_ = NULL;
+  return temp;
+}
+inline void ReqInlaystoneToEquip::set_allocated_stoneid(::NFMsg::Ident* stoneid) {
+  delete stoneid_;
+  stoneid_ = stoneid;
+  if (stoneid) {
+    set_has_stoneid();
+  } else {
+    clear_has_stoneid();
+  }
+}
+
+// required int32 hole_index = 4;
+inline bool ReqInlaystoneToEquip::has_hole_index() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqInlaystoneToEquip::set_has_hole_index() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqInlaystoneToEquip::clear_has_hole_index() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqInlaystoneToEquip::clear_hole_index() {
+  hole_index_ = 0;
+  clear_has_hole_index();
+}
+inline ::google::protobuf::int32 ReqInlaystoneToEquip::hole_index() const {
+  return hole_index_;
+}
+inline void ReqInlaystoneToEquip::set_hole_index(::google::protobuf::int32 value) {
+  set_has_hole_index();
+  hole_index_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// AckInlaystoneToEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool AckInlaystoneToEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AckInlaystoneToEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AckInlaystoneToEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AckInlaystoneToEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& AckInlaystoneToEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* AckInlaystoneToEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* AckInlaystoneToEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void AckInlaystoneToEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool AckInlaystoneToEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckInlaystoneToEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckInlaystoneToEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckInlaystoneToEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& AckInlaystoneToEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* AckInlaystoneToEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* AckInlaystoneToEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void AckInlaystoneToEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// required int32 result = 3;
+inline bool AckInlaystoneToEquip::has_result() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AckInlaystoneToEquip::set_has_result() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AckInlaystoneToEquip::clear_has_result() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AckInlaystoneToEquip::clear_result() {
+  result_ = 0;
+  clear_has_result();
+}
+inline ::google::protobuf::int32 AckInlaystoneToEquip::result() const {
+  return result_;
+}
+inline void AckInlaystoneToEquip::set_result(::google::protobuf::int32 value) {
+  set_has_result();
+  result_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqElementlevelToEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqElementlevelToEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqElementlevelToEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqElementlevelToEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqElementlevelToEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqElementlevelToEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqElementlevelToEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqElementlevelToEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqElementlevelToEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool ReqElementlevelToEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqElementlevelToEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqElementlevelToEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqElementlevelToEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& ReqElementlevelToEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* ReqElementlevelToEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* ReqElementlevelToEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void ReqElementlevelToEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// required .NFMsg.EGameElementType eElementType = 3;
+inline bool ReqElementlevelToEquip::has_eelementtype() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqElementlevelToEquip::set_has_eelementtype() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqElementlevelToEquip::clear_has_eelementtype() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqElementlevelToEquip::clear_eelementtype() {
+  eelementtype_ = 0;
+  clear_has_eelementtype();
+}
+inline ::NFMsg::EGameElementType ReqElementlevelToEquip::eelementtype() const {
+  return static_cast< ::NFMsg::EGameElementType >(eelementtype_);
+}
+inline void ReqElementlevelToEquip::set_eelementtype(::NFMsg::EGameElementType value) {
+  assert(::NFMsg::EGameElementType_IsValid(value));
+  set_has_eelementtype();
+  eelementtype_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// AckElementlevelToEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool AckElementlevelToEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AckElementlevelToEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AckElementlevelToEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AckElementlevelToEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& AckElementlevelToEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* AckElementlevelToEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* AckElementlevelToEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void AckElementlevelToEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool AckElementlevelToEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckElementlevelToEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckElementlevelToEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckElementlevelToEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& AckElementlevelToEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* AckElementlevelToEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* AckElementlevelToEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void AckElementlevelToEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// required int32 result = 3;
+inline bool AckElementlevelToEquip::has_result() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AckElementlevelToEquip::set_has_result() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AckElementlevelToEquip::clear_has_result() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AckElementlevelToEquip::clear_result() {
+  result_ = 0;
+  clear_has_result();
+}
+inline ::google::protobuf::int32 AckElementlevelToEquip::result() const {
+  return result_;
+}
+inline void AckElementlevelToEquip::set_result(::google::protobuf::int32 value) {
+  set_has_result();
+  result_ = value;
 }
 
 
