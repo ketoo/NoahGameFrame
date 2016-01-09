@@ -34,7 +34,7 @@ public:
     NFCWorldNet_ServerModule(NFIPluginManager* p)
     {
         pPluginManager = p;
-		mnLastCheckTime = p->GetNowTime();
+		mnLastCheckTime = pPluginManager->GetNowTime();
     }
 
     virtual bool Init();
