@@ -12,19 +12,16 @@
 
 const std::string mstrPackTableName[] =
 {
-    std::string( "BagItemList" ),
-	std::string( "BagEquipList" ),
-	std::string( "PlayerHero" ),
-	std::string( "DropItemList" ),
+    NFrame::Player::R_BagItemList(),
+    NFrame::Player::R_BagEquipList(),
+    NFrame::Player::R_PlayerHero(),
+	NFrame::Player::R_DropItemList(),
 };
 
 bool NFCPackModule::Init()
 {
-    
-
     return true;
 }
-
 
 bool NFCPackModule::Shut()
 {
@@ -441,7 +438,7 @@ void NFCPackModule::AddDropItem(const NFGUID& self, const NFIDataList& var)
         return;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "DropItemList");
+    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_DropItemList());
     if (NULL == pRecord.get())
     {
         return;
@@ -465,7 +462,7 @@ int NFCPackModule::OnObjectBeKilled(const NFGUID& self, const int nEventID, cons
         return 1;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(identKiller, "DropItemList");
+    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(identKiller, NFrame::Player::R_DropItemList());
     if (nullptr == pRecord)
     {
         return 1;
@@ -496,7 +493,7 @@ const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string&
 		return NULL_OBJECT;
 	}
 
-	int nItemType = m_pElementInfoModule->GetPropertyInt(strConfigName, "ItemType" );
+	int nItemType = m_pElementInfoModule->GetPropertyInt(strConfigName, NFrame::Item::ItemType());
 	if ( NFMsg::EItemType::EIT_EQUIP != nItemType )
 	{
 		return NULL_OBJECT;
@@ -571,7 +568,7 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 		return 0;
 	}
 
-	int nItemType = m_pElementInfoModule->GetPropertyInt(strConfigName, "ItemType" );
+	int nItemType = m_pElementInfoModule->GetPropertyInt(strConfigName, NFrame::Item::ItemType());
 	if ( NFMsg::EItemType::EIT_NORMAL != nItemType )
 	{
 		return 0;
@@ -626,7 +623,7 @@ int NFCPackModule::FindItemRowByConfig( const NFGUID& self, const std::string& s
 		return 0;
 	}
 
-	int nItemType = m_pElementInfoModule->GetPropertyInt(strItemConfigID, "ItemType" );
+	int nItemType = m_pElementInfoModule->GetPropertyInt(strItemConfigID, NFrame::Item::ItemType());
 	if ( NFMsg::EItemType::EIT_NORMAL != nItemType )
 	{
 		return 0;
@@ -717,7 +714,7 @@ bool NFCPackModule::DeleteItem( const NFGUID& self, const std::string& strItemCo
 		return false;
 	}
 
-	int nItemType = m_pElementInfoModule->GetPropertyInt(strItemConfigID, "ItemType" );
+	int nItemType = m_pElementInfoModule->GetPropertyInt(strItemConfigID, NFrame::Item::ItemType());
 	if ( NFMsg::EItemType::EIT_NORMAL != nItemType )
 	{
 		return false;
