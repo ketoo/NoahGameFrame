@@ -80,10 +80,19 @@ struct ServerData
 class NFINetModule
 	: public NFILogicModule
 {
-
 public:
 	NFINetModule()
 	{
+		//important to init the value of pPluginManager
+		//pPluginManager
+		nLastTime = 0;
+		m_pNet = NULL;
+	}
+
+	NFINetModule(NFIPluginManager* p)
+	{
+		pPluginManager = p;
+
 		nLastTime = 0;
 		m_pNet = NULL;
 	}
@@ -102,6 +111,8 @@ public:
 	template<typename BaseType>
 	void Initialization(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const char* strIP, const unsigned short nPort)
 	{
+		nLastTime = GetPluginManager()->GetNowTime();
+
 		m_pNet = new NFCNet(pBaseType, handleRecieve, handleEvent);
 		
 		m_pNet->Initialization(strIP, nPort);
@@ -110,6 +121,8 @@ public:
 	template<typename BaseType>
 	int Initialization(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4)
 	{
+		nLastTime = GetPluginManager()->GetNowTime();
+
 		m_pNet = new NFCNet(pBaseType, handleRecieve, handleEvent);
 
 		return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
@@ -365,7 +378,7 @@ protected:
 			return;
 		}
 
-		if (nLastTime + 10 < GetPluginManager()->GetNowTime())
+		if (nLastTime + 10 > GetPluginManager()->GetNowTime())
 		{
 			return;
 		}
