@@ -24,10 +24,9 @@ class NFCMasterNet_ServerModule
 	: public NFINetModule
 {
 public:
-	NFCMasterNet_ServerModule(NFIPluginManager* p)
+	NFCMasterNet_ServerModule(NFIPluginManager* p) : NFINetModule(p)
 	{
-		pPluginManager = p;
-		mnLastLogTime = p->GetNowTime();
+		mnLastLogTime = pPluginManager->GetNowTime();
 	}
 
 	virtual bool Init();
