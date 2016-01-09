@@ -24,10 +24,10 @@ bool NFCWorldNet_ServerModule::AfterInit()
     m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-	m_pWorldGuildModule = dynamic_cast<NFIWorldGuildModule*>(pPluginManager->FindModule("NFCWorldGuildModule"));
+	m_pWorldGuildModule = pPluginManager->FindModule<NFIWorldGuildModule>("NFCWorldGuildModule");
 	m_pClusterSQLModule = pPluginManager->FindModule<NFIClusterModule>("NFCMysqlClusterModule");
-    m_pWorldGuildDataModule = dynamic_cast<NFIWorldGuildDataModule*>(pPluginManager->FindModule("NFCWorldGuildDataModule"));
-    m_pWordChatGroupModule = dynamic_cast<NFIWorldChatGroupModule*>(pPluginManager->FindModule("NFCWorldChatGroupModule"));
+    m_pWorldGuildDataModule = pPluginManager->FindModule<NFIWorldGuildDataModule>("NFCWorldGuildDataModule");
+    m_pWordChatGroupModule = pPluginManager->FindModule<NFIWorldChatGroupModule>("NFCWorldChatGroupModule");
     
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);

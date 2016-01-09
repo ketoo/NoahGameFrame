@@ -21,11 +21,11 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
     m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-    m_pProxyToWorldModule = dynamic_cast<NFIProxyServerToWorldModule*>(pPluginManager->FindModule("NFCProxyServerToWorldModule"));
+    m_pProxyToWorldModule = pPluginManager->FindModule<NFIProxyServerToWorldModule>("NFCProxyServerToWorldModule");
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-	m_pProxyServerToGameModule = dynamic_cast<NFIProxyServerToGameModule*>(pPluginManager->FindModule("NFCProxyServerToGameModule"));
+	m_pProxyServerToGameModule = pPluginManager->FindModule<NFIProxyServerToGameModule>("NFCProxyServerToGameModule");
 	
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
