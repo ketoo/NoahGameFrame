@@ -24,6 +24,7 @@ const ::google::protobuf::EnumDescriptor* EGameEventCode_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EGameMsgID_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EItemType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EGameEquipSubType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* EGameElementType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EGameItemSubType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EGameItemExpiredType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EDrawDropItemState_descriptor_ = NULL;
@@ -45,13 +46,14 @@ void protobuf_AssignDesc_NFDefine_2eproto() {
   EGameMsgID_descriptor_ = file->enum_type(1);
   EItemType_descriptor_ = file->enum_type(2);
   EGameEquipSubType_descriptor_ = file->enum_type(3);
-  EGameItemSubType_descriptor_ = file->enum_type(4);
-  EGameItemExpiredType_descriptor_ = file->enum_type(5);
-  EDrawDropItemState_descriptor_ = file->enum_type(6);
-  EGuildPowerType_descriptor_ = file->enum_type(7);
-  ETaskState_descriptor_ = file->enum_type(8);
-  ETaskType_descriptor_ = file->enum_type(9);
-  EBattleType_descriptor_ = file->enum_type(10);
+  EGameElementType_descriptor_ = file->enum_type(4);
+  EGameItemSubType_descriptor_ = file->enum_type(5);
+  EGameItemExpiredType_descriptor_ = file->enum_type(6);
+  EDrawDropItemState_descriptor_ = file->enum_type(7);
+  EGuildPowerType_descriptor_ = file->enum_type(8);
+  ETaskState_descriptor_ = file->enum_type(9);
+  ETaskType_descriptor_ = file->enum_type(10);
+  EBattleType_descriptor_ = file->enum_type(11);
 }
 
 namespace {
@@ -112,7 +114,7 @@ void protobuf_AddDesc_NFDefine_2eproto() {
     "\027EGEC_ENTER_GAME_SUCCESS\020\220\001\022\036\n\031EGEC_CREA"
     "TE_GUILD_SUCCESS\020\310\001\022\034\n\027EGEC_JOIN_GUILD_S"
     "UCCESS\020\311\001\022\035\n\030EGEC_LEAVE_GUILD_SUCCESS\020\312\001"
-    "*\350\034\n\nEGameMsgID\022\017\n\013EGMI_UNKNOW\020\000\022\025\n\021EGMI"
+    "*\200\037\n\nEGameMsgID\022\017\n\013EGMI_UNKNOW\020\000\022\025\n\021EGMI"
     "_EVENT_RESULT\020\001\022\030\n\024EGMI_EVENT_TRANSPOND\020"
     "\002\022\025\n\021EGMI_CLOSE_SOCKET\020\003\022\035\n\031EGMI_MTL_WOR"
     "LD_REGISTERED\020\n\022\037\n\033EGMI_MTL_WORLD_UNREGI"
@@ -192,7 +194,14 @@ void protobuf_AddDesc_NFDefine_2eproto() {
     "INVITE_CHATGROUP\020\231\003\022\034\n\027EGEC_REQ_KICK_CHA"
     "TGROUP\020\232\003\022\034\n\027EGEC_ACK_KICK_CHATGROUP\020\233\003\022"
     "\037\n\032EGEC_REQ_CHATGROUP_TO_TEAM\020\302\003\022\037\n\032EGEC"
-    "_ACK_CHATGROUP_TO_TEAM\020\303\003\022\036\n\031EGMI_REQ_CM"
+    "_ACK_CHATGROUP_TO_TEAM\020\303\003\022%\n EGEC_REQ_IN"
+    "TENSIFYLEVEL_TO_EQUIP\020\364\003\022%\n EGEC_ACK_INT"
+    "ENSIFYLEVEL_TO_EQUIP\020\365\003\022\033\n\026EGEC_REQ_HOLE"
+    "_TO_EQUIP\020\366\003\022\033\n\026EGEC_ACK_HOLE_TO_EQUIP\020\367"
+    "\003\022!\n\034EGEC_REQ_INLAYSTONE_TO_EQUIP\020\370\003\022!\n\034"
+    "EGEC_ACK_INLAYSTONE_TO_EQUIP\020\371\003\022#\n\036EGEC_"
+    "REQ_ELEMENTLEVEL_TO_EQUIP\020\372\003\022#\n\036EGEC_ACK"
+    "_ELEMENTLEVEL_TO_EQUIP\020\373\003\022\036\n\031EGMI_REQ_CM"
     "D_PROPERTY_INT\020\350\007\022\036\n\031EGMI_REQ_CMD_PROPER"
     "TY_STR\020\351\007\022!\n\034EGMI_REQ_CMD_PROPERTY_OBJEC"
     "T\020\352\007\022 \n\033EGMI_REQ_CMD_PROPERTY_FLOAT\020\353\007\022\034"
@@ -217,34 +226,37 @@ void protobuf_AddDesc_NFDefine_2eproto() {
     "TYPE_GLOVE\020\010\022\023\n\017EQUIPTYPE_WRIST\020\t\022\022\n\016EQU"
     "IPTYPE_BELT\020\n\022\022\n\016EQUIPTYPE_PANT\020\013\022\022\n\016EQU"
     "IPTYPE_BOOT\020\014\022\022\n\016EQUIPTYPE_WING\020\r\022\023\n\017EQU"
-    "IPTYPE_CLOAK\020\016\022\025\n\021EQUIPTYPE_FASHION\020\017*\241\002"
-    "\n\020EGameItemSubType\022\022\n\016EGIT_ITEM_NONE\020\000\022\033"
-    "\n\027EGIT_ITEM_PROPERTY_CARD\020\001\022\035\n\031EGIT_ITEM"
-    "_PVP_ATTACK_CARD\020\002\022\036\n\032EGIT_ITEM_PVP_DEFE"
-    "NSE_CARD\020\003\022\030\n\024EGIT_ITEM_SKILL_CARD\020\004\022\036\n\032"
-    "EGIT_ITEM_GUILD_SKILL_CARD\020\005\022\033\n\027EGIT_ITE"
-    "M_GUILD_DIAMOND\020\006\022\026\n\022EGIT_ITEM_POSITION\020"
-    "\007\022\030\n\024EGIT_ITEM_WORLD_HORN\020\010\022\024\n\020EGIT_ITEM"
-    "_REBORN\020\t*e\n\024EGameItemExpiredType\022\016\n\nEGI"
-    "ET_NONE\020\000\022\023\n\017EGIET_USE_TIMES\020\001\022\023\n\017EGIET_"
-    "REAL_TIME\020\002\022\023\n\017EGIET_END_INDEX\020\003*Y\n\022EDra"
-    "wDropItemState\022\025\n\021E_DRAW_STATE_NONE\020\000\022\025\n"
-    "\021E_DRAW_STATE_GAIN\020\001\022\025\n\021E_DRAW_STATE_REC"
-    "V\020\002*s\n\017EGuildPowerType\022\033\n\027GUILD_POWER_TY"
-    "PE_NORMAL\020\000\022#\n\037GUILD_POWER_TYPE_VICE_PRE"
-    "SIDENT\020\001\022\036\n\032GUILD_POWER_TYPE_PRESIDENT\020\002"
-    "*V\n\nETaskState\022\023\n\017TASK_IN_PROCESS\020\000\022\r\n\tT"
-    "ASK_DONE\020\001\022\023\n\017TASK_DRAW_AWARD\020\002\022\017\n\013TASK_"
-    "FINISH\020\003*\251\002\n\tETaskType\022 \n\034TASK_LEVEL_UPD"
-    "ATE_SOME_LEVEL\020\000\022\024\n\020TASK_PASS_ECTYPE\020\001\022\032"
-    "\n\026TASK_PASS_ECTYPE_COUNT\020\002\022$\n TASK_PASS_"
-    "SOME_TYPE_ECTYPE_COUNT\020\003\022\033\n\027TASK_UPDATE_"
-    "SKILL_COUNT\020\004\022\026\n\022TASK_CONSUME_MONEY\020\005\022\030\n"
-    "\024TASK_CONSUME_DIAMOND\020\006\022\024\n\020TASK_ARENA_CO"
-    "UNT\020\007\022\033\n\027TASK_KILL_MONSTER_COUNT\020\010\022 \n\034TA"
-    "SK_KILL_SOME_MONSTER_COUNT\020\t*5\n\013EBattleT"
-    "ype\022\021\n\rBATTLE_SINGLE\020\000\022\023\n\017BATTLE_PVE_TEA"
-    "M\020\001", 6643);
+    "IPTYPE_CLOAK\020\016\022\025\n\021EQUIPTYPE_FASHION\020\017*\210\001"
+    "\n\020EGameElementType\022\024\n\020EELEMENTTYPE_FLY\020\000"
+    "\022\025\n\021EELEMENTTYPE_FIRE\020\001\022\030\n\024EELEMENTTYPE_"
+    "THUNDER\020\002\022\025\n\021EELEMENTTYPE_SOIL\020\003\022\026\n\022EELE"
+    "MENTTYPE_WATER\020\004*\241\002\n\020EGameItemSubType\022\022\n"
+    "\016EGIT_ITEM_NONE\020\000\022\033\n\027EGIT_ITEM_PROPERTY_"
+    "CARD\020\001\022\035\n\031EGIT_ITEM_PVP_ATTACK_CARD\020\002\022\036\n"
+    "\032EGIT_ITEM_PVP_DEFENSE_CARD\020\003\022\030\n\024EGIT_IT"
+    "EM_SKILL_CARD\020\004\022\036\n\032EGIT_ITEM_GUILD_SKILL"
+    "_CARD\020\005\022\033\n\027EGIT_ITEM_GUILD_DIAMOND\020\006\022\026\n\022"
+    "EGIT_ITEM_POSITION\020\007\022\030\n\024EGIT_ITEM_WORLD_"
+    "HORN\020\010\022\024\n\020EGIT_ITEM_REBORN\020\t*e\n\024EGameIte"
+    "mExpiredType\022\016\n\nEGIET_NONE\020\000\022\023\n\017EGIET_US"
+    "E_TIMES\020\001\022\023\n\017EGIET_REAL_TIME\020\002\022\023\n\017EGIET_"
+    "END_INDEX\020\003*Y\n\022EDrawDropItemState\022\025\n\021E_D"
+    "RAW_STATE_NONE\020\000\022\025\n\021E_DRAW_STATE_GAIN\020\001\022"
+    "\025\n\021E_DRAW_STATE_RECV\020\002*s\n\017EGuildPowerTyp"
+    "e\022\033\n\027GUILD_POWER_TYPE_NORMAL\020\000\022#\n\037GUILD_"
+    "POWER_TYPE_VICE_PRESIDENT\020\001\022\036\n\032GUILD_POW"
+    "ER_TYPE_PRESIDENT\020\002*V\n\nETaskState\022\023\n\017TAS"
+    "K_IN_PROCESS\020\000\022\r\n\tTASK_DONE\020\001\022\023\n\017TASK_DR"
+    "AW_AWARD\020\002\022\017\n\013TASK_FINISH\020\003*\251\002\n\tETaskTyp"
+    "e\022 \n\034TASK_LEVEL_UPDATE_SOME_LEVEL\020\000\022\024\n\020T"
+    "ASK_PASS_ECTYPE\020\001\022\032\n\026TASK_PASS_ECTYPE_CO"
+    "UNT\020\002\022$\n TASK_PASS_SOME_TYPE_ECTYPE_COUN"
+    "T\020\003\022\033\n\027TASK_UPDATE_SKILL_COUNT\020\004\022\026\n\022TASK"
+    "_CONSUME_MONEY\020\005\022\030\n\024TASK_CONSUME_DIAMOND"
+    "\020\006\022\024\n\020TASK_ARENA_COUNT\020\007\022\033\n\027TASK_KILL_MO"
+    "NSTER_COUNT\020\010\022 \n\034TASK_KILL_SOME_MONSTER_"
+    "COUNT\020\t*5\n\013EBattleType\022\021\n\rBATTLE_SINGLE\020"
+    "\000\022\023\n\017BATTLE_PVE_TEAM\020\001", 7062);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFDefine.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFDefine_2eproto);
@@ -439,6 +451,14 @@ bool EGameMsgID_IsValid(int value) {
     case 411:
     case 450:
     case 451:
+    case 500:
+    case 501:
+    case 502:
+    case 503:
+    case 504:
+    case 505:
+    case 506:
+    case 507:
     case 1000:
     case 1001:
     case 1002:
@@ -503,6 +523,23 @@ bool EGameEquipSubType_IsValid(int value) {
     case 13:
     case 14:
     case 15:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* EGameElementType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return EGameElementType_descriptor_;
+}
+bool EGameElementType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
       return true;
     default:
       return false;
