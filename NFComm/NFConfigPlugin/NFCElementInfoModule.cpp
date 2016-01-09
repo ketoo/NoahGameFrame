@@ -28,7 +28,7 @@ NFCElementInfoModule::~NFCElementInfoModule()
 
 bool NFCElementInfoModule::Init()
 {
-    m_pLogicClassModule = dynamic_cast<NFCLogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
+    m_pLogicClassModule = pPluginManager->FindModule<NFCLogicClassModule>("NFCLogicClassModule");
 
     assert(NULL != m_pLogicClassModule);
 
