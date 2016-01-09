@@ -593,4 +593,35 @@ public class StateFunction {
 	public static final String EFT_CREATE_SOLDER = "EFT_CREATE_SOLDER";
 	public static final String EFT_CREATE_SPEEL = "EFT_CREATE_SPEEL";
 	public static final String EFT_RESEARCH = "EFT_RESEARCH";
-	public static final String EFT_COLLECT
+	public static final String EFT_COLLECT_GOLD = "EFT_COLLECT_GOLD";
+	public static final String EFT_COLLECT_STONE = "EFT_COLLECT_STONE";
+	public static final String EFT_COLLECT_STEEL = "EFT_COLLECT_STEEL";
+	public static final String EFT_COLLECT_DIAMOND = "EFT_COLLECT_DIAMOND";
+	public static final String EFT_SELL = "EFT_SELL";
+	public static final String EFT_REPAIR = "EFT_REPAIR";
+	public static final String EFT_CANCEL = "EFT_CANCEL";
+	public static final String EFT_FINISH = "EFT_FINISH";
+
+}
+
+public class StateFunction {
+
+}
+
+public class Task {
+	public static final String Type = "Type";
+	public static final String NextTaskID = "NextTaskID";
+	public static final String KillMonsterName = "KillMonsterName";
+	public static final String KillCount = "KillCount";
+	public static final String LevelReq = "LevelReq";
+	public static final String AwardExp = "AwardExp";
+	public static final String AwardGold = "AwardGold";
+	public static final String AwardPack = "AwardPack";
+	public static final String Desc = "Desc";
+
+}
+
+public class Task {
+
+}
+
