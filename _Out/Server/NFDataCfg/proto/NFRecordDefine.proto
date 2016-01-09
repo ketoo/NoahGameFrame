@@ -227,4 +227,42 @@ enum DropItemList
 	MonsterID		= 0; // MonsterID -- object
 	ItemID		= 1; // ItemID -- string
 	ItemCount		= 2; // ItemCount -- int
-	Dr
+	DrawState		= 3; // DrawState -- int
+}
+
+enum SkillTable
+{
+	SkillID		= 0; // SkillID -- string
+	SkillLevel		= 1; // SkillLevel -- int
+	SkillStone		= 2; // SkillStone -- string
+	SkillSoulLevel		= 3; // SkillSoulLevel -- int
+}
+
+enum TaskMonsterList
+{
+	MonsterID		= 0; // MonsterID -- string
+	CurrentKillCount		= 1; // CurrentKillCount -- int
+	RequireKillCount		= 2; // RequireKillCount -- int
+	TaskID		= 3; // TaskID -- string
+}
+
+enum TaskList
+{
+	TaskID		= 0; // TaskID -- string
+	TaskStatus		= 1; // TaskStatus -- int
+	Process		= 2; // Process -- int
+}
+
+enum PVPList
+{
+	ID		= 0; // ID -- object
+	Name		= 1; // Name -- string
+	Level		= 2; // Level -- int
+}
+
+enum ChatGroup
+{
+	ChatType		= 0; // ChatType -- int
+	GroupGUID		= 1; // GroupGUID -- object
+}
+
