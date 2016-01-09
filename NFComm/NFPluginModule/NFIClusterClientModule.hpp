@@ -240,7 +240,7 @@ protected:
 			case ConnectDataState::RECONNECT:
 				{
 					//¼ÆËãÊ±¼ä
-					if (pServerData->mnLastActionTime + 30.0f < GetPluginManager()->GetNowTime())
+					if (pServerData->mnLastActionTime + 30.0f > GetPluginManager()->GetNowTime())
 					{
 						break;
 					}
@@ -253,7 +253,7 @@ protected:
 					pServerData->mnLastActionTime = GetPluginManager()->GetNowTime();
 
 					pServerData->eState = ConnectDataState::NORMAL;
-                    pServerData->mxNetModule = NF_SHARE_PTR<NFINetModule> (NF_NEW NFINetModule());
+                    pServerData->mxNetModule = NF_SHARE_PTR<NFINetModule> (NF_NEW NFINetModule(pPluginManager));
 					pServerData->mxNetModule->Initialization(this, &NFIClusterClientModule::OnRecivePack, &NFIClusterClientModule::OnSocketEvent, pServerData->strIP.c_str(), pServerData->nPort);
 				}
 				break;
@@ -308,7 +308,7 @@ private:
 	void KeepState(ConnectData* pServerData)
 	{
 
-		if (pServerData->mnLastActionTime + 10 < GetPluginManager()->GetNowTime())
+		if (pServerData->mnLastActionTime + 10 > GetPluginManager()->GetNowTime())
 		{
 			return;
 		}
@@ -387,8 +387,9 @@ private:
 				xServerData->strName = xInfo.strName;
 				xServerData->eState = ConnectDataState::NORMAL;
 				xServerData->nPort = xInfo.nPort;
+				xServerData->mnLastActionTime = GetPluginManager()->GetNowTime();
 
-				xServerData->mxNetModule = NF_SHARE_PTR<NFINetModule>(NF_NEW NFINetModule());
+				xServerData->mxNetModule = NF_SHARE_PTR<NFINetModule>(NF_NEW NFINetModule(pPluginManager));
 				xServerData->mxNetModule->Initialization(this, &NFIClusterClientModule::OnRecivePack, &NFIClusterClientModule::OnSocketEvent, xServerData->strIP.c_str(), xServerData->nPort);
 
 				mxServerMap.AddElement(xInfo.nGameID, xServerData);
