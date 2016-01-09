@@ -72,7 +72,7 @@ NFIMysqlDriver* NFCMysqlConnectMgrModule::GetMysqlDriver()
 void NFCMysqlConnectMgrModule::CheckMysql()
 {
 
-	if (mnLastCheckTime + 10 < GetPluginManager()->GetNowTime())
+	if (mnLastCheckTime + 10 > GetPluginManager()->GetNowTime())
 	{
 		return;
 	}

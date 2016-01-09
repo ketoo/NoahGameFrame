@@ -112,10 +112,18 @@ public:
         return (ItemTime <= GetCurrentTime());
     }
 
+	//second
     static time_t GetNowTime()
     {
         return GetCurrentTime().GetTime();
     }
+
+	//msec
+	static int64_t GetNowTimeMille()
+	{
+		return GetCurrentTime().GetTime() * 1000;
+	}
+
 
 protected:
 	time_t GetTime() const throw();
