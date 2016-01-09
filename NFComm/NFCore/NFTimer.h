@@ -19,6 +19,7 @@ desc    :¶¨Ê±Æ÷Àà
 #include <sys/time.h>
 #include <utime.h>
 #include <stddef.h>
+#include <string.h>
 #endif
 
 
