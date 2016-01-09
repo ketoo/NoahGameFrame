@@ -139,7 +139,7 @@ bool NFCSceneProcessModule::CreateContinerObject( const int nContainerID, const 
                     arg << "Z" << pResourceObject->fSeedZ;
                     arg << "SeedID" << strSeedID;
 
-                    //m_pKernelModule->CreateObject( NFGUID(), nContainerID, nGroupID, strClassName, pResourceObject->strConfigID, arg );
+                    m_pKernelModule->CreateObject( NFGUID(), nContainerID, nGroupID, strClassName, pResourceObject->strConfigID, arg );
                 }
             }
         }
