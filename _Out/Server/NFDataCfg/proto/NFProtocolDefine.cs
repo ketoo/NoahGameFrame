@@ -349,12 +349,13 @@ public class Language
 public class NPC
 {
 	public static readonly String SeedID = "SeedID";
+	public static readonly String VIPEXP = "VIPEXP";
 	public static readonly String EXP = "EXP";
 	public static readonly String HP = "HP";
 	public static readonly String SP = "SP";
 	public static readonly String MP = "MP";
+	public static readonly String Gold = "Gold";
 	public static readonly String Money = "Money";
-	public static readonly String LastAttacker = "LastAttacker";
 	public static readonly String X = "X";
 	public static readonly String Y = "Y";
 	public static readonly String Z = "Z";
@@ -391,6 +392,8 @@ public class NPC
 	public static readonly String DropPackList = "DropPackList";
 	public static readonly String SkillIDRef = "SkillIDRef";
 	public static readonly String Height = "Height";
+	public static readonly String EffectData = "EffectData";
+	public static readonly String ConsumeData = "ConsumeData";
 
 }
 
@@ -676,4 +679,18 @@ public class Task
 	public static readonly String Type = "Type";
 	public static readonly String NextTaskID = "NextTaskID";
 	public static readonly String KillMonsterName = "KillMonsterName";
-	public static readonly String
+	public static readonly String KillCount = "KillCount";
+	public static readonly String LevelReq = "LevelReq";
+	public static readonly String AwardExp = "AwardExp";
+	public static readonly String AwardGold = "AwardGold";
+	public static readonly String AwardPack = "AwardPack";
+	public static readonly String Desc = "Desc";
+
+}
+
+public class Task
+{
+
+}
+
+}

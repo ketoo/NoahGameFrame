@@ -531,12 +531,13 @@ public:
 	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; }
 	// Property
 	static const std::string& SeedID(){ static std::string xSeedID = "SeedID"; return xSeedID; }
+	static const std::string& VIPEXP(){ static std::string xVIPEXP = "VIPEXP"; return xVIPEXP; }
 	static const std::string& EXP(){ static std::string xEXP = "EXP"; return xEXP; }
 	static const std::string& HP(){ static std::string xHP = "HP"; return xHP; }
 	static const std::string& SP(){ static std::string xSP = "SP"; return xSP; }
 	static const std::string& MP(){ static std::string xMP = "MP"; return xMP; }
+	static const std::string& Gold(){ static std::string xGold = "Gold"; return xGold; }
 	static const std::string& Money(){ static std::string xMoney = "Money"; return xMoney; }
-	static const std::string& LastAttacker(){ static std::string xLastAttacker = "LastAttacker"; return xLastAttacker; }
 	static const std::string& X(){ static std::string xX = "X"; return xX; }
 	static const std::string& Y(){ static std::string xY = "Y"; return xY; }
 	static const std::string& Z(){ static std::string xZ = "Z"; return xZ; }
@@ -573,6 +574,8 @@ public:
 	static const std::string& DropPackList(){ static std::string xDropPackList = "DropPackList"; return xDropPackList; }
 	static const std::string& SkillIDRef(){ static std::string xSkillIDRef = "SkillIDRef"; return xSkillIDRef; }
 	static const std::string& Height(){ static std::string xHeight = "Height"; return xHeight; }
+	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; }
+	static const std::string& ConsumeData(){ static std::string xConsumeData = "ConsumeData"; return xConsumeData; }
 	// Record
 	static const std::string& R_PosList(){ static std::string xPosList = "PosList"; return xPosList;}
 
@@ -1053,4 +1056,12 @@ public:
 	static const std::string& LevelReq(){ static std::string xLevelReq = "LevelReq"; return xLevelReq; }
 	static const std::string& AwardExp(){ static std::string xAwardExp = "AwardExp"; return xAwardExp; }
 	static const std::string& AwardGold(){ static std::string xAwardGold = "AwardGold"; return xAwardGold; }
-	static const std::st
+	static const std::string& AwardPack(){ static std::string xAwardPack = "AwardPack"; return xAwardPack; }
+	static const std::string& Desc(){ static std::string xDesc = "Desc"; return xDesc; }
+	// Record
+
+};
+
+} // !@NFrame
+
+#endif NF_PR_NAME_HPP // !NF_PR_NAME_HPP
