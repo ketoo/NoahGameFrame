@@ -249,7 +249,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
 			NF_SHARE_PTR<NFIComponent> xComponent = pStaticClasComponentManager->Next(strSrciptComponentName);
 		}
 		//////////////////////////////////////////////////////////////////////////
-		//配置属性
+		//配置属性--属性表
 		NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementInfoModule->GetPropertyManager(strConfigIndex);
 		NF_SHARE_PTR<NFIRecordManager> pConfigRecordManager = m_pElementInfoModule->GetRecordManager(strConfigIndex);
 
