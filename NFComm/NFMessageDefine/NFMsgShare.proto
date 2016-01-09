@@ -343,4 +343,67 @@ message ReqCancelSubscriptionChatGroup
 	repeated Ident		xChatGroupid		= 2;//订阅聊天组消息
 }
 
+//EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP			= 500;		 // 装备强化
+message ReqIntensifylevelToEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID	
+}
+
+//EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP			= 501;		 // 装备强化
+message AckIntensifylevelToEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID
+	required int32		result				= 3;//0失败 1成功
+}
+
+//EGEC_REQ_HOLE_TO_EQUIP					= 502;		 // 装备打洞
+message ReqHoleToEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID
+}
+
+//EGEC_ACK_HOLE_TO_EQUIP					= 503;		 // 装备打洞
+message AckHoleToEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID
+	required int32		result				= 3;//0失败 1成功
+}
+
+//EGEC_REQ_INLAYSTONE_TO_EQUIP				= 504;		 // 装备镶嵌
+message ReqInlaystoneToEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID
+	required Ident		stoneid			= 3;//石头ID
+	required int32		hole_index				= 4;//空位
+}
+
+//EGEC_ACK_INLAYSTONE_TO_EQUIP				= 505;		 // 装备镶嵌
+message AckInlaystoneToEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID
+	required int32		result				= 3;//0失败 1成功
+}
+
+//EGEC_REQ_ELEMENTLEVEL_TO_EQUIP				= 506;		 // 装备附
+message ReqElementlevelToEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID
+	required EGameElementType		eElementType	= 3;//附魔元素
+}
+
+//EGEC_ACK_ELEMENTLEVEL_TO_EQUIP				= 507;		 // 装备附魔
+message AckElementlevelToEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID
+	required int32		result				= 3;//0失败 1成功
+}
+
 
