@@ -1549,7 +1549,7 @@ bool NFCKernelModule::AddClassCallBack(const std::string& strClassName, const CL
 
 void NFCKernelModule::ProcessMemFree()
 {
-	if (nLastTime + 30 < pPluginManager->GetNowTime())
+	if (nLastTime + 30 > pPluginManager->GetNowTime())
 	{
 		return;
 	}
