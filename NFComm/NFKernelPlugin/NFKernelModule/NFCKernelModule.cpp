@@ -1428,7 +1428,7 @@ bool NFCKernelModule::AddRecord(const NFGUID& self, const std::string& strRecord
 
 const NFGUID& NFCKernelModule::GetGridID(const float fX, const float fY, const float fZ)
 {
-	return NFGUID();
+	return NULL_OBJECT;
 }
 
 bool NFCKernelModule::AfterInit()
