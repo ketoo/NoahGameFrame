@@ -16,6 +16,21 @@ using System.Threading.Tasks;
 namespace NFrame
 {
 
+public class IObject
+{
+	public static readonly String ID = "ID";
+	public static readonly String ClassName = "ClassName";
+	public static readonly String SceneID = "SceneID";
+	public static readonly String GroupID = "GroupID";
+	public static readonly String ConfigID = "ConfigID";
+
+}
+
+public class IObject
+{
+
+}
+
 public class BB_Build
 {
 	public static readonly String Type = "Type";
@@ -289,21 +304,6 @@ public class InitProperty
 }
 
 public class InitProperty
-{
-
-}
-
-public class IObject
-{
-	public static readonly String ID = "ID";
-	public static readonly String ClassName = "ClassName";
-	public static readonly String SceneID = "SceneID";
-	public static readonly String GroupID = "GroupID";
-	public static readonly String ConfigID = "ConfigID";
-
-}
-
-public class IObject
 {
 
 }
@@ -676,18 +676,4 @@ public class Task
 	public static readonly String Type = "Type";
 	public static readonly String NextTaskID = "NextTaskID";
 	public static readonly String KillMonsterName = "KillMonsterName";
-	public static readonly String KillCount = "KillCount";
-	public static readonly String LevelReq = "LevelReq";
-	public static readonly String AwardExp = "AwardExp";
-	public static readonly String AwardGold = "AwardGold";
-	public static readonly String AwardPack = "AwardPack";
-	public static readonly String Desc = "Desc";
-
-}
-
-public class Task
-{
-
-}
-
-}
+	public static readonly String
