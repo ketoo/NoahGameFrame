@@ -514,6 +514,30 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_CHATGROUP_TO_TEAM", Value=451)]
       EGEC_ACK_CHATGROUP_TO_TEAM = 451,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP", Value=500)]
+      EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP = 500,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP", Value=501)]
+      EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP = 501,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_HOLE_TO_EQUIP", Value=502)]
+      EGEC_REQ_HOLE_TO_EQUIP = 502,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_HOLE_TO_EQUIP", Value=503)]
+      EGEC_ACK_HOLE_TO_EQUIP = 503,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_INLAYSTONE_TO_EQUIP", Value=504)]
+      EGEC_REQ_INLAYSTONE_TO_EQUIP = 504,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_INLAYSTONE_TO_EQUIP", Value=505)]
+      EGEC_ACK_INLAYSTONE_TO_EQUIP = 505,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_ELEMENTLEVEL_TO_EQUIP", Value=506)]
+      EGEC_REQ_ELEMENTLEVEL_TO_EQUIP = 506,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_ELEMENTLEVEL_TO_EQUIP", Value=507)]
+      EGEC_ACK_ELEMENTLEVEL_TO_EQUIP = 507,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_INT", Value=1000)]
       EGMI_REQ_CMD_PROPERTY_INT = 1000,
             
@@ -643,6 +667,26 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_FASHION", Value=15)]
       EQUIPTYPE_FASHION = 15
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EGameElementType")]
+    public enum EGameElementType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_FLY", Value=0)]
+      EELEMENTTYPE_FLY = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_FIRE", Value=1)]
+      EELEMENTTYPE_FIRE = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_THUNDER", Value=2)]
+      EELEMENTTYPE_THUNDER = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_SOIL", Value=3)]
+      EELEMENTTYPE_SOIL = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_WATER", Value=4)]
+      EELEMENTTYPE_WATER = 4
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGameItemSubType")]
