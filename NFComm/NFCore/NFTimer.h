@@ -10,14 +10,17 @@ desc    :¶¨Ê±Æ÷Àà
 
 #include <stdint.h>
 #include <time.h>
-
+#include <string>
+#include <iostream>
 
 #if defined(_WIN32) || defined(_WIN64)
+#include <windows.h>
 #else
 #include <sys/time.h>
 #include <utime.h>
 #include <stddef.h>
 #endif
+
 
 class NFTimeSpan
 {
