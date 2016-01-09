@@ -465,7 +465,7 @@ bool NFCWorldNet_ServerModule::InThisWorld( const std::string& strAccount )
 
 void NFCWorldNet_ServerModule::LogGameServer()
 {
-	if (mnLastCheckTime + 10 < GetPluginManager()->GetNowTime())
+	if (mnLastCheckTime + 10 > GetPluginManager()->GetNowTime())
 	{
 		return;
 	}
