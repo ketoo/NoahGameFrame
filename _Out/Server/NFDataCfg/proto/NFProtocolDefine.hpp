@@ -1053,4 +1053,12 @@ public:
 	static const std::string& LevelReq(){ static std::string xLevelReq = "LevelReq"; return xLevelReq; }
 	static const std::string& AwardExp(){ static std::string xAwardExp = "AwardExp"; return xAwardExp; }
 	static const std::string& AwardGold(){ static std::string xAwardGold = "AwardGold"; return xAwardGold; }
-	static const std::st
+	static const std::string& AwardPack(){ static std::string xAwardPack = "AwardPack"; return xAwardPack; }
+	static const std::string& Desc(){ static std::string xDesc = "Desc"; return xDesc; }
+	// Record
+
+};
+
+} // !@NFrame
+
+#endif NF_PR_NAME_HPP // !NF_PR_NAME_HPP

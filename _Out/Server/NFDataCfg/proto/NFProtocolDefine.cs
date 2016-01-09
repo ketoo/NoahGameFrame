@@ -676,4 +676,18 @@ public class Task
 	public static readonly String Type = "Type";
 	public static readonly String NextTaskID = "NextTaskID";
 	public static readonly String KillMonsterName = "KillMonsterName";
-	public static readonly String
+	public static readonly String KillCount = "KillCount";
+	public static readonly String LevelReq = "LevelReq";
+	public static readonly String AwardExp = "AwardExp";
+	public static readonly String AwardGold = "AwardGold";
+	public static readonly String AwardPack = "AwardPack";
+	public static readonly String Desc = "Desc";
+
+}
+
+public class Task
+{
+
+}
+
+}
