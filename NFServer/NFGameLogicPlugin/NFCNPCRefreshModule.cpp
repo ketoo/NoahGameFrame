@@ -49,10 +49,10 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
     {
         if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )
         {
-            const std::string& strConfigID = m_pKernelModule->GetPropertyString(self, "ConfigID");
-            int nHPMax = m_pElementInfoModule->GetPropertyInt(strConfigID, "MAXHP");
-            m_pKernelModule->SetPropertyInt(self, "HP", nHPMax);
-            m_pKernelModule->AddPropertyCallBack( self, "HP", this, &NFCNPCRefreshModule::OnObjectHPEvent );
+            const std::string& strConfigID = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
+            int nHPMax = m_pElementInfoModule->GetPropertyInt(strConfigID, NFrame::NPC::MAXHP());
+            m_pKernelModule->SetPropertyInt(self, NFrame::NPC::HP(), nHPMax);
+            m_pKernelModule->AddPropertyCallBack( self, NFrame::NPC::HP(), this, &NFCNPCRefreshModule::OnObjectHPEvent );
         }
     }
     return 0;
@@ -62,7 +62,7 @@ int NFCNPCRefreshModule::OnObjectHPEvent( const NFGUID& self, const std::string&
 {
     if ( newVar.GetInt() <= 0 )
     {
-        NFGUID identAttacker = m_pKernelModule->GetPropertyObject( self, "LastAttacker" );
+        NFGUID identAttacker = m_pKernelModule->GetPropertyObject( self, NFrame::NPC::LastAttacker());
         if (!identAttacker.IsNull())
 		{
             m_pEventProcessModule->DoEvent( self, NFED_ON_OBJECT_BE_KILLED, NFCDataList() << identAttacker );
@@ -77,25 +77,25 @@ int NFCNPCRefreshModule::OnObjectHPEvent( const NFGUID& self, const std::string&
 int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
     //and create new object
-    const std::string& strClassName = m_pKernelModule->GetPropertyString( self, "ClassName" );
-    const std::string& strSeedID = m_pKernelModule->GetPropertyString( self, "NPCConfigID" );
-    const std::string& strConfigID = m_pKernelModule->GetPropertyString( self, "ConfigID" );
-    int nContainerID = m_pKernelModule->GetPropertyInt( self, "SceneID" );
-    int nGroupID = m_pKernelModule->GetPropertyInt( self, "GroupID" );
+    const std::string& strClassName = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ClassName());
+    const std::string& strSeedID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::SeedID());
+    const std::string& strConfigID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ConfigID());
+    int nContainerID = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::SceneID());
+    int nGroupID = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::GroupID());
 
     //m_pSceneProcessModule->ClearAll( nContainerID, nGroupID, strSeendID );
 
-	float fSeedX = m_pKernelModule->GetPropertyFloat( self, "X" );
-	float fSeedY = m_pKernelModule->GetPropertyFloat( self, "Y" );
-	float fSeedZ = m_pKernelModule->GetPropertyFloat( self, "Z" );
+	float fSeedX = m_pKernelModule->GetPropertyFloat( self, NFrame::NPC::X());
+	float fSeedY = m_pKernelModule->GetPropertyFloat( self, NFrame::NPC::Y());
+	float fSeedZ = m_pKernelModule->GetPropertyFloat( self, NFrame::NPC::Z());
     
     m_pKernelModule->DestroyObject( self );
 
     NFCDataList arg;
-	arg << "X" << fSeedX;
-	arg << "Y" << fSeedY;
-	arg << "Z" << fSeedZ;
-	arg << "SeedID" << strSeedID;
+	arg << NFrame::NPC::X() << fSeedX;
+    arg << NFrame::NPC::Y() << fSeedY;
+    arg << NFrame::NPC::Z() << fSeedZ;
+	arg << NFrame::NPC::SeedID() << strSeedID;
 
 	m_pKernelModule->CreateObject( NFGUID(), nContainerID, nGroupID, strClassName, strConfigID, arg );
 
