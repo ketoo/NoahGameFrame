@@ -75,9 +75,7 @@ void NFCProperty::SetValue(const NFIDataList::TData& TData)
 
 void NFCProperty::SetValue(const NFIProperty* pProperty)
 {
-    const NFCProperty* p = dynamic_cast<const NFCProperty*>(pProperty);
-    SetValue(p->GetValue());
-    //SetValue(pProperty->GetValue());
+    SetValue(pProperty->GetValue());
 }
 
 const NFIDataList::TData& NFCProperty::GetValue() const
