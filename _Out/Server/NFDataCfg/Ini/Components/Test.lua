@@ -9,14 +9,14 @@ function Test:AfterInit(kernel, self)
 	io.write("Hello Lua AfterInit!\n");
 
 	if kernel == nil then
-		io.write("kernel is nil");
+		io.write("kernel is nil\n");
 	end
 
 	if self == nil then
-		io.write("self is nil");
+		io.write("self is nil\n");
 	end
 
-	io.write("Start use C++ functions");
+	io.write("Start use C++ functions\n");
 	local nMaxhp = GetPropertyInt(kernel, self, "MAXHP");
 	io.write("Hello Lua MAXHP:" ..nMaxhp .. "\n");
 
