@@ -31,7 +31,7 @@ bool NFCHeartBeatManager::Execute()
     NF_SHARE_PTR<NFCHeartBeatElement> pElement = mHeartBeatElementMapEx.First();
     while (pElement.get())
     {
-		NFINT64 nTime = NFTimeEx::GetNowTime();
+		NFINT64 nTime = NFTimeEx::GetNowTimeMille();
 
 		if (nTime > pElement->nTime && pElement->nCount > 0)
 		{
@@ -47,7 +47,7 @@ bool NFCHeartBeatManager::Execute()
 			else
 			{
 				//Do Event
-				pElement->nTime = nTime + pElement->fBeatTime;
+				pElement->nTime = nTime + pElement->fBeatTime * 1000;
 			}
 		}
 
