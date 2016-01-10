@@ -119,11 +119,31 @@ public:
     }
 
 	//msec
-	static int64_t GetNowTimeMille()
-	{
-		return GetCurrentTime().GetTime() * 1000;
-	}
+    static int64_t GetNowTimeMille()
+    {
+#ifdef _MSC_VER
+        return ::GetTickCount64();
+#else
+        struct timeval start;
+        gettimeofday(&start, NULL);
+        int64_t nSec = start.tv_sec;
+        int64_t nUSec = start.tv_usec;
+        return nSec * 1000 + nUSec / 1000;
+#endif
+    }
 
+    void Print(std::string& strTime)
+    {
+        struct tm* ptimeTemp = GetGmtTm();
+        if (ptimeTemp)
+        {
+            char buf[255] = {0};
+            strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", ptimeTemp);
+            strTime.assign(buf, strlen(buf));
+        }
+
+        std::cout << "Time = " << strTime << std::endl;
+    }
 
 protected:
 	time_t GetTime() const throw();
