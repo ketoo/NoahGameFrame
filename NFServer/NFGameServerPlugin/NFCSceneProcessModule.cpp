@@ -68,7 +68,7 @@ bool NFCSceneProcessModule::AfterInit()
             {
                 LoadInitFileResource( nSceneID );
 
-                m_pKernelModule->CreateContainer( nSceneID, strData );
+                m_pKernelModule->CreateScene( nSceneID, strData );
 
                 if ( E_SCENE_TYPE::SCENE_TYPE_NORMAL == GetCloneSceneType(nSceneID) )
                 {
@@ -160,7 +160,7 @@ int NFCSceneProcessModule::CreateCloneScene( const int& nContainerID, const int 
             //随服务器自动安排线路
             for ( int i = 1; i <= mnContainerLine; i++ )
             {
-                int nCount = m_pKernelModule->GetContainerOnLineCount( nContainerID, i );
+                int nCount = m_pKernelModule->GetSceneOnLineCount( nContainerID, i );
                 if ( nCount < mnLineMaxPlayer )
                 {
                     nTargetGroupID = i;
@@ -171,7 +171,7 @@ int NFCSceneProcessModule::CreateCloneScene( const int& nContainerID, const int 
         else
         {
             //想换指定的线，看人数是否满了
-            int nCount = m_pKernelModule->GetContainerOnLineCount( nContainerID, nGroupID );
+            int nCount = m_pKernelModule->GetSceneOnLineCount( nContainerID, nGroupID );
             if ( nCount < mnLineMaxPlayer )
             {
                 nTargetGroupID = nGroupID;
