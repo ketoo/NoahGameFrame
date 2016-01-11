@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/09
+//    @Date             :    2016/01/11
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -567,12 +567,13 @@ public:
 	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
 	// Property
 	static const std::string& SeedID(){ static std::string xSeedID = "SeedID"; return xSeedID; } // string
+	static const std::string& VIPEXP(){ static std::string xVIPEXP = "VIPEXP"; return xVIPEXP; } // int
 	static const std::string& EXP(){ static std::string xEXP = "EXP"; return xEXP; } // int
 	static const std::string& HP(){ static std::string xHP = "HP"; return xHP; } // int
 	static const std::string& SP(){ static std::string xSP = "SP"; return xSP; } // int
 	static const std::string& MP(){ static std::string xMP = "MP"; return xMP; } // int
+	static const std::string& Gold(){ static std::string xGold = "Gold"; return xGold; } // int
 	static const std::string& Money(){ static std::string xMoney = "Money"; return xMoney; } // int
-	static const std::string& LastAttacker(){ static std::string xLastAttacker = "LastAttacker"; return xLastAttacker; } // object
 	static const std::string& X(){ static std::string xX = "X"; return xX; } // float
 	static const std::string& Y(){ static std::string xY = "Y"; return xY; } // float
 	static const std::string& Z(){ static std::string xZ = "Z"; return xZ; } // float
@@ -609,16 +610,10 @@ public:
 	static const std::string& DropPackList(){ static std::string xDropPackList = "DropPackList"; return xDropPackList; } // string
 	static const std::string& SkillIDRef(){ static std::string xSkillIDRef = "SkillIDRef"; return xSkillIDRef; } // string
 	static const std::string& Height(){ static std::string xHeight = "Height"; return xHeight; } // float
+	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
+	static const std::string& ConsumeData(){ static std::string xConsumeData = "ConsumeData"; return xConsumeData; } // string
+	static const std::string& LastAttacker(){ static std::string xLastAttacker = "LastAttacker"; return xLastAttacker; } // object
 	// Record
-	static const std::string& R_PosList(){ static std::string xPosList = "PosList"; return xPosList;}
-
-	enum PosList
-	{
-		PosList_X		= 0, // X -- float
-		PosList_Y		= 1, // Y -- float
-		PosList_Z		= 2, // Z -- float
-		PosList_StayTime		= 3, // StayTime -- float
-	};
 
 };
 
