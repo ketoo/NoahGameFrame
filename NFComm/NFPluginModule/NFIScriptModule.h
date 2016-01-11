@@ -383,9 +383,9 @@ static const std::string& KernelModule_GetElementPropertyString(NFIKernelModule*
     return pElementInfoModule->GetPropertyString(strConfigName, strPropertyName);
 }
 
-static bool KernelModule_ExistContainer(NFIKernelModule* pKernelModule, const int nContainerIndex)
+static bool KernelModule_ExistContainer(NFIKernelModule* pKernelModule, const int nSceneID)
 {
-    return pKernelModule->ExistContainer(nContainerIndex);
+    return pKernelModule->ExistContainer(nSceneID);
 }
 
 static bool KernelModule_SetPropertyInt(NFINT64 kernelAddress, const NFGUID& self, const std::string& strPropertyName, const int nValue)
