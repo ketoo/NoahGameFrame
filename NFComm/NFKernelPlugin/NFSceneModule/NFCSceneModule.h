@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCContainerModule.h
+//    @FileName      :    NFCSceneModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
-//    @Module           :    NFCContainerModule
+//    @Module           :    NFCSceneModule
 //
 // -------------------------------------------------------------------------
 
@@ -10,14 +10,14 @@
 #define NFC_CONTAINER_MODULE_H
 
 #include <iostream>
-#include "NFIContainerModule.h"
+#include "NFISceneModule.h"
 #include "NFComm/NFCore/NFIObject.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 
-class NFCContainerModule
-    : public NFIContainerModule
+class NFCSceneModule
+    : public NFISceneModule
 {
 public:
 

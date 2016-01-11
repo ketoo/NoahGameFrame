@@ -148,12 +148,11 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFContainerModule\NFCContainerModule.h" />
-    <ClInclude Include="NFContainerModule\NFIContainerModule.h" />
-    <ClInclude Include="NFKernelModule\NFCConcurrentModule.h" />
     <ClInclude Include="NFKernelModule\NFCKernelModule.h" />
     <ClInclude Include="NFKernelModule\NFCUUIDModule.h" />
     <ClInclude Include="NFKernelPlugin.h" />
+    <ClInclude Include="NFSceneModule\NFCSceneModule.h" />
+    <ClInclude Include="NFSceneModule\NFISceneModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -164,11 +163,10 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFContainerModule\NFCContainerModule.cpp" />
-    <ClCompile Include="NFKernelModule\NFCConcurrentModule.cpp" />
     <ClCompile Include="NFKernelModule\NFCKernelModule.cpp" />
     <ClCompile Include="NFKernelModule\NFCUUIDModule.cpp" />
     <ClCompile Include="NFKernelPlugin.cpp" />
+    <ClCompile Include="NFSceneModule\NFCSceneModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NFConfigPlugin\NFConfigPlugin.vcxproj">

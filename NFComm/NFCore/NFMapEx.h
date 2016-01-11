@@ -248,5 +248,11 @@ private:
     typename NFMapOBJECT::iterator mObjectCurIter;
 };
 
-
+template <typename T , typename TD>
+class NFConcurrentMap : public NFMapEx<T, TD>
+{
+public:
+protected:
+private:
+};
 #endif
