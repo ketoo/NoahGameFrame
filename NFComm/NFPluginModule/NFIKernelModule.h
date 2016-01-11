@@ -164,18 +164,18 @@ public:
     virtual bool AddRecord(const NFGUID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& varKey, const NFIDataList& varDesc, const NFIDataList& varTag, const NFIDataList& varRelatedRecord, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex) = 0;
     ////////////////////////////////////////////////////////////////
 
-    virtual bool CreateContainer(const int nSceneIndex, const std::string& strSceneConfigID) = 0;
+    virtual bool CreateScene(const int nSceneIndex, const std::string& strSceneConfigID) = 0;
 
     virtual int GetOnLineCount() = 0;
 
     virtual int GetMaxOnLineCount() = 0;
 
-    virtual int GetContainerOnLineCount(const int nContainerID) = 0;
+    virtual int GetSceneOnLineCount(const int nContainerID) = 0;
 
-    virtual int GetContainerOnLineCount(const int nContainerID, const int nGroupID) = 0;
+    virtual int GetSceneOnLineCount(const int nContainerID, const int nGroupID) = 0;
 
-    virtual int GetContainerOnLineList(const int nContainerID, NFIDataList& var) = 0;
-    virtual int GetAllContainerObjectList(NFIDataList& var) = 0;
+    virtual int GetSceneOnLineList(const int nContainerID, NFIDataList& var) = 0;
+    virtual int GetAllSceneObjectList(NFIDataList& var) = 0;
 
     virtual int RequestGroupScene(const int nContainerID) = 0;
 
