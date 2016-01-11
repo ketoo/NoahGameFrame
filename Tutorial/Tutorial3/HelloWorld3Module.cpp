@@ -75,7 +75,7 @@ bool HelloWorld3Module::AfterInit()
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 
 	//创建容器，所有的对象均需在容器中
-	m_pKernelModule->CreateContainer(1, "");
+	m_pKernelModule->CreateScene(1, "");
 
 	m_pEventProcessModule->AddClassCallBack("Player", this, &HelloWorld3Module::OnClassCallBackEvent);
 
