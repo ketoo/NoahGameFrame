@@ -187,6 +187,9 @@ enum EGameMsgID
 	EGMI_REQ_SEARCH_GUILD                       = 308; // 申请搜索公会
 	EGMI_ACK_SEARCH_GUILD                       = 309; // 返回搜索公会	
 	
+	EGMI_REQ_OPR_GUILDINFO						= 310; // 申请公会操作 
+	EGMI_ACK_OPR_GUILDINFO						= 311; // 公会操作结果
+	
 	EGEC_REQ_CREATE_CHATGROUP					= 400;		 // 创建聊天ReqAckCreateChatGroup
 	EGEC_ACK_CREATE_CHATGROUP					= 401;		 // 创建聊天ReqAckCreateChatGroup
 	EGEC_REQ_JOIN_CHATGROUP						= 402;		 // 加入聊天ReqAckjoinChatGroup
