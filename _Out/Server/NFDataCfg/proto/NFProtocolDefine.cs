@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/09
+//    @Date             :    2016/01/11
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -553,12 +553,13 @@ public class NPC
 	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
 	public static readonly String SeedID = "SeedID"; // string
+	public static readonly String VIPEXP = "VIPEXP"; // int
 	public static readonly String EXP = "EXP"; // int
 	public static readonly String HP = "HP"; // int
 	public static readonly String SP = "SP"; // int
 	public static readonly String MP = "MP"; // int
+	public static readonly String Gold = "Gold"; // int
 	public static readonly String Money = "Money"; // int
-	public static readonly String LastAttacker = "LastAttacker"; // object
 	public static readonly String X = "X"; // float
 	public static readonly String Y = "Y"; // float
 	public static readonly String Z = "Z"; // float
@@ -595,16 +596,10 @@ public class NPC
 	public static readonly String DropPackList = "DropPackList"; // string
 	public static readonly String SkillIDRef = "SkillIDRef"; // string
 	public static readonly String Height = "Height"; // float
+	public static readonly String EffectData = "EffectData"; // string
+	public static readonly String ConsumeData = "ConsumeData"; // string
+	public static readonly String LastAttacker = "LastAttacker"; // object
 	// Record
-	public static readonly String PosList = "PosList";
-
-	public enum PosList
-	{
-		X		= 0, // X -- float
-		Y		= 1, // Y -- float
-		Z		= 2, // Z -- float
-		StayTime		= 3, // StayTime -- float
-	};
 
 }
 

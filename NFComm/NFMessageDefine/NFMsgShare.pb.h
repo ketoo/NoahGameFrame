@@ -65,6 +65,7 @@ class AckSearchGuild_SearchGuildObject;
 class ReqAckJoinGuild;
 class ReqAckLeaveGuild;
 class ReqAckOprGuildMember;
+class ReqAckOprGuild;
 class ReqAckDonateGuildItem;
 class ChatInfo;
 class ReqAckCreateChatGroup;
@@ -221,11 +222,17 @@ inline bool ReqAckJoinActivity_EGameActivitySubType_Parse(
 enum ReqAckOprGuildMember_EGGuildMemberOprType {
   ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DOWN = 0,
   ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_UP = 1,
-  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICK = 2
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICK = 2,
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_APPOINT = 3,
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_FIRE = 4,
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DEMISE = 5,
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_ACCEPTAPPLY = 6,
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DENYAPPLY = 7,
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICKOUT = 8
 };
 bool ReqAckOprGuildMember_EGGuildMemberOprType_IsValid(int value);
 const ReqAckOprGuildMember_EGGuildMemberOprType ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_MIN = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DOWN;
-const ReqAckOprGuildMember_EGGuildMemberOprType ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_MAX = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICK;
+const ReqAckOprGuildMember_EGGuildMemberOprType ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_MAX = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICKOUT;
 const int ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_ARRAYSIZE = ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ReqAckOprGuildMember_EGGuildMemberOprType_descriptor();
@@ -237,6 +244,29 @@ inline bool ReqAckOprGuildMember_EGGuildMemberOprType_Parse(
     const ::std::string& name, ReqAckOprGuildMember_EGGuildMemberOprType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<ReqAckOprGuildMember_EGGuildMemberOprType>(
     ReqAckOprGuildMember_EGGuildMemberOprType_descriptor(), name, value);
+}
+enum ReqAckOprGuild_EGGuildOprType {
+  ReqAckOprGuild_EGGuildOprType_EGAT_APPLYDISMISS = 1,
+  ReqAckOprGuild_EGGuildOprType_EGAT_STOPDISMISS = 2,
+  ReqAckOprGuild_EGGuildOprType_EGAT_SETRECRUIT = 3,
+  ReqAckOprGuild_EGGuildOprType_EGAT_PUBLISHRECRUIT = 4,
+  ReqAckOprGuild_EGGuildOprType_EGAT_EDITAD = 5,
+  ReqAckOprGuild_EGGuildOprType_EGAT_LEVELUP = 6
+};
+bool ReqAckOprGuild_EGGuildOprType_IsValid(int value);
+const ReqAckOprGuild_EGGuildOprType ReqAckOprGuild_EGGuildOprType_EGGuildOprType_MIN = ReqAckOprGuild_EGGuildOprType_EGAT_APPLYDISMISS;
+const ReqAckOprGuild_EGGuildOprType ReqAckOprGuild_EGGuildOprType_EGGuildOprType_MAX = ReqAckOprGuild_EGGuildOprType_EGAT_LEVELUP;
+const int ReqAckOprGuild_EGGuildOprType_EGGuildOprType_ARRAYSIZE = ReqAckOprGuild_EGGuildOprType_EGGuildOprType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ReqAckOprGuild_EGGuildOprType_descriptor();
+inline const ::std::string& ReqAckOprGuild_EGGuildOprType_Name(ReqAckOprGuild_EGGuildOprType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ReqAckOprGuild_EGGuildOprType_descriptor(), value);
+}
+inline bool ReqAckOprGuild_EGGuildOprType_Parse(
+    const ::std::string& name, ReqAckOprGuild_EGGuildOprType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ReqAckOprGuild_EGGuildOprType>(
+    ReqAckOprGuild_EGGuildOprType_descriptor(), name, value);
 }
 enum ChatInfo_EChatType {
   ChatInfo_EChatType_ECHATTYPE_NORMAL = 0,
@@ -3441,6 +3471,12 @@ class ReqAckOprGuildMember : public ::google::protobuf::Message {
   static const EGGuildMemberOprType EGAT_DOWN = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DOWN;
   static const EGGuildMemberOprType EGAT_UP = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_UP;
   static const EGGuildMemberOprType EGAT_KICK = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICK;
+  static const EGGuildMemberOprType EGAT_APPOINT = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_APPOINT;
+  static const EGGuildMemberOprType EGAT_FIRE = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_FIRE;
+  static const EGGuildMemberOprType EGAT_DEMISE = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DEMISE;
+  static const EGGuildMemberOprType EGAT_ACCEPTAPPLY = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_ACCEPTAPPLY;
+  static const EGGuildMemberOprType EGAT_DENYAPPLY = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DENYAPPLY;
+  static const EGGuildMemberOprType EGAT_KICKOUT = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICKOUT;
   static inline bool EGGuildMemberOprType_IsValid(int value) {
     return ReqAckOprGuildMember_EGGuildMemberOprType_IsValid(value);
   }
@@ -3513,6 +3549,170 @@ class ReqAckOprGuildMember : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ReqAckOprGuildMember* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckOprGuild : public ::google::protobuf::Message {
+ public:
+  ReqAckOprGuild();
+  virtual ~ReqAckOprGuild();
+
+  ReqAckOprGuild(const ReqAckOprGuild& from);
+
+  inline ReqAckOprGuild& operator=(const ReqAckOprGuild& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckOprGuild& default_instance();
+
+  void Swap(ReqAckOprGuild* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckOprGuild* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckOprGuild& from);
+  void MergeFrom(const ReqAckOprGuild& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef ReqAckOprGuild_EGGuildOprType EGGuildOprType;
+  static const EGGuildOprType EGAT_APPLYDISMISS = ReqAckOprGuild_EGGuildOprType_EGAT_APPLYDISMISS;
+  static const EGGuildOprType EGAT_STOPDISMISS = ReqAckOprGuild_EGGuildOprType_EGAT_STOPDISMISS;
+  static const EGGuildOprType EGAT_SETRECRUIT = ReqAckOprGuild_EGGuildOprType_EGAT_SETRECRUIT;
+  static const EGGuildOprType EGAT_PUBLISHRECRUIT = ReqAckOprGuild_EGGuildOprType_EGAT_PUBLISHRECRUIT;
+  static const EGGuildOprType EGAT_EDITAD = ReqAckOprGuild_EGGuildOprType_EGAT_EDITAD;
+  static const EGGuildOprType EGAT_LEVELUP = ReqAckOprGuild_EGGuildOprType_EGAT_LEVELUP;
+  static inline bool EGGuildOprType_IsValid(int value) {
+    return ReqAckOprGuild_EGGuildOprType_IsValid(value);
+  }
+  static const EGGuildOprType EGGuildOprType_MIN =
+    ReqAckOprGuild_EGGuildOprType_EGGuildOprType_MIN;
+  static const EGGuildOprType EGGuildOprType_MAX =
+    ReqAckOprGuild_EGGuildOprType_EGGuildOprType_MAX;
+  static const int EGGuildOprType_ARRAYSIZE =
+    ReqAckOprGuild_EGGuildOprType_EGGuildOprType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  EGGuildOprType_descriptor() {
+    return ReqAckOprGuild_EGGuildOprType_descriptor();
+  }
+  static inline const ::std::string& EGGuildOprType_Name(EGGuildOprType value) {
+    return ReqAckOprGuild_EGGuildOprType_Name(value);
+  }
+  static inline bool EGGuildOprType_Parse(const ::std::string& name,
+      EGGuildOprType* value) {
+    return ReqAckOprGuild_EGGuildOprType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident guild_id = 1;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // required .NFMsg.Ident player_id = 2;
+  inline bool has_player_id() const;
+  inline void clear_player_id();
+  static const int kPlayerIdFieldNumber = 2;
+  inline const ::NFMsg::Ident& player_id() const;
+  inline ::NFMsg::Ident* mutable_player_id();
+  inline ::NFMsg::Ident* release_player_id();
+  inline void set_allocated_player_id(::NFMsg::Ident* player_id);
+
+  // required .NFMsg.ReqAckOprGuild.EGGuildOprType type = 3;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 3;
+  inline ::NFMsg::ReqAckOprGuild_EGGuildOprType type() const;
+  inline void set_type(::NFMsg::ReqAckOprGuild_EGGuildOprType value);
+
+  // required string Recruit_data = 4;
+  inline bool has_recruit_data() const;
+  inline void clear_recruit_data();
+  static const int kRecruitDataFieldNumber = 4;
+  inline const ::std::string& recruit_data() const;
+  inline void set_recruit_data(const ::std::string& value);
+  inline void set_recruit_data(const char* value);
+  inline void set_recruit_data(const char* value, size_t size);
+  inline ::std::string* mutable_recruit_data();
+  inline ::std::string* release_recruit_data();
+  inline void set_allocated_recruit_data(::std::string* recruit_data);
+
+  // required string Ad_data = 5;
+  inline bool has_ad_data() const;
+  inline void clear_ad_data();
+  static const int kAdDataFieldNumber = 5;
+  inline const ::std::string& ad_data() const;
+  inline void set_ad_data(const ::std::string& value);
+  inline void set_ad_data(const char* value);
+  inline void set_ad_data(const char* value, size_t size);
+  inline ::std::string* mutable_ad_data();
+  inline ::std::string* release_ad_data();
+  inline void set_allocated_ad_data(::std::string* ad_data);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckOprGuild)
+ private:
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
+  inline void set_has_player_id();
+  inline void clear_has_player_id();
+  inline void set_has_type();
+  inline void clear_has_type();
+  inline void set_has_recruit_data();
+  inline void clear_has_recruit_data();
+  inline void set_has_ad_data();
+  inline void clear_has_ad_data();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_id_;
+  ::NFMsg::Ident* player_id_;
+  ::std::string* recruit_data_;
+  ::std::string* ad_data_;
+  int type_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckOprGuild* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -8324,6 +8524,249 @@ inline void ReqAckOprGuildMember::set_type(::NFMsg::ReqAckOprGuildMember_EGGuild
 
 // -------------------------------------------------------------------
 
+// ReqAckOprGuild
+
+// required .NFMsg.Ident guild_id = 1;
+inline bool ReqAckOprGuild::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckOprGuild::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckOprGuild::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckOprGuild::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& ReqAckOprGuild::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprGuild::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprGuild::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void ReqAckOprGuild::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// required .NFMsg.Ident player_id = 2;
+inline bool ReqAckOprGuild::has_player_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckOprGuild::set_has_player_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckOprGuild::clear_has_player_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckOprGuild::clear_player_id() {
+  if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
+  clear_has_player_id();
+}
+inline const ::NFMsg::Ident& ReqAckOprGuild::player_id() const {
+  return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprGuild::mutable_player_id() {
+  set_has_player_id();
+  if (player_id_ == NULL) player_id_ = new ::NFMsg::Ident;
+  return player_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprGuild::release_player_id() {
+  clear_has_player_id();
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
+  return temp;
+}
+inline void ReqAckOprGuild::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  delete player_id_;
+  player_id_ = player_id;
+  if (player_id) {
+    set_has_player_id();
+  } else {
+    clear_has_player_id();
+  }
+}
+
+// required .NFMsg.ReqAckOprGuild.EGGuildOprType type = 3;
+inline bool ReqAckOprGuild::has_type() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckOprGuild::set_has_type() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckOprGuild::clear_has_type() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckOprGuild::clear_type() {
+  type_ = 1;
+  clear_has_type();
+}
+inline ::NFMsg::ReqAckOprGuild_EGGuildOprType ReqAckOprGuild::type() const {
+  return static_cast< ::NFMsg::ReqAckOprGuild_EGGuildOprType >(type_);
+}
+inline void ReqAckOprGuild::set_type(::NFMsg::ReqAckOprGuild_EGGuildOprType value) {
+  assert(::NFMsg::ReqAckOprGuild_EGGuildOprType_IsValid(value));
+  set_has_type();
+  type_ = value;
+}
+
+// required string Recruit_data = 4;
+inline bool ReqAckOprGuild::has_recruit_data() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqAckOprGuild::set_has_recruit_data() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqAckOprGuild::clear_has_recruit_data() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqAckOprGuild::clear_recruit_data() {
+  if (recruit_data_ != &::google::protobuf::internal::kEmptyString) {
+    recruit_data_->clear();
+  }
+  clear_has_recruit_data();
+}
+inline const ::std::string& ReqAckOprGuild::recruit_data() const {
+  return *recruit_data_;
+}
+inline void ReqAckOprGuild::set_recruit_data(const ::std::string& value) {
+  set_has_recruit_data();
+  if (recruit_data_ == &::google::protobuf::internal::kEmptyString) {
+    recruit_data_ = new ::std::string;
+  }
+  recruit_data_->assign(value);
+}
+inline void ReqAckOprGuild::set_recruit_data(const char* value) {
+  set_has_recruit_data();
+  if (recruit_data_ == &::google::protobuf::internal::kEmptyString) {
+    recruit_data_ = new ::std::string;
+  }
+  recruit_data_->assign(value);
+}
+inline void ReqAckOprGuild::set_recruit_data(const char* value, size_t size) {
+  set_has_recruit_data();
+  if (recruit_data_ == &::google::protobuf::internal::kEmptyString) {
+    recruit_data_ = new ::std::string;
+  }
+  recruit_data_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckOprGuild::mutable_recruit_data() {
+  set_has_recruit_data();
+  if (recruit_data_ == &::google::protobuf::internal::kEmptyString) {
+    recruit_data_ = new ::std::string;
+  }
+  return recruit_data_;
+}
+inline ::std::string* ReqAckOprGuild::release_recruit_data() {
+  clear_has_recruit_data();
+  if (recruit_data_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = recruit_data_;
+    recruit_data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckOprGuild::set_allocated_recruit_data(::std::string* recruit_data) {
+  if (recruit_data_ != &::google::protobuf::internal::kEmptyString) {
+    delete recruit_data_;
+  }
+  if (recruit_data) {
+    set_has_recruit_data();
+    recruit_data_ = recruit_data;
+  } else {
+    clear_has_recruit_data();
+    recruit_data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string Ad_data = 5;
+inline bool ReqAckOprGuild::has_ad_data() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ReqAckOprGuild::set_has_ad_data() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ReqAckOprGuild::clear_has_ad_data() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ReqAckOprGuild::clear_ad_data() {
+  if (ad_data_ != &::google::protobuf::internal::kEmptyString) {
+    ad_data_->clear();
+  }
+  clear_has_ad_data();
+}
+inline const ::std::string& ReqAckOprGuild::ad_data() const {
+  return *ad_data_;
+}
+inline void ReqAckOprGuild::set_ad_data(const ::std::string& value) {
+  set_has_ad_data();
+  if (ad_data_ == &::google::protobuf::internal::kEmptyString) {
+    ad_data_ = new ::std::string;
+  }
+  ad_data_->assign(value);
+}
+inline void ReqAckOprGuild::set_ad_data(const char* value) {
+  set_has_ad_data();
+  if (ad_data_ == &::google::protobuf::internal::kEmptyString) {
+    ad_data_ = new ::std::string;
+  }
+  ad_data_->assign(value);
+}
+inline void ReqAckOprGuild::set_ad_data(const char* value, size_t size) {
+  set_has_ad_data();
+  if (ad_data_ == &::google::protobuf::internal::kEmptyString) {
+    ad_data_ = new ::std::string;
+  }
+  ad_data_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckOprGuild::mutable_ad_data() {
+  set_has_ad_data();
+  if (ad_data_ == &::google::protobuf::internal::kEmptyString) {
+    ad_data_ = new ::std::string;
+  }
+  return ad_data_;
+}
+inline ::std::string* ReqAckOprGuild::release_ad_data() {
+  clear_has_ad_data();
+  if (ad_data_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = ad_data_;
+    ad_data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckOprGuild::set_allocated_ad_data(::std::string* ad_data) {
+  if (ad_data_ != &::google::protobuf::internal::kEmptyString) {
+    delete ad_data_;
+  }
+  if (ad_data) {
+    set_has_ad_data();
+    ad_data_ = ad_data;
+  } else {
+    clear_has_ad_data();
+    ad_data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
 // ReqAckDonateGuildItem
 
 // required .NFMsg.Ident guild_id = 1;
@@ -10224,6 +10667,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckJoinActivity_EGam
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType>() {
   return ::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckOprGuild_EGGuildOprType>() {
+  return ::NFMsg::ReqAckOprGuild_EGGuildOprType_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ChatInfo_EChatType>() {
