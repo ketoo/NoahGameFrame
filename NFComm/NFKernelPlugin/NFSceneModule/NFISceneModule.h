@@ -22,17 +22,17 @@
 /*
 if a object in the group of '0', them it can be see by all object in this scene.
 */
-class NFCContainerGroupInfo
+class NFCSceneGroupInfo
     //: public NFList<NFGUID>
 {
 public:
-    NFCContainerGroupInfo(int nSceneID, int nGroupID, int nWidth)
+    NFCSceneGroupInfo(int nSceneID, int nGroupID, int nWidth)
     {
         mnGroupID = nGroupID;
         //m_pGridModule = NF_SHARE_PTR<NFIGridModule>(NF_NEW NFCGridModule(nSceneID, nWidth));
     }
 
-    virtual ~NFCContainerGroupInfo()
+    virtual ~NFCSceneGroupInfo()
     {
     }
 
@@ -54,18 +54,18 @@ public:
 };
 
 // all group in this scene
-class NFCContainerInfo
-    : public NFMapEx<int, NFCContainerGroupInfo>
+class NFCSceneInfo
+    : public NFMapEx<int, NFCSceneGroupInfo>
 {
 public:
-    NFCContainerInfo(int nSceneID, int nWidth)
+    NFCSceneInfo(int nSceneID, int nWidth)
     {
         mnGroupIndex = 0;
         mnSceneID = nSceneID;
         mnWidth = nWidth;
     }
 
-    virtual ~NFCContainerInfo()
+    virtual ~NFCSceneInfo()
     {
         ClearAll();
     }
@@ -92,7 +92,7 @@ public:
 
     bool AddObjectToGroup(const int nGroupID, const NFGUID& ident, bool bPlayer)
     {
-        NF_SHARE_PTR<NFCContainerGroupInfo> pInfo = GetElement(nGroupID);
+        NF_SHARE_PTR<NFCSceneGroupInfo> pInfo = GetElement(nGroupID);
         if (pInfo.get())
         {
             if (bPlayer)
@@ -110,7 +110,7 @@ public:
 
     bool RemoveObjectFromGroup(const int nGroupID, const NFGUID& ident, bool bPlayer)
     {
-        NF_SHARE_PTR<NFCContainerGroupInfo> pInfo = GetElement(nGroupID);
+        NF_SHARE_PTR<NFCSceneGroupInfo> pInfo = GetElement(nGroupID);
         if (pInfo.get())
         {
             if (bPlayer)
@@ -128,7 +128,7 @@ public:
 
     bool Execute()
     {
-        NF_SHARE_PTR<NFCContainerGroupInfo> pGroupInfo = First();
+        NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = First();
         while (pGroupInfo.get())
         {
             pGroupInfo->Execute();
@@ -145,11 +145,11 @@ private:
     int mnWidth;
 };
 
-class NFIContainerModule
-    : public NFMapEx<int, NFCContainerInfo>
+class NFISceneModule
+    : public NFMapEx<int, NFCSceneInfo>
 {
 public:
-    virtual ~NFIContainerModule()
+    virtual ~NFISceneModule()
     {
         ClearAll();
     }
