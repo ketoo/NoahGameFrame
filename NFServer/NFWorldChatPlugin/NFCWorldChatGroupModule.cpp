@@ -45,7 +45,7 @@ bool NFCWorldChatGroupModule::AfterInit()
     m_pDataProcessModule->RegisterAutoSave(mstrGroupTalble);
     m_pKernelModule->AddClassCallBack(mstrGroupTalble, this, &NFCWorldChatGroupModule::OnGuildClassEvent);
 
-    m_pKernelModule->CreateContainer(mContainerID, "");
+    m_pKernelModule->CreateScene(mContainerID, "");
     return true;
 }
 
