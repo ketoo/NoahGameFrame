@@ -71,46 +71,6 @@ int NFCLoginLogicModule::OnDisconnectEvent(const NFGUID& object, const int nEven
 bool NFCLoginLogicModule::Execute()
 {
 
-    //////////////////////////////////////////////////////////////////////////
-#ifdef NF_DEBUG_MODE
-    //     char szContent[MAX_PATH] = { 0 };
-    //     if (kbhit() && gets(szContent))
-    //     {
-    //         NFCDataList val(szContent, ",");
-    //         if (val.GetCount() > 0)
-    //         {
-    //             const std::string& strCmd = val.String(0);
-    //             //if (0 == strcmp("listworldserver", pstrCmd))
-    //             if ("listworldserver" == strCmd)
-    //             {
-    //                 NFCDataList valOobjectList;
-    //                 int nCount = m_pKernelModule->GetContainerOnLineList(-2, valOobjectList);
-    //                 for (int i = 0; i < nCount; i++)
-    //                 {
-    //                     NFGUID ident = valOobjectList.Object(i);
-    //
-    //                     char szInfo[MAX_PATH] = { 0 };
-    //                     sprintf_s(szInfo, "WorldID:%d, WorldName:%s, WorldMaxOnline:%d, WorldOnlineCount:%d",
-    //                               m_pKernelModule->GetPropertyInt(ident, "WorldID"),
-    //                               m_pKernelModule->GetPropertyString(ident, "WorldName"),
-    //                               m_pKernelModule->GetPropertyInt(ident, "WorldMaxOnline"),
-    //                               m_pKernelModule->GetPropertyInt(ident, "WorldOnlineCount"));
-    //
-    //                     m_pKernelModule->LogInfo(szInfo);
-    //                 }
-    //             }
-    //             else if ("listclient" == strCmd)
-    //                 //else if (0 == strcmp("listclient", pstrCmd))
-    //             {
-    //             }
-    //             else
-    //             {
-    //                 m_pKernelModule->Command(val);
-    //             }
-    //         }
-    //     }
-#endif
-
 
     return true;
 }

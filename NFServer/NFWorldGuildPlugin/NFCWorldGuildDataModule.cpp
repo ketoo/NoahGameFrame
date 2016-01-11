@@ -46,7 +46,7 @@ bool NFCWorldGuildDataModule::AfterInit()
     m_pDataProcessModule->RegisterAutoSave("Guild");
     m_pKernelModule->AddClassCallBack("Guild", this, &NFCWorldGuildDataModule::OnGuildClassEvent);
 
-    m_pKernelModule->CreateContainer(mContainerID, "");
+    m_pKernelModule->CreateScene(mContainerID, "");
 
     m_pUUIDModule->SetIdentID(pPluginManager->AppID());
     return true;
