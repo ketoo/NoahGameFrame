@@ -1,15 +1,3 @@
-CREATE TABLE `BB_Build` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `BB_Player` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 ALTER TABLE `BB_Player` ADD `RoleName` varchar(128) DEFAULT '' COMMENT '角色名';
 ALTER TABLE `BB_Player` ADD `Sex` bigint(11) DEFAULT '0' COMMENT '性别';
 ALTER TABLE `BB_Player` ADD `Race` bigint(11) DEFAULT '0' COMMENT '种族';
@@ -23,13 +11,6 @@ ALTER TABLE `BB_Player` ADD `Diamond` bigint(11) DEFAULT '0' COMMENT '拥有的�
 ALTER TABLE `BB_Player` ADD `LoadPropertyFinish` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `BB_Player` ADD `BuildingList` BLOB COMMENT '';
 ALTER TABLE `BB_Player` ADD `BuildingProduce` BLOB COMMENT '';
-
-
-CREATE TABLE `Buff` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 ALTER TABLE `Buff` ADD `EffectType` bigint(11) DEFAULT '0' COMMENT '影响属性类型(效果类型)  生命，法力(可组合,叠加)';
 ALTER TABLE `Buff` ADD `EffectValueType` bigint(11) DEFAULT '0' COMMENT '影响值类型 百分比 绝对值--如果是控制属性开关，则只能是绝对值';
 ALTER TABLE `Buff` ADD `EffectValueReferType` bigint(11) DEFAULT '0' COMMENT '影响值参考类型';
@@ -39,24 +20,10 @@ ALTER TABLE `Buff` ADD `WashGroupID` bigint(11) DEFAULT '0' COMMENT '每次间�
 ALTER TABLE `Buff` ADD `ReverseReferType` bigint(11) DEFAULT '0' COMMENT '是否还原，不还原的在计算的时候不能保存在runTimeInfo,只能累计在最终值内';
 ALTER TABLE `Buff` ADD `EffectClearOnDead` bigint(11) DEFAULT '0' COMMENT '死亡是否清除';
 ALTER TABLE `Buff` ADD `DownSaveType` bigint(11) DEFAULT '0' COMMENT '下线是否保存';
-
-
-CREATE TABLE `ChatGroup` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 ALTER TABLE `ChatGroup` ADD `Name` varchar(128) DEFAULT '' COMMENT '组名字';
 ALTER TABLE `ChatGroup` ADD `CreateObject` varchar(128) DEFAULT '' COMMENT '创建者';
 ALTER TABLE `ChatGroup` ADD `GroupMemberList` BLOB COMMENT '';
 ALTER TABLE `ChatGroup` ADD `ChatList` BLOB COMMENT '';
-
-
-CREATE TABLE `ConsumeData` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 ALTER TABLE `ConsumeData` ADD `VIPEXP` bigint(11) DEFAULT '0' COMMENT 'VIP经验';
 ALTER TABLE `ConsumeData` ADD `EXP` bigint(11) DEFAULT '0' COMMENT '经验获得,如果是怪物，则是掉落经验';
 ALTER TABLE `ConsumeData` ADD `HP` bigint(11) DEFAULT '0' COMMENT '生命值';
@@ -64,41 +31,6 @@ ALTER TABLE `ConsumeData` ADD `SP` bigint(11) DEFAULT '0' COMMENT '体力';
 ALTER TABLE `ConsumeData` ADD `MP` bigint(11) DEFAULT '0' COMMENT '法力值';
 ALTER TABLE `ConsumeData` ADD `Gold` bigint(11) DEFAULT '0' COMMENT '玩家游戏金币';
 ALTER TABLE `ConsumeData` ADD `Money` bigint(11) DEFAULT '0' COMMENT '钻石';
-
-
-CREATE TABLE `Cost` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `DescData` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `EffectData` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `Equip` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `Guild` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 ALTER TABLE `Guild` ADD `Name` varchar(128) DEFAULT '' COMMENT '工会名';
 ALTER TABLE `Guild` ADD `PresidentID` varchar(128) DEFAULT '' COMMENT '会长ID';
 ALTER TABLE `Guild` ADD `PresidentName` varchar(128) DEFAULT '' COMMENT '会长名';
@@ -127,71 +59,17 @@ ALTER TABLE `Guild` ADD `GuildAppyList` BLOB COMMENT 'guild';
 ALTER TABLE `Guild` ADD `GuildEvent` BLOB COMMENT 'guild';
 ALTER TABLE `Guild` ADD `GuildHouse` BLOB COMMENT 'guild';
 ALTER TABLE `Guild` ADD `GuildSkill` BLOB COMMENT 'guild';
-
-
-CREATE TABLE `GuildConfig` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `GuildJob` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `GuildName` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 ALTER TABLE `GuildName` ADD `GuildID` varchar(128) DEFAULT '' COMMENT '工会ID';
-
-
-CREATE TABLE `InitProperty` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `Item` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `Language` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `NPC` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+ALTER TABLE `NPC` ADD `VIPEXP` bigint(11) DEFAULT '0' COMMENT 'VIP经验';
 ALTER TABLE `NPC` ADD `EXP` bigint(11) DEFAULT '0' COMMENT '经验获得,如果是怪物，则是掉落经验';
+ALTER TABLE `NPC` ADD `HP` bigint(11) DEFAULT '0' COMMENT '生命值';
 ALTER TABLE `NPC` ADD `SP` bigint(11) DEFAULT '0' COMMENT '体力';
 ALTER TABLE `NPC` ADD `MP` bigint(11) DEFAULT '0' COMMENT '法力值';
-ALTER TABLE `NPC` ADD `Money` bigint(11) DEFAULT '0' COMMENT '钱';
+ALTER TABLE `NPC` ADD `Gold` bigint(11) DEFAULT '0' COMMENT '玩家游戏金币';
+ALTER TABLE `NPC` ADD `Money` bigint(11) DEFAULT '0' COMMENT '钻石';
 ALTER TABLE `NPC` ADD `X` float(11,3) DEFAULT '0' COMMENT '';
 ALTER TABLE `NPC` ADD `Y` float(11,3) DEFAULT '0' COMMENT '';
 ALTER TABLE `NPC` ADD `Z` float(11,3) DEFAULT '0' COMMENT '';
-ALTER TABLE `NPC` ADD `PosList` BLOB COMMENT '';
-
-
-CREATE TABLE `Player` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 ALTER TABLE `Player` ADD `Name` varchar(128) DEFAULT '' COMMENT '角色名';
 ALTER TABLE `Player` ADD `Sex` bigint(11) DEFAULT '0' COMMENT '性别';
 ALTER TABLE `Player` ADD `Race` bigint(11) DEFAULT '0' COMMENT '种族';
@@ -255,27 +133,6 @@ ALTER TABLE `Player` ADD `DropItemList` BLOB COMMENT '怪物掉落表';
 ALTER TABLE `Player` ADD `SkillTable` BLOB COMMENT '';
 ALTER TABLE `Player` ADD `TaskMonsterList` BLOB COMMENT '任务杀怪表';
 ALTER TABLE `Player` ADD `TaskList` BLOB COMMENT '任务表';
-
-
-CREATE TABLE `Scene` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `Server` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `Shop` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 ALTER TABLE `Shop` ADD `Type` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `Shop` ADD `ItemID` varchar(128) DEFAULT '' COMMENT '';
 ALTER TABLE `Shop` ADD `Gold` bigint(11) DEFAULT '0' COMMENT '';
@@ -283,42 +140,7 @@ ALTER TABLE `Shop` ADD `Steel` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `Shop` ADD `Stone` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `Shop` ADD `Diamond` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `Shop` ADD `Level` bigint(11) DEFAULT '0' COMMENT '';
-
-
-CREATE TABLE `Skill` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `SkillRef` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `SqlServer` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `StateFuncResources` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 ALTER TABLE `StateFuncResources` ADD `Atlas_ResID` varchar(128) DEFAULT '' COMMENT '';
-
-
-CREATE TABLE `StateFunction` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 ALTER TABLE `StateFunction` ADD `EFT_INFO` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `StateFunction` ADD `EFT_BOOOST` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `StateFunction` ADD `EFT_LVLUP` bigint(11) DEFAULT '0' COMMENT '';
@@ -333,12 +155,3 @@ ALTER TABLE `StateFunction` ADD `EFT_SELL` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `StateFunction` ADD `EFT_REPAIR` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `StateFunction` ADD `EFT_CANCEL` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `StateFunction` ADD `EFT_FINISH` bigint(11) DEFAULT '0' COMMENT '';
-
-
-CREATE TABLE `Task` (
-	`ID` varchar(128) NOT NULL,
-	PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
