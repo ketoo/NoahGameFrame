@@ -115,14 +115,6 @@ enum GuildSkill
 	Power		= 7; // Power -- int
 }
 
-enum PosList
-{
-	X		= 0; // X -- float
-	Y		= 1; // Y -- float
-	Z		= 2; // Z -- float
-	StayTime		= 3; // StayTime -- float
-}
-
 enum PlayerViewItem
 {
 	ConfigID		= 0; // ConfigID -- string

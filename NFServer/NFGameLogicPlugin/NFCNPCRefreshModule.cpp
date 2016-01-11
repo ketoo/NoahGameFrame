@@ -45,8 +45,32 @@ bool NFCNPCRefreshModule::AfterInit()
 
 int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
+    NF_SHARE_PTR<NFIObject> pSelf = m_pKernelModule->GetObject(self);
+    if (nullptr == pSelf)
+    {
+        return 1;
+    }
+
     if ( strClassName == "NPC" )
     {
+        if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
+        {
+            const std::string& strConfigIndex = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
+            const std::string& strPropertyID = m_pElementInfoModule->GetPropertyString(strConfigIndex, NFrame::NPC::EffectData());
+            NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementInfoModule->GetPropertyManager(strPropertyID);
+            if (pConfigPropertyManager)
+            {
+                std::string strProperName;
+                NF_SHARE_PTR<NFIPropertyManager> pSelfPropertyManager = pSelf->GetPropertyManager();
+                for (NFIProperty* pProperty = pConfigPropertyManager->FirstNude(strProperName); pProperty != NULL; pProperty = pConfigPropertyManager->NextNude(strProperName))
+                {
+                    if (pSelfPropertyManager && strProperName != NFrame::NPC::ID())
+                    {
+                        pSelfPropertyManager->SetProperty(pProperty->GetKey(), pProperty->GetValue());
+                    }
+                }
+            }
+        }
         if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )
         {
             const std::string& strConfigID = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
