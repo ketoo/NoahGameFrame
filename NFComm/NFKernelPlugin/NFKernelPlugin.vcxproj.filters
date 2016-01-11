@@ -4,7 +4,7 @@
     <Filter Include="NFKernelModule">
       <UniqueIdentifier>{a8aa8caa-98c2-4623-b91e-119c2b3027fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFContainerModule">
+    <Filter Include="NFSceneModule">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
@@ -14,17 +14,14 @@
     <ClInclude Include="NFKernelModule\NFCKernelModule.h">
       <Filter>NFKernelModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFContainerModule\NFCContainerModule.h">
-      <Filter>NFContainerModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFContainerModule\NFIContainerModule.h">
-      <Filter>NFContainerModule</Filter>
-    </ClInclude>
     <ClInclude Include="NFKernelModule\NFCUUIDModule.h">
       <Filter>NFKernelModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFKernelModule\NFCConcurrentModule.h">
-      <Filter>NFContainerModule</Filter>
+    <ClInclude Include="NFSceneModule\NFCSceneModule.h">
+      <Filter>NFSceneModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFSceneModule\NFISceneModule.h">
+      <Filter>NFSceneModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -33,14 +30,11 @@
     <ClCompile Include="NFKernelModule\NFCKernelModule.cpp">
       <Filter>NFKernelModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFContainerModule\NFCContainerModule.cpp">
-      <Filter>NFContainerModule</Filter>
-    </ClCompile>
     <ClCompile Include="NFKernelModule\NFCUUIDModule.cpp">
       <Filter>NFKernelModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFKernelModule\NFCConcurrentModule.cpp">
-      <Filter>NFContainerModule</Filter>
+    <ClCompile Include="NFSceneModule\NFCSceneModule.cpp">
+      <Filter>NFSceneModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

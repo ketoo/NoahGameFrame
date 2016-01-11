@@ -23,7 +23,7 @@
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
-#include "NFComm/NFKernelPlugin/NFContainerModule/NFCContainerModule.h"
+#include "NFComm/NFKernelPlugin/NFSceneModule/NFCSceneModule.h"
 
 class NFCKernelModule
     : public NFIKernelModule,
@@ -51,7 +51,7 @@ public:
 
     virtual bool IsContainer(const NFGUID& self);
 
-    virtual bool ExistContainer(const int nContainerIndex);
+    virtual bool ExistContainer(const int nSceneID);
 
     virtual NF_SHARE_PTR<NFIObject> GetObject(const NFGUID& ident);
 
@@ -107,20 +107,20 @@ public:
     virtual bool AddRecord(const NFGUID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& varKey, const NFIDataList& varDesc, const NFIDataList& varTag, const NFIDataList& varRelatedRecord, const int nRows, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex);
     ////////////////////////////////////////////////////////////////
 
-    virtual bool CreateContainer(const int nContainerIndex, const std::string& strSceneConfigID);
+    virtual bool CreateScene(const int nSceneID, const std::string& strSceneConfigID);
 
-    virtual bool DestroyContainer(const int nContainerIndex);
+    virtual bool DestroyContainer(const int nSceneID);
 
     virtual int GetOnLineCount();
 
     virtual int GetMaxOnLineCount();
 
-    virtual int GetContainerOnLineCount(const int nContainerID);
+    virtual int GetSceneOnLineCount(const int nContainerID);
 
-    virtual int GetContainerOnLineCount(const int nContainerID, const int nGroupID);
+    virtual int GetSceneOnLineCount(const int nContainerID, const int nGroupID);
 
-    virtual int GetContainerOnLineList(const int nContainerID, NFIDataList& var);
-    virtual int GetAllContainerObjectList(NFIDataList& var);
+    virtual int GetSceneOnLineList(const int nContainerID, NFIDataList& var);
+    virtual int GetAllSceneObjectList(NFIDataList& var);
 
     virtual int RequestGroupScene(const int nContainerID);
 
@@ -199,7 +199,7 @@ private:
     NFGUID mnCurExeObject;
     NFINT64 nLastTime;
 
-    NF_SHARE_PTR<NFIContainerModule> m_pContainerModule;
+    NF_SHARE_PTR<NFISceneModule> m_pContainerModule;
     
     NFILogModule* m_pLogModule;
     NFILogicClassModule* m_pLogicClassModule;
