@@ -223,17 +223,18 @@ message ReqAckBattleOppnent
 
 
 ///////////////工会/////////////////////////////////////////////////////////////////////////////////////
+//EGMI_REQ_CREATE_GUILD                       = 300; // 申请创建公会 EGMI_ACK_CREATE_GUILD						= 301; // 创建公会结果
 message ReqAckCreateGuild
 {
     required Ident		guild_id = 1;
     required string		guild_name = 2;
 }
-
+//EGMI_REQ_SEARCH_GUILD                       = 308; // 申请搜索公会
 message ReqSearchGuild
 {
     required string		guild_name = 1;
 }
-
+//EGMI_ACK_SEARCH_GUILD                       = 309; // 返回搜索公会
 message AckSearchGuild
 {
 	message SearchGuildObject
@@ -249,13 +250,13 @@ message AckSearchGuild
 	
 	repeated SearchGuildObject guild_list = 1;
 }
-
+//EGMI_REQ_JOIN_GUILD                         = 302; // 申请加入公会 EGMI_ACK_JOIN_GUILD							= 303; // 加入公会结果
 message ReqAckJoinGuild
 {
     required Ident		guild_id = 1;
     required string		guild_name = 2;
 }
-
+//EGMI_ACK_LEAVE_GUILD						= 305; // 离开公会结果 
 message ReqAckLeaveGuild
 {
     required Ident		guild_id = 1;
@@ -263,7 +264,7 @@ message ReqAckLeaveGuild
 }
 
 
-//操作成员
+//操作成员 EGMI_REQ_OPR_GUILD                        	= 306; // 申请成员操作 EGMI_ACK_OPR_GUILD                        	= 307; // 成员操作结果
 message ReqAckOprGuildMember
 {
 	enum EGGuildMemberOprType
@@ -271,10 +272,37 @@ message ReqAckOprGuildMember
 		EGAT_DOWN = 0;
 		EGAT_UP = 1;
 		EGAT_KICK = 2;
+		
+		EGAT_APPOINT 		= 3;//任命
+		EGAT_FIRE 			= 4;//撤职
+		EGAT_DEMISE 		= 5;//禅让
+		EGAT_ACCEPTAPPLY 	= 6;//收人
+		EGAT_DENYAPPLY 		= 7;//拒收
+		EGAT_KICKOUT 		= 8;//开除
 	}
 	required Ident						guild_id = 1;
     required Ident						member_id = 2;//被操作的ID
     required EGGuildMemberOprType		type = 3;
+}
+
+//EGMI_REQ_OPR_GUILDINFO						= 310; // 申请公会操作   EGMI_ACK_OPR_GUILDINFO						= 311; // 公会操作结果
+message ReqAckOprGuild
+{
+	enum EGGuildOprType
+	{		
+		EGAT_APPLYDISMISS	= 1;//申请解散军团
+		EGAT_STOPDISMISS	= 2;//中止解散军团
+		EGAT_SETRECRUIT		= 3;//设置招募
+		EGAT_PUBLISHRECRUIT	= 4;//发布招募
+		EGAT_EDITAD			= 5;//编辑公告
+		EGAT_LEVELUP		= 6;//军团升级
+	}
+	required Ident						guild_id = 1;
+    required Ident						player_id = 2;//
+    required EGGuildOprType				type = 3;
+	
+	required string						Recruit_data = 4;//招募信息
+	required string						Ad_data 	= 5;//公告信息
 }
 
 message ReqAckDonateGuildItem

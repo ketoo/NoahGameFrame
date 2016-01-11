@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/09
+//    @Date             :    2016/01/11
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -526,12 +526,13 @@ public class NPC {
 	public static final String ConfigID = "ConfigID"; // string
 	// Property
 	public static final String SeedID = "SeedID"; // string
+	public static final String VIPEXP = "VIPEXP"; // int
 	public static final String EXP = "EXP"; // int
 	public static final String HP = "HP"; // int
 	public static final String SP = "SP"; // int
 	public static final String MP = "MP"; // int
+	public static final String Gold = "Gold"; // int
 	public static final String Money = "Money"; // int
-	public static final String LastAttacker = "LastAttacker"; // object
 	public static final String X = "X"; // float
 	public static final String Y = "Y"; // float
 	public static final String Z = "Z"; // float
@@ -568,16 +569,10 @@ public class NPC {
 	public static final String DropPackList = "DropPackList"; // string
 	public static final String SkillIDRef = "SkillIDRef"; // string
 	public static final String Height = "Height"; // float
+	public static final String EffectData = "EffectData"; // string
+	public static final String ConsumeData = "ConsumeData"; // string
+	public static final String LastAttacker = "LastAttacker"; // object
 	// Record
-	public static final String PosList = "PosList";
-
-	public enum PosList
-	{
-		X		= 0, // X -- float
-		Y		= 1, // Y -- float
-		Z		= 2, // Z -- float
-		StayTime		= 3, // StayTime -- float
-	};
 
 }
 
