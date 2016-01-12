@@ -16,6 +16,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 class NFCLevelModule
     : public NFILevelModule
@@ -51,8 +52,6 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-
 };
-
 
 #endif
