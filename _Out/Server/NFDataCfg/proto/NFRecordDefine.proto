@@ -1,26 +1,5 @@
 package NFrame;
 
-enum BuildingList
-{
-	BuildingID		= 0; // BuildingID -- string
-	BuildingGUID		= 1; // BuildingGUID -- object
-	State		= 2; // State -- int
-	PosX		= 3; // PosX -- int
-	PosY		= 4; // PosY -- int
-	PosZ		= 5; // PosZ -- int
-	StateStartTime		= 6; // StateStartTime -- int
-	StateEndTime		= 7; // StateEndTime -- int
-}
-
-enum BuildingProduce
-{
-	BuildingGUID		= 0; // BuildingGUID -- object
-	ItemID		= 1; // ItemID -- string
-	LeftCount		= 2; // LeftCount -- int
-	OnceTime		= 3; // OnceTime -- int
-	OnceStartTime		= 4; // OnceStartTime -- int
-}
-
 enum GroupMemberList
 {
 	GUID		= 0; // GUID -- object
@@ -256,5 +235,29 @@ enum ChatGroup
 {
 	ChatType		= 0; // ChatType -- int
 	GroupGUID		= 1; // GroupGUID -- object
+}
+
+enum BuildingList
+{
+	BuildingID		= 0; // BuildingID -- string
+	BuildingGUID		= 1; // BuildingGUID -- object
+	State		= 2; // State -- int
+	PosX		= 3; // PosX -- int
+	PosY		= 4; // PosY -- int
+	PosZ		= 5; // PosZ -- int
+	StateStartTime		= 6; // StateStartTime -- int
+	StateEndTime		= 7; // StateEndTime -- int
+}
+
+enum BuildingList
+{
+	BuildingID		= 0; // BuildingID -- string
+	BuildingGUID		= 1; // BuildingGUID -- object
+	State		= 2; // State -- int
+	PosX		= 3; // PosX -- int
+	PosY		= 4; // PosY -- int
+	PosZ		= 5; // PosZ -- int
+	StateStartTime		= 6; // StateStartTime -- int
+	StateEndTime		= 7; // StateEndTime -- int
 }
 
