@@ -13,9 +13,9 @@ bool NFCBriefSkillConsumeProcessModule::Init()
     mstrSkillTableName = "SkillTable";
 
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pSkillConsumeManagerModule = dynamic_cast<NFISkillConsumeManagerModule*>( pPluginManager->FindModule( "NFCSkillConsumeManagerModule" ) );
+    m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>("NFCSkillConsumeManagerModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-    m_pSkillModule = dynamic_cast<NFISkillModule*>( pPluginManager->FindModule( "NFCSkillModule" ) );
+    m_pSkillModule = pPluginManager->FindModule<NFISkillModule>("NFCSkillModule");
     m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
 
     assert( NULL != m_pKernelModule );

@@ -14,7 +14,6 @@ bool NFCSkillModule::Init()
     return true;
 }
 
-
 bool NFCSkillModule::Shut()
 {
     return true;
@@ -22,7 +21,6 @@ bool NFCSkillModule::Shut()
 
 bool NFCSkillModule::Execute()
 {
-    //位置呢
     return true;
 }
 
@@ -30,7 +28,7 @@ bool NFCSkillModule::AfterInit()
 {
     m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pSkillConsumeManagerModule = dynamic_cast<NFISkillConsumeManagerModule*>( pPluginManager->FindModule( "NFCSkillConsumeManagerModule" ) );
+    m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>("NFCSkillConsumeManagerModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
     m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
     m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
@@ -49,10 +47,9 @@ bool NFCSkillModule::AfterInit()
     m_pEventProcessModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL, this, &NFCSkillModule::OnRequireUseSkillEvent );
     m_pEventProcessModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL_POS, this, &NFCSkillModule::OnRequireUseSkillPosEvent );
 
-    m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCSkillModule::OnClassObjectEvent );
-    m_pEventProcessModule->AddClassCallBack( "NPC", this, &NFCSkillModule::OnClassObjectEvent );
-    m_pEventProcessModule->AddClassCallBack( "Pet", this, &NFCSkillModule::OnClassObjectEvent );
-
+    m_pEventProcessModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCSkillModule::OnClassObjectEvent );
+    m_pEventProcessModule->AddClassCallBack( NFrame::NPC::ThisName(), this, &NFCSkillModule::OnClassObjectEvent );
+    //m_pEventProcessModule->AddClassCallBack( NFrame::Pet::ThisName(), this, &NFCSkillModule::OnClassObjectEvent );
 
     return true;
 }
@@ -136,14 +133,14 @@ int NFCSkillModule::OnUseSkill(const NFGUID& self, const NFIDataList& var)
     //    damageResultList.AddInt(0);
     //}
 
-    int nCurHP = m_pKernelModule->GetPropertyInt(nTargetID, "HP");
+    int nCurHP = m_pKernelModule->GetPropertyInt(nTargetID, NFrame::NPC::HP());
     if (nCurHP <= 0)
     {
         return 1;
     }
 
-    m_pKernelModule->SetPropertyObject(nTargetID, "LastAttacker", self);
-    m_pKernelModule->SetPropertyInt(nTargetID, "HP", (nCurHP - 10) >= 0 ? (nCurHP - 10) : 0); // 暂时扣10点血
+    m_pKernelModule->SetPropertyObject(nTargetID, NFrame::NPC::LastAttacker(), self);
+    m_pKernelModule->SetPropertyInt(nTargetID, NFrame::NPC::HP(), (nCurHP - 10) >= 0 ? (nCurHP - 10) : 0); // 暂时扣10点血
     
 
     ////结果事件--无论失败或者是成功，都会发下去--当然使用结果只对使用者下发--成果的结果，还得对被施放的人发
@@ -178,7 +175,7 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const int nEvent
         return 1;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecordSkill = pObejct->GetRecordManager()->GetElement( mstrSkillTableName );
+    NF_SHARE_PTR<NFIRecord> pRecordSkill = pObejct->GetRecordManager()->GetElement( NFrame::Player::R_SkillTable() );
     if ( pRecordSkill == NULL )
     {
         return 1;
@@ -190,7 +187,7 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const int nEvent
         return 1;
     }
 
-    NF_SHARE_PTR<NFIProperty> pItemTypeProperty = pPropertyManager->GetElement( "SkillType" );
+    NF_SHARE_PTR<NFIProperty> pItemTypeProperty = pPropertyManager->GetElement(NFrame::Skill::SkillType());
     if ( pItemTypeProperty == NULL )
     {
         return 1;
@@ -221,7 +218,7 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const int nEvent
     int nResult = pConsumeProcessModule->ConsumeProcess( var.Object( 0 ), var.String( 2 ), valueOther, damageValueList, damageResultList );
     for (int i = 0; i < valueOther.GetCount(); i++)
     {
-        m_pKernelModule->SetPropertyInt(valueOther.Object(i), "HP", 0);
+        m_pKernelModule->SetPropertyInt(valueOther.Object(i), NFrame::NPC::HP(), 0);
         damageValueList.AddInt(0);
         damageResultList.AddInt(0);
     }
@@ -279,10 +276,10 @@ int NFCSkillModule::AddSkill( const NFGUID& self, const std::string& strSkillNam
             if ( pRecord )
             {
                 return pRecord->AddRow( -1,  NFCDataList() << strSkillName.c_str());
-                //                 if ( nRow >= 0 )
-                //                 {
-                //                     return pRecord->SetString( nRow, EGameSkillStoreType::EGSST_TYPE_SKILL_CONFIGID, strSkillName.c_str() );
-                //                 }
+                //if ( nRow >= 0 )
+                //{
+                //    return pRecord->SetString( nRow, EGameSkillStoreType::EGSST_TYPE_SKILL_CONFIGID, strSkillName.c_str() );
+                //}
             }
         }
     }
