@@ -30,7 +30,7 @@ bool NFCNPCRefreshModule::AfterInit()
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
     m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>( "NFCSceneProcessModule" );
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-    m_pPackModule = dynamic_cast<NFIPackModule*>( pPluginManager->FindModule( "NFCPackModule" ) );
+    m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
 
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
@@ -38,7 +38,7 @@ bool NFCNPCRefreshModule::AfterInit()
     assert(NULL != m_pElementInfoModule);
     assert(NULL != m_pPackModule);
 
-    m_pEventProcessModule->AddClassCallBack( "NPC", this, &NFCNPCRefreshModule::OnObjectClassEvent );
+    m_pEventProcessModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCNPCRefreshModule::OnObjectClassEvent);
 
     return true;
 }
@@ -51,7 +51,7 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
         return 1;
     }
 
-    if ( strClassName == "NPC" )
+    if (strClassName == NFrame::NPC::ThisName())
     {
         if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
         {

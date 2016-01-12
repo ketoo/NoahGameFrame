@@ -82,7 +82,7 @@ bool NFCWorldChatGroupModule::JoinGroup( const NFGUID& self, const NFGUID& xGrou
 	return false;
 }
 
-const NFGUID& NFCWorldChatGroupModule::CreateGroup( const NFGUID& self )
+const NFGUID NFCWorldChatGroupModule::CreateGroup( const NFGUID& self )
 {
     const NFGUID xGuidID = m_pUUIDModule->CreateGUID();
 
