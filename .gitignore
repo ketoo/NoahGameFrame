@@ -19,3 +19,16 @@
 *.exe
 *.out
 *.app
+/Dependencies/gperftools-2.1
+/Dependencies/lib
+/Dependencies/boost_1_53_0
+/Dependencies/curl-7.37.1
+/Temp
+/NoahFrame.v11.suo
+/NoahFrame.opensdf
+/NoahFrame.sdf
+/_Out/Comm/Debug/*.manifest
+/_Out/Comm/Debug/*.exp
+/_Out/Comm/Debug/*.ilk
+/_Out/Comm/Debug/*.bsc
+/_Out/Comm/Debug/*.pdb

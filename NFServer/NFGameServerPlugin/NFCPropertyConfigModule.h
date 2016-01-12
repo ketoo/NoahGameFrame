@@ -17,6 +17,7 @@
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 class NFCPropertyConfigModule
     : public NFIPropertyConfigModule

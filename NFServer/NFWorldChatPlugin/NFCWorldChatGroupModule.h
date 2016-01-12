@@ -36,7 +36,7 @@ public:
 
 public:
     virtual bool JoinGroup(const NFGUID& self, const NFGUID& xGroupID);
-    virtual const NFGUID& CreateGroup(const NFGUID& self);
+    virtual const NFGUID CreateGroup(const NFGUID& self);
     virtual bool QuitGroup(const NFGUID& self, const NFGUID& xGroupID);
     virtual bool DeleteGroup(const NFGUID& self, const NFGUID& xGroupID);
     virtual NF_SHARE_PTR<NFIObject> GetGroup(const NFGUID& self);
