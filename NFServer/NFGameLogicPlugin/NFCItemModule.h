@@ -41,9 +41,8 @@ protected:
 	int OnRequireUseItemPosEvent( const NFGUID& self, const int nEventID, const NFIDataList& var );
 
 	virtual bool CheckConfig();
-private:
-    char* mstrPackTableName;
 
+private:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFIItemConsumeManagerModule* m_pItemConsumeManagerModule;

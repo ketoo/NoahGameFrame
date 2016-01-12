@@ -16,7 +16,7 @@ class NFIWorldChatGroupModule
 {
 public:
     virtual bool JoinGroup(const NFGUID& self, const NFGUID& xGroupID) = 0;
-    virtual const NFGUID& CreateGroup(const NFGUID& self) = 0;
+    virtual const NFGUID CreateGroup(const NFGUID& self) = 0;
     virtual bool QuitGroup(const NFGUID& self, const NFGUID& xGroupID) = 0;
     virtual bool DeleteGroup(const NFGUID& self, const NFGUID& xGroupID) = 0;
     virtual NF_SHARE_PTR<NFIObject> GetGroup(const NFGUID& self) = 0;
