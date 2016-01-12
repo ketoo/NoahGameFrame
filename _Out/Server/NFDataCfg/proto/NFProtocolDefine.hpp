@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/11
+//    @Date             :    2016/01/12
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -49,57 +49,6 @@ public:
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
 	static const std::string& Desc(){ static std::string xDesc = "Desc"; return xDesc; } // string
 	// Record
-
-};
-
-class BB_Player
-{
-public:
-	//Class name
-	static const std::string& ThisName(){ static std::string xBB_Player = "BB_Player"; return xBB_Player; }
-	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	// Property
-	static const std::string& RoleName(){ static std::string xRoleName = "RoleName"; return xRoleName; } // string
-	static const std::string& Sex(){ static std::string xSex = "Sex"; return xSex; } // int
-	static const std::string& Race(){ static std::string xRace = "Race"; return xRace; } // int
-	static const std::string& Camp(){ static std::string xCamp = "Camp"; return xCamp; } // int
-	static const std::string& LastContainerID(){ static std::string xLastContainerID = "LastContainerID"; return xLastContainerID; } // int
-	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel; } // int
-	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
-	static const std::string& Gold(){ static std::string xGold = "Gold"; return xGold; } // int
-	static const std::string& Stone(){ static std::string xStone = "Stone"; return xStone; } // int
-	static const std::string& Steel(){ static std::string xSteel = "Steel"; return xSteel; } // int
-	static const std::string& Diamond(){ static std::string xDiamond = "Diamond"; return xDiamond; } // int
-	static const std::string& LoadPropertyFinish(){ static std::string xLoadPropertyFinish = "LoadPropertyFinish"; return xLoadPropertyFinish; } // int
-	// Record
-	static const std::string& R_BuildingList(){ static std::string xBuildingList = "BuildingList"; return xBuildingList;}
-	static const std::string& R_BuildingProduce(){ static std::string xBuildingProduce = "BuildingProduce"; return xBuildingProduce;}
-
-	enum BuildingList
-	{
-		BuildingList_BuildingID		= 0, // BuildingID -- string
-		BuildingList_BuildingGUID		= 1, // BuildingGUID -- object
-		BuildingList_State		= 2, // State -- int
-		BuildingList_PosX		= 3, // PosX -- int
-		BuildingList_PosY		= 4, // PosY -- int
-		BuildingList_PosZ		= 5, // PosZ -- int
-		BuildingList_StateStartTime		= 6, // StateStartTime -- int
-		BuildingList_StateEndTime		= 7, // StateEndTime -- int
-	};
-
-	enum BuildingProduce
-	{
-		BuildingProduce_BuildingGUID		= 0, // BuildingGUID -- object
-		BuildingProduce_ItemID		= 1, // ItemID -- string
-		BuildingProduce_LeftCount		= 2, // LeftCount -- int
-		BuildingProduce_OnceTime		= 3, // OnceTime -- int
-		BuildingProduce_OnceStartTime		= 4, // OnceStartTime -- int
-	};
 
 };
 
@@ -721,6 +670,8 @@ public:
 	static const std::string& R_TaskList(){ static std::string xTaskList = "TaskList"; return xTaskList;}
 	static const std::string& R_PVPList(){ static std::string xPVPList = "PVPList"; return xPVPList;}
 	static const std::string& R_ChatGroup(){ static std::string xChatGroup = "ChatGroup"; return xChatGroup;}
+	static const std::string& R_BuildingList(){ static std::string xBuildingList = "BuildingList"; return xBuildingList;}
+	static const std::string& R_BuildingList(){ static std::string xBuildingList = "BuildingList"; return xBuildingList;}
 
 	enum PlayerViewItem
 	{
@@ -863,6 +814,30 @@ public:
 	{
 		ChatGroup_ChatType		= 0, // ChatType -- int
 		ChatGroup_GroupGUID		= 1, // GroupGUID -- object
+	};
+
+	enum BuildingList
+	{
+		BuildingList_BuildingID		= 0, // BuildingID -- string
+		BuildingList_BuildingGUID		= 1, // BuildingGUID -- object
+		BuildingList_State		= 2, // State -- int
+		BuildingList_PosX		= 3, // PosX -- int
+		BuildingList_PosY		= 4, // PosY -- int
+		BuildingList_PosZ		= 5, // PosZ -- int
+		BuildingList_StateStartTime		= 6, // StateStartTime -- int
+		BuildingList_StateEndTime		= 7, // StateEndTime -- int
+	};
+
+	enum BuildingList
+	{
+		BuildingList_BuildingID		= 0, // BuildingID -- string
+		BuildingList_BuildingGUID		= 1, // BuildingGUID -- object
+		BuildingList_State		= 2, // State -- int
+		BuildingList_PosX		= 3, // PosX -- int
+		BuildingList_PosY		= 4, // PosY -- int
+		BuildingList_PosZ		= 5, // PosZ -- int
+		BuildingList_StateStartTime		= 6, // StateStartTime -- int
+		BuildingList_StateEndTime		= 7, // StateEndTime -- int
 	};
 
 };
