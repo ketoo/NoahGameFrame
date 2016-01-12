@@ -12,8 +12,8 @@ bool NFCItemModule::Init()
 {
     m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pItemConsumeManagerModule = dynamic_cast<NFIItemConsumeManagerModule*>( pPluginManager->FindModule( "NFCItemConsumeManagerModule" ) );
-    m_pPackModule = dynamic_cast<NFIPackModule*>( pPluginManager->FindModule( "NFCPackModule" ) );
+    m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>("NFCItemConsumeManagerModule");
+    m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
 
@@ -23,9 +23,6 @@ bool NFCItemModule::Init()
     assert( NULL != m_pPackModule );
     assert( NULL != m_pElementInfoModule );
 	assert(	NULL != m_pLogicClassModule);
-
-
-    mstrPackTableName = "BagItemList";
 
     return true;
 }
@@ -44,7 +41,7 @@ bool NFCItemModule::Execute()
 
 bool NFCItemModule::AfterInit()
 {
-    m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCItemModule::OnClassObjectEvent );
+    m_pEventProcessModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCItemModule::OnClassObjectEvent );
 	CheckConfig();
     return true;
 }
@@ -83,8 +80,8 @@ int NFCItemModule::OnRequireUseItemEvent( const NFGUID& self, const int nEventID
 		return 0;
 	}
 
-    NF_SHARE_PTR<NFIRecord> pRecordPack = m_pKernelModule->FindRecord(self, mstrPackTableName);
-    if (pRecordPack)
+    NF_SHARE_PTR<NFIRecord> pRecordPack = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagItemList());
+    if (nullptr != pRecordPack)
     {
 // 		const bool bRet = m_pPackModule->DeleteItem(self, strItemID, 1);
 // 		if (bRet)
@@ -115,7 +112,7 @@ int NFCItemModule::OnRequireUseItemPosEvent( const NFGUID& self, const int nEven
 
 bool NFCItemModule::CheckConfig()
 {
-	NF_SHARE_PTR<NFILogicClass> pLogicCLass = m_pLogicClassModule->GetElement("Item");
+	NF_SHARE_PTR<NFILogicClass> pLogicCLass = m_pLogicClassModule->GetElement(NFrame::Item::ThisName());
 	if (nullptr == pLogicCLass)
 	{
 		assert(0);
@@ -132,45 +129,45 @@ bool NFCItemModule::CheckConfig()
 		{
 			assert(0);
 		}
-		int nType = m_pElementInfoModule->GetPropertyInt(strConfigID, "ItemType");
+		int nType = m_pElementInfoModule->GetPropertyInt(strConfigID, NFrame::Item::ItemType());
 
 		if (nType < 0)
 		{
 			assert(0);
 		}
-		int nSubType = m_pElementInfoModule->GetPropertyInt(strConfigID, "ItemSubType");
+		int nSubType = m_pElementInfoModule->GetPropertyInt(strConfigID, NFrame::Item::ItemSubType());
 		if (nSubType < 0)
 		{
 			assert(0);
 		}
 		
-		int nLevel = m_pElementInfoModule->GetPropertyInt(strConfigID, "Level");
+		int nLevel = m_pElementInfoModule->GetPropertyInt(strConfigID, NFrame::Item::Level());
 		if (nLevel < 0)
 		{
 			assert(0);
 		}
 
-		int nQuality = m_pElementInfoModule->GetPropertyInt(strConfigID, "Quality");
+		int nQuality = m_pElementInfoModule->GetPropertyInt(strConfigID, NFrame::Item::Quality());
 		if (nQuality < 0)
 		{
 			assert(0);
 		}
 
-// 		int nCoolDown = m_pElementInfoModule->GetPropertyInt(strConfigID, "CoolDwnTime");
-// 		if (nCoolDown <= 0)
-// 		{
-// 			assert(0);
-// 		}
+ 		//int nCoolDown = m_pElementInfoModule->GetPropertyInt(strConfigID, NFrame::Item::CoolDownTime());
+ 		//if (nCoolDown <= 0)
+ 		//{
+ 		//	assert(0);
+ 		//}
 
-		int nOverlayCount = m_pElementInfoModule->GetPropertyInt(strConfigID, "OverlayCount");
+		int nOverlayCount = m_pElementInfoModule->GetPropertyInt(strConfigID, NFrame::Item::OverlayCount());
 		if (nOverlayCount <= 0)
 		{
 			assert(0);
 		}
 
 
-		int nBuyPrice = m_pElementInfoModule->GetPropertyInt(strConfigID, "BuyPrice");
-		int nSalePrice = m_pElementInfoModule->GetPropertyInt(strConfigID, "SalePrice");
+		int nBuyPrice = m_pElementInfoModule->GetPropertyInt(strConfigID, NFrame::Item::BuyPrice());
+		int nSalePrice = m_pElementInfoModule->GetPropertyInt(strConfigID, NFrame::Item::SalePrice());
 		
 		if (nSalePrice < 0 || nBuyPrice < 0)
 		{

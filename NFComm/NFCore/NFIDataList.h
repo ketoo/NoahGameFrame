@@ -46,7 +46,7 @@ const static std::string NULL_STR = "";
 const static NFGUID NULL_OBJECT = NFGUID();
 const static double NULL_FLOAT = 0.0;
 const static INT64 NULL_INT = 0;
-//const static NFIDataList::TData NULL_TDATA;
+
 
 //类型接口
 class NFIDataList
@@ -59,6 +59,7 @@ public:
         {
             nType = TDATA_UNKNOWN;
         }
+
 		TData(TDATA_TYPE eType)
 		{
 			nType = eType;
@@ -419,5 +420,7 @@ protected:
 };
 
 inline NFIDataList::~NFIDataList() {}
+
+const static NFIDataList::TData NULL_TDATA = NFIDataList::TData();
 
 #endif
