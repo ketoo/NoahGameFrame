@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/11
+//    @Date             :    2016/01/12
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -40,55 +40,6 @@ public class BB_Build {
 	public static final String ShowName = "ShowName"; // string
 	public static final String Desc = "Desc"; // string
 	// Record
-
-}
-
-public class BB_Player {
-	//Class name
-	public static final String ThisName = "BB_Player";
-	// IObject
-	public static final String ID = "ID"; // string
-	public static final String ClassName = "ClassName"; // string
-	public static final String SceneID = "SceneID"; // int
-	public static final String GroupID = "GroupID"; // int
-	public static final String ConfigID = "ConfigID"; // string
-	// Property
-	public static final String RoleName = "RoleName"; // string
-	public static final String Sex = "Sex"; // int
-	public static final String Race = "Race"; // int
-	public static final String Camp = "Camp"; // int
-	public static final String LastContainerID = "LastContainerID"; // int
-	public static final String Level = "Level"; // int
-	public static final String ShowName = "ShowName"; // string
-	public static final String Gold = "Gold"; // int
-	public static final String Stone = "Stone"; // int
-	public static final String Steel = "Steel"; // int
-	public static final String Diamond = "Diamond"; // int
-	public static final String LoadPropertyFinish = "LoadPropertyFinish"; // int
-	// Record
-	public static final String BuildingList = "BuildingList";
-	public static final String BuildingProduce = "BuildingProduce";
-
-	public enum BuildingList
-	{
-		BuildingID		= 0, // BuildingID -- string
-		BuildingGUID		= 1, // BuildingGUID -- object
-		State		= 2, // State -- int
-		PosX		= 3, // PosX -- int
-		PosY		= 4, // PosY -- int
-		PosZ		= 5, // PosZ -- int
-		StateStartTime		= 6, // StateStartTime -- int
-		StateEndTime		= 7, // StateEndTime -- int
-	};
-
-	public enum BuildingProduce
-	{
-		BuildingGUID		= 0, // BuildingGUID -- object
-		ItemID		= 1, // ItemID -- string
-		LeftCount		= 2, // LeftCount -- int
-		OnceTime		= 3, // OnceTime -- int
-		OnceStartTime		= 4, // OnceStartTime -- int
-	};
 
 }
 
@@ -678,6 +629,8 @@ public class Player {
 	public static final String TaskList = "TaskList";
 	public static final String PVPList = "PVPList";
 	public static final String ChatGroup = "ChatGroup";
+	public static final String BuildingList = "BuildingList";
+	public static final String BuildingList = "BuildingList";
 
 	public enum PlayerViewItem
 	{
@@ -820,6 +773,30 @@ public class Player {
 	{
 		ChatType		= 0, // ChatType -- int
 		GroupGUID		= 1, // GroupGUID -- object
+	};
+
+	public enum BuildingList
+	{
+		BuildingID		= 0, // BuildingID -- string
+		BuildingGUID		= 1, // BuildingGUID -- object
+		State		= 2, // State -- int
+		PosX		= 3, // PosX -- int
+		PosY		= 4, // PosY -- int
+		PosZ		= 5, // PosZ -- int
+		StateStartTime		= 6, // StateStartTime -- int
+		StateEndTime		= 7, // StateEndTime -- int
+	};
+
+	public enum BuildingList
+	{
+		BuildingID		= 0, // BuildingID -- string
+		BuildingGUID		= 1, // BuildingGUID -- object
+		State		= 2, // State -- int
+		PosX		= 3, // PosX -- int
+		PosY		= 4, // PosY -- int
+		PosZ		= 5, // PosZ -- int
+		StateStartTime		= 6, // StateStartTime -- int
+		StateEndTime		= 7, // StateEndTime -- int
 	};
 
 }
