@@ -10,8 +10,6 @@
 
 bool NFCLevelModule::Init()
 {
-
-
     return true;
 }
 
@@ -39,18 +37,18 @@ bool NFCLevelModule::AfterInit()
     assert( NULL != m_pLogModule );
     assert( NULL != m_pPropertyConfigModule );
 
-    m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCLevelModule::OnObjectClassEvent );
-    m_pEventProcessModule->AddClassCallBack( "NPC", this, &NFCLevelModule::OnObjectClassEvent );
+    m_pEventProcessModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCLevelModule::OnObjectClassEvent );
+    m_pEventProcessModule->AddClassCallBack( NFrame::NPC::ThisName(), this, &NFCLevelModule::OnObjectClassEvent );
 
     return true;
 }
 
 int NFCLevelModule::AddExp( const NFGUID& self, const int nExp)
 {
-    NFJobType eJobType = ( NFJobType )m_pKernelModule->GetPropertyInt( self, "Job" );
-    int nCurExp = m_pKernelModule->GetPropertyInt( self, "EXP" );
-    int nLevel = m_pKernelModule->GetPropertyInt( self, "Level" );
-    int nMaxExp = m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, "MAXEXP");
+    NFJobType eJobType = ( NFJobType )m_pKernelModule->GetPropertyInt( self, NFrame::Player::Job());
+    int nCurExp = m_pKernelModule->GetPropertyInt( self, NFrame::Player::EXP() );
+    int nLevel = m_pKernelModule->GetPropertyInt( self, NFrame::Player::Level() );
+    int nMaxExp = m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, NFrame::Player::MAXEXP());
 
     nCurExp += nExp;
 
@@ -60,11 +58,11 @@ int NFCLevelModule::AddExp( const NFGUID& self, const int nExp)
         //升级
         nLevel++;
         //防止越级BUG
-        m_pKernelModule->SetPropertyInt( self, "Level", nLevel );
+        m_pKernelModule->SetPropertyInt( self, NFrame::Player::Level(), nLevel );
 
         nCurExp = nRemainExp;
 
-        nMaxExp = m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, "MAXEXP");
+        nMaxExp = m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, NFrame::Player::MAXEXP());
         if (nMaxExp <= 0)
         {
             break;
@@ -73,7 +71,7 @@ int NFCLevelModule::AddExp( const NFGUID& self, const int nExp)
         nRemainExp -= nMaxExp;
     }
 
-    m_pKernelModule->SetPropertyInt( self, "EXP", nCurExp );
+    m_pKernelModule->SetPropertyInt( self, NFrame::Player::EXP(), nCurExp );
     
     return 0;
 }
@@ -97,13 +95,12 @@ int NFCLevelModule::OnObjectExpEvent( const NFGUID& self, const std::string& str
 
 int NFCLevelModule::OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
-    if ( strClassName == "Player"
-         && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
+    if ( strClassName == NFrame::Player::ThisName() && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
     {
 
     }
 
-    if ( strClassName == "NPC" && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
+    if ( strClassName == NFrame::NPC::ThisName() && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
     {
         m_pEventProcessModule->AddEventCallBack( self, NFED_ON_OBJECT_BE_KILLED, this, &NFCLevelModule::OnObjectBeKilled );
     }
@@ -118,7 +115,7 @@ int NFCLevelModule::OnObjectBeKilled( const NFGUID& object, const int nEventID, 
         NFGUID identKiller = var.Object( 0 );
         if ( m_pKernelModule->GetObject( identKiller ) )
         {
-            int nExp = m_pKernelModule->GetPropertyInt( object, "EXP" );
+            int nExp = m_pKernelModule->GetPropertyInt( object, NFrame::Player::EXP() );
             AddExp( identKiller, nExp);
             // TODO:加怪物掉落金钱
             m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, identKiller, "Add Exp for kill monster", nExp);

@@ -52,8 +52,8 @@ bool NFCPackModule::AfterInit()
     assert( NULL != m_pLogModule );
     assert( NULL != m_pUUIDModule );
 
-    m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCPackModule::OnClassObjectEvent );
-    m_pEventProcessModule->AddClassCallBack( "NPC", this, &NFCPackModule::OnClassObjectEvent );
+    m_pEventProcessModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPackModule::OnClassObjectEvent );
+    m_pEventProcessModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCPackModule::OnClassObjectEvent );
 
     return true;
 }
@@ -152,7 +152,7 @@ const std::string& GetPackName( const PackTableType name )
 
 int NFCPackModule::OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
-    if (strClassNames == "Player")
+    if (strClassNames == NFrame::Player::ThisName())
     {
         if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
         {
@@ -172,7 +172,7 @@ int NFCPackModule::OnClassObjectEvent( const NFGUID& self, const std::string& st
         }
     }
 
-    if ( strClassNames == "NPC")
+    if ( strClassNames == NFrame::NPC::ThisName())
     {
         if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
         {

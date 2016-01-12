@@ -14,6 +14,7 @@
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIBuffModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 class NFCBuffModule
     : public NFIBuffModule
@@ -131,7 +132,6 @@ private:
     NFIBuffConfigModule* m_pBuffConfigModule;
 
     char* mstrRunTimeEffectTable;
-    char* mstrPropertyTable;
 };
 
 

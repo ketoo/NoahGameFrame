@@ -19,6 +19,7 @@
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 class NFCSkillModule
     : public NFISkillModule
