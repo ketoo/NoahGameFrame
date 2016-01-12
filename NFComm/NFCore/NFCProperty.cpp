@@ -85,7 +85,7 @@ const NFIDataList::TData& NFCProperty::GetValue() const
         return *mxData;
     }
 
-    return NFIDataList::TData();
+    return NULL_TDATA;
 }
 
 const std::string&  NFCProperty::GetKey() const
