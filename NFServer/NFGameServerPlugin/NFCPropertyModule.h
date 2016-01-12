@@ -17,9 +17,9 @@
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
-class NFCPropertyModule
-    : public NFIPropertyModule
+class NFCPropertyModule : public NFIPropertyModule
 {
 public:
     NFCPropertyModule( NFIPluginManager* p )
@@ -69,11 +69,8 @@ protected:
     int OnObjectLevelEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar );
 
     int OnRecordPropertyEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar);
-private:
-    //NFConfig mConfig;
-private:
-    char* mstrCommPropertyName;
 
+private:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFIPropertyConfigModule* m_pPropertyConfigModule;

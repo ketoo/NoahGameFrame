@@ -29,7 +29,7 @@ bool NFCSceneProcessModule::Init()
     assert( NULL != m_pPropertyModule );
     assert( NULL != m_pLogModule );
 
-    m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCSceneProcessModule::OnObjectClassEvent );
+    m_pEventProcessModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCSceneProcessModule::OnObjectClassEvent );
 
     return true;
 }
@@ -61,8 +61,8 @@ bool NFCSceneProcessModule::AfterInit()
         {
             int nSceneID = boost::lexical_cast<int>(strData);
 
-            const std::string& strFilePath = m_pElementInfoModule->GetPropertyString( strData, "FilePath" );
-            const int nActorID = m_pElementInfoModule->GetPropertyInt( strData, "ActorID" );
+            const std::string& strFilePath = m_pElementInfoModule->GetPropertyString( strData, NFrame::Scene::FilePath());
+            const int nActorID = m_pElementInfoModule->GetPropertyInt( strData, NFrame::Scene::ActorID());
 
 			//if ( nActorID == nSelfActorID && nSceneID > 0 )
             {
@@ -99,7 +99,7 @@ bool NFCSceneProcessModule::CreateContinerObjectByFile( const int nContainerID, 
         NF_SHARE_PTR<SceneGroupResource> pResourceMap = pSceneResource->GetElement( strFileName );
         if ( pResourceMap.get() )
         {
-            NF_SHARE_PTR<NFMapEx<std::string, SceneSeedResource>> pNPCResourceList = pResourceMap->xSceneGroupResource.GetElement( "NPC" );
+            NF_SHARE_PTR<NFMapEx<std::string, SceneSeedResource>> pNPCResourceList = pResourceMap->xSceneGroupResource.GetElement(NFrame::NPC::ThisName());
             if ( pNPCResourceList.get() )
             {
                 NF_SHARE_PTR<SceneSeedResource> pResource = pNPCResourceList->First( );
@@ -125,19 +125,19 @@ bool NFCSceneProcessModule::CreateContinerObject( const int nContainerID, const 
         NF_SHARE_PTR<SceneGroupResource> pGroupResource = pSceneResource->GetElement( strFileName );
         if ( pSceneResource.get() )
         {
-            NF_SHARE_PTR<NFMapEx<std::string, SceneSeedResource>> pResourceList = pGroupResource->xSceneGroupResource.GetElement( "NPC" );
+            NF_SHARE_PTR<NFMapEx<std::string, SceneSeedResource>> pResourceList = pGroupResource->xSceneGroupResource.GetElement(NFrame::NPC::ThisName());
             if ( pResourceList.get() )
             {
                 NF_SHARE_PTR<SceneSeedResource> pResourceObject = pResourceList->GetElement( strSeedID );
                 if ( pResourceObject.get() )
                 {
-                    const std::string& strClassName = m_pElementInfoModule->GetPropertyString(pResourceObject->strConfigID, "ClassName");
+                    const std::string& strClassName = m_pElementInfoModule->GetPropertyString(pResourceObject->strConfigID, NFrame::NPC::ClassName());
 
                     NFCDataList arg;
-                    arg << "X" << pResourceObject->fSeedX;
-                    arg << "Y" << pResourceObject->fSeedY;
-                    arg << "Z" << pResourceObject->fSeedZ;
-                    arg << "SeedID" << strSeedID;
+                    arg << NFrame::NPC::X() << pResourceObject->fSeedX;
+                    arg << NFrame::NPC::Y() << pResourceObject->fSeedY;
+                    arg << NFrame::NPC::Z() << pResourceObject->fSeedZ;
+                    arg << NFrame::NPC::SeedID() << strSeedID;
 
                     m_pKernelModule->CreateObject( NFGUID(), nContainerID, nGroupID, strClassName, pResourceObject->strConfigID, arg );
                 }
@@ -217,7 +217,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFGUID& self, const int nEve
     int nType = var.Int( 1 );
     int nTargetScene = var.Int( 2 );
     int nTargetGroupID = var.Int( 3 );
-    int nOldSceneID = m_pKernelModule->GetPropertyInt( self, "SceneID" );
+    int nOldSceneID = m_pKernelModule->GetPropertyInt( self, NFrame::Player::SceneID());
 
     char szSceneID[MAX_PATH] = {0};
     sprintf(szSceneID, "%d", nTargetScene);
@@ -236,8 +236,8 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFGUID& self, const int nEve
         return 1;
     }
 
-    const int nNowContainerID = m_pKernelModule->GetPropertyInt(self, "SceneID");
-    const int nNowGroupID = m_pKernelModule->GetPropertyInt(self, "GroupID");
+    const int nNowContainerID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+    const int nNowGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
     if (nNowContainerID == nTargetScene
         && nNowGroupID == nTargetGroupID)
     {
@@ -259,7 +259,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFGUID& self, const int nEve
     double fY = 0.0f;
     double fZ = 0.0f;
 
-    const std::string& strRelivePosList = m_pElementInfoModule->GetPropertyString(szSceneID, "RelivePos");
+    const std::string& strRelivePosList = m_pElementInfoModule->GetPropertyString(szSceneID, NFrame::Scene::RelivePos());
     NFCDataList valueRelivePosList( strRelivePosList.c_str(), ";" );
     if ( valueRelivePosList.GetCount() >= 1 )
     {
@@ -303,7 +303,7 @@ int NFCSceneProcessModule::OnLeaveSceneEvent( const NFGUID& object, const int nE
     NFINT32 nOldGroupID = var.Int(0);
     if (nOldGroupID > 0)
     {
-        int nContainerID = m_pKernelModule->GetPropertyInt(object, "SceneID");
+        int nContainerID = m_pKernelModule->GetPropertyInt(object, NFrame::Player::SceneID());
         if (GetCloneSceneType(nContainerID) == SCENE_TYPE_MAINLINE_CLONE)
         {
             m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, object, "DestroyCloneSceneGroup", nOldGroupID);
@@ -321,10 +321,10 @@ int NFCSceneProcessModule::OnObjectClassEvent( const NFGUID& self, const std::st
         if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
         {
             //如果在副本中,则删除他的那个副本
-            int nContainerID = m_pKernelModule->GetPropertyInt(self, "SceneID");
+            int nContainerID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
             if (GetCloneSceneType(nContainerID) == SCENE_TYPE_MAINLINE_CLONE)
             {
-                int nGroupID = m_pKernelModule->GetPropertyInt(self, "GroupID");
+                int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
 
                 m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "DestroyCloneSceneGroup", nGroupID);
                 DestroyCloneScene(nContainerID, nGroupID, NFCDataList());
@@ -346,7 +346,7 @@ E_SCENE_TYPE NFCSceneProcessModule::GetCloneSceneType( const int nContainerID )
     sprintf( szSceneIDName, "%d", nContainerID );
     if (m_pElementInfoModule->ExistElement(szSceneIDName))
     {
-        return (E_SCENE_TYPE)m_pElementInfoModule->GetPropertyInt(szSceneIDName, "CanClone");
+        return (E_SCENE_TYPE)m_pElementInfoModule->GetPropertyInt(szSceneIDName, NFrame::Scene::CanClone());
     }
 
     return SCENE_TYPE_ERROR;
@@ -362,8 +362,8 @@ bool NFCSceneProcessModule::LoadInitFileResource( const int& nContainerID )
     char szSceneIDName[MAX_PATH] = { 0 };
     sprintf( szSceneIDName, "%d", nContainerID );
 
-    const std::string& strSceneFilePath = m_pElementInfoModule->GetPropertyString( szSceneIDName, "FilePath" );
-    const int nCanClone = m_pElementInfoModule->GetPropertyInt( szSceneIDName, "CanClone" );
+    const std::string& strSceneFilePath = m_pElementInfoModule->GetPropertyString( szSceneIDName, NFrame::Scene::FilePath() );
+    const int nCanClone = m_pElementInfoModule->GetPropertyInt( szSceneIDName, NFrame::Scene::CanClone() );
 
     //场景对应资源
     NF_SHARE_PTR<NFMapEx<std::string, SceneGroupResource>> pSceneResourceMap = mtSceneResourceConfig.GetElement( nContainerID );
