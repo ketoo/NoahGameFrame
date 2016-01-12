@@ -18,8 +18,6 @@ bool NFCBuffModule::Init()
     //  m_pEventProcessModule->AddClassCallBack( "Player", OnObjectClassEvent );
     //  m_pEventProcessModule->AddClassCallBack( "NPC", OnObjectClassEvent );
     mstrRunTimeEffectTable = "RuntimeBuffInfo";
-    mstrPropertyTable = "CommPropertyValue";
-
 
     return true;
 }
@@ -162,7 +160,7 @@ int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFGUID& sel
     NF_SHARE_PTR<NFIRecord> pBuffRecord = pObject->GetRecordManager()->GetElement( mstrRunTimeEffectTable );
     if ( pBuffRecord )
     {
-        NF_SHARE_PTR<NFIRecord> pPropertyGroupRecord = pObject->GetRecordManager()->GetElement( mstrPropertyTable );
+        NF_SHARE_PTR<NFIRecord> pPropertyGroupRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_CommPropertyValue());
 
         std::string strPropertyList;
         std::string strPropertyName;

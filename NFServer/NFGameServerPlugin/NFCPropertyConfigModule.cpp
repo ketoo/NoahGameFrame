@@ -11,10 +11,8 @@
 
 bool NFCPropertyConfigModule::Init()
 {
-
     return true;
 }
-
 
 bool NFCPropertyConfigModule::Shut()
 {
@@ -55,7 +53,7 @@ int NFCPropertyConfigModule::CalculateBaseValue( const NFJobType nJob, const int
 
 void NFCPropertyConfigModule::Load()
 {
-    NF_SHARE_PTR<NFILogicClass> pLogicClass = m_pLogicClassModule->GetElement("InitProperty");
+    NF_SHARE_PTR<NFILogicClass> pLogicClass = m_pLogicClassModule->GetElement(NFrame::InitProperty::ThisName());
     if (pLogicClass.get())
     {
         NFList<std::string>& xList = pLogicClass->GetConfigNameList();
@@ -66,9 +64,9 @@ void NFCPropertyConfigModule::Load()
             NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager(strData);
             if (pPropertyManager.get())
             {
-                int nJob = m_pElementInfoModule->GetPropertyInt(strData, "Job");
-                int nLevel = m_pElementInfoModule->GetPropertyInt(strData, "Level");
-                std::string strEffectData = m_pElementInfoModule->GetPropertyString(strData, "EffectData");
+                int nJob = m_pElementInfoModule->GetPropertyInt(strData, NFrame::InitProperty::Job());
+                int nLevel = m_pElementInfoModule->GetPropertyInt(strData, NFrame::InitProperty::Level());
+                std::string strEffectData = m_pElementInfoModule->GetPropertyString(strData, NFrame::InitProperty::EffectData());
                 mhtCoefficienData[nJob].AddElement( nLevel, NF_SHARE_PTR<std::string>(NF_NEW std::string(strEffectData)) );
             }
 
