@@ -11,8 +11,8 @@
 bool NFCCardItemConsumeProcessModule::Init()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pItemConsumeManagerModule = dynamic_cast<NFIItemConsumeManagerModule*>( pPluginManager->FindModule( "NFCItemConsumeManagerModule" ) );
-    m_pPackModule = dynamic_cast<NFIPackModule*>( pPluginManager->FindModule( "NFCPackModule" ) );
+    m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>("NFCItemConsumeManagerModule");
+    m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
     m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
 
