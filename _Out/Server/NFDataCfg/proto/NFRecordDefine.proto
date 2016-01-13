@@ -249,7 +249,7 @@ enum BuildingList
 	StateEndTime		= 7; // StateEndTime -- int
 }
 
-enum BuildingList
+enum BuildingListProduce
 {
 	BuildingID		= 0; // BuildingID -- string
 	BuildingGUID		= 1; // BuildingGUID -- object
