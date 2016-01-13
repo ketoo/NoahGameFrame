@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/12
+//    @Date             :    2016/01/13
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -630,7 +630,7 @@ public class Player {
 	public static final String PVPList = "PVPList";
 	public static final String ChatGroup = "ChatGroup";
 	public static final String BuildingList = "BuildingList";
-	public static final String BuildingList = "BuildingList";
+	public static final String BuildingListProduce = "BuildingListProduce";
 
 	public enum PlayerViewItem
 	{
@@ -787,7 +787,7 @@ public class Player {
 		StateEndTime		= 7, // StateEndTime -- int
 	};
 
-	public enum BuildingList
+	public enum BuildingListProduce
 	{
 		BuildingID		= 0, // BuildingID -- string
 		BuildingGUID		= 1, // BuildingGUID -- object
