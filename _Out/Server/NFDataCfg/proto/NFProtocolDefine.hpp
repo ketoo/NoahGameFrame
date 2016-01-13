@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/12
+//    @Date             :    2016/01/13
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -671,7 +671,7 @@ public:
 	static const std::string& R_PVPList(){ static std::string xPVPList = "PVPList"; return xPVPList;}
 	static const std::string& R_ChatGroup(){ static std::string xChatGroup = "ChatGroup"; return xChatGroup;}
 	static const std::string& R_BuildingList(){ static std::string xBuildingList = "BuildingList"; return xBuildingList;}
-	static const std::string& R_BuildingList(){ static std::string xBuildingList = "BuildingList"; return xBuildingList;}
+	static const std::string& R_BuildingListProduce(){ static std::string xBuildingListProduce = "BuildingListProduce"; return xBuildingListProduce;}
 
 	enum PlayerViewItem
 	{
@@ -828,16 +828,16 @@ public:
 		BuildingList_StateEndTime		= 7, // StateEndTime -- int
 	};
 
-	enum BuildingList
+	enum BuildingListProduce
 	{
-		BuildingList_BuildingID		= 0, // BuildingID -- string
-		BuildingList_BuildingGUID		= 1, // BuildingGUID -- object
-		BuildingList_State		= 2, // State -- int
-		BuildingList_PosX		= 3, // PosX -- int
-		BuildingList_PosY		= 4, // PosY -- int
-		BuildingList_PosZ		= 5, // PosZ -- int
-		BuildingList_StateStartTime		= 6, // StateStartTime -- int
-		BuildingList_StateEndTime		= 7, // StateEndTime -- int
+		BuildingListProduce_BuildingID		= 0, // BuildingID -- string
+		BuildingListProduce_BuildingGUID		= 1, // BuildingGUID -- object
+		BuildingListProduce_State		= 2, // State -- int
+		BuildingListProduce_PosX		= 3, // PosX -- int
+		BuildingListProduce_PosY		= 4, // PosY -- int
+		BuildingListProduce_PosZ		= 5, // PosZ -- int
+		BuildingListProduce_StateStartTime		= 6, // StateStartTime -- int
+		BuildingListProduce_StateEndTime		= 7, // StateEndTime -- int
 	};
 
 };

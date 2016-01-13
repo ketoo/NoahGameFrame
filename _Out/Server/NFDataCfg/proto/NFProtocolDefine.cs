@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/12
+//    @Date             :    2016/01/13
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -657,7 +657,7 @@ public class Player
 	public static readonly String PVPList = "PVPList";
 	public static readonly String ChatGroup = "ChatGroup";
 	public static readonly String BuildingList = "BuildingList";
-	public static readonly String BuildingList = "BuildingList";
+	public static readonly String BuildingListProduce = "BuildingListProduce";
 
 	public enum PlayerViewItem
 	{
@@ -814,7 +814,7 @@ public class Player
 		StateEndTime		= 7, // StateEndTime -- int
 	};
 
-	public enum BuildingList
+	public enum BuildingListProduce
 	{
 		BuildingID		= 0, // BuildingID -- string
 		BuildingGUID		= 1, // BuildingGUID -- object
