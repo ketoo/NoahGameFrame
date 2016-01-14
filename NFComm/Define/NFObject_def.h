@@ -5,8 +5,8 @@
 //    功能描述    :    对象的结构体
 //
 // -------------------------------------------------------------------------
-#ifndef _NFC_OBJECT_DEF_H_
-#define _NFC_OBJECT_DEF_H_
+#ifndef NFC_OBJECT_DEF_H
+#define NFC_OBJECT_DEF_H
 
 #include "NFItem_def.h"
 //#include <vector>
@@ -15,13 +15,6 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//性别
-enum NFSexType
-{
-    NST_MAN,
-    NST_FEMAN,
-    NST_MAX,
-};
 //职业1:勇士2枪客3: 医4:弓手5刺客
 enum NFJobType
 {

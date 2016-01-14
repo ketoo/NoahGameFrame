@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_PLUGIN_MANAGER_H_
-#define _NFC_PLUGIN_MANAGER_H_
+#ifndef NFC_PLUGIN_MANAGER_H
+#define NFC_PLUGIN_MANAGER_H
 
 #include <map>
 #include <string>
@@ -25,7 +25,10 @@ public:
 		mbOnReloadPlugin = false;
 		m_pActorManager = pManager;
         mnAppID = 0;
-		mnStartRunTime = time(NULL);
+		mnInitTime = time(NULL);
+		mnNowTime = mnInitTime;
+		
+        mstrConfigPath = "";
 	}
 
     virtual bool Init();
@@ -57,9 +60,15 @@ public:
 
     virtual void RemoveModule(const std::string& strModuleName);
 
-    virtual NFILogicModule* FindModule(const std::string& strModuleName);
+	virtual NFILogicModule* FindModule(const std::string& strModuleName);
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+	virtual void AddComponent(const std::string& strComponentName, NFIComponent* pComponent);
+
+	virtual void RemoveComponent(const std::string& strComponentName);
+
+	virtual NFIComponent* FindComponent(const std::string& strComponentName);
+
+    virtual bool Execute();
 
     //  virtual void OnReloadModule( const std::string& strModuleName, NFILogicModule* pModule );
     //
@@ -69,8 +78,10 @@ public:
 	virtual NFIActorManager* GetActorManager(){ return m_pActorManager;}
 
 	virtual int AppID(){ return mnAppID; }
-	virtual NFINT64 StartRunTime(){ return mnStartRunTime; }
+	virtual NFINT64 GetInitTime() const { return mnInitTime; }
+	virtual NFINT64 GetNowTime() const { return mnNowTime; }
 
+    virtual const std::string& GetConfigPath() const { return mstrConfigPath; }
 
 protected:
 
@@ -86,12 +97,15 @@ private:
 	NFQueue<NFIActorMessage> mxQueue;
 
 	int mnAppID;
-	NFINT64 mnStartRunTime;
+	NFINT64 mnInitTime;
+	NFINT64 mnNowTime;
+    std::string mstrConfigPath;
 
 	typedef std::map<std::string, bool> PluginNameMap;
 	typedef std::map<std::string, NFCDynLib*> PluginLibMap;
 	typedef std::map<std::string, NFIPlugin*> PluginInstanceMap;
 	typedef std::map<std::string, NFILogicModule*> ModuleInstanceMap;
+	typedef std::map<std::string, NFIComponent*> ComponentInstanceMap;
 
 	typedef void(* DLL_START_PLUGIN_FUNC)(NFIPluginManager* pm);
 	typedef void(* DLL_STOP_PLUGIN_FUNC)(NFIPluginManager* pm);
@@ -100,7 +114,8 @@ private:
     PluginNameMap mPluginNameMap;
     PluginLibMap mPluginLibMap;
     PluginInstanceMap mPluginInstanceMap;
-    ModuleInstanceMap mModuleInstanceMap;
+	ModuleInstanceMap mModuleInstanceMap;
+	ComponentInstanceMap mComponentInstanceMap;
 };
 
 #endif

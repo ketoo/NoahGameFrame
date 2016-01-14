@@ -21,7 +21,7 @@ bool NFCSLGShopModule::Shut()
     return true;
 }
 
-bool NFCSLGShopModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCSLGShopModule::Execute()
 {
     //Œª÷√ƒÿ
     return true;
@@ -29,12 +29,12 @@ bool NFCSLGShopModule::Execute( const float fLasFrametime, const float fStartedT
 
 bool NFCSLGShopModule::AfterInit()
 {
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>( pPluginManager->FindModule( "NFCEventProcessModule" ) );
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
-    m_pLogModule = dynamic_cast<NFILogModule*>( pPluginManager->FindModule( "NFCLogModule" ) );
-    m_pSLGBuildingModule = dynamic_cast<NFISLGBuildingModule*>(pPluginManager->FindModule("NFCSLGBuildingModule"));
-    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-    m_pPropertyModule = dynamic_cast<NFIPropertyModule*>(pPluginManager->FindModule("NFCPropertyModule"));
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
+    m_pSLGBuildingModule = pPluginManager->FindModule<NFISLGBuildingModule>("NFCSLGBuildingModule");
+    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
+    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>("NFCPropertyModule");
 
     assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
@@ -46,7 +46,7 @@ bool NFCSLGShopModule::AfterInit()
     return true;
 }
 
-bool NFCSLGShopModule::ReqBuyItem(const NFIDENTID& self, const std::string& strID, float fX, float fY, float fZ)
+bool NFCSLGShopModule::ReqBuyItem(const NFGUID& self, const std::string& strID, float fX, float fY, float fZ)
 {
     if (!m_pElementInfoModule->ExistElement(strID))
     {

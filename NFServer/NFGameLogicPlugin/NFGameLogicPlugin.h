@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_GAMELOGICLUGIN_H_
-#define _NFC_GAMELOGICLUGIN_H_
+#ifndef NFC_GAMELOGICLUGIN_H
+#define NFC_GAMELOGICLUGIN_H
 
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"

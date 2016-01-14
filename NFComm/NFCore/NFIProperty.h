@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_PROPERTY_H_
-#define _NFI_PROPERTY_H_
+#ifndef _NFI_PROPERTY_H
+#define _NFI_PROPERTY_H
 
 #include "NFDefine.h"
 #include "NFIDataList.h"
@@ -20,11 +20,9 @@ public:
     virtual void SetValue(const NFIDataList::TData& TData) = 0;
     virtual void SetValue(const NFIProperty* pProperty) = 0;
     virtual bool SetInt(const NFINT64 value) = 0;
-    virtual bool SetFloat(const float value) = 0;
-    virtual bool SetDouble(const double value) = 0;
+    virtual bool SetFloat(const double value) = 0;
     virtual bool SetString(const std::string& value) = 0;
-    virtual bool SetObject(const NFIDENTID& value) = 0;
-    virtual bool SetPointer(const void* value) = 0;
+    virtual bool SetObject(const NFGUID& value) = 0;
 
     virtual const TDATA_TYPE GetType() const = 0;
     virtual const bool GeUsed() const = 0;
@@ -43,17 +41,15 @@ public:
     virtual void SetScriptFunction(const std::string& strScriptFunction) = 0;
 
     virtual NFINT64 GetInt() const = 0;
-    virtual float GetFloat() const = 0;
-    virtual double GetDouble() const = 0;
+    virtual double GetFloat() const = 0;
     virtual const std::string& GetString() const = 0;
-    virtual NFIDENTID GetObject() const = 0;
-    virtual void* GetPointer() const = 0;
+    virtual const NFGUID& GetObject() const = 0;
 
     virtual bool Changed() const = 0;
 
     virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
 
-    virtual NFIDataList::TData GetValue() const = 0;
+    virtual const NFIDataList::TData& GetValue() const = 0;
     virtual std::string ToString() = 0;
     virtual bool FromString(const std::string& strData) = 0;
 

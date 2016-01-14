@@ -9,7 +9,6 @@
 //#include "stdafx.h"
 #include "NFCGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
-#include "NFComm/NFCore/NFCMemory.h"
 
 bool NFCGameServerNet_ServerModule::Init()
 {
@@ -18,21 +17,21 @@ bool NFCGameServerNet_ServerModule::Init()
 
 bool NFCGameServerNet_ServerModule::AfterInit()
 {
-	m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-	m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
-	m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
-	m_pSceneProcessModule = dynamic_cast<NFISceneProcessModule*>(pPluginManager->FindModule("NFCSceneProcessModule"));
-	m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
-	m_pSLGShopModule = dynamic_cast<NFISLGShopModule*>(pPluginManager->FindModule("NFCSLGShopModule"));
-	m_pSLGBuildingModule = dynamic_cast<NFISLGBuildingModule*>(pPluginManager->FindModule("NFCSLGBuildingModule"));
-	m_pUUIDModule = dynamic_cast<NFIUUIDModule*>(pPluginManager->FindModule("NFCUUIDModule"));
-	m_pPVPModule = dynamic_cast<NFIPVPModule*>(pPluginManager->FindModule("NFCPVPModule"));
-	m_pSkillModule = dynamic_cast<NFISkillModule*>(pPluginManager->FindModule("NFCSkillModule"));
-	m_pDataProcessModule = dynamic_cast<NFIDataProcessModule*>(pPluginManager->FindModule("NFCDataProcessModule"));
-	m_pEctypeModule = dynamic_cast<NFIEctypeModule*>(pPluginManager->FindModule("NFCEctypeModule"));
-    m_pGameServerToWorldModule = dynamic_cast<NFIGameServerToWorldModule*>(pPluginManager->FindModule("NFCGameServerToWorldModule"));
-
+	m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
+	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
+	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>("NFCSceneProcessModule");
+	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
+	m_pSLGShopModule = pPluginManager->FindModule<NFISLGShopModule>("NFCSLGShopModule");
+	m_pSLGBuildingModule = pPluginManager->FindModule<NFISLGBuildingModule>("NFCSLGBuildingModule");
+	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
+	m_pPVPModule = pPluginManager->FindModule<NFIPVPModule>("NFCPVPModule");
+	m_pSkillModule = pPluginManager->FindModule<NFISkillModule>("NFCSkillModule");
+	m_pDataProcessModule = pPluginManager->FindModule<NFIDataProcessModule>("NFCDataProcessModule");
+    m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>("NFCGameServerToWorldModule");
+    m_pEquipModule = pPluginManager->FindModule<NFIEquipModule>("NFCEquipModule");
+    
 	assert(NULL != m_pEventProcessModule);
 	assert(NULL != m_pKernelModule);
 	assert(NULL != m_pLogicClassModule);
@@ -45,8 +44,8 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	assert(NULL != m_pPVPModule);
 	assert(NULL != m_pSkillModule);
 	assert(NULL != m_pDataProcessModule);
-	assert(NULL != m_pEctypeModule);
     assert(NULL != m_pGameServerToWorldModule);
+    assert(NULL != m_pEquipModule);
 
 	m_pKernelModule->ResgisterCommonClassEvent( this, &NFCGameServerNet_ServerModule::OnClassCommonEvent );
 	m_pKernelModule->ResgisterCommonPropertyEvent( this, &NFCGameServerNet_ServerModule::OnPropertyCommonEvent );
@@ -72,7 +71,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 				const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
 				const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
 
-				Initialization(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCGameServerNet_ServerModule::OnRecivePSPack, &NFCGameServerNet_ServerModule::OnSocketPSEvent, nMaxConnect, nPort, nCpus);
+				Initialization(this, &NFCGameServerNet_ServerModule::OnRecivePSPack, &NFCGameServerNet_ServerModule::OnSocketPSEvent, nMaxConnect, nPort, nCpus);
 			}
 		}
 	}
@@ -86,172 +85,178 @@ bool NFCGameServerNet_ServerModule::Shut()
 	return true;
 }
 
-bool NFCGameServerNet_ServerModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCGameServerNet_ServerModule::Execute()
 {
-	return NFINetModule::Execute(fLasFrametime, fStartedTime);
+	return NFINetModule::Execute();
 }
 
-int NFCGameServerNet_ServerModule::OnRecivePSPack( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnRecivePSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	m_pLogModule->LogNormal(NFILogModule::NLL_WARING_NORMAL, NFIDENTID(), "BeginMsg:", msg.GetMsgHead()->GetMsgID(), __FUNCTION__, __LINE__ );
+	m_pLogModule->LogNormal(NFILogModule::NLL_WARING_NORMAL, NFGUID(), "BeginMsg:", nMsgID, __FUNCTION__, __LINE__ );
 	// TOCHECK
 	//NFIActorMessage xActorMsg;
 
 	//xActorMsg.eType = NFIActorMessage::EACTOR_NET_MSG;
-	//xActorMsg.nSubMsgID = msg.GetMsgHead()->GetMsgID();
+	//xActorMsg.nSubMsgID = nMsgID;
 	//xActorMsg.data.assign(msg.GetData(), msg.GetDataLen());
 
 	////根据用户基础信息得到目标actor地址,看自己想怎么管理和优化
 	//pPluginManager->GetFramework().Send(xActorMsg, pPluginManager->GetAddress(), pPluginManager->GetAddress());
 	//不上actor的情况
-	switch (msg.GetMsgHead()->GetMsgID())
+	switch (nMsgID)
 	{
 	case NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REFRESH:
-		OnRefreshProxyServerInfoProcess(msg);
+		OnRefreshProxyServerInfoProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 
 	case NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED:
-		OnProxyServerRegisteredProcess(msg);
+		OnProxyServerRegisteredProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 
 	case NFMsg::EGameMsgID::EGMI_PTWG_PROXY_UNREGISTERED:
-		OnProxyServerUnRegisteredProcess(msg);
+		OnProxyServerUnRegisteredProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 		//////////////////////////////////////////////////////////////////////////
 	case NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME:
-		OnClienEnterGameProcess(msg);
+		OnClienEnterGameProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GAME:
-		OnClienLeaveGameProcess(msg);
+		OnClienLeaveGameProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_ROLE_LIST:
-		OnReqiureRoleListProcess(msg);
+		OnReqiureRoleListProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_CREATE_ROLE:
-		OnCreateRoleGameProcess(msg);
+		OnCreateRoleGameProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_DELETE_ROLE:
-		OnDeleteRoleGameProcess(msg);
+		OnDeleteRoleGameProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_RECOVER_ROLE:
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_SWAP_SCENE:
-		OnClienSwapSceneProcess(msg);
+		OnClienSwapSceneProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 		//case NFMsg::EGameMsgID::EGMI_REQ_COMMAND:
-		//    OnClienGMProcess(msg);
+		//    OnClienGMProcess(nSockIndex, nMsgID, msg, nLen);
 		//    break;
 
 	case NFMsg::EGameMsgID::EGMI_REQ_SKILL_OBJECTX:
-		OnClienUseSkill(msg);
+		OnClienUseSkill(nSockIndex, nMsgID, msg, nLen);
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_MOVE:
-		OnClienMove(msg);
+		OnClienMove(nSockIndex, nMsgID, msg, nLen);
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_MOVE_IMMUNE:
-		OnClienMoveImmune(msg);
+		OnClienMoveImmune(nSockIndex, nMsgID, msg, nLen);
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_CHAT:
-		OnClienChatProcess(msg);
+		OnClienChatProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_JOIN_PVP:
-		OnClientJoinPVP(msg);
+		OnClientJoinPVP(nSockIndex, nMsgID, msg, nLen);
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_EXIT_PVP:
-		OnClientExitPVP(msg);
+		OnClientExitPVP(nSockIndex, nMsgID, msg, nLen);
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_END_BATTLE:
-		OnClientEndBattle(msg);
+		OnClientEndBattle(nSockIndex, nMsgID, msg, nLen);
 		break;
 
 
 		//SLG////////////////////////////////////////////////////////////////////////
 	case NFMsg::EGameMsgID::EGMI_REQ_BUY_FORM_SHOP:
-		OnSLGClienBuyItem(msg);
+		OnSLGClienBuyItem(nSockIndex, nMsgID, msg, nLen);
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_MOVE_BUILD_OBJECT:
-		OnSLGClienMoveObject(msg);
+		OnSLGClienMoveObject(nSockIndex, nMsgID, msg, nLen);
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_UP_BUILD_LVL:
-		OnSLGClienUpgradeBuilding(msg);
+		OnSLGClienUpgradeBuilding(nSockIndex, nMsgID, msg, nLen);
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_CREATE_ITEM:
-		OnSLGClienCreateItem(msg);
+		OnSLGClienCreateItem(nSockIndex, nMsgID, msg, nLen);
 		break;
 		//////////////////////////////////////////////////////////////////////////
 	case NFMsg::EGameMsgID::EGMI_REQ_CREATE_GUILD:
         {
-            NFIDENTID xGuildID = GetGuildID<NFMsg::ReqAckCreateGuild>(msg);
-            OnTransWorld(msg, xGuildID.nData64);
+            NFGUID xGuildID = GetGuildID<NFMsg::ReqAckCreateGuild>(nSockIndex, nMsgID, msg, nLen);
+            OnTransWorld(nSockIndex, nMsgID, msg, nLen, xGuildID.nData64);
         }
         break;
 	case NFMsg::EGameMsgID::EGMI_REQ_JOIN_GUILD:
         {
-            NFIDENTID xGuildID = GetGuildID<NFMsg::ReqAckJoinGuild>(msg);
-            OnTransWorld(msg, xGuildID.nData64);
+            NFGUID xGuildID = GetGuildID<NFMsg::ReqAckJoinGuild>(nSockIndex, nMsgID, msg, nLen);
+            OnTransWorld(nSockIndex, nMsgID, msg, nLen, xGuildID.nData64);
         }
         break;
 	case NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GUILD:
         {
-            NFIDENTID xGuildID = GetGuildID<NFMsg::ReqAckLeaveGuild>(msg);
-            OnTransWorld(msg, xGuildID.nData64);
+            NFGUID xGuildID = GetGuildID<NFMsg::ReqAckLeaveGuild>(nSockIndex, nMsgID, msg, nLen);
+            OnTransWorld(nSockIndex, nMsgID, msg, nLen, xGuildID.nData64);
         }
         break;
 	case NFMsg::EGameMsgID::EGMI_REQ_OPR_GUILD:
         {
-            NFIDENTID xGuildID = GetGuildID<NFMsg::ReqAckOprGuildMember>(msg);
-            OnTransWorld(msg, xGuildID.nData64);
+            NFGUID xGuildID = GetGuildID<NFMsg::ReqAckOprGuildMember>(nSockIndex, nMsgID, msg, nLen);
+            OnTransWorld(nSockIndex, nMsgID, msg, nLen, xGuildID.nData64);
         }
         break;
     case NFMsg::EGameMsgID::EGMI_REQ_SEARCH_GUILD:
-		OnTransWorld(msg);
+		OnTransWorld(nSockIndex, nMsgID, msg, nLen);
 		break;
+
+    case NFMsg::EGameMsgID::EGEC_REQ_CREATE_CHATGROUP:
+    case NFMsg::EGameMsgID::EGEC_REQ_JOIN_CHATGROUP:
+    case NFMsg::EGameMsgID::EGEC_REQ_LEAVE_CHATGROUP:
+    case NFMsg::EGameMsgID::EGEC_REQ_SUBSCRIPTION_CHATGROUP:
+        {
+            OnTransWorld(nSockIndex, nMsgID, msg, nLen);
+        }
+        break;
 		//////////////////////////////////////////////////////////////////////////
 	default:
 		break;
 	}
 
-	m_pLogModule->LogNormal(NFILogModule::NLL_WARING_NORMAL, NFIDENTID(), "EndMsg:", msg.GetMsgHead()->GetMsgID(), __FUNCTION__, __LINE__ );
+	m_pLogModule->LogNormal(NFILogModule::NLL_WARING_NORMAL, NFGUID(), "EndMsg:", nMsgID, __FUNCTION__, __LINE__ );
 
-	return true;
 }
 
-int NFCGameServerNet_ServerModule::OnSocketPSEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
+void NFCGameServerNet_ServerModule::OnSocketPSEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
 	if (eEvent & NF_NET_EVENT_EOF)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
 		OnClientDisconnect(nSockIndex);
 	}
 	else if (eEvent & NF_NET_EVENT_ERROR)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
 		OnClientDisconnect(nSockIndex);
 	}
 	else if (eEvent & NF_NET_EVENT_TIMEOUT)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
 		OnClientDisconnect(nSockIndex);
 	}
 	else  if (eEvent == NF_NET_EVENT_CONNECTED)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
 		OnClientConnected(nSockIndex);
 	}
-
-	return true;
 }
 
 void NFCGameServerNet_ServerModule::OnClientDisconnect( const int nAddress )
 {
 	//只可能是网关丢了
 	int nServerID = 0;
-	NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.First();
+	NF_SHARE_PTR<GateData> pServerData =  mProxyMap.First();
 	while (pServerData.get())
 	{
-		if (nAddress == pServerData->nFD)
+		if (nAddress == pServerData->xServerData.nFD)
 		{
-			nServerID = pServerData->pData->server_id();
+			nServerID = pServerData->xServerData.pData->server_id();
 			break;
 		}
 
@@ -266,23 +271,23 @@ void NFCGameServerNet_ServerModule::OnClientConnected( const int nAddress )
 
 }
 
-void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	//在进入游戏之前nPlayerID为其在网关的FD
-	NFIDENTID nClientID;
+	NFGUID nClientID;
 	NFMsg::ReqEnterGameServer xMsg;
-	if (!RecivePB(msg, xMsg, nClientID))
+	if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nClientID))
 	{
 		return;
 	}
 
-	NFIDENTID nRoleID = PBToNF(xMsg.id());
+	NFGUID nRoleID = PBToNF(xMsg.id());
 
 	PlayerLeaveGameServer(nRoleID);
 
 	//////////////////////////////////////////////////////////////////////////
 	//拉取数据
-	if(!m_pDataProcessModule->LoadDataFormNoSql(nRoleID))
+	if(!m_pDataProcessModule->LoadDataFormSql(nRoleID, "Player"))
 	{
 		return;
 	}
@@ -296,12 +301,12 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
 	}
 
 	int nGateID = -1;
-	NF_SHARE_PTR<ServerData> pServerData = mProxyMap.First();
+	NF_SHARE_PTR<GateData> pServerData = mProxyMap.First();
 	while (pServerData.get())
 	{
-		if (msg.GetFd() == pServerData->nFD)
+		if (nSockIndex == pServerData->xServerData.nFD)
 		{
-			nGateID = pServerData->pData->server_id();
+			nGateID = pServerData->xServerData.pData->server_id();
 			break;
 		}
 
@@ -321,7 +326,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
 	}
 
 	// proxy绑定playerID和gateFD
-	if (!pServerData->xRoleInfo.insert(std::make_pair(nRoleID, msg.GetFd())).second)
+	if (!pServerData->xRoleInfo.insert(std::make_pair(nRoleID, nSockIndex)).second)
 	{
 		return;
 	}
@@ -364,11 +369,11 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess( const NFIPacket& ms
 	m_pEventProcessModule->DoEvent( pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry );
 }
 
-void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	NFIDENTID nPlayerID;
+	NFGUID nPlayerID;
 	NFMsg::ReqLeaveGameServer xMsg;
-	if (!RecivePB(msg, xMsg, nPlayerID))
+	if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -382,7 +387,7 @@ void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess( const NFIPacket& ms
 
 }
 
-int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDataList& argVar, const NFIDENTID& self )
+int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDataList& argVar, const NFGUID& self )
 {
 	if ( argVar.GetCount() <= 0 || self.IsNull())
 	{
@@ -436,7 +441,7 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDataList& argVar, c
 						{
 							NFMsg::PropertyFloat* pDataFloat = pPublicData->add_property_float_list();
 							pDataFloat->set_property_name( pPropertyInfo->GetKey() );
-							pDataFloat->set_data( pPropertyInfo->GetInt() );
+							pDataFloat->set_data( pPropertyInfo->GetFloat() );
 						}
 
 						if ( pPropertyInfo->GetPrivate() )
@@ -444,24 +449,6 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDataList& argVar, c
 							NFMsg::PropertyFloat* pDataFloat = pPrivateData->add_property_float_list();
 							pDataFloat->set_property_name( pPropertyInfo->GetKey() );
 							pDataFloat->set_data( pPropertyInfo->GetFloat() );
-						}
-					}
-					break;
-
-				case TDATA_DOUBLE:
-					{
-						if ( pPropertyInfo->GetPublic() )
-						{
-							NFMsg::PropertyFloat* pDataFloat = pPublicData->add_property_float_list();
-							pDataFloat->set_property_name( pPropertyInfo->GetKey() );
-							pDataFloat->set_data( pPropertyInfo->GetDouble() );
-						}
-
-						if ( pPropertyInfo->GetPrivate() )
-						{
-							NFMsg::PropertyFloat* pDataFloat = pPrivateData->add_property_float_list();
-							pDataFloat->set_property_name( pPropertyInfo->GetKey() );
-							pDataFloat->set_data( pPropertyInfo->GetDouble() );
 						}
 					}
 					break;
@@ -512,7 +499,7 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter( const NFIDataList& argVar, c
 
 		for ( int i = 0; i < argVar.GetCount(); i++ )
 		{
-			NFIDENTID identOther = argVar.Object( i );
+			NFGUID identOther = argVar.Object( i );
 			if ( self == identOther )
 			{
 				//找到他所在网关的FD
@@ -562,27 +549,15 @@ bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase*
 						}
 					}
 					break;
-				case TDATA_TYPE::TDATA_DOUBLE:
+				case TDATA_TYPE::TDATA_FLOAT:
 					{
-						double dwValue = pRecord->GetDouble( i, j );
+						double dwValue = pRecord->GetFloat( i, j );
 						//if ( dwValue < -0.01f || dwValue > 0.01f )
 						{
 							NFMsg::RecordFloat* pAddData = pAddRowStruct->add_record_float_list();
 							pAddData->set_row( i );
 							pAddData->set_col( j );
 							pAddData->set_data( dwValue );
-						}
-					}
-					break;
-				case TDATA_TYPE::TDATA_FLOAT:
-					{
-						float fValue = pRecord->GetFloat( i, j );
-						//if ( fValue < -0.01f || fValue > 0.01f )
-						{
-							NFMsg::RecordFloat* pAddData = pAddRowStruct->add_record_float_list();
-							pAddData->set_row( i );
-							pAddData->set_col( j );
-							pAddData->set_data( fValue );
 						}
 					}
 					break;
@@ -600,7 +575,7 @@ bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase*
 					break;
 				case TDATA_TYPE::TDATA_OBJECT:
 					{
-						NFIDENTID ident = pRecord->GetObject( i, j );
+						NFGUID ident = pRecord->GetObject( i, j );
 						//if ( !ident.IsNull() )
 						{
 							NFMsg::RecordObject* pAddData = pAddRowStruct->add_record_object_list();
@@ -620,7 +595,7 @@ bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase*
 	return true;
 }
 
-int NFCGameServerNet_ServerModule::OnRecordEnter( const NFIDataList& argVar, const NFIDENTID& self )
+int NFCGameServerNet_ServerModule::OnRecordEnter( const NFIDataList& argVar, const NFGUID& self )
 {
 	if ( argVar.GetCount() <= 0 || self.IsNull() )
 	{
@@ -680,7 +655,7 @@ int NFCGameServerNet_ServerModule::OnRecordEnter( const NFIDataList& argVar, con
 
 		for ( int i = 0; i < argVar.GetCount(); i++ )
 		{
-			NFIDENTID identOther = argVar.Object( i );
+			NFGUID identOther = argVar.Object( i );
 			if ( self == identOther )
 			{
 				if (xPrivateMsg.multi_player_record_size() > 0)
@@ -711,7 +686,7 @@ int NFCGameServerNet_ServerModule::OnObjectListEnter( const NFIDataList& self, c
 	NFMsg::AckPlayerEntryList xPlayerEntryInfoList;
 	for ( int i = 0; i < argVar.GetCount(); i++ )
 	{
-		NFIDENTID identOld = argVar.Object( i );
+		NFGUID identOld = argVar.Object( i );
 		//排除空对象
 		if (identOld.IsNull())
 		{
@@ -739,7 +714,7 @@ int NFCGameServerNet_ServerModule::OnObjectListEnter( const NFIDataList& self, c
 
 	for (int i = 0; i < self.GetCount(); i++)
 	{
-		NFIDENTID ident = self.Object(i);
+		NFGUID ident = self.Object(i);
 		if (ident.IsNull())
 		{
 			continue;
@@ -762,7 +737,7 @@ int NFCGameServerNet_ServerModule::OnObjectListLeave( const NFIDataList& self, c
 	NFMsg::AckPlayerLeaveList xPlayerLeaveInfoList;
 	for ( int i = 0; i < argVar.GetCount(); i++ )
 	{
-		NFIDENTID identOld = argVar.Object( i );
+		NFGUID identOld = argVar.Object( i );
 		//排除空对象
 		if (identOld.IsNull())
 		{
@@ -775,7 +750,7 @@ int NFCGameServerNet_ServerModule::OnObjectListLeave( const NFIDataList& self, c
 
 	for (int i = 0; i < self.GetCount(); i++)
 	{
-		NFIDENTID ident = self.Object(i);
+		NFGUID ident = self.Object(i);
 		if (ident.IsNull())
 		{
 			continue;
@@ -787,13 +762,8 @@ int NFCGameServerNet_ServerModule::OnObjectListLeave( const NFIDataList& self, c
 	return 1;
 }
 
-int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
+int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-	if ( oldVar.GetCount() <= 0 )
-	{
-		return 0;
-	}
-
 	//if ( "Player" == m_pKernelModule->GetPropertyString( self, "ClassName" ) )
 	{
 		if ( "GroupID" == strPropertyName )
@@ -834,7 +804,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 		return 0;
 	}
 
-	switch ( oldVar.Type( 0 ) )
+	switch ( oldVar.GetType())
 	{
 	case TDATA_INT:
 		{
@@ -844,11 +814,11 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 
 			NFMsg::PropertyInt* pDataInt = xPropertyInt.add_property_list();
 			pDataInt->set_property_name( strPropertyName );
-			pDataInt->set_data( newVar.Int( 0 ) );
+			pDataInt->set_data( newVar.GetInt() );
 
 			for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 			{
-				NFIDENTID identOld = valueBroadCaseList.Object( i );
+				NFGUID identOld = valueBroadCaseList.Object( i );
 
 				SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt, identOld);
 			}
@@ -863,32 +833,13 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 
 			NFMsg::PropertyFloat* pDataFloat = xPropertyFloat.add_property_list();
 			pDataFloat->set_property_name( strPropertyName );
-			pDataFloat->set_data( newVar.Float( 0 ) );
+			pDataFloat->set_data( newVar.GetFloat() );
 
 			for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 			{
-				NFIDENTID identOld = valueBroadCaseList.Object( i );
+				NFGUID identOld = valueBroadCaseList.Object( i );
 
-				SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_FLOAT, xPropertyFloat, identOld);
-			}
-		}
-		break;
-
-	case TDATA_DOUBLE:
-		{
-			NFMsg::ObjectPropertyFloat xPropertyDouble;
-			NFMsg::Ident* pIdent = xPropertyDouble.mutable_player_id();
-			*pIdent = NFToPB(self);
-
-			NFMsg::PropertyFloat* pDataFloat = xPropertyDouble.add_property_list();
-			pDataFloat->set_property_name( strPropertyName );
-			pDataFloat->set_data( newVar.Double( 0 ) );
-
-			for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
-			{
-				NFIDENTID identOld = valueBroadCaseList.Object( i );
-
-				SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyDouble, identOld);
+				SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyFloat, identOld);
 			}
 		}
 		break;
@@ -901,11 +852,11 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 
 			NFMsg::PropertyString* pDataString = xPropertyString.add_property_list();
 			pDataString->set_property_name( strPropertyName );
-			pDataString->set_data( newVar.String( 0 ) );
+			pDataString->set_data( newVar.GetString() );
 
 			for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 			{
-				NFIDENTID identOld = valueBroadCaseList.Object( i );
+				NFGUID identOld = valueBroadCaseList.Object( i );
 
 				SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString, identOld);
 			}
@@ -920,11 +871,11 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 
 			NFMsg::PropertyObject* pDataObject = xPropertyObject.add_property_list();
 			pDataObject->set_property_name( strPropertyName );
-			*pDataObject->mutable_data() = NFToPB(newVar.Object( 0 ));
+			*pDataObject->mutable_data() = NFToPB(newVar.GetObject());
 
 			for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 			{
-				NFIDENTID identOld = valueBroadCaseList.Object( i );
+				NFGUID identOld = valueBroadCaseList.Object( i );
 
 				SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject, identOld);
 			}
@@ -939,7 +890,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFIDENTID& self,
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar)
+int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar)
 {
     const std::string& strRecordName = xEventData.strRecordName;
     const int nOpType = xEventData.nOpType;
@@ -1009,18 +960,6 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
 						}
 					}
 					break;
-				case TDATA_DOUBLE:
-					{
-						float fValue = newVar.Double( i );
-						//if ( fValue > 0.001f  || fValue < -0.001f )
-						{
-							NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
-							pAddData->set_col( i );
-							pAddData->set_row( nRow );
-							pAddData->set_data( fValue );
-						}
-					}
-					break;
 				case TDATA_STRING:
 					{
 						const std::string& str = newVar.String( i );
@@ -1035,7 +974,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
 					break;
 				case TDATA_OBJECT:
 					{
-						NFIDENTID identValue = newVar.Object( i );
+						NFGUID identValue = newVar.Object( i );
 						//if (!identValue.IsNull())
 						{
 							NFMsg::RecordObject* pAddData = pAddRowData->add_record_object_list();
@@ -1054,7 +993,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
 
 			for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 			{
-				NFIDENTID identOther = valueBroadCaseList.Object( i );
+				NFGUID identOther = valueBroadCaseList.Object( i );
 
 				SendMsgPBToGate(NFMsg::EGMI_ACK_ADD_ROW, xAddRecordRow, identOther);
 			}
@@ -1072,7 +1011,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
 
 			for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 			{
-				NFIDENTID identOther = valueBroadCaseList.Object( i );
+				NFGUID identOther = valueBroadCaseList.Object( i );
 
 				SendMsgPBToGate(NFMsg::EGMI_ACK_REMOVE_ROW, xReoveRecordRow, identOther);
 			}
@@ -1091,7 +1030,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
 
 			for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 			{
-				NFIDENTID identOther = valueBroadCaseList.Object( i );
+				NFGUID identOther = valueBroadCaseList.Object( i );
 
 				SendMsgPBToGate(NFMsg::EGMI_ACK_SWAP_ROW, xSwapRecord, identOther);
 			}
@@ -1115,7 +1054,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
 
 					for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 					{
-						NFIDENTID identOther = valueBroadCaseList.Object( i );
+						NFGUID identOther = valueBroadCaseList.Object( i );
 
 						SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_INT, xRecordChanged, identOther);
 					}
@@ -1135,25 +1074,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
 
 					for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 					{
-						NFIDENTID identOther = valueBroadCaseList.Object( i );
-
-						SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_FLOAT, xRecordChanged, identOther);
-					}
-				}
-			case TDATA_DOUBLE:
-				{
-					NFMsg::ObjectRecordFloat xRecordChanged;
-					*xRecordChanged.mutable_player_id() = NFToPB(self);
-
-					xRecordChanged.set_record_name( strRecordName );
-					NFMsg::RecordFloat* recordProperty = xRecordChanged.add_property_list();
-					recordProperty->set_row( nRow );
-					recordProperty->set_col( nCol );
-					recordProperty->set_data( newVar.Double( 0 ) );
-
-					for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
-					{
-						NFIDENTID identOther = valueBroadCaseList.Object( i );
+						NFGUID identOther = valueBroadCaseList.Object( i );
 
 						SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_DOUBLE, xRecordChanged, identOther);
 					}
@@ -1172,7 +1093,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
 
 					for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 					{
-						NFIDENTID identOther = valueBroadCaseList.Object( i );
+						NFGUID identOther = valueBroadCaseList.Object( i );
 
 						SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_STRING, xRecordChanged, identOther);
 					}
@@ -1191,7 +1112,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
 
 					for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 					{
-						NFIDENTID identOther = valueBroadCaseList.Object( i );
+						NFGUID identOther = valueBroadCaseList.Object( i );
 
 						SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_OBJECT, xRecordChanged, identOther);
 					}
@@ -1215,7 +1136,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
 			//
 			//             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 			//             {
-			//                 NFIDENTID identOther = valueBroadCaseList.Object( i );
+			//                 NFGUID identOther = valueBroadCaseList.Object( i );
 			//                 SendMsgPB(NFMsg::EGMI_ACK_RECORD_CLEAR, xRecordChanged, 0);
 			//             }
 		}
@@ -1227,7 +1148,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFIDENTID& self, c
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnClassCommonEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCGameServerNet_ServerModule::OnClassCommonEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
 	////////////1:广播给已经存在的人//////////////////////////////////////////////////////////////
 	if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
@@ -1252,7 +1173,7 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent( const NFIDENTID& self, co
 
 		for ( int i = 0; i < valueAllObjectList.GetCount(); i++ )
 		{
-			NFIDENTID identBC = valueAllObjectList.Object( i );
+			NFGUID identBC = valueAllObjectList.Object( i );
 			const std::string& strClassName = m_pKernelModule->GetPropertyString( identBC, "ClassName" );
 			if ( "Player" == strClassName )
 			{
@@ -1305,14 +1226,14 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent( const NFIDENTID& self, co
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
+int NFCGameServerNet_ServerModule::OnGroupEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
 	//容器发生变化，只可能从A容器的0层切换到B容器的0层
 	//需要注意的是------------任何层改变的时候，此玩家其实还未进入层，因此，层改变的时候获取的玩家列表，目标层是不包含自己的
 	int nSceneID = m_pKernelModule->GetPropertyInt( self, "SceneID" );
 
 	//广播给别人自己离去(层降或者跃层)
-	int nOldGroupID = oldVar.Int( 0 );
+	int nOldGroupID = oldVar.GetInt();
 	if ( nOldGroupID > 0 )
 	{
 		NFCDataList valueAllOldObjectList;
@@ -1323,11 +1244,11 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const st
 			//自己只需要广播其他玩家
 			for ( int i = 0; i < valueAllOldObjectList.GetCount(); i++ )
 			{
-				NFIDENTID identBC = valueAllOldObjectList.Object( i );
+				NFGUID identBC = valueAllOldObjectList.Object( i );
 
 				if(valueAllOldObjectList.Object(i) == self)
 				{
-					valueAllOldObjectList.Set(i, NFIDENTID());
+					valueAllOldObjectList.Set(i, NFGUID());
 				}
 
 				const std::string& strClassName = m_pKernelModule->GetPropertyString( identBC, "ClassName" );
@@ -1347,7 +1268,7 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const st
 	}
 
 	//再广播给别人自己出现(层升或者跃层)
-	int nNewGroupID = newVar.Int( 0 );
+	int nNewGroupID = newVar.GetInt();
 	if ( nNewGroupID > 0 )
 	{
 		//这里需要把自己从广播中排除
@@ -1359,7 +1280,7 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const st
 		m_pKernelModule->GetGroupObjectList( nSceneID, nNewGroupID, valueAllObjectList );
 		for ( int i = 0; i < valueAllObjectList.GetCount(); i++ )
 		{
-			NFIDENTID identBC = valueAllObjectList.Object( i );
+			NFGUID identBC = valueAllObjectList.Object( i );
 			const std::string& strClassName = m_pKernelModule->GetPropertyString( identBC, "ClassName" );
 			if ( "Player" == strClassName )
 			{
@@ -1399,7 +1320,7 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const st
 			{
 				//此时不用再广播自己的属性给自己
 				//把已经存在的人的属性广播给新来的人
-				NFIDENTID identOld = valueAllObjectListNoSelf.Object( i );
+				NFGUID identOld = valueAllObjectListNoSelf.Object( i );
 
 				OnPropertyEnter(NFCDataList() << self, identOld);
 				//把已经存在的人的表广播给新来的人
@@ -1418,12 +1339,12 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFIDENTID& self, const st
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
+int NFCGameServerNet_ServerModule::OnContainerEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
 	//容器发生变化，只可能从A容器的0层切换到B容器的0层
 	//需要注意的是------------任何容器改变的时候，玩家必须是0层
-	int nOldSceneID = oldVar.Int( 0 );
-	int nNowSceneID = newVar.Int( 0 );
+	int nOldSceneID = oldVar.GetInt();
+	int nNowSceneID = newVar.GetInt();
 
 	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "Enter Scene:", nNowSceneID);
 
@@ -1439,16 +1360,16 @@ int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, cons
 
 	for ( int i = 0; i < valueOldAllObjectList.GetCount(); i++ )
 	{
-		NFIDENTID identBC = valueOldAllObjectList.Object( i );
+		NFGUID identBC = valueOldAllObjectList.Object( i );
 		if (identBC == self)
 		{
-			valueOldAllObjectList.Set(i, NFIDENTID());
+			valueOldAllObjectList.Set(i, NFGUID());
 		}
 	}
 
 	for ( int i = 0; i < valueNewAllObjectList.GetCount(); i++ )
 	{
-		NFIDENTID identBC = valueNewAllObjectList.Object( i );
+		NFGUID identBC = valueNewAllObjectList.Object( i );
 		const std::string& strClassName = m_pKernelModule->GetPropertyString( identBC, "ClassName" );
 		if ( "Player" == strClassName )
 		{
@@ -1486,7 +1407,7 @@ int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, cons
 	////////////////////把已经存在的人的属性广播给新来的人//////////////////////////////////////////////////////
 	for ( int i = 0; i < valueAllObjectListNoSelf.GetCount(); i++ )
 	{
-		NFIDENTID identOld = valueAllObjectListNoSelf.Object( i );
+		NFGUID identOld = valueAllObjectListNoSelf.Object( i );
 		OnPropertyEnter(NFCDataList() << self , identOld);
 		////////////////////把已经存在的人的表广播给新来的人//////////////////////////////////////////////////////
 		OnRecordEnter(NFCDataList() << self , identOld);
@@ -1502,7 +1423,7 @@ int NFCGameServerNet_ServerModule::OnContainerEvent( const NFIDENTID& self, cons
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::GetBroadCastObject( const NFIDENTID& self, const std::string& strPropertyName, const bool bTable, NFIDataList& valueObject )
+int NFCGameServerNet_ServerModule::GetBroadCastObject( const NFGUID& self, const std::string& strPropertyName, const bool bTable, NFIDataList& valueObject )
 {
 	int nObjectContainerID = m_pKernelModule->GetPropertyInt( self, "SceneID" );
 	int nObjectGroupID = m_pKernelModule->GetPropertyInt( self, "GroupID" );
@@ -1605,7 +1526,7 @@ int NFCGameServerNet_ServerModule::GetBroadCastObject( const int nObjectContaine
 	return valueObject.GetCount();
 }
 
-int NFCGameServerNet_ServerModule::OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCGameServerNet_ServerModule::OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
 	if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
 	{
@@ -1625,7 +1546,7 @@ int NFCGameServerNet_ServerModule::OnObjectClassEvent( const NFIDENTID& self, co
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnObjectNPCClassEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+int NFCGameServerNet_ServerModule::OnObjectNPCClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
 {
 	if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )
 	{
@@ -1637,12 +1558,12 @@ int NFCGameServerNet_ServerModule::OnObjectNPCClassEvent(const NFIDENTID& self, 
 
 //////////////////////////////////////////////////////////////////////////
 
-int NFCGameServerNet_ServerModule::OnReturnEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
+int NFCGameServerNet_ServerModule::OnReturnEvent( const NFGUID& self, const int nEventID, const NFIDataList& var )
 {
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnMoveEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
+int NFCGameServerNet_ServerModule::OnMoveEvent( const NFGUID& self, const int nEventID, const NFIDataList& var )
 {
 	if (var.GetCount() != 3 || !var.TypeEx(TDATA_FLOAT, TDATA_FLOAT, TDATA_FLOAT, TDATA_UNKNOWN))
 	{
@@ -1666,7 +1587,7 @@ int NFCGameServerNet_ServerModule::OnMoveEvent( const NFIDENTID& self, const int
 	m_pKernelModule->GetGroupObjectList(nContianerID, nGroupID, xDataList);
 	for (int i = 0; i < xDataList.GetCount(); ++i)
 	{
-		const NFIDENTID& xIdent = xDataList.Object(i);
+		const NFGUID& xIdent = xDataList.Object(i);
 
 		SendMsgPBToGate(NFMsg::EGMI_ACK_MOVE, xMsg, xIdent);
 	}
@@ -1674,12 +1595,12 @@ int NFCGameServerNet_ServerModule::OnMoveEvent( const NFIDENTID& self, const int
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnUseSkillResultEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
+int NFCGameServerNet_ServerModule::OnUseSkillResultEvent( const NFGUID& self, const int nEventID, const NFIDataList& var )
 {
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
+int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent( const NFGUID& self, const int nEventID, const NFIDataList& var )
 {
 	if ( var.GetCount() != 7 ||
 		!var.TypeEx(TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT,
@@ -1690,7 +1611,7 @@ int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent( const NFIDENTID& self
 		return 1;
 	}
 
-	NFIDENTID ident = var.Object( 0 );
+	NFGUID ident = var.Object( 0 );
 	int nType = var.Int( 1 );
 	int nTargetScene = var.Int( 2 );
 	int nTargetGroupID = var.Int( 3 );
@@ -1711,7 +1632,7 @@ int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent( const NFIDENTID& self
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnNoticeEctypeAward(const NFIDENTID& self, const int nEventID, const NFIDataList& var)
+int NFCGameServerNet_ServerModule::OnNoticeEctypeAward(const NFGUID& self, const int nEventID, const NFIDataList& var)
 {
 	if (var.GetCount() < 3)
 	{
@@ -1751,17 +1672,17 @@ int NFCGameServerNet_ServerModule::OnNoticeEctypeAward(const NFIDENTID& self, co
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnChatResultEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
+int NFCGameServerNet_ServerModule::OnChatResultEvent( const NFGUID& self, const int nEventID, const NFIDataList& var )
 {
 	return 0;
 }
 
-void NFCGameServerNet_ServerModule::OnReqiureRoleListProcess( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnReqiureRoleListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	//fd
-	NFIDENTID nClientID;
+	NFGUID nClientID;
 	NFMsg::ReqRoleList xMsg;
-	if (!RecivePB(msg, xMsg, nClientID))
+	if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nClientID))
 	{
 		return;
 	}
@@ -1772,14 +1693,15 @@ void NFCGameServerNet_ServerModule::OnReqiureRoleListProcess( const NFIPacket& m
     vFieldVector.push_back("ID");
     vFieldVector.push_back("Level");
     vFieldVector.push_back("Sex");
-    vFieldVector.push_back("Job");
+	vFieldVector.push_back("Job");
     vFieldVector.push_back("Name");  
+	vFieldVector.push_back("Race");
 
-    const NFIDENTID ident = m_pDataProcessModule->GetChar(xMsg.account(), vFieldVector, vValueVector);
+    const NFGUID ident = m_pDataProcessModule->GetChar(xMsg.account(), vFieldVector, vValueVector);
 	if (ident.IsNull())
 	{
 		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
-		SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, msg.GetFd(), nClientID);
+		SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 		return;
 	}
 
@@ -1798,10 +1720,11 @@ void NFCGameServerNet_ServerModule::OnReqiureRoleListProcess( const NFIPacket& m
 	pData->set_last_offline_ip(0);
 	pData->set_view_record("");
 
-    NFIDENTID xID;
+    NFGUID xID;
     int nLevel = 0;
     int nSex = 0;
-    int nJob = 0;
+	int nJob = 0;
+	int nRace = 0;
     std::string strName;
 
     if (!xID.FromString(vValueVector[0]))
@@ -1823,26 +1746,32 @@ void NFCGameServerNet_ServerModule::OnReqiureRoleListProcess( const NFIPacket& m
     {
         return ;
     }
+
     strName = vValueVector[4];
 
+	if (!NF_StrTo(vValueVector[5], nRace))
+	{
+		return ;
+	}
     pData->set_role_level(nLevel);
     pData->set_sex(nSex);
     pData->set_career(nJob);
-    pData->set_noob_name(strName);
+	pData->set_noob_name(strName);
+	pData->set_race(nRace);
 
-	SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, msg.GetFd(), nClientID);
+	SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 }
 
-void NFCGameServerNet_ServerModule::OnCreateRoleGameProcess( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnCreateRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	NFIDENTID nClientID;
+	NFGUID nClientID;
 	NFMsg::ReqCreateRole xMsg;
-	if (!RecivePB(msg, xMsg, nClientID))
+	if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nClientID))
 	{
 		return;
 	}
 
-	NFIDENTID xRoleID = m_pDataProcessModule->CreateRole(xMsg.account(), xMsg.noob_name(), xMsg.career(), xMsg.sex());
+	NFGUID xRoleID = m_pDataProcessModule->CreateRole(xMsg.account(), xMsg.noob_name(), xMsg.race(), xMsg.career(), xMsg.sex());
 	if (xRoleID.IsNull())
 	{
 		return;
@@ -1865,14 +1794,14 @@ void NFCGameServerNet_ServerModule::OnCreateRoleGameProcess( const NFIPacket& ms
 	pData->set_last_offline_ip(0);
 	pData->set_view_record("");
 
-	SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, msg.GetFd(), nClientID);
+	SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 }
 
-void NFCGameServerNet_ServerModule::OnDeleteRoleGameProcess( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnDeleteRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	NFIDENTID nPlayerID;
+	NFGUID nPlayerID;
 	NFMsg::ReqDeleteRole xMsg;
-	if (!RecivePB(msg, xMsg, nPlayerID))
+	if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -1880,12 +1809,12 @@ void NFCGameServerNet_ServerModule::OnDeleteRoleGameProcess( const NFIPacket& ms
 	m_pDataProcessModule->DeleteRole(xMsg.account(), nPlayerID);
 
 	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
-	SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, msg.GetFd(), nPlayerID);
+	SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nPlayerID);
 }
 
-void NFCGameServerNet_ServerModule::OnClienSwapSceneProcess( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckSwapScene)
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckSwapScene)
 
 	NFCDataList varEntry;
 	varEntry << pObject->Self();
@@ -1895,9 +1824,9 @@ void NFCGameServerNet_ServerModule::OnClienSwapSceneProcess( const NFIPacket& ms
 	m_pEventProcessModule->DoEvent( pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry );
 }
 
-void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnClienUseSkill(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckUseSkill)
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckUseSkill)
 
 	//bc
 	const std::string& strSkillID =  xMsg.skill_id();
@@ -1914,7 +1843,7 @@ void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
 	for (int i = 0; i < xMsg.effect_data_size(); ++i)
 	{
 		const NFMsg::EffectData& xEffectData = xMsg.effect_data(i);
-		const NFIDENTID nTarget = PBToNF(xEffectData.effect_ident());
+		const NFGUID nTarget = PBToNF(xEffectData.effect_ident());
 		// 技能伤害
 		m_pSkillModule->OnUseSkill(nPlayerID, NFCDataList() << strSkillID << nTarget);
 
@@ -1928,9 +1857,9 @@ void NFCGameServerNet_ServerModule::OnClienUseSkill( const NFIPacket& msg )
 	SendMsgPBToGate(NFMsg::EGMI_ACK_SKILL_OBJECTX, xReqAckUseSkill, nPlayerID);
 }
 
-void NFCGameServerNet_ServerModule::OnClienMove( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnClienMove(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckPlayerMove)
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
 
 	m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "X", xMsg.target_pos(0).x());
 	m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Y", xMsg.target_pos(0).x());
@@ -1948,9 +1877,9 @@ void NFCGameServerNet_ServerModule::OnClienMove( const NFIPacket& msg )
 	}
 }
 
-void NFCGameServerNet_ServerModule::OnClienMoveImmune( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnClienMoveImmune(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckPlayerMove)
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
 
 	m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "X", xMsg.target_pos(0).x());
 	m_pKernelModule->SetPropertyFloat(PBToNF(xMsg.mover()), "Y", xMsg.target_pos(0).x());
@@ -1968,34 +1897,34 @@ void NFCGameServerNet_ServerModule::OnClienMoveImmune( const NFIPacket& msg )
 	}
 }
 
-void NFCGameServerNet_ServerModule::OnClienCommand( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnClienCommand(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 
 }
 
-void NFCGameServerNet_ServerModule::OnClienAcceptTask( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnClienAcceptTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAcceptTask)
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAcceptTask)
 }
 
-void NFCGameServerNet_ServerModule::OnClienPushTask( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnClienPushTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(msg, NFMsg::ReqCompeleteTask)
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCompeleteTask)
 }
 
-void NFCGameServerNet_ServerModule::OnClienPushCustom( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnClienPushCustom(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	//CLIENT_MSG_PROCESS(msg, NFMsg::cu)
+	//CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::cu)
 }
 
-void NFCGameServerNet_ServerModule::OnClienPickItem( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnClienPickItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(msg, NFMsg::ReqPickDropItem)
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqPickDropItem)
 }
 
-void NFCGameServerNet_ServerModule::OnClienChatProcess( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnClienChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckPlayerChat)
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckPlayerChat)
 
 	switch (xMsg.chat_type())
 	{
@@ -2006,10 +1935,10 @@ void NFCGameServerNet_ServerModule::OnClienChatProcess( const NFIPacket& msg )
 		break;
 	case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_GUILD:
 		{
-			NFIDENTID xGuildID = m_pKernelModule->GetPropertyObject(nPlayerID, "GuildID");
+			NFGUID xGuildID = m_pKernelModule->GetPropertyObject(nPlayerID, "GuildID");
 			if (!xGuildID.IsNull())
 			{
-				OnTransWorld(msg, xGuildID.nData64);
+				OnTransWorld(nSockIndex, nMsgID, msg, nLen, xGuildID.nData64);
 			}
 		}
 		break;
@@ -2018,10 +1947,10 @@ void NFCGameServerNet_ServerModule::OnClienChatProcess( const NFIPacket& msg )
 		{
 			if (xMsg.has_target_id())
 			{
-				NFIDENTID xTargetID = PBToNF(xMsg.target_id());
+				NFGUID xTargetID = PBToNF(xMsg.target_id());
 				if (!xTargetID.IsNull())
 				{
-					OnTransWorld(msg, nPlayerID.nData64);
+					OnTransWorld(nSockIndex, nMsgID, msg, nLen, nPlayerID.nData64);
 				}
 			}
 		}
@@ -2033,9 +1962,9 @@ void NFCGameServerNet_ServerModule::OnClienChatProcess( const NFIPacket& msg )
 
 }
 
-void NFCGameServerNet_ServerModule::OnClientJoinPVP(const NFIPacket& msg)
+void NFCGameServerNet_ServerModule::OnClientJoinPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckJoinActivity)
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckJoinActivity)
 
 	switch (xMsg.activity_type())
 	{
@@ -2047,22 +1976,22 @@ void NFCGameServerNet_ServerModule::OnClientJoinPVP(const NFIPacket& msg)
 	}
 }
 
-void NFCGameServerNet_ServerModule::OnClientExitPVP(const NFIPacket& msg)
+void NFCGameServerNet_ServerModule::OnClientExitPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	//CLIENT_MSG_PROCESS(msg, NFMsg::reqex)
+	//CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::reqex)
 
 }
 
-void NFCGameServerNet_ServerModule::OnClienUseItem( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckUseItem)
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckUseItem)
 }
 
-void NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	NFIDENTID nPlayerID;
+	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!RecivePB(msg, xMsg, nPlayerID))
+	if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -2070,27 +1999,27 @@ void NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess( const NFIPac
 	for (int i = 0; i < xMsg.server_list_size(); ++i)
 	{
 		NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-		NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.GetElement(pData->server_id());
+		NF_SHARE_PTR<GateData> pServerData =  mProxyMap.GetElement(pData->server_id());
 		if (!pServerData.get())
 		{
-			pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
+			pServerData = NF_SHARE_PTR<GateData>(NF_NEW GateData());
 			mProxyMap.AddElement(pData->server_id(), pServerData);
 		}
 
-		pServerData->nFD = msg.GetFd();
-		*(pServerData->pData) = *pData;
+		pServerData->xServerData.nFD = nSockIndex;
+		*(pServerData->xServerData.pData) = *pData;
 
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Proxy Registered");
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Proxy Registered");
 	}
 
 	return;
 }
 
-void NFCGameServerNet_ServerModule::OnProxyServerUnRegisteredProcess( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnProxyServerUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	NFIDENTID nPlayerID;
+	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!RecivePB(msg, xMsg, nPlayerID))
+	if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -2101,17 +2030,17 @@ void NFCGameServerNet_ServerModule::OnProxyServerUnRegisteredProcess( const NFIP
 		mProxyMap.RemoveElement(pData->server_id());
 
 
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Proxy UnRegistered");
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Proxy UnRegistered");
 	}
 
 	return;
 }
 
-void NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	NFIDENTID nPlayerID;
+	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!RecivePB(msg, xMsg, nPlayerID))
+	if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -2119,27 +2048,27 @@ void NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess( const NFIPa
 	for (int i = 0; i < xMsg.server_list_size(); ++i)
 	{
 		NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-		NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.GetElement(pData->server_id());
+		NF_SHARE_PTR<GateData> pServerData =  mProxyMap.GetElement(pData->server_id());
 		if (!pServerData.get())
 		{
-			pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
+			pServerData = NF_SHARE_PTR<GateData>(NF_NEW GateData());
 			mProxyMap.AddElement(pData->server_id(), pServerData);
 		}
 
-		pServerData->nFD = msg.GetFd();
-		*(pServerData->pData) = *pData;
+		pServerData->xServerData.nFD = nSockIndex;
+		*(pServerData->xServerData.pData) = *pData;
 
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(0, pData->server_id()), pData->server_name(), "Proxy Registered");
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Proxy Registered");
 	}
 
 	return;
 }
 
-void NFCGameServerNet_ServerModule::OnClienGMProcess( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnClienGMProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	NFIDENTID nPlayerID;
+	NFGUID nPlayerID;
 	NFMsg::ReqCommand xMsg;
-	if (!RecivePB(msg, xMsg, nPlayerID))
+	if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -2163,9 +2092,9 @@ void NFCGameServerNet_ServerModule::OnClienGMProcess( const NFIPacket& msg )
 			const int nContianerID = m_pKernelModule->GetPropertyInt(nPlayerID, "SceneID");
 			const int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, "GroupID");
 
-			float fX = m_pKernelModule->GetPropertyFloat(nPlayerID, "X");
-			float fY = m_pKernelModule->GetPropertyFloat(nPlayerID, "Y");
-			float fZ = m_pKernelModule->GetPropertyFloat(nPlayerID, "Z");
+			double fX = m_pKernelModule->GetPropertyFloat(nPlayerID, "X");
+			double fY = m_pKernelModule->GetPropertyFloat(nPlayerID, "Y");
+			double fZ = m_pKernelModule->GetPropertyFloat(nPlayerID, "Z");
 
 			const std::string& strObjectIndex = xMsg.command_str_value();
 			//const int nValue = xMsg.command_value();
@@ -2176,7 +2105,7 @@ void NFCGameServerNet_ServerModule::OnClienGMProcess( const NFIPacket& msg )
 				xDataList << "Y" << fY;
 				xDataList << "Z" << fZ;
 				const std::string& strObjectClass = m_pElementInfoModule->GetPropertyString(strObjectIndex, "ClassName");
-				m_pKernelModule->CreateObject(NFIDENTID(), nContianerID, nGroupID, strObjectClass, strObjectIndex, xDataList);
+				m_pKernelModule->CreateObject(NFGUID(), nContianerID, nGroupID, strObjectClass, strObjectIndex, xDataList);
 			}
 		}
 		break;
@@ -2185,16 +2114,14 @@ void NFCGameServerNet_ServerModule::OnClienGMProcess( const NFIPacket& msg )
 	}
 }
 
-void NFCGameServerNet_ServerModule::OnClientEndBattle(const NFIPacket& msg)
+void NFCGameServerNet_ServerModule::OnClientEndBattle(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckEndBattle);
-	m_pEctypeModule->OnEctypeSettleEvent(nPlayerID, 1, 3); // 暂时先给1通过和3星
 }
 
 //SLG////////////////////////////////////////////////////////////////////////
-void NFCGameServerNet_ServerModule::OnSLGClienBuyItem(const NFIPacket& msg)
+void NFCGameServerNet_ServerModule::OnSLGClienBuyItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckBuyObjectFormShop);
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckBuyObjectFormShop);
 
 	const std::string strItemID = xMsg.config_id();
 	const float fX = xMsg.x();
@@ -2203,11 +2130,11 @@ void NFCGameServerNet_ServerModule::OnSLGClienBuyItem(const NFIPacket& msg)
 	m_pSLGShopModule->ReqBuyItem(nPlayerID, strItemID, fX, fY, fZ);
 }
 
-void NFCGameServerNet_ServerModule::OnSLGClienMoveObject(const NFIPacket& msg)
+void NFCGameServerNet_ServerModule::OnSLGClienMoveObject(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(msg, NFMsg::ReqAckMoveBuildObject);
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckMoveBuildObject);
 
-	const NFIDENTID xBuildID = PBToNF(xMsg.object_guid());
+	const NFGUID xBuildID = PBToNF(xMsg.object_guid());
 	const float fX = xMsg.x();
 	const float fY = xMsg.y();
 	const float fZ = xMsg.z();
@@ -2215,52 +2142,52 @@ void NFCGameServerNet_ServerModule::OnSLGClienMoveObject(const NFIPacket& msg)
 	m_pSLGBuildingModule->Move(nPlayerID, xBuildID, fX, fY, fZ);
 }
 
-void NFCGameServerNet_ServerModule::OnSLGClienUpgradeBuilding(const NFIPacket& msg)
+void NFCGameServerNet_ServerModule::OnSLGClienUpgradeBuilding(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(msg, NFMsg::ReqUpBuildLv);
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqUpBuildLv);
 
-	const NFIDENTID xBuilID = PBToNF(xMsg.object_guid());
+	const NFGUID xBuilID = PBToNF(xMsg.object_guid());
 	m_pSLGBuildingModule->Upgrade(nPlayerID, xBuilID);
 }
 
-void NFCGameServerNet_ServerModule::OnSLGClienCreateItem(const NFIPacket& msg)
+void NFCGameServerNet_ServerModule::OnSLGClienCreateItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(msg, NFMsg::ReqCreateItem);
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCreateItem);
 
-	const NFIDENTID& xBuilID = PBToNF(xMsg.object_guid());
+	const NFGUID& xBuilID = PBToNF(xMsg.object_guid());
 	const std::string& strItemID = xMsg.config_id();
 	const int nCount = xMsg.count();
 
 	m_pSLGBuildingModule->Produce(nPlayerID, xBuilID, strItemID, nCount);
 }
 
-void NFCGameServerNet_ServerModule::SendMsgPBToGate( const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFIDENTID self )
+void NFCGameServerNet_ServerModule::SendMsgPBToGate( const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self )
 {
 	NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(self);
 	if (pData.get())
 	{
-		NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
+		NF_SHARE_PTR<GateData> pProxyData = mProxyMap.GetElement(pData->nGateID);
 		if (pProxyData.get())
 		{
-			SendMsgPB(nMsgID, xMsg, pProxyData->nFD, pData->xClientID);
+			SendMsgPB(nMsgID, xMsg, pProxyData->xServerData.nFD, pData->xClientID);
 		}
 	}
 }
 
-void NFCGameServerNet_ServerModule::SendMsgPBToGate( const uint16_t nMsgID, const std::string& strMsg, const NFIDENTID self )
+void NFCGameServerNet_ServerModule::SendMsgPBToGate( const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self )
 {
     NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(self);
     if (pData.get())
     {
-        NF_SHARE_PTR<ServerData> pProxyData = mProxyMap.GetElement(pData->nGateID);
+        NF_SHARE_PTR<GateData> pProxyData = mProxyMap.GetElement(pData->nGateID);
         if (pProxyData.get())
         {
-            SendMsgPB(nMsgID, strMsg, pProxyData->nFD, pData->xClientID);
+            SendMsgPB(nMsgID, strMsg, pProxyData->xServerData.nFD, pData->xClientID);
         }
     }
 }
 
-void NFCGameServerNet_ServerModule::PlayerLeaveGameServer( const NFIDENTID self )
+void NFCGameServerNet_ServerModule::PlayerLeaveGameServer( const NFGUID self )
 {
 	if(!m_pKernelModule->GetObject(self))
 	{
@@ -2279,7 +2206,7 @@ void NFCGameServerNet_ServerModule::PlayerLeaveGameServer( const NFIDENTID self 
 	mRoleBaseData.RemoveElement(self);
 
 
-	NF_SHARE_PTR<ServerData> pServerData = mProxyMap.GetElement(pBaseData->nGateID);
+	NF_SHARE_PTR<GateData> pServerData = mProxyMap.GetElement(pBaseData->nGateID);
 	if (nullptr == pServerData)
 	{
 		return;
@@ -2288,20 +2215,94 @@ void NFCGameServerNet_ServerModule::PlayerLeaveGameServer( const NFIDENTID self 
 	pServerData->xRoleInfo.erase(self);
 }
 
-void NFCGameServerNet_ServerModule::OnTransWorld( const NFIPacket& msg )
+void NFCGameServerNet_ServerModule::OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     std::string strMsg;
-    NFIDENTID nPlayer;
+    NFGUID nPlayer;
     int nHasKey = 0;
-    if (NFINetModule::RecivePB(msg, strMsg, nPlayer))
+    if (NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen,strMsg, nPlayer))
     {
         nHasKey = nPlayer.nData64;
     }
     
-    m_pGameServerToWorldModule->SendBySuit(nHasKey, msg);
+    m_pGameServerToWorldModule->SendBySuit(nHasKey, nSockIndex, nMsgID, msg, nLen);
 }
 
-void NFCGameServerNet_ServerModule::OnTransWorld( const NFIPacket& msg, const int nWorldKey )
+void NFCGameServerNet_ServerModule::OnTransWorld( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey )
 {
-    m_pGameServerToWorldModule->SendBySuit(nWorldKey, msg);
+    m_pGameServerToWorldModule->SendBySuit(nWorldKey, nSockIndex, nMsgID, msg, nLen);
+}
+
+void NFCGameServerNet_ServerModule::OnIntensifylevelToEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+{
+    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqIntensifylevelToEquip);
+
+    const NFGUID self = PBToNF(xMsg.selfid());
+    const NFGUID xEquipID = PBToNF(xMsg.equipid());
+
+    int nResult = m_pEquipModule->IntensifylevelToEquip(self, xEquipID);
+
+    NFMsg::AckIntensifylevelToEquip xAck;
+
+    *xAck.mutable_selfid() = xMsg.selfid();
+    *xAck.mutable_equipid() = xMsg.equipid();
+    xAck.set_result(nResult);
+
+    SendMsgPBToGate(NFMsg::EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP, xAck, self);
+}
+
+void NFCGameServerNet_ServerModule::OnHoleToEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+{
+    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqHoleToEquip);
+
+    const NFGUID self = PBToNF(xMsg.selfid());
+    const NFGUID xEquipID = PBToNF(xMsg.equipid());
+
+    int nResult = m_pEquipModule->HoleToEquip(self, xEquipID);
+
+    NFMsg::AckHoleToEquip xAck;
+
+    *xAck.mutable_selfid() = xMsg.selfid();
+    *xAck.mutable_equipid() = xMsg.equipid();
+    xAck.set_result(nResult);
+
+    SendMsgPBToGate(NFMsg::EGEC_ACK_HOLE_TO_EQUIP, xAck, self);
+}
+
+void NFCGameServerNet_ServerModule::OnInlaystoneToEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+{
+    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqInlaystoneToEquip);
+
+    const NFGUID self = PBToNF(xMsg.selfid());
+    const NFGUID xEquipID = PBToNF(xMsg.equipid());
+    const std::string& strStoneID = xMsg.stoneid();
+    const int nHoleIndex = xMsg.hole_index();
+
+    int nResult = m_pEquipModule->InlaystoneToEquip(self, xEquipID, strStoneID, nHoleIndex);
+
+    NFMsg::AckInlaystoneToEquip xAck;
+
+    *xAck.mutable_selfid() = xMsg.selfid();
+    *xAck.mutable_equipid() = xMsg.equipid();
+    xAck.set_result(nResult);
+
+    SendMsgPBToGate(NFMsg::EGEC_ACK_INLAYSTONE_TO_EQUIP, xAck, self);
+}
+
+void NFCGameServerNet_ServerModule::OnElementlevelToEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+{
+    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqElementlevelToEquip);
+
+    const NFGUID self = PBToNF(xMsg.selfid());
+    const NFGUID xEquipID = PBToNF(xMsg.equipid());
+
+    int nResult = m_pEquipModule->ElementlevelToEquip(self, xEquipID, xMsg.eelementtype());
+
+    NFMsg::AckElementlevelToEquip xAck;
+
+    *xAck.mutable_selfid() = xMsg.selfid();
+    *xAck.mutable_equipid() = xMsg.equipid();
+    xAck.set_result(nResult);
+
+    SendMsgPBToGate(NFMsg::EGEC_ACK_ELEMENTLEVEL_TO_EQUIP, xAck, self);
 }

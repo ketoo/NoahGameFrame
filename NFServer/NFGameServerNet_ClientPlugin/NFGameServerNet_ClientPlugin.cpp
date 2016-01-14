@@ -36,7 +36,7 @@ const int NFGameServerNet_ClientPlugin::GetPluginVersion()
 
 const std::string NFGameServerNet_ClientPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFGameServerNet_ClientPlugin)
+    return GET_CLASS_NAME(NFGameServerNet_ClientPlugin)
 }
 
 void NFGameServerNet_ClientPlugin::Install()

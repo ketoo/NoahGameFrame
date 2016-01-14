@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_LOGINNET_CLIENT_MODULE_H_
-#define _NFC_LOGINNET_CLIENT_MODULE_H_
+#ifndef NFC_LOGINNET_CLIENT_MODULE_H
+#define NFC_LOGINNET_CLIENT_MODULE_H
 
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 
@@ -33,7 +33,7 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool AfterInit();
 	virtual bool BeforeShut();
@@ -44,20 +44,20 @@ public:
     virtual NFMapEx<int, NFMsg::ServerInfoReport>& GetWorldMap();
 
 protected:
-	int OnReciveMSPack(const NFIPacket& msg);
-    int OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+	void OnReciveMSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 protected:
 
     //////////////////////////////////////////////////////////////////////////
-    int OnSelectServerEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnSelectServerEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
-    int OnSelectServerResultProcess(const NFIPacket& msg);
+    int OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 
 	//////////////////////////////////////////////////////////////////////////
 
-	int OnWorldInfoProcess(const NFIPacket& msg);
+	int OnWorldInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     //////////////////////////////////////////////////////////////////////////
     void Register(NFINet* pNet);
