@@ -6,16 +6,16 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_ACTOR_H_
-#define _NFC_ACTOR_H_
+#ifndef NFC_ACTOR_H
+#define NFC_ACTOR_H
 
 #include <map>
 #include <string>
 #include "NFComm/NFCore/NFSingleton.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
-
 #include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFCore/NFIComponent.h"
+#include "../NFCore/NFList.h"
 
 class NFCActor
 	: public NFIActor
@@ -28,21 +28,28 @@ public:
 
 	~NFCActor()
 	{
-		if (m_pComponent)
+		NF_SHARE_PTR<NFIComponent> pComponent;
+		bool bRet = mxComponentList.First(pComponent);
+		while (bRet)
 		{
-			m_pComponent->BeforeShut();
-			m_pComponent->Shut();
+			pComponent->BeforeShut();
+			pComponent->Shut();
 
-			delete m_pComponent;
-			m_pComponent = NULL;
+			bRet = mxComponentList.Next(pComponent);
 		}
+
+		mxComponentList.ClearAll();
 	}
 
 	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
-	virtual void RegisterActorComponent(NFIComponent* pComponent);
+	virtual void HandlerSelf(const NFIActorMessage& message, const Theron::Address from);
+	virtual void AddComponent(NF_SHARE_PTR<NFIComponent> pComponent);
+	virtual bool AddEndFunc(EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end);
+	virtual bool SendMsg(const Theron::Address address, const NFIActorMessage& message);
 
 
 protected:
-	NFIComponent* m_pComponent;
+	NFList< NF_SHARE_PTR<NFIComponent> > mxComponentList;
+	EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR mxFunctorEndPtr;
 };
 #endif

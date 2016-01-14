@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<XML>
-  <Object ID="GameServer_1" ServerID="6" Name="GameServer_1" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="16001" Type="6" />
-  <Object ID="WorldServer_1" ServerID="7" Name="WorldServer_1" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="17001" Type="7" />
-  <Object ID="ProxyServer_1" ServerID="5" Name="ProxyServer_1" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="15001" Type="5" />
-  <Object ID="MasterServer_1" ServerID="3" Name="MasterServer_1" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="13001" Type="3" />
-  <Object ID="LoginServer_1" ServerID="4" Name="LoginServer_1" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="14001" Type="4" />
-</XML>

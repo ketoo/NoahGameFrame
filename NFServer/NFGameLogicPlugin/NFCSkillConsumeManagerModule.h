@@ -6,8 +6,8 @@
 //    @Desc             :   技能消费机制管理类,所有类型的技能消费类型均需注册才能消费
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_SKILLCONSUME_MANAGER_MODULE_H_
-#define _NFC_SKILLCONSUME_MANAGER_MODULE_H_
+#ifndef NFC_SKILLCONSUME_MANAGER_MODULE_H
+#define NFC_SKILLCONSUME_MANAGER_MODULE_H
 
 #include <iostream>
 #include "NFComm/NFCore/NFMap.h"
@@ -25,7 +25,7 @@ public:
     }
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute( const float fLasFrametime, const float fStartedTime );
+    virtual bool Execute();
     virtual bool AfterInit();
 
     virtual bool ResgisterConsumeModule( const int nModuleType, NFISkillConsumeProcessModule* pModule );

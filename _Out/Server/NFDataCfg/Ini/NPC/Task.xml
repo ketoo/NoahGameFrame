@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<XML>
-  <Object ID="Task1" TaskName="Task1" Type="1" NextTaskID="Task2" KillMonsterName="AttackNpc1" KillCount="1" LevelReq="1" AwardExp="100" AwardGold="110" AwardPack="DropBag_1" />
-  <Object ID="Task2" TaskName="Task2" Type="1" NextTaskID="Task3" KillMonsterName="AttackNpc1" KillCount="2" LevelReq="2" AwardExp="200" AwardGold="220" AwardPack="DropBag_1" />
-  <Object ID="Task3" TaskName="Task3" Type="1" NextTaskID="Task4" KillMonsterName="AttackNpc1" KillCount="3" LevelReq="3" AwardExp="300" AwardGold="330" AwardPack="DropBag_1" />
-</XML>

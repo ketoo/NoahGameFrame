@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_DEADSTATE_H_
-#define _NFC_DEADSTATE_H_
+#ifndef NFC_DEADSTATE_H
+#define NFC_DEADSTATE_H
 
 #include "NFIState.h"
 
@@ -22,13 +22,13 @@ public:
 
     virtual ~NFCDeadState() {}
 
-    virtual bool Enter(const NFIDENTID& self);
+    virtual bool Enter(const NFGUID& self);
 
-    virtual bool Execute(const NFIDENTID& self);
+    virtual bool Execute(const NFGUID& self);
 
-    virtual bool Exit(const NFIDENTID& self);
+    virtual bool Exit(const NFGUID& self);
 
-    virtual bool DoRule(const NFIDENTID& self);
+    virtual bool DoRule(const NFGUID& self);
 
 protected:
 private:

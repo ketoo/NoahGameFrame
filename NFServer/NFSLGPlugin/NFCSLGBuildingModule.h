@@ -5,8 +5,8 @@
 //    @Module           £º    NFCSLGBuildingModule
 //
 // -------------------------------------------------------------------------
-#ifndef __NFC_SLG_BUILDING_MODULE_H__
-#define __NFC_SLG_BUILDING_MODULE_H__
+#ifndef NFC_SLG_BUILDING_MODULE_H
+#define NFC_SLG_BUILDING_MODULE_H
 
 #include "NFComm/NFPluginModule/NFISLGBuildingModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -26,31 +26,31 @@ public:
     virtual bool CheckConfig();
     virtual bool BeforeShut();
     virtual bool Shut();
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
 public:
-    virtual int AddBuilding(const NFIDENTID& self, const std::string& strBuilding, const float fX, const float fY, const float fZ);
+    virtual int AddBuilding(const NFGUID& self, const std::string& strBuilding, const float fX, const float fY, const float fZ);
 
-    virtual int Upgrade(const NFIDENTID& self, const NFIDENTID& xBuilID);
-    virtual int Boost(const NFIDENTID& self, const NFIDENTID& xBuilID);
+    virtual int Upgrade(const NFGUID& self, const NFGUID& xBuilID);
+    virtual int Boost(const NFGUID& self, const NFGUID& xBuilID);
 
-    virtual int Produce(const NFIDENTID& self, const NFIDENTID& xBuilID, const std::string& strItemID, const int nCount);
-    virtual int Move(const NFIDENTID& self, const NFIDENTID nGUID, const float fX, const float fY, const float fZ);
+    virtual int Produce(const NFGUID& self, const NFGUID& xBuilID, const std::string& strItemID, const int nCount);
+    virtual int Move(const NFGUID& self, const NFGUID nGUID, const float fX, const float fY, const float fZ);
 
 protected:    
-    int OnUpgradeHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount); 
-    int OnBoostHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount);   
-    int OnProduceHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount);   
+    int OnUpgradeHeartBeat(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount); 
+    int OnBoostHeartBeat(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);   
+    int OnProduceHeartBeat(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);   
 
-    int CheckBuildingStatusEnd(const NFIDENTID& self);
-    int OnClassObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+    int CheckBuildingStatusEnd(const NFGUID& self);
+    int OnClassObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
-    int CheckProduceData(const NFIDENTID& self);
-    int AddProduceData(const NFIDENTID& self, const NFIDENTID& xBuilID, const std::string& strItemID, const int nCount);
-    bool GetProduceDataCount(const NFIDENTID& self, const NFIDENTID& xBuilID, const std::string& strItemID, int& nCount);
-    int CostProduceData(const NFIDENTID& self, const NFIDENTID& xBuilID, const std::string& strItemID, const int nCount);
+    int CheckProduceData(const NFGUID& self);
+    int AddProduceData(const NFGUID& self, const NFGUID& xBuilID, const std::string& strItemID, const int nCount);
+    bool GetProduceDataCount(const NFGUID& self, const NFGUID& xBuilID, const std::string& strItemID, int& nCount);
+    int CostProduceData(const NFGUID& self, const NFGUID& xBuilID, const std::string& strItemID, const int nCount);
 
-    std::string GetProduceHeartName(const NFIDENTID& self, const NFIDENTID& xBuild, const std::string& strItemID);
+    std::string GetProduceHeartName(const NFGUID& self, const NFGUID& xBuild, const std::string& strItemID);
 
 private:
 	NFIKernelModule* m_pKernelModule;
@@ -59,4 +59,4 @@ private:
     NFIEventProcessModule* m_pEventProcessModule;
 };
 
-#endif // !__NFC_SLG_BUILDING_MODULE_H__
+#endif // !__NFC_SLG_BUILDING_MODULE_H_

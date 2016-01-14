@@ -15,10 +15,10 @@ bool NFCSLGBuildingModule::Init()
 
 bool NFCSLGBuildingModule::AfterInit()
 {
-	m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
-	m_pLogModule = dynamic_cast<NFILogModule*>( pPluginManager->FindModule( "NFCLogModule" ) );
-	m_pUUIDModule = dynamic_cast<NFIUUIDModule*>( pPluginManager->FindModule( "NFCUUIDModule" ) );
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>( pPluginManager->FindModule( "NFCEventProcessModule" ) );
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
+	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>( "NFCUUIDModule" );
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
 
 	assert( NULL != m_pKernelModule );
 	assert( NULL != m_pLogModule );
@@ -45,14 +45,14 @@ bool NFCSLGBuildingModule::Shut()
     return true;
 }
 
-bool NFCSLGBuildingModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCSLGBuildingModule::Execute()
 {
     return true;
 }
 
 //////////////////////////////////////////////////////////////////////////
 
-int NFCSLGBuildingModule::AddBuilding(const NFIDENTID& self, const std::string& strBuilding, const float fX, const float fY, const float fZ)
+int NFCSLGBuildingModule::AddBuilding(const NFGUID& self, const std::string& strBuilding, const float fX, const float fY, const float fZ)
 {
     if (strBuilding.empty())
     {
@@ -93,7 +93,7 @@ int NFCSLGBuildingModule::AddBuilding(const NFIDENTID& self, const std::string& 
     return 0;
 }
 
-int NFCSLGBuildingModule::Upgrade(const NFIDENTID& self, const NFIDENTID& xBuilID)
+int NFCSLGBuildingModule::Upgrade(const NFGUID& self, const NFGUID& xBuilID)
 {
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "BuildingList");
     if (NULL == pRecord.get())
@@ -127,7 +127,7 @@ int NFCSLGBuildingModule::Upgrade(const NFIDENTID& self, const NFIDENTID& xBuilI
 }
 
 
-int NFCSLGBuildingModule::OnUpgradeHeartBeat(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
+int NFCSLGBuildingModule::OnUpgradeHeartBeat(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
 //     if (var.GetCount() != 1 ||  var.TypeEx(TDATA_OBJECT, TDATA_UNKNOWN))
 //     {
@@ -135,7 +135,7 @@ int NFCSLGBuildingModule::OnUpgradeHeartBeat(const NFIDENTID& self, const std::s
 //         return 1;
 //     }
 // 
-//     const NFIDENTID& xBuildID = var.Object(0);
+//     const NFGUID& xBuildID = var.Object(0);
 // 
 //     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "BuildingList");
 //     if (NULL == pRecord.get())
@@ -166,7 +166,7 @@ int NFCSLGBuildingModule::OnUpgradeHeartBeat(const NFIDENTID& self, const std::s
     return 0;
 }
 
-int NFCSLGBuildingModule::OnBoostHeartBeat( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
+int NFCSLGBuildingModule::OnBoostHeartBeat( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
 // 	if (var.GetCount() != 1 ||  var.TypeEx(TDATA_OBJECT, TDATA_UNKNOWN))
 // 	{
@@ -174,7 +174,7 @@ int NFCSLGBuildingModule::OnBoostHeartBeat( const NFIDENTID& self, const std::st
 // 		return 1;
 // 	}
 // 
-//     const NFIDENTID& xBuidID = var.Object(0);
+//     const NFGUID& xBuidID = var.Object(0);
 // 
 //     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "BuildingList");
 //     if (NULL == pRecord.get())
@@ -201,7 +201,7 @@ int NFCSLGBuildingModule::OnBoostHeartBeat( const NFIDENTID& self, const std::st
     return 0;
 }
 
-int NFCSLGBuildingModule::OnProduceHeartBeat( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
+int NFCSLGBuildingModule::OnProduceHeartBeat( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
 //     if (var.GetCount() != 2 || var.TypeEx(TDATA_OBJECT, TDATA_STRING, TDATA_UNKNOWN))
 //     {
@@ -212,7 +212,7 @@ int NFCSLGBuildingModule::OnProduceHeartBeat( const NFIDENTID& self, const std::
     //To ADD
 
     //Cost Left Count
-//     const NFIDENTID& xBuildID = var.Object(0);
+//     const NFGUID& xBuildID = var.Object(0);
 //     const std::string& strItem = var.String(1);
 //     CostProduceData(self, xBuildID, strItem, 1);
 // 
@@ -236,7 +236,7 @@ int NFCSLGBuildingModule::OnProduceHeartBeat( const NFIDENTID& self, const std::
 
     return 0;
 }
-int NFCSLGBuildingModule::Boost(const NFIDENTID& self, const NFIDENTID& xBuilID)
+int NFCSLGBuildingModule::Boost(const NFGUID& self, const NFGUID& xBuilID)
 {
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "BuildingList");
     if (NULL == pRecord.get())
@@ -269,7 +269,7 @@ int NFCSLGBuildingModule::Boost(const NFIDENTID& self, const NFIDENTID& xBuilID)
     return 0;
 }
 
-int NFCSLGBuildingModule::Produce(const NFIDENTID& self, const NFIDENTID& xBuilID, const std::string& strItemID, const int nCount)
+int NFCSLGBuildingModule::Produce(const NFGUID& self, const NFGUID& xBuilID, const std::string& strItemID, const int nCount)
 {
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "BuildingList");
     if (NULL == pRecord.get())
@@ -302,7 +302,7 @@ int NFCSLGBuildingModule::Produce(const NFIDENTID& self, const NFIDENTID& xBuilI
     return 0;
 }
 
-int NFCSLGBuildingModule::Move(const NFIDENTID& self, const NFIDENTID nGUID, const float fX, const float fY, const float fZ)
+int NFCSLGBuildingModule::Move(const NFGUID& self, const NFGUID nGUID, const float fX, const float fY, const float fZ)
 {
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "BuildingList");
     if (NULL == pRecord.get())
@@ -328,7 +328,7 @@ int NFCSLGBuildingModule::Move(const NFIDENTID& self, const NFIDENTID nGUID, con
 }
 
 
-int NFCSLGBuildingModule::CheckBuildingStatusEnd( const NFIDENTID& self )
+int NFCSLGBuildingModule::CheckBuildingStatusEnd( const NFGUID& self )
 {
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, "BuildingList");
     if (NULL == pRecord.get())
@@ -346,7 +346,7 @@ int NFCSLGBuildingModule::CheckBuildingStatusEnd( const NFIDENTID& self )
         }
 
         const NFINT64 nEndTime = pRecord->GetInt(i, "StateEndTime");
-        const NFIDENTID& xBuildID = pRecord->GetObject(i, "BuildingGUID");
+        const NFGUID& xBuildID = pRecord->GetObject(i, "BuildingGUID");
         const int& nStatus = pRecord->GetInt(i, "State");
 
         float fTime = nEndTime - nNowTime;
@@ -378,7 +378,7 @@ int NFCSLGBuildingModule::CheckBuildingStatusEnd( const NFIDENTID& self )
     return 0;
 }
 
-int NFCSLGBuildingModule::OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCSLGBuildingModule::OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
     if (COE_CREATE_FINISH == eClassEvent)
     {
@@ -389,7 +389,7 @@ int NFCSLGBuildingModule::OnClassObjectEvent( const NFIDENTID& self, const std::
     return 0;
 }
 
-int NFCSLGBuildingModule::AddProduceData(const NFIDENTID& self, const NFIDENTID& xBuilID, const std::string& strItemID, const int nCount)
+int NFCSLGBuildingModule::AddProduceData(const NFGUID& self, const NFGUID& xBuilID, const std::string& strItemID, const int nCount)
 {
     NF_SHARE_PTR<NFIRecord> pProduce = m_pKernelModule->FindRecord(self, "BuildingProduce");
     if (NULL == pProduce.get())
@@ -436,7 +436,7 @@ int NFCSLGBuildingModule::AddProduceData(const NFIDENTID& self, const NFIDENTID&
     return 0;
 }
 
-int NFCSLGBuildingModule::CostProduceData( const NFIDENTID& self, const NFIDENTID& xBuilID, const std::string& strItemID, const int nCount )
+int NFCSLGBuildingModule::CostProduceData( const NFGUID& self, const NFGUID& xBuilID, const std::string& strItemID, const int nCount )
 {
     NF_SHARE_PTR<NFIRecord> pProduce = m_pKernelModule->FindRecord(self, "BuildingProduce");
     if (NULL == pProduce.get())
@@ -461,7 +461,7 @@ int NFCSLGBuildingModule::CostProduceData( const NFIDENTID& self, const NFIDENTI
     return 0;
 }
 
-bool NFCSLGBuildingModule::GetProduceDataCount( const NFIDENTID& self, const NFIDENTID& xBuilID, const std::string& strItemID, int& nCount )
+bool NFCSLGBuildingModule::GetProduceDataCount( const NFGUID& self, const NFGUID& xBuilID, const std::string& strItemID, int& nCount )
 {
     NF_SHARE_PTR<NFIRecord> pProduce = m_pKernelModule->FindRecord(self, "BuildingProduce");
     if (NULL == pProduce.get())
@@ -494,7 +494,7 @@ bool NFCSLGBuildingModule::GetProduceDataCount( const NFIDENTID& self, const NFI
     return false;
 }
 
-int NFCSLGBuildingModule::CheckProduceData( const NFIDENTID& self )
+int NFCSLGBuildingModule::CheckProduceData( const NFGUID& self )
 {
     NF_SHARE_PTR<NFIRecord> pProduce = m_pKernelModule->FindRecord(self, "BuildingProduce");
     if (NULL == pProduce.get())
@@ -511,7 +511,7 @@ int NFCSLGBuildingModule::CheckProduceData( const NFIDENTID& self )
         }
 
         const int nNowTime = NFTimeEx::GetNowTime();
-        const NFIDENTID xBuildID = pProduce->GetObject(i, "BuildingGUID");
+        const NFGUID xBuildID = pProduce->GetObject(i, "BuildingGUID");
         const std::string strItemID = pProduce->GetString(i, "ItemID");
         const int nLeftCount = pProduce->GetInt(i, "LeftCount");
         const NFINT64 nLastOnceBeginTime = pProduce->GetInt(i, "OnceStartTime");
@@ -552,7 +552,7 @@ int NFCSLGBuildingModule::CheckProduceData( const NFIDENTID& self )
     return 0;
 }
 
-std::string NFCSLGBuildingModule::GetProduceHeartName(const NFIDENTID& self, const NFIDENTID& xBuild, const std::string& strItemID)
+std::string NFCSLGBuildingModule::GetProduceHeartName(const NFGUID& self, const NFGUID& xBuild, const std::string& strItemID)
 {
     return xBuild.ToString() + "_" + strItemID + "_" + "OnProduceHeartBeat";
 }

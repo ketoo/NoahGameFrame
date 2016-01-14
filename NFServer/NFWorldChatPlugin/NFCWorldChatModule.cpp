@@ -23,7 +23,7 @@ bool NFCWorldChatModule::Shut()
     return true;
 }
 
-bool NFCWorldChatModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCWorldChatModule::Execute()
 {
 
 
@@ -32,8 +32,8 @@ bool NFCWorldChatModule::Execute(const float fLasFrametime, const float fStarted
 
 bool NFCWorldChatModule::AfterInit()
 {
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
 
 
     assert(NULL != m_pEventProcessModule);

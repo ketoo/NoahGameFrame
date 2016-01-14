@@ -6,42 +6,92 @@
 //
 // -----------------------------------------------------------------------
 
-#ifndef _NFI_COMPONENT_H_
-#define _NFI_COMPONENT_H_
+#ifndef _NFI_COMPONENT_H
+#define _NFI_COMPONENT_H
 
-#include "NFComm/NFPluginModule/NFIdentID.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
 
 class NFIComponent : public NFILogicModule
 {
+private:
+	NFIComponent()
+	{
+	}
+
 public:
+	NFIComponent(NFGUID self, const std::string& strName)
+	{
+		mbHasInit = false;
+		mbEnable = true;
+		mSelf = self;
+		mstrName = strName;
+	}
+
     virtual ~NFIComponent() {}
+
+	template <typename T>
+	NF_SHARE_PTR<T> CreateNewInstance()
+	{
+		NF_SHARE_PTR<NFIComponent> pComponent = CreateNewInstance();
+		if (nullptr != pComponent)
+		{
+			if (TIsDerived<T, NFIComponent>::Result)
+			{
+				NF_SHARE_PTR<T> pT = std::dynamic_pointer_cast<T>(pComponent);
+				if (nullptr != pT)
+				{
+					return pT;
+				}				
+			}
+		}
+
+		return NF_SHARE_PTR<T>();
+	}
+
     virtual bool SetEnable(const bool bEnable)
     {
-        return false;
+        return mbEnable;
     }
 
 	virtual bool Enable()
     {
-        return false;
+        return mbEnable;
     }
 
-	virtual NFIDENTID Self()
+	virtual bool SetHasInit(const bool bEnable)
+	{
+		mbHasInit = bEnable;
+		return mbHasInit;
+	}
+
+	virtual bool HasInit()
+	{
+		return mbHasInit;
+	}
+
+	virtual NFGUID Self()
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
-    virtual const std::string& ComponentName()
-    {
-        return NULL_STR;
-    }
-    virtual const std::string& LanguageName()
-    {
-        return NULL_STR;
-    }
+    virtual const std::string& GetComponentName() const
+	{
+		return mstrName;
+	};
 
-	virtual int OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg){ return 0;}
+	//for actor
+	virtual int OnASyncEvent(const NFGUID& self, const int event, std::string& arg){return 0;}
+
+protected:
+	virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance(){ return nullptr;};
+
 private:
+	bool mbEnable;
+	bool mbHasInit;
+	NFGUID mSelf;
+	std::string mstrName;
 };
 
 #endif

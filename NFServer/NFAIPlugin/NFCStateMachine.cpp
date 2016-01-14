@@ -10,7 +10,7 @@
 #include "NFCStateMachine.h"
 #include "NFCAIModule.h"
 
-NFCStateMachine::NFCStateMachine(const NFIDENTID& self, NFIAIModule* pControl)
+NFCStateMachine::NFCStateMachine(const NFGUID& self, NFIAIModule* pControl)
     : mOwnerID(self),
       meCurrentState(PatrolState), // 默认一开始就巡逻
       meLastState(IdleState),
@@ -28,14 +28,14 @@ NFCStateMachine::~NFCStateMachine()
 
 }
 
-void NFCStateMachine::UpData(float fFrameTime, float fAllTime)
+void NFCStateMachine::Execute()
 {
     //same for the current state
     if (State_Error != meCurrentState)
     {
         if (mfHeartBeatTime > 0)
         {
-            mfHeartBeatTime -= fFrameTime;
+            mfHeartBeatTime -= 0.001f;
         }
         else
         {
@@ -45,6 +45,7 @@ void NFCStateMachine::UpData(float fFrameTime, float fAllTime)
             //设置心跳时间
             NFCDataList xDataList;
             m_pKernelModule->Random(0, 10, 1, xDataList);
+
             mfHeartBeatTime = pState->GetHeartBeatTime() + xDataList.Int(0);
         }
     }
