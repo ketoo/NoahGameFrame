@@ -29,13 +29,15 @@ enum PackTableType
 class NFIPackModule : public NFILogicModule
 {
 public:
-	/////////////基础/////////////////////////////////////////////////////////////
+    virtual const std::string& GetPackName( const PackTableType name ) = 0;
+    /////////////基础/////////////////////////////////////////////////////////////
 
 	virtual const NFGUID& CreateEquip( const NFGUID& self, const std::string& strConfigName) = 0;
 	virtual bool CreateItem( const NFGUID& self, const std::string& strConfigName, const int nCount ) = 0;
 
 	virtual bool DeleteEquip( const NFGUID& self, const NFGUID& id) = 0;
 	virtual bool DeleteItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount) = 0;
+    virtual bool EnoughItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount) = 0;
 	/////////////英雄装备和背包互换/////////////////////////////////////////////////////////////
 
 	virtual bool DressEquipForHero( const NFGUID& self, const NFGUID& hero, const NFGUID& id) = 0;
