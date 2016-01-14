@@ -30,7 +30,8 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pSkillModule = pPluginManager->FindModule<NFISkillModule>("NFCSkillModule");
 	m_pDataProcessModule = pPluginManager->FindModule<NFIDataProcessModule>("NFCDataProcessModule");
     m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>("NFCGameServerToWorldModule");
-
+    m_pEquipModule = pPluginManager->FindModule<NFIEquipModule>("NFCEquipModule");
+    
 	assert(NULL != m_pEventProcessModule);
 	assert(NULL != m_pKernelModule);
 	assert(NULL != m_pLogicClassModule);
@@ -44,6 +45,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	assert(NULL != m_pSkillModule);
 	assert(NULL != m_pDataProcessModule);
     assert(NULL != m_pGameServerToWorldModule);
+    assert(NULL != m_pEquipModule);
 
 	m_pKernelModule->ResgisterCommonClassEvent( this, &NFCGameServerNet_ServerModule::OnClassCommonEvent );
 	m_pKernelModule->ResgisterCommonPropertyEvent( this, &NFCGameServerNet_ServerModule::OnPropertyCommonEvent );
@@ -2229,4 +2231,78 @@ void NFCGameServerNet_ServerModule::OnTransWorld(const int nSockIndex, const int
 void NFCGameServerNet_ServerModule::OnTransWorld( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey )
 {
     m_pGameServerToWorldModule->SendBySuit(nWorldKey, nSockIndex, nMsgID, msg, nLen);
+}
+
+void NFCGameServerNet_ServerModule::OnIntensifylevelToEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+{
+    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqIntensifylevelToEquip);
+
+    const NFGUID self = PBToNF(xMsg.selfid());
+    const NFGUID xEquipID = PBToNF(xMsg.equipid());
+
+    int nResult = m_pEquipModule->IntensifylevelToEquip(self, xEquipID);
+
+    NFMsg::AckIntensifylevelToEquip xAck;
+
+    *xAck.mutable_selfid() = xMsg.selfid();
+    *xAck.mutable_equipid() = xMsg.equipid();
+    xAck.set_result(nResult);
+
+    SendMsgPBToGate(NFMsg::EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP, xAck, self);
+}
+
+void NFCGameServerNet_ServerModule::OnHoleToEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+{
+    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqHoleToEquip);
+
+    const NFGUID self = PBToNF(xMsg.selfid());
+    const NFGUID xEquipID = PBToNF(xMsg.equipid());
+
+    int nResult = m_pEquipModule->HoleToEquip(self, xEquipID);
+
+    NFMsg::AckHoleToEquip xAck;
+
+    *xAck.mutable_selfid() = xMsg.selfid();
+    *xAck.mutable_equipid() = xMsg.equipid();
+    xAck.set_result(nResult);
+
+    SendMsgPBToGate(NFMsg::EGEC_ACK_HOLE_TO_EQUIP, xAck, self);
+}
+
+void NFCGameServerNet_ServerModule::OnInlaystoneToEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+{
+    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqInlaystoneToEquip);
+
+    const NFGUID self = PBToNF(xMsg.selfid());
+    const NFGUID xEquipID = PBToNF(xMsg.equipid());
+    const std::string& strStoneID = xMsg.stoneid();
+    const int nHoleIndex = xMsg.hole_index();
+
+    int nResult = m_pEquipModule->InlaystoneToEquip(self, xEquipID, strStoneID, nHoleIndex);
+
+    NFMsg::AckInlaystoneToEquip xAck;
+
+    *xAck.mutable_selfid() = xMsg.selfid();
+    *xAck.mutable_equipid() = xMsg.equipid();
+    xAck.set_result(nResult);
+
+    SendMsgPBToGate(NFMsg::EGEC_ACK_INLAYSTONE_TO_EQUIP, xAck, self);
+}
+
+void NFCGameServerNet_ServerModule::OnElementlevelToEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+{
+    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqElementlevelToEquip);
+
+    const NFGUID self = PBToNF(xMsg.selfid());
+    const NFGUID xEquipID = PBToNF(xMsg.equipid());
+
+    int nResult = m_pEquipModule->ElementlevelToEquip(self, xEquipID, xMsg.eelementtype());
+
+    NFMsg::AckElementlevelToEquip xAck;
+
+    *xAck.mutable_selfid() = xMsg.selfid();
+    *xAck.mutable_equipid() = xMsg.equipid();
+    xAck.set_result(nResult);
+
+    SendMsgPBToGate(NFMsg::EGEC_ACK_ELEMENTLEVEL_TO_EQUIP, xAck, self);
 }
