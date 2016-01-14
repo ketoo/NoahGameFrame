@@ -5051,14 +5051,17 @@ class ReqInlaystoneToEquip : public ::google::protobuf::Message {
   inline ::NFMsg::Ident* release_equipid();
   inline void set_allocated_equipid(::NFMsg::Ident* equipid);
 
-  // required .NFMsg.Ident stoneid = 3;
+  // required bytes stoneid = 3;
   inline bool has_stoneid() const;
   inline void clear_stoneid();
   static const int kStoneidFieldNumber = 3;
-  inline const ::NFMsg::Ident& stoneid() const;
-  inline ::NFMsg::Ident* mutable_stoneid();
-  inline ::NFMsg::Ident* release_stoneid();
-  inline void set_allocated_stoneid(::NFMsg::Ident* stoneid);
+  inline const ::std::string& stoneid() const;
+  inline void set_stoneid(const ::std::string& value);
+  inline void set_stoneid(const char* value);
+  inline void set_stoneid(const void* value, size_t size);
+  inline ::std::string* mutable_stoneid();
+  inline ::std::string* release_stoneid();
+  inline void set_allocated_stoneid(::std::string* stoneid);
 
   // required int32 hole_index = 4;
   inline bool has_hole_index() const;
@@ -5082,7 +5085,7 @@ class ReqInlaystoneToEquip : public ::google::protobuf::Message {
 
   ::NFMsg::Ident* selfid_;
   ::NFMsg::Ident* equipid_;
-  ::NFMsg::Ident* stoneid_;
+  ::std::string* stoneid_;
   ::google::protobuf::int32 hole_index_;
 
   mutable int _cached_size_;
@@ -10260,7 +10263,7 @@ inline void ReqInlaystoneToEquip::set_allocated_equipid(::NFMsg::Ident* equipid)
   }
 }
 
-// required .NFMsg.Ident stoneid = 3;
+// required bytes stoneid = 3;
 inline bool ReqInlaystoneToEquip::has_stoneid() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -10271,30 +10274,62 @@ inline void ReqInlaystoneToEquip::clear_has_stoneid() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void ReqInlaystoneToEquip::clear_stoneid() {
-  if (stoneid_ != NULL) stoneid_->::NFMsg::Ident::Clear();
+  if (stoneid_ != &::google::protobuf::internal::kEmptyString) {
+    stoneid_->clear();
+  }
   clear_has_stoneid();
 }
-inline const ::NFMsg::Ident& ReqInlaystoneToEquip::stoneid() const {
-  return stoneid_ != NULL ? *stoneid_ : *default_instance_->stoneid_;
+inline const ::std::string& ReqInlaystoneToEquip::stoneid() const {
+  return *stoneid_;
 }
-inline ::NFMsg::Ident* ReqInlaystoneToEquip::mutable_stoneid() {
+inline void ReqInlaystoneToEquip::set_stoneid(const ::std::string& value) {
   set_has_stoneid();
-  if (stoneid_ == NULL) stoneid_ = new ::NFMsg::Ident;
+  if (stoneid_ == &::google::protobuf::internal::kEmptyString) {
+    stoneid_ = new ::std::string;
+  }
+  stoneid_->assign(value);
+}
+inline void ReqInlaystoneToEquip::set_stoneid(const char* value) {
+  set_has_stoneid();
+  if (stoneid_ == &::google::protobuf::internal::kEmptyString) {
+    stoneid_ = new ::std::string;
+  }
+  stoneid_->assign(value);
+}
+inline void ReqInlaystoneToEquip::set_stoneid(const void* value, size_t size) {
+  set_has_stoneid();
+  if (stoneid_ == &::google::protobuf::internal::kEmptyString) {
+    stoneid_ = new ::std::string;
+  }
+  stoneid_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqInlaystoneToEquip::mutable_stoneid() {
+  set_has_stoneid();
+  if (stoneid_ == &::google::protobuf::internal::kEmptyString) {
+    stoneid_ = new ::std::string;
+  }
   return stoneid_;
 }
-inline ::NFMsg::Ident* ReqInlaystoneToEquip::release_stoneid() {
+inline ::std::string* ReqInlaystoneToEquip::release_stoneid() {
   clear_has_stoneid();
-  ::NFMsg::Ident* temp = stoneid_;
-  stoneid_ = NULL;
-  return temp;
+  if (stoneid_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = stoneid_;
+    stoneid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
 }
-inline void ReqInlaystoneToEquip::set_allocated_stoneid(::NFMsg::Ident* stoneid) {
-  delete stoneid_;
-  stoneid_ = stoneid;
+inline void ReqInlaystoneToEquip::set_allocated_stoneid(::std::string* stoneid) {
+  if (stoneid_ != &::google::protobuf::internal::kEmptyString) {
+    delete stoneid_;
+  }
   if (stoneid) {
     set_has_stoneid();
+    stoneid_ = stoneid;
   } else {
     clear_has_stoneid();
+    stoneid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
