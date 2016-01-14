@@ -34,7 +34,7 @@ const int NFWorldGuildPlugin::GetPluginVersion()
 
 const std::string NFWorldGuildPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFWorldGuildPlugin)
+    return GET_CLASS_NAME(NFWorldGuildPlugin)
 }
 
 void NFWorldGuildPlugin::Install()

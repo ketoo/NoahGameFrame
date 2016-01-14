@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_ELEMENTINFO_MODULE_H_
-#define _NFI_ELEMENTINFO_MODULE_H_
+#ifndef _NFI_ELEMENTINFO_MODULE_H
+#define _NFI_ELEMENTINFO_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
@@ -34,8 +34,7 @@ public:
     virtual std::shared_ptr<NFIComponentManager> GetComponentManager(const std::string& strConfigName) = 0;
 
     virtual NFINT64 GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName) = 0;
-    virtual float GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName) = 0;
-    virtual double GetPropertyDouble(const std::string& strConfigName, const std::string& strPropertyName) = 0;
+    virtual double GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName) = 0;
     virtual const std::string& GetPropertyString(const std::string& strConfigName, const std::string& strPropertyName) = 0;
 
 protected:

@@ -12,4 +12,5 @@
 	
 	<ActorDataModule Name="NFCDataProcessModule" />
 	<APPID Name="4" />
+    <ConfigPath Name="../../" />
 </XML>

@@ -23,15 +23,15 @@ bool NFCWorldGuildBroadcastModule::Shut()
     return true;
 }
 
-bool NFCWorldGuildBroadcastModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCWorldGuildBroadcastModule::Execute()
 {
     return true;
 }
 
 bool NFCWorldGuildBroadcastModule::AfterInit()
 {
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pWorldGuildDataModule = dynamic_cast<NFIWorldGuildDataModule*>(pPluginManager->FindModule("NFCWorldGuildDataModule"));
     m_pWorldNet_ServerModule = dynamic_cast<NFIWorldNet_ServerModule*>(pPluginManager->FindModule("NFCWorldNet_ServerModule"));
     m_pWorldGuildModule = dynamic_cast<NFIWorldGuildModule*>(pPluginManager->FindModule("NFCWorldGuildModule"));
@@ -48,13 +48,8 @@ bool NFCWorldGuildBroadcastModule::AfterInit()
     return true;
 }
 
-int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar)
+int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-    if ( oldVar.GetCount() <= 0 )
-    {
-        return 0;
-    }
-
     if ( "Guild" != m_pKernelModule->GetPropertyString( self, "ClassName" ))
     {
         return 0;
@@ -63,7 +58,7 @@ int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, 
     NFCDataList valueBroadCaseList;
     NFCDataList valueBroadCaseGameList;
 
-    if (!m_pWorldGuildModule->GetOnlineMember(NFIDENTID(), self, valueBroadCaseList, valueBroadCaseGameList))
+    if (!m_pWorldGuildModule->GetOnlineMember(NFGUID(), self, valueBroadCaseList, valueBroadCaseGameList))
     {
         return 0;
     }
@@ -73,7 +68,7 @@ int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, 
         return 0;
     }
 
-    switch ( oldVar.Type( 0 ) )
+    switch ( oldVar.GetType() )
     {
     case TDATA_INT:
         {
@@ -83,7 +78,7 @@ int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, 
 
             NFMsg::PropertyInt* pDataInt = xPropertyInt.add_property_list();
             pDataInt->set_property_name( strPropertyName );
-            pDataInt->set_data( newVar.Int( 0 ) );
+            pDataInt->set_data( newVar.GetInt() );
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt);
 
@@ -98,23 +93,9 @@ int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, 
 
             NFMsg::PropertyFloat* pDataFloat = xPropertyFloat.add_property_list();
             pDataFloat->set_property_name( strPropertyName );
-            pDataFloat->set_data( newVar.Float( 0 ) );
+            pDataFloat->set_data( newVar.GetFloat() );
 
-            m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_FLOAT, xPropertyFloat);
-        }
-        break;
-
-    case TDATA_DOUBLE:
-        {
-            NFMsg::ObjectPropertyFloat xPropertyDouble;
-            NFMsg::Ident* pIdent = xPropertyDouble.mutable_player_id();
-            *pIdent = NFINetModule::NFToPB(self);
-
-            NFMsg::PropertyFloat* pDataFloat = xPropertyDouble.add_property_list();
-            pDataFloat->set_property_name( strPropertyName );
-            pDataFloat->set_data( newVar.Double( 0 ) );
-
-            m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyDouble);
+            m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyFloat);
         }
         break;
 
@@ -126,7 +107,7 @@ int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, 
 
             NFMsg::PropertyString* pDataString = xPropertyString.add_property_list();
             pDataString->set_property_name( strPropertyName );
-            pDataString->set_data( newVar.String( 0 ) );
+            pDataString->set_data( newVar.GetString() );
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString);
         }
@@ -140,7 +121,7 @@ int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, 
 
             NFMsg::PropertyObject* pDataObject = xPropertyObject.add_property_list();
             pDataObject->set_property_name( strPropertyName );
-            *pDataObject->mutable_data() = NFINetModule::NFToPB(newVar.Object( 0 ));
+            *pDataObject->mutable_data() = NFINetModule::NFToPB(newVar.GetObject());
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject);
 
@@ -156,7 +137,7 @@ int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFIDENTID& self, 
 }
 
 
-int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar )
+int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar )
 {
     const std::string& strRecordName = xEventData.strRecordName; 
     int nOpType = xEventData.nOpType;
@@ -170,7 +151,7 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, co
 
     NFCDataList valueBroadCaseList;
     NFCDataList valueBroadCaseGameList;
-    if (!m_pWorldGuildModule->GetOnlineMember(NFIDENTID(), self, valueBroadCaseList, valueBroadCaseGameList))
+    if (!m_pWorldGuildModule->GetOnlineMember(NFGUID(), self, valueBroadCaseList, valueBroadCaseGameList))
     {
         return 0;
     }
@@ -223,18 +204,6 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, co
                         }
                     }
                     break;
-                case TDATA_DOUBLE:
-                    {
-                        float fValue = newVar.Double( i );
-                        //if ( fValue > 0.001f  || fValue < -0.001f )
-                        {
-                            NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
-                            pAddData->set_col( i );
-                            pAddData->set_row( nRow );
-                            pAddData->set_data( fValue );
-                        }
-                    }
-                    break;
                 case TDATA_STRING:
                     {
                         const std::string& str = newVar.String( i );
@@ -249,7 +218,7 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, co
                     break;
                 case TDATA_OBJECT:
                     {
-                        NFIDENTID identValue = newVar.Object( i );
+                        NFGUID identValue = newVar.Object( i );
                         //if (!identValue.IsNull())
                         {
                             NFMsg::RecordObject* pAddData = pAddRowData->add_record_object_list();
@@ -286,8 +255,8 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, co
             if (pRecord && strRecordName == "GuildMemberList")
             {
                 //add
-                const NFIDENTID& nPlayer = pRecord->GetObject(nRow, NFMsg::GuildMemberList_GUID);
-                NFINT64 nGameID = pRecord->GetInt(nRow, NFMsg::GuildMemberList_GameID);
+                const NFGUID& nPlayer = pRecord->GetObject(nRow, NFrame::Guild::GuildMemberList_GUID);
+                NFINT64 nGameID = pRecord->GetInt(nRow, NFrame::Guild::GuildMemberList_GameID);
 
                 NFCDataList varSelf;
                 NFCDataList varGameID;
@@ -322,11 +291,11 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, co
             NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, strRecordName);
             if (pRecord && strRecordName == "GuildMemberList")
             {
-                if (nCol == NFMsg::GuildMemberList_Online && newVar.Int( 0 ) > 0)
+                if (nCol == NFrame::Guild::GuildMemberList_Online && newVar.Int( 0 ) > 0)
                 {
                     //add
-                    const NFIDENTID& nPlayer = pRecord->GetObject(nRow, NFMsg::GuildMemberList_GUID);
-                    NFINT64 nGameID = pRecord->GetInt(nRow, NFMsg::GuildMemberList_GameID);
+                    const NFGUID& nPlayer = pRecord->GetObject(nRow, NFrame::Guild::GuildMemberList_GUID);
+                    NFINT64 nGameID = pRecord->GetInt(nRow, NFrame::Guild::GuildMemberList_GameID);
 
                     NFCDataList varSelf;
                     NFCDataList varGameID;
@@ -373,21 +342,6 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFIDENTID& self, co
                     recordProperty->set_row( nRow );
                     recordProperty->set_col( nCol );
                     recordProperty->set_data( newVar.Float( 0 ) );
-
-                    m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_RECORD_FLOAT, xRecordChanged);
-
-                }
-                break;
-            case TDATA_DOUBLE:
-                {
-                    NFMsg::ObjectRecordFloat xRecordChanged;
-                    *xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
-
-                    xRecordChanged.set_record_name( strRecordName );
-                    NFMsg::RecordFloat* recordProperty = xRecordChanged.add_property_list();
-                    recordProperty->set_row( nRow );
-                    recordProperty->set_col( nCol );
-                    recordProperty->set_data( newVar.Double( 0 ) );
 
                     m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_RECORD_DOUBLE, xRecordChanged);
 

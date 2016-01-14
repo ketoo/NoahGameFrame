@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_PACK_MODULE_H_
-#define _NFC_PACK_MODULE_H_
+#ifndef NFC_PACK_MODULE_H
+#define NFC_PACK_MODULE_H
 
 #include <boost/static_assert.hpp>
 #include <boost/date_time/gregorian/gregorian.hpp>
@@ -21,8 +21,8 @@
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
-#include "NFComm/NFPluginModule/NFIAwardPackModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 class NFCPackModule
     : public NFIPackModule
@@ -37,98 +37,59 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute( const float fLasFrametime, const float fStartedTime );
+    virtual bool Execute();
     virtual bool AfterInit();
 
-    //添加装备:装备config,装备过期类型,孔数量，空里宝石列表，强化等级，附魔等级，元素卡片列表
-    virtual NFIDENTID CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount,
-                           const NFIDataList& inlayCardList, const int nIntensiveLevel, const int nEnchantLevel, const std::string& enchantCardList );
+    virtual const std::string& GetPackName( const PackTableType name );
 
-    //添加装备:装备config,装备过期类型,孔数量
-    virtual NFIDENTID CreateEquip( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nSoltCount );
+	/////////////基础/////////////////////////////////////////////////////////////
 
-    //添加普通道具
-    virtual bool CreateItem( const NFIDENTID& self, const std::string& strConfigName, const EGameItemExpiredType eExpiredType, const int nCount );
+	virtual const NFGUID& CreateEquip( const NFGUID& self, const std::string& strConfigName);
+	virtual bool CreateItem( const NFGUID& self, const std::string& strConfigName, const int nCount );
 
+	virtual bool DeleteEquip( const NFGUID& self, const NFGUID& id);
+    virtual bool DeleteItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount);
+    virtual bool EnoughItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount);
 
-    //交换2个格子[换装]
-    virtual bool SwapGrid( const NFIDENTID& self, const int nOrigin, const int nTarget, const PackTableType origin_name = PackTableType::NormalPack, const PackTableType target_name = PackTableType::NormalPack );
+	/////////////英雄装备和背包互换/////////////////////////////////////////////////////////////
 
-    //删除某格子内物品
-    virtual bool DeleteGrid( const NFIDENTID& self, const int nOrigin, const PackTableType name = PackTableType::NormalPack );
+	virtual bool DressEquipForHero( const NFGUID& self, const NFGUID& hero, const NFGUID& id);
+	virtual bool TakeOffEquipForm( const NFGUID& self, const NFGUID& hero, const NFGUID& id);
 
-    //////////////////////////////////////////////////////////////////////////
-    //得到configID
-    virtual const std::string& GetGridConfigID( const NFIDENTID& self, const int nRow, const PackTableType name = PackTableType::NormalPack );
+	/////////////装备的随机属性/////////////////////////////////////////////////////////////
 
-    //设置道具数量
-    virtual bool SetGridCount( const NFIDENTID& self, const int nOrigin, const int nCount, const PackTableType name = PackTableType::NormalPack );
-    virtual int GetGridCount( const NFIDENTID& self, const int nOrigin, const PackTableType name = PackTableType::NormalPack );
+	virtual int SetEquipRandPropertyID( const NFGUID& self, const NFGUID& id, const std::string& strPropertyID); 
+	virtual const std::string& GetEquipRandPropertyID( const NFGUID& self, const NFGUID& id);
 
-    //是否绑定
-    virtual bool SetGridBan( const NFIDENTID& self, const int nOrigin, const bool bBan );
-    virtual bool GetGridBan( const NFIDENTID& self, const int nOrigin );
+	/////////////装备的打洞/////////////////////////////////////////////////////////////
 
-    //设置装备强化等级
-    virtual bool SetEquipIntensiveLevel( const NFIDENTID& self, const int nOrigin, const int nLevel );
-    virtual int GetEquipIntensiveLevel( const NFIDENTID& self, const int nOrigin );
+	virtual bool SetEquipHoleCount( const NFGUID& self, const NFGUID& id, const int nCount);
+	virtual int GetEquipHoleCount( const NFGUID& self, const NFGUID& id);
 
-    //设置装备洞数量
-    virtual bool SetEquipSlotCount( const NFIDENTID& self, const int nOrigin, const int nCount );
-    virtual int GetEquipSlotCount( const NFIDENTID& self, const int nOrigin );
+	/////////////装备镶嵌的石头/////////////////////////////////////////////////////////////
 
-    //设置装镶嵌宝石ID
-    virtual bool SetEquipInlayCard( const NFIDENTID& self, const int nOrigin, const EGameItemStoreType eSlotIndex, const std::string& strCardIndex );
-    virtual const std::string& GetEquipInlayCard( const NFIDENTID& self, const int nOrigin, const EGameItemStoreType eSlotIndex );
+	virtual bool SetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex, const std::string& strPropertyID);
+	virtual const std::string& GetEquipInlayStoneID( const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex);
 
-    //设置装备附魔等级
-    virtual bool SetEquipEnchantmentLevel( const NFIDENTID& self, const int nOrigin, const int nLevel );
-    virtual int GetEquipEnchantmentLevel( const NFIDENTID& self, const int nOrigin );
+	/////////////装备强化的等级/////////////////////////////////////////////////////////////
 
-    //设置装附魔宝石ID
-    virtual bool SetEquipEnchantmentCard( const NFIDENTID& self, const int nOrigin, const std::string& strCardIndex );
-    virtual const std::string& GetEquipEnchantmentCard( const NFIDENTID& self, const int nOrigin );
+	virtual bool SetEquipIntensifyLevel( const NFGUID& self, const NFGUID& id, const int nLevel);
+	virtual int GetEquipIntensifyLevel( const NFGUID& self, const NFGUID& id);
 
-    //设置创建时间(如果是非永久道具)
-    virtual bool SetEquipCreatTime( const NFIDENTID& self, const int nOrigin, const std::string& strTime );
-    virtual const std::string& GetEquipCreatTime( const NFIDENTID& self, const int nOrigin );
+	/////////////装备元素的等级/////////////////////////////////////////////////////////////
 
-    virtual bool SetGridData( const NFIDENTID& self, const int nRow, const int nCol, const NFIDataList& var, const PackTableType name = PackTableType::NormalPack );
+	virtual bool SetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex, const int nLevel);
+	virtual int GetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex);
 
-	virtual int GetCanUsedCount(const NFIDENTID& self, const PackTableType name = PackTableType::NormalPack) const;
-
-    //得到某样物品有多少个
-    virtual int QueryCount(const NFIDENTID& self, const std::string& strItemConfigID) const;
-
-    //消费N个某样物品
-    virtual bool DeleteItem(const NFIDENTID& self, const std::string& strItemConfigID, const int nCount);
-
-    // 掉落奖励
-    virtual void DrawDropAward(const NFIDENTID& self, int& nMoney, int& nExp, NFIDataList& xItemList, NFIDataList& xCountList);
 protected:
-    virtual int RefreshEquipProperty( const NFIDENTID& self );
-    virtual int RefreshEquipProperty( const NFIDENTID& self, const int nRow );
-    
-    virtual int AddEquipProperty( const NFIDENTID& self, const std::string& strConfigID, const int nRow );
-    virtual int RemoveEquipProperty( const NFIDENTID& self, const std::string& strConfigID, const int nRow );
 
-    virtual int CheckEquip();
-    int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
-    int OnSwapTableRowEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
-    int OnAddDropListEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
-    int OnObjectPackRecordEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar );
-    int OnObjectPackViewRecordEvent( const NFIDENTID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar);
+	int FindItemRowByConfig(const NFGUID& self, const std::string& strItemConfigID);
+    int OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    PackTableType GetPackType( const std::string& name );
-    bool pack_item_type_greater( NFIDataList* elem1, NFIDataList* elem2 );
-    bool can_normal_pack_item_swap( const NFIDENTID& self, NF_SHARE_PTR<NFIRecord> pOriginRecord, NF_SHARE_PTR<NFIRecord> pTargetRecord, const int origin, const int target ); // 判断是否可以交换普通背包物品(装备特殊判断)
-    
-    // 计算掉落包
-    bool ComputerDropPack(NF_SHARE_PTR<NFIObject> pObject, const NFIDENTID identMonster,  const std::string& strDropPackConfig);
-    
     // 添加掉落道具
-    void AddDropItem(const NFIDENTID& self, const NFIDataList& var);
-    int OnObjectBeKilled(const NFIDENTID& self, const int nEventID, const NFIDataList& var);
+    void AddDropItem(const NFGUID& self, const NFIDataList& var);
+    int OnObjectBeKilled(const NFGUID& self, const int nEventID, const NFIDataList& var);
+
 private:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
@@ -137,7 +98,6 @@ private:
     NFISceneProcessModule* m_pSceneProcessModule;
     NFIPropertyModule* m_pPropertyModule;
     NFIUUIDModule* m_pUUIDModule;
-    NFIAwardPackModule* m_pAwardPackModule;
 };
 
 

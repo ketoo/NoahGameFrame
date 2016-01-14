@@ -20,7 +20,7 @@ bool NFCItemConsumeManagerModule::Shut()
     return true;
 }
 
-bool NFCItemConsumeManagerModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCItemConsumeManagerModule::Execute()
 {
     return true;
 }

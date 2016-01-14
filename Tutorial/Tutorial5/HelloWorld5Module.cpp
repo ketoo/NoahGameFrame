@@ -1,49 +1,93 @@
-#include "HelloWorld5Module.h"
-#include "NFComm/NFCore/NFTimer.h"
 #include <thread>
-#include "NFComm/NFCore/NFIComponent.h"
+#include "HelloWorld5Module.h"
 #include "NFCTestComponent.h"
-
+#include "NFComm/NFCore/NFTimer.h"
+#include "NFComm/NFCore/NFIComponent.h"
+#include "NFComm/NFCore/NFCObject.h"
 
 
 bool HelloWorld5Module::Init()
 {
     //初始化
-    std::cout << "Hello, world5, Init" << std::endl;
+    std::cout << "Hello, world5, Init, ThreadID: " << std::this_thread::get_id() << std::endl;
 
     return true;
 }
+
+class IComponentTest : public NFIComponent
+{
+public:
+	IComponentTest(): NFIComponent(NFGUID(), "ComponentTest")
+	{
+
+	}
+
+
+	virtual void Test() = 0;
+
+protected:
+private:
+};
+
+class ComponentTest : public IComponentTest
+{
+public:
+	ComponentTest()
+	{
+
+	}
+
+	virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance()
+	{
+		return NF_SHARE_PTR<NFIComponent>(NF_NEW ComponentTest());
+	}
+
+	virtual void Test()
+	{
+		int i = 0; 
+		++i;
+	}
+
+protected:
+private:
+};
 
 bool HelloWorld5Module::AfterInit()
 {
     //初始化完毕
     std::cout << "Hello, world5, AfterInit, ThreadID: " << std::this_thread::get_id() << std::endl;
 
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
+    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////test1//////////////////////////////////////////////////
 
-	//int nActorID = m_pEventProcessModule->AddActorEventCallBack<NFCTestComponent, HelloWorld5Module>(this, &HelloWorld5Module::OnSyncEvent);
-	int nActorID = m_pEventProcessModule->AddActorEventCallBack<NFCTestComponent>(this, &HelloWorld5Module::OnSyncEvent);
+	NFIObject* pObject = new NFCObject(NFGUID(0, 1), pPluginManager);
 
-	for (int i = 0; i < 20; ++i)
+	pObject->AddComponent<ComponentTest>();
+
+	NF_SHARE_PTR<IComponentTest> pT = pObject->FindComponent<IComponentTest>("ComponentTest");
+	pT->Test();
+
+	///////////////////////////test2////////////////////////////////////////////////////////////////////////////////
+
+	NF_SHARE_PTR<NFIComponent> pNewAddCOmponent = pObject->AddComponent<NFIComponent>("NFCTestComponent");
+
+	////////////////////////////test3///////////////////////////////////////////////////////////////////////////////
+	for (int i = 0; i < 1; ++i)
 	{
-		m_pEventProcessModule->SendActorMsg(nActorID, 555, NFIDENTID(), boost::lexical_cast<std::string>(i));
+		int nActorID = pPluginManager->GetActorManager()->RequireActor<NFCTestComponent>(this, &HelloWorld5Module::OnSyncEvent);
+
+		pPluginManager->GetActorManager()->SendMsgToActor(nActorID, NFGUID(), 555, boost::lexical_cast<std::string>(i));
 	}
 
-
     std::cout << "End Test Actor, ThreadID: " << std::this_thread::get_id() << std::endl;
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-   
 
     return true;
 }
 
-int HelloWorld5Module::OnSyncEvent(const NFIDENTID& self, const int event, const std::string& arg)
+int HelloWorld5Module::OnSyncEvent(const NFGUID& self, const int nActorID, const int event, const std::string& arg)
 {
     //事件回调函数
     std::cout << "End OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg << " ThreadID: " << std::this_thread::get_id() << std::endl;
@@ -51,7 +95,7 @@ int HelloWorld5Module::OnSyncEvent(const NFIDENTID& self, const int event, const
     return 0;
 }
 
-bool HelloWorld5Module::Execute( const float fLasFrametime, const float fStartedTime )
+bool HelloWorld5Module::Execute()
 {
     //每帧执行
     //std::cout << "Hello, world5, Execute" << std::endl;

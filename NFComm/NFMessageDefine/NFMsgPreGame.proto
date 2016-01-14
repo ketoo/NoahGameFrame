@@ -2,7 +2,6 @@ package NFMsg;
 
 import "NFDefine.proto";
 import "NFMsgBase.proto";
-import "NFMsgBaseEx.proto";
 
 //这里主要是与游戏内容关系不是很大的协议，比如登录，创建角色，平台扣费等
 
@@ -26,6 +25,7 @@ message ServerInfoReport//服务器之间报告服务器状态
 	required int32   server_max_online = 5;
 	required int32   server_cur_count = 6;
 	required EServerState   server_state = 7;
+	required int32   server_type = 8;
 }
 
 message ServerInfoReportList//服务器之间报告服务器状态

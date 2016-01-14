@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_DATABASENET_CLIENT_MODULE_H_
-#define _NFI_DATABASENET_CLIENT_MODULE_H_
+#ifndef _NFI_DATABASENET_CLIENT_MODULE_H
+#define _NFI_DATABASENET_CLIENT_MODULE_H
 
 #include "NFComm/NFPluginModule/NFILogicModule.h"
 

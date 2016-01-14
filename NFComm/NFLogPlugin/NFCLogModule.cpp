@@ -87,7 +87,7 @@ bool NFCLogModule::AfterInit()
 
 }
 
-bool NFCLogModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCLogModule::Execute()
 {
     return true;
 
@@ -130,7 +130,7 @@ bool NFCLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
     return true;
 }
 
-bool NFCLogModule::LogElement(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strElement, const std::string& strDesc, const char* func, int line)
+bool NFCLogModule::LogElement(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strElement, const std::string& strDesc, const char* func, int line)
 {
     if (line > 0)
     {
@@ -144,7 +144,7 @@ bool NFCLogModule::LogElement(const NF_LOG_LEVEL nll, const NFIDENTID ident, con
     return true;
 }
 
-bool NFCLogModule::LogProperty(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strProperty, const std::string& strDesc, const char* func, int line)
+bool NFCLogModule::LogProperty(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strProperty, const std::string& strDesc, const char* func, int line)
 {
     if (line > 0)
     {
@@ -159,7 +159,7 @@ bool NFCLogModule::LogProperty(const NF_LOG_LEVEL nll, const NFIDENTID ident, co
 
 }
 
-bool NFCLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strRecord, const std::string& strDesc, const int nRow, const int nCol, const char* func, int line)
+bool NFCLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strRecord, const std::string& strDesc, const int nRow, const int nCol, const char* func, int line)
 {
     if (line > 0)
     {
@@ -174,7 +174,7 @@ bool NFCLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
 
 }
 
-bool NFCLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strRecord, const std::string& strDesc, const char* func, int line)
+bool NFCLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strRecord, const std::string& strDesc, const char* func, int line)
 {
     if (line > 0)
     {
@@ -188,7 +188,7 @@ bool NFCLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
     return true;
 }
 
-bool NFCLogModule::LogObject(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strDesc, const char* func, int line)
+bool NFCLogModule::LogObject(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strDesc, const char* func, int line)
 {
     if (line > 0)
     {
@@ -232,7 +232,7 @@ void NFCLogModule::LogStack()
     */
 }
 
-bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strInfo, const std::string& strDesc, const char* func, int line)
+bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strInfo, const std::string& strDesc, const char* func, int line)
 {
     if (line > 0)
     {
@@ -246,7 +246,7 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
     return true;
 }
 
-bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strInfo, const int nDesc, const char* func, int line)
+bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strInfo, const int nDesc, const char* func, int line)
 {
     if (line > 0)
     {
@@ -260,7 +260,7 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
     return true;
 }
 
-bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::ostringstream& stream, const char* func, int line)
+bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const std::ostringstream& stream, const char* func, int line)
 {
     switch (nll)
     {
@@ -319,7 +319,7 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
     return true;
 }
 
-bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, const std::string& strInfo, const char* func /*= ""*/, int line /*= 0*/)
+bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strInfo, const char* func /*= ""*/, int line /*= 0*/)
 {
     if (line > 0)
     {
@@ -333,7 +333,7 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFIDENTID ident, cons
     return true;
 }
 
-bool NFCLogModule::LogDebugFunctionDump(const NFIDENTID ident, const int nMsg, const std::string& strArg,  const char* func /*= ""*/, const int line /*= 0*/ )
+bool NFCLogModule::LogDebugFunctionDump(const NFGUID ident, const int nMsg, const std::string& strArg,  const char* func /*= ""*/, const int line /*= 0*/ )
 {
     //#ifdef NF_DEBUG_MODE
     LogNormal(NFILogModule::NLL_WARING_NORMAL, ident, strArg + "MsgID:", nMsg, func, line);
@@ -390,6 +390,6 @@ bool NFCLogModule::ChangeLogLevel(const std::string& strLevel)
     }
 
     el::Loggers::reconfigureAllLoggers(*pConfigurations);
-    LogNormal(NFILogModule::NLL_INFO_NORMAL, NFIDENTID(), "[Log] Change log level", strLevel, __FUNCTION__, __LINE__);
+    LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "[Log] Change log level", strLevel, __FUNCTION__, __LINE__);
     return true;
 }

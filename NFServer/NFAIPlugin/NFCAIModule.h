@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_AI_MODULE_H_
-#define _NFC_AI_MODULE_H_
+#ifndef NFC_AI_MODULE_H
+#define NFC_AI_MODULE_H
 
 #include "NFIHateModule.h"
 #include "NFIStateMachine.h"
@@ -34,44 +34,44 @@ public:
 
     virtual bool BeforeShut();
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual void OnReload(const char* pstrModuleName, NFILogicModule* pModule);
 
     virtual NFIState* GetState(const int eState) ;
 
-    virtual NFIStateMachine* GetStateMachine(const NFIDENTID& self);
+    virtual NFIStateMachine* GetStateMachine(const NFGUID& self);
 
     virtual NFIHateModule* GetHateModule();
     virtual NFIKernelModule* GetKernelModule();
     //找可视范围内的所有人
 
 
-    int CanUseAnySkill(const NFIDENTID& self, const NFIDENTID& other);
+    int CanUseAnySkill(const NFGUID& self, const NFGUID& other);
 
-    float UseAnySkill(const NFIDENTID& self, const NFIDENTID& other);
+    float UseAnySkill(const NFGUID& self, const NFGUID& other);
 protected:
 
-    virtual bool CreateAIObject(const NFIDENTID& self);
+    virtual bool CreateAIObject(const NFGUID& self);
 
-    virtual bool DelAIObject(const NFIDENTID& self);
-
-    //////////////////////////////////////////////////////////////////////////
-    virtual int OnAIObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+    virtual bool DelAIObject(const NFGUID& self);
 
     //////////////////////////////////////////////////////////////////////////
+    virtual int OnAIObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
-    virtual void OnBeKilled(const NFIDENTID& self, const NFIDENTID& other);
+    //////////////////////////////////////////////////////////////////////////
 
-    virtual void OnBeAttack(const NFIDENTID& self, const NFIDENTID& other, const int nDamageValue);
+    virtual void OnBeKilled(const NFGUID& self, const NFGUID& other);
 
-    virtual void OnSpring(const NFIDENTID& self, const NFIDENTID& other);
+    virtual void OnBeAttack(const NFGUID& self, const NFGUID& other, const int nDamageValue);
 
-    virtual void OnEndSpring(const NFIDENTID& self, const NFIDENTID& other);
+    virtual void OnSpring(const NFGUID& self, const NFGUID& other);
 
-    virtual void OnMotion(const NFIDENTID& self, int nResults);
+    virtual void OnEndSpring(const NFGUID& self, const NFGUID& other);
 
-    virtual void OnSelect(const NFIDENTID& self, const NFIDENTID& other);
+    virtual void OnMotion(const NFGUID& self, int nResults);
+
+    virtual void OnSelect(const NFGUID& self, const NFGUID& other);
 
 
 private:
@@ -79,7 +79,7 @@ private:
     typedef std::map<NFAI_STATE, NFIState*> TMAPSTATE;
     TMAPSTATE mtStateMap;
     //AI对象，状态机
-    typedef std::map<NFIDENTID, NFIStateMachine*> TOBJECTSTATEMACHINE;
+    typedef std::map<NFGUID, NFIStateMachine*> TOBJECTSTATEMACHINE;
     TOBJECTSTATEMACHINE mtObjectStateMachine;
 
     NFIHateModule* m_pHateModule;

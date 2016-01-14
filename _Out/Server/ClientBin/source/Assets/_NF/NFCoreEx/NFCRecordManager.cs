@@ -11,7 +11,7 @@ namespace NFCoreEx
 		public NFCRecordManager(NFIDENTID ident)
 		{
 			mSelf = ident;
-			mhtRecord = new Hashtable();
+            mhtRecord = new Dictionary<string, NFIRecord>();
 		}
 
 		public override void RegisterCallback(string strRecordName, NFIRecord.RecordEventHandler handler)
@@ -46,15 +46,16 @@ namespace NFCoreEx
 		public override NFIDataList GetRecordList()
 		{
 			NFIDataList varData = new NFCDataList();
-			foreach( DictionaryEntry de in mhtRecord) 
+            foreach (KeyValuePair<string, NFIRecord> de in mhtRecord) 
 			{
-				varData.AddString(de.Key.ToString());				
+				varData.AddString(de.Key);				
 			}
 			
 			return varData;
 		}
 		
 		NFIDENTID mSelf;
-		Hashtable mhtRecord;
+        //Hashtable mhtRecord;
+        Dictionary<string, NFIRecord> mhtRecord;
 	}
 }

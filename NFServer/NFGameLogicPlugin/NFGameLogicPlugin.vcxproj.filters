@@ -17,14 +17,11 @@
     <Filter Include="NFNPCRefreshModule">
       <UniqueIdentifier>{66b71f90-47f5-4f43-90e9-1f0b1af85713}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFEctypeModule">
-      <UniqueIdentifier>{f022e1db-10d7-45e2-a65f-5b24b710abc7}</UniqueIdentifier>
+    <Filter Include="NFHeroModule">
+      <UniqueIdentifier>{338af58a-ffe4-4588-ae11-6dc9949a7b53}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFCostModule">
-      <UniqueIdentifier>{a8d85b35-2159-4979-87c0-10f8e1b94235}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NFTaskModule">
-      <UniqueIdentifier>{9a5b2e11-fb8b-4048-a12a-431b88a46cda}</UniqueIdentifier>
+    <Filter Include="NFEquipModule">
+      <UniqueIdentifier>{4444cbab-0f7e-4d79-bd7c-9c5962f99abc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,17 +63,11 @@
     <ClInclude Include="NFCNPCRefreshModule.h">
       <Filter>NFNPCRefreshModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCAwardPackModule.h">
-      <Filter>NFPackModule</Filter>
+    <ClInclude Include="NFCHeroModule.h">
+      <Filter>NFHeroModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCEctypeModule.h">
-      <Filter>NFEctypeModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCCostModule.h">
-      <Filter>NFCostModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCTaskModule.h">
-      <Filter>NFTaskModule</Filter>
+    <ClInclude Include="NFCEquipModule.h">
+      <Filter>NFEquipModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -119,17 +110,11 @@
     <ClCompile Include="NFCNPCRefreshModule.cpp">
       <Filter>NFNPCRefreshModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFCAwardPackModule.cpp">
-      <Filter>NFPackModule</Filter>
+    <ClCompile Include="NFCHeroModule.cpp">
+      <Filter>NFHeroModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFCEctypeModule.cpp">
-      <Filter>NFEctypeModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCCostModule.cpp">
-      <Filter>NFCostModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCTaskModule.cpp">
-      <Filter>NFTaskModule</Filter>
+    <ClCompile Include="NFCEquipModule.cpp">
+      <Filter>NFEquipModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

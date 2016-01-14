@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_LOGIC_MODULE_H_
-#define _NFI_LOGIC_MODULE_H_
+#ifndef _NFI_LOGIC_MODULE_H
+#define _NFI_LOGIC_MODULE_H
 
 #include <string>
 #include "NFComm/Define/NFObject_def.h"
@@ -20,6 +20,26 @@
 #include "NFComm/NFCore/NFIRecord.h"
 #include "NFComm/NFEventDefine/NFEventDefine.h"
 
+template<typename DerivedType, typename BaseType> 
+class TIsDerived
+{
+public:
+	static int AnyFunction(BaseType* base)
+	{
+		return 1;
+	}
+
+	static  char AnyFunction(void* t2)
+	{
+		return 0;
+	}
+
+	enum 
+	{
+		Result = ( sizeof(int) == sizeof(AnyFunction( (DerivedType*)NULL) ) ), 
+	};
+
+};
 class NFIPluginManager;
 
 class NFILogicModule
@@ -59,7 +79,7 @@ public:
         return true;
     }
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime)
+    virtual bool Execute()
     {
         return true;
     }
@@ -73,6 +93,10 @@ public:
 		AfterInit();
     }
 
+    virtual NFIPluginManager* GetPluginManager() const
+    {
+        return pPluginManager;
+    }
 
 
     std::string strName;

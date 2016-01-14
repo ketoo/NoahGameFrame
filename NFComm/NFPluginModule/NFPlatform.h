@@ -1,5 +1,5 @@
-#ifndef _NF_PLATFORM_H_
-#define _NF_PLATFORM_H_
+#ifndef NF_PLATFORM_H
+#define NF_PLATFORM_H
 
 #define NF_PLATFORM_WIN 1
 #define NF_PLATFORM_LINUX 2
@@ -301,7 +301,7 @@ inline unsigned long NF_GetTickCount()
 
 
 //use actor mode--begin
-#define NF_ACTOR_THREAD_COUNT 16
+#define NF_ACTOR_THREAD_COUNT 1
 
 #ifndef NF_DYNAMIC_PLUGIN
 #define NF_DYNAMIC_PLUGIN
@@ -313,6 +313,12 @@ inline unsigned long NF_GetTickCount()
 
 #ifdef NF_USE_ACTOR
 
+#ifdef NF_DEBUG_MODE
+#define THERON_DEBUG 1
+#else
+#define THERON_DEBUG 0
+#endif
+
 #ifndef THERON_CPP11
 #define THERON_CPP11 1
 #endif
@@ -322,6 +328,7 @@ inline unsigned long NF_GetTickCount()
 
 
 #define NF_SHARE_PTR std::shared_ptr
+#define NF_NEW new
 
 #include <string>
 #include <boost/lexical_cast.hpp>
