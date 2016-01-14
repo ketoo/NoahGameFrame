@@ -1289,19 +1289,19 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\035\n\007equipid"
     "\030\002 \002(\0132\014.NFMsg.Ident\"]\n\016AckHoleToEquip\022\034"
     "\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\035\n\007equipid\030"
-    "\002 \002(\0132\014.NFMsg.Ident\022\016\n\006result\030\003 \002(\005\"\206\001\n\024"
-    "ReqInlaystoneToEquip\022\034\n\006selfid\030\001 \002(\0132\014.N"
-    "FMsg.Ident\022\035\n\007equipid\030\002 \002(\0132\014.NFMsg.Iden"
-    "t\022\035\n\007stoneid\030\003 \002(\0132\014.NFMsg.Ident\022\022\n\nhole"
-    "_index\030\004 \002(\005\"c\n\024AckInlaystoneToEquip\022\034\n\006"
-    "selfid\030\001 \002(\0132\014.NFMsg.Ident\022\035\n\007equipid\030\002 "
-    "\002(\0132\014.NFMsg.Ident\022\016\n\006result\030\003 \002(\005\"\204\001\n\026Re"
-    "qElementlevelToEquip\022\034\n\006selfid\030\001 \002(\0132\014.N"
-    "FMsg.Ident\022\035\n\007equipid\030\002 \002(\0132\014.NFMsg.Iden"
-    "t\022-\n\014eElementType\030\003 \002(\0162\027.NFMsg.EGameEle"
-    "mentType\"e\n\026AckElementlevelToEquip\022\034\n\006se"
-    "lfid\030\001 \002(\0132\014.NFMsg.Ident\022\035\n\007equipid\030\002 \002("
-    "\0132\014.NFMsg.Ident\022\016\n\006result\030\003 \002(\005", 5711);
+    "\002 \002(\0132\014.NFMsg.Ident\022\016\n\006result\030\003 \002(\005\"x\n\024R"
+    "eqInlaystoneToEquip\022\034\n\006selfid\030\001 \002(\0132\014.NF"
+    "Msg.Ident\022\035\n\007equipid\030\002 \002(\0132\014.NFMsg.Ident"
+    "\022\017\n\007stoneid\030\003 \002(\014\022\022\n\nhole_index\030\004 \002(\005\"c\n"
+    "\024AckInlaystoneToEquip\022\034\n\006selfid\030\001 \002(\0132\014."
+    "NFMsg.Ident\022\035\n\007equipid\030\002 \002(\0132\014.NFMsg.Ide"
+    "nt\022\016\n\006result\030\003 \002(\005\"\204\001\n\026ReqElementlevelTo"
+    "Equip\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\035\n\007e"
+    "quipid\030\002 \002(\0132\014.NFMsg.Ident\022-\n\014eElementTy"
+    "pe\030\003 \002(\0162\027.NFMsg.EGameElementType\"e\n\026Ack"
+    "ElementlevelToEquip\022\034\n\006selfid\030\001 \002(\0132\014.NF"
+    "Msg.Ident\022\035\n\007equipid\030\002 \002(\0132\014.NFMsg.Ident"
+    "\022\016\n\006result\030\003 \002(\005", 5696);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -14185,7 +14185,6 @@ ReqInlaystoneToEquip::ReqInlaystoneToEquip()
 void ReqInlaystoneToEquip::InitAsDefaultInstance() {
   selfid_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
   equipid_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
-  stoneid_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 ReqInlaystoneToEquip::ReqInlaystoneToEquip(const ReqInlaystoneToEquip& from)
@@ -14198,7 +14197,7 @@ void ReqInlaystoneToEquip::SharedCtor() {
   _cached_size_ = 0;
   selfid_ = NULL;
   equipid_ = NULL;
-  stoneid_ = NULL;
+  stoneid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   hole_index_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -14208,10 +14207,12 @@ ReqInlaystoneToEquip::~ReqInlaystoneToEquip() {
 }
 
 void ReqInlaystoneToEquip::SharedDtor() {
+  if (stoneid_ != &::google::protobuf::internal::kEmptyString) {
+    delete stoneid_;
+  }
   if (this != default_instance_) {
     delete selfid_;
     delete equipid_;
-    delete stoneid_;
   }
 }
 
@@ -14245,7 +14246,9 @@ void ReqInlaystoneToEquip::Clear() {
       if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
     }
     if (has_stoneid()) {
-      if (stoneid_ != NULL) stoneid_->::NFMsg::Ident::Clear();
+      if (stoneid_ != &::google::protobuf::internal::kEmptyString) {
+        stoneid_->clear();
+      }
     }
     hole_index_ = 0;
   }
@@ -14286,13 +14289,13 @@ bool ReqInlaystoneToEquip::MergePartialFromCodedStream(
         break;
       }
 
-      // required .NFMsg.Ident stoneid = 3;
+      // required bytes stoneid = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_stoneid:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_stoneid()));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_stoneid()));
         } else {
           goto handle_uninterpreted;
         }
@@ -14346,9 +14349,9 @@ void ReqInlaystoneToEquip::SerializeWithCachedSizes(
       2, this->equipid(), output);
   }
 
-  // required .NFMsg.Ident stoneid = 3;
+  // required bytes stoneid = 3;
   if (has_stoneid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
       3, this->stoneid(), output);
   }
 
@@ -14379,10 +14382,10 @@ void ReqInlaystoneToEquip::SerializeWithCachedSizes(
         2, this->equipid(), target);
   }
 
-  // required .NFMsg.Ident stoneid = 3;
+  // required bytes stoneid = 3;
   if (has_stoneid()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         3, this->stoneid(), target);
   }
 
@@ -14416,10 +14419,10 @@ int ReqInlaystoneToEquip::ByteSize() const {
           this->equipid());
     }
 
-    // required .NFMsg.Ident stoneid = 3;
+    // required bytes stoneid = 3;
     if (has_stoneid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->stoneid());
     }
 
@@ -14464,7 +14467,7 @@ void ReqInlaystoneToEquip::MergeFrom(const ReqInlaystoneToEquip& from) {
       mutable_equipid()->::NFMsg::Ident::MergeFrom(from.equipid());
     }
     if (from.has_stoneid()) {
-      mutable_stoneid()->::NFMsg::Ident::MergeFrom(from.stoneid());
+      set_stoneid(from.stoneid());
     }
     if (from.has_hole_index()) {
       set_hole_index(from.hole_index());
@@ -14493,9 +14496,6 @@ bool ReqInlaystoneToEquip::IsInitialized() const {
   }
   if (has_equipid()) {
     if (!this->equipid().IsInitialized()) return false;
-  }
-  if (has_stoneid()) {
-    if (!this->stoneid().IsInitialized()) return false;
   }
   return true;
 }
