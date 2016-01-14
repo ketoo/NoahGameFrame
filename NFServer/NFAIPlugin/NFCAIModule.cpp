@@ -14,8 +14,8 @@
 
 bool NFCAIModule::Init()
 {
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
 
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
@@ -68,7 +68,7 @@ NFIState* NFCAIModule::GetState(const int eState)
     return NULL;
 }
 
-bool NFCAIModule::CreateAIObject(const NFIDENTID& self)
+bool NFCAIModule::CreateAIObject(const NFGUID& self)
 {
     //这里只是为了以后方便维护状态机时间，节约CPU
     TOBJECTSTATEMACHINE::iterator it = mtObjectStateMachine.find(self);
@@ -82,7 +82,7 @@ bool NFCAIModule::CreateAIObject(const NFIDENTID& self)
     return false;
 }
 
-bool NFCAIModule::DelAIObject(const NFIDENTID& self)
+bool NFCAIModule::DelAIObject(const NFGUID& self)
 {
     TOBJECTSTATEMACHINE::iterator it = mtObjectStateMachine.find(self);
     if (it != mtObjectStateMachine.end())
@@ -95,18 +95,18 @@ bool NFCAIModule::DelAIObject(const NFIDENTID& self)
     return false;
 }
 
-bool NFCAIModule::Execute(float fFrameTime, float fAllTime)
+bool NFCAIModule::Execute()
 {
     TOBJECTSTATEMACHINE::iterator it = mtObjectStateMachine.begin();
     for (it; it != mtObjectStateMachine.end(); it++)
     {
-        it->second->UpData(fFrameTime, fAllTime);
+        it->second->Execute();
     }
 
     return true;
 }
 
-NFIStateMachine* NFCAIModule::GetStateMachine(const NFIDENTID& self)
+NFIStateMachine* NFCAIModule::GetStateMachine(const NFGUID& self)
 {
     TOBJECTSTATEMACHINE::iterator it = mtObjectStateMachine.find(self);
     if (it != mtObjectStateMachine.end())
@@ -127,7 +127,7 @@ NFIKernelModule* NFCAIModule::GetKernelModule()
     return m_pKernelModule;
 }
 
-void NFCAIModule::OnBeKilled(const NFIDENTID& self, const NFIDENTID& other)
+void NFCAIModule::OnBeKilled(const NFGUID& self, const NFGUID& other)
 {
     /*
     这里需要展示一个状态转变规则的应用
@@ -171,7 +171,7 @@ void NFCAIModule::OnBeKilled(const NFIDENTID& self, const NFIDENTID& other)
     }
 }
 
-void NFCAIModule::OnBeAttack(const NFIDENTID& self, const NFIDENTID& other, const int nDamageValue)
+void NFCAIModule::OnBeAttack(const NFGUID& self, const NFGUID& other, const int nDamageValue)
 {
     GetHateModule()->AddHate(self, other, nDamageValue);
     GetHateModule()->CompSortList(self);
@@ -186,7 +186,7 @@ void NFCAIModule::OnBeAttack(const NFIDENTID& self, const NFIDENTID& other, cons
     }
 }
 
-void NFCAIModule::OnSpring(const NFIDENTID& self, const NFIDENTID& other)
+void NFCAIModule::OnSpring(const NFGUID& self, const NFGUID& other)
 {
     //根据职业,等级,血量,防御
     //战斗状态只打仇恨列表内的人，巡逻,休闲状态才重新找对象打
@@ -213,17 +213,17 @@ void NFCAIModule::OnSpring(const NFIDENTID& self, const NFIDENTID& other)
     }
 }
 
-void NFCAIModule::OnEndSpring(const NFIDENTID& self, const NFIDENTID& other)
+void NFCAIModule::OnEndSpring(const NFGUID& self, const NFGUID& other)
 {
     GetHateModule()->SetHateValue(self, other, 0);
 }
 
-void NFCAIModule::OnMotion(const NFIDENTID& self, int nResults)
+void NFCAIModule::OnMotion(const NFGUID& self, int nResults)
 {
     //运动成功，或失败，都在这里进行一些处理，比如传送等
 }
 
-void NFCAIModule::OnSelect(const NFIDENTID& self, const NFIDENTID& other)
+void NFCAIModule::OnSelect(const NFGUID& self, const NFGUID& other)
 {
     //选择后可能是接任务啊，或者是对话，或者是搞你
 }
@@ -233,17 +233,17 @@ void NFCAIModule::OnReload(const char* pstrModuleName, NFILogicModule* pModule)
 
 }
 
-int NFCAIModule::CanUseAnySkill(const NFIDENTID& self, const NFIDENTID& other)
+int NFCAIModule::CanUseAnySkill(const NFGUID& self, const NFGUID& other)
 {
     return 0;
 }
 
-float NFCAIModule::UseAnySkill(const NFIDENTID& self, const NFIDENTID& other)
+float NFCAIModule::UseAnySkill(const NFGUID& self, const NFGUID& other)
 {
     return 0.5f;
 }
 
-int NFCAIModule::OnAIObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+int NFCAIModule::OnAIObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
 {
     if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
     {

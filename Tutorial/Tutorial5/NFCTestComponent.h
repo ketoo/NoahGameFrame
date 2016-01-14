@@ -6,19 +6,20 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_TEST_COMPONENT_H_
-#define _NFC_TEST_COMPONENT_H_
+#ifndef NFC_TEST_COMPONENT_H
+#define NFC_TEST_COMPONENT_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFIPlugin.h"
 
 class NFCTestComponent : public NFIComponent
 {
 public:
-    NFCTestComponent(NFIPluginManager* p)
+    NFCTestComponent(NFIPluginManager* p) : NFIComponent(NFGUID(), "")
     {
 		pPluginManager = p;
     }
@@ -28,7 +29,8 @@ public:
     virtual bool Init();
     virtual bool AfterInit();
 
-    virtual int OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg);
+	virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance();
+    virtual int OnASyncEvent(const NFGUID& self, const int event, std::string& arg);
 
 private:
 };

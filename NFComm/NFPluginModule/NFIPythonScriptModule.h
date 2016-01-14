@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_PYTHON_SCRIPT_MODULE_H_
-#define _NFI_PYTHON_SCRIPT_MODULE_H_
+#ifndef _NFI_PYTHON_SCRIPT_MODULE_H
+#define _NFI_PYTHON_SCRIPT_MODULE_H
 
 #include <iostream>
 #include "NFIScriptModule.h"

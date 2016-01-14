@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_UUID_MODULE_H_
-#define _NFI_UUID_MODULE_H_
+#ifndef _NFI_UUID_MODULE_H
+#define _NFI_UUID_MODULE_H
 
 #include "NFILogicModule.h"
 
@@ -15,9 +15,9 @@ class NFIUUIDModule
     : public NFILogicModule
 {
 public:
-    virtual NFIDENTID CreateGUID() = 0;
+    virtual NFGUID CreateGUID() = 0;
     virtual NFINT64 GetIdentID() = 0;
     virtual void SetIdentID(NFINT64 nID) = 0;
 };
 
-#endif // !_NFI_UUID_MODULE_H_
+#endif // !_NFI_UUID_MODULE_H

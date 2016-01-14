@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_LOGICCLASS_MODULE_H_
-#define _NFC_LOGICCLASS_MODULE_H_
+#ifndef NFC_LOGICCLASS_MODULE_H
+#define NFC_LOGICCLASS_MODULE_H
 
 #include <string>
 #include <map>
@@ -37,9 +37,9 @@ public:
         m_pParentClass = NULL;
         mstrClassName = strClassName;
 
-        m_pPropertyManager = NF_SHARE_PTR<NFIPropertyManager>(NF_NEW NFCPropertyManager(NFIDENTID()));
-        m_pRecordManager = NF_SHARE_PTR<NFIRecordManager>(NF_NEW NFCRecordManager(NFIDENTID()));
-        m_pComponentManager = NF_SHARE_PTR<NFIComponentManager>(NF_NEW NFCComponentManager(NFIDENTID()));
+        m_pPropertyManager = NF_SHARE_PTR<NFIPropertyManager>(NF_NEW NFCPropertyManager(NFGUID()));
+        m_pRecordManager = NF_SHARE_PTR<NFIRecordManager>(NF_NEW NFCRecordManager(NFGUID()));
+        m_pComponentManager = NF_SHARE_PTR<NFIComponentManager>(NF_NEW NFCComponentManager(NFGUID()));
     }
 
     virtual ~NFCLogicClass()
@@ -140,7 +140,6 @@ public:
     virtual NF_SHARE_PTR<NFIRecordManager> GetClassRecordManager(const std::string& strClassName);
     virtual NF_SHARE_PTR<NFIComponentManager> GetClassComponentManager(const std::string& strClassName);
 
-
     virtual bool AddClass(const std::string& strClassName, const std::string& strParentName);
 protected:
 
@@ -153,6 +152,13 @@ protected:
 
     //加载此节点的类
     virtual bool Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFILogicClass> pParentClass);
+
+public:
+    static bool ReadFileToString(const std::string& strFile, std::string& strOutData);
+    static bool IsEncoded(unsigned char c);
+    static std::string Encode(unsigned char const* bytes_to_encode, unsigned int in_len);
+    static std::string Decode(const std::string& encoded_string);
+    static std::string cepher;
 
 protected:
     NFIElementInfoModule* m_pElementInfoModule;

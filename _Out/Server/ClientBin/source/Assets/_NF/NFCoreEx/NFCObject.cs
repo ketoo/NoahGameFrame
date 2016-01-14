@@ -34,9 +34,25 @@ namespace NFCoreEx
 
         public override bool Shut()
         {
+            NFIDataList xRecordList = mRecordManager.GetRecordList();
+            if (null != xRecordList)
+            {
+                for(int i = 0; i < xRecordList.Count(); ++i)
+                {
+                    string strRecordName = xRecordList.StringVal(i);
+                    NFIRecord xRecord = mRecordManager.GetRecord(strRecordName);
+                    if (null !=  xRecord)
+                    {
+                        xRecord.Clear();
+                    }
+                }
+            }
+
 			mRecordManager = null;
 			mPropertyManager = null;
-			mHeartManager = null;
+            mHeartManager = null;
+            mEventManager = null;
+
             return true;
         }
 

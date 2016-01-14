@@ -19,7 +19,7 @@ bool NFCTagModule::Shut()
 
 }
 
-bool NFCTagModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCTagModule::Execute()
 {
 	return true;
 
@@ -37,34 +37,34 @@ bool NFCTagModule::BeforeShut()
 
 }
 
-bool NFCTagModule::GetTagList( const std::string& strTag, NFList<NFIDENTID>& xList)
+bool NFCTagModule::GetTagList( const std::string& strTag, NFList<NFGUID>& xList)
 {
 	return true;
 }
 
-bool NFCTagModule::GetTagList( const TAG_DEFINE eTag, const std::string& strTag, NFList<NFIDENTID>& xList)
+bool NFCTagModule::GetTagList( const TAG_DEFINE eTag, const std::string& strTag, NFList<NFGUID>& xList)
 {
 	return true;
 }
 
-bool NFCTagModule::AddToTagList( const std::string& strTag, const NFIDENTID object )
+bool NFCTagModule::AddToTagList( const std::string& strTag, const NFGUID object )
 {
 	return false;
 
 }
 
-bool NFCTagModule::AddToTagList( const TAG_DEFINE eTag, const std::string& strTag, const NFIDENTID object )
+bool NFCTagModule::AddToTagList( const TAG_DEFINE eTag, const std::string& strTag, const NFGUID object )
 {
 	return false;
 
 }
 
-bool NFCTagModule::RemoveFrmTagList( const std::string& strTag, const NFIDENTID object )
+bool NFCTagModule::RemoveFrmTagList( const std::string& strTag, const NFGUID object )
 {
 	return false;
 }
 
-bool NFCTagModule::RemoveFrmTagList( const TAG_DEFINE eTag, const std::string& strTag, const NFIDENTID object )
+bool NFCTagModule::RemoveFrmTagList( const TAG_DEFINE eTag, const std::string& strTag, const NFGUID object )
 {
 	return false;
 

@@ -29,7 +29,7 @@ const int NFEventProcessPlugin::GetPluginVersion()
 
 const std::string NFEventProcessPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFEventProcessPlugin)
+    return GET_CLASS_NAME(NFEventProcessPlugin)
 }
 
 void NFEventProcessPlugin::Install()

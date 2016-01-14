@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_EVENTDEFINE_H_
-#define _NF_EVENTDEFINE_H_
+#ifndef NF_EVENTDEFINE_H
+#define NF_EVENTDEFINE_H
 
 #include <iostream>
 ///
@@ -48,13 +48,11 @@ enum NFEventDefine
     NFED_ON_CLIENT_REQUIRE_USE_SKILL_POS,
     NFED_ON_CLIENT_USE_SKILL_POS_RESULT,
 
-    //arg[0]:itemID,TargetObjectList
+    //arg[0]:itemID,TargetObject
     NFED_ON_CLIENT_REQUIRE_USE_ITEM,
-    NFED_ON_CLIENT_USE_ITEM_RESULT,
 
     //arg[0]:itemID, fx, fy, fz, TargetObjectList
     NFED_ON_CLIENT_REQUIRE_USE_ITEM_POS,
-    NFED_ON_CLIENT_USE_ITEM_POS_RESULT,
 
     //arg[0]:object,type,sceneID,line
     NFED_ON_CLIENT_ENTER_SCENE,

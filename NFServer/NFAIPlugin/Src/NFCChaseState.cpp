@@ -1,6 +1,6 @@
 #include "../NFCAIModule.h"
 
-bool NFCChaseState::Enter(const NFIDENTID& self)
+bool NFCChaseState::Enter(const NFGUID& self)
 {
     if (!NFIState::Enter(self))
     {
@@ -10,7 +10,7 @@ bool NFCChaseState::Enter(const NFIDENTID& self)
     return true;
 }
 
-bool NFCChaseState::Execute(const NFIDENTID& self)
+bool NFCChaseState::Execute(const NFGUID& self)
 {
     if (!NFIState::Execute(self))
     {
@@ -19,7 +19,7 @@ bool NFCChaseState::Execute(const NFIDENTID& self)
         {
             //查找是否有可以攻击的对象
 			NFAI_MOVE_TYPE eMoveType = (NFAI_MOVE_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
-            NFIDENTID ident = m_pHateModule->QueryMaxHateObject(self);
+            NFGUID ident = m_pHateModule->QueryMaxHateObject(self);
             if (!ident.IsNull())
             {
                 // 增加技能是否可以用判断
@@ -55,12 +55,12 @@ bool NFCChaseState::Execute(const NFIDENTID& self)
     return true;
 }
 
-bool NFCChaseState::Exit(const NFIDENTID& self)
+bool NFCChaseState::Exit(const NFGUID& self)
 {
     return true;
 }
 
-bool NFCChaseState::DoRule(const NFIDENTID& self)
+bool NFCChaseState::DoRule(const NFGUID& self)
 {
     return true;
 }

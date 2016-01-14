@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_LEVEL_MODULE_H_
-#define _NFC_LEVEL_MODULE_H_
+#ifndef NFC_LEVEL_MODULE_H
+#define NFC_LEVEL_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
@@ -16,6 +16,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 class NFCLevelModule
     : public NFILevelModule
@@ -29,30 +30,28 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute( const float fLasFrametime, const float fStartedTime );
+    virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual int AddExp( const NFIDENTID& self, const int nExp);
+    virtual int AddExp( const NFGUID& self, const int nExp);
 
-    virtual int OnKillObject( const NFIDENTID& self, const NFIDENTID& other );
+    virtual int OnKillObject( const NFGUID& self, const NFGUID& other );
 
-    virtual int OnDead( const NFIDENTID& self, const NFIDENTID& other );
+    virtual int OnDead( const NFGUID& self, const NFGUID& other );
 
 protected:
 
-    int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+    int OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    int OnObjectExpEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
+    int OnObjectExpEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
 
-    int OnObjectBeKilled( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
+    int OnObjectBeKilled( const NFGUID& object, const int nEventID, const NFIDataList& var );
 
 private:
     NFIPropertyConfigModule* m_pPropertyConfigModule;
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-
 };
-
 
 #endif
