@@ -21,6 +21,7 @@
 #include "NFCNPCRefreshModule.h"
 #include "NFCRebornItemConsumeProcessModule.h"
 #include "NFCHeroModule.h"
+#include "NFCEquipModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -70,12 +71,14 @@ void NFGameLogicPlugin::Install()
     //Continue to add other skill types of consumption
 
 	REGISTER_MODULE(pPluginManager, NFCHeroModule)
-	REGISTER_MODULE(pPluginManager, NFCNPCRefreshModule)
+    REGISTER_MODULE(pPluginManager, NFCNPCRefreshModule)
+    REGISTER_MODULE(pPluginManager, NFCEquipModule)
 }
 
 void NFGameLogicPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFCNPCRefreshModule)
+    UNREGISTER_MODULE(pPluginManager, NFCEquipModule)
+    UNREGISTER_MODULE(pPluginManager, NFCNPCRefreshModule)
 	UNREGISTER_MODULE(pPluginManager, NFCHeroModule)
 
     UNREGISTER_MODULE(pPluginManager, NFCBulletSkillConsumeProcessModule)
