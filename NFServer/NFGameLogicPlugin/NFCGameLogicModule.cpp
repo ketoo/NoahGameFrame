@@ -25,7 +25,7 @@ bool NFCGameLogicModule::Shut()
     return true;
 }
 
-bool NFCGameLogicModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCGameLogicModule::Execute()
 {
 
     return true;
@@ -33,14 +33,12 @@ bool NFCGameLogicModule::Execute( const float fLasFrametime, const float fStarte
 
 bool NFCGameLogicModule::AfterInit()
 {
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>( pPluginManager->FindModule( "NFCEventProcessModule" ) );
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
-    //m_pNoSqlModule = dynamic_cast<NFIDataNoSqlModule*>(pPluginManager->FindModule("NFCDataNoSqlModule"));
-    m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>( pPluginManager->FindModule( "NFCLogicClassModule" ) );
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
 
     assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
-    //assert(NULL != m_pNoSqlModule);
     assert( NULL != m_pLogicClassModule );
 
     return true;

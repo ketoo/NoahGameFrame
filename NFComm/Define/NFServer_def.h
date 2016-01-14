@@ -5,8 +5,8 @@
 //    π¶ƒ‹√Ë ˆ    :    
 //
 // -------------------------------------------------------------------------
-#ifndef _NFC_SERVERDEF_H_
-#define _NFC_SERVERDEF_H_
+#ifndef NFC_SERVERDEF_H
+#define NFC_SERVERDEF_H
 
 #pragma pack(push,1)
 

@@ -19,7 +19,7 @@ bool NFCPVPModule::Shut()
     return true;
 }
 
-bool NFCPVPModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCPVPModule::Execute()
 {
     //位置呢
     return true;
@@ -27,9 +27,9 @@ bool NFCPVPModule::Execute( const float fLasFrametime, const float fStartedTime 
 
 bool NFCPVPModule::AfterInit()
 {
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>( pPluginManager->FindModule( "NFCEventProcessModule" ) );
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
-    m_pLogModule = dynamic_cast<NFILogModule*>( pPluginManager->FindModule( "NFCLogModule" ) );
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
 
     assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
@@ -39,7 +39,7 @@ bool NFCPVPModule::AfterInit()
     return true;
 }
 
-bool NFCPVPModule::MatchPVPObject( const NFIDENTID& self )
+bool NFCPVPModule::MatchPVPObject( const NFGUID& self )
 {
 	//应记录玩家处于PVP筹备状态
 	const NFLogicStateType eLogicState = (NFLogicStateType)m_pKernelModule->GetPropertyInt(self, "LogicState");
@@ -48,10 +48,12 @@ bool NFCPVPModule::MatchPVPObject( const NFIDENTID& self )
 		return false;
 	}
 
+	//随机选择战斗对象，并把对象数据下发
+
 	return true;
 }
 
-bool NFCPVPModule::StartPVPWar( const NFIDENTID& self )
+bool NFCPVPModule::StartPVPWar( const NFGUID& self )
 {
 	//应记录玩家处于PVP状态，或者说模块独占状态
 	const NFLogicStateType eLogicState = (NFLogicStateType)m_pKernelModule->GetPropertyInt(self, "LogicState");
@@ -78,7 +80,7 @@ bool NFCPVPModule::StartPVPWar( const NFIDENTID& self )
 	return true;
 }
 
-bool NFCPVPModule::ExitPVPWar( const NFIDENTID& self )
+bool NFCPVPModule::ExitPVPWar( const NFGUID& self )
 {
 	//还原玩家为自由状态
 	const NFLogicStateType eLogicState = (NFLogicStateType)m_pKernelModule->GetPropertyInt(self, "LogicState");

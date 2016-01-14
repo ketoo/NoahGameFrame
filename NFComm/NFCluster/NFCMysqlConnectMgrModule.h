@@ -7,11 +7,10 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_MYSQL_CONNECT_MANAGER_MODULE_H_
-#define _NFC_MYSQL_CONNECT_MANAGER_MODULE_H_
+#ifndef NFC_MYSQL_CONNECT_MANAGER_MODULE_H
+#define NFC_MYSQL_CONNECT_MANAGER_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIMysqlConnectMgrModule.h"
-#include "NFComm/NFPluginModule/NFIMysqlDriver.h"
 
 class NFCMysqlConnectMgrModule : public NFIMysqlConnectMgrModule
 {
@@ -25,7 +24,7 @@ public:
     virtual bool BeforeShut();
     virtual bool AfterInit();
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
 
     virtual bool AddMysqlServer( const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime = 10, const int nRconneCount = -1);
@@ -33,12 +32,12 @@ public:
 	virtual NFIMysqlDriver* GetMysqlDriver();
 
 protected:
-	void CheckMysql(float fLastFrameTime, const float fStartedTime);
+	void CheckMysql();
     std::string GetIPByHostName(const std::string& strHostName);
 
 	NFMap<int, NFIMysqlDriver> mvMysql;
 	NFMap<int, NFIMysqlDriver> mvInvalidMsyql;
-	float mfLastCheckTime;
+	NFINT64 mnLastCheckTime;
 };
 
-#endif // !_NFC_MYSQL_CONNECT_MANAGER_MODULE_H_
+#endif // !_NFC_MYSQL_CONNECT_MANAGER_MODULE_H

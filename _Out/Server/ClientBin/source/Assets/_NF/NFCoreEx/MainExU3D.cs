@@ -107,7 +107,7 @@ namespace NFCoreEx
 			Debug.Log("***************NFProperty*******************");
 
             NFIDENTID ident = new NFIDENTID(0, 1);
-            NFIObject gameObject = xKernel.CreateObject(ident, 0, 0, "", "", new NFCDataList());
+            NFIObject gameObject = xKernel.CreateObject(ident, 0, 0, "Player", "", new NFCDataList());
 
 			NFIDataList valueProperty = new NFCDataList();
 			valueProperty.AddInt(112221);

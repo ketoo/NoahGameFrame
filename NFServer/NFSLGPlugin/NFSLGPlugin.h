@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef __NFC_SLG_PLUGIN_H__
-#define __NFC_SLG_PLUGIN_H__
+#ifndef NFC_SLG_PLUGIN_H
+#define NFC_SLG_PLUGIN_H
 
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -28,4 +28,4 @@ public:
     virtual void Uninstall();
 };
 
-#endif // !__NFC_SLG_PLUGIN_H__
+#endif // !__NFC_SLG_PLUGIN_H_

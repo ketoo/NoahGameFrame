@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_HELLO_WORLD1_H_
-#define _NFC_HELLO_WORLD1_H_
+#ifndef NFC_HELLO_WORLD1_H
+#define NFC_HELLO_WORLD1_H
 
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -24,7 +24,7 @@ public:
     virtual bool Init();
     virtual bool AfterInit();
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool BeforeShut();
     virtual bool Shut();

@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_PROXYNET_SERVERMODULE_H_
-#define _NFI_PROXYNET_SERVERMODULE_H_
+#ifndef _NFI_PROXYNET_SERVERMODULE_H
+#define _NFI_PROXYNET_SERVERMODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
@@ -18,8 +18,8 @@ class NFIProxyServerNet_ServerModule
 {
 
 public:
-	virtual int Transpond(const NFIPacket& msg) = 0;
-	virtual int EnterGameSuccessEvent(const NFIDENTID xClientID, const NFIDENTID xPlayerID) = 0;
+	virtual int Transpond(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
+	virtual int EnterGameSuccessEvent(const NFGUID xClientID, const NFGUID xPlayerID) = 0;
 };
 
 #endif

@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_QUEUE_H_
-#define _NF_QUEUE_H_
+#ifndef NF_QUEUE_H
+#define NF_QUEUE_H
 
 #include <list>
 #include <thread>
@@ -15,7 +15,6 @@
 #include <atomic>
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
-class spinlock_mutex;
 class NFLock
 {
 public:
@@ -27,44 +26,21 @@ public:
     ~NFLock()
     {
     }
-protected:
-    std::atomic_flag flag;
+	void lock()
+	{
+		while (flag.test_and_set(std::memory_order_acquire));
+	}
 
-    friend spinlock_mutex;
+	void unlock()
+	{
+		flag.clear(std::memory_order_release);
+	}
+
+protected:
+    mutable std::atomic_flag flag;
 
 private:
     NFLock& operator=(const NFLock& src);
-};
-
-class spinlock_mutex
-{
-public:
-    explicit spinlock_mutex(NFLock& xGuard):mGuard(xGuard)
-    {
-        lock();
-    }
-
-    ~spinlock_mutex()
-    {
-        unlock();
-    }
-
-protected:
-    void lock()
-    {
-        while (mGuard.flag.test_and_set(std::memory_order_acquire));
-    }
-
-    void unlock()
-    {
-        mGuard.flag.clear(std::memory_order_release);
-    }
-
-private:
-    spinlock_mutex& operator=(const spinlock_mutex& src);
-
-private:
-    NFLock& mGuard;
 };
 
 template<typename T>
@@ -81,23 +57,31 @@ public:
 
     bool Push(const T& object)
     {
-        spinlock_mutex(*this);
+        lock();
+
         mList.push_back(object);
+
+		unlock();
 
         return true;
     }
 
     bool Pop(T& object)
     {
-        spinlock_mutex(*this);
+        lock();
+
         if (mList.empty())
         {
+			unlock();
+
             return false;
         }
 
         object = mList.front();
         mList.pop_front();
         
+		unlock();
+
         return true;
     }
 

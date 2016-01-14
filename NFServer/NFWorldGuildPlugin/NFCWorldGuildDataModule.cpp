@@ -12,7 +12,7 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
-#include "NFComm/NFMessageDefine/NFRecordDefine.pb.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCWorldGuildDataModule::Init()
 {
@@ -24,35 +24,35 @@ bool NFCWorldGuildDataModule::Shut()
     return true;
 }
 
-bool NFCWorldGuildDataModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCWorldGuildDataModule::Execute()
 {
     return true;
 }
 
 bool NFCWorldGuildDataModule::AfterInit()
 {
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
-    m_pUUIDModule = dynamic_cast<NFIUUIDModule*>(pPluginManager->FindModule("NFCUUIDModule"));
-    m_pClusterSQLModule = dynamic_cast<NFIClusterModule*>(pPluginManager->FindModule("NFCMysqlClusterModule"));
-    m_pObjectSaveModule = dynamic_cast<NFIObjectSaveModule*>(pPluginManager->FindModule("NFCObjectSaveModule"));
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
+    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
+    m_pClusterSQLModule = pPluginManager->FindModule<NFIClusterModule>("NFCMysqlClusterModule");
+    m_pDataProcessModule = pPluginManager->FindModule<NFIDataProcessModule>("NFCDataProcessModule");
 
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pUUIDModule);
     assert(NULL != m_pClusterSQLModule);
-    assert(NULL != m_pObjectSaveModule);
+    assert(NULL != m_pDataProcessModule);
 
-    m_pObjectSaveModule->RegisterAutoSave("Guild");
+    m_pDataProcessModule->RegisterAutoSave("Guild");
     m_pKernelModule->AddClassCallBack("Guild", this, &NFCWorldGuildDataModule::OnGuildClassEvent);
 
-    m_pKernelModule->CreateContainer(mContainerID, "");
+    m_pKernelModule->CreateScene(mContainerID, "");
 
     m_pUUIDModule->SetIdentID(pPluginManager->AppID());
     return true;
 }
 
-bool NFCWorldGuildDataModule::ExitGuild( const NFIDENTID& self, const std::string& strName, bool& bExit)
+bool NFCWorldGuildDataModule::ExitGuild( const NFGUID& self, const std::string& strName, bool& bExit)
 {
     if (!m_pClusterSQLModule->Exists(mstrGuildNameTalble, strName, bExit))
     {
@@ -62,19 +62,19 @@ bool NFCWorldGuildDataModule::ExitGuild( const NFIDENTID& self, const std::strin
     return true;
 }
 
-void NFCWorldGuildDataModule::CheckLoadGuild( const NFIDENTID& self, const NFIDENTID& xGuild )
+void NFCWorldGuildDataModule::CheckLoadGuild( const NFGUID& self, const NFGUID& xGuild )
 {
     NF_SHARE_PTR<NFIObject> pObejct = m_pKernelModule->GetObject(xGuild);
     if (!pObejct.get())
     {
-        if (m_pObjectSaveModule->LoadDataFormNoSql(xGuild, "Guild"))
+        if (m_pDataProcessModule->LoadDataFormSql(xGuild, "Guild"))
         {
             m_pKernelModule->CreateObject(xGuild, 1, 0, "Guild", "", NFCDataList());
         }
     }
 }
 
-int NFCWorldGuildDataModule::OnGuildClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCWorldGuildDataModule::OnGuildClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
     if ( strClassName == "Guild" )
     {
@@ -88,20 +88,20 @@ int NFCWorldGuildDataModule::OnGuildClassEvent( const NFIDENTID& self, const std
 }
 
 
-const NFIDENTID NFCWorldGuildDataModule::CreateGuild(const NFIDENTID& xPlayeID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP, const int nOffLine /*= 1*/, const int nPower/* = NFMsg::GUILD_POWER_TYPE_PRESIDENT*/)
+const NFGUID& NFCWorldGuildDataModule::CreateGuild(const NFGUID& xPlayeID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP, const int nOffLine /*= 1*/, const int nPower/* = NFMsg::GUILD_POWER_TYPE_PRESIDENT*/)
 {
     bool bExit = false;
     if (!m_pClusterSQLModule->Exists(mstrGuildNameTalble, strName, bExit))
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
     if (bExit)
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
-    const NFIDENTID xGuidID = m_pUUIDModule->CreateGUID();
+    const NFGUID xGuidID = m_pUUIDModule->CreateGUID();
 
     //Guild
     std::vector<std::string> vGuildFieldVec;
@@ -124,7 +124,7 @@ const NFIDENTID NFCWorldGuildDataModule::CreateGuild(const NFIDENTID& xPlayeID, 
 
     if (!m_pClusterSQLModule->Updata(mstrGuildTalble, xGuidID.ToString(), vGuildFieldVec, vGuildValueVec))
     {
-        return NFIDENTID();
+        return NULL_OBJECT;
     }
 
     //Name
@@ -139,7 +139,7 @@ const NFIDENTID NFCWorldGuildDataModule::CreateGuild(const NFIDENTID& xPlayeID, 
     return xGuidID;
 }
 
-const bool NFCWorldGuildDataModule::DeleteGuild(const NFIDENTID& xGuild )
+const bool NFCWorldGuildDataModule::DeleteGuild(const NFGUID& xGuild )
 {
     NF_SHARE_PTR<NFIObject> pGuilD = m_pKernelModule->GetObject(xGuild);
     if (pGuilD.get())
@@ -180,14 +180,14 @@ const bool NFCWorldGuildDataModule::DeleteGuild(const NFIDENTID& xGuild )
     return true;
 }
 
-NF_SHARE_PTR<NFIObject> NFCWorldGuildDataModule::GetGuild( const NFIDENTID& xGuild )
+NF_SHARE_PTR<NFIObject> NFCWorldGuildDataModule::GetGuild( const NFGUID& xGuild )
 {
-    CheckLoadGuild(NFIDENTID(), xGuild);
+    CheckLoadGuild(NFGUID(), xGuild);
 
     return m_pKernelModule->GetObject(xGuild);
 }
 
-bool NFCWorldGuildDataModule::GetPlayerGuild( const NFIDENTID& self, NFIDENTID& xGuild )
+bool NFCWorldGuildDataModule::GetPlayerGuild( const NFGUID& self, NFGUID& xGuild )
 {
     std::vector<std::string> vFieldVec;
     std::vector<std::string> vValueVec;
@@ -202,7 +202,7 @@ bool NFCWorldGuildDataModule::GetPlayerGuild( const NFIDENTID& self, NFIDENTID& 
     return xGuild.FromString(strGuildID);
 }
 
-bool NFCWorldGuildDataModule::SearchGuild( const NFIDENTID& self, const std::string& strName, std::vector<SearchGuildObject>& xList )
+bool NFCWorldGuildDataModule::SearchGuild( const NFGUID& self, const std::string& strName, std::vector<SearchGuildObject>& xList )
 {   
     std::vector<std::string> vValueName;
     if (!m_pClusterSQLModule->Keys(mstrGuildNameTalble, strName, vValueName))
@@ -224,7 +224,7 @@ bool NFCWorldGuildDataModule::SearchGuild( const NFIDENTID& self, const std::str
             continue;
         }
 
-        NFIDENTID xGuild ;
+        NFGUID xGuild ;
         xGuild.FromString(vValueVec[0]);
 
         SearchGuildObject xGuildInfo;
@@ -237,7 +237,7 @@ bool NFCWorldGuildDataModule::SearchGuild( const NFIDENTID& self, const std::str
     return true;
 }
 
-bool NFCWorldGuildDataModule::GetGuildInfo( const NFIDENTID& self, const NFIDENTID& xGuild, SearchGuildObject& xGuildInfo )
+bool NFCWorldGuildDataModule::GetGuildInfo( const NFGUID& self, const NFGUID& xGuild, SearchGuildObject& xGuildInfo )
 {
     std::vector<std::string> vFieldVec;
     std::vector<std::string> vValueVec;
@@ -279,7 +279,7 @@ bool NFCWorldGuildDataModule::GetGuildInfo( const NFIDENTID& self, const NFIDENT
     return true;
 }
 
-bool NFCWorldGuildDataModule::GetPlayerInfo( const NFIDENTID& self, std::string& strRoleName, int& nLevel, int& nJob , int& nDonation , int& nVIP )
+bool NFCWorldGuildDataModule::GetPlayerInfo( const NFGUID& self, std::string& strRoleName, int& nLevel, int& nJob , int& nDonation , int& nVIP )
 {
     nDonation = 0;//这什么字段，还没加？
     nVIP = 1;
@@ -313,7 +313,7 @@ bool NFCWorldGuildDataModule::GetPlayerInfo( const NFIDENTID& self, std::string&
     return true;
 }
 
-bool NFCWorldGuildDataModule::GetPlayerGameID( const NFIDENTID& self, int& nGameID )
+bool NFCWorldGuildDataModule::GetPlayerGameID( const NFGUID& self, int& nGameID )
 {
     std::vector<std::string> xVecFeild;
     std::vector<std::string> xVecValue;
@@ -333,9 +333,9 @@ bool NFCWorldGuildDataModule::GetPlayerGameID( const NFIDENTID& self, int& nGame
     return true;
 }
 
-int NFCWorldGuildDataModule::OnSaveGuildheartEvent( const NFIDENTID& self , const std::string& strHeartName, const float fTime, const int nCount )
+int NFCWorldGuildDataModule::OnSaveGuildheartEvent( const NFGUID& self , const std::string& strHeartName, const float fTime, const int nCount )
 {
-    m_pObjectSaveModule->SaveDataToNoSql(self);
+    m_pDataProcessModule->SaveDataToSql(self);
 
     return 0;
 }

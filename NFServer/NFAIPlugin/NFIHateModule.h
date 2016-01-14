@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_HATE_MODULE_H_
-#define _NFI_HATE_MODULE_H_
+#ifndef _NFI_HATE_MODULE_H
+#define _NFI_HATE_MODULE_H
 
 #include "NFComm/NFCore/NFIDataList.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
@@ -16,23 +16,23 @@ class NFIHateModule
     : public NFILogicModule
 {
 public:
-    virtual bool ClearHate(const NFIDENTID& self) = 0;
+    virtual bool ClearHate(const NFGUID& self) = 0;
 
-    virtual bool Empty(const NFIDENTID& self) = 0;
+    virtual bool Empty(const NFGUID& self) = 0;
 
-    virtual bool AddHate(const NFIDENTID& self, const NFIDENTID& other, const int nValue) = 0;
+    virtual bool AddHate(const NFGUID& self, const NFGUID& other, const int nValue) = 0;
 
-    virtual bool SetHateValue(const NFIDENTID& self, const NFIDENTID& other, const int nValue) = 0;
+    virtual bool SetHateValue(const NFGUID& self, const NFGUID& other, const int nValue) = 0;
 
-    virtual bool CopyHateList(const NFIDENTID& self, const NFIDENTID& other) = 0;
+    virtual bool CopyHateList(const NFGUID& self, const NFGUID& other) = 0;
 
-    virtual void CompSortList(const NFIDENTID& self) = 0;
+    virtual void CompSortList(const NFGUID& self) = 0;
 
-    virtual NFIDENTID QueryMaxHateObject(const NFIDENTID& self) = 0;
+    virtual const NFGUID& QueryMaxHateObject(const NFGUID& self) = 0;
 
-    virtual bool QueryMaxHateObject(const NFIDENTID& self, std::list<std::string>& HateList, const int nCount = 1) = 0;
+    virtual bool QueryMaxHateObject(const NFGUID& self, std::list<std::string>& HateList, const int nCount = 1) = 0;
 
-    virtual int QueryHateValue(const NFIDENTID& self, const NFIDENTID& other) = 0;
+    virtual int QueryHateValue(const NFGUID& self, const NFGUID& other) = 0;
 
 protected:
 
