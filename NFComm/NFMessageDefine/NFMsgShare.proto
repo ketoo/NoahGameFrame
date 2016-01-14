@@ -406,7 +406,7 @@ message ReqInlaystoneToEquip
 {	
 	required Ident		selfid				= 1;//角色ID
 	required Ident		equipid			= 2;//装备ID
-	required Ident		stoneid			= 3;//石头ID
+	required bytes		stoneid			= 3;//石头ID
 	required int32		hole_index				= 4;//空位
 }
 
