@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_LOGINLOGIC_MODULE_H_
-#define _NFC_LOGINLOGIC_MODULE_H_
+#ifndef NFC_LOGINLOGIC_MODULE_H
+#define NFC_LOGINLOGIC_MODULE_H
 
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -26,7 +26,7 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool AfterInit();
 
@@ -34,9 +34,9 @@ public:
 protected:
 
     // client event
-    int OnLoginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnLoginEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
-    int OnDisconnectEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnDisconnectEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
 protected:
 

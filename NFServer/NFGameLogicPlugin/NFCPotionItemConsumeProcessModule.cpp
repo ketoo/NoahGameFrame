@@ -10,13 +10,13 @@
 
 bool NFCPotionItemConsumeProcessModule::Init()
 {
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
-    m_pItemConsumeManagerModule = dynamic_cast<NFIItemConsumeManagerModule*>( pPluginManager->FindModule( "NFCItemConsumeManagerModule" ) );
-    m_pPackModule = dynamic_cast<NFIPackModule*>( pPluginManager->FindModule( "NFCPackModule" ) );
-    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>( pPluginManager->FindModule( "NFCElementInfoModule" ) );
-    m_pLevelModule = dynamic_cast<NFILevelModule*>( pPluginManager->FindModule( "NFCLevelModule" ) );
-    m_pPropertyModule = dynamic_cast<NFIPropertyModule*>( pPluginManager->FindModule( "NFCPropertyModule" ) );
-    m_pLogModule = dynamic_cast<NFILogModule*>( pPluginManager->FindModule( "NFCLogModule" ) );
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
+    m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>("NFCItemConsumeManagerModule");
+    m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
+    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
+    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>("NFCLevelModule");
+    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
 
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pItemConsumeManagerModule );
@@ -32,9 +32,9 @@ bool NFCPotionItemConsumeProcessModule::Init()
 bool NFCPotionItemConsumeProcessModule::AfterInit()
 {
     //药剂，红药，蓝药，攻击药水(加攻击BUFF)，防御药水(加防御BUFF)
-    m_pItemConsumeManagerModule->ResgisterConsumeModule( EGameItemSubType::EGIT_ITEM_RECOVER_POTION, this );
-    //包括了经验药水
-    m_pItemConsumeManagerModule->ResgisterConsumeModule( EGameItemSubType::EGIT_ITEM_EXP, this );
+//     m_pItemConsumeManagerModule->ResgisterConsumeModule( EGameItemSubType::EGIT_ITEM_RECOVER_POTION, this );
+//     //包括了经验药水
+//     m_pItemConsumeManagerModule->ResgisterConsumeModule( EGameItemSubType::EGIT_ITEM_EXP, this );
 
     return true;
 }
@@ -44,109 +44,20 @@ bool NFCPotionItemConsumeProcessModule::Shut()
     return true;
 }
 
-bool NFCPotionItemConsumeProcessModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCPotionItemConsumeProcessModule::Execute()
 {
     return true;
 }
 
 
-int NFCPotionItemConsumeProcessModule::ConsumeLegal( const NFIDENTID& self, int nItemRowID, const NFIDataList& other )
+int NFCPotionItemConsumeProcessModule::ConsumeLegal( const NFGUID& self, const std::string& strItemName, const NFGUID& targetID )
 {
     return 1;
 }
 
-int NFCPotionItemConsumeProcessModule::ConsumeSelf( const NFIDENTID& self, int nItemRowID )
+int NFCPotionItemConsumeProcessModule::ConsumeProcess( const NFGUID& self, const std::string& strItemName, const NFGUID& targetID )
 {
-    //得到数量-1
-    int nCount = m_pPackModule->GetGridCount( self, nItemRowID );
-    nCount--;
-
-    if ( nCount >= 0 )
-    {
-        //消费成功
-        if ( 0 == nCount )
-        {
-            m_pPackModule->DeleteGrid( self, nItemRowID );
-
-        }
-        else
-        {
-            m_pPackModule->SetGridCount( self, nItemRowID, nCount );
-        }
-
-        return 1;
-    }
-
-    //失败
-
-    return 0;
-}
-
-int NFCPotionItemConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, const std::string& strItemName, const NFIDataList& other )
-{
-    //附加效果
-
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager( strItemName );
-    if ( pPropertyManager )
-    {
-        NF_SHARE_PTR<NFIProperty> pItemEffectProperty = pPropertyManager->GetElement( "EffectProperty" );
-        NF_SHARE_PTR<NFIProperty> pItemEffectValue = pPropertyManager->GetElement( "EffectValue" );
-        if ( pItemEffectProperty && pItemEffectValue )
-        {
-            NFCDataList valueEffectProperty( pItemEffectProperty->GetString().c_str(), "," );
-            NFCDataList valueEffectValue( pItemEffectValue->GetString().c_str(), "," );
-            if ( valueEffectProperty.GetCount() == valueEffectValue.GetCount() )
-            {
-                for ( int i = 0; i < valueEffectProperty.GetCount(); i++ )
-                {
-                    //先测定目标是否有此属性(其实是担心配错了)
-                    for ( int j = 0; j < other.GetCount(); j++ )
-                    {
-                        NFIDENTID identOther = other.Object( j );
-                        if ( !identOther.IsNull() )
-                        {
-                            NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( identOther );
-                            if ( pObject )
-                            {
-                                std::string strCurProperty = valueEffectProperty.String( i );
-                                std::string strMaxProperty = "MAX" + strCurProperty;
-                                NF_SHARE_PTR<NFIProperty> pOtherCurProperty = pObject->GetPropertyManager()->GetElement( strCurProperty );
-                                NF_SHARE_PTR<NFIProperty> pOtherMaxProperty = pObject->GetPropertyManager()->GetElement( strMaxProperty );
-                                if ( pOtherCurProperty && pOtherMaxProperty )
-                                {
-                                    //药物，只能是绝对值，百分比不要了，百分比让BUFF去做
-                                    //而且，只有最大值的那种，才能使用，因此，这里只能有 HP MP CSP 3样属性
-                                    //重要的是，不能超过最大值，这几个属性那个都是整型数据
-                                    //类似最大HP之类的，不能通过药剂直接修改属性，而是通过BUFF来修改，只要是分层属性都通过BUFF修改
-                                    int nAddValue = boost::lexical_cast<int>( valueEffectValue.String( i ) );
-
-                                    if ( "EXP" == strCurProperty )
-                                    {
-                                        m_pLevelModule->AddExp( self, nAddValue );
-                                    }
-                                    else if ( "HP" == strCurProperty )
-                                    {
-                                        m_pPropertyModule->AddHP( self, nAddValue );
-                                    }
-                                    else if ( "MP" == strCurProperty )
-                                    {
-                                        m_pPropertyModule->AddMP( self, nAddValue );
-                                    }
-                                }
-                                else
-                                {
-                                    m_pLogModule->LogProperty(NFILogModule::NLL_ERROR_NORMAL, self, strCurProperty, "", __FUNCTION__, __LINE__);
-                                    return 0;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                return other.GetCount();
-            }
-        }
-    }
+  
 
     m_pLogModule->LogProperty(NFILogModule::NLL_ERROR_NORMAL, self, strItemName, "", __FUNCTION__, __LINE__);
 

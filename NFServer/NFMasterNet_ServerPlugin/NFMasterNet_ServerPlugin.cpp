@@ -32,7 +32,7 @@ const int NFMasterNet_ServerPlugin::GetPluginVersion()
 
 const std::string NFMasterNet_ServerPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFMasterNet_ServerPlugin)
+    return GET_CLASS_NAME(NFMasterNet_ServerPlugin)
 }
 
 void NFMasterNet_ServerPlugin::Install()

@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef __NFC_CHASE_STATE_H__
-#define __NFC_CHASE_STATE_H__
+#ifndef __NFC_CHASE_STATE_H_
+#define __NFC_CHASE_STATE_H_
 
 #include "NFIState.h"
 
@@ -21,19 +21,19 @@ public:
 
     virtual ~NFCChaseState() {}
 
-    virtual bool Enter(const NFIDENTID& self);
+    virtual bool Enter(const NFGUID& self);
 
-    virtual bool Execute(const NFIDENTID& self);
+    virtual bool Execute(const NFGUID& self);
 
-    virtual bool Exit(const NFIDENTID& self);
+    virtual bool Exit(const NFGUID& self);
 
-    virtual bool DoRule(const NFIDENTID& self);
+    virtual bool DoRule(const NFGUID& self);
 
 protected:
 
-    //bool RandomPatrol(const NFIDENTID& self);
+    //bool RandomPatrol(const NFGUID& self);
 
 private:
 };
 
-#endif // !__NFC_CHASE_STATE_H__
+#endif // !__NFC_CHASE_STATE_H_

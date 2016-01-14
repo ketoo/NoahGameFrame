@@ -97,6 +97,8 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="NFCChatGroupBroadcastModule.h" />
+    <ClInclude Include="NFCWorldChatGroupModule.h" />
     <ClInclude Include="NFCWorldChatModule.h" />
     <ClInclude Include="NFWorldChatPlugin.h" />
   </ItemGroup>
@@ -109,6 +111,8 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFCChatGroupBroadcastModule.cpp" />
+    <ClCompile Include="NFCWorldChatGroupModule.cpp" />
     <ClCompile Include="NFCWorldChatModule.cpp" />
     <ClCompile Include="NFWorldChatPlugin.cpp" />
   </ItemGroup>

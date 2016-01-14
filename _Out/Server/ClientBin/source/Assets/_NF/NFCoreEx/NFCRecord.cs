@@ -498,7 +498,18 @@ namespace NFCoreEx
 
         public override bool Clear()
         {
+            for (int i = 0; i < mhtUseState.Count; ++i )
+            {
+                if (IsUsed(i))
+                {
+                    Remove(i);
+
+                    mhtUseState[i] = 0;
+                }
+            }
+
 			mhtRecordVec.Clear();
+
             return true;
         }
 

@@ -10,6 +10,8 @@
     <ClInclude Include="NFMsgPreGame.pb.h" />
     <ClInclude Include="NFFleetingDefine.pb.h" />
     <ClInclude Include="NFSLGDefine.pb.h" />
+    <ClInclude Include="NFMsgURl.pb.h" />
+    <ClInclude Include="NFProtocolDefine.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFMsgShare.pb.cc" />
@@ -20,5 +22,6 @@
     <ClCompile Include="NFMsgDefine.cpp" />
     <ClCompile Include="NFFleetingDefine.pb.cc" />
     <ClCompile Include="NFSLGDefine.pb.cc" />
+    <ClCompile Include="NFMsgURl.pb.cc" />
   </ItemGroup>
 </Project>

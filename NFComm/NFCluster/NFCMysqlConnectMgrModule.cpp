@@ -1,6 +1,3 @@
-#include "NFCMysqlConnectMgrModule.h"
-#include "NFComm/NFCluster/NFCMysqlDriver.h"
-
 #ifdef _MSC_VER
 #include <WinSock2.h>
 #include <winsock.h>
@@ -12,10 +9,14 @@
 #include<arpa/inet.h>
 #endif
 
+#include "NFCMysqlConnectMgrModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFCluster/NFCMysqlDriver.h"
+
 NFCMysqlConnectMgrModule::NFCMysqlConnectMgrModule( NFIPluginManager* p )
 {
     pPluginManager = p;
-	mfLastCheckTime = 0.0f;
+	mnLastCheckTime = GetPluginManager()->GetNowTime();
     bCanReload = false;
 }
 
@@ -32,21 +33,15 @@ bool NFCMysqlConnectMgrModule::Init()
 bool NFCMysqlConnectMgrModule::Shut()
 {
 	for (NFIMysqlDriver* pMysqlDriver = mvMysql.First(); pMysqlDriver != NULL; pMysqlDriver = mvMysql.Next())
-	{
-		if (pMysqlDriver)
-		{
-			delete pMysqlDriver;
-			pMysqlDriver = NULL;
-		}
+    {
+        delete pMysqlDriver;
+        pMysqlDriver = NULL;
 	}
 
 	for (NFIMysqlDriver* pMysqlDriver = mvInvalidMsyql.First(); pMysqlDriver != NULL; pMysqlDriver = mvInvalidMsyql.Next())
 	{
-		if (pMysqlDriver)
-		{
-			delete pMysqlDriver;
-			pMysqlDriver = NULL;
-		}
+        delete pMysqlDriver;
+        pMysqlDriver = NULL;
 	}
 
     return true;
@@ -62,9 +57,9 @@ bool NFCMysqlConnectMgrModule::AfterInit()
     return true;
 }
 
-bool NFCMysqlConnectMgrModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCMysqlConnectMgrModule::Execute()
 {
-	CheckMysql(fLasFrametime, fStartedTime);
+	CheckMysql();
 
     return true;
 }
@@ -74,14 +69,15 @@ NFIMysqlDriver* NFCMysqlConnectMgrModule::GetMysqlDriver()
 	return mvMysql.First(); // ÔÝÊ±ÏÈ¸øfirst
 }
 
-void NFCMysqlConnectMgrModule::CheckMysql(float fLastFrameTime, const float fStartedTime)
+void NFCMysqlConnectMgrModule::CheckMysql()
 {
-	if (mfLastCheckTime < 5.0f)
+
+	if (mnLastCheckTime + 10 > GetPluginManager()->GetNowTime())
 	{
-		mfLastCheckTime += fLastFrameTime;
 		return;
 	}
 
+	mnLastCheckTime = GetPluginManager()->GetNowTime();
 
 	//////////////////////////////////////////////////////////////////////////
 	int nServerID = 0;
@@ -105,7 +101,7 @@ void NFCMysqlConnectMgrModule::CheckMysql(float fLastFrameTime, const float fSta
 
 	for (NFIMysqlDriver* pMysqlDriver = mvInvalidMsyql.First(nServerID); pMysqlDriver != NULL; pMysqlDriver = mvInvalidMsyql.Next(nServerID))
 	{
-		if (!pMysqlDriver->Enable() && pMysqlDriver->CanReconnect(mfLastCheckTime))
+		if (!pMysqlDriver->Enable() && pMysqlDriver->CanReconnect())
 		{
 			pMysqlDriver->Reconnect();
 			if (pMysqlDriver->Enable())
@@ -121,7 +117,6 @@ void NFCMysqlConnectMgrModule::CheckMysql(float fLastFrameTime, const float fSta
 		mvInvalidMsyql.RemoveElement(xIntVec[i]);
 	}
 
-    mfLastCheckTime = 0.0f;
 }
 bool NFCMysqlConnectMgrModule::AddMysqlServer( const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime/* = 10*/, const int nRconneCount/* = -1*/)
 {

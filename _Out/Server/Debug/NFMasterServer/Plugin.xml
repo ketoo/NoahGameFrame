@@ -6,4 +6,5 @@
 	<Plugin Name="NFMasterNet_ServerPlugin" Main="1"/>
 	<Plugin Name="NFLogPlugin" Main="1"/>
 	<APPID Name="3" />
+    <ConfigPath Name="../../" />
 </XML>

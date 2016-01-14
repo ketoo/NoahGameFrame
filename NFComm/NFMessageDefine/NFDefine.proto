@@ -3,8 +3,8 @@ package NFMsg;
 //所有的网络逻辑事件枚举都在这里 
 enum EGameEventCode
 {
-	EGEC_UNKOWN_ERROR							= 0;		// 未知错误
-	EGEC_SUCCESS								= 1;        // 操作成功
+	EGEC_SUCCESS								= 0;        // 操作成功
+	EGEC_UNKOWN_ERROR							= 1;		// 未知错误
 	EGEC_ACCOUNT_EXIST							= 2;        // 注册时账号在数据库中已存在
 	EGEC_ACCOUNTPWD_INVALID						= 3;        // 账号不存在或者密码错误
 	EGEC_ACCOUNT_USING							= 4;        // 账号正在使用
@@ -54,6 +54,8 @@ enum EGameEventCode
 	EGEC_CREATE_GUILD_SUCCESS					= 200;		 // 创建公会成功
 	EGEC_JOIN_GUILD_SUCCESS						= 201;		 // 加入公会成功
 	EGEC_LEAVE_GUILD_SUCCESS					= 202;		 // 离开公会成功
+	
+
 }
 
 enum EGameMsgID
@@ -161,9 +163,15 @@ enum EGameMsgID
 	EGMI_REQ_ACCEPT_TASK						= 256;
 	EGMI_REQ_COMPELETE_TASK						= 257;
 	
-	EGMI_REQ_JOIN_PVP                           = 260; // 申请加入PVP队列
-	EGMI_REQ_EXIT_PVP                           = 261; // 申请/通知某角色离开PVP队列
+	EGMI_REQ_JOIN_PVP                           = 260; // 申请加入PVP
+	EGMI_REQ_EXIT_PVP                           = 261; // 申请离开PVP
 	EGMT_ACK_START_PVP                          = 262; // 通知开始PVP
+	
+	EGMI_REQ_SEARCH_OPPNENT                     = 280; // 查找对手(EBattleType)
+	EGMI_ACK_SEARCH_OPPNENT                     = 281; // 返回查找对手的信息(EBattleType)
+	EGMT_REQ_START_OPPNENT                      = 282; // 开始战斗(EBattleType)
+	EGMT_ACK_START_OPPNENT                      = 283; // 开始战斗(EBattleType)
+	
 	
 	EGMI_ACK_ONLINE_NOTIFY						= 290; // 玩家上线通知
 	EGMI_ACK_OFFLINE_NOTIFY						= 291; // 玩家下线通知
@@ -179,9 +187,39 @@ enum EGameMsgID
 	EGMI_REQ_SEARCH_GUILD                       = 308; // 申请搜索公会
 	EGMI_ACK_SEARCH_GUILD                       = 309; // 返回搜索公会	
 	
+	EGMI_REQ_OPR_GUILDINFO						= 310; // 申请公会操作 
+	EGMI_ACK_OPR_GUILDINFO						= 311; // 公会操作结果
 	
+	EGEC_REQ_CREATE_CHATGROUP					= 400;		 // 创建聊天ReqAckCreateChatGroup
+	EGEC_ACK_CREATE_CHATGROUP					= 401;		 // 创建聊天ReqAckCreateChatGroup
+	EGEC_REQ_JOIN_CHATGROUP						= 402;		 // 加入聊天ReqAckjoinChatGroup
+	EGEC_ACK_JOIN_CHATGROUP						= 403;		 // 加入聊天ReqAckjoinChatGroup
+	EGEC_REQ_LEAVE_CHATGROUP					= 404;		 // 离开聊天ReqAckQuitChatGroup
+	EGEC_ACK_LEAVE_CHATGROUP					= 405;		 // 离开聊天ReqAckQuitChatGroup
+	EGEC_REQ_SUBSCRIPTION_CHATGROUP				= 406;		 // 订阅聊天室ReqSubscriptionChatGroup
+	EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP		= 407;		 // 取消订阅聊天室ReqSubscriptionChatGroup
+	EGEC_REQ_INVITE_CHATGROUP					= 408;		 // 邀请进入聊天室
+	EGEC_ACK_INVITE_CHATGROUP					= 409;		 // 邀请进入聊天室
+	EGEC_REQ_KICK_CHATGROUP						= 410;		 // 踢出聊天室
+	EGEC_ACK_KICK_CHATGROUP						= 411;		 // 踢出聊天室
 	
-	/////////////////////GM MSG/////////////////////////////////////
+	EGEC_REQ_CHATGROUP_TO_TEAM					= 450;		 // 聊天室快速组队
+	EGEC_ACK_CHATGROUP_TO_TEAM					= 451;		 // 聊天室快速组队	
+	
+	EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP			= 500;		 // 装备强化
+	EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP			= 501;		 // 装备强化
+	
+	EGEC_REQ_HOLE_TO_EQUIP						= 502;		 // 装备打洞
+	EGEC_ACK_HOLE_TO_EQUIP						= 503;		 // 装备打洞
+	
+	EGEC_REQ_INLAYSTONE_TO_EQUIP				= 504;		 // 装备镶嵌
+	EGEC_ACK_INLAYSTONE_TO_EQUIP				= 505;		 // 装备镶嵌
+	
+	EGEC_REQ_ELEMENTLEVEL_TO_EQUIP				= 506;		 // 装备附魔
+	EGEC_ACK_ELEMENTLEVEL_TO_EQUIP				= 507;		 // 装备附魔
+
+	
+	/////////////////////GM MSG/////////////////////////////////////订阅
 	EGMI_REQ_CMD_PROPERTY_INT					= 1000;			// GM命令修改整形
 	EGMI_REQ_CMD_PROPERTY_STR					= 1001;			// GM命令修改修改字符串
 	EGMI_REQ_CMD_PROPERTY_OBJECT				= 1002;			// GM命令
@@ -201,13 +239,88 @@ enum EGameMsgID
 	EGMI_REQ_BUILD_OPERATE						= 10103;//申请建筑操作
 }
 
-enum EAwardType
+/////////////////////////道具系统相关//////////////////////////////////////////////////////////////////////////
+enum EItemType
 {
-    AWARD_TYPE_NORMAL   = 0; // 普通类型(装备和物品)
-	AWARD_TYPE_HERO     = 1; // 英雄类型
-	// TODO
+    EIT_NORMAL   			= 0; // 普通类型(物品，主要处理属性)
+    EIT_EQUIP   			= 1; // 装备
+	EIT_BOUNTY   			= 2; // 赏金令
+	EIT_HERO_CARD   		= 3; // 英雄卡牌，吃得英雄
+	EIT_HERO_STONE   		= 4; // 英雄石，吃得英雄经验
+	EIT_STRENGTHEN_STONE	= 5; // 强化石
+	EIT_DEMONIZATION_STONE	= 6; // 附魔石
+	
+	EIT_WOOD				= 100; // 木材
+	EIT_STONE				= 101; // 石材
+	
+	//EIT_STONE				= 200;
 }
 
+//道具子类型(归属类型)
+enum EGameEquipSubType
+{
+	EQUIPTYPE_WEAPON            = 0;    // 武器
+	EQUIPTYPE_ARMOR             = 1;    // 胸甲
+	EQUIPTYPE_NECKLACE          = 2;    // 项链
+	EQUIPTYPE_RING              = 3;    // 戒指
+	EQUIPTYPE_EARRINGS          = 4;    // 耳环
+	EQUIPTYPE_BADGE             = 5;    // 徽章
+	EQUIPTYPE_HELMET            = 6;    // 头盔
+	EQUIPTYPE_SHAWL             = 7;    // 肩甲
+	EQUIPTYPE_GLOVE             = 8;    // 手套
+	EQUIPTYPE_WRIST             = 9;    // 护腕
+	EQUIPTYPE_BELT              = 10;   // 腰带
+	EQUIPTYPE_PANT              = 11;   // 裤子
+	EQUIPTYPE_BOOT              = 12;   // 靴子
+	EQUIPTYPE_WING              = 13;   // 翅膀
+	EQUIPTYPE_CLOAK             = 14;   // 披风
+	EQUIPTYPE_FASHION           = 15;   // 时装
+};
+
+//元素类型
+enum EGameElementType
+{
+	EELEMENTTYPE_FLY				= 0;    // 风
+	EELEMENTTYPE_FIRE				= 1;    // 火
+	EELEMENTTYPE_THUNDER			= 2;    // 雷
+	EELEMENTTYPE_SOIL              	= 3;    // 土
+	EELEMENTTYPE_WATER          	= 4;    // 水
+};
+
+enum EGameItemSubType
+{
+    EGIT_ITEM_NONE             	= 0;    // 无
+    EGIT_ITEM_PROPERTY_CARD     = 1;    // 基础属性石，合成镶嵌
+    EGIT_ITEM_PVP_ATTACK_CARD   = 2;    // PVP攻击卡
+    EGIT_ITEM_PVP_DEFENSE_CARD  = 3;    // PVP防御卡
+    EGIT_ITEM_SKILL_CARD        = 4;    // 学习类技能书，普通的技能都是这样学习的
+    EGIT_ITEM_GUILD_SKILL_CARD  = 5;    // 工会技能书
+    EGIT_ITEM_GUILD_DIAMOND     = 6;    // 工会圣宝
+    EGIT_ITEM_POSITION          = 7;    // 移动位置(传送到新手村)(消耗此物品时得到某种待遇)
+    EGIT_ITEM_WORLD_HORN        = 8;   // 世界喇叭(使用某个功能的时候消耗此物品)
+    EGIT_ITEM_REBORN            = 9;   // 重生道具(消耗此物品时得到某种待遇)
+};
+
+//道具时间类型
+enum EGameItemExpiredType
+{
+    EGIET_NONE = 0;               // 永不过期类型
+    EGIET_USE_TIMES = 1;              // 使用次数, 变形魔杖,变0道具要消失(普通物品数量)
+    EGIET_REAL_TIME = 2;              // 真实的时间流逝(秒),适合时装,礼包,饰品(写死1天1周)
+    EGIET_END_INDEX = 3;
+};
+
+
+////////////掉落状态/////////////////////////////////////////////////////////////////////////////////////
+
+enum EDrawDropItemState
+{
+    E_DRAW_STATE_NONE   = 0; // 初始状态
+    E_DRAW_STATE_GAIN   = 1; // 可获得
+    E_DRAW_STATE_RECV   = 2; // 已领取
+};
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// 公会成员权限
 enum EGuildPowerType
 {
     GUILD_POWER_TYPE_NORMAL   			= 0; // 普通成员
@@ -240,3 +353,19 @@ enum ETaskType
     TASK_KILL_SOME_MONSTER_COUNT        = 9; // 杀死某个特定怪度多少只
     // TODO
 }
+
+// 战斗类型
+enum EBattleType
+{
+	BATTLE_SINGLE        = 0; // 主角单人打副本
+	BATTLE_PVE_TEAM      = 1; // 多人打副本
+}
+
+
+
+
+
+
+
+
+

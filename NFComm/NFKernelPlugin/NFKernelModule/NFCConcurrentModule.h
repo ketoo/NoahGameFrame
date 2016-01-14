@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_CONCURRENT_MODULE_H_
-#define _NFC_CONCURRENT_MODULE_H_
+#ifndef NFC_CONCURRENT_MODULE_H
+#define NFC_CONCURRENT_MODULE_H
 
 //#include "NFComm/NFPluginModule/NFIConcurrentModule.h"
 
@@ -25,7 +25,7 @@
 //     virtual bool BeforeShut();
 //     virtual bool AfterInit();
 //
-//     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+//     virtual bool Execute();
 //
 //     virtual void OnReload(const char* strModuleName, NFILogicModule* pModule);
 // };

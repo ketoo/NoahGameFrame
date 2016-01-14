@@ -101,6 +101,8 @@
 		<Unit filename="NFCSceneProcessModule.h" />
 		<Unit filename="NFGameServerPlugin.cpp" />
 		<Unit filename="NFGameServerPlugin.h" />
+		<Unit filename="NFCPropertyTrailModule.cpp" />
+		<Unit filename="NFCPropertyTrailModule.h" />
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />

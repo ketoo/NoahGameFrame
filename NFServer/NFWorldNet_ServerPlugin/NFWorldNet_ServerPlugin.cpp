@@ -30,7 +30,7 @@ const int NFWorldNet_ServerPlugin::GetPluginVersion()
 
 const std::string NFWorldNet_ServerPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFWorldNet_ServerPlugin)
+    return GET_CLASS_NAME(NFWorldNet_ServerPlugin)
 }
 
 void NFWorldNet_ServerPlugin::Install()

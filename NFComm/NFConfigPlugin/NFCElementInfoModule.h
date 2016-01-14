@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_ELEMENTINFO_MODULE_H_
-#define _NFC_ELEMENTINFO_MODULE_H_
+#ifndef NFC_ELEMENTINFO_MODULE_H
+#define NFC_ELEMENTINFO_MODULE_H
 
 #include <string>
 #include <map>
@@ -36,9 +36,9 @@ class ElementConfigInfo
 public:
     ElementConfigInfo()
     {
-        m_pPropertyManager = NF_SHARE_PTR<NFIPropertyManager>(NF_NEW NFCPropertyManager(NFIDENTID()));
-        m_pRecordManager = NF_SHARE_PTR<NFIRecordManager>(NF_NEW NFCRecordManager(NFIDENTID()));
-        m_pComponentManager = NF_SHARE_PTR<NFIComponentManager>(NF_NEW NFCComponentManager(NFIDENTID()));
+        m_pPropertyManager = NF_SHARE_PTR<NFIPropertyManager>(NF_NEW NFCPropertyManager(NFGUID()));
+        m_pRecordManager = NF_SHARE_PTR<NFIRecordManager>(NF_NEW NFCRecordManager(NFGUID()));
+        m_pComponentManager = NF_SHARE_PTR<NFIComponentManager>(NF_NEW NFCComponentManager(NFGUID()));
     }
 
     virtual ~ElementConfigInfo()
@@ -81,7 +81,7 @@ public:
 
     virtual bool AfterInit();
     virtual bool BeforeShut();
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool Load();
     virtual bool Save();
@@ -96,8 +96,7 @@ public:
     virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager(const std::string& strConfigName);
 
     virtual NFINT64 GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName);
-    virtual float GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName);
-    virtual double GetPropertyDouble(const std::string& strConfigName, const std::string& strPropertyName);
+    virtual double GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName);
     virtual const std::string& GetPropertyString(const std::string& strConfigName, const std::string& strPropertyName);
 
 protected:

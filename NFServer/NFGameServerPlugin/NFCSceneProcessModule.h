@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_SCENEPROCESS_MODULE_H_
-#define _NFC_SCENEPROCESS_MODULE_H_
+#ifndef NFC_SCENEPROCESS_MODULE_H
+#define NFC_SCENEPROCESS_MODULE_H
 
 #include <string>
 #include <map>
@@ -28,6 +28,7 @@
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 class NFCSceneProcessModule
     : public NFISceneProcessModule
@@ -41,7 +42,7 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute( const float fLasFrametime, const float fStartedTime );
+    virtual bool Execute();
     virtual bool AfterInit();
 
     virtual E_SCENE_TYPE GetCloneSceneType(const int nContainerID);
@@ -60,10 +61,10 @@ protected:
 
 protected:
 
-    int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+    int OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    int OnEnterSceneEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
-    int OnLeaveSceneEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
+    int OnEnterSceneEvent( const NFGUID& object, const int nEventID, const NFIDataList& var );
+    int OnLeaveSceneEvent( const NFGUID& object, const int nEventID, const NFIDataList& var );
 
 private:
     int mnContainerLine;

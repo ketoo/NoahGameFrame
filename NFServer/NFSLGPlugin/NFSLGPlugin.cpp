@@ -29,7 +29,7 @@ const int NFSLGPlugin::GetPluginVersion()
 
 const std::string NFSLGPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME( NFSLGPlugin )
+    return GET_CLASS_NAME( NFSLGPlugin )
 }
 
 void NFSLGPlugin::Install()

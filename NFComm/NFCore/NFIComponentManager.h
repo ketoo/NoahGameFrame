@@ -6,28 +6,67 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_COMPONENT_MANAGER_H_
-#define _NFI_COMPONENT_MANAGER_H_
+#ifndef _NFI_COMPONENT_MANAGER_H
+#define _NFI_COMPONENT_MANAGER_H
 
+#include <memory>
 #include "NFMap.h"
 #include "NFIComponent.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
 
 class NFIComponentManager : public NFILogicModule, public NFMapEx<std::string, NFIComponent>
 {
 public:
     virtual ~NFIComponentManager() {}
-    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
-    virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
 
-    virtual bool SetEnable(const std::string& strComponentName, const bool bEnable) = 0;
+	template <typename T>
+	bool AddComponent()
+	{
+		if (!TIsDerived<T, NFIComponent>::Result)
+		{
+			//BaseTypeComponent must inherit from NFIComponent;
+			return NF_SHARE_PTR<T>();
+		}
 
-    virtual bool Enable(const std::string& strComponentName) = 0;
+		NFIComponent* pComponent = NF_NEW T();
+		return AddComponent(pComponent->GetComponentName(), NF_SHARE_PTR<NFIComponent>(pComponent));
+	}
 
-    virtual NFIDENTID Self() = 0;
+	template <typename T>
+	NF_SHARE_PTR<T> FindComponent(const std::string& strName)
+	{
+		if (!TIsDerived<T, NFIComponent>::Result)
+		{
+			//BaseTypeComponent must inherit from NFIComponent;
+			return NF_SHARE_PTR<T>();
+		}
 
-    //     template<typename BaseType>
-    //     virtual bool SenbdMessage(const std::string& strComponentName, const bool bEnable);
+		NF_SHARE_PTR<NFIComponent> pComponent = First();
+		while (nullptr != pComponent)
+		{
+			if (pComponent->GetComponentName() == strName)
+			{
+				NF_SHARE_PTR<T> pT = std::dynamic_pointer_cast<T>(pComponent);
+				if (nullptr != pT)
+				{
+					return pT;
+				}
+				else
+				{
+					return NF_SHARE_PTR<T>();
+				}
+			}
+
+			pComponent = Next();
+		}
+
+		return NF_SHARE_PTR<T>();
+	}
+
+    virtual NFGUID Self() = 0;
+
+	virtual bool AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent) = 0;
 
 private:
 };

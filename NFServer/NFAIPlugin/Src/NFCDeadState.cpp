@@ -9,7 +9,7 @@
 ////#include "stdafx.h"
 #include "../NFCAIModule.h"
 
-bool NFCDeadState::Enter(const NFIDENTID& self)
+bool NFCDeadState::Enter(const NFGUID& self)
 {
     if (!NFIState::Enter(self))
     {
@@ -20,7 +20,7 @@ bool NFCDeadState::Enter(const NFIDENTID& self)
     return true;
 }
 
-bool NFCDeadState::Execute(const NFIDENTID& self)
+bool NFCDeadState::Execute(const NFGUID& self)
 {
     if (!NFIState::Execute(self))
     {
@@ -31,14 +31,14 @@ bool NFCDeadState::Execute(const NFIDENTID& self)
     return true;
 }
 
-bool NFCDeadState::Exit(const NFIDENTID& self)
+bool NFCDeadState::Exit(const NFGUID& self)
 {
 
 
     return true;
 }
 
-bool NFCDeadState::DoRule(const NFIDENTID& self)
+bool NFCDeadState::DoRule(const NFGUID& self)
 {
     return true;
 }

@@ -33,7 +33,7 @@ const int NFKernelPlugin::GetPluginVersion()
 
 const std::string NFKernelPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFKernelPlugin)
+    return GET_CLASS_NAME(NFKernelPlugin)
 }
 
 void NFKernelPlugin::Install()
