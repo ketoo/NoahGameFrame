@@ -40,13 +40,16 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
+    virtual const std::string& GetPackName( const PackTableType name );
+
 	/////////////基础/////////////////////////////////////////////////////////////
 
 	virtual const NFGUID& CreateEquip( const NFGUID& self, const std::string& strConfigName);
 	virtual bool CreateItem( const NFGUID& self, const std::string& strConfigName, const int nCount );
 
 	virtual bool DeleteEquip( const NFGUID& self, const NFGUID& id);
-	virtual bool DeleteItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount);
+    virtual bool DeleteItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount);
+    virtual bool EnoughItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount);
 
 	/////////////英雄装备和背包互换/////////////////////////////////////////////////////////////
 
@@ -81,13 +84,6 @@ public:
 protected:
 
 	int FindItemRowByConfig(const NFGUID& self, const std::string& strItemConfigID);
-
-//     int RefreshEquipProperty( const NFGUID& self );
-//     int RefreshEquipProperty( const NFGUID& self, const int nRow );
-    
-//     int AddEquipProperty( const NFGUID& self, const std::string& strConfigID, const int nRow );
-//     int RemoveEquipProperty( const NFGUID& self, const std::string& strConfigID, const int nRow );
-
     int OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
     // 添加掉落道具
