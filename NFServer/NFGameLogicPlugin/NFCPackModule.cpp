@@ -58,7 +58,7 @@ bool NFCPackModule::AfterInit()
     return true;
 }
 
-const std::string& GetPackName( const PackTableType name )
+const std::string& NFCPackModule::GetPackName( const PackTableType name )
 {
     if ( name > PackTableType::MaxPack || name < PackTableType::NONE_PACK )
     {
@@ -182,169 +182,6 @@ int NFCPackModule::OnClassObjectEvent( const NFGUID& self, const std::string& st
 
     return 0;
 }
-
-// int NFCPackModule::RefreshEquipProperty( const NFGUID& self )
-// {
-// 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-// 	if ( NULL == pObject )
-// 	{
-// 		return 1;
-// 	}
-// 
-// 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::ViewPack ) );
-// 	if ( NULL == pRecord )
-// 	{
-// 		return 1;
-// 	}
-// 
-//     // 装备属性计算
-// 	for (int i = 0; i < pRecord->GetRows(); ++i)
-// 	{
-//         RefreshEquipProperty(self, i);
-//     }
-// 
-//     return 0;
-// }
-
-// int NFCPackModule::RefreshEquipProperty( const NFGUID& self, const int nRow )
-// {
-//     // 单件装备属性计算
-//     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-//     if ( NULL == pObject )
-//     {
-//         return 1;
-//     }
-// 
-//     NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::ViewPack ) );
-//     if ( NULL == pRecord )
-//     {
-//         return 1;
-//     }
-// 
-//     if(!pRecord->IsUsed(nRow))
-//     {
-//         return 1;
-//     }
-// 
-//     const std::string& strConfigID = pRecord->GetString( nRow, ( int )NFMsg::PlayerViewItem_ConfigID );
-//     if (strConfigID.empty())
-//     {
-//         return 1;
-//     }
-// 
-// 	AddEquipProperty(self, strConfigID, nRow);
-// 
-//     return 0;
-// }
-
-// int NFCPackModule::AddEquipProperty( const NFGUID& self, const std::string& strConfigID, const int nRow )
-// {
-//     if (strConfigID.empty())
-//     {
-//         return 1;
-//     }
-// 
-//     //////////////////////////////////////////////////////////////////////////
-//     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-//     if ( NULL == pObject )
-//     {
-//         m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-//         return 1;
-//     }
-// 
-//     NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-//     if ( NULL == pRecord || !pRecord->IsUsed(nRow) )
-//     {
-//         return 1;
-//     }
-// 
-//     //////////////////////////////////////////////////////////////////////////
-// 
-//     NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager(strConfigID);
-//     if (!pPropertyManager)
-//     {
-//         return 1;
-//     }
-// 
-//     NF_SHARE_PTR<NFIProperty> pEffectDataProperty = pPropertyManager->GetElement("EffectData");
-//     if (!pEffectDataProperty)
-//     {
-//         return 1;
-//     }
-// 
-//     NF_SHARE_PTR<NFIPropertyManager> pEffectDataPropertyManager = m_pElementInfoModule->GetPropertyManager(pEffectDataProperty->GetString());
-//     if (!pEffectDataPropertyManager)
-//     {
-//         return 1;
-//     }
-// 
-//    NF_SHARE_PTR<NFIProperty> pProperty = pEffectDataPropertyManager->First();
-//    while (pProperty)
-//    {
-//        if (pProperty->GetInt() != 0)
-//        {
-//            m_pPropertyModule->AddPropertyValue( self, pProperty->GetKey(), NFIPropertyModule::NPG_EQUIP, pProperty->GetInt() );
-//        }
-// 
-//        pProperty = pEffectDataPropertyManager->Next();
-//    }
-// 
-//    return 0;
-// }
-
-// int NFCPackModule::RemoveEquipProperty( const NFGUID& self, const std::string& strConfigID, const int nRow )
-// {
-//     if (strConfigID.empty())
-//     {
-//         return 1;
-//     }
-// 
-//     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-//     if ( NULL == pObject )
-//     {
-//         m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-//         return 1;
-//     }
-// 
-//     NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::NormalPack ) );
-//     if ( NULL == pRecord || !pRecord->IsUsed(nRow) )
-//     {
-//         return 1;
-//     }
-// 
-//     //////////////////////////////////////////////////////////////////////////
-//     NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager(strConfigID);
-//     if (!pPropertyManager)
-//     {
-//         return 1;
-//     }
-// 
-//     NF_SHARE_PTR<NFIProperty> pEffectDataProperty = pPropertyManager->GetElement("EffectData");
-//     if (!pEffectDataProperty)
-//     {
-//         return 1;
-//     }
-// 
-//     NF_SHARE_PTR<NFIPropertyManager> pEffectDataPropertyManager = m_pElementInfoModule->GetPropertyManager(pEffectDataProperty->GetString());
-//     if (!pEffectDataPropertyManager)
-//     {
-//         return 1;
-//     }
-// 
-//     NF_SHARE_PTR<NFIProperty> pProperty = pEffectDataPropertyManager->First();
-//     while (pProperty)
-//     {
-//         if (pProperty->GetInt() != 0)
-//         {
-//             m_pPropertyModule->SubPropertyValue( self, pProperty->GetKey(), NFIPropertyModule::NPG_EQUIP, pProperty->GetInt() );
-//         }
-// 
-//         pProperty = pEffectDataPropertyManager->Next();
-//     }
-// 
-//     
-//     return 0;
-// }
 
 // int NFCPackModule::QueryCount( const NFGUID& self, const std::string& strItemConfigID ) const
 // {
@@ -1286,4 +1123,53 @@ int NFCPackModule::GetEquipElementLevel( const NFGUID& self, const NFGUID& id, N
 	}
 
 	return 0;
+}
+
+bool NFCPackModule::EnoughItem( const NFGUID& self, const std::string& strItemConfigID, const int nCount )
+{
+    if(nCount <= 0)
+    {
+        return false;
+    }
+
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+    if ( NULL == pObject )
+    {
+        return false;
+    }
+
+    //还得确定有这个装备
+    bool bExist = m_pElementInfoModule->ExistElement( strItemConfigID );
+    if ( !bExist )
+    {
+        return false;
+    }
+
+    int nItemType = m_pElementInfoModule->GetPropertyInt(strItemConfigID, NFrame::Item::ItemType());
+    if ( NFMsg::EItemType::EIT_NORMAL != nItemType )
+    {
+        return false;
+    }
+
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagItemPack ) );
+    if (!pRecord)
+    {
+        return false;
+    }
+
+    int nRow = FindItemRowByConfig(self, strItemConfigID);
+    if (nRow >= 0)
+    {
+        int nOldCount = pRecord->GetInt(nRow, NFrame::Player::BagItemList_ItemCount);
+        if (nCount >= nOldCount)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    return false;
 }

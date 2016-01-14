@@ -1,0 +1,15 @@
+<XML>	
+	<AwardPackPlayerLevel_1 Name="AwardPackPlayerLevel_1">
+		<ID1 Name="ID1" Count="1"/>
+		<ID1 Name="ID1" Count="1"/>
+		<ID1 Name="ID1" Count="1"/>
+	</AwardPackPlayerLevel_1>
+	
+	<AwardPackPlayerLevel_2 Name="AwardPackPlayerLevel_1">
+		<ID1 Name="ID1" />
+	</AwardPackPlayerLevel_1>
+	
+	<AwardPackPlayerLevel_2 Name="AwardPackPlayerLevel_1">
+		<ID1 Name="ID1" />
+	</AwardPackPlayerLevel_1>
+</XML>

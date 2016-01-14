@@ -20,6 +20,9 @@
     <Filter Include="NFHeroModule">
       <UniqueIdentifier>{338af58a-ffe4-4588-ae11-6dc9949a7b53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFEquipModule">
+      <UniqueIdentifier>{4444cbab-0f7e-4d79-bd7c-9c5962f99abc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCGameLogicModule.h" />
@@ -62,6 +65,9 @@
     </ClInclude>
     <ClInclude Include="NFCHeroModule.h">
       <Filter>NFHeroModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCEquipModule.h">
+      <Filter>NFEquipModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +112,9 @@
     </ClCompile>
     <ClCompile Include="NFCHeroModule.cpp">
       <Filter>NFHeroModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCEquipModule.cpp">
+      <Filter>NFEquipModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
