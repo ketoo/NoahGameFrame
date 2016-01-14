@@ -703,7 +703,7 @@ namespace NFTCPClient
                     NFMsg.ObjectRecordBase xObjectRecordBase = xObjectRecordList.record_list[j];
                     for (int k = 0; k < xObjectRecordBase.row_struct.Count; ++k )
                     {
-                        NFMsg.RecordAddRowStruct xAddRowStruct = xObjectRecordBase.row_struct[i];
+                        NFMsg.RecordAddRowStruct xAddRowStruct = xObjectRecordBase.row_struct[k];
 
                         ADD_ROW(PBToNF(xObjectRecordList.player_id), System.Text.Encoding.Default.GetString(xObjectRecordBase.record_name), xAddRowStruct);
                     }

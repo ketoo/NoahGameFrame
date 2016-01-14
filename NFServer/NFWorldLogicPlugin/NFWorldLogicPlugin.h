@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_WORLDLOGICPLUGIN_MODULE_H_
-#define _NFC_WORLDLOGICPLUGIN_MODULE_H_
+#ifndef NFC_WORLDLOGICPLUGIN_MODULE_H
+#define NFC_WORLDLOGICPLUGIN_MODULE_H
 
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPlugin.h"

@@ -5,10 +5,10 @@
 //    @Module           :    NFCMysqlDriver
 //    @Desc             :
 // -------------------------------------------------------------------------
-#ifndef __NFC_MYSQL_DRIVER_MODULE_H__
-#define __NFC_MYSQL_DRIVER_MODULE_H__
+#ifndef NFC_MYSQL_DRIVER_MODULE_H
+#define NFC_MYSQL_DRIVER_MODULE_H
 
-#include "NFIMysqlDriver.h"
+#include "NFComm/NFPluginModule/NFIMysqlDriver.h"
 
 #define  NFMYSQLTRYBEGIN try {
 
@@ -99,9 +99,9 @@ public:
         return Connect();
     }
 
-    virtual  bool Execute(const float fLasFrametime, const float fStartedTime)
+    virtual  bool Execute()
     {
-        if (IsNeedReconnect() && CanReconnect(fLasFrametime))
+        if (IsNeedReconnect() && CanReconnect())
         {
             Connect(mstrDBName, mstrDBHost, mnDBPort, mstrDBUser, mstrDBPwd);
         }
@@ -153,11 +153,8 @@ public:
 
     virtual void CloseConnection()
     {
-        if (m_pMysqlConnect)
-        {
-            delete m_pMysqlConnect;
-            m_pMysqlConnect = NULL;
-        }
+        delete m_pMysqlConnect;
+        m_pMysqlConnect = NULL;
     }
 
     virtual bool Enable()
@@ -165,9 +162,10 @@ public:
         return !IsNeedReconnect();
     }
 
-    virtual bool CanReconnect(const float fLasFrametime)
+    virtual bool CanReconnect()
     {
-        mfCheckReconnect += fLasFrametime;
+
+		mfCheckReconnect += 0.1f;
 
         //30分钟检查断线重连
         if (mfCheckReconnect < mnReconnectTime)
@@ -236,7 +234,7 @@ protected:
         }
         NFMYSQLTRYBEGIN
             m_pMysqlConnect->set_option(new mysqlpp::MultiStatementsOption(true));
-            m_pMysqlConnect->set_option(new mysqlpp::SetCharsetNameOption("utf8"));
+            m_pMysqlConnect->set_option(new mysqlpp::SetCharsetNameOption("utf8mb4"));
             m_pMysqlConnect->set_option(new mysqlpp::ReconnectOption(true));
             if (!m_pMysqlConnect->connect(mstrDBName.c_str(), mstrDBHost.c_str(), mstrDBUser.c_str(), mstrDBPwd.c_str(), mnDBPort))
             {
@@ -267,4 +265,4 @@ private:
     int mnReconnectCount;
 };
 
-#endif // !__NFC_REDIS_DRIVER_MODULE_H__
+#endif // !__NFC_REDIS_DRIVER_MODULE_H_

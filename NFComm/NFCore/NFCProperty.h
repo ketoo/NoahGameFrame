@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_PROPERTY_H_
-#define _NFC_PROPERTY_H_
+#ifndef NFC_PROPERTY_H
+#define NFC_PROPERTY_H
 
 #include "NFDefine.h"
 #include "NFMap.h"
@@ -19,7 +19,7 @@ class NFCProperty : public NFIProperty
 public:
     NFCProperty();
 
-    NFCProperty(const NFIDENTID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex, const std::string& strScriptFunction);
+    NFCProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex, const std::string& strScriptFunction);
 
     virtual ~NFCProperty();
 
@@ -27,11 +27,9 @@ public:
     virtual void SetValue(const NFIProperty* pProperty);
 
     virtual bool SetInt(const NFINT64 value);
-    virtual bool SetFloat(const float value);
-    virtual bool SetDouble(const double value);
+    virtual bool SetFloat(const double value);
     virtual bool SetString(const std::string& value);
-    virtual bool SetObject(const NFIDENTID& value);
-    virtual bool SetPointer(const void* value);
+    virtual bool SetObject(const NFGUID& value);
 
     virtual const TDATA_TYPE GetType() const;
     virtual const bool GeUsed() const;
@@ -50,19 +48,17 @@ public:
     virtual void SetScriptFunction(const std::string& strScriptFunction);
 
     virtual NFINT64 GetInt() const;
-    virtual float GetFloat() const;
-    virtual double GetDouble() const;
+    virtual double GetFloat() const;
     virtual const std::string& GetString() const;
-    virtual NFIDENTID GetObject() const;
-    virtual void* GetPointer() const;
+    virtual const NFGUID& GetObject() const;
 
     virtual bool Changed() const;
 
     virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb);
 
-    virtual NFIDataList::TData GetValue() const;
+    virtual const NFIDataList::TData& GetValue() const;
 
-    int OnEventHandler(const NFIDataList& oldVar, const NFIDataList& newVar);
+    int OnEventHandler(const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
     virtual std::string ToString();
     virtual bool FromString(const std::string& strData);
@@ -70,12 +66,12 @@ private:
     typedef std::vector<PROPERTY_EVENT_FUNCTOR_PTR> TPROPERTYCALLBACKEX;
     TPROPERTYCALLBACKEX mtPropertyCallback;
 
-    NFIDENTID mSelf;
+    NFGUID mSelf;
     std::string msPropertyName;//可以想办法与基本类型共用
     TDATA_TYPE eType;//只有在不存在指针的时候才用这个判断类型--为节约内存
     //NFCDataList    mVarProperty;
     //NFIDataList::TData* m_pTData;
-    NF_SHARE_PTR<NFIDataList::TData> m_pTData;
+    NF_SHARE_PTR<NFIDataList::TData> mxData;
 
     bool mbPublic;
     bool mbPrivate;

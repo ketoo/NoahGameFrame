@@ -78,6 +78,21 @@ bool NFCPluginManager::LoadPlugin()
         return false;
     }
 
+    rapidxml::xml_node<>* pPluginConfigPathNode = pRoot->first_node("ConfigPath");
+    if (!pPluginConfigPathNode)
+    {
+        NFASSERT(0, "There are no ConfigPath", __FILE__, __FUNCTION__);
+        return false;
+    }
+
+    if (NULL == pPluginConfigPathNode->first_attribute( "Name" ))
+    {
+        NFASSERT(0, "There are no ConfigPath.Name", __FILE__, __FUNCTION__);
+        return false;
+    }
+
+    mstrConfigPath = pPluginConfigPathNode->first_attribute( "Name" )->value();
+
     return true;
 }
 
@@ -129,14 +144,16 @@ NFIPlugin* NFCPluginManager::FindPlugin(const std::string& strPluginName)
     return NULL;
 }
 
-bool NFCPluginManager::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCPluginManager::Execute()
 {
+	mnNowTime = time(NULL);
+
     bool bRet = true;
 
     PluginInstanceMap::iterator it = mPluginInstanceMap.begin();
     for (; it != mPluginInstanceMap.end(); ++it)
     {
-        bool tembRet = it->second->Execute(fLasFrametime, fStartedTime);
+        bool tembRet = it->second->Execute();
         bRet = bRet && tembRet;
     }
 
@@ -161,6 +178,7 @@ void NFCPluginManager::RemoveModule(const std::string& strModuleName)
         mModuleInstanceMap.erase(it);
     }
 }
+
 
 NFILogicModule* NFCPluginManager::FindModule(const std::string& strModuleName)
 {
@@ -289,7 +307,7 @@ bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
             DLL_START_PLUGIN_FUNC pFunc = (DLL_START_PLUGIN_FUNC)pLib->GetSymbol("DllStartPlugin");
             if (!pFunc)
             {
-                std::cout << "Find function DllStartPlugin Failed in [" << strPluginDLLName << "]" << std::endl;
+                std::cout << "Find function DllStartPlugin Failed in [" << pLib->GetName() << "]" << std::endl;
                 assert(0);
                 return false;
             }
@@ -304,12 +322,14 @@ bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
             char* error = dlerror();
             if (error)
             {
-                fprintf(stderr, "Open shared lib %s failed, %s.\n", strPluginDLLName.c_str(), error);
+				std::cout << stderr << " Open shared lib failed " << pLib->GetName() << " " << error << std::endl;
                 assert(0);
                 return false;
             }
+#elif NF_PLATFORM == NF_PLATFORM_WIN
+            std::cout << stderr << " Open DLL " << pLib->GetName() << " failed, ErrorNo = "<< GetLastError() << std::endl;
 #endif // NF_PLATFORM
-            std::cout << "Load [" << strPluginDLLName << "] Failed" << std::endl;
+            std::cout << "Load [" << pLib->GetName() << "] Failed" << std::endl;
             assert(0);
         }
     }
@@ -394,7 +414,8 @@ bool NFCPluginManager::ExecuteEvent()
 	{
 		if (xMsg.eType == NFIActorMessage::EACTOR_RETURN_EVENT_MSG)
 		{
-			xMsg.xActorEventFunc->xEndFuncptr->operator()(xMsg.self, xMsg.nSubMsgID, xMsg.data);
+			xMsg.xEndFuncptr->operator()(xMsg.self, xMsg.nFormActor, xMsg.nSubMsgID, xMsg.data);
+			m_pActorManager->ReleaseActor(xMsg.nFormActor);
 		}
 
 		bRet = mxQueue.Pop(xMsg);
@@ -403,4 +424,32 @@ bool NFCPluginManager::ExecuteEvent()
 
 
 	return true;
+}
+
+void NFCPluginManager::AddComponent( const std::string& strComponentName, NFIComponent* pComponent )
+{
+	if (!FindComponent(strComponentName))
+	{
+		mComponentInstanceMap.insert(ComponentInstanceMap::value_type(strComponentName, pComponent));
+	}
+	
+}
+
+void NFCPluginManager::RemoveComponent( const std::string& strComponentName )
+{
+	ComponentInstanceMap::iterator it = mComponentInstanceMap.find(strComponentName);
+	if (it != mComponentInstanceMap.end())
+	{
+		mComponentInstanceMap.erase(it);
+	}
+}
+
+NFIComponent* NFCPluginManager::FindComponent( const std::string& strComponentName )
+{
+	ComponentInstanceMap::iterator it = mComponentInstanceMap.find(strComponentName);
+	if (it != mComponentInstanceMap.end())
+	{
+		return it->second;
+	}
+	return NULL;
 }

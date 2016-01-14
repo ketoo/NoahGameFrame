@@ -6,24 +6,28 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_COMPONENT_MANAGER_H_
-#define _NFC_COMPONENT_MANAGER_H_
+#ifndef NFC_COMPONENT_MANAGER_H
+#define NFC_COMPONENT_MANAGER_H
 
-#include "NFCComponent.h"
 #include "NFIComponentManager.h"
-#include "NFComm/NFPluginModule/NFIdentID.h"
+#include "NFComm/NFPluginModule/NFGUID.h"
 
 class NFCComponentManager : public NFIComponentManager
 {
+private:
+	NFCComponentManager()
+	{
+
+	}
+
 public:
-    NFCComponentManager(const NFIDENTID& self)
+    NFCComponentManager(const NFGUID& self)
     {
         mSelf = self;
     }
 
     virtual ~NFCComponentManager()
     {
-        DestroyAllComponent();
         ClearAll();
     }
 
@@ -35,22 +39,16 @@ public:
 
     virtual bool Shut();
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
-    virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName);
-    virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName);
-
-    virtual bool SetEnable(const std::string& strComponentName, const bool bEnable);
-
-    virtual bool Enable(const std::string& strComponentName);
-
-    virtual NFIDENTID Self();
+	virtual NFGUID Self();
 
 protected:
-    virtual bool DestroyAllComponent();
+
+	virtual bool AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent);
 
 private:
-    NFIDENTID mSelf;
+    NFGUID mSelf;
 };
 
 #endif

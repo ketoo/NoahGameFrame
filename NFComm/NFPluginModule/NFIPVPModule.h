@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_PVP_MODULE_H_
-#define _NFI_PVP_MODULE_H_
+#ifndef _NFI_PVP_MODULE_H
+#define _NFI_PVP_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
@@ -31,15 +31,15 @@ public:
         };
 
         int mnCellStatus;               // 房间状态 0有空位 1满员 2
-        NFMap<NFIDENTID, int> mxList;   // 仅限6个人, first = playerID second = is_owner
+        NFMap<NFGUID, int> mxList;   // 仅限6个人, first = playerID second = is_owner
     };
 
 public:
-	virtual bool MatchPVPObject(const NFIDENTID& self) = 0;
+	virtual bool MatchPVPObject(const NFGUID& self) = 0;
 
-	virtual bool StartPVPWar(const NFIDENTID& self) = 0;
+	virtual bool StartPVPWar(const NFGUID& self) = 0;
 	
-	virtual bool ExitPVPWar(const NFIDENTID& self) = 0;
+	virtual bool ExitPVPWar(const NFGUID& self) = 0;
 
 };
 

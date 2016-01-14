@@ -7,11 +7,10 @@
 //     @Changed         : NFCProxyConnectObject Add HeartBeat by hahaya 2013-11-1
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_PROXYSERVER_TO_GAME_MODULE_H_
-#define _NFC_PROXYSERVER_TO_GAME_MODULE_H_
+#ifndef NFC_PROXYSERVER_TO_GAME_MODULE_H
+#define NFC_PROXYSERVER_TO_GAME_MODULE_H
 
 #include <string>
-#include "NFComm/NFNet/NFIPacket.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFCore/NFCHeartBeatManager.h"
 #include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
@@ -36,7 +35,7 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool AfterInit();
 
@@ -46,12 +45,12 @@ public:
 
 protected:
 
-	int OnReciveGSPack(const NFIPacket& msg);
-	int OnSocketGSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+	void OnReciveGSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSocketGSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 	void Register(NFINet* pNet);
 
-	void OnAckEnterGame(const NFIPacket& msg);
+	void OnAckEnterGame(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	virtual void LogServerInfo( const std::string& strServerInfo );
 
 private:

@@ -33,7 +33,7 @@ const int NFTagPlugin::GetPluginVersion()
 
 const std::string NFTagPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFTagPlugin)
+    return GET_CLASS_NAME(NFTagPlugin)
 }
 
 void NFTagPlugin::Install()

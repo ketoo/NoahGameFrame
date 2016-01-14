@@ -9,7 +9,9 @@
 	<Plugin Name="NFWorldGuildPlugin" Main="1"/>	
 	<Plugin Name="NFMysqlClusterPlugin" Main="1"/>
 	<Plugin Name="NFDataBaseNet_ClientPlugin" Main="1"/>
+	<Plugin Name="NFWorldChatPlugin" Main="1"/>
 	
 	<ActorDataModule Name="NFCDataProcessModule" />
 	<APPID Name="7" />
+    <ConfigPath Name="../../" />
 </XML>

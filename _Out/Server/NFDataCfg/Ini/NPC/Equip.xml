@@ -1,5 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<XML>
-  <Object ID="EQUIP_ZS_M_0_WEAPON_10001" ItemType="2" ItemSubType="0" Level="1" Job="" Quality="1" ShowName="饮血刀" Desc="" EffectData="Equip_100" PrefabPath="Dao/Dao_001" DropPrePath="Prefabs/Misc/Drop/Drop_Weapon" BuyPrice="0" SalePrice="0" SuitID="0" SuitBuffID="0" />
-  <Object ID="EQUIP_ZS_M_0_WEAPON_10002" ItemType="2" ItemSubType="0" Level="5" Job="" Quality="1" ShowName="皇者刀" Desc="" EffectData="Equip_101" PrefabPath="Dao/Dao_001" DropPrePath="Prefabs/Misc/Drop/Drop_Weapon" BuyPrice="0" SalePrice="0" SuitID="0" SuitBuffID="0" />
-</XML>
