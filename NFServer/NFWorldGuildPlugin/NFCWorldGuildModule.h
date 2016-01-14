@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_WORLD_GUILD_MODULE_H_
-#define _NFC_WORLD_GUILD_MODULE_H_
+#ifndef NFC_WORLD_GUILD_MODULE_H
+#define NFC_WORLD_GUILD_MODULE_H
 
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -27,28 +27,28 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool AfterInit();
 
-	virtual NFIDENTID CreateGuild( const NFIDENTID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP);
-	virtual bool JoinGuild(const NFIDENTID& self, const NFIDENTID& xGuildID);
-	virtual bool LeaveGuild(const NFIDENTID& self, const NFIDENTID& xGuildID);
-	virtual bool UpGuildMmember(const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember);
-	virtual bool DownGuildMmember(const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember);
-	virtual bool KickGuildMmember(const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember);
+	virtual const NFGUID& CreateGuild( const NFGUID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP);
+	virtual bool JoinGuild(const NFGUID& self, const NFGUID& xGuildID);
+	virtual bool LeaveGuild(const NFGUID& self, const NFGUID& xGuildID);
+	virtual bool UpGuildMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember);
+	virtual bool DownGuildMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember);
+	virtual bool KickGuildMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember);
 
-    virtual bool GetOnlineMember(const NFIDENTID& self, const NFIDENTID& xGuild, NFCDataList& varMemberList, NFCDataList& varGameList);
-    virtual bool MemberOnline(const NFIDENTID& self, const NFIDENTID& xGuild, const int& nGameID);
-    virtual bool MemberOffeline(const NFIDENTID& self, const NFIDENTID& xGuild);
+    virtual bool GetOnlineMember(const NFGUID& self, const NFGUID& xGuild, NFCDataList& varMemberList, NFCDataList& varGameList);
+    virtual bool MemberOnline(const NFGUID& self, const NFGUID& xGuild, const int& nGameID);
+    virtual bool MemberOffeline(const NFGUID& self, const NFGUID& xGuild);
 
 	//////////////////////其次考虑参数////////////////////////////////////////////////////
-	virtual bool GetGuildBaseInfo(const NFIDENTID& self, const NFIDENTID& xGuildID);
-	virtual bool GetGuildMemberInfo(const NFIDENTID& self, const NFIDENTID& xGuildID);
-	virtual bool GetGuildMemberInfo(const NFIDENTID& self, const NFIDENTID& xGuildID, const NFIDENTID& xMmember);
+	virtual bool GetGuildBaseInfo(const NFGUID& self, const NFGUID& xGuildID);
+	virtual bool GetGuildMemberInfo(const NFGUID& self, const NFGUID& xGuildID);
+	virtual bool GetGuildMemberInfo(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember);
 
 protected:
-    bool CheckPower(const NFIDENTID& self, const NFIDENTID& xGuildID, int nPowerType);
+    bool CheckPower(const NFGUID& self, const NFGUID& xGuildID, int nPowerType);
 
 protected:
     NFIEventProcessModule* m_pEventProcessModule;

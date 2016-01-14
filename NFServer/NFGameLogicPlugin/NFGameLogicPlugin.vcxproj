@@ -106,13 +106,12 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCAwardPackModule.h" />
     <ClInclude Include="NFCBuffModule.h" />
     <ClInclude Include="NFCBulletSkillConsumeProcessModule.h" />
     <ClInclude Include="NFCCardItemConsumeProcessModule.h" />
-    <ClInclude Include="NFCCostModule.h" />
-    <ClInclude Include="NFCEctypeModule.h" />
+    <ClInclude Include="NFCEquipModule.h" />
     <ClInclude Include="NFCGameLogicModule.h" />
+    <ClInclude Include="NFCHeroModule.h" />
     <ClInclude Include="NFCItemConsumeManagerModule.h" />
     <ClInclude Include="NFCNPCRefreshModule.h" />
     <ClInclude Include="NFCPotionItemConsumeProcessModule.h" />
@@ -122,7 +121,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClInclude Include="NFCSkillConsumeManagerModule.h" />
     <ClInclude Include="NFCBriefSkillConsumeProcessModule.h" />
     <ClInclude Include="NFCSkillModule.h" />
-    <ClInclude Include="NFCTaskModule.h" />
     <ClInclude Include="NFGameLogicPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -134,13 +132,12 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCAwardPackModule.cpp" />
     <ClCompile Include="NFCBuffModule.cpp" />
     <ClCompile Include="NFCBulletSkillConsumeProcessModule.cpp" />
     <ClCompile Include="NFCCardItemConsumeProcessModule.cpp" />
-    <ClCompile Include="NFCCostModule.cpp" />
-    <ClCompile Include="NFCEctypeModule.cpp" />
+    <ClCompile Include="NFCEquipModule.cpp" />
     <ClCompile Include="NFCGameLogicModule.cpp" />
+    <ClCompile Include="NFCHeroModule.cpp" />
     <ClCompile Include="NFCItemConsumeManagerModule.cpp" />
     <ClCompile Include="NFCNPCRefreshModule.cpp" />
     <ClCompile Include="NFCPotionItemConsumeProcessModule.cpp" />
@@ -150,7 +147,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClCompile Include="NFCSkillConsumeManagerModule.cpp" />
     <ClCompile Include="NFCBriefSkillConsumeProcessModule.cpp" />
     <ClCompile Include="NFCSkillModule.cpp" />
-    <ClCompile Include="NFCTaskModule.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

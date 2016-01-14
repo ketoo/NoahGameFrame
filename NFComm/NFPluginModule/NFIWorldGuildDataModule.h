@@ -6,11 +6,11 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_WORLD_GUILD_DATA_MODULE_H_
-#define _NFI_WORLD_GUILD_DATA_MODULE_H_
+#ifndef _NFI_WORLD_GUILD_DATA_MODULE_H
+#define _NFI_WORLD_GUILD_DATA_MODULE_H
 
 #include "NFILogicModule.h"
-#include "NFComm/NFMessageDefine/NFRecordDefine.pb.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
 class NFIWorldGuildDataModule
@@ -27,7 +27,7 @@ public:
             mnGuildRank  = 0;
         }
 
-        NFIDENTID		mxGuildID    ;
+        NFGUID		mxGuildID    ;
         std::string		mstrGuildName  ;
         std::string		mnGuildIcon  ;
         NFINT32		    mnGuildMemberCount  ;
@@ -36,18 +36,18 @@ public:
         NFINT32		    mnGuildRank  ;
     };
 
-	virtual bool ExitGuild(const NFIDENTID& self, const std::string& strName, bool& bExit) = 0;
-    virtual void CheckLoadGuild(const NFIDENTID& self, const NFIDENTID& xGuild) = 0;
-    virtual bool GetPlayerInfo(const NFIDENTID& self, std::string& strRoleName, int& nLevel, int& nJob , int& nDonation , int& nVIP) = 0;
+	virtual bool ExitGuild(const NFGUID& self, const std::string& strName, bool& bExit) = 0;
+    virtual void CheckLoadGuild(const NFGUID& self, const NFGUID& xGuild) = 0;
+    virtual bool GetPlayerInfo(const NFGUID& self, std::string& strRoleName, int& nLevel, int& nJob , int& nDonation , int& nVIP) = 0;
 
-    virtual const NFIDENTID CreateGuild(const NFIDENTID& xPlayeID, const std::string& strName, const std::string& strRoleName, 
+    virtual const NFGUID &CreateGuild(const NFGUID& xPlayeID, const std::string& strName, const std::string& strRoleName, 
         const int nLevel, const int nJob , const int nDonation , const int nVIP, const int nOffLine = 1, const int nPower = NFMsg::GUILD_POWER_TYPE_PRESIDENT) = 0;
-    virtual const bool DeleteGuild(const NFIDENTID& xGuild) = 0;
-    virtual NF_SHARE_PTR<NFIObject> GetGuild(const NFIDENTID& xGuild) = 0;
+    virtual const bool DeleteGuild(const NFGUID& xGuild) = 0;
+    virtual NF_SHARE_PTR<NFIObject> GetGuild(const NFGUID& xGuild) = 0;
 
-    virtual bool GetPlayerGuild(const NFIDENTID& self, NFIDENTID& xGuild) = 0;
-    virtual bool SearchGuild(const NFIDENTID& self, const std::string& strName, std::vector<SearchGuildObject>& xList) = 0;
-    virtual bool GetPlayerGameID( const NFIDENTID& self, int& nGameID ) = 0;
+    virtual bool GetPlayerGuild(const NFGUID& self, NFGUID& xGuild) = 0;
+    virtual bool SearchGuild(const NFGUID& self, const std::string& strName, std::vector<SearchGuildObject>& xList) = 0;
+    virtual bool GetPlayerGameID( const NFGUID& self, int& nGameID ) = 0;
 
 protected:
 private:

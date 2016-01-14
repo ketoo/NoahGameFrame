@@ -10,7 +10,7 @@
 #include "NFCHateModule.h"
 //
 
-bool NFCHateModule::Empty(const NFIDENTID& self)
+bool NFCHateModule::Empty(const NFGUID& self)
 {
     TOBJECTHATEMAP::iterator it = mtObjectHateMap.find(self);
     if (it != mtObjectHateMap.end())
@@ -21,7 +21,7 @@ bool NFCHateModule::Empty(const NFIDENTID& self)
     return true;
 }
 
-bool NFCHateModule::AddHate(const NFIDENTID& self, const NFIDENTID& other, const int nValue)
+bool NFCHateModule::AddHate(const NFGUID& self, const NFGUID& other, const int nValue)
 {
     TOBJECTHATEMAP::iterator it = mtObjectHateMap.find(other);
     if (it == mtObjectHateMap.end())
@@ -43,7 +43,7 @@ bool NFCHateModule::AddHate(const NFIDENTID& self, const NFIDENTID& other, const
     return true;
 }
 
-bool NFCHateModule::SetHateValue(const NFIDENTID& self, const NFIDENTID& other, const int nValue)
+bool NFCHateModule::SetHateValue(const NFGUID& self, const NFGUID& other, const int nValue)
 {
     TOBJECTHATEMAP::iterator it = mtObjectHateMap.find(other);
     if (it != mtObjectHateMap.end())
@@ -66,27 +66,27 @@ bool NFCHateModule::SetHateValue(const NFIDENTID& self, const NFIDENTID& other, 
     return true;
 }
 
-bool NFCHateModule::CopyHateList(const NFIDENTID& self, const NFIDENTID& other)
+bool NFCHateModule::CopyHateList(const NFGUID& self, const NFGUID& other)
 {
     return true;
 }
 
-void NFCHateModule::CompSortList(const NFIDENTID& self)
+void NFCHateModule::CompSortList(const NFGUID& self)
 {
 
 }
 
-bool NFCHateModule::QueryMaxHateObject(const NFIDENTID& self, std::list<std::string>& HateList, const int nCount)
+bool NFCHateModule::QueryMaxHateObject(const NFGUID& self, std::list<std::string>& HateList, const int nCount)
 {
     return true;
 }
 
-NFIDENTID NFCHateModule::QueryMaxHateObject(const NFIDENTID& self)
+const NFGUID& NFCHateModule::QueryMaxHateObject(const NFGUID& self)
 {
-    return NFIDENTID();
+    return NULL_OBJECT;
 }
 
-int NFCHateModule::QueryHateValue(const NFIDENTID& self, const NFIDENTID& other)
+int NFCHateModule::QueryHateValue(const NFGUID& self, const NFGUID& other)
 {
     TOBJECTHATEMAP::iterator it = mtObjectHateMap.find(other);
     if (it != mtObjectHateMap.end())
@@ -102,7 +102,7 @@ int NFCHateModule::QueryHateValue(const NFIDENTID& self, const NFIDENTID& other)
     return -1;
 }
 
-bool NFCHateModule::ClearHate(const NFIDENTID& self)
+bool NFCHateModule::ClearHate(const NFGUID& self)
 {
     TOBJECTHATEMAP::iterator it = mtObjectHateMap.find(self);
     if (it != mtObjectHateMap.end())

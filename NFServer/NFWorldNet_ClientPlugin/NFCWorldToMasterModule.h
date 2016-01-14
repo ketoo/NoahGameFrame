@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_WORLDNET_CLIENT_MODULE_H_
-#define _NFC_WORLDNET_CLIENT_MODULE_H_
+#ifndef NFC_WORLDNET_CLIENT_MODULE_H
+#define NFC_WORLDNET_CLIENT_MODULE_H
 
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 
@@ -32,7 +32,7 @@ public:
     virtual bool Init();
     virtual bool BeforeShut();
     virtual bool Shut();
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
     virtual bool AfterInit();
 
 	virtual void LogRecive(const char* str){}
@@ -42,8 +42,8 @@ protected:
 
 protected:
 
-	int OnReciveMSPack(const NFIPacket& msg);
-	int OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+	void OnReciveMSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 	//连接丢失,删2层(连接对象，帐号对象)
 	void OnClientDisconnect(const int nAddress);
@@ -56,10 +56,10 @@ protected:
     void Register(NFINet* pNet);
     void RefreshWorldInfo();
 
-    int OnSelectServerProcess(const NFIPacket& msg);
-    int OnKickClientProcess(const NFIPacket& msg);
+    int OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnKickClientProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    int OnSelectServerResultsEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
+    int OnSelectServerResultsEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
 private:
 

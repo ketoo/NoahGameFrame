@@ -6,8 +6,8 @@
 //    @Desc             :   道具消费机制类,详细的具体某类道具消费流程以及扣除机制--药剂消费
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_POTIONITEMCONSUME_PROCESS_MODULE_H_
-#define _NFC_POTIONITEMCONSUME_PROCESS_MODULE_H_
+#ifndef NFC_POTIONITEMCONSUME_PROCESS_MODULE_H
+#define NFC_POTIONITEMCONSUME_PROCESS_MODULE_H
 
 #include <iostream>
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -31,17 +31,14 @@ public:
     }
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute( const float fLasFrametime, const float fStartedTime );
+    virtual bool Execute();
     virtual bool AfterInit();
 
-    //物品使用是否合法
-    virtual int ConsumeLegal( const NFIDENTID& self, int nItemRowID,  const NFIDataList& other );
+	//物品使用是否合法
+	virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemName, const NFGUID& targetID);
 
-    //使用物品的消耗
-    virtual int ConsumeSelf( const NFIDENTID& self, int nItemRowID );
-
-    //合法,消耗,那么处理过程[消耗后,nItemRowID已经找不到了，因为可能被清空了]
-    virtual int ConsumeProcess( const NFIDENTID& self, const std::string& strItemName, const NFIDataList& other );
+	//合法,消耗,那么处理过程[消耗后,nItemRowID已经找不到了，因为可能被清空了]
+	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemName, const NFGUID& targetID);
 
 private:
     NFIKernelModule* m_pKernelModule;

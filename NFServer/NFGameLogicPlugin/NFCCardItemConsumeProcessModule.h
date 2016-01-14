@@ -7,8 +7,8 @@
 //                                  --技能书学习技能,礼包类获得物品,BUFF类得到BUFF,技能类使用技能
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_CARDITEMCONSUME_PROCESS_MODULE_H_
-#define _NFC_CARDITEMCONSUME_PROCESS_MODULE_H_
+#ifndef NFC_CARDITEMCONSUME_PROCESS_MODULE_H
+#define NFC_CARDITEMCONSUME_PROCESS_MODULE_H
 
 #include <iostream>
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -30,17 +30,14 @@ public:
     }
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute( const float fLasFrametime, const float fStartedTime );
+    virtual bool Execute();
     virtual bool AfterInit();
 
-    //物品使用是否合法
-    virtual int ConsumeLegal( const NFIDENTID& self, int nItemRowID,  const NFIDataList& other );
+	//物品使用是否合法
+	virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemName, const NFGUID& targetID);
 
-    //使用物品的消耗
-    virtual int ConsumeSelf( const NFIDENTID& self, int nItemRowID );
-
-    //合法,消耗,那么处理过程[消耗后,nItemRowID已经找不到了，因为可能被清空了]
-    virtual int ConsumeProcess( const NFIDENTID& self, const std::string& strItemName, const NFIDataList& other );
+	//合法,消耗,那么处理过程[消耗后,nItemRowID已经找不到了，因为可能被清空了]
+	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemName, const NFGUID& targetID);
 
 private:
     NFIKernelModule* m_pKernelModule;
