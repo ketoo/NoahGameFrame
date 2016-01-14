@@ -34,6 +34,7 @@
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
+#include "NFComm/NFPluginModule/NFIEquipModule.h"
 ////////////////////////////////////////////////////////////////////////////
 
 
@@ -96,6 +97,12 @@ protected:
     void OnClienPushTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClienPushCustom(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClienChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+    //Equip
+    void OnIntensifylevelToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnHoleToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnInlaystoneToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnElementlevelToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     //////////////////////////////////////////////////////////////////////////
 
@@ -210,6 +217,7 @@ private:
     //SLGÄ£¿é
 	NFISLGShopModule* m_pSLGShopModule;
     NFISLGBuildingModule* m_pSLGBuildingModule;
+    NFIEquipModule* m_pEquipModule;
     NFIGameServerToWorldModule* m_pGameServerToWorldModule;
 };
 
