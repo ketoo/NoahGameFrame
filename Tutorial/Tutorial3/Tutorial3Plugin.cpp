@@ -27,7 +27,7 @@ const int Tutorial3Plugin::GetPluginVersion()
 
 const std::string Tutorial3Plugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(Tutorial3Plugin)
+    return GET_CLASS_NAME(Tutorial3Plugin)
 }
 
 void Tutorial3Plugin::Install()

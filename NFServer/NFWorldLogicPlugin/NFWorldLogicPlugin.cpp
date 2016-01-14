@@ -36,15 +36,13 @@ const int NFWorldLogicPlugin::GetPluginVersion()
 
 const std::string NFWorldLogicPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFWorldLogicPlugin)
+    return GET_CLASS_NAME(NFWorldLogicPlugin);
 }
 
 void NFWorldLogicPlugin::Install()
 {
 
     REGISTER_MODULE(pPluginManager, NFCWorldLogicModule)
-
-
 }
 
 void NFWorldLogicPlugin::Uninstall()

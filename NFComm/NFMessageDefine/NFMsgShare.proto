@@ -1,0 +1,437 @@
+package NFMsg; 
+
+import "NFDefine.proto";
+import "NFMsgBase.proto";
+
+
+//除 去基础对象身上的属性外，这里全部游戏中的逻辑协议
+
+message ReqEnterGameServer
+{
+	required Ident 		id = 1;
+	required bytes 		account = 2;
+    required int32 		game_id = 3;
+	required bytes 		name = 4;
+}
+
+message ReqHeartBeat
+{
+}
+
+message ReqLeaveGameServer
+{
+}
+
+message PlayerEntryInfo//对象出现基本信息
+{
+	required Ident	object_guid = 1;
+	required float	x = 2;
+	required float	y = 3;
+	required float	z = 4;
+	required int32	career_type = 5;
+	required int32	player_state = 6;
+	required bytes  config_id = 7;
+	required int32  scene_id = 8;
+	required bytes  class_id = 9;
+}
+
+message AckPlayerEntryList//对象出现列表
+{
+	repeated PlayerEntryInfo object_list = 1;
+}
+
+message AckPlayerLeaveList//对象离去列表
+{
+	repeated Ident 	object_list = 1;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+message ReqAckSynData//对象离去列表
+{
+	enum SynType
+	{
+		EST_SCENE = 1;	//场景
+		EST_GROUP = 2;	//层
+		EST_GUILD = 3;	//公会
+		EST_FRIEND = 4;	//好友
+	}
+	required Ident 		syser = 1;
+	repeated Ident 		object_list = 2;
+	required bytes  	data = 3;
+	required SynType  	syn_type = 4;
+	required EGameMsgID msg_id = 5;//有消息ID限制
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+message ReqAckPlayerMove
+{
+	required Ident 	mover = 1;
+	required int32  moveType = 2;
+	repeated Position target_pos = 3;
+	repeated Position source_pos = 4;
+}
+
+message ChatContainer
+{
+	enum ContainerType
+	{
+		EGCT_ITEM = 1;	//道具
+	}
+	
+	required int32 ConTainerType = 2;
+	required bytes data_info = 3;
+}
+
+message ReqAckPlayerChat
+{
+	enum EGameChatType
+	{
+		EGCT_GUILD = 0;
+		EGCT_PRIVATE = 1;
+		EGCT_TEAM = 2;
+		EGCT_WORLD = 3;
+	}
+
+	required Ident	chat_id = 1;
+	required EGameChatType  chat_type = 2;
+	required bytes chat_info = 3;
+	required bytes chat_name = 4;
+	optional Ident	target_id = 5;
+	repeated ChatContainer Container_data = 6;
+}
+
+message EffectData
+{
+	enum EResultType
+	{
+		EET_SUCCESS = 0;
+		EET_FAIL = 1;
+		EET_REFUSE = 2;		
+	}
+	required Ident 			effect_ident = 1;
+	required int32  		effect_value = 2;
+	required EResultType  	effect_rlt = 3;
+}
+
+message ReqAckUseSkill
+{
+	required Ident 	user = 1;
+	required bytes skill_id = 2;
+	required Position now_pos = 3;
+	required Position tar_pos = 4;
+	required int32  use_index = 5;//因为客户端要先展示
+	repeated EffectData 	effect_data = 6;
+}
+
+message ReqAckUseItem
+{
+	required Ident 	user = 1;
+	required Ident item_guid	= 2;
+	repeated EffectData 	effect_data = 3;
+}
+
+message ReqAckSwapScene
+{
+	enum EGameSwapType
+	{
+		EGST_NARMAL = 0;//普通城镇传送
+		EGST_CLONE = 1;//普通副本
+		EGST_ARENA = 2;//竞技场
+		EGST_MIRROR = 3;//镜像空间
+	}
+
+    required EGameSwapType		transfer_type = 1;
+	required int32		scene_id = 2;
+	required int32		line_id = 3;
+	optional float 		x = 4;
+	optional float 		y = 5;
+	optional float 		z = 6;
+}
+
+message ItemStruct
+{
+    required string item_id            = 1; // 配置ID
+    required int32 item_count          = 2; // 数量
+}
+
+message ReqAckEndBattle
+{
+	//下发的时候则为道具列表
+	//获得的金币等列表
+    required int32 money            = 1; // 副本获得的金币
+    required int32 exp              = 2; // 副本获得的经验
+    required int32 diamond          = 3; // 副本获得的经验
+    repeated ItemStruct item_list   = 4; // 副本获得的道具列表
+}
+
+
+message ReqPickDropItem//拾取物品
+{
+	required Ident item_guid = 2;
+}
+
+message ReqAcceptTask//接受任务
+{
+	required bytes task_id = 1;
+}
+
+message ReqCompeleteTask//完成任务后申请领奖
+{
+	required bytes task_id = 1;
+}
+
+///////////////战斗/////////////////////////////////////////////////////////////////////////////////////
+
+message ReqAckJoinActivity
+{
+	enum EGameActivityType
+	{
+		EGAT_PVP = 0;//普通PVP对战活动
+	}
+	
+	enum EGameActivitySubType
+	{
+		EGAT_NORMAL = 0;//普通难度
+	}
+    required EGameActivityType		activity_type = 1;
+    required EGameActivitySubType	sub_activity_type = 2;
+}
+
+message ReqAckSearchOppnent
+{
+    required EBattleType		search_type = 1;
+    //optional EGameActivitySubType	sub_activity_type = 2;//回来要带对手数据
+}
+
+message ReqAckBattleOppnent
+{
+    required EBattleType		battle_type = 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////工会/////////////////////////////////////////////////////////////////////////////////////
+//EGMI_REQ_CREATE_GUILD                       = 300; // 申请创建公会 EGMI_ACK_CREATE_GUILD						= 301; // 创建公会结果
+message ReqAckCreateGuild
+{
+    required Ident		guild_id = 1;
+    required string		guild_name = 2;
+}
+//EGMI_REQ_SEARCH_GUILD                       = 308; // 申请搜索公会
+message ReqSearchGuild
+{
+    required string		guild_name = 1;
+}
+//EGMI_ACK_SEARCH_GUILD                       = 309; // 返回搜索公会
+message AckSearchGuild
+{
+	message SearchGuildObject
+	{
+		required Ident		guild_ID 	= 1;
+		required string		guild_name 	= 2;
+		required string		guild_icon 	= 3;
+		required int32		guild_member_count 	= 4;
+		required int32		guild_member_max_count 	= 5;
+		required int32		guild_honor 	= 6;
+		required int32		guild_rank 	= 7;
+	}
+	
+	repeated SearchGuildObject guild_list = 1;
+}
+//EGMI_REQ_JOIN_GUILD                         = 302; // 申请加入公会 EGMI_ACK_JOIN_GUILD							= 303; // 加入公会结果
+message ReqAckJoinGuild
+{
+    required Ident		guild_id = 1;
+    required string		guild_name = 2;
+}
+//EGMI_ACK_LEAVE_GUILD						= 305; // 离开公会结果 
+message ReqAckLeaveGuild
+{
+    required Ident		guild_id = 1;
+    required string		guild_name = 2;
+}
+
+
+//操作成员 EGMI_REQ_OPR_GUILD                        	= 306; // 申请成员操作 EGMI_ACK_OPR_GUILD                        	= 307; // 成员操作结果
+message ReqAckOprGuildMember
+{
+	enum EGGuildMemberOprType
+	{
+		EGAT_DOWN = 0;
+		EGAT_UP = 1;
+		EGAT_KICK = 2;
+		
+		EGAT_APPOINT 		= 3;//任命
+		EGAT_FIRE 			= 4;//撤职
+		EGAT_DEMISE 		= 5;//禅让
+		EGAT_ACCEPTAPPLY 	= 6;//收人
+		EGAT_DENYAPPLY 		= 7;//拒收
+		EGAT_KICKOUT 		= 8;//开除
+	}
+	required Ident						guild_id = 1;
+    required Ident						member_id = 2;//被操作的ID
+    required EGGuildMemberOprType		type = 3;
+}
+
+//EGMI_REQ_OPR_GUILDINFO						= 310; // 申请公会操作   EGMI_ACK_OPR_GUILDINFO						= 311; // 公会操作结果
+message ReqAckOprGuild
+{
+	enum EGGuildOprType
+	{		
+		EGAT_APPLYDISMISS	= 1;//申请解散军团
+		EGAT_STOPDISMISS	= 2;//中止解散军团
+		EGAT_SETRECRUIT		= 3;//设置招募
+		EGAT_PUBLISHRECRUIT	= 4;//发布招募
+		EGAT_EDITAD			= 5;//编辑公告
+		EGAT_LEVELUP		= 6;//军团升级
+	}
+	required Ident						guild_id = 1;
+    required Ident						player_id = 2;//
+    required EGGuildOprType				type = 3;
+	
+	required string						Recruit_data = 4;//招募信息
+	required string						Ad_data 	= 5;//公告信息
+}
+
+message ReqAckDonateGuildItem
+{
+    required Ident		guild_id = 1;
+    required Ident		target_id = 2;
+    repeated ItemStruct item_list = 3;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+message ChatInfo
+{
+	enum EChatType
+	{
+		ECHATTYPE_NORMAL = 0;//普通
+		ECHATTYPE_PRIVATE = 1;//私聊
+		ECHATTYPE_GUILD = 2;//公会
+		ECHATTYPE_WORLD = 3;//世界
+	}
+	
+	required EChatType  chat_type 			= 1;//01普通2世界
+	required bytes 		chat_info 			= 2;
+	required int64 		chat_time 			= 3;//
+	optional bytes 		addtional_info 		= 4;//附件
+	
+	required Ident		send_id				= 5;//发送者的ID
+	required bytes 		send_name 			= 6;//发送者的名字
+	optional int32 		send_level 			= 7;//发送者的等级
+
+	repeated Ident   	recvier_id  		= 8;//接收者列表
+	optional bytes		guid_name   		= 9;//公会名
+}
+
+message ReqAckCreateChatGroup
+{	
+	required bytes      name				= 1;//名字
+	required Ident		selfid				= 2;//角色ID
+	optional Ident		xChatGroupid		= 3;//聊天组的ID
+	optional int32		chatType			= 4;//聊天组的聊天类型
+}
+
+message ReqAckjoinChatGroup
+{	
+	required Ident		selfid				= 1;//角色ID
+	optional Ident		xChatGroupid		= 2;//聊天组的ID
+	optional int64		result				= 3;//结果 0失败， 1成功
+	optional int32		chatType			= 4;//聊天组的聊天类型
+}
+
+message ReqAckQuitChatGroup
+{	
+	required Ident		selfid				= 1;//角色ID
+	optional Ident		xChatGroupid		= 2;//聊天组的ID
+	optional int64		result				= 3;//结果 0失败， 1成功
+}
+
+message ReqSubscriptionChatGroup
+{	
+	required Ident		selfid				= 1;//角色ID
+	repeated Ident		xChatGroupid		= 2;//订阅聊天组消息
+}
+
+message ReqCancelSubscriptionChatGroup
+{	
+	required Ident		selfid				= 1;//角色ID
+	repeated Ident		xChatGroupid		= 2;//订阅聊天组消息
+}
+
+//EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP			= 500;		 // 装备强化
+message ReqIntensifylevelToEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID	
+}
+
+//EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP			= 501;		 // 装备强化
+message AckIntensifylevelToEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID
+	required int32		result				= 3;//0失败 1成功
+}
+
+//EGEC_REQ_HOLE_TO_EQUIP					= 502;		 // 装备打洞
+message ReqHoleToEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID
+}
+
+//EGEC_ACK_HOLE_TO_EQUIP					= 503;		 // 装备打洞
+message AckHoleToEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID
+	required int32		result				= 3;//0失败 1成功
+}
+
+//EGEC_REQ_INLAYSTONE_TO_EQUIP				= 504;		 // 装备镶嵌
+message ReqInlaystoneToEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID
+	required bytes		stoneid			= 3;//石头ID
+	required int32		hole_index				= 4;//空位
+}
+
+//EGEC_ACK_INLAYSTONE_TO_EQUIP				= 505;		 // 装备镶嵌
+message AckInlaystoneToEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID
+	required int32		result				= 3;//0失败 1成功
+}
+
+//EGEC_REQ_ELEMENTLEVEL_TO_EQUIP				= 506;		 // 装备附
+message ReqElementlevelToEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID
+	required EGameElementType		eElementType	= 3;//附魔元素
+}
+
+//EGEC_ACK_ELEMENTLEVEL_TO_EQUIP				= 507;		 // 装备附魔
+message AckElementlevelToEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID
+	required int32		result				= 3;//0失败 1成功
+}
+
+

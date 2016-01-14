@@ -39,7 +39,7 @@ const int NFProxyPlugin::GetPluginVersion()
 
 const std::string NFProxyPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFProxyPlugin)
+    return GET_CLASS_NAME(NFProxyPlugin)
 }
 
 void NFProxyPlugin::Install()

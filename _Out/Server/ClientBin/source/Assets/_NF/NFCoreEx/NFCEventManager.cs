@@ -11,7 +11,7 @@ namespace NFCoreEx
 		public NFCEventManager(NFIDENTID self)
 		{
 			mSelf = self;
-			mhtEvent = new Hashtable();
+            mhtEvent = new Dictionary<int, NFIEvent>();
 		}
 
 		public override void RegisterCallback(int nEventID, NFIEvent.EventHandler handler, NFIDataList valueList)
@@ -36,6 +36,6 @@ namespace NFCoreEx
 		}
 
 		NFIDENTID mSelf;
-		Hashtable mhtEvent;
+        Dictionary<int, NFIEvent> mhtEvent;
     }
 }

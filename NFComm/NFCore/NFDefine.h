@@ -6,12 +6,12 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_DEFINE_H_
-#define _NF_DEFINE_H_
+#ifndef NF_DEFINE_H
+#define NF_DEFINE_H
 
 #include <functional>
 #include "NFIDataList.h"
-#include "NFComm/NFPluginModule/NFIdentID.h"
+#include "NFComm/NFPluginModule/NFGUID.h"
 
 enum CLASS_OBJECT_EVENT
 {
@@ -42,15 +42,15 @@ struct RECORD_EVENT_DATA
 };
 
 // functor
-typedef std::function<int(const NFIDENTID&, const std::string&, const float, const int)> HEART_BEAT_FUNCTOR;
-typedef std::function<int(const NFIDENTID&, const std::string&, const NFIDataList&, const NFIDataList&)> PROPERTY_EVENT_FUNCTOR;
-typedef std::function<int(const NFIDENTID&, const RECORD_EVENT_DATA&, const NFIDataList&, const NFIDataList&)> RECORD_EVENT_FUNCTOR;
+typedef std::function<int(const NFGUID&, const std::string&, const float, const int)> HEART_BEAT_FUNCTOR;
+typedef std::function<int(const NFGUID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&)> PROPERTY_EVENT_FUNCTOR;
+typedef std::function<int(const NFGUID&, const RECORD_EVENT_DATA&, const NFIDataList&, const NFIDataList&)> RECORD_EVENT_FUNCTOR;
 
-typedef std::function<int(const NFIDENTID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIDataList&)> CLASS_EVENT_FUNCTOR;
-typedef std::function<int(const NFIDENTID&, const int, const NFIDataList&)> EVENT_PROCESS_FUNCTOR;
+typedef std::function<int(const NFGUID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIDataList&)> CLASS_EVENT_FUNCTOR;
+typedef std::function<int(const NFGUID&, const int, const NFIDataList&)> EVENT_PROCESS_FUNCTOR;
 
-typedef std::function<int(const NFIDENTID&, const int, std::string&)> EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR;
-typedef std::function<int(const NFIDENTID&, const int, const std::string&)> EVENT_ASYNC_PROCESS_END_FUNCTOR;
+typedef std::function<int(const NFGUID&, const int, std::string&)> EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR;
+typedef std::function<int(const NFGUID&, const int, const int, const std::string&)> EVENT_ASYNC_PROCESS_END_FUNCTOR;
 
 typedef NF_SHARE_PTR<HEART_BEAT_FUNCTOR> HEART_BEAT_FUNCTOR_PTR;
 typedef NF_SHARE_PTR<PROPERTY_EVENT_FUNCTOR> PROPERTY_EVENT_FUNCTOR_PTR;

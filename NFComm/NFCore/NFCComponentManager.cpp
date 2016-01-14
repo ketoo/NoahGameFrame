@@ -8,63 +8,20 @@
 
 #include "NFCComponentManager.h"
 
-NFIDENTID NFCComponentManager::Self()
+NFGUID NFCComponentManager::Self()
 {
     return mSelf;
 }
 
-NF_SHARE_PTR<NFIComponent> NFCComponentManager::AddComponent(const std::string& strComponentName, const std::string& strLanguageName)
+bool NFCComponentManager::AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent)
 {
-    NF_SHARE_PTR<NFIComponent> pComponent = GetElement(strComponentName);
-    if (pComponent.get())
-    {
-        return pComponent;
-    }
-
-    pComponent = NF_SHARE_PTR<NFIComponent>(NF_NEW NFCComponent(mSelf, strComponentName, strLanguageName));
-    AddElement(strComponentName, pComponent);
-
-    return pComponent;
-}
-
-NF_SHARE_PTR<NFIComponent> NFCComponentManager::FindComponent(const std::string& strComponentName)
-{
-    return GetElement(strComponentName);
-}
-
-bool NFCComponentManager::SetEnable(const std::string& strComponentName, const bool bEnable)
-{
-    NF_SHARE_PTR<NFIComponent> pComponent = GetElement(strComponentName);
-    if (pComponent.get())
-    {
-        return pComponent->SetEnable(bEnable);
-    }
-
-    return false;
-}
-
-bool NFCComponentManager::Enable(const std::string& strComponentName)
-{
-    NF_SHARE_PTR<NFIComponent> pComponent = GetElement(strComponentName);
-    if (pComponent.get())
-    {
-        return pComponent->Enable();
-    }
-
-    return false;
-}
-
-bool NFCComponentManager::DestroyAllComponent()
-{
-    ClearAll();
-
-    return true;
+    return AddElement(strComponentName, pNewComponent);
 }
 
 bool NFCComponentManager::Init()
 {
     NF_SHARE_PTR<NFIComponent> pComponent = First();
-    while (pComponent.get())
+    while (nullptr != pComponent)
     {
         pComponent->Init();
 
@@ -113,13 +70,13 @@ bool NFCComponentManager::Shut()
     return true;
 }
 
-bool NFCComponentManager::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCComponentManager::Execute()
 {
 
     NF_SHARE_PTR<NFIComponent> pComponent = First();
     while (pComponent.get() && pComponent->Enable())
     {
-        pComponent->Execute(fLasFrametime, fStartedTime);
+        pComponent->Execute();
 
         pComponent = Next();
     }

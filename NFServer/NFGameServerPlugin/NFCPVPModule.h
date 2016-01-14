@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_PVP_MODULE_H_
-#define _NFC_PVP_MODULE_H_
+#ifndef NFC_PVP_MODULE_H
+#define NFC_PVP_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
@@ -30,14 +30,14 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute( const float fLasFrametime, const float fStartedTime );
+    virtual bool Execute();
     virtual bool AfterInit();
 
-	virtual bool MatchPVPObject(const NFIDENTID& self);
+	virtual bool MatchPVPObject(const NFGUID& self);
 
-	virtual bool StartPVPWar(const NFIDENTID& self);
+	virtual bool StartPVPWar(const NFGUID& self);
 
-	virtual bool ExitPVPWar(const NFIDENTID& self);
+	virtual bool ExitPVPWar(const NFGUID& self);
 
 private:
     NFIEventProcessModule* m_pEventProcessModule;
@@ -45,7 +45,7 @@ private:
     NFILogModule* m_pLogModule;
 
 private:
-    NFList<NFIDENTID> mxPVPList; // 报名的队列
+    NFList<NFGUID> mxPVPList; // 报名的队列
 };
 
 

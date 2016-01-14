@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_ACTOR_MANAGER_H_
-#define _NFC_ACTOR_MANAGER_H_
+#ifndef NFC_ACTOR_MANAGER_H
+#define NFC_ACTOR_MANAGER_H
 
 #include <map>
 #include <string>
@@ -34,7 +34,7 @@ public:
 
 	virtual bool Shut();
 
-	virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+	virtual bool Execute();
 
 	virtual void OnReload(const char* strModuleName, NFILogicModule* pModule)
 	{
@@ -43,21 +43,21 @@ public:
 		AfterInit();
 	}
 
-	virtual NFIPluginManager* GetPluginManager();
+	virtual bool SendMsgToActor( const int nActorIndex, const NFGUID& objectID, const int nEventID, const std::string& strArg);
 
-	virtual int OnRequireActor(NFIComponent* pComponent);
-	virtual bool SendMsgToActor( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc);
+    virtual NF_SHARE_PTR<NFIActor> GetActor(const int nActorIndex);
+	
+protected:
+	virtual int RequireActor();
+	virtual bool ReleaseActor(const int nActorIndex);
 
-    virtual NFIActor* GetActor(const int nActorIndex);
-
+	virtual bool AddComponent(const int nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent);
+	virtual bool AddEndFunc(const int nActorIndex, EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end);
 private:
-	NFIPluginManager* m_pPluginManager;
 
     Theron::Framework* m_pFramework;
-	NFIActor* m_pMainActor;
-	std::vector<NFIActor*> mvActorList;
-	std::map<int, NF_SHARE_PTR<NFIActor>> mxActorMap;
-
+	NF_SHARE_PTR<NFIActor> m_pMainActor;
+	std::map<int, NF_SHARE_PTR<NFIActor> > mxActorMap;
 };
 
 #endif

@@ -20,17 +20,17 @@ bool NFCDataBaseNet_ClientModule::Shut()
     return true;
 }
 
-bool NFCDataBaseNet_ClientModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCDataBaseNet_ClientModule::Execute()
 {
     return true;
 }
 
 bool NFCDataBaseNet_ClientModule::AfterInit()
 {
-    m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
-    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-    m_pMysqlConnectMgrModule = dynamic_cast<NFIMysqlConnectMgrModule*>(pPluginManager->FindModule("NFCMysqlConnectMgrModule"));
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
+    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
+    m_pMysqlConnectMgrModule = pPluginManager->FindModule<NFIMysqlConnectMgrModule>("NFCMysqlConnectMgrModule");
 
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pKernelModule);

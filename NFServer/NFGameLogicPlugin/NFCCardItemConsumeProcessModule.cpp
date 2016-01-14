@@ -10,11 +10,11 @@
 
 bool NFCCardItemConsumeProcessModule::Init()
 {
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
-    m_pItemConsumeManagerModule = dynamic_cast<NFIItemConsumeManagerModule*>( pPluginManager->FindModule( "NFCItemConsumeManagerModule" ) );
-    m_pPackModule = dynamic_cast<NFIPackModule*>( pPluginManager->FindModule( "NFCPackModule" ) );
-    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>( pPluginManager->FindModule( "NFCElementInfoModule" ) );
-    m_pLogModule = dynamic_cast<NFILogModule*>( pPluginManager->FindModule( "NFCLogModule" ) );
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
+    m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>("NFCItemConsumeManagerModule");
+    m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
+    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
 
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pItemConsumeManagerModule );
@@ -29,7 +29,7 @@ bool NFCCardItemConsumeProcessModule::AfterInit()
 {
     //学习技能卡暂时废掉
     //m_pItemConsumeManagerModule->ResgisterConsumeModule( EGameItemType::EGIT_ITEM_SKILL_CARD, this);
-    m_pItemConsumeManagerModule->ResgisterConsumeModule( EGameItemSubType::EGIT_ITEM_PACK, this );
+    //m_pItemConsumeManagerModule->ResgisterConsumeModule( EGameItemSubType::EGIT_ITEM_PACK, this );
 
     return true;
 }
@@ -39,85 +39,20 @@ bool NFCCardItemConsumeProcessModule::Shut()
     return true;
 }
 
-bool NFCCardItemConsumeProcessModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCCardItemConsumeProcessModule::Execute()
 {
     return true;
 }
 
 
-int NFCCardItemConsumeProcessModule::ConsumeLegal( const NFIDENTID& self, int nItemRowID, const NFIDataList& other )
+int NFCCardItemConsumeProcessModule::ConsumeLegal( const NFGUID& self, const std::string& strItemName, const NFGUID& targetID )
 {
     return 1;
 }
 
-int NFCCardItemConsumeProcessModule::ConsumeSelf( const NFIDENTID& self, int nItemRowID )
+int NFCCardItemConsumeProcessModule::ConsumeProcess( const NFGUID& self, const std::string& strItemName, const NFGUID& targetID )
 {
-    //得到数量-1
-    int nCount = m_pPackModule->GetGridCount( self, nItemRowID );
-    nCount--;
-
-    if ( nCount >= 0 )
-    {
-        //消费成功
-        if ( 0 == nCount )
-        {
-            m_pPackModule->DeleteGrid( self, nItemRowID );
-
-        }
-        else
-        {
-            m_pPackModule->SetGridCount( self, nItemRowID, nCount );
-        }
-
-        return 1;
-    }
-
-    //失败
-
-    return 0;
-}
-
-int NFCCardItemConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, const std::string& strItemName, const NFIDataList& other )
-{
-    //附加效果
-
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager( strItemName );
-    if ( pPropertyManager )
-    {
-        NF_SHARE_PTR<NFIProperty> pItemEffectProperty = pPropertyManager->GetElement( "EffectProperty" );
-        NF_SHARE_PTR<NFIProperty> pItemEffectValue = pPropertyManager->GetElement( "EffectValue" );
-        if ( pItemEffectProperty && pItemEffectValue )
-        {
-            NFCDataList valueEffectProperty( pItemEffectProperty->GetString().c_str(), "," );
-            NFCDataList valueEffectValue( pItemEffectValue->GetString().c_str(), "," );
-            if ( valueEffectProperty.GetCount() == valueEffectValue.GetCount() )
-            {
-                for ( int i = 0; i < valueEffectProperty.GetCount(); i++ )
-                {
-                    //先测定目标是否有此属性(其实是担心配错了)
-                    for ( int j = 0; j < other.GetCount(); j++ )
-                    {
-                        NFIDENTID identOther = other.Object( j );
-                        if ( !identOther.IsNull() )
-                        {
-                            NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( identOther );
-                            if ( pObject )
-                            {
-                                std::string strCurProperty = valueEffectProperty.String( i );
-                                std::string strMaxProperty = "MAX" + strCurProperty;
-                                NF_SHARE_PTR<NFIProperty> pOtherCurProperty = pObject->GetPropertyManager()->GetElement( strCurProperty );
-                                NF_SHARE_PTR<NFIProperty> pOtherMaxProperty = pObject->GetPropertyManager()->GetElement( strMaxProperty );
-                                if ( pOtherCurProperty && pOtherMaxProperty )
-                                {
-                                    //技能书之类的，学习新东西(并不是装备类的那个技能书，那个是用来强化的)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+    
 
     m_pLogModule->LogElement(NFILogModule::NLL_ERROR_NORMAL, self, strItemName, "There is no element", __FUNCTION__, __LINE__);
 

@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_STATE_MACHINE_H_
-#define _NFC_STATE_MACHINE_H_
+#ifndef NFC_STATE_MACHINE_H
+#define NFC_STATE_MACHINE_H
 
 #include "NFIStateMachine.h"
 #include "NFCAIModule.h"
@@ -17,11 +17,11 @@ class NFCStateMachine
 {
 public:
 
-    NFCStateMachine(const NFIDENTID& self, NFIAIModule* pControl);
+    NFCStateMachine(const NFGUID& self, NFIAIModule* pControl);
 
     virtual ~NFCStateMachine();
 
-    virtual void UpData(float fFrameTime, float fAllTime);
+    virtual void Execute();
 
     //change to a new state
     virtual void ChangeState(const NFAI_STATE eState);
@@ -42,7 +42,7 @@ public:
 private:
     NFIAIModule*    m_pAIControlInterface;
 
-    NFIDENTID mOwnerID;
+    NFGUID mOwnerID;
     float mfHeartBeatTime;
     NFAI_STATE meCurrentState;
     NFAI_STATE meLastState;

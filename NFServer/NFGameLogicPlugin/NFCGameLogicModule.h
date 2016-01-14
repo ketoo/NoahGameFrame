@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_GAMELOGIC_MODULE_H_
-#define _NFC_GAMELOGIC_MODULE_H_
+#ifndef NFC_GAMELOGIC_MODULE_H
+#define NFC_GAMELOGIC_MODULE_H
 
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -30,7 +30,7 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute( const float fLasFrametime, const float fStartedTime );
+    virtual bool Execute();
 
     virtual bool AfterInit();
     virtual bool BeforeShut();

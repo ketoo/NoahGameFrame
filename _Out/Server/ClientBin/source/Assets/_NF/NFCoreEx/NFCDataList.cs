@@ -8,9 +8,9 @@ namespace NFCoreEx
 {
     public class NFCDataList : NFIDataList
     {
-        
 
-        private Hashtable mValueObject = new Hashtable();
+
+        private Dictionary<int, Var_Data> mValueObject = new Dictionary<int, Var_Data>();
 
         //==============================================
 
@@ -257,7 +257,7 @@ namespace NFCoreEx
         protected Var_Data GetDataObject(int index)
         {
 
-            if (mValueObject.Contains(index))
+            if (mValueObject.ContainsKey(index))
             {
                 return (Var_Data)mValueObject[index];
             }
