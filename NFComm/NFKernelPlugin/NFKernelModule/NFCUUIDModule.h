@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_UUID_MODULE_H_
-#define _NFC_UUID_MODULE_H_
+#ifndef NFC_UUID_MODULE_H
+#define NFC_UUID_MODULE_H
 
 #include <boost/crc.hpp>
 #include <boost/format.hpp>
@@ -34,9 +34,9 @@ public:
     virtual bool BeforeShut();
     virtual bool AfterInit();
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
-    virtual NFIDENTID CreateGUID();
+    virtual NFGUID CreateGUID();
 
     virtual NFINT64 GetIdentID();
     virtual void SetIdentID(NFINT64 nID);
@@ -47,4 +47,4 @@ private:
 	NFIKernelModule* m_pKernelModule;
 };
 
-#endif // !_NFC_UUID_MODULE_H_
+#endif // !_NFC_UUID_MODULE_H

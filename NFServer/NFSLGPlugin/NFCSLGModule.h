@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_SLG_SERVER_MODULE_H_
-#define _NFC_SLG_SERVER_MODULE_H_
+#ifndef NFC_SLG_SERVER_MODULE_H
+#define NFC_SLG_SERVER_MODULE_H
 
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -26,7 +26,7 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute( const float fLasFrametime, const float fStartedTime );
+    virtual bool Execute();
 
     virtual bool AfterInit();
     virtual bool BeforeShut();
@@ -41,4 +41,4 @@ protected:
 private:
 };
 
-#endif // !_NFC_SLG_SERVER_MODULE_H_
+#endif // !_NFC_SLG_SERVER_MODULE_H

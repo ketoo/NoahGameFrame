@@ -20,9 +20,8 @@
 #include "NFCItemConsumeManagerModule.h"
 #include "NFCNPCRefreshModule.h"
 #include "NFCRebornItemConsumeProcessModule.h"
-#include "NFCAwardPackModule.h"
-#include "NFCEctypeModule.h"
-#include "NFCCostModule.h"
+#include "NFCHeroModule.h"
+#include "NFCEquipModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -47,7 +46,7 @@ const int NFGameLogicPlugin::GetPluginVersion()
 
 const std::string NFGameLogicPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME( NFGameLogicPlugin )
+    return GET_CLASS_NAME( NFGameLogicPlugin )
 }
 
 void NFGameLogicPlugin::Install()
@@ -71,18 +70,16 @@ void NFGameLogicPlugin::Install()
     REGISTER_MODULE(pPluginManager, NFCBulletSkillConsumeProcessModule)
     //Continue to add other skill types of consumption
 
+	REGISTER_MODULE(pPluginManager, NFCHeroModule)
     REGISTER_MODULE(pPluginManager, NFCNPCRefreshModule)
-    REGISTER_MODULE(pPluginManager, NFCAwardPackModule)
-    REGISTER_MODULE(pPluginManager, NFCEctypeModule)
-    REGISTER_MODULE(pPluginManager, NFCCostModule)
+    REGISTER_MODULE(pPluginManager, NFCEquipModule)
 }
 
 void NFGameLogicPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCCostModule)
-    UNREGISTER_MODULE(pPluginManager, NFCEctypeModule)
-    UNREGISTER_MODULE(pPluginManager, NFCAwardPackModule)
-	UNREGISTER_MODULE(pPluginManager, NFCNPCRefreshModule)
+    UNREGISTER_MODULE(pPluginManager, NFCEquipModule)
+    UNREGISTER_MODULE(pPluginManager, NFCNPCRefreshModule)
+	UNREGISTER_MODULE(pPluginManager, NFCHeroModule)
 
     UNREGISTER_MODULE(pPluginManager, NFCBulletSkillConsumeProcessModule)
     UNREGISTER_MODULE(pPluginManager, NFCBriefSkillConsumeProcessModule)

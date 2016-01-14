@@ -24,7 +24,7 @@ bool NFCProxyLogicModule::Shut()
     return true;
 }
 
-bool NFCProxyLogicModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCProxyLogicModule::Execute()
 {
     // #ifdef NF_DEBUG_MODE
     //     char szContent[MAX_PATH] = { 0 };
@@ -47,10 +47,10 @@ bool NFCProxyLogicModule::Execute(const float fLasFrametime, const float fStarte
 
 bool NFCProxyLogicModule::AfterInit()
 {
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     //m_pShareMemoryModule = dynamic_cast<NFIShareMemoryModule*>(pPluginManager->FindModule("NFCShareMemoryModule"));
-    m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
 
     assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);

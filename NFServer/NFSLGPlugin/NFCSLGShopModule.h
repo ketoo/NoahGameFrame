@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_SLG_SHOP_MODULE_H_
-#define _NFC_SLG_SHOP_MODULE_H_
+#ifndef NFC_SLG_SHOP_MODULE_H
+#define NFC_SLG_SHOP_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
@@ -30,10 +30,10 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute( const float fLasFrametime, const float fStartedTime );
+    virtual bool Execute();
     virtual bool AfterInit();
 
-	virtual bool ReqBuyItem(const NFIDENTID& self, const std::string& strID, float fX, float fY, float fZ);
+	virtual bool ReqBuyItem(const NFGUID& self, const std::string& strID, float fX, float fY, float fZ);
 
 private:
     NFIElementInfoModule* m_pElementInfoModule;

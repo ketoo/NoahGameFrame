@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_ITEM_MODULE_H_
-#define _NFC_ITEM_MODULE_H_
+#ifndef NFC_ITEM_MODULE_H
+#define NFC_ITEM_MODULE_H
 
 #include "NFCPackModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -31,19 +31,18 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute( const float fLasFrametime, const float fStartedTime );
+    virtual bool Execute();
     virtual bool AfterInit();
 
 protected:
-    /**/int OnClassObjectEvent( const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+	int OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    /**/int OnRequireUseItemEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
-    /**/int OnRequireUseItemPosEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
+	int OnRequireUseItemEvent( const NFGUID& self, const int nEventID, const NFIDataList& var );
+	int OnRequireUseItemPosEvent( const NFGUID& self, const int nEventID, const NFIDataList& var );
 
 	virtual bool CheckConfig();
-private:
-    char* mstrPackTableName;
 
+private:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFIItemConsumeManagerModule* m_pItemConsumeManagerModule;

@@ -16,7 +16,7 @@
 
 bool NFCLogicClassModule::Init()
 {
-    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
+    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 
     assert(NULL != m_pElementInfoModule);
 
@@ -37,7 +37,7 @@ NFCLogicClassModule::NFCLogicClassModule(NFIPluginManager* p)
     mnPropertyIndex = NF_GetTickCount() % 10 + 1;
 
     pPluginManager = p;
-    msConfigFileName = "../../NFDataCfg/Struct/LogicClass.xml";
+    msConfigFileName = "NFDataCfg/Struct/LogicClass.NF";
 }
 
 NFCLogicClassModule::~NFCLogicClassModule()
@@ -49,33 +49,23 @@ TDATA_TYPE NFCLogicClassModule::ComputerType(const char* pstrTypeName, NFIDataLi
 {
     if (0 == strcmp(pstrTypeName, "int"))
     {
-        var.nType = TDATA_INT;
-        var.variantData = (NFINT64)0;
-        return TDATA_INT;
-    }
-    else if (0 == strcmp(pstrTypeName, "float"))
-    {
-        var.nType = TDATA_FLOAT;
-        var.variantData = (float)0.0f;
-        return TDATA_FLOAT;
+		var.SetInt(NULL_INT);
+        return var.GetType();
     }
     else if (0 == strcmp(pstrTypeName, "string"))
     {
-        var.nType = TDATA_STRING;
-        var.variantData = NULL_STR;
-        return TDATA_STRING;
+		var.SetString(NULL_STR);
+		return var.GetType();
     }
-    else if (0 == strcmp(pstrTypeName, "double"))
+    else if (0 == strcmp(pstrTypeName, "float"))
     {
-        var.nType = TDATA_DOUBLE;
-        var.variantData = (double)0.0f;
-        return TDATA_DOUBLE;
+		var.SetFloat(NULL_FLOAT);
+		return var.GetType();
     }
     else if (0 == strcmp(pstrTypeName, "object"))
     {
-        var.nType = TDATA_OBJECT;
-        var.variantData = NFIDENTID();
-        return TDATA_OBJECT;
+		var.SetObject(NULL_OBJECT);
+		return var.GetType();
     }
 
     return TDATA_UNKNOWN;
@@ -138,7 +128,7 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
 
             //printf( " Property:%s[%s]\n", pstrPropertyName, pstrType );
 
-            pClass->GetPropertyManager()->AddProperty(NFIDENTID(), strPropertyName, varProperty.nType, bPublic,  bPrivate, bSave, bView, nIndex, pstrRelationValue);
+            pClass->GetPropertyManager()->AddProperty(NFGUID(), strPropertyName, varProperty.GetType(), bPublic,  bPrivate, bSave, bView, nIndex, pstrRelationValue);
         }
     }
 
@@ -249,7 +239,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_S
                 //////////////////////////////////////////////////////////////////////////
             }
 
-            pClass->GetRecordManager()->AddRecord(NFIDENTID(), pstrRecordName, recordVar, recordKey, recordDesc, recordTag, recordRelation, atoi(pstrRow), bPublic, bPrivate, bSave, bView, nIndex);
+            pClass->GetRecordManager()->AddRecord(NFGUID(), pstrRecordName, recordVar, recordKey, recordDesc, recordTag, recordRelation, atoi(pstrRow), bPublic, bPrivate, bSave, bView, nIndex);
         }
     }
 
@@ -274,8 +264,8 @@ bool NFCLogicClassModule::AddComponents(rapidxml::xml_node<>* pComponentRootNode
                     NFASSERT(0, strComponentName, __FILE__, __FUNCTION__);
                     continue;
                 }
-
-                pClass->GetComponentManager()->AddComponent(strComponentName, strLanguage);
+				NF_SHARE_PTR<NFIComponent> xComponent(NF_NEW NFIComponent(NFGUID(), strComponentName));
+                pClass->GetComponentManager()->AddComponent(strComponentName, xComponent);
             }
         }
     }
@@ -290,10 +280,17 @@ bool NFCLogicClassModule::AddClassInclude(const char* pstrClassFilePath, NF_SHAR
         return false;
     }
 
-    rapidxml::file<> fdoc(pstrClassFilePath);
-    //std::cout << fdoc.data() << std::endl;
-    rapidxml::xml_document<>  doc;
-    doc.parse<0>(fdoc.data());
+    std::string strFileData;
+    ReadFileToString(pPluginManager->GetConfigPath() + pstrClassFilePath, strFileData);
+    std::string strDecode = Decode(strFileData);
+
+    const int nDataSize = strDecode.length();
+    char* data = new char[nDataSize + 1];
+    strncpy(data, strDecode.data(), strDecode.length());
+    data[nDataSize] = 0;
+
+    rapidxml::xml_document<> doc;
+    doc.parse<0>(data);
 
     //support for unlimited layer class inherits
     rapidxml::xml_node<>* root = doc.first_node();
@@ -342,8 +339,8 @@ bool NFCLogicClassModule::AddClassInclude(const char* pstrClassFilePath, NF_SHAR
 bool NFCLogicClassModule::AddClass(const char* pstrClassFilePath, NF_SHARE_PTR<NFILogicClass> pClass)
 {
 
-    std::ofstream file;
-    file.open("./Log/NFLogicClass.log");
+    //std::ofstream file;
+    //file.open("./Log/NFLogicClass.log");
 
     NF_SHARE_PTR<NFILogicClass> pParent = pClass->GetParent();
     while (pParent.get())
@@ -377,7 +374,7 @@ bool NFCLogicClassModule::AddClass(const char* pstrClassFilePath, NF_SHARE_PTR<N
         pClass->Add(pstrClassFilePath);
     }
 
-    file.close();
+    //file.close();
 
     return true;
 }
@@ -399,7 +396,6 @@ bool NFCLogicClassModule::AddClass(const std::string& strClassName, const std::s
         {
             pChildClass->SetParent(pParentClass);
         }
-
     }
 
     return true;
@@ -407,7 +403,6 @@ bool NFCLogicClassModule::AddClass(const std::string& strClassName, const std::s
 
 bool NFCLogicClassModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFILogicClass> pParentClass)
 {
-
     const char* pstrLogicClassName = attrNode->first_attribute("Id")->value();
     const char* pstrType = attrNode->first_attribute("Type")->value();
     const char* pstrPath = attrNode->first_attribute("Path")->value();
@@ -435,10 +430,17 @@ bool NFCLogicClassModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIL
 
 bool NFCLogicClassModule::Load()
 {
-    rapidxml::file<> fdoc(msConfigFileName.c_str());
-    //std::cout << fdoc.data() << std::endl;
-    rapidxml::xml_document<>  doc;
-    doc.parse<0>(fdoc.data());
+    std::string strFileData;
+    ReadFileToString(pPluginManager->GetConfigPath() + msConfigFileName, strFileData);
+    std::string strDecode = Decode(strFileData);
+
+    const int nDataSize = strDecode.length();
+    char* data = new char[nDataSize + 1];
+    strncpy(data, strDecode.data(), strDecode.length());
+    data[nDataSize] = 0;
+
+    rapidxml::xml_document<> doc;
+    doc.parse<0>(data);
 
     //support for unlimited layer class inherits
     rapidxml::xml_node<>* root = doc.first_node();
@@ -493,4 +495,145 @@ bool NFCLogicClassModule::Clear()
 {
     return true;
 
+}
+
+std::string NFCLogicClassModule::cepher = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+bool NFCLogicClassModule::IsEncoded(unsigned char c)
+{
+    return (isalnum(c) || (c == '+') || (c == '/'));
+}
+
+std::string NFCLogicClassModule::Encode(unsigned char const* bytes_to_encode, unsigned int in_len)
+{
+    std::string ret;
+    int i = 0;
+    int j = 0;
+    unsigned char char_array_3[3];
+    unsigned char char_array_4[4];
+
+    while (in_len--)
+    {
+        char_array_3[i++] = *(bytes_to_encode++);
+        if (i == 3) {
+            char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
+            char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
+            char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
+            char_array_4[3] = char_array_3[2] & 0x3f;
+
+            for(i = 0; (i <4) ; i++)
+            {
+                ret += cepher[char_array_4[i]];
+            }
+
+            i = 0;
+        }
+    }
+
+    if (i)
+    {
+        for(j = i; j < 3; j++)
+        {
+            char_array_3[j] = '\0';
+        }
+
+        char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
+        char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
+        char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
+        char_array_4[3] = char_array_3[2] & 0x3f;
+
+        for (j = 0; (j < i + 1); j++)
+        {
+            ret += cepher[char_array_4[j]];
+        }
+
+        while((i++ < 3))
+        {
+            ret += '=';
+        }
+    }
+
+    return ret;
+}
+
+std::string NFCLogicClassModule::Decode(const std::string& encoded_string)
+{
+    int in_len = encoded_string.size();
+    int i = 0;
+    int j = 0;
+    int in_ = 0;
+    unsigned char char_array_4[4], char_array_3[3];
+    std::string ret;
+
+    while (in_len-- && ( encoded_string[in_] != '=') && IsEncoded(encoded_string[in_]))
+    {
+        char_array_4[i++] = encoded_string[in_];
+        in_++;
+        if (i ==4)
+        {
+            for (i = 0; i <4; i++)
+                char_array_4[i] = cepher.find(char_array_4[i]);
+
+            char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
+            char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
+            char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
+
+            for (i = 0; (i < 3); i++)
+            {
+                ret += char_array_3[i];
+            }
+
+            i = 0;
+        }
+    }
+
+    if (i)
+    {
+        for (j = i; j <4; j++)
+        {
+            char_array_4[j] = 0;
+        }
+
+        for (j = 0; j <4; j++)
+        {
+            char_array_4[j] = cepher.find(char_array_4[j]);
+        }
+
+        char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
+        char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
+        char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
+
+        for (j = 0; (j < i - 1); j++)
+        {
+            ret += char_array_3[j];
+        }
+    }
+
+    return ret;
+}
+
+bool NFCLogicClassModule::ReadFileToString(const std::string& strFile, std::string& strOutData)
+{
+    std::ifstream stream(strFile, std::ios::binary);
+    if (!stream)
+    {
+        throw std::runtime_error(std::string("cannot open file = ") + strFile);
+        return false;
+    }
+
+    stream.unsetf(std::ios::skipws);
+
+    // Determine stream size
+    stream.seekg(0, std::ios::end);
+    size_t size = stream.tellg();
+    stream.seekg(0);
+
+    std::vector<char> m_data;
+    // Load data and add terminating 0
+    m_data.resize(size + 1);
+    stream.read(&m_data.front(), static_cast<std::streamsize>(size));
+    m_data[size] = 0;
+
+    strOutData.append(&m_data.front(), size);
+    return true;
 }

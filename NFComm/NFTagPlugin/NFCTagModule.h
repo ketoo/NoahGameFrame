@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_TAG_MODULE_H_
-#define _NFC_TAG_MODULE_H_
+#ifndef NFC_TAG_MODULE_H
+#define NFC_TAG_MODULE_H
 
 #include "NFComm/NFPluginModule/NFITagModule.h"
 
@@ -22,24 +22,24 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool AfterInit();
     virtual bool BeforeShut();
 
-	virtual bool GetTagList(const std::string& strTag, NFList<NFIDENTID>& xList);
-	virtual bool AddToTagList(const std::string& strTag, const NFIDENTID object);
-	virtual bool RemoveFrmTagList(const std::string& strTag, const NFIDENTID object);
+	virtual bool GetTagList(const std::string& strTag, NFList<NFGUID>& xList);
+	virtual bool AddToTagList(const std::string& strTag, const NFGUID object);
+	virtual bool RemoveFrmTagList(const std::string& strTag, const NFGUID object);
 
-	virtual bool GetTagList(const TAG_DEFINE eTag, const std::string& strTag, NFList<NFIDENTID>& xList);
-	virtual bool AddToTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFIDENTID object);
-	virtual bool RemoveFrmTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFIDENTID object);
+	virtual bool GetTagList(const TAG_DEFINE eTag, const std::string& strTag, NFList<NFGUID>& xList);
+	virtual bool AddToTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFGUID object);
+	virtual bool RemoveFrmTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFGUID object);
 
 protected:
 
 private:
 	//tag_id->(tag_layer, object_list)
-	NFMap<int, NFMap<std::string, NFList<NFIDENTID>>> mxTagManager;
+	NFMap<int, NFMap<std::string, NFList<NFGUID>>> mxTagManager;
 };
 
 #endif
