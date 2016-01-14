@@ -33,7 +33,7 @@ const int NFConfigPlugin::GetPluginVersion()
 
 const std::string NFConfigPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFConfigPlugin)
+    return GET_CLASS_NAME(NFConfigPlugin)
 }
 
 void NFConfigPlugin::Install()

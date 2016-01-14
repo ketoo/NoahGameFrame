@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_Tutorial4Actor_H_
-#define _NF_Tutorial4Actor_H_
+#ifndef NF_Tutorial4Actor_H
+#define NF_Tutorial4Actor_H
 
 ///
 #include "NFComm/NFPluginModule/NFIPlugin.h"

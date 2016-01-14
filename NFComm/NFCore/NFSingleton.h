@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _GT_SINGLETON_H_
-#define _GT_SINGLETON_H_
+#ifndef _GT_SINGLETON_H
+#define _GT_SINGLETON_H
 
 #include <iostream>
 
@@ -64,11 +64,8 @@ public:
 
     static void ReleaseInstance()
     {
-        if (NULL != m_pInstance)
-        {
-            delete m_pInstance;
-            m_pInstance = NULL;
-        }
+        delete m_pInstance;
+        m_pInstance = NULL;
     }
 
 private:

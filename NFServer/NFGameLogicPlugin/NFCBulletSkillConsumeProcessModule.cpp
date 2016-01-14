@@ -16,9 +16,9 @@ bool NFCBulletSkillConsumeProcessModule::Init()
 
 bool NFCBulletSkillConsumeProcessModule::AfterInit()
 {
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
-    m_pSkillConsumeManagerModule = dynamic_cast<NFISkillConsumeManagerModule*>( pPluginManager->FindModule( "NFCSkillConsumeManagerModule" ) );
-    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>( pPluginManager->FindModule( "NFCElementInfoModule" ) );
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
+    m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>( "NFCSkillConsumeManagerModule" );
+    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
 
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pSkillConsumeManagerModule );
@@ -35,19 +35,19 @@ bool NFCBulletSkillConsumeProcessModule::Shut()
     return true;
 }
 
-bool NFCBulletSkillConsumeProcessModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCBulletSkillConsumeProcessModule::Execute()
 {
     return true;
 }
 
 
-int NFCBulletSkillConsumeProcessModule::ConsumeLegal( const NFIDENTID& self, const std::string& skillID,  const NFIDataList& other )
+int NFCBulletSkillConsumeProcessModule::ConsumeLegal( const NFGUID& self, const std::string& skillID,  const NFIDataList& other )
 {
     //是否被沉默,CD,距离等
     return 1;
 }
 
-int NFCBulletSkillConsumeProcessModule::ConsumeSelf( const NFIDENTID& self, const std::string& skillID )
+int NFCBulletSkillConsumeProcessModule::ConsumeSelf( const NFGUID& self, const std::string& skillID )
 {
     //得到数量-1
 
@@ -56,12 +56,12 @@ int NFCBulletSkillConsumeProcessModule::ConsumeSelf( const NFIDENTID& self, cons
     return 0;
 }
 
-int NFCBulletSkillConsumeProcessModule::ConsumeProcess( const NFIDENTID& self, const std::string& strItemName, const NFIDataList& other, NFIDataList& damageListValue , NFIDataList& damageResultList )
+int NFCBulletSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const std::string& strItemName, const NFIDataList& other, NFIDataList& damageListValue , NFIDataList& damageResultList )
 {
     return 0;
 }
 
-int NFCBulletSkillConsumeProcessModule::ConsumeProcessEx( const NFIDENTID& self, const std::string& strSkillName, const NFIDataList& other, NFIDataList& damageListValue, NFIDataList& damageResultList )
+int NFCBulletSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, const std::string& strSkillName, const NFIDataList& other, NFIDataList& damageListValue, NFIDataList& damageResultList )
 {
     return 0;
 }

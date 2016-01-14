@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_HELLO_WORLD4_H_
-#define _NFC_HELLO_WORLD4_H_
+#ifndef NFC_HELLO_WORLD4_H
+#define NFC_HELLO_WORLD4_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIEventProcessModule.h"
@@ -26,14 +26,14 @@ public:
     virtual bool Init();
     virtual bool AfterInit();
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool BeforeShut();
     virtual bool Shut();
 
 protected:
-	int OnASyncEvent(const NFIDENTID& self, const int event, std::string& arg);
-	int OnSyncEvent(const NFIDENTID& self, const int event, const std::string& arg);
+	int OnASyncEvent(const NFGUID& self, const int event, std::string& arg);
+	int OnSyncEvent(const NFGUID& self, const int nActorID, const int event, const std::string& arg);
 
 protected:
     unsigned long mLastTime;

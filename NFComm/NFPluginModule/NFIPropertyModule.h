@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_PROPERTY_MODULE_H_
-#define _NFI_PROPERTY_MODULE_H_
+#ifndef _NFI_PROPERTY_MODULE_H
+#define _NFI_PROPERTY_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
@@ -31,33 +31,33 @@ public:
     };
 
 
-    virtual int RefreshBaseProperty(const NFIDENTID& self) = 0;
-    virtual int GetPropertyValue(const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType) = 0;
-    virtual int SetPropertyValue(const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue) = 0;
-    virtual int AddPropertyValue(const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue) = 0;
-    virtual int SubPropertyValue(const NFIDENTID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue) = 0;
+    virtual int RefreshBaseProperty(const NFGUID& self) = 0;
+    virtual int GetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType) = 0;
+    virtual int SetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue) = 0;
+    virtual int AddPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue) = 0;
+    virtual int SubPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue) = 0;
 
-    virtual bool FullHPMP(const NFIDENTID& self) = 0;
-    virtual bool AddHP(const NFIDENTID& self, const NFINT64& nValue) = 0;
-    virtual bool ConsumeHP(const NFIDENTID& self, const NFINT64& nValue) = 0;
-    virtual bool EnoughHP(const NFIDENTID& self, const NFINT64& nValue) = 0;
+    virtual bool FullHPMP(const NFGUID& self) = 0;
+    virtual bool AddHP(const NFGUID& self, const NFINT64& nValue) = 0;
+    virtual bool ConsumeHP(const NFGUID& self, const NFINT64& nValue) = 0;
+    virtual bool EnoughHP(const NFGUID& self, const NFINT64& nValue) = 0;
 
-    virtual bool AddMP(const NFIDENTID& self, const NFINT64& nValue) = 0;
-    virtual bool ConsumeMP(const NFIDENTID& self, const NFINT64& nValue) = 0;    
-    virtual bool EnoughMP(const NFIDENTID& self, const NFINT64& nValue) = 0;
+    virtual bool AddMP(const NFGUID& self, const NFINT64& nValue) = 0;
+    virtual bool ConsumeMP(const NFGUID& self, const NFINT64& nValue) = 0;    
+    virtual bool EnoughMP(const NFGUID& self, const NFINT64& nValue) = 0;
 
-    virtual bool FullSP(const NFIDENTID& self) = 0;
-    virtual bool AddSP(const NFIDENTID& self, const NFINT64& nValue) = 0;
-    virtual bool ConsumeSP(const NFIDENTID& self, const NFINT64& nValue) = 0;
-    virtual bool EnoughSP(const NFIDENTID& self, const NFINT64& nValue) = 0;
+    virtual bool FullSP(const NFGUID& self) = 0;
+    virtual bool AddSP(const NFGUID& self, const NFINT64& nValue) = 0;
+    virtual bool ConsumeSP(const NFGUID& self, const NFINT64& nValue) = 0;
+    virtual bool EnoughSP(const NFGUID& self, const NFINT64& nValue) = 0;
 
-    virtual bool AddMoney( const NFIDENTID& self, const NFINT64& nValue ) = 0;
-    virtual bool ConsumeMoney(const NFIDENTID& self, const NFINT64& nValue) = 0;
-    virtual bool EnoughMoney(const NFIDENTID& self, const NFINT64& nValue) = 0;
+    virtual bool AddMoney( const NFGUID& self, const NFINT64& nValue ) = 0;
+    virtual bool ConsumeMoney(const NFGUID& self, const NFINT64& nValue) = 0;
+    virtual bool EnoughMoney(const NFGUID& self, const NFINT64& nValue) = 0;
 
-    virtual bool AddDiamond(const NFIDENTID& self, const NFINT64& nValue) = 0;
-    virtual bool ConsumeDiamond(const NFIDENTID& self, const NFINT64& nValue) = 0;
-    virtual bool EnoughDiamond(const NFIDENTID& self, const NFINT64& nValue) = 0;
+    virtual bool AddDiamond(const NFGUID& self, const NFINT64& nValue) = 0;
+    virtual bool ConsumeDiamond(const NFGUID& self, const NFINT64& nValue) = 0;
+    virtual bool EnoughDiamond(const NFGUID& self, const NFINT64& nValue) = 0;
 };
 
 #endif

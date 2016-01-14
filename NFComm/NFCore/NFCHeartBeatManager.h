@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _GT_HEARTBEATMANAGER_H_
-#define _GT_HEARTBEATMANAGER_H_
+#ifndef _GT_HEARTBEATMANAGER_H
+#define _GT_HEARTBEATMANAGER_H
 
 #include "NFMap.h"
 #include "NFList.h"
@@ -20,11 +20,11 @@ class NFCHeartBeatManager : public NFIHeartBeatManager
 public:
     NFCHeartBeatManager()
     {
-        mSelf = NFIDENTID();
+        mSelf = NFGUID();
         fLastTotal = 0.0f;
     }
 
-    NFCHeartBeatManager(const NFIDENTID& self)
+    NFCHeartBeatManager(const NFGUID& self)
     {
         mSelf = self;
         fLastTotal = 0.0f;
@@ -32,19 +32,18 @@ public:
 
     virtual ~NFCHeartBeatManager();
 
-    virtual NFIDENTID Self();
+    virtual NFGUID Self();
 
-    virtual bool Execute(const float fLastTime, const float fAllTime);
+    virtual bool Execute();
     virtual bool Exist(const std::string& strHeartBeatName);
-    virtual bool AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount);
+    virtual bool AddHeartBeat(const NFGUID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount);
     virtual bool RemoveHeartBeat(const std::string& strHeartBeatName);
 
 protected:
-    NFIDENTID mSelf;
+    NFGUID mSelf;
     float fLastTotal;
 
     NFList<std::string> mRemoveListEx;
-    //NFList<NFCHeartBeatElement*> mAddListEx;
     std::list<NFCHeartBeatElement> mAddListEx;
     NFMapEx<std::string, NFCHeartBeatElement> mHeartBeatElementMapEx;
 };

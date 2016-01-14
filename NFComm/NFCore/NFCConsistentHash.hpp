@@ -1,3 +1,12 @@
+// -------------------------------------------------------------------------
+//    @FileName         :    NFCConsistentHash.hpp
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2012-03-01
+//    @Module           :    NFCConsistentHash.hpp
+//
+// -------------------------------------------------------------------------
+
+
 #include <map>
 #include <string>
 #include <list>
@@ -7,8 +16,8 @@
 #include "boost/lexical_cast.hpp"
 #include "boost/format.hpp"
 
-#ifndef __CONSISTENT_HASH_H__
-#define __CONSISTENT_HASH_H__
+#ifndef NFC_CONSISTENT_HASH_H
+#define NFC_CONSISTENT_HASH_H
 
 //ÐéÄâ½Úµã
 class NFIVirtualNode 
@@ -162,17 +171,6 @@ public:
 		return GetSuitNode(nID, node);
 	}
 
-	bool GetSuitNode(const int nID, NFCMachineNode& node)
-	{
-		std::string strData = boost::lexical_cast<std::string>(nID);
-		if (GetSuitNode(strData, node))
-		{
-			return true;
-		}
-
-		return false;
-	}
-
 	bool GetSuitNode(const std::string& str, NFCMachineNode& node)
 	{
 		boost::crc_32_type ret;
@@ -206,47 +204,47 @@ public:
 		return true;
 	}
 
-	bool GetMasterNodeReverse(NFCMachineNode& node)
-	{
-		if(mxNodes.empty())
-		{
-			return false;
-		}
-
-		int nID = 0;
-		TMAP_TYPE::iterator it = mxNodes.begin();
-		for (; it != mxNodes.end(); ++it)
-		{
-			if (it->second.GetDataID() > nID)
-			{
-				node = it->second;
-				nID = it->second.GetDataID();
-			}
-		}
-
-		return true;
-	}
-
-	bool GetMasterNodeSequence(NFCMachineNode& node)
-	{
-		if(mxNodes.empty())
-		{
-			return false;
-		}
-
-		int nID = mxNodes.begin()->second.GetDataID();
-		TMAP_TYPE::iterator it = mxNodes.begin();
-		for (; it != mxNodes.end(); ++it)
-		{
-			if (it->second.GetDataID() < nID)
-			{
-				node = it->second;
-				nID = it->second.GetDataID();
-			}
-		}
-
-		return true;
-	}
+// 	bool GetMasterNodeReverse(NFCMachineNode& node)
+// 	{
+// 		if(mxNodes.empty())
+// 		{
+// 			return false;
+// 		}
+// 
+// 		int nID = 0;
+// 		TMAP_TYPE::iterator it = mxNodes.begin();
+// 		for (; it != mxNodes.end(); ++it)
+// 		{
+// 			if (it->second.GetDataID() > nID)
+// 			{
+// 				node = it->second;
+// 				nID = it->second.GetDataID();
+// 			}
+// 		}
+// 
+// 		return true;
+// 	}
+// 
+// 	bool GetMasterNodeSequence(NFCMachineNode& node)
+// 	{
+// 		if(mxNodes.empty())
+// 		{
+// 			return false;
+// 		}
+// 
+// 		int nID = mxNodes.begin()->second.GetDataID();
+// 		TMAP_TYPE::iterator it = mxNodes.begin();
+// 		for (; it != mxNodes.end(); ++it)
+// 		{
+// 			if (it->second.GetDataID() < nID)
+// 			{
+// 				node = it->second;
+// 				nID = it->second.GetDataID();
+// 			}
+// 		}
+// 
+// 		return true;
+// 	}
 
 private:
 	typedef std::map<uint32_t, NFCMachineNode> TMAP_TYPE;

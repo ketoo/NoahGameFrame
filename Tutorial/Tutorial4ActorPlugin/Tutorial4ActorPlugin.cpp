@@ -27,7 +27,7 @@ const int Tutorial4ActorPlugin::GetPluginVersion()
 
 const std::string Tutorial4ActorPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(Tutorial4ActorPlugin)
+    return GET_CLASS_NAME(Tutorial4ActorPlugin)
 }
 
 void Tutorial4ActorPlugin::Install()
