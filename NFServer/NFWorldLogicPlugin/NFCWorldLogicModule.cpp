@@ -33,7 +33,7 @@ bool NFCWorldLogicModule::Shut()
     return true;
 }
 
-bool NFCWorldLogicModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCWorldLogicModule::Execute()
 {
 
     //////////////////////////////////////////////////////////////////////////
@@ -68,13 +68,11 @@ bool NFCWorldLogicModule::AfterInit()
 {
 
 
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-    //m_pDataBaseModule = dynamic_cast<NFIDataBaseModule*>( pPluginManager->FindModule( "NFCDataBaseModule" ) );
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
 
 
     assert(NULL != m_pEventProcessModule);
-    //assert( NULL != m_pDataBaseModule );
     assert(NULL != m_pKernelModule);
     return true;
 }

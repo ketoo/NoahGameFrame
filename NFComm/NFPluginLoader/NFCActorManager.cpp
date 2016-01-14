@@ -8,58 +8,46 @@
 
 #include "NFCActorManager.h"
 #include "NFCPluginManager.h"
-#include "NFComm/NFCore/NFCMemory.h"
 #include "NFComm/NFCore/NFIComponent.h"
 
 NFCActorManager::NFCActorManager()
 {
 	srand((unsigned)time(NULL));
 
-    m_pFramework = new Theron::Framework(NF_ACTOR_THREAD_COUNT);
-	m_pPluginManager = new NFCPluginManager(this);
+	m_pFramework = NF_NEW Theron::Framework(NF_ACTOR_THREAD_COUNT);
+	pPluginManager = NF_NEW NFCPluginManager(this);
+
 }
 
 bool NFCActorManager::Init()
 {
-	m_pMainActor = new NFCActor(*m_pFramework, this);
-	for (int i= 0; i < NF_ACTOR_THREAD_COUNT*2; ++i)
-	{
-		mvActorList.push_back(new NFCActor(*m_pFramework, this));
-	}
+	m_pMainActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFCActor(*m_pFramework, this));
 
-	m_pPluginManager->Init();
+	pPluginManager->Init();
 
 	return true;
 }
 
 bool NFCActorManager::AfterInit()
 {
-	m_pPluginManager->AfterInit();
+	pPluginManager->AfterInit();
 
 	return true;
 }
 
 bool NFCActorManager::CheckConfig()
 {
-	m_pPluginManager->CheckConfig();
+	pPluginManager->CheckConfig();
 
     return true;
 }
 
 bool NFCActorManager::BeforeShut()
 {
-	delete m_pMainActor;
-	m_pMainActor = NULL;
+	m_pMainActor.reset();
+	m_pMainActor = nullptr;
 
-	for (int i= 0; i < NF_ACTOR_THREAD_COUNT*2; ++i)
-	{
-		NFIActor* pActor = mvActorList[i];
-		delete pActor;
-	}
-
-	mvActorList.clear();
-
-	m_pPluginManager->BeforeShut();
+	pPluginManager->BeforeShut();
 
 	return true;
 }
@@ -69,66 +57,50 @@ bool NFCActorManager::Shut()
     delete m_pFramework;
     m_pFramework = NULL;
 
-	m_pPluginManager->Shut();
+	pPluginManager->Shut();
 
 	return true;
 }
 
-bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCActorManager::Execute()
 {
-	m_pPluginManager->Execute(fLasFrametime, fStartedTime);
-    
-	//m_pFramework->Execute();
+	pPluginManager->Execute();
 
 	return true;
 }
 
-int NFCActorManager::OnRequireActor(NFIComponent* pComponent)
+int NFCActorManager::RequireActor()
 {
 	//¶Ñactor
-	if (pComponent)
-	{
-		NF_SHARE_PTR<NFIActor> pActor(NF_NEW NFCActor(*m_pFramework, this));
+	NF_SHARE_PTR<NFIActor> pActor(NF_NEW NFCActor(*m_pFramework, this));
+	mxActorMap.insert(std::make_pair(pActor->GetAddress().AsInteger(), pActor));
 
-		pActor->RegisterActorComponent(pComponent);
-
-		mxActorMap.insert(std::make_pair(pActor->GetAddress().AsInteger(), pActor));
-
-		return pActor->GetAddress().AsInteger();
-	}
-	
-	return 0;
+	return pActor->GetAddress().AsInteger();
 }
 
-NFIActor* NFCActorManager::GetActor(const int nActorIndex)
+NF_SHARE_PTR<NFIActor> NFCActorManager::GetActor(const int nActorIndex)
 {
-    std::map<int, NF_SHARE_PTR<NFIActor>>::iterator it = mxActorMap.find(nActorIndex);
+    std::map<int, NF_SHARE_PTR<NFIActor> >::iterator it = mxActorMap.find(nActorIndex);
     if (it != mxActorMap.end())
     {
-        return it->second.get();
+        return it->second;
     }
-
-    int nIndex = rand() % (NF_ACTOR_THREAD_COUNT*2);
-    if (nIndex > mvActorList.size() || nIndex < 0)
-    {
-        return NULL;
-    }
-
-    return  mvActorList[nIndex];
+        
+	return NF_SHARE_PTR<NFIActor>();
 }
 
-bool NFCActorManager::SendMsgToActor( const int nActorIndex, const NFIDENTID& objectID, const int nEventID, const std::string& strArg, const NF_SHARE_PTR<NFAsyncEventFunc> xActorEventList)
+bool NFCActorManager::SendMsgToActor( const int nActorIndex, const NFGUID& objectID, const int nEventID, const std::string& strArg)
 {
-	NFIActor* pActor = GetActor(nActorIndex);
-    if (pActor)
+	NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
+    if (nullptr != pActor)
     {
         NFIActorMessage xMessage;
 
         xMessage.eType = NFIActorMessage::EACTOR_EVENT_MSG;
         xMessage.data = strArg;
         xMessage.nSubMsgID = nEventID;
+		xMessage.nFormActor = m_pMainActor->GetAddress().AsInteger();
         xMessage.self = objectID;
-        xMessage.xActorEventFunc = xActorEventList;
 
         return m_pFramework->Send(xMessage, m_pMainActor->GetAddress(), pActor->GetAddress());
     }
@@ -136,7 +108,43 @@ bool NFCActorManager::SendMsgToActor( const int nActorIndex, const NFIDENTID& ob
 	return false;
 }
 
-NFIPluginManager* NFCActorManager::GetPluginManager()
+bool NFCActorManager::AddComponent( const int nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent )
 {
-	return m_pPluginManager;
+	NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
+	if (nullptr != pActor)
+	{
+		pActor->AddComponent(pComponent);
+
+		return true;
+	}
+
+	return false;
 }
+
+bool NFCActorManager::ReleaseActor( const int nActorIndex )
+{
+	std::map<int, NF_SHARE_PTR<NFIActor> >::iterator it = mxActorMap.find(nActorIndex);
+	if (it != mxActorMap.end())
+	{
+		mxActorMap.erase(it);
+
+		return true;
+	}
+
+	return false;
+}
+
+bool NFCActorManager::AddEndFunc( const int nActorIndex, EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end )
+{
+	NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
+	if (nullptr != pActor)
+	{
+		pActor->AddEndFunc(functorPtr_end);
+
+		return true;
+	}
+
+	return false;
+}
+
+

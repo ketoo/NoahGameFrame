@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_ACTOR_H_
-#define _NFI_ACTOR_H_
+#ifndef _NFI_ACTOR_H
+#define _NFI_ACTOR_H
 
 #include <map>
 #include <string>
@@ -26,6 +26,7 @@ public:
     {
         eType = EACTOR_UNKNOW;
         nSubMsgID = 0;
+		nFormActor = 0;
     }
 
 	enum EACTOR_MESSAGE_ID
@@ -42,15 +43,40 @@ public:
 		EACTOR_LOG_MSG,
 		EACTOR_EVENT_MSG,
 		EACTOR_RETURN_EVENT_MSG,
+
+		EACTOR_GET_PROPERTY_MSG_INT = 100,
+		EACTOR_GET_PROPERTY_MSG_FLOAT,
+		EACTOR_GET_PROPERTY_MSG_DOUBLE,
+		EACTOR_GET_PROPERTY_MSG_STRING,
+		EACTOR_GET_PROPERTY_MSG_OBJECT,
+
+		EACTOR_SET_PROPERTY_MSG_INT = 110,
+		EACTOR_SET_PROPERTY_MSG_FLOAT,
+		EACTOR_SET_PROPERTY_MSG_DOUBLE,
+		EACTOR_SET_PROPERTY_MSG_STRING,
+		EACTOR_SET_PROPERTY_MSG_OBJECT,
+
+		EACTOR_GET_RECORD_MSG_INT = 120,
+		EACTOR_GET_RECORD_MSG_FLOAT,
+		EACTOR_GET_RECORD_MSG_DOUBLE,
+		EACTOR_GET_RECORD_MSG_STRING,
+		EACTOR_GET_RECORD_MSG_OBJECT,
+
+		EACTOR_SET_RECORD_MSG_INT = 130,
+		EACTOR_SET_RECORD_MSG_FLOAT,
+		EACTOR_SET_RECORD_MSG_DOUBLE,
+		EACTOR_SET_RECORD_MSG_STRING,
+		EACTOR_SET_RECORD_MSG_OBJECT,
 	};
 
     EACTOR_MESSAGE_ID eType;
-    int nSubMsgID;
+	int nSubMsgID;
+	int nFormActor;
 	std::string data;
 	////////////////////event/////////////////////////////////////////////////
-	NFIDENTID self;
-	NF_SHARE_PTR<NFAsyncEventFunc> xActorEventFunc;//包含同步异步等回调接口
+	NFGUID self;
 	//////////////////////////////////////////////////////////////////////////
+	EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR xEndFuncptr;
 protected:
 private:
 };
@@ -65,32 +91,26 @@ public:
         RegisterHandler(this, &NFIActor::Handler);
     }
 
-    virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from){};
 	NFIActorManager* GetActorManager(){return m_pActorManager;}
 
-	virtual void RegisterActorComponent(NFIComponent* pComponent) = 0;
+	virtual void AddComponent(NF_SHARE_PTR<NFIComponent> pComponent) = 0;
+	virtual bool AddEndFunc(EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end) = 0;
+	virtual bool SendMsg(const Theron::Address address, const NFIActorMessage& message) = 0;
+
+protected:
+
+	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from){};
+	virtual void HandlerSelf(const NFIActorMessage& message, const Theron::Address from){};
 
 private:
-    virtual void Handler(const NFIActorMessage& message, const Theron::Address from)
+    void Handler(const NFIActorMessage& message, const Theron::Address from)
     {
+		
 		//收到消息要处理逻辑
 		if (message.eType == NFIActorMessage::EACTOR_EVENT_MSG)
 		{
-			std::string strData = message.data;
-			message.xActorEventFunc->xBeginFuncptr->operator()(message.self, message.nSubMsgID, strData);
-			
-			////////////////////////////////////////////////////////
+			HandlerSelf(message, from);
 
-			NFIActorMessage xReturnMessage;
-
-			xReturnMessage.eType = NFIActorMessage::EACTOR_RETURN_EVENT_MSG;
-			xReturnMessage.nSubMsgID = message.nSubMsgID;
-			xReturnMessage.data = strData;
-			////////////////////event/////////////////////////////////////////////////
-			xReturnMessage.self = message.self;
-			xReturnMessage.xActorEventFunc = message.xActorEventFunc;
-
-			Send(xReturnMessage, from);
 		}
 		else
 		{

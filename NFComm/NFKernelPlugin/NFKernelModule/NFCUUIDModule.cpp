@@ -106,17 +106,15 @@ bool NFCUUIDModule::Shut()
 
 bool NFCUUIDModule::BeforeShut()
 {
-    if (NULL != m_pUUID)
-    {
-        delete m_pUUID;
-        m_pUUID = NULL;
-    }
+    delete m_pUUID;
+    m_pUUID = NULL;
+
     return true;
 }
 
 bool NFCUUIDModule::AfterInit()
 {
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     assert(NULL != m_pKernelModule);
 
     // 初始化uuid
@@ -127,14 +125,14 @@ bool NFCUUIDModule::AfterInit()
     return true;
 }
 
-bool NFCUUIDModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCUUIDModule::Execute()
 {
     return true;
 }
 
-NFIDENTID NFCUUIDModule::CreateGUID()
+NFGUID NFCUUIDModule::CreateGUID()
 {
-	NFIDENTID xID;
+	NFGUID xID;
 	xID.nHead64 = GetIdentID();
 	xID.nData64 = m_pUUID->generate();
 	

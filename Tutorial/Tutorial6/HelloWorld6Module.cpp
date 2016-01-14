@@ -14,15 +14,15 @@ bool HelloWorld6Module::AfterInit()
     //初始化完毕
     std::cout << "Hello, world6, AfterInit" << std::endl;
 
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-    m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-    m_pLuaScriptModule = dynamic_cast<NFILuaScriptModule*>(pPluginManager->FindModule("NFCLuaScriptModule"));
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
+    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
+    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
+    m_pLuaScriptModule = pPluginManager->FindModule<NFILuaScriptModule>("NFCLuaScriptModule");
 
-    assert( NULL != m_pLuaScriptModule);
+    //assert( NULL != m_pLuaScriptModule);
 
-    m_pKernelModule->CreateContainer(1, "");
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(NFIDENTID(), 1, 0, "Player", "", NFCDataList());
+    m_pKernelModule->CreateScene(1, "");
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(NFGUID(), 1, 0, "Player", "", NFCDataList());
     if ( !pObject.get() )
     {
         return false;
@@ -45,7 +45,7 @@ bool HelloWorld6Module::AfterInit()
     return true;
 }
 
-bool HelloWorld6Module::Execute( const float fLasFrametime, const float fStartedTime )
+bool HelloWorld6Module::Execute()
 {
     //每帧执行
     //std::cout << "Hello, world6, Execute" << std::endl;

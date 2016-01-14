@@ -37,7 +37,7 @@ const int NFProxyServerNet_ClientPlugin::GetPluginVersion()
 
 const std::string NFProxyServerNet_ClientPlugin::GetPluginName()
 {
-	GET_PLUGIN_NAME(NFProxyServerNet_ClientPlugin)
+	return GET_CLASS_NAME(NFProxyServerNet_ClientPlugin)
 }
 
 void NFProxyServerNet_ClientPlugin::Install()

@@ -8,6 +8,7 @@
 
 //#include <crtdbg.h>
 #include <time.h>
+#include <time.inl>
 #include <stdio.h>
 #include <iostream>
 #include <utility>
@@ -55,7 +56,7 @@ long ApplicationCrashHandler(EXCEPTION_POINTERS* pException)
     char szDmupName[MAX_PATH];
     tm* ptm = localtime(&t);
 
-    sprintf(szDmupName, "%d_%d_%d_%d_%d_%d.dmp",  ptm->tm_year + 1900, ptm->tm_mon, ptm->tm_mday, ptm->tm_hour, ptm->tm_min, ptm->tm_sec);
+    sprintf_s(szDmupName, "%04d_%02d_%02d_%02d_%02d_%02d.dmp",  ptm->tm_year + 1900, ptm->tm_mon, ptm->tm_mday, ptm->tm_hour, ptm->tm_min, ptm->tm_sec);
     CreateDumpFile(szDmupName, pException);
 
     FatalAppExit(-1,  szDmupName);
@@ -79,26 +80,26 @@ void CloseXButton()
 }
 
 bool bExitApp = false;
-boost::thread gThread;
+std::thread gThread;
 
 void ThreadFunc()
 {
     while ( !bExitApp )
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        //std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-        std::string s;
-        std::cin >> s;
-        if ( 0 == stricmp( s.c_str(), "exit" ) )
-        {
-            bExitApp = true;
-        }
+//         std::string s;
+//         std::cin >> s;
+//         if ( 0 == stricmp( s.c_str(), "exit" ) )
+//         {
+//             bExitApp = true;
+//         }
     }
 }
 
 void CreateBackThread()
 {
-    gThread = boost::thread(boost::bind(&ThreadFunc));
+    //gThread = std::thread(std::bind(&ThreadFunc));
 	//auto f = std::async (std::launch::async, std::bind(ThreadFunc));
     //std::cout << "CreateBackThread, thread ID = " << gThread.get_id() << std::endl;
 }
@@ -140,9 +141,6 @@ void PrintfLogo()
 #endif // NF_PLATFORM
 }
 
-unsigned long unStartTickTime = 0;
-unsigned long unLastTickTime = 0;
-
 #if NF_PLATFORM == NF_PLATFORM_WIN || NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_APPLE
 int main(int argc, char* argv[])
 #elif  NF_PLATFORM == NF_PLATFORM_ANDROID || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
@@ -167,6 +165,8 @@ int main(int argc, char* argv[])
 		InitDaemon();
 	}
 
+	signal(SIGPIPE, SIG_IGN);
+	signal(SIGCHLD, SIG_IGN);
 
 #endif
 	NFCActorManager::GetSingletonPtr()->Init();
@@ -177,9 +177,6 @@ int main(int argc, char* argv[])
 
     CloseXButton();
     CreateBackThread();
-
-    unStartTickTime = ::NF_GetTickCount();
-    unLastTickTime = unStartTickTime;
 
     while (!bExitApp)    //DEBUG∞Ê±æ±¿¿££¨RELEASE≤ª±¿
     {
@@ -192,21 +189,11 @@ int main(int argc, char* argv[])
                 break;
             }
 
-			unsigned long unNowTickTime = ::NF_GetTickCount();
-			float fStartedTime = float(unNowTickTime - unStartTickTime) / 1000;
-			float fLastTime = float(unNowTickTime - unLastTickTime) / 1000;
-
-			if (fStartedTime < 0.001f)
-			{
-				fStartedTime = 0.0f;
-			}
-
 #if NF_PLATFORM == NF_PLATFORM_WIN
             __try
             {
 #endif
-                NFCActorManager::GetSingletonPtr()->Execute(fLastTime, fStartedTime);
-				unLastTickTime = unNowTickTime;
+                NFCActorManager::GetSingletonPtr()->Execute();
 #if NF_PLATFORM == NF_PLATFORM_WIN
             }
             __except (ApplicationCrashHandler(GetExceptionInformation()))

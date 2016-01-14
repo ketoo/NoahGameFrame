@@ -105,11 +105,11 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCDataProcessModule.h" />
     <ClInclude Include="NFCGameServerModule.h" />
     <ClInclude Include="NFCLevelModule.h" />
     <ClInclude Include="NFCPropertyConfigModule.h" />
     <ClInclude Include="NFCPropertyModule.h" />
+    <ClInclude Include="NFCPropertyTrailModule.h" />
     <ClInclude Include="NFCPVPModule.h" />
     <ClInclude Include="NFCSceneProcessModule.h" />
     <ClInclude Include="NFGameServerPlugin.h" />
@@ -123,11 +123,11 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCDataProcessModule.cpp" />
     <ClCompile Include="NFCGameServerModule.cpp" />
     <ClCompile Include="NFCLevelModule.cpp" />
     <ClCompile Include="NFCPropertyConfigModule.cpp" />
     <ClCompile Include="NFCPropertyModule.cpp" />
+    <ClCompile Include="NFCPropertyTrailModule.cpp" />
     <ClCompile Include="NFCPVPModule.cpp" />
     <ClCompile Include="NFCSceneProcessModule.cpp" />
     <ClCompile Include="NFGameServerPlugin.cpp" />

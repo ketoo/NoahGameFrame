@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_DATABASENET_CLIENT_MODULE_H_
-#define _NFC_DATABASENET_CLIENT_MODULE_H_
+#ifndef NFC_DATABASENET_CLIENT_MODULE_H
+#define NFC_DATABASENET_CLIENT_MODULE_H
 
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
@@ -26,7 +26,7 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool AfterInit();
     virtual bool BeforeShut();
