@@ -54,10 +54,6 @@ bool NFCEquipModule::AfterInit()
     strEquipPath += "NFDataCfg\Ini\Common\EqupConfig.xml";
     NFCCommonConfig::GetSingletonPtr()->LoadConfig(strEquipPath);
 
-    std::string strPlayerPath = pPluginManager->GetConfigPath();
-    strPlayerPath += "NFDataCfg\Ini\Common\PlayerLevelConfig.xml";
-    NFCCommonConfig::GetSingletonPtr()->LoadConfig(strPlayerPath);
-
     m_pEventProcessModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCEquipModule::OnClassObjectEvent );
     return true;
 }
@@ -309,7 +305,6 @@ int NFCEquipModule::OnClassObjectEvent( const NFGUID& self, const std::string& s
     }
     else if ( CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent )
     {
-        m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFCEquipModule::OnObjectLevelEvent);
          m_pKernelModule->AddRecordCallBack( self, m_pPackModule->GetPackName( PackTableType::BagEquipPack ), this, &NFCEquipModule::OnObjectBagEquipRecordEvent );
     }
 
@@ -330,12 +325,18 @@ int NFCEquipModule::OnObjectBagEquipRecordEvent( const NFGUID& self, const RECOR
     {
     case NFIRecord::RecordOptype::Add:
         {
-            AddEquipProperty(self, xEventData.nRow);
+            if (NeedEquipProperty(self, newVar.Object(NFrame::Player::BagEquipList::BagEquipList_WearGUID)))
+            {
+                AddEquipProperty(self, xEventData.nRow);
+            }
         }
         break;
     case NFIRecord::RecordOptype::Del:
         {
-            RemoveEquipProperty(self, xEventData.nRow);
+            if (NeedEquipProperty(self, oldVar.Object(NFrame::Player::BagEquipList::BagEquipList_WearGUID)))
+            {
+                RemoveEquipProperty(self, xEventData.nRow);
+            }
         }
         break;
     case NFIRecord::RecordOptype::Swap:
@@ -348,9 +349,67 @@ int NFCEquipModule::OnObjectBagEquipRecordEvent( const NFGUID& self, const RECOR
         break;
     case NFIRecord::RecordOptype::UpData:
         {
+            if (xEventData.nCol != NFrame::Player::BagEquipList::BagEquipList_WearGUID)
+            {
+                if (!NeedEquipProperty(self, oldVar.Object(NFrame::Player::BagEquipList::BagEquipList_WearGUID)))
+                {
+                    break;
+                }
+            }
+
             switch (xEventData.nCol)
             {
             case NFrame::Player::BagEquipList::BagEquipList_IntensifyLevel:
+                {
+                    const std::string& strConfigID = xRecord->GetString( xEventData.nRow, NFrame::Player::BagEquipList::BagEquipList_ConfigID );
+                    const int nOldLevel = oldVar.Int(0);
+                    const int nNewLevel = newVar.Int(0);
+                    if (strConfigID.empty())
+                    {
+                        return 1;
+                    }
+
+                    const float nLevelRate = GetEquipLevelRate(nOldLevel);
+                    RemoveEffectDataProperty(self, strConfigID, nLevelRate);
+                    const float nNewLevelRate = GetEquipLevelRate(nNewLevel);
+                    AddEffectDataProperty(self, strConfigID, nNewLevelRate);
+                }
+                break;
+
+            case NFrame::Player::BagEquipList::BagEquipList_InlayStone1:
+            case NFrame::Player::BagEquipList::BagEquipList_InlayStone2:
+            case NFrame::Player::BagEquipList::BagEquipList_InlayStone3:
+            case NFrame::Player::BagEquipList::BagEquipList_InlayStone4:
+            case NFrame::Player::BagEquipList::BagEquipList_InlayStone5:
+            case NFrame::Player::BagEquipList::BagEquipList_InlayStone6:
+            case NFrame::Player::BagEquipList::BagEquipList_InlayStone7:
+            case NFrame::Player::BagEquipList::BagEquipList_InlayStone8:
+            case NFrame::Player::BagEquipList::BagEquipList_InlayStone9:
+            case NFrame::Player::BagEquipList::BagEquipList_InlayStone10:
+                {
+                    const std::string& strOldeStoneID= oldVar.String(0);
+                    const std::string& strNewStoneID= newVar.String(0);
+
+                    RemoveEffectDataProperty(self, strOldeStoneID, 0);
+                    AddEffectDataProperty(self, strNewStoneID, 0);
+                }
+                break;
+            case NFrame::Player::BagEquipList::BagEquipList_WearGUID:
+                {
+                    const NFGUID& xOldeID= oldVar.Object(0);
+                    const NFGUID& xNewID= newVar.Object(0);
+
+                    if (NeedEquipProperty(self, xOldeID))
+                    {
+                        RemoveEquipProperty(self, xEventData.nRow);
+                    }
+
+                    if (NeedEquipProperty(self, xNewID))
+                    {
+                        AddEquipProperty(self, xEventData.nRow);
+                    }
+                }
+                break;
             default:
                 break;
             }
@@ -370,48 +429,7 @@ int NFCEquipModule::OnObjectBagEquipRecordEvent( const NFGUID& self, const RECOR
 }
 
 
-int NFCEquipModule::OnObjectLevelEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
-{
-    NFINT64 nLevel = newVar.GetInt();
 
-    AddLevelUpAward(self, nLevel);
-    return 0;
-}
-
-bool NFCEquipModule::AddLevelUpAward( const NFGUID& self, const int nLevel )
-{
-    const std::string& strAwardID = NFCCommonConfig::GetSingletonPtr()->GetAttributeString("PlayerLevel", boost::lexical_cast<std::string>(nLevel), "AwardPack");
-    if (strAwardID.empty())
-    {
-        return true;
-    }
-
-    std::vector<std::string> xList;
-    NFCCommonConfig::GetSingletonPtr()->GetStructItemList(strAwardID, xList);
-
-    for (int i = 0; i < xList.size(); ++i)
-    {
-        const std::string& strItemID = xList[i];
-        const int nCout = NFCCommonConfig::GetSingletonPtr()->GetAttributeInt("strAwardID", strItemID, "Count");
-        if (m_pElementInfoModule->ExistElement(strItemID))
-        {
-            const int nItemType = m_pElementInfoModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
-            switch (nItemType)
-            {
-            case NFMsg::EIT_EQUIP:
-                {
-                    m_pPackModule->CreateEquip(self, strItemID);
-                }
-                break;
-            default:
-                m_pPackModule->CreateItem(self, strItemID, nCout);
-                break;
-            }
-        }
-    }
-
-    return true;
-}
 
 
 int NFCEquipModule::AddEquipProperty( const NFGUID& self )
@@ -626,4 +644,9 @@ float NFCEquipModule::GetEquipLevelRate( const int nNowLevel )
 {
     float fRate = 0.5f * nNowLevel;
     return fRate ;
+}
+
+bool NFCEquipModule::NeedEquipProperty( const NFGUID& self, const NFGUID& xWearID )
+{
+    return true;
 }
