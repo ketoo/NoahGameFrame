@@ -17,6 +17,8 @@
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIPackModule.h"
 
 class NFCLevelModule
     : public NFILevelModule
@@ -38,6 +40,7 @@ public:
     virtual int OnKillObject( const NFGUID& self, const NFGUID& other );
 
     virtual int OnDead( const NFGUID& self, const NFGUID& other );
+    virtual bool AddLevelUpAward( const NFGUID& self, const int nLevel );
 
 protected:
 
@@ -47,12 +50,13 @@ protected:
     int OnObjectExpEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
 
     int OnObjectBeKilled( const NFGUID& object, const int nEventID, const NFIDataList& var );
-    bool AddLevelUpAward( const NFGUID& self, const int nLevel );
 private:
     NFIPropertyConfigModule* m_pPropertyConfigModule;
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
+	NFIElementInfoModule* m_pElementInfoModule;
+	NFIPackModule* m_pPackModule;
 };
 
 #endif
