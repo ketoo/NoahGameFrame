@@ -43,10 +43,11 @@ protected:
 
     int OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
+    int OnObjectLevelEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar );
     int OnObjectExpEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
 
     int OnObjectBeKilled( const NFGUID& object, const int nEventID, const NFIDataList& var );
-
+    bool AddLevelUpAward( const NFGUID& self, const int nLevel );
 private:
     NFIPropertyConfigModule* m_pPropertyConfigModule;
     NFIEventProcessModule* m_pEventProcessModule;
