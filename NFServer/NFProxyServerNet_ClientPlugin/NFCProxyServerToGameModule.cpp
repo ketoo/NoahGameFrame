@@ -72,7 +72,7 @@ bool NFCProxyServerToGameModule::AfterInit()
 				ConnectData xServerData;
 
 				xServerData.nGameID = nServerID;
-				xServerData.eServerType = (NF_SERVER_TYPE)nServerType;
+				xServerData.eServerType = (NF_SERVER_TYPES)nServerType;
 				xServerData.strIP = strIP;
 				xServerData.nPort = nPort;
 				xServerData.strName = strName;
