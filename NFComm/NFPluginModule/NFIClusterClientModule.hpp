@@ -29,13 +29,13 @@ struct ConnectData
 		nPort = 0;
 		strName = "";
 		strIP = "";
-		eServerType = NFST_NONE;
+		eServerType = NF_ST_NONE;
 		eState = ConnectDataState::DISCONNECT;
 		mnLastActionTime = 0;
 	}
 
 	int nGameID;
-	NF_SERVER_TYPE eServerType;
+	NF_SERVER_TYPES eServerType;
 	std::string strIP;
 	int nPort;
 	std::string strName;
