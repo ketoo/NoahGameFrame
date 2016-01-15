@@ -71,16 +71,16 @@ void NFCProxyServerToWorldModule::OnServerInfoProcess(const int nSockIndex, cons
 		xServerData.nPort = pData->server_port();
 		xServerData.strName = pData->server_name();
 		//xServerData.eState = pData->server_state();
-		xServerData.eServerType = (NF_SERVER_TYPE)pData->server_type();
+		xServerData.eServerType = (NF_SERVER_TYPES)pData->server_type();
 
 		switch (xServerData.eServerType)
 		{
-		case NF_SERVER_TYPE::NFST_GAME_SERVER:
+		case NF_SERVER_TYPES::NF_ST_GAME:
 			{
 				m_pToGameServerClusterClient->AddServer(xServerData);
 			}
 			break;
-		case NF_SERVER_TYPE::NFST_WORLD_SERVER:
+		case NF_SERVER_TYPES::NF_ST_WORLD:
 			{
 				NFIClusterClientModule::AddServer(xServerData);
 			}
@@ -199,7 +199,7 @@ bool NFCProxyServerToWorldModule::AfterInit()
 				ConnectData xServerData;
 
 				xServerData.nGameID = nServerID;
-				xServerData.eServerType = (NF_SERVER_TYPE)nServerType;
+				xServerData.eServerType = (NF_SERVER_TYPES)nServerType;
 				xServerData.strIP = strIP;
 				xServerData.nPort = nPort;
 				xServerData.strName = strName;
