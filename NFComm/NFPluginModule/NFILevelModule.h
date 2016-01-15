@@ -28,6 +28,8 @@ public:
     //À¿Õˆ ±
     virtual int OnDead(const NFGUID& self, const NFGUID& other) = 0;
 
+    virtual bool AddLevelUpAward( const NFGUID& self, const int nLevel ) =0;
+
 };
 
 #endif
