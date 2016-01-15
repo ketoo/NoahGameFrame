@@ -17,6 +17,7 @@ bool NFCPropertyModule::Init()
     m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
     m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>( "NFCPropertyConfigModule" );
     m_pEquipModuele = pPluginManager->FindModule<NFIEquipModule>( "NFCEquipModule" );
+    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>( "NFCLevelModule" );
     
     assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
@@ -24,6 +25,7 @@ bool NFCPropertyModule::Init()
     assert( NULL != m_pLogicClassModule );
     assert( NULL != m_pPropertyConfigModule );
     assert( NULL != m_pEquipModuele );
+    assert( NULL != m_pLevelModule );
 
     m_pEventProcessModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCPropertyModule::OnObjectClassEvent );
     return true;
@@ -185,11 +187,13 @@ int NFCPropertyModule::OnObjectClassEvent( const NFGUID& self, const std::string
                 //第一次出生，设置基础属性
                 m_pKernelModule->SetPropertyInt( self, NFrame::Player::Level(), 1 );
 
-                m_pEquipModuele->AddLevelUpAward(self, 1);
+                m_pLevelModule->AddLevelUpAward(self, 1);
             }
         }
         else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
         {
+            int nOnlineCount = m_pKernelModule->GetPropertyInt( self, NFrame::Player::OnlineCount() );
+			m_pKernelModule->SetPropertyInt( self, NFrame::Player::OnlineCount(), (nOnlineCount + 1));
 
         }
     }

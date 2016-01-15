@@ -31,12 +31,16 @@ bool NFCLevelModule::AfterInit()
     m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
     m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
-    m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>( "NFCPropertyConfigModule" );
-
+	m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>( "NFCPropertyConfigModule" );
+	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>( "NFCPackModule" );
+	
     assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pLogModule );
-    assert( NULL != m_pPropertyConfigModule );
+	assert( NULL != m_pPropertyConfigModule );
+	assert( NULL != m_pElementInfoModule );
+	assert( NULL != m_pPackModule );
 
     m_pEventProcessModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCLevelModule::OnObjectClassEvent );
     m_pEventProcessModule->AddClassCallBack( NFrame::NPC::ThisName(), this, &NFCLevelModule::OnObjectClassEvent );
