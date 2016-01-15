@@ -45,13 +45,11 @@ public:
     virtual bool HoleToEquip(const NFGUID& self, const NFGUID& xEquipID);
     virtual bool InlaystoneToEquip(const NFGUID& self, const NFGUID& xEquipID, const std::string& strStoneID, const int nHoleIndex);
     virtual bool ElementlevelToEquip(const NFGUID& self, const NFGUID& xEquipID, const NFMsg::EGameElementType& eElemetType);
-    virtual bool AddLevelUpAward(const NFGUID& self, const int nLevel);
 
 protected:
     virtual bool RamdomSucess(const int nNowLevel, const int nMaxLevel);
     virtual float GetEquipLevelRate(const int nNowLevel);
     int OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
-    int OnObjectLevelEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar );
     int OnObjectBagEquipRecordEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar );
 
     int AddEquipProperty( const NFGUID& self );
@@ -60,6 +58,9 @@ protected:
     int AddEffectDataProperty( const NFGUID& self, const std::string& strConfigID, const float fAddRate);
     int RemoveEffectDataProperty( const NFGUID& self, const std::string& strConfigID, const float fAddRate);
     int RemoveEquipProperty( const NFGUID& self, const int nRow );
+
+    bool NeedEquipProperty( const NFGUID& self, const NFGUID& xWearID);
+
 private:
     NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
