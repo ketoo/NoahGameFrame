@@ -7,6 +7,7 @@
 // -------------------------------------------------------------------------
 
 #include "NFCLevelModule.h"
+#include "NFComm/NFCore/NFCCommonConfig.h"
 
 bool NFCLevelModule::Init()
 {
@@ -39,6 +40,10 @@ bool NFCLevelModule::AfterInit()
 
     m_pEventProcessModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCLevelModule::OnObjectClassEvent );
     m_pEventProcessModule->AddClassCallBack( NFrame::NPC::ThisName(), this, &NFCLevelModule::OnObjectClassEvent );
+
+    std::string strPlayerPath = pPluginManager->GetConfigPath();
+    strPlayerPath += "NFDataCfg\Ini\Common\PlayerLevelConfig.xml";
+    NFCCommonConfig::GetSingletonPtr()->LoadConfig(strPlayerPath);
 
     return true;
 }
@@ -100,11 +105,23 @@ int NFCLevelModule::OnObjectClassEvent( const NFGUID& self, const std::string& s
 
     }
 
+    if ( strClassName == NFrame::Player::ThisName() && CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent )
+    {
+        m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFCLevelModule::OnObjectLevelEvent);
+    }
     if ( strClassName == NFrame::NPC::ThisName() && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
     {
         m_pEventProcessModule->AddEventCallBack( self, NFED_ON_OBJECT_BE_KILLED, this, &NFCLevelModule::OnObjectBeKilled );
     }
 
+    return 0;
+}
+
+int NFCLevelModule::OnObjectLevelEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
+{
+    NFINT64 nLevel = newVar.GetInt();
+
+    AddLevelUpAward(self, nLevel);
     return 0;
 }
 
@@ -127,4 +144,40 @@ int NFCLevelModule::OnObjectBeKilled( const NFGUID& object, const int nEventID, 
     }
 
     return 0;
+}
+
+
+bool NFCLevelModule::AddLevelUpAward( const NFGUID& self, const int nLevel )
+{
+    const std::string& strAwardID = NFCCommonConfig::GetSingletonPtr()->GetAttributeString("PlayerLevel", boost::lexical_cast<std::string>(nLevel), "AwardPack");
+    if (strAwardID.empty())
+    {
+        return true;
+    }
+
+    std::vector<std::string> xList;
+    NFCCommonConfig::GetSingletonPtr()->GetStructItemList(strAwardID, xList);
+
+    for (int i = 0; i < xList.size(); ++i)
+    {
+        const std::string& strItemID = xList[i];
+        const int nCout = NFCCommonConfig::GetSingletonPtr()->GetAttributeInt("strAwardID", strItemID, "Count");
+        if (m_pElementInfoModule->ExistElement(strItemID))
+        {
+            const int nItemType = m_pElementInfoModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
+            switch (nItemType)
+            {
+            case NFMsg::EIT_EQUIP:
+                {
+                    m_pPackModule->CreateEquip(self, strItemID);
+                }
+                break;
+            default:
+                m_pPackModule->CreateItem(self, strItemID, nCout);
+                break;
+            }
+        }
+    }
+
+    return true;
 }
