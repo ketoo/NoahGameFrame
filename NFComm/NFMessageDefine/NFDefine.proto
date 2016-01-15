@@ -249,6 +249,7 @@ enum EItemType
 	EIT_HERO_STONE   		= 4; // 英雄石，吃得英雄经验
 	EIT_STRENGTHEN_STONE	= 5; // 强化石
 	EIT_DEMONIZATION_STONE	= 6; // 附魔石
+	EIT_GEM_STONE			= 7; // 属性宝石
 	
 	EIT_WOOD				= 100; // 木材
 	EIT_STONE				= 101; // 石材
