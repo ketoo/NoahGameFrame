@@ -19,17 +19,20 @@
 #include "NFGUID.h"
 #include "NFIPluginManager.h"
 
-enum NF_SERVER_TYPE
+
+enum NF_SERVER_TYPES
 {
-	NFST_NONE = 0,
-	NFST_CIENT = 1,
-	NFST_MAXTER_SERVER = 2,
-	NFST_WORLD_SERVER = 3,
-	NFST_GAME_SERVER = 4,
-	NFST_PROXY_SERVER = 5,
-	NFST_LOGIN_SERVER = 6,
-	NFST_NOSQL_SERVER = 7,
+	NF_ST_NONE			= 0,    // NONE
+	NF_ST_REDIS			= 1,    //
+	NF_ST_MYSQL			= 2,    //
+	NF_ST_MASTER		= 3,    //
+	NF_ST_LOGIN			= 4,    //
+	NF_ST_PROXY			= 5,    //
+	NF_ST_GAME			= 6,    //
+	NF_ST_WORLD			= 7,    //
+
 };
+
 
 ////////////////////////////////////////////////////////////////////////////
 
