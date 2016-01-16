@@ -28,6 +28,7 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
+
 class NFCLogicClass : public NFILogicClass
 {
 public:
@@ -61,6 +62,25 @@ public:
     {
         return m_pComponentManager;
     }
+
+	virtual bool AddClassCallBack(const CLASS_EVENT_FUNCTOR_PTR& cb)
+	{
+		return mxClassEventInfo.Add(cb);
+	}
+
+	virtual bool DoEvent(const NFGUID& objectID, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList)
+	{
+		CLASS_EVENT_FUNCTOR_PTR cb;
+		bool bRet = mxClassEventInfo.First(cb);
+		while (bRet)
+		{
+			cb->operator()(objectID, mstrClassName, eClassEvent,  valueList);
+
+			bRet = mxClassEventInfo.Next(cb);
+		}
+
+		return true;
+	}
 
     void SetParent(NF_SHARE_PTR<NFILogicClass> pClass)
     {
@@ -120,6 +140,8 @@ private:
     std::string mstrClassInstancePath;
 
     NFList<std::string> mlConfigList;
+
+	NFList<CLASS_EVENT_FUNCTOR_PTR> mxClassEventInfo;
 };
 
 class NFCLogicClassModule
@@ -135,6 +157,9 @@ public:
     virtual bool Load();
     virtual bool Save();
     virtual bool Clear();
+
+	virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb);
+	virtual bool DoEvent(const NFGUID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList);
 
     virtual NF_SHARE_PTR<NFIPropertyManager> GetClassPropertyManager(const std::string& strClassName);
     virtual NF_SHARE_PTR<NFIRecordManager> GetClassRecordManager(const std::string& strClassName);

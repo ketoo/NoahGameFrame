@@ -52,8 +52,8 @@ bool NFCPackModule::AfterInit()
     assert( NULL != m_pLogModule );
     assert( NULL != m_pUUIDModule );
 
-    m_pEventProcessModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPackModule::OnClassObjectEvent );
-    m_pEventProcessModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCPackModule::OnClassObjectEvent );
+    m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPackModule::OnClassObjectEvent );
+    m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCPackModule::OnClassObjectEvent );
 
     return true;
 }
