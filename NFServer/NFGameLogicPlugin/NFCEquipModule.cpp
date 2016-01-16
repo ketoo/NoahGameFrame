@@ -54,7 +54,7 @@ bool NFCEquipModule::AfterInit()
     strEquipPath += "NFDataCfg\Ini\Common\EqupConfig.xml";
     NFCCommonConfig::GetSingletonPtr()->LoadConfig(strEquipPath);
 
-    m_pEventProcessModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCEquipModule::OnClassObjectEvent );
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCEquipModule::OnClassObjectEvent );
     return true;
 }
 

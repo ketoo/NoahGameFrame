@@ -115,7 +115,7 @@ bool NFCGameServerToWorldModule::AfterInit()
 
 	NFIClusterClientModule::Bind(this, &NFCGameServerToWorldModule::OnReciveWSPack, &NFCGameServerToWorldModule::OnSocketWSEvent);
     
-    m_pEventProcessModule->AddClassCallBack("Player", this, &NFCGameServerToWorldModule::OnObjectClassEvent);
+    m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGameServerToWorldModule::OnObjectClassEvent);
 
 	// Á¬½Óworld server
 	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
