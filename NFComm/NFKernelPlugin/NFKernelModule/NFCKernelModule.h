@@ -151,6 +151,10 @@ public:
 
     virtual bool LogSelfInfo(const NFGUID ident);
 
+	//////////////////////////////////////////////////////////////////////////
+
+	virtual bool DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFIDataList& valueList);
+
 protected:
 
     //只能网络[脚本]模块注册，回调用来同步对象类事件,所有的类对象都会回调
@@ -199,7 +203,7 @@ private:
     NFGUID mnCurExeObject;
     NFINT64 nLastTime;
 
-    NF_SHARE_PTR<NFISceneModule> m_pContainerModule;
+    NF_SHARE_PTR<NFISceneModule> m_pSceneModule;
     
     NFILogModule* m_pLogModule;
     NFILogicClassModule* m_pLogicClassModule;
