@@ -82,7 +82,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFDefine", "NFDefine", "{7B
 	ProjectSection(SolutionItems) = preProject
 		NFComm\Define\NFItem_def.h = NFComm\Define\NFItem_def.h
 		NFComm\Define\NFObject_def.h = NFComm\Define\NFObject_def.h
-		NFComm\Define\NFServer_def.h = NFComm\Define\NFServer_def.h
 		NFComm\Define\NFSkill_def.h = NFComm\Define\NFSkill_def.h
 		NFComm\Define\NFStringInfo.h = NFComm\Define\NFStringInfo.h
 	EndProjectSection
