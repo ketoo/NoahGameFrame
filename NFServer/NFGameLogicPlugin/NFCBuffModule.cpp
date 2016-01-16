@@ -15,8 +15,6 @@ bool NFCBuffModule::Init()
     m_pBuffConfigModule = dynamic_cast<NFIBuffConfigModule*>( pPluginManager->FindModule( "NFCBuffConfigModule" ) );
     
 
-    //  m_pEventProcessModule->AddClassCallBack( "Player", OnObjectClassEvent );
-    //  m_pEventProcessModule->AddClassCallBack( "NPC", OnObjectClassEvent );
     mstrRunTimeEffectTable = "RuntimeBuffInfo";
 
     return true;

@@ -41,7 +41,7 @@ bool NFCItemModule::Execute()
 
 bool NFCItemModule::AfterInit()
 {
-    m_pEventProcessModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCItemModule::OnClassObjectEvent );
+    m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCItemModule::OnClassObjectEvent );
 	CheckConfig();
     return true;
 }

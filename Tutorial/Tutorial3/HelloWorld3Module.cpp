@@ -77,7 +77,7 @@ bool HelloWorld3Module::AfterInit()
 	//创建容器，所有的对象均需在容器中
 	m_pKernelModule->CreateScene(1, "");
 
-	m_pEventProcessModule->AddClassCallBack("Player", this, &HelloWorld3Module::OnClassCallBackEvent);
+	m_pKernelModule->AddClassCallBack("Player", this, &HelloWorld3Module::OnClassCallBackEvent);
 
 	//创建对象，挂类回调和属性回调,然后事件处理对象
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(NFGUID(0, 10), 1, 0, "Player", "", NFCDataList());
