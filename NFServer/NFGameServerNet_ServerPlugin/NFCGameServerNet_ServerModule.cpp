@@ -51,8 +51,8 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pKernelModule->ResgisterCommonPropertyEvent( this, &NFCGameServerNet_ServerModule::OnPropertyCommonEvent );
 	m_pKernelModule->ResgisterCommonRecordEvent( this, &NFCGameServerNet_ServerModule::OnRecordCommonEvent );
 
-	m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCGameServerNet_ServerModule::OnObjectClassEvent );
-	m_pEventProcessModule->AddClassCallBack( "NPC", this, &NFCGameServerNet_ServerModule::OnObjectNPCClassEvent );
+	m_pKernelModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCGameServerNet_ServerModule::OnObjectClassEvent );
+	m_pKernelModule->AddClassCallBack( NFrame::NPC::ThisName(), this, &NFCGameServerNet_ServerModule::OnObjectNPCClassEvent );
 
 	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
 	if (xLogicClass.get())
@@ -359,7 +359,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
     pObject->SetPropertyInt("GateID", nGateID);
 	pObject->SetPropertyInt("GameID", pPluginManager->AppID());
 
- 	m_pEventProcessModule->DoEvent(pObject->Self(), "Player", CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCDataList() );
+ 	m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCDataList() );
 
 	NFCDataList varEntry;
 	varEntry << pObject->Self();

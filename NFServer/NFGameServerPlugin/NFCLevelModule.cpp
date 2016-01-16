@@ -42,8 +42,8 @@ bool NFCLevelModule::AfterInit()
 	assert( NULL != m_pElementInfoModule );
 	assert( NULL != m_pPackModule );
 
-    m_pEventProcessModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCLevelModule::OnObjectClassEvent );
-    m_pEventProcessModule->AddClassCallBack( NFrame::NPC::ThisName(), this, &NFCLevelModule::OnObjectClassEvent );
+    m_pKernelModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCLevelModule::OnObjectClassEvent );
+    m_pKernelModule->AddClassCallBack( NFrame::NPC::ThisName(), this, &NFCLevelModule::OnObjectClassEvent );
 
     std::string strPlayerPath = pPluginManager->GetConfigPath();
     strPlayerPath += "NFDataCfg\Ini\Common\PlayerLevelConfig.xml";
