@@ -339,8 +339,6 @@ bool NFCKernelModule::DestroyObject(const NFGUID& self)
 		DoEvent(self, strClassName, COE_BEFOREDESTROY, NFCDataList());
 		DoEvent(self, strClassName, COE_DESTROY, NFCDataList());
 
-		m_pEventProcessModule->RemoveEvent(self);
-
 		RemoveElement(self);
 
 		return true;
