@@ -38,7 +38,7 @@ bool NFCNPCRefreshModule::AfterInit()
     assert(NULL != m_pElementInfoModule);
     assert(NULL != m_pPackModule);
 
-    m_pEventProcessModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCNPCRefreshModule::OnObjectClassEvent);
+    m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCNPCRefreshModule::OnObjectClassEvent);
 
     return true;
 }

@@ -78,6 +78,9 @@ public:
         CLASS_EVENT_FUNCTOR_PTR functorPtr(new CLASS_EVENT_FUNCTOR(functor));
         return AddClassCallBack(strClassName, functorPtr);
     }
+
+	virtual bool DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFIDataList& valueList) = 0;
+
     //////////////////////////////////////////////////////////////////////////
     //只能网络模块注册，回调用来同步对象类事件,所有的类对象都会回调
     template<typename BaseType>
@@ -105,7 +108,8 @@ public:
         RECORD_EVENT_FUNCTOR_PTR functorPtr(new RECORD_EVENT_FUNCTOR(functor));
         return ResgisterCommonRecordEvent(functorPtr);
     }
-   
+
+
     /////////////////////////////////////////////////////////////////
 
     virtual int Command(const NFIDataList& var) = 0;
@@ -198,6 +202,8 @@ public:
 protected:
     virtual bool AddEventCallBack(const NFGUID& self, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb) = 0;
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb) = 0;
+
+
 protected:
 
     //只能网络模块注册，回调用来同步对象类事件,所有的类对象都会回调
