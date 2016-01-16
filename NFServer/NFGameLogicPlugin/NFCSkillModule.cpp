@@ -44,12 +44,11 @@ bool NFCSkillModule::AfterInit()
     assert( NULL != m_pPropertyModule );
     assert( NULL != m_pSceneProcessModule );
 
-    m_pEventProcessModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL, this, &NFCSkillModule::OnRequireUseSkillEvent );
-    m_pEventProcessModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL_POS, this, &NFCSkillModule::OnRequireUseSkillPosEvent );
+    m_pKernelModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL, this, &NFCSkillModule::OnRequireUseSkillEvent );
+    m_pKernelModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL_POS, this, &NFCSkillModule::OnRequireUseSkillPosEvent );
 
-    m_pEventProcessModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCSkillModule::OnClassObjectEvent );
-    m_pEventProcessModule->AddClassCallBack( NFrame::NPC::ThisName(), this, &NFCSkillModule::OnClassObjectEvent );
-    //m_pEventProcessModule->AddClassCallBack( NFrame::Pet::ThisName(), this, &NFCSkillModule::OnClassObjectEvent );
+    m_pKernelModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCSkillModule::OnClassObjectEvent );
+    m_pKernelModule->AddClassCallBack( NFrame::NPC::ThisName(), this, &NFCSkillModule::OnClassObjectEvent );
 
     return true;
 }
