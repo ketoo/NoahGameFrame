@@ -10,6 +10,7 @@
 #include "NFCStateMachine.h"
 #include "NFCHateModule.h"
 #include "NFAIPlugin.h"
+#include "NFComm\NFMessageDefine\NFProtocolDefine.hpp"
 
 
 bool NFCAIModule::Init()
@@ -260,9 +261,8 @@ int NFCAIModule::OnAIObjectEvent(const NFGUID& self, const std::string& strClass
 
 bool NFCAIModule::AfterInit()
 {
-	m_pEventProcessModule->AddClassCallBack("AttackNPC", this, &NFCAIModule::OnAIObjectEvent);
-	m_pEventProcessModule->AddClassCallBack("NPC", this, &NFCAIModule::OnAIObjectEvent);
-    m_pEventProcessModule->AddClassCallBack("Pet",this, &NFCAIModule::OnAIObjectEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCAIModule::OnAIObjectEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCAIModule::OnAIObjectEvent);
     return true;
 }
 
