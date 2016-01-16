@@ -43,8 +43,8 @@ bool NFCWorldGuildDataModule::AfterInit()
     assert(NULL != m_pClusterSQLModule);
     assert(NULL != m_pDataProcessModule);
 
-    m_pDataProcessModule->RegisterAutoSave("Guild");
-    m_pKernelModule->AddClassCallBack("Guild", this, &NFCWorldGuildDataModule::OnGuildClassEvent);
+    m_pDataProcessModule->RegisterAutoSave(NFrame::Guild::ThisName());
+    m_pKernelModule->AddClassCallBack(NFrame::Guild::ThisName(), this, &NFCWorldGuildDataModule::OnGuildClassEvent);
 
     m_pKernelModule->CreateScene(mContainerID, "");
 

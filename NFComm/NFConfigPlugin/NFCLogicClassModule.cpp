@@ -635,5 +635,28 @@ bool NFCLogicClassModule::ReadFileToString(const std::string& strFile, std::stri
     m_data[size] = 0;
 
     strOutData.append(&m_data.front(), size);
+
     return true;
+}
+
+bool NFCLogicClassModule::AddClassCallBack( const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb )
+{
+	NF_SHARE_PTR<NFILogicClass> pClass = GetElement(strClassName);
+	if (nullptr == pClass)
+	{
+		return false;
+	}
+
+	return pClass->AddClassCallBack(cb);
+}
+
+bool NFCLogicClassModule::DoEvent( const NFGUID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList )
+{
+	NF_SHARE_PTR<NFILogicClass> pClass = GetElement(strClassName);
+	if (nullptr == pClass)
+	{
+		return false;
+	}
+
+	return pClass->DoEvent(objectID, eClassEvent, valueList);
 }
