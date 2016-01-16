@@ -27,7 +27,7 @@ bool NFCPropertyModule::Init()
     assert( NULL != m_pEquipModuele );
     assert( NULL != m_pLevelModule );
 
-    m_pEventProcessModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCPropertyModule::OnObjectClassEvent );
+    m_pKernelModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCPropertyModule::OnObjectClassEvent );
     return true;
 }
 

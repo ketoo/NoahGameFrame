@@ -17,10 +17,8 @@ NFCEventProcessModule::NFCEventProcessModule(NFIPluginManager* p)
 
 NFCEventProcessModule::~NFCEventProcessModule()
 {
-	mRemoveObjectListEx.ClearAll();
 	mRemoveEventListEx.ClearAll();
 
-	mxClassEventInfoEx.ClearAll();
 	mObjectEventInfoMapEx.ClearAll();
 }
 
@@ -31,7 +29,6 @@ bool NFCEventProcessModule::Init()
 
 bool NFCEventProcessModule::Shut()
 {
-    mxClassEventInfoEx.ClearAll();
     mRemoveEventListEx.ClearAll();
     mObjectEventInfoMapEx.ClearAll();
 
@@ -93,24 +90,7 @@ bool NFCEventProcessModule::Execute()
 
     mRemoveEventListEx.ClearAll();
 
-    //////////////////////////////////////////////////////////////////////////
-    //删除事件对象
-    bool bRet = mRemoveObjectListEx.First(ident);
-    while (bRet)
-    {
-        mObjectEventInfoMapEx.RemoveElement(ident);
-
-        bRet = mRemoveObjectListEx.Next(ident);
-    }
-
-    mRemoveObjectListEx.ClearAll();
-
     return true;
-}
-
-bool NFCEventProcessModule::RemoveEvent(const NFGUID& objectID)
-{
-    return mRemoveObjectListEx.Add(objectID);
 }
 
 bool NFCEventProcessModule::RemoveEventCallBack(const NFGUID& objectID, const int nEventID/*, const EVENT_PROCESS_FUNCTOR_PTR& cb*/)
@@ -163,24 +143,6 @@ bool NFCEventProcessModule::DoEvent(const NFGUID& objectID, const int nEventID, 
     return true;
 }
 
-bool NFCEventProcessModule::DoEvent(const NFGUID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList)
-{
-    NF_SHARE_PTR<NFCClassEventList> pEventList = mxClassEventInfoEx.GetElement(strClassName);
-    if (nullptr != pEventList)
-    {
-        CLASS_EVENT_FUNCTOR_PTR cb;
-        bool bRet = pEventList->First(cb);
-        while (bRet)
-        {
-            cb->operator()(objectID, strClassName, eClassEvent,  valueList);
-
-            bRet = pEventList->Next(cb);
-        }
-    }
-
-    return false;
-}
-
 bool NFCEventProcessModule::HasEventCallBack(const NFGUID& objectID, const int nEventID)
 {
     NF_SHARE_PTR<NFCObjectEventInfo> pObjectEventInfo = mObjectEventInfoMapEx.GetElement(objectID);
@@ -194,20 +156,4 @@ bool NFCEventProcessModule::HasEventCallBack(const NFGUID& objectID, const int n
     }
 
     return false;
-}
-
-bool NFCEventProcessModule::AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb)
-{
-    NF_SHARE_PTR<NFCClassEventList> pEventList = mxClassEventInfoEx.GetElement(strClassName);
-    if (nullptr == pEventList)
-    {
-        pEventList = NF_SHARE_PTR<NFCClassEventList>(NF_NEW NFCClassEventList());
-        mxClassEventInfoEx.AddElement(strClassName, pEventList);
-    }
-
-    assert(NULL != pEventList);
-
-    pEventList->Add(cb);
-
-    return true;
 }

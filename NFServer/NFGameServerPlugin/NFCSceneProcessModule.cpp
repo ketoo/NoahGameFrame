@@ -29,7 +29,7 @@ bool NFCSceneProcessModule::Init()
     assert( NULL != m_pPropertyModule );
     assert( NULL != m_pLogModule );
 
-    m_pEventProcessModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCSceneProcessModule::OnObjectClassEvent );
+    m_pKernelModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCSceneProcessModule::OnObjectClassEvent );
 
     return true;
 }
