@@ -370,7 +370,6 @@ bool NFCKernelModule::SetPropertyInt(const NFGUID& self, const std::string& strP
 	}
 
 	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
-	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName, __FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -424,7 +423,7 @@ NFINT64 NFCKernelModule::GetPropertyInt(const NFGUID& self, const std::string& s
 
 	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
 
-	return 0;
+	return NULL_INT;
 }
 
 double NFCKernelModule::GetPropertyFloat(const NFGUID& self, const std::string& strPropertyName)
@@ -437,7 +436,7 @@ double NFCKernelModule::GetPropertyFloat(const NFGUID& self, const std::string& 
 
 	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
 
-	return 0.0;
+	return NULL_FLOAT;
 }
 
 const std::string& NFCKernelModule::GetPropertyString(const NFGUID& self, const std::string& strPropertyName)
@@ -476,7 +475,7 @@ NF_SHARE_PTR<NFIRecord> NFCKernelModule::FindRecord(const NFGUID& self, const st
 
 	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName + "| There is no object", __FUNCTION__, __LINE__);
 
-	return NULL;
+	return nullptr;
 }
 
 bool NFCKernelModule::ClearRecord(const NFGUID& self, const std::string& strRecordName)
