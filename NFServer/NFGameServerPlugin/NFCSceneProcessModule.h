@@ -20,7 +20,6 @@
 #include "NFComm/RapidXML/rapidxml_utils.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerConfigModule.h"
@@ -74,7 +73,6 @@ private:
     NFIPropertyModule* m_pPropertyModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIKernelModule* m_pKernelModule;
-    NFIEventProcessModule* m_pEventProcessModule;
     NFILogModule* m_pLogModule;
     
     //////////////////////////////////////////////////////////////////////////

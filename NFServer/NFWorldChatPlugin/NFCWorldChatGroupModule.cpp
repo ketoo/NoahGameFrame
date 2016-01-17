@@ -30,13 +30,11 @@ bool NFCWorldChatGroupModule::Execute()
 
 bool NFCWorldChatGroupModule::AfterInit()
 {
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
     m_pClusterSQLModule = pPluginManager->FindModule<NFIClusterModule>("NFCMysqlClusterModule");
     m_pDataProcessModule = pPluginManager->FindModule<NFIDataProcessModule>("NFCDataProcessModule");
 
-    assert(NULL != m_pEventProcessModule);
 	assert(NULL != m_pKernelModule);
 	assert(NULL != m_pUUIDModule);
 	assert(NULL != m_pClusterSQLModule);

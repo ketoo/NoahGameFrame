@@ -6,7 +6,6 @@
 //
 // -------------------------------------------------------------------------
 
-////#include "stdafx.h"
 #include "NFCStateMachine.h"
 #include "NFCAIModule.h"
 

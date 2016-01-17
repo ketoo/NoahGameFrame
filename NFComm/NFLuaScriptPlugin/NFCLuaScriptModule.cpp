@@ -18,12 +18,10 @@ bool NFCLuaScriptModule::Init()
 
 bool NFCLuaScriptModule::AfterInit()
 {
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 
-    assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pElementInfoModule);

@@ -1,7 +1,6 @@
 // NFKernelPlugin.cpp : Defines the exported functions for the DLL application.
 //
 
-//#include "stdafx.h"
 #include "NFKernelPlugin.h"
 #include "NFKernelModule/NFCKernelModule.h"
 #include "NFKernelModule/NFCConcurrentModule.h"

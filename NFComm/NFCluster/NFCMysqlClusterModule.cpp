@@ -6,7 +6,6 @@
 //    Row,Col; ; ; ; ; ; ;
 // -------------------------------------------------------------------------
 
-//#include "stdafx.h"
 #include <algorithm>
 #include "NFCMysqlDriver.h"
 #include "NFCMysqlClusterModule.h"
