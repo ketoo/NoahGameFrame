@@ -6,16 +6,14 @@
 //
 // -------------------------------------------------------------------------
 
-////#include "stdafx.h"
 #include "../NFCAIModule.h"
 
 NFCPatrolState::NFCPatrolState(float fHeartBeatTime, NFIPluginManager* p)
     : NFIState(PatrolState, fHeartBeatTime, p)
 {
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pAIModule = dynamic_cast<NFIAIModule*>(pPluginManager->FindModule("NFCAIModule"));
-    m_pMoveModule = dynamic_cast<NFIMoveModule*>(pPluginManager->FindModule("NFCMoveModule"));
+    m_pAIModule = pPluginManager->FindModule<NFIAIModule>("NFCAIModule");
+    m_pMoveModule = pPluginManager->FindModule<NFIMoveModule>("NFCMoveModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 
     m_pHateModule = m_pAIModule->GetHateModule();
@@ -137,7 +135,7 @@ bool NFCPatrolState::RandomPatrol(const NFGUID& self)
 				valueList.AddFloat(fCurX);
 				valueList.AddFloat(fCurY);
 				valueList.AddFloat(fCurZ);
-				m_pEventProcessModule->DoEvent(self, NFED_ON_CLIENT_REQUIRE_MOVE, valueList);
+				m_pKernelModule->DoEvent(self, NFED_ON_CLIENT_REQUIRE_MOVE, valueList);
 
 				m_pKernelModule->SetPropertyFloat(self, "X", fCurX);
 				m_pKernelModule->SetPropertyFloat(self, "Y", fCurY);

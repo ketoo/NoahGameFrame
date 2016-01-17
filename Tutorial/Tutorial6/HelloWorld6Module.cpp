@@ -15,7 +15,6 @@ bool HelloWorld6Module::AfterInit()
     std::cout << "Hello, world6, AfterInit" << std::endl;
 
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
     m_pLuaScriptModule = pPluginManager->FindModule<NFILuaScriptModule>("NFCLuaScriptModule");
 
@@ -40,7 +39,7 @@ bool HelloWorld6Module::AfterInit()
     pObject->SetPropertyInt("MAXHP",100);
 
 
-    m_pEventProcessModule->DoEvent(pObject->Self(), 2222, NFCDataList());
+    m_pKernelModule->DoEvent(pObject->Self(), 2222, NFCDataList());
 
     return true;
 }

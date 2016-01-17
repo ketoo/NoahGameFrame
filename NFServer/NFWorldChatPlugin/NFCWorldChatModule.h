@@ -12,7 +12,6 @@
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIWorldChatModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 
 class NFCWorldChatModule
     : public NFIWorldChatModule
@@ -34,7 +33,6 @@ public:
 protected:
 
 protected:
-    NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
 private:
 };

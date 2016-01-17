@@ -6,7 +6,6 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-//#include "stdafx.h"
 #include "NFCWorldNet_ServerModule.h"
 #include "NFWorldNet_ServerPlugin.h"
 #include "NFComm/NFMessageDefine/NFMsgPreGame.pb.h"
@@ -18,7 +17,6 @@ bool NFCWorldNet_ServerModule::Init()
 
 bool NFCWorldNet_ServerModule::AfterInit()
 {
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pWorldLogicModule = pPluginManager->FindModule<NFIWorldLogicModule>("NFCWorldLogicModule");
     m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
@@ -27,9 +25,9 @@ bool NFCWorldNet_ServerModule::AfterInit()
 	m_pWorldGuildModule = pPluginManager->FindModule<NFIWorldGuildModule>("NFCWorldGuildModule");
 	m_pClusterSQLModule = pPluginManager->FindModule<NFIClusterModule>("NFCMysqlClusterModule");
     m_pWorldGuildDataModule = pPluginManager->FindModule<NFIWorldGuildDataModule>("NFCWorldGuildDataModule");
-    m_pWordChatGroupModule = pPluginManager->FindModule<NFIWorldChatGroupModule>("NFCWorldChatGroupModule");
+	m_pWordChatGroupModule = pPluginManager->FindModule<NFIWorldChatGroupModule>("NFCWorldChatGroupModule");
+	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>("NFCWorldNet_ServerModule");
     
-    assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pWorldLogicModule);
     assert(NULL != m_pLogModule);
@@ -38,9 +36,8 @@ bool NFCWorldNet_ServerModule::AfterInit()
 	assert(NULL != m_pWorldGuildModule);
     assert(NULL != m_pClusterSQLModule);
     assert(NULL != m_pWorldGuildDataModule);
-    assert(NULL != m_pWordChatGroupModule);
-
-    m_pEventProcessModule->AddEventCallBack(NFGUID(), NFED_ON_CLIENT_SELECT_SERVER, this, &NFCWorldNet_ServerModule::OnSelectServerEvent);
+	assert(NULL != m_pWordChatGroupModule);
+	assert(NULL != m_pWorldNet_ServerModule);
 
 	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
 	if (xLogicClass.get())
@@ -159,47 +156,26 @@ int NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess(const int nSockInde
     return 0;
 }
 
-int NFCWorldNet_ServerModule::OnSelectServerEvent(const NFGUID& object, const int nEventID, const NFIDataList& var)
+int NFCWorldNet_ServerModule::OnSelectServerEvent(const int nWorldID, const NFGUID xSenderID, int nLoginID, const std::string& strAccount)
 {
-    if (4 != var.GetCount()
-        || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
-    {
-        return 0;
-    }
-
-    const int nWorldID = var.Int(0);
-    const NFGUID xClientIdent = var.Object(1);
-    const int nLoginID = var.Int(2);
-    const std::string& strAccount = var.String(3);
-
-    //////////////////////////////////////////////////////////////////////////
-    if (InThisWorld(strAccount))
-    {
-        return 0;
-    }
-
-    NF_SHARE_PTR<ServerData> pServerData = mProxyMap.First();
-    if (pServerData.get())
-    {
-        NFMsg::AckConnectWorldResult xData;
-
-        xData.set_world_id(nWorldID);
-        xData.mutable_sender()->CopyFrom(NFToPB(xClientIdent));
-        xData.set_login_id(nLoginID);
-        xData.set_account(strAccount);
-
-        xData.set_world_ip(pServerData->pData->server_ip());
-        xData.set_world_port(pServerData->pData->server_port());
-        xData.set_world_key(strAccount);
-
-        SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xData, pServerData->nFD);
-
-        //½á¹û
-        NFCDataList varResult;
-        varResult << nWorldID << xClientIdent << nLoginID << strAccount << pServerData->pData->server_ip() << pServerData->pData->server_port() << strAccount;
-        m_pEventProcessModule->DoEvent(NFGUID(), NFED_ON_CLIENT_SELECT_SERVER_RESULTS, varResult);
-    }
     
+	NF_SHARE_PTR<ServerData> pServerData = mProxyMap.First();
+	if (pServerData.get())
+	{
+		NFMsg::AckConnectWorldResult xData;
+
+		xData.set_world_id(nWorldID);
+		xData.mutable_sender()->CopyFrom(NFToPB(xSenderID));
+		xData.set_login_id(nLoginID);
+		xData.set_account(strAccount);
+
+		xData.set_world_ip(pServerData->pData->server_ip());
+		xData.set_world_port(pServerData->pData->server_port());
+		xData.set_world_key(strAccount);
+
+		SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xData, pServerData->nFD);
+	}
+
     return 0;
 }
 
@@ -456,11 +432,6 @@ void NFCWorldNet_ServerModule::OnClientConnected( const int nAddress )
 {
 
 
-}
-
-bool NFCWorldNet_ServerModule::InThisWorld( const std::string& strAccount )
-{
-    return false;
 }
 
 void NFCWorldNet_ServerModule::LogGameServer()
