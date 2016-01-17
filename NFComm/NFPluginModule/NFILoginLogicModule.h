@@ -15,8 +15,9 @@
 class NFILoginLogicModule
     : public NFILogicModule
 {
-
 public:
+	virtual int OnLoginProcess(const NFGUID& object, const std::string& strAccount, const std::string& strPwd) = 0;
+
 };
 
 #endif
