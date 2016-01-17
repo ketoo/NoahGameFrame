@@ -6,7 +6,6 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-//#include "stdafx.h"
 #include "NFCLoginToMasterModule.h"
 #include "NFLoginNet_ClientPlugin.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
@@ -23,7 +22,6 @@ bool NFCLoginToMasterModule::Shut()
 
 bool NFCLoginToMasterModule::AfterInit()
 {
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pLoginLogicModule = pPluginManager->FindModule<NFILoginLogicModule>("NFCLoginLogicModule");
     m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
@@ -31,15 +29,12 @@ bool NFCLoginToMasterModule::AfterInit()
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
     m_pLoginNet_ServerModule = pPluginManager->FindModule<NFILoginNet_ServerModule>("NFCLoginNet_ServerModule");
 
-    assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pLoginLogicModule);
     assert(NULL != m_pLogModule);
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pElementInfoModule);
     assert(NULL != m_pLoginNet_ServerModule);
-
-    m_pEventProcessModule->AddEventCallBack(NFGUID(), NFED_ON_CLIENT_SELECT_SERVER, this, &NFCLoginToMasterModule::OnSelectServerEvent);
 
 	NFIClusterClientModule::Bind(this, &NFCLoginToMasterModule::OnReciveMSPack, &NFCLoginToMasterModule::OnSocketMSEvent);
 
@@ -82,31 +77,6 @@ bool NFCLoginToMasterModule::BeforeShut()
 {
 
     return false;
-}
-
-int NFCLoginToMasterModule::OnSelectServerEvent(const NFGUID& object, const int nEventID, const NFIDataList& var)
-{
-	if (4 != var.GetCount()
-		|| !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_OBJECT,
-		TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
-	{
-		return -1;
-	}
-
-	const int nServerID = var.Int(0);
-	const NFGUID xClientIdent = var.Object(1);
-	const int nLoginID = var.Int(2);
-	const std::string& strAccount = var.String(3);
-
-	NFMsg::ReqConnectWorld xData;
-	xData.set_world_id(nServerID);
-	xData.set_login_id(nLoginID);
-	xData.mutable_sender()->CopyFrom(NFINetModule::NFToPB(xClientIdent));
-	xData.set_account(strAccount);
-
-	SendSuitByPB(NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xData);
-
-	return 0;
 }
 
 bool NFCLoginToMasterModule::Execute()
@@ -167,16 +137,7 @@ int NFCLoginToMasterModule::OnSelectServerResultProcess(const int nSockIndex, co
         return 0;
     }
 
-    NFCDataList var;
-    var << xMsg.world_id()
-        << NFINetModule::PBToNF(xMsg.sender())
-        << xMsg.login_id()
-        << xMsg.account()
-        << xMsg.world_ip()
-        << xMsg.world_port()
-        << xMsg.world_key();
-
-    m_pEventProcessModule->DoEvent(NFGUID(), NFED_ON_CLIENT_SELECT_SERVER_RESULTS, var);
+	m_pLoginNet_ServerModule->OnSelectWorldResultsProcess(xMsg.world_id(), NFINetModule::PBToNF(xMsg.sender()), xMsg.login_id(), xMsg.account(), xMsg.world_ip(), xMsg.world_port(), xMsg.world_key());
 
 	return 0;
 }
