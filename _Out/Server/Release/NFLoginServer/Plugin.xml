@@ -1,9 +1,15 @@
 <XML>
-	<Plugin Name="NFEventProcessPlugin" Main="1"/>
 	<Plugin Name="NFKernelPlugin" Main="1"/>
 	<Plugin Name="NFConfigPlugin" Main="1"/>
 	<Plugin Name="NFLoginLogicPlugin" Main="1"/>
 	<Plugin Name="NFLoginNet_ServerPlugin" Main="1"/>
 	<Plugin Name="NFLoginNet_ClientPlugin" Main="1"/>
+	<Plugin Name="NFLogPlugin" Main="1"/>
+	
+    <Plugin Name="NFDataBaseNet_ClientPlugin" Main="1"/>
+    <Plugin Name="NFMysqlClusterPlugin" Main="1"/>
+	
+	<ActorDataModule Name="NFCDataProcessModule" />
+	<APPID Name="4" />
     <ConfigPath Name="../../" />
 </XML>
