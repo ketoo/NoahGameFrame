@@ -14,11 +14,6 @@
 
 enum NFEventDefine
 {
-    ////////////prepare//////////////////////////////////////////////////////////////
-
-    //arg[0]:xClient,xPlayer
-    NFED_ON_ENTERGAME_SUCESS,
-
     ////////////////Has Self---logic//////////////////////////////////////////////////////////
     //arg[0]:resultID[EGameErrorCode]
     NFED_ON_GENERAL_MESSAGE,
@@ -50,15 +45,11 @@ enum NFEventDefine
     NFED_ON_OBJECT_ENTER_SCENE_BEFORE,
     NFED_ON_OBJECT_ENTER_SCENE_RESULT,
     
-    NFED_ON_CLIENT_SWAP_TABLE,
-
     NFED_ON_OBJECT_BE_KILLED,
 
     // 通知副本奖励
     NFED_ON_NOTICE_ECTYPE_AWARD,
 
-    //player enter game success,  arg[0] GateID, GameID, arg
-    NFED_ON_ONLINE_SUCCESS,
 };
 
 #endif
