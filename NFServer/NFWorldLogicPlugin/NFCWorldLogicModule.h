@@ -12,7 +12,6 @@
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIWorldLogicModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 
 class NFCWorldLogicModule
     : public NFIWorldLogicModule
@@ -29,16 +28,9 @@ public:
 
     virtual bool AfterInit();
 
-//     virtual int GetWorldID();
-//     virtual const char* GetWorldName();
+protected:
 
 protected:
-// 
-//     int mnWorldID;
-//     std::string mstrWorldName;
-
-protected:
-    NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
 private:
 };

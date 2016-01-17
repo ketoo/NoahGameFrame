@@ -6,7 +6,6 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-//#include "stdafx.h"
 #include "NFCDataBaseNet_ClientModule.h"
 #include "NFDataBaseNet_ClientPlugin.h"
 
