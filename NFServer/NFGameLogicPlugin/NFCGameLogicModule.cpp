@@ -9,7 +9,6 @@
 #include "NFCGameLogicModule.h"
 #include "NFComm/Config/NFConfig.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -33,11 +32,9 @@ bool NFCGameLogicModule::Execute()
 
 bool NFCGameLogicModule::AfterInit()
 {
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
     m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
 
-    assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pLogicClassModule );
 

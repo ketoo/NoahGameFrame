@@ -10,7 +10,6 @@
 #define NFC_HELLO_WORLD4_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
@@ -39,7 +38,6 @@ protected:
     unsigned long mLastTime;
 protected:
     NFIKernelModule* m_pKernelModule;
-    NFIEventProcessModule* m_pEventProcessModule;
     NFIElementInfoModule* m_pElementInfoModule;
 };
 

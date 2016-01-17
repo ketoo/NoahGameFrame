@@ -6,7 +6,6 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-//#include "stdafx.h"
 #include "NFCGameServerToWorldModule.h"
 #include "NFGameServerNet_ClientPlugin.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
@@ -97,14 +96,12 @@ void NFCGameServerToWorldModule::RefreshWorldInfo()
 
 bool NFCGameServerToWorldModule::AfterInit()
 {
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
     m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
     m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
 
-    assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pElementInfoModule);
@@ -115,7 +112,7 @@ bool NFCGameServerToWorldModule::AfterInit()
 
 	NFIClusterClientModule::Bind(this, &NFCGameServerToWorldModule::OnReciveWSPack, &NFCGameServerToWorldModule::OnSocketWSEvent);
     
-    m_pEventProcessModule->AddClassCallBack("Player", this, &NFCGameServerToWorldModule::OnObjectClassEvent);
+    m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGameServerToWorldModule::OnObjectClassEvent);
 
 	// Á¬½Óworld server
 	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");

@@ -31,20 +31,18 @@ bool NFCWorldGuildDataModule::Execute()
 
 bool NFCWorldGuildDataModule::AfterInit()
 {
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
     m_pClusterSQLModule = pPluginManager->FindModule<NFIClusterModule>("NFCMysqlClusterModule");
     m_pDataProcessModule = pPluginManager->FindModule<NFIDataProcessModule>("NFCDataProcessModule");
 
-    assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pUUIDModule);
     assert(NULL != m_pClusterSQLModule);
     assert(NULL != m_pDataProcessModule);
 
-    m_pDataProcessModule->RegisterAutoSave("Guild");
-    m_pKernelModule->AddClassCallBack("Guild", this, &NFCWorldGuildDataModule::OnGuildClassEvent);
+    m_pDataProcessModule->RegisterAutoSave(NFrame::Guild::ThisName());
+    m_pKernelModule->AddClassCallBack(NFrame::Guild::ThisName(), this, &NFCWorldGuildDataModule::OnGuildClassEvent);
 
     m_pKernelModule->CreateScene(mContainerID, "");
 
@@ -88,7 +86,7 @@ int NFCWorldGuildDataModule::OnGuildClassEvent( const NFGUID& self, const std::s
 }
 
 
-const NFGUID& NFCWorldGuildDataModule::CreateGuild(const NFGUID& xPlayeID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP, const int nOffLine /*= 1*/, const int nPower/* = NFMsg::GUILD_POWER_TYPE_PRESIDENT*/)
+const NFGUID NFCWorldGuildDataModule::CreateGuild(const NFGUID& xPlayeID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP, const int nOffLine /*= 1*/, const int nPower/* = NFMsg::GUILD_POWER_TYPE_PRESIDENT*/)
 {
     bool bExit = false;
     if (!m_pClusterSQLModule->Exists(mstrGuildNameTalble, strName, bExit))

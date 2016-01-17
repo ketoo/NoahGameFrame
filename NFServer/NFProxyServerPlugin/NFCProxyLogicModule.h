@@ -12,8 +12,6 @@
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
-//#include "NFComm/NFPluginModule/NFIShareMemoryModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIProxyLogicModule.h"
 
@@ -38,8 +36,6 @@ protected:
 
 protected:
     NFILogicClassModule* m_pLogicClassModule;
-    //NFIShareMemoryModule* m_pShareMemoryModule;
-    NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
 private:
 };

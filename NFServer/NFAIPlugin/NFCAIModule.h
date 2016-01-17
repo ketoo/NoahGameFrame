@@ -14,7 +14,6 @@
 #include "NFComm/NFPluginModule/NFIMoveModule.h"
 #include "NFComm/NFPluginModule/NFIAIModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
 
