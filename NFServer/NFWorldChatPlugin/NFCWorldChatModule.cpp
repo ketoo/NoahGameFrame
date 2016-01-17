@@ -32,12 +32,9 @@ bool NFCWorldChatModule::Execute()
 
 bool NFCWorldChatModule::AfterInit()
 {
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
 
-
-    assert(NULL != m_pEventProcessModule);
-    assert(NULL != m_pKernelModule);
+	assert(NULL != m_pKernelModule);
 
     return true;
 }

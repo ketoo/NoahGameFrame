@@ -12,7 +12,6 @@
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIWorldGuildModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIWorldGuildDataModule.h"
 
@@ -51,7 +50,6 @@ protected:
     bool CheckPower(const NFGUID& self, const NFGUID& xGuildID, int nPowerType);
 
 protected:
-    NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFIUUIDModule* m_pUUIDModule;
     NFIWorldGuildDataModule* m_pWorldGuildDataModule;

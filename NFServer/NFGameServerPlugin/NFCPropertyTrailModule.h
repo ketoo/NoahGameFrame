@@ -11,7 +11,6 @@
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
@@ -49,7 +48,6 @@ protected:
 
 private:
 
-	NFIEventProcessModule* m_pEventProcessModule;
 	NFIKernelModule* m_pKernelModule;
 	NFIPropertyConfigModule* m_pPropertyConfigModule;
 	NFIElementInfoModule* m_pElementInfoModule;
