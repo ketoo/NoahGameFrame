@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 
-//#include "stdafx.h"
 #include "NFCMasterModule.h"
 #include "NFMasterServerPlugin.h"
 
