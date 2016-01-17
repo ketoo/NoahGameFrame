@@ -3,7 +3,6 @@
 
 #include "NFKernelPlugin.h"
 #include "NFKernelModule/NFCKernelModule.h"
-#include "NFKernelModule/NFCConcurrentModule.h"
 #include "NFKernelModule/NFCUUIDModule.h"
 
 //
