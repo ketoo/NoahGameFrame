@@ -55,7 +55,7 @@ public:
     virtual int OnPropertyEnter( const NFIDataList& argVar, const NFIDataList& argGameID, const NFGUID& self );
     virtual int OnRecordEnter( const NFIDataList& argVar,const NFIDataList& argGameID, const NFGUID& self );
 
-	virtual int OnSelectServerEvent(const int nWorldID, const NFGUID xSenderID, int nLoginID, const std::string& strAccount);
+	virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter();
 
 protected:
 
