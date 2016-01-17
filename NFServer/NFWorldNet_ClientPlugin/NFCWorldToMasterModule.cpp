@@ -135,27 +135,26 @@ int NFCWorldToMasterModule::OnSelectServerProcess(const int nSockIndex, const in
 		return 0;
 	}
 
+	NF_SHARE_PTR<ServerData> xServerData = m_pWorldNet_ServerModule->GetSuitProxyForEnter();
+	if (xServerData)
+	{
+		NFMsg::AckConnectWorldResult xData;
 
-	m_pWorldNet_ServerModule->OnSelectServerEvent(xMsg.world_id(), NFINetModule::PBToNF(xMsg.sender()), xMsg.login_id(), xMsg.account());
-    
+		xData.set_world_id(xMsg.world_id());
+		xData.mutable_sender()->CopyFrom(xMsg.sender());
+		xData.set_login_id(xMsg.login_id());
+		xData.set_account(xMsg.account());
+
+		xData.set_world_ip(xServerData->pData->server_ip());
+		xData.set_world_port(xServerData->pData->server_port());
+		xData.set_world_key(xMsg.account());
+
+		m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xData, xServerData->nFD);
+
+		SendSuitByPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xMsg);
+	}
+
 	return 0;
-}
-
-int NFCWorldToMasterModule::OnSelectServerResultsEvent(const int nWorldID, const NFGUID xSenderID, const int nLoginID, const std::string& strAccount, const std::string& strWorldIP, const int nWorldPort, const std::string& strWorldKey)
-{
-    NFMsg::AckConnectWorldResult xMsg;
-
-    xMsg.set_world_id(nWorldID);
-    xMsg.set_login_id(nLoginID);
-    xMsg.set_world_port(nWorldPort);
-    xMsg.mutable_sender()->CopyFrom(NFINetModule::NFToPB(xSenderID));
-    xMsg.set_account(strAccount);
-    xMsg.set_world_ip(strWorldIP);
-    xMsg.set_world_key(strWorldKey);
-
-	SendSuitByPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xMsg);
-
-    return 0;
 }
 
 int NFCWorldToMasterModule::OnKickClientProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
