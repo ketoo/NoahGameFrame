@@ -1,7 +1,6 @@
 // NFLogPlugin.cpp : Defines the exported functions for the DLL application.
 //
 
-//#include "stdafx.h"
 #include "NFLogPlugin.h"
 #include "NFCLogModule.h"
 

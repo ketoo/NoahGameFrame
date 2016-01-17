@@ -6,7 +6,6 @@
 //
 // -------------------------------------------------------------------------
 
-////#include "stdafx.h"
 #include <algorithm>
 #include <ctype.h>
 #include "NFConfigPlugin.h"

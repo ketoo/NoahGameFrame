@@ -6,7 +6,6 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-//#include "stdafx.h"
 #include "NFCGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
 
@@ -17,7 +16,6 @@ bool NFCGameServerNet_ServerModule::Init()
 
 bool NFCGameServerNet_ServerModule::AfterInit()
 {
-	m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>("NFCSceneProcessModule");
@@ -32,7 +30,6 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>("NFCGameServerToWorldModule");
     m_pEquipModule = pPluginManager->FindModule<NFIEquipModule>("NFCEquipModule");
     
-	assert(NULL != m_pEventProcessModule);
 	assert(NULL != m_pKernelModule);
 	assert(NULL != m_pLogicClassModule);
 	assert(NULL != m_pSceneProcessModule);
@@ -51,8 +48,8 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pKernelModule->ResgisterCommonPropertyEvent( this, &NFCGameServerNet_ServerModule::OnPropertyCommonEvent );
 	m_pKernelModule->ResgisterCommonRecordEvent( this, &NFCGameServerNet_ServerModule::OnRecordCommonEvent );
 
-	m_pEventProcessModule->AddClassCallBack( "Player", this, &NFCGameServerNet_ServerModule::OnObjectClassEvent );
-	m_pEventProcessModule->AddClassCallBack( "NPC", this, &NFCGameServerNet_ServerModule::OnObjectNPCClassEvent );
+	m_pKernelModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCGameServerNet_ServerModule::OnObjectClassEvent );
+	m_pKernelModule->AddClassCallBack( NFrame::NPC::ThisName(), this, &NFCGameServerNet_ServerModule::OnObjectNPCClassEvent );
 
 	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
 	if (xLogicClass.get())
@@ -359,14 +356,14 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
     pObject->SetPropertyInt("GateID", nGateID);
 	pObject->SetPropertyInt("GameID", pPluginManager->AppID());
 
- 	m_pEventProcessModule->DoEvent(pObject->Self(), "Player", CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCDataList() );
+ 	m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCDataList() );
 
 	NFCDataList varEntry;
 	varEntry << pObject->Self();
 	varEntry << NFINT64(0);
 	varEntry << nSceneID;
 	varEntry << -1;
-	m_pEventProcessModule->DoEvent( pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry );
+	m_pKernelModule->DoEvent( pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry );
 }
 
 void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -1264,7 +1261,7 @@ int NFCGameServerNet_ServerModule::OnGroupEvent( const NFGUID& self, const std::
 			OnObjectListLeave( NFCDataList() << self, valueAllOldObjectList );
 		}
 
-		m_pEventProcessModule->DoEvent(self, NFED_ON_CLIENT_LEAVE_SCENE, NFCDataList() << nOldGroupID);
+		m_pKernelModule->DoEvent(self, NFED_ON_CLIENT_LEAVE_SCENE, NFCDataList() << nOldGroupID);
 	}
 
 	//再广播给别人自己出现(层升或者跃层)
@@ -1539,8 +1536,8 @@ int NFCGameServerNet_ServerModule::OnObjectClassEvent( const NFGUID& self, const
 	}
 	else if ( CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent )
 	{
-		m_pEventProcessModule->AddEventCallBack(self, NFED_ON_OBJECT_ENTER_SCENE_BEFORE, this, &NFCGameServerNet_ServerModule::OnSwapSceneResultEvent);
-		m_pEventProcessModule->AddEventCallBack(self, NFED_ON_NOTICE_ECTYPE_AWARD, this, &NFCGameServerNet_ServerModule::OnNoticeEctypeAward);
+		m_pKernelModule->AddEventCallBack(self, NFED_ON_OBJECT_ENTER_SCENE_BEFORE, this, &NFCGameServerNet_ServerModule::OnSwapSceneResultEvent);
+		m_pKernelModule->AddEventCallBack(self, NFED_ON_NOTICE_ECTYPE_AWARD, this, &NFCGameServerNet_ServerModule::OnNoticeEctypeAward);
 	}
 
 	return 0;
@@ -1550,7 +1547,7 @@ int NFCGameServerNet_ServerModule::OnObjectNPCClassEvent(const NFGUID& self, con
 {
 	if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )
 	{
-		m_pEventProcessModule->AddEventCallBack( self, NFED_ON_CLIENT_REQUIRE_MOVE, this, &NFCGameServerNet_ServerModule::OnMoveEvent );
+		m_pKernelModule->AddEventCallBack( self, NFED_ON_CLIENT_REQUIRE_MOVE, this, &NFCGameServerNet_ServerModule::OnMoveEvent );
 	}
 
 	return 0;
@@ -1821,7 +1818,7 @@ void NFCGameServerNet_ServerModule::OnClienSwapSceneProcess(const int nSockIndex
 	varEntry << 0;
 	varEntry << xMsg.scene_id();
 	varEntry << -1;
-	m_pEventProcessModule->DoEvent( pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry );
+	m_pKernelModule->DoEvent( pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry );
 }
 
 void NFCGameServerNet_ServerModule::OnClienUseSkill(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)

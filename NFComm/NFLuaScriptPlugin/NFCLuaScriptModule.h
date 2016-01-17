@@ -11,8 +11,6 @@
 
 #include "lua/lua.hpp"
 #include "LuaBridge/LuaBridge.h"
-
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
@@ -63,10 +61,9 @@ protected:
     NFIElementInfoModule* m_pElementInfoModule;
     NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
-    NFIEventProcessModule* m_pEventProcessModule;
 
 protected:
-    NFMap<std::string, int> mmCompomentStatus;//Ω≈±æ «∑Òº”‘ÿ
+    NFMap<std::string, int> mmCompomentStatus;
     lua_State *mpLuaState;
 };
 
