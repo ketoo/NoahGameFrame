@@ -10,18 +10,14 @@
 #include "NFCStateMachine.h"
 #include "NFCHateModule.h"
 #include "NFAIPlugin.h"
+#include "NFComm\NFMessageDefine\NFProtocolDefine.hpp"
 
 
 bool NFCAIModule::Init()
 {
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
 
-    assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
-
-    //m_pEventProcessModule->AddEventCallBack(0, NFED_ON_DATABASE_SERVER_LOADROE_BEGIN, OnDataLoadBeginEvent);
-    //m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_WANTO_SWAP_GS, OnSwapGSEvent);
 
     //////////////////////////////////////////////////////////////////////////
 
@@ -260,9 +256,8 @@ int NFCAIModule::OnAIObjectEvent(const NFGUID& self, const std::string& strClass
 
 bool NFCAIModule::AfterInit()
 {
-	m_pEventProcessModule->AddClassCallBack("AttackNPC", this, &NFCAIModule::OnAIObjectEvent);
-	m_pEventProcessModule->AddClassCallBack("NPC", this, &NFCAIModule::OnAIObjectEvent);
-    m_pEventProcessModule->AddClassCallBack("Pet",this, &NFCAIModule::OnAIObjectEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCAIModule::OnAIObjectEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCAIModule::OnAIObjectEvent);
     return true;
 }
 

@@ -12,7 +12,6 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCSLGBuildingModule : public NFISLGBuildingModule
@@ -56,7 +55,6 @@ private:
 	NFIKernelModule* m_pKernelModule;
 	NFILogModule* m_pLogModule;
 	NFIUUIDModule* m_pUUIDModule;
-    NFIEventProcessModule* m_pEventProcessModule;
 };
 
 #endif // !__NFC_SLG_BUILDING_MODULE_H_

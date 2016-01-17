@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 
-//#include "stdafx.h"
 #include "NFCWorldChatModule.h"
 #include "NFWorldChatPlugin.h"
 #include "NFCWorldChatGroupModule.h"
