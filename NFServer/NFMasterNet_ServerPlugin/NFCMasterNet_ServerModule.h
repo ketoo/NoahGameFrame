@@ -13,7 +13,6 @@
 
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIMasterNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
@@ -80,7 +79,6 @@ private:
 	
 	NFIElementInfoModule* m_pElementInfoModule;
 	NFILogicClassModule* m_pLogicClassModule;
-	NFIEventProcessModule* m_pEventProcessModule;
 	NFIKernelModule* m_pKernelModule;
 	NFILogModule* m_pLogModule;
 };
