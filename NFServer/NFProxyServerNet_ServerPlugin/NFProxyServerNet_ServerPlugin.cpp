@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 
-//#include "stdafx.h"
 #include "NFCProxyServerNet_ServerModule.h"
 #include "NFProxyServerNet_ServerPlugin.h"
 

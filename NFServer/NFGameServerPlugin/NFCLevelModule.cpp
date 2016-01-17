@@ -28,14 +28,12 @@ bool NFCLevelModule::Execute()
 
 bool NFCLevelModule::AfterInit()
 {
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
     m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
 	m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>( "NFCPropertyConfigModule" );
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
 	m_pPackModule = pPluginManager->FindModule<NFIPackModule>( "NFCPackModule" );
 	
-    assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pLogModule );
 	assert( NULL != m_pPropertyConfigModule );
@@ -115,7 +113,7 @@ int NFCLevelModule::OnObjectClassEvent( const NFGUID& self, const std::string& s
     }
     if ( strClassName == NFrame::NPC::ThisName() && CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
     {
-        m_pEventProcessModule->AddEventCallBack( self, NFED_ON_OBJECT_BE_KILLED, this, &NFCLevelModule::OnObjectBeKilled );
+        m_pKernelModule->AddEventCallBack( self, NFED_ON_OBJECT_BE_KILLED, this, &NFCLevelModule::OnObjectBeKilled );
     }
 
     return 0;

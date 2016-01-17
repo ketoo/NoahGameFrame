@@ -10,7 +10,6 @@
 #define NFC_SLG_SHOP_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFISLGShopModule.h"
 #include "NFComm/NFPluginModule/NFISLGBuildingModule.h"
@@ -37,7 +36,6 @@ public:
 
 private:
     NFIElementInfoModule* m_pElementInfoModule;
-    NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
     NFISLGBuildingModule* m_pSLGBuildingModule;
