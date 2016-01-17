@@ -6,7 +6,6 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-//#include "stdafx.h"
 #include "NFCMasterNet_ServerModule.h"
 #include "NFMasterNet_ServerPlugin.h"
 
@@ -238,13 +237,11 @@ int NFCMasterNet_ServerModule::OnSelectServerResultProcess(const int nSockIndex,
 
 bool NFCMasterNet_ServerModule::AfterInit()
 {
-	m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 
-	assert(NULL != m_pEventProcessModule);
 	assert(NULL != m_pKernelModule);
 	assert(NULL != m_pLogModule);
 	assert(NULL != m_pLogicClassModule);

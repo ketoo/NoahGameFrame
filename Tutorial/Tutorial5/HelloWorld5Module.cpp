@@ -58,7 +58,6 @@ bool HelloWorld5Module::AfterInit()
     std::cout << "Hello, world5, AfterInit, ThreadID: " << std::this_thread::get_id() << std::endl;
 
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 
 	////////////////////////test1//////////////////////////////////////////////////
@@ -105,7 +104,6 @@ bool HelloWorld5Module::Execute()
 
 bool HelloWorld5Module::BeforeShut()
 {
-    //反初始化之前
     std::cout << "Hello, world5, BeforeShut" << std::endl;
 
     m_pKernelModule->DestroyAll();

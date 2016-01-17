@@ -11,7 +11,6 @@
 
 bool NFCPropertyModule::Init()
 {
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
     m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
@@ -19,7 +18,6 @@ bool NFCPropertyModule::Init()
     m_pEquipModuele = pPluginManager->FindModule<NFIEquipModule>( "NFCEquipModule" );
     m_pLevelModule = pPluginManager->FindModule<NFILevelModule>( "NFCLevelModule" );
     
-    assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pElementInfoModule );
     assert( NULL != m_pLogicClassModule );

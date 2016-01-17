@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 
-//#include "stdafx.h"
 #include "NFCWorldGuildModule.h"
 #include "NFWorldGuildPlugin.h"
 #include "NFCWorldGuildDataModule.h"
