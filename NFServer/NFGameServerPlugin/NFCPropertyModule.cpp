@@ -11,21 +11,7 @@
 
 bool NFCPropertyModule::Init()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
-    m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>( "NFCPropertyConfigModule" );
-    m_pEquipModuele = pPluginManager->FindModule<NFIEquipModule>( "NFCEquipModule" );
-    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>( "NFCLevelModule" );
-    
-    assert( NULL != m_pKernelModule );
-    assert( NULL != m_pElementInfoModule );
-    assert( NULL != m_pLogicClassModule );
-    assert( NULL != m_pPropertyConfigModule );
-    assert( NULL != m_pEquipModuele );
-    assert( NULL != m_pLevelModule );
 
-    m_pKernelModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCPropertyModule::OnObjectClassEvent );
     return true;
 }
 
@@ -41,6 +27,22 @@ bool NFCPropertyModule::Execute()
 
 bool NFCPropertyModule::AfterInit()
 {
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
+	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
+	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
+	m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>( "NFCPropertyConfigModule" );
+	m_pEquipModuele = pPluginManager->FindModule<NFIEquipModule>( "NFCEquipModule" );
+	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>( "NFCLevelModule" );
+
+	assert( NULL != m_pKernelModule );
+	assert( NULL != m_pElementInfoModule );
+	assert( NULL != m_pLogicClassModule );
+	assert( NULL != m_pPropertyConfigModule );
+	assert( NULL != m_pEquipModuele );
+	assert( NULL != m_pLevelModule );
+
+	m_pKernelModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCPropertyModule::OnObjectClassEvent );
+
     return true;
 }
 
