@@ -11,7 +11,6 @@
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIMasterModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIMasterNet_ServerModule.h"
 
 class NFCMasterModule
@@ -32,7 +31,6 @@ protected:
 
 private:
 
-    NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
 };
 
