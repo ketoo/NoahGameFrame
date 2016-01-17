@@ -6,7 +6,6 @@
 //
 // -------------------------------------------------------------------------
 
-////#include "stdafx.h"
 #include "../NFCAIModule.h"
 
 bool NFCDeadState::Enter(const NFGUID& self)

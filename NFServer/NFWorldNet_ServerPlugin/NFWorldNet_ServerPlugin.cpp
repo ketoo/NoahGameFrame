@@ -1,7 +1,6 @@
 // NFWorldNet_ServerPlugin.cpp : Defines the exported functions for the DLL application.
 //
 
-//#include "stdafx.h"
 #include "NFWorldNet_ServerPlugin.h"
 #include "NFCWorldNet_ServerModule.h"
 
