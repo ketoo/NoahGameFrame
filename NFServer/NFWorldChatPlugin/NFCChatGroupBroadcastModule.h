@@ -11,7 +11,6 @@
 
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIChatGroupBroadcastModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIWorldChatGroupModule.h"
@@ -37,7 +36,6 @@ protected:
     int OnRecordCommonEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar );
 
 protected:
-    NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
     NFIWorldChatGroupModule* m_pWorldChatGroupModule;

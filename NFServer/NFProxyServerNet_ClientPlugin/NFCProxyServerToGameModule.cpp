@@ -6,7 +6,6 @@
 //
 // -------------------------------------------------------------------------
 
-//#include "stdafx.h"
 #include "NFCProxyServerToGameModule.h"
 #include "NFProxyServerNet_ClientPlugin.h"
 #include "NFComm/NFCore/NFIHeartBeatManager.h"
@@ -30,11 +29,8 @@ bool NFCProxyServerToGameModule::Execute()
 	return NFIClusterClientModule::Execute();
 }
 
-
 bool NFCProxyServerToGameModule::AfterInit()
 {
-
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
     m_pProxyLogicModule = pPluginManager->FindModule<NFIProxyLogicModule>("NFCProxyLogicModule");
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pProxyServerNet_ServerModule = pPluginManager->FindModule<NFIProxyServerNet_ServerModule>("NFCProxyServerNet_ServerModule");
@@ -42,7 +38,6 @@ bool NFCProxyServerToGameModule::AfterInit()
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
 	
-    assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pProxyLogicModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pProxyServerNet_ServerModule);

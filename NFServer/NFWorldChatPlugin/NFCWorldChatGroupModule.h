@@ -12,7 +12,6 @@
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIWorldChatGroupModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
 #include "NFComm/NFPluginModule/NFIDataProcessModule.h"
@@ -50,7 +49,6 @@ protected:
     int OnSaveGroupheartEvent( const NFGUID& self , const std::string& strHeartName, const float fTime, const int nCount );
 
 protected:
-    NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFIUUIDModule* m_pUUIDModule;
     NFIClusterModule* m_pClusterSQLModule;    

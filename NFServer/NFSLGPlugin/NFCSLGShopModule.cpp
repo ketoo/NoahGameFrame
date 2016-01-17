@@ -29,14 +29,12 @@ bool NFCSLGShopModule::Execute()
 
 bool NFCSLGShopModule::AfterInit()
 {
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
     m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
     m_pSLGBuildingModule = pPluginManager->FindModule<NFISLGBuildingModule>("NFCSLGBuildingModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
     m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>("NFCPropertyModule");
 
-    assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pLogModule );
     assert(NULL != m_pSLGBuildingModule);

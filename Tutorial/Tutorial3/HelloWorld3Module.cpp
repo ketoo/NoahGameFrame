@@ -39,7 +39,7 @@ int HelloWorld3Module::OnClassCallBackEvent(const NFGUID& self, const std::strin
 
 	if (event == COE_CREATE_HASDATA)
 	{
-		m_pEventProcessModule->AddEventCallBack(self, 11111111, this, &HelloWorld3Module::OnEvent);
+		m_pKernelModule->AddEventCallBack(self, 11111111, this, &HelloWorld3Module::OnEvent);
 
 		m_pKernelModule->AddHeartBeat(self, "OnHeartBeat", this, &HelloWorld3Module::OnHeartBeat, 5.0f, 9999 );
 
@@ -71,13 +71,12 @@ bool HelloWorld3Module::AfterInit()
 	std::cout << "Hello, world3, AfterInit" << std::endl;
 
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-	m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 
 	//创建容器，所有的对象均需在容器中
 	m_pKernelModule->CreateScene(1, "");
 
-	m_pEventProcessModule->AddClassCallBack("Player", this, &HelloWorld3Module::OnClassCallBackEvent);
+	m_pKernelModule->AddClassCallBack("Player", this, &HelloWorld3Module::OnClassCallBackEvent);
 
 	//创建对象，挂类回调和属性回调,然后事件处理对象
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(NFGUID(0, 10), 1, 0, "Player", "", NFCDataList());
@@ -96,7 +95,7 @@ bool HelloWorld3Module::AfterInit()
 	pObject->SetPropertyInt("World", 1111);
 
 
-	m_pEventProcessModule->DoEvent(pObject->Self(), 11111111, NFCDataList() << int(100) << "200");
+	m_pKernelModule->DoEvent(pObject->Self(), 11111111, NFCDataList() << int(100) << "200");
 
 	return true;
 }

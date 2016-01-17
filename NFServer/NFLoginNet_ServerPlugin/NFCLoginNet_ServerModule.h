@@ -14,7 +14,6 @@
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFILoginLogicModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
@@ -59,14 +58,14 @@ public:
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
 
+	virtual int OnSelectWorldResultsProcess(const int nWorldID, const NFGUID xSenderID, const int nLoginID, const std::string& strAccount, const std::string& strWorldIP, const int nWorldPort, const std::string& strKey);
+
 protected:
 	void OnReciveClientPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnSocketClientEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 protected:
-	//连接丢失,删2层(连接对象，帐号对象)
 	void OnClientDisconnect(const int nAddress);
-	//有连接
 	void OnClientConnected(const int nAddress);
 
 	//登入 
@@ -78,13 +77,6 @@ protected:
 	//申请查看世界列表
 	int OnViewWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    //////////////////////////////////////////////////////////////////////////
-
-    //选择大世界结果(发下key等给客户端)
-    int OnSelectWorldResultsEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
-
-    //登入结果
-    int OnLoginResultsEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
 
 protected:
@@ -97,7 +89,6 @@ protected:
 private:
 
     NFILoginToMasterModule* m_pLoginToMasterModule;
-    NFIEventProcessModule* m_pEventProcessModule;
 	NFILogicClassModule* m_pLogicClassModule;
 	NFIElementInfoModule* m_pElementInfoModule;	
 	NFIKernelModule* m_pKernelModule;
