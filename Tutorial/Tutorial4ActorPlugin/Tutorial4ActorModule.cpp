@@ -35,12 +35,7 @@ bool HelloWorld4ActorModule::AfterInit()
     std::cout << "Hello, world4, AfterInit, ThreadID: " << std::this_thread::get_id() << std::endl;
 
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-	m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 
 	//////////////////////////////////////Í¬²½/////////////////////////////////////////////////////////////////////
 

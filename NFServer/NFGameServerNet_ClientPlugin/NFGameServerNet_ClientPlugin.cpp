@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 
-//#include "stdafx.h"
 #include "NFCGameServerToWorldModule.h"
 #include "NFGameServerNet_ClientPlugin.h"
 

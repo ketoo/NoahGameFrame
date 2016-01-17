@@ -6,7 +6,6 @@
 //
 // -------------------------------------------------------------------------
 
-//#include "stdafx.h"
 #include "NFCProxyServerToWorldModule.h"
 #include "NFProxyServerNet_ClientPlugin.h"
 #include "NFComm/NFCore/NFIHeartBeatManager.h"
@@ -159,7 +158,6 @@ void NFCProxyServerToWorldModule::Register(NFINet* pNet)
 
 bool NFCProxyServerToWorldModule::AfterInit()
 {
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
     m_pProxyLogicModule = dynamic_cast<NFIProxyLogicModule*>(pPluginManager->FindModule("NFCProxyLogicModule"));
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pProxyServerNet_ServerModule = dynamic_cast<NFIProxyServerNet_ServerModule*>(pPluginManager->FindModule("NFCProxyServerNet_ServerModule"));
@@ -168,7 +166,6 @@ bool NFCProxyServerToWorldModule::AfterInit()
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
 	m_pToGameServerClusterClient = dynamic_cast<NFIClusterClientModule*>(pPluginManager->FindModule("NFCProxyServerToGameModule"));
 	
-    assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pProxyLogicModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pProxyServerNet_ServerModule);
