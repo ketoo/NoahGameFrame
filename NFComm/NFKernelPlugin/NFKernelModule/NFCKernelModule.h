@@ -21,7 +21,6 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFKernelPlugin/NFSceneModule/NFCSceneModule.h"
 
@@ -154,6 +153,7 @@ public:
 	//////////////////////////////////////////////////////////////////////////
 
 	virtual bool DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFIDataList& valueList);
+	virtual bool DoEvent(const NFGUID& self, const int nEventID, const NFIDataList& valueList);
 
 protected:
 
@@ -208,7 +208,6 @@ private:
     NFILogModule* m_pLogModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIElementInfoModule* m_pElementInfoModule;
-	NFIEventProcessModule* m_pEventProcessModule;
 	NFIUUIDModule* m_pUUIDModule;
 };
 
