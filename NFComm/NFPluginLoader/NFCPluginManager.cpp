@@ -6,7 +6,6 @@
 //
 // -------------------------------------------------------------------------
 
-//#include "stdafx.h"
 #include "NFCPluginManager.h"
 #include "NFComm/RapidXML/rapidxml.hpp"
 #include "NFComm/RapidXML/rapidxml_iterators.hpp"

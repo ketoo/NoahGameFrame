@@ -14,7 +14,6 @@
 #include "NFComm/NFPluginModule/NFIClusterClientModule.hpp"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ClientModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
@@ -103,7 +102,6 @@ private:
 
     NFILogModule* m_pLogModule;
     NFIKernelModule* m_pKernelModule;
-    NFIEventProcessModule* m_pEventProcessModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIElementInfoModule* m_pElementInfoModule;
     NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;

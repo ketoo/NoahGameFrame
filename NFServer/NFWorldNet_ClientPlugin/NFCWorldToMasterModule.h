@@ -13,12 +13,12 @@
 
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIWorldToMasterModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIWorldLogicModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 
 class NFCWorldToMasterModule
     : public NFIWorldToMasterModule
@@ -37,6 +37,8 @@ public:
 
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
+
+	virtual int OnSelectServerResultsEvent(const int nWorldID, const NFGUID xSenderID, const int nLoginID, const std::string& strAccount, const std::string& strWorldIP, const int nWorldPort, const std::string& strWorldKey);
 
 protected:
 
@@ -59,7 +61,6 @@ protected:
     int OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     int OnKickClientProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    int OnSelectServerResultsEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
 private:
 
@@ -67,7 +68,8 @@ private:
 	NFIElementInfoModule* m_pElementInfoModule;
 	NFILogicClassModule* m_pLogicClassModule;
     NFIWorldLogicModule* m_pWorldLogicModule;
-    NFIEventProcessModule* m_pEventProcessModule;
+	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
+
 };
 
 #endif
