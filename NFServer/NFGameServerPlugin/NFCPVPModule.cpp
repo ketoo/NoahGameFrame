@@ -27,14 +27,11 @@ bool NFCPVPModule::Execute()
 
 bool NFCPVPModule::AfterInit()
 {
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
     m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
 
-    assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pLogModule );
-
 
     return true;
 }
