@@ -80,6 +80,7 @@ public:
     }
 
 	virtual bool DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFIDataList& valueList) = 0;
+	virtual bool DoEvent(const NFGUID& self, const int nEventID, const NFIDataList& valueList) = 0;
 
     //////////////////////////////////////////////////////////////////////////
     //只能网络模块注册，回调用来同步对象类事件,所有的类对象都会回调
