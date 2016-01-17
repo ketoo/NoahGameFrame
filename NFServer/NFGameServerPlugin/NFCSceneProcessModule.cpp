@@ -15,19 +15,7 @@ bool NFCSceneProcessModule::Init()
     mnContainerLine = 10;
     mnLineMaxPlayer = 100;
 
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
-    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
 
-    assert( NULL != m_pKernelModule );
-    assert( NULL != m_pElementInfoModule );
-    assert( NULL != m_pLogicClassModule );
-    assert( NULL != m_pPropertyModule );
-    assert( NULL != m_pLogModule );
-
-    m_pKernelModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCSceneProcessModule::OnObjectClassEvent );
 
     return true;
 }
@@ -44,6 +32,21 @@ bool NFCSceneProcessModule::Execute()
 
 bool NFCSceneProcessModule::AfterInit()
 {
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
+	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
+	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
+
+	assert( NULL != m_pKernelModule );
+	assert( NULL != m_pElementInfoModule );
+	assert( NULL != m_pLogicClassModule );
+	assert( NULL != m_pPropertyModule );
+	assert( NULL != m_pLogModule );
+
+	m_pKernelModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCSceneProcessModule::OnObjectClassEvent );
+	//////////////////////////////////////////////////////////////////////////
+
     //³õÊ¼»¯³¡¾°ÈÝÆ÷
 // #ifdef NF_USE_ACTOR
 // 	int nSelfActorID = pPluginManager->GetActorID();
