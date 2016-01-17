@@ -96,6 +96,12 @@
     <ClInclude Include="NFCCommonConfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NFCEventManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NFIEventManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFCore.cpp" />
@@ -128,6 +134,9 @@
     </ClCompile>
     <ClCompile Include="NFCMemManger.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCEventManager.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
