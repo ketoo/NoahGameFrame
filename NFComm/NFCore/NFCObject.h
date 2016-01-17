@@ -81,6 +81,7 @@ public:
     virtual NF_SHARE_PTR<NFIHeartBeatManager> GetHeartBeatManager();
     virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager();
     virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager();
+	virtual NF_SHARE_PTR<NFIEventManager> GetEventManager();
 
 protected:
     virtual bool AddRecordCallBack(const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb);
@@ -95,7 +96,8 @@ private:
     NF_SHARE_PTR<NFIRecordManager> m_pRecordManager;
     NF_SHARE_PTR<NFIHeartBeatManager> m_pHeartBeatManager;
     NF_SHARE_PTR<NFIPropertyManager> m_pPropertyManager;
-    NF_SHARE_PTR<NFIComponentManager> m_pComponentManager;
+	NF_SHARE_PTR<NFIComponentManager> m_pComponentManager;
+	NF_SHARE_PTR<NFIEventManager> m_pEventManager;
 
 };
 

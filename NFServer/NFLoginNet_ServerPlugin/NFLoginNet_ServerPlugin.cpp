@@ -1,7 +1,6 @@
 // NFLoginNet_ServerPlugin.cpp : Defines the exported functions for the DLL application.
 //
 
-//#include "stdafx.h"
 #include "NFLoginNet_ServerPlugin.h"
 #include "NFCLoginNet_ServerModule.h"
 

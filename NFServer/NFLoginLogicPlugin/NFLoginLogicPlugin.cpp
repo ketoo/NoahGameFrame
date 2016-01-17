@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 
-//#include "stdafx.h"
 #include "NFLoginLogicPlugin.h"
 #include "NFCLoginLogicModule.h"
 

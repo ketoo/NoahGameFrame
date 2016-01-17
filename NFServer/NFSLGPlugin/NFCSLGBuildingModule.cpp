@@ -2,6 +2,7 @@
 #include "NFComm/NFCore/NFIObject.h"
 #include "NFComm/NFMessageDefine/NFSLGDefine.pb.h"
 #include "NFComm/NFCore/NFTimer.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 NFCSLGBuildingModule::NFCSLGBuildingModule(NFIPluginManager* p)
 {
@@ -18,14 +19,12 @@ bool NFCSLGBuildingModule::AfterInit()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
 	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>( "NFCUUIDModule" );
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
 
 	assert( NULL != m_pKernelModule );
 	assert( NULL != m_pLogModule );
 	assert( NULL != m_pUUIDModule );
-    assert( NULL != m_pEventProcessModule );
 
-    m_pEventProcessModule->AddClassCallBack("BB_Player", this, &NFCSLGBuildingModule::OnClassObjectEvent);
+    m_pKernelModule->AddClassCallBack(NFrame::BB_Player::ThisName(), this, &NFCSLGBuildingModule::OnClassObjectEvent);
 
     return true;
 }

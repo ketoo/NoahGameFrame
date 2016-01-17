@@ -11,7 +11,6 @@
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFISkillModule.h"
 #include "NFComm/NFPluginModule/NFISkillConsumeManagerModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
@@ -59,7 +58,6 @@ private:
     char* mstrSkillTableName;
 
     NFIPropertyModule* m_pPropertyModule;
-    NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
     NFISkillConsumeManagerModule* m_pSkillConsumeManagerModule;

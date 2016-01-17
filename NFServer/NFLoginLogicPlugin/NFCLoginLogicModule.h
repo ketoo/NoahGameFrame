@@ -12,8 +12,8 @@
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILoginLogicModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
+#include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
 
 class NFCLoginLogicModule
     : public NFILoginLogicModule
@@ -30,19 +30,14 @@ public:
 
     virtual bool AfterInit();
 
+	virtual int OnLoginProcess(const NFGUID& object, const std::string& strAccount, const std::string& strPwd);
 
 protected:
 
-    // client event
-    int OnLoginEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
-
-    int OnDisconnectEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
-
 protected:
 
-    NFIEventProcessModule* m_pEventProcessModule;
     NFIClusterModule* m_pClusterSqlModule;
-
+	NFILoginNet_ServerModule* m_pLoginNet_ServerModule;
 private:
 };
 
