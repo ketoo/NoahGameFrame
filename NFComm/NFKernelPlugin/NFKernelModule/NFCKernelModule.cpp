@@ -61,13 +61,11 @@ bool NFCKernelModule::Init()
 	//mnIdentIndex
 
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-	m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
 	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
 
 	assert(NULL != m_pLogicClassModule);
-	assert(NULL != m_pEventProcessModule);
 	assert(NULL != m_pElementInfoModule);
 	assert(NULL != m_pLogModule);
 	assert(NULL != m_pUUIDModule);
@@ -1537,7 +1535,13 @@ int NFCKernelModule::GetAllSceneObjectList(NFIDataList& var)
 
 bool NFCKernelModule::AddEventCallBack(const NFGUID& self, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb)
 {
-	return m_pEventProcessModule->AddEventCallBack(self, nEventID, cb);
+	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
+	if (pObject)
+	{
+		return pObject->GetEventManager()->AddEventCallBack(nEventID, cb);
+	}
+
+	return false;
 }
 
 bool NFCKernelModule::AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb)
@@ -1560,4 +1564,15 @@ void NFCKernelModule::ProcessMemFree()
 bool NFCKernelModule::DoEvent( const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFIDataList& valueList )
 {
 	return m_pLogicClassModule->DoEvent(self, strClassName, eEvent, valueList);
+}
+
+bool NFCKernelModule::DoEvent( const NFGUID& self, const int nEventID, const NFIDataList& valueList )
+{
+	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
+	if (pObject)
+	{
+		return pObject->GetEventManager()->DoEvent(nEventID, valueList);
+	}
+
+	return false;
 }
