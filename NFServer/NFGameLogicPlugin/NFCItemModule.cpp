@@ -10,14 +10,12 @@
 
 bool NFCItemModule::Init()
 {
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
     m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>("NFCItemConsumeManagerModule");
     m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
 
-    assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pItemConsumeManagerModule );
     assert( NULL != m_pPackModule );
@@ -54,8 +52,8 @@ int NFCItemModule::OnClassObjectEvent( const NFGUID& self, const std::string& st
     }
     else if ( CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
     {
-        m_pEventProcessModule->AddEventCallBack( self, NFED_ON_CLIENT_REQUIRE_USE_ITEM, this, &NFCItemModule::OnRequireUseItemEvent );
-        m_pEventProcessModule->AddEventCallBack( self, NFED_ON_CLIENT_REQUIRE_USE_ITEM_POS, this, &NFCItemModule::OnRequireUseItemEvent );
+        m_pKernelModule->AddEventCallBack( self, NFED_ON_CLIENT_REQUIRE_USE_ITEM, this, &NFCItemModule::OnRequireUseItemEvent );
+        m_pKernelModule->AddEventCallBack( self, NFED_ON_CLIENT_REQUIRE_USE_ITEM_POS, this, &NFCItemModule::OnRequireUseItemEvent );
 
     }
 

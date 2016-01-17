@@ -26,7 +26,6 @@ bool NFCSkillModule::Execute()
 
 bool NFCSkillModule::AfterInit()
 {
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>( "NFCEventProcessModule" );
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
     m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>("NFCSkillConsumeManagerModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
@@ -34,9 +33,6 @@ bool NFCSkillModule::AfterInit()
     m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
     m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>( "NFCSceneProcessModule" );
 
-    
-
-    assert( NULL != m_pEventProcessModule );
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pSkillConsumeManagerModule );
     assert( NULL != m_pElementInfoModule );

@@ -12,7 +12,6 @@
 #include "NFCPackModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIItemModule.h"
 #include "NFComm/NFPluginModule/NFIItemConsumeManagerModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
@@ -43,7 +42,6 @@ protected:
 	virtual bool CheckConfig();
 
 private:
-    NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
     NFIItemConsumeManagerModule* m_pItemConsumeManagerModule;
     NFIPackModule* m_pPackModule;
