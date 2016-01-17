@@ -38,10 +38,6 @@ public:
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
 
-	virtual int OnSelectServerResultsEvent(const int nWorldID, const NFGUID xSenderID, const int nLoginID, const std::string& strAccount, const std::string& strWorldIP, const int nWorldPort, const std::string& strWorldKey);
-
-protected:
-
 protected:
 
 	void OnReciveMSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
