@@ -151,7 +151,7 @@ int NFCWorldToMasterModule::OnSelectServerProcess(const int nSockIndex, const in
 
 		m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xData, xServerData->nFD);
 
-		SendSuitByPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xMsg);
+		SendSuitByPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xData);
 	}
 
 	return 0;
