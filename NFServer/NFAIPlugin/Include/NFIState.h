@@ -111,7 +111,6 @@ protected:
     NFIKernelModule* m_pKernelModule;
     NFIMoveModule* m_pMoveModule;
     NFIElementInfoModule* m_pElementInfoModule;
-    NFIEventProcessModule* m_pEventProcessModule;
 
 };
 

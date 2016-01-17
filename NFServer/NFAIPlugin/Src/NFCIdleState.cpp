@@ -6,7 +6,6 @@
 //
 // -------------------------------------------------------------------------
 
-////#include "stdafx.h"
 #include "../NFCAIModule.h"
 #include "../NFAIPlugin.h"
 
@@ -15,7 +14,6 @@ NFCIdleState::NFCIdleState(float fHeartBeatTime, NFIPluginManager* p)
 {
     //任何对象出生后先进入Idle状态，这里初始化静态变量指针
 
-    m_pEventProcessModule = pPluginManager->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pAIModule = dynamic_cast<NFIAIModule*>(pPluginManager->FindModule("NFCAIModule"));
     m_pMoveModule = dynamic_cast<NFIMoveModule*>(pPluginManager->FindModule("NFCMoveModule"));

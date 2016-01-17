@@ -14,7 +14,6 @@
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIWorldToMasterModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIWorldLogicModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
@@ -26,6 +25,7 @@
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
 #include "NFComm/NFPluginModule/NFIWorldGuildDataModule.h"
 #include "NFComm/NFPluginModule/NFIWorldChatGroupModule.h"
+#include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
 
 class NFCWorldNet_ServerModule
     : public NFIWorldNet_ServerModule
@@ -55,6 +55,8 @@ public:
     virtual int OnPropertyEnter( const NFIDataList& argVar, const NFIDataList& argGameID, const NFGUID& self );
     virtual int OnRecordEnter( const NFIDataList& argVar,const NFIDataList& argGameID, const NFGUID& self );
 
+	virtual int OnSelectServerEvent(const int nWorldID, const NFGUID xSenderID, int nLoginID, const std::string& strAccount);
+
 protected:
 
 	void OnRecivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -68,12 +70,8 @@ protected:
     bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase* pObjectRecordBase);
 
 
-protected:
-    int OnSelectServerEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
 protected:
-
-	bool InThisWorld(const std::string& strAccount);
 
     int OnGameServerRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     int OnGameServerUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -121,11 +119,12 @@ private:
     NFIWorldLogicModule* m_pWorldLogicModule;
 	NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-	NFIEventProcessModule* m_pEventProcessModule;
 	NFIWorldGuildModule* m_pWorldGuildModule;
     NFIClusterModule* m_pClusterSQLModule;
     NFIWorldGuildDataModule* m_pWorldGuildDataModule;
     NFIWorldChatGroupModule* m_pWordChatGroupModule;
+	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
+	
 };
 
 #endif
