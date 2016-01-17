@@ -16,7 +16,6 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
@@ -342,8 +341,7 @@ public:
 static bool KernelModule_DoEvent(NFINT64 kernelAddress, const NFGUID& self, const int nEventID, const NFCDataList& valueList)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
-    NFIEventProcessModule* pEventProcessModule = pKernelModule->GetPluginManager()->FindModule<NFIEventProcessModule>("NFCEventProcessModule");
-    return pEventProcessModule->DoEvent(self, nEventID, valueList);
+    return pKernelModule->DoEvent(self, nEventID, valueList);
 }
 
 static bool KernelModule_FindHeartBeat(NFIKernelModule* pKernelModule, const NFGUID& self, const std::string& strHeartBeatName)

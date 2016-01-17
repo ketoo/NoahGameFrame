@@ -1,7 +1,6 @@
 // NFWorldNet_ClientPlugin.cpp : Defines the exported functions for the DLL application.
 //
 
-//#include "stdafx.h"
 #include "NFWorldNet_ClientPlugin.h"
 #include "NFCWorldToMasterModule.h"
 

@@ -6,7 +6,6 @@
 //
 // -------------------------------------------------------------------------
 
-////#include "stdafx.h"
 #include "../NFCAIModule.h"
 
 bool NFCFightState::Enter(const NFGUID& self)
