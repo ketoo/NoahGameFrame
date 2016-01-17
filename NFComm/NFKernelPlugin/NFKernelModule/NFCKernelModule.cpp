@@ -54,11 +54,6 @@ bool NFCKernelModule::Init()
 	m_pSceneModule = NF_SHARE_PTR<NFCSceneModule>(NF_NEW NFCSceneModule());
 
 	mtDeleteSelfList.clear();
-	//mLogFile.open( "./Log/NFKernel.log" );
-
-	// every process has a mnIdentIndex, and the ident maybe conflict
-	// so...
-	//mnIdentIndex
 
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
