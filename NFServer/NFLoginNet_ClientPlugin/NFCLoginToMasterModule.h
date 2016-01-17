@@ -11,7 +11,6 @@
 
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILoginLogicModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
@@ -46,11 +45,10 @@ public:
 protected:
 	void OnReciveMSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
-
+	
 protected:
 
     //////////////////////////////////////////////////////////////////////////
-    int OnSelectServerEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
     int OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
@@ -67,7 +65,6 @@ private:
 
 	NFILoginLogicModule* m_pLoginLogicModule;
 	NFILoginNet_ServerModule* m_pLoginNet_ServerModule;
-	NFIEventProcessModule* m_pEventProcessModule;
     NFIElementInfoModule* m_pElementInfoModule;
 	NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
