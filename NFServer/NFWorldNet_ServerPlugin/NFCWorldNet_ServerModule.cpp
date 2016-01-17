@@ -156,29 +156,6 @@ int NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess(const int nSockInde
     return 0;
 }
 
-int NFCWorldNet_ServerModule::OnSelectServerEvent(const int nWorldID, const NFGUID xSenderID, int nLoginID, const std::string& strAccount)
-{
-    
-	NF_SHARE_PTR<ServerData> pServerData = mProxyMap.First();
-	if (pServerData.get())
-	{
-		NFMsg::AckConnectWorldResult xData;
-
-		xData.set_world_id(nWorldID);
-		xData.mutable_sender()->CopyFrom(NFToPB(xSenderID));
-		xData.set_login_id(nLoginID);
-		xData.set_account(strAccount);
-
-		xData.set_world_ip(pServerData->pData->server_ip());
-		xData.set_world_port(pServerData->pData->server_port());
-		xData.set_world_key(strAccount);
-
-		SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xData, pServerData->nFD);
-	}
-
-    return 0;
-}
-
 int NFCWorldNet_ServerModule::OnProxyServerRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     NFGUID nPlayerID;
@@ -1184,4 +1161,9 @@ void NFCWorldNet_ServerModule::OnReqCancelSubscriptionChatGroupProcess(const int
 
         m_pWordChatGroupModule->Offeline(nPlayerID, xGroup);
     }
+}
+
+NF_SHARE_PTR<ServerData> NFCWorldNet_ServerModule::GetSuitProxyForEnter()
+{
+	return mProxyMap.First();
 }
