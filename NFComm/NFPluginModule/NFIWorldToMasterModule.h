@@ -19,7 +19,7 @@ class NFIWorldToMasterModule
 {
 
 public:
-
+	virtual int OnSelectServerResultsEvent(const int nWorldID, const NFGUID xSenderID, const int nLoginID, const std::string& strAccount, const std::string& strWorldIP, const int nWorldPort, const std::string& strWorldKey) = 0;
 
 };
 
