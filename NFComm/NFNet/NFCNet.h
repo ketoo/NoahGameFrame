@@ -17,20 +17,30 @@
 class NFCNet : public NFINet
 {
 public:
-    template<typename BaseType>
-    NFCNet(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*))
+    NFCNet()
     {
         base = NULL;
         listener = NULL;
 
-        mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-        mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
         mstrIP = "";
         mnPort = 0;
         mnCpuCount = 0;
         mbServer = false;
     }
 
+	template<typename BaseType>
+	NFCNet(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*))
+	{
+		base = NULL;
+		listener = NULL;
+
+		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+		mstrIP = "";
+		mnPort = 0;
+		mnCpuCount = 0;
+		mbServer = false;
+	}
 	virtual ~NFCNet(){};
 
 public:
@@ -89,6 +99,10 @@ private:
 	static void log_cb(int severity, const char *msg);
 
 protected:
+	virtual bool AddReciveCallBack(const int nMsgID, const NET_RECIEVE_FUNCTOR_PTR& cb);
+	virtual bool AddEventCallBack(const NET_EVENT_FUNCTOR_PTR& cb);
+
+protected:
 	int DeCode( const char* strData, const uint32_t unLen, NFCMsgHead& xHead);
 	int EnCode( const uint16_t unMsgID, const char* strData, const uint32_t unDataLen, std::string& strOutData );
 
@@ -111,6 +125,8 @@ private:
 
     NET_RECIEVE_FUNCTOR mRecvCB;
     NET_EVENT_FUNCTOR mEventCB;
+	std::map<int, NET_RECIEVE_FUNCTOR_PTR> mxReciveCallBack;
+	std::list<NET_EVENT_FUNCTOR_PTR> mxEventCallBack;
 
 	//////////////////////////////////////////////////////////////////////////
 };
