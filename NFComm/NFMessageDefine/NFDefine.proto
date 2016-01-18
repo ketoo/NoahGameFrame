@@ -218,6 +218,11 @@ enum EGameMsgID
 	EGEC_REQ_ELEMENTLEVEL_TO_EQUIP				= 506;		 // 装备附魔
 	EGEC_ACK_ELEMENTLEVEL_TO_EQUIP				= 507;		 // 装备附魔
 
+	EGEC_REQ_SET_FIGHT_HERO						= 508;		 // 战斗武将
+	
+	EGEC_WEAR_EQUIP								= 509;		 // 装备创戴
+	EGEC_TAKEOFF_EQUIP							= 510;		 // 装备卸载
+
 	
 	/////////////////////GM MSG/////////////////////////////////////订阅
 	EGMI_REQ_CMD_PROPERTY_INT					= 1000;			// GM命令修改整形
