@@ -63,16 +63,19 @@ public:
         int64_t value = 0;
         uint64_t time = UUIDModule::get_time();
 
-        // 保留后48位时间
-        value = time << 16;
+		// 保留后48位时间
+		//value = time << 16;
+		value = time * 1000000;
 
-        // 最后16位是sequenceID
-        value |= sequence_++;
+		// 最后16位是sequenceID
+		//value |= sequence_++;
+		value += sequence_++;
 
-        if (sequence_ == 0x7FFF)
-        {
-            sequence_ = 0;
-        }
+		//if (sequence_ == 0x7FFF)
+		if (sequence_ == 999999)
+		{
+			sequence_ = 0;
+		}
 
         return value;
     }
