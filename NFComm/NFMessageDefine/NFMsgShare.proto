@@ -130,6 +130,8 @@ message ReqAckUseItem
 	required Ident 	user = 1;
 	required Ident item_guid	= 2;
 	repeated EffectData 	effect_data = 3;
+	required ItemStruct 	item = 4;
+	required Ident 			targetid = 5;
 }
 
 message ReqAckSwapScene
@@ -434,4 +436,27 @@ message AckElementlevelToEquip
 	required int32		result				= 3;//0失败 1成功
 }
 
+//EGEC_REQ_SET_FIGHT_HERO						= 508;		 // 战斗武将
+message ReqSetFightHero
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		Heroid			= 2;//
+}
+
+//EGEC_WEAR_EQUIP								= 509;		 // 装备创戴
+message ReqWearEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID
+	required Ident		Targetid			= 3;//
+	
+}
+
+//EGEC_TAKEOFF_EQUIP							= 510;		 // 装备卸载
+message TakeOffEquip
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		equipid			= 2;//装备ID
+	required Ident		Targetid			= 3;//
+}
 
