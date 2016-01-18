@@ -1196,7 +1196,7 @@ int NFCKernelModule::OnPropertyCommonEvent(const NFGUID& self, const std::string
 	std::list<PROPERTY_EVENT_FUNCTOR_PTR>::iterator it = mtCommonPropertyCallBackList.begin();
 	for (it; it != mtCommonPropertyCallBackList.end(); it++)
 	{
-		PROPERTY_EVENT_FUNCTOR_PTR pFunPtr = *it;
+		PROPERTY_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 		PROPERTY_EVENT_FUNCTOR* pFun = pFunPtr.get();
 		pFun->operator()(self, strPropertyName, oldVar, newVar);
 	}
@@ -1338,7 +1338,7 @@ int NFCKernelModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_
 	std::list<RECORD_EVENT_FUNCTOR_PTR>::iterator it = mtCommonRecordCallBackList.begin();
 	for (it; it != mtCommonRecordCallBackList.end(); it++)
 	{
-		RECORD_EVENT_FUNCTOR_PTR pFunPtr = *it;
+		RECORD_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 		RECORD_EVENT_FUNCTOR* pFun = pFunPtr.get();
 		pFun->operator()(self, xEventData, oldVar, newVar);
 	}
@@ -1356,7 +1356,7 @@ int NFCKernelModule::OnClassCommonEvent(const NFGUID& self, const std::string& s
 	std::list<CLASS_EVENT_FUNCTOR_PTR>::iterator it = mtCommonClassCallBackList.begin();
 	for (it; it != mtCommonClassCallBackList.end(); it++)
 	{
-		CLASS_EVENT_FUNCTOR_PTR pFunPtr = *it;
+		CLASS_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 		CLASS_EVENT_FUNCTOR* pFun = pFunPtr.get();
 		pFun->operator()(self, strClassName, eClassEvent, var);
 	}

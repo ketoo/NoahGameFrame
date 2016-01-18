@@ -205,7 +205,7 @@ int NFCProperty::OnEventHandler(const NFIDataList::TData& oldVar, const NFIDataL
     for (it; it != end; ++it)
     {
         //NFIDataList参数:属性名，OLD属性值，NEW属性值, ARG参数(pKernel,self)
-        PROPERTY_EVENT_FUNCTOR_PTR pFunPtr = *it;
+        PROPERTY_EVENT_FUNCTOR_PTR& pFunPtr = *it;
         PROPERTY_EVENT_FUNCTOR* pFunc = pFunPtr.get();
         int nTemRet = pFunc->operator()(mSelf, msPropertyName, oldVar, newVar);
     }
