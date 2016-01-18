@@ -40,6 +40,8 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
+    virtual bool WearEquip(const NFGUID& self, const NFGUID& xEquipID, const NFGUID& xTareget);
+    virtual bool TakeOffEquip(const NFGUID& self, const NFGUID& xEquipID, const NFGUID& xTareget);
     virtual bool IntensifylevelToEquip(const NFGUID& self, const NFGUID& xEquipID);
     virtual bool HoleToEquip(const NFGUID& self, const NFGUID& xEquipID);
     virtual bool InlaystoneToEquip(const NFGUID& self, const NFGUID& xEquipID, const std::string& strStoneID, const int nHoleIndex);

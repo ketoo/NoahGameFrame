@@ -49,7 +49,7 @@ bool NFCEquipModule::AfterInit()
 
     std::string strEquipPath = pPluginManager->GetConfigPath();
 
-    strEquipPath += "NFDataCfg\Ini\Common\EqupConfig.xml";
+    strEquipPath += "NFDataCfg/Ini/Common/EqupConfig.xml";
     NFCCommonConfig::GetSingletonPtr()->LoadConfig(strEquipPath);
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCEquipModule::OnClassObjectEvent );
@@ -646,5 +646,35 @@ float NFCEquipModule::GetEquipLevelRate( const int nNowLevel )
 
 bool NFCEquipModule::NeedEquipProperty( const NFGUID& self, const NFGUID& xWearID )
 {
+    return true;
+}
+
+bool NFCEquipModule::WearEquip( const NFGUID& self, const NFGUID& xEquipID, const NFGUID& xTareget )
+{
+    if (self == xTareget)
+    {
+        //给人装
+    }
+    else
+    {
+        //to do 
+        //有没有装备给别人
+        return m_pPackModule->DressEquipForHero(self, xTareget, xEquipID);
+    }
+
+    return true;
+}
+
+bool NFCEquipModule::TakeOffEquip( const NFGUID& self, const NFGUID& xEquipID, const NFGUID& xTareget )
+{
+    if (self == xTareget)
+    {
+        //给人装
+    }
+    else
+    {
+        return m_pPackModule->TakeOffEquipForm(self, xTareget, xEquipID);
+    }
+
     return true;
 }
