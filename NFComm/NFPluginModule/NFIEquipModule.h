@@ -22,6 +22,8 @@ public:
     virtual bool HoleToEquip(const NFGUID& self, const NFGUID& xEquipID) = 0;
     virtual bool InlaystoneToEquip(const NFGUID& self, const NFGUID& xEquipID, const std::string& strStoneID, const int nHoleIndex) = 0;
     virtual bool ElementlevelToEquip(const NFGUID& self, const NFGUID& xEquipID, const NFMsg::EGameElementType& eElemetType) = 0;
+    virtual bool WearEquip(const NFGUID& self, const NFGUID& xEquipID, const NFGUID& xTareget) = 0;
+    virtual bool TakeOffEquip(const NFGUID& self, const NFGUID& xEquipID, const NFGUID& xTareget) = 0;
 };
 
 #endif

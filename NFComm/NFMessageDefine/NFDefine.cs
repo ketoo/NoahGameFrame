@@ -472,6 +472,12 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SEARCH_GUILD", Value=309)]
       EGMI_ACK_SEARCH_GUILD = 309,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_OPR_GUILDINFO", Value=310)]
+      EGMI_REQ_OPR_GUILDINFO = 310,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OPR_GUILDINFO", Value=311)]
+      EGMI_ACK_OPR_GUILDINFO = 311,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_CREATE_CHATGROUP", Value=400)]
       EGEC_REQ_CREATE_CHATGROUP = 400,
             
@@ -537,6 +543,15 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_ELEMENTLEVEL_TO_EQUIP", Value=507)]
       EGEC_ACK_ELEMENTLEVEL_TO_EQUIP = 507,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_SET_FIGHT_HERO", Value=508)]
+      EGEC_REQ_SET_FIGHT_HERO = 508,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_WEAR_EQUIP", Value=509)]
+      EGEC_WEAR_EQUIP = 509,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_TAKEOFF_EQUIP", Value=510)]
+      EGEC_TAKEOFF_EQUIP = 510,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_INT", Value=1000)]
       EGMI_REQ_CMD_PROPERTY_INT = 1000,
@@ -608,6 +623,9 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"EIT_DEMONIZATION_STONE", Value=6)]
       EIT_DEMONIZATION_STONE = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_GEM_STONE", Value=7)]
+      EIT_GEM_STONE = 7,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EIT_WOOD", Value=100)]
       EIT_WOOD = 100,
