@@ -54,6 +54,35 @@ public:
     };
 
 public:
+	template<typename BaseType>
+	int AddReciveCallBack(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen))
+	{
+		std::map<int, NET_RECIEVE_FUNCTOR_PTR>::iterator it = mxReciveCallBack.find(nMsgID);
+		if (mxReciveCallBack.end() == it)
+		{
+			NET_RECIEVE_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+			NET_RECIEVE_FUNCTOR_PTR functorPtr(new NET_RECIEVE_FUNCTOR(functor));
+
+			mxReciveCallBack.insert(std::map<int, NET_RECIEVE_FUNCTOR_PTR>::value_type(nMsgID, cb));
+
+			return true;
+		}
+
+		assert(nMsgID);
+
+		return false;
+	}
+
+	template<typename BaseType>
+	bool AddEventCallBack(BaseType* pBase, int (BaseType::*handler)(const int nSockIndex, const NF_NET_EVENT nEvent, NFINet* pNet))
+	{
+		NET_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+		NET_EVENT_FUNCTOR_PTR functorPtr(new NET_EVENT_FUNCTOR(functor));
+
+		mxEventCallBack.push_back(cb);
+
+		return true;
+	}
 
     void AddServer(const ConnectData& xInfo)
     {
@@ -392,6 +421,20 @@ private:
 				xServerData->mxNetModule = NF_SHARE_PTR<NFINetModule>(NF_NEW NFINetModule(pPluginManager));
 				xServerData->mxNetModule->Initialization(this, &NFIClusterClientModule::OnRecivePack, &NFIClusterClientModule::OnSocketEvent, xServerData->strIP.c_str(), xServerData->nPort);
 
+				//add msg callback
+				std::map<int, NET_RECIEVE_FUNCTOR_PTR>::iterator itReciveCB = mxReciveCallBack.begin();
+				for ( ; mxReciveCallBack.end() != itReciveCB; ++itReciveCB)
+				{
+					xServerData->mxNetModule->GetNet()->AddReciveCallBack(itReciveCB->first, itReciveCB->second);
+				}
+
+				//add event callback
+				std::list<NET_EVENT_FUNCTOR_PTR>::iterator itEventCB = mxEventCallBack.begin();
+				for ( ; mxEventCallBack.end() != itEventCB; ++itEventCB)
+				{
+					xServerData->mxNetModule->GetNet()->AddEventCallBack(*itEventCB);
+				}
+
 				mxServerMap.AddElement(xInfo.nGameID, xServerData);
             }
         }
@@ -450,6 +493,10 @@ private:
 	NFCConsistentHash mxConsistentHash;
 
     std::list<ConnectData> mxTempNetList;
+
+	//call back
+	std::map<int, NET_RECIEVE_FUNCTOR_PTR> mxReciveCallBack;
+	std::list<NET_EVENT_FUNCTOR_PTR> mxEventCallBack;
 };
 
 #endif

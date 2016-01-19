@@ -36,6 +36,8 @@ public:
     virtual bool AfterInit();
     virtual bool BeforeShut();
 
+    virtual bool AddHero(const NFGUID& self, const std::string& strID);
+    virtual bool SetFightHero(const NFGUID& self, const NFGUID& xID);
 
 protected:
 

@@ -21,8 +21,8 @@ public:
 //	virtual NFGUID GetHero(const NFGUID& self, const std::string& strHeroCfgID) = 0;
 //	virtual bool DelHero(const NFGUID& self, const NFGUID xID) = 0;
 
-
-
+    virtual bool AddHero(const NFGUID& self, const std::string& strID) = 0;
+    virtual bool SetFightHero(const NFGUID& self, const NFGUID& xID) = 0;
 
 };
 
