@@ -110,7 +110,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClInclude Include="NFCPropertyConfigModule.h" />
     <ClInclude Include="NFCPropertyModule.h" />
     <ClInclude Include="NFCPropertyTrailModule.h" />
-    <ClInclude Include="NFCPVPModule.h" />
     <ClInclude Include="NFCSceneProcessModule.h" />
     <ClInclude Include="NFGameServerPlugin.h" />
   </ItemGroup>
@@ -128,7 +127,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClCompile Include="NFCPropertyConfigModule.cpp" />
     <ClCompile Include="NFCPropertyModule.cpp" />
     <ClCompile Include="NFCPropertyTrailModule.cpp" />
-    <ClCompile Include="NFCPVPModule.cpp" />
     <ClCompile Include="NFCSceneProcessModule.cpp" />
     <ClCompile Include="NFGameServerPlugin.cpp" />
   </ItemGroup>

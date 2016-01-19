@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_KERNEL_MODULE_H
-#define _NFI_KERNEL_MODULE_H
+#ifndef NFI_KERNEL_MODULE_H
+#define NFI_KERNEL_MODULE_H
 
 #include <iostream>
 #include <string>
@@ -169,7 +169,8 @@ public:
     virtual bool AddRecord(const NFGUID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& varKey, const NFIDataList& varDesc, const NFIDataList& varTag, const NFIDataList& varRelatedRecord, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex) = 0;
     ////////////////////////////////////////////////////////////////
 
-    virtual bool CreateScene(const int nSceneIndex, const std::string& strSceneConfigID) = 0;
+	virtual bool CreateScene(const int nSceneID) = 0;
+    virtual bool DestroyScene(const int nSceneID) = 0;
 
     virtual int GetOnLineCount() = 0;
 

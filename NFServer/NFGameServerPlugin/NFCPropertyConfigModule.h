@@ -39,6 +39,7 @@ public:
 
 protected:
     void Load();
+
 private:
     //µÈ¼¶->EffectData
     NFMapEx<int, std::string> mhtCoefficienData[( int )NFJobType::NJT_MAX];

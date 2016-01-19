@@ -23,6 +23,12 @@
     <Filter Include="NFEquipModule">
       <UniqueIdentifier>{4444cbab-0f7e-4d79-bd7c-9c5962f99abc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFShopModule">
+      <UniqueIdentifier>{d50f0f3b-3102-42f9-a181-8c94bb0f5dd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NFPVPModule">
+      <UniqueIdentifier>{61a8697e-e6af-4dc2-a039-8939512fadc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCGameLogicModule.h" />
@@ -68,6 +74,15 @@
     </ClInclude>
     <ClInclude Include="NFCEquipModule.h">
       <Filter>NFEquipModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCSLGBuildingModule.h">
+      <Filter>NFShopModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCSLGShopModule.h">
+      <Filter>NFShopModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCPVPModule.h">
+      <Filter>NFPVPModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +130,15 @@
     </ClCompile>
     <ClCompile Include="NFCEquipModule.cpp">
       <Filter>NFEquipModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCSLGBuildingModule.cpp">
+      <Filter>NFShopModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCSLGShopModule.cpp">
+      <Filter>NFShopModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCPVPModule.cpp">
+      <Filter>NFPVPModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
