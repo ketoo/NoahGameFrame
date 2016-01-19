@@ -81,6 +81,9 @@ class ReqInlaystoneToEquip;
 class AckInlaystoneToEquip;
 class ReqElementlevelToEquip;
 class AckElementlevelToEquip;
+class ReqSetFightHero;
+class ReqWearEquip;
+class TakeOffEquip;
 
 enum ReqAckSynData_SynType {
   ReqAckSynData_SynType_EST_SCENE = 1,
@@ -1835,21 +1838,45 @@ class ReqAckUseItem : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >*
       mutable_effect_data();
 
+  // required .NFMsg.ItemStruct item = 4;
+  inline bool has_item() const;
+  inline void clear_item();
+  static const int kItemFieldNumber = 4;
+  inline const ::NFMsg::ItemStruct& item() const;
+  inline ::NFMsg::ItemStruct* mutable_item();
+  inline ::NFMsg::ItemStruct* release_item();
+  inline void set_allocated_item(::NFMsg::ItemStruct* item);
+
+  // required .NFMsg.Ident targetid = 5;
+  inline bool has_targetid() const;
+  inline void clear_targetid();
+  static const int kTargetidFieldNumber = 5;
+  inline const ::NFMsg::Ident& targetid() const;
+  inline ::NFMsg::Ident* mutable_targetid();
+  inline ::NFMsg::Ident* release_targetid();
+  inline void set_allocated_targetid(::NFMsg::Ident* targetid);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckUseItem)
  private:
   inline void set_has_user();
   inline void clear_has_user();
   inline void set_has_item_guid();
   inline void clear_has_item_guid();
+  inline void set_has_item();
+  inline void clear_has_item();
+  inline void set_has_targetid();
+  inline void clear_has_targetid();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::NFMsg::Ident* user_;
   ::NFMsg::Ident* item_guid_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData > effect_data_;
+  ::NFMsg::ItemStruct* item_;
+  ::NFMsg::Ident* targetid_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -5416,6 +5443,318 @@ class AckElementlevelToEquip : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static AckElementlevelToEquip* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class ReqSetFightHero : public ::google::protobuf::Message {
+ public:
+  ReqSetFightHero();
+  virtual ~ReqSetFightHero();
+
+  ReqSetFightHero(const ReqSetFightHero& from);
+
+  inline ReqSetFightHero& operator=(const ReqSetFightHero& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqSetFightHero& default_instance();
+
+  void Swap(ReqSetFightHero* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqSetFightHero* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqSetFightHero& from);
+  void MergeFrom(const ReqSetFightHero& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident Heroid = 2;
+  inline bool has_heroid() const;
+  inline void clear_heroid();
+  static const int kHeroidFieldNumber = 2;
+  inline const ::NFMsg::Ident& heroid() const;
+  inline ::NFMsg::Ident* mutable_heroid();
+  inline ::NFMsg::Ident* release_heroid();
+  inline void set_allocated_heroid(::NFMsg::Ident* heroid);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqSetFightHero)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_heroid();
+  inline void clear_has_heroid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* heroid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqSetFightHero* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqWearEquip : public ::google::protobuf::Message {
+ public:
+  ReqWearEquip();
+  virtual ~ReqWearEquip();
+
+  ReqWearEquip(const ReqWearEquip& from);
+
+  inline ReqWearEquip& operator=(const ReqWearEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqWearEquip& default_instance();
+
+  void Swap(ReqWearEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqWearEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqWearEquip& from);
+  void MergeFrom(const ReqWearEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // required .NFMsg.Ident Targetid = 3;
+  inline bool has_targetid() const;
+  inline void clear_targetid();
+  static const int kTargetidFieldNumber = 3;
+  inline const ::NFMsg::Ident& targetid() const;
+  inline ::NFMsg::Ident* mutable_targetid();
+  inline ::NFMsg::Ident* release_targetid();
+  inline void set_allocated_targetid(::NFMsg::Ident* targetid);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqWearEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+  inline void set_has_targetid();
+  inline void clear_has_targetid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+  ::NFMsg::Ident* targetid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqWearEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class TakeOffEquip : public ::google::protobuf::Message {
+ public:
+  TakeOffEquip();
+  virtual ~TakeOffEquip();
+
+  TakeOffEquip(const TakeOffEquip& from);
+
+  inline TakeOffEquip& operator=(const TakeOffEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const TakeOffEquip& default_instance();
+
+  void Swap(TakeOffEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  TakeOffEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const TakeOffEquip& from);
+  void MergeFrom(const TakeOffEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // required .NFMsg.Ident Targetid = 3;
+  inline bool has_targetid() const;
+  inline void clear_targetid();
+  static const int kTargetidFieldNumber = 3;
+  inline const ::NFMsg::Ident& targetid() const;
+  inline ::NFMsg::Ident* mutable_targetid();
+  inline ::NFMsg::Ident* release_targetid();
+  inline void set_allocated_targetid(::NFMsg::Ident* targetid);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.TakeOffEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+  inline void set_has_targetid();
+  inline void clear_has_targetid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+  ::NFMsg::Ident* targetid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static TakeOffEquip* default_instance_;
+};
 // ===================================================================
 
 
@@ -7089,6 +7428,82 @@ ReqAckUseItem::effect_data() const {
 inline ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >*
 ReqAckUseItem::mutable_effect_data() {
   return &effect_data_;
+}
+
+// required .NFMsg.ItemStruct item = 4;
+inline bool ReqAckUseItem::has_item() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqAckUseItem::set_has_item() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqAckUseItem::clear_has_item() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqAckUseItem::clear_item() {
+  if (item_ != NULL) item_->::NFMsg::ItemStruct::Clear();
+  clear_has_item();
+}
+inline const ::NFMsg::ItemStruct& ReqAckUseItem::item() const {
+  return item_ != NULL ? *item_ : *default_instance_->item_;
+}
+inline ::NFMsg::ItemStruct* ReqAckUseItem::mutable_item() {
+  set_has_item();
+  if (item_ == NULL) item_ = new ::NFMsg::ItemStruct;
+  return item_;
+}
+inline ::NFMsg::ItemStruct* ReqAckUseItem::release_item() {
+  clear_has_item();
+  ::NFMsg::ItemStruct* temp = item_;
+  item_ = NULL;
+  return temp;
+}
+inline void ReqAckUseItem::set_allocated_item(::NFMsg::ItemStruct* item) {
+  delete item_;
+  item_ = item;
+  if (item) {
+    set_has_item();
+  } else {
+    clear_has_item();
+  }
+}
+
+// required .NFMsg.Ident targetid = 5;
+inline bool ReqAckUseItem::has_targetid() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ReqAckUseItem::set_has_targetid() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ReqAckUseItem::clear_has_targetid() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ReqAckUseItem::clear_targetid() {
+  if (targetid_ != NULL) targetid_->::NFMsg::Ident::Clear();
+  clear_has_targetid();
+}
+inline const ::NFMsg::Ident& ReqAckUseItem::targetid() const {
+  return targetid_ != NULL ? *targetid_ : *default_instance_->targetid_;
+}
+inline ::NFMsg::Ident* ReqAckUseItem::mutable_targetid() {
+  set_has_targetid();
+  if (targetid_ == NULL) targetid_ = new ::NFMsg::Ident;
+  return targetid_;
+}
+inline ::NFMsg::Ident* ReqAckUseItem::release_targetid() {
+  clear_has_targetid();
+  ::NFMsg::Ident* temp = targetid_;
+  targetid_ = NULL;
+  return temp;
+}
+inline void ReqAckUseItem::set_allocated_targetid(::NFMsg::Ident* targetid) {
+  delete targetid_;
+  targetid_ = targetid;
+  if (targetid) {
+    set_has_targetid();
+  } else {
+    clear_has_targetid();
+  }
 }
 
 // -------------------------------------------------------------------
@@ -10660,6 +11075,322 @@ inline ::google::protobuf::int32 AckElementlevelToEquip::result() const {
 inline void AckElementlevelToEquip::set_result(::google::protobuf::int32 value) {
   set_has_result();
   result_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqSetFightHero
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqSetFightHero::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqSetFightHero::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqSetFightHero::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqSetFightHero::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqSetFightHero::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqSetFightHero::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqSetFightHero::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqSetFightHero::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident Heroid = 2;
+inline bool ReqSetFightHero::has_heroid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqSetFightHero::set_has_heroid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqSetFightHero::clear_has_heroid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqSetFightHero::clear_heroid() {
+  if (heroid_ != NULL) heroid_->::NFMsg::Ident::Clear();
+  clear_has_heroid();
+}
+inline const ::NFMsg::Ident& ReqSetFightHero::heroid() const {
+  return heroid_ != NULL ? *heroid_ : *default_instance_->heroid_;
+}
+inline ::NFMsg::Ident* ReqSetFightHero::mutable_heroid() {
+  set_has_heroid();
+  if (heroid_ == NULL) heroid_ = new ::NFMsg::Ident;
+  return heroid_;
+}
+inline ::NFMsg::Ident* ReqSetFightHero::release_heroid() {
+  clear_has_heroid();
+  ::NFMsg::Ident* temp = heroid_;
+  heroid_ = NULL;
+  return temp;
+}
+inline void ReqSetFightHero::set_allocated_heroid(::NFMsg::Ident* heroid) {
+  delete heroid_;
+  heroid_ = heroid;
+  if (heroid) {
+    set_has_heroid();
+  } else {
+    clear_has_heroid();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqWearEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqWearEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqWearEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqWearEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqWearEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqWearEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqWearEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqWearEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqWearEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool ReqWearEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqWearEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqWearEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqWearEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& ReqWearEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* ReqWearEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* ReqWearEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void ReqWearEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// required .NFMsg.Ident Targetid = 3;
+inline bool ReqWearEquip::has_targetid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqWearEquip::set_has_targetid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqWearEquip::clear_has_targetid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqWearEquip::clear_targetid() {
+  if (targetid_ != NULL) targetid_->::NFMsg::Ident::Clear();
+  clear_has_targetid();
+}
+inline const ::NFMsg::Ident& ReqWearEquip::targetid() const {
+  return targetid_ != NULL ? *targetid_ : *default_instance_->targetid_;
+}
+inline ::NFMsg::Ident* ReqWearEquip::mutable_targetid() {
+  set_has_targetid();
+  if (targetid_ == NULL) targetid_ = new ::NFMsg::Ident;
+  return targetid_;
+}
+inline ::NFMsg::Ident* ReqWearEquip::release_targetid() {
+  clear_has_targetid();
+  ::NFMsg::Ident* temp = targetid_;
+  targetid_ = NULL;
+  return temp;
+}
+inline void ReqWearEquip::set_allocated_targetid(::NFMsg::Ident* targetid) {
+  delete targetid_;
+  targetid_ = targetid;
+  if (targetid) {
+    set_has_targetid();
+  } else {
+    clear_has_targetid();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// TakeOffEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool TakeOffEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void TakeOffEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void TakeOffEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void TakeOffEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& TakeOffEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* TakeOffEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* TakeOffEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void TakeOffEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool TakeOffEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void TakeOffEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void TakeOffEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void TakeOffEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& TakeOffEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* TakeOffEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* TakeOffEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void TakeOffEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// required .NFMsg.Ident Targetid = 3;
+inline bool TakeOffEquip::has_targetid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void TakeOffEquip::set_has_targetid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void TakeOffEquip::clear_has_targetid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void TakeOffEquip::clear_targetid() {
+  if (targetid_ != NULL) targetid_->::NFMsg::Ident::Clear();
+  clear_has_targetid();
+}
+inline const ::NFMsg::Ident& TakeOffEquip::targetid() const {
+  return targetid_ != NULL ? *targetid_ : *default_instance_->targetid_;
+}
+inline ::NFMsg::Ident* TakeOffEquip::mutable_targetid() {
+  set_has_targetid();
+  if (targetid_ == NULL) targetid_ = new ::NFMsg::Ident;
+  return targetid_;
+}
+inline ::NFMsg::Ident* TakeOffEquip::release_targetid() {
+  clear_has_targetid();
+  ::NFMsg::Ident* temp = targetid_;
+  targetid_ = NULL;
+  return temp;
+}
+inline void TakeOffEquip::set_allocated_targetid(::NFMsg::Ident* targetid) {
+  delete targetid_;
+  targetid_ = targetid;
+  if (targetid) {
+    set_has_targetid();
+  } else {
+    clear_has_targetid();
+  }
 }
 
 
