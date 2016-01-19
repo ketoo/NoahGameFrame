@@ -46,3 +46,13 @@ bool NFCHeroModule::BeforeShut()
 
     return true;
 }
+
+bool NFCHeroModule::AddHero( const NFGUID& self, const std::string& strID )
+{
+    return true;
+}
+
+bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xID)
+{
+    return true;
+}

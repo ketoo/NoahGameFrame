@@ -26,7 +26,7 @@ public:
 		if (!TIsDerived<T, NFIComponent>::Result)
 		{
 			//BaseTypeComponent must inherit from NFIComponent;
-			return NF_SHARE_PTR<T>();
+			return false;
 		}
 
 		NFIComponent* pComponent = NF_NEW T();
