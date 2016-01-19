@@ -106,9 +106,9 @@ public:
     virtual bool AddRecord(const NFGUID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& varKey, const NFIDataList& varDesc, const NFIDataList& varTag, const NFIDataList& varRelatedRecord, const int nRows, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex);
     ////////////////////////////////////////////////////////////////
 
-    virtual bool CreateScene(const int nSceneID, const std::string& strSceneConfigID);
+    virtual bool CreateScene(const int nSceneID);
 
-    virtual bool DestroyContainer(const int nSceneID);
+    virtual bool DestroyScene(const int nSceneID);
 
     virtual int GetOnLineCount();
 
