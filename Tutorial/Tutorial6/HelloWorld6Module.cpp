@@ -20,7 +20,7 @@ bool HelloWorld6Module::AfterInit()
 
     //assert( NULL != m_pLuaScriptModule);
 
-    m_pKernelModule->CreateScene(1, "");
+    m_pKernelModule->CreateScene(1);
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(NFGUID(), 1, 0, "Player", "", NFCDataList());
     if ( !pObject.get() )
     {
