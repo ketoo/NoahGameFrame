@@ -10,9 +10,6 @@
     <Filter Include="NFPropertyModule">
       <UniqueIdentifier>{8e42431a-1328-4cf4-8d08-38101ed10817}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFPVPModule">
-      <UniqueIdentifier>{abbc1079-9f03-4c6c-b599-04d4c879cc18}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFGameServerPlugin.h" />
@@ -29,9 +26,6 @@
       <Filter>NFPropertyModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCGameServerModule.h" />
-    <ClInclude Include="NFCPVPModule.h">
-      <Filter>NFPVPModule</Filter>
-    </ClInclude>
     <ClInclude Include="NFCPropertyTrailModule.h">
       <Filter>NFPropertyModule</Filter>
     </ClInclude>
@@ -52,9 +46,6 @@
       <Filter>NFPropertyModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCGameServerModule.cpp" />
-    <ClCompile Include="NFCPVPModule.cpp">
-      <Filter>NFPVPModule</Filter>
-    </ClCompile>
     <ClCompile Include="NFCPropertyTrailModule.cpp">
       <Filter>NFPropertyModule</Filter>
     </ClCompile>

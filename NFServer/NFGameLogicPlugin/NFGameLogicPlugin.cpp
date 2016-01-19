@@ -22,6 +22,9 @@
 #include "NFCRebornItemConsumeProcessModule.h"
 #include "NFCHeroModule.h"
 #include "NFCEquipModule.h"
+#include "NFCSLGShopModule.h"
+#include "NFCSLGBuildingModule.h"
+#include "NFCPVPModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -72,12 +75,19 @@ void NFGameLogicPlugin::Install()
 
 	REGISTER_MODULE(pPluginManager, NFCHeroModule)
     REGISTER_MODULE(pPluginManager, NFCNPCRefreshModule)
-    REGISTER_MODULE(pPluginManager, NFCEquipModule)
+	REGISTER_MODULE(pPluginManager, NFCEquipModule)
+	REGISTER_MODULE(pPluginManager, NFCSLGShopModule)
+	REGISTER_MODULE(pPluginManager, NFCSLGBuildingModule)
+	REGISTER_MODULE(pPluginManager, NFCPVPModule)
+	
 }
 
 void NFGameLogicPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCEquipModule)
+	UNREGISTER_MODULE(pPluginManager, NFCPVPModule)
+	UNREGISTER_MODULE(pPluginManager, NFCSLGBuildingModule)
+	UNREGISTER_MODULE(pPluginManager, NFCSLGShopModule)
+	UNREGISTER_MODULE(pPluginManager, NFCEquipModule)
     UNREGISTER_MODULE(pPluginManager, NFCNPCRefreshModule)
 	UNREGISTER_MODULE(pPluginManager, NFCHeroModule)
 
