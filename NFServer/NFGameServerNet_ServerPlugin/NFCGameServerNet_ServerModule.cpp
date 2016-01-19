@@ -29,7 +29,9 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pDataProcessModule = pPluginManager->FindModule<NFIDataProcessModule>("NFCDataProcessModule");
     m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>("NFCGameServerToWorldModule");
     m_pEquipModule = pPluginManager->FindModule<NFIEquipModule>("NFCEquipModule");
+    m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>("NFCHeroModule");
     
+
 	assert(NULL != m_pKernelModule);
 	assert(NULL != m_pLogicClassModule);
 	assert(NULL != m_pSceneProcessModule);
@@ -43,6 +45,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	assert(NULL != m_pDataProcessModule);
     assert(NULL != m_pGameServerToWorldModule);
     assert(NULL != m_pEquipModule);
+    assert(NULL != m_pHeroModule);
 
 	m_pKernelModule->ResgisterCommonClassEvent( this, &NFCGameServerNet_ServerModule::OnClassCommonEvent );
 	m_pKernelModule->ResgisterCommonPropertyEvent( this, &NFCGameServerNet_ServerModule::OnPropertyCommonEvent );
@@ -141,15 +144,57 @@ void NFCGameServerNet_ServerModule::OnRecivePSPack(const int nSockIndex, const i
 	case NFMsg::EGameMsgID::EGMI_REQ_SKILL_OBJECTX:
 		OnClienUseSkill(nSockIndex, nMsgID, msg, nLen);
 		break;
+    case NFMsg::EGameMsgID::EGMI_REQ_ITEM_OBJECT:
+        OnClienUseItem(nSockIndex, nMsgID, msg, nLen);
+        break;
+
+    case NFMsg::EGameMsgID::EGMI_REQ_PICK_ITEM:
+        OnClienPickItem(nSockIndex, nMsgID, msg, nLen);
+        break;
 	case NFMsg::EGameMsgID::EGMI_REQ_MOVE:
 		OnClienMove(nSockIndex, nMsgID, msg, nLen);
 		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_MOVE_IMMUNE:
 		OnClienMoveImmune(nSockIndex, nMsgID, msg, nLen);
 		break;
+    case NFMsg::EGameMsgID::EGMI_REQ_ACCEPT_TASK:
+        OnClienAcceptTask(nSockIndex, nMsgID, msg, nLen);
+        break;
+    case NFMsg::EGameMsgID::EGMI_REQ_COMPELETE_TASK:
+        OnClienPushTask(nSockIndex, nMsgID, msg, nLen);
+        break;
+//     case NFMsg::EGameMsgID::EGMI_REQ_END_BATTLE:
+//         OnClienPushCustom(nSockIndex, nMsgID, msg, nLen);
+//         break;
 	case NFMsg::EGameMsgID::EGMI_REQ_CHAT:
 		OnClienChatProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
+
+    case NFMsg::EGameMsgID::EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP:
+        OnIntensifylevelToEquipProcess(nSockIndex, nMsgID, msg, nLen);
+        break;
+
+    case NFMsg::EGameMsgID::EGEC_REQ_HOLE_TO_EQUIP:
+        OnHoleToEquipProcess(nSockIndex, nMsgID, msg, nLen);
+        break;
+
+    case NFMsg::EGameMsgID::EGEC_REQ_INLAYSTONE_TO_EQUIP:
+        OnInlaystoneToEquipProcess(nSockIndex, nMsgID, msg, nLen);
+        break;
+    case NFMsg::EGameMsgID::EGEC_REQ_ELEMENTLEVEL_TO_EQUIP:
+        OnElementlevelToEquipProcess(nSockIndex, nMsgID, msg, nLen);
+        break;
+
+    case NFMsg::EGameMsgID::EGEC_REQ_SET_FIGHT_HERO:
+        OnSetFightHeroProcess(nSockIndex, nMsgID, msg, nLen);
+        break;
+    case NFMsg::EGameMsgID::EGEC_WEAR_EQUIP:
+        OnReqWearEquipProcess(nSockIndex, nMsgID, msg, nLen);
+        break;
+    case NFMsg::EGameMsgID::EGEC_TAKEOFF_EQUIP:
+        OnTakeOffEquipProcess(nSockIndex, nMsgID, msg, nLen);
+        break;
+
 	case NFMsg::EGameMsgID::EGMI_REQ_JOIN_PVP:
 		OnClientJoinPVP(nSockIndex, nMsgID, msg, nLen);
 		break;
@@ -159,6 +204,8 @@ void NFCGameServerNet_ServerModule::OnRecivePSPack(const int nSockIndex, const i
 	case NFMsg::EGameMsgID::EGMI_REQ_END_BATTLE:
 		OnClientEndBattle(nSockIndex, nMsgID, msg, nLen);
 		break;
+
+
 
 
 		//SLG////////////////////////////////////////////////////////////////////////
@@ -1982,6 +2029,12 @@ void NFCGameServerNet_ServerModule::OnClientExitPVP(const int nSockIndex, const 
 void NFCGameServerNet_ServerModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckUseItem)
+
+    const std::string strID = xMsg.item().item_id();
+    const NFGUID xTarget = PBToNF(xMsg.targetid());
+    NFCDataList varList;
+    varList << strID <<xTarget;
+    m_pKernelModule->DoEvent(nPlayerID, NFED_ON_CLIENT_REQUIRE_USE_ITEM, varList);
 }
 
 void NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -2302,4 +2355,33 @@ void NFCGameServerNet_ServerModule::OnElementlevelToEquipProcess( const int nSoc
     xAck.set_result(nResult);
 
     SendMsgPBToGate(NFMsg::EGEC_ACK_ELEMENTLEVEL_TO_EQUIP, xAck, self);
+}
+
+void NFCGameServerNet_ServerModule::OnSetFightHeroProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+{
+    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSetFightHero);
+
+    const NFGUID xHero = PBToNF(xMsg.heroid());
+    m_pHeroModule->SetFightHero(nPlayerID, xHero);
+}
+
+void NFCGameServerNet_ServerModule::OnReqWearEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+{
+    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqWearEquip);
+
+    const NFGUID self = PBToNF(xMsg.selfid());
+    const NFGUID xEquipID = PBToNF(xMsg.equipid());
+    const NFGUID xTarget = PBToNF(xMsg.targetid());
+
+    m_pEquipModule->WearEquip(self, xEquipID, xTarget);
+}
+
+void NFCGameServerNet_ServerModule::OnTakeOffEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+{
+    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::TakeOffEquip);
+    const NFGUID self = PBToNF(xMsg.selfid());
+    const NFGUID xEquipID = PBToNF(xMsg.equipid());
+    const NFGUID xTarget = PBToNF(xMsg.targetid());
+
+    m_pEquipModule->TakeOffEquip(self, xEquipID, xTarget);
 }
