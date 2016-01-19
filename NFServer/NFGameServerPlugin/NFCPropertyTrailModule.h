@@ -49,7 +49,6 @@ protected:
 private:
 
 	NFIKernelModule* m_pKernelModule;
-	NFIPropertyConfigModule* m_pPropertyConfigModule;
 	NFIElementInfoModule* m_pElementInfoModule;
 	NFILogicClassModule* m_pLogicClassModule;
 	NFILogModule* m_pLogModule;
