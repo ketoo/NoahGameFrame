@@ -78,8 +78,10 @@ Need build sub librares:
 11. Copy files:libmysql.dll mysqlpp.dll 	to **_Out/Server/Release/NFLoginServer/**
 12. Copy files:libmysql.dll mysqlpp_d.dll 	to **_Out/Server/Debug/NFWorldServer/**
 13. Copy files:libmysql.dll mysqlpp.dll 	to **_Out/Server/Release/NFWorldServer/**
-
 14. Run the binary file by **_Out/Server/Debug/Run.bat**
+
+### Windows[VS2015]
+Who can do this?
 
 ### Linux[CodeBlock 13.1]
 
@@ -93,6 +95,15 @@ Need build sub librares:
 8. Build library: **NFNet, NFCore, NFEventTriggerPlugin, NFKernelPlugin, Theron, libprotocolbuf[libprotocolbuf-lite], NFLogPlugin, NFPluginLoader**
 9. Build all other plugin
 10. Run the binary file by **_Out/Server/Debug/Run.sh**
+
+
+### JAVA Project
+WebSite:  https://github.com/NFGameTeam/NFrame-java
+
+### C# Project
+WebSite:  https://github.com/ketoo/NFrame
+
+
 
 ## Documents & Tutorial
 [English](https://github.com/ketoo/NoahGameFrame/blob/develop/doc_EN_US.md)
