@@ -68,7 +68,8 @@ public:
 	virtual bool IsServer(){return mbServer;}
 	virtual bool Log(int severity, const char *msg);
 
-
+	virtual bool AddReciveCallBack(const int nMsgID, const NET_RECIEVE_FUNCTOR_PTR& cb);
+	virtual bool AddEventCallBack(const NET_EVENT_FUNCTOR_PTR& cb);
 
 private:
     	//已带上包头
@@ -97,10 +98,6 @@ private:
 	static void conn_eventcb(struct bufferevent *bev, short events, void *user_data);
 	static void time_cb(evutil_socket_t fd, short _event, void *argc);
 	static void log_cb(int severity, const char *msg);
-
-protected:
-	virtual bool AddReciveCallBack(const int nMsgID, const NET_RECIEVE_FUNCTOR_PTR& cb);
-	virtual bool AddEventCallBack(const NET_EVENT_FUNCTOR_PTR& cb);
 
 protected:
 	int DeCode( const char* strData, const uint32_t unLen, NFCMsgHead& xHead);
