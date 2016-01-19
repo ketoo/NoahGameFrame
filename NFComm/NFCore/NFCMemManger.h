@@ -4,6 +4,10 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFSingleton.h"
 
+//#define  NF_USE_TCMALLOC
+
+#ifdef NF_USE_TCMALLOC
+
 #ifdef NF_DEBUG_MODE
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
@@ -23,6 +27,8 @@
 #pragma comment( lib, "libtcmalloc_minimal.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 #endif
+
+#endif // NF_USE_TCMALLOC
 
 #endif
 
