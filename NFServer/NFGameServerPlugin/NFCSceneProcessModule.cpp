@@ -116,7 +116,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFGUID& self, const int nEve
     const NFGUID ident = var.Object( 0 );
     const int nType = var.Int( 1 );
     const int nTargetScene = var.Int( 2 );
-    //const int nTargetGroupID = var.Int( 3 );
+    const int nTargetGroupID = var.Int( 3 );
     const int nNowSceneID = m_pKernelModule->GetPropertyInt( self, NFrame::Player::SceneID());
 	const int nNowGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
 
@@ -126,7 +126,8 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFGUID& self, const int nEve
         return 1;
     }
 
-    if (nNowSceneID == nTargetScene)
+    if (nNowSceneID == nTargetScene
+		&& nTargetGroupID == nNowGroupID)
     {
         //本来就是这个层这个场景就别切换了
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "in same scene and group but it not a clone scene", nTargetScene);
@@ -134,8 +135,9 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFGUID& self, const int nEve
         return 1;
     }
 
-    NFINT64 nTargetGroupID = CreateCloneScene( nTargetScene );
-    if ( nTargetGroupID <= 0 )
+	//每个玩家，一个副本
+    NFINT64 nNewGroupID = CreateCloneScene( nTargetScene );
+    if ( nNewGroupID <= 0 )
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "CreateCloneScene failed", nTargetScene);
         return 0;
@@ -167,14 +169,14 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFGUID& self, const int nEve
 
     m_pKernelModule->DoEvent( self, NFED_ON_OBJECT_ENTER_SCENE_BEFORE, xSceneResult );
 
-    if(!m_pKernelModule->SwitchScene( self, nTargetScene, nTargetGroupID, fX, fY, fZ, 0.0f, var ))
+    if(!m_pKernelModule->SwitchScene( self, nTargetScene, nNewGroupID, fX, fY, fZ, 0.0f, var ))
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "SwitchScene failed", nTargetScene);
 
         return 0;
     }
 
-	xSceneResult.Add( nTargetGroupID );
+	xSceneResult.Add( nNewGroupID );
     m_pKernelModule->DoEvent( self, NFED_ON_OBJECT_ENTER_SCENE_RESULT, xSceneResult );
 
     return 0;
