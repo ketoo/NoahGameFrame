@@ -32,13 +32,11 @@ bool NFCPropertyTrailModule::AfterInit()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
-	m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>( "NFCPropertyConfigModule" );
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
 	
 	assert( NULL != m_pKernelModule );
 	assert( NULL != m_pElementInfoModule );
 	assert( NULL != m_pLogicClassModule );
-	assert( NULL != m_pPropertyConfigModule );
 	assert( NULL != m_pLogModule );
 
 
