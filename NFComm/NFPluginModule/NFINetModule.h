@@ -132,9 +132,9 @@ public:
 	}
 
 	template<typename BaseType>
-	int AddReciveCallBack(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen))
+	int AddReciveCallBack(const int nMsgID, BaseType* pBaseType, void (BaseType::*handleRecieve)(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen))
 	{
-		return m_pNet->AddReciveCallBack<BaseType>(pBase, handleRecieve);
+		return m_pNet->AddReciveCallBack<BaseType>(nMsgID, pBase, handleRecieve);
 	}
 
 	template<typename BaseType>
