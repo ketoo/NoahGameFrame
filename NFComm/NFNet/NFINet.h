@@ -376,6 +376,9 @@ public:
 		return AddEventCallBack(functorPtr);
 	}
 
+	virtual bool AddReciveCallBack(const int nMsgID, const NET_RECIEVE_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddEventCallBack(const NET_EVENT_FUNCTOR_PTR& cb) = 0;
+
 	virtual bool Execute() = 0;
 
 	virtual void Initialization(const char* strIP, const unsigned short nPort) = 0;
@@ -399,11 +402,6 @@ public:
 	virtual bool IsServer() = 0;
 
 	virtual bool Log(int severity, const char *msg) = 0;
-
-protected:
-	virtual bool AddReciveCallBack(const int nMsgID, const NET_RECIEVE_FUNCTOR_PTR& cb) = 0;
-	virtual bool AddEventCallBack(const NET_EVENT_FUNCTOR_PTR& cb) = 0;
-
 };
 
 #pragma pack(pop)
