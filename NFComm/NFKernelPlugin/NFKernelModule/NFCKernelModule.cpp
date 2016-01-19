@@ -807,38 +807,22 @@ bool NFCKernelModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, 
 	return false;
 }
 
-bool NFCKernelModule::CreateScene(const int nSceneID, const std::string& strSceneConfigID)
+bool NFCKernelModule::CreateScene(const int nSceneID)
 {
-	std::string strClassName = "Scene";
-
 	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
 	if (pSceneInfo.get())
 	{
 		return false;
 	}
 
-	int nWidth = 0;
-	NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementInfoModule->GetPropertyManager(strSceneConfigID);
-	if (pConfigPropertyManager.get())
-	{
-		NF_SHARE_PTR<NFIProperty> pProperty = pConfigPropertyManager->GetElement("Width");
-		if (!pProperty.get())
-		{
-			return false;
-		}
-
-		nWidth = pProperty->GetInt();
-	}
-
-
 	//容器nSceneIndex
-	pSceneInfo = NF_SHARE_PTR<NFCSceneInfo>(NF_NEW NFCSceneInfo(nSceneID, nWidth));
+	pSceneInfo = NF_SHARE_PTR<NFCSceneInfo>(NF_NEW NFCSceneInfo(nSceneID));
 	if (pSceneInfo.get())
 	{
 		m_pSceneModule->AddElement(nSceneID, pSceneInfo);
 
 		//默认分组0
-		NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = NF_SHARE_PTR<NFCSceneGroupInfo>(NF_NEW NFCSceneGroupInfo(nSceneID, 0, nWidth));
+		NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = NF_SHARE_PTR<NFCSceneGroupInfo>(NF_NEW NFCSceneGroupInfo(nSceneID, 0));
 		if (NULL != pGroupInfo.get())
 		{
 			pSceneInfo->AddElement(0, pGroupInfo);
@@ -852,7 +836,7 @@ bool NFCKernelModule::CreateScene(const int nSceneID, const std::string& strScen
 	return false;
 }
 
-bool NFCKernelModule::DestroyContainer(const int nSceneID)
+bool NFCKernelModule::DestroyScene(const int nSceneID)
 {
 	m_pSceneModule->RemoveElement(nSceneID);
 
