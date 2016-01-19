@@ -131,6 +131,18 @@ public:
 		return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
 	}
 
+	template<typename BaseType>
+	int AddReciveCallBack(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen))
+	{
+		return m_pNet->AddReciveCallBack<BaseType>(pBase, handleRecieve);
+	}
+
+	template<typename BaseType>
+	bool AddEventCallBack(BaseType* pBase, int (BaseType::*handler)(const int nSockIndex, const NF_NET_EVENT nEvent, NFINet* pNet))
+	{
+		return m_pNet->AddEventCallBack<BaseType>(pBase, handler);
+	}
+
 	virtual bool Execute()
 	{
 		if (!m_pNet)
