@@ -26,11 +26,17 @@ class NFCSceneGroupInfo
     //: public NFList<NFGUID>
 {
 public:
-    NFCSceneGroupInfo(int nSceneID, int nGroupID, int nWidth)
+    NFCSceneGroupInfo(int nSceneID, int nGroupID)
     {
         mnGroupID = nGroupID;
         //m_pGridModule = NF_SHARE_PTR<NFIGridModule>(NF_NEW NFCGridModule(nSceneID, nWidth));
     }
+
+	NFCSceneGroupInfo(int nSceneID, int nGroupID, int nWidth)
+	{
+		mnGroupID = nGroupID;
+		//m_pGridModule = NF_SHARE_PTR<NFIGridModule>(NF_NEW NFCGridModule(nSceneID, nWidth));
+	}
 
     virtual ~NFCSceneGroupInfo()
     {
@@ -58,12 +64,20 @@ class NFCSceneInfo
     : public NFMapEx<int, NFCSceneGroupInfo>
 {
 public:
-    NFCSceneInfo(int nSceneID, int nWidth)
+
+    NFCSceneInfo(int nSceneID)
     {
         mnGroupIndex = 0;
         mnSceneID = nSceneID;
-        mnWidth = nWidth;
+        mnWidth = 512;
     }
+
+	NFCSceneInfo(int nSceneID, int nWidth)
+	{
+		mnGroupIndex = 0;
+		mnSceneID = nSceneID;
+		mnWidth = nWidth;
+	}
 
     virtual ~NFCSceneInfo()
     {
