@@ -44,7 +44,7 @@ bool NFCLevelModule::AfterInit()
     m_pKernelModule->AddClassCallBack( NFrame::NPC::ThisName(), this, &NFCLevelModule::OnObjectClassEvent );
 
     std::string strPlayerPath = pPluginManager->GetConfigPath();
-    strPlayerPath += "NFDataCfg\Ini\Common\PlayerLevelConfig.xml";
+    strPlayerPath += "NFDataCfg/Ini/Common/PlayerLevelConfig.xml";
     NFCCommonConfig::GetSingletonPtr()->LoadConfig(strPlayerPath);
 
     return true;

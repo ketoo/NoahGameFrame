@@ -68,20 +68,42 @@ Need build sub librares:
 1. Download all source;
 2. Extract nessasery lib: 	**Dependencies/boost_1_53_0.zip** to **Dependencies/**
 3. Extract nessasery lib: 	**Dependencies/lib.zip** to **Dependencies/**
-4. Open the solution: **NoahFrame.sln**
-5. Build the solution
-6. Run the binary file by **_Out/Server/Debug/Run.bat**
+4. Extract nessasery lib: 	**Dependencies/gperftools-2.1.zip** to **Dependencies/**
+5. Extract nessasery lib: 	**Dependencies/curl-7.37.1.zip** to **Dependencies/**
+6. Open the solution: **NoahFrame.sln**
+7. Build the solution
+8. Copy files:libmysql.dll mysqlpp_d.dll 	to **_Out/Server/Debug/NFGameServer1/**
+9. Copy files:libmysql.dll mysqlpp.dll 		to **_Out/Server/Release/NFGameServer1/**
+10. Copy files:libmysql.dll mysqlpp_d.dll 	to **_Out/Server/Debug/NFLoginServer/**
+11. Copy files:libmysql.dll mysqlpp.dll 	to **_Out/Server/Release/NFLoginServer/**
+12. Copy files:libmysql.dll mysqlpp_d.dll 	to **_Out/Server/Debug/NFWorldServer/**
+13. Copy files:libmysql.dll mysqlpp.dll 	to **_Out/Server/Release/NFWorldServer/**
+14. Run the binary file by **_Out/Server/Debug/Run.bat**
+
+### Windows[VS2015]
+Who can do this?
 
 ### Linux[CodeBlock 13.1]
 
 1. Download all source;
 2. Extract nessasery lib: **Dependencies/boost_1_53_0.zip** to **Dependencies/**
-3. Extract nessasery lib: **Dependencies/lib.zip** to **Dependencies/**
-4. Open the solution with CodeBlocks: **NF.workspace**
-5. Add **c++11** optional for every project of this solution
-6. Build library: **NFNet, NFCore, NFEventTriggerPlugin, NFKernelPlugin, Theron, libprotocolbuf[libprotocolbuf-lite], NFLogPlugin, NFPluginLoader**
-7. Build all other plugin
-8. Run the binary file by **_Out/Server/Debug/Run.sh**
+3. Extract nessasery lib: 	**Dependencies/lib.zip** to **Dependencies/**
+4. Extract nessasery lib: 	**Dependencies/gperftools-2.1.zip** to **Dependencies/**
+5. Extract nessasery lib: 	**Dependencies/curl-7.37.1.zip** to **Dependencies/**
+6. Open the solution with CodeBlocks: **NF.workspace**
+7. Add **c++11** optional for every project of this solution
+8. Build library: **NFNet, NFCore, NFEventTriggerPlugin, NFKernelPlugin, Theron, libprotocolbuf[libprotocolbuf-lite], NFLogPlugin, NFPluginLoader**
+9. Build all other plugin
+10. Run the binary file by **_Out/Server/Debug/Run.sh**
+
+
+### JAVA Project
+WebSite:  https://github.com/NFGameTeam/NFrame-java
+
+### C# Project
+WebSite:  https://github.com/ketoo/NFrame
+
+
 
 ## Documents & Tutorial
 [English](https://github.com/ketoo/NoahGameFrame/blob/develop/doc_EN_US.md)
