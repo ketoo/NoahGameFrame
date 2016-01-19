@@ -55,7 +55,7 @@ long ApplicationCrashHandler(EXCEPTION_POINTERS* pException)
     char szDmupName[MAX_PATH];
     tm* ptm = localtime(&t);
 
-    sprintf_s(szDmupName, "%04d_%02d_%02d_%02d_%02d_%02d.dmp",  ptm->tm_year + 1900, ptm->tm_mon, ptm->tm_mday, ptm->tm_hour, ptm->tm_min, ptm->tm_sec);
+    sprintf_s(szDmupName, "%04d_%02d_%02d_%02d_%02d_%02d.dmp",  ptm->tm_year + 1900, ptm->tm_mon + 1, ptm->tm_mday, ptm->tm_hour, ptm->tm_min, ptm->tm_sec);
     CreateDumpFile(szDmupName, pException);
 
     FatalAppExit(-1,  szDmupName);
