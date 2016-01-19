@@ -48,15 +48,11 @@ public:
     virtual bool IsCloneScene(const int nSceneID);
 
 protected:
-    int CreateCloneScene( const int& nContainerID, const int nGroupID, const std::string& strResourceID, const NFIDataList& arg );
-    bool DestroyCloneScene( const int& nContainerID, const int& nGroupID, const NFIDataList& arg );
+	int CreateCloneScene( const int& nSceneID);
 
+    bool CreateSceneObject( const int nSceneID, const int nGroupID);
 
-protected:
-    bool LoadInitFileResource( const int& nContainerID );
-
-    bool CreateContinerObjectByFile( const int nContainerID, const int nGroupID, const std::string& strFileName );
-    bool CreateContinerObject( const int nContainerID, const int nGroupID, const std::string& strFileName, const std::string& strSeedID );
+	bool LoadSceneResource( const int nSceneID );
 
 protected:
 
@@ -66,11 +62,8 @@ protected:
     int OnLeaveSceneEvent( const NFGUID& object, const int nEventID, const NFIDataList& var );
 
 private:
-    int mnContainerLine;
-    int mnLineMaxPlayer;
 
     NFIElementInfoModule* m_pElementInfoModule;
-    NFIPropertyModule* m_pPropertyModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
@@ -85,18 +78,8 @@ private:
         float fSeedZ;
     };
 
-    struct SceneGroupResource
-    {
-        bool bCanClone;
-        //资源文件ID,<NPC种子列表>
-        //NPC.xml
-        NFMapEx<std::string, NFMapEx<std::string, SceneSeedResource>> xSceneGroupResource;
-    };
-
-    //场景ID,对应资源
-    //Map<int, SceneGroupResource> mtSceneResourceConfig;
-    //场景ID,(File.xml,分组资源)
-    NFMapEx<int, NFMapEx<std::string, SceneGroupResource>> mtSceneResourceConfig;
+    //场景ID,(SeedID,SeedData)
+    NFMapEx<int, NFMapEx<std::string, SceneSeedResource>> mtSceneResourceConfig;
 
     //////////////////////////////////////////////////////////////////////////
 };

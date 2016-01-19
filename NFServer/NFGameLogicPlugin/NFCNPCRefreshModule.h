@@ -16,6 +16,8 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIPackModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFILevelModule.h"
 
 class NFCNPCRefreshModule
     : public NFINPCRefreshModule
@@ -36,6 +38,10 @@ protected:
     int OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
     int OnObjectHPEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+	int OnObjectBeKilled(const NFGUID& self, const int nEventID, const NFIDataList& var);
+
+	int OnObjectLevelEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar );
+	bool AddLevelUpAward( const NFGUID& self, const int nLevel );
 
     int OnDeadDestroyHeart( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
 private:
@@ -44,6 +50,8 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFISceneProcessModule* m_pSceneProcessModule;
     NFIPackModule* m_pPackModule;
+	NFILogModule* m_pLogModule;
+	NFILevelModule* m_pLevelModule;
 
 };
 

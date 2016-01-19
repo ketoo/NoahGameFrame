@@ -36,25 +36,11 @@ public:
 
     virtual int AddExp( const NFGUID& self, const int nExp);
 
-    virtual int OnKillObject( const NFGUID& self, const NFGUID& other );
-
-    virtual int OnDead( const NFGUID& self, const NFGUID& other );
-    virtual bool AddLevelUpAward( const NFGUID& self, const int nLevel );
-
-protected:
-
-    int OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
-
-    int OnObjectLevelEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar );
-    int OnObjectExpEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
-
-    int OnObjectBeKilled( const NFGUID& object, const int nEventID, const NFIDataList& var );
 private:
     NFIPropertyConfigModule* m_pPropertyConfigModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFIElementInfoModule* m_pElementInfoModule;
-	NFIPackModule* m_pPackModule;
 };
 
 #endif

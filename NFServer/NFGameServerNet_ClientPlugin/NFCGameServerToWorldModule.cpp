@@ -145,8 +145,6 @@ bool NFCGameServerToWorldModule::AfterInit()
 		}
 	}
 
-	m_pKernelModule->CreateScene(-2, "");
-
 	return true;
 }
 
