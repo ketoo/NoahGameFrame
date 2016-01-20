@@ -728,9 +728,11 @@ bool NFCPackModule::TakeOffEquipForm( const NFGUID& self, const NFGUID& hero, co
 
 	if (nEquipRow >= 0 && nHeroRow >= 0)
 	{
-		//找到了装备,也找到了英雄--还要查看装备是什么类型，然后放什么位置
-		pHeroRecord->SetObject(nHeroRow, nHeroEquipCol, NULL_OBJECT);
-		pEquipRecord->SetObject(nEquipRow, NFrame::Player::BagEquipList_WearGUID, NULL_OBJECT);
+		//找到了装备,也找到了英雄
+        //TODO:还要查看装备是什么类型，然后放什么位置等条件判断
+        //Hero和PackItem GUID互相绑定
+		pHeroRecord->SetObject(nHeroRow, nHeroEquipCol, id);
+		pEquipRecord->SetObject(nEquipRow, NFrame::Player::BagEquipList_WearGUID, hero);
 	}
 
 	return false;
