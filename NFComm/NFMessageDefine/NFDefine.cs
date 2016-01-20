@@ -553,6 +553,9 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_TAKEOFF_EQUIP", Value=510)]
       EGEC_TAKEOFF_EQUIP = 510,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_MINING_TITLE", Value=600)]
+      EGEC_REQ_MINING_TITLE = 600,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_INT", Value=1000)]
       EGMI_REQ_CMD_PROPERTY_INT = 1000,
             
