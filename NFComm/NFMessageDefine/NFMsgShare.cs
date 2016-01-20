@@ -1689,4 +1689,35 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqMiningTitle")]
+  public partial class ReqMiningTitle : global::ProtoBuf.IExtensible
+  {
+    public ReqMiningTitle() {}
+    
+    private NFMsg.Ident _selfid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"selfid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident selfid
+    {
+      get { return _selfid; }
+      set { _selfid = value; }
+    }
+    private int _x;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"x", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int x
+    {
+      get { return _x; }
+      set { _x = value; }
+    }
+    private int _y;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"y", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int y
+    {
+      get { return _y; }
+      set { _y = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
 }
