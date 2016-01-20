@@ -29,6 +29,12 @@
     <Filter Include="NFPVPModule">
       <UniqueIdentifier>{61a8697e-e6af-4dc2-a039-8939512fadc9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFMailModule">
+      <UniqueIdentifier>{41b1abb7-3f86-4d9d-ac49-d9a585011cfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NFRankModule">
+      <UniqueIdentifier>{0d666a41-6965-4d4b-aec5-2785353cea09}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCGameLogicModule.h" />
@@ -83,6 +89,12 @@
     </ClInclude>
     <ClInclude Include="NFCPVPModule.h">
       <Filter>NFPVPModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCMailModule.h">
+      <Filter>NFMailModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCRankModule.h">
+      <Filter>NFRankModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +151,12 @@
     </ClCompile>
     <ClCompile Include="NFCPVPModule.cpp">
       <Filter>NFPVPModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCMailModule.cpp">
+      <Filter>NFMailModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCRankModule.cpp">
+      <Filter>NFRankModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
