@@ -113,11 +113,13 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClInclude Include="NFCGameLogicModule.h" />
     <ClInclude Include="NFCHeroModule.h" />
     <ClInclude Include="NFCItemConsumeManagerModule.h" />
+    <ClInclude Include="NFCMailModule.h" />
     <ClInclude Include="NFCNPCRefreshModule.h" />
     <ClInclude Include="NFCPotionItemConsumeProcessModule.h" />
     <ClInclude Include="NFCItemModule.h" />
     <ClInclude Include="NFCPackModule.h" />
     <ClInclude Include="NFCPVPModule.h" />
+    <ClInclude Include="NFCRankModule.h" />
     <ClInclude Include="NFCRebornItemConsumeProcessModule.h" />
     <ClInclude Include="NFCSkillConsumeManagerModule.h" />
     <ClInclude Include="NFCBriefSkillConsumeProcessModule.h" />
@@ -142,11 +144,13 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClCompile Include="NFCGameLogicModule.cpp" />
     <ClCompile Include="NFCHeroModule.cpp" />
     <ClCompile Include="NFCItemConsumeManagerModule.cpp" />
+    <ClCompile Include="NFCMailModule.cpp" />
     <ClCompile Include="NFCNPCRefreshModule.cpp" />
     <ClCompile Include="NFCPotionItemConsumeProcessModule.cpp" />
     <ClCompile Include="NFCItemModule.cpp" />
     <ClCompile Include="NFCPackModule.cpp" />
     <ClCompile Include="NFCPVPModule.cpp" />
+    <ClCompile Include="NFCRankModule.cpp" />
     <ClCompile Include="NFCRebornItemConsumeProcessModule.cpp" />
     <ClCompile Include="NFCSkillConsumeManagerModule.cpp" />
     <ClCompile Include="NFCBriefSkillConsumeProcessModule.cpp" />
