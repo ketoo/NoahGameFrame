@@ -460,3 +460,19 @@ message TakeOffEquip
 	required Ident		Targetid			= 3;//
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//EGEC_REQ_MINING_TITLE							= 600;		 // 挖矿
+message ReqMiningTitle
+{	
+	required Ident		selfid			= 1;//角色ID
+	required int32		x				= 2;//
+	required int32		y				= 3;//
+}
+
+
+
+
+
+

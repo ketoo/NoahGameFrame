@@ -174,6 +174,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* TakeOffEquip_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   TakeOffEquip_reflection_ = NULL;
+const ::google::protobuf::Descriptor* ReqMiningTitle_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ReqMiningTitle_reflection_ = NULL;
 
 }  // namespace
 
@@ -1012,6 +1015,23 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(TakeOffEquip));
+  ReqMiningTitle_descriptor_ = file->message_type(47);
+  static const int ReqMiningTitle_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMiningTitle, selfid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMiningTitle, x_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMiningTitle, y_),
+  };
+  ReqMiningTitle_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ReqMiningTitle_descriptor_,
+      ReqMiningTitle::default_instance_,
+      ReqMiningTitle_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMiningTitle, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMiningTitle, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ReqMiningTitle));
 }
 
 namespace {
@@ -1120,6 +1140,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
     ReqWearEquip_descriptor_, &ReqWearEquip::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     TakeOffEquip_descriptor_, &TakeOffEquip::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ReqMiningTitle_descriptor_, &ReqMiningTitle::default_instance());
 }
 
 }  // namespace
@@ -1221,6 +1243,8 @@ void protobuf_ShutdownFile_NFMsgShare_2eproto() {
   delete ReqWearEquip_reflection_;
   delete TakeOffEquip::default_instance_;
   delete TakeOffEquip_reflection_;
+  delete ReqMiningTitle::default_instance_;
+  delete ReqMiningTitle_reflection_;
 }
 
 void protobuf_AddDesc_NFMsgShare_2eproto() {
@@ -1383,7 +1407,9 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "\n\010Targetid\030\003 \002(\0132\014.NFMsg.Ident\"k\n\014TakeOf"
     "fEquip\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\035\n\007"
     "equipid\030\002 \002(\0132\014.NFMsg.Ident\022\036\n\010Targetid\030"
-    "\003 \002(\0132\014.NFMsg.Ident", 6059);
+    "\003 \002(\0132\014.NFMsg.Ident\"D\n\016ReqMiningTitle\022\034\n"
+    "\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\t\n\001x\030\002 \002(\005\022\t"
+    "\n\001y\030\003 \002(\005", 6129);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -1434,6 +1460,7 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqSetFightHero::default_instance_ = new ReqSetFightHero();
   ReqWearEquip::default_instance_ = new ReqWearEquip();
   TakeOffEquip::default_instance_ = new TakeOffEquip();
+  ReqMiningTitle::default_instance_ = new ReqMiningTitle();
   ReqEnterGameServer::default_instance_->InitAsDefaultInstance();
   ReqHeartBeat::default_instance_->InitAsDefaultInstance();
   ReqLeaveGameServer::default_instance_->InitAsDefaultInstance();
@@ -1482,6 +1509,7 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqSetFightHero::default_instance_->InitAsDefaultInstance();
   ReqWearEquip::default_instance_->InitAsDefaultInstance();
   TakeOffEquip::default_instance_->InitAsDefaultInstance();
+  ReqMiningTitle::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFMsgShare_2eproto);
 }
 
@@ -16513,6 +16541,303 @@ void TakeOffEquip::Swap(TakeOffEquip* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = TakeOffEquip_descriptor_;
   metadata.reflection = TakeOffEquip_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ReqMiningTitle::kSelfidFieldNumber;
+const int ReqMiningTitle::kXFieldNumber;
+const int ReqMiningTitle::kYFieldNumber;
+#endif  // !_MSC_VER
+
+ReqMiningTitle::ReqMiningTitle()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void ReqMiningTitle::InitAsDefaultInstance() {
+  selfid_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+}
+
+ReqMiningTitle::ReqMiningTitle(const ReqMiningTitle& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ReqMiningTitle::SharedCtor() {
+  _cached_size_ = 0;
+  selfid_ = NULL;
+  x_ = 0;
+  y_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ReqMiningTitle::~ReqMiningTitle() {
+  SharedDtor();
+}
+
+void ReqMiningTitle::SharedDtor() {
+  if (this != default_instance_) {
+    delete selfid_;
+  }
+}
+
+void ReqMiningTitle::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ReqMiningTitle::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ReqMiningTitle_descriptor_;
+}
+
+const ReqMiningTitle& ReqMiningTitle::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
+  return *default_instance_;
+}
+
+ReqMiningTitle* ReqMiningTitle::default_instance_ = NULL;
+
+ReqMiningTitle* ReqMiningTitle::New() const {
+  return new ReqMiningTitle;
+}
+
+void ReqMiningTitle::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_selfid()) {
+      if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+    }
+    x_ = 0;
+    y_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ReqMiningTitle::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .NFMsg.Ident selfid = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_selfid()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_x;
+        break;
+      }
+
+      // required int32 x = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_x:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &x_)));
+          set_has_x();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(24)) goto parse_y;
+        break;
+      }
+
+      // required int32 y = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_y:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &y_)));
+          set_has_y();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void ReqMiningTitle::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .NFMsg.Ident selfid = 1;
+  if (has_selfid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->selfid(), output);
+  }
+
+  // required int32 x = 2;
+  if (has_x()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->x(), output);
+  }
+
+  // required int32 y = 3;
+  if (has_y()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->y(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* ReqMiningTitle::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required .NFMsg.Ident selfid = 1;
+  if (has_selfid()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->selfid(), target);
+  }
+
+  // required int32 x = 2;
+  if (has_x()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->x(), target);
+  }
+
+  // required int32 y = 3;
+  if (has_y()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->y(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int ReqMiningTitle::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .NFMsg.Ident selfid = 1;
+    if (has_selfid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->selfid());
+    }
+
+    // required int32 x = 2;
+    if (has_x()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->x());
+    }
+
+    // required int32 y = 3;
+    if (has_y()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->y());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ReqMiningTitle::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ReqMiningTitle* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ReqMiningTitle*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ReqMiningTitle::MergeFrom(const ReqMiningTitle& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_selfid()) {
+      mutable_selfid()->::NFMsg::Ident::MergeFrom(from.selfid());
+    }
+    if (from.has_x()) {
+      set_x(from.x());
+    }
+    if (from.has_y()) {
+      set_y(from.y());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ReqMiningTitle::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqMiningTitle::CopyFrom(const ReqMiningTitle& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqMiningTitle::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+
+  if (has_selfid()) {
+    if (!this->selfid().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void ReqMiningTitle::Swap(ReqMiningTitle* other) {
+  if (other != this) {
+    std::swap(selfid_, other->selfid_);
+    std::swap(x_, other->x_);
+    std::swap(y_, other->y_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ReqMiningTitle::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ReqMiningTitle_descriptor_;
+  metadata.reflection = ReqMiningTitle_reflection_;
   return metadata;
 }
 
