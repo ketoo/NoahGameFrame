@@ -18,6 +18,7 @@
 #include "NFIPropertyManager.h"
 #include "NFIComponentManager.h"
 #include "NFIEventManager.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFIObject
 {
