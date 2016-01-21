@@ -30,9 +30,7 @@ public:
     virtual bool AfterInit();
 
 public:
-    virtual int OnReqRankList(const NFGUID& self, const int nRankType, const int nStart, const int nEnd);
 
-    virtual void LoadRankList();
     virtual void ProcessRankValueUpdate(const NFGUID& self, const int nRankType, const int nOperateType, const NFINT64 nValue);
 
 private:

@@ -896,7 +896,7 @@ int NFCRecord::FindFloat(const int nCol, const double value, NFIDataList& varRes
         return -1;
     }
 
-    for (int64_t i = 0; i < mnMaxRow; ++i)
+    for (int i = 0; i < mnMaxRow; ++i)
     {
         if (!IsUsed(i))
         {

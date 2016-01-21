@@ -617,6 +617,30 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CurrencyStruct")]
+  public partial class CurrencyStruct : global::ProtoBuf.IExtensible
+  {
+    public CurrencyStruct() {}
+    
+    private int _currency_type;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"currency_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int currency_type
+    {
+      get { return _currency_type; }
+      set { _currency_type = value; }
+    }
+    private int _currency_count;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"currency_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int currency_count
+    {
+      get { return _currency_count; }
+      set { _currency_count = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckEndBattle")]
   public partial class ReqAckEndBattle : global::ProtoBuf.IExtensible
   {
@@ -1715,6 +1739,44 @@ namespace NFMsg
       get { return _y; }
       set { _y = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqSendMail")]
+  public partial class ReqSendMail : global::ProtoBuf.IExtensible
+  {
+    public ReqSendMail() {}
+    
+    private NFMsg.Ident _selfid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"selfid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident selfid
+    {
+      get { return _selfid; }
+      set { _selfid = value; }
+    }
+    private NFMsg.Ident _reciever;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"reciever", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident reciever
+    {
+      get { return _reciever; }
+      set { _reciever = value; }
+    }
+    private readonly global::System.Collections.Generic.List<NFMsg.ItemStruct> _item_list = new global::System.Collections.Generic.List<NFMsg.ItemStruct>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"item_list", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFMsg.ItemStruct> item_list
+    {
+      get { return _item_list; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<NFMsg.CurrencyStruct> _currency_list = new global::System.Collections.Generic.List<NFMsg.CurrencyStruct>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"currency_list", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFMsg.CurrencyStruct> currency_list
+    {
+      get { return _currency_list; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
