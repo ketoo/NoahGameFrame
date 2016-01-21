@@ -225,6 +225,10 @@ enum EGameMsgID
 
 	EGEC_REQ_MINING_TITLE						= 600;		 // 申请挖次矿（地块）
 	
+    EGEC_REQ_SEND_MAIL                          = 700; // 发送邮件
+    EGEC_REQ_DRAW_MAIL                          = 701; // 领取邮件中的奖励(包含道具或者钻石等非道具的东西)
+    EGEC_REQ_DELETE_MAIL                        = 702; // 删除邮件
+    
 	/////////////////////GM MSG/////////////////////////////////////订阅
 	EGMI_REQ_CMD_PROPERTY_INT					= 1000;			// GM命令修改整形
 	EGMI_REQ_CMD_PROPERTY_STR					= 1001;			// GM命令修改修改字符串
@@ -287,7 +291,7 @@ enum EGameEquipSubType
 //元素类型
 enum EGameElementType
 {
-	EELEMENTTYPE_FLY				= 0;    // 风
+	EELEMENTTYPE_WIND				= 0;    // 风
 	EELEMENTTYPE_FIRE				= 1;    // 火
 	EELEMENTTYPE_THUNDER			= 2;    // 雷
 	EELEMENTTYPE_SOIL              	= 3;    // 土
