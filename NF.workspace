@@ -7,16 +7,13 @@
 		<Project filename="NFComm/NFKernelPlugin/NFKernelPlugin.cbp">
 			<Depends filename="NFComm/NFCore/NFCore.cbp" />
 		</Project>
-		<Project filename="NFComm/NFEventProcessPlugin/NFEventProcessPlugin.cbp" />
 		<Project filename="NFComm/NFConfigPlugin/NFConfigPlugin.cbp" />
 		<Project filename="NFServer/NFLoginNet_ServerPlugin/NFLoginNet_ServerPlugin.cbp" />
 		<Project filename="NFServer/NFLoginNet_ClientPlugin/NFLoginNet_ClientPlugin.cbp" />
 		<Project filename="NFServer/NFWorldNet_ClientPlugin/NFWorldNet_ClientPlugin.cbp" />
 		<Project filename="NFServer/NFGameServerPlugin/NFGameServerPlugin.cbp" />
 		<Project filename="NFServer/NFGameServerNet_ClientPlugin/NFGameServerNet_ClientPlugin.cbp" />
-		<Project filename="NFServer/NFGameServerNet_ServerPlugin/NFGameServerNet_ServerPlugin.cbp">
-			<Depends filename="NFComm/NFEventProcessPlugin/NFEventProcessPlugin.cbp" />
-		</Project>
+		<Project filename="NFServer/NFGameServerNet_ServerPlugin/NFGameServerNet_ServerPlugin.cbp" />
 		<Project filename="NFServer/NFMasterServerPlugin/NFMasterServerPlugin.cbp" />
 		<Project filename="NFServer/NFMasterNet_ServerPlugin/NFMasterNet_ServerPlugin.cbp" />
 		<Project filename="NFComm/NFCore/NFCore.cbp" />
@@ -36,9 +33,9 @@
 		<Project filename="NFServer/NFDataBaseNet_ClientPlugin/NFDataBaseNet_ClientPlugin.cbp" />
 		<Project filename="NFComm/NFTagPlugin/NFTagPlugin.cbp" />
 		<Project filename="NFServer/NFGameLogicPlugin/NFGameLogicPlugin.cbp" />
-		<Project filename="NFServer/NFSLGPlugin/NFSLGPlugin.cbp" />
 		<Project filename="NFServer/NFWorldChatPlugin/NFWorldChatPlugin.cbp" />
 		<Project filename="NFServer/NFWorldGuildPlugin/NFWorldGuildPlugin.cbp" />
 		<Project filename="NFComm/NFCluster/NFMysqlClusterPlugin.cbp" />
+		<Project filename="Tutorial/Tutorial5/Tutorial5.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
