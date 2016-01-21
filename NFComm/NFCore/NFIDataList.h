@@ -45,7 +45,7 @@ enum TDATA_TYPE
 const static std::string NULL_STR = "";
 const static NFGUID NULL_OBJECT = NFGUID();
 const static double NULL_FLOAT = 0.0;
-const static INT64 NULL_INT = 0;
+const static NFINT64 NULL_INT = 0;
 
 
 //类型接口
