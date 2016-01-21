@@ -51,6 +51,7 @@ class ReqAckUseSkill;
 class ReqAckUseItem;
 class ReqAckSwapScene;
 class ItemStruct;
+class CurrencyStruct;
 class ReqAckEndBattle;
 class ReqPickDropItem;
 class ReqAcceptTask;
@@ -85,6 +86,7 @@ class ReqSetFightHero;
 class ReqWearEquip;
 class TakeOffEquip;
 class ReqMiningTitle;
+class ReqSendMail;
 
 enum ReqAckSynData_SynType {
   ReqAckSynData_SynType_EST_SCENE = 1,
@@ -2140,6 +2142,98 @@ class ItemStruct : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ItemStruct* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class CurrencyStruct : public ::google::protobuf::Message {
+ public:
+  CurrencyStruct();
+  virtual ~CurrencyStruct();
+
+  CurrencyStruct(const CurrencyStruct& from);
+
+  inline CurrencyStruct& operator=(const CurrencyStruct& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CurrencyStruct& default_instance();
+
+  void Swap(CurrencyStruct* other);
+
+  // implements Message ----------------------------------------------
+
+  CurrencyStruct* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const CurrencyStruct& from);
+  void MergeFrom(const CurrencyStruct& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 currency_type = 1;
+  inline bool has_currency_type() const;
+  inline void clear_currency_type();
+  static const int kCurrencyTypeFieldNumber = 1;
+  inline ::google::protobuf::int32 currency_type() const;
+  inline void set_currency_type(::google::protobuf::int32 value);
+
+  // required int32 currency_count = 2;
+  inline bool has_currency_count() const;
+  inline void clear_currency_count();
+  static const int kCurrencyCountFieldNumber = 2;
+  inline ::google::protobuf::int32 currency_count() const;
+  inline void set_currency_count(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.CurrencyStruct)
+ private:
+  inline void set_has_currency_type();
+  inline void clear_has_currency_type();
+  inline void set_has_currency_count();
+  inline void clear_has_currency_count();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 currency_type_;
+  ::google::protobuf::int32 currency_count_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static CurrencyStruct* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -5860,6 +5954,128 @@ class ReqMiningTitle : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static ReqMiningTitle* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class ReqSendMail : public ::google::protobuf::Message {
+ public:
+  ReqSendMail();
+  virtual ~ReqSendMail();
+
+  ReqSendMail(const ReqSendMail& from);
+
+  inline ReqSendMail& operator=(const ReqSendMail& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqSendMail& default_instance();
+
+  void Swap(ReqSendMail* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqSendMail* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqSendMail& from);
+  void MergeFrom(const ReqSendMail& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident reciever = 2;
+  inline bool has_reciever() const;
+  inline void clear_reciever();
+  static const int kRecieverFieldNumber = 2;
+  inline const ::NFMsg::Ident& reciever() const;
+  inline ::NFMsg::Ident* mutable_reciever();
+  inline ::NFMsg::Ident* release_reciever();
+  inline void set_allocated_reciever(::NFMsg::Ident* reciever);
+
+  // repeated .NFMsg.ItemStruct item_list = 3;
+  inline int item_list_size() const;
+  inline void clear_item_list();
+  static const int kItemListFieldNumber = 3;
+  inline const ::NFMsg::ItemStruct& item_list(int index) const;
+  inline ::NFMsg::ItemStruct* mutable_item_list(int index);
+  inline ::NFMsg::ItemStruct* add_item_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >&
+      item_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >*
+      mutable_item_list();
+
+  // repeated .NFMsg.CurrencyStruct currency_list = 4;
+  inline int currency_list_size() const;
+  inline void clear_currency_list();
+  static const int kCurrencyListFieldNumber = 4;
+  inline const ::NFMsg::CurrencyStruct& currency_list(int index) const;
+  inline ::NFMsg::CurrencyStruct* mutable_currency_list(int index);
+  inline ::NFMsg::CurrencyStruct* add_currency_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::CurrencyStruct >&
+      currency_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::CurrencyStruct >*
+      mutable_currency_list();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqSendMail)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_reciever();
+  inline void clear_has_reciever();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* reciever_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct > item_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::CurrencyStruct > currency_list_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqSendMail* default_instance_;
+};
 // ===================================================================
 
 
@@ -7842,6 +8058,54 @@ inline ::google::protobuf::int32 ItemStruct::item_count() const {
 inline void ItemStruct::set_item_count(::google::protobuf::int32 value) {
   set_has_item_count();
   item_count_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// CurrencyStruct
+
+// required int32 currency_type = 1;
+inline bool CurrencyStruct::has_currency_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void CurrencyStruct::set_has_currency_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void CurrencyStruct::clear_has_currency_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void CurrencyStruct::clear_currency_type() {
+  currency_type_ = 0;
+  clear_has_currency_type();
+}
+inline ::google::protobuf::int32 CurrencyStruct::currency_type() const {
+  return currency_type_;
+}
+inline void CurrencyStruct::set_currency_type(::google::protobuf::int32 value) {
+  set_has_currency_type();
+  currency_type_ = value;
+}
+
+// required int32 currency_count = 2;
+inline bool CurrencyStruct::has_currency_count() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void CurrencyStruct::set_has_currency_count() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void CurrencyStruct::clear_has_currency_count() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void CurrencyStruct::clear_currency_count() {
+  currency_count_ = 0;
+  clear_has_currency_count();
+}
+inline ::google::protobuf::int32 CurrencyStruct::currency_count() const {
+  return currency_count_;
+}
+inline void CurrencyStruct::set_currency_count(::google::protobuf::int32 value) {
+  set_has_currency_count();
+  currency_count_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -11582,6 +11846,136 @@ inline ::google::protobuf::int32 ReqMiningTitle::y() const {
 inline void ReqMiningTitle::set_y(::google::protobuf::int32 value) {
   set_has_y();
   y_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqSendMail
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqSendMail::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqSendMail::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqSendMail::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqSendMail::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqSendMail::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqSendMail::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqSendMail::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqSendMail::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident reciever = 2;
+inline bool ReqSendMail::has_reciever() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqSendMail::set_has_reciever() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqSendMail::clear_has_reciever() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqSendMail::clear_reciever() {
+  if (reciever_ != NULL) reciever_->::NFMsg::Ident::Clear();
+  clear_has_reciever();
+}
+inline const ::NFMsg::Ident& ReqSendMail::reciever() const {
+  return reciever_ != NULL ? *reciever_ : *default_instance_->reciever_;
+}
+inline ::NFMsg::Ident* ReqSendMail::mutable_reciever() {
+  set_has_reciever();
+  if (reciever_ == NULL) reciever_ = new ::NFMsg::Ident;
+  return reciever_;
+}
+inline ::NFMsg::Ident* ReqSendMail::release_reciever() {
+  clear_has_reciever();
+  ::NFMsg::Ident* temp = reciever_;
+  reciever_ = NULL;
+  return temp;
+}
+inline void ReqSendMail::set_allocated_reciever(::NFMsg::Ident* reciever) {
+  delete reciever_;
+  reciever_ = reciever;
+  if (reciever) {
+    set_has_reciever();
+  } else {
+    clear_has_reciever();
+  }
+}
+
+// repeated .NFMsg.ItemStruct item_list = 3;
+inline int ReqSendMail::item_list_size() const {
+  return item_list_.size();
+}
+inline void ReqSendMail::clear_item_list() {
+  item_list_.Clear();
+}
+inline const ::NFMsg::ItemStruct& ReqSendMail::item_list(int index) const {
+  return item_list_.Get(index);
+}
+inline ::NFMsg::ItemStruct* ReqSendMail::mutable_item_list(int index) {
+  return item_list_.Mutable(index);
+}
+inline ::NFMsg::ItemStruct* ReqSendMail::add_item_list() {
+  return item_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >&
+ReqSendMail::item_list() const {
+  return item_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >*
+ReqSendMail::mutable_item_list() {
+  return &item_list_;
+}
+
+// repeated .NFMsg.CurrencyStruct currency_list = 4;
+inline int ReqSendMail::currency_list_size() const {
+  return currency_list_.size();
+}
+inline void ReqSendMail::clear_currency_list() {
+  currency_list_.Clear();
+}
+inline const ::NFMsg::CurrencyStruct& ReqSendMail::currency_list(int index) const {
+  return currency_list_.Get(index);
+}
+inline ::NFMsg::CurrencyStruct* ReqSendMail::mutable_currency_list(int index) {
+  return currency_list_.Mutable(index);
+}
+inline ::NFMsg::CurrencyStruct* ReqSendMail::add_currency_list() {
+  return currency_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::CurrencyStruct >&
+ReqSendMail::currency_list() const {
+  return currency_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::CurrencyStruct >*
+ReqSendMail::mutable_currency_list() {
+  return &currency_list_;
 }
 
 
