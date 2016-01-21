@@ -24,16 +24,6 @@ bool NFCRankModule::AfterInit()
     return true;
 }
 
-int NFCRankModule::OnReqRankList(const NFGUID& self, const int nRankType, const int nStart, const int nEnd)
-{
-    return 0;
-}
-
-void NFCRankModule::LoadRankList()
-{
-    // TODO
-}
-
 void NFCRankModule::ProcessRankValueUpdate(const NFGUID& self, const int nRankType, const int nOperateType, const NFINT64 nValue)
 {
     // TODO
