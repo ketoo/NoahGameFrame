@@ -556,6 +556,15 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_MINING_TITLE", Value=600)]
       EGEC_REQ_MINING_TITLE = 600,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_SEND_MAIL", Value=700)]
+      EGEC_REQ_SEND_MAIL = 700,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_DRAW_MAIL", Value=701)]
+      EGEC_REQ_DRAW_MAIL = 701,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_DELETE_MAIL", Value=702)]
+      EGEC_REQ_DELETE_MAIL = 702,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_INT", Value=1000)]
       EGMI_REQ_CMD_PROPERTY_INT = 1000,
             
@@ -694,8 +703,8 @@ namespace NFMsg
     public enum EGameElementType
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_FLY", Value=0)]
-      EELEMENTTYPE_FLY = 0,
+      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_WIND", Value=0)]
+      EELEMENTTYPE_WIND = 0,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_FIRE", Value=1)]
       EELEMENTTYPE_FIRE = 1,
