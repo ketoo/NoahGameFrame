@@ -112,33 +112,33 @@ public:
 	}
 
 	template<typename BaseType>
-	void Initialization(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const char* strIP, const unsigned short nPort)
+	void Initialization(BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const char* strIP, const unsigned short nPort)
 	{
 		nLastTime = GetPluginManager()->GetNowTime();
 
-		m_pNet = new NFCNet(pBaseType, handleRecieve, handleEvent);
+		m_pNet = new NFCNet(pBase, handleRecieve, handleEvent);
 		
 		m_pNet->Initialization(strIP, nPort);
 	}
 
 	template<typename BaseType>
-	int Initialization(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4)
+	int Initialization(BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4)
 	{
 		nLastTime = GetPluginManager()->GetNowTime();
 
-		m_pNet = new NFCNet(pBaseType, handleRecieve, handleEvent);
+		m_pNet = new NFCNet(pBase, handleRecieve, handleEvent);
 
 		return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
 	}
 
 	template<typename BaseType>
-	int AddReciveCallBack(const int nMsgID, BaseType* pBaseType, void (BaseType::*handleRecieve)(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen))
+	int AddReciveCallBack(const int nMsgID, BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
 	{
 		return m_pNet->AddReciveCallBack<BaseType>(nMsgID, pBase, handleRecieve);
 	}
 
 	template<typename BaseType>
-	bool AddEventCallBack(BaseType* pBase, int (BaseType::*handler)(const int nSockIndex, const NF_NET_EVENT nEvent, NFINet* pNet))
+	bool AddEventCallBack(BaseType* pBase, int (BaseType::*handler)(const int, const NF_NET_EVENT, NFINet*))
 	{
 		return m_pNet->AddEventCallBack<BaseType>(pBase, handler);
 	}
