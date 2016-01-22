@@ -934,7 +934,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent( const NFGUID& self, co
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar)
+int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
     const std::string& strRecordName = xEventData.strRecordName;
     const int nOpType = xEventData.nOpType;
@@ -975,7 +975,8 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFGUID& self, cons
 			pAddRowData->set_row(nRow);
 
 			//add row 需要完整的row
-			for ( int i = 0; i < newVar.GetCount(); i++ )
+            //FIXME:RECORD
+			/*for ( int i = 0; i < newVar.GetCount(); i++ )
 			{
 				switch ( newVar.Type( i ) )
 				{
@@ -1032,7 +1033,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFGUID& self, cons
 				default:
 					break;
 				}
-			}
+			}*/
 
 
 			for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
@@ -1082,7 +1083,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFGUID& self, cons
 		break;
 	case NFIRecord::RecordOptype::UpData:
 		{
-			switch ( oldVar.Type( 0 ) )
+			switch ( oldVar.GetType() )
 			{
 			case TDATA_INT:
 				{
@@ -1093,7 +1094,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFGUID& self, cons
 					NFMsg::RecordInt* recordProperty = xRecordChanged.add_property_list();
 					recordProperty->set_row( nRow );
 					recordProperty->set_col( nCol );
-					int nData = newVar.Int( 0 );
+					int nData = newVar.GetInt();
 					recordProperty->set_data( nData );
 
 					for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
@@ -1114,7 +1115,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFGUID& self, cons
 					NFMsg::RecordFloat* recordProperty = xRecordChanged.add_property_list();
 					recordProperty->set_row( nRow );
 					recordProperty->set_col( nCol );
-					recordProperty->set_data( newVar.Float( 0 ) );
+					recordProperty->set_data( newVar.GetFloat() );
 
 					for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 					{
@@ -1133,7 +1134,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFGUID& self, cons
 					NFMsg::RecordString* recordProperty = xRecordChanged.add_property_list();
 					recordProperty->set_row( nRow );
 					recordProperty->set_col( nCol );
-					recordProperty->set_data( newVar.String( 0 ) );
+					recordProperty->set_data( newVar.GetString() );
 
 					for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 					{
@@ -1152,7 +1153,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFGUID& self, cons
 					NFMsg::RecordObject* recordProperty = xRecordChanged.add_property_list();
 					recordProperty->set_row( nRow );
 					recordProperty->set_col( nCol );
-					*recordProperty->mutable_data() = NFToPB(newVar.Object( 0 ));
+					*recordProperty->mutable_data() = NFToPB(newVar.GetObject());
 
 					for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 					{
