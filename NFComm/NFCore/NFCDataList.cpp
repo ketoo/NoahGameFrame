@@ -499,13 +499,14 @@ std::string NFCDataList::StringValEx(const int index) const
 			break;
 
 		case TDATA_STRING:
-			strData = boost::lexical_cast<std::string> (String(index));
+			strData = String(index);
 			break; 
-		case TDATA_OBJECT:
+
+        case TDATA_OBJECT:
 			strData = Object(index).ToString();
 			break;
-		default:
 
+        default:
 			strData = NULL_STR;
 			break;
 		}

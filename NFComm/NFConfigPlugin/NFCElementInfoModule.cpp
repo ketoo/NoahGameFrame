@@ -185,11 +185,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFI
                 }
                 var.SetObject(NFGUID());
             }
-
             break;
-            //case TDATA_POINTER:
-            //    var.variantData = (void*)NULL;
-            //    break;
             default:
                 NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 break;
