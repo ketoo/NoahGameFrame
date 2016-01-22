@@ -220,6 +220,35 @@ public:
 			return NULL_OBJECT;
 		}
 
+        std::string StringValEx() const
+        {
+            std::string strData;
+
+            switch (nType)
+            {
+            case TDATA_INT:
+                strData = boost::lexical_cast<std::string> (GetInt());
+                break;
+
+            case TDATA_FLOAT:
+                strData = boost::lexical_cast<std::string> (GetFloat());
+                break;
+
+            case TDATA_STRING:
+                strData = GetString();
+                break; 
+
+            case TDATA_OBJECT:
+                strData = GetObject().ToString();
+                break;
+
+            default:
+                strData = NULL_STR;
+                break;
+            }
+            return strData;
+        }
+
 	private:
 
         TDATA_TYPE nType;
