@@ -10,7 +10,7 @@
 #include "NFCStateMachine.h"
 #include "NFCHateModule.h"
 #include "NFAIPlugin.h"
-#include "NFComm\NFMessageDefine\NFProtocolDefine.hpp"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 
 bool NFCAIModule::Init()
