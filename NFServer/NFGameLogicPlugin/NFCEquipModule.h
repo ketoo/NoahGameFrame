@@ -51,7 +51,7 @@ protected:
     virtual bool RamdomSucess(const int nNowLevel, const int nMaxLevel);
     virtual float GetEquipLevelRate(const int nNowLevel);
     int OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
-    int OnObjectBagEquipRecordEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar );
+    int OnObjectBagEquipRecordEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar );
 
     int AddEquipProperty( const NFGUID& self );
     int AddEquipProperty( const NFGUID& self, const int nRow );
