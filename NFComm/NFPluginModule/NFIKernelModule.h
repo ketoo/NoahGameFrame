@@ -39,7 +39,7 @@ public:
     virtual bool RemoveHeartBeat(const NFGUID& self, const std::string& strHeartBeatName) = 0;
 
     template<typename BaseType>
-    bool AddRecordCallBack(const NFGUID& self, const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFIDataList&, const NFIDataList&))
+    bool AddRecordCallBack(const NFGUID& self, const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&))
     {
 		NF_SHARE_PTR<NFIObject> pObject = GetObject(self);
 		if (pObject.get())
@@ -103,7 +103,7 @@ public:
 
     //只能网络模块注册，回调用来同步对象类表事件,所有的类表都会回调
     template<typename BaseType>
-    bool ResgisterCommonRecordEvent(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFIDataList&, const NFIDataList&))
+    bool ResgisterCommonRecordEvent(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&))
     {
         RECORD_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         RECORD_EVENT_FUNCTOR_PTR functorPtr(new RECORD_EVENT_FUNCTOR(functor));

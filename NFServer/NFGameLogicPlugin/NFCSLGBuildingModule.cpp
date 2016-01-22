@@ -24,7 +24,7 @@ bool NFCSLGBuildingModule::AfterInit()
 	assert( NULL != m_pLogModule );
 	assert( NULL != m_pUUIDModule );
 
-    m_pKernelModule->AddClassCallBack(NFrame::BB_Player::ThisName(), this, &NFCSLGBuildingModule::OnClassObjectEvent);
+    //m_pKernelModule->AddClassCallBack(NFrame::BB_Player::ThisName(), this, &NFCSLGBuildingModule::OnClassObjectEvent);
 
     return true;
 }
