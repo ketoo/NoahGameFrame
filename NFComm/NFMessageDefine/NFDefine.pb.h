@@ -230,6 +230,9 @@ enum EGameMsgID {
   EGEC_WEAR_EQUIP = 509,
   EGEC_TAKEOFF_EQUIP = 510,
   EGEC_REQ_MINING_TITLE = 600,
+  EGEC_REQ_SEND_MAIL = 700,
+  EGEC_REQ_DRAW_MAIL = 701,
+  EGEC_REQ_DELETE_MAIL = 702,
   EGMI_REQ_CMD_PROPERTY_INT = 1000,
   EGMI_REQ_CMD_PROPERTY_STR = 1001,
   EGMI_REQ_CMD_PROPERTY_OBJECT = 1002,
@@ -322,14 +325,14 @@ inline bool EGameEquipSubType_Parse(
     EGameEquipSubType_descriptor(), name, value);
 }
 enum EGameElementType {
-  EELEMENTTYPE_FLY = 0,
+  EELEMENTTYPE_WIND = 0,
   EELEMENTTYPE_FIRE = 1,
   EELEMENTTYPE_THUNDER = 2,
   EELEMENTTYPE_SOIL = 3,
   EELEMENTTYPE_WATER = 4
 };
 bool EGameElementType_IsValid(int value);
-const EGameElementType EGameElementType_MIN = EELEMENTTYPE_FLY;
+const EGameElementType EGameElementType_MIN = EELEMENTTYPE_WIND;
 const EGameElementType EGameElementType_MAX = EELEMENTTYPE_WATER;
 const int EGameElementType_ARRAYSIZE = EGameElementType_MAX + 1;
 
