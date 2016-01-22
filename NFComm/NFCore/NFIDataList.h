@@ -231,6 +231,7 @@ public:
     NFIDataList()
     {
 		mnUseSize = 0;
+        mvList.reserve(STACK_SIZE);
 		for (int i = 0; i < STACK_SIZE; ++i)
 		{
 			mvList.push_back(NF_SHARE_PTR<TData>(NF_NEW TData()));
