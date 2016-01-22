@@ -15,9 +15,6 @@
 class NFIRankModule : public NFILogicModule
 {
 public:
-    virtual int OnReqRankList(const NFGUID& self, const int nRankType, const int nStart, const int nEnd) = 0;
-    
-    virtual void LoadRankList() = 0;
     virtual void ProcessRankValueUpdate(const NFGUID& self, const int nRankType, const int nOperateType, const NFINT64 nValue) = 0;
 };
 
