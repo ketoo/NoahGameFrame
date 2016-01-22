@@ -21,7 +21,7 @@ enum ConnectDataState
 	RECONNECT,
 
 };
-struct ConnectData 
+struct ConnectData
 {
 	ConnectData()
 	{
@@ -50,20 +50,20 @@ class NFIClusterClientModule : public NFILogicModule
 public:
     enum EConstDefine
     {
-        EConstDefine_DefaultWeith = 500, 
+        EConstDefine_DefaultWeith = 500,
     };
 
 public:
 	template<typename BaseType>
-	int AddReciveCallBack(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen))
+	int AddReciveCallBack(const int nMsgID, BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
 	{
 		std::map<int, NET_RECIEVE_FUNCTOR_PTR>::iterator it = mxReciveCallBack.find(nMsgID);
 		if (mxReciveCallBack.end() == it)
 		{
-			NET_RECIEVE_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+			NET_RECIEVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 			NET_RECIEVE_FUNCTOR_PTR functorPtr(new NET_RECIEVE_FUNCTOR(functor));
 
-			mxReciveCallBack.insert(std::map<int, NET_RECIEVE_FUNCTOR_PTR>::value_type(nMsgID, cb));
+			mxReciveCallBack.insert(std::map<int, NET_RECIEVE_FUNCTOR_PTR>::value_type(nMsgID, functorPtr));
 
 			return true;
 		}
@@ -74,12 +74,12 @@ public:
 	}
 
 	template<typename BaseType>
-	bool AddEventCallBack(BaseType* pBase, int (BaseType::*handler)(const int nSockIndex, const NF_NET_EVENT nEvent, NFINet* pNet))
+	bool AddEventCallBack(BaseType* pBase, int (BaseType::*handler)(const int, const NF_NET_EVENT, NFINet*))
 	{
 		NET_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		NET_EVENT_FUNCTOR_PTR functorPtr(new NET_EVENT_FUNCTOR(functor));
 
-		mxEventCallBack.push_back(cb);
+		mxEventCallBack.push_back(functorPtr);
 
 		return true;
 	}
@@ -231,7 +231,7 @@ public:
 		return mxServerMap;
 	}
 
-protected:  
+protected:
 	template<typename BaseType>
 	void Bind(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*))
 	{

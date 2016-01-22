@@ -1087,4 +1087,4 @@ public:
 
 } // !@NFrame
 
-#endif NF_PR_NAME_HPP // !NF_PR_NAME_HPP
+#endif // !NF_PR_NAME_HPP
