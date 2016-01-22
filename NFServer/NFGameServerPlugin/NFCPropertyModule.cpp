@@ -131,7 +131,7 @@ int NFCPropertyModule::OnObjectLevelEvent( const NFGUID& self, const std::string
     return 0;
 }
 
-int NFCPropertyModule::OnRecordPropertyEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar )
+int NFCPropertyModule::OnRecordPropertyEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
 {
     //¼ÆËã×ÜÖµ
     const std::string& strRecordName = xEventData.strRecordName;
