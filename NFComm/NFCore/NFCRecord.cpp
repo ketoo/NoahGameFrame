@@ -367,7 +367,8 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
 		xEventData.nCol = 0;
 		xEventData.strRecordName = mstrRecordName;
 
-        OnEventHandler(mSelf, xEventData, mVarRecordType, var);
+        NFIDataList::TData tData;
+        OnEventHandler(mSelf, xEventData, tData, tData); //FIXME:RECORD
     }
 
     return nFindRow;
@@ -414,11 +415,11 @@ bool NFCRecord::SetInt(const int nRow, const int nCol, const NFINT64 value)
         mxIntKeyMap.insert(std::map<NFINT64, int>::value_type(value, nRow));
     }
 
-    NFCDataList oldValue;
-    NFCDataList newValue;
+    NFCDataList::TData oldValue;
+    NFCDataList::TData newValue;
 
-    oldValue.Append(*pVar);
-    newValue.Add(value);
+    oldValue.SetInt(pVar->GetInt());
+    newValue.SetInt(value);
 
     pVar->variantData = value;
 
@@ -466,11 +467,11 @@ bool NFCRecord::SetFloat(const int nRow, const int nCol, const double value)
         return false;
     }
 
-    NFCDataList oldValue;
-    NFCDataList newValue;
+    NFCDataList::TData oldValue;
+    NFCDataList::TData newValue;
 
-    oldValue.Append(*pVar);
-    newValue.Add(value);
+    oldValue.SetFloat(pVar->GetFloat());
+    newValue.SetFloat(value);
 
     pVar->variantData = value;
 
@@ -533,11 +534,11 @@ bool NFCRecord::SetString(const int nRow, const int nCol, const char* value)
     }
 
 
-    NFCDataList oldValue;
-    NFCDataList newValue;
+    NFCDataList::TData oldValue;
+    NFCDataList::TData newValue;
 
-    oldValue.Append(*pVar);
-    newValue.Add(value);
+    oldValue.SetString(pVar->GetString());
+    newValue.SetString(value);
 
     pVar->variantData = (std::string)value;
 
@@ -598,11 +599,11 @@ bool NFCRecord::SetObject(const int nRow, const int nCol, const NFGUID& value)
         mxObjectKeyMap.insert(std::map<NFGUID, int>::value_type(value, nRow));
     }
 
-    NFCDataList oldValue;
-    NFCDataList newValue;
+    NFCDataList::TData oldValue;
+    NFCDataList::TData newValue;
 
-    oldValue.Append(*pVar);
-    newValue.Add(value);
+    oldValue.SetObject(pVar->GetObject());
+    newValue.SetObject(value);
 
     pVar->variantData = value;
 
@@ -1044,7 +1045,7 @@ bool NFCRecord::Remove(const int nRow)
 			xEventData.nCol = 0;
 			xEventData.strRecordName = mstrRecordName;
 
-            OnEventHandler(mSelf, xEventData, NFCDataList(), NFCDataList());
+            OnEventHandler(mSelf, xEventData, NFCDataList::TData(), NFCDataList::TData());
 
 			if (mnKeyCol >= 0)
 			{
@@ -1151,7 +1152,7 @@ const NFIDataList& NFCRecord::GetInitData() const
     return mVarRecordType;
 }
 
-void NFCRecord::OnEventHandler(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar)
+void NFCRecord::OnEventHandler(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
     TRECORDCALLBACKEX::iterator itr = mtRecordCallback.begin();
     TRECORDCALLBACKEX::iterator end = mtRecordCallback.end();
@@ -1301,8 +1302,8 @@ bool NFCRecord::SwapRowInfo(const int nOriginRow, const int nTargetRow)
 		xEventData.nCol = nTargetRow;
 		xEventData.strRecordName = mstrRecordName;
 
-		NFCDataList xDataList;
-        OnEventHandler(mSelf, xEventData, xDataList, xDataList);
+		NFCDataList::TData xData;
+        OnEventHandler(mSelf, xEventData, xData, xData);
 
         return true;
     }
