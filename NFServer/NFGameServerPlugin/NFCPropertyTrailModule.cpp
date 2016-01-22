@@ -126,7 +126,7 @@ int NFCPropertyTrailModule::OnObjectPropertyEvent( const NFGUID& self, const std
 	return 0;
 }
 
-int NFCPropertyTrailModule::OnObjectRecordEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar )
+int NFCPropertyTrailModule::OnObjectRecordEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
 {
 	std::ostringstream stream;
 	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, xEventData.strRecordName);
@@ -171,8 +171,8 @@ int NFCPropertyTrailModule::OnObjectRecordEvent( const NFGUID& self, const RECOR
 	case NFIRecord::RecordOptype::UpData:
 		{
 			stream << " Trail UpData Row[" << xEventData.nRow << "] Col[" << xEventData.nCol << "]";
-			stream << " [Old] " << oldVar.StringValEx(0);
-			stream << " [New] " << newVar.StringValEx(0);
+			stream << " [Old] " << oldVar.StringValEx();
+			stream << " [New] " << newVar.StringValEx();
 			m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
 		}
 		break;

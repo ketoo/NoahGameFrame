@@ -135,7 +135,7 @@ int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFGUID& self, con
 }
 
 
-int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar )
+int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
 {
     const std::string& strRecordName = xEventData.strRecordName; 
     int nOpType = xEventData.nOpType;
@@ -173,7 +173,8 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const
             pAddRowData->set_row(nRow);
 
             //add row 需要完整的row
-            for ( int i = 0; i < newVar.GetCount(); i++ )
+            // FIXME:RECORD
+            /*for ( int i = 0; i < newVar.GetCount(); i++ )
             {
                 switch ( newVar.Type( i ) )
                 {
@@ -230,7 +231,7 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const
                 default:
                     break;
                 }
-            }
+            }*/
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_ADD_ROW, xAddRecordRow);
         }
@@ -289,7 +290,7 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const
             NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, strRecordName);
             if (pRecord && strRecordName == "GuildMemberList")
             {
-                if (nCol == NFrame::Guild::GuildMemberList_Online && newVar.Int( 0 ) > 0)
+                if (nCol == NFrame::Guild::GuildMemberList_Online && newVar.GetInt() > 0)
                 {
                     //add
                     const NFGUID& nPlayer = pRecord->GetObject(nRow, NFrame::Guild::GuildMemberList_GUID);
@@ -311,7 +312,7 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const
                 }
             }
 
-            switch ( oldVar.Type( 0 ) )
+            switch ( oldVar.GetType() )
             {
             case TDATA_INT:
                 {
@@ -322,7 +323,7 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const
                     NFMsg::RecordInt* recordProperty = xRecordChanged.add_property_list();
                     recordProperty->set_row( nRow );
                     recordProperty->set_col( nCol );
-                    int nData = newVar.Int( 0 );
+                    int nData = newVar.GetInt();
                     recordProperty->set_data( nData );
 
                     m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_RECORD_INT, xRecordChanged);
@@ -339,7 +340,7 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const
                     NFMsg::RecordFloat* recordProperty = xRecordChanged.add_property_list();
                     recordProperty->set_row( nRow );
                     recordProperty->set_col( nCol );
-                    recordProperty->set_data( newVar.Float( 0 ) );
+                    recordProperty->set_data( newVar.GetFloat() );
 
                     m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_RECORD_DOUBLE, xRecordChanged);
 
@@ -354,7 +355,7 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const
                     NFMsg::RecordString* recordProperty = xRecordChanged.add_property_list();
                     recordProperty->set_row( nRow );
                     recordProperty->set_col( nCol );
-                    recordProperty->set_data( newVar.String( 0 ) );
+                    recordProperty->set_data( newVar.GetString() );
 
                     m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_RECORD_STRING, xRecordChanged);
                 }
@@ -368,7 +369,7 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const
                     NFMsg::RecordObject* recordProperty = xRecordChanged.add_property_list();
                     recordProperty->set_row( nRow );
                     recordProperty->set_col( nCol );
-                    *recordProperty->mutable_data() = NFINetModule::NFToPB(newVar.Object( 0 ));
+                    *recordProperty->mutable_data() = NFINetModule::NFToPB(newVar.GetObject());
 
                     m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_RECORD_OBJECT, xRecordChanged);
                 }

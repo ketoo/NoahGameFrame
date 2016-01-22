@@ -80,7 +80,7 @@ int NFCLuaScriptModule::OnPropertyCommEvent(const NFGUID& self, const std::strin
     return 0;
 }
 
-int NFCLuaScriptModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar)
+int NFCLuaScriptModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
     DoRecordCommonEvent(self, xEventData, oldVar, newVar);
 
@@ -217,7 +217,7 @@ int NFCLuaScriptModule::DoScriptPropertyCallBack(const NFGUID& self, const std::
     return 1;
 }
 
-int NFCLuaScriptModule::DoScriptRecordCallBack(const NFGUID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCDataList& oldVar, const NFCDataList& newVar)
+int NFCLuaScriptModule::DoScriptRecordCallBack(const NFGUID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCDataList::TData& oldVar, const NFCDataList::TData& newVar)
 {
     if (!CheckCompomentStatus(strComponentName, strFunction))
     {
