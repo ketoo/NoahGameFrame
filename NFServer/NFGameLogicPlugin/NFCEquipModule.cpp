@@ -310,7 +310,7 @@ int NFCEquipModule::OnClassObjectEvent( const NFGUID& self, const std::string& s
 }
 
 
-int NFCEquipModule::OnObjectBagEquipRecordEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar )
+int NFCEquipModule::OnObjectBagEquipRecordEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
 {
     std::ostringstream stream;
     NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, xEventData.strRecordName);
@@ -323,7 +323,7 @@ int NFCEquipModule::OnObjectBagEquipRecordEvent( const NFGUID& self, const RECOR
     {
     case NFIRecord::RecordOptype::Add:
         {
-            if (NeedEquipProperty(self, newVar.Object(NFrame::Player::BagEquipList::BagEquipList_WearGUID)))
+            if (NeedEquipProperty(self, newVar.GetObject())) // FIXME:RECORD
             {
                 AddEquipProperty(self, xEventData.nRow);
             }
@@ -331,7 +331,7 @@ int NFCEquipModule::OnObjectBagEquipRecordEvent( const NFGUID& self, const RECOR
         break;
     case NFIRecord::RecordOptype::Del:
         {
-            if (NeedEquipProperty(self, oldVar.Object(NFrame::Player::BagEquipList::BagEquipList_WearGUID)))
+            if (NeedEquipProperty(self, oldVar.GetObject())) // FIXME:RECORD
             {
                 RemoveEquipProperty(self, xEventData.nRow);
             }
@@ -349,7 +349,7 @@ int NFCEquipModule::OnObjectBagEquipRecordEvent( const NFGUID& self, const RECOR
         {
             if (xEventData.nCol != NFrame::Player::BagEquipList::BagEquipList_WearGUID)
             {
-                if (!NeedEquipProperty(self, oldVar.Object(NFrame::Player::BagEquipList::BagEquipList_WearGUID)))
+                if (!NeedEquipProperty(self, oldVar.GetObject())) // FIXME:RECORD
                 {
                     break;
                 }
@@ -360,8 +360,8 @@ int NFCEquipModule::OnObjectBagEquipRecordEvent( const NFGUID& self, const RECOR
             case NFrame::Player::BagEquipList::BagEquipList_IntensifyLevel:
                 {
                     const std::string& strConfigID = xRecord->GetString( xEventData.nRow, NFrame::Player::BagEquipList::BagEquipList_ConfigID );
-                    const int nOldLevel = oldVar.Int(0);
-                    const int nNewLevel = newVar.Int(0);
+                    const int nOldLevel = oldVar.GetInt();
+                    const int nNewLevel = newVar.GetInt();
                     if (strConfigID.empty())
                     {
                         return 1;
@@ -385,8 +385,8 @@ int NFCEquipModule::OnObjectBagEquipRecordEvent( const NFGUID& self, const RECOR
             case NFrame::Player::BagEquipList::BagEquipList_InlayStone9:
             case NFrame::Player::BagEquipList::BagEquipList_InlayStone10:
                 {
-                    const std::string& strOldeStoneID= oldVar.String(0);
-                    const std::string& strNewStoneID= newVar.String(0);
+                    const std::string& strOldeStoneID= oldVar.GetString();
+                    const std::string& strNewStoneID= newVar.GetString();
 
                     RemoveEffectDataProperty(self, strOldeStoneID, 0);
                     AddEffectDataProperty(self, strNewStoneID, 0);
@@ -394,8 +394,8 @@ int NFCEquipModule::OnObjectBagEquipRecordEvent( const NFGUID& self, const RECOR
                 break;
             case NFrame::Player::BagEquipList::BagEquipList_WearGUID:
                 {
-                    const NFGUID& xOldeID= oldVar.Object(0);
-                    const NFGUID& xNewID= newVar.Object(0);
+                    const NFGUID& xOldeID= oldVar.GetObject();
+                    const NFGUID& xNewID= newVar.GetObject();
 
                     if (NeedEquipProperty(self, xOldeID))
                     {
