@@ -362,7 +362,7 @@ protected:
     bool ValidRow(int nRow) const;
     bool ValidCol(int nCol) const;
 
-    void OnEventHandler(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList& oldVar, const NFIDataList& newVar);
+    void OnEventHandler(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
 protected:
     //记录这个表的Key类型，那样在读取和设置的时候才能保持正确
