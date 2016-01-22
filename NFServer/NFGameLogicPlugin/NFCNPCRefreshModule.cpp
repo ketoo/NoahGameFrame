@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------
 
 #include "NFCNPCRefreshModule.h"
-#include "NFComm\NFCore\NFCCommonConfig.h"
+#include "NFComm/NFCore/NFCCommonConfig.h"
 
 bool NFCNPCRefreshModule::Init()
 {
@@ -33,7 +33,7 @@ bool NFCNPCRefreshModule::AfterInit()
 	m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
 	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>("NFCLevelModule");
-	
+
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pSceneProcessModule);
     assert(NULL != m_pElementInfoModule);
@@ -124,7 +124,7 @@ int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFGUID& self, const std::stri
 	float fSeedX = m_pKernelModule->GetPropertyFloat( self, NFrame::NPC::X());
 	float fSeedY = m_pKernelModule->GetPropertyFloat( self, NFrame::NPC::Y());
 	float fSeedZ = m_pKernelModule->GetPropertyFloat( self, NFrame::NPC::Z());
-    
+
     m_pKernelModule->DestroyObject( self );
 
     NFCDataList arg;

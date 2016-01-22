@@ -14,8 +14,6 @@
 
 bool NFCWorldGuildModule::Init()
 {
-
-
     return true;
 }
 
@@ -26,8 +24,6 @@ bool NFCWorldGuildModule::Shut()
 
 bool NFCWorldGuildModule::Execute()
 {
-
-
     return true;
 }
 
@@ -35,7 +31,7 @@ bool NFCWorldGuildModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-    m_pWorldGuildDataModule = dynamic_cast<NFIWorldGuildDataModule*>(pPluginManager->FindModule("NFCWorldGuildDataModule"));
+    m_pWorldGuildDataModule = pPluginManager->FindModule<NFIWorldGuildDataModule>("NFCWorldGuildDataModule");
 
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pUUIDModule);

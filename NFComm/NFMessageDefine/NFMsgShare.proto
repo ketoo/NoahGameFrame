@@ -158,6 +158,12 @@ message ItemStruct
     required int32 item_count          = 2; // 数量
 }
 
+message CurrencyStruct
+{
+    required int32 currency_type        = 1;// 金币，钻石，体力等等东西的类型
+    required int32 currency_count       = 2;// 数量
+}
+
 message ReqAckEndBattle
 {
 	//下发的时候则为道具列表
@@ -383,72 +389,72 @@ message ReqIntensifylevelToEquip
 //EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP			= 501;		 // 装备强化
 message AckIntensifylevelToEquip
 {	
-	required Ident		selfid				= 1;//角色ID
+	required Ident		selfid          = 1;//角色ID
 	required Ident		equipid			= 2;//装备ID
-	required int32		result				= 3;//0失败 1成功
+	required int32		result          = 3;//0失败 1成功
 }
 
 //EGEC_REQ_HOLE_TO_EQUIP					= 502;		 // 装备打洞
 message ReqHoleToEquip
 {	
-	required Ident		selfid				= 1;//角色ID
+	required Ident		selfid          = 1;//角色ID
 	required Ident		equipid			= 2;//装备ID
 }
 
 //EGEC_ACK_HOLE_TO_EQUIP					= 503;		 // 装备打洞
 message AckHoleToEquip
 {	
-	required Ident		selfid				= 1;//角色ID
+	required Ident		selfid          = 1;//角色ID
 	required Ident		equipid			= 2;//装备ID
-	required int32		result				= 3;//0失败 1成功
+	required int32		result          = 3;//0失败 1成功
 }
 
 //EGEC_REQ_INLAYSTONE_TO_EQUIP				= 504;		 // 装备镶嵌
 message ReqInlaystoneToEquip
 {	
-	required Ident		selfid				= 1;//角色ID
+	required Ident		selfid          = 1;//角色ID
 	required Ident		equipid			= 2;//装备ID
 	required bytes		stoneid			= 3;//石头ID
-	required int32		hole_index				= 4;//空位
+	required int32		hole_index      = 4;//空位
 }
 
 //EGEC_ACK_INLAYSTONE_TO_EQUIP				= 505;		 // 装备镶嵌
 message AckInlaystoneToEquip
 {	
 	required Ident		selfid				= 1;//角色ID
-	required Ident		equipid			= 2;//装备ID
+	required Ident		equipid			    = 2;//装备ID
 	required int32		result				= 3;//0失败 1成功
 }
 
-//EGEC_REQ_ELEMENTLEVEL_TO_EQUIP				= 506;		 // 装备附
+//EGEC_REQ_ELEMENTLEVEL_TO_EQUIP				= 506;		 // 装备附魔
 message ReqElementlevelToEquip
 {	
 	required Ident		selfid				= 1;//角色ID
-	required Ident		equipid			= 2;//装备ID
-	required EGameElementType		eElementType	= 3;//附魔元素
+	required Ident		equipid			    = 2;//装备ID
+	required EGameElementType eElementType	= 3;//附魔元素
 }
 
 //EGEC_ACK_ELEMENTLEVEL_TO_EQUIP				= 507;		 // 装备附魔
 message AckElementlevelToEquip
 {	
-	required Ident		selfid				= 1;//角色ID
+	required Ident		selfid          = 1;//角色ID
 	required Ident		equipid			= 2;//装备ID
-	required int32		result				= 3;//0失败 1成功
+	required int32		result          = 3;//0失败 1成功
 }
 
 //EGEC_REQ_SET_FIGHT_HERO						= 508;		 // 战斗武将
 message ReqSetFightHero
 {	
-	required Ident		selfid				= 1;//角色ID
+	required Ident		selfid          = 1;//角色ID
 	required Ident		Heroid			= 2;//
 }
 
 //EGEC_WEAR_EQUIP								= 509;		 // 装备创戴
 message ReqWearEquip
 {	
-	required Ident		selfid				= 1;//角色ID
+	required Ident		selfid          = 1;//角色ID
 	required Ident		equipid			= 2;//装备ID
-	required Ident		Targetid			= 3;//
+	required Ident		Targetid        = 3;//
 	
 }
 
@@ -456,7 +462,7 @@ message ReqWearEquip
 message TakeOffEquip
 {	
 	required Ident		selfid				= 1;//角色ID
-	required Ident		equipid			= 2;//装备ID
+	required Ident		equipid			    = 2;//装备ID
 	required Ident		Targetid			= 3;//
 }
 
@@ -472,7 +478,11 @@ message ReqMiningTitle
 }
 
 
-
-
-
-
+//EGEC_REQ_SEND_MAIL = 700; // 发送邮件
+message ReqSendMail
+{
+    required Ident      selfid              = 1; // 角色ID
+    required Ident      reciever            = 2; // 目标ID
+    repeated ItemStruct item_list           = 3; // 
+    repeated CurrencyStruct currency_list   = 4;
+}
