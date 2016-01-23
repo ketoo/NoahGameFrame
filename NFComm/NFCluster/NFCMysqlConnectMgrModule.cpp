@@ -150,9 +150,15 @@ bool NFCMysqlConnectMgrModule::AddMysqlServer( const int nServerID, const std::s
 
 
     pMysqlDriver = NF_NEW NFCMysqlDriver(nRconnectTime, nRconneCount);
-    pMysqlDriver->Connect(strDBName, strDnsIp, nPort, strDBUser, strDBPwd);
+    if(pMysqlDriver->Connect(strDBName, strDnsIp, nPort, strDBUser, strDBPwd))
+	{
+		mvMysql.AddElement(nServerID, pMysqlDriver);
+	}
+	else
+	{
+		mvInvalidMsyql.AddElement(nServerID, pMysqlDriver);
+	}
 
-    mvMysql.AddElement(nServerID, pMysqlDriver);
 
     return true;
 }
