@@ -18,6 +18,7 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFILevelModule.h"
+#include "NFComm/NFPluginModule/NFICommonConfigModule.h"
 
 class NFCNPCRefreshModule
     : public NFINPCRefreshModule
@@ -52,6 +53,7 @@ private:
     NFIPackModule* m_pPackModule;
 	NFILogModule* m_pLogModule;
 	NFILevelModule* m_pLevelModule;
+	NFICommonConfigModule* m_pCommonConfigModule;
 
 };
 

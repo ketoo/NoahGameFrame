@@ -235,7 +235,8 @@ protected:
         NFMYSQLTRYBEGIN
             m_pMysqlConnect->set_option(new mysqlpp::MultiStatementsOption(true));
             m_pMysqlConnect->set_option(new mysqlpp::SetCharsetNameOption("utf8mb4"));
-            m_pMysqlConnect->set_option(new mysqlpp::ReconnectOption(true));
+			m_pMysqlConnect->set_option(new mysqlpp::ReconnectOption(true));
+			m_pMysqlConnect->set_option(new mysqlpp::ConnectTimeoutOption(60));
             if (!m_pMysqlConnect->connect(mstrDBName.c_str(), mstrDBHost.c_str(), mstrDBUser.c_str(), mstrDBPwd.c_str(), mnDBPort))
             {
                 CloseConnection();
