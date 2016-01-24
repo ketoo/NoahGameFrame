@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 #include "NFCLevelModule.h"
-#include "NFComm/NFCore/NFCCommonConfig.h"
 
 bool NFCLevelModule::Init()
 {
@@ -38,10 +37,7 @@ bool NFCLevelModule::AfterInit()
 	assert( NULL != m_pPropertyConfigModule );
 	assert( NULL != m_pElementInfoModule );
 
-    std::string strPlayerPath = pPluginManager->GetConfigPath();
-    strPlayerPath += "NFDataCfg/Ini/Common/PlayerLevelConfig.xml";
 
-    NFCCommonConfig::GetSingletonPtr()->LoadConfig(strPlayerPath);
 
     return true;
 }
