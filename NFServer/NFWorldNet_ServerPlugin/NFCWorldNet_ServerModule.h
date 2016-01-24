@@ -54,6 +54,7 @@ public:
     virtual int OnObjectListLeave( const NFIDataList& self, const NFIDataList& argVar );
     virtual int OnPropertyEnter( const NFIDataList& argVar, const NFIDataList& argGameID, const NFGUID& self );
     virtual int OnRecordEnter( const NFIDataList& argVar,const NFIDataList& argGameID, const NFGUID& self );
+	virtual bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase* pObjectRecordBase);
 
 	virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter();
 
@@ -66,8 +67,6 @@ protected:
 	void OnClientDisconnect(const int nAddress);
 	//спа╛╫с
 	void OnClientConnected(const int nAddress);
-
-    bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase* pObjectRecordBase);
 
 
 
