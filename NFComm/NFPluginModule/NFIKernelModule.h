@@ -187,6 +187,8 @@ public:
 
     virtual bool ReleaseGroupScene(const int nContainerID, const int nGroupID) = 0;
 
+	virtual bool ExitGroupScene(const int nContainerID, const int nGroupID) = 0;
+
     virtual bool GetGroupObjectList(const int nContainerID, const int nGroupID, NFIDataList& list) = 0;
 
     virtual const NFGUID& GetGridID(const float fX, const float fY, const float fZ) = 0;
