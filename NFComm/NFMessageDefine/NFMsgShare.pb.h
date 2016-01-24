@@ -68,6 +68,10 @@ class ReqAckLeaveGuild;
 class ReqAckOprGuildMember;
 class ReqAckOprGuild;
 class ReqAckDonateGuildItem;
+class ReqGuildEctypeInfo;
+class GuildEctypeInfo;
+class AckGuildEctypeInfo;
+class SetGuildEctypeInfo;
 class ChatInfo;
 class ReqAckCreateChatGroup;
 class ReqAckjoinChatGroup;
@@ -3944,6 +3948,408 @@ class ReqAckDonateGuildItem : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ReqAckDonateGuildItem* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqGuildEctypeInfo : public ::google::protobuf::Message {
+ public:
+  ReqGuildEctypeInfo();
+  virtual ~ReqGuildEctypeInfo();
+
+  ReqGuildEctypeInfo(const ReqGuildEctypeInfo& from);
+
+  inline ReqGuildEctypeInfo& operator=(const ReqGuildEctypeInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqGuildEctypeInfo& default_instance();
+
+  void Swap(ReqGuildEctypeInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqGuildEctypeInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqGuildEctypeInfo& from);
+  void MergeFrom(const ReqGuildEctypeInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident guild_id = 2;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIdFieldNumber = 2;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqGuildEctypeInfo)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* guild_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqGuildEctypeInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GuildEctypeInfo : public ::google::protobuf::Message {
+ public:
+  GuildEctypeInfo();
+  virtual ~GuildEctypeInfo();
+
+  GuildEctypeInfo(const GuildEctypeInfo& from);
+
+  inline GuildEctypeInfo& operator=(const GuildEctypeInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GuildEctypeInfo& default_instance();
+
+  void Swap(GuildEctypeInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  GuildEctypeInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GuildEctypeInfo& from);
+  void MergeFrom(const GuildEctypeInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident guild_id = 1;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // required int64 server_id = 2;
+  inline bool has_server_id() const;
+  inline void clear_server_id();
+  static const int kServerIdFieldNumber = 2;
+  inline ::google::protobuf::int64 server_id() const;
+  inline void set_server_id(::google::protobuf::int64 value);
+
+  // required int64 Ectype_id = 3;
+  inline bool has_ectype_id() const;
+  inline void clear_ectype_id();
+  static const int kEctypeIdFieldNumber = 3;
+  inline ::google::protobuf::int64 ectype_id() const;
+  inline void set_ectype_id(::google::protobuf::int64 value);
+
+  // required int64 Ectype_Group = 4;
+  inline bool has_ectype_group() const;
+  inline void clear_ectype_group();
+  static const int kEctypeGroupFieldNumber = 4;
+  inline ::google::protobuf::int64 ectype_group() const;
+  inline void set_ectype_group(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.GuildEctypeInfo)
+ private:
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
+  inline void set_has_server_id();
+  inline void clear_has_server_id();
+  inline void set_has_ectype_id();
+  inline void clear_has_ectype_id();
+  inline void set_has_ectype_group();
+  inline void clear_has_ectype_group();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_id_;
+  ::google::protobuf::int64 server_id_;
+  ::google::protobuf::int64 ectype_id_;
+  ::google::protobuf::int64 ectype_group_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static GuildEctypeInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AckGuildEctypeInfo : public ::google::protobuf::Message {
+ public:
+  AckGuildEctypeInfo();
+  virtual ~AckGuildEctypeInfo();
+
+  AckGuildEctypeInfo(const AckGuildEctypeInfo& from);
+
+  inline AckGuildEctypeInfo& operator=(const AckGuildEctypeInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckGuildEctypeInfo& default_instance();
+
+  void Swap(AckGuildEctypeInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  AckGuildEctypeInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckGuildEctypeInfo& from);
+  void MergeFrom(const AckGuildEctypeInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.GuildEctypeInfo xectypeinfo = 2;
+  inline bool has_xectypeinfo() const;
+  inline void clear_xectypeinfo();
+  static const int kXectypeinfoFieldNumber = 2;
+  inline const ::NFMsg::GuildEctypeInfo& xectypeinfo() const;
+  inline ::NFMsg::GuildEctypeInfo* mutable_xectypeinfo();
+  inline ::NFMsg::GuildEctypeInfo* release_xectypeinfo();
+  inline void set_allocated_xectypeinfo(::NFMsg::GuildEctypeInfo* xectypeinfo);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckGuildEctypeInfo)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_xectypeinfo();
+  inline void clear_has_xectypeinfo();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::GuildEctypeInfo* xectypeinfo_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckGuildEctypeInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class SetGuildEctypeInfo : public ::google::protobuf::Message {
+ public:
+  SetGuildEctypeInfo();
+  virtual ~SetGuildEctypeInfo();
+
+  SetGuildEctypeInfo(const SetGuildEctypeInfo& from);
+
+  inline SetGuildEctypeInfo& operator=(const SetGuildEctypeInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SetGuildEctypeInfo& default_instance();
+
+  void Swap(SetGuildEctypeInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  SetGuildEctypeInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SetGuildEctypeInfo& from);
+  void MergeFrom(const SetGuildEctypeInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.GuildEctypeInfo xectypeinfo = 2;
+  inline bool has_xectypeinfo() const;
+  inline void clear_xectypeinfo();
+  static const int kXectypeinfoFieldNumber = 2;
+  inline const ::NFMsg::GuildEctypeInfo& xectypeinfo() const;
+  inline ::NFMsg::GuildEctypeInfo* mutable_xectypeinfo();
+  inline ::NFMsg::GuildEctypeInfo* release_xectypeinfo();
+  inline void set_allocated_xectypeinfo(::NFMsg::GuildEctypeInfo* xectypeinfo);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.SetGuildEctypeInfo)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_xectypeinfo();
+  inline void clear_has_xectypeinfo();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::GuildEctypeInfo* xectypeinfo_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static SetGuildEctypeInfo* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -9655,6 +10061,354 @@ ReqAckDonateGuildItem::item_list() const {
 inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >*
 ReqAckDonateGuildItem::mutable_item_list() {
   return &item_list_;
+}
+
+// -------------------------------------------------------------------
+
+// ReqGuildEctypeInfo
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqGuildEctypeInfo::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqGuildEctypeInfo::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqGuildEctypeInfo::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqGuildEctypeInfo::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqGuildEctypeInfo::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqGuildEctypeInfo::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqGuildEctypeInfo::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqGuildEctypeInfo::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident guild_id = 2;
+inline bool ReqGuildEctypeInfo::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqGuildEctypeInfo::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqGuildEctypeInfo::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqGuildEctypeInfo::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& ReqGuildEctypeInfo::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* ReqGuildEctypeInfo::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* ReqGuildEctypeInfo::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void ReqGuildEctypeInfo::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// GuildEctypeInfo
+
+// required .NFMsg.Ident guild_id = 1;
+inline bool GuildEctypeInfo::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GuildEctypeInfo::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GuildEctypeInfo::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GuildEctypeInfo::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& GuildEctypeInfo::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* GuildEctypeInfo::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* GuildEctypeInfo::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void GuildEctypeInfo::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// required int64 server_id = 2;
+inline bool GuildEctypeInfo::has_server_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void GuildEctypeInfo::set_has_server_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void GuildEctypeInfo::clear_has_server_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void GuildEctypeInfo::clear_server_id() {
+  server_id_ = GOOGLE_LONGLONG(0);
+  clear_has_server_id();
+}
+inline ::google::protobuf::int64 GuildEctypeInfo::server_id() const {
+  return server_id_;
+}
+inline void GuildEctypeInfo::set_server_id(::google::protobuf::int64 value) {
+  set_has_server_id();
+  server_id_ = value;
+}
+
+// required int64 Ectype_id = 3;
+inline bool GuildEctypeInfo::has_ectype_id() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void GuildEctypeInfo::set_has_ectype_id() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void GuildEctypeInfo::clear_has_ectype_id() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void GuildEctypeInfo::clear_ectype_id() {
+  ectype_id_ = GOOGLE_LONGLONG(0);
+  clear_has_ectype_id();
+}
+inline ::google::protobuf::int64 GuildEctypeInfo::ectype_id() const {
+  return ectype_id_;
+}
+inline void GuildEctypeInfo::set_ectype_id(::google::protobuf::int64 value) {
+  set_has_ectype_id();
+  ectype_id_ = value;
+}
+
+// required int64 Ectype_Group = 4;
+inline bool GuildEctypeInfo::has_ectype_group() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void GuildEctypeInfo::set_has_ectype_group() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void GuildEctypeInfo::clear_has_ectype_group() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void GuildEctypeInfo::clear_ectype_group() {
+  ectype_group_ = GOOGLE_LONGLONG(0);
+  clear_has_ectype_group();
+}
+inline ::google::protobuf::int64 GuildEctypeInfo::ectype_group() const {
+  return ectype_group_;
+}
+inline void GuildEctypeInfo::set_ectype_group(::google::protobuf::int64 value) {
+  set_has_ectype_group();
+  ectype_group_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// AckGuildEctypeInfo
+
+// required .NFMsg.Ident selfid = 1;
+inline bool AckGuildEctypeInfo::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AckGuildEctypeInfo::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AckGuildEctypeInfo::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AckGuildEctypeInfo::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& AckGuildEctypeInfo::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* AckGuildEctypeInfo::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* AckGuildEctypeInfo::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void AckGuildEctypeInfo::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.GuildEctypeInfo xectypeinfo = 2;
+inline bool AckGuildEctypeInfo::has_xectypeinfo() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckGuildEctypeInfo::set_has_xectypeinfo() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckGuildEctypeInfo::clear_has_xectypeinfo() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckGuildEctypeInfo::clear_xectypeinfo() {
+  if (xectypeinfo_ != NULL) xectypeinfo_->::NFMsg::GuildEctypeInfo::Clear();
+  clear_has_xectypeinfo();
+}
+inline const ::NFMsg::GuildEctypeInfo& AckGuildEctypeInfo::xectypeinfo() const {
+  return xectypeinfo_ != NULL ? *xectypeinfo_ : *default_instance_->xectypeinfo_;
+}
+inline ::NFMsg::GuildEctypeInfo* AckGuildEctypeInfo::mutable_xectypeinfo() {
+  set_has_xectypeinfo();
+  if (xectypeinfo_ == NULL) xectypeinfo_ = new ::NFMsg::GuildEctypeInfo;
+  return xectypeinfo_;
+}
+inline ::NFMsg::GuildEctypeInfo* AckGuildEctypeInfo::release_xectypeinfo() {
+  clear_has_xectypeinfo();
+  ::NFMsg::GuildEctypeInfo* temp = xectypeinfo_;
+  xectypeinfo_ = NULL;
+  return temp;
+}
+inline void AckGuildEctypeInfo::set_allocated_xectypeinfo(::NFMsg::GuildEctypeInfo* xectypeinfo) {
+  delete xectypeinfo_;
+  xectypeinfo_ = xectypeinfo;
+  if (xectypeinfo) {
+    set_has_xectypeinfo();
+  } else {
+    clear_has_xectypeinfo();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// SetGuildEctypeInfo
+
+// required .NFMsg.Ident selfid = 1;
+inline bool SetGuildEctypeInfo::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SetGuildEctypeInfo::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SetGuildEctypeInfo::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SetGuildEctypeInfo::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& SetGuildEctypeInfo::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* SetGuildEctypeInfo::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* SetGuildEctypeInfo::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void SetGuildEctypeInfo::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.GuildEctypeInfo xectypeinfo = 2;
+inline bool SetGuildEctypeInfo::has_xectypeinfo() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SetGuildEctypeInfo::set_has_xectypeinfo() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SetGuildEctypeInfo::clear_has_xectypeinfo() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SetGuildEctypeInfo::clear_xectypeinfo() {
+  if (xectypeinfo_ != NULL) xectypeinfo_->::NFMsg::GuildEctypeInfo::Clear();
+  clear_has_xectypeinfo();
+}
+inline const ::NFMsg::GuildEctypeInfo& SetGuildEctypeInfo::xectypeinfo() const {
+  return xectypeinfo_ != NULL ? *xectypeinfo_ : *default_instance_->xectypeinfo_;
+}
+inline ::NFMsg::GuildEctypeInfo* SetGuildEctypeInfo::mutable_xectypeinfo() {
+  set_has_xectypeinfo();
+  if (xectypeinfo_ == NULL) xectypeinfo_ = new ::NFMsg::GuildEctypeInfo;
+  return xectypeinfo_;
+}
+inline ::NFMsg::GuildEctypeInfo* SetGuildEctypeInfo::release_xectypeinfo() {
+  clear_has_xectypeinfo();
+  ::NFMsg::GuildEctypeInfo* temp = xectypeinfo_;
+  xectypeinfo_ = NULL;
+  return temp;
+}
+inline void SetGuildEctypeInfo::set_allocated_xectypeinfo(::NFMsg::GuildEctypeInfo* xectypeinfo) {
+  delete xectypeinfo_;
+  xectypeinfo_ = xectypeinfo;
+  if (xectypeinfo) {
+    set_has_xectypeinfo();
+  } else {
+    clear_has_xectypeinfo();
+  }
 }
 
 // -------------------------------------------------------------------
