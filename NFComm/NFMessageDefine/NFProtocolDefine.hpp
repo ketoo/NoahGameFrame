@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/21
+//    @Date             :    2016/01/24
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -234,6 +234,18 @@ public:
 	static const std::string& EnchantmentBuffList(){ static std::string xEnchantmentBuffList = "EnchantmentBuffList"; return xEnchantmentBuffList; } // string
 	static const std::string& SuitID(){ static std::string xSuitID = "SuitID"; return xSuitID; } // int
 	static const std::string& SuitBuffID(){ static std::string xSuitBuffID = "SuitBuffID"; return xSuitBuffID; } // string
+	static const std::string& ItemType(){ static std::string xItemType = "ItemType"; return xItemType; } // int
+	static const std::string& ItemSubType(){ static std::string xItemSubType = "ItemSubType"; return xItemSubType; } // int
+	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel; } // int
+	static const std::string& Job(){ static std::string xJob = "Job"; return xJob; } // string
+	static const std::string& Quality(){ static std::string xQuality = "Quality"; return xQuality; } // int
+	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
+	static const std::string& Desc(){ static std::string xDesc = "Desc"; return xDesc; } // string
+	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
+	static const std::string& PrefabPath(){ static std::string xPrefabPath = "PrefabPath"; return xPrefabPath; } // string
+	static const std::string& DropPrePath(){ static std::string xDropPrePath = "DropPrePath"; return xDropPrePath; } // string
+	static const std::string& BuyPrice(){ static std::string xBuyPrice = "BuyPrice"; return xBuyPrice; } // int
+	static const std::string& SalePrice(){ static std::string xSalePrice = "SalePrice"; return xSalePrice; } // int
 	// Record
 
 };
@@ -272,6 +284,9 @@ public:
 	static const std::string& RecruitAD(){ static std::string xRecruitAD = "RecruitAD"; return xRecruitAD; } // string
 	static const std::string& RecruitLevel(){ static std::string xRecruitLevel = "RecruitLevel"; return xRecruitLevel; } // int
 	static const std::string& AutoRecruit(){ static std::string xAutoRecruit = "AutoRecruit"; return xAutoRecruit; } // string
+	static const std::string& EctypServer(){ static std::string xEctypServer = "EctypServer"; return xEctypServer; } // int
+	static const std::string& EctypID(){ static std::string xEctypID = "EctypID"; return xEctypID; } // int
+	static const std::string& EctypIDGroup(){ static std::string xEctypIDGroup = "EctypIDGroup"; return xEctypIDGroup; } // int
 	// Record
 	static const std::string& R_GuildBoss(){ static std::string xGuildBoss = "GuildBoss"; return xGuildBoss;}
 	static const std::string& R_GuildMemberList(){ static std::string xGuildMemberList = "GuildMemberList"; return xGuildMemberList;}
@@ -1087,4 +1102,4 @@ public:
 
 } // !@NFrame
 
-#endif // !NF_PR_NAME_HPP
+#endif NF_PR_NAME_HPP // !NF_PR_NAME_HPP
