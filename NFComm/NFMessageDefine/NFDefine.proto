@@ -190,6 +190,11 @@ enum EGameMsgID
 	EGMI_REQ_OPR_GUILDINFO						= 310; // 申请公会操作 
 	EGMI_ACK_OPR_GUILDINFO						= 311; // 公会操作结果
 	
+	EGMI_REQ_GUILDECTYPEINFO					= 312; // 申请公会副本
+	EGMI_ACK_GUILDECTYPEINFO					= 313; // 工会副本的信息
+	
+	EGMI_SET_GUILDECTYPEINFO					= 314; // 设置工会副本的信息
+	
 	EGEC_REQ_CREATE_CHATGROUP					= 400;		 // 创建聊天ReqAckCreateChatGroup
 	EGEC_ACK_CREATE_CHATGROUP					= 401;		 // 创建聊天ReqAckCreateChatGroup
 	EGEC_REQ_JOIN_CHATGROUP						= 402;		 // 加入聊天ReqAckjoinChatGroup
@@ -228,6 +233,30 @@ enum EGameMsgID
     EGEC_REQ_SEND_MAIL                          = 700; // 发送邮件
     EGEC_REQ_DRAW_MAIL                          = 701; // 领取邮件中的奖励(包含道具或者钻石等非道具的东西)
     EGEC_REQ_DELETE_MAIL                        = 702; // 删除邮件
+	
+	//对象clone
+	EGMI_ACK_CLONE_OBJECT_ENTRY						= 800;			// 有对象进入
+	EGMI_ACK_CLONE_OBJECT_LEAVE						= 801;			// 有对象出去
+	        
+	EGMI_ACK_CLONE_OBJECT_PROPERTY_ENTRY			= 802;			// 有对象属性进入
+	EGMI_ACK_CLONE_OBJECT_RECORD_ENTRY				= 803;			// 有对象表进入
+	       
+	EGMI_ACK_CLONE_PROPERTY_INT						= 810;			// 属性变更
+	EGMI_ACK_CLONE_PROPERTY_FLOAT					= 811;			// 属性变更
+	EGMI_ACK_CLONE_PROPERTY_STRING					= 812;			// 属性变更
+	EGMI_ACK_CLONE_PROPERTY_DOUBLE					= 813;			// 属性变更
+	EGMI_ACK_CLONE_PROPERTY_OBJECT					= 814;			// 属性变更
+            
+	EGMI_ACK_CLONE_ADD_ROW							= 820;
+	EGMI_ACK_CLONE_REMOVE_ROW						= 821;
+	EGMI_ACK_CLONE_SWAP_ROW							= 822;
+	EGMI_ACK_CLONE_RECORD_INT						= 823;
+	EGMI_ACK_CLONE_RECORD_FLOAT						= 824;
+	EGMI_ACK_CLONE_RECORD_DOUBLE					= 825;
+	EGMI_ACK_CLONE_RECORD_STRING					= 826;
+	EGMI_ACK_CLONE_RECORD_OBJECT					= 827;
+	EGMI_ACK_CLONE_RECORD_CLEAR						= 828;
+	EGMI_ACK_CLONE_RECORD_SORT						= 829;
     
 	/////////////////////GM MSG/////////////////////////////////////订阅
 	EGMI_REQ_CMD_PROPERTY_INT					= 1000;			// GM命令修改整形

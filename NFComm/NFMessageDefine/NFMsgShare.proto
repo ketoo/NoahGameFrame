@@ -319,6 +319,35 @@ message ReqAckDonateGuildItem
     required Ident		target_id = 2;
     repeated ItemStruct item_list = 3;
 }
+
+//EGMI_REQ_GUILDECTYPEINFO					= 312; // 申请公会副本
+message ReqGuildEctypeInfo
+{	
+	required Ident		selfid				= 1;//角色ID
+	required Ident		guild_id			= 2;//工会副本	
+}
+
+message GuildEctypeInfo
+{	
+	required Ident		guild_id				= 1;//角色ID
+	required int64		server_id				= 2;//所在服务ID
+	required int64		Ectype_id				= 3;//副本ID
+	required int64		Ectype_Group			= 4;//副本层	
+}
+
+//EGMI_ACK_GUILDECTYPEINFO					= 313; // 工会副本的信息
+message AckGuildEctypeInfo
+{	
+	required Ident		selfid				= 1;//角色ID
+	required GuildEctypeInfo		xectypeinfo		= 2;//工会副本的信息
+}
+
+//EGMI_SET_GUILDECTYPEINFO					= 314; // 设置工会副本的信息
+message SetGuildEctypeInfo
+{	
+	required Ident		selfid				= 1;//角色ID
+	required GuildEctypeInfo		xectypeinfo		= 2;//工会副本的信息
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 message ChatInfo

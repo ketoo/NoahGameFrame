@@ -975,6 +975,21 @@ bool NFCKernelModule::ReleaseGroupScene(const int nContainerID, const int nGroup
 	return false;
 }
 
+bool NFCKernelModule::ExitGroupScene(const int nContainerID, const int nGroupID)
+{
+	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nContainerID);
+	if (pSceneInfo.get())
+	{
+		NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(nGroupID);
+		if (pGroupInfo)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 bool NFCKernelModule::GetGroupObjectList(const int nContainerID, const int nGroupID, NFIDataList& list)
 {
     NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nContainerID);

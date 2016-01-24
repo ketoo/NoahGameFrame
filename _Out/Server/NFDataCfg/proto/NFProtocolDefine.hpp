@@ -284,6 +284,9 @@ public:
 	static const std::string& RecruitAD(){ static std::string xRecruitAD = "RecruitAD"; return xRecruitAD; } // string
 	static const std::string& RecruitLevel(){ static std::string xRecruitLevel = "RecruitLevel"; return xRecruitLevel; } // int
 	static const std::string& AutoRecruit(){ static std::string xAutoRecruit = "AutoRecruit"; return xAutoRecruit; } // string
+	static const std::string& EctypServer(){ static std::string xEctypServer = "EctypServer"; return xEctypServer; } // int
+	static const std::string& EctypID(){ static std::string xEctypID = "EctypID"; return xEctypID; } // int
+	static const std::string& EctypIDGroup(){ static std::string xEctypIDGroup = "EctypIDGroup"; return xEctypIDGroup; } // int
 	// Record
 	static const std::string& R_GuildBoss(){ static std::string xGuildBoss = "GuildBoss"; return xGuildBoss;}
 	static const std::string& R_GuildMemberList(){ static std::string xGuildMemberList = "GuildMemberList"; return xGuildMemberList;}
