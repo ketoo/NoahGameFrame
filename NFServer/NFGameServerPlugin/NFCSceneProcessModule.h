@@ -46,6 +46,8 @@ public:
 
     virtual E_SCENE_TYPE GetCloneSceneType(const int nContainerID);
     virtual bool IsCloneScene(const int nSceneID);
+	virtual bool ApplyCloneGroup(const int nSceneID, int& nGroupID);
+	virtual bool ExitCloneGroup(const int nSceneID, const int& nGroupID);
 
 protected:
 	int CreateCloneScene( const int& nSceneID);

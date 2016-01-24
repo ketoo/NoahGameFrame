@@ -99,6 +99,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
   <ItemGroup>
     <ClInclude Include="NFCWorldGuildBroadcastModule.h" />
     <ClInclude Include="NFCWorldGuildDataModule.h" />
+    <ClInclude Include="NFCWorldGuildEctypeModule.h" />
     <ClInclude Include="NFCWorldGuildModule.h" />
     <ClInclude Include="NFWorldGuildPlugin.h" />
   </ItemGroup>
@@ -113,6 +114,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </ClCompile>
     <ClCompile Include="NFCWorldGuildBroadcastModule.cpp" />
     <ClCompile Include="NFCWorldGuildDataModule.cpp" />
+    <ClCompile Include="NFCWorldGuildEctypeModule.cpp" />
     <ClCompile Include="NFCWorldGuildModule.cpp" />
     <ClCompile Include="NFWorldGuildPlugin.cpp" />
   </ItemGroup>

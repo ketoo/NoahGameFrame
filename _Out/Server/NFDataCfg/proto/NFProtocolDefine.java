@@ -259,6 +259,9 @@ public class Guild {
 	public static final String RecruitAD = "RecruitAD"; // string
 	public static final String RecruitLevel = "RecruitLevel"; // int
 	public static final String AutoRecruit = "AutoRecruit"; // string
+	public static final String EctypServer = "EctypServer"; // int
+	public static final String EctypID = "EctypID"; // int
+	public static final String EctypIDGroup = "EctypIDGroup"; // int
 	// Record
 	public static final String GuildBoss = "GuildBoss";
 	public static final String GuildMemberList = "GuildMemberList";
