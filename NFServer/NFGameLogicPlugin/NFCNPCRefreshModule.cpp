@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 #include "NFCNPCRefreshModule.h"
-#include "NFComm/NFCore/NFCCommonConfig.h"
 
 bool NFCNPCRefreshModule::Init()
 {
@@ -33,6 +32,7 @@ bool NFCNPCRefreshModule::AfterInit()
 	m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
 	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>("NFCLevelModule");
+	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>("NFCCommonConfigModule");
 
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pSceneProcessModule);
@@ -40,9 +40,15 @@ bool NFCNPCRefreshModule::AfterInit()
 	assert(NULL != m_pPackModule);
 	assert(NULL != m_pLogModule);
 	assert(NULL != m_pLevelModule);
+	assert(NULL != m_pCommonConfigModule);
 
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCNPCRefreshModule::OnObjectClassEvent);
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCNPCRefreshModule::OnObjectClassEvent);
+
+	std::string strPlayerPath = pPluginManager->GetConfigPath();
+	strPlayerPath += "NFDataCfg/Ini/Common/PlayerLevelConfig.xml";
+
+	m_pCommonConfigModule->LoadConfig(strPlayerPath);
 
     return true;
 }
@@ -87,7 +93,7 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
         }
     }
 
-	if ( strClassName == NFrame::Player::ThisName() && CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent )
+	if ( strClassName == NFrame::Player::ThisName() && CLASS_OBJECT_EVENT::COE_CREATE_BEFORE_EFFECT == eClassEvent )
 	{
 		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFCNPCRefreshModule::OnObjectLevelEvent);
 	}
@@ -172,19 +178,19 @@ int NFCNPCRefreshModule::OnObjectLevelEvent( const NFGUID& self, const std::stri
 
 bool NFCNPCRefreshModule::AddLevelUpAward( const NFGUID& self, const int nLevel )
 {
-	const std::string& strAwardID = NFCCommonConfig::GetSingletonPtr()->GetAttributeString("PlayerLevel", boost::lexical_cast<std::string>(nLevel), "AwardPack");
+	const std::string& strAwardID = m_pCommonConfigModule->GetAttributeString("PlayerLevel", boost::lexical_cast<std::string>(nLevel), "AwardPack");
 	if (strAwardID.empty())
 	{
 		return true;
 	}
 
 	std::vector<std::string> xList;
-	NFCCommonConfig::GetSingletonPtr()->GetStructItemList(strAwardID, xList);
+	m_pCommonConfigModule->GetStructItemList(strAwardID, xList);
 
 	for (int i = 0; i < xList.size(); ++i)
 	{
 		const std::string& strItemID = xList[i];
-		const int nCout = NFCCommonConfig::GetSingletonPtr()->GetAttributeInt("strAwardID", strItemID, "Count");
+		const int nCout = m_pCommonConfigModule->GetAttributeInt("strAwardID", strItemID, "Count");
 		if (m_pElementInfoModule->ExistElement(strItemID))
 		{
 			const int nItemType = m_pElementInfoModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());

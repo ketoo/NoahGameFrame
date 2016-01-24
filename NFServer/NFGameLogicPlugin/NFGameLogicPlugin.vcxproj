@@ -109,6 +109,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClInclude Include="NFCBuffModule.h" />
     <ClInclude Include="NFCBulletSkillConsumeProcessModule.h" />
     <ClInclude Include="NFCCardItemConsumeProcessModule.h" />
+    <ClInclude Include="NFCCommonConfigModule.h" />
     <ClInclude Include="NFCEquipModule.h" />
     <ClInclude Include="NFCGameLogicModule.h" />
     <ClInclude Include="NFCHeroModule.h" />
@@ -140,6 +141,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClCompile Include="NFCBuffModule.cpp" />
     <ClCompile Include="NFCBulletSkillConsumeProcessModule.cpp" />
     <ClCompile Include="NFCCardItemConsumeProcessModule.cpp" />
+    <ClCompile Include="NFCCommonConfigModule.cpp" />
     <ClCompile Include="NFCEquipModule.cpp" />
     <ClCompile Include="NFCGameLogicModule.cpp" />
     <ClCompile Include="NFCHeroModule.cpp" />
