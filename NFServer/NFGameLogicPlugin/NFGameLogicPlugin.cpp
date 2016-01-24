@@ -27,6 +27,7 @@
 #include "NFCPVPModule.h"
 #include "NFCMailModule.h"
 #include "NFCRankModule.h"
+#include "NFCCommonConfigModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -82,12 +83,14 @@ void NFGameLogicPlugin::Install()
 	REGISTER_MODULE(pPluginManager, NFCSLGBuildingModule)
 	REGISTER_MODULE(pPluginManager, NFCPVPModule)
 	REGISTER_MODULE(pPluginManager, NFCMailModule);
-    REGISTER_MODULE(pPluginManager, NFCRankModule);
+	REGISTER_MODULE(pPluginManager, NFCRankModule);
+	REGISTER_MODULE(pPluginManager, NFCCommonConfigModule);
 }
 
 void NFGameLogicPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCRankModule);
+	UNREGISTER_MODULE(pPluginManager, NFCCommonConfigModule);
+	UNREGISTER_MODULE(pPluginManager, NFCRankModule);
     UNREGISTER_MODULE(pPluginManager, NFCMailModule);
     
 	UNREGISTER_MODULE(pPluginManager, NFCPVPModule)
