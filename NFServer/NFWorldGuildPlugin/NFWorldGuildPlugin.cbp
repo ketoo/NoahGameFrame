@@ -91,6 +91,8 @@
 		<Unit filename="NFCWorldGuildDataModule.h" />
 		<Unit filename="NFCWorldGuildModule.cpp" />
 		<Unit filename="NFCWorldGuildModule.h" />
+		<Unit filename="NFCWorldGuildEctypeModule.cpp" />
+		<Unit filename="NFCWorldGuildEctypeModule.h" />
 		<Unit filename="NFWorldGuildPlugin.cpp" />
 		<Unit filename="NFWorldGuildPlugin.h" />
 		<Unit filename="dllmain.cpp" />
