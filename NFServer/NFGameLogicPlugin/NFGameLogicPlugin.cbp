@@ -119,6 +119,8 @@
 		<Unit filename="NFCSkillModule.h" />
 		<Unit filename="NFCCommonConfigModule.cpp" />
 		<Unit filename="NFCCommonConfigModule.h" />
+		<Unit filename="NFCGuildEctypeModule.cpp" />
+		<Unit filename="NFCGuildEctypeModule.h" />
 		<Unit filename="NFGameLogicPlugin.cpp" />
 		<Unit filename="NFGameLogicPlugin.h" />
 		<Unit filename="dllmain.cpp" />

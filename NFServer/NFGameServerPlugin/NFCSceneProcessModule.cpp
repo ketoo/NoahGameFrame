@@ -136,7 +136,16 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFGUID& self, const int nEve
     }
 
 	//每个玩家，一个副本
-    NFINT64 nNewGroupID = CreateCloneScene( nTargetScene );
+	NFINT64 nNewGroupID = 0;
+	if (nTargetGroupID <= 0)
+	{
+		nNewGroupID = CreateCloneScene( nTargetScene );
+	}
+	else
+	{
+		nNewGroupID = nTargetGroupID;
+	}
+
     if ( nNewGroupID <= 0 )
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "CreateCloneScene failed", nTargetScene);
@@ -248,6 +257,18 @@ E_SCENE_TYPE NFCSceneProcessModule::GetCloneSceneType( const int nContainerID )
 bool NFCSceneProcessModule::IsCloneScene(const int nSceneID)
 {
     return GetCloneSceneType(nSceneID) == 1;
+}
+
+bool NFCSceneProcessModule::ApplyCloneGroup(const int nSceneID, int& nGroupID)
+{
+	nGroupID = CreateCloneScene( nSceneID );
+
+	return true;
+}
+
+bool NFCSceneProcessModule::ExitCloneGroup(const int nSceneID, const int& nGroupID)
+{
+	return m_pKernelModule->ExitGroupScene(nSceneID, nGroupID);
 }
 
 bool NFCSceneProcessModule::LoadSceneResource( const int nContainerID )
