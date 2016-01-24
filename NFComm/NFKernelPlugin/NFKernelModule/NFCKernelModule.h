@@ -125,7 +125,9 @@ public:
 
     //virtual int AddObjectToGroup(const int nContainerID,const int nGroupID, const NFIDataList& var);
 
-    virtual bool ReleaseGroupScene(const int nContainerID, const int nGroupID);
+	virtual bool ReleaseGroupScene(const int nContainerID, const int nGroupID);
+
+	virtual bool ExitGroupScene(const int nContainerID, const int nGroupID);
 
     virtual bool GetGroupObjectList(const int nContainerID, const int nGroupID, NFIDataList& list);
 

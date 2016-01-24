@@ -25,6 +25,7 @@ public:
     virtual int OnPropertyEnter( const NFIDataList& argVar, const NFIDataList& argGameID, const NFGUID& self ) = 0;
     virtual int OnRecordEnter( const NFIDataList& argVar,const NFIDataList& argGameID, const NFGUID& self ) = 0;
     virtual bool SendMsgToGame( const NFIDataList& argObjectVar, const NFIDataList& argGameID,  const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData) = 0;
+	virtual bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase* pObjectRecordBase) = 0;
 
 	virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter() = 0;
 
