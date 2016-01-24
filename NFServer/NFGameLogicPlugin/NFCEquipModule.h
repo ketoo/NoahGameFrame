@@ -23,6 +23,7 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIPackModule.h"
+#include "NFComm/NFPluginModule/NFICommonConfigModule.h"
 
 class NFCEquipModule
     : public NFIEquipModule
@@ -69,7 +70,8 @@ private:
     NFISceneProcessModule* m_pSceneProcessModule;
     NFIPropertyModule* m_pPropertyModule;
     NFIUUIDModule* m_pUUIDModule;
-    NFIPackModule* m_pPackModule;
+	NFIPackModule* m_pPackModule;
+	NFICommonConfigModule* m_pCommonConfigModule;
 };
 
 

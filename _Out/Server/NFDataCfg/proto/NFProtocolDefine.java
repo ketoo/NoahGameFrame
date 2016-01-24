@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/21
+//    @Date             :    2016/01/24
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -211,6 +211,18 @@ public class Equip {
 	public static final String EnchantmentBuffList = "EnchantmentBuffList"; // string
 	public static final String SuitID = "SuitID"; // int
 	public static final String SuitBuffID = "SuitBuffID"; // string
+	public static final String ItemType = "ItemType"; // int
+	public static final String ItemSubType = "ItemSubType"; // int
+	public static final String Level = "Level"; // int
+	public static final String Job = "Job"; // string
+	public static final String Quality = "Quality"; // int
+	public static final String ShowName = "ShowName"; // string
+	public static final String Desc = "Desc"; // string
+	public static final String EffectData = "EffectData"; // string
+	public static final String PrefabPath = "PrefabPath"; // string
+	public static final String DropPrePath = "DropPrePath"; // string
+	public static final String BuyPrice = "BuyPrice"; // int
+	public static final String SalePrice = "SalePrice"; // int
 	// Record
 
 }

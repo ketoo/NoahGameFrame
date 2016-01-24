@@ -110,7 +110,7 @@ const NFGUID& NFCDataProcessModule::CreateRole( const std::string& strAccount, c
     vValueVec.push_back(boost::lexical_cast<std::string>(nSex));
 
     vFieldVec.push_back("Level");
-    vValueVec.push_back("1");
+    vValueVec.push_back("0");
 
 	if(!m_pClusterSQLModule->Updata(mstrRoleTable, xID.ToString(), vFieldVec, vValueVec))
 	{
