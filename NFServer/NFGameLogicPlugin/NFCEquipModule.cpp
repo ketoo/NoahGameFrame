@@ -9,8 +9,6 @@
 #include "NFCEquipModule.h"
 #include "NFComm/Define/NFStringInfo.h"
 #include "NFComm/NFCore/NFTimer.h"
-#include "NFComm/NFCore/NFCCommonConfig.h"
-
 
 
 bool NFCEquipModule::Init()
@@ -37,7 +35,8 @@ bool NFCEquipModule::AfterInit()
     m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
     m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-    m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
+	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>("NFCCommonConfigModule");
     
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pElementInfoModule );
@@ -45,12 +44,13 @@ bool NFCEquipModule::AfterInit()
     assert( NULL != m_pPropertyModule );
     assert( NULL != m_pLogModule );
     assert( NULL != m_pUUIDModule );
-    assert( NULL != m_pPackModule );
+	assert( NULL != m_pPackModule );
+	assert( NULL != m_pCommonConfigModule );
 
     std::string strEquipPath = pPluginManager->GetConfigPath();
 
     strEquipPath += "NFDataCfg/Ini/Common/EqupConfig.xml";
-    NFCCommonConfig::GetSingletonPtr()->LoadConfig(strEquipPath);
+    m_pCommonConfigModule->LoadConfig(strEquipPath);
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCEquipModule::OnClassObjectEvent );
     return true;
@@ -60,9 +60,9 @@ bool NFCEquipModule::IntensifylevelToEquip( const NFGUID& self, const NFGUID& xE
 {
     const int nLevel = m_pPackModule->GetEquipIntensifyLevel(self, xEquipID);
 
-    const int nCostMoney = NFCCommonConfig::GetSingletonPtr()->GetAttributeInt("IntensifylevelToEquip", boost::lexical_cast<std::string>(nLevel), "CostMoney");
-    const int nConstItemCount = NFCCommonConfig::GetSingletonPtr()->GetAttributeInt("IntensifylevelToEquip", boost::lexical_cast<std::string>(nLevel), "ConstItemCount");
-    const std::string& strCostItemID = NFCCommonConfig::GetSingletonPtr()->GetAttributeString("IntensifylevelToEquip", boost::lexical_cast<std::string>(nLevel), "ConstItem");
+    const int nCostMoney = m_pCommonConfigModule->GetAttributeInt("IntensifylevelToEquip", boost::lexical_cast<std::string>(nLevel), "CostMoney");
+    const int nConstItemCount = m_pCommonConfigModule->GetAttributeInt("IntensifylevelToEquip", boost::lexical_cast<std::string>(nLevel), "ConstItemCount");
+    const std::string& strCostItemID = m_pCommonConfigModule->GetAttributeString("IntensifylevelToEquip", boost::lexical_cast<std::string>(nLevel), "ConstItem");
 
     if (!strCostItemID.empty())
     {
@@ -96,7 +96,7 @@ bool NFCEquipModule::IntensifylevelToEquip( const NFGUID& self, const NFGUID& xE
     }
     else
     {
-        const int nIsDownLevel = NFCCommonConfig::GetSingletonPtr()->GetAttributeInt("IntensifylevelToEquip", boost::lexical_cast<std::string>(nLevel), "IsDownLevel");
+        const int nIsDownLevel = m_pCommonConfigModule->GetAttributeInt("IntensifylevelToEquip", boost::lexical_cast<std::string>(nLevel), "IsDownLevel");
         if (nIsDownLevel)
         {
             int nAfterLevel = nLevel - 1;
@@ -116,9 +116,9 @@ bool NFCEquipModule::IntensifylevelToEquip( const NFGUID& self, const NFGUID& xE
 bool NFCEquipModule::HoleToEquip( const NFGUID& self, const NFGUID& xEquipID )
 {
     const int nHoleCount = m_pPackModule->GetEquipHoleCount(self, xEquipID);
-    const int nCostMoney = NFCCommonConfig::GetSingletonPtr()->GetAttributeInt("HoleToEquip", boost::lexical_cast<std::string>(nHoleCount), "CostMoney");
-    const int nConstItemCount = NFCCommonConfig::GetSingletonPtr()->GetAttributeInt("HoleToEquip", boost::lexical_cast<std::string>(nHoleCount), "ConstItemCount");
-    const std::string& strCostItemID = NFCCommonConfig::GetSingletonPtr()->GetAttributeString("HoleToEquip", boost::lexical_cast<std::string>(nHoleCount), "ConstItem");
+    const int nCostMoney = m_pCommonConfigModule->GetAttributeInt("HoleToEquip", boost::lexical_cast<std::string>(nHoleCount), "CostMoney");
+    const int nConstItemCount = m_pCommonConfigModule->GetAttributeInt("HoleToEquip", boost::lexical_cast<std::string>(nHoleCount), "ConstItemCount");
+    const std::string& strCostItemID = m_pCommonConfigModule->GetAttributeString("HoleToEquip", boost::lexical_cast<std::string>(nHoleCount), "ConstItem");
 
     if (!strCostItemID.empty())
     {
@@ -171,9 +171,9 @@ bool NFCEquipModule::InlaystoneToEquip( const NFGUID& self, const NFGUID& xEquip
     }
 
     const int nHoleID = nHoleIndex - NFrame::Player::BagEquipList::BagEquipList_InlayStone1 + 1;
-    const int nCostMoney = NFCCommonConfig::GetSingletonPtr()->GetAttributeInt("ElementlevelToEquip", boost::lexical_cast<std::string>(nHoleID), "CostMoney");
-    const int nConstItemCount = NFCCommonConfig::GetSingletonPtr()->GetAttributeInt("ElementlevelToEquip", boost::lexical_cast<std::string>(nHoleID), "ConstItemCount");
-    const std::string& strCostItemID = NFCCommonConfig::GetSingletonPtr()->GetAttributeString("ElementlevelToEquip", boost::lexical_cast<std::string>(nHoleID), "ConstItem");
+    const int nCostMoney = m_pCommonConfigModule->GetAttributeInt("ElementlevelToEquip", boost::lexical_cast<std::string>(nHoleID), "CostMoney");
+    const int nConstItemCount = m_pCommonConfigModule->GetAttributeInt("ElementlevelToEquip", boost::lexical_cast<std::string>(nHoleID), "ConstItemCount");
+    const std::string& strCostItemID = m_pCommonConfigModule->GetAttributeString("ElementlevelToEquip", boost::lexical_cast<std::string>(nHoleID), "ConstItem");
 
     if (!strCostItemID.empty())
     {
@@ -213,9 +213,9 @@ bool NFCEquipModule::ElementlevelToEquip( const NFGUID& self, const NFGUID& xEqu
     const int nElementIndex = NFrame::Player::BagEquipList::BagEquipList_ElementLevel1 + eElemetType;
     const int nElementLevel = m_pPackModule->GetEquipElementLevel(self, xEquipID, (NFrame::Player::BagEquipList)nElementIndex);
 
-    const int nCostMoney = NFCCommonConfig::GetSingletonPtr()->GetAttributeInt("ElementlevelToEquip", boost::lexical_cast<std::string>(nElementLevel), "CostMoney");
-    const int nConstItemCount = NFCCommonConfig::GetSingletonPtr()->GetAttributeInt("ElementlevelToEquip", boost::lexical_cast<std::string>(nElementLevel), "ConstItemCount");
-    const std::string& strCostItemID = NFCCommonConfig::GetSingletonPtr()->GetAttributeString("ElementlevelToEquip", boost::lexical_cast<std::string>(nElementLevel), "ConstItem");
+    const int nCostMoney = m_pCommonConfigModule->GetAttributeInt("ElementlevelToEquip", boost::lexical_cast<std::string>(nElementLevel), "CostMoney");
+    const int nConstItemCount = m_pCommonConfigModule->GetAttributeInt("ElementlevelToEquip", boost::lexical_cast<std::string>(nElementLevel), "ConstItemCount");
+    const std::string& strCostItemID = m_pCommonConfigModule->GetAttributeString("ElementlevelToEquip", boost::lexical_cast<std::string>(nElementLevel), "ConstItem");
 
     if (!strCostItemID.empty())
     {
@@ -247,7 +247,7 @@ bool NFCEquipModule::ElementlevelToEquip( const NFGUID& self, const NFGUID& xEqu
     }
     else
     {
-        const int nIsDownLevel = NFCCommonConfig::GetSingletonPtr()->GetAttributeInt("IntensifylevelToEquip", boost::lexical_cast<std::string>(nElementLevel), "IsDownLevel");
+        const int nIsDownLevel = m_pCommonConfigModule->GetAttributeInt("IntensifylevelToEquip", boost::lexical_cast<std::string>(nElementLevel), "IsDownLevel");
         if (nIsDownLevel)
         {
             int nAfterLevel = nElementLevel - 1;

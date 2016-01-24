@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/21
+//    @Date             :    2016/01/24
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -229,6 +229,18 @@ public class Equip
 	public static readonly String EnchantmentBuffList = "EnchantmentBuffList"; // string
 	public static readonly String SuitID = "SuitID"; // int
 	public static readonly String SuitBuffID = "SuitBuffID"; // string
+	public static readonly String ItemType = "ItemType"; // int
+	public static readonly String ItemSubType = "ItemSubType"; // int
+	public static readonly String Level = "Level"; // int
+	public static readonly String Job = "Job"; // string
+	public static readonly String Quality = "Quality"; // int
+	public static readonly String ShowName = "ShowName"; // string
+	public static readonly String Desc = "Desc"; // string
+	public static readonly String EffectData = "EffectData"; // string
+	public static readonly String PrefabPath = "PrefabPath"; // string
+	public static readonly String DropPrePath = "DropPrePath"; // string
+	public static readonly String BuyPrice = "BuyPrice"; // int
+	public static readonly String SalePrice = "SalePrice"; // int
 	// Record
 
 }
