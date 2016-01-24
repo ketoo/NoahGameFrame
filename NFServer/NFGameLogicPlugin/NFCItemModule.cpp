@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 #include "NFCItemModule.h"
-#include "NFComm/NFCore/NFCCommonConfig.h"
 
 bool NFCItemModule::Init()
 {
@@ -17,7 +16,8 @@ bool NFCItemModule::Init()
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
     m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
     m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
-    m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>( "NFCHeroModule" );
+	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>( "NFCHeroModule" );
+	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>( "NFCCommonConfigModule" );
     
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pItemConsumeManagerModule );
@@ -25,11 +25,12 @@ bool NFCItemModule::Init()
     assert( NULL != m_pElementInfoModule );
     assert(	NULL != m_pLogicClassModule);
     assert(	NULL != m_pPropertyModule);
-    assert(	NULL != m_pHeroModule);
+	assert(	NULL != m_pHeroModule);
+	assert(	NULL != m_pCommonConfigModule);
 
     std::string strPlayerPath = pPluginManager->GetConfigPath();
     strPlayerPath += "NFDataCfg/Ini/Common/AwardPackConfig.xml";
-    NFCCommonConfig::GetSingletonPtr()->LoadConfig(strPlayerPath);
+    m_pCommonConfigModule->LoadConfig(strPlayerPath);
     return true;
 }
 
@@ -318,12 +319,12 @@ bool NFCItemModule::ConsumeDataIteProperty( const NFGUID& self, const std::strin
 bool NFCItemModule::DoAwardPack( const NFGUID& self, const std::string& strAwardPack )
 {
     std::vector<std::string> xList;
-    NFCCommonConfig::GetSingletonPtr()->GetStructItemList(strAwardPack, xList);
+    m_pCommonConfigModule->GetStructItemList(strAwardPack, xList);
 
     for (int i = 0; i < xList.size(); ++i)
     {
         const std::string& strItemID = xList[i];
-        const int nCout = NFCCommonConfig::GetSingletonPtr()->GetAttributeInt("strAwardID", strItemID, "Count");
+        const int nCout = m_pCommonConfigModule->GetAttributeInt("strAwardID", strItemID, "Count");
         if (m_pElementInfoModule->ExistElement(strItemID))
         {
             if (!m_pElementInfoModule->ExistElement(strItemID))

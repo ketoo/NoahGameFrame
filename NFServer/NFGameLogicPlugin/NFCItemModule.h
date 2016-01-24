@@ -18,6 +18,7 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIHeroModule.h"
+#include "NFComm/NFPluginModule/NFICommonConfigModule.h"
 
 class NFCItemModule
     : public NFIItemModule
@@ -56,7 +57,8 @@ private:
     NFIElementInfoModule* m_pElementInfoModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIPropertyModule* m_pPropertyModule;
-    NFIHeroModule* m_pHeroModule;
+	NFIHeroModule* m_pHeroModule;
+	NFICommonConfigModule* m_pCommonConfigModule;
 };
 
 
