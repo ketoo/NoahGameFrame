@@ -35,6 +35,9 @@
     <Filter Include="NFRankModule">
       <UniqueIdentifier>{0d666a41-6965-4d4b-aec5-2785353cea09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFCommonConfigModule">
+      <UniqueIdentifier>{15121c6f-c078-4629-81c4-7bac017e056f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCGameLogicModule.h" />
@@ -95,6 +98,9 @@
     </ClInclude>
     <ClInclude Include="NFCRankModule.h">
       <Filter>NFRankModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCCommonConfigModule.h">
+      <Filter>NFCommonConfigModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +163,9 @@
     </ClCompile>
     <ClCompile Include="NFCRankModule.cpp">
       <Filter>NFRankModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCCommonConfigModule.cpp">
+      <Filter>NFCommonConfigModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
