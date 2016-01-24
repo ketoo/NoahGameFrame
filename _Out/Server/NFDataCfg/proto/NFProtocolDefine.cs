@@ -278,6 +278,9 @@ public class Guild
 	public static readonly String RecruitAD = "RecruitAD"; // string
 	public static readonly String RecruitLevel = "RecruitLevel"; // int
 	public static readonly String AutoRecruit = "AutoRecruit"; // string
+	public static readonly String EctypServer = "EctypServer"; // int
+	public static readonly String EctypID = "EctypID"; // int
+	public static readonly String EctypIDGroup = "EctypIDGroup"; // int
 	// Record
 	public static readonly String GuildBoss = "GuildBoss";
 	public static readonly String GuildMemberList = "GuildMemberList";
