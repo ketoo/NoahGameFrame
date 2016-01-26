@@ -122,10 +122,10 @@ int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFGUID& self, const std::stri
     const std::string& strClassName = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ClassName());
     const std::string& strSeedID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::SeedID());
     const std::string& strConfigID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ConfigID());
-    int nContainerID = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::SceneID());
+    int nSceneID = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::SceneID());
     int nGroupID = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::GroupID());
 
-    //m_pSceneProcessModule->ClearAll( nContainerID, nGroupID, strSeendID );
+    //m_pSceneProcessModule->ClearAll( nSceneID, nGroupID, strSeendID );
 
 	float fSeedX = m_pKernelModule->GetPropertyFloat( self, NFrame::NPC::X());
 	float fSeedY = m_pKernelModule->GetPropertyFloat( self, NFrame::NPC::Y());
@@ -139,7 +139,7 @@ int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFGUID& self, const std::stri
     arg << NFrame::NPC::Z() << fSeedZ;
 	arg << NFrame::NPC::SeedID() << strSeedID;
 
-	m_pKernelModule->CreateObject( NFGUID(), nContainerID, nGroupID, strClassName, strConfigID, arg );
+	m_pKernelModule->CreateObject( NFGUID(), nSceneID, nGroupID, strClassName, strConfigID, arg );
 
     return 0;
 }
