@@ -38,6 +38,9 @@
     <Filter Include="NFCommonConfigModule">
       <UniqueIdentifier>{15121c6f-c078-4629-81c4-7bac017e056f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFGuildEctypeModule">
+      <UniqueIdentifier>{758bd285-309d-45a8-8950-aa2abb0a6d78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCGameLogicModule.h" />
@@ -101,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="NFCCommonConfigModule.h">
       <Filter>NFCommonConfigModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCGuildEctypeModule.h">
+      <Filter>NFGuildEctypeModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +172,9 @@
     </ClCompile>
     <ClCompile Include="NFCCommonConfigModule.cpp">
       <Filter>NFCommonConfigModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCGuildEctypeModule.cpp">
+      <Filter>NFGuildEctypeModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
