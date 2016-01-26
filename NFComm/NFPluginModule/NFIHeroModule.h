@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
+#include "NFINetModule.h"
 
 class NFIHeroModule
     : public NFILogicModule

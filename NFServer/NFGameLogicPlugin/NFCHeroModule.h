@@ -17,6 +17,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCHeroModule
     : public NFIHeroModule
@@ -40,11 +41,13 @@ public:
     virtual bool SetFightHero(const NFGUID& self, const NFGUID& xID);
 
 protected:
+	void OnSetFightHeroProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
 
 
 protected:
     NFILogicClassModule* m_pLogicClassModule;
-    NFIKernelModule* m_pKernelModule;
+	NFIKernelModule* m_pKernelModule;
+	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 private:
 };
 
