@@ -44,7 +44,7 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual E_SCENE_TYPE GetCloneSceneType(const int nContainerID);
+    virtual E_SCENE_TYPE GetCloneSceneType(const int nSceneID);
     virtual bool IsCloneScene(const int nSceneID);
 	virtual bool ApplyCloneGroup(const int nSceneID, int& nGroupID);
 	virtual bool ExitCloneGroup(const int nSceneID, const int& nGroupID);
@@ -80,7 +80,7 @@ private:
         float fSeedZ;
     };
 
-    //³¡¾°ID,(SeedID,SeedData)
+    //SceneID,(SeedID,SeedData)
     NFMapEx<int, NFMapEx<std::string, SceneSeedResource>> mtSceneResourceConfig;
 
     //////////////////////////////////////////////////////////////////////////

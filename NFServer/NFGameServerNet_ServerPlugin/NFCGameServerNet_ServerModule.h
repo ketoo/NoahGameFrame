@@ -103,7 +103,6 @@ protected:
     void OnHoleToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnInlaystoneToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnElementlevelToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnSetFightHeroProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnReqWearEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnTakeOffEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
@@ -164,10 +163,20 @@ protected:
     // 通知副本奖励结果
     int OnNoticeEctypeAward(const NFGUID& self, const int nEventID, const NFIDataList& var);
 
+	void PlayerLeaveGameServer( const NFGUID& self );
+
     template<class PBClass>    
-    NFGUID GetGuildID(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-private:
-	void PlayerLeaveGameServer( const NFGUID self );
+    NFGUID GetGuildID(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+	{
+		NFGUID nPlayerID;
+		PBClass xMsg;                                         
+		if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+		{
+			return NULL_OBJECT;
+		}
+
+		return PBToNF(xMsg.guild_id());
+	}
 
 private:
 
@@ -202,6 +211,7 @@ private:
 private:
     //<角色id,角色网关基础信息>//其实可以在object系统中被代替
     NFMapEx<NFGUID, BaseData> mRoleBaseData;
+
     //gateid,data
     NFMapEx<int, GateData> mProxyMap;
 
@@ -212,6 +222,7 @@ private:
     NFILogModule* m_pLogModule;
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFIElementInfoModule* m_pElementInfoModule;
+
     NFIPVPModule* m_pPVPModule;
 	NFISkillModule* m_pSkillModule;
 	NFIDataProcessModule* m_pDataProcessModule;
@@ -221,20 +232,5 @@ private:
     NFISLGBuildingModule* m_pSLGBuildingModule;
     NFIEquipModule* m_pEquipModule;
     NFIGameServerToWorldModule* m_pGameServerToWorldModule;
-    NFIHeroModule* m_pHeroModule;
 };
-
-template<class PBClass>
-NFGUID NFCGameServerNet_ServerModule::GetGuildID(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-    NFGUID nPlayerID;
-    PBClass xMsg;                                         
-    if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
-    {
-        return NULL_OBJECT;
-    }
-
-    return PBToNF(xMsg.guild_id());
-}
-
 #endif

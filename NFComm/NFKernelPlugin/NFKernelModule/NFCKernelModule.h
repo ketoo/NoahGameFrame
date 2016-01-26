@@ -54,7 +54,7 @@ public:
 
     virtual NF_SHARE_PTR<NFIObject> GetObject(const NFGUID& ident);
 
-    virtual NF_SHARE_PTR<NFIObject> CreateObject(const NFGUID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg);
+    virtual NF_SHARE_PTR<NFIObject> CreateObject(const NFGUID& self, const int nSceneID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg);
 
     virtual bool DestroyObject(const NFGUID& self);
 
@@ -114,34 +114,34 @@ public:
 
     virtual int GetMaxOnLineCount();
 
-    virtual int GetSceneOnLineCount(const int nContainerID);
+    virtual int GetSceneOnLineCount(const int nSceneID);
 
-    virtual int GetSceneOnLineCount(const int nContainerID, const int nGroupID);
+    virtual int GetSceneOnLineCount(const int nSceneID, const int nGroupID);
 
-    virtual int GetSceneOnLineList(const int nContainerID, NFIDataList& var);
+    virtual int GetSceneOnLineList(const int nSceneID, NFIDataList& var);
     virtual int GetAllSceneObjectList(NFIDataList& var);
 
-    virtual int RequestGroupScene(const int nContainerID);
+    virtual int RequestGroupScene(const int nSceneID);
 
-    //virtual int AddObjectToGroup(const int nContainerID,const int nGroupID, const NFIDataList& var);
+    //virtual int AddObjectToGroup(const int nSceneID,const int nGroupID, const NFIDataList& var);
 
-	virtual bool ReleaseGroupScene(const int nContainerID, const int nGroupID);
+	virtual bool ReleaseGroupScene(const int nSceneID, const int nGroupID);
 
-	virtual bool ExitGroupScene(const int nContainerID, const int nGroupID);
+	virtual bool ExitGroupScene(const int nSceneID, const int nGroupID);
 
-    virtual bool GetGroupObjectList(const int nContainerID, const int nGroupID, NFIDataList& list);
+    virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list);
 
     virtual const NFGUID& GetGridID(const float fX, const float fY, const float fZ);
 
-    //virtual bool GetAroundGrid(const int nContainerID, const int nGroupID, const NFGUID nGridID, NFIDataList& list);
+    //virtual bool GetAroundGrid(const int nSceneID, const int nGroupID, const NFGUID nGridID, NFIDataList& list);
 
-    //virtual bool GetGridObjectList(const int nContainerID, const int nGroupID, const NFGUID nGridID, NFIDataList& list);
+    //virtual bool GetGridObjectList(const int nSceneID, const int nGroupID, const NFGUID nGridID, NFIDataList& list);
 
-    virtual bool GetRangObjectList(const NFGUID& self, const int nContainerID, const int nGroupID, const float fRang, NFIDataList& list);
+    virtual bool GetRangObjectList(const NFGUID& self, const int nSceneID, const int nGroupID, const float fRang, NFIDataList& list);
 
-    virtual bool GetRangObjectList(const float fX, const float fY, const float fZ, const int nContainerID, const int nGroupID, const float fRang, NFIDataList& list);
+    virtual bool GetRangObjectList(const float fX, const float fY, const float fZ, const int nSceneID, const int nGroupID, const float fRang, NFIDataList& list);
 
-    virtual int GetObjectByProperty(const int nContainerID, const std::string& strPropertyName, const NFIDataList& valueArgArg, NFIDataList& list);
+    virtual int GetObjectByProperty(const int nSceneID, const std::string& strPropertyName, const NFIDataList& valueArgArg, NFIDataList& list);
 
     virtual void Random(int nStart, int nEnd, int nCount, NFIDataList& valueList);
 
