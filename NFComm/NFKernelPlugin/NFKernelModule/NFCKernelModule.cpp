@@ -138,27 +138,27 @@ bool NFCKernelModule::RemoveHeartBeat(const NFGUID& self, const std::string& str
 	return false;
 }
 
-NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const int nContainerID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg)
+NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const int nSceneID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg)
 {
 	NF_SHARE_PTR<NFIObject> pObject;
 	NFGUID ident = self;
 
-	NF_SHARE_PTR<NFCSceneInfo> pContainerInfo = m_pSceneModule->GetElement(nContainerID);
+	NF_SHARE_PTR<NFCSceneInfo> pContainerInfo = m_pSceneModule->GetElement(nSceneID);
 	if (!pContainerInfo.get())
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nContainerID), "There is no scene", nContainerID, __FUNCTION__, __LINE__);
+		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nSceneID), "There is no scene", nSceneID, __FUNCTION__, __LINE__);
 		return pObject;
 	}
 
 	if (!pContainerInfo->GetElement(nGroupID))
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nContainerID), "There is no group", nGroupID, __FUNCTION__, __LINE__);
+		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nSceneID), "There is no group", nGroupID, __FUNCTION__, __LINE__);
 		return pObject;
 	}
 
 // 	if (!m_pElementInfoModule->ExistElement(strConfigIndex))
 // 	{
-// 		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nContainerID), "There is no group", nGroupID, __FUNCTION__, __LINE__);
+// 		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nSceneID), "There is no group", nGroupID, __FUNCTION__, __LINE__);
 // 		return pObject;
 // 	}
 
@@ -296,7 +296,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
 		//放进容器//先进入场景，再进入层
 		pObject->SetPropertyString("ConfigID", strConfigIndex);
 		pObject->SetPropertyString("ClassName", strClassName);
-		pObject->SetPropertyInt("SceneID", nContainerID);
+		pObject->SetPropertyInt("SceneID", nSceneID);
 		pObject->SetPropertyInt("GroupID", nGroupID);
 
 		DoEvent(ident, strClassName, COE_CREATE_LOADDATA, arg);
@@ -320,9 +320,9 @@ bool NFCKernelModule::DestroyObject(const NFGUID& self)
 
 	//需要同时从容器中删掉
 	NFINT64 nGroupID = GetPropertyInt(self, "GroupID");
-	NFINT64 nContainerID = GetPropertyInt(self, "SceneID");
+	NFINT64 nSceneID = GetPropertyInt(self, "SceneID");
 
-	NF_SHARE_PTR<NFCSceneInfo> pContainerInfo = m_pSceneModule->GetElement(nContainerID);
+	NF_SHARE_PTR<NFCSceneInfo> pContainerInfo = m_pSceneModule->GetElement(nSceneID);
 	if (pContainerInfo.get())
 	{
 		const std::string& strClassName = GetPropertyString(self, "ClassName");
@@ -338,7 +338,7 @@ bool NFCKernelModule::DestroyObject(const NFGUID& self)
 
 	}
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "There is no scene", nContainerID, __FUNCTION__, __LINE__);
+    m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "There is no scene", nSceneID, __FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -870,11 +870,11 @@ int NFCKernelModule::GetMaxOnLineCount()
 	return 10000;
 }
 
-int NFCKernelModule::GetSceneOnLineCount(const int nContainerID)
+int NFCKernelModule::GetSceneOnLineCount(const int nSceneID)
 {
     int nCount = 0;
 
-    NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nContainerID);
+    NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
     if (pSceneInfo.get())
     {
         NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = pSceneInfo->First();
@@ -888,11 +888,11 @@ int NFCKernelModule::GetSceneOnLineCount(const int nContainerID)
     return nCount;
 }
 
-int NFCKernelModule::GetSceneOnLineCount(const int nContainerID, const int nGroupID)
+int NFCKernelModule::GetSceneOnLineCount(const int nSceneID, const int nGroupID)
 {
     int nCount = 0;
 
-    NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nContainerID);
+    NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
     if (pSceneInfo.get())
     {
         NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(nGroupID);
@@ -905,10 +905,10 @@ int NFCKernelModule::GetSceneOnLineCount(const int nContainerID, const int nGrou
     return nCount;
 }
 
-//int NFCKernelModule::GetSceneOnLineList( const int nContainerID, type, NFIDataList& var )
-int NFCKernelModule::GetSceneOnLineList(const int nContainerID, NFIDataList& var)
+//int NFCKernelModule::GetSceneOnLineList( const int nSceneID, type, NFIDataList& var )
+int NFCKernelModule::GetSceneOnLineList(const int nSceneID, NFIDataList& var)
 {
-    NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nContainerID);
+    NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
     if (pSceneInfo.get())
     {
         NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = pSceneInfo->First();
@@ -932,13 +932,13 @@ int NFCKernelModule::GetSceneOnLineList(const int nContainerID, NFIDataList& var
     return var.GetCount();
 }
 
-int NFCKernelModule::RequestGroupScene(const int nContainerID)
+int NFCKernelModule::RequestGroupScene(const int nSceneID)
 {
-	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nContainerID);
+	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
 	if (pSceneInfo.get())
 	{
 		int nNewGroupID = pSceneInfo->NewGroupID();
-		NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo(NF_NEW NFCSceneGroupInfo(nContainerID, nNewGroupID, pSceneInfo->GetWidth()));
+		NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo(NF_NEW NFCSceneGroupInfo(nSceneID, nNewGroupID, pSceneInfo->GetWidth()));
 		if (pGroupInfo.get())
 		{
 			pSceneInfo->AddElement(nNewGroupID, pGroupInfo);
@@ -949,15 +949,15 @@ int NFCKernelModule::RequestGroupScene(const int nContainerID)
 	return -1;
 }
 
-bool NFCKernelModule::ReleaseGroupScene(const int nContainerID, const int nGroupID)
+bool NFCKernelModule::ReleaseGroupScene(const int nSceneID, const int nGroupID)
 {
-	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nContainerID);
+	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
 	if (pSceneInfo.get())
 	{
 		if (pSceneInfo->GetElement(nGroupID))
 		{
 			NFCDataList listObject;
-			if (GetGroupObjectList(nContainerID, nGroupID, listObject))
+			if (GetGroupObjectList(nSceneID, nGroupID, listObject))
 			{
 				for (int i = 0; i < listObject.GetCount(); ++i)
 				{
@@ -975,9 +975,9 @@ bool NFCKernelModule::ReleaseGroupScene(const int nContainerID, const int nGroup
 	return false;
 }
 
-bool NFCKernelModule::ExitGroupScene(const int nContainerID, const int nGroupID)
+bool NFCKernelModule::ExitGroupScene(const int nSceneID, const int nGroupID)
 {
-	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nContainerID);
+	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
 	if (pSceneInfo.get())
 	{
 		NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(nGroupID);
@@ -990,9 +990,9 @@ bool NFCKernelModule::ExitGroupScene(const int nContainerID, const int nGroupID)
 	return false;
 }
 
-bool NFCKernelModule::GetGroupObjectList(const int nContainerID, const int nGroupID, NFIDataList& list)
+bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list)
 {
-    NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nContainerID);
+    NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
     if (pSceneInfo.get())
     {
 
@@ -1025,9 +1025,9 @@ bool NFCKernelModule::GetGroupObjectList(const int nContainerID, const int nGrou
     return false;
 }
 
-//bool NFCKernelModule::GetGridObjectList(const int nContainerID, const int nGroupID, const NFGUID nGridID, NFIDataList& list)
+//bool NFCKernelModule::GetGridObjectList(const int nSceneID, const int nGroupID, const NFGUID nGridID, NFIDataList& list)
 //{
-//	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pContainerModule->GetElement(nContainerID);
+//	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pContainerModule->GetElement(nSceneID);
 //	if (pSceneInfo.get())
 //	{
 //		NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(nGroupID);
@@ -1044,9 +1044,9 @@ bool NFCKernelModule::GetGroupObjectList(const int nContainerID, const int nGrou
 //	return false;
 //}
 
-//bool NFCKernelModule::GetAroundGrid(const int nContainerID, const int nGroupID, const NFGUID nGridID, NFIDataList& list)
+//bool NFCKernelModule::GetAroundGrid(const int nSceneID, const int nGroupID, const NFGUID nGridID, NFIDataList& list)
 //{
-//	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pContainerModule->GetElement(nContainerID);
+//	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pContainerModule->GetElement(nSceneID);
 //	if (pSceneInfo.get())
 //	{
 //		NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(nGroupID);
@@ -1063,7 +1063,7 @@ bool NFCKernelModule::GetGroupObjectList(const int nContainerID, const int nGrou
 //	return false;
 //}
 
-bool NFCKernelModule::GetRangObjectList(const NFGUID& self, const int nContainerID, const int nGroupID, const float fRang, NFIDataList& list)
+bool NFCKernelModule::GetRangObjectList(const NFGUID& self, const int nSceneID, const int nGroupID, const float fRang, NFIDataList& list)
 {
 	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
 	if (pObject.get())
@@ -1073,7 +1073,7 @@ bool NFCKernelModule::GetRangObjectList(const NFGUID& self, const int nContainer
 		float fZ = pObject->GetPropertyManager()->GetElement("Z")->GetFloat();
 
 		// collect info
-		return GetRangObjectList(fX, fY, fZ, nContainerID, nGroupID, fRang, list);
+		return GetRangObjectList(fX, fY, fZ, nSceneID, nGroupID, fRang, list);
 	}
 
 	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
@@ -1081,10 +1081,10 @@ bool NFCKernelModule::GetRangObjectList(const NFGUID& self, const int nContainer
 	return false;
 }
 
-bool NFCKernelModule::GetRangObjectList(const float fX, const float fY, const float fZ, const int nContainerID, const int nGroupID, const float fRang, NFIDataList& list)
+bool NFCKernelModule::GetRangObjectList(const float fX, const float fY, const float fZ, const int nSceneID, const int nGroupID, const float fRang, NFIDataList& list)
 {
 	//NFGUID gridIdent = NFCGridModule::ComputerGridID(fX, fY, fZ);
-	//NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pContainerModule->GetElement(nContainerID);
+	//NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pContainerModule->GetElement(nSceneID);
 	//if (pSceneInfo.get())
 	//{
 	//	NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(nGroupID);
@@ -1157,12 +1157,12 @@ bool NFCKernelModule::LogInfo(const NFGUID ident)
 	{
 		if (IsContainer(ident))
 		{
-			int nContainerID = GetPropertyInt(ident, "SceneID");
+			int nSceneID = GetPropertyInt(ident, "SceneID");
 
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "//----------child object list-------- SceneID = ", nContainerID);
+			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "//----------child object list-------- SceneID = ", nSceneID);
 
 			NFCDataList valObjectList;
-			int nCount = GetSceneOnLineList(nContainerID, valObjectList);
+			int nCount = GetSceneOnLineList(nSceneID, valObjectList);
 			for (int i  = 0; i < nCount; i++)
 			{
 				NFGUID targetIdent = valObjectList.Object(i);
@@ -1260,10 +1260,10 @@ int NFCKernelModule::Command(const NFIDataList& var)
 	return 0;
 }
 
-int NFCKernelModule::GetObjectByProperty(const int nContainerID, const std::string& strPropertyName, const NFIDataList& valueArg, NFIDataList& list)
+int NFCKernelModule::GetObjectByProperty(const int nSceneID, const std::string& strPropertyName, const NFIDataList& valueArg, NFIDataList& list)
 {
 	NFCDataList varObjectList;
-	GetSceneOnLineList(nContainerID, varObjectList);
+	GetSceneOnLineList(nSceneID, varObjectList);
 	int nWorldCount = varObjectList.GetCount();
 	for (int i = 0; i < nWorldCount; i++)
 	{
