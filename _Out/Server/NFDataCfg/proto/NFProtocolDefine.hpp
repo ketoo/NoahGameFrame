@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/24
+//    @Date             :    2016/01/25
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -1102,4 +1102,4 @@ public:
 
 } // !@NFrame
 
-#endif NF_PR_NAME_HPP // !NF_PR_NAME_HPP
+#endif // !NF_PR_NAME_HPP
