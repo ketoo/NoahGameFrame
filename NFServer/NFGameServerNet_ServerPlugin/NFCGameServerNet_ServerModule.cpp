@@ -29,7 +29,6 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pDataProcessModule = pPluginManager->FindModule<NFIDataProcessModule>("NFCDataProcessModule");
     m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>("NFCGameServerToWorldModule");
     m_pEquipModule = pPluginManager->FindModule<NFIEquipModule>("NFCEquipModule");
-    m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>("NFCHeroModule");
     
 
 	assert(NULL != m_pKernelModule);
@@ -45,7 +44,6 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	assert(NULL != m_pDataProcessModule);
     assert(NULL != m_pGameServerToWorldModule);
     assert(NULL != m_pEquipModule);
-    assert(NULL != m_pHeroModule);
 
 	m_pKernelModule->ResgisterCommonClassEvent( this, &NFCGameServerNet_ServerModule::OnClassCommonEvent );
 	m_pKernelModule->ResgisterCommonPropertyEvent( this, &NFCGameServerNet_ServerModule::OnPropertyCommonEvent );
@@ -185,9 +183,6 @@ void NFCGameServerNet_ServerModule::OnRecivePSPack(const int nSockIndex, const i
         OnElementlevelToEquipProcess(nSockIndex, nMsgID, msg, nLen);
         break;
 
-    case NFMsg::EGameMsgID::EGEC_REQ_SET_FIGHT_HERO:
-        OnSetFightHeroProcess(nSockIndex, nMsgID, msg, nLen);
-        break;
     case NFMsg::EGameMsgID::EGEC_WEAR_EQUIP:
         OnReqWearEquipProcess(nSockIndex, nMsgID, msg, nLen);
         break;
@@ -2238,7 +2233,7 @@ void NFCGameServerNet_ServerModule::SendMsgPBToGate( const uint16_t nMsgID, cons
     }
 }
 
-void NFCGameServerNet_ServerModule::PlayerLeaveGameServer( const NFGUID self )
+void NFCGameServerNet_ServerModule::PlayerLeaveGameServer( const NFGUID& self )
 {
 	if(!m_pKernelModule->GetObject(self))
 	{
@@ -2356,14 +2351,6 @@ void NFCGameServerNet_ServerModule::OnElementlevelToEquipProcess( const int nSoc
     xAck.set_result(nResult);
 
     SendMsgPBToGate(NFMsg::EGEC_ACK_ELEMENTLEVEL_TO_EQUIP, xAck, self);
-}
-
-void NFCGameServerNet_ServerModule::OnSetFightHeroProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
-{
-    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSetFightHero);
-
-    const NFGUID xHero = PBToNF(xMsg.heroid());
-    m_pHeroModule->SetFightHero(nPlayerID, xHero);
 }
 
 void NFCGameServerNet_ServerModule::OnReqWearEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
