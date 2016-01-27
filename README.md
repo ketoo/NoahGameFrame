@@ -81,7 +81,7 @@ Need build sub librares:
 14. Run the binary file by **_Out/Server/Debug/Run.bat**
 
 ### Windows[VS2015]
-[Click to view](https://github.com/eliteYang/NFrame_CPP_VS2015_Libs)
+[Click to view](https://github.com/NFGameTeam/NFrame_VS2015_Dep)
 
 ### Linux[CodeBlock 13.1]
 
