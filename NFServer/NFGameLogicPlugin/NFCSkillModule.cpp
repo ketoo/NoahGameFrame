@@ -7,11 +7,18 @@
 // -------------------------------------------------------------------------
 
 #include "NFCSkillModule.h"
+#include "NFComm/NFPluginModule/NFINetModule.h"
 
 bool NFCSkillModule::Init()
 {
     mstrSkillTableName = "SkillList";
-    return true;
+
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
+
+	assert( NULL != m_pGameServerNet_ServerModule );
+
+	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_SKILL_OBJECTX, this, &NFCSkillModule::OnClienUseSkill)){ return false; }
+	return true;
 }
 
 bool NFCSkillModule::Shut()
@@ -373,4 +380,37 @@ int NFCSkillModule::AddNewerSkill( const NFGUID& self )
     //初始化技能列表
 
     return 0;
+}
+
+void NFCSkillModule::OnClienUseSkill(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckUseSkill)
+
+		//bc
+	const std::string& strSkillID =  xMsg.skill_id();
+	int nContianerID = m_pKernelModule->GetPropertyInt(nPlayerID, "SceneID");
+	int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, "GroupID");
+
+	NFMsg::ReqAckUseSkill xReqAckUseSkill;
+	xReqAckUseSkill.set_skill_id(strSkillID);
+	*xReqAckUseSkill.mutable_user() = NFINetModule::NFToPB(nPlayerID);
+	*xReqAckUseSkill.mutable_now_pos() = xMsg.now_pos();
+	*xReqAckUseSkill.mutable_tar_pos() = xMsg.tar_pos();
+	xReqAckUseSkill.set_use_index( xMsg.use_index());
+
+	for (int i = 0; i < xMsg.effect_data_size(); ++i)
+	{
+		const NFMsg::EffectData& xEffectData = xMsg.effect_data(i);
+		const NFGUID nTarget = NFINetModule::PBToNF(xEffectData.effect_ident());
+		// 技能伤害
+		OnUseSkill(nPlayerID, NFCDataList() << strSkillID << nTarget);
+
+		NFMsg::EffectData* pNewEffectData = xReqAckUseSkill.add_effect_data();
+
+		*pNewEffectData->mutable_effect_ident() = NFINetModule::NFToPB(nTarget);
+		pNewEffectData->set_effect_value(20);// 暂时代替
+		pNewEffectData->set_effect_rlt(xEffectData.effect_rlt());
+	}
+
+	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_SKILL_OBJECTX, xReqAckUseSkill, nPlayerID);
 }

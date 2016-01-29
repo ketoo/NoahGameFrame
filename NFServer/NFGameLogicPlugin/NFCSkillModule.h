@@ -19,6 +19,7 @@
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCSkillModule
     : public NFISkillModule
@@ -54,6 +55,9 @@ protected:
 
 	int OnRequireUseSkillEvent( const NFGUID& self, const int nEventID, const NFIDataList& var );
 	int OnRequireUseSkillPosEvent( const NFGUID& self, const int nEventID, const NFIDataList& var );
+
+protected:
+	void OnClienUseSkill(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 private:
     char* mstrSkillTableName;
 
@@ -63,6 +67,7 @@ private:
     NFISkillConsumeManagerModule* m_pSkillConsumeManagerModule;
     NFIElementInfoModule* m_pElementInfoModule;
     NFISceneProcessModule* m_pSceneProcessModule;
+	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 
 
