@@ -109,8 +109,6 @@ public:
     virtual int GetSceneOnLineList(const int nSceneID, NFIDataList& var);
 
     virtual int RequestGroupScene(const int nSceneID);
-    virtual bool RequestGroupScene(const int nSceneID, const int nGroupID);
-
 	virtual bool ReleaseGroupScene(const int nSceneID, const int nGroupID);
 	virtual bool ExitGroupScene(const int nSceneID, const int nGroupID);
 

@@ -113,18 +113,14 @@ public:
 
     /////////////////////////////////////////////////////////////////
 
-    virtual int Command(const NFIDataList& var) = 0;
 
     virtual bool IsContainer(const NFGUID& self) = 0;
-
     virtual bool ExistContainer(const int nContainerIndex) = 0;
 
     virtual NF_SHARE_PTR<NFIObject> GetObject(const NFGUID& ident) = 0;
-
     virtual NF_SHARE_PTR<NFIObject> CreateObject(const NFGUID& self, const int nSceneID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg) = 0;
 
     virtual bool DestroyObject(const NFGUID& self) = 0;
-
     virtual bool DestroyAll() = 0;
 
     virtual bool FindProperty(const NFGUID& self, const std::string& strPropertyName) = 0;
@@ -140,7 +136,6 @@ public:
     virtual const NFGUID& GetPropertyObject(const NFGUID& self, const std::string& strPropertyName) = 0;
 
     virtual NF_SHARE_PTR<NFIRecord> FindRecord(const NFGUID& self, const std::string& strRecordName) = 0;
-
     virtual bool ClearRecord(const NFGUID& self, const std::string& strRecordName) = 0;
 
     virtual bool SetRecordInt(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue) = 0;
@@ -173,34 +168,19 @@ public:
     virtual bool DestroyScene(const int nSceneID) = 0;
 
     virtual int GetOnLineCount() = 0;
-
     virtual int GetMaxOnLineCount() = 0;
-
     virtual int GetSceneOnLineCount(const int nSceneID) = 0;
-
     virtual int GetSceneOnLineCount(const int nSceneID, const int nGroupID) = 0;
-
     virtual int GetSceneOnLineList(const int nSceneID, NFIDataList& var) = 0;
-    virtual int GetAllSceneObjectList(NFIDataList& var) = 0;
 
     virtual int RequestGroupScene(const int nSceneID) = 0;
-
-    virtual bool ReleaseGroupScene(const int nSceneID, const int nGroupID) = 0;
-
+	virtual bool ReleaseGroupScene(const int nSceneID, const int nGroupID) = 0;
 	virtual bool ExitGroupScene(const int nSceneID, const int nGroupID) = 0;
 
     virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list) = 0;
-
-    virtual const NFGUID& GetGridID(const float fX, const float fY, const float fZ) = 0;
-
-    virtual bool GetRangObjectList(const NFGUID& self, const int nSceneID, const int nGroupID, const float fRang, NFIDataList& list) = 0;
-
-    virtual bool GetRangObjectList(const float fX, const float fY, const float fZ, const int nSceneID, const int nGroupID, const float fRang, NFIDataList& list) = 0;
-
     virtual int GetObjectByProperty(const int nSceneID, const std::string& strPropertyName, const NFIDataList& valueArg, NFIDataList& list) = 0;
 
     virtual void Random(int nStart, int nEnd, int nCount, NFIDataList& valueList) = 0;
-
     virtual bool LogInfo(const NFGUID ident) = 0;
 
 protected:
