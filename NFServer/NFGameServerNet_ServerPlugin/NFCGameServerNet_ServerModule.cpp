@@ -21,14 +21,9 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>("NFCSceneProcessModule");
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-	m_pSLGShopModule = pPluginManager->FindModule<NFISLGShopModule>("NFCSLGShopModule");
-	m_pSLGBuildingModule = pPluginManager->FindModule<NFISLGBuildingModule>("NFCSLGBuildingModule");
 	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-	m_pPVPModule = pPluginManager->FindModule<NFIPVPModule>("NFCPVPModule");
-	m_pSkillModule = pPluginManager->FindModule<NFISkillModule>("NFCSkillModule");
 	m_pDataProcessModule = pPluginManager->FindModule<NFIDataProcessModule>("NFCDataProcessModule");
     m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>("NFCGameServerToWorldModule");
-    m_pEquipModule = pPluginManager->FindModule<NFIEquipModule>("NFCEquipModule");
     
 
 	assert(NULL != m_pKernelModule);
@@ -36,14 +31,9 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	assert(NULL != m_pSceneProcessModule);
 	assert(NULL != m_pElementInfoModule);
 	assert(NULL != m_pLogModule);
-	assert(NULL != m_pSLGShopModule);
-	assert(NULL != m_pSLGBuildingModule);
 	assert(NULL != m_pUUIDModule);
-	assert(NULL != m_pPVPModule);
-	assert(NULL != m_pSkillModule);
 	assert(NULL != m_pDataProcessModule);
     assert(NULL != m_pGameServerToWorldModule);
-    assert(NULL != m_pEquipModule);
 
 	m_pKernelModule->ResgisterCommonClassEvent( this, &NFCGameServerNet_ServerModule::OnClassCommonEvent );
 	m_pKernelModule->ResgisterCommonPropertyEvent( this, &NFCGameServerNet_ServerModule::OnPropertyCommonEvent );
@@ -139,9 +129,7 @@ void NFCGameServerNet_ServerModule::OnRecivePSPack(const int nSockIndex, const i
 		//    OnClienGMProcess(nSockIndex, nMsgID, msg, nLen);
 		//    break;
 
-	case NFMsg::EGameMsgID::EGMI_REQ_SKILL_OBJECTX:
-		OnClienUseSkill(nSockIndex, nMsgID, msg, nLen);
-		break;
+
     case NFMsg::EGameMsgID::EGMI_REQ_ITEM_OBJECT:
         OnClienUseItem(nSockIndex, nMsgID, msg, nLen);
         break;
@@ -168,55 +156,12 @@ void NFCGameServerNet_ServerModule::OnRecivePSPack(const int nSockIndex, const i
 		OnClienChatProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 
-    case NFMsg::EGameMsgID::EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP:
-        OnIntensifylevelToEquipProcess(nSockIndex, nMsgID, msg, nLen);
-        break;
 
-    case NFMsg::EGameMsgID::EGEC_REQ_HOLE_TO_EQUIP:
-        OnHoleToEquipProcess(nSockIndex, nMsgID, msg, nLen);
-        break;
-
-    case NFMsg::EGameMsgID::EGEC_REQ_INLAYSTONE_TO_EQUIP:
-        OnInlaystoneToEquipProcess(nSockIndex, nMsgID, msg, nLen);
-        break;
-    case NFMsg::EGameMsgID::EGEC_REQ_ELEMENTLEVEL_TO_EQUIP:
-        OnElementlevelToEquipProcess(nSockIndex, nMsgID, msg, nLen);
-        break;
-
-    case NFMsg::EGameMsgID::EGEC_WEAR_EQUIP:
-        OnReqWearEquipProcess(nSockIndex, nMsgID, msg, nLen);
-        break;
-    case NFMsg::EGameMsgID::EGEC_TAKEOFF_EQUIP:
-        OnTakeOffEquipProcess(nSockIndex, nMsgID, msg, nLen);
-        break;
-
-	case NFMsg::EGameMsgID::EGMI_REQ_JOIN_PVP:
-		OnClientJoinPVP(nSockIndex, nMsgID, msg, nLen);
-		break;
-	case NFMsg::EGameMsgID::EGMI_REQ_EXIT_PVP:
-		OnClientExitPVP(nSockIndex, nMsgID, msg, nLen);
-		break;
 	case NFMsg::EGameMsgID::EGMI_REQ_END_BATTLE:
 		OnClientEndBattle(nSockIndex, nMsgID, msg, nLen);
 		break;
 
 
-
-
-		//SLG////////////////////////////////////////////////////////////////////////
-	case NFMsg::EGameMsgID::EGMI_REQ_BUY_FORM_SHOP:
-		OnSLGClienBuyItem(nSockIndex, nMsgID, msg, nLen);
-		break;
-	case NFMsg::EGameMsgID::EGMI_REQ_MOVE_BUILD_OBJECT:
-		OnSLGClienMoveObject(nSockIndex, nMsgID, msg, nLen);
-		break;
-	case NFMsg::EGameMsgID::EGMI_REQ_UP_BUILD_LVL:
-		OnSLGClienUpgradeBuilding(nSockIndex, nMsgID, msg, nLen);
-		break;
-	case NFMsg::EGameMsgID::EGMI_REQ_CREATE_ITEM:
-		OnSLGClienCreateItem(nSockIndex, nMsgID, msg, nLen);
-		break;
-		//////////////////////////////////////////////////////////////////////////
 	case NFMsg::EGameMsgID::EGMI_REQ_CREATE_GUILD:
         {
             NFGUID xGuildID = GetGuildID<NFMsg::ReqAckCreateGuild>(nSockIndex, nMsgID, msg, nLen);
@@ -1864,38 +1809,6 @@ void NFCGameServerNet_ServerModule::OnClienSwapSceneProcess(const int nSockIndex
 	m_pKernelModule->DoEvent( pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry );
 }
 
-void NFCGameServerNet_ServerModule::OnClienUseSkill(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckUseSkill)
-
-	//bc
-	const std::string& strSkillID =  xMsg.skill_id();
-	int nContianerID = m_pKernelModule->GetPropertyInt(nPlayerID, "SceneID");
-	int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, "GroupID");
-
-	NFMsg::ReqAckUseSkill xReqAckUseSkill;
-	xReqAckUseSkill.set_skill_id(strSkillID);
-    *xReqAckUseSkill.mutable_user() = NFINetModule::NFToPB(nPlayerID);
-    *xReqAckUseSkill.mutable_now_pos() = xMsg.now_pos();
-    *xReqAckUseSkill.mutable_tar_pos() = xMsg.tar_pos();
-    xReqAckUseSkill.set_use_index( xMsg.use_index());
-
-	for (int i = 0; i < xMsg.effect_data_size(); ++i)
-	{
-		const NFMsg::EffectData& xEffectData = xMsg.effect_data(i);
-		const NFGUID nTarget = PBToNF(xEffectData.effect_ident());
-		// 技能伤害
-		m_pSkillModule->OnUseSkill(nPlayerID, NFCDataList() << strSkillID << nTarget);
-
-		NFMsg::EffectData* pNewEffectData = xReqAckUseSkill.add_effect_data();
-
-		*pNewEffectData->mutable_effect_ident() = NFToPB(nTarget);
-		pNewEffectData->set_effect_value(20);// 暂时代替
-		pNewEffectData->set_effect_rlt(xEffectData.effect_rlt());
-	}
-
-	SendMsgPBToGate(NFMsg::EGMI_ACK_SKILL_OBJECTX, xReqAckUseSkill, nPlayerID);
-}
 
 void NFCGameServerNet_ServerModule::OnClienMove(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
@@ -2002,25 +1915,6 @@ void NFCGameServerNet_ServerModule::OnClienChatProcess(const int nSockIndex, con
 
 }
 
-void NFCGameServerNet_ServerModule::OnClientJoinPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckJoinActivity)
-
-	switch (xMsg.activity_type())
-	{
-		case NFMsg::ReqAckJoinActivity_EGameActivityType_EGAT_PVP:
-			m_pPVPModule->StartPVPWar(nPlayerID);
-			break;
-		default:
-			break;
-	}
-}
-
-void NFCGameServerNet_ServerModule::OnClientExitPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	//CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::reqex)
-
-}
 
 void NFCGameServerNet_ServerModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
@@ -2164,49 +2058,6 @@ void NFCGameServerNet_ServerModule::OnClientEndBattle(const int nSockIndex, cons
 {
 }
 
-//SLG////////////////////////////////////////////////////////////////////////
-void NFCGameServerNet_ServerModule::OnSLGClienBuyItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckBuyObjectFormShop);
-
-	const std::string strItemID = xMsg.config_id();
-	const float fX = xMsg.x();
-	const float fY = xMsg.y();
-	const float fZ = xMsg.z();
-	m_pSLGShopModule->ReqBuyItem(nPlayerID, strItemID, fX, fY, fZ);
-}
-
-void NFCGameServerNet_ServerModule::OnSLGClienMoveObject(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckMoveBuildObject);
-
-	const NFGUID xBuildID = PBToNF(xMsg.object_guid());
-	const float fX = xMsg.x();
-	const float fY = xMsg.y();
-	const float fZ = xMsg.z();
-
-	m_pSLGBuildingModule->Move(nPlayerID, xBuildID, fX, fY, fZ);
-}
-
-void NFCGameServerNet_ServerModule::OnSLGClienUpgradeBuilding(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqUpBuildLv);
-
-	const NFGUID xBuilID = PBToNF(xMsg.object_guid());
-	m_pSLGBuildingModule->Upgrade(nPlayerID, xBuilID);
-}
-
-void NFCGameServerNet_ServerModule::OnSLGClienCreateItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCreateItem);
-
-	const NFGUID& xBuilID = PBToNF(xMsg.object_guid());
-	const std::string& strItemID = xMsg.config_id();
-	const int nCount = xMsg.count();
-
-	m_pSLGBuildingModule->Produce(nPlayerID, xBuilID, strItemID, nCount);
-}
-
 void NFCGameServerNet_ServerModule::SendMsgPBToGate( const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self )
 {
 	NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(self);
@@ -2277,99 +2128,4 @@ void NFCGameServerNet_ServerModule::OnTransWorld(const int nSockIndex, const int
 void NFCGameServerNet_ServerModule::OnTransWorld( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey )
 {
     m_pGameServerToWorldModule->SendBySuit(nWorldKey, nSockIndex, nMsgID, msg, nLen);
-}
-
-void NFCGameServerNet_ServerModule::OnIntensifylevelToEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
-{
-    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqIntensifylevelToEquip);
-
-    const NFGUID self = PBToNF(xMsg.selfid());
-    const NFGUID xEquipID = PBToNF(xMsg.equipid());
-
-    int nResult = m_pEquipModule->IntensifylevelToEquip(self, xEquipID);
-
-    NFMsg::AckIntensifylevelToEquip xAck;
-
-    *xAck.mutable_selfid() = xMsg.selfid();
-    *xAck.mutable_equipid() = xMsg.equipid();
-    xAck.set_result(nResult);
-
-    SendMsgPBToGate(NFMsg::EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP, xAck, self);
-}
-
-void NFCGameServerNet_ServerModule::OnHoleToEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
-{
-    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqHoleToEquip);
-
-    const NFGUID self = PBToNF(xMsg.selfid());
-    const NFGUID xEquipID = PBToNF(xMsg.equipid());
-
-    int nResult = m_pEquipModule->HoleToEquip(self, xEquipID);
-
-    NFMsg::AckHoleToEquip xAck;
-
-    *xAck.mutable_selfid() = xMsg.selfid();
-    *xAck.mutable_equipid() = xMsg.equipid();
-    xAck.set_result(nResult);
-
-    SendMsgPBToGate(NFMsg::EGEC_ACK_HOLE_TO_EQUIP, xAck, self);
-}
-
-void NFCGameServerNet_ServerModule::OnInlaystoneToEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
-{
-    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqInlaystoneToEquip);
-
-    const NFGUID self = PBToNF(xMsg.selfid());
-    const NFGUID xEquipID = PBToNF(xMsg.equipid());
-    const std::string& strStoneID = xMsg.stoneid();
-    const int nHoleIndex = xMsg.hole_index();
-
-    int nResult = m_pEquipModule->InlaystoneToEquip(self, xEquipID, strStoneID, nHoleIndex);
-
-    NFMsg::AckInlaystoneToEquip xAck;
-
-    *xAck.mutable_selfid() = xMsg.selfid();
-    *xAck.mutable_equipid() = xMsg.equipid();
-    xAck.set_result(nResult);
-
-    SendMsgPBToGate(NFMsg::EGEC_ACK_INLAYSTONE_TO_EQUIP, xAck, self);
-}
-
-void NFCGameServerNet_ServerModule::OnElementlevelToEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
-{
-    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqElementlevelToEquip);
-
-    const NFGUID self = PBToNF(xMsg.selfid());
-    const NFGUID xEquipID = PBToNF(xMsg.equipid());
-
-    int nResult = m_pEquipModule->ElementlevelToEquip(self, xEquipID, xMsg.eelementtype());
-
-    NFMsg::AckElementlevelToEquip xAck;
-
-    *xAck.mutable_selfid() = xMsg.selfid();
-    *xAck.mutable_equipid() = xMsg.equipid();
-    xAck.set_result(nResult);
-
-    SendMsgPBToGate(NFMsg::EGEC_ACK_ELEMENTLEVEL_TO_EQUIP, xAck, self);
-}
-
-void NFCGameServerNet_ServerModule::OnReqWearEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
-{
-    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqWearEquip);
-
-    const NFGUID self = PBToNF(xMsg.selfid());
-    const NFGUID xEquipID = PBToNF(xMsg.equipid());
-    const NFGUID xTarget = PBToNF(xMsg.targetid());
-
-    m_pEquipModule->WearEquip(self, xEquipID, xTarget);
-}
-
-void NFCGameServerNet_ServerModule::OnTakeOffEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
-{
-    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::TakeOffEquip);
-    const NFGUID self = PBToNF(xMsg.selfid());
-    const NFGUID xEquipID = PBToNF(xMsg.equipid());
-    const NFGUID xTarget = PBToNF(xMsg.targetid());
-
-    m_pEquipModule->TakeOffEquip(self, xEquipID, xTarget);
 }

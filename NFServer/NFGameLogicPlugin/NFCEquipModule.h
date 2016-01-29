@@ -24,6 +24,7 @@
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIPackModule.h"
 #include "NFComm/NFPluginModule/NFICommonConfigModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCEquipModule
     : public NFIEquipModule
@@ -63,6 +64,15 @@ protected:
 
     bool NeedEquipProperty( const NFGUID& self, const NFGUID& xWearID);
 
+protected:
+	//Equip
+	void OnIntensifylevelToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnHoleToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnInlaystoneToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnElementlevelToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReqWearEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnTakeOffEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
 private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
@@ -72,6 +82,7 @@ private:
     NFIUUIDModule* m_pUUIDModule;
 	NFIPackModule* m_pPackModule;
 	NFICommonConfigModule* m_pCommonConfigModule;
+	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 
 
