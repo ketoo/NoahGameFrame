@@ -6,3 +6,29 @@
 //
 // -------------------------------------------------------------------------
 
+#include "NFCSceneModule.h"
+
+bool NFCSceneModule::Init()
+{
+	return true;
+}
+
+bool NFCSceneModule::AfterInit()
+{
+	return true;
+}
+
+bool NFCSceneModule::BeforeShut()
+{
+	return true;
+}
+
+bool NFCSceneModule::Shut()
+{
+	return true;
+}
+
+bool NFCSceneModule::Execute()
+{
+	return true;
+}
