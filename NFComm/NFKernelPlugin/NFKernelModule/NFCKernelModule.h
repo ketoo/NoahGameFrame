@@ -122,7 +122,7 @@ public:
     virtual int GetAllSceneObjectList(NFIDataList& var);
 
     virtual int RequestGroupScene(const int nSceneID);
-
+    virtual bool RequestGroupScene(const int nSceneID, const int nGroupID);
     //virtual int AddObjectToGroup(const int nSceneID,const int nGroupID, const NFIDataList& var);
 
 	virtual bool ReleaseGroupScene(const int nSceneID, const int nGroupID);
