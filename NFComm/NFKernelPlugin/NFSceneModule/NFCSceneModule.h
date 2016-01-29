@@ -1,4 +1,4 @@
-// -------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------
 //    @FileName      :    NFCSceneModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
@@ -6,20 +6,36 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFC_CONTAINER_MODULE_H
-#define NFC_CONTAINER_MODULE_H
+#ifndef NFC_SCENE_MODULE_H
+#define NFC_SCENE_MODULE_H
 
 #include <iostream>
-#include "NFISceneModule.h"
 #include "NFComm/NFCore/NFIObject.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
+#include "NFComm/NFPluginModule/NFISceneModule.h"
 
 class NFCSceneModule
     : public NFISceneModule
 {
 public:
+	NFCSceneModule(NFIPluginManager* p)
+	{
+		//pPluginManager = p;
+	}
+
+	    
+	virtual ~NFCSceneModule()
+    {
+    }
+
+	virtual bool Init();
+    virtual bool AfterInit();
+    virtual bool BeforeShut();
+    virtual bool Shut();
+    virtual bool Execute();
+
 
 
 protected:
