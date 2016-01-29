@@ -10,11 +10,12 @@
 #define _NFI_PLUGIN_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include <assert.h>
 #include "NFComm/NFCore/NFMap.h"
+#include "NFComm/NFPluginModule/NFIActor.h"
+#include "NFComm/NFPluginModule/NFILogicModule.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
-#include "NFIActor.h"
-#include "NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 #define REGISTER_MODULE(pManager, className)  NFILogicModule* pRegisterModule##className= new className(pManager); \
     pRegisterModule##className->strName = (#className); \
@@ -57,7 +58,11 @@ public:
         NFILogicModule* pModule = First();
         while (pModule)
         {
-            pModule->Init();
+            bool bRet = pModule->Init();
+			if (!bRet)
+			{
+				assert(0);
+			}
 
             pModule = Next();
         }
@@ -69,7 +74,11 @@ public:
         NFILogicModule* pModule = First();
         while (pModule)
         {
-            pModule->AfterInit();
+            bool bRet = pModule->AfterInit();
+			if (!bRet)
+			{
+				assert(0);
+			}
 
             pModule = Next();
         }
