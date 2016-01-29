@@ -11,6 +11,14 @@ NFCSLGBuildingModule::NFCSLGBuildingModule(NFIPluginManager* p)
 
 bool NFCSLGBuildingModule::Init()
 {
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
+
+	assert( NULL != m_pGameServerNet_ServerModule );
+
+	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_MOVE_BUILD_OBJECT, this, &NFCSLGBuildingModule::OnSLGClienMoveObject)){ return false; }
+	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_UP_BUILD_LVL, this, &NFCSLGBuildingModule::OnSLGClienUpgradeBuilding)){ return false; }
+	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CREATE_ITEM, this, &NFCSLGBuildingModule::OnSLGClienCreateItem)){ return false; }
+
     return true;
 }
 
@@ -554,4 +562,36 @@ int NFCSLGBuildingModule::CheckProduceData( const NFGUID& self )
 std::string NFCSLGBuildingModule::GetProduceHeartName(const NFGUID& self, const NFGUID& xBuild, const std::string& strItemID)
 {
     return xBuild.ToString() + "_" + strItemID + "_" + "OnProduceHeartBeat";
+}
+
+
+void NFCSLGBuildingModule::OnSLGClienMoveObject(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckMoveBuildObject);
+
+	const NFGUID xBuildID = NFINetModule::PBToNF(xMsg.object_guid());
+	const float fX = xMsg.x();
+	const float fY = xMsg.y();
+	const float fZ = xMsg.z();
+
+	Move(nPlayerID, xBuildID, fX, fY, fZ);
+}
+
+void NFCSLGBuildingModule::OnSLGClienUpgradeBuilding(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqUpBuildLv);
+
+	const NFGUID xBuilID = NFINetModule::PBToNF(xMsg.object_guid());
+	Upgrade(nPlayerID, xBuilID);
+}
+
+void NFCSLGBuildingModule::OnSLGClienCreateItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCreateItem);
+
+	const NFGUID& xBuilID = NFINetModule::PBToNF(xMsg.object_guid());
+	const std::string& strItemID = xMsg.config_id();
+	const int nCount = xMsg.count();
+
+	Produce(nPlayerID, xBuilID, strItemID, nCount);
 }

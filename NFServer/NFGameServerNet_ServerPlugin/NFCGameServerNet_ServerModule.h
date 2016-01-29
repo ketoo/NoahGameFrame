@@ -98,17 +98,10 @@ protected:
     void OnClienPushCustom(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClienChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    //Equip
-    void OnIntensifylevelToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnHoleToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnInlaystoneToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnElementlevelToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnReqWearEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnTakeOffEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
 
     //////////////////////////////////////////////////////////////////////////
 
-    void OnClientJoinPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClientExitPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 
@@ -120,13 +113,6 @@ protected:
 
 	///////////WORLD_END///////////////////////////////////////////////////////////////
 
-	/////////SLG_START/////////////////////////////////////////////////////////////////
-	void OnSLGClienBuyItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSLGClienMoveObject(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSLGClienUpgradeBuilding(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSLGClienCreateItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-	/////////SLG_END/////////////////////////////////////////////////////////////////
 protected:
     //将self的全部属性广播给argVar[应该是多对多]
     int OnPropertyEnter( const NFIDataList& argVar, const NFGUID& self );
@@ -223,14 +209,8 @@ private:
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFIElementInfoModule* m_pElementInfoModule;
 
-    NFIPVPModule* m_pPVPModule;
-	NFISkillModule* m_pSkillModule;
 	NFIDataProcessModule* m_pDataProcessModule;
     //////////////////////////////////////////////////////////////////////////
-    //SLG模块
-	NFISLGShopModule* m_pSLGShopModule;
-    NFISLGBuildingModule* m_pSLGBuildingModule;
-    NFIEquipModule* m_pEquipModule;
     NFIGameServerToWorldModule* m_pGameServerToWorldModule;
 };
 #endif
