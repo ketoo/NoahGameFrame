@@ -9,10 +9,21 @@
 #include "NFCEquipModule.h"
 #include "NFComm/Define/NFStringInfo.h"
 #include "NFComm/NFCore/NFTimer.h"
+#include "NFComm/NFPluginModule/NFINetModule.h"
 
 
 bool NFCEquipModule::Init()
 {
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
+
+	assert( NULL != m_pGameServerNet_ServerModule );
+
+	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP, this, &NFCEquipModule::OnIntensifylevelToEquipProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGEC_REQ_HOLE_TO_EQUIP, this, &NFCEquipModule::OnHoleToEquipProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGEC_REQ_INLAYSTONE_TO_EQUIP, this, &NFCEquipModule::OnInlaystoneToEquipProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGEC_REQ_ELEMENTLEVEL_TO_EQUIP, this, &NFCEquipModule::OnElementlevelToEquipProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGEC_WEAR_EQUIP, this, &NFCEquipModule::OnReqWearEquipProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGEC_TAKEOFF_EQUIP, this, &NFCEquipModule::OnTakeOffEquipProcess)){ return false; }
     return true;
 }
 
@@ -677,4 +688,99 @@ bool NFCEquipModule::TakeOffEquip( const NFGUID& self, const NFGUID& xEquipID, c
     }
 
     return true;
+}
+
+void NFCEquipModule::OnIntensifylevelToEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqIntensifylevelToEquip);
+
+	const NFGUID self = NFINetModule::PBToNF((xMsg.selfid()));
+	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
+
+	int nResult = IntensifylevelToEquip(self, xEquipID);
+
+	NFMsg::AckIntensifylevelToEquip xAck;
+
+	*xAck.mutable_selfid() = xMsg.selfid();
+	*xAck.mutable_equipid() = xMsg.equipid();
+	xAck.set_result(nResult);
+
+	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP, xAck, self);
+}
+
+void NFCEquipModule::OnHoleToEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqHoleToEquip);
+
+	const NFGUID self = NFINetModule::PBToNF((xMsg.selfid()));
+	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
+
+	int nResult = HoleToEquip(self, xEquipID);
+
+	NFMsg::AckHoleToEquip xAck;
+
+	*xAck.mutable_selfid() = xMsg.selfid();
+	*xAck.mutable_equipid() = xMsg.equipid();
+	xAck.set_result(nResult);
+
+	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_HOLE_TO_EQUIP, xAck, self);
+}
+
+void NFCEquipModule::OnInlaystoneToEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqInlaystoneToEquip);
+
+	const NFGUID self = NFINetModule::PBToNF((xMsg.selfid()));
+	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
+	const std::string& strStoneID = xMsg.stoneid();
+	const int nHoleIndex = xMsg.hole_index();
+
+	int nResult = InlaystoneToEquip(self, xEquipID, strStoneID, nHoleIndex);
+
+	NFMsg::AckInlaystoneToEquip xAck;
+
+	*xAck.mutable_selfid() = xMsg.selfid();
+	*xAck.mutable_equipid() = xMsg.equipid();
+	xAck.set_result(nResult);
+
+	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_INLAYSTONE_TO_EQUIP, xAck, self);
+}
+
+void NFCEquipModule::OnElementlevelToEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqElementlevelToEquip);
+
+	const NFGUID self = NFINetModule::PBToNF((xMsg.selfid()));
+	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
+
+	int nResult = ElementlevelToEquip(self, xEquipID, xMsg.eelementtype());
+
+	NFMsg::AckElementlevelToEquip xAck;
+
+	*xAck.mutable_selfid() = xMsg.selfid();
+	*xAck.mutable_equipid() = xMsg.equipid();
+	xAck.set_result(nResult);
+
+	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_ELEMENTLEVEL_TO_EQUIP, xAck, self);
+}
+
+void NFCEquipModule::OnReqWearEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqWearEquip);
+
+	const NFGUID self = NFINetModule::PBToNF((xMsg.selfid()));
+	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
+	const NFGUID xTarget = NFINetModule::PBToNF((xMsg.targetid()));
+
+	WearEquip(self, xEquipID, xTarget);
+}
+
+void NFCEquipModule::OnTakeOffEquipProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::TakeOffEquip);
+	const NFGUID self = NFINetModule::PBToNF((xMsg.selfid()));
+	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
+	const NFGUID xTarget = NFINetModule::PBToNF((xMsg.targetid()));
+
+	TakeOffEquip(self, xEquipID, xTarget);
 }
