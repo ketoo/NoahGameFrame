@@ -950,13 +950,16 @@ int NFCKernelModule::RequestGroupScene(const int nSceneID)
 bool NFCKernelModule::RequestGroupScene(const int nSceneID, const int nGroupID)
 {
     NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
-    if (pSceneInfo.get())
+    if (pSceneInfo)
     {
-        NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo(NF_NEW NFCSceneGroupInfo(nSceneID, nGroupID, pSceneInfo->GetWidth()));
-        if (pGroupInfo.get())
-        {
-            return pSceneInfo->AddElement(nGroupID, pGroupInfo);
-        }
+		if(!pSceneInfo->GetElement(nGroupID))
+		{
+			 NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo(NF_NEW NFCSceneGroupInfo(nSceneID, nGroupID, pSceneInfo->GetWidth()));
+			if (pGroupInfo.get())
+			{
+				return pSceneInfo->AddElement(nGroupID, pGroupInfo);
+			}
+		}
     }
 
     return false;
