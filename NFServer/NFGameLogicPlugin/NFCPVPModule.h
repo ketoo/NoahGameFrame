@@ -15,6 +15,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCPVPModule
     : public NFIPVPModule
@@ -38,12 +39,16 @@ public:
 
 	virtual bool ExitPVPWar(const NFGUID& self);
 
+protected:
+	void OnClientJoinPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientExitPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 
 private:
     NFList<NFGUID> mxPVPList; // 报名的队列
+	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 
 

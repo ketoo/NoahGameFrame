@@ -7,9 +7,18 @@
 // -------------------------------------------------------------------------
 
 #include "NFCPVPModule.h"
+#include "NFComm/NFPluginModule/NFINetModule.h"
+#include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
 
 bool NFCPVPModule::Init()
 {
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
+
+	assert( NULL != m_pGameServerNet_ServerModule );
+
+	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_JOIN_PVP, this, &NFCPVPModule::OnClientJoinPVP)){ return false; }
+	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_EXIT_PVP, this, &NFCPVPModule::OnClientExitPVP)){ return false; }
+
     return true;
 }
 
@@ -90,4 +99,23 @@ bool NFCPVPModule::ExitPVPWar( const NFGUID& self )
     mxPVPList.Remove(self);
 
 	return false;
+}
+
+void NFCPVPModule::OnClientJoinPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckJoinActivity)
+
+	switch (xMsg.activity_type())
+	{
+		case NFMsg::ReqAckJoinActivity_EGameActivityType_EGAT_PVP:
+			StartPVPWar(nPlayerID);
+			break;
+		default:
+			break;
+	}
+}
+void NFCPVPModule::OnClientExitPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	//CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::reqex)
+
 }
