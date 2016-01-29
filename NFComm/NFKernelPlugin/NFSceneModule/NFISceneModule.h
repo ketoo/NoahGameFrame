@@ -86,15 +86,7 @@ public:
 
     int NewGroupID()
     {
-        int nNew = ++mnGroupIndex;
-        NF_SHARE_PTR<NFCSceneGroupInfo> pData = GetElement(nNew);
-        while (pData.get())
-        {
-            nNew = ++mnGroupIndex;
-            NF_SHARE_PTR<NFCSceneGroupInfo> pData = GetElement(nNew);
-        }
-
-        return nNew;
+        return ++mnGroupIndex;
     }
 
     int GetWidth()
