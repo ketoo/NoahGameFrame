@@ -3,6 +3,7 @@
 
 #include "NFKernelPlugin.h"
 #include "NFKernelModule/NFCKernelModule.h"
+#include "NFSceneModule/NFCSceneModule.h"
 #include "NFKernelModule/NFCUUIDModule.h"
 
 //
@@ -37,13 +38,13 @@ const std::string NFKernelPlugin::GetPluginName()
 void NFKernelPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFCUUIDModule)
-    //REGISTER_MODULE(pPluginManager, NFCConcurrentModule)
+    REGISTER_MODULE(pPluginManager, NFCSceneModule)
     REGISTER_MODULE(pPluginManager, NFCKernelModule)
 }
 
 void NFKernelPlugin::Uninstall()
 {
     UNREGISTER_MODULE(pPluginManager, NFCKernelModule)
-    //UNREGISTER_MODULE(pPluginManager, NFCConcurrentModule)
+	UNREGISTER_MODULE(pPluginManager, NFCSceneModule)
     UNREGISTER_MODULE(pPluginManager, NFCUUIDModule)
 }
