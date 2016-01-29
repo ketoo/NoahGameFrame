@@ -15,6 +15,8 @@ desc    :定时器类
 
 #if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
+#include <sys/timeb.h>
+#include "NFSingleton.h"
 #else
 #include <sys/time.h>
 #include <utime.h>
@@ -22,6 +24,46 @@ desc    :定时器类
 #include <string.h>
 #endif
 
+#ifdef _MSC_VER
+class CurrentTimeProvider : public NFSingleton<CurrentTimeProvider>
+{
+public:
+    CurrentTimeProvider():highResolutionAvailable(false), countPerMilliSecond(0), beginCount(0)
+    {
+        static LARGE_INTEGER systemFrequency;
+        if(0 != QueryPerformanceFrequency(&systemFrequency))
+        {
+            highResolutionAvailable = true;
+            countPerMilliSecond = systemFrequency.QuadPart/1000;
+            _timeb tb;
+            _ftime_s(&tb);
+            unsigned short currentMilli = tb.millitm;
+            LARGE_INTEGER now;
+            QueryPerformanceCounter(&now);
+            beginCount = now.QuadPart - (currentMilli*countPerMilliSecond);
+        }
+    };
+    int64_t getCurrentTime()
+    {
+        time_t tt;
+        ::time(&tt);
+
+        int64_t millisecond = 0;
+        if (highResolutionAvailable)
+        {
+            LARGE_INTEGER qfc;
+            QueryPerformanceCounter(&qfc);
+            millisecond = (int)((qfc.QuadPart - beginCount)/countPerMilliSecond)%1000;
+        }
+        return tt * 1000 + millisecond;
+    }
+private:
+    bool highResolutionAvailable;
+    int64_t countPerMilliSecond;
+    int64_t beginCount;
+};
+
+#endif
 
 class NFTimeSpan
 {
@@ -126,7 +168,7 @@ public:
     static int64_t GetNowTimeMille()
     {
 #ifdef _MSC_VER
-        return ::GetTickCount64();
+        return CurrentTimeProvider::GetSingletonPtr()->getCurrentTime();
 #else
         struct timeval start;
         gettimeofday(&start, NULL);
