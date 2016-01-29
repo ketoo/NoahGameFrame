@@ -152,7 +152,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClInclude Include="NFKernelModule\NFCUUIDModule.h" />
     <ClInclude Include="NFKernelPlugin.h" />
     <ClInclude Include="NFSceneModule\NFCSceneModule.h" />
-    <ClInclude Include="NFSceneModule\NFISceneModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">

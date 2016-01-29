@@ -20,9 +20,6 @@
     <ClInclude Include="NFSceneModule\NFCSceneModule.h">
       <Filter>NFSceneModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFSceneModule\NFISceneModule.h">
-      <Filter>NFSceneModule</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFKernelPlugin.cpp" />
