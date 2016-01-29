@@ -29,23 +29,16 @@ public:
     NFCSceneGroupInfo(int nSceneID, int nGroupID)
     {
         mnGroupID = nGroupID;
-        //m_pGridModule = NF_SHARE_PTR<NFIGridModule>(NF_NEW NFCGridModule(nSceneID, nWidth));
     }
 
 	NFCSceneGroupInfo(int nSceneID, int nGroupID, int nWidth)
 	{
 		mnGroupID = nGroupID;
-		//m_pGridModule = NF_SHARE_PTR<NFIGridModule>(NF_NEW NFCGridModule(nSceneID, nWidth));
 	}
 
     virtual ~NFCSceneGroupInfo()
     {
     }
-
-    //NF_SHARE_PTR<NFIGridModule> GetGridModule()
-    //{
-    //    return m_pGridModule;
-    //}
 
     bool Execute()
     {
@@ -55,8 +48,6 @@ public:
     NFMapEx<NFGUID, int> mxPlayerList;
     NFMapEx<NFGUID, int> mxOtherList;
     int mnGroupID;
-//private:
-//    NF_SHARE_PTR<NFIGridModule> m_pGridModule;
 };
 
 // all group in this scene
@@ -93,16 +84,6 @@ public:
     {
         return mnWidth;
     }
-
-    //void SetObjectSelf(const NFGUID& ident)
-    //{
-    //    mIdent = ident;
-    //}
-
-    //NFGUID GetObjectSelf()
-    //{
-    //    return mIdent;
-    //}
 
     bool AddObjectToGroup(const int nGroupID, const NFGUID& ident, bool bPlayer)
     {
@@ -153,14 +134,14 @@ public:
     }
 protected:
 private:
-    //NFGUID mIdent;
     int mnGroupIndex;
     int mnSceneID;
     int mnWidth;
 };
 
 class NFISceneModule
-    : public NFMapEx<int, NFCSceneInfo>
+    : public NFILogicModule,
+	public NFMapEx<int, NFCSceneInfo>
 {
 public:
     virtual ~NFISceneModule()
