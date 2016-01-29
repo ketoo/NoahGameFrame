@@ -7,10 +7,19 @@
 // -------------------------------------------------------------------------
 
 #include "NFCSLGShopModule.h"
+#include "NFComm/NFPluginModule/NFINetModule.h"
+#include "NFComm/NFMessageDefine/NFSLGDefine.pb.h"
 
 bool NFCSLGShopModule::Init()
 {
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
 
+	assert( NULL != m_pKernelModule );
+
+	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_BUY_FORM_SHOP, this, &NFCSLGShopModule::OnSLGClienBuyItem))
+	{
+		//Log
+	}
 
     return true;
 }
@@ -66,4 +75,15 @@ bool NFCSLGShopModule::ReqBuyItem(const NFGUID& self, const std::string& strID, 
     //Ìí¼Ó½ø±í
     m_pSLGBuildingModule->AddBuilding(self, strItem, fX, fY, fZ);
 	return true;
+}
+
+void NFCSLGShopModule::OnSLGClienBuyItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckBuyObjectFormShop);
+
+	const std::string strItemID = xMsg.config_id();
+	const float fX = xMsg.x();
+	const float fY = xMsg.y();
+	const float fZ = xMsg.z();
+	ReqBuyItem(nPlayerID, strItemID, fX, fY, fZ);
 }
