@@ -43,24 +43,17 @@ public:
     ///////////////////////////////////////////////////////////////////////
 
     virtual bool FindHeartBeat(const NFGUID& self, const std::string& strHeartBeatName);
-
     virtual bool RemoveHeartBeat(const NFGUID& self, const std::string& strHeartBeatName);
 
-    virtual int Command(const NFIDataList& var);
-
     virtual bool IsContainer(const NFGUID& self);
-
     virtual bool ExistContainer(const int nSceneID);
 
     virtual NF_SHARE_PTR<NFIObject> GetObject(const NFGUID& ident);
-
     virtual NF_SHARE_PTR<NFIObject> CreateObject(const NFGUID& self, const int nSceneID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg);
-
-    virtual bool DestroyObject(const NFGUID& self);
-
-    virtual bool DestroyAll();
-
+    
+	virtual bool DestroyAll();
     virtual bool DestroySelf(const NFGUID& self);
+    virtual bool DestroyObject(const NFGUID& self);
 
     //////////////////////////////////////////////////////////////////////////
     virtual bool FindProperty(const NFGUID& self, const std::string& strPropertyName);
@@ -77,7 +70,6 @@ public:
 
     //////////////////////////////////////////////////////////////////////////
     virtual NF_SHARE_PTR<NFIRecord> FindRecord(const NFGUID& self, const std::string& strRecordName);
-
     virtual bool ClearRecord(const NFGUID& self, const std::string& strRecordName);
 
     virtual bool SetRecordInt(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue);
@@ -107,49 +99,29 @@ public:
     ////////////////////////////////////////////////////////////////
 
     virtual bool CreateScene(const int nSceneID);
-
     virtual bool DestroyScene(const int nSceneID);
 
     virtual int GetOnLineCount();
-
     virtual int GetMaxOnLineCount();
-
     virtual int GetSceneOnLineCount(const int nSceneID);
-
     virtual int GetSceneOnLineCount(const int nSceneID, const int nGroupID);
 
     virtual int GetSceneOnLineList(const int nSceneID, NFIDataList& var);
-    virtual int GetAllSceneObjectList(NFIDataList& var);
 
     virtual int RequestGroupScene(const int nSceneID);
     virtual bool RequestGroupScene(const int nSceneID, const int nGroupID);
-    //virtual int AddObjectToGroup(const int nSceneID,const int nGroupID, const NFIDataList& var);
 
 	virtual bool ReleaseGroupScene(const int nSceneID, const int nGroupID);
-
 	virtual bool ExitGroupScene(const int nSceneID, const int nGroupID);
 
     virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list);
-
-    virtual const NFGUID& GetGridID(const float fX, const float fY, const float fZ);
-
-    //virtual bool GetAroundGrid(const int nSceneID, const int nGroupID, const NFGUID nGridID, NFIDataList& list);
-
-    //virtual bool GetGridObjectList(const int nSceneID, const int nGroupID, const NFGUID nGridID, NFIDataList& list);
-
-    virtual bool GetRangObjectList(const NFGUID& self, const int nSceneID, const int nGroupID, const float fRang, NFIDataList& list);
-
-    virtual bool GetRangObjectList(const float fX, const float fY, const float fZ, const int nSceneID, const int nGroupID, const float fRang, NFIDataList& list);
-
     virtual int GetObjectByProperty(const int nSceneID, const std::string& strPropertyName, const NFIDataList& valueArgArg, NFIDataList& list);
 
     virtual void Random(int nStart, int nEnd, int nCount, NFIDataList& valueList);
 
     //////////////////////////////////////////////////////////////////////////
     virtual bool LogStack();
-
     virtual bool LogInfo(const NFGUID ident);
-
     virtual bool LogSelfInfo(const NFGUID ident);
 
 	//////////////////////////////////////////////////////////////////////////
@@ -205,8 +177,7 @@ private:
     NFGUID mnCurExeObject;
     NFINT64 nLastTime;
 
-    NF_SHARE_PTR<NFISceneModule> m_pSceneModule;
-    
+    NFISceneModule* m_pSceneModule;
     NFILogModule* m_pLogModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIElementInfoModule* m_pElementInfoModule;
