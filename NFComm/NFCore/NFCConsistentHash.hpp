@@ -41,8 +41,18 @@ public:
 		nVirtualIndex = 0;
 	}
 
-	virtual std::string GetDataStr() const = 0;
-	virtual int GetDataID() const = 0;
+	virtual std::string GetDataStr() const
+	{
+		return "";
+	}
+	virtual int GetDataID() const
+	{
+		return 0;
+	}
+	virtual bool Candidate() const
+	{
+		return false;
+	};
 
     std::string ToStr() const 
     {
@@ -62,6 +72,7 @@ public:
 		nPort = 0;
 		nWeight = 0;//总共多少权重即是多少虚拟节点
 		nMachineID = 0;
+		bCandidate = false;
 	}
 
 	NFCMachineNode()
@@ -70,6 +81,7 @@ public:
 		nPort = 0;
 		nWeight = 0;//总共多少权重即是多少虚拟节点
 		nMachineID = 0;
+		bCandidate = false;
 	}
 
 public:
@@ -84,10 +96,19 @@ public:
 		return nMachineID;
 	}
 
+	virtual bool Candidate() const
+	{
+		return bCandidate;
+	}
+
 	std::string strIP;
 	int nPort;
 	int nWeight;
 	int nMachineID;
+	bool bCandidate;
+
+	//如果是候选主机，则在没启用之前，他会指向真实主机
+	std::list<NFIVirtualNode> xRealMachine;
 };
 
 class NFIHasher
@@ -107,6 +128,25 @@ public:
 
         return ret.checksum();
     }
+};
+
+class NFIConsistentHash
+{
+	virtual std::size_t Size() const = 0;
+	virtual bool Empty() const = 0;
+
+	virtual void Insert(const int nID, const std::string& strIP, int nPort) = 0;
+	virtual void Insert(const NFCMachineNode& xNode) = 0;
+
+	virtual bool Exist(const NFCMachineNode& xInNode) = 0;
+	virtual std::size_t Erase(const NFCMachineNode& xNode)  = 0;
+
+	virtual bool GetSuitNode(NFCMachineNode& node) = 0;
+	virtual bool GetSuitNode(const std::string& str, NFCMachineNode& node) = 0;
+	virtual bool GetSuitNode(uint32_t hashValue, NFCMachineNode& node) = 0;
+
+	virtual bool GetNodeList(std::list<NFCMachineNode>& nodeList) = 0;
+
 };
 
 class NFCConsistentHash
@@ -137,20 +177,30 @@ public:
         return mxNodes.empty();
     }
 
+	void Insert(const int nID, const std::string& strIP, int nPort) 
+	{
+		NFCMachineNode xNode;
+		xNode.nMachineID = nID;
+		xNode.strIP = strIP;
+		xNode.nPort = nPort;
+
+		Insert(xNode);
+	}
+
     void Insert(const NFCMachineNode& xNode) 
     {
         uint32_t hash = m_pHasher->GetHashValue(xNode);
         auto it = mxNodes.find(hash);
         if (it == mxNodes.end())
         {
-            mxNodes.insert(TMAP_TYPE::value_type(hash,xNode));
+            mxNodes.insert(std::map<uint32_t, NFCMachineNode>::value_type(hash, xNode));
         }
     }
 
 	bool Exist(const NFCMachineNode& xInNode)
 	{
 		uint32_t hash = m_pHasher->GetHashValue(xInNode);
-		TMAP_TYPE::iterator it = mxNodes.find(hash);
+		std::map<uint32_t, NFCMachineNode>::iterator it = mxNodes.find(hash);
 		if (it != mxNodes.end())
 		{
 			return true;
@@ -192,7 +242,7 @@ public:
 			return false;
 		}
 
-		TMAP_TYPE::iterator it = mxNodes.lower_bound(hashValue);
+		std::map<uint32_t, NFCMachineNode>::iterator it = mxNodes.lower_bound(hashValue);
 
 		if (it == mxNodes.end())
 		{
@@ -204,54 +254,19 @@ public:
 		return true;
 	}
 
-// 	bool GetMasterNodeReverse(NFCMachineNode& node)
-// 	{
-// 		if(mxNodes.empty())
-// 		{
-// 			return false;
-// 		}
-// 
-// 		int nID = 0;
-// 		TMAP_TYPE::iterator it = mxNodes.begin();
-// 		for (; it != mxNodes.end(); ++it)
-// 		{
-// 			if (it->second.GetDataID() > nID)
-// 			{
-// 				node = it->second;
-// 				nID = it->second.GetDataID();
-// 			}
-// 		}
-// 
-// 		return true;
-// 	}
-// 
-// 	bool GetMasterNodeSequence(NFCMachineNode& node)
-// 	{
-// 		if(mxNodes.empty())
-// 		{
-// 			return false;
-// 		}
-// 
-// 		int nID = mxNodes.begin()->second.GetDataID();
-// 		TMAP_TYPE::iterator it = mxNodes.begin();
-// 		for (; it != mxNodes.end(); ++it)
-// 		{
-// 			if (it->second.GetDataID() < nID)
-// 			{
-// 				node = it->second;
-// 				nID = it->second.GetDataID();
-// 			}
-// 		}
-// 
-// 		return true;
-// 	}
+	bool GetNodeList(std::list<NFCMachineNode>& nodeList)
+	{
+		for (std::map<uint32_t, NFCMachineNode>::iterator it = mxNodes.begin(); it != mxNodes.end(); ++it)
+		{
+			nodeList.push_back(it->second);
+		}
+
+		return true;
+	}
 
 private:
-	typedef std::map<uint32_t, NFCMachineNode> TMAP_TYPE;
-	typedef TMAP_TYPE::iterator iterator;
-
+	std::map<uint32_t, NFCMachineNode> mxNodes;
     NFIHasher* m_pHasher;
-    TMAP_TYPE mxNodes;
 };
 
 
