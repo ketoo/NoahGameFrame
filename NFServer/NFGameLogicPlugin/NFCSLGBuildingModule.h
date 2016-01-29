@@ -13,6 +13,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCSLGBuildingModule : public NFISLGBuildingModule
 {
@@ -51,10 +52,16 @@ protected:
 
     std::string GetProduceHeartName(const NFGUID& self, const NFGUID& xBuild, const std::string& strItemID);
 
+protected:
+	void OnSLGClienMoveObject(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSLGClienUpgradeBuilding(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSLGClienCreateItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
 private:
 	NFIKernelModule* m_pKernelModule;
 	NFILogModule* m_pLogModule;
 	NFIUUIDModule* m_pUUIDModule;
+	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 
 #endif // !__NFC_SLG_BUILDING_MODULE_H_
