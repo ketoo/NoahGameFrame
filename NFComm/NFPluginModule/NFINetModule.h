@@ -56,7 +56,7 @@ enum NF_SERVER_TYPES
 #define CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msgData, nLen, msg)                 \
 	NFGUID nPlayerID;                                \
 	msg xMsg;                                           \
-	if (!RecivePB(nSockIndex, nMsgID, msgData, nLen, xMsg, nPlayerID))             \
+	if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msgData, nLen, xMsg, nPlayerID))             \
 {                                                   \
 	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
 	return;                                         \
