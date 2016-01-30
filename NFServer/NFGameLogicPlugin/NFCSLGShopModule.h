@@ -40,7 +40,7 @@ protected:
 	void OnSLGClienBuyItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
-    NFIElementInfoModule* m_pEslementInfoModule;
+    NFIElementInfoModule* m_pElementInfoModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
     NFISLGBuildingModule* m_pSLGBuildingModule;
