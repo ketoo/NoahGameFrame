@@ -43,36 +43,8 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-	virtual bool ApplyEnterGuilEctype(const NFGUID& self, const NFGUID& guild);
-	virtual bool BindGuildEcType(const NFGUID& self, const NFGUID& guild, const int nEctypeID, const int nGroup);
-
-protected:
-	void OnAckGuildEctypeProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSetGuildEctypeInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	
-	void OnCloneObjectEntryProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnCloneObjectLeaveProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnCloneObjectPropertyEntryProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnCloneObjectRecordEntryProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClonePropertyIntProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClonePropertyFloatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClonePropertyStringProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClonePropertyDoubleProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClonePropertyObjectProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnCloneAddRowProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnCloneRemoveRowProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnCloneSwapRowProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnCloneRecordIntProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnCloneRecordFloatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnCloneRecordDoubleProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnCloneRecordStringProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnCloneRecordObjectProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnCloneRecordClearProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnCloneRecordSortProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-	void OnRecordEnterUnPack(NF_SHARE_PTR<NFIRecord> pRecord, const NFMsg::ObjectRecordBase& xRecordData);
-
-
+    virtual bool CreateGuilEctype(const NFGUID& self, const NFGUID& guild);
+    virtual bool ApplyEnterGuilEctype(const NFGUID& self, const NFGUID& guild);
 private:
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFIGameServerToWorldModule* m_pGameServerToWorldModule;
