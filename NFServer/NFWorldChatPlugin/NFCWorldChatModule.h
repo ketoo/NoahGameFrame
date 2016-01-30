@@ -12,6 +12,7 @@
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIWorldChatModule.h"
+#include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 
 class NFCWorldChatModule
     : public NFIWorldChatModule
@@ -31,9 +32,13 @@ public:
 
 	//////////////////////////////////////////////////////////////////////////
 protected:
+	void OnChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+protected:
 
 protected:
     NFIKernelModule* m_pKernelModule;
+	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 private:
 };
 
