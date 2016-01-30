@@ -112,7 +112,9 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClInclude Include="NFCCommonConfigModule.h" />
     <ClInclude Include="NFCEquipModule.h" />
     <ClInclude Include="NFCGameLogicModule.h" />
+    <ClInclude Include="NFCGuildDataModule.h" />
     <ClInclude Include="NFCGuildEctypeModule.h" />
+    <ClInclude Include="NFCGuildModule.h" />
     <ClInclude Include="NFCHeroModule.h" />
     <ClInclude Include="NFCItemConsumeManagerModule.h" />
     <ClInclude Include="NFCMailModule.h" />
@@ -145,7 +147,9 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClCompile Include="NFCCommonConfigModule.cpp" />
     <ClCompile Include="NFCEquipModule.cpp" />
     <ClCompile Include="NFCGameLogicModule.cpp" />
+    <ClCompile Include="NFCGuildDataModule.cpp" />
     <ClCompile Include="NFCGuildEctypeModule.cpp" />
+    <ClCompile Include="NFCGuildModule.cpp" />
     <ClCompile Include="NFCHeroModule.cpp" />
     <ClCompile Include="NFCItemConsumeManagerModule.cpp" />
     <ClCompile Include="NFCMailModule.cpp" />
