@@ -14,6 +14,8 @@
 #include "NFComm/NFPluginModule/NFIWorldGuildModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIWorldGuildDataModule.h"
+#include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFCWorldGuildModule
     : public NFIWorldGuildModule
@@ -47,12 +49,21 @@ public:
 	virtual bool GetGuildMemberInfo(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember);
 
 protected:
+	void OnCreateGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnJoinGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnLeaveGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnOprGuildMemberProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSearchGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+protected:
     bool CheckPower(const NFGUID& self, const NFGUID& xGuildID, int nPowerType);
 
 protected:
     NFIKernelModule* m_pKernelModule;
     NFIUUIDModule* m_pUUIDModule;
     NFIWorldGuildDataModule* m_pWorldGuildDataModule;
+	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
+	NFILogModule* m_pLogModule;
 };
 
 #endif
