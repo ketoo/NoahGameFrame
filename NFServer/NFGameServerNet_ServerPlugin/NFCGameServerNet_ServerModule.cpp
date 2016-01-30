@@ -129,11 +129,6 @@ void NFCGameServerNet_ServerModule::OnRecivePSPack(const int nSockIndex, const i
 		//    OnClienGMProcess(nSockIndex, nMsgID, msg, nLen);
 		//    break;
 
-
-    case NFMsg::EGameMsgID::EGMI_REQ_ITEM_OBJECT:
-        OnClienUseItem(nSockIndex, nMsgID, msg, nLen);
-        break;
-
     case NFMsg::EGameMsgID::EGMI_REQ_PICK_ITEM:
         OnClienPickItem(nSockIndex, nMsgID, msg, nLen);
         break;
@@ -1911,20 +1906,6 @@ void NFCGameServerNet_ServerModule::OnClienChatProcess(const int nSockIndex, con
 	default:
 		break;;
 	}
-	
-
-}
-
-
-void NFCGameServerNet_ServerModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckUseItem)
-
-    const std::string strID = xMsg.item().item_id();
-    const NFGUID xTarget = PBToNF(xMsg.targetid());
-    NFCDataList varList;
-    varList << strID <<xTarget;
-    m_pKernelModule->DoEvent(nPlayerID, NFED_ON_CLIENT_REQUIRE_USE_ITEM, varList);
 }
 
 void NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
