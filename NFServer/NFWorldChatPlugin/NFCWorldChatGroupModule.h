@@ -15,6 +15,8 @@
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
 #include "NFComm/NFPluginModule/NFIDataProcessModule.h"
+#include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFCWorldChatGroupModule
     : public NFIWorldChatGroupModule
@@ -44,6 +46,13 @@ public:
     virtual bool Offeline(const NFGUID& self, const NFGUID& xGroupID);
 
 protected:
+	void OnReqCreateChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReqJoineChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReqLeaveChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReqSubscriptionChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReqCancelSubscriptionChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+protected:
     void CheckLoadGuild( const NFGUID& self, const NFGUID& xGuild );
     int OnGuildClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
     int OnSaveGroupheartEvent( const NFGUID& self , const std::string& strHeartName, const float fTime, const int nCount );
@@ -53,6 +62,8 @@ protected:
     NFIUUIDModule* m_pUUIDModule;
     NFIClusterModule* m_pClusterSQLModule;    
     NFIDataProcessModule* m_pDataProcessModule;
+	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
+	NFILogModule* m_pLogModule;
 
 private:
     std::string mstrGroupTalble;
