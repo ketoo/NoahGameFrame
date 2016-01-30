@@ -21,10 +21,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIWorldGuildModule.h"
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
-#include "NFComm/NFPluginModule/NFIWorldGuildDataModule.h"
-#include "NFComm/NFPluginModule/NFIWorldChatGroupModule.h"
 #include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
 
 class NFCWorldNet_ServerModule
@@ -58,6 +55,8 @@ public:
 
 	virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter();
 
+	virtual int GetPlayerGameID(const NFGUID self);
+
 protected:
 
 	void OnRecivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -90,20 +89,10 @@ protected:
 	void LogGameServer();
 
 protected:
-	void OnCreateGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnJoinGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnLeaveGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnOprGuildMemberProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnSearchGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
     void OnOnlineProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnOfflineProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     
-    void OnReqCreateChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnReqJoineChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnReqLeaveChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnReqSubscriptionChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnReqCancelSubscriptionChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
 
@@ -118,10 +107,7 @@ private:
     NFIWorldLogicModule* m_pWorldLogicModule;
 	NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-	NFIWorldGuildModule* m_pWorldGuildModule;
     NFIClusterModule* m_pClusterSQLModule;
-    NFIWorldGuildDataModule* m_pWorldGuildDataModule;
-    NFIWorldChatGroupModule* m_pWordChatGroupModule;
 	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 	
 };
