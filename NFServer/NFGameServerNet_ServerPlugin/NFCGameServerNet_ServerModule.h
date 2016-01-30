@@ -88,7 +88,7 @@ protected:
     //////////////////////////////////////////////////////////////////////////
     
     void OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienUseItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    
     void OnClienPickItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClienMove(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClienMoveImmune(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -97,12 +97,9 @@ protected:
     void OnClienPushCustom(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClienChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-
-
     //////////////////////////////////////////////////////////////////////////
 
     void OnClientExitPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
 
     void OnClientEndBattle(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
