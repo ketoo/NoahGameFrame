@@ -93,9 +93,6 @@
     <ClInclude Include="NFCAddConsistentHash.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFCCommonConfig.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NFCEventManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
