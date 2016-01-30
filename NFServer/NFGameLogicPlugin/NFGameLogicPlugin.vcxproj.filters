@@ -108,6 +108,12 @@
     <ClInclude Include="NFCGuildEctypeModule.h">
       <Filter>NFGuildEctypeModule</Filter>
     </ClInclude>
+    <ClInclude Include="NFCGuildDataModule.h">
+      <Filter>NFGuildEctypeModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCGuildModule.h">
+      <Filter>NFGuildEctypeModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -174,6 +180,12 @@
       <Filter>NFCommonConfigModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCGuildEctypeModule.cpp">
+      <Filter>NFGuildEctypeModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCGuildDataModule.cpp">
+      <Filter>NFGuildEctypeModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCGuildModule.cpp">
       <Filter>NFGuildEctypeModule</Filter>
     </ClCompile>
   </ItemGroup>
