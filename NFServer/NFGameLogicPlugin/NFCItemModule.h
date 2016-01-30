@@ -19,6 +19,7 @@
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIHeroModule.h"
 #include "NFComm/NFPluginModule/NFICommonConfigModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCItemModule
     : public NFIItemModule
@@ -39,7 +40,6 @@ public:
 protected:
 	int OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-	int OnRequireUseItemEvent( const NFGUID& self, const int nEventID, const NFIDataList& var );
 	int OnRequireUseItemPosEvent( const NFGUID& self, const int nEventID, const NFIDataList& var );
 
 	virtual bool CheckConfig();
@@ -50,6 +50,9 @@ protected:
 
     bool DoAwardPack( const NFGUID& self, const std::string& strAwardPack);
 
+protected:
+	void OnClienUseItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
 private:
     NFIKernelModule* m_pKernelModule;
     NFIItemConsumeManagerModule* m_pItemConsumeManagerModule;
@@ -59,6 +62,7 @@ private:
     NFIPropertyModule* m_pPropertyModule;
 	NFIHeroModule* m_pHeroModule;
 	NFICommonConfigModule* m_pCommonConfigModule;
+	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 
 
