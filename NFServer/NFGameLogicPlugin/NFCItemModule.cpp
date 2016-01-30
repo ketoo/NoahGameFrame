@@ -10,30 +10,8 @@
 
 bool NFCItemModule::Init()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>("NFCItemConsumeManagerModule");
-    m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
-    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
-	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>( "NFCHeroModule" );
-	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>( "NFCCommonConfigModule" );
-    
-    assert( NULL != m_pKernelModule );
-    assert( NULL != m_pItemConsumeManagerModule );
-    assert( NULL != m_pPackModule );
-    assert( NULL != m_pElementInfoModule );
-    assert(	NULL != m_pLogicClassModule);
-    assert(	NULL != m_pPropertyModule);
-	assert(	NULL != m_pHeroModule);
-	assert(	NULL != m_pCommonConfigModule);
-
-    std::string strPlayerPath = pPluginManager->GetConfigPath();
-    strPlayerPath += "NFDataCfg/Ini/Common/AwardPackConfig.xml";
-    m_pCommonConfigModule->LoadConfig(strPlayerPath);
     return true;
 }
-
 
 bool NFCItemModule::Shut()
 {
@@ -48,8 +26,38 @@ bool NFCItemModule::Execute()
 
 bool NFCItemModule::AfterInit()
 {
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
+	m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>("NFCItemConsumeManagerModule");
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
+	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
+	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
+	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>( "NFCHeroModule" );
+	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>( "NFCCommonConfigModule" );
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
+
+	assert( NULL != m_pKernelModule );
+	assert( NULL != m_pItemConsumeManagerModule );
+	assert( NULL != m_pPackModule );
+	assert( NULL != m_pElementInfoModule );
+	assert(	NULL != m_pLogicClassModule);
+	assert(	NULL != m_pPropertyModule);
+	assert(	NULL != m_pHeroModule);
+	assert(	NULL != m_pCommonConfigModule);
+	assert(	NULL != m_pGameServerNet_ServerModule);
+
+	std::string strPlayerPath = pPluginManager->GetConfigPath();
+	strPlayerPath += "NFDataCfg/Ini/Common/AwardPackConfig.xml";
+	m_pCommonConfigModule->LoadConfig(strPlayerPath);
+
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCItemModule::OnClassObjectEvent );
 	CheckConfig();
+
+	//////////////////////////////////////////////////////////////////////////
+	// add msg handler
+	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_SWAP_SCENE, this, &NFCItemModule::OnClienUseItem)){ return false; }
+
+
     return true;
 }
 
@@ -61,64 +69,7 @@ int NFCItemModule::OnClassObjectEvent( const NFGUID& self, const std::string& st
     }
     else if ( CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
     {
-        m_pKernelModule->AddEventCallBack( self, NFED_ON_CLIENT_REQUIRE_USE_ITEM, this, &NFCItemModule::OnRequireUseItemEvent );
-        m_pKernelModule->AddEventCallBack( self, NFED_ON_CLIENT_REQUIRE_USE_ITEM_POS, this, &NFCItemModule::OnRequireUseItemEvent );
-
-    }
-
-    return 0;
-}
-
-
-int NFCItemModule::OnRequireUseItemEvent( const NFGUID& self, const int nEventID, const NFIDataList& var )
-{
-	if (var.GetCount() != 2
-		|| !var.TypeEx(TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_UNKNOWN))
-	{
-		return 0;
-	}
-    //EGameErrorCode errorCode = EGameErrorCode::EGEC_INVALID_ITEM;
-	const std::string& strItemID = var.String(0);
-	const NFGUID xTargetID = var.Object(0);
-
-	if(!m_pElementInfoModule->ExistElement(strItemID)
-		|| !m_pKernelModule->GetObject(xTargetID))
-	{
-		return 0;
-	}
-
-    NF_SHARE_PTR<NFIRecord> pRecordPack = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagItemList());
-    if (nullptr == pRecordPack)
-    {
-        return 1;
-    }
-
-    if (!ConsumeDataIteProperty(self, strItemID))
-    {
-        return 1;
-    }
-
-    if (!m_pPackModule->DeleteItem(self, strItemID, 1))
-    {
-        return 1;
-    }
-
-    int nItemType = m_pElementInfoModule->GetPropertyInt(strItemID, "ItemType");
-    NFIItemConsumeProcessModule* pConsumeProcessModule = m_pItemConsumeManagerModule->GetConsumeModule(nItemType);
-    if (pConsumeProcessModule)
-    {
-        if (pConsumeProcessModule->ConsumeLegal(self, strItemID, xTargetID) > 0)
-        {
-            pConsumeProcessModule->ConsumeProcess(self, strItemID, xTargetID);
-        }
-    }
-
-    AddItemEffectDataProperty(self, xTargetID, strItemID);
-
-    const std::string& strAwardPackID = m_pElementInfoModule->GetPropertyString(strItemID, "AwardData");
-    if (!strAwardPackID.empty())
-    {
-        DoAwardPack( self, strAwardPackID);
+        m_pKernelModule->AddEventCallBack( self, NFED_ON_CLIENT_REQUIRE_USE_ITEM_POS, this, &NFCItemModule::OnRequireUseItemPosEvent );
     }
 
     return 0;
@@ -126,8 +77,6 @@ int NFCItemModule::OnRequireUseItemEvent( const NFGUID& self, const int nEventID
 
 int NFCItemModule::OnRequireUseItemPosEvent( const NFGUID& self, const int nEventID, const NFIDataList& var )
 {
-
-
     return 0;
 }
 
@@ -353,4 +302,52 @@ bool NFCItemModule::DoAwardPack( const NFGUID& self, const std::string& strAward
     }
 
     return true;
+}
+
+void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckUseItem);
+
+	const NFGUID& self = NFINetModule::PBToNF(xMsg.user());
+	const std::string strItemID = xMsg.item().item_id();
+	const NFGUID xTargetID = NFINetModule::PBToNF(xMsg.targetid());
+
+	if(!m_pElementInfoModule->ExistElement(strItemID) || !m_pKernelModule->GetObject(xTargetID))
+	{
+		return;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pRecordPack = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagItemList());
+	if (nullptr == pRecordPack)
+	{
+		return;
+	}
+
+	if (!ConsumeDataIteProperty(self, strItemID))
+	{
+		return;
+	}
+
+	if (!m_pPackModule->DeleteItem(self, strItemID, 1))
+	{
+		return;
+	}
+
+	int nItemType = m_pElementInfoModule->GetPropertyInt(strItemID, "ItemType");
+	NFIItemConsumeProcessModule* pConsumeProcessModule = m_pItemConsumeManagerModule->GetConsumeModule(nItemType);
+	if (pConsumeProcessModule)
+	{
+		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, xTargetID) > 0)
+		{
+			pConsumeProcessModule->ConsumeProcess(self, strItemID, xTargetID);
+		}
+	}
+
+	AddItemEffectDataProperty(self, xTargetID, strItemID);
+
+	const std::string& strAwardPackID = m_pElementInfoModule->GetPropertyString(strItemID, "AwardData");
+	if (!strAwardPackID.empty())
+	{
+		DoAwardPack( self, strAwardPackID);
+	}
 }
