@@ -12,6 +12,7 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFINetModule.h"
 
 bool NFCWorldChatGroupModule::Init()
 {
@@ -20,6 +21,15 @@ bool NFCWorldChatGroupModule::Init()
 
 bool NFCWorldChatGroupModule::Shut()
 {
+	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>("NFCWorldNet_ServerModule");
+
+	assert(NULL != m_pWorldNet_ServerModule);
+	
+	if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGEC_REQ_CREATE_CHATGROUP, this, &NFCWorldChatGroupModule::OnReqCreateChatGroupProcess)){ return false; }
+	if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGEC_REQ_JOIN_CHATGROUP, this, &NFCWorldChatGroupModule::OnReqJoineChatGroupProcess)){ return false; }
+	if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGEC_REQ_LEAVE_CHATGROUP, this, &NFCWorldChatGroupModule::OnReqLeaveChatGroupProcess)){ return false; }
+	if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGEC_REQ_SUBSCRIPTION_CHATGROUP, this, &NFCWorldChatGroupModule::OnReqSubscriptionChatGroupProcess)){ return false; }
+	if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP, this, &NFCWorldChatGroupModule::OnReqCancelSubscriptionChatGroupProcess)){ return false; }
     return true;
 }
 
@@ -33,12 +43,14 @@ bool NFCWorldChatGroupModule::AfterInit()
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
     m_pClusterSQLModule = pPluginManager->FindModule<NFIClusterModule>("NFCMysqlClusterModule");
-    m_pDataProcessModule = pPluginManager->FindModule<NFIDataProcessModule>("NFCDataProcessModule");
-
+	m_pDataProcessModule = pPluginManager->FindModule<NFIDataProcessModule>("NFCDataProcessModule");
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
+	
 	assert(NULL != m_pKernelModule);
 	assert(NULL != m_pUUIDModule);
 	assert(NULL != m_pClusterSQLModule);
 	assert(NULL != m_pDataProcessModule);
+	assert(NULL != m_pLogModule);
 
     m_pDataProcessModule->RegisterAutoSave(mstrGroupTalble);
     m_pKernelModule->AddClassCallBack(mstrGroupTalble, this, &NFCWorldChatGroupModule::OnGuildClassEvent);
@@ -273,4 +285,107 @@ bool NFCWorldChatGroupModule::Offeline( const NFGUID& self, const NFGUID& xGroup
     pRecord->SetInt(nRow, NFrame::ChatGroup::GroupMemberList_Online, 0);
     pRecord->SetInt(nRow, NFrame::ChatGroup::GroupMemberList_GameID, 0);
     return true;
+}
+
+void NFCWorldChatGroupModule::OnReqCreateChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen,NFMsg::ReqAckCreateChatGroup);
+
+	const NFGUID xGroup = CreateGroup(nPlayerID);
+	if (!xGroup.IsNull())
+	{
+		NFMsg::ReqAckCreateChatGroup xAck;
+		xAck.set_name(xMsg.name());
+		*xAck.mutable_selfid() = NFINetModule::NFToPB(nPlayerID);
+		*xAck.mutable_xchatgroupid() = NFINetModule::NFToPB(xGroup);
+		m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGEC_ACK_CREATE_CHATGROUP, xAck, nSockIndex, nPlayerID);
+	}
+	else
+	{
+		NFMsg::ReqAckCreateChatGroup xAck;
+		xAck.set_name(xMsg.name());
+		*xAck.mutable_selfid() = NFINetModule::NFToPB(nPlayerID);
+		*xAck.mutable_xchatgroupid() = NFINetModule::NFToPB(xGroup);
+		m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGEC_ACK_CREATE_CHATGROUP, xAck, nSockIndex, nPlayerID);
+	}
+}
+
+void NFCWorldChatGroupModule::OnReqJoineChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen,NFMsg::ReqAckjoinChatGroup);
+
+	const NFGUID xGroup = NFINetModule::PBToNF(xMsg.xchatgroupid());
+	if (JoinGroup(nPlayerID, xGroup))
+	{
+		NFMsg::ReqAckjoinChatGroup xAck;
+
+		*xAck.mutable_selfid() = NFINetModule::NFToPB(nPlayerID);
+		*xAck.mutable_xchatgroupid() = NFINetModule::NFToPB(xGroup);
+		xAck.set_result(1);
+		m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGEC_ACK_JOIN_CHATGROUP, xAck, nSockIndex, nPlayerID);
+	}
+	else
+	{
+		NFMsg::ReqAckjoinChatGroup xAck;
+
+		*xAck.mutable_selfid() = NFINetModule::NFToPB(nPlayerID);
+		*xAck.mutable_xchatgroupid() = NFINetModule::NFToPB(xGroup);
+		xAck.set_result(0);
+		m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGEC_ACK_JOIN_CHATGROUP, xAck, nSockIndex, nPlayerID);
+	}
+}
+
+void NFCWorldChatGroupModule::OnReqLeaveChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen,NFMsg::ReqAckQuitChatGroup);
+
+	const NFGUID xGroup = NFINetModule::PBToNF(xMsg.xchatgroupid());
+	if (QuitGroup(nPlayerID, xGroup))
+	{
+		NFMsg::ReqAckQuitChatGroup xAck;
+
+		*xAck.mutable_selfid() = NFINetModule::NFToPB(nPlayerID);
+		*xAck.mutable_xchatgroupid() = NFINetModule::NFToPB(xGroup);
+		xAck.set_result(1);
+		m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGEC_ACK_LEAVE_CHATGROUP, xAck, nSockIndex, nPlayerID);
+	}
+	else
+	{
+		NFMsg::ReqAckQuitChatGroup xAck;
+
+		*xAck.mutable_selfid() = NFINetModule::NFToPB(nPlayerID);
+		*xAck.mutable_xchatgroupid() = NFINetModule::NFToPB(xGroup);
+		xAck.set_result(0);
+		m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGEC_ACK_LEAVE_CHATGROUP, xAck, nSockIndex, nPlayerID);
+	}
+}
+
+void NFCWorldChatGroupModule::OnReqSubscriptionChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen,NFMsg::ReqSubscriptionChatGroup);
+
+	int nGameID = 0;
+// 	if (!m_pWorldGuildDataModule->GetPlayerGameID(nPlayerID, nGameID))
+// 	{
+// 		return ;
+// 	}
+
+	for (int i = 0; i < xMsg.xchatgroupid_size(); ++ i)
+	{
+		const NFGUID xGroup = NFINetModule::PBToNF(xMsg.xchatgroupid(i));
+
+		Online(nPlayerID, xGroup, nGameID);
+	}
+}
+
+void NFCWorldChatGroupModule::OnReqCancelSubscriptionChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen,NFMsg::ReqCancelSubscriptionChatGroup);
+
+	for (int i = 0; i < xMsg.xchatgroupid_size(); ++ i)
+	{
+		const NFGUID xGroup = NFINetModule::PBToNF(xMsg.xchatgroupid(i));
+
+		Offeline(nPlayerID, xGroup);
+	}
 }
