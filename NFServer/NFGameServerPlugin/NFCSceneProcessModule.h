@@ -28,6 +28,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCSceneProcessModule
     : public NFISceneProcessModule
@@ -63,13 +64,16 @@ protected:
     int OnEnterSceneEvent( const NFGUID& object, const int nEventID, const NFIDataList& var );
     int OnLeaveSceneEvent( const NFGUID& object, const int nEventID, const NFIDataList& var );
 
+protected:
+	void OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
 private:
 
     NFIElementInfoModule* m_pElementInfoModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-    
+    NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     //////////////////////////////////////////////////////////////////////////
     struct SceneSeedResource
     {

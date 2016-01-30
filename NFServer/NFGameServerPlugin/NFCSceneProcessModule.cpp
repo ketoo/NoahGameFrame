@@ -31,11 +31,13 @@ bool NFCSceneProcessModule::AfterInit()
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
 
-	assert( NULL != m_pKernelModule );
-	assert( NULL != m_pElementInfoModule );
-	assert( NULL != m_pLogicClassModule );
-	assert( NULL != m_pLogModule );
+	assert(NULL != m_pKernelModule);
+	assert(NULL != m_pElementInfoModule);
+	assert(NULL != m_pLogicClassModule);
+	assert(NULL != m_pLogModule);
+	assert(NULL != m_pGameServerNet_ServerModule);
 
 	m_pKernelModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCSceneProcessModule::OnObjectClassEvent );
 	//////////////////////////////////////////////////////////////////////////
@@ -62,6 +64,10 @@ bool NFCSceneProcessModule::AfterInit()
             bRet = list.Next(strData);
         }
     }
+
+	//////////////////////////////////////////////////////////////////////////
+	// add msg handler
+	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_SWAP_SCENE, this, &NFCSceneProcessModule::OnClienSwapSceneProcess)){ return false; }
 
     return true;
 }
@@ -323,4 +329,16 @@ bool NFCSceneProcessModule::LoadSceneResource( const int nSceneID )
 	}
 
     return true;
+}
+
+void NFCSceneProcessModule::OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	//CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckSwapScene);
+	//NFCDataList varEntry;
+	//varEntry << pObject->Self();
+	//varEntry << 0;
+	//varEntry << xMsg.scene_id();
+	//varEntry << -1;
+
+	//const NFGUID self = NFINetModule::PBToNF((xMsg.selfid()));
 }
