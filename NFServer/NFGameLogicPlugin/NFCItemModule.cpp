@@ -55,7 +55,7 @@ bool NFCItemModule::AfterInit()
 
 	//////////////////////////////////////////////////////////////////////////
 	// add msg handler
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_SWAP_SCENE, this, &NFCItemModule::OnClienUseItem)){ return false; }
+	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_ITEM_OBJECT, this, &NFCItemModule::OnClienUseItem)){ return false; }
 
 
     return true;
@@ -197,20 +197,20 @@ int NFCItemModule::AddItemEffectDataProperty( const NFGUID& self, const NFGUID& 
     return 0;
 }
 
-bool NFCItemModule::ConsumeDataIteProperty( const NFGUID& self, const std::string& strItemID )
+bool NFCItemModule::ConsumeDataItemProperty( const NFGUID& self, const std::string& strID )
 {
-    if (strItemID.empty())
+    if (strID.empty())
     {
         return false;
     }
 
-    const int nVIPEXP = m_pElementInfoModule->GetPropertyInt(strItemID, NFrame::ConsumeData::VIPEXP());
-    const int nEXP = m_pElementInfoModule->GetPropertyInt(strItemID, NFrame::ConsumeData::EXP());
-    const int nHP = m_pElementInfoModule->GetPropertyInt(strItemID, NFrame::ConsumeData::HP());
-    const int nSP = m_pElementInfoModule->GetPropertyInt(strItemID, NFrame::ConsumeData::SP());
-    const int nMP = m_pElementInfoModule->GetPropertyInt(strItemID, NFrame::ConsumeData::MP());
-    const int nGold = m_pElementInfoModule->GetPropertyInt(strItemID, NFrame::ConsumeData::Gold());
-    const int nMoney = m_pElementInfoModule->GetPropertyInt(strItemID, NFrame::ConsumeData::Money());
+    const int nVIPEXP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::VIPEXP());
+    const int nEXP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::EXP());
+    const int nHP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::HP());
+    const int nSP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::SP());
+    const int nMP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::MP());
+    const int nGold = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::Gold());
+    const int nMoney = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::Money());
    
     if (!m_pPropertyModule->EnoughDiamond(self, nGold))
     {
@@ -263,6 +263,62 @@ bool NFCItemModule::ConsumeDataIteProperty( const NFGUID& self, const std::strin
     }
 
     return true;
+}
+
+bool NFCItemModule::AwardItemProperty( const NFGUID& self, const std::string& strID )
+{
+	if (strID.empty())
+	{
+		return false;
+	}
+
+	const int nVIPEXP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::VIPEXP());
+	const int nEXP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::EXP());
+	const int nHP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::HP());
+	const int nSP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::SP());
+	const int nMP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::MP());
+	const int nGold = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::Gold());
+	const int nMoney = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::Money());
+
+	if (nVIPEXP > 0)
+	{
+		const NFINT64 nOldValue = m_pKernelModule->GetPropertyInt(self, NFrame::Player::VIPEXP());
+		const NFINT64 nNewValue = nOldValue + nVIPEXP;
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::VIPEXP(), nNewValue);
+	}
+
+	if (nEXP > 0)
+	{
+		const NFINT64 nOldValue = m_pKernelModule->GetPropertyInt(self, NFrame::Player::EXP());
+		const NFINT64 nNewValue = nOldValue + nEXP;
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::EXP(), nNewValue);
+	}
+
+	if (nHP > 0)
+	{
+		m_pPropertyModule->AddHP(self, nHP);
+	}
+	if (nSP > 0)
+	{
+		m_pPropertyModule->AddSP(self, nHP);
+	}
+
+	if (nMP > 0)
+	{
+		m_pPropertyModule->AddMP(self, nHP);
+	}
+
+	if (nGold > 0)
+	{
+		m_pPropertyModule->AddDiamond(self, nHP);
+	}
+
+	if (nMoney > 0)
+	{
+		m_pPropertyModule->AddMoney(self, nHP);
+	}
+
+	return true;
 }
 
 bool NFCItemModule::DoAwardPack( const NFGUID& self, const std::string& strAwardPack )
@@ -323,7 +379,7 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 		return;
 	}
 
-	if (!ConsumeDataIteProperty(self, strItemID))
+	if (!ConsumeDataItemProperty(self, strItemID))
 	{
 		return;
 	}
@@ -349,5 +405,11 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 	if (!strAwardPackID.empty())
 	{
 		DoAwardPack( self, strAwardPackID);
+	}
+
+	const std::string& strAwardProperty = m_pElementInfoModule->GetPropertyString(strItemID, "AwardProperty");
+	if (!strAwardProperty.empty())
+	{
+		AwardItemProperty( self, strAwardProperty);
 	}
 }

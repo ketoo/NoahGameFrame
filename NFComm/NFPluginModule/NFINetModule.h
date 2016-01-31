@@ -119,6 +119,18 @@ public:
 		m_pNet = new NFCNet(pBase, handleRecieve, handleEvent);
 		
 		m_pNet->Initialization(strIP, nPort);
+
+		int nMsgID = 0 ;
+		for (NET_RECIEVE_FUNCTOR_PTR* pData = mmRecieveList.First(nMsgID);  pData != NULL ; pData = mmRecieveList.Next(nMsgID))
+		{
+			m_pNet->AddReciveCallBack(nMsgID, *pData);
+		}
+
+		NET_EVENT_FUNCTOR_PTR xData;
+		for (bool bRet = mmEventList.First(xData);  bRet ; bRet = mmEventList.Next(xData))
+		{
+			m_pNet->AddEventCallBack(xData);
+		}
 	}
 
 	template<typename BaseType>
@@ -128,19 +140,53 @@ public:
 
 		m_pNet = new NFCNet(pBase, handleRecieve, handleEvent);
 
+		int nMsgID = 0 ;
+		for (NET_RECIEVE_FUNCTOR_PTR* pData = mmRecieveList.First(nMsgID);  pData != NULL ; pData = mmRecieveList.Next(nMsgID))
+		{
+			m_pNet->AddReciveCallBack(nMsgID, *pData);
+		}
+
+		NET_EVENT_FUNCTOR_PTR xData;
+		for (bool bRet = mmEventList.First(xData);  bRet ; bRet = mmEventList.Next(xData))
+		{
+			m_pNet->AddEventCallBack(xData);
+		}
+
 		return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
 	}
 
 	template<typename BaseType>
-	int AddReciveCallBack(const int nMsgID, BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
+	bool AddReciveCallBack(const int nMsgID, BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
 	{
-		return m_pNet->AddReciveCallBack<BaseType>(nMsgID, pBase, handleRecieve);
+		if (m_pNet)
+		{
+			if (!m_pNet->AddReciveCallBack<BaseType>(nMsgID, pBase, handleRecieve))
+			{
+				return false;
+			}
+		}
+
+		NET_RECIEVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		NET_RECIEVE_FUNCTOR_PTR functorPtr(new NET_RECIEVE_FUNCTOR(functor));
+
+		return mmRecieveList.AddElement(nMsgID, new NET_RECIEVE_FUNCTOR_PTR(functorPtr));
 	}
 
 	template<typename BaseType>
 	bool AddEventCallBack(BaseType* pBase, int (BaseType::*handler)(const int, const NF_NET_EVENT, NFINet*))
 	{
-		return m_pNet->AddEventCallBack<BaseType>(pBase, handler);
+
+		if (m_pNet)
+		{
+			if (!m_pNet->AddEventCallBack<BaseType>(pBase, handler))
+			{
+				return false;
+			}
+		}
+		NET_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+		NET_EVENT_FUNCTOR_PTR functorPtr(new NET_EVENT_FUNCTOR(functor));
+
+		return mmEventList.Add(functorPtr);
 	}
 
 	virtual bool Execute()
@@ -411,6 +457,8 @@ private:
 
 	NFINet* m_pNet;
 	NFINT64 nLastTime;
+	NFMap<int , NET_RECIEVE_FUNCTOR_PTR> mmRecieveList;
+	NFList<NET_EVENT_FUNCTOR_PTR> mmEventList;
 };
 
 #endif
