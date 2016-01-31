@@ -117,8 +117,6 @@ public:
 		nLastTime = GetPluginManager()->GetNowTime();
 
 		m_pNet = new NFCNet(pBase, handleRecieve, handleEvent);
-		
-		m_pNet->Initialization(strIP, nPort);
 
 		int nMsgID = 0;
 		for (NET_RECIEVE_FUNCTOR_PTR* pData = mmRecieveList.First(nMsgID);  pData != NULL ; pData = mmRecieveList.Next(nMsgID))
@@ -131,6 +129,8 @@ public:
 		{
 			m_pNet->AddEventCallBack(xData);
 		}
+
+		m_pNet->Initialization(strIP, nPort);
 	}
 
 	template<typename BaseType>
