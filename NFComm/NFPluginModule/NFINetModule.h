@@ -120,14 +120,14 @@ public:
 		
 		m_pNet->Initialization(strIP, nPort);
 
-		int nMsgID = 0 ;
+		int nMsgID = 0;
 		for (NET_RECIEVE_FUNCTOR_PTR* pData = mmRecieveList.First(nMsgID);  pData != NULL ; pData = mmRecieveList.Next(nMsgID))
 		{
 			m_pNet->AddReciveCallBack(nMsgID, *pData);
 		}
 
 		NET_EVENT_FUNCTOR_PTR xData;
-		for (bool bRet = mmEventList.First(xData);  bRet ; bRet = mmEventList.Next(xData))
+		for (bool bRet = mmEventList.First(xData); bRet && xData != nullptr; bRet = mmEventList.Next(xData))
 		{
 			m_pNet->AddEventCallBack(xData);
 		}
@@ -140,14 +140,14 @@ public:
 
 		m_pNet = new NFCNet(pBase, handleRecieve, handleEvent);
 
-		int nMsgID = 0 ;
+		int nMsgID = 0;
 		for (NET_RECIEVE_FUNCTOR_PTR* pData = mmRecieveList.First(nMsgID);  pData != NULL ; pData = mmRecieveList.Next(nMsgID))
 		{
 			m_pNet->AddReciveCallBack(nMsgID, *pData);
 		}
 
 		NET_EVENT_FUNCTOR_PTR xData;
-		for (bool bRet = mmEventList.First(xData);  bRet ; bRet = mmEventList.Next(xData))
+		for (bool bRet = mmEventList.First(xData); bRet && xData != nullptr; bRet = mmEventList.Next(xData))
 		{
 			m_pNet->AddEventCallBack(xData);
 		}
@@ -175,7 +175,6 @@ public:
 	template<typename BaseType>
 	bool AddEventCallBack(BaseType* pBase, int (BaseType::*handler)(const int, const NF_NET_EVENT, NFINet*))
 	{
-
 		if (m_pNet)
 		{
 			if (!m_pNet->AddEventCallBack<BaseType>(pBase, handler))
