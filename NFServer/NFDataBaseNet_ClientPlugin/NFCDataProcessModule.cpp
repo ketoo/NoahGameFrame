@@ -66,7 +66,7 @@ int NFCDataProcessModule::OnObjectClassEvent( const NFGUID& self, const std::str
 	return 0;
 }
 
-const NFGUID& NFCDataProcessModule::CreateRole( const std::string& strAccount, const std::string& strName, const int nRace, const int nJob, const int nSex )
+const NFGUID NFCDataProcessModule::CreateRole( const std::string& strAccount, const std::string& strName, const int nRace, const int nJob, const int nSex )
 {
 	bool bExit = false;
 	if (!m_pClusterSQLModule->Exists(mstrAccountTable, strAccount, bExit)
@@ -153,7 +153,7 @@ const bool NFCDataProcessModule::DeleteRole( const std::string& strAccount, cons
 	return true;
 }
 
-const NFGUID& NFCDataProcessModule::GetChar( const std::string& strAccount, const std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVec )
+const NFGUID NFCDataProcessModule::GetChar( const std::string& strAccount, const std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVec )
 {
 	bool bExit = false;
 	if (!m_pClusterSQLModule->Exists(mstrAccountTable, strAccount, bExit)
