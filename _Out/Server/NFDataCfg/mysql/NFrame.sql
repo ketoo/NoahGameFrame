@@ -40,6 +40,8 @@ ALTER TABLE `Guild` ADD `DismissTime` bigint(11) DEFAULT '0' COMMENT '申请解�
 ALTER TABLE `Guild` ADD `RecruitAD` varchar(128) DEFAULT '' COMMENT '招募公告';
 ALTER TABLE `Guild` ADD `RecruitLevel` bigint(11) DEFAULT '0' COMMENT '招募等级限制';
 ALTER TABLE `Guild` ADD `AutoRecruit` varchar(128) DEFAULT '' COMMENT '自动招募';
+ALTER TABLE `Guild` ADD `EctypServer` bigint(11) DEFAULT '0' COMMENT '工会副本所在的服';
+ALTER TABLE `Guild` ADD `EctypID` bigint(11) DEFAULT '0' COMMENT '工会副本ID';
 ALTER TABLE `Guild` ADD `GuildBoss` BLOB COMMENT 'guild';
 ALTER TABLE `Guild` ADD `GuildMemberList` BLOB COMMENT 'guild';
 ALTER TABLE `Guild` ADD `GuildAppyList` BLOB COMMENT 'guild';
