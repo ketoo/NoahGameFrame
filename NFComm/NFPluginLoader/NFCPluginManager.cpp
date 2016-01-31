@@ -117,7 +117,6 @@ void NFCPluginManager::Registered(NFIPlugin* plugin)
             plugin->Install();
         }
     }
-
 }
 
 void NFCPluginManager::UnsRegistered(NFIPlugin* plugin)
@@ -321,15 +320,17 @@ bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
             char* error = dlerror();
             if (error)
             {
-				std::cout << stderr << " Open shared lib failed " << pLib->GetName() << " " << error << std::endl;
-                assert(0);
+				std::cout << stderr << " Open shared lib[" << pLib->GetName() << "] failed, ErrorNo. = [" << error << "]" << std::endl;
+                std::cout << "Load [" << pLib->GetName() << "] failed" << std::endl;
+				assert(0);
                 return false;
             }
 #elif NF_PLATFORM == NF_PLATFORM_WIN
-            std::cout << stderr << " Open DLL " << pLib->GetName() << " failed, ErrorNo = "<< GetLastError() << std::endl;
+			std::cout << stderr << " Open DLL[" << pLib->GetName() << "] failed, ErrorNo. = ["<< GetLastError() << "]" << std::endl;
+			std::cout << "Load [" << pLib->GetName() << "] failed" << std::endl;
+			assert(0);
+			return false;
 #endif // NF_PLATFORM
-            std::cout << "Load [" << pLib->GetName() << "] Failed" << std::endl;
-            assert(0);
         }
     }
 
