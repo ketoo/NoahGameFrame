@@ -1131,6 +1131,116 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqGuildEctypeInfo")]
+  public partial class ReqGuildEctypeInfo : global::ProtoBuf.IExtensible
+  {
+    public ReqGuildEctypeInfo() {}
+    
+    private NFMsg.Ident _selfid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"selfid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident selfid
+    {
+      get { return _selfid; }
+      set { _selfid = value; }
+    }
+    private NFMsg.Ident _guild_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"guild_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident guild_id
+    {
+      get { return _guild_id; }
+      set { _guild_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"GuildEctypeInfo")]
+  public partial class GuildEctypeInfo : global::ProtoBuf.IExtensible
+  {
+    public GuildEctypeInfo() {}
+    
+    private NFMsg.Ident _guild_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"guild_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident guild_id
+    {
+      get { return _guild_id; }
+      set { _guild_id = value; }
+    }
+    private long _server_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"server_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long server_id
+    {
+      get { return _server_id; }
+      set { _server_id = value; }
+    }
+    private long _Ectype_id;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"Ectype_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long Ectype_id
+    {
+      get { return _Ectype_id; }
+      set { _Ectype_id = value; }
+    }
+    private long _Ectype_Group;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"Ectype_Group", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long Ectype_Group
+    {
+      get { return _Ectype_Group; }
+      set { _Ectype_Group = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckGuildEctypeInfo")]
+  public partial class AckGuildEctypeInfo : global::ProtoBuf.IExtensible
+  {
+    public AckGuildEctypeInfo() {}
+    
+    private NFMsg.Ident _selfid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"selfid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident selfid
+    {
+      get { return _selfid; }
+      set { _selfid = value; }
+    }
+    private NFMsg.GuildEctypeInfo _xectypeinfo;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"xectypeinfo", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.GuildEctypeInfo xectypeinfo
+    {
+      get { return _xectypeinfo; }
+      set { _xectypeinfo = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SetGuildEctypeInfo")]
+  public partial class SetGuildEctypeInfo : global::ProtoBuf.IExtensible
+  {
+    public SetGuildEctypeInfo() {}
+    
+    private NFMsg.Ident _selfid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"selfid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident selfid
+    {
+      get { return _selfid; }
+      set { _selfid = value; }
+    }
+    private NFMsg.GuildEctypeInfo _xectypeinfo;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"xectypeinfo", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.GuildEctypeInfo xectypeinfo
+    {
+      get { return _xectypeinfo; }
+      set { _xectypeinfo = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ChatInfo")]
   public partial class ChatInfo : global::ProtoBuf.IExtensible
   {

@@ -12,6 +12,7 @@
     <ClInclude Include="NFSLGDefine.pb.h" />
     <ClInclude Include="NFMsgURl.pb.h" />
     <ClInclude Include="NFProtocolDefine.hpp" />
+    <ClInclude Include="NFMsgMysql.pb.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFMsgShare.pb.cc" />
@@ -23,5 +24,6 @@
     <ClCompile Include="NFFleetingDefine.pb.cc" />
     <ClCompile Include="NFSLGDefine.pb.cc" />
     <ClCompile Include="NFMsgURl.pb.cc" />
+    <ClCompile Include="NFMsgMysql.pb.cc" />
   </ItemGroup>
 </Project>
