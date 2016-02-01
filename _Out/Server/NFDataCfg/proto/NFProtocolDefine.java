@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/25
+//    @Date             :    2016/01/31
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -11,6 +11,11 @@ public class IObject {
 	//Class name
 	public static final String ThisName = "IObject";
 	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	// Property
 	public static final String ID = "ID"; // string
 	public static final String ClassName = "ClassName"; // string
@@ -25,6 +30,11 @@ public class BB_Build {
 	//Class name
 	public static final String ThisName = "BB_Build";
 	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	public static final String ID = "ID"; // string
 	public static final String ClassName = "ClassName"; // string
 	public static final String SceneID = "SceneID"; // int
@@ -52,6 +62,11 @@ public class Buff {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	// Property
 	public static final String EffectType = "EffectType"; // int
 	public static final String EffectValueType = "EffectValueType"; // int
@@ -70,6 +85,11 @@ public class ChatGroup {
 	//Class name
 	public static final String ThisName = "ChatGroup";
 	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	public static final String ID = "ID"; // string
 	public static final String ClassName = "ClassName"; // string
 	public static final String SceneID = "SceneID"; // int
@@ -107,6 +127,11 @@ public class ConsumeData {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	// Property
 	public static final String VIPEXP = "VIPEXP"; // int
 	public static final String EXP = "EXP"; // int
@@ -123,6 +148,11 @@ public class Cost {
 	//Class name
 	public static final String ThisName = "Cost";
 	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	public static final String ID = "ID"; // string
 	public static final String ClassName = "ClassName"; // string
 	public static final String SceneID = "SceneID"; // int
@@ -146,6 +176,11 @@ public class DescData {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	// Property
 	public static final String ShowName = "ShowName"; // string
 	public static final String Icon = "Icon"; // string
@@ -162,6 +197,11 @@ public class EffectData {
 	//Class name
 	public static final String ThisName = "EffectData";
 	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	public static final String ID = "ID"; // string
 	public static final String ClassName = "ClassName"; // string
 	public static final String SceneID = "SceneID"; // int
@@ -205,6 +245,11 @@ public class Equip {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	// Property
 	public static final String Sex = "Sex"; // int
 	public static final String IntensiveBuffList = "IntensiveBuffList"; // string
@@ -231,6 +276,11 @@ public class Guild {
 	//Class name
 	public static final String ThisName = "Guild";
 	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	public static final String ID = "ID"; // string
 	public static final String ClassName = "ClassName"; // string
 	public static final String SceneID = "SceneID"; // int
@@ -361,6 +411,11 @@ public class GuildConfig {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	// Property
 	public static final String ConditionPlayerLevel = "ConditionPlayerLevel"; // int
 	public static final String ConditionPlayerVIP = "ConditionPlayerVIP"; // int
@@ -376,6 +431,11 @@ public class GuildJob {
 	//Class name
 	public static final String ThisName = "GuildJob";
 	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	public static final String ID = "ID"; // string
 	public static final String ClassName = "ClassName"; // string
 	public static final String SceneID = "SceneID"; // int
@@ -410,6 +470,11 @@ public class GuildName {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	// Property
 	public static final String GuildID = "GuildID"; // object
 	// Record
@@ -420,6 +485,11 @@ public class InitProperty {
 	//Class name
 	public static final String ThisName = "InitProperty";
 	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	public static final String ID = "ID"; // string
 	public static final String ClassName = "ClassName"; // string
 	public static final String SceneID = "SceneID"; // int
@@ -439,6 +509,11 @@ public class Item {
 	//Class name
 	public static final String ThisName = "Item";
 	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	public static final String ID = "ID"; // string
 	public static final String ClassName = "ClassName"; // string
 	public static final String SceneID = "SceneID"; // int
@@ -474,6 +549,11 @@ public class Language {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	// Property
 	public static final String English = "English"; // string
 	public static final String Chinese = "Chinese"; // string
@@ -485,6 +565,11 @@ public class NPC {
 	//Class name
 	public static final String ThisName = "NPC";
 	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	public static final String ID = "ID"; // string
 	public static final String ClassName = "ClassName"; // string
 	public static final String SceneID = "SceneID"; // int
@@ -546,6 +631,11 @@ public class Player {
 	//Class name
 	public static final String ThisName = "Player";
 	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	public static final String ID = "ID"; // string
 	public static final String ClassName = "ClassName"; // string
 	public static final String SceneID = "SceneID"; // int
@@ -825,6 +915,11 @@ public class Scene {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	// Property
 	public static final String SceneName = "SceneName"; // string
 	public static final String SceneShowName = "SceneShowName"; // string
@@ -840,6 +935,7 @@ public class Scene {
 	public static final String LoadingUI = "LoadingUI"; // string
 	public static final String CamOffestPos = "CamOffestPos"; // string
 	public static final String CamOffestRot = "CamOffestRot"; // string
+	public static final String SyncObject = "SyncObject"; // int
 	// Record
 
 }
@@ -848,6 +944,11 @@ public class Server {
 	//Class name
 	public static final String ThisName = "Server";
 	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	public static final String ID = "ID"; // string
 	public static final String ClassName = "ClassName"; // string
 	public static final String SceneID = "SceneID"; // int
@@ -874,6 +975,11 @@ public class Shop {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	// Property
 	public static final String Type = "Type"; // int
 	public static final String ItemID = "ItemID"; // string
@@ -890,6 +996,11 @@ public class Skill {
 	//Class name
 	public static final String ThisName = "Skill";
 	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	public static final String ID = "ID"; // string
 	public static final String ClassName = "ClassName"; // string
 	public static final String SceneID = "SceneID"; // int
@@ -934,6 +1045,11 @@ public class SkillRef {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	// Property
 	public static final String NORMALATTACK1 = "NORMALATTACK1"; // string
 	public static final String NORMALATTACK2 = "NORMALATTACK2"; // string
@@ -962,6 +1078,11 @@ public class SqlServer {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	// Property
 	public static final String ServerID = "ServerID"; // int
 	public static final String IP = "IP"; // string
@@ -984,6 +1105,11 @@ public class StateFuncResources {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	// Property
 	public static final String Atlas_ResID = "Atlas_ResID"; // string
 	// Record
@@ -994,6 +1120,11 @@ public class StateFunction {
 	//Class name
 	public static final String ThisName = "StateFunction";
 	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	public static final String ID = "ID"; // string
 	public static final String ClassName = "ClassName"; // string
 	public static final String SceneID = "SceneID"; // int
@@ -1022,6 +1153,11 @@ public class Task {
 	//Class name
 	public static final String ThisName = "Task";
 	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
 	public static final String ID = "ID"; // string
 	public static final String ClassName = "ClassName"; // string
 	public static final String SceneID = "SceneID"; // int

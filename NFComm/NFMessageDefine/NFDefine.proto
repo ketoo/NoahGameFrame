@@ -289,6 +289,7 @@ enum EItemType
 	EIT_STRENGTHEN_STONE	= 5; // 强化石
 	EIT_DEMONIZATION_STONE	= 6; // 附魔石
 	EIT_GEM_STONE			= 7; // 属性宝石
+	EIT_CURRENCY			= 8; // 货币道具不进背包s
 	
 	EIT_WOOD				= 100; // 木材
 	EIT_STONE				= 101; // 石材
