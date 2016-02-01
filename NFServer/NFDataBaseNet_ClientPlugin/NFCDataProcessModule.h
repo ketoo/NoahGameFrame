@@ -38,9 +38,9 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-	virtual const NFGUID& CreateRole(const std::string& strAccount, const std::string& strName, const int nRace, const int nJob, const int nSex);
+	virtual const NFGUID CreateRole(const std::string& strAccount, const std::string& strName, const int nRace, const int nJob, const int nSex);
 	virtual const bool DeleteRole(const std::string& strAccount, const NFGUID xID);
-	virtual const NFGUID& GetChar(const std::string& strAccount, const std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVec);
+	virtual const NFGUID GetChar(const std::string& strAccount, const std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVec);
 
 	//////////////////////////////////////////////////////////////////////////
 
