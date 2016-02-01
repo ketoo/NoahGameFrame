@@ -44,11 +44,20 @@ public:
 	virtual bool Exists(const std::string& strRecordName, const std::string& strKey, bool& bExit);
     virtual bool Keys(const std::string& strRecordName, const std::string& strKeyName, std::vector<std::string>& valueVec);
 
+    //////////////////////////////////////////////////////////////////////////
+    virtual bool UpdataWithDriver(const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec, NFIMysqlDriver* pDriver);
+    virtual bool QueryWithDriver(const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec, NFIMysqlDriver* pDriver);
+    virtual bool SelectWithDriver(const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec, NFIMysqlDriver* pDriver);
+
+    virtual bool DeleteWithDriver(const std::string& strRecordName, const std::string& strKey, NFIMysqlDriver* pDriver);
+    virtual bool ExistsWithDriver(const std::string& strRecordName, const std::string& strKey, bool& bExit, NFIMysqlDriver* pDriver);
+    virtual bool KeysWithDriver(const std::string& strRecordName, const std::string& strKeyName, std::vector<std::string>& valueVec, NFIMysqlDriver* pDriver);
+
 private:
     NFIMysqlConnectMgrModule* m_pMysqlConnectMgrManager;
 
-    static std::string strDefaultKey;
-    static std::string strDefaultTable;
+    const static std::string strDefaultKey;
+    const static std::string strDefaultTable;
 
 
     // keyÄ¬ÈÏÎªID
