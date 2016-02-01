@@ -35,8 +35,15 @@ public:
 	virtual bool Exists(const std::string& strRecordName, const std::string& strKey, bool& bExit) = 0;    
     virtual bool Keys(const std::string& strRecordName, const std::string& strKeyName, std::vector<std::string>& valueVec) = 0;
 
+    //////////////////////////////////////////////////////////////////////////
+    virtual bool UpdataWithDriver(const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec, NFIMysqlDriver* pDriver) = 0;
+    virtual bool QueryWithDriver(const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec, NFIMysqlDriver* pDriver) = 0;
+    virtual bool SelectWithDriver(const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec, NFIMysqlDriver* pDriver) = 0;
+
+    virtual bool DeleteWithDriver(const std::string& strRecordName, const std::string& strKey, NFIMysqlDriver* pDriver) = 0;
+    virtual bool ExistsWithDriver(const std::string& strRecordName, const std::string& strKey, bool& bExit, NFIMysqlDriver* pDriver) = 0;
+    virtual bool KeysWithDriver(const std::string& strRecordName, const std::string& strKeyName, std::vector<std::string>& valueVec, NFIMysqlDriver* pDriver) = 0;
 private:
 
 };
-
 #endif

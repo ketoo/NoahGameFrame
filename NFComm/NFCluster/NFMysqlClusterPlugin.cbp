@@ -98,6 +98,10 @@
 		<Unit filename="NFCMysqlConnectMgrModule.h" />
 		<Unit filename="NFCMysqlDriver.cpp" />
 		<Unit filename="NFCMysqlDriver.h" />
+		<Unit filename="NFCAsyMysqlClusterModule.cpp" />
+		<Unit filename="NFCAsyMysqlClusterModule.h" />
+		<Unit filename="NFCMysqlDriverManager.cpp" />
+		<Unit filename="NFCMysqlDriverManager.h" />
 		<Unit filename="NFMysqlClusterPlugin.cpp" />
 		<Unit filename="NFMysqlClusterPlugin.h" />
 		<Unit filename="dllmain.cpp" />

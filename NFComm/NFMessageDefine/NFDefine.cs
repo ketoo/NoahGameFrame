@@ -478,6 +478,15 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OPR_GUILDINFO", Value=311)]
       EGMI_ACK_OPR_GUILDINFO = 311,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_GUILDECTYPEINFO", Value=312)]
+      EGMI_REQ_GUILDECTYPEINFO = 312,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_GUILDECTYPEINFO", Value=313)]
+      EGMI_ACK_GUILDECTYPEINFO = 313,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_SET_GUILDECTYPEINFO", Value=314)]
+      EGMI_SET_GUILDECTYPEINFO = 314,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_CREATE_CHATGROUP", Value=400)]
       EGEC_REQ_CREATE_CHATGROUP = 400,
             
@@ -564,6 +573,63 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_DELETE_MAIL", Value=702)]
       EGEC_REQ_DELETE_MAIL = 702,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_OBJECT_ENTRY", Value=800)]
+      EGMI_ACK_CLONE_OBJECT_ENTRY = 800,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_OBJECT_LEAVE", Value=801)]
+      EGMI_ACK_CLONE_OBJECT_LEAVE = 801,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_OBJECT_PROPERTY_ENTRY", Value=802)]
+      EGMI_ACK_CLONE_OBJECT_PROPERTY_ENTRY = 802,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_OBJECT_RECORD_ENTRY", Value=803)]
+      EGMI_ACK_CLONE_OBJECT_RECORD_ENTRY = 803,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_PROPERTY_INT", Value=810)]
+      EGMI_ACK_CLONE_PROPERTY_INT = 810,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_PROPERTY_FLOAT", Value=811)]
+      EGMI_ACK_CLONE_PROPERTY_FLOAT = 811,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_PROPERTY_STRING", Value=812)]
+      EGMI_ACK_CLONE_PROPERTY_STRING = 812,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_PROPERTY_DOUBLE", Value=813)]
+      EGMI_ACK_CLONE_PROPERTY_DOUBLE = 813,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_PROPERTY_OBJECT", Value=814)]
+      EGMI_ACK_CLONE_PROPERTY_OBJECT = 814,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_ADD_ROW", Value=820)]
+      EGMI_ACK_CLONE_ADD_ROW = 820,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_REMOVE_ROW", Value=821)]
+      EGMI_ACK_CLONE_REMOVE_ROW = 821,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_SWAP_ROW", Value=822)]
+      EGMI_ACK_CLONE_SWAP_ROW = 822,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_RECORD_INT", Value=823)]
+      EGMI_ACK_CLONE_RECORD_INT = 823,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_RECORD_FLOAT", Value=824)]
+      EGMI_ACK_CLONE_RECORD_FLOAT = 824,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_RECORD_DOUBLE", Value=825)]
+      EGMI_ACK_CLONE_RECORD_DOUBLE = 825,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_RECORD_STRING", Value=826)]
+      EGMI_ACK_CLONE_RECORD_STRING = 826,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_RECORD_OBJECT", Value=827)]
+      EGMI_ACK_CLONE_RECORD_OBJECT = 827,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_RECORD_CLEAR", Value=828)]
+      EGMI_ACK_CLONE_RECORD_CLEAR = 828,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_RECORD_SORT", Value=829)]
+      EGMI_ACK_CLONE_RECORD_SORT = 829,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_INT", Value=1000)]
       EGMI_REQ_CMD_PROPERTY_INT = 1000,

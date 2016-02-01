@@ -38,7 +38,7 @@
     <Filter Include="NFCommonConfigModule">
       <UniqueIdentifier>{15121c6f-c078-4629-81c4-7bac017e056f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFGuildEctypeModule">
+    <Filter Include="NFGuildModule">
       <UniqueIdentifier>{758bd285-309d-45a8-8950-aa2abb0a6d78}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -106,13 +106,13 @@
       <Filter>NFCommonConfigModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCGuildEctypeModule.h">
-      <Filter>NFGuildEctypeModule</Filter>
+      <Filter>NFGuildModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCGuildDataModule.h">
-      <Filter>NFGuildEctypeModule</Filter>
+      <Filter>NFGuildModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCGuildModule.h">
-      <Filter>NFGuildEctypeModule</Filter>
+      <Filter>NFGuildModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -180,13 +180,13 @@
       <Filter>NFCommonConfigModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCGuildEctypeModule.cpp">
-      <Filter>NFGuildEctypeModule</Filter>
+      <Filter>NFGuildModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCGuildDataModule.cpp">
-      <Filter>NFGuildEctypeModule</Filter>
+      <Filter>NFGuildModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCGuildModule.cpp">
-      <Filter>NFGuildEctypeModule</Filter>
+      <Filter>NFGuildModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
