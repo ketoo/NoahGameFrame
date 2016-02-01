@@ -45,10 +45,11 @@ protected:
 	virtual bool CheckConfig();
 
     int AddItemEffectDataProperty( const NFGUID& self, const NFGUID& xTarget, const std::string& strItemID);
-    bool ConsumeDataIteProperty( const NFGUID& self, const std::string& strItemID);
+    bool ConsumeDataItemProperty( const NFGUID& self, const std::string& strID);
+	bool AwardItemProperty( const NFGUID& self, const std::string& strID );
 
 
-    bool DoAwardPack( const NFGUID& self, const std::string& strAwardPack);
+	bool DoAwardPack( const NFGUID& self, const std::string& strAwardPack);
 
 protected:
 	void OnClienUseItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
