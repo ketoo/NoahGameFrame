@@ -374,10 +374,10 @@ const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string&
 	var << 0;
 	var << 0;
 
-	bool bAddRet = pRecord->AddRow(-1, var);
-	if (bAddRet)
+	int nAddRow = pRecord->AddRow(-1, var);
+	if (nAddRow > 0)
 	{
-		return ident;
+		return pRecord->GetObject(nAddRow, NFrame::Player::BagEquipList_GUID);
 	}
 
 	return NULL_OBJECT;
