@@ -13,10 +13,14 @@
 #pragma comment( lib, "libmysql.lib" )
 #pragma comment( lib, "mysqlclient.lib" )
 #pragma comment( lib, "mysqlpp_d.lib" )
+#pragma comment( lib, "libprotobuf_d.lib" )
+#pragma comment( lib, "NFMessageDefine_d.lib" )
 
 #else
 #pragma comment( lib, "NFCore_Static_d.lib" )
 #pragma comment( lib, "Theron_Static_d.lib" )
+#pragma comment( lib, "libprotobuf_d.lib" )
+#pragma comment( lib, "NFMessageDefine_d.lib" )
 #endif
 
 //#pragma comment( lib, "Theron_d.lib" )
@@ -40,6 +44,8 @@
 #else
 #pragma comment( lib, "NFCore_Static.lib" )
 #pragma comment( lib, "Theron_Static.lib" )
+#pragma comment( lib, "libprotobuf.lib" )
+#pragma comment( lib, "NFMessageDefine.lib" )
 #endif
 
 //#pragma comment( lib, "Theron.lib" )

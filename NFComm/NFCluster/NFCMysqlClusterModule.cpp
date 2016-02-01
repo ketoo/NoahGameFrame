@@ -10,8 +10,8 @@
 #include "NFCMysqlDriver.h"
 #include "NFCMysqlClusterModule.h"
 
-std::string NFCMysqlClusterModule::strDefaultKey = "ID";
-std::string NFCMysqlClusterModule::strDefaultTable = "RoleInfo";
+const std::string NFCMysqlClusterModule::strDefaultKey = "ID";
+const std::string NFCMysqlClusterModule::strDefaultTable = "RoleInfo";
 
 NFCMysqlClusterModule::NFCMysqlClusterModule(NFIPluginManager* p)
 {
@@ -53,6 +53,40 @@ bool NFCMysqlClusterModule::Execute()
 bool NFCMysqlClusterModule::Updata( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec )
 {
     NFIMysqlDriver* pDriver = m_pMysqlConnectMgrManager->GetMysqlDriver();
+    return UpdataWithDriver(strRecordName, strKey, fieldVec, valueVec, pDriver);
+}
+
+bool NFCMysqlClusterModule::Query( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec )
+{
+    NFIMysqlDriver* pDriver = m_pMysqlConnectMgrManager->GetMysqlDriver();
+    return QueryWithDriver(strRecordName, strKey, fieldVec, valueVec, pDriver);
+}
+
+bool NFCMysqlClusterModule::Delete( const std::string& strRecordName, const std::string& strKey )
+{
+    NFIMysqlDriver* pDriver = m_pMysqlConnectMgrManager->GetMysqlDriver();
+    return DeleteWithDriver(strRecordName, strKey, pDriver);
+}
+
+bool NFCMysqlClusterModule::Exists( const std::string& strRecordName, const std::string& strKey, bool& bExit )
+{
+    NFIMysqlDriver* pDriver = m_pMysqlConnectMgrManager->GetMysqlDriver();
+    return ExistsWithDriver(strRecordName, strKey, bExit, pDriver);
+}
+
+bool NFCMysqlClusterModule::Select( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec )
+{
+	return false;
+}
+
+bool NFCMysqlClusterModule::Keys( const std::string& strRecordName, const std::string& strKeyName, std::vector<std::string>& valueVec )
+{
+    NFIMysqlDriver* pDriver = m_pMysqlConnectMgrManager->GetMysqlDriver();
+    return KeysWithDriver(strRecordName, strKeyName, valueVec, pDriver);
+}
+
+bool NFCMysqlClusterModule::UpdataWithDriver( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec, NFIMysqlDriver* pDriver )
+{
     if (!pDriver)
     {
         return false;
@@ -65,7 +99,7 @@ bool NFCMysqlClusterModule::Updata( const std::string& strRecordName, const std:
     }
 
     bool bExist = false;
-    if (!Exists(strRecordName, strKey, bExist))
+    if (!ExistsWithDriver(strRecordName, strKey, bExist, pDriver))
     {
         return false;
     }
@@ -77,119 +111,122 @@ bool NFCMysqlClusterModule::Updata( const std::string& strRecordName, const std:
 
     NFMYSQLTRYBEGIN
         mysqlpp::Query query = pConnection->query();
-        if (bExist)
-        {
-            // update
-            query << "UPDATE " << strRecordName << " SET ";
-            for (int i = 0; i < fieldVec.size(); ++i)
-            {
-                if (i == 0)
-                {
-                    query << fieldVec[i] << " = " << mysqlpp::quote << valueVec[i];
-                }
-                else
-                {
-                    query << "," << fieldVec[i] << " = " << mysqlpp::quote << valueVec[i];
-                }
-            }
-
-            query << " WHERE " << strDefaultKey << " = " << mysqlpp::quote << strKey << ";";
-        }
-        else
-        {
-            // insert
-            query << "INSERT INTO " << strRecordName << "(" << strDefaultKey << ",";
-            for (int i = 0; i < fieldVec.size(); ++i)
-            {
-                if (i == 0)
-                {
-                    query << fieldVec[i];
-                }
-                else
-                {
-                    query << ", " << fieldVec[i];
-                }
-            }
-
-            query << ") VALUES(" << mysqlpp::quote << strKey << ",";
-            for (int i = 0; i < valueVec.size(); ++i)
-            {
-                if (i == 0)
-                {
-                    query << mysqlpp::quote << valueVec[i];
-                }
-                else
-                {
-                    query << ", " << mysqlpp::quote << valueVec[i];
-                }
-            }
-
-            query << ");";
-        }
-
-        query.execute();
-        query.reset();
-    NFMYSQLTRYEND("update or insert error")
-
-	return true;
-}
-
-bool NFCMysqlClusterModule::Query( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec )
-{
-    NFIMysqlDriver* pDriver = m_pMysqlConnectMgrManager->GetMysqlDriver();
-    if (!pDriver)
+    if (bExist)
     {
-        return false;
-    }
-
-    mysqlpp::Connection* pConnection = pDriver->GetConnection();
-    if (NULL == pConnection)
-    {
-        return false;
-    }
-
-    NFMYSQLTRYBEGIN
-        mysqlpp::Query query = pConnection->query();
-        query << "SELECT ";
-        for (std::vector<std::string>::const_iterator iter = fieldVec.begin(); iter != fieldVec.end(); ++iter)
+        // update
+        query << "UPDATE " << strRecordName << " SET ";
+        for (int i = 0; i < fieldVec.size(); ++i)
         {
-            if (iter == fieldVec.begin())
+            if (i == 0)
             {
-                query << *iter;
+                query << fieldVec[i] << " = " << mysqlpp::quote << valueVec[i];
             }
             else
             {
-                query << "," << *iter;
-            }            
-        }
-        query << " FROM " << strRecordName << " WHERE " << strDefaultKey << " = " << mysqlpp::quote << strKey << ";";
-        //query.execute(); // 官网例子不需要execute
-        mysqlpp::StoreQueryResult xResult = query.store();
-        query.reset();
-
-        if (xResult.empty() || !xResult)
-        {
-            return false;
-        }
-
-        // xResult应该只有一行的，为了以后可能出现的多条，所以用了循环
-        for (int i = 0; i < xResult.size(); ++i)
-        {
-            for (int j = 0; j < fieldVec.size(); ++j)
-            {
-                const std::string& strFieldName = fieldVec[j];
-                std::string strValue(xResult[i][strFieldName.data()].data(), xResult[i][strFieldName.data()].length());
-                valueVec.push_back(strValue);
+                query << "," << fieldVec[i] << " = " << mysqlpp::quote << valueVec[i];
             }
         }
+
+        query << " WHERE " << strDefaultKey << " = " << mysqlpp::quote << strKey << ";";
+    }
+    else
+    {
+        // insert
+        query << "INSERT INTO " << strRecordName << "(" << strDefaultKey << ",";
+        for (int i = 0; i < fieldVec.size(); ++i)
+        {
+            if (i == 0)
+            {
+                query << fieldVec[i];
+            }
+            else
+            {
+                query << ", " << fieldVec[i];
+            }
+        }
+
+        query << ") VALUES(" << mysqlpp::quote << strKey << ",";
+        for (int i = 0; i < valueVec.size(); ++i)
+        {
+            if (i == 0)
+            {
+                query << mysqlpp::quote << valueVec[i];
+            }
+            else
+            {
+                query << ", " << mysqlpp::quote << valueVec[i];
+            }
+        }
+
+        query << ");";
+    }
+
+    query.execute();
+    query.reset();
+    NFMYSQLTRYEND("update or insert error")
+
+    return true;
+}
+
+bool NFCMysqlClusterModule::QueryWithDriver( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec, NFIMysqlDriver* pDriver )
+{
+    if (!pDriver)
+    {
+        return false;
+    }
+
+    mysqlpp::Connection* pConnection = pDriver->GetConnection();
+    if (NULL == pConnection)
+    {
+        return false;
+    }
+
+    NFMYSQLTRYBEGIN
+        mysqlpp::Query query = pConnection->query();
+    query << "SELECT ";
+    for (std::vector<std::string>::const_iterator iter = fieldVec.begin(); iter != fieldVec.end(); ++iter)
+    {
+        if (iter == fieldVec.begin())
+        {
+            query << *iter;
+        }
+        else
+        {
+            query << "," << *iter;
+        }            
+    }
+    query << " FROM " << strRecordName << " WHERE " << strDefaultKey << " = " << mysqlpp::quote << strKey << ";";
+    //query.execute(); // 官网例子不需要execute
+    mysqlpp::StoreQueryResult xResult = query.store();
+    query.reset();
+
+    if (xResult.empty() || !xResult)
+    {
+        return false;
+    }
+
+    // xResult应该只有一行的，为了以后可能出现的多条，所以用了循环
+    for (int i = 0; i < xResult.size(); ++i)
+    {
+        for (int j = 0; j < fieldVec.size(); ++j)
+        {
+            const std::string& strFieldName = fieldVec[j];
+            std::string strValue(xResult[i][strFieldName.data()].data(), xResult[i][strFieldName.data()].length());
+            valueVec.push_back(strValue);
+        }
+    }
     NFMYSQLTRYEND("query error")
 
-	return true;
+    return true;
 }
 
-bool NFCMysqlClusterModule::Delete( const std::string& strRecordName, const std::string& strKey )
+bool NFCMysqlClusterModule::SelectWithDriver( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec, NFIMysqlDriver* pDriver )
 {
-    NFIMysqlDriver* pDriver = m_pMysqlConnectMgrManager->GetMysqlDriver();
+    return false;
+}
+
+bool NFCMysqlClusterModule::DeleteWithDriver( const std::string& strRecordName, const std::string& strKey, NFIMysqlDriver* pDriver )
+{
     if (!pDriver)
     {
         return false;
@@ -203,18 +240,17 @@ bool NFCMysqlClusterModule::Delete( const std::string& strRecordName, const std:
 
     NFMYSQLTRYBEGIN
         mysqlpp::Query query = pConnection->query();
-        query << "DELETE FROM " << strRecordName << " WHERE " << strDefaultKey << " = " << mysqlpp::quote << strKey << ";";
+    query << "DELETE FROM " << strRecordName << " WHERE " << strDefaultKey << " = " << mysqlpp::quote << strKey << ";";
 
-        query.execute();
-        query.reset();
+    query.execute();
+    query.reset();
     NFMYSQLTRYEND("delete error")
 
-	return true;
+    return true;
 }
 
-bool NFCMysqlClusterModule::Exists( const std::string& strRecordName, const std::string& strKey, bool& bExit )
+bool NFCMysqlClusterModule::ExistsWithDriver( const std::string& strRecordName, const std::string& strKey, bool& bExit, NFIMysqlDriver* pDriver )
 {
-    NFIMysqlDriver* pDriver = m_pMysqlConnectMgrManager->GetMysqlDriver();
     if (!pDriver)
     {
         return false;
@@ -228,32 +264,26 @@ bool NFCMysqlClusterModule::Exists( const std::string& strRecordName, const std:
 
     NFMYSQLTRYBEGIN
         mysqlpp::Query query = pConnection->query();
-        query << "SELECT 1 FROM " << strRecordName << " WHERE " << strDefaultKey << " = " << mysqlpp::quote << strKey << " LIMIT 1;";
+    query << "SELECT 1 FROM " << strRecordName << " WHERE " << strDefaultKey << " = " << mysqlpp::quote << strKey << " LIMIT 1;";
 
-        //query.execute();
-        mysqlpp::StoreQueryResult result = query.store();
-        query.reset();
+    //query.execute();
+    mysqlpp::StoreQueryResult result = query.store();
+    query.reset();
 
-        if (!result || result.empty())
-        {
-            bExit = false;
-            return true;
-        }
+    if (!result || result.empty())
+    {
+        bExit = false;
+        return true;
+    }
 
     NFMYSQLTRYEND("exist error")
 
-    bExit = true;
-	return true;
+        bExit = true;
+    return true;
 }
 
-bool NFCMysqlClusterModule::Select( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec )
+bool NFCMysqlClusterModule::KeysWithDriver( const std::string& strRecordName, const std::string& strKeyName, std::vector<std::string>& valueVec, NFIMysqlDriver* pDriver )
 {
-	return false;
-}
-
-bool NFCMysqlClusterModule::Keys( const std::string& strRecordName, const std::string& strKeyName, std::vector<std::string>& valueVec )
-{
-    NFIMysqlDriver* pDriver = m_pMysqlConnectMgrManager->GetMysqlDriver();
     if (!pDriver)
     {
         return false;
@@ -264,7 +294,7 @@ bool NFCMysqlClusterModule::Keys( const std::string& strRecordName, const std::s
     {
         return false;
     }
-    
+
     const std::string strLikeKey = "%" + strKeyName + "%";
 
     NFMYSQLTRYBEGIN
@@ -288,5 +318,5 @@ bool NFCMysqlClusterModule::Keys( const std::string& strRecordName, const std::s
 
     NFMYSQLTRYEND("exist error")
 
-   return true;
+    return true;
 }
