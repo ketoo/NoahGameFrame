@@ -1,7 +1,5 @@
 #include "NFCAsyMysqlClusterModule.h"
-#include "NFComm/NFMessageDefine/NFMsgMysql.pb.h"
 #include "NFCMysqlDriverManager.h"
-
 
 bool NFCMysqlComponent::Init()
 {

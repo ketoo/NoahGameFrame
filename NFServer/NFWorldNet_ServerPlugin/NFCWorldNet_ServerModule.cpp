@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCWorldNet_ServerModule.cpp
+//    @FileName         :    NFCWorldNet_ServerModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
 //    @Module           :    NFCWorldNet_ServerModule
@@ -378,7 +378,6 @@ void NFCWorldNet_ServerModule::LogGameServer()
 		return;
 	}
 
-
 	mnLastCheckTime = GetPluginManager()->GetNowTime();
 
 	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "Begin Log GameServer Info", "");
@@ -410,7 +409,6 @@ void NFCWorldNet_ServerModule::LogGameServer()
 	}
 
 	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "End Log ProxyServer Info", "");
-
 }
 
 
