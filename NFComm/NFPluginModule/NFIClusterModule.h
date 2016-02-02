@@ -12,6 +12,7 @@
 
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFIMysqlDriver.h"
 
 class NFIClusterModule
     : public NFILogicModule
