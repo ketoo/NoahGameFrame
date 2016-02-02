@@ -86,13 +86,13 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFConfigPlugin/NFCElementInfoModule.cpp" />
-		<Unit filename="NFConfigPlugin/NFCElementInfoModule.h" />
-		<Unit filename="NFConfigPlugin/NFCLogicClassModule.cpp" />
-		<Unit filename="NFConfigPlugin/NFCLogicClassModule.h" />
-		<Unit filename="NFConfigPlugin/NFConfigPlugin.cpp" />
-		<Unit filename="NFConfigPlugin/NFConfigPlugin.h" />
-		<Unit filename="NFConfigPlugin/dllmain.cpp" />
+		<Unit filename="NFCElementInfoModule.cpp" />
+		<Unit filename="NFCElementInfoModule.h" />
+		<Unit filename="NFCLogicClassModule.cpp" />
+		<Unit filename="NFCLogicClassModule.h" />
+		<Unit filename="NFConfigPlugin.cpp" />
+		<Unit filename="NFConfigPlugin.h" />
+		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
