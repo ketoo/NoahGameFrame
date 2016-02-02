@@ -94,7 +94,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
         break;
     case SMysqlParam::EMYSQLOPRTYPE_EXISTS:
         {
-            bool bExit;
+            bool bExit = false;
             //if (m_pClusterModule->ExistsWithDriver(xparam.strRecordName, xparam.strKey, bExit, m_pMysqlDriverManager->GetMysqlDriver()))
             {
                 xparam.bExit = bExit;
