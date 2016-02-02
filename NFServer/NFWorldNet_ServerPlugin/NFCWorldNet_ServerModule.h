@@ -10,7 +10,6 @@
 #define NFC_WORLDNET_SERVER_MODULE_H
 
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
-#include <memory>
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIWorldToMasterModule.h"
