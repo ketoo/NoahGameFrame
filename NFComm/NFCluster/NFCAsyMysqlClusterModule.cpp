@@ -62,7 +62,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
     {
     case SMysqlParam::EMYSQLOPRTYPE_UPDATA:
         {
-            if (m_pClusterModule->UpdataWithDriver(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec, m_pMysqlDriverManager->GetMysqlDriver()))
+            //if (m_pClusterModule->UpdataWithDriver(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec, m_pMysqlDriverManager->GetMysqlDriver()))
             {
                 xparam.nRet = -1;
             }
@@ -70,7 +70,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
         break;
     case SMysqlParam::EMYSQLOPRTYPE_QUERY :
         {
-            if (m_pClusterModule->QueryWithDriver(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec, m_pMysqlDriverManager->GetMysqlDriver()))
+            //if (m_pClusterModule->QueryWithDriver(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec, m_pMysqlDriverManager->GetMysqlDriver()))
             {
                 xparam.nRet = -1;
             }
@@ -78,7 +78,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
         break;
     case SMysqlParam::EMYSQLOPRTYPE_SELECT:
         {
-            if (m_pClusterModule->SelectWithDriver(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec, m_pMysqlDriverManager->GetMysqlDriver()))
+            //if (m_pClusterModule->SelectWithDriver(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec, m_pMysqlDriverManager->GetMysqlDriver()))
             {
                 xparam.nRet = -1;
             }
@@ -86,7 +86,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
         break;
     case SMysqlParam::EMYSQLOPRTYPE_DELETE:
         {
-            if (m_pClusterModule->DeleteWithDriver(xparam.strRecordName, xparam.strKey, m_pMysqlDriverManager->GetMysqlDriver()))
+            //if (m_pClusterModule->DeleteWithDriver(xparam.strRecordName, xparam.strKey, m_pMysqlDriverManager->GetMysqlDriver()))
             {
                 xparam.nRet = -1;
             }
@@ -95,7 +95,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
     case SMysqlParam::EMYSQLOPRTYPE_EXISTS:
         {
             bool bExit;
-            if (m_pClusterModule->ExistsWithDriver(xparam.strRecordName, xparam.strKey, bExit, m_pMysqlDriverManager->GetMysqlDriver()))
+            //if (m_pClusterModule->ExistsWithDriver(xparam.strRecordName, xparam.strKey, bExit, m_pMysqlDriverManager->GetMysqlDriver()))
             {
                 xparam.bExit = bExit;
                 xparam.nRet = -1;
@@ -104,7 +104,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
         break;
     case SMysqlParam::EMYSQLOPRTYPE_KEYS  :
         {
-            if (m_pClusterModule->KeysWithDriver(xparam.strRecordName, xparam.strKey, xparam.valueVec, m_pMysqlDriverManager->GetMysqlDriver()))
+            //if (m_pClusterModule->KeysWithDriver(xparam.strRecordName, xparam.strKey, xparam.valueVec, m_pMysqlDriverManager->GetMysqlDriver()))
             {
                 xparam.nRet = -1;
             }
