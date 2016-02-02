@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCAsyMysqlClusterModule.h
+//    @FileName         :    NFCAsyMysqlClusterModule.h
 //    @Author           :    ChuanBo.Guo
 //    @Date             :    2016-01-31
 //    @Module           :    NFCAsyMysqlClusterModule
@@ -15,8 +15,8 @@
 #include "NFComm/NFPluginModule/NFIAsyClusterModule.h"
 #include "NFComm/NFPluginModule/NFIMysqlConnectMgrModule.h"
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
+#include "NFComm/NFMessageDefine/NFMsgMysql.pb.h"
 #include "NFIMysqlDriverManager.h"
-
 
 struct SMysqlParam
 {
