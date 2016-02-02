@@ -76,9 +76,9 @@
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFConfigPlugin.so $(SolutionDir)/_Out/Server/Release/NFGameServer1/" />
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFConfigPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial1/" />
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFConfigPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial2/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFConfigPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial3/" 
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFConfigPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial4/" 
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFConfigPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial5/" 
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFConfigPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial3/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFConfigPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial4/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFConfigPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial5/" />
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
