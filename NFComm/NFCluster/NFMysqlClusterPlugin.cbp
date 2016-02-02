@@ -24,11 +24,13 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
 					<Add directory="$(SolutionDir)/Dependencies/mysql/" />
 					<Add directory="$(SolutionDir)/Dependencies/mysqlpp/" />
+					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
 				</Compiler>
 				<Linker>
 					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFCore_d.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libmysqlpp.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libmysqlclient.a" />
+					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libprotobuf.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/lib/Debug/" />
 				</Linker>
@@ -66,11 +68,13 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
 					<Add directory="$(SolutionDir)/Dependencies/mysql/" />
 					<Add directory="$(SolutionDir)/Dependencies/mysqlpp/" />
+					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
 				</Compiler>
 				<Linker>
 					<Add library="$(SolutionDir)/_Out/Comm/Release/NFCore.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libmysqlpp.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libmysqlclient.a" />
+					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libprotobuf.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/lib/Release/" />
 				</Linker>
@@ -92,14 +96,14 @@
 				</Environment>
 			</Target>
 		</Build>
+		<Unit filename="NFCAsyMysqlClusterModule.cpp" />
+		<Unit filename="NFCAsyMysqlClusterModule.h" />
 		<Unit filename="NFCMysqlClusterModule.cpp" />
 		<Unit filename="NFCMysqlClusterModule.h" />
 		<Unit filename="NFCMysqlConnectMgrModule.cpp" />
 		<Unit filename="NFCMysqlConnectMgrModule.h" />
 		<Unit filename="NFCMysqlDriver.cpp" />
 		<Unit filename="NFCMysqlDriver.h" />
-		<Unit filename="NFCAsyMysqlClusterModule.cpp" />
-		<Unit filename="NFCAsyMysqlClusterModule.h" />
 		<Unit filename="NFCMysqlDriverManager.cpp" />
 		<Unit filename="NFCMysqlDriverManager.h" />
 		<Unit filename="NFMysqlClusterPlugin.cpp" />
