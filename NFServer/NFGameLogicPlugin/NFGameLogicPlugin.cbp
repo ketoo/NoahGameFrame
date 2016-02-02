@@ -27,6 +27,7 @@
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
 					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+                    <Add directory="$(SolutionDir)/Dependencies/mysql/" />
 				</Compiler>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFGameLogicPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFGameServer1/" />
@@ -65,6 +66,7 @@
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
 					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+                    <Add directory="$(SolutionDir)/Dependencies/mysql/" />
 				</Compiler>
 				<Linker>
 					<Add library="$(SolutionDir)/_Out/Comm/Release/NFMessageDefine.a" />
