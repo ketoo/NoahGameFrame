@@ -28,7 +28,7 @@ public:
     int Updata(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec,
         BaseType* pBaseType, void (BaseType::*handleReturnRsp)(const NFGUID&, const int, const std::string&),  const std::string&strUseData)
     {
-        MYSQL_RETURN_FUNCTOR FunReturnRsp = std::bind(handleReturnRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+        const MYSQL_RETURN_FUNCTOR FunReturnRsp = std::bind(handleReturnRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
         return Updata(self, strRecordName, strKey, fieldVec, valueVec, FunReturnRsp, strUseData);
     }
@@ -37,7 +37,7 @@ public:
     int Query(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec,
         BaseType* pBaseType, void (BaseType::*handleReturnRsp)(const NFGUID&, const int, const std::vector<std::string>&, const std::vector<std::string>&, const std::string&),  const std::string&strUseData)
     {
-        MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR mFunReturnVeckKeyValueRsp = std::bind(handleReturnRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
+        const MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR mFunReturnVeckKeyValueRsp = std::bind(handleReturnRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
 
         return Query(self, strRecordName, strKey, fieldVec, valueVec, mFunReturnVeckKeyValueRsp, strUseData);
     }
@@ -46,7 +46,7 @@ public:
     int Delete(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec,
         BaseType* pBaseType, void (BaseType::*handleReturnRsp)(const NFGUID&, const int, const std::string&),  const std::string&strUseData)
     {
-        MYSQL_RETURN_FUNCTOR FunReturnRsp = std::bind(handleReturnRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+        const MYSQL_RETURN_FUNCTOR FunReturnRsp = std::bind(handleReturnRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
         return Delete(self, strRecordName, strKey, FunReturnRsp, strUseData);
     }
@@ -55,7 +55,7 @@ public:
     int Exists(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec,
         BaseType* pBaseType, void (BaseType::*handleReturnRsp)(const NFGUID&, const int, const int, const std::string&),  const std::string&strUseData)
     {
-        MYSQL_RETURN_INT_FUNCTOR mFunReturnIntRsp = std::bind(handleReturnRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+        const MYSQL_RETURN_INT_FUNCTOR mFunReturnIntRsp = std::bind(handleReturnRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 
         return Exists(self, strRecordName, strKey, mFunReturnIntRsp, strUseData);
     }
@@ -64,7 +64,7 @@ public:
     int Keys(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec,
         BaseType* pBaseType, void (BaseType::*handleReturnRsp)(const NFGUID&, const int, const std::vector<std::string>&, const std::string&),  const std::string&strUseData)
     {
-        MYSQL_RETURN_VECVALUE_FUNCTOR mFunReturnVecValueRsp = std::bind(handleReturnRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+        const MYSQL_RETURN_VECVALUE_FUNCTOR mFunReturnVecValueRsp = std::bind(handleReturnRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 
         return Keys(self, strRecordName, strKey, mFunReturnVecValueRsp, strUseData);
     }
