@@ -36,14 +36,38 @@ bool NFCDataProcessModule::AfterInit()
     m_pClusterSQLModule = dynamic_cast<NFIClusterModule*>( pPluginManager->FindModule( "NFCMysqlClusterModule" ) );
 	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>( "NFCUUIDModule" );
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
+    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
 	
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pClusterSQLModule);
 	assert(NULL != m_pUUIDModule);
 	assert(NULL != m_pLogicClassModule);
-	assert(NULL != m_pLogModule);
+    assert(NULL != m_pLogModule);
+    assert(NULL != m_pElementInfoModule);
 	
+    NF_SHARE_PTR<NFILogicClass> pLogicClass = m_pLogicClassModule->GetElement("SqlServer");
+    if (nullptr == pLogicClass)
+    {
+        return false;
+    }
+
+    NFList<std::string>& xNameList = pLogicClass->GetConfigNameList();
+    std::string strConfigName; 
+    if (!xNameList.Get(0, strConfigName))
+    {
+        return false;
+    }
+
+    const int nID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+    const std::string& mstrSQLIP = m_pElementInfoModule->GetPropertyString(strConfigName, "SqlIP");
+    const int mnSQLPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "SqlPort");
+    const std::string& mstrSQLName = m_pElementInfoModule->GetPropertyString(strConfigName, "SqlName");
+    const std::string& mstrSQLUser = m_pElementInfoModule->GetPropertyString(strConfigName, "SqlUser");
+    const std::string& mstrSQLPWD = m_pElementInfoModule->GetPropertyString(strConfigName, "SqlPwd");
+
+    bool bConnect = m_pClusterSQLModule->AddMysqlServer(nID, "", mstrSQLIP, mnSQLPort, mstrSQLName, mstrSQLUser, mstrSQLPWD);
+
     RegisterAutoSave(NFrame::Player::ThisName());
 
 	return true;
