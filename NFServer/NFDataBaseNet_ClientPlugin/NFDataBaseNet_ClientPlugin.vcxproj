@@ -12,13 +12,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCDataBaseNet_ClientModule.cpp" />
     <ClCompile Include="NFCDataProcessModule.cpp" />
     <ClCompile Include="NFDataBaseNet_ClientPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\NFComm\NFPluginModule\NFIObjectSaveModule.h" />
-    <ClInclude Include="NFCDataBaseNet_ClientModule.h" />
     <ClInclude Include="NFCDataProcessModule.h" />
     <ClInclude Include="NFDataBaseNet_ClientPlugin.h" />
   </ItemGroup>
