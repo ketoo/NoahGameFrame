@@ -7,8 +7,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_CLUSTER_MODULE_H_
-#define _NFI_CLUSTER_MODULE_H_
+#ifndef NFI_CLUSTER_MODULE_H
+#define NFI_CLUSTER_MODULE_H
 
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
