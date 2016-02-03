@@ -85,6 +85,8 @@
 				</Environment>
 			</Target>
 		</Build>
+		<Unit filename="NFCProxyServerToGameModule.cpp" />
+		<Unit filename="NFCProxyServerToGameModule.h" />
 		<Unit filename="NFCProxyServerToWorldModule.cpp" />
 		<Unit filename="NFCProxyServerToWorldModule.h" />
 		<Unit filename="NFProxyServerNet_ClientPlugin.cpp" />
