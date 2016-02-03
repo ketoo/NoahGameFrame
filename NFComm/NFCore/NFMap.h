@@ -6,14 +6,15 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_MAP_H_
-#define _NF_MAP_H_
+#ifndef NF_MAP_H
+#define NF_MAP_H
 
 #include <map>
 #include <list>
 #include <string>
 #include <iostream>
 #include <typeinfo>
+#include "NFMapEx.h"
 
 template <typename T , typename TD>
 class NFMap
@@ -70,7 +71,7 @@ public:
 
     virtual TD* First()
     {
-        if (mObjectList.size() <= 0 )
+        if (mObjectList.size() <= 0)
         {
             return NULL;
         }
@@ -106,7 +107,7 @@ public:
 
     virtual TD* First(T& name)
     {
-        if (mObjectList.size() <= 0 )
+        if (mObjectList.size() <= 0)
         {
             return NULL;
         }
@@ -129,7 +130,7 @@ public:
         {
             return NULL;
         }
-
+        
         mObjectCurIter++;
         if (mObjectCurIter != mObjectList.end())
         {
@@ -156,6 +157,5 @@ private:
     NFMapOBJECT     mObjectList;
     typename NFMapOBJECT::iterator mObjectCurIter;
 };
-
 
 #endif

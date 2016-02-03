@@ -10,60 +10,49 @@
 #define _NFI_PLUGIN_MANAGER_H_
 
 #include "NFIActor.h"
-//#include "NFIPlugin.h"
+#include "NFILogicModule.h"
+#include "NFIActorManager.h"
 
 class NFIPlugin;
 
-#ifdef NF_DYNAMIC_PLUGIN
-class NFIPluginManager : public NFIActor
+class NFIPluginManager : public NFILogicModule
 {
 public:
-    NFIPluginManager(Theron::Framework &framework, NFIActorManager* pManager, NFIActorManager::EACTOR eActor): NFIActor(framework, pManager, eActor)
-    {
+	NFIPluginManager(NFIActorManager* pManager)
+	{
 
     }
-#else
-class NFIPluginManager : public NFIActor
-{
-public:
-    NFIPluginManager()
-    {
-    }
 
-    virtual bool Init()
-    {
-        return true;
-    }
+	template <typename T>
+	T* FindModule(const std::string& strModuleName)
+	{
+		NFILogicModule* pLogicModule = FindModule(strModuleName);
+		if (pLogicModule)
+		{
+			if (!TIsDerived<T, NFILogicModule>::Result)
+			{
+				//BaseTypeComponent must inherit from NFIComponent;
+				return NULL;
+			}
 
-    virtual bool AfterInit()
-    {
-        return true;
-    }
+			return dynamic_cast<T*>(pLogicModule);
+		}
 
-    virtual bool BeforeShut()
-    {
-        return true;
-    }
+		return NULL;
+	}
 
-    virtual bool Shut()
-    {
-        return true;
-    }
-
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime)
-    {
-        return true;
-    }
-#endif
-
+	template <typename T>
+	T* GetModule(const std::string& strModuleName)
+	{
+		return FindModule<T>(strModuleName);
+	}
+	
+	NFILogicModule* GetModule(const std::string& strModuleName)
+	{
+		return FindModule(strModuleName);
+	}
 
     virtual bool LoadPlugin() = 0;
-
-    //virtual bool UnLoadPlugin() = 0;
-
-    //virtual bool LoadPlugin( const std::string& strPluginName ) = 0;
-
-    //virtual bool UnLoadPlugin( const std::string& strPluginName ) = 0;
 
     virtual void Registered(NFIPlugin* plugin) = 0;
 
@@ -75,9 +64,26 @@ public:
 
     virtual void RemoveModule(const std::string& strModuleName) = 0;
 
-    virtual NFILogicModule* FindModule(const std::string& strModuleName) = 0;
+	virtual NFILogicModule* FindModule(const std::string& strModuleName) = 0;
 
+	//////////////////////////////////////////////////////////////////////////
+
+	virtual void AddComponent(const std::string& strComponentName, NFIComponent* pComponent) = 0;
+
+	virtual void RemoveComponent(const std::string& strComponentName) = 0;
+
+	virtual NFIComponent* FindComponent(const std::string& strComponentName) = 0;
+
+	//////////////////////////////////////////////////////////////////////////
     virtual bool ReInitialize() = 0;
+
+	virtual NFIActorManager* GetActorManager() = 0;
+	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from) = 0;
+
+    virtual int AppID() = 0;
+	virtual NFINT64 GetInitTime() const = 0;
+	virtual NFINT64 GetNowTime() const = 0;
+    virtual const std::string& GetConfigPath() const = 0;
 };
 
 #endif

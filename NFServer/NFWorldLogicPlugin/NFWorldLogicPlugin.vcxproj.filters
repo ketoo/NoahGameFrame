@@ -9,4 +9,9 @@
     <ClCompile Include="NFWorldLogicPlugin.cpp" />
     <ClCompile Include="NFCWorldLogicModule.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Filter Include="NFRankModule">
+      <UniqueIdentifier>{5487df7b-1497-4fe0-a820-a751656f9fb9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
 </Project>

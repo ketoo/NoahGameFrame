@@ -1,5 +1,3 @@
-#pragma once
-
 // -------------------------------------------------------------------------
 //    文件名      :    NFSkill_def.h
 //    创建者      :    LvSheng.Huang
@@ -7,6 +5,8 @@
 //    功能描述    :    对象的结构体
 //
 // -------------------------------------------------------------------------
+#ifndef NFC_OBJECT_DEF_H
+#define NFC_OBJECT_DEF_H
 
 #include "NFItem_def.h"
 //#include <vector>
@@ -15,13 +15,6 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//性别
-enum NFSexType
-{
-    NST_MAN,
-    NST_FEMAN,
-    NST_MAX,
-};
 //职业1:勇士2枪客3: 医4:弓手5刺客
 enum NFJobType
 {
@@ -53,13 +46,20 @@ enum NFCampType
 //0呆着1跑2走3闪烁4技能飞移5死6平常技能中
 enum NFObjectStateType
 {
-    NOST_IDEL,
+    NOST_IDLE,
     NOST_RUN,
     NOST_WALK,
     NOST_WILK,
     NOST_SKILLFLY,
     NOST_DEAD,
     NOST_SKILLUSE,
+};
+
+enum NFLogicStateType
+{
+	NLST_FREE,//自由状态
+	NLST_PVP,//PVP状态（内部再有自己的小状态）
+	NLST_PVE,//PVE状态（内部再有自己的小状态）
 };
 
 enum NFGMComandID
@@ -90,3 +90,4 @@ enum NFGMComandID
 
 
 #pragma pack(pop)
+#endif

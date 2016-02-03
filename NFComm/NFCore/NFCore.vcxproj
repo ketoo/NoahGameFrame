@@ -57,7 +57,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_X64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\boost_1_53_0\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\boost_1_53_0\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\;$(SolutionDir)\Dependencies\gperftools-2.1\src</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -80,7 +80,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_X64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\boost_1_53_0\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\boost_1_53_0\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\;$(SolutionDir)\Dependencies\gperftools-2.1\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -93,11 +93,13 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCComponent.h" />
+    <ClInclude Include="NFCAddConsistentHash.hpp" />
     <ClInclude Include="NFCComponentManager.h" />
+    <ClInclude Include="NFCConsistentHash.hpp" />
     <ClInclude Include="NFCDataList.h" />
+    <ClInclude Include="NFCEventManager.h" />
     <ClInclude Include="NFCHeartBeatManager.h" />
-    <ClInclude Include="NFCMemory .h" />
+    <ClInclude Include="NFCMemManger.h" />
     <ClInclude Include="NFCObject.h" />
     <ClInclude Include="NFCProperty.h" />
     <ClInclude Include="NFCPropertyManager.h" />
@@ -105,14 +107,14 @@
     <ClInclude Include="NFIComponent.h" />
     <ClInclude Include="NFIComponentManager.h" />
     <ClInclude Include="NFIDataList.h" />
+    <ClInclude Include="NFIEventManager.h" />
     <ClInclude Include="NFIHeartBeatManager.h" />
-    <ClInclude Include="NFIMemory.h" />
+    <ClInclude Include="NFMapEx.h" />
     <ClInclude Include="NFQueue.h" />
     <ClInclude Include="NFSingleton.h" />
     <ClInclude Include="NFCore.h" />
     <ClInclude Include="NFCRecord.h" />
     <ClInclude Include="NFDefine.h" />
-    <ClInclude Include="NFIdentID.h" />
     <ClInclude Include="NFIObject.h" />
     <ClInclude Include="NFIProperty.h" />
     <ClInclude Include="NFIPropertyManager.h" />
@@ -120,15 +122,14 @@
     <ClInclude Include="NFIRecordManager.h" />
     <ClInclude Include="NFList.h" />
     <ClInclude Include="NFMap.h" />
-    <ClInclude Include="NFPlatform.h" />
     <ClInclude Include="NFTimer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NFCComponent.cpp" />
     <ClCompile Include="NFCComponentManager.cpp" />
     <ClCompile Include="NFCDataList.cpp" />
+    <ClCompile Include="NFCEventManager.cpp" />
     <ClCompile Include="NFCHeartBeatManager.cpp" />
-    <ClCompile Include="NFCMemory.cpp" />
+    <ClCompile Include="NFCMemManger.cpp" />
     <ClCompile Include="NFCObject.cpp" />
     <ClCompile Include="NFCProperty.cpp" />
     <ClCompile Include="NFCPropertyManager.cpp" />

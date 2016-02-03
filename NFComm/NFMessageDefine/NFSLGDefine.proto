@@ -1,0 +1,184 @@
+package NFMsg;
+import "NFMsgBase.proto";
+
+// 按照海岛奇兵修改，更简单，更舒服
+// 兵可以收回，但是不回血
+// 建筑可以慢慢回血
+// 核弹可设置是否报复
+
+// SLG建筑大类型
+enum ESLGBuildingType
+{
+	EBT_BASE		= 0;	// 基地设施
+	EBT_DEFENSE		= 1;	// 防御设施--商城打开
+	EBT_ARMY		= 2;	// 军事设施--商城打开
+	EBT_RESOURCE	= 3;	// 资源设施--商城打开
+	EBT_GUILD		= 4;	// 公会设施--商城打开
+	EBT_TEMPLE		= 5;	// 神庙设施--商城打开
+	EBT_NUCLEAR		= 6;	// 原子设施--商城打开
+}
+
+// SLG建筑小类型
+enum ESLGBuildingSubType
+{
+	// 基地设施
+	EBST_HALL					= 0;	// 大厅
+		
+	// 装饰设施
+	// 		普通障碍物
+	EBST_MASHROOM				= 70;	// 蘑菇
+	EBST_BUSH					= 71;	// 灌木
+	EBST_BRANCH_1				= 72;	// 树枝1
+	EBST_BRANCH_2				= 73;	// 树枝2
+	EBST_BRANCH_3				= 74;	// 树枝3
+	EBST_TREE_1					= 75;	// 树木1
+	EBST_TREE_2					= 76;	// 树木2
+	EBST_TREE_3					= 77;	// 树木3
+	EBST_STONE_1				= 78;	// 石头1
+	EBST_STONE_2				= 79;	// 石头2
+	EBST_STONE_3				= 80;	// 石头3
+	EBST_TOMB					= 81;	// 墓碑(普通兵死亡后地图中创建)
+	EBST_DARK_TOMB				= 82;	// 暗黑墓碑(暗黑兵种死亡后地图中创建)
+	EBST_PYXIS					= 83;	// 宝石盒(采集后可获得宝石)
+	// 		各类装饰品
+	EBST_TORCH					= 84;	// 火把
+	EBST__WHITE_FLAG			= 85;	// 白旗(后面加各种旗子、风车、植物、国旗、图腾、神像等，现在将枚举留出来)
+	// TO ADD
+	
+	// 防御设施--所有的家里种植编辑的普通玩意
+	EBST_CANNON					= 101;	// 加农炮
+	EBST_MORTAR					= 102;	// 迫击炮
+	EBST_ARCHER_TOWER			= 103;	// 箭塔
+	EBST_WIZARD_TOWER			= 104;	// 法师塔
+	EBST_AIR_TOWER				= 105;	// 防空塔
+	EBST_TESLA_TOWER			= 106;	// 电塔
+	EBST_WALL					= 107;	// 围墙
+	EBST_X_BOW					= 108;	// X连弩
+	EBST_BOMB					= 109;	// 炸弹
+	EBST_AIR_BOMB				= 110;	// 空中炸弹
+	EBST_SPRING_TRAP			= 111;	// 弹簧陷阱
+	EBST_HELL_TOWER				= 112;	// 地狱塔
+			
+	// 军事设施--所有的攻击单位制造者
+	EBST_CAMP					= 200;	// 兵营
+	EBST_BARRACK				= 201;	// 训练营
+	EBST_TEC_FACTORY			= 202;	// 科技工厂
+	EBST_DARK_BARRACK			= 203;	// 暗黑训练营
+	EBST_DRUG_FACTORY			= 204;	// 药剂工厂
+	EBST_KING_ALTAR				= 205;	// 国王
+	EBST_QUEEN_ALTAR			= 206;	// 女王
+			
+	// 资源设施--所有的资源设施制造者
+	EBST_GOLD_COLLECTOR			= 300;	// 金币收集器
+	EBST_GOLD_STORAGE			= 301;	// 金币储存器
+	EBST_STONE_COLLECTOR		= 302;	// 石头收集器
+	EBST_STONE_STORAGE			= 303;	// 石头存储器
+	EBST_STEEL_COLLECTOR		= 304;	// 钢铁收集器
+	EBST_STEEL_STORAGE			= 305;	// 钢铁存储器
+	EBST_DIAMOND_COLLECTOR		= 306;	// 钻石收集器
+	EBST_DIAMOND_STORAGE		= 307;	// 钻石存储器
+	EBST_HUT					= 308;	// 建筑工人小屋
+	
+	
+	
+	// 公会设施--公会相关功能全在这里
+	EBST_GUILD_CASTLE			= 400;	// 公会城堡
+	EBST_GUILD_CRYPT			= 401;	// 公会地穴
+	
+	// 神庙设施--所有的事务的研究
+	EBST_ELEMENT_LAB		= 500;	// 元素实验室--研究火，毒，冰冻元素
+	
+	
+	// 原子设施--高科技全在这里
+	EBST_NUCLEAR_FACTORY		= 600;	// 原子工厂
+}
+
+// SLG兵种类型--军事设施-训练营产出
+enum ESLGArmyType
+{
+	// 普通兵种
+	EAT_FOOTMAN					= 0;	// 步兵(近战)
+	EAT_ARCHER					= 1;	// 弓箭手(远战)
+	EAT_GOBLIN					= 2;	// 哥布林(资源掠夺)
+	EAT_GIANT					= 3;	// 巨人(肉盾)
+	EAT_WALL_BREAKER			= 4;	// 炸弹人(破墙)
+	EAT_BALLOON					= 5;	// 气球兵(空军)
+	EAT_HEALER					= 6;	// 天使(治疗法师)
+	EAT_WIZARD					= 7;	// 法师(远程高攻)
+	EAT_DRAGON					= 8;	// 龙(空军高攻)
+	EAT_PEKKA					= 9;	// 皮卡超人(近战高攻)
+	
+	// 暗黑兵种
+	EAT_MINION					= 20;	// 亡灵(空军高攻)
+	EAT_HOG_RIDER				= 21;	// 野猪骑士(近战高攻，无视城墙)
+	EAT_VALKYRIE				= 22;	// 女武神(近战高攻，溅射伤害)
+	EAT_GOLEM					= 23;	// 石头人()
+}
+
+
+/////////操作功能列表//////////////////////////////////////////////////////////////////////////
+// 建筑的功能类型列表
+enum ESLGFuncType
+{
+	EFT_INFO					= 0;	// 查看信息
+	EFT_BOOOST					= 1;	// 加速
+	EFT_LVLUP					= 2;	// 升级 
+	EFT_CREATE_SOLDER			= 3;	// 造兵
+	EFT_CREATE_SPEEL			= 4;	// 药水
+	EFT_RESEARCH				= 5;	// 研究 
+	EFT_COLLECT_GOLD			= 6;	// 收集金币
+	EFT_COLLECT_STONE			= 7;	// 收集石头
+	EFT_COLLECT_STEEL			= 8;	// 收集铁
+	EFT_COLLECT_DIAMOND			= 9;	// 收集砖石
+	EFT_SELL					= 10;	// 出售
+	EFT_REPAIR					= 11;	// 修复
+	EFT_CANCEL					= 12;	// 取消
+	EFT_FINISH					= 13;	// 完成
+}
+
+// 建筑当前的状态
+enum ESLGBuildingState
+{
+	EBS_IDLE					= 0; // idle状态
+	EBS_BOOST					= 1; // 加速状态
+	EBS_UPGRADE					= 2; // 升级状态
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+message ReqAckBuyObjectFormShop//从商店种植建筑
+{
+	required string	config_id = 1;
+	required float	x = 2;
+	required float	y = 3;
+	required float	z = 4;
+}
+
+message ReqAckMoveBuildObject//移动建筑
+{
+	optional int32 row = 1;
+	required Ident object_guid = 2;
+	required float x = 3;
+	required float y = 4;
+	required float z = 5;
+}
+
+message ReqUpBuildLv//申请建筑升级
+{
+	optional int32 row = 1;
+	required Ident	object_guid = 2;
+}
+
+message ReqCreateItem//申请造兵&药水&等
+{
+	optional int32 row = 1;
+	required Ident	object_guid = 2;
+	required string	config_id = 3;
+	required int32	count = 4;
+}
+
+message ReqBuildOperate//申请建筑操作(升级，加速采集，收集等等(需要参数的功能不走这条消息，比如造兵，药水，研究))
+{
+	optional int32 row = 1;
+	required Ident	object_guid = 2;
+	required ESLGFuncType	functype = 3;
+}
