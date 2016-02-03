@@ -13,7 +13,6 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIAsyClusterModule.h"
-#include "NFComm/NFPluginModule/NFIMysqlConnectMgrModule.h"
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
 #include "NFComm/NFMessageDefine/NFMsgMysql.pb.h"
 #include "NFIMysqlDriverManager.h"
@@ -38,6 +37,10 @@ struct SMysqlParam
         bExit = 0;
         eType = EMYSQLOPRTYPE_NONE;
     }
+
+public:
+    bool PackParam(std::string& strData );
+    bool UnPackParam( const std::string& strData);
 
     std::string strRecordName;
     std::string strKey;
@@ -84,10 +87,6 @@ protected:
     virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance();
 
     NF_SHARE_PTR<NFIMysqlDriverManager> m_pMysqlDriverManager;
-
-    NFIAsyClusterModule* m_pAsyClusterModule;
-    NFIClusterModule* m_pClusterModule;
-    
 };
 
 
@@ -121,8 +120,6 @@ public:
 
     virtual bool StartActorPool(const int nCount);
     virtual bool CloseActorPool();
-    virtual bool PackParam( const SMysqlParam& xParam, std::string& strData );
-    virtual bool UnPackParam( const std::string& strData, SMysqlParam& xParam );
 
     virtual bool AddMysqlServer( const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime = 10, const int nRconneCount = -1);
 
