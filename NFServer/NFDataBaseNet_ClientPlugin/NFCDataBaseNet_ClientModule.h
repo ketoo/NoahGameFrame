@@ -15,6 +15,7 @@
 #include "NFComm/NFPluginModule/NFIDataBaseNet_ClientModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIMysqlConnectMgrModule.h"
+#include "NFComm/NFPluginModule/NFIClusterModule.h"
 
 class NFCDataBaseNet_ClientModule : public NFIDataBaseNet_ClientModule
 {
@@ -35,7 +36,7 @@ private:
     NFILogicClassModule* m_pLogicClassModule;
     NFIKernelModule* m_pKernelModule;
     NFIElementInfoModule* m_pElementInfoModule;
-    NFIMysqlConnectMgrModule* m_pMysqlConnectMgrModule;
+    NFIClusterModule* m_pMysqlClusterModule;
 };
 
 #endif

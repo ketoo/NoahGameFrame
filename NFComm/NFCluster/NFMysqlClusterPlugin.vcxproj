@@ -133,7 +133,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </ClCompile>
     <ClCompile Include="NFCAsyMysqlClusterModule.cpp" />
     <ClCompile Include="NFCMysqlClusterModule.cpp" />
-    <ClCompile Include="NFCMysqlConnectMgrModule.cpp" />
     <ClCompile Include="NFCMysqlDriver.cpp" />
     <ClCompile Include="NFCMysqlDriverManager.cpp" />
     <ClCompile Include="NFMysqlClusterPlugin.cpp" />
@@ -141,7 +140,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
   <ItemGroup>
     <ClInclude Include="NFCAsyMysqlClusterModule.h" />
     <ClInclude Include="NFCMysqlClusterModule.h" />
-    <ClInclude Include="NFCMysqlConnectMgrModule.h" />
     <ClInclude Include="NFCMysqlDriver.h" />
     <ClInclude Include="NFCMysqlDriverManager.h" />
     <ClInclude Include="NFMysqlClusterPlugin.h" />
