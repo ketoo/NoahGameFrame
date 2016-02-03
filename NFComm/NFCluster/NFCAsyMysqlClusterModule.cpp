@@ -12,6 +12,7 @@ bool SMysqlParam::PackParam(std::string& strData )
         xMsg.set_bexit(bExit);
         xMsg.set_nreqid(nReqID);
         xMsg.set_nret(nRet);
+        xMsg.set_etype(eType);
 
         for (int i = 0; i < fieldVec.size(); i++)
         {
@@ -51,6 +52,7 @@ bool SMysqlParam::UnPackParam( const std::string& strData)
         bExit                    = xMsg.bexit();
         nReqID                   = xMsg.nreqid();
         nRet                     = xMsg.nret();
+        eType                    = (EMysqlOPRType)xMsg.etype();
 
         for (int i = 0; i < xMsg.fieldveclist_size(); i++)
         {
@@ -475,61 +477,28 @@ int NFCAsyMysqlClusterModule::ApplyRequest( NF_SHARE_PTR<SMysqlParam> pParam )
     return 0;
 }
 
-int NFCAsyMysqlClusterModule::RequestAsyEnd( const NFGUID& self, const int nFormActor, const int nSubMsgID, const std::string& strData )
+int NFCAsyMysqlClusterModule::RequestAsyEnd( const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData )
 {
-    SMysqlParam xResultparam;
-    if (!xResultparam.UnPackParam(strData))
+    switch (nEventID)
     {
-        return -1;
-    }
-
-    NF_SHARE_PTR<SMysqlParam> pReqData = mReqList.GetElement(xResultparam.nReqID);
-    if (NULL == pReqData)
-    {
-        return -2;
-    }
-
-    switch (pReqData->eType)
-    {
-    case SMysqlParam::EMYSQLOPRTYPE_DELETE:
-    case SMysqlParam::EMYSQLOPRTYPE_UPDATA:
+    case NFCAsyMysqlClusterModule::ACOTERMYSQLEVENT_USEDB:
         {
-            if (pReqData->mFunReturnRsp)
-            {
-                pReqData->mFunReturnRsp(pReqData->self, pReqData->nRet, pReqData->mstrUseData);
-            }
+            return OnUseMysqlAsyEnd(self, nFormActor, nEventID, strData);
         }
         break;
-    case SMysqlParam::EMYSQLOPRTYPE_SELECT:
-    case SMysqlParam::EMYSQLOPRTYPE_QUERY :
+    case NFCAsyMysqlClusterModule::ACOTERMYSQLEVENT_INISERVER:
         {
-            if (pReqData->mFunReturnVeckKeyValueRsp)
-            {
-                pReqData->mFunReturnVeckKeyValueRsp(pReqData->self, pReqData->nRet, pReqData->fieldVec, pReqData->valueVec, pReqData->mstrUseData);
-            }
+            return OnAddMysqlServerAsyEnd(self, nFormActor, nEventID, strData);
         }
         break;
-    case SMysqlParam::EMYSQLOPRTYPE_EXISTS:
+    case NFCAsyMysqlClusterModule::ACOTERMYSQLEVENT_KEEPALIVESERVER:
         {
-            if (pReqData->mFunReturnIntRsp)
-            {
-                pReqData->mFunReturnIntRsp(pReqData->self, pReqData->nRet, pReqData->bExit,pReqData->mstrUseData);
-            }
-        }
-        break;
-    case SMysqlParam::EMYSQLOPRTYPE_KEYS  :
-        {
-            if (pReqData->mFunReturnVecValueRsp)
-            {
-                pReqData->mFunReturnVecValueRsp(pReqData->self, pReqData->nRet, pReqData->valueVec, pReqData->mstrUseData);
-            }
+            return OnKeepServerAliveAsyEnd(self, nFormActor, nEventID, strData);
         }
         break;
     default:
         break;
     }
-
-    mReqList.RemoveElement(xResultparam.nReqID);
 
     return 0;
 }
@@ -611,4 +580,71 @@ bool NFCAsyMysqlClusterModule::KeepAliveMysqlServer()
     }
 
     return true;
+}
+
+int NFCAsyMysqlClusterModule::OnUseMysqlAsyEnd( const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData )
+{
+    SMysqlParam xResultparam;
+    if (!xResultparam.UnPackParam(strData))
+    {
+        return -1;
+    }
+
+    NF_SHARE_PTR<SMysqlParam> pReqData = mReqList.GetElement(xResultparam.nReqID);
+    if (NULL == pReqData)
+    {
+        return -2;
+    }
+
+    switch (pReqData->eType)
+    {
+    case SMysqlParam::EMYSQLOPRTYPE_DELETE:
+    case SMysqlParam::EMYSQLOPRTYPE_UPDATA:
+        {
+            if (pReqData->mFunReturnRsp)
+            {
+                pReqData->mFunReturnRsp(pReqData->self, pReqData->nRet, pReqData->mstrUseData);
+            }
+        }
+        break;
+    case SMysqlParam::EMYSQLOPRTYPE_SELECT:
+    case SMysqlParam::EMYSQLOPRTYPE_QUERY :
+        {
+            if (pReqData->mFunReturnVeckKeyValueRsp)
+            {
+                pReqData->mFunReturnVeckKeyValueRsp(pReqData->self, pReqData->nRet, pReqData->fieldVec, pReqData->valueVec, pReqData->mstrUseData);
+            }
+        }
+        break;
+    case SMysqlParam::EMYSQLOPRTYPE_EXISTS:
+        {
+            if (pReqData->mFunReturnIntRsp)
+            {
+                pReqData->mFunReturnIntRsp(pReqData->self, pReqData->nRet, pReqData->bExit,pReqData->mstrUseData);
+            }
+        }
+        break;
+    case SMysqlParam::EMYSQLOPRTYPE_KEYS  :
+        {
+            if (pReqData->mFunReturnVecValueRsp)
+            {
+                pReqData->mFunReturnVecValueRsp(pReqData->self, pReqData->nRet, pReqData->valueVec, pReqData->mstrUseData);
+            }
+        }
+        break;
+    default:
+        break;
+    }
+
+    mReqList.RemoveElement(xResultparam.nReqID);
+}
+
+int NFCAsyMysqlClusterModule::OnAddMysqlServerAsyEnd( const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData )
+{
+    return 0;
+}
+
+int NFCAsyMysqlClusterModule::OnKeepServerAliveAsyEnd( const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData )
+{
+    return 0;
 }
