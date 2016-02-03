@@ -26,7 +26,7 @@
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
 					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
-                    <Add directory="$(SolutionDir)/Dependencies/mysql/" />
+					<Add directory="$(SolutionDir)/Dependencies/mysql/" />
 				</Compiler>
 				<Linker>
 					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFMessageDefine_d.a" />
@@ -65,7 +65,7 @@
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
 					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
-                    <Add directory="$(SolutionDir)/Dependencies/mysql/" />
+					<Add directory="$(SolutionDir)/Dependencies/mysql/" />
 				</Compiler>
 				<Linker>
 					<Add library="$(SolutionDir)/_Out/Comm/Release/NFMessageDefine.a" />
@@ -86,6 +86,10 @@
 				</Environment>
 			</Target>
 		</Build>
+		<Unit filename="NFCChatGroupBroadcastModule.cpp" />
+		<Unit filename="NFCChatGroupBroadcastModule.h" />
+		<Unit filename="NFCWorldChatGroupModule.cpp" />
+		<Unit filename="NFCWorldChatGroupModule.h" />
 		<Unit filename="NFCWorldChatModule.cpp" />
 		<Unit filename="NFCWorldChatModule.h" />
 		<Unit filename="NFWorldChatPlugin.cpp" />

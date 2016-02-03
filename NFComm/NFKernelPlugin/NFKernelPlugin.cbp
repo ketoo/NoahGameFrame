@@ -100,6 +100,8 @@
 		<Unit filename="NFKernelModule/NFCUUIDModule.h" />
 		<Unit filename="NFKernelPlugin.cpp" />
 		<Unit filename="NFKernelPlugin.h" />
+		<Unit filename="NFSceneModule/NFCSceneModule.cpp" />
+		<Unit filename="NFSceneModule/NFCSceneModule.h" />
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
