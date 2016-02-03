@@ -69,6 +69,9 @@ public:
         return Keys(self, strRecordName, strKey, mFunReturnVecValueRsp, strUseData);
     }
 
+    virtual bool StartActorPool(const int nCount) = 0;
+    virtual bool CloseActorPool() = 0;
+    virtual bool AddMysqlServer( const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime = 10, const int nRconneCount = -1) = 0;
 
 protected:
     virtual bool Updata(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec, const MYSQL_RETURN_FUNCTOR& mFunReturnRsp, const std::string& strUseData) = 0;
@@ -77,9 +80,6 @@ protected:
     virtual bool Delete(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const MYSQL_RETURN_FUNCTOR& mFunReturnRsp, const std::string& strUseData) = 0;
     virtual bool Exists(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const MYSQL_RETURN_INT_FUNCTOR& mFunReturnIntRsp, const std::string& strUseData) = 0;
     virtual bool Keys(const NFGUID& self, const std::string& strRecordName, const std::string& strKeyName, const MYSQL_RETURN_VECVALUE_FUNCTOR& mFunReturnVecValueRsp, const std::string& strUseData) = 0;
-
-    virtual bool StartActorPool(const int nCount) = 0;
-    virtual bool CloseActorPool() = 0;
 
 };
 
