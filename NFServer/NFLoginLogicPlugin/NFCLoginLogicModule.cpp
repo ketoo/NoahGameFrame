@@ -6,7 +6,6 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-//#include "stdafx.h"
 #include "NFLoginLogicPlugin.h"
 #include "NFCLoginLogicModule.h"
 
@@ -22,85 +21,26 @@ bool NFCLoginLogicModule::Shut()
     return true;
 }
 
-int NFCLoginLogicModule::OnLoginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
+int NFCLoginLogicModule::OnLoginProcess(const NFGUID& object, const std::string& strAccount, const std::string& strPwd)
 {
-    if (3 != var.GetCount()
-        || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
-    {
-        return -1;
-    }
+	int64_t nState = -1;
 
-    //////////////////////////////////////////////////////////////////////////
-    int nAddress = var.Int(0);
-    const std::string& strAccount = var.String(1);
-    const std::string& strPassword = var.String(2);
-    //int nState = m_pDataBaseModule->ConfirmAccountInfo(strAccount, strPassword);
-    //m_pNoSqlModule->AddAccountInfo(strAccount, strPassword);
+	std::vector<std::string> xFieldVec;
+	std::vector<std::string> xValueVec;
+	xFieldVec.push_back("Password");
 
-    int nState = 0;//= m_pNoSqlModule->ConfirmAccountInfo(strAccount, strPassword);
- 
-    NFCDataList valEventInfo;
-    valEventInfo << nState << nAddress << strAccount;
-    m_pEventProcessModule->DoEvent(0, NFED_ON_CLIENT_LOGIN_RESULTS, valEventInfo);
-  
-    return 0;
+	if (m_pClusterSqlModule->Query("AccountInfo", strAccount, xFieldVec, xValueVec)
+		&& xFieldVec.size() == xValueVec.size()
+		&& strPwd == xValueVec[0])
+	{
+		nState = 0;
+	}
+
+    return nState;
 }
 
-int NFCLoginLogicModule::OnDisconnectEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var)
+bool NFCLoginLogicModule::Execute()
 {
-    if (2 != var.GetCount()
-        || !var.TypeEx(TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_STRING, TDATA_TYPE::TDATA_UNKNOWN))
-    {
-        return -1;
-    }
-
-    //std::string strAccount = var.String(0);
-
-    return 0;
-}
-
-bool NFCLoginLogicModule::Execute(const float fLasFrametime, const float fStartedTime)
-{
-
-    //////////////////////////////////////////////////////////////////////////
-#ifdef NF_DEBUG_MODE
-    //     char szContent[MAX_PATH] = { 0 };
-    //     if (kbhit() && gets(szContent))
-    //     {
-    //         NFCDataList val(szContent, ",");
-    //         if (val.GetCount() > 0)
-    //         {
-    //             const std::string& strCmd = val.String(0);
-    //             //if (0 == strcmp("listworldserver", pstrCmd))
-    //             if ("listworldserver" == strCmd)
-    //             {
-    //                 NFCDataList valOobjectList;
-    //                 int nCount = m_pKernelModule->GetContainerOnLineList(-2, valOobjectList);
-    //                 for (int i = 0; i < nCount; i++)
-    //                 {
-    //                     NFIDENTID ident = valOobjectList.Object(i);
-    //
-    //                     char szInfo[MAX_PATH] = { 0 };
-    //                     sprintf_s(szInfo, "WorldID:%d, WorldName:%s, WorldMaxOnline:%d, WorldOnlineCount:%d",
-    //                               m_pKernelModule->GetPropertyInt(ident, "WorldID"),
-    //                               m_pKernelModule->GetPropertyString(ident, "WorldName"),
-    //                               m_pKernelModule->GetPropertyInt(ident, "WorldMaxOnline"),
-    //                               m_pKernelModule->GetPropertyInt(ident, "WorldOnlineCount"));
-    //
-    //                     m_pKernelModule->LogInfo(szInfo);
-    //                 }
-    //             }
-    //             else if ("listclient" == strCmd)
-    //                 //else if (0 == strcmp("listclient", pstrCmd))
-    //             {
-    //             }
-    //             else
-    //             {
-    //                 m_pKernelModule->Command(val);
-    //             }
-    //         }
-    //     }
-#endif
 
 
     return true;
@@ -109,22 +49,11 @@ bool NFCLoginLogicModule::Execute(const float fLasFrametime, const float fStarte
 
 bool NFCLoginLogicModule::AfterInit()
 {
+	m_pClusterSqlModule = pPluginManager->FindModule<NFIClusterModule>("NFCMysqlClusterModule");
+	m_pLoginNet_ServerModule = pPluginManager->FindModule<NFILoginNet_ServerModule>("NFCLoginNet_ServerModule");
 
-
-
-    //////////////////////////////////////////////////////////////////////////
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-    //m_pNoSqlModule = dynamic_cast<NFIPlatformDataModule*>(pPluginManager->FindModule("NFCPlatformDataModule"));
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
-
-
-    assert(NULL != m_pEventProcessModule);
-    //assert(NULL != m_pNoSqlModule);
-    assert(NULL != m_pKernelModule);
-
-    //////////////////////////////////////////////////////////////////////////
-    // register event calback
-    m_pEventProcessModule->AddEventCallBack(0, NFED_ON_CLIENT_LOGIN, this, &NFCLoginLogicModule::OnLoginEvent);
+	assert(NULL != m_pClusterSqlModule);
+	assert(NULL != m_pLoginNet_ServerModule);
 
     return true;
 }

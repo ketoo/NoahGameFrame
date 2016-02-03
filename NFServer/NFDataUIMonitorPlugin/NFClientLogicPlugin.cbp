@@ -14,14 +14,15 @@
 				<Option createDefFile="1" />
 				<Compiler>
 					<Add option="-D_DEBUG" />
-					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
-					<Add option="-DNFCLIENTLOGICPLUGIN_EXPORTS" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(NFBIN_COMM)/$(Configuration)" />
 					<Add directory="$(APP_DEPLIB)/$(Configuration)" />
 				</Linker>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 			<Target title="Release Win32">
 				<Option output="NFClientLogicPlugin" prefix_auto="1" extension_auto="1" />
@@ -31,10 +32,11 @@
 				<Option createDefFile="1" />
 				<Compiler>
 					<Add option="-DNDEBUG" />
-					<Add option="-D_WINDOWS" />
 					<Add option="-D_USRDLL" />
-					<Add option="-DNFCLIENTLOGICPLUGIN_EXPORTS" />
 				</Compiler>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 		</Build>
 		<Compiler>

@@ -10,9 +10,6 @@
     <Filter Include="NFPropertyModule">
       <UniqueIdentifier>{8e42431a-1328-4cf4-8d08-38101ed10817}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFDataProcessModule">
-      <UniqueIdentifier>{ab24bac9-1d0d-4fdc-b5de-72433c4b2753}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFGameServerPlugin.h" />
@@ -28,10 +25,10 @@
     <ClInclude Include="NFCPropertyConfigModule.h">
       <Filter>NFPropertyModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCDataProcessModule.h">
-      <Filter>NFDataProcessModule</Filter>
-    </ClInclude>
     <ClInclude Include="NFCGameServerModule.h" />
+    <ClInclude Include="NFCPropertyTrailModule.h">
+      <Filter>NFPropertyModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -48,9 +45,9 @@
     <ClCompile Include="NFCPropertyConfigModule.cpp">
       <Filter>NFPropertyModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFCDataProcessModule.cpp">
-      <Filter>NFDataProcessModule</Filter>
-    </ClCompile>
     <ClCompile Include="NFCGameServerModule.cpp" />
+    <ClCompile Include="NFCPropertyTrailModule.cpp">
+      <Filter>NFPropertyModule</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

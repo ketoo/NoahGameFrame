@@ -60,7 +60,6 @@ public:
 protected:
 
 private:
-	//boost::shared_ptr<redis::client> mRedisClient;
 	redis::client* m_pRedisClient;
 };
 

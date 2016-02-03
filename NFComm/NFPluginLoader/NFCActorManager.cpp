@@ -8,117 +8,143 @@
 
 #include "NFCActorManager.h"
 #include "NFCPluginManager.h"
+#include "NFComm/NFCore/NFIComponent.h"
+
+NFCActorManager::NFCActorManager()
+{
+	srand((unsigned)time(NULL));
+
+	m_pFramework = NF_NEW Theron::Framework(NF_ACTOR_THREAD_COUNT);
+	pPluginManager = NF_NEW NFCPluginManager(this);
+
+}
 
 bool NFCActorManager::Init()
 {
-    m_pFramework = new Theron::Framework();
+	m_pMainActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFCActor(*m_pFramework, this));
 
-    //首个主线程
-    //mActorVec.push_back(new NFCPluginManager(*m_pFramework, this, EACTOR::EACTOR_MAIN));
-
-	for (int i = EACTOR::EACTOR_MAIN; i < EACTOR::EACTOR_END; ++i)
-	{
-		mActorVec.push_back(new NFCPluginManager(*m_pFramework, this, (EACTOR)i));
-	}
-
-	std::vector<NFIActor*>::iterator it = mActorVec.begin();
-	for (; it != mActorVec.end(); ++it)
-	{
-		Theron::Receiver receiver;
-
-		NFIActorMessage message;
-		message.eType = NFIActorMessage::EACTOR_INIT;
-		m_pFramework->Send(message, receiver.GetAddress(), (*it)->GetAddress());
-
-		receiver.Wait();
-	}
+	pPluginManager->Init();
 
 	return true;
 }
 
 bool NFCActorManager::AfterInit()
 {
-	std::vector<NFIActor*>::iterator it = mActorVec.begin();
-	for (; it != mActorVec.end(); ++it)
-	{
-		Theron::Receiver receiver;
+	pPluginManager->AfterInit();
 
-		NFIActorMessage message;
-		message.eType = NFIActorMessage::EACTOR_AFTER_INIT;
-		m_pFramework->Send(message, receiver.GetAddress(), (*it)->GetAddress());
-
-		receiver.Wait();
-	}
 	return true;
+}
+
+bool NFCActorManager::CheckConfig()
+{
+	pPluginManager->CheckConfig();
+
+    return true;
 }
 
 bool NFCActorManager::BeforeShut()
 {
-	std::vector<NFIActor*>::iterator it = mActorVec.begin();
-	for (; it != mActorVec.end(); ++it)
-	{
-		Theron::Receiver receiver;
+	m_pMainActor.reset();
+	m_pMainActor = nullptr;
 
-		NFIActorMessage message;
-		message.eType = NFIActorMessage::EACTOR_BEFORE_SHUT;
-		m_pFramework->Send(message, receiver.GetAddress(), (*it)->GetAddress());
+	pPluginManager->BeforeShut();
 
-		receiver.Wait();
-	}
 	return true;
 }
 
 bool NFCActorManager::Shut()
 {
-	std::vector<NFIActor*>::iterator it = mActorVec.begin();
-	for (; it != mActorVec.end(); ++it)
-	{
-		Theron::Receiver receiver;
-
-		NFIActorMessage message;
-		message.eType = NFIActorMessage::EACTOR_SHUT;
-		m_pFramework->Send(message, receiver.GetAddress(), (*it)->GetAddress());
-
-		receiver.Wait();
-	}
-
-	it = mActorVec.begin();
-	for (; it != mActorVec.end(); ++it)
-	{
-		delete *it;
-	}
-
     delete m_pFramework;
     m_pFramework = NULL;
 
-	return true;
-}
-
-bool NFCActorManager::Execute( const float fLasFrametime, const float fStartedTime )
-{
-	std::vector<NFIActor*>::iterator it = mActorVec.begin();
-	for (; it != mActorVec.end(); ++it)
-	{
-        NFIActor* pActor = *it;
-        int nMsgCount = pActor->GetNumQueuedMessages();
-        if (nMsgCount <= 10)
-        {
-            NFIActorMessage message;
-            message.eType = NFIActorMessage::EACTOR_EXCUTE;
-            m_pFramework->Send(message, Theron::Address(), pActor->GetAddress());
-        }
-	}
+	pPluginManager->Shut();
 
 	return true;
 }
 
-const Theron::Address NFCActorManager::GetAddress( NFIActorManager::EACTOR eActor )
+bool NFCActorManager::Execute()
 {
-	if (eActor >= NFIActorManager::EACTOR_MAIN
-		&& eActor < NFIActorManager::EACTOR_END)
+	pPluginManager->Execute();
+
+	return true;
+}
+
+int NFCActorManager::RequireActor()
+{
+	//堆actor
+	NF_SHARE_PTR<NFIActor> pActor(NF_NEW NFCActor(*m_pFramework, this));
+	mxActorMap.insert(std::make_pair(pActor->GetAddress().AsInteger(), pActor));
+
+	return pActor->GetAddress().AsInteger();
+}
+
+NF_SHARE_PTR<NFIActor> NFCActorManager::GetActor(const int nActorIndex)
+{
+    std::map<int, NF_SHARE_PTR<NFIActor> >::iterator it = mxActorMap.find(nActorIndex);
+    if (it != mxActorMap.end())
+    {
+        return it->second;
+    }
+        
+	return NF_SHARE_PTR<NFIActor>();
+}
+
+bool NFCActorManager::SendMsgToActor( const int nActorIndex, const NFGUID& objectID, const int nEventID, const std::string& strArg)
+{
+	NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
+    if (nullptr != pActor)
+    {
+        NFIActorMessage xMessage;
+
+        xMessage.eType = NFIActorMessage::EACTOR_EVENT_MSG;
+        xMessage.data = strArg;
+        xMessage.nSubMsgID = nEventID;
+		xMessage.nFormActor = m_pMainActor->GetAddress().AsInteger();
+        xMessage.self = objectID;
+
+        return m_pFramework->Send(xMessage, m_pMainActor->GetAddress(), pActor->GetAddress());
+    }
+
+	return false;
+}
+
+bool NFCActorManager::AddComponent( const int nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent )
+{
+	NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
+	if (nullptr != pActor)
 	{
-		return mActorVec[eActor]->GetAddress();
+		pActor->AddComponent(pComponent);
+
+		return true;
 	}
 
-	return Theron::Address();
+	return false;
 }
+
+bool NFCActorManager::ReleaseActor( const int nActorIndex )
+{
+	std::map<int, NF_SHARE_PTR<NFIActor> >::iterator it = mxActorMap.find(nActorIndex);
+	if (it != mxActorMap.end())
+	{
+		mxActorMap.erase(it);
+
+		return true;
+	}
+
+	return false;
+}
+
+bool NFCActorManager::AddEndFunc( const int nActorIndex, EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end )
+{
+	NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
+	if (nullptr != pActor)
+	{
+		pActor->AddEndFunc(functorPtr_end);
+
+		return true;
+	}
+
+	return false;
+}
+
+
