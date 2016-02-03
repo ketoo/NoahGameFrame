@@ -29,12 +29,12 @@ bool NFCDataBaseNet_ClientModule::AfterInit()
     m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-    m_pMysqlConnectMgrModule = pPluginManager->FindModule<NFIMysqlConnectMgrModule>("NFCMysqlConnectMgrModule");
-
+    m_pMysqlClusterModule = pPluginManager->FindModule<NFIClusterModule>("NFCMysqlClusterModule");
+    
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pElementInfoModule);
-    assert(NULL != m_pMysqlConnectMgrModule);
+    assert(NULL != m_pMysqlClusterModule);
 
     NF_SHARE_PTR<NFILogicClass> pLogicClass = m_pLogicClassModule->GetElement("SqlServer");
     if (nullptr == pLogicClass)
@@ -56,7 +56,7 @@ bool NFCDataBaseNet_ClientModule::AfterInit()
     const std::string& mstrSQLUser = m_pElementInfoModule->GetPropertyString(strConfigName, "SqlUser");
     const std::string& mstrSQLPWD = m_pElementInfoModule->GetPropertyString(strConfigName, "SqlPwd");
 
-    bool bConnect = m_pMysqlConnectMgrModule->AddMysqlServer(nID, "", mstrSQLIP, mnSQLPort, mstrSQLName, mstrSQLUser, mstrSQLPWD);
+    bool bConnect = m_pMysqlClusterModule->AddMysqlServer(nID, "", mstrSQLIP, mnSQLPort, mstrSQLName, mstrSQLUser, mstrSQLPWD);
 
     // Log
 
