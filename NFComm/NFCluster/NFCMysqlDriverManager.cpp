@@ -9,6 +9,7 @@
 #include<arpa/inet.h>
 #endif
 
+#include "NFComm/NFCore/NFIDataList.h"
 #include "NFComm/NFCluster/NFCMysqlDriverManager.h"
 #include "NFCMysqlDriver.h"
 
@@ -58,8 +59,25 @@ void NFCMysqlDriverManager::CheckMysql()
 	}
 
 }
-bool NFCMysqlDriverManager::AddMysqlServer( const int nServerID, const std::string& strDnsIp, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime/* = 10*/, const int nRconneCount/* = -1*/)
+bool NFCMysqlDriverManager::AddMysqlServer( const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime/* = 10*/, const int nRconneCount/* = -1*/)
 {
+    std::string  strDnsIp;
+    if(!strDns.empty())
+    {
+        strDnsIp = GetIPByHostName(strDns);   
+    }
+
+    if (strDnsIp.empty())
+    {
+        strDnsIp = strIP;
+    }
+
+    if (strDnsIp.empty())
+    {
+        return false;
+    }
+
+
 	if (strDnsIp.empty())
 	{
 		return false;
@@ -89,4 +107,27 @@ bool NFCMysqlDriverManager::AddMysqlServer( const int nServerID, const std::stri
 	}
 
     return true;
+}
+
+std::string NFCMysqlDriverManager::GetIPByHostName( const std::string& strHostName )
+{
+    if (strHostName.empty())
+    {
+        return NULL_STR;
+    }
+
+    hostent* pHost = gethostbyname(strHostName.c_str());
+    if(pHost == NULL)
+    {
+        return NULL_STR;
+    }
+
+    if(pHost->h_addr_list[0] != NULL)
+    {
+        char strIp[32] = {0};
+        inet_ntop(pHost->h_addrtype,pHost->h_addr_list[0], strIp, sizeof(strIp));
+        return std::string(strIp);
+    }
+
+    return NULL_STR;
 }

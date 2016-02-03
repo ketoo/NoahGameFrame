@@ -34,7 +34,7 @@ public:
     }
 
     template<typename BaseType>
-    int Query(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec,
+    int Query(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec,
         BaseType* pBaseType, void (BaseType::*handleReturnRsp)(const NFGUID&, const int, const std::vector<std::string>&, const std::vector<std::string>&, const std::string&),  const std::string&strUseData)
     {
         const MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR mFunReturnVeckKeyValueRsp = std::bind(handleReturnRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
@@ -69,6 +69,8 @@ public:
         return Keys(self, strRecordName, strKey, mFunReturnVecValueRsp, strUseData);
     }
 
+
+protected:
     virtual bool Updata(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec, const MYSQL_RETURN_FUNCTOR& mFunReturnRsp, const std::string& strUseData) = 0;
     virtual bool Query(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR& mFunReturnVeckKeyValueRsp, const std::string& strUseData) = 0;
 
@@ -78,11 +80,6 @@ public:
 
     virtual bool StartActorPool(const int nCount) = 0;
     virtual bool CloseActorPool() = 0;
-
-    virtual bool PackParam( const SMysqlParam& xParam, std::string& strData ) = 0;
-    virtual bool UnPackParam( const std::string& strData, SMysqlParam& xParam ) = 0;
-
-private:
 
 };
 
