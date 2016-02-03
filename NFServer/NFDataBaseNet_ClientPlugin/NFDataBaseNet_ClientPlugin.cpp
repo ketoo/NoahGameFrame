@@ -1,23 +1,20 @@
 #include "NFDataBaseNet_ClientPlugin.h"
-#include "NFCDataBaseNet_ClientModule.h"
+#include "NFCDataProcessModule.h"
 
+#ifdef NF_DYNAMIC_PLUGIN
 
-NFIPlugin* pPlugin = NULL;
-NFIPluginManager* pPluginManager = NULL;
-
-extern "C"  __declspec(dllexport) void DllStartPlugin(NFIPluginManager* pm)
+NF_EXPORT void DllStartPlugin( NFIPluginManager* pm )
 {
-    pPluginManager = pm;
-
-    CREATE_PLUGIN(pm, NFDataBaseNet_ClientPlugin, pPlugin)
+    CREATE_PLUGIN( pm, NFDataBaseNet_ClientPlugin )
 
 };
 
-extern "C" __declspec(dllexport) void DllStopPlugin(NFIPluginManager* pm)
+NF_EXPORT void DllStopPlugin( NFIPluginManager* pm )
 {
-    DESTROY_PLUGIN(pm, pPlugin)
+    DESTROY_PLUGIN( pm, NFDataBaseNet_ClientPlugin )
 };
 
+#endif
 //////////////////////////////////////////////////////////////////////////
 
 const int NFDataBaseNet_ClientPlugin::GetPluginVersion()
@@ -27,17 +24,15 @@ const int NFDataBaseNet_ClientPlugin::GetPluginVersion()
 
 const std::string NFDataBaseNet_ClientPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFDataBaseNet_ClientPlugin)
+    return GET_CLASS_NAME( NFDataBaseNet_ClientPlugin )
 }
 
 void NFDataBaseNet_ClientPlugin::Install()
 {
-    SetConsoleTitle("NFDataBaseServer");
-
-    REGISTER_MODULE(pPluginManager, "NFCDataBaseNet_ClientModule", NFCDataBaseNet_ClientModule)
+    REGISTER_MODULE(pPluginManager, NFCDataProcessModule)
 }
 
 void NFDataBaseNet_ClientPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, "NFCDataBaseNet_ClientModule", NFCDataBaseNet_ClientModule)
+    UNREGISTER_MODULE(pPluginManager, NFCDataProcessModule)
 }

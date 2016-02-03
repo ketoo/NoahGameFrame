@@ -6,14 +6,13 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_HELLO_WORLD3_H_
-#define _NFC_HELLO_WORLD3_H_
+#ifndef NFC_HELLO_WORLD6_H
+#define NFC_HELLO_WORLD6_H
 
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class HelloWorld6Module
     : public NFILogicModule
@@ -27,7 +26,7 @@ public:
     virtual bool Init();
     virtual bool AfterInit();
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool BeforeShut();
     virtual bool Shut();
@@ -36,7 +35,6 @@ protected:
     unsigned long mLastTime;
 protected:
     NFIKernelModule* m_pKernelModule;
-    NFIEventProcessModule* m_pEventProcessModule;
     NFIElementInfoModule* m_pElementInfoModule;
     NFILuaScriptModule* m_pLuaScriptModule;
 };

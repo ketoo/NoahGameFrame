@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_LUA_SCRIPT_LUGIN_H_
-#define _NF_LUA_SCRIPT_LUGIN_H_
+#ifndef NF_LUA_SCRIPT_LUGIN_H
+#define NF_LUA_SCRIPT_LUGIN_H
 
 ///
 #include "NFComm/NFPluginModule/NFIPlugin.h"

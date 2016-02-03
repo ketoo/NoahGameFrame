@@ -8,70 +8,20 @@
 
 #include "NFCComponentManager.h"
 
-NFIDENTID NFCComponentManager::Self()
+NFGUID NFCComponentManager::Self()
 {
     return mSelf;
 }
 
-NFIComponent* NFCComponentManager::AddComponent( const std::string& strComponentName, const std::string& strLanguageName)
+bool NFCComponentManager::AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent)
 {
-    NFIComponent* pComponent = GetElement(strComponentName);
-    if (pComponent)
-    {
-        return NULL;
-    }
-
-    pComponent = NF_NEW NFCComponent(mSelf, strComponentName, strLanguageName);
-    AddElement(strComponentName, pComponent);
-
-    return pComponent;
-}
-
-NFIComponent* NFCComponentManager::FindComponent( const std::string& strComponentName )
-{
-    return GetElement(strComponentName);
-}
-
-bool NFCComponentManager::SetEnable( const std::string& strComponentName, const bool bEnable )
-{
-    NFIComponent* pComponent = GetElement(strComponentName);
-    if (pComponent)
-    {
-        return pComponent->SetEnable(bEnable);
-    }
-
-    return false;
-}
-
-bool NFCComponentManager::Enable( const std::string& strComponentName )
-{
-    NFIComponent* pComponent = GetElement(strComponentName);
-    if (pComponent)
-    {
-        return pComponent->Enable();
-    }
-
-    return false;
-}
-
-bool NFCComponentManager::DestroyAllComponent()
-{
-    NFIComponent* pComponent = First();
-    while (pComponent)
-    {
-        delete pComponent;
-        pComponent = NULL;
-
-        pComponent = Next();
-    }
-
-    return true;
+    return AddElement(strComponentName, pNewComponent);
 }
 
 bool NFCComponentManager::Init()
 {
-    NFIComponent* pComponent = First();
-    while (pComponent)
+    NF_SHARE_PTR<NFIComponent> pComponent = First();
+    while (nullptr != pComponent)
     {
         pComponent->Init();
 
@@ -83,8 +33,8 @@ bool NFCComponentManager::Init()
 
 bool NFCComponentManager::AfterInit()
 {
-    NFIComponent* pComponent = First();
-    while (pComponent)
+    NF_SHARE_PTR<NFIComponent> pComponent = First();
+    while (pComponent.get())
     {
         pComponent->AfterInit();
 
@@ -96,8 +46,8 @@ bool NFCComponentManager::AfterInit()
 
 bool NFCComponentManager::BeforeShut()
 {
-    NFIComponent* pComponent = First();
-    while (pComponent)
+    NF_SHARE_PTR<NFIComponent> pComponent = First();
+    while (pComponent.get())
     {
         pComponent->BeforeShut();
 
@@ -109,8 +59,8 @@ bool NFCComponentManager::BeforeShut()
 
 bool NFCComponentManager::Shut()
 {
-    NFIComponent* pComponent = First();
-    while (pComponent)
+    NF_SHARE_PTR<NFIComponent> pComponent = First();
+    while (pComponent.get())
     {
         pComponent->Shut();
 
@@ -120,12 +70,13 @@ bool NFCComponentManager::Shut()
     return true;
 }
 
-bool NFCComponentManager::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCComponentManager::Execute()
 {
-    NFIComponent* pComponent = First();
-    while (pComponent && pComponent->Enable())
+
+    NF_SHARE_PTR<NFIComponent> pComponent = First();
+    while (pComponent.get() && pComponent->Enable())
     {
-        pComponent->Execute(fLasFrametime, fStartedTime);
+        pComponent->Execute();
 
         pComponent = Next();
     }
