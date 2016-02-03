@@ -125,7 +125,11 @@ public:
 
 protected:
     int ApplyRequest(NF_SHARE_PTR<SMysqlParam> pParam );
-    int RequestAsyEnd(const NFGUID& self, const int nFormActor, const int nSubMsgID, const std::string& strData);
+    int RequestAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData);
+
+    int OnUseMysqlAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData);
+    int OnAddMysqlServerAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData);
+    int OnKeepServerAliveAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData);
 
     int GetActor();
     bool KeepAliveMysqlServer();
