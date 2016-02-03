@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_LOGICCLASS_MODULE_H_
-#define _NFC_LOGICCLASS_MODULE_H_
+#ifndef NFC_LOGICCLASS_MODULE_H
+#define NFC_LOGICCLASS_MODULE_H
 
 #include <string>
 #include <map>
@@ -28,6 +28,7 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
+
 class NFCLogicClass : public NFILogicClass
 {
 public:
@@ -37,55 +38,56 @@ public:
         m_pParentClass = NULL;
         mstrClassName = strClassName;
 
-        m_pPropertyManager = NF_NEW NFCPropertyManager(0);
-        m_pRecordManager = NF_NEW NFCRecordManager(0);
-        m_pComponentManager = NF_NEW NFCComponentManager(0);
+        m_pPropertyManager = NF_SHARE_PTR<NFIPropertyManager>(NF_NEW NFCPropertyManager(NFGUID()));
+        m_pRecordManager = NF_SHARE_PTR<NFIRecordManager>(NF_NEW NFCRecordManager(NFGUID()));
+        m_pComponentManager = NF_SHARE_PTR<NFIComponentManager>(NF_NEW NFCComponentManager(NFGUID()));
     }
 
     virtual ~NFCLogicClass()
     {
-        if (NULL != m_pComponentManager)
-        {
-            delete m_pComponentManager;
-            m_pComponentManager = NULL;
-        }
-        
-        if (NULL != m_pRecordManager)
-        {
-            delete m_pRecordManager;
-            m_pRecordManager = NULL;
-        }
-        
-        if (NULL != m_pPropertyManager)
-        {
-            delete m_pPropertyManager;
-            m_pPropertyManager = NULL;
-        }
-
         ClearAll();
     }
 
-    NFIPropertyManager* GetPropertyManager()
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager()
     {
         return m_pPropertyManager;
     }
 
-    NFIRecordManager* GetRecordManager()
+    virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager()
     {
         return m_pRecordManager;
     }
 
-    virtual NFIComponentManager* GetComponentManager()
+    virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager()
     {
         return m_pComponentManager;
     }
 
-    void SetParent(NFILogicClass* pClass)
+	virtual bool AddClassCallBack(const CLASS_EVENT_FUNCTOR_PTR& cb)
+	{
+		return mxClassEventInfo.Add(cb);
+	}
+
+	virtual bool DoEvent(const NFGUID& objectID, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList)
+	{
+		CLASS_EVENT_FUNCTOR_PTR cb;
+		bool bRet = mxClassEventInfo.First(cb);
+		while (bRet)
+		{
+			cb->operator()(objectID, mstrClassName, eClassEvent,  valueList);
+
+			bRet = mxClassEventInfo.Next(cb);
+		}
+
+		return true;
+	}
+
+    void SetParent(NF_SHARE_PTR<NFILogicClass> pClass)
     {
         m_pParentClass = pClass;
     }
 
-    NFILogicClass* GetParent()
+    NF_SHARE_PTR<NFILogicClass> GetParent()
     {
         return m_pParentClass;
     }
@@ -128,16 +130,18 @@ public:
     }
 
 private:
-    NFIPropertyManager* m_pPropertyManager;
-    NFIRecordManager* m_pRecordManager;
-    NFIComponentManager* m_pComponentManager;
-    
-    NFILogicClass* m_pParentClass;
+    NF_SHARE_PTR<NFIPropertyManager> m_pPropertyManager;
+    NF_SHARE_PTR<NFIRecordManager> m_pRecordManager;
+    NF_SHARE_PTR<NFIComponentManager> m_pComponentManager;
+
+    NF_SHARE_PTR<NFILogicClass> m_pParentClass;
     std::string mstrType;
     std::string mstrClassName;
     std::string mstrClassInstancePath;
 
     NFList<std::string> mlConfigList;
+
+	NFList<CLASS_EVENT_FUNCTOR_PTR> mxClassEventInfo;
 };
 
 class NFCLogicClassModule
@@ -152,25 +156,34 @@ public:
 
     virtual bool Load();
     virtual bool Save();
-	virtual bool Clear();
+    virtual bool Clear();
 
-    virtual NFIPropertyManager* GetClassPropertyManager(const std::string& strClassName);
-    virtual NFIRecordManager* GetClassRecordManager(const std::string& strClassName);
-    virtual NFIComponentManager* GetClassComponentManager(const std::string& strClassName);
+	virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb);
+	virtual bool DoEvent(const NFGUID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList);
 
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetClassPropertyManager(const std::string& strClassName);
+    virtual NF_SHARE_PTR<NFIRecordManager> GetClassRecordManager(const std::string& strClassName);
+    virtual NF_SHARE_PTR<NFIComponentManager> GetClassComponentManager(const std::string& strClassName);
 
     virtual bool AddClass(const std::string& strClassName, const std::string& strParentName);
 protected:
 
     virtual TDATA_TYPE ComputerType(const char* pstrTypeName, NFIDataList::TData& var);
-    virtual bool AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NFCLogicClass* pClass);
-    virtual bool AddRecords(rapidxml::xml_node<>* pRecordRootNode, NFCLogicClass* pClass);
-    virtual bool AddComponents(rapidxml::xml_node<>* pRecordRootNode, NFCLogicClass* pClass);
-    virtual bool AddClassInclude(const char* pstrClassFilePath, NFCLogicClass* pClass);
-    virtual bool AddClass(const char* pstrClassFilePath, NFCLogicClass* pClass);
+    virtual bool AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NF_SHARE_PTR<NFILogicClass> pClass);
+    virtual bool AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_PTR<NFILogicClass> pClass);
+    virtual bool AddComponents(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_PTR<NFILogicClass> pClass);
+    virtual bool AddClassInclude(const char* pstrClassFilePath, NF_SHARE_PTR<NFILogicClass> pClass);
+    virtual bool AddClass(const char* pstrClassFilePath, NF_SHARE_PTR<NFILogicClass> pClass);
 
     //加载此节点的类
-    virtual bool Load(rapidxml::xml_node<>* attrNode, NFCLogicClass* pParentClass);
+    virtual bool Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFILogicClass> pParentClass);
+
+public:
+    static bool ReadFileToString(const std::string& strFile, std::string& strOutData);
+    static bool IsEncoded(unsigned char c);
+    static std::string Encode(unsigned char const* bytes_to_encode, unsigned int in_len);
+    static std::string Decode(const std::string& encoded_string);
+    static std::string cepher;
 
 protected:
     NFIElementInfoModule* m_pElementInfoModule;
