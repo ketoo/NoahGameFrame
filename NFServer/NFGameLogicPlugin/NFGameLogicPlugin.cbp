@@ -27,12 +27,8 @@
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
 					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
-                    <Add directory="$(SolutionDir)/Dependencies/mysql/" />
+					<Add directory="$(SolutionDir)/Dependencies/mysql/" />
 				</Compiler>
-				<ExtraCommands>
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFGameLogicPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFGameServer1/" />
-					<Mode after="always" />
-				</ExtraCommands>
 				<Linker>
 					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFMessageDefine_d.a" />
 					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFNet_d.a" />
@@ -43,6 +39,10 @@
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc/" />
 				</Linker>
+				<ExtraCommands>
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFGameLogicPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFGameServer1/" />
+					<Mode after="always" />
+				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
@@ -66,7 +66,7 @@
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
 					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
-                    <Add directory="$(SolutionDir)/Dependencies/mysql/" />
+					<Add directory="$(SolutionDir)/Dependencies/mysql/" />
 				</Compiler>
 				<Linker>
 					<Add library="$(SolutionDir)/_Out/Comm/Release/NFMessageDefine.a" />
@@ -97,32 +97,50 @@
 		<Unit filename="NFCBulletSkillConsumeProcessModule.h" />
 		<Unit filename="NFCCardItemConsumeProcessModule.cpp" />
 		<Unit filename="NFCCardItemConsumeProcessModule.h" />
+		<Unit filename="NFCCommonConfigModule.cpp" />
+		<Unit filename="NFCCommonConfigModule.h" />
 		<Unit filename="NFCCostModule.cpp" />
 		<Unit filename="NFCCostModule.h" />
 		<Unit filename="NFCEctypeModule.cpp" />
 		<Unit filename="NFCEctypeModule.h" />
+		<Unit filename="NFCEquipModule.cpp" />
+		<Unit filename="NFCEquipModule.h" />
 		<Unit filename="NFCGameLogicModule.cpp" />
 		<Unit filename="NFCGameLogicModule.h" />
+		<Unit filename="NFCGuildDataModule.cpp" />
+		<Unit filename="NFCGuildDataModule.h" />
+		<Unit filename="NFCGuildEctypeModule.cpp" />
+		<Unit filename="NFCGuildEctypeModule.h" />
+		<Unit filename="NFCGuildModule.cpp" />
+		<Unit filename="NFCGuildModule.h" />
+		<Unit filename="NFCHeroModule.cpp" />
+		<Unit filename="NFCHeroModule.h" />
 		<Unit filename="NFCItemConsumeManagerModule.cpp" />
 		<Unit filename="NFCItemConsumeManagerModule.h" />
 		<Unit filename="NFCItemModule.cpp" />
 		<Unit filename="NFCItemModule.h" />
+		<Unit filename="NFCMailModule.cpp" />
+		<Unit filename="NFCMailModule.h" />
 		<Unit filename="NFCNPCRefreshModule.cpp" />
 		<Unit filename="NFCNPCRefreshModule.h" />
+		<Unit filename="NFCPVPModule.cpp" />
+		<Unit filename="NFCPVPModule.h" />
 		<Unit filename="NFCPackModule.cpp" />
 		<Unit filename="NFCPackModule.h" />
 		<Unit filename="NFCPotionItemConsumeProcessModule.cpp" />
 		<Unit filename="NFCPotionItemConsumeProcessModule.h" />
+		<Unit filename="NFCRankModule.cpp" />
+		<Unit filename="NFCRankModule.h" />
 		<Unit filename="NFCRebornItemConsumeProcessModule.cpp" />
 		<Unit filename="NFCRebornItemConsumeProcessModule.h" />
+		<Unit filename="NFCSLGBuildingModule.cpp" />
+		<Unit filename="NFCSLGBuildingModule.h" />
+		<Unit filename="NFCSLGShopModule.cpp" />
+		<Unit filename="NFCSLGShopModule.h" />
 		<Unit filename="NFCSkillConsumeManagerModule.cpp" />
 		<Unit filename="NFCSkillConsumeManagerModule.h" />
 		<Unit filename="NFCSkillModule.cpp" />
 		<Unit filename="NFCSkillModule.h" />
-		<Unit filename="NFCCommonConfigModule.cpp" />
-		<Unit filename="NFCCommonConfigModule.h" />
-		<Unit filename="NFCGuildEctypeModule.cpp" />
-		<Unit filename="NFCGuildEctypeModule.h" />
 		<Unit filename="NFGameLogicPlugin.cpp" />
 		<Unit filename="NFGameLogicPlugin.h" />
 		<Unit filename="dllmain.cpp" />
