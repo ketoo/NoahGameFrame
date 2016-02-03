@@ -1,6 +1,78 @@
 #include "NFCAsyMysqlClusterModule.h"
 #include "NFCMysqlDriverManager.h"
 
+bool SMysqlParam::PackParam(std::string& strData )
+{
+    try
+    {
+        NFMsg::PackMysqlParam xMsg;
+
+        xMsg.set_strrecordname(strRecordName);
+        xMsg.set_strkey(strKey);
+        xMsg.set_bexit(bExit);
+        xMsg.set_nreqid(nReqID);
+        xMsg.set_nret(nRet);
+
+        for (int i = 0; i < fieldVec.size(); i++)
+        {
+            const std::string& strFiled = fieldVec[i];
+            xMsg.add_fieldveclist(strFiled);
+        }
+
+        for (int i = 0; i < valueVec.size(); i++)
+        {
+            const std::string& strValue = valueVec[i];
+            xMsg.add_valueveclist(strValue);
+        }
+
+        return xMsg.SerializeToString(&strData);
+    }
+    catch (...)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+
+bool SMysqlParam::UnPackParam( const std::string& strData)
+{
+    try
+    {
+        NFMsg::PackMysqlParam xMsg;
+        if (!xMsg.ParseFromString(strData))
+        {
+            return false;
+        }
+
+        strRecordName            = xMsg.strrecordname();
+        strKey                   = xMsg.strkey();
+        bExit                    = xMsg.bexit();
+        nReqID                   = xMsg.nreqid();
+        nRet                     = xMsg.nret();
+
+        for (int i = 0; i < xMsg.fieldveclist_size(); i++)
+        {
+            const std::string& strField = xMsg.fieldveclist(i);
+            fieldVec.push_back(strField);
+        }
+
+        for (int i = 0; i < xMsg.valueveclist_size(); i++)
+        {
+            const std::string& strValue = xMsg.valueveclist(i);
+            valueVec.push_back(strValue);
+        }
+
+    }
+    catch(...)
+    {
+        return false;
+    }
+
+    return true;
+}
+
 bool NFCMysqlComponent::Init()
 {
     return true;
@@ -8,12 +80,6 @@ bool NFCMysqlComponent::Init()
 
 bool NFCMysqlComponent::AfterInit()
 {
-    m_pAsyClusterModule = pPluginManager->FindModule<NFIAsyClusterModule>("NFCAsyMysqlClusterModule");
-    m_pClusterModule = pPluginManager->FindModule<NFIClusterModule>("NFCMysqlClusterModule");
-
-    assert( NULL != m_pAsyClusterModule );
-    assert( NULL != m_pClusterModule );
-
     m_pMysqlDriverManager = NF_SHARE_PTR<NFIMysqlDriverManager>(NF_NEW NFCMysqlDriverManager());
 
     return true;
@@ -48,7 +114,7 @@ int NFCMysqlComponent::OnASyncEvent( const NFGUID& self, const int event, std::s
 int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, std::string& arg )
 {
     SMysqlParam xparam;
-    if (!m_pAsyClusterModule->UnPackParam(arg, xparam))
+    if (!xparam.UnPackParam(arg))
     {
         return -1;
     }
@@ -58,11 +124,17 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
         return -2;
     }
 
+    NFIMysqlDriver* pDriver = m_pMysqlDriverManager->GetMysqlDriver();
+    if (NULL == pDriver)
+    {
+        return -3;
+    }
+
     switch (xparam.eType)
     {
     case SMysqlParam::EMYSQLOPRTYPE_UPDATA:
         {
-            //if (m_pClusterModule->UpdataWithDriver(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec, m_pMysqlDriverManager->GetMysqlDriver()))
+            if (pDriver->Updata(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
             {
                 xparam.nRet = -1;
             }
@@ -70,7 +142,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
         break;
     case SMysqlParam::EMYSQLOPRTYPE_QUERY :
         {
-            //if (m_pClusterModule->QueryWithDriver(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec, m_pMysqlDriverManager->GetMysqlDriver()))
+            if (pDriver->Query(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
             {
                 xparam.nRet = -1;
             }
@@ -78,7 +150,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
         break;
     case SMysqlParam::EMYSQLOPRTYPE_SELECT:
         {
-            //if (m_pClusterModule->SelectWithDriver(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec, m_pMysqlDriverManager->GetMysqlDriver()))
+            if (pDriver->Select(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
             {
                 xparam.nRet = -1;
             }
@@ -86,7 +158,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
         break;
     case SMysqlParam::EMYSQLOPRTYPE_DELETE:
         {
-            //if (m_pClusterModule->DeleteWithDriver(xparam.strRecordName, xparam.strKey, m_pMysqlDriverManager->GetMysqlDriver()))
+            if (pDriver->Delete(xparam.strRecordName, xparam.strKey))
             {
                 xparam.nRet = -1;
             }
@@ -95,7 +167,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
     case SMysqlParam::EMYSQLOPRTYPE_EXISTS:
         {
             bool bExit = false;
-            //if (m_pClusterModule->ExistsWithDriver(xparam.strRecordName, xparam.strKey, bExit, m_pMysqlDriverManager->GetMysqlDriver()))
+            if (pDriver->Exists(xparam.strRecordName, xparam.strKey, bExit))
             {
                 xparam.bExit = bExit;
                 xparam.nRet = -1;
@@ -104,7 +176,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
         break;
     case SMysqlParam::EMYSQLOPRTYPE_KEYS  :
         {
-            //if (m_pClusterModule->KeysWithDriver(xparam.strRecordName, xparam.strKey, xparam.valueVec, m_pMysqlDriverManager->GetMysqlDriver()))
+            if (pDriver->Keys(xparam.strRecordName, xparam.strKey, xparam.valueVec))
             {
                 xparam.nRet = -1;
             }
@@ -115,8 +187,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
     }
 
 
-    m_pAsyClusterModule->PackParam(xparam, arg);
-
+    xparam.PackParam(arg);
     return 0;
 }
 
@@ -128,7 +199,7 @@ int NFCMysqlComponent::OnASyAddMysqlServerEvent( const NFGUID& self, const int e
         return -1;
     }
 
-   if (!m_pMysqlDriverManager->AddMysqlServer(xMsg.nserverid(), xMsg.strdnsip(), xMsg.nport(), xMsg.strdbname(), xMsg.strdbuser(), xMsg.strdbpwd(), xMsg.nrconnecttime(), xMsg.nrconnecount()))
+   if (!m_pMysqlDriverManager->AddMysqlServer(xMsg.nserverid(), "", xMsg.strdnsip(), xMsg.nport(), xMsg.strdbname(), xMsg.strdbuser(), xMsg.strdbpwd(), xMsg.nrconnecttime(), xMsg.nrconnecount()))
    {
        return -2;
    }
@@ -385,7 +456,7 @@ int NFCAsyMysqlClusterModule::ApplyRequest( NF_SHARE_PTR<SMysqlParam> pParam )
     std::string arg;
     const int nEvetID = ACOTERMYSQLEVENT_USEDB;
 
-    if (!PackParam(*pParam, arg))
+    if (!pParam->PackParam(arg))
     {
         return -3;
     }
@@ -407,7 +478,7 @@ int NFCAsyMysqlClusterModule::ApplyRequest( NF_SHARE_PTR<SMysqlParam> pParam )
 int NFCAsyMysqlClusterModule::RequestAsyEnd( const NFGUID& self, const int nFormActor, const int nSubMsgID, const std::string& strData )
 {
     SMysqlParam xResultparam;
-    if (!NFCAsyMysqlClusterModule::UnPackParam(strData, xResultparam))
+    if (!xResultparam.UnPackParam(strData))
     {
         return -1;
     }
@@ -461,77 +532,6 @@ int NFCAsyMysqlClusterModule::RequestAsyEnd( const NFGUID& self, const int nForm
     mReqList.RemoveElement(xResultparam.nReqID);
 
     return 0;
-}
-
-bool NFCAsyMysqlClusterModule::PackParam( const SMysqlParam& xParam, std::string& strData )
-{
-    try
-    {
-        NFMsg::PackMysqlParam xMsg;
-
-        xMsg.set_strrecordname(xParam.strRecordName);
-        xMsg.set_strkey(xParam.strKey);
-        xMsg.set_bexit(xParam.bExit);
-        xMsg.set_nreqid(xParam.nReqID);
-        xMsg.set_nret(xParam.nRet);
-
-        for (int i = 0; i < xParam.fieldVec.size(); i++)
-        {
-            const std::string& strFiled = xParam.fieldVec[i];
-            xMsg.add_fieldveclist(strFiled);
-        }
-
-        for (int i = 0; i < xParam.valueVec.size(); i++)
-        {
-            const std::string& strValue = xParam.valueVec[i];
-            xMsg.add_valueveclist(strValue);
-        }
-
-        return xMsg.SerializeToString(&strData);
-    }
-    catch (...)
-    {
-        return false;
-    }
-
-    return true;
-}
-
-bool NFCAsyMysqlClusterModule::UnPackParam( const std::string& strData, SMysqlParam& xParam )
-{
-    try
-    {
-        NFMsg::PackMysqlParam xMsg;
-        if (!xMsg.ParseFromString(strData))
-        {
-            return false;
-        }
-
-        xParam.strRecordName            = xMsg.strrecordname();
-        xParam.strKey                   = xMsg.strkey();
-        xParam.bExit                    = xMsg.bexit();
-        xParam.nReqID                   = xMsg.nreqid();
-        xParam.nRet                     = xMsg.nret();
-   
-        for (int i = 0; i < xMsg.fieldveclist_size(); i++)
-        {
-            const std::string& strField = xMsg.fieldveclist(i);
-            xParam.fieldVec.push_back(strField);
-        }
-
-        for (int i = 0; i < xMsg.valueveclist_size(); i++)
-        {
-            const std::string& strValue = xMsg.valueveclist(i);
-            xParam.valueVec.push_back(strValue);
-        }
-
-    }
-    catch(...)
-    {
-        return false;
-    }
-
-    return true;
 }
 
 int NFCAsyMysqlClusterModule::GetActor()
