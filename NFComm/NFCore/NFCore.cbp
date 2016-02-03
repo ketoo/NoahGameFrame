@@ -7,41 +7,59 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="NFCore" prefix_auto="1" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFCore_d" prefix_auto="0" extension_auto="1" />
 				<Option working_dir="" />
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add option="-fPIC" />
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
-					<Add directory="$(NF_HOME)" />
-					<Add directory="$(BOOST_HOME)" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(BOOST_LIB)" />
 				</Linker>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 			<Target title="Release x64">
-				<Option output="NFCore" prefix_auto="1" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Comm/Release/NFCore" prefix_auto="0" extension_auto="1" />
 				<Option working_dir="" />
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-fPIC" />
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
-					<Add directory="$(NF_HOME)" />
-					<Add directory="$(BOOST_HOME)" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCComponent.cpp" />
-		<Unit filename="NFCComponent.h" />
 		<Unit filename="NFCComponentManager.cpp" />
 		<Unit filename="NFCComponentManager.h" />
+		<Unit filename="NFCConsistentHash.hpp" />
+		<Unit filename="NFCDataList.cpp" />
+		<Unit filename="NFCDataList.h" />
 		<Unit filename="NFCHeartBeatManager.cpp" />
 		<Unit filename="NFCHeartBeatManager.h" />
+		<Unit filename="NFCMemManger.cpp" />
+		<Unit filename="NFCMemManger.h" />
+		<Unit filename="NFCMemory.cpp" />
+		<Unit filename="NFCMemory.h" />
 		<Unit filename="NFCObject.cpp" />
 		<Unit filename="NFCObject.h" />
 		<Unit filename="NFCProperty.cpp" />
@@ -52,24 +70,22 @@
 		<Unit filename="NFCRecord.h" />
 		<Unit filename="NFCRecordManager.cpp" />
 		<Unit filename="NFCRecordManager.h" />
-		<Unit filename="NFCValueList.cpp" />
-		<Unit filename="NFCValueList.h" />
 		<Unit filename="NFCore.cpp" />
 		<Unit filename="NFCore.h" />
 		<Unit filename="NFDefine.h" />
 		<Unit filename="NFIComponent.h" />
 		<Unit filename="NFIComponentManager.h" />
+		<Unit filename="NFIDataList.h" />
 		<Unit filename="NFIHeartBeatManager.h" />
+		<Unit filename="NFIMemory.h" />
 		<Unit filename="NFIObject.h" />
 		<Unit filename="NFIProperty.h" />
 		<Unit filename="NFIPropertyManager.h" />
 		<Unit filename="NFIRecord.h" />
 		<Unit filename="NFIRecordManager.h" />
-		<Unit filename="NFIValueList.h" />
-		<Unit filename="NFIdentID.h" />
 		<Unit filename="NFList.h" />
 		<Unit filename="NFMap.h" />
-		<Unit filename="NFPlatform.h" />
+		<Unit filename="NFMapEx.h" />
 		<Unit filename="NFQueue.h" />
 		<Unit filename="NFSingleton.h" />
 		<Unit filename="NFTimer.cpp" />

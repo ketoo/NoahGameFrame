@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_MSGDEFINE_H_
-#define _NF_MSGDEFINE_H_
+#ifndef NF_MSGDEFINE_H
+#define NF_MSGDEFINE_H
 
 #include "NFLimit.h"
 #include "NFDefine.pb.h"
@@ -15,7 +15,7 @@
 #include "NFMsgBaseEx.pb.h"
 #include "NFMsgPreGame.pb.h"
 #include "NFMsgShare.pb.h"
-#include "NFComm/NFCore/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFCore/NFIRecordManager.h"
 #include "NFComm/NFCore/NFIPropertyManager.h"
 #include "NFComm/NFCore/NFList.h"

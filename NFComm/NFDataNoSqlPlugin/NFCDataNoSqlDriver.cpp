@@ -25,7 +25,6 @@ NFCDataNoSqlDriver::~NFCDataNoSqlDriver()
 
 int NFCDataNoSqlDriver::Connect(const std::string& strDSN)
 {
-    //mRedisClient = boost::shared_ptr<redis::client>(new redis::client(strDSN));
 	m_pRedisClient = new redis::client(strDSN);
 
     return 1;

@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_MASTERNET_SERVERMODULE_H_
-#define _NFI_MASTERNET_SERVERMODULE_H_
+#ifndef _NFI_MASTERNET_SERVERMODULE_H
+#define _NFI_MASTERNET_SERVERMODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"

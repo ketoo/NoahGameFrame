@@ -6,15 +6,14 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_LOGINLOGIC_MODULE_H_
-#define _NFC_LOGINLOGIC_MODULE_H_
+#ifndef NFC_LOGINLOGIC_MODULE_H
+#define NFC_LOGINLOGIC_MODULE_H
 
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILoginLogicModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
-#include "NFComm/NFPluginModule/NFIDataNoSqlModule.h"
-#include "NFComm/NFPluginModule/NFIPlatformDataModule.h"
+#include "NFComm/NFPluginModule/NFIClusterModule.h"
+#include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
 
 class NFCLoginLogicModule
     : public NFILoginLogicModule
@@ -27,24 +26,18 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool AfterInit();
 
+	virtual int OnLoginProcess(const NFGUID& object, const std::string& strAccount, const std::string& strPwd);
 
 protected:
 
-    // client event
-    int OnLoginEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
-
-    int OnDisconnectEvent(const NFIDENTID& object, const int nEventID, const NFIDataList& var);
-
 protected:
 
-    NFIEventProcessModule* m_pEventProcessModule;
-    NFIPlatformDataModule* m_pNoSqlModule;
-    NFIKernelModule* m_pKernelModule;
-
+    NFIClusterModule* m_pClusterSqlModule;
+	NFILoginNet_ServerModule* m_pLoginNet_ServerModule;
 private:
 };
 

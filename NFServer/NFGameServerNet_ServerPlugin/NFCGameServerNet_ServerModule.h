@@ -6,15 +6,15 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_GAMESERVER_SERVER_MODULE_H_
-#define _NFC_GAMESERVER_SERVER_MODULE_H_
+#ifndef NFC_GAMESERVER_SERVER_MODULE_H
+#define NFC_GAMESERVER_SERVER_MODULE_H
 
 //#include "GameServerPCH.h"
 //#include "NW_Helper.h"
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
+#include <memory>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
@@ -23,10 +23,24 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-#include <vector>
+#include "NFComm/NFPluginModule/NFISLGShopModule.h"
+#include "NFComm/NFPluginModule/NFISLGBuildingModule.h"
+#include "NFComm/NFMessageDefine/NFSLGDefine.pb.h"
+#include "NFComm/NFPluginModule/NFIUUIDModule.h"
+#include "NFComm/NFPluginModule/NFIPVPModule.h"
+#include "NFComm/NFPluginModule/NFISkillModule.h"
+#include "NFComm/NFPluginModule/NFIDataProcessModule.h"
+#include "NFComm/NFMessageDefine/NFDefine.pb.h"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
+#include "NFComm/NFPluginModule/NFIEquipModule.h"
+#include "NFComm/NFPluginModule/NFIHeroModule.h"
+////////////////////////////////////////////////////////////////////////////
+
+
 
 class NFCGameServerNet_ServerModule
-    : public NFINetModule
+    : public NFIGameServerNet_ServerModule
 {
 public:
     NFCGameServerNet_ServerModule(NFIPluginManager* p)
@@ -35,17 +49,19 @@ public:
     }
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool AfterInit();
 
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
+    virtual void SendMsgPBToGate( const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self );
+	virtual void SendMsgPBToGate( const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self );
 
 protected:
 
-	int OnRecivePack(const NFIPacket& msg);
-	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
+	void OnRecivePSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSocketPSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 	//连接丢失,删2层(连接对象，帐号对象)
 	void OnClientDisconnect(const int nSockIndex);
@@ -53,94 +69,105 @@ protected:
 	void OnClientConnected(const int nSockIndex);
 
 protected:
-    int OnProxyServerRegisteredProcess(const NFIPacket& msg);
-    int OnProxyServerUnRegisteredProcess(const NFIPacket& msg);
-    int OnRefreshProxyServerInfoProcess(const NFIPacket& msg);
+    void OnProxyServerRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnProxyServerUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnRefreshProxyServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
 
-    void OnReqiureRoleListProcess(const NFIPacket& msg);
-    void OnCreateRoleGameProcess(const NFIPacket& msg);
-    void OnDeleteRoleGameProcess(const NFIPacket& msg);
-    void OnClienCommand(const NFIPacket& msg);
+    void OnReqiureRoleListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnCreateRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnDeleteRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienCommand(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     //////////////////////////////////////////////////////////////////////////
 
-    void OnClienEnterGameProcess(const NFIPacket& msg);
-    void OnClienLeaveGameProcess(const NFIPacket& msg);
-    void OnClienGMProcess(const NFIPacket& msg);
+    void OnClienEnterGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienGMProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     //////////////////////////////////////////////////////////////////////////
     
-    void OnClienSwapSceneProcess(const NFIPacket& msg);
-    void OnClienUseSkill(const NFIPacket& msg);
-    void OnClienUseItem(const NFIPacket& msg);
-    void OnClienPickItem(const NFIPacket& msg);
-    void OnClienMove(const NFIPacket& msg);
-    void OnClienAcceptTask(const NFIPacket& msg);
-    void OnClienPushTask(const NFIPacket& msg);
-    void OnClienPushCustom(const NFIPacket& msg);
-    void OnClienChatProcess(const NFIPacket& msg);
+    void OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    
+    void OnClienPickItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienMove(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienMoveImmune(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienAcceptTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienPushTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienPushCustom(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+    //////////////////////////////////////////////////////////////////////////
+
+    void OnClientExitPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+    void OnClientEndBattle(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+	///////////WORLD_START///////////////////////////////////////////////////////////////
+	void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey);
+
+	///////////WORLD_END///////////////////////////////////////////////////////////////
 
 protected:
     //将self的全部属性广播给argVar[应该是多对多]
-    int OnPropertyEnter( const NFIDENTID& self, const NFIDataList& argVar );
-    int OnRecordEnter( const NFIDENTID& self, const NFIDataList& argVar );
+    int OnPropertyEnter( const NFIDataList& argVar, const NFGUID& self );
+    int OnRecordEnter( const NFIDataList& argVar, const NFGUID& self );
 
     //把argVar这些人的出现或者离去广播给self这些人
     int OnObjectListEnter( const NFIDataList& self, const NFIDataList& argVar );
     int OnObjectListLeave( const NFIDataList& self, const NFIDataList& argVar );
 
     //网络同步
-    int OnPropertyCommonEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
-    int OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
-    int OnClassCommonEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+    int OnPropertyCommonEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar );
+    int OnRecordCommonEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+    int OnClassCommonEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    int OnGroupEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
-    int OnContainerEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& argVar );
+    int OnGroupEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+    int OnContainerEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
-    int GetBroadCastObject( const NFIDENTID& self, const std::string& strPropertyName, const bool bTable, NFIDataList& valueObject );
+    int GetBroadCastObject( const NFGUID& self, const std::string& strPropertyName, const bool bTable, NFIDataList& valueObject );
     int GetBroadCastObject( const int nObjectContainerID, const int nGroupID, NFIDataList& valueObject );
     //////////////////////////////////////////////////////////////////////////
-    int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
-
+    int OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+    int OnObjectNPCClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
     //////////////////////////////////////////////////////////////////////////
     // 回馈事件
-    int OnReturnEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
+    int OnReturnEvent( const NFGUID& self, const int nEventID, const NFIDataList& var );
     // 移动广播
-    int OnMoveEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
+    int OnMoveEvent( const NFGUID& self, const int nEventID, const NFIDataList& var );
     // 技能结算结果事件
-    int OnUseSkillResultEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
+    int OnUseSkillResultEvent( const NFGUID& self, const int nEventID, const NFIDataList& var );
     // 跨场景结果事件
-    int OnSwapSceneResultEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
+    int OnSwapSceneResultEvent( const NFGUID& self, const int nEventID, const NFIDataList& var );
     // 发送聊天结果
-    int OnChatResultEvent( const NFIDENTID& self, const int nEventID, const NFIDataList& var );
+    int OnChatResultEvent( const NFGUID& self, const int nEventID, const NFIDataList& var );
+    // 通知副本奖励结果
+    int OnNoticeEctypeAward(const NFGUID& self, const int nEventID, const NFIDataList& var);
+
+	void PlayerLeaveGameServer( const NFGUID& self );
+
+    template<class PBClass>    
+    NFGUID GetGuildID(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+	{
+		NFGUID nPlayerID;
+		PBClass xMsg;                                         
+		if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+		{
+			return NULL_OBJECT;
+		}
+
+		return PBToNF(xMsg.guild_id());
+	}
+
 private:
 
-    struct ServerData 
+    struct GateData 
     {
-        ServerData()
-        {
-            pData = new NFMsg::ServerInfoReport();
-            nFD = 0;
-        }
-        ~ServerData()
-        {
-            nFD = 0;
-            delete pData;
-            pData = NULL;
-        }
-
-        int nFD;
-        NFMsg::ServerInfoReport* pData;
-
+		ServerData xServerData;
         //此网关上所有的对象<角色ID,gate_FD>
-        std::map<NFIDENTID, int> xRoleInfo;
+        std::map<NFGUID, int> xRoleInfo;
     };
-
-private:
-    //gateid,data
-    NFMap<int, ServerData> mProxyMap;
-protected:
 
     //要管理当前所有的对象所在的actor,gateid,fd等
     struct BaseData 
@@ -149,29 +176,37 @@ protected:
         {
             nActorID = 0;
             nGateID = 0;
-            nFD = 0;
+        }
+
+        BaseData(const int gateID, const NFGUID xIdent)
+        {
+            nActorID = 0;
+            nGateID = gateID;
+            xClientID = xIdent;
         }
 
         int nActorID;
         int nGateID;
-        int nFD;
+        NFGUID xClientID;
     };
 
-
 private:
-    //<角色id,角色基础信息>
-    NFMap<NFIDENTID, BaseData> mRoleBaseData;
-    //<角色fd(在网关),角色id>
-    NFMap<int, NFIDENTID> mRoleFDData;
-    //临时保存角色是否已经等待创建的状态<角色名，fd>
-    NFMap<std::string, int> mRoleState;
+    //<角色id,角色网关基础信息>//其实可以在object系统中被代替
+    NFMapEx<NFGUID, BaseData> mRoleBaseData;
 
-    NFIKernelModule* m_pKernelModule;
+    //gateid,data
+    NFMapEx<int, GateData> mProxyMap;
+
+    //////////////////////////////////////////////////////////////////////////
+	NFIUUIDModule* m_pUUIDModule;
+	NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFILogModule* m_pLogModule;
-    NFIEventProcessModule* m_pEventProcessModule;
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFIElementInfoModule* m_pElementInfoModule;
-};
 
+	NFIDataProcessModule* m_pDataProcessModule;
+    //////////////////////////////////////////////////////////////////////////
+    NFIGameServerToWorldModule* m_pGameServerToWorldModule;
+};
 #endif
