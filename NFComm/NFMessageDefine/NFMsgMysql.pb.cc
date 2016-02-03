@@ -37,7 +37,7 @@ void protobuf_AssignDesc_NFMsgMysql_2eproto() {
       "NFMsgMysql.proto");
   GOOGLE_CHECK(file != NULL);
   PackMysqlParam_descriptor_ = file->message_type(0);
-  static const int PackMysqlParam_offsets_[7] = {
+  static const int PackMysqlParam_offsets_[8] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PackMysqlParam, strrecordname_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PackMysqlParam, strkey_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PackMysqlParam, fieldveclist_),
@@ -45,6 +45,7 @@ void protobuf_AssignDesc_NFMsgMysql_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PackMysqlParam, bexit_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PackMysqlParam, nreqid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PackMysqlParam, nret_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PackMysqlParam, etype_),
   };
   PackMysqlParam_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -113,15 +114,16 @@ void protobuf_AddDesc_NFMsgMysql_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\020NFMsgMysql.proto\022\005NFMsg\"\220\001\n\016PackMysqlP"
+    "\n\020NFMsgMysql.proto\022\005NFMsg\"\237\001\n\016PackMysqlP"
     "aram\022\025\n\rstrRecordName\030\001 \002(\014\022\016\n\006strKey\030\002 "
     "\002(\014\022\024\n\014fieldVecList\030\003 \003(\014\022\024\n\014valueVecLis"
     "t\030\004 \003(\014\022\r\n\005bExit\030\005 \002(\003\022\016\n\006nreqid\030\006 \002(\003\022\014"
-    "\n\004nRet\030\007 \002(\003\"\256\001\n\023PackMysqlServerInfo\022\025\n\r"
-    "nRconnectTime\030\001 \002(\003\022\024\n\014nRconneCount\030\002 \002("
-    "\003\022\r\n\005nPort\030\003 \002(\003\022\021\n\tstrDBName\030\004 \002(\014\022\020\n\010s"
-    "trDnsIp\030\005 \002(\014\022\021\n\tstrDBUser\030\006 \002(\014\022\020\n\010strD"
-    "BPwd\030\007 \002(\014\022\021\n\tnServerID\030\010 \002(\003", 349);
+    "\n\004nRet\030\007 \002(\003\022\r\n\005eType\030\010 \002(\003\"\256\001\n\023PackMysq"
+    "lServerInfo\022\025\n\rnRconnectTime\030\001 \002(\003\022\024\n\014nR"
+    "conneCount\030\002 \002(\003\022\r\n\005nPort\030\003 \002(\003\022\021\n\tstrDB"
+    "Name\030\004 \002(\014\022\020\n\010strDnsIp\030\005 \002(\014\022\021\n\tstrDBUse"
+    "r\030\006 \002(\014\022\020\n\010strDBPwd\030\007 \002(\014\022\021\n\tnServerID\030\010"
+    " \002(\003", 364);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgMysql.proto", &protobuf_RegisterTypes);
   PackMysqlParam::default_instance_ = new PackMysqlParam();
@@ -148,6 +150,7 @@ const int PackMysqlParam::kValueVecListFieldNumber;
 const int PackMysqlParam::kBExitFieldNumber;
 const int PackMysqlParam::kNreqidFieldNumber;
 const int PackMysqlParam::kNRetFieldNumber;
+const int PackMysqlParam::kETypeFieldNumber;
 #endif  // !_MSC_VER
 
 PackMysqlParam::PackMysqlParam()
@@ -171,6 +174,7 @@ void PackMysqlParam::SharedCtor() {
   bexit_ = GOOGLE_LONGLONG(0);
   nreqid_ = GOOGLE_LONGLONG(0);
   nret_ = GOOGLE_LONGLONG(0);
+  etype_ = GOOGLE_LONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -225,6 +229,7 @@ void PackMysqlParam::Clear() {
     bexit_ = GOOGLE_LONGLONG(0);
     nreqid_ = GOOGLE_LONGLONG(0);
     nret_ = GOOGLE_LONGLONG(0);
+    etype_ = GOOGLE_LONGLONG(0);
   }
   fieldveclist_.Clear();
   valueveclist_.Clear();
@@ -339,6 +344,22 @@ bool PackMysqlParam::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(64)) goto parse_eType;
+        break;
+      }
+
+      // required int64 eType = 8;
+      case 8: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_eType:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &etype_)));
+          set_has_etype();
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -400,6 +421,11 @@ void PackMysqlParam::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(7, this->nret(), output);
   }
 
+  // required int64 eType = 8;
+  if (has_etype()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(8, this->etype(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -449,6 +475,11 @@ void PackMysqlParam::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(7, this->nret(), target);
   }
 
+  // required int64 eType = 8;
+  if (has_etype()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(8, this->etype(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -493,6 +524,13 @@ int PackMysqlParam::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int64Size(
           this->nret());
+    }
+
+    // required int64 eType = 8;
+    if (has_etype()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->etype());
     }
 
   }
@@ -553,6 +591,9 @@ void PackMysqlParam::MergeFrom(const PackMysqlParam& from) {
     if (from.has_nret()) {
       set_nret(from.nret());
     }
+    if (from.has_etype()) {
+      set_etype(from.etype());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -570,7 +611,7 @@ void PackMysqlParam::CopyFrom(const PackMysqlParam& from) {
 }
 
 bool PackMysqlParam::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000073) != 0x00000073) return false;
+  if ((_has_bits_[0] & 0x000000f3) != 0x000000f3) return false;
 
   return true;
 }
@@ -584,6 +625,7 @@ void PackMysqlParam::Swap(PackMysqlParam* other) {
     std::swap(bexit_, other->bexit_);
     std::swap(nreqid_, other->nreqid_);
     std::swap(nret_, other->nret_);
+    std::swap(etype_, other->etype_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

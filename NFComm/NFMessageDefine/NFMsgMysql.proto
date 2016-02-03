@@ -11,6 +11,7 @@ message PackMysqlParam
 	required int64		bExit 	= 5;
 	required int64		nreqid 	= 6;
 	required int64 		nRet 			= 7;
+	required int64 		eType 			= 8;
 }
 
 message PackMysqlServerInfo
