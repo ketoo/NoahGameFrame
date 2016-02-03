@@ -25,6 +25,7 @@ message ServerInfoReport//服务器之间报告服务器状态
 	required int32   server_max_online = 5;
 	required int32   server_cur_count = 6;
 	required EServerState   server_state = 7;
+	required int32   server_type = 8;
 }
 
 message ServerInfoReportList//服务器之间报告服务器状态
@@ -35,7 +36,8 @@ message ServerInfoReportList//服务器之间报告服务器状态
 message AckEventResult//返回事件结果(对或错等详细)
 {
 	required EGameEventCode event_code = 1;
-	optional int64 event_arg = 2;
+	optional Ident event_object = 2;//playerID
+	optional Ident event_client = 3;//clientID
 }
 
 ////////////////////////////////////////////////////
@@ -89,14 +91,14 @@ message ReqConnectWorld//玩家想连到世界服务器,进游戏世界--登录通过后选世界
 {
 	required int32   world_id = 1;//想去的世界ID
 	optional bytes  account = 2;//玩家帐号--客户度发送时可以不填--转发需填
-	optional int32  sender_ip = 3;//玩家IP--客户度发送时可以不填--转发需填
+	optional Ident  sender = 3;//玩家临时ID--客户度发送时可以不填--转发需填
 	optional int32   login_id = 4;//登录服务器ID--客户度发送时可以不填--转发需填
 }
 
 message AckConnectWorldResult//返回申请到世界服务器的结果
 {
 	required int32   world_id = 1;//申请者想去的世界ID
-	required int32  sender_ip = 2;//申请者的IP
+	required Ident  sender = 2;//申请者临时ID
 	required int32   login_id = 3;//申请者所在的登录服务器ID
 	required bytes  account = 4;//申请者的帐号
 	required bytes  world_ip = 5;//得到的世界服务器分配的网关IP
@@ -126,17 +128,18 @@ message ReqRoleList//请求得到角色列表
 
 message RoleLiteInfo//角色基础信息
 {
-	required int32 		career = 1;
-    required int32 		sex = 2;
-    required int32 		race = 3;
-    required bytes 		noob_name = 4;
-    required int32 		game_id = 5;
-	required int32 		role_level = 6;
-	required int32		delete_time = 7;
-	required int32		reg_time = 8;
-	required int32		last_offline_time = 9;
-	required int32		last_offline_ip = 10;
-	required bytes		view_record = 11;
+	required Ident 		id = 1;
+	required int32 		career = 2;
+    required int32 		sex = 3;
+    required int32 		race = 4;
+    required bytes 		noob_name = 5;
+    required int32 		game_id = 6;
+	required int32 		role_level = 7;
+	required int32		delete_time = 8;
+	required int32		reg_time = 9;
+	required int32		last_offline_time = 10;
+	required int32		last_offline_ip = 11;
+	required bytes		view_record = 12;
 }
 
 message AckRoleLiteInfoList//角色基础信息列表
@@ -166,4 +169,19 @@ message ReqRecoverRole//恢复角色
 	required bytes 	account = 1;
     required bytes	name = 2;
 	required int32 	game_id = 3;
+}
+
+message ServerHeartBeat // 心跳
+{
+	optional int32 count = 1; // 数量，暂时没用到，以后可以用来做角色数量报告等
+}
+
+message RoleOnlineNotify // 玩家上线通知
+{
+	optional Ident guild = 1; // 公会ID
+}
+
+message RoleOfflineNotify // 玩家下线通知
+{
+	optional Ident guild = 1; // 公会ID
 }

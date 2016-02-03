@@ -1,0 +1,266 @@
+package NFFS; 
+
+message FSVector3
+{
+	required float x = 1;
+	required float y = 2;
+	required float z = 3;
+}
+
+message SuwayyahEvents
+{
+	enum ESEType
+	{
+		ESET_SINGLE = 0;//单点(靠时间触发)
+		ESET_SINGLE_AREA = 1;//单点范围(靠时间触发)
+		ESET_LEFT_AREA = 2;//左开始范围
+		ESET_RIGHT_AREA = 3;//右开始范围
+	}
+	message Suwayyah
+	{
+		required ESEType EventType= 1;
+		required float EventTime= 2; //伤害的触发时间
+		required float EndTime= 3;//伤害的结束时间（范围有效）
+		required float DamageRang= 4; //伤害范围
+		required float BackHeroDis= 5;//="碰到目标后击退距离
+		required float BackNpcDis= 6;//="碰到目标后击退距离
+		required string BeAttackParticle= 7;//碰到目标后被击打特效
+		required string MethodCall= 8;//碰到目标后要调用的函数名
+		required string MethodParam= 9;//碰到目标后要调用的函数参数，如果有多个，则用逗号区分
+		required string TargetMethodCall= 10;//碰到目标后要调用的函数名
+		required string TargetMethodParam= 11;//碰到目标后要调用的函数参数，如果有多个，则用逗号区分
+	}
+	
+	repeated Suwayyah xSuwayyahList= 1;
+}
+message BulletEvents
+{
+	enum EBEType
+	{
+		ESET_TARGET = 0;//子弹为触碰目标
+		ESET_POSITION = 1;//子弹为触发坐标
+	}
+	enum EBE_BACKType
+	{
+		EBEBT_BACK = 0;//后退
+		EBEBT_SIDE = 1;//俩侧
+	}
+	
+	message TacheBomp
+	{
+		required float BompTime= 1;//触碰后多久后爆炸（无论是触碰目标还是触碰坐标）
+		required float BompRang= 2;//爆炸半径
+		required string BompPrefabPath= 3;//爆炸特效的预设
+		required string BeAttackParticle= 4;//爆炸被击打特效
+		required float BackNpcDis= 5;//爆炸击退距离
+		required float BackHeroDis= 6;//爆炸击退距离
+		required string MethodCall= 7;
+		required string MethodParam= 8;
+		required string TargetMethodCall= 9;
+		required string TargetMethodParam= 10;
+	}
+	
+	message Bullet
+	{
+		required float EventTime= 1;//事件的触发时间
+		required EBEType EventType= 2;
+		required float Speed= 3;//子弹速度,>=1000为瞬时
+		required float MaxDis= 4;//子弹最大距离
+		required float BulletRang= 5;//子弹半径大小
+		required EBE_BACKType BulletBackType= 6;//子弹击退方式，后退，俩侧
+		required float BackHeroDis= 7;//子弹碰到目标后击退距离
+		required float BackNpcDis= 8;//子弹碰到目标后击退距离
+		required int32 TacheDetroy= 9;//子弹碰到目标后是否销毁
+		required string BeAttackParticle= 10;//子弹碰到目标后被击打特效
+		required string FireTacheName= 11;//子弹初始挂载节点
+		required FSVector3 FireTacheOffest= 12;//子弹初始挂载节点偏移
+		required string BulletPrefabPath= 13;//子弹预设
+		required string MethodCall= 14;
+		required string MethodParam= 15;
+		required string TargetMethodCall= 16;
+		required string TargetMethodParam= 17;
+		
+		repeated TacheBomp Bomp= 18;
+	}
+	
+	repeated Bullet xBulletList= 1;
+}
+
+message AnimatorMoves
+{
+	enum EAMType
+	{
+		EAMT_FORWARD = 0;
+		EAMT_BACK = 1;
+		EAMT_LEFT = 2;
+		EAMT_RIGHT = 3;
+	}
+	message Move
+	{
+		required float EventTime= 1;//事件的触发时间
+		required EAMType EventType= 2;
+		required float MoveDis= 3;//移动距离
+		required float MoveTime= 4;//移动消耗时间
+		required string MethodCall= 5;
+		required string MethodParam= 6;
+	}
+	
+	repeated Move xMoveList= 1;
+}
+
+message CameraControlEvents
+{
+	enum ECEType
+	{
+		Earthquake = 0;
+		Explosion = 1;
+		No = 2;
+		FireKick = 3;
+		Stomp = 4;
+		Yes = 5;
+		SprintShake = 6;
+		FreeMode = 7;
+		MainRPGMode = 8;
+	}
+	message Camera
+	{
+		required float EventTime= 1;//事件的触发时间
+		required ECEType EventType= 2;
+		required FSVector3 AmountParam= 3;//震动参数，其实是一个vector
+		required float ShakeTime= 4;//震动消耗时间
+		required string MethodCall= 5;
+		required string MethodParam= 6;
+	}
+	
+	repeated Camera xCameraList= 1;
+}
+
+message ParticleEvents
+{
+	enum EPERTYPE
+	{
+		NONE = 0;
+		MatchTarget = 1;
+		Random_X = 2;
+		Random_Y = 3;
+		Random_Z = 4;
+		Random_XY = 5;
+		Random_XZ = 6;
+		Random_YZ = 7;
+		Random_XYZ = 8;
+	}
+	message Particle
+	{
+		required float EventTime= 1;//事件的触发时间
+		required EPERTYPE Rotation= 3;
+		required string ParticlePath= 4;//粒子的预设路径
+		required string TargetTacheName= 5;//粒子的挂节点名（如果没有，则为根节点）
+		required FSVector3 TargetTacheOffest = 6;//粒子的挂节偏移
+		required int32 CastToSurface= 7;//粒子释放后是否触地
+		required int32 BindTarget= 8;//粒子释放后是否绑定在出生点
+		required float DestroyTime= 9;//粒子释放后多久后销毁
+		required string MethodCall= 10;
+		required string MethodParam= 11;
+	}
+	
+	repeated Particle xParticleList= 1;
+}
+
+message EnableEvents
+{
+	enum EEETYPE
+	{
+		INIT = 0;
+		FINAL = 1;
+	}
+	message Enable
+	{
+		required float EventTime= 1;
+		required EEETYPE EventType= 2;
+		required string TargetName= 3;
+		required string MethodCall= 4;
+		required string MethodParam= 5;
+	}
+	
+	repeated Enable xEnableList= 1;
+}
+
+message TrailEvents
+{
+	enum TEETYPE
+	{
+		INIT = 0;
+		FINAL = 1;
+	}
+	message Trail
+	{
+		required float EventTime= 1;
+		required TEETYPE EventType= 2;
+		required string TargetName= 3;
+		required string MethodCall= 4;
+		required string MethodParam= 5;
+	}
+	
+	repeated Trail xTrailList= 1;
+}
+
+message AudioEvents
+{
+	enum AEETYPE
+	{
+		INIT = 0;
+		FINAL = 1;
+	}
+	message Audio
+	{
+		required float EventTime= 1;
+		required AEETYPE EventType= 2;
+		required string AudioName= 3;
+		required string MethodCall= 4;
+		required string MethodParam= 5;
+	}
+	
+	repeated Audio xAudioList= 1;
+}
+
+message GlobalSpeeds
+{
+	enum EGSTYPE
+	{
+		INIT = 0;
+		FINAL = 1;
+	}
+	
+	message Speed
+	{
+		required float EventTime= 1;
+		required EGSTYPE EventType= 2;
+		required float SpeedValue= 3;
+	}
+	
+	repeated Speed xSpeedList= 1;
+}
+
+message AnimatorFlys
+{
+	enum EAFType
+	{
+		EAFT_FORWARD = 0;
+		EAFT_BACK = 1;
+		EAFT_LEFT = 2;
+		EAFT_RIGHT = 3;
+		EAFT_TOP = 4;
+	}
+	message Fly
+	{
+		required float EventTime= 1;//事件的触发时间
+		required EAFType EventType= 2;
+		required float MoveDis= 3;//移动距离
+		required float MoveTime= 4;//移动消耗时间
+		required float MoveTopDis= 5;//移动高度
+		required string MethodCall= 6;
+		required string MethodParam= 7;
+	}
+	
+	repeated Fly xFlyList= 1;
+}

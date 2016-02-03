@@ -1,9 +1,8 @@
 // NFLoginNet_ClientPlugin.cpp : Defines the exported functions for the DLL application.
 //
 
-//#include "stdafx.h"
 #include "NFLoginNet_ClientPlugin.h"
-#include "NFCLoginNet_ClientModule.h"
+#include "NFCLoginToMasterModule.h"
 
 //
 //
@@ -31,17 +30,17 @@ const int NFLoginNet_ClientPlugin::GetPluginVersion()
 
 const std::string NFLoginNet_ClientPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFLoginNet_ClientPlugin)
+    return GET_CLASS_NAME(NFLoginNet_ClientPlugin)
 }
 
 void NFLoginNet_ClientPlugin::Install()
 {
     //NFILogicModule* pModule = new NFCLoginNet_ClientModule();
 
-    REGISTER_MODULE(pPluginManager, NFCLoginNet_ClientModule)
+    REGISTER_MODULE(pPluginManager, NFCLoginToMasterModule)
 }
 
 void NFLoginNet_ClientPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCLoginNet_ClientModule)
+    UNREGISTER_MODULE(pPluginManager, NFCLoginToMasterModule)
 }

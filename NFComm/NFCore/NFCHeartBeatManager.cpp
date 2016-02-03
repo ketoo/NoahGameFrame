@@ -7,67 +7,49 @@
 // -------------------------------------------------------------------------
 
 #include "NFCHeartBeatManager.h"
+#include "NFTimer.h"
 
 NFCHeartBeatManager::~NFCHeartBeatManager()
 {
-    NFCHeartBeatElement* pElementEx = mHeartBeatElementMapEx.First();
-    while (pElementEx)
-    {
-        delete pElementEx;
-        pElementEx = mHeartBeatElementMapEx.Next();
-    }
+    mHeartBeatElementMapEx.ClearAll();
 }
 
 void NFCHeartBeatElement::DoHeartBeatEvent()
 {
-    HEART_BEAT_FUNCTOR_PTR cb = HEART_BEAT_FUNCTOR_PTR();
+    HEART_BEAT_FUNCTOR_PTR cb;
     bool bRet = First(cb);
     while (bRet)
     {
-        cb.get()->operator()(self, strBeatName, fBeatTime, nCount, var);
+        cb.get()->operator()(self, strBeatName, fBeatTime, nCount);
 
         bRet = Next(cb);
     }
 }
 //////////////////////////////////////////////////////////////////////////
-bool NFCHeartBeatManager::Execute(const float fLastTime, const float fAllTime)
+bool NFCHeartBeatManager::Execute()
 {
-    NFCHeartBeatElement* pElement = mHeartBeatElementMapEx.First();
-    while (pElement)
+    NF_SHARE_PTR<NFCHeartBeatElement> pElement = mHeartBeatElementMapEx.First();
+    while (pElement.get())
     {
-        int nCount = pElement->nCount;
-        float fTime = pElement->fTime;
+		NFINT64 nTime = NFTimeEx::GetNowTimeMille();
 
-        if (fTime > 0.000000f)
-        {
-            fTime -= fLastTime;
-        }
+		if (nTime > pElement->nTime && pElement->nCount > 0)
+		{
+			pElement->nCount--;
 
-        if (fTime <= 0.001f)
-        {
-            nCount--;
-        }
-        else
-        {
-            pElement->fTime = fTime;
-        }
+			pElement->DoHeartBeatEvent();
 
-        if (nCount <= 0)
-        {
-            //Do Event
-            pElement->DoHeartBeatEvent();
-
-            //等待删除
-            mRemoveListEx.Add(pElement->strBeatName);
-
-        }
-        else if (pElement->nCount != nCount)
-        {
-            pElement->nCount = nCount;
-            //Do Event
-            pElement->DoHeartBeatEvent();
-            pElement->fTime = pElement->fBeatTime;
-        }
+			if (pElement->nCount <= 0)
+			{
+				//等待删除
+				mRemoveListEx.Add(pElement->strBeatName);
+			}
+			else
+			{
+				//Do Event
+				pElement->nTime = nTime + NFINT64(pElement->fBeatTime * 1000);
+			}
+		}
 
         pElement = mHeartBeatElementMapEx.Next();
     }
@@ -77,78 +59,58 @@ bool NFCHeartBeatManager::Execute(const float fLastTime, const float fAllTime)
     bool bRet = mRemoveListEx.First(strHeartBeatName);
     while (bRet)
     {
-        NFCHeartBeatElement* pElement = mHeartBeatElementMapEx.RemoveElement(strHeartBeatName);
-        if (pElement)
-        {
-            HEART_BEAT_FUNCTOR_PTR heartFunctorPtr;
-            bool bRemoveRet = pElement->First(heartFunctorPtr);
-            while (bRemoveRet)
-            {
-                heartFunctorPtr.reset();
-
-                bRemoveRet = pElement->Next(heartFunctorPtr);
-            }
-
-            delete pElement;
-        }
+        mHeartBeatElementMapEx.RemoveElement(strHeartBeatName);
 
         bRet = mRemoveListEx.Next(strHeartBeatName);
     }
+
     mRemoveListEx.ClearAll();
+
     //////////////////////////////////////////////////////////////////////////
     //添加新心跳也是延时添加的
-    NFCHeartBeatElement* pHeartBeatEx = NULL;
-    bool bAddRetEx = mAddListEx.First(pHeartBeatEx);
-    while (bAddRetEx && pHeartBeatEx)
+    for (std::list<NFCHeartBeatElement>::iterator iter = mAddListEx.begin(); iter != mAddListEx.end(); ++iter)
     {
-        if (mHeartBeatElementMapEx.GetElement(pHeartBeatEx->strBeatName))
+        if (NULL == mHeartBeatElementMapEx.GetElement(iter->strBeatName))
         {
-            delete pHeartBeatEx;
-        }
-        else
-        {
+            NF_SHARE_PTR<NFCHeartBeatElement> pHeartBeatEx(NF_NEW NFCHeartBeatElement());
+            *pHeartBeatEx = *iter;
             mHeartBeatElementMapEx.AddElement(pHeartBeatEx->strBeatName, pHeartBeatEx);
         }
-
-
-        pHeartBeatEx = NULL;
-        bAddRetEx = mAddListEx.Next(pHeartBeatEx);
     }
-    mAddListEx.ClearAll();
+
+    mAddListEx.clear();
 
     return true;
 }
 
-bool NFCHeartBeatManager::RemoveHeartBeat( const std::string& strHeartBeatName )
+bool NFCHeartBeatManager::RemoveHeartBeat(const std::string& strHeartBeatName)
 {
     return mRemoveListEx.Add(strHeartBeatName);
 }
 
-NFIDENTID NFCHeartBeatManager::Self()
+NFGUID NFCHeartBeatManager::Self()
 {
-	return mSelf;
+    return mSelf;
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool NFCHeartBeatManager::AddHeartBeat(const NFIDENTID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const NFIDataList& var, const float fTime, const int nCount)
+bool NFCHeartBeatManager::AddHeartBeat(const NFGUID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount)
 {
-    NFCHeartBeatElement* pHeartBeat = NF_NEW NFCHeartBeatElement();
-    pHeartBeat->fTime = fTime;
-    pHeartBeat->fBeatTime = fTime;
-    pHeartBeat->nCount = nCount;
-    pHeartBeat->var = var;
-    pHeartBeat->self = self;
-    pHeartBeat->strBeatName = strHeartBeatName;
-    pHeartBeat->Add(cb);
-
-    mAddListEx.Add(pHeartBeat);
+    NFCHeartBeatElement xHeartBeat;
+	xHeartBeat.nTime = NFTimeEx::GetNowTime() + (NFINT64)fTime;
+    xHeartBeat.fBeatTime = fTime;
+    xHeartBeat.nCount = nCount;
+    xHeartBeat.self = self;
+    xHeartBeat.strBeatName = strHeartBeatName;
+    xHeartBeat.Add(cb);
+    mAddListEx.push_back(xHeartBeat);
 
     return true;
 }
 
-bool NFCHeartBeatManager::Exist( const std::string& strHeartBeatName )
+bool NFCHeartBeatManager::Exist(const std::string& strHeartBeatName)
 {
-    if(mHeartBeatElementMapEx.GetElement(strHeartBeatName))
+    if (mHeartBeatElementMapEx.GetElement(strHeartBeatName))
     {
         return true;
     }

@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 
-//#include "stdafx.h"
 #include "NFCWorldLogicModule.h"
 #include "NFWorldLogicPlugin.h"
 
@@ -16,8 +15,9 @@
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
+#if NF_PLATFORM == NF_PLATFORM_WIN
 	SetConsoleTitle("NFWorldServer");
-
+#endif // NF_PLATFORM
     CREATE_PLUGIN(pm, NFWorldLogicPlugin)
 };
 
@@ -35,15 +35,13 @@ const int NFWorldLogicPlugin::GetPluginVersion()
 
 const std::string NFWorldLogicPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFWorldLogicPlugin)
+    return GET_CLASS_NAME(NFWorldLogicPlugin);
 }
 
 void NFWorldLogicPlugin::Install()
 {
 
     REGISTER_MODULE(pPluginManager, NFCWorldLogicModule)
-
-
 }
 
 void NFWorldLogicPlugin::Uninstall()

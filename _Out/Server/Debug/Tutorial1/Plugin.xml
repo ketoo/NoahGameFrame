@@ -1,4 +1,6 @@
 <XML>
 
 	<Plugin Name="Tutorial1" Main="1"/>
+	<APPID Name="111" />
+    <ConfigPath Name="../../" />
 </XML>

@@ -27,7 +27,6 @@
 #include <google/protobuf/unknown_field_set.h>
 #include "NFDefine.pb.h"
 #include "NFMsgBase.pb.h"
-#include "NFMsgBaseEx.pb.h"
 // @@protoc_insertion_point(includes)
 
 namespace NFMsg {
@@ -40,26 +39,106 @@ void protobuf_ShutdownFile_NFMsgShare_2eproto();
 class ReqEnterGameServer;
 class ReqHeartBeat;
 class ReqLeaveGameServer;
-class ReqAckPlayerMove;
-class ReqAckPlayerChat;
-class ReqAckUseSkill;
-class ReqAckUseItem;
-class ReqAckSwapScene;
-class ReqPickDropItem;
-class ReqAcceptTask;
-class ReqCompeleteTask;
 class PlayerEntryInfo;
 class AckPlayerEntryList;
 class AckPlayerLeaveList;
+class ReqAckSynData;
+class ReqAckPlayerMove;
+class ChatContainer;
+class ReqAckPlayerChat;
+class EffectData;
+class ReqAckUseSkill;
+class ReqAckUseItem;
+class ReqAckSwapScene;
+class ItemStruct;
+class CurrencyStruct;
+class ReqAckEndBattle;
+class ReqPickDropItem;
+class ReqAcceptTask;
+class ReqCompeleteTask;
+class ReqAckJoinActivity;
+class ReqAckSearchOppnent;
+class ReqAckBattleOppnent;
+class ReqAckCreateGuild;
+class ReqSearchGuild;
+class AckSearchGuild;
+class AckSearchGuild_SearchGuildObject;
+class ReqAckJoinGuild;
+class ReqAckLeaveGuild;
+class ReqAckOprGuildMember;
+class ReqAckOprGuild;
+class ReqAckDonateGuildItem;
+class ReqGuildEctypeInfo;
+class GuildEctypeInfo;
+class AckGuildEctypeInfo;
+class SetGuildEctypeInfo;
+class ChatInfo;
+class ReqAckCreateChatGroup;
+class ReqAckjoinChatGroup;
+class ReqAckQuitChatGroup;
+class ReqSubscriptionChatGroup;
+class ReqCancelSubscriptionChatGroup;
+class ReqIntensifylevelToEquip;
+class AckIntensifylevelToEquip;
+class ReqHoleToEquip;
+class AckHoleToEquip;
+class ReqInlaystoneToEquip;
+class AckInlaystoneToEquip;
+class ReqElementlevelToEquip;
+class AckElementlevelToEquip;
+class ReqSetFightHero;
+class ReqWearEquip;
+class TakeOffEquip;
+class ReqMiningTitle;
+class ReqSendMail;
 
+enum ReqAckSynData_SynType {
+  ReqAckSynData_SynType_EST_SCENE = 1,
+  ReqAckSynData_SynType_EST_GROUP = 2,
+  ReqAckSynData_SynType_EST_GUILD = 3,
+  ReqAckSynData_SynType_EST_FRIEND = 4
+};
+bool ReqAckSynData_SynType_IsValid(int value);
+const ReqAckSynData_SynType ReqAckSynData_SynType_SynType_MIN = ReqAckSynData_SynType_EST_SCENE;
+const ReqAckSynData_SynType ReqAckSynData_SynType_SynType_MAX = ReqAckSynData_SynType_EST_FRIEND;
+const int ReqAckSynData_SynType_SynType_ARRAYSIZE = ReqAckSynData_SynType_SynType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ReqAckSynData_SynType_descriptor();
+inline const ::std::string& ReqAckSynData_SynType_Name(ReqAckSynData_SynType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ReqAckSynData_SynType_descriptor(), value);
+}
+inline bool ReqAckSynData_SynType_Parse(
+    const ::std::string& name, ReqAckSynData_SynType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ReqAckSynData_SynType>(
+    ReqAckSynData_SynType_descriptor(), name, value);
+}
+enum ChatContainer_ContainerType {
+  ChatContainer_ContainerType_EGCT_ITEM = 1
+};
+bool ChatContainer_ContainerType_IsValid(int value);
+const ChatContainer_ContainerType ChatContainer_ContainerType_ContainerType_MIN = ChatContainer_ContainerType_EGCT_ITEM;
+const ChatContainer_ContainerType ChatContainer_ContainerType_ContainerType_MAX = ChatContainer_ContainerType_EGCT_ITEM;
+const int ChatContainer_ContainerType_ContainerType_ARRAYSIZE = ChatContainer_ContainerType_ContainerType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ChatContainer_ContainerType_descriptor();
+inline const ::std::string& ChatContainer_ContainerType_Name(ChatContainer_ContainerType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ChatContainer_ContainerType_descriptor(), value);
+}
+inline bool ChatContainer_ContainerType_Parse(
+    const ::std::string& name, ChatContainer_ContainerType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ChatContainer_ContainerType>(
+    ChatContainer_ContainerType_descriptor(), name, value);
+}
 enum ReqAckPlayerChat_EGameChatType {
-  ReqAckPlayerChat_EGameChatType_EGCT_NARMAL = 0,
+  ReqAckPlayerChat_EGameChatType_EGCT_GUILD = 0,
   ReqAckPlayerChat_EGameChatType_EGCT_PRIVATE = 1,
   ReqAckPlayerChat_EGameChatType_EGCT_TEAM = 2,
   ReqAckPlayerChat_EGameChatType_EGCT_WORLD = 3
 };
 bool ReqAckPlayerChat_EGameChatType_IsValid(int value);
-const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat_EGameChatType_EGameChatType_MIN = ReqAckPlayerChat_EGameChatType_EGCT_NARMAL;
+const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat_EGameChatType_EGameChatType_MIN = ReqAckPlayerChat_EGameChatType_EGCT_GUILD;
 const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat_EGameChatType_EGameChatType_MAX = ReqAckPlayerChat_EGameChatType_EGCT_WORLD;
 const int ReqAckPlayerChat_EGameChatType_EGameChatType_ARRAYSIZE = ReqAckPlayerChat_EGameChatType_EGameChatType_MAX + 1;
 
@@ -72,6 +151,26 @@ inline bool ReqAckPlayerChat_EGameChatType_Parse(
     const ::std::string& name, ReqAckPlayerChat_EGameChatType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<ReqAckPlayerChat_EGameChatType>(
     ReqAckPlayerChat_EGameChatType_descriptor(), name, value);
+}
+enum EffectData_EResultType {
+  EffectData_EResultType_EET_SUCCESS = 0,
+  EffectData_EResultType_EET_FAIL = 1,
+  EffectData_EResultType_EET_REFUSE = 2
+};
+bool EffectData_EResultType_IsValid(int value);
+const EffectData_EResultType EffectData_EResultType_EResultType_MIN = EffectData_EResultType_EET_SUCCESS;
+const EffectData_EResultType EffectData_EResultType_EResultType_MAX = EffectData_EResultType_EET_REFUSE;
+const int EffectData_EResultType_EResultType_ARRAYSIZE = EffectData_EResultType_EResultType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* EffectData_EResultType_descriptor();
+inline const ::std::string& EffectData_EResultType_Name(EffectData_EResultType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EffectData_EResultType_descriptor(), value);
+}
+inline bool EffectData_EResultType_Parse(
+    const ::std::string& name, EffectData_EResultType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EffectData_EResultType>(
+    EffectData_EResultType_descriptor(), name, value);
 }
 enum ReqAckSwapScene_EGameSwapType {
   ReqAckSwapScene_EGameSwapType_EGST_NARMAL = 0,
@@ -93,6 +192,112 @@ inline bool ReqAckSwapScene_EGameSwapType_Parse(
     const ::std::string& name, ReqAckSwapScene_EGameSwapType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<ReqAckSwapScene_EGameSwapType>(
     ReqAckSwapScene_EGameSwapType_descriptor(), name, value);
+}
+enum ReqAckJoinActivity_EGameActivityType {
+  ReqAckJoinActivity_EGameActivityType_EGAT_PVP = 0
+};
+bool ReqAckJoinActivity_EGameActivityType_IsValid(int value);
+const ReqAckJoinActivity_EGameActivityType ReqAckJoinActivity_EGameActivityType_EGameActivityType_MIN = ReqAckJoinActivity_EGameActivityType_EGAT_PVP;
+const ReqAckJoinActivity_EGameActivityType ReqAckJoinActivity_EGameActivityType_EGameActivityType_MAX = ReqAckJoinActivity_EGameActivityType_EGAT_PVP;
+const int ReqAckJoinActivity_EGameActivityType_EGameActivityType_ARRAYSIZE = ReqAckJoinActivity_EGameActivityType_EGameActivityType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ReqAckJoinActivity_EGameActivityType_descriptor();
+inline const ::std::string& ReqAckJoinActivity_EGameActivityType_Name(ReqAckJoinActivity_EGameActivityType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ReqAckJoinActivity_EGameActivityType_descriptor(), value);
+}
+inline bool ReqAckJoinActivity_EGameActivityType_Parse(
+    const ::std::string& name, ReqAckJoinActivity_EGameActivityType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ReqAckJoinActivity_EGameActivityType>(
+    ReqAckJoinActivity_EGameActivityType_descriptor(), name, value);
+}
+enum ReqAckJoinActivity_EGameActivitySubType {
+  ReqAckJoinActivity_EGameActivitySubType_EGAT_NORMAL = 0
+};
+bool ReqAckJoinActivity_EGameActivitySubType_IsValid(int value);
+const ReqAckJoinActivity_EGameActivitySubType ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_MIN = ReqAckJoinActivity_EGameActivitySubType_EGAT_NORMAL;
+const ReqAckJoinActivity_EGameActivitySubType ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_MAX = ReqAckJoinActivity_EGameActivitySubType_EGAT_NORMAL;
+const int ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_ARRAYSIZE = ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ReqAckJoinActivity_EGameActivitySubType_descriptor();
+inline const ::std::string& ReqAckJoinActivity_EGameActivitySubType_Name(ReqAckJoinActivity_EGameActivitySubType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ReqAckJoinActivity_EGameActivitySubType_descriptor(), value);
+}
+inline bool ReqAckJoinActivity_EGameActivitySubType_Parse(
+    const ::std::string& name, ReqAckJoinActivity_EGameActivitySubType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ReqAckJoinActivity_EGameActivitySubType>(
+    ReqAckJoinActivity_EGameActivitySubType_descriptor(), name, value);
+}
+enum ReqAckOprGuildMember_EGGuildMemberOprType {
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DOWN = 0,
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_UP = 1,
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICK = 2,
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_APPOINT = 3,
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_FIRE = 4,
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DEMISE = 5,
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_ACCEPTAPPLY = 6,
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DENYAPPLY = 7,
+  ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICKOUT = 8
+};
+bool ReqAckOprGuildMember_EGGuildMemberOprType_IsValid(int value);
+const ReqAckOprGuildMember_EGGuildMemberOprType ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_MIN = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DOWN;
+const ReqAckOprGuildMember_EGGuildMemberOprType ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_MAX = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICKOUT;
+const int ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_ARRAYSIZE = ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ReqAckOprGuildMember_EGGuildMemberOprType_descriptor();
+inline const ::std::string& ReqAckOprGuildMember_EGGuildMemberOprType_Name(ReqAckOprGuildMember_EGGuildMemberOprType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ReqAckOprGuildMember_EGGuildMemberOprType_descriptor(), value);
+}
+inline bool ReqAckOprGuildMember_EGGuildMemberOprType_Parse(
+    const ::std::string& name, ReqAckOprGuildMember_EGGuildMemberOprType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ReqAckOprGuildMember_EGGuildMemberOprType>(
+    ReqAckOprGuildMember_EGGuildMemberOprType_descriptor(), name, value);
+}
+enum ReqAckOprGuild_EGGuildOprType {
+  ReqAckOprGuild_EGGuildOprType_EGAT_APPLYDISMISS = 1,
+  ReqAckOprGuild_EGGuildOprType_EGAT_STOPDISMISS = 2,
+  ReqAckOprGuild_EGGuildOprType_EGAT_SETRECRUIT = 3,
+  ReqAckOprGuild_EGGuildOprType_EGAT_PUBLISHRECRUIT = 4,
+  ReqAckOprGuild_EGGuildOprType_EGAT_EDITAD = 5,
+  ReqAckOprGuild_EGGuildOprType_EGAT_LEVELUP = 6
+};
+bool ReqAckOprGuild_EGGuildOprType_IsValid(int value);
+const ReqAckOprGuild_EGGuildOprType ReqAckOprGuild_EGGuildOprType_EGGuildOprType_MIN = ReqAckOprGuild_EGGuildOprType_EGAT_APPLYDISMISS;
+const ReqAckOprGuild_EGGuildOprType ReqAckOprGuild_EGGuildOprType_EGGuildOprType_MAX = ReqAckOprGuild_EGGuildOprType_EGAT_LEVELUP;
+const int ReqAckOprGuild_EGGuildOprType_EGGuildOprType_ARRAYSIZE = ReqAckOprGuild_EGGuildOprType_EGGuildOprType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ReqAckOprGuild_EGGuildOprType_descriptor();
+inline const ::std::string& ReqAckOprGuild_EGGuildOprType_Name(ReqAckOprGuild_EGGuildOprType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ReqAckOprGuild_EGGuildOprType_descriptor(), value);
+}
+inline bool ReqAckOprGuild_EGGuildOprType_Parse(
+    const ::std::string& name, ReqAckOprGuild_EGGuildOprType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ReqAckOprGuild_EGGuildOprType>(
+    ReqAckOprGuild_EGGuildOprType_descriptor(), name, value);
+}
+enum ChatInfo_EChatType {
+  ChatInfo_EChatType_ECHATTYPE_NORMAL = 0,
+  ChatInfo_EChatType_ECHATTYPE_PRIVATE = 1,
+  ChatInfo_EChatType_ECHATTYPE_GUILD = 2,
+  ChatInfo_EChatType_ECHATTYPE_WORLD = 3
+};
+bool ChatInfo_EChatType_IsValid(int value);
+const ChatInfo_EChatType ChatInfo_EChatType_EChatType_MIN = ChatInfo_EChatType_ECHATTYPE_NORMAL;
+const ChatInfo_EChatType ChatInfo_EChatType_EChatType_MAX = ChatInfo_EChatType_ECHATTYPE_WORLD;
+const int ChatInfo_EChatType_EChatType_ARRAYSIZE = ChatInfo_EChatType_EChatType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ChatInfo_EChatType_descriptor();
+inline const ::std::string& ChatInfo_EChatType_Name(ChatInfo_EChatType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ChatInfo_EChatType_descriptor(), value);
+}
+inline bool ChatInfo_EChatType_Parse(
+    const ::std::string& name, ChatInfo_EChatType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ChatInfo_EChatType>(
+    ChatInfo_EChatType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -150,10 +355,19 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required bytes account = 1;
+  // required .NFMsg.Ident id = 1;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& id() const;
+  inline ::NFMsg::Ident* mutable_id();
+  inline ::NFMsg::Ident* release_id();
+  inline void set_allocated_id(::NFMsg::Ident* id);
+
+  // required bytes account = 2;
   inline bool has_account() const;
   inline void clear_account();
-  static const int kAccountFieldNumber = 1;
+  static const int kAccountFieldNumber = 2;
   inline const ::std::string& account() const;
   inline void set_account(const ::std::string& value);
   inline void set_account(const char* value);
@@ -162,17 +376,17 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
   inline ::std::string* release_account();
   inline void set_allocated_account(::std::string* account);
 
-  // required int32 game_id = 2;
+  // required int32 game_id = 3;
   inline bool has_game_id() const;
   inline void clear_game_id();
-  static const int kGameIdFieldNumber = 2;
+  static const int kGameIdFieldNumber = 3;
   inline ::google::protobuf::int32 game_id() const;
   inline void set_game_id(::google::protobuf::int32 value);
 
-  // required bytes name = 3;
+  // required bytes name = 4;
   inline bool has_name() const;
   inline void clear_name();
-  static const int kNameFieldNumber = 3;
+  static const int kNameFieldNumber = 4;
   inline const ::std::string& name() const;
   inline void set_name(const ::std::string& value);
   inline void set_name(const char* value);
@@ -183,6 +397,8 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqEnterGameServer)
  private:
+  inline void set_has_id();
+  inline void clear_has_id();
   inline void set_has_account();
   inline void clear_has_account();
   inline void set_has_game_id();
@@ -192,12 +408,13 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::NFMsg::Ident* id_;
   ::std::string* account_;
   ::std::string* name_;
   ::google::protobuf::int32 game_id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -352,6 +569,508 @@ class ReqLeaveGameServer : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class PlayerEntryInfo : public ::google::protobuf::Message {
+ public:
+  PlayerEntryInfo();
+  virtual ~PlayerEntryInfo();
+
+  PlayerEntryInfo(const PlayerEntryInfo& from);
+
+  inline PlayerEntryInfo& operator=(const PlayerEntryInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PlayerEntryInfo& default_instance();
+
+  void Swap(PlayerEntryInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  PlayerEntryInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PlayerEntryInfo& from);
+  void MergeFrom(const PlayerEntryInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident object_guid = 1;
+  inline bool has_object_guid() const;
+  inline void clear_object_guid();
+  static const int kObjectGuidFieldNumber = 1;
+  inline const ::NFMsg::Ident& object_guid() const;
+  inline ::NFMsg::Ident* mutable_object_guid();
+  inline ::NFMsg::Ident* release_object_guid();
+  inline void set_allocated_object_guid(::NFMsg::Ident* object_guid);
+
+  // required float x = 2;
+  inline bool has_x() const;
+  inline void clear_x();
+  static const int kXFieldNumber = 2;
+  inline float x() const;
+  inline void set_x(float value);
+
+  // required float y = 3;
+  inline bool has_y() const;
+  inline void clear_y();
+  static const int kYFieldNumber = 3;
+  inline float y() const;
+  inline void set_y(float value);
+
+  // required float z = 4;
+  inline bool has_z() const;
+  inline void clear_z();
+  static const int kZFieldNumber = 4;
+  inline float z() const;
+  inline void set_z(float value);
+
+  // required int32 career_type = 5;
+  inline bool has_career_type() const;
+  inline void clear_career_type();
+  static const int kCareerTypeFieldNumber = 5;
+  inline ::google::protobuf::int32 career_type() const;
+  inline void set_career_type(::google::protobuf::int32 value);
+
+  // required int32 player_state = 6;
+  inline bool has_player_state() const;
+  inline void clear_player_state();
+  static const int kPlayerStateFieldNumber = 6;
+  inline ::google::protobuf::int32 player_state() const;
+  inline void set_player_state(::google::protobuf::int32 value);
+
+  // required bytes config_id = 7;
+  inline bool has_config_id() const;
+  inline void clear_config_id();
+  static const int kConfigIdFieldNumber = 7;
+  inline const ::std::string& config_id() const;
+  inline void set_config_id(const ::std::string& value);
+  inline void set_config_id(const char* value);
+  inline void set_config_id(const void* value, size_t size);
+  inline ::std::string* mutable_config_id();
+  inline ::std::string* release_config_id();
+  inline void set_allocated_config_id(::std::string* config_id);
+
+  // required int32 scene_id = 8;
+  inline bool has_scene_id() const;
+  inline void clear_scene_id();
+  static const int kSceneIdFieldNumber = 8;
+  inline ::google::protobuf::int32 scene_id() const;
+  inline void set_scene_id(::google::protobuf::int32 value);
+
+  // required bytes class_id = 9;
+  inline bool has_class_id() const;
+  inline void clear_class_id();
+  static const int kClassIdFieldNumber = 9;
+  inline const ::std::string& class_id() const;
+  inline void set_class_id(const ::std::string& value);
+  inline void set_class_id(const char* value);
+  inline void set_class_id(const void* value, size_t size);
+  inline ::std::string* mutable_class_id();
+  inline ::std::string* release_class_id();
+  inline void set_allocated_class_id(::std::string* class_id);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.PlayerEntryInfo)
+ private:
+  inline void set_has_object_guid();
+  inline void clear_has_object_guid();
+  inline void set_has_x();
+  inline void clear_has_x();
+  inline void set_has_y();
+  inline void clear_has_y();
+  inline void set_has_z();
+  inline void clear_has_z();
+  inline void set_has_career_type();
+  inline void clear_has_career_type();
+  inline void set_has_player_state();
+  inline void clear_has_player_state();
+  inline void set_has_config_id();
+  inline void clear_has_config_id();
+  inline void set_has_scene_id();
+  inline void clear_has_scene_id();
+  inline void set_has_class_id();
+  inline void clear_has_class_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* object_guid_;
+  float x_;
+  float y_;
+  float z_;
+  ::google::protobuf::int32 career_type_;
+  ::std::string* config_id_;
+  ::google::protobuf::int32 player_state_;
+  ::google::protobuf::int32 scene_id_;
+  ::std::string* class_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static PlayerEntryInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AckPlayerEntryList : public ::google::protobuf::Message {
+ public:
+  AckPlayerEntryList();
+  virtual ~AckPlayerEntryList();
+
+  AckPlayerEntryList(const AckPlayerEntryList& from);
+
+  inline AckPlayerEntryList& operator=(const AckPlayerEntryList& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckPlayerEntryList& default_instance();
+
+  void Swap(AckPlayerEntryList* other);
+
+  // implements Message ----------------------------------------------
+
+  AckPlayerEntryList* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckPlayerEntryList& from);
+  void MergeFrom(const AckPlayerEntryList& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFMsg.PlayerEntryInfo object_list = 1;
+  inline int object_list_size() const;
+  inline void clear_object_list();
+  static const int kObjectListFieldNumber = 1;
+  inline const ::NFMsg::PlayerEntryInfo& object_list(int index) const;
+  inline ::NFMsg::PlayerEntryInfo* mutable_object_list(int index);
+  inline ::NFMsg::PlayerEntryInfo* add_object_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PlayerEntryInfo >&
+      object_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PlayerEntryInfo >*
+      mutable_object_list();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckPlayerEntryList)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PlayerEntryInfo > object_list_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckPlayerEntryList* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AckPlayerLeaveList : public ::google::protobuf::Message {
+ public:
+  AckPlayerLeaveList();
+  virtual ~AckPlayerLeaveList();
+
+  AckPlayerLeaveList(const AckPlayerLeaveList& from);
+
+  inline AckPlayerLeaveList& operator=(const AckPlayerLeaveList& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckPlayerLeaveList& default_instance();
+
+  void Swap(AckPlayerLeaveList* other);
+
+  // implements Message ----------------------------------------------
+
+  AckPlayerLeaveList* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckPlayerLeaveList& from);
+  void MergeFrom(const AckPlayerLeaveList& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFMsg.Ident object_list = 1;
+  inline int object_list_size() const;
+  inline void clear_object_list();
+  static const int kObjectListFieldNumber = 1;
+  inline const ::NFMsg::Ident& object_list(int index) const;
+  inline ::NFMsg::Ident* mutable_object_list(int index);
+  inline ::NFMsg::Ident* add_object_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+      object_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+      mutable_object_list();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckPlayerLeaveList)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > object_list_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckPlayerLeaveList* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckSynData : public ::google::protobuf::Message {
+ public:
+  ReqAckSynData();
+  virtual ~ReqAckSynData();
+
+  ReqAckSynData(const ReqAckSynData& from);
+
+  inline ReqAckSynData& operator=(const ReqAckSynData& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckSynData& default_instance();
+
+  void Swap(ReqAckSynData* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckSynData* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckSynData& from);
+  void MergeFrom(const ReqAckSynData& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef ReqAckSynData_SynType SynType;
+  static const SynType EST_SCENE = ReqAckSynData_SynType_EST_SCENE;
+  static const SynType EST_GROUP = ReqAckSynData_SynType_EST_GROUP;
+  static const SynType EST_GUILD = ReqAckSynData_SynType_EST_GUILD;
+  static const SynType EST_FRIEND = ReqAckSynData_SynType_EST_FRIEND;
+  static inline bool SynType_IsValid(int value) {
+    return ReqAckSynData_SynType_IsValid(value);
+  }
+  static const SynType SynType_MIN =
+    ReqAckSynData_SynType_SynType_MIN;
+  static const SynType SynType_MAX =
+    ReqAckSynData_SynType_SynType_MAX;
+  static const int SynType_ARRAYSIZE =
+    ReqAckSynData_SynType_SynType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  SynType_descriptor() {
+    return ReqAckSynData_SynType_descriptor();
+  }
+  static inline const ::std::string& SynType_Name(SynType value) {
+    return ReqAckSynData_SynType_Name(value);
+  }
+  static inline bool SynType_Parse(const ::std::string& name,
+      SynType* value) {
+    return ReqAckSynData_SynType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident syser = 1;
+  inline bool has_syser() const;
+  inline void clear_syser();
+  static const int kSyserFieldNumber = 1;
+  inline const ::NFMsg::Ident& syser() const;
+  inline ::NFMsg::Ident* mutable_syser();
+  inline ::NFMsg::Ident* release_syser();
+  inline void set_allocated_syser(::NFMsg::Ident* syser);
+
+  // repeated .NFMsg.Ident object_list = 2;
+  inline int object_list_size() const;
+  inline void clear_object_list();
+  static const int kObjectListFieldNumber = 2;
+  inline const ::NFMsg::Ident& object_list(int index) const;
+  inline ::NFMsg::Ident* mutable_object_list(int index);
+  inline ::NFMsg::Ident* add_object_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+      object_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+      mutable_object_list();
+
+  // required bytes data = 3;
+  inline bool has_data() const;
+  inline void clear_data();
+  static const int kDataFieldNumber = 3;
+  inline const ::std::string& data() const;
+  inline void set_data(const ::std::string& value);
+  inline void set_data(const char* value);
+  inline void set_data(const void* value, size_t size);
+  inline ::std::string* mutable_data();
+  inline ::std::string* release_data();
+  inline void set_allocated_data(::std::string* data);
+
+  // required .NFMsg.ReqAckSynData.SynType syn_type = 4;
+  inline bool has_syn_type() const;
+  inline void clear_syn_type();
+  static const int kSynTypeFieldNumber = 4;
+  inline ::NFMsg::ReqAckSynData_SynType syn_type() const;
+  inline void set_syn_type(::NFMsg::ReqAckSynData_SynType value);
+
+  // required .NFMsg.EGameMsgID msg_id = 5;
+  inline bool has_msg_id() const;
+  inline void clear_msg_id();
+  static const int kMsgIdFieldNumber = 5;
+  inline ::NFMsg::EGameMsgID msg_id() const;
+  inline void set_msg_id(::NFMsg::EGameMsgID value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckSynData)
+ private:
+  inline void set_has_syser();
+  inline void clear_has_syser();
+  inline void set_has_data();
+  inline void clear_has_data();
+  inline void set_has_syn_type();
+  inline void clear_has_syn_type();
+  inline void set_has_msg_id();
+  inline void clear_has_msg_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* syser_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > object_list_;
+  ::std::string* data_;
+  int syn_type_;
+  int msg_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckSynData* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class ReqAckPlayerMove : public ::google::protobuf::Message {
  public:
   ReqAckPlayerMove();
@@ -406,12 +1125,14 @@ class ReqAckPlayerMove : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional int64 mover = 1;
+  // required .NFMsg.Ident mover = 1;
   inline bool has_mover() const;
   inline void clear_mover();
   static const int kMoverFieldNumber = 1;
-  inline ::google::protobuf::int64 mover() const;
-  inline void set_mover(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& mover() const;
+  inline ::NFMsg::Ident* mutable_mover();
+  inline ::NFMsg::Ident* release_mover();
+  inline void set_allocated_mover(::NFMsg::Ident* mover);
 
   // required int32 moveType = 2;
   inline bool has_movetype() const;
@@ -420,47 +1141,29 @@ class ReqAckPlayerMove : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 movetype() const;
   inline void set_movetype(::google::protobuf::int32 value);
 
-  // required float target_x = 3;
-  inline bool has_target_x() const;
-  inline void clear_target_x();
-  static const int kTargetXFieldNumber = 3;
-  inline float target_x() const;
-  inline void set_target_x(float value);
+  // repeated .NFMsg.Position target_pos = 3;
+  inline int target_pos_size() const;
+  inline void clear_target_pos();
+  static const int kTargetPosFieldNumber = 3;
+  inline const ::NFMsg::Position& target_pos(int index) const;
+  inline ::NFMsg::Position* mutable_target_pos(int index);
+  inline ::NFMsg::Position* add_target_pos();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >&
+      target_pos() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >*
+      mutable_target_pos();
 
-  // optional float target_y = 4;
-  inline bool has_target_y() const;
-  inline void clear_target_y();
-  static const int kTargetYFieldNumber = 4;
-  inline float target_y() const;
-  inline void set_target_y(float value);
-
-  // required float target_z = 5;
-  inline bool has_target_z() const;
-  inline void clear_target_z();
-  static const int kTargetZFieldNumber = 5;
-  inline float target_z() const;
-  inline void set_target_z(float value);
-
-  // optional float source_x = 6;
-  inline bool has_source_x() const;
-  inline void clear_source_x();
-  static const int kSourceXFieldNumber = 6;
-  inline float source_x() const;
-  inline void set_source_x(float value);
-
-  // optional float source_y = 7;
-  inline bool has_source_y() const;
-  inline void clear_source_y();
-  static const int kSourceYFieldNumber = 7;
-  inline float source_y() const;
-  inline void set_source_y(float value);
-
-  // optional float source_z = 8;
-  inline bool has_source_z() const;
-  inline void clear_source_z();
-  static const int kSourceZFieldNumber = 8;
-  inline float source_z() const;
-  inline void set_source_z(float value);
+  // repeated .NFMsg.Position source_pos = 4;
+  inline int source_pos_size() const;
+  inline void clear_source_pos();
+  static const int kSourcePosFieldNumber = 4;
+  inline const ::NFMsg::Position& source_pos(int index) const;
+  inline ::NFMsg::Position* mutable_source_pos(int index);
+  inline ::NFMsg::Position* add_source_pos();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >&
+      source_pos() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >*
+      mutable_source_pos();
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckPlayerMove)
  private:
@@ -468,32 +1171,16 @@ class ReqAckPlayerMove : public ::google::protobuf::Message {
   inline void clear_has_mover();
   inline void set_has_movetype();
   inline void clear_has_movetype();
-  inline void set_has_target_x();
-  inline void clear_has_target_x();
-  inline void set_has_target_y();
-  inline void clear_has_target_y();
-  inline void set_has_target_z();
-  inline void clear_has_target_z();
-  inline void set_has_source_x();
-  inline void clear_has_source_x();
-  inline void set_has_source_y();
-  inline void clear_has_source_y();
-  inline void set_has_source_z();
-  inline void clear_has_source_z();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 mover_;
+  ::NFMsg::Ident* mover_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Position > target_pos_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Position > source_pos_;
   ::google::protobuf::int32 movetype_;
-  float target_x_;
-  float target_y_;
-  float target_z_;
-  float source_x_;
-  float source_y_;
-  float source_z_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -501,6 +1188,126 @@ class ReqAckPlayerMove : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ReqAckPlayerMove* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ChatContainer : public ::google::protobuf::Message {
+ public:
+  ChatContainer();
+  virtual ~ChatContainer();
+
+  ChatContainer(const ChatContainer& from);
+
+  inline ChatContainer& operator=(const ChatContainer& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ChatContainer& default_instance();
+
+  void Swap(ChatContainer* other);
+
+  // implements Message ----------------------------------------------
+
+  ChatContainer* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ChatContainer& from);
+  void MergeFrom(const ChatContainer& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef ChatContainer_ContainerType ContainerType;
+  static const ContainerType EGCT_ITEM = ChatContainer_ContainerType_EGCT_ITEM;
+  static inline bool ContainerType_IsValid(int value) {
+    return ChatContainer_ContainerType_IsValid(value);
+  }
+  static const ContainerType ContainerType_MIN =
+    ChatContainer_ContainerType_ContainerType_MIN;
+  static const ContainerType ContainerType_MAX =
+    ChatContainer_ContainerType_ContainerType_MAX;
+  static const int ContainerType_ARRAYSIZE =
+    ChatContainer_ContainerType_ContainerType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  ContainerType_descriptor() {
+    return ChatContainer_ContainerType_descriptor();
+  }
+  static inline const ::std::string& ContainerType_Name(ContainerType value) {
+    return ChatContainer_ContainerType_Name(value);
+  }
+  static inline bool ContainerType_Parse(const ::std::string& name,
+      ContainerType* value) {
+    return ChatContainer_ContainerType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required int32 ConTainerType = 2;
+  inline bool has_containertype() const;
+  inline void clear_containertype();
+  static const int kConTainerTypeFieldNumber = 2;
+  inline ::google::protobuf::int32 containertype() const;
+  inline void set_containertype(::google::protobuf::int32 value);
+
+  // required bytes data_info = 3;
+  inline bool has_data_info() const;
+  inline void clear_data_info();
+  static const int kDataInfoFieldNumber = 3;
+  inline const ::std::string& data_info() const;
+  inline void set_data_info(const ::std::string& value);
+  inline void set_data_info(const char* value);
+  inline void set_data_info(const void* value, size_t size);
+  inline ::std::string* mutable_data_info();
+  inline ::std::string* release_data_info();
+  inline void set_allocated_data_info(::std::string* data_info);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ChatContainer)
+ private:
+  inline void set_has_containertype();
+  inline void clear_has_containertype();
+  inline void set_has_data_info();
+  inline void clear_has_data_info();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* data_info_;
+  ::google::protobuf::int32 containertype_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ChatContainer* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -557,7 +1364,7 @@ class ReqAckPlayerChat : public ::google::protobuf::Message {
   // nested types ----------------------------------------------------
 
   typedef ReqAckPlayerChat_EGameChatType EGameChatType;
-  static const EGameChatType EGCT_NARMAL = ReqAckPlayerChat_EGameChatType_EGCT_NARMAL;
+  static const EGameChatType EGCT_GUILD = ReqAckPlayerChat_EGameChatType_EGCT_GUILD;
   static const EGameChatType EGCT_PRIVATE = ReqAckPlayerChat_EGameChatType_EGCT_PRIVATE;
   static const EGameChatType EGCT_TEAM = ReqAckPlayerChat_EGameChatType_EGCT_TEAM;
   static const EGameChatType EGCT_WORLD = ReqAckPlayerChat_EGameChatType_EGCT_WORLD;
@@ -584,12 +1391,14 @@ class ReqAckPlayerChat : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 chat_id = 1;
+  // required .NFMsg.Ident chat_id = 1;
   inline bool has_chat_id() const;
   inline void clear_chat_id();
   static const int kChatIdFieldNumber = 1;
-  inline ::google::protobuf::int64 chat_id() const;
-  inline void set_chat_id(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& chat_id() const;
+  inline ::NFMsg::Ident* mutable_chat_id();
+  inline ::NFMsg::Ident* release_chat_id();
+  inline void set_allocated_chat_id(::NFMsg::Ident* chat_id);
 
   // required .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 2;
   inline bool has_chat_type() const;
@@ -610,6 +1419,39 @@ class ReqAckPlayerChat : public ::google::protobuf::Message {
   inline ::std::string* release_chat_info();
   inline void set_allocated_chat_info(::std::string* chat_info);
 
+  // required bytes chat_name = 4;
+  inline bool has_chat_name() const;
+  inline void clear_chat_name();
+  static const int kChatNameFieldNumber = 4;
+  inline const ::std::string& chat_name() const;
+  inline void set_chat_name(const ::std::string& value);
+  inline void set_chat_name(const char* value);
+  inline void set_chat_name(const void* value, size_t size);
+  inline ::std::string* mutable_chat_name();
+  inline ::std::string* release_chat_name();
+  inline void set_allocated_chat_name(::std::string* chat_name);
+
+  // optional .NFMsg.Ident target_id = 5;
+  inline bool has_target_id() const;
+  inline void clear_target_id();
+  static const int kTargetIdFieldNumber = 5;
+  inline const ::NFMsg::Ident& target_id() const;
+  inline ::NFMsg::Ident* mutable_target_id();
+  inline ::NFMsg::Ident* release_target_id();
+  inline void set_allocated_target_id(::NFMsg::Ident* target_id);
+
+  // repeated .NFMsg.ChatContainer Container_data = 6;
+  inline int container_data_size() const;
+  inline void clear_container_data();
+  static const int kContainerDataFieldNumber = 6;
+  inline const ::NFMsg::ChatContainer& container_data(int index) const;
+  inline ::NFMsg::ChatContainer* mutable_container_data(int index);
+  inline ::NFMsg::ChatContainer* add_container_data();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ChatContainer >&
+      container_data() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ChatContainer >*
+      mutable_container_data();
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckPlayerChat)
  private:
   inline void set_has_chat_id();
@@ -618,12 +1460,148 @@ class ReqAckPlayerChat : public ::google::protobuf::Message {
   inline void clear_has_chat_type();
   inline void set_has_chat_info();
   inline void clear_has_chat_info();
+  inline void set_has_chat_name();
+  inline void clear_has_chat_name();
+  inline void set_has_target_id();
+  inline void clear_has_target_id();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 chat_id_;
+  ::NFMsg::Ident* chat_id_;
   ::std::string* chat_info_;
+  ::std::string* chat_name_;
+  ::NFMsg::Ident* target_id_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::ChatContainer > container_data_;
   int chat_type_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckPlayerChat* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class EffectData : public ::google::protobuf::Message {
+ public:
+  EffectData();
+  virtual ~EffectData();
+
+  EffectData(const EffectData& from);
+
+  inline EffectData& operator=(const EffectData& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const EffectData& default_instance();
+
+  void Swap(EffectData* other);
+
+  // implements Message ----------------------------------------------
+
+  EffectData* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const EffectData& from);
+  void MergeFrom(const EffectData& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef EffectData_EResultType EResultType;
+  static const EResultType EET_SUCCESS = EffectData_EResultType_EET_SUCCESS;
+  static const EResultType EET_FAIL = EffectData_EResultType_EET_FAIL;
+  static const EResultType EET_REFUSE = EffectData_EResultType_EET_REFUSE;
+  static inline bool EResultType_IsValid(int value) {
+    return EffectData_EResultType_IsValid(value);
+  }
+  static const EResultType EResultType_MIN =
+    EffectData_EResultType_EResultType_MIN;
+  static const EResultType EResultType_MAX =
+    EffectData_EResultType_EResultType_MAX;
+  static const int EResultType_ARRAYSIZE =
+    EffectData_EResultType_EResultType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  EResultType_descriptor() {
+    return EffectData_EResultType_descriptor();
+  }
+  static inline const ::std::string& EResultType_Name(EResultType value) {
+    return EffectData_EResultType_Name(value);
+  }
+  static inline bool EResultType_Parse(const ::std::string& name,
+      EResultType* value) {
+    return EffectData_EResultType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident effect_ident = 1;
+  inline bool has_effect_ident() const;
+  inline void clear_effect_ident();
+  static const int kEffectIdentFieldNumber = 1;
+  inline const ::NFMsg::Ident& effect_ident() const;
+  inline ::NFMsg::Ident* mutable_effect_ident();
+  inline ::NFMsg::Ident* release_effect_ident();
+  inline void set_allocated_effect_ident(::NFMsg::Ident* effect_ident);
+
+  // required int32 effect_value = 2;
+  inline bool has_effect_value() const;
+  inline void clear_effect_value();
+  static const int kEffectValueFieldNumber = 2;
+  inline ::google::protobuf::int32 effect_value() const;
+  inline void set_effect_value(::google::protobuf::int32 value);
+
+  // required .NFMsg.EffectData.EResultType effect_rlt = 3;
+  inline bool has_effect_rlt() const;
+  inline void clear_effect_rlt();
+  static const int kEffectRltFieldNumber = 3;
+  inline ::NFMsg::EffectData_EResultType effect_rlt() const;
+  inline void set_effect_rlt(::NFMsg::EffectData_EResultType value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.EffectData)
+ private:
+  inline void set_has_effect_ident();
+  inline void clear_has_effect_ident();
+  inline void set_has_effect_value();
+  inline void clear_has_effect_value();
+  inline void set_has_effect_rlt();
+  inline void clear_has_effect_rlt();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* effect_ident_;
+  ::google::protobuf::int32 effect_value_;
+  int effect_rlt_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
@@ -633,7 +1611,7 @@ class ReqAckPlayerChat : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
   void InitAsDefaultInstance();
-  static ReqAckPlayerChat* default_instance_;
+  static EffectData* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -691,10 +1669,19 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required bytes skill_id = 1;
+  // required .NFMsg.Ident user = 1;
+  inline bool has_user() const;
+  inline void clear_user();
+  static const int kUserFieldNumber = 1;
+  inline const ::NFMsg::Ident& user() const;
+  inline ::NFMsg::Ident* mutable_user();
+  inline ::NFMsg::Ident* release_user();
+  inline void set_allocated_user(::NFMsg::Ident* user);
+
+  // required bytes skill_id = 2;
   inline bool has_skill_id() const;
   inline void clear_skill_id();
-  static const int kSkillIdFieldNumber = 1;
+  static const int kSkillIdFieldNumber = 2;
   inline const ::std::string& skill_id() const;
   inline void set_skill_id(const ::std::string& value);
   inline void set_skill_id(const char* value);
@@ -703,71 +1690,67 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
   inline ::std::string* release_skill_id();
   inline void set_allocated_skill_id(::std::string* skill_id);
 
-  // repeated int64 effect_ident = 2;
-  inline int effect_ident_size() const;
-  inline void clear_effect_ident();
-  static const int kEffectIdentFieldNumber = 2;
-  inline ::google::protobuf::int64 effect_ident(int index) const;
-  inline void set_effect_ident(int index, ::google::protobuf::int64 value);
-  inline void add_effect_ident(::google::protobuf::int64 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
-      effect_ident() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
-      mutable_effect_ident();
+  // required .NFMsg.Position now_pos = 3;
+  inline bool has_now_pos() const;
+  inline void clear_now_pos();
+  static const int kNowPosFieldNumber = 3;
+  inline const ::NFMsg::Position& now_pos() const;
+  inline ::NFMsg::Position* mutable_now_pos();
+  inline ::NFMsg::Position* release_now_pos();
+  inline void set_allocated_now_pos(::NFMsg::Position* now_pos);
 
-  // repeated int32 effect_value = 3;
-  inline int effect_value_size() const;
-  inline void clear_effect_value();
-  static const int kEffectValueFieldNumber = 3;
-  inline ::google::protobuf::int32 effect_value(int index) const;
-  inline void set_effect_value(int index, ::google::protobuf::int32 value);
-  inline void add_effect_value(::google::protobuf::int32 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      effect_value() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_effect_value();
+  // required .NFMsg.Position tar_pos = 4;
+  inline bool has_tar_pos() const;
+  inline void clear_tar_pos();
+  static const int kTarPosFieldNumber = 4;
+  inline const ::NFMsg::Position& tar_pos() const;
+  inline ::NFMsg::Position* mutable_tar_pos();
+  inline ::NFMsg::Position* release_tar_pos();
+  inline void set_allocated_tar_pos(::NFMsg::Position* tar_pos);
 
-  // repeated int32 effect_rlt = 4;
-  inline int effect_rlt_size() const;
-  inline void clear_effect_rlt();
-  static const int kEffectRltFieldNumber = 4;
-  inline ::google::protobuf::int32 effect_rlt(int index) const;
-  inline void set_effect_rlt(int index, ::google::protobuf::int32 value);
-  inline void add_effect_rlt(::google::protobuf::int32 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      effect_rlt() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_effect_rlt();
+  // required int32 use_index = 5;
+  inline bool has_use_index() const;
+  inline void clear_use_index();
+  static const int kUseIndexFieldNumber = 5;
+  inline ::google::protobuf::int32 use_index() const;
+  inline void set_use_index(::google::protobuf::int32 value);
 
-  // optional bytes key_value = 5;
-  inline bool has_key_value() const;
-  inline void clear_key_value();
-  static const int kKeyValueFieldNumber = 5;
-  inline const ::std::string& key_value() const;
-  inline void set_key_value(const ::std::string& value);
-  inline void set_key_value(const char* value);
-  inline void set_key_value(const void* value, size_t size);
-  inline ::std::string* mutable_key_value();
-  inline ::std::string* release_key_value();
-  inline void set_allocated_key_value(::std::string* key_value);
+  // repeated .NFMsg.EffectData effect_data = 6;
+  inline int effect_data_size() const;
+  inline void clear_effect_data();
+  static const int kEffectDataFieldNumber = 6;
+  inline const ::NFMsg::EffectData& effect_data(int index) const;
+  inline ::NFMsg::EffectData* mutable_effect_data(int index);
+  inline ::NFMsg::EffectData* add_effect_data();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >&
+      effect_data() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >*
+      mutable_effect_data();
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckUseSkill)
  private:
+  inline void set_has_user();
+  inline void clear_has_user();
   inline void set_has_skill_id();
   inline void clear_has_skill_id();
-  inline void set_has_key_value();
-  inline void clear_has_key_value();
+  inline void set_has_now_pos();
+  inline void clear_has_now_pos();
+  inline void set_has_tar_pos();
+  inline void clear_has_tar_pos();
+  inline void set_has_use_index();
+  inline void clear_has_use_index();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::NFMsg::Ident* user_;
   ::std::string* skill_id_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int64 > effect_ident_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > effect_value_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > effect_rlt_;
-  ::std::string* key_value_;
+  ::NFMsg::Position* now_pos_;
+  ::NFMsg::Position* tar_pos_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData > effect_data_;
+  ::google::protobuf::int32 use_index_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -832,75 +1815,72 @@ class ReqAckUseItem : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 item_guid = 1;
+  // required .NFMsg.Ident user = 1;
+  inline bool has_user() const;
+  inline void clear_user();
+  static const int kUserFieldNumber = 1;
+  inline const ::NFMsg::Ident& user() const;
+  inline ::NFMsg::Ident* mutable_user();
+  inline ::NFMsg::Ident* release_user();
+  inline void set_allocated_user(::NFMsg::Ident* user);
+
+  // required .NFMsg.Ident item_guid = 2;
   inline bool has_item_guid() const;
   inline void clear_item_guid();
-  static const int kItemGuidFieldNumber = 1;
-  inline ::google::protobuf::int64 item_guid() const;
-  inline void set_item_guid(::google::protobuf::int64 value);
+  static const int kItemGuidFieldNumber = 2;
+  inline const ::NFMsg::Ident& item_guid() const;
+  inline ::NFMsg::Ident* mutable_item_guid();
+  inline ::NFMsg::Ident* release_item_guid();
+  inline void set_allocated_item_guid(::NFMsg::Ident* item_guid);
 
-  // repeated int64 effect_ident = 2;
-  inline int effect_ident_size() const;
-  inline void clear_effect_ident();
-  static const int kEffectIdentFieldNumber = 2;
-  inline ::google::protobuf::int64 effect_ident(int index) const;
-  inline void set_effect_ident(int index, ::google::protobuf::int64 value);
-  inline void add_effect_ident(::google::protobuf::int64 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
-      effect_ident() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
-      mutable_effect_ident();
+  // repeated .NFMsg.EffectData effect_data = 3;
+  inline int effect_data_size() const;
+  inline void clear_effect_data();
+  static const int kEffectDataFieldNumber = 3;
+  inline const ::NFMsg::EffectData& effect_data(int index) const;
+  inline ::NFMsg::EffectData* mutable_effect_data(int index);
+  inline ::NFMsg::EffectData* add_effect_data();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >&
+      effect_data() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >*
+      mutable_effect_data();
 
-  // repeated int32 effect_value = 3;
-  inline int effect_value_size() const;
-  inline void clear_effect_value();
-  static const int kEffectValueFieldNumber = 3;
-  inline ::google::protobuf::int32 effect_value(int index) const;
-  inline void set_effect_value(int index, ::google::protobuf::int32 value);
-  inline void add_effect_value(::google::protobuf::int32 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      effect_value() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_effect_value();
+  // required .NFMsg.ItemStruct item = 4;
+  inline bool has_item() const;
+  inline void clear_item();
+  static const int kItemFieldNumber = 4;
+  inline const ::NFMsg::ItemStruct& item() const;
+  inline ::NFMsg::ItemStruct* mutable_item();
+  inline ::NFMsg::ItemStruct* release_item();
+  inline void set_allocated_item(::NFMsg::ItemStruct* item);
 
-  // repeated int32 effect_rlt = 4;
-  inline int effect_rlt_size() const;
-  inline void clear_effect_rlt();
-  static const int kEffectRltFieldNumber = 4;
-  inline ::google::protobuf::int32 effect_rlt(int index) const;
-  inline void set_effect_rlt(int index, ::google::protobuf::int32 value);
-  inline void add_effect_rlt(::google::protobuf::int32 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      effect_rlt() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_effect_rlt();
-
-  // optional bytes key_value = 5;
-  inline bool has_key_value() const;
-  inline void clear_key_value();
-  static const int kKeyValueFieldNumber = 5;
-  inline const ::std::string& key_value() const;
-  inline void set_key_value(const ::std::string& value);
-  inline void set_key_value(const char* value);
-  inline void set_key_value(const void* value, size_t size);
-  inline ::std::string* mutable_key_value();
-  inline ::std::string* release_key_value();
-  inline void set_allocated_key_value(::std::string* key_value);
+  // required .NFMsg.Ident targetid = 5;
+  inline bool has_targetid() const;
+  inline void clear_targetid();
+  static const int kTargetidFieldNumber = 5;
+  inline const ::NFMsg::Ident& targetid() const;
+  inline ::NFMsg::Ident* mutable_targetid();
+  inline ::NFMsg::Ident* release_targetid();
+  inline void set_allocated_targetid(::NFMsg::Ident* targetid);
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckUseItem)
  private:
+  inline void set_has_user();
+  inline void clear_has_user();
   inline void set_has_item_guid();
   inline void clear_has_item_guid();
-  inline void set_has_key_value();
-  inline void clear_has_key_value();
+  inline void set_has_item();
+  inline void clear_has_item();
+  inline void set_has_targetid();
+  inline void clear_has_targetid();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 item_guid_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int64 > effect_ident_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > effect_value_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > effect_rlt_;
-  ::std::string* key_value_;
+  ::NFMsg::Ident* user_;
+  ::NFMsg::Ident* item_guid_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData > effect_data_;
+  ::NFMsg::ItemStruct* item_;
+  ::NFMsg::Ident* targetid_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
@@ -1072,6 +2052,310 @@ class ReqAckSwapScene : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class ItemStruct : public ::google::protobuf::Message {
+ public:
+  ItemStruct();
+  virtual ~ItemStruct();
+
+  ItemStruct(const ItemStruct& from);
+
+  inline ItemStruct& operator=(const ItemStruct& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ItemStruct& default_instance();
+
+  void Swap(ItemStruct* other);
+
+  // implements Message ----------------------------------------------
+
+  ItemStruct* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ItemStruct& from);
+  void MergeFrom(const ItemStruct& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string item_id = 1;
+  inline bool has_item_id() const;
+  inline void clear_item_id();
+  static const int kItemIdFieldNumber = 1;
+  inline const ::std::string& item_id() const;
+  inline void set_item_id(const ::std::string& value);
+  inline void set_item_id(const char* value);
+  inline void set_item_id(const char* value, size_t size);
+  inline ::std::string* mutable_item_id();
+  inline ::std::string* release_item_id();
+  inline void set_allocated_item_id(::std::string* item_id);
+
+  // required int32 item_count = 2;
+  inline bool has_item_count() const;
+  inline void clear_item_count();
+  static const int kItemCountFieldNumber = 2;
+  inline ::google::protobuf::int32 item_count() const;
+  inline void set_item_count(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ItemStruct)
+ private:
+  inline void set_has_item_id();
+  inline void clear_has_item_id();
+  inline void set_has_item_count();
+  inline void clear_has_item_count();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* item_id_;
+  ::google::protobuf::int32 item_count_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ItemStruct* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class CurrencyStruct : public ::google::protobuf::Message {
+ public:
+  CurrencyStruct();
+  virtual ~CurrencyStruct();
+
+  CurrencyStruct(const CurrencyStruct& from);
+
+  inline CurrencyStruct& operator=(const CurrencyStruct& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CurrencyStruct& default_instance();
+
+  void Swap(CurrencyStruct* other);
+
+  // implements Message ----------------------------------------------
+
+  CurrencyStruct* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const CurrencyStruct& from);
+  void MergeFrom(const CurrencyStruct& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 currency_type = 1;
+  inline bool has_currency_type() const;
+  inline void clear_currency_type();
+  static const int kCurrencyTypeFieldNumber = 1;
+  inline ::google::protobuf::int32 currency_type() const;
+  inline void set_currency_type(::google::protobuf::int32 value);
+
+  // required int32 currency_count = 2;
+  inline bool has_currency_count() const;
+  inline void clear_currency_count();
+  static const int kCurrencyCountFieldNumber = 2;
+  inline ::google::protobuf::int32 currency_count() const;
+  inline void set_currency_count(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.CurrencyStruct)
+ private:
+  inline void set_has_currency_type();
+  inline void clear_has_currency_type();
+  inline void set_has_currency_count();
+  inline void clear_has_currency_count();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 currency_type_;
+  ::google::protobuf::int32 currency_count_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static CurrencyStruct* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckEndBattle : public ::google::protobuf::Message {
+ public:
+  ReqAckEndBattle();
+  virtual ~ReqAckEndBattle();
+
+  ReqAckEndBattle(const ReqAckEndBattle& from);
+
+  inline ReqAckEndBattle& operator=(const ReqAckEndBattle& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckEndBattle& default_instance();
+
+  void Swap(ReqAckEndBattle* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckEndBattle* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckEndBattle& from);
+  void MergeFrom(const ReqAckEndBattle& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 money = 1;
+  inline bool has_money() const;
+  inline void clear_money();
+  static const int kMoneyFieldNumber = 1;
+  inline ::google::protobuf::int32 money() const;
+  inline void set_money(::google::protobuf::int32 value);
+
+  // required int32 exp = 2;
+  inline bool has_exp() const;
+  inline void clear_exp();
+  static const int kExpFieldNumber = 2;
+  inline ::google::protobuf::int32 exp() const;
+  inline void set_exp(::google::protobuf::int32 value);
+
+  // required int32 diamond = 3;
+  inline bool has_diamond() const;
+  inline void clear_diamond();
+  static const int kDiamondFieldNumber = 3;
+  inline ::google::protobuf::int32 diamond() const;
+  inline void set_diamond(::google::protobuf::int32 value);
+
+  // repeated .NFMsg.ItemStruct item_list = 4;
+  inline int item_list_size() const;
+  inline void clear_item_list();
+  static const int kItemListFieldNumber = 4;
+  inline const ::NFMsg::ItemStruct& item_list(int index) const;
+  inline ::NFMsg::ItemStruct* mutable_item_list(int index);
+  inline ::NFMsg::ItemStruct* add_item_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >&
+      item_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >*
+      mutable_item_list();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckEndBattle)
+ private:
+  inline void set_has_money();
+  inline void clear_has_money();
+  inline void set_has_exp();
+  inline void clear_has_exp();
+  inline void set_has_diamond();
+  inline void clear_has_diamond();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 money_;
+  ::google::protobuf::int32 exp_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct > item_list_;
+  ::google::protobuf::int32 diamond_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckEndBattle* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class ReqPickDropItem : public ::google::protobuf::Message {
  public:
   ReqPickDropItem();
@@ -1126,12 +2410,14 @@ class ReqPickDropItem : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 item_guid = 2;
+  // required .NFMsg.Ident item_guid = 2;
   inline bool has_item_guid() const;
   inline void clear_item_guid();
   static const int kItemGuidFieldNumber = 2;
-  inline ::google::protobuf::int64 item_guid() const;
-  inline void set_item_guid(::google::protobuf::int64 value);
+  inline const ::NFMsg::Ident& item_guid() const;
+  inline ::NFMsg::Ident* mutable_item_guid();
+  inline ::NFMsg::Ident* release_item_guid();
+  inline void set_allocated_item_guid(::NFMsg::Ident* item_guid);
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqPickDropItem)
  private:
@@ -1140,7 +2426,7 @@ class ReqPickDropItem : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 item_guid_;
+  ::NFMsg::Ident* item_guid_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -1328,14 +2614,14 @@ class ReqCompeleteTask : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class PlayerEntryInfo : public ::google::protobuf::Message {
+class ReqAckJoinActivity : public ::google::protobuf::Message {
  public:
-  PlayerEntryInfo();
-  virtual ~PlayerEntryInfo();
+  ReqAckJoinActivity();
+  virtual ~ReqAckJoinActivity();
 
-  PlayerEntryInfo(const PlayerEntryInfo& from);
+  ReqAckJoinActivity(const ReqAckJoinActivity& from);
 
-  inline PlayerEntryInfo& operator=(const PlayerEntryInfo& from) {
+  inline ReqAckJoinActivity& operator=(const ReqAckJoinActivity& from) {
     CopyFrom(from);
     return *this;
   }
@@ -1349,17 +2635,155 @@ class PlayerEntryInfo : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const PlayerEntryInfo& default_instance();
+  static const ReqAckJoinActivity& default_instance();
 
-  void Swap(PlayerEntryInfo* other);
+  void Swap(ReqAckJoinActivity* other);
 
   // implements Message ----------------------------------------------
 
-  PlayerEntryInfo* New() const;
+  ReqAckJoinActivity* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const PlayerEntryInfo& from);
-  void MergeFrom(const PlayerEntryInfo& from);
+  void CopyFrom(const ReqAckJoinActivity& from);
+  void MergeFrom(const ReqAckJoinActivity& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef ReqAckJoinActivity_EGameActivityType EGameActivityType;
+  static const EGameActivityType EGAT_PVP = ReqAckJoinActivity_EGameActivityType_EGAT_PVP;
+  static inline bool EGameActivityType_IsValid(int value) {
+    return ReqAckJoinActivity_EGameActivityType_IsValid(value);
+  }
+  static const EGameActivityType EGameActivityType_MIN =
+    ReqAckJoinActivity_EGameActivityType_EGameActivityType_MIN;
+  static const EGameActivityType EGameActivityType_MAX =
+    ReqAckJoinActivity_EGameActivityType_EGameActivityType_MAX;
+  static const int EGameActivityType_ARRAYSIZE =
+    ReqAckJoinActivity_EGameActivityType_EGameActivityType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  EGameActivityType_descriptor() {
+    return ReqAckJoinActivity_EGameActivityType_descriptor();
+  }
+  static inline const ::std::string& EGameActivityType_Name(EGameActivityType value) {
+    return ReqAckJoinActivity_EGameActivityType_Name(value);
+  }
+  static inline bool EGameActivityType_Parse(const ::std::string& name,
+      EGameActivityType* value) {
+    return ReqAckJoinActivity_EGameActivityType_Parse(name, value);
+  }
+
+  typedef ReqAckJoinActivity_EGameActivitySubType EGameActivitySubType;
+  static const EGameActivitySubType EGAT_NORMAL = ReqAckJoinActivity_EGameActivitySubType_EGAT_NORMAL;
+  static inline bool EGameActivitySubType_IsValid(int value) {
+    return ReqAckJoinActivity_EGameActivitySubType_IsValid(value);
+  }
+  static const EGameActivitySubType EGameActivitySubType_MIN =
+    ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_MIN;
+  static const EGameActivitySubType EGameActivitySubType_MAX =
+    ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_MAX;
+  static const int EGameActivitySubType_ARRAYSIZE =
+    ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  EGameActivitySubType_descriptor() {
+    return ReqAckJoinActivity_EGameActivitySubType_descriptor();
+  }
+  static inline const ::std::string& EGameActivitySubType_Name(EGameActivitySubType value) {
+    return ReqAckJoinActivity_EGameActivitySubType_Name(value);
+  }
+  static inline bool EGameActivitySubType_Parse(const ::std::string& name,
+      EGameActivitySubType* value) {
+    return ReqAckJoinActivity_EGameActivitySubType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.ReqAckJoinActivity.EGameActivityType activity_type = 1;
+  inline bool has_activity_type() const;
+  inline void clear_activity_type();
+  static const int kActivityTypeFieldNumber = 1;
+  inline ::NFMsg::ReqAckJoinActivity_EGameActivityType activity_type() const;
+  inline void set_activity_type(::NFMsg::ReqAckJoinActivity_EGameActivityType value);
+
+  // required .NFMsg.ReqAckJoinActivity.EGameActivitySubType sub_activity_type = 2;
+  inline bool has_sub_activity_type() const;
+  inline void clear_sub_activity_type();
+  static const int kSubActivityTypeFieldNumber = 2;
+  inline ::NFMsg::ReqAckJoinActivity_EGameActivitySubType sub_activity_type() const;
+  inline void set_sub_activity_type(::NFMsg::ReqAckJoinActivity_EGameActivitySubType value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckJoinActivity)
+ private:
+  inline void set_has_activity_type();
+  inline void clear_has_activity_type();
+  inline void set_has_sub_activity_type();
+  inline void clear_has_sub_activity_type();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  int activity_type_;
+  int sub_activity_type_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckJoinActivity* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckSearchOppnent : public ::google::protobuf::Message {
+ public:
+  ReqAckSearchOppnent();
+  virtual ~ReqAckSearchOppnent();
+
+  ReqAckSearchOppnent(const ReqAckSearchOppnent& from);
+
+  inline ReqAckSearchOppnent& operator=(const ReqAckSearchOppnent& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckSearchOppnent& default_instance();
+
+  void Swap(ReqAckSearchOppnent* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckSearchOppnent* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckSearchOppnent& from);
+  void MergeFrom(const ReqAckSearchOppnent& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -1382,111 +2806,1753 @@ class PlayerEntryInfo : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int64 object_guid = 1;
-  inline bool has_object_guid() const;
-  inline void clear_object_guid();
-  static const int kObjectGuidFieldNumber = 1;
-  inline ::google::protobuf::int64 object_guid() const;
-  inline void set_object_guid(::google::protobuf::int64 value);
+  // required .NFMsg.EBattleType search_type = 1;
+  inline bool has_search_type() const;
+  inline void clear_search_type();
+  static const int kSearchTypeFieldNumber = 1;
+  inline ::NFMsg::EBattleType search_type() const;
+  inline void set_search_type(::NFMsg::EBattleType value);
 
-  // required float x = 2;
-  inline bool has_x() const;
-  inline void clear_x();
-  static const int kXFieldNumber = 2;
-  inline float x() const;
-  inline void set_x(float value);
-
-  // required float y = 3;
-  inline bool has_y() const;
-  inline void clear_y();
-  static const int kYFieldNumber = 3;
-  inline float y() const;
-  inline void set_y(float value);
-
-  // required float z = 4;
-  inline bool has_z() const;
-  inline void clear_z();
-  static const int kZFieldNumber = 4;
-  inline float z() const;
-  inline void set_z(float value);
-
-  // required int32 career_type = 5;
-  inline bool has_career_type() const;
-  inline void clear_career_type();
-  static const int kCareerTypeFieldNumber = 5;
-  inline ::google::protobuf::int32 career_type() const;
-  inline void set_career_type(::google::protobuf::int32 value);
-
-  // required int32 player_state = 6;
-  inline bool has_player_state() const;
-  inline void clear_player_state();
-  static const int kPlayerStateFieldNumber = 6;
-  inline ::google::protobuf::int32 player_state() const;
-  inline void set_player_state(::google::protobuf::int32 value);
-
-  // required bytes config_id = 7;
-  inline bool has_config_id() const;
-  inline void clear_config_id();
-  static const int kConfigIdFieldNumber = 7;
-  inline const ::std::string& config_id() const;
-  inline void set_config_id(const ::std::string& value);
-  inline void set_config_id(const char* value);
-  inline void set_config_id(const void* value, size_t size);
-  inline ::std::string* mutable_config_id();
-  inline ::std::string* release_config_id();
-  inline void set_allocated_config_id(::std::string* config_id);
-
-  // required int32 scene_id = 8;
-  inline bool has_scene_id() const;
-  inline void clear_scene_id();
-  static const int kSceneIdFieldNumber = 8;
-  inline ::google::protobuf::int32 scene_id() const;
-  inline void set_scene_id(::google::protobuf::int32 value);
-
-  // required bytes class_id = 9;
-  inline bool has_class_id() const;
-  inline void clear_class_id();
-  static const int kClassIdFieldNumber = 9;
-  inline const ::std::string& class_id() const;
-  inline void set_class_id(const ::std::string& value);
-  inline void set_class_id(const char* value);
-  inline void set_class_id(const void* value, size_t size);
-  inline ::std::string* mutable_class_id();
-  inline ::std::string* release_class_id();
-  inline void set_allocated_class_id(::std::string* class_id);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.PlayerEntryInfo)
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckSearchOppnent)
  private:
-  inline void set_has_object_guid();
-  inline void clear_has_object_guid();
-  inline void set_has_x();
-  inline void clear_has_x();
-  inline void set_has_y();
-  inline void clear_has_y();
-  inline void set_has_z();
-  inline void clear_has_z();
-  inline void set_has_career_type();
-  inline void clear_has_career_type();
-  inline void set_has_player_state();
-  inline void clear_has_player_state();
-  inline void set_has_config_id();
-  inline void clear_has_config_id();
-  inline void set_has_scene_id();
-  inline void clear_has_scene_id();
-  inline void set_has_class_id();
-  inline void clear_has_class_id();
+  inline void set_has_search_type();
+  inline void clear_has_search_type();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int64 object_guid_;
-  float x_;
-  float y_;
-  float z_;
-  ::google::protobuf::int32 career_type_;
-  ::std::string* config_id_;
-  ::google::protobuf::int32 player_state_;
-  ::google::protobuf::int32 scene_id_;
-  ::std::string* class_id_;
+  int search_type_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckSearchOppnent* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckBattleOppnent : public ::google::protobuf::Message {
+ public:
+  ReqAckBattleOppnent();
+  virtual ~ReqAckBattleOppnent();
+
+  ReqAckBattleOppnent(const ReqAckBattleOppnent& from);
+
+  inline ReqAckBattleOppnent& operator=(const ReqAckBattleOppnent& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckBattleOppnent& default_instance();
+
+  void Swap(ReqAckBattleOppnent* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckBattleOppnent* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckBattleOppnent& from);
+  void MergeFrom(const ReqAckBattleOppnent& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.EBattleType battle_type = 1;
+  inline bool has_battle_type() const;
+  inline void clear_battle_type();
+  static const int kBattleTypeFieldNumber = 1;
+  inline ::NFMsg::EBattleType battle_type() const;
+  inline void set_battle_type(::NFMsg::EBattleType value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckBattleOppnent)
+ private:
+  inline void set_has_battle_type();
+  inline void clear_has_battle_type();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  int battle_type_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckBattleOppnent* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckCreateGuild : public ::google::protobuf::Message {
+ public:
+  ReqAckCreateGuild();
+  virtual ~ReqAckCreateGuild();
+
+  ReqAckCreateGuild(const ReqAckCreateGuild& from);
+
+  inline ReqAckCreateGuild& operator=(const ReqAckCreateGuild& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckCreateGuild& default_instance();
+
+  void Swap(ReqAckCreateGuild* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckCreateGuild* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckCreateGuild& from);
+  void MergeFrom(const ReqAckCreateGuild& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident guild_id = 1;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // required string guild_name = 2;
+  inline bool has_guild_name() const;
+  inline void clear_guild_name();
+  static const int kGuildNameFieldNumber = 2;
+  inline const ::std::string& guild_name() const;
+  inline void set_guild_name(const ::std::string& value);
+  inline void set_guild_name(const char* value);
+  inline void set_guild_name(const char* value, size_t size);
+  inline ::std::string* mutable_guild_name();
+  inline ::std::string* release_guild_name();
+  inline void set_allocated_guild_name(::std::string* guild_name);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckCreateGuild)
+ private:
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
+  inline void set_has_guild_name();
+  inline void clear_has_guild_name();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_id_;
+  ::std::string* guild_name_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckCreateGuild* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqSearchGuild : public ::google::protobuf::Message {
+ public:
+  ReqSearchGuild();
+  virtual ~ReqSearchGuild();
+
+  ReqSearchGuild(const ReqSearchGuild& from);
+
+  inline ReqSearchGuild& operator=(const ReqSearchGuild& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqSearchGuild& default_instance();
+
+  void Swap(ReqSearchGuild* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqSearchGuild* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqSearchGuild& from);
+  void MergeFrom(const ReqSearchGuild& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string guild_name = 1;
+  inline bool has_guild_name() const;
+  inline void clear_guild_name();
+  static const int kGuildNameFieldNumber = 1;
+  inline const ::std::string& guild_name() const;
+  inline void set_guild_name(const ::std::string& value);
+  inline void set_guild_name(const char* value);
+  inline void set_guild_name(const char* value, size_t size);
+  inline ::std::string* mutable_guild_name();
+  inline ::std::string* release_guild_name();
+  inline void set_allocated_guild_name(::std::string* guild_name);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqSearchGuild)
+ private:
+  inline void set_has_guild_name();
+  inline void clear_has_guild_name();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* guild_name_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqSearchGuild* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AckSearchGuild_SearchGuildObject : public ::google::protobuf::Message {
+ public:
+  AckSearchGuild_SearchGuildObject();
+  virtual ~AckSearchGuild_SearchGuildObject();
+
+  AckSearchGuild_SearchGuildObject(const AckSearchGuild_SearchGuildObject& from);
+
+  inline AckSearchGuild_SearchGuildObject& operator=(const AckSearchGuild_SearchGuildObject& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckSearchGuild_SearchGuildObject& default_instance();
+
+  void Swap(AckSearchGuild_SearchGuildObject* other);
+
+  // implements Message ----------------------------------------------
+
+  AckSearchGuild_SearchGuildObject* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckSearchGuild_SearchGuildObject& from);
+  void MergeFrom(const AckSearchGuild_SearchGuildObject& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident guild_ID = 1;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIDFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // required string guild_name = 2;
+  inline bool has_guild_name() const;
+  inline void clear_guild_name();
+  static const int kGuildNameFieldNumber = 2;
+  inline const ::std::string& guild_name() const;
+  inline void set_guild_name(const ::std::string& value);
+  inline void set_guild_name(const char* value);
+  inline void set_guild_name(const char* value, size_t size);
+  inline ::std::string* mutable_guild_name();
+  inline ::std::string* release_guild_name();
+  inline void set_allocated_guild_name(::std::string* guild_name);
+
+  // required string guild_icon = 3;
+  inline bool has_guild_icon() const;
+  inline void clear_guild_icon();
+  static const int kGuildIconFieldNumber = 3;
+  inline const ::std::string& guild_icon() const;
+  inline void set_guild_icon(const ::std::string& value);
+  inline void set_guild_icon(const char* value);
+  inline void set_guild_icon(const char* value, size_t size);
+  inline ::std::string* mutable_guild_icon();
+  inline ::std::string* release_guild_icon();
+  inline void set_allocated_guild_icon(::std::string* guild_icon);
+
+  // required int32 guild_member_count = 4;
+  inline bool has_guild_member_count() const;
+  inline void clear_guild_member_count();
+  static const int kGuildMemberCountFieldNumber = 4;
+  inline ::google::protobuf::int32 guild_member_count() const;
+  inline void set_guild_member_count(::google::protobuf::int32 value);
+
+  // required int32 guild_member_max_count = 5;
+  inline bool has_guild_member_max_count() const;
+  inline void clear_guild_member_max_count();
+  static const int kGuildMemberMaxCountFieldNumber = 5;
+  inline ::google::protobuf::int32 guild_member_max_count() const;
+  inline void set_guild_member_max_count(::google::protobuf::int32 value);
+
+  // required int32 guild_honor = 6;
+  inline bool has_guild_honor() const;
+  inline void clear_guild_honor();
+  static const int kGuildHonorFieldNumber = 6;
+  inline ::google::protobuf::int32 guild_honor() const;
+  inline void set_guild_honor(::google::protobuf::int32 value);
+
+  // required int32 guild_rank = 7;
+  inline bool has_guild_rank() const;
+  inline void clear_guild_rank();
+  static const int kGuildRankFieldNumber = 7;
+  inline ::google::protobuf::int32 guild_rank() const;
+  inline void set_guild_rank(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckSearchGuild.SearchGuildObject)
+ private:
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
+  inline void set_has_guild_name();
+  inline void clear_has_guild_name();
+  inline void set_has_guild_icon();
+  inline void clear_has_guild_icon();
+  inline void set_has_guild_member_count();
+  inline void clear_has_guild_member_count();
+  inline void set_has_guild_member_max_count();
+  inline void clear_has_guild_member_max_count();
+  inline void set_has_guild_honor();
+  inline void clear_has_guild_honor();
+  inline void set_has_guild_rank();
+  inline void clear_has_guild_rank();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_id_;
+  ::std::string* guild_name_;
+  ::std::string* guild_icon_;
+  ::google::protobuf::int32 guild_member_count_;
+  ::google::protobuf::int32 guild_member_max_count_;
+  ::google::protobuf::int32 guild_honor_;
+  ::google::protobuf::int32 guild_rank_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckSearchGuild_SearchGuildObject* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AckSearchGuild : public ::google::protobuf::Message {
+ public:
+  AckSearchGuild();
+  virtual ~AckSearchGuild();
+
+  AckSearchGuild(const AckSearchGuild& from);
+
+  inline AckSearchGuild& operator=(const AckSearchGuild& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckSearchGuild& default_instance();
+
+  void Swap(AckSearchGuild* other);
+
+  // implements Message ----------------------------------------------
+
+  AckSearchGuild* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckSearchGuild& from);
+  void MergeFrom(const AckSearchGuild& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef AckSearchGuild_SearchGuildObject SearchGuildObject;
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFMsg.AckSearchGuild.SearchGuildObject guild_list = 1;
+  inline int guild_list_size() const;
+  inline void clear_guild_list();
+  static const int kGuildListFieldNumber = 1;
+  inline const ::NFMsg::AckSearchGuild_SearchGuildObject& guild_list(int index) const;
+  inline ::NFMsg::AckSearchGuild_SearchGuildObject* mutable_guild_list(int index);
+  inline ::NFMsg::AckSearchGuild_SearchGuildObject* add_guild_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::AckSearchGuild_SearchGuildObject >&
+      guild_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::AckSearchGuild_SearchGuildObject >*
+      mutable_guild_list();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckSearchGuild)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::AckSearchGuild_SearchGuildObject > guild_list_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckSearchGuild* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckJoinGuild : public ::google::protobuf::Message {
+ public:
+  ReqAckJoinGuild();
+  virtual ~ReqAckJoinGuild();
+
+  ReqAckJoinGuild(const ReqAckJoinGuild& from);
+
+  inline ReqAckJoinGuild& operator=(const ReqAckJoinGuild& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckJoinGuild& default_instance();
+
+  void Swap(ReqAckJoinGuild* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckJoinGuild* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckJoinGuild& from);
+  void MergeFrom(const ReqAckJoinGuild& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident guild_id = 1;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // required string guild_name = 2;
+  inline bool has_guild_name() const;
+  inline void clear_guild_name();
+  static const int kGuildNameFieldNumber = 2;
+  inline const ::std::string& guild_name() const;
+  inline void set_guild_name(const ::std::string& value);
+  inline void set_guild_name(const char* value);
+  inline void set_guild_name(const char* value, size_t size);
+  inline ::std::string* mutable_guild_name();
+  inline ::std::string* release_guild_name();
+  inline void set_allocated_guild_name(::std::string* guild_name);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckJoinGuild)
+ private:
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
+  inline void set_has_guild_name();
+  inline void clear_has_guild_name();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_id_;
+  ::std::string* guild_name_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckJoinGuild* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckLeaveGuild : public ::google::protobuf::Message {
+ public:
+  ReqAckLeaveGuild();
+  virtual ~ReqAckLeaveGuild();
+
+  ReqAckLeaveGuild(const ReqAckLeaveGuild& from);
+
+  inline ReqAckLeaveGuild& operator=(const ReqAckLeaveGuild& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckLeaveGuild& default_instance();
+
+  void Swap(ReqAckLeaveGuild* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckLeaveGuild* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckLeaveGuild& from);
+  void MergeFrom(const ReqAckLeaveGuild& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident guild_id = 1;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // required string guild_name = 2;
+  inline bool has_guild_name() const;
+  inline void clear_guild_name();
+  static const int kGuildNameFieldNumber = 2;
+  inline const ::std::string& guild_name() const;
+  inline void set_guild_name(const ::std::string& value);
+  inline void set_guild_name(const char* value);
+  inline void set_guild_name(const char* value, size_t size);
+  inline ::std::string* mutable_guild_name();
+  inline ::std::string* release_guild_name();
+  inline void set_allocated_guild_name(::std::string* guild_name);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckLeaveGuild)
+ private:
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
+  inline void set_has_guild_name();
+  inline void clear_has_guild_name();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_id_;
+  ::std::string* guild_name_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckLeaveGuild* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckOprGuildMember : public ::google::protobuf::Message {
+ public:
+  ReqAckOprGuildMember();
+  virtual ~ReqAckOprGuildMember();
+
+  ReqAckOprGuildMember(const ReqAckOprGuildMember& from);
+
+  inline ReqAckOprGuildMember& operator=(const ReqAckOprGuildMember& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckOprGuildMember& default_instance();
+
+  void Swap(ReqAckOprGuildMember* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckOprGuildMember* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckOprGuildMember& from);
+  void MergeFrom(const ReqAckOprGuildMember& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef ReqAckOprGuildMember_EGGuildMemberOprType EGGuildMemberOprType;
+  static const EGGuildMemberOprType EGAT_DOWN = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DOWN;
+  static const EGGuildMemberOprType EGAT_UP = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_UP;
+  static const EGGuildMemberOprType EGAT_KICK = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICK;
+  static const EGGuildMemberOprType EGAT_APPOINT = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_APPOINT;
+  static const EGGuildMemberOprType EGAT_FIRE = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_FIRE;
+  static const EGGuildMemberOprType EGAT_DEMISE = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DEMISE;
+  static const EGGuildMemberOprType EGAT_ACCEPTAPPLY = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_ACCEPTAPPLY;
+  static const EGGuildMemberOprType EGAT_DENYAPPLY = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DENYAPPLY;
+  static const EGGuildMemberOprType EGAT_KICKOUT = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICKOUT;
+  static inline bool EGGuildMemberOprType_IsValid(int value) {
+    return ReqAckOprGuildMember_EGGuildMemberOprType_IsValid(value);
+  }
+  static const EGGuildMemberOprType EGGuildMemberOprType_MIN =
+    ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_MIN;
+  static const EGGuildMemberOprType EGGuildMemberOprType_MAX =
+    ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_MAX;
+  static const int EGGuildMemberOprType_ARRAYSIZE =
+    ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  EGGuildMemberOprType_descriptor() {
+    return ReqAckOprGuildMember_EGGuildMemberOprType_descriptor();
+  }
+  static inline const ::std::string& EGGuildMemberOprType_Name(EGGuildMemberOprType value) {
+    return ReqAckOprGuildMember_EGGuildMemberOprType_Name(value);
+  }
+  static inline bool EGGuildMemberOprType_Parse(const ::std::string& name,
+      EGGuildMemberOprType* value) {
+    return ReqAckOprGuildMember_EGGuildMemberOprType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident guild_id = 1;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // required .NFMsg.Ident member_id = 2;
+  inline bool has_member_id() const;
+  inline void clear_member_id();
+  static const int kMemberIdFieldNumber = 2;
+  inline const ::NFMsg::Ident& member_id() const;
+  inline ::NFMsg::Ident* mutable_member_id();
+  inline ::NFMsg::Ident* release_member_id();
+  inline void set_allocated_member_id(::NFMsg::Ident* member_id);
+
+  // required .NFMsg.ReqAckOprGuildMember.EGGuildMemberOprType type = 3;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 3;
+  inline ::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType type() const;
+  inline void set_type(::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckOprGuildMember)
+ private:
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
+  inline void set_has_member_id();
+  inline void clear_has_member_id();
+  inline void set_has_type();
+  inline void clear_has_type();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_id_;
+  ::NFMsg::Ident* member_id_;
+  int type_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckOprGuildMember* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckOprGuild : public ::google::protobuf::Message {
+ public:
+  ReqAckOprGuild();
+  virtual ~ReqAckOprGuild();
+
+  ReqAckOprGuild(const ReqAckOprGuild& from);
+
+  inline ReqAckOprGuild& operator=(const ReqAckOprGuild& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckOprGuild& default_instance();
+
+  void Swap(ReqAckOprGuild* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckOprGuild* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckOprGuild& from);
+  void MergeFrom(const ReqAckOprGuild& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef ReqAckOprGuild_EGGuildOprType EGGuildOprType;
+  static const EGGuildOprType EGAT_APPLYDISMISS = ReqAckOprGuild_EGGuildOprType_EGAT_APPLYDISMISS;
+  static const EGGuildOprType EGAT_STOPDISMISS = ReqAckOprGuild_EGGuildOprType_EGAT_STOPDISMISS;
+  static const EGGuildOprType EGAT_SETRECRUIT = ReqAckOprGuild_EGGuildOprType_EGAT_SETRECRUIT;
+  static const EGGuildOprType EGAT_PUBLISHRECRUIT = ReqAckOprGuild_EGGuildOprType_EGAT_PUBLISHRECRUIT;
+  static const EGGuildOprType EGAT_EDITAD = ReqAckOprGuild_EGGuildOprType_EGAT_EDITAD;
+  static const EGGuildOprType EGAT_LEVELUP = ReqAckOprGuild_EGGuildOprType_EGAT_LEVELUP;
+  static inline bool EGGuildOprType_IsValid(int value) {
+    return ReqAckOprGuild_EGGuildOprType_IsValid(value);
+  }
+  static const EGGuildOprType EGGuildOprType_MIN =
+    ReqAckOprGuild_EGGuildOprType_EGGuildOprType_MIN;
+  static const EGGuildOprType EGGuildOprType_MAX =
+    ReqAckOprGuild_EGGuildOprType_EGGuildOprType_MAX;
+  static const int EGGuildOprType_ARRAYSIZE =
+    ReqAckOprGuild_EGGuildOprType_EGGuildOprType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  EGGuildOprType_descriptor() {
+    return ReqAckOprGuild_EGGuildOprType_descriptor();
+  }
+  static inline const ::std::string& EGGuildOprType_Name(EGGuildOprType value) {
+    return ReqAckOprGuild_EGGuildOprType_Name(value);
+  }
+  static inline bool EGGuildOprType_Parse(const ::std::string& name,
+      EGGuildOprType* value) {
+    return ReqAckOprGuild_EGGuildOprType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident guild_id = 1;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // required .NFMsg.Ident player_id = 2;
+  inline bool has_player_id() const;
+  inline void clear_player_id();
+  static const int kPlayerIdFieldNumber = 2;
+  inline const ::NFMsg::Ident& player_id() const;
+  inline ::NFMsg::Ident* mutable_player_id();
+  inline ::NFMsg::Ident* release_player_id();
+  inline void set_allocated_player_id(::NFMsg::Ident* player_id);
+
+  // required .NFMsg.ReqAckOprGuild.EGGuildOprType type = 3;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 3;
+  inline ::NFMsg::ReqAckOprGuild_EGGuildOprType type() const;
+  inline void set_type(::NFMsg::ReqAckOprGuild_EGGuildOprType value);
+
+  // required string Recruit_data = 4;
+  inline bool has_recruit_data() const;
+  inline void clear_recruit_data();
+  static const int kRecruitDataFieldNumber = 4;
+  inline const ::std::string& recruit_data() const;
+  inline void set_recruit_data(const ::std::string& value);
+  inline void set_recruit_data(const char* value);
+  inline void set_recruit_data(const char* value, size_t size);
+  inline ::std::string* mutable_recruit_data();
+  inline ::std::string* release_recruit_data();
+  inline void set_allocated_recruit_data(::std::string* recruit_data);
+
+  // required string Ad_data = 5;
+  inline bool has_ad_data() const;
+  inline void clear_ad_data();
+  static const int kAdDataFieldNumber = 5;
+  inline const ::std::string& ad_data() const;
+  inline void set_ad_data(const ::std::string& value);
+  inline void set_ad_data(const char* value);
+  inline void set_ad_data(const char* value, size_t size);
+  inline ::std::string* mutable_ad_data();
+  inline ::std::string* release_ad_data();
+  inline void set_allocated_ad_data(::std::string* ad_data);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckOprGuild)
+ private:
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
+  inline void set_has_player_id();
+  inline void clear_has_player_id();
+  inline void set_has_type();
+  inline void clear_has_type();
+  inline void set_has_recruit_data();
+  inline void clear_has_recruit_data();
+  inline void set_has_ad_data();
+  inline void clear_has_ad_data();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_id_;
+  ::NFMsg::Ident* player_id_;
+  ::std::string* recruit_data_;
+  ::std::string* ad_data_;
+  int type_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckOprGuild* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckDonateGuildItem : public ::google::protobuf::Message {
+ public:
+  ReqAckDonateGuildItem();
+  virtual ~ReqAckDonateGuildItem();
+
+  ReqAckDonateGuildItem(const ReqAckDonateGuildItem& from);
+
+  inline ReqAckDonateGuildItem& operator=(const ReqAckDonateGuildItem& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckDonateGuildItem& default_instance();
+
+  void Swap(ReqAckDonateGuildItem* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckDonateGuildItem* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckDonateGuildItem& from);
+  void MergeFrom(const ReqAckDonateGuildItem& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident guild_id = 1;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // required .NFMsg.Ident target_id = 2;
+  inline bool has_target_id() const;
+  inline void clear_target_id();
+  static const int kTargetIdFieldNumber = 2;
+  inline const ::NFMsg::Ident& target_id() const;
+  inline ::NFMsg::Ident* mutable_target_id();
+  inline ::NFMsg::Ident* release_target_id();
+  inline void set_allocated_target_id(::NFMsg::Ident* target_id);
+
+  // repeated .NFMsg.ItemStruct item_list = 3;
+  inline int item_list_size() const;
+  inline void clear_item_list();
+  static const int kItemListFieldNumber = 3;
+  inline const ::NFMsg::ItemStruct& item_list(int index) const;
+  inline ::NFMsg::ItemStruct* mutable_item_list(int index);
+  inline ::NFMsg::ItemStruct* add_item_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >&
+      item_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >*
+      mutable_item_list();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckDonateGuildItem)
+ private:
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
+  inline void set_has_target_id();
+  inline void clear_has_target_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_id_;
+  ::NFMsg::Ident* target_id_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct > item_list_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckDonateGuildItem* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqGuildEctypeInfo : public ::google::protobuf::Message {
+ public:
+  ReqGuildEctypeInfo();
+  virtual ~ReqGuildEctypeInfo();
+
+  ReqGuildEctypeInfo(const ReqGuildEctypeInfo& from);
+
+  inline ReqGuildEctypeInfo& operator=(const ReqGuildEctypeInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqGuildEctypeInfo& default_instance();
+
+  void Swap(ReqGuildEctypeInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqGuildEctypeInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqGuildEctypeInfo& from);
+  void MergeFrom(const ReqGuildEctypeInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident guild_id = 2;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIdFieldNumber = 2;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqGuildEctypeInfo)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* guild_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqGuildEctypeInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GuildEctypeInfo : public ::google::protobuf::Message {
+ public:
+  GuildEctypeInfo();
+  virtual ~GuildEctypeInfo();
+
+  GuildEctypeInfo(const GuildEctypeInfo& from);
+
+  inline GuildEctypeInfo& operator=(const GuildEctypeInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GuildEctypeInfo& default_instance();
+
+  void Swap(GuildEctypeInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  GuildEctypeInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GuildEctypeInfo& from);
+  void MergeFrom(const GuildEctypeInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident guild_id = 1;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
+  // required int64 server_id = 2;
+  inline bool has_server_id() const;
+  inline void clear_server_id();
+  static const int kServerIdFieldNumber = 2;
+  inline ::google::protobuf::int64 server_id() const;
+  inline void set_server_id(::google::protobuf::int64 value);
+
+  // required int64 Ectype_id = 3;
+  inline bool has_ectype_id() const;
+  inline void clear_ectype_id();
+  static const int kEctypeIdFieldNumber = 3;
+  inline ::google::protobuf::int64 ectype_id() const;
+  inline void set_ectype_id(::google::protobuf::int64 value);
+
+  // required int64 Ectype_Group = 4;
+  inline bool has_ectype_group() const;
+  inline void clear_ectype_group();
+  static const int kEctypeGroupFieldNumber = 4;
+  inline ::google::protobuf::int64 ectype_group() const;
+  inline void set_ectype_group(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.GuildEctypeInfo)
+ private:
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
+  inline void set_has_server_id();
+  inline void clear_has_server_id();
+  inline void set_has_ectype_id();
+  inline void clear_has_ectype_id();
+  inline void set_has_ectype_group();
+  inline void clear_has_ectype_group();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* guild_id_;
+  ::google::protobuf::int64 server_id_;
+  ::google::protobuf::int64 ectype_id_;
+  ::google::protobuf::int64 ectype_group_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static GuildEctypeInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AckGuildEctypeInfo : public ::google::protobuf::Message {
+ public:
+  AckGuildEctypeInfo();
+  virtual ~AckGuildEctypeInfo();
+
+  AckGuildEctypeInfo(const AckGuildEctypeInfo& from);
+
+  inline AckGuildEctypeInfo& operator=(const AckGuildEctypeInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckGuildEctypeInfo& default_instance();
+
+  void Swap(AckGuildEctypeInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  AckGuildEctypeInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckGuildEctypeInfo& from);
+  void MergeFrom(const AckGuildEctypeInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.GuildEctypeInfo xectypeinfo = 2;
+  inline bool has_xectypeinfo() const;
+  inline void clear_xectypeinfo();
+  static const int kXectypeinfoFieldNumber = 2;
+  inline const ::NFMsg::GuildEctypeInfo& xectypeinfo() const;
+  inline ::NFMsg::GuildEctypeInfo* mutable_xectypeinfo();
+  inline ::NFMsg::GuildEctypeInfo* release_xectypeinfo();
+  inline void set_allocated_xectypeinfo(::NFMsg::GuildEctypeInfo* xectypeinfo);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckGuildEctypeInfo)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_xectypeinfo();
+  inline void clear_has_xectypeinfo();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::GuildEctypeInfo* xectypeinfo_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckGuildEctypeInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class SetGuildEctypeInfo : public ::google::protobuf::Message {
+ public:
+  SetGuildEctypeInfo();
+  virtual ~SetGuildEctypeInfo();
+
+  SetGuildEctypeInfo(const SetGuildEctypeInfo& from);
+
+  inline SetGuildEctypeInfo& operator=(const SetGuildEctypeInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SetGuildEctypeInfo& default_instance();
+
+  void Swap(SetGuildEctypeInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  SetGuildEctypeInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SetGuildEctypeInfo& from);
+  void MergeFrom(const SetGuildEctypeInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.GuildEctypeInfo xectypeinfo = 2;
+  inline bool has_xectypeinfo() const;
+  inline void clear_xectypeinfo();
+  static const int kXectypeinfoFieldNumber = 2;
+  inline const ::NFMsg::GuildEctypeInfo& xectypeinfo() const;
+  inline ::NFMsg::GuildEctypeInfo* mutable_xectypeinfo();
+  inline ::NFMsg::GuildEctypeInfo* release_xectypeinfo();
+  inline void set_allocated_xectypeinfo(::NFMsg::GuildEctypeInfo* xectypeinfo);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.SetGuildEctypeInfo)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_xectypeinfo();
+  inline void clear_has_xectypeinfo();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::GuildEctypeInfo* xectypeinfo_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static SetGuildEctypeInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ChatInfo : public ::google::protobuf::Message {
+ public:
+  ChatInfo();
+  virtual ~ChatInfo();
+
+  ChatInfo(const ChatInfo& from);
+
+  inline ChatInfo& operator=(const ChatInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ChatInfo& default_instance();
+
+  void Swap(ChatInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  ChatInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ChatInfo& from);
+  void MergeFrom(const ChatInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef ChatInfo_EChatType EChatType;
+  static const EChatType ECHATTYPE_NORMAL = ChatInfo_EChatType_ECHATTYPE_NORMAL;
+  static const EChatType ECHATTYPE_PRIVATE = ChatInfo_EChatType_ECHATTYPE_PRIVATE;
+  static const EChatType ECHATTYPE_GUILD = ChatInfo_EChatType_ECHATTYPE_GUILD;
+  static const EChatType ECHATTYPE_WORLD = ChatInfo_EChatType_ECHATTYPE_WORLD;
+  static inline bool EChatType_IsValid(int value) {
+    return ChatInfo_EChatType_IsValid(value);
+  }
+  static const EChatType EChatType_MIN =
+    ChatInfo_EChatType_EChatType_MIN;
+  static const EChatType EChatType_MAX =
+    ChatInfo_EChatType_EChatType_MAX;
+  static const int EChatType_ARRAYSIZE =
+    ChatInfo_EChatType_EChatType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  EChatType_descriptor() {
+    return ChatInfo_EChatType_descriptor();
+  }
+  static inline const ::std::string& EChatType_Name(EChatType value) {
+    return ChatInfo_EChatType_Name(value);
+  }
+  static inline bool EChatType_Parse(const ::std::string& name,
+      EChatType* value) {
+    return ChatInfo_EChatType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.ChatInfo.EChatType chat_type = 1;
+  inline bool has_chat_type() const;
+  inline void clear_chat_type();
+  static const int kChatTypeFieldNumber = 1;
+  inline ::NFMsg::ChatInfo_EChatType chat_type() const;
+  inline void set_chat_type(::NFMsg::ChatInfo_EChatType value);
+
+  // required bytes chat_info = 2;
+  inline bool has_chat_info() const;
+  inline void clear_chat_info();
+  static const int kChatInfoFieldNumber = 2;
+  inline const ::std::string& chat_info() const;
+  inline void set_chat_info(const ::std::string& value);
+  inline void set_chat_info(const char* value);
+  inline void set_chat_info(const void* value, size_t size);
+  inline ::std::string* mutable_chat_info();
+  inline ::std::string* release_chat_info();
+  inline void set_allocated_chat_info(::std::string* chat_info);
+
+  // required int64 chat_time = 3;
+  inline bool has_chat_time() const;
+  inline void clear_chat_time();
+  static const int kChatTimeFieldNumber = 3;
+  inline ::google::protobuf::int64 chat_time() const;
+  inline void set_chat_time(::google::protobuf::int64 value);
+
+  // optional bytes addtional_info = 4;
+  inline bool has_addtional_info() const;
+  inline void clear_addtional_info();
+  static const int kAddtionalInfoFieldNumber = 4;
+  inline const ::std::string& addtional_info() const;
+  inline void set_addtional_info(const ::std::string& value);
+  inline void set_addtional_info(const char* value);
+  inline void set_addtional_info(const void* value, size_t size);
+  inline ::std::string* mutable_addtional_info();
+  inline ::std::string* release_addtional_info();
+  inline void set_allocated_addtional_info(::std::string* addtional_info);
+
+  // required .NFMsg.Ident send_id = 5;
+  inline bool has_send_id() const;
+  inline void clear_send_id();
+  static const int kSendIdFieldNumber = 5;
+  inline const ::NFMsg::Ident& send_id() const;
+  inline ::NFMsg::Ident* mutable_send_id();
+  inline ::NFMsg::Ident* release_send_id();
+  inline void set_allocated_send_id(::NFMsg::Ident* send_id);
+
+  // required bytes send_name = 6;
+  inline bool has_send_name() const;
+  inline void clear_send_name();
+  static const int kSendNameFieldNumber = 6;
+  inline const ::std::string& send_name() const;
+  inline void set_send_name(const ::std::string& value);
+  inline void set_send_name(const char* value);
+  inline void set_send_name(const void* value, size_t size);
+  inline ::std::string* mutable_send_name();
+  inline ::std::string* release_send_name();
+  inline void set_allocated_send_name(::std::string* send_name);
+
+  // optional int32 send_level = 7;
+  inline bool has_send_level() const;
+  inline void clear_send_level();
+  static const int kSendLevelFieldNumber = 7;
+  inline ::google::protobuf::int32 send_level() const;
+  inline void set_send_level(::google::protobuf::int32 value);
+
+  // repeated .NFMsg.Ident recvier_id = 8;
+  inline int recvier_id_size() const;
+  inline void clear_recvier_id();
+  static const int kRecvierIdFieldNumber = 8;
+  inline const ::NFMsg::Ident& recvier_id(int index) const;
+  inline ::NFMsg::Ident* mutable_recvier_id(int index);
+  inline ::NFMsg::Ident* add_recvier_id();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+      recvier_id() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+      mutable_recvier_id();
+
+  // optional bytes guid_name = 9;
+  inline bool has_guid_name() const;
+  inline void clear_guid_name();
+  static const int kGuidNameFieldNumber = 9;
+  inline const ::std::string& guid_name() const;
+  inline void set_guid_name(const ::std::string& value);
+  inline void set_guid_name(const char* value);
+  inline void set_guid_name(const void* value, size_t size);
+  inline ::std::string* mutable_guid_name();
+  inline ::std::string* release_guid_name();
+  inline void set_allocated_guid_name(::std::string* guid_name);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ChatInfo)
+ private:
+  inline void set_has_chat_type();
+  inline void clear_has_chat_type();
+  inline void set_has_chat_info();
+  inline void clear_has_chat_info();
+  inline void set_has_chat_time();
+  inline void clear_has_chat_time();
+  inline void set_has_addtional_info();
+  inline void clear_has_addtional_info();
+  inline void set_has_send_id();
+  inline void clear_has_send_id();
+  inline void set_has_send_name();
+  inline void clear_has_send_name();
+  inline void set_has_send_level();
+  inline void clear_has_send_level();
+  inline void set_has_guid_name();
+  inline void clear_has_guid_name();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* chat_info_;
+  ::google::protobuf::int64 chat_time_;
+  ::std::string* addtional_info_;
+  int chat_type_;
+  ::google::protobuf::int32 send_level_;
+  ::NFMsg::Ident* send_id_;
+  ::std::string* send_name_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > recvier_id_;
+  ::std::string* guid_name_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
@@ -1496,18 +4562,18 @@ class PlayerEntryInfo : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
   void InitAsDefaultInstance();
-  static PlayerEntryInfo* default_instance_;
+  static ChatInfo* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class AckPlayerEntryList : public ::google::protobuf::Message {
+class ReqAckCreateChatGroup : public ::google::protobuf::Message {
  public:
-  AckPlayerEntryList();
-  virtual ~AckPlayerEntryList();
+  ReqAckCreateChatGroup();
+  virtual ~ReqAckCreateChatGroup();
 
-  AckPlayerEntryList(const AckPlayerEntryList& from);
+  ReqAckCreateChatGroup(const ReqAckCreateChatGroup& from);
 
-  inline AckPlayerEntryList& operator=(const AckPlayerEntryList& from) {
+  inline ReqAckCreateChatGroup& operator=(const ReqAckCreateChatGroup& from) {
     CopyFrom(from);
     return *this;
   }
@@ -1521,17 +4587,17 @@ class AckPlayerEntryList : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const AckPlayerEntryList& default_instance();
+  static const ReqAckCreateChatGroup& default_instance();
 
-  void Swap(AckPlayerEntryList* other);
+  void Swap(ReqAckCreateChatGroup* other);
 
   // implements Message ----------------------------------------------
 
-  AckPlayerEntryList* New() const;
+  ReqAckCreateChatGroup* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const AckPlayerEntryList& from);
-  void MergeFrom(const AckPlayerEntryList& from);
+  void CopyFrom(const ReqAckCreateChatGroup& from);
+  void MergeFrom(const ReqAckCreateChatGroup& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -1554,45 +4620,81 @@ class AckPlayerEntryList : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // repeated .NFMsg.PlayerEntryInfo object_list = 1;
-  inline int object_list_size() const;
-  inline void clear_object_list();
-  static const int kObjectListFieldNumber = 1;
-  inline const ::NFMsg::PlayerEntryInfo& object_list(int index) const;
-  inline ::NFMsg::PlayerEntryInfo* mutable_object_list(int index);
-  inline ::NFMsg::PlayerEntryInfo* add_object_list();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PlayerEntryInfo >&
-      object_list() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PlayerEntryInfo >*
-      mutable_object_list();
+  // required bytes name = 1;
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 1;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const void* value, size_t size);
+  inline ::std::string* mutable_name();
+  inline ::std::string* release_name();
+  inline void set_allocated_name(::std::string* name);
 
-  // @@protoc_insertion_point(class_scope:NFMsg.AckPlayerEntryList)
+  // required .NFMsg.Ident selfid = 2;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 2;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // optional .NFMsg.Ident xChatGroupid = 3;
+  inline bool has_xchatgroupid() const;
+  inline void clear_xchatgroupid();
+  static const int kXChatGroupidFieldNumber = 3;
+  inline const ::NFMsg::Ident& xchatgroupid() const;
+  inline ::NFMsg::Ident* mutable_xchatgroupid();
+  inline ::NFMsg::Ident* release_xchatgroupid();
+  inline void set_allocated_xchatgroupid(::NFMsg::Ident* xchatgroupid);
+
+  // optional int32 chatType = 4;
+  inline bool has_chattype() const;
+  inline void clear_chattype();
+  static const int kChatTypeFieldNumber = 4;
+  inline ::google::protobuf::int32 chattype() const;
+  inline void set_chattype(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckCreateChatGroup)
  private:
+  inline void set_has_name();
+  inline void clear_has_name();
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_xchatgroupid();
+  inline void clear_has_xchatgroupid();
+  inline void set_has_chattype();
+  inline void clear_has_chattype();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::PlayerEntryInfo > object_list_;
+  ::std::string* name_;
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* xchatgroupid_;
+  ::google::protobuf::int32 chattype_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
   void InitAsDefaultInstance();
-  static AckPlayerEntryList* default_instance_;
+  static ReqAckCreateChatGroup* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class AckPlayerLeaveList : public ::google::protobuf::Message {
+class ReqAckjoinChatGroup : public ::google::protobuf::Message {
  public:
-  AckPlayerLeaveList();
-  virtual ~AckPlayerLeaveList();
+  ReqAckjoinChatGroup();
+  virtual ~ReqAckjoinChatGroup();
 
-  AckPlayerLeaveList(const AckPlayerLeaveList& from);
+  ReqAckjoinChatGroup(const ReqAckjoinChatGroup& from);
 
-  inline AckPlayerLeaveList& operator=(const AckPlayerLeaveList& from) {
+  inline ReqAckjoinChatGroup& operator=(const ReqAckjoinChatGroup& from) {
     CopyFrom(from);
     return *this;
   }
@@ -1606,17 +4708,17 @@ class AckPlayerLeaveList : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const AckPlayerLeaveList& default_instance();
+  static const ReqAckjoinChatGroup& default_instance();
 
-  void Swap(AckPlayerLeaveList* other);
+  void Swap(ReqAckjoinChatGroup* other);
 
   // implements Message ----------------------------------------------
 
-  AckPlayerLeaveList* New() const;
+  ReqAckjoinChatGroup* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const AckPlayerLeaveList& from);
-  void MergeFrom(const AckPlayerLeaveList& from);
+  void CopyFrom(const ReqAckjoinChatGroup& from);
+  void MergeFrom(const ReqAckjoinChatGroup& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -1639,34 +4741,1746 @@ class AckPlayerLeaveList : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // repeated int64 object_list = 1;
-  inline int object_list_size() const;
-  inline void clear_object_list();
-  static const int kObjectListFieldNumber = 1;
-  inline ::google::protobuf::int64 object_list(int index) const;
-  inline void set_object_list(int index, ::google::protobuf::int64 value);
-  inline void add_object_list(::google::protobuf::int64 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
-      object_list() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
-      mutable_object_list();
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
 
-  // @@protoc_insertion_point(class_scope:NFMsg.AckPlayerLeaveList)
+  // optional .NFMsg.Ident xChatGroupid = 2;
+  inline bool has_xchatgroupid() const;
+  inline void clear_xchatgroupid();
+  static const int kXChatGroupidFieldNumber = 2;
+  inline const ::NFMsg::Ident& xchatgroupid() const;
+  inline ::NFMsg::Ident* mutable_xchatgroupid();
+  inline ::NFMsg::Ident* release_xchatgroupid();
+  inline void set_allocated_xchatgroupid(::NFMsg::Ident* xchatgroupid);
+
+  // optional int64 result = 3;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 3;
+  inline ::google::protobuf::int64 result() const;
+  inline void set_result(::google::protobuf::int64 value);
+
+  // optional int32 chatType = 4;
+  inline bool has_chattype() const;
+  inline void clear_chattype();
+  static const int kChatTypeFieldNumber = 4;
+  inline ::google::protobuf::int32 chattype() const;
+  inline void set_chattype(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckjoinChatGroup)
  private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_xchatgroupid();
+  inline void clear_has_xchatgroupid();
+  inline void set_has_result();
+  inline void clear_has_result();
+  inline void set_has_chattype();
+  inline void clear_has_chattype();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedField< ::google::protobuf::int64 > object_list_;
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* xchatgroupid_;
+  ::google::protobuf::int64 result_;
+  ::google::protobuf::int32 chattype_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
   void InitAsDefaultInstance();
-  static AckPlayerLeaveList* default_instance_;
+  static ReqAckjoinChatGroup* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqAckQuitChatGroup : public ::google::protobuf::Message {
+ public:
+  ReqAckQuitChatGroup();
+  virtual ~ReqAckQuitChatGroup();
+
+  ReqAckQuitChatGroup(const ReqAckQuitChatGroup& from);
+
+  inline ReqAckQuitChatGroup& operator=(const ReqAckQuitChatGroup& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckQuitChatGroup& default_instance();
+
+  void Swap(ReqAckQuitChatGroup* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckQuitChatGroup* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckQuitChatGroup& from);
+  void MergeFrom(const ReqAckQuitChatGroup& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // optional .NFMsg.Ident xChatGroupid = 2;
+  inline bool has_xchatgroupid() const;
+  inline void clear_xchatgroupid();
+  static const int kXChatGroupidFieldNumber = 2;
+  inline const ::NFMsg::Ident& xchatgroupid() const;
+  inline ::NFMsg::Ident* mutable_xchatgroupid();
+  inline ::NFMsg::Ident* release_xchatgroupid();
+  inline void set_allocated_xchatgroupid(::NFMsg::Ident* xchatgroupid);
+
+  // optional int64 result = 3;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 3;
+  inline ::google::protobuf::int64 result() const;
+  inline void set_result(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckQuitChatGroup)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_xchatgroupid();
+  inline void clear_has_xchatgroupid();
+  inline void set_has_result();
+  inline void clear_has_result();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* xchatgroupid_;
+  ::google::protobuf::int64 result_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckQuitChatGroup* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqSubscriptionChatGroup : public ::google::protobuf::Message {
+ public:
+  ReqSubscriptionChatGroup();
+  virtual ~ReqSubscriptionChatGroup();
+
+  ReqSubscriptionChatGroup(const ReqSubscriptionChatGroup& from);
+
+  inline ReqSubscriptionChatGroup& operator=(const ReqSubscriptionChatGroup& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqSubscriptionChatGroup& default_instance();
+
+  void Swap(ReqSubscriptionChatGroup* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqSubscriptionChatGroup* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqSubscriptionChatGroup& from);
+  void MergeFrom(const ReqSubscriptionChatGroup& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // repeated .NFMsg.Ident xChatGroupid = 2;
+  inline int xchatgroupid_size() const;
+  inline void clear_xchatgroupid();
+  static const int kXChatGroupidFieldNumber = 2;
+  inline const ::NFMsg::Ident& xchatgroupid(int index) const;
+  inline ::NFMsg::Ident* mutable_xchatgroupid(int index);
+  inline ::NFMsg::Ident* add_xchatgroupid();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+      xchatgroupid() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+      mutable_xchatgroupid();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqSubscriptionChatGroup)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > xchatgroupid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqSubscriptionChatGroup* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqCancelSubscriptionChatGroup : public ::google::protobuf::Message {
+ public:
+  ReqCancelSubscriptionChatGroup();
+  virtual ~ReqCancelSubscriptionChatGroup();
+
+  ReqCancelSubscriptionChatGroup(const ReqCancelSubscriptionChatGroup& from);
+
+  inline ReqCancelSubscriptionChatGroup& operator=(const ReqCancelSubscriptionChatGroup& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqCancelSubscriptionChatGroup& default_instance();
+
+  void Swap(ReqCancelSubscriptionChatGroup* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqCancelSubscriptionChatGroup* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqCancelSubscriptionChatGroup& from);
+  void MergeFrom(const ReqCancelSubscriptionChatGroup& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // repeated .NFMsg.Ident xChatGroupid = 2;
+  inline int xchatgroupid_size() const;
+  inline void clear_xchatgroupid();
+  static const int kXChatGroupidFieldNumber = 2;
+  inline const ::NFMsg::Ident& xchatgroupid(int index) const;
+  inline ::NFMsg::Ident* mutable_xchatgroupid(int index);
+  inline ::NFMsg::Ident* add_xchatgroupid();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+      xchatgroupid() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+      mutable_xchatgroupid();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqCancelSubscriptionChatGroup)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > xchatgroupid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqCancelSubscriptionChatGroup* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqIntensifylevelToEquip : public ::google::protobuf::Message {
+ public:
+  ReqIntensifylevelToEquip();
+  virtual ~ReqIntensifylevelToEquip();
+
+  ReqIntensifylevelToEquip(const ReqIntensifylevelToEquip& from);
+
+  inline ReqIntensifylevelToEquip& operator=(const ReqIntensifylevelToEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqIntensifylevelToEquip& default_instance();
+
+  void Swap(ReqIntensifylevelToEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqIntensifylevelToEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqIntensifylevelToEquip& from);
+  void MergeFrom(const ReqIntensifylevelToEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqIntensifylevelToEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqIntensifylevelToEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AckIntensifylevelToEquip : public ::google::protobuf::Message {
+ public:
+  AckIntensifylevelToEquip();
+  virtual ~AckIntensifylevelToEquip();
+
+  AckIntensifylevelToEquip(const AckIntensifylevelToEquip& from);
+
+  inline AckIntensifylevelToEquip& operator=(const AckIntensifylevelToEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckIntensifylevelToEquip& default_instance();
+
+  void Swap(AckIntensifylevelToEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  AckIntensifylevelToEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckIntensifylevelToEquip& from);
+  void MergeFrom(const AckIntensifylevelToEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // required int32 result = 3;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 3;
+  inline ::google::protobuf::int32 result() const;
+  inline void set_result(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckIntensifylevelToEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+  inline void set_has_result();
+  inline void clear_has_result();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+  ::google::protobuf::int32 result_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckIntensifylevelToEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqHoleToEquip : public ::google::protobuf::Message {
+ public:
+  ReqHoleToEquip();
+  virtual ~ReqHoleToEquip();
+
+  ReqHoleToEquip(const ReqHoleToEquip& from);
+
+  inline ReqHoleToEquip& operator=(const ReqHoleToEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqHoleToEquip& default_instance();
+
+  void Swap(ReqHoleToEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqHoleToEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqHoleToEquip& from);
+  void MergeFrom(const ReqHoleToEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqHoleToEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqHoleToEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AckHoleToEquip : public ::google::protobuf::Message {
+ public:
+  AckHoleToEquip();
+  virtual ~AckHoleToEquip();
+
+  AckHoleToEquip(const AckHoleToEquip& from);
+
+  inline AckHoleToEquip& operator=(const AckHoleToEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckHoleToEquip& default_instance();
+
+  void Swap(AckHoleToEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  AckHoleToEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckHoleToEquip& from);
+  void MergeFrom(const AckHoleToEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // required int32 result = 3;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 3;
+  inline ::google::protobuf::int32 result() const;
+  inline void set_result(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckHoleToEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+  inline void set_has_result();
+  inline void clear_has_result();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+  ::google::protobuf::int32 result_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckHoleToEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqInlaystoneToEquip : public ::google::protobuf::Message {
+ public:
+  ReqInlaystoneToEquip();
+  virtual ~ReqInlaystoneToEquip();
+
+  ReqInlaystoneToEquip(const ReqInlaystoneToEquip& from);
+
+  inline ReqInlaystoneToEquip& operator=(const ReqInlaystoneToEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqInlaystoneToEquip& default_instance();
+
+  void Swap(ReqInlaystoneToEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqInlaystoneToEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqInlaystoneToEquip& from);
+  void MergeFrom(const ReqInlaystoneToEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // required bytes stoneid = 3;
+  inline bool has_stoneid() const;
+  inline void clear_stoneid();
+  static const int kStoneidFieldNumber = 3;
+  inline const ::std::string& stoneid() const;
+  inline void set_stoneid(const ::std::string& value);
+  inline void set_stoneid(const char* value);
+  inline void set_stoneid(const void* value, size_t size);
+  inline ::std::string* mutable_stoneid();
+  inline ::std::string* release_stoneid();
+  inline void set_allocated_stoneid(::std::string* stoneid);
+
+  // required int32 hole_index = 4;
+  inline bool has_hole_index() const;
+  inline void clear_hole_index();
+  static const int kHoleIndexFieldNumber = 4;
+  inline ::google::protobuf::int32 hole_index() const;
+  inline void set_hole_index(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqInlaystoneToEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+  inline void set_has_stoneid();
+  inline void clear_has_stoneid();
+  inline void set_has_hole_index();
+  inline void clear_has_hole_index();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+  ::std::string* stoneid_;
+  ::google::protobuf::int32 hole_index_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqInlaystoneToEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AckInlaystoneToEquip : public ::google::protobuf::Message {
+ public:
+  AckInlaystoneToEquip();
+  virtual ~AckInlaystoneToEquip();
+
+  AckInlaystoneToEquip(const AckInlaystoneToEquip& from);
+
+  inline AckInlaystoneToEquip& operator=(const AckInlaystoneToEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckInlaystoneToEquip& default_instance();
+
+  void Swap(AckInlaystoneToEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  AckInlaystoneToEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckInlaystoneToEquip& from);
+  void MergeFrom(const AckInlaystoneToEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // required int32 result = 3;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 3;
+  inline ::google::protobuf::int32 result() const;
+  inline void set_result(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckInlaystoneToEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+  inline void set_has_result();
+  inline void clear_has_result();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+  ::google::protobuf::int32 result_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckInlaystoneToEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqElementlevelToEquip : public ::google::protobuf::Message {
+ public:
+  ReqElementlevelToEquip();
+  virtual ~ReqElementlevelToEquip();
+
+  ReqElementlevelToEquip(const ReqElementlevelToEquip& from);
+
+  inline ReqElementlevelToEquip& operator=(const ReqElementlevelToEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqElementlevelToEquip& default_instance();
+
+  void Swap(ReqElementlevelToEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqElementlevelToEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqElementlevelToEquip& from);
+  void MergeFrom(const ReqElementlevelToEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // required .NFMsg.EGameElementType eElementType = 3;
+  inline bool has_eelementtype() const;
+  inline void clear_eelementtype();
+  static const int kEElementTypeFieldNumber = 3;
+  inline ::NFMsg::EGameElementType eelementtype() const;
+  inline void set_eelementtype(::NFMsg::EGameElementType value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqElementlevelToEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+  inline void set_has_eelementtype();
+  inline void clear_has_eelementtype();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+  int eelementtype_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqElementlevelToEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AckElementlevelToEquip : public ::google::protobuf::Message {
+ public:
+  AckElementlevelToEquip();
+  virtual ~AckElementlevelToEquip();
+
+  AckElementlevelToEquip(const AckElementlevelToEquip& from);
+
+  inline AckElementlevelToEquip& operator=(const AckElementlevelToEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckElementlevelToEquip& default_instance();
+
+  void Swap(AckElementlevelToEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  AckElementlevelToEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckElementlevelToEquip& from);
+  void MergeFrom(const AckElementlevelToEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // required int32 result = 3;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 3;
+  inline ::google::protobuf::int32 result() const;
+  inline void set_result(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckElementlevelToEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+  inline void set_has_result();
+  inline void clear_has_result();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+  ::google::protobuf::int32 result_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckElementlevelToEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqSetFightHero : public ::google::protobuf::Message {
+ public:
+  ReqSetFightHero();
+  virtual ~ReqSetFightHero();
+
+  ReqSetFightHero(const ReqSetFightHero& from);
+
+  inline ReqSetFightHero& operator=(const ReqSetFightHero& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqSetFightHero& default_instance();
+
+  void Swap(ReqSetFightHero* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqSetFightHero* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqSetFightHero& from);
+  void MergeFrom(const ReqSetFightHero& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident Heroid = 2;
+  inline bool has_heroid() const;
+  inline void clear_heroid();
+  static const int kHeroidFieldNumber = 2;
+  inline const ::NFMsg::Ident& heroid() const;
+  inline ::NFMsg::Ident* mutable_heroid();
+  inline ::NFMsg::Ident* release_heroid();
+  inline void set_allocated_heroid(::NFMsg::Ident* heroid);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqSetFightHero)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_heroid();
+  inline void clear_has_heroid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* heroid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqSetFightHero* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqWearEquip : public ::google::protobuf::Message {
+ public:
+  ReqWearEquip();
+  virtual ~ReqWearEquip();
+
+  ReqWearEquip(const ReqWearEquip& from);
+
+  inline ReqWearEquip& operator=(const ReqWearEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqWearEquip& default_instance();
+
+  void Swap(ReqWearEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqWearEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqWearEquip& from);
+  void MergeFrom(const ReqWearEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // required .NFMsg.Ident Targetid = 3;
+  inline bool has_targetid() const;
+  inline void clear_targetid();
+  static const int kTargetidFieldNumber = 3;
+  inline const ::NFMsg::Ident& targetid() const;
+  inline ::NFMsg::Ident* mutable_targetid();
+  inline ::NFMsg::Ident* release_targetid();
+  inline void set_allocated_targetid(::NFMsg::Ident* targetid);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqWearEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+  inline void set_has_targetid();
+  inline void clear_has_targetid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+  ::NFMsg::Ident* targetid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqWearEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class TakeOffEquip : public ::google::protobuf::Message {
+ public:
+  TakeOffEquip();
+  virtual ~TakeOffEquip();
+
+  TakeOffEquip(const TakeOffEquip& from);
+
+  inline TakeOffEquip& operator=(const TakeOffEquip& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const TakeOffEquip& default_instance();
+
+  void Swap(TakeOffEquip* other);
+
+  // implements Message ----------------------------------------------
+
+  TakeOffEquip* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const TakeOffEquip& from);
+  void MergeFrom(const TakeOffEquip& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident equipid = 2;
+  inline bool has_equipid() const;
+  inline void clear_equipid();
+  static const int kEquipidFieldNumber = 2;
+  inline const ::NFMsg::Ident& equipid() const;
+  inline ::NFMsg::Ident* mutable_equipid();
+  inline ::NFMsg::Ident* release_equipid();
+  inline void set_allocated_equipid(::NFMsg::Ident* equipid);
+
+  // required .NFMsg.Ident Targetid = 3;
+  inline bool has_targetid() const;
+  inline void clear_targetid();
+  static const int kTargetidFieldNumber = 3;
+  inline const ::NFMsg::Ident& targetid() const;
+  inline ::NFMsg::Ident* mutable_targetid();
+  inline ::NFMsg::Ident* release_targetid();
+  inline void set_allocated_targetid(::NFMsg::Ident* targetid);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.TakeOffEquip)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_equipid();
+  inline void clear_has_equipid();
+  inline void set_has_targetid();
+  inline void clear_has_targetid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* equipid_;
+  ::NFMsg::Ident* targetid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static TakeOffEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqMiningTitle : public ::google::protobuf::Message {
+ public:
+  ReqMiningTitle();
+  virtual ~ReqMiningTitle();
+
+  ReqMiningTitle(const ReqMiningTitle& from);
+
+  inline ReqMiningTitle& operator=(const ReqMiningTitle& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqMiningTitle& default_instance();
+
+  void Swap(ReqMiningTitle* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqMiningTitle* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqMiningTitle& from);
+  void MergeFrom(const ReqMiningTitle& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required int32 x = 2;
+  inline bool has_x() const;
+  inline void clear_x();
+  static const int kXFieldNumber = 2;
+  inline ::google::protobuf::int32 x() const;
+  inline void set_x(::google::protobuf::int32 value);
+
+  // required int32 y = 3;
+  inline bool has_y() const;
+  inline void clear_y();
+  static const int kYFieldNumber = 3;
+  inline ::google::protobuf::int32 y() const;
+  inline void set_y(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqMiningTitle)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_x();
+  inline void clear_has_x();
+  inline void set_has_y();
+  inline void clear_has_y();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::google::protobuf::int32 x_;
+  ::google::protobuf::int32 y_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqMiningTitle* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqSendMail : public ::google::protobuf::Message {
+ public:
+  ReqSendMail();
+  virtual ~ReqSendMail();
+
+  ReqSendMail(const ReqSendMail& from);
+
+  inline ReqSendMail& operator=(const ReqSendMail& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqSendMail& default_instance();
+
+  void Swap(ReqSendMail* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqSendMail* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqSendMail& from);
+  void MergeFrom(const ReqSendMail& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required .NFMsg.Ident reciever = 2;
+  inline bool has_reciever() const;
+  inline void clear_reciever();
+  static const int kRecieverFieldNumber = 2;
+  inline const ::NFMsg::Ident& reciever() const;
+  inline ::NFMsg::Ident* mutable_reciever();
+  inline ::NFMsg::Ident* release_reciever();
+  inline void set_allocated_reciever(::NFMsg::Ident* reciever);
+
+  // repeated .NFMsg.ItemStruct item_list = 3;
+  inline int item_list_size() const;
+  inline void clear_item_list();
+  static const int kItemListFieldNumber = 3;
+  inline const ::NFMsg::ItemStruct& item_list(int index) const;
+  inline ::NFMsg::ItemStruct* mutable_item_list(int index);
+  inline ::NFMsg::ItemStruct* add_item_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >&
+      item_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >*
+      mutable_item_list();
+
+  // repeated .NFMsg.CurrencyStruct currency_list = 4;
+  inline int currency_list_size() const;
+  inline void clear_currency_list();
+  static const int kCurrencyListFieldNumber = 4;
+  inline const ::NFMsg::CurrencyStruct& currency_list(int index) const;
+  inline ::NFMsg::CurrencyStruct* mutable_currency_list(int index);
+  inline ::NFMsg::CurrencyStruct* add_currency_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::CurrencyStruct >&
+      currency_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::CurrencyStruct >*
+      mutable_currency_list();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqSendMail)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_reciever();
+  inline void clear_has_reciever();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::NFMsg::Ident* reciever_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct > item_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::CurrencyStruct > currency_list_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqSendMail* default_instance_;
 };
 // ===================================================================
 
@@ -1675,15 +6489,53 @@ class AckPlayerLeaveList : public ::google::protobuf::Message {
 
 // ReqEnterGameServer
 
-// required bytes account = 1;
-inline bool ReqEnterGameServer::has_account() const {
+// required .NFMsg.Ident id = 1;
+inline bool ReqEnterGameServer::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqEnterGameServer::set_has_account() {
+inline void ReqEnterGameServer::set_has_id() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqEnterGameServer::clear_has_account() {
+inline void ReqEnterGameServer::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqEnterGameServer::clear_id() {
+  if (id_ != NULL) id_->::NFMsg::Ident::Clear();
+  clear_has_id();
+}
+inline const ::NFMsg::Ident& ReqEnterGameServer::id() const {
+  return id_ != NULL ? *id_ : *default_instance_->id_;
+}
+inline ::NFMsg::Ident* ReqEnterGameServer::mutable_id() {
+  set_has_id();
+  if (id_ == NULL) id_ = new ::NFMsg::Ident;
+  return id_;
+}
+inline ::NFMsg::Ident* ReqEnterGameServer::release_id() {
+  clear_has_id();
+  ::NFMsg::Ident* temp = id_;
+  id_ = NULL;
+  return temp;
+}
+inline void ReqEnterGameServer::set_allocated_id(::NFMsg::Ident* id) {
+  delete id_;
+  id_ = id;
+  if (id) {
+    set_has_id();
+  } else {
+    clear_has_id();
+  }
+}
+
+// required bytes account = 2;
+inline bool ReqEnterGameServer::has_account() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqEnterGameServer::set_has_account() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqEnterGameServer::clear_has_account() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void ReqEnterGameServer::clear_account() {
   if (account_ != &::google::protobuf::internal::kEmptyString) {
@@ -1745,15 +6597,15 @@ inline void ReqEnterGameServer::set_allocated_account(::std::string* account) {
   }
 }
 
-// required int32 game_id = 2;
+// required int32 game_id = 3;
 inline bool ReqEnterGameServer::has_game_id() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void ReqEnterGameServer::set_has_game_id() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void ReqEnterGameServer::clear_has_game_id() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void ReqEnterGameServer::clear_game_id() {
   game_id_ = 0;
@@ -1767,15 +6619,15 @@ inline void ReqEnterGameServer::set_game_id(::google::protobuf::int32 value) {
   game_id_ = value;
 }
 
-// required bytes name = 3;
+// required bytes name = 4;
 inline bool ReqEnterGameServer::has_name() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void ReqEnterGameServer::set_has_name() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void ReqEnterGameServer::clear_has_name() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void ReqEnterGameServer::clear_name() {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
@@ -1847,1009 +6699,9 @@ inline void ReqEnterGameServer::set_allocated_name(::std::string* name) {
 
 // -------------------------------------------------------------------
 
-// ReqAckPlayerMove
-
-// optional int64 mover = 1;
-inline bool ReqAckPlayerMove::has_mover() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ReqAckPlayerMove::set_has_mover() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ReqAckPlayerMove::clear_has_mover() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ReqAckPlayerMove::clear_mover() {
-  mover_ = GOOGLE_LONGLONG(0);
-  clear_has_mover();
-}
-inline ::google::protobuf::int64 ReqAckPlayerMove::mover() const {
-  return mover_;
-}
-inline void ReqAckPlayerMove::set_mover(::google::protobuf::int64 value) {
-  set_has_mover();
-  mover_ = value;
-}
-
-// required int32 moveType = 2;
-inline bool ReqAckPlayerMove::has_movetype() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ReqAckPlayerMove::set_has_movetype() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void ReqAckPlayerMove::clear_has_movetype() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void ReqAckPlayerMove::clear_movetype() {
-  movetype_ = 0;
-  clear_has_movetype();
-}
-inline ::google::protobuf::int32 ReqAckPlayerMove::movetype() const {
-  return movetype_;
-}
-inline void ReqAckPlayerMove::set_movetype(::google::protobuf::int32 value) {
-  set_has_movetype();
-  movetype_ = value;
-}
-
-// required float target_x = 3;
-inline bool ReqAckPlayerMove::has_target_x() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void ReqAckPlayerMove::set_has_target_x() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void ReqAckPlayerMove::clear_has_target_x() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void ReqAckPlayerMove::clear_target_x() {
-  target_x_ = 0;
-  clear_has_target_x();
-}
-inline float ReqAckPlayerMove::target_x() const {
-  return target_x_;
-}
-inline void ReqAckPlayerMove::set_target_x(float value) {
-  set_has_target_x();
-  target_x_ = value;
-}
-
-// optional float target_y = 4;
-inline bool ReqAckPlayerMove::has_target_y() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void ReqAckPlayerMove::set_has_target_y() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void ReqAckPlayerMove::clear_has_target_y() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void ReqAckPlayerMove::clear_target_y() {
-  target_y_ = 0;
-  clear_has_target_y();
-}
-inline float ReqAckPlayerMove::target_y() const {
-  return target_y_;
-}
-inline void ReqAckPlayerMove::set_target_y(float value) {
-  set_has_target_y();
-  target_y_ = value;
-}
-
-// required float target_z = 5;
-inline bool ReqAckPlayerMove::has_target_z() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void ReqAckPlayerMove::set_has_target_z() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void ReqAckPlayerMove::clear_has_target_z() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void ReqAckPlayerMove::clear_target_z() {
-  target_z_ = 0;
-  clear_has_target_z();
-}
-inline float ReqAckPlayerMove::target_z() const {
-  return target_z_;
-}
-inline void ReqAckPlayerMove::set_target_z(float value) {
-  set_has_target_z();
-  target_z_ = value;
-}
-
-// optional float source_x = 6;
-inline bool ReqAckPlayerMove::has_source_x() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void ReqAckPlayerMove::set_has_source_x() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void ReqAckPlayerMove::clear_has_source_x() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void ReqAckPlayerMove::clear_source_x() {
-  source_x_ = 0;
-  clear_has_source_x();
-}
-inline float ReqAckPlayerMove::source_x() const {
-  return source_x_;
-}
-inline void ReqAckPlayerMove::set_source_x(float value) {
-  set_has_source_x();
-  source_x_ = value;
-}
-
-// optional float source_y = 7;
-inline bool ReqAckPlayerMove::has_source_y() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
-}
-inline void ReqAckPlayerMove::set_has_source_y() {
-  _has_bits_[0] |= 0x00000040u;
-}
-inline void ReqAckPlayerMove::clear_has_source_y() {
-  _has_bits_[0] &= ~0x00000040u;
-}
-inline void ReqAckPlayerMove::clear_source_y() {
-  source_y_ = 0;
-  clear_has_source_y();
-}
-inline float ReqAckPlayerMove::source_y() const {
-  return source_y_;
-}
-inline void ReqAckPlayerMove::set_source_y(float value) {
-  set_has_source_y();
-  source_y_ = value;
-}
-
-// optional float source_z = 8;
-inline bool ReqAckPlayerMove::has_source_z() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
-}
-inline void ReqAckPlayerMove::set_has_source_z() {
-  _has_bits_[0] |= 0x00000080u;
-}
-inline void ReqAckPlayerMove::clear_has_source_z() {
-  _has_bits_[0] &= ~0x00000080u;
-}
-inline void ReqAckPlayerMove::clear_source_z() {
-  source_z_ = 0;
-  clear_has_source_z();
-}
-inline float ReqAckPlayerMove::source_z() const {
-  return source_z_;
-}
-inline void ReqAckPlayerMove::set_source_z(float value) {
-  set_has_source_z();
-  source_z_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// ReqAckPlayerChat
-
-// required int64 chat_id = 1;
-inline bool ReqAckPlayerChat::has_chat_id() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ReqAckPlayerChat::set_has_chat_id() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ReqAckPlayerChat::clear_has_chat_id() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ReqAckPlayerChat::clear_chat_id() {
-  chat_id_ = GOOGLE_LONGLONG(0);
-  clear_has_chat_id();
-}
-inline ::google::protobuf::int64 ReqAckPlayerChat::chat_id() const {
-  return chat_id_;
-}
-inline void ReqAckPlayerChat::set_chat_id(::google::protobuf::int64 value) {
-  set_has_chat_id();
-  chat_id_ = value;
-}
-
-// required .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 2;
-inline bool ReqAckPlayerChat::has_chat_type() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ReqAckPlayerChat::set_has_chat_type() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void ReqAckPlayerChat::clear_has_chat_type() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void ReqAckPlayerChat::clear_chat_type() {
-  chat_type_ = 0;
-  clear_has_chat_type();
-}
-inline ::NFMsg::ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::chat_type() const {
-  return static_cast< ::NFMsg::ReqAckPlayerChat_EGameChatType >(chat_type_);
-}
-inline void ReqAckPlayerChat::set_chat_type(::NFMsg::ReqAckPlayerChat_EGameChatType value) {
-  assert(::NFMsg::ReqAckPlayerChat_EGameChatType_IsValid(value));
-  set_has_chat_type();
-  chat_type_ = value;
-}
-
-// required bytes chat_info = 3;
-inline bool ReqAckPlayerChat::has_chat_info() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void ReqAckPlayerChat::set_has_chat_info() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void ReqAckPlayerChat::clear_has_chat_info() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void ReqAckPlayerChat::clear_chat_info() {
-  if (chat_info_ != &::google::protobuf::internal::kEmptyString) {
-    chat_info_->clear();
-  }
-  clear_has_chat_info();
-}
-inline const ::std::string& ReqAckPlayerChat::chat_info() const {
-  return *chat_info_;
-}
-inline void ReqAckPlayerChat::set_chat_info(const ::std::string& value) {
-  set_has_chat_info();
-  if (chat_info_ == &::google::protobuf::internal::kEmptyString) {
-    chat_info_ = new ::std::string;
-  }
-  chat_info_->assign(value);
-}
-inline void ReqAckPlayerChat::set_chat_info(const char* value) {
-  set_has_chat_info();
-  if (chat_info_ == &::google::protobuf::internal::kEmptyString) {
-    chat_info_ = new ::std::string;
-  }
-  chat_info_->assign(value);
-}
-inline void ReqAckPlayerChat::set_chat_info(const void* value, size_t size) {
-  set_has_chat_info();
-  if (chat_info_ == &::google::protobuf::internal::kEmptyString) {
-    chat_info_ = new ::std::string;
-  }
-  chat_info_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqAckPlayerChat::mutable_chat_info() {
-  set_has_chat_info();
-  if (chat_info_ == &::google::protobuf::internal::kEmptyString) {
-    chat_info_ = new ::std::string;
-  }
-  return chat_info_;
-}
-inline ::std::string* ReqAckPlayerChat::release_chat_info() {
-  clear_has_chat_info();
-  if (chat_info_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = chat_info_;
-    chat_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void ReqAckPlayerChat::set_allocated_chat_info(::std::string* chat_info) {
-  if (chat_info_ != &::google::protobuf::internal::kEmptyString) {
-    delete chat_info_;
-  }
-  if (chat_info) {
-    set_has_chat_info();
-    chat_info_ = chat_info;
-  } else {
-    clear_has_chat_info();
-    chat_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// -------------------------------------------------------------------
-
-// ReqAckUseSkill
-
-// required bytes skill_id = 1;
-inline bool ReqAckUseSkill::has_skill_id() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ReqAckUseSkill::set_has_skill_id() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ReqAckUseSkill::clear_has_skill_id() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ReqAckUseSkill::clear_skill_id() {
-  if (skill_id_ != &::google::protobuf::internal::kEmptyString) {
-    skill_id_->clear();
-  }
-  clear_has_skill_id();
-}
-inline const ::std::string& ReqAckUseSkill::skill_id() const {
-  return *skill_id_;
-}
-inline void ReqAckUseSkill::set_skill_id(const ::std::string& value) {
-  set_has_skill_id();
-  if (skill_id_ == &::google::protobuf::internal::kEmptyString) {
-    skill_id_ = new ::std::string;
-  }
-  skill_id_->assign(value);
-}
-inline void ReqAckUseSkill::set_skill_id(const char* value) {
-  set_has_skill_id();
-  if (skill_id_ == &::google::protobuf::internal::kEmptyString) {
-    skill_id_ = new ::std::string;
-  }
-  skill_id_->assign(value);
-}
-inline void ReqAckUseSkill::set_skill_id(const void* value, size_t size) {
-  set_has_skill_id();
-  if (skill_id_ == &::google::protobuf::internal::kEmptyString) {
-    skill_id_ = new ::std::string;
-  }
-  skill_id_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqAckUseSkill::mutable_skill_id() {
-  set_has_skill_id();
-  if (skill_id_ == &::google::protobuf::internal::kEmptyString) {
-    skill_id_ = new ::std::string;
-  }
-  return skill_id_;
-}
-inline ::std::string* ReqAckUseSkill::release_skill_id() {
-  clear_has_skill_id();
-  if (skill_id_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = skill_id_;
-    skill_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void ReqAckUseSkill::set_allocated_skill_id(::std::string* skill_id) {
-  if (skill_id_ != &::google::protobuf::internal::kEmptyString) {
-    delete skill_id_;
-  }
-  if (skill_id) {
-    set_has_skill_id();
-    skill_id_ = skill_id;
-  } else {
-    clear_has_skill_id();
-    skill_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// repeated int64 effect_ident = 2;
-inline int ReqAckUseSkill::effect_ident_size() const {
-  return effect_ident_.size();
-}
-inline void ReqAckUseSkill::clear_effect_ident() {
-  effect_ident_.Clear();
-}
-inline ::google::protobuf::int64 ReqAckUseSkill::effect_ident(int index) const {
-  return effect_ident_.Get(index);
-}
-inline void ReqAckUseSkill::set_effect_ident(int index, ::google::protobuf::int64 value) {
-  effect_ident_.Set(index, value);
-}
-inline void ReqAckUseSkill::add_effect_ident(::google::protobuf::int64 value) {
-  effect_ident_.Add(value);
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
-ReqAckUseSkill::effect_ident() const {
-  return effect_ident_;
-}
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
-ReqAckUseSkill::mutable_effect_ident() {
-  return &effect_ident_;
-}
-
-// repeated int32 effect_value = 3;
-inline int ReqAckUseSkill::effect_value_size() const {
-  return effect_value_.size();
-}
-inline void ReqAckUseSkill::clear_effect_value() {
-  effect_value_.Clear();
-}
-inline ::google::protobuf::int32 ReqAckUseSkill::effect_value(int index) const {
-  return effect_value_.Get(index);
-}
-inline void ReqAckUseSkill::set_effect_value(int index, ::google::protobuf::int32 value) {
-  effect_value_.Set(index, value);
-}
-inline void ReqAckUseSkill::add_effect_value(::google::protobuf::int32 value) {
-  effect_value_.Add(value);
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-ReqAckUseSkill::effect_value() const {
-  return effect_value_;
-}
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-ReqAckUseSkill::mutable_effect_value() {
-  return &effect_value_;
-}
-
-// repeated int32 effect_rlt = 4;
-inline int ReqAckUseSkill::effect_rlt_size() const {
-  return effect_rlt_.size();
-}
-inline void ReqAckUseSkill::clear_effect_rlt() {
-  effect_rlt_.Clear();
-}
-inline ::google::protobuf::int32 ReqAckUseSkill::effect_rlt(int index) const {
-  return effect_rlt_.Get(index);
-}
-inline void ReqAckUseSkill::set_effect_rlt(int index, ::google::protobuf::int32 value) {
-  effect_rlt_.Set(index, value);
-}
-inline void ReqAckUseSkill::add_effect_rlt(::google::protobuf::int32 value) {
-  effect_rlt_.Add(value);
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-ReqAckUseSkill::effect_rlt() const {
-  return effect_rlt_;
-}
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-ReqAckUseSkill::mutable_effect_rlt() {
-  return &effect_rlt_;
-}
-
-// optional bytes key_value = 5;
-inline bool ReqAckUseSkill::has_key_value() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void ReqAckUseSkill::set_has_key_value() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void ReqAckUseSkill::clear_has_key_value() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void ReqAckUseSkill::clear_key_value() {
-  if (key_value_ != &::google::protobuf::internal::kEmptyString) {
-    key_value_->clear();
-  }
-  clear_has_key_value();
-}
-inline const ::std::string& ReqAckUseSkill::key_value() const {
-  return *key_value_;
-}
-inline void ReqAckUseSkill::set_key_value(const ::std::string& value) {
-  set_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    key_value_ = new ::std::string;
-  }
-  key_value_->assign(value);
-}
-inline void ReqAckUseSkill::set_key_value(const char* value) {
-  set_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    key_value_ = new ::std::string;
-  }
-  key_value_->assign(value);
-}
-inline void ReqAckUseSkill::set_key_value(const void* value, size_t size) {
-  set_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    key_value_ = new ::std::string;
-  }
-  key_value_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqAckUseSkill::mutable_key_value() {
-  set_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    key_value_ = new ::std::string;
-  }
-  return key_value_;
-}
-inline ::std::string* ReqAckUseSkill::release_key_value() {
-  clear_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = key_value_;
-    key_value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void ReqAckUseSkill::set_allocated_key_value(::std::string* key_value) {
-  if (key_value_ != &::google::protobuf::internal::kEmptyString) {
-    delete key_value_;
-  }
-  if (key_value) {
-    set_has_key_value();
-    key_value_ = key_value;
-  } else {
-    clear_has_key_value();
-    key_value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// -------------------------------------------------------------------
-
-// ReqAckUseItem
-
-// required int64 item_guid = 1;
-inline bool ReqAckUseItem::has_item_guid() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ReqAckUseItem::set_has_item_guid() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ReqAckUseItem::clear_has_item_guid() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ReqAckUseItem::clear_item_guid() {
-  item_guid_ = GOOGLE_LONGLONG(0);
-  clear_has_item_guid();
-}
-inline ::google::protobuf::int64 ReqAckUseItem::item_guid() const {
-  return item_guid_;
-}
-inline void ReqAckUseItem::set_item_guid(::google::protobuf::int64 value) {
-  set_has_item_guid();
-  item_guid_ = value;
-}
-
-// repeated int64 effect_ident = 2;
-inline int ReqAckUseItem::effect_ident_size() const {
-  return effect_ident_.size();
-}
-inline void ReqAckUseItem::clear_effect_ident() {
-  effect_ident_.Clear();
-}
-inline ::google::protobuf::int64 ReqAckUseItem::effect_ident(int index) const {
-  return effect_ident_.Get(index);
-}
-inline void ReqAckUseItem::set_effect_ident(int index, ::google::protobuf::int64 value) {
-  effect_ident_.Set(index, value);
-}
-inline void ReqAckUseItem::add_effect_ident(::google::protobuf::int64 value) {
-  effect_ident_.Add(value);
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
-ReqAckUseItem::effect_ident() const {
-  return effect_ident_;
-}
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
-ReqAckUseItem::mutable_effect_ident() {
-  return &effect_ident_;
-}
-
-// repeated int32 effect_value = 3;
-inline int ReqAckUseItem::effect_value_size() const {
-  return effect_value_.size();
-}
-inline void ReqAckUseItem::clear_effect_value() {
-  effect_value_.Clear();
-}
-inline ::google::protobuf::int32 ReqAckUseItem::effect_value(int index) const {
-  return effect_value_.Get(index);
-}
-inline void ReqAckUseItem::set_effect_value(int index, ::google::protobuf::int32 value) {
-  effect_value_.Set(index, value);
-}
-inline void ReqAckUseItem::add_effect_value(::google::protobuf::int32 value) {
-  effect_value_.Add(value);
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-ReqAckUseItem::effect_value() const {
-  return effect_value_;
-}
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-ReqAckUseItem::mutable_effect_value() {
-  return &effect_value_;
-}
-
-// repeated int32 effect_rlt = 4;
-inline int ReqAckUseItem::effect_rlt_size() const {
-  return effect_rlt_.size();
-}
-inline void ReqAckUseItem::clear_effect_rlt() {
-  effect_rlt_.Clear();
-}
-inline ::google::protobuf::int32 ReqAckUseItem::effect_rlt(int index) const {
-  return effect_rlt_.Get(index);
-}
-inline void ReqAckUseItem::set_effect_rlt(int index, ::google::protobuf::int32 value) {
-  effect_rlt_.Set(index, value);
-}
-inline void ReqAckUseItem::add_effect_rlt(::google::protobuf::int32 value) {
-  effect_rlt_.Add(value);
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-ReqAckUseItem::effect_rlt() const {
-  return effect_rlt_;
-}
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-ReqAckUseItem::mutable_effect_rlt() {
-  return &effect_rlt_;
-}
-
-// optional bytes key_value = 5;
-inline bool ReqAckUseItem::has_key_value() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void ReqAckUseItem::set_has_key_value() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void ReqAckUseItem::clear_has_key_value() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void ReqAckUseItem::clear_key_value() {
-  if (key_value_ != &::google::protobuf::internal::kEmptyString) {
-    key_value_->clear();
-  }
-  clear_has_key_value();
-}
-inline const ::std::string& ReqAckUseItem::key_value() const {
-  return *key_value_;
-}
-inline void ReqAckUseItem::set_key_value(const ::std::string& value) {
-  set_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    key_value_ = new ::std::string;
-  }
-  key_value_->assign(value);
-}
-inline void ReqAckUseItem::set_key_value(const char* value) {
-  set_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    key_value_ = new ::std::string;
-  }
-  key_value_->assign(value);
-}
-inline void ReqAckUseItem::set_key_value(const void* value, size_t size) {
-  set_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    key_value_ = new ::std::string;
-  }
-  key_value_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqAckUseItem::mutable_key_value() {
-  set_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    key_value_ = new ::std::string;
-  }
-  return key_value_;
-}
-inline ::std::string* ReqAckUseItem::release_key_value() {
-  clear_has_key_value();
-  if (key_value_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = key_value_;
-    key_value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void ReqAckUseItem::set_allocated_key_value(::std::string* key_value) {
-  if (key_value_ != &::google::protobuf::internal::kEmptyString) {
-    delete key_value_;
-  }
-  if (key_value) {
-    set_has_key_value();
-    key_value_ = key_value;
-  } else {
-    clear_has_key_value();
-    key_value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// -------------------------------------------------------------------
-
-// ReqAckSwapScene
-
-// required .NFMsg.ReqAckSwapScene.EGameSwapType transfer_type = 1;
-inline bool ReqAckSwapScene::has_transfer_type() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ReqAckSwapScene::set_has_transfer_type() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ReqAckSwapScene::clear_has_transfer_type() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ReqAckSwapScene::clear_transfer_type() {
-  transfer_type_ = 0;
-  clear_has_transfer_type();
-}
-inline ::NFMsg::ReqAckSwapScene_EGameSwapType ReqAckSwapScene::transfer_type() const {
-  return static_cast< ::NFMsg::ReqAckSwapScene_EGameSwapType >(transfer_type_);
-}
-inline void ReqAckSwapScene::set_transfer_type(::NFMsg::ReqAckSwapScene_EGameSwapType value) {
-  assert(::NFMsg::ReqAckSwapScene_EGameSwapType_IsValid(value));
-  set_has_transfer_type();
-  transfer_type_ = value;
-}
-
-// required int32 scene_id = 2;
-inline bool ReqAckSwapScene::has_scene_id() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ReqAckSwapScene::set_has_scene_id() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void ReqAckSwapScene::clear_has_scene_id() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void ReqAckSwapScene::clear_scene_id() {
-  scene_id_ = 0;
-  clear_has_scene_id();
-}
-inline ::google::protobuf::int32 ReqAckSwapScene::scene_id() const {
-  return scene_id_;
-}
-inline void ReqAckSwapScene::set_scene_id(::google::protobuf::int32 value) {
-  set_has_scene_id();
-  scene_id_ = value;
-}
-
-// required int32 line_id = 3;
-inline bool ReqAckSwapScene::has_line_id() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void ReqAckSwapScene::set_has_line_id() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void ReqAckSwapScene::clear_has_line_id() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void ReqAckSwapScene::clear_line_id() {
-  line_id_ = 0;
-  clear_has_line_id();
-}
-inline ::google::protobuf::int32 ReqAckSwapScene::line_id() const {
-  return line_id_;
-}
-inline void ReqAckSwapScene::set_line_id(::google::protobuf::int32 value) {
-  set_has_line_id();
-  line_id_ = value;
-}
-
-// optional float x = 4;
-inline bool ReqAckSwapScene::has_x() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void ReqAckSwapScene::set_has_x() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void ReqAckSwapScene::clear_has_x() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void ReqAckSwapScene::clear_x() {
-  x_ = 0;
-  clear_has_x();
-}
-inline float ReqAckSwapScene::x() const {
-  return x_;
-}
-inline void ReqAckSwapScene::set_x(float value) {
-  set_has_x();
-  x_ = value;
-}
-
-// optional float y = 5;
-inline bool ReqAckSwapScene::has_y() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void ReqAckSwapScene::set_has_y() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void ReqAckSwapScene::clear_has_y() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void ReqAckSwapScene::clear_y() {
-  y_ = 0;
-  clear_has_y();
-}
-inline float ReqAckSwapScene::y() const {
-  return y_;
-}
-inline void ReqAckSwapScene::set_y(float value) {
-  set_has_y();
-  y_ = value;
-}
-
-// optional float z = 6;
-inline bool ReqAckSwapScene::has_z() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void ReqAckSwapScene::set_has_z() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void ReqAckSwapScene::clear_has_z() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void ReqAckSwapScene::clear_z() {
-  z_ = 0;
-  clear_has_z();
-}
-inline float ReqAckSwapScene::z() const {
-  return z_;
-}
-inline void ReqAckSwapScene::set_z(float value) {
-  set_has_z();
-  z_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// ReqPickDropItem
-
-// required int64 item_guid = 2;
-inline bool ReqPickDropItem::has_item_guid() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ReqPickDropItem::set_has_item_guid() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ReqPickDropItem::clear_has_item_guid() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ReqPickDropItem::clear_item_guid() {
-  item_guid_ = GOOGLE_LONGLONG(0);
-  clear_has_item_guid();
-}
-inline ::google::protobuf::int64 ReqPickDropItem::item_guid() const {
-  return item_guid_;
-}
-inline void ReqPickDropItem::set_item_guid(::google::protobuf::int64 value) {
-  set_has_item_guid();
-  item_guid_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// ReqAcceptTask
-
-// required bytes task_id = 1;
-inline bool ReqAcceptTask::has_task_id() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ReqAcceptTask::set_has_task_id() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ReqAcceptTask::clear_has_task_id() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ReqAcceptTask::clear_task_id() {
-  if (task_id_ != &::google::protobuf::internal::kEmptyString) {
-    task_id_->clear();
-  }
-  clear_has_task_id();
-}
-inline const ::std::string& ReqAcceptTask::task_id() const {
-  return *task_id_;
-}
-inline void ReqAcceptTask::set_task_id(const ::std::string& value) {
-  set_has_task_id();
-  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
-    task_id_ = new ::std::string;
-  }
-  task_id_->assign(value);
-}
-inline void ReqAcceptTask::set_task_id(const char* value) {
-  set_has_task_id();
-  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
-    task_id_ = new ::std::string;
-  }
-  task_id_->assign(value);
-}
-inline void ReqAcceptTask::set_task_id(const void* value, size_t size) {
-  set_has_task_id();
-  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
-    task_id_ = new ::std::string;
-  }
-  task_id_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqAcceptTask::mutable_task_id() {
-  set_has_task_id();
-  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
-    task_id_ = new ::std::string;
-  }
-  return task_id_;
-}
-inline ::std::string* ReqAcceptTask::release_task_id() {
-  clear_has_task_id();
-  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = task_id_;
-    task_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void ReqAcceptTask::set_allocated_task_id(::std::string* task_id) {
-  if (task_id_ != &::google::protobuf::internal::kEmptyString) {
-    delete task_id_;
-  }
-  if (task_id) {
-    set_has_task_id();
-    task_id_ = task_id;
-  } else {
-    clear_has_task_id();
-    task_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// -------------------------------------------------------------------
-
-// ReqCompeleteTask
-
-// required bytes task_id = 1;
-inline bool ReqCompeleteTask::has_task_id() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ReqCompeleteTask::set_has_task_id() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ReqCompeleteTask::clear_has_task_id() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ReqCompeleteTask::clear_task_id() {
-  if (task_id_ != &::google::protobuf::internal::kEmptyString) {
-    task_id_->clear();
-  }
-  clear_has_task_id();
-}
-inline const ::std::string& ReqCompeleteTask::task_id() const {
-  return *task_id_;
-}
-inline void ReqCompeleteTask::set_task_id(const ::std::string& value) {
-  set_has_task_id();
-  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
-    task_id_ = new ::std::string;
-  }
-  task_id_->assign(value);
-}
-inline void ReqCompeleteTask::set_task_id(const char* value) {
-  set_has_task_id();
-  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
-    task_id_ = new ::std::string;
-  }
-  task_id_->assign(value);
-}
-inline void ReqCompeleteTask::set_task_id(const void* value, size_t size) {
-  set_has_task_id();
-  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
-    task_id_ = new ::std::string;
-  }
-  task_id_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqCompeleteTask::mutable_task_id() {
-  set_has_task_id();
-  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
-    task_id_ = new ::std::string;
-  }
-  return task_id_;
-}
-inline ::std::string* ReqCompeleteTask::release_task_id() {
-  clear_has_task_id();
-  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = task_id_;
-    task_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void ReqCompeleteTask::set_allocated_task_id(::std::string* task_id) {
-  if (task_id_ != &::google::protobuf::internal::kEmptyString) {
-    delete task_id_;
-  }
-  if (task_id) {
-    set_has_task_id();
-    task_id_ = task_id;
-  } else {
-    clear_has_task_id();
-    task_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// -------------------------------------------------------------------
-
 // PlayerEntryInfo
 
-// required int64 object_guid = 1;
+// required .NFMsg.Ident object_guid = 1;
 inline bool PlayerEntryInfo::has_object_guid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -2860,15 +6712,31 @@ inline void PlayerEntryInfo::clear_has_object_guid() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PlayerEntryInfo::clear_object_guid() {
-  object_guid_ = GOOGLE_LONGLONG(0);
+  if (object_guid_ != NULL) object_guid_->::NFMsg::Ident::Clear();
   clear_has_object_guid();
 }
-inline ::google::protobuf::int64 PlayerEntryInfo::object_guid() const {
+inline const ::NFMsg::Ident& PlayerEntryInfo::object_guid() const {
+  return object_guid_ != NULL ? *object_guid_ : *default_instance_->object_guid_;
+}
+inline ::NFMsg::Ident* PlayerEntryInfo::mutable_object_guid() {
+  set_has_object_guid();
+  if (object_guid_ == NULL) object_guid_ = new ::NFMsg::Ident;
   return object_guid_;
 }
-inline void PlayerEntryInfo::set_object_guid(::google::protobuf::int64 value) {
-  set_has_object_guid();
-  object_guid_ = value;
+inline ::NFMsg::Ident* PlayerEntryInfo::release_object_guid() {
+  clear_has_object_guid();
+  ::NFMsg::Ident* temp = object_guid_;
+  object_guid_ = NULL;
+  return temp;
+}
+inline void PlayerEntryInfo::set_allocated_object_guid(::NFMsg::Ident* object_guid) {
+  delete object_guid_;
+  object_guid_ = object_guid;
+  if (object_guid) {
+    set_has_object_guid();
+  } else {
+    clear_has_object_guid();
+  }
 }
 
 // required float x = 2;
@@ -3176,29 +7044,5692 @@ AckPlayerEntryList::mutable_object_list() {
 
 // AckPlayerLeaveList
 
-// repeated int64 object_list = 1;
+// repeated .NFMsg.Ident object_list = 1;
 inline int AckPlayerLeaveList::object_list_size() const {
   return object_list_.size();
 }
 inline void AckPlayerLeaveList::clear_object_list() {
   object_list_.Clear();
 }
-inline ::google::protobuf::int64 AckPlayerLeaveList::object_list(int index) const {
+inline const ::NFMsg::Ident& AckPlayerLeaveList::object_list(int index) const {
   return object_list_.Get(index);
 }
-inline void AckPlayerLeaveList::set_object_list(int index, ::google::protobuf::int64 value) {
-  object_list_.Set(index, value);
+inline ::NFMsg::Ident* AckPlayerLeaveList::mutable_object_list(int index) {
+  return object_list_.Mutable(index);
 }
-inline void AckPlayerLeaveList::add_object_list(::google::protobuf::int64 value) {
-  object_list_.Add(value);
+inline ::NFMsg::Ident* AckPlayerLeaveList::add_object_list() {
+  return object_list_.Add();
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
 AckPlayerLeaveList::object_list() const {
   return object_list_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
 AckPlayerLeaveList::mutable_object_list() {
   return &object_list_;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckSynData
+
+// required .NFMsg.Ident syser = 1;
+inline bool ReqAckSynData::has_syser() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckSynData::set_has_syser() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckSynData::clear_has_syser() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckSynData::clear_syser() {
+  if (syser_ != NULL) syser_->::NFMsg::Ident::Clear();
+  clear_has_syser();
+}
+inline const ::NFMsg::Ident& ReqAckSynData::syser() const {
+  return syser_ != NULL ? *syser_ : *default_instance_->syser_;
+}
+inline ::NFMsg::Ident* ReqAckSynData::mutable_syser() {
+  set_has_syser();
+  if (syser_ == NULL) syser_ = new ::NFMsg::Ident;
+  return syser_;
+}
+inline ::NFMsg::Ident* ReqAckSynData::release_syser() {
+  clear_has_syser();
+  ::NFMsg::Ident* temp = syser_;
+  syser_ = NULL;
+  return temp;
+}
+inline void ReqAckSynData::set_allocated_syser(::NFMsg::Ident* syser) {
+  delete syser_;
+  syser_ = syser;
+  if (syser) {
+    set_has_syser();
+  } else {
+    clear_has_syser();
+  }
+}
+
+// repeated .NFMsg.Ident object_list = 2;
+inline int ReqAckSynData::object_list_size() const {
+  return object_list_.size();
+}
+inline void ReqAckSynData::clear_object_list() {
+  object_list_.Clear();
+}
+inline const ::NFMsg::Ident& ReqAckSynData::object_list(int index) const {
+  return object_list_.Get(index);
+}
+inline ::NFMsg::Ident* ReqAckSynData::mutable_object_list(int index) {
+  return object_list_.Mutable(index);
+}
+inline ::NFMsg::Ident* ReqAckSynData::add_object_list() {
+  return object_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+ReqAckSynData::object_list() const {
+  return object_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+ReqAckSynData::mutable_object_list() {
+  return &object_list_;
+}
+
+// required bytes data = 3;
+inline bool ReqAckSynData::has_data() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckSynData::set_has_data() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckSynData::clear_has_data() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckSynData::clear_data() {
+  if (data_ != &::google::protobuf::internal::kEmptyString) {
+    data_->clear();
+  }
+  clear_has_data();
+}
+inline const ::std::string& ReqAckSynData::data() const {
+  return *data_;
+}
+inline void ReqAckSynData::set_data(const ::std::string& value) {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  data_->assign(value);
+}
+inline void ReqAckSynData::set_data(const char* value) {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  data_->assign(value);
+}
+inline void ReqAckSynData::set_data(const void* value, size_t size) {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  data_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckSynData::mutable_data() {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  return data_;
+}
+inline ::std::string* ReqAckSynData::release_data() {
+  clear_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = data_;
+    data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckSynData::set_allocated_data(::std::string* data) {
+  if (data_ != &::google::protobuf::internal::kEmptyString) {
+    delete data_;
+  }
+  if (data) {
+    set_has_data();
+    data_ = data;
+  } else {
+    clear_has_data();
+    data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required .NFMsg.ReqAckSynData.SynType syn_type = 4;
+inline bool ReqAckSynData::has_syn_type() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqAckSynData::set_has_syn_type() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqAckSynData::clear_has_syn_type() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqAckSynData::clear_syn_type() {
+  syn_type_ = 1;
+  clear_has_syn_type();
+}
+inline ::NFMsg::ReqAckSynData_SynType ReqAckSynData::syn_type() const {
+  return static_cast< ::NFMsg::ReqAckSynData_SynType >(syn_type_);
+}
+inline void ReqAckSynData::set_syn_type(::NFMsg::ReqAckSynData_SynType value) {
+  assert(::NFMsg::ReqAckSynData_SynType_IsValid(value));
+  set_has_syn_type();
+  syn_type_ = value;
+}
+
+// required .NFMsg.EGameMsgID msg_id = 5;
+inline bool ReqAckSynData::has_msg_id() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ReqAckSynData::set_has_msg_id() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ReqAckSynData::clear_has_msg_id() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ReqAckSynData::clear_msg_id() {
+  msg_id_ = 0;
+  clear_has_msg_id();
+}
+inline ::NFMsg::EGameMsgID ReqAckSynData::msg_id() const {
+  return static_cast< ::NFMsg::EGameMsgID >(msg_id_);
+}
+inline void ReqAckSynData::set_msg_id(::NFMsg::EGameMsgID value) {
+  assert(::NFMsg::EGameMsgID_IsValid(value));
+  set_has_msg_id();
+  msg_id_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckPlayerMove
+
+// required .NFMsg.Ident mover = 1;
+inline bool ReqAckPlayerMove::has_mover() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckPlayerMove::set_has_mover() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckPlayerMove::clear_has_mover() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckPlayerMove::clear_mover() {
+  if (mover_ != NULL) mover_->::NFMsg::Ident::Clear();
+  clear_has_mover();
+}
+inline const ::NFMsg::Ident& ReqAckPlayerMove::mover() const {
+  return mover_ != NULL ? *mover_ : *default_instance_->mover_;
+}
+inline ::NFMsg::Ident* ReqAckPlayerMove::mutable_mover() {
+  set_has_mover();
+  if (mover_ == NULL) mover_ = new ::NFMsg::Ident;
+  return mover_;
+}
+inline ::NFMsg::Ident* ReqAckPlayerMove::release_mover() {
+  clear_has_mover();
+  ::NFMsg::Ident* temp = mover_;
+  mover_ = NULL;
+  return temp;
+}
+inline void ReqAckPlayerMove::set_allocated_mover(::NFMsg::Ident* mover) {
+  delete mover_;
+  mover_ = mover;
+  if (mover) {
+    set_has_mover();
+  } else {
+    clear_has_mover();
+  }
+}
+
+// required int32 moveType = 2;
+inline bool ReqAckPlayerMove::has_movetype() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckPlayerMove::set_has_movetype() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckPlayerMove::clear_has_movetype() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckPlayerMove::clear_movetype() {
+  movetype_ = 0;
+  clear_has_movetype();
+}
+inline ::google::protobuf::int32 ReqAckPlayerMove::movetype() const {
+  return movetype_;
+}
+inline void ReqAckPlayerMove::set_movetype(::google::protobuf::int32 value) {
+  set_has_movetype();
+  movetype_ = value;
+}
+
+// repeated .NFMsg.Position target_pos = 3;
+inline int ReqAckPlayerMove::target_pos_size() const {
+  return target_pos_.size();
+}
+inline void ReqAckPlayerMove::clear_target_pos() {
+  target_pos_.Clear();
+}
+inline const ::NFMsg::Position& ReqAckPlayerMove::target_pos(int index) const {
+  return target_pos_.Get(index);
+}
+inline ::NFMsg::Position* ReqAckPlayerMove::mutable_target_pos(int index) {
+  return target_pos_.Mutable(index);
+}
+inline ::NFMsg::Position* ReqAckPlayerMove::add_target_pos() {
+  return target_pos_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >&
+ReqAckPlayerMove::target_pos() const {
+  return target_pos_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >*
+ReqAckPlayerMove::mutable_target_pos() {
+  return &target_pos_;
+}
+
+// repeated .NFMsg.Position source_pos = 4;
+inline int ReqAckPlayerMove::source_pos_size() const {
+  return source_pos_.size();
+}
+inline void ReqAckPlayerMove::clear_source_pos() {
+  source_pos_.Clear();
+}
+inline const ::NFMsg::Position& ReqAckPlayerMove::source_pos(int index) const {
+  return source_pos_.Get(index);
+}
+inline ::NFMsg::Position* ReqAckPlayerMove::mutable_source_pos(int index) {
+  return source_pos_.Mutable(index);
+}
+inline ::NFMsg::Position* ReqAckPlayerMove::add_source_pos() {
+  return source_pos_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >&
+ReqAckPlayerMove::source_pos() const {
+  return source_pos_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >*
+ReqAckPlayerMove::mutable_source_pos() {
+  return &source_pos_;
+}
+
+// -------------------------------------------------------------------
+
+// ChatContainer
+
+// required int32 ConTainerType = 2;
+inline bool ChatContainer::has_containertype() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ChatContainer::set_has_containertype() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ChatContainer::clear_has_containertype() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ChatContainer::clear_containertype() {
+  containertype_ = 0;
+  clear_has_containertype();
+}
+inline ::google::protobuf::int32 ChatContainer::containertype() const {
+  return containertype_;
+}
+inline void ChatContainer::set_containertype(::google::protobuf::int32 value) {
+  set_has_containertype();
+  containertype_ = value;
+}
+
+// required bytes data_info = 3;
+inline bool ChatContainer::has_data_info() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ChatContainer::set_has_data_info() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ChatContainer::clear_has_data_info() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ChatContainer::clear_data_info() {
+  if (data_info_ != &::google::protobuf::internal::kEmptyString) {
+    data_info_->clear();
+  }
+  clear_has_data_info();
+}
+inline const ::std::string& ChatContainer::data_info() const {
+  return *data_info_;
+}
+inline void ChatContainer::set_data_info(const ::std::string& value) {
+  set_has_data_info();
+  if (data_info_ == &::google::protobuf::internal::kEmptyString) {
+    data_info_ = new ::std::string;
+  }
+  data_info_->assign(value);
+}
+inline void ChatContainer::set_data_info(const char* value) {
+  set_has_data_info();
+  if (data_info_ == &::google::protobuf::internal::kEmptyString) {
+    data_info_ = new ::std::string;
+  }
+  data_info_->assign(value);
+}
+inline void ChatContainer::set_data_info(const void* value, size_t size) {
+  set_has_data_info();
+  if (data_info_ == &::google::protobuf::internal::kEmptyString) {
+    data_info_ = new ::std::string;
+  }
+  data_info_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ChatContainer::mutable_data_info() {
+  set_has_data_info();
+  if (data_info_ == &::google::protobuf::internal::kEmptyString) {
+    data_info_ = new ::std::string;
+  }
+  return data_info_;
+}
+inline ::std::string* ChatContainer::release_data_info() {
+  clear_has_data_info();
+  if (data_info_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = data_info_;
+    data_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ChatContainer::set_allocated_data_info(::std::string* data_info) {
+  if (data_info_ != &::google::protobuf::internal::kEmptyString) {
+    delete data_info_;
+  }
+  if (data_info) {
+    set_has_data_info();
+    data_info_ = data_info;
+  } else {
+    clear_has_data_info();
+    data_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckPlayerChat
+
+// required .NFMsg.Ident chat_id = 1;
+inline bool ReqAckPlayerChat::has_chat_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckPlayerChat::set_has_chat_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckPlayerChat::clear_has_chat_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckPlayerChat::clear_chat_id() {
+  if (chat_id_ != NULL) chat_id_->::NFMsg::Ident::Clear();
+  clear_has_chat_id();
+}
+inline const ::NFMsg::Ident& ReqAckPlayerChat::chat_id() const {
+  return chat_id_ != NULL ? *chat_id_ : *default_instance_->chat_id_;
+}
+inline ::NFMsg::Ident* ReqAckPlayerChat::mutable_chat_id() {
+  set_has_chat_id();
+  if (chat_id_ == NULL) chat_id_ = new ::NFMsg::Ident;
+  return chat_id_;
+}
+inline ::NFMsg::Ident* ReqAckPlayerChat::release_chat_id() {
+  clear_has_chat_id();
+  ::NFMsg::Ident* temp = chat_id_;
+  chat_id_ = NULL;
+  return temp;
+}
+inline void ReqAckPlayerChat::set_allocated_chat_id(::NFMsg::Ident* chat_id) {
+  delete chat_id_;
+  chat_id_ = chat_id;
+  if (chat_id) {
+    set_has_chat_id();
+  } else {
+    clear_has_chat_id();
+  }
+}
+
+// required .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 2;
+inline bool ReqAckPlayerChat::has_chat_type() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckPlayerChat::set_has_chat_type() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckPlayerChat::clear_has_chat_type() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckPlayerChat::clear_chat_type() {
+  chat_type_ = 0;
+  clear_has_chat_type();
+}
+inline ::NFMsg::ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::chat_type() const {
+  return static_cast< ::NFMsg::ReqAckPlayerChat_EGameChatType >(chat_type_);
+}
+inline void ReqAckPlayerChat::set_chat_type(::NFMsg::ReqAckPlayerChat_EGameChatType value) {
+  assert(::NFMsg::ReqAckPlayerChat_EGameChatType_IsValid(value));
+  set_has_chat_type();
+  chat_type_ = value;
+}
+
+// required bytes chat_info = 3;
+inline bool ReqAckPlayerChat::has_chat_info() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckPlayerChat::set_has_chat_info() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckPlayerChat::clear_has_chat_info() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckPlayerChat::clear_chat_info() {
+  if (chat_info_ != &::google::protobuf::internal::kEmptyString) {
+    chat_info_->clear();
+  }
+  clear_has_chat_info();
+}
+inline const ::std::string& ReqAckPlayerChat::chat_info() const {
+  return *chat_info_;
+}
+inline void ReqAckPlayerChat::set_chat_info(const ::std::string& value) {
+  set_has_chat_info();
+  if (chat_info_ == &::google::protobuf::internal::kEmptyString) {
+    chat_info_ = new ::std::string;
+  }
+  chat_info_->assign(value);
+}
+inline void ReqAckPlayerChat::set_chat_info(const char* value) {
+  set_has_chat_info();
+  if (chat_info_ == &::google::protobuf::internal::kEmptyString) {
+    chat_info_ = new ::std::string;
+  }
+  chat_info_->assign(value);
+}
+inline void ReqAckPlayerChat::set_chat_info(const void* value, size_t size) {
+  set_has_chat_info();
+  if (chat_info_ == &::google::protobuf::internal::kEmptyString) {
+    chat_info_ = new ::std::string;
+  }
+  chat_info_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckPlayerChat::mutable_chat_info() {
+  set_has_chat_info();
+  if (chat_info_ == &::google::protobuf::internal::kEmptyString) {
+    chat_info_ = new ::std::string;
+  }
+  return chat_info_;
+}
+inline ::std::string* ReqAckPlayerChat::release_chat_info() {
+  clear_has_chat_info();
+  if (chat_info_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = chat_info_;
+    chat_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckPlayerChat::set_allocated_chat_info(::std::string* chat_info) {
+  if (chat_info_ != &::google::protobuf::internal::kEmptyString) {
+    delete chat_info_;
+  }
+  if (chat_info) {
+    set_has_chat_info();
+    chat_info_ = chat_info;
+  } else {
+    clear_has_chat_info();
+    chat_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required bytes chat_name = 4;
+inline bool ReqAckPlayerChat::has_chat_name() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqAckPlayerChat::set_has_chat_name() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqAckPlayerChat::clear_has_chat_name() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqAckPlayerChat::clear_chat_name() {
+  if (chat_name_ != &::google::protobuf::internal::kEmptyString) {
+    chat_name_->clear();
+  }
+  clear_has_chat_name();
+}
+inline const ::std::string& ReqAckPlayerChat::chat_name() const {
+  return *chat_name_;
+}
+inline void ReqAckPlayerChat::set_chat_name(const ::std::string& value) {
+  set_has_chat_name();
+  if (chat_name_ == &::google::protobuf::internal::kEmptyString) {
+    chat_name_ = new ::std::string;
+  }
+  chat_name_->assign(value);
+}
+inline void ReqAckPlayerChat::set_chat_name(const char* value) {
+  set_has_chat_name();
+  if (chat_name_ == &::google::protobuf::internal::kEmptyString) {
+    chat_name_ = new ::std::string;
+  }
+  chat_name_->assign(value);
+}
+inline void ReqAckPlayerChat::set_chat_name(const void* value, size_t size) {
+  set_has_chat_name();
+  if (chat_name_ == &::google::protobuf::internal::kEmptyString) {
+    chat_name_ = new ::std::string;
+  }
+  chat_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckPlayerChat::mutable_chat_name() {
+  set_has_chat_name();
+  if (chat_name_ == &::google::protobuf::internal::kEmptyString) {
+    chat_name_ = new ::std::string;
+  }
+  return chat_name_;
+}
+inline ::std::string* ReqAckPlayerChat::release_chat_name() {
+  clear_has_chat_name();
+  if (chat_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = chat_name_;
+    chat_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckPlayerChat::set_allocated_chat_name(::std::string* chat_name) {
+  if (chat_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete chat_name_;
+  }
+  if (chat_name) {
+    set_has_chat_name();
+    chat_name_ = chat_name;
+  } else {
+    clear_has_chat_name();
+    chat_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional .NFMsg.Ident target_id = 5;
+inline bool ReqAckPlayerChat::has_target_id() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ReqAckPlayerChat::set_has_target_id() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ReqAckPlayerChat::clear_has_target_id() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ReqAckPlayerChat::clear_target_id() {
+  if (target_id_ != NULL) target_id_->::NFMsg::Ident::Clear();
+  clear_has_target_id();
+}
+inline const ::NFMsg::Ident& ReqAckPlayerChat::target_id() const {
+  return target_id_ != NULL ? *target_id_ : *default_instance_->target_id_;
+}
+inline ::NFMsg::Ident* ReqAckPlayerChat::mutable_target_id() {
+  set_has_target_id();
+  if (target_id_ == NULL) target_id_ = new ::NFMsg::Ident;
+  return target_id_;
+}
+inline ::NFMsg::Ident* ReqAckPlayerChat::release_target_id() {
+  clear_has_target_id();
+  ::NFMsg::Ident* temp = target_id_;
+  target_id_ = NULL;
+  return temp;
+}
+inline void ReqAckPlayerChat::set_allocated_target_id(::NFMsg::Ident* target_id) {
+  delete target_id_;
+  target_id_ = target_id;
+  if (target_id) {
+    set_has_target_id();
+  } else {
+    clear_has_target_id();
+  }
+}
+
+// repeated .NFMsg.ChatContainer Container_data = 6;
+inline int ReqAckPlayerChat::container_data_size() const {
+  return container_data_.size();
+}
+inline void ReqAckPlayerChat::clear_container_data() {
+  container_data_.Clear();
+}
+inline const ::NFMsg::ChatContainer& ReqAckPlayerChat::container_data(int index) const {
+  return container_data_.Get(index);
+}
+inline ::NFMsg::ChatContainer* ReqAckPlayerChat::mutable_container_data(int index) {
+  return container_data_.Mutable(index);
+}
+inline ::NFMsg::ChatContainer* ReqAckPlayerChat::add_container_data() {
+  return container_data_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ChatContainer >&
+ReqAckPlayerChat::container_data() const {
+  return container_data_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ChatContainer >*
+ReqAckPlayerChat::mutable_container_data() {
+  return &container_data_;
+}
+
+// -------------------------------------------------------------------
+
+// EffectData
+
+// required .NFMsg.Ident effect_ident = 1;
+inline bool EffectData::has_effect_ident() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void EffectData::set_has_effect_ident() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void EffectData::clear_has_effect_ident() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void EffectData::clear_effect_ident() {
+  if (effect_ident_ != NULL) effect_ident_->::NFMsg::Ident::Clear();
+  clear_has_effect_ident();
+}
+inline const ::NFMsg::Ident& EffectData::effect_ident() const {
+  return effect_ident_ != NULL ? *effect_ident_ : *default_instance_->effect_ident_;
+}
+inline ::NFMsg::Ident* EffectData::mutable_effect_ident() {
+  set_has_effect_ident();
+  if (effect_ident_ == NULL) effect_ident_ = new ::NFMsg::Ident;
+  return effect_ident_;
+}
+inline ::NFMsg::Ident* EffectData::release_effect_ident() {
+  clear_has_effect_ident();
+  ::NFMsg::Ident* temp = effect_ident_;
+  effect_ident_ = NULL;
+  return temp;
+}
+inline void EffectData::set_allocated_effect_ident(::NFMsg::Ident* effect_ident) {
+  delete effect_ident_;
+  effect_ident_ = effect_ident;
+  if (effect_ident) {
+    set_has_effect_ident();
+  } else {
+    clear_has_effect_ident();
+  }
+}
+
+// required int32 effect_value = 2;
+inline bool EffectData::has_effect_value() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void EffectData::set_has_effect_value() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void EffectData::clear_has_effect_value() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void EffectData::clear_effect_value() {
+  effect_value_ = 0;
+  clear_has_effect_value();
+}
+inline ::google::protobuf::int32 EffectData::effect_value() const {
+  return effect_value_;
+}
+inline void EffectData::set_effect_value(::google::protobuf::int32 value) {
+  set_has_effect_value();
+  effect_value_ = value;
+}
+
+// required .NFMsg.EffectData.EResultType effect_rlt = 3;
+inline bool EffectData::has_effect_rlt() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void EffectData::set_has_effect_rlt() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void EffectData::clear_has_effect_rlt() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void EffectData::clear_effect_rlt() {
+  effect_rlt_ = 0;
+  clear_has_effect_rlt();
+}
+inline ::NFMsg::EffectData_EResultType EffectData::effect_rlt() const {
+  return static_cast< ::NFMsg::EffectData_EResultType >(effect_rlt_);
+}
+inline void EffectData::set_effect_rlt(::NFMsg::EffectData_EResultType value) {
+  assert(::NFMsg::EffectData_EResultType_IsValid(value));
+  set_has_effect_rlt();
+  effect_rlt_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckUseSkill
+
+// required .NFMsg.Ident user = 1;
+inline bool ReqAckUseSkill::has_user() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckUseSkill::set_has_user() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckUseSkill::clear_has_user() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckUseSkill::clear_user() {
+  if (user_ != NULL) user_->::NFMsg::Ident::Clear();
+  clear_has_user();
+}
+inline const ::NFMsg::Ident& ReqAckUseSkill::user() const {
+  return user_ != NULL ? *user_ : *default_instance_->user_;
+}
+inline ::NFMsg::Ident* ReqAckUseSkill::mutable_user() {
+  set_has_user();
+  if (user_ == NULL) user_ = new ::NFMsg::Ident;
+  return user_;
+}
+inline ::NFMsg::Ident* ReqAckUseSkill::release_user() {
+  clear_has_user();
+  ::NFMsg::Ident* temp = user_;
+  user_ = NULL;
+  return temp;
+}
+inline void ReqAckUseSkill::set_allocated_user(::NFMsg::Ident* user) {
+  delete user_;
+  user_ = user;
+  if (user) {
+    set_has_user();
+  } else {
+    clear_has_user();
+  }
+}
+
+// required bytes skill_id = 2;
+inline bool ReqAckUseSkill::has_skill_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckUseSkill::set_has_skill_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckUseSkill::clear_has_skill_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckUseSkill::clear_skill_id() {
+  if (skill_id_ != &::google::protobuf::internal::kEmptyString) {
+    skill_id_->clear();
+  }
+  clear_has_skill_id();
+}
+inline const ::std::string& ReqAckUseSkill::skill_id() const {
+  return *skill_id_;
+}
+inline void ReqAckUseSkill::set_skill_id(const ::std::string& value) {
+  set_has_skill_id();
+  if (skill_id_ == &::google::protobuf::internal::kEmptyString) {
+    skill_id_ = new ::std::string;
+  }
+  skill_id_->assign(value);
+}
+inline void ReqAckUseSkill::set_skill_id(const char* value) {
+  set_has_skill_id();
+  if (skill_id_ == &::google::protobuf::internal::kEmptyString) {
+    skill_id_ = new ::std::string;
+  }
+  skill_id_->assign(value);
+}
+inline void ReqAckUseSkill::set_skill_id(const void* value, size_t size) {
+  set_has_skill_id();
+  if (skill_id_ == &::google::protobuf::internal::kEmptyString) {
+    skill_id_ = new ::std::string;
+  }
+  skill_id_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckUseSkill::mutable_skill_id() {
+  set_has_skill_id();
+  if (skill_id_ == &::google::protobuf::internal::kEmptyString) {
+    skill_id_ = new ::std::string;
+  }
+  return skill_id_;
+}
+inline ::std::string* ReqAckUseSkill::release_skill_id() {
+  clear_has_skill_id();
+  if (skill_id_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = skill_id_;
+    skill_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckUseSkill::set_allocated_skill_id(::std::string* skill_id) {
+  if (skill_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete skill_id_;
+  }
+  if (skill_id) {
+    set_has_skill_id();
+    skill_id_ = skill_id;
+  } else {
+    clear_has_skill_id();
+    skill_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required .NFMsg.Position now_pos = 3;
+inline bool ReqAckUseSkill::has_now_pos() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckUseSkill::set_has_now_pos() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckUseSkill::clear_has_now_pos() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckUseSkill::clear_now_pos() {
+  if (now_pos_ != NULL) now_pos_->::NFMsg::Position::Clear();
+  clear_has_now_pos();
+}
+inline const ::NFMsg::Position& ReqAckUseSkill::now_pos() const {
+  return now_pos_ != NULL ? *now_pos_ : *default_instance_->now_pos_;
+}
+inline ::NFMsg::Position* ReqAckUseSkill::mutable_now_pos() {
+  set_has_now_pos();
+  if (now_pos_ == NULL) now_pos_ = new ::NFMsg::Position;
+  return now_pos_;
+}
+inline ::NFMsg::Position* ReqAckUseSkill::release_now_pos() {
+  clear_has_now_pos();
+  ::NFMsg::Position* temp = now_pos_;
+  now_pos_ = NULL;
+  return temp;
+}
+inline void ReqAckUseSkill::set_allocated_now_pos(::NFMsg::Position* now_pos) {
+  delete now_pos_;
+  now_pos_ = now_pos;
+  if (now_pos) {
+    set_has_now_pos();
+  } else {
+    clear_has_now_pos();
+  }
+}
+
+// required .NFMsg.Position tar_pos = 4;
+inline bool ReqAckUseSkill::has_tar_pos() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqAckUseSkill::set_has_tar_pos() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqAckUseSkill::clear_has_tar_pos() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqAckUseSkill::clear_tar_pos() {
+  if (tar_pos_ != NULL) tar_pos_->::NFMsg::Position::Clear();
+  clear_has_tar_pos();
+}
+inline const ::NFMsg::Position& ReqAckUseSkill::tar_pos() const {
+  return tar_pos_ != NULL ? *tar_pos_ : *default_instance_->tar_pos_;
+}
+inline ::NFMsg::Position* ReqAckUseSkill::mutable_tar_pos() {
+  set_has_tar_pos();
+  if (tar_pos_ == NULL) tar_pos_ = new ::NFMsg::Position;
+  return tar_pos_;
+}
+inline ::NFMsg::Position* ReqAckUseSkill::release_tar_pos() {
+  clear_has_tar_pos();
+  ::NFMsg::Position* temp = tar_pos_;
+  tar_pos_ = NULL;
+  return temp;
+}
+inline void ReqAckUseSkill::set_allocated_tar_pos(::NFMsg::Position* tar_pos) {
+  delete tar_pos_;
+  tar_pos_ = tar_pos;
+  if (tar_pos) {
+    set_has_tar_pos();
+  } else {
+    clear_has_tar_pos();
+  }
+}
+
+// required int32 use_index = 5;
+inline bool ReqAckUseSkill::has_use_index() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ReqAckUseSkill::set_has_use_index() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ReqAckUseSkill::clear_has_use_index() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ReqAckUseSkill::clear_use_index() {
+  use_index_ = 0;
+  clear_has_use_index();
+}
+inline ::google::protobuf::int32 ReqAckUseSkill::use_index() const {
+  return use_index_;
+}
+inline void ReqAckUseSkill::set_use_index(::google::protobuf::int32 value) {
+  set_has_use_index();
+  use_index_ = value;
+}
+
+// repeated .NFMsg.EffectData effect_data = 6;
+inline int ReqAckUseSkill::effect_data_size() const {
+  return effect_data_.size();
+}
+inline void ReqAckUseSkill::clear_effect_data() {
+  effect_data_.Clear();
+}
+inline const ::NFMsg::EffectData& ReqAckUseSkill::effect_data(int index) const {
+  return effect_data_.Get(index);
+}
+inline ::NFMsg::EffectData* ReqAckUseSkill::mutable_effect_data(int index) {
+  return effect_data_.Mutable(index);
+}
+inline ::NFMsg::EffectData* ReqAckUseSkill::add_effect_data() {
+  return effect_data_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >&
+ReqAckUseSkill::effect_data() const {
+  return effect_data_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >*
+ReqAckUseSkill::mutable_effect_data() {
+  return &effect_data_;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckUseItem
+
+// required .NFMsg.Ident user = 1;
+inline bool ReqAckUseItem::has_user() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckUseItem::set_has_user() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckUseItem::clear_has_user() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckUseItem::clear_user() {
+  if (user_ != NULL) user_->::NFMsg::Ident::Clear();
+  clear_has_user();
+}
+inline const ::NFMsg::Ident& ReqAckUseItem::user() const {
+  return user_ != NULL ? *user_ : *default_instance_->user_;
+}
+inline ::NFMsg::Ident* ReqAckUseItem::mutable_user() {
+  set_has_user();
+  if (user_ == NULL) user_ = new ::NFMsg::Ident;
+  return user_;
+}
+inline ::NFMsg::Ident* ReqAckUseItem::release_user() {
+  clear_has_user();
+  ::NFMsg::Ident* temp = user_;
+  user_ = NULL;
+  return temp;
+}
+inline void ReqAckUseItem::set_allocated_user(::NFMsg::Ident* user) {
+  delete user_;
+  user_ = user;
+  if (user) {
+    set_has_user();
+  } else {
+    clear_has_user();
+  }
+}
+
+// required .NFMsg.Ident item_guid = 2;
+inline bool ReqAckUseItem::has_item_guid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckUseItem::set_has_item_guid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckUseItem::clear_has_item_guid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckUseItem::clear_item_guid() {
+  if (item_guid_ != NULL) item_guid_->::NFMsg::Ident::Clear();
+  clear_has_item_guid();
+}
+inline const ::NFMsg::Ident& ReqAckUseItem::item_guid() const {
+  return item_guid_ != NULL ? *item_guid_ : *default_instance_->item_guid_;
+}
+inline ::NFMsg::Ident* ReqAckUseItem::mutable_item_guid() {
+  set_has_item_guid();
+  if (item_guid_ == NULL) item_guid_ = new ::NFMsg::Ident;
+  return item_guid_;
+}
+inline ::NFMsg::Ident* ReqAckUseItem::release_item_guid() {
+  clear_has_item_guid();
+  ::NFMsg::Ident* temp = item_guid_;
+  item_guid_ = NULL;
+  return temp;
+}
+inline void ReqAckUseItem::set_allocated_item_guid(::NFMsg::Ident* item_guid) {
+  delete item_guid_;
+  item_guid_ = item_guid;
+  if (item_guid) {
+    set_has_item_guid();
+  } else {
+    clear_has_item_guid();
+  }
+}
+
+// repeated .NFMsg.EffectData effect_data = 3;
+inline int ReqAckUseItem::effect_data_size() const {
+  return effect_data_.size();
+}
+inline void ReqAckUseItem::clear_effect_data() {
+  effect_data_.Clear();
+}
+inline const ::NFMsg::EffectData& ReqAckUseItem::effect_data(int index) const {
+  return effect_data_.Get(index);
+}
+inline ::NFMsg::EffectData* ReqAckUseItem::mutable_effect_data(int index) {
+  return effect_data_.Mutable(index);
+}
+inline ::NFMsg::EffectData* ReqAckUseItem::add_effect_data() {
+  return effect_data_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >&
+ReqAckUseItem::effect_data() const {
+  return effect_data_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData >*
+ReqAckUseItem::mutable_effect_data() {
+  return &effect_data_;
+}
+
+// required .NFMsg.ItemStruct item = 4;
+inline bool ReqAckUseItem::has_item() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqAckUseItem::set_has_item() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqAckUseItem::clear_has_item() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqAckUseItem::clear_item() {
+  if (item_ != NULL) item_->::NFMsg::ItemStruct::Clear();
+  clear_has_item();
+}
+inline const ::NFMsg::ItemStruct& ReqAckUseItem::item() const {
+  return item_ != NULL ? *item_ : *default_instance_->item_;
+}
+inline ::NFMsg::ItemStruct* ReqAckUseItem::mutable_item() {
+  set_has_item();
+  if (item_ == NULL) item_ = new ::NFMsg::ItemStruct;
+  return item_;
+}
+inline ::NFMsg::ItemStruct* ReqAckUseItem::release_item() {
+  clear_has_item();
+  ::NFMsg::ItemStruct* temp = item_;
+  item_ = NULL;
+  return temp;
+}
+inline void ReqAckUseItem::set_allocated_item(::NFMsg::ItemStruct* item) {
+  delete item_;
+  item_ = item;
+  if (item) {
+    set_has_item();
+  } else {
+    clear_has_item();
+  }
+}
+
+// required .NFMsg.Ident targetid = 5;
+inline bool ReqAckUseItem::has_targetid() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ReqAckUseItem::set_has_targetid() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ReqAckUseItem::clear_has_targetid() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ReqAckUseItem::clear_targetid() {
+  if (targetid_ != NULL) targetid_->::NFMsg::Ident::Clear();
+  clear_has_targetid();
+}
+inline const ::NFMsg::Ident& ReqAckUseItem::targetid() const {
+  return targetid_ != NULL ? *targetid_ : *default_instance_->targetid_;
+}
+inline ::NFMsg::Ident* ReqAckUseItem::mutable_targetid() {
+  set_has_targetid();
+  if (targetid_ == NULL) targetid_ = new ::NFMsg::Ident;
+  return targetid_;
+}
+inline ::NFMsg::Ident* ReqAckUseItem::release_targetid() {
+  clear_has_targetid();
+  ::NFMsg::Ident* temp = targetid_;
+  targetid_ = NULL;
+  return temp;
+}
+inline void ReqAckUseItem::set_allocated_targetid(::NFMsg::Ident* targetid) {
+  delete targetid_;
+  targetid_ = targetid;
+  if (targetid) {
+    set_has_targetid();
+  } else {
+    clear_has_targetid();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckSwapScene
+
+// required .NFMsg.ReqAckSwapScene.EGameSwapType transfer_type = 1;
+inline bool ReqAckSwapScene::has_transfer_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckSwapScene::set_has_transfer_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckSwapScene::clear_has_transfer_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckSwapScene::clear_transfer_type() {
+  transfer_type_ = 0;
+  clear_has_transfer_type();
+}
+inline ::NFMsg::ReqAckSwapScene_EGameSwapType ReqAckSwapScene::transfer_type() const {
+  return static_cast< ::NFMsg::ReqAckSwapScene_EGameSwapType >(transfer_type_);
+}
+inline void ReqAckSwapScene::set_transfer_type(::NFMsg::ReqAckSwapScene_EGameSwapType value) {
+  assert(::NFMsg::ReqAckSwapScene_EGameSwapType_IsValid(value));
+  set_has_transfer_type();
+  transfer_type_ = value;
+}
+
+// required int32 scene_id = 2;
+inline bool ReqAckSwapScene::has_scene_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckSwapScene::set_has_scene_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckSwapScene::clear_has_scene_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckSwapScene::clear_scene_id() {
+  scene_id_ = 0;
+  clear_has_scene_id();
+}
+inline ::google::protobuf::int32 ReqAckSwapScene::scene_id() const {
+  return scene_id_;
+}
+inline void ReqAckSwapScene::set_scene_id(::google::protobuf::int32 value) {
+  set_has_scene_id();
+  scene_id_ = value;
+}
+
+// required int32 line_id = 3;
+inline bool ReqAckSwapScene::has_line_id() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckSwapScene::set_has_line_id() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckSwapScene::clear_has_line_id() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckSwapScene::clear_line_id() {
+  line_id_ = 0;
+  clear_has_line_id();
+}
+inline ::google::protobuf::int32 ReqAckSwapScene::line_id() const {
+  return line_id_;
+}
+inline void ReqAckSwapScene::set_line_id(::google::protobuf::int32 value) {
+  set_has_line_id();
+  line_id_ = value;
+}
+
+// optional float x = 4;
+inline bool ReqAckSwapScene::has_x() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqAckSwapScene::set_has_x() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqAckSwapScene::clear_has_x() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqAckSwapScene::clear_x() {
+  x_ = 0;
+  clear_has_x();
+}
+inline float ReqAckSwapScene::x() const {
+  return x_;
+}
+inline void ReqAckSwapScene::set_x(float value) {
+  set_has_x();
+  x_ = value;
+}
+
+// optional float y = 5;
+inline bool ReqAckSwapScene::has_y() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ReqAckSwapScene::set_has_y() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ReqAckSwapScene::clear_has_y() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ReqAckSwapScene::clear_y() {
+  y_ = 0;
+  clear_has_y();
+}
+inline float ReqAckSwapScene::y() const {
+  return y_;
+}
+inline void ReqAckSwapScene::set_y(float value) {
+  set_has_y();
+  y_ = value;
+}
+
+// optional float z = 6;
+inline bool ReqAckSwapScene::has_z() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void ReqAckSwapScene::set_has_z() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void ReqAckSwapScene::clear_has_z() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void ReqAckSwapScene::clear_z() {
+  z_ = 0;
+  clear_has_z();
+}
+inline float ReqAckSwapScene::z() const {
+  return z_;
+}
+inline void ReqAckSwapScene::set_z(float value) {
+  set_has_z();
+  z_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ItemStruct
+
+// required string item_id = 1;
+inline bool ItemStruct::has_item_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ItemStruct::set_has_item_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ItemStruct::clear_has_item_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ItemStruct::clear_item_id() {
+  if (item_id_ != &::google::protobuf::internal::kEmptyString) {
+    item_id_->clear();
+  }
+  clear_has_item_id();
+}
+inline const ::std::string& ItemStruct::item_id() const {
+  return *item_id_;
+}
+inline void ItemStruct::set_item_id(const ::std::string& value) {
+  set_has_item_id();
+  if (item_id_ == &::google::protobuf::internal::kEmptyString) {
+    item_id_ = new ::std::string;
+  }
+  item_id_->assign(value);
+}
+inline void ItemStruct::set_item_id(const char* value) {
+  set_has_item_id();
+  if (item_id_ == &::google::protobuf::internal::kEmptyString) {
+    item_id_ = new ::std::string;
+  }
+  item_id_->assign(value);
+}
+inline void ItemStruct::set_item_id(const char* value, size_t size) {
+  set_has_item_id();
+  if (item_id_ == &::google::protobuf::internal::kEmptyString) {
+    item_id_ = new ::std::string;
+  }
+  item_id_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ItemStruct::mutable_item_id() {
+  set_has_item_id();
+  if (item_id_ == &::google::protobuf::internal::kEmptyString) {
+    item_id_ = new ::std::string;
+  }
+  return item_id_;
+}
+inline ::std::string* ItemStruct::release_item_id() {
+  clear_has_item_id();
+  if (item_id_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = item_id_;
+    item_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ItemStruct::set_allocated_item_id(::std::string* item_id) {
+  if (item_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete item_id_;
+  }
+  if (item_id) {
+    set_has_item_id();
+    item_id_ = item_id;
+  } else {
+    clear_has_item_id();
+    item_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required int32 item_count = 2;
+inline bool ItemStruct::has_item_count() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ItemStruct::set_has_item_count() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ItemStruct::clear_has_item_count() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ItemStruct::clear_item_count() {
+  item_count_ = 0;
+  clear_has_item_count();
+}
+inline ::google::protobuf::int32 ItemStruct::item_count() const {
+  return item_count_;
+}
+inline void ItemStruct::set_item_count(::google::protobuf::int32 value) {
+  set_has_item_count();
+  item_count_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// CurrencyStruct
+
+// required int32 currency_type = 1;
+inline bool CurrencyStruct::has_currency_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void CurrencyStruct::set_has_currency_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void CurrencyStruct::clear_has_currency_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void CurrencyStruct::clear_currency_type() {
+  currency_type_ = 0;
+  clear_has_currency_type();
+}
+inline ::google::protobuf::int32 CurrencyStruct::currency_type() const {
+  return currency_type_;
+}
+inline void CurrencyStruct::set_currency_type(::google::protobuf::int32 value) {
+  set_has_currency_type();
+  currency_type_ = value;
+}
+
+// required int32 currency_count = 2;
+inline bool CurrencyStruct::has_currency_count() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void CurrencyStruct::set_has_currency_count() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void CurrencyStruct::clear_has_currency_count() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void CurrencyStruct::clear_currency_count() {
+  currency_count_ = 0;
+  clear_has_currency_count();
+}
+inline ::google::protobuf::int32 CurrencyStruct::currency_count() const {
+  return currency_count_;
+}
+inline void CurrencyStruct::set_currency_count(::google::protobuf::int32 value) {
+  set_has_currency_count();
+  currency_count_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckEndBattle
+
+// required int32 money = 1;
+inline bool ReqAckEndBattle::has_money() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckEndBattle::set_has_money() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckEndBattle::clear_has_money() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckEndBattle::clear_money() {
+  money_ = 0;
+  clear_has_money();
+}
+inline ::google::protobuf::int32 ReqAckEndBattle::money() const {
+  return money_;
+}
+inline void ReqAckEndBattle::set_money(::google::protobuf::int32 value) {
+  set_has_money();
+  money_ = value;
+}
+
+// required int32 exp = 2;
+inline bool ReqAckEndBattle::has_exp() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckEndBattle::set_has_exp() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckEndBattle::clear_has_exp() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckEndBattle::clear_exp() {
+  exp_ = 0;
+  clear_has_exp();
+}
+inline ::google::protobuf::int32 ReqAckEndBattle::exp() const {
+  return exp_;
+}
+inline void ReqAckEndBattle::set_exp(::google::protobuf::int32 value) {
+  set_has_exp();
+  exp_ = value;
+}
+
+// required int32 diamond = 3;
+inline bool ReqAckEndBattle::has_diamond() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckEndBattle::set_has_diamond() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckEndBattle::clear_has_diamond() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckEndBattle::clear_diamond() {
+  diamond_ = 0;
+  clear_has_diamond();
+}
+inline ::google::protobuf::int32 ReqAckEndBattle::diamond() const {
+  return diamond_;
+}
+inline void ReqAckEndBattle::set_diamond(::google::protobuf::int32 value) {
+  set_has_diamond();
+  diamond_ = value;
+}
+
+// repeated .NFMsg.ItemStruct item_list = 4;
+inline int ReqAckEndBattle::item_list_size() const {
+  return item_list_.size();
+}
+inline void ReqAckEndBattle::clear_item_list() {
+  item_list_.Clear();
+}
+inline const ::NFMsg::ItemStruct& ReqAckEndBattle::item_list(int index) const {
+  return item_list_.Get(index);
+}
+inline ::NFMsg::ItemStruct* ReqAckEndBattle::mutable_item_list(int index) {
+  return item_list_.Mutable(index);
+}
+inline ::NFMsg::ItemStruct* ReqAckEndBattle::add_item_list() {
+  return item_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >&
+ReqAckEndBattle::item_list() const {
+  return item_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >*
+ReqAckEndBattle::mutable_item_list() {
+  return &item_list_;
+}
+
+// -------------------------------------------------------------------
+
+// ReqPickDropItem
+
+// required .NFMsg.Ident item_guid = 2;
+inline bool ReqPickDropItem::has_item_guid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqPickDropItem::set_has_item_guid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqPickDropItem::clear_has_item_guid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqPickDropItem::clear_item_guid() {
+  if (item_guid_ != NULL) item_guid_->::NFMsg::Ident::Clear();
+  clear_has_item_guid();
+}
+inline const ::NFMsg::Ident& ReqPickDropItem::item_guid() const {
+  return item_guid_ != NULL ? *item_guid_ : *default_instance_->item_guid_;
+}
+inline ::NFMsg::Ident* ReqPickDropItem::mutable_item_guid() {
+  set_has_item_guid();
+  if (item_guid_ == NULL) item_guid_ = new ::NFMsg::Ident;
+  return item_guid_;
+}
+inline ::NFMsg::Ident* ReqPickDropItem::release_item_guid() {
+  clear_has_item_guid();
+  ::NFMsg::Ident* temp = item_guid_;
+  item_guid_ = NULL;
+  return temp;
+}
+inline void ReqPickDropItem::set_allocated_item_guid(::NFMsg::Ident* item_guid) {
+  delete item_guid_;
+  item_guid_ = item_guid;
+  if (item_guid) {
+    set_has_item_guid();
+  } else {
+    clear_has_item_guid();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqAcceptTask
+
+// required bytes task_id = 1;
+inline bool ReqAcceptTask::has_task_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAcceptTask::set_has_task_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAcceptTask::clear_has_task_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAcceptTask::clear_task_id() {
+  if (task_id_ != &::google::protobuf::internal::kEmptyString) {
+    task_id_->clear();
+  }
+  clear_has_task_id();
+}
+inline const ::std::string& ReqAcceptTask::task_id() const {
+  return *task_id_;
+}
+inline void ReqAcceptTask::set_task_id(const ::std::string& value) {
+  set_has_task_id();
+  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
+    task_id_ = new ::std::string;
+  }
+  task_id_->assign(value);
+}
+inline void ReqAcceptTask::set_task_id(const char* value) {
+  set_has_task_id();
+  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
+    task_id_ = new ::std::string;
+  }
+  task_id_->assign(value);
+}
+inline void ReqAcceptTask::set_task_id(const void* value, size_t size) {
+  set_has_task_id();
+  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
+    task_id_ = new ::std::string;
+  }
+  task_id_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAcceptTask::mutable_task_id() {
+  set_has_task_id();
+  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
+    task_id_ = new ::std::string;
+  }
+  return task_id_;
+}
+inline ::std::string* ReqAcceptTask::release_task_id() {
+  clear_has_task_id();
+  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = task_id_;
+    task_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAcceptTask::set_allocated_task_id(::std::string* task_id) {
+  if (task_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete task_id_;
+  }
+  if (task_id) {
+    set_has_task_id();
+    task_id_ = task_id;
+  } else {
+    clear_has_task_id();
+    task_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqCompeleteTask
+
+// required bytes task_id = 1;
+inline bool ReqCompeleteTask::has_task_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqCompeleteTask::set_has_task_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqCompeleteTask::clear_has_task_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqCompeleteTask::clear_task_id() {
+  if (task_id_ != &::google::protobuf::internal::kEmptyString) {
+    task_id_->clear();
+  }
+  clear_has_task_id();
+}
+inline const ::std::string& ReqCompeleteTask::task_id() const {
+  return *task_id_;
+}
+inline void ReqCompeleteTask::set_task_id(const ::std::string& value) {
+  set_has_task_id();
+  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
+    task_id_ = new ::std::string;
+  }
+  task_id_->assign(value);
+}
+inline void ReqCompeleteTask::set_task_id(const char* value) {
+  set_has_task_id();
+  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
+    task_id_ = new ::std::string;
+  }
+  task_id_->assign(value);
+}
+inline void ReqCompeleteTask::set_task_id(const void* value, size_t size) {
+  set_has_task_id();
+  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
+    task_id_ = new ::std::string;
+  }
+  task_id_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqCompeleteTask::mutable_task_id() {
+  set_has_task_id();
+  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
+    task_id_ = new ::std::string;
+  }
+  return task_id_;
+}
+inline ::std::string* ReqCompeleteTask::release_task_id() {
+  clear_has_task_id();
+  if (task_id_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = task_id_;
+    task_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqCompeleteTask::set_allocated_task_id(::std::string* task_id) {
+  if (task_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete task_id_;
+  }
+  if (task_id) {
+    set_has_task_id();
+    task_id_ = task_id;
+  } else {
+    clear_has_task_id();
+    task_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckJoinActivity
+
+// required .NFMsg.ReqAckJoinActivity.EGameActivityType activity_type = 1;
+inline bool ReqAckJoinActivity::has_activity_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckJoinActivity::set_has_activity_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckJoinActivity::clear_has_activity_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckJoinActivity::clear_activity_type() {
+  activity_type_ = 0;
+  clear_has_activity_type();
+}
+inline ::NFMsg::ReqAckJoinActivity_EGameActivityType ReqAckJoinActivity::activity_type() const {
+  return static_cast< ::NFMsg::ReqAckJoinActivity_EGameActivityType >(activity_type_);
+}
+inline void ReqAckJoinActivity::set_activity_type(::NFMsg::ReqAckJoinActivity_EGameActivityType value) {
+  assert(::NFMsg::ReqAckJoinActivity_EGameActivityType_IsValid(value));
+  set_has_activity_type();
+  activity_type_ = value;
+}
+
+// required .NFMsg.ReqAckJoinActivity.EGameActivitySubType sub_activity_type = 2;
+inline bool ReqAckJoinActivity::has_sub_activity_type() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckJoinActivity::set_has_sub_activity_type() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckJoinActivity::clear_has_sub_activity_type() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckJoinActivity::clear_sub_activity_type() {
+  sub_activity_type_ = 0;
+  clear_has_sub_activity_type();
+}
+inline ::NFMsg::ReqAckJoinActivity_EGameActivitySubType ReqAckJoinActivity::sub_activity_type() const {
+  return static_cast< ::NFMsg::ReqAckJoinActivity_EGameActivitySubType >(sub_activity_type_);
+}
+inline void ReqAckJoinActivity::set_sub_activity_type(::NFMsg::ReqAckJoinActivity_EGameActivitySubType value) {
+  assert(::NFMsg::ReqAckJoinActivity_EGameActivitySubType_IsValid(value));
+  set_has_sub_activity_type();
+  sub_activity_type_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckSearchOppnent
+
+// required .NFMsg.EBattleType search_type = 1;
+inline bool ReqAckSearchOppnent::has_search_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckSearchOppnent::set_has_search_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckSearchOppnent::clear_has_search_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckSearchOppnent::clear_search_type() {
+  search_type_ = 0;
+  clear_has_search_type();
+}
+inline ::NFMsg::EBattleType ReqAckSearchOppnent::search_type() const {
+  return static_cast< ::NFMsg::EBattleType >(search_type_);
+}
+inline void ReqAckSearchOppnent::set_search_type(::NFMsg::EBattleType value) {
+  assert(::NFMsg::EBattleType_IsValid(value));
+  set_has_search_type();
+  search_type_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckBattleOppnent
+
+// required .NFMsg.EBattleType battle_type = 1;
+inline bool ReqAckBattleOppnent::has_battle_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckBattleOppnent::set_has_battle_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckBattleOppnent::clear_has_battle_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckBattleOppnent::clear_battle_type() {
+  battle_type_ = 0;
+  clear_has_battle_type();
+}
+inline ::NFMsg::EBattleType ReqAckBattleOppnent::battle_type() const {
+  return static_cast< ::NFMsg::EBattleType >(battle_type_);
+}
+inline void ReqAckBattleOppnent::set_battle_type(::NFMsg::EBattleType value) {
+  assert(::NFMsg::EBattleType_IsValid(value));
+  set_has_battle_type();
+  battle_type_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckCreateGuild
+
+// required .NFMsg.Ident guild_id = 1;
+inline bool ReqAckCreateGuild::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckCreateGuild::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckCreateGuild::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckCreateGuild::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& ReqAckCreateGuild::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckCreateGuild::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckCreateGuild::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void ReqAckCreateGuild::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// required string guild_name = 2;
+inline bool ReqAckCreateGuild::has_guild_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckCreateGuild::set_has_guild_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckCreateGuild::clear_has_guild_name() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckCreateGuild::clear_guild_name() {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    guild_name_->clear();
+  }
+  clear_has_guild_name();
+}
+inline const ::std::string& ReqAckCreateGuild::guild_name() const {
+  return *guild_name_;
+}
+inline void ReqAckCreateGuild::set_guild_name(const ::std::string& value) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void ReqAckCreateGuild::set_guild_name(const char* value) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void ReqAckCreateGuild::set_guild_name(const char* value, size_t size) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckCreateGuild::mutable_guild_name() {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  return guild_name_;
+}
+inline ::std::string* ReqAckCreateGuild::release_guild_name() {
+  clear_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = guild_name_;
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckCreateGuild::set_allocated_guild_name(::std::string* guild_name) {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete guild_name_;
+  }
+  if (guild_name) {
+    set_has_guild_name();
+    guild_name_ = guild_name;
+  } else {
+    clear_has_guild_name();
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqSearchGuild
+
+// required string guild_name = 1;
+inline bool ReqSearchGuild::has_guild_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqSearchGuild::set_has_guild_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqSearchGuild::clear_has_guild_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqSearchGuild::clear_guild_name() {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    guild_name_->clear();
+  }
+  clear_has_guild_name();
+}
+inline const ::std::string& ReqSearchGuild::guild_name() const {
+  return *guild_name_;
+}
+inline void ReqSearchGuild::set_guild_name(const ::std::string& value) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void ReqSearchGuild::set_guild_name(const char* value) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void ReqSearchGuild::set_guild_name(const char* value, size_t size) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqSearchGuild::mutable_guild_name() {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  return guild_name_;
+}
+inline ::std::string* ReqSearchGuild::release_guild_name() {
+  clear_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = guild_name_;
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqSearchGuild::set_allocated_guild_name(::std::string* guild_name) {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete guild_name_;
+  }
+  if (guild_name) {
+    set_has_guild_name();
+    guild_name_ = guild_name;
+  } else {
+    clear_has_guild_name();
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// AckSearchGuild_SearchGuildObject
+
+// required .NFMsg.Ident guild_ID = 1;
+inline bool AckSearchGuild_SearchGuildObject::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AckSearchGuild_SearchGuildObject::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& AckSearchGuild_SearchGuildObject::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* AckSearchGuild_SearchGuildObject::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* AckSearchGuild_SearchGuildObject::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void AckSearchGuild_SearchGuildObject::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// required string guild_name = 2;
+inline bool AckSearchGuild_SearchGuildObject::has_guild_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckSearchGuild_SearchGuildObject::set_has_guild_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_has_guild_name() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_guild_name() {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    guild_name_->clear();
+  }
+  clear_has_guild_name();
+}
+inline const ::std::string& AckSearchGuild_SearchGuildObject::guild_name() const {
+  return *guild_name_;
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_name(const ::std::string& value) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_name(const char* value) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_name(const char* value, size_t size) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AckSearchGuild_SearchGuildObject::mutable_guild_name() {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  return guild_name_;
+}
+inline ::std::string* AckSearchGuild_SearchGuildObject::release_guild_name() {
+  clear_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = guild_name_;
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AckSearchGuild_SearchGuildObject::set_allocated_guild_name(::std::string* guild_name) {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete guild_name_;
+  }
+  if (guild_name) {
+    set_has_guild_name();
+    guild_name_ = guild_name;
+  } else {
+    clear_has_guild_name();
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string guild_icon = 3;
+inline bool AckSearchGuild_SearchGuildObject::has_guild_icon() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AckSearchGuild_SearchGuildObject::set_has_guild_icon() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_has_guild_icon() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_guild_icon() {
+  if (guild_icon_ != &::google::protobuf::internal::kEmptyString) {
+    guild_icon_->clear();
+  }
+  clear_has_guild_icon();
+}
+inline const ::std::string& AckSearchGuild_SearchGuildObject::guild_icon() const {
+  return *guild_icon_;
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_icon(const ::std::string& value) {
+  set_has_guild_icon();
+  if (guild_icon_ == &::google::protobuf::internal::kEmptyString) {
+    guild_icon_ = new ::std::string;
+  }
+  guild_icon_->assign(value);
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_icon(const char* value) {
+  set_has_guild_icon();
+  if (guild_icon_ == &::google::protobuf::internal::kEmptyString) {
+    guild_icon_ = new ::std::string;
+  }
+  guild_icon_->assign(value);
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_icon(const char* value, size_t size) {
+  set_has_guild_icon();
+  if (guild_icon_ == &::google::protobuf::internal::kEmptyString) {
+    guild_icon_ = new ::std::string;
+  }
+  guild_icon_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AckSearchGuild_SearchGuildObject::mutable_guild_icon() {
+  set_has_guild_icon();
+  if (guild_icon_ == &::google::protobuf::internal::kEmptyString) {
+    guild_icon_ = new ::std::string;
+  }
+  return guild_icon_;
+}
+inline ::std::string* AckSearchGuild_SearchGuildObject::release_guild_icon() {
+  clear_has_guild_icon();
+  if (guild_icon_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = guild_icon_;
+    guild_icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AckSearchGuild_SearchGuildObject::set_allocated_guild_icon(::std::string* guild_icon) {
+  if (guild_icon_ != &::google::protobuf::internal::kEmptyString) {
+    delete guild_icon_;
+  }
+  if (guild_icon) {
+    set_has_guild_icon();
+    guild_icon_ = guild_icon;
+  } else {
+    clear_has_guild_icon();
+    guild_icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required int32 guild_member_count = 4;
+inline bool AckSearchGuild_SearchGuildObject::has_guild_member_count() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void AckSearchGuild_SearchGuildObject::set_has_guild_member_count() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_has_guild_member_count() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_guild_member_count() {
+  guild_member_count_ = 0;
+  clear_has_guild_member_count();
+}
+inline ::google::protobuf::int32 AckSearchGuild_SearchGuildObject::guild_member_count() const {
+  return guild_member_count_;
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_member_count(::google::protobuf::int32 value) {
+  set_has_guild_member_count();
+  guild_member_count_ = value;
+}
+
+// required int32 guild_member_max_count = 5;
+inline bool AckSearchGuild_SearchGuildObject::has_guild_member_max_count() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void AckSearchGuild_SearchGuildObject::set_has_guild_member_max_count() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_has_guild_member_max_count() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_guild_member_max_count() {
+  guild_member_max_count_ = 0;
+  clear_has_guild_member_max_count();
+}
+inline ::google::protobuf::int32 AckSearchGuild_SearchGuildObject::guild_member_max_count() const {
+  return guild_member_max_count_;
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_member_max_count(::google::protobuf::int32 value) {
+  set_has_guild_member_max_count();
+  guild_member_max_count_ = value;
+}
+
+// required int32 guild_honor = 6;
+inline bool AckSearchGuild_SearchGuildObject::has_guild_honor() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void AckSearchGuild_SearchGuildObject::set_has_guild_honor() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_has_guild_honor() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_guild_honor() {
+  guild_honor_ = 0;
+  clear_has_guild_honor();
+}
+inline ::google::protobuf::int32 AckSearchGuild_SearchGuildObject::guild_honor() const {
+  return guild_honor_;
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_honor(::google::protobuf::int32 value) {
+  set_has_guild_honor();
+  guild_honor_ = value;
+}
+
+// required int32 guild_rank = 7;
+inline bool AckSearchGuild_SearchGuildObject::has_guild_rank() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void AckSearchGuild_SearchGuildObject::set_has_guild_rank() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_has_guild_rank() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void AckSearchGuild_SearchGuildObject::clear_guild_rank() {
+  guild_rank_ = 0;
+  clear_has_guild_rank();
+}
+inline ::google::protobuf::int32 AckSearchGuild_SearchGuildObject::guild_rank() const {
+  return guild_rank_;
+}
+inline void AckSearchGuild_SearchGuildObject::set_guild_rank(::google::protobuf::int32 value) {
+  set_has_guild_rank();
+  guild_rank_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// AckSearchGuild
+
+// repeated .NFMsg.AckSearchGuild.SearchGuildObject guild_list = 1;
+inline int AckSearchGuild::guild_list_size() const {
+  return guild_list_.size();
+}
+inline void AckSearchGuild::clear_guild_list() {
+  guild_list_.Clear();
+}
+inline const ::NFMsg::AckSearchGuild_SearchGuildObject& AckSearchGuild::guild_list(int index) const {
+  return guild_list_.Get(index);
+}
+inline ::NFMsg::AckSearchGuild_SearchGuildObject* AckSearchGuild::mutable_guild_list(int index) {
+  return guild_list_.Mutable(index);
+}
+inline ::NFMsg::AckSearchGuild_SearchGuildObject* AckSearchGuild::add_guild_list() {
+  return guild_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::AckSearchGuild_SearchGuildObject >&
+AckSearchGuild::guild_list() const {
+  return guild_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::AckSearchGuild_SearchGuildObject >*
+AckSearchGuild::mutable_guild_list() {
+  return &guild_list_;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckJoinGuild
+
+// required .NFMsg.Ident guild_id = 1;
+inline bool ReqAckJoinGuild::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckJoinGuild::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckJoinGuild::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckJoinGuild::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& ReqAckJoinGuild::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckJoinGuild::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckJoinGuild::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void ReqAckJoinGuild::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// required string guild_name = 2;
+inline bool ReqAckJoinGuild::has_guild_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckJoinGuild::set_has_guild_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckJoinGuild::clear_has_guild_name() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckJoinGuild::clear_guild_name() {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    guild_name_->clear();
+  }
+  clear_has_guild_name();
+}
+inline const ::std::string& ReqAckJoinGuild::guild_name() const {
+  return *guild_name_;
+}
+inline void ReqAckJoinGuild::set_guild_name(const ::std::string& value) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void ReqAckJoinGuild::set_guild_name(const char* value) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void ReqAckJoinGuild::set_guild_name(const char* value, size_t size) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckJoinGuild::mutable_guild_name() {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  return guild_name_;
+}
+inline ::std::string* ReqAckJoinGuild::release_guild_name() {
+  clear_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = guild_name_;
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckJoinGuild::set_allocated_guild_name(::std::string* guild_name) {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete guild_name_;
+  }
+  if (guild_name) {
+    set_has_guild_name();
+    guild_name_ = guild_name;
+  } else {
+    clear_has_guild_name();
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckLeaveGuild
+
+// required .NFMsg.Ident guild_id = 1;
+inline bool ReqAckLeaveGuild::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckLeaveGuild::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckLeaveGuild::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckLeaveGuild::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& ReqAckLeaveGuild::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckLeaveGuild::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckLeaveGuild::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void ReqAckLeaveGuild::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// required string guild_name = 2;
+inline bool ReqAckLeaveGuild::has_guild_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckLeaveGuild::set_has_guild_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckLeaveGuild::clear_has_guild_name() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckLeaveGuild::clear_guild_name() {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    guild_name_->clear();
+  }
+  clear_has_guild_name();
+}
+inline const ::std::string& ReqAckLeaveGuild::guild_name() const {
+  return *guild_name_;
+}
+inline void ReqAckLeaveGuild::set_guild_name(const ::std::string& value) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void ReqAckLeaveGuild::set_guild_name(const char* value) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(value);
+}
+inline void ReqAckLeaveGuild::set_guild_name(const char* value, size_t size) {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  guild_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckLeaveGuild::mutable_guild_name() {
+  set_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    guild_name_ = new ::std::string;
+  }
+  return guild_name_;
+}
+inline ::std::string* ReqAckLeaveGuild::release_guild_name() {
+  clear_has_guild_name();
+  if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = guild_name_;
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckLeaveGuild::set_allocated_guild_name(::std::string* guild_name) {
+  if (guild_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete guild_name_;
+  }
+  if (guild_name) {
+    set_has_guild_name();
+    guild_name_ = guild_name;
+  } else {
+    clear_has_guild_name();
+    guild_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckOprGuildMember
+
+// required .NFMsg.Ident guild_id = 1;
+inline bool ReqAckOprGuildMember::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckOprGuildMember::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckOprGuildMember::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckOprGuildMember::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& ReqAckOprGuildMember::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprGuildMember::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprGuildMember::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void ReqAckOprGuildMember::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// required .NFMsg.Ident member_id = 2;
+inline bool ReqAckOprGuildMember::has_member_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckOprGuildMember::set_has_member_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckOprGuildMember::clear_has_member_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckOprGuildMember::clear_member_id() {
+  if (member_id_ != NULL) member_id_->::NFMsg::Ident::Clear();
+  clear_has_member_id();
+}
+inline const ::NFMsg::Ident& ReqAckOprGuildMember::member_id() const {
+  return member_id_ != NULL ? *member_id_ : *default_instance_->member_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprGuildMember::mutable_member_id() {
+  set_has_member_id();
+  if (member_id_ == NULL) member_id_ = new ::NFMsg::Ident;
+  return member_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprGuildMember::release_member_id() {
+  clear_has_member_id();
+  ::NFMsg::Ident* temp = member_id_;
+  member_id_ = NULL;
+  return temp;
+}
+inline void ReqAckOprGuildMember::set_allocated_member_id(::NFMsg::Ident* member_id) {
+  delete member_id_;
+  member_id_ = member_id;
+  if (member_id) {
+    set_has_member_id();
+  } else {
+    clear_has_member_id();
+  }
+}
+
+// required .NFMsg.ReqAckOprGuildMember.EGGuildMemberOprType type = 3;
+inline bool ReqAckOprGuildMember::has_type() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckOprGuildMember::set_has_type() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckOprGuildMember::clear_has_type() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckOprGuildMember::clear_type() {
+  type_ = 0;
+  clear_has_type();
+}
+inline ::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType ReqAckOprGuildMember::type() const {
+  return static_cast< ::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType >(type_);
+}
+inline void ReqAckOprGuildMember::set_type(::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType value) {
+  assert(::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType_IsValid(value));
+  set_has_type();
+  type_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckOprGuild
+
+// required .NFMsg.Ident guild_id = 1;
+inline bool ReqAckOprGuild::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckOprGuild::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckOprGuild::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckOprGuild::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& ReqAckOprGuild::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprGuild::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprGuild::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void ReqAckOprGuild::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// required .NFMsg.Ident player_id = 2;
+inline bool ReqAckOprGuild::has_player_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckOprGuild::set_has_player_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckOprGuild::clear_has_player_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckOprGuild::clear_player_id() {
+  if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
+  clear_has_player_id();
+}
+inline const ::NFMsg::Ident& ReqAckOprGuild::player_id() const {
+  return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprGuild::mutable_player_id() {
+  set_has_player_id();
+  if (player_id_ == NULL) player_id_ = new ::NFMsg::Ident;
+  return player_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprGuild::release_player_id() {
+  clear_has_player_id();
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
+  return temp;
+}
+inline void ReqAckOprGuild::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  delete player_id_;
+  player_id_ = player_id;
+  if (player_id) {
+    set_has_player_id();
+  } else {
+    clear_has_player_id();
+  }
+}
+
+// required .NFMsg.ReqAckOprGuild.EGGuildOprType type = 3;
+inline bool ReqAckOprGuild::has_type() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckOprGuild::set_has_type() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckOprGuild::clear_has_type() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckOprGuild::clear_type() {
+  type_ = 1;
+  clear_has_type();
+}
+inline ::NFMsg::ReqAckOprGuild_EGGuildOprType ReqAckOprGuild::type() const {
+  return static_cast< ::NFMsg::ReqAckOprGuild_EGGuildOprType >(type_);
+}
+inline void ReqAckOprGuild::set_type(::NFMsg::ReqAckOprGuild_EGGuildOprType value) {
+  assert(::NFMsg::ReqAckOprGuild_EGGuildOprType_IsValid(value));
+  set_has_type();
+  type_ = value;
+}
+
+// required string Recruit_data = 4;
+inline bool ReqAckOprGuild::has_recruit_data() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqAckOprGuild::set_has_recruit_data() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqAckOprGuild::clear_has_recruit_data() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqAckOprGuild::clear_recruit_data() {
+  if (recruit_data_ != &::google::protobuf::internal::kEmptyString) {
+    recruit_data_->clear();
+  }
+  clear_has_recruit_data();
+}
+inline const ::std::string& ReqAckOprGuild::recruit_data() const {
+  return *recruit_data_;
+}
+inline void ReqAckOprGuild::set_recruit_data(const ::std::string& value) {
+  set_has_recruit_data();
+  if (recruit_data_ == &::google::protobuf::internal::kEmptyString) {
+    recruit_data_ = new ::std::string;
+  }
+  recruit_data_->assign(value);
+}
+inline void ReqAckOprGuild::set_recruit_data(const char* value) {
+  set_has_recruit_data();
+  if (recruit_data_ == &::google::protobuf::internal::kEmptyString) {
+    recruit_data_ = new ::std::string;
+  }
+  recruit_data_->assign(value);
+}
+inline void ReqAckOprGuild::set_recruit_data(const char* value, size_t size) {
+  set_has_recruit_data();
+  if (recruit_data_ == &::google::protobuf::internal::kEmptyString) {
+    recruit_data_ = new ::std::string;
+  }
+  recruit_data_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckOprGuild::mutable_recruit_data() {
+  set_has_recruit_data();
+  if (recruit_data_ == &::google::protobuf::internal::kEmptyString) {
+    recruit_data_ = new ::std::string;
+  }
+  return recruit_data_;
+}
+inline ::std::string* ReqAckOprGuild::release_recruit_data() {
+  clear_has_recruit_data();
+  if (recruit_data_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = recruit_data_;
+    recruit_data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckOprGuild::set_allocated_recruit_data(::std::string* recruit_data) {
+  if (recruit_data_ != &::google::protobuf::internal::kEmptyString) {
+    delete recruit_data_;
+  }
+  if (recruit_data) {
+    set_has_recruit_data();
+    recruit_data_ = recruit_data;
+  } else {
+    clear_has_recruit_data();
+    recruit_data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string Ad_data = 5;
+inline bool ReqAckOprGuild::has_ad_data() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ReqAckOprGuild::set_has_ad_data() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ReqAckOprGuild::clear_has_ad_data() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ReqAckOprGuild::clear_ad_data() {
+  if (ad_data_ != &::google::protobuf::internal::kEmptyString) {
+    ad_data_->clear();
+  }
+  clear_has_ad_data();
+}
+inline const ::std::string& ReqAckOprGuild::ad_data() const {
+  return *ad_data_;
+}
+inline void ReqAckOprGuild::set_ad_data(const ::std::string& value) {
+  set_has_ad_data();
+  if (ad_data_ == &::google::protobuf::internal::kEmptyString) {
+    ad_data_ = new ::std::string;
+  }
+  ad_data_->assign(value);
+}
+inline void ReqAckOprGuild::set_ad_data(const char* value) {
+  set_has_ad_data();
+  if (ad_data_ == &::google::protobuf::internal::kEmptyString) {
+    ad_data_ = new ::std::string;
+  }
+  ad_data_->assign(value);
+}
+inline void ReqAckOprGuild::set_ad_data(const char* value, size_t size) {
+  set_has_ad_data();
+  if (ad_data_ == &::google::protobuf::internal::kEmptyString) {
+    ad_data_ = new ::std::string;
+  }
+  ad_data_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckOprGuild::mutable_ad_data() {
+  set_has_ad_data();
+  if (ad_data_ == &::google::protobuf::internal::kEmptyString) {
+    ad_data_ = new ::std::string;
+  }
+  return ad_data_;
+}
+inline ::std::string* ReqAckOprGuild::release_ad_data() {
+  clear_has_ad_data();
+  if (ad_data_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = ad_data_;
+    ad_data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckOprGuild::set_allocated_ad_data(::std::string* ad_data) {
+  if (ad_data_ != &::google::protobuf::internal::kEmptyString) {
+    delete ad_data_;
+  }
+  if (ad_data) {
+    set_has_ad_data();
+    ad_data_ = ad_data;
+  } else {
+    clear_has_ad_data();
+    ad_data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckDonateGuildItem
+
+// required .NFMsg.Ident guild_id = 1;
+inline bool ReqAckDonateGuildItem::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckDonateGuildItem::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckDonateGuildItem::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckDonateGuildItem::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& ReqAckDonateGuildItem::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckDonateGuildItem::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* ReqAckDonateGuildItem::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void ReqAckDonateGuildItem::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// required .NFMsg.Ident target_id = 2;
+inline bool ReqAckDonateGuildItem::has_target_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckDonateGuildItem::set_has_target_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckDonateGuildItem::clear_has_target_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckDonateGuildItem::clear_target_id() {
+  if (target_id_ != NULL) target_id_->::NFMsg::Ident::Clear();
+  clear_has_target_id();
+}
+inline const ::NFMsg::Ident& ReqAckDonateGuildItem::target_id() const {
+  return target_id_ != NULL ? *target_id_ : *default_instance_->target_id_;
+}
+inline ::NFMsg::Ident* ReqAckDonateGuildItem::mutable_target_id() {
+  set_has_target_id();
+  if (target_id_ == NULL) target_id_ = new ::NFMsg::Ident;
+  return target_id_;
+}
+inline ::NFMsg::Ident* ReqAckDonateGuildItem::release_target_id() {
+  clear_has_target_id();
+  ::NFMsg::Ident* temp = target_id_;
+  target_id_ = NULL;
+  return temp;
+}
+inline void ReqAckDonateGuildItem::set_allocated_target_id(::NFMsg::Ident* target_id) {
+  delete target_id_;
+  target_id_ = target_id;
+  if (target_id) {
+    set_has_target_id();
+  } else {
+    clear_has_target_id();
+  }
+}
+
+// repeated .NFMsg.ItemStruct item_list = 3;
+inline int ReqAckDonateGuildItem::item_list_size() const {
+  return item_list_.size();
+}
+inline void ReqAckDonateGuildItem::clear_item_list() {
+  item_list_.Clear();
+}
+inline const ::NFMsg::ItemStruct& ReqAckDonateGuildItem::item_list(int index) const {
+  return item_list_.Get(index);
+}
+inline ::NFMsg::ItemStruct* ReqAckDonateGuildItem::mutable_item_list(int index) {
+  return item_list_.Mutable(index);
+}
+inline ::NFMsg::ItemStruct* ReqAckDonateGuildItem::add_item_list() {
+  return item_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >&
+ReqAckDonateGuildItem::item_list() const {
+  return item_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >*
+ReqAckDonateGuildItem::mutable_item_list() {
+  return &item_list_;
+}
+
+// -------------------------------------------------------------------
+
+// ReqGuildEctypeInfo
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqGuildEctypeInfo::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqGuildEctypeInfo::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqGuildEctypeInfo::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqGuildEctypeInfo::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqGuildEctypeInfo::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqGuildEctypeInfo::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqGuildEctypeInfo::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqGuildEctypeInfo::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident guild_id = 2;
+inline bool ReqGuildEctypeInfo::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqGuildEctypeInfo::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqGuildEctypeInfo::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqGuildEctypeInfo::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& ReqGuildEctypeInfo::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* ReqGuildEctypeInfo::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* ReqGuildEctypeInfo::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void ReqGuildEctypeInfo::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// GuildEctypeInfo
+
+// required .NFMsg.Ident guild_id = 1;
+inline bool GuildEctypeInfo::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GuildEctypeInfo::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GuildEctypeInfo::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GuildEctypeInfo::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& GuildEctypeInfo::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* GuildEctypeInfo::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* GuildEctypeInfo::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void GuildEctypeInfo::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
+  }
+}
+
+// required int64 server_id = 2;
+inline bool GuildEctypeInfo::has_server_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void GuildEctypeInfo::set_has_server_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void GuildEctypeInfo::clear_has_server_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void GuildEctypeInfo::clear_server_id() {
+  server_id_ = GOOGLE_LONGLONG(0);
+  clear_has_server_id();
+}
+inline ::google::protobuf::int64 GuildEctypeInfo::server_id() const {
+  return server_id_;
+}
+inline void GuildEctypeInfo::set_server_id(::google::protobuf::int64 value) {
+  set_has_server_id();
+  server_id_ = value;
+}
+
+// required int64 Ectype_id = 3;
+inline bool GuildEctypeInfo::has_ectype_id() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void GuildEctypeInfo::set_has_ectype_id() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void GuildEctypeInfo::clear_has_ectype_id() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void GuildEctypeInfo::clear_ectype_id() {
+  ectype_id_ = GOOGLE_LONGLONG(0);
+  clear_has_ectype_id();
+}
+inline ::google::protobuf::int64 GuildEctypeInfo::ectype_id() const {
+  return ectype_id_;
+}
+inline void GuildEctypeInfo::set_ectype_id(::google::protobuf::int64 value) {
+  set_has_ectype_id();
+  ectype_id_ = value;
+}
+
+// required int64 Ectype_Group = 4;
+inline bool GuildEctypeInfo::has_ectype_group() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void GuildEctypeInfo::set_has_ectype_group() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void GuildEctypeInfo::clear_has_ectype_group() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void GuildEctypeInfo::clear_ectype_group() {
+  ectype_group_ = GOOGLE_LONGLONG(0);
+  clear_has_ectype_group();
+}
+inline ::google::protobuf::int64 GuildEctypeInfo::ectype_group() const {
+  return ectype_group_;
+}
+inline void GuildEctypeInfo::set_ectype_group(::google::protobuf::int64 value) {
+  set_has_ectype_group();
+  ectype_group_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// AckGuildEctypeInfo
+
+// required .NFMsg.Ident selfid = 1;
+inline bool AckGuildEctypeInfo::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AckGuildEctypeInfo::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AckGuildEctypeInfo::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AckGuildEctypeInfo::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& AckGuildEctypeInfo::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* AckGuildEctypeInfo::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* AckGuildEctypeInfo::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void AckGuildEctypeInfo::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.GuildEctypeInfo xectypeinfo = 2;
+inline bool AckGuildEctypeInfo::has_xectypeinfo() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckGuildEctypeInfo::set_has_xectypeinfo() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckGuildEctypeInfo::clear_has_xectypeinfo() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckGuildEctypeInfo::clear_xectypeinfo() {
+  if (xectypeinfo_ != NULL) xectypeinfo_->::NFMsg::GuildEctypeInfo::Clear();
+  clear_has_xectypeinfo();
+}
+inline const ::NFMsg::GuildEctypeInfo& AckGuildEctypeInfo::xectypeinfo() const {
+  return xectypeinfo_ != NULL ? *xectypeinfo_ : *default_instance_->xectypeinfo_;
+}
+inline ::NFMsg::GuildEctypeInfo* AckGuildEctypeInfo::mutable_xectypeinfo() {
+  set_has_xectypeinfo();
+  if (xectypeinfo_ == NULL) xectypeinfo_ = new ::NFMsg::GuildEctypeInfo;
+  return xectypeinfo_;
+}
+inline ::NFMsg::GuildEctypeInfo* AckGuildEctypeInfo::release_xectypeinfo() {
+  clear_has_xectypeinfo();
+  ::NFMsg::GuildEctypeInfo* temp = xectypeinfo_;
+  xectypeinfo_ = NULL;
+  return temp;
+}
+inline void AckGuildEctypeInfo::set_allocated_xectypeinfo(::NFMsg::GuildEctypeInfo* xectypeinfo) {
+  delete xectypeinfo_;
+  xectypeinfo_ = xectypeinfo;
+  if (xectypeinfo) {
+    set_has_xectypeinfo();
+  } else {
+    clear_has_xectypeinfo();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// SetGuildEctypeInfo
+
+// required .NFMsg.Ident selfid = 1;
+inline bool SetGuildEctypeInfo::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SetGuildEctypeInfo::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SetGuildEctypeInfo::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SetGuildEctypeInfo::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& SetGuildEctypeInfo::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* SetGuildEctypeInfo::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* SetGuildEctypeInfo::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void SetGuildEctypeInfo::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.GuildEctypeInfo xectypeinfo = 2;
+inline bool SetGuildEctypeInfo::has_xectypeinfo() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SetGuildEctypeInfo::set_has_xectypeinfo() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SetGuildEctypeInfo::clear_has_xectypeinfo() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SetGuildEctypeInfo::clear_xectypeinfo() {
+  if (xectypeinfo_ != NULL) xectypeinfo_->::NFMsg::GuildEctypeInfo::Clear();
+  clear_has_xectypeinfo();
+}
+inline const ::NFMsg::GuildEctypeInfo& SetGuildEctypeInfo::xectypeinfo() const {
+  return xectypeinfo_ != NULL ? *xectypeinfo_ : *default_instance_->xectypeinfo_;
+}
+inline ::NFMsg::GuildEctypeInfo* SetGuildEctypeInfo::mutable_xectypeinfo() {
+  set_has_xectypeinfo();
+  if (xectypeinfo_ == NULL) xectypeinfo_ = new ::NFMsg::GuildEctypeInfo;
+  return xectypeinfo_;
+}
+inline ::NFMsg::GuildEctypeInfo* SetGuildEctypeInfo::release_xectypeinfo() {
+  clear_has_xectypeinfo();
+  ::NFMsg::GuildEctypeInfo* temp = xectypeinfo_;
+  xectypeinfo_ = NULL;
+  return temp;
+}
+inline void SetGuildEctypeInfo::set_allocated_xectypeinfo(::NFMsg::GuildEctypeInfo* xectypeinfo) {
+  delete xectypeinfo_;
+  xectypeinfo_ = xectypeinfo;
+  if (xectypeinfo) {
+    set_has_xectypeinfo();
+  } else {
+    clear_has_xectypeinfo();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ChatInfo
+
+// required .NFMsg.ChatInfo.EChatType chat_type = 1;
+inline bool ChatInfo::has_chat_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ChatInfo::set_has_chat_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ChatInfo::clear_has_chat_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ChatInfo::clear_chat_type() {
+  chat_type_ = 0;
+  clear_has_chat_type();
+}
+inline ::NFMsg::ChatInfo_EChatType ChatInfo::chat_type() const {
+  return static_cast< ::NFMsg::ChatInfo_EChatType >(chat_type_);
+}
+inline void ChatInfo::set_chat_type(::NFMsg::ChatInfo_EChatType value) {
+  assert(::NFMsg::ChatInfo_EChatType_IsValid(value));
+  set_has_chat_type();
+  chat_type_ = value;
+}
+
+// required bytes chat_info = 2;
+inline bool ChatInfo::has_chat_info() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ChatInfo::set_has_chat_info() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ChatInfo::clear_has_chat_info() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ChatInfo::clear_chat_info() {
+  if (chat_info_ != &::google::protobuf::internal::kEmptyString) {
+    chat_info_->clear();
+  }
+  clear_has_chat_info();
+}
+inline const ::std::string& ChatInfo::chat_info() const {
+  return *chat_info_;
+}
+inline void ChatInfo::set_chat_info(const ::std::string& value) {
+  set_has_chat_info();
+  if (chat_info_ == &::google::protobuf::internal::kEmptyString) {
+    chat_info_ = new ::std::string;
+  }
+  chat_info_->assign(value);
+}
+inline void ChatInfo::set_chat_info(const char* value) {
+  set_has_chat_info();
+  if (chat_info_ == &::google::protobuf::internal::kEmptyString) {
+    chat_info_ = new ::std::string;
+  }
+  chat_info_->assign(value);
+}
+inline void ChatInfo::set_chat_info(const void* value, size_t size) {
+  set_has_chat_info();
+  if (chat_info_ == &::google::protobuf::internal::kEmptyString) {
+    chat_info_ = new ::std::string;
+  }
+  chat_info_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ChatInfo::mutable_chat_info() {
+  set_has_chat_info();
+  if (chat_info_ == &::google::protobuf::internal::kEmptyString) {
+    chat_info_ = new ::std::string;
+  }
+  return chat_info_;
+}
+inline ::std::string* ChatInfo::release_chat_info() {
+  clear_has_chat_info();
+  if (chat_info_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = chat_info_;
+    chat_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ChatInfo::set_allocated_chat_info(::std::string* chat_info) {
+  if (chat_info_ != &::google::protobuf::internal::kEmptyString) {
+    delete chat_info_;
+  }
+  if (chat_info) {
+    set_has_chat_info();
+    chat_info_ = chat_info;
+  } else {
+    clear_has_chat_info();
+    chat_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required int64 chat_time = 3;
+inline bool ChatInfo::has_chat_time() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ChatInfo::set_has_chat_time() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ChatInfo::clear_has_chat_time() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ChatInfo::clear_chat_time() {
+  chat_time_ = GOOGLE_LONGLONG(0);
+  clear_has_chat_time();
+}
+inline ::google::protobuf::int64 ChatInfo::chat_time() const {
+  return chat_time_;
+}
+inline void ChatInfo::set_chat_time(::google::protobuf::int64 value) {
+  set_has_chat_time();
+  chat_time_ = value;
+}
+
+// optional bytes addtional_info = 4;
+inline bool ChatInfo::has_addtional_info() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ChatInfo::set_has_addtional_info() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ChatInfo::clear_has_addtional_info() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ChatInfo::clear_addtional_info() {
+  if (addtional_info_ != &::google::protobuf::internal::kEmptyString) {
+    addtional_info_->clear();
+  }
+  clear_has_addtional_info();
+}
+inline const ::std::string& ChatInfo::addtional_info() const {
+  return *addtional_info_;
+}
+inline void ChatInfo::set_addtional_info(const ::std::string& value) {
+  set_has_addtional_info();
+  if (addtional_info_ == &::google::protobuf::internal::kEmptyString) {
+    addtional_info_ = new ::std::string;
+  }
+  addtional_info_->assign(value);
+}
+inline void ChatInfo::set_addtional_info(const char* value) {
+  set_has_addtional_info();
+  if (addtional_info_ == &::google::protobuf::internal::kEmptyString) {
+    addtional_info_ = new ::std::string;
+  }
+  addtional_info_->assign(value);
+}
+inline void ChatInfo::set_addtional_info(const void* value, size_t size) {
+  set_has_addtional_info();
+  if (addtional_info_ == &::google::protobuf::internal::kEmptyString) {
+    addtional_info_ = new ::std::string;
+  }
+  addtional_info_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ChatInfo::mutable_addtional_info() {
+  set_has_addtional_info();
+  if (addtional_info_ == &::google::protobuf::internal::kEmptyString) {
+    addtional_info_ = new ::std::string;
+  }
+  return addtional_info_;
+}
+inline ::std::string* ChatInfo::release_addtional_info() {
+  clear_has_addtional_info();
+  if (addtional_info_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = addtional_info_;
+    addtional_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ChatInfo::set_allocated_addtional_info(::std::string* addtional_info) {
+  if (addtional_info_ != &::google::protobuf::internal::kEmptyString) {
+    delete addtional_info_;
+  }
+  if (addtional_info) {
+    set_has_addtional_info();
+    addtional_info_ = addtional_info;
+  } else {
+    clear_has_addtional_info();
+    addtional_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required .NFMsg.Ident send_id = 5;
+inline bool ChatInfo::has_send_id() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ChatInfo::set_has_send_id() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ChatInfo::clear_has_send_id() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ChatInfo::clear_send_id() {
+  if (send_id_ != NULL) send_id_->::NFMsg::Ident::Clear();
+  clear_has_send_id();
+}
+inline const ::NFMsg::Ident& ChatInfo::send_id() const {
+  return send_id_ != NULL ? *send_id_ : *default_instance_->send_id_;
+}
+inline ::NFMsg::Ident* ChatInfo::mutable_send_id() {
+  set_has_send_id();
+  if (send_id_ == NULL) send_id_ = new ::NFMsg::Ident;
+  return send_id_;
+}
+inline ::NFMsg::Ident* ChatInfo::release_send_id() {
+  clear_has_send_id();
+  ::NFMsg::Ident* temp = send_id_;
+  send_id_ = NULL;
+  return temp;
+}
+inline void ChatInfo::set_allocated_send_id(::NFMsg::Ident* send_id) {
+  delete send_id_;
+  send_id_ = send_id;
+  if (send_id) {
+    set_has_send_id();
+  } else {
+    clear_has_send_id();
+  }
+}
+
+// required bytes send_name = 6;
+inline bool ChatInfo::has_send_name() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void ChatInfo::set_has_send_name() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void ChatInfo::clear_has_send_name() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void ChatInfo::clear_send_name() {
+  if (send_name_ != &::google::protobuf::internal::kEmptyString) {
+    send_name_->clear();
+  }
+  clear_has_send_name();
+}
+inline const ::std::string& ChatInfo::send_name() const {
+  return *send_name_;
+}
+inline void ChatInfo::set_send_name(const ::std::string& value) {
+  set_has_send_name();
+  if (send_name_ == &::google::protobuf::internal::kEmptyString) {
+    send_name_ = new ::std::string;
+  }
+  send_name_->assign(value);
+}
+inline void ChatInfo::set_send_name(const char* value) {
+  set_has_send_name();
+  if (send_name_ == &::google::protobuf::internal::kEmptyString) {
+    send_name_ = new ::std::string;
+  }
+  send_name_->assign(value);
+}
+inline void ChatInfo::set_send_name(const void* value, size_t size) {
+  set_has_send_name();
+  if (send_name_ == &::google::protobuf::internal::kEmptyString) {
+    send_name_ = new ::std::string;
+  }
+  send_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ChatInfo::mutable_send_name() {
+  set_has_send_name();
+  if (send_name_ == &::google::protobuf::internal::kEmptyString) {
+    send_name_ = new ::std::string;
+  }
+  return send_name_;
+}
+inline ::std::string* ChatInfo::release_send_name() {
+  clear_has_send_name();
+  if (send_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = send_name_;
+    send_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ChatInfo::set_allocated_send_name(::std::string* send_name) {
+  if (send_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete send_name_;
+  }
+  if (send_name) {
+    set_has_send_name();
+    send_name_ = send_name;
+  } else {
+    clear_has_send_name();
+    send_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional int32 send_level = 7;
+inline bool ChatInfo::has_send_level() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void ChatInfo::set_has_send_level() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void ChatInfo::clear_has_send_level() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void ChatInfo::clear_send_level() {
+  send_level_ = 0;
+  clear_has_send_level();
+}
+inline ::google::protobuf::int32 ChatInfo::send_level() const {
+  return send_level_;
+}
+inline void ChatInfo::set_send_level(::google::protobuf::int32 value) {
+  set_has_send_level();
+  send_level_ = value;
+}
+
+// repeated .NFMsg.Ident recvier_id = 8;
+inline int ChatInfo::recvier_id_size() const {
+  return recvier_id_.size();
+}
+inline void ChatInfo::clear_recvier_id() {
+  recvier_id_.Clear();
+}
+inline const ::NFMsg::Ident& ChatInfo::recvier_id(int index) const {
+  return recvier_id_.Get(index);
+}
+inline ::NFMsg::Ident* ChatInfo::mutable_recvier_id(int index) {
+  return recvier_id_.Mutable(index);
+}
+inline ::NFMsg::Ident* ChatInfo::add_recvier_id() {
+  return recvier_id_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+ChatInfo::recvier_id() const {
+  return recvier_id_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+ChatInfo::mutable_recvier_id() {
+  return &recvier_id_;
+}
+
+// optional bytes guid_name = 9;
+inline bool ChatInfo::has_guid_name() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void ChatInfo::set_has_guid_name() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void ChatInfo::clear_has_guid_name() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void ChatInfo::clear_guid_name() {
+  if (guid_name_ != &::google::protobuf::internal::kEmptyString) {
+    guid_name_->clear();
+  }
+  clear_has_guid_name();
+}
+inline const ::std::string& ChatInfo::guid_name() const {
+  return *guid_name_;
+}
+inline void ChatInfo::set_guid_name(const ::std::string& value) {
+  set_has_guid_name();
+  if (guid_name_ == &::google::protobuf::internal::kEmptyString) {
+    guid_name_ = new ::std::string;
+  }
+  guid_name_->assign(value);
+}
+inline void ChatInfo::set_guid_name(const char* value) {
+  set_has_guid_name();
+  if (guid_name_ == &::google::protobuf::internal::kEmptyString) {
+    guid_name_ = new ::std::string;
+  }
+  guid_name_->assign(value);
+}
+inline void ChatInfo::set_guid_name(const void* value, size_t size) {
+  set_has_guid_name();
+  if (guid_name_ == &::google::protobuf::internal::kEmptyString) {
+    guid_name_ = new ::std::string;
+  }
+  guid_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ChatInfo::mutable_guid_name() {
+  set_has_guid_name();
+  if (guid_name_ == &::google::protobuf::internal::kEmptyString) {
+    guid_name_ = new ::std::string;
+  }
+  return guid_name_;
+}
+inline ::std::string* ChatInfo::release_guid_name() {
+  clear_has_guid_name();
+  if (guid_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = guid_name_;
+    guid_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ChatInfo::set_allocated_guid_name(::std::string* guid_name) {
+  if (guid_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete guid_name_;
+  }
+  if (guid_name) {
+    set_has_guid_name();
+    guid_name_ = guid_name;
+  } else {
+    clear_has_guid_name();
+    guid_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckCreateChatGroup
+
+// required bytes name = 1;
+inline bool ReqAckCreateChatGroup::has_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckCreateChatGroup::set_has_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckCreateChatGroup::clear_has_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckCreateChatGroup::clear_name() {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    name_->clear();
+  }
+  clear_has_name();
+}
+inline const ::std::string& ReqAckCreateChatGroup::name() const {
+  return *name_;
+}
+inline void ReqAckCreateChatGroup::set_name(const ::std::string& value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void ReqAckCreateChatGroup::set_name(const char* value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void ReqAckCreateChatGroup::set_name(const void* value, size_t size) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckCreateChatGroup::mutable_name() {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  return name_;
+}
+inline ::std::string* ReqAckCreateChatGroup::release_name() {
+  clear_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = name_;
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckCreateChatGroup::set_allocated_name(::std::string* name) {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_;
+  }
+  if (name) {
+    set_has_name();
+    name_ = name;
+  } else {
+    clear_has_name();
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required .NFMsg.Ident selfid = 2;
+inline bool ReqAckCreateChatGroup::has_selfid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckCreateChatGroup::set_has_selfid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckCreateChatGroup::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckCreateChatGroup::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqAckCreateChatGroup::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqAckCreateChatGroup::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqAckCreateChatGroup::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqAckCreateChatGroup::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// optional .NFMsg.Ident xChatGroupid = 3;
+inline bool ReqAckCreateChatGroup::has_xchatgroupid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckCreateChatGroup::set_has_xchatgroupid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckCreateChatGroup::clear_has_xchatgroupid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckCreateChatGroup::clear_xchatgroupid() {
+  if (xchatgroupid_ != NULL) xchatgroupid_->::NFMsg::Ident::Clear();
+  clear_has_xchatgroupid();
+}
+inline const ::NFMsg::Ident& ReqAckCreateChatGroup::xchatgroupid() const {
+  return xchatgroupid_ != NULL ? *xchatgroupid_ : *default_instance_->xchatgroupid_;
+}
+inline ::NFMsg::Ident* ReqAckCreateChatGroup::mutable_xchatgroupid() {
+  set_has_xchatgroupid();
+  if (xchatgroupid_ == NULL) xchatgroupid_ = new ::NFMsg::Ident;
+  return xchatgroupid_;
+}
+inline ::NFMsg::Ident* ReqAckCreateChatGroup::release_xchatgroupid() {
+  clear_has_xchatgroupid();
+  ::NFMsg::Ident* temp = xchatgroupid_;
+  xchatgroupid_ = NULL;
+  return temp;
+}
+inline void ReqAckCreateChatGroup::set_allocated_xchatgroupid(::NFMsg::Ident* xchatgroupid) {
+  delete xchatgroupid_;
+  xchatgroupid_ = xchatgroupid;
+  if (xchatgroupid) {
+    set_has_xchatgroupid();
+  } else {
+    clear_has_xchatgroupid();
+  }
+}
+
+// optional int32 chatType = 4;
+inline bool ReqAckCreateChatGroup::has_chattype() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqAckCreateChatGroup::set_has_chattype() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqAckCreateChatGroup::clear_has_chattype() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqAckCreateChatGroup::clear_chattype() {
+  chattype_ = 0;
+  clear_has_chattype();
+}
+inline ::google::protobuf::int32 ReqAckCreateChatGroup::chattype() const {
+  return chattype_;
+}
+inline void ReqAckCreateChatGroup::set_chattype(::google::protobuf::int32 value) {
+  set_has_chattype();
+  chattype_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckjoinChatGroup
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqAckjoinChatGroup::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckjoinChatGroup::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckjoinChatGroup::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckjoinChatGroup::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqAckjoinChatGroup::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqAckjoinChatGroup::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqAckjoinChatGroup::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqAckjoinChatGroup::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// optional .NFMsg.Ident xChatGroupid = 2;
+inline bool ReqAckjoinChatGroup::has_xchatgroupid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckjoinChatGroup::set_has_xchatgroupid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckjoinChatGroup::clear_has_xchatgroupid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckjoinChatGroup::clear_xchatgroupid() {
+  if (xchatgroupid_ != NULL) xchatgroupid_->::NFMsg::Ident::Clear();
+  clear_has_xchatgroupid();
+}
+inline const ::NFMsg::Ident& ReqAckjoinChatGroup::xchatgroupid() const {
+  return xchatgroupid_ != NULL ? *xchatgroupid_ : *default_instance_->xchatgroupid_;
+}
+inline ::NFMsg::Ident* ReqAckjoinChatGroup::mutable_xchatgroupid() {
+  set_has_xchatgroupid();
+  if (xchatgroupid_ == NULL) xchatgroupid_ = new ::NFMsg::Ident;
+  return xchatgroupid_;
+}
+inline ::NFMsg::Ident* ReqAckjoinChatGroup::release_xchatgroupid() {
+  clear_has_xchatgroupid();
+  ::NFMsg::Ident* temp = xchatgroupid_;
+  xchatgroupid_ = NULL;
+  return temp;
+}
+inline void ReqAckjoinChatGroup::set_allocated_xchatgroupid(::NFMsg::Ident* xchatgroupid) {
+  delete xchatgroupid_;
+  xchatgroupid_ = xchatgroupid;
+  if (xchatgroupid) {
+    set_has_xchatgroupid();
+  } else {
+    clear_has_xchatgroupid();
+  }
+}
+
+// optional int64 result = 3;
+inline bool ReqAckjoinChatGroup::has_result() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckjoinChatGroup::set_has_result() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckjoinChatGroup::clear_has_result() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckjoinChatGroup::clear_result() {
+  result_ = GOOGLE_LONGLONG(0);
+  clear_has_result();
+}
+inline ::google::protobuf::int64 ReqAckjoinChatGroup::result() const {
+  return result_;
+}
+inline void ReqAckjoinChatGroup::set_result(::google::protobuf::int64 value) {
+  set_has_result();
+  result_ = value;
+}
+
+// optional int32 chatType = 4;
+inline bool ReqAckjoinChatGroup::has_chattype() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqAckjoinChatGroup::set_has_chattype() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqAckjoinChatGroup::clear_has_chattype() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqAckjoinChatGroup::clear_chattype() {
+  chattype_ = 0;
+  clear_has_chattype();
+}
+inline ::google::protobuf::int32 ReqAckjoinChatGroup::chattype() const {
+  return chattype_;
+}
+inline void ReqAckjoinChatGroup::set_chattype(::google::protobuf::int32 value) {
+  set_has_chattype();
+  chattype_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckQuitChatGroup
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqAckQuitChatGroup::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckQuitChatGroup::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckQuitChatGroup::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckQuitChatGroup::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqAckQuitChatGroup::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqAckQuitChatGroup::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqAckQuitChatGroup::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqAckQuitChatGroup::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// optional .NFMsg.Ident xChatGroupid = 2;
+inline bool ReqAckQuitChatGroup::has_xchatgroupid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckQuitChatGroup::set_has_xchatgroupid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckQuitChatGroup::clear_has_xchatgroupid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckQuitChatGroup::clear_xchatgroupid() {
+  if (xchatgroupid_ != NULL) xchatgroupid_->::NFMsg::Ident::Clear();
+  clear_has_xchatgroupid();
+}
+inline const ::NFMsg::Ident& ReqAckQuitChatGroup::xchatgroupid() const {
+  return xchatgroupid_ != NULL ? *xchatgroupid_ : *default_instance_->xchatgroupid_;
+}
+inline ::NFMsg::Ident* ReqAckQuitChatGroup::mutable_xchatgroupid() {
+  set_has_xchatgroupid();
+  if (xchatgroupid_ == NULL) xchatgroupid_ = new ::NFMsg::Ident;
+  return xchatgroupid_;
+}
+inline ::NFMsg::Ident* ReqAckQuitChatGroup::release_xchatgroupid() {
+  clear_has_xchatgroupid();
+  ::NFMsg::Ident* temp = xchatgroupid_;
+  xchatgroupid_ = NULL;
+  return temp;
+}
+inline void ReqAckQuitChatGroup::set_allocated_xchatgroupid(::NFMsg::Ident* xchatgroupid) {
+  delete xchatgroupid_;
+  xchatgroupid_ = xchatgroupid;
+  if (xchatgroupid) {
+    set_has_xchatgroupid();
+  } else {
+    clear_has_xchatgroupid();
+  }
+}
+
+// optional int64 result = 3;
+inline bool ReqAckQuitChatGroup::has_result() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckQuitChatGroup::set_has_result() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckQuitChatGroup::clear_has_result() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckQuitChatGroup::clear_result() {
+  result_ = GOOGLE_LONGLONG(0);
+  clear_has_result();
+}
+inline ::google::protobuf::int64 ReqAckQuitChatGroup::result() const {
+  return result_;
+}
+inline void ReqAckQuitChatGroup::set_result(::google::protobuf::int64 value) {
+  set_has_result();
+  result_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqSubscriptionChatGroup
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqSubscriptionChatGroup::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqSubscriptionChatGroup::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqSubscriptionChatGroup::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqSubscriptionChatGroup::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqSubscriptionChatGroup::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqSubscriptionChatGroup::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqSubscriptionChatGroup::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqSubscriptionChatGroup::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// repeated .NFMsg.Ident xChatGroupid = 2;
+inline int ReqSubscriptionChatGroup::xchatgroupid_size() const {
+  return xchatgroupid_.size();
+}
+inline void ReqSubscriptionChatGroup::clear_xchatgroupid() {
+  xchatgroupid_.Clear();
+}
+inline const ::NFMsg::Ident& ReqSubscriptionChatGroup::xchatgroupid(int index) const {
+  return xchatgroupid_.Get(index);
+}
+inline ::NFMsg::Ident* ReqSubscriptionChatGroup::mutable_xchatgroupid(int index) {
+  return xchatgroupid_.Mutable(index);
+}
+inline ::NFMsg::Ident* ReqSubscriptionChatGroup::add_xchatgroupid() {
+  return xchatgroupid_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+ReqSubscriptionChatGroup::xchatgroupid() const {
+  return xchatgroupid_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+ReqSubscriptionChatGroup::mutable_xchatgroupid() {
+  return &xchatgroupid_;
+}
+
+// -------------------------------------------------------------------
+
+// ReqCancelSubscriptionChatGroup
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqCancelSubscriptionChatGroup::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqCancelSubscriptionChatGroup::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqCancelSubscriptionChatGroup::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqCancelSubscriptionChatGroup::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqCancelSubscriptionChatGroup::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqCancelSubscriptionChatGroup::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqCancelSubscriptionChatGroup::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqCancelSubscriptionChatGroup::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// repeated .NFMsg.Ident xChatGroupid = 2;
+inline int ReqCancelSubscriptionChatGroup::xchatgroupid_size() const {
+  return xchatgroupid_.size();
+}
+inline void ReqCancelSubscriptionChatGroup::clear_xchatgroupid() {
+  xchatgroupid_.Clear();
+}
+inline const ::NFMsg::Ident& ReqCancelSubscriptionChatGroup::xchatgroupid(int index) const {
+  return xchatgroupid_.Get(index);
+}
+inline ::NFMsg::Ident* ReqCancelSubscriptionChatGroup::mutable_xchatgroupid(int index) {
+  return xchatgroupid_.Mutable(index);
+}
+inline ::NFMsg::Ident* ReqCancelSubscriptionChatGroup::add_xchatgroupid() {
+  return xchatgroupid_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+ReqCancelSubscriptionChatGroup::xchatgroupid() const {
+  return xchatgroupid_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+ReqCancelSubscriptionChatGroup::mutable_xchatgroupid() {
+  return &xchatgroupid_;
+}
+
+// -------------------------------------------------------------------
+
+// ReqIntensifylevelToEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqIntensifylevelToEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqIntensifylevelToEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqIntensifylevelToEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqIntensifylevelToEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqIntensifylevelToEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqIntensifylevelToEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqIntensifylevelToEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqIntensifylevelToEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool ReqIntensifylevelToEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqIntensifylevelToEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqIntensifylevelToEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqIntensifylevelToEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& ReqIntensifylevelToEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* ReqIntensifylevelToEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* ReqIntensifylevelToEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void ReqIntensifylevelToEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// AckIntensifylevelToEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool AckIntensifylevelToEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AckIntensifylevelToEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AckIntensifylevelToEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AckIntensifylevelToEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& AckIntensifylevelToEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* AckIntensifylevelToEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* AckIntensifylevelToEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void AckIntensifylevelToEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool AckIntensifylevelToEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckIntensifylevelToEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckIntensifylevelToEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckIntensifylevelToEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& AckIntensifylevelToEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* AckIntensifylevelToEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* AckIntensifylevelToEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void AckIntensifylevelToEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// required int32 result = 3;
+inline bool AckIntensifylevelToEquip::has_result() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AckIntensifylevelToEquip::set_has_result() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AckIntensifylevelToEquip::clear_has_result() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AckIntensifylevelToEquip::clear_result() {
+  result_ = 0;
+  clear_has_result();
+}
+inline ::google::protobuf::int32 AckIntensifylevelToEquip::result() const {
+  return result_;
+}
+inline void AckIntensifylevelToEquip::set_result(::google::protobuf::int32 value) {
+  set_has_result();
+  result_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqHoleToEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqHoleToEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqHoleToEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqHoleToEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqHoleToEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqHoleToEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqHoleToEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqHoleToEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqHoleToEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool ReqHoleToEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqHoleToEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqHoleToEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqHoleToEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& ReqHoleToEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* ReqHoleToEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* ReqHoleToEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void ReqHoleToEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// AckHoleToEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool AckHoleToEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AckHoleToEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AckHoleToEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AckHoleToEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& AckHoleToEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* AckHoleToEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* AckHoleToEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void AckHoleToEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool AckHoleToEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckHoleToEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckHoleToEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckHoleToEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& AckHoleToEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* AckHoleToEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* AckHoleToEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void AckHoleToEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// required int32 result = 3;
+inline bool AckHoleToEquip::has_result() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AckHoleToEquip::set_has_result() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AckHoleToEquip::clear_has_result() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AckHoleToEquip::clear_result() {
+  result_ = 0;
+  clear_has_result();
+}
+inline ::google::protobuf::int32 AckHoleToEquip::result() const {
+  return result_;
+}
+inline void AckHoleToEquip::set_result(::google::protobuf::int32 value) {
+  set_has_result();
+  result_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqInlaystoneToEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqInlaystoneToEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqInlaystoneToEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqInlaystoneToEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqInlaystoneToEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqInlaystoneToEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqInlaystoneToEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqInlaystoneToEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqInlaystoneToEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool ReqInlaystoneToEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqInlaystoneToEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqInlaystoneToEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqInlaystoneToEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& ReqInlaystoneToEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* ReqInlaystoneToEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* ReqInlaystoneToEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void ReqInlaystoneToEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// required bytes stoneid = 3;
+inline bool ReqInlaystoneToEquip::has_stoneid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqInlaystoneToEquip::set_has_stoneid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqInlaystoneToEquip::clear_has_stoneid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqInlaystoneToEquip::clear_stoneid() {
+  if (stoneid_ != &::google::protobuf::internal::kEmptyString) {
+    stoneid_->clear();
+  }
+  clear_has_stoneid();
+}
+inline const ::std::string& ReqInlaystoneToEquip::stoneid() const {
+  return *stoneid_;
+}
+inline void ReqInlaystoneToEquip::set_stoneid(const ::std::string& value) {
+  set_has_stoneid();
+  if (stoneid_ == &::google::protobuf::internal::kEmptyString) {
+    stoneid_ = new ::std::string;
+  }
+  stoneid_->assign(value);
+}
+inline void ReqInlaystoneToEquip::set_stoneid(const char* value) {
+  set_has_stoneid();
+  if (stoneid_ == &::google::protobuf::internal::kEmptyString) {
+    stoneid_ = new ::std::string;
+  }
+  stoneid_->assign(value);
+}
+inline void ReqInlaystoneToEquip::set_stoneid(const void* value, size_t size) {
+  set_has_stoneid();
+  if (stoneid_ == &::google::protobuf::internal::kEmptyString) {
+    stoneid_ = new ::std::string;
+  }
+  stoneid_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqInlaystoneToEquip::mutable_stoneid() {
+  set_has_stoneid();
+  if (stoneid_ == &::google::protobuf::internal::kEmptyString) {
+    stoneid_ = new ::std::string;
+  }
+  return stoneid_;
+}
+inline ::std::string* ReqInlaystoneToEquip::release_stoneid() {
+  clear_has_stoneid();
+  if (stoneid_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = stoneid_;
+    stoneid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqInlaystoneToEquip::set_allocated_stoneid(::std::string* stoneid) {
+  if (stoneid_ != &::google::protobuf::internal::kEmptyString) {
+    delete stoneid_;
+  }
+  if (stoneid) {
+    set_has_stoneid();
+    stoneid_ = stoneid;
+  } else {
+    clear_has_stoneid();
+    stoneid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required int32 hole_index = 4;
+inline bool ReqInlaystoneToEquip::has_hole_index() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqInlaystoneToEquip::set_has_hole_index() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqInlaystoneToEquip::clear_has_hole_index() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqInlaystoneToEquip::clear_hole_index() {
+  hole_index_ = 0;
+  clear_has_hole_index();
+}
+inline ::google::protobuf::int32 ReqInlaystoneToEquip::hole_index() const {
+  return hole_index_;
+}
+inline void ReqInlaystoneToEquip::set_hole_index(::google::protobuf::int32 value) {
+  set_has_hole_index();
+  hole_index_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// AckInlaystoneToEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool AckInlaystoneToEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AckInlaystoneToEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AckInlaystoneToEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AckInlaystoneToEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& AckInlaystoneToEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* AckInlaystoneToEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* AckInlaystoneToEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void AckInlaystoneToEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool AckInlaystoneToEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckInlaystoneToEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckInlaystoneToEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckInlaystoneToEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& AckInlaystoneToEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* AckInlaystoneToEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* AckInlaystoneToEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void AckInlaystoneToEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// required int32 result = 3;
+inline bool AckInlaystoneToEquip::has_result() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AckInlaystoneToEquip::set_has_result() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AckInlaystoneToEquip::clear_has_result() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AckInlaystoneToEquip::clear_result() {
+  result_ = 0;
+  clear_has_result();
+}
+inline ::google::protobuf::int32 AckInlaystoneToEquip::result() const {
+  return result_;
+}
+inline void AckInlaystoneToEquip::set_result(::google::protobuf::int32 value) {
+  set_has_result();
+  result_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqElementlevelToEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqElementlevelToEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqElementlevelToEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqElementlevelToEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqElementlevelToEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqElementlevelToEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqElementlevelToEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqElementlevelToEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqElementlevelToEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool ReqElementlevelToEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqElementlevelToEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqElementlevelToEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqElementlevelToEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& ReqElementlevelToEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* ReqElementlevelToEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* ReqElementlevelToEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void ReqElementlevelToEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// required .NFMsg.EGameElementType eElementType = 3;
+inline bool ReqElementlevelToEquip::has_eelementtype() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqElementlevelToEquip::set_has_eelementtype() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqElementlevelToEquip::clear_has_eelementtype() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqElementlevelToEquip::clear_eelementtype() {
+  eelementtype_ = 0;
+  clear_has_eelementtype();
+}
+inline ::NFMsg::EGameElementType ReqElementlevelToEquip::eelementtype() const {
+  return static_cast< ::NFMsg::EGameElementType >(eelementtype_);
+}
+inline void ReqElementlevelToEquip::set_eelementtype(::NFMsg::EGameElementType value) {
+  assert(::NFMsg::EGameElementType_IsValid(value));
+  set_has_eelementtype();
+  eelementtype_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// AckElementlevelToEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool AckElementlevelToEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AckElementlevelToEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AckElementlevelToEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AckElementlevelToEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& AckElementlevelToEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* AckElementlevelToEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* AckElementlevelToEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void AckElementlevelToEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool AckElementlevelToEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckElementlevelToEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckElementlevelToEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckElementlevelToEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& AckElementlevelToEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* AckElementlevelToEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* AckElementlevelToEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void AckElementlevelToEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// required int32 result = 3;
+inline bool AckElementlevelToEquip::has_result() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AckElementlevelToEquip::set_has_result() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AckElementlevelToEquip::clear_has_result() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AckElementlevelToEquip::clear_result() {
+  result_ = 0;
+  clear_has_result();
+}
+inline ::google::protobuf::int32 AckElementlevelToEquip::result() const {
+  return result_;
+}
+inline void AckElementlevelToEquip::set_result(::google::protobuf::int32 value) {
+  set_has_result();
+  result_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqSetFightHero
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqSetFightHero::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqSetFightHero::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqSetFightHero::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqSetFightHero::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqSetFightHero::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqSetFightHero::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqSetFightHero::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqSetFightHero::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident Heroid = 2;
+inline bool ReqSetFightHero::has_heroid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqSetFightHero::set_has_heroid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqSetFightHero::clear_has_heroid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqSetFightHero::clear_heroid() {
+  if (heroid_ != NULL) heroid_->::NFMsg::Ident::Clear();
+  clear_has_heroid();
+}
+inline const ::NFMsg::Ident& ReqSetFightHero::heroid() const {
+  return heroid_ != NULL ? *heroid_ : *default_instance_->heroid_;
+}
+inline ::NFMsg::Ident* ReqSetFightHero::mutable_heroid() {
+  set_has_heroid();
+  if (heroid_ == NULL) heroid_ = new ::NFMsg::Ident;
+  return heroid_;
+}
+inline ::NFMsg::Ident* ReqSetFightHero::release_heroid() {
+  clear_has_heroid();
+  ::NFMsg::Ident* temp = heroid_;
+  heroid_ = NULL;
+  return temp;
+}
+inline void ReqSetFightHero::set_allocated_heroid(::NFMsg::Ident* heroid) {
+  delete heroid_;
+  heroid_ = heroid;
+  if (heroid) {
+    set_has_heroid();
+  } else {
+    clear_has_heroid();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqWearEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqWearEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqWearEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqWearEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqWearEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqWearEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqWearEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqWearEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqWearEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool ReqWearEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqWearEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqWearEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqWearEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& ReqWearEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* ReqWearEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* ReqWearEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void ReqWearEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// required .NFMsg.Ident Targetid = 3;
+inline bool ReqWearEquip::has_targetid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqWearEquip::set_has_targetid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqWearEquip::clear_has_targetid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqWearEquip::clear_targetid() {
+  if (targetid_ != NULL) targetid_->::NFMsg::Ident::Clear();
+  clear_has_targetid();
+}
+inline const ::NFMsg::Ident& ReqWearEquip::targetid() const {
+  return targetid_ != NULL ? *targetid_ : *default_instance_->targetid_;
+}
+inline ::NFMsg::Ident* ReqWearEquip::mutable_targetid() {
+  set_has_targetid();
+  if (targetid_ == NULL) targetid_ = new ::NFMsg::Ident;
+  return targetid_;
+}
+inline ::NFMsg::Ident* ReqWearEquip::release_targetid() {
+  clear_has_targetid();
+  ::NFMsg::Ident* temp = targetid_;
+  targetid_ = NULL;
+  return temp;
+}
+inline void ReqWearEquip::set_allocated_targetid(::NFMsg::Ident* targetid) {
+  delete targetid_;
+  targetid_ = targetid;
+  if (targetid) {
+    set_has_targetid();
+  } else {
+    clear_has_targetid();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// TakeOffEquip
+
+// required .NFMsg.Ident selfid = 1;
+inline bool TakeOffEquip::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void TakeOffEquip::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void TakeOffEquip::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void TakeOffEquip::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& TakeOffEquip::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* TakeOffEquip::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* TakeOffEquip::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void TakeOffEquip::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident equipid = 2;
+inline bool TakeOffEquip::has_equipid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void TakeOffEquip::set_has_equipid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void TakeOffEquip::clear_has_equipid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void TakeOffEquip::clear_equipid() {
+  if (equipid_ != NULL) equipid_->::NFMsg::Ident::Clear();
+  clear_has_equipid();
+}
+inline const ::NFMsg::Ident& TakeOffEquip::equipid() const {
+  return equipid_ != NULL ? *equipid_ : *default_instance_->equipid_;
+}
+inline ::NFMsg::Ident* TakeOffEquip::mutable_equipid() {
+  set_has_equipid();
+  if (equipid_ == NULL) equipid_ = new ::NFMsg::Ident;
+  return equipid_;
+}
+inline ::NFMsg::Ident* TakeOffEquip::release_equipid() {
+  clear_has_equipid();
+  ::NFMsg::Ident* temp = equipid_;
+  equipid_ = NULL;
+  return temp;
+}
+inline void TakeOffEquip::set_allocated_equipid(::NFMsg::Ident* equipid) {
+  delete equipid_;
+  equipid_ = equipid;
+  if (equipid) {
+    set_has_equipid();
+  } else {
+    clear_has_equipid();
+  }
+}
+
+// required .NFMsg.Ident Targetid = 3;
+inline bool TakeOffEquip::has_targetid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void TakeOffEquip::set_has_targetid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void TakeOffEquip::clear_has_targetid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void TakeOffEquip::clear_targetid() {
+  if (targetid_ != NULL) targetid_->::NFMsg::Ident::Clear();
+  clear_has_targetid();
+}
+inline const ::NFMsg::Ident& TakeOffEquip::targetid() const {
+  return targetid_ != NULL ? *targetid_ : *default_instance_->targetid_;
+}
+inline ::NFMsg::Ident* TakeOffEquip::mutable_targetid() {
+  set_has_targetid();
+  if (targetid_ == NULL) targetid_ = new ::NFMsg::Ident;
+  return targetid_;
+}
+inline ::NFMsg::Ident* TakeOffEquip::release_targetid() {
+  clear_has_targetid();
+  ::NFMsg::Ident* temp = targetid_;
+  targetid_ = NULL;
+  return temp;
+}
+inline void TakeOffEquip::set_allocated_targetid(::NFMsg::Ident* targetid) {
+  delete targetid_;
+  targetid_ = targetid;
+  if (targetid) {
+    set_has_targetid();
+  } else {
+    clear_has_targetid();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqMiningTitle
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqMiningTitle::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqMiningTitle::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqMiningTitle::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqMiningTitle::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqMiningTitle::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqMiningTitle::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqMiningTitle::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqMiningTitle::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required int32 x = 2;
+inline bool ReqMiningTitle::has_x() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqMiningTitle::set_has_x() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqMiningTitle::clear_has_x() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqMiningTitle::clear_x() {
+  x_ = 0;
+  clear_has_x();
+}
+inline ::google::protobuf::int32 ReqMiningTitle::x() const {
+  return x_;
+}
+inline void ReqMiningTitle::set_x(::google::protobuf::int32 value) {
+  set_has_x();
+  x_ = value;
+}
+
+// required int32 y = 3;
+inline bool ReqMiningTitle::has_y() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqMiningTitle::set_has_y() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqMiningTitle::clear_has_y() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqMiningTitle::clear_y() {
+  y_ = 0;
+  clear_has_y();
+}
+inline ::google::protobuf::int32 ReqMiningTitle::y() const {
+  return y_;
+}
+inline void ReqMiningTitle::set_y(::google::protobuf::int32 value) {
+  set_has_y();
+  y_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqSendMail
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqSendMail::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqSendMail::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqSendMail::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqSendMail::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqSendMail::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqSendMail::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqSendMail::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqSendMail::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required .NFMsg.Ident reciever = 2;
+inline bool ReqSendMail::has_reciever() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqSendMail::set_has_reciever() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqSendMail::clear_has_reciever() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqSendMail::clear_reciever() {
+  if (reciever_ != NULL) reciever_->::NFMsg::Ident::Clear();
+  clear_has_reciever();
+}
+inline const ::NFMsg::Ident& ReqSendMail::reciever() const {
+  return reciever_ != NULL ? *reciever_ : *default_instance_->reciever_;
+}
+inline ::NFMsg::Ident* ReqSendMail::mutable_reciever() {
+  set_has_reciever();
+  if (reciever_ == NULL) reciever_ = new ::NFMsg::Ident;
+  return reciever_;
+}
+inline ::NFMsg::Ident* ReqSendMail::release_reciever() {
+  clear_has_reciever();
+  ::NFMsg::Ident* temp = reciever_;
+  reciever_ = NULL;
+  return temp;
+}
+inline void ReqSendMail::set_allocated_reciever(::NFMsg::Ident* reciever) {
+  delete reciever_;
+  reciever_ = reciever;
+  if (reciever) {
+    set_has_reciever();
+  } else {
+    clear_has_reciever();
+  }
+}
+
+// repeated .NFMsg.ItemStruct item_list = 3;
+inline int ReqSendMail::item_list_size() const {
+  return item_list_.size();
+}
+inline void ReqSendMail::clear_item_list() {
+  item_list_.Clear();
+}
+inline const ::NFMsg::ItemStruct& ReqSendMail::item_list(int index) const {
+  return item_list_.Get(index);
+}
+inline ::NFMsg::ItemStruct* ReqSendMail::mutable_item_list(int index) {
+  return item_list_.Mutable(index);
+}
+inline ::NFMsg::ItemStruct* ReqSendMail::add_item_list() {
+  return item_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >&
+ReqSendMail::item_list() const {
+  return item_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >*
+ReqSendMail::mutable_item_list() {
+  return &item_list_;
+}
+
+// repeated .NFMsg.CurrencyStruct currency_list = 4;
+inline int ReqSendMail::currency_list_size() const {
+  return currency_list_.size();
+}
+inline void ReqSendMail::clear_currency_list() {
+  currency_list_.Clear();
+}
+inline const ::NFMsg::CurrencyStruct& ReqSendMail::currency_list(int index) const {
+  return currency_list_.Get(index);
+}
+inline ::NFMsg::CurrencyStruct* ReqSendMail::mutable_currency_list(int index) {
+  return currency_list_.Mutable(index);
+}
+inline ::NFMsg::CurrencyStruct* ReqSendMail::add_currency_list() {
+  return currency_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::CurrencyStruct >&
+ReqSendMail::currency_list() const {
+  return currency_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::CurrencyStruct >*
+ReqSendMail::mutable_currency_list() {
+  return &currency_list_;
 }
 
 
@@ -3211,12 +12742,44 @@ namespace google {
 namespace protobuf {
 
 template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckSynData_SynType>() {
+  return ::NFMsg::ReqAckSynData_SynType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ChatContainer_ContainerType>() {
+  return ::NFMsg::ChatContainer_ContainerType_descriptor();
+}
+template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckPlayerChat_EGameChatType>() {
   return ::NFMsg::ReqAckPlayerChat_EGameChatType_descriptor();
 }
 template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EffectData_EResultType>() {
+  return ::NFMsg::EffectData_EResultType_descriptor();
+}
+template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckSwapScene_EGameSwapType>() {
   return ::NFMsg::ReqAckSwapScene_EGameSwapType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckJoinActivity_EGameActivityType>() {
+  return ::NFMsg::ReqAckJoinActivity_EGameActivityType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckJoinActivity_EGameActivitySubType>() {
+  return ::NFMsg::ReqAckJoinActivity_EGameActivitySubType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType>() {
+  return ::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckOprGuild_EGGuildOprType>() {
+  return ::NFMsg::ReqAckOprGuild_EGGuildOprType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ChatInfo_EChatType>() {
+  return ::NFMsg::ChatInfo_EChatType_descriptor();
 }
 
 }  // namespace google

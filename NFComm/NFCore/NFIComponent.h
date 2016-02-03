@@ -6,24 +6,92 @@
 //
 // -----------------------------------------------------------------------
 
-#ifndef _NFI_COMPONENT_H_
-#define _NFI_COMPONENT_H_
+#ifndef _NFI_COMPONENT_H
+#define _NFI_COMPONENT_H
 
-#include "NFIdentID.h"
-#include "NFComm\NFPluginModule\NFILogicModule.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFGUID.h"
+#include "NFComm/NFPluginModule/NFILogicModule.h"
 
 class NFIComponent : public NFILogicModule
 {
-public:
-    virtual bool SetEnable(const bool bEnable) = 0;
-
-    virtual bool Enable() = 0;
-
-    virtual NFIDENTID Self() = 0;
-
-    virtual const std::string& ComponentName() = 0;
-    virtual const std::string& LanguageName() = 0;
 private:
+	NFIComponent()
+	{
+	}
+
+public:
+	NFIComponent(NFGUID self, const std::string& strName)
+	{
+		mbHasInit = false;
+		mbEnable = true;
+		mSelf = self;
+		mstrName = strName;
+	}
+
+    virtual ~NFIComponent() {}
+
+	template <typename T>
+	NF_SHARE_PTR<T> CreateNewInstance()
+	{
+		NF_SHARE_PTR<NFIComponent> pComponent = CreateNewInstance();
+		if (nullptr != pComponent)
+		{
+			if (TIsDerived<T, NFIComponent>::Result)
+			{
+				NF_SHARE_PTR<T> pT = std::dynamic_pointer_cast<T>(pComponent);
+				if (nullptr != pT)
+				{
+					return pT;
+				}				
+			}
+		}
+
+		return NF_SHARE_PTR<T>();
+	}
+
+    virtual bool SetEnable(const bool bEnable)
+    {
+        return mbEnable;
+    }
+
+	virtual bool Enable()
+    {
+        return mbEnable;
+    }
+
+	virtual bool SetHasInit(const bool bEnable)
+	{
+		mbHasInit = bEnable;
+		return mbHasInit;
+	}
+
+	virtual bool HasInit()
+	{
+		return mbHasInit;
+	}
+
+	virtual NFGUID Self()
+    {
+        return NULL_OBJECT;
+    }
+
+    virtual const std::string& GetComponentName() const
+	{
+		return mstrName;
+	};
+
+	//for actor
+	virtual int OnASyncEvent(const NFGUID& self, const int event, std::string& arg){return 0;}
+
+protected:
+	virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance(){ return nullptr;};
+
+private:
+	bool mbEnable;
+	bool mbHasInit;
+	NFGUID mSelf;
+	std::string mstrName;
 };
 
 #endif
