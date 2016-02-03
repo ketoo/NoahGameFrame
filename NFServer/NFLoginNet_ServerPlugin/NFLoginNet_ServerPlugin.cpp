@@ -1,7 +1,6 @@
 // NFLoginNet_ServerPlugin.cpp : Defines the exported functions for the DLL application.
 //
 
-//#include "stdafx.h"
 #include "NFLoginNet_ServerPlugin.h"
 #include "NFCLoginNet_ServerModule.h"
 
@@ -31,7 +30,7 @@ const int NFLoginNet_ServerPlugin::GetPluginVersion()
 
 const std::string NFLoginNet_ServerPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFLoginNet_ServerPlugin)
+    return GET_CLASS_NAME(NFLoginNet_ServerPlugin)
 }
 
 void NFLoginNet_ServerPlugin::Install()

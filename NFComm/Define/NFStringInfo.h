@@ -1,5 +1,5 @@
-#ifndef __NF_STRING_INFO_H__
-#define __NF_STRING_INFO_H__
+#ifndef NF_STRING_INFO_H
+#define NF_STRING_INFO_H
 
 // desc:所有NFED_ON_SHOW_STRING事件使用的字串
 // 字串格式中自带格式 格式全部使用%s
@@ -40,4 +40,4 @@ enum ResultInfo
 
 };
 
-#endif // __NF_STRING_INFO_H__
+#endif // _NF_STRING_INFO_H_

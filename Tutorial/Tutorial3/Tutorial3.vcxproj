@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{491DC435-4ACB-410A-B502-3CC9ED493F75}</ProjectGuid>
+    <ProjectGuid>{40285E86-2B3A-4BA2-99D8-8D3F07A4909A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NFMasterNet_ServerPlugin</RootNamespace>
+    <RootNamespace>Tutorial3Plugin</RootNamespace>
     <ProjectName>Tutorial3Plugin</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -58,7 +58,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN;_DEBUG;_WINDOWS;_USRDLL;THERON_CPP11</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN;_DEBUG;_WINDOWS;_USRDLL;</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\boost_1_53_0\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\include\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\WIN32-Code\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\compat\;$(SolutionDir)\Dependencies\protobuf-2.5.0\src\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
@@ -83,7 +83,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(Solutio
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN;_WINDOWS;_USRDLL;THERON_CPP11</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN;_WINDOWS;_USRDLL;</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\boost_1_53_0\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\include\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\WIN32-Code\;$(SolutionDir)\Dependencies\libevent-2.0.21-stable\compat\;$(SolutionDir)\Dependencies\protobuf-2.5.0\src\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>

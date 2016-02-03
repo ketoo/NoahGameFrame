@@ -24,7 +24,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{79DD0147-06CD-4F60-A8A5-19E2962B3D56}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NFKernelPlugin</RootNamespace>
+    <RootNamespace>NFConfigPlugin</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -69,7 +69,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_X64;_DEBUG;_USRDLL;THERON_USE_STD_THREADS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_X64;_DEBUG;_USRDLL;</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\boost_1_53_0\;$(SolutionDir)\Dependencies\glog-0.3.3\src\windows\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\External\</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
@@ -99,6 +99,10 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(Solutio
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial2\$(ProjectName)_d.pdb
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName)_d.dll
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName)_d.pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName)_d.dll
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName)_d.pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial5\$(ProjectName)_d.dll
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial5\$(ProjectName)_d.pdb
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName)_d.dll
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName)_d.pdb</Command>
     </PostBuildEvent>
@@ -116,7 +120,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(Solutio
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>_X64;NDEBUG;_USRDLL;THERON_USE_STD_THREADS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_X64;NDEBUG;_USRDLL;</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\boost_1_53_0\;$(SolutionDir)\Dependencies\glog-0.3.3\src\windows\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\External\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -143,6 +147,10 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionD
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial2\$(ProjectName).pdb
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName).dll
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName).pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName).dll
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName).pdb
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial5\$(ProjectName).dll
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial5\$(ProjectName).pdb
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName).dll
 copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName).pdb</Command>
     </PostBuildEvent>

@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_LOGINLOGIC_MODULE_H_
-#define _NFI_LOGINLOGIC_MODULE_H_
+#ifndef _NFI_LOGINLOGIC_MODULE_H
+#define _NFI_LOGINLOGIC_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
@@ -15,8 +15,9 @@
 class NFILoginLogicModule
     : public NFILogicModule
 {
-
 public:
+	virtual int OnLoginProcess(const NFGUID& object, const std::string& strAccount, const std::string& strPwd) = 0;
+
 };
 
 #endif

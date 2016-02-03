@@ -6,7 +6,6 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-////#include "stdafx.h"
 #include "NFGameServerPlugin.h"
 #include "NFCGameServerModule.h"
 #include "NFComm/Config/NFConfig.h"
@@ -14,6 +13,16 @@
 
 bool NFCGameServerModule::Init()
 {
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
+    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>( "NFCUUIDModule" );
+
+    assert( NULL != m_pKernelModule );
+    assert( NULL != m_pLogicClassModule );
+    assert( NULL != m_pUUIDModule );
+
+    m_pUUIDModule->SetIdentID(1);
+
     return true;
 }
 
@@ -23,7 +32,7 @@ bool NFCGameServerModule::Shut()
     return true;
 }
 
-bool NFCGameServerModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCGameServerModule::Execute()
 {
 #ifdef _DEBUG
     /*
@@ -47,13 +56,7 @@ bool NFCGameServerModule::Execute( const float fLasFrametime, const float fStart
 
 bool NFCGameServerModule::AfterInit()
 {
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>( pPluginManager->FindModule( "NFCEventProcessModule" ) );
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
-    m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>( pPluginManager->FindModule( "NFCLogicClassModule" ) );
 
-    assert( NULL != m_pEventProcessModule );
-    assert( NULL != m_pKernelModule );
-    assert( NULL != m_pLogicClassModule );
 
     return true;
 }

@@ -6,20 +6,21 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_PROXYSERVER_SERVER_MODULE_H_
-#define _NFC_PROXYSERVER_SERVER_MODULE_H_
+#ifndef NFC_PROXYSERVER_SERVER_MODULE_H
+#define NFC_PROXYSERVER_SERVER_MODULE_H
 
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIProxyServerNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFIProxyServerNet_ClientModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
+#include "NFComm/NFPluginModule/NFIProxyServerToWorldModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIUUIDModule.h"
+#include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
 
 class NFCProxyServerNet_ServerModule : public NFIProxyServerNet_ServerModule
 {
@@ -31,71 +32,53 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool AfterInit();
 
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
 
-    virtual int Transpond(const NFIPacket& msg);
+    virtual int Transpond(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+	//进入游戏成功
+	virtual int EnterGameSuccessEvent(const NFGUID xClientID, const NFGUID xPlayerID);
 
 protected:
 
-	int OnRecivePack(const NFIPacket& msg);
-	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
+	void OnReciveClientPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSocketClientEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 	//连接丢失,删2层(连接对象，帐号对象)
 	void OnClientDisconnect(const int nAddress);
 	//有连接
 	void OnClientConnected(const int nAddress);
 
-    int OnConnectKeyProcess(const NFIPacket& msg);
-    int OnReqServerListProcess(const NFIPacket& msg);
-    int OnSelectServerProcess(const NFIPacket& msg);
-    int OnReqRoleListProcess(const NFIPacket& msg);
-    int OnReqCreateRoleProcess(const NFIPacket& msg);
-    int OnReqDelRoleProcess(const NFIPacket& msg);
-    int OnReqEnterGameServer(const NFIPacket& msg);
+    int OnConnectKeyProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnReqServerListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnReqRoleListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnReqCreateRoleProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnReqDelRoleProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnReqEnterGameServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-
-    int OnTranspondProcess(const NFIPacket& msg);
 
     //客户端的连接60秒删掉
-    int HB_OnConnectCheckTime( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var );
-
-    //保存的世界服务器发过来的KEY,60秒删掉
-    int HB_OnPlayerWantToConnect(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var );
+    int HB_OnConnectCheckTime( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var );
     //////////////////////////////////////////////////////////////////////////
+protected:
 
-    //保存的世界服务器发过来的信息对象
-    int OnWantToConnectObjectEvent(const NFIDENTID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+	NFMapEx<NFGUID, int> mxClientIdent;
 
 protected:
-    //新建立的连接对象，等待他们自己发验证KEY，KEY验证后删掉
-    //-1
-    //int mnConnectContainer;
-
-    //世界服务器发过来，谁想登录此服务器的那个对象，包含帐号和KEY信息，KEY验证后删掉？
-    //-2
-    //int mnWantToConnectContainer;
-
-    //-3
-    //int mnGameContainerID;
-
-    //// 世界服务器发过来，谁想登录此服务器的那个对象，包含帐号和KEY信息，KEY验证后删掉
-    //NFMap<std::string, ConnectData> mWantConnectionMap;
-
-    //// Game容器
-    //NFMap<int, ServerData> mnGameDataMap;
-
-protected:
-    NFIProxyServerNet_ClientModule* m_pProxyServerNet_ClientModule;
+	NFIProxyServerToWorldModule* m_pProxyToWorldModule;
+	NFIProxyServerToGameModule* m_pProxyServerToGameModule;
 	NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFIElementInfoModule* m_pElementInfoModule;
     NFILogicClassModule* m_pLogicClassModule;
-    NFIEventProcessModule* m_pEventProcessModule;
+	NFIUUIDModule* m_pUUIDModule;
+
 };
 
 #endif

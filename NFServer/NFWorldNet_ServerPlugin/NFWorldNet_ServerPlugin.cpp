@@ -1,7 +1,6 @@
 // NFWorldNet_ServerPlugin.cpp : Defines the exported functions for the DLL application.
 //
 
-//#include "stdafx.h"
 #include "NFWorldNet_ServerPlugin.h"
 #include "NFCWorldNet_ServerModule.h"
 
@@ -30,7 +29,7 @@ const int NFWorldNet_ServerPlugin::GetPluginVersion()
 
 const std::string NFWorldNet_ServerPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFWorldNet_ServerPlugin)
+    return GET_CLASS_NAME(NFWorldNet_ServerPlugin)
 }
 
 void NFWorldNet_ServerPlugin::Install()

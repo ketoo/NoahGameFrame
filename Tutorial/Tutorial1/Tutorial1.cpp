@@ -25,7 +25,7 @@ const int Tutorial1::GetPluginVersion()
 
 const std::string Tutorial1::GetPluginName()
 {
-    GET_PLUGIN_NAME(Tutorial1)
+    return GET_CLASS_NAME(Tutorial1)
 }
 
 void Tutorial1::Install()
