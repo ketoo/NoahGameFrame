@@ -10,15 +10,16 @@
 
 bool NFCDynLib::Load()
 {
-    mInst = (DYNLIB_HANDLE)DYNLIB_LOAD(mstrName.c_str());
+    std::string strLibPath = "./";
+    strLibPath += mstrName;
+    mInst = (DYNLIB_HANDLE)DYNLIB_LOAD(strLibPath.c_str());
 
     return mInst != NULL;
-
 }
 
 bool NFCDynLib::UnLoad()
 {
-    DYNLIB_UNLOAD(mInst);    
+    DYNLIB_UNLOAD(mInst);
     return true;
 }
 

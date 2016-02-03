@@ -6,13 +6,11 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-//#include "stdafx.h"
 #include "NFCMasterNet_ServerModule.h"
 #include "NFMasterNet_ServerPlugin.h"
 
 bool NFCMasterNet_ServerModule::Init()
 {
-	mstrConfigIdent = "MasterServer";
 	return true;
 }
 
@@ -21,11 +19,11 @@ bool NFCMasterNet_ServerModule::Shut()
 	return true;
 }
 
-int NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const NFIPacket& msg)
+int NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	int64_t nPlayerID = 0;
+	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!RecivePB(msg, xMsg, nPlayerID))
+	if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return 0;
 	}
@@ -33,30 +31,30 @@ int NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const NFIPacket& msg)
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        ServerData* pServerData =  mWorldMap.GetElement(pData->server_id());
-        if (!pServerData)
+        NF_SHARE_PTR<ServerData> pServerData =  mWorldMap.GetElement(pData->server_id());
+        if (!pServerData.get())
         {
-            pServerData = new ServerData();
+            pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
             mWorldMap.AddElement(pData->server_id(), pServerData);
         }
 
-        pServerData->nFD = msg.GetFd();
+        pServerData->nFD = nSockIndex;
         *(pServerData->pData) = *pData;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "WorldRegistered");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "WorldRegistered");
     }
-	
+
 
 	SynWorldToLogin();
 
 	return 0;
 }
 
-int NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const NFIPacket& msg)
+int NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	int64_t nPlayerID = 0;
+	NFGUID nPlayerID;
     NFMsg::ServerInfoReportList xMsg;
-    if (!RecivePB(msg, xMsg, nPlayerID))
+    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -64,14 +62,10 @@ int NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const NFIPacket& msg)
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        ServerData* pServerData =  mWorldMap.RemoveElement(pData->server_id());
-        if (pServerData)
-        {
-            delete pServerData;
-            pServerData = NULL;
-        }
+        mWorldMap.RemoveElement(pData->server_id());
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "WorldUnRegistered");
+
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "WorldUnRegistered");
     }
 
 	SynWorldToLogin();
@@ -79,11 +73,11 @@ int NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const NFIPacket& msg)
 	return 0;
 }
 
-int NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFIPacket& msg)
+int NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	int64_t nPlayerID = 0;
+	NFGUID nPlayerID;
     NFMsg::ServerInfoReportList xMsg;
-    if (!RecivePB(msg, xMsg, nPlayerID))
+    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -91,17 +85,17 @@ int NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFIPacket& msg)
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        ServerData* pServerData =  mWorldMap.GetElement(pData->server_id());
-        if (!pServerData)
+        NF_SHARE_PTR<ServerData> pServerData =  mWorldMap.GetElement(pData->server_id());
+        if (!pServerData.get())
         {
-            pServerData = new ServerData();
+            pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
             mWorldMap.AddElement(pData->server_id(), pServerData);
         }
 
-        pServerData->nFD = msg.GetFd();
+        pServerData->nFD = nSockIndex;
         *(pServerData->pData) = *pData;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "RefreshWorldInfo");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "RefreshWorldInfo");
 
     }
 
@@ -110,11 +104,11 @@ int NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFIPacket& msg)
 	return 0;
 }
 
-int NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const NFIPacket& msg)
+int NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	int64_t nPlayerID = 0;
+	NFGUID nPlayerID;
     NFMsg::ServerInfoReportList xMsg;
-    if (!RecivePB(msg, xMsg, nPlayerID))
+    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -122,17 +116,17 @@ int NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const NFIPacket& msg)
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        ServerData* pServerData =  mLoginMap.GetElement(pData->server_id());
-        if (!pServerData)
+        NF_SHARE_PTR<ServerData> pServerData =  mLoginMap.GetElement(pData->server_id());
+        if (!pServerData.get())
         {
-            pServerData = new ServerData();
+            pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
             mLoginMap.AddElement(pData->server_id(), pServerData);
         }
 
-        pServerData->nFD = msg.GetFd();
+        pServerData->nFD = nSockIndex;
         *(pServerData->pData) = *pData;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "LoginRegistered");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "LoginRegistered");
     }
 
 	SynWorldToLogin();
@@ -140,11 +134,11 @@ int NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const NFIPacket& msg)
 	return 0;
 }
 
-int NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const NFIPacket& msg)
+int NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	int64_t nPlayerID = 0;
+	NFGUID nPlayerID;
     NFMsg::ServerInfoReportList xMsg;
-    if (!RecivePB(msg, xMsg, nPlayerID))
+    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -152,14 +146,9 @@ int NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const NFIPacket& msg)
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        ServerData* pServerData =  mLoginMap.RemoveElement(pData->server_id());
-        if (pServerData)
-        {
-            delete pServerData;
-            pServerData = NULL;
-        }
+        mLoginMap.RemoveElement(pData->server_id());
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "LoginUnRegistered");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "LoginUnRegistered");
 
     }
 
@@ -167,11 +156,11 @@ int NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const NFIPacket& msg)
 	return 0;
 }
 
-int NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess(const NFIPacket& msg)
+int NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	int64_t nPlayerID = 0;
+	NFGUID nPlayerID;
     NFMsg::ServerInfoReportList xMsg;
-    if (!RecivePB(msg, xMsg, nPlayerID))
+    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -179,34 +168,34 @@ int NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess(const NFIPacket& msg)
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
         NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        ServerData* pServerData =  mLoginMap.GetElement(pData->server_id());
-        if (!pServerData)
+        NF_SHARE_PTR<ServerData> pServerData =  mLoginMap.GetElement(pData->server_id());
+        if (!pServerData.get())
         {
-            pServerData = new ServerData();
+            pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
             mLoginMap.AddElement(pData->server_id(), pServerData);
         }
 
-        pServerData->nFD = msg.GetFd();
+        pServerData->nFD = nSockIndex;
         *(pServerData->pData) = *pData;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, pData->server_id(), pData->server_name(), "RefreshLoginInfo");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "RefreshLoginInfo");
 
     }
 
 	return 0;
 }
 
-int NFCMasterNet_ServerModule::OnSelectWorldProcess(const NFIPacket& msg)
+int NFCMasterNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	int64_t nPlayerID = 0;
+	NFGUID nPlayerID;
 	NFMsg::ReqConnectWorld xMsg;
-	if (!RecivePB(msg, xMsg, nPlayerID))
+	if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return 0;
 	}
 
-    ServerData* pServerData =  mWorldMap.GetElement(xMsg.world_id());
-    if (!pServerData)
+    NF_SHARE_PTR<ServerData> pServerData =  mWorldMap.GetElement(xMsg.world_id());
+    if (!pServerData.get())
     {
         return 0;
     }
@@ -217,24 +206,25 @@ int NFCMasterNet_ServerModule::OnSelectWorldProcess(const NFIPacket& msg)
 	return 0;
 }
 
-bool NFCMasterNet_ServerModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCMasterNet_ServerModule::Execute()
 {
-	m_pNet->Execute(fLasFrametime, fStartedTime);
+	LogGameServer();
 
+	NFINetModule::Execute();
 	return true;
 }
 
-int NFCMasterNet_ServerModule::OnSelectServerResultProcess(const NFIPacket& msg)
+int NFCMasterNet_ServerModule::OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	int64_t nPlayerID = 0;
+	NFGUID nPlayerID;
 	NFMsg::AckConnectWorldResult xMsg;
-	if (!RecivePB(msg, xMsg, nPlayerID))
+	if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return 0;
 	}
 
-    ServerData* pServerData =  mLoginMap.GetElement(xMsg.login_id());
-    if (!pServerData)
+    NF_SHARE_PTR<ServerData> pServerData =  mLoginMap.GetElement(xMsg.login_id());
+    if (!pServerData.get())
     {
         return 0;
     }
@@ -247,117 +237,124 @@ int NFCMasterNet_ServerModule::OnSelectServerResultProcess(const NFIPacket& msg)
 
 bool NFCMasterNet_ServerModule::AfterInit()
 {
-	
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
+	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
+	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 
-	m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-	m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
-	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
-	m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
-	m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
-	
-	assert(NULL != m_pEventProcessModule);
 	assert(NULL != m_pKernelModule);
 	assert(NULL != m_pLogModule);
 	assert(NULL != m_pLogicClassModule);
 	assert(NULL != m_pElementInfoModule);
 
-	const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
-	const int nServerPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerPort");
-	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
-	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
-	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
-	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
-
-	m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCMasterNet_ServerModule::OnRecivePack, &NFCMasterNet_ServerModule::OnSocketEvent);
-	int nRet = m_pNet->Initialization(nMaxConnect, nPort, nCpus);
-	if (nRet <= 0)
+	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
+	if (xLogicClass.get())
 	{
-		assert(0);
+		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
+		std::string strConfigName; 
+		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
+		{
+			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
+            const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+            if (nServerType == NF_SERVER_TYPES::NF_ST_MASTER && pPluginManager->AppID() == nServerID)
+			{
+				const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
+				const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
+				const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
+				const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
+				const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
+
+				int nRet = Initialization(this, &NFCMasterNet_ServerModule::OnRecivePack, &NFCMasterNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
+                if (nRet < 0)
+                {
+                    std::ostringstream strLog;
+                    strLog << "Cannot init server net, Port = " << nPort;
+                    m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+                    NFASSERT(nRet, "Cannot init server net", __FILE__, __FUNCTION__);
+                    exit(0);
+                }
+			}
+		}
 	}
 
 	return true;
 }
 
-int NFCMasterNet_ServerModule::OnRecivePack( const NFIPacket& msg )
+void NFCMasterNet_ServerModule::OnRecivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	int nMsgID = msg.GetMsgHead()->GetMsgID();
 	switch (nMsgID)
 	{
-	case NFMsg::EGameMsgID::EGMI_UNKNOW:
-		break;
-
+    case NFMsg::EGameMsgID::EGMI_STS_HEART_BEAT:
+        break;
 	case NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED:
-		OnWorldRegisteredProcess(msg);
+		OnWorldRegisteredProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 
 	case NFMsg::EGameMsgID::EGMI_MTL_WORLD_UNREGISTERED:
-		OnWorldUnRegisteredProcess(msg);
+		OnWorldUnRegisteredProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 
 	case NFMsg::EGameMsgID::EGMI_MTL_WORLD_REFRESH:
-		OnRefreshWorldInfoProcess(msg);
+		OnRefreshWorldInfoProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 
 	case NFMsg::EGameMsgID::EGMI_LTM_LOGIN_REGISTERED:
-		OnLoginRegisteredProcess(msg);
+		OnLoginRegisteredProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 
 	case NFMsg::EGameMsgID::EGMI_LTM_LOGIN_UNREGISTERED:
-		OnLoginUnRegisteredProcess(msg);
+		OnLoginUnRegisteredProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 
 	case NFMsg::EGameMsgID::EGMI_LTM_LOGIN_REFRESH:
-		OnRefreshLoginInfoProcess(msg);
+		OnRefreshLoginInfoProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 
 	case NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD:
-		OnSelectWorldProcess(msg);
+		OnSelectWorldProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 
 	case NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD:
-		OnSelectServerResultProcess(msg);
+		OnSelectServerResultProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
 
 	default:
-		printf("NFNet || 非法消息:unMsgID=%d\n", msg.GetMsgHead()->GetMsgID());
+		printf("NFNet || 非法消息:unMsgID=%d\n", nMsgID);
 		break;
 	}
-
-	return 0;
-
 }
 
-int NFCMasterNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
+void NFCMasterNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
-    if (eEvent & NF_NET_EVENT_EOF) 
+	//std::cout << "OnSocketEvent::thread id=" << GetCurrentThreadId() << std::endl;
+
+    if (eEvent & NF_NET_EVENT_EOF)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
-    } 
-    else if (eEvent & NF_NET_EVENT_ERROR) 
+    }
+    else if (eEvent & NF_NET_EVENT_ERROR)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     }
     else if (eEvent & NF_NET_EVENT_TIMEOUT)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     }
     else  if (eEvent == NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
         OnClientConnected(nSockIndex);
     }
-
-	return 0;
 }
 
 void NFCMasterNet_ServerModule::OnClientDisconnect( const int nAddress )
 {
 	//不管是login还是world都要找出来,替他反注册
-    ServerData* pServerData =  mWorldMap.First();
-    while (pServerData)
+    NF_SHARE_PTR<ServerData> pServerData =  mWorldMap.First();
+    while (pServerData.get())
     {
         if (nAddress == pServerData->nFD)
         {
@@ -370,12 +367,12 @@ void NFCMasterNet_ServerModule::OnClientDisconnect( const int nAddress )
 
         pServerData = mWorldMap.Next();
     }
-    
+
     //////////////////////////////////////////////////////////////////////////
 
     int nServerID = 0;
     pServerData =  mLoginMap.First();
-    while (pServerData)
+    while (pServerData.get())
     {
         if (nAddress == pServerData->nFD)
         {
@@ -386,15 +383,8 @@ void NFCMasterNet_ServerModule::OnClientDisconnect( const int nAddress )
         pServerData = mLoginMap.Next();
     }
 
-    if (nServerID != 0)
-    {
-        ServerData* pRmServerData = mLoginMap.RemoveElement(nServerID);
-        if (pRmServerData)
-        {
-            delete pRmServerData;
-            pRmServerData = NULL;
-        }
-    }
+    mLoginMap.RemoveElement(nServerID);
+
 }
 
 void NFCMasterNet_ServerModule::OnClientConnected( const int nAddress )
@@ -406,8 +396,8 @@ void NFCMasterNet_ServerModule::SynWorldToLogin()
 {
     NFMsg::ServerInfoReportList xData;
 
-    ServerData* pServerData =  mWorldMap.First();
-    while (pServerData)
+    NF_SHARE_PTR<ServerData> pServerData =  mWorldMap.First();
+    while (pServerData.get())
     {
         NFMsg::ServerInfoReport* pData = xData.add_server_list();
         *pData = *(pServerData->pData);
@@ -417,10 +407,52 @@ void NFCMasterNet_ServerModule::SynWorldToLogin()
 
     //广播给所有loginserver
     pServerData =  mLoginMap.First();
-    while (pServerData)
+    while (pServerData.get())
     {
         SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, pServerData->nFD);
 
         pServerData = mLoginMap.Next();
     }
+}
+
+void NFCMasterNet_ServerModule::LogGameServer()
+{
+	if (mnLastLogTime + 10 > GetPluginManager()->GetNowTime())
+	{
+		return;
+	}
+
+	mnLastLogTime = GetPluginManager()->GetNowTime();
+
+	//////////////////////////////////////////////////////////////////////////
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "Begin Log WorldServer Info", "");
+
+	NF_SHARE_PTR<ServerData> pGameData = mWorldMap.First();
+	while (pGameData)
+	{
+		std::ostringstream stream;
+		stream << "Type: " << pGameData->pData->server_type() << " ID: " << pGameData->pData->server_id() << " State: " <<  NFMsg::EServerState_Name(pGameData->pData->server_state()) << " IP: " << pGameData->pData->server_ip() << " FD: " << pGameData->nFD;
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), stream);
+
+		pGameData = mWorldMap.Next();
+	}
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "End Log WorldServer Info", "");
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "Begin Log LoginServer Info", "");
+
+	//////////////////////////////////////////////////////////////////////////
+	pGameData = mLoginMap.First();
+	while (pGameData)
+	{
+		std::ostringstream stream;
+		stream << "Type: " << pGameData->pData->server_type() << " ID: " << pGameData->pData->server_id() << " State: " <<  NFMsg::EServerState_Name(pGameData->pData->server_state()) << " IP: " << pGameData->pData->server_ip() << " FD: " << pGameData->nFD;
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), stream);
+
+		pGameData = mLoginMap.Next();
+	}
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "End Log LoginServer Info", "");
+
 }

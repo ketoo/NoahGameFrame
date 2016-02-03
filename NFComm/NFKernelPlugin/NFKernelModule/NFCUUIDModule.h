@@ -6,15 +6,19 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_UUID_MODULE_H_
-#define _NFC_UUID_MODULE_H_
+#ifndef NFC_UUID_MODULE_H
+#define NFC_UUID_MODULE_H
 
+#include <boost/crc.hpp>
+#include <boost/format.hpp>
+#include <boost/functional/hash.hpp>
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
 
 namespace UUIDModule
 {
-    extern uint64_t get_time();
-    class UUID;
+extern uint64_t get_time();
+class UUID;
 }
 
 class NFCUUIDModule
@@ -30,12 +34,17 @@ public:
     virtual bool BeforeShut();
     virtual bool AfterInit();
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
-    virtual int64_t CreateGUID();
+    virtual NFGUID CreateGUID();
 
+    virtual NFINT64 GetIdentID();
+    virtual void SetIdentID(NFINT64 nID);
 private:
+
+    NFINT64 mnIdent;
     UUIDModule::UUID* m_pUUID;
+	NFIKernelModule* m_pKernelModule;
 };
 
-#endif // !_NFC_UUID_MODULE_H_
+#endif // !_NFC_UUID_MODULE_H

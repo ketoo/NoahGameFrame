@@ -6,12 +6,12 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_DYNLIB_H_
-#define _NFC_DYNLIB_H_
+#ifndef NFC_DYNLIB_H
+#define NFC_DYNLIB_H
 
 #include <stdio.h>
 #include <iostream>
-#include "NFComm/NFCore/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #    define DYNLIB_HANDLE hInstance
@@ -23,6 +23,7 @@ struct HINSTANCE__;
 typedef struct HINSTANCE__* hInstance;
 
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
+#include <dlfcn.h>
 #define DYNLIB_HANDLE void*
 #define DYNLIB_LOAD( a ) dlopen( a, RTLD_LAZY | RTLD_GLOBAL)
 #define DYNLIB_GETSYM( a, b ) dlsym( a, b )
