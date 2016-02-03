@@ -39,7 +39,7 @@ public:
     {
         const MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR mFunReturnVeckKeyValueRsp = std::bind(handleReturnRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
 
-        return Query(self, strRecordName, strKey, fieldVec, valueVec, mFunReturnVeckKeyValueRsp, strUseData);
+        return Query(self, strRecordName, strKey, fieldVec, mFunReturnVeckKeyValueRsp, strUseData);
     }
 
     template<typename BaseType>
