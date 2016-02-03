@@ -6,8 +6,8 @@
 //    @Desc                 :    NPCË¢ÐÂ
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_NPC_REFRESH_MODULE_H_
-#define _NFI_NPC_REFRESH_MODULE_H_
+#ifndef _NFI_NPC_REFRESH_MODULE_H
+#define _NFI_NPC_REFRESH_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"

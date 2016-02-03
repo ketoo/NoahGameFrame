@@ -12,40 +12,57 @@
 
 bool NFCProxyServerNet_ServerModule::Init()
 {
-    mstrConfigIdent = "ProxyServer";
-
     return true;
 }
 
 bool NFCProxyServerNet_ServerModule::AfterInit()
 {
-    
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
-    m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
-    m_pProxyServerNet_ClientModule = dynamic_cast<NFIProxyServerNet_ClientModule*>(pPluginManager->FindModule("NFCProxyServerNet_ClientModule"));
-	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
-	m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
+    m_pProxyToWorldModule = pPluginManager->FindModule<NFIProxyServerToWorldModule>("NFCProxyServerToWorldModule");
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
+	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
+	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
+	m_pProxyServerToGameModule = pPluginManager->FindModule<NFIProxyServerToGameModule>("NFCProxyServerToGameModule");
 	
-    assert(NULL != m_pEventProcessModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pLogicClassModule);
-    assert(NULL != m_pProxyServerNet_ClientModule);
+    assert(NULL != m_pProxyToWorldModule);
 	assert(NULL != m_pLogModule);
 	assert(NULL != m_pElementInfoModule);
+	assert(NULL != m_pUUIDModule);
+	assert(NULL != m_pProxyServerToGameModule);
 
-	const int nServerID = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerID");
-	const int nServerPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "ServerPort");
-	const std::string& strName = m_pElementInfoModule->GetPropertyString(mstrConfigIdent, "Name");
-	const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "MaxConnect");
-	const int nCpus = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "CpuCount");
-	const int nPort = m_pElementInfoModule->GetPropertyInt(mstrConfigIdent, "Port");
-
-	m_pNet = new NFCNet(NFIMsgHead::NF_Head::NF_HEAD_LENGTH, this, &NFCProxyServerNet_ServerModule::OnRecivePack, &NFCProxyServerNet_ServerModule::OnSocketEvent);
-	int nRet = m_pNet->Initialization(nMaxConnect, nPort, nCpus);
-	if (nRet <= 0)
+	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
+	if (xLogicClass.get())
 	{
-		assert(0);
+		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
+		std::string strConfigName; 
+		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
+		{
+			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
+            const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+            if (nServerType == NF_SERVER_TYPES::NF_ST_PROXY && pPluginManager->AppID() == nServerID)
+			{
+				const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
+				const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
+				const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
+				const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
+				const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
+
+				m_pUUIDModule->SetIdentID(nServerID);
+
+				int nRet = Initialization(this, &NFCProxyServerNet_ServerModule::OnReciveClientPack, &NFCProxyServerNet_ServerModule::OnSocketClientEvent, nMaxConnect, nPort, nCpus);
+                if (nRet < 0)
+                {
+                    std::ostringstream strLog;
+                    strLog << "Cannot init server net, Port = " << nPort;
+                    m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+                    NFASSERT(nRet, "Cannot init server net", __FILE__, __FUNCTION__);
+                    exit(0);
+                }
+			}
+		}
 	}
 
     return true;
@@ -53,130 +70,129 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
 
 bool NFCProxyServerNet_ServerModule::Shut()
 {
-    m_pNet->Final();
 
     return true;
 }
 
-bool NFCProxyServerNet_ServerModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCProxyServerNet_ServerModule::Execute()
 {
-    return m_pNet->Execute(fLasFrametime, fStartedTime);
+	return NFINetModule::Execute();
 }
 
-int NFCProxyServerNet_ServerModule::HB_OnConnectCheckTime( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var )
+int NFCProxyServerNet_ServerModule::HB_OnConnectCheckTime( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var )
 {
     m_pKernelModule->DestroyObject(self);
 
     return 0;
 }
 
-int NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const NFIPacket& msg)
+int NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    int64_t nPlayerID = 0;
+    NFGUID nPlayerID;
     NFMsg::ReqAccountLogin xMsg;
-    if (!RecivePB(msg, xMsg, nPlayerID))
+    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return 0;
     }
 
-    bool bRet = m_pProxyServerNet_ClientModule->VerifyConnectData(xMsg.account(), xMsg.security_code());
+    bool bRet = m_pProxyToWorldModule->VerifyConnectData(xMsg.account(), xMsg.security_code());
     if (bRet)
     {
         //可以进入,设置标志，选单服,心跳延迟,进入gs创建角色和删除角色,这里只是转发
-        NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
+        NetObject* pNetObject = this->GetNet()->GetNetObject(nSockIndex);
         if (pNetObject)
         {
-            pNetObject->SetLogicState(1);
-            pNetObject->SetUserStrData(xMsg.account());
+            pNetObject->SetConnectKeyState(1);
+            pNetObject->SetAccount(xMsg.account());
 
             NFMsg::AckEventResult xSendMsg;
             xSendMsg.set_event_code(NFMsg::EGEC_VERIFY_KEY_SUCCESS);
-            xSendMsg.set_event_arg(msg.GetFd());//让前端记得自己的fd，后面有一些验证
+            *xSendMsg.mutable_event_client() = NFToPB(pNetObject->GetClientID());//让前端记得自己的fd，后面有一些验证
 
-            SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_KEY, xSendMsg, msg.GetFd());
+            SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_KEY, xSendMsg, nSockIndex);
         }
     }
     else
     {
-        GetNet()->CloseNetObject(msg.GetFd());
+        GetNet()->CloseNetObject(nSockIndex);
     }
 
     return 0;
 }
 
-int NFCProxyServerNet_ServerModule::OnRecivePack( const NFIPacket& msg )
+void NFCProxyServerNet_ServerModule::OnReciveClientPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     //看他连接在哪个gs，然后转发
-    switch (msg.GetMsgHead()->GetMsgID())
+    switch (nMsgID)
     {
     case NFMsg::EGameMsgID::EGMI_REQ_CONNECT_KEY:
-        OnConnectKeyProcess(msg);
+        OnConnectKeyProcess(nSockIndex, nMsgID, msg, nLen);
         break;
     case NFMsg::EGameMsgID::EGMI_REQ_WORLD_LIST:
-        OnReqServerListProcess(msg);
+        OnReqServerListProcess(nSockIndex, nMsgID, msg, nLen);
         break;
     case NFMsg::EGameMsgID::EGMI_REQ_SELECT_SERVER:
-        OnSelectServerProcess(msg);
+        OnSelectServerProcess(nSockIndex, nMsgID, msg, nLen);
         break;
     case NFMsg::EGameMsgID::EGMI_REQ_ROLE_LIST:
-        OnReqRoleListProcess(msg);
+        OnReqRoleListProcess(nSockIndex, nMsgID, msg, nLen);
         break;
     case NFMsg::EGameMsgID::EGMI_REQ_CREATE_ROLE:
-        OnReqCreateRoleProcess(msg);
+        OnReqCreateRoleProcess(nSockIndex, nMsgID, msg, nLen);
         break;
     case NFMsg::EGameMsgID::EGMI_REQ_DELETE_ROLE:
-        OnReqDelRoleProcess(msg);
+        OnReqDelRoleProcess(nSockIndex, nMsgID, msg, nLen);
         break;
     case NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME:
-        OnReqEnterGameServer(msg);
+        OnReqEnterGameServer(nSockIndex, nMsgID, msg, nLen);
         break;
-        
     default:
         {
-            if (!VerifyProtocol(msg, msg.GetFd()))
-            {
-                break;
-            }
+			NFMsg::MsgBase xMsg;
+			if(!xMsg.ParseFromArray(msg, nLen))
+			{
+				char szData[MAX_PATH] = { 0 };
+				sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", nMsgID);
+				LogRecive(szData);
 
-            NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
-            if (!pNetObject || pNetObject->GetLogicState() <= 0 || pNetObject->GetUserData() <= 0)
+				return;
+			}
+
+            NetObject* pNetObject = this->GetNet()->GetNetObject(nSockIndex);
+            if (!pNetObject || pNetObject->GetConnectKeyState() <= 0 || pNetObject->GetGameID() <= 0)
             {
                 //没验证key，没选择服务器
                 break;
             }
-
-            OnTranspondProcess(msg);
+			
+			m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), nSockIndex, nMsgID, msg, nLen);
         }
         break;
     }
-
-	return 0;
 }
 
-int NFCProxyServerNet_ServerModule::OnSocketEvent( const int nSockIndex, const NF_NET_EVENT eEvent )
+void NFCProxyServerNet_ServerModule::OnSocketClientEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
     if (eEvent & NF_NET_EVENT_EOF) 
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     } 
     else if (eEvent & NF_NET_EVENT_ERROR) 
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     }
     else if (eEvent & NF_NET_EVENT_TIMEOUT)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     }
     else  if (eEvent == NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nSockIndex, "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
         OnClientConnected(nSockIndex);
     }
-
-	return 0;
 }
 
 void NFCProxyServerNet_ServerModule::OnClientDisconnect( const int nAddress )
@@ -184,102 +200,75 @@ void NFCProxyServerNet_ServerModule::OnClientDisconnect( const int nAddress )
     NetObject* pNetObject = this->GetNet()->GetNetObject(nAddress);
     if (pNetObject)
     {
-        int nUserData = pNetObject->GetUserData();
-        if (nUserData > 0)
+        int nGameID = pNetObject->GetGameID();
+        if (nGameID > 0)
         {
-            //掉线
-            NFMsg::ReqLeaveGameServer xData;
-
-            NFCPacket msg(this->GetNet()->GetHeadLen());
-            NFMsg::MsgBase xMsg;
-            if (!xData.SerializeToString(xMsg.mutable_msg_data()))
+            if (!pNetObject->GetUserID().IsNull())
             {
-                return;
+                //掉线
+                NFMsg::ReqLeaveGameServer xData;
+
+                NFMsg::MsgBase xMsg;
+                //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
+                *xMsg.mutable_player_id() = NFToPB(pNetObject->GetUserID());
+
+                if (!xData.SerializeToString(xMsg.mutable_msg_data()))
+                {
+                    return;
+                }
+
+                std::string strMsg;
+                if(!xMsg.SerializeToString(&strMsg))
+                {
+                    return;
+                }
+
+				m_pProxyServerToGameModule->SendByServerID(nGameID, nAddress, NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GAME, strMsg.c_str(), strMsg.length());
             }
-
-            //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
-            xMsg.set_player_id(nAddress);
-
-            std::string strMsg;
-            if(!xMsg.SerializeToString(&strMsg))
-            {
-                return;
-            }
-
-            if(!msg.EnCode(NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GAME, strMsg.c_str(), strMsg.length()))
-            {
-                return;
-            }
-
-            m_pProxyServerNet_ClientModule->Transpond(nUserData, msg);
         }
+
+		NFGUID xClientIdent = pNetObject->GetClientID();
+		mxClientIdent.RemoveElement(xClientIdent);
     }
 }
 
-int NFCProxyServerNet_ServerModule::OnTranspondProcess( const NFIPacket& msg )
+int NFCProxyServerNet_ServerModule::OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
-    if (pNetObject)
-    {
-        //得到gs_id
-        int nUserData = pNetObject->GetUserData();
-        if (nUserData > 0)
-        {
-            //广播给谁呢，看他在哪个服务器上
-            return m_pProxyServerNet_ClientModule->Transpond(nUserData, msg);
-        }
-    }
-
-    return 0;
-}
-
-int NFCProxyServerNet_ServerModule::OnSelectServerProcess( const NFIPacket& msg )
-{
-    int64_t nPlayerID = 0;
+    NFGUID nPlayerID;
     NFMsg::ReqSelectServer xMsg;
-    if (!RecivePB(msg, xMsg, nPlayerID))
+    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return 0;
     }
 
-    if (msg.GetFd() != nPlayerID)
-    {
-        return 0;
-    }
+	NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xMsg.world_id());
+	if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
+	{
+		//选择成功
+		NetObject* pNetObject = this->GetNet()->GetNetObject(nSockIndex);
+		if (pNetObject)
+		{
+			pNetObject->SetGameID(xMsg.world_id());
 
-    NFIProxyServerNet_ClientModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xMsg.world_id());
-    if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
-    {
-        //选择成功
-        NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
-        if (pNetObject)
-        {
-            pNetObject->SetUserData(xMsg.world_id());
-
-            NFMsg::AckEventResult xMsg;
-            xMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SELECTSERVER_SUCCESS);
-            SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, msg.GetFd());
-            return 0;
-        }
-    }
+			NFMsg::AckEventResult xMsg;
+			xMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SELECTSERVER_SUCCESS);
+			SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, nSockIndex);
+			return 0;
+		}
+	}
 
     NFMsg::AckEventResult xSendMsg;
-    xSendMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SELECTSERVER_SUCCESS);
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, msg.GetFd());
+    xSendMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SELECTSERVER_FAIL);
+    SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, nSockIndex);
     
     return 0;
 }
 
-int NFCProxyServerNet_ServerModule::OnReqServerListProcess( const NFIPacket& msg )
+int NFCProxyServerNet_ServerModule::OnReqServerListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    int64_t nPlayerID = 0;
+    NFGUID nPlayerID;
     NFMsg::ReqServerList xMsg;
-    if (!RecivePB(msg, xMsg, nPlayerID))
-    {
-        return 0;
-    }
-
-    if (msg.GetFd() != nPlayerID)
+    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -289,54 +278,66 @@ int NFCProxyServerNet_ServerModule::OnReqServerListProcess( const NFIPacket& msg
         return 0;
     }
 
-    NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
-    if (pNetObject && pNetObject->GetLogicState() > 0)
+    NetObject* pNetObject = this->GetNet()->GetNetObject(nSockIndex);
+    if (pNetObject && pNetObject->GetConnectKeyState() > 0)
     {
         //验证过的帐号才能获取服务器列表
         NFMsg::AckServerList xData;
         xData.set_type(NFMsg::RSLT_GAMES_ERVER);
 
-        NFIProxyServerNet_ClientModule::GameDataMap& xGameDataMap = m_pProxyServerNet_ClientModule->GetGameDataMap();
-        NFIProxyServerNet_ClientModule::GameData* pGameData = xGameDataMap.First();
-        while (NULL != pGameData)
+		NFMapEx<int, ConnectData>& xServerList = m_pProxyServerToGameModule->GetServerList();
+        ConnectData* pGameData = xServerList.FirstNude();
+        while (NULL != pGameData )
         {
-            NFMsg::ServerInfo* pServerInfo = xData.add_info();
+			if (ConnectDataState::NORMAL == pGameData->eState)
+			{
+				NFMsg::ServerInfo* pServerInfo = xData.add_info();
 
-            pServerInfo->set_name(pGameData->strName);
-            pServerInfo->set_status(pGameData->eState);
-            pServerInfo->set_server_id(pGameData->nGameID);
-            pServerInfo->set_wait_count(0);
+				pServerInfo->set_name(pGameData->strName);
+				pServerInfo->set_status(NFMsg::EServerState::EST_NARMAL);
+				pServerInfo->set_server_id(pGameData->nGameID);
+				pServerInfo->set_wait_count(0);
+			}
 
-            pGameData = xGameDataMap.Next();
+            pGameData = xServerList.NextNude();
         }
 
-        SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_WORLD_LIST, xData, msg.GetFd());
+        SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_WORLD_LIST, xData, nSockIndex);
     }
 
     return 0;
 }
 
-int NFCProxyServerNet_ServerModule::Transpond(const NFIPacket& msg )
+int NFCProxyServerNet_ServerModule::Transpond(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
 {
     NFMsg::MsgBase xMsg;
-    if(!xMsg.ParseFromArray(msg.GetData(), msg.GetDataLen()))
+    if(!xMsg.ParseFromArray(msg, nLen))
     {
         char szData[MAX_PATH] = { 0 };
-        sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msg.GetMsgHead()->GetMsgID());
+        sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", nMsgID);
         LogRecive(szData);
 
         return false;
     }
 
-    for (int i = 0; i < xMsg.player_fd_list_size(); ++i)
+    for (int i = 0; i < xMsg.player_client_list_size(); ++i)
     {
-        GetNet()->SendMsg(msg, xMsg.player_fd_list(i));
+        NF_SHARE_PTR<int> pFD = mxClientIdent.GetElement(PBToNF(xMsg.player_client_list(i)));
+        if (pFD)
+        {
+            GetNet()->SendMsgWithOutHead(nMsgID, msg, nLen, *pFD);
+        }
     }
 
-    if(xMsg.player_fd_list_size() <= 0)
+    if(xMsg.player_client_list_size() <= 0)
     {
-        //playerid==fd
-        GetNet()->SendMsg(msg, xMsg.player_id());
+        //playerid==ClientID;
+
+        NF_SHARE_PTR<int> pFD = mxClientIdent.GetElement(PBToNF(xMsg.player_id()));
+        if (pFD)
+        {
+            GetNet()->SendMsgWithOutHead(nMsgID, msg, nLen, *pFD);
+        }
     }
 
     return true;
@@ -344,28 +345,35 @@ int NFCProxyServerNet_ServerModule::Transpond(const NFIPacket& msg )
 
 void NFCProxyServerNet_ServerModule::OnClientConnected( const int nAddress )
 {
+	NFGUID xClientIdent = m_pUUIDModule->CreateGUID();
+    NetObject* pNetObject = GetNet()->GetNetObject(nAddress);
+    if (pNetObject)
+    {
+        pNetObject->SetClientID(xClientIdent);
+    }
 
+	mxClientIdent.AddElement(xClientIdent, NF_SHARE_PTR<int>(new int(nAddress)));
 }
 
-int NFCProxyServerNet_ServerModule::OnReqRoleListProcess( const NFIPacket& msg )
+int NFCProxyServerNet_ServerModule::OnReqRoleListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     //在没有正式进入游戏之前，nPlayerID都是FD
-    int64_t nPlayerID = 0;
+    NFGUID nPlayerID;
     NFMsg::ReqRoleList xData;
-    if (!RecivePB(msg, xData, nPlayerID))
+    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
     {
         return 0;
     }
 
-    NFIProxyServerNet_ClientModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
-    if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
+	NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xData.game_id());
+    if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
         //数据匹配
-        NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
+        NetObject* pNetObject = this->GetNet()->GetNetObject(nSockIndex);
         if (pNetObject
-            && pNetObject->GetLogicState() > 0
-            && pNetObject->GetUserData() == xData.game_id()
-            && pNetObject->GetUserStrData() == xData.account())
+            && pNetObject->GetConnectKeyState() > 0
+            && pNetObject->GetGameID() == xData.game_id()
+            && pNetObject->GetAccount() == xData.account())
         {
             NFMsg::MsgBase xMsg;
             if (!xData.SerializeToString(xMsg.mutable_msg_data()))
@@ -374,7 +382,7 @@ int NFCProxyServerNet_ServerModule::OnReqRoleListProcess( const NFIPacket& msg )
             }
 
             //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
-            xMsg.set_player_id(msg.GetFd());
+            xMsg.mutable_player_id()->CopyFrom(NFToPB(pNetObject->GetClientID()));
 
             std::string strMsg;
             if(!xMsg.SerializeToString(&strMsg))
@@ -382,117 +390,141 @@ int NFCProxyServerNet_ServerModule::OnReqRoleListProcess( const NFIPacket& msg )
                 return false;
             }
 
-            NFCPacket xPacket(m_pNet->GetHeadLen());
-            if(!xPacket.EnCode(NFMsg::EGameMsgID::EGMI_REQ_ROLE_LIST, strMsg.c_str(), strMsg.length()))
+			m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), nSockIndex, NFMsg::EGameMsgID::EGMI_REQ_ROLE_LIST, strMsg.c_str(), strMsg.length());
+        }
+    }
+
+    return 0;
+}
+
+int NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+    //在没有正式进入游戏之前，nPlayerID都是FD
+
+
+    NFGUID nPlayerID;
+    NFMsg::ReqCreateRole xData;
+    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
+    {
+        return 0;
+    }
+
+	NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xData.game_id());
+	if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
+	{
+        //数据匹配
+        NetObject* pNetObject = this->GetNet()->GetNetObject(nSockIndex);
+        if (pNetObject
+            && pNetObject->GetConnectKeyState() > 0
+            && pNetObject->GetGameID() == xData.game_id()
+            && pNetObject->GetAccount() == xData.account())
+        {
+            NFMsg::MsgBase xMsg;
+            if (!xData.SerializeToString(xMsg.mutable_msg_data()))
             {
                 return false;
             }
 
-            xPacket.SetFd(msg.GetFd());
+            //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
+            xMsg.mutable_player_id()->CopyFrom(NFToPB(pNetObject->GetClientID()));
 
-            OnTranspondProcess(xPacket);
+            std::string strMsg;
+            if(!xMsg.SerializeToString(&strMsg))
+            {
+                return false;
+            }
+
+			m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), nSockIndex, nMsgID, msg, nLen);
         }
     }
 
     return 0;
 }
 
-int NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess( const NFIPacket& msg )
+int NFCProxyServerNet_ServerModule::OnReqDelRoleProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     //在没有正式进入游戏之前，nPlayerID都是FD
-
-
-    int64_t nPlayerID = 0;
-    NFMsg::ReqCreateRole xData;
-    if (!RecivePB(msg, xData, nPlayerID))
-    {
-        return 0;
-    }
-
-    if (msg.GetFd() != nPlayerID)
-    {
-        return 0;
-    }
-
-    NFIProxyServerNet_ClientModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
-    if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
-    {
-        //数据匹配
-        NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
-        if (pNetObject
-            && pNetObject->GetLogicState() > 0
-            && pNetObject->GetUserData() == xData.game_id()
-            && pNetObject->GetUserStrData() == xData.account())
-        {
-            OnTranspondProcess(msg);
-        }
-    }
-
-    return 0;
-}
-
-int NFCProxyServerNet_ServerModule::OnReqDelRoleProcess( const NFIPacket& msg )
-{
-    //在没有正式进入游戏之前，nPlayerID都是FD
-    int64_t nPlayerID = 0;
+    NFGUID nPlayerID;
     NFMsg::ReqDeleteRole xData;
-    if (!RecivePB(msg, xData, nPlayerID))
+    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
     {
         return 0;
     }
 
-    if (msg.GetFd() != nPlayerID)
-    {
-        return 0;
-    }
-
-    NFIProxyServerNet_ClientModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
-    if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
-    {
+	NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xData.game_id());
+	if (NULL != pServerData
+		&& pServerData->eState != NFMsg::EST_CRASH
+		&& pServerData->eState != NFMsg::EST_MAINTEN)
+	{
         //数据匹配
-        NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
+        NetObject* pNetObject = this->GetNet()->GetNetObject(nSockIndex);
         if (pNetObject
-            && pNetObject->GetLogicState() > 0
-            && pNetObject->GetUserData() == xData.game_id()
-            && pNetObject->GetUserStrData() == xData.account())
+            && pNetObject->GetConnectKeyState() > 0
+            && pNetObject->GetGameID() == xData.game_id()
+            && pNetObject->GetAccount() == xData.account())
         {
-            OnTranspondProcess(msg);
+            m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), nMsgID, std::string(msg, nLen));
         }
     }
 
     return 0;
 }
 
-int NFCProxyServerNet_ServerModule::OnReqEnterGameServer( const NFIPacket& msg )
+int NFCProxyServerNet_ServerModule::OnReqEnterGameServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     //在没有正式进入游戏之前，nPlayerID都是FD
-    int64_t nPlayerID = 0;
+    NFGUID nPlayerID;
     NFMsg::ReqEnterGameServer xData;
-    if (!RecivePB(msg, xData, nPlayerID))
+    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
     {
         return 0;
     }
 
-    if (msg.GetFd() != nPlayerID)
-    {
-        return 0;
-    }
-
-    NFIProxyServerNet_ClientModule::GameData* pServerData = m_pProxyServerNet_ClientModule->GetGameData(xData.game_id());
-    if (NULL != pServerData && pServerData->eState != NFMsg::EST_CRASH)
-    {
+	NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xData.game_id());
+	if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
+	{
         //数据匹配
-        NetObject* pNetObject = this->GetNet()->GetNetObject(msg.GetFd());
+        NetObject* pNetObject = this->GetNet()->GetNetObject(nSockIndex);
         if (pNetObject
-            && pNetObject->GetLogicState() > 0
-            && pNetObject->GetUserData() == xData.game_id()
-            && pNetObject->GetUserStrData() == xData.account()
+            && pNetObject->GetConnectKeyState() > 0
+            && pNetObject->GetGameID() == xData.game_id()
+            && pNetObject->GetAccount() == xData.account()
             && !xData.name().empty()
             && !xData.account().empty())
         {
-            OnTranspondProcess(msg);
+            NFMsg::MsgBase xMsg;
+            if (!xData.SerializeToString(xMsg.mutable_msg_data()))
+            {
+                return false;
+            }
+
+            //playerid在进入游戏之前都是FD，其他时候是真实的ID
+            xMsg.mutable_player_id()->CopyFrom(NFToPB(pNetObject->GetClientID()));
+
+            std::string strMsg;
+            if(!xMsg.SerializeToString(&strMsg))
+            {
+                return false;
+            }
+
+            m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), nSockIndex, NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME, strMsg.c_str(), strMsg.length());
         }
     }
 
     return 0;
+}
+
+int NFCProxyServerNet_ServerModule::EnterGameSuccessEvent(const NFGUID xClientID, const NFGUID xPlayerID)
+{
+	NF_SHARE_PTR<int> pFD = mxClientIdent.GetElement(xClientID);
+	if (pFD)
+	{
+		NetObject* pNetObeject = GetNet()->GetNetObject(*pFD);
+		if (pNetObeject)
+		{
+			pNetObeject->SetUserID(xPlayerID);
+		}
+	}
+
+	return 0;
 }

@@ -18,16 +18,10 @@
     <ClInclude Include="NFDefine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFIdentID.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NFIObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NFIRecord.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NFPlatform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NFList.h">
@@ -63,9 +57,6 @@
     <ClInclude Include="NFIHeartBeatManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFCComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NFCComponentManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -84,16 +75,28 @@
     <ClInclude Include="NFCObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFCMemory .h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NFIMemory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NFCDataList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NFIDataList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NFMapEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCConsistentHash.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCMemManger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCAddConsistentHash.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCEventManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NFIEventManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -114,9 +117,6 @@
     <ClCompile Include="NFCHeartBeatManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NFCComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="NFCComponentManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -126,11 +126,14 @@
     <ClCompile Include="NFCObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NFCMemory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="NFCDataList.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCMemManger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCEventManager.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

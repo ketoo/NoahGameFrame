@@ -1,11 +1,9 @@
 // NFConfigPlugin.cpp : Defines the exported functions for the DLL application.
 //
 
-////#include "stdafx.h"
 #include "NFConfigPlugin.h"
 #include "NFCLogicClassModule.h"
 #include "NFCElementInfoModule.h"
-#include "NFComm\NFPluginModule\NFIPluginManager.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -34,7 +32,7 @@ const int NFConfigPlugin::GetPluginVersion()
 
 const std::string NFConfigPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFConfigPlugin)
+    return GET_CLASS_NAME(NFConfigPlugin)
 }
 
 void NFConfigPlugin::Install()

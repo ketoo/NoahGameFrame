@@ -6,7 +6,6 @@
 //
 // -------------------------------------------------------------------------
 
-//#include "stdafx.h"
 #include "NFCPluginManager.h"
 #include "NFComm/RapidXML/rapidxml.hpp"
 #include "NFComm/RapidXML/rapidxml_iterators.hpp"
@@ -14,6 +13,7 @@
 #include "NFComm/RapidXML/rapidxml_utils.hpp"
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIActorDataModule.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 #pragma comment( lib, "ws2_32.lib" )
 
@@ -53,28 +53,44 @@ bool NFCPluginManager::LoadPlugin()
         const char* strPluginName = pPluginNode->first_attribute( "Name" )->value();
         const char* strMain = pPluginNode->first_attribute( "Main" )->value();
 
-        int nMain = boost::lexical_cast<int>( strMain );
-        bool bMain = (nMain > 0 ? true : false);
-        if (bMain)
-        {
-            //主模块只能运行在主actor上只
-            //非主模块则所有的actor都创建
-            if (GetActorID() == NFIActorManager::EACTOR_MAIN)
-            {
-                mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, bMain));
-            }
-        }
-        else
-        {
-            mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, bMain));
-        }
+		mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, true));
+
     }
 
-    rapidxml::xml_node<>* pActorDataNode = pRoot->first_node("ActorDataModule");
-    if (pActorDataNode)
+    rapidxml::xml_node<>* pPluginAppNode = pRoot->first_node("APPID");
+    if (!pPluginAppNode)
     {
-        strDataModule = pActorDataNode->first_attribute( "Name" )->value();
+        NFASSERT(0, "There are no App ID", __FILE__, __FUNCTION__);
+        return false;
     }
+
+    const char* strAppID = pPluginAppNode->first_attribute( "Name" )->value();
+    if (!strAppID)
+    {
+        NFASSERT(0, "There are no App ID", __FILE__, __FUNCTION__);
+        return false;
+    }
+
+    if (!NF_StrTo(strAppID, mnAppID))
+    {
+        NFASSERT(0, "App ID Convert Error", __FILE__, __FUNCTION__);
+        return false;
+    }
+
+    rapidxml::xml_node<>* pPluginConfigPathNode = pRoot->first_node("ConfigPath");
+    if (!pPluginConfigPathNode)
+    {
+        NFASSERT(0, "There are no ConfigPath", __FILE__, __FUNCTION__);
+        return false;
+    }
+
+    if (NULL == pPluginConfigPathNode->first_attribute( "Name" ))
+    {
+        NFASSERT(0, "There are no ConfigPath.Name", __FILE__, __FUNCTION__);
+        return false;
+    }
+
+    mstrConfigPath = pPluginConfigPathNode->first_attribute( "Name" )->value();
 
     return true;
 }
@@ -109,8 +125,9 @@ void NFCPluginManager::UnsRegistered(NFIPlugin* plugin)
     if (it != mPluginInstanceMap.end())
     {
         it->second->Uninstall();
-        delete it->second;
+		delete it->second;
         it->second = NULL;
+        mPluginInstanceMap.erase(it);
     }
 }
 
@@ -125,16 +142,20 @@ NFIPlugin* NFCPluginManager::FindPlugin(const std::string& strPluginName)
     return NULL;
 }
 
-bool NFCPluginManager::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCPluginManager::Execute()
 {
+	mnNowTime = time(NULL);
+
     bool bRet = true;
 
     PluginInstanceMap::iterator it = mPluginInstanceMap.begin();
     for (; it != mPluginInstanceMap.end(); ++it)
     {
-        bool tembRet = it->second->Execute(fLasFrametime, fStartedTime);
+        bool tembRet = it->second->Execute();
         bRet = bRet && tembRet;
     }
+
+	ExecuteEvent();
 
     return bRet;
 }
@@ -155,6 +176,7 @@ void NFCPluginManager::RemoveModule(const std::string& strModuleName)
         mModuleInstanceMap.erase(it);
     }
 }
+
 
 NFILogicModule* NFCPluginManager::FindModule(const std::string& strModuleName)
 {
@@ -215,6 +237,17 @@ bool NFCPluginManager::AfterInit()
     return true;
 }
 
+bool NFCPluginManager::CheckConfig()
+{
+    PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
+    for (itCheckInstance; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
+    {
+        itCheckInstance->second->CheckConfig();
+    }
+
+    return true;
+}
+
 bool NFCPluginManager::BeforeShut()
 {
     PluginInstanceMap::iterator itBeforeInstance = mPluginInstanceMap.begin();
@@ -228,6 +261,8 @@ bool NFCPluginManager::BeforeShut()
 
 bool NFCPluginManager::Shut()
 {
+
+
     PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
     for (itInstance; itInstance != mPluginInstanceMap.end(); ++itInstance)
     {
@@ -242,6 +277,7 @@ bool NFCPluginManager::Shut()
         UnLoadPluginLibrary(it->first);
     }
 
+
 #else
 
     //     DESTROY_PLUGIN(this, NFConfigPlugin)
@@ -249,10 +285,9 @@ bool NFCPluginManager::Shut()
     //     DESTROY_PLUGIN(this, NFKernelPlugin)
 
 #endif
-    mPluginInstanceMap.clear();
+	mPluginInstanceMap.clear();
     mPluginNameMap.clear();
-
-    return true;
+	return true;
 }
 
 bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
@@ -270,12 +305,32 @@ bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
             DLL_START_PLUGIN_FUNC pFunc = (DLL_START_PLUGIN_FUNC)pLib->GetSymbol("DllStartPlugin");
             if (!pFunc)
             {
+                std::cout << "Find function DllStartPlugin Failed in [" << pLib->GetName() << "]" << std::endl;
+                assert(0);
                 return false;
             }
 
             pFunc(this);
 
             return true;
+        }
+        else
+        {
+#if NF_PLATFORM == NF_PLATFORM_LINUX
+            char* error = dlerror();
+            if (error)
+            {
+				std::cout << stderr << " Open shared lib[" << pLib->GetName() << "] failed, ErrorNo. = [" << error << "]" << std::endl;
+                std::cout << "Load [" << pLib->GetName() << "] failed" << std::endl;
+				assert(0);
+                return false;
+            }
+#elif NF_PLATFORM == NF_PLATFORM_WIN
+			std::cout << stderr << " Open DLL[" << pLib->GetName() << "] failed, ErrorNo. = ["<< GetLastError() << "]" << std::endl;
+			std::cout << "Load [" << pLib->GetName() << "] failed" << std::endl;
+			assert(0);
+			return false;
+#endif // NF_PLATFORM
         }
     }
 
@@ -295,12 +350,11 @@ bool NFCPluginManager::UnLoadPluginLibrary(const std::string& strPluginDLLName)
         {
             pFunc(this);
         }
-        
+
         pLib->UnLoad();
 
         delete pLib;
         pLib = NULL;
-
         mPluginLibMap.erase(it);
 
         return true;
@@ -335,18 +389,67 @@ bool NFCPluginManager::ReInitialize()
         itAfterInstance->second->AfterInit();
     }
 
+    PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
+    for (itCheckInstance; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
+    {
+        itCheckInstance->second->CheckConfig();
+    }
+
     return true;
 }
 
+
 void NFCPluginManager::HandlerEx( const NFIActorMessage& message, const Theron::Address from )
 {
-    if (message.eType != NFIActorMessage::EACTOR_UNKNOW)
-    {
-        //给哪个模块接这个消息呢..难道广播...他也不知道，哪个模块要写是接受数据的啊，除非...配置写好
-        NFIActorDataModule* pModule = dynamic_cast<NFIActorDataModule*>(pPluginManager->FindModule(strDataModule));
-        if (pModule)
-        {
-            pModule->Handler(message, from);
-        }
-    }
+	//添加到队列，每帧执行
+	mxQueue.Push(message);
+}
+
+bool NFCPluginManager::ExecuteEvent()
+{
+	NFIActorMessage xMsg;
+	bool bRet = false;
+	bRet = mxQueue.Pop(xMsg);
+	while (bRet)
+	{
+		if (xMsg.eType == NFIActorMessage::EACTOR_RETURN_EVENT_MSG)
+		{
+			xMsg.xEndFuncptr->operator()(xMsg.self, xMsg.nFormActor, xMsg.nSubMsgID, xMsg.data);
+			m_pActorManager->ReleaseActor(xMsg.nFormActor);
+		}
+
+		bRet = mxQueue.Pop(xMsg);
+	}
+
+
+
+	return true;
+}
+
+void NFCPluginManager::AddComponent( const std::string& strComponentName, NFIComponent* pComponent )
+{
+	if (!FindComponent(strComponentName))
+	{
+		mComponentInstanceMap.insert(ComponentInstanceMap::value_type(strComponentName, pComponent));
+	}
+	
+}
+
+void NFCPluginManager::RemoveComponent( const std::string& strComponentName )
+{
+	ComponentInstanceMap::iterator it = mComponentInstanceMap.find(strComponentName);
+	if (it != mComponentInstanceMap.end())
+	{
+		mComponentInstanceMap.erase(it);
+	}
+}
+
+NFIComponent* NFCPluginManager::FindComponent( const std::string& strComponentName )
+{
+	ComponentInstanceMap::iterator it = mComponentInstanceMap.find(strComponentName);
+	if (it != mComponentInstanceMap.end())
+	{
+		return it->second;
+	}
+	return NULL;
 }

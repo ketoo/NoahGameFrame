@@ -33,7 +33,7 @@ const int NFLuaScriptPlugin::GetPluginVersion()
 
 const std::string NFLuaScriptPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFLuaScriptPlugin)
+    return GET_CLASS_NAME(NFLuaScriptPlugin)
 }
 
 void NFLuaScriptPlugin::Install()
