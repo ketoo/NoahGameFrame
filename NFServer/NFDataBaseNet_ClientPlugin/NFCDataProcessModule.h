@@ -18,6 +18,7 @@
 #include "NFComm/NFMessageDefine/NFMsgBase.pb.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 
 class NFCDataProcessModule
     : public NFIDataProcessModule
@@ -63,6 +64,7 @@ private:
 	NFIUUIDModule* m_pUUIDModule;
 	NFILogicClassModule* m_pLogicClassModule;
 	NFILogModule* m_pLogModule;
+    NFIElementInfoModule* m_pElementInfoModule;
 
 private:
 	NFMapEx<NFGUID, NFMapEx<std::string, std::string> > mtObjectCache;
