@@ -64,7 +64,15 @@ bool NFCLoginNet_ServerModule::AfterInit()
 
 				m_pUUIDModule->SetIdentID(nServerID);
 
-				Initialization(this, &NFCLoginNet_ServerModule::OnReciveClientPack, &NFCLoginNet_ServerModule::OnSocketClientEvent, nMaxConnect, nPort, nCpus);		
+				int nRet = Initialization(this, &NFCLoginNet_ServerModule::OnReciveClientPack, &NFCLoginNet_ServerModule::OnSocketClientEvent, nMaxConnect, nPort, nCpus);		
+                if (nRet < 0)
+                {
+                    std::ostringstream strLog;
+                    strLog << "Cannot init server net, Port = " << nPort;
+                    m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+                    NFASSERT(nRet, "Cannot init server net", __FILE__, __FUNCTION__);
+                    exit(0);
+                }
 			}
 		}
 	}
