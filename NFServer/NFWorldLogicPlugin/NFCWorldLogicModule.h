@@ -6,13 +6,12 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_WORLDLOGIC_MODULE_H_
-#define _NFC_WORLDLOGIC_MODULE_H_
+#ifndef NFC_WORLDLOGIC_MODULE_H
+#define NFC_WORLDLOGIC_MODULE_H
 
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIWorldLogicModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 
 class NFCWorldLogicModule
     : public NFIWorldLogicModule
@@ -25,22 +24,13 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool AfterInit();
 
-//     virtual int GetWorldID();
-//     virtual const char* GetWorldName();
+protected:
 
 protected:
-// 
-//     int mnWorldID;
-//     std::string mstrWorldName;
-
-protected:
-    int mnWorldContranerID;
-
-    NFIEventProcessModule* m_pEventProcessModule;
     NFIKernelModule* m_pKernelModule;
 private:
 };

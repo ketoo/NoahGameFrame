@@ -1,0 +1,27 @@
+<XML>	
+	<AwardPackPlayerLevel_1 Name="AwardPackPlayerLevel_1">
+		<ItemInfo Name="EQUIP_ZS_M_0_WEAPON_10001" Count="1"/>
+		<ItemInfo Name="EQUIP_ZS_M_0_ARMOR_10001" Count="1"/>
+		<ItemInfo Name="EQUIP_ZS_M_0_BOOT_10001" Count="1"/>
+	</AwardPackPlayerLevel_1>
+	
+	<AwardPackPlayerLevel_2 Name="AwardPackPlayerLevel_2">
+		<ItemInfo Name="Gem_Maxhp_10001" Count="1"/>
+		<ItemInfo Name="Gem_Maxmp_10001" Count="1"/>
+		<ItemInfo Name="Gem_Maxsp_10001" Count="1"/>
+		<ItemInfo Name="Gem_HpRegen_10001" Count="1"/>
+		<ItemInfo Name="Gem_SPRegen_10001" Count="1"/>
+		<ItemInfo Name="Gem_MPRegen_10001" Count="1"/>
+		<ItemInfo Name="Gem_Atk_Value_10001" Count="1"/>
+		<ItemInfo Name="Gem_Def_Value_10001" Count="1"/>
+		<ItemInfo Name="Gem_Move_Speed_10001" Count="1"/>
+		<ItemInfo Name="Gem_Atk_Speed_10001" Count="1"/>
+	</AwardPackPlayerLevel_2>
+	
+	<AwardPackPlayerLevel_5 Name="AwardPackPlayerLevel_5">
+		<ItemInfo Name="EQUIP_ZS_M_0_WEAPON_10002" Count="1"/>
+		<ItemInfo Name="EQUIP_ZS_M_0_ARMOR_10002" Count="1"/>
+		<ItemInfo Name="EQUIP_ZS_M_0_BOOT_10002" Count="1"/>
+	</AwardPackPlayerLevel_5>
+
+</XML>

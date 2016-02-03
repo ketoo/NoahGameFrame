@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_SCENEPROCESS_MODULE_H_
-#define _NFC_SCENEPROCESS_MODULE_H_
+#ifndef NFC_SCENEPROCESS_MODULE_H
+#define NFC_SCENEPROCESS_MODULE_H
 
 #include <string>
 #include <map>
@@ -18,16 +18,17 @@
 #include "NFComm/RapidXML/rapidxml_iterators.hpp"
 #include "NFComm/RapidXML/rapidxml_print.hpp"
 #include "NFComm/RapidXML/rapidxml_utils.hpp"
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerConfigModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCSceneProcessModule
     : public NFISceneProcessModule
@@ -41,40 +42,38 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute( const float fLasFrametime, const float fStartedTime );
+    virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual E_SCENE_TYPE GetCloneSceneType(const int nContainerID);
+    virtual E_SCENE_TYPE GetCloneSceneType(const int nSceneID);
+    virtual bool IsCloneScene(const int nSceneID);
+	virtual bool ApplyCloneGroup(const int nSceneID, int& nGroupID);
+	virtual bool ExitCloneGroup(const int nSceneID, const int& nGroupID);
 
 protected:
-    int CreateCloneScene( const int& nContainerID, const int nGroupID, const std::string& strResourceID, const NFIDataList& arg );
-    bool DestroyCloneScene( const int& nContainerID, const int& nGroupID, const NFIDataList& arg );
+	int CreateCloneScene( const int& nSceneID);
 
+    bool CreateSceneObject( const int nSceneID, const int nGroupID);
 
-protected:
-    bool LoadInitFileResource( const int& nContainerID );
-
-    bool CreateContinerObjectByFile( const int nContainerID, const int nGroupID, const std::string& strFileName );
-    bool CreateContinerObject( const int nContainerID, const int nGroupID, const std::string& strFileName, const std::string& strSeedID );
+	bool LoadSceneResource( const int nSceneID );
 
 protected:
 
-    int OnObjectClassEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+    int OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-    int OnEnterSceneEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
-    int OnLeaveSceneEvent( const NFIDENTID& object, const int nEventID, const NFIDataList& var );
+    int OnEnterSceneEvent( const NFGUID& object, const int nEventID, const NFIDataList& var );
+    int OnLeaveSceneEvent( const NFGUID& object, const int nEventID, const NFIDataList& var );
+
+protected:
+	void OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
-    int mnContainerLine;
-    int mnLineMaxPlayer;
 
     NFIElementInfoModule* m_pElementInfoModule;
-    NFIPropertyModule* m_pPropertyModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIKernelModule* m_pKernelModule;
-    NFIEventProcessModule* m_pEventProcessModule;
     NFILogModule* m_pLogModule;
-    
+    NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     //////////////////////////////////////////////////////////////////////////
     struct SceneSeedResource
     {
@@ -85,18 +84,8 @@ private:
         float fSeedZ;
     };
 
-    struct SceneGroupResource
-    {
-        bool bCanClone;
-        //资源文件ID,<NPC种子列表>
-        //NPC.xml
-        NFMap<std::string, NFMap<std::string, SceneSeedResource>> xSceneGroupResource;
-    };
-
-    //场景ID,对应资源
-    //Map<int, SceneGroupResource> mtSceneResourceConfig;
-    //场景ID,(File.xml,分组资源)
-    NFMap<int, NFMap<std::string, SceneGroupResource>> mtSceneResourceConfig;
+    //SceneID,(SeedID,SeedData)
+    NFMapEx<int, NFMapEx<std::string, SceneSeedResource>> mtSceneResourceConfig;
 
     //////////////////////////////////////////////////////////////////////////
 };

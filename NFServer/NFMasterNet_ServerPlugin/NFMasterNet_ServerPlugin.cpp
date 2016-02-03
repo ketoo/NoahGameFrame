@@ -1,7 +1,6 @@
 // NFLoginNet_ServerPlugin.cpp : Defines the exported functions for the DLL application.
 //
 
-//#include "stdafx.h"
 #include "NFMasterNet_ServerPlugin.h"
 #include "NFCMasterNet_ServerModule.h"
 
@@ -32,7 +31,7 @@ const int NFMasterNet_ServerPlugin::GetPluginVersion()
 
 const std::string NFMasterNet_ServerPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFMasterNet_ServerPlugin)
+    return GET_CLASS_NAME(NFMasterNet_ServerPlugin)
 }
 
 void NFMasterNet_ServerPlugin::Install()

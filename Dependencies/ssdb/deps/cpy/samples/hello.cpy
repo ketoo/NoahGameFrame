@@ -1,2 +1,0 @@
-
-printf("Hello World!\n");
