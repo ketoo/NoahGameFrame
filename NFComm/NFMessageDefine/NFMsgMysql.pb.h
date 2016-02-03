@@ -169,6 +169,13 @@ class PackMysqlParam : public ::google::protobuf::Message {
   inline ::google::protobuf::int64 nret() const;
   inline void set_nret(::google::protobuf::int64 value);
 
+  // required int64 eType = 8;
+  inline bool has_etype() const;
+  inline void clear_etype();
+  static const int kETypeFieldNumber = 8;
+  inline ::google::protobuf::int64 etype() const;
+  inline void set_etype(::google::protobuf::int64 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.PackMysqlParam)
  private:
   inline void set_has_strrecordname();
@@ -181,6 +188,8 @@ class PackMysqlParam : public ::google::protobuf::Message {
   inline void clear_has_nreqid();
   inline void set_has_nret();
   inline void clear_has_nret();
+  inline void set_has_etype();
+  inline void clear_has_etype();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -191,9 +200,10 @@ class PackMysqlParam : public ::google::protobuf::Message {
   ::google::protobuf::int64 bexit_;
   ::google::protobuf::int64 nreqid_;
   ::google::protobuf::int64 nret_;
+  ::google::protobuf::int64 etype_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgMysql_2eproto();
   friend void protobuf_AssignDesc_NFMsgMysql_2eproto();
@@ -673,6 +683,28 @@ inline ::google::protobuf::int64 PackMysqlParam::nret() const {
 inline void PackMysqlParam::set_nret(::google::protobuf::int64 value) {
   set_has_nret();
   nret_ = value;
+}
+
+// required int64 eType = 8;
+inline bool PackMysqlParam::has_etype() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void PackMysqlParam::set_has_etype() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void PackMysqlParam::clear_has_etype() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void PackMysqlParam::clear_etype() {
+  etype_ = GOOGLE_LONGLONG(0);
+  clear_has_etype();
+}
+inline ::google::protobuf::int64 PackMysqlParam::etype() const {
+  return etype_;
+}
+inline void PackMysqlParam::set_etype(::google::protobuf::int64 value) {
+  set_has_etype();
+  etype_ = value;
 }
 
 // -------------------------------------------------------------------

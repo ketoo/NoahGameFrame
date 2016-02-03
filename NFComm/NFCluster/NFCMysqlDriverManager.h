@@ -1,9 +1,9 @@
 
 // -------------------------------------------------------------------------
-//    @FileName         :    NFCMysqlConnectMgrModule.h
-//    @Author           :    eliteYang
+//    @FileName         :    NFCMysqlDriverManager.h
+//    @Author           :    Chuanbo.Guo
 //    @Date             :    2014-11-10
-//    @Module           :    NFCMysqlConnectMgrModule
+//    @Module           :    NFCMysqlDriverManager
 //
 // -------------------------------------------------------------------------
 
