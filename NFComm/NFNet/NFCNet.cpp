@@ -210,7 +210,6 @@ int NFCNet::Initialization( const unsigned int nMaxClient, const unsigned short 
     mnCpuCount = nCpuCount;
 
     return InitServerNet();
-
 }
 
 bool NFCNet::Final()

@@ -50,7 +50,15 @@ bool NFCWorldNet_ServerModule::AfterInit()
 				const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
 				const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
 
-				Initialization(this, &NFCWorldNet_ServerModule::OnRecivePack, &NFCWorldNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
+				int nRet = Initialization(this, &NFCWorldNet_ServerModule::OnRecivePack, &NFCWorldNet_ServerModule::OnSocketEvent, nMaxConnect, nPort, nCpus);
+                if (nRet < 0)
+                {
+                    std::ostringstream strLog;
+                    strLog << "Cannot init server net, Port = " << nPort;
+                    m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+                    NFASSERT(nRet, "Cannot init server net", __FILE__, __FUNCTION__);
+                    exit(0);
+                }
 			}
 		}
 	}
