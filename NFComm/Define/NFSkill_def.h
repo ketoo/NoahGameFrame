@@ -1,5 +1,3 @@
-#pragma once
-
 // -------------------------------------------------------------------------
 //    文件名      :    NFSkill_def.h
 //    创建者      :    LvSheng.Huang
@@ -7,6 +5,9 @@
 //    功能描述    :    技能的结构体
 //
 // -------------------------------------------------------------------------
+
+#ifndef NFC_SKILL_DEF_H
+#define NFC_SKILL_DEF_H
 
 #pragma pack(push,1)
 
@@ -58,3 +59,4 @@ enum EGameSkillStoreType
 };
 
 #pragma pack(pop)
+#endif

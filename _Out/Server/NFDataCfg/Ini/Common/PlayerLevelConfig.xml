@@ -1,0 +1,9 @@
+<XML>	
+	<PlayerLevel Name="PlayerLevel">
+		<LevelAwardPack Name="1" AwardPack="AwardPackPlayerLevel_1" />
+		<LevelAwardPack Name="2" AwardPack="AwardPackPlayerLevel_2" />
+		<LevelAwardPack Name="3" AwardPack="AwardPackPlayerLevel_3" />
+		<LevelAwardPack Name="4" AwardPack="AwardPackPlayerLevel_4" />
+		<LevelAwardPack Name="5" AwardPack="AwardPackPlayerLevel_5" />
+	</PlayerLevel>
+</XML>

@@ -1,0 +1,7 @@
+1. copy dump_syms & minidump_stackwalk to exe directory
+2. $ ./dump_syms ./test > test.sym
+3. $ head -n1 test.sym
+MODULE Linux x86_64 6EDC6ACDB282125843FD59DA9C81BD830 test
+4. $ mkdir -p ./symbols/test/6EDC6ACDB282125843FD59DA9C81BD830
+5. $ mv test.sym ./symbols/test/6EDC6ACDB282125843FD59DA9C81BD830
+6. $ ./minidump_stackwalk minidump.dmp ./symbols

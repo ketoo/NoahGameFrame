@@ -6,14 +6,13 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_MASTERNET_SERVER_MODULE_H_
-#define _NFC_MASTERNET_SERVER_MODULE_H_
+#ifndef NFC_MASTERNET_SERVER_MODULE_H
+#define NFC_MASTERNET_SERVER_MODULE_H
 
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIMasterNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFIEventProcessModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
@@ -24,24 +23,24 @@ class NFCMasterNet_ServerModule
 	: public NFINetModule
 {
 public:
-	NFCMasterNet_ServerModule(NFIPluginManager* p)
+	NFCMasterNet_ServerModule(NFIPluginManager* p) : NFINetModule(p)
 	{
-		pPluginManager = p;
+		mnLastLogTime = pPluginManager->GetNowTime();
 	}
 
 	virtual bool Init();
 	virtual bool Shut();
 
 	virtual bool AfterInit();
-	virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+	virtual bool Execute();
 
 	virtual void LogRecive(const char* str){}
 	virtual void LogSend(const char* str){}
 
 protected:
 
-	int OnRecivePack(const NFIPacket& msg);
-	int OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent);
+	void OnRecivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 	//连接丢失,删2层(连接对象，帐号对象)
 	void OnClientDisconnect(const int nAddress);
@@ -50,53 +49,36 @@ protected:
 	
 protected:
 	//世界服务器注册，刷新信息
-	int OnWorldRegisteredProcess(const NFIPacket& msg);
-	int OnWorldUnRegisteredProcess(const NFIPacket& msg);
-	int OnRefreshWorldInfoProcess(const NFIPacket& msg);
+	int OnWorldRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	int OnWorldUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	int OnRefreshWorldInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	//////////////////////////////////////////////////////////////////////////
 	//登录服务器注册，刷新信息
-	int OnLoginRegisteredProcess(const NFIPacket& msg);
-	int OnLoginUnRegisteredProcess(const NFIPacket& msg);
-	int OnRefreshLoginInfoProcess(const NFIPacket& msg);
+	int OnLoginRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	int OnLoginUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	int OnRefreshLoginInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	//选择世界服务器消息
-	int OnSelectWorldProcess(const NFIPacket& msg);
-	int OnSelectServerResultProcess(const NFIPacket& msg);
+	int OnSelectWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	int OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	//////////////////////////////////////////////////////////////////////////
 
 	void SynWorldToLogin();
+	void LogGameServer();
 
 private:
 
-    struct ServerData 
-    {
-        ServerData()
-        {
-            pData = new NFMsg::ServerInfoReport();
-            nFD = 0;
-        }
-        ~ServerData()
-        {
-            nFD = 0;
-            delete pData;
-            pData = NULL;
-        }
+	NFINT64 mnLastLogTime;
 
-        int nFD;
-        NFMsg::ServerInfoReport* pData;
-    };
-
-private:
     //serverid,data
-    NFMap<int, ServerData> mWorldMap;
-    NFMap<int, ServerData> mLoginMap;
+    NFMapEx<int, ServerData> mWorldMap;
+    NFMapEx<int, ServerData> mLoginMap;
 
 	
 	NFIElementInfoModule* m_pElementInfoModule;
 	NFILogicClassModule* m_pLogicClassModule;
-	NFIEventProcessModule* m_pEventProcessModule;
 	NFIKernelModule* m_pKernelModule;
 	NFILogModule* m_pLogModule;
 };

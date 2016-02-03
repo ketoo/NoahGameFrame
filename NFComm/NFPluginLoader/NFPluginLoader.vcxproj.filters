@@ -20,6 +20,9 @@
     <ClInclude Include="NFCActorManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NFCActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFPluginLoader.cpp" />
@@ -30,6 +33,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NFCActorManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

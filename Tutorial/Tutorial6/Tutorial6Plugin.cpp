@@ -5,8 +5,9 @@
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
+#if NF_PLATFORM == NF_PLATFORM_WIN
     SetConsoleTitle("Tutorial6");
-
+#endif
     CREATE_PLUGIN(pm, Tutorial6Plugin)
 
 };
@@ -26,7 +27,7 @@ const int Tutorial6Plugin::GetPluginVersion()
 
 const std::string Tutorial6Plugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(Tutorial6Plugin)
+    return GET_CLASS_NAME(Tutorial6Plugin)
 }
 
 void Tutorial6Plugin::Install()
