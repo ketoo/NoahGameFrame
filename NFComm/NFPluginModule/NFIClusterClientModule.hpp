@@ -17,9 +17,9 @@
 enum ConnectDataState
 {
 	DISCONNECT,
+    CONNECTING,
 	NORMAL,
-	RECONNECT,
-
+    RECONNECT,
 };
 struct ConnectData
 {
@@ -252,10 +252,17 @@ protected:
 					{
 						pServerData->mxNetModule = nullptr;
 						pServerData->eState = ConnectDataState::RECONNECT;
-						pServerData->mnLastActionTime = GetPluginManager()->GetNowTime();
 					}
 				}
 				break;
+            case ConnectDataState::CONNECTING:
+                {
+                    if (pServerData->mxNetModule)
+                    {
+                        pServerData->mxNetModule->Execute();
+                    }
+                }
+                break;
 			case ConnectDataState::NORMAL:
 				{
 					if (pServerData->mxNetModule)
@@ -269,7 +276,7 @@ protected:
 			case ConnectDataState::RECONNECT:
 				{
 					//¼ÆËãÊ±¼ä
-					if (pServerData->mnLastActionTime + 30.0f > GetPluginManager()->GetNowTime())
+					if ((pServerData->mnLastActionTime + 30) >= GetPluginManager()->GetNowTime())
 					{
 						break;
 					}
@@ -279,9 +286,7 @@ protected:
                         pServerData->mxNetModule = nullptr;
                     }
 
-					pServerData->mnLastActionTime = GetPluginManager()->GetNowTime();
-
-					pServerData->eState = ConnectDataState::NORMAL;
+                    pServerData->eState = ConnectDataState::CONNECTING;
                     pServerData->mxNetModule = NF_SHARE_PTR<NFINetModule> (NF_NEW NFINetModule(pPluginManager));
 					pServerData->mxNetModule->Initialization(this, &NFIClusterClientModule::OnRecivePack, &NFIClusterClientModule::OnSocketEvent, pServerData->strIP.c_str(), pServerData->nPort);
 				}
@@ -318,10 +323,10 @@ protected:
 private:
 	virtual void LogServerInfo()
 	{
-		LogServerInfo("This is a client, begin to Printf Server Info----------------------------------");
+		LogServerInfo("This is a client, begin to print Server Info----------------------------------");
 
 		ConnectData* pServerData = mxServerMap.FirstNude();
-		while (pServerData)
+		while (nullptr != pServerData)
 		{
 			std::ostringstream stream;
 			stream << "Type: " << pServerData->eServerType << " ProxyServer ID: " << pServerData->nGameID << " State: " <<  pServerData->eState << " IP: " << pServerData->strIP << " Port: " << pServerData->nPort;
@@ -331,12 +336,11 @@ private:
 			pServerData = mxServerMap.NextNude();
 		}
 
-		LogServerInfo("This is a client, end to Printf Server Info----------------------------------");
+		LogServerInfo("This is a client, end to print Server Info----------------------------------");
 	};
 
 	void KeepState(ConnectData* pServerData)
 	{
-
 		if (pServerData->mnLastActionTime + 10 > GetPluginManager()->GetNowTime())
 		{
 			return;
@@ -389,10 +393,11 @@ private:
     int OnDisConnected(const int fd, NFINet* pNet)
     {
         NF_SHARE_PTR<ConnectData> pServerInfo = GetServerNetInfo(pNet);
-        if (pServerInfo.get())
+        if (nullptr != pServerInfo)
         {
             RemoveServerWeightData(pServerInfo);
             pServerInfo->eState = ConnectDataState::DISCONNECT;
+            pServerInfo->mnLastActionTime = GetPluginManager()->GetNowTime();
         }
 
         return 0;
@@ -414,7 +419,7 @@ private:
 				xServerData->eServerType = xInfo.eServerType;
 				xServerData->strIP = xInfo.strIP;
 				xServerData->strName = xInfo.strName;
-				xServerData->eState = ConnectDataState::NORMAL;
+				xServerData->eState = ConnectDataState::CONNECTING;
 				xServerData->nPort = xInfo.nPort;
 				xServerData->mnLastActionTime = GetPluginManager()->GetNowTime();
 
