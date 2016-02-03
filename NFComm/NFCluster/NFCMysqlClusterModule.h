@@ -20,7 +20,7 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
-#include "NFComm/NFPluginModule/NFIMysqlConnectMgrModule.h"
+#include "NFIMysqlDriverManager.h"
 
 class NFCMysqlClusterModule
     : public NFIClusterModule
@@ -43,25 +43,11 @@ public:
 	virtual bool Delete(const std::string& strRecordName, const std::string& strKey);
 	virtual bool Exists(const std::string& strRecordName, const std::string& strKey, bool& bExit);
     virtual bool Keys(const std::string& strRecordName, const std::string& strKeyName, std::vector<std::string>& valueVec);
-
-    //////////////////////////////////////////////////////////////////////////
-    virtual bool UpdataWithDriver(const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec, NFIMysqlDriver* pDriver);
-    virtual bool QueryWithDriver(const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec, NFIMysqlDriver* pDriver);
-    virtual bool SelectWithDriver(const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec, NFIMysqlDriver* pDriver);
-
-    virtual bool DeleteWithDriver(const std::string& strRecordName, const std::string& strKey, NFIMysqlDriver* pDriver);
-    virtual bool ExistsWithDriver(const std::string& strRecordName, const std::string& strKey, bool& bExit, NFIMysqlDriver* pDriver);
-    virtual bool KeysWithDriver(const std::string& strRecordName, const std::string& strKeyName, std::vector<std::string>& valueVec, NFIMysqlDriver* pDriver);
-
+    virtual bool AddMysqlServer( const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime = 10, const int nRconneCount = -1);
 private:
-    NFIMysqlConnectMgrModule* m_pMysqlConnectMgrManager;
+    NF_SHARE_PTR<NFIMysqlDriverManager> m_pMysqlDriverManager;
 
-    const static std::string strDefaultKey;
-    const static std::string strDefaultTable;
-
-
-    // key默认为ID
-    // RoleInfo为角色的Property和Record数据，有三列数据 ID, Property, Record
+    NFINT64 mnLastCheckTime;
 };
 
 #endif
