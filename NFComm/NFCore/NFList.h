@@ -1,4 +1,3 @@
-#pragma once
 // -------------------------------------------------------------------------
 //    @FileName      :    NFList.h
 //    @Author      :    LvSheng.Huang
@@ -7,14 +6,14 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_LIST_H_
-#define _NF_LIST_H_
+#ifndef NF_LIST_H
+#define NF_LIST_H
 
 #include <iostream>
 #include <map>
 #include <list>
 #include <algorithm>
-#include "NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 template < typename T >
 class NFList
@@ -27,25 +26,12 @@ public:
     bool                    ClearAll();
 
     bool                    First(T& id);
-	bool                    Next(T& id);
+    bool                    Next(T& id);
     bool                    Get(const int32_t index, T& id);
     int                       Count();
 
-// 	idType& operator [] (const int32_t index)
-// 	{
-// 		if (it >= this->mtObjConfigList.size())
-// 		{
-// 			return normal;
-// 		}
-// 
-// 		std::list<idType>::iterator it = this->mtObjConfigList.begin();
-// 		std::advance(it + index);
-// 
-// 		return *it;
-// 	}
-
 protected:
-	//idType normal;
+    //idType normal;
     typedef     std::list<T>   TLISTOBJCONFIGLIST;
     TLISTOBJCONFIGLIST          mtObjConfigList;
     typename std::list<T>::iterator mCurIter;
@@ -56,7 +42,7 @@ private:
 template < typename T >
 bool NFList<T>::Add(const T& id)
 {
-    if (!Find(id))
+    //if (!Find(id))
     {
         mtObjConfigList.push_back(id);
         return true;
@@ -135,17 +121,17 @@ bool NFList<T>::Find(const T& id)
 template < typename T >
 bool NFList<T>::Get(const int32_t index, T& id)
 {
-	if (index >= mtObjConfigList.size())
-	{
-		return false;;
-	}
-	
-	std::list<T>::iterator it = this->mtObjConfigList.begin();
-	std::advance(it, index);
+    if (index >= mtObjConfigList.size())
+    {
+        return false;
+    }
 
-	id = *it;
+    typename std::list<T>::iterator it = this->mtObjConfigList.begin();
+    std::advance(it, index);
 
-	return true;
+    id = *it;
+
+    return true;
 }
 
 template < typename T >

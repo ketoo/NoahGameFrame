@@ -1,0 +1,27 @@
+package NFMsg; 
+
+//除 去基础对象身上的属性外，这里全部游戏中的逻辑协议
+
+message PackMysqlParam
+{
+	required bytes 		strRecordName 			= 1;
+	required bytes 		strKey 					= 2;
+    repeated bytes 		fieldVecList 			= 3;
+	repeated bytes 		valueVecList 			= 4;
+	required int64		bExit 	= 5;
+	required int64		nreqid 	= 6;
+	required int64 		nRet 			= 7;
+	required int64 		eType 			= 8;
+}
+
+message PackMysqlServerInfo
+{
+	required int64 		nRconnectTime	= 1;
+	required int64 		nRconneCount	= 2;
+    required int64 		nPort 			= 3;
+	required bytes 		strDBName		= 4;
+	required bytes		strDnsIp 		= 5;
+	required bytes		strDBUser 		= 6;
+	required bytes 		strDBPwd		= 7;
+	required int64 		nServerID		= 8;
+}

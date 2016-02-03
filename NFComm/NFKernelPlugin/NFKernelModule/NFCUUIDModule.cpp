@@ -15,79 +15,82 @@ namespace UUIDModule
 #define EPOCHFILETIME 11644473600000000Ui64
 #endif
 
-    uint64_t get_time()
-    {
+uint64_t get_time()
+{
 #ifndef _MSC_VER
-        struct timeval tv;
-        gettimeofday(&tv, NULL);
-        uint64 time = tv.tv_usec;
-        time /= 1000;
-        time += (tv.tv_sec * 1000);
-        return time;
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    int time = tv.tv_usec;
+    time /= 1000;
+    time += (tv.tv_sec * 1000);
+    return time;
 #else
-        FILETIME filetime;
-        uint64_t time = 0;
-        GetSystemTimeAsFileTime(&filetime);
+    FILETIME filetime;
+    uint64_t time = 0;
+    GetSystemTimeAsFileTime(&filetime);
 
-        time |= filetime.dwHighDateTime;
-        time <<= 32;
-        time |= filetime.dwLowDateTime;
+    time |= filetime.dwHighDateTime;
+    time <<= 32;
+    time |= filetime.dwLowDateTime;
 
-        time /= 10;
-        time -= EPOCHFILETIME;
-        return time / 1000;
+    time /= 10;
+    time -= EPOCHFILETIME;
+    return time / 1000;
 #endif
+}
+
+class UUID
+{
+public:
+    UUID() : epoch_(0), time_(0), machine_(0), sequence_(0)
+    {
     }
 
-    class UUID
+    ~UUID() {}
+
+    void set_epoch(uint64_t epoch)
     {
-    public:
-        UUID() : epoch_(0), time_(0), machine_(0), sequence_(0)
-        {
-        }
+        epoch_ = epoch;
+    }
 
-        ~UUID() {}
+    void set_machine(int32_t machine)
+    {
+        machine_ = machine;
+    }
 
-        void set_epoch(uint64_t epoch)
-        {
-            epoch_ = epoch;
-        }
+    int64_t generate()
+    {
+        int64_t value = 0;
+        uint64_t time = UUIDModule::get_time();
 
-        void set_machine(int32_t machine)
-        {
-            machine_ = machine;
-        }
+		// ä¿ç•™åŽ48ä½æ—¶é—´
+		//value = time << 16;
+		value = time * 1000000;
 
-        int64_t generate()
-        {
-            int64_t value = 0;
-            uint64_t time = UUIDModule::get_time() - epoch_;
+		// æœ€åŽ16ä½æ˜¯sequenceID
+		//value |= sequence_++;
+		value += sequence_++;
 
-            // ±£Áôºó41Î»Ê±¼ä
-            value = time << 22;
+		//if (sequence_ == 0x7FFF)
+		if (sequence_ == 999999)
+		{
+			sequence_ = 0;
+		}
 
-            // ÖÐ¼ä10Î»ÊÇ»úÆ÷ID
-            value |= (machine_ & 0x3FF) << 12;
-
-            // ×îºó12Î»ÊÇsequenceID
-            value |= sequence_++ & 0xFFF;
-            if (sequence_ == 0x1000)
-            {
-                sequence_ = 0;
-            }
-
-            return value;
-        }
-    private:
-        uint64_t epoch_;
-        uint64_t time_;
-        int32_t machine_;
-        int32_t sequence_;
-    };
+        return value;
+    }
+private:
+    uint64_t epoch_;
+    uint64_t time_;
+    int32_t machine_;
+    int32_t sequence_;
+};
 }
 
 NFCUUIDModule::NFCUUIDModule(NFIPluginManager* p)
 {
+    mnIdent = 0;
+	m_pKernelModule = NULL;
     pPluginManager = p;
 }
 
@@ -106,33 +109,45 @@ bool NFCUUIDModule::Shut()
 
 bool NFCUUIDModule::BeforeShut()
 {
-    if (NULL != m_pUUID)
-    {
-        delete m_pUUID;
-        m_pUUID = NULL;
-    }
+    delete m_pUUID;
+    m_pUUID = NULL;
+
     return true;
 }
 
 bool NFCUUIDModule::AfterInit()
 {
-    NFIKernelModule* pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
-    assert(NULL != pKernelModule);
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
+    assert(NULL != m_pKernelModule);
 
-    // ³õÊ¼»¯uuid
-    NFINT32 nID = pKernelModule->GetIdentID();
+    // åˆå§‹åŒ–uuid
+    NFINT32 nID = GetIdentID();
     m_pUUID->set_machine(nID);
     m_pUUID->set_epoch(uint64_t(1367505795100));
 
     return true;
 }
 
-bool NFCUUIDModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCUUIDModule::Execute()
 {
     return true;
 }
 
-int64_t NFCUUIDModule::CreateGUID()
+NFGUID NFCUUIDModule::CreateGUID()
 {
-    return m_pUUID->generate();
+	NFGUID xID;
+	xID.nHead64 = GetIdentID();
+	xID.nData64 = m_pUUID->generate();
+	
+    return xID;
+}
+
+NFINT64 NFCUUIDModule::GetIdentID()
+{
+    return mnIdent;
+}
+
+void NFCUUIDModule::SetIdentID( NFINT64 nID )
+{
+    mnIdent = nID;
 }

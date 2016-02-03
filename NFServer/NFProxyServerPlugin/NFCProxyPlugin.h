@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_PROXYSERVERPLUGIN_H_
-#define _NFC_PROXYSERVERPLUGIN_H_
+#ifndef NFC_PROXYSERVERPLUGIN_H
+#define NFC_PROXYSERVERPLUGIN_H
 
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"

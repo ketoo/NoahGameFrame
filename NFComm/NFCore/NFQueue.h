@@ -1,126 +1,92 @@
-#pragma once
 // -------------------------------------------------------------------------
 //    @FileName      :    NFQueue.h
 //    @Author      :    LvSheng.Huang
 //    @Date    :    2011-01-21 21:49
-//    @Module    : 
+//    @Module    :
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NF_QUEUE_H_
-#define _NF_QUEUE_H_
+#ifndef NF_QUEUE_H
+#define NF_QUEUE_H
 
-#include <iostream>
-#include <map>
 #include <list>
-#include <algorithm>
 #include <thread>
 #include <mutex>
-#include "NFPlatform.h"
+#include <atomic>
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
-const int QUEUE_SIZE = 10000;  
+class NFLock
+{
+public:
+    explicit NFLock()
+    {
+        flag.clear();
+    }
 
-template<typename T>  
-class NFQueue  
-{  
-public:  
-	NFQueue();  
-	virtual ~NFQueue();  
-public:  
+    ~NFLock()
+    {
+    }
+	void lock()
+	{
+		while (flag.test_and_set(std::memory_order_acquire));
+	}
 
-	bool Push(const T& object);  
-	bool Pop(T& object);
+	void unlock()
+	{
+		flag.clear(std::memory_order_release);
+	}
 
 protected:
+    mutable std::atomic_flag flag;
 
-	bool Empty(); 
-	//bool Full();  
+private:
+    NFLock& operator=(const NFLock& src);
+};
 
-private:  
-// 	int front;  
-// 	int rear;  
-// 	int size; 
-	std::list<T> mList;
-	//Object list[QUEUE_SIZE];  
-	std::mutex queueMutex;  
-};  
-
-//------------------------------------------------------  
-template<typename T>  
-NFQueue<T>::NFQueue()  
-{  
-// 	front = rear = 0; 
-// 	size = QUEUE_SIZE;
-	//queueMutex.lock();
-
-}  
-//------------------------------------------------------  
-template<typename T>  
-bool NFQueue<T>::Push(const T& object)  
-{  
-	queueMutex.lock();
-	if(Full())  
-	{  
-		queueMutex.unlock();
-
-		return false;  
-	}
-
-	mList.push_back(object);
-// 	list[rear] = object;  
-// 	rear = (rear + 1) % size;  
-
-	queueMutex.unlock();
-
-
-	return true;  
-}  
-//------------------------------------------------------  
-template<typename T>  
-bool NFQueue<T>::Pop(T& object)  
+template<typename T>
+class NFQueue :public NFLock
 {
-	queueMutex.lock();
-	if(Empty())  
-	{  
-		queueMutex.unlock();
+public:
+    NFQueue()
+    {
+    }
 
-		return false;  
-	}
+    virtual ~NFQueue()
+    {
+    }
 
-	object = mList.pop_front();
-// 	object = list[front];  
-// 	front = (front + 1) % size;  
+    bool Push(const T& object)
+    {
+        lock();
 
-	queueMutex.unlock();
+        mList.push_back(object);
 
-	return true;  
-}  
-//------------------------------------------------------  
-template<typename T>  
-bool NFQueue<T>::Empty()  
-{  
-	return mList.empty();
-// 	if(rear == front)  
-// 		return true;  
-// 	else  
-// 		return false;  
-}  
-//------------------------------------------------------  
-// template<typename Object>  
-// bool NFQueue<Object>::Full()  
-// {  
-// 	if((rear + 1) % size == front)  
-// 		return true;  
-// 	else  
-// 		return false;  
-// }  
-//------------------------------------------------------  
-template<typename T>  
-NFQueue<T>::~NFQueue()  
-{  
-	mList.clear(); 
-}  
-//------------------------------------------------------  
+		unlock();
 
+        return true;
+    }
+
+    bool Pop(T& object)
+    {
+        lock();
+
+        if (mList.empty())
+        {
+			unlock();
+
+            return false;
+        }
+
+        object = mList.front();
+        mList.pop_front();
+        
+		unlock();
+
+        return true;
+    }
+
+private:
+    std::list<T> mList;
+};
 
 #endif

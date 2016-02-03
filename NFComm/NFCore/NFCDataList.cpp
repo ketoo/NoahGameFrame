@@ -6,37 +6,31 @@
 //
 // -------------------------------------------------------------------------
 
+#include <cstdarg>
 #include "NFCDataList.h"
+#include "NFIDataList.h"
 
 NFCDataList::NFCDataList()
+: NFIDataList()
 {
-    mnCapacity = STACK_SIZE;
-    mnNextOrderCapacity = mnCapacity * 2;
-    mnSize = 0;
-    mnOrder = 0;
-    Clear();
-
 }
 
 NFCDataList::NFCDataList(const char* str, const char* strSplit)
 {
-    mnSize = 0;
-    mnOrder = 0;
-    mnCapacity = STACK_SIZE;
-    mnNextOrderCapacity = mnCapacity * 2;
-
     Clear();
 
     Split(str, strSplit);
 }
 
+NFCDataList::NFCDataList(const NFCDataList& src)
+{
+    Clear();
+
+    InnerAppendEx(src, 0, src.GetCount());
+}
+
 NFCDataList::NFCDataList(const NFIDataList& src)
 {
-    mnSize = 0;
-    mnOrder = 0;
-    mnCapacity = STACK_SIZE;
-    mnNextOrderCapacity = mnCapacity * 2;
-
     Clear();
 
     InnerAppendEx(src, 0, src.GetCount());
@@ -47,6 +41,15 @@ NFCDataList::~NFCDataList()
     Clear();
 };
 
+/*
+NFCDataList& NFCDataList::operator=(const NFCDataList& src)
+{
+    Clear();
+    InnerAppendEx(src, 0, src.GetCount());
+
+    return *this;
+}
+
 NFCDataList& NFCDataList::operator=(const NFIDataList& src)
 {
     Clear();
@@ -55,6 +58,7 @@ NFCDataList& NFCDataList::operator=(const NFIDataList& src)
     return *this;
 }
 
+*/
 // 添加
 bool NFCDataList::Append(const NFIDataList& src, const int start, const int count)
 {
@@ -75,211 +79,312 @@ bool NFCDataList::Append(const NFIDataList& src, const int start, const int coun
     return true;
 }
 
-bool NFCDataList::Append(const NFIDataList::TData& TData)
+bool NFCDataList::Append(const NFIDataList::TData& xData)
 {
-    if (TData.nType <= TDATA_UNKNOWN
-        || TData.nType >= TDATA_MAX)
+    if (xData.GetType() <= TDATA_UNKNOWN
+        || xData.GetType() >= TDATA_MAX)
     {
         return false;
     }
 
-    NFIDataList::TData* pVar = GetStack(mnSize);
-    if (pVar)
-    {
-        pVar->nType = TData.nType;
-        pVar->variantData = TData.variantData;
-        mnSize++;
+	switch (xData.GetType())
+	{
+	case TDATA_INT:
+		AddInt(xData.GetInt());
+		break;
+	case TDATA_FLOAT:
+		AddFloat(xData.GetFloat());
+		break;
+	case TDATA_OBJECT:
+		AddObject(xData.GetObject());
+		break;
+	case TDATA_STRING:
+		AddString(xData.GetString());
+		break;
+	default:
+		break;
+	}
 
-        return true;
-    }
+    return true;
+}
+
+bool NFCDataList::Append( const NFIDataList& src )
+{
+	return Append(src, 0, src.GetCount());
+}
+
+bool NFCDataList::Add(const NFINT64 value)
+{
+	if (GetCount() == mvList.size())
+	{
+		AddStatck();
+	}
+	
+	NF_SHARE_PTR<TData> var = GetStack(GetCount());
+	if (var)
+	{
+		var->SetInt(value);
+		mnUseSize++;
+
+		return true;
+	}
 
     return false;
-}
-
-bool NFCDataList::Add(const int value)
-{
-    return NFIDataList::AddNumber<int>(TDATA_INT, value);
-}
-
-bool NFCDataList::Add(const float value)
-{
-    return AddNumber<float>(TDATA_FLOAT, value);
 }
 
 bool NFCDataList::Add(const double value)
 {
-    return AddNumber<double>(TDATA_DOUBLE, value);
+	if (GetCount() == mvList.size())
+	{
+		AddStatck();
+	}
+
+	NF_SHARE_PTR<TData> var = GetStack(GetCount());
+	if (var)
+	{
+		var->SetFloat(value);
+		mnUseSize++;
+
+		return true;
+	}
+
+	return false;
 }
 
 bool NFCDataList::Add(const char* value)
 {
-    TData* pVar = GetStack(mnSize);
-    if (pVar)
+	if (GetCount() == mvList.size())
+	{
+		AddStatck();
+	}
+
+	NF_SHARE_PTR<TData> var = GetStack(GetCount());
+	if (var)
+	{
+		var->SetString(value);
+		mnUseSize++;
+
+		return true;
+	}
+
+	return false;
+}
+
+bool NFCDataList::Add(const std::string& value)
+{
+	if (GetCount() == mvList.size())
+	{
+		AddStatck();
+	}
+
+	NF_SHARE_PTR<TData> var = GetStack(GetCount());
+	if (var)
+	{
+		var->SetString(value);
+		mnUseSize++;
+
+		return true;
+	}
+
+	return false;
+}
+
+bool NFCDataList::Add(const NFGUID& value)
+{
+	if (GetCount() == mvList.size())
+	{
+		AddStatck();
+	}
+
+	NF_SHARE_PTR<TData> var = GetStack(GetCount());
+	if (var)
+	{
+		var->SetObject(value);
+		mnUseSize++;
+
+		return true;
+	}
+
+	return false;
+}
+
+bool NFCDataList::Set(const int index, const NFINT64 value)
+{
+    if (index < GetCount()
+		&& index >= 0
+		&& Type(index) == TDATA_INT)
     {
-        pVar->nType = TDATA_STRING;
-        pVar->variantData = (std::string)value;
-        mnSize++;
-    }
+		NF_SHARE_PTR<TData> var = GetStack(GetCount());
+		if (var)
+		{
+			var->SetInt(value);
 
-    return true;
-    //return AddStringEx(value);
-}
-
-bool NFCDataList::Add(const NFIDENTID& value)
-{
-    return AddNumber<NFINT64>(TDATA_OBJECT, value.nData64);
-}
-
-bool NFCDataList::Add(const void* value)
-{
-    return AddNumber<const void*>(TDATA_POINTER, value);
-}
-
-bool NFCDataList::Set(const int index, const int value)
-{
-    return SetNumber(index, value);
-}
-bool NFCDataList::Set(const int index, const float value)
-{
-    return SetNumber(index, value);
-}
-bool NFCDataList::Set(const int index, const double value)
-{
-    return SetNumber(index, value);
-}
-bool NFCDataList::Set(const int index, const char* value)
-{
-    if (index < mnSize && index > 0)
-    {
-        TData* var = GetStack(index);
-        if (var && TDATA_STRING == var->nType)
-        {
-            var->variantData = (std::string)value;
-            return true;
-        }
+			return true;
+		}
     }
 
     return false;
 }
-bool NFCDataList::Set(const int index, const NFIDENTID& value)
+bool NFCDataList::Set(const int index, const double value)
 {
-    return SetNumber<NFINT64>(index, value.nData64);
+	if (index < GetCount()
+		&& index >= 0
+		&& Type(index) == TDATA_FLOAT)
+	{
+		NF_SHARE_PTR<TData> var = GetStack(GetCount());
+		if (var)
+		{
+			var->SetFloat(value);
+
+			return true;
+		}
+	}
+
+    return false;
+}
+bool NFCDataList::Set(const int index, const char* value)
+{
+	if (index < GetCount()
+		&& index >= 0
+		&& Type(index) == TDATA_STRING)
+	{
+		NF_SHARE_PTR<TData> var = GetStack(GetCount());
+		if (var)
+		{
+			var->SetString(value);
+
+			return true;
+		}
+	}
+
+	return false;
 }
 
-bool NFCDataList::Set(const int index, const void* value)
+bool NFCDataList::Set(const int index, const NFGUID& value)
 {
-    return SetNumber(index, value);
+	if (index < GetCount()
+		&& index >= 0
+		&& Type(index) == TDATA_OBJECT)
+	{
+		NF_SHARE_PTR<TData> var = GetStack(GetCount());
+		if (var)
+		{
+			var->SetObject(value);
+
+			return true;
+		}
+	}
+
+	return false;
 }
 
-int NFCDataList::Int(const int index) const
+NFINT64 NFCDataList::Int(const int index) const
 {
-    return NumberVal<int>(index);
+    if (index < GetCount() && index >= 0)
+    {
+		if (Type(index) == TDATA_INT)
+		{
+			const NF_SHARE_PTR<TData> var = GetStack(index);
+			return var->GetInt();
+		}
+    }
+
+    return 0;
 }
 
-float NFCDataList::Float(const int index) const
+double NFCDataList::Float(const int index) const
 {
-    return NumberVal<float>(index);
-}
+    if (index < GetCount() && index >= 0)
+    {
+		const NF_SHARE_PTR<TData> var = mvList[index];
+		if (var && TDATA_FLOAT == var->GetType())
+		{
+			return var->GetFloat();
+		}
+    }
 
-
-double NFCDataList::Double(const int index) const
-{
-    return NumberVal<double>(index);
+    return 0.0f;
 }
 
 const std::string& NFCDataList::String(const int index) const
 {
-    if (index < mnSize)
+    if (index < GetCount() && index >= 0)
     {
-        const TData* var = GetStackConst(index);
-        if (var && TDATA_STRING == var->nType)
+        const NF_SHARE_PTR<TData> var = mvList[index];
+        if (var && TDATA_STRING == var->GetType())
         {
-            return boost::get<const std::string&>(var->variantData);
+            return var->GetString();
         }
     }
 
     return NULL_STR;
-    //return StringValEx(index);
 }
 
-NFIDENTID NFCDataList::Object(const int index) const
+const NFGUID& NFCDataList::Object(const int index) const
 {
-    return NumberVal<NFINT64>(index);
+    if (index < GetCount() && index >= 0)
+    {
+		TDATA_TYPE type = Type(index);
+		if (TDATA_OBJECT == type)
+		{
+			NF_SHARE_PTR<TData> var = GetStack(index);
+			if (var.get())
+			{
+				return var->GetObject();
+			}
+		}
+    }
+
+    return NULL_OBJECT;
 }
 
-void* NFCDataList::Pointer(const int index) const
+bool NFCDataList::Split(const char* str, const char* strSplit)
 {
-    return NumberVal<void*>(index);
-}
+	Clear();
 
-// bool NFCDataList::Split(const char* pstr, const char* pstrSplit)
-// {
-//     Clear();
-// 
-//     int nLen = strlen(pstr);
-//     char* szInput = new char[nLen + 1];
-//     memset(szInput, 0, nLen + 1);
-// 
-//     strcpy_s(szInput, nLen + 1, pstr);
-// 
-//     char* p = NULL;
-//     p = strtok(szInput, pstrSplit);
-//     while (p != NULL)
-//     {
-//         Add(p);
-//         p = strtok(NULL, pstrSplit);
-//     }
-// 
-//     delete[] szInput;
-// 
-//     return true;
-// }
-
-bool NFCDataList::Split( const char* str, const char* strSplit )
-{
-	std::string strData(str);
+    std::string strData(str);
     if (strData.empty())
     {
         return true;
     }
 
-	std::string temstrSplit(strSplit);
-	std::string::size_type pos;
-	strData += temstrSplit;
-	std::string::size_type size = strData.length();
+    std::string temstrSplit(strSplit);
+    std::string::size_type pos;
+    strData += temstrSplit;
+    std::string::size_type size = strData.length();
 
-	for (std::string::size_type i = 0; i < size; i++)
-	{
-		pos = int(strData.find(temstrSplit, i));
-		if (pos < size)
-		{
-			std::string strSub = strData.substr(i, pos - i);
-			Add(strSub.c_str());
+    for (std::string::size_type i = 0; i < size; i++)
+    {
+        pos = int(strData.find(temstrSplit, i));
+        if (pos < size)
+        {
+            std::string strSub = strData.substr(i, pos - i);
+            Add(strSub.c_str());
 
-			i = pos + temstrSplit.size() - 1;
-		}
-	}
+            i = pos + temstrSplit.size() - 1;
+        }
+    }
 
-	return true;
+    return true;
 }
 
 TDATA_TYPE NFCDataList::Type(const int index) const
 {
-    if (index >= mnSize || index < 0)
+    if (index >= GetCount() || index < 0)
     {
         return TDATA_UNKNOWN;
     }
 
     if (index < STACK_SIZE)
     {
-        return mvStack[index].nType;
+        return mvList[index]->GetType();
     }
     else
     {
-        const TData* pData = GetStackConst(index);
+        const NF_SHARE_PTR<TData> pData = GetStack(index);
         if (pData)
         {
-            return pData->nType;
+            return pData->GetType();
         }
     }
 
@@ -328,34 +433,27 @@ bool NFCDataList::Concat(const NFIDataList& src)
 
 void NFCDataList::Clear()
 {
-    for (int i = 0; i < STACK_SIZE; i++)
-    {
-        mvStack[i].nType = TDATA_UNKNOWN;
-    }
+	mnUseSize = 0;
+	//8个以后的清除掉
+	if (mvList.size() > STACK_SIZE)
+	{
+		for (int i = 0; i < STACK_SIZE; ++i)
+		{
+			mvList[i]->Reset();
+		}
 
-    for (int i = 0; i < mvList.size(); i++)
-    {
-        TData* data = mvList[i];
-        delete[] data;
-        data = NULL;
-    }
-
-    mnOrder = 0;
-    mnSize = 0;
-    mnCapacity = STACK_SIZE;
-    mnNextOrderCapacity = mnCapacity * 2;
-
-    mvList.clear();
+		mvList.erase(mvList.begin() + 8, mvList.end());
+	}
 }
 
 bool NFCDataList::IsEmpty() const
 {
-    return (0 == mnSize);
+    return (0 == mnUseSize);
 }
 
 int NFCDataList::GetCount() const
 {
-    return mnSize;
+    return mnUseSize;
 }
 
 void NFCDataList::InnerAppendEx(const NFIDataList& src, const int start, const int end)
@@ -366,55 +464,62 @@ void NFCDataList::InnerAppendEx(const NFIDataList& src, const int start, const i
         switch (vType)
         {
             case TDATA_INT:
-                AddNumber<int>(vType, src.NumberVal<int>(i));
+				AddInt(src.Int(i));
                 break;
             case TDATA_FLOAT:
-                AddNumber<float>(vType, src.NumberVal<float>(i));
-                break;
-            case TDATA_DOUBLE:
-                AddNumber<double>(vType, src.NumberVal<double>(i));
+				AddFloat(src.Float(i));
                 break;
             case TDATA_STRING:
-                Add(src.String(i).c_str());
+                AddString(src.String(i));
                 break;
             case TDATA_OBJECT:
-                AddNumber<NFINT64>(vType, src.NumberVal<NFINT64>(i));
-                break;
-            case TDATA_POINTER:
-                AddNumber<void*>(vType, src.NumberVal<void*>(i));
+                AddObject(src.Object(i));
                 break;
             default:
-                //Assert(0);
                 break;
         }
     }
 }
 
-std::string NFCDataList::StringValEx(const int index, const bool bForce) const
+std::string NFCDataList::StringValEx(const int index) const
 {
-    if (index < mnSize && index >= 0)
+    if (index < GetCount() && index >= 0)
     {
-        TDATA_TYPE type =  Type(index);
-        if (type == TDATA_STRING)
-        {
-            return String(index);
-        }
+		std::string strData;
 
-        const TData* var = GetStackConst(index);
-        if (var)
-        {
-            return boost::lexical_cast<std::string>(var->variantData);
-        }
+		const TDATA_TYPE eType =  Type(index);
+		switch (eType)
+		{
+		case TDATA_INT:
+			strData = boost::lexical_cast<std::string> (Int(index));
+			break;
+
+		case TDATA_FLOAT:
+			strData = boost::lexical_cast<std::string> (Float(index));
+			break;
+
+		case TDATA_STRING:
+			strData = String(index);
+			break; 
+
+        case TDATA_OBJECT:
+			strData = Object(index).ToString();
+			break;
+
+        default:
+			strData = NULL_STR;
+			break;
+		}
     }
 
     return NULL_STR;
 }
 
-bool NFCDataList::ToString(OUT std::string& str, const char* strSplit)
+bool NFCDataList::ToString(std::string& str, const char* strSplit) const
 {
     for (int i = 0; i < GetCount(); ++i)
     {
-        std::string strVal = StringValEx(i, true);
+        std::string strVal = StringValEx(i);
         str += strVal;
         str += strSplit;
     }
@@ -427,4 +532,23 @@ bool NFCDataList::ToString(OUT std::string& str, const char* strSplit)
     }
 
     return true;
+}
+
+void NFCDataList::AddStatck()
+{
+	for (int i = 0; i < STACK_SIZE; ++i )
+	{
+		NF_SHARE_PTR<TData> pData(NF_NEW TData());
+		mvList.push_back(pData);
+	}
+}
+
+const NF_SHARE_PTR<NFIDataList::TData> NFCDataList::GetStack( const int index ) const
+{
+	if (index < mvList.size())
+	{
+		return mvList[index];
+	}
+
+	return NF_SHARE_PTR<TData>();
 }

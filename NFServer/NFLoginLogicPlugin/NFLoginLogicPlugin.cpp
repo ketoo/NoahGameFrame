@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 
-//#include "stdafx.h"
 #include "NFLoginLogicPlugin.h"
 #include "NFCLoginLogicModule.h"
 
@@ -16,8 +15,9 @@
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
+#if NF_PLATFORM == NF_PLATFORM_WIN
 	SetConsoleTitle("NFLoginServer");
-
+#endif
     CREATE_PLUGIN(pm, NFLoginLogicPlugin)
 
 };
@@ -37,7 +37,7 @@ const int NFLoginLogicPlugin::GetPluginVersion()
 
 const std::string NFLoginLogicPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFLoginLogicPlugin)
+    return GET_CLASS_NAME(NFLoginLogicPlugin);
 }
 
 void NFLoginLogicPlugin::Install()
