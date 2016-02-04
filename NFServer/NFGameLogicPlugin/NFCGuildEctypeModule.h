@@ -15,6 +15,8 @@
 #include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFICommonConfigModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFCGuildEctypeModule
     : public NFIGuildEctypeModule
@@ -44,13 +46,22 @@ public:
     virtual bool AfterInit();
 
     virtual bool CreateGuilEctype(const NFGUID& self, const NFGUID& guild);
+    virtual bool DestroyGuildEctype(const NFGUID& self, const NFGUID& guild);
     virtual bool ApplyEnterGuilEctype(const NFGUID& self, const NFGUID& guild);
+
+protected:
+    int OnGuildClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+
+protected:
+    void OnApplyEnterGuilEctypeProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFIGameServerToWorldModule* m_pGameServerToWorldModule;
-	NFICommonConfigModule* m_pCommonConfigModule;
-
+    NFICommonConfigModule* m_pCommonConfigModule;
+    NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+    NFILogModule* m_pLogModule;
+    
 	NFMapEx<NFGUID, GuildEctypeInfo> mmGuilEctype;
 	NFIKernelModule* m_pKernelModule;
 };

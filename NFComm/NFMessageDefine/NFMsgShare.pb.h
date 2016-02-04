@@ -72,6 +72,7 @@ class ReqGuildEctypeInfo;
 class GuildEctypeInfo;
 class AckGuildEctypeInfo;
 class SetGuildEctypeInfo;
+class ReqEnterGuildEctype;
 class ChatInfo;
 class ReqAckCreateChatGroup;
 class ReqAckjoinChatGroup;
@@ -4350,6 +4351,90 @@ class SetGuildEctypeInfo : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static SetGuildEctypeInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReqEnterGuildEctype : public ::google::protobuf::Message {
+ public:
+  ReqEnterGuildEctype();
+  virtual ~ReqEnterGuildEctype();
+
+  ReqEnterGuildEctype(const ReqEnterGuildEctype& from);
+
+  inline ReqEnterGuildEctype& operator=(const ReqEnterGuildEctype& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqEnterGuildEctype& default_instance();
+
+  void Swap(ReqEnterGuildEctype* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqEnterGuildEctype* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqEnterGuildEctype& from);
+  void MergeFrom(const ReqEnterGuildEctype& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqEnterGuildEctype)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqEnterGuildEctype* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -10408,6 +10493,48 @@ inline void SetGuildEctypeInfo::set_allocated_xectypeinfo(::NFMsg::GuildEctypeIn
     set_has_xectypeinfo();
   } else {
     clear_has_xectypeinfo();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqEnterGuildEctype
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqEnterGuildEctype::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqEnterGuildEctype::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqEnterGuildEctype::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqEnterGuildEctype::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqEnterGuildEctype::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqEnterGuildEctype::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqEnterGuildEctype::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqEnterGuildEctype::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
   }
 }
 

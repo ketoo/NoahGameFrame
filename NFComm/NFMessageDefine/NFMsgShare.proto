@@ -348,6 +348,12 @@ message SetGuildEctypeInfo
 	required Ident		selfid				= 1;//角色ID
 	required GuildEctypeInfo		xectypeinfo		= 2;//工会副本的信息
 }
+
+//EGMI_ReqEnterGuildEctype					= 315; // 
+message ReqEnterGuildEctype
+{	
+	required Ident		selfid				= 1;//角色ID
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 message ChatInfo
