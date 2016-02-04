@@ -17,6 +17,7 @@
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFMessageDefine/NFMsgBase.pb.h"
 #include "NFComm/NFPluginModule/NFIDataProcessModule.h"
+#include "NFComm/NFPluginModule/NFICommonConfigModule.h"
 
 class NFCGuildDataModule
     : public NFIGuildDataModule
@@ -56,6 +57,7 @@ protected:
     NFIUUIDModule* m_pUUIDModule;
     NFIClusterModule* m_pClusterSQLModule;    
     NFIDataProcessModule* m_pDataProcessModule;
+    NFICommonConfigModule* m_pCommonConfigModule;
     
 private:
 };

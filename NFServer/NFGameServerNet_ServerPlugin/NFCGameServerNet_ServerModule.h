@@ -58,6 +58,13 @@ public:
     virtual void SendMsgPBToGate( const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self );
 	virtual void SendMsgPBToGate( const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self );
 
+    //把argVar这些人的出现或者离去广播给self这些人
+    virtual int OnPropertyEnter( const NFIDataList& argVar, const NFGUID& self );
+    virtual int OnRecordEnter( const NFIDataList& argVar, const NFGUID& self );
+
+    virtual int OnObjectListEnter( const NFIDataList& self, const NFIDataList& argVar );
+    virtual int OnObjectListLeave( const NFIDataList& self, const NFIDataList& argVar );
+
 protected:
 
 	void OnRecivePSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -111,12 +118,8 @@ protected:
 
 protected:
     //将self的全部属性广播给argVar[应该是多对多]
-    int OnPropertyEnter( const NFIDataList& argVar, const NFGUID& self );
-    int OnRecordEnter( const NFIDataList& argVar, const NFGUID& self );
 
-    //把argVar这些人的出现或者离去广播给self这些人
-    int OnObjectListEnter( const NFIDataList& self, const NFIDataList& argVar );
-    int OnObjectListLeave( const NFIDataList& self, const NFIDataList& argVar );
+
 
     //网络同步
     int OnPropertyCommonEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar );

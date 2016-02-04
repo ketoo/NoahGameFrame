@@ -35,17 +35,27 @@ bool NFCGuildDataModule::AfterInit()
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
     m_pClusterSQLModule = pPluginManager->FindModule<NFIClusterModule>("NFCMysqlClusterModule");
     m_pDataProcessModule = pPluginManager->FindModule<NFIDataProcessModule>("NFCDataProcessModule");
+    m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>("NFCCommonConfigModule");
 
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pUUIDModule);
     assert(NULL != m_pClusterSQLModule);
     assert(NULL != m_pDataProcessModule);
+    assert(NULL != m_pCommonConfigModule);
 
     m_pDataProcessModule->RegisterAutoSave(NFrame::Guild::ThisName());
     m_pKernelModule->AddClassCallBack(NFrame::Guild::ThisName(), this, &NFCGuildDataModule::OnGuildClassEvent);
 
 
     m_pUUIDModule->SetIdentID(pPluginManager->AppID());
+
+    int nScenceID = m_pCommonConfigModule->GetAttributeInt("GuildEctype", "GuildEctypeInfo", "ScenceID");
+    if (nScenceID <=0)
+    {
+        nScenceID = 300;
+        m_pKernelModule->CreateScene(nScenceID);
+    }
+
     return true;
 }
 
@@ -66,7 +76,13 @@ void NFCGuildDataModule::CheckLoadGuild( const NFGUID& self, const NFGUID& xGuil
     {
         if (m_pDataProcessModule->LoadDataFormSql(xGuild, "Guild"))
         {
-            m_pKernelModule->CreateObject(xGuild, 1, 0, "Guild", "", NFCDataList());
+            int nScenceID = m_pCommonConfigModule->GetAttributeInt("GuildEctype", "GuildEctypeInfo", "ScenceID");
+            if (nScenceID <=0)
+            {
+                nScenceID = 300;
+            }
+
+            m_pKernelModule->CreateObject(xGuild, nScenceID, 0, "Guild", "", NFCDataList());
         }
     }
 }

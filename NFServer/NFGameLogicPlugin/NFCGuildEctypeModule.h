@@ -45,6 +45,7 @@ public:
 
     virtual bool CreateGuilEctype(const NFGUID& self, const NFGUID& guild);
     virtual bool ApplyEnterGuilEctype(const NFGUID& self, const NFGUID& guild);
+
 private:
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFIGameServerToWorldModule* m_pGameServerToWorldModule;

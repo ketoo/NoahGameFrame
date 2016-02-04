@@ -20,6 +20,12 @@ class NFIGameServerNet_ServerModule
 public:
     virtual void SendMsgPBToGate( const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self ) = 0;
     virtual void SendMsgPBToGate( const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self ) = 0;
+
+    //把argVar这些人的出现或者离去广播给self这些人
+    virtual int OnPropertyEnter( const NFIDataList& argVar, const NFGUID& self ) = 0;
+    virtual int OnRecordEnter( const NFIDataList& argVar, const NFGUID& self ) = 0;
+    virtual int OnObjectListEnter( const NFIDataList& self, const NFIDataList& argVar ) = 0;
+    virtual int OnObjectListLeave( const NFIDataList& self, const NFIDataList& argVar ) = 0;
 };
 
 #endif

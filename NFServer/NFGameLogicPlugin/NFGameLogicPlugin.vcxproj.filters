@@ -114,6 +114,9 @@
     <ClInclude Include="NFCGuildModule.h">
       <Filter>NFGuildModule</Filter>
     </ClInclude>
+    <ClInclude Include="NFCGuildBroadcastModule.h">
+      <Filter>NFGuildModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -186,6 +189,9 @@
       <Filter>NFGuildModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCGuildModule.cpp">
+      <Filter>NFGuildModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCGuildBroadcastModule.cpp">
       <Filter>NFGuildModule</Filter>
     </ClCompile>
   </ItemGroup>
