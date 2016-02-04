@@ -141,6 +141,8 @@
 		<Unit filename="NFCSkillConsumeManagerModule.h" />
 		<Unit filename="NFCSkillModule.cpp" />
 		<Unit filename="NFCSkillModule.h" />
+		<Unit filename="NFCGuildBroadcastModule.cpp" />
+		<Unit filename="NFCGuildBroadcastModule.h" />
 		<Unit filename="NFGameLogicPlugin.cpp" />
 		<Unit filename="NFGameLogicPlugin.h" />
 		<Unit filename="dllmain.cpp" />
