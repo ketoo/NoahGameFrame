@@ -50,6 +50,8 @@ bool NFCGuildModule::AfterInit()
     assert(NULL != m_pUUIDModule);
     assert(NULL != m_pGuildDataModule);
 
+    m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGuildModule::OnPlayerClassEvent);
+
     return true;
 }
 
@@ -537,3 +539,32 @@ void NFCGuildModule::OnSearchGuildProcess(const int nSockIndex, const int nMsgID
 
 	m_pGameServerNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_SEARCH_GUILD, xAckMsg, nSockIndex, nPlayerID);
 } 
+
+int NFCGuildModule::OnPlayerClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+{
+    if ( strClassName == NFrame::Guild::ThisName() )
+    {
+        if ( CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent )
+        {
+            const NFGUID xGuild = m_pKernelModule->GetPropertyObject(self, NFrame::Player::GuildID());
+            if (xGuild.IsNull())
+            {
+                mmNoneGuildPlayerList.AddElement(self, NF_SHARE_PTR<int>(NF_NEW int(0)));
+
+                m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::GuildID(), this, &NFCGuildModule::OnObjectGuildIDEvent);
+            }
+        } 
+    }
+
+    return 0;
+}
+
+int NFCGuildModule::OnObjectGuildIDEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+{
+    if ( !newVar.GetObject().IsNull())
+    {
+        mmNoneGuildPlayerList.RemoveElement(self);
+    }
+
+    return 0;
+}

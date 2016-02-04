@@ -57,13 +57,17 @@ protected:
 
 protected:
     bool CheckPower(const NFGUID& self, const NFGUID& xGuildID, int nPowerType);
-
+    int OnPlayerClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+    int OnObjectGuildIDEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 protected:
     NFIKernelModule* m_pKernelModule;
     NFIUUIDModule* m_pUUIDModule;
     NFIGuildDataModule* m_pGuildDataModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFILogModule* m_pLogModule;
+
+    NFMapEx<NFGUID, int> mmNoneGuildPlayerList;
+
 };
 
 #endif
