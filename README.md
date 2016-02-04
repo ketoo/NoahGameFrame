@@ -72,12 +72,12 @@ Need build sub librares:
 5. Extract nessasery lib: 	**Dependencies/curl-7.37.1.zip** to **Dependencies/**
 6. Open the solution: **NoahFrame.sln**
 7. Build the solution
-8. Copy files:libmysql.dll mysqlpp_d.dll 	to **_Out/Server/Debug/NFGameServer1/**
-9. Copy files:libmysql.dll mysqlpp.dll 		to **_Out/Server/Release/NFGameServer1/**
-10. Copy files:libmysql.dll mysqlpp_d.dll 	to **_Out/Server/Debug/NFLoginServer/**
-11. Copy files:libmysql.dll mysqlpp.dll 	to **_Out/Server/Release/NFLoginServer/**
-12. Copy files:libmysql.dll mysqlpp_d.dll 	to **_Out/Server/Debug/NFWorldServer/**
-13. Copy files:libmysql.dll mysqlpp.dll 	to **_Out/Server/Release/NFWorldServer/**
+8. Copy files: 	**/Dependencies/lib/Debug/ libmysql.dll mysqlpp_d.dll 	to **_Out/Server/Debug/NFGameServer1/**
+9. Copy files: 	**/Dependencies/lib/Debug/ libmysql.dll mysqlpp.dll 	to **_Out/Server/Release/NFGameServer1/**
+10. Copy files: **/Dependencies/lib/Debug/ libmysql.dll mysqlpp_d.dll 	to **_Out/Server/Debug/NFLoginServer/**
+11. Copy files: **/Dependencies/lib/Debug/ libmysql.dll mysqlpp.dll 	to **_Out/Server/Release/NFLoginServer/**
+12. Copy files: **/Dependencies/lib/Debug/ libmysql.dll mysqlpp_d.dll 	to **_Out/Server/Debug/NFWorldServer/**
+13. Copy files: **/Dependencies/lib/Debug/ libmysql.dll mysqlpp.dll 	to **_Out/Server/Release/NFWorldServer/**
 14. Run the binary file by **_Out/Server/Debug/Run.bat**
 
 ### Windows[VS2015]
