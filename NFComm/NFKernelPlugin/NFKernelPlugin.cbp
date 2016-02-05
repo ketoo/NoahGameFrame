@@ -86,14 +86,6 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFContainerModule/NFCContainerModule.cpp" />
-		<Unit filename="NFContainerModule/NFCContainerModule.h" />
-		<Unit filename="NFContainerModule/NFIContainerModule.h" />
-		<Unit filename="NFGridModule/NFCGridModule.cpp" />
-		<Unit filename="NFGridModule/NFCGridModule.h" />
-		<Unit filename="NFGridModule/NFIGridModule.h" />
-		<Unit filename="NFKernelModule/NFCConcurrentModule.cpp" />
-		<Unit filename="NFKernelModule/NFCConcurrentModule.h" />
 		<Unit filename="NFKernelModule/NFCKernelModule.cpp" />
 		<Unit filename="NFKernelModule/NFCKernelModule.h" />
 		<Unit filename="NFKernelModule/NFCUUIDModule.cpp" />
