@@ -102,8 +102,6 @@
 		</Build>
 		<Unit filename="NFCDataProcessModule.cpp" />
 		<Unit filename="NFCDataProcessModule.h" />
-		<Unit filename="NFCObjectSaveModule.cpp" />
-		<Unit filename="NFCObjectSaveModule.h" />
 		<Unit filename="NFDataBaseNet_ClientPlugin.cpp" />
 		<Unit filename="NFDataBaseNet_ClientPlugin.h" />
 		<Unit filename="dllmain.cpp" />
