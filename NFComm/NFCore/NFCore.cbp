@@ -58,8 +58,6 @@
 		<Unit filename="NFCHeartBeatManager.h" />
 		<Unit filename="NFCMemManger.cpp" />
 		<Unit filename="NFCMemManger.h" />
-		<Unit filename="NFCMemory.cpp" />
-		<Unit filename="NFCMemory.h" />
 		<Unit filename="NFCObject.cpp" />
 		<Unit filename="NFCObject.h" />
 		<Unit filename="NFCProperty.cpp" />
