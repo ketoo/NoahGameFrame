@@ -13,12 +13,10 @@
         <Project filename="NFComm/NFTagPlugin/NFTagPlugin.cbp" />
         
         <!-- NF Server -->
-        <Project filename="NFServer/NFAIPlugin/NFAIPlugin.cbp" />
         <Project filename="NFServer/NFDataBaseNet_ClientPlugin/NFDataBaseNet_ClientPlugin.cbp" />
         <Project filename="NFServer/NFGameServerPlugin/NFGameServerPlugin.cbp" />
         <Project filename="NFServer/NFGameServerNet_ClientPlugin/NFGameServerNet_ClientPlugin.cbp" />
         <Project filename="NFServer/NFGameServerNet_ServerPlugin/NFGameServerNet_ServerPlugin.cbp" />
-        <Project filename="NFServer/NFGameLogicPlugin/NFGameLogicPlugin.cbp" />
         
 		<Project filename="NFServer/NFWorldLogicPlugin/NFWorldLogicPlugin.cbp" />
         <Project filename="NFServer/NFWorldChatPlugin/NFWorldChatPlugin.cbp" />
