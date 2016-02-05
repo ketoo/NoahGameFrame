@@ -85,14 +85,10 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCDataProcessModule.cpp" />
-		<Unit filename="NFCDataProcessModule.h" />
 		<Unit filename="NFCGameServerModule.cpp" />
 		<Unit filename="NFCGameServerModule.h" />
 		<Unit filename="NFCLevelModule.cpp" />
 		<Unit filename="NFCLevelModule.h" />
-		<Unit filename="NFCPVPModule.cpp" />
-		<Unit filename="NFCPVPModule.h" />
 		<Unit filename="NFCPropertyConfigModule.cpp" />
 		<Unit filename="NFCPropertyConfigModule.h" />
 		<Unit filename="NFCPropertyModule.cpp" />
