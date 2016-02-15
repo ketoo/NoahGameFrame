@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/31
+//    @Date             :    2016/02/15
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -21,11 +21,6 @@ public class IObject
 	//Class name
 	public static readonly string ThisName = "IObject";
 	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
 	public static readonly String ID = "ID"; // string
 	public static readonly String ClassName = "ClassName"; // string
@@ -41,11 +36,6 @@ public class BB_Build
 	//Class name
 	public static readonly string ThisName = "BB_Build";
 	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	public static readonly String ID = "ID"; // string
 	public static readonly String ClassName = "ClassName"; // string
 	public static readonly String SceneID = "SceneID"; // int
@@ -74,11 +64,6 @@ public class Buff
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
 	public static readonly String EffectType = "EffectType"; // int
 	public static readonly String EffectValueType = "EffectValueType"; // int
@@ -98,11 +83,6 @@ public class ChatGroup
 	//Class name
 	public static readonly string ThisName = "ChatGroup";
 	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	public static readonly String ID = "ID"; // string
 	public static readonly String ClassName = "ClassName"; // string
 	public static readonly String SceneID = "SceneID"; // int
@@ -141,11 +121,6 @@ public class ConsumeData
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
 	public static readonly String VIPEXP = "VIPEXP"; // int
 	public static readonly String EXP = "EXP"; // int
@@ -163,11 +138,6 @@ public class Cost
 	//Class name
 	public static readonly string ThisName = "Cost";
 	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	public static readonly String ID = "ID"; // string
 	public static readonly String ClassName = "ClassName"; // string
 	public static readonly String SceneID = "SceneID"; // int
@@ -192,11 +162,6 @@ public class DescData
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
 	public static readonly String ShowName = "ShowName"; // string
 	public static readonly String Icon = "Icon"; // string
@@ -214,11 +179,6 @@ public class EffectData
 	//Class name
 	public static readonly string ThisName = "EffectData";
 	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	public static readonly String ID = "ID"; // string
 	public static readonly String ClassName = "ClassName"; // string
 	public static readonly String SceneID = "SceneID"; // int
@@ -263,11 +223,6 @@ public class Equip
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
 	public static readonly String Sex = "Sex"; // int
 	public static readonly String IntensiveBuffList = "IntensiveBuffList"; // string
@@ -295,11 +250,6 @@ public class Guild
 	//Class name
 	public static readonly string ThisName = "Guild";
 	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	public static readonly String ID = "ID"; // string
 	public static readonly String ClassName = "ClassName"; // string
 	public static readonly String SceneID = "SceneID"; // int
@@ -431,11 +381,6 @@ public class GuildConfig
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
 	public static readonly String ConditionPlayerLevel = "ConditionPlayerLevel"; // int
 	public static readonly String ConditionPlayerVIP = "ConditionPlayerVIP"; // int
@@ -452,11 +397,6 @@ public class GuildJob
 	//Class name
 	public static readonly string ThisName = "GuildJob";
 	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	public static readonly String ID = "ID"; // string
 	public static readonly String ClassName = "ClassName"; // string
 	public static readonly String SceneID = "SceneID"; // int
@@ -492,11 +432,6 @@ public class GuildName
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
 	public static readonly String GuildID = "GuildID"; // object
 	// Record
@@ -508,11 +443,6 @@ public class InitProperty
 	//Class name
 	public static readonly string ThisName = "InitProperty";
 	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	public static readonly String ID = "ID"; // string
 	public static readonly String ClassName = "ClassName"; // string
 	public static readonly String SceneID = "SceneID"; // int
@@ -538,11 +468,6 @@ public class Item
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
 	public static readonly String ItemType = "ItemType"; // int
 	public static readonly String ItemSubType = "ItemSubType"; // int
@@ -553,6 +478,7 @@ public class Item
 	public static readonly String EffectData = "EffectData"; // string
 	public static readonly String ConsumeData = "ConsumeData"; // string
 	public static readonly String AwardData = "AwardData"; // string
+	public static readonly String AwardProperty = "AwardProperty"; // string
 	public static readonly String CoolDownTime = "CoolDownTime"; // float
 	public static readonly String OverlayCount = "OverlayCount"; // int
 	public static readonly String ExpiredType = "ExpiredType"; // int
@@ -574,11 +500,6 @@ public class Language
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
 	public static readonly String English = "English"; // string
 	public static readonly String Chinese = "Chinese"; // string
@@ -591,11 +512,6 @@ public class NPC
 	//Class name
 	public static readonly string ThisName = "NPC";
 	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	public static readonly String ID = "ID"; // string
 	public static readonly String ClassName = "ClassName"; // string
 	public static readonly String SceneID = "SceneID"; // int
@@ -658,11 +574,6 @@ public class Player
 	//Class name
 	public static readonly string ThisName = "Player";
 	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	public static readonly String ID = "ID"; // string
 	public static readonly String ClassName = "ClassName"; // string
 	public static readonly String SceneID = "SceneID"; // int
@@ -943,11 +854,6 @@ public class Scene
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
 	public static readonly String SceneName = "SceneName"; // string
 	public static readonly String SceneShowName = "SceneShowName"; // string
@@ -978,11 +884,6 @@ public class Server
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
 	public static readonly String ServerID = "ServerID"; // int
 	public static readonly String Name = "Name"; // string
@@ -1005,11 +906,6 @@ public class Shop
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
 	public static readonly String Type = "Type"; // int
 	public static readonly String ItemID = "ItemID"; // string
@@ -1027,11 +923,6 @@ public class Skill
 	//Class name
 	public static readonly string ThisName = "Skill";
 	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	public static readonly String ID = "ID"; // string
 	public static readonly String ClassName = "ClassName"; // string
 	public static readonly String SceneID = "SceneID"; // int
@@ -1077,11 +968,6 @@ public class SkillRef
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
 	public static readonly String NORMALATTACK1 = "NORMALATTACK1"; // string
 	public static readonly String NORMALATTACK2 = "NORMALATTACK2"; // string
@@ -1111,11 +997,6 @@ public class SqlServer
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
 	public static readonly String ServerID = "ServerID"; // int
 	public static readonly String IP = "IP"; // string
@@ -1139,11 +1020,6 @@ public class StateFuncResources
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
 	public static readonly String Atlas_ResID = "Atlas_ResID"; // string
 	// Record
@@ -1155,11 +1031,6 @@ public class StateFunction
 	//Class name
 	public static readonly string ThisName = "StateFunction";
 	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	public static readonly String ID = "ID"; // string
 	public static readonly String ClassName = "ClassName"; // string
 	public static readonly String SceneID = "SceneID"; // int
@@ -1189,11 +1060,6 @@ public class Task
 	//Class name
 	public static readonly string ThisName = "Task";
 	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
 	public static readonly String ID = "ID"; // string
 	public static readonly String ClassName = "ClassName"; // string
 	public static readonly String SceneID = "SceneID"; // int
