@@ -35,10 +35,10 @@
 enum TDATA_TYPE
 {
     TDATA_UNKNOWN,  // 未知
-    TDATA_INT,              // 32位整数
-    TDATA_FLOAT,       // 浮点数(双精度，用double类型实现)
-    TDATA_STRING,       // 字符串
-    TDATA_OBJECT,       // 对象ID
+    TDATA_INT,      // 64位整数
+    TDATA_FLOAT,    // 浮点数(双精度，用double类型实现)
+    TDATA_STRING,   // 字符串
+    TDATA_OBJECT,   // 对象ID
     TDATA_MAX,
 };
 
@@ -46,7 +46,6 @@ const static std::string NULL_STR = "";
 const static NFGUID NULL_OBJECT = NFGUID();
 const static double NULL_FLOAT = 0.0;
 const static NFINT64 NULL_INT = 0;
-
 
 //类型接口
 class NFIDataList

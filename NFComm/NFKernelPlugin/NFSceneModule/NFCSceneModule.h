@@ -11,8 +11,6 @@
 
 #include <iostream>
 #include "NFComm/NFCore/NFIObject.h"
-#include "NFComm/NFCore/NFCDataList.h"
-#include "NFComm/NFCore/NFCRecord.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFISceneModule.h"
 

@@ -1,19 +1,6 @@
-// -------------------------------------------------------------------------
-//    @FileName      :    NFCKernelModule.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2012-12-15
-//    @Module           :    NFCKernelModule
-//    @Desc             :
-// -------------------------------------------------------------------------
-
-#include <time.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <cstdlib>
-#include <functional>
 #include "NFCKernelModule.h"
 #include "NFComm/NFCore/NFDefine.h"
-#include "NFComm/NFCore/NFIObject.h"
+#include "NFComm/NFCore/NFCObject.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
