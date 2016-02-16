@@ -12,8 +12,7 @@
 #include "NFCElementInfoModule.h"
 #include "NFCLogicClassModule.h"
 
-////
-
+bool NFCLogicClassModule::bCipher = true;
 bool NFCLogicClassModule::Init()
 {
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
@@ -37,7 +36,19 @@ NFCLogicClassModule::NFCLogicClassModule(NFIPluginManager* p)
     mnPropertyIndex = NF_GetTickCount() % 10 + 1;
 
     pPluginManager = p;
+
+    // 判断 *.NF 是否存在，如果不存在，用 *.xml
     msConfigFileName = "NFDataCfg/Struct/LogicClass.NF";
+    bCipher = true;
+    std::fstream file;
+    file.open(pPluginManager->GetConfigPath() + msConfigFileName, std::ios::in);
+    if (!file)
+    {
+        msConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
+        bCipher = false;
+    }
+
+    std::cout << "Using [" << pPluginManager->GetConfigPath() + msConfigFileName << "]" << std::endl;
 }
 
 NFCLogicClassModule::~NFCLogicClassModule()
@@ -280,20 +291,40 @@ bool NFCLogicClassModule::AddClassInclude(const char* pstrClassFilePath, NF_SHAR
         return false;
     }
 
-    std::string strFileData;
-    ReadFileToString(pPluginManager->GetConfigPath() + pstrClassFilePath, strFileData);
-    std::string strDecode = Decode(strFileData);
+    //////////////////////////////////////////////////////////////////////////
+    rapidxml::xml_document<> xDoc;
+    char* pData = NULL;
+    int nDataSize = 0;
 
-    const int nDataSize = strDecode.length();
-    char* data = new char[nDataSize + 1];
-    strncpy(data, strDecode.data(), strDecode.length());
-    data[nDataSize] = 0;
+    std::string strFile = pPluginManager->GetConfigPath() + pstrClassFilePath;
+    if (!bCipher)
+    {
+        rapidxml::file<> fdoc(strFile.c_str());
+        nDataSize = fdoc.size();
+        pData = new char[nDataSize + 1];
+        strncpy(pData, fdoc.data(), nDataSize);
+    }
+    else
+    {
+        std::string strFileData;
+        if (!ReadFileToString(strFile, strFileData))
+        {
+            return false;
+        }
 
-    rapidxml::xml_document<> doc;
-    doc.parse<0>(data);
+        std::string strDecode = Decode(strFileData);
+
+        nDataSize = strDecode.length();
+        pData = new char[nDataSize + 1];
+        strncpy(pData, strDecode.data(), nDataSize);
+    }
+
+    pData[nDataSize] = 0;
+    xDoc.parse<0>(pData);
+    //////////////////////////////////////////////////////////////////////////
 
     //support for unlimited layer class inherits
-    rapidxml::xml_node<>* root = doc.first_node();
+    rapidxml::xml_node<>* root = xDoc.first_node();
 
     rapidxml::xml_node<>* pRropertyRootNode = root->first_node("Propertys");
     if (pRropertyRootNode)
@@ -332,16 +363,18 @@ bool NFCLogicClassModule::AddClassInclude(const char* pstrClassFilePath, NF_SHAR
         }
     }
 
+    //////////////////////////////////////////////////////////////////////////
+    if (NULL != pData)
+    {
+        delete []pData;
+    }
+    //////////////////////////////////////////////////////////////////////////
 
     return true;
 }
 
 bool NFCLogicClassModule::AddClass(const char* pstrClassFilePath, NF_SHARE_PTR<NFILogicClass> pClass)
 {
-
-    //std::ofstream file;
-    //file.open("./Log/NFLogicClass.log");
-
     NF_SHARE_PTR<NFILogicClass> pParent = pClass->GetParent();
     while (pParent.get())
     {
@@ -430,26 +463,51 @@ bool NFCLogicClassModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIL
 
 bool NFCLogicClassModule::Load()
 {
-    std::string strFileData;
-    ReadFileToString(pPluginManager->GetConfigPath() + msConfigFileName, strFileData);
-    std::string strDecode = Decode(strFileData);
+    //////////////////////////////////////////////////////////////////////////
+    rapidxml::xml_document<> xDoc;
+    char* pData = NULL;
+    int nDataSize = 0;
 
-    const int nDataSize = strDecode.length();
-    char* data = new char[nDataSize + 1];
-    strncpy(data, strDecode.data(), strDecode.length());
-    data[nDataSize] = 0;
+    std::string strFile = pPluginManager->GetConfigPath() + msConfigFileName;
+    if (!bCipher)
+    {
+        rapidxml::file<> fdoc(strFile.c_str());
+        nDataSize = fdoc.size();
+        pData = new char[nDataSize + 1];
+        strncpy(pData, fdoc.data(), nDataSize);
+    }
+    else
+    {
+        std::string strFileData;
+        if (!ReadFileToString(strFile, strFileData))
+        {
+            return false;
+        }
 
-    rapidxml::xml_document<> doc;
-    doc.parse<0>(data);
+        std::string strDecode = Decode(strFileData);
 
+        nDataSize = strDecode.length();
+        pData = new char[nDataSize + 1];
+        strncpy(pData, strDecode.data(), nDataSize);
+    }
+
+    pData[nDataSize] = 0;
+    xDoc.parse<0>(pData);
+    //////////////////////////////////////////////////////////////////////////
     //support for unlimited layer class inherits
-    rapidxml::xml_node<>* root = doc.first_node();
+    rapidxml::xml_node<>* root = xDoc.first_node();
     for (rapidxml::xml_node<>* attrNode = root->first_node(); attrNode; attrNode = attrNode->next_sibling())
     {
         Load(attrNode, NULL);
     }
 
     m_pElementInfoModule->Load();
+    //////////////////////////////////////////////////////////////////////////
+    if (NULL != pData)
+    {
+        delete []pData;
+    }
+    //////////////////////////////////////////////////////////////////////////
     return true;
 }
 
@@ -494,7 +552,6 @@ NF_SHARE_PTR<NFIComponentManager> NFCLogicClassModule::GetClassComponentManager(
 bool NFCLogicClassModule::Clear()
 {
     return true;
-
 }
 
 std::string NFCLogicClassModule::cepher = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
