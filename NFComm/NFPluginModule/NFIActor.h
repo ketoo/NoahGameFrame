@@ -6,8 +6,10 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_ACTOR_H
-#define _NFI_ACTOR_H
+#ifndef NFI_ACTOR_H
+#define NFI_ACTOR_H
+
+#define THERON_USE_STD_THREADS 1
 
 #include <map>
 #include <string>
@@ -16,7 +18,6 @@
 
 #include "NFILogicModule.h"
 #include "NFIActorManager.h"
-#include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFIComponent.h"
 
 class NFIActorMessage
@@ -123,4 +124,4 @@ protected:
 
 };
 
-#endif
+#endif // !NFI_ACTOR_H
