@@ -12,7 +12,6 @@
 #include <list>
 #include <iostream>
 #include <algorithm>
-#include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFList.h"
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFCore/NFIObject.h"
