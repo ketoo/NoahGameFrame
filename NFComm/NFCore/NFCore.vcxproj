@@ -57,7 +57,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_X64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\boost_1_53_0\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\;$(SolutionDir)\Dependencies\gperftools-2.1\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\boost_1_53_0\;$(SolutionDir)\Dependencies\Theron-6.00.01\Include\;$(SolutionDir)\Dependencies\gperftools-2.1\src</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
