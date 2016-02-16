@@ -11,7 +11,6 @@
 #include "NFComm/NFPluginModule/NFIActor.h"
 //#include "NFStackWalker.h"
 #include "NFCLogModule.h"
-#include <boost/filesystem.hpp>
 #include <stdarg.h>
 #include "easylog/easylogging++.h"
 
@@ -23,7 +22,9 @@ bool NFCLogModule::CheckLogFileExist(const char* filename)
 {
     std::stringstream stream;
     stream << filename << "." << ++idx;
-    if (boost::filesystem::exists(stream.str()))
+    std::fstream file;
+    file.open(stream.str(), std::ios::in);
+    if (file)
     {
         return CheckLogFileExist(filename);
     }
@@ -37,7 +38,7 @@ void NFCLogModule::rolloutHandler(const char* filename, std::size_t size)
     if (!CheckLogFileExist(filename))
     {
         stream << filename << "." << idx;
-        boost::filesystem::rename(filename, stream.str().c_str());
+        rename(filename, stream.str().c_str());
     }
 }
 
