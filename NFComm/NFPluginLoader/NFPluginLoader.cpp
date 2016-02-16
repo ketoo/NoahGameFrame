@@ -18,7 +18,6 @@
 #include "NFCActorManager.h"
 #include "NFComm/Config/NFConfig.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
-#include "boost/thread.hpp"
 
 #if NF_PLATFORM == NF_PLATFORM_LINUX
 #include <netdb.h>
