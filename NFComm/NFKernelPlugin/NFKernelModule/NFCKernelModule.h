@@ -13,16 +13,16 @@
 #include <fstream>
 #include <string>
 #include <boost/random.hpp>
-#include "NFComm/NFCore/NFCObject.h"
-#include "NFComm/NFCore/NFCDataList.h"
-#include "NFComm/NFCore/NFCRecord.h"
+#include "NFComm/NFCore/NFIObject.h"
+#include "NFComm/NFCore/NFIDataList.h"
+#include "NFComm/NFCore/NFIRecord.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
-#include "NFComm/NFKernelPlugin/NFSceneModule/NFCSceneModule.h"
+#include "NFComm/NFPluginModule/NFISceneModule.h"
 
 class NFCKernelModule
     : public NFIKernelModule,

@@ -15,7 +15,7 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFCore/NFIComponent.h"
-#include "../NFCore/NFList.h"
+#include "NFComm/NFCore/NFList.h"
 
 class NFCActor
 	: public NFIActor
