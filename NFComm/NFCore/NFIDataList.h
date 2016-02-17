@@ -26,7 +26,6 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
-#include <boost/lexical_cast.hpp>
 #include <boost/variant.hpp>
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
@@ -226,11 +225,11 @@ public:
             switch (nType)
             {
             case TDATA_INT:
-                strData = boost::lexical_cast<std::string> (GetInt());
+                strData = lexical_cast<std::string> (GetInt());
                 break;
 
             case TDATA_FLOAT:
-                strData = boost::lexical_cast<std::string> (GetFloat());
+                strData = lexical_cast<std::string> (GetFloat());
                 break;
 
             case TDATA_STRING:
