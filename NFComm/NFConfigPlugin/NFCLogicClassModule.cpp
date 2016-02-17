@@ -12,7 +12,7 @@
 #include "NFCElementInfoModule.h"
 #include "NFCLogicClassModule.h"
 
-bool NFCLogicClassModule::bCipher = true;
+bool NFCLogicClassModule::bCipher = false;
 bool NFCLogicClassModule::Init()
 {
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
@@ -37,15 +37,15 @@ NFCLogicClassModule::NFCLogicClassModule(NFIPluginManager* p)
 
     pPluginManager = p;
 
-    // 判断 *.NF 是否存在，如果不存在，用 *.xml
-    msConfigFileName = "NFDataCfg/Struct/LogicClass.NF";
-    bCipher = true;
+    // 判断 *.xml 是否存在，如果不存在，用 *.NF
+    msConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
+    bCipher = false;
     std::fstream file;
     file.open(pPluginManager->GetConfigPath() + msConfigFileName, std::ios::in);
     if (!file)
     {
-        msConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
-        bCipher = false;
+        msConfigFileName = "NFDataCfg/Struct/LogicClass.NF";
+        bCipher = true;
     }
 
     std::cout << "Using [" << pPluginManager->GetConfigPath() + msConfigFileName << "]" << std::endl;
