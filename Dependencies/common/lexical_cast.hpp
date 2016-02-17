@@ -65,7 +65,7 @@ namespace detail
     {
         static long long convert(const From& from)
         {
-#if _MSC_VER <= 1700 // vs2012
+#if defined(_MSC_VER) && _MSC_VER <= 1700 // vs2012
             return _atoi64(from);
 #else
             return std::atoll(from);
@@ -78,7 +78,7 @@ namespace detail
     {
         static long long convert(const std::string& from)
         {
-#if _MSC_VER <= 1700 // vs2012
+#if defined(_MSC_VER) && _MSC_VER <= 1700 // vs2012
             return _atoi64(from.c_str());
 #else
             return std::atoll(from.c_str());
