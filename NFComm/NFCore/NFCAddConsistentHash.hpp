@@ -11,9 +11,6 @@
 #include <list>
 #include <functional> 
 #include <algorithm>
-#include "boost/crc.hpp"
-#include "boost/lexical_cast.hpp"
-#include "boost/format.hpp"
 #include "NFCConsistentHash.hpp"
 
 #ifndef NFC_ADDCONSISTENT_HASH_H

@@ -56,7 +56,7 @@ public:
 
     std::string ToStr() const 
     {
-        return boost::str(boost::format("%1%-%2%-%3%") % boost::lexical_cast<std::string>(GetDataID()) % GetDataStr() % nVirtualIndex);
+        return boost::str(boost::format("%1%-%2%-%3%") % lexical_cast<std::string>(GetDataID()) % GetDataStr() % nVirtualIndex);
     }
 
 private:
