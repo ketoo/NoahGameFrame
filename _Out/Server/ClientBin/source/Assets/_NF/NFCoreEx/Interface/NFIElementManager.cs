@@ -7,7 +7,7 @@ namespace NFCoreEx
 {
     public abstract class NFIElementManager
     {
-        public abstract bool Load();
+        public abstract bool Load(String strConfigPath);
         public abstract bool Clear();
 
         public abstract bool ExistElement(string strConfigName);

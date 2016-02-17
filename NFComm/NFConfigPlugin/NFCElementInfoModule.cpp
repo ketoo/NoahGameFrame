@@ -185,7 +185,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFI
                 {
                     NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 }
-				var.SetInt(boost::lexical_cast<NFINT64>(pstrConfigValue));
+				var.SetInt(lexical_cast<NFINT64>(pstrConfigValue));
             }
             break;
             case TDATA_FLOAT:
