@@ -21,6 +21,8 @@
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/" />
 				</Compiler>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
@@ -40,6 +42,8 @@
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/" />
 				</Compiler>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
