@@ -18,7 +18,6 @@
 #include "NFCActorManager.h"
 #include "NFComm/Config/NFConfig.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
-#include "boost/thread.hpp"
 
 #if NF_PLATFORM == NF_PLATFORM_LINUX
 #include <netdb.h>
@@ -129,7 +128,7 @@ void PrintfLogo()
     std::cout << "¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï" << std::endl;
     std::cout << "¡ï                                            ¡ï" << std::endl;
     std::cout << "¡ï                 NoahFrame                  ¡ï" << std::endl;
-    std::cout << "¡ï   Copyright (c) 2011-2015  NFrame Studio   ¡ï" << std::endl;
+    std::cout << "¡ï   Copyright (c) 2011-2016  NFrame Studio   ¡ï" << std::endl;
     std::cout << "¡ï             All rights reserved.           ¡ï" << std::endl;
     std::cout << "¡ï                                            ¡ï" << std::endl;
     std::cout << "¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï" << std::endl;
