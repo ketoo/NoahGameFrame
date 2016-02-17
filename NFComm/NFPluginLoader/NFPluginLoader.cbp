@@ -8,6 +8,7 @@
 		<Build>
 			<Target title="Debug x64">
 				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d" prefix_auto="0" extension_auto="1" />
+				<Option working_dir="/home/eliteyang/dev/NoahGameFrame/_Out/Server/Debug/NFGameServer1" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option use_console_runner="0" />
@@ -28,8 +29,6 @@
 				<Linker>
 					<Add option="-ldl" />
 					<Add option="-lpthread" />
-					<Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_system-gcc48-mt-s-1_53.a" />
-					<Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_thread-gcc48-mt-s-1_53.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libtherond.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
@@ -72,8 +71,6 @@
 				<Linker>
 					<Add option="-ldl" />
 					<Add option="-lpthread" />
-					<Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_system-gcc48-mt-s-1_53.a" />
-					<Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_thread-gcc48-mt-s-1_53.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libtheron.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
