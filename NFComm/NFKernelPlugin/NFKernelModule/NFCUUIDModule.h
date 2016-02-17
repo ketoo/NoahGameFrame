@@ -11,7 +11,6 @@
 
 #include <boost/crc.hpp>
 #include <boost/format.hpp>
-#include <boost/functional/hash.hpp>
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 
