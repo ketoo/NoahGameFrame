@@ -9,9 +9,6 @@
 #ifndef NFC_PACK_MODULE_H
 #define NFC_PACK_MODULE_H
 
-#include <boost/static_assert.hpp>
-#include <boost/date_time/gregorian/gregorian.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIPackModule.h"
