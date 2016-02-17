@@ -25,8 +25,6 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
 				</Compiler>
 				<Linker>
-					<Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc/libboost_filesystem-mt-s.a" />
-					<Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc/libboost_system-mt-s.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/lib/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
