@@ -33,6 +33,7 @@ public class NFConfig
     private string mnChatData = null;
     private int mnChatMinTime = 0;
     private int mnChatMaxTime = 0;
+    private String mstrRootPath = null;
 
 
     public void Load()
@@ -42,7 +43,6 @@ public class NFConfig
         xmldoc.Load("Config.xml");
         root = xmldoc.SelectSingleNode("XML");
     }
-
 
     public ArrayList GetServerList()
     {
@@ -63,9 +63,22 @@ public class NFConfig
                 aWorldList.Add(strServer);
             }
         }
-        
 
         return aWorldList;
+    }
+
+    public String GetConfigPath()
+    {
+        if (null == mstrRootPath)
+        {
+            XmlNode node = root.SelectSingleNode("ConfigPath");
+            if (null != node)
+            {
+                mstrRootPath = node.Attributes["Path"].Value;
+            }
+        }
+
+        return mstrRootPath;
     }
 
     public bool GetSelectServer(ref string strIP, ref int nPort)
