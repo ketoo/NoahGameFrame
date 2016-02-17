@@ -491,11 +491,11 @@ std::string NFCDataList::StringValEx(const int index) const
 		switch (eType)
 		{
 		case TDATA_INT:
-			strData = boost::lexical_cast<std::string> (Int(index));
+			strData = lexical_cast<std::string> (Int(index));
 			break;
 
 		case TDATA_FLOAT:
-			strData = boost::lexical_cast<std::string> (Float(index));
+			strData = lexical_cast<std::string> (Float(index));
 			break;
 
 		case TDATA_STRING:

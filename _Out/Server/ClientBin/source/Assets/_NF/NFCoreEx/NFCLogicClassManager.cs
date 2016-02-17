@@ -11,7 +11,8 @@ namespace NFCoreEx
 {
     public class NFCLogicClassManager : NFILogicClassManager
     {
-
+        private bool mbCepher = false;
+        private String mstrRootPath = null;
         #region Instance
         private static NFCLogicClassManager _Instance = null;
         public static NFCLogicClassManager Instance
@@ -21,12 +22,23 @@ namespace NFCoreEx
                 if (_Instance == null)
                 {
                     _Instance = new NFCLogicClassManager();
-                    _Instance.Load();
                 }
+
                 return _Instance;
             }
         }
         #endregion
+
+        public bool GetCepher()
+        {
+            return mbCepher;
+        }
+
+        public void LoadFromConfig(String strConfigPath)
+        {
+            mstrRootPath = strConfigPath;
+            _Instance.Load();
+        }
 
         private bool Load()
         {
@@ -34,28 +46,43 @@ namespace NFCoreEx
 
             XmlDocument xmldoc = new XmlDocument();
 
-            string strLogicPath = "../../NFDataCfg/Struct/LogicClass.NF";
+            string strLogicPath = mstrRootPath + "NFDataCfg/Struct/LogicClass.xml";
+            if (File.Exists(strLogicPath))
+            {
+                mbCepher = false;
+            }
+            else
+            {
+                strLogicPath = mstrRootPath + "NFDataCfg/Struct/LogicClass.NF";
+                mbCepher = true;
+            }
+
             ///////////////////////////////////////////////////////////////////////////////////////
-            StreamReader cepherReader = new StreamReader(strLogicPath); ;
-            string strContent = cepherReader.ReadToEnd();
-            cepherReader.Close();
+            if (mbCepher)
+            {
+                StreamReader cepherReader = new StreamReader(strLogicPath); ;
+                string strContent = cepherReader.ReadToEnd();
+                cepherReader.Close();
 
-            byte[] data = Convert.FromBase64String(strContent);
+                byte[] data = Convert.FromBase64String(strContent);
 
-            MemoryStream stream = new MemoryStream(data);
-            XmlReader x = XmlReader.Create(stream);
-            x.MoveToContent();
-            string res = x.ReadOuterXml();
+                MemoryStream stream = new MemoryStream(data);
+                XmlReader x = XmlReader.Create(stream);
+                x.MoveToContent();
+                string res = x.ReadOuterXml();
 
-            xmldoc.LoadXml(res);
+                xmldoc.LoadXml(res);
+            }
+            else
+            {
+                xmldoc.Load(strLogicPath);
+            }
             /////////////////////////////////////////////////////////////////
-
             XmlNode root = xmldoc.SelectSingleNode("XML");
 
             LoadLogicClass(root);
             LoadLogicClassProperty();
             LoadLogicClassRecord();
-            
 
             return false;
         }
@@ -161,24 +188,29 @@ namespace NFCoreEx
             NFILogicClass xLogicClass = GetElement(strName);
             if (null != xLogicClass)
             {
-                string strLogicPath = xLogicClass.GetPath();
+                string strLogicPath = mstrRootPath + xLogicClass.GetPath();
 
                 XmlDocument xmldoc = new XmlDocument();
-
-                //xmldoc.Load(strLogicPath);
                 ///////////////////////////////////////////////////////////////////////////////////////
-                StreamReader cepherReader = new StreamReader(strLogicPath); ;
-                string strContent = cepherReader.ReadToEnd();
-                cepherReader.Close();
+                if (mbCepher)
+                {
+                    StreamReader cepherReader = new StreamReader(strLogicPath); ;
+                    string strContent = cepherReader.ReadToEnd();
+                    cepherReader.Close();
 
-                byte[] data = Convert.FromBase64String(strContent);
+                    byte[] data = Convert.FromBase64String(strContent);
 
-                MemoryStream stream = new MemoryStream(data);
-                XmlReader x = XmlReader.Create(stream);
-                x.MoveToContent();
-                string res = x.ReadOuterXml();
+                    MemoryStream stream = new MemoryStream(data);
+                    XmlReader x = XmlReader.Create(stream);
+                    x.MoveToContent();
+                    string res = x.ReadOuterXml();
 
-                xmldoc.LoadXml(res);
+                    xmldoc.LoadXml(res);
+                }
+                else
+                {
+                    xmldoc.Load(strLogicPath);
+                }
                 /////////////////////////////////////////////////////////////////
 
                 XmlNode xRoot = xmldoc.SelectSingleNode("XML");
@@ -240,25 +272,30 @@ namespace NFCoreEx
             NFILogicClass xLogicClass = GetElement(strName);
             if (null != xLogicClass)
             {
-                string strLogicPath = xLogicClass.GetPath();
+                string strLogicPath = mstrRootPath + xLogicClass.GetPath();
 
                 XmlDocument xmldoc = new XmlDocument();
+                ///////////////////////////////////////////////////////////////////////////////////////
+                if (mbCepher)
+                {
+                    StreamReader cepherReader = new StreamReader(strLogicPath); ;
+                    string strContent = cepherReader.ReadToEnd();
+                    cepherReader.Close();
 
-                //xmldoc.Load(strLogicPath);
-///////////////////////////////////////////////////////////////////////////////////////
-                StreamReader cepherReader = new StreamReader(strLogicPath); ;
-                string strContent = cepherReader.ReadToEnd();
-                cepherReader.Close();
+                    byte[] data = Convert.FromBase64String(strContent);
 
-                byte[] data = Convert.FromBase64String(strContent);
+                    MemoryStream stream = new MemoryStream(data);
+                    XmlReader x = XmlReader.Create(stream);
+                    x.MoveToContent();
+                    string res = x.ReadOuterXml();
 
-                MemoryStream stream = new MemoryStream(data);
-                XmlReader x = XmlReader.Create(stream);
-                x.MoveToContent();
-                string res = x.ReadOuterXml();
-
-                xmldoc.LoadXml(res);
-/////////////////////////////////////////////////////////////////
+                    xmldoc.LoadXml(res);
+                }
+                else
+                {
+                    xmldoc.Load(strLogicPath);
+                }
+                /////////////////////////////////////////////////////////////////
                 XmlNode xRoot = xmldoc.SelectSingleNode("XML");
                 XmlNode xNodePropertys = xRoot.SelectSingleNode("Records");
                 if (null != xNodePropertys)
