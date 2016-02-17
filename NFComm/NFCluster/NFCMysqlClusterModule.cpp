@@ -26,21 +26,17 @@ NFCMysqlClusterModule::~NFCMysqlClusterModule()
 
 bool NFCMysqlClusterModule::Init()
 {
-
-
+    m_pMysqlDriverManager = NF_SHARE_PTR<NFIMysqlDriverManager> (NF_NEW NFCMysqlDriverManager());
     return true;
 }
 
 bool NFCMysqlClusterModule::Shut()
 {
-
     return true;
 }
 
 bool NFCMysqlClusterModule::AfterInit()
 {
-    m_pMysqlDriverManager = NF_SHARE_PTR<NFIMysqlDriverManager> (NF_NEW NFCMysqlDriverManager());
-
     return true;
 }
 
@@ -61,7 +57,6 @@ bool NFCMysqlClusterModule::Execute()
     return true;
 }
 
-
 bool NFCMysqlClusterModule::AddMysqlServer( const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime/* = 10*/, const int nRconneCount/* = -1*/)
 {
     if (!m_pMysqlDriverManager.get())
@@ -71,7 +66,6 @@ bool NFCMysqlClusterModule::AddMysqlServer( const int nServerID, const std::stri
 
     return m_pMysqlDriverManager->AddMysqlServer(nServerID, strDns, strIP, nPort, strDBName, strDBUser, strDBPwd, nRconnectTime, nRconneCount);
 }
-
 
 bool NFCMysqlClusterModule::Updata( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec )
 {
