@@ -36,7 +36,7 @@ bool NFCLoginNet_ServerModule::AfterInit()
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
     m_pLoginToMasterModule = pPluginManager->FindModule<NFILoginToMasterModule>("NFCLoginToMasterModule");
 	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-    
+
 
 	assert(NULL != m_pKernelModule);
 	assert(NULL != m_pLoginLogicModule);
@@ -51,20 +51,20 @@ bool NFCLoginNet_ServerModule::AfterInit()
 	if (xLogicClass.get())
 	{
 		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
-		std::string strConfigName; 
+		std::string strConfigName;
 		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
 		{
 			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
             const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
 			if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN && pPluginManager->AppID() == nServerID)
 			{
-				const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");				
+				const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
 				const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
 				const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
 
 				m_pUUIDModule->SetIdentID(nServerID);
 
-				int nRet = Initialization(this, &NFCLoginNet_ServerModule::OnReciveClientPack, &NFCLoginNet_ServerModule::OnSocketClientEvent, nMaxConnect, nPort, nCpus);		
+				int nRet = Initialization(this, &NFCLoginNet_ServerModule::OnReciveClientPack, &NFCLoginNet_ServerModule::OnSocketClientEvent, nMaxConnect, nPort, nCpus);
                 if (nRet < 0)
                 {
                     std::ostringstream strLog;
@@ -76,7 +76,7 @@ bool NFCLoginNet_ServerModule::AfterInit()
 			}
 		}
 	}
-	
+
 	return true;
 }
 
@@ -134,7 +134,7 @@ int NFCLoginNet_ServerModule::OnLoginProcess(const int nSockIndex, const int nMs
 	{
 		return 0;
 	}
-    
+
     NetObject* pNetObject = GetNet()->GetNetObject(nSockIndex);
     if (pNetObject)
     {
@@ -163,13 +163,14 @@ int NFCLoginNet_ServerModule::OnLoginProcess(const int nSockIndex, const int nMs
 			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "Login successed :", xMsg.account().c_str());
         }
     }
-	
-		
+
+
 	return 0;
 }
 
 int NFCLoginNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "recv SelectWorld msg", "", __FUNCTION__, __LINE__);
 	NFGUID nPlayerID;
 	NFMsg::ReqConnectWorld xMsg;
 	if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
@@ -196,7 +197,7 @@ int NFCLoginNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const i
 	xData.set_account(pNetObject->GetAccount());
 
 	m_pLoginToMasterModule->SendSuitByPB(NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xData);
-	
+
 	return 0;
 }
 
@@ -218,7 +219,7 @@ void NFCLoginNet_ServerModule::OnReciveClientPack(const int nSockIndex, const in
 	case NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD:
 		OnSelectWorldProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
-		
+
 	case NFMsg::EGameMsgID::EGMI_REQ_WORLD_LIST:
 		OnViewWorldProcess(nSockIndex, nMsgID, msg, nLen);
 		break;
@@ -237,12 +238,12 @@ void NFCLoginNet_ServerModule::OnReciveClientPack(const int nSockIndex, const in
 
 void NFCLoginNet_ServerModule::OnSocketClientEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
-    if (eEvent & NF_NET_EVENT_EOF) 
+    if (eEvent & NF_NET_EVENT_EOF)
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
-    } 
-    else if (eEvent & NF_NET_EVENT_ERROR) 
+    }
+    else if (eEvent & NF_NET_EVENT_ERROR)
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
@@ -277,7 +278,7 @@ void NFCLoginNet_ServerModule::SynWorldToClient( const int nFD )
 
 		pWorldData = xWorldMap.NextNude();
 	}
-    
+
 
     SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_WORLD_LIST, xData, nFD);
 }
