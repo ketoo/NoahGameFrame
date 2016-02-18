@@ -121,10 +121,10 @@ void InitDaemon()
 void PrintfLogo()
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
-    std::cout << "\n" << std::endl;
-
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-
+#endif
+    
+    std::cout << "\n" << std::endl;
     std::cout << "¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï" << std::endl;
     std::cout << "¡ï                                            ¡ï" << std::endl;
     std::cout << "¡ï                 NoahFrame                  ¡ï" << std::endl;
@@ -132,10 +132,10 @@ void PrintfLogo()
     std::cout << "¡ï             All rights reserved.           ¡ï" << std::endl;
     std::cout << "¡ï                                            ¡ï" << std::endl;
     std::cout << "¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï" << std::endl;
-
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-
     std::cout << "\n" << std::endl;
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 #endif // NF_PLATFORM
 }
 
