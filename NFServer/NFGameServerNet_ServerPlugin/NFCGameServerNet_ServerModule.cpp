@@ -260,8 +260,6 @@ void NFCGameServerNet_ServerModule::OnClientConnected( const int nAddress )
 
 void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "recv enter game msg", "", __FUNCTION__, __LINE__);
-
 	//在进入游戏之前nPlayerID为其在网关的FD
 	NFGUID nClientID;
 	NFMsg::ReqEnterGameServer xMsg;
