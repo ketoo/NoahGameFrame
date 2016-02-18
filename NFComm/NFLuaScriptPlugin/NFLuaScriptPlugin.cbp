@@ -24,11 +24,11 @@
 					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
 				</Compiler>
 				<Linker>
-					<Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc/libboost_filesystem-mt-s.a" />
-					<Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc/libboost_system-mt-s.a" />
+					<!-- <Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc/libboost_filesystem-mt-s.a" /> -->
+					<!-- <Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc/libboost_system-mt-s.a" /> -->
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/lib/Debug/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
+					<!-- <Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" /> -->
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFLuaScriptPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFLoginServer/" />
@@ -67,7 +67,7 @@
 				<Linker>
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/lib/Release/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
+					<!-- <Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" /> -->
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFLuaScriptPlugin.so $(SolutionDir)/_Out/Server/Release/NFLoginServer/" />
