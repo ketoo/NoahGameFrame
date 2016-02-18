@@ -31,7 +31,7 @@
 					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFCore_d.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
+					<!-- <Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" /> -->
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/Tutorial2_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial2/" />
@@ -63,7 +63,7 @@
 				<Linker>
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
+					<!-- <Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" /> -->
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/Tutorial2.so $(SolutionDir)/_Out/Server/Release/Tutorial2/" />

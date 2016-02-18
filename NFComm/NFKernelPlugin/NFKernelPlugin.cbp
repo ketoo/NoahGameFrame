@@ -27,7 +27,7 @@
 					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFCore_d.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/lib/Debug/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
+					<!-- <Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" /> -->
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFKernelPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFLoginServer/" />
@@ -66,7 +66,7 @@
 					<Add library="$(SolutionDir)/_Out/Comm/Release/NFCore.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/lib/Release/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
+					<!-- <Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" /> -->
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFKernelPlugin.so $(SolutionDir)/_Out/Server/Release/NFLoginServer/" />
