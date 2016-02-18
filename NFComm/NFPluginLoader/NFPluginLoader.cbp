@@ -8,7 +8,7 @@
 		<Build>
 			<Target title="Debug x64">
 				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d" prefix_auto="0" extension_auto="1" />
-				<Option working_dir="/home/eliteyang/dev/NoahGameFrame/_Out/Server/Debug/NFGameServer1" />
+				<Option working_dir="." />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option use_console_runner="0" />
@@ -32,7 +32,7 @@
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libtherond.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
+					<!-- <Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" /> -->
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d $(SolutionDir)/_Out/Server/Debug/NFLoginServer/" />
@@ -52,7 +52,7 @@
 				</Environment>
 			</Target>
 			<Target title="Release x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Release/NFPluginLoader" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r" prefix_auto="0" extension_auto="1" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option use_console_runner="0" />
@@ -74,19 +74,19 @@
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libtheron.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
+					<!-- <Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" /> -->
 				</Linker>
 				<ExtraCommands>
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/NFLoginServer/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/NFWorldServer/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/NFMasterServer/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/NFProxyServer1/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/NFGameServer1/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/Tutorial1/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/Tutorial2/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/Tutorial3/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/Tutorial4/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/Tutorial5/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/NFLoginServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/NFWorldServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/NFMasterServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/NFProxyServer1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/NFGameServer1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/Tutorial1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/Tutorial2/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/Tutorial3/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/Tutorial4/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/Tutorial5/" />
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
