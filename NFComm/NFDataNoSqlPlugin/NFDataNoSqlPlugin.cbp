@@ -28,7 +28,7 @@
 				<Linker>
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/lib/Deubg/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
+					<!-- <Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" /> -->
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFDataNoSqlPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFLoginServer/" />
@@ -65,7 +65,7 @@
 				<Linker>
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/lib/Release/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
+					<!-- <Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" /> -->
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFDataNoSqlPlugin.so $(SolutionDir)/_Out/Server/Release/NFLoginServer/" />
