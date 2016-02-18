@@ -144,11 +144,14 @@ int NFCLoginNet_ServerModule::OnLoginProcess(const int nSockIndex, const int nMs
 			int nState = m_pLoginLogicModule->OnLoginProcess(pNetObject->GetClientID(), xMsg.account(), xMsg.password());
 			if (0 != nState)
 			{
+                std::ostringstream strLog;
+                strLog << "Check password failed, Account = " << xMsg.account() << " Password = " << xMsg.password();
+                m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nSockIndex), strLog, __FUNCTION__, __LINE__);
+
 				NFMsg::AckEventResult xMsg;
 				xMsg.set_event_code(NFMsg::EGEC_ACCOUNTPWD_INVALID);
 
 				SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xMsg, nSockIndex);
-
 				return 0;
 			}
 
