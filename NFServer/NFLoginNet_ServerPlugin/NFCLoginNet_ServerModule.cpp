@@ -170,7 +170,6 @@ int NFCLoginNet_ServerModule::OnLoginProcess(const int nSockIndex, const int nMs
 
 int NFCLoginNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "recv SelectWorld msg", "", __FUNCTION__, __LINE__);
 	NFGUID nPlayerID;
 	NFMsg::ReqConnectWorld xMsg;
 	if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))

@@ -1589,7 +1589,6 @@ public:
         }
 #else
         ::gettimeofday(tv, nullptr);
-        tv->tv_sec += 8 * 3600; // set timezone +8
 #endif  // ELPP_OS_WINDOWS
     }
 
