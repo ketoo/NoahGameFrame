@@ -16,20 +16,15 @@ chmod -R 777  NFPluginLoader_r
 ./NFPluginLoader_r &
 cd ../
 
-
-
 cd ./NFGameServer1
 chmod -R 777  NFPluginLoader_r 
 ./NFPluginLoader_r &
 cd ../
 
-
 cd ./NFProxyServer1
 chmod -R 777  NFPluginLoader_r 
 ./NFPluginLoader_r &
 cd ../
-
-
 
 
 ps -A|grep NF

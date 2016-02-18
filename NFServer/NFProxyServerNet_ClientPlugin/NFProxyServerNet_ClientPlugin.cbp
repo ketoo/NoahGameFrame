@@ -36,7 +36,7 @@
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libprotobuf.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc/" />
+					<!-- <Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc/" /> -->
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFProxyServerNet_ClientPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFProxyServer1/" />
@@ -74,7 +74,7 @@
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libprotobuf.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc/" />
+					<!-- <Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc/" /> -->
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFProxyServerNet_ClientPlugin.so $(SolutionDir)/_Out/Server/Release/NFProxyServer1/" />
