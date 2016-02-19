@@ -1,6 +1,6 @@
 @echo off
 
-rem first extract the mysql-connector-c to "C:\Program Files\MySQL\MySQL Connector C 6.1"
+rem extract the mysql-connector-c to "C:\Program Files\MySQL\MySQL Connector C 6.1"
 rem you can find all the zip file from tar folder
 
 echo "***************************************************************************"
@@ -9,11 +9,16 @@ echo "********************Current only debug mode for windows*******************
 echo 
 echo "***************************************************************************"
 
-rem ************************check build environment******************************************
+rem ************************check build environment***************************************
 if not "%Platform%" == "X64" (
 	echo Please use the Visual Studio x64 command prompt Shell
 	goto exit
 )
+
+
+rem ************************create dirs***************************************
+md lib\Debug
+md lib\Release
 
 
 rem ************************copy the mysql C lib******************************************
@@ -101,6 +106,10 @@ if %ERRORLEVEL%==1 goto exit
 echo Build eval boost ...
 
 cd boost
+if not exist bootstrap.bat (
+	echo "Please extract boost lib ."
+	goto exit
+)
 call bootstrap.bat
 .\b2 --toolset=msvc-12.0 link=static
 
