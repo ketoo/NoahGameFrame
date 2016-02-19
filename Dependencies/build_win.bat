@@ -17,16 +17,33 @@ if not "%Platform%" == "X64" (
 
 
 rem ************************create dirs***************************************
-md boost
-md curl
-md gperftools
-md lib\Debug
-md lib\Release
-md libevent
-md mysqlpp
-md protobuf
-md Theron
-
+if not exist boost (
+	md boost
+)
+if not exist curl (
+	md curl
+)
+if not exist gperftools (
+	md gperftools
+)
+if not exist lib\Debug (
+	md lib\Debug
+)
+if not exist lib\Release (
+	md lib\Release
+)
+if not exist libevent (
+	md libevent
+)
+if not exist mysqlpp (
+	md mysqlpp
+)
+if not exist protobuf (
+	md protobuf
+)
+if not exist Theron (
+	md Theron
+)
 
 rem ************************copy the mysql C lib******************************************
 echo Check and copy mysql-connector-c from C:\Program Files\MySQL\MySQL Connector C 6.1
