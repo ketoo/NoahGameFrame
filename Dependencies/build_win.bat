@@ -17,8 +17,15 @@ if not "%Platform%" == "X64" (
 
 
 rem ************************create dirs***************************************
+md boost
+md curl
+md gperftools
 md lib\Debug
 md lib\Release
+md libevent
+md mysqlpp
+md protobuf
+md Theron
 
 
 rem ************************copy the mysql C lib******************************************
