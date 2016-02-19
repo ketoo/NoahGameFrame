@@ -1,6 +1,8 @@
 # NoahGameFrame
 ##### Copyright © http://www.noahframe.com
 
+[![Join the chat at https://gitter.im/ketoo/NoahGameFrame](https://badges.gitter.im/ketoo/NoahGameFrame.svg)](https://gitter.im/ketoo/NoahGameFrame?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 #####交流QQ群：341159815
 
 ## What is it?
