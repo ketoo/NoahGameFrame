@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------
 
 #include "NFCUrlClientModule.h"
-#include "Dependencies/curl-7.37.1/include/curl/curl.h"
+#include "curl/curl.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIUrlCodeModule.h"
 #include "NFComm/NFMessageDefine/NFMsgURl.pb.h"
