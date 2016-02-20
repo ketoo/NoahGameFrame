@@ -12,7 +12,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <boost/random.hpp>
+#include <random>
 #include "NFComm/NFCore/NFIObject.h"
 #include "NFComm/NFCore/NFIDataList.h"
 #include "NFComm/NFCore/NFIRecord.h"

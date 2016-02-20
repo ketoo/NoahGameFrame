@@ -48,55 +48,45 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 
 ## Dependencies
 
-Need build sub librares:
-
-- Boost.System
-- Boost.Chrono
-- Boost.Thread
-- libevent-2.0.21-stable
-- protobuf-2.5.0
-- redis-cplusplus-client
-- Theron-6.00.01
-- easylogging++
+- libevent 2.0.22
+- easylogging++ 9.80
+- mysql++ 3.2.2
+- google protobuf 2.5.0
+- pybind11 1.2
+- redis-cpp-client 
+- Theron 6.00.01
+- curl 7.37.1
 
 ## Supported Compilers
 
 * GCC >= 4.8
-* VC >= 9.0 (sp1)
+* MSVC >= VS2013
 
 ## Build and Install
-### Windows[VS2012]
+### Windows[MSVC >= 2013]
 
-1. Download all source;
-2. Extract nessasery lib: 	**Dependencies/boost_1_53_0.zip** to **Dependencies/**
-3. Extract nessasery lib: 	**Dependencies/lib.zip** to **Dependencies/**
-4. Extract nessasery lib: 	**Dependencies/gperftools-2.1.zip** to **Dependencies/**
-5. Extract nessasery lib: 	**Dependencies/curl-7.37.1.zip** to **Dependencies/**
-6. Open the solution: **NoahFrame.sln**
-7. Build the solution
-8. Copy files: 	**/Dependencies/lib/Debug/ libmysql.dll mysqlpp_d.dll 	to **_Out/Server/Debug/NFGameServer1/**
-9. Copy files: 	**/Dependencies/lib/Debug/ libmysql.dll mysqlpp.dll 	to **_Out/Server/Release/NFGameServer1/**
-10. Copy files: **/Dependencies/lib/Debug/ libmysql.dll mysqlpp_d.dll 	to **_Out/Server/Debug/NFLoginServer/**
-11. Copy files: **/Dependencies/lib/Debug/ libmysql.dll mysqlpp.dll 	to **_Out/Server/Release/NFLoginServer/**
-12. Copy files: **/Dependencies/lib/Debug/ libmysql.dll mysqlpp_d.dll 	to **_Out/Server/Debug/NFWorldServer/**
-13. Copy files: **/Dependencies/lib/Debug/ libmysql.dll mysqlpp.dll 	to **_Out/Server/Release/NFWorldServer/**
-14. Run the binary file by **_Out/Server/Debug/Run.bat**
+1. git pull all source
+2. Run **install.bat**
+3. Open the solution: **NoahFrame.sln**
+4. Build the solution
+5. Copy files: 	**Dependencies/lib/Debug/ libmysql.dll mysqlpp_d.dll** to 
+	- **_Out/Server/Debug/NFGameServer1/**
+	- **_Out/Server/Release/NFGameServer1/**
+	- **_Out/Server/Debug/NFLoginServer/**
+	- **_Out/Server/Release/NFLoginServer/**
+	- **_Out/Server/Debug/NFWorldServer/**
+	- **_Out/Server/Release/NFWorldServer/**
+6. Run the binary file by **_Out/Server/Debug/Run.bat**
 
-### Windows[VS2015]
-[Click to view](https://github.com/NFGameTeam/NFrame_VS2015_Dep)
+### Linux[CodeBlocks >= 13.1]
 
-### Linux[CodeBlock 13.1]
-
-1. Download all source;
-2. Extract nessasery lib: **Dependencies/boost_1_53_0.zip** to **Dependencies/**
-3. Extract nessasery lib: 	**Dependencies/lib.zip** to **Dependencies/**
-4. Extract nessasery lib: 	**Dependencies/gperftools-2.1.zip** to **Dependencies/**
-5. Extract nessasery lib: 	**Dependencies/curl-7.37.1.zip** to **Dependencies/**
-6. Open the solution with CodeBlocks: **NF.workspace**
-7. Add **c++11** optional for every project of this solution
-8. Build library: **NFNet, NFCore, NFEventTriggerPlugin, NFKernelPlugin, Theron, libprotocolbuf[libprotocolbuf-lite], NFLogPlugin, NFPluginLoader**
-9. Build all other plugin
-10. Run the binary file by **_Out/Server/Debug/Run.sh**
+1. git pull all source
+2. Run **install.sh**
+3. Open the solution with CodeBlocks: **NF.workspace**
+4. Add **C++11** optional in CodeBlocks compiling setting
+5. Build **NF.workspace**
+6. Build all other plugin
+7. Run the binary file by **_Out/Server/Debug/rund.sh**
 
 
 ### JAVA Project
