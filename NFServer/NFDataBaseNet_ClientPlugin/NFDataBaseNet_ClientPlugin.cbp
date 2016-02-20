@@ -22,18 +22,17 @@
 					<Add option="-DELPP_NO_DEFAULT_LOG_FILE" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
-					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/protobuf/src/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 					<Add directory="$(SolutionDir)/Dependencies/mysql/" />
 				</Compiler>
 				<Linker>
-					<Add library="../../_Out/Comm/Debug/NFCore_d.a" />
-					<Add library="../../_Out/Comm/Debug/NFMessageDefine_d.a" />
-					<Add library="../../Dependencies/lib/Debug/libprotobuf.a" />
+					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFCore_d.a" />
+					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFMessageDefine_d.a" />
+					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libprotobuf.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 				</Linker>
@@ -68,18 +67,17 @@
 					<Add option="-DELPP_NO_DEFAULT_LOG_FILE" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
-					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/protobuf/src/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 					<Add directory="$(SolutionDir)/Dependencies/mysql/" />
 				</Compiler>
 				<Linker>
-					<Add library="../../_Out/Comm/Release/NFCore.a" />
-					<Add library="../../_Out/Comm/Release/NFMessageDefine.a" />
-					<Add library="../../Dependencies/lib/Release/libprotobuf.a" />
+					<Add library="$(SolutionDir)/_Out/Comm/Release/NFCore.a" />
+					<Add library="$(SolutionDir)/_Out/Comm/Release/NFMessageDefine.a" />
+					<Add library="$(SolutionDir)/Dependencies/lib/Release/libprotobuf.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
 				</Linker>
