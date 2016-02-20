@@ -404,7 +404,8 @@ bool NFCRecord::SetInt(const int nRow, const int nCol, const NFINT64 value)
     //还要把以前的key的内容删除
     if (IsKey(nCol))
     {
-        NFINT64 nOldValue = boost::get<NFINT64>(pVar->variantData);
+        //NFINT64 nOldValue = boost::get<NFINT64>(pVar->variantData);
+        NFINT64 nOldValue = pVar->variantData.get<NFINT64>();
         mxIntKeyMap.erase(nOldValue);
 
         if (mxIntKeyMap.find(value) != mxIntKeyMap.end())
@@ -522,7 +523,8 @@ bool NFCRecord::SetString(const int nRow, const int nCol, const char* value)
     //还要把以前的key的内容删除
     if (IsKey(nCol))
     {
-        std::string& strOldValue = boost::get<std::string>(pVar->variantData);
+        //std::string& strOldValue = boost::get<std::string>(pVar->variantData);
+        std::string& strOldValue = pVar->variantData.get<std::string>();
         mxStringKeyMap.erase(strOldValue);
 
         if (mxStringKeyMap.find(value) != mxStringKeyMap.end())
@@ -588,7 +590,8 @@ bool NFCRecord::SetObject(const int nRow, const int nCol, const NFGUID& value)
     //还要把以前的key的内容删除
     if (IsKey(nCol))
     {
-        NFGUID xOldValue = boost::get<NFGUID>(pVar->variantData);
+        //NFGUID xOldValue = boost::get<NFGUID>(pVar->variantData);
+        NFGUID xOldValue = pVar->variantData.get<NFGUID>();
         mxObjectKeyMap.erase(xOldValue);
 
         if (mxObjectKeyMap.find(value) != mxObjectKeyMap.end())
