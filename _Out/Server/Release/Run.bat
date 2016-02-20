@@ -2,6 +2,17 @@ cd /d %~dp0
 
 @echo off
 
+copy ..\\..\\..\\Dependencies\\lib\\Release\\libmysql.dll NFGameServer1\\ /Y
+copy ..\\..\\..\\Dependencies\\lib\\Release\\libmysql.dll NFLoginServer\\ /Y
+copy ..\\..\\..\\Dependencies\\lib\\Release\\libmysql.dll NFMasterServer\\ /Y
+copy ..\\..\\..\\Dependencies\\lib\\Release\\libmysql.dll NFProxyServer1\\ /Y
+copy ..\\..\\..\\Dependencies\\lib\\Release\\libmysql.dll NFWorldServer\\ /Y
+
+copy ..\\..\\..\\Dependencies\\lib\\Release\\mysqlpp.dll NFGameServer1\\ /Y
+copy ..\\..\\..\\Dependencies\\lib\\Release\\mysqlpp.dll NFLoginServer\\ /Y
+copy ..\\..\\..\\Dependencies\\lib\\Release\\mysqlpp.dll NFMasterServer\\ /Y
+copy ..\\..\\..\\Dependencies\\lib\\Release\\mysqlpp.dll NFProxyServer1\\ /Y
+copy ..\\..\\..\\Dependencies\\lib\\Release\\mysqlpp.dll NFWorldServer\\ /Y
 
 cd  NFMasterServer
 
