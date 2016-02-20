@@ -20,15 +20,15 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
 #if NF_PLATFORM == NF_PLATFORM_LINUX
+#include <unistd.h>
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <signal.h>
 #endif
 
-#pragma comment( lib, "DbgHelp" )
-
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
+#pragma comment( lib, "DbgHelp" )
 // 创建Dump文件
 void CreateDumpFile(const std::string& strDumpFilePathName, EXCEPTION_POINTERS* pException)
 {
@@ -123,7 +123,7 @@ void PrintfLogo()
 #if NF_PLATFORM == NF_PLATFORM_WIN
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 #endif
-    
+
     std::cout << "\n" << std::endl;
     std::cout << "★★★★★★★★★★★★★★★★★★★★★★★★" << std::endl;
     std::cout << "★                                            ★" << std::endl;
