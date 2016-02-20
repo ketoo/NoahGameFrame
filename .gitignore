@@ -32,3 +32,5 @@
 /_Out/Comm/Debug/*.ilk
 /_Out/Comm/Debug/*.bsc
 /_Out/Comm/Debug/*.pdb
+/Dependencies/libevent
+/Dependencies/curl
