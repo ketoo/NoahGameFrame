@@ -65,18 +65,19 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 ## Build and Install
 ### Windows[MSVC >= 2013]
 
-1. git pull all source
+1. Git pull all source
 2. Run **install.bat**
 3. Open the solution: **NoahFrame.sln**
 4. Build the solution
-5. Run the binary file by **_Out/Server/Debug/Run.bat**
+5. Run **_Out/Server/NFDataCfg/Tool/FileProcess.exe** to generate configuration files
+6. Run the binary file by **_Out/Server/Debug/Run.bat**
 
 ### Linux[CodeBlocks >= 13.1]
 
-1. git pull all source
+1. Git pull all source
 2. Run **install.sh**
 3. Open the solution with CodeBlocks: **NF.workspace**
-4. Check **C++11** optional in CodeBlocks compiler setting
+4. Check **C++11** option in CodeBlocks compiler setting
 5. Build **NF.workspace**
 6. Run the binary file by **_Out/Server/Debug/rund.sh**
 
