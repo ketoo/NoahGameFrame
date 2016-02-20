@@ -10,14 +10,14 @@
 NF is a lightweight, fast, scalable, distributed plugin framework.Greatly inspired by OGRE and Bigworld.
 
 ## Features
-*  it is easy to use interface oriented design minimise the effort
-*  extensible plugin framework makes getting your application running is quick and simple
-*  clean, uncluttered design, stable engine used in several commercial products
-*  using the actor model has very high performance(by theron);</p>
-*  based on the event-driven and attribute-driver can make business more clearly and easy to maintenance
-*  based on the standard c + + development, cross-platform support
-*  with existing c++, c# game client for rapid development
-*  Cross-platform
+- Easy to use interface oriented design minimise the effort
+- Extensible plugin framework makes getting your application running is quick and simple
+- Clean, uncluttered design, stable engine used in several commercial products
+- Using the actor model has very high performance(by Theron)
+- Based on the event-driven and attribute-driver can make business more clearly and easy to maintenance
+- Based on the standard c + + development, cross-platform support
+- With existing c++, c# game client for rapid development
+- Cross-platform
 
 
 ## Introduction
@@ -59,8 +59,8 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 
 ## Supported Compilers
 
-* GCC >= 4.8
-* MSVC >= VS2013
+* GCC >= 4.8 (**Tested in Ubuntu 15.04**)
+* MSVC >= VS2013 (**Tested in Win7/10**)
 
 ## Build and Install
 ### Windows[MSVC >= 2013]
