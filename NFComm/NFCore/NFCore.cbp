@@ -19,8 +19,7 @@
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
 					<Add directory="$(SolutionDir)" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
 				</Compiler>
 				<Linker>
@@ -42,8 +41,7 @@
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
 					<Add directory="$(SolutionDir)" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
 				</Compiler>
 				<Environment>
