@@ -1,19 +1,6 @@
-// -------------------------------------------------------------------------
-//    @FileName      :    NFCKernelModule.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2012-12-15
-//    @Module           :    NFCKernelModule
-//    @Desc             :
-// -------------------------------------------------------------------------
-
-#include <time.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <cstdlib>
-#include <functional>
 #include "NFCKernelModule.h"
 #include "NFComm/NFCore/NFDefine.h"
-#include "NFComm/NFCore/NFIObject.h"
+#include "NFComm/NFCore/NFCObject.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
@@ -38,13 +25,14 @@ void NFCKernelModule::InitRandom()
 
 	int nRandomMax = 100000;
 	mnRandomPos = 0;
-	boost::uniform_real<> distribution(0, 1.0f) ;
-	boost::mt19937 engine ;
-	boost::variate_generator<boost::mt19937, boost::uniform_real<> > myrandom(engine, distribution);
+
+    std::random_device rd;
+	std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(0, 1.0f);
 
 	for (int i = 0; i < nRandomMax; i++)
 	{
-		mvRandom.push_back(myrandom());
+		mvRandom.push_back(dis(gen));
 	}
 }
 
@@ -316,7 +304,7 @@ bool NFCKernelModule::DestroyObject(const NFGUID& self)
 	if (pContainerInfo.get())
 	{
 		const std::string& strClassName = GetPropertyString(self, "ClassName");
-        
+
         pContainerInfo->RemoveObjectFromGroup(nGroupID, self, strClassName == "Player" ? true : false);
 
 		DoEvent(self, strClassName, COE_BEFOREDESTROY, NFCDataList());

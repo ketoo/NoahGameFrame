@@ -78,7 +78,7 @@ bool HelloWorld5Module::AfterInit()
 	{
 		int nActorID = pPluginManager->GetActorManager()->RequireActor<NFCTestComponent>(this, &HelloWorld5Module::OnSyncEvent);
 
-		pPluginManager->GetActorManager()->SendMsgToActor(nActorID, NFGUID(), 555, boost::lexical_cast<std::string>(i));
+		pPluginManager->GetActorManager()->SendMsgToActor(nActorID, NFGUID(), 555, lexical_cast<std::string>(i));
 	}
 
     std::cout << "End Test Actor, ThreadID: " << std::this_thread::get_id() << std::endl;
