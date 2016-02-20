@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------
 
 #include "NFCUrlClientModule.h"
-#include "Dependencies/curl-7.37.1/include/curl/curl.h"
+#include "Dependencies/curl/include/curl/curl.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIUrlCodeModule.h"
 #include "NFComm/NFMessageDefine/NFMsgURl.pb.h"
@@ -287,7 +287,8 @@ int NFCUrlClientModule::HttpRequestAsyEnd(const NFGUID& self, const int nFormAct
         return -2;
     }
 
-    if (pReqData->mFunRsp._Empty())
+    // std::function ÓÐÖØÔØoperator bool
+    if (pReqData->mFunRsp)
     {
         return -3;
     }

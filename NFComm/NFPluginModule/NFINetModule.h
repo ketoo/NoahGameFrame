@@ -307,7 +307,7 @@ public:
 		if (!xData.SerializeToString(xMsg.mutable_msg_data()))
 		{
 			char szData[MAX_PATH] = { 0 };
-			NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For Serialize of MsgData, MessageID: %d\n", nMsgID);
+			NFSPRINTF(szData, MAX_PATH, "Send Message to all Failed For Serialize of MsgData, MessageID: %d\n", nMsgID);
 
 			return false;
 		}
@@ -319,7 +319,7 @@ public:
 		if(!xMsg.SerializeToString(&strMsg))
 		{
 			char szData[MAX_PATH] = { 0 };
-			NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For Serialize of MsgBase, MessageID: %d\n", nMsgID);
+			NFSPRINTF(szData, MAX_PATH, "Send Message to all Failed For Serialize of MsgBase, MessageID: %d\n", nMsgID);
 
 			return false;
 		}
