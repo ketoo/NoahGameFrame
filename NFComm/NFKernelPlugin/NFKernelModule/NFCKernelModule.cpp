@@ -25,13 +25,14 @@ void NFCKernelModule::InitRandom()
 
 	int nRandomMax = 100000;
 	mnRandomPos = 0;
-	boost::uniform_real<> distribution(0, 1.0f) ;
-	boost::mt19937 engine ;
-	boost::variate_generator<boost::mt19937, boost::uniform_real<> > myrandom(engine, distribution);
+    
+    std::random_device rd;
+	std::mt19937 gen(rd());
+    std::uniform_real<> dis(0, 1.0f);
 
 	for (int i = 0; i < nRandomMax; i++)
 	{
-		mvRandom.push_back(myrandom());
+		mvRandom.push_back(dis(gen));
 	}
 }
 
