@@ -13,7 +13,6 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include <boost/lexical_cast.hpp>
 
 struct NFGUID
 {
@@ -93,7 +92,7 @@ struct NFGUID
 
     std::string ToString() const
     {
-        return boost::lexical_cast<std::string>(nHead64) + "-" + boost::lexical_cast<std::string>(nData64);
+        return lexical_cast<std::string>(nHead64) + "-" + lexical_cast<std::string>(nData64);
     }
 
 	bool FromString(const std::string& strID)
@@ -114,8 +113,8 @@ struct NFGUID
 
         try
         {
-            nHead64 = boost::lexical_cast<NFINT64>(strHead);
-            nData64 = boost::lexical_cast<NFINT64>(strData);
+            nHead64 = lexical_cast<NFINT64>(strHead);
+            nData64 = lexical_cast<NFINT64>(strData);
 
             return true;
         }

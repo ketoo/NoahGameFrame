@@ -44,7 +44,7 @@
 #include <unistd.h>
 #endif
 
-#include "../NFPluginModule/NFGUID.h"
+#include "NFComm/NFPluginModule/NFGUID.h"
 
 #pragma pack(push, 1)
 
@@ -316,7 +316,7 @@ public:
     void SetGameID(const int nData)
     {
         mnGameID = nData;
-    }    
+    }
     const NFGUID& GetUserID()
     {
         return mnUserID;

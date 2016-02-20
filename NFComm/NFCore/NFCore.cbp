@@ -19,8 +19,8 @@
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
 					<Add directory="$(SolutionDir)" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(BOOST_LIB)" />
@@ -41,19 +41,22 @@
 					<Add option="-D_X64" />
 					<Add option="-DNDEBUG" />
 					<Add directory="$(SolutionDir)" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/" />
 				</Compiler>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
 			</Target>
 		</Build>
+		<Unit filename="NFCAddConsistentHash.hpp" />
 		<Unit filename="NFCComponentManager.cpp" />
 		<Unit filename="NFCComponentManager.h" />
 		<Unit filename="NFCConsistentHash.hpp" />
 		<Unit filename="NFCDataList.cpp" />
 		<Unit filename="NFCDataList.h" />
+		<Unit filename="NFCEventManager.cpp" />
+		<Unit filename="NFCEventManager.h" />
 		<Unit filename="NFCHeartBeatManager.cpp" />
 		<Unit filename="NFCHeartBeatManager.h" />
 		<Unit filename="NFCMemManger.cpp" />
@@ -74,6 +77,7 @@
 		<Unit filename="NFIComponent.h" />
 		<Unit filename="NFIComponentManager.h" />
 		<Unit filename="NFIDataList.h" />
+		<Unit filename="NFIEventManager.h" />
 		<Unit filename="NFIHeartBeatManager.h" />
 		<Unit filename="NFIMemory.h" />
 		<Unit filename="NFIObject.h" />
@@ -88,6 +92,7 @@
 		<Unit filename="NFSingleton.h" />
 		<Unit filename="NFTimer.cpp" />
 		<Unit filename="NFTimer.h" />
+		<Unit filename="ReadMe.txt" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -24,7 +24,7 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
 	m_pProxyServerToGameModule = pPluginManager->FindModule<NFIProxyServerToGameModule>("NFCProxyServerToGameModule");
-	
+
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pProxyToWorldModule);
@@ -37,7 +37,7 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
 	if (xLogicClass.get())
 	{
 		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
-		std::string strConfigName; 
+		std::string strConfigName;
 		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
 		{
 			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
@@ -122,6 +122,7 @@ int NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const int nSockIndex, co
 
 void NFCProxyServerNet_ServerModule::OnReciveClientPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
+    m_pLogModule->LogNormal(NFILogModule::NLL_WARING_NORMAL, NFGUID(0, nSockIndex), "BeginMsg:", nMsgID, __FUNCTION__, __LINE__ );
     //看他连接在哪个gs，然后转发
     switch (nMsgID)
     {
@@ -164,21 +165,22 @@ void NFCProxyServerNet_ServerModule::OnReciveClientPack(const int nSockIndex, co
                 //没验证key，没选择服务器
                 break;
             }
-			
+
 			m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), nSockIndex, nMsgID, msg, nLen);
         }
         break;
     }
+    m_pLogModule->LogNormal(NFILogModule::NLL_WARING_NORMAL, NFGUID(0, nSockIndex), "EndMsg:", nMsgID, __FUNCTION__, __LINE__ );
 }
 
 void NFCProxyServerNet_ServerModule::OnSocketClientEvent( const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet )
 {
-    if (eEvent & NF_NET_EVENT_EOF) 
+    if (eEvent & NF_NET_EVENT_EOF)
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
-    } 
-    else if (eEvent & NF_NET_EVENT_ERROR) 
+    }
+    else if (eEvent & NF_NET_EVENT_ERROR)
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
@@ -260,7 +262,7 @@ int NFCProxyServerNet_ServerModule::OnSelectServerProcess(const int nSockIndex, 
     NFMsg::AckEventResult xSendMsg;
     xSendMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SELECTSERVER_FAIL);
     SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, nSockIndex);
-    
+
     return 0;
 }
 

@@ -12,7 +12,7 @@
 #include "NFCElementInfoModule.h"
 #include "NFCLogicClassModule.h"
 
-bool NFCLogicClassModule::bCipher = true;
+bool NFCLogicClassModule::bCipher = false;
 bool NFCLogicClassModule::Init()
 {
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
@@ -37,15 +37,15 @@ NFCLogicClassModule::NFCLogicClassModule(NFIPluginManager* p)
 
     pPluginManager = p;
 
-    // 判断 *.NF 是否存在，如果不存在，用 *.xml
-    msConfigFileName = "NFDataCfg/Struct/LogicClass.NF";
-    bCipher = true;
+    // 判断 *.xml 是否存在，如果不存在，用 *.NF
+    msConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
+    bCipher = false;
     std::fstream file;
     file.open(pPluginManager->GetConfigPath() + msConfigFileName, std::ios::in);
     if (!file)
     {
-        msConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
-        bCipher = false;
+        msConfigFileName = "NFDataCfg/Struct/LogicClass.NF";
+        bCipher = true;
     }
 
     std::cout << "Using [" << pPluginManager->GetConfigPath() + msConfigFileName << "]" << std::endl;
@@ -115,11 +115,11 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
                 pstrRelationValue = pPropertyNode->first_attribute("RelationValue")->value();
             }
 
-            bool bPublic = boost::lexical_cast<bool>(pstrPublic);
-            bool bPrivate = boost::lexical_cast<bool>(pstrPrivate);
-            bool bSave = boost::lexical_cast<bool>(pstrSave);
-            bool bView = (strView.empty() ? false : (boost::lexical_cast<bool>(strView)));
-            int nIndex = boost::lexical_cast<int>(pstrPropertyIndex);
+            bool bPublic = lexical_cast<bool>(pstrPublic);
+            bool bPrivate = lexical_cast<bool>(pstrPrivate);
+            bool bSave = lexical_cast<bool>(pstrSave);
+            bool bView = (strView.empty() ? false : (lexical_cast<bool>(strView)));
+            int nIndex = lexical_cast<int>(pstrPropertyIndex);
 
             if (bPublic || bPrivate)
             {
@@ -178,11 +178,11 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_S
 
             const char* pstrIndex = pRecordNode->first_attribute("Index")->value();
 
-            bool bPublic = boost::lexical_cast<bool>(pstrPublic);
-            bool bPrivate = boost::lexical_cast<bool>(pstrPrivate);
-            bool bSave = boost::lexical_cast<bool>(pstrSave);
-            bool bView = (strView.empty() ? false : (boost::lexical_cast<bool>(strView)));
-            int nIndex = boost::lexical_cast<int>(pstrIndex);
+            bool bPublic = lexical_cast<bool>(pstrPublic);
+            bool bPrivate = lexical_cast<bool>(pstrPrivate);
+            bool bSave = lexical_cast<bool>(pstrSave);
+            bool bView = (strView.empty() ? false : (lexical_cast<bool>(strView)));
+            int nIndex = lexical_cast<int>(pstrIndex);
 
             NFCDataList recordVar;
             NFCDataList recordKey;
@@ -205,7 +205,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_S
                 if (recordColNode->first_attribute("Key") != NULL)
                 {
                     const char* pstrKey = recordColNode->first_attribute("Key")->value();
-                    bool bKey = boost::lexical_cast<bool>(pstrKey);
+                    bool bKey = lexical_cast<bool>(pstrKey);
                     if (bKey)
                     {
                         recordKey.Add(NFINT64(1));
@@ -266,7 +266,7 @@ bool NFCLogicClassModule::AddComponents(rapidxml::xml_node<>* pComponentRootNode
             const char* strComponentName = pComponentNode->first_attribute("Name")->value();
             const char* strLanguage = pComponentNode->first_attribute("Language")->value();
             const char* strEnable = pComponentNode->first_attribute("Enable")->value();
-            bool bEnable = boost::lexical_cast<bool>(strEnable);
+            bool bEnable = lexical_cast<bool>(strEnable);
             if (bEnable)
             {
                 if (pClass->GetComponentManager()->GetElement(strComponentName))
