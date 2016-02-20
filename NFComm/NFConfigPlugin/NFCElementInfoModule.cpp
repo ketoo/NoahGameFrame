@@ -54,33 +54,56 @@ bool NFCElementInfoModule::Load()
     while (pLogicClass.get())
     {
         const std::string& strInstancePath = pLogicClass->GetInstancePath();
-        if (strInstancePath.length() == 0)
+        if (strInstancePath.empty())
         {
             pLogicClass = m_pLogicClassModule->Next();
             continue;
         }
+        //////////////////////////////////////////////////////////////////////////
+        rapidxml::xml_document<> xDoc;
+        char* pData = NULL;
+        int nDataSize = 0;
 
-        std::string strFileData;
-        NFCLogicClassModule::ReadFileToString(pPluginManager->GetConfigPath() + strInstancePath, strFileData);
-        std::string strDecode = NFCLogicClassModule::Decode(strFileData);
+        std::string strFile = pPluginManager->GetConfigPath() + strInstancePath;
+        if (!NFCLogicClassModule::bCipher)
+        {
+            rapidxml::file<> fdoc(strFile.c_str());
+            nDataSize = fdoc.size();
+            pData = new char[nDataSize + 1];
+            strncpy(pData, fdoc.data(), nDataSize);
+        }
+        else
+        {
+            std::string strFileData;
+            if (!NFCLogicClassModule::ReadFileToString(strFile, strFileData))
+            {
+                return false;
+            }
 
-        const int nDataSize = strDecode.length();
-        char* data = new char[nDataSize + 1];
-        strncpy(data, strDecode.data(), strDecode.length());
-        data[nDataSize] = 0;
+            std::string strDecode = NFCLogicClassModule::Decode(strFileData);
 
-        rapidxml::xml_document<> doc;
-        doc.parse<0>(data);
+            nDataSize = strDecode.length();
+            pData = new char[nDataSize + 1];
+            strncpy(pData, strDecode.data(), nDataSize);
+        }
 
+        pData[nDataSize] = 0;
+        xDoc.parse<0>(pData);
+        //////////////////////////////////////////////////////////////////////////
         //support for unlimited layer class inherits
-        rapidxml::xml_node<>* root = doc.first_node();
+        rapidxml::xml_node<>* root = xDoc.first_node();
         for (rapidxml::xml_node<>* attrNode = root->first_node(); attrNode; attrNode = attrNode->next_sibling())
         {
             Load(attrNode, pLogicClass);
         }
 
         mbLoaded = true;
-
+        //////////////////////////////////////////////////////////////////////////
+        if (NULL != pData)
+        {
+            delete []pData;
+        }
+        //////////////////////////////////////////////////////////////////////////
         pLogicClass = m_pLogicClassModule->Next();
     }
 
@@ -162,7 +185,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFI
                 {
                     NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 }
-				var.SetInt(boost::lexical_cast<NFINT64>(pstrConfigValue));
+				var.SetInt(lexical_cast<NFINT64>(pstrConfigValue));
             }
             break;
             case TDATA_FLOAT:
