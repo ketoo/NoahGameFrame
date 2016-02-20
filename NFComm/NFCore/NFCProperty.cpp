@@ -379,15 +379,15 @@ std::string NFCProperty::ToString()
     switch (eType)
     {
     case TDATA_INT:
-        strData = boost::lexical_cast<std::string> (GetInt());
+        strData = lexical_cast<std::string> (GetInt());
         break;
 
     case TDATA_FLOAT:
-        strData = boost::lexical_cast<std::string> (GetFloat());
+        strData = lexical_cast<std::string> (GetFloat());
         break;
 
     case TDATA_STRING:
-        strData = boost::lexical_cast<std::string> (GetString());
+        strData = lexical_cast<std::string> (GetString());
         break; 
     case TDATA_OBJECT:
         strData = GetObject().ToString();

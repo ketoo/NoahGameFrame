@@ -5,19 +5,16 @@
 //    @Module           :    NFCConsistentHash.hpp
 //
 // -------------------------------------------------------------------------
-
+#ifndef NFC_CONSISTENT_HASH_H
+#define NFC_CONSISTENT_HASH_H
 
 #include <map>
 #include <string>
 #include <list>
 #include <functional> 
 #include <algorithm>
-#include "boost/crc.hpp"
-#include "boost/lexical_cast.hpp"
-#include "boost/format.hpp"
-
-#ifndef NFC_CONSISTENT_HASH_H
-#define NFC_CONSISTENT_HASH_H
+#include "NFComm/NFPluginModule/NFPlatform.h"
+#include "common/crc32.hpp"
 
 //ÐéÄâ½Úµã
 class NFIVirtualNode 
@@ -56,7 +53,10 @@ public:
 
     std::string ToStr() const 
     {
-        return boost::str(boost::format("%1%-%2%-%3%") % boost::lexical_cast<std::string>(GetDataID()) % GetDataStr() % nVirtualIndex);
+        std::ostringstream strInfo;
+        strInfo << lexical_cast<std::string>(GetDataID()) << "-" << GetDataStr() << "-" << nVirtualIndex;
+        return strInfo.str();
+        //return boost::str(boost::format("%1%-%2%-%3%") % lexical_cast<std::string>(GetDataID()) % GetDataStr() % nVirtualIndex);
     }
 
 private:
@@ -122,11 +122,14 @@ class NFCHasher : public NFIHasher
 public:
     virtual uint32_t GetHashValue(const NFIVirtualNode& vNode)
     {
-        boost::crc_32_type ret;
-        std::string vnode = vNode.ToStr();
-        ret.process_bytes(vnode.c_str(), vnode.size());
+        //boost::crc_32_type ret;
+        //std::string vnode = vNode.ToStr();
+        //ret.process_bytes(vnode.c_str(), vnode.size());
+        
+        //return ret.checksum();
 
-        return ret.checksum();
+        std::string vnode = vNode.ToStr();
+        return NFrame::CRC32(vnode);
     }
 };
 
@@ -146,7 +149,6 @@ class NFIConsistentHash
 	virtual bool GetSuitNode(uint32_t hashValue, NFCMachineNode& node) = 0;
 
 	virtual bool GetNodeList(std::list<NFCMachineNode>& nodeList) = 0;
-
 };
 
 class NFCConsistentHash
@@ -223,16 +225,8 @@ public:
 
 	bool GetSuitNode(const std::string& str, NFCMachineNode& node)
 	{
-		boost::crc_32_type ret;
-		ret.process_bytes(str.c_str(), str.length());
-		uint32_t nCRC32 = ret.checksum();
-
-		if (GetSuitNode(nCRC32, node))
-		{
-			return true;
-		}
-
-		return false;
+		uint32_t nCRC32 = NFrame::CRC32(str);
+        return GetSuitNode(nCRC32, node);
 	}
 
 	bool GetSuitNode(uint32_t hashValue, NFCMachineNode& node)

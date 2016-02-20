@@ -20,17 +20,15 @@
 					<Add option="-D_USRDLL" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
-					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/protobuf/src/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFUrlPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFLoginServer/" />
@@ -59,17 +57,15 @@
 					<Add option="-D_USRDLL" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
-					<Add directory="$(SolutionDir)/Dependencies/protobuf-2.5.0/src/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/protobuf/src/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFUrlPlugin.so $(SolutionDir)/_Out/Server/Release/NFLoginServer/" />

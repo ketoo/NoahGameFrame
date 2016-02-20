@@ -12,17 +12,17 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <boost/random.hpp>
-#include "NFComm/NFCore/NFCObject.h"
-#include "NFComm/NFCore/NFCDataList.h"
-#include "NFComm/NFCore/NFCRecord.h"
+#include <random>
+#include "NFComm/NFCore/NFIObject.h"
+#include "NFComm/NFCore/NFIDataList.h"
+#include "NFComm/NFCore/NFIRecord.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
-#include "NFComm/NFKernelPlugin/NFSceneModule/NFCSceneModule.h"
+#include "NFComm/NFPluginModule/NFISceneModule.h"
 
 class NFCKernelModule
     : public NFIKernelModule,
@@ -50,7 +50,7 @@ public:
 
     virtual NF_SHARE_PTR<NFIObject> GetObject(const NFGUID& ident);
     virtual NF_SHARE_PTR<NFIObject> CreateObject(const NFGUID& self, const int nSceneID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg);
-    
+
 	virtual bool DestroyAll();
     virtual bool DestroySelf(const NFGUID& self);
     virtual bool DestroyObject(const NFGUID& self);
