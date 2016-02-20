@@ -125,13 +125,13 @@ const NFGUID NFCDataProcessModule::CreateRole( const std::string& strAccount, co
     vValueVec.push_back(strName);
 
     vFieldVec.push_back("Job");
-    vValueVec.push_back(boost::lexical_cast<std::string>(nJob));
+    vValueVec.push_back(lexical_cast<std::string>(nJob));
 
 	vFieldVec.push_back("Race");
-	vValueVec.push_back(boost::lexical_cast<std::string>(nRace));
+	vValueVec.push_back(lexical_cast<std::string>(nRace));
 
     vFieldVec.push_back("Sex");
-    vValueVec.push_back(boost::lexical_cast<std::string>(nSex));
+    vValueVec.push_back(lexical_cast<std::string>(nSex));
 
     vFieldVec.push_back("Level");
     vValueVec.push_back("0");
@@ -225,8 +225,8 @@ void NFCDataProcessModule::OnOnline( const NFGUID& self )
     xFieldVec.push_back("GateID");
     xFieldVec.push_back("GameID");
 
-    vValueVec.push_back(boost::lexical_cast<std::string> (nGateID));
-    vValueVec.push_back(boost::lexical_cast<std::string> (nGameID));
+    vValueVec.push_back(lexical_cast<std::string> (nGateID));
+    vValueVec.push_back(lexical_cast<std::string> (nGameID));
 
     m_pClusterSQLModule->Updata(mstrRoleTable, self.ToString(), xFieldVec, vValueVec);
 }
@@ -242,8 +242,8 @@ void NFCDataProcessModule::OnOffline( const NFGUID& self )
     xFieldVec.push_back("GateID");
     xFieldVec.push_back("GameID");
 
-    vValueVec.push_back(boost::lexical_cast<std::string> (nGateID));
-    vValueVec.push_back(boost::lexical_cast<std::string> (nGameID));
+    vValueVec.push_back(lexical_cast<std::string> (nGateID));
+    vValueVec.push_back(lexical_cast<std::string> (nGameID));
 
     m_pClusterSQLModule->Updata(mstrRoleTable, self.ToString(), xFieldVec, vValueVec);
 }

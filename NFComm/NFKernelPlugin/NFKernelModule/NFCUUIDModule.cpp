@@ -147,7 +147,7 @@ NFINT64 NFCUUIDModule::GetIdentID()
     return mnIdent;
 }
 
-void NFCUUIDModule::SetIdentID( NFINT64 nID )
+void NFCUUIDModule::SetIdentID(NFINT64 nID)
 {
     mnIdent = nID;
 }

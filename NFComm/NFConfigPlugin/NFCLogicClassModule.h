@@ -16,9 +16,6 @@
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFCore/NFList.h"
 #include "NFComm/RapidXML/rapidxml.hpp"
-#include "NFComm/RapidXML/rapidxml_iterators.hpp"
-#include "NFComm/RapidXML/rapidxml_print.hpp"
-#include "NFComm/RapidXML/rapidxml_utils.hpp"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
 #include "NFComm/NFCore/NFList.h"
@@ -27,7 +24,6 @@
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-
 
 class NFCLogicClass : public NFILogicClass
 {
@@ -166,8 +162,8 @@ public:
     virtual NF_SHARE_PTR<NFIComponentManager> GetClassComponentManager(const std::string& strClassName);
 
     virtual bool AddClass(const std::string& strClassName, const std::string& strParentName);
-protected:
 
+protected:
     virtual TDATA_TYPE ComputerType(const char* pstrTypeName, NFIDataList::TData& var);
     virtual bool AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NF_SHARE_PTR<NFILogicClass> pClass);
     virtual bool AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_PTR<NFILogicClass> pClass);
@@ -184,13 +180,13 @@ public:
     static std::string Encode(unsigned char const* bytes_to_encode, unsigned int in_len);
     static std::string Decode(const std::string& encoded_string);
     static std::string cepher;
-
+    static bool bCipher;
 protected:
     NFIElementInfoModule* m_pElementInfoModule;
 
     std::string msConfigFileName;
-    int mnPropertyIndex;
 
+    int mnPropertyIndex;
     std::map<std::string, int> mxPropertyIndexMap;
 };
 

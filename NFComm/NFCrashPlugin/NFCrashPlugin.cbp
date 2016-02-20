@@ -18,15 +18,13 @@
 					<Add option="-D_X64" />
 					<Add option="-D_DEBUG" />
 					<Add directory="$(SolutionDir)" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 					<Add directory="$(SolutionDir)/Dependencies/google-breakpad/src" />
 					<Add directory="$(SolutionDir)/Dependencies" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/lib/Deubg/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFCrashPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFLoginServer/" />
@@ -58,15 +56,13 @@
 					<Add option="-DNDEBUG" />
 					<Add option="-D_USRDLL" />
 					<Add directory="$(SolutionDir)" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 					<Add directory="$(SolutionDir)/Dependencies/google-breakpad/src" />
 					<Add directory="$(SolutionDir)/Dependencies" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/lib/Release/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFCrashPlugin.so $(SolutionDir)/_Out/Server/Release/NFLoginServer/" />
