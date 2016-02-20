@@ -25,10 +25,10 @@ void NFCKernelModule::InitRandom()
 
 	int nRandomMax = 100000;
 	mnRandomPos = 0;
-    
+
     std::random_device rd;
 	std::mt19937 gen(rd());
-    std::uniform_real<> dis(0, 1.0f);
+    std::uniform_real_distribution<> dis(0, 1.0f);
 
 	for (int i = 0; i < nRandomMax; i++)
 	{
@@ -304,7 +304,7 @@ bool NFCKernelModule::DestroyObject(const NFGUID& self)
 	if (pContainerInfo.get())
 	{
 		const std::string& strClassName = GetPropertyString(self, "ClassName");
-        
+
         pContainerInfo->RemoveObjectFromGroup(nGroupID, self, strClassName == "Player" ? true : false);
 
 		DoEvent(self, strClassName, COE_BEFOREDESTROY, NFCDataList());

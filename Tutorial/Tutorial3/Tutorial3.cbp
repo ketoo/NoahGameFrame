@@ -20,9 +20,9 @@
 					<Add option="-D_USRDLL" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/include/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/compat/" />
 					<Add directory="$(SolutionDir)/Dependencies/protobuf/src/" />
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
@@ -46,9 +46,9 @@
 					<Add option="-fPIC" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/" />
-					<Add directory="$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/include/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/compat/" />
 					<Add directory="$(SolutionDir)/Dependencies/protobuf/src/" />
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
