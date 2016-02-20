@@ -9,8 +9,6 @@
 #ifndef NFC_UUID_MODULE_H
 #define NFC_UUID_MODULE_H
 
-#include <boost/crc.hpp>
-#include <boost/format.hpp>
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 
