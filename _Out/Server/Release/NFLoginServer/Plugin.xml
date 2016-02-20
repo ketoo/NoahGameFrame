@@ -7,6 +7,7 @@
 	<Plugin Name="NFLogPlugin" Main="1"/>
 	
     <Plugin Name="NFMysqlClusterPlugin" Main="1"/>
+    <Plugin Name="NFDataBaseNet_ClientPlugin" Main="1"/>
 	
 	<ActorDataModule Name="NFCDataProcessModule" />
 	<APPID Name="4" />

@@ -637,6 +637,7 @@ int NFCAsyMysqlClusterModule::OnUseMysqlAsyEnd( const NFGUID& self, const int nF
     }
 
     mReqList.RemoveElement(xResultparam.nReqID);
+    return 0;
 }
 
 int NFCAsyMysqlClusterModule::OnAddMysqlServerAsyEnd( const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData )

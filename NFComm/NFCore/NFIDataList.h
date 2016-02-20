@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_DATALIST_H
-#define _NFI_DATALIST_H
+#ifndef NFI_DATALIST_H
+#define NFI_DATALIST_H
 
 #include <string>
 #include <cstring>
@@ -26,19 +26,18 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
-#include <boost/lexical_cast.hpp>
-#include <boost/variant.hpp>
+#include "common/variant.hpp"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
-//±äÁ¿ÀàĞÍ
+//å˜é‡ç±»å‹
 enum TDATA_TYPE
 {
-    TDATA_UNKNOWN,  // Î´Öª
-    TDATA_INT,              // 32Î»ÕûÊı
-    TDATA_FLOAT,       // ¸¡µãÊı(Ë«¾«¶È£¬ÓÃdoubleÀàĞÍÊµÏÖ)
-    TDATA_STRING,       // ×Ö·û´®
-    TDATA_OBJECT,       // ¶ÔÏóID
+    TDATA_UNKNOWN,  // æœªçŸ¥
+    TDATA_INT,      // 64ä½æ•´æ•°
+    TDATA_FLOAT,    // æµ®ç‚¹æ•°(åŒç²¾åº¦ï¼Œç”¨doubleç±»å‹å®ç°)
+    TDATA_STRING,   // å­—ç¬¦ä¸²
+    TDATA_OBJECT,   // å¯¹è±¡ID
     TDATA_MAX,
 };
 
@@ -47,8 +46,7 @@ const static NFGUID NULL_OBJECT = NFGUID();
 const static double NULL_FLOAT = 0.0;
 const static NFINT64 NULL_INT = 0;
 
-
-//ÀàĞÍ½Ó¿Ú
+//ç±»å‹æ¥å£
 class NFIDataList
 {
 public:
@@ -144,7 +142,7 @@ public:
 			return nType;
 		}
 
-		/** ÉèÖÃÖµ£¬ÀàĞÍ±ØĞëºÍÖ®Ç°Ò»ÖÂ*/
+		// è®¾ç½®å€¼ï¼Œç±»å‹å¿…é¡»å’Œä¹‹å‰ä¸€è‡´
 		void SetInt(const NFINT64 var)
 		{
 			if (nType == TDATA_INT || TDATA_UNKNOWN == nType)
@@ -185,7 +183,8 @@ public:
 		{
 			if (TDATA_INT == nType)
 			{
-				return boost::get<NFINT64>(variantData);
+				//return boost::get<NFINT64>(variantData);
+                return variantData.get<NFINT64>();
 			}
 
 			return NULL_INT;
@@ -195,7 +194,8 @@ public:
 		{
 			if (TDATA_FLOAT == nType)
 			{
-				return boost::get<double>(variantData);
+				//return boost::get<double>(variantData);
+                return variantData.get<double>();
 			}
 
 			return NULL_FLOAT;
@@ -204,7 +204,8 @@ public:
 		{
 			if (TDATA_STRING == nType)
 			{
-				return boost::get<const std::string&>(variantData);
+				//return boost::get<const std::string&>(variantData);
+                return variantData.get<std::string>();
 			}
 
 			return NULL_STR;
@@ -214,7 +215,8 @@ public:
 		{
 			if (TDATA_OBJECT == nType)
 			{
-				return boost::get<const NFGUID&>(variantData);
+				//return boost::get<const NFGUID&>(variantData);
+                return variantData.get<NFGUID>();
 			}
 
 			return NULL_OBJECT;
@@ -227,11 +229,11 @@ public:
             switch (nType)
             {
             case TDATA_INT:
-                strData = boost::lexical_cast<std::string> (GetInt());
+                strData = lexical_cast<std::string> (GetInt());
                 break;
 
             case TDATA_FLOAT:
-                strData = boost::lexical_cast<std::string> (GetFloat());
+                strData = lexical_cast<std::string> (GetFloat());
                 break;
 
             case TDATA_STRING:
@@ -254,7 +256,8 @@ public:
         TDATA_TYPE nType;
 
 	public:
-        boost::variant<NFINT64, double, std::string, NFGUID> variantData;
+        //boost::variant<NFINT64, double, std::string, NFGUID> variantData;
+        mapbox::util::variant<NFINT64, double, std::string, NFGUID> variantData;
     };
 
     NFIDataList()
@@ -276,27 +279,27 @@ public:
 
 	virtual const NF_SHARE_PTR<TData> GetStack(const int index) const = 0;
 
-    // ºÏ²¢
+    // åˆå¹¶
     virtual bool Concat(const NFIDataList& src) = 0;
-    // ²¿·ÖÌí¼Ó
+    // éƒ¨åˆ†æ·»åŠ 
 	virtual bool Append(const NFIDataList& src) = 0;
     virtual bool Append(const NFIDataList& src, const int start, const int count) = 0;
-    // ²¿·ÖÌí¼Ó
+    // éƒ¨åˆ†æ·»åŠ 
     virtual bool Append(const NFIDataList::TData& sTData) = 0;
-    // Çå¿Õ
+    // æ¸…ç©º
     virtual void Clear() = 0;
-    // ÊÇ·ñÎª¿Õ
+    // æ˜¯å¦ä¸ºç©º
     virtual bool IsEmpty() const = 0;
-    // Êı¾İÊıÁ¿
+    // æ•°æ®æ•°é‡
     virtual int GetCount() const = 0;
-    // Êı¾İÀàĞÍ
+    // æ•°æ®ç±»å‹
     virtual TDATA_TYPE Type(const int index) const = 0;
-    //Êı¾İÀàĞÍ¼ì²â
+    //æ•°æ®ç±»å‹æ£€æµ‹
     virtual bool TypeEx(const  int nType, ...) const = 0;
-    //ĞÂ½øÈë²ğ·Ö
+    //æ–°è¿›å…¥æ‹†åˆ†
     virtual bool Split(const char* str, const char* strSplit) = 0;
 
-    // Ìí¼ÓÊı¾İ
+    // æ·»åŠ æ•°æ®
     virtual bool Add(const NFINT64 value) = 0;
     virtual bool Add(const double value) = 0;
     virtual bool Add(const char* value) = 0;
@@ -308,7 +311,7 @@ public:
     virtual bool Set(const int index, const char* value) = 0;
     virtual bool Set(const int index, const NFGUID& value) = 0;
 
-    // »ñµÃÊı¾İ
+    // è·å¾—æ•°æ®
     virtual NFINT64 Int(const int index) const = 0;
     virtual double Float(const int index) const = 0;
     virtual const std::string& String(const int index) const = 0;
