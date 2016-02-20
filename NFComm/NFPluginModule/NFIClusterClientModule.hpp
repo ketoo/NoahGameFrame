@@ -169,7 +169,7 @@ public:
         }
 
         NFCMachineNode xNode;
-        if (!GetServerMachineData(boost::lexical_cast<std::string> (nHashKey), xNode))
+        if (!GetServerMachineData(lexical_cast<std::string> (nHashKey), xNode))
         {
             return ;
         }
@@ -185,7 +185,7 @@ public:
         }
 
         NFCMachineNode xNode;
-        if (!GetServerMachineData(boost::lexical_cast<std::string>(nHashKey), xNode))
+        if (!GetServerMachineData(lexical_cast<std::string>(nHashKey), xNode))
         {
             return ;
         }
@@ -201,7 +201,7 @@ public:
 		}
 
 		NFCMachineNode xNode;
-		if (!GetServerMachineData(boost::lexical_cast<std::string> (nHashKey), xNode))
+		if (!GetServerMachineData(lexical_cast<std::string> (nHashKey), xNode))
 		{
 			return ;
 		}
@@ -449,16 +449,8 @@ private:
 
     bool GetServerMachineData(const std::string& strServerID, NFCMachineNode& xMachineData)
     {
-        boost::crc_32_type ret;
-        ret.process_bytes(strServerID.c_str(), strServerID.length());
-        uint32_t nCRC32 = ret.checksum();
-
-        if (mxConsistentHash.GetSuitNode(nCRC32, xMachineData))
-        {
-            return true;
-        }
-
-        return false;
+        uint32_t nCRC32 = NFrame::CRC32(strServerID);
+        return mxConsistentHash.GetSuitNode(nCRC32, xMachineData);
     }
 
     void AddServerWeightData(NF_SHARE_PTR<ConnectData> xInfo)
