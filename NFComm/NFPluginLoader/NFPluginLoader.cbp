@@ -22,9 +22,8 @@
 					<Add option="-DGOOGLE_GLOG_DLL_DECL=" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/External/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/External/" />
 				</Compiler>
 				<Linker>
 					<Add option="-ldl" />
@@ -32,7 +31,6 @@
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libtherond.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
-					<!-- <Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" /> -->
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d $(SolutionDir)/_Out/Server/Debug/NFLoginServer/" />
@@ -64,9 +62,8 @@
 					<Add option="-DNF_DYNAMIC_PLUGIN" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/External/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/External/" />
 				</Compiler>
 				<Linker>
 					<Add option="-ldl" />
@@ -74,7 +71,6 @@
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libtheron.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
-					<!-- <Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" /> -->
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/NFLoginServer/" />
