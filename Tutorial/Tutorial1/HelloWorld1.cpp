@@ -1,6 +1,5 @@
 #include "HelloWorld1.h"
 
-
 bool HelloWorld1::Init()
 {
     //≥ı ºªØ

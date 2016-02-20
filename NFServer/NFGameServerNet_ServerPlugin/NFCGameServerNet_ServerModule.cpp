@@ -24,7 +24,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
 	m_pDataProcessModule = pPluginManager->FindModule<NFIDataProcessModule>("NFCDataProcessModule");
     m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>("NFCGameServerToWorldModule");
-    
+
 
 	assert(NULL != m_pKernelModule);
 	assert(NULL != m_pLogicClassModule);
@@ -276,6 +276,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 	//拉取数据
 	if(!m_pDataProcessModule->LoadDataFormSql(nRoleID, "Player"))
 	{
+        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nClientID, "Cannot load data from mysql", "", __FUNCTION__, __LINE__);
 		return;
 	}
 	//////////////////////////////////////////////////////////////////////////
@@ -1682,7 +1683,7 @@ void NFCGameServerNet_ServerModule::OnReqiureRoleListProcess(const int nSockInde
     vFieldVector.push_back("Level");
     vFieldVector.push_back("Sex");
 	vFieldVector.push_back("Job");
-    vFieldVector.push_back("Name");  
+    vFieldVector.push_back("Name");
 	vFieldVector.push_back("Race");
 
     const NFGUID ident = m_pDataProcessModule->GetChar(xMsg.account(), vFieldVector, vValueVector);
@@ -1719,7 +1720,7 @@ void NFCGameServerNet_ServerModule::OnReqiureRoleListProcess(const int nSockInde
     {
         return;
     }
-    
+
     if (!NF_StrTo(vValueVector[1], nLevel))
     {
         return ;
@@ -2110,7 +2111,7 @@ void NFCGameServerNet_ServerModule::OnTransWorld(const int nSockIndex, const int
     {
         nHasKey = nPlayer.nData64;
     }
-    
+
     m_pGameServerToWorldModule->SendBySuit(nHasKey, nSockIndex, nMsgID, msg, nLen);
 }
 
