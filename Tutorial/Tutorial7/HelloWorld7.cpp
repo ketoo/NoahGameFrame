@@ -1,6 +1,5 @@
 #include "HelloWorld7.h"
 
-
 bool HelloWorld7::Init()
 {
     //≥ı ºªØ
