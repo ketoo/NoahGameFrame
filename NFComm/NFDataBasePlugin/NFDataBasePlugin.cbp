@@ -20,9 +20,8 @@
 					<Add option="-D_USRDLL" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/External/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/External/" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
@@ -55,9 +54,8 @@
 					<Add option="-D_USRDLL" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/External/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/External/" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />

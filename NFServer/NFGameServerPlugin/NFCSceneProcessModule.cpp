@@ -55,7 +55,7 @@ bool NFCSceneProcessModule::AfterInit()
         bool bRet = list.First(strData);
         while (bRet)
         {
-            int nSceneID = boost::lexical_cast<int>(strData);
+            int nSceneID = lexical_cast<int>(strData);
 
 			LoadSceneResource( nSceneID );
 
@@ -162,7 +162,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFGUID& self, const int nEve
     double fX = 0.0;
     double fY = 0.0;
     double fZ = 0.0;
-	const std::string strSceneID = boost::lexical_cast<std::string>(nTargetScene);
+	const std::string strSceneID = lexical_cast<std::string>(nTargetScene);
     const std::string& strRelivePosList = m_pElementInfoModule->GetPropertyString(strSceneID, NFrame::Scene::RelivePos());
 
     NFCDataList valueRelivePosList( strRelivePosList.c_str(), ";" );
@@ -171,9 +171,9 @@ int NFCSceneProcessModule::OnEnterSceneEvent( const NFGUID& self, const int nEve
         NFCDataList valueRelivePos( valueRelivePosList.String( 0 ).c_str(), "," );
         if ( valueRelivePos.GetCount() == 3 )
         {
-            fX = boost::lexical_cast<double>( valueRelivePos.String( 0 ) );
-            fY = boost::lexical_cast<double>( valueRelivePos.String( 1 ) );
-            fZ = boost::lexical_cast<double>( valueRelivePos.String( 2 ) );
+            fX = lexical_cast<double>( valueRelivePos.String( 0 ) );
+            fY = lexical_cast<double>( valueRelivePos.String( 1 ) );
+            fZ = lexical_cast<double>( valueRelivePos.String( 2 ) );
         }
     }
 
@@ -304,9 +304,9 @@ bool NFCSceneProcessModule::LoadSceneResource( const int nSceneID )
 		//种子具体信息
 		std::string strSeedID = pSeedFileNode->first_attribute( "ID" )->value();
 		std::string strConfigID = pSeedFileNode->first_attribute( "NPCConfigID" )->value();
-		float fSeedX = boost::lexical_cast<float>(pSeedFileNode->first_attribute( "SeedX" )->value());
-		float fSeedY = boost::lexical_cast<float>(pSeedFileNode->first_attribute( "SeedY" )->value());
-		float fSeedZ = boost::lexical_cast<float>(pSeedFileNode->first_attribute( "SeedZ" )->value());
+		float fSeedX = lexical_cast<float>(pSeedFileNode->first_attribute( "SeedX" )->value());
+		float fSeedY = lexical_cast<float>(pSeedFileNode->first_attribute( "SeedY" )->value());
+		float fSeedZ = lexical_cast<float>(pSeedFileNode->first_attribute( "SeedZ" )->value());
 
 		if (!m_pElementInfoModule->ExistElement(strConfigID))
 		{

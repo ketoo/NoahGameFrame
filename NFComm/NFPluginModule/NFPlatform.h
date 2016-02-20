@@ -273,7 +273,7 @@ typedef int64_t NFINT64;
 
 ///////////////////////////////////////////////////////////////
 #include <time.h>
-
+#include <sstream>
 
 inline unsigned long NF_GetTickCount()
 {
@@ -331,13 +331,13 @@ inline unsigned long NF_GetTickCount()
 #define NF_NEW new
 
 #include <string>
-#include <boost/lexical_cast.hpp>
+#include <common/lexical_cast.hpp>
 template<typename DTYPE>
 bool NF_StrTo(const std::string& strValue, DTYPE& nValue)
 {
     try
     {
-        nValue = boost::lexical_cast<DTYPE>(strValue);
+        nValue = lexical_cast<DTYPE>(strValue);
         return true;
     }
     catch (...)
@@ -347,6 +347,5 @@ bool NF_StrTo(const std::string& strValue, DTYPE& nValue)
 
     return false;
 }
-
 
 #endif
