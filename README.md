@@ -69,24 +69,16 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 2. Run **install.bat**
 3. Open the solution: **NoahFrame.sln**
 4. Build the solution
-5. Copy files: 	**Dependencies/lib/Debug/ libmysql.dll mysqlpp_d.dll** to 
-	- **_Out/Server/Debug/NFGameServer1/**
-	- **_Out/Server/Release/NFGameServer1/**
-	- **_Out/Server/Debug/NFLoginServer/**
-	- **_Out/Server/Release/NFLoginServer/**
-	- **_Out/Server/Debug/NFWorldServer/**
-	- **_Out/Server/Release/NFWorldServer/**
-6. Run the binary file by **_Out/Server/Debug/Run.bat**
+5. Run the binary file by **_Out/Server/Debug/Run.bat**
 
 ### Linux[CodeBlocks >= 13.1]
 
 1. git pull all source
 2. Run **install.sh**
 3. Open the solution with CodeBlocks: **NF.workspace**
-4. Add **C++11** optional in CodeBlocks compiling setting
+4. Check **C++11** optional in CodeBlocks compiler setting
 5. Build **NF.workspace**
-6. Build all other plugin
-7. Run the binary file by **_Out/Server/Debug/rund.sh**
+6. Run the binary file by **_Out/Server/Debug/rund.sh**
 
 
 ### JAVA Project
