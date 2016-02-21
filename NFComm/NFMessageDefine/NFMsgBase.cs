@@ -1003,7 +1003,10 @@ namespace NFMsg
       EGCT_MODIY_ITEM = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGCT_CREATE_OBJECT", Value=2)]
-      EGCT_CREATE_OBJECT = 2
+      EGCT_CREATE_OBJECT = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGCT_ADD_ROLE_EXP", Value=3)]
+      EGCT_ADD_ROLE_EXP = 3
     }
   
     private global::ProtoBuf.IExtension extensionObject;

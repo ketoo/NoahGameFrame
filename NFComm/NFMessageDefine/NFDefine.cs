@@ -487,6 +487,9 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_SET_GUILDECTYPEINFO", Value=314)]
       EGMI_SET_GUILDECTYPEINFO = 314,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ReqEnterGuildEctype", Value=315)]
+      EGMI_ReqEnterGuildEctype = 315,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_CREATE_CHATGROUP", Value=400)]
       EGEC_REQ_CREATE_CHATGROUP = 400,
             
@@ -655,6 +658,9 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_RECORD_FLOAT", Value=1007)]
       EGMI_REQ_CMD_RECORD_FLOAT = 1007,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_NORMAL", Value=1008)]
+      EGMI_REQ_CMD_NORMAL = 1008,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BUY_FORM_SHOP", Value=10000)]
       EGMI_REQ_BUY_FORM_SHOP = 10000,
             
@@ -704,6 +710,9 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"EIT_GEM_STONE", Value=7)]
       EIT_GEM_STONE = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_CURRENCY", Value=8)]
+      EIT_CURRENCY = 8,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EIT_WOOD", Value=100)]
       EIT_WOOD = 100,

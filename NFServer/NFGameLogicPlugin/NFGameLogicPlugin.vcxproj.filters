@@ -41,6 +41,9 @@
     <Filter Include="NFGuildModule">
       <UniqueIdentifier>{758bd285-309d-45a8-8950-aa2abb0a6d78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFGMModule">
+      <UniqueIdentifier>{9c627c80-9536-4c28-8b31-2dc81cfd2d6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCGameLogicModule.h" />
@@ -116,6 +119,9 @@
     </ClInclude>
     <ClInclude Include="NFCGuildBroadcastModule.h">
       <Filter>NFGuildModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCGmModule.h">
+      <Filter>NFGMModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +199,9 @@
     </ClCompile>
     <ClCompile Include="NFCGuildBroadcastModule.cpp">
       <Filter>NFGuildModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCGmModule.cpp">
+      <Filter>NFGMModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

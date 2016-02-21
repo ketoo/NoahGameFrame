@@ -269,6 +269,7 @@ enum EGameMsgID
 	EGMI_REQ_CMD_RECORD_STR						= 1005;			// GM命令修改修改表字符串
 	EGMI_REQ_CMD_RECORD_OBJECT					= 1006;			// GM命令修改
 	EGMI_REQ_CMD_RECORD_FLOAT					= 1007;			// GM命令修改
+	EGMI_REQ_CMD_NORMAL							= 1008;			// 其他GM修改
 	/////////////////////Base SLG MSG/////////////////////////////////////
 	EGMI_REQ_BUY_FORM_SHOP						= 10000;//申请从商店种植建筑
 	EGMI_ACK_BUY_FORM_SHOP						= 10001;//返回商店种植建筑结果

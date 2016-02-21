@@ -907,16 +907,17 @@ void protobuf_AddDesc_NFMsgBase_2eproto() {
     "layer_id\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010msg_data"
     "\030\002 \002(\014\022(\n\022player_Client_list\030\003 \003(\0132\014.NFM"
     "sg.Ident\"+\n\010Position\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002"
-    "(\002\022\t\n\001z\030\003 \002(\002\"\364\002\n\nReqCommand\022 \n\ncontrol_"
+    "(\002\022\t\n\001z\030\003 \002(\002\"\213\003\n\nReqCommand\022 \n\ncontrol_"
     "id\030\001 \002(\0132\014.NFMsg.Ident\0226\n\ncommand_id\030\002 \002"
     "(\0162\".NFMsg.ReqCommand.EGameCommandType\022\031"
     "\n\021command_str_value\030\003 \001(\014\022\031\n\021command_val"
     "ue_int\030\004 \001(\003\022\033\n\023command_value_float\030\005 \001("
     "\002\022\031\n\021command_value_str\030\006 \001(\014\022*\n\024command_"
     "value_object\030\007 \001(\0132\014.NFMsg.Ident\022\013\n\003row\030"
-    "\010 \001(\005\022\013\n\003col\030\t \001(\005\"X\n\020EGameCommandType\022\027"
+    "\010 \001(\005\022\013\n\003col\030\t \001(\005\"o\n\020EGameCommandType\022\027"
     "\n\023EGCT_MODIY_PROPERTY\020\000\022\023\n\017EGCT_MODIY_IT"
-    "EM\020\001\022\026\n\022EGCT_CREATE_OBJECT\020\002", 3668);
+    "EM\020\001\022\026\n\022EGCT_CREATE_OBJECT\020\002\022\025\n\021EGCT_ADD"
+    "_ROLE_EXP\020\003", 3691);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgBase.proto", &protobuf_RegisterTypes);
   Ident::default_instance_ = new Ident();
@@ -9983,6 +9984,7 @@ bool ReqCommand_EGameCommandType_IsValid(int value) {
     case 0:
     case 1:
     case 2:
+    case 3:
       return true;
     default:
       return false;
@@ -9993,6 +9995,7 @@ bool ReqCommand_EGameCommandType_IsValid(int value) {
 const ReqCommand_EGameCommandType ReqCommand::EGCT_MODIY_PROPERTY;
 const ReqCommand_EGameCommandType ReqCommand::EGCT_MODIY_ITEM;
 const ReqCommand_EGameCommandType ReqCommand::EGCT_CREATE_OBJECT;
+const ReqCommand_EGameCommandType ReqCommand::EGCT_ADD_ROLE_EXP;
 const ReqCommand_EGameCommandType ReqCommand::EGameCommandType_MIN;
 const ReqCommand_EGameCommandType ReqCommand::EGameCommandType_MAX;
 const int ReqCommand::EGameCommandType_ARRAYSIZE;
