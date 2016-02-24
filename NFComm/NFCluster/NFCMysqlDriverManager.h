@@ -9,10 +9,10 @@
 
 #ifndef NFC_MYSQL_DRIVER_MANAGER_H
 #define NFC_MYSQL_DRIVER_MANAGER_H
-#include "NFComm/NFPluginModule/NFIMysqlDriver.h"
-#include "NFComm/NFCore/NFMap.h"
-#include "NFIMysqlDriverManager.h"
 
+#include "NFComm/NFCore/NFMap.h"
+#include "NFComm/NFPluginModule/NFIMysqlDriver.h"
+#include "NFComm/NFPluginModule/NFIMysqlDriverManager.h"
 
 class NFCMysqlDriverManager : public NFIMysqlDriverManager
 {

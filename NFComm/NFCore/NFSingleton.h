@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _GT_SINGLETON_H
-#define _GT_SINGLETON_H
+#ifndef NF_SINGLETON_H
+#define NF_SINGLETON_H
 
 #include <iostream>
 

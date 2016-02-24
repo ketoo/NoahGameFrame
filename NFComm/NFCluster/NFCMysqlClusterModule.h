@@ -20,7 +20,7 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
-#include "NFIMysqlDriverManager.h"
+#include "NFComm/NFPluginModule/NFIMysqlDriverManager.h"
 
 class NFCMysqlClusterModule
     : public NFIClusterModule
