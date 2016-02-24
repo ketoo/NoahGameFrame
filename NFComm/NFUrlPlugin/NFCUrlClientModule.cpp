@@ -6,15 +6,15 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
+#include <string>
+#include <iostream>
+#include <sstream>
 #include "NFCUrlClientModule.h"
 #include "Dependencies/curl/include/curl/curl.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIUrlCodeModule.h"
 #include "NFComm/NFMessageDefine/NFMsgURl.pb.h"
 
-#include <string>
-#include <iostream>
-#include <sstream>
 
 int NFCURLComponent::OnASyncEvent( const NFGUID& self, const int event, std::string& arg )
 {
