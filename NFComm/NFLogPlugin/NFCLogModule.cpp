@@ -7,12 +7,11 @@
 // -------------------------------------------------------------------------
 
 #define GLOG_NO_ABBREVIATED_SEVERITIES
+#include <stdarg.h>
+#include "NFCLogModule.h"
+#include "easylog/easylogging++.h"
 #include "NFComm/NFPluginModule/NFIActorManager.h"
 #include "NFComm/NFPluginModule/NFIActor.h"
-//#include "NFStackWalker.h"
-#include "NFCLogModule.h"
-#include <stdarg.h>
-#include "easylog/easylogging++.h"
 
 INITIALIZE_EASYLOGGINGPP
 
