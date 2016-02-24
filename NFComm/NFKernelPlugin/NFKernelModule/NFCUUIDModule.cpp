@@ -1,3 +1,11 @@
+// -------------------------------------------------------------------------
+//    @FileName         :    NFCUUIDModule.cpp
+//    @Author           :    eliteYang
+//    @Date             :    2014-4-9
+//    @Module           :    NFCUUIDModule
+//
+// -------------------------------------------------------------------------
+
 #include "NFCUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"

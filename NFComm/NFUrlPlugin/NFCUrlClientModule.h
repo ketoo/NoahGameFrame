@@ -9,9 +9,9 @@
 #ifndef NFC_URL_MODULE_H
 #define NFC_URL_MODULE_H
 
+#include "NFComm/NFCore/NFIComponent.h"
 #include "Dependencies/curl/include/curl/curl.h"
 #include "NFComm/NFPluginModule/NFIUrlClientModule.h"
-#include "NFComm/NFCore/NFIComponent.h"
 #include "NFComm/NFPluginModule/NFIUrlCodeModule.h"
 
 struct SURLParam

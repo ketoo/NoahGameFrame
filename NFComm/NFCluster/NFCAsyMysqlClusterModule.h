@@ -10,12 +10,12 @@
 #define NFC_ASY_MYSQL_CLUSTER_MODULE_H
 
 #include "NFCMysqlDriver.h"
+#include "NFComm/NFMessageDefine/NFMsgMysql.pb.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIAsyClusterModule.h"
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
-#include "NFComm/NFMessageDefine/NFMsgMysql.pb.h"
-#include "NFIMysqlDriverManager.h"
+#include "NFComm/NFPluginModule/NFIMysqlDriverManager.h"
 
 struct SMysqlParam
 {
