@@ -1,7 +1,7 @@
 #include "NFMysqlClusterPlugin.h"
 #include "NFCMysqlClusterModule.h"
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFCAsyMysqlClusterModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
