@@ -242,7 +242,7 @@ bool NFCProperty::SetInt(const NFINT64 value)
 
 	mxData->SetInt(value);
 
-	OnEventHandler(oldValue , *mxData);
+	OnEventHandler(oldValue , value);
 
 	return true;
 }
@@ -278,7 +278,7 @@ bool NFCProperty::SetFloat(const double value)
 	mxData->SetFloat(value);
 
 
-	OnEventHandler(oldValue , *mxData);
+	OnEventHandler(oldValue , newValue);
 
 	return true;
 }
@@ -312,7 +312,7 @@ bool NFCProperty::SetString(const std::string& value)
 
 	mxData->SetString(value);
 
-	OnEventHandler(oldValue , *mxData);
+	OnEventHandler(oldValue , newValue);
 
 	return true;
 }
