@@ -74,16 +74,21 @@ void NFCGuildDataModule::CheckLoadGuild( const NFGUID& self, const NFGUID& xGuil
     NF_SHARE_PTR<NFIObject> pObejct = m_pKernelModule->GetObject(xGuild);
     if (!pObejct.get())
     {
-        if (m_pDataProcessModule->LoadDataFormSql(xGuild, "Guild"))
-        {
-            int nScenceID = m_pCommonConfigModule->GetAttributeInt("GuildEctype", "GuildEctypeInfo", "ScenceID");
-            if (nScenceID <=0)
-            {
-                nScenceID = 300;
-            }
+        m_pDataProcessModule->LoadDataFormSqlAsy(xGuild, "Guild", this, &NFCGuildDataModule::HandleLoadGuildSuccess, "");
+    }
+}
 
-            m_pKernelModule->CreateObject(xGuild, nScenceID, 0, "Guild", "", NFCDataList());
+void NFCGuildDataModule::HandleLoadGuildSuccess(const NFGUID& xGuild, const int nResult, const std::string& strUseData)
+{
+    if (nResult == 0)
+    {
+        int nScenceID = m_pCommonConfigModule->GetAttributeInt("GuildEctype", "GuildEctypeInfo", "ScenceID");
+        if (nScenceID <=0)
+        {
+            nScenceID = 300;
         }
+
+        m_pKernelModule->CreateObject(xGuild, nScenceID, 0, "Guild", "", NFCDataList());
     }
 }
 

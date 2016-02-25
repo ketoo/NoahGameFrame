@@ -51,7 +51,8 @@ public:
 protected:
     int OnGuildClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
     int OnSaveGuildheartEvent(const NFGUID& self , const std::string& strHeartName, const float fTime, const int nCount);
-   
+    void HandleLoadGuildSuccess(const NFGUID& xGuild, const int nResult, const std::string& strUseData);
+
 protected:
     NFIKernelModule* m_pKernelModule;
     NFIUUIDModule* m_pUUIDModule;

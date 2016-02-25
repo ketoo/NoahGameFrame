@@ -493,7 +493,7 @@ message ReqWearEquip
 	
 }
 
-//EGEC_TAKEOFF_EQUIP							= 510;		 // 装备卸载
+//EGEC_TAKEOFF_EQUIP							= 510;		 // 装备卸载EGEC_TAKEOFF_EQUIP
 message TakeOffEquip
 {	
 	required Ident		selfid				= 1;//角色ID

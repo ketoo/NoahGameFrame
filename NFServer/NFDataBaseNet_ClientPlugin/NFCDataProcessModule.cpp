@@ -38,6 +38,7 @@ bool NFCDataProcessModule::AfterInit()
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
     m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
+    m_pAsyClusterSQLModule = pPluginManager->FindModule<NFIAsyClusterModule>( "NFCAsyMysqlClusterModule" );
 	
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pClusterSQLModule);
@@ -45,6 +46,7 @@ bool NFCDataProcessModule::AfterInit()
 	assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pLogModule);
     assert(NULL != m_pElementInfoModule);
+    assert(NULL != m_pAsyClusterSQLModule);
 	
     NF_SHARE_PTR<NFILogicClass> pLogicClass = m_pLogicClassModule->GetElement("SqlServer");
     if (nullptr == pLogicClass)
@@ -78,7 +80,8 @@ int NFCDataProcessModule::OnObjectClassEvent( const NFGUID& self, const std::str
 	if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
 	{
 		OnOffline(self);
-		SaveDataToSql(self);
+		//SaveDataToSql(self);
+        SaveDataToSqlAsy(self);
 	}
 	else if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
 	{
@@ -555,4 +558,221 @@ const bool NFCDataProcessModule::ConvertPBToRecord(const NFMsg::PlayerRecordBase
 	}
 
 	return true;
+}
+
+const bool NFCDataProcessModule::LoadDataFormSqlAsy( const NFGUID& self , const std::string& strClassName, const LOADDATA_RETURN_FUNCTOR& xFun, const std::string& strUseData)
+{
+    NF_SHARE_PTR<NFIPropertyManager> pProManager = m_pLogicClassModule->GetClassPropertyManager(strClassName);
+    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pLogicClassModule->GetClassRecordManager(strClassName);
+
+    if (!pProManager || !pRecordManager)
+    {
+        return false;
+    }
+
+    std::vector<std::string> vFieldVec;
+    std::vector<std::string> vValueVec;
+
+    int nIndex = 0;
+    std::string strName;
+    std::map<std::string, int> xDataIndex;
+
+    //witch Property Need Load
+    NF_SHARE_PTR<NFIProperty> xProperty = pProManager->First(strName);
+    while (xProperty)
+    {
+        if (xProperty->GetSave())
+        {
+            vFieldVec.push_back(strName);
+            xDataIndex.insert(std::make_pair(strName, nIndex));
+            nIndex ++;
+        }
+
+        strName.clear();
+        xProperty = pProManager->Next(strName);
+    }
+
+    //witch Record Need Load
+    NF_SHARE_PTR<NFIRecord> xRecord = pRecordManager->First(strName);
+    while (xRecord)
+    {
+        if (xRecord->GetSave())
+        {
+            vFieldVec.push_back(strName);
+            xDataIndex.insert(std::make_pair(strName, nIndex));
+            nIndex ++;
+        }
+
+        strName.clear();
+        xRecord = pRecordManager->Next(strName);
+    }
+
+    mnLoadCount ++;
+    std::string strData = lexical_cast<std::string>(mnLoadCount);
+    
+    NF_SHARE_PTR<LoadData> pData = NF_SHARE_PTR<LoadData> (NF_NEW LoadData());
+
+    pData->mFunc = xFun;
+    pData->strUseData = strData;
+
+    if (mmLoadlisReq.AddElement(mnLoadCount, pData))
+    {
+        m_pAsyClusterSQLModule->Query(self, strClassName, self.ToString(), vFieldVec, this, &NFCDataProcessModule::LoadDataFormSqlAsySucess, strData);
+    }
+   
+    return true;
+}
+void NFCDataProcessModule::LoadDataFormSqlAsySucess( const NFGUID& self, const int nResult, const std::vector<std::string>& vFieldVec, const std::vector<std::string>& vValueVec, const std::string& strUserData)
+{
+    NFINT64 nID = 0;
+    if (!NF_StrTo(strUserData, nID))
+    {
+        return;
+    }
+
+    NF_SHARE_PTR<LoadData> pData = mmLoadlisReq.GetElement(nID);
+    if (pData.get())
+    {
+        if (nResult < 0 )
+        {
+            mmLoadlisReq.RemoveElement(nID);
+            return;
+        }
+
+        if (vFieldVec.size() != vValueVec.size())
+        {
+            mmLoadlisReq.RemoveElement(nID);
+            return;
+        }
+
+        NF_SHARE_PTR<NFMapEx<std::string, std::string> > pSelf = mtObjectCache.GetElement(self);
+        if (!pSelf)
+        {
+            pSelf = NF_SHARE_PTR< NFMapEx<std::string, std::string> > (NF_NEW NFMapEx<std::string, std::string>());
+            if (!mtObjectCache.AddElement(self, pSelf))
+            {
+                mmLoadlisReq.RemoveElement(nID);
+                return;
+            }
+        }
+
+        for (int i = 0; i< vValueVec.size(); i++)
+        {
+            const std::string& strName = vFieldVec[i];
+            const std::string& strValue = vValueVec[i];
+
+            pSelf->AddElement(strName, NF_SHARE_PTR<std::string>(NF_NEW std::string(strValue)));
+        }
+
+        pData->mFunc(self, nResult, strUserData);
+        mmLoadlisReq.RemoveElement(nID);
+        return;
+    }
+
+}
+
+const bool NFCDataProcessModule::SaveDataToSqlAsy( const NFGUID& self )
+{
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+    if ( pObject.get() )
+    {
+        NF_SHARE_PTR<NFIPropertyManager> pProManager = pObject->GetPropertyManager();
+        NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
+
+        std::vector<std::string> vFieldVec;
+        std::vector<std::string> vValueVec;
+
+        //witch property to save
+        std::string strName;
+        NF_SHARE_PTR<NFIProperty> xProperty = pProManager->First(strName);
+        while (xProperty)
+        {
+            if (xProperty->GetSave())
+            {
+                vFieldVec.push_back(strName);
+                vValueVec.push_back(xProperty->ToString());
+            }
+
+            strName.clear();
+            xProperty = pProManager->Next(strName);
+        }
+
+        //witch Record to save
+        NF_SHARE_PTR<NFIRecord> xRecord = pRecordManager->First(strName);
+        while (xRecord)
+        {
+            if (xRecord->GetSave())
+            {
+                NFMsg::PlayerRecordBase xRecordData;
+                xRecordData.set_record_name(strName);
+
+                for (int i = 0; i < xRecord->GetRows(); ++i)
+                {
+                    if(xRecord->IsUsed(i))
+                    {
+                        for (int j = 0; j < xRecord->GetCols(); ++j)
+                        {
+                            switch (xRecord->GetColType(j))
+                            {
+                            case TDATA_INT:
+                                {
+                                    NFMsg::RecordInt* pRecordInt = xRecordData.add_record_int_list();
+                                    pRecordInt->set_row(i);
+                                    pRecordInt->set_col(j);
+                                    pRecordInt->set_data(xRecord->GetInt(i, j));
+                                }
+                                break;
+                            case TDATA_FLOAT:
+                                {
+                                    NFMsg::RecordFloat* xRecordFloat = xRecordData.add_record_float_list();
+                                    xRecordFloat->set_row(i);
+                                    xRecordFloat->set_col(j);
+                                    xRecordFloat->set_data(xRecord->GetFloat(i, j));
+                                }
+                                break;
+                            case TDATA_STRING:
+                                {
+                                    NFMsg::RecordString* xRecordString = xRecordData.add_record_string_list();
+                                    xRecordString->set_row(i);
+                                    xRecordString->set_col(j);
+                                    xRecordString->set_data(xRecord->GetString(i, j));
+                                }
+                                break;
+                            case TDATA_OBJECT:
+                                {
+                                    NFMsg::RecordObject* xRecordObejct = xRecordData.add_record_object_list();
+                                    xRecordObejct->set_row(i);
+                                    xRecordObejct->set_col(j);
+                                    *xRecordObejct->mutable_data() = NFINetModule::NFToPB(xRecord->GetObject(i, j));
+                                }
+                                break;
+                            default:
+                                break;
+                            }
+                        }   
+                    }
+                }
+
+                std::string strRecordValue;
+                if(xRecordData.SerializeToString(&strRecordValue))
+                {
+                    vFieldVec.push_back(strName);
+                    vValueVec.push_back(strRecordValue);
+                }
+            }
+
+            strName.clear();
+            xRecord = pRecordManager->Next(strName);
+        }
+
+        const std::string& strClass = m_pKernelModule->GetPropertyString(self, "ClassName");
+        m_pAsyClusterSQLModule->Updata(self, strClass, self.ToString(), vFieldVec, vValueVec, this, &NFCDataProcessModule::SaveDataToSqlAsySucess, "");
+    }
+
+    return false;
+}
+
+void NFCDataProcessModule::SaveDataToSqlAsySucess( const NFGUID& self, const int nRet, const std::string&strUseData )
+{
+   //
 }
