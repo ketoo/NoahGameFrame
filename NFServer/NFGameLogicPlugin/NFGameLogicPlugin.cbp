@@ -143,6 +143,8 @@
 		<Unit filename="NFCSkillModule.h" />
 		<Unit filename="NFCGuildBroadcastModule.cpp" />
 		<Unit filename="NFCGuildBroadcastModule.h" />
+		<Unit filename="NFCGmModule.cpp" />
+		<Unit filename="NFCGmModule.h" />
 		<Unit filename="NFGameLogicPlugin.cpp" />
 		<Unit filename="NFGameLogicPlugin.h" />
 		<Unit filename="dllmain.cpp" />
