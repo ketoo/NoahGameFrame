@@ -6,7 +6,6 @@
 //    @Desc                 :
 // -------------------------------------------------------------------------
 
-#include "boost/lexical_cast.hpp"
 #include "NFComm/RapidXML/rapidxml_utils.hpp"
 
 #include "NFCCommonConfigModule.h"

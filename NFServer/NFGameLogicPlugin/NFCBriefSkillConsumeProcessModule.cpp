@@ -106,15 +106,15 @@ int NFCBriefSkillConsumeProcessModule::ConsumeSelf( const NFGUID& self, const st
 //         {
 //             case ConsumeType_Value:
 //                 //绝对值
-//                 nConsumeValue = boost::lexical_cast<int>( valueConsumeValue.StringVal( i ) );
+//                 nConsumeValue = lexical_cast<int>( valueConsumeValue.StringVal( i ) );
 //                 break;
 //             case ConsumeType_CurrentPercent:
 //                 //当前量百分比
-//                 nConsumeValue = boost::lexical_cast<int>( valueConsumeValue.StringVal( i ) ) / 100.0f * pSelfCurProperty->QueryInt();
+//                 nConsumeValue = lexical_cast<int>( valueConsumeValue.StringVal( i ) ) / 100.0f * pSelfCurProperty->QueryInt();
 //                 break;
 //             case ConsumeType_MaxPercent:
 //                 //最大量百分比
-//                 nConsumeValue = boost::lexical_cast<int>( valueConsumeValue.StringVal( i ) ) / 100.0f * pSelfMaxProperty->QueryInt();
+//                 nConsumeValue = lexical_cast<int>( valueConsumeValue.StringVal( i ) ) / 100.0f * pSelfMaxProperty->QueryInt();
 //                 break;
 //             default:
 //                 break;
@@ -273,15 +273,15 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, con
 //             {
 //             case 0:
 //                 //绝对值
-//                 nDamageValue = boost::lexical_cast<int>( valueEffectValue.StringVal( i ) );
+//                 nDamageValue = lexical_cast<int>( valueEffectValue.StringVal( i ) );
 //                 break;
 //             case 1:
 //                 //当前量百分比
-//                 nDamageValue = boost::lexical_cast<int>( valueEffectValue.StringVal( i ) ) / 100.0f * nCurValue;
+//                 nDamageValue = lexical_cast<int>( valueEffectValue.StringVal( i ) ) / 100.0f * nCurValue;
 //                 break;
 //             case 2:
 //                 //最大量百分比
-//                 nDamageValue = boost::lexical_cast<int>( valueEffectValue.StringVal( i ) ) / 100.0f * nMaxValue;
+//                 nDamageValue = lexical_cast<int>( valueEffectValue.StringVal( i ) ) / 100.0f * nMaxValue;
 //                 break;
 //             default:
 //                 break;

@@ -178,7 +178,7 @@ int NFCNPCRefreshModule::OnObjectLevelEvent( const NFGUID& self, const std::stri
 
 bool NFCNPCRefreshModule::AddLevelUpAward( const NFGUID& self, const int nLevel )
 {
-	const std::string& strAwardID = m_pCommonConfigModule->GetAttributeString("PlayerLevel", boost::lexical_cast<std::string>(nLevel), "AwardPack");
+	const std::string& strAwardID = m_pCommonConfigModule->GetAttributeString("PlayerLevel", lexical_cast<std::string>(nLevel), "AwardPack");
 	if (strAwardID.empty())
 	{
 		return true;
