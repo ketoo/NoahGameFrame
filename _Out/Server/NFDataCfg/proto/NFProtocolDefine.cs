@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/02/18
+//    @Date             :    2016/02/28
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -565,6 +565,7 @@ public class NPC
 	public static readonly String EffectData = "EffectData"; // string
 	public static readonly String ConsumeData = "ConsumeData"; // string
 	public static readonly String LastAttacker = "LastAttacker"; // object
+	public static readonly String ShowName = "ShowName"; // string
 	// Record
 
 }

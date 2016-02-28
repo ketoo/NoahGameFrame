@@ -230,6 +230,9 @@ void NFCGmModule::OnGMRecordIntProcess(const int nSockIndex, const int nMsgID, c
 		return;
 	}
 
+
+    CheckAndAddRow(nPlayerID, strRecordName, nRow);
+
 	NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(nPlayerID, strRecordName);
 	if (pRecord.get())
 	{
@@ -251,7 +254,7 @@ void NFCGmModule::OnGMRecordStrProcess(const int nSockIndex, const int nMsgID, c
 		strRecordName = xMsg.command_str_value();
 	}
 
-	std::string strValue =0;
+	std::string strValue ;
 	if (xMsg.has_command_value_str())
 	{
 		strValue = xMsg.command_value_str();
@@ -279,7 +282,8 @@ void NFCGmModule::OnGMRecordStrProcess(const int nSockIndex, const int nMsgID, c
 		return;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(nPlayerID, strRecordName);
+    CheckAndAddRow(nPlayerID, strRecordName, nRow);
+    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(nPlayerID, strRecordName);
 	if (pRecord.get())
 	{
 		pRecord->SetString(nRow, ncol, strValue.data());
@@ -328,7 +332,8 @@ void NFCGmModule::OnGMRecordObjectProcess(const int nSockIndex, const int nMsgID
 		return;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(nPlayerID, strRecordName);
+    CheckAndAddRow(nPlayerID, strRecordName, nRow);
+    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(nPlayerID, strRecordName);
 	if (pRecord.get())
 	{
 		pRecord->SetObject(nRow, ncol, nValue);
@@ -377,7 +382,8 @@ void NFCGmModule::OnGMRecordFloatProcess(const int nSockIndex, const int nMsgID,
 		return;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(nPlayerID, strRecordName);
+    CheckAndAddRow(nPlayerID, strRecordName, nRow);
+    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(nPlayerID, strRecordName);
 	if (pRecord.get())
 	{
 		pRecord->SetInt(nRow, ncol, nValue);
@@ -413,4 +419,19 @@ void NFCGmModule::OnGMNormalProcess(const int nSockIndex, const int nMsgID, cons
 	default:
 		break;
 	}
+}
+
+void NFCGmModule::CheckAndAddRow(const NFGUID& self, const std::string strRecordName, const int nRow)
+{
+
+    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, strRecordName);
+    if (pRecord.get())
+    {
+        if (!pRecord->IsUsed(nRow))
+        {
+            NFCDataList varData = pRecord->GetInitData();
+
+            pRecord->AddRow(nRow, varData);
+        }
+    }
 }

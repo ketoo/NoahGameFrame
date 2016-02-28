@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/02/18
+//    @Date             :    2016/02/28
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -578,6 +578,7 @@ public:
 	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
 	static const std::string& ConsumeData(){ static std::string xConsumeData = "ConsumeData"; return xConsumeData; } // string
 	static const std::string& LastAttacker(){ static std::string xLastAttacker = "LastAttacker"; return xLastAttacker; } // object
+	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
 	// Record
 
 };

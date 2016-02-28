@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/02/18
+//    @Date             :    2016/02/28
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -539,6 +539,7 @@ public class NPC {
 	public static final String EffectData = "EffectData"; // string
 	public static final String ConsumeData = "ConsumeData"; // string
 	public static final String LastAttacker = "LastAttacker"; // object
+	public static final String ShowName = "ShowName"; // string
 	// Record
 
 }

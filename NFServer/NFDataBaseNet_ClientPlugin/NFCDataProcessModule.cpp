@@ -69,6 +69,7 @@ bool NFCDataProcessModule::AfterInit()
     const std::string& mstrSQLPWD = m_pElementInfoModule->GetPropertyString(strConfigName, "SqlPwd");
 
     bool bConnect = m_pClusterSQLModule->AddMysqlServer(nID, "", mstrSQLIP, mnSQLPort, mstrSQLName, mstrSQLUser, mstrSQLPWD);
+    m_pAsyClusterSQLModule->AddMysqlServer(nID, "", mstrSQLIP, mnSQLPort, mstrSQLName, mstrSQLUser, mstrSQLPWD);
 
     RegisterAutoSave(NFrame::Player::ThisName());
 
@@ -80,8 +81,8 @@ int NFCDataProcessModule::OnObjectClassEvent( const NFGUID& self, const std::str
 	if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
 	{
 		OnOffline(self);
-		//SaveDataToSql(self);
-        SaveDataToSqlAsy(self);
+		SaveDataToSql(self);
+        //SaveDataToSqlAsy(self);
 	}
 	else if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
 	{

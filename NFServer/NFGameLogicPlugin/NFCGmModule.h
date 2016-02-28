@@ -47,6 +47,8 @@ public:
 	void OnGMRecordFloatProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
 	void OnGMNormalProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
 
+    void CheckAndAddRow(const NFGUID& self, std::string strRecordName, const int nRow);
+
 private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
