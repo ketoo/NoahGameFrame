@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/02/28
+//    @Date             :    2016/02/29
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -703,13 +703,24 @@ public:
 		PlayerHero_GUID		= 0, // GUID -- object
 		PlayerHero_ConfigID		= 1, // ConfigID -- string
 		PlayerHero_Level		= 2, // Level -- int
-		PlayerHero_Exp		= 3, // Exp -- string
-		PlayerHero_Equip1		= 4, // Equip1 -- object
-		PlayerHero_Equip2		= 5, // Equip2 -- object
-		PlayerHero_Equip3		= 6, // Equip3 -- object
-		PlayerHero_Equip4		= 7, // Equip4 -- object
-		PlayerHero_Equip5		= 8, // Equip5 -- object
-		PlayerHero_Equip6		= 9, // Equip6 -- object
+		PlayerHero_Exp		= 3, // Exp -- int
+		PlayerHero_Star		= 4, // Star -- int
+		PlayerHero_Equip1		= 5, // Equip1 -- object
+		PlayerHero_Equip2		= 6, // Equip2 -- object
+		PlayerHero_Equip3		= 7, // Equip3 -- object
+		PlayerHero_Equip4		= 8, // Equip4 -- object
+		PlayerHero_Equip5		= 9, // Equip5 -- object
+		PlayerHero_Equip6		= 10, // Equip6 -- object
+		PlayerHero_Equip7		= 11, // Equip7 -- object
+		PlayerHero_Equip8		= 12, // Equip8 -- object
+		PlayerHero_Talent1		= 13, // Talent1 -- string
+		PlayerHero_Talent2		= 14, // Talent2 -- string
+		PlayerHero_Talent3		= 15, // Talent3 -- string
+		PlayerHero_Talent4		= 16, // Talent4 -- string
+		PlayerHero_Talent5		= 17, // Talent5 -- string
+		PlayerHero_Talent6		= 18, // Talent6 -- string
+		PlayerHero_Talent7		= 19, // Talent7 -- string
+		PlayerHero_Talent8		= 20, // Talent8 -- string
 	};
 
 	enum BagEquipList

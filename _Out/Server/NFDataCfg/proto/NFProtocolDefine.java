@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/02/28
+//    @Date             :    2016/02/29
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -662,13 +662,24 @@ public class Player {
 		GUID		= 0, // GUID -- object
 		ConfigID		= 1, // ConfigID -- string
 		Level		= 2, // Level -- int
-		Exp		= 3, // Exp -- string
-		Equip1		= 4, // Equip1 -- object
-		Equip2		= 5, // Equip2 -- object
-		Equip3		= 6, // Equip3 -- object
-		Equip4		= 7, // Equip4 -- object
-		Equip5		= 8, // Equip5 -- object
-		Equip6		= 9, // Equip6 -- object
+		Exp		= 3, // Exp -- int
+		Star		= 4, // Star -- int
+		Equip1		= 5, // Equip1 -- object
+		Equip2		= 6, // Equip2 -- object
+		Equip3		= 7, // Equip3 -- object
+		Equip4		= 8, // Equip4 -- object
+		Equip5		= 9, // Equip5 -- object
+		Equip6		= 10, // Equip6 -- object
+		Equip7		= 11, // Equip7 -- object
+		Equip8		= 12, // Equip8 -- object
+		Talent1		= 13, // Talent1 -- string
+		Talent2		= 14, // Talent2 -- string
+		Talent3		= 15, // Talent3 -- string
+		Talent4		= 16, // Talent4 -- string
+		Talent5		= 17, // Talent5 -- string
+		Talent6		= 18, // Talent6 -- string
+		Talent7		= 19, // Talent7 -- string
+		Talent8		= 20, // Talent8 -- string
 	};
 
 	public enum BagEquipList
