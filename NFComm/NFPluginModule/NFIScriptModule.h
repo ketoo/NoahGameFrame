@@ -6,8 +6,8 @@
 //    @Desc             :     every script plugin need to export two interfaces(NFCScriptVarList and most of NFCScriptKernel)
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_SCRIPT_MODULE_H
-#define _NFI_SCRIPT_MODULE_H
+#ifndef NFI_SCRIPT_MODULE_H
+#define NFI_SCRIPT_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"

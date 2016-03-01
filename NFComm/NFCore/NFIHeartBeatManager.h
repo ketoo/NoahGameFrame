@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_HEARTBEATMANAGER_H
-#define _NFI_HEARTBEATMANAGER_H
+#ifndef NFI_HEARTBEATMANAGER_H
+#define NFI_HEARTBEATMANAGER_H
 
 #include <string>
 #include "NFMap.h"
