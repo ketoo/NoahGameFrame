@@ -6,12 +6,11 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_PACK_MODULE_H
-#define _NFI_PACK_MODULE_H
+#ifndef NFI_PACK_MODULE_H
+#define NFI_PACK_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
-#include "NFComm/Define/NFItem_def.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
