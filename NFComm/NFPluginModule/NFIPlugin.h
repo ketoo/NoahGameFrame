@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_PLUGIN_H
-#define _NFI_PLUGIN_H
+#ifndef NFI_PLUGIN_H
+#define NFI_PLUGIN_H
 
 #include <iostream>
 #include <assert.h>
