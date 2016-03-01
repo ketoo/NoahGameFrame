@@ -27,19 +27,19 @@ public:
     virtual bool AfterInit();
     virtual bool BeforeShut();
 
-	virtual bool GetTagList(const std::string& strTag, NFList<NFGUID>& xList);
-	virtual bool AddToTagList(const std::string& strTag, const NFGUID object);
-	virtual bool RemoveFrmTagList(const std::string& strTag, const NFGUID object);
+    virtual bool GetTagList(const std::string& strTag, NFList<NFGUID>& xList);
+    virtual bool AddToTagList(const std::string& strTag, const NFGUID object);
+    virtual bool RemoveFrmTagList(const std::string& strTag, const NFGUID object);
 
-	virtual bool GetTagList(const TAG_DEFINE eTag, const std::string& strTag, NFList<NFGUID>& xList);
-	virtual bool AddToTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFGUID object);
-	virtual bool RemoveFrmTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFGUID object);
+    virtual bool GetTagList(const TAG_DEFINE eTag, const std::string& strTag, NFList<NFGUID>& xList);
+    virtual bool AddToTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFGUID object);
+    virtual bool RemoveFrmTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFGUID object);
 
 protected:
 
 private:
-	//tag_id->(tag_layer, object_list)
-	NFMap<int, NFMap<std::string, NFList<NFGUID>>> mxTagManager;
+    //tag_id->(tag_layer, object_list)
+    NFMap<int, NFMap<std::string, NFList<NFGUID>>> mxTagManager;
 };
 
 #endif
