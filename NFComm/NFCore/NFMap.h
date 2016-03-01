@@ -130,7 +130,7 @@ public:
         {
             return NULL;
         }
-        
+
         mObjectCurIter++;
         if (mObjectCurIter != mObjectList.end())
         {

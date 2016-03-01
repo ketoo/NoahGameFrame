@@ -13,10 +13,10 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-typedef std::function<void(const NFGUID& self, const int nRet, const std::string&strUseData)> MYSQL_RETURN_FUNCTOR;
-typedef std::function<void(const NFGUID& self, const int nRet, const int nValue, const std::string&strUseData)> MYSQL_RETURN_INT_FUNCTOR;
-typedef std::function<void(const NFGUID& self, const int nRet, const std::vector<std::string>& valueVec, const std::string&strUseData)> MYSQL_RETURN_VECVALUE_FUNCTOR;
-typedef std::function<void(const NFGUID& self, const int nRet, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec, const std::string&strUseData)> MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR;
+typedef std::function<void(const NFGUID& self, const int nRet, const std::string& strUseData)> MYSQL_RETURN_FUNCTOR;
+typedef std::function<void(const NFGUID& self, const int nRet, const int nValue, const std::string& strUseData)> MYSQL_RETURN_INT_FUNCTOR;
+typedef std::function<void(const NFGUID& self, const int nRet, const std::vector<std::string>& valueVec, const std::string& strUseData)> MYSQL_RETURN_VECVALUE_FUNCTOR;
+typedef std::function<void(const NFGUID& self, const int nRet, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec, const std::string& strUseData)> MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR;
 
 struct SMysqlParam;
 
@@ -26,7 +26,7 @@ class NFIAsyClusterModule
 public:
     template<typename BaseType>
     int Updata(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec,
-        BaseType* pBaseType, void (BaseType::*handleReturnRsp)(const NFGUID&, const int, const std::string&),  const std::string&strUseData)
+               BaseType* pBaseType, void (BaseType::*handleReturnRsp)(const NFGUID&, const int, const std::string&),  const std::string& strUseData)
     {
         const MYSQL_RETURN_FUNCTOR FunReturnRsp = std::bind(handleReturnRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
@@ -35,7 +35,7 @@ public:
 
     template<typename BaseType>
     int Query(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec,
-        BaseType* pBaseType, void (BaseType::*handleReturnRsp)(const NFGUID&, const int, const std::vector<std::string>&, const std::vector<std::string>&, const std::string&),  const std::string&strUseData)
+              BaseType* pBaseType, void (BaseType::*handleReturnRsp)(const NFGUID&, const int, const std::vector<std::string>&, const std::vector<std::string>&, const std::string&),  const std::string& strUseData)
     {
         const MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR mFunReturnVeckKeyValueRsp = std::bind(handleReturnRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
 
@@ -44,7 +44,7 @@ public:
 
     template<typename BaseType>
     int Delete(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec,
-        BaseType* pBaseType, void (BaseType::*handleReturnRsp)(const NFGUID&, const int, const std::string&),  const std::string&strUseData)
+               BaseType* pBaseType, void (BaseType::*handleReturnRsp)(const NFGUID&, const int, const std::string&),  const std::string& strUseData)
     {
         const MYSQL_RETURN_FUNCTOR FunReturnRsp = std::bind(handleReturnRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
@@ -53,7 +53,7 @@ public:
 
     template<typename BaseType>
     int Exists(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec,
-        BaseType* pBaseType, void (BaseType::*handleReturnRsp)(const NFGUID&, const int, const int, const std::string&),  const std::string&strUseData)
+               BaseType* pBaseType, void (BaseType::*handleReturnRsp)(const NFGUID&, const int, const int, const std::string&),  const std::string& strUseData)
     {
         const MYSQL_RETURN_INT_FUNCTOR mFunReturnIntRsp = std::bind(handleReturnRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 
@@ -62,7 +62,7 @@ public:
 
     template<typename BaseType>
     int Keys(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec,
-        BaseType* pBaseType, void (BaseType::*handleReturnRsp)(const NFGUID&, const int, const std::vector<std::string>&, const std::string&),  const std::string&strUseData)
+             BaseType* pBaseType, void (BaseType::*handleReturnRsp)(const NFGUID&, const int, const std::vector<std::string>&, const std::string&),  const std::string& strUseData)
     {
         const MYSQL_RETURN_VECVALUE_FUNCTOR mFunReturnVecValueRsp = std::bind(handleReturnRsp, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 
@@ -71,7 +71,7 @@ public:
 
     virtual bool StartActorPool(const int nCount) = 0;
     virtual bool CloseActorPool() = 0;
-    virtual bool AddMysqlServer( const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime = 10, const int nRconneCount = -1) = 0;
+    virtual bool AddMysqlServer(const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime = 10, const int nRconneCount = -1) = 0;
 
 protected:
     virtual bool Updata(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec, const MYSQL_RETURN_FUNCTOR& mFunReturnRsp, const std::string& strUseData) = 0;

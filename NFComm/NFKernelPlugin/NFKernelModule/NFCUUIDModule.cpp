@@ -71,19 +71,19 @@ public:
         int64_t value = 0;
         uint64_t time = UUIDModule::get_time();
 
-		// 保留后48位时间
-		//value = time << 16;
-		value = time * 1000000;
+        // 保留后48位时间
+        //value = time << 16;
+        value = time * 1000000;
 
-		// 最后16位是sequenceID
-		//value |= sequence_++;
-		value += sequence_++;
+        // 最后16位是sequenceID
+        //value |= sequence_++;
+        value += sequence_++;
 
-		//if (sequence_ == 0x7FFF)
-		if (sequence_ == 999999)
-		{
-			sequence_ = 0;
-		}
+        //if (sequence_ == 0x7FFF)
+        if (sequence_ == 999999)
+        {
+            sequence_ = 0;
+        }
 
         return value;
     }
@@ -98,7 +98,7 @@ private:
 NFCUUIDModule::NFCUUIDModule(NFIPluginManager* p)
 {
     mnIdent = 0;
-	m_pKernelModule = NULL;
+    m_pKernelModule = NULL;
     pPluginManager = p;
 }
 
@@ -143,10 +143,10 @@ bool NFCUUIDModule::Execute()
 
 NFGUID NFCUUIDModule::CreateGUID()
 {
-	NFGUID xID;
-	xID.nHead64 = GetIdentID();
-	xID.nData64 = m_pUUID->generate();
-	
+    NFGUID xID;
+    xID.nHead64 = GetIdentID();
+    xID.nData64 = m_pUUID->generate();
+
     return xID;
 }
 

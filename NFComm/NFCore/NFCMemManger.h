@@ -12,7 +12,7 @@
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "libtcmalloc_minimal_d.lib" )
-#pragma comment(linker, "/include:__tcmalloc") 
+#pragma comment(linker, "/include:__tcmalloc")
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 #pragma comment( lib, "libtcmalloc_minimal.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
@@ -22,7 +22,7 @@
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "libtcmalloc_minimal.lib" )
-#pragma comment(linker, "/include:__tcmalloc") 
+#pragma comment(linker, "/include:__tcmalloc")
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 #pragma comment( lib, "libtcmalloc_minimal.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
