@@ -26,15 +26,15 @@ public:
     ~NFLock()
     {
     }
-	void lock()
-	{
-		while (flag.test_and_set(std::memory_order_acquire));
-	}
+    void lock()
+    {
+        while (flag.test_and_set(std::memory_order_acquire));
+    }
 
-	void unlock()
-	{
-		flag.clear(std::memory_order_release);
-	}
+    void unlock()
+    {
+        flag.clear(std::memory_order_release);
+    }
 
 protected:
     mutable std::atomic_flag flag;
@@ -44,7 +44,7 @@ private:
 };
 
 template<typename T>
-class NFQueue :public NFLock
+class NFQueue : public NFLock
 {
 public:
     NFQueue()
@@ -61,7 +61,7 @@ public:
 
         mList.push_back(object);
 
-		unlock();
+        unlock();
 
         return true;
     }
@@ -72,15 +72,15 @@ public:
 
         if (mList.empty())
         {
-			unlock();
+            unlock();
 
             return false;
         }
 
         object = mList.front();
         mList.pop_front();
-        
-		unlock();
+
+        unlock();
 
         return true;
     }

@@ -220,31 +220,31 @@ bool NFCProperty::SetInt(const NFINT64 value)
         return false;
     }
 
-	if (!mxData.get())
-	{
-		//本身是空就是因为没数据，还来个没数据的就不存了
-		if (0 == value)
-		{
-			return false;
-		}
+    if (!mxData.get())
+    {
+        //本身是空就是因为没数据，还来个没数据的就不存了
+        if (0 == value)
+        {
+            return false;
+        }
 
-		mxData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(TDATA_INT));
-		mxData->SetInt(0);
-	}
+        mxData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(TDATA_INT));
+        mxData->SetInt(0);
+    }
 
-	if (value == mxData->GetInt())
-	{
-		return false;
-	}
+    if (value == mxData->GetInt())
+    {
+        return false;
+    }
 
-	NFCDataList::TData oldValue;
-	oldValue = *mxData;
+    NFCDataList::TData oldValue;
+    oldValue = *mxData;
 
-	mxData->SetInt(value);
+    mxData->SetInt(value);
 
-	OnEventHandler(oldValue, *mxData);
+    OnEventHandler(oldValue, *mxData);
 
-	return true;
+    return true;
 }
 
 bool NFCProperty::SetFloat(const double value)
@@ -257,8 +257,8 @@ bool NFCProperty::SetFloat(const double value)
     if (!mxData.get())
     {
         //本身是空就是因为没数据，还来个没数据的就不存了
-		if (std::abs(value) < 0.001)
-		{
+        if (std::abs(value) < 0.001)
+        {
             return false;
         }
 
@@ -272,15 +272,15 @@ bool NFCProperty::SetFloat(const double value)
     }
 
 
-	NFCDataList::TData oldValue;
-	oldValue = *mxData;
+    NFCDataList::TData oldValue;
+    oldValue = *mxData;
 
-	mxData->SetFloat(value);
+    mxData->SetFloat(value);
 
 
-	OnEventHandler(oldValue, *mxData);
+    OnEventHandler(oldValue, *mxData);
 
-	return true;
+    return true;
 }
 
 bool NFCProperty::SetString(const std::string& value)
@@ -307,14 +307,14 @@ bool NFCProperty::SetString(const std::string& value)
         return false;
     }
 
-	NFCDataList::TData oldValue;
-	oldValue = *mxData;
+    NFCDataList::TData oldValue;
+    oldValue = *mxData;
 
-	mxData->SetString(value);
+    mxData->SetString(value);
 
-	OnEventHandler(oldValue, *mxData);
+    OnEventHandler(oldValue, *mxData);
 
-	return true;
+    return true;
 }
 
 bool NFCProperty::SetObject(const NFGUID& value)
@@ -378,36 +378,36 @@ std::string NFCProperty::ToString()
     const TDATA_TYPE eType = GetType();
     switch (eType)
     {
-    case TDATA_INT:
-        strData = lexical_cast<std::string> (GetInt());
-        break;
+        case TDATA_INT:
+            strData = lexical_cast<std::string> (GetInt());
+            break;
 
-    case TDATA_FLOAT:
-        strData = lexical_cast<std::string> (GetFloat());
-        break;
+        case TDATA_FLOAT:
+            strData = lexical_cast<std::string> (GetFloat());
+            break;
 
-    case TDATA_STRING:
-        strData = lexical_cast<std::string> (GetString());
-        break; 
-    case TDATA_OBJECT:
-        strData = GetObject().ToString();
-        break;
-    default:
+        case TDATA_STRING:
+            strData = lexical_cast<std::string> (GetString());
+            break;
+        case TDATA_OBJECT:
+            strData = GetObject().ToString();
+            break;
+        default:
 
-        strData = NULL_STR;
-        break;
+            strData = NULL_STR;
+            break;
     }
 
     return strData;
 }
 
-bool NFCProperty::FromString( const std::string& strData )
+bool NFCProperty::FromString(const std::string& strData)
 {
     const TDATA_TYPE eType = GetType();
     bool bRet = false;
     switch (eType)
     {
-    case TDATA_INT:
+        case TDATA_INT:
         {
             NFINT64  nValue = 0;
             bRet = NF_StrTo(strData, nValue);
@@ -415,7 +415,7 @@ bool NFCProperty::FromString( const std::string& strData )
         }
         break;
 
-    case TDATA_FLOAT:
+        case TDATA_FLOAT:
         {
             double  dValue = 0;
             bRet = NF_StrTo(strData, dValue);
@@ -423,22 +423,22 @@ bool NFCProperty::FromString( const std::string& strData )
         }
         break;
 
-    case TDATA_STRING:
+        case TDATA_STRING:
         {
             SetString(strData);
             bRet = true;
         }
-        break; 
-    case TDATA_OBJECT:
+        break;
+        case TDATA_OBJECT:
         {
             NFGUID xID;
-            
-            bRet = xID.FromString(strData);           
+
+            bRet = xID.FromString(strData);
             SetObject(xID);
         }
         break;
-    default:
-        break;
+        default:
+            break;
     }
 
     return bRet;
