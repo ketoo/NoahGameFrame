@@ -6,13 +6,10 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_LOGIC_MODULE_H
-#define _NFI_LOGIC_MODULE_H
+#ifndef NFI_LOGIC_MODULE_H
+#define NFI_LOGIC_MODULE_H
 
 #include <string>
-#include "NFComm/Define/NFObject_def.h"
-#include "NFComm/Define/NFItem_def.h"
-#include "NFComm/Define/NFSkill_def.h"
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFCore/NFList.h"
 #include "NFComm/NFCore/NFDefine.h"
