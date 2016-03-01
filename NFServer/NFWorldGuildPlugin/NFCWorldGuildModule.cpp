@@ -15,19 +15,34 @@
 
 bool NFCWorldGuildModule::Init()
 {
-	m_pWorldNet_ServerModule = dynamic_cast<NFIWorldNet_ServerModule*>(pPluginManager->FindModule("NFCWorldNet_ServerModule"));
-	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
+    m_pWorldNet_ServerModule = dynamic_cast<NFIWorldNet_ServerModule*>(pPluginManager->FindModule("NFCWorldNet_ServerModule"));
+    m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
 
-	assert(NULL != m_pWorldNet_ServerModule);
-	assert(NULL != m_pLogModule);
+    assert(NULL != m_pWorldNet_ServerModule);
+    assert(NULL != m_pLogModule);
 
-	if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CREATE_GUILD, this, &NFCWorldGuildModule::OnCreateGuildProcess)){ return false; }
-	if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_JOIN_GUILD, this, &NFCWorldGuildModule::OnJoinGuildProcess)){ return false; }
-	if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_LEAVE_GUILD, this, &NFCWorldGuildModule::OnLeaveGuildProcess)){ return false; }
-	if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_OPR_GUILD, this, &NFCWorldGuildModule::OnOprGuildMemberProcess)){ return false; }
-	if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_SEARCH_GUILD, this, &NFCWorldGuildModule::OnSearchGuildProcess)){ return false; }
+    if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CREATE_GUILD, this, &NFCWorldGuildModule::OnCreateGuildProcess))
+    {
+        return false;
+    }
+    if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_JOIN_GUILD, this, &NFCWorldGuildModule::OnJoinGuildProcess))
+    {
+        return false;
+    }
+    if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_LEAVE_GUILD, this, &NFCWorldGuildModule::OnLeaveGuildProcess))
+    {
+        return false;
+    }
+    if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_OPR_GUILD, this, &NFCWorldGuildModule::OnOprGuildMemberProcess))
+    {
+        return false;
+    }
+    if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_SEARCH_GUILD, this, &NFCWorldGuildModule::OnSearchGuildProcess))
+    {
+        return false;
+    }
 
-	return true;
+    return true;
 }
 
 bool NFCWorldGuildModule::Shut()
@@ -53,7 +68,7 @@ bool NFCWorldGuildModule::AfterInit()
     return true;
 }
 
-const NFGUID& NFCWorldGuildModule::CreateGuild( const NFGUID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP)
+const NFGUID& NFCWorldGuildModule::CreateGuild(const NFGUID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP)
 {
     if (strName.empty())
     {
@@ -74,7 +89,7 @@ const NFGUID& NFCWorldGuildModule::CreateGuild( const NFGUID& self, const std::s
     return m_pWorldGuildDataModule->CreateGuild(self, strName, strRoleName, nLevel, nJob, nDonation, nVIP);
 }
 
-bool NFCWorldGuildModule::JoinGuild( const NFGUID& self, const NFGUID& xGuildID )
+bool NFCWorldGuildModule::JoinGuild(const NFGUID& self, const NFGUID& xGuildID)
 {
     NF_SHARE_PTR<NFIObject> pGuildObject = m_pWorldGuildDataModule->GetGuild(xGuildID);
     if (!pGuildObject.get())
@@ -118,7 +133,7 @@ bool NFCWorldGuildModule::JoinGuild( const NFGUID& self, const NFGUID& xGuildID 
     {
         nPower = NFMsg::GUILD_POWER_TYPE_PRESIDENT;
     }
-    
+
     int nTitle = 0;
     int nOnlineGameID = 0;
 
@@ -131,13 +146,13 @@ bool NFCWorldGuildModule::JoinGuild( const NFGUID& self, const NFGUID& xGuildID 
     {
         return false;
     }
-    
-    m_pKernelModule->SetPropertyInt(xGuildID, "GuildMemeberCount", nCount+1);
 
-	return true;
+    m_pKernelModule->SetPropertyInt(xGuildID, "GuildMemeberCount", nCount + 1);
+
+    return true;
 }
 
-bool NFCWorldGuildModule::LeaveGuild( const NFGUID& self, const NFGUID& xGuildID )
+bool NFCWorldGuildModule::LeaveGuild(const NFGUID& self, const NFGUID& xGuildID)
 {
     NF_SHARE_PTR<NFIObject> pGuildObject = m_pWorldGuildDataModule->GetGuild(xGuildID);
     if (!pGuildObject.get())
@@ -159,11 +174,11 @@ bool NFCWorldGuildModule::LeaveGuild( const NFGUID& self, const NFGUID& xGuildID
     }
 
     const int nRow = varList.Int(0);
-    
+
     return pMemberRecord->Remove(nRow);
 }
 
-bool NFCWorldGuildModule::UpGuildMmember( const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember )
+bool NFCWorldGuildModule::UpGuildMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember)
 {
     NF_SHARE_PTR<NFIObject> pGuildObject = m_pWorldGuildDataModule->GetGuild(xGuildID);
     if (!pGuildObject.get())
@@ -196,10 +211,10 @@ bool NFCWorldGuildModule::UpGuildMmember( const NFGUID& self, const NFGUID& xGui
     }
 
     pMemberRecord->SetInt(nRow, NFrame::Guild::GuildMemberList_Power, (nPower + 1)) ;
-	return true;
+    return true;
 }
 
-bool NFCWorldGuildModule::DownGuildMmember( const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember )
+bool NFCWorldGuildModule::DownGuildMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember)
 {
     NF_SHARE_PTR<NFIObject> pGuildObject = m_pWorldGuildDataModule->GetGuild(xGuildID);
     if (!pGuildObject.get())
@@ -234,7 +249,7 @@ bool NFCWorldGuildModule::DownGuildMmember( const NFGUID& self, const NFGUID& xG
     return true;
 }
 
-bool NFCWorldGuildModule::KickGuildMmember( const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember )
+bool NFCWorldGuildModule::KickGuildMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember)
 {
     NF_SHARE_PTR<NFIObject> pGuildObject = m_pWorldGuildDataModule->GetGuild(xGuildID);
     if (!pGuildObject.get())
@@ -268,24 +283,24 @@ bool NFCWorldGuildModule::KickGuildMmember( const NFGUID& self, const NFGUID& xG
     return true;
 }
 
-bool NFCWorldGuildModule::GetGuildBaseInfo( const NFGUID& self, const NFGUID& xGuildID )
+bool NFCWorldGuildModule::GetGuildBaseInfo(const NFGUID& self, const NFGUID& xGuildID)
 {
-	return true;
+    return true;
 }
 
-bool NFCWorldGuildModule::GetGuildMemberInfo( const NFGUID& self, const NFGUID& xGuildID )
+bool NFCWorldGuildModule::GetGuildMemberInfo(const NFGUID& self, const NFGUID& xGuildID)
 {
 
-	return true;
+    return true;
 }
 
-bool NFCWorldGuildModule::GetGuildMemberInfo( const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember )
+bool NFCWorldGuildModule::GetGuildMemberInfo(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember)
 {
 
-	return false;
+    return false;
 }
 
-bool NFCWorldGuildModule::CheckPower( const NFGUID& self, const NFGUID& xGuildID, int nPowerType )
+bool NFCWorldGuildModule::CheckPower(const NFGUID& self, const NFGUID& xGuildID, int nPowerType)
 {
     NF_SHARE_PTR<NFIObject> pGuildObject = m_pWorldGuildDataModule->GetGuild(xGuildID);
     if (pGuildObject.get())
@@ -298,7 +313,7 @@ bool NFCWorldGuildModule::CheckPower( const NFGUID& self, const NFGUID& xGuildID
             if (varList.GetCount() == 1)
             {
                 const int nRow = varList.Int(0);
-                const int nPower = pMemberRecord->GetInt(nRow, NFrame::Guild::GuildMemberList_Power); 
+                const int nPower = pMemberRecord->GetInt(nRow, NFrame::Guild::GuildMemberList_Power);
                 if (nPower >= NFMsg::GUILD_POWER_TYPE_PRESIDENT)
                 {
                     return true;
@@ -310,7 +325,7 @@ bool NFCWorldGuildModule::CheckPower( const NFGUID& self, const NFGUID& xGuildID
     return false;
 }
 
-bool NFCWorldGuildModule::GetOnlineMember( const NFGUID& self, const NFGUID& xGuild, NFCDataList& varMemberList, NFCDataList& varGameList)
+bool NFCWorldGuildModule::GetOnlineMember(const NFGUID& self, const NFGUID& xGuild, NFCDataList& varMemberList, NFCDataList& varGameList)
 {
     NF_SHARE_PTR<NFIObject> pGuildObject = m_pWorldGuildDataModule->GetGuild(xGuild);
     if (!pGuildObject.get())
@@ -324,7 +339,7 @@ bool NFCWorldGuildModule::GetOnlineMember( const NFGUID& self, const NFGUID& xGu
         return false;
     }
 
-    for (int i = 0; i< pMemberRecord->GetRows(); i++)
+    for (int i = 0; i < pMemberRecord->GetRows(); i++)
     {
         if (!pMemberRecord->IsUsed(i))
         {
@@ -345,7 +360,7 @@ bool NFCWorldGuildModule::GetOnlineMember( const NFGUID& self, const NFGUID& xGu
     return true;
 }
 
-bool NFCWorldGuildModule::MemberOnline( const NFGUID& self, const NFGUID& xGuild , const int& nGameID)
+bool NFCWorldGuildModule::MemberOnline(const NFGUID& self, const NFGUID& xGuild , const int& nGameID)
 {
     NF_SHARE_PTR<NFIObject> pGuildObject = m_pWorldGuildDataModule->GetGuild(xGuild);
     if (!pGuildObject.get())
@@ -368,13 +383,13 @@ bool NFCWorldGuildModule::MemberOnline( const NFGUID& self, const NFGUID& xGuild
 
     const int nRow = varList.Int(0);
     pMemberRecord->SetInt(nRow, NFrame::Guild::GuildMemberList_GameID, nGameID);
-    
+
     pMemberRecord->SetInt(nRow, NFrame::Guild::GuildMemberList_Online, 1);
 
     return true;
 }
 
-bool NFCWorldGuildModule::MemberOffeline( const NFGUID& self, const NFGUID& xGuild )
+bool NFCWorldGuildModule::MemberOffeline(const NFGUID& self, const NFGUID& xGuild)
 {
     NF_SHARE_PTR<NFIObject> pGuildObject = m_pWorldGuildDataModule->GetGuild(xGuild);
     if (!pGuildObject.get())
@@ -405,135 +420,135 @@ bool NFCWorldGuildModule::MemberOffeline( const NFGUID& self, const NFGUID& xGui
 
 void NFCWorldGuildModule::OnCreateGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckCreateGuild);
+    CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckCreateGuild);
 
-	std::string strRoleName ;
-	int nLevel = 0;
-	int nJob = 0;
-	int nDonation= 0;
-	int nVIP= 0;
+    std::string strRoleName ;
+    int nLevel = 0;
+    int nJob = 0;
+    int nDonation = 0;
+    int nVIP = 0;
 
-	m_pWorldGuildDataModule->GetPlayerInfo(nPlayerID, strRoleName, nLevel, nJob, nDonation, nVIP);
-	NFGUID xGuild = CreateGuild(nPlayerID, xMsg.guild_name(), strRoleName, nLevel, nJob, nDonation, nVIP);
+    m_pWorldGuildDataModule->GetPlayerInfo(nPlayerID, strRoleName, nLevel, nJob, nDonation, nVIP);
+    NFGUID xGuild = CreateGuild(nPlayerID, xMsg.guild_name(), strRoleName, nLevel, nJob, nDonation, nVIP);
 
-	if (!xGuild.IsNull())
-	{
-		NFMsg::ReqAckCreateGuild xAck;
-		*xAck.mutable_guild_id() = NFINetModule::NFToPB(xGuild);
-		xAck.set_guild_name(xMsg.guild_name());
+    if (!xGuild.IsNull())
+    {
+        NFMsg::ReqAckCreateGuild xAck;
+        *xAck.mutable_guild_id() = NFINetModule::NFToPB(xGuild);
+        xAck.set_guild_name(xMsg.guild_name());
 
-		m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_GUILD, xAck, nSockIndex, nPlayerID);
-	}
-	else
-	{
-		NFMsg::ReqAckCreateGuild xAck;
-		*xAck.mutable_guild_id() = NFINetModule::NFToPB(xGuild);
-		xAck.set_guild_name("");
+        m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_GUILD, xAck, nSockIndex, nPlayerID);
+    }
+    else
+    {
+        NFMsg::ReqAckCreateGuild xAck;
+        *xAck.mutable_guild_id() = NFINetModule::NFToPB(xGuild);
+        xAck.set_guild_name("");
 
-		m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_GUILD, xAck, nSockIndex, nPlayerID);
-	}
+        m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_GUILD, xAck, nSockIndex, nPlayerID);
+    }
 }
 
 void NFCWorldGuildModule::OnJoinGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen,NFMsg::ReqAckJoinGuild)
+    CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckJoinGuild)
 
-		if (JoinGuild(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id())))
-		{
-			NFMsg::ReqAckJoinGuild xAck;
-			*xAck.mutable_guild_id() = xMsg.guild_id();
+    if (JoinGuild(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id())))
+    {
+        NFMsg::ReqAckJoinGuild xAck;
+        *xAck.mutable_guild_id() = xMsg.guild_id();
 
-			NFGUID xGuild = NFINetModule::PBToNF(xMsg.guild_id());
-			const std::string& strName = m_pKernelModule->GetPropertyString(xGuild, "Name");
-			xAck.set_guild_name(strName);
+        NFGUID xGuild = NFINetModule::PBToNF(xMsg.guild_id());
+        const std::string& strName = m_pKernelModule->GetPropertyString(xGuild, "Name");
+        xAck.set_guild_name(strName);
 
-			m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_JOIN_GUILD, xAck, nSockIndex, nPlayerID);
+        m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_JOIN_GUILD, xAck, nSockIndex, nPlayerID);
 
-			int nGameID = 0;
-			if(m_pWorldGuildDataModule->GetPlayerGameID(nPlayerID, nGameID))
-			{
-				MemberOnline(nPlayerID, xGuild, nGameID);
-			}
-		}
-		else
-		{
-			NFMsg::ReqAckJoinGuild xAck;
-			*xAck.mutable_guild_id() = NFINetModule::NFToPB(NFGUID());
-			xAck.set_guild_name("");
+        int nGameID = 0;
+        if (m_pWorldGuildDataModule->GetPlayerGameID(nPlayerID, nGameID))
+        {
+            MemberOnline(nPlayerID, xGuild, nGameID);
+        }
+    }
+    else
+    {
+        NFMsg::ReqAckJoinGuild xAck;
+        *xAck.mutable_guild_id() = NFINetModule::NFToPB(NFGUID());
+        xAck.set_guild_name("");
 
-			m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_JOIN_GUILD, xAck, nSockIndex, nPlayerID);
-		}
+        m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_JOIN_GUILD, xAck, nSockIndex, nPlayerID);
+    }
 }
 
 void NFCWorldGuildModule::OnLeaveGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen,NFMsg::ReqAckLeaveGuild)
+    CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckLeaveGuild)
 
-		if (LeaveGuild(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id())))
-		{
+    if (LeaveGuild(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id())))
+    {
 
-			NFMsg::ReqAckLeaveGuild xAck;
-			*xAck.mutable_guild_id() = xMsg.guild_id();
-			xAck.set_guild_name(xMsg.guild_name());
+        NFMsg::ReqAckLeaveGuild xAck;
+        *xAck.mutable_guild_id() = xMsg.guild_id();
+        xAck.set_guild_name(xMsg.guild_name());
 
-			m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_GUILD, xAck, nSockIndex, nPlayerID);
-		}
-		else
-		{
-			NFMsg::ReqAckLeaveGuild xAck;
-			*xAck.mutable_guild_id() = NFINetModule::NFToPB(NFGUID());
-			xAck.set_guild_name("");
+        m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_GUILD, xAck, nSockIndex, nPlayerID);
+    }
+    else
+    {
+        NFMsg::ReqAckLeaveGuild xAck;
+        *xAck.mutable_guild_id() = NFINetModule::NFToPB(NFGUID());
+        xAck.set_guild_name("");
 
-			m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_GUILD, xAck, nSockIndex, nPlayerID);
-		}
+        m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_GUILD, xAck, nSockIndex, nPlayerID);
+    }
 }
 
 void NFCWorldGuildModule::OnOprGuildMemberProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen,NFMsg::ReqAckOprGuildMember)
+    CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckOprGuildMember)
 
-		NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType eOprType = xMsg.type();
-	switch (eOprType)
-	{
-	case NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType::ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_UP:
-		UpGuildMmember(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id()), NFINetModule::PBToNF(xMsg.member_id()));
-		break;
-	case NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType::ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DOWN:
-		DownGuildMmember(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id()), NFINetModule::PBToNF(xMsg.member_id()));
-		break;
-	case NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType::ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICK:
-		KickGuildMmember(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id()), NFINetModule::PBToNF(xMsg.member_id()));
-		break;
-	default:
-		break;
-	}
+    NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType eOprType = xMsg.type();
+    switch (eOprType)
+    {
+        case NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType::ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_UP:
+            UpGuildMmember(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id()), NFINetModule::PBToNF(xMsg.member_id()));
+            break;
+        case NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType::ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DOWN:
+            DownGuildMmember(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id()), NFINetModule::PBToNF(xMsg.member_id()));
+            break;
+        case NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType::ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICK:
+            KickGuildMmember(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id()), NFINetModule::PBToNF(xMsg.member_id()));
+            break;
+        default:
+            break;
+    }
 
 }
 
 void NFCWorldGuildModule::OnSearchGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen,NFMsg::ReqSearchGuild);
+    CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSearchGuild);
 
-	std::vector<NFIWorldGuildDataModule::SearchGuildObject> xList;    
-	m_pWorldGuildDataModule->SearchGuild(nPlayerID, xMsg.guild_name(), xList);
+    std::vector<NFIWorldGuildDataModule::SearchGuildObject> xList;
+    m_pWorldGuildDataModule->SearchGuild(nPlayerID, xMsg.guild_name(), xList);
 
-	NFMsg::AckSearchGuild xAckMsg;
-	for (int i = 0; i < xList.size(); ++i)
-	{
-		NFMsg::AckSearchGuild::SearchGuildObject* pData = xAckMsg.add_guild_list();
-		if (pData)
-		{
-			const NFIWorldGuildDataModule::SearchGuildObject& xGuild = xList[i];
-			*pData->mutable_guild_id() = NFINetModule::NFToPB(xGuild.mxGuildID);
-			pData->set_guild_name(xGuild.mstrGuildName);
-			pData->set_guild_icon(xGuild.mnGuildIcon);
+    NFMsg::AckSearchGuild xAckMsg;
+    for (int i = 0; i < xList.size(); ++i)
+    {
+        NFMsg::AckSearchGuild::SearchGuildObject* pData = xAckMsg.add_guild_list();
+        if (pData)
+        {
+            const NFIWorldGuildDataModule::SearchGuildObject& xGuild = xList[i];
+            *pData->mutable_guild_id() = NFINetModule::NFToPB(xGuild.mxGuildID);
+            pData->set_guild_name(xGuild.mstrGuildName);
+            pData->set_guild_icon(xGuild.mnGuildIcon);
 
-			pData->set_guild_member_count(xGuild.mnGuildMemberCount);
-			pData->set_guild_member_max_count(xGuild.mnGuildMemberMaxCount);
-			pData->set_guild_honor(xGuild.mnGuildHonor);
-			pData->set_guild_rank(xGuild.mnGuildRank);
-		}
-	}
+            pData->set_guild_member_count(xGuild.mnGuildMemberCount);
+            pData->set_guild_member_max_count(xGuild.mnGuildMemberMaxCount);
+            pData->set_guild_honor(xGuild.mnGuildHonor);
+            pData->set_guild_rank(xGuild.mnGuildRank);
+        }
+    }
 
-	m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_SEARCH_GUILD, xAckMsg, nSockIndex, nPlayerID);
-} 
+    m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_SEARCH_GUILD, xAckMsg, nSockIndex, nPlayerID);
+}
