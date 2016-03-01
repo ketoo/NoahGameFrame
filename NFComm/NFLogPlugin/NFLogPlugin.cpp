@@ -31,7 +31,7 @@ const std::string NFLogPlugin::GetPluginName()
     return GET_CLASS_NAME(NFLogPlugin)
 }
 
-void NFLogPlugin::Install()
+       void NFLogPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFCLogModule)
 }

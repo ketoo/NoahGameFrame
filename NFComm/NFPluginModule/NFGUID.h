@@ -95,21 +95,21 @@ struct NFGUID
         return lexical_cast<std::string>(nHead64) + "-" + lexical_cast<std::string>(nData64);
     }
 
-	bool FromString(const std::string& strID)
-	{
-		size_t nStrLength = strID.length();
-		size_t nPos = strID.find('-');
-		if (nPos == std::string::npos)
-		{
-			return false;
-		}
+    bool FromString(const std::string& strID)
+    {
+        size_t nStrLength = strID.length();
+        size_t nPos = strID.find('-');
+        if (nPos == std::string::npos)
+        {
+            return false;
+        }
 
-		std::string strHead = strID.substr(0, nPos);
-		std::string strData = "";
-		if (nPos + 1 < nStrLength)
-		{
-			strData = strID.substr(nPos + 1, nStrLength - nPos);
-		}
+        std::string strHead = strID.substr(0, nPos);
+        std::string strData = "";
+        if (nPos + 1 < nStrLength)
+        {
+            strData = strID.substr(nPos + 1, nStrLength - nPos);
+        }
 
         try
         {
@@ -122,7 +122,7 @@ struct NFGUID
         {
             return false;
         }
-	}
+    }
 };
 
 #endif
