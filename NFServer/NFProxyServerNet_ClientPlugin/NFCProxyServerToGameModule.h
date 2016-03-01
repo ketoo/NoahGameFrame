@@ -38,19 +38,19 @@ public:
 
     virtual bool AfterInit();
 
-	virtual void LogRecive(const char* str){}
-	virtual void LogSend(const char* str){}
+    virtual void LogRecive(const char* str) {}
+    virtual void LogSend(const char* str) {}
 
 
 protected:
 
-	void OnReciveGSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSocketGSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+    void OnReciveGSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnSocketGSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
-	void Register(NFINet* pNet);
+    void Register(NFINet* pNet);
 
-	void OnAckEnterGame(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	virtual void LogServerInfo( const std::string& strServerInfo );
+    void OnAckEnterGame(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    virtual void LogServerInfo(const std::string& strServerInfo);
 
 private:
 
@@ -58,8 +58,8 @@ private:
     NFIProxyLogicModule* m_pProxyLogicModule;
     NFIKernelModule* m_pKernelModule;
     NFIProxyServerNet_ServerModule* m_pProxyServerNet_ServerModule;
-	NFIElementInfoModule* m_pElementInfoModule;
-	NFILogicClassModule* m_pLogicClassModule;
+    NFIElementInfoModule* m_pElementInfoModule;
+    NFILogicClassModule* m_pLogicClassModule;
 
 };
 
