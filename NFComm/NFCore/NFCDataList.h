@@ -25,8 +25,8 @@ public:
     virtual ~NFCDataList();
 
     // 添加
-	virtual bool Append(const NFIDataList& src);
-	virtual bool Append(const NFIDataList& src, const int start, const int count);
+    virtual bool Append(const NFIDataList& src);
+    virtual bool Append(const NFIDataList& src, const int start, const int count);
 
     // 添加
     virtual bool Append(const NFIDataList::TData& TData);
@@ -44,7 +44,7 @@ public:
     virtual bool Concat(const NFIDataList& src);
 
     //////////////////////////////////////////////////////////////////////////
-	const NF_SHARE_PTR<NFIDataList::TData> GetStack(const int index) const;
+    const NF_SHARE_PTR<NFIDataList::TData> GetStack(const int index) const;
 
     // 数据类型
     virtual TDATA_TYPE Type(const int index) const;
@@ -71,12 +71,12 @@ public:
     virtual const std::string& String(const int index) const;
     virtual const NFGUID& Object(const int index) const;
 
-	virtual bool ToString(std::string& str, const char* strSplit) const;
+    virtual bool ToString(std::string& str, const char* strSplit) const;
 
 
 protected:
-	void AddStatck();
+    void AddStatck();
     void InnerAppendEx(const NFIDataList& src, const int start, const int end);
 };
 
-#endif	
+#endif

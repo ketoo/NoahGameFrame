@@ -49,10 +49,10 @@ NFCLogModule::NFCLogModule(NFIPluginManager* p)
 bool NFCLogModule::Init()
 {
 
-// #ifdef NF_USE_ACTOR
-//     NFIActor* pActor = (NFIActor*)(pPluginManager);
-//     if (pActor->GetActorID() == NFIActorManager::EACTOR_MAIN)
-// #endif
+    // #ifdef NF_USE_ACTOR
+    //     NFIActor* pActor = (NFIActor*)(pPluginManager);
+    //     if (pActor->GetActorID() == NFIActorManager::EACTOR_MAIN)
+    // #endif
     {
         el::Loggers::addFlag(el::LoggingFlag::StrictLogFileSizeCheck);
         el::Loggers::addFlag(el::LoggingFlag::DisableApplicationAbortOnFatalLog);
@@ -104,27 +104,27 @@ bool NFCLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
 
     switch (nll)
     {
-    case NFILogModule::NLL_DEBUG_NORMAL:
-        LOG(DEBUG) << szBuffer;
-        break;
-    case NFILogModule::NLL_INFO_NORMAL:
-        LOG(INFO) << szBuffer;
-        break;
-    case NFILogModule::NLL_WARING_NORMAL:
-        LOG(WARNING) << szBuffer;
-        break;
-    case NFILogModule::NLL_ERROR_NORMAL:
+        case NFILogModule::NLL_DEBUG_NORMAL:
+            LOG(DEBUG) << szBuffer;
+            break;
+        case NFILogModule::NLL_INFO_NORMAL:
+            LOG(INFO) << szBuffer;
+            break;
+        case NFILogModule::NLL_WARING_NORMAL:
+            LOG(WARNING) << szBuffer;
+            break;
+        case NFILogModule::NLL_ERROR_NORMAL:
         {
             LOG(ERROR) << szBuffer;
             //LogStack();
         }
         break;
-    case NFILogModule::NLL_FATAL_NORMAL:
-        LOG(FATAL) << szBuffer;
-        break;
-    default:
-        LOG(INFO) << szBuffer;
-        break;
+        case NFILogModule::NLL_FATAL_NORMAL:
+            LOG(FATAL) << szBuffer;
+            break;
+        default:
+            LOG(INFO) << szBuffer;
+            break;
     }
 
     return true;
@@ -264,7 +264,7 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const s
 {
     switch (nll)
     {
-    case NFILogModule::NLL_DEBUG_NORMAL:
+        case NFILogModule::NLL_DEBUG_NORMAL:
         {
             if (0 == line)
             {
@@ -276,7 +276,7 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const s
             }
         }
         break;
-    case NFILogModule::NLL_INFO_NORMAL:
+        case NFILogModule::NLL_INFO_NORMAL:
         {
             if (0 == line)
             {
@@ -288,7 +288,7 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const s
             }
         }
         break;
-    case NFILogModule::NLL_WARING_NORMAL:
+        case NFILogModule::NLL_WARING_NORMAL:
         {
             if (0 == line)
             {
@@ -300,7 +300,7 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const s
             }
         }
         break;
-    case NFILogModule::NLL_ERROR_NORMAL:
+        case NFILogModule::NLL_ERROR_NORMAL:
         {
             if (0 == line)
             {
@@ -312,8 +312,8 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const s
             }
         }
         break;
-    default:
-        break;
+        default:
+            break;
     }
 
     return true;
@@ -333,7 +333,7 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const s
     return true;
 }
 
-bool NFCLogModule::LogDebugFunctionDump(const NFGUID ident, const int nMsg, const std::string& strArg,  const char* func /*= ""*/, const int line /*= 0*/ )
+bool NFCLogModule::LogDebugFunctionDump(const NFGUID ident, const int nMsg, const std::string& strArg,  const char* func /*= ""*/, const int line /*= 0*/)
 {
     //#ifdef NF_DEBUG_MODE
     LogNormal(NFILogModule::NLL_WARING_NORMAL, ident, strArg + "MsgID:", nMsg, func, line);
@@ -362,31 +362,31 @@ bool NFCLogModule::ChangeLogLevel(const std::string& strLevel)
     // !!!!!! NOTICE:故意没有break，请千万注意 !!!!!!
     switch (logLevel)
     {
-    case el::Level::Fatal:
+        case el::Level::Fatal:
         {
             el::Configuration errorConfiguration(el::Level::Error, el::ConfigurationType::Enabled, "false");
             pConfigurations->set(&errorConfiguration);
         }
-    case el::Level::Error:
+        case el::Level::Error:
         {
             el::Configuration warnConfiguration(el::Level::Warning, el::ConfigurationType::Enabled, "false");
             pConfigurations->set(&warnConfiguration);
         }
-    case el::Level::Warning:
+        case el::Level::Warning:
         {
             el::Configuration infoConfiguration(el::Level::Info, el::ConfigurationType::Enabled, "false");
             pConfigurations->set(&infoConfiguration);
         }
-    case el::Level::Info:
+        case el::Level::Info:
         {
             el::Configuration debugConfiguration(el::Level::Debug, el::ConfigurationType::Enabled, "false");
             pConfigurations->set(&debugConfiguration);
-            
+
         }
-    case el::Level::Debug:
-        break;
-    default:
-        break;
+        case el::Level::Debug:
+            break;
+        default:
+            break;
     }
 
     el::Loggers::reconfigureAllLoggers(*pConfigurations);

@@ -68,7 +68,7 @@ void CloseXButton()
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
     HWND hWnd = GetConsoleWindow();
-    if(hWnd)
+    if (hWnd)
     {
         HMENU hMenu = GetSystemMenu(hWnd, FALSE);
         EnableMenuItem(hMenu, SC_CLOSE, MF_DISABLED | MF_BYCOMMAND);
@@ -82,39 +82,39 @@ std::thread gThread;
 
 void ThreadFunc()
 {
-    while ( !bExitApp )
+    while (!bExitApp)
     {
         //std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-//         std::string s;
-//         std::cin >> s;
-//         if ( 0 == stricmp( s.c_str(), "exit" ) )
-//         {
-//             bExitApp = true;
-//         }
+        //         std::string s;
+        //         std::cin >> s;
+        //         if ( 0 == stricmp( s.c_str(), "exit" ) )
+        //         {
+        //             bExitApp = true;
+        //         }
     }
 }
 
 void CreateBackThread()
 {
     //gThread = std::thread(std::bind(&ThreadFunc));
-	//auto f = std::async (std::launch::async, std::bind(ThreadFunc));
+    //auto f = std::async (std::launch::async, std::bind(ThreadFunc));
     //std::cout << "CreateBackThread, thread ID = " << gThread.get_id() << std::endl;
 }
 
 void InitDaemon()
 {
 #if NF_PLATFORM == NF_PLATFORM_LINUX
-	daemon(1, 0);
+    daemon(1, 0);
 
-	// ignore signals
-	signal(SIGINT,  SIG_IGN);
-	signal(SIGHUP,  SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGPIPE, SIG_IGN);
-	signal(SIGTTOU, SIG_IGN);
-	signal(SIGTTIN, SIG_IGN);
-	signal(SIGTERM, SIG_IGN);
+    // ignore signals
+    signal(SIGINT,  SIG_IGN);
+    signal(SIGHUP,  SIG_IGN);
+    signal(SIGQUIT, SIG_IGN);
+    signal(SIGPIPE, SIG_IGN);
+    signal(SIGTTOU, SIG_IGN);
+    signal(SIGTTIN, SIG_IGN);
+    signal(SIGTERM, SIG_IGN);
 #endif
 }
 
@@ -148,27 +148,27 @@ int main(int argc, char* argv[])
 #if NF_PLATFORM == NF_PLATFORM_WIN
     SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
 #elif NF_PLATFORM == NF_PLATFORM_LINUX
-	bool bDaemon = false;
+    bool bDaemon = false;
 
-	if (argc > 1)
-	{
-		if (0 == NFSTRICMP((const char*)argv[1], "-d"))
-		{
-			bDaemon = true;
-		}
-	}
+    if (argc > 1)
+    {
+        if (0 == NFSTRICMP((const char*)argv[1], "-d"))
+        {
+            bDaemon = true;
+        }
+    }
 
-	if (bDaemon)
-	{
-		InitDaemon();
-	}
+    if (bDaemon)
+    {
+        InitDaemon();
+    }
 
-	signal(SIGPIPE, SIG_IGN);
-	signal(SIGCHLD, SIG_IGN);
+    signal(SIGPIPE, SIG_IGN);
+    signal(SIGCHLD, SIG_IGN);
 
 #endif
-	NFCActorManager::GetSingletonPtr()->Init();
-	NFCActorManager::GetSingletonPtr()->AfterInit();
+    NFCActorManager::GetSingletonPtr()->Init();
+    NFCActorManager::GetSingletonPtr()->AfterInit();
     NFCActorManager::GetSingletonPtr()->CheckConfig();
 
     PrintfLogo();
@@ -180,7 +180,7 @@ int main(int argc, char* argv[])
     {
         while (true)
         {
-			std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
             if (bExitApp)
             {
@@ -201,8 +201,8 @@ int main(int argc, char* argv[])
         }
     }
 
-	NFCActorManager::GetSingletonPtr()->BeforeShut();
-	NFCActorManager::GetSingletonPtr()->Shut();
+    NFCActorManager::GetSingletonPtr()->BeforeShut();
+    NFCActorManager::GetSingletonPtr()->Shut();
 
     NFCActorManager::GetSingletonPtr()->ReleaseInstance();
 

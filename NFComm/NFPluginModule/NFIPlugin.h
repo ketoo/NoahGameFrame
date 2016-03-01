@@ -22,7 +22,7 @@
     pManager->AddModule( (#className), pRegisterModule##className );AddElement( (#className), pRegisterModule##className );
 
 #define UNREGISTER_MODULE(pManager, className) NFILogicModule* pUnRegisterModule##className =  \
-    dynamic_cast<NFILogicModule*>( pManager->FindModule( (#className) ) ); pManager->RemoveModule( (#className) ); RemoveElement( (#className) ); delete pUnRegisterModule##className;
+        dynamic_cast<NFILogicModule*>( pManager->FindModule( (#className) ) ); pManager->RemoveModule( (#className) ); RemoveElement( (#className) ); delete pUnRegisterModule##className;
 
 #define CREATE_PLUGIN(pManager, className)  NFIPlugin* pCreatePlugin##className = new className(pManager); pManager->Registered( pCreatePlugin##className );
 
@@ -32,11 +32,11 @@
 
 
 #define REGISTER_COMPONENT(pManager, className)  NFIComponent* pRegisterComponent##className= new className(pManager); \
-	pRegisterComponent##className->strName = (#className); \
-	pManager->AddComponent( (#className), pRegisterComponent##className );
+    pRegisterComponent##className->strName = (#className); \
+    pManager->AddComponent( (#className), pRegisterComponent##className );
 
 #define UNREGISTER_COMPONENT(pManager, className) NFIComponent* pRegisterComponent##className =  \
-	dynamic_cast<NFIComponent*>( pManager->FindComponent( (#className) ) ); pManager->RemoveComponent( (#className) ); delete pRegisterComponent##className;
+        dynamic_cast<NFIComponent*>( pManager->FindComponent( (#className) ) ); pManager->RemoveComponent( (#className) ); delete pRegisterComponent##className;
 
 
 class NFIPluginManager;
@@ -59,10 +59,10 @@ public:
         while (pModule)
         {
             bool bRet = pModule->Init();
-			if (!bRet)
-			{
-				assert(0);
-			}
+            if (!bRet)
+            {
+                assert(0);
+            }
 
             pModule = Next();
         }
@@ -75,10 +75,10 @@ public:
         while (pModule)
         {
             bool bRet = pModule->AfterInit();
-			if (!bRet)
-			{
-				assert(0);
-			}
+            if (!bRet)
+            {
+                assert(0);
+            }
 
             pModule = Next();
         }
