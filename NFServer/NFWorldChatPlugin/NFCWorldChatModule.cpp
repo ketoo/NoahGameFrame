@@ -14,11 +14,14 @@
 
 bool NFCWorldChatModule::Init()
 {
-	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>("NFCWorldNet_ServerModule");
+    m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>("NFCWorldNet_ServerModule");
 
-	assert(NULL != m_pWorldNet_ServerModule);
+    assert(NULL != m_pWorldNet_ServerModule);
 
-	if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CHAT, this, &NFCWorldChatModule::OnChatProcess)){ return false; }
+    if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CHAT, this, &NFCWorldChatModule::OnChatProcess))
+    {
+        return false;
+    }
 
     return true;
 }
@@ -39,7 +42,7 @@ bool NFCWorldChatModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
 
-	assert(NULL != m_pKernelModule);
+    assert(NULL != m_pKernelModule);
 
     return true;
 }
@@ -47,16 +50,16 @@ bool NFCWorldChatModule::AfterInit()
 
 void NFCWorldChatModule::OnChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckPlayerChat)
-		switch (xMsg.chat_type())
-	{
-		case NFMsg::ReqAckPlayerChat::EGCT_WORLD:
-			{
-				//SendMsgPBToAllClient(NFMsg::EGMI_ACK_CHAT, xMsg);
-			}
-			break;
-		default:
-			break;;
-	}
+    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckPlayerChat)
+    switch (xMsg.chat_type())
+    {
+        case NFMsg::ReqAckPlayerChat::EGCT_WORLD:
+        {
+            //SendMsgPBToAllClient(NFMsg::EGMI_ACK_CHAT, xMsg);
+        }
+        break;
+        default:
+            break;;
+    }
 }
 
