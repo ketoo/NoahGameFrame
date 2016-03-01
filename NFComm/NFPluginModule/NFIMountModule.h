@@ -18,7 +18,7 @@ class NFIMountModule
 public:
     virtual int AddMount(const NFGUID& self, const std::string& strPetID, int nRow = 0, bool bLevel = false) = 0;
     virtual int RemoveMount(const NFGUID& self, const std::string& strPetID, int nRow = 0) = 0;
-    virtual void AddNewerMount( const NFGUID self, const int nLevel ) = 0;
+    virtual void AddNewerMount(const NFGUID self, const int nLevel) = 0;
 };
 
 #endif // !_NFI_MOUNT_MODULE_H

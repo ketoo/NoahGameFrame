@@ -38,12 +38,12 @@ bool NFCDataNoSqlModule::AfterInit()
     return true;
 }
 
-bool NFCDataNoSqlModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCDataNoSqlModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
     return true;
 }
 
-bool NFCDataNoSqlModule::ConnectSql( const std::string& strIP )
+bool NFCDataNoSqlModule::ConnectSql(const std::string& strIP)
 {
     m_pPlayerDataDriver = new NFCDataNoSqlDriver();
     m_pPlayerDataDriver->Connect(strIP);

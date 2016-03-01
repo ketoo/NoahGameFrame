@@ -36,7 +36,7 @@ const std::string NFTagPlugin::GetPluginName()
     return GET_CLASS_NAME(NFTagPlugin)
 }
 
-void NFTagPlugin::Install()
+       void NFTagPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFCTagModule)
 

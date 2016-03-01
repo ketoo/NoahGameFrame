@@ -17,24 +17,24 @@
 #include "NFComm/NFCore/NFIRecord.h"
 #include "NFComm/NFEventDefine/NFEventDefine.h"
 
-template<typename DerivedType, typename BaseType> 
+template<typename DerivedType, typename BaseType>
 class TIsDerived
 {
 public:
-	static int AnyFunction(BaseType* base)
-	{
-		return 1;
-	}
+    static int AnyFunction(BaseType* base)
+    {
+        return 1;
+    }
 
-	static  char AnyFunction(void* t2)
-	{
-		return 0;
-	}
+    static  char AnyFunction(void* t2)
+    {
+        return 0;
+    }
 
-	enum 
-	{
-		Result = ( sizeof(int) == sizeof(AnyFunction( (DerivedType*)NULL) ) ), 
-	};
+    enum
+    {
+        Result = (sizeof(int) == sizeof(AnyFunction((DerivedType*)NULL))),
+    };
 
 };
 class NFIPluginManager;
@@ -43,16 +43,16 @@ class NFILogicModule
 {
 
 public:
-	NFILogicModule()
+    NFILogicModule()
     {
         bCanReload = true;
     }
 
-	virtual ~NFILogicModule(){}
-	
-	virtual bool Init()
+    virtual ~NFILogicModule() {}
+
+    virtual bool Init()
     {
-        
+
         return true;
     }
 
@@ -83,11 +83,11 @@ public:
 
     virtual void OnReload(const char* strModuleName, NFILogicModule* pModule)
     {
-		BeforeShut();
-		Shut();
+        BeforeShut();
+        Shut();
 
-		Init();
-		AfterInit();
+        Init();
+        AfterInit();
     }
 
     virtual NFIPluginManager* GetPluginManager() const

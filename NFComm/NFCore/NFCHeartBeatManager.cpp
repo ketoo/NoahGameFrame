@@ -31,25 +31,25 @@ bool NFCHeartBeatManager::Execute()
     NF_SHARE_PTR<NFCHeartBeatElement> pElement = mHeartBeatElementMapEx.First();
     while (pElement.get())
     {
-		NFINT64 nTime = NFTimeEx::GetNowTimeMille();
+        NFINT64 nTime = NFTimeEx::GetNowTimeMille();
 
-		if (nTime > pElement->nTime && pElement->nCount > 0)
-		{
-			pElement->nCount--;
+        if (nTime > pElement->nTime && pElement->nCount > 0)
+        {
+            pElement->nCount--;
 
-			pElement->DoHeartBeatEvent();
+            pElement->DoHeartBeatEvent();
 
-			if (pElement->nCount <= 0)
-			{
-				//µÈ´ýÉ¾³ý
-				mRemoveListEx.Add(pElement->strBeatName);
-			}
-			else
-			{
-				//Do Event
-				pElement->nTime = nTime + NFINT64(pElement->fBeatTime * 1000);
-			}
-		}
+            if (pElement->nCount <= 0)
+            {
+                //µÈ´ýÉ¾³ý
+                mRemoveListEx.Add(pElement->strBeatName);
+            }
+            else
+            {
+                //Do Event
+                pElement->nTime = nTime + NFINT64(pElement->fBeatTime * 1000);
+            }
+        }
 
         pElement = mHeartBeatElementMapEx.Next();
     }
@@ -97,7 +97,7 @@ NFGUID NFCHeartBeatManager::Self()
 bool NFCHeartBeatManager::AddHeartBeat(const NFGUID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount)
 {
     NFCHeartBeatElement xHeartBeat;
-	xHeartBeat.nTime = NFTimeEx::GetNowTime() + (NFINT64)fTime;
+    xHeartBeat.nTime = NFTimeEx::GetNowTime() + (NFINT64)fTime;
     xHeartBeat.fBeatTime = fTime;
     xHeartBeat.nCount = nCount;
     xHeartBeat.self = self;

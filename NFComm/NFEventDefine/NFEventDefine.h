@@ -44,7 +44,7 @@ enum NFEventDefine
     //arg[0]:object,type,sceneID,line
     NFED_ON_OBJECT_ENTER_SCENE_BEFORE,
     NFED_ON_OBJECT_ENTER_SCENE_RESULT,
-    
+
     NFED_ON_OBJECT_BE_KILLED,
 
     // 通知副本奖励
