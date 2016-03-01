@@ -36,7 +36,7 @@ const std::string NFLuaScriptPlugin::GetPluginName()
     return GET_CLASS_NAME(NFLuaScriptPlugin)
 }
 
-void NFLuaScriptPlugin::Install()
+       void NFLuaScriptPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFCLuaScriptModule)
 

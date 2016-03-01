@@ -1,6 +1,6 @@
 #include "NFCUrlCodeModule.h"
 
-NFCUrlCodeModule::EncodeURIDefineNode NFCUrlCodeModule::mxURIEncodeMap[256] = 
+NFCUrlCodeModule::EncodeURIDefineNode NFCUrlCodeModule::mxURIEncodeMap[256] =
 {
     {3, "%00"},
     {3, "%01"},
@@ -260,225 +260,230 @@ NFCUrlCodeModule::EncodeURIDefineNode NFCUrlCodeModule::mxURIEncodeMap[256] =
     {3, "%FF"}
 };
 
-NFCUrlCodeModule::DecodeURIDefineNode NFCUrlCodeModule::mxURIDecodeMap[103] = {
-    {0,0},//0
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},//20
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},//30
-    {0,0},
-    {0,0},//32
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},//40
-    {0,0},
-    {0,0},
-    {0,20},//43 + --> ' '
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {16,1},
-    {32,2},
-    {48,3},
-    {64,4},
-    {80,5},
-    {96,6},
-    {112,7},
-    {128,8},
-    {144,9},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {160,10},
-    {176,11},
-    {192,12},
-    {208,13},
-    {224,14},
-    {240,15},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {0,0},
-    {160,10},
-    {176,11},
-    {192,12},
-    {208,13},
-    {224,14},
-    {240,15}
+NFCUrlCodeModule::DecodeURIDefineNode NFCUrlCodeModule::mxURIDecodeMap[103] =
+{
+    {0, 0}, //0
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0}, //20
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0}, //30
+    {0, 0},
+    {0, 0}, //32
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0}, //40
+    {0, 0},
+    {0, 0},
+    {0, 20}, //43 + --> ' '
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {16, 1},
+    {32, 2},
+    {48, 3},
+    {64, 4},
+    {80, 5},
+    {96, 6},
+    {112, 7},
+    {128, 8},
+    {144, 9},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {160, 10},
+    {176, 11},
+    {192, 12},
+    {208, 13},
+    {224, 14},
+    {240, 15},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {160, 10},
+    {176, 11},
+    {192, 12},
+    {208, 13},
+    {224, 14},
+    {240, 15}
 };
 
 std::string NFCUrlCodeModule::EncodeURIValue(const std::string& strSource)
 {
-	std::string re;
-	EncodeURIValue(re, strSource);
-	
-	return re;
+    std::string re;
+    EncodeURIValue(re, strSource);
+
+    return re;
 }
 
 int NFCUrlCodeModule::EncodeURIValue(std::string& strResult, const std::string& strSource)
 {
-	size_t len = strSource.size() * 3 + 10;
-	char * buff = NF_NEW char[len];
-	int res = EncodeURIValue(buff, strSource.c_str(), len);	
+    size_t len = strSource.size() * 3 + 10;
+    char* buff = NF_NEW char[len];
+    int res = EncodeURIValue(buff, strSource.c_str(), len);
     strResult = buff;
-	
-	delete [] buff;
-	
-	return res;
+
+    delete [] buff;
+
+    return res;
 }
 
-int NFCUrlCodeModule::EncodeURIValue(char * pResultBuffer, const char * pSourceStr, size_t nResultBufferSize)
+int NFCUrlCodeModule::EncodeURIValue(char* pResultBuffer, const char* pSourceStr, size_t nResultBufferSize)
 {
-	if(pSourceStr == NULL || pResultBuffer == NULL)
+    if (pSourceStr == NULL || pResultBuffer == NULL)
     {
-		return ERR_NULL_PARAMS;
-	}
-	
+        return ERR_NULL_PARAMS;
+    }
+
     register size_t blen = nResultBufferSize - 1;
     register size_t c = 0;
 
-	register unsigned char * p = (unsigned char *)pSourceStr;
-	register EncodeURIDefineNode * tmp = NULL;
-	int res = OK;
-	
-	while(*p != '\0')
+    register unsigned char* p = (unsigned char*)pSourceStr;
+    register EncodeURIDefineNode* tmp = NULL;
+    int res = OK;
+
+    while (*p != '\0')
     {
-		tmp = &mxURIEncodeMap[*p];
-		if(c + (*tmp).len > blen)
+        tmp = &mxURIEncodeMap[*p];
+        if (c + (*tmp).len > blen)
         {
-			res = ERR_BUFFER_TOO_SMALL;
-			break;
-		}
-        else{
-			memcpy(pResultBuffer + c, (*tmp).ta, (*tmp).len);
-			c += (*tmp).len;
-		}
-		++p;
-	}
+            res = ERR_BUFFER_TOO_SMALL;
+            break;
+        }
+        else
+        {
+            memcpy(pResultBuffer + c, (*tmp).ta, (*tmp).len);
+            c += (*tmp).len;
+        }
+        ++p;
+    }
 
-	*(pResultBuffer + c) = '\0';
-	
-	return res;
+    *(pResultBuffer + c) = '\0';
+
+    return res;
 }
 
-std::string NFCUrlCodeModule::DecodeURIValue(const std::string& sourceStr){
-	std::string re;
-	
-	DecodeURIValue(re, sourceStr);
-	
-	return re;
-}
-
-int NFCUrlCodeModule::DecodeURIValue(std::string& resultStr, const std::string& sourceStr){
-
-	size_t len = sourceStr.size() + 10;
-	char * buff = NF_NEW char[len];
-	
-	int res = DecodeURIValue(buff, sourceStr.c_str(), len);
-	resultStr = buff;
-	
-	delete [] buff;
-	
-	return res;
-}
-
-int NFCUrlCodeModule::DecodeURIValue(char * resultBuffer, const char * sourceStr, size_t resultBufferSize)
+std::string NFCUrlCodeModule::DecodeURIValue(const std::string& sourceStr)
 {
-	if(sourceStr == NULL || resultBuffer == NULL){
-		return ERR_NULL_PARAMS;
-	}
-	
+    std::string re;
+
+    DecodeURIValue(re, sourceStr);
+
+    return re;
+}
+
+int NFCUrlCodeModule::DecodeURIValue(std::string& resultStr, const std::string& sourceStr)
+{
+
+    size_t len = sourceStr.size() + 10;
+    char* buff = NF_NEW char[len];
+
+    int res = DecodeURIValue(buff, sourceStr.c_str(), len);
+    resultStr = buff;
+
+    delete [] buff;
+
+    return res;
+}
+
+int NFCUrlCodeModule::DecodeURIValue(char* resultBuffer, const char* sourceStr, size_t resultBufferSize)
+{
+    if (sourceStr == NULL || resultBuffer == NULL)
+    {
+        return ERR_NULL_PARAMS;
+    }
+
     register size_t blen = resultBufferSize - 1;
     register size_t c = 0;
 
-	register unsigned char * p = (unsigned char *)sourceStr;
-	register DecodeURIDefineNode * tmph = NULL;
-	register DecodeURIDefineNode * tmpl = NULL;
-	int res = OK;
-	
-	while(*p != '\0')
+    register unsigned char* p = (unsigned char*)sourceStr;
+    register DecodeURIDefineNode* tmph = NULL;
+    register DecodeURIDefineNode* tmpl = NULL;
+    int res = OK;
+
+    while (*p != '\0')
     {
-		if(c + 1 > blen)
+        if (c + 1 > blen)
         {
-			res = ERR_BUFFER_TOO_SMALL;
-			break;
-		}
-		
-		if(('%' == *p) && isxdigit(*(p + 1)) && isxdigit(*(p + 2)))
+            res = ERR_BUFFER_TOO_SMALL;
+            break;
+        }
+
+        if (('%' == *p) && isxdigit(*(p + 1)) && isxdigit(*(p + 2)))
         {
-			tmph = &mxURIDecodeMap[*(p + 1)];
-			tmpl = &mxURIDecodeMap[*(p + 2)];
-			*(resultBuffer + c) = (*tmph).highVal + (*tmpl).lowVal;
-			p += 3;
-		}
+            tmph = &mxURIDecodeMap[*(p + 1)];
+            tmpl = &mxURIDecodeMap[*(p + 2)];
+            *(resultBuffer + c) = (*tmph).highVal + (*tmpl).lowVal;
+            p += 3;
+        }
         else
         {
-			*(resultBuffer + c) = (*p == '+') ? 0x20 : *p;
-			++p;
-		}
-		
-		c += 1;
-	}
+            *(resultBuffer + c) = (*p == '+') ? 0x20 : *p;
+            ++p;
+        }
 
-	*(resultBuffer + c) = '\0';
-	return res;
+        c += 1;
+    }
+
+    *(resultBuffer + c) = '\0';
+    return res;
 }

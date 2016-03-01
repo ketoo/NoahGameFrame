@@ -40,15 +40,15 @@ public:
 
     virtual const int GetPropertyIndex(const std::string& strProperty);
 
-	virtual bool SetPropertyInt(const std::string& strPropertyName, const NFINT64 nValue);
-	virtual bool SetPropertyFloat(const std::string& strPropertyName, const double dwValue);
-	virtual bool SetPropertyString(const std::string& strPropertyName, const std::string& strValue);
-	virtual bool SetPropertyObject(const std::string& strPropertyName, const NFGUID& obj);
+    virtual bool SetPropertyInt(const std::string& strPropertyName, const NFINT64 nValue);
+    virtual bool SetPropertyFloat(const std::string& strPropertyName, const double dwValue);
+    virtual bool SetPropertyString(const std::string& strPropertyName, const std::string& strValue);
+    virtual bool SetPropertyObject(const std::string& strPropertyName, const NFGUID& obj);
 
-	virtual NFINT64 GetPropertyInt(const std::string& strPropertyName);
-	virtual double GetPropertyFloat(const std::string& strPropertyName);
-	virtual const std::string& GetPropertyString(const std::string& strPropertyName);
-	virtual const NFGUID& GetPropertyObject(const std::string& strPropertyName);
+    virtual NFINT64 GetPropertyInt(const std::string& strPropertyName);
+    virtual double GetPropertyFloat(const std::string& strPropertyName);
+    virtual const std::string& GetPropertyString(const std::string& strPropertyName);
+    virtual const NFGUID& GetPropertyObject(const std::string& strPropertyName);
 
 
 private:

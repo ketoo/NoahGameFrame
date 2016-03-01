@@ -60,7 +60,7 @@ public:
 protected:
 
 private:
-	redis::client* m_pRedisClient;
+    redis::client* m_pRedisClient;
 };
 
 #endif
