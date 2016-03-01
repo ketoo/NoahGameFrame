@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_PROPERTYMANAGER_H
-#define _NFI_PROPERTYMANAGER_H
+#ifndef NFI_PROPERTYMANAGER_H
+#define NFI_PROPERTYMANAGER_H
 
 #include "NFMap.h"
 #include "NFIProperty.h"
