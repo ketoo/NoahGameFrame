@@ -16,8 +16,8 @@ class NFIGameServerConfigModule
     : public NFILogicModule
 {
 public:
-    virtual bool AddSceneToActor( const int nSceneID, const int nGameServer ) = 0;
-    virtual int GetActorID( const int nSceneID ) = 0;
+    virtual bool AddSceneToActor(const int nSceneID, const int nGameServer) = 0;
+    virtual int GetActorID(const int nSceneID) = 0;
 };
 
 #endif

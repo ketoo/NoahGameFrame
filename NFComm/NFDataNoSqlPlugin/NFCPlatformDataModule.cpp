@@ -34,34 +34,34 @@ bool NFCPlatformDataModule::Shut()
     return true;
 }
 
-bool NFCPlatformDataModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCPlatformDataModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
-	return true;
+    return true;
 }
 
 bool NFCPlatformDataModule::AfterInit()
 {
-	return true;
+    return true;
 }
 
-int NFCPlatformDataModule::AddAccountInfo( const std::string& strAccount, const std::string& strPassword )
+int NFCPlatformDataModule::AddAccountInfo(const std::string& strAccount, const std::string& strPassword)
 {
-	return 0;
+    return 0;
 }
 
-int NFCPlatformDataModule::ConfirmAccountInfo( const std::string& strAccount, const std::string& strPassword )
+int NFCPlatformDataModule::ConfirmAccountInfo(const std::string& strAccount, const std::string& strPassword)
 {
-	return 0;
+    return 0;
 
 }
 
-int NFCPlatformDataModule::SetAccountState( const std::string& strAccount, const int nState )
+int NFCPlatformDataModule::SetAccountState(const std::string& strAccount, const int nState)
 {
-	return 0;
+    return 0;
 
 }
 
-bool NFCPlatformDataModule::ConnectSql( const std::string& strIP )
+bool NFCPlatformDataModule::ConnectSql(const std::string& strIP)
 {
     m_pPlayerDataDriver = new NFCDataNoSqlDriver();
     m_pPlayerDataDriver->Connect(strIP);

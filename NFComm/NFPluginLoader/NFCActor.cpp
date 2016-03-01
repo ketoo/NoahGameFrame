@@ -10,66 +10,66 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 
-void NFCActor::HandlerEx( const NFIActorMessage& message, const Theron::Address from )
+void NFCActor::HandlerEx(const NFIActorMessage& message, const Theron::Address from)
 {
-	//添加到主线程事件
-	m_pActorManager->GetPluginManager()->HandlerEx(message, from);
+    //添加到主线程事件
+    m_pActorManager->GetPluginManager()->HandlerEx(message, from);
 }
 
-void NFCActor::AddComponent( NF_SHARE_PTR<NFIComponent> pComponent )
+void NFCActor::AddComponent(NF_SHARE_PTR<NFIComponent> pComponent)
 {
-	if (nullptr != pComponent)
-	{
-		mxComponentList.Add(pComponent);
-	}
+    if (nullptr != pComponent)
+    {
+        mxComponentList.Add(pComponent);
+    }
 }
 
-void NFCActor::HandlerSelf( const NFIActorMessage& message, const Theron::Address from )
+void NFCActor::HandlerSelf(const NFIActorMessage& message, const Theron::Address from)
 {
-	std::string strData = message.data;
+    std::string strData = message.data;
 
-	NF_SHARE_PTR<NFIComponent> pComponent;
-	bool bRet = mxComponentList.First(pComponent);
-	while (bRet)
-	{
-		if (!pComponent->HasInit())
-		{
-			pComponent->SetHasInit(true);
+    NF_SHARE_PTR<NFIComponent> pComponent;
+    bool bRet = mxComponentList.First(pComponent);
+    while (bRet)
+    {
+        if (!pComponent->HasInit())
+        {
+            pComponent->SetHasInit(true);
 
-			pComponent->Init();
-			pComponent->AfterInit();
-		}
+            pComponent->Init();
+            pComponent->AfterInit();
+        }
 
-		pComponent->OnASyncEvent(message.self, message.nSubMsgID, strData);
+        pComponent->OnASyncEvent(message.self, message.nSubMsgID, strData);
 
-		bRet = mxComponentList.Next(pComponent);
-	}
-	//m_pComponent->OnASyncEvent(message.self, message.nSubMsgID, strData);
+        bRet = mxComponentList.Next(pComponent);
+    }
+    //m_pComponent->OnASyncEvent(message.self, message.nSubMsgID, strData);
 
-	//message.xActorEventFunc->xBeginFuncptr->operator()(message.self, message.nSubMsgID, strData);
+    //message.xActorEventFunc->xBeginFuncptr->operator()(message.self, message.nSubMsgID, strData);
 
-	////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
 
-	NFIActorMessage xReturnMessage;
+    NFIActorMessage xReturnMessage;
 
-	xReturnMessage.eType = NFIActorMessage::EACTOR_RETURN_EVENT_MSG;
-	xReturnMessage.nSubMsgID = message.nSubMsgID;
-	xReturnMessage.data = strData;
-	////////////////////event/////////////////////////////////////////////////
-	xReturnMessage.self = message.self;
-	xReturnMessage.nFormActor = this->GetAddress().AsInteger();
-	xReturnMessage.xEndFuncptr = mxFunctorEndPtr;
+    xReturnMessage.eType = NFIActorMessage::EACTOR_RETURN_EVENT_MSG;
+    xReturnMessage.nSubMsgID = message.nSubMsgID;
+    xReturnMessage.data = strData;
+    ////////////////////event/////////////////////////////////////////////////
+    xReturnMessage.self = message.self;
+    xReturnMessage.nFormActor = this->GetAddress().AsInteger();
+    xReturnMessage.xEndFuncptr = mxFunctorEndPtr;
 
-	Send(xReturnMessage, from);
+    Send(xReturnMessage, from);
 }
 
-bool NFCActor::AddEndFunc( EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end )
+bool NFCActor::AddEndFunc(EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end)
 {
-	mxFunctorEndPtr = functorPtr_end;
-	return true;
+    mxFunctorEndPtr = functorPtr_end;
+    return true;
 }
 
-bool NFCActor::SendMsg( const Theron::Address address, const NFIActorMessage& message )
+bool NFCActor::SendMsg(const Theron::Address address, const NFIActorMessage& message)
 {
-	return Send(message, address);
+    return Send(message, address);
 }

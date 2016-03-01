@@ -15,7 +15,7 @@ class NFISLGShopModule
     : public NFILogicModule
 {
 public:
-	virtual bool ReqBuyItem(const NFGUID& self, const std::string& strID, float fX, float fY, float fZ) = 0;
+    virtual bool ReqBuyItem(const NFGUID& self, const std::string& strID, float fX, float fY, float fZ) = 0;
 };
 
 #endif
