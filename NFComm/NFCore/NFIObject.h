@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_OBJECT_H
-#define _NFI_OBJECT_H
+#ifndef NFI_OBJECT_H
+#define NFI_OBJECT_H
 
 
 #include "NFComm/NFPluginModule/NFPlatform.h"
