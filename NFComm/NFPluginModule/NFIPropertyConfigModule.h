@@ -12,6 +12,15 @@
 #include <iostream>
 #include "NFILogicModule.h"
 
+enum NFJobType
+{
+	NJT_1,
+	NJT_2,
+	NJT_3,
+	NJT_4,
+	NJT_MAX,
+};
+
 class NFIPropertyConfigModule
     : public NFILogicModule
 {

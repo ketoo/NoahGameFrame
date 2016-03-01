@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_EVENT_MNG_H
-#define _NFI_EVENT_MNG_H
+#ifndef NFI_EVENT_MNG_H
+#define NFI_EVENT_MNG_H
 
 #include <iostream>
 #include <functional>

@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_LOGINNET_SERVERMODULE_H
-#define _NFI_LOGINNET_SERVERMODULE_H
+#ifndef NFI_LOGINNET_SERVERMODULE_H
+#define NFI_LOGINNET_SERVERMODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
