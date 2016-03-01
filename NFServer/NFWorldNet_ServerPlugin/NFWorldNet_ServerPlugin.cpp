@@ -32,7 +32,7 @@ const std::string NFWorldNet_ServerPlugin::GetPluginName()
     return GET_CLASS_NAME(NFWorldNet_ServerPlugin)
 }
 
-void NFWorldNet_ServerPlugin::Install()
+       void NFWorldNet_ServerPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFCWorldNet_ServerModule)
 }
