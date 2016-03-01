@@ -8,16 +8,16 @@
 
 #include "NFCEventManager.h"
 
-NFCEventManager::NFCEventManager( NFGUID self )
+NFCEventManager::NFCEventManager(NFGUID self)
 {
-	mSelf = self;
+    mSelf = self;
 }
 
 NFCEventManager::~NFCEventManager()
 {
-	mRemoveEventListEx.ClearAll();
+    mRemoveEventListEx.ClearAll();
 
-	mObjectEventInfoMapEx.ClearAll();
+    mObjectEventInfoMapEx.ClearAll();
 }
 
 bool NFCEventManager::Init()
@@ -51,14 +51,14 @@ bool NFCEventManager::AddEventCallBack(const int nEventID, const EVENT_PROCESS_F
 
 bool NFCEventManager::Execute()
 {
-	int nEvent = 0;
-	bool bRet = mRemoveEventListEx.First(nEvent);
-	while (bRet)
-	{
-		mObjectEventInfoMapEx.RemoveElement(nEvent);
+    int nEvent = 0;
+    bool bRet = mRemoveEventListEx.First(nEvent);
+    while (bRet)
+    {
+        mObjectEventInfoMapEx.RemoveElement(nEvent);
 
-		bRet = mRemoveEventListEx.Next(nEvent);
-	}
+        bRet = mRemoveEventListEx.Next(nEvent);
+    }
 
     mRemoveEventListEx.ClearAll();
 
@@ -67,37 +67,37 @@ bool NFCEventManager::Execute()
 
 bool NFCEventManager::RemoveEventCallBack(const int nEventID/*, const EVENT_PROCESS_FUNCTOR_PTR& cb*/)
 {
-	mRemoveEventListEx.Add(nEventID);
-	return true;
+    mRemoveEventListEx.Add(nEventID);
+    return true;
 }
 
 bool NFCEventManager::DoEvent(const int nEventID, const NFIDataList& valueList)
 {
-	NF_SHARE_PTR<NFList<EVENT_PROCESS_FUNCTOR_PTR>> pEventInfo = mObjectEventInfoMapEx.GetElement(nEventID);
-	if (nullptr == pEventInfo)
-	{
-		return false;
-	}
+    NF_SHARE_PTR<NFList<EVENT_PROCESS_FUNCTOR_PTR>> pEventInfo = mObjectEventInfoMapEx.GetElement(nEventID);
+    if (nullptr == pEventInfo)
+    {
+        return false;
+    }
 
-	EVENT_PROCESS_FUNCTOR_PTR cb;
-	bool bRet = pEventInfo->First(cb);
-	while (bRet)
-	{
-		cb->operator()(mSelf, nEventID,  valueList);
+    EVENT_PROCESS_FUNCTOR_PTR cb;
+    bool bRet = pEventInfo->First(cb);
+    while (bRet)
+    {
+        cb->operator()(mSelf, nEventID,  valueList);
 
-		bRet = pEventInfo->Next(cb);
-	}
+        bRet = pEventInfo->Next(cb);
+    }
 
     return true;
 }
 
 bool NFCEventManager::HasEventCallBack(const int nEventID)
 {
-	NF_SHARE_PTR<NFList<EVENT_PROCESS_FUNCTOR_PTR>> pEventInfo = mObjectEventInfoMapEx.GetElement(nEventID);
-	if (nullptr != pEventInfo)
-	{
-		return true;
-	}
+    NF_SHARE_PTR<NFList<EVENT_PROCESS_FUNCTOR_PTR>> pEventInfo = mObjectEventInfoMapEx.GetElement(nEventID);
+    if (nullptr != pEventInfo)
+    {
+        return true;
+    }
 
     return false;
 }

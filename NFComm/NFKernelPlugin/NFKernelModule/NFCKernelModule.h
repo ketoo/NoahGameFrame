@@ -51,7 +51,7 @@ public:
     virtual NF_SHARE_PTR<NFIObject> GetObject(const NFGUID& ident);
     virtual NF_SHARE_PTR<NFIObject> CreateObject(const NFGUID& self, const int nSceneID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg);
 
-	virtual bool DestroyAll();
+    virtual bool DestroyAll();
     virtual bool DestroySelf(const NFGUID& self);
     virtual bool DestroyObject(const NFGUID& self);
 
@@ -109,8 +109,8 @@ public:
     virtual int GetSceneOnLineList(const int nSceneID, NFIDataList& var);
 
     virtual int RequestGroupScene(const int nSceneID);
-	virtual bool ReleaseGroupScene(const int nSceneID, const int nGroupID);
-	virtual bool ExitGroupScene(const int nSceneID, const int nGroupID);
+    virtual bool ReleaseGroupScene(const int nSceneID, const int nGroupID);
+    virtual bool ExitGroupScene(const int nSceneID, const int nGroupID);
 
     virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list);
     virtual int GetObjectByProperty(const int nSceneID, const std::string& strPropertyName, const NFIDataList& valueArgArg, NFIDataList& list);
@@ -122,10 +122,10 @@ public:
     virtual bool LogInfo(const NFGUID ident);
     virtual bool LogSelfInfo(const NFGUID ident);
 
-	//////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
 
-	virtual bool DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFIDataList& valueList);
-	virtual bool DoEvent(const NFGUID& self, const int nEventID, const NFIDataList& valueList);
+    virtual bool DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFIDataList& valueList);
+    virtual bool DoEvent(const NFGUID& self, const int nEventID, const NFIDataList& valueList);
 
 protected:
 
@@ -179,7 +179,7 @@ private:
     NFILogModule* m_pLogModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIElementInfoModule* m_pElementInfoModule;
-	NFIUUIDModule* m_pUUIDModule;
+    NFIUUIDModule* m_pUUIDModule;
 };
 
 #endif

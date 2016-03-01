@@ -32,7 +32,7 @@ bool NFCMonoScriptModule::AfterInit()
     MonoDomain* domain = mono_jit_init("ScriptDomain");
 
     MonoAssembly* assembly = mono_domain_assembly_open(domain, "test.dll");
-    if(!assembly)
+    if (!assembly)
     {
         std::cout << "err" << std::endl;
         abort();
@@ -53,37 +53,37 @@ bool NFCMonoScriptModule::Execute(const float fLasFrametime, const float fStarte
     return true;
 }
 
-int NFCMonoScriptModule::DoScript( const NFIDENTID& self, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg )
+int NFCMonoScriptModule::DoScript(const NFIDENTID& self, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg)
 {
     return 0;
 }
 
-int NFCMonoScriptModule::DoEventScript( const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg )
+int NFCMonoScriptModule::DoEventScript(const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg)
 {
     return 0;
 }
 
-int NFCMonoScriptModule::DoHeartBeatScript( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg )
+int NFCMonoScriptModule::DoHeartBeatScript(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg)
 {
     return 0;
 }
 
-int NFCMonoScriptModule::DoScriptPropertyCallBack( const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& oldVar, const NFCScriptVarList& neVar, const NFCScriptVarList& arg )
+int NFCMonoScriptModule::DoScriptPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& oldVar, const NFCScriptVarList& neVar, const NFCScriptVarList& arg)
 {
     return 0;
 }
 
-int NFCMonoScriptModule::DoScriptRecordCallBack( const NFIDENTID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCScriptVarList& oldVar, const NFCScriptVarList& newVar, const NFCScriptVarList& arg )
+int NFCMonoScriptModule::DoScriptRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCScriptVarList& oldVar, const NFCScriptVarList& newVar, const NFCScriptVarList& arg)
 {
     return 0;
 }
 
-int NFCMonoScriptModule::DoHeartBeatCommonCB( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var )
+int NFCMonoScriptModule::DoHeartBeatCommonCB(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var)
 {
     return 0;
 }
 
-int NFCMonoScriptModule::DoEventCommonCB( const NFIDENTID& self, const int nEventID, const NFIDataList& var )
+int NFCMonoScriptModule::DoEventCommonCB(const NFIDENTID& self, const int nEventID, const NFIDataList& var)
 {
     return 0;
 }

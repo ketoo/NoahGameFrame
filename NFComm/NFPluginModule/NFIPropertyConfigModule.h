@@ -14,11 +14,11 @@
 
 enum NFJobType
 {
-	NJT_1,
-	NJT_2,
-	NJT_3,
-	NJT_4,
-	NJT_MAX,
+    NJT_1,
+    NJT_2,
+    NJT_3,
+    NJT_4,
+    NJT_MAX,
 };
 
 class NFIPropertyConfigModule
@@ -27,7 +27,7 @@ class NFIPropertyConfigModule
 public:
 
     virtual int CalculateBaseValue(const NFJobType jobType,  const int nLevel, const std::string& strProperty) = 0;
-    virtual bool LegalLevel( const NFJobType nJob, const int nLevel ) = 0;
+    virtual bool LegalLevel(const NFJobType nJob, const int nLevel) = 0;
 };
 
 
