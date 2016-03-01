@@ -22,7 +22,7 @@ class NFCCreateRoleModule
     : public NFILogicModule
 {
 public:
-    NFCCreateRoleModule( NFIPluginManager* p )
+    NFCCreateRoleModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
@@ -30,19 +30,19 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute( const float fLasFrametime, const float fStartedTime );
+    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
     virtual bool AfterInit();
 
 protected:
-    static int OnLoadRoleBeginEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var );
+    static int OnLoadRoleBeginEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
 
-    static int OnLoadRoleFinalEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var );
+    static int OnLoadRoleFinalEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
 
-    static int OnCreateRoleEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var );
+    static int OnCreateRoleEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
 
-    static int OnDeleteRoleEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var );
+    static int OnDeleteRoleEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
 
-    static int OnAcountDisConnectEvent( const NFIDENTID& object, const int nEventID, const NFIValueList& var );
+    static int OnAcountDisConnectEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var);
 
 private:
 
