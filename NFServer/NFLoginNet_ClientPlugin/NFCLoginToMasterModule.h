@@ -35,17 +35,17 @@ public:
     virtual bool Execute();
 
     virtual bool AfterInit();
-	virtual bool BeforeShut();
+    virtual bool BeforeShut();
 
-	virtual void LogRecive(const char* str){}
-	virtual void LogSend(const char* str){}
+    virtual void LogRecive(const char* str) {}
+    virtual void LogSend(const char* str) {}
 
     virtual NFMapEx<int, NFMsg::ServerInfoReport>& GetWorldMap();
 
 protected:
-	void OnReciveMSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnReciveMSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
-	
+
 protected:
 
     //////////////////////////////////////////////////////////////////////////
@@ -53,9 +53,9 @@ protected:
     int OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 
-	//////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
 
-	int OnWorldInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnWorldInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     //////////////////////////////////////////////////////////////////////////
     void Register(NFINet* pNet);
@@ -63,10 +63,10 @@ protected:
 private:
     NFMapEx<int, NFMsg::ServerInfoReport> mWorldMap;
 
-	NFILoginLogicModule* m_pLoginLogicModule;
-	NFILoginNet_ServerModule* m_pLoginNet_ServerModule;
+    NFILoginLogicModule* m_pLoginLogicModule;
+    NFILoginNet_ServerModule* m_pLoginNet_ServerModule;
     NFIElementInfoModule* m_pElementInfoModule;
-	NFIKernelModule* m_pKernelModule;
+    NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFILogModule* m_pLogModule;
 };

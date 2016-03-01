@@ -34,7 +34,7 @@ const std::string NFMasterNet_ServerPlugin::GetPluginName()
     return GET_CLASS_NAME(NFMasterNet_ServerPlugin)
 }
 
-void NFMasterNet_ServerPlugin::Install()
+       void NFMasterNet_ServerPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFCMasterNet_ServerModule)
 }
