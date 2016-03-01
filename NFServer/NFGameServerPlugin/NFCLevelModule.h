@@ -23,7 +23,7 @@ class NFCLevelModule
     : public NFILevelModule
 {
 public:
-    NFCLevelModule( NFIPluginManager* p )
+    NFCLevelModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
@@ -34,13 +34,13 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual int AddExp( const NFGUID& self, const int nExp);
+    virtual int AddExp(const NFGUID& self, const int nExp);
 
 private:
     NFIPropertyConfigModule* m_pPropertyConfigModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-	NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementInfoModule* m_pElementInfoModule;
 };
 
 #endif
