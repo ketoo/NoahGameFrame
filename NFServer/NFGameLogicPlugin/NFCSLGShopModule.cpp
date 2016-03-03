@@ -9,12 +9,15 @@
 #include "NFCSLGShopModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFMessageDefine/NFSLGDefine.pb.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCSLGShopModule::Init()
 {
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
-
-	assert( NULL != m_pKernelModule );
+    m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
+    m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
+    
+    assert(NULL != m_pKernelModule);
+    assert(NULL != m_pPackModule);
 
 	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_BUY_FORM_SHOP, this, &NFCSLGShopModule::OnSLGClienBuyItem))
 	{
@@ -59,11 +62,27 @@ bool NFCSLGShopModule::ReqBuyItem(const NFGUID& self, const std::string& strID, 
     {
         return false;
     }
+
+    int nNeedLevel = m_pElementInfoModule->GetPropertyInt(strID, "Level");
+    if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::Level()) < nNeedLevel)
+    {
+        return false;
+    }
+
     //扣除货币
     int nGold = m_pElementInfoModule->GetPropertyInt(strID, "Gold");
     if (!m_pPropertyModule->ConsumeMoney(self, nGold))
     {
-        //return false;
+        return false;
+    }
+
+//     int nSteel = m_pElementInfoModule->GetPropertyInt(strID, "Steel");
+//     int nStone = m_pElementInfoModule->GetPropertyInt(strID, "Stone");
+
+    int nDiamond = m_pElementInfoModule->GetPropertyInt(strID, "Diamond");
+    if (!m_pPropertyModule->ConsumeDiamond(self, nGold))
+    {
+        return false;
     }
 
 	const std::string strItem = m_pElementInfoModule->GetPropertyString(strID, "ItemID");
@@ -72,8 +91,35 @@ bool NFCSLGShopModule::ReqBuyItem(const NFGUID& self, const std::string& strID, 
 		return false;
 	}
 
-    //添加进表
-    m_pSLGBuildingModule->AddBuilding(self, strItem, fX, fY, fZ);
+    const int nShopType = m_pElementInfoModule->GetPropertyInt(strID, "Type");
+    switch (nShopType)
+    {
+        case NFMsg::EShopType::EST_GOLD:
+        case NFMsg::EShopType::EST_DIAMOND:
+        case NFMsg::EShopType::EST_SP:
+        {
+            m_pPackModule->CreateItem(self, strItem, 1);
+        }
+        break;
+        case NFMsg::EShopType::EST_BUILDING:
+        {
+            m_pSLGBuildingModule->AddBuilding(self, strItem, fX, fY, fZ);
+        }
+        break;
+        default:
+        {
+            const int nItemType = m_pElementInfoModule->GetPropertyInt(strItem, "Type");
+            if (nItemType == NFMsg::EItemType::EIT_EQUIP)
+            {
+                m_pPackModule->CreateEquip(self, strItem);
+            }
+            else
+            {
+                m_pPackModule->CreateItem(self, strItem, 1);
+            }
+        }
+    }
+
 	return true;
 }
 

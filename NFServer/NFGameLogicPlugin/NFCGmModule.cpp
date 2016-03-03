@@ -44,14 +44,18 @@ bool NFCGmModule::AfterInit()
     m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>( "NFCSceneProcessModule" );
     m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>("NFCLevelModule");
-	
+    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>("NFCLevelModule");
+    m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
+    m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>("NFCHeroModule");
+    
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pElementInfoModule );
     assert( NULL != m_pSceneProcessModule );
     assert( NULL != m_pPropertyModule );
 	assert( NULL != m_pLogModule );
-	assert( NULL != m_pLevelModule );
+    assert(NULL != m_pLevelModule);
+    assert(NULL != m_pPackModule);
+    assert(NULL != m_pHeroModule);
 
     return true;
 }
@@ -416,6 +420,47 @@ void NFCGmModule::OnGMNormalProcess(const int nSockIndex, const int nMsgID, cons
 			}
 		}
 		break;
+
+    case NFMsg::ReqCommand::EGCT_MODIY_ITEM:
+    {
+        int nCount = 0;
+        if (xMsg.has_command_value_int())
+        {
+            nCount = xMsg.command_value_int();
+        }
+
+        string strItemID;
+        if (xMsg.has_command_str_value())
+        {
+            strItemID = xMsg.command_str_value();
+        }
+
+        if (strItemID.empty() || nCount <=0)
+        {
+            break;
+        }
+
+
+        const int nItemType = m_pElementInfoModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
+        switch (nItemType)
+        {
+        case NFMsg::EIT_EQUIP:
+        {
+            m_pPackModule->CreateEquip(nPlayerID, strItemID);
+        }
+        break;
+        case NFMsg::EIT_HERO_CARD:
+        {
+            m_pHeroModule->AddHero(nPlayerID, strItemID);
+        }
+        break;
+        default:
+            m_pPackModule->CreateItem(nPlayerID, strItemID, nCount);
+            break;
+        }
+
+    }
+    break;
 	default:
 		break;
 	}

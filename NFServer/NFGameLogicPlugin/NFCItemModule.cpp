@@ -264,63 +264,7 @@ bool NFCItemModule::ConsumeDataItemProperty( const NFGUID& self, const std::stri
 
     return true;
 }
-
-bool NFCItemModule::AwardItemProperty( const NFGUID& self, const std::string& strID )
-{
-	if (strID.empty())
-	{
-		return false;
-	}
-
-	const int nVIPEXP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::VIPEXP());
-	const int nEXP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::EXP());
-	const int nHP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::HP());
-	const int nSP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::SP());
-	const int nMP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::MP());
-	const int nGold = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::Gold());
-	const int nMoney = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::Money());
-
-	if (nVIPEXP > 0)
-	{
-		const NFINT64 nOldValue = m_pKernelModule->GetPropertyInt(self, NFrame::Player::VIPEXP());
-		const NFINT64 nNewValue = nOldValue + nVIPEXP;
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::VIPEXP(), nNewValue);
-	}
-
-	if (nEXP > 0)
-	{
-		const NFINT64 nOldValue = m_pKernelModule->GetPropertyInt(self, NFrame::Player::EXP());
-		const NFINT64 nNewValue = nOldValue + nEXP;
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::EXP(), nNewValue);
-	}
-
-	if (nHP > 0)
-	{
-		m_pPropertyModule->AddHP(self, nHP);
-	}
-	if (nSP > 0)
-	{
-		m_pPropertyModule->AddSP(self, nHP);
-	}
-
-	if (nMP > 0)
-	{
-		m_pPropertyModule->AddMP(self, nHP);
-	}
-
-	if (nGold > 0)
-	{
-		m_pPropertyModule->AddDiamond(self, nHP);
-	}
-
-	if (nMoney > 0)
-	{
-		m_pPropertyModule->AddMoney(self, nHP);
-	}
-
-	return true;
-}
-
+  
 bool NFCItemModule::DoAwardPack( const NFGUID& self, const std::string& strAwardPack )
 {
     std::vector<std::string> xList;
@@ -330,10 +274,12 @@ bool NFCItemModule::DoAwardPack( const NFGUID& self, const std::string& strAward
     {
         const std::string& strItemID = xList[i];
         const int nCout = m_pCommonConfigModule->GetAttributeInt("strAwardID", strItemID, "Count");
+        const int nIsHero = m_pCommonConfigModule->GetAttributeInt("strAwardID", strItemID, "IsHero");
         if (m_pElementInfoModule->ExistElement(strItemID))
         {
-            if (!m_pElementInfoModule->ExistElement(strItemID))
+            if (nIsHero > 0)
             {
+                m_pHeroModule->AddHero(self, strItemID);
                 continue;
             }
 
@@ -343,11 +289,6 @@ bool NFCItemModule::DoAwardPack( const NFGUID& self, const std::string& strAward
             case NFMsg::EIT_EQUIP:
                 {
                     m_pPackModule->CreateEquip(self, strItemID);
-                }
-                break;
-            case NFMsg::EIT_HERO_CARD:
-                {
-                    m_pHeroModule->AddHero(self, strItemID);
                 }
                 break;
             default:
@@ -379,15 +320,15 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 		return;
 	}
 
-	if (!ConsumeDataItemProperty(self, strItemID))
-	{
-		return;
-	}
+    if (!ConsumeDataItemProperty(self, strItemID))
+    {
+        return;
+    }
 
-	if (!m_pPackModule->DeleteItem(self, strItemID, 1))
-	{
-		return;
-	}
+    if (!m_pPackModule->DeleteItem(self, strItemID, 1))
+    {
+        return;
+    }
 
 	int nItemType = m_pElementInfoModule->GetPropertyInt(strItemID, "ItemType");
 	NFIItemConsumeProcessModule* pConsumeProcessModule = m_pItemConsumeManagerModule->GetConsumeModule(nItemType);
@@ -406,10 +347,5 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 	{
 		DoAwardPack( self, strAwardPackID);
 	}
-
-	const std::string& strAwardProperty = m_pElementInfoModule->GetPropertyString(strItemID, "AwardProperty");
-	if (!strAwardProperty.empty())
-	{
-		AwardItemProperty( self, strAwardProperty);
-	}
+         
 }

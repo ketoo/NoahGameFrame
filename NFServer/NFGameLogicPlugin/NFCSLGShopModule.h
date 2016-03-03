@@ -17,6 +17,7 @@
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIPackModule.h"
 
 class NFCSLGShopModule
     : public NFISLGShopModule
@@ -46,6 +47,7 @@ private:
     NFISLGBuildingModule* m_pSLGBuildingModule;
     NFIPropertyModule* m_pPropertyModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+    NFIPackModule* m_pPackModule;
 };
 
 

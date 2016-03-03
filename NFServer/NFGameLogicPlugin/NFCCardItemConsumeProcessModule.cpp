@@ -27,9 +27,7 @@ bool NFCCardItemConsumeProcessModule::Init()
 
 bool NFCCardItemConsumeProcessModule::AfterInit()
 {
-    //学习技能卡暂时废掉
-    //m_pItemConsumeManagerModule->ResgisterConsumeModule( EGameItemType::EGIT_ITEM_SKILL_CARD, this);
-    //m_pItemConsumeManagerModule->ResgisterConsumeModule( EGameItemSubType::EGIT_ITEM_PACK, this );
+    m_pItemConsumeManagerModule->ResgisterConsumeModule( NFMsg::EItemType::EIT_HERO_CARD, this);
 
     return true;
 }

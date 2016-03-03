@@ -18,6 +18,8 @@
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIUUIDModule.h"
+#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 
 class NFCHeroModule
     : public NFIHeroModule
@@ -38,6 +40,10 @@ public:
     virtual bool BeforeShut();
 
     virtual bool AddHero(const NFGUID& self, const std::string& strID);
+    virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int nExp);
+    virtual bool HeroStarUp(const NFGUID& self, const NFGUID& xHeroID);
+    virtual bool HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex);
+    virtual bool HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex);
     virtual bool SetFightHero(const NFGUID& self, const NFGUID& xID);
 
 protected:
@@ -45,9 +51,14 @@ protected:
 
 
 protected:
+
+
+protected:
     NFILogicClassModule* m_pLogicClassModule;
+    NFIElementInfoModule* m_pElementInfoModule;
 	NFIKernelModule* m_pKernelModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+    NFIUUIDModule* m_pUUIDModule;
 private:
 };
 

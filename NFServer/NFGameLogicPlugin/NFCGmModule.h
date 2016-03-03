@@ -21,6 +21,8 @@
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFILevelModule.h"
+#include "NFComm/NFPluginModule/NFIPackModule.h"
+#include "NFComm/NFPluginModule/NFIHeroModule.h"
 
 class NFCGmModule
     : public NFIGmModule
@@ -45,7 +47,7 @@ public:
 	void OnGMRecordStrProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
 	void OnGMRecordObjectProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
 	void OnGMRecordFloatProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
-	void OnGMNormalProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+    void OnGMNormalProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     void CheckAndAddRow(const NFGUID& self, std::string strRecordName, const int nRow);
 
@@ -57,6 +59,8 @@ private:
     NFIPropertyModule* m_pPropertyModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFILevelModule* m_pLevelModule;
+    NFIPackModule* m_pPackModule;
+    NFIHeroModule* m_pHeroModule;
 };
 
 

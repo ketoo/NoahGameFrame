@@ -30,7 +30,7 @@ bool NFCRebornItemConsumeProcessModule::AfterInit()
     assert( NULL != m_pLogModule );
 
     //包括了复活药水(满血蓝)
-    m_pItemConsumeManagerModule->ResgisterConsumeModule( NFMsg::EGIT_ITEM_REBORN, this );
+    m_pItemConsumeManagerModule->ResgisterConsumeModule( NFMsg::EItemType::EIT_ITEM_REBORN, this );
 
     return true;
 }

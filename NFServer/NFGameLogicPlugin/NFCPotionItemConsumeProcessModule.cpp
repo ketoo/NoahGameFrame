@@ -31,11 +31,7 @@ bool NFCPotionItemConsumeProcessModule::Init()
 
 bool NFCPotionItemConsumeProcessModule::AfterInit()
 {
-    //Ò©¼Á£¬ºìÒ©£¬À¶Ò©£¬¹¥»÷Ò©Ë®(¼Ó¹¥»÷BUFF)£¬·ÀÓùÒ©Ë®(¼Ó·ÀÓùBUFF)
-//     m_pItemConsumeManagerModule->ResgisterConsumeModule( EGameItemSubType::EGIT_ITEM_RECOVER_POTION, this );
-//     //°üÀ¨ÁË¾­ÑéÒ©Ë®
-//     m_pItemConsumeManagerModule->ResgisterConsumeModule( EGameItemSubType::EGIT_ITEM_EXP, this );
-
+    m_pItemConsumeManagerModule->ResgisterConsumeModule(NFMsg::EItemType::EIT_ITEM_POSITION, this);
     return true;
 }
 

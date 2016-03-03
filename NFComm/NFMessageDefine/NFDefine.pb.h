@@ -298,6 +298,8 @@ enum EItemType {
   EIT_DEMONIZATION_STONE = 6,
   EIT_GEM_STONE = 7,
   EIT_CURRENCY = 8,
+  EIT_ITEM_REBORN = 9,
+  EIT_ITEM_POSITION = 10,
   EIT_WOOD = 100,
   EIT_STONE = 101
 };
@@ -379,13 +381,11 @@ enum EGameItemSubType {
   EGIT_ITEM_SKILL_CARD = 4,
   EGIT_ITEM_GUILD_SKILL_CARD = 5,
   EGIT_ITEM_GUILD_DIAMOND = 6,
-  EGIT_ITEM_POSITION = 7,
-  EGIT_ITEM_WORLD_HORN = 8,
-  EGIT_ITEM_REBORN = 9
+  EGIT_ITEM_WORLD_HORN = 7
 };
 bool EGameItemSubType_IsValid(int value);
 const EGameItemSubType EGameItemSubType_MIN = EGIT_ITEM_NONE;
-const EGameItemSubType EGameItemSubType_MAX = EGIT_ITEM_REBORN;
+const EGameItemSubType EGameItemSubType_MAX = EGIT_ITEM_WORLD_HORN;
 const int EGameItemSubType_ARRAYSIZE = EGameItemSubType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EGameItemSubType_descriptor();
@@ -526,6 +526,28 @@ inline bool EBattleType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EBattleType>(
     EBattleType_descriptor(), name, value);
 }
+enum EShopType {
+  EST_BUILDING = 1,
+  EST_GOLD = 2,
+  EST_DIAMOND = 3,
+  EST_SP = 4,
+  EST_Equip = 5
+};
+bool EShopType_IsValid(int value);
+const EShopType EShopType_MIN = EST_BUILDING;
+const EShopType EShopType_MAX = EST_Equip;
+const int EShopType_ARRAYSIZE = EShopType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* EShopType_descriptor();
+inline const ::std::string& EShopType_Name(EShopType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EShopType_descriptor(), value);
+}
+inline bool EShopType_Parse(
+    const ::std::string& name, EShopType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EShopType>(
+    EShopType_descriptor(), name, value);
+}
 // ===================================================================
 
 
@@ -590,6 +612,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ETaskType>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EBattleType>() {
   return ::NFMsg::EBattleType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EShopType>() {
+  return ::NFMsg::EShopType_descriptor();
 }
 
 }  // namespace google

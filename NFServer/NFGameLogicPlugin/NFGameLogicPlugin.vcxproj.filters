@@ -123,6 +123,12 @@
     <ClInclude Include="NFCGmModule.h">
       <Filter>NFGMModule</Filter>
     </ClInclude>
+    <ClInclude Include="NFCHeroItemConsumeProcessModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCNormalConsumeProcessModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -202,6 +208,12 @@
     </ClCompile>
     <ClCompile Include="NFCGmModule.cpp">
       <Filter>NFGMModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCHeroItemConsumeProcessModule.cpp">
+      <Filter>NFItemModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCNormalConsumeProcessModule.cpp">
+      <Filter>NFItemModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

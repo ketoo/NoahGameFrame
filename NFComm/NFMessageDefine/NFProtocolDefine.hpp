@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/25
+//    @Date             :    2016/02/29
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -489,6 +489,7 @@ public:
 	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
 	static const std::string& ConsumeData(){ static std::string xConsumeData = "ConsumeData"; return xConsumeData; } // string
 	static const std::string& AwardData(){ static std::string xAwardData = "AwardData"; return xAwardData; } // string
+	static const std::string& AwardProperty(){ static std::string xAwardProperty = "AwardProperty"; return xAwardProperty; } // string
 	static const std::string& CoolDownTime(){ static std::string xCoolDownTime = "CoolDownTime"; return xCoolDownTime; } // float
 	static const std::string& OverlayCount(){ static std::string xOverlayCount = "OverlayCount"; return xOverlayCount; } // int
 	static const std::string& ExpiredType(){ static std::string xExpiredType = "ExpiredType"; return xExpiredType; } // int
@@ -577,6 +578,7 @@ public:
 	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
 	static const std::string& ConsumeData(){ static std::string xConsumeData = "ConsumeData"; return xConsumeData; } // string
 	static const std::string& LastAttacker(){ static std::string xLastAttacker = "LastAttacker"; return xLastAttacker; } // object
+	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
 	// Record
 
 };
@@ -701,13 +703,34 @@ public:
 		PlayerHero_GUID		= 0, // GUID -- object
 		PlayerHero_ConfigID		= 1, // ConfigID -- string
 		PlayerHero_Level		= 2, // Level -- int
-		PlayerHero_Exp		= 3, // Exp -- string
-		PlayerHero_Equip1		= 4, // Equip1 -- object
-		PlayerHero_Equip2		= 5, // Equip2 -- object
-		PlayerHero_Equip3		= 6, // Equip3 -- object
-		PlayerHero_Equip4		= 7, // Equip4 -- object
-		PlayerHero_Equip5		= 8, // Equip5 -- object
-		PlayerHero_Equip6		= 9, // Equip6 -- object
+		PlayerHero_Exp		= 3, // Exp -- int
+		PlayerHero_Star		= 4, // Star -- int
+		PlayerHero_Equip1		= 5, // Equip1 -- object
+		PlayerHero_Equip2		= 6, // Equip2 -- object
+		PlayerHero_Equip3		= 7, // Equip3 -- object
+		PlayerHero_Equip4		= 8, // Equip4 -- object
+		PlayerHero_Equip5		= 9, // Equip5 -- object
+		PlayerHero_Equip6		= 10, // Equip6 -- object
+		PlayerHero_Equip7		= 11, // Equip7 -- object
+		PlayerHero_Equip8		= 12, // Equip8 -- object
+		PlayerHero_Talent1		= 13, // Talent1 -- string
+		PlayerHero_Talent2		= 14, // Talent2 -- string
+		PlayerHero_Talent3		= 15, // Talent3 -- string
+		PlayerHero_Talent4		= 16, // Talent4 -- string
+		PlayerHero_Talent5		= 17, // Talent5 -- string
+		PlayerHero_Talent6		= 18, // Talent6 -- string
+		PlayerHero_Talent7		= 19, // Talent7 -- string
+		PlayerHero_Talent8		= 20, // Talent8 -- string
+		PlayerHero_Skill1		= 21, // Skill1 -- string
+		PlayerHero_Skill2		= 22, // Skill2 -- string
+		PlayerHero_Skill3		= 23, // Skill3 -- string
+		PlayerHero_Skill4		= 24, // Skill4 -- string
+		PlayerHero_Skill5		= 25, // Skill5 -- string
+		PlayerHero_SkillLevel1		= 26, // SkillLevel1 -- int
+		PlayerHero_SkillLevel2		= 27, // SkillLevel2 -- int
+		PlayerHero_SkillLevel3		= 28, // SkillLevel3 -- int
+		PlayerHero_SkillLevel4		= 29, // SkillLevel4 -- int
+		PlayerHero_SkillLevel5		= 30, // SkillLevel5 -- int
 	};
 
 	enum BagEquipList
@@ -883,6 +906,7 @@ public:
 	static const std::string& LoadingUI(){ static std::string xLoadingUI = "LoadingUI"; return xLoadingUI; } // string
 	static const std::string& CamOffestPos(){ static std::string xCamOffestPos = "CamOffestPos"; return xCamOffestPos; } // string
 	static const std::string& CamOffestRot(){ static std::string xCamOffestRot = "CamOffestRot"; return xCamOffestRot; } // string
+	static const std::string& SyncObject(){ static std::string xSyncObject = "SyncObject"; return xSyncObject; } // int
 	// Record
 
 };

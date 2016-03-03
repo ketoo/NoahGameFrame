@@ -46,7 +46,6 @@ protected:
 
     int AddItemEffectDataProperty( const NFGUID& self, const NFGUID& xTarget, const std::string& strItemID);
     bool ConsumeDataItemProperty( const NFGUID& self, const std::string& strID);
-	bool AwardItemProperty( const NFGUID& self, const std::string& strID );
 
 
 	bool DoAwardPack( const NFGUID& self, const std::string& strAwardPack);
