@@ -125,6 +125,16 @@ enum PlayerHero
 	Talent6		= 18; // Talent6 -- string
 	Talent7		= 19; // Talent7 -- string
 	Talent8		= 20; // Talent8 -- string
+	Skill1		= 21; // Skill1 -- string
+	Skill2		= 22; // Skill2 -- string
+	Skill3		= 23; // Skill3 -- string
+	Skill4		= 24; // Skill4 -- string
+	Skill5		= 25; // Skill5 -- string
+	SkillLevel1		= 26; // SkillLevel1 -- int
+	SkillLevel2		= 27; // SkillLevel2 -- int
+	SkillLevel3		= 28; // SkillLevel3 -- int
+	SkillLevel4		= 29; // SkillLevel4 -- int
+	SkillLevel5		= 30; // SkillLevel5 -- int
 }
 
 enum BagEquipList

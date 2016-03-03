@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/02/29
+//    @Date             :    2016/03/04
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -241,6 +241,7 @@ public class Equip
 	public static readonly String DropPrePath = "DropPrePath"; // string
 	public static readonly String BuyPrice = "BuyPrice"; // int
 	public static readonly String SalePrice = "SalePrice"; // int
+	public static readonly String Icon = "Icon"; // string
 	// Record
 
 }
@@ -486,6 +487,7 @@ public class Item
 	public static readonly String SalePrice = "SalePrice"; // int
 	public static readonly String Script = "Script"; // string
 	public static readonly String Extend = "Extend"; // string
+	public static readonly String Icon = "Icon"; // string
 	// Record
 
 }
@@ -707,6 +709,16 @@ public class Player
 		Talent6		= 18, // Talent6 -- string
 		Talent7		= 19, // Talent7 -- string
 		Talent8		= 20, // Talent8 -- string
+		Skill1		= 21, // Skill1 -- string
+		Skill2		= 22, // Skill2 -- string
+		Skill3		= 23, // Skill3 -- string
+		Skill4		= 24, // Skill4 -- string
+		Skill5		= 25, // Skill5 -- string
+		SkillLevel1		= 26, // SkillLevel1 -- int
+		SkillLevel2		= 27, // SkillLevel2 -- int
+		SkillLevel3		= 28, // SkillLevel3 -- int
+		SkillLevel4		= 29, // SkillLevel4 -- int
+		SkillLevel5		= 30, // SkillLevel5 -- int
 	};
 
 	public enum BagEquipList

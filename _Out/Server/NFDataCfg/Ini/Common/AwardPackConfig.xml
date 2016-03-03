@@ -23,5 +23,32 @@
 		<ItemInfo Name="EQUIP_ZS_M_0_ARMOR_10002" Count="1"/>
 		<ItemInfo Name="EQUIP_ZS_M_0_BOOT_10002" Count="1"/>
 	</AwardPackPlayerLevel_5>
+	
+	<AwardPack_Hero_1001 Name="AwardPack_Hero_1001">
+		<ItemInfo Name="Player_0_0" Count="1" IsHero="1"/>
+	</AwardPack_Hero_1001>
+	
+	<AwardPack_Hero_1002 Name="AwardPack_Hero_1002">
+		<ItemInfo Name="Player_0_1" Count="1" IsHero="1"/>
+	</AwardPack_Hero_1002>
+	
+	<AwardPack_Hero_1003 Name="AwardPack_Hero_1003">
+		<ItemInfo Name="Player_0_2" Count="1" IsHero="1"/>
+	</AwardPack_Hero_1003>
+	
+	<AwardPack_Hero_1004 Name="AwardPack_Hero_1004">
+		<ItemInfo Name="Player_0_3" Count="1" IsHero="1"/>
+	</AwardPack_Hero_1004>
+	
+	<AwardPack_Hero_1005 Name="AwardPack_Hero_1005">
+		<ItemInfo Name="Player_0_4" Count="1" IsHero="1"/>
+	</AwardPack_Hero_1005>
+	
+	<AwardPack_Hero_1006 Name="AwardPack_Hero_1006">
+		<ItemInfo Name="Player_1_0" Count="1" type="Hero"/>
+	</AwardPack_Hero_1006>
+
 
 </XML>
+
+

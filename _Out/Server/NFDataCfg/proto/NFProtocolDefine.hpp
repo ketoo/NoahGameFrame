@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/02/29
+//    @Date             :    2016/03/04
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -246,6 +246,7 @@ public:
 	static const std::string& DropPrePath(){ static std::string xDropPrePath = "DropPrePath"; return xDropPrePath; } // string
 	static const std::string& BuyPrice(){ static std::string xBuyPrice = "BuyPrice"; return xBuyPrice; } // int
 	static const std::string& SalePrice(){ static std::string xSalePrice = "SalePrice"; return xSalePrice; } // int
+	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
 	// Record
 
 };
@@ -497,6 +498,7 @@ public:
 	static const std::string& SalePrice(){ static std::string xSalePrice = "SalePrice"; return xSalePrice; } // int
 	static const std::string& Script(){ static std::string xScript = "Script"; return xScript; } // string
 	static const std::string& Extend(){ static std::string xExtend = "Extend"; return xExtend; } // string
+	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
 	// Record
 
 };
@@ -721,6 +723,16 @@ public:
 		PlayerHero_Talent6		= 18, // Talent6 -- string
 		PlayerHero_Talent7		= 19, // Talent7 -- string
 		PlayerHero_Talent8		= 20, // Talent8 -- string
+		PlayerHero_Skill1		= 21, // Skill1 -- string
+		PlayerHero_Skill2		= 22, // Skill2 -- string
+		PlayerHero_Skill3		= 23, // Skill3 -- string
+		PlayerHero_Skill4		= 24, // Skill4 -- string
+		PlayerHero_Skill5		= 25, // Skill5 -- string
+		PlayerHero_SkillLevel1		= 26, // SkillLevel1 -- int
+		PlayerHero_SkillLevel2		= 27, // SkillLevel2 -- int
+		PlayerHero_SkillLevel3		= 28, // SkillLevel3 -- int
+		PlayerHero_SkillLevel4		= 29, // SkillLevel4 -- int
+		PlayerHero_SkillLevel5		= 30, // SkillLevel5 -- int
 	};
 
 	enum BagEquipList
