@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFSDK", "NFSDK", "{410C8A08-63DC-45B2-ADB9-08CD991861F0}"
 EndProject
@@ -106,6 +106,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libprotobuf-lite", "Dependencies\protobuf\vsprojects\libprotobuf-lite.vcxproj", "{49EA010D-706F-4BE2-A397-77854B72A040}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Theron", "Dependencies\Theron\Theron\Theron.vcxproj", "{8C0827D2-EFA0-427B-96B2-A92158E7812F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFGameLogicPlugin", "NFServer\NFGameLogicPlugin\NFGameLogicPlugin.vcxproj", "{73CE3203-1DAD-43E8-B49D-0151973765C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -253,6 +255,10 @@ Global
 		{8C0827D2-EFA0-427B-96B2-A92158E7812F}.Debug|x64.Build.0 = Debug|x64
 		{8C0827D2-EFA0-427B-96B2-A92158E7812F}.Release|x64.ActiveCfg = Release|x64
 		{8C0827D2-EFA0-427B-96B2-A92158E7812F}.Release|x64.Build.0 = Release|x64
+		{73CE3203-1DAD-43E8-B49D-0151973765C9}.Debug|x64.ActiveCfg = Debug|x64
+		{73CE3203-1DAD-43E8-B49D-0151973765C9}.Debug|x64.Build.0 = Debug|x64
+		{73CE3203-1DAD-43E8-B49D-0151973765C9}.Release|x64.ActiveCfg = Release|x64
+		{73CE3203-1DAD-43E8-B49D-0151973765C9}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -300,5 +306,6 @@ Global
 		{3E283F37-A4ED-41B7-A3E6-A2D89D131A30} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
 		{49EA010D-706F-4BE2-A397-77854B72A040} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
 		{8C0827D2-EFA0-427B-96B2-A92158E7812F} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
+		{73CE3203-1DAD-43E8-B49D-0151973765C9} = {CE93E519-82D7-4D96-A18A-37A5B8533AC1}
 	EndGlobalSection
 EndGlobal

@@ -20,13 +20,11 @@ bool NFCHeroModule::Init()
 
 bool NFCHeroModule::Shut()
 {
-
     return true;
 }
 
 bool NFCHeroModule::Execute()
 {
-
     return true;
 }
 
@@ -44,17 +42,13 @@ bool NFCHeroModule::AfterInit()
     assert( NULL != m_pUUIDModule);
     assert( NULL != m_pElementInfoModule);
 
-	
 	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGameMsgID::EGEC_REQ_SET_FIGHT_HERO, this, &NFCHeroModule::OnSetFightHeroProcess)){ return false;}
-
-
 
     return true;
 }
 
 bool NFCHeroModule::BeforeShut()
 {
-
     return true;
 }
 
@@ -133,7 +127,6 @@ bool NFCHeroModule::AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const 
     return true;
 }
 
-
 bool NFCHeroModule::HeroStarUp(const NFGUID& self, const NFGUID& xHeroID)
 {
     NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
@@ -179,20 +172,22 @@ bool NFCHeroModule::HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const
         return false;
     }
 
-    NFCDataList varFind;
-    if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroID, varFind) <= 0)
+    NFCDataList xMatchList;
+	int nMatchCout = pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroID, xMatchList);
+	if (nMatchCout <= 0)
     {
         return false;
     }
 
-    const int nRow = varFind.Int(0);
+    const int nRow = xMatchList.Int(0);
     NFCDataList varRowData;
     if (!pHeroRecord->QueryRow(nRow, varRowData))
     {
         return false;
     }
 
-    if (nIndex > (NFrame::Player::PlayerHero::PlayerHero_Skill5 - NFrame::Player::PlayerHero::PlayerHero_Skill1))
+    if (nIndex > (NFrame::Player::PlayerHero::PlayerHero_Skill5 - NFrame::Player::PlayerHero::PlayerHero_Skill1)
+		|| nIndex < 0)
     {
         return false;
     }
@@ -211,22 +206,24 @@ bool NFCHeroModule::HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const
 
         switch (nSkillIDCol)
         {
-        case 0:
+        case NFrame::Player::PlayerHero::PlayerHero_Skill1:
             strSkillID = m_pElementInfoModule->GetPropertyString(strSkillRef, NFrame::SkillRef::SKILL1());
             break;
-        case 1:
+        case NFrame::Player::PlayerHero::PlayerHero_Skill2:
             strSkillID = m_pElementInfoModule->GetPropertyString(strSkillRef, NFrame::SkillRef::SKILL2());
             break;
-        case 2:
+        case NFrame::Player::PlayerHero::PlayerHero_Skill3:
             strSkillID = m_pElementInfoModule->GetPropertyString(strSkillRef, NFrame::SkillRef::SKILL3());
             break;
-        case 3:
+        case NFrame::Player::PlayerHero::PlayerHero_Skill4:
             strSkillID = m_pElementInfoModule->GetPropertyString(strSkillRef, NFrame::SkillRef::SKILL4());
             break;
-        case 4:
+        case NFrame::Player::PlayerHero::PlayerHero_Skill5:
             strSkillID = m_pElementInfoModule->GetPropertyString(strSkillRef, NFrame::SkillRef::SKILL5());
             break;
-
+		default:
+			return 1;
+			break;
         }
 
         pHeroRecord->SetString(nRow, nSkillIDCol, strSkillID.data());
@@ -239,7 +236,6 @@ bool NFCHeroModule::HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const
     }
 
     pHeroRecord->SetInt(nRow, nSkillLevleCol, nAfterLevel);
-
     return true;
 }
 
