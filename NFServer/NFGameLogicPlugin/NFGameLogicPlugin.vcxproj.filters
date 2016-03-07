@@ -44,6 +44,9 @@
     <Filter Include="NFGMModule">
       <UniqueIdentifier>{9c627c80-9536-4c28-8b31-2dc81cfd2d6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFTileModule">
+      <UniqueIdentifier>{4a3dbd25-605f-4b42-9e78-9fc44d2a179d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCGameLogicModule.h" />
