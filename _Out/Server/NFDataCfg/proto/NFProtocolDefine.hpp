@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/03/04
+//    @Date             :    2016/03/07
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -691,6 +691,7 @@ public:
 	static const std::string& R_ChatGroup(){ static std::string xChatGroup = "ChatGroup"; return xChatGroup;}
 	static const std::string& R_BuildingList(){ static std::string xBuildingList = "BuildingList"; return xBuildingList;}
 	static const std::string& R_BuildingListProduce(){ static std::string xBuildingListProduce = "BuildingListProduce"; return xBuildingListProduce;}
+	static const std::string& R_TileList(){ static std::string xTileList = "TileList"; return xTileList;}
 
 	enum PlayerViewItem
 	{
@@ -878,6 +879,14 @@ public:
 		BuildingListProduce_PosZ		= 5, // PosZ -- int
 		BuildingListProduce_StateStartTime		= 6, // StateStartTime -- int
 		BuildingListProduce_StateEndTime		= 7, // StateEndTime -- int
+	};
+
+	enum TileList
+	{
+		TileList_TileID		= 0, // TileID -- int
+		TileList_X		= 1, // X -- int
+		TileList_Y		= 2, // Y -- int
+		TileList_TileType		= 3, // TileType -- int
 	};
 
 };

@@ -132,6 +132,9 @@
     <ClInclude Include="NFCNormalConsumeProcessModule.h">
       <Filter>NFItemModule</Filter>
     </ClInclude>
+    <ClInclude Include="NFCTileModule.h">
+      <Filter>NFTileModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -217,6 +220,9 @@
     </ClCompile>
     <ClCompile Include="NFCNormalConsumeProcessModule.cpp">
       <Filter>NFItemModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCTileModule.cpp">
+      <Filter>NFTileModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

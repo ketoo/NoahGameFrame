@@ -15,7 +15,7 @@ class NFITileModule
     : public NFILogicModule
 {
 public:
-	// TODO:
+    virtual void SetTileData(const NFGUID& self, const int x, const int y, const int type) = 0;
 
 };
 

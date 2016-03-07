@@ -282,3 +282,11 @@ enum BuildingListProduce
 	StateEndTime		= 7; // StateEndTime -- int
 }
 
+enum TileList
+{
+	TileID		= 0; // TileID -- int
+	X		= 1; // X -- int
+	Y		= 2; // Y -- int
+	TileType		= 3; // TileType -- int
+}
+

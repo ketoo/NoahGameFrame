@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFGameServerPlugin.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2012-07-14 08:51
-//    @Module           :    NFGameServerPlugin
+//    @FileName         :   NFGameServerPlugin.cpp
+//    @Author           :   LvSheng.Huang
+//    @Date             :   2012-07-14 08:51
+//    @Module           :   NFGameServerPlugin
 //
 // -------------------------------------------------------------------------
 
@@ -29,6 +29,7 @@
 #include "NFCRankModule.h"
 #include "NFCCommonConfigModule.h"
 #include "NFCGmModule.h"
+#include "NFCTileModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -86,11 +87,13 @@ void NFGameLogicPlugin::Install()
 	REGISTER_MODULE(pPluginManager, NFCMailModule);
 	REGISTER_MODULE(pPluginManager, NFCRankModule);
     REGISTER_MODULE(pPluginManager, NFCCommonConfigModule);         
-    REGISTER_MODULE(pPluginManager, NFCGmModule);         
+    REGISTER_MODULE(pPluginManager, NFCGmModule);
+    REGISTER_MODULE(pPluginManager, NFCTileModule);
 }
 
 void NFGameLogicPlugin::Uninstall()
 {
+    UNREGISTER_MODULE(pPluginManager, NFCTileModule);
     UNREGISTER_MODULE(pPluginManager, NFCGmModule);
     UNREGISTER_MODULE(pPluginManager, NFCCommonConfigModule);
 	UNREGISTER_MODULE(pPluginManager, NFCRankModule);

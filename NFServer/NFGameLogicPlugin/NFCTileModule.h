@@ -1,18 +1,18 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCHeroModule.h
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2012-12-15
-//    @Module           :    NFCHeroModule
+//    @FileName         :   NFCTileModule.h
+//    @Author           :   Nick Yang
+//    @Date             :   2016/03/07
+//    @Module           :   NFCTileModule
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFC_HERO_MODULE_MODULE_H
-#define NFC_HERO_MODULE_MODULE_H
+#ifndef NFC_TILE_MODULE_H
+#define NFC_TILE_MODULE_H
 
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
-#include "NFComm/NFPluginModule/NFIHeroModule.h"
+#include "NFComm/NFPluginModule/NFITileModule.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
@@ -21,37 +21,29 @@
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 
-class NFCHeroModule
-    : public NFIHeroModule
+class NFCTileModule
+    : public NFITileModule
 {
 public:
-    NFCHeroModule( NFIPluginManager* p )
+    NFCTileModule(NFIPluginManager* p)
     {
-		std::string s = NFrame::BB_Build::NormalStateFunc();
         pPluginManager = p;
     }
-    virtual ~NFCHeroModule() {};
+
+    virtual ~NFCTileModule() {};
 
     virtual bool Init();
     virtual bool Shut();
     virtual bool Execute();
-
     virtual bool AfterInit();
-    virtual bool BeforeShut();
 
-    virtual bool AddHero(const NFGUID& self, const std::string& strID);
-    virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int nExp);
-    virtual bool HeroStarUp(const NFGUID& self, const NFGUID& xHeroID);
-    virtual bool HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex);
-    virtual bool HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex);
-    virtual bool SetFightHero(const NFGUID& self, const NFGUID& xID);
+    virtual void SetTileData(const NFGUID& self, const int x, const int y, const int type);
 
 protected:
-	void OnSetFightHeroProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+    int OnClassObjectEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eEvent, const NFIDataList& args);
 
-
-protected:
-
+    void TransferTileDataToMap(const NFGUID& self);
+    void TransferTileDataToRecord(const NFGUID& self);
 
 protected:
     NFILogicClassModule* m_pLogicClassModule;
@@ -59,7 +51,9 @@ protected:
 	NFIKernelModule* m_pKernelModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     NFIUUIDModule* m_pUUIDModule;
+
 private:
+    std::map<NFGUID, std::map<int, bool>> xTileDataMap; // map<playerID, TileData>
 };
 
-#endif
+#endif // !NFC_TILE_MODULE_H
