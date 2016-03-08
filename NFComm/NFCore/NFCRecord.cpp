@@ -298,13 +298,11 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
         return -1;
     }
 
-    bool bType = true;
     for (int i = 0; i < GetCols(); ++i)
     {
         if (var.Type(i) != GetColType(i))
         {
-            bType = false;
-            break;
+            return -1;
         }
 
         if (IsKey(i))
@@ -346,30 +344,28 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
         }
     }
 
-    if (bType)
+
+    SetUsed(nFindRow, 1);
+    for (int i = 0; i < GetCols(); ++i)
     {
-        SetUsed(nFindRow, 1);
-        for (int i = 0; i < GetCols(); ++i)
+        NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nFindRow, i));//GetTData(nFindRow, i);
+        if (!ValidSet(GetColType(i), *var.GetStack(i), pVar))
         {
-            NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nFindRow, i));//GetTData(nFindRow, i);
-            if (!ValidSet(GetColType(i), *var.GetStack(i), pVar))
-            {
-                //添加失败--不存在这样的情况，因为类型上面已经监测过，如果返回的话，那么添加的数据是0的话就会返回，导致结果错误
-                //                 mVecUsedState[nFindRow] = 0;
-                //                 pVar.reset();
-                //                 return -1;
-            }
+            //添加失败--不存在这样的情况，因为类型上面已经监测过，如果返回的话，那么添加的数据是0的话就会返回，导致结果错误
+            //                 mVecUsedState[nFindRow] = 0;
+            //                 pVar.reset();
+            //                 return -1;
         }
-
-        RECORD_EVENT_DATA xEventData;
-        xEventData.nOpType = Add;
-        xEventData.nRow = nFindRow;
-        xEventData.nCol = 0;
-        xEventData.strRecordName = mstrRecordName;
-
-        NFIDataList::TData tData;
-        OnEventHandler(mSelf, xEventData, tData, tData); //FIXME:RECORD
     }
+
+    RECORD_EVENT_DATA xEventData;
+    xEventData.nOpType = Add;
+    xEventData.nRow = nFindRow;
+    xEventData.nCol = 0;
+    xEventData.strRecordName = mstrRecordName;
+
+    NFIDataList::TData tData;
+    OnEventHandler(mSelf, xEventData, tData, tData); //FIXME:RECORD
 
     return nFindRow;
 }
