@@ -17,7 +17,7 @@
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
-	SetConsoleTitle("NFProxyServer");
+    SetConsoleTitle("NFProxyServer");
 #endif
     CREATE_PLUGIN(pm, NFProxyPlugin)
 
@@ -41,7 +41,7 @@ const std::string NFProxyPlugin::GetPluginName()
     return GET_CLASS_NAME(NFProxyPlugin)
 }
 
-void NFProxyPlugin::Install()
+       void NFProxyPlugin::Install()
 {
 
     REGISTER_MODULE(pPluginManager, NFCProxyLogicModule)

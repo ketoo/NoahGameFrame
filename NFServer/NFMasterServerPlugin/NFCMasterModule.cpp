@@ -26,7 +26,7 @@ bool NFCMasterModule::Shut()
 
 bool NFCMasterModule::Execute()
 {
- 
+
 
     return true;
 }

@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_WORLDNET_CLIENTMODULE_H
-#define _NFI_WORLDNET_CLIENTMODULE_H
+#ifndef NFI_WORLDNET_CLIENTMODULE_H
+#define NFI_WORLDNET_CLIENTMODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"

@@ -36,12 +36,12 @@ public:
     virtual bool AfterInit();
 
 
-    virtual void LogRecive(const char* str){}
-    virtual void LogSend(const char* str){}
+    virtual void LogRecive(const char* str) {}
+    virtual void LogSend(const char* str) {}
 
 protected:
 
-    void OnReciveWSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);	
+    void OnReciveWSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     //连接丢失,删2层(连接对象，帐号对象)
@@ -78,14 +78,14 @@ protected:
     int OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
 
-    int OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
-    
-//     template<class PBClass>    
-//     int TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+
+    //     template<class PBClass>
+    //     int TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     int TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 
-	virtual void LogServerInfo( const std::string& strServerInfo );
+    virtual void LogServerInfo(const std::string& strServerInfo);
 
 private:
     void SendOnline(const NFGUID& self);
