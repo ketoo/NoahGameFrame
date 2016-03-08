@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_COMPONENT_MANAGER_H
-#define _NFI_COMPONENT_MANAGER_H
+#ifndef NFI_COMPONENT_MANAGER_H
+#define NFI_COMPONENT_MANAGER_H
 
 #include <memory>
 #include "NFMap.h"
@@ -20,53 +20,53 @@ class NFIComponentManager : public NFILogicModule, public NFMapEx<std::string, N
 public:
     virtual ~NFIComponentManager() {}
 
-	template <typename T>
-	bool AddComponent()
-	{
-		if (!TIsDerived<T, NFIComponent>::Result)
-		{
-			//BaseTypeComponent must inherit from NFIComponent;
-			return false;
-		}
+    template <typename T>
+    bool AddComponent()
+    {
+        if (!TIsDerived<T, NFIComponent>::Result)
+        {
+            //BaseTypeComponent must inherit from NFIComponent;
+            return false;
+        }
 
-		NFIComponent* pComponent = NF_NEW T();
-		return AddComponent(pComponent->GetComponentName(), NF_SHARE_PTR<NFIComponent>(pComponent));
-	}
+        NFIComponent* pComponent = NF_NEW T();
+        return AddComponent(pComponent->GetComponentName(), NF_SHARE_PTR<NFIComponent>(pComponent));
+    }
 
-	template <typename T>
-	NF_SHARE_PTR<T> FindComponent(const std::string& strName)
-	{
-		if (!TIsDerived<T, NFIComponent>::Result)
-		{
-			//BaseTypeComponent must inherit from NFIComponent;
-			return NF_SHARE_PTR<T>();
-		}
+    template <typename T>
+    NF_SHARE_PTR<T> FindComponent(const std::string& strName)
+    {
+        if (!TIsDerived<T, NFIComponent>::Result)
+        {
+            //BaseTypeComponent must inherit from NFIComponent;
+            return NF_SHARE_PTR<T>();
+        }
 
-		NF_SHARE_PTR<NFIComponent> pComponent = First();
-		while (nullptr != pComponent)
-		{
-			if (pComponent->GetComponentName() == strName)
-			{
-				NF_SHARE_PTR<T> pT = std::dynamic_pointer_cast<T>(pComponent);
-				if (nullptr != pT)
-				{
-					return pT;
-				}
-				else
-				{
-					return NF_SHARE_PTR<T>();
-				}
-			}
+        NF_SHARE_PTR<NFIComponent> pComponent = First();
+        while (nullptr != pComponent)
+        {
+            if (pComponent->GetComponentName() == strName)
+            {
+                NF_SHARE_PTR<T> pT = std::dynamic_pointer_cast<T>(pComponent);
+                if (nullptr != pT)
+                {
+                    return pT;
+                }
+                else
+                {
+                    return NF_SHARE_PTR<T>();
+                }
+            }
 
-			pComponent = Next();
-		}
+            pComponent = Next();
+        }
 
-		return NF_SHARE_PTR<T>();
-	}
+        return NF_SHARE_PTR<T>();
+    }
 
     virtual NFGUID Self() = 0;
 
-	virtual bool AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent) = 0;
+    virtual bool AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent) = 0;
 
 private:
 };

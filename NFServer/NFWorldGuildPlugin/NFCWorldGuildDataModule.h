@@ -43,24 +43,24 @@ public:
 
     virtual bool GetPlayerInfo(const NFGUID& self, std::string& strRoleName, int& nLevel, int& nJob , int& nDonation , int& nVIP);
     virtual bool GetPlayerGuild(const NFGUID& self, NFGUID& xGuild);
-    virtual bool GetPlayerGameID( const NFGUID& self, int& nGameID );
+    virtual bool GetPlayerGameID(const NFGUID& self, int& nGameID);
 
     virtual const NFGUID CreateGuild(const NFGUID& xPlayeID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP, const int nOffLine = 1, const int nPower = NFMsg::GUILD_POWER_TYPE_PRESIDENT);
     virtual const bool DeleteGuild(const NFGUID& xGuild);
 
     virtual bool SearchGuild(const NFGUID& self, const std::string& strName, std::vector<SearchGuildObject>& xList);
-    virtual bool GetGuildInfo( const NFGUID& self, const NFGUID& xGuild, SearchGuildObject& xGuildInfo );
+    virtual bool GetGuildInfo(const NFGUID& self, const NFGUID& xGuild, SearchGuildObject& xGuildInfo);
 
 protected:
-    int OnGuildClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+    int OnGuildClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
     int OnSaveGuildheartEvent(const NFGUID& self , const std::string& strHeartName, const float fTime, const int nCount);
-   
+
 protected:
     NFIKernelModule* m_pKernelModule;
     NFIUUIDModule* m_pUUIDModule;
-    NFIClusterModule* m_pClusterSQLModule;    
+    NFIClusterModule* m_pClusterSQLModule;
     NFIDataProcessModule* m_pDataProcessModule;
-    
+
 private:
     std::string mstrGuildTalble;
     std::string mstrGuildNameTalble;

@@ -6,8 +6,8 @@
 //    @Desc             :     every script plugin need to export two interfaces(NFCScriptVarList and most of NFCScriptKernel)
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_SCRIPT_MODULE_H
-#define _NFI_SCRIPT_MODULE_H
+#ifndef NFI_SCRIPT_MODULE_H
+#define NFI_SCRIPT_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
@@ -38,7 +38,7 @@ public:
         return true;
     }
 
-    NFCScriptName(){}
+    NFCScriptName() {}
 
     NFCScriptName(const std::string& strComponentName, const std::string& strFunctionName)
     {
@@ -168,24 +168,24 @@ public:
 
         switch (eClassEvent)
         {
-        case COE_CREATE_NODATA:
-            strSerializationName = "Init";
-            break;
+            case COE_CREATE_NODATA:
+                strSerializationName = "Init";
+                break;
 
-        case COE_CREATE_HASDATA:
-            strSerializationName = "AfterInit";
-            break;
+            case COE_CREATE_HASDATA:
+                strSerializationName = "AfterInit";
+                break;
 
-        case COE_BEFOREDESTROY:
-            strSerializationName = "BeforeShut";
-            break;
+            case COE_BEFOREDESTROY:
+                strSerializationName = "BeforeShut";
+                break;
 
-        case COE_DESTROY:
-            strSerializationName = "Shut";
-            break;
+            case COE_DESTROY:
+                strSerializationName = "Shut";
+                break;
 
-        default:
-            break;
+            default:
+                break;
         }
 
         if (!strSerializationName.empty())
@@ -207,8 +207,8 @@ public:
     }
 
     //call script
-	virtual int DoScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg) = 0;
-	virtual int DoClassCommonScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction) = 0;
+    virtual int DoScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg) = 0;
+    virtual int DoClassCommonScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction) = 0;
     virtual int DoEventScript(const NFGUID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg) = 0;
     virtual int DoHeartBeatScript(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction) = 0;
 
