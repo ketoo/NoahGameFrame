@@ -33,7 +33,7 @@ const std::string NFLoginNet_ServerPlugin::GetPluginName()
     return GET_CLASS_NAME(NFLoginNet_ServerPlugin)
 }
 
-void NFLoginNet_ServerPlugin::Install()
+       void NFLoginNet_ServerPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFCLoginNet_ServerModule)
 }

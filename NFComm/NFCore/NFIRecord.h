@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_RECORD_H
-#define _NFI_RECORD_H
+#ifndef NFI_RECORD_H
+#define NFI_RECORD_H
 
 #include "NFDefine.h"
 #include "NFIDataList.h"

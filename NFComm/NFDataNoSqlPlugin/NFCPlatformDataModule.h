@@ -29,12 +29,12 @@ public:
 
     virtual bool ConnectSql(const std::string& strIP);
 
-	virtual int AddAccountInfo(const std::string& strAccount, const std::string& strPassword);
+    virtual int AddAccountInfo(const std::string& strAccount, const std::string& strPassword);
 
-	//int& nState:0为正确可登录，>0为其他各种错误,比如封号等
-	virtual int ConfirmAccountInfo(const std::string& strAccount, const std::string& strPassword);
+    //int& nState:0为正确可登录，>0为其他各种错误,比如封号等
+    virtual int ConfirmAccountInfo(const std::string& strAccount, const std::string& strPassword);
 
-	virtual int SetAccountState(const std::string& strAccount, const int nState);
+    virtual int SetAccountState(const std::string& strAccount, const int nState);
 
     virtual NFIDataNoSqlDriver* GetDriver()
     {
@@ -42,7 +42,7 @@ public:
     }
 
 protected:
-	NFIDataNoSqlDriver* m_pPlayerDataDriver;
+    NFIDataNoSqlDriver* m_pPlayerDataDriver;
 
 };
 

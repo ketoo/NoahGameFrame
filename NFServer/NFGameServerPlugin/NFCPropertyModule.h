@@ -22,7 +22,7 @@
 class NFCPropertyModule : public NFIPropertyModule
 {
 public:
-    NFCPropertyModule( NFIPluginManager* p )
+    NFCPropertyModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
@@ -33,13 +33,13 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual int RefreshBaseProperty( const NFGUID& self );
+    virtual int RefreshBaseProperty(const NFGUID& self);
 
-    virtual int GetPropertyValue( const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType );
-    virtual int SetPropertyValue( const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue );
+    virtual int GetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType);
+    virtual int SetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue);
 
-    virtual int AddPropertyValue( const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue );
-    virtual int SubPropertyValue( const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue );
+    virtual int AddPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue);
+    virtual int SubPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue);
 
     virtual bool FullHPMP(const NFGUID& self);
     virtual bool AddHP(const NFGUID& self, const NFINT64& nValue);
@@ -47,7 +47,7 @@ public:
     virtual bool EnoughHP(const NFGUID& self, const NFINT64& nValue);
 
     virtual bool AddMP(const NFGUID& self, const NFINT64& nValue);
-    virtual bool ConsumeMP(const NFGUID& self, const NFINT64& nValue);    
+    virtual bool ConsumeMP(const NFGUID& self, const NFINT64& nValue);
     virtual bool EnoughMP(const NFGUID& self, const NFINT64& nValue);
 
     virtual bool FullSP(const NFGUID& self);
@@ -64,18 +64,18 @@ public:
     virtual bool EnoughDiamond(const NFGUID& self, const NFINT64& nValue);
 
 protected:
-    int OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
-    int OnObjectLevelEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar );
+    int OnObjectLevelEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
-    int OnRecordPropertyEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+    int OnRecordPropertyEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
 private:
     NFIKernelModule* m_pKernelModule;
     NFIPropertyConfigModule* m_pPropertyConfigModule;
     NFIElementInfoModule* m_pElementInfoModule;
     NFILogicClassModule* m_pLogicClassModule;
-	NFILevelModule* m_pLevelModule;
+    NFILevelModule* m_pLevelModule;
 };
 
 

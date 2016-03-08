@@ -43,7 +43,7 @@ public:
     virtual bool EnoughHP(const NFGUID& self, const NFINT64& nValue) = 0;
 
     virtual bool AddMP(const NFGUID& self, const NFINT64& nValue) = 0;
-    virtual bool ConsumeMP(const NFGUID& self, const NFINT64& nValue) = 0;    
+    virtual bool ConsumeMP(const NFGUID& self, const NFINT64& nValue) = 0;
     virtual bool EnoughMP(const NFGUID& self, const NFINT64& nValue) = 0;
 
     virtual bool FullSP(const NFGUID& self) = 0;
@@ -51,7 +51,7 @@ public:
     virtual bool ConsumeSP(const NFGUID& self, const NFINT64& nValue) = 0;
     virtual bool EnoughSP(const NFGUID& self, const NFINT64& nValue) = 0;
 
-    virtual bool AddMoney( const NFGUID& self, const NFINT64& nValue ) = 0;
+    virtual bool AddMoney(const NFGUID& self, const NFINT64& nValue) = 0;
     virtual bool ConsumeMoney(const NFGUID& self, const NFINT64& nValue) = 0;
     virtual bool EnoughMoney(const NFGUID& self, const NFINT64& nValue) = 0;
 

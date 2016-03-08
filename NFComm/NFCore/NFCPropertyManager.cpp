@@ -80,10 +80,10 @@ bool NFCPropertyManager::SetProperty(const std::string& strPropertyName, const N
 //     if (pSelfProperty.get())
 //     {
 //         pSelfProperty->SetValue(pProperty);
-// 
+//
 //         return true;
 //     }
-// 
+//
 //     return false;
 // }
 
@@ -108,91 +108,91 @@ const int NFCPropertyManager::GetPropertyIndex(const std::string& strProperty)
     return 0;
 }
 
-bool NFCPropertyManager::SetPropertyInt( const std::string& strPropertyName, const NFINT64 nValue )
+bool NFCPropertyManager::SetPropertyInt(const std::string& strPropertyName, const NFINT64 nValue)
 {
-	NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
-	if (pProperty.get())
-	{
-		return pProperty->SetInt(nValue);
-	}
+    NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
+    if (pProperty.get())
+    {
+        return pProperty->SetInt(nValue);
+    }
 
-	return false;
+    return false;
 }
 
-bool NFCPropertyManager::SetPropertyFloat( const std::string& strPropertyName, const double dwValue )
+bool NFCPropertyManager::SetPropertyFloat(const std::string& strPropertyName, const double dwValue)
 {
-	NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
-	if (pProperty.get())
-	{
-		return pProperty->SetFloat(dwValue);
-	}
+    NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
+    if (pProperty.get())
+    {
+        return pProperty->SetFloat(dwValue);
+    }
 
-	return false;
+    return false;
 }
 
-bool NFCPropertyManager::SetPropertyString( const std::string& strPropertyName, const std::string& strValue )
+bool NFCPropertyManager::SetPropertyString(const std::string& strPropertyName, const std::string& strValue)
 {
-	NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
-	if (pProperty.get())
-	{
-		return pProperty->SetString(strValue);
-	}
+    NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
+    if (pProperty.get())
+    {
+        return pProperty->SetString(strValue);
+    }
 
-	return false;
+    return false;
 }
 
-bool NFCPropertyManager::SetPropertyObject( const std::string& strPropertyName, const NFGUID& obj )
+bool NFCPropertyManager::SetPropertyObject(const std::string& strPropertyName, const NFGUID& obj)
 {
-	NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
-	if (pProperty.get())
-	{
-		return pProperty->SetObject(obj);
-	}
+    NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
+    if (pProperty.get())
+    {
+        return pProperty->SetObject(obj);
+    }
 
-	return false;
+    return false;
 }
 
-NFINT64 NFCPropertyManager::GetPropertyInt( const std::string& strPropertyName )
+NFINT64 NFCPropertyManager::GetPropertyInt(const std::string& strPropertyName)
 {
-	NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
-	if (pProperty.get())
-	{
-		return pProperty->GetInt();
-	}
+    NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
+    if (pProperty.get())
+    {
+        return pProperty->GetInt();
+    }
 
-	return 0;
+    return 0;
 }
 
-double NFCPropertyManager::GetPropertyFloat( const std::string& strPropertyName )
+double NFCPropertyManager::GetPropertyFloat(const std::string& strPropertyName)
 {
-	NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
-	if (pProperty.get())
-	{
-		return pProperty->GetFloat();
-	}
+    NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
+    if (pProperty.get())
+    {
+        return pProperty->GetFloat();
+    }
 
-	return 0.0;
+    return 0.0;
 }
 
-const std::string& NFCPropertyManager::GetPropertyString( const std::string& strPropertyName )
+const std::string& NFCPropertyManager::GetPropertyString(const std::string& strPropertyName)
 {
-	NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
-	if (pProperty.get())
-	{
-		return pProperty->GetString();
-	}
+    NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
+    if (pProperty.get())
+    {
+        return pProperty->GetString();
+    }
 
-	return NULL_STR;
+    return NULL_STR;
 }
 
-const NFGUID& NFCPropertyManager::GetPropertyObject( const std::string& strPropertyName )
+const NFGUID& NFCPropertyManager::GetPropertyObject(const std::string& strPropertyName)
 {
-	NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
-	if (pProperty.get())
-	{
-		return pProperty->GetObject();
-	}
+    NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
+    if (pProperty.get())
+    {
+        return pProperty->GetObject();
+    }
 
-	return NULL_OBJECT;
+    return NULL_OBJECT;
 }
 

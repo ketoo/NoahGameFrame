@@ -26,19 +26,19 @@ enum CLASS_OBJECT_EVENT
     COE_CREATE_FINISH,  // ToModify任务创建完成后再挂回调
 };
 
-struct RECORD_EVENT_DATA 
+struct RECORD_EVENT_DATA
 {
-	RECORD_EVENT_DATA()
-	{
-		nOpType = 0;
-		nRow = 0;
-		nCol = 0;
-	}
+    RECORD_EVENT_DATA()
+    {
+        nOpType = 0;
+        nRow = 0;
+        nCol = 0;
+    }
 
-	int nOpType;
-	int nRow;
-	int nCol;
-	std::string strRecordName;
+    int nOpType;
+    int nRow;
+    int nCol;
+    std::string strRecordName;
 };
 
 // functor
