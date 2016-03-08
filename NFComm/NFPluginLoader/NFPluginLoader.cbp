@@ -19,7 +19,6 @@
 					<Add option="-D_DEBUG" />
 					<Add option="-D_CONSOLE" />
 					<Add option="-DNF_DYNAMIC_PLUGIN" />
-					<Add option="-DGOOGLE_GLOG_DLL_DECL=" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />

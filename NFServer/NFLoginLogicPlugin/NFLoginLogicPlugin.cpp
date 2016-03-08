@@ -16,7 +16,7 @@
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
-	SetConsoleTitle("NFLoginServer");
+    SetConsoleTitle("NFLoginServer");
 #endif
     CREATE_PLUGIN(pm, NFLoginLogicPlugin)
 

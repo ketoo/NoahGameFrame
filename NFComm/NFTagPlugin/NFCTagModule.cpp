@@ -10,62 +10,62 @@
 
 bool NFCTagModule::Init()
 {
-	return true;
+    return true;
 }
 
 bool NFCTagModule::Shut()
 {
-	return true;
+    return true;
 
 }
 
 bool NFCTagModule::Execute()
 {
-	return true;
+    return true;
 
 }
 
 bool NFCTagModule::AfterInit()
 {
-	return true;
+    return true;
 
 }
 
 bool NFCTagModule::BeforeShut()
 {
-	return true;
+    return true;
 
 }
 
-bool NFCTagModule::GetTagList( const std::string& strTag, NFList<NFGUID>& xList)
+bool NFCTagModule::GetTagList(const std::string& strTag, NFList<NFGUID>& xList)
 {
-	return true;
+    return true;
 }
 
-bool NFCTagModule::GetTagList( const TAG_DEFINE eTag, const std::string& strTag, NFList<NFGUID>& xList)
+bool NFCTagModule::GetTagList(const TAG_DEFINE eTag, const std::string& strTag, NFList<NFGUID>& xList)
 {
-	return true;
+    return true;
 }
 
-bool NFCTagModule::AddToTagList( const std::string& strTag, const NFGUID object )
+bool NFCTagModule::AddToTagList(const std::string& strTag, const NFGUID object)
 {
-	return false;
-
-}
-
-bool NFCTagModule::AddToTagList( const TAG_DEFINE eTag, const std::string& strTag, const NFGUID object )
-{
-	return false;
+    return false;
 
 }
 
-bool NFCTagModule::RemoveFrmTagList( const std::string& strTag, const NFGUID object )
+bool NFCTagModule::AddToTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFGUID object)
 {
-	return false;
+    return false;
+
 }
 
-bool NFCTagModule::RemoveFrmTagList( const TAG_DEFINE eTag, const std::string& strTag, const NFGUID object )
+bool NFCTagModule::RemoveFrmTagList(const std::string& strTag, const NFGUID object)
 {
-	return false;
+    return false;
+}
+
+bool NFCTagModule::RemoveFrmTagList(const TAG_DEFINE eTag, const std::string& strTag, const NFGUID object)
+{
+    return false;
 
 }

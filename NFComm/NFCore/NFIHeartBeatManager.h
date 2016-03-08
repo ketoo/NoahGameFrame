@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_HEARTBEATMANAGER_H
-#define _NFI_HEARTBEATMANAGER_H
+#ifndef NFI_HEARTBEATMANAGER_H
+#define NFI_HEARTBEATMANAGER_H
 
 #include <string>
 #include "NFMap.h"
@@ -33,7 +33,7 @@ public:
     {
         fBeatTime = 0.0f;
         //fTime = 0.0f;
-		nTime = 0;
+        nTime = 0;
         nCount = 0;
         strBeatName = "";
     };
@@ -45,7 +45,7 @@ public:
     void DoHeartBeatEvent();
 
     float fBeatTime;
-	NFINT64 nTime;
+    NFINT64 nTime;
     int nCount;
     std::string strBeatName;
     NFGUID self;

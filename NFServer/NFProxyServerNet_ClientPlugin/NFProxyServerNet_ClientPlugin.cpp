@@ -36,17 +36,17 @@ const int NFProxyServerNet_ClientPlugin::GetPluginVersion()
 
 const std::string NFProxyServerNet_ClientPlugin::GetPluginName()
 {
-	return GET_CLASS_NAME(NFProxyServerNet_ClientPlugin)
+    return GET_CLASS_NAME(NFProxyServerNet_ClientPlugin)
 }
 
-void NFProxyServerNet_ClientPlugin::Install()
+       void NFProxyServerNet_ClientPlugin::Install()
 {
-	REGISTER_MODULE(pPluginManager, NFCProxyServerToWorldModule)
-	REGISTER_MODULE(pPluginManager, NFCProxyServerToGameModule)
+    REGISTER_MODULE(pPluginManager, NFCProxyServerToWorldModule)
+    REGISTER_MODULE(pPluginManager, NFCProxyServerToGameModule)
 }
 
 void NFProxyServerNet_ClientPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFCProxyServerToGameModule)
-	UNREGISTER_MODULE(pPluginManager, NFCProxyServerToWorldModule)
+    UNREGISTER_MODULE(pPluginManager, NFCProxyServerToGameModule)
+    UNREGISTER_MODULE(pPluginManager, NFCProxyServerToWorldModule)
 }

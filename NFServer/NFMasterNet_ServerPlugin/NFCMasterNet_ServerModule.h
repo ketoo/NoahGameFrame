@@ -20,67 +20,67 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 
 class NFCMasterNet_ServerModule
-	: public NFINetModule
+    : public NFINetModule
 {
 public:
-	NFCMasterNet_ServerModule(NFIPluginManager* p) : NFINetModule(p)
-	{
-		mnLastLogTime = pPluginManager->GetNowTime();
-	}
+    NFCMasterNet_ServerModule(NFIPluginManager* p) : NFINetModule(p)
+    {
+        mnLastLogTime = pPluginManager->GetNowTime();
+    }
 
-	virtual bool Init();
-	virtual bool Shut();
+    virtual bool Init();
+    virtual bool Shut();
 
-	virtual bool AfterInit();
-	virtual bool Execute();
+    virtual bool AfterInit();
+    virtual bool Execute();
 
-	virtual void LogRecive(const char* str){}
-	virtual void LogSend(const char* str){}
+    virtual void LogRecive(const char* str) {}
+    virtual void LogSend(const char* str) {}
 
 protected:
 
-	void OnRecivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+    void OnRecivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
-	//连接丢失,删2层(连接对象，帐号对象)
-	void OnClientDisconnect(const int nAddress);
-	//有连接
-	void OnClientConnected(const int nAddress);
-	
+    //连接丢失,删2层(连接对象，帐号对象)
+    void OnClientDisconnect(const int nAddress);
+    //有连接
+    void OnClientConnected(const int nAddress);
+
 protected:
-	//世界服务器注册，刷新信息
-	int OnWorldRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	int OnWorldUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	int OnRefreshWorldInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    //世界服务器注册，刷新信息
+    int OnWorldRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnWorldUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnRefreshWorldInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-	//////////////////////////////////////////////////////////////////////////
-	//登录服务器注册，刷新信息
-	int OnLoginRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	int OnLoginUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	int OnRefreshLoginInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    //////////////////////////////////////////////////////////////////////////
+    //登录服务器注册，刷新信息
+    int OnLoginRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnLoginUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnRefreshLoginInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-	//选择世界服务器消息
-	int OnSelectWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	int OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    //选择世界服务器消息
+    int OnSelectWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    int OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-	//////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
 
-	void SynWorldToLogin();
-	void LogGameServer();
+    void SynWorldToLogin();
+    void LogGameServer();
 
 private:
 
-	NFINT64 mnLastLogTime;
+    NFINT64 mnLastLogTime;
 
     //serverid,data
     NFMapEx<int, ServerData> mWorldMap;
     NFMapEx<int, ServerData> mLoginMap;
 
-	
-	NFIElementInfoModule* m_pElementInfoModule;
-	NFILogicClassModule* m_pLogicClassModule;
-	NFIKernelModule* m_pKernelModule;
-	NFILogModule* m_pLogModule;
+
+    NFIElementInfoModule* m_pElementInfoModule;
+    NFILogicClassModule* m_pLogicClassModule;
+    NFIKernelModule* m_pKernelModule;
+    NFILogModule* m_pLogModule;
 };
 
 #endif
