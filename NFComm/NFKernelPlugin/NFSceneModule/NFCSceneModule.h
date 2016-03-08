@@ -18,17 +18,17 @@ class NFCSceneModule
     : public NFISceneModule
 {
 public:
-	NFCSceneModule(NFIPluginManager* p)
-	{
-		//pPluginManager = p;
-	}
+    NFCSceneModule(NFIPluginManager* p)
+    {
+        //pPluginManager = p;
+    }
 
-	    
-	virtual ~NFCSceneModule()
+
+    virtual ~NFCSceneModule()
     {
     }
 
-	virtual bool Init();
+    virtual bool Init();
     virtual bool AfterInit();
     virtual bool BeforeShut();
     virtual bool Shut();

@@ -3,15 +3,15 @@
 
 #ifdef NF_DYNAMIC_PLUGIN
 
-NF_EXPORT void DllStartPlugin( NFIPluginManager* pm )
+NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
-    CREATE_PLUGIN( pm, NFDataBaseNet_ClientPlugin )
+    CREATE_PLUGIN(pm, NFDataBaseNet_ClientPlugin)
 
 };
 
-NF_EXPORT void DllStopPlugin( NFIPluginManager* pm )
+NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
 {
-    DESTROY_PLUGIN( pm, NFDataBaseNet_ClientPlugin )
+    DESTROY_PLUGIN(pm, NFDataBaseNet_ClientPlugin)
 };
 
 #endif
@@ -24,10 +24,10 @@ const int NFDataBaseNet_ClientPlugin::GetPluginVersion()
 
 const std::string NFDataBaseNet_ClientPlugin::GetPluginName()
 {
-    return GET_CLASS_NAME( NFDataBaseNet_ClientPlugin )
+    return GET_CLASS_NAME(NFDataBaseNet_ClientPlugin)
 }
 
-void NFDataBaseNet_ClientPlugin::Install()
+       void NFDataBaseNet_ClientPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFCDataProcessModule)
 }

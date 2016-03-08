@@ -36,7 +36,7 @@ const std::string NFWorldGuildPlugin::GetPluginName()
     return GET_CLASS_NAME(NFWorldGuildPlugin)
 }
 
-void NFWorldGuildPlugin::Install()
+       void NFWorldGuildPlugin::Install()
 {
 
     REGISTER_MODULE(pPluginManager, NFCWorldGuildModule)

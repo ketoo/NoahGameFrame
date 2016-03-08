@@ -15,10 +15,10 @@
 class NFCComponentManager : public NFIComponentManager
 {
 private:
-	NFCComponentManager()
-	{
+    NFCComponentManager()
+    {
 
-	}
+    }
 
 public:
     NFCComponentManager(const NFGUID& self)
@@ -41,11 +41,11 @@ public:
 
     virtual bool Execute();
 
-	virtual NFGUID Self();
+    virtual NFGUID Self();
 
 protected:
 
-	virtual bool AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent);
+    virtual bool AddComponent(const std::string& strComponentName, NF_SHARE_PTR<NFIComponent> pNewComponent);
 
 private:
     NFGUID mSelf;

@@ -24,7 +24,7 @@ bool NFCJavaScriptModule::Init()
     m_pScriptKernelModule = new NFCScriptKernelModule(m_pKernelModule, this, m_pElementInfoModule, m_pEventProcessModule);
 
     bool ret = InstallJS("script_init.js");
-    assert( ret );
+    assert(ret);
 
     std::shared_ptr<NFILogicClass> pClass = m_pLogicClassModule->First();
     while (pClass.get())
@@ -41,7 +41,7 @@ bool NFCJavaScriptModule::Init()
         }
 
         pClass = m_pLogicClassModule->Next();
-    } 
+    }
 
 
     //add all callback
@@ -76,46 +76,46 @@ bool NFCJavaScriptModule::Execute(const float fLasFrametime, const float fStarte
     return true;
 }
 
-int NFCJavaScriptModule::DoScript( const NFIDENTID& self, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg )
+int NFCJavaScriptModule::DoScript(const NFIDENTID& self, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg)
 {
     return 0;
 }
 
-int NFCJavaScriptModule::DoEventScript( const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg )
+int NFCJavaScriptModule::DoEventScript(const NFIDENTID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg)
 {
     return 0;
 }
 
-int NFCJavaScriptModule::DoHeartBeatScript( const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg )
+int NFCJavaScriptModule::DoHeartBeatScript(const NFIDENTID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& arg)
 {
     return 0;
 }
 
-int NFCJavaScriptModule::DoScriptPropertyCallBack( const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& oldVar, const NFCScriptVarList& neVar, const NFCScriptVarList& arg )
+int NFCJavaScriptModule::DoScriptPropertyCallBack(const NFIDENTID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFCScriptVarList& oldVar, const NFCScriptVarList& neVar, const NFCScriptVarList& arg)
 {
     return 0;
 }
 
-int NFCJavaScriptModule::DoScriptRecordCallBack( const NFIDENTID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCScriptVarList& oldVar, const NFCScriptVarList& newVar, const NFCScriptVarList& arg )
+int NFCJavaScriptModule::DoScriptRecordCallBack(const NFIDENTID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCScriptVarList& oldVar, const NFCScriptVarList& newVar, const NFCScriptVarList& arg)
 {
     return 0;
 }
 
-int NFCJavaScriptModule::OnPropertyCommEvent( const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& arg )
+int NFCJavaScriptModule::OnPropertyCommEvent(const NFIDENTID& self, const std::string& strPropertyName, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& arg)
 {
-    DoPropertyCommEvent(m_pScriptKernelModule, self,strPropertyName, oldVar, newVar, arg);
+    DoPropertyCommEvent(m_pScriptKernelModule, self, strPropertyName, oldVar, newVar, arg);
 
     return 0;
 }
 
-int NFCJavaScriptModule::OnRecordCommonEvent( const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& arg )
+int NFCJavaScriptModule::OnRecordCommonEvent(const NFIDENTID& self, const std::string& strRecordName, const int nOpType, const int nRow, const int nCol, const NFIDataList& oldVar, const NFIDataList& newVar, const NFIDataList& arg)
 {
-    DoRecordCommonEvent(m_pScriptKernelModule, self,strRecordName, nOpType, nRow, nCol, oldVar, newVar, arg);
+    DoRecordCommonEvent(m_pScriptKernelModule, self, strRecordName, nOpType, nRow, nCol, oldVar, newVar, arg);
 
     return 0;
 }
 
-int NFCJavaScriptModule::OnClassCommonEvent( const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCJavaScriptModule::OnClassCommonEvent(const NFIDENTID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
 {
     DoClassCommonEvent(m_pLogicClassModule, self, strClassName, eClassEvent, var);
 
@@ -157,7 +157,7 @@ bool NFCJavaScriptModule::InstallJS(const std::string& strComponentName)
 }
 bool NFCJavaScriptModule::CheckCompomentStatus(const std::string& strComponentName, const std::string& strFuncName)
 {
-    if( !CheckCompomentStatus(strComponentName))
+    if (!CheckCompomentStatus(strComponentName))
     {
         assert(0);
 
@@ -184,7 +184,7 @@ bool NFCJavaScriptModule::CheckCompomentStatus(const std::string& strComponentNa
 bool NFCJavaScriptModule::CheckCompomentStatus(const std::string& strComponentName)
 {
     if (!mmCompomentStatus.GetElement(strComponentName))
-    { 
+    {
         int nRet = luabind::call_function<int>(mpLuaState, "load_script_file", strComponentName.c_str());
         if (nRet <= 0)
         {
@@ -250,32 +250,32 @@ bool NFCJavaScriptModule::Regisger()
     v8::Handle<v8::ObjectTemplate> xScriptVarListProto = xScriptVarListClass->PrototypeTemplate();
     xScriptVarListProto->Set(v8::String::NewFromUtf8(m_pIsolate, "IsEmpty"), v8::FunctionTemplate::New(m_pIsolate, &NFCScriptVarList::IsEmpty()));
 
-        //    class_ <NFCScriptVarList> ("NFCVarList")
-        //    .def(luabind::constructor<>())
-        //    .def ("IsEmpty", &NFCScriptVarList::IsEmpty)
-        //    .def ("GetCount", &NFCScriptVarList::GetCount)
-        //    .def ("Type", &NFCScriptVarList::Type)
-        //    .def ("AddInt", &NFCScriptVarList::AddInt)
-        //    .def ("AddFloat", &NFCScriptVarList::AddFloat)
-        //    .def ("AddString", &NFCScriptVarList::AddString)
-        //    .def ("AddObject", &NFCScriptVarList::AddObject)
-        //    .def ("SetInt", &NFCScriptVarList::SetInt)
-        //    .def ("SetFloat", &NFCScriptVarList::SetFloat)
-        //    .def ("SetString", &NFCScriptVarList::SetString)
-        //    .def ("SetObject", &NFCScriptVarList::SetObject)
-        //    .def ("Int", &NFCScriptVarList::Int)
-        //    .def ("Float", &NFCScriptVarList::Float)
-        //    .def("String", &NFCScriptVarList::String)
-        //    .def("Object", &NFCScriptVarList::Object),
+    //    class_ <NFCScriptVarList> ("NFCVarList")
+    //    .def(luabind::constructor<>())
+    //    .def ("IsEmpty", &NFCScriptVarList::IsEmpty)
+    //    .def ("GetCount", &NFCScriptVarList::GetCount)
+    //    .def ("Type", &NFCScriptVarList::Type)
+    //    .def ("AddInt", &NFCScriptVarList::AddInt)
+    //    .def ("AddFloat", &NFCScriptVarList::AddFloat)
+    //    .def ("AddString", &NFCScriptVarList::AddString)
+    //    .def ("AddObject", &NFCScriptVarList::AddObject)
+    //    .def ("SetInt", &NFCScriptVarList::SetInt)
+    //    .def ("SetFloat", &NFCScriptVarList::SetFloat)
+    //    .def ("SetString", &NFCScriptVarList::SetString)
+    //    .def ("SetObject", &NFCScriptVarList::SetObject)
+    //    .def ("Int", &NFCScriptVarList::Int)
+    //    .def ("Float", &NFCScriptVarList::Float)
+    //    .def("String", &NFCScriptVarList::String)
+    //    .def("Object", &NFCScriptVarList::Object),
 
-        //    class_ <NFScriptIdent> ("NFIDENTID")
-        //    .def(luabind::constructor<>())
-        //    .def ("GetIdent", &NFScriptIdent::GetIdent)
-        //    .def ("GetData", &NFScriptIdent::GetData)
-        //    .def ("SetData", &NFScriptIdent::SetData)
-        //    .def ("GetHead", &NFScriptIdent::GetHead)
-        //    .def ("SetHead", &NFScriptIdent::SetHead)
-        //]; 
+    //    class_ <NFScriptIdent> ("NFIDENTID")
+    //    .def(luabind::constructor<>())
+    //    .def ("GetIdent", &NFScriptIdent::GetIdent)
+    //    .def ("GetData", &NFScriptIdent::GetData)
+    //    .def ("SetData", &NFScriptIdent::SetData)
+    //    .def ("GetHead", &NFScriptIdent::GetHead)
+    //    .def ("SetHead", &NFScriptIdent::SetHead)
+    //];
 
     return true;
 }

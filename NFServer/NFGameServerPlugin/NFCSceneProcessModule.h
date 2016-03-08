@@ -34,7 +34,7 @@ class NFCSceneProcessModule
     : public NFISceneProcessModule
 {
 public:
-    NFCSceneProcessModule( NFIPluginManager* p )
+    NFCSceneProcessModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
@@ -47,25 +47,25 @@ public:
 
     virtual E_SCENE_TYPE GetCloneSceneType(const int nSceneID);
     virtual bool IsCloneScene(const int nSceneID);
-	virtual bool ApplyCloneGroup(const int nSceneID, int& nGroupID);
-	virtual bool ExitCloneGroup(const int nSceneID, const int& nGroupID);
+    virtual bool ApplyCloneGroup(const int nSceneID, int& nGroupID);
+    virtual bool ExitCloneGroup(const int nSceneID, const int& nGroupID);
 
 protected:
-	int CreateCloneScene( const int& nSceneID);
+    int CreateCloneScene(const int& nSceneID);
 
-    bool CreateSceneObject( const int nSceneID, const int nGroupID);
+    bool CreateSceneObject(const int nSceneID, const int nGroupID);
 
-	bool LoadSceneResource( const int nSceneID );
-
-protected:
-
-    int OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
-
-    int OnEnterSceneEvent( const NFGUID& object, const int nEventID, const NFIDataList& var );
-    int OnLeaveSceneEvent( const NFGUID& object, const int nEventID, const NFIDataList& var );
+    bool LoadSceneResource(const int nSceneID);
 
 protected:
-	void OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+
+    int OnEnterSceneEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
+    int OnLeaveSceneEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
+
+protected:
+    void OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
 
