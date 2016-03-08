@@ -18,8 +18,8 @@ class NFIGameServerNet_ServerModule
 {
 
 public:
-    virtual void SendMsgPBToGate( const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self ) = 0;
-    virtual void SendMsgPBToGate( const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self ) = 0;
+    virtual void SendMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self) = 0;
+    virtual void SendMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self) = 0;
 };
 
 #endif

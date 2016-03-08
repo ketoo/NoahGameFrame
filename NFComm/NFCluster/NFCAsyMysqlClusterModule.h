@@ -10,12 +10,12 @@
 #define NFC_ASY_MYSQL_CLUSTER_MODULE_H
 
 #include "NFCMysqlDriver.h"
+#include "NFComm/NFMessageDefine/NFMsgMysql.pb.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIAsyClusterModule.h"
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
-#include "NFComm/NFMessageDefine/NFMsgMysql.pb.h"
-#include "NFIMysqlDriverManager.h"
+#include "NFComm/NFPluginModule/NFIMysqlDriverManager.h"
 
 struct SMysqlParam
 {
@@ -39,8 +39,8 @@ struct SMysqlParam
     }
 
 public:
-    bool PackParam(std::string& strData );
-    bool UnPackParam( const std::string& strData);
+    bool PackParam(std::string& strData);
+    bool UnPackParam(const std::string& strData);
 
     std::string strRecordName;
     std::string strKey;
@@ -61,11 +61,11 @@ public:
 class NFCMysqlComponent : public NFIComponent
 {
 public:
-    NFCMysqlComponent(NFGUID self, const std::string& strName):NFIComponent(self, strName)
+    NFCMysqlComponent(NFGUID self, const std::string& strName): NFIComponent(self, strName)
     {
     }
 
-    NFCMysqlComponent(NFIPluginManager* pPluginManager):NFIComponent(NFGUID(), "")
+    NFCMysqlComponent(NFIPluginManager* pPluginManager): NFIComponent(NFGUID(), "")
     {
     }
 
@@ -78,9 +78,9 @@ public:
     virtual bool AfterInit();
     virtual int OnASyncEvent(const NFGUID& self, const int event, std::string& arg);
 
-    int OnASyUseMysqlEvent( const NFGUID& self, const int event, std::string& arg );
-    int OnASyAddMysqlServerEvent( const NFGUID& self, const int event, std::string& arg );
-    int OnASyKeepServerAliveEvent( const NFGUID& self, const int event, std::string& arg );
+    int OnASyUseMysqlEvent(const NFGUID& self, const int event, std::string& arg);
+    int OnASyAddMysqlServerEvent(const NFGUID& self, const int event, std::string& arg);
+    int OnASyKeepServerAliveEvent(const NFGUID& self, const int event, std::string& arg);
 
 
 protected:
@@ -110,21 +110,21 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-	virtual bool Updata(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec, const MYSQL_RETURN_FUNCTOR& mFunReturnRsp, const std::string& strUseData);
-	virtual bool Query(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR& mFunReturnVeckKeyValueRsp, const std::string& strUseData);
-	virtual bool Select(const NFGUID& self,const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR& mFunReturnVeckKeyValueRsp, const std::string& strUseData);
+    virtual bool Updata(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec, const MYSQL_RETURN_FUNCTOR& mFunReturnRsp, const std::string& strUseData);
+    virtual bool Query(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR& mFunReturnVeckKeyValueRsp, const std::string& strUseData);
+    virtual bool Select(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR& mFunReturnVeckKeyValueRsp, const std::string& strUseData);
 
-	virtual bool Delete(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const MYSQL_RETURN_FUNCTOR& mFunReturnRsp, const std::string& strUseData);
-	virtual bool Exists(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const MYSQL_RETURN_INT_FUNCTOR& mFunReturnIntRsp, const std::string& strUseData);
+    virtual bool Delete(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const MYSQL_RETURN_FUNCTOR& mFunReturnRsp, const std::string& strUseData);
+    virtual bool Exists(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const MYSQL_RETURN_INT_FUNCTOR& mFunReturnIntRsp, const std::string& strUseData);
     virtual bool Keys(const NFGUID& self, const std::string& strRecordName, const std::string& strKeyName, const MYSQL_RETURN_VECVALUE_FUNCTOR& mFunReturnVecValueRsp, const std::string& strUseData);
 
     virtual bool StartActorPool(const int nCount);
     virtual bool CloseActorPool();
 
-    virtual bool AddMysqlServer( const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime = 10, const int nRconneCount = -1);
+    virtual bool AddMysqlServer(const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime = 10, const int nRconneCount = -1);
 
 protected:
-    int ApplyRequest(NF_SHARE_PTR<SMysqlParam> pParam );
+    int ApplyRequest(NF_SHARE_PTR<SMysqlParam> pParam);
     int RequestAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData);
 
     int OnUseMysqlAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData);

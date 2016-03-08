@@ -13,10 +13,10 @@
 #include "NFDefine.h"
 
 class NFCEventManager
-	: public NFIEventManager
+    : public NFIEventManager
 {
 public:
-	NFCEventManager(NFGUID self);
+    NFCEventManager(NFGUID self);
     virtual ~NFCEventManager();
 
     virtual bool Init();
@@ -31,13 +31,13 @@ public:
     virtual bool AddEventCallBack(const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb);
 
 protected:
-	virtual bool HasEventCallBack(const int nEventID);
+    virtual bool HasEventCallBack(const int nEventID);
 
 private:
-	NFGUID mSelf;
+    NFGUID mSelf;
 
     NFList<int> mRemoveEventListEx;
-	NFMapEx<int, NFList<EVENT_PROCESS_FUNCTOR_PTR>> mObjectEventInfoMapEx;
+    NFMapEx<int, NFList<EVENT_PROCESS_FUNCTOR_PTR>> mObjectEventInfoMapEx;
 };
 
 
