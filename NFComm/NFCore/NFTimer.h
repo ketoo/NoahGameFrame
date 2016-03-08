@@ -28,19 +28,19 @@ desc    :¶¨Ê±Æ÷Àà
 class CurrentTimeProvider : public NFSingleton<CurrentTimeProvider>
 {
 public:
-    CurrentTimeProvider():highResolutionAvailable(false), countPerMilliSecond(0), beginCount(0)
+    CurrentTimeProvider(): highResolutionAvailable(false), countPerMilliSecond(0), beginCount(0)
     {
         static LARGE_INTEGER systemFrequency;
-        if(0 != QueryPerformanceFrequency(&systemFrequency))
+        if (0 != QueryPerformanceFrequency(&systemFrequency))
         {
             highResolutionAvailable = true;
-            countPerMilliSecond = systemFrequency.QuadPart/1000;
+            countPerMilliSecond = systemFrequency.QuadPart / 1000;
             _timeb tb;
             _ftime_s(&tb);
             unsigned short currentMilli = tb.millitm;
             LARGE_INTEGER now;
             QueryPerformanceCounter(&now);
-            beginCount = now.QuadPart - (currentMilli*countPerMilliSecond);
+            beginCount = now.QuadPart - (currentMilli * countPerMilliSecond);
         }
     };
     int64_t getCurrentTime()
@@ -53,7 +53,7 @@ public:
         {
             LARGE_INTEGER qfc;
             QueryPerformanceCounter(&qfc);
-            millisecond = (int)((qfc.QuadPart - beginCount)/countPerMilliSecond)%1000;
+            millisecond = (int)((qfc.QuadPart - beginCount) / countPerMilliSecond) % 1000;
         }
         return tt * 1000 + millisecond;
     }
@@ -158,13 +158,13 @@ public:
         return (ItemTime <= GetCurrentTime());
     }
 
-	//second
+    //second
     static time_t GetNowTime()
     {
         return GetCurrentTime().GetTime();
     }
 
-	//msec
+    //msec
     static int64_t GetNowTimeMille()
     {
 #ifdef _MSC_VER
@@ -192,15 +192,15 @@ public:
     }
 
 protected:
-	time_t GetTime() const throw();
+    time_t GetTime() const throw();
 
-	struct tm* GetGmtTm(struct tm* ptm) const;
-	struct tm* GetLocalTm(struct tm* ptm) const;
+    struct tm* GetGmtTm(struct tm* ptm) const;
+    struct tm* GetLocalTm(struct tm* ptm) const;
 #if !_SECURE_ATL
-	//  _ATL_INSECURE_DEPRECATE("Pass an output time structure to Time::GetGmtTm")
-	struct tm* GetGmtTm() const throw();
-	//  _ATL_INSECURE_DEPRECATE("Pass an output time structure to Time::GetLocalTm")
-	struct tm* GetLocalTm() const throw();
+    //  _ATL_INSECURE_DEPRECATE("Pass an output time structure to Time::GetGmtTm")
+    struct tm* GetGmtTm() const throw();
+    //  _ATL_INSECURE_DEPRECATE("Pass an output time structure to Time::GetLocalTm")
+    struct tm* GetLocalTm() const throw();
 #endif
 
 

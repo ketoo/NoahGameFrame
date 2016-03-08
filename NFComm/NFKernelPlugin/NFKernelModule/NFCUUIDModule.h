@@ -41,7 +41,7 @@ private:
 
     NFINT64 mnIdent;
     UUIDModule::UUID* m_pUUID;
-	NFIKernelModule* m_pKernelModule;
+    NFIKernelModule* m_pKernelModule;
 };
 
 #endif // !_NFC_UUID_MODULE_H

@@ -13,11 +13,11 @@
 class NFMysqlClusterPlugin : public NFIPlugin
 {
 public:
-	NFMysqlClusterPlugin(NFIPluginManager* p)
-	{
-		pPluginManager = p;
-		bCanReload = false;
-	}
+    NFMysqlClusterPlugin(NFIPluginManager* p)
+    {
+        pPluginManager = p;
+        bCanReload = false;
+    }
 
     virtual const int GetPluginVersion();
 

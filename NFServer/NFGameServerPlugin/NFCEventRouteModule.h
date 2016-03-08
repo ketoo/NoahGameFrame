@@ -3,7 +3,7 @@
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2015-01-02
 //    @Module           :    NFCEventRouteModule.h
-//    @Desc			:	事件路由，主要用来代替分布式中有些对象不在本服务器然后需要转发的事件（邮件）
+//    @Desc         :   事件路由，主要用来代替分布式中有些对象不在本服务器然后需要转发的事件（邮件）
 // -------------------------------------------------------------------------
 
 #ifndef _NFC_EVENTROUTE_MODULE_H_
@@ -21,7 +21,7 @@ class NFCEventRouteModule
     : public NFIEventRouteModule
 {
 public:
-    NFCEventRouteModule( NFIPluginManager* p )
+    NFCEventRouteModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
@@ -29,13 +29,13 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute( const float fLasFrametime, const float fStartedTime );
+    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
     virtual bool AfterInit();
 
 public:
-	virtual bool StartRouteEvent(const NFIDENTID& self, const NFIDataList& xDataList);
+    virtual bool StartRouteEvent(const NFIDENTID& self, const NFIDataList& xDataList);
 
-	virtual bool ReceiveRouteEvent(const NFIDENTID& self, const NFIDataList& xDataList);
+    virtual bool ReceiveRouteEvent(const NFIDENTID& self, const NFIDataList& xDataList);
 
 private:
     NFIEventProcessModule* m_pEventProcessModule;

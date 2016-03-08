@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_OBJECT_H
-#define _NFI_OBJECT_H
+#ifndef NFI_OBJECT_H
+#define NFI_OBJECT_H
 
 
 #include "NFComm/NFPluginModule/NFPlatform.h"
@@ -23,10 +23,10 @@
 class NFIObject
 {
 public:
-	NFIObject(NFGUID self)
-	{
+    NFIObject(NFGUID self)
+    {
 
-	}
+    }
     virtual ~NFIObject() {}
 
     virtual bool Execute() = 0;
@@ -57,33 +57,33 @@ public:
         return AddHeartBeat(strHeartBeatName, functorPtr, fTime, nCount);
     }
 
-	template <typename T>
-	bool AddComponent()
-	{
-		return GetComponentManager()->AddComponent<T>();
-	}
+    template <typename T>
+    bool AddComponent()
+    {
+        return GetComponentManager()->AddComponent<T>();
+    }
 
-	template <typename T>
-	NF_SHARE_PTR<T> AddComponent(const std::string& strComponentName)
-	{
-		NFIComponent* pComponent = m_pPluginManager->FindComponent(strComponentName);
-		if (pComponent)
-		{
-			NF_SHARE_PTR<T> pNewCOmponent = pComponent->CreateNewInstance<T>();
-			if (nullptr != pNewCOmponent && GetComponentManager()->AddComponent(strComponentName, pNewCOmponent))
-			{
-				return pNewCOmponent;
-			}
-		}
+    template <typename T>
+    NF_SHARE_PTR<T> AddComponent(const std::string& strComponentName)
+    {
+        NFIComponent* pComponent = m_pPluginManager->FindComponent(strComponentName);
+        if (pComponent)
+        {
+            NF_SHARE_PTR<T> pNewCOmponent = pComponent->CreateNewInstance<T>();
+            if (nullptr != pNewCOmponent && GetComponentManager()->AddComponent(strComponentName, pNewCOmponent))
+            {
+                return pNewCOmponent;
+            }
+        }
 
-		return NF_SHARE_PTR<T>();
-	}
+        return NF_SHARE_PTR<T>();
+    }
 
-	template <typename T>
-	NF_SHARE_PTR<T> FindComponent(const std::string& strComponentName)
-	{
-		return GetComponentManager()->FindComponent<T>(strComponentName);
-	}
+    template <typename T>
+    NF_SHARE_PTR<T> FindComponent(const std::string& strComponentName)
+    {
+        return GetComponentManager()->FindComponent<T>(strComponentName);
+    }
 
     virtual bool FindHeartBeat(const std::string& strHeartBeatName) = 0;
 
@@ -123,27 +123,27 @@ public:
     virtual NFINT64 GetRecordInt(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
     virtual double GetRecordFloat(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
     virtual const std::string& GetRecordString(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
-	virtual const NFGUID& GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
+    virtual const NFGUID& GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
 
-// 	virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
-// 	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
+    //  virtual NF_SHARE_PTR<NFIComponent> AddComponent(const std::string& strComponentName, const std::string& strLanguageName) = 0;
+    //  virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
 
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager() = 0;
     virtual NF_SHARE_PTR<NFIHeartBeatManager> GetHeartBeatManager() = 0;
     virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager() = 0;
-	virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager() = 0;
-	virtual NF_SHARE_PTR<NFIEventManager> GetEventManager() = 0;
-	
+    virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager() = 0;
+    virtual NF_SHARE_PTR<NFIEventManager> GetEventManager() = 0;
+
 
 protected:
-	virtual bool AddRecordCallBack(const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
+    virtual bool AddRecordCallBack(const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
 
-	virtual bool AddPropertyCallBack(const std::string& strPropertyName, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
+    virtual bool AddPropertyCallBack(const std::string& strPropertyName, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
 
-	virtual bool AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
+    virtual bool AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
 
 protected:
-	NFIPluginManager* m_pPluginManager;
+    NFIPluginManager* m_pPluginManager;
 
 private:
 };
