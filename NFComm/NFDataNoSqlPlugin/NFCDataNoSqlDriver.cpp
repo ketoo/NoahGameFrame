@@ -16,16 +16,16 @@ NFCDataNoSqlDriver::NFCDataNoSqlDriver()
 
 NFCDataNoSqlDriver::~NFCDataNoSqlDriver()
 {
-	if (m_pRedisClient)
-	{
-		delete m_pRedisClient;
-		m_pRedisClient = NULL;
-	}
+    if (m_pRedisClient)
+    {
+        delete m_pRedisClient;
+        m_pRedisClient = NULL;
+    }
 }
 
 int NFCDataNoSqlDriver::Connect(const std::string& strDSN)
 {
-	m_pRedisClient = new redis::client(strDSN);
+    m_pRedisClient = new redis::client(strDSN);
 
     return 1;
 }
@@ -99,10 +99,10 @@ int NFCDataNoSqlDriver::HMGet(const std::string& strKey, const std::vector<std::
 
 int NFCDataNoSqlDriver::HMSet(const std::string& strKey, const std::vector<std::string>& keys, const std::vector<std::string>& values)
 {
-	if (keys.size() != values.size())
-	{
-		return 0;
-	}
+    if (keys.size() != values.size())
+    {
+        return 0;
+    }
 
     m_pRedisClient->hmset(strKey, keys, values);
 
@@ -140,11 +140,11 @@ int NFCDataNoSqlDriver::SIsMember(const std::string& strKey, const std::string& 
 
 int NFCDataNoSqlDriver::SRemove(const std::string& strKey, const std::vector<std::string>& value)
 {
-	std::vector<std::string>::const_iterator it = value.begin();
-	for (; it != value.end(); ++it)
-	{
-		m_pRedisClient->srem(strKey, *it);
-	}
+    std::vector<std::string>::const_iterator it = value.begin();
+    for (; it != value.end(); ++it)
+    {
+        m_pRedisClient->srem(strKey, *it);
+    }
 
     return 1;
 }

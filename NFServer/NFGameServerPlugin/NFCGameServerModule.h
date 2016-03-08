@@ -19,7 +19,7 @@ class NFCGameServerModule
     : public NFIGameServerModule
 {
 public:
-    NFCGameServerModule( NFIPluginManager* p )
+    NFCGameServerModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }

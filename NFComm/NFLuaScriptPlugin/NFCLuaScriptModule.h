@@ -35,7 +35,7 @@ public:
 
     //call script
     virtual int DoScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg);
-	virtual int DoClassCommonScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction);
+    virtual int DoClassCommonScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction);
 
     virtual int DoEventScript(const NFGUID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg);
     virtual int DoHeartBeatScript(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction);
@@ -47,15 +47,15 @@ protected:
 
     int OnPropertyCommEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
     int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
-    int OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);    
+    int OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
 protected:
     bool InstallLua(const std::string& strComponentName);
-    bool Regisger(); 
+    bool Regisger();
     bool CheckCompomentStatus(const std::string& strComponentName, const std::string& strFuncName);
     bool CheckCompomentStatus(const std::string& strComponentName);
 
-    void LuaInit(NFIKernelModule* pKernel, const NFGUID& self,const NFIDataList& arg);
+    void LuaInit(NFIKernelModule* pKernel, const NFGUID& self, const NFIDataList& arg);
 
 protected:
     NFIElementInfoModule* m_pElementInfoModule;
@@ -64,7 +64,7 @@ protected:
 
 protected:
     NFMap<std::string, int> mmCompomentStatus;
-    lua_State *mpLuaState;
+    lua_State* mpLuaState;
 };
 
 #endif

@@ -35,12 +35,12 @@ void NFDataNoSqlPlugin::Install()
 {
     //因为有好几个进程都在用此插件，隐藏此插件不能设置Title
     //SetConsoleTitle( "NFDataBaseServer" );
-	REGISTER_MODULE(pPluginManager, NFCDataNoSqlModule)
-	REGISTER_MODULE(pPluginManager, NFCPlatformDataModule)
+    REGISTER_MODULE(pPluginManager, NFCDataNoSqlModule)
+    REGISTER_MODULE(pPluginManager, NFCPlatformDataModule)
 }
 
 void NFDataNoSqlPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFCPlatformDataModule)
-	UNREGISTER_MODULE(pPluginManager, NFCDataNoSqlModule)
+    UNREGISTER_MODULE(pPluginManager, NFCPlatformDataModule)
+    UNREGISTER_MODULE(pPluginManager, NFCDataNoSqlModule)
 }

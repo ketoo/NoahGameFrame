@@ -29,196 +29,196 @@ bool NFCPropertyTrailModule::Execute()
 
 bool NFCPropertyTrailModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
-	
-	assert( NULL != m_pKernelModule );
-	assert( NULL != m_pElementInfoModule );
-	assert( NULL != m_pLogicClassModule );
-	assert( NULL != m_pLogModule );
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
+    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
+
+    assert(NULL != m_pKernelModule);
+    assert(NULL != m_pElementInfoModule);
+    assert(NULL != m_pLogicClassModule);
+    assert(NULL != m_pLogModule);
 
 
     return true;
 }
 
-void NFCPropertyTrailModule::StartTrail( const NFGUID self )
+void NFCPropertyTrailModule::StartTrail(const NFGUID self)
 {
-	LogObjectData(self);
+    LogObjectData(self);
 
-	
-}
-
-void NFCPropertyTrailModule::EndTrail( const NFGUID self )
-{
 
 }
 
-int NFCPropertyTrailModule::LogObjectData( const NFGUID& self )
+void NFCPropertyTrailModule::EndTrail(const NFGUID self)
 {
-	NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
-	if (nullptr == xObject)
-	{
-		return -1;
-	}
 
-	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = xObject->GetPropertyManager();
-	if (nullptr != xPropertyManager)
-	{
-		NF_SHARE_PTR<NFIProperty> xProperty = xPropertyManager->First();
-		while (nullptr != xProperty)
-		{
-			std::ostringstream stream;
-			
-			stream << " Start trail ";
-			stream << xProperty->ToString();
-
-			m_pLogModule->LogProperty(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xProperty->GetKey(), stream.str(),  __FUNCTION__, __LINE__);
-
-			xProperty = xPropertyManager->Next();
-		}
-	}
-
-	NF_SHARE_PTR<NFIRecordManager> xRecordManager = xObject->GetRecordManager();
-	if (nullptr != xRecordManager)
-	{
-		NF_SHARE_PTR<NFIRecord> xRecord = xRecordManager->First();
-		while (nullptr != xRecord)
-		{
-			for (int i = 0; i < xRecord->GetRows(); ++i)
-			{
-				NFCDataList xDataList;
-				bool bRet = xRecord->QueryRow(i, xDataList);
-				if (bRet)
-				{
-					std::ostringstream stream;
-					stream << " Start trail Row[" << i << "]";
-
-					for (int j = 0; j < xDataList.GetCount(); ++j)
-					{
-						stream << " [" << j << "] " << xDataList.StringValEx(j);
-					}
-
-					m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
-				}
-			}
-			
-			xRecord = xRecordManager->Next();
-		}
-	}
-
-	return 0;
 }
 
-int NFCPropertyTrailModule::OnObjectPropertyEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
+int NFCPropertyTrailModule::LogObjectData(const NFGUID& self)
 {
-	std::ostringstream stream;
+    NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
+    if (nullptr == xObject)
+    {
+        return -1;
+    }
 
-	stream << " Trailing ";
-	stream << " [Old] ";
-	stream << oldVar.GetString();
-	stream << " [New] ";
-	stream << newVar.GetString();
+    NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = xObject->GetPropertyManager();
+    if (nullptr != xPropertyManager)
+    {
+        NF_SHARE_PTR<NFIProperty> xProperty = xPropertyManager->First();
+        while (nullptr != xProperty)
+        {
+            std::ostringstream stream;
 
-	m_pLogModule->LogProperty(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, strPropertyName, stream.str(),  __FUNCTION__, __LINE__);
+            stream << " Start trail ";
+            stream << xProperty->ToString();
 
-	return 0;
+            m_pLogModule->LogProperty(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xProperty->GetKey(), stream.str(),  __FUNCTION__, __LINE__);
+
+            xProperty = xPropertyManager->Next();
+        }
+    }
+
+    NF_SHARE_PTR<NFIRecordManager> xRecordManager = xObject->GetRecordManager();
+    if (nullptr != xRecordManager)
+    {
+        NF_SHARE_PTR<NFIRecord> xRecord = xRecordManager->First();
+        while (nullptr != xRecord)
+        {
+            for (int i = 0; i < xRecord->GetRows(); ++i)
+            {
+                NFCDataList xDataList;
+                bool bRet = xRecord->QueryRow(i, xDataList);
+                if (bRet)
+                {
+                    std::ostringstream stream;
+                    stream << " Start trail Row[" << i << "]";
+
+                    for (int j = 0; j < xDataList.GetCount(); ++j)
+                    {
+                        stream << " [" << j << "] " << xDataList.StringValEx(j);
+                    }
+
+                    m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
+                }
+            }
+
+            xRecord = xRecordManager->Next();
+        }
+    }
+
+    return 0;
 }
 
-int NFCPropertyTrailModule::OnObjectRecordEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
+int NFCPropertyTrailModule::OnObjectPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-	std::ostringstream stream;
-	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, xEventData.strRecordName);
-	if (nullptr == xRecord)
-	{
-		return 0;
-	}
+    std::ostringstream stream;
 
-	switch (xEventData.nOpType)
-	{
-	case NFIRecord::RecordOptype::Add:
-		{
-			NFCDataList xDataList;
-			bool bRet = xRecord->QueryRow(xEventData.nRow, xDataList);
-			if (bRet)
-			{
-				stream << " Trail Add Row[" << xEventData.nRow << "]";
+    stream << " Trailing ";
+    stream << " [Old] ";
+    stream << oldVar.GetString();
+    stream << " [New] ";
+    stream << newVar.GetString();
 
-				for (int j = 0; j < xDataList.GetCount(); ++j)
-				{
-					stream << " [" << j << "] " << xDataList.StringValEx(j);
-				}
+    m_pLogModule->LogProperty(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, strPropertyName, stream.str(),  __FUNCTION__, __LINE__);
 
-				m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
-			}
-		}
-		break;
-	case NFIRecord::RecordOptype::Del:
-		{
-			stream << " Trail Del Row[" << xEventData.nRow << "]";
-			m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
-		}
-		break;
-	case NFIRecord::RecordOptype::Swap:
-		{
-			stream << " Trail Swap Row[" << xEventData.nRow << "] Row[" << xEventData.nCol << "]";
-			m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
-		}
-		break;
-	case NFIRecord::RecordOptype::Create:
-		break;
-	case NFIRecord::RecordOptype::UpData:
-		{
-			stream << " Trail UpData Row[" << xEventData.nRow << "] Col[" << xEventData.nCol << "]";
-			stream << " [Old] " << oldVar.StringValEx();
-			stream << " [New] " << newVar.StringValEx();
-			m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
-		}
-		break;
-	case NFIRecord::RecordOptype::Cleared:
-		break;
-	case NFIRecord::RecordOptype::Sort:
-		break;
-	default:
-		break;
-	}
-
-	return 0;
+    return 0;
 }
 
-int NFCPropertyTrailModule::TrailObjectData( const NFGUID& self )
+int NFCPropertyTrailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-	NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
-	if (nullptr == xObject)
-	{
-		return -1;
-	}
+    std::ostringstream stream;
+    NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, xEventData.strRecordName);
+    if (nullptr == xRecord)
+    {
+        return 0;
+    }
 
-	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = xObject->GetPropertyManager();
-	if (nullptr != xPropertyManager)
-	{
-		NF_SHARE_PTR<NFIProperty> xProperty = xPropertyManager->First();
-		while (nullptr != xProperty)
-		{
-			m_pKernelModule->AddPropertyCallBack(self, xProperty->GetKey(), this, &NFCPropertyTrailModule::OnObjectPropertyEvent);
+    switch (xEventData.nOpType)
+    {
+        case NFIRecord::RecordOptype::Add:
+        {
+            NFCDataList xDataList;
+            bool bRet = xRecord->QueryRow(xEventData.nRow, xDataList);
+            if (bRet)
+            {
+                stream << " Trail Add Row[" << xEventData.nRow << "]";
 
-			xProperty = xPropertyManager->Next();
-		}
-	}
+                for (int j = 0; j < xDataList.GetCount(); ++j)
+                {
+                    stream << " [" << j << "] " << xDataList.StringValEx(j);
+                }
 
-	NF_SHARE_PTR<NFIRecordManager> xRecordManager = xObject->GetRecordManager();
-	if (nullptr != xRecordManager)
-	{
-		NF_SHARE_PTR<NFIRecord> xRecord = xRecordManager->First();
-		while (nullptr != xRecord)
-		{
-			m_pKernelModule->AddRecordCallBack(self, xRecord->GetName(), this, &NFCPropertyTrailModule::OnObjectRecordEvent);
+                m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
+            }
+        }
+        break;
+        case NFIRecord::RecordOptype::Del:
+        {
+            stream << " Trail Del Row[" << xEventData.nRow << "]";
+            m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
+        }
+        break;
+        case NFIRecord::RecordOptype::Swap:
+        {
+            stream << " Trail Swap Row[" << xEventData.nRow << "] Row[" << xEventData.nCol << "]";
+            m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
+        }
+        break;
+        case NFIRecord::RecordOptype::Create:
+            break;
+        case NFIRecord::RecordOptype::UpData:
+        {
+            stream << " Trail UpData Row[" << xEventData.nRow << "] Col[" << xEventData.nCol << "]";
+            stream << " [Old] " << oldVar.StringValEx();
+            stream << " [New] " << newVar.StringValEx();
+            m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
+        }
+        break;
+        case NFIRecord::RecordOptype::Cleared:
+            break;
+        case NFIRecord::RecordOptype::Sort:
+            break;
+        default:
+            break;
+    }
+
+    return 0;
+}
+
+int NFCPropertyTrailModule::TrailObjectData(const NFGUID& self)
+{
+    NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
+    if (nullptr == xObject)
+    {
+        return -1;
+    }
+
+    NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = xObject->GetPropertyManager();
+    if (nullptr != xPropertyManager)
+    {
+        NF_SHARE_PTR<NFIProperty> xProperty = xPropertyManager->First();
+        while (nullptr != xProperty)
+        {
+            m_pKernelModule->AddPropertyCallBack(self, xProperty->GetKey(), this, &NFCPropertyTrailModule::OnObjectPropertyEvent);
+
+            xProperty = xPropertyManager->Next();
+        }
+    }
+
+    NF_SHARE_PTR<NFIRecordManager> xRecordManager = xObject->GetRecordManager();
+    if (nullptr != xRecordManager)
+    {
+        NF_SHARE_PTR<NFIRecord> xRecord = xRecordManager->First();
+        while (nullptr != xRecord)
+        {
+            m_pKernelModule->AddRecordCallBack(self, xRecord->GetName(), this, &NFCPropertyTrailModule::OnObjectRecordEvent);
 
 
-			xRecord = xRecordManager->Next();
-		}
-	}
+            xRecord = xRecordManager->Next();
+        }
+    }
 
-	return 0;
+    return 0;
 }

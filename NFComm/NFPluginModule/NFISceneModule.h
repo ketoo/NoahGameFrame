@@ -30,10 +30,10 @@ public:
         mnGroupID = nGroupID;
     }
 
-	NFCSceneGroupInfo(int nSceneID, int nGroupID, int nWidth)
-	{
-		mnGroupID = nGroupID;
-	}
+    NFCSceneGroupInfo(int nSceneID, int nGroupID, int nWidth)
+    {
+        mnGroupID = nGroupID;
+    }
 
     virtual ~NFCSceneGroupInfo()
     {
@@ -62,12 +62,12 @@ public:
         mnWidth = 512;
     }
 
-	NFCSceneInfo(int nSceneID, int nWidth)
-	{
-		mnGroupIndex = 0;
-		mnSceneID = nSceneID;
-		mnWidth = nWidth;
-	}
+    NFCSceneInfo(int nSceneID, int nWidth)
+    {
+        mnGroupIndex = 0;
+        mnSceneID = nSceneID;
+        mnWidth = nWidth;
+    }
 
     virtual ~NFCSceneInfo()
     {
@@ -140,7 +140,7 @@ private:
 
 class NFISceneModule
     : public NFILogicModule,
-	public NFMapEx<int, NFCSceneInfo>
+  public NFMapEx<int, NFCSceneInfo>
 {
 public:
     virtual ~NFISceneModule()

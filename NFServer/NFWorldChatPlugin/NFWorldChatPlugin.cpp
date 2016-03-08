@@ -36,7 +36,7 @@ const std::string NFWorldChatPlugin::GetPluginName()
     return GET_CLASS_NAME(NFWorldChatPlugin)
 }
 
-void NFWorldChatPlugin::Install()
+       void NFWorldChatPlugin::Install()
 {
 
     REGISTER_MODULE(pPluginManager, NFCWorldChatModule)

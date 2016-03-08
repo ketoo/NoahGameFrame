@@ -9,20 +9,17 @@
 #ifndef NFC_ELEMENTINFO_MODULE_H
 #define NFC_ELEMENTINFO_MODULE_H
 
-#include <string>
 #include <map>
-///
+#include <string>
 #include <iostream>
-#include <iostream>
-#include "NFComm/NFCore/NFMap.h"
-#include "NFComm/NFCore/NFList.h"
 #include "NFComm/RapidXML/rapidxml.hpp"
 #include "NFComm/RapidXML/rapidxml_iterators.hpp"
 #include "NFComm/RapidXML/rapidxml_print.hpp"
 #include "NFComm/RapidXML/rapidxml_utils.hpp"
+#include "NFComm/NFCore/NFMap.h"
+#include "NFComm/NFCore/NFList.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
-#include "NFComm/NFCore/NFList.h"
 #include "NFComm/NFCore/NFCPropertyManager.h"
 #include "NFComm/NFCore/NFCRecordManager.h"
 #include "NFComm/NFCore/NFCComponentManager.h"

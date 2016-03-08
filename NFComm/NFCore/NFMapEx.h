@@ -62,18 +62,18 @@ public:
         return false;
     }
 
-	virtual TD* GetElementNude(const T& name)
-	{
-		typename NFMapOBJECT::iterator itr = mObjectList.find(name);
-		if (itr != mObjectList.end())
-		{
-			return itr->second.get();
-		}
-		else
-		{
-			return NULL;
-		}
-	}
+    virtual TD* GetElementNude(const T& name)
+    {
+        typename NFMapOBJECT::iterator itr = mObjectList.find(name);
+        if (itr != mObjectList.end())
+        {
+            return itr->second.get();
+        }
+        else
+        {
+            return NULL;
+        }
+    }
 
     virtual NF_SHARE_PTR<TD> GetElement(const T& name)
     {
@@ -87,77 +87,77 @@ public:
             return NF_SHARE_PTR<TD>();
         }
     }
-	virtual TD* FirstNude(T& name)
-	{
-		if (mObjectList.size() <= 0)
-		{
-			return NULL;
-		}
+    virtual TD* FirstNude(T& name)
+    {
+        if (mObjectList.size() <= 0)
+        {
+            return NULL;
+        }
 
-		mObjectCurIter = mObjectList.begin();
-		if (mObjectCurIter != mObjectList.end())
-		{
-			name = mObjectCurIter->first;
-			return mObjectCurIter->second.get();
-		}
-		else
-		{
-			return NULL;
-		}
-	}
+        mObjectCurIter = mObjectList.begin();
+        if (mObjectCurIter != mObjectList.end())
+        {
+            name = mObjectCurIter->first;
+            return mObjectCurIter->second.get();
+        }
+        else
+        {
+            return NULL;
+        }
+    }
 
-	virtual TD* NextNude(T& name)
-	{
-		if (mObjectCurIter == mObjectList.end())
-		{
-			return NULL;
-		}
+    virtual TD* NextNude(T& name)
+    {
+        if (mObjectCurIter == mObjectList.end())
+        {
+            return NULL;
+        }
 
-		mObjectCurIter++;
-		if (mObjectCurIter != mObjectList.end())
-		{
-			name = mObjectCurIter->first;
-			return mObjectCurIter->second.get();
-		}
-		else
-		{
-			return NULL;
-		}
-	}
-	virtual TD* FirstNude()
-	{
-		if (mObjectList.size() <= 0)
-		{
-			return NULL;
-		}
+        mObjectCurIter++;
+        if (mObjectCurIter != mObjectList.end())
+        {
+            name = mObjectCurIter->first;
+            return mObjectCurIter->second.get();
+        }
+        else
+        {
+            return NULL;
+        }
+    }
+    virtual TD* FirstNude()
+    {
+        if (mObjectList.size() <= 0)
+        {
+            return NULL;
+        }
 
-		mObjectCurIter = mObjectList.begin();
-		if (mObjectCurIter != mObjectList.end())
-		{
-			return mObjectCurIter->second.get();
-		}
-		else
-		{
-			return NULL;
-		}
-	}
-	virtual TD* NextNude()
-	{
-		if (mObjectCurIter == mObjectList.end())
-		{
-			return NULL;
-		}
+        mObjectCurIter = mObjectList.begin();
+        if (mObjectCurIter != mObjectList.end())
+        {
+            return mObjectCurIter->second.get();
+        }
+        else
+        {
+            return NULL;
+        }
+    }
+    virtual TD* NextNude()
+    {
+        if (mObjectCurIter == mObjectList.end())
+        {
+            return NULL;
+        }
 
-		mObjectCurIter++;
-		if (mObjectCurIter != mObjectList.end())
-		{
-			return mObjectCurIter->second.get();
-		}
-		else
-		{
-			return NULL;
-		}
-	}
+        mObjectCurIter++;
+        if (mObjectCurIter != mObjectList.end())
+        {
+            return mObjectCurIter->second.get();
+        }
+        else
+        {
+            return NULL;
+        }
+    }
 
     virtual NF_SHARE_PTR<TD> First()
     {
