@@ -21,7 +21,7 @@ bool NFCEventRouteModule::Shut()
     return true;
 }
 
-bool NFCEventRouteModule::Execute( const float fLasFrametime, const float fStartedTime )
+bool NFCEventRouteModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
     //Œª÷√ƒÿ
     return true;
@@ -29,25 +29,25 @@ bool NFCEventRouteModule::Execute( const float fLasFrametime, const float fStart
 
 bool NFCEventRouteModule::AfterInit()
 {
-    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>( pPluginManager->FindModule( "NFCEventProcessModule" ) );
-    m_pKernelModule = dynamic_cast<NFIKernelModule*>( pPluginManager->FindModule( "NFCKernelModule" ) );
-    m_pLogModule = dynamic_cast<NFILogModule*>( pPluginManager->FindModule( "NFCLogModule" ) );
+    m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
+    m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
+    m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
 
-    assert( NULL != m_pEventProcessModule );
-    assert( NULL != m_pKernelModule );
-    assert( NULL != m_pLogModule );
+    assert(NULL != m_pEventProcessModule);
+    assert(NULL != m_pKernelModule);
+    assert(NULL != m_pLogModule);
 
 
     return true;
 }
 
-bool NFCEventRouteModule::StartRouteEvent( const NFIDENTID& self, const NFIDataList& xDataList )
+bool NFCEventRouteModule::StartRouteEvent(const NFIDENTID& self, const NFIDataList& xDataList)
 {
-	return false;
+    return false;
 }
 
-bool NFCEventRouteModule::ReceiveRouteEvent( const NFIDENTID& self, const NFIDataList& xDataList )
+bool NFCEventRouteModule::ReceiveRouteEvent(const NFIDENTID& self, const NFIDataList& xDataList)
 {
-	return false;
+    return false;
 }
 

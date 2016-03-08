@@ -21,7 +21,7 @@ class NFIElementInfoModule
 {
 public:
     virtual bool Load() = 0;
-	virtual bool Save() = 0;
+    virtual bool Save() = 0;
     virtual bool Clear() = 0;
 
     //special

@@ -16,7 +16,7 @@ class NFIPVPModule
     : public NFILogicModule
 {
 public:
-    struct PVPCell 
+    struct PVPCell
     {
         enum PVPCellStatus
         {
@@ -35,11 +35,11 @@ public:
     };
 
 public:
-	virtual bool MatchPVPObject(const NFGUID& self) = 0;
+    virtual bool MatchPVPObject(const NFGUID& self) = 0;
 
-	virtual bool StartPVPWar(const NFGUID& self) = 0;
-	
-	virtual bool ExitPVPWar(const NFGUID& self) = 0;
+    virtual bool StartPVPWar(const NFGUID& self) = 0;
+
+    virtual bool ExitPVPWar(const NFGUID& self) = 0;
 
 };
 

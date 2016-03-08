@@ -12,7 +12,7 @@
 class NFDataBaseNet_ClientPlugin : public NFIPlugin
 {
 public:
-    NFDataBaseNet_ClientPlugin( NFIPluginManager* p )
+    NFDataBaseNet_ClientPlugin(NFIPluginManager* p)
     {
         pPluginManager = p;
     }

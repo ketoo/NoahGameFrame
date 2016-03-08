@@ -37,7 +37,7 @@ const std::string NFUrlPlugin::GetPluginName()
     return GET_CLASS_NAME(NFUrlPlugin)
 }
 
-void NFUrlPlugin::Install()
+       void NFUrlPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFCUrlClientModule)
     REGISTER_MODULE(pPluginManager, NFCUrlCodeModule)

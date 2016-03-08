@@ -37,24 +37,24 @@ public:
 
     virtual bool AfterInit();
 
-	virtual void LogRecive(const char* str){}
-	virtual void LogSend(const char* str){}
+    virtual void LogRecive(const char* str) {}
+    virtual void LogSend(const char* str) {}
 
     virtual bool VerifyConnectData(const std::string& strAccount, const std::string& strKey);
 
 protected:
 
-	void OnReciveWSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+    void OnReciveWSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     void Register(NFINet* pNet);
 
     void OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-	virtual void LogServerInfo(const std::string& strServerInfo);
+    virtual void LogServerInfo(const std::string& strServerInfo);
 private:
-    struct ClientConnectData 
+    struct ClientConnectData
     {
         ClientConnectData()
         {
@@ -75,9 +75,9 @@ private:
     NFIProxyLogicModule* m_pProxyLogicModule;
     NFIKernelModule* m_pKernelModule;
     NFIProxyServerNet_ServerModule* m_pProxyServerNet_ServerModule;
-	NFIElementInfoModule* m_pElementInfoModule;
-	NFILogicClassModule* m_pLogicClassModule;
-	NFIClusterClientModule* m_pToGameServerClusterClient;
+    NFIElementInfoModule* m_pElementInfoModule;
+    NFILogicClassModule* m_pLogicClassModule;
+    NFIClusterClientModule* m_pToGameServerClusterClient;
 
 };
 
