@@ -418,17 +418,16 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 	int nRow = FindItemRowByConfig(self, strConfigName);
 	if (nRow < 0)
 	{
-		NFGUID ident = m_pUUIDModule->CreateGUID();
+        NFCDataList varRowData = pRecord->GetInitData();
 
-		NFCDataList var;
-		var << ident;
-		var << nCount;
-		var << strConfigName;
-		var << 0;
-		var << NFTimeEx::GetNowTime();
+        varRowData.SetString(NFrame::Player::BagItemList::BagItemList_ConfigID, strConfigName.data());
+        varRowData.SetInt(NFrame::Player::BagItemList::BagItemList_ItemCount, nCount);
+        varRowData.SetInt(NFrame::Player::BagItemList::BagItemList_Bound, 0);
+        varRowData.SetInt(NFrame::Player::BagItemList::BagItemList_ExpiredType, 0);
+        varRowData.SetObject(NFrame::Player::BagItemList::BagItemList_Date, NFGUID(0, NFTimeEx::GetNowTime()));
 
-		bool bAddRet = pRecord->AddRow(-1, var);
-		if (bAddRet)
+		int nRow= pRecord->AddRow(-1, varRowData);
+		if (nRow >= 0)
 		{
 			return nCount;
 		}

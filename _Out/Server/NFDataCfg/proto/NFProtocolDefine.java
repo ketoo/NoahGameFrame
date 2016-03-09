@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/03/07
+//    @Date             :    2016/03/09
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -39,6 +39,33 @@ public class BB_Build {
 	public static final String Icon = "Icon"; // string
 	public static final String ShowName = "ShowName"; // string
 	public static final String Desc = "Desc"; // string
+	// Record
+
+}
+
+public class Block {
+	//Class name
+	public static final String ThisName = "Block";
+	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
+	// Property
+	public static final String Tag = "Tag"; // string
+	public static final String LeftSide = "LeftSide"; // string
+	public static final String RightSide = "RightSide"; // string
+	public static final String TopSide = "TopSide"; // string
+	public static final String DownSide = "DownSide"; // string
+	public static final String LeftTopSide = "LeftTopSide"; // string
+	public static final String LeftDownSide = "LeftDownSide"; // string
+	public static final String RightTopSide = "RightTopSide"; // string
+	public static final String RightDownSide = "RightDownSide"; // string
+	public static final String LeftID = "LeftID"; // string
+	public static final String RightID = "RightID"; // string
+	public static final String TopID = "TopID"; // string
+	public static final String DownID = "DownID"; // string
 	// Record
 
 }
@@ -224,6 +251,26 @@ public class Equip {
 	public static final String BuyPrice = "BuyPrice"; // int
 	public static final String SalePrice = "SalePrice"; // int
 	public static final String Icon = "Icon"; // string
+	// Record
+
+}
+
+public class EquipRef {
+	//Class name
+	public static final String ThisName = "EquipRef";
+	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
+	// Property
+	public static final String EQUIP1 = "EQUIP1"; // string
+	public static final String EQUIP2 = "EQUIP2"; // string
+	public static final String EQUIP3 = "EQUIP3"; // string
+	public static final String EQUIP4 = "EQUIP4"; // string
+	public static final String EQUIP5 = "EQUIP5"; // string
+	public static final String EQUIP6 = "EQUIP6"; // string
 	// Record
 
 }
@@ -542,6 +589,7 @@ public class NPC {
 	public static final String ConsumeData = "ConsumeData"; // string
 	public static final String LastAttacker = "LastAttacker"; // object
 	public static final String ShowName = "ShowName"; // string
+	public static final String EquipIDRef = "EquipIDRef"; // string
 	// Record
 
 }

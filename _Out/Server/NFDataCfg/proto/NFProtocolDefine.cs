@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/03/07
+//    @Date             :    2016/03/09
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -50,6 +50,34 @@ public class BB_Build
 	public static readonly String Icon = "Icon"; // string
 	public static readonly String ShowName = "ShowName"; // string
 	public static readonly String Desc = "Desc"; // string
+	// Record
+
+}
+
+public class Block
+{
+	//Class name
+	public static readonly string ThisName = "Block";
+	// IObject
+	public static readonly String ID = "ID"; // string
+	public static readonly String ClassName = "ClassName"; // string
+	public static readonly String SceneID = "SceneID"; // int
+	public static readonly String GroupID = "GroupID"; // int
+	public static readonly String ConfigID = "ConfigID"; // string
+	// Property
+	public static readonly String Tag = "Tag"; // string
+	public static readonly String LeftSide = "LeftSide"; // string
+	public static readonly String RightSide = "RightSide"; // string
+	public static readonly String TopSide = "TopSide"; // string
+	public static readonly String DownSide = "DownSide"; // string
+	public static readonly String LeftTopSide = "LeftTopSide"; // string
+	public static readonly String LeftDownSide = "LeftDownSide"; // string
+	public static readonly String RightTopSide = "RightTopSide"; // string
+	public static readonly String RightDownSide = "RightDownSide"; // string
+	public static readonly String LeftID = "LeftID"; // string
+	public static readonly String RightID = "RightID"; // string
+	public static readonly String TopID = "TopID"; // string
+	public static readonly String DownID = "DownID"; // string
 	// Record
 
 }
@@ -242,6 +270,27 @@ public class Equip
 	public static readonly String BuyPrice = "BuyPrice"; // int
 	public static readonly String SalePrice = "SalePrice"; // int
 	public static readonly String Icon = "Icon"; // string
+	// Record
+
+}
+
+public class EquipRef
+{
+	//Class name
+	public static readonly string ThisName = "EquipRef";
+	// IObject
+	public static readonly String ID = "ID"; // string
+	public static readonly String ClassName = "ClassName"; // string
+	public static readonly String SceneID = "SceneID"; // int
+	public static readonly String GroupID = "GroupID"; // int
+	public static readonly String ConfigID = "ConfigID"; // string
+	// Property
+	public static readonly String EQUIP1 = "EQUIP1"; // string
+	public static readonly String EQUIP2 = "EQUIP2"; // string
+	public static readonly String EQUIP3 = "EQUIP3"; // string
+	public static readonly String EQUIP4 = "EQUIP4"; // string
+	public static readonly String EQUIP5 = "EQUIP5"; // string
+	public static readonly String EQUIP6 = "EQUIP6"; // string
 	// Record
 
 }
@@ -568,6 +617,7 @@ public class NPC
 	public static readonly String ConsumeData = "ConsumeData"; // string
 	public static readonly String LastAttacker = "LastAttacker"; // object
 	public static readonly String ShowName = "ShowName"; // string
+	public static readonly String EquipIDRef = "EquipIDRef"; // string
 	// Record
 
 }

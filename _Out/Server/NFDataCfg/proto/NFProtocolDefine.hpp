@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/03/07
+//    @Date             :    2016/03/09
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -48,6 +48,35 @@ public:
 	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
 	static const std::string& Desc(){ static std::string xDesc = "Desc"; return xDesc; } // string
+	// Record
+
+};
+
+class Block
+{
+public:
+	//Class name
+	static const std::string& ThisName(){ static std::string xBlock = "Block"; return xBlock; }
+	// IObject
+	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
+	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
+	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
+	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
+	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
+	// Property
+	static const std::string& Tag(){ static std::string xTag = "Tag"; return xTag; } // string
+	static const std::string& LeftSide(){ static std::string xLeftSide = "LeftSide"; return xLeftSide; } // string
+	static const std::string& RightSide(){ static std::string xRightSide = "RightSide"; return xRightSide; } // string
+	static const std::string& TopSide(){ static std::string xTopSide = "TopSide"; return xTopSide; } // string
+	static const std::string& DownSide(){ static std::string xDownSide = "DownSide"; return xDownSide; } // string
+	static const std::string& LeftTopSide(){ static std::string xLeftTopSide = "LeftTopSide"; return xLeftTopSide; } // string
+	static const std::string& LeftDownSide(){ static std::string xLeftDownSide = "LeftDownSide"; return xLeftDownSide; } // string
+	static const std::string& RightTopSide(){ static std::string xRightTopSide = "RightTopSide"; return xRightTopSide; } // string
+	static const std::string& RightDownSide(){ static std::string xRightDownSide = "RightDownSide"; return xRightDownSide; } // string
+	static const std::string& LeftID(){ static std::string xLeftID = "LeftID"; return xLeftID; } // string
+	static const std::string& RightID(){ static std::string xRightID = "RightID"; return xRightID; } // string
+	static const std::string& TopID(){ static std::string xTopID = "TopID"; return xTopID; } // string
+	static const std::string& DownID(){ static std::string xDownID = "DownID"; return xDownID; } // string
 	// Record
 
 };
@@ -247,6 +276,28 @@ public:
 	static const std::string& BuyPrice(){ static std::string xBuyPrice = "BuyPrice"; return xBuyPrice; } // int
 	static const std::string& SalePrice(){ static std::string xSalePrice = "SalePrice"; return xSalePrice; } // int
 	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
+	// Record
+
+};
+
+class EquipRef
+{
+public:
+	//Class name
+	static const std::string& ThisName(){ static std::string xEquipRef = "EquipRef"; return xEquipRef; }
+	// IObject
+	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
+	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
+	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
+	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
+	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
+	// Property
+	static const std::string& EQUIP1(){ static std::string xEQUIP1 = "EQUIP1"; return xEQUIP1; } // string
+	static const std::string& EQUIP2(){ static std::string xEQUIP2 = "EQUIP2"; return xEQUIP2; } // string
+	static const std::string& EQUIP3(){ static std::string xEQUIP3 = "EQUIP3"; return xEQUIP3; } // string
+	static const std::string& EQUIP4(){ static std::string xEQUIP4 = "EQUIP4"; return xEQUIP4; } // string
+	static const std::string& EQUIP5(){ static std::string xEQUIP5 = "EQUIP5"; return xEQUIP5; } // string
+	static const std::string& EQUIP6(){ static std::string xEQUIP6 = "EQUIP6"; return xEQUIP6; } // string
 	// Record
 
 };
@@ -581,6 +632,7 @@ public:
 	static const std::string& ConsumeData(){ static std::string xConsumeData = "ConsumeData"; return xConsumeData; } // string
 	static const std::string& LastAttacker(){ static std::string xLastAttacker = "LastAttacker"; return xLastAttacker; } // object
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
+	static const std::string& EquipIDRef(){ static std::string xEquipIDRef = "EquipIDRef"; return xEquipIDRef; } // string
 	// Record
 
 };
