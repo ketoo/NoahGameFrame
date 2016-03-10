@@ -179,6 +179,35 @@ enum BagItemList
 	Date		= 4; // Date -- object
 }
 
+enum Record_HeroPropertyValue
+{
+	HeroGUID		= 0; // HeroGUID -- object
+	Group		= 1; // Group -- int
+	MAXHP		= 2; // MAXHP -- int
+	MAXMP		= 3; // MAXMP -- int
+	MAXSP		= 4; // MAXSP -- int
+	HPREGEN		= 5; // HPREGEN -- int
+	SPREGEN		= 6; // SPREGEN -- int
+	MPREGEN		= 7; // MPREGEN -- int
+	ATK_VALUE		= 8; // ATK_VALUE -- int
+	DEF_VALUE		= 9; // DEF_VALUE -- int
+	MOVE_SPEED		= 10; // MOVE_SPEED -- int
+	ATK_SPEED		= 11; // ATK_SPEED -- int
+	ATK_FIRE		= 12; // ATK_FIRE -- int
+	ATK_LIGHT		= 13; // ATK_LIGHT -- int
+	ATK_ICE		= 14; // ATK_ICE -- int
+	ATK_POISON		= 15; // ATK_POISON -- int
+	DEF_FIRE		= 16; // DEF_FIRE -- int
+	DEF_LIGHT		= 17; // DEF_LIGHT -- int
+	DEF_ICE		= 18; // DEF_ICE -- int
+	DEF_POISON		= 19; // DEF_POISON -- int
+	DIZZY_GATE		= 20; // DIZZY_GATE -- int
+	MOVE_GATE		= 21; // MOVE_GATE -- int
+	SKILL_GATE		= 22; // SKILL_GATE -- int
+	PHYSICAL_GATE		= 23; // PHYSICAL_GATE -- int
+	MAGIC_GATE		= 24; // MAGIC_GATE -- int
+}
+
 enum CommPropertyValue
 {
 	MAXHP		= 0; // MAXHP -- int

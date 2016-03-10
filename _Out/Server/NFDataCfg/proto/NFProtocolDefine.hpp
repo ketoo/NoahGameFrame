@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/03/09
+//    @Date             :    2016/03/10
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -64,7 +64,7 @@ public:
 	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
 	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
 	// Property
-	static const std::string& Tag(){ static std::string xTag = "Tag"; return xTag; } // string
+	static const std::string& Tag(){ static std::string xTag = "Tag"; return xTag; } // Int
 	static const std::string& LeftSide(){ static std::string xLeftSide = "LeftSide"; return xLeftSide; } // string
 	static const std::string& RightSide(){ static std::string xRightSide = "RightSide"; return xRightSide; } // string
 	static const std::string& TopSide(){ static std::string xTopSide = "TopSide"; return xTopSide; } // string
@@ -73,10 +73,6 @@ public:
 	static const std::string& LeftDownSide(){ static std::string xLeftDownSide = "LeftDownSide"; return xLeftDownSide; } // string
 	static const std::string& RightTopSide(){ static std::string xRightTopSide = "RightTopSide"; return xRightTopSide; } // string
 	static const std::string& RightDownSide(){ static std::string xRightDownSide = "RightDownSide"; return xRightDownSide; } // string
-	static const std::string& LeftID(){ static std::string xLeftID = "LeftID"; return xLeftID; } // string
-	static const std::string& RightID(){ static std::string xRightID = "RightID"; return xRightID; } // string
-	static const std::string& TopID(){ static std::string xTopID = "TopID"; return xTopID; } // string
-	static const std::string& DownID(){ static std::string xDownID = "DownID"; return xDownID; } // string
 	// Record
 
 };
@@ -733,6 +729,7 @@ public:
 	static const std::string& R_PlayerHero(){ static std::string xPlayerHero = "PlayerHero"; return xPlayerHero;}
 	static const std::string& R_BagEquipList(){ static std::string xBagEquipList = "BagEquipList"; return xBagEquipList;}
 	static const std::string& R_BagItemList(){ static std::string xBagItemList = "BagItemList"; return xBagItemList;}
+	static const std::string& R_Record_HeroPropertyValue(){ static std::string xRecord_HeroPropertyValue = "Record_HeroPropertyValue"; return xRecord_HeroPropertyValue;}
 	static const std::string& R_CommPropertyValue(){ static std::string xCommPropertyValue = "CommPropertyValue"; return xCommPropertyValue;}
 	static const std::string& R_EctypeList(){ static std::string xEctypeList = "EctypeList"; return xEctypeList;}
 	static const std::string& R_DropItemList(){ static std::string xDropItemList = "DropItemList"; return xDropItemList;}
@@ -828,6 +825,35 @@ public:
 		BagItemList_Bound		= 2, // Bound -- int
 		BagItemList_ExpiredType		= 3, // ExpiredType -- int
 		BagItemList_Date		= 4, // Date -- object
+	};
+
+	enum Record_HeroPropertyValue
+	{
+		Record_HeroPropertyValue_HeroGUID		= 0, // HeroGUID -- object
+		Record_HeroPropertyValue_Group		= 1, // Group -- int
+		Record_HeroPropertyValue_MAXHP		= 2, // MAXHP -- int
+		Record_HeroPropertyValue_MAXMP		= 3, // MAXMP -- int
+		Record_HeroPropertyValue_MAXSP		= 4, // MAXSP -- int
+		Record_HeroPropertyValue_HPREGEN		= 5, // HPREGEN -- int
+		Record_HeroPropertyValue_SPREGEN		= 6, // SPREGEN -- int
+		Record_HeroPropertyValue_MPREGEN		= 7, // MPREGEN -- int
+		Record_HeroPropertyValue_ATK_VALUE		= 8, // ATK_VALUE -- int
+		Record_HeroPropertyValue_DEF_VALUE		= 9, // DEF_VALUE -- int
+		Record_HeroPropertyValue_MOVE_SPEED		= 10, // MOVE_SPEED -- int
+		Record_HeroPropertyValue_ATK_SPEED		= 11, // ATK_SPEED -- int
+		Record_HeroPropertyValue_ATK_FIRE		= 12, // ATK_FIRE -- int
+		Record_HeroPropertyValue_ATK_LIGHT		= 13, // ATK_LIGHT -- int
+		Record_HeroPropertyValue_ATK_ICE		= 14, // ATK_ICE -- int
+		Record_HeroPropertyValue_ATK_POISON		= 15, // ATK_POISON -- int
+		Record_HeroPropertyValue_DEF_FIRE		= 16, // DEF_FIRE -- int
+		Record_HeroPropertyValue_DEF_LIGHT		= 17, // DEF_LIGHT -- int
+		Record_HeroPropertyValue_DEF_ICE		= 18, // DEF_ICE -- int
+		Record_HeroPropertyValue_DEF_POISON		= 19, // DEF_POISON -- int
+		Record_HeroPropertyValue_DIZZY_GATE		= 20, // DIZZY_GATE -- int
+		Record_HeroPropertyValue_MOVE_GATE		= 21, // MOVE_GATE -- int
+		Record_HeroPropertyValue_SKILL_GATE		= 22, // SKILL_GATE -- int
+		Record_HeroPropertyValue_PHYSICAL_GATE		= 23, // PHYSICAL_GATE -- int
+		Record_HeroPropertyValue_MAGIC_GATE		= 24, // MAGIC_GATE -- int
 	};
 
 	enum CommPropertyValue

@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/03/09
+//    @Date             :    2016/03/10
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -53,7 +53,7 @@ public class Block {
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
 	// Property
-	public static final String Tag = "Tag"; // string
+	public static final String Tag = "Tag"; // Int
 	public static final String LeftSide = "LeftSide"; // string
 	public static final String RightSide = "RightSide"; // string
 	public static final String TopSide = "TopSide"; // string
@@ -62,10 +62,6 @@ public class Block {
 	public static final String LeftDownSide = "LeftDownSide"; // string
 	public static final String RightTopSide = "RightTopSide"; // string
 	public static final String RightDownSide = "RightDownSide"; // string
-	public static final String LeftID = "LeftID"; // string
-	public static final String RightID = "RightID"; // string
-	public static final String TopID = "TopID"; // string
-	public static final String DownID = "DownID"; // string
 	// Record
 
 }
@@ -106,8 +102,8 @@ public class ChatGroup {
 	public static final String Name = "Name"; // string
 	public static final String CreateObject = "CreateObject"; // object
 	// Record
-	public static final String GroupMemberList = "GroupMemberList";
-	public static final String ChatList = "ChatList";
+	public static final String R_GroupMemberList = "GroupMemberList";
+	public static final String R_ChatList = "ChatList";
 
 	public enum GroupMemberList
 	{
@@ -311,12 +307,12 @@ public class Guild {
 	public static final String EctypID = "EctypID"; // int
 	public static final String EctypIDGroup = "EctypIDGroup"; // int
 	// Record
-	public static final String GuildBoss = "GuildBoss";
-	public static final String GuildMemberList = "GuildMemberList";
-	public static final String GuildAppyList = "GuildAppyList";
-	public static final String GuildEvent = "GuildEvent";
-	public static final String GuildHouse = "GuildHouse";
-	public static final String GuildSkill = "GuildSkill";
+	public static final String R_GuildBoss = "GuildBoss";
+	public static final String R_GuildMemberList = "GuildMemberList";
+	public static final String R_GuildAppyList = "GuildAppyList";
+	public static final String R_GuildEvent = "GuildEvent";
+	public static final String R_GuildHouse = "GuildHouse";
+	public static final String R_GuildSkill = "GuildSkill";
 
 	public enum GuildBoss
 	{
@@ -684,21 +680,22 @@ public class Player {
 	public static final String GateID = "GateID"; // int
 	public static final String GuildID = "GuildID"; // object
 	// Record
-	public static final String PlayerViewItem = "PlayerViewItem";
-	public static final String PlayerHero = "PlayerHero";
-	public static final String BagEquipList = "BagEquipList";
-	public static final String BagItemList = "BagItemList";
-	public static final String CommPropertyValue = "CommPropertyValue";
-	public static final String EctypeList = "EctypeList";
-	public static final String DropItemList = "DropItemList";
-	public static final String SkillTable = "SkillTable";
-	public static final String TaskMonsterList = "TaskMonsterList";
-	public static final String TaskList = "TaskList";
-	public static final String PVPList = "PVPList";
-	public static final String ChatGroup = "ChatGroup";
-	public static final String BuildingList = "BuildingList";
-	public static final String BuildingListProduce = "BuildingListProduce";
-	public static final String TileList = "TileList";
+	public static final String R_PlayerViewItem = "PlayerViewItem";
+	public static final String R_PlayerHero = "PlayerHero";
+	public static final String R_BagEquipList = "BagEquipList";
+	public static final String R_BagItemList = "BagItemList";
+	public static final String R_Record_HeroPropertyValue = "Record_HeroPropertyValue";
+	public static final String R_CommPropertyValue = "CommPropertyValue";
+	public static final String R_EctypeList = "EctypeList";
+	public static final String R_DropItemList = "DropItemList";
+	public static final String R_SkillTable = "SkillTable";
+	public static final String R_TaskMonsterList = "TaskMonsterList";
+	public static final String R_TaskList = "TaskList";
+	public static final String R_PVPList = "PVPList";
+	public static final String R_ChatGroup = "ChatGroup";
+	public static final String R_BuildingList = "BuildingList";
+	public static final String R_BuildingListProduce = "BuildingListProduce";
+	public static final String R_TileList = "TileList";
 
 	public enum PlayerViewItem
 	{
@@ -783,6 +780,35 @@ public class Player {
 		Bound		= 2, // Bound -- int
 		ExpiredType		= 3, // ExpiredType -- int
 		Date		= 4, // Date -- object
+	};
+
+	public enum Record_HeroPropertyValue
+	{
+		HeroGUID		= 0, // HeroGUID -- object
+		Group		= 1, // Group -- int
+		MAXHP		= 2, // MAXHP -- int
+		MAXMP		= 3, // MAXMP -- int
+		MAXSP		= 4, // MAXSP -- int
+		HPREGEN		= 5, // HPREGEN -- int
+		SPREGEN		= 6, // SPREGEN -- int
+		MPREGEN		= 7, // MPREGEN -- int
+		ATK_VALUE		= 8, // ATK_VALUE -- int
+		DEF_VALUE		= 9, // DEF_VALUE -- int
+		MOVE_SPEED		= 10, // MOVE_SPEED -- int
+		ATK_SPEED		= 11, // ATK_SPEED -- int
+		ATK_FIRE		= 12, // ATK_FIRE -- int
+		ATK_LIGHT		= 13, // ATK_LIGHT -- int
+		ATK_ICE		= 14, // ATK_ICE -- int
+		ATK_POISON		= 15, // ATK_POISON -- int
+		DEF_FIRE		= 16, // DEF_FIRE -- int
+		DEF_LIGHT		= 17, // DEF_LIGHT -- int
+		DEF_ICE		= 18, // DEF_ICE -- int
+		DEF_POISON		= 19, // DEF_POISON -- int
+		DIZZY_GATE		= 20, // DIZZY_GATE -- int
+		MOVE_GATE		= 21, // MOVE_GATE -- int
+		SKILL_GATE		= 22, // SKILL_GATE -- int
+		PHYSICAL_GATE		= 23, // PHYSICAL_GATE -- int
+		MAGIC_GATE		= 24, // MAGIC_GATE -- int
 	};
 
 	public enum CommPropertyValue

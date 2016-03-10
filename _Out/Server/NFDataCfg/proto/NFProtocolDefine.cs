@@ -1,18 +1,15 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/03/09
+//    @Date             :    2016/03/10
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-
 namespace NFrame
 {
 
@@ -65,7 +62,7 @@ public class Block
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
-	public static readonly String Tag = "Tag"; // string
+	public static readonly String Tag = "Tag"; // Int
 	public static readonly String LeftSide = "LeftSide"; // string
 	public static readonly String RightSide = "RightSide"; // string
 	public static readonly String TopSide = "TopSide"; // string
@@ -74,10 +71,6 @@ public class Block
 	public static readonly String LeftDownSide = "LeftDownSide"; // string
 	public static readonly String RightTopSide = "RightTopSide"; // string
 	public static readonly String RightDownSide = "RightDownSide"; // string
-	public static readonly String LeftID = "LeftID"; // string
-	public static readonly String RightID = "RightID"; // string
-	public static readonly String TopID = "TopID"; // string
-	public static readonly String DownID = "DownID"; // string
 	// Record
 
 }
@@ -120,8 +113,8 @@ public class ChatGroup
 	public static readonly String Name = "Name"; // string
 	public static readonly String CreateObject = "CreateObject"; // object
 	// Record
-	public static readonly String GroupMemberList = "GroupMemberList";
-	public static readonly String ChatList = "ChatList";
+	public static readonly String R_GroupMemberList = "GroupMemberList";
+	public static readonly String R_ChatList = "ChatList";
 
 	public enum GroupMemberList
 	{
@@ -332,12 +325,12 @@ public class Guild
 	public static readonly String EctypID = "EctypID"; // int
 	public static readonly String EctypIDGroup = "EctypIDGroup"; // int
 	// Record
-	public static readonly String GuildBoss = "GuildBoss";
-	public static readonly String GuildMemberList = "GuildMemberList";
-	public static readonly String GuildAppyList = "GuildAppyList";
-	public static readonly String GuildEvent = "GuildEvent";
-	public static readonly String GuildHouse = "GuildHouse";
-	public static readonly String GuildSkill = "GuildSkill";
+	public static readonly String R_GuildBoss = "GuildBoss";
+	public static readonly String R_GuildMemberList = "GuildMemberList";
+	public static readonly String R_GuildAppyList = "GuildAppyList";
+	public static readonly String R_GuildEvent = "GuildEvent";
+	public static readonly String R_GuildHouse = "GuildHouse";
+	public static readonly String R_GuildSkill = "GuildSkill";
 
 	public enum GuildBoss
 	{
@@ -713,21 +706,22 @@ public class Player
 	public static readonly String GateID = "GateID"; // int
 	public static readonly String GuildID = "GuildID"; // object
 	// Record
-	public static readonly String PlayerViewItem = "PlayerViewItem";
-	public static readonly String PlayerHero = "PlayerHero";
-	public static readonly String BagEquipList = "BagEquipList";
-	public static readonly String BagItemList = "BagItemList";
-	public static readonly String CommPropertyValue = "CommPropertyValue";
-	public static readonly String EctypeList = "EctypeList";
-	public static readonly String DropItemList = "DropItemList";
-	public static readonly String SkillTable = "SkillTable";
-	public static readonly String TaskMonsterList = "TaskMonsterList";
-	public static readonly String TaskList = "TaskList";
-	public static readonly String PVPList = "PVPList";
-	public static readonly String ChatGroup = "ChatGroup";
-	public static readonly String BuildingList = "BuildingList";
-	public static readonly String BuildingListProduce = "BuildingListProduce";
-	public static readonly String TileList = "TileList";
+	public static readonly String R_PlayerViewItem = "PlayerViewItem";
+	public static readonly String R_PlayerHero = "PlayerHero";
+	public static readonly String R_BagEquipList = "BagEquipList";
+	public static readonly String R_BagItemList = "BagItemList";
+	public static readonly String R_Record_HeroPropertyValue = "Record_HeroPropertyValue";
+	public static readonly String R_CommPropertyValue = "CommPropertyValue";
+	public static readonly String R_EctypeList = "EctypeList";
+	public static readonly String R_DropItemList = "DropItemList";
+	public static readonly String R_SkillTable = "SkillTable";
+	public static readonly String R_TaskMonsterList = "TaskMonsterList";
+	public static readonly String R_TaskList = "TaskList";
+	public static readonly String R_PVPList = "PVPList";
+	public static readonly String R_ChatGroup = "ChatGroup";
+	public static readonly String R_BuildingList = "BuildingList";
+	public static readonly String R_BuildingListProduce = "BuildingListProduce";
+	public static readonly String R_TileList = "TileList";
 
 	public enum PlayerViewItem
 	{
@@ -812,6 +806,35 @@ public class Player
 		Bound		= 2, // Bound -- int
 		ExpiredType		= 3, // ExpiredType -- int
 		Date		= 4, // Date -- object
+	};
+
+	public enum Record_HeroPropertyValue
+	{
+		HeroGUID		= 0, // HeroGUID -- object
+		Group		= 1, // Group -- int
+		MAXHP		= 2, // MAXHP -- int
+		MAXMP		= 3, // MAXMP -- int
+		MAXSP		= 4, // MAXSP -- int
+		HPREGEN		= 5, // HPREGEN -- int
+		SPREGEN		= 6, // SPREGEN -- int
+		MPREGEN		= 7, // MPREGEN -- int
+		ATK_VALUE		= 8, // ATK_VALUE -- int
+		DEF_VALUE		= 9, // DEF_VALUE -- int
+		MOVE_SPEED		= 10, // MOVE_SPEED -- int
+		ATK_SPEED		= 11, // ATK_SPEED -- int
+		ATK_FIRE		= 12, // ATK_FIRE -- int
+		ATK_LIGHT		= 13, // ATK_LIGHT -- int
+		ATK_ICE		= 14, // ATK_ICE -- int
+		ATK_POISON		= 15, // ATK_POISON -- int
+		DEF_FIRE		= 16, // DEF_FIRE -- int
+		DEF_LIGHT		= 17, // DEF_LIGHT -- int
+		DEF_ICE		= 18, // DEF_ICE -- int
+		DEF_POISON		= 19, // DEF_POISON -- int
+		DIZZY_GATE		= 20, // DIZZY_GATE -- int
+		MOVE_GATE		= 21, // MOVE_GATE -- int
+		SKILL_GATE		= 22, // SKILL_GATE -- int
+		PHYSICAL_GATE		= 23, // PHYSICAL_GATE -- int
+		MAGIC_GATE		= 24, // MAGIC_GATE -- int
 	};
 
 	public enum CommPropertyValue
