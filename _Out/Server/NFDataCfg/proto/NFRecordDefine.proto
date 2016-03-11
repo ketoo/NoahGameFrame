@@ -179,7 +179,7 @@ enum BagItemList
 	Date		= 4; // Date -- object
 }
 
-enum Record_HeroPropertyValue
+enum HeroPropertyValue
 {
 	HeroGUID		= 0; // HeroGUID -- object
 	Group		= 1; // Group -- int

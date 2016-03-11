@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/03/10
+//    @Date             :    2016/03/11
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -724,12 +724,13 @@ public:
 	static const std::string& GameID(){ static std::string xGameID = "GameID"; return xGameID; } // int
 	static const std::string& GateID(){ static std::string xGateID = "GateID"; return xGateID; } // int
 	static const std::string& GuildID(){ static std::string xGuildID = "GuildID"; return xGuildID; } // object
+	static const std::string& FightHero(){ static std::string xFightHero = "FightHero"; return xFightHero; } // object
 	// Record
 	static const std::string& R_PlayerViewItem(){ static std::string xPlayerViewItem = "PlayerViewItem"; return xPlayerViewItem;}
 	static const std::string& R_PlayerHero(){ static std::string xPlayerHero = "PlayerHero"; return xPlayerHero;}
 	static const std::string& R_BagEquipList(){ static std::string xBagEquipList = "BagEquipList"; return xBagEquipList;}
 	static const std::string& R_BagItemList(){ static std::string xBagItemList = "BagItemList"; return xBagItemList;}
-	static const std::string& R_Record_HeroPropertyValue(){ static std::string xRecord_HeroPropertyValue = "Record_HeroPropertyValue"; return xRecord_HeroPropertyValue;}
+	static const std::string& R_HeroPropertyValue(){ static std::string xHeroPropertyValue = "HeroPropertyValue"; return xHeroPropertyValue;}
 	static const std::string& R_CommPropertyValue(){ static std::string xCommPropertyValue = "CommPropertyValue"; return xCommPropertyValue;}
 	static const std::string& R_EctypeList(){ static std::string xEctypeList = "EctypeList"; return xEctypeList;}
 	static const std::string& R_DropItemList(){ static std::string xDropItemList = "DropItemList"; return xDropItemList;}
@@ -827,33 +828,33 @@ public:
 		BagItemList_Date		= 4, // Date -- object
 	};
 
-	enum Record_HeroPropertyValue
+	enum HeroPropertyValue
 	{
-		Record_HeroPropertyValue_HeroGUID		= 0, // HeroGUID -- object
-		Record_HeroPropertyValue_Group		= 1, // Group -- int
-		Record_HeroPropertyValue_MAXHP		= 2, // MAXHP -- int
-		Record_HeroPropertyValue_MAXMP		= 3, // MAXMP -- int
-		Record_HeroPropertyValue_MAXSP		= 4, // MAXSP -- int
-		Record_HeroPropertyValue_HPREGEN		= 5, // HPREGEN -- int
-		Record_HeroPropertyValue_SPREGEN		= 6, // SPREGEN -- int
-		Record_HeroPropertyValue_MPREGEN		= 7, // MPREGEN -- int
-		Record_HeroPropertyValue_ATK_VALUE		= 8, // ATK_VALUE -- int
-		Record_HeroPropertyValue_DEF_VALUE		= 9, // DEF_VALUE -- int
-		Record_HeroPropertyValue_MOVE_SPEED		= 10, // MOVE_SPEED -- int
-		Record_HeroPropertyValue_ATK_SPEED		= 11, // ATK_SPEED -- int
-		Record_HeroPropertyValue_ATK_FIRE		= 12, // ATK_FIRE -- int
-		Record_HeroPropertyValue_ATK_LIGHT		= 13, // ATK_LIGHT -- int
-		Record_HeroPropertyValue_ATK_ICE		= 14, // ATK_ICE -- int
-		Record_HeroPropertyValue_ATK_POISON		= 15, // ATK_POISON -- int
-		Record_HeroPropertyValue_DEF_FIRE		= 16, // DEF_FIRE -- int
-		Record_HeroPropertyValue_DEF_LIGHT		= 17, // DEF_LIGHT -- int
-		Record_HeroPropertyValue_DEF_ICE		= 18, // DEF_ICE -- int
-		Record_HeroPropertyValue_DEF_POISON		= 19, // DEF_POISON -- int
-		Record_HeroPropertyValue_DIZZY_GATE		= 20, // DIZZY_GATE -- int
-		Record_HeroPropertyValue_MOVE_GATE		= 21, // MOVE_GATE -- int
-		Record_HeroPropertyValue_SKILL_GATE		= 22, // SKILL_GATE -- int
-		Record_HeroPropertyValue_PHYSICAL_GATE		= 23, // PHYSICAL_GATE -- int
-		Record_HeroPropertyValue_MAGIC_GATE		= 24, // MAGIC_GATE -- int
+		HeroPropertyValue_HeroGUID		= 0, // HeroGUID -- object
+		HeroPropertyValue_Group		= 1, // Group -- int
+		HeroPropertyValue_MAXHP		= 2, // MAXHP -- int
+		HeroPropertyValue_MAXMP		= 3, // MAXMP -- int
+		HeroPropertyValue_MAXSP		= 4, // MAXSP -- int
+		HeroPropertyValue_HPREGEN		= 5, // HPREGEN -- int
+		HeroPropertyValue_SPREGEN		= 6, // SPREGEN -- int
+		HeroPropertyValue_MPREGEN		= 7, // MPREGEN -- int
+		HeroPropertyValue_ATK_VALUE		= 8, // ATK_VALUE -- int
+		HeroPropertyValue_DEF_VALUE		= 9, // DEF_VALUE -- int
+		HeroPropertyValue_MOVE_SPEED		= 10, // MOVE_SPEED -- int
+		HeroPropertyValue_ATK_SPEED		= 11, // ATK_SPEED -- int
+		HeroPropertyValue_ATK_FIRE		= 12, // ATK_FIRE -- int
+		HeroPropertyValue_ATK_LIGHT		= 13, // ATK_LIGHT -- int
+		HeroPropertyValue_ATK_ICE		= 14, // ATK_ICE -- int
+		HeroPropertyValue_ATK_POISON		= 15, // ATK_POISON -- int
+		HeroPropertyValue_DEF_FIRE		= 16, // DEF_FIRE -- int
+		HeroPropertyValue_DEF_LIGHT		= 17, // DEF_LIGHT -- int
+		HeroPropertyValue_DEF_ICE		= 18, // DEF_ICE -- int
+		HeroPropertyValue_DEF_POISON		= 19, // DEF_POISON -- int
+		HeroPropertyValue_DIZZY_GATE		= 20, // DIZZY_GATE -- int
+		HeroPropertyValue_MOVE_GATE		= 21, // MOVE_GATE -- int
+		HeroPropertyValue_SKILL_GATE		= 22, // SKILL_GATE -- int
+		HeroPropertyValue_PHYSICAL_GATE		= 23, // PHYSICAL_GATE -- int
+		HeroPropertyValue_MAGIC_GATE		= 24, // MAGIC_GATE -- int
 	};
 
 	enum CommPropertyValue

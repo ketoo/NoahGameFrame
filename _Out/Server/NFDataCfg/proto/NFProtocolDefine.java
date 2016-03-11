@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/03/10
+//    @Date             :    2016/03/11
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -679,12 +679,13 @@ public class Player {
 	public static final String GameID = "GameID"; // int
 	public static final String GateID = "GateID"; // int
 	public static final String GuildID = "GuildID"; // object
+	public static final String FightHero = "FightHero"; // object
 	// Record
 	public static final String R_PlayerViewItem = "PlayerViewItem";
 	public static final String R_PlayerHero = "PlayerHero";
 	public static final String R_BagEquipList = "BagEquipList";
 	public static final String R_BagItemList = "BagItemList";
-	public static final String R_Record_HeroPropertyValue = "Record_HeroPropertyValue";
+	public static final String R_HeroPropertyValue = "HeroPropertyValue";
 	public static final String R_CommPropertyValue = "CommPropertyValue";
 	public static final String R_EctypeList = "EctypeList";
 	public static final String R_DropItemList = "DropItemList";
@@ -782,7 +783,7 @@ public class Player {
 		Date		= 4, // Date -- object
 	};
 
-	public enum Record_HeroPropertyValue
+	public enum HeroPropertyValue
 	{
 		HeroGUID		= 0, // HeroGUID -- object
 		Group		= 1, // Group -- int
