@@ -13,7 +13,6 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include <boost/lexical_cast.hpp>
 
 struct NFGUID
 {
@@ -93,29 +92,29 @@ struct NFGUID
 
     std::string ToString() const
     {
-        return boost::lexical_cast<std::string>(nHead64) + "-" + boost::lexical_cast<std::string>(nData64);
+        return lexical_cast<std::string>(nHead64) + "-" + lexical_cast<std::string>(nData64);
     }
 
-	bool FromString(const std::string& strID)
-	{
-		size_t nStrLength = strID.length();
-		size_t nPos = strID.find('-');
-		if (nPos == std::string::npos)
-		{
-			return false;
-		}
+    bool FromString(const std::string& strID)
+    {
+        size_t nStrLength = strID.length();
+        size_t nPos = strID.find('-');
+        if (nPos == std::string::npos)
+        {
+            return false;
+        }
 
-		std::string strHead = strID.substr(0, nPos);
-		std::string strData = "";
-		if (nPos + 1 < nStrLength)
-		{
-			strData = strID.substr(nPos + 1, nStrLength - nPos);
-		}
+        std::string strHead = strID.substr(0, nPos);
+        std::string strData = "";
+        if (nPos + 1 < nStrLength)
+        {
+            strData = strID.substr(nPos + 1, nStrLength - nPos);
+        }
 
         try
         {
-            nHead64 = boost::lexical_cast<NFINT64>(strHead);
-            nData64 = boost::lexical_cast<NFINT64>(strData);
+            nHead64 = lexical_cast<NFINT64>(strHead);
+            nData64 = lexical_cast<NFINT64>(strData);
 
             return true;
         }
@@ -123,7 +122,7 @@ struct NFGUID
         {
             return false;
         }
-	}
+    }
 };
 
 #endif

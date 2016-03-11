@@ -19,8 +19,8 @@ class NFIWorldLogicModule
     : public NFILogicModule
 {
 public:
-//     virtual int GetWorldID() = 0;
-//     virtual const char* GetWorldName() = 0;
+    //     virtual int GetWorldID() = 0;
+    //     virtual const char* GetWorldName() = 0;
 
 protected:
 private:

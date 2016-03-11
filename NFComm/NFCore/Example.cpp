@@ -10,7 +10,7 @@
 //所有主机的列表
 void InitMainNodes(std::vector<MachineData>& vNodes)
 {
-    
+
     MachineData xData;
     xData.strIP = "192.168.1.100";
     xData.nWeight = 1000;
@@ -54,9 +54,9 @@ void InitVirtualNodes(const std::vector<MachineData>& vMainNodes, std::vector<NF
 
 void TestOneValue(NFCConsistentHash& xCH, uint32_t nValue)
 {
-    std::cout<<"=====测试查找某个hash值对应的vnode 和 主机：=================="<<std::endl;
+    std::cout << "=====测试查找某个hash值对应的vnode 和 主机：==================" << std::endl;
     NFCConsistentHash::iterator it = xCH.Find(nValue);
-    std::cout<< it->second.xNodeData.strIP << " Index: " << it->second.nVirtualIndex << " 节点Hash: " <<  it->first << std::endl;
+    std::cout << it->second.xNodeData.strIP << " Index: " << it->second.nVirtualIndex << " 节点Hash: " <<  it->first << std::endl;
 }
 
 void TestMulValue(NFCConsistentHash& xCH)
@@ -100,7 +100,7 @@ int _tmain(int argc, _TCHAR* argv[])
     std::vector<NFCNode> vVirNodes;
     InitVirtualNodes(nodes, vVirNodes);
 
-    //把虚节点加入管理 
+    //把虚节点加入管理
     NFCConsistentHash xConsistentHash;
     for (int i = 0; i < vVirNodes.size(); ++i)
     {
@@ -112,11 +112,11 @@ int _tmain(int argc, _TCHAR* argv[])
     uint32_t nTestValue = ret.checksum();
     TestOneValue(xConsistentHash, nTestValue);
 
-    std::cout<<"=====测试散列桶分布：========================================="<<std::endl;
+    std::cout << "=====测试散列桶分布：=========================================" << std::endl;
 
     TestMulValue(xConsistentHash);
 
-    std::cout<<"=====拔掉真实节点测试容错：=========================================="<<std::endl;
+    std::cout << "=====拔掉真实节点测试容错：==========================================" << std::endl;
     MachineData xRemoveData = nodes[3];
     for (int i = 0; i < xRemoveData.nWeight; ++i)
     {
@@ -125,7 +125,7 @@ int _tmain(int argc, _TCHAR* argv[])
     }
     TestOneValue(xConsistentHash, nTestValue);
 
-    std::cout<<"=====再次测试散列桶分布：====================================="<<std::endl;
+    std::cout << "=====再次测试散列桶分布：=====================================" << std::endl;
     TestMulValue(xConsistentHash);
 
     return 0;

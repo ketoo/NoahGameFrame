@@ -23,7 +23,7 @@ class NFCPropertyTrailModule
     : public NFIPropertyTrailModule
 {
 public:
-    NFCPropertyTrailModule( NFIPluginManager* p )
+    NFCPropertyTrailModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
@@ -34,24 +34,24 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-	virtual void StartTrail(const NFGUID self);
-	virtual void EndTrail(const NFGUID self);
+    virtual void StartTrail(const NFGUID self);
+    virtual void EndTrail(const NFGUID self);
 
 protected:
 
-	int LogObjectData( const NFGUID& self);
-	int TrailObjectData( const NFGUID& self);
+    int LogObjectData(const NFGUID& self);
+    int TrailObjectData(const NFGUID& self);
 
-	int OnObjectPropertyEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar );
+    int OnObjectPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
-	int OnObjectRecordEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+    int OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
 private:
 
-	NFIKernelModule* m_pKernelModule;
-	NFIElementInfoModule* m_pElementInfoModule;
-	NFILogicClassModule* m_pLogicClassModule;
-	NFILogModule* m_pLogModule;
+    NFIKernelModule* m_pKernelModule;
+    NFIElementInfoModule* m_pElementInfoModule;
+    NFILogicClassModule* m_pLogicClassModule;
+    NFILogModule* m_pLogModule;
 };
 
 

@@ -6,17 +6,21 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
+#include <string>
+#include <iostream>
+#include <sstream>
 #include "NFCUrlClientModule.h"
+<<<<<<< HEAD
 #include "curl/curl.h"
+=======
+#include "Dependencies/curl/include/curl/curl.h"
+>>>>>>> refs/remotes/ketoo/master
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIUrlCodeModule.h"
 #include "NFComm/NFMessageDefine/NFMsgURl.pb.h"
 
-#include <string>
-#include <iostream>
-#include <sstream>
 
-int NFCURLComponent::OnASyncEvent( const NFGUID& self, const int event, std::string& arg )
+int NFCURLComponent::OnASyncEvent(const NFGUID& self, const int event, std::string& arg)
 {
     SURLParam xparam;
     if (!NFCUrlClientModule::UnPackParam(arg, xparam))
@@ -36,22 +40,22 @@ int NFCURLComponent::OnASyncEvent( const NFGUID& self, const int event, std::str
 
 NF_SHARE_PTR<NFIComponent> NFCURLComponent::CreateNewInstance()
 {
-  return  NF_SHARE_PTR<NFIComponent> (NF_NEW  NFCURLComponent(NFGUID(1, 2), ""));
+    return  NF_SHARE_PTR<NFIComponent> (NF_NEW  NFCURLComponent(NFGUID(1, 2), ""));
 }
 
 bool NFCUrlClientModule::Init()
 {
-	return true;
+    return true;
 }
 
 bool NFCUrlClientModule::Shut()
 {
-	return true;
+    return true;
 }
 
 bool NFCUrlClientModule::Execute()
 {
-	return true;
+    return true;
 }
 
 bool NFCUrlClientModule::AfterInit()
@@ -65,15 +69,15 @@ bool NFCUrlClientModule::AfterInit()
         mbInitCurl = true;
         curl_global_init(CURL_GLOBAL_ALL);
     }
-	return true;
+    return true;
 }
 
 bool NFCUrlClientModule::BeforeShut()
 {
-	return true;
+    return true;
 }
 
-int NFCUrlClientModule::HttpPostRequest(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp)
+int NFCUrlClientModule::HttpPostRequest(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams, const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp)
 {
     std::string strGetParam = CompositeParam(mxGetParams);
     std::string strCookies = CompositeCookies(mxCookies);
@@ -81,7 +85,7 @@ int NFCUrlClientModule::HttpPostRequest(const std::string& strUrl, const std::ma
     return HttpReq(strUrl, strGetParam, strPostParam, strCookies, fTimeOutSec, strRsp);
 }
 
-int NFCUrlClientModule::HttpRequest(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp)
+int NFCUrlClientModule::HttpRequest(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData, const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp)
 {
     std::string strGetParam = CompositeParam(mxGetParams);
     std::string strCookies = CompositeCookies(mxCookies);
@@ -96,7 +100,7 @@ size_t NFCUrlClientModule::RecvHttpData(void* buffer, size_t size, size_t nmemb,
     {
         try
         {
-            pStrRecveData->append((char *)buffer, sizes);
+            pStrRecveData->append((char*)buffer, sizes);
         }
         catch (...)
         {
@@ -107,56 +111,58 @@ size_t NFCUrlClientModule::RecvHttpData(void* buffer, size_t size, size_t nmemb,
     return sizes;
 }
 
-std::string NFCUrlClientModule::CompositeParam( const std::map<std::string,std::string>& params )
+std::string NFCUrlClientModule::CompositeParam(const std::map<std::string, std::string>& params)
 {
     std::stringstream ss;
-    std::multimap<std::string,std::string>::const_iterator iter = params.begin();
-    while( iter != params.end() )
+    std::multimap<std::string, std::string>::const_iterator iter = params.begin();
+    while (iter != params.end())
     {
-        ss<< iter->first
-            <<"="
-            << m_pUrlCodeModule->EncodeURIValue(iter->second.c_str())
-            <<"&";
+        ss << iter->first
+           << "="
+           << m_pUrlCodeModule->EncodeURIValue(iter->second.c_str())
+           << "&";
         ++iter;
     }
 
     std::string line = ss.str();
     if (line.size() > 1)
-    {//去掉末尾的&
-        line.erase( line.size() -1 );
+    {
+        //去掉末尾的&
+        line.erase(line.size() - 1);
     }
 
     return line;
 }
 
-std::string NFCUrlClientModule::CompositeCookies( const std::map<std::string,std::string>& params )
+std::string NFCUrlClientModule::CompositeCookies(const std::map<std::string, std::string>& params)
 {
     std::stringstream ss;
-    std::multimap<std::string,std::string>::const_iterator iter = params.begin();
-    while( iter != params.end() )
+    std::multimap<std::string, std::string>::const_iterator iter = params.begin();
+    while (iter != params.end())
     {
-        ss<< iter->first
-            <<"="
-            << m_pUrlCodeModule->EncodeURIValue(iter->second.c_str())
-            <<";";
+        ss << iter->first
+           << "="
+           << m_pUrlCodeModule->EncodeURIValue(iter->second.c_str())
+           << ";";
         ++iter;
     }
 
     std::string line = ss.str();
     if (line.size() > 1)
-    {//去掉末尾的;
-        line.erase( line.size() -1 );
+    {
+        //去掉末尾的;
+        line.erase(line.size() - 1);
     }
 
     return line;
 }
 
 
-int NFCUrlClientModule::HttpReq( const std::string& strUrl, const std::string& strGetParam, const std::string& strBodyData,const std::string& strCookies, const float fTimeOutSec, std::string& strRsp )
+int NFCUrlClientModule::HttpReq(const std::string& strUrl, const std::string& strGetParam, const std::string& strBodyData, const std::string& strCookies, const float fTimeOutSec, std::string& strRsp)
 {
     try
     {
-        if(strUrl.empty())
+        if (strUrl.empty())
         {
             return -2;
         }
@@ -166,7 +172,7 @@ int NFCUrlClientModule::HttpReq( const std::string& strUrl, const std::string& s
         strFullStr += "?";
         strFullStr += strGetParam;
 
-        CURL *curl = 0;
+        CURL* curl = 0;
         CURLcode ret;
 
         curl = curl_easy_init();
@@ -176,7 +182,7 @@ int NFCUrlClientModule::HttpReq( const std::string& strUrl, const std::string& s
         }
 
         SConnAutoFree conn_free(curl);
-        struct curl_slist *headerlist=NULL;
+        struct curl_slist* headerlist = NULL;
 
         char buf[256] = {0};
 
@@ -199,11 +205,11 @@ int NFCUrlClientModule::HttpReq( const std::string& strUrl, const std::string& s
             curl_easy_setopt(curl, CURLOPT_COOKIE, strCookies.c_str()); // ok
         }
 
-        curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, (int)(fTimeOutSec*1000));
-        curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT_MS, (int)(fTimeOutSec*1000));
+        curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, (int)(fTimeOutSec * 1000));
+        curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT_MS, (int)(fTimeOutSec * 1000));
 
-        curl_easy_setopt(curl,CURLOPT_SSL_VERIFYPEER,false);
-        curl_easy_setopt(curl,CURLOPT_SSL_VERIFYHOST,false);
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
         curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1L);
 
         if (!strBodyData.empty())
@@ -218,10 +224,11 @@ int NFCUrlClientModule::HttpReq( const std::string& strUrl, const std::string& s
             return ret;
         }
         else
-        {//如果访问正常但http状态码不是200，直接返回http的状态码
+        {
+            //如果访问正常但http状态码不是200，直接返回http的状态码
             long http_code = 0;
             curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
-            if(200 != http_code)
+            if (200 != http_code)
             {
                 return http_code;
             }
@@ -229,13 +236,13 @@ int NFCUrlClientModule::HttpReq( const std::string& strUrl, const std::string& s
             return 0;//状态码为200时返回0
         }
     }
-    catch(...)
+    catch (...)
     {
         return -1;
     }
 }
 
-bool NFCUrlClientModule::StartActorPool( const int nCount )
+bool NFCUrlClientModule::StartActorPool(const int nCount)
 {
     NFIActorManager* pActorManager = pPluginManager->GetActorManager();
     if (NULL == pActorManager)
@@ -257,7 +264,7 @@ bool NFCUrlClientModule::StartActorPool( const int nCount )
 
 bool NFCUrlClientModule::CloseActorPool()
 {
-    int nActor =0;
+    int nActor = 0;
     NFIActorManager* pActorManager = pPluginManager->GetActorManager();
     if (NULL == pActorManager)
     {
@@ -287,7 +294,8 @@ int NFCUrlClientModule::HttpRequestAsyEnd(const NFGUID& self, const int nFormAct
         return -2;
     }
 
-    if (pReqData->mFunRsp._Empty())
+    // std::function 有重载operator bool
+    if (pReqData->mFunRsp)
     {
         return -3;
     }
@@ -299,7 +307,7 @@ int NFCUrlClientModule::HttpRequestAsyEnd(const NFGUID& self, const int nFormAct
     return 0;
 }
 
-int NFCUrlClientModule::HttpRequestAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn, const std::string&strUseData)
+int NFCUrlClientModule::HttpRequestAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData, const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn, const std::string& strUseData)
 {
     std::string strGetParam = CompositeParam(mxGetParams);
     std::string strCookies = CompositeCookies(mxCookies);
@@ -326,13 +334,13 @@ int NFCUrlClientModule::HttpRequestAs(const NFGUID& self, const std::string& str
     }
 
     int nAcotrID = GetActor();
-    if (nAcotrID <=0 )
+    if (nAcotrID <= 0)
     {
         return -2;
     }
 
     std::string arg;
-    const int nEvetID =1;
+    const int nEvetID = 1;
 
     if (!PackParam(*pUrlParam, arg))
     {
@@ -353,14 +361,14 @@ int NFCUrlClientModule::HttpRequestAs(const NFGUID& self, const std::string& str
     return 0;
 }
 
-int NFCUrlClientModule::HttpRequestPostAs( const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn , const std::string&strUseData)
+int NFCUrlClientModule::HttpRequestPostAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams, const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn , const std::string& strUseData)
 {
     std::string strPostParam = CompositeParam(mxPostParams);
 
     return HttpRequestAs(self, strUrl, mxGetParams, strPostParam, mxCookies, fTimeOutSec, RspFucn, strUseData);
 }
 
-bool NFCUrlClientModule::PackParam( const SURLParam& xParam, std::string& strData )
+bool NFCUrlClientModule::PackParam(const SURLParam& xParam, std::string& strData)
 {
     try
     {
@@ -385,7 +393,7 @@ bool NFCUrlClientModule::PackParam( const SURLParam& xParam, std::string& strDat
     return true;
 }
 
-bool NFCUrlClientModule::UnPackParam( const std::string& strData, SURLParam& xParam )
+bool NFCUrlClientModule::UnPackParam(const std::string& strData, SURLParam& xParam)
 {
     try
     {
@@ -405,11 +413,11 @@ bool NFCUrlClientModule::UnPackParam( const std::string& strData, SURLParam& xPa
         xParam.nReqID           = xMsg.nreqid();
 
     }
-    catch(...)
+    catch (...)
     {
         return false;
     }
-    
+
     return true;
 }
 
@@ -426,14 +434,14 @@ int NFCUrlClientModule::GetActor()
     int i = 0;
     for (int* pData = mActorList.FirstNude(); pData != NULL ; pData = mActorList.NextNude())
     {
-       if (i < mActorList.Count() && i == mnSuitIndex)
-       {
-           return *pData;
-       }
-       
-       ++i;
+        if (i < mActorList.Count() && i == mnSuitIndex)
+        {
+            return *pData;
+        }
+
+        ++i;
     }
-    
+
 
     return -1;
 }

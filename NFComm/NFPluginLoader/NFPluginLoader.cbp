@@ -8,6 +8,7 @@
 		<Build>
 			<Target title="Debug x64">
 				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d" prefix_auto="0" extension_auto="1" />
+				<Option working_dir="." />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option use_console_runner="0" />
@@ -18,22 +19,17 @@
 					<Add option="-D_DEBUG" />
 					<Add option="-D_CONSOLE" />
 					<Add option="-DNF_DYNAMIC_PLUGIN" />
-					<Add option="-DGOOGLE_GLOG_DLL_DECL=" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/External/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/External/" />
 				</Compiler>
 				<Linker>
 					<Add option="-ldl" />
 					<Add option="-lpthread" />
-					<Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_system-gcc48-mt-s-1_53.a" />
-					<Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_thread-gcc48-mt-s-1_53.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libtherond.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d $(SolutionDir)/_Out/Server/Debug/NFLoginServer/" />
@@ -53,7 +49,7 @@
 				</Environment>
 			</Target>
 			<Target title="Release x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Release/NFPluginLoader" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r" prefix_auto="0" extension_auto="1" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option use_console_runner="0" />
@@ -65,31 +61,27 @@
 					<Add option="-DNF_DYNAMIC_PLUGIN" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron-6.00.01/Include/External/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
+					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/External/" />
 				</Compiler>
 				<Linker>
 					<Add option="-ldl" />
 					<Add option="-lpthread" />
-					<Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_system-gcc48-mt-s-1_53.a" />
-					<Add library="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_thread-gcc48-mt-s-1_53.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libtheron.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
-					<Add directory="$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/" />
 				</Linker>
 				<ExtraCommands>
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/NFLoginServer/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/NFWorldServer/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/NFMasterServer/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/NFProxyServer1/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/NFGameServer1/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/Tutorial1/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/Tutorial2/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/Tutorial3/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/Tutorial4/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader $(SolutionDir)/_Out/Server/Release/Tutorial5/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/NFLoginServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/NFWorldServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/NFMasterServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/NFProxyServer1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/NFGameServer1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/Tutorial1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/Tutorial2/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/Tutorial3/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/Tutorial4/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r $(SolutionDir)/_Out/Server/Release/Tutorial5/" />
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>

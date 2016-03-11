@@ -60,23 +60,23 @@ TDATA_TYPE NFCLogicClassModule::ComputerType(const char* pstrTypeName, NFIDataLi
 {
     if (0 == strcmp(pstrTypeName, "int"))
     {
-		var.SetInt(NULL_INT);
+        var.SetInt(NULL_INT);
         return var.GetType();
     }
     else if (0 == strcmp(pstrTypeName, "string"))
     {
-		var.SetString(NULL_STR);
-		return var.GetType();
+        var.SetString(NULL_STR);
+        return var.GetType();
     }
     else if (0 == strcmp(pstrTypeName, "float"))
     {
-		var.SetFloat(NULL_FLOAT);
-		return var.GetType();
+        var.SetFloat(NULL_FLOAT);
+        return var.GetType();
     }
     else if (0 == strcmp(pstrTypeName, "object"))
     {
-		var.SetObject(NULL_OBJECT);
-		return var.GetType();
+        var.SetObject(NULL_OBJECT);
+        return var.GetType();
     }
 
     return TDATA_UNKNOWN;
@@ -102,7 +102,7 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
             const char* pstrPropertyIndex = pPropertyNode->first_attribute("Index")->value();
 
             const char* pstrSave = pPropertyNode->first_attribute("Save")->value();
-            
+
             std::string strView;
             if (pPropertyNode->first_attribute("View") != NULL)
             {
@@ -115,11 +115,11 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
                 pstrRelationValue = pPropertyNode->first_attribute("RelationValue")->value();
             }
 
-            bool bPublic = boost::lexical_cast<bool>(pstrPublic);
-            bool bPrivate = boost::lexical_cast<bool>(pstrPrivate);
-            bool bSave = boost::lexical_cast<bool>(pstrSave);
-            bool bView = (strView.empty() ? false : (boost::lexical_cast<bool>(strView)));
-            int nIndex = boost::lexical_cast<int>(pstrPropertyIndex);
+            bool bPublic = lexical_cast<bool>(pstrPublic);
+            bool bPrivate = lexical_cast<bool>(pstrPrivate);
+            bool bSave = lexical_cast<bool>(pstrSave);
+            bool bView = (strView.empty() ? false : (lexical_cast<bool>(strView)));
+            int nIndex = lexical_cast<int>(pstrPropertyIndex);
 
             if (bPublic || bPrivate)
             {
@@ -169,7 +169,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_S
             const char* pstrPublic = pRecordNode->first_attribute("Public")->value();
             const char* pstrPrivate = pRecordNode->first_attribute("Private")->value();
             const char* pstrSave = pRecordNode->first_attribute("Save")->value();
-            
+
             std::string strView;
             if (pRecordNode->first_attribute("View") != NULL)
             {
@@ -178,11 +178,11 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_S
 
             const char* pstrIndex = pRecordNode->first_attribute("Index")->value();
 
-            bool bPublic = boost::lexical_cast<bool>(pstrPublic);
-            bool bPrivate = boost::lexical_cast<bool>(pstrPrivate);
-            bool bSave = boost::lexical_cast<bool>(pstrSave);
-            bool bView = (strView.empty() ? false : (boost::lexical_cast<bool>(strView)));
-            int nIndex = boost::lexical_cast<int>(pstrIndex);
+            bool bPublic = lexical_cast<bool>(pstrPublic);
+            bool bPrivate = lexical_cast<bool>(pstrPrivate);
+            bool bSave = lexical_cast<bool>(pstrSave);
+            bool bView = (strView.empty() ? false : (lexical_cast<bool>(strView)));
+            int nIndex = lexical_cast<int>(pstrIndex);
 
             NFCDataList recordVar;
             NFCDataList recordKey;
@@ -205,7 +205,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_S
                 if (recordColNode->first_attribute("Key") != NULL)
                 {
                     const char* pstrKey = recordColNode->first_attribute("Key")->value();
-                    bool bKey = boost::lexical_cast<bool>(pstrKey);
+                    bool bKey = lexical_cast<bool>(pstrKey);
                     if (bKey)
                     {
                         recordKey.Add(NFINT64(1));
@@ -266,7 +266,7 @@ bool NFCLogicClassModule::AddComponents(rapidxml::xml_node<>* pComponentRootNode
             const char* strComponentName = pComponentNode->first_attribute("Name")->value();
             const char* strLanguage = pComponentNode->first_attribute("Language")->value();
             const char* strEnable = pComponentNode->first_attribute("Enable")->value();
-            bool bEnable = boost::lexical_cast<bool>(strEnable);
+            bool bEnable = lexical_cast<bool>(strEnable);
             if (bEnable)
             {
                 if (pClass->GetComponentManager()->GetElement(strComponentName))
@@ -275,7 +275,7 @@ bool NFCLogicClassModule::AddComponents(rapidxml::xml_node<>* pComponentRootNode
                     NFASSERT(0, strComponentName, __FILE__, __FUNCTION__);
                     continue;
                 }
-				NF_SHARE_PTR<NFIComponent> xComponent(NF_NEW NFIComponent(NFGUID(), strComponentName));
+                NF_SHARE_PTR<NFIComponent> xComponent(NF_NEW NFIComponent(NFGUID(), strComponentName));
                 pClass->GetComponentManager()->AddComponent(strComponentName, xComponent);
             }
         }
@@ -572,13 +572,14 @@ std::string NFCLogicClassModule::Encode(unsigned char const* bytes_to_encode, un
     while (in_len--)
     {
         char_array_3[i++] = *(bytes_to_encode++);
-        if (i == 3) {
+        if (i == 3)
+        {
             char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
             char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
             char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
             char_array_4[3] = char_array_3[2] & 0x3f;
 
-            for(i = 0; (i <4) ; i++)
+            for (i = 0; (i < 4) ; i++)
             {
                 ret += cepher[char_array_4[i]];
             }
@@ -589,7 +590,7 @@ std::string NFCLogicClassModule::Encode(unsigned char const* bytes_to_encode, un
 
     if (i)
     {
-        for(j = i; j < 3; j++)
+        for (j = i; j < 3; j++)
         {
             char_array_3[j] = '\0';
         }
@@ -604,7 +605,7 @@ std::string NFCLogicClassModule::Encode(unsigned char const* bytes_to_encode, un
             ret += cepher[char_array_4[j]];
         }
 
-        while((i++ < 3))
+        while ((i++ < 3))
         {
             ret += '=';
         }
@@ -622,14 +623,16 @@ std::string NFCLogicClassModule::Decode(const std::string& encoded_string)
     unsigned char char_array_4[4], char_array_3[3];
     std::string ret;
 
-    while (in_len-- && ( encoded_string[in_] != '=') && IsEncoded(encoded_string[in_]))
+    while (in_len-- && (encoded_string[in_] != '=') && IsEncoded(encoded_string[in_]))
     {
         char_array_4[i++] = encoded_string[in_];
         in_++;
-        if (i ==4)
+        if (i == 4)
         {
-            for (i = 0; i <4; i++)
+            for (i = 0; i < 4; i++)
+            {
                 char_array_4[i] = cepher.find(char_array_4[i]);
+            }
 
             char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
             char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
@@ -646,12 +649,12 @@ std::string NFCLogicClassModule::Decode(const std::string& encoded_string)
 
     if (i)
     {
-        for (j = i; j <4; j++)
+        for (j = i; j < 4; j++)
         {
             char_array_4[j] = 0;
         }
 
-        for (j = 0; j <4; j++)
+        for (j = 0; j < 4; j++)
         {
             char_array_4[j] = cepher.find(char_array_4[j]);
         }
@@ -696,24 +699,24 @@ bool NFCLogicClassModule::ReadFileToString(const std::string& strFile, std::stri
     return true;
 }
 
-bool NFCLogicClassModule::AddClassCallBack( const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb )
+bool NFCLogicClassModule::AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb)
 {
-	NF_SHARE_PTR<NFILogicClass> pClass = GetElement(strClassName);
-	if (nullptr == pClass)
-	{
-		return false;
-	}
+    NF_SHARE_PTR<NFILogicClass> pClass = GetElement(strClassName);
+    if (nullptr == pClass)
+    {
+        return false;
+    }
 
-	return pClass->AddClassCallBack(cb);
+    return pClass->AddClassCallBack(cb);
 }
 
-bool NFCLogicClassModule::DoEvent( const NFGUID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList )
+bool NFCLogicClassModule::DoEvent(const NFGUID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList)
 {
-	NF_SHARE_PTR<NFILogicClass> pClass = GetElement(strClassName);
-	if (nullptr == pClass)
-	{
-		return false;
-	}
+    NF_SHARE_PTR<NFILogicClass> pClass = GetElement(strClassName);
+    if (nullptr == pClass)
+    {
+        return false;
+    }
 
-	return pClass->DoEvent(objectID, eClassEvent, valueList);
+    return pClass->DoEvent(objectID, eClassEvent, valueList);
 }

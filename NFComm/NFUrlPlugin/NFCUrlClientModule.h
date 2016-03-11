@@ -9,9 +9,14 @@
 #ifndef NFC_URL_MODULE_H
 #define NFC_URL_MODULE_H
 
+<<<<<<< HEAD
 #include "curl/curl.h"
 #include "NFComm/NFPluginModule/NFIUrlClientModule.h"
+=======
+>>>>>>> refs/remotes/ketoo/master
 #include "NFComm/NFCore/NFIComponent.h"
+#include "Dependencies/curl/include/curl/curl.h"
+#include "NFComm/NFPluginModule/NFIUrlClientModule.h"
 #include "NFComm/NFPluginModule/NFIUrlCodeModule.h"
 
 struct SURLParam
@@ -40,11 +45,11 @@ struct SURLParam
 class NFCURLComponent : public NFIComponent
 {
 public:
-	NFCURLComponent(NFGUID self, const std::string& strName):NFIComponent(self, strName)
+    NFCURLComponent(NFGUID self, const std::string& strName): NFIComponent(self, strName)
     {
     }
 
-    NFCURLComponent(NFIPluginManager* pPluginManager):NFIComponent(NFGUID(), "")
+    NFCURLComponent(NFIPluginManager* pPluginManager): NFIComponent(NFGUID(), "")
     {
     }
 
@@ -52,7 +57,7 @@ public:
     {
 
     }
-    
+
     virtual int OnASyncEvent(const NFGUID& self, const int event, std::string& arg);
 
 protected:
@@ -91,7 +96,7 @@ public:
 
     struct SSlistAutoFree
     {
-        SSlistAutoFree(struct curl_slist *plist)
+        SSlistAutoFree(struct curl_slist* plist)
         {
             m_plist = plist;
         }
@@ -99,10 +104,10 @@ public:
         {
             if (m_plist)
             {
-                curl_slist_free_all (m_plist);
+                curl_slist_free_all(m_plist);
             }
         }
-        struct curl_slist *m_plist;
+        struct curl_slist* m_plist;
     };
 
     virtual bool Init();
@@ -112,16 +117,16 @@ public:
     virtual bool AfterInit();
     virtual bool BeforeShut();
 
-    virtual int HttpPostRequest(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp);    
-    virtual int HttpRequest(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp);    
-    virtual int HttpRequestAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn,  const std::string&strUseData);
-    virtual int HttpRequestPostAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams,const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn, const std::string&strUseData);
+    virtual int HttpPostRequest(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams, const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp);
+    virtual int HttpRequest(const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData, const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, std::string& strRsp);
+    virtual int HttpRequestAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData, const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn,  const std::string& strUseData);
+    virtual int HttpRequestPostAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams, const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn, const std::string& strUseData);
 
     virtual bool StartActorPool(const int nCount);
     virtual bool CloseActorPool();
 
 public:
-    static int HttpReq(const std::string& strUrl, const std::string& strGetParams, const std::string& strBodyData,const std::string& mxCookies, const float fTimeOutSec, std::string& strRsp);    
+    static int HttpReq(const std::string& strUrl, const std::string& strGetParams, const std::string& strBodyData, const std::string& mxCookies, const float fTimeOutSec, std::string& strRsp);
     static bool PackParam(const SURLParam& xParam, std::string& strData);
     static bool UnPackParam(const std::string& strData, SURLParam& xParam);
 
@@ -130,8 +135,8 @@ protected:
     int HttpRequestAsyEnd(const NFGUID& self, const int nFormActor, const int nSubMsgID, const std::string& strData);
 
     static size_t RecvHttpData(void* buffer, size_t size, size_t nmemb, std::string* strRecveData);
-    std::string CompositeParam( const std::map<std::string,std::string>& params );
-    std::string CompositeCookies( const std::map<std::string,std::string>& params );
+    std::string CompositeParam(const std::map<std::string, std::string>& params);
+    std::string CompositeCookies(const std::map<std::string, std::string>& params);
 
 public:
     NFIUrlCodeModule* m_pUrlCodeModule;

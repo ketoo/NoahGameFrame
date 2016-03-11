@@ -40,15 +40,15 @@ bool NFCWorldGuildBroadcastModule::AfterInit()
     assert(NULL != m_pWorldNet_ServerModule);
     assert(NULL != m_pWorldGuildModule);
 
-    m_pKernelModule->ResgisterCommonPropertyEvent( this, &NFCWorldGuildBroadcastModule::OnPropertyCommonEvent );
-    m_pKernelModule->ResgisterCommonRecordEvent( this, &NFCWorldGuildBroadcastModule::OnRecordCommonEvent );
+    m_pKernelModule->ResgisterCommonPropertyEvent(this, &NFCWorldGuildBroadcastModule::OnPropertyCommonEvent);
+    m_pKernelModule->ResgisterCommonRecordEvent(this, &NFCWorldGuildBroadcastModule::OnRecordCommonEvent);
 
     return true;
 }
 
-int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-    if ( "Guild" != m_pKernelModule->GetPropertyString( self, "ClassName" ))
+    if ("Guild" != m_pKernelModule->GetPropertyString(self, "ClassName"))
     {
         return 0;
     }
@@ -61,64 +61,64 @@ int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFGUID& self, con
         return 0;
     }
 
-    if ( valueBroadCaseList.GetCount() <= 0 || valueBroadCaseList.GetCount() != valueBroadCaseGameList.GetCount())
+    if (valueBroadCaseList.GetCount() <= 0 || valueBroadCaseList.GetCount() != valueBroadCaseGameList.GetCount())
     {
         return 0;
     }
 
-    switch ( oldVar.GetType() )
+    switch (oldVar.GetType())
     {
-    case TDATA_INT:
+        case TDATA_INT:
         {
             NFMsg::ObjectPropertyInt xPropertyInt;
             NFMsg::Ident* pIdent = xPropertyInt.mutable_player_id();
             *pIdent = NFINetModule::NFToPB(self);
 
             NFMsg::PropertyInt* pDataInt = xPropertyInt.add_property_list();
-            pDataInt->set_property_name( strPropertyName );
-            pDataInt->set_data( newVar.GetInt() );
+            pDataInt->set_property_name(strPropertyName);
+            pDataInt->set_data(newVar.GetInt());
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt);
 
         }
         break;
 
-    case TDATA_FLOAT:
+        case TDATA_FLOAT:
         {
             NFMsg::ObjectPropertyFloat xPropertyFloat;
             NFMsg::Ident* pIdent = xPropertyFloat.mutable_player_id();
             *pIdent = NFINetModule::NFToPB(self);
 
             NFMsg::PropertyFloat* pDataFloat = xPropertyFloat.add_property_list();
-            pDataFloat->set_property_name( strPropertyName );
-            pDataFloat->set_data( newVar.GetFloat() );
+            pDataFloat->set_property_name(strPropertyName);
+            pDataFloat->set_data(newVar.GetFloat());
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyFloat);
         }
         break;
 
-    case TDATA_STRING:
+        case TDATA_STRING:
         {
             NFMsg::ObjectPropertyString xPropertyString;
             NFMsg::Ident* pIdent = xPropertyString.mutable_player_id();
             *pIdent = NFINetModule::NFToPB(self);
 
             NFMsg::PropertyString* pDataString = xPropertyString.add_property_list();
-            pDataString->set_property_name( strPropertyName );
-            pDataString->set_data( newVar.GetString() );
+            pDataString->set_property_name(strPropertyName);
+            pDataString->set_data(newVar.GetString());
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString);
         }
         break;
 
-    case TDATA_OBJECT:
+        case TDATA_OBJECT:
         {
             NFMsg::ObjectPropertyObject xPropertyObject;
             NFMsg::Ident* pIdent = xPropertyObject.mutable_player_id();
             *pIdent = NFINetModule::NFToPB(self);
 
             NFMsg::PropertyObject* pDataObject = xPropertyObject.add_property_list();
-            pDataObject->set_property_name( strPropertyName );
+            pDataObject->set_property_name(strPropertyName);
             *pDataObject->mutable_data() = NFINetModule::NFToPB(newVar.GetObject());
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject);
@@ -126,8 +126,8 @@ int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFGUID& self, con
         }
         break;
 
-    default:
-        break;
+        default:
+            break;
     }
 
 
@@ -135,14 +135,14 @@ int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFGUID& self, con
 }
 
 
-int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
+int NFCWorldGuildBroadcastModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-    const std::string& strRecordName = xEventData.strRecordName; 
+    const std::string& strRecordName = xEventData.strRecordName;
     int nOpType = xEventData.nOpType;
     int nRow = xEventData.nRow;
     int nCol = xEventData.nCol;
 
-    if ( "Guild" != m_pKernelModule->GetPropertyString( self, "ClassName" ))
+    if ("Guild" != m_pKernelModule->GetPropertyString(self, "ClassName"))
     {
         return 0;
     }
@@ -159,15 +159,15 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const
         return 0;
     }
 
-    switch ( nOpType )
+    switch (nOpType)
     {
-    case NFIRecord::RecordOptype::Add:
+        case NFIRecord::RecordOptype::Add:
         {
             NFMsg::ObjectRecordAddRow xAddRecordRow;
             NFMsg::Ident* pIdent = xAddRecordRow.mutable_player_id();
             *pIdent = NFINetModule::NFToPB(self);
 
-            xAddRecordRow.set_record_name( strRecordName );
+            xAddRecordRow.set_record_name(strRecordName);
 
             NFMsg::RecordAddRowStruct* pAddRowData = xAddRecordRow.add_row_data();
             pAddRowData->set_row(nRow);
@@ -236,15 +236,15 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_ADD_ROW, xAddRecordRow);
         }
         break;
-    case NFIRecord::RecordOptype::Del:
+        case NFIRecord::RecordOptype::Del:
         {
             NFMsg::ObjectRecordRemove xReoveRecordRow;
 
             NFMsg::Ident* pIdent = xReoveRecordRow.mutable_player_id();
             *pIdent = NFINetModule::NFToPB(self);
 
-            xReoveRecordRow.set_record_name( strRecordName );
-            xReoveRecordRow.add_remove_row( nRow );
+            xReoveRecordRow.set_record_name(strRecordName);
+            xReoveRecordRow.add_remove_row(nRow);
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_REMOVE_ROW, xReoveRecordRow);
 
@@ -269,21 +269,21 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const
             }
         }
         break;
-    case NFIRecord::RecordOptype::Swap:
+        case NFIRecord::RecordOptype::Swap:
         {
             //其实是2个row交换
             NFMsg::ObjectRecordSwap xSwapRecord;
             *xSwapRecord.mutable_player_id() = NFINetModule::NFToPB(self);
 
-            xSwapRecord.set_origin_record_name( strRecordName );
-            xSwapRecord.set_target_record_name( strRecordName ); // 暂时没用
-            xSwapRecord.set_row_origin( nRow );
-            xSwapRecord.set_row_target( nCol );
+            xSwapRecord.set_origin_record_name(strRecordName);
+            xSwapRecord.set_target_record_name(strRecordName);   // 暂时没用
+            xSwapRecord.set_row_origin(nRow);
+            xSwapRecord.set_row_target(nCol);
 
             m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_SWAP_ROW, xSwapRecord);
         }
         break;
-    case NFIRecord::RecordOptype::UpData:
+        case NFIRecord::RecordOptype::UpData:
         {
             //装备的过程中是不能更新的
             const int nCol = xEventData.nCol;
@@ -312,85 +312,85 @@ int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const
                 }
             }
 
-            switch ( oldVar.GetType() )
+            switch (oldVar.GetType())
             {
-            case TDATA_INT:
+                case TDATA_INT:
                 {
                     NFMsg::ObjectRecordInt xRecordChanged;
                     *xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
 
-                    xRecordChanged.set_record_name( strRecordName );
+                    xRecordChanged.set_record_name(strRecordName);
                     NFMsg::RecordInt* recordProperty = xRecordChanged.add_property_list();
-                    recordProperty->set_row( nRow );
-                    recordProperty->set_col( nCol );
+                    recordProperty->set_row(nRow);
+                    recordProperty->set_col(nCol);
                     int nData = newVar.GetInt();
-                    recordProperty->set_data( nData );
+                    recordProperty->set_data(nData);
 
                     m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_RECORD_INT, xRecordChanged);
 
                 }
                 break;
 
-            case TDATA_FLOAT:
+                case TDATA_FLOAT:
                 {
                     NFMsg::ObjectRecordFloat xRecordChanged;
                     *xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
 
-                    xRecordChanged.set_record_name( strRecordName );
+                    xRecordChanged.set_record_name(strRecordName);
                     NFMsg::RecordFloat* recordProperty = xRecordChanged.add_property_list();
-                    recordProperty->set_row( nRow );
-                    recordProperty->set_col( nCol );
-                    recordProperty->set_data( newVar.GetFloat() );
+                    recordProperty->set_row(nRow);
+                    recordProperty->set_col(nCol);
+                    recordProperty->set_data(newVar.GetFloat());
 
                     m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_RECORD_DOUBLE, xRecordChanged);
 
                 }
                 break;
-            case TDATA_STRING:
+                case TDATA_STRING:
                 {
                     NFMsg::ObjectRecordString xRecordChanged;
                     *xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
 
-                    xRecordChanged.set_record_name( strRecordName );
+                    xRecordChanged.set_record_name(strRecordName);
                     NFMsg::RecordString* recordProperty = xRecordChanged.add_property_list();
-                    recordProperty->set_row( nRow );
-                    recordProperty->set_col( nCol );
-                    recordProperty->set_data( newVar.GetString() );
+                    recordProperty->set_row(nRow);
+                    recordProperty->set_col(nCol);
+                    recordProperty->set_data(newVar.GetString());
 
                     m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_RECORD_STRING, xRecordChanged);
                 }
                 break;
-            case TDATA_OBJECT:
+                case TDATA_OBJECT:
                 {
                     NFMsg::ObjectRecordObject xRecordChanged;
                     *xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
 
-                    xRecordChanged.set_record_name( strRecordName );
+                    xRecordChanged.set_record_name(strRecordName);
                     NFMsg::RecordObject* recordProperty = xRecordChanged.add_property_list();
-                    recordProperty->set_row( nRow );
-                    recordProperty->set_col( nCol );
+                    recordProperty->set_row(nRow);
+                    recordProperty->set_col(nCol);
                     *recordProperty->mutable_data() = NFINetModule::NFToPB(newVar.GetObject());
 
                     m_pWorldNet_ServerModule->SendMsgToGame(valueBroadCaseList, valueBroadCaseGameList, NFMsg::EGMI_ACK_RECORD_OBJECT, xRecordChanged);
                 }
                 break;
 
-            default:
-                return 0;
-                break;
+                default:
+                    return 0;
+                    break;
             }
         }
         break;
-    case NFIRecord::RecordOptype::Create:
-        return 0;
-        break;
-    case NFIRecord::RecordOptype::Cleared:
+        case NFIRecord::RecordOptype::Create:
+            return 0;
+            break;
+        case NFIRecord::RecordOptype::Cleared:
         {
         }
         break;
-    default:
-        break;
+        default:
+            break;
     }
 
     return 0;
- }
+}

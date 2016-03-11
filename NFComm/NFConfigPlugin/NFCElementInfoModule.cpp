@@ -125,7 +125,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFI
         NFASSERT(0, strConfigID, __FILE__, __FUNCTION__);
         return false;
     }
-    
+
     NF_SHARE_PTR<ElementConfigInfo> pElementInfo(NF_NEW ElementConfigInfo());
     AddElement(strConfigID, pElementInfo);
 
@@ -185,7 +185,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFI
                 {
                     NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 }
-				var.SetInt(boost::lexical_cast<NFINT64>(pstrConfigValue));
+                var.SetInt(lexical_cast<NFINT64>(pstrConfigValue));
             }
             break;
             case TDATA_FLOAT:
@@ -194,11 +194,11 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFI
                 {
                     NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 }
-				var.SetFloat((double)atof(pstrConfigValue));
+                var.SetFloat((double)atof(pstrConfigValue));
             }
             break;
             case TDATA_STRING:
-               var.SetString(pstrConfigValue);
+                var.SetString(pstrConfigValue);
                 break;
             case TDATA_OBJECT:
             {
@@ -217,8 +217,8 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFI
         pElementPropertyManager->SetProperty(pstrConfigName, var);
     }
 
-	NFIDataList::TData xData;
-	xData.SetString(pLogicClass->GetClassName());
+    NFIDataList::TData xData;
+    xData.SetString(pLogicClass->GetClassName());
     pElementPropertyManager->SetProperty("ClassName", xData);
 
     return true;
