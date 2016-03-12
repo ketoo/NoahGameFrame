@@ -404,10 +404,11 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 	}
 
 	int nItemType = m_pElementInfoModule->GetPropertyInt(strConfigName, NFrame::Item::ItemType());
-	if ( NFMsg::EItemType::EIT_NORMAL != nItemType )
-	{
-		return 0;
-	}
+    PackTableType eBagType = GetPackBagType(nItemType);
+    if (eBagType != PackTableType::BagItemPack)
+    {
+        return -1;
+    }
 
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagItemPack ) );
 	if (!pRecord)
@@ -418,13 +419,23 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 	int nRow = FindItemRowByConfig(self, strConfigName);
 	if (nRow < 0)
 	{
-        NFCDataList varRowData = pRecord->GetInitData();
+        NFCDataList varRowData;
+//         if (!pRecord->IniRowData(varRowData))
+//         {
+//             return 0;
+//         }
 
-        varRowData.SetString(NFrame::Player::BagItemList::BagItemList_ConfigID, strConfigName.data());
-        varRowData.SetInt(NFrame::Player::BagItemList::BagItemList_ItemCount, nCount);
-        varRowData.SetInt(NFrame::Player::BagItemList::BagItemList_Bound, 0);
-        varRowData.SetInt(NFrame::Player::BagItemList::BagItemList_ExpiredType, 0);
-        varRowData.SetObject(NFrame::Player::BagItemList::BagItemList_Date, NFGUID(0, NFTimeEx::GetNowTime()));
+//         varRowData.SetString(NFrame::Player::BagItemList::BagItemList_ConfigID, strConfigName.c_str());
+//         varRowData.SetInt(NFrame::Player::BagItemList::BagItemList_ItemCount, nCount);
+//         varRowData.SetInt(NFrame::Player::BagItemList::BagItemList_Bound, 0);
+//         varRowData.SetInt(NFrame::Player::BagItemList::BagItemList_ExpiredType, 0);
+//         varRowData.SetObject(NFrame::Player::BagItemList::BagItemList_Date, NFGUID(0, NFTimeEx::GetNowTime()));
+
+        varRowData << strConfigName;
+        varRowData << nCount;
+        varRowData << 0;
+        varRowData << 0;
+        varRowData << NFGUID(0, NFTimeEx::GetNowTime());
 
 		int nRow= pRecord->AddRow(-1, varRowData);
 		if (nRow >= 0)
@@ -442,31 +453,61 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 	return 0;
 }
 
+PackTableType NFCPackModule::GetPackBagType(int nItemType)
+{
+    switch (nItemType)
+    {
+    case NFMsg::EItemType::EIT_NORMAL:
+    case NFMsg::EItemType::EIT_EQUIP:
+    {
+        return PackTableType::BagEquipPack;
+    }
+    break;
+    case NFMsg::EItemType::EIT_BOUNTY:
+    case NFMsg::EItemType::EIT_HERO_CARD:
+    case NFMsg::EItemType::EIT_HERO_STONE:
+    case NFMsg::EItemType::EIT_STRENGTHEN_STONE:
+    case NFMsg::EItemType::EIT_DEMONIZATION_STONE:
+    case NFMsg::EItemType::EIT_GEM_STONE:
+    case NFMsg::EItemType::EIT_CURRENCY:
+    case NFMsg::EItemType::EIT_ITEM_REBORN:
+    case NFMsg::EItemType::EIT_ITEM_POSITION:
+    case NFMsg::EItemType::EIT_WOOD:
+    case NFMsg::EItemType::EIT_STONE:
+        break;
+    default:
+        break;
+    }
+
+    return PackTableType::BagItemPack;
+}
+
 int NFCPackModule::FindItemRowByConfig( const NFGUID& self, const std::string& strItemConfigID )
 {
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
 	if ( NULL == pObject )
 	{
-		return 0;
+		return -1;
 	}
 
 	//还得确定有这个装备
 	bool bExist = m_pElementInfoModule->ExistElement( strItemConfigID );
 	if ( !bExist )
 	{
-		return 0;
+		return -1;
 	}
 
 	int nItemType = m_pElementInfoModule->GetPropertyInt(strItemConfigID, NFrame::Item::ItemType());
-	if ( NFMsg::EItemType::EIT_NORMAL != nItemType )
-	{
-		return 0;
-	}
+    PackTableType eBagType = GetPackBagType(nItemType);
+    if (eBagType != PackTableType::BagItemPack)
+    {
+        return -1;
+    }
 
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagItemPack ) );
 	if (!pRecord)
 	{
-		return 0;
+		return -1;
 	}
 
 	for (int i = 0; i < pRecord->GetRows(); ++i)
@@ -549,10 +590,11 @@ bool NFCPackModule::DeleteItem( const NFGUID& self, const std::string& strItemCo
 	}
 
 	int nItemType = m_pElementInfoModule->GetPropertyInt(strItemConfigID, NFrame::Item::ItemType());
-	if ( NFMsg::EItemType::EIT_NORMAL != nItemType )
-	{
-		return false;
-	}
+    PackTableType eBagType = GetPackBagType(nItemType);
+    if (eBagType != PackTableType::BagItemPack)
+    {
+        return -1;
+    }
 
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagItemPack ) );
 	if (!pRecord)
@@ -1145,7 +1187,8 @@ bool NFCPackModule::EnoughItem( const NFGUID& self, const std::string& strItemCo
     }
 
     int nItemType = m_pElementInfoModule->GetPropertyInt(strItemConfigID, NFrame::Item::ItemType());
-    if ( NFMsg::EItemType::EIT_NORMAL != nItemType )
+    PackTableType eBagType = GetPackBagType(nItemType);
+    if (eBagType != PackTableType::BagItemPack)
     {
         return false;
     }

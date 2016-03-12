@@ -156,6 +156,8 @@ int NFCHeroModule::OnObjectFightHeroEvent(const NFGUID& self, const std::string&
                             NFCDataList varSkillData = pSkillRecord->GetInitData();
                             varSkillData.SetInt(NFrame::Player::SkillTable_SkillLevel, nSkillLevel);
                             varSkillData.SetString(NFrame::Player::SkillTable_SkillID, strSkillID.data());
+
+                            pSkillRecord->AddRow(-1, varSkillData);
                         }
                     }
                 }

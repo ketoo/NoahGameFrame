@@ -77,6 +77,8 @@ public:
 	virtual bool SetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex, const int nLevel);
 	virtual int GetEquipElementLevel( const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex);
 
+    virtual PackTableType GetPackBagType(int nItemType);
+
 protected:
 
 	int FindItemRowByConfig(const NFGUID& self, const std::string& strItemConfigID);
