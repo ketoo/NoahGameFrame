@@ -918,66 +918,70 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent( const NFGUID& self, cons
 			NFMsg::RecordAddRowStruct* pAddRowData = xAddRecordRow.add_row_data();
 			pAddRowData->set_row(nRow);
 
-			//add row 需要完整的row
-            //FIXME:RECORD
-			/*for ( int i = 0; i < newVar.GetCount(); i++ )
+			NFCDataList varRowData;
+			NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, strRecordName);
+			if (pRecord->QueryRow(nRow, varRowData))
 			{
-				switch ( newVar.Type( i ) )
+				for (int i = 0; i < varRowData.GetCount(); i++)
 				{
-				case TDATA_INT:
+					switch (varRowData.Type(i))
+					{
+					case TDATA_INT:
 					{
 						//添加的时候数据要全s
-						int nValue = newVar.Int( i );
+						int nValue = varRowData.Int(i);
 						//if ( 0 != nValue )
 						{
 							NFMsg::RecordInt* pAddData = pAddRowData->add_record_int_list();
-							pAddData->set_col( i );
-							pAddData->set_row( nRow );
-							pAddData->set_data( nValue );
+							pAddData->set_col(i);
+							pAddData->set_row(nRow);
+							pAddData->set_data(nValue);
 						}
 					}
 					break;
-				case TDATA_FLOAT:
+					case TDATA_FLOAT:
 					{
-						float fValue = newVar.Float( i );
+						float fValue = varRowData.Float(i);
 						//if ( fValue > 0.001f  || fValue < -0.001f )
 						{
 							NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
-							pAddData->set_col( i );
-							pAddData->set_row( nRow );
-							pAddData->set_data( fValue );
+							pAddData->set_col(i);
+							pAddData->set_row(nRow);
+							pAddData->set_data(fValue);
 						}
 					}
 					break;
-				case TDATA_STRING:
+					case TDATA_STRING:
 					{
-						const std::string& str = newVar.String( i );
+						const std::string& str = varRowData.String(i);
 						//if (!str.empty())
 						{
 							NFMsg::RecordString* pAddData = pAddRowData->add_record_string_list();
-							pAddData->set_col( i );
-							pAddData->set_row( nRow );
-							pAddData->set_data( str );
+							pAddData->set_col(i);
+							pAddData->set_row(nRow);
+							pAddData->set_data(str);
 						}
 					}
 					break;
-				case TDATA_OBJECT:
+					case TDATA_OBJECT:
 					{
-						NFGUID identValue = newVar.Object( i );
+						NFGUID identValue = varRowData.Object(i);
 						//if (!identValue.IsNull())
 						{
 							NFMsg::RecordObject* pAddData = pAddRowData->add_record_object_list();
-							pAddData->set_col( i );
-							pAddData->set_row( nRow );
+							pAddData->set_col(i);
+							pAddData->set_row(nRow);
 
 							*pAddData->mutable_data() = NFToPB(identValue);
 						}
 					}
 					break;
-				default:
-					break;
+					default:
+						break;
+					}
 				}
-			}*/
+			}
+			
 
 
 			for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
