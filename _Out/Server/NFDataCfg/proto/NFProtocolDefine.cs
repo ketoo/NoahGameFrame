@@ -62,7 +62,7 @@ public class Block
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
-	public static readonly String Tag = "Tag"; // Int
+	public static readonly String Tag = "Tag"; // int
 	public static readonly String SpriteList = "SpriteList"; // string
 	public static readonly String SpritePath = "SpritePath"; // string
 	public static readonly String LeftSide = "LeftSide"; // string

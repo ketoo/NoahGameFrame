@@ -64,7 +64,7 @@ public:
 	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
 	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
 	// Property
-	static const std::string& Tag(){ static std::string xTag = "Tag"; return xTag; } // Int
+	static const std::string& Tag(){ static std::string xTag = "Tag"; return xTag; } // int
 	static const std::string& SpriteList(){ static std::string xSpriteList = "SpriteList"; return xSpriteList; } // string
 	static const std::string& SpritePath(){ static std::string xSpritePath = "SpritePath"; return xSpritePath; } // string
 	static const std::string& LeftSide(){ static std::string xLeftSide = "LeftSide"; return xLeftSide; } // string

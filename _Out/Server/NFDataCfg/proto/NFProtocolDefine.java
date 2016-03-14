@@ -53,7 +53,7 @@ public class Block {
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
 	// Property
-	public static final String Tag = "Tag"; // Int
+	public static final String Tag = "Tag"; // int
 	public static final String SpriteList = "SpriteList"; // string
 	public static final String SpritePath = "SpritePath"; // string
 	public static final String LeftSide = "LeftSide"; // string
