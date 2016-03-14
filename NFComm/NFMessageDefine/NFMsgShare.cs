@@ -1773,6 +1773,13 @@ namespace NFMsg
       get { return _Heroid; }
       set { _Heroid = value; }
     }
+    private int _FightPos;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"FightPos", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int FightPos
+    {
+      get { return _FightPos; }
+      set { _FightPos = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

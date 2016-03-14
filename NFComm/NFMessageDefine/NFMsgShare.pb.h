@@ -6103,20 +6103,30 @@ class ReqSetFightHero : public ::google::protobuf::Message {
   inline ::NFMsg::Ident* release_heroid();
   inline void set_allocated_heroid(::NFMsg::Ident* heroid);
 
+  // required int32 FightPos = 3;
+  inline bool has_fightpos() const;
+  inline void clear_fightpos();
+  static const int kFightPosFieldNumber = 3;
+  inline ::google::protobuf::int32 fightpos() const;
+  inline void set_fightpos(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqSetFightHero)
  private:
   inline void set_has_selfid();
   inline void clear_has_selfid();
   inline void set_has_heroid();
   inline void clear_has_heroid();
+  inline void set_has_fightpos();
+  inline void clear_has_fightpos();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::NFMsg::Ident* selfid_;
   ::NFMsg::Ident* heroid_;
+  ::google::protobuf::int32 fightpos_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -12405,6 +12415,28 @@ inline void ReqSetFightHero::set_allocated_heroid(::NFMsg::Ident* heroid) {
   } else {
     clear_has_heroid();
   }
+}
+
+// required int32 FightPos = 3;
+inline bool ReqSetFightHero::has_fightpos() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqSetFightHero::set_has_fightpos() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqSetFightHero::clear_has_fightpos() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqSetFightHero::clear_fightpos() {
+  fightpos_ = 0;
+  clear_has_fightpos();
+}
+inline ::google::protobuf::int32 ReqSetFightHero::fightpos() const {
+  return fightpos_;
+}
+inline void ReqSetFightHero::set_fightpos(::google::protobuf::int32 value) {
+  set_has_fightpos();
+  fightpos_ = value;
 }
 
 // -------------------------------------------------------------------

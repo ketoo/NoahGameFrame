@@ -311,6 +311,12 @@ enum BuildingListProduce
 	StateEndTime		= 7; // StateEndTime -- int
 }
 
+enum FightHeroList
+{
+	HeroGUID		= 0; // HeroGUID -- object
+	FightPos		= 1; // FightPos -- int
+}
+
 enum TileList
 {
 	TileID		= 0; // TileID -- int

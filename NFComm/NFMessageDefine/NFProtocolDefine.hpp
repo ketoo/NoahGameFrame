@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/03/11
+//    @Date             :    2016/03/14
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -65,6 +65,8 @@ public:
 	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
 	// Property
 	static const std::string& Tag(){ static std::string xTag = "Tag"; return xTag; } // Int
+	static const std::string& SpriteList(){ static std::string xSpriteList = "SpriteList"; return xSpriteList; } // string
+	static const std::string& SpritePath(){ static std::string xSpritePath = "SpritePath"; return xSpritePath; } // string
 	static const std::string& LeftSide(){ static std::string xLeftSide = "LeftSide"; return xLeftSide; } // string
 	static const std::string& RightSide(){ static std::string xRightSide = "RightSide"; return xRightSide; } // string
 	static const std::string& TopSide(){ static std::string xTopSide = "TopSide"; return xTopSide; } // string
@@ -73,6 +75,15 @@ public:
 	static const std::string& LeftDownSide(){ static std::string xLeftDownSide = "LeftDownSide"; return xLeftDownSide; } // string
 	static const std::string& RightTopSide(){ static std::string xRightTopSide = "RightTopSide"; return xRightTopSide; } // string
 	static const std::string& RightDownSide(){ static std::string xRightDownSide = "RightDownSide"; return xRightDownSide; } // string
+	static const std::string& LeftTopOutSide(){ static std::string xLeftTopOutSide = "LeftTopOutSide"; return xLeftTopOutSide; } // string
+	static const std::string& LeftDownOutSide(){ static std::string xLeftDownOutSide = "LeftDownOutSide"; return xLeftDownOutSide; } // string
+	static const std::string& RightTopOutSide(){ static std::string xRightTopOutSide = "RightTopOutSide"; return xRightTopOutSide; } // string
+	static const std::string& RightDownOutSide(){ static std::string xRightDownOutSide = "RightDownOutSide"; return xRightDownOutSide; } // string
+	static const std::string& GrassList(){ static std::string xGrassList = "GrassList"; return xGrassList; } // string
+	static const std::string& JoinList(){ static std::string xJoinList = "JoinList"; return xJoinList; } // string
+	static const std::string& CrackList(){ static std::string xCrackList = "CrackList"; return xCrackList; } // string
+	static const std::string& TreasureList(){ static std::string xTreasureList = "TreasureList"; return xTreasureList; } // string
+	static const std::string& TreeRootList(){ static std::string xTreeRootList = "TreeRootList"; return xTreeRootList; } // string
 	// Record
 
 };
@@ -741,6 +752,7 @@ public:
 	static const std::string& R_ChatGroup(){ static std::string xChatGroup = "ChatGroup"; return xChatGroup;}
 	static const std::string& R_BuildingList(){ static std::string xBuildingList = "BuildingList"; return xBuildingList;}
 	static const std::string& R_BuildingListProduce(){ static std::string xBuildingListProduce = "BuildingListProduce"; return xBuildingListProduce;}
+	static const std::string& R_FightHeroList(){ static std::string xFightHeroList = "FightHeroList"; return xFightHeroList;}
 	static const std::string& R_TileList(){ static std::string xTileList = "TileList"; return xTileList;}
 
 	enum PlayerViewItem
@@ -958,6 +970,12 @@ public:
 		BuildingListProduce_PosZ		= 5, // PosZ -- int
 		BuildingListProduce_StateStartTime		= 6, // StateStartTime -- int
 		BuildingListProduce_StateEndTime		= 7, // StateEndTime -- int
+	};
+
+	enum FightHeroList
+	{
+		FightHeroList_HeroGUID		= 0, // HeroGUID -- object
+		FightHeroList_FightPos		= 1, // FightPos -- int
 	};
 
 	enum TileList

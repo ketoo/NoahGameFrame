@@ -482,6 +482,7 @@ message ReqSetFightHero
 {	
 	required Ident		selfid          = 1;//角色ID
 	required Ident		Heroid			= 2;//
+	required int32		FightPos	    = 3;//
 }
 
 //EGEC_WEAR_EQUIP								= 509;		 // 装备创戴

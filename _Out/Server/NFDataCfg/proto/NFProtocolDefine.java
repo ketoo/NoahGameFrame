@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/03/11
+//    @Date             :    2016/03/14
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -54,6 +54,8 @@ public class Block {
 	public static final String ConfigID = "ConfigID"; // string
 	// Property
 	public static final String Tag = "Tag"; // Int
+	public static final String SpriteList = "SpriteList"; // string
+	public static final String SpritePath = "SpritePath"; // string
 	public static final String LeftSide = "LeftSide"; // string
 	public static final String RightSide = "RightSide"; // string
 	public static final String TopSide = "TopSide"; // string
@@ -62,6 +64,15 @@ public class Block {
 	public static final String LeftDownSide = "LeftDownSide"; // string
 	public static final String RightTopSide = "RightTopSide"; // string
 	public static final String RightDownSide = "RightDownSide"; // string
+	public static final String LeftTopOutSide = "LeftTopOutSide"; // string
+	public static final String LeftDownOutSide = "LeftDownOutSide"; // string
+	public static final String RightTopOutSide = "RightTopOutSide"; // string
+	public static final String RightDownOutSide = "RightDownOutSide"; // string
+	public static final String GrassList = "GrassList"; // string
+	public static final String JoinList = "JoinList"; // string
+	public static final String CrackList = "CrackList"; // string
+	public static final String TreasureList = "TreasureList"; // string
+	public static final String TreeRootList = "TreeRootList"; // string
 	// Record
 
 }
@@ -696,6 +707,7 @@ public class Player {
 	public static final String R_ChatGroup = "ChatGroup";
 	public static final String R_BuildingList = "BuildingList";
 	public static final String R_BuildingListProduce = "BuildingListProduce";
+	public static final String R_FightHeroList = "FightHeroList";
 	public static final String R_TileList = "TileList";
 
 	public enum PlayerViewItem
@@ -913,6 +925,12 @@ public class Player {
 		PosZ		= 5, // PosZ -- int
 		StateStartTime		= 6, // StateStartTime -- int
 		StateEndTime		= 7, // StateEndTime -- int
+	};
+
+	public enum FightHeroList
+	{
+		HeroGUID		= 0, // HeroGUID -- object
+		FightPos		= 1, // FightPos -- int
 	};
 
 	public enum TileList

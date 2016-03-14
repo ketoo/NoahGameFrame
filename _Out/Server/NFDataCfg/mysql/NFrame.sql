@@ -125,6 +125,7 @@ ALTER TABLE `Player` ADD `TaskMonsterList` BLOB COMMENT '任务杀怪表';
 ALTER TABLE `Player` ADD `TaskList` BLOB COMMENT '任务表';
 ALTER TABLE `Player` ADD `BuildingList` BLOB COMMENT '';
 ALTER TABLE `Player` ADD `BuildingListProduce` BLOB COMMENT '';
+ALTER TABLE `Player` ADD `FightHeroList` BLOB COMMENT '';
 ALTER TABLE `Player` ADD `TileList` BLOB COMMENT '';
 ALTER TABLE `Shop` ADD `Type` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `Shop` ADD `ItemID` varchar(128) DEFAULT '' COMMENT '';

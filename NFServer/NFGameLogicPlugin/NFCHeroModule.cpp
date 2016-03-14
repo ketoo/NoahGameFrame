@@ -346,6 +346,44 @@ void NFCHeroModule::OnSetFightHeroProcess( const int nSockIndex, const int nMsgI
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSetFightHero);
 
-	const NFGUID xHero = NFINetModule::PBToNF(xMsg.heroid());
-	SetFightHero(nPlayerID, xHero);
+    const NFGUID xHero = NFINetModule::PBToNF(xMsg.heroid());
+    const int nFightPos = xMsg.fightpos();
+
+    NF_SHARE_PTR<NFIRecord> pHeroList = m_pKernelModule->FindRecord(nPlayerID, NFrame::Player::R_PlayerHero());
+    if (!pHeroList.get())
+    {
+        return;
+    }
+
+    NFCDataList varHeroList;
+    if (pHeroList->FindObject(NFrame::Player::FightHeroList::FightHeroList_HeroGUID, xHero, varHeroList) <=0 )
+    {
+        return;
+    }
+    
+    NF_SHARE_PTR<NFIRecord> pFightHeroList = m_pKernelModule->FindRecord(nPlayerID, NFrame::Player::R_FightHeroList());
+    if (pFightHeroList.get())
+    {
+        NFCDataList varRowList;
+        if (pFightHeroList->FindInt(NFrame::Player::FightHeroList::FightHeroList_FightPos, nFightPos, varRowList) > 0)
+        {
+            int nRow = varRowList.Int(0);
+            if (pFightHeroList->SetObject(nRow, NFrame::Player::FightHeroList::FightHeroList_HeroGUID, xHero))
+            {
+                SetFightHero(nPlayerID, xHero);
+            }
+        }
+        else
+        {
+            NFCDataList varList = pFightHeroList->GetInitData();
+            
+            varList.SetObject(NFrame::Player::FightHeroList::FightHeroList_HeroGUID, xHero);
+            varList.SetInt(NFrame::Player::FightHeroList::FightHeroList_FightPos, nFightPos);
+
+            if (pFightHeroList->AddRow(-1, varList) < 0)
+            {
+                SetFightHero(nPlayerID, xHero);
+            }
+        }
+    }
 }

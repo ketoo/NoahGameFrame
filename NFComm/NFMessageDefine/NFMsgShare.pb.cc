@@ -1084,9 +1084,10 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckElementlevelToEquip));
   ReqSetFightHero_descriptor_ = file->message_type(50);
-  static const int ReqSetFightHero_offsets_[2] = {
+  static const int ReqSetFightHero_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSetFightHero, selfid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSetFightHero, heroid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSetFightHero, fightpos_),
   };
   ReqSetFightHero_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -1576,20 +1577,21 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "-\n\014eElementType\030\003 \002(\0162\027.NFMsg.EGameEleme"
     "ntType\"e\n\026AckElementlevelToEquip\022\034\n\006self"
     "id\030\001 \002(\0132\014.NFMsg.Ident\022\035\n\007equipid\030\002 \002(\0132"
-    "\014.NFMsg.Ident\022\016\n\006result\030\003 \002(\005\"M\n\017ReqSetF"
+    "\014.NFMsg.Ident\022\016\n\006result\030\003 \002(\005\"_\n\017ReqSetF"
     "ightHero\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\034"
-    "\n\006Heroid\030\002 \002(\0132\014.NFMsg.Ident\"k\n\014ReqWearE"
-    "quip\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\035\n\007eq"
-    "uipid\030\002 \002(\0132\014.NFMsg.Ident\022\036\n\010Targetid\030\003 "
-    "\002(\0132\014.NFMsg.Ident\"k\n\014TakeOffEquip\022\034\n\006sel"
-    "fid\030\001 \002(\0132\014.NFMsg.Ident\022\035\n\007equipid\030\002 \002(\013"
-    "2\014.NFMsg.Ident\022\036\n\010Targetid\030\003 \002(\0132\014.NFMsg"
-    ".Ident\"D\n\016ReqMiningTitle\022\034\n\006selfid\030\001 \002(\013"
-    "2\014.NFMsg.Ident\022\t\n\001x\030\002 \002(\005\022\t\n\001y\030\003 \002(\005\"\237\001\n"
-    "\013ReqSendMail\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ide"
-    "nt\022\036\n\010reciever\030\002 \002(\0132\014.NFMsg.Ident\022$\n\tit"
-    "em_list\030\003 \003(\0132\021.NFMsg.ItemStruct\022,\n\rcurr"
-    "ency_list\030\004 \003(\0132\025.NFMsg.CurrencyStruct", 6798);
+    "\n\006Heroid\030\002 \002(\0132\014.NFMsg.Ident\022\020\n\010FightPos"
+    "\030\003 \002(\005\"k\n\014ReqWearEquip\022\034\n\006selfid\030\001 \002(\0132\014"
+    ".NFMsg.Ident\022\035\n\007equipid\030\002 \002(\0132\014.NFMsg.Id"
+    "ent\022\036\n\010Targetid\030\003 \002(\0132\014.NFMsg.Ident\"k\n\014T"
+    "akeOffEquip\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Iden"
+    "t\022\035\n\007equipid\030\002 \002(\0132\014.NFMsg.Ident\022\036\n\010Targ"
+    "etid\030\003 \002(\0132\014.NFMsg.Ident\"D\n\016ReqMiningTit"
+    "le\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\t\n\001x\030\002 "
+    "\002(\005\022\t\n\001y\030\003 \002(\005\"\237\001\n\013ReqSendMail\022\034\n\006selfid"
+    "\030\001 \002(\0132\014.NFMsg.Ident\022\036\n\010reciever\030\002 \002(\0132\014"
+    ".NFMsg.Ident\022$\n\titem_list\030\003 \003(\0132\021.NFMsg."
+    "ItemStruct\022,\n\rcurrency_list\030\004 \003(\0132\025.NFMs"
+    "g.CurrencyStruct", 6816);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -17451,6 +17453,7 @@ void AckElementlevelToEquip::Swap(AckElementlevelToEquip* other) {
 #ifndef _MSC_VER
 const int ReqSetFightHero::kSelfidFieldNumber;
 const int ReqSetFightHero::kHeroidFieldNumber;
+const int ReqSetFightHero::kFightPosFieldNumber;
 #endif  // !_MSC_VER
 
 ReqSetFightHero::ReqSetFightHero()
@@ -17473,6 +17476,7 @@ void ReqSetFightHero::SharedCtor() {
   _cached_size_ = 0;
   selfid_ = NULL;
   heroid_ = NULL;
+  fightpos_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -17516,6 +17520,7 @@ void ReqSetFightHero::Clear() {
     if (has_heroid()) {
       if (heroid_ != NULL) heroid_->::NFMsg::Ident::Clear();
     }
+    fightpos_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -17547,6 +17552,22 @@ bool ReqSetFightHero::MergePartialFromCodedStream(
          parse_Heroid:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_heroid()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(24)) goto parse_FightPos;
+        break;
+      }
+
+      // required int32 FightPos = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_FightPos:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &fightpos_)));
+          set_has_fightpos();
         } else {
           goto handle_uninterpreted;
         }
@@ -17584,6 +17605,11 @@ void ReqSetFightHero::SerializeWithCachedSizes(
       2, this->heroid(), output);
   }
 
+  // required int32 FightPos = 3;
+  if (has_fightpos()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->fightpos(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -17604,6 +17630,11 @@ void ReqSetFightHero::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         2, this->heroid(), target);
+  }
+
+  // required int32 FightPos = 3;
+  if (has_fightpos()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->fightpos(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -17629,6 +17660,13 @@ int ReqSetFightHero::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->heroid());
+    }
+
+    // required int32 FightPos = 3;
+    if (has_fightpos()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->fightpos());
     }
 
   }
@@ -17664,6 +17702,9 @@ void ReqSetFightHero::MergeFrom(const ReqSetFightHero& from) {
     if (from.has_heroid()) {
       mutable_heroid()->::NFMsg::Ident::MergeFrom(from.heroid());
     }
+    if (from.has_fightpos()) {
+      set_fightpos(from.fightpos());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -17681,7 +17722,7 @@ void ReqSetFightHero::CopyFrom(const ReqSetFightHero& from) {
 }
 
 bool ReqSetFightHero::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   if (has_selfid()) {
     if (!this->selfid().IsInitialized()) return false;
@@ -17696,6 +17737,7 @@ void ReqSetFightHero::Swap(ReqSetFightHero* other) {
   if (other != this) {
     std::swap(selfid_, other->selfid_);
     std::swap(heroid_, other->heroid_);
+    std::swap(fightpos_, other->fightpos_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

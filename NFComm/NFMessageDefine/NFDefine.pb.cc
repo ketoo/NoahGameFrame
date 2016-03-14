@@ -33,6 +33,7 @@ const ::google::protobuf::EnumDescriptor* ETaskState_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ETaskType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EBattleType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EShopType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* EFightPos_descriptor_ = NULL;
 
 }  // namespace
 
@@ -56,6 +57,7 @@ void protobuf_AssignDesc_NFDefine_2eproto() {
   ETaskType_descriptor_ = file->enum_type(10);
   EBattleType_descriptor_ = file->enum_type(11);
   EShopType_descriptor_ = file->enum_type(12);
+  EFightPos_descriptor_ = file->enum_type(13);
 }
 
 namespace {
@@ -285,9 +287,12 @@ void protobuf_AddDesc_NFDefine_2eproto() {
     "_DIAMOND\020\006\022\024\n\020TASK_ARENA_COUNT\020\007\022\033\n\027TASK"
     "_KILL_MONSTER_COUNT\020\010\022 \n\034TASK_KILL_SOME_"
     "MONSTER_COUNT\020\t*5\n\013EBattleType\022\021\n\rBATTLE"
-    "_SINGLE\020\000\022\023\n\017BATTLE_PVE_TEAM\020\001*W\n\tEShopT"
-    "ype\022\020\n\014EST_BUILDING\020\001\022\014\n\010EST_GOLD\020\002\022\017\n\013E"
-    "ST_DIAMOND\020\003\022\n\n\006EST_SP\020\004\022\r\n\tEST_Equip\020\005", 8239);
+    "_SINGLE\020\000\022\023\n\017BATTLE_PVE_TEAM\020\001*\201\001\n\tEShop"
+    "Type\022\020\n\014EST_BUILDING\020\001\022\014\n\010EST_GOLD\020\002\022\017\n\013"
+    "EST_DIAMOND\020\003\022\n\n\006EST_SP\020\004\022\r\n\tEST_EQUIP\020\005"
+    "\022\013\n\007EST_GEM\020\006\022\014\n\010EST_Hero\020\007\022\r\n\tEST_Other"
+    "\020\010*I\n\tEFightPos\022\016\n\nEFP_MINER1\020\000\022\r\n\tEFP_H"
+    "ERO1\020\001\022\016\n\nEFP_MINER2\020\002\022\r\n\tEFP_HERO2\020\003", 8357);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFDefine.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFDefine_2eproto);
@@ -743,6 +748,25 @@ bool EShopType_IsValid(int value) {
     case 3:
     case 4:
     case 5:
+    case 6:
+    case 7:
+    case 8:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* EFightPos_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return EFightPos_descriptor_;
+}
+bool EFightPos_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
       return true;
     default:
       return false;

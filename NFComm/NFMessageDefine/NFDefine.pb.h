@@ -531,11 +531,14 @@ enum EShopType {
   EST_GOLD = 2,
   EST_DIAMOND = 3,
   EST_SP = 4,
-  EST_Equip = 5
+  EST_EQUIP = 5,
+  EST_GEM = 6,
+  EST_Hero = 7,
+  EST_Other = 8
 };
 bool EShopType_IsValid(int value);
 const EShopType EShopType_MIN = EST_BUILDING;
-const EShopType EShopType_MAX = EST_Equip;
+const EShopType EShopType_MAX = EST_Other;
 const int EShopType_ARRAYSIZE = EShopType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EShopType_descriptor();
@@ -547,6 +550,27 @@ inline bool EShopType_Parse(
     const ::std::string& name, EShopType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<EShopType>(
     EShopType_descriptor(), name, value);
+}
+enum EFightPos {
+  EFP_MINER1 = 0,
+  EFP_HERO1 = 1,
+  EFP_MINER2 = 2,
+  EFP_HERO2 = 3
+};
+bool EFightPos_IsValid(int value);
+const EFightPos EFightPos_MIN = EFP_MINER1;
+const EFightPos EFightPos_MAX = EFP_HERO2;
+const int EFightPos_ARRAYSIZE = EFightPos_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* EFightPos_descriptor();
+inline const ::std::string& EFightPos_Name(EFightPos value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EFightPos_descriptor(), value);
+}
+inline bool EFightPos_Parse(
+    const ::std::string& name, EFightPos* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EFightPos>(
+    EFightPos_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -616,6 +640,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EBattleType>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EShopType>() {
   return ::NFMsg::EShopType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EFightPos>() {
+  return ::NFMsg::EFightPos_descriptor();
 }
 
 }  // namespace google

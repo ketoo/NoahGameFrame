@@ -714,6 +714,12 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EIT_CURRENCY", Value=8)]
       EIT_CURRENCY = 8,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_ITEM_REBORN", Value=9)]
+      EIT_ITEM_REBORN = 9,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_ITEM_POSITION", Value=10)]
+      EIT_ITEM_POSITION = 10,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EIT_WOOD", Value=100)]
       EIT_WOOD = 100,
             
@@ -819,14 +825,8 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_GUILD_DIAMOND", Value=6)]
       EGIT_ITEM_GUILD_DIAMOND = 6,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_POSITION", Value=7)]
-      EGIT_ITEM_POSITION = 7,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_WORLD_HORN", Value=8)]
-      EGIT_ITEM_WORLD_HORN = 8,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_REBORN", Value=9)]
-      EGIT_ITEM_REBORN = 9
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_WORLD_HORN", Value=7)]
+      EGIT_ITEM_WORLD_HORN = 7
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGameItemExpiredType")]
@@ -935,6 +935,52 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"BATTLE_PVE_TEAM", Value=1)]
       BATTLE_PVE_TEAM = 1
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EShopType")]
+    public enum EShopType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_BUILDING", Value=1)]
+      EST_BUILDING = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_GOLD", Value=2)]
+      EST_GOLD = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_DIAMOND", Value=3)]
+      EST_DIAMOND = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_SP", Value=4)]
+      EST_SP = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_EQUIP", Value=5)]
+      EST_EQUIP = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_GEM", Value=6)]
+      EST_GEM = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_Hero", Value=7)]
+      EST_Hero = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_Other", Value=8)]
+      EST_Other = 8
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EFightPos")]
+    public enum EFightPos
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EFP_MINER1", Value=0)]
+      EFP_MINER1 = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EFP_HERO1", Value=1)]
+      EFP_HERO1 = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EFP_MINER2", Value=2)]
+      EFP_MINER2 = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EFP_HERO2", Value=3)]
+      EFP_HERO2 = 3
     }
   
 }
