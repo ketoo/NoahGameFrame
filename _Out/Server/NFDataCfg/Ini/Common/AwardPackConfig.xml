@@ -45,7 +45,7 @@
 	</AwardPack_Hero_1005>
 	
 	<AwardPack_Hero_1006 Name="AwardPack_Hero_1006">
-		<ItemInfo Name="Player_1_0" Count="1" type="Hero"/>
+		<ItemInfo Name="Player_1_0" Count="1" IsHero="1"/>
 	</AwardPack_Hero_1006>
 
 

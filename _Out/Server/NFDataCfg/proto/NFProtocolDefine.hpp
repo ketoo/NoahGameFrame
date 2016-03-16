@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/03/14
+//    @Date             :    2016/03/16
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -557,6 +557,7 @@ public:
 	static const std::string& Script(){ static std::string xScript = "Script"; return xScript; } // string
 	static const std::string& Extend(){ static std::string xExtend = "Extend"; return xExtend; } // string
 	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
+	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
 	// Record
 
 };
@@ -640,6 +641,8 @@ public:
 	static const std::string& LastAttacker(){ static std::string xLastAttacker = "LastAttacker"; return xLastAttacker; } // object
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
 	static const std::string& EquipIDRef(){ static std::string xEquipIDRef = "EquipIDRef"; return xEquipIDRef; } // string
+	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
+	static const std::string& ShowCard(){ static std::string xShowCard = "ShowCard"; return xShowCard; } // string
 	// Record
 
 };

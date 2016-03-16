@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/03/14
+//    @Date             :    2016/03/16
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -541,6 +541,7 @@ public class Item
 	public static readonly String Script = "Script"; // string
 	public static readonly String Extend = "Extend"; // string
 	public static readonly String Icon = "Icon"; // string
+	public static readonly String ShowName = "ShowName"; // string
 	// Record
 
 }
@@ -622,6 +623,8 @@ public class NPC
 	public static readonly String LastAttacker = "LastAttacker"; // object
 	public static readonly String ShowName = "ShowName"; // string
 	public static readonly String EquipIDRef = "EquipIDRef"; // string
+	public static readonly String Icon = "Icon"; // string
+	public static readonly String ShowCard = "ShowCard"; // string
 	// Record
 
 }
