@@ -35,17 +35,24 @@ bool NFCHeroModule::AfterInit()
     m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
+    m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>("NFCCommonConfigModule");
     
     assert( NULL != m_pKernelModule );
 	assert( NULL != m_pLogicClassModule );
     assert( NULL != m_pGameServerNet_ServerModule);
     assert( NULL != m_pUUIDModule);
-    assert( NULL != m_pElementInfoModule);
+    assert(NULL != m_pElementInfoModule);
+    assert(NULL != m_pCommonConfigModule);
 
 	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGameMsgID::EGEC_REQ_SET_FIGHT_HERO, this, &NFCHeroModule::OnSetFightHeroProcess)){ return false;}
 
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCHeroModule::OnObjectClassEvent);
 
+
+    std::string strEquipPath = pPluginManager->GetConfigPath();
+
+    strEquipPath += "NFDataCfg/Ini/Common/FightHeroPos.xml";
+    m_pCommonConfigModule->LoadConfig(strEquipPath);
     return true;
 }
 
@@ -342,7 +349,45 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xID)
     return m_pKernelModule->SetPropertyObject(self, "FightHero", xID);
 }
 
-void NFCHeroModule::OnSetFightHeroProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+bool NFCHeroModule::SwichFightHero(const NFGUID& self, const NFGUID& xID, const int nFightPos)
+{
+    switch (nFightPos)
+    {
+    case NFMsg::EFightPos::EFP_MINER1:
+    case NFMsg::EFightPos::EFP_HERO1:
+    {
+        const int nEctype = m_pCommonConfigModule->GetAttributeInt("FightHeroPos", lexical_cast<std::string>(nFightPos), "EctypeID");
+        const int nNowScnceId = m_pKernelModule->GetPropertyInt(self, "SceneID");
+        if (nEctype > 0 && nNowScnceId != nEctype)
+        {
+            NFCDataList varEntry;
+            varEntry << self;
+            varEntry << NFINT64(0);
+            varEntry << nEctype;
+            varEntry << -1;
+            m_pKernelModule->DoEvent(self, NFED_ON_CLIENT_ENTER_SCENE, varEntry);
+        }
+        SetFightHero(self, xID);
+    }
+        break;
+    case NFMsg::EFightPos::EFP_MINER2:
+    case NFMsg::EFightPos::EFP_HERO2:
+    {
+        NFGUID xGuild = m_pKernelModule->GetPropertyObject(self, NFrame::Player::GuildID());
+        if (m_pGuildEctypeModule->ApplyEnterGuilEctype(self, xGuild))
+        {
+            SetFightHero(self, xID);
+        }
+    }
+    break;
+    default:
+        break;
+    }
+
+    return true;
+}
+
+void NFCHeroModule::OnSetFightHeroProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSetFightHero);
 
@@ -370,7 +415,7 @@ void NFCHeroModule::OnSetFightHeroProcess( const int nSockIndex, const int nMsgI
             int nRow = varRowList.Int(0);
             if (pFightHeroList->SetObject(nRow, NFrame::Player::FightHeroList::FightHeroList_HeroGUID, xHero))
             {
-                SetFightHero(nPlayerID, xHero);
+                SwichFightHero(nPlayerID, xHero, nFightPos);
             }
         }
         else
@@ -382,7 +427,7 @@ void NFCHeroModule::OnSetFightHeroProcess( const int nSockIndex, const int nMsgI
 
             if (pFightHeroList->AddRow(-1, varList) < 0)
             {
-                SetFightHero(nPlayerID, xHero);
+                SwichFightHero(nPlayerID, xHero, nFightPos);
             }
         }
     }

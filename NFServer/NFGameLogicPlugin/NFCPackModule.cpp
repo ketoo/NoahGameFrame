@@ -458,6 +458,7 @@ PackTableType NFCPackModule::GetPackBagType(int nItemType)
     switch (nItemType)
     {
     case NFMsg::EItemType::EIT_NORMAL:
+        break;
     case NFMsg::EItemType::EIT_EQUIP:
     {
         return PackTableType::BagEquipPack;

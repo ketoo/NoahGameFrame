@@ -30,6 +30,8 @@
 #include "NFCCommonConfigModule.h"
 #include "NFCGmModule.h"
 #include "NFCTileModule.h"
+#include "NFCHeroItemConsumeProcessModule.h"
+#include "NFCNormalConsumeProcessModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -71,6 +73,8 @@ void NFGameLogicPlugin::Install()
     REGISTER_MODULE(pPluginManager, NFCItemConsumeManagerModule)
     REGISTER_MODULE(pPluginManager, NFCPotionItemConsumeProcessModule)
     REGISTER_MODULE(pPluginManager, NFCCardItemConsumeProcessModule)
+    REGISTER_MODULE(pPluginManager, NFCHeroItemConsumeProcessModule)
+    REGISTER_MODULE(pPluginManager, NFCNormalConsumeProcessModule)
     //Continue to ad other item types of consumption
 
     REGISTER_MODULE(pPluginManager, NFCSkillConsumeManagerModule)
@@ -110,6 +114,8 @@ void NFGameLogicPlugin::Uninstall()
     UNREGISTER_MODULE(pPluginManager, NFCBriefSkillConsumeProcessModule)
     UNREGISTER_MODULE(pPluginManager, NFCSkillConsumeManagerModule)
 
+    UNREGISTER_MODULE(pPluginManager, NFCNormalConsumeProcessModule)
+    UNREGISTER_MODULE(pPluginManager, NFCHeroItemConsumeProcessModule)
     UNREGISTER_MODULE(pPluginManager, NFCCardItemConsumeProcessModule)
     UNREGISTER_MODULE(pPluginManager, NFCPotionItemConsumeProcessModule)
     UNREGISTER_MODULE(pPluginManager, NFCItemConsumeManagerModule)

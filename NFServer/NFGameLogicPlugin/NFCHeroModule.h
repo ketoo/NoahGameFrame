@@ -20,6 +20,8 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFICommonConfigModule.h"
+#include "NFComm/NFPluginModule/NFIGuildEctypeModule.h"
 
 class NFCHeroModule
     : public NFIHeroModule
@@ -46,6 +48,8 @@ public:
     virtual bool HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex);
     virtual bool SetFightHero(const NFGUID& self, const NFGUID& xID);
 
+    virtual bool SwichFightHero(const NFGUID& self, const NFGUID& xID, const int nFightPos);
+
 protected:
 	void OnSetFightHeroProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
     int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
@@ -60,6 +64,8 @@ protected:
 	NFIKernelModule* m_pKernelModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     NFIUUIDModule* m_pUUIDModule;
+    NFICommonConfigModule* m_pCommonConfigModule;
+    NFIGuildEctypeModule* m_pGuildEctypeModule;
 private:
 };
 

@@ -212,52 +212,47 @@ bool NFCItemModule::ConsumeDataItemProperty( const NFGUID& self, const std::stri
     const int nGold = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::Gold());
     const int nMoney = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::Money());
    
-    if (!m_pPropertyModule->EnoughDiamond(self, nGold))
+    if (nGold > 0 && !m_pPropertyModule->EnoughDiamond(self, nGold))
     {
         return false;
     }
 
-    if (!m_pPropertyModule->EnoughHP(self, nHP))
+    if (nHP > 0 && !m_pPropertyModule->EnoughHP(self, nHP))
     {
         return false;
     }
 
-    if (!m_pPropertyModule->EnoughMoney(self, nMoney))
+    if (nMoney > 0 && !m_pPropertyModule->EnoughMoney(self, nMoney))
     {
         return false;
     }
 
-    if (!m_pPropertyModule->EnoughMP(self, nMP))
+    if (nMP > 0 && !m_pPropertyModule->EnoughMP(self, nMP))
     {
         return false;
     }
 
-    if (!m_pPropertyModule->EnoughSP(self, nSP))
+    if (nSP > 0 && !m_pPropertyModule->EnoughSP(self, nSP))
     {
         return false;
     }
 
-    if (!m_pPropertyModule->ConsumeDiamond(self, nGold))
+    if (nHP > 0 && !m_pPropertyModule->ConsumeHP(self, nHP))
     {
         return false;
     }
 
-    if (!m_pPropertyModule->ConsumeHP(self, nHP))
+    if (nMoney > 0 && !m_pPropertyModule->ConsumeMoney(self, nMoney))
     {
         return false;
     }
 
-    if (!m_pPropertyModule->ConsumeMoney(self, nMoney))
+    if (nMP > 0 && !m_pPropertyModule->ConsumeMP(self, nMP))
     {
         return false;
     }
 
-    if (!m_pPropertyModule->ConsumeMP(self, nMP))
-    {
-        return false;
-    }
-
-    if (!m_pPropertyModule->ConsumeSP(self, nSP))
+    if (nSP > 0 && !m_pPropertyModule->ConsumeSP(self, nSP))
     {
         return false;
     }
@@ -273,8 +268,8 @@ bool NFCItemModule::DoAwardPack( const NFGUID& self, const std::string& strAward
     for (int i = 0; i < xList.size(); ++i)
     {
         const std::string& strItemID = xList[i];
-        const int nCout = m_pCommonConfigModule->GetAttributeInt("strAwardID", strItemID, "Count");
-        const int nIsHero = m_pCommonConfigModule->GetAttributeInt("strAwardID", strItemID, "IsHero");
+        const int nCout = m_pCommonConfigModule->GetAttributeInt(strAwardPack, strItemID, "Count");
+        const int nIsHero = m_pCommonConfigModule->GetAttributeInt(strAwardPack, strItemID, "IsHero");
         if (m_pElementInfoModule->ExistElement(strItemID))
         {
             if (nIsHero > 0)
