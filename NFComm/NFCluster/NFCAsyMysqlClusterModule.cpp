@@ -138,7 +138,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
         {
             if (pDriver->Updata(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
             {
-                xparam.nRet = -1;
+                xparam.nRet = 0;
             }
         }
         break;
@@ -146,7 +146,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
         {
             if (pDriver->Query(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
             {
-                xparam.nRet = -1;
+                xparam.nRet = 0;
             }
         }
         break;
@@ -154,7 +154,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
         {
             if (pDriver->Select(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
             {
-                xparam.nRet = -1;
+                xparam.nRet = 0;
             }
         }
         break;
@@ -162,7 +162,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
         {
             if (pDriver->Delete(xparam.strRecordName, xparam.strKey))
             {
-                xparam.nRet = -1;
+                xparam.nRet = 0;
             }
         }
         break;
@@ -172,7 +172,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
             if (pDriver->Exists(xparam.strRecordName, xparam.strKey, bExit))
             {
                 xparam.bExit = bExit;
-                xparam.nRet = -1;
+                xparam.nRet = 0;
             }
         }
         break;
@@ -180,7 +180,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent( const NFGUID& self, const int event, 
         {
             if (pDriver->Keys(xparam.strRecordName, xparam.strKey, xparam.valueVec))
             {
-                xparam.nRet = -1;
+                xparam.nRet = 0;
             }
         }
         break;

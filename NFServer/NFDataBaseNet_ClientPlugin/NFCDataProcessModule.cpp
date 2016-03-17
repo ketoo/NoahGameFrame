@@ -69,6 +69,12 @@ bool NFCDataProcessModule::AfterInit()
     const std::string& mstrSQLPWD = m_pElementInfoModule->GetPropertyString(strConfigName, "SqlPwd");
 
     bool bConnect = m_pClusterSQLModule->AddMysqlServer(nID, "", mstrSQLIP, mnSQLPort, mstrSQLName, mstrSQLUser, mstrSQLPWD);
+
+    if (!m_pAsyClusterSQLModule->StartActorPool(50))
+    {
+        return false;
+    }
+
     m_pAsyClusterSQLModule->AddMysqlServer(nID, "", mstrSQLIP, mnSQLPort, mstrSQLName, mstrSQLUser, mstrSQLPWD);
 
     RegisterAutoSave(NFrame::Player::ThisName());
