@@ -291,7 +291,7 @@ int NFCUrlClientModule::HttpRequestAsyEnd(const NFGUID& self, const int nFormAct
     }
 
     // std::function ÓÐÖØÔØoperator bool
-    if (pReqData->mFunRsp)
+    if (!pReqData->mFunRsp)
     {
         return -3;
     }

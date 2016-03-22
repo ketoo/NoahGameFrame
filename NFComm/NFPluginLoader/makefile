@@ -19,25 +19,25 @@ LIB =
 LDFLAGS = 
 SolutionDir = ../../
 
-INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/External/
+INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/Theron/Include/ -I$(SolutionDir)/Dependencies/Theron/Include/External/
 CFLAGS_DEBUG_X64 = $(CFLAGS) -std=c++11 -g -D_X64 -D_DEBUG -D_CONSOLE -DNF_DYNAMIC_PLUGIN -DGOOGLE_GLOG_DLL_DECL=
 RESINC_DEBUG_X64 = $(RESINC)
 RCFLAGS_DEBUG_X64 = $(RCFLAGS)
-LIBDIR_DEBUG_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Debug/ -L$(SolutionDir)/Dependencies/lib/Debug/ -L$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/
-LIB_DEBUG_X64 = $(LIB)$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_system-gcc48-mt-s-1_53.a $(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_thread-gcc48-mt-s-1_53.a $(SolutionDir)/Dependencies/lib/Debug/libtherond.a
+LIBDIR_DEBUG_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Debug/ -L$(SolutionDir)/Dependencies/lib/Debug/ 
+LIB_DEBUG_X64 = $(LIB)  $(SolutionDir)/Dependencies/lib/Debug/libtherond.a
 LDFLAGS_DEBUG_X64 = $(LDFLAGS) -ldl -lpthread
-OBJDIR_DEBUG_X64 = .objs
+OBJDIR_DEBUG_X64 = .objs_d
 DEP_DEBUG_X64 = 
 OUT_DEBUG_X64 = $(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d
 
-INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/External/
+INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/Theron/Include/ -I$(SolutionDir)/Dependencies/Theron/Include/External/
 CFLAGS_RELEASE_X64 = $(CFLAGS) -std=c++11 -D_X64 -DNDEBUG -D_CONSOLE -DNF_DYNAMIC_PLUGIN
 RESINC_RELEASE_X64 = $(RESINC)
 RCFLAGS_RELEASE_X64 = $(RCFLAGS)
-LIBDIR_RELEASE_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Release/ -L$(SolutionDir)/Dependencies/lib/Release/ -L$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/
-LIB_RELEASE_X64 = $(LIB)$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_system-gcc48-mt-s-1_53.a $(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/libboost_thread-gcc48-mt-s-1_53.a $(SolutionDir)/Dependencies/lib/Release/libtheron.a
+LIBDIR_RELEASE_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Release/ -L$(SolutionDir)/Dependencies/lib/Release/ 
+LIB_RELEASE_X64 = $(LIB)$  $(SolutionDir)/Dependencies/lib/Release/libtheron.a
 LDFLAGS_RELEASE_X64 = $(LDFLAGS) -ldl -lpthread
-OBJDIR_RELEASE_X64 = .objs
+OBJDIR_RELEASE_X64 = .objs_r
 DEP_RELEASE_X64 = 
 OUT_RELEASE_X64 = $(SolutionDir)/_Out/Comm/Release/NFPluginLoader
 
