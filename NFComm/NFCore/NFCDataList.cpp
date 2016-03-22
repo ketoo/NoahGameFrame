@@ -210,11 +210,9 @@ bool NFCDataList::Add(const NFGUID& value)
 
 bool NFCDataList::Set(const int index, const NFINT64 value)
 {
-    if (index < GetCount()
-        && index >= 0
-        && Type(index) == TDATA_INT)
+    if (ValidIndex(index) && Type(index) == TDATA_INT)
     {
-        NF_SHARE_PTR<TData> var = GetStack(GetCount());
+        NF_SHARE_PTR<TData> var = GetStack(index);
         if (var)
         {
             var->SetInt(value);
@@ -227,11 +225,9 @@ bool NFCDataList::Set(const int index, const NFINT64 value)
 }
 bool NFCDataList::Set(const int index, const double value)
 {
-    if (index < GetCount()
-        && index >= 0
-        && Type(index) == TDATA_FLOAT)
+    if (ValidIndex(index) && Type(index) == TDATA_FLOAT)
     {
-        NF_SHARE_PTR<TData> var = GetStack(GetCount());
+        NF_SHARE_PTR<TData> var = GetStack(index);
         if (var)
         {
             var->SetFloat(value);
@@ -244,11 +240,9 @@ bool NFCDataList::Set(const int index, const double value)
 }
 bool NFCDataList::Set(const int index, const char* value)
 {
-    if (index < GetCount()
-        && index >= 0
-        && Type(index) == TDATA_STRING)
+    if (ValidIndex(index) && Type(index) == TDATA_STRING)
     {
-        NF_SHARE_PTR<TData> var = GetStack(GetCount());
+        NF_SHARE_PTR<TData> var = GetStack(index);
         if (var)
         {
             var->SetString(value);
@@ -262,11 +256,9 @@ bool NFCDataList::Set(const int index, const char* value)
 
 bool NFCDataList::Set(const int index, const NFGUID& value)
 {
-    if (index < GetCount()
-        && index >= 0
-        && Type(index) == TDATA_OBJECT)
+    if (ValidIndex(index) && Type(index) == TDATA_OBJECT)
     {
-        NF_SHARE_PTR<TData> var = GetStack(GetCount());
+        NF_SHARE_PTR<TData> var = GetStack(index);
         if (var)
         {
             var->SetObject(value);
@@ -280,7 +272,7 @@ bool NFCDataList::Set(const int index, const NFGUID& value)
 
 NFINT64 NFCDataList::Int(const int index) const
 {
-    if (index < GetCount() && index >= 0)
+    if (ValidIndex(index))
     {
         if (Type(index) == TDATA_INT)
         {
@@ -294,7 +286,7 @@ NFINT64 NFCDataList::Int(const int index) const
 
 double NFCDataList::Float(const int index) const
 {
-    if (index < GetCount() && index >= 0)
+    if (ValidIndex(index))
     {
         const NF_SHARE_PTR<TData> var = mvList[index];
         if (var && TDATA_FLOAT == var->GetType())
@@ -308,7 +300,7 @@ double NFCDataList::Float(const int index) const
 
 const std::string& NFCDataList::String(const int index) const
 {
-    if (index < GetCount() && index >= 0)
+    if (ValidIndex(index))
     {
         const NF_SHARE_PTR<TData> var = mvList[index];
         if (var && TDATA_STRING == var->GetType())
@@ -322,7 +314,7 @@ const std::string& NFCDataList::String(const int index) const
 
 const NFGUID& NFCDataList::Object(const int index) const
 {
-    if (index < GetCount() && index >= 0)
+    if (ValidIndex(index))
     {
         TDATA_TYPE type = Type(index);
         if (TDATA_OBJECT == type)
@@ -370,7 +362,7 @@ bool NFCDataList::Split(const char* str, const char* strSplit)
 
 TDATA_TYPE NFCDataList::Type(const int index) const
 {
-    if (index >= GetCount() || index < 0)
+    if (!ValidIndex(index))
     {
         return TDATA_UNKNOWN;
     }
@@ -483,7 +475,7 @@ void NFCDataList::InnerAppendEx(const NFIDataList& src, const int start, const i
 
 std::string NFCDataList::StringValEx(const int index) const
 {
-    if (index < GetCount() && index >= 0)
+    if (ValidIndex(index))
     {
         std::string strData;
 
@@ -551,4 +543,9 @@ const NF_SHARE_PTR<NFIDataList::TData> NFCDataList::GetStack(const int index) co
     }
 
     return NF_SHARE_PTR<TData>();
+}
+
+bool NFCDataList::ValidIndex(int index) const
+{
+	return (index < GetCount()) && (index >= 0);
 }
