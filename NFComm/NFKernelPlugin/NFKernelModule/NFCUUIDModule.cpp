@@ -28,7 +28,7 @@ uint64_t get_time()
 #ifndef _MSC_VER
     struct timeval tv;
     gettimeofday(&tv, NULL);
-    int time = tv.tv_usec;
+    uint64_t time = tv.tv_usec;
     time /= 1000;
     time += (tv.tv_sec * 1000);
     return time;

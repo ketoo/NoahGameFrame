@@ -381,19 +381,16 @@ std::string NFCProperty::ToString()
         case TDATA_INT:
             strData = lexical_cast<std::string> (GetInt());
             break;
-
         case TDATA_FLOAT:
             strData = lexical_cast<std::string> (GetFloat());
             break;
-
         case TDATA_STRING:
-            strData = lexical_cast<std::string> (GetString());
+            strData = GetString();
             break;
-        case TDATA_OBJECT:
+		case TDATA_OBJECT:
             strData = GetObject().ToString();
             break;
         default:
-
             strData = NULL_STR;
             break;
     }
