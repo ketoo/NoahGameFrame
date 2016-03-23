@@ -155,6 +155,15 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFProxyServerNet_ClientPlug
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFDep", "NFDep", "{E78C3B11-6914-488A-B068-B3BF4F5150F5}"
 EndProject
+<<<<<<< HEAD
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libprotobuf", "Dependencies\protobuf\vsprojects\libprotobuf.vcxproj", "{3E283F37-A4ED-41B7-A3E6-A2D89D131A30}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libprotobuf-lite", "Dependencies\protobuf\vsprojects\libprotobuf-lite.vcxproj", "{49EA010D-706F-4BE2-A397-77854B72A040}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Theron", "Dependencies\Theron\Theron\Theron.vcxproj", "{8C0827D2-EFA0-427B-96B2-A92158E7812F}"
+EndProject
+=======
+>>>>>>> refs/remotes/ketoo/master
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tutorial", "Tutorial", "{374F8F3D-D507-4C1A-AEAD-376B22AAEC5F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial2", "Tutorial\Tutorial2\Tutorial2.vcxproj", "{E81D3FC6-119C-410A-9704-19FBD9BA5D1B}"

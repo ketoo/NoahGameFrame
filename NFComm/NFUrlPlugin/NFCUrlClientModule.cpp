@@ -10,7 +10,11 @@
 #include <iostream>
 #include <sstream>
 #include "NFCUrlClientModule.h"
+<<<<<<< HEAD
+#include "curl/curl.h"
+=======
 #include "Dependencies/curl/include/curl/curl.h"
+>>>>>>> refs/remotes/ketoo/master
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIUrlCodeModule.h"
 #include "NFComm/NFMessageDefine/NFMsgURl.pb.h"
